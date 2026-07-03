@@ -9,18 +9,43 @@ import { slugify } from "./quests.js";
 
 const CAPS = { registry: 40, history: 10, knownFacts: 8, skills: 6 };
 
+/** Fuzzy-find an existing person before ever creating a new one — the GM refers
+ *  to the same human as "davan", "davan-channel-worker", or "Davan" across turns. */
+export function findExistingNpc(reg, id, name = "") {
+  if (reg[id]) return reg[id];
+  const nameNorm = slugify(name);
+  for (const n of Object.values(reg)) {
+    if (nameNorm && slugify(n.name) === nameNorm) return n;
+    const a = n.id.split("-")[0], b = id.split("-")[0];
+    if (a === b && (n.id.startsWith(id) || id.startsWith(n.id) || a === id || b === n.id)) return n;
+  }
+  return null;
+}
+
+/** Names that are really ids ("davan_channel_worker", "millbrook.elder_woman")
+ *  become readable ("Davan Channel Worker", "Elder Woman"). */
+export function prettifyNpcName(name, dropTokens = []) {
+  if (!/[._]/.test(name) && /[A-Z]/.test(name)) return name; // already human-shaped
+  const words = String(name).split(/[._\-\s]+/).filter(w => w && !dropTokens.includes(w.toLowerCase()));
+  if (!words.length) return name;
+  return words.map(w => w[0].toUpperCase() + w.slice(1)).join(" ").slice(0, 60);
+}
+
 export function applyNpcUpdates(character, updates = [], ctx = {}) {
   character.npcRegistry = character.npcRegistry || {};
   const reg = character.npcRegistry;
   for (const u of (updates || []).slice(0, 5)) {
     const id = u.npcId ? slugify(u.npcId) : slugify(u.name || "");
     if (!id) continue;
-    let n = reg[id];
+    let n = findExistingNpc(reg, id, u.name || "");
     if (!n) {
+      // only a "meet" may create a person; updates for unknown people are dropped
+      // (this is what let the legacy path spawn duplicate id-named entries)
+      if (u.op && u.op !== "meet") continue;
       if (Object.keys(reg).length >= CAPS.registry) continue; // registry full — keep the people who matter
       n = reg[id] = {
         id,
-        name: String(u.name || id).slice(0, 60),
+        name: prettifyNpcName(String(u.name || id)).slice(0, 60),
         role: String(u.role || "").slice(0, 100),
         description: String(u.description || "").slice(0, 240),
         firstMet: { locationId: ctx.locationId || null, day: ctx.day ?? null },
@@ -92,6 +117,37 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
     (n.knownFacts.length ? ` What they know/have experienced: ${n.knownFacts.join("; ")}.` : "") +
     (n.history.length ? ` History with ${character.name}: ${n.history.slice(-4).join(" | ")}` : "")
   ).join("\n");
+}
+
+/** Cleanup migration: merge duplicate registry entries (same person under
+ *  different ids), and prettify names that are really ids. Community-id tokens
+ *  (e.g. "millbrook") are dropped from prettified names. */
+export function mergeDuplicateNpcs(character, dropTokens = []) {
+  const reg = character.npcRegistry || {};
+  const ids = Object.keys(reg);
+  for (const id of ids) {
+    const n = reg[id];
+    if (!n) continue;
+    for (const otherId of Object.keys(reg)) {
+      if (otherId === id || !reg[otherId]) continue;
+      const other = reg[otherId];
+      const sameName = slugify(n.name) === slugify(other.name);
+      const a = id.split(/[.-]/)[0], b = otherId.split(/[.-]/)[0];
+      const tokenKin = a === b && (id.startsWith(otherId) || otherId.startsWith(id) || a === id || b === otherId);
+      if (!sameName && !tokenKin) continue;
+      // merge the shorter-history entry into the richer one
+      const [keep, drop] = (n.history.length + n.knownFacts.length) >= (other.history.length + other.knownFacts.length) ? [n, other] : [other, n];
+      keep.history = [...new Set([...drop.history, ...keep.history])].slice(-10);
+      keep.knownFacts = [...new Set([...drop.knownFacts, ...keep.knownFacts])].slice(-8);
+      keep.skillsObserved = [...new Set([...drop.skillsObserved, ...keep.skillsObserved])].slice(-6);
+      keep.relationship = Math.abs(drop.relationship) > Math.abs(keep.relationship) ? drop.relationship : keep.relationship;
+      if (!keep.role && drop.role) keep.role = drop.role;
+      if (!keep.description && drop.description) keep.description = drop.description;
+      delete reg[drop.id];
+    }
+  }
+  for (const n of Object.values(reg)) n.name = prettifyNpcName(n.name, dropTokens);
+  return character;
 }
 
 /** One-time migration: fold the old shallow relationships map into the registry. */

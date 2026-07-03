@@ -11,8 +11,8 @@ import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, i
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify } from "../engine/quests.js";
-import { sanitizeScene, buildTurnContext } from "../engine/gm.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "../engine/npcs.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent } from "../engine/gm.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
@@ -358,6 +358,37 @@ for (const id of ["millbrook", "echo_river_crossing", "archive_hollow", "dispute
   if (!(l.map && typeof l.map.x === "number" && typeof l.map.y === "number")) { check(`map coords present for ${id}`, false); }
 }
 check("all locations carry map coordinates", true);
+
+// --- v0.8.1 bug regressions ---
+// 1) NaN can never reach the dice
+const nanChance = successChance({ character: char, action: { label: "x", attribute: "social", axes: { violence_peace: "very peaceful" }, difficulty: "moderate" }, location: loc, rules });
+check("malformed action still yields finite chance", Number.isFinite(nanChance));
+const badIntent = sanitizeIntent({ label: "Build rapport", attribute: "social", subAttribute: "vibes", difficulty: "moderate", axes: { violence_peace: "high", chaos_order: 0.4 }, intentTags: ["rapport"], abilityId: "ghost_walk", comboAbilities: "not-an-array", novelUse: "yes" }, { abilities: [{ abilityId: "prism_sight", level: 1 }] });
+check("intent sanitizer clamps everything", badIntent.difficulty === 0 && badIntent.subAttribute === null && badIntent.abilityId === null && Array.isArray(badIntent.comboAbilities) && badIntent.axes.chaos_order === 0.4 && !("violence_peace" in badIntent.axes));
+const sanChance = successChance({ character: char, action: badIntent, location: loc, rules });
+check("sanitized intent rolls clean", Number.isFinite(sanChance) && sanChance > 0);
+// 2) named NPC updates: update-only ops can't create ghosts; fuzzy match prevents twins
+const town = { name: "T", npcRegistry: {} };
+applyNpcUpdates(town, [{ op: "update", npcId: "sorel", relationshipDelta: 1 }], {});
+check("update for unknown person is dropped (meet must come first)", !town.npcRegistry.sorel);
+applyNpcUpdates(town, [{ op: "meet", npcId: "davan", name: "Davan", role: "channel worker" }], { day: 1 });
+applyNpcUpdates(town, [{ op: "meet", npcId: "davan_channel_worker", name: "davan_channel_worker" }], { day: 2 });
+check("fuzzy match reuses the same human", Object.keys(town.npcRegistry).length === 1 && town.npcRegistry.davan.name === "Davan");
+applyNpcUpdates(town, [{ op: "update", npcId: "davan-channel-worker", note: "helped him clear the channel gate" }], { day: 3 });
+check("updates under variant ids land on the one person", town.npcRegistry.davan.history.length === 1);
+// 3) duplicate healing + name prettifying for existing saves
+const dirty = { npcRegistry: {
+  "davan": { id: "davan", name: "Davan", role: "channel worker", relationship: 2, history: ["[d1] met"], knownFacts: [], skillsObserved: [], status: "active" },
+  "davan-channel-worker": { id: "davan-channel-worker", name: "davan_channel_worker", role: "", relationship: 1, history: ["[d2] helped"], knownFacts: ["knows the sluices"], skillsObserved: [], status: "active" },
+  "millbrook-elder-woman": { id: "millbrook-elder-woman", name: "millbrook.elder_woman", role: "", relationship: -1, history: [], knownFacts: [], skillsObserved: [], status: "active" }
+} };
+mergeDuplicateNpcs(dirty, ["millbrook"]);
+const merged = Object.values(dirty.npcRegistry);
+check("duplicates merged into one Davan", merged.filter(n => n.id.startsWith("davan")).length === 1);
+const davan = merged.find(n => n.id.startsWith("davan"));
+check("merge keeps history and facts from both", davan.history.length === 2 && davan.knownFacts.includes("knows the sluices"));
+check("id-shaped names prettified, community token dropped", merged.some(n => n.name === "Elder Woman"));
+check("prettify leaves human names alone", prettifyNpcName("Mara Wells") === "Mara Wells");
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

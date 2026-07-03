@@ -56,7 +56,12 @@ export function successChance({ character, action, location, rules, aptitudeMods
   if (action.discoveryBonus) chance += action.discoveryBonus;
   else if (action.novel) chance -= rules.novel?.difficultySurcharge ?? 15;
 
-  chance -= action.difficulty || 0;
+  chance -= Number(action.difficulty) || 0;
+  // hard guard: malformed inputs must never reach the dice as NaN
+  if (!Number.isFinite(chance)) {
+    console.warn("[resolve] non-finite chance from action:", action.label);
+    chance = 50;
+  }
   return Math.max(rules.d100.floorChance, Math.min(rules.d100.ceilingChance, Math.round(chance)));
 }
 

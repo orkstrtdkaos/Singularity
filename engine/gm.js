@@ -21,7 +21,7 @@ ABSOLUTE RULES
 11. QUESTS are tracked state. When the player takes on an undertaking, emit questUpdates op "start" (short memorable title, one-line summary, who gave it). When a scene advances one, emit op "progress" with a note. When finished, op "complete" (xpReward 15-50 by difficulty) or op "fail". Keep at most 2-3 quests in active play; finish threads before opening many more.
 12. Ground scenes in the character's BIO: their livelihood earns them recognition or work, their hobbies surface naturally, their motivation is the lens for every big choice. NPCs react to what the character does for a living.
 13. SCENE PERMANENCE — the most important continuity rule (within a scene). The CURRENT SCENE STATE block is authoritative physical reality: the exact spot the character occupies, who is present, what objects exist. You MUST NOT contradict it. The character stays exactly where they are unless the player's action moves them or something in-world explicitly moves them — and any movement must be narrated as a transition ("you follow her up the lane…"), never assumed. NPCs do not teleport, swap, or change roles; objects stay where they were left; indoor/outdoor, weather, and lighting persist. You MAY add new elements (a person arrives, something is uncovered) — additions are generativity, contradictions are errors. Return the updated scene state EVERY turn in the "scene" field, carrying forward everything still true.
-14. NPC PERMANENCE (across scenes). The KNOWN PEOPLE registry is established fact: names, roles, relationship standing, shared history, what each person has experienced and what skills they've shown. Reuse these people — the dock-master from three days ago is STILL the dock-master, with the same name, and remembers what passed between you. Never invent a replacement for someone who already exists. When the character meets someone new worth remembering, emit npcUpdates op "meet" (name them!). When an interaction changes a relationship, teaches you something about them, or something happens TO them, emit op "update" with note/learned/relationshipDelta/skillsObserved/status. Minor crowd figures (a passing farmer) don't need registry entries.
+14. NPC PERMANENCE (across scenes). The KNOWN PEOPLE registry is established fact: names, roles, relationship standing, shared history, what each person has experienced and what skills they've shown. Reuse these people — the dock-master from three days ago is STILL the dock-master, with the same name, and remembers what passed between you. Never invent a replacement for someone who already exists. Whenever a NAMED NPC features meaningfully in a scene — dialogue, a deal, a favor, a conflict — you MUST emit an npcUpdates entry for them: op "meet" the first time (npcId = kebab of their personal name, e.g. "sorel"; "name" = their human name, REQUIRED), op "update" after. If the person already appears in KNOWN PEOPLE, use their EXACT existing npcId — never coin a second id for the same human. Relationship changes go through npcUpdates.relationshipDelta. Only anonymous crowd figures (a passing farmer) are exempt.
 15A. GAMBITS. When the resolution block is a GAMBIT (a declared multi-step plan), narrate the WHOLE run as one continuous cinematic sequence — heist-movie pacing, honoring every step's receipt in order: clean successes chain smoothly, complications visibly wrinkle the plan, fallbacks read as quick thinking, an adaptation reroll reads as grit or luck, and an abandoned run ends with the character extracting themselves from wherever it broke. Then land the aftermath in the same scene and offer choices as usual. Same length discipline: 3-5 paragraphs max.
 17. THE CODEX is the character's cataloged knowledge — a graph of topics they've LEARNED about. When a scene teaches something durable — a truth about the world, a faction's move, a mystery deepening, a name that matters — emit codexUpdates: topic (stable kebab id), kind (mystery|faction|lore|event|person|place), the fact learned, and links to related topic ids (link liberally — locations and quests by their ids too). Routine events don't belong; knowledge does. The CODEX block shows what they already know that's relevant HERE — NPCs shouldn't re-explain it, and the character may act on it.
 16. NOVEL USE & COMBINATIONS. When the resolution is marked NOVEL (an ability pushed outside its envelope, or two abilities braided), narrate the strain — the field resisting, the technique bending. On BACKLASH (the resolution block lists engine-applied damage), narrate real cost: resonance-burn, light-scald, a nosebleed, the power snapping back. On DISCOVERY-ELIGIBLE (critical success), narrate breakthrough — the moment the technique clicks into something repeatable — and return the "discovery" field naming it. Discovered techniques listed in ABILITY LAW are earned: treat them as reliable capabilities.
@@ -34,7 +34,6 @@ REPLY FORMAT — a single JSON object, no other text:
   "choices": [{"label": "...", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": 0.4}, "difficulty": 0, "intentTags": ["..."], "abilityId": null, "energyCost": null}],
   "deeds": [{"description": "...", "tags": ["..."], "weight": 1, "communityId": "valley.millbrook"}],
   "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [{"name": "...", "kind": "weapon|tool|consumable|quest|misc", "description": "...", "consumable": false, "effects": {"health": 0, "energy": 0}}], "inventoryRemove": ["exact item name"], "xp": 0},
-  "relationshipDeltas": [{"npcId": "...", "delta": 1, "note": "..."}],
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
   "questUpdates": [{"op": "start|progress|complete|fail", "questId": "kebab-id", "title": "...", "summary": "...", "giver": "...", "note": "...", "xpReward": 25}],
   "scene": {"setting": "1-2 sentences: EXACTLY where the character is (indoor/outdoor, position, lighting, weather)", "npcsPresent": [{"name": "...", "state": "what they're doing right now"}], "objects": ["notable objects in view or reach"], "threads": ["unresolved in-scene threads (a question hanging, someone waiting for an answer)"]},
@@ -197,8 +196,38 @@ abilityId must be one the character actually has, or null. novelUse=true when an
     `Inventory: ${(character.inventory || []).map(i => i.name || i).join(", ") || "empty"}. ` +
     `Location: ${location.name} (${(location.tags || []).join(", ")}).\nPlayer action: "${playerText}"`;
   try {
-    return await callClaudeJSON([{ role: "user", content }], { task: "intent-parse", system: sys });
+    const raw = await callClaudeJSON([{ role: "user", content }], { task: "intent-parse", system: sys });
+    return sanitizeIntent(raw, character, playerText);
   } catch {
-    return { label: playerText.slice(0, 60), attribute: "practical", axes: {}, difficulty: 0, intentTags: [], abilityId: null, feasible: true };
+    return { label: playerText.slice(0, 60), attribute: "practical", subAttribute: null, axes: {}, difficulty: 0, intentTags: [], abilityId: null, comboAbilities: [], novelUse: false, noveltyHint: "", feasible: true };
   }
+}
+
+/** Validate/clamp a parsed intent so malformed model output can never poison the
+ *  dice (a stray string difficulty once produced "roll 20 vs NaN"). */
+export function sanitizeIntent(raw, character, playerText = "") {
+  const SUBS8 = ["strength", "agility", "reason", "insight", "presence", "rapport", "craft", "wits"];
+  const owned = id => (character.abilities || []).some(a => a.abilityId === id);
+  const axes = {};
+  if (raw?.axes && typeof raw.axes === "object") {
+    for (const [k, v] of Object.entries(raw.axes).slice(0, 6)) {
+      const n = Number(v);
+      if (Number.isFinite(n)) axes[String(k)] = Math.max(-1, Math.min(1, n));
+    }
+  }
+  const diff = Number(raw?.difficulty);
+  return {
+    label: String(raw?.label || playerText).slice(0, 80),
+    attribute: ["physical", "mental", "social", "practical"].includes(raw?.attribute) ? raw.attribute : "practical",
+    subAttribute: SUBS8.includes(raw?.subAttribute) ? raw.subAttribute : null,
+    axes,
+    difficulty: [0, 15, 30].includes(diff) ? diff : Number.isFinite(diff) ? Math.max(0, Math.min(30, Math.round(diff))) : 0,
+    intentTags: (Array.isArray(raw?.intentTags) ? raw.intentTags : []).slice(0, 6).map(String),
+    abilityId: owned(raw?.abilityId) ? raw.abilityId : null,
+    comboAbilities: (Array.isArray(raw?.comboAbilities) ? raw.comboAbilities : []).filter(owned).slice(0, 3),
+    novelUse: !!raw?.novelUse,
+    noveltyHint: String(raw?.noveltyHint || "").slice(0, 60),
+    feasible: raw?.feasible !== false,
+    infeasibleReason: raw?.infeasibleReason ? String(raw.infeasibleReason).slice(0, 200) : null
+  };
 }

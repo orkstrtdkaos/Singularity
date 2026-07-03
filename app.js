@@ -14,14 +14,14 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.8.0";
+const APP_VERSION = "0.8.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -33,6 +33,7 @@ let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
+let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
 
 // ---------- boot ----------
 
@@ -166,6 +167,7 @@ function migrate(c) {
   if (!c.companions) c.companions = [];
   if (!c.quests) c.quests = [];
   migrateRelationships(c, CONTENT.npcs);
+  mergeDuplicateNpcs(c, Object.keys(CONTENT.locations)); // heal duplicate/id-named people
   if (!c.placeMemory) c.placeMemory = {};
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
@@ -411,9 +413,10 @@ function applyTurn(turn, resolution) {
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day };
   applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
-  // legacy relationshipDeltas fold into the registry too (older GM replies)
+  // legacy relationshipDeltas: tolerated but may only UPDATE existing people —
+  // this path once minted duplicate id-named registry entries
   applyNpcUpdates(character, (turn.relationshipDeltas || []).map(r => ({
-    op: "update", npcId: r.npcId, name: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
+    op: "update", npcId: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
   })), memCtx);
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
@@ -520,6 +523,7 @@ async function onChoice(choice) {
 
 async function onFreeform(text) {
   if (busy || !text.trim()) return;
+  lastPlayerText = text;
   renderPlay(null, { thinking: "Reading your intent…", playerBeat: { label: text } });
   const location = CONTENT.locations[character.currentLocationId];
   const intent = await parseIntent(text, character, location);
@@ -564,6 +568,7 @@ async function rest() {
 
 async function onAsk(text) {
   if (busy || !text.trim()) return;
+  lastPlayerText = text;
   busy = true;
   const lastTurn = character.activeScene?.lastTurn || null;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, thinking: "The GM leans back…" });
@@ -1025,6 +1030,7 @@ function renderPlay(turn, opts = {}) {
     if (ff2) { ff2.value = val; ff2.focus(); }
   };
   if (ff && go) {
+    if (opts.error && lastPlayerText) ff.value = lastPlayerText; // never lose what they wrote
     const submit = () => askMode ? onAsk(ff.value) : onFreeform(ff.value);
     go.onclick = submit;
     ff.onkeydown = e => { if (e.key === "Enter") submit(); };

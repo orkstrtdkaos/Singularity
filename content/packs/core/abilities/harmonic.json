@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "harmonic",
+  "civilization": "Harmonic Heights",
+  "abilities": [
+    {
+      "id": "sonic_resonance",
+      "name": "Sonic Resonance",
+      "levelReq": 1,
+      "energyCost": 8,
+      "axes": { "mechanical_spiritual": 0.4, "concrete_abstract": -0.3 },
+      "attribute": "practical",
+      "effectTags": ["manipulate", "vibration", "structural"],
+      "narrationHints": "Focused sound waves that can shake, shatter, resonate with, or gently move physical objects. Visible as shimmering pressure ripples in the air.",
+      "description": "Project focused resonant waves to move, shake, or shatter matter at a distance."
+    },
+    {
+      "id": "echo_sense",
+      "name": "Echo Sense",
+      "levelReq": 1,
+      "energyCost": 4,
+      "axes": { "dark_light": -0.2, "body_mind": 0.4 },
+      "attribute": "mental",
+      "effectTags": ["perceive", "detect", "through-walls"],
+      "narrationHints": "Sound-based perception like echolocation — hearing shapes, movement, and hollow spaces through walls and darkness.",
+      "description": "Perceive your surroundings through sound reflection — even through walls, smoke, or darkness."
+    },
+    {
+      "id": "resonant_shield",
+      "name": "Resonant Shield",
+      "levelReq": 2,
+      "energyCost": 12,
+      "axes": { "violence_peace": 0.3, "chaos_order": 0.4 },
+      "attribute": "practical",
+      "effectTags": ["defend", "barrier"],
+      "narrationHints": "A standing-wave barrier of interference patterns that deflects projectiles and dampens incoming force.",
+      "description": "Raise a standing-wave barrier that dampens incoming force."
+    },
+    {
+      "id": "harmonic_voice",
+      "name": "Harmonic Voice",
+      "levelReq": 2,
+      "energyCost": 6,
+      "axes": { "emotional_logical": -0.4, "violence_peace": 0.5 },
+      "attribute": "social",
+      "effectTags": ["social", "calm", "influence"],
+      "narrationHints": "Layered vocal overtones that soothe fear, ease tension, and lend weight to spoken words. Subtle — listeners feel it more than hear it.",
+      "description": "Weave calming overtones into your speech, easing fear and hostility in those who hear you."
+    }
+  ]
+}

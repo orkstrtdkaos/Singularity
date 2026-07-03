@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "high_luminary",
+  "name": "High Luminary Sera",
+  "role": "Master of the Radiant Plateau",
+  "homeLocation": "radiant_plateau_edge",
+  "communityId": "valley.radiant_plateau",
+  "personality": { "warmth": 0.5, "trust": 0.3, "candor": 0.5, "patience": 0.6 },
+  "spectrum": { "dark_light": 0.7, "falsehood_truth": 0.4, "concrete_abstract": 0.3, "emotional_logical": 0.3 },
+  "voiceHints": "Precise, luminous diction; asks questions that feel like being gently X-rayed. Younger than expected for the office. Light gathers subtly toward her when she is interested.",
+  "knowledge": [
+    "Master-level photonic technique and the Plateau's optical sciences",
+    "One of her own filtration engineers has been falsifying purity reports — she discovered it recently and hasn't decided what to do",
+    "The falsified reports hide something stranger than negligence: readings that make no sense for any known contaminant",
+    "Precursor optics records in the Plateau archives that describe 'the light beneath light'"
+  ],
+  "wants": "The truth about the readings her engineer buried — quietly, before the Harmonic delegation finds the falsification and weaponizes it.",
+  "fears": "That the contamination is neither civilization's doing, and that saying so out loud will sound like exactly the kind of lie she'd tell.",
+  "reactsToReputation": { "truth-seeker": "takes real interest, may confide", "deceiver": "mirrors and misleads, tests constantly" }
+}

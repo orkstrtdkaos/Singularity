@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "spectrums": [
+    { "id": "emotional_logical", "negPole": "emotional", "posPole": "logical", "description": "Intuition and passion vs. reason and systematic thinking" },
+    { "id": "falsehood_truth", "negPole": "falsehood", "posPole": "truth", "description": "Illusion and deception vs. objective reality and honesty" },
+    { "id": "demonic_angelic", "negPole": "demonic", "posPole": "angelic", "description": "Primal destructive forces vs. ordered creative forces" },
+    { "id": "violence_peace", "negPole": "violence", "posPole": "peace", "description": "Conflict and force vs. harmony and diplomacy" },
+    { "id": "concrete_abstract", "negPole": "concrete", "posPole": "abstract", "description": "Physical practical reality vs. ideas and theory" },
+    { "id": "mechanical_spiritual", "negPole": "mechanical", "posPole": "spiritual", "description": "Technology and systems vs. mysticism and metaphysical energy" },
+    { "id": "chaos_order", "negPole": "chaos", "posPole": "order", "description": "Freedom and spontaneity vs. structure and rules" },
+    { "id": "dark_light", "negPole": "dark", "posPole": "light", "description": "Mystery and concealment vs. illumination and revelation" },
+    { "id": "death_life", "negPole": "death", "posPole": "life", "description": "Decay, entropy, transformation vs. growth, vitality, renewal" },
+    { "id": "space_time", "negPole": "space", "posPole": "time", "description": "Distance and location vs. duration and sequence" },
+    { "id": "body_mind", "negPole": "body", "posPole": "mind", "description": "Physical form and strength vs. thought and consciousness" },
+    { "id": "destruction_creation", "negPole": "destruction", "posPole": "creation", "description": "Breaking and unmaking vs. building and manifestation" }
+  ],
+  "notes": "Every vector is a map of spectrumId -> number in [-1, 1]. Negative leans toward negPole, positive toward posPole. Locations, actions, abilities, and character alignment all use this same shape. Missing keys mean 0 (neutral)."
+}

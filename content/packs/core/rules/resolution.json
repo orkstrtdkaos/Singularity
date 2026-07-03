@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "d100": {
+    "critSuccessMax": 5,
+    "critFailMin": 96,
+    "partialBand": 15,
+    "floorChance": 5,
+    "ceilingChance": 95
+  },
+  "baseChance": {
+    "attributeMultiplier": 20,
+    "skillBonus": 10,
+    "abilityLevelBonus": 5
+  },
+  "spectrumModifier": {
+    "alignmentWeight": 15,
+    "locationWeight": 10,
+    "maxTotal": 25,
+    "minTotal": -25
+  },
+  "energy": {
+    "max": 100,
+    "regenPerRest": 40,
+    "defaultActionCost": 5
+  },
+  "senseTiers": [
+    { "tier": 0, "minAttunement": 0,  "label": "none",    "precision": "nothing" },
+    { "tier": 1, "minAttunement": 2,  "label": "vibes",   "precision": "risky-or-safe only" },
+    { "tier": 2, "minAttunement": 5,  "label": "bands",   "precision": "five qualitative bands" },
+    { "tier": 3, "minAttunement": 9,  "label": "precise", "precision": "close numeric read plus reasons" }
+  ],
+  "reputationBands": [
+    { "min": 50,   "band": "revered" },
+    { "min": 20,   "band": "trusted" },
+    { "min": 5,    "band": "known" },
+    { "min": -4,   "band": "neutral" },
+    { "min": -19,  "band": "wary" },
+    { "min": -49,  "band": "distrusted" },
+    { "min": -999, "band": "hated" }
+  ],
+  "playerAptitudes": [
+    { "id": "strategist",      "tendency": "strategic", "threshold": 8,  "mods": { "plannedActionBonus": 5, "senseTierBonus": 1 }, "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens." },
+    { "id": "rough_and_ready", "tendency": "physical",  "threshold": 8,  "mods": { "physicalBonus": 5, "socialFinessePenalty": -3 }, "description": "Your character grows hard and capable, but subtlety suffers." },
+    { "id": "silver_tongue",   "tendency": "social",    "threshold": 8,  "mods": { "socialBonus": 5 }, "description": "Words come easily. People open up to you." },
+    { "id": "scholar",         "tendency": "cerebral",  "threshold": 8,  "mods": { "mentalBonus": 5 }, "description": "Study and investigation compound into insight." },
+    { "id": "carouser",        "tendency": "carousing", "threshold": 6,  "mods": { "rapportBonus": 5, "disciplinePenalty": -5 }, "description": "Everyone likes a good companion at the table — but focus and restraint decay." },
+    { "id": "daredevil",       "tendency": "risky",     "threshold": 8,  "mods": { "critSuccessBonus": 2, "critFailPenalty": 2 }, "description": "Fortune favors you — and punishes you. Wider extremes both ways." },
+    { "id": "good_samaritan",  "tendency": "generous",  "threshold": 6,  "mods": { "reputationGainBonus": 0.25 }, "description": "Your kindnesses are remembered a little longer and travel a little farther." }
+  ]
+}

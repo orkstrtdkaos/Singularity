@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "water_crisis",
+  "name": "The Water Crisis",
+  "regionId": "valley",
+  "status": "active",
+  "stage": 1,
+  "stages": [
+    { "stage": 1, "name": "Discoloration", "summary": "The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate.", "spectrumShift": { "death_life": -0.05, "violence_peace": -0.05 } },
+    { "stage": 2, "name": "First Sickness", "summary": "Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.", "spectrumShift": { "death_life": -0.1, "violence_peace": -0.1, "falsehood_truth": -0.05 } },
+    { "stage": 3, "name": "Rationing", "summary": "Millbrook posts guards at the clean springs. Water becomes currency. Explorer factions push to open the Archive for pre-Transition purification tech.", "spectrumShift": { "death_life": -0.1, "violence_peace": -0.15, "chaos_order": -0.1 } },
+    { "stage": 4, "name": "The Brink", "summary": "An armed standoff at the filtration arrays. One spark from open conflict. The true source, still unfound, accelerates.", "spectrumShift": { "violence_peace": -0.25, "demonic_angelic": -0.1 } }
+  ],
+  "hooks": [
+    "Trace the contamination upstream past the Disputed Zone fringe",
+    "Investigate the Radiant filtration arrays and the falsified purity reports",
+    "Win Mara Wells' trust to learn what pattern she recognized",
+    "Ask the Archive Guardian what pre-Transition industry existed upstream",
+    "Follow Kit Farrow's account of survey-grid lights in the Zone at night"
+  ],
+  "truth": "GM-EYES-ONLY: The source is a pre-Transition nanite reclamation site in the upper Disputed Zone, disturbed and partially reactivated. It is not malfunctioning — it is following its last instruction: 'prepare the watershed.' Who or what reactivated it, and for whom the preparation is intended, is the campaign's deeper mystery and connects to the Precursor layer. Reveal in fragments; never state plainly before stage 3."
+}

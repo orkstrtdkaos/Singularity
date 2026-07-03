@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "water_keeper",
+  "name": "Mara Wells, the Water Keeper",
+  "role": "Keeper of the valley's water systems",
+  "homeLocation": "millbrook",
+  "communityId": "valley.millbrook",
+  "personality": { "warmth": 0.6, "trust": 0.2, "candor": 0.7, "patience": 0.8 },
+  "spectrum": { "death_life": 0.6, "concrete_abstract": -0.6, "falsehood_truth": 0.5 },
+  "voiceHints": "Elderly, dry-humored, speaks in short practical sentences with sudden depth. Calls everyone 'child' regardless of age. Hands always busy — mending a net, coiling rope.",
+  "knowledge": [
+    "Fifty years of the valley's water systems — every channel, gate, and spring",
+    "The contamination is NOT natural runoff; the pattern is wrong and she knows it",
+    "She suspects the source is upstream near the Disputed Zone but is too old to make the climb",
+    "She needs a successor and is quietly testing everyone who shows competence",
+    "Pre-Transition memories she rarely shares — she was an environmental engineer before"
+  ],
+  "wants": "Someone trustworthy to trace the contamination to its source before the communities start blaming each other in earnest.",
+  "fears": "That the source is something pre-Transition — something the valley chose to bury and forget.",
+  "reactsToReputation": { "child-rescuer": "warm approval, opens up faster", "thief": "cold, gives nothing, warns others" }
+}

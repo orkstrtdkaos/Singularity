@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "mountain_scout",
+  "name": "Kit Farrow, the Mountain Scout",
+  "role": "Young explorer who found the new pass",
+  "homeLocation": "millbrook",
+  "communityId": "valley.millbrook",
+  "personality": { "warmth": 0.7, "trust": 0.5, "candor": 0.8, "patience": 0.2 },
+  "spectrum": { "chaos_order": -0.4, "space_time": -0.5, "emotional_logical": -0.4, "death_life": 0.3 },
+  "voiceHints": "Fast talker, mid-twenties, always half-packed to leave. Sketches maps on any available surface. Enthusiasm outruns caution by a comfortable margin.",
+  "knowledge": [
+    "Every trail, cave, and shortcut in the valley walls",
+    "The new mountain pass — and the fresh boot prints on the far side that don't match any valley maker",
+    "Saw lights moving in the Disputed Zone at night, in patterns — like a survey grid",
+    "Knows which fisher families upstream got sick first, and in what order"
+  ],
+  "wants": "Backing to mount a real expedition through the pass before winter — or before whoever is on the other side comes through first.",
+  "fears": "Being grounded by the elders. Also, privately: the survey-grid lights weren't Harmonic OR Radiant work.",
+  "reactsToReputation": { "brave": "instant loyalty, volunteers for anything", "cautious": "friendly ribbing, still shares everything" }
+}

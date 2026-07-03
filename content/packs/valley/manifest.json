@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "packId": "valley",
+  "name": "The Valley of Echoes",
+  "version": "0.1.0",
+  "regionId": "valley",
+  "startingLocation": "millbrook",
+  "provides": {
+    "locations": [
+      "locations/millbrook.json",
+      "locations/echo_river_crossing.json",
+      "locations/harmonic_heights_terrace.json",
+      "locations/radiant_plateau_edge.json",
+      "locations/disputed_zone_fringe.json",
+      "locations/archive_hollow.json"
+    ],
+    "npcs": [
+      "npcs/water_keeper.json",
+      "npcs/elder_resonance.json",
+      "npcs/high_luminary.json",
+      "npcs/archive_guardian.json",
+      "npcs/mountain_scout.json"
+    ],
+    "events": ["events/water_crisis.json"],
+    "lore": ["lore/valley_primer.md", "lore/power_systems.md", "lore/precursors.md"]
+  }
+}

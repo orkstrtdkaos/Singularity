@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Character",
+  "description": "One playable character. Owned and written ONLY by its player's client. schemaVersion is required on every record; all future changes must be additive with defaults.",
+  "type": "object",
+  "required": ["schemaVersion", "id", "playerKey", "name", "origin", "attributes", "level"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "id": { "type": "string" },
+    "playerKey": { "type": "string", "description": "The human behind the character. Links to players/{playerKey}/profile.json" },
+    "name": { "type": "string" },
+    "origin": { "type": "string", "enum": ["harmonic", "radiant", "valley"], "description": "Home culture; determines available power system. 'valley' = unaligned, may learn either at higher cost." },
+    "background": { "type": "string", "description": "e.g. former-professional, community-organizer, craftsman, survivalist, medic" },
+    "level": { "type": "integer", "minimum": 1 },
+    "xp": { "type": "integer", "minimum": 0 },
+    "attributes": {
+      "type": "object",
+      "description": "1-4 at creation (12 points), can grow to 6",
+      "required": ["physical", "mental", "social", "practical"],
+      "properties": {
+        "physical": { "type": "integer" }, "mental": { "type": "integer" },
+        "social": { "type": "integer" }, "practical": { "type": "integer" }
+      }
+    },
+    "skills": { "type": "object", "description": "skillId -> level (0-5)", "additionalProperties": { "type": "integer" } },
+    "abilities": { "type": "array", "items": { "type": "object", "properties": { "abilityId": { "type": "string" }, "level": { "type": "integer" } } } },
+    "alignment": { "type": "object", "description": "12-axis spectrum fingerprint, spectrumId -> [-1,1]. Accumulates from actions via EWMA.", "additionalProperties": { "type": "number" } },
+    "attunement": { "type": "integer", "description": "Governs sense-of-success tier. Grows with ability use and level." },
+    "health": { "type": "integer" }, "maxHealth": { "type": "integer" },
+    "energy": { "type": "integer" }, "maxEnergy": { "type": "integer" },
+    "inventory": { "type": "array", "items": { "type": "string" } },
+    "deeds": {
+      "type": "array",
+      "description": "Append-only memorable actions. Reputation with any community derives from deeds it has witnessed/heard of.",
+      "items": {
+        "type": "object",
+        "required": ["at", "description", "weight", "communityId"],
+        "properties": {
+          "at": { "type": "string" },
+          "locationId": { "type": "string" },
+          "communityId": { "type": ["string", "null"], "description": "Community that witnessed it. null = unwitnessed (still shapes alignment, not reputation)." },
+          "description": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" }, "description": "e.g. child-rescuer, thief, peacemaker, violent, scholar" },
+          "weight": { "type": "integer", "minimum": -3, "maximum": 3 },
+          "spread": { "type": "array", "items": { "type": "string" }, "description": "Other communityIds that have since heard of it (world-tick fills this in v0.3)." }
+        }
+      }
+    },
+    "relationships": { "type": "object", "description": "npcId -> {score, notes}", "additionalProperties": { "type": "object" } },
+    "chronicle": { "type": "array", "description": "One-line summaries per scene, oldest first. Compressed when long.", "items": { "type": "string" } },
+    "currentLocationId": { "type": "string" },
+    "activeScene": { "type": ["object", "null"], "description": "Serialized in-progress scene so a closed tab resumes exactly where it left off." }
+  }
+}

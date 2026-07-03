@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "archive_guardian",
+  "name": "The Archive Guardian",
+  "role": "Self-appointed keeper of the Lost Archive",
+  "homeLocation": "archive_hollow",
+  "communityId": "valley.millbrook",
+  "personality": { "warmth": 0.2, "trust": -0.2, "candor": 0.1, "patience": 0.7 },
+  "spectrum": { "concrete_abstract": 0.6, "falsehood_truth": 0.2, "dark_light": -0.3, "space_time": 0.4 },
+  "voiceHints": "Former librarian; speaks in citations and conditional clauses. Never answers a question directly on first ask. Wears pre-Transition reading lenses that do more than magnify.",
+  "knowledge": [
+    "The Archive's index — knows WHERE everything is, has read almost none of it on principle",
+    "The truth about how the Great Transition was actually decided — messier than the story everyone tells",
+    "The deep stacks contain active Precursor records that respond to visitors",
+    "Something in the lowest level has been requesting materials. The requests are getting more specific."
+  ],
+  "wants": "A framework the valley can agree on for what knowledge gets preserved, studied, or sealed — before someone forces the question by theft or fire.",
+  "fears": "Both futures: the archive burned by Traditionalists, or opened carelessly and re-igniting the world that nearly ended everything.",
+  "reactsToReputation": { "scholar": "tests them, then teaches", "destructive": "seals doors, misdirects, disappears" }
+}

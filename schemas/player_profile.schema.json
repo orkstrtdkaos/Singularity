@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlayerProfile",
+  "description": "Tracks the HUMAN, not the character. Persists across all of a player's characters. Tendencies accumulate from tagged actions; crossing thresholds (see core rules playerAptitudes) grants aptitudes that modify every character this player runs.",
+  "type": "object",
+  "required": ["schemaVersion", "playerKey", "tendencies"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "playerKey": { "type": "string" },
+    "displayName": { "type": "string" },
+    "tendencies": {
+      "type": "object",
+      "description": "tendencyId -> running score. Incremented when actions carry matching intent tags; slow decay keeps it current-behavior-weighted. Core tendencies: strategic, physical, social, cerebral, carousing, risky, cautious, generous, ruthless.",
+      "additionalProperties": { "type": "number" }
+    },
+    "aptitudes": { "type": "array", "description": "Derived, recomputed after every update — never hand-edited.", "items": { "type": "string" } },
+    "actionCount": { "type": "integer" },
+    "charactersPlayed": { "type": "array", "items": { "type": "string" } },
+    "history": { "type": "array", "description": "Optional recent tag samples for debugging/insight UI.", "items": { "type": "object" } }
+  }
+}

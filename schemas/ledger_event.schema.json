@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LedgerEvent",
+  "description": "Append-only world consequence. Players APPEND these; only the world-tick consolidates them into region state. Nobody ever edits region files directly. This is what lets multiple characters share one persistent world without write conflicts.",
+  "type": "object",
+  "required": ["schemaVersion", "at", "who", "where", "what"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "at": { "type": "string", "description": "ISO timestamp" },
+    "who": { "type": "string", "description": "characterId (or 'world' for tick-generated events)" },
+    "playerKey": { "type": "string" },
+    "where": { "type": "string", "description": "locationId" },
+    "what": { "type": "string", "description": "Short factual description, e.g. 'records_stolen: filtration purity logs taken from Radiant array office'" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "spectrumDeltas": { "type": "object", "additionalProperties": { "type": "number" } },
+    "visibility": { "type": "string", "enum": ["public", "witnessed", "hidden"], "default": "witnessed" }
+  }
+}

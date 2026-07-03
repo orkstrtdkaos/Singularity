@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "millbrook",
+  "name": "Millbrook",
+  "regionId": "valley",
+  "communityId": "valley.millbrook",
+  "spectrum": { "violence_peace": 0.6, "chaos_order": 0.3, "death_life": 0.4, "mechanical_spiritual": 0.2, "concrete_abstract": -0.5 },
+  "tags": ["village", "farming", "riverside", "unaligned"],
+  "connections": ["echo_river_crossing", "harmonic_heights_terrace", "radiant_plateau_edge"],
+  "descriptionSeed": "A riverside farming village on the valley floor, home to a few hundred unaligned folk — Traditionalists, Adaptors, and a handful of Explorers living side by side. Water wheels turn along the Echo River; terraced gardens climb the lower slopes. The village well and the river dock are the two centers of daily life. Lately the water runs faintly gray-green some mornings, and everyone pretends not to notice out loud.",
+  "loreRefs": ["valley_primer"],
+  "npcsPresent": ["water_keeper", "mountain_scout"],
+  "encounterFlavor": "Daily village life under quiet strain — farmers arguing about irrigation shares, children playing at sonic and light games they barely control, traders passing through with news."
+}

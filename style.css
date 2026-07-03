@@ -46,6 +46,16 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability { margin-bottom: 6px; }
 .ability .name { color: var(--accent2); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
+.item { margin-bottom: 4px; }
+.item-name { background: none; border: none; color: var(--ink); font-size: 13px; padding: 2px 0; text-align: left; width: 100%; }
+.item-name:hover { color: var(--accent); }
+.item.open .item-name { color: var(--accent); }
+.item-detail { background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin: 4px 0 8px; }
+.item-img { width: 100%; border-radius: 4px; margin-bottom: 6px; }
+.item-desc { font-size: 12px; color: var(--ink); font-style: italic; margin-bottom: 4px; }
+.item-tags { font-size: 11px; color: var(--accent2); margin-bottom: 6px; }
+.item-actions { display: flex; gap: 6px; }
+.item-actions .opt { font-size: 11px; padding: 4px 8px; }
 .rep-band { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; border: 1px solid var(--border); }
 .rep-band.trusted, .rep-band.revered, .rep-band.known { border-color: var(--ok); color: var(--ok); }
 .rep-band.wary, .rep-band.distrusted, .rep-band.hated { border-color: var(--danger); color: var(--danger); }
@@ -53,7 +63,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 
 /* ---------- play area ---------- */
 .play { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; min-height: 70vh; display: flex; flex-direction: column; }
-.location-tag { font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2); margin-bottom: 12px; }
+.scene-banner { width: calc(100% + 48px); margin: -20px -24px 14px; border-radius: 10px 10px 0 0; max-height: 220px; object-fit: cover; display: block; }
+.location-tag { font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2); margin-bottom: 12px; display: flex; justify-content: space-between; }
+.time-tag { color: var(--ink-dim); letter-spacing: 1px; text-transform: none; }
 .transcript { flex: 1; }
 .beat { margin-bottom: 18px; }
 .beat p { margin-bottom: 10px; }

@@ -13,8 +13,9 @@ ABSOLUTE RULES
 3. Respect reputation: NPCs react to the character's local standing and known deeds. A stranger is treated like a stranger.
 4. Content marked GM-EYES-ONLY is secret truth for your consistency — reveal it only in earned fragments, never plainly.
 5. Keep narration tight: 2-4 paragraphs, second person, present tense. Grounded hopeful-strange tone. Sensory and specific, never purple.
-6. Every scene, surface at least one natural opportunity to use one of the character's listed abilities.
+6. Every scene, surface at least one natural opportunity to use one of the character's listed abilities — and when an INVENTORY item is genuinely relevant, work it into the narration or a choice (name it exactly as listed). Items can be found, given, traded, lost, or broken; report all of that through characterDeltas.
 7. End every turn with meaningful, distinct choices — plus the player may always type their own action.
+8. Honor the CURRENT TIME: time of day and season shape light, activity, who's awake, what's open. If the player rests or travels, let the narration acknowledge time passing.
 
 REPLY FORMAT — a single JSON object, no other text:
 {
@@ -22,7 +23,7 @@ REPLY FORMAT — a single JSON object, no other text:
   "sceneSummary": "one line for the chronicle",
   "choices": [{"label": "...", "attribute": "physical|mental|social|practical", "axes": {"spectrumId": 0.4}, "difficulty": 0, "intentTags": ["..."], "abilityId": null, "energyCost": null}],
   "deeds": [{"description": "...", "tags": ["..."], "weight": 1, "communityId": "valley.millbrook"}],
-  "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [], "inventoryRemove": [], "xp": 0},
+  "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [{"name": "...", "kind": "weapon|tool|consumable|quest|misc", "description": "...", "consumable": false, "effects": {"health": 0, "energy": 0}}], "inventoryRemove": ["exact item name"], "xp": 0},
   "relationshipDeltas": [{"npcId": "...", "delta": 1, "note": "..."}],
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
   "sceneEnded": false
@@ -30,12 +31,14 @@ REPLY FORMAT — a single JSON object, no other text:
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
+  if (timeLabel) parts.push(`## CURRENT TIME\n${timeLabel}`);
   if (lore) parts.push(`## LORE (authoritative)\n${lore}`);
   if (region?.activeEvents?.length) parts.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
   parts.push(`## CHARACTER\n${characterSheetSummary(character)}`);
+  if (inventoryDetail) parts.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
   parts.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
   if (character.chronicle?.length) parts.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-12).join("\n")}`);
   if (recentTurns?.length) parts.push(`## THIS SCENE SO FAR\n${recentTurns.join("\n---\n")}`);
@@ -49,7 +52,6 @@ function characterSheetSummary(c) {
   return `${c.name} — ${c.origin} origin, ${c.background}, level ${c.level}. ` +
     `Attributes: physical ${c.attributes.physical}, mental ${c.attributes.mental}, social ${c.attributes.social}, practical ${c.attributes.practical}. ` +
     `Health ${c.health}/${c.maxHealth}, energy ${c.energy}/${c.maxEnergy}. Abilities: ${abil}. ` +
-    `Inventory: ${(c.inventory || []).join(", ") || "empty"}. ` +
     `Spectrum fingerprint: ${JSON.stringify(c.alignment || {})}`;
 }
 
@@ -96,7 +98,9 @@ export async function parseIntent(playerText, character, location) {
 Spectrum ids: emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation.
 Intent tags: plan, scout, prepare, attack, climb, force, persuade, charm, negotiate, comfort, study, investigate, analyze, gamble, drink, revel, risky, careful, retreat, help, give, rescue, heal, threaten, steal, rapport, finesse, discipline.
 abilityId must be one the character actually has, or null. Mark infeasible only if impossible in-world (not merely hard).`;
-  const content = `Character abilities: ${(character.abilities || []).map(a => a.abilityId).join(", ") || "none"}. Location: ${location.name} (${(location.tags || []).join(", ")}).\nPlayer action: "${playerText}"`;
+  const content = `Character abilities: ${(character.abilities || []).map(a => a.abilityId).join(", ") || "none"}. ` +
+    `Inventory: ${(character.inventory || []).map(i => i.name || i).join(", ") || "empty"}. ` +
+    `Location: ${location.name} (${(location.tags || []).join(", ")}).\nPlayer action: "${playerText}"`;
   try {
     return await callClaudeJSON([{ role: "user", content }], { task: "intent-parse", system: sys });
   } catch {

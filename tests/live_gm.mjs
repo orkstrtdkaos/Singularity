@@ -29,7 +29,11 @@ const character = {
   attributes: { physical: 3, mental: 3, social: 3, practical: 3 },
   skills: {}, abilities: [{ abilityId: "sonic_resonance", level: 1 }],
   alignment: {}, attunement: 1, health: 30, maxHealth: 30, energy: 100, maxEnergy: 100,
-  inventory: ["traveler's pack"], deeds: [], relationships: {}, chronicle: [], currentLocationId: "millbrook"
+  inventory: [
+    { name: "Belt Knife", kind: "weapon", qty: 1, description: "A plain working blade." },
+    { name: "Resonance Lantern", kind: "tool", qty: 1, description: "Phononic crystal that glows when it sings; hums near active nanite fields." }
+  ],
+  deeds: [], relationships: {}, chronicle: [], currentLocationId: "millbrook"
 };
 
 console.log("1) Opening scene turn (Sonnet, structured)…");
@@ -38,7 +42,9 @@ const result = await gmTurn({
   region: { activeEvents: [{ summaryForGM: "The Water Crisis — stage 1 (Discoloration): the Echo River runs gray-green on bad mornings." }] },
   resolution: null,
   playerInput: "(Scene opening — set the scene and present the situation.)",
-  recentTurns: []
+  recentTurns: [],
+  timeLabel: "Day 3, evening (late-spring)",
+  inventoryDetail: "Belt Knife (weapon — a plain working blade); Resonance Lantern (tool — phononic crystal that glows when it sings; hums near active nanite fields)"
 });
 if (!result.ok) { console.error("FAIL: gmTurn errored:", result.error); process.exit(1); }
 const t = result.turn;

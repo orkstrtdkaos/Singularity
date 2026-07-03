@@ -4,11 +4,31 @@
   "name": "Harmonic Heights — Lower Terrace",
   "regionId": "valley",
   "communityId": "valley.harmonic_heights",
-  "spectrum": { "mechanical_spiritual": 0.5, "chaos_order": 0.5, "emotional_logical": -0.3, "violence_peace": 0.4, "concrete_abstract": 0.2 },
-  "tags": ["city", "sonic", "terraced", "power-center-proximity"],
-  "connections": ["millbrook", "disputed_zone_fringe"],
+  "spectrum": {
+    "mechanical_spiritual": 0.5,
+    "chaos_order": 0.5,
+    "emotional_logical": -0.3,
+    "violence_peace": 0.4,
+    "concrete_abstract": 0.2
+  },
+  "tags": [
+    "city",
+    "sonic",
+    "terraced",
+    "power-center-proximity"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe"
+  ],
   "descriptionSeed": "The lowest terrace of the Harmonic Heights, where the sonic civilization meets the valley floor. Buildings grown from phononic crystal hum at frequencies you feel in your teeth. Wind chimes the size of trees tune the weather. Everything resonates — the streets carry footstep-echoes upward like reports, and privacy is a discipline, not a given. The Resonance Halls above are visible as terraces of impossible acoustics climbing into cloud.",
-  "loreRefs": ["valley_primer", "power_systems"],
-  "npcsPresent": ["elder_resonance"],
-  "encounterFlavor": "Acoustic apprentices practicing badly, tuning-wardens adjusting the city's chord, debates conducted in overlapping harmonic argument, deep suspicion of Radiant visitors."
+  "loreRefs": [
+    "valley_primer",
+    "power_systems"
+  ],
+  "npcsPresent": [
+    "elder_resonance"
+  ],
+  "encounterFlavor": "Acoustic apprentices practicing badly, tuning-wardens adjusting the city's chord, debates conducted in overlapping harmonic argument, deep suspicion of Radiant visitors.",
+  "image": "content/packs/valley/assets/harmonic_heights_terrace.jpg"
 }

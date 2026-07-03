@@ -50,11 +50,11 @@ Or the GitHub Pages deployment. First run: Settings → paste your Anthropic API
 
 ## Roadmap
 
-- **v0.1 (this)** — solo loop in the Valley: creation, resolution, sense filter, reputation-by-deeds, player-profile aptitudes, GM narration, saves, optional GitHub backup + ledger append.
-- **v0.2** — ability economy depth, skills growth, NPC relationship arcs.
-- **v0.3** — world-tick: ledger → region state consolidation, event stage advancement, news spread between communities (deed `spread`).
-- **v0.4** — Gambits: multi-step declared plans with complications, fallbacks, and adaptation points.
-- **v0.5** — shared scenes: party play via `world/scenes/` polling.
+- **v0.1** — solo loop in the Valley: creation, resolution, sense filter, reputation-by-deeds, player-profile aptitudes, GM narration, saves, optional GitHub backup + ledger append.
+- **v0.2 (this)** — **Inventory** as first-class items (`engine/inventory.js`): catalog in `content/packs/core/items/`, use/examine/drop in scenes, consumable effects, equipment bonuses (`bonusTags` matching action intent), GM sees and weaves items. **Art** (`engine/art.js`): `image` field on any record + bundled location banners in pack `assets/`, optional generation for missing art (Pollinations, keyless) — setting: off/static/generate. **Time passage** (`engine/worldtime.js`): story mode (clock moves with play) or real mode (anchored to the real clock at a configurable ratio) — the GM narrates time of day and season.
+- **v0.3** — world-tick: ledger → region state consolidation, event stage advancement, news spread between communities (deed `spread`), real-time mode ticking world events while away.
+- **v0.4** — Gambits: multi-step declared plans with complications, fallbacks, and adaptation points. Ability economy depth, skills growth, NPC relationship arcs.
+- **v0.5** — shared scenes: party play via `world/scenes/` polling. Time mode becomes world-level (one world, one clock).
 
 ## Design pillars
 

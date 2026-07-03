@@ -9,8 +9,11 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight } from "./engin
 import { gmTurn, parseIntent } from "./engine/gm.js";
 import { getApiKey, setApiKey } from "./engine/claude.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } from "./engine/sync.js";
+import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "./engine/inventory.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
+import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 
-const APP_VERSION = "0.1.0";
+const APP_VERSION = "0.2.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -18,6 +21,7 @@ let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent turn texts for scene continuity
 let busy = false;
+let examinedItem = null; // name of the item expanded in the sidebar
 
 // ---------- boot ----------
 
@@ -53,6 +57,8 @@ function chrome(inner) {
 
 function renderSettings(note = "") {
   const sc = getSyncConfig();
+  const ts = getTimeSettings();
+  const artMode = getArtMode();
   chrome(`<div class="screen">
     <h2>Settings</h2>
     ${note ? `<p class="hint" style="margin-bottom:12px">${esc(note)}</p>` : ""}
@@ -61,6 +67,20 @@ function renderSettings(note = "") {
     <div class="field"><label>Anthropic API key</label>
       <input id="set-key" type="password" value="${esc(getApiKey())}" placeholder="sk-ant-...">
       <div class="hint">Stored in this browser's localStorage only. Never written to any file or repo.</div></div>
+    <div class="field"><label>Scene &amp; item art</label>
+      <select id="set-art">
+        <option value="off" ${artMode === "off" ? "selected" : ""}>Off — text only</option>
+        <option value="static" ${artMode === "static" ? "selected" : ""}>Static — bundled image files only</option>
+        <option value="generate" ${artMode === "generate" ? "selected" : ""}>Generate — also create missing art (Pollinations, free)</option>
+      </select>
+      <div class="hint">Generated art builds from each location/item's own description with a fixed seed, so places look consistent between visits.</div></div>
+    <div class="field"><label>Time passage</label>
+      <select id="set-time-mode">
+        <option value="story" ${ts.mode === "story" ? "selected" : ""}>Story time — the clock moves with play</option>
+        <option value="real" ${ts.mode === "real" ? "selected" : ""}>Real time — the world's clock runs even while you're away</option>
+      </select>
+      <input id="set-time-ratio" type="number" min="1" max="168" value="${ts.ratio}" style="margin-top:6px; width:120px"> <span class="hint" style="display:inline">game-hours per real hour (24 = one game day per real hour)</span>
+      <div class="hint">Story: +1h per beat, +3h travel, +8h rest. Real: in-game time keeps flowing between sessions — the world will feel like it moved without you.</div></div>
     <div class="field"><label>Shared world sync (optional — GitHub)</label>
       <input id="set-owner" value="${esc(sc.owner)}" placeholder="GitHub owner (e.g. orkstrtdkaos)" style="margin-bottom:6px">
       <input id="set-repo" value="${esc(sc.repo)}" placeholder="Repo (e.g. Singularity)" style="margin-bottom:6px">
@@ -73,6 +93,8 @@ function renderSettings(note = "") {
     profile.displayName = document.getElementById("set-player").value.trim();
     saveProfile(profile);
     setApiKey(document.getElementById("set-key").value);
+    setArtMode(document.getElementById("set-art").value);
+    setTimeSettings({ mode: document.getElementById("set-time-mode").value, ratio: parseFloat(document.getElementById("set-time-ratio").value) });
     setSyncConfig({
       owner: document.getElementById("set-owner").value,
       repo: document.getElementById("set-repo").value,
@@ -120,11 +142,33 @@ function renderRoster() {
     input.click();
   };
   for (const btn of app.querySelectorAll("[data-play]")) {
-    btn.onclick = () => { character = loadCharacter(btn.dataset.play); enterPlay(); };
+    btn.onclick = () => { character = migrate(loadCharacter(btn.dataset.play)); saveCharacter(character); enterPlay(); };
   }
 }
 
+/** Additive-schema migration for pre-v0.2 saves: string inventories become item
+ *  objects (re-linked to the catalog), and characters gain a clock. */
+function migrate(c) {
+  if (!c) return c;
+  normalizeInventory(c, CONTENT.items);
+  if (!c.clock) c.clock = newClock();
+  return c;
+}
+
 // ---------- character creation ----------
+
+const GEAR_BY_BACKGROUND = {
+  "former-professional": ["prism_chip", "trade_tokens"],
+  "community-organizer": ["trade_tokens", "dried_rations"],
+  "craftsman": ["belt_knife", "hemp_rope"],
+  "survivalist": ["hemp_rope", "dried_rations"],
+  "medic": ["medics_satchel", "healing_draught"]
+};
+
+function startingGear(background) {
+  const ids = ["travelers_pack", "waterskin", ...(GEAR_BY_BACKGROUND[background] || [])];
+  return ids.map(id => CONTENT.items[id]).filter(Boolean).map(it => fromCatalog(it));
+}
 
 const BACKGROUNDS = [
   ["former-professional", "Former Professional", "Pre-Transition career skills and connections"],
@@ -208,10 +252,11 @@ function renderCreate() {
       attunement: 1,
       maxHealth: 15 + state.attrs.physical * 5, health: 15 + state.attrs.physical * 5,
       maxEnergy: rules.energy.max, energy: rules.energy.max,
-      inventory: ["traveler's pack", "waterskin"],
+      inventory: startingGear(state.background),
       deeds: [], relationships: {}, chronicle: [],
       currentLocationId: CONTENT.startingLocation,
-      activeScene: null
+      activeScene: null,
+      clock: newClock()
     };
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
@@ -243,12 +288,15 @@ async function runGM({ resolution, playerInput }) {
   busy = true;
   const location = CONTENT.locations[character.currentLocationId];
   const region = { ...CONTENT.region, activeEvents: eventsForGM(CONTENT.region, CONTENT.events) };
+  const time = readClock(character.clock);
   const result = await gmTurn({
     character, location, region,
     lore: loreForLocation(location, CONTENT.lore),
     rules: CONTENT.rules,
     resolution, playerInput,
-    recentTurns: sceneTurns.slice(-6)
+    recentTurns: sceneTurns.slice(-6),
+    timeLabel: time.label,
+    inventoryDetail: inventoryForGM(character)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -265,8 +313,8 @@ function applyTurn(turn, resolution) {
   if (d.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + clampInt(d.health, -20, 10)));
   if (d.energy) character.energy = Math.max(0, Math.min(character.maxEnergy, character.energy + clampInt(d.energy, -20, 10)));
   if (d.xp) character.xp += Math.max(0, Math.min(25, d.xp | 0));
-  for (const item of d.inventoryAdd || []) if (character.inventory.length < 30) character.inventory.push(String(item).slice(0, 60));
-  for (const item of d.inventoryRemove || []) character.inventory = character.inventory.filter(i => i !== item);
+  for (const item of d.inventoryAdd || []) addItem(character, item, CONTENT.items);
+  for (const item of d.inventoryRemove || []) removeItem(character, typeof item === "string" ? item : item?.name);
 
   // deeds → reputation
   for (const deed of turn.deeds || []) {
@@ -298,6 +346,8 @@ function applyTurn(turn, resolution) {
     character.health = character.maxHealth; character.energy = character.maxEnergy;
     turn.narration += `\n\n*You feel it settle into you — a new steadiness. (Level ${character.level}: attunement and reserves grow.)*`;
   }
+  // time passes with the story (story mode; real mode advances itself)
+  advanceClock(character.clock, turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat);
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push(turn.sceneSummary);
@@ -335,7 +385,9 @@ async function onChoice(choice) {
     }
   }
   const action = { label: choice.label, attribute: choice.attribute || "practical", axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel, tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)) };
-  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods });
+  const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
+  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus });
+  if (equip.bonus > 0) resolution.equipHelpers = equip.helpers;
   character.energy = applyEnergyCost(character, choice.abilityId ? energyCost : undefined, CONTENT.rules);
 
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
@@ -360,6 +412,7 @@ function travelTo(locId) {
   character.currentLocationId = locId;
   character.activeScene = null;
   sceneTurns = [];
+  advanceClock(character.clock, ADVANCE.travel);
   saveCharacter(character);
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`);
 }
@@ -368,8 +421,26 @@ function rest() {
   if (busy) return;
   character.energy = Math.min(character.maxEnergy, character.energy + CONTENT.rules.energy.regenPerRest);
   character.health = Math.min(character.maxHealth, character.health + 3);
+  advanceClock(character.clock, ADVANCE.rest);
   saveCharacter(character);
   startScene(`(The character takes a real rest here — camp, inn, or quiet corner. Narrate the rest briefly, restore them, then present what's happening when they get up. Time has passed.)`);
+}
+
+function useItem(name) {
+  if (busy) return;
+  const item = character.inventory.find(i => i.name === name);
+  if (!item) return;
+  if (item.consumable) {
+    const fx = consumeItem(character, name);
+    saveCharacter(character);
+    const parts = [];
+    if (fx?.health) parts.push(`${fx.health > 0 ? "+" : ""}${fx.health} health`);
+    if (fx?.energy) parts.push(`${fx.energy > 0 ? "+" : ""}${fx.energy} energy`);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You use the ${name}${parts.length ? ` (${parts.join(", ")})` : ""}.` });
+  } else {
+    // non-consumable: using it IS a scene action — route through the normal loop
+    onFreeform(`I use my ${name} here`);
+  }
 }
 
 // ---------- play rendering ----------
@@ -391,6 +462,23 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Abilities</h3>
       ${character.abilities.map(a => { const ab = CONTENT.abilities[a.abilityId]; return `<div class="ability"><span class="name">${esc(ab?.name || a.abilityId)}</span> lv${a.level} <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`; }).join("") || "<div class='insight'>none yet</div>"}
     </section>
+    <section><h3>Items</h3>
+      ${(character.inventory || []).map(it => {
+        const open = examinedItem === it.name;
+        const img = open ? itemImage(it) : null;
+        return `<div class="item ${open ? "open" : ""}">
+          <button class="item-name" data-examine="${esc(it.name)}">${esc(it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
+          ${open ? `<div class="item-detail">
+            ${img ? `<img class="item-img" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy">` : ""}
+            <div class="item-desc">${esc(it.description || it.kind)}</div>
+            ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
+            <div class="item-actions">
+              <button class="opt" data-use="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
+              <button class="opt" data-drop="${esc(it.name)}">Drop</button>
+            </div></div>` : ""}
+        </div>`;
+      }).join("") || "<div class='insight'>empty-handed</div>"}
+    </section>
     <section><h3>Standing here</h3>
       ${rep ? `<span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span>` : `<span class="insight">no community claims this place</span>`}
     </section>
@@ -401,12 +489,17 @@ function renderPlay(turn, opts = {}) {
     </section>
   </div>`;
 
-  let main = `<div class="play"><div class="location-tag">${esc(location.name)}</div><div class="transcript">`;
+  const banner = locationImage(location);
+  const time = readClock(character.clock);
+  let main = `<div class="play">
+    ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
+    <div class="location-tag">${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div><div class="transcript">`;
   if (opts.playerBeat) {
     main += `<div class="beat player-action">▸ ${esc(opts.playerBeat.label)}</div>`;
     if (opts.playerBeat.resolution) {
       const r = opts.playerBeat.resolution;
-      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span></div>`;
+      const helpers = r.equipHelpers?.length ? ` · aided by ${r.equipHelpers.map(esc).join(", ")}` : "";
+      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}</div>`;
     }
   }
   if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
@@ -423,7 +516,8 @@ function renderPlay(turn, opts = {}) {
         action.abilityLevel = character.abilities.find(a => a.abilityId === c.abilityId).level;
         abilityHtml = `<span class="ability-tag"> ✦ ${esc(CONTENT.abilities[c.abilityId]?.name || c.abilityId)}</span>`;
       }
-      const chance = successChance({ character, action, location, rules, aptitudeMods: mods });
+      const equip = equipmentBonus(character, action.tags, rules);
+      const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus });
       const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
       if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
       return `<button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>`;
@@ -443,6 +537,18 @@ function renderPlay(turn, opts = {}) {
     }
   }
   for (const btn of app.querySelectorAll("[data-travel]")) btn.onclick = () => travelTo(btn.dataset.travel);
+  for (const btn of app.querySelectorAll("[data-examine]")) btn.onclick = () => {
+    examinedItem = examinedItem === btn.dataset.examine ? null : btn.dataset.examine;
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  };
+  for (const btn of app.querySelectorAll("[data-use]")) btn.onclick = () => useItem(btn.dataset.use);
+  for (const btn of app.querySelectorAll("[data-drop]")) btn.onclick = () => {
+    if (!confirm(`Drop ${btn.dataset.drop}?`)) return;
+    removeItem(character, btn.dataset.drop, 999);
+    examinedItem = null;
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You leave the ${btn.dataset.drop} behind.` });
+  };
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = rest;
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");

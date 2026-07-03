@@ -4,11 +4,28 @@
   "name": "Echo River Crossing",
   "regionId": "valley",
   "communityId": "valley.millbrook",
-  "spectrum": { "space_time": -0.3, "death_life": -0.2, "dark_light": -0.2, "chaos_order": -0.2 },
-  "tags": ["river", "bridge", "travel", "contamination-visible"],
-  "connections": ["millbrook", "disputed_zone_fringe", "archive_hollow"],
+  "spectrum": {
+    "space_time": -0.3,
+    "death_life": -0.2,
+    "dark_light": -0.2,
+    "chaos_order": -0.2
+  },
+  "tags": [
+    "river",
+    "bridge",
+    "travel",
+    "contamination-visible"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe",
+    "archive_hollow"
+  ],
   "descriptionSeed": "The old stone-and-cable bridge where the Echo River narrows between granite shoulders. Upstream the water sheets gray-green over the rocks — the contamination is unmistakable here, worse every week. Fisher shacks stand empty. The bridge is the only crossing for miles, so everyone passes through: Harmonic traders, Radiant surveyors, valley farmers, and lately, strangers no one recognizes.",
-  "loreRefs": ["valley_primer"],
+  "loreRefs": [
+    "valley_primer"
+  ],
   "npcsPresent": [],
-  "encounterFlavor": "Travelers with rumors, contamination survey teams from both Heights and Plateau blaming each other, desperate fishers, and things washed downstream that shouldn't exist."
+  "encounterFlavor": "Travelers with rumors, contamination survey teams from both Heights and Plateau blaming each other, desperate fishers, and things washed downstream that shouldn't exist.",
+  "image": "content/packs/valley/assets/echo_river_crossing.jpg"
 }

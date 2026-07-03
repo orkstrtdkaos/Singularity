@@ -4,12 +4,33 @@
   "name": "The Disputed Zone — Fringe",
   "regionId": "valley",
   "communityId": null,
-  "spectrum": { "chaos_order": -0.6, "violence_peace": -0.4, "dark_light": 0.0, "space_time": -0.4, "mechanical_spiritual": 0.4, "demonic_angelic": -0.2 },
-  "tags": ["wilds", "interference", "dangerous", "no-law"],
-  "connections": ["echo_river_crossing", "harmonic_heights_terrace", "radiant_plateau_edge"],
+  "spectrum": {
+    "chaos_order": -0.6,
+    "violence_peace": -0.4,
+    "dark_light": 0.0,
+    "space_time": -0.4,
+    "mechanical_spiritual": 0.4,
+    "demonic_angelic": -0.2
+  },
+  "tags": [
+    "wilds",
+    "interference",
+    "dangerous",
+    "no-law"
+  ],
+  "connections": [
+    "echo_river_crossing",
+    "harmonic_heights_terrace",
+    "radiant_plateau_edge"
+  ],
   "descriptionSeed": "The band of broken country where Harmonic and Radiant power fields interfere. Sound bends light here; light carries sound. Standing waves make pockets where time runs syrup-slow, and shimmer-vortices wander like dust devils made of noise and glare. Neither civilization claims it — officially. Both send people into it. Things live here that adapted to the interference, and things were left here during the Great Transition that never got collected.",
-  "loreRefs": ["valley_primer", "power_systems", "precursors"],
+  "loreRefs": [
+    "valley_primer",
+    "power_systems",
+    "precursors"
+  ],
   "npcsPresent": [],
   "encounterFlavor": "Interference phenomena, scavengers and smugglers, adapted fauna, half-buried pre-Transition machinery, and rarely — very rarely — something that predates humanity noticing you.",
-  "dangerLevel": 3
+  "dangerLevel": 3,
+  "image": "content/packs/valley/assets/disputed_zone_fringe.jpg"
 }

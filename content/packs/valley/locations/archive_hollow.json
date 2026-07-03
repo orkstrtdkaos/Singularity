@@ -4,12 +4,31 @@
   "name": "Archive Hollow",
   "regionId": "valley",
   "communityId": "valley.millbrook",
-  "spectrum": { "concrete_abstract": 0.6, "dark_light": -0.4, "space_time": 0.3, "falsehood_truth": 0.4, "mechanical_spiritual": -0.3 },
-  "tags": ["ruin", "archive", "pre-transition", "restricted"],
-  "connections": ["echo_river_crossing"],
+  "spectrum": {
+    "concrete_abstract": 0.6,
+    "dark_light": -0.4,
+    "space_time": 0.3,
+    "falsehood_truth": 0.4,
+    "mechanical_spiritual": -0.3
+  },
+  "tags": [
+    "ruin",
+    "archive",
+    "pre-transition",
+    "restricted"
+  ],
+  "connections": [
+    "echo_river_crossing"
+  ],
   "descriptionSeed": "A collapsed limestone sink upstream of the crossing, where spring floods exposed a pre-Transition vault: the Lost Archive. Sealed stacks of crystalline storage descend into the dark — fifteen years of the valley agreeing not to talk about what humanity chose to walk away from, all suddenly legible again. The Archive Guardian keeps the entrance, by whose authority nobody can quite say. The air inside tastes like ozone and old arguments.",
-  "loreRefs": ["valley_primer", "precursors"],
-  "npcsPresent": ["archive_guardian"],
+  "loreRefs": [
+    "valley_primer",
+    "precursors"
+  ],
+  "npcsPresent": [
+    "archive_guardian"
+  ],
   "encounterFlavor": "The Guardian's tests and evasions, sealed doors keyed to forgotten protocols, fragments of pre-Transition records, factions' agents nosing around, and the uncomfortable sense of being catalogued by something in the deep stacks.",
-  "dangerLevel": 2
+  "dangerLevel": 2,
+  "image": "content/packs/valley/assets/archive_hollow.jpg"
 }

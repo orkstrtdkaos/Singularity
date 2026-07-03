@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "travelers_pack", "name": "Traveler's Pack", "kind": "tool",
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": ["retreat", "careful"], "consumable": false
+    },
+    {
+      "id": "waterskin", "name": "Waterskin", "kind": "consumable",
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": { "energy": 10 }, "consumable": true
+    },
+    {
+      "id": "belt_knife", "name": "Belt Knife", "kind": "weapon",
+      "description": "A plain working blade — more tool than weapon, but it has been both.",
+      "bonusTags": ["attack", "force"], "consumable": false
+    },
+    {
+      "id": "hemp_rope", "name": "Hemp Rope (30 ft)", "kind": "tool",
+      "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
+      "bonusTags": ["climb"], "consumable": false
+    },
+    {
+      "id": "resonance_lantern", "name": "Resonance Lantern", "kind": "tool",
+      "description": "Harmonic-made: a phononic crystal that glows when it sings. Light without flame, and it hums louder near active nanite fields.",
+      "bonusTags": ["investigate", "scout"], "consumable": false
+    },
+    {
+      "id": "medics_satchel", "name": "Medic's Satchel", "kind": "tool",
+      "description": "Herb rolls, boiled linen, needle and gut. Valley medicine — patient, practical, proven.",
+      "bonusTags": ["heal", "help"], "consumable": false
+    },
+    {
+      "id": "healing_draught", "name": "Healing Draught", "kind": "consumable",
+      "description": "Bitter green tincture from the terrace gardens. Knits small wounds and dulls big ones.",
+      "effects": { "health": 8 }, "consumable": true
+    },
+    {
+      "id": "dried_rations", "name": "Dried Rations", "kind": "consumable",
+      "description": "Fish, fruit leather, hard bread. Two days if you're honest with yourself, three if you're not.",
+      "effects": { "energy": 15 }, "consumable": true
+    },
+    {
+      "id": "prism_chip", "name": "Prism Chip", "kind": "tool",
+      "description": "A thumb-sized shard of Radiant photonic crystal. Splits any light into telltale spectra — a poor man's Prism Sight.",
+      "bonusTags": ["investigate", "analyze"], "consumable": false
+    },
+    {
+      "id": "trade_tokens", "name": "Trade Tokens", "kind": "misc",
+      "description": "Stamped ceramic rounds honored in Millbrook and grudgingly beyond. The valley's compromise with currency.",
+      "bonusTags": ["negotiate"], "consumable": false
+    }
+  ]
+}

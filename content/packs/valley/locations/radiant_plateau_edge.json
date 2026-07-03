@@ -4,11 +4,31 @@
   "name": "Radiant Plateau — Edge District",
   "regionId": "valley",
   "communityId": "valley.radiant_plateau",
-  "spectrum": { "dark_light": 0.6, "falsehood_truth": 0.3, "concrete_abstract": 0.4, "mechanical_spiritual": 0.3, "violence_peace": 0.3 },
-  "tags": ["city", "photonic", "plateau", "power-center-proximity"],
-  "connections": ["millbrook", "disputed_zone_fringe"],
+  "spectrum": {
+    "dark_light": 0.6,
+    "falsehood_truth": 0.3,
+    "concrete_abstract": 0.4,
+    "mechanical_spiritual": 0.3,
+    "violence_peace": 0.3
+  },
+  "tags": [
+    "city",
+    "photonic",
+    "plateau",
+    "power-center-proximity"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe"
+  ],
   "descriptionSeed": "The rim of the Radiant Plateau, where photonic-crystal towers catch and braid the sunlight into working beams. Streets are paved with light-guides; at dusk the whole district glows from below like standing on a slow aurora. The Radiant people prize clarity and revelation — but their light-bending arts mean what you see here is always, deliberately, a choice someone made.",
-  "loreRefs": ["valley_primer", "power_systems"],
-  "npcsPresent": ["high_luminary"],
-  "encounterFlavor": "Optics-weavers at work, mirror-court politics, filtration array engineers under pressure about the river, apprentices dueling with harmless beams, quiet distrust of Harmonic visitors."
+  "loreRefs": [
+    "valley_primer",
+    "power_systems"
+  ],
+  "npcsPresent": [
+    "high_luminary"
+  ],
+  "encounterFlavor": "Optics-weavers at work, mirror-court politics, filtration array engineers under pressure about the river, apprentices dueling with harmless beams, quiet distrust of Harmonic visitors.",
+  "image": "content/packs/valley/assets/radiant_plateau_edge.jpg"
 }

@@ -17,7 +17,7 @@ export function spectrumAlignment(a = {}, b = {}) {
 /** Compute true success chance for an action. Everything is data-driven from rules JSON.
  *  action: { attribute, skillId?, axes?, abilityLevel?, difficulty (0-100 penalty), planned? }
  *  aptitudeMods: flat map merged from the player's aptitudes (see playerprofile.js). */
-export function successChance({ character, action, location, rules, aptitudeMods = {} }) {
+export function successChance({ character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0 }) {
   const bc = rules.baseChance;
   const attrLevel = character.attributes[action.attribute] || 1;
   let chance = attrLevel * bc.attributeMultiplier;
@@ -44,6 +44,9 @@ export function successChance({ character, action, location, rules, aptitudeMods
     if (action.tags?.includes("finesse") && aptitudeMods.socialFinessePenalty) chance += aptitudeMods.socialFinessePenalty;
   }
   if (action.tags?.includes("discipline") && aptitudeMods.disciplinePenalty) chance += aptitudeMods.disciplinePenalty;
+
+  // Equipment: the right tool in your pack helps (computed by inventory.equipmentBonus)
+  chance += equipmentBonus;
 
   chance -= action.difficulty || 0;
   return Math.max(rules.d100.floorChance, Math.min(rules.d100.ceilingChance, Math.round(chance)));

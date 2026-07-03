@@ -25,6 +25,12 @@ export async function loadContent() {
     for (const a of pack.abilities) abilities[a.id] = { ...a, powerSystem: pack.powerSystem };
   }
 
+  const items = {};
+  for (const path of index.provides.items || []) {
+    const pack = await fetchJSON(`content/packs/core/${path}`);
+    for (const it of pack.items) items[it.id] = it;
+  }
+
   const locations = {};
   for (const path of valley.provides.locations) {
     const loc = await fetchJSON(`content/packs/valley/${path}`);
@@ -47,7 +53,7 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, abilities, locations, npcs, events, lore, region, startingLocation: valley.startingLocation };
+  return { spectrums, rules, abilities, items, locations, npcs, events, lore, region, startingLocation: valley.startingLocation };
 }
 
 async function fetchJSON(path) {

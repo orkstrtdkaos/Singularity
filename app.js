@@ -14,8 +14,10 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "./engine/npcs.js";
+import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 
-const APP_VERSION = "0.3.1";
+const APP_VERSION = "0.4.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -158,6 +160,8 @@ function migrate(c) {
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
   if (!c.quests) c.quests = [];
+  migrateRelationships(c, CONTENT.npcs);
+  if (!c.placeMemory) c.placeMemory = {};
   return c;
 }
 
@@ -298,6 +302,8 @@ function renderCreate() {
       clock: newClock(),
       companions: [],
       quests: [],
+      npcRegistry: {},
+      placeMemory: {},
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
@@ -343,7 +349,9 @@ async function runGM({ resolution, playerInput }) {
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
     questsDetail: questsForGM(character),
-    sceneState
+    sceneState,
+    npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
+    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -367,13 +375,14 @@ function applyTurn(turn, resolution) {
   for (const deed of turn.deeds || []) {
     recordDeed(character, { ...deed, locationId: location.id, communityId: deed.communityId ?? location.communityId }, mods);
   }
-  // relationships
-  for (const r of turn.relationshipDeltas || []) {
-    const rel = character.relationships[r.npcId] || { score: 0, notes: [] };
-    rel.score += clampInt(r.delta, -3, 3);
-    if (r.note) rel.notes = [...(rel.notes || []), r.note].slice(-5);
-    character.relationships[r.npcId] = rel;
-  }
+  // people & places remember (typed ops, clamped)
+  const memCtx = { locationId: location.id, day: readClock(character.clock).day };
+  applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
+  // legacy relationshipDeltas fold into the registry too (older GM replies)
+  applyNpcUpdates(character, (turn.relationshipDeltas || []).map(r => ({
+    op: "update", npcId: r.npcId, name: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
+  })), memCtx);
+  applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
   if (resolution?.action?.axes) {
     for (const [ax, v] of Object.entries(resolution.action.axes)) {
@@ -466,6 +475,7 @@ function travelTo(locId) {
   sceneTurns = [];
   sceneState = null;
   advanceClock(character.clock, ADVANCE.travel);
+  notePlaceVisit(character, locId, readClock(character.clock).day);
   saveCharacter(character);
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`);
 }
@@ -497,7 +507,9 @@ async function onAsk(text) {
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
     questsDetail: questsForGM(character),
-    sceneState
+    sceneState,
+    npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
+    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId)
   }, text);
   busy = false;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
@@ -538,6 +550,11 @@ function renderPlay(turn, opts = {}) {
     </div></section>
     <section><h3>Abilities</h3>
       ${character.abilities.map(a => { const ab = CONTENT.abilities[a.abilityId]; return `<div class="ability"><span class="name">${esc(ab?.name || a.abilityId)}</span> lv${a.level} <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`; }).join("") || "<div class='insight'>none yet</div>"}
+    </section>
+    <section><h3>People you know</h3>
+      ${Object.values(character.npcRegistry || {}).sort((a, b) => Math.abs(b.relationship) - Math.abs(a.relationship)).slice(0, 5).map(n =>
+        `<div class="known-npc" title="${esc((n.history || []).slice(-2).join(" | ") || n.description || "")}"><span class="npc-name">${esc(n.name)}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`
+      ).join("") || "<div class='insight'>no one yet — introduce yourself</div>"}
     </section>
     <section><h3>Quests</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `

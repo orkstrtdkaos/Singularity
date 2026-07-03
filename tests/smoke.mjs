@@ -12,6 +12,8 @@ import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext } from "../engine/gm.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "../engine/npcs.js";
+import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -172,6 +174,35 @@ const ctx = buildTurnContext({
 });
 check("scene state block is in the GM context", ctx.includes("AUTHORITATIVE") && ctx.includes("Dock-master Hela"));
 check("recent beats include full text, older only summaries", ctx.includes("FULL TEXT: Full narration") && ctx.includes("old beat"));
+
+// --- NPC permanence ---
+const traveler2 = { name: "Kaelen" };
+applyNpcUpdates(traveler2, [{ op: "meet", npcId: "dock-master-hela", name: "Dock-master Hela", role: "Millbrook dock-master", description: "Broad, ink-stained fingers, misses nothing.", note: "Answered Kaelen's question about the gray water — guardedly.", learned: ["Logs every barge; noticed catch weights dropping for a month"], skillsObserved: ["ledger-keeping"], relationshipDelta: 1 }], { locationId: "millbrook", day: 1 });
+check("met NPC lands in registry", traveler2.npcRegistry["dock-master-hela"]?.name === "Dock-master Hela");
+applyNpcUpdates(traveler2, [{ op: "update", npcId: "dock-master-hela", note: "Kaelen fixed her jammed crane gratis.", relationshipDelta: 2, skillsObserved: ["ledger-keeping", "haggling"] }], { locationId: "millbrook", day: 2 });
+const hela = traveler2.npcRegistry["dock-master-hela"];
+check("history accumulates with days", hela.history.length === 2 && hela.history[1].includes("d2"));
+check("relationship moves, delta clamped to ±2", hela.relationship === 3);
+check("skills dedupe", hela.skillsObserved.length === 2);
+applyNpcUpdates(traveler2, [{ op: "update", npcId: "dock-master-hela", relationshipDelta: 99 }], {});
+check("big deltas clamp", traveler2.npcRegistry["dock-master-hela"].relationship === 5);
+check("bands read", relationshipBand(5) === "ally" && relationshipBand(-8) === "enemy");
+const regBlock = npcRegistryForGM(traveler2, { locationId: "millbrook", sceneNpcNames: [] });
+check("GM registry block carries facts + history", regBlock.includes("catch weights dropping") && regBlock.includes("fixed her jammed crane"));
+const legacy = { relationships: { water_keeper: { score: 3, notes: ["shared tea"] } } };
+migrateRelationships(legacy, { water_keeper: { name: "Mara Wells", role: "Water Keeper", homeLocation: "millbrook" } });
+check("legacy relationships migrate", legacy.npcRegistry["water-keeper"]?.name === "Mara Wells" && legacy.npcRegistry["water-keeper"].history[0] === "shared tea");
+
+// --- place memory ---
+const traveler3 = {};
+notePlaceVisit(traveler3, "millbrook", 1);
+notePlaceVisit(traveler3, "millbrook", 3);
+applyPlaceUpdates(traveler3, "millbrook", [{ note: "Left the hemp rope coiled behind the well." }, { flag: { crane_fixed: true } }], { day: 3 });
+const pm = placeMemoryForGM(traveler3, "millbrook");
+check("place remembers visits, notes, flags", pm.includes("Visits: 2") && pm.includes("hemp rope") && pm.includes("crane_fixed=true"));
+check("unvisited place has no block", placeMemoryForGM(traveler3, "archive_hollow") === null);
+applyPlaceUpdates(traveler3, "millbrook", [{ note: "Left the hemp rope coiled behind the well." }], { day: 3 });
+check("duplicate place notes dedupe", traveler3.placeMemory.millbrook.notes.length === 1);
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

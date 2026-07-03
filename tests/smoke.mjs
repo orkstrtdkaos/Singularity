@@ -11,6 +11,7 @@ import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, i
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify } from "../engine/quests.js";
+import { sanitizeScene, buildTurnContext } from "../engine/gm.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -150,6 +151,27 @@ for (let i = 0; i < 7; i++) applyQuestUpdates(q, [{ op: "start", title: "Side th
 check("active quest cap holds at 5", q.quests.filter(x => x.status === "active").length <= 5);
 check("GM quest block renders", questsForGM(q).includes("Side thing 0"));
 check("slugify behaves", slugify("The  Gray!! Water??") === "the-gray-water");
+
+// --- scene permanence ---
+const rawScene = {
+  setting: "On the Millbrook dock at dusk, " + "x".repeat(500),
+  npcsPresent: [{ name: "Dock-master Hela", state: "logging the last barge" }, "Kit Farrow", ...Array(10).fill({ name: "extra", state: "" })],
+  objects: Array(20).fill("crate of gray-slick fish"),
+  threads: ["Hela hasn't answered the question about the toll-takers"]
+};
+const clean = sanitizeScene(rawScene);
+check("scene setting clamped", clean.setting.length <= 400);
+check("scene npcs capped and normalized", clean.npcsPresent.length <= 8 && clean.npcsPresent[1].name === "Kit Farrow");
+check("scene objects capped", clean.objects.length <= 10);
+check("garbage scene returns null (keep previous)", sanitizeScene({ npcsPresent: [] }) === null && sanitizeScene(null) === null);
+const ctx = buildTurnContext({
+  character: { name: "T", origin: "valley", background: "craftsman", level: 1, attributes: { physical: 1, mental: 1, social: 1, practical: 1 }, health: 1, maxHealth: 1, energy: 1, maxEnergy: 1, alignment: {}, deeds: [] },
+  location: { name: "Dock", descriptionSeed: "d", spectrum: {}, communityId: null },
+  rules, sceneState: clean,
+  recentTurns: [{ summary: "old beat" }, { summary: "recent beat", narration: "Full narration text of the recent beat." }]
+});
+check("scene state block is in the GM context", ctx.includes("AUTHORITATIVE") && ctx.includes("Dock-master Hela"));
+check("recent beats include full text, older only summaries", ctx.includes("FULL TEXT: Full narration") && ctx.includes("old beat"));
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

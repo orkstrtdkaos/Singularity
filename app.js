@@ -6,7 +6,7 @@ import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.
 import { senseAction } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey } from "./engine/claude.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } from "./engine/sync.js";
@@ -15,13 +15,14 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
 
-const APP_VERSION = "0.3.0";
+const APP_VERSION = "0.3.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
-let sceneTurns = [];     // recent turn texts for scene continuity
+let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
+let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, objects, threads
 let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
@@ -311,8 +312,10 @@ function renderCreate() {
 
 function enterPlay() {
   sceneTurns = [];
+  sceneState = null;
   if (character.activeScene?.turns?.length) {
     sceneTurns = character.activeScene.turns;
+    sceneState = character.activeScene.sceneState || null;
     renderPlay(character.activeScene.lastTurn, { resumed: true });
   } else {
     startScene();
@@ -339,7 +342,8 @@ async function runGM({ resolution, playerInput }) {
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
-    questsDetail: questsForGM(character)
+    questsDetail: questsForGM(character),
+    sceneState
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -393,12 +397,14 @@ function applyTurn(turn, resolution) {
   applyQuestUpdates(character, turn.questUpdates || []);
   // time passes with the story (story mode; real mode advances itself)
   advanceClock(character.clock, turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat);
+  // scene anchor: the GM's updated scene state, clamped — or keep the previous one
+  sceneState = sanitizeScene(turn.scene) || sceneState;
   // chronicle + scene persistence
   if (turn.sceneSummary) {
-    sceneTurns.push(turn.sceneSummary);
-    if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; }
+    sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" });
+    if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; }
   }
-  character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn };
+  character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };
   saveCharacter(character); saveProfile(profile);
 
   // shared-world consequences (best-effort, never blocks play)
@@ -458,6 +464,7 @@ function travelTo(locId) {
   character.currentLocationId = locId;
   character.activeScene = null;
   sceneTurns = [];
+  sceneState = null;
   advanceClock(character.clock, ADVANCE.travel);
   saveCharacter(character);
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`);
@@ -467,6 +474,8 @@ function rest() {
   if (busy) return;
   character.energy = Math.min(character.maxEnergy, character.energy + CONTENT.rules.energy.regenPerRest);
   character.health = Math.min(character.maxHealth, character.health + 3);
+  sceneTurns = [];
+  sceneState = null; // hours pass — the old scene has dissolved
   advanceClock(character.clock, ADVANCE.rest);
   saveCharacter(character);
   startScene(`(The character takes a real rest here — camp, inn, or quiet corner. Narrate the rest briefly, restore them, then present what's happening when they get up. Time has passed.)`);
@@ -487,7 +496,8 @@ async function onAsk(text) {
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
-    questsDetail: questsForGM(character)
+    questsDetail: questsForGM(character),
+    sceneState
   }, text);
   busy = false;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
@@ -578,7 +588,7 @@ function renderPlay(turn, opts = {}) {
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag">${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div><div class="transcript">`;
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div><div class="transcript">`;
   if (opts.playerBeat) {
     main += `<div class="beat player-action">▸ ${esc(opts.playerBeat.label)}</div>`;
     if (opts.playerBeat.resolution) {

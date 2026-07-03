@@ -20,6 +20,7 @@ ABSOLUTE RULES
 10. MOMENTUM. Every turn must advance something concrete: a quest moves, a secret surfaces, a relationship shifts, a door opens or closes. No idle slice-of-life beats unless the player explicitly seeks quiet. If no active quest engages the current scene, weave one of the location's QUEST SEEDS into play as a concrete, named opportunity with stakes — an NPC asks, an event interrupts, a chance presents itself.
 11. QUESTS are tracked state. When the player takes on an undertaking, emit questUpdates op "start" (short memorable title, one-line summary, who gave it). When a scene advances one, emit op "progress" with a note. When finished, op "complete" (xpReward 15-50 by difficulty) or op "fail". Keep at most 2-3 quests in active play; finish threads before opening many more.
 12. Ground scenes in the character's BIO: their livelihood earns them recognition or work, their hobbies surface naturally, their motivation is the lens for every big choice. NPCs react to what the character does for a living.
+13. SCENE PERMANENCE — the most important continuity rule. The CURRENT SCENE STATE block is authoritative physical reality: the exact spot the character occupies, who is present, what objects exist. You MUST NOT contradict it. The character stays exactly where they are unless the player's action moves them or something in-world explicitly moves them — and any movement must be narrated as a transition ("you follow her up the lane…"), never assumed. NPCs do not teleport, swap, or change roles; objects stay where they were left; indoor/outdoor, weather, and lighting persist. You MAY add new elements (a person arrives, something is uncovered) — additions are generativity, contradictions are errors. Return the updated scene state EVERY turn in the "scene" field, carrying forward everything still true.
 
 REPLY FORMAT — a single JSON object, no other text:
 {
@@ -31,12 +32,14 @@ REPLY FORMAT — a single JSON object, no other text:
   "relationshipDeltas": [{"npcId": "...", "delta": 1, "note": "..."}],
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
   "questUpdates": [{"op": "start|progress|complete|fail", "questId": "kebab-id", "title": "...", "summary": "...", "giver": "...", "note": "...", "xpReward": 25}],
+  "scene": {"setting": "1-2 sentences: EXACTLY where the character is (indoor/outdoor, position, lighting, weather)", "npcsPresent": [{"name": "...", "state": "what they're doing right now"}], "objects": ["notable objects in view or reach"], "threads": ["unresolved in-scene threads (a question hanging, someone waiting for an answer)"]},
   "sceneEnded": false
 }
+The "scene" field is REQUIRED every turn: carry forward everything still true from the current scene state, change only what this beat actually changed.
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
   if (location.questSeeds?.length) parts.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
@@ -49,7 +52,17 @@ export function buildTurnContext({ character, location, region, lore, rules, res
   if (questsDetail) parts.push(`## ACTIVE QUESTS\n${questsDetail}`);
   parts.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
   if (character.chronicle?.length) parts.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-12).join("\n")}`);
-  if (recentTurns?.length) parts.push(`## THIS SCENE SO FAR\n${recentTurns.join("\n---\n")}`);
+  if (sceneState) {
+    parts.push(`## CURRENT SCENE STATE (AUTHORITATIVE — do not contradict; see rule 13)\nSetting: ${sceneState.setting}\nPresent: ${(sceneState.npcsPresent || []).map(n => `${n.name} (${n.state})`).join("; ") || "no one else"}\nObjects: ${(sceneState.objects || []).join(", ") || "nothing notable"}\nOpen threads: ${(sceneState.threads || []).join("; ") || "none"}`);
+  }
+  if (recentTurns?.length) {
+    // older beats as one-line summaries, the last few in full — continuity needs texture
+    const rendered = recentTurns.map((t, i) => {
+      if (typeof t === "string") return t; // legacy shape
+      return i >= recentTurns.length - 3 && t.narration ? `${t.summary}\nFULL TEXT: ${t.narration.slice(0, 700)}` : t.summary;
+    });
+    parts.push(`## THIS SCENE SO FAR (oldest first)\n${rendered.join("\n---\n")}`);
+  }
   if (resolution) parts.push(`## RESOLUTION (already rolled by the engine — narrate this outcome)\nAction: ${resolution.action.label}\nResult: ${resolution.degree} (rolled ${resolution.roll} vs ${resolution.chance})`);
   if (playerInput) parts.push(`## PLAYER SAYS\n${playerInput}`);
   return parts.join("\n\n");
@@ -93,10 +106,24 @@ export async function gmTurn(ctx) {
   }
 }
 
+/** Clamp a GM-proposed scene state to sane bounds. Returns null for garbage —
+ *  callers keep the previous scene state in that case (permanence over novelty). */
+export function sanitizeScene(scene) {
+  if (!scene || typeof scene !== "object" || !scene.setting) return null;
+  return {
+    setting: String(scene.setting).slice(0, 400),
+    npcsPresent: (Array.isArray(scene.npcsPresent) ? scene.npcsPresent : []).slice(0, 8).map(n =>
+      typeof n === "string" ? { name: n.slice(0, 60), state: "" } : { name: String(n.name || "someone").slice(0, 60), state: String(n.state || "").slice(0, 120) }),
+    objects: (Array.isArray(scene.objects) ? scene.objects : []).slice(0, 10).map(o => String(o).slice(0, 80)),
+    threads: (Array.isArray(scene.threads) ? scene.threads : []).slice(0, 5).map(t => String(t).slice(0, 160))
+  };
+}
+
 function fallbackTurn(narration) {
   return {
     narration,
     sceneSummary: narration.slice(0, 100),
+    scene: null, // engine keeps the previous scene state — permanence over novelty
     choices: [
       { label: "Look around carefully", attribute: "mental", axes: {}, difficulty: 0, intentTags: ["investigate", "careful"] },
       { label: "Press on", attribute: "physical", axes: {}, difficulty: 0, intentTags: [] },

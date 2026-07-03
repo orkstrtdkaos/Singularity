@@ -49,6 +49,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability { margin-bottom: 6px; }
 .ability .name { color: var(--accent2); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
+.companion { margin-bottom: 6px; }
+.companion-name { color: var(--accent2); font-weight: 600; }
+.companion .cost { display: block; color: var(--ink-dim); font-size: 11px; margin: 2px 0 4px; }
+.companion-part { font-size: 11px; padding: 3px 8px; }
 .item { margin-bottom: 4px; }
 .item-name { background: none; border: none; color: var(--ink); font-size: 13px; padding: 2px 0; text-align: left; width: 100%; }
 .item-name:hover { color: var(--accent); }

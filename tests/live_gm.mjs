@@ -16,6 +16,7 @@ if (!process.env.ANTHROPIC_API_KEY) { console.error("Set ANTHROPIC_API_KEY"); pr
 localStorage.setItem("singularity.anthropicKey", process.env.ANTHROPIC_API_KEY);
 
 const { gmTurn, parseIntent } = await import("../engine/gm.js");
+const { companionsForGM } = await import("../engine/companions.js");
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const load = p => JSON.parse(readFileSync(join(root, p), "utf8"));
@@ -44,7 +45,8 @@ const result = await gmTurn({
   playerInput: "(Scene opening — set the scene and present the situation.)",
   recentTurns: [],
   timeLabel: "Day 3, evening (late-spring)",
-  inventoryDetail: "Belt Knife (weapon — a plain working blade); Resonance Lantern (tool — phononic crystal that glows when it sings; hums near active nanite fields)"
+  inventoryDetail: "Belt Knife (weapon — a plain working blade); Resonance Lantern (tool — phononic crystal that glows when it sings; hums near active nanite fields)",
+  companionsDetail: companionsForGM([JSON.parse(readFileSync(join(root, "content/packs/valley/companions/aevi.json"), "utf8"))])
 });
 if (!result.ok) { console.error("FAIL: gmTurn errored:", result.error); process.exit(1); }
 const t = result.turn;

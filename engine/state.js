@@ -46,6 +46,11 @@ export async function loadContent() {
     const ev = await fetchJSON(`content/packs/valley/${path}`);
     events[ev.id] = ev;
   }
+  const companions = {};
+  for (const path of valley.provides.companions || []) {
+    const c = await fetchJSON(`content/packs/valley/${path}`);
+    companions[c.id] = c;
+  }
   const lore = {};
   for (const path of valley.provides.lore) {
     const name = path.split("/").pop().replace(".md", "");
@@ -53,7 +58,7 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, abilities, items, locations, npcs, events, lore, region, startingLocation: valley.startingLocation };
+  return { spectrums, rules, abilities, items, locations, npcs, events, companions, lore, region, startingLocation: valley.startingLocation };
 }
 
 async function fetchJSON(path) {

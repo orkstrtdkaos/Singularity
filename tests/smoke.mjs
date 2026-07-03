@@ -9,6 +9,7 @@ import { recordDeed, standingWith, reputationSummary, knownTags } from "../engin
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
+import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -118,6 +119,19 @@ check("real anchor stored", !!clock.realAnchor);
 localStorage.setItem("singularity.timeMode", "story");
 readClock(clock);
 check("returning to story mode drops anchor", clock.realAnchor === null);
+
+// --- companions ---
+const aevi = JSON.parse(readFileSync(join(root, "content/packs/valley/companions/aevi.json"), "utf8"));
+const catalogC = { aevi };
+const traveler = { companions: ["aevi"] };
+const active = activeCompanions(traveler, catalogC);
+check("companion resolves from catalog", active.length === 1 && active[0].name === "Aevi");
+check("aevi assists investigation", companionBonus(active, ["investigate"], rules).bonus === 5);
+check("aevi does not assist theft", companionBonus(active, ["steal"], rules).bonus === 0);
+check("GM block includes boundaries", companionsForGM(active).includes("will not lie"));
+check("unknown companion id is dropped", activeCompanions({ companions: ["ghost"] }, catalogC).length === 0);
+const chanceWithAevi = successChance({ character: char, action: { ...action, tags: ["investigate"] }, location: loc, rules, equipmentBonus: companionBonus(active, ["investigate"], rules).bonus });
+check("companion assist flows into chance", chanceWithAevi === chance + 5);
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

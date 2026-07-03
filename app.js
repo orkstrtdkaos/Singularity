@@ -12,8 +12,9 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } 
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
+import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
 
-const APP_VERSION = "0.2.0";
+const APP_VERSION = "0.2.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -152,6 +153,7 @@ function migrate(c) {
   if (!c) return c;
   normalizeInventory(c, CONTENT.items);
   if (!c.clock) c.clock = newClock();
+  if (!c.companions) c.companions = [];
   return c;
 }
 
@@ -256,7 +258,8 @@ function renderCreate() {
       deeds: [], relationships: {}, chronicle: [],
       currentLocationId: CONTENT.startingLocation,
       activeScene: null,
-      clock: newClock()
+      clock: newClock(),
+      companions: []
     };
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
@@ -296,7 +299,8 @@ async function runGM({ resolution, playerInput }) {
     resolution, playerInput,
     recentTurns: sceneTurns.slice(-6),
     timeLabel: time.label,
-    inventoryDetail: inventoryForGM(character)
+    inventoryDetail: inventoryForGM(character),
+    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions))
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -386,8 +390,9 @@ async function onChoice(choice) {
   }
   const action = { label: choice.label, attribute: choice.attribute || "practical", axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel, tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)) };
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
-  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus });
-  if (equip.bonus > 0) resolution.equipHelpers = equip.helpers;
+  const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules);
+  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
+  if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
   character.energy = applyEnergyCost(character, choice.abilityId ? energyCost : undefined, CONTENT.rules);
 
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
@@ -462,6 +467,17 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Abilities</h3>
       ${character.abilities.map(a => { const ab = CONTENT.abilities[a.abilityId]; return `<div class="ability"><span class="name">${esc(ab?.name || a.abilityId)}</span> lv${a.level} <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`; }).join("") || "<div class='insight'>none yet</div>"}
     </section>
+    <section><h3>Companions</h3>
+      ${(character.companions || []).map(id => {
+        const c = CONTENT.companions[id];
+        return c ? `<div class="companion"><span class="companion-name">${esc(c.name)}</span> <span class="cost">${esc(c.role)}</span>
+          <button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>` : "";
+      }).join("")}
+      ${Object.values(CONTENT.companions).filter(c => !(character.companions || []).includes(c.id)).map(c =>
+        `<button class="opt" data-join="${esc(c.id)}" style="margin:2px 0; display:block; width:100%" title="${esc(c.persona.slice(0, 140))}">Travel with ${esc(c.name)}</button>`
+      ).join("")}
+      ${!Object.keys(CONTENT.companions).length ? "<div class='insight'>you travel alone</div>" : ""}
+    </section>
     <section><h3>Items</h3>
       ${(character.inventory || []).map(it => {
         const open = examinedItem === it.name;
@@ -517,7 +533,8 @@ function renderPlay(turn, opts = {}) {
         abilityHtml = `<span class="ability-tag"> ✦ ${esc(CONTENT.abilities[c.abilityId]?.name || c.abilityId)}</span>`;
       }
       const equip = equipmentBonus(character, action.tags, rules);
-      const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus });
+      const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules);
+      const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
       const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
       if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
       return `<button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>`;
@@ -537,6 +554,22 @@ function renderPlay(turn, opts = {}) {
     }
   }
   for (const btn of app.querySelectorAll("[data-travel]")) btn.onclick = () => travelTo(btn.dataset.travel);
+  for (const btn of app.querySelectorAll("[data-join]")) btn.onclick = async () => {
+    if (busy) return;
+    const c = CONTENT.companions[btn.dataset.join];
+    character.companions = [...(character.companions || []), c.id];
+    saveCharacter(character);
+    renderPlay(null, { thinking: `${c.name} arrives…` });
+    const result = await runGM({ resolution: null, playerInput: `(${c.name} has just joined the character as a traveling companion. Introduce them into the current scene naturally — their arrival, how they read the situation — then continue the scene.)` });
+    if (result) renderPlay(result.turn, { degraded: result.degraded });
+  };
+  for (const btn of app.querySelectorAll("[data-part]")) btn.onclick = () => {
+    const c = CONTENT.companions[btn.dataset.part];
+    if (!confirm(`Part ways with ${c.name}?`)) return;
+    character.companions = character.companions.filter(id => id !== c.id);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${c.name} drifts on — for now.` });
+  };
   for (const btn of app.querySelectorAll("[data-examine]")) btn.onclick = () => {
     examinedItem = examinedItem === btn.dataset.examine ? null : btn.dataset.examine;
     renderPlay(character.activeScene?.lastTurn || null, {});

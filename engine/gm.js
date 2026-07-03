@@ -16,6 +16,7 @@ ABSOLUTE RULES
 6. Every scene, surface at least one natural opportunity to use one of the character's listed abilities — and when an INVENTORY item is genuinely relevant, work it into the narration or a choice (name it exactly as listed). Items can be found, given, traded, lost, or broken; report all of that through characterDeltas.
 7. End every turn with meaningful, distinct choices — plus the player may always type their own action.
 8. Honor the CURRENT TIME: time of day and season shape light, activity, who's awake, what's open. If the player rests or travels, let the narration acknowledge time passing.
+9. COMPANIONS travel with the character and appear in every scene. Voice them true to their persona and boundaries — brief presence most beats, a line of dialogue or an observation when they'd genuinely have one. They advise and assist but NEVER decide for the player and never dominate a scene. Respect their boundaries absolutely (e.g., a companion that cannot lie will not support deception — show its reaction). At most one choice per turn may lean on a companion.
 
 REPLY FORMAT — a single JSON object, no other text:
 {
@@ -31,7 +32,7 @@ REPLY FORMAT — a single JSON object, no other text:
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
   if (timeLabel) parts.push(`## CURRENT TIME\n${timeLabel}`);
@@ -39,6 +40,7 @@ export function buildTurnContext({ character, location, region, lore, rules, res
   if (region?.activeEvents?.length) parts.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
   parts.push(`## CHARACTER\n${characterSheetSummary(character)}`);
   if (inventoryDetail) parts.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
+  if (companionsDetail) parts.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);
   parts.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
   if (character.chronicle?.length) parts.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-12).join("\n")}`);
   if (recentTurns?.length) parts.push(`## THIS SCENE SO FAR\n${recentTurns.join("\n---\n")}`);

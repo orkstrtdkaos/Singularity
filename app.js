@@ -21,7 +21,7 @@ import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rer
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.8.3";
+const APP_VERSION = "0.8.4";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -614,7 +614,7 @@ async function onAsk(text) {
 
 // ---------- world map ----------
 
-function renderMap() {
+function renderMap(selectedId = null) {
   const locs = Object.values(CONTENT.locations);
   const here = character.currentLocationId;
   const connectedToHere = CONTENT.locations[here]?.connections || [];
@@ -626,28 +626,61 @@ function renderMap() {
     if (!seen.has(key) && CONTENT.locations[c]) { seen.add(key); edges.push([l.id, c]); }
   }
   const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
+  const isVisited = id => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
   const svg = `<svg viewBox="0 0 800 440" class="world-map">
     <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
     <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}</text>
     ${edges.map(([a, b]) => { const A = CONTENT.locations[a].map, B = CONTENT.locations[b].map;
       return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""}"/>`; }).join("")}
     ${locs.map(l => {
-      const visited = (character.placeMemory?.[l.id]?.visits || 0) > 0 || l.id === here;
+      const visited = isVisited(l.id);
       const reachable = connectedToHere.includes(l.id);
-      const cls = `map-node ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${l.dangerLevel >= 3 ? "danger" : ""}`;
-      return `<g class="${cls}" ${reachable ? `data-mapgo="${esc(l.id)}"` : ""}>
+      const pm = character.placeMemory?.[l.id];
+      const cls = `map-node ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${l.dangerLevel >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
+      const tip = visited
+        ? `${l.name}${l.id === here ? " — you are here" : ""}${pm?.visits ? ` · ${pm.visits} visit${pm.visits > 1 ? "s" : ""}` : ""}${l.dangerLevel >= 3 ? " · DANGEROUS" : ""}${reachable ? " · one travel away" : ""}`
+        : `Unknown place — you've only heard of it${reachable ? " · one travel away" : ""}`;
+      return `<g class="${cls}" data-mapsel="${esc(l.id)}">
+        <title>${esc(tip)}</title>
+        <circle class="hit" cx="${l.map.x}" cy="${l.map.y}" r="24"/>
         <circle cx="${l.map.x}" cy="${l.map.y}" r="${l.id === here ? 14 : 10}"/>
         <text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
-        ${visited && character.placeMemory?.[l.id]?.visits > 1 ? `<text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${character.placeMemory[l.id].visits}</text>` : ""}
+        ${visited && pm?.visits > 1 ? `<text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
       </g>`; }).join("")}
   </svg>`;
+  // details panel for the selected node — travel is an explicit button, never a stray click
+  let details = "";
+  if (selectedId && CONTENT.locations[selectedId]) {
+    const l = CONTENT.locations[selectedId];
+    const visited = isVisited(l.id);
+    const pm = character.placeMemory?.[l.id];
+    const reachable = connectedToHere.includes(l.id);
+    details = `<div class="map-details">
+      <div class="map-details-head">
+        <h3>${esc(visited ? l.name : "An unknown place")}</h3>
+        ${l.dangerLevel >= 3 ? `<span class="rep-band wary">dangerous</span>` : ""}
+        ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
+      </div>
+      ${visited
+        ? `<p class="map-details-desc">${esc(l.descriptionSeed.slice(0, 260))}${l.descriptionSeed.length > 260 ? "…" : ""}</p>
+           ${pm?.visits ? `<div class="hint">${pm.visits} visit${pm.visits > 1 ? "s" : ""}${pm.lastVisit != null ? ` · last on day ${pm.lastVisit}` : ""}</div>` : ""}
+           ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}`
+        : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
+      ${l.id !== here ? (reachable
+        ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">Travel here (+${ADVANCE.travel}h)</button>`
+        : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")} — travel via a connected place.</div>`) : ""}
+    </div>`;
+  }
   chrome(`<div class="screen" style="max-width:860px">
     <h2>World Map</h2>
-    <p class="hint" style="margin-bottom:8px">Gold ring: you are here. Bright nodes are a travel away — click to go (+${ADVANCE.travel}h). Dim marks are places you've only heard of.</p>
+    <p class="hint" style="margin-bottom:8px">Gold ring: you are here. Hover a place for a quick read; click it for details and travel.</p>
     ${svg}
+    ${details}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
-  for (const g of app.querySelectorAll("[data-mapgo]")) g.onclick = () => travelTo(g.dataset.mapgo);
+  for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
+  const travelBtn = document.getElementById("map-travel");
+  if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 

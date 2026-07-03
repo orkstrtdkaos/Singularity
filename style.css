@@ -49,6 +49,14 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability { margin-bottom: 6px; }
 .ability .name { color: var(--accent2); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
+.quest { margin-bottom: 8px; }
+.quest-title { color: var(--accent); font-weight: 600; font-size: 13px; }
+.quest-note { color: var(--ink-dim); font-size: 12px; font-style: italic; margin-top: 1px; }
+.quest-done { color: var(--ink-dim); font-size: 11px; margin-top: 4px; border-top: 1px dashed var(--border); padding-top: 4px; }
+.gm-aside { border-left: 3px solid var(--accent2); background: var(--panel2); border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0; font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
+.gm-aside p { margin-bottom: 6px; } .gm-aside p:last-child { margin-bottom: 0; }
+.mode-toggle { background: var(--panel2); color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600; }
+.mode-toggle.asking { color: var(--accent2); border-color: var(--accent2); }
 .companion { margin-bottom: 6px; }
 .companion-name { color: var(--accent2); font-weight: 600; }
 .companion .cost { display: block; color: var(--ink-dim); font-size: 11px; margin: 2px 0 4px; }

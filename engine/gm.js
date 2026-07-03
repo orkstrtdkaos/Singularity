@@ -17,6 +17,9 @@ ABSOLUTE RULES
 7. End every turn with meaningful, distinct choices — plus the player may always type their own action.
 8. Honor the CURRENT TIME: time of day and season shape light, activity, who's awake, what's open. If the player rests or travels, let the narration acknowledge time passing.
 9. COMPANIONS travel with the character and appear in every scene. Voice them true to their persona and boundaries — brief presence most beats, a line of dialogue or an observation when they'd genuinely have one. They advise and assist but NEVER decide for the player and never dominate a scene. Respect their boundaries absolutely (e.g., a companion that cannot lie will not support deception — show its reaction). At most one choice per turn may lean on a companion.
+10. MOMENTUM. Every turn must advance something concrete: a quest moves, a secret surfaces, a relationship shifts, a door opens or closes. No idle slice-of-life beats unless the player explicitly seeks quiet. If no active quest engages the current scene, weave one of the location's QUEST SEEDS into play as a concrete, named opportunity with stakes — an NPC asks, an event interrupts, a chance presents itself.
+11. QUESTS are tracked state. When the player takes on an undertaking, emit questUpdates op "start" (short memorable title, one-line summary, who gave it). When a scene advances one, emit op "progress" with a note. When finished, op "complete" (xpReward 15-50 by difficulty) or op "fail". Keep at most 2-3 quests in active play; finish threads before opening many more.
+12. Ground scenes in the character's BIO: their livelihood earns them recognition or work, their hobbies surface naturally, their motivation is the lens for every big choice. NPCs react to what the character does for a living.
 
 REPLY FORMAT — a single JSON object, no other text:
 {
@@ -27,20 +30,23 @@ REPLY FORMAT — a single JSON object, no other text:
   "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [{"name": "...", "kind": "weapon|tool|consumable|quest|misc", "description": "...", "consumable": false, "effects": {"health": 0, "energy": 0}}], "inventoryRemove": ["exact item name"], "xp": 0},
   "relationshipDeltas": [{"npcId": "...", "delta": 1, "note": "..."}],
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
+  "questUpdates": [{"op": "start|progress|complete|fail", "questId": "kebab-id", "title": "...", "summary": "...", "giver": "...", "note": "...", "xpReward": 25}],
   "sceneEnded": false
 }
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
+  if (location.questSeeds?.length) parts.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
   if (timeLabel) parts.push(`## CURRENT TIME\n${timeLabel}`);
   if (lore) parts.push(`## LORE (authoritative)\n${lore}`);
   if (region?.activeEvents?.length) parts.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
   parts.push(`## CHARACTER\n${characterSheetSummary(character)}`);
   if (inventoryDetail) parts.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
   if (companionsDetail) parts.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);
+  if (questsDetail) parts.push(`## ACTIVE QUESTS\n${questsDetail}`);
   parts.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
   if (character.chronicle?.length) parts.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-12).join("\n")}`);
   if (recentTurns?.length) parts.push(`## THIS SCENE SO FAR\n${recentTurns.join("\n---\n")}`);
@@ -51,10 +57,17 @@ export function buildTurnContext({ character, location, region, lore, rules, res
 
 function characterSheetSummary(c) {
   const abil = (c.abilities || []).map(a => `${a.abilityId} (lv${a.level})`).join(", ") || "none yet";
-  return `${c.name} — ${c.origin} origin, ${c.background}, level ${c.level}. ` +
+  let s = `${c.name} — ${c.origin} origin, ${c.background}, level ${c.level}. ` +
     `Attributes: physical ${c.attributes.physical}, mental ${c.attributes.mental}, social ${c.attributes.social}, practical ${c.attributes.practical}. ` +
     `Health ${c.health}/${c.maxHealth}, energy ${c.energy}/${c.maxEnergy}. Abilities: ${abil}. ` +
     `Spectrum fingerprint: ${JSON.stringify(c.alignment || {})}`;
+  if (c.bio) {
+    const b = c.bio;
+    s += `\nBIO — From: ${b.hometown || "unknown"}. Lives: ${b.residence || "no fixed home"}. Livelihood: ${b.livelihood || "gets by"}. ` +
+      `Hobbies: ${b.hobbies || "few"}. Why they stepped out of ordinary life: ${b.motivation || "unstated"}.` +
+      (b.story ? `\nTheir story so far: ${b.story}` : "");
+  }
+  return s;
 }
 
 /** Run one GM turn. Returns the parsed turn object, or a safe fallback shape. */
@@ -91,6 +104,31 @@ function fallbackTurn(narration) {
     ],
     deeds: [], characterDeltas: {}, relationshipDeltas: [], ledgerEvents: [], sceneEnded: false
   };
+}
+
+/** Out-of-character question to the GM. Answers about the world, the scene, the
+ *  rules, the character's own knowledge — WITHOUT advancing the story, rolling
+ *  dice, or changing any state. Strict no-spoiler rule for GM-EYES-ONLY content. */
+export async function gmAsk(ctx, question) {
+  const sys = `You are the Game Master of SINGULARITY answering an OUT-OF-CHARACTER question from the player. This is a meta channel: the story does not advance, no dice are rolled, nothing in the world changes.
+- Answer helpfully about: the current scene, what the CHARACTER would plausibly know or remember, the world's lore as provided, how the game's mechanics work (d100 vs shown chance, spectrum alignment, reputation from deeds, energy, quests), and what the choices on offer would generally entail.
+- NEVER reveal GM-EYES-ONLY content, hidden truths, NPC secrets, or true odds beyond what the character's sense already showed. If asked, say the character doesn't know that yet — finding out is play.
+- Be concise: a short paragraph or two. Plain, friendly, spoiler-safe.`;
+  const content = buildTurnContext({ ...ctx, resolution: null, playerInput: null }) + `\n\n## PLAYER ASKS (out of character)\n${question}`;
+  try {
+    const text = await callClaude([{ role: "user", content }], { task: "gm-meta", system: sys, maxTokens: 1024 });
+    return { ok: true, text };
+  } catch (err) {
+    return { ok: false, error: err.message };
+  }
+}
+
+/** Generate a bio draft from the creation choices (player edits before accepting). */
+export async function generateBio({ name, origin, background, attributes }) {
+  const sys = `You write short character bios for an RPG set in the Valley of Echoes — a post-de-technologizing world (15 years after humanity voluntarily stepped back from its own technology) with two local civilizations: the sonic Harmonic Heights and the photonic Radiant Plateau, plus unaligned valley-floor farming communities. Grounded, specific, warm; no cliches, no chosen-one tropes. Reply with ONLY JSON:
+{"hometown": "where they grew up (specific, in-world)", "residence": "where they live now and what it's like", "livelihood": "how they actually make money", "hobbies": "2-3 real hobbies", "motivation": "why they stepped out of ordinary life to become someone things happen to — concrete and personal, not grand", "story": "3-4 sentence life story tying it together"}`;
+  const content = `Name: ${name}. Origin: ${origin} (harmonic = Heights sonic culture, radiant = Plateau light culture, valley = unaligned farming folk). Background: ${background}. Attributes (1-4): ${JSON.stringify(attributes)} — let the strongest shape the story.`;
+  return callClaudeJSON([{ role: "user", content }], { task: "bio-gen", system: sys, maxTokens: 1024 });
 }
 
 /** Parse a freeform player action into a resolvable action spec (cheap model). */

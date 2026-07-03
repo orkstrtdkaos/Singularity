@@ -6,7 +6,8 @@ import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.
 import { senseAction } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio } from "./engine/gm.js";
+import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey } from "./engine/claude.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "./engine/inventory.js";
@@ -14,7 +15,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
 
-const APP_VERSION = "0.2.1";
+const APP_VERSION = "0.3.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -23,6 +24,7 @@ let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent turn texts for scene continuity
 let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
+let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 
 // ---------- boot ----------
 
@@ -154,6 +156,7 @@ function migrate(c) {
   normalizeInventory(c, CONTENT.items);
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
+  if (!c.quests) c.quests = [];
   return c;
 }
 
@@ -220,7 +223,7 @@ function renderCreate() {
       <div class="field"><label>Abilities — choose ${maxAbilities()}</label>
         <div class="opt-row">${okAb.map(a => `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc(a.description)}">${esc(a.name)}</button>`).join("")}</div>
         <div class="hint">${state.abilities.map(id => esc(CONTENT.abilities[id].description)).join(" · ") || "Hover for descriptions."}</div></div>
-      <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Begin in Millbrook</button>
+      <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your story</button>
     </div>`);
 
     document.getElementById("c-name").oninput = e => { state.name = e.target.value; document.getElementById("c-done").disabled = !(state.name.trim() && left === 0 && state.abilities.length === maxAbilities()); };
@@ -234,10 +237,43 @@ function renderCreate() {
       else if (state.abilities.length < maxAbilities()) state.abilities.push(id);
       draw();
     };
-    document.getElementById("c-done").onclick = finish;
+    document.getElementById("c-done").onclick = () => renderBioStep();
   }
 
-  function finish() {
+  function renderBioStep(bio = { hometown: "", residence: "", livelihood: "", hobbies: "", motivation: "", story: "" }) {
+    const FIELDS = [
+      ["hometown", "Where are they from?", "e.g. a fishing hamlet two days upriver"],
+      ["residence", "Where do they live now?", "e.g. a rented loft over the Millbrook cooperage"],
+      ["livelihood", "How do they make money?", "e.g. repairs water-wheels; takes carving commissions in winter"],
+      ["hobbies", "What do they do for joy?", "e.g. night fishing, dice, collecting pre-Transition buttons"],
+      ["motivation", "Why step out of ordinary life?", "What makes them someone things HAPPEN to — a debt, a loss, a question, an itch"]
+    ];
+    chrome(`<div class="screen">
+      <h2>${esc(state.name)}'s Story</h2>
+      <p class="hint" style="margin-bottom:14px">This is what makes them a character and not a bystander. The GM grounds every scene in it. Fill it in, or let the valley weave a draft you can edit.</p>
+      ${FIELDS.map(([k, label, ph]) => `<div class="field"><label>${label}</label><input id="bio-${k}" value="${esc(bio[k])}" placeholder="${esc(ph)}"></div>`).join("")}
+      <div class="field"><label>Their story so far</label><textarea id="bio-story" rows="4" style="width:100%" placeholder="A few sentences tying it together">${esc(bio.story)}</textarea></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn secondary" id="bio-weave">✦ Weave it for me</button>
+        <button class="btn" id="bio-done">Begin in Millbrook</button>
+      </div>
+      <div class="hint" id="bio-status" style="margin-top:8px"></div>
+    </div>`);
+    const read = () => Object.fromEntries([...FIELDS.map(([k]) => [k, document.getElementById(`bio-${k}`).value.trim()]), ["story", document.getElementById("bio-story").value.trim()]]);
+    document.getElementById("bio-weave").onclick = async () => {
+      const status = document.getElementById("bio-status");
+      status.textContent = "The valley considers who you might be…";
+      try {
+        const draft = await generateBio({ name: state.name, origin: state.origin, background: state.background, attributes: state.attrs });
+        renderBioStep({ ...read(), ...Object.fromEntries(Object.entries(draft).filter(([, v]) => v)) });
+      } catch (err) {
+        status.textContent = "The weave slipped (" + err.message.slice(0, 60) + ") — write it by hand or try again.";
+      }
+    };
+    document.getElementById("bio-done").onclick = () => finish(read());
+  }
+
+  function finish(bio = null) {
     const rules = CONTENT.rules;
     character = {
       schemaVersion: 1,
@@ -259,7 +295,9 @@ function renderCreate() {
       currentLocationId: CONTENT.startingLocation,
       activeScene: null,
       clock: newClock(),
-      companions: []
+      companions: [],
+      quests: [],
+      bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
@@ -300,7 +338,8 @@ async function runGM({ resolution, playerInput }) {
     recentTurns: sceneTurns.slice(-6),
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
-    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions))
+    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
+    questsDetail: questsForGM(character)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -350,6 +389,8 @@ function applyTurn(turn, resolution) {
     character.health = character.maxHealth; character.energy = character.maxEnergy;
     turn.narration += `\n\n*You feel it settle into you — a new steadiness. (Level ${character.level}: attunement and reserves grow.)*`;
   }
+  // quests: typed ops from the GM, applied within bounds
+  applyQuestUpdates(character, turn.questUpdates || []);
   // time passes with the story (story mode; real mode advances itself)
   advanceClock(character.clock, turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat);
   // chronicle + scene persistence
@@ -431,6 +472,27 @@ function rest() {
   startScene(`(The character takes a real rest here — camp, inn, or quiet corner. Narrate the rest briefly, restore them, then present what's happening when they get up. Time has passed.)`);
 }
 
+async function onAsk(text) {
+  if (busy || !text.trim()) return;
+  busy = true;
+  const lastTurn = character.activeScene?.lastTurn || null;
+  renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, thinking: "The GM leans back…" });
+  const location = CONTENT.locations[character.currentLocationId];
+  const time = readClock(character.clock);
+  const result = await gmAsk({
+    character, location, rules: CONTENT.rules,
+    lore: loreForLocation(location, CONTENT.lore),
+    region: { ...CONTENT.region, activeEvents: eventsForGM(CONTENT.region, CONTENT.events) },
+    recentTurns: sceneTurns.slice(-6),
+    timeLabel: time.label,
+    inventoryDetail: inventoryForGM(character),
+    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
+    questsDetail: questsForGM(character)
+  }, text);
+  busy = false;
+  renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
+}
+
 function useItem(name) {
   if (busy) return;
   const item = character.inventory.find(i => i.name === name);
@@ -466,6 +528,13 @@ function renderPlay(turn, opts = {}) {
     </div></section>
     <section><h3>Abilities</h3>
       ${character.abilities.map(a => { const ab = CONTENT.abilities[a.abilityId]; return `<div class="ability"><span class="name">${esc(ab?.name || a.abilityId)}</span> lv${a.level} <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`; }).join("") || "<div class='insight'>none yet</div>"}
+    </section>
+    <section><h3>Quests</h3>
+      ${(character.quests || []).filter(q => q.status === "active").map(q => `
+        <div class="quest"><span class="quest-title">${esc(q.title)}</span>
+          <div class="quest-note">${esc(q.progress?.length ? q.progress[q.progress.length - 1] : q.summary)}</div>
+        </div>`).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
+      ${(character.quests || []).some(q => q.status !== "active") ? `<div class="quest-done">${(character.quests || []).filter(q => q.status === "completed").length} completed · ${(character.quests || []).filter(q => q.status === "failed").length} failed</div>` : ""}
     </section>
     <section><h3>Companions</h3>
       ${(character.companions || []).map(id => {
@@ -520,6 +589,7 @@ function renderPlay(turn, opts = {}) {
   }
   if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
   if (opts.aside) main += `<div class="beat"><em>${esc(opts.aside)}</em></div>`;
+  if (opts.gmAside) main += `<div class="gm-aside">${opts.gmAside.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
   if (opts.error) main += `<div class="error-card">The GM stumbled: ${esc(opts.error)}<br><button class="btn" id="retry" style="margin-top:8px">Try again</button></div>`;
 
   if (turn) {
@@ -541,8 +611,11 @@ function renderPlay(turn, opts = {}) {
     }).join("")}</div>`;
   }
   main += `</div>`;
-  if (turn || opts.error) {
-    main += `<div class="freeform"><input id="freeform-input" placeholder="Or do something else — describe it…" ${busy ? "disabled" : ""}><button id="freeform-go" ${busy ? "disabled" : ""}>Act</button></div>`;
+  if (turn || opts.error || opts.gmAside) {
+    main += `<div class="freeform">
+      <button id="mode-toggle" class="mode-toggle ${askMode ? "asking" : ""}" title="Switch between acting in the scene and asking the GM out-of-character">${askMode ? "Ask" : "Act"}</button>
+      <input id="freeform-input" placeholder="${askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
+      <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button></div>`;
   }
   main += `</div>`;
 
@@ -585,9 +658,18 @@ function renderPlay(turn, opts = {}) {
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = rest;
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");
+  const modeBtn = document.getElementById("mode-toggle");
+  if (modeBtn) modeBtn.onclick = () => {
+    askMode = !askMode;
+    const val = ff?.value || "";
+    renderPlay(turn || character.activeScene?.lastTurn || null, { ...opts, thinking: null });
+    const ff2 = document.getElementById("freeform-input");
+    if (ff2) { ff2.value = val; ff2.focus(); }
+  };
   if (ff && go) {
-    go.onclick = () => onFreeform(ff.value);
-    ff.onkeydown = e => { if (e.key === "Enter") onFreeform(ff.value); };
+    const submit = () => askMode ? onAsk(ff.value) : onFreeform(ff.value);
+    go.onclick = submit;
+    ff.onkeydown = e => { if (e.key === "Enter") submit(); };
   }
   const retry = document.getElementById("retry");
   if (retry) retry.onclick = () => startScene("(Retry the previous beat — pick up smoothly from where the story last stood.)");

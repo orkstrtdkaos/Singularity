@@ -10,6 +10,7 @@ import { newProfile, updateProfile, aptitudeMods, deriveAptitudes } from "../eng
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
+import { applyQuestUpdates, questsForGM, slugify } from "../engine/quests.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -132,6 +133,23 @@ check("GM block includes boundaries", companionsForGM(active).includes("will not
 check("unknown companion id is dropped", activeCompanions({ companions: ["ghost"] }, catalogC).length === 0);
 const chanceWithAevi = successChance({ character: char, action: { ...action, tags: ["investigate"] }, location: loc, rules, equipmentBonus: companionBonus(active, ["investigate"], rules).bonus });
 check("companion assist flows into chance", chanceWithAevi === chance + 5);
+
+// --- quests ---
+const q = { xp: 0 };
+applyQuestUpdates(q, [{ op: "start", title: "Trace the Gray Water", summary: "Follow the contamination upstream", giver: "Mara Wells" }]);
+check("quest starts", q.quests.length === 1 && q.quests[0].status === "active" && q.quests[0].id === "trace-the-gray-water");
+applyQuestUpdates(q, [{ op: "start", title: "Trace the Gray Water" }]);
+check("duplicate start ignored", q.quests.length === 1);
+applyQuestUpdates(q, [{ op: "progress", questId: "trace-the-gray-water", note: "The samples match nothing natural." }]);
+check("progress appends", q.quests[0].progress.length === 1 && q.quests[0].progress[0].includes("nothing natural"));
+applyQuestUpdates(q, [{ op: "complete", questId: "trace-the-gray-water", xpReward: 400 }]);
+check("complete clamps xp to 50", q.quests[0].status === "completed" && q.xp === 50);
+applyQuestUpdates(q, [{ op: "progress", questId: "trace-the-gray-water", note: "too late" }]);
+check("resolved quests reject updates", q.quests[0].progress.length <= 4 && q.quests[0].status === "completed");
+for (let i = 0; i < 7; i++) applyQuestUpdates(q, [{ op: "start", title: "Side thing " + i }]);
+check("active quest cap holds at 5", q.quests.filter(x => x.status === "active").length <= 5);
+check("GM quest block renders", questsForGM(q).includes("Side thing 0"));
+check("slugify behaves", slugify("The  Gray!! Water??") === "the-gray-water");
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

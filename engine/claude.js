@@ -5,12 +5,14 @@
 
 const MODEL_MAP = {
   "gm-narrate": "claude-sonnet-4-6",
+  "gm-meta": "claude-sonnet-4-6",
+  "bio-gen": "claude-sonnet-4-6",
   "intent-parse": "claude-haiku-4-5-20251001",
   "chronicle-compress": "claude-haiku-4-5-20251001",
   _default: "claude-sonnet-4-6"
 };
 
-const BUDGETS = { "gm-narrate": 4096, "intent-parse": 1024, "chronicle-compress": 1024, _default: 2048 };
+const BUDGETS = { "gm-narrate": 4096, "gm-meta": 1024, "bio-gen": 1024, "intent-parse": 1024, "chronicle-compress": 1024, _default: 2048 };
 
 export function getApiKey() { return localStorage.getItem("singularity.anthropicKey") || ""; }
 export function setApiKey(k) { localStorage.setItem("singularity.anthropicKey", k.trim()); }

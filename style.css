@@ -24,7 +24,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 /* ---------- layout ---------- */
 #app { max-width: 1100px; margin: 0 auto; padding: 16px; }
 .layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: start; }
-@media (max-width: 800px) { .layout { grid-template-columns: 1fr; } }
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; }
+  .sheet { position: static; }
+}
 
 .topbar { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
 .topbar h1 { font-size: 20px; letter-spacing: 2px; color: var(--accent); font-weight: normal; }

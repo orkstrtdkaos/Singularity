@@ -17,6 +17,17 @@ export const SUB_OF = {
 };
 export const SUBS = Object.keys(SUB_OF);
 
+export const SUB_DESC = {
+  strength: "Force and endurance — breaking, lifting, carrying, holding on",
+  agility: "Speed and balance — climbing, dodging, sneaking, slipping past",
+  reason: "Logic and analysis — puzzles, mechanisms, deduction, planning details",
+  insight: "Perception and intuition — noticing things, reading people, sensing wrongness",
+  presence: "Command and inspiration — leading, being heeded, holding a room",
+  rapport: "Charm and empathy — befriending, soothing, negotiating, fitting in",
+  craft: "Making and fixing — tools, repairs, precise handwork, quality judgment",
+  wits: "Improvisation and survival — quick thinking, reacting, making do"
+};
+
 /** Migrate a character to sub-attributes (both subs start at the parent value). */
 export function ensureSubAttributes(character) {
   if (character.subAttributes) return character;

@@ -17,6 +17,8 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/p
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "../engine/codex.js";
+import { sceneImage, locationImage } from "../engine/art.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -318,6 +320,44 @@ check("known combo found regardless of hint", !!knownDiscovery(hero2, ["echo_sen
 const discChance = successChance({ character: hero2, action: { ...novelAction, novel: true, discoveryBonus: rules.novel.discoveryBonus }, location: { spectrum: {} }, rules });
 check("discovered technique earns bonus instead of surcharge", discChance === plainChance + rules.novel.discoveryBonus);
 check("ability law lists discovered techniques", abilitiesForGM(hero2, abilityCatalog).includes("Echo-Guided Push"));
+
+// --- codex (knowledge graph) ---
+const scribe = {};
+ensureCodex(scribe);
+applyCodexUpdates(scribe, [
+  { topic: "the-gray-water", label: "The Gray Water", kind: "mystery", fact: "The contamination pattern is not natural — Mara recognized it.", links: ["millbrook", "mara-wells"] },
+  { topic: "mara-wells", label: "Mara Wells", kind: "person", fact: "Was an environmental engineer before the Transition.", links: ["the-gray-water"] }
+], { day: 3 });
+check("codex topics created with links", scribe.codex.topics["the-gray-water"]?.links.includes("millbrook") && scribe.codex.topics["mara-wells"]?.kind === "person");
+applyCodexUpdates(scribe, [{ topic: "the-gray-water", fact: "The contamination pattern is not natural — Mara recognized it." }], { day: 5 });
+check("duplicate facts dedupe across days", scribe.codex.topics["the-gray-water"].facts.length === 1);
+applyCodexUpdates(scribe, [{ topic: "the-gray-water", fact: "Upstream fisher families sickened first, in draw order.", links: ["echo-river-crossing"] }], { day: 6 });
+check("facts accumulate day-stamped", scribe.codex.topics["the-gray-water"].facts.length === 2 && scribe.codex.topics["the-gray-water"].facts[1].startsWith("[d6]"));
+const relevant = codexForGM(scribe, { locationId: "millbrook", questTitles: [] });
+check("location-linked topics surface as relevant", relevant.includes("The Gray Water"));
+const relevant2 = codexForGM(scribe, { locationId: "archive_hollow", questTitles: ["Trace the Gray Water"] });
+check("quest-matched topics surface too", relevant2 && relevant2.includes("Gray Water"));
+check("codex search finds facts", searchCodex(scribe, "fisher").length === 1 && searchCodex(scribe, "").length === 2);
+
+// --- scene-level art ---
+globalThis.localStorage.setItem("singularity.artMode", "generate");
+const testLoc = { id: "millbrook", name: "Millbrook", descriptionSeed: "a village", image: "content/packs/valley/assets/millbrook.jpg" };
+const sc1 = sceneImage(testLoc, { setting: "Inside a low-beamed cottage, fire banked, rain on the shutters" });
+const sc2 = sceneImage(testLoc, { setting: "On the river dock at dusk, gray-green water lapping the pilings" });
+check("generate mode: scene setting drives the image", sc1.includes("pollinations") && sc1 !== sc2);
+check("same setting = same image (stable seed)", sc1 === sceneImage(testLoc, { setting: "Inside a low-beamed cottage, fire banked, rain on the shutters" }));
+globalThis.localStorage.setItem("singularity.artMode", "static");
+check("static mode falls back to the location banner", sceneImage(testLoc, { setting: "anywhere" }) === testLoc.image);
+globalThis.localStorage.setItem("singularity.artMode", "off");
+check("off mode shows nothing", sceneImage(testLoc, { setting: "anywhere" }) === null);
+globalThis.localStorage.setItem("singularity.artMode", "static");
+
+// --- map data ---
+for (const id of ["millbrook", "echo_river_crossing", "archive_hollow", "disputed_zone_fringe", "harmonic_heights_terrace", "radiant_plateau_edge"]) {
+  const l = JSON.parse(readFileSync(join(root, `content/packs/valley/locations/${id}.json`), "utf8"));
+  if (!(l.map && typeof l.map.x === "number" && typeof l.map.y === "number")) { check(`map coords present for ${id}`, false); }
+}
+check("all locations carry map coordinates", true);
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

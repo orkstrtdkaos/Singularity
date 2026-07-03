@@ -12,15 +12,16 @@ import { getApiKey, setApiKey } from "./engine/claude.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
-import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.7.0";
+const APP_VERSION = "0.8.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -168,6 +169,7 @@ function migrate(c) {
   if (!c.placeMemory) c.placeMemory = {};
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
+  ensureCodex(c);
   return c;
 }
 
@@ -328,6 +330,7 @@ function renderCreate() {
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
     ensureSubAttributes(character);
+    ensureCodex(character);
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
@@ -378,7 +381,8 @@ async function runGM({ resolution, playerInput }) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities)
+    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities),
+    codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -412,6 +416,7 @@ function applyTurn(turn, resolution) {
     op: "update", npcId: r.npcId, name: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
   })), memCtx);
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
+  applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
   if (resolution?.action?.axes) {
     for (const [ax, v] of Object.entries(resolution.action.axes)) {
@@ -577,10 +582,87 @@ async function onAsk(text) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities)
+    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities),
+    codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
   }, text);
   busy = false;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
+}
+
+// ---------- world map ----------
+
+function renderMap() {
+  const locs = Object.values(CONTENT.locations);
+  const here = character.currentLocationId;
+  const connectedToHere = CONTENT.locations[here]?.connections || [];
+  // dedupe edges
+  const edges = [];
+  const seen = new Set();
+  for (const l of locs) for (const c of l.connections || []) {
+    const key = [l.id, c].sort().join("~");
+    if (!seen.has(key) && CONTENT.locations[c]) { seen.add(key); edges.push([l.id, c]); }
+  }
+  const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
+  const svg = `<svg viewBox="0 0 800 440" class="world-map">
+    <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
+    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}</text>
+    ${edges.map(([a, b]) => { const A = CONTENT.locations[a].map, B = CONTENT.locations[b].map;
+      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""}"/>`; }).join("")}
+    ${locs.map(l => {
+      const visited = (character.placeMemory?.[l.id]?.visits || 0) > 0 || l.id === here;
+      const reachable = connectedToHere.includes(l.id);
+      const cls = `map-node ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${l.dangerLevel >= 3 ? "danger" : ""}`;
+      return `<g class="${cls}" ${reachable ? `data-mapgo="${esc(l.id)}"` : ""}>
+        <circle cx="${l.map.x}" cy="${l.map.y}" r="${l.id === here ? 14 : 10}"/>
+        <text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
+        ${visited && character.placeMemory?.[l.id]?.visits > 1 ? `<text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${character.placeMemory[l.id].visits}</text>` : ""}
+      </g>`; }).join("")}
+  </svg>`;
+  chrome(`<div class="screen" style="max-width:860px">
+    <h2>World Map</h2>
+    <p class="hint" style="margin-bottom:8px">Gold ring: you are here. Bright nodes are a travel away — click to go (+${ADVANCE.travel}h). Dim marks are places you've only heard of.</p>
+    ${svg}
+    <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
+  </div>`);
+  for (const g of app.querySelectorAll("[data-mapgo]")) g.onclick = () => travelTo(g.dataset.mapgo);
+  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+// ---------- codex: the character's knowledge graph ----------
+
+function renderCodexScreen(query = "", openTopicId = null) {
+  const results = searchCodex(character, query);
+  const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
+  chrome(`<div class="screen" style="max-width:720px">
+    <h2>Codex — what ${esc(character.name)} knows</h2>
+    <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
+    ${open ? `
+      <div class="codex-topic-page">
+        <div class="codex-kind">${esc(open.kind)}</div>
+        <h3 class="codex-title">${esc(open.label)}</h3>
+        ${open.facts.length ? open.facts.map(f => `<div class="codex-fact">${esc(f)}</div>`).join("") : "<div class='insight'>known of, little learned yet</div>"}
+        ${open.links.length ? `<div class="codex-links">linked: ${open.links.map(l => {
+          const t = character.codex.topics[l];
+          return t ? `<button class="codex-link" data-topic="${esc(l)}">${esc(t.label)}</button>` : `<span class="codex-link dead">${esc(l)}</span>`;
+        }).join(" ")}</div>` : ""}
+        <button class="btn secondary" id="codex-close-topic" style="margin-top:12px">All topics</button>
+      </div>` : `
+      <div class="codex-list">
+        ${results.length ? results.map(t => `
+          <button class="codex-item" data-topic="${esc(t.id)}">
+            <span class="codex-kind">${esc(t.kind)}</span> <strong>${esc(t.label)}</strong>
+            <span class="hint">${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}</span>
+          </button>`).join("") : "<div class='insight'>Nothing cataloged yet — knowledge accumulates as you learn things that matter.</div>"}
+      </div>`}
+    <button class="btn secondary" id="codex-back" style="margin-top:12px">Back to the valley</button>
+  </div>`);
+  const search = document.getElementById("codex-search");
+  search.oninput = () => renderCodexScreen(search.value, null);
+  if (search.value) { search.focus(); search.setSelectionRange(search.value.length, search.value.length); }
+  for (const b of app.querySelectorAll("[data-topic]")) b.onclick = () => renderCodexScreen(query, b.dataset.topic);
+  const closeT = document.getElementById("codex-close-topic");
+  if (closeT) closeT.onclick = () => renderCodexScreen(query, null);
+  document.getElementById("codex-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 // ---------- gambits: declared multi-step plans ----------
@@ -770,7 +852,7 @@ function renderPlay(turn, opts = {}) {
     Health <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
     Energy <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
     <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
-      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${SUB_OF[s]}">${s}</div><div>${"●".repeat(character.subAttributes?.[s] ?? 0)}${"○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
+      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${"●".repeat(character.subAttributes?.[s] ?? 0)}${"○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>
     <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</h3>
       ${character.abilities.map(a => {
@@ -835,12 +917,16 @@ function renderPlay(turn, opts = {}) {
     </section>
     <section><h3>You, the player</h3><div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></section>
     <section><h3>Travel</h3>
+      <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map</button>
       ${(location.connections || []).map(id => `<button class="opt" data-travel="${id}" style="margin:2px 0; display:block; width:100%">${esc(CONTENT.locations[id]?.name || id)}</button>`).join("")}
       <button class="opt" id="do-rest" style="margin-top:8px; display:block; width:100%">Rest (+${rules.energy.regenPerRest} energy)</button>
     </section>
+    <section><h3>Codex</h3>
+      <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} cataloged — open</button>
+    </section>
   </div>`;
 
-  const banner = locationImage(location);
+  const banner = sceneImage(location, sceneState);
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
@@ -926,6 +1012,8 @@ function renderPlay(turn, opts = {}) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: `You leave the ${btn.dataset.drop} behind.` });
   };
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = rest;
+  const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
+  const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");
   const modeBtn = document.getElementById("mode-toggle");

@@ -37,6 +37,19 @@ export function locationImage(location) {
   return pollinationsURL(prompt, { width: 1024, height: 320, seed: seedFrom(location.id) });
 }
 
+/** Scene-level banner: in generate mode, the image follows the SCENE — a cottage
+ *  interior, a dock at dusk — built from the scene anchor's own setting text
+ *  (seeded by it, so the same scene keeps the same image across re-renders).
+ *  Falls back to the location banner otherwise. */
+export function sceneImage(location, sceneState) {
+  const mode = getArtMode();
+  if (mode === "generate" && sceneState?.setting) {
+    const prompt = `${location.name} — ${sceneState.setting.slice(0, 280)}`;
+    return pollinationsURL(prompt, { width: 1024, height: 320, seed: seedFrom(sceneState.setting) });
+  }
+  return locationImage(location);
+}
+
 /** Image URL for an item (examine view), or null. */
 export function itemImage(item) {
   const mode = getArtMode();

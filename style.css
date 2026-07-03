@@ -60,7 +60,11 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .news-item { font-size: 13px; color: var(--ink); margin-bottom: 3px; font-style: italic; }
 .gm-aside { border-left: 3px solid var(--accent2); background: var(--panel2); border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0; font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
 .gm-aside p { margin-bottom: 6px; } .gm-aside p:last-child { margin-bottom: 0; }
-.mode-toggle { background: var(--panel2); color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600; }
+.mode-toggle { background: var(--panel2); color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.gambit-step { border-left: 2px solid var(--border); padding-left: 10px; }
+.g-chance { color: var(--accent2); font-style: italic; text-transform: none; letter-spacing: 0; }
+.g-weak { color: var(--danger); text-transform: none; letter-spacing: 0; }
+.g-remove { font-size: 11px; padding: 2px 8px; }
 .mode-toggle.asking { color: var(--accent2); border-color: var(--accent2); }
 .companion { margin-bottom: 6px; }
 .companion-name { color: var(--accent2); font-weight: 600; }

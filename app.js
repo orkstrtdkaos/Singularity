@@ -17,8 +17,9 @@ import { companionBonus, companionsForGM, activeCompanions } from "./engine/comp
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
+import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 
-const APP_VERSION = "0.5.0";
+const APP_VERSION = "0.6.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -29,6 +30,7 @@ let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, ob
 let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
+let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
 
 // ---------- boot ----------
 
@@ -540,6 +542,150 @@ async function onAsk(text) {
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
 }
 
+// ---------- gambits: declared multi-step plans ----------
+
+function gambitCtx() {
+  const location = hereNow();
+  const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
+  const comps = activeCompanions(character, CONTENT.companions);
+  return {
+    character, location, rules: CONTENT.rules, aptitudeMods: mods,
+    bonuses: (action) => equipmentBonus(character, action.tags || [], CONTENT.rules).bonus +
+                         companionBonus(comps, action.tags || [], CONTENT.rules).bonus
+  };
+}
+
+function renderGambitBuilder(status = "") {
+  if (!gambitDraft) gambitDraft = { goal: "", steps: [{ text: "", fallback: "" }], assessed: null };
+  const g = gambitDraft;
+  const max = CONTENT.rules.gambit?.maxSteps ?? 5;
+  chrome(`<div class="screen" style="max-width:720px">
+    <h2>Plan a Gambit</h2>
+    <p class="hint" style="margin-bottom:12px">Declare a sequence of moves. Assess it to read your odds (as far as your experience allows), then run it. A failed step forces a decision: fallback, adapt, press on, or abandon. Adaptation points available: <strong>${adaptationPointsFor(profile, CONTENT.rules)}</strong>.</p>
+    <div class="field"><label>Goal</label><input id="g-goal" value="${esc(g.goal)}" placeholder="e.g. get the falsified purity logs out of the array office"></div>
+    ${g.steps.map((s, i) => `
+      <div class="field gambit-step">
+        <label>Step ${i + 1}${g.assessed?.steps[i] ? ` — <span class="g-chance">${g.assessed.steps[i].sense.text ? esc(g.assessed.steps[i].sense.text) : "no read"}</span>${g.assessed.weakIndex === i ? ` <span class="g-weak">⚠ weakest link</span>` : ""}` : ""}</label>
+        <input class="g-step" data-i="${i}" value="${esc(s.text)}" placeholder="what you'll do">
+        <input class="g-fallback" data-i="${i}" value="${esc(s.fallback)}" placeholder="fallback if it goes wrong (optional)" style="margin-top:4px; opacity:.8">
+        ${g.steps.length > 1 ? `<button class="opt g-remove" data-i="${i}" style="margin-top:4px">remove</button>` : ""}
+      </div>`).join("")}
+    <div style="display:flex; gap:8px; margin-bottom:14px;">
+      ${g.steps.length < max ? `<button class="btn secondary" id="g-add">+ step</button>` : ""}
+      <button class="btn secondary" id="g-assess">Assess plan</button>
+      <button class="btn" id="g-run" ${g.assessed ? "" : "disabled"}>Run it</button>
+      <button class="btn secondary" id="g-cancel">Back</button>
+    </div>
+    ${status ? `<div class="hint">${esc(status)}</div>` : ""}
+  </div>`);
+  const read = () => {
+    g.goal = document.getElementById("g-goal").value;
+    for (const el of app.querySelectorAll(".g-step")) g.steps[+el.dataset.i].text = el.value;
+    for (const el of app.querySelectorAll(".g-fallback")) g.steps[+el.dataset.i].fallback = el.value;
+  };
+  for (const el of app.querySelectorAll(".g-step, .g-fallback, #g-goal")) el.oninput = () => { g.assessed = null; };
+  for (const b of app.querySelectorAll(".g-remove")) b.onclick = () => { read(); g.steps.splice(+b.dataset.i, 1); g.assessed = null; renderGambitBuilder(); };
+  const add = document.getElementById("g-add");
+  if (add) add.onclick = () => { read(); g.steps.push({ text: "", fallback: "" }); g.assessed = null; renderGambitBuilder(); };
+  document.getElementById("g-cancel").onclick = () => { gambitDraft = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
+  document.getElementById("g-assess").onclick = async () => {
+    read();
+    const texts = g.steps.map(s => s.text.trim()).filter(Boolean);
+    if (!texts.length || !g.goal.trim()) { renderGambitBuilder("Give the plan a goal and at least one step."); return; }
+    g.steps = g.steps.filter(s => s.text.trim());
+    renderGambitBuilder("Reading the plan…");
+    try {
+      const actions = await parseGambitSteps(g.steps.map(s => s.text), character, hereNow());
+      g.actions = actions;
+      g.assessed = assessGambit(actions, gambitCtx());
+      renderGambitBuilder();
+    } catch (err) {
+      renderGambitBuilder("Couldn't read the plan (" + err.message.slice(0, 60) + ") — try again.");
+    }
+  };
+  document.getElementById("g-run").onclick = () => { read(); runGambit(); };
+}
+
+async function runGambit() {
+  const g = gambitDraft;
+  const ctx = gambitCtx();
+  const run = { receipts: [], adaptLeft: adaptationPointsFor(profile, CONTENT.rules), fallbackUsed: {} , abandoned: false };
+  let index = 0;
+  const step = () => {
+    const res = executeGambit(g.actions, ctx, Math.random, index);
+    run.receipts.push(...res.receipts.filter(r => r.degree !== "failure" && r.degree !== "crit_failure"));
+    if (res.blockedAt === null) return finishGambit(run);
+    const failed = res.receipts[res.receipts.length - 1];
+    renderComplication(failed);
+  };
+  const renderComplication = (failed) => {
+    const a = g.actions[failed.index];
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>The plan hits a wall</h2>
+      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
+        ${g.steps[failed.index]?.fallback && !run.fallbackUsed[failed.index] ? `<button class="choice" id="c-fallback">Fallback: ${esc(g.steps[failed.index].fallback)}</button>` : ""}
+        ${run.adaptLeft > 0 ? `<button class="choice" id="c-adapt">Adapt — force another try (${run.adaptLeft} adaptation point${run.adaptLeft > 1 ? "s" : ""} left)</button>` : ""}
+        <button class="choice" id="c-presson">Accept the failure and press on with the rest</button>
+        <button class="choice" id="c-abandon">Abandon the plan — get out of it</button>
+      </div>
+    </div>`);
+    const fb = document.getElementById("c-fallback");
+    if (fb) fb.onclick = async () => {
+      run.fallbackUsed[failed.index] = true;
+      const [fbAction] = await parseGambitSteps([g.steps[failed.index].fallback], character, ctx.location);
+      const r = rerollStep(fbAction, ctx);
+      if (r.degree === "failure" || r.degree === "crit_failure") {
+        renderComplication({ ...r, index: failed.index });
+      } else {
+        run.receipts.push({ index: failed.index, ...r, viaFallback: fbAction.label });
+        index = failed.index + 1; step();
+      }
+    };
+    const ad = document.getElementById("c-adapt");
+    if (ad) ad.onclick = () => {
+      run.adaptLeft--;
+      const r = rerollStep(g.actions[failed.index], ctx);
+      if (r.degree === "failure" || r.degree === "crit_failure") {
+        renderComplication({ ...r, index: failed.index });
+      } else {
+        run.receipts.push({ index: failed.index, ...r, rerolled: true });
+        index = failed.index + 1; step();
+      }
+    };
+    document.getElementById("c-presson").onclick = () => {
+      run.receipts.push(failed);
+      index = failed.index + 1;
+      if (index >= g.actions.length) finishGambit(run); else step();
+    };
+    document.getElementById("c-abandon").onclick = () => { run.receipts.push(failed); run.abandoned = true; finishGambit(run); };
+  };
+  step();
+}
+
+async function finishGambit(run) {
+  const g = gambitDraft;
+  gambitDraft = null;
+  // energy: each executed step costs; ability steps cost their ability's energy
+  const per = CONTENT.rules.gambit?.stepEnergyCost ?? 4;
+  let cost = 0;
+  for (const r of run.receipts) {
+    const a = g.actions[r.index];
+    cost += a.abilityId ? (CONTENT.abilities[a.abilityId]?.energyCost ?? per) : per;
+  }
+  character.energy = Math.max(0, character.energy - cost);
+  // the human planned: that's who they are becoming
+  const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
+  updateProfile(profile, allTags, CONTENT.rules.playerAptitudes);
+  saveProfile(profile); saveCharacter(character);
+  const rough = run.receipts.some(r => r.complication || r.viaFallback || r.rerolled || r.degree === "failure" || r.degree === "crit_failure");
+  const outcome = run.abandoned ? "abandoned" : rough ? "completed_rough" : "completed";
+  const resolution = gambitResolutionForGM(g.goal, run.receipts, g.actions, outcome);
+  renderPlay(null, { thinking: "The run unfolds…", playerBeat: { label: `GAMBIT: ${g.goal} (${outcome.replace("_", " ")})` } });
+  const result = await runGM({ resolution, playerInput: null });
+  if (result) renderPlay(result.turn, { playerBeat: { label: `GAMBIT: ${g.goal} (${outcome.replace("_", " ")})` }, degraded: result.degraded });
+}
+
 function useItem(name) {
   if (busy) return;
   const item = character.inventory.find(i => i.name === name);
@@ -666,11 +812,12 @@ function renderPlay(turn, opts = {}) {
     }).join("")}</div>`;
   }
   main += `</div>`;
-  if (turn || opts.error || opts.gmAside) {
+  if (turn || opts.error || opts.gmAside || opts.aside || (!busy && !opts.thinking)) {
     main += `<div class="freeform">
       <button id="mode-toggle" class="mode-toggle ${askMode ? "asking" : ""}" title="Switch between acting in the scene and asking the GM out-of-character">${askMode ? "Ask" : "Act"}</button>
       <input id="freeform-input" placeholder="${askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
-      <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button></div>`;
+      <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
+      <button id="gambit-open" class="mode-toggle" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
   main += `</div>`;
 
@@ -726,6 +873,8 @@ function renderPlay(turn, opts = {}) {
     go.onclick = submit;
     ff.onkeydown = e => { if (e.key === "Enter") submit(); };
   }
+  const gambitBtn = document.getElementById("gambit-open");
+  if (gambitBtn) gambitBtn.onclick = () => renderGambitBuilder();
   const retry = document.getElementById("retry");
   if (retry) retry.onclick = () => startScene("(Retry the previous beat — pick up smoothly from where the story last stood.)");
 }

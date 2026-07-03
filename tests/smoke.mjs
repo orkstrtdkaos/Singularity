@@ -15,6 +15,7 @@ import { sanitizeScene, buildTurnContext } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
+import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -243,6 +244,33 @@ check("evolution news lands", evolved.worldState.news.some(n => n.text.includes(
 const failing = { name: "K", worldState: initWorldState(1), npcRegistry: { x: { id: "x", name: "X", role: "", relationship: 0, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
 await runWorldTick({ character: failing, content: tickContent, currentDay: 8, evolveNpcs: async () => { throw new Error("api down"); } });
 check("evolution failure never blocks the tick", failing.worldState.lastTickDay === 8);
+
+// --- gambits ---
+const gActions = [
+  { label: "scout the office", attribute: "mental", axes: {}, difficulty: 0, intentTags: ["scout"], tags: ["scout"], planned: true },
+  { label: "slip inside", attribute: "physical", axes: {}, difficulty: 15, intentTags: ["risky"], tags: ["risky"], planned: true },
+  { label: "copy the logs", attribute: "practical", axes: {}, difficulty: 15, intentTags: ["careful"], tags: ["careful"], planned: true }
+];
+const gCtx = { character: char, location: loc, rules, aptitudeMods: {}, bonuses: () => 0 };
+const luckyRolls = [0.1, 0.1, 0.1];
+let li = 0;
+const cleanRun = executeGambit(gActions, gCtx, () => luckyRolls[li++]);
+check("clean run completes all steps", cleanRun.done && cleanRun.receipts.length === 3 && cleanRun.blockedAt === null);
+const mixedRolls = [0.1, 0.93, 0.1]; // step 2 rolls 94 -> failure
+let mi = 0;
+const blocked = executeGambit(gActions, gCtx, () => mixedRolls[mi++]);
+check("failed step blocks the run", !blocked.done && blocked.blockedAt === 1 && blocked.receipts.length === 2);
+const resumed = executeGambit(gActions, gCtx, () => 0.1, 2);
+check("resume from index continues", resumed.done && resumed.receipts[0].index === 2);
+const rr = rerollStep(gActions[1], gCtx, () => 0.1);
+check("adaptation reroll resolves", rr.degree === "success" || rr.degree === "crit_success");
+const assessment = assessGambit(gActions, { ...gCtx, character: { ...char, attunement: 9 } });
+check("assessment reads all steps", assessment.steps.length === 3 && assessment.steps.every(s => s.chance > 0));
+check("weak link visible to experienced planners", assessment.weakIndex !== null && assessment.steps[assessment.weakIndex].chance === Math.min(...assessment.steps.map(s => s.chance)));
+check("novice sees no weak link", assessGambit(gActions, { ...gCtx, character: { ...char, attunement: 0, alignment: {} }, location: { spectrum: {} } }).weakIndex === null);
+check("strategist earns extra adaptation point", adaptationPointsFor({ aptitudes: ["strategist"] }, rules) === 2 && adaptationPointsFor({ aptitudes: [] }, rules) === 1);
+const gres = gambitResolutionForGM("steal the logs", [...blocked.receipts, { index: 1, roll: 12, chance: 60, degree: "success", rerolled: true, action: gActions[1] }], gActions, "completed_rough");
+check("gambit resolution formats for GM", gres.gambit.steps.length === 3 && gres.gambit.steps[2].includes("adaptation") && gres.action.label.includes("steal the logs"));
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

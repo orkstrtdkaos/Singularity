@@ -42,6 +42,13 @@
     { "min": -49,  "band": "distrusted" },
     { "min": -999, "band": "hated" }
   ],
+  "gambit": {
+    "maxSteps": 5,
+    "adaptationBase": 1,
+    "strategistBonusPoints": 1,
+    "partialComplicationNote": "a wrinkle — it works, but not cleanly",
+    "stepEnergyCost": 4
+  },
   "playerAptitudes": [
     { "id": "strategist",      "tendency": "strategic", "threshold": 8,  "mods": { "plannedActionBonus": 5, "senseTierBonus": 1 }, "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens." },
     { "id": "rough_and_ready", "tendency": "physical",  "threshold": 8,  "mods": { "physicalBonus": 5, "socialFinessePenalty": -3 }, "description": "Your character grows hard and capable, but subtlety suffers." },

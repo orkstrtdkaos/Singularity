@@ -16,6 +16,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBa
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -271,6 +272,52 @@ check("novice sees no weak link", assessGambit(gActions, { ...gCtx, character: {
 check("strategist earns extra adaptation point", adaptationPointsFor({ aptitudes: ["strategist"] }, rules) === 2 && adaptationPointsFor({ aptitudes: [] }, rules) === 1);
 const gres = gambitResolutionForGM("steal the logs", [...blocked.receipts, { index: 1, roll: 12, chance: 60, degree: "success", rerolled: true, action: gActions[1] }], gActions, "completed_rough");
 check("gambit resolution formats for GM", gres.gambit.steps.length === 3 && gres.gambit.steps[2].includes("adaptation") && gres.action.label.includes("steal the logs"));
+
+// --- progression: sub-attributes, leveling, skill trees ---
+const hero2 = { origin: "harmonic", level: 1, xp: 0, attributes: { physical: 3, mental: 2, social: 3, practical: 4 }, abilities: [{ abilityId: "sonic_resonance", level: 1 }], maxHealth: 30, health: 30, maxEnergy: 100, energy: 100, attunement: 1 };
+ensureSubAttributes(hero2);
+check("subs initialize from parents", hero2.subAttributes.strength === 3 && hero2.subAttributes.craft === 4 && hero2.subAttributes.reason === 2);
+const subChance = successChance({ character: hero2, action: { attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules });
+hero2.subAttributes.strength = 5;
+const subChance2 = successChance({ character: hero2, action: { attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules });
+check("sub-attribute drives the roll", subChance2 === subChance + 2 * rules.baseChance.attributeMultiplier || subChance2 === rules.d100.ceilingChance);
+hero2.subAttributes.strength = 3;
+hero2.xp = 250; // enough for levels 2 and 3
+const msgs = applyLevelUps(hero2, rules);
+check("multi-level-up banks growth", hero2.level === 3 && hero2.pendingSubPoints === 2 && hero2.skillPoints === 2 && msgs.length === 2);
+check("spend sub point works and syncs parent", spendSubPoint(hero2, "agility", rules) && hero2.subAttributes.agility === 4 && hero2.attributes.physical === 4);
+check("cannot spend into unknown sub", !spendSubPoint(hero2, "luck", rules));
+const abilityCatalog = {};
+for (const f of ["harmonic", "radiant"]) {
+  const pack = JSON.parse(readFileSync(join(root, `content/packs/core/abilities/${f}.json`), "utf8"));
+  for (const a of pack.abilities) abilityCatalog[a.id] = { ...a, powerSystem: pack.powerSystem };
+}
+const ru = rankUpAbility(hero2, "sonic_resonance", rules);
+check("rank up at level 3", ru.ok && ru.newRank === 2);
+check("rank 3 gated to level 5", rankUpAbility(hero2, "sonic_resonance", rules).ok === false);
+check("harmonic cannot learn radiant arts", learnAbility(hero2, "light_bending", abilityCatalog, rules).why === "wrong tradition");
+check("learning own tradition works", learnAbility(hero2, "echo_sense", abilityCatalog, rules).ok && hero2.abilities.length === 2 && hero2.skillPoints === 0);
+const law = abilitiesForGM(hero2, abilityCatalog);
+check("ability law carries rank grants and limits", law.includes("Standing Wave") && law.includes("CANNOT") && law.includes("NOT FOR"));
+
+// --- novel use & discoveries ---
+const novelAction = { attribute: "practical", subAttribute: "craft", axes: {}, difficulty: 0, novel: true };
+const plainChance = successChance({ character: hero2, action: { ...novelAction, novel: false }, location: { spectrum: {} }, rules });
+const novelChance = successChance({ character: hero2, action: novelAction, location: { spectrum: {} }, rules });
+check("novel use pays the surcharge", novelChance === plainChance - rules.novel.difficultySurcharge);
+const rNovel = resolveAction({ character: hero2, action: novelAction, location: { spectrum: {} }, rules }, () => 0.93); // roll 94
+check("novel crit-fail band widens (94 crit-fails)", rNovel.degree === "crit_failure");
+const rPlain = resolveAction({ character: hero2, action: { ...novelAction, novel: false, difficulty: -50 }, location: { spectrum: {} }, rules }, () => 0.93);
+check("same roll is not a crit-fail when routine", rPlain.degree !== "crit_failure");
+const before = { h: hero2.health, e: hero2.energy };
+const bl = applyBacklash(hero2, rules);
+check("backlash costs health and energy", hero2.health === before.h + bl.health && hero2.energy === before.e + bl.energy);
+const minted = recordDiscovery(hero2, { name: "Echo-Guided Push", description: "Sonic push aimed by echo-sense through a wall.", abilityIds: ["sonic_resonance", "echo_sense"], noveltyHint: "push through wall", day: 4 });
+check("discovery mints once", minted && recordDiscovery(hero2, { name: "Echo-Guided Push", abilityIds: ["sonic_resonance", "echo_sense"], noveltyHint: "push through wall" }) === null);
+check("known combo found regardless of hint", !!knownDiscovery(hero2, ["echo_sense", "sonic_resonance"]));
+const discChance = successChance({ character: hero2, action: { ...novelAction, novel: true, discoveryBonus: rules.novel.discoveryBonus }, location: { spectrum: {} }, rules });
+check("discovered technique earns bonus instead of surcharge", discChance === plainChance + rules.novel.discoveryBonus);
+check("ability law lists discovered techniques", abilitiesForGM(hero2, abilityCatalog).includes("Echo-Guided Push"));
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

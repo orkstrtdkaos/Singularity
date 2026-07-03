@@ -42,6 +42,27 @@
     { "min": -49,  "band": "distrusted" },
     { "min": -999, "band": "hated" }
   ],
+  "subAttributes": {
+    "physical": ["strength", "agility"],
+    "mental": ["reason", "insight"],
+    "social": ["presence", "rapport"],
+    "practical": ["craft", "wits"]
+  },
+  "leveling": {
+    "xpPerLevel": 100,
+    "subPointPerLevel": 1,
+    "skillPointPerLevel": 1,
+    "subAttributeCap": 6,
+    "maxAbilityRank": 3,
+    "rankLevelReq": { "2": 3, "3": 5 }
+  },
+  "novel": {
+    "difficultySurcharge": 15,
+    "critFailWiden": 3,
+    "backlashHealth": 4,
+    "backlashEnergy": 10,
+    "discoveryBonus": 10
+  },
   "gambit": {
     "maxSteps": 5,
     "adaptationBase": 1,

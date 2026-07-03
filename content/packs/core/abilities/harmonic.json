@@ -8,44 +8,155 @@
       "name": "Sonic Resonance",
       "levelReq": 1,
       "energyCost": 8,
-      "axes": { "mechanical_spiritual": 0.4, "concrete_abstract": -0.3 },
+      "axes": {
+        "mechanical_spiritual": 0.4,
+        "concrete_abstract": -0.3
+      },
       "attribute": "practical",
-      "effectTags": ["manipulate", "vibration", "structural"],
+      "effectTags": [
+        "manipulate",
+        "vibration",
+        "structural"
+      ],
       "narrationHints": "Focused sound waves that can shake, shatter, resonate with, or gently move physical objects. Visible as shimmering pressure ripples in the air.",
-      "description": "Project focused resonant waves to move, shake, or shatter matter at a distance."
+      "description": "Project focused resonant waves to move, shake, or shatter matter at a distance.",
+      "notFor": "Fine manipulation (it pushes, shakes, shatters — it cannot pick a lock or thread a needle); silent work (using it is always audible); affecting light or minds.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Focused Push",
+          "grants": "Move, rattle, or knock over objects up to a person's weight within ~10 paces; crack brittle material (pottery, thin ice, old mortar); knock a weapon from an unready hand.",
+          "cannot": "No effect through solid stone; nothing heavier than a person; no sustained force — each use is a pulse."
+        },
+        {
+          "rank": 2,
+          "name": "Standing Wave",
+          "grants": "Sustained pressure — hold a door shut or force it, pin a light object to a wall, shatter dense material (green wood, cheap iron fittings); shape the pulse around one ally.",
+          "cannot": "Cannot lift (only push); two targets max; fails in heavy interference without a check."
+        },
+        {
+          "rank": 3,
+          "name": "Resonant Break",
+          "grants": "Find and exploit a structure's resonant frequency: collapse a wall section, shatter quality steel, stun everyone in a small room (nonlethal); precise enough to break one link of a chain.",
+          "cannot": "Not lethal by design — the field limits output near living tissue; exhausting (double energy) in Radiant territory."
+        }
+      ]
     },
     {
       "id": "echo_sense",
       "name": "Echo Sense",
       "levelReq": 1,
       "energyCost": 4,
-      "axes": { "dark_light": -0.2, "body_mind": 0.4 },
+      "axes": {
+        "dark_light": -0.2,
+        "body_mind": 0.4
+      },
       "attribute": "mental",
-      "effectTags": ["perceive", "detect", "through-walls"],
+      "effectTags": [
+        "perceive",
+        "detect",
+        "through-walls"
+      ],
       "narrationHints": "Sound-based perception like echolocation — hearing shapes, movement, and hollow spaces through walls and darkness.",
-      "description": "Perceive your surroundings through sound reflection — even through walls, smoke, or darkness."
+      "description": "Perceive your surroundings through sound reflection — even through walls, smoke, or darkness.",
+      "notFor": "Reading emotion, intent, or words on a page; anything at true distance (beyond ~50 paces); seeing color or light-based detail.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Near Echo",
+          "grants": "Map bodies and large objects through one wall or in darkness within ~10 paces; count people; sense sudden movement behind you.",
+          "cannot": "No fine detail (a face, a small tool); one wall only; loud environments blind it."
+        },
+        {
+          "rank": 2,
+          "name": "Carried Echo",
+          "grants": "Range ~30 paces and two walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (not words); sense hollow spaces and hidden voids.",
+          "cannot": "Still cannot resolve words reliably; running water scrambles it."
+        },
+        {
+          "rank": 3,
+          "name": "Deep Listening",
+          "grants": "Hear actual words through barriers at ~20 paces; read a building's whole layout in a minute of stillness; detect the sub-sound of active nanite fields and Precursor machinery.",
+          "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to."
+        }
+      ]
     },
     {
       "id": "resonant_shield",
       "name": "Resonant Shield",
       "levelReq": 2,
       "energyCost": 12,
-      "axes": { "violence_peace": 0.3, "chaos_order": 0.4 },
+      "axes": {
+        "violence_peace": 0.3,
+        "chaos_order": 0.4
+      },
       "attribute": "practical",
-      "effectTags": ["defend", "barrier"],
+      "effectTags": [
+        "defend",
+        "barrier"
+      ],
       "narrationHints": "A standing-wave barrier of interference patterns that deflects projectiles and dampens incoming force.",
-      "description": "Raise a standing-wave barrier that dampens incoming force."
+      "description": "Raise a standing-wave barrier that dampens incoming force.",
+      "notFor": "Offense of any kind; protecting against gas, liquid, or light-based attacks; concealment (the barrier visibly shimmers).",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Flicker Guard",
+          "grants": "A heartbeat's barrier that deflects one projectile or blunts one blow; enough warning-shimmer to interrupt an ambush.",
+          "cannot": "One impact then gone; only protects you; cannot hold against sustained force."
+        },
+        {
+          "rank": 2,
+          "name": "Held Chord",
+          "grants": "Sustain the barrier several breaths; cover yourself plus one adjacent ally; shrug off thrown stones, arrows, tool-swings.",
+          "cannot": "Walking pace only while held; heavy impacts (a charging animal) break it and cost you the energy anyway."
+        },
+        {
+          "rank": 3,
+          "name": "Bulwark Harmony",
+          "grants": "Room-corner dome for up to four people, held a full scene if unmolested; turns crossbow bolts and a Radiant lance's first strike; can be tuned to let allies' actions pass outward.",
+          "cannot": "Immobile once anchored; collapses instantly if you take a hit inside it; useless against the ground shaking."
+        }
+      ]
     },
     {
       "id": "harmonic_voice",
       "name": "Harmonic Voice",
       "levelReq": 2,
       "energyCost": 6,
-      "axes": { "emotional_logical": -0.4, "violence_peace": 0.5 },
+      "axes": {
+        "emotional_logical": -0.4,
+        "violence_peace": 0.5
+      },
       "attribute": "social",
-      "effectTags": ["social", "calm", "influence"],
+      "effectTags": [
+        "social",
+        "calm",
+        "influence"
+      ],
       "narrationHints": "Layered vocal overtones that soothe fear, ease tension, and lend weight to spoken words. Subtle — listeners feel it more than hear it.",
-      "description": "Weave calming overtones into your speech, easing fear and hostility in those who hear you."
+      "description": "Weave calming overtones into your speech, easing fear and hostility in those who hear you.",
+      "notFor": "Domination or command (it soothes and carries, never compels); deception (a lie sung in harmony still reads as a lie); working on the deaf or on machinery.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Calming Undertone",
+          "grants": "Ease fear and hostility in a conversation-sized group; steady a panicking person or animal; make your words land as sincere (when they are).",
+          "cannot": "Cannot change anyone's mind — only their temperature; breaks if you or an ally acts aggressively."
+        },
+        {
+          "rank": 2,
+          "name": "Carrying Tone",
+          "grants": "Project clearly to a crowd or across a river without shouting; lace a negotiation with patience — hotheads get one reflexive pause before doing something irreversible.",
+          "cannot": "The pause is a heartbeat, not a hold; crowds beyond ~50 resist; costs double against trained Radiant negotiators."
+        },
+        {
+          "rank": 3,
+          "name": "Concord",
+          "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge; sung over the wounded, grants deep restorative sleep.",
+          "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden."
+        }
+      ]
     }
   ]
 }

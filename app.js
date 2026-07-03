@@ -18,8 +18,9 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBa
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
+import { SUBS, SUB_OF, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
 
-const APP_VERSION = "0.6.0";
+const APP_VERSION = "0.7.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -166,6 +167,7 @@ function migrate(c) {
   migrateRelationships(c, CONTENT.npcs);
   if (!c.placeMemory) c.placeMemory = {};
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
+  ensureSubAttributes(c);
   return c;
 }
 
@@ -325,6 +327,8 @@ function renderCreate() {
       worldState: initWorldState(1),
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
+    ensureSubAttributes(character);
+    character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
     enterPlay();
@@ -373,7 +377,8 @@ async function runGM({ resolution, playerInput }) {
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
-    newsDetail: newsForGM(character)
+    newsDetail: newsForGM(character),
+    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -418,13 +423,17 @@ function applyTurn(turn, resolution) {
   if (resolution?.action?.intentTags?.length) {
     updateProfile(profile, resolution.action.intentTags, CONTENT.rules.playerAptitudes);
   }
-  // level up: simple threshold — attunement and reserves grow
-  const threshold = character.level * 100;
-  if (character.xp >= threshold) {
-    character.level++; character.attunement++;
-    character.maxHealth += 5; character.maxEnergy += 5;
-    character.health = character.maxHealth; character.energy = character.maxEnergy;
-    turn.narration += `\n\n*You feel it settle into you — a new steadiness. (Level ${character.level}: attunement and reserves grow.)*`;
+  // discoveries: only mintable when the engine flagged this resolution eligible
+  if (turn.discovery && resolution?.discoveryEligible) {
+    const minted = recordDiscovery(character, {
+      name: turn.discovery.name, description: turn.discovery.description,
+      abilityIds: resolution.discoveryAbilities || [], noveltyHint: resolution.action?.noveltyHint || "", day: dayNow
+    });
+    if (minted) turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now.*`;
+  }
+  // level up: banked growth the player chooses to spend
+  for (const msg of applyLevelUps(character, CONTENT.rules)) {
+    turn.narration += `\n\n*You feel it settle into you — a new steadiness. (${msg})*`;
   }
   // quests: typed ops from the GM, applied within bounds
   applyQuestUpdates(character, turn.questUpdates || []);
@@ -457,7 +466,7 @@ async function onChoice(choice) {
   const location = hereNow();
   const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
 
-  // ability gating + energy
+  // ability gating + energy (combos draw from every ability involved)
   let abilityLevel = 0, energyCost = choice.energyCost;
   if (choice.abilityId) {
     const owned = character.abilities.find(a => a.abilityId === choice.abilityId);
@@ -465,15 +474,39 @@ async function onChoice(choice) {
     else {
       abilityLevel = owned.level;
       energyCost = energyCost ?? CONTENT.abilities[choice.abilityId]?.energyCost;
-      if (character.energy < (energyCost || 0)) { alert("Not enough energy — rest first."); return; }
     }
   }
-  const action = { label: choice.label, attribute: choice.attribute || "practical", axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel, tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)) };
+  if ((choice.comboAbilities || []).length > 1) {
+    energyCost = choice.comboAbilities.reduce((sum, id) => sum + (CONTENT.abilities[id]?.energyCost ?? 5), 0);
+    abilityLevel = Math.min(...choice.comboAbilities.map(id => character.abilities.find(a => a.abilityId === id)?.level ?? 1));
+  }
+  if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
+  const action = {
+    label: choice.label, attribute: choice.attribute || "practical",
+    subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null,
+    axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel,
+    tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
+    novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || ""
+  };
+  // a technique already discovered isn't novel anymore — it's earned skill
+  const abilityIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
+  const disc = action.novel ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
+  if (disc) { action.novel = false; action.discoveryBonus = CONTENT.rules.novel?.discoveryBonus ?? 10; }
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules);
   const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
   if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
-  character.energy = applyEnergyCost(character, choice.abilityId ? energyCost : undefined, CONTENT.rules);
+  if (disc) resolution.usedDiscovery = disc.name;
+  // novel use: breakthrough or backlash — the engine decides, the GM narrates
+  if (action.novel) {
+    if (resolution.degree === "crit_success") {
+      resolution.discoveryEligible = true;
+      resolution.discoveryAbilities = abilityIds;
+    } else if (resolution.degree === "crit_failure") {
+      resolution.backlash = applyBacklash(character, CONTENT.rules);
+    }
+  }
+  character.energy = applyEnergyCost(character, (choice.abilityId || (choice.comboAbilities || []).length > 1) ? energyCost : undefined, CONTENT.rules);
 
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
   const result = await runGM({ resolution, playerInput: null });
@@ -489,7 +522,14 @@ async function onFreeform(text) {
     renderPlay(character.activeScene?.lastTurn || null, { aside: intent.infeasibleReason || "That isn't possible here." });
     return;
   }
-  await onChoice({ label: intent.label || text, attribute: intent.attribute, axes: intent.axes, difficulty: intent.difficulty, intentTags: intent.intentTags, abilityId: intent.abilityId, energyCost: null });
+  await onChoice({
+    label: intent.label || text, attribute: intent.attribute, subAttribute: intent.subAttribute,
+    axes: intent.axes, difficulty: intent.difficulty, intentTags: intent.intentTags,
+    abilityId: intent.abilityId, energyCost: null,
+    novel: !!intent.novelUse || (intent.comboAbilities || []).length > 1,
+    comboAbilities: (intent.comboAbilities || []).filter(id => character.abilities.some(a => a.abilityId === id)),
+    noveltyHint: intent.noveltyHint || ""
+  });
 }
 
 async function travelTo(locId) {
@@ -536,7 +576,8 @@ async function onAsk(text) {
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
-    newsDetail: newsForGM(character)
+    newsDetail: newsForGM(character),
+    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities)
   }, text);
   busy = false;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
@@ -681,6 +722,18 @@ async function finishGambit(run) {
   const rough = run.receipts.some(r => r.complication || r.viaFallback || r.rerolled || r.degree === "failure" || r.degree === "crit_failure");
   const outcome = run.abandoned ? "abandoned" : rough ? "completed_rough" : "completed";
   const resolution = gambitResolutionForGM(g.goal, run.receipts, g.actions, outcome);
+  // novel steps inside a gambit carry the same stakes: backlash on crit failure,
+  // a mintable technique on crit success
+  for (const r of run.receipts) {
+    const a = g.actions[r.index];
+    if (!a?.novel) continue;
+    if (r.degree === "crit_failure") resolution.backlash = applyBacklash(character, CONTENT.rules);
+    if (r.degree === "crit_success") {
+      resolution.discoveryEligible = true;
+      resolution.discoveryAbilities = [a.abilityId, ...(a.comboAbilities || [])].filter(Boolean);
+      resolution.action.noveltyHint = a.noveltyHint || "";
+    }
+  }
   renderPlay(null, { thinking: "The run unfolds…", playerBeat: { label: `GAMBIT: ${g.goal} (${outcome.replace("_", " ")})` } });
   const result = await runGM({ resolution, playerInput: null });
   if (result) renderPlay(result.turn, { playerBeat: { label: `GAMBIT: ${g.goal} (${outcome.replace("_", " ")})` }, degraded: result.degraded });
@@ -716,11 +769,26 @@ function renderPlay(turn, opts = {}) {
     <div class="meta">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} (${character.xp} xp)</div>
     Health <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
     Energy <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
-    <section><h3>Attributes</h3><div class="attr-grid">
-      ${Object.entries(character.attributes).map(([k, v]) => `<div style="text-transform:capitalize">${k}</div><div>${"●".repeat(v)}${"○".repeat(Math.max(0, 4 - v))}</div>`).join("")}
+    <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
+      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${SUB_OF[s]}">${s}</div><div>${"●".repeat(character.subAttributes?.[s] ?? 0)}${"○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>
-    <section><h3>Abilities</h3>
-      ${character.abilities.map(a => { const ab = CONTENT.abilities[a.abilityId]; return `<div class="ability"><span class="name">${esc(ab?.name || a.abilityId)}</span> lv${a.level} <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`; }).join("") || "<div class='insight'>none yet</div>"}
+    <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</h3>
+      ${character.abilities.map(a => {
+        const ab = CONTENT.abilities[a.abilityId];
+        const rank = ab?.tree?.find(t => t.rank === a.level);
+        const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
+        const canRank = character.skillPoints > 0 && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
+        return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
+          <span class="name">${esc(ab?.name || a.abilityId)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}</em>` : ""}
+          ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend a skill point">▲</button>` : ""}
+          <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`;
+      }).join("") || "<div class='insight'>none yet</div>"}
+      ${character.skillPoints > 0 ? Object.values(CONTENT.abilities).filter(ab =>
+          !character.abilities.some(a => a.abilityId === ab.id) &&
+          (character.origin === "valley" || ab.powerSystem === character.origin) &&
+          character.level >= (ab.levelReq || 1)
+        ).map(ab => `<button class="opt" data-learn="${esc(ab.id)}" title="${esc(ab.description)}" style="margin:2px 0; display:block; width:100%">Learn: ${esc(ab.name)}</button>`).join("") : ""}
+      ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
     </section>
     <section><h3>People you know</h3>
       ${Object.values(character.npcRegistry || {}).sort((a, b) => Math.abs(b.relationship) - Math.abs(a.relationship)).slice(0, 5).map(n =>
@@ -873,6 +941,19 @@ function renderPlay(turn, opts = {}) {
     go.onclick = submit;
     ff.onkeydown = e => { if (e.key === "Enter") submit(); };
   }
+  for (const b of app.querySelectorAll("[data-grow]")) b.onclick = () => {
+    if (spendSubPoint(character, b.dataset.grow, CONTENT.rules)) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, {}); }
+  };
+  for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
+    const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules);
+    if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `${CONTENT.abilities[b.dataset.rankup]?.name} advances to rank ${r.newRank}.` }); }
+    else alert(r.why);
+  };
+  for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
+    const r = learnAbility(character, b.dataset.learn, CONTENT.abilities, CONTENT.rules);
+    if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `You begin learning ${CONTENT.abilities[b.dataset.learn]?.name}.` }); }
+    else alert(r.why);
+  };
   const gambitBtn = document.getElementById("gambit-open");
   if (gambitBtn) gambitBtn.onclick = () => renderGambitBuilder();
   const retry = document.getElementById("retry");

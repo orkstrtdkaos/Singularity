@@ -19,7 +19,10 @@ export function spectrumAlignment(a = {}, b = {}) {
  *  aptitudeMods: flat map merged from the player's aptitudes (see playerprofile.js). */
 export function successChance({ character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0 }) {
   const bc = rules.baseChance;
-  const attrLevel = character.attributes[action.attribute] || 1;
+  // Sub-attributes (strength/agility, reason/insight, presence/rapport, craft/wits)
+  // are the real target when present; the parent attribute is the fallback.
+  const attrLevel = (action.subAttribute && character.subAttributes?.[action.subAttribute])
+    || character.attributes[action.attribute] || 1;
   let chance = attrLevel * bc.attributeMultiplier;
 
   if (action.skillId && character.skills?.[action.skillId]) {
@@ -48,6 +51,11 @@ export function successChance({ character, action, location, rules, aptitudeMods
   // Equipment: the right tool in your pack helps (computed by inventory.equipmentBonus)
   chance += equipmentBonus;
 
+  // Novel/combined ability use is genuinely harder — unless it's a technique the
+  // character already DISCOVERED, in which case it's earned skill with a bonus.
+  if (action.discoveryBonus) chance += action.discoveryBonus;
+  else if (action.novel) chance -= rules.novel?.difficultySurcharge ?? 15;
+
   chance -= action.difficulty || 0;
   return Math.max(rules.d100.floorChance, Math.min(rules.d100.ceilingChance, Math.round(chance)));
 }
@@ -60,7 +68,9 @@ export function resolveAction(ctx, rng = Math.random) {
   const roll = Math.floor(rng() * 100) + 1;
   const d = rules.d100;
   const critLow = d.critSuccessMax + (ctx.aptitudeMods?.critSuccessBonus || 0);
-  const critHigh = d.critFailMin - (ctx.aptitudeMods?.critFailPenalty || 0);
+  let critHigh = d.critFailMin - (ctx.aptitudeMods?.critFailPenalty || 0);
+  // Novel use is volatile: the crit-failure band widens — reach exceeding grasp can HURT
+  if (ctx.action.novel && !ctx.action.discoveryBonus) critHigh -= rules.novel?.critFailWiden ?? 3;
 
   let degree;
   if (roll <= critLow) degree = "crit_success";

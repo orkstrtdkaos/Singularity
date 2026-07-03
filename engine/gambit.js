@@ -12,10 +12,11 @@ import { senseAction } from "./sense.js";
 /** Parse all step texts into action specs in ONE cheap call. */
 export async function parseGambitSteps(stepTexts, character, location) {
   const sys = `Classify each step of an RPG player's declared plan into an action spec. Reply ONLY JSON:
-{"steps": [{"label": "short restatement", "attribute": "physical|mental|social|practical", "axes": {"spectrumId": -1..1}, "difficulty": 0|15|30, "intentTags": ["..."], "abilityId": "id-or-null"}]}
-One entry per input step, same order. Spectrum ids: emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation.
+{"steps": [{"label": "short restatement", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": -1..1}, "difficulty": 0|15|30, "intentTags": ["..."], "abilityId": "id-or-null", "comboAbilities": ["ids if deliberately combining two abilities, else []"], "novelUse": false, "noveltyHint": "2-4 words, only if novelUse"}]}
+One entry per input step, same order. subAttribute picks the finest fit: strength (force) / agility (speed, balance, stealth) / reason (analysis) / insight (perception, reading people) / presence (command) / rapport (charm) / craft (tool work) / wits (improvisation).
+Spectrum ids: emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation.
 Intent tags: plan, scout, prepare, attack, climb, force, persuade, charm, negotiate, comfort, study, investigate, analyze, gamble, drink, revel, risky, careful, retreat, help, give, rescue, heal, threaten, steal, rapport, finesse, discipline.
-abilityId must be one the character actually has, or null. Later steps in a plan are typically harder (guards alerted, time pressure) — reflect that in difficulty.`;
+abilityId must be one the character actually has, or null. novelUse=true when an ability is pushed outside its normal envelope or two are braided together. Later steps in a plan are typically harder (guards alerted, time pressure) — reflect that in difficulty.`;
   const content = `Character abilities: ${(character.abilities || []).map(a => a.abilityId).join(", ") || "none"}. ` +
     `Inventory: ${(character.inventory || []).map(i => i.name || i).join(", ") || "empty"}. ` +
     `Location: ${location.name} (${(location.tags || []).join(", ")}).\n` +
@@ -23,16 +24,25 @@ abilityId must be one the character actually has, or null. Later steps in a plan
   const out = await callClaudeJSON([{ role: "user", content }], { task: "intent-parse", system: sys, maxTokens: 2048 });
   const steps = Array.isArray(out.steps) ? out.steps : [];
   // pad/truncate defensively to match input count
-  return stepTexts.map((text, i) => ({
-    label: steps[i]?.label || text.slice(0, 60),
-    attribute: ["physical", "mental", "social", "practical"].includes(steps[i]?.attribute) ? steps[i].attribute : "practical",
-    axes: steps[i]?.axes || {},
-    difficulty: [0, 15, 30].includes(steps[i]?.difficulty) ? steps[i].difficulty : 0,
-    intentTags: Array.isArray(steps[i]?.intentTags) ? steps[i].intentTags : [],
-    abilityId: (character.abilities || []).some(a => a.abilityId === steps[i]?.abilityId) ? steps[i].abilityId : null,
-    planned: true,
-    tags: Array.isArray(steps[i]?.intentTags) ? steps[i].intentTags : []
-  }));
+  const SUBS = ["strength", "agility", "reason", "insight", "presence", "rapport", "craft", "wits"];
+  return stepTexts.map((text, i) => {
+    const owned = id => (character.abilities || []).some(a => a.abilityId === id);
+    const combo = (Array.isArray(steps[i]?.comboAbilities) ? steps[i].comboAbilities : []).filter(owned);
+    return {
+      label: steps[i]?.label || text.slice(0, 60),
+      attribute: ["physical", "mental", "social", "practical"].includes(steps[i]?.attribute) ? steps[i].attribute : "practical",
+      subAttribute: SUBS.includes(steps[i]?.subAttribute) ? steps[i].subAttribute : null,
+      axes: steps[i]?.axes || {},
+      difficulty: [0, 15, 30].includes(steps[i]?.difficulty) ? steps[i].difficulty : 0,
+      intentTags: Array.isArray(steps[i]?.intentTags) ? steps[i].intentTags : [],
+      abilityId: owned(steps[i]?.abilityId) ? steps[i].abilityId : null,
+      comboAbilities: combo,
+      novel: !!steps[i]?.novelUse || combo.length > 1,
+      noveltyHint: steps[i]?.noveltyHint || "",
+      planned: true,
+      tags: Array.isArray(steps[i]?.intentTags) ? steps[i].intentTags : []
+    };
+  });
 }
 
 /** Per-step odds + what the character's attunement lets them perceive.

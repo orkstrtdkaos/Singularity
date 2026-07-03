@@ -49,6 +49,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability { margin-bottom: 6px; }
 .ability .name { color: var(--accent2); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
+.grow-badge { color: var(--accent); font-size: 10px; border: 1px solid var(--accent); border-radius: 8px; padding: 0 6px; letter-spacing: 0; text-transform: none; }
+.grow-btn { background: var(--accent); color: #16130c; border: none; border-radius: 4px; width: 18px; height: 18px; font-size: 12px; font-weight: bold; line-height: 1; margin-left: 4px; }
+.discoveries { margin-top: 6px; border-top: 1px dashed var(--border); padding-top: 6px; }
+.discovery { color: var(--accent); font-size: 12px; margin-bottom: 2px; }
 .known-npc { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .npc-name { color: var(--ink); font-size: 13px; }
 .quest { margin-bottom: 8px; }

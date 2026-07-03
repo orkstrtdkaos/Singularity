@@ -8,44 +8,156 @@
       "name": "Light Bending",
       "levelReq": 1,
       "energyCost": 8,
-      "axes": { "dark_light": 0.3, "falsehood_truth": -0.3 },
+      "axes": {
+        "dark_light": 0.3,
+        "falsehood_truth": -0.3
+      },
       "attribute": "practical",
-      "effectTags": ["conceal", "illusion", "redirect"],
+      "effectTags": [
+        "conceal",
+        "illusion",
+        "redirect"
+      ],
       "narrationHints": "Curving light around objects or people — partial invisibility, mirages, redirected beams. The edges shimmer like heat haze.",
-      "description": "Bend light around yourself or objects — concealment, mirage, or redirection."
+      "description": "Bend light around yourself or objects — concealment, mirage, or redirection.",
+      "notFor": "Affecting anything physical (bent light stops no arrow); working in total darkness (it needs light to bend); undoing what someone already saw.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Haze Veil",
+          "grants": "Blur yourself into a heat-shimmer while still — effectively unseen beyond 10 paces; dim or brighten a small room's light; throw a fist-sized false glint.",
+          "cannot": "Movement breaks it above a slow creep; your shadow stays true; touch reveals everything."
+        },
+        {
+          "rank": 2,
+          "name": "Drawn Curtain",
+          "grants": "Move at walking pace veiled; cloak one companion standing close; project a simple still image (a closed door, an empty shelf) over reality for minutes.",
+          "cannot": "Images don't survive scrutiny from arm's length; fails under Harmonic sound-sight (echo senses ignore it)."
+        },
+        {
+          "rank": 3,
+          "name": "Second Sun",
+          "grants": "Full mirage-craft: a moving figure, a wall that isn't there, daylight in a cellar; blind a group for a breath with a soundless flash; split your image into three.",
+          "cannot": "Mirages are silent and scentless — sound gives them away; sustained work drains fast; Prism Sight of equal rank sees through it."
+        }
+      ]
     },
     {
       "id": "prism_sight",
       "name": "Prism Sight",
       "levelReq": 1,
       "energyCost": 4,
-      "axes": { "dark_light": 0.5, "falsehood_truth": 0.4 },
+      "axes": {
+        "dark_light": 0.5,
+        "falsehood_truth": 0.4
+      },
       "attribute": "mental",
-      "effectTags": ["perceive", "reveal", "analyze"],
+      "effectTags": [
+        "perceive",
+        "reveal",
+        "analyze"
+      ],
       "narrationHints": "Splitting light into revealing spectra — seeing heat traces, hidden markings, tampering, recent presence, and through glamours.",
-      "description": "See the hidden spectra — heat traces, concealed marks, tampering, and lies of light."
+      "description": "See the hidden spectra — heat traces, concealed marks, tampering, and lies of light.",
+      "notFor": "Seeing through solid barriers (it reads light, not matter); reading thoughts; working with eyes closed or in absolute darkness.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "True Spectrum",
+          "grants": "See heat traces (a hand's warmth on a handle, a body's passage within minutes); spot tampering, overpainting, recent digging; notice light-bending at work.",
+          "cannot": "Traces fade in minutes to hours; rain and cold erase them; cannot identify WHO, only THAT."
+        },
+        {
+          "rank": 2,
+          "name": "Layered Reading",
+          "grants": "Read a scene's last hour of light-history in still places; see through rank-1 veils and mirages; catch the micro-flush of a lie on a face in good light.",
+          "cannot": "Lie-reading is a hint, not proof (one reroll of a social sense, not a truth machine); crowded scenes smear."
+        },
+        {
+          "rank": 3,
+          "name": "The Light Beneath",
+          "grants": "See the structural light of things: stress lines in a bridge, sickness in a body, active nanite flows, the seams of Precursor work; pierce any mirage of lower rank instantly.",
+          "cannot": "Minutes of use cost hours of eye-ache; what you see you cannot always name; some Precursor light looks back."
+        }
+      ]
     },
     {
       "id": "radiant_lance",
       "name": "Radiant Lance",
       "levelReq": 2,
       "energyCost": 12,
-      "axes": { "violence_peace": -0.5, "destruction_creation": -0.3 },
+      "axes": {
+        "violence_peace": -0.5,
+        "destruction_creation": -0.3
+      },
       "attribute": "physical",
-      "effectTags": ["attack", "precise", "ranged"],
+      "effectTags": [
+        "attack",
+        "precise",
+        "ranged"
+      ],
       "narrationHints": "A coherent beam of focused light — silent, precise, instantaneous. Leaves clean scorch lines.",
-      "description": "Focus light into a searing coherent beam — precise, silent, fast as sight."
+      "description": "Focus light into a searing coherent beam — precise, silent, fast as sight.",
+      "notFor": "Subtlety (the line of light is visible to everyone); nonlethal crowd control; cutting what light cannot heat (mirror-finish, running water).",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Needle Beam",
+          "grants": "A precise burn at 20 paces: sever a rope, scorch a hand into dropping a weapon, light tinder instantly, mark a surface permanently.",
+          "cannot": "Cannot penetrate armor or thick wood; one heartbeat of beam per breath; useless in smoke or fog."
+        },
+        {
+          "rank": 2,
+          "name": "Cutting Line",
+          "grants": "Sustained cut: through a door bar, a cart axle, light armor at close range; deflect off a carried mirror to strike around a corner (with a wits check).",
+          "cannot": "Sustained cutting anchors you in place; the beam-line advertises your exact position; still fog-blind."
+        },
+        {
+          "rank": 3,
+          "name": "Sunlance",
+          "grants": "A single devastating coherent strike — through a stone wall's weak point, a Harmonic shield's first rank, an engine block; can be flared wide as a blinding nonlethal burst instead.",
+          "cannot": "Once per scene; the flash is visible across the valley at night; double energy in Harmonic territory."
+        }
+      ]
     },
     {
       "id": "daybreak_mantle",
       "name": "Daybreak Mantle",
       "levelReq": 2,
       "energyCost": 6,
-      "axes": { "dark_light": 0.5, "emotional_logical": -0.3 },
+      "axes": {
+        "dark_light": 0.5,
+        "emotional_logical": -0.3
+      },
       "attribute": "social",
-      "effectTags": ["social", "inspire", "presence"],
+      "effectTags": [
+        "social",
+        "inspire",
+        "presence"
+      ],
       "narrationHints": "A soft radiance that gathers on the shoulders and face — commanding attention, lending hope and authority to the bearer.",
-      "description": "Gather a mantle of soft radiance that inspires the hopeless and commands a room."
+      "description": "Gather a mantle of soft radiance that inspires the hopeless and commands a room.",
+      "notFor": "Stealth of any kind (you are literally glowing); coercion; hiding your identity (the mantle is memorable).",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Kindled Presence",
+          "grants": "A warm radiance that marks you as someone to hear out — first words always get listened to; lift the mood of a dim room; steady the hopeless for an hour.",
+          "cannot": "Attention is not agreement; draws every eye including hostile ones."
+        },
+        {
+          "rank": 2,
+          "name": "Rallying Light",
+          "grants": "Extend courage to companions in sight — one reroll against fear or despair for the group per scene; your requests to strangers land as if from a respected local.",
+          "cannot": "Strangers' goodwill is shallow — one favor deep; wears off and they wonder why they agreed."
+        },
+        {
+          "rank": 3,
+          "name": "Standard of Dawn",
+          "grants": "Become a beacon a crowd will follow through danger — organize a panicked evacuation, hold a line of frightened volunteers, make a mob hesitate before violence.",
+          "cannot": "Leadership, not control — where you lead them matters; afterward you are the most identifiable person in the valley."
+        }
+      ]
     }
   ]
 }

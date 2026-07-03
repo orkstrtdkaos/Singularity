@@ -396,6 +396,10 @@ const freshChance = successChance({ character: { ...char, energy: 50 }, action, 
 const tiredChance = successChance({ character: tired, action, location: loc, rules });
 check("exhaustion penalizes all actions", tiredChance === freshChance - rules.energy.exhaustedPenalty);
 check("one point of energy clears the penalty", successChance({ character: { ...char, energy: 1 }, action, location: loc, rules }) === freshChance);
+// --- v0.8.3: recovery table present and sane ---
+check("recovery table shipped", rules.recovery && rules.recovery.meal === 10 && rules.recovery.breather.energy === 10 && rules.recovery.sleep.energy === 40);
+const medGain = (rules.recovery.meditationBase ?? 10) + (rules.recovery.meditationPerAttunement ?? 2) * 5;
+check("meditation scales with attunement", medGain === 20);
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

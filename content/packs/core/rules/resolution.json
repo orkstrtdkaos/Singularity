@@ -28,6 +28,15 @@
     "defaultActionCost": 5,
     "exhaustedPenalty": 10
   },
+  "recovery": {
+    "meal": 10,
+    "heartyMeal": 15,
+    "drink": 5,
+    "breather": { "energy": 10, "health": 1, "hours": 1 },
+    "sleep": { "energy": 40, "health": 3, "hours": 8 },
+    "meditationBase": 10,
+    "meditationPerAttunement": 2
+  },
   "senseTiers": [
     { "tier": 0, "minAttunement": 0,  "label": "none",    "precision": "nothing" },
     { "tier": 1, "minAttunement": 2,  "label": "vibes",   "precision": "risky-or-safe only" },

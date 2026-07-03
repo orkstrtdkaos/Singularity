@@ -7,7 +7,7 @@ const TAG_TO_TENDENCY = {
   plan: "strategic", scout: "strategic", prepare: "strategic", ambush: "strategic",
   attack: "physical", climb: "physical", force: "physical", labor: "physical", brawl: "physical",
   persuade: "social", charm: "social", negotiate: "social", comfort: "social", rapport: "social",
-  study: "cerebral", investigate: "cerebral", analyze: "cerebral", read: "cerebral",
+  study: "cerebral", investigate: "cerebral", analyze: "cerebral", read: "cerebral", meditate: "cerebral",
   gamble: "carousing", drink: "carousing", revel: "carousing",
   risky: "risky", reckless: "risky",
   careful: "cautious", retreat: "cautious",

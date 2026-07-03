@@ -21,7 +21,7 @@ import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rer
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.8.2";
+const APP_VERSION = "0.8.3";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -517,6 +517,14 @@ async function onChoice(choice) {
     }
   }
   character.energy = applyEnergyCost(character, (choice.abilityId || (choice.comboAbilities || []).length > 1) ? energyCost : undefined, CONTENT.rules);
+  // meditation: engine-owned recovery, scaled by attunement — the centered refill faster
+  if ((action.intentTags || []).includes("meditate") && ["crit_success", "success", "partial"].includes(resolution.degree)) {
+    const rec = CONTENT.rules.recovery || {};
+    let gain = (rec.meditationBase ?? 10) + (rec.meditationPerAttunement ?? 2) * (character.attunement || 0);
+    if (resolution.degree === "partial") gain = Math.ceil(gain / 2);
+    character.energy = Math.min(character.maxEnergy, character.energy + gain);
+    resolution.meditation = { energy: gain };
+  }
 
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
   const result = await runGM({ resolution, playerInput: null });
@@ -556,16 +564,24 @@ async function travelTo(locId) {
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`, news);
 }
 
-async function rest() {
+async function rest(kind = "sleep") {
   if (busy) return;
-  character.energy = Math.min(character.maxEnergy, character.energy + CONTENT.rules.energy.regenPerRest);
-  character.health = Math.min(character.maxHealth, character.health + 3);
+  const rec = CONTENT.rules.recovery || {};
+  const r = kind === "breather" ? (rec.breather || { energy: 10, health: 1, hours: 1 }) : (rec.sleep || { energy: 40, health: 3, hours: 8 });
+  character.energy = Math.min(character.maxEnergy, character.energy + r.energy);
+  character.health = Math.min(character.maxHealth, character.health + r.health);
+  if (kind === "breather") {
+    advanceClock(character.clock, r.hours);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You take an hour off your feet. (+${r.energy} energy, +${r.health} health)` });
+    return;
+  }
   sceneTurns = [];
   sceneState = null; // hours pass — the old scene has dissolved
-  advanceClock(character.clock, ADVANCE.rest);
+  advanceClock(character.clock, r.hours);
   saveCharacter(character);
   const news = await maybeTick();
-  startScene(`(The character takes a real rest here — camp, inn, or quiet corner. Narrate the rest briefly, restore them, then present what's happening when they get up. Time has passed.)`, news);
+  startScene(`(The character takes a real night's rest here — camp, inn, or quiet corner. Narrate the rest briefly, then present what's happening when they get up. ${r.hours} hours have passed; do not grant additional energy — the engine already restored them.)`, news);
 }
 
 async function onAsk(text) {
@@ -926,7 +942,8 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Travel</h3>
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map</button>
       ${(location.connections || []).map(id => `<button class="opt" data-travel="${id}" style="margin:2px 0; display:block; width:100%">${esc(CONTENT.locations[id]?.name || id)}</button>`).join("")}
-      <button class="opt" id="do-rest" style="margin-top:8px; display:block; width:100%">Rest (+${rules.energy.regenPerRest} energy)</button>
+      <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${rules.recovery?.breather?.energy ?? 10} energy, 1h)</button>
+      <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${rules.recovery?.sleep?.energy ?? 40} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
     </section>
     <section><h3>Codex</h3>
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} cataloged — open</button>
@@ -1021,7 +1038,8 @@ function renderPlay(turn, opts = {}) {
     saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `You leave the ${btn.dataset.drop} behind.` });
   };
-  const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = rest;
+  const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
+  const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
   const ff = document.getElementById("freeform-input");

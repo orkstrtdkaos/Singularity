@@ -56,6 +56,9 @@ export function successChance({ character, action, location, rules, aptitudeMods
   if (action.discoveryBonus) chance += action.discoveryBonus;
   else if (action.novel) chance -= rules.novel?.difficultySurcharge ?? 15;
 
+  // Exhaustion: at zero energy everything is harder — body and field both spent
+  if ((character.energy ?? 1) <= 0) chance -= rules.energy?.exhaustedPenalty ?? 10;
+
   chance -= Number(action.difficulty) || 0;
   // hard guard: malformed inputs must never reach the dice as NaN
   if (!Number.isFinite(chance)) {

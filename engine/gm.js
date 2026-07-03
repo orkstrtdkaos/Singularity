@@ -15,7 +15,7 @@ ABSOLUTE RULES
 5. Keep narration tight: 2-4 paragraphs, second person, present tense. Grounded hopeful-strange tone. Sensory and specific, never purple.
 6. Every scene, surface at least one natural opportunity to use one of the character's listed abilities — and when an INVENTORY item is genuinely relevant, work it into the narration or a choice (name it exactly as listed). Items can be found, given, traded, lost, or broken; report all of that through characterDeltas.
 7. End every turn with meaningful, distinct choices — plus the player may always type their own action.
-8. Honor the CURRENT TIME: time of day and season shape light, activity, who's awake, what's open. If the player rests or travels, let the narration acknowledge time passing.
+8. Honor the CURRENT TIME: time of day and season shape light, activity, who's awake, what's open. When the scene itself includes real time passing — sleeping, a long wait, an afternoon of work — report it in "timeAdvanceHours" (0-12) AND restore the character accordingly through characterDeltas: a full night's sleep is worth around +40 energy and some health; a short breather much less. Narrative rest must COUNT — a character who slept in the story is rested in the numbers. An exhausted character (energy at 0) should read exhausted in the prose until they rest.
 9. COMPANIONS travel with the character and appear in every scene. Voice them true to their persona and boundaries — brief presence most beats, a line of dialogue or an observation when they'd genuinely have one. They advise and assist but NEVER decide for the player and never dominate a scene. Respect their boundaries absolutely (e.g., a companion that cannot lie will not support deception — show its reaction). At most one choice per turn may lean on a companion.
 10. MOMENTUM. Every turn must advance something concrete: a quest moves, a secret surfaces, a relationship shifts, a door opens or closes. No idle slice-of-life beats unless the player explicitly seeks quiet. If no active quest engages the current scene, weave one of the location's QUEST SEEDS into play as a concrete, named opportunity with stakes — an NPC asks, an event interrupts, a chance presents itself.
 11. QUESTS are tracked state. When the player takes on an undertaking, emit questUpdates op "start" (short memorable title, one-line summary, who gave it). When a scene advances one, emit op "progress" with a note. When finished, op "complete" (xpReward 15-50 by difficulty) or op "fail". Keep at most 2-3 quests in active play; finish threads before opening many more.
@@ -41,8 +41,10 @@ REPLY FORMAT — a single JSON object, no other text:
   "placeUpdates": [{"note": "durable change to THIS place that future visits must honor", "flag": {"key": "value"}}],
   "discovery": {"name": "evocative technique name", "description": "what this new technique does and its cost/limit"},
   "codexUpdates": [{"topic": "kebab-id", "label": "Display Name", "kind": "mystery|faction|lore|event|person|place", "fact": "the durable thing learned this beat", "links": ["related-topic-ids", "location-ids", "quest-ids"]}],
+  "timeAdvanceHours": 0,
   "sceneEnded": false
 }
+"timeAdvanceHours": in-scene hours beyond the beat itself (sleep, waits, long work) — 0 for a normal beat, up to 12.
 "discovery" ONLY when the resolution block explicitly says DISCOVERY-ELIGIBLE (a critical success on a novel or combined ability use). Otherwise omit it entirely.
 The "scene" field is REQUIRED every turn: carry forward everything still true from the current scene state, change only what this beat actually changed.
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
@@ -98,7 +100,7 @@ function characterSheetSummary(c) {
     : `physical ${c.attributes.physical}, mental ${c.attributes.mental}, social ${c.attributes.social}, practical ${c.attributes.practical}`;
   let s = `${c.name} — ${c.origin} origin, ${c.background}, level ${c.level}. ` +
     `Attributes: ${attrs}. ` +
-    `Health ${c.health}/${c.maxHealth}, energy ${c.energy}/${c.maxEnergy}. Abilities: ${abil}. ` +
+    `Health ${c.health}/${c.maxHealth}, energy ${c.energy}/${c.maxEnergy}${c.energy <= 0 ? " (EXHAUSTED — everything is harder until they rest)" : ""}. Abilities: ${abil}. ` +
     `Spectrum fingerprint: ${JSON.stringify(c.alignment || {})}`;
   if (c.bio) {
     const b = c.bio;

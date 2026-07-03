@@ -21,7 +21,7 @@ import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rer
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.8.1";
+const APP_VERSION = "0.8.2";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -399,8 +399,8 @@ function applyTurn(turn, resolution) {
 
   // deltas from the GM (bounded trust: clamp everything)
   const d = turn.characterDeltas || {};
-  if (d.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + clampInt(d.health, -20, 10)));
-  if (d.energy) character.energy = Math.max(0, Math.min(character.maxEnergy, character.energy + clampInt(d.energy, -20, 10)));
+  if (d.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + clampInt(d.health, -20, 15)));
+  if (d.energy) character.energy = Math.max(0, Math.min(character.maxEnergy, character.energy + clampInt(d.energy, -20, 40)));
   if (d.xp) character.xp += Math.max(0, Math.min(25, d.xp | 0));
   for (const item of d.inventoryAdd || []) addItem(character, item, CONTENT.items);
   for (const item of d.inventoryRemove || []) removeItem(character, typeof item === "string" ? item : item?.name);
@@ -445,8 +445,10 @@ function applyTurn(turn, resolution) {
   }
   // quests: typed ops from the GM, applied within bounds
   applyQuestUpdates(character, turn.questUpdates || []);
-  // time passes with the story (story mode; real mode advances itself)
-  advanceClock(character.clock, turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat);
+  // time passes with the story (story mode; real mode advances itself) — plus
+  // any in-scene hours the GM reported (sleep, waits, long work)
+  const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0));
+  advanceClock(character.clock, (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours);
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // chronicle + scene persistence
@@ -973,7 +975,10 @@ function renderPlay(turn, opts = {}) {
   main += `</div>`;
   if (turn || opts.error || opts.gmAside || opts.aside || (!busy && !opts.thinking)) {
     main += `<div class="freeform">
-      <button id="mode-toggle" class="mode-toggle ${askMode ? "asking" : ""}" title="Switch between acting in the scene and asking the GM out-of-character">${askMode ? "Ask" : "Act"}</button>
+      <div class="mode-chips">
+        <button id="mode-act" class="mode-chip ${askMode ? "" : "active"}" title="Act in the scene">Act</button>
+        <button id="mode-ask" class="mode-chip ${askMode ? "active" : ""}" title="Ask the GM out-of-character — context, rules, what your character would know. Never advances the story.">Ask GM</button>
+      </div>
       <input id="freeform-input" placeholder="${askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
       <button id="gambit-open" class="mode-toggle" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
@@ -1021,14 +1026,18 @@ function renderPlay(turn, opts = {}) {
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");
-  const modeBtn = document.getElementById("mode-toggle");
-  if (modeBtn) modeBtn.onclick = () => {
-    askMode = !askMode;
+  const setMode = (mode) => {
+    if (askMode === mode) return;
+    askMode = mode;
     const val = ff?.value || "";
     renderPlay(turn || character.activeScene?.lastTurn || null, { ...opts, thinking: null });
     const ff2 = document.getElementById("freeform-input");
     if (ff2) { ff2.value = val; ff2.focus(); }
   };
+  const actBtn = document.getElementById("mode-act");
+  const askBtn = document.getElementById("mode-ask");
+  if (actBtn) actBtn.onclick = () => setMode(false);
+  if (askBtn) askBtn.onclick = () => setMode(true);
   if (ff && go) {
     if (opts.error && lastPlayerText) ff.value = lastPlayerText; // never lose what they wrote
     const submit = () => askMode ? onAsk(ff.value) : onFreeform(ff.value);

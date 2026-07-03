@@ -91,6 +91,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .gm-aside { border-left: 3px solid var(--accent2); background: var(--panel2); border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0; font-family: var(--font-ui); font-size: 13px; color: var(--ink); }
 .gm-aside p { margin-bottom: 6px; } .gm-aside p:last-child { margin-bottom: 0; }
 .mode-toggle { background: var(--panel2); color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.mode-chips { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.mode-chip { background: var(--panel2); color: var(--ink-dim); border: none; padding: 8px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.mode-chip.active { background: var(--accent2); color: #10201e; }
+.mode-chip:not(.active):hover { color: var(--ink); }
 .gambit-step { border-left: 2px solid var(--border); padding-left: 10px; }
 .g-chance { color: var(--accent2); font-style: italic; text-transform: none; letter-spacing: 0; }
 .g-weak { color: var(--danger); text-transform: none; letter-spacing: 0; }

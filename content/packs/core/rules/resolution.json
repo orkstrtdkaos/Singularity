@@ -25,7 +25,8 @@
   "energy": {
     "max": 100,
     "regenPerRest": 40,
-    "defaultActionCost": 5
+    "defaultActionCost": 5,
+    "exhaustedPenalty": 10
   },
   "senseTiers": [
     { "tier": 0, "minAttunement": 0,  "label": "none",    "precision": "nothing" },

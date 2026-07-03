@@ -390,5 +390,12 @@ check("merge keeps history and facts from both", davan.history.length === 2 && d
 check("id-shaped names prettified, community token dropped", merged.some(n => n.name === "Elder Woman"));
 check("prettify leaves human names alone", prettifyNpcName("Mara Wells") === "Mara Wells");
 
+// --- v0.8.2: exhaustion + narrative rest ---
+const tired = { ...char, energy: 0 };
+const freshChance = successChance({ character: { ...char, energy: 50 }, action, location: loc, rules });
+const tiredChance = successChance({ character: tired, action, location: loc, rules });
+check("exhaustion penalizes all actions", tiredChance === freshChance - rules.energy.exhaustedPenalty);
+check("one point of energy clears the penalty", successChance({ character: { ...char, energy: 1 }, action, location: loc, rules }) === freshChance);
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -14,6 +14,7 @@ import { applyQuestUpdates, questsForGM, slugify } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
+import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -203,6 +204,45 @@ check("place remembers visits, notes, flags", pm.includes("Visits: 2") && pm.inc
 check("unvisited place has no block", placeMemoryForGM(traveler3, "archive_hollow") === null);
 applyPlaceUpdates(traveler3, "millbrook", [{ note: "Left the hemp rope coiled behind the well." }], { day: 3 });
 check("duplicate place notes dedupe", traveler3.placeMemory.millbrook.notes.length === 1);
+
+// --- world tick ---
+const wcEvent = JSON.parse(readFileSync(join(root, "content/packs/valley/events/water_crisis.json"), "utf8"));
+const locFiles = ["millbrook", "harmonic_heights_terrace", "radiant_plateau_edge"].map(id =>
+  JSON.parse(readFileSync(join(root, `content/packs/valley/locations/${id}.json`), "utf8")));
+const tickContent = {
+  region: { activeEvents: [{ eventId: "water_crisis", stage: 1 }] },
+  events: { water_crisis: wcEvent },
+  locations: Object.fromEntries(locFiles.map(l => [l.id, l]))
+};
+const wanderer = {
+  name: "Kaelen", worldState: initWorldState(1), npcRegistry: {},
+  deeds: [{ description: "Pulled two children from the flooded channel", tags: ["child-rescuer"], weight: 3, communityId: "valley.millbrook", day: 1, spread: [] }]
+};
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 1, evolveNpcs: null });
+check("same-day tick is a no-op", wanderer.worldState.news.length === 0);
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 14, evolveNpcs: null });
+check("event advances after stage days (12)", wanderer.worldState.eventStages.water_crisis.stage === 2);
+check("stage shift drifts the spectrum", wanderer.worldState.spectrumDrift.death_life < 0);
+check("big deed spread to other communities", wanderer.deeds[0].spread.includes("valley.harmonic_heights") && wanderer.deeds[0].spread.includes("valley.radiant_plateau"));
+check("news generated for both", wanderer.worldState.news.length === 2);
+const unseen = takeUnseenNews(wanderer);
+check("unseen news delivered once", unseen.length === 2 && takeUnseenNews(wanderer).length === 0);
+check("news block for GM renders", newsForGM(wanderer).includes("First Sickness"));
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 30, evolveNpcs: null });
+check("event advances again (12+15=27 < 30)", wanderer.worldState.eventStages.water_crisis.stage === 3);
+await runWorldTick({ character: wanderer, content: tickContent, currentDay: 200, evolveNpcs: null });
+check("final stage holds (999 days)", wanderer.worldState.eventStages.water_crisis.stage === 4);
+const region2 = buildRegionView(tickContent, wanderer);
+check("region view reflects campaign stage", region2.activeEvents[0].stage === 4);
+const shifted = effectiveLocation({ id: "millbrook", spectrum: { death_life: 0.4 } }, wanderer.worldState);
+check("effective location merges drift", shifted.spectrum.death_life < 0.4);
+const evolved = { name: "K", worldState: initWorldState(1), npcRegistry: { hela: { id: "hela", name: "Hela", role: "dock-master", relationship: 3, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
+await runWorldTick({ character: evolved, content: tickContent, currentDay: 8, evolveNpcs: async () => ({ npcUpdates: [{ npcId: "hela", note: "Fell ill from the water; recovering.", status: "injured" }], news: ["The dock-master took sick last week."] }) });
+check("offscreen npc evolution applies", evolved.npcRegistry.hela.status === "injured" && evolved.npcRegistry.hela.history.length === 1);
+check("evolution news lands", evolved.worldState.news.some(n => n.text.includes("took sick")));
+const failing = { name: "K", worldState: initWorldState(1), npcRegistry: { x: { id: "x", name: "X", role: "", relationship: 0, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
+await runWorldTick({ character: failing, content: tickContent, currentDay: 8, evolveNpcs: async () => { throw new Error("api down"); } });
+check("evolution failure never blocks the tick", failing.worldState.lastTickDay === 8);
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

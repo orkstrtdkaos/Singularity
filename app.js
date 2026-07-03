@@ -16,8 +16,9 @@ import { locationImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./e
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, relationshipBand } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
+import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 
-const APP_VERSION = "0.4.0";
+const APP_VERSION = "0.5.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -162,7 +163,22 @@ function migrate(c) {
   if (!c.quests) c.quests = [];
   migrateRelationships(c, CONTENT.npcs);
   if (!c.placeMemory) c.placeMemory = {};
+  if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   return c;
+}
+
+/** World-tick choke point: run whenever the character (re)enters play or the
+ *  clock jumps. Returns fresh news to show the player once. */
+async function maybeTick() {
+  const currentDay = readClock(character.clock).day;
+  await runWorldTick({ character, content: CONTENT, currentDay });
+  saveCharacter(character);
+  return takeUnseenNews(character);
+}
+
+/** The current location with the world's spectrum drift applied. */
+function hereNow() {
+  return effectiveLocation(CONTENT.locations[character.currentLocationId], character.worldState);
 }
 
 // ---------- character creation ----------
@@ -304,6 +320,7 @@ function renderCreate() {
       quests: [],
       npcRegistry: {},
       placeMemory: {},
+      worldState: initWorldState(1),
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
@@ -316,28 +333,30 @@ function renderCreate() {
 
 // ---------- play ----------
 
-function enterPlay() {
+async function enterPlay() {
   sceneTurns = [];
   sceneState = null;
+  const news = await maybeTick();
   if (character.activeScene?.turns?.length) {
     sceneTurns = character.activeScene.turns;
     sceneState = character.activeScene.sceneState || null;
-    renderPlay(character.activeScene.lastTurn, { resumed: true });
+    renderPlay(character.activeScene.lastTurn, { resumed: true, newsFlash: news });
   } else {
-    startScene();
+    startScene(undefined, news);
   }
 }
 
-async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)") {
-  renderPlay(null, { thinking: "The valley takes shape…" });
+async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = []) {
+  if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
+  renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news });
   const result = await runGM({ resolution: null, playerInput: prompt });
-  if (result) renderPlay(result.turn, { degraded: result.degraded });
+  if (result) renderPlay(result.turn, { degraded: result.degraded, newsFlash: news });
 }
 
 async function runGM({ resolution, playerInput }) {
   busy = true;
-  const location = CONTENT.locations[character.currentLocationId];
-  const region = { ...CONTENT.region, activeEvents: eventsForGM(CONTENT.region, CONTENT.events) };
+  const location = hereNow();
+  const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
   const result = await gmTurn({
     character, location, region,
@@ -351,7 +370,8 @@ async function runGM({ resolution, playerInput }) {
     questsDetail: questsForGM(character),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId)
+    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
+    newsDetail: newsForGM(character)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -361,6 +381,7 @@ async function runGM({ resolution, playerInput }) {
 
 function applyTurn(turn, resolution) {
   const location = CONTENT.locations[character.currentLocationId];
+  const dayNow = readClock(character.clock).day;
   const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
 
   // deltas from the GM (bounded trust: clamp everything)
@@ -371,9 +392,10 @@ function applyTurn(turn, resolution) {
   for (const item of d.inventoryAdd || []) addItem(character, item, CONTENT.items);
   for (const item of d.inventoryRemove || []) removeItem(character, typeof item === "string" ? item : item?.name);
 
-  // deeds → reputation
+  // deeds → reputation (day-stamped so news spread knows when they happened)
   for (const deed of turn.deeds || []) {
-    recordDeed(character, { ...deed, locationId: location.id, communityId: deed.communityId ?? location.communityId }, mods);
+    const recorded = recordDeed(character, { ...deed, locationId: location.id, communityId: deed.communityId ?? location.communityId }, mods);
+    recorded.day = dayNow;
   }
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day };
@@ -430,7 +452,7 @@ function applyTurn(turn, resolution) {
 
 async function onChoice(choice) {
   if (busy) return;
-  const location = CONTENT.locations[character.currentLocationId];
+  const location = hereNow();
   const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
 
   // ability gating + energy
@@ -468,7 +490,7 @@ async function onFreeform(text) {
   await onChoice({ label: intent.label || text, attribute: intent.attribute, axes: intent.axes, difficulty: intent.difficulty, intentTags: intent.intentTags, abilityId: intent.abilityId, energyCost: null });
 }
 
-function travelTo(locId) {
+async function travelTo(locId) {
   if (busy) return;
   character.currentLocationId = locId;
   character.activeScene = null;
@@ -477,10 +499,11 @@ function travelTo(locId) {
   advanceClock(character.clock, ADVANCE.travel);
   notePlaceVisit(character, locId, readClock(character.clock).day);
   saveCharacter(character);
-  startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`);
+  const news = await maybeTick();
+  startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`, news);
 }
 
-function rest() {
+async function rest() {
   if (busy) return;
   character.energy = Math.min(character.maxEnergy, character.energy + CONTENT.rules.energy.regenPerRest);
   character.health = Math.min(character.maxHealth, character.health + 3);
@@ -488,7 +511,8 @@ function rest() {
   sceneState = null; // hours pass — the old scene has dissolved
   advanceClock(character.clock, ADVANCE.rest);
   saveCharacter(character);
-  startScene(`(The character takes a real rest here — camp, inn, or quiet corner. Narrate the rest briefly, restore them, then present what's happening when they get up. Time has passed.)`);
+  const news = await maybeTick();
+  startScene(`(The character takes a real rest here — camp, inn, or quiet corner. Narrate the rest briefly, restore them, then present what's happening when they get up. Time has passed.)`, news);
 }
 
 async function onAsk(text) {
@@ -496,12 +520,12 @@ async function onAsk(text) {
   busy = true;
   const lastTurn = character.activeScene?.lastTurn || null;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, thinking: "The GM leans back…" });
-  const location = CONTENT.locations[character.currentLocationId];
+  const location = hereNow();
   const time = readClock(character.clock);
   const result = await gmAsk({
     character, location, rules: CONTENT.rules,
     lore: loreForLocation(location, CONTENT.lore),
-    region: { ...CONTENT.region, activeEvents: eventsForGM(CONTENT.region, CONTENT.events) },
+    region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
     recentTurns: sceneTurns.slice(-6),
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
@@ -509,7 +533,8 @@ async function onAsk(text) {
     questsDetail: questsForGM(character),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId)
+    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
+    newsDetail: newsForGM(character)
   }, text);
   busy = false;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
@@ -535,7 +560,7 @@ function useItem(name) {
 // ---------- play rendering ----------
 
 function renderPlay(turn, opts = {}) {
-  const location = CONTENT.locations[character.currentLocationId];
+  const location = hereNow();
   const rules = CONTENT.rules;
   const mods = aptitudeMods(profile, rules.playerAptitudes);
   const rep = location.communityId ? standingWith(character, location.communityId, rules) : null;
@@ -606,6 +631,9 @@ function renderPlay(turn, opts = {}) {
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
     <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div><div class="transcript">`;
+  if (opts.newsFlash?.length) {
+    main += `<div class="news-flash"><div class="news-title">While you were away…</div>${opts.newsFlash.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("")}</div>`;
+  }
   if (opts.playerBeat) {
     main += `<div class="beat player-action">▸ ${esc(opts.playerBeat.label)}</div>`;
     if (opts.playerBeat.resolution) {

@@ -3,6 +3,8 @@
 An AI-game-mastered narrative RPG. **Code owns the rules and the dice; the model owns the words.**
 Pure ES modules on GitHub Pages — no backend, no build step (same architecture as Tether).
 
+> **Authoritative reference: [SYSTEM_SPEC.md](SYSTEM_SPEC.md)** — design laws, all systems with numbers, GM contract, ops, roadmap, and the PO protocol (Aevi is Product Owner; task ledger at `po/ALERT.md`). This README is a quick orientation; when they disagree, the spec wins.
+
 ## Play
 
 Serve the folder over HTTP (packs load via `fetch`):

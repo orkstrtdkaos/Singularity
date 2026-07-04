@@ -42,8 +42,10 @@ REPLY FORMAT — a single JSON object, no other text:
   "discovery": {"name": "evocative technique name", "description": "what this new technique does and its cost/limit"},
   "codexUpdates": [{"topic": "kebab-id", "label": "Display Name", "kind": "mystery|faction|lore|event|person|place", "fact": "the durable thing learned this beat", "links": ["related-topic-ids", "location-ids", "quest-ids"]}],
   "timeAdvanceHours": 0,
+  "newAbility": {"id": "kebab-id", "name": "...", "description": "what it functionally does AND its limits", "energyCost": 8, "attribute": "physical|mental|social|practical", "axes": {"spectrumId": 0.4}, "notFor": "what it is inappropriate for", "taughtBy": "who or what taught it"},
   "sceneEnded": false
 }
+"newAbility" is RARE: only when the fiction genuinely earns a wholly new capability — explicit training with a master, a quest's reward, a profound unlock. Not for variations of existing abilities (that's a discovery). The engine caps how many a character can hold; omit the field otherwise.
 "timeAdvanceHours": in-scene hours beyond the beat itself (sleep, waits, long work) — 0 for a normal beat, up to 12.
 "discovery" ONLY when the resolution block explicitly says DISCOVERY-ELIGIBLE (a critical success on a novel or combined ability use). Otherwise omit it entirely.
 The "scene" field is REQUIRED every turn: carry forward everything still true from the current scene state, change only what this beat actually changed.

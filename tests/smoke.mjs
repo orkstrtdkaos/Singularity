@@ -282,7 +282,8 @@ check("subs initialize from parents", hero2.subAttributes.strength === 3 && hero
 const subChance = successChance({ character: hero2, action: { attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules });
 hero2.subAttributes.strength = 5;
 const subChance2 = successChance({ character: hero2, action: { attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules });
-check("sub-attribute drives the roll", subChance2 === subChance + 2 * rules.baseChance.attributeMultiplier || subChance2 === rules.d100.ceilingChance);
+// 3→5 crosses the soft cap (4): +20 for the 4th point, +5 for the 5th
+check("sub-attribute drives the roll (with soft cap)", subChance2 === subChance + rules.baseChance.attributeMultiplier + rules.baseChance.attributePerPointBeyond || subChance2 === rules.d100.ceilingChance);
 hero2.subAttributes.strength = 3;
 hero2.xp = 250; // enough for levels 2 and 3
 const msgs = applyLevelUps(hero2, rules);
@@ -416,6 +417,25 @@ const trivialIntent = sanitizeIntent({ label: "chat with the miller", attribute:
 check("trivial survives sanitization", trivialIntent.trivial === true);
 const trivialAbility = sanitizeIntent({ label: "x", abilityId: "prism_sight", trivial: true }, { abilities: [{ abilityId: "prism_sight", level: 1 }] });
 check("ability use is never trivial", trivialAbility.trivial === false);
+
+// --- v1.0.0: deep attributes, GM-generated abilities ---
+const deepChar = (v) => ({ ...char, subAttributes: { strength: v, agility: 3, reason: 3, insight: 3, presence: 3, rapport: 3, craft: 3, wits: 3 }, energy: 50 });
+const act8 = { label: "x", attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 30 };
+const at4 = successChance({ character: deepChar(4), action: act8, location: { spectrum: {} }, rules });
+const at8 = successChance({ character: deepChar(8), action: act8, location: { spectrum: {} }, rules });
+const at20 = successChance({ character: deepChar(20), action: act8, location: { spectrum: {} }, rules });
+check("beyond soft cap: +5 per point (diminishing)", at8 === at4 + 20 && at20 > at8);
+check("hard rolls stay meaningful at high attributes", at20 <= rules.d100.ceilingChance);
+const { sanitizeNewAbility, applyNewAbility } = await import("../engine/progression.js");
+const rawAb = { name: "Stone-Singing", description: "Coax cracks through rock by humming its grain. Slow — minutes per span; useless on metal or living things.", energyCost: 99, attribute: "practical", axes: { mechanical_spiritual: 2 }, taughtBy: "Elder Resonance" };
+const def = sanitizeNewAbility(rawAb);
+check("new ability sanitized (cost + axes clamped)", def.energyCost === 15 && def.axes.mechanical_spiritual === 1 && def.powerSystem === "learned");
+const learner = { level: 2, abilities: [{ abilityId: "sonic_resonance", level: 1 }] };
+check("grant applies and joins the character", applyNewAbility(learner, def, rules).ok && learner.abilities.some(a => a.abilityId === "stone-singing"));
+check("duplicate grant rejected", applyNewAbility(learner, def, rules).ok === false);
+const capped = { level: 1, abilities: [], customAbilities: { a: {}, b: {} } };
+check("learned-ability cap enforced", applyNewAbility(capped, sanitizeNewAbility({ name: "Third", description: "x" }), rules).why.includes("cap"));
+check("garbage ability rejected", sanitizeNewAbility({ name: "NoDesc" }) === null);
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

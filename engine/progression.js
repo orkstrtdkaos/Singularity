@@ -128,6 +128,47 @@ export function learnAbility(character, abilityId, catalog, rules) {
   return { ok: true };
 }
 
+// ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------
+
+/** Validate a GM-proposed new ability. Returns a safe def or null. */
+export function sanitizeNewAbility(raw) {
+  if (!raw || !raw.name || !raw.description) return null;
+  const id = slugify(raw.id || raw.name);
+  if (!id) return null;
+  const axes = {};
+  for (const [k, v] of Object.entries(raw.axes || {}).slice(0, 3)) {
+    const n = Number(v);
+    if (Number.isFinite(n)) axes[String(k)] = Math.max(-1, Math.min(1, n));
+  }
+  return {
+    id,
+    name: String(raw.name).slice(0, 60),
+    description: String(raw.description).slice(0, 300),
+    energyCost: Math.max(4, Math.min(15, Number(raw.energyCost) || 8)),
+    attribute: ["physical", "mental", "social", "practical"].includes(raw.attribute) ? raw.attribute : "practical",
+    axes,
+    notFor: raw.notFor ? String(raw.notFor).slice(0, 200) : "Anything beyond its described envelope.",
+    narrationHints: String(raw.description).slice(0, 200),
+    levelReq: 1,
+    powerSystem: "learned",
+    taughtBy: raw.taughtBy ? String(raw.taughtBy).slice(0, 60) : null,
+    effectTags: []
+  };
+}
+
+/** Grant a new ability the fiction earned. Capped: floor(level/2)+1 learned
+ *  abilities total, no duplicates of anything known. */
+export function applyNewAbility(character, def, rules) {
+  if (!def) return { ok: false, why: "invalid" };
+  character.customAbilities = character.customAbilities || {};
+  const cap = Math.floor((character.level || 1) / 2) + 1;
+  if (Object.keys(character.customAbilities).length >= cap) return { ok: false, why: "learned-ability cap for this level" };
+  if (character.customAbilities[def.id] || (character.abilities || []).some(a => a.abilityId === def.id)) return { ok: false, why: "already known" };
+  character.customAbilities[def.id] = def;
+  character.abilities.push({ abilityId: def.id, level: 1 });
+  return { ok: true };
+}
+
 // ---------- novel use & discoveries ----------
 
 export function discoveryKey(abilityIds = [], noveltyHint = "") {

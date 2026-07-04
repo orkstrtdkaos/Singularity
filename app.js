@@ -16,12 +16,12 @@ import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES
 import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
-import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.9.0";
+const APP_VERSION = "1.0.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -172,8 +172,14 @@ function migrate(c) {
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
   ensureCodex(c);
+  if (!c.customAbilities) c.customAbilities = {};
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   return c;
+}
+
+/** Ability catalog including GM-granted learned abilities on this character. */
+function fullCatalog() {
+  return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
 }
 
 /** World-tick choke point: run whenever the character (re)enters play or the
@@ -181,6 +187,7 @@ function migrate(c) {
 async function maybeTick() {
   const currentDay = readClock(character.clock).day;
   await runWorldTick({ character, content: CONTENT, currentDay });
+  await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
   saveCharacter(character);
   return takeUnseenNews(character);
 }
@@ -385,7 +392,7 @@ async function runGM({ resolution, playerInput }) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities),
+    abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
   });
   busy = false;
@@ -441,6 +448,14 @@ function applyTurn(turn, resolution) {
     });
     if (minted) turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now.*`;
   }
+  // GM-granted new ability: earned in fiction, clamped by engine
+  if (turn.newAbility) {
+    const def = sanitizeNewAbility(turn.newAbility);
+    const granted = def ? applyNewAbility(character, def, CONTENT.rules) : { ok: false };
+    if (granted.ok) turn.narration += `
+
+*✦ New ability learned: **${def.name}**${def.taughtBy ? ` (from ${def.taughtBy})` : ""} — ${def.description.slice(0, 120)}*`;
+  }
   // level up: banked growth the player chooses to spend
   for (const msg of applyLevelUps(character, CONTENT.rules)) {
     turn.narration += `\n\n*You feel it settle into you — a new steadiness. (${msg})*`;
@@ -486,11 +501,11 @@ async function onChoice(choice) {
     if (!owned) { choice.abilityId = null; }
     else {
       abilityLevel = owned.level;
-      energyCost = energyCost ?? effectiveEnergyCost(CONTENT.abilities[choice.abilityId], character, CONTENT.rules);
+      energyCost = energyCost ?? effectiveEnergyCost(fullCatalog()[choice.abilityId], character, CONTENT.rules);
     }
   }
   if ((choice.comboAbilities || []).length > 1) {
-    energyCost = choice.comboAbilities.reduce((sum, id) => sum + effectiveEnergyCost(CONTENT.abilities[id], character, CONTENT.rules), 0);
+    energyCost = choice.comboAbilities.reduce((sum, id) => sum + effectiveEnergyCost(fullCatalog()[id], character, CONTENT.rules), 0);
     abilityLevel = Math.min(...choice.comboAbilities.map(id => character.abilities.find(a => a.abilityId === id)?.level ?? 1));
   }
   if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
@@ -617,7 +632,7 @@ async function onAsk(text) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, CONTENT.abilities),
+    abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
   }, text);
   busy = false;
@@ -899,7 +914,7 @@ async function finishGambit(run) {
   let cost = 0;
   for (const r of run.receipts) {
     const a = g.actions[r.index];
-    cost += a.abilityId ? effectiveEnergyCost(CONTENT.abilities[a.abilityId], character, CONTENT.rules) : per;
+    cost += a.abilityId ? effectiveEnergyCost(fullCatalog()[a.abilityId], character, CONTENT.rules) : per;
   }
   character.energy = Math.max(0, character.energy - cost);
   // the human planned: that's who they are becoming
@@ -957,11 +972,11 @@ function renderPlay(turn, opts = {}) {
     Health <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
     Energy <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
     <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
-      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${"●".repeat(character.subAttributes?.[s] ?? 0)}${"○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
+      ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>
     <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</h3>
       ${character.abilities.map(a => {
-        const ab = CONTENT.abilities[a.abilityId];
+        const ab = fullCatalog()[a.abilityId];
         const rank = ab?.tree?.find(t => t.rank === a.level);
         const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
         const canRank = character.skillPoints > 0 && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
@@ -1062,7 +1077,7 @@ function renderPlay(turn, opts = {}) {
       const action = { label: c.label, attribute: c.attribute || "practical", axes: c.axes || {}, difficulty: c.difficulty || 0, tags: c.intentTags || [], abilityLevel: 0, planned: (c.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)) };
       if (c.abilityId && character.abilities.some(a => a.abilityId === c.abilityId)) {
         action.abilityLevel = character.abilities.find(a => a.abilityId === c.abilityId).level;
-        abilityHtml = `<span class="ability-tag"> ✦ ${esc(CONTENT.abilities[c.abilityId]?.name || c.abilityId)}</span>`;
+        abilityHtml = `<span class="ability-tag"> ✦ ${esc(fullCatalog()[c.abilityId]?.name || c.abilityId)}</span>`;
       }
       if (c.trivial && !c.abilityId) {
         senseHtml = `<span class="sense trivial-tag">no roll — just do it</span>`;
@@ -1156,7 +1171,7 @@ function renderPlay(turn, opts = {}) {
   };
   for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
     const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules);
-    if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `${CONTENT.abilities[b.dataset.rankup]?.name} advances to rank ${r.newRank}.` }); }
+    if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `${fullCatalog()[b.dataset.rankup]?.name} advances to rank ${r.newRank}.` }); }
     else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {

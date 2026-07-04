@@ -50,6 +50,23 @@ async function ghPut(path, contentStr, message, sha = null) {
   return res.json();
 }
 
+/** Read a JSON file from the shared repo. Returns parsed object or null. */
+export async function fetchRepoJSON(path) {
+  const meta = await ghGet(path);
+  if (!meta) return null;
+  try {
+    return JSON.parse(decodeURIComponent(escape(atob(meta.content.replace(/\n/g, "")))));
+  } catch { return null; }
+}
+
+/** Read this month's (and optionally last month's) shared ledger events. */
+export async function fetchLedger(monthsBack = 0) {
+  const d = new Date();
+  d.setMonth(d.getMonth() - monthsBack);
+  const month = d.toISOString().slice(0, 7);
+  return (await fetchRepoJSON(`world/ledger/${month}.json`)) || [];
+}
+
 /** Write a file the caller EXCLUSIVELY OWNS (character/profile). Retries once on
  *  SHA conflict with a cold re-read — same 409/422 discipline as Tether. */
 export async function pushOwnedFile(path, obj, message) {

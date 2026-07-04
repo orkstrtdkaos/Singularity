@@ -12,6 +12,7 @@
 
 import { callClaudeJSON } from "./claude.js";
 import { applyNpcUpdates } from "./npcs.js";
+import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile } from "./sync.js";
 
 const NEWS_CAP = 20;
 const NEWS_TRAVEL_DAYS = 3;
@@ -104,6 +105,58 @@ export async function runWorldTick({ character, content, currentDay, evolveNpcs 
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
   return { ticked: true, news };
+}
+
+/** SHARED WORLD consolidation (best-effort, never throws): when sync is on,
+ *  one valley is true for everyone. Event stages merge to the furthest reached,
+ *  spectrum drift to the strongest pressure, other characters' deeds arrive as
+ *  news — and the consolidated region state is pushed back for the next player. */
+export async function syncSharedWorld({ character, content }) {
+  if (!syncEnabled() || !character.worldState) return { synced: false };
+  const ws = character.worldState;
+  const news = [];
+  try {
+    // 1. merge remote region state: the world is as far along as ANYONE has seen it
+    const remote = await fetchRepoJSON("world/regions/valley.json");
+    if (remote?.eventStages) {
+      for (const [eventId, st] of Object.entries(remote.eventStages)) {
+        const local = ws.eventStages[eventId];
+        if (!local || st.stage > local.stage) {
+          ws.eventStages[eventId] = { ...st };
+          const ev = content.events[eventId];
+          const def = ev?.stages.find(s => s.stage === st.stage);
+          if (ev && def) news.push(`${ev.name} stands at ${def.name} across the valley: ${def.summary}`);
+        }
+      }
+    }
+    if (remote?.spectrumDrift) {
+      for (const [ax, v] of Object.entries(remote.spectrumDrift)) {
+        if (Math.abs(v) > Math.abs(ws.spectrumDrift[ax] || 0)) ws.spectrumDrift[ax] = v;
+      }
+    }
+    // 2. other characters' consequences reach you as news
+    const since = ws.lastSharedReadAt || "1970";
+    const ledger = await fetchLedger(0);
+    const fromOthers = ledger.filter(e => e.who !== character.id && e.at > since && e.visibility !== "hidden").slice(-5);
+    for (const e of fromOthers) news.push(`Word reaches you: ${e.what}${e.where ? ` (near ${e.where.replace(/_/g, " ")})` : ""}`);
+    ws.lastSharedReadAt = new Date().toISOString();
+    // 3. push the consolidated region state back (SHA-retry inside pushOwnedFile)
+    await pushOwnedFile("world/regions/valley.json", {
+      schemaVersion: 1, regionId: "valley",
+      calendar: remote?.calendar || { day: ws.lastTickDay, season: "late-spring", year: 15 },
+      activeEvents: (content.region.activeEvents || []).map(({ eventId, stage }) => ({ eventId, stage: ws.eventStages[eventId]?.stage ?? stage })),
+      eventStages: ws.eventStages, spectrumDrift: ws.spectrumDrift,
+      worldFlags: remote?.worldFlags || {}, lastTick: new Date().toISOString()
+    }, `world-tick: consolidated by ${character.name}`);
+  } catch (err) {
+    console.warn("[sharedworld] consolidation skipped:", err.message);
+  }
+  if (news.length) {
+    const stamped = news.map(n => ({ day: ws.lastTickDay, text: String(n).slice(0, 220) }));
+    ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+  }
+  return { synced: true, news };
 }
 
 /** Pull (and clear) news the player hasn't seen — shown once on return to play. */

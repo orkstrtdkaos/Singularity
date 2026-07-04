@@ -23,7 +23,11 @@ export function successChance({ character, action, location, rules, aptitudeMods
   // are the real target when present; the parent attribute is the fallback.
   const attrLevel = (action.subAttribute && character.subAttributes?.[action.subAttribute])
     || character.attributes[action.attribute] || 1;
-  let chance = attrLevel * bc.attributeMultiplier;
+  // full value through the soft cap (competence), diminishing beyond (mastery) —
+  // high attributes buy power against HARD rolls without trivializing easy ones
+  const soft = bc.attributeSoftCap ?? 4;
+  let chance = Math.min(attrLevel, soft) * bc.attributeMultiplier
+    + Math.max(0, attrLevel - soft) * (bc.attributePerPointBeyond ?? 5);
 
   if (action.skillId && character.skills?.[action.skillId]) {
     chance += character.skills[action.skillId] * bc.skillBonus;

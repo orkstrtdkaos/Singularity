@@ -9,6 +9,8 @@
   },
   "baseChance": {
     "attributeMultiplier": 20,
+    "attributeSoftCap": 4,
+    "attributePerPointBeyond": 5,
     "skillBonus": 10,
     "abilityLevelBonus": 5,
     "equipmentBonus": 5,
@@ -62,7 +64,7 @@
     "xpPerLevel": 100,
     "subPointPerLevel": 1,
     "skillPointPerLevel": 1,
-    "subAttributeCap": 6,
+    "subAttributeCap": 20,
     "maxAbilityRank": 3,
     "rankLevelReq": { "2": 3, "3": 5 },
     "energyEfficiencyPerTwoLevels": 1,

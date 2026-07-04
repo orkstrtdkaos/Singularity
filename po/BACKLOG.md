@@ -35,6 +35,6 @@ Move origins and backgrounds out of `app.js` into `content/packs/*/origins/` + `
 
 ---
 
-## Ordering after SNG-001 (party play) ships
-**SNG-002 → SNG-007 → SNG-003 → SNG-005 → SNG-004 (+008) →** remaining §9 specced-unbuilt items.
+## Ordering (resequenced 2026-07-04, Erik's call: encounters first)
+**SNG-002 (ACTIVE) → SNG-001 party play → SNG-007 → SNG-003 → SNG-005 → SNG-004 (+008) →** remaining §9 specced-unbuilt items.
 Rationale: encounters give scenes teeth first; the sheet/inventory screens make the character legible while playing the new encounters; then content waves land into a game that can carry them.

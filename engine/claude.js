@@ -13,7 +13,7 @@ const MODEL_MAP = {
   _default: "claude-sonnet-4-6"
 };
 
-const BUDGETS = { "gm-narrate": 4096, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "intent-parse": 1024, "chronicle-compress": 1024, _default: 2048 };
+const BUDGETS = { "gm-narrate": 8000, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "intent-parse": 1024, "chronicle-compress": 1024, _default: 2048 };
 
 export function getApiKey() { return localStorage.getItem("singularity.anthropicKey") || ""; }
 export function setApiKey(k) { localStorage.setItem("singularity.anthropicKey", k.trim()); }
@@ -51,11 +51,15 @@ export async function callClaude(messages, opts = {}) {
 /** Call expecting a JSON object back. Strips code fences; throws on unparseable.
  *  Callers must wrap in try/catch with a graceful fallback (project law: a hiccup
  *  never blocks play). */
-export async function callClaudeJSON(messages, opts = {}) {
-  const raw = await callClaude(messages, opts);
-  const cleaned = raw.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+export function parseLooseJSON(raw) {
+  const cleaned = String(raw).trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
   const start = cleaned.indexOf("{");
   const end = cleaned.lastIndexOf("}");
   if (start === -1 || end === -1) throw new Error("NO_JSON_FOUND");
   return JSON.parse(cleaned.slice(start, end + 1));
+}
+
+export async function callClaudeJSON(messages, opts = {}) {
+  const raw = await callClaude(messages, opts);
+  return parseLooseJSON(raw);
 }

@@ -21,7 +21,7 @@ import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rer
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "1.0.0";
+const APP_VERSION = "1.0.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -258,8 +258,8 @@ function renderCreate() {
             <span style="text-transform:capitalize">${k}</span>
           </div>`).join("")}</div>
       <div class="field"><label>Abilities — choose ${maxAbilities()}</label>
-        <div class="opt-row">${okAb.map(a => `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc(a.description)}">${esc(a.name)}</button>`).join("")}</div>
-        <div class="hint">${state.abilities.map(id => esc(CONTENT.abilities[id].description)).join(" · ") || "Hover for descriptions."}</div></div>
+        <div class="opt-row">${okAb.map(a => { const r1 = a.tree?.find(t => t.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div>
+        <div class="hint">${state.abilities.map(id => { const a = CONTENT.abilities[id]; const r1 = a.tree?.find(t => t.rank === 1); return r1 ? `<strong>${esc(a.name)}</strong> — rank 1 “${esc(r1.name)}”: ${esc(r1.grants)}` : esc(a.description); }).join("<br>") || "Hover an ability to see exactly what its first rank can and cannot do."}</div></div>
       <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your story</button>
     </div>`);
 
@@ -447,6 +447,13 @@ function applyTurn(turn, resolution) {
       abilityIds: resolution.discoveryAbilities || [], noveltyHint: resolution.action?.noveltyHint || "", day: dayNow
     });
     if (minted) turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now.*`;
+  }
+  // earned xp: every meaningful resolved action teaches something (trivial acts don't)
+  if (resolution && resolution.degree && resolution.degree !== "auto") {
+    const xpT = CONTENT.rules.xp || {};
+    let gain = xpT[resolution.degree] ?? 0;
+    if (resolution.action?.novel && gain) gain += xpT.novelBonus ?? 0;
+    character.xp += gain;
   }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {

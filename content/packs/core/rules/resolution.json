@@ -34,31 +34,92 @@
     "meal": 10,
     "heartyMeal": 15,
     "drink": 5,
-    "breather": { "energy": 10, "health": 1, "hours": 1 },
-    "sleep": { "energy": 40, "health": 3, "hours": 8 },
+    "breather": {
+      "energy": 10,
+      "health": 1,
+      "hours": 1
+    },
+    "sleep": {
+      "energy": 40,
+      "health": 3,
+      "hours": 8
+    },
     "meditationBase": 10,
     "meditationPerAttunement": 2
   },
   "senseTiers": [
-    { "tier": 0, "minAttunement": 0,  "label": "none",    "precision": "nothing" },
-    { "tier": 1, "minAttunement": 2,  "label": "vibes",   "precision": "risky-or-safe only" },
-    { "tier": 2, "minAttunement": 5,  "label": "bands",   "precision": "five qualitative bands" },
-    { "tier": 3, "minAttunement": 9,  "label": "precise", "precision": "close numeric read plus reasons" }
+    {
+      "tier": 0,
+      "minAttunement": 0,
+      "label": "none",
+      "precision": "nothing"
+    },
+    {
+      "tier": 1,
+      "minAttunement": 2,
+      "label": "vibes",
+      "precision": "risky-or-safe only"
+    },
+    {
+      "tier": 2,
+      "minAttunement": 5,
+      "label": "bands",
+      "precision": "five qualitative bands"
+    },
+    {
+      "tier": 3,
+      "minAttunement": 9,
+      "label": "precise",
+      "precision": "close numeric read plus reasons"
+    }
   ],
   "reputationBands": [
-    { "min": 50,   "band": "revered" },
-    { "min": 20,   "band": "trusted" },
-    { "min": 5,    "band": "known" },
-    { "min": -4,   "band": "neutral" },
-    { "min": -19,  "band": "wary" },
-    { "min": -49,  "band": "distrusted" },
-    { "min": -999, "band": "hated" }
+    {
+      "min": 50,
+      "band": "revered"
+    },
+    {
+      "min": 20,
+      "band": "trusted"
+    },
+    {
+      "min": 5,
+      "band": "known"
+    },
+    {
+      "min": -4,
+      "band": "neutral"
+    },
+    {
+      "min": -19,
+      "band": "wary"
+    },
+    {
+      "min": -49,
+      "band": "distrusted"
+    },
+    {
+      "min": -999,
+      "band": "hated"
+    }
   ],
   "subAttributes": {
-    "physical": ["strength", "agility"],
-    "mental": ["reason", "insight"],
-    "social": ["presence", "rapport"],
-    "practical": ["craft", "wits"]
+    "physical": [
+      "strength",
+      "agility"
+    ],
+    "mental": [
+      "reason",
+      "insight"
+    ],
+    "social": [
+      "presence",
+      "rapport"
+    ],
+    "practical": [
+      "craft",
+      "wits"
+    ]
   },
   "leveling": {
     "xpPerLevel": 100,
@@ -66,7 +127,10 @@
     "skillPointPerLevel": 1,
     "subAttributeCap": 20,
     "maxAbilityRank": 3,
-    "rankLevelReq": { "2": 3, "3": 5 },
+    "rankLevelReq": {
+      "2": 3,
+      "3": 5
+    },
     "energyEfficiencyPerTwoLevels": 1,
     "rankEnergyDiscount": 1,
     "minEnergyCostFraction": 0.5
@@ -86,12 +150,83 @@
     "stepEnergyCost": 4
   },
   "playerAptitudes": [
-    { "id": "strategist",      "tendency": "strategic", "threshold": 8,  "mods": { "plannedActionBonus": 5, "senseTierBonus": 1 }, "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens." },
-    { "id": "rough_and_ready", "tendency": "physical",  "threshold": 8,  "mods": { "physicalBonus": 5, "socialFinessePenalty": -3 }, "description": "Your character grows hard and capable, but subtlety suffers." },
-    { "id": "silver_tongue",   "tendency": "social",    "threshold": 8,  "mods": { "socialBonus": 5 }, "description": "Words come easily. People open up to you." },
-    { "id": "scholar",         "tendency": "cerebral",  "threshold": 8,  "mods": { "mentalBonus": 5 }, "description": "Study and investigation compound into insight." },
-    { "id": "carouser",        "tendency": "carousing", "threshold": 6,  "mods": { "rapportBonus": 5, "disciplinePenalty": -5 }, "description": "Everyone likes a good companion at the table — but focus and restraint decay." },
-    { "id": "daredevil",       "tendency": "risky",     "threshold": 8,  "mods": { "critSuccessBonus": 2, "critFailPenalty": 2 }, "description": "Fortune favors you — and punishes you. Wider extremes both ways." },
-    { "id": "good_samaritan",  "tendency": "generous",  "threshold": 6,  "mods": { "reputationGainBonus": 0.25 }, "description": "Your kindnesses are remembered a little longer and travel a little farther." }
-  ]
+    {
+      "id": "strategist",
+      "tendency": "strategic",
+      "threshold": 8,
+      "mods": {
+        "plannedActionBonus": 5,
+        "senseTierBonus": 1
+      },
+      "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens."
+    },
+    {
+      "id": "rough_and_ready",
+      "tendency": "physical",
+      "threshold": 8,
+      "mods": {
+        "physicalBonus": 5,
+        "socialFinessePenalty": -3
+      },
+      "description": "Your character grows hard and capable, but subtlety suffers."
+    },
+    {
+      "id": "silver_tongue",
+      "tendency": "social",
+      "threshold": 8,
+      "mods": {
+        "socialBonus": 5
+      },
+      "description": "Words come easily. People open up to you."
+    },
+    {
+      "id": "scholar",
+      "tendency": "cerebral",
+      "threshold": 8,
+      "mods": {
+        "mentalBonus": 5
+      },
+      "description": "Study and investigation compound into insight."
+    },
+    {
+      "id": "carouser",
+      "tendency": "carousing",
+      "threshold": 6,
+      "mods": {
+        "rapportBonus": 5,
+        "disciplinePenalty": -5
+      },
+      "description": "Everyone likes a good companion at the table — but focus and restraint decay."
+    },
+    {
+      "id": "daredevil",
+      "tendency": "risky",
+      "threshold": 8,
+      "mods": {
+        "critSuccessBonus": 2,
+        "critFailPenalty": 2
+      },
+      "description": "Fortune favors you — and punishes you. Wider extremes both ways."
+    },
+    {
+      "id": "good_samaritan",
+      "tendency": "generous",
+      "threshold": 6,
+      "mods": {
+        "reputationGainBonus": 0.25
+      },
+      "description": "Your kindnesses are remembered a little longer and travel a little farther."
+    }
+  ],
+  "xp": {
+    "crit_success": 8,
+    "success": 5,
+    "partial": 3,
+    "failure": 2,
+    "crit_failure": 2,
+    "novelBonus": 3,
+    "completed": 12,
+    "completed_rough": 10,
+    "abandoned": 3
+  }
 }

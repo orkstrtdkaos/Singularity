@@ -2,7 +2,7 @@
 // Code owns the rules and the dice; the model owns the words. The GM receives
 // resolution RESULTS (already rolled) and narrates them — it never decides outcomes.
 
-import { callClaude, callClaudeJSON } from "./claude.js";
+import { callClaude, callClaudeJSON, parseLooseJSON } from "./claude.js";
 import { reputationSummary } from "./reputation.js";
 
 const GM_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG set in the Valley of Echoes — a post-de-technologizing world of nanite-mediated power systems, fifteen years after humanity chose to step back from its own technology.
@@ -121,21 +121,35 @@ function characterSheetSummary(c) {
 }
 
 /** Run one GM turn. Returns the parsed turn object, or a safe fallback shape. */
+/** Pull the narration string out of broken/truncated JSON so the player sees
+ *  prose, never a raw JSON dump. */
+export function salvageNarration(raw) {
+  const m = String(raw || "").match(/"narration"\s*:\s*"((?:[^"\\]|\\.)*)/);
+  if (!m || !m[1]) return null;
+  try { return JSON.parse('"' + m[1].replace(/\\$/, "") + '"'); }
+  catch { return m[1].replace(/\\n/g, "\n").replace(/\\"/g, '"'); }
+}
+
+const PROSE_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG in the Valley of Echoes. Narrate the current beat in 2-4 tight paragraphs of second-person present-tense prose. Honor the resolution outcome and scene state provided. Reply with PROSE ONLY — no JSON, no lists, no headers.`;
+
 export async function gmTurn(ctx) {
   const content = buildTurnContext(ctx);
+  let raw = "";
   try {
-    const turn = await callClaudeJSON([{ role: "user", content }], { task: "gm-narrate", system: GM_SYSTEM });
+    raw = await callClaude([{ role: "user", content }], { task: "gm-narrate", system: GM_SYSTEM });
+    const turn = parseLooseJSON(raw);
     if (!turn.narration || !Array.isArray(turn.choices)) throw new Error("BAD_SHAPE");
     return { ok: true, turn };
   } catch (err) {
-    console.warn("[gmTurn] structured parse failed, falling back to plain narration:", err.message);
-    // Graceful degradation (project law): one pass failing yields a partial-but-valid
-    // result, never a hard error. Plain prose + generic choices keeps play moving.
+    console.warn("[gmTurn] structured parse failed:", err.message);
+    // Graceful degradation, in order: salvage the narration out of the broken
+    // JSON (free), else re-ask in prose-only mode. Never show raw JSON.
+    const salvaged = salvageNarration(raw);
+    if (salvaged && salvaged.length > 80) {
+      return { ok: true, degraded: true, turn: fallbackTurn(salvaged) };
+    }
     try {
-      const prose = await callClaude(
-        [{ role: "user", content: content + "\n\n(Reply with narration prose only, no JSON.)" }],
-        { task: "gm-narrate", system: GM_SYSTEM }
-      );
+      const prose = await callClaude([{ role: "user", content }], { task: "gm-narrate", system: PROSE_SYSTEM });
       return { ok: true, degraded: true, turn: fallbackTurn(prose) };
     } catch (err2) {
       return { ok: false, error: err2.message };

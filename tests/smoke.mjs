@@ -437,5 +437,15 @@ const capped = { level: 1, abilities: [], customAbilities: { a: {}, b: {} } };
 check("learned-ability cap enforced", applyNewAbility(capped, sanitizeNewAbility({ name: "Third", description: "x" }), rules).why.includes("cap"));
 check("garbage ability rejected", sanitizeNewAbility({ name: "NoDesc" }) === null);
 
+// --- v1.0.1: JSON salvage + earned xp table ---
+const { salvageNarration } = await import("../engine/gm.js");
+const { parseLooseJSON } = await import("../engine/claude.js");
+const truncated = '```json\n{"narration": "The dock creaks under your boots.\\nMara turns, says \\"you came back\\" — and the light shifts", "sceneSummary": "retur';
+const sal = salvageNarration(truncated);
+check("narration salvaged from truncated JSON", sal && sal.includes("dock creaks") && sal.includes('"you came back"') && !sal.includes("sceneSummary"));
+check("no salvage from garbage returns null", salvageNarration("total nonsense") === null);
+check("parseLooseJSON strips fences", parseLooseJSON('```json\n{"a": 1}\n```').a === 1);
+check("xp table pays every degree", ["crit_success", "success", "partial", "failure", "crit_failure", "completed", "abandoned"].every(k => (rules.xp[k] ?? 0) > 0));
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

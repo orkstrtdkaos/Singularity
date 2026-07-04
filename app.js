@@ -18,10 +18,10 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 
-const APP_VERSION = "0.8.4";
+const APP_VERSION = "0.9.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -172,6 +172,7 @@ function migrate(c) {
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
   ensureCodex(c);
+  retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   return c;
 }
 
@@ -333,6 +334,7 @@ function renderCreate() {
     };
     ensureSubAttributes(character);
     ensureCodex(character);
+    character.grantsVersion = 1; // born after banked growth — no retro grant owed
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
@@ -476,18 +478,19 @@ async function onChoice(choice) {
   const location = hereNow();
   const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
 
-  // ability gating + energy (combos draw from every ability involved)
+  // ability gating + energy (combos draw from every ability involved; practiced
+  // power costs less — effectiveEnergyCost scales with level and rank)
   let abilityLevel = 0, energyCost = choice.energyCost;
   if (choice.abilityId) {
     const owned = character.abilities.find(a => a.abilityId === choice.abilityId);
     if (!owned) { choice.abilityId = null; }
     else {
       abilityLevel = owned.level;
-      energyCost = energyCost ?? CONTENT.abilities[choice.abilityId]?.energyCost;
+      energyCost = energyCost ?? effectiveEnergyCost(CONTENT.abilities[choice.abilityId], character, CONTENT.rules);
     }
   }
   if ((choice.comboAbilities || []).length > 1) {
-    energyCost = choice.comboAbilities.reduce((sum, id) => sum + (CONTENT.abilities[id]?.energyCost ?? 5), 0);
+    energyCost = choice.comboAbilities.reduce((sum, id) => sum + effectiveEnergyCost(CONTENT.abilities[id], character, CONTENT.rules), 0);
     abilityLevel = Math.min(...choice.comboAbilities.map(id => character.abilities.find(a => a.abilityId === id)?.level ?? 1));
   }
   if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
@@ -498,6 +501,14 @@ async function onChoice(choice) {
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
     novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || ""
   };
+  // trivial actions — no real chance of failure, no cost: no dice, no energy
+  if (choice.trivial && !choice.abilityId && !(choice.comboAbilities || []).length && !action.novel) {
+    const resolution = { action, degree: "auto", roll: null, chance: null };
+    renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
+    const result = await runGM({ resolution, playerInput: null });
+    if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+    return;
+  }
   // a technique already discovered isn't novel anymore — it's earned skill
   const abilityIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
   const disc = action.novel ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
@@ -547,7 +558,8 @@ async function onFreeform(text) {
     abilityId: intent.abilityId, energyCost: null,
     novel: !!intent.novelUse || (intent.comboAbilities || []).length > 1,
     comboAbilities: (intent.comboAbilities || []).filter(id => character.abilities.some(a => a.abilityId === id)),
-    noveltyHint: intent.noveltyHint || ""
+    noveltyHint: intent.noveltyHint || "",
+    trivial: !!intent.trivial
   });
 }
 
@@ -682,6 +694,43 @@ function renderMap(selectedId = null) {
   const travelBtn = document.getElementById("map-travel");
   if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+// ---------- quest detail ----------
+
+function renderQuestDetail(questId, guidance = null, loading = false) {
+  const q = (character.quests || []).find(x => x.id === questId);
+  if (!q) { renderPlay(character.activeScene?.lastTurn || null, {}); return; }
+  chrome(`<div class="screen" style="max-width:680px">
+    <div class="codex-kind">${esc(q.status)}</div>
+    <h2 style="margin-top:4px">${esc(q.title)}</h2>
+    <p class="map-details-desc">${esc(q.summary)}</p>
+    <div class="hint">${q.giver ? `From ${esc(q.giver)} · ` : ""}started ${q.startedAt ? "day " + esc(String(q.startedAtDay ?? "").trim() || new Date(q.startedAt).toLocaleDateString()) : "a while back"}</div>
+    ${q.progress?.length ? `<div style="margin-top:12px"><h3 class="codex-title" style="font-size:15px">The story so far</h3>${q.progress.map(p => `<div class="codex-fact">${esc(p)}</div>`).join("")}</div>` : ""}
+    <div style="margin-top:14px">
+      ${guidance ? `<div class="gm-aside">${guidance.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>` : ""}
+      ${loading ? `<div class="thinking">The GM considers your situation…</div>` : `<button class="btn secondary" id="quest-guidance">Ask the GM for guidance</button>`}
+      <div class="hint" style="margin-top:6px">Spoiler-safe: possible next steps, who might help, how hard it looks — never the hidden truth.</div>
+    </div>
+    <button class="btn secondary" id="quest-back" style="margin-top:14px">Back</button>
+  </div>`);
+  document.getElementById("quest-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  const gBtn = document.getElementById("quest-guidance");
+  if (gBtn) gBtn.onclick = async () => {
+    renderQuestDetail(questId, null, true);
+    const location = hereNow();
+    const time = readClock(character.clock);
+    const result = await gmAsk({
+      character, location, rules: CONTENT.rules,
+      lore: loreForLocation(location, CONTENT.lore),
+      region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
+      recentTurns: sceneTurns.slice(-4), timeLabel: time.label,
+      questsDetail: questsForGM(character),
+      npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: [] }),
+      codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: [q.title] })
+    }, `Give me practical guidance on my quest "${q.title}": what are 2-3 sensible next steps from where I am, who might help or know more, and roughly how difficult does this look? Spoiler-safe only.`);
+    renderQuestDetail(questId, result.ok ? result.text : "The GM stumbled: " + result.error, false);
+  };
 }
 
 // ---------- codex: the character's knowledge graph ----------
@@ -850,7 +899,7 @@ async function finishGambit(run) {
   let cost = 0;
   for (const r of run.receipts) {
     const a = g.actions[r.index];
-    cost += a.abilityId ? (CONTENT.abilities[a.abilityId]?.energyCost ?? per) : per;
+    cost += a.abilityId ? effectiveEnergyCost(CONTENT.abilities[a.abilityId], character, CONTENT.rules) : per;
   }
   character.energy = Math.max(0, character.energy - cost);
   // the human planned: that's who they are becoming
@@ -919,7 +968,7 @@ function renderPlay(turn, opts = {}) {
         return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
           <span class="name">${esc(ab?.name || a.abilityId)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}</em>` : ""}
           ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend a skill point">▲</button>` : ""}
-          <span class="cost">(${ab?.energyCost ?? "?"} energy)</span></div>`;
+          <span class="cost">(${ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : "?"} energy${ab && effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span></div>`;
       }).join("") || "<div class='insight'>none yet</div>"}
       ${character.skillPoints > 0 ? Object.values(CONTENT.abilities).filter(ab =>
           !character.abilities.some(a => a.abilityId === ab.id) &&
@@ -929,15 +978,16 @@ function renderPlay(turn, opts = {}) {
       ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
     </section>
     <section><h3>People you know</h3>
-      ${Object.values(character.npcRegistry || {}).sort((a, b) => Math.abs(b.relationship) - Math.abs(a.relationship)).slice(0, 5).map(n =>
-        `<div class="known-npc" title="${esc((n.history || []).slice(-2).join(" | ") || n.description || "")}"><span class="npc-name">${esc(n.name)}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`
+      ${Object.values(character.npcRegistry || {}).map(n => ({ n, here: (n.lastSeen?.locationId === character.currentLocationId || n.firstMet?.locationId === character.currentLocationId) }))
+        .sort((a, b) => (b.here - a.here) || (Math.abs(b.n.relationship) - Math.abs(a.n.relationship))).slice(0, 7).map(({ n, here }) =>
+        `<div class="known-npc" title="${esc((n.history || []).slice(-2).join(" | ") || n.description || "")}"><span class="npc-name">${here ? "📍 " : ""}${esc(n.name)}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`
       ).join("") || "<div class='insight'>no one yet — introduce yourself</div>"}
     </section>
     <section><h3>Quests</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `
-        <div class="quest"><span class="quest-title">${esc(q.title)}</span>
+        <button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>
           <div class="quest-note">${esc(q.progress?.length ? q.progress[q.progress.length - 1] : q.summary)}</div>
-        </div>`).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
+        </button>`).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
       ${(character.quests || []).some(q => q.status !== "active") ? `<div class="quest-done">${(character.quests || []).filter(q => q.status === "completed").length} completed · ${(character.quests || []).filter(q => q.status === "failed").length} failed</div>` : ""}
     </section>
     <section><h3>Companions</h3>
@@ -1014,11 +1064,16 @@ function renderPlay(turn, opts = {}) {
         action.abilityLevel = character.abilities.find(a => a.abilityId === c.abilityId).level;
         abilityHtml = `<span class="ability-tag"> ✦ ${esc(CONTENT.abilities[c.abilityId]?.name || c.abilityId)}</span>`;
       }
-      const equip = equipmentBonus(character, action.tags, rules);
-      const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules);
-      const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
-      const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
-      if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
+      if (c.trivial && !c.abilityId) {
+        senseHtml = `<span class="sense trivial-tag">no roll — just do it</span>`;
+      } else {
+        action.subAttribute = SUBS.includes(c.subAttribute) ? c.subAttribute : null;
+        const equip = equipmentBonus(character, action.tags, rules);
+        const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules);
+        const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
+        const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
+        if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
+      }
       return `<button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>`;
     }).join("")}</div>`;
   }
@@ -1074,6 +1129,7 @@ function renderPlay(turn, opts = {}) {
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
+  for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");

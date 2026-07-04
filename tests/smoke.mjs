@@ -401,5 +401,21 @@ check("recovery table shipped", rules.recovery && rules.recovery.meal === 10 && 
 const medGain = (rules.recovery.meditationBase ?? 10) + (rules.recovery.meditationPerAttunement ?? 2) * 5;
 check("meditation scales with attunement", medGain === 20);
 
+// --- v0.9.0: retro grants, energy efficiency, trivial actions ---
+const { retroLevelGrants, effectiveEnergyCost } = await import("../engine/progression.js");
+const veteran = { level: 3, pendingSubPoints: 0, skillPoints: 0 };
+check("retro grant pays owed levels once", retroLevelGrants(veteran, rules) && veteran.pendingSubPoints === 2 && veteran.skillPoints === 2 && !retroLevelGrants(veteran, rules));
+const freshChar = { level: 1, grantsVersion: 1, pendingSubPoints: 2, skillPoints: 0 };
+retroLevelGrants(freshChar, rules);
+check("flagged characters get nothing extra", freshChar.pendingSubPoints === 2 && freshChar.skillPoints === 0);
+const sonicDef = abilityCatalog.sonic_resonance; // base 8
+check("level 1 rank 1 pays full cost", effectiveEnergyCost(sonicDef, { level: 1, abilities: [{ abilityId: "sonic_resonance", level: 1 }] }, rules) === 8);
+check("level 5 rank 3 pays discounted cost", effectiveEnergyCost(sonicDef, { level: 5, abilities: [{ abilityId: "sonic_resonance", level: 3 }] }, rules) === 4);
+check("discount floors at half base", effectiveEnergyCost(sonicDef, { level: 20, abilities: [{ abilityId: "sonic_resonance", level: 3 }] }, rules) === 4);
+const trivialIntent = sanitizeIntent({ label: "chat with the miller", attribute: "social", trivial: true, feasible: true }, { abilities: [] });
+check("trivial survives sanitization", trivialIntent.trivial === true);
+const trivialAbility = sanitizeIntent({ label: "x", abilityId: "prism_sight", trivial: true }, { abilities: [{ abilityId: "prism_sight", level: 1 }] });
+check("ability use is never trivial", trivialAbility.trivial === false);
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

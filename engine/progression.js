@@ -66,6 +66,31 @@ export function applyLevelUps(character, rules) {
   return msgs;
 }
 
+/** One-time retro grant for characters who leveled before banked growth existed
+ *  (v0.7.0). Grants (level-1) sub and skill points, once, flagged. */
+export function retroLevelGrants(character, rules) {
+  if (character.grantsVersion >= 1) return false;
+  character.grantsVersion = 1;
+  const owed = Math.max(0, (character.level || 1) - 1);
+  if (owed > 0) {
+    character.pendingSubPoints = (character.pendingSubPoints || 0) + owed * (rules.leveling?.subPointPerLevel ?? 1);
+    character.skillPoints = (character.skillPoints || 0) + owed * (rules.leveling?.skillPointPerLevel ?? 1);
+  }
+  return owed > 0;
+}
+
+/** Practiced power costs less: -1 energy per two character levels and -1 per
+ *  ability rank above 1, floored at half the base cost (data-driven). */
+export function effectiveEnergyCost(abilityDef, character, rules) {
+  const base = abilityDef?.energyCost ?? rules.energy?.defaultActionCost ?? 5;
+  const lv = rules.leveling || {};
+  const owned = (character.abilities || []).find(a => a.abilityId === abilityDef?.id);
+  const levelDiscount = Math.floor(((character.level || 1) - 1) / 2) * (lv.energyEfficiencyPerTwoLevels ?? 1);
+  const rankDiscount = Math.max(0, (owned?.level ?? 1) - 1) * (lv.rankEnergyDiscount ?? 1);
+  const floor = Math.max(1, Math.ceil(base * (lv.minEnergyCostFraction ?? 0.5)));
+  return Math.max(floor, base - levelDiscount - rankDiscount);
+}
+
 export function spendSubPoint(character, sub, rules) {
   const cap = rules.leveling?.subAttributeCap ?? 6;
   if (!SUBS.includes(sub) || (character.pendingSubPoints || 0) < 1) return false;

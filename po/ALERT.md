@@ -4,46 +4,56 @@
 
 ---
 
-## Task SNG-001 — v1.1 Party Play, Phase 1: Shared Scenes
+## Task SNG-002 — Encounters Engine (duels, challenges, puzzles)
 
-**Task ID:** SNG-001
-**Opened:** 2026-07-04 (Aevi, PO)
+**Task ID:** SNG-002
+**Opened:** 2026-07-04 (Aevi, PO). Direction ratified by Erik 2026-07-04. Sequenced ahead of SNG-001 (party play) by Erik's call — scenes get teeth before the family shares them.
 
-**Goal (one session, one outcome):** Two characters (different browsers/devices, GitHub sync on) can occupy the same scene: both see the same scene anchor and beat history, turns resolve in order, and each player's GM turn includes the other party member's presence and actions.
+**Goal (one session, one outcome):** A location can declare an encounter; entering it starts a typed, multi-round/multi-stage structure where each round resolves through the existing d100 engine and the GM narrates per-round receipts. One duel, one challenge, and one puzzle authored and playable in the Valley.
 
 **Scope — in:**
-- `world/scenes/{sceneId}.json` — shared scene file: scene anchor, party roster (characterId, name, joined-at), ordered beat log, turn pointer. Written via the same owned-file + SHA-retry discipline as `sync.js` ledger appends; polling ~20s while a shared scene is active.
-- `engine/party.js` (new) — join/leave scene, poll loop, turn-order gate (client acts only on its turn; UI shows "waiting for {name}"), merge of remote beats into local chronicle.
-- GM context — party block: other members' names, bios (short form), last actions, so narration weaves everyone (extends existing scene-anchor plumbing; no GM-contract rule changes in this phase).
-- UI — minimal: party sidebar entry, join-scene affordance from map/location when a shared scene exists at the current location, turn indicator.
-- Smoke tests for every new write path (scene create/join/append/leave; turn-order gate; poll-merge idempotency).
+- `engine/encounters.js` (new) — generic encounter state machine. Three types:
+  - **duel/battle:** opponent stat block (`health`, `threat` 0–100, `spectrum`, `tacticTags[]`, `yieldAt`, `fleeDifficulty`). Round loop: player declares action → normal `successChance` roll, opposed by opponent threat as difficulty; margins map to opponent-health/player-health deltas (data-driven table in resolution.json → `encounters.duel`); end states: opponent yields/falls, player yields/flees/falls (falls = incapacitated, never auto-death — GM narrates consequence).
+  - **challenge:** ordered stages (each a typed action: attribute/skill/axes/difficulty); partial failure costs (health/energy/time) from the stage record, not full stop; complete/abandon end states.
+  - **puzzle:** attempts cost energy/time; `hintTiers[]` revealed through the existing sense filter (attunement gates how much you're told); `codexUnlocks[]` — knowing a codex topic can open a solution path; solve/walk-away end states.
+- Content schema: `content/packs/*/encounters/*.json`, `schemaVersion: 1`; locations gain optional `encounterSeeds[]` (like questSeeds). Engine loads whatever manifests declare.
+- Rules numbers: new `encounters` block in `content/packs/core/rules/resolution.json` (duel margin table, challenge failure-cost defaults, puzzle attempt costs). All tuning lives here.
+- GM integration: encounter receipt block in the turn context (round #, both sides' state, roll receipt); GM narrates receipts and proposes choices — **never** advances encounter state itself; `encounterOps` typed + engine-clamped like all other ops. Draft contract rule text goes in the results file for **Erik's ratification before ship** (load-bearing rule).
+- Companions assist inside rounds (existing companionBonus path). Abilities/items usable as round actions. Novel-use and discovery work inside encounters unchanged.
+- First content (Aevi-authored post-build if session runs long — flag in results): one duel (Disputed Zone raider), one challenge (rockslide crossing), one puzzle (Precursor mechanism, water-crisis adjacent — truth field GM-eyes-only).
+- Smoke tests: every state transition (start/round/stage/attempt/end for all three types), clamp paths, margin table edges. State new test count in results.
 
-**Scope — out (later phases or Erik-ratification territory):**
-- World-level time mode (one world, one clock) — Phase 2.
-- Codex/knowledge trading — Phase 3.
-- Any change to GM-contract load-bearing rules, resolution math, or design laws §2 — needs Erik.
-- Conflict resolution beyond turn-order gating (no simultaneous-action reconciliation this phase).
-- Same-scene combat mechanics beyond existing resolution (no initiative system this phase).
+**Scope — out:**
+- Party-play interaction with encounters (SNG-001 lands after; design encounter state to serialize cleanly so shared scenes can carry it, but build no sync).
+- Initiative systems, multi-opponent battles (v-next of encounters).
+- Any change to `resolve.js` math — encounters CONSUME resolution, never modify it.
+- New abilities (SNG-003), inventory/character screens (SNG-007).
 
 **Guardrails:**
-- Design law: a client writes only files it exclusively owns — the shared scene file is the deliberate exception; it must use SHA-conflict retry with re-fetch-and-merge, never blind overwrite. Document the merge rule in the file header comment.
-- Graceful degradation: sync off or poll failure → play continues solo in the same location; shared scene features simply absent. No AI failure or network failure may block play.
-- Additive schema only: new `party.schema.json` (or scene schema) gets `schemaVersion: 1`; character records gain optional fields with defaults.
-- No engine module may import content specifics.
+- Design law 1 absolute: model never rolls, never edits encounter state freeform. All GM encounter influence flows through typed, clamped ops.
+- Graceful degradation: GM parse failure mid-encounter → engine state holds, plain narration fallback, encounter continues; no failure blocks play or strands the character.
+- Content-not-code: no opponent, stage, or puzzle specifics in engine files.
+- Additive schemas only. Incapacitation, never engine-imposed death.
 - This repo never touches the ErikIAm pipeline.
 
-**Files expected to change:** `engine/party.js` (new), `engine/sync.js` (scene read/write helpers), `engine/gm.js` (party context block), `engine/state.js` (active-scene reference on character), `app.js` + `index.html` + `style.css` (UI), `schemas/` (new scene/party schema), `tests/smoke.mjs` (new tests), `SYSTEM_SPEC.md` (§3 module row, §5 or §6 party-play subsection, §9 roadmap tick), `README.md` (roadmap line).
+**Files expected to change:** `engine/encounters.js` (new), `engine/gm.js` (receipt block + encounterOps parsing), `engine/state.js` (active-encounter on character), `app.js` + `style.css` (encounter UI: round header, both-sides status, action bar), `content/packs/core/rules/resolution.json` (encounters block), `content/packs/valley/encounters/` (3 seed encounters) + valley `manifest.json` + touched location files (encounterSeeds), `schemas/` (encounter schema), `tests/smoke.mjs`, `SYSTEM_SPEC.md` (§3, §6, §7, §9), `README.md`.
 
 **Verification criteria (per-change, specific):**
-1. `node tests/smoke.mjs` — all existing tests pass plus new party-path tests (state the new count in results).
-2. Two-browser live check: browser A creates shared scene at a location; browser B joins from same location; A acts → B sees A's beat within one poll cycle; B's GM narration references A by name. (Erik browser-leg or documented two-profile local check.)
-3. Turn gate: B attempting to act during A's turn is blocked client-side with visible "waiting" state.
-4. Degradation: with sync disabled, the location behaves exactly as v1.0 (no errors, no dangling UI).
-5. SHA-conflict path exercised in a test (two writers, one stale SHA → retry succeeds).
+1. `node tests/smoke.mjs` — all prior tests pass + new encounter tests (state count).
+2. Live: start the raider duel → at least 3 rounds with visible per-round receipts (chance, roll, margin, both health bars moving) → reach two different end states across runs (win, flee).
+3. Live: rockslide challenge — fail one stage, verify partial cost applied and progression continues.
+4. Live: Precursor puzzle — verify hint tier shown matches character attunement tier; verify a codex-unlocked path appears only when the topic is known.
+5. Degradation: force a GM parse failure mid-duel (malformed reply in test harness) → engine state intact, plain narration, next round playable.
+6. GM contract rule draft present in results file, awaiting Erik ratification — ship blocks on it.
 
-**Rollback note:** All changes additive. Rollback = revert commits; shared scene files in `world/scenes/` are inert without `engine/party.js` and can remain.
+**Rollback note:** Additive. Revert commits; encounter content files inert without engine module.
 
-**Spec updates required on ship:** §3 (module inventory + party.js row), §6 (new "Party play" subsection with the polling/turn-order/merge rules and their numbers), §9 (move shared-scenes from roadmap to shipped; leave world-clock + codex-trading listed), §8 gotchas if polling adds any.
+**Spec updates required on ship:** §3 (encounters.js row), §6 (Encounters subsection with margin table + all numbers), §7 (ratified rule text), §9 (mark shipped; note party-play interaction deferred to SNG-001).
+
+---
+
+## Queue note
+SNG-001 (party play, previously active) returns to queue — now first after SNG-002. Full backlog + ordering: `po/BACKLOG.md`.
 
 ---
 

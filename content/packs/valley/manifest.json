@@ -21,8 +21,21 @@
       "npcs/archive_guardian.json",
       "npcs/mountain_scout.json"
     ],
-    "events": ["events/water_crisis.json"],
-    "companions": ["companions/aevi.json"],
-    "lore": ["lore/valley_primer.md", "lore/power_systems.md", "lore/precursors.md"]
+    "events": [
+      "events/water_crisis.json"
+    ],
+    "companions": [
+      "companions/aevi.json"
+    ],
+    "lore": [
+      "lore/valley_primer.md",
+      "lore/power_systems.md",
+      "lore/precursors.md"
+    ],
+    "encounters": [
+      "encounters/zone_raider_duel.json",
+      "encounters/rockslide_crossing.json",
+      "encounters/precursor_mechanism.json"
+    ]
   }
 }

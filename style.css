@@ -49,6 +49,15 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability { margin-bottom: 6px; }
 .ability .name { color: var(--accent2); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
+/* ---------- encounters ---------- */
+.encounter-bar { border: 1px solid var(--danger); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; background: linear-gradient(to right, rgba(192,91,77,0.10), transparent); font-family: var(--font-ui); font-size: 13px; }
+.enc-name { color: var(--danger); font-weight: 600; }
+.enc-round { color: var(--ink-dim); font-size: 11px; margin-left: 8px; }
+.enc-status { margin-top: 3px; color: var(--ink); letter-spacing: 1px; }
+.enc-hints { margin-top: 6px; letter-spacing: 0; }
+.enc-hints div { font-size: 12px; color: var(--accent2); font-style: italic; margin-bottom: 2px; }
+.enc-choice { border-color: var(--danger); }
+.enc-choice:hover:not(:disabled) { border-color: var(--danger); background: rgba(192,91,77,0.12); }
 /* ---------- world map ---------- */
 .world-map { width: 100%; background: radial-gradient(ellipse at 50% 40%, #1e2129, var(--bg)); border: 1px solid var(--border); border-radius: 10px; }
 .map-title { fill: var(--accent); font-family: var(--font); font-size: 18px; letter-spacing: 3px; }

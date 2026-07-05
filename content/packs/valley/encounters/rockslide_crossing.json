@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "rockslide_crossing",
+  "type": "challenge",
+  "name": "The Rockslide Crossing",
+  "locationId": "echo_river_crossing",
+  "setup": "A slab of the granite shoulder has let go above the bridge path — a live rockslide field between you and the far bank, still ticking and settling.",
+  "stages": [
+    {
+      "name": "Read the fall line",
+      "attribute": "mental",
+      "subAttribute": "insight",
+      "axes": {
+        "chaos_order": 0.3
+      },
+      "difficulty": 0,
+      "failureCost": {
+        "energy": 4,
+        "hours": 1
+      }
+    },
+    {
+      "name": "Cross the loose field",
+      "attribute": "physical",
+      "subAttribute": "agility",
+      "axes": {
+        "body_mind": -0.3
+      },
+      "difficulty": 15,
+      "failureCost": {
+        "health": 4,
+        "energy": 5
+      }
+    },
+    {
+      "name": "Clear the choke point",
+      "attribute": "physical",
+      "subAttribute": "strength",
+      "axes": {
+        "destruction_creation": -0.2
+      },
+      "difficulty": 15,
+      "failureCost": {
+        "health": 3,
+        "energy": 6,
+        "hours": 1
+      }
+    }
+  ],
+  "stakes": "Each slip costs blood, breath, or daylight — but the slide can be beaten a stage at a time."
+}

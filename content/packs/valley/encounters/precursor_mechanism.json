@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "precursor_mechanism",
+  "type": "puzzle",
+  "name": "The Humming Seal",
+  "locationId": "archive_hollow",
+  "setup": "A sealed stack door in the Archive's second gallery — no lock, no handle, only a hairline seam and a hum just below hearing. Pre-Transition work, or older.",
+  "difficulty": 30,
+  "attribute": "mental",
+  "subAttribute": "reason",
+  "axes": {
+    "concrete_abstract": 0.4,
+    "mechanical_spiritual": -0.3
+  },
+  "hintTiers": [
+    "The hum is not constant — it drops a half-tone whenever someone speaks nearby. It is listening.",
+    "The seam brightens faintly under any light that has passed through crystal. The door reads spectra, not keys.",
+    "The hum's rhythm matches the Water Keeper's old channel-gate cadence — a maintenance pattern. This is infrastructure, and infrastructure answers to its own language."
+  ],
+  "codexUnlocks": [
+    {
+      "topic": "the-gray-water",
+      "note": "The contamination pattern you learned from Mara matches the seal's cadence — you could hum the sequence back.",
+      "difficultyBonus": 15
+    },
+    {
+      "topic": "valley-flora-post-transition",
+      "note": "The iridescent creeper's leaf-spacing repeats in the seam's etching — a planting diagram, and you know the order.",
+      "difficultyBonus": 10
+    }
+  ],
+  "truth": "GM-EYES-ONLY: The stack behind this seal holds pre-Transition watershed maintenance records — including the reclamation site's work orders. Solving it is a major water-crisis lead. The door was built to open for maintenance workers; it still thinks it has some.",
+  "stakes": "Attempts cost focus and hours. The Archive Guardian watches every try with great interest."
+}

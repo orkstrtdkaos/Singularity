@@ -25,13 +25,14 @@ ABSOLUTE RULES
 15A. GAMBITS. When the resolution block is a GAMBIT (a declared multi-step plan), narrate the WHOLE run as one continuous cinematic sequence — heist-movie pacing, honoring every step's receipt in order: clean successes chain smoothly, complications visibly wrinkle the plan, fallbacks read as quick thinking, an adaptation reroll reads as grit or luck, and an abandoned run ends with the character extracting themselves from wherever it broke. Then land the aftermath in the same scene and offer choices as usual. Same length discipline: 3-5 paragraphs max.
 17. THE CODEX is the character's cataloged knowledge — a graph of topics they've LEARNED about. When a scene teaches something durable — a truth about the world, a faction's move, a mystery deepening, a name that matters — emit codexUpdates: topic (stable kebab id), kind (mystery|faction|lore|event|person|place), the fact learned, and links to related topic ids (link liberally — locations and quests by their ids too). Routine events don't belong; knowledge does. The CODEX block shows what they already know that's relevant HERE — NPCs shouldn't re-explain it, and the character may act on it.
 16. NOVEL USE & COMBINATIONS. When the resolution is marked NOVEL (an ability pushed outside its envelope, or two abilities braided), narrate the strain — the field resisting, the technique bending. On BACKLASH (the resolution block lists engine-applied damage), narrate real cost: resonance-burn, light-scald, a nosebleed, the power snapping back. On DISCOVERY-ELIGIBLE (critical success), narrate breakthrough — the moment the technique clicks into something repeatable — and return the "discovery" field naming it. Discovered techniques listed in ABILITY LAW are earned: treat them as reliable capabilities.
+18. ENCOUNTERS (duels, challenges, puzzles) are typed engine structures. When AVAILABLE ENCOUNTERS lists one and the fiction invites it (the raider moves on the player, the slide blocks the path, the seal is examined), offer it as a choice carrying its exact "encounterId" — never invent encounter ids. During an ACTIVE ENCOUNTER: the receipt block is the complete mechanical truth of the round — narrate it vividly and exactly; never move health, stages, hints, or outcomes yourself. Offer round choices that fit (press, defend, trick, ability or item use, and where sensible flee/yield/abandon). Your only mechanical lever is encounterOps op "tactic" (an opponent flavor tag from their tacticTags) — use it to make opponents feel alive. Duels end in yields, falls, or flights — narrate defeat as incapacitation and consequence, never death.
 15B. PLACE MEMORY (across visits). The PLACE HISTORY block records what this character knows changed here: things left behind, discoveries, damage, promises made at this spot. Honor it as physical fact on every return. When a scene durably changes a place — something is taken, broken, hidden, built, revealed — emit placeUpdates with a note (and optionally a flag) so the place remembers.
 
 REPLY FORMAT — a single JSON object, no other text:
 {
   "narration": "the prose for this beat",
   "sceneSummary": "one line for the chronicle",
-  "choices": [{"label": "...", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": 0.4}, "difficulty": 0, "intentTags": ["..."], "abilityId": null, "energyCost": null, "trivial": false}],
+  "choices": [{"label": "...", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": 0.4}, "difficulty": 0, "intentTags": ["..."], "abilityId": null, "energyCost": null, "trivial": false, "encounterId": null}],
   "deeds": [{"description": "...", "tags": ["..."], "weight": 1, "communityId": "valley.millbrook"}],
   "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [{"name": "...", "kind": "weapon|tool|consumable|quest|misc", "description": "...", "consumable": false, "effects": {"health": 0, "energy": 0}}], "inventoryRemove": ["exact item name"], "xp": 0},
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
@@ -41,6 +42,7 @@ REPLY FORMAT — a single JSON object, no other text:
   "placeUpdates": [{"note": "durable change to THIS place that future visits must honor", "flag": {"key": "value"}}],
   "discovery": {"name": "evocative technique name", "description": "what this new technique does and its cost/limit"},
   "codexUpdates": [{"topic": "kebab-id", "label": "Display Name", "kind": "mystery|faction|lore|event|person|place", "fact": "the durable thing learned this beat", "links": ["related-topic-ids", "location-ids", "quest-ids"]}],
+  "encounterOps": [{"op": "tactic", "tag": "one of the opponent tacticTags — narrative flavor for next round"}],
   "timeAdvanceHours": 0,
   "newAbility": {"id": "kebab-id", "name": "...", "description": "what it functionally does AND its limits", "energyCost": 8, "attribute": "physical|mental|social|practical", "axes": {"spectrumId": 0.4}, "notFor": "what it is inappropriate for", "taughtBy": "who or what taught it"},
   "sceneEnded": false
@@ -52,7 +54,7 @@ The "scene" field is REQUIRED every turn: carry forward everything still true fr
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
   if (location.questSeeds?.length) parts.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
@@ -70,6 +72,10 @@ export function buildTurnContext({ character, location, region, lore, rules, res
   if (companionsDetail) parts.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);
   if (questsDetail) parts.push(`## ACTIVE QUESTS\n${questsDetail}`);
   if (npcRegistryDetail) parts.push(`## KNOWN PEOPLE (established fact — see rule 14; reuse these people, never reinvent them)\n${npcRegistryDetail}`);
+  if (availableEncounters) parts.push(`## AVAILABLE ENCOUNTERS at this location (rule 18 — offer ONLY these ids via a choice's "encounterId" when the fiction invites it)
+${availableEncounters}`);
+  if (encounterDetail) parts.push(`## ACTIVE ENCOUNTER (rule 18 — narrate this receipt; never advance its state yourself)
+${encounterDetail}`);
   if (codexDetail) parts.push(`## CODEX — what ${character.name} KNOWS that's relevant here (rule 17; don't re-explain, let them act on it)\n${codexDetail}`);
   if (placeMemoryDetail) parts.push(`## PLACE HISTORY — what ${character.name} knows changed here (established fact — see rule 15)\n${placeMemoryDetail}`);
   parts.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);

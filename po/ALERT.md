@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** active
+**Status:** complete_pending_review — results: `po/results/20260704_SNG-002.md` (v1.1.0). Rule-18 ratification requested from Erik.
 
 ---
 

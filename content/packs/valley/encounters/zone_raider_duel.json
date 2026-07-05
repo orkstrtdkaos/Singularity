@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "zone_raider_duel",
+  "type": "duel",
+  "name": "The Hook-Pole Raider",
+  "locationId": "disputed_zone_fringe",
+  "setup": "A scavenger-raider with a hooked salvage pole has decided your pack is worth more than your goodwill. The interference shimmer makes distance hard to judge — this will be close work.",
+  "opponent": {
+    "name": "Vess, hook-pole raider",
+    "health": 5,
+    "threat": 45,
+    "yieldAt": 1,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "chaos_order": -0.4,
+      "violence_peace": -0.3
+    },
+    "tacticTags": [
+      "hook-and-pull",
+      "circle-left",
+      "feint-high",
+      "use-the-shimmer"
+    ],
+    "notes": "Fights to rob, not to kill. Yields when badly hurt; accepts a yield gracefully — the Zone has its own code."
+  },
+  "stakes": "Loss means waking bruised with your pack lighter. Victory or a clean flee keeps everything — and Vess remembers either way."
+}

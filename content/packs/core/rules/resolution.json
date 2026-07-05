@@ -228,5 +228,54 @@
     "completed": 12,
     "completed_rough": 10,
     "abandoned": 3
+  },
+  "encounters": {
+    "duel": {
+      "margins": {
+        "crit_success": {
+          "opponent": -3,
+          "player": 0
+        },
+        "success": {
+          "opponent": -2,
+          "player": 0
+        },
+        "partial": {
+          "opponent": -1,
+          "player": -1
+        },
+        "failure": {
+          "opponent": 0,
+          "player": -2
+        },
+        "crit_failure": {
+          "opponent": 0,
+          "player": -3
+        }
+      },
+      "playerHealthPerHit": 4,
+      "threatToDifficulty": 0.3,
+      "energyPerRound": 3,
+      "fleeFailFreeHit": 1,
+      "winXp": 15,
+      "fleeXp": 5,
+      "yieldXp": 3
+    },
+    "challenge": {
+      "defaultFailureCost": {
+        "health": 3,
+        "energy": 5,
+        "hours": 1
+      },
+      "critFailureMultiplier": 2,
+      "completeXp": 12,
+      "abandonXp": 3
+    },
+    "puzzle": {
+      "attemptEnergy": 4,
+      "attemptHours": 1,
+      "solveXp": 15,
+      "walkAwayXp": 2
+    }
   }
 }

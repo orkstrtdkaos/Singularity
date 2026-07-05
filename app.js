@@ -3,7 +3,7 @@
 
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
-import { senseAction } from "./engine/sense.js";
+import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
@@ -20,8 +20,9 @@ import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effecti
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
+import { startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.0.1";
+const APP_VERSION = "1.1.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -180,6 +181,38 @@ function migrate(c) {
 /** Ability catalog including GM-granted learned abilities on this character. */
 function fullCatalog() {
   return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
+}
+
+function senseTierFor() {
+  return senseTier({ character, action: {}, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(profile, CONTENT.rules.playerAptitudes) });
+}
+
+/** Active encounter def + state, or null. */
+function activeEnc() {
+  const e = character?.activeEncounter;
+  if (!e) return null;
+  const def = CONTENT.encounters?.[e.defId];
+  return def ? { def, state: e.state } : null;
+}
+
+function listAvailableEncounters() {
+  const loc = CONTENT.locations[character.currentLocationId];
+  return (loc.encounterSeeds || []).map(seed => {
+    const def = CONTENT.encounters?.[seed.encounterId];
+    return def ? `- id "${def.id}" (${def.type}): ${def.name} — ${seed.hint}. Setup: ${def.setup}` : null;
+  }).filter(Boolean).join("\n") || null;
+}
+
+/** End an encounter: outcome XP, clear state, incapacitation floor. */
+function endEncounter(outcome) {
+  const enc = activeEnc();
+  if (!enc) return;
+  const t = CONTENT.rules.encounters?.[enc.def.type] || {};
+  const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
+  character.xp += Math.max(0, xpMap[outcome] ?? 0);
+  character.activeEncounter = null;
+  if (outcome === "incapacitated") { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
+  saveCharacter(character);
 }
 
 /** World-tick choke point: run whenever the character (re)enters play or the
@@ -393,7 +426,9 @@ async function runGM({ resolution, playerInput }) {
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
     abilityLawDetail: abilitiesForGM(character, fullCatalog()),
-    codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
+    codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
+    encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
+    availableEncounters: activeEnc() ? null : listAvailableEncounters()
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -429,6 +464,10 @@ function applyTurn(turn, resolution) {
   })), memCtx);
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
+  if (character.activeEncounter && turn.encounterOps) {
+    const encA = activeEnc();
+    if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def));
+  }
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
   if (resolution?.action?.axes) {
     for (const [ax, v] of Object.entries(resolution.action.axes)) {
@@ -523,6 +562,16 @@ async function onChoice(choice) {
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
     novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || ""
   };
+  // starting an encounter (GM-offered choice carrying a real encounterId)
+  if (choice.encounterId && CONTENT.encounters?.[choice.encounterId] && !character.activeEncounter) {
+    const def = CONTENT.encounters[choice.encounterId];
+    character.activeEncounter = { defId: def.id, state: startEncounter(def) };
+    saveCharacter(character);
+    renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
+    const result = await runGM({ resolution: null, playerInput: `(The encounter "${def.name}" begins: ${def.setup} Narrate the opening and offer round choices.)` });
+    if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+    return;
+  }
   // trivial actions — no real chance of failure, no cost: no dice, no energy
   if (choice.trivial && !choice.abilityId && !(choice.comboAbilities || []).length && !action.novel) {
     const resolution = { action, degree: "auto", roll: null, chance: null };
@@ -535,6 +584,8 @@ async function onChoice(choice) {
   const abilityIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
   const disc = action.novel ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
   if (disc) { action.novel = false; action.discoveryBonus = CONTENT.rules.novel?.discoveryBonus ?? 10; }
+  const encD = activeEnc();
+  if (encD) action.difficulty = (action.difficulty || 0) + encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules);
   const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
@@ -559,6 +610,25 @@ async function onChoice(choice) {
     resolution.meditation = { energy: gain };
   }
 
+  // active encounter: map the receipt onto encounter state (engine-owned)
+  const enc = activeEnc();
+  if (enc) {
+    const opts = { flee: choice.encounterAction === "flee", yield: choice.encounterAction === "yield", abandon: choice.encounterAction === "abandon", walkAway: choice.encounterAction === "walkAway" };
+    let rr = null;
+    if (enc.def.type === "duel") rr = duelRound(enc.state, enc.def, resolution, CONTENT.rules, opts);
+    else if (enc.def.type === "challenge") rr = challengeStage(enc.state, enc.def, resolution, CONTENT.rules, opts);
+    else if (enc.def.type === "puzzle") rr = puzzleAttempt(enc.state, enc.def, resolution, CONTENT.rules, opts);
+    if (rr) {
+      character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas.health || 0)));
+      character.energy = Math.max(0, Math.min(character.maxEnergy, character.energy + (rr.deltas.energy || 0)));
+      if (rr.hours) advanceClock(character.clock, rr.hours);
+      character.activeEncounter = { defId: enc.def.id, state: rr.state };
+      let outcome = rr.ended ? rr.outcome : null;
+      if (!rr.ended && checkIncapacitation(character)) { outcome = "incapacitated"; rr.state.status = "ended"; }
+      resolution.encounterReceipt = encounterReceiptForGM(rr.state, enc.def, resolution, { ...rr, outcome });
+      if (outcome) endEncounter(outcome); else saveCharacter(character);
+    }
+  }
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
   const result = await runGM({ resolution, playerInput: null });
   if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, resolution }, degraded: result.degraded });
@@ -1059,7 +1129,19 @@ function renderPlay(turn, opts = {}) {
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div><div class="transcript">`;
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div>
+    ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
+      let status = "";
+      if (d.type === "duel") status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;
+      if (d.type === "challenge") status = `stage ${Math.min(st.stageIndex + 1, d.stages.length)}/${d.stages.length}: ${esc(d.stages[st.stageIndex]?.name || "complete")}`;
+      if (d.type === "puzzle") {
+        const tier = senseTierFor();
+        const revealed = puzzleHints(d, Math.max(tier, st.hintsRevealed));
+        status = `attempts: ${st.attempts} · understanding: ${revealed.length}/${(d.hintTiers || []).length}` +
+          (revealed.length ? `<div class="enc-hints">${revealed.map(h => `<div>◈ ${esc(h)}</div>`).join("")}</div>` : "");
+      }
+      return `<div class="encounter-bar"><span class="enc-name">⚔ ${esc(d.name)}</span> <span class="enc-round">round ${st.round}</span><div class="enc-status">${status}</div></div>`;
+    })()}<div class="transcript">`;
   if (opts.newsFlash?.length) {
     main += `<div class="news-flash"><div class="news-title">While you were away…</div>${opts.newsFlash.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("")}</div>`;
   }
@@ -1097,7 +1179,18 @@ function renderPlay(turn, opts = {}) {
         if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
       }
       return `<button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>`;
-    }).join("")}</div>`;
+    }).join("")}${(() => { const e = activeEnc(); if (!e) return ""; const d = e.def;
+      const mk = (label, act, extra = "") => `<button class="choice enc-choice" data-encact="${act}"${extra}>${label}</button>`;
+      let btns = "";
+      if (d.type === "duel") btns = mk("⚑ Try to flee", "flee") + mk("Yield", "yield");
+      if (d.type === "challenge") btns = mk(`Attempt: ${esc(d.stages[e.state.stageIndex]?.name || "")}`, "stage") + mk("Abandon the attempt", "abandon");
+      if (d.type === "puzzle") {
+        btns = mk("Work the mechanism", "attempt");
+        for (const [ui, u] of puzzleUnlocks(d, character).entries()) btns += mk(`◈ ${esc(u.note.slice(0, 80))}`, "unlock", ` data-unlock="${ui}"`);
+        btns += mk("Walk away", "walkAway");
+      }
+      return btns;
+    })()}</div>`;
   }
   main += `</div>`;
   if (turn || opts.error || opts.gmAside || opts.aside || (!busy && !opts.thinking)) {
@@ -1118,6 +1211,19 @@ function renderPlay(turn, opts = {}) {
     for (const btn of app.querySelectorAll("[data-choice]")) {
       btn.onclick = () => onChoice(turn.choices[parseInt(btn.dataset.choice)]);
     }
+  }
+  for (const btn of app.querySelectorAll("[data-encact]")) {
+    btn.onclick = () => {
+      const e = activeEnc(); if (!e) return;
+      const d = e.def, act = btn.dataset.encact;
+      if (act === "flee") onChoice({ label: "Break away and flee", attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 0, intentTags: ["retreat", "risky"], encounterAction: "flee" });
+      else if (act === "yield") onChoice({ label: "Yield", trivial: false, attribute: "social", subAttribute: "presence", axes: {}, difficulty: 0, intentTags: ["careful"], encounterAction: "yield" });
+      else if (act === "abandon") onChoice({ label: "Abandon the attempt", attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["retreat", "careful"], encounterAction: "abandon" });
+      else if (act === "walkAway") onChoice({ label: "Walk away from the puzzle", attribute: "mental", subAttribute: "reason", axes: {}, difficulty: 0, intentTags: ["careful"], encounterAction: "walkAway" });
+      else if (act === "stage") { const st = d.stages[e.state.stageIndex]; onChoice({ label: `Attempt: ${st.name}`, attribute: st.attribute, subAttribute: st.subAttribute, axes: st.axes || {}, difficulty: 0, intentTags: ["risky"] }); }
+      else if (act === "attempt") onChoice({ label: "Work the mechanism", attribute: d.attribute || "mental", subAttribute: d.subAttribute, axes: d.axes || {}, difficulty: 0, intentTags: ["study", "analyze"] });
+      else if (act === "unlock") { const u = puzzleUnlocks(d, character)[+btn.dataset.unlock]; if (u) onChoice({ label: u.note.slice(0, 80), attribute: d.attribute || "mental", subAttribute: d.subAttribute, axes: d.axes || {}, difficulty: -(u.difficultyBonus || 10), intentTags: ["study", "analyze"] }); }
+    };
   }
   for (const btn of app.querySelectorAll("[data-travel]")) btn.onclick = () => travelTo(btn.dataset.travel);
   for (const btn of app.querySelectorAll("[data-join]")) btn.onclick = async () => {

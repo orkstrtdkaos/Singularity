@@ -5,7 +5,7 @@
 
 - Live: https://orkstrtdkaos.github.io/Singularity/
 - Repo: github.com/orkstrtdkaos/Singularity (GitHub Pages, `main`, root)
-- Current version: v1.0.1 (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
+- Current version: v1.1.0 (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
 
 ---
 
@@ -45,6 +45,7 @@ engine/
   codex.js       knowledge graph (typed linked topics), contextual surfacing
   quests.js      quest ops (start/progress/complete/fail), slugify
   gambit.js      multi-step plans: parse, assess (weak link), execute, reroll, GM formatting
+  encounters.js  typed duels/challenges/puzzles: state machine consuming d100 receipts; margin tables, stage costs, hint tiers, codex unlocks; clamped encounterOps
   companions.js  companion defs, assist bonuses, GM block
   playerprofile.js human tendencies → aptitudes
   worldtime.js   story/real time modes, clock, phases/seasons
@@ -93,6 +94,7 @@ tests/live_gm.mjs      real-API harness (costs cents; ANTHROPIC_API_KEY env var)
 - **Shared world** (sync configured): `syncSharedWorld` merges remote region stages (furthest wins) + drift (strongest wins), imports other characters' ledger events as news, pushes consolidated `world/regions/valley.json` (SHA retry). One valley, true for everyone. Sync config = owner/repo/PAT in Settings (localStorage).
 - **Quests:** typed ops, ≤5 active, XP clamped ≤50. Every location has 3–4 questSeeds; momentum rule: every turn advances something concrete, idle scenes get a seed woven in. Quest detail UI + spoiler-safe GM guidance via meta channel.
 - **Gambits:** goal + ≤5 steps + optional fallbacks; one-call parse (later steps auto-harden); assess = per-step sense + weakest-link (tier≥2); execution blocks on failure → fallback / adaptation reroll (1, Strategist 2) / press on / abandon; cinematic single narration from receipts; steps are planned actions (Strategist bonus) and feed the profile.
+- **Encounters** (v1.1.0, SNG-002): locations declare `encounterSeeds`; GM offers via choice `encounterId`. Duels (opponent hits, threat×0.3 difficulty, margin table, yield/flee/fall — incapacitation never death), challenges (staged, partial advances-with-cost, failure retries-with-cost), puzzles (attempt costs, hint tiers gated by max(sense tier, partial reveals), codex-unlock solution paths). All numbers in rules `encounters` block; GM rule 18 (ratification pending); state at `character.activeEncounter`, serializes for party play.
 - **Companions:** content-defined (Aevi: nanite-mote intelligence, cannot lie, Precursor hook GM-eyes-only); +5 assist on matching tags (cap 10); voiced every scene under boundary rules; join/part in sidebar.
 
 ## 7. GM Contract (abridged — full text in `engine/gm.js` GM_SYSTEM)
@@ -112,7 +114,8 @@ OOC channel (`gmAsk`): answers context/rules/what-character-knows; never advance
 
 ## 9. Roadmap
 
-- **v1.1 — party play:** shared scenes via `world/scenes/{id}.json` polling (~20s), turn order, GM context includes all party members; world-level time mode (one world, one clock); character-to-character codex/knowledge trading.
+- **SNG-002 encounters: SHIPPED v1.1.0** (party-play interaction deferred to SNG-001).
+- **SNG-001 — party play:** shared scenes via `world/scenes/{id}.json` polling (~20s), turn order, GM context includes all party members; world-level time mode (one world, one clock); character-to-character codex/knowledge trading.
 - **Specced, unbuilt:** known roads (route walked 3+ times → −1h travel); crit mastery (ability rank 3 narrows own crit-fail band); reputation economics (prices/favors by band); companion bonds (assist grows with shared history); carry capacity from strength; max energy from attunement.
 - **Expansion space:** new regions as content packs (five civilizations beyond the pass); mountain-pass arc; Precursor deep-game (Archive lower levels; water-crisis truth).
 

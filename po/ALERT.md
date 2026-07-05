@@ -8,7 +8,13 @@
 
 **closed_green** with one open ratification question (below). Verified at origin: 180/180 smoke tests incl. 31 new; engine-before-GM ordering makes degradation structural; resolve.js untouched (hash-identical to pre-task); three seed encounters live with encounterSeeds on three locations; SYSTEM_SPEC §3/§6/§7/§9 updated in the ship commit; parse_probe.mjs guard adopted into ship checklist — good permanent add. Rule 18 shipped-then-ratified was a protocol deviation, correctly self-flagged, resolved by Erik's in-session amendment (v1.1.1). Accepted.
 
-**⚠ OPEN — Erik ratification requested (lethal × GM-invented interaction):** `sanitizeNewEncounter` passes `lethal: !!raw.lethal` through — meaning the *model* can invent a duel AND mark it lethal in the same op. Authored-content lethality is telegraphed by design; model-originated lethality puts death on the table at the model's discretion, which brushes design law 1's spirit. **PO recommendation:** GM-invented duels are always non-lethal (`lethal: false` forced in sanitize); `lethal: true` honored only from authored content files. One-line change + one smoke test. Erik: ratify recommendation, keep as-is, or amend.
+**✓ RATIFIED (Erik, 2026-07-04) — lethal × GM-invented:** GM-invented lethal duels are PERMITTED, with a hard avoidability condition: any lethal encounter (authored or invented) must be declinable before engagement — the entry choice always includes a clear avoid/refuse path, lethal stakes telegraphed in the offer itself, and flee remains available in round 1. Engine enforces: `sanitizeNewEncounter` keeps the lethal passthrough; encounter-offer clamp adds `avoidable: true` forced on all lethal encounters (entry cannot be ambushed/forced); smoke test for the clamp. Rule 18 wording gains one sentence: "A lethal encounter is always offered, never imposed — the player must have a clear path to decline before engagement." → **SNG-002b micro-amendment, bundled into next build session ahead of SNG-001 work.**
+
+---
+
+## Micro-task SNG-002b — Lethal avoidability clamp (do FIRST, ~30 min)
+
+Per Erik's ratification above: (1) force `avoidable: true` on any encounter with `lethal: true` at offer time — an offered lethal encounter must present a decline path and cannot be entered without explicit player choice; (2) rule 18 += "A lethal encounter is always offered, never imposed — the player must have a clear path to decline before engagement."; (3) round-1 flee always available in lethal duels regardless of fleeDifficulty (difficulty applies, availability doesn't); (4) smoke tests: lethal-offer-carries-decline, forced-entry rejected, round-1 flee present. Update SYSTEM_SPEC §7 rule text. Then proceed to SNG-001 below.
 
 ---
 

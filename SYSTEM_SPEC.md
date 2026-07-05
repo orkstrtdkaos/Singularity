@@ -5,7 +5,7 @@
 
 - Live: https://orkstrtdkaos.github.io/Singularity/
 - Repo: github.com/orkstrtdkaos/Singularity (GitHub Pages, `main`, root)
-- Current version: v1.2.0 (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
+- Current version: v1.3.0 (SNG-BATCH-1: 36-ability catalog + cross-training, character/inventory screens, companion bonds — details in po/results/20260704_SNG-BATCH-1.md; spec subsections to be folded in by PO review) (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
 
 ---
 

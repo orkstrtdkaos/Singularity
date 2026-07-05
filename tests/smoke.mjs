@@ -569,5 +569,27 @@ check('cross-training gate blocks at low level', learnAbility(crossLearner, 'way
 crossLearner.level = 2;
 check('cross-training opens at effective level', learnAbility(crossLearner, 'wayfinding', fullCat, rules).ok);
 
+// --- SNG-005: companion bonds ---
+const { ensureBonds, growBond, bondOf } = await import('../engine/companions.js');
+const bonded = { companionBonds: {} };
+ensureBonds(bonded);
+for (let i = 0; i < 6; i++) growBond(bonded, 'aevi', 'deed', rules);       // +3.0
+check('deeds grow the bond', bondOf(bonded, 'aevi', rules).bond === 3);
+const capComp = [{ id: 'aevi', name: 'Aevi', assistTags: ['investigate'] }];
+const withBond = companionBonus(capComp, ['investigate'], rules, bonded);
+check('bond >= 3 raises assist cap (bonus path intact)', withBond.bonus === 5 && withBond.helpers.includes('Aevi'));
+let evts = [];
+for (let i = 0; i < 2; i++) evts.push(...growBond(bonded, 'aevi', 'encounter', rules).events); // 3 -> 6
+check('grant unlocks exactly once at 6', evts.filter(e => e === 'grant').length === 1);
+evts = [];
+for (let i = 0; i < 2; i++) evts.push(...growBond(bonded, 'aevi', 'encounter', rules).events); // 6 -> 9
+check('stage 2 unlocks at 8', evts.includes('stage2') && bondOf(bonded, 'aevi', rules).stage === 2);
+for (let i = 0; i < 20; i++) growBond(bonded, 'aevi', 'encounter', rules);
+check('bond clamps at 10', bondOf(bonded, 'aevi', rules).bond === 10);
+const aeviDef = JSON.parse(readFileSync(join(root, 'content/packs/valley/companions/aevi.json'), 'utf8'));
+check('aevi carries bondGrants + stages (PO content)', aeviDef.bondGrants?.id === 'motes-vigil' && aeviDef.stages?.length === 2);
+const gmBlock = companionsForGM([aeviDef], bonded, rules);
+check('GM block carries bond + stage-2 hints', gmBlock.includes('stage 2') && gmBlock.includes('Kindled Chorus'));
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

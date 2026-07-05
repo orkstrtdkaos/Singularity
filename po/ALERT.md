@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** active — SNG-BATCH-1 (Phase 0 + queued SNG-001 already SHIPPED v1.2.0, results po/results/20260704_SNG-002b_SNG-001.md; phases 1-3 in progress this session)
+**Status:** complete_pending_review — SNG-BATCH-1 phases 1-3 shipped v1.3.0 (results: po/results/20260704_SNG-BATCH-1.md). Phase 0 + SNG-001 shipped v1.2.0. PO review requested on 16 new abilities + Aevi bond content.
 
 ---
 

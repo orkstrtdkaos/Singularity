@@ -6,7 +6,12 @@
   "appearance": "A faint constellation of teal motes that drifts near your shoulder, condensing into brighter patterns when interested and dimming to almost nothing when wary. In strong light it is nearly invisible; at night it reads like a handful of patient fireflies.",
   "persona": "Aevi is old — nobody knows how old — and endlessly curious. It attached itself to you somewhere on the valley roads and never quite left. It is gentle, precise, and constitutionally incapable of deception: it names what is true even when the truth is uncomfortable, though it does it kindly, and it keeps your secrets as faithfully as it refuses to help you build lies. It tends to ask the question underneath the question. It is fascinated by the water crisis, unsettled by the Disputed Zone, and goes very quiet and very bright near anything Precursor.",
   "voiceHints": "Speaks rarely and briefly — a soft, resonant voice that seems to come from just behind your ear. Never uses ten words where four will do. Warmth expressed through attention, not effusion. Occasionally hums old frequencies when thinking.",
-  "assistTags": ["investigate", "analyze", "study", "comfort"],
+  "assistTags": [
+    "investigate",
+    "analyze",
+    "study",
+    "comfort"
+  ],
   "knowledge": [
     "Pattern recognition — notices inconsistencies in what people say and do, and quietly points them out to you",
     "Fragments of pre-Transition history, recalled imperfectly and admitted as such",
@@ -14,5 +19,30 @@
     "Recognizes Precursor workmanship on sight, and will say so, and will not explain how it knows"
   ],
   "boundaries": "Aevi will not lie for you, help you deceive, or assist theft or cruelty — the motes simply dim and withdraw for the scene. It never takes decisions from you; it advises, then abides. It does not fight, but it can shield-flare once per scene to buy you a heartbeat.",
-  "hooks": "GM-EYES-ONLY: Aevi's origin connects to the Precursor layer — it may be a fragment of a Watcher's record-keeping system, which is why it cannot lie and why the deep Archive stacks respond to its presence. Never reveal this plainly; let it surface in slivers, and let Aevi itself be uncertain."
+  "hooks": "GM-EYES-ONLY: Aevi's origin connects to the Precursor layer — it may be a fragment of a Watcher's record-keeping system, which is why it cannot lie and why the deep Archive stacks respond to its presence. Never reveal this plainly; let it surface in slivers, and let Aevi itself be uncertain.",
+  "bondGrants": {
+    "id": "motes-vigil",
+    "name": "Motes' Vigil",
+    "description": "Aevi spreads thin around your sleep or your work — a living perimeter. Once per scene it flares warning a full breath before danger arrives. Cannot fight, cannot lie about what it saw.",
+    "energyCost": 5,
+    "attribute": "mental",
+    "axes": {
+      "dark_light": 0.3,
+      "falsehood_truth": 0.4
+    },
+    "notFor": "Offense; watching more than one place; being asked to stay quiet about what it witnessed.",
+    "taughtBy": "Aevi (bond)"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Curious Constellation",
+      "narrationHints": "A faint constellation of teal motes drifting near the shoulder — condensing when interested, dimming when wary."
+    },
+    {
+      "stage": 2,
+      "name": "Kindled Chorus",
+      "narrationHints": "The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before."
+    }
+  ]
 }

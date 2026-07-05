@@ -13,7 +13,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } 
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
-import { companionBonus, companionsForGM, activeCompanions } from "./engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -23,7 +23,7 @@ import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engin
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.2.0";
+const APP_VERSION = "1.3.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -178,6 +178,7 @@ function migrate(c) {
   ensureSubAttributes(c);
   ensureCodex(c);
   if (!c.customAbilities) c.customAbilities = {};
+  ensureBonds(c);
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   return c;
 }
@@ -214,6 +215,7 @@ function endEncounter(outcome) {
   const t = CONTENT.rules.encounters?.[enc.def.type] || {};
   const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
+  for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules);
   character.activeEncounter = null;
   if (outcome === "incapacitated") {
     if (enc.def.lethal) { character.dead = true; }
@@ -496,7 +498,7 @@ async function runGM({ resolution, playerInput }) {
     recentTurns: sceneTurns.slice(-6),
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
-    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
+    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
     questsDetail: questsForGM(character),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
@@ -531,6 +533,32 @@ function applyTurn(turn, resolution) {
   for (const deed of turn.deeds || []) {
     const recorded = recordDeed(character, { ...deed, locationId: location.id, communityId: deed.communityId ?? location.communityId }, mods);
     recorded.day = dayNow;
+  }
+  // companion bonds grow through shared life (engine-owned; GM has no op)
+  {
+    const comps = activeCompanions(character, CONTENT.companions);
+    for (const c of comps) {
+      const unlocked = [];
+      if ((turn.deeds || []).length) unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules).events);
+      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules).events);
+      if (unlocked.includes("grant") && c.bondGrants) {
+        const def = sanitizeNewAbility(c.bondGrants);
+        if (def && !character.abilities.some(a => a.abilityId === def.id)) {
+          character.customAbilities = character.customAbilities || {};
+          character.customAbilities[def.id] = def;
+          character.abilities.push({ abilityId: def.id, level: 1 });
+          turn.narration += `
+
+*✦ Your bond with ${c.name} deepens into something new: **${def.name}**.*`;
+        }
+      }
+      if (unlocked.includes("stage2")) {
+        const st = (c.stages || []).find(x => x.stage === 2);
+        if (st) turn.narration += `
+
+*✦ ${c.name} has changed — ${st.name}.*`;
+      }
+    }
   }
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day };
@@ -671,7 +699,7 @@ async function onChoice(choice) {
   const encD = activeEnc();
   if (encD) action.difficulty = (action.difficulty || 0) + encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
-  const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules);
+  const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules, character);
   const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
   if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
   if (disc) resolution.usedDiscovery = disc.name;
@@ -787,7 +815,7 @@ async function onAsk(text) {
     recentTurns: sceneTurns.slice(-6),
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
-    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions)),
+    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
     questsDetail: questsForGM(character),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
@@ -1033,7 +1061,7 @@ function gambitCtx() {
   return {
     character, location, rules: CONTENT.rules, aptitudeMods: mods,
     bonuses: (action) => equipmentBonus(character, action.tags || [], CONTENT.rules).bonus +
-                         companionBonus(comps, action.tags || [], CONTENT.rules).bonus
+                         companionBonus(comps, action.tags || [], CONTENT.rules, character).bonus
   };
 }
 
@@ -1261,7 +1289,7 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Companions</h3>
       ${(character.companions || []).map(id => {
         const c = CONTENT.companions[id];
-        return c ? `<div class="companion"><span class="companion-name">${esc(c.name)}</span> <span class="cost">${esc(c.role)}</span>
+        return c ? `<div class="companion"><span class="companion-name">${esc(c.name)}</span> <span class="rep-band ${bondOf(character, c.id, CONTENT.rules).bond >= 3 ? "trusted" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${bondOf(character, c.id, CONTENT.rules).bond}${bondOf(character, c.id, CONTENT.rules).stage === 2 ? " · stage 2" : ""}</span> <span class="cost">${esc(c.role)}</span>
           <button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>` : "";
       }).join("")}
       ${Object.values(CONTENT.companions).filter(c => !(character.companions || []).includes(c.id)).map(c =>
@@ -1349,7 +1377,7 @@ function renderPlay(turn, opts = {}) {
       } else {
         action.subAttribute = SUBS.includes(c.subAttribute) ? c.subAttribute : null;
         const equip = equipmentBonus(character, action.tags, rules);
-        const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules);
+        const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules, character);
         const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
         const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
         if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;

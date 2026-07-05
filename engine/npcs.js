@@ -60,6 +60,17 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (u.name && !n.name) n.name = String(u.name).slice(0, 60);
     if (u.role) n.role = String(u.role).slice(0, 100);
     if (u.description && !n.description) n.description = String(u.description).slice(0, 240);
+    if (u.revealName) {
+      const newName = prettifyNpcName(String(u.revealName).slice(0, 60));
+      if (!n.nameRevealed && newName && newName !== n.name) {
+        n.aliases = [...(n.aliases || []), n.name].slice(-4);
+        n.history = [...n.history, `[d${ctx.day ?? "?"}] Their name is revealed: ${newName} (was known as "${n.name}")`].slice(-CAPS.history);
+        n.name = newName;
+        n.nameRevealed = true;
+      } else if (n.nameRevealed && newName && newName !== n.name && !(n.aliases || []).includes(newName)) {
+        n.aliases = [...(n.aliases || []), newName].slice(-4); // later renames become aliases
+      }
+    }
     if (u.note) n.history = [...n.history, `[d${ctx.day ?? "?"}] ${String(u.note).slice(0, 180)}`].slice(-CAPS.history);
     if (u.learned) {
       const facts = Array.isArray(u.learned) ? u.learned : [u.learned];

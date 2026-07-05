@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** active — SNG-009 hotfix (field bugs, Erik live play 2026-07-04). SNG-004+008 queued behind it.
+**Status:** complete_pending_review — SNG-009 shipped v1.3.1 (results: po/results/20260705_SNG-009.md). SNG-004+008 queued next.
 
 ---
 

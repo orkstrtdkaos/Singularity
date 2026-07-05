@@ -62,6 +62,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .cs-ranks { margin-left: 8px; letter-spacing: 2px; }
 .cs-rank-on { color: var(--accent); } .cs-rank-off { color: var(--ink-dim); }
 .inv-row { margin-bottom: 4px; }
+.npc-group { margin-bottom: 6px; }
+.npc-group summary { cursor: pointer; font-size: 12px; color: var(--accent2); list-style: revert; }
+.npc-group[open] summary { margin-bottom: 4px; }
+.npc-group .known-npc { padding-left: 10px; }
 /* ---------- encounters ---------- */
 .encounter-bar { border: 1px solid var(--danger); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; background: linear-gradient(to right, rgba(192,91,77,0.10), transparent); font-family: var(--font-ui); font-size: 13px; }
 .enc-name { color: var(--danger); font-weight: 600; }

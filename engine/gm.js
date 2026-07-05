@@ -21,7 +21,7 @@ ABSOLUTE RULES
 11. QUESTS are tracked state. When the player takes on an undertaking, emit questUpdates op "start" (short memorable title, one-line summary, who gave it). When a scene advances one, emit op "progress" with a note. When finished, op "complete" (xpReward 15-50 by difficulty) or op "fail". Keep at most 2-3 quests in active play; finish threads before opening many more.
 12. Ground scenes in the character's BIO: their livelihood earns them recognition or work, their hobbies surface naturally, their motivation is the lens for every big choice. NPCs react to what the character does for a living.
 13. SCENE PERMANENCE — the most important continuity rule (within a scene). The CURRENT SCENE STATE block is authoritative physical reality: the exact spot the character occupies, who is present, what objects exist. You MUST NOT contradict it. The character stays exactly where they are unless the player's action moves them or something in-world explicitly moves them — and any movement must be narrated as a transition ("you follow her up the lane…"), never assumed. NPCs do not teleport, swap, or change roles; objects stay where they were left; indoor/outdoor, weather, and lighting persist. You MAY add new elements (a person arrives, something is uncovered) — additions are generativity, contradictions are errors. Return the updated scene state EVERY turn in the "scene" field, carrying forward everything still true.
-14. NPC PERMANENCE (across scenes). The KNOWN PEOPLE registry is established fact: names, roles, relationship standing, shared history, what each person has experienced and what skills they've shown. Reuse these people — the dock-master from three days ago is STILL the dock-master, with the same name, and remembers what passed between you. Never invent a replacement for someone who already exists. Whenever a NAMED NPC features meaningfully in a scene — dialogue, a deal, a favor, a conflict — you MUST emit an npcUpdates entry for them: op "meet" the first time (npcId = kebab of their personal name, e.g. "sorel"; "name" = their human name, REQUIRED), op "update" after. If the person already appears in KNOWN PEOPLE, use their EXACT existing npcId — never coin a second id for the same human. Relationship changes go through npcUpdates.relationshipDelta. Only anonymous crowd figures (a passing farmer) are exempt.
+14. NPC PERMANENCE (across scenes). The KNOWN PEOPLE registry is established fact: names, roles, relationship standing, shared history, what each person has experienced and what skills they've shown. Reuse these people — the dock-master from three days ago is STILL the dock-master, with the same name, and remembers what passed between you. Never invent a replacement for someone who already exists. Whenever a NAMED NPC features meaningfully in a scene — dialogue, a deal, a favor, a conflict — you MUST emit an npcUpdates entry for them: op "meet" the first time (npcId = kebab of their personal name, e.g. "sorel"; "name" = their human name, REQUIRED), op "update" after. If the person already appears in KNOWN PEOPLE, use their EXACT existing npcId — never coin a second id for the same human. Relationship changes go through npcUpdates.relationshipDelta. When the fiction reveals the true name of a known-but-unnamed person (the tuning-warden is Maren), emit revealName on their EXISTING npcId — the id stays stable, the display name updates. Only anonymous crowd figures (a passing farmer) are exempt.
 15A. GAMBITS. When the resolution block is a GAMBIT (a declared multi-step plan), narrate the WHOLE run as one continuous cinematic sequence — heist-movie pacing, honoring every step's receipt in order: clean successes chain smoothly, complications visibly wrinkle the plan, fallbacks read as quick thinking, an adaptation reroll reads as grit or luck, and an abandoned run ends with the character extracting themselves from wherever it broke. Then land the aftermath in the same scene and offer choices as usual. Same length discipline: 3-5 paragraphs max.
 17. THE CODEX is the character's cataloged knowledge — a graph of topics they've LEARNED about. When a scene teaches something durable — a truth about the world, a faction's move, a mystery deepening, a name that matters — emit codexUpdates: topic (stable kebab id), kind (mystery|faction|lore|event|person|place), the fact learned, and links to related topic ids (link liberally — locations and quests by their ids too). Routine events don't belong; knowledge does. The CODEX block shows what they already know that's relevant HERE — NPCs shouldn't re-explain it, and the character may act on it.
 16. NOVEL USE & COMBINATIONS. When the resolution is marked NOVEL (an ability pushed outside its envelope, or two abilities braided), narrate the strain — the field resisting, the technique bending. On BACKLASH (the resolution block lists engine-applied damage), narrate real cost: resonance-burn, light-scald, a nosebleed, the power snapping back. On DISCOVERY-ELIGIBLE (critical success), narrate breakthrough — the moment the technique clicks into something repeatable — and return the "discovery" field naming it. Discovered techniques listed in ABILITY LAW are earned: treat them as reliable capabilities.
@@ -38,7 +38,7 @@ REPLY FORMAT — a single JSON object, no other text:
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
   "questUpdates": [{"op": "start|progress|complete|fail", "questId": "kebab-id", "title": "...", "summary": "...", "giver": "...", "note": "...", "xpReward": 25}],
   "scene": {"setting": "1-2 sentences: EXACTLY where the character is (indoor/outdoor, position, lighting, weather)", "npcsPresent": [{"name": "...", "state": "what they're doing right now"}], "objects": ["notable objects in view or reach"], "threads": ["unresolved in-scene threads (a question hanging, someone waiting for an answer)"]},
-  "npcUpdates": [{"op": "meet|update", "npcId": "kebab-id (stable across scenes)", "name": "...", "role": "...", "description": "one line, on meet", "note": "what passed between you this beat", "learned": ["fact about them / something they experienced"], "skillsObserved": ["skill they demonstrated"], "relationshipDelta": 1, "status": "active|injured|missing|dead|departed"}],
+  "npcUpdates": [{"op": "meet|update", "npcId": "kebab-id (stable across scenes)", "name": "...", "role": "...", "description": "one line, on meet", "note": "what passed between you this beat", "learned": ["fact about them / something they experienced"], "skillsObserved": ["skill they demonstrated"], "relationshipDelta": 1, "status": "active|injured|missing|dead|departed", "revealName": "their true name, ONLY when the fiction reveals the identity of a known-but-unnamed person"}],
   "placeUpdates": [{"note": "durable change to THIS place that future visits must honor", "flag": {"key": "value"}, "subPlace": {"name": "named spot WITHIN this location (a cottage, a warden post)", "note": "one line", "visited": true}}],
   "discovery": {"name": "evocative technique name", "description": "what this new technique does and its cost/limit"},
   "codexUpdates": [{"topic": "kebab-id", "label": "Display Name", "kind": "mystery|faction|lore|event|person|place", "fact": "the durable thing learned this beat", "links": ["related-topic-ids", "location-ids", "quest-ids"]}],
@@ -55,10 +55,11 @@ The "scene" field is REQUIRED every turn: carry forward everything still true fr
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
   if (location.questSeeds?.length) parts.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
+  if (opLossNote) parts.push(`## PREVIOUS TURN OPS LOST\n${opLossNote}`);
   if (timeLabel) parts.push(`## CURRENT TIME\n${timeLabel}`);
   if (rules?.recovery) {
     const rec = rules.recovery;
@@ -139,6 +140,37 @@ export function salvageNarration(raw) {
   catch { return m[1].replace(/\\n/g, "\n").replace(/\\"/g, '"'); }
 }
 
+/** Best-effort op recovery from malformed JSON: extract recognizable top-level
+ *  arrays/objects by balanced-bracket scan and parse each independently. Only
+ *  ops that later clamp-validate will ever apply — salvage never widens trust. */
+export function salvageOps(raw) {
+  const out = {};
+  const keys = ["questUpdates", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas"];
+  const text = String(raw || "");
+  for (const key of keys) {
+    const m = text.indexOf('"' + key + '"');
+    if (m === -1) continue;
+    const colon = text.indexOf(":", m);
+    if (colon === -1) continue;
+    let i = colon + 1;
+    while (i < text.length && /\s/.test(text[i])) i++;
+    const openCh = text[i];
+    if (openCh !== "[" && openCh !== "{") continue;
+    const closeCh = openCh === "[" ? "]" : "}";
+    let depth = 0, inStr = false, esc2 = false, end = -1;
+    for (let j = i; j < text.length; j++) {
+      const ch = text[j];
+      if (inStr) { if (esc2) esc2 = false; else if (ch === "\\") esc2 = true; else if (ch === '"') inStr = false; continue; }
+      if (ch === '"') inStr = true;
+      else if (ch === openCh) depth++;
+      else if (ch === closeCh) { depth--; if (depth === 0) { end = j; break; } }
+    }
+    if (end === -1) continue;
+    try { out[key] = JSON.parse(text.slice(i, end + 1)); } catch { /* truncated segment — skip */ }
+  }
+  return out;
+}
+
 const PROSE_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG in the Valley of Echoes. Narrate the current beat in 2-4 tight paragraphs of second-person present-tense prose. Honor the resolution outcome and scene state provided. Reply with PROSE ONLY — no JSON, no lists, no headers.`;
 
 export async function gmTurn(ctx) {
@@ -151,17 +183,39 @@ export async function gmTurn(ctx) {
     return { ok: true, turn };
   } catch (err) {
     console.warn("[gmTurn] structured parse failed:", err.message);
-    // Graceful degradation, in order: salvage the narration out of the broken
-    // JSON (free), else re-ask in prose-only mode. Never show raw JSON.
-    const salvaged = salvageNarration(raw);
-    if (salvaged && salvaged.length > 80) {
-      return { ok: true, degraded: true, turn: fallbackTurn(salvaged) };
+    // SNG-009 Fix 1 — never silently drop ops:
+    // (a) ONE automatic retry with a terse valid-JSON nudge
+    try {
+      const retryRaw = await callClaude([
+        { role: "user", content },
+        { role: "assistant", content: String(raw).slice(0, 4000) },
+        { role: "user", content: "Your reply was invalid or truncated JSON. Emit the SAME turn again as a single complete valid JSON object only — no fences, no prose outside it." }
+      ], { task: "gm-narrate", system: GM_SYSTEM });
+      const retryTurn = parseLooseJSON(retryRaw);
+      if (retryTurn.narration && Array.isArray(retryTurn.choices)) {
+        return { ok: true, turn: retryTurn, retried: true };
+      }
+    } catch (err2) {
+      console.warn("[gmTurn] retry also failed:", err2.message);
+    }
+    // (b) salvage narration AND recognizable ops from the broken reply
+    const salvagedText = salvageNarration(raw);
+    const salvagedOps = salvageOps(raw);
+    const gotOps = Object.keys(salvagedOps).length > 0;
+    if (salvagedText && salvagedText.length > 80) {
+      const turn = { ...fallbackTurn(salvagedText), ...salvagedOps };
+      turn._opNote = gotOps
+        ? `Recovered ${Object.keys(salvagedOps).join(", ")} from the broken reply; anything else was lost.`
+        : "This beat's state updates were lost — the GM will restate them next turn.";
+      return { ok: true, degraded: true, opsLost: !gotOps, turn };
     }
     try {
       const prose = await callClaude([{ role: "user", content }], { task: "gm-narrate", system: PROSE_SYSTEM });
-      return { ok: true, degraded: true, turn: fallbackTurn(prose) };
-    } catch (err2) {
-      return { ok: false, error: err2.message };
+      const turn = fallbackTurn(prose);
+      turn._opNote = "This beat's state updates were lost — the GM will restate them next turn.";
+      return { ok: true, degraded: true, opsLost: true, turn };
+    } catch (err3) {
+      return { ok: false, error: err3.message };
     }
   }
 }

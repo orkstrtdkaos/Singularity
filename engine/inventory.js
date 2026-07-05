@@ -54,8 +54,25 @@ export function addItem(character, incoming, catalog = {}) {
   return item;
 }
 
+/** Player names an item (agency, no GM involvement). Original name kept as subtitle. */
+export function nameItem(character, originalName, customName) {
+  const it = findItem(character, originalName);
+  if (!it) return false;
+  it.customName = String(customName).slice(0, 40).trim() || undefined;
+  return true;
+}
+
+export function findItem(character, name) {
+  const q = String(name).toLowerCase();
+  return (character.inventory || []).find(m => m.name.toLowerCase() === q || (m.customName || "").toLowerCase() === q) || null;
+}
+
+export function displayName(item) {
+  return item.customName ? `${item.customName}` : item.name;
+}
+
 export function removeItem(character, name, qty = 1) {
-  const idx = character.inventory.findIndex(m => m.name.toLowerCase() === String(name).toLowerCase());
+  const idx = character.inventory.findIndex(m => m.name.toLowerCase() === String(name).toLowerCase() || (m.customName || "").toLowerCase() === String(name).toLowerCase());
   if (idx === -1) return false;
   character.inventory[idx].qty -= qty;
   if (character.inventory[idx].qty <= 0) character.inventory.splice(idx, 1);
@@ -72,7 +89,7 @@ function clampEffects(fx) {
 
 /** Consume a consumable: apply its effects, decrement stack. Returns applied deltas or null. */
 export function consumeItem(character, name) {
-  const item = character.inventory.find(m => m.name.toLowerCase() === String(name).toLowerCase());
+  const item = findItem(character, name);
   if (!item || !item.consumable) return null;
   const fx = item.effects || {};
   if (fx.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + fx.health));
@@ -101,6 +118,6 @@ export function equipmentBonus(character, actionTags = [], rules) {
 export function inventoryForGM(character) {
   if (!character.inventory?.length) return "empty-handed";
   return character.inventory.map(i =>
-    `${i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""})`
+    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""})`
   ).join("; ");
 }

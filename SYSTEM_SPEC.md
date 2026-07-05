@@ -5,7 +5,7 @@
 
 - Live: https://orkstrtdkaos.github.io/Singularity/
 - Repo: github.com/orkstrtdkaos/Singularity (GitHub Pages, `main`, root)
-- Current version: v1.3.0 (SNG-BATCH-1: 36-ability catalog + cross-training, character/inventory screens, companion bonds — details in po/results/20260704_SNG-BATCH-1.md; spec subsections to be folded in by PO review) (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
+- Current version: v1.3.1 (SNG-009 hotfix: op-loss retry/salvage/restate chain, npc revealName, player item naming, quest repair, people-by-location) (SNG-BATCH-1: 36-ability catalog + cross-training, character/inventory screens, companion bonds — details in po/results/20260704_SNG-BATCH-1.md; spec subsections to be folded in by PO review) (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
 
 ---
 
@@ -111,6 +111,8 @@ tests/live_gm.mjs      real-API harness (costs cents; ANTHROPIC_API_KEY env var)
 Reply = single JSON: `narration, sceneSummary, choices[{label, attribute, subAttribute, axes, difficulty, intentTags, abilityId, energyCost, trivial}], deeds, characterDeltas{health −20..+15, energy −20..+40, xp ≤25, inventoryAdd/Remove}, npcUpdates, placeUpdates, codexUpdates, questUpdates, ledgerEvents, scene, discovery(eligible-only), newAbility(rare), timeAdvanceHours 0–12, sceneEnded`. **Every field is engine-clamped on apply** — see applyTurn in app.js. Parse failure → salvageNarration → prose-only retry → error card (player input preserved).
 
 OOC channel (`gmAsk`): answers context/rules/what-character-knows; never advances state; never reveals GM-eyes-only (live-verified).
+
+**Op-loss chain (SNG-009, v1.3.1):** GM parse failure → (a) one automatic valid-JSON retry → (b) salvage narration AND recognizable op arrays from the broken text (balanced-bracket extraction; salvaged ops still clamp-validate) → (c) degraded notice names what was lost/recovered → (d) `character.opLossPending` adds a PREVIOUS TURN OPS LOST restate line to the next GM context. npcUpdates gains `revealName` (existing NPCs only; once — later renames become aliases). Items carry player-set `customName` (cap 40; GM sees both names). Quest detail has a player repair button. §8 gotcha: parse fallback can still narrate ahead of state for one beat — the restate line reconciles on the next.
 
 ## 8. Ops & Quality
 

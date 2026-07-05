@@ -591,5 +591,29 @@ check('aevi carries bondGrants + stages (PO content)', aeviDef.bondGrants?.id ==
 const gmBlock = companionsForGM([aeviDef], bonded, rules);
 check('GM block carries bond + stage-2 hints', gmBlock.includes('stage 2') && gmBlock.includes('Kindled Chorus'));
 
+// --- SNG-009 hotfix ---
+const { salvageOps } = await import('../engine/gm.js');
+const broken = '{"narration": "The dock creaks...", "questUpdates": [{"op": "progress", "questId": "trace-the-gray-water", "note": "vial filled"}], "npcUpdates": [{"op": "update", "npcId": "mara-wells", "note": "trusts you more"}], "choices": [{"label": "unterminated...';
+const sops = salvageOps(broken);
+check('salvage recovers complete op arrays from broken JSON', sops.questUpdates?.[0]?.note === 'vial filled' && sops.npcUpdates?.length === 1);
+check('salvage skips the truncated segment', !sops.choices);
+check('salvage of garbage yields nothing', Object.keys(salvageOps('no json here')).length === 0);
+// revealName
+const rvChar = { npcRegistry: {} };
+applyNpcUpdates(rvChar, [{ op: 'meet', npcId: 'tuning-warden', name: 'The Tuning-Warden', role: 'warden' }], { day: 1 });
+applyNpcUpdates(rvChar, [{ op: 'update', npcId: 'tuning-warden', revealName: 'Maren' }], { day: 2 });
+const warden = rvChar.npcRegistry['tuning-warden'];
+check('revealName updates display, keeps id, logs history', warden.name === 'Maren' && warden.aliases.includes('The Tuning-Warden') && warden.history.some(h => h.includes('revealed')));
+applyNpcUpdates(rvChar, [{ op: 'update', npcId: 'tuning-warden', revealName: 'Maren the Grey' }], { day: 3 });
+check('second reveal becomes alias, name stays', warden.name === 'Maren' && warden.aliases.includes('Maren the Grey'));
+check('revealName cannot create a person', (applyNpcUpdates({ npcRegistry: {} }, [{ op: 'update', npcId: 'ghost', revealName: 'X' }], {}), true));
+// customName
+const { nameItem, findItem, displayName: dName, inventoryForGM: invGM } = await import('../engine/inventory.js');
+const pack = { inventory: [{ name: 'Resonance Lantern', kind: 'tool', qty: 1 }] };
+check('player names an item', nameItem(pack, 'Resonance Lantern', 'Waystaff') && dName(pack.inventory[0]) === 'Waystaff');
+check('lookup works by either name', !!findItem(pack, 'Waystaff') && !!findItem(pack, 'Resonance Lantern'));
+check('GM sees both names', invGM(pack).includes('Waystaff') && invGM(pack).includes('their name for: Resonance Lantern'));
+check('cap 40 chars', (nameItem(pack, 'Waystaff', 'x'.repeat(60)), pack.inventory[0].customName.length <= 40));
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -10,7 +10,7 @@ import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey } from "./engine/claude.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } from "./engine/sync.js";
-import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "./engine/inventory.js";
+import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
@@ -23,7 +23,7 @@ import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engin
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.3.0";
+const APP_VERSION = "1.3.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -34,6 +34,8 @@ let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, ob
 let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
+let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
+let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
 let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
 let sharedScene = null;  // SNG-001: the shared scene object (party play), null when solo
@@ -181,6 +183,17 @@ function migrate(c) {
   ensureBonds(c);
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   return c;
+}
+
+/** Fix 5: group registry people by where they are known (lastSeen, else firstMet, else elsewhere). */
+function groupNpcsByLocation(registry) {
+  const groups = {};
+  for (const n of Object.values(registry)) {
+    const k = n.lastSeen?.locationId || n.firstMet?.locationId || "elsewhere";
+    (groups[k] = groups[k] || []).push(n);
+  }
+  for (const k of Object.keys(groups)) groups[k].sort((a, b) => Math.abs(b.relationship) - Math.abs(a.relationship));
+  return groups;
 }
 
 /** Ability catalog including GM-granted learned abilities on this character. */
@@ -506,12 +519,16 @@ async function runGM({ resolution, playerInput }) {
     newsDetail: newsForGM(character),
     abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
+    opLossNote: character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex updates that occurred last beat (the narration advanced; the state did not)." : null,
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
+  // SNG-009: track op loss so the next turn's GM restates missed updates
+  if (result.opsLost) { character.opLossPending = true; character.opLossLog = [...(character.opLossLog || []), { at: new Date().toISOString() }].slice(-3); }
+  else character.opLossPending = false;
   applyTurn(result.turn, resolution);
   return result;
 }
@@ -960,13 +977,14 @@ function renderInventoryScreen(openName = null) {
       <div class="cs-block"><h3 class="codex-title" style="font-size:14px; text-transform:capitalize">${k}s</h3>
       ${(character.inventory || []).filter(i => i.kind === k).map(it => `
         <div class="inv-row">
-          <button class="item-name" data-inv="${esc(it.name)}">${esc(it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
+          <button class="item-name" data-inv="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
           ${openName === it.name ? `<div class="item-detail">
             <div class="item-desc">${esc(it.description || it.kind)}</div>
             ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
             ${it.effects ? `<div class="item-tags">${Object.entries(it.effects).map(([k2, v]) => `${k2} ${v > 0 ? "+" : ""}${v}`).join(", ")}</div>` : ""}
             <div class="item-actions">
               <button class="opt" data-invuse="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
+              <button class="opt" data-invname="${esc(it.name)}">Name it</button>
               <button class="opt" data-invdrop="${esc(it.name)}">Drop</button>
             </div></div>` : ""}
         </div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
@@ -975,6 +993,7 @@ function renderInventoryScreen(openName = null) {
   for (const b of app.querySelectorAll("[data-inv]")) b.onclick = () => renderInventoryScreen(openName === b.dataset.inv ? null : b.dataset.inv);
   for (const b of app.querySelectorAll("[data-invuse]")) b.onclick = () => { const n = b.dataset.invuse; renderPlay(character.activeScene?.lastTurn || null, {}); useItem(n); };
   for (const b of app.querySelectorAll("[data-invdrop]")) b.onclick = () => { if (confirm("Drop " + b.dataset.invdrop + "?")) { removeItem(character, b.dataset.invdrop, 999); saveCharacter(character); renderInventoryScreen(); } };
+  for (const b of app.querySelectorAll("[data-invname]")) b.onclick = () => { const nn = prompt("Name this item:"); if (nn !== null && nameItem(character, b.dataset.invname, nn)) { saveCharacter(character); renderInventoryScreen(b.dataset.invname); } };
   document.getElementById("inv-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -994,9 +1013,17 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
       ${loading ? `<div class="thinking">The GM considers your situation…</div>` : `<button class="btn secondary" id="quest-guidance">Ask the GM for guidance</button>`}
       <div class="hint" style="margin-top:6px">Spoiler-safe: possible next steps, who might help, how hard it looks — never the hidden truth.</div>
     </div>
+    ${q.status === "active" ? `<button class="btn secondary" id="quest-resolve" style="margin-top:14px; margin-right:8px" title="Repair: if the story completed this but the tracker missed it">Mark complete (repair)</button>` : ""}
     <button class="btn secondary" id="quest-back" style="margin-top:14px">Back</button>
   </div>`);
   document.getElementById("quest-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  const rBtn = document.getElementById("quest-resolve");
+  if (rBtn) rBtn.onclick = () => {
+    if (!confirm(`Mark "${q.title}" complete? Use this when the story finished it but the tracker missed it.`)) return;
+    applyQuestUpdates(character, [{ op: "complete", questId: q.id, xpReward: 25, note: "(resolved by player — tracker repair)" }]);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${q.title} marked complete (+25 xp).` });
+  };
   const gBtn = document.getElementById("quest-guidance");
   if (gBtn) gBtn.onclick = async () => {
     renderQuestDetail(questId, null, true);
@@ -1267,10 +1294,19 @@ function renderPlay(turn, opts = {}) {
       ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
     </section>
     <section><h3>People you know</h3>
-      ${Object.values(character.npcRegistry || {}).map(n => ({ n, here: (n.lastSeen?.locationId === character.currentLocationId || n.firstMet?.locationId === character.currentLocationId) }))
-        .sort((a, b) => (b.here - a.here) || (Math.abs(b.n.relationship) - Math.abs(a.n.relationship))).slice(0, 7).map(({ n, here }) =>
-        `<div class="known-npc" title="${esc((n.history || []).slice(-2).join(" | ") || n.description || "")}"><span class="npc-name">${here ? "📍 " : ""}${esc(n.name)}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`
-      ).join("") || "<div class='insight'>no one yet — introduce yourself</div>"}
+      ${(() => {
+        const groups = groupNpcsByLocation(character.npcRegistry || {});
+        const keys = Object.keys(groups);
+        if (!keys.length) return "<div class='insight'>no one yet — introduce yourself</div>";
+        keys.sort((a, b) => (a === character.currentLocationId ? -1 : b === character.currentLocationId ? 1 : a === "elsewhere" ? 1 : b === "elsewhere" ? -1 : 0));
+        return keys.map(k => {
+          const open = npcGroupsOpen.has(k) || (k === character.currentLocationId && !npcGroupsClosed.has(k));
+          const label = k === "elsewhere" ? "Elsewhere" : (CONTENT.locations[k]?.name || k);
+          return `<details class="npc-group" data-npcgroup="${esc(k)}" ${open ? "open" : ""}><summary>${esc(label)} <span class="cost">(${groups[k].length})</span></summary>
+            ${groups[k].map(n => `<div class="known-npc" title="${esc((n.history || []).slice(-2).join(" | ") || n.description || "")}"><span class="npc-name">${esc(n.name)}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`).join("")}
+          </details>`;
+        }).join("");
+      })()}
     </section>
     <section><h3>Quests</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `
@@ -1302,13 +1338,14 @@ function renderPlay(turn, opts = {}) {
         const open = examinedItem === it.name;
         const img = open ? itemImage(it) : null;
         return `<div class="item ${open ? "open" : ""}">
-          <button class="item-name" data-examine="${esc(it.name)}">${esc(it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
+          <button class="item-name" data-examine="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
           ${open ? `<div class="item-detail">
             ${img ? `<img class="item-img" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy">` : ""}
             <div class="item-desc">${esc(it.description || it.kind)}</div>
             ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
             <div class="item-actions">
               <button class="opt" data-use="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
+              <button class="opt" data-nameit="${esc(it.name)}">Name it</button>
               <button class="opt" data-drop="${esc(it.name)}">Drop</button>
             </div></div>` : ""}
         </div>`;
@@ -1363,7 +1400,7 @@ function renderPlay(turn, opts = {}) {
 
   if (turn) {
     main += `<div class="beat">${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
-    if (opts.degraded) main += `<div class="degraded-note">(The GM's structured reply failed — plain narration mode this turn.)</div>`;
+    if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     main += `<div class="choices">${(turn.choices || []).map((c, i) => {
       let senseHtml = "", abilityHtml = "";
@@ -1451,6 +1488,15 @@ function renderPlay(turn, opts = {}) {
     renderPlay(character.activeScene?.lastTurn || null, {});
   };
   for (const btn of app.querySelectorAll("[data-use]")) btn.onclick = () => useItem(btn.dataset.use);
+  for (const d of app.querySelectorAll("[data-npcgroup]")) d.ontoggle = () => {
+    const k = d.dataset.npcgroup;
+    if (d.open) { npcGroupsOpen.add(k); npcGroupsClosed.delete(k); }
+    else { npcGroupsOpen.delete(k); npcGroupsClosed.add(k); }
+  };
+  for (const btn of app.querySelectorAll("[data-nameit]")) btn.onclick = () => {
+    const nn = prompt("Name this item (their story-name; the original stays as subtitle):");
+    if (nn !== null && nameItem(character, btn.dataset.nameit, nn)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
+  };
   for (const btn of app.querySelectorAll("[data-drop]")) btn.onclick = () => {
     if (!confirm(`Drop ${btn.dataset.drop}?`)) return;
     removeItem(character, btn.dataset.drop, 999);

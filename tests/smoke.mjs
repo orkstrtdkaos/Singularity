@@ -734,5 +734,29 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("ESTABLISHED FACTS block present", ctx.includes("ESTABLISHED FACTS") && ctx.includes("Teva is safe"));
 }
 
+// --- SNG-011 Phase 1: location vectors perception ---
+{
+  const { notePerception, perceivedVectors, vectorLabel, vectorSummary } = await import("../engine/vectors.js");
+  const spectrums = JSON.parse(readFileSync(join(root, "content/packs/core/spectrums.json"), "utf8"));
+  const loc = { id: "millbrook", spectrum: { violence_peace: 0.6, chaos_order: 0.3, death_life: 0.4 } };
+  check("vectorLabel names the right pole + sign", vectorLabel(spectrums, "violence_peace", 0.6) === "Peace +0.6" && vectorLabel(spectrums, "violence_peace", -0.6) === "Violence −0.6");
+  const novice = { attunement: 1, placeMemory: {} };
+  notePerception(novice, "millbrook", loc, { visited: true, usedAbilityIds: [] }, rules);
+  const nv = perceivedVectors(novice, "millbrook", loc, spectrums, rules);
+  check("visit reveals strong axes only (|v|>=0.5)", nv.length === 1 && nv[0].axis === "violence_peace");
+  const adept = { attunement: 6, placeMemory: {} };
+  notePerception(adept, "millbrook", loc, { visited: true, usedAbilityIds: [] }, rules);
+  const av = perceivedVectors(adept, "millbrook", loc, spectrums, rules);
+  check("high attunement also feels mid axes (>=0.3)", av.length === 3);
+  const seer = { attunement: 1, placeMemory: {} };
+  notePerception(seer, "millbrook", loc, { visited: true, usedAbilityIds: ["address_sense"] }, rules);
+  check("address_sense reveals ALL axes exactly", perceivedVectors(seer, "millbrook", loc, spectrums, rules).length === 3);
+  const prism = { attunement: 1, placeMemory: {} };
+  notePerception(prism, "millbrook", loc, { visited: true, usedAbilityIds: ["prism_sight"] }, rules);
+  check("perceiving ability unlocks mid axes", perceivedVectors(prism, "millbrook", loc, spectrums, rules).length === 3);
+  check("vectorSummary reads human", vectorSummary(novice, "millbrook", loc, spectrums, rules).startsWith("This place runs"));
+  check("unvisited place shows nothing", vectorSummary({ placeMemory: {} }, "millbrook", loc, spectrums, rules) === null);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

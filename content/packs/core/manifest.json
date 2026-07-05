@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "packId": "core",
   "name": "Singularity Core Rules",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "provides": {
     "spectrums": "spectrums.json",
     "rules": [
@@ -12,7 +12,8 @@
     "abilities": [
       "abilities/harmonic.json",
       "abilities/radiant.json",
-      "abilities/valley_craft.json"
+      "abilities/valley_craft.json",
+      "abilities/precursor.json"
     ],
     "items": [
       "items/basic.json"

@@ -2,13 +2,14 @@
   "schemaVersion": 1,
   "packId": "core",
   "name": "Singularity Core Rules",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "provides": {
     "spectrums": "spectrums.json",
     "rules": [
       "rules/resolution.json",
       "rules/emergence_recipes.json",
-      "rules/attribute_gates.json"
+      "rules/attribute_gates.json",
+      "rules/skill_capacity.json"
     ],
     "abilities": [
       "abilities/harmonic.json",

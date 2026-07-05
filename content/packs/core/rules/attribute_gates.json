@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "note": "Attribute gates apply to SOME skills — the high-tier band (levelReq 3+). Tier I–II abilities stay ungated so entry/mid play is open. To LEARN a gated ability the character needs its governing sub-attribute >= learnMin; to reach RANK 3 needs >= rank3Min. Sub-attributes cap 20/area (soft-cap knee 4), so gates cannot all be cleared — attribute investment is the tradeoff. Framework: what you can wield reflects who you've become. Mechanic ratified by Erik 2026-07-06 ('attribute gates for some skills'); per-ability selection + values authored by Aevi (PO). Tunable.",
+  "gates": {
+    "shatterpoint":      {"subAttribute": "reason",   "learnMin": 5, "rank3Min": 7},
+    "echo_memory":       {"subAttribute": "insight",  "learnMin": 5, "rank3Min": 7},
+    "dawn_surgery":      {"subAttribute": "craft",    "learnMin": 5, "rank3Min": 7},
+    "prism_ward":        {"subAttribute": "insight",  "learnMin": 5, "rank3Min": 7},
+    "address_sense":     {"subAttribute": "insight",  "learnMin": 5, "rank3Min": 7},
+    "latticespeak":      {"subAttribute": "craft",    "learnMin": 5, "rank3Min": 7},
+    "wake_the_line":     {"subAttribute": "craft",    "learnMin": 6, "rank3Min": 8},
+    "foreclose":         {"subAttribute": "reason",   "learnMin": 6, "rank3Min": 8},
+    "unmake_seal":       {"subAttribute": "reason",   "learnMin": 7, "rank3Min": 9},
+    "hold_the_aperture": {"subAttribute": "presence", "learnMin": 7, "rank3Min": 9}
+  }
+}

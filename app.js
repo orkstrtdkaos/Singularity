@@ -881,6 +881,75 @@ function renderMap(selectedId = null) {
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
+// ---------- character & inventory screens (SNG-007) ----------
+
+function renderCharacterScreen() {
+  const rules = CONTENT.rules;
+  const cap = rules.leveling?.subAttributeCap ?? 20;
+  const soft = rules.baseChance?.attributeSoftCap ?? 4;
+  const b = character.bio || {};
+  const xpNeed = character.level * (rules.leveling?.xpPerLevel ?? 100);
+  chrome(`<div class="screen" style="max-width:760px">
+    <h2>${esc(character.name)}</h2>
+    <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+    ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
+      ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
+      ${b.story ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""}</div>` : ""}
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Attributes <span class="hint" style="text-transform:none">(knee at ${soft}: full value to there, +5/point beyond, cap ${cap})</span></h3>
+      ${SUBS.map(sub => { const v = character.subAttributes?.[sub] ?? 0; return `
+        <div class="cs-attr"><span class="cs-attr-name" title="${esc(SUB_DESC[sub])}">${sub}</span>
+          <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, v / cap * 100)}%"></div><div class="cs-knee" style="left:${soft / cap * 100}%"></div></div>
+          <span class="cs-val">${v}</span>
+          ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
+        </div>`; }).join("")}</div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities</h3>
+      ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
+        const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
+        const canRank = character.skillPoints > 0 && a.level < (rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
+        return `<div class="cs-ability"><strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+          <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
+          ${canRank ? `<button class="grow-btn" data-rank2="${esc(a.abilityId)}">▲</button>` : ""}
+          ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}</div>`; }).join("")}
+      ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aptitudes (you, the player)</h3>
+      <div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests</h3>
+      ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
+      ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
+    <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
+  </div>`);
+  for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
+  for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => { const r = rankUpAbility(character, btn.dataset.rank2, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
+  document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+function renderInventoryScreen(openName = null) {
+  const kinds = ["weapon", "tool", "consumable", "quest", "misc"];
+  chrome(`<div class="screen" style="max-width:680px">
+    <h2>Inventory — ${esc(character.name)}</h2>
+    ${kinds.filter(k => (character.inventory || []).some(i => i.kind === k)).map(k => `
+      <div class="cs-block"><h3 class="codex-title" style="font-size:14px; text-transform:capitalize">${k}s</h3>
+      ${(character.inventory || []).filter(i => i.kind === k).map(it => `
+        <div class="inv-row">
+          <button class="item-name" data-inv="${esc(it.name)}">${esc(it.name)}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
+          ${openName === it.name ? `<div class="item-detail">
+            <div class="item-desc">${esc(it.description || it.kind)}</div>
+            ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
+            ${it.effects ? `<div class="item-tags">${Object.entries(it.effects).map(([k2, v]) => `${k2} ${v > 0 ? "+" : ""}${v}`).join(", ")}</div>` : ""}
+            <div class="item-actions">
+              <button class="opt" data-invuse="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
+              <button class="opt" data-invdrop="${esc(it.name)}">Drop</button>
+            </div></div>` : ""}
+        </div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
+    <button class="btn secondary" id="inv-back" style="margin-top:10px">Back</button>
+  </div>`);
+  for (const b of app.querySelectorAll("[data-inv]")) b.onclick = () => renderInventoryScreen(openName === b.dataset.inv ? null : b.dataset.inv);
+  for (const b of app.querySelectorAll("[data-invuse]")) b.onclick = () => { const n = b.dataset.invuse; renderPlay(character.activeScene?.lastTurn || null, {}); useItem(n); };
+  for (const b of app.querySelectorAll("[data-invdrop]")) b.onclick = () => { if (confirm("Drop " + b.dataset.invdrop + "?")) { removeItem(character, b.dataset.invdrop, 999); saveCharacter(character); renderInventoryScreen(); } };
+  document.getElementById("inv-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
 // ---------- quest detail ----------
 
 function renderQuestDetail(questId, guidance = null, loading = false) {
@@ -1139,6 +1208,10 @@ function renderPlay(turn, opts = {}) {
   const sheet = `<div class="sheet">
     <h2>${esc(character.name)}</h2>
     <div class="meta">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} (${character.xp} xp)</div>
+    <div style="display:flex; gap:6px; margin:6px 0">
+      <button class="opt" id="open-character" style="flex:1">Character</button>
+      <button class="opt" id="open-inventory" style="flex:1">Inventory</button>
+    </div>
     Health <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
     Energy <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
     <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
@@ -1362,6 +1435,8 @@ function renderPlay(turn, opts = {}) {
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
+  const charBtn = document.getElementById("open-character"); if (charBtn) charBtn.onclick = () => renderCharacterScreen();
+  const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");
   const setMode = (mode) => {

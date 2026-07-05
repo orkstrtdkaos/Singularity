@@ -51,6 +51,17 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .ability .cost { color: var(--ink-dim); font-size: 11px; }
 .sys-group { margin-bottom: 8px; }
 .sys-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 4px; }
+.cs-block { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 10px; }
+.cs-attr { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-family: var(--font-ui); font-size: 13px; }
+.cs-attr-name { width: 80px; text-transform: capitalize; }
+.cs-bar { flex: 1; height: 10px; background: var(--panel2); border-radius: 5px; position: relative; overflow: hidden; }
+.cs-fill { height: 100%; background: var(--accent2); border-radius: 5px; }
+.cs-knee { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--accent); opacity: .8; }
+.cs-val { width: 24px; text-align: right; }
+.cs-ability { margin-bottom: 10px; font-family: var(--font-ui); font-size: 13px; }
+.cs-ranks { margin-left: 8px; letter-spacing: 2px; }
+.cs-rank-on { color: var(--accent); } .cs-rank-off { color: var(--ink-dim); }
+.inv-row { margin-bottom: 4px; }
 /* ---------- encounters ---------- */
 .encounter-bar { border: 1px solid var(--danger); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; background: linear-gradient(to right, rgba(192,91,77,0.10), transparent); font-family: var(--font-ui); font-size: 13px; }
 .enc-name { color: var(--danger); font-weight: 600; }

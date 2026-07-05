@@ -90,12 +90,22 @@ Locations already carry `spectrum` (fed to GM as "Spectrum character of this pla
 - Higher levelReq (3–5) and energy already in the data — honor them; precursor abilities obey the same rank/levelReq gates.
 - Smoke: precursor absent at creation and normal level-up; acquirable via unlock path; Foreclose use moves alignment toward foreclosing axes; Hold the Aperture moves it back.
 
-### Phase 3 — Skill catalog as a KG visual, by class, with level-reqs
-An in-game ability browser rendered as a knowledge graph (same spirit as the codex KG):
-- Nodes = abilities, grouped/colored by CLASS (power system: harmonic / radiant / valley_craft / precursor / learned / discovery). Class legend.
-- Each node shows name + **levelReq in the label/description** (Erik: "level requirements as part of the descriptions"); expand a node to see its 3-rank tree with grants/cannot.
-- Edges: emergence recipes (component abilities → combo result, from emergence_recipes.json), branch templates (ability → its growth), and cross-training relationships. Owned abilities highlighted; ripe/aspired states shown if SNG-010 has shipped.
-- Reachable from the character screen. Presentational over existing catalog + recipe data; no new state. Smoke: renders all classes incl. precursor; levelReqs shown; recipe edges drawn between real component/result ids.
+### Phase 3 — Skill catalog as a KG graph (render like the world map) + Tier surface + gating tradeoffs
+Erik ratified 2026-07-06: bump SNG-011 forward; render the skill catalog as a graph the SAME WAY as the world map (reuse the renderMap SVG-node approach in app.js ~651, NOT a generic graph lib), and add explicit power-level legibility + skill-tree tradeoffs.
+
+**3a — Skill KG graph (self-ratified viz):**
+- Reuse the world-map render pattern: SVG nodes positioned + edges, pan/zoom consistent with the map. Nodes = abilities; edges = prerequisites (rank chain), emergence recipes (component→combo, from emergence_recipes.json), branch forks (3c), and cross-class relationships.
+- Node encoding: COLOR = class/power-system (harmonic / radiant / valley_craft / precursor / learned / discovery); SIZE or badge = Tier I–V; label shows name + levelReq. Owned abilities lit; ripe/aspired states shown (SNG-010 A+B shipped, so wire these). Attribute-gate locks (3b) and fork locks (3c) rendered on nodes.
+- Reachable from the character screen. Presentational over catalog + recipe + character data.
+
+**3b — Tier surface (self-ratified display):** derive Tier I–V from `levelReq` (1→5). Show the Tier badge on every ability everywhere it appears — character sheet, ability picker, skill graph. Rank pips show depth WITHIN the tier. Pure display; no mechanical change from the badge itself. (Precursor = Tiers III–V, the high-level-spell band.)
+
+**3c — Class/attribute gating + tree tradeoffs (SHAPE NEEDS ERIK RATIFICATION — build after he confirms each):**
+- **(i) Breadth-vs-depth class cap:** secondary (non-home) classes reachable only to rank 2; rank-3 mastery home-class-only. (Alt considered: secondary points cost double.) Extends existing cross-training +1 levelReq. — Erik ratifies mechanic + shape.
+- **(ii) Attribute requirements:** each ability gated behind a minimum in its governing sub-attribute, scaling with tier (draft: Tier T needs sub-attr ≥ 2T-ish; rank 3 a step higher). Uses existing sub-attribute pools (20/area, soft-cap knee 4) so gates can't all be cleared — investment becomes the tradeoff. Framework tie: attribute tilt = cosmic-address vector; what you can wield reflects who you've become. — Erik ratifies whether-gated + the curve (resolution-math).
+- **(iii) Branch forks:** at rank 2/3, flagged abilities fork — pick specialization A xor B, the other locks. Feeds from SNG-010 branch-templates. Real opportunity cost. — Erik ratifies fork-with-lockout as a mechanic.
+- Once (i)/(ii)/(iii) shapes are ratified: Aevi authors the per-ability attribute-req numbers, the fork specialization content, and the class-cap wiring spec (numbers/content self-ratified; mechanic shape is Erik's).
+- Smoke: graph renders all classes incl. precursor with tier/levelReq/attribute-gate/fork encodings; gates block learn when unmet and clear when met; fork lockout holds; secondary-class rank-2 cap enforced.
 
 ### Guardrails
 Design law 1 intact; content-not-code (no ability/location specifics in engine); additive only; precursor peril reuses existing alignment tracking (no new resolution math beyond the named block); this repo never touches the ErikIAm pipeline; suites + parse_probe green per phase.

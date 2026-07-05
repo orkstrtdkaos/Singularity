@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "note": "Broad-vs-deep capacity (tier-slot mechanic). skillsKnownByLevel = max DISTINCT chosen abilities a character may hold at each level — the breadth cap. Level 1 = 2 (Erik ratified 2026-07-06: 'generic RPG quantity per level guide, level 1 = 2'). At the cap, skill points may still RANK UP owned abilities (depth) — that IS the broad-vs-deep tradeoff. Tier access is separately gated by each ability's levelReq. Generic linear default (level + 1); tunable.",
+  "skillsKnownByLevel": {"1":2,"2":3,"3":4,"4":5,"5":6,"6":7,"7":8,"8":9,"9":10,"10":11,"11":12,"12":13},
+  "beyondTable": "level + 1",
+  "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points go to depth (rank-ups). Emergence combos/branches (SNG-010) and crit-discoveries do NOT count against the cap — earned techniques are free growth, not chosen breadth."
+}

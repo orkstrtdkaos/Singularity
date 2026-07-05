@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** SNG-BATCH-2 CLOSED GREEN (v1.5.0→v1.6.1, 327 checks, browser-verified). Next: SNG-013 + SNG-014 (world liveliness). Detailed prior specs preserved below.
+**Status:** SNG-BATCH-2 CLOSED GREEN (v1.5.0→v1.6.1, 327 checks, browser-verified). Next: SNG-BATCH-3 (world liveliness — random encounters + location affinities), run as one batch. Detailed prior specs preserved below.
 
 ---
 
@@ -10,22 +10,33 @@ All phases closed_green after origin audit: facts.js / vectors.js / skilltree.js
 
 ---
 
-## SNG-013 — Location skill affinities (RATIFIED direction; vector-bias shape pending Erik)
-Erik 2026-07-06: "location benefits/drawbacks to certain skills." Content pre-authored: `content/packs/core/rules/location_affinities.json`.
-- **Type affinity (build now, content ready):** a location TAG grants small situational skill/attribute bumps (forge→Tinker's Hand+Craft; wild→Wayfinding/Beastfriend, −social; water→Rivercraft; ruin→Stonewise/Old Roads; precursor→Latticespeak/Address-Sense, −spirit; shrine→−Foreclose; etc.). Apply as a capped situational modifier in resolution; surface to player ("the forge favored your mending").
-- **Vector alignment (SHAPE PENDING ERIK — resolution-math):** ability whose axes align with a location's strong spectrum axes eases the roll, opposed hardens; cap ±10 on d100. Draft curve in the file. Build once Erik ratifies the curve/cap. Perceived only after vectorsKnown (SNG-011); else applied and revealed as "the place favored this."
-- Smoke: type bonus applies only in tagged locations and is capped; modifier shown in the roll receipt; vector-align built only if ratified.
+## SNG-BATCH-3 — World Liveliness (Erik: run as one batch, 2026-07-06)
 
-## SNG-014 — Random encounters (flavored)
-Erik 2026-07-06: "random encounters of various flavors — beneficial, benign, beautiful, dangerous, theft, chases, fights." Content pre-authored: `content/packs/valley/events/random_encounters.json` (15 encounters × 7 flavors, registered valley manifest).
-- **Engine `engine/random_encounters.js`:** on travel/rest/enter-location/world-tick, maybe roll one encounter (triggerRules chances in the file), weighted by flavor × location dangerLevel + tags. Low-danger skews beneficial/benign/beautiful; high-danger skews dangerous/theft/chase/fight — but every place keeps a chance of beauty and kindness (hopeful-strange, not grim).
-- **Routing (reuse existing engines, no new resolution math):** narrative = beat + optional choice; opposed = one skill check; challenge = staged (encounters engine); duel = combat (encounters engine). Beautiful/beneficial/benign are narrative; theft = opposed (Keen Appraisal/Quiet Step); chase = challenge; fight = duel.
-- **Guardrail (hard):** any fight/dangerous encounter that can incapacitate MUST present decline/flee before engagement (SNG-002b lethal clamp) — no ambush-lethality. Peaceful outs honored (Mediator's Tongue on bandits, Beastfriend to end a creature chase).
+**One build arc, phases in order, each shippable green. Content pre-authored at origin: `content/packs/valley/events/random_encounters.json`, `content/packs/core/rules/location_affinities.json`. Results: `po/results/YYYYMMDD_SNG-BATCH-3.md`. Only Aevi closes.**
+
+### PREVIEW-TESTING PROTOCOL (Erik opted in — test in CCode's live preview during dev)
+At EACH phase boundary, CCode surfaces a working preview and gives Erik a ONE-SENTENCE test task (non-programmer default — no commands), then waits for Erik's test feedback before marking the phase complete_pending_review. Erik tests UI/flow/feel; suites cover mechanics. Priority: **Erik has not tested combat at all yet** — Phase 1 must let him trigger a fight on demand and verify it.
+
+### Phase 1 — SNG-014 Random encounters (flavored) + on-demand test triggers
+- `engine/random_encounters.js`: on travel/rest/enter-location/world-tick, maybe roll one encounter (triggerRules chances in the content file), weighted by flavor × location dangerLevel + tags. Low-danger skews beneficial/benign/beautiful; high-danger skews dangerous/theft/chase/fight; every place keeps a chance of grace (hopeful-strange, not grim).
+- Routing reuses existing engines (NO new resolution math): narrative = beat+choice; opposed = one skill check; challenge = staged (encounters engine); duel = combat (encounters engine). theft=opposed (Keen Appraisal/Quiet Step); chase=challenge; fight=duel.
+- **HARD guardrail:** any fight/dangerous encounter that can incapacitate MUST present decline/flee before engagement (SNG-002b). Peaceful outs honored (Mediator's Tongue on bandits, Beastfriend ends a creature chase).
+- **DEV TEST TRIGGERS (so Erik can finally test combat):** a dev/test affordance in the preview to FIRE a chosen encounter flavor on demand — one button per flavor (beneficial/benign/beautiful/dangerous/theft/chase/fight). Behind a dev flag; not shipped to normal play UI (or tucked in a debug panel). This is how Erik tests a duel without waiting for a random roll.
 - Precursor-glimpse flavors stay glimpsed-never-explained (lore canon).
-- Smoke: encounter rolls respect trigger chances + danger weighting; flavor spread present; every lethal-capable encounter carries an avoid path; routing dispatches to the right engine; peaceful-out abilities resolve the encounter.
+- **Erik preview test (Phase 1):** "Trigger a Fight from the test panel — verify you get a clear decline/flee option BEFORE it starts, that a duel runs in rounds with both health bars moving, and that yielding ends it cleanly." Plus trigger one Beautiful and one Theft to feel the tonal range.
+- Smoke: trigger chances + danger weighting respected; flavor spread present; every lethal-capable encounter carries an avoid path; routing dispatches correctly; peaceful-out abilities resolve the encounter; dev triggers fire each flavor.
 
-### Sequencing / batch
-Suggest SNG-014 (random encounters) first — highest felt-variety per Erik's original "quiet and slow" report — then SNG-013 type-affinity, with SNG-013 vector-bias landing when Erik ratifies the curve. Or bundle both as SNG-BATCH-3. Also still queued: SNG-010C item evolution (needs PO content), SNG-001 party remainder, SNG-004+008, and the parked 3c class-cap + branch-forks (pending Erik shape).
+### Phase 2 — SNG-013 Location skill affinities
+- **Type affinity (content ready):** location TAG grants small capped situational skill/attribute bumps (forge→Tinker's Hand+Craft; wild→Wayfinding/Beastfriend, −social; water→Rivercraft; ruin→Stonewise/Old Roads; precursor→Latticespeak/Address-Sense, −spirit; shrine→−Foreclose; market→Keen Appraisal/Mediator's Tongue; settled→Storykeeper/Hearthbinding; high→Prism Sight, −Quiet Step). Surface in the roll receipt ("the forge favored your mending +8").
+- **Vector alignment (building to the DRAFT curve; Erik tunes via browser-leg):** ability whose axes align with a location's strong spectrum axes eases the roll, opposed hardens; total location modifier capped ±10 on d100. Perceived only after vectorsKnown (SNG-011); else applied and revealed as "the place favored this." Erik's browser-leg IS the ratification of the feel — if the curve/cap is wrong, Aevi retunes the numbers (self-ratify) or Erik amends the shape.
+- **Erik preview test (Phase 2):** "In a strongly-tilted place (e.g. the Archive Hollow), attempt an aligned skill and an opposed one — verify the roll receipt shows the location helping one and hindering the other, and that it never swings more than ±10."
+- Smoke: type bonus applies only in tagged locations, capped; vector modifier computed from spectrum vs axes, capped ±10; both shown in the receipt.
+
+### Batch guardrails
+Design law 1 (encounters/affinities are engine-computed; GM narrates, never invents mechanics); reuse encounters/resolution engines — no new math except the capped location modifier; additive; content-not-code; lethal-avoidability absolute; this repo never touches the ErikIAm pipeline; suites + parse_probe green per phase.
+
+### Queue after batch
+SNG-010C item evolution (needs PO Waystaff+Aevi seed content — Aevi owes it) → SNG-001 party remainder → SNG-004+008. Parked pending Erik shape: 3c class-cap, branch-forks; SNG-013 vector-bias curve confirm.
 
 ---
 

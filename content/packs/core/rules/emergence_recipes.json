@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "description": "Emergence recipes — authored templates that ripen from practice (co-activation ledger). The engine mints from these; the model never freeforms a combo. Three tiers: 'branch' grows an owned ability's tree, 'combo' braids two owned abilities into a discovery, 'novel' is the rare wholly-new unlock (gated hardest). notFor and cost lines carry the same honesty bar as the ability catalog.",
+  "recipes": [
+    {
+      "id": "resonant_sight",
+      "tier": "combo",
+      "name": "Resonant Sight",
+      "components": ["prism_sight", "sonic_resonance"],
+      "requires": {"prism_sight": 1, "sonic_resonance": 1},
+      "ripenAt": 6,
+      "energyCost": 9,
+      "attribute": "mental",
+      "axes": {"concrete_abstract": 0.2, "instinct_analysis": 0.3},
+      "effectTags": ["perceive", "reveal", "structural"],
+      "description": "Light and vibration read together: see a thing by how it rings and refracts at once. Hidden seams, hollow places, and stress-signatures show themselves — what a surface conceals is betrayed by how it answers the braided field.",
+      "notFor": "Reading intent or thought (only structure and material); working through the gray water, which returns silence to both senses; seeing what has no resonance and casts no light.",
+      "narrationHints": "The two techniques stop being two — light held to a note until the object confesses its inside. Warm where it's whole, wrong where it's been touched.",
+      "discoveredBlurb": "Prism Sight and Sonic Resonance have braided enough times that they've fused: the eye now hears and the ear now sees."
+    },
+    {
+      "id": "wardens_chord",
+      "tier": "combo",
+      "name": "Warden's Chord",
+      "components": ["sonic_resonance", "resonant_anchor"],
+      "requires": {"sonic_resonance": 2, "resonant_anchor": 1},
+      "ripenAt": 7,
+      "energyCost": 10,
+      "attribute": "practical",
+      "axes": {"mechanical_spiritual": -0.2, "individual_collective": 0.3},
+      "effectTags": ["defend", "structural", "hold"],
+      "description": "Brace and vibration sung as one held chord: stabilize a failing structure — a bridge, a shaft, a wall mid-collapse — long enough for people to cross or clear. Buys minutes, not permanence.",
+      "notFor": "Repairing (only holding); holding against a force that grows; anything you can't touch or stand within reach of.",
+      "narrationHints": "A note you hold in your teeth and your knees both. The stone agrees to wait.",
+      "discoveredBlurb": "Anchoring and resonance have run together enough to become a single sustained act."
+    },
+    {
+      "id": "true_ward",
+      "tier": "combo",
+      "name": "True Ward",
+      "components": ["prism_sight", "prism_ward"],
+      "requires": {"prism_sight": 2, "prism_ward": 1},
+      "ripenAt": 6,
+      "energyCost": 9,
+      "attribute": "mental",
+      "axes": {"concrete_abstract": 0.3, "tradition_innovation": 0.1},
+      "effectTags": ["ward", "reveal", "detect"],
+      "description": "A ward that doesn't just bar but reports: anything crossing it is seen truly as it passes — form, intent-shape, whether it's what it claims. A tripwire that also names the thing that trips it.",
+      "notFor": "Stopping what it reveals (it sees, it doesn't hold); reading through deliberate Precursor masking; covering more than a threshold-sized span.",
+      "narrationHints": "The ward hums and the hum has eyes. Nothing passes unread.",
+      "discoveredBlurb": "Sight and ward have fused — the boundary now perceives what meets it."
+    }
+  ],
+  "branchTemplates": [
+    {
+      "id": "prism_sight_deep_read",
+      "tier": "branch",
+      "growsAbility": "prism_sight",
+      "name": "Deep Read",
+      "requiresRank": 2,
+      "ripenAt": 8,
+      "grants": "A specialization branch: with time and stillness, read an object's layered history in light — not just what it is, but the order of what happened to it.",
+      "cannot": "Needs minutes and quiet; a hurried or hostile scene forecloses it; history older than the material itself is silent.",
+      "narrationHints": "The spectrum stops being a snapshot and becomes a sequence — a stratigraphy of light."
+    }
+  ]
+}

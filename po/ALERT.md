@@ -1,49 +1,31 @@
 # PO Alert — Singularity
 
-**Status:** complete_pending_review — SNG-BATCH-2 Phases 0-3 shipped v1.5.0→v1.6.1 (results: po/results/20260706_SNG-BATCH-2.md). Phase 4 (SNG-010C item evolution) DEFERRED — needs PO-authored Waystaff+Aevi seed content. GM rules EW/FCT/19 flagged for Erik ratification. SNG-004+SNG-008 queued next.
+**Status:** SNG-BATCH-2 CLOSED GREEN (v1.5.0→v1.6.1, 327 checks, browser-verified). Next: SNG-013 + SNG-014 (world liveliness). Detailed prior specs preserved below.
 
 ---
 
-## SNG-BATCH-2 — the big update (one build arc, phases in strict order, each independently shippable)
+## PO closure — SNG-BATCH-2 (2026-07-06, Aevi)
+All phases closed_green after origin audit: facts.js / vectors.js / skilltree.js exist at HEAD; attribute gates + broad-vs-deep capacity genuinely ENFORCED in progression.js (meetsLearnGate/meetsRank3Gate/atCapacity); ESTABLISHED FACTS + PLAYER'S EXACT WORDS blocks wired into GM context (rules FCT, EW). Picker collapsible + tier/level indicators + rank-up highlight shipped; skill-KG graph rendered like the world map; player NPC-rename shipped. Phase 4 (item evolution) correctly deferred — needs PO Waystaff+Aevi seed content.
+**Erik ratification requested (load-bearing GM rules):** EW (exact-words narration), FCT (established-facts permanence + factUpdates + statusNote). Both implement fixes Erik requested; flagged per protocol — Erik: confirm or amend wording.
 
-**Opened 2026-07-06 (Aevi PO; batch requested by Erik). Ship green per phase; results in `po/results/YYYYMMDD_SNG-BATCH-2.md`, per-phase sections, complete_pending_review per phase; only Aevi closes.**
+---
 
-**Ratification state going in (Erik 2026-07-06):**
-- Attribute gates for SOME skills — **RATIFIED**, build. Selection + values pre-authored at `content/packs/core/rules/attribute_gates.json` (10 high-tier abilities, manifest v0.5.0).
-- Skill KG graph (render like world map) + Tier I–V badges — self-ratified viz, build.
-- **Tier-slot capacity (3c-iv) — RATIFIED** (Erik 2026-07-06: generic RPG quantity/level, L1=2). Table pre-authored at `content/packs/core/rules/skill_capacity.json` (manifest v0.6.0). Build in this batch (Phase 3).
-- Class-cap (3c-i), branch forks (3c-iii) — still PENDING shape ratification; NOT in this batch.
+## SNG-013 — Location skill affinities (RATIFIED direction; vector-bias shape pending Erik)
+Erik 2026-07-06: "location benefits/drawbacks to certain skills." Content pre-authored: `content/packs/core/rules/location_affinities.json`.
+- **Type affinity (build now, content ready):** a location TAG grants small situational skill/attribute bumps (forge→Tinker's Hand+Craft; wild→Wayfinding/Beastfriend, −social; water→Rivercraft; ruin→Stonewise/Old Roads; precursor→Latticespeak/Address-Sense, −spirit; shrine→−Foreclose; etc.). Apply as a capped situational modifier in resolution; surface to player ("the forge favored your mending").
+- **Vector alignment (SHAPE PENDING ERIK — resolution-math):** ability whose axes align with a location's strong spectrum axes eases the roll, opposed hardens; cap ±10 on d100. Draft curve in the file. Build once Erik ratifies the curve/cap. Perceived only after vectorsKnown (SNG-011); else applied and revealed as "the place favored this."
+- Smoke: type bonus applies only in tagged locations and is capped; modifier shown in the roll receipt; vector-align built only if ratified.
 
-### Phase 0 — SNG-012 Memory & Input Fidelity (HOTFIX, do FIRST)
-Full spec below. Part A: player's raw typed text reaches the narration GM verbatim (PLAYER'S EXACT WORDS block); parseIntent stays mechanical-only. Part B: durable non-scrolling ESTABLISHED FACTS ledger (factUpdates op) + named-NPC situation status pinned in npcRegistryDetail. Fixes GM-forgets + typed-detail-lost.
-Part C (name fix — Erik 2026-07-06, names still not revealing): `revealName` code works but the GM under-emits it (op-loss/continuity). Two fixes: (1) op-loss restate must explicitly re-emit a pending name reveal; (2) **player-driven rename** — a "Set name" affordance on any "(name unknown)" People-You-Know entry (parallel to SNG-009 item naming): player types the known name, engine sets displayName on the existing npcId, ledger notes it, GM context carries it as established fact thereafter. Erik can name the Tuning-warden "Maren" directly without waiting on the GM. Smoke: rename sets displayName on stable id; GM context shows the set name next turn.
+## SNG-014 — Random encounters (flavored)
+Erik 2026-07-06: "random encounters of various flavors — beneficial, benign, beautiful, dangerous, theft, chases, fights." Content pre-authored: `content/packs/valley/events/random_encounters.json` (15 encounters × 7 flavors, registered valley manifest).
+- **Engine `engine/random_encounters.js`:** on travel/rest/enter-location/world-tick, maybe roll one encounter (triggerRules chances in the file), weighted by flavor × location dangerLevel + tags. Low-danger skews beneficial/benign/beautiful; high-danger skews dangerous/theft/chase/fight — but every place keeps a chance of beauty and kindness (hopeful-strange, not grim).
+- **Routing (reuse existing engines, no new resolution math):** narrative = beat + optional choice; opposed = one skill check; challenge = staged (encounters engine); duel = combat (encounters engine). Beautiful/beneficial/benign are narrative; theft = opposed (Keen Appraisal/Quiet Step); chase = challenge; fight = duel.
+- **Guardrail (hard):** any fight/dangerous encounter that can incapacitate MUST present decline/flee before engagement (SNG-002b lethal clamp) — no ambush-lethality. Peaceful outs honored (Mediator's Tongue on bandits, Beastfriend to end a creature chase).
+- Precursor-glimpse flavors stay glimpsed-never-explained (lore canon).
+- Smoke: encounter rolls respect trigger chances + danger weighting; flavor spread present; every lethal-capable encounter carries an avoid path; routing dispatches to the right engine; peaceful-out abilities resolve the encounter.
 
-### Phase 1 — SNG-011 Phases 0–2 (world legibility + Precursor wire)
-Full spec below. Map sub-place render fix (satellites on parent nodes); location vectors made player-perceivable (spectrum data already fed to GM); wire the Precursor tier (gated acquisition + peril drift on the alignment vector, Foreclose→foreclosing axes, Hold the Aperture→life/creation).
-
-### Phase 2 — Skill legibility: graph + tiers + picker fixes (Erik live-flagged 2026-07-06)
-The current ability PICKER is a flat scrolling list of "Learn: X" buttons (screenshot) — fix the picker AND ship the graph.
-- **Ability picker (the Learn list):** COLLAPSIBLE, grouped by class (and Tier within class) — same collapsible pattern as the now-shipped People-You-Know location groups; current-tier group open by default. Each Learn row shows the Tier I–V badge and levelReq inline. This is the surface Erik sees at level-up/creation; it must not be a flat list.
-- **Level-up highlight:** when a skill ranks up (by point or by practice), HIGHLIGHT the newly-gained capability — show the new rank's `grants` emphasized against the prior rank so the player sees exactly what improved (and the new `cannot`, briefly). Applies on the character sheet and in the level-up flow.
-- **Skill KG graph:** catalog as a graph rendered the SAME WAY as the world map (reuse renderMap SVG-node approach, not a generic lib): class = node color, Tier I–V = size/badge, levelReqs on labels, edges for prerequisites + emergence recipes; owned/ripe/aspired lit; attribute-gate + capacity-cap states shown as locks. Reachable from the character screen.
-- Tier I–V badge (from levelReq) shown everywhere an ability appears — sheet, picker, graph.
-- Smoke: picker renders collapsible groups with current-tier open; tier badges + levelReq on every row; rank-up shows the improved-capability highlight; graph renders like the map with all encodings.
-
-### Phase 3 — Attribute gates + broad-vs-deep capacity (both RATIFIED, wire pre-authored content)
-**Capacity (skill_capacity.json):** a character may LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level] (L1=2, then +1/level). At the cap, skill points go to DEPTH (rank-ups). Emergence combos/branches + crit-discoveries do NOT count against the cap. Show remaining breadth slots in the picker + character sheet ("2 of 2 skills — at capacity, points now deepen owned skills"). Smoke: learn blocked at cap, rank-up still allowed at cap, earned techniques don't consume slots, cap scales with level.
-**Attribute gates (attribute_gates.json):** wire `attribute_gates.json`: to LEARN a gated ability, character's governing sub-attribute >= learnMin; to reach rank 3, >= rank3Min. Gated = 10 high-tier abilities (Tier III–V); Tier I–II ungated. Show gate state as locks in the skill graph + ability picker (e.g. "needs Insight 5 — you have 3"); block learn/rank when unmet, clear when met. Smoke: gate blocks below threshold, clears at/above, ungated abilities unaffected, rank-3 gate distinct from learn gate.
-
-### Phase 4 — SNG-010 Phase C: item evolution (OPTIONAL — only if the session has room after Phases 0–3 ship green)
-Full spec below. Item `evolution` linked to a companion bond; Waystaff wakes by stages as Aevi's bond deepens and she's integrated into casts. PO authors the Waystaff+Aevi seed content on pickup.
-
-### Batch guardrails
-Design law 1 absolute (facts/gates/state engine-owned; GM emits typed clamped ops only); additive schemas; content-not-code; resolution/encounter math untouched except named blocks; this repo never touches the ErikIAm pipeline; suites + parse_probe green at every phase boundary — a phase ships only green.
-
-### Verify (Erik browser-leg, after ship)
-1. Long typed action → GM honors the specifics. 2. Rescue an NPC from a place → many scenes later still treated as rescued. 3. Map shows sub-place satellites. 4. Location shows its vectors; subtle axes need a perceiving ability. 5. Skill graph opens from character screen, rendered like the map, class-colored, Tier-badged, level-reqs shown. 6. A Tier-III+ ability shows an attribute lock until the sub-attribute is high enough. 7. (If Phase 4) Waystaff evolves a stage as Aevi's bond climbs.
-
-### Queue after batch
-SNG-001 party play remainder → SNG-004 origins-as-content + SNG-008 (Heimrún shrine, Council of Mavens, framework weave). Pending-ratification 3c items (tier-slots table, class cap, forks) fold into a later batch once Erik confirms shapes. Full queue: `po/BACKLOG.md`.
+### Sequencing / batch
+Suggest SNG-014 (random encounters) first — highest felt-variety per Erik's original "quiet and slow" report — then SNG-013 type-affinity, with SNG-013 vector-bias landing when Erik ratifies the curve. Or bundle both as SNG-BATCH-3. Also still queued: SNG-010C item evolution (needs PO content), SNG-001 party remainder, SNG-004+008, and the parked 3c class-cap + branch-forks (pending Erik shape).
 
 ---
 

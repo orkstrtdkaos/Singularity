@@ -8,6 +8,7 @@
 //     critical success mints a permanent named technique with a standing bonus.
 
 import { slugify } from "./quests.js";
+import { meetsLearnGate, meetsRank3Gate, atCapacity } from "./skilltree.js";
 
 export const SUB_OF = {
   strength: "physical", agility: "physical",
@@ -110,6 +111,10 @@ export function rankUpAbility(character, abilityId, rules, opts = {}) {
   if (owned.level >= max) return { ok: false, why: "already mastered" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
   if (character.level < req) return { ok: false, why: `requires level ${req}` };
+  if (owned.level + 1 >= 3 && opts.attributeGates) {
+    const g = meetsRank3Gate(character, abilityId, opts.attributeGates);
+    if (!g.ok) return { ok: false, why: g.why };
+  }
   owned.level++;
   if (!opts.viaPractice) character.skillPoints--;
   return { ok: true, newRank: owned.level, viaPractice: !!opts.viaPractice };
@@ -145,6 +150,13 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   const req = effectiveLevelReq(ab, character, rules);
   if (req === null) return { ok: false, why: "wrong tradition" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
+  if (opts.attributeGates) {
+    const g = meetsLearnGate(character, abilityId, opts.attributeGates);
+    if (!g.ok) return { ok: false, why: g.why };
+  }
+  if (opts.skillCapacity && atCapacity(character, opts.skillCapacity)) {
+    return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one" };
+  }
   character.abilities.push({ abilityId, level: 1 });
   if (!opts.free) character.skillPoints--;
   return { ok: true, free: !!opts.free };

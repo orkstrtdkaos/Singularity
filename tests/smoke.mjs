@@ -789,5 +789,30 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("graph draws recipe edges between real component ids", gm.edges.some(e => e.from === "prism_sight" && e.kind === "combo"));
 }
 
+// --- SNG-BATCH-2 Phase 3: gate + capacity ENFORCEMENT ---
+{
+  const gates3 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/attribute_gates.json"), "utf8"));
+  const cap3 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_capacity.json"), "utf8"));
+  const cat3 = {};
+  for (const g of ["harmonic","radiant","valley_craft"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+g+".json"),"utf8")); for (const a of pk.abilities) cat3[a.id] = {...a, powerSystem: pk.powerSystem}; }
+  // attribute-gate blocks learn of a gated ability below threshold
+  const lowReason = { origin: "valley", level: 5, skillPoints: 3, abilities: [], subAttributes: { reason: 3 }, customAbilities: {} };
+  check("gated learn blocked below sub-attribute", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3 }).why.includes("reason"));
+  lowReason.subAttributes.reason = 5;
+  check("gated learn clears at threshold", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);
+  // rank-3 gate
+  const r3 = { origin: "valley", level: 5, skillPoints: 3, abilities: [{ abilityId: "shatterpoint", level: 2 }], subAttributes: { reason: 5 }, customAbilities: {} };
+  check("rank-3 blocked below rank3Min", rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3 }).why.includes("rank 3"));
+  r3.subAttributes.reason = 7;
+  check("rank-3 clears at rank3Min", rankUpAbility(r3, "shatterpoint", rules, { attributeGates: gates3 }).ok);
+  // capacity blocks a fresh learn at cap; rank-up still allowed
+  const capped = { origin: "valley", level: 1, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }, { abilityId: "greenlore", level: 1 }], subAttributes: {}, customAbilities: {} };
+  check("learn blocked at breadth capacity", learnAbility(capped, "stonewise", cat3, rules, { skillCapacity: cap3 }).why.includes("capacity"));
+  check("rank-up still allowed at capacity", rankUpAbility({ ...capped, level: 3 }, "wayfinding", rules, {}).ok);
+  // ungated + under cap learns fine
+  const room = { origin: "valley", level: 3, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }], subAttributes: {}, customAbilities: {} };
+  check("ungated learn under cap succeeds", learnAbility(room, "greenlore", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

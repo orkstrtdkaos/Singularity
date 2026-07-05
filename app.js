@@ -28,7 +28,7 @@ import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.0";
+const APP_VERSION = "1.6.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1098,7 +1098,7 @@ function renderCharacterScreen() {
           <span class="cs-val">${v}</span>
           ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
         </div>`; }).join("")}</div>
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities</h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span></h3>
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
         const canRank = character.skillPoints > 0 && a.level < (rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
@@ -1140,13 +1140,13 @@ function renderCharacterScreen() {
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
-  for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => { const r = rankUpAbility(character, btn.dataset.rank2, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
+  for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => { const r = rankUpAbility(character, btn.dataset.rank2, rules, { attributeGates: CONTENT.attributeGates }); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
   const aspPick = document.getElementById("asp-pick");
   if (aspPick) aspPick.onchange = () => { if (aspPick.value) { const r = declareAspiration(character, aspPick.value, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); } };
   for (const btn of app.querySelectorAll("[data-aspdrop]")) btn.onclick = () => { dropAspiration(character, btn.dataset.aspdrop); saveCharacter(character); renderCharacterScreen(); };
   for (const btn of app.querySelectorAll("[data-asplearn]")) btn.onclick = () => {
     const id = btn.dataset.asplearn;
-    const r = learnAbility(character, id, fullCatalog(), rules, { free: true });
+    const r = learnAbility(character, id, fullCatalog(), rules, { free: true, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity });
     if (r.ok) { dropAspiration(character, id); saveCharacter(character); renderCharacterScreen(); } else alert(r.why);
   };
   for (const btn of app.querySelectorAll("[data-claimcombo]")) btn.onclick = () => {
@@ -1776,16 +1776,16 @@ function renderPlay(turn, opts = {}) {
     renderPlay(turn || character.activeScene?.lastTurn || null, { aside });
   };
   for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
-    const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules);
+    const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules, { attributeGates: CONTENT.attributeGates });
     if (r.ok) afterRank(b.dataset.rankup, r); else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-rankpractice]")) b.onclick = () => {
-    const r = rankUpAbility(character, b.dataset.rankpractice, CONTENT.rules, { viaPractice: true });
+    const r = rankUpAbility(character, b.dataset.rankpractice, CONTENT.rules, { viaPractice: true, attributeGates: CONTENT.attributeGates });
     if (r.ok) afterRank(b.dataset.rankpractice, r); else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
     const free = aspirationRipe(character, b.dataset.learn, CONTENT.rules);
-    const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free });
+    const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity });
     if (r.ok) {
       if (free) dropAspiration(character, b.dataset.learn);
       saveCharacter(character);

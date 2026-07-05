@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** active — SNG-BATCH-2 (big update). Detailed task specs (SNG-012, SNG-011, SNG-010C) preserved below; this header is the ordered build plan.
+**Status:** complete_pending_review — SNG-BATCH-2 Phases 0-3 shipped v1.5.0→v1.6.1 (results: po/results/20260706_SNG-BATCH-2.md). Phase 4 (SNG-010C item evolution) DEFERRED — needs PO-authored Waystaff+Aevi seed content. GM rules EW/FCT/19 flagged for Erik ratification. SNG-004+SNG-008 queued next.
 
 ---
 

@@ -24,10 +24,11 @@ import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAsp
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
+import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.5.1";
+const APP_VERSION = "1.6.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1012,6 +1013,70 @@ function renderMap(selectedId = null) {
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
+// ---------- skill KG graph (SNG-011 Phase 3a — rendered like the world map) ----------
+
+function renderSkillGraph(selectedId = null) {
+  const model = skillGraphModel(fullCatalog(), CONTENT.emergence, character, {
+    attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity,
+    preds: {
+      isRipe: id => ripeCombos(character, CONTENT.emergence, CONTENT.rules).some(r => r.id === id) || ripeBranches(character, CONTENT.emergence).some(t => t.id === id),
+      isAspired: id => (character.practice?.aspirations || []).some(a => a.abilityId === id)
+    }
+  });
+  const classes = [...new Set(model.nodes.map(n => n.cls))];
+  const colW = 150, rowH = 46, padX = 70, padY = 70;
+  // layout: class column, tier→name order within column
+  const pos = {};
+  classes.forEach((cls, ci) => {
+    const col = model.nodes.filter(n => n.cls === cls).sort((a, b) => a.levelReq - b.levelReq || a.name.localeCompare(b.name));
+    col.forEach((n, ri) => { pos[n.id] = { x: padX + ci * colW, y: padY + ri * rowH }; });
+  });
+  const virtuals = [...new Set(model.edges.map(e => e.virtual))];
+  virtuals.forEach((vid, vi) => { pos[vid] = { x: padX + classes.length * colW + 20, y: padY + vi * rowH * 1.6 }; });
+  const width = padX + (classes.length + 1) * colW + 60;
+  const height = Math.max(padY + 8 * rowH, padY + virtuals.length * rowH * 1.6 + 40,
+    ...classes.map(cls => padY + model.nodes.filter(n => n.cls === cls).length * rowH + 40));
+  const recipeName = id => (CONTENT.emergence.recipes || []).find(r => r.id === id)?.name || (CONTENT.emergence.branchTemplates || []).find(t => t.id === id)?.name || id;
+
+  const svg = `<svg viewBox="0 0 ${width} ${height}" class="world-map skill-graph">
+    ${classes.map((cls, ci) => `<text x="${padX + ci * colW}" y="36" text-anchor="middle" class="graph-class-label" fill="${classColor(cls)}">${esc(classLabel(cls))}</text>`).join("")}
+    ${virtuals.length ? `<text x="${padX + classes.length * colW + 20}" y="36" text-anchor="middle" class="graph-class-label" fill="${classColor("discovery")}">Emergence</text>` : ""}
+    ${model.edges.map(e => { const A = pos[e.from], B = pos[e.virtual]; return A && B ? `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="graph-edge ${e.kind}"/>` : ""; }).join("")}
+    ${model.nodes.map(n => { const p = pos[n.id]; const r = 6 + (n.levelReq - 1) * 1.5;
+      const cls = `graph-node ${n.owned ? "owned" : ""} ${n.ripe ? "ripe" : ""} ${n.aspired ? "aspired" : ""} ${n.locked ? "locked" : ""} ${selectedId === n.id ? "selected" : ""}`;
+      return `<g class="${cls}" data-skillnode="${esc(n.id)}"><title>${esc(n.name + " — Tier " + n.tier + " (L" + n.levelReq + ")" + (n.owned ? ", rank " + n.rank : "") + (n.locked ? " 🔒 " + n.lockText : ""))}</title>
+        <circle class="hit" cx="${p.x}" cy="${p.y}" r="18"/>
+        <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${n.owned ? classColor(n.cls) : "#23262e"}" stroke="${classColor(n.cls)}"/>
+        ${n.locked ? `<text x="${p.x}" y="${p.y - r - 3}" text-anchor="middle" class="graph-lock">🔒</text>` : ""}
+        <text x="${p.x + r + 4}" y="${p.y + 3}" class="graph-node-label ${n.owned ? "owned" : ""}">${esc(n.name)} <tspan class="graph-tier">${n.tier}</tspan></text>
+      </g>`; }).join("")}
+    ${virtuals.map(vid => { const p = pos[vid]; return `<g class="graph-node virtual" data-skillnode="${esc(vid)}"><title>${esc(recipeName(vid))}</title>
+      <rect x="${p.x - 5}" y="${p.y - 5}" width="10" height="10" transform="rotate(45 ${p.x} ${p.y})" fill="#23262e" stroke="${classColor("discovery")}"/>
+      <text x="${p.x + 10}" y="${p.y + 3}" class="graph-node-label">${esc(recipeName(vid))}</text></g>`; }).join("")}
+  </svg>`;
+
+  const sel = selectedId ? model.nodes.find(n => n.id === selectedId) : null;
+  const selAb = sel ? fullCatalog()[sel.id] : null;
+  const details = sel ? `<div class="map-details">
+    <div class="map-details-head"><h3>${esc(sel.name)}</h3>
+      <span class="rep-band" style="border-color:${classColor(sel.cls)};color:${classColor(sel.cls)}">${esc(classLabel(sel.cls))} · Tier ${sel.tier}</span>
+      ${sel.owned ? `<span class="rep-band trusted">owned · rank ${sel.rank}</span>` : ""}</div>
+    <div class="hint">Level requirement: ${sel.levelReq}${sel.gated ? ` · ${(() => { const g = gateFor(sel.id, CONTENT.attributeGates); return `needs ${g.subAttribute} ${g.learnMin} (rank 3: ${g.rank3Min})`; })()}` : ""}${sel.locked ? ` · 🔒 ${esc(sel.lockText)}` : ""}</div>
+    <p class="map-details-desc">${esc(selAb?.description || "")}</p>
+    ${(selAb?.tree || []).map(t => `<div class="codex-fact"><strong>${tierOf(sel.levelReq)}·r${t.rank} ${esc(t.name)}:</strong> ${esc(t.grants)} <em>(cannot: ${esc(t.cannot)})</em></div>`).join("")}
+  </div>` : "";
+
+  chrome(`<div class="screen" style="max-width:960px">
+    <h2>Skill Graph</h2>
+    <p class="hint" style="margin-bottom:8px">Every ability by class (color) and Tier I–V (size). Filled = owned. Gold ring = aspired · teal ring = ripe to claim · 🔒 = gated. Diamonds are emergence techniques; lines link their components.</p>
+    <div style="overflow:auto; max-height:70vh">${svg}</div>
+    ${details}
+    <button class="btn secondary" id="graph-back" style="margin-top:12px">Back</button>
+  </div>`);
+  for (const g of app.querySelectorAll("[data-skillnode]")) g.onclick = () => renderSkillGraph(g.dataset.skillnode === selectedId ? null : g.dataset.skillnode);
+  document.getElementById("graph-back").onclick = () => renderCharacterScreen();
+}
+
 // ---------- character & inventory screens (SNG-007) ----------
 
 function renderCharacterScreen() {
@@ -1037,7 +1102,7 @@ function renderCharacterScreen() {
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
         const canRank = character.skillPoints > 0 && a.level < (rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
-        return `<div class="cs-ability"><strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
           ${canRank ? `<button class="grow-btn" data-rank2="${esc(a.abilityId)}">▲</button>` : ""}
           ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}</div>`; }).join("")}
@@ -1071,6 +1136,7 @@ function renderCharacterScreen() {
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
+    <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">🗺 Skill Graph</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
@@ -1095,6 +1161,7 @@ function renderCharacterScreen() {
     if (tpl) { acceptBranch(character, tpl); saveCharacter(character); }
     renderCharacterScreen();
   };
+  const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillGraph();
   document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -1414,21 +1481,36 @@ function renderPlay(turn, opts = {}) {
         const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
         const canRank = character.skillPoints > 0 && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
         return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
-          <span class="name">${esc(ab?.name || a.abilityId)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}</em>` : ""}
+          <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${ab ? tierOf(ab.levelReq) : "?"}">${ab ? tierOf(ab.levelReq) : "?"}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}</em>` : ""}
           ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend a skill point">▲</button>` : ""}
           ${practiceRankReady(character, a.abilityId, CONTENT.rules) && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)] ?? 1) ? `<button class="grow-btn practiced" data-rankpractice="${esc(a.abilityId)}" title="Practiced enough — rank up free">▲free</button>` : ""}
           <span class="cost">(${ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : "?"} energy${ab && effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span></div>`;
       }).join("") || "<div class='insight'>none yet</div>"}
-      ${(character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules))) ? Object.values(CONTENT.abilities).filter(ab => {
+      ${(() => {
+        const canShow = character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules));
+        if (!canShow) return "";
+        const cap = atCapacity(character, CONTENT.skillCapacity);
+        const learnable = Object.values(CONTENT.abilities).filter(ab => {
           if (character.abilities.some(a => a.abilityId === ab.id)) return false;
           if (character.skillPoints <= 0 && !aspirationRipe(character, ab.id, CONTENT.rules)) return false;
           const req = effectiveLevelReq(ab, character, CONTENT.rules);
           return req !== null && character.level >= req;
-        }).map(ab => {
-          const cross = effectiveLevelReq(ab, character, CONTENT.rules) !== (ab.levelReq || 1);
-          const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
-          return `<button class="opt ${ripe ? "practiced" : ""}" data-learn="${esc(ab.id)}" title="${esc(ab.description)}" style="margin:2px 0; display:block; width:100%">Learn: ${esc(ab.name)} <span class="cost">(${ab.powerSystem === "valley_craft" ? "valley craft" : ab.powerSystem}${cross ? ", cross-trained" : ""}${ripe ? " — FREE, practiced" : ""})</span></button>`;
-        }).join("") : ""}
+        });
+        const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points now deepen owned skills" : ""}</div>`;
+        if (!learnable.length) return capLine;
+        const byClass = {};
+        for (const ab of learnable) (byClass[ab.powerSystem] = byClass[ab.powerSystem] || []).push(ab);
+        const groups = Object.keys(byClass).sort().map(cls => `<details class="learn-group"><summary>Learn ${esc(classLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+          byClass[cls].sort((a,b)=>(a.levelReq||1)-(b.levelReq||1)).map(ab => {
+            const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
+            const capBlock = cap && ab.powerSystem !== "learned";
+            const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
+            const cross = effectiveLevelReq(ab, character, CONTENT.rules) !== (ab.levelReq || 1);
+            const blocked = !gate.ok || capBlock;
+            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + (gate.ok ? "" : " — " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${cross ? ", cross" : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : ""}</span></button>`;
+          }).join("")}</details>`).join("");
+        return capLine + groups;
+      })()}
       ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
     </section>
     <section><h3>People you know</h3>
@@ -1685,7 +1767,13 @@ function renderPlay(turn, opts = {}) {
       character.precursorAccess = [...(character.precursorAccess || []), "address_sense"];
     }
     saveCharacter(character);
-    renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `${fullCatalog()[abilityId]?.name} advances to rank ${r.newRank}${r.viaPractice ? " — earned by practice, no point spent" : ""}.${abilityId === "old_roads" && r.newRank === 3 ? " The old roads remember you now: Address-Sense may be learned." : ""}` });
+    // rank-up highlight: show exactly what the new rank grants (and its new limit)
+    const ab = fullCatalog()[abilityId];
+    const gained = ab?.tree?.find(t => t.rank === r.newRank);
+    let aside = `${ab?.name} advances to rank ${r.newRank}${r.viaPractice ? " — earned by practice, no point spent" : ""}.`;
+    if (gained) aside += `\n✦ Now: ${gained.name} — ${gained.grants}\n△ New limit: ${gained.cannot}`;
+    if (abilityId === "old_roads" && r.newRank === 3) aside += "\nThe old roads remember you now: Address-Sense may be learned.";
+    renderPlay(turn || character.activeScene?.lastTurn || null, { aside });
   };
   for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
     const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules);

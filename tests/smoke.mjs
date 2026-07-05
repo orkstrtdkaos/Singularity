@@ -758,5 +758,36 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("unvisited place shows nothing", vectorSummary({ placeMemory: {} }, "millbrook", loc, spectrums, rules) === null);
 }
 
+// --- SNG-BATCH-2 Phase 2/3: skill tree helpers ---
+{
+  const { tierOf, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } = await import("../engine/skilltree.js");
+  const gates = JSON.parse(readFileSync(join(root, "content/packs/core/rules/attribute_gates.json"), "utf8"));
+  const capTable = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_capacity.json"), "utf8"));
+  const cat = {};
+  for (const g of ["harmonic","radiant","valley_craft","precursor"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+g+".json"),"utf8")); for (const a of pk.abilities) cat[a.id] = {...a, powerSystem: pk.powerSystem}; }
+  check("tierOf maps levelReq to roman", tierOf(1) === "I" && tierOf(3) === "III" && tierOf(5) === "V" && tierOf(9) === "V");
+  check("classLabel humanizes", classLabel("valley_craft") === "Valley Craft" && classLabel("precursor") === "Precursor");
+  // attribute gates
+  check("ungated ability passes", meetsLearnGate({ subAttributes: { reason: 1 } }, "sonic_resonance", gates).ok);
+  check("gated ability blocks below threshold", !meetsLearnGate({ subAttributes: { reason: 3 } }, "shatterpoint", gates).ok);
+  check("gated ability clears at threshold", meetsLearnGate({ subAttributes: { reason: 5 } }, "shatterpoint", gates).ok);
+  check("rank-3 gate is a distinct, higher bar", !meetsRank3Gate({ subAttributes: { reason: 5 } }, "shatterpoint", gates).ok && meetsRank3Gate({ subAttributes: { reason: 7 } }, "shatterpoint", gates).ok);
+  // capacity
+  const c1 = { level: 1, abilities: [{ abilityId: "sonic_resonance", level: 1 }], customAbilities: {} };
+  check("L1 breadth cap is 2", breadthCap(c1, capTable) === 2 && breadthUsed(c1) === 1 && !atCapacity(c1, capTable));
+  c1.abilities.push({ abilityId: "echo_sense", level: 1 });
+  check("at cap when breadth used == cap", atCapacity(c1, capTable));
+  c1.customAbilities = { "motes-vigil": {} }; c1.abilities.push({ abilityId: "motes-vigil", level: 1 });
+  check("earned techniques do not consume breadth", breadthUsed(c1) === 2 && atCapacity(c1, capTable));
+  c1.level = 3;
+  check("cap scales with level", breadthCap(c1, capTable) === 4 && !atCapacity(c1, capTable));
+  // graph model
+  const emergence = JSON.parse(readFileSync(join(root, "content/packs/core/rules/emergence_recipes.json"), "utf8"));
+  const gm = skillGraphModel(cat, emergence, { level: 3, abilities: [{ abilityId: "prism_sight", level: 2 }], subAttributes: { reason: 2 }, customAbilities: {} }, { attributeGates: gates, skillCapacity: capTable, preds: {} });
+  check("graph has a node per ability with tier/class", gm.nodes.length === Object.keys(cat).length && gm.nodes.every(n => n.tier && n.cls));
+  check("graph marks owned + gated + locked", gm.nodes.find(n => n.id === "prism_sight").owned && gm.nodes.find(n => n.id === "shatterpoint").gated && gm.nodes.find(n => n.id === "shatterpoint").locked);
+  check("graph draws recipe edges between real component ids", gm.edges.some(e => e.from === "prism_sight" && e.kind === "combo"));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

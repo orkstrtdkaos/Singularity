@@ -21,6 +21,11 @@ export async function loadContent() {
   let emergence = { recipes: [], branchTemplates: [] };
   const emergencePath = (index.provides.rules || []).find(r => r.includes("emergence"));
   if (emergencePath) { try { emergence = await fetchJSON(`content/packs/core/${emergencePath}`); } catch { /* optional */ } }
+  let attributeGates = { gates: {} }, skillCapacity = { skillsKnownByLevel: {} };
+  const gatesPath = (index.provides.rules || []).find(r => r.includes("attribute_gates"));
+  if (gatesPath) { try { attributeGates = await fetchJSON(`content/packs/core/${gatesPath}`); } catch { /* optional */ } }
+  const capPath = (index.provides.rules || []).find(r => r.includes("skill_capacity"));
+  if (capPath) { try { skillCapacity = await fetchJSON(`content/packs/core/${capPath}`); } catch { /* optional */ } }
 
   const abilities = {};
   for (const path of index.provides.abilities) {
@@ -66,7 +71,7 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, emergence, abilities, items, locations, npcs, events, companions, encounters, lore, region, startingLocation: valley.startingLocation };
+  return { spectrums, rules, emergence, attributeGates, skillCapacity, abilities, items, locations, npcs, events, companions, encounters, lore, region, startingLocation: valley.startingLocation };
 }
 
 async function fetchJSON(path) {

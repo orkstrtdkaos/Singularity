@@ -21,10 +21,11 @@ import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rer
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
+import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.4.0";
+const APP_VERSION = "1.4.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -185,6 +186,15 @@ function migrate(c) {
   ensurePractice(c);
   if (!c.precursorAccess) c.precursorAccess = [];
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
+  // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
+  if (needsBackfill(c)) {
+    c._backfillSummary = runBackfill(c, {
+      rules: CONTENT.rules,
+      abilityCatalog: { ...CONTENT.abilities, ...(c.customAbilities || {}) },
+      emergence: CONTENT.emergence,
+      companionCatalog: CONTENT.companions
+    });
+  }
   return c;
 }
 
@@ -485,20 +495,28 @@ async function enterPlay() {
     });
   }
   const news = await maybeTick();
+  // one-time "catching up" tally from the backfill migration
+  let backfillAside = null;
+  if (character._backfillSummary) {
+    const lines = summaryLines(character._backfillSummary);
+    delete character._backfillSummary;
+    saveCharacter(character);
+    if (lines.length) backfillAside = "Catching up on all you've done:\n• " + lines.join("\n• ");
+  }
   if (character.activeScene?.turns?.length) {
     sceneTurns = character.activeScene.turns;
     sceneState = character.activeScene.sceneState || null;
-    renderPlay(character.activeScene.lastTurn, { resumed: true, newsFlash: news });
+    renderPlay(character.activeScene.lastTurn, { resumed: true, newsFlash: news, aside: backfillAside });
   } else {
-    startScene(undefined, news);
+    startScene(undefined, news, backfillAside);
   }
 }
 
-async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = []) {
+async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = [], aside = null) {
   if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
-  renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news });
+  renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news, aside });
   const result = await runGM({ resolution: null, playerInput: prompt });
-  if (result) renderPlay(result.turn, { degraded: result.degraded, newsFlash: news });
+  if (result) renderPlay(result.turn, { degraded: result.degraded, newsFlash: news, aside });
 }
 
 async function runGM({ resolution, playerInput }) {
@@ -1029,6 +1047,15 @@ function renderCharacterScreen() {
           ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && effectiveLevelReq(ab, character, rules) !== null && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${ab.powerSystem}, lv ${effectiveLevelReq(ab, character, rules)})</option>`).join("")}
         </select>` : ""}
     </div>
+    ${(() => {
+      const combos = ripeCombos(character, CONTENT.emergence, rules);
+      const branches = ripeBranches(character, CONTENT.emergence);
+      if (!combos.length && !branches.length) return "";
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Ripe to claim <span class="hint" style="text-transform:none">(practice has ripened these — claim now or let the GM offer them in play)</span></h3>
+        ${combos.map(r => `<div class="cs-ability"><strong>${esc(r.name)}</strong> <span class="hint">(combo: ${r.components.join(" + ")})</span> <button class="grow-btn practiced" data-claimcombo="${esc(r.id)}">claim</button><div class="hint">${esc(r.description.slice(0, 120))}</div></div>`).join("")}
+        ${branches.map(t => `<div class="cs-ability"><strong>${esc(t.name)}</strong> <span class="hint">(branch: grows ${t.growsAbility})</span> <button class="grow-btn practiced" data-claimbranch="${esc(t.id)}">claim</button><div class="hint">${esc(t.grants.slice(0, 120))}</div></div>`).join("")}
+      </div>`;
+    })()}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aptitudes (you, the player)</h3>
       <div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests</h3>
@@ -1046,6 +1073,18 @@ function renderCharacterScreen() {
     const id = btn.dataset.asplearn;
     const r = learnAbility(character, id, fullCatalog(), rules, { free: true });
     if (r.ok) { dropAspiration(character, id); saveCharacter(character); renderCharacterScreen(); } else alert(r.why);
+  };
+  for (const btn of app.querySelectorAll("[data-claimcombo]")) btn.onclick = () => {
+    const tpl = validEmergenceId(character, CONTENT.emergence, rules, btn.dataset.claimcombo);
+    if (!tpl) return renderCharacterScreen();
+    const nn = prompt(`Name your new technique (or leave as "${tpl.name}"):`, tpl.name);
+    acceptCombo(character, tpl, (nn || tpl.name).slice(0, 60), readClock(character.clock).day);
+    saveCharacter(character); renderCharacterScreen();
+  };
+  for (const btn of app.querySelectorAll("[data-claimbranch]")) btn.onclick = () => {
+    const tpl = validEmergenceId(character, CONTENT.emergence, rules, btn.dataset.claimbranch);
+    if (tpl) { acceptBranch(character, tpl); saveCharacter(character); }
+    renderCharacterScreen();
   };
   document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
@@ -1484,7 +1523,7 @@ function renderPlay(turn, opts = {}) {
     }
   }
   if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
-  if (opts.aside) main += `<div class="beat"><em>${esc(opts.aside)}</em></div>`;
+  if (opts.aside) main += `<div class="beat"><em>${opts.aside.split("\n").map(esc).join("<br>")}</em></div>`;
   if (opts.gmAside) main += `<div class="gm-aside">${opts.gmAside.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
   if (opts.error) main += `<div class="error-card">The GM stumbled: ${esc(opts.error)}<br><button class="btn" id="retry" style="margin-top:8px">Try again</button></div>`;
 

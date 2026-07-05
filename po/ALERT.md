@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** complete_pending_review — SNG-010 A+B and SNG-011 phases 0+2 shipped v1.4.0 (results: po/results/20260705_SNG-010_011.md; RULE 19 awaits Erik ratification). Deferred: 010-C, 011-1, 011-3. SNG-004+008 queued.
+**Status:** complete_pending_review — v1.4.1 retroactive-backfill (Erik-direct; results po/results/20260705_backfill.md) on top of SNG-010 A+B and SNG-011 phases 0+2 shipped v1.4.0 (results: po/results/20260705_SNG-010_011.md; RULE 19 awaits Erik ratification). Deferred: 010-C, 011-1, 011-3. SNG-004+008 queued.
 
 ---
 

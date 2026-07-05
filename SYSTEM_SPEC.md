@@ -5,7 +5,7 @@
 
 - Live: https://orkstrtdkaos.github.io/Singularity/
 - Repo: github.com/orkstrtdkaos/Singularity (GitHub Pages, `main`, root)
-- Current version: v1.4.0 (SNG-010 A+B practice & emergence + SNG-011 phases 0+2: practice ledger, aspirations, use-ranking, authored emergence, precursor tier + peril drift, map sub-place satellites — details po/results/20260705_SNG-010_011.md) (SNG-BATCH-1: 36-ability catalog + cross-training, character/inventory screens, companion bonds — details in po/results/20260704_SNG-BATCH-1.md; spec subsections to be folded in by PO review) (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
+- Current version: v1.4.1 (retroactive backfill migration — engine/backfill.js — credits pre-feature characters with XP/bonds/practice from durable state; then v1.4.0: SNG-010 A+B practice & emergence + SNG-011 phases 0+2: practice ledger, aspirations, use-ranking, authored emergence, precursor tier + peril drift, map sub-place satellites — details po/results/20260705_SNG-010_011.md) (SNG-BATCH-1: 36-ability catalog + cross-training, character/inventory screens, companion bonds — details in po/results/20260704_SNG-BATCH-1.md; spec subsections to be folded in by PO review) (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
 
 ---
 

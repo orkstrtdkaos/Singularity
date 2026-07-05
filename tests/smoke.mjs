@@ -665,5 +665,43 @@ check('unlocked precursor opens at its own levelReq', effectiveLevelReq(preCat.a
 check('other precursor abilities stay closed', effectiveLevelReq(preCat.foreclose, mundane, rules) === null);
 check('precursor rules block shipped', rules.precursor.perilDrift === 0.05 && rules.precursor.bandNotice === 0.4);
 
+// --- backfill: retroactive credit ---
+const { needsBackfill, runBackfill, activitySpine, summaryLines } = await import("../engine/backfill.js");
+const recipes = JSON.parse(readFileSync(join(root, "content/packs/core/rules/emergence_recipes.json"), "utf8"));
+const aeviDef2 = JSON.parse(readFileSync(join(root, "content/packs/valley/companions/aevi.json"), "utf8"));
+const abilityCat = {};
+for (const f of ["harmonic","radiant","valley_craft"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+f+".json"),"utf8")); for (const a of pk.abilities) abilityCat[a.id] = {...a, powerSystem: pk.powerSystem}; }
+// veteran: lots of chronicle + deeds, travels with Aevi, owns both resonant_sight components, one already-minted combo elsewhere
+const vet = {
+  name: "Cellaceron", origin: "valley", level: 2, xp: 40,
+  attributes: {physical:3,mental:3,social:3,practical:4}, subAttributes:{strength:3,agility:3,reason:4,insight:4,presence:3,rapport:3,craft:4,wits:4},
+  abilities: [{abilityId:"prism_sight",level:2},{abilityId:"sonic_resonance",level:1}],
+  attunement:2, maxHealth:35, health:35, maxEnergy:100, energy:80,
+  companions: ["aevi"],
+  deeds: Array.from({length:10},(_,i)=>({description:"deed "+i, weight:2, communityId:"valley.millbrook", day:i})),
+  chronicle: Array.from({length:40},(_,i)=>("Day "+i+": Cellaceron used prism sight and sonic resonance together to read the wall.")),
+  npcRegistry: { "mara": { name:"Mara", history:["met","helped","helped again"], relationship:3, knownFacts:[], skillsObserved:[], status:"active" } },
+  quests: [{id:"q1",title:"done one",status:"completed"},{id:"q2",title:"active",status:"active"}],
+  discoveries: [], companionBonds: {}, practice: undefined
+};
+check("veteran needs backfill", needsBackfill(vet));
+const spine = activitySpine(vet);
+check("activity spine counts chronicle+deeds+npc+quests", spine.chronicle === 40 && spine.deeds === 10 && spine.questsDone === 1 && spine.beats > 60);
+const sum = runBackfill(vet, { rules, abilityCatalog: abilityCat, emergence: recipes, companionCatalog: { aevi: aeviDef2 } });
+check("backfill grants xp (capped) and re-levels", sum.xpGained > 0 && sum.xpGained <= 300 && vet.level > 2 && vet.pendingSubPoints >= 1 && vet.skillPoints >= 1);
+check("idempotent: second run is null", runBackfill(vet, { rules, abilityCatalog: abilityCat, emergence: recipes, companionCatalog: { aevi: aeviDef2 } }) === null && !needsBackfill(vet));
+check("aevi bond credited to grant tier + ability granted", vet.companionBonds.aevi >= 6 && vet.abilities.some(a=>a.abilityId==="motes-vigil") && sum.bonds[0].granted);
+check("practice seeded from ranks", vet.practice.uses.prism_sight >= 8 && vet.practice.uses.sonic_resonance >= 4);
+check("chronicle mentions boosted use counts above rank floor", vet.practice.uses.prism_sight > 8);
+const { discoveryKey: dk } = await import("../engine/progression.js");
+check("resonant_sight co-activation ripened from history", (vet.practice.coActivations[dk(["prism_sight","sonic_resonance"])] || 0) >= 6);
+const { ripeCombos: ripeCombosBF } = await import("../engine/practice.js");
+check("ripened combo is now claimable", ripeCombosBF(vet, recipes, rules).some(r=>r.id==="resonant_sight"));
+check("summary lines read human", summaryLines(sum).some(l=>l.includes("experience")) && summaryLines(sum).some(l=>l.includes("Aevi")));
+// fresh character: minimal activity, no over-credit
+const fresh = { name:"New", origin:"valley", level:1, xp:0, attributes:{physical:2,mental:2,social:2,practical:2}, abilities:[], companions:[], deeds:[], chronicle:[], quests:[], discoveries:[] };
+const fsum = runBackfill(fresh, { rules, abilityCatalog: abilityCat, emergence: recipes, companionCatalog: {} });
+check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.level === 1 && fresh.backfillVersion === 1);
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

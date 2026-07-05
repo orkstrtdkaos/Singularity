@@ -1,22 +1,26 @@
 # PO Alert — Singularity
 
-**Status:** closed_green (v1.2.0 + v1.3.0) — awaiting Erik browser-leg; next task queued below.
+**Status:** active — SNG-009 hotfix (field bugs, Erik live play 2026-07-04). SNG-004+008 queued behind it.
 
 ---
 
-## PO closure — SNG-BATCH-1 + SNG-002b + SNG-001 (2026-07-04, Aevi)
+## Task SNG-009 — Op-loss on parse fallback + naming gaps (HOTFIX, do first)
 
-All phases **closed_green** after origin audit:
-- Suites green at every boundary (198 → 248 checks) + parse_probe (semantics corrected — good catch).
-- **Content review PASSED (PO ratification):** all 16 new harmonic/radiant abilities read verbatim — style bar met (hard cannots, honest notFors, rank-3 legend-adjacent and priced, no niche trivialized; standouts: Shatterpoint r3's two-way Precursor door, Echo Memory's "some echoes look back," Prism Ward's community-consent fence). 36 unique ids confirmed. Aevi companion content (Motes' Vigil / Kindled Chorus) ratified — "cannot lie about what it saw" is exactly her.
-- Bonds engine-owned confirmed at origin (no GM bond op in gm.js).
-- SNG-001 merge-retry, turn gate, encounter-witness verified via smoke per results.
-- Creator addendum (map sub-places, rule 15B extension) accepted — Erik-direct is Erik-ratified by definition.
+**Root observation (Erik screenshot):** GM structured reply failed → "plain narration mode this turn" → ALL ops silently dropped (questUpdates, NPC name reveal, item naming) while narration advanced the fiction. State fell behind story. Three symptoms, one likely cause + two genuine gaps:
 
-**Outstanding — Erik browser-leg (blocks nothing, informs tuning):**
-1. Lethal offer shows stakes + decline. 2. Creation: 13+ valley abilities, grouping, cross-training note. 3. Character screen: backstory, /20 bars with knee, spend banked points. 4. Inventory examine/use/drop. 5. Bond meter moves on a shared deed. 6. **Two-browser party test** (SNG-001 criteria 2/3) — second device, same location, join + see partner's beat within a poll cycle.
+**Fix 1 — never silently drop ops (core).** On structured-parse failure: (a) ONE automatic retry — re-send with a terse "reply was invalid JSON, emit the same turn as valid JSON only" system nudge before falling back; (b) if fallback still triggers, salvage ops best-effort from the malformed text (regex-extract recognizable op arrays; apply only ones that clamp-validate); (c) surface it — the fallback notice should say ops were lost/salvaged; (d) log dropped-op turns to a small `state.opLossLog` so a later turn can re-emit (GM context gains one line: "PREVIOUS TURN OPS LOST — restate any quest/npc/place updates that occurred").
 
-**PO spec debt (mine, next session):** fold §4/§6 detailed subsections (encounters numbers, party play, bonds, cross-training) into SYSTEM_SPEC from results files.
+**Fix 2 — NPC identity reveal.** `npcUpdates` must support name reveal/refinement: op `{id, revealName}` — engine updates display name, keeps id stable, ledger notes the reveal ("the Tuning-warden is Maren"). Clamped: reveal only for NPCs currently in scene, once (subsequent renames need `aliasAdd` not replace). GM contract sentence: when the fiction reveals a known-but-unnamed person's name, emit revealName.
+
+**Fix 3 — player naming of items.** Named items are player agency, not GM ops: inventory examine panel gains "Name it" (custom name stored as `customName`, original catalog name retained as subtitle; GM context shows "Waystaff (resonance-crystal translator staff)"). No GM involvement needed. Cap 40 chars, ledger-safe.
+
+**Fix 4 — quest completion audit for Erik's live character (data repair).** Ship a one-time `repair` path or console-invokable function that re-evaluates quest objective state against chronicle/ledger; document in results how Erik clears The Apprentice Who Followed a Frequency (one click or one pasted line, per non-programmer default).
+
+**Guardrails:** ops remain typed+clamped (salvage never applies anything that wouldn't validate); design law 1 intact; additive schema (`customName`, `opLossLog`); smoke: retry-then-success path, salvage-partial path, revealName clamp, customName render + GM context line.
+
+**Verify:** forced-malformed reply → retry recovers ops (smoke); forced double-failure → notice names op loss + log entry + next-turn GM restate line present (smoke); Maren-class reveal live-checkable; Erik renames staff in UI and GM's next narration uses "Waystaff"; Erik's stuck quest cleared (browser-leg).
+
+**Ship spec updates:** §7 (revealName sentence + op-loss restate line), §8 gotcha (parse-fallback op behavior), §3 if module touched.
 
 ---
 

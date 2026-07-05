@@ -69,6 +69,45 @@ Design law 1 absolute (engine owns ledger/thresholds/minting; model offers words
 
 ---
 
+## Task SNG-011 — World Legibility & Precursor Depth (QUEUED after SNG-010)
+
+Four asks from Erik live play 2026-07-04. Phase 0 is a bug fix (do first). Precursor catalog pre-authored at origin.
+
+### Phase 0 — FIX: map sub-places don't render
+`placeMemory[id].subPlaces` is tracked (up to 12, name/visited/note) AND fed to the GM ("Known places within…"), but `renderMap` (app.js ~651) draws only top-level `CONTENT.locations` nodes — sub-places never render. Fix: draw known sub-places as small satellite nodes clustered on their parent location node (visited = solid, heard-of = hollow); on selecting a location, the details panel lists its sub-places with notes. Presentational only; data model unchanged. Smoke: a location with 3 subPlaces renders 3 satellites; heard-of vs visited styled distinctly.
+
+### Phase 1 — Location vectors: perceivable + displayed
+Locations already carry `spectrum` (fed to GM as "Spectrum character of this place"). Missing: the player side.
+- **Display:** map details panel + character/location view show the location's strong axes as labeled vectors ("This place runs strong toward Truth +0.4, Abstract +0.6, away from Light −0.4"), using spectrums.json axis names. Only axes past a threshold (|v| ≥ 0.3) show as "strong"; subtler ones show only with perception (below).
+- **Perception ("is or becomes aware"):** a character's awareness of a place's vectors is gated by attunement/abilities. Baseline: strong axes (|v| ≥ 0.5) are felt by anyone after a visit. Mid axes need attunement or a perceiving ability (prism_sight, old_roads, and especially precursor `address_sense`, which reveals ALL axes exactly). Represent as a per-place `vectorsKnown` set on placeMemory, filled as perception fires. GM already has full spectrum; this is player-facing only.
+- **(Optional, Erik-ratify — resolution-math):** acting ALONG a location's strong axis could ease difficulty / against it harden. NOT in scope unless Erik rules it in — flag in results, do not build without ratification.
+- Smoke: strong axes show after visit; mid axes hidden until a perceiving ability used; address_sense reveals all.
+
+### Phase 2 — Wire the Precursor tier
+`content/packs/core/abilities/precursor.json` is AT ORIGIN (6 abilities, `gated:"learned"`, registered manifest v0.4.0). Build:
+- Load precursor as a power system that is NOT offered at creation and NOT in the normal level-up pick list. Acquisition ONLY via: (a) discovery/newAbility path at a live remnant, (b) quest reward, (c) Old Roads rank-3 unlock, or (d) a teacher. CCode wires the gates; content/lore of unlocks can seed minimally now, expand in SNG-008 wave.
+- **Peril mechanic:** each precursor ability carries a `peril` line and drift-tendency in its `axes`. Using Foreclose (and to lesser degree others) should nudge the character's own spectrum vector toward its foreclosing axes — reuse existing `spectrumDeltas`/alignment tracking; Hold the Aperture reverses it (toward life/creation). Threshold/deltas tunable in resolution.json `precursor` block (Aevi self-ratifies numbers). The "a too-foreclosed character has changed" GM ruling is narrative — give the GM a context line when a character's drift crosses a band, no forced mechanical state.
+- Higher levelReq (3–5) and energy already in the data — honor them; precursor abilities obey the same rank/levelReq gates.
+- Smoke: precursor absent at creation and normal level-up; acquirable via unlock path; Foreclose use moves alignment toward foreclosing axes; Hold the Aperture moves it back.
+
+### Phase 3 — Skill catalog as a KG visual, by class, with level-reqs
+An in-game ability browser rendered as a knowledge graph (same spirit as the codex KG):
+- Nodes = abilities, grouped/colored by CLASS (power system: harmonic / radiant / valley_craft / precursor / learned / discovery). Class legend.
+- Each node shows name + **levelReq in the label/description** (Erik: "level requirements as part of the descriptions"); expand a node to see its 3-rank tree with grants/cannot.
+- Edges: emergence recipes (component abilities → combo result, from emergence_recipes.json), branch templates (ability → its growth), and cross-training relationships. Owned abilities highlighted; ripe/aspired states shown if SNG-010 has shipped.
+- Reachable from the character screen. Presentational over existing catalog + recipe data; no new state. Smoke: renders all classes incl. precursor; levelReqs shown; recipe edges drawn between real component/result ids.
+
+### Guardrails
+Design law 1 intact; content-not-code (no ability/location specifics in engine); additive only; precursor peril reuses existing alignment tracking (no new resolution math beyond the named block); this repo never touches the ErikIAm pipeline; suites + parse_probe green per phase.
+
+### Verify (Erik browser-leg)
+1. A location with sub-places shows satellites on the map. 2. Location details show its strong vectors; a subtle axis appears only after using a perceiving ability; address_sense shows all. 3. Precursor unavailable at creation; acquired via a remnant/quest; Foreclose drifts your vector, Hold the Aperture pulls it back. 4. Skill KG opens from the character screen, grouped by class, precursor included, level-reqs and recipe edges visible.
+
+### Ship spec updates
+§3 (map sub-place render, skill KG, precursor loader), §4 (precursor power system + peril), §6 (location vectors perception), §9 (mark shipped; optional vector-resolution-bias noted as unratified).
+
+---
+
 ## Task SNG-004 — Origins & backgrounds as content (+ SNG-008 weave) (QUEUED — next build)
 
 **Goal (one session):** origins/backgrounds move from app.js to content packs with mechanical hooks; new origins land including unusual-embodiment; first SNG-008 content (rune shrine, Council of Mavens NPCs) rides the wave.

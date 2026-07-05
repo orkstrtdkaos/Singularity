@@ -18,7 +18,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
@@ -326,10 +326,11 @@ function renderCreate() {
   const POOL = 12;
 
   function abilityChoices() {
-    const all = Object.values(CONTENT.abilities).filter(a => a.levelReq <= 1);
-    if (state.origin === "harmonic") return all.filter(a => a.powerSystem === "harmonic");
-    if (state.origin === "radiant") return all.filter(a => a.powerSystem === "radiant");
-    return all; // valley: unaligned may pick from either, but only one
+    const fake = { origin: state.origin, level: 1 };
+    return Object.values(CONTENT.abilities).filter(a => {
+      const req = effectiveLevelReq(a, fake, CONTENT.rules);
+      return req !== null && req <= 1;
+    });
   }
   function maxAbilities() { return state.origin === "valley" ? 1 : 2; }
 
@@ -359,7 +360,9 @@ function renderCreate() {
             <span style="text-transform:capitalize">${k}</span>
           </div>`).join("")}</div>
       <div class="field"><label>Abilities — choose ${maxAbilities()}</label>
-        <div class="opt-row">${okAb.map(a => { const r1 = a.tree?.find(t => t.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div>
+        ${["harmonic", "radiant", "valley_craft"].filter(sys => okAb.some(a => a.powerSystem === sys)).map(sys => `
+          <div class="sys-group"><div class="sys-label">${sys === "valley_craft" ? "Valley Craft" : sys[0].toUpperCase() + sys.slice(1)}</div>
+          <div class="opt-row">${okAb.filter(a => a.powerSystem === sys).map(a => { const r1 = a.tree?.find(t => t.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div></div>`).join("")}
         <div class="hint">${state.abilities.map(id => { const a = CONTENT.abilities[id]; const r1 = a.tree?.find(t => t.rank === 1); return r1 ? `<strong>${esc(a.name)}</strong> — rank 1 “${esc(r1.name)}”: ${esc(r1.grants)}` : esc(a.description); }).join("<br>") || "Hover an ability to see exactly what its first rank can and cannot do."}</div></div>
       <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your story</button>
     </div>`);
@@ -1152,11 +1155,14 @@ function renderPlay(turn, opts = {}) {
           ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend a skill point">▲</button>` : ""}
           <span class="cost">(${ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : "?"} energy${ab && effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span></div>`;
       }).join("") || "<div class='insight'>none yet</div>"}
-      ${character.skillPoints > 0 ? Object.values(CONTENT.abilities).filter(ab =>
-          !character.abilities.some(a => a.abilityId === ab.id) &&
-          (character.origin === "valley" || ab.powerSystem === character.origin) &&
-          character.level >= (ab.levelReq || 1)
-        ).map(ab => `<button class="opt" data-learn="${esc(ab.id)}" title="${esc(ab.description)}" style="margin:2px 0; display:block; width:100%">Learn: ${esc(ab.name)}</button>`).join("") : ""}
+      ${character.skillPoints > 0 ? Object.values(CONTENT.abilities).filter(ab => {
+          if (character.abilities.some(a => a.abilityId === ab.id)) return false;
+          const req = effectiveLevelReq(ab, character, CONTENT.rules);
+          return req !== null && character.level >= req;
+        }).map(ab => {
+          const cross = effectiveLevelReq(ab, character, CONTENT.rules) !== (ab.levelReq || 1);
+          return `<button class="opt" data-learn="${esc(ab.id)}" title="${esc(ab.description)}" style="margin:2px 0; display:block; width:100%">Learn: ${esc(ab.name)} <span class="cost">(${ab.powerSystem === "valley_craft" ? "valley craft" : ab.powerSystem}${cross ? ", cross-trained" : ""})</span></button>`;
+        }).join("") : ""}
       ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
     </section>
     <section><h3>People you know</h3>

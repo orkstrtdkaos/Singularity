@@ -158,6 +158,318 @@
           "cannot": "Leadership, not control — where you lead them matters; afterward you are the most identifiable person in the valley."
         }
       ]
+    },
+    {
+      "id": "light_well",
+      "name": "Light Well",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "dark_light": 0.4,
+        "destruction_creation": 0.3
+      },
+      "attribute": "practical",
+      "effectTags": [
+        "store",
+        "light",
+        "tool"
+      ],
+      "narrationHints": "Daylight coaxed into glass, water, or crystal — carried like a coal from an older fire.",
+      "description": "Store light in a simple vessel and release it later, slow or sudden.",
+      "notFor": "Weaponized flashes beyond a candle-flare (that is lance-work); storing MOONLIGHT or firelight (only true daylight keeps); vessels that are alive.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Carried Coal",
+          "grants": "A jar of noon holds a lantern's worth through one night; release it steady or all at once as a soft flare.",
+          "cannot": "Keeps one night only; leaks visibly (a glowing pack is a beacon); one vessel at a time."
+        },
+        {
+          "rank": 2,
+          "name": "Banked Noon",
+          "grants": "Three vessels, three nights' keeping; tune release warm or cold, wide or narrow; a sudden release startles a beast or buys a heartbeat's blink.",
+          "cannot": "Nothing brighter than the day you banked; cloudy-day light is thin gruel."
+        },
+        {
+          "rank": 3,
+          "name": "Bottled Summer",
+          "grants": "A season's-worth cache for a cellar or sickroom; a release timed to a set moment (dawn in a windowless cell); light shaped to hold a doorway as a soft ward.",
+          "cannot": "The great cache takes a week of clear noons to fill; broken early, it is simply GONE — light does not forgive vessels."
+        }
+      ]
+    },
+    {
+      "id": "sun_coax",
+      "name": "Sun Coax",
+      "levelReq": 1,
+      "energyCost": 6,
+      "axes": {
+        "death_life": 0.4,
+        "dark_light": 0.3
+      },
+      "attribute": "practical",
+      "effectTags": [
+        "warm",
+        "grow",
+        "tend"
+      ],
+      "narrationHints": "Bending a patch of sun to sit where it's needed — on a seedbed, a fever-chilled back, a wet rope.",
+      "description": "Concentrate gentle sunlight: warm, dry, ripen, comfort.",
+      "notFor": "Burning or blinding anything; forcing growth a plant cannot pay for; working at night without a Light Well to draw on.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Warm Patch",
+          "grants": "Dry soaked gear in an hour; keep a chilled person safely warm; give a struggling seedbed a golden afternoon.",
+          "cannot": "One small patch; you must stay with it; it is exactly as visible as sunlight."
+        },
+        {
+          "rank": 2,
+          "name": "Kind Season",
+          "grants": "Ripen a bed of greens days early; hold frost off a plot through one hard night; ease an ague's chill from a whole sickbed row.",
+          "cannot": "The plants' debt is real — an early crop is a smaller one unless the soil is fed; a night's frost-holding is a night you don't sleep."
+        },
+        {
+          "rank": 3,
+          "name": "Harvest-Hand",
+          "grants": "Turn a field's bad week around; draw rot's damp out of a granary; a touch of concentrated dawn that steadies the dying toward one more clear hour.",
+          "cannot": "Cannot cure — only comfort and buy time; the valley notices a golden field in a gray month, and asks."
+        }
+      ]
+    },
+    {
+      "id": "afterimage",
+      "name": "Afterimage",
+      "levelReq": 2,
+      "energyCost": 8,
+      "axes": {
+        "falsehood_truth": -0.4,
+        "space_time": -0.2
+      },
+      "attribute": "physical",
+      "effectTags": [
+        "misdirect",
+        "evade",
+        "illusion"
+      ],
+      "narrationHints": "Stepping out of your own lingering image — the eye holds where you were a breath too long.",
+      "description": "Leave a hanging visual echo of yourself and be elsewhere when it fades.",
+      "notFor": "Fooling echo-senses or dogs' noses; holding still (the trick IS the move); standing in darkness where no image can hang.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Slip-Frame",
+          "grants": "One sidestep hidden behind your own afterimage — break a grab, dodge a swing, cross a doorway unmarked while eyes hold the ghost.",
+          "cannot": "One breath of hang-time; the ghost doesn't move or speak; bright even light needed."
+        },
+        {
+          "rank": 2,
+          "name": "Double Walk",
+          "grants": "Your image walks three paces on while you turn a corner; two watchers argue later about where you went; in a scuffle, the first strike aimed at you hits yesterday's you.",
+          "cannot": "Once per scene per watcher — eyes learn; lantern-light makes thin ghosts."
+        },
+        {
+          "rank": 3,
+          "name": "Crowd of One",
+          "grants": "Three afterimages peel off at a junction; a pursuit splits or stalls; walk out of an encirclement inside your own dissolving echo.",
+          "cannot": "Costs a real sprint's wind; Prism Sight r2+ reads every ghost instantly; you cannot ATTACK from inside the trick without ending it."
+        }
+      ]
+    },
+    {
+      "id": "clarity_lens",
+      "name": "Clarity Lens",
+      "levelReq": 2,
+      "energyCost": 5,
+      "axes": {
+        "concrete_abstract": 0.3,
+        "dark_light": 0.4
+      },
+      "attribute": "mental",
+      "effectTags": [
+        "magnify",
+        "detail",
+        "study"
+      ],
+      "narrationHints": "Air itself curved into a reading glass — the world's small print made legible.",
+      "description": "Shape light into a floating lens: magnify, steady, and brighten fine detail.",
+      "notFor": "Seeing through anything; distance (this is close-work, not a spyglass beyond r2); reading in true darkness.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Jeweler's Air",
+          "grants": "A hovering lens for fine work — read worn engraving, find the hairline crack, tie the surgeon's knot; your craft checks on small things sharpen.",
+          "cannot": "Arm's-reach focus only; wobbles if you're winded; needs decent light."
+        },
+        {
+          "rank": 2,
+          "name": "Far Glass",
+          "grants": "A spyglass of shaped air — read a banner across the valley floor, count a far ridge's walkers; steady enough to share with someone at your shoulder.",
+          "cannot": "Heat-shimmer and rain ruin it; watching far means blind near."
+        },
+        {
+          "rank": 3,
+          "name": "The Patient Eye",
+          "grants": "A fixed lens that KEEPS watching — set it on a door and know later what crossed the light; pair with Glimmer Script to log what it saw in faint marks.",
+          "cannot": "One standing eye at a time; it is findable by anyone with light-craft; it records light only — no sound, no dark."
+        }
+      ]
+    },
+    {
+      "id": "glimmer_script",
+      "name": "Glimmer Script",
+      "levelReq": 1,
+      "energyCost": 4,
+      "axes": {
+        "concrete_abstract": 0.4,
+        "falsehood_truth": 0.3
+      },
+      "attribute": "practical",
+      "effectTags": [
+        "write",
+        "mark",
+        "message"
+      ],
+      "narrationHints": "Writing with a fingertip of light — marks that sleep invisible until the right glow wakes them.",
+      "description": "Write in persistent light: notes, marks, and signs only the keyed light reveals.",
+      "notFor": "Long documents (a paragraph is a labor); marks on living skin; anything meant to survive a season of weather.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Fingerlight",
+          "grants": "A sentence on stone, wood, or cloth that glows to YOUR light and sleeps otherwise; trail-marks a stranger walks past blind.",
+          "cannot": "Fades in days outdoors; any Radiant-trained eye can find it if they look; you can't erase another's script."
+        },
+        {
+          "rank": 2,
+          "name": "Keyed Hand",
+          "grants": "Marks keyed to a specific person's light or a time of day; a week's persistence; a door-sign that flares warning only to your circle.",
+          "cannot": "The key travels by teaching, not by wish; a determined prism-reader breaks it with an hour's work."
+        },
+        {
+          "rank": 3,
+          "name": "Standing Word",
+          "grants": "A month's persistence; script that changes with the light's angle (two messages in one mark); leave word in the Archive's dark that only your companion's glow will ever raise.",
+          "cannot": "Each standing word is a thread of your own light budget until it fades; the Guardian considers unsanctioned Archive-script a personal insult."
+        }
+      ]
+    },
+    {
+      "id": "beacon_thread",
+      "name": "Beacon Thread",
+      "levelReq": 2,
+      "energyCost": 7,
+      "axes": {
+        "dark_light": 0.4,
+        "space_time": -0.3
+      },
+      "attribute": "social",
+      "effectTags": [
+        "signal",
+        "guide",
+        "bond"
+      ],
+      "narrationHints": "A hair-thin line of light from you to a chosen eye — a private star to steer by.",
+      "description": "Spin a light-line between you and chosen companions: guide, signal, find.",
+      "notFor": "Unwilling targets; carrying words (it carries direction and simple pulses only); threading through solid ground.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Hearth-Line",
+          "grants": "One companion sees a faint thread pointing to you across a mile of open valley; three pulse-signals (come, wait, danger).",
+          "cannot": "Line of sight bends around hills poorly; the thread dies at running water; strangers with light-craft can glimpse it."
+        },
+        {
+          "rank": 2,
+          "name": "Woven Watch",
+          "grants": "Three companions threaded at once; threads persist through a night; a snapped thread (member fallen or taken) is felt by all instantly.",
+          "cannot": "The weave frays past a few miles; in the Disputed Zone, interference gnaws threads within the hour."
+        },
+        {
+          "rank": 3,
+          "name": "Constellation",
+          "grants": "A party moves as fixed stars to each other — night operations without a lantern shown; thread a stranger IN for one scene by shared consent; the snap-alarm wakes sleepers.",
+          "cannot": "You are the loom — if YOU fall, every thread dies at once; a woven night costs you dawn-headache and dimmed light-craft till noon."
+        }
+      ]
+    },
+    {
+      "id": "dawn_surgery",
+      "name": "Dawn Surgery",
+      "levelReq": 3,
+      "energyCost": 12,
+      "axes": {
+        "death_life": 0.5,
+        "concrete_abstract": 0.3
+      },
+      "attribute": "practical",
+      "effectTags": [
+        "heal",
+        "precise",
+        "light"
+      ],
+      "narrationHints": "A blade of light finer than any steel, cauterizing as it parts — medicine at the edge of what the field permits.",
+      "description": "Operate with focused light: clean cuts, sealed vessels, sight into the wound.",
+      "notFor": "Battlefield speed (this is slow, prepared work); curing sickness (it is a knife, not a physic); working on yourself beyond a forearm's reach.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Sealing Touch",
+          "grants": "Close a bleeding wound clean with light-cautery; lance and purge infection with far less scarring; steady work in a dim room by your own operating glow.",
+          "cannot": "Pain is NOT removed — someone must hold them; deep wounds still need a real medic's knowledge (yours or a helper's)."
+        },
+        {
+          "rank": 2,
+          "name": "The Fine Blade",
+          "grants": "Remove what must come out — a barbed head, a crushed splinter, a growth near the skin — with a surgeon's precision your hands alone never had.",
+          "cannot": "An hour's work costs you like a day's labor; the patient's stillness is a hard requirement (see: someone with Harmonic Voice)."
+        },
+        {
+          "rank": 3,
+          "name": "Light in the Wound",
+          "grants": "See INTO tissue as you work (paired shallow prism-read); operate at the edge of the impossible — the crushed hand rebuilt to work again, the eye saved; teach a valley medic to assist and double their craft for the scene.",
+          "cannot": "The field itself resists deep intervention near heart and head — some doors the light will not cut through, and pushing them is novel-use with real backlash."
+        }
+      ]
+    },
+    {
+      "id": "prism_ward",
+      "name": "Prism Ward",
+      "levelReq": 3,
+      "energyCost": 10,
+      "axes": {
+        "chaos_order": 0.4,
+        "dark_light": 0.5
+      },
+      "attribute": "mental",
+      "effectTags": [
+        "ward",
+        "detect",
+        "standing"
+      ],
+      "narrationHints": "A lattice of faint light strung across a threshold — anything that crosses is written in color on your mind.",
+      "description": "String a standing lattice that reports whatever crosses it.",
+      "notFor": "Stopping anything (it is a tripwire of light, not a wall); warding in bright noon (the lattice drowns); more thresholds than you can hold in mind.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Threshold Eye",
+          "grants": "One doorway or path warded till dawn — you know THAT something crossed and how big; the lattice is near-invisible in dusk or dark.",
+          "cannot": "Reports only at your next quiet moment unless you hold vigil; a light-crafter who SEES it can step through a made gap."
+        },
+        {
+          "rank": 2,
+          "name": "Woven Rooms",
+          "grants": "Three wards held; crossing reports arrive as a felt color instantly at any distance in the valley; the ward reads direction and count.",
+          "cannot": "Running water and Zone interference eat wards in hours; your sleep is thinner for each ward held."
+        },
+        {
+          "rank": 3,
+          "name": "The Bright Fence",
+          "grants": "Ward a compound for a season with anchored vessels (Light Well pairing); identity-echo on crossings you've threaded before (Beacon pairing); the fence can be keyed to IGNORE your circle.",
+          "cannot": "A season-fence is community work — the village will know and must consent; Precursor movers leave no color at all, and THAT absence is its own cold report."
+        }
+      ]
     }
   ]
 }

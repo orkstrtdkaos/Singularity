@@ -551,5 +551,23 @@ const writerA = mergeBeat(base, bA);          // A pushed first
 const replayed = mergeBeat(mergeBeat(writerA, bB), bB); // B refetches A's version, re-applies own beat (twice = retry)
 check('SHA-conflict merge-retry keeps both beats exactly once', replayed.beats.length === 2 && replayed.beats.filter(b => b.by === 'char-b').length === 1);
 
+// --- SNG-003: ability catalog + cross-training ---
+const { effectiveLevelReq } = await import('../engine/progression.js');
+const fullCat = {};
+for (const f of ['harmonic', 'radiant', 'valley_craft']) {
+  const pk = JSON.parse(readFileSync(join(root, 'content/packs/core/abilities/' + f + '.json'), 'utf8'));
+  for (const a of pk.abilities) { check('no id collision: ' + a.id, !fullCat[a.id]); fullCat[a.id] = { ...a, powerSystem: pk.powerSystem }; }
+}
+check('catalog is 28+ abilities with trees', Object.keys(fullCat).length >= 28 && Object.values(fullCat).every(a => a.tree?.length === 3 && a.notFor));
+const hChar = { origin: 'harmonic', level: 1 };
+check('own tradition at face value', effectiveLevelReq(fullCat.stillness_field, hChar, rules) === 1);
+check('cross-training into valley_craft costs +1', effectiveLevelReq(fullCat.wayfinding, hChar, rules) === 2);
+check('other civ tradition closed', effectiveLevelReq(fullCat.light_well, hChar, rules) === null);
+check('valley takes everything natively', effectiveLevelReq(fullCat.light_well, { origin: 'valley', level: 1 }, rules) === 1 && effectiveLevelReq(fullCat.wayfinding, { origin: 'valley', level: 1 }, rules) === 1);
+const crossLearner = { origin: 'radiant', level: 1, skillPoints: 1, abilities: [] };
+check('cross-training gate blocks at low level', learnAbility(crossLearner, 'wayfinding', fullCat, rules).why.includes('cross-training'));
+crossLearner.level = 2;
+check('cross-training opens at effective level', learnAbility(crossLearner, 'wayfinding', fullCat, rules).ok);
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -114,15 +114,30 @@ export function rankUpAbility(character, abilityId, rules) {
   return { ok: true, newRank: owned.level };
 }
 
-/** Learn a new ability (1 skill point). Origin-gated: harmonic/radiant learn their
- *  system; valley folk may learn from either (their flexibility). */
+/** SNG-003 access rule: own tradition at face value; valley folk take any system
+ *  natively (their flexibility); harmonic/radiant may cross-train into
+ *  valley_craft at +crossTraditionLevelPenalty levelReq; the OTHER civilization's
+ *  tradition stays closed. Returns effective levelReq, or null if forbidden. */
+export function effectiveLevelReq(ab, character, rules) {
+  if (!ab) return null;
+  const sys = ab.powerSystem, origin = character.origin;
+  const base = ab.levelReq || 1;
+  if (sys === "learned") return base; // GM-granted, already personal
+  if (origin === "valley") return base;
+  if (sys === origin) return base;
+  if (sys === "valley_craft") return base + (rules?.leveling?.crossTraditionLevelPenalty ?? 1);
+  return null; // harmonic <-> radiant: closed
+}
+
+/** Learn a new ability (1 skill point), gated by effectiveLevelReq. */
 export function learnAbility(character, abilityId, catalog, rules) {
   if ((character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
   const ab = catalog[abilityId];
   if (!ab) return { ok: false, why: "unknown ability" };
-  if (character.origin !== "valley" && ab.powerSystem !== character.origin) return { ok: false, why: "wrong tradition" };
-  if (character.level < (ab.levelReq || 1)) return { ok: false, why: `requires level ${ab.levelReq}` };
+  const req = effectiveLevelReq(ab, character, rules);
+  if (req === null) return { ok: false, why: "wrong tradition" };
+  if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
   character.abilities.push({ abilityId, level: 1 });
   character.skillPoints--;
   return { ok: true };

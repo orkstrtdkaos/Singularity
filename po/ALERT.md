@@ -16,9 +16,11 @@
 
 **Fix 4 — quest completion audit for Erik's live character (data repair).** Ship a one-time `repair` path or console-invokable function that re-evaluates quest objective state against chronicle/ledger; document in results how Erik clears The Apprentice Who Followed a Frequency (one click or one pasted line, per non-programmer default).
 
+**Fix 5 — People You Know: collapse to location expandables (Erik live ask).** The relationship list grows unbounded and reads flat. Regroup by the location where each NPC is known/was met (NPC records already carry or can derive a home/met location; where unknown, group under "Elsewhere"). Render as collapsible location sections (location name + count; expand to the NPC rows with their relationship badges). Default: expand the current location's group, collapse the rest; remember expand state within a session. Purely presentational — no relationship-data change, no schema change beyond an optional `knownAt` location tag on NPC records (derive-and-backfill from ledger on load where missing). Smoke: grouping renders from a fixture with NPCs across 3 locations + one Elsewhere; current-location group defaults open.
+
 **Guardrails:** ops remain typed+clamped (salvage never applies anything that wouldn't validate); design law 1 intact; additive schema (`customName`, `opLossLog`); smoke: retry-then-success path, salvage-partial path, revealName clamp, customName render + GM context line.
 
-**Verify:** forced-malformed reply → retry recovers ops (smoke); forced double-failure → notice names op loss + log entry + next-turn GM restate line present (smoke); Maren-class reveal live-checkable; Erik renames staff in UI and GM's next narration uses "Waystaff"; Erik's stuck quest cleared (browser-leg).
+**Verify:** forced-malformed reply → retry recovers ops (smoke); forced double-failure → notice names op loss + log entry + next-turn GM restate line present (smoke); Maren-class reveal live-checkable; Erik renames staff in UI and GM's next narration uses "Waystaff"; Erik's stuck quest cleared (browser-leg); People-You-Know shows location groups, current location open by default.
 
 **Ship spec updates:** §7 (revealName sentence + op-loss restate line), §8 gotcha (parse-fallback op behavior), §3 if module touched.
 

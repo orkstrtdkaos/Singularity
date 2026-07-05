@@ -11,19 +11,27 @@
 **Ratification state going in (Erik 2026-07-06):**
 - Attribute gates for SOME skills — **RATIFIED**, build. Selection + values pre-authored at `content/packs/core/rules/attribute_gates.json` (10 high-tier abilities, manifest v0.5.0).
 - Skill KG graph (render like world map) + Tier I–V badges — self-ratified viz, build.
-- Tier-slot capacity (3c-iv), class-cap (3c-i), branch forks (3c-iii) — **PENDING Erik table-shape ratification; NOT in this batch.** Build later once shapes confirmed.
+- **Tier-slot capacity (3c-iv) — RATIFIED** (Erik 2026-07-06: generic RPG quantity/level, L1=2). Table pre-authored at `content/packs/core/rules/skill_capacity.json` (manifest v0.6.0). Build in this batch (Phase 3).
+- Class-cap (3c-i), branch forks (3c-iii) — still PENDING shape ratification; NOT in this batch.
 
 ### Phase 0 — SNG-012 Memory & Input Fidelity (HOTFIX, do FIRST)
 Full spec below. Part A: player's raw typed text reaches the narration GM verbatim (PLAYER'S EXACT WORDS block); parseIntent stays mechanical-only. Part B: durable non-scrolling ESTABLISHED FACTS ledger (factUpdates op) + named-NPC situation status pinned in npcRegistryDetail. Fixes GM-forgets + typed-detail-lost.
+Part C (name fix — Erik 2026-07-06, names still not revealing): `revealName` code works but the GM under-emits it (op-loss/continuity). Two fixes: (1) op-loss restate must explicitly re-emit a pending name reveal; (2) **player-driven rename** — a "Set name" affordance on any "(name unknown)" People-You-Know entry (parallel to SNG-009 item naming): player types the known name, engine sets displayName on the existing npcId, ledger notes it, GM context carries it as established fact thereafter. Erik can name the Tuning-warden "Maren" directly without waiting on the GM. Smoke: rename sets displayName on stable id; GM context shows the set name next turn.
 
 ### Phase 1 — SNG-011 Phases 0–2 (world legibility + Precursor wire)
 Full spec below. Map sub-place render fix (satellites on parent nodes); location vectors made player-perceivable (spectrum data already fed to GM); wire the Precursor tier (gated acquisition + peril drift on the alignment vector, Foreclose→foreclosing axes, Hold the Aperture→life/creation).
 
-### Phase 2 — SNG-011 Phase 3a+3b (skill graph + tiers)
-Skill catalog as a KG graph rendered the SAME WAY as the world map (reuse renderMap SVG-node approach, not a generic lib): class = node color, Tier I–V = size/badge, level-reqs on labels, edges for prerequisites + emergence recipes; owned/ripe/aspired lit. Tier I–V badge (from levelReq) shown everywhere abilities appear.
+### Phase 2 — Skill legibility: graph + tiers + picker fixes (Erik live-flagged 2026-07-06)
+The current ability PICKER is a flat scrolling list of "Learn: X" buttons (screenshot) — fix the picker AND ship the graph.
+- **Ability picker (the Learn list):** COLLAPSIBLE, grouped by class (and Tier within class) — same collapsible pattern as the now-shipped People-You-Know location groups; current-tier group open by default. Each Learn row shows the Tier I–V badge and levelReq inline. This is the surface Erik sees at level-up/creation; it must not be a flat list.
+- **Level-up highlight:** when a skill ranks up (by point or by practice), HIGHLIGHT the newly-gained capability — show the new rank's `grants` emphasized against the prior rank so the player sees exactly what improved (and the new `cannot`, briefly). Applies on the character sheet and in the level-up flow.
+- **Skill KG graph:** catalog as a graph rendered the SAME WAY as the world map (reuse renderMap SVG-node approach, not a generic lib): class = node color, Tier I–V = size/badge, levelReqs on labels, edges for prerequisites + emergence recipes; owned/ripe/aspired lit; attribute-gate + capacity-cap states shown as locks. Reachable from the character screen.
+- Tier I–V badge (from levelReq) shown everywhere an ability appears — sheet, picker, graph.
+- Smoke: picker renders collapsible groups with current-tier open; tier badges + levelReq on every row; rank-up shows the improved-capability highlight; graph renders like the map with all encodings.
 
-### Phase 3 — Attribute gates (RATIFIED, wire the pre-authored content)
-Wire `attribute_gates.json`: to LEARN a gated ability, character's governing sub-attribute >= learnMin; to reach rank 3, >= rank3Min. Gated = 10 high-tier abilities (Tier III–V); Tier I–II ungated. Show gate state as locks in the skill graph + ability picker (e.g. "needs Insight 5 — you have 3"); block learn/rank when unmet, clear when met. Smoke: gate blocks below threshold, clears at/above, ungated abilities unaffected, rank-3 gate distinct from learn gate.
+### Phase 3 — Attribute gates + broad-vs-deep capacity (both RATIFIED, wire pre-authored content)
+**Capacity (skill_capacity.json):** a character may LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level] (L1=2, then +1/level). At the cap, skill points go to DEPTH (rank-ups). Emergence combos/branches + crit-discoveries do NOT count against the cap. Show remaining breadth slots in the picker + character sheet ("2 of 2 skills — at capacity, points now deepen owned skills"). Smoke: learn blocked at cap, rank-up still allowed at cap, earned techniques don't consume slots, cap scales with level.
+**Attribute gates (attribute_gates.json):** wire `attribute_gates.json`: to LEARN a gated ability, character's governing sub-attribute >= learnMin; to reach rank 3, >= rank3Min. Gated = 10 high-tier abilities (Tier III–V); Tier I–II ungated. Show gate state as locks in the skill graph + ability picker (e.g. "needs Insight 5 — you have 3"); block learn/rank when unmet, clear when met. Smoke: gate blocks below threshold, clears at/above, ungated abilities unaffected, rank-3 gate distinct from learn gate.
 
 ### Phase 4 — SNG-010 Phase C: item evolution (OPTIONAL — only if the session has room after Phases 0–3 ship green)
 Full spec below. Item `evolution` linked to a companion bond; Waystaff wakes by stages as Aevi's bond deepens and she's integrated into casts. PO authors the Waystaff+Aevi seed content on pickup.

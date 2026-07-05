@@ -1,52 +1,33 @@
 # PO Alert — Singularity
 
-**Status:** complete_pending_review — SNG-BATCH-1 phases 1-3 shipped v1.3.0 (results: po/results/20260704_SNG-BATCH-1.md). Phase 0 + SNG-001 shipped v1.2.0. PO review requested on 16 new abilities + Aevi bond content.
+**Status:** closed_green (v1.2.0 + v1.3.0) — awaiting Erik browser-leg; next task queued below.
 
 ---
 
-## SNG-BATCH-1 — one build session, four phases in strict order
+## PO closure — SNG-BATCH-1 + SNG-002b + SNG-001 (2026-07-04, Aevi)
 
-**Opened:** 2026-07-04 (Aevi, PO; batch requested by Erik). If the session runs short, ship phases completed in order — each phase is independently shippable and verified. Results: one file `po/results/YYYYMMDD_SNG-BATCH-1.md`, per-phase sections, `complete_pending_review` per phase.
+All phases **closed_green** after origin audit:
+- Suites green at every boundary (198 → 248 checks) + parse_probe (semantics corrected — good catch).
+- **Content review PASSED (PO ratification):** all 16 new harmonic/radiant abilities read verbatim — style bar met (hard cannots, honest notFors, rank-3 legend-adjacent and priced, no niche trivialized; standouts: Shatterpoint r3's two-way Precursor door, Echo Memory's "some echoes look back," Prism Ward's community-consent fence). 36 unique ids confirmed. Aevi companion content (Motes' Vigil / Kindled Chorus) ratified — "cannot lie about what it saw" is exactly her.
+- Bonds engine-owned confirmed at origin (no GM bond op in gm.js).
+- SNG-001 merge-retry, turn gate, encounter-witness verified via smoke per results.
+- Creator addendum (map sub-places, rule 15B extension) accepted — Erik-direct is Erik-ratified by definition.
 
-### Phase 0 — SNG-002b: lethal avoidability clamp (~30 min, RATIFIED)
-Erik's ratification (2026-07-04): GM-invented lethal duels permitted; lethality always avoidable. Build: (1) force `avoidable: true` on any `lethal: true` encounter at offer time — decline path always present, entry only by explicit player choice; (2) rule 18 += "A lethal encounter is always offered, never imposed — the player must have a clear path to decline before engagement."; (3) round-1 flee always AVAILABLE in lethal duels (difficulty applies, availability doesn't); (4) smoke tests: lethal-offer-carries-decline, forced-entry rejected, round-1 flee present. SYSTEM_SPEC §7 update.
+**Outstanding — Erik browser-leg (blocks nothing, informs tuning):**
+1. Lethal offer shows stakes + decline. 2. Creation: 13+ valley abilities, grouping, cross-training note. 3. Character screen: backstory, /20 bars with knee, spend banked points. 4. Inventory examine/use/drop. 5. Bond meter moves on a shared deed. 6. **Two-browser party test** (SNG-001 criteria 2/3) — second device, same location, join + see partner's beat within a poll cycle.
 
-### Phase 1 — SNG-003: ability catalog integration (content pre-authored by PO)
-`content/packs/core/abilities/valley_craft.json` is ALREADY AT ORIGIN (12 unaligned abilities, PO-authored, registered in core manifest v0.2.0). Build work:
-- Wire origin access: valley origin gains the valley_craft power system (its ability list at creation and level-up draws from it); harmonic/radiant origins may take valley_craft abilities at +1 levelReq (cross-training rule — add to resolution.json `leveling` block as `crossTraditionLevelPenalty: 1`; valley taking harmonic/radiant stays origin-gated as today).
-- Author 8 new harmonic + 8 new radiant abilities IN THE STYLE OF the existing files and valley_craft (3-rank trees, hard `cannot` lines, `notFor` honest, grounded hopeful-strange, no ability trivializes another's niche). PO style bar: every rank names what it CANNOT do as concretely as what it grants; rank 3 is legend-adjacent but priced. Append to existing harmonic.json / radiant.json.
-- Ability-picker UI: group by power system, show levelReq gating and cross-training penalty. Smoke tests: catalog loads (28+ abilities), cross-training gate, no id collisions.
-- **PO review gate:** new harmonic/radiant entries land as content for Aevi review in results (verbatim list) — Aevi ratifies content; do not tune valley_craft entries.
-
-### Phase 2 — SNG-007: character sheet & inventory screens
-- **Character screen**, reachable any time in play: bio/backstory (full text), attributes + all 8 sub-attributes as current/20 bars with soft-cap knee at 4 visually marked, abilities with ranks + tree progress + energy cost after discounts, aptitudes, XP/level + banked points (pendingSubPoints, skillPoints) with spend-affordances, custom/GM-generated abilities, active quests summary, companions with assist tags.
-- **Inventory screen**, first-class: item details from catalog, equipment/carried split, use/examine/drop, quantities. Sidebar strip remains as the quick view.
-- Same components render at creation (point bars) and in play. Smoke: screens render from a fixture character; spend-affordance calls existing progression functions only.
-
-### Phase 3 — SNG-005: companion bonds & evolution
-- Bond value −10..10 per companion, same bands as NPC relationships; grows via witnessed shared deeds (companion present on the beat), assists used, encounters weathered together (data-driven weights in resolution.json `companions` block).
-- Tiers: bond ≥3 assist cap +3; ≥6 companion grants one companion-specific ability (defined in companion JSON `bondGrants`); ≥8 evolution stage 2 (companion JSON `stages[]`: name/description/narrationHints shift — e.g. Aevi's motes condense and brighten). GM context gains bond band + stage per companion. GM-generated companions (Cellaceron case) get default bond track with GM-authored `stages` allowed via clamped op ONLY at creation, engine-owned after.
-- Migration: existing companions bond 0, stage 1. Smoke: bond growth paths, tier unlocks, stage transition, GM cannot move bond directly.
-
-### Batch-wide guardrails
-Design law 1 absolute everywhere; graceful degradation on every new surface; additive schemas only; content-not-code; encounters/resolution math untouched except the named resolution.json blocks; this repo never touches the ErikIAm pipeline; `node tests/smoke.mjs` + `tests/parse_probe.mjs` green at every phase boundary — a phase ships only green.
-
-### Verification (Erik browser-leg after ship)
-1. Lethal offer shows decline path. 2. Creation: valley origin sees 13+ abilities grouped by system; cross-training gate visible. 3. Character screen from live play: backstory readable, /20 bars with knee, banked points spendable. 4. Inventory screen: examine + drop round-trip. 5. Companion panel shows bond meter; a shared deed moves it.
-
-### Queue after batch
-SNG-001 party play (spec below preserved) → SNG-004 origins-as-content (+ SNG-008 Heimrún/Mavens/framework weave). Full ordering: `po/BACKLOG.md`.
+**PO spec debt (mine, next session):** fold §4/§6 detailed subsections (encounters numbers, party play, bonds, cross-training) into SYSTEM_SPEC from results files.
 
 ---
 
-## Task SNG-001 — v1.1 Party Play, Phase 1: Shared Scenes (QUEUED — next after batch)
+## Task SNG-004 — Origins & backgrounds as content (+ SNG-008 weave) (QUEUED — next build)
 
-**Goal:** Two characters (different browsers/devices, GitHub sync on) share a scene: same anchor and beat history, turns in order, each player's GM turn includes the other's presence and actions.
-**In:** `world/scenes/{sceneId}.json` (anchor, roster, ordered beats, turn pointer; SHA-retry re-fetch-and-merge, never blind overwrite; poll ~20s while active); `engine/party.js` (join/leave, poll, turn gate with waiting-UI, beat merge); GM party context block (names, short bios, last actions); encounter interop — `character.activeEncounter` serializes into the scene so partners WITNESS an ongoing encounter (joint participation = phase 2); minimal UI (party sidebar, join affordance at location, turn indicator); smoke tests on every write path + merge idempotency + encounter serialization.
-**Out:** world clock; codex trading; joint encounters; contract/resolution/design-law changes (Erik ratifies); reconciliation beyond turn-order.
-**Verify:** two-browser live (join, see beat within a poll, narration names partner); turn gate blocks with waiting state; sync-off degrades to exact solo; SHA-conflict retry-merge test; encounter-witness block present.
-**Ship spec updates:** §3, §6 (party subsection), §9, §8 gotchas if any.
+**Goal (one session):** origins/backgrounds move from app.js to content packs with mechanical hooks; new origins land including unusual-embodiment; first SNG-008 content (rune shrine, Council of Mavens NPCs) rides the wave.
+**In:** `content/packs/*/origins/*.json` + `backgrounds/*.json` (spectrum tilt, power-system access incl. crossTradition exceptions, background skill grants, creation copy); loader + creation UI from content; migrate 3 existing origins byte-equivalent in effect; new origins: mountain-pass folk, Disputed Zone survivor, Archive-born, **unusual embodiment** (ENT precedent — its own hooks, GM guidance line in rule set); backgrounds +6; **SNG-008 seed:** one rune-caster NPC + shrine location (casting = daily omen: small spectrum-axis nudge; rune table data-driven, seeded from Heimrún canon — Aevi supplies `runes.json` before build), Council of Mavens as 3 petitionable NPCs (domain + bias each). Smoke: content-loaded origins match legacy behavior, new origins gate correctly, omen nudge clamped.
+**Out:** external Heimrún app linkage (later); framework lore layer beyond what the shrine/mavens carry implicitly; any resolution/contract change (Erik ratifies).
+**Verify:** legacy character loads unchanged; new origin creates and plays; omen applies once per day and clamps; mavens give conflicting counsel on one seeded question.
+**Ship spec updates:** §3 (loader), §4 (origin hooks), §6 (omen), §9.
 
 ---
 
-*Task ledger between Aevi (PO) and Claude Code build sessions. Template/flow: `SYSTEM_SPEC.md` §10. Results → `po/results/`. Only Aevi closes tasks. Queue: `po/BACKLOG.md`.*
+*Task ledger between Aevi (PO) and Claude Code build sessions. Template/flow: `SYSTEM_SPEC.md` §10. Results → `po/results/`. Only Aevi closes. Queue: `po/BACKLOG.md`.*

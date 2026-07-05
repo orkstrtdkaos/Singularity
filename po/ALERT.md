@@ -69,6 +69,36 @@ Design law 1 absolute (engine owns ledger/thresholds/minting; model offers words
 
 ---
 
+## Task SNG-012 — Memory & Input Fidelity (HOTFIX — do FIRST, before SNG-011)
+
+Two live-play bugs (Erik 2026-07-06, screenshot: GM lost that Teva was already rescued from the resonance chamber). Shared root: the pipeline compresses information that should be preserved.
+
+### Part A — Player input fidelity (typed detail lost)
+Symptom: a detailed typed action gets distilled by `parseIntent` (cheap model) into a short action label; the narration GM keys off the label and the player's specific instructions (who to address, what to watch, how to act) are dropped.
+- Fix: the player's RAW typed text must ALWAYS reach the narration GM verbatim. `parseIntent`'s reduction is for DICE/MECHANICS ONLY and never substitutes for the narration source.
+- On the typed-action path, pass the raw text through to `runGM` and render it in `buildTurnContext` as an authoritative block, e.g. `## PLAYER'S EXACT WORDS (honor these specifics in narration — the action roll abstracts them, the narration must not)`. Distinct from the mechanical `RESOLUTION` block.
+- The GM contract gets one line: narrate to the player's exact words when present — the resolution says whether it worked, the player's words say what was actually attempted and how.
+- Smoke: a verbose typed action reaches the GM context intact (full text present, not truncated below ~1500 chars); parseIntent label still drives the roll; narration path receives raw text on both the action and the say/plan paths.
+
+### Part B — GM memory fidelity (established facts forgotten)
+Symptom: `chronicle.slice(-12)` + scene-summary compression lose load-bearing facts once they scroll off or get flattened; named-NPC current situation isn't pinned as always-fed state.
+- Add a durable, NON-SCROLLING **ESTABLISHED FACTS** ledger per character: load-bearing facts (a rescue, a death, a promise, a major change, a relocation) captured as short pinned lines, fed to the GM IN FULL every turn (not windowed). Cap generously (e.g. 40 lines) and let old routine ones age out, but never drop on a fixed -12 like the chronicle.
+- Capture path: GM emits a `factUpdates` op ({op:"add|resolve", text, subjectId?}) when a scene establishes/【resolves】a load-bearing fact; engine stores it; it's fed via a new `## ESTABLISHED FACTS (authoritative, persistent — never contradict)` block. Typed+clamped like all ops (design law 1).
+- Tighten NPC-state capture: when a named NPC's SITUATION changes (rescued, injured, moved, now-safe), that belongs in their npc record as a current-status note fed every turn via npcRegistryDetail — not only a chronicle line. Rule 14 already pins identity/relationship; extend it to current-situation status.
+- Widen the recent-history texture modestly if token budget allows (chronicle slice -12 → -16; keep last-3-full-narration). Secondary to the facts ledger.
+- Smoke: a factUpdates "add" persists and feeds every subsequent turn regardless of how many scenes pass; an NPC situation-change note persists in npcRegistryDetail; resolving a fact removes it from the active feed; degradation intact (a dropped fact op re-emits per the SNG-009 op-loss restate path).
+
+### Guardrails
+Design law 1 absolute (facts/status are engine-owned; GM emits typed clamped ops, never edits the ledger freeform); additive schemas (`character.establishedFacts`, npc `statusNote`); graceful degradation; no resolution/encounter math change; suites + parse_probe green.
+
+### Verify (Erik browser-leg)
+1. Type a long, specific action → the GM's narration honors the specific instructions, not a flattened version. 2. Establish a fact (rescue an NPC from a place) → many scenes later the GM still treats it as true and doesn't relocate/reset that NPC. 3. A named NPC whose situation changed shows the current status in later scenes.
+
+### Ship spec updates
+§3 (established-facts ledger, input-fidelity path), §5 (memory/permanence: facts ledger + npc status), §7 (factUpdates op + exact-words narration rule), §8 gotcha (parseIntent is mechanical-only).
+
+---
+
 ## Task SNG-011 — World Legibility & Precursor Depth (QUEUED after SNG-010)
 
 Four asks from Erik live play 2026-07-04. Phase 0 is a bug fix (do first). Precursor catalog pre-authored at origin.

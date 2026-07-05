@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "note": "Location benefits/drawbacks to skills (Erik ratified 2026-07-06). TWO layers. (1) VECTOR ALIGNMENT (mechanic, resolution-math): an ability whose axes align with a location's STRONG spectrum axes eases the roll; opposed axes harden it — small, capped bumps, engine-computed from location.spectrum vs ability.axes. (2) TYPE AFFINITY (this file, content): a location TAG grants a flat situational bump to listed skills/attributes. Both surface to the player (LLW: show why a roll was easier here). Bumps small so place colors play, never dominates it. Aevi authors type-affinity content; vector-alignment shape is Erik's (resolution-math) — draft curve below for his ratify.",
+  "vectorAlignment": {
+    "ratifyNeeded": true,
+    "draftCurve": "for each of a location's strong axes (|v| >= 0.4), if the ability's axis sign matches, +ease; if opposite, +hardness. Cap total location modifier at +/-10 on the d100 chance. Perceived only after the player knows the vectors (SNG-011 vectorsKnown) — otherwise applied silently and revealed as 'the place favored this'."
+  },
+  "typeAffinity": {
+    "forge":      {"bonus": {"tinkers_hand": 8, "attr_craft": 4}, "note": "workshops, smithies — making and mending come easier"},
+    "shrine":     {"bonus": {"attr_spiritual": 4, "greenlore": 5}, "penalty": {"foreclose": 6}, "note": "sacred/quiet places resist the foreclosing tools"},
+    "market":     {"bonus": {"keen_appraisal": 8, "mediators_tongue": 5}, "note": "trade and crowds reward appraisal and negotiation"},
+    "wild":       {"bonus": {"wayfinding": 8, "beastfriend": 6, "quiet_step": 4}, "penalty": {"attr_social": 3}, "note": "wilderness rewards trackers, punishes parlor skills"},
+    "water":      {"bonus": {"rivercraft": 10, "attr_practical": 3}, "note": "rivers, crossings, wet country"},
+    "ruin":       {"bonus": {"stonewise": 8, "old_roads": 6, "keen_appraisal": 4}, "note": "old construction reads itself to the right eye"},
+    "precursor":  {"bonus": {"latticespeak": 8, "address_sense": 6, "old_roads": 8}, "penalty": {"attr_spiritual": 4}, "note": "live remnant sites amplify Precursor craft — and unsettle the spirit"},
+    "settled":    {"bonus": {"storykeeper": 6, "hearthbinding": 6, "mediators_tongue": 4}, "note": "towns and halls reward the social and the memory-keeping crafts"},
+    "high":       {"bonus": {"prism_sight": 6, "beacon_thread": 5}, "penalty": {"quiet_step": 4}, "note": "heights and open terraces — far sight helps, hiding does not"}
+  }
+}

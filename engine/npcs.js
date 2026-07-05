@@ -90,9 +90,31 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
       n.relationship = Math.max(-10, Math.min(10, n.relationship + Math.max(-2, Math.min(2, u.relationshipDelta))));
     }
     if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
+    if (u.statusNote) n.statusNote = String(u.statusNote).slice(0, 160);
     n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
   }
   return character.npcRegistry;
+}
+
+/** SNG-012 Part C: player names an unnamed NPC directly (parallel to item naming).
+ *  Sets display name on the stable id, records the old name as an alias, logs it. */
+export function setNpcName(character, npcId, name, day = null) {
+  const n = character.npcRegistry?.[npcId];
+  if (!n) return false;
+  const newName = prettifyNpcName(String(name).slice(0, 60));
+  if (!newName || newName === n.name) return false;
+  n.aliases = [...(n.aliases || []), n.name].slice(-4);
+  n.history = [...n.history, `[d${day ?? "?"}] You know this person's name now: ${newName} (was "${n.name}")`].slice(-CAPS.history);
+  n.name = newName;
+  n.nameRevealed = true;
+  return true;
+}
+
+/** Heuristic: does this registry entry read as name-unknown (a role/placeholder)? */
+export function nameIsUnknown(n) {
+  if (n.nameRevealed) return false;
+  const name = (n.name || "").toLowerCase();
+  return /unknown|unnamed|\bthe\b|warden|keeper|stranger|figure|man|woman|guard|clerk|scout|elder|apprentice|dock-?master/.test(name);
 }
 
 export function relationshipBand(score) {
@@ -124,6 +146,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
   return pick.map(n =>
     `- ${n.name}${n.role ? ` (${n.role})` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
     (n.description ? ` ${n.description}` : "") +
+    (n.statusNote ? ` CURRENT SITUATION: ${n.statusNote}.` : "") +
     (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +
     (n.knownFacts.length ? ` What they know/have experienced: ${n.knownFacts.join("; ")}.` : "") +
     (n.history.length ? ` History with ${character.name}: ${n.history.slice(-4).join(" | ")}` : "")

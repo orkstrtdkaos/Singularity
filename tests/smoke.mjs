@@ -703,5 +703,36 @@ const fresh = { name:"New", origin:"valley", level:1, xp:0, attributes:{physical
 const fsum = runBackfill(fresh, { rules, abilityCatalog: abilityCat, emergence: recipes, companionCatalog: {} });
 check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.level === 1 && fresh.backfillVersion === 1);
 
+// --- SNG-012: memory & input fidelity ---
+{
+  const { ensureFacts, applyFactUpdates, factsForGM } = await import("../engine/facts.js");
+  const { setNpcName, nameIsUnknown } = await import("../engine/npcs.js");
+  const fc = {};
+  ensureFacts(fc);
+  applyFactUpdates(fc, [{ op: "add", text: "Teva was rescued from the resonance chamber and is safe at the mill", subjectId: "teva" }], { day: 5 });
+  applyFactUpdates(fc, [{ op: "add", text: "Teva was rescued from the resonance chamber and is safe at the mill", subjectId: "teva" }], { day: 6 });
+  check("fact added once (dedupe)", fc.establishedFacts.length === 1 && fc.establishedFacts[0].subjectId === "teva");
+  check("factsForGM feeds the whole ledger", factsForGM(fc).includes("Teva was rescued"));
+  for (let i = 0; i < 50; i++) applyFactUpdates(fc, [{ op: "add", text: "routine fact " + i }], { day: i });
+  check("facts ledger caps generously (40)", fc.establishedFacts.length <= 40);
+  applyFactUpdates(fc, [{ op: "resolve", subjectId: "teva" }], {});
+  check("resolve retires a fact", !fc.establishedFacts.some(x => x.subjectId === "teva"));
+
+  const nc = { name: "Kael", npcRegistry: {} };
+  applyNpcUpdates(nc, [{ op: "meet", npcId: "teva", name: "Teva", role: "apprentice" }], { locationId: "disputed_zone_fringe", day: 1 });
+  applyNpcUpdates(nc, [{ op: "update", npcId: "teva", statusNote: "rescued and safe at the Millbrook mill" }], { day: 5 });
+  check("statusNote stored", nc.npcRegistry.teva.statusNote.includes("rescued"));
+  check("statusNote fed to GM every turn", npcRegistryForGM(nc, { locationId: "disputed_zone_fringe" }).includes("CURRENT SITUATION: rescued"));
+
+  const rc = { npcRegistry: { "the-warden": { id: "the-warden", name: "The Tuning-Warden", role: "warden", history: [], aliases: [] } } };
+  check("unknown-name heuristic flags role-name", nameIsUnknown(rc.npcRegistry["the-warden"]));
+  check("player sets the name on stable id", setNpcName(rc, "the-warden", "Maren", 3) && rc.npcRegistry["the-warden"].name === "Maren" && rc.npcRegistry["the-warden"].nameRevealed);
+  check("named NPC no longer flagged unknown", !nameIsUnknown(rc.npcRegistry["the-warden"]));
+
+  const ctx = buildTurnContext({ character: { name: "K", origin: "valley", background: "c", level: 1, attributes: { physical: 1, mental: 1, social: 1, practical: 1 }, health: 1, maxHealth: 1, energy: 1, maxEnergy: 1, alignment: {}, deeds: [] }, location: { name: "D", descriptionSeed: "d", spectrum: {}, communityId: null }, rules, exactWords: "I address the dock-master directly and watch the Radiant delegate for a flinch", factsDetail: "- Teva is safe" });
+  check("PLAYER EXACT WORDS block present", ctx.includes("PLAYER'S EXACT WORDS") && ctx.includes("watch the Radiant delegate"));
+  check("ESTABLISHED FACTS block present", ctx.includes("ESTABLISHED FACTS") && ctx.includes("Teva is safe"));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

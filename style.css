@@ -70,6 +70,8 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .opt.practiced { border-color: var(--accent2); }
 .map-satellite.visited { fill: var(--accent2); stroke: none; }
 .map-satellite.heard { fill: transparent; stroke: var(--ink-dim); stroke-width: 1.2; }
+.npc-setname { background: none; border: 1px solid var(--border); color: var(--accent2); border-radius: 4px; font-size: 10px; padding: 0 4px; margin-left: 4px; }
+.npc-setname:hover { border-color: var(--accent2); }
 /* ---------- encounters ---------- */
 .encounter-bar { border: 1px solid var(--danger); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; background: linear-gradient(to right, rgba(192,91,77,0.10), transparent); font-family: var(--font-ui); font-size: 13px; }
 .enc-name { color: var(--danger); font-weight: 600; }

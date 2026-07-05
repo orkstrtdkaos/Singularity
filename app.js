@@ -14,7 +14,7 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -22,10 +22,11 @@ import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoi
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
+import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.4.1";
+const APP_VERSION = "1.5.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -184,6 +185,7 @@ function migrate(c) {
   if (!c.customAbilities) c.customAbilities = {};
   ensureBonds(c);
   ensurePractice(c);
+  ensureFacts(c);
   if (!c.precursorAccess) c.precursorAccess = [];
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
@@ -519,7 +521,7 @@ async function startScene(prompt = "(Scene opening — set the scene where the c
   if (result) renderPlay(result.turn, { degraded: result.degraded, newsFlash: news, aside });
 }
 
-async function runGM({ resolution, playerInput }) {
+async function runGM({ resolution, playerInput, exactWords }) {
   busy = true;
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
@@ -528,7 +530,7 @@ async function runGM({ resolution, playerInput }) {
     character, location, region,
     lore: loreForLocation(location, CONTENT.lore),
     rules: CONTENT.rules,
-    resolution, playerInput,
+    resolution, playerInput, exactWords,
     recentTurns: sceneTurns.slice(-6),
     timeLabel: time.label,
     inventoryDetail: inventoryForGM(character),
@@ -540,7 +542,8 @@ async function runGM({ resolution, playerInput }) {
     newsDetail: newsForGM(character),
     abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
-    opLossNote: character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex updates that occurred last beat (the narration advanced; the state did not)." : null,
+    factsDetail: factsForGM(character),
+    opLossNote: character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex/FACT updates that occurred last beat — INCLUDING any name reveal (revealName) or established fact the fiction set. The narration advanced; the state did not." : null,
     emergenceDetail: emergenceNoticeForGM(character, CONTENT.emergence, CONTENT.rules),
     perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
@@ -610,6 +613,7 @@ function applyTurn(turn, resolution) {
   })), memCtx);
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
+  applyFactUpdates(character, turn.factUpdates || [], memCtx);
   if (character.activeEncounter && turn.encounterOps) {
     const encA = activeEnc();
     if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state));
@@ -757,7 +761,7 @@ async function onChoice(choice) {
   if (choice.trivial && !choice.abilityId && !(choice.comboAbilities || []).length && !action.novel) {
     const resolution = { action, degree: "auto", roll: null, chance: null };
     renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
-    const result = await runGM({ resolution, playerInput: null });
+    const result = await runGM({ resolution, playerInput: null, exactWords: choice.exactWords || null });
     if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
     return;
   }
@@ -831,7 +835,7 @@ async function onChoice(choice) {
     }
   }
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
-  const result = await runGM({ resolution, playerInput: null });
+  const result = await runGM({ resolution, playerInput: null, exactWords: choice.exactWords || null });
   if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, resolution }, degraded: result.degraded });
 }
 
@@ -852,7 +856,8 @@ async function onFreeform(text) {
     novel: !!intent.novelUse || (intent.comboAbilities || []).length > 1,
     comboAbilities: (intent.comboAbilities || []).filter(id => character.abilities.some(a => a.abilityId === id)),
     noveltyHint: intent.noveltyHint || "",
-    trivial: !!intent.trivial
+    trivial: !!intent.trivial,
+    exactWords: text
   });
 }
 
@@ -1432,7 +1437,7 @@ function renderPlay(turn, opts = {}) {
           const open = npcGroupsOpen.has(k) || (k === character.currentLocationId && !npcGroupsClosed.has(k));
           const label = k === "elsewhere" ? "Elsewhere" : (CONTENT.locations[k]?.name || k);
           return `<details class="npc-group" data-npcgroup="${esc(k)}" ${open ? "open" : ""}><summary>${esc(label)} <span class="cost">(${groups[k].length})</span></summary>
-            ${groups[k].map(n => `<div class="known-npc" title="${esc((n.history || []).slice(-2).join(" | ") || n.description || "")}"><span class="npc-name">${esc(n.name)}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`).join("")}
+            ${groups[k].map(n => `<div class="known-npc" title="${esc((n.statusNote ? "Now: " + n.statusNote + " | " : "") + ((n.history || []).slice(-2).join(" | ") || n.description || ""))}"><span class="npc-name">${esc(n.name)}${nameIsUnknown(n) ? ` <button class="npc-setname" data-setname="${esc(n.id)}" title="You know their name — set it">✎ name</button>` : ""}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`).join("")}
           </details>`;
         }).join("");
       })()}
@@ -1620,6 +1625,11 @@ function renderPlay(turn, opts = {}) {
     renderPlay(character.activeScene?.lastTurn || null, {});
   };
   for (const btn of app.querySelectorAll("[data-use]")) btn.onclick = () => useItem(btn.dataset.use);
+  for (const b of app.querySelectorAll("[data-setname]")) b.onclick = (e) => {
+    e.stopPropagation();
+    const nn = prompt("What is their name?");
+    if (nn && setNpcName(character, b.dataset.setname, nn, readClock(character.clock).day)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
+  };
   for (const d of app.querySelectorAll("[data-npcgroup]")) d.ontoggle = () => {
     const k = d.dataset.npcgroup;
     if (d.open) { npcGroupsOpen.add(k); npcGroupsClosed.delete(k); }

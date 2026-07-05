@@ -18,8 +18,9 @@ export function startEncounter(def) {
 /** Difficulty the encounter adds to the player's roll this round. */
 export function encounterDifficulty(state, def, rules, action = {}) {
   if (state.type === "duel") {
-    if (action.flee) return def.opponent.fleeDifficulty ?? 15;
-    return Math.round((def.opponent.threat ?? 30) * (rules.encounters?.duel?.threatToDifficulty ?? 0.3));
+    const comp = state.complication ? 5 : 0;
+    if (action.flee) return (def.opponent.fleeDifficulty ?? 15) + comp;
+    return Math.round((def.opponent.threat ?? 30) * (rules.encounters?.duel?.threatToDifficulty ?? 0.3)) + comp;
   }
   if (state.type === "challenge") return def.stages[state.stageIndex]?.difficulty ?? 15;
   if (state.type === "puzzle") return def.difficulty ?? 15;
@@ -32,6 +33,7 @@ export function encounterDifficulty(state, def, rules, action = {}) {
 export function duelRound(state, def, resolution, rules, opts = {}) {
   const cfg = rules.encounters?.duel || {};
   const s = { ...state, round: state.round + 1 };
+  if (s.complication) s.complication = null; // one round of pressure, then it clears
   const deltas = { health: 0, energy: -(cfg.energyPerRound ?? 3) };
   const events = [];
   let ended = false, outcome = null;
@@ -168,9 +170,13 @@ export function encounterReceiptForGM(state, def, resolution, roundResult) {
 }
 
 /** GM encounter ops: narrative-flavor only, clamped. */
-export function sanitizeEncounterOps(ops, def) {
+export function sanitizeEncounterOps(ops, def, state) {
   const out = [];
   for (const o of (Array.isArray(ops) ? ops : []).slice(0, 2)) {
+    if (o?.op === "complication" && o.text && !state?.complicationUsed) {
+      out.push({ op: "complication", text: String(o.text).slice(0, 120) });
+      continue;
+    }
     if (o?.op === "tactic" && o.tag && def?.opponent) {
       const tag = String(o.tag).slice(0, 40);
       if ((def.opponent.tacticTags || []).includes(tag) || (def.opponent.tacticTags || []).length === 0) {
@@ -182,6 +188,22 @@ export function sanitizeEncounterOps(ops, def) {
 }
 
 export function applyEncounterOps(state, ops) {
-  for (const o of ops) if (o.op === "tactic") state.tactic = o.tag;
+  for (const o of ops) {
+    if (o.op === "tactic") state.tactic = o.tag;
+    if (o.op === "complication") { state.complication = o.text; state.complicationUsed = true; }
+  }
   return state;
+}
+
+/** GM-invented duel (rule 18 amended): engine-clamped stat block, duels only. */
+export function sanitizeNewEncounter(raw) {
+  if (!raw || raw.type !== "duel" || !raw.name || !raw.opponent?.name) return null;
+  const o = raw.opponent;
+  return { schemaVersion: 1, id: "gm-" + String(raw.id || raw.name).toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30),
+    type: "duel", name: String(raw.name).slice(0, 60), setup: String(raw.setup || "").slice(0, 300),
+    lethal: !!raw.lethal,
+    opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
+      threat: Math.max(10, Math.min(70, o.threat | 0 || 35)), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),
+      fleeDifficulty: Math.max(0, Math.min(30, o.fleeDifficulty | 0 || 15)),
+      tacticTags: (Array.isArray(o.tacticTags) ? o.tacticTags : []).slice(0, 4).map(t => String(t).slice(0, 30)) } };
 }

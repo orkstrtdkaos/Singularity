@@ -26,7 +26,7 @@ export async function callClaude(messages, opts = {}) {
   const key = getApiKey();
   if (!key) throw new Error("NO_API_KEY");
 
-  const body = { model, max_tokens, messages };
+  const body = { model, max_tokens, messages, cache_control: { type: "ephemeral" } };
   if (opts.system) body.system = opts.system;
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {

@@ -20,7 +20,7 @@ import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effecti
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
-import { startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+import { sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
 const APP_VERSION = "1.1.0";
 const app = document.getElementById("app");
@@ -155,7 +155,7 @@ function renderRoster() {
     input.click();
   };
   for (const btn of app.querySelectorAll("[data-play]")) {
-    btn.onclick = () => { character = migrate(loadCharacter(btn.dataset.play)); saveCharacter(character); enterPlay(); };
+    btn.onclick = () => { const c = migrate(loadCharacter(btn.dataset.play)); if (c.dead) { alert(c.name + " fell in the valley. Their story is over."); return; } character = c; saveCharacter(character); enterPlay(); };
   }
 }
 
@@ -191,7 +191,7 @@ function senseTierFor() {
 function activeEnc() {
   const e = character?.activeEncounter;
   if (!e) return null;
-  const def = CONTENT.encounters?.[e.defId];
+  const def = CONTENT.encounters?.[e.defId] || character.customEncounters?.[e.defId];
   return def ? { def, state: e.state } : null;
 }
 
@@ -211,7 +211,10 @@ function endEncounter(outcome) {
   const xpMap = { opponent_fell: t.winXp, opponent_yielded: t.winXp, fled: t.fleeXp, yielded: t.yieldXp, completed: t.completeXp, abandoned: t.abandonXp, solved: t.solveXp, walked_away: t.walkAwayXp, incapacitated: 0 };
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
   character.activeEncounter = null;
-  if (outcome === "incapacitated") { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
+  if (outcome === "incapacitated") {
+    if (enc.def.lethal) { character.dead = true; }
+    else { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
+  }
   saveCharacter(character);
 }
 
@@ -466,7 +469,11 @@ function applyTurn(turn, resolution) {
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
   if (character.activeEncounter && turn.encounterOps) {
     const encA = activeEnc();
-    if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def));
+    if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state));
+  }
+  if (turn.newEncounter) {
+    const nd = sanitizeNewEncounter(turn.newEncounter);
+    if (nd) { character.customEncounters = character.customEncounters || {}; character.customEncounters[nd.id] = nd; }
   }
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
   if (resolution?.action?.axes) {
@@ -563,8 +570,8 @@ async function onChoice(choice) {
     novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || ""
   };
   // starting an encounter (GM-offered choice carrying a real encounterId)
-  if (choice.encounterId && CONTENT.encounters?.[choice.encounterId] && !character.activeEncounter) {
-    const def = CONTENT.encounters[choice.encounterId];
+  if (choice.encounterId && (CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId]) && !character.activeEncounter) {
+    const def = CONTENT.encounters?.[choice.encounterId] || character.customEncounters[choice.encounterId];
     character.activeEncounter = { defId: def.id, state: startEncounter(def) };
     saveCharacter(character);
     renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });

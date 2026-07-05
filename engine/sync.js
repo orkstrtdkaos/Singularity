@@ -50,6 +50,12 @@ async function ghPut(path, contentStr, message, sha = null) {
   return res.json();
 }
 
+/** List file names in a repo directory. Returns [] if missing. */
+export async function ghList(path) {
+  const meta = await ghGet(path);
+  return Array.isArray(meta) ? meta.map(f => f.name) : [];
+}
+
 /** Read a JSON file from the shared repo. Returns parsed object or null. */
 export async function fetchRepoJSON(path) {
   const meta = await ghGet(path);

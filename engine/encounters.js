@@ -207,3 +207,24 @@ export function sanitizeNewEncounter(raw) {
       fleeDifficulty: Math.max(0, Math.min(30, o.fleeDifficulty | 0 || 15)),
       tacticTags: (Array.isArray(o.tacticTags) ? o.tacticTags : []).slice(0, 4).map(t => String(t).slice(0, 30)) } };
 }
+
+/** SNG-002b (ratified): a lethal encounter is always OFFERED, never imposed.
+ *  Clamps a GM choice list: any choice starting a lethal encounter is marked,
+ *  never trivial, and a guaranteed decline choice is appended if missing. */
+export function lethalOfferClamp(choices, catalog = {}) {
+  const out = [...(choices || [])];
+  let lethalOffered = false;
+  for (const c of out) {
+    const def = c?.encounterId ? catalog[c.encounterId] : null;
+    if (def?.lethal) {
+      lethalOffered = true;
+      c.trivial = false; // entry must be an explicit, informed choice
+      if (!/lethal|deadly|kill/i.test(c.label || "")) c.label = `⚠ ${c.label} (lethal stakes)`;
+    }
+  }
+  const hasDecline = out.some(c => !c.encounterId && /decline|refuse|back away|walk away|leave|avoid/i.test(c.label || ""));
+  if (lethalOffered && !hasDecline) {
+    out.push({ label: "Decline — back away from this", attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true });
+  }
+  return out;
+}

@@ -21,6 +21,20 @@ export function applyPlaceUpdates(character, locationId, updates = [], ctx = {})
       const note = `[d${ctx.day ?? "?"}] ${String(u.note).slice(0, 200)}`;
       if (!p.notes.includes(note)) p.notes = [...p.notes, note].slice(-CAPS.notes);
     }
+    if (u.subPlace && (u.subPlace.name || typeof u.subPlace === "string")) {
+      const name = String(u.subPlace.name || u.subPlace).slice(0, 40);
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      p.subPlaces = p.subPlaces || {};
+      if (p.subPlaces[slug] || Object.keys(p.subPlaces).length < 12) {
+        const prev = p.subPlaces[slug] || {};
+        p.subPlaces[slug] = {
+          name: prev.name || name,
+          day: prev.day ?? ctx.day ?? null,
+          visited: prev.visited || u.subPlace.visited !== false,
+          note: u.subPlace.note ? String(u.subPlace.note).slice(0, 120) : prev.note || ""
+        };
+      }
+    }
     if (u.flag && typeof u.flag === "object") {
       for (const [k, v] of Object.entries(u.flag).slice(0, 2)) {
         if (Object.keys(p.flags).length < CAPS.flags || k in p.flags) {
@@ -36,10 +50,12 @@ export function applyPlaceUpdates(character, locationId, updates = [], ctx = {})
  *  changed here. The GM must honor these as established fact. */
 export function placeMemoryForGM(character, locationId) {
   const p = character.placeMemory?.[locationId];
-  if (!p || (!p.notes.length && !Object.keys(p.flags).length && p.visits <= 1)) return null;
+  if (!p || (!p.notes.length && !Object.keys(p.flags).length && !Object.keys(p.subPlaces || {}).length && p.visits <= 1)) return null;
   const parts = [`Visits: ${p.visits}${p.lastVisit != null ? ` (last: day ${p.lastVisit})` : ""}`];
   if (p.notes.length) parts.push(`Durable changes & discoveries:\n${p.notes.map(n => `  - ${n}`).join("\n")}`);
   const flags = Object.entries(p.flags);
   if (flags.length) parts.push(`Standing facts: ${flags.map(([k, v]) => `${k}=${v}`).join(", ")}`);
+  const subs = Object.values(p.subPlaces || {});
+  if (subs.length) parts.push(`Known places within: ${subs.map(sp => `${sp.name}${sp.visited ? "" : " (heard of only)"}${sp.note ? ` — ${sp.note}` : ""}`).join("; ")}`);
   return parts.join("\n");
 }

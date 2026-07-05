@@ -502,5 +502,54 @@ check("ops clamp to known tactics only", eOps.length === 1 && eOps[0].tag === "c
 const opState = { ...dS }; applyEncounterOps(opState, eOps);
 check("tactic op is flavor-only", opState.tactic === "circle-left" && opState.opponentHealth === dS.opponentHealth);
 
+// --- SNG-002b: lethal avoidability + sub-places ---
+const { lethalOfferClamp } = await import('../engine/encounters.js');
+const lethalCat = { 'gm-black-warden': { id: 'gm-black-warden', type: 'duel', lethal: true, opponent: { name: 'Black Warden' } } };
+let cl = lethalOfferClamp([{ label: 'Face the warden', encounterId: 'gm-black-warden', trivial: true }], lethalCat);
+check('lethal offer carries a decline path', cl.length === 2 && /decline/i.test(cl[1].label));
+check('lethal entry never trivial + telegraphed', cl[0].trivial === false && /lethal/i.test(cl[0].label));
+cl = lethalOfferClamp([{ label: 'Face the warden (lethal stakes)', encounterId: 'gm-black-warden' }, { label: 'Back away from this fight', trivial: true }], lethalCat);
+check('existing decline not duplicated', cl.length === 2);
+check('non-lethal offers untouched', lethalOfferClamp([{ label: 'Spar', encounterId: 'x' }], {}).length === 1);
+// sub-places
+const wanderer2 = {};
+const { applyPlaceUpdates: apu, placeMemoryForGM: pmg } = await import('../engine/places.js');
+apu(wanderer2, 'millbrook', [{ subPlace: { name: 'Warden Post', note: 'Hale keeps the ledger here' } }, { subPlace: { name: 'The Cottage', visited: false } }], { day: 4 });
+const mem = wanderer2.placeMemory.millbrook;
+check('sub-places registered with slugs', mem.subPlaces['warden-post']?.visited === true && mem.subPlaces['the-cottage']?.visited === false);
+apu(wanderer2, 'millbrook', [{ subPlace: { name: 'warden post', note: 'second visit' } }], { day: 6 });
+check('sub-place dedupes by slug, keeps first name', Object.keys(mem.subPlaces).length === 2 && mem.subPlaces['warden-post'].name === 'Warden Post');
+check('GM block lists places within', pmg(wanderer2, 'millbrook').includes('heard of only'));
+
+// --- SNG-001: party shared scenes (pure core) ---
+const { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, nextTurn, setEncounterState, partyBlockForGM } = await import('../engine/party.js');
+const cA = { id: 'char-a', name: 'Kaelen', playerKey: 'erik' };
+const cB = { id: 'char-b', name: 'Rowan', playerKey: 'kid1' };
+let scn = newSharedScene('millbrook', cA, '2026-07-04T12-00-00');
+check('scene starts with creator on turn', scn.party.length === 1 && scn.turn === 'char-a' && scn.locationId === 'millbrook');
+scn = addMember(scn, cB);
+check('join adds member once', scn.party.length === 2 && addMember(scn, cB).party.length === 2);
+check('turn gate blocks B during A turn', isMyTurn(scn, 'char-a') && !isMyTurn(scn, 'char-b'));
+const beat = { by: 'char-a', name: 'Kaelen', label: 'Calmed the crowd', degree: 'success', summary: 'The square settles.', at: '2026-07-04T12:01:00Z' };
+scn = mergeBeat(scn, beat);
+check('beat appends and turn rotates to B', scn.beats.length === 1 && scn.turn === 'char-b');
+check('merge is idempotent by (by, at)', mergeBeat(scn, beat).beats.length === 1);
+check('round-robin wraps', nextTurn(scn, 'char-b') === 'char-a');
+scn = setEncounterState(scn, 'char-a', 'ENCOUNTER — The Hook-Pole Raider (duel), round 2');
+const block = partyBlockForGM(scn, 'char-b');
+check('party block carries other member + last action + encounter', block.includes('Kaelen') && block.includes('Calmed the crowd') && block.includes('Hook-Pole'));
+check('solo member gets no party block', partyBlockForGM(newSharedScene('millbrook', cA, 'x'), 'char-a') === null);
+scn = setEncounterState(scn, 'char-a', null);
+check('encounter state clears', !scn.encounters['char-a']);
+scn = removeMember(scn, 'char-b');
+check('leave hands turn back and removes member', scn.party.length === 1 && scn.turn === 'char-a');
+// conflict-merge simulation: two writers, same base — replay both beats, dedupe holds
+let base = addMember(newSharedScene('millbrook', cA, 'y'), cB);
+const bA = { by: 'char-a', name: 'Kaelen', label: 'x', degree: 'success', summary: 's1', at: 't1' };
+const bB = { by: 'char-b', name: 'Rowan', label: 'y', degree: 'partial', summary: 's2', at: 't2' };
+const writerA = mergeBeat(base, bA);          // A pushed first
+const replayed = mergeBeat(mergeBeat(writerA, bB), bB); // B refetches A's version, re-applies own beat (twice = retry)
+check('SHA-conflict merge-retry keeps both beats exactly once', replayed.beats.length === 2 && replayed.beats.filter(b => b.by === 'char-b').length === 1);
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

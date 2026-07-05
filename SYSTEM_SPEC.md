@@ -5,7 +5,7 @@
 
 - Live: https://orkstrtdkaos.github.io/Singularity/
 - Repo: github.com/orkstrtdkaos/Singularity (GitHub Pages, `main`, root)
-- Current version: v1.1.0 (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
+- Current version: v1.2.0 (version string in `app.js` APP_VERSION + `index.html` cache-busters — bump both every ship)
 
 ---
 
@@ -46,6 +46,7 @@ engine/
   quests.js      quest ops (start/progress/complete/fail), slugify
   gambit.js      multi-step plans: parse, assess (weak link), execute, reroll, GM formatting
   encounters.js  typed duels/challenges/puzzles: state machine consuming d100 receipts; margin tables, stage costs, hint tiers, codex unlocks; clamped encounterOps
+  party.js       SNG-001 shared scenes: scene file merge (idempotent beats, round-robin turns), party block for GM, poll transport
   companions.js  companion defs, assist bonuses, GM block
   playerprofile.js human tendencies → aptitudes
   worldtime.js   story/real time modes, clock, phases/seasons
@@ -58,7 +59,7 @@ content/packs/valley/  manifest, locations (spectrum, questSeeds, map x/y, image
 world/regions/valley.json  shared region state (world-tick writes only)
 world/ledger/YYYY-MM.json  append-only cross-character events
 schemas/               JSON Schema docs for character, player profile, ledger events
-tests/smoke.mjs        171 pure-engine tests (node tests/smoke.mjs)
+tests/smoke.mjs        198 pure-engine tests (node tests/smoke.mjs)
 tests/live_gm.mjs      real-API harness (costs cents; ANTHROPIC_API_KEY env var)
 ```
 
@@ -96,6 +97,12 @@ tests/live_gm.mjs      real-API harness (costs cents; ANTHROPIC_API_KEY env var)
 - **Gambits:** goal + ≤5 steps + optional fallbacks; one-call parse (later steps auto-harden); assess = per-step sense + weakest-link (tier≥2); execution blocks on failure → fallback / adaptation reroll (1, Strategist 2) / press on / abandon; cinematic single narration from receipts; steps are planned actions (Strategist bonus) and feed the profile.
 - **Encounters** (v1.1.0, SNG-002): locations declare `encounterSeeds`; GM offers via choice `encounterId`. Duels (opponent hits, threat×0.3 difficulty, margin table, yield/flee/fall — incapacitation never death), challenges (staged, partial advances-with-cost, failure retries-with-cost), puzzles (attempt costs, hint tiers gated by max(sense tier, partial reveals), codex-unlock solution paths). All numbers in rules `encounters` block; GM rule 18 (ratification pending); state at `character.activeEncounter`, serializes for party play.
 - **Companions:** content-defined (Aevi: nanite-mote intelligence, cannot lie, Precursor hook GM-eyes-only); +5 assist on matching tags (cap 10); voiced every scene under boundary rules; join/part in sidebar.
+
+**Party play — phase 1 (SNG-001, v1.2.0):** shared scene file `world/scenes/{locationId}--{stamp}.json` (schemaVersion 1: party roster, ordered beat log capped 40, round-robin `turn`, per-member witnessed encounter receipts). Writes via merge-retry (`pushSceneWithMerge`: refetch → idempotent `mergeBeat` by (by, at) → retry ×3) — the documented exception to owned-file writes. Polling 20s while active; turn gate client-side (Ask GM stays open off-turn); other members' beats enter local chronicle and the GM's PARTY block ("never decide for them"). Sync off → pure solo, no party UI. Joint encounter participation, world-clock, knowledge trading = later phases.
+
+**Sub-places (Erik, v1.2.0):** GM registers named spots within a location via `placeUpdates.subPlace {name, note, visited}` (cap 12/location, slug-deduped); shown as chips in the map details panel (dim = heard-of); clicking issues an in-location move. Sidebar travel buttons retired — the map owns travel.
+
+**Lethal avoidability (SNG-002b, ratified):** `lethalOfferClamp` forces every lethal-encounter offer to be explicit (never trivial, stakes in the label) with a guaranteed decline choice; flee availability in round 1 is unconditional. Rule 18: "A lethal encounter is always offered, never imposed."
 
 ## 7. GM Contract (abridged — full text in `engine/gm.js` GM_SYSTEM)
 

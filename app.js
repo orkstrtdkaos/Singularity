@@ -20,9 +20,10 @@ import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effecti
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
-import { sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
+import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.1.0";
+const APP_VERSION = "1.2.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -35,6 +36,9 @@ let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
 let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
+let sharedScene = null;  // SNG-001: the shared scene object (party play), null when solo
+let partyPoll = null;    // poll timer while a shared scene is active
+let seenBeats = 0;       // remote beats already rendered
 
 // ---------- boot ----------
 
@@ -218,6 +222,67 @@ function endEncounter(outcome) {
   saveCharacter(character);
 }
 
+// ---------- party (SNG-001 phase 1) ----------
+
+async function startPartyScene() {
+  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const scene = newSharedScene(character.currentLocationId, character, stamp);
+  const pushed = await pushSceneWithMerge(scene.sceneId, s => s, scene);
+  if (!pushed) { alert("Could not create the shared scene (sync failed)."); return; }
+  enterPartyScene(pushed);
+}
+
+async function joinPartyScene(sceneId) {
+  const joined = await pushSceneWithMerge(sceneId, s => addMember(s, character));
+  if (!joined) { alert("Could not join — the scene may be gone."); return; }
+  enterPartyScene(joined);
+}
+
+function enterPartyScene(scene) {
+  sharedScene = scene;
+  seenBeats = scene.beats.length;
+  character.sharedSceneId = scene.sceneId;
+  saveCharacter(character);
+  if (partyPoll) clearInterval(partyPoll);
+  partyPoll = setInterval(pollPartyScene, 20000);
+  renderPlay(character.activeScene?.lastTurn || null, { aside: `Shared scene: ${scene.party.map(m => m.name).join(", ")}. Turns rotate — act when it's yours.` });
+}
+
+async function leavePartyScene() {
+  const id = character.sharedSceneId;
+  if (partyPoll) { clearInterval(partyPoll); partyPoll = null; }
+  sharedScene = null; character.sharedSceneId = null; saveCharacter(character);
+  if (id) pushSceneWithMerge(id, s => removeMember(s, character.id));
+  renderPlay(character.activeScene?.lastTurn || null, { aside: "You part ways with the party — solo play resumes." });
+}
+
+async function pollPartyScene() {
+  if (!character?.sharedSceneId || busy) return;
+  const remote = await fetchScene(character.sharedSceneId);
+  if (!remote) return;
+  const hadNew = remote.beats.length > seenBeats;
+  const newBeats = remote.beats.slice(seenBeats).filter(b => b.by !== character.id);
+  sharedScene = remote;
+  if (hadNew) {
+    seenBeats = remote.beats.length;
+    for (const b of newBeats) sceneTurns.push({ summary: `${b.name}: ${b.summary}` });
+    if (newBeats.length && !busy) {
+      renderPlay(character.activeScene?.lastTurn || null, { aside: newBeats.map(b => `${b.name}: ${b.label}${b.degree ? ` (${b.degree.replace("_", " ")})` : ""} — ${b.summary}`).join("; ") });
+    }
+  } else if (!busy) {
+    renderPlay(character.activeScene?.lastTurn || null, {});
+  }
+}
+
+/** Publish my beat to the shared scene (fire-and-forget; solo play never blocks). */
+function publishPartyBeat(label, degree, summary) {
+  if (!sharedScene || !character.sharedSceneId) return;
+  const beat = { by: character.id, name: character.name, label, degree, summary, at: new Date().toISOString() };
+  const encReceipt = activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null;
+  pushSceneWithMerge(character.sharedSceneId, s => setEncounterState(mergeBeat(s, beat), character.id, encReceipt))
+    .then(next => { if (next) { sharedScene = next; seenBeats = next.beats.length; } });
+}
+
 /** World-tick choke point: run whenever the character (re)enters play or the
  *  clock jumps. Returns fresh news to show the player once. */
 async function maybeTick() {
@@ -392,6 +457,12 @@ function renderCreate() {
 async function enterPlay() {
   sceneTurns = [];
   sceneState = null;
+  if (character.sharedSceneId && syncEnabled()) {
+    fetchScene(character.sharedSceneId).then(sc => {
+      if (sc && sc.party.some(m => m.characterId === character.id)) { sharedScene = sc; seenBeats = sc.beats.length; if (!partyPoll) partyPoll = setInterval(pollPartyScene, 20000); }
+      else { character.sharedSceneId = null; saveCharacter(character); }
+    });
+  }
   const news = await maybeTick();
   if (character.activeScene?.turns?.length) {
     sceneTurns = character.activeScene.turns;
@@ -431,7 +502,8 @@ async function runGM({ resolution, playerInput }) {
     abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
-    availableEncounters: activeEnc() ? null : listAvailableEncounters()
+    availableEncounters: activeEnc() ? null : listAvailableEncounters(),
+    partyDetail: partyBlockForGM(sharedScene, character.id)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -521,6 +593,8 @@ function applyTurn(turn, resolution) {
   advanceClock(character.clock, (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours);
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
+  // party: publish this beat to the shared scene (fire-and-forget)
+  if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" });
@@ -775,7 +849,8 @@ function renderMap(selectedId = null) {
       ${visited
         ? `<p class="map-details-desc">${esc(l.descriptionSeed.slice(0, 260))}${l.descriptionSeed.length > 260 ? "…" : ""}</p>
            ${pm?.visits ? `<div class="hint">${pm.visits} visit${pm.visits > 1 ? "s" : ""}${pm.lastVisit != null ? ` · last on day ${pm.lastVisit}` : ""}</div>` : ""}
-           ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}`
+           ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
+           ${Object.keys(pm?.subPlaces || {}).length ? `<div class="sub-places"><span class="hint">Places within: </span>${Object.entries(pm.subPlaces).map(([slug, sp]) => `<button class="codex-link ${sp.visited ? "" : "dead"}" data-subgo="${esc(slug)}" data-subloc="${esc(l.id)}" title="${esc(sp.note || (sp.visited ? "you have been here" : "heard of only"))}">${esc(sp.name)}</button>`).join(" ")}</div>` : ""}`
         : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
       ${l.id !== here ? (reachable
         ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">Travel here (+${ADVANCE.travel}h)</button>`
@@ -792,6 +867,14 @@ function renderMap(selectedId = null) {
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
   const travelBtn = document.getElementById("map-travel");
   if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
+  for (const b of app.querySelectorAll("[data-subgo]")) b.onclick = () => {
+    const pm = character.placeMemory?.[b.dataset.subloc];
+    const sp = pm?.subPlaces?.[b.dataset.subgo];
+    if (!sp) return;
+    if (b.dataset.subloc !== character.currentLocationId) { alert("Travel to " + (CONTENT.locations[b.dataset.subloc]?.name || "that place") + " first — then head to the " + sp.name + "."); return; }
+    renderPlay(character.activeScene?.lastTurn || null, {});
+    onFreeform(`Head to the ${sp.name}`);
+  };
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -1089,6 +1172,13 @@ function renderPlay(turn, opts = {}) {
         </button>`).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
       ${(character.quests || []).some(q => q.status !== "active") ? `<div class="quest-done">${(character.quests || []).filter(q => q.status === "completed").length} completed · ${(character.quests || []).filter(q => q.status === "failed").length} failed</div>` : ""}
     </section>
+    ${syncEnabled() ? `<section><h3>Party</h3>
+      ${sharedScene ? `
+        ${sharedScene.party.map(m => `<div class="known-npc"><span class="npc-name">${m.characterId === character.id ? "you" : esc(m.name)}</span>${sharedScene.turn === m.characterId ? `<span class="rep-band trusted">turn</span>` : ""}</div>`).join("")}
+        <div class="hint">${isMyTurn(sharedScene, character.id) ? "Your turn — act." : "Waiting for " + esc(sharedScene.party.find(m => m.characterId === sharedScene.turn)?.name || "…")}</div>
+        <button class="opt" id="party-leave" style="display:block; width:100%; margin-top:4px">Leave shared scene</button>`
+      : `<button class="opt" id="party-find" style="display:block; width:100%">Find or start a party here</button>`}
+    </section>` : ""}
     <section><h3>Companions</h3>
       ${(character.companions || []).map(id => {
         const c = CONTENT.companions[id];
@@ -1121,9 +1211,8 @@ function renderPlay(turn, opts = {}) {
       ${rep ? `<span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span>` : `<span class="insight">no community claims this place</span>`}
     </section>
     <section><h3>You, the player</h3><div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></section>
-    <section><h3>Travel</h3>
-      <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map</button>
-      ${(location.connections || []).map(id => `<button class="opt" data-travel="${id}" style="margin:2px 0; display:block; width:100%">${esc(CONTENT.locations[id]?.name || id)}</button>`).join("")}
+    <section><h3>Map & Rest</h3>
+      <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${rules.recovery?.breather?.energy ?? 10} energy, 1h)</button>
       <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${rules.recovery?.sleep?.energy ?? 40} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
     </section>
@@ -1168,6 +1257,7 @@ function renderPlay(turn, opts = {}) {
   if (turn) {
     main += `<div class="beat">${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
     if (opts.degraded) main += `<div class="degraded-note">(The GM's structured reply failed — plain narration mode this turn.)</div>`;
+    turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     main += `<div class="choices">${(turn.choices || []).map((c, i) => {
       let senseHtml = "", abilityHtml = "";
       const action = { label: c.label, attribute: c.attribute || "practical", axes: c.axes || {}, difficulty: c.difficulty || 0, tags: c.intentTags || [], abilityLevel: 0, planned: (c.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)) };
@@ -1299,6 +1389,23 @@ function renderPlay(turn, opts = {}) {
     if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `You begin learning ${CONTENT.abilities[b.dataset.learn]?.name}.` }); }
     else alert(r.why);
   };
+  const findBtn = document.getElementById("party-find");
+  if (findBtn) findBtn.onclick = async () => {
+    findBtn.textContent = "Looking…";
+    const scenes = await listScenesAt(character.currentLocationId);
+    const open = scenes.find(sc => !sc.party.some(m => m.characterId === character.id));
+    if (open && confirm(`Join ${open.party.map(m => m.name).join(", ")} in their scene?`)) joinPartyScene(open.sceneId);
+    else if (confirm("No party found here. Start a shared scene others can join?")) startPartyScene();
+    else renderPlay(character.activeScene?.lastTurn || null, {});
+  };
+  const leaveBtn = document.getElementById("party-leave");
+  if (leaveBtn) leaveBtn.onclick = () => leavePartyScene();
+  // turn gate: not your turn → choices and Act wait (Ask GM stays open)
+  if (sharedScene && !isMyTurn(sharedScene, character.id)) {
+    for (const b of app.querySelectorAll("[data-choice], [data-encact], #gambit-open")) b.disabled = true;
+    const goBtn = document.getElementById("freeform-go");
+    if (goBtn && !askMode) goBtn.disabled = true;
+  }
   const gambitBtn = document.getElementById("gambit-open");
   if (gambitBtn) gambitBtn.onclick = () => renderGambitBuilder();
   const retry = document.getElementById("retry");

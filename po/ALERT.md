@@ -26,6 +26,49 @@
 
 ---
 
+## Task SNG-010 — Practice & Emergence (QUEUED — next after SNG-009 hotfix; bumped AHEAD of SNG-004 by Erik)
+
+**Direction + 3 load-bearing calls RATIFIED by Erik 2026-07-04.** Design philosophy: competency is the residue of attention over time — you declare what you're working toward and practice grows it; you don't get skills from a menu out of the blue. Emergence expresses in a RARITY GRADIENT (this is the governor — no hard cap): mostly tree-growth, often combos, rarely truly-novel.
+
+**Ratified shape:**
+- Use-ranking: a practiced rank unlocks at ZERO skill-point cost but still gates on levelReq (`rankLevelReq`). Points remain the shortcut; practice is the earned road.
+- Governor: NOT a numeric cap. A weighted three-tier output — the engine strongly prefers (1) tree-growth and (2) combos; (3) truly-novel fires only under a much higher bar. Reuses existing structure: `discovery` already = variations/combos (keyed on component ids), `newAbility` already = wholly-new AND already engine-capped. Formalize the gradient; don't add a count cap.
+- Aspiration discount: FREE when fully practiced (100%).
+
+**Pre-authored content already at origin (PO):** `content/packs/core/rules/emergence_recipes.json` — 3 combo recipes incl. the seed **resonant_sight (prism_sight + sonic_resonance, ripenAt 6)** matching Erik's live play, plus 1 branch template. Engine mints from this file; the model NEVER freeforms a combo. Register it in core manifest on build.
+
+### Phase A — Practice ledger + aspirations + use-ranking (foundation)
+- New engine-owned substrate `character.practice = { uses:{abilityId:n}, coActivations:{pairKey:n}, aspirations:[{abilityId, since}] }`. Additive; migrate existing characters to empty ledger. `pairKey` = the existing `discoveryKey` pair form (sorted ids joined) — reuse `discoveryKey`, don't invent a second keyer.
+- Increment: on each validated ability use, `uses[id]++`; when 2+ abilities resolve in one action, `coActivations[pairKey]++`. Wire at the single resolution site so nothing double-counts. Backfill is not required (starts accruing now) but DO seed from `character.discoveries` if a combo already exists (don't re-offer what's owned).
+- **Aspirations:** player declares up to 2 target abilities (sheet UI). While aspired, relevant activity accrues aspiration-progress (using a component/prereq ability, or acting into the target's effectTags). At `aspirationRipe` threshold AND levelReq met → learning that ability costs 0 skill points. Never automagic: the Learn button still requires a click; the discount is the only change. No aspiration set → point-buy works exactly as today.
+- **Use-ranking:** at `useRankThreshold[nextRank]` uses AND the rank's levelReq met → next rank unlocks for 0 points via existing `rankUpAbility` path (add a `viaPractice` flag; point-spend path unchanged).
+- All thresholds are tunable numbers in a new `resolution.json` `practice` block (Aevi self-ratifies the numbers). Suggested starts: `useRankThreshold {2:8, 3:16}`, `aspirationRipe 10`, coActivation `ripenAt` per-recipe (already in recipe file).
+- Smoke: ledger increments once per use; co-activation counts only on multi-ability actions; aspiration discount applies at threshold+levelReq and NOT before; use-rank unlock respects levelReq; migration yields empty ledger.
+
+### Phase B — Emergence engine (the three tiers, reading the ledger)
+- **Combos (Tier 2, common):** when `coActivations[pairKey]` ≥ the recipe's `ripenAt` AND both components owned at required ranks AND not already discovered → mark the pair RIPE. GM context gains a one-line RIPE notice; GM gets a clamped op `emergenceOffer` (op `combo`, carrying the recipe id) to OFFER the technique in-fiction. Player accepts (+names, honoring existing rename affordance) → mint via existing `recordDiscovery` using the recipe's fields. Engine validates the recipe id is real and ripe; GM cannot invent a combo not in the recipe file or not yet ripe.
+- **Tree-growth (Tier 1, most common):** when `uses[id]` crosses a branch template's `ripenAt` AND `requiresRank` met → offer the branch (op `branch`) — a specialization that attaches to the owned ability (new sub-entry with its own grants/cannot). Cheapest, most frequent emergence. Additive to the ability record; does not consume a skill slot.
+- **Novel (Tier 3, rare):** keep the existing `newAbility` path (crit-success on novel action, already capped). Practice does NOT directly mint novel — it can RAISE ELIGIBILITY (sustained novel-context practice lowers the crit bar slightly / flags the action novel-eligible), but novel stays the rare road. No recipe = no premium combo; ungated pairs still route to the generic discovery path on crit as today.
+- GM contract additions (LOAD-BEARING — draft wording to results for Erik ratification before ship): the `emergenceOffer` op (combo|branch), the RIPE-notice reading rule, and the hard rule that the model offers only engine-flagged-ripe emergence and never mints state itself. Design law 1 intact: engine owns the ledger, thresholds, and minting; model owns the offer's words only.
+- Smoke: ripe fires at threshold not before; emergenceOffer with a non-ripe or unknown recipe id is rejected; accepting mints exactly one discovery; branch attaches without a skill-point charge; novel path unchanged and still capped.
+
+### Phase C — Item evolution + gear-bond (Waystaff + Aevi; biggest lift, ship last)
+- New optional substrate on items: `evolution` — an item can carry `bondSource` (a companion id) and `stages[]` (like companion evolution). When the linked companion's bond deepens AND the item is used-with-companion enough (a co-activation of item+companion, tracked in the same ledger under a namespaced pairKey), the item evolves a stage: name/description/effect shift, authored in the item file.
+- Seed content (PO authors on Phase C pickup, not now): the **Waystaff** gains an `evolution` linked to the **aevi** companion — as Aevi's bond climbs and she's integrated into casts, the staff wakes by stages (a translator staff that begins to anticipate, then to answer). Gear-bond recipe honors the same authored-template discipline as combos.
+- This axis needs item records to support evolution + a ledger namespace for item×companion co-activation; spec it additively, migrate existing items untouched.
+- Smoke: item evolution gated on both bond tier AND co-activation; non-bonded items unaffected; migration inert.
+
+### Batch guardrails
+Design law 1 absolute (engine owns ledger/thresholds/minting; model offers words only); emergence mints ONLY from authored recipe/branch/item templates — no freeform; graceful degradation (parse fail during an offer → offer re-presents next turn from the still-ripe ledger, nothing lost); additive schemas only; content-not-code; resolution/encounter math untouched except the named `practice` block; this repo never touches the ErikIAm pipeline; suites + parse_probe green at every phase boundary.
+
+### Verify (Erik browser-leg)
+1. Set an aspiration; use adjacent abilities; watch progress accrue on the sheet; at ripe, learn it for 0 points. 2. Use one ability repeatedly; rank it up by use at 0 points once levelReq met. 3. Braid Prism Sight + Sonic Resonance ~6 times → GM offers Resonant Sight → accept + name → it appears as a discovery. 4. Cross a branch threshold → specialization offered and attaches. 5. (Phase C) Deepen Aevi's bond + cast with the Waystaff → staff evolves a stage.
+
+### Ship spec updates
+§3 (practice ledger + emergence engine rows), §4/§6 (practice numbers, rarity gradient, aspiration/use-ranking rules), §7 (ratified emergenceOffer rule text), §9 (mark shipped; Phase C noted if deferred).
+
+---
+
 ## Task SNG-004 — Origins & backgrounds as content (+ SNG-008 weave) (QUEUED — next build)
 
 **Goal (one session):** origins/backgrounds move from app.js to content packs with mechanical hooks; new origins land including unusual-embodiment; first SNG-008 content (rune shrine, Council of Mavens NPCs) rides the wave.

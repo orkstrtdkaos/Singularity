@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** complete_pending_review — SNG-009 shipped v1.3.1 (results: po/results/20260705_SNG-009.md). SNG-004+008 queued next.
+**Status:** complete_pending_review — SNG-010 A+B and SNG-011 phases 0+2 shipped v1.4.0 (results: po/results/20260705_SNG-010_011.md; RULE 19 awaits Erik ratification). Deferred: 010-C, 011-1, 011-3. SNG-004+008 queued.
 
 ---
 

@@ -66,6 +66,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .npc-group summary { cursor: pointer; font-size: 12px; color: var(--accent2); list-style: revert; }
 .npc-group[open] summary { margin-bottom: 4px; }
 .npc-group .known-npc { padding-left: 10px; }
+.grow-btn.practiced { background: var(--accent2); width: auto; padding: 0 6px; font-size: 10px; }
+.opt.practiced { border-color: var(--accent2); }
+.map-satellite.visited { fill: var(--accent2); stroke: none; }
+.map-satellite.heard { fill: transparent; stroke: var(--ink-dim); stroke-width: 1.2; }
 /* ---------- encounters ---------- */
 .encounter-bar { border: 1px solid var(--danger); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; background: linear-gradient(to right, rgba(192,91,77,0.10), transparent); font-family: var(--font-ui); font-size: 13px; }
 .enc-name { color: var(--danger); font-weight: 600; }

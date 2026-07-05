@@ -20,10 +20,11 @@ import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effecti
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
+import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.3.1";
+const APP_VERSION = "1.4.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -181,6 +182,8 @@ function migrate(c) {
   ensureCodex(c);
   if (!c.customAbilities) c.customAbilities = {};
   ensureBonds(c);
+  ensurePractice(c);
+  if (!c.precursorAccess) c.precursorAccess = [];
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   return c;
 }
@@ -520,6 +523,8 @@ async function runGM({ resolution, playerInput }) {
     abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
     opLossNote: character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex updates that occurred last beat (the narration advanced; the state did not)." : null,
+    emergenceDetail: emergenceNoticeForGM(character, CONTENT.emergence, CONTENT.rules),
+    perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id)
@@ -621,6 +626,15 @@ function applyTurn(turn, resolution) {
     if (resolution.action?.novel && gain) gain += xpT.novelBonus ?? 0;
     character.xp += gain;
   }
+  // SNG-011: precursor access unlock — only when the fiction earns it
+  if (turn.unlockPrecursor?.abilityId && turn.unlockPrecursor?.via) {
+    const pid = turn.unlockPrecursor.abilityId;
+    const ab = fullCatalog()[pid];
+    if (ab?.powerSystem === "precursor" && !(character.precursorAccess || []).includes(pid)) {
+      character.precursorAccess = [...(character.precursorAccess || []), pid];
+      turn.narration += `\n\n*✦ A door opens that was never on any list: **${ab.name}** may now be learned (${String(turn.unlockPrecursor.via).slice(0, 80)}).*`;
+    }
+  }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {
     const def = sanitizeNewAbility(turn.newAbility);
@@ -691,6 +705,26 @@ async function onChoice(choice) {
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
     novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || ""
   };
+  // accepting ripe emergence (GM-offered choice carrying an engine-verified emergenceId)
+  if (choice.emergenceId) {
+    const tpl = validEmergenceId(character, CONTENT.emergence, CONTENT.rules, choice.emergenceId);
+    if (tpl) {
+      let minted = null;
+      if (tpl.tier === "combo") {
+        const nn = prompt(`Name your new technique (or leave as "${tpl.name}"):`, tpl.name);
+        minted = acceptCombo(character, tpl, (nn || tpl.name).slice(0, 60), readClock(character.clock).day);
+      } else {
+        minted = acceptBranch(character, tpl);
+      }
+      saveCharacter(character);
+      if (minted) {
+        renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
+        const result = await runGM({ resolution: null, playerInput: `(Practice has ripened into breakthrough: the character accepts "${minted.name}" — ${tpl.tier === "combo" ? tpl.discoveredBlurb || tpl.description : tpl.grants}. Narrate the moment it clicks into something repeatable, then continue the scene.)` });
+        if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+        return;
+      }
+    }
+  }
   // starting an encounter (GM-offered choice carrying a real encounterId)
   if (choice.encounterId && (CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId]) && !character.activeEncounter) {
     const def = CONTENT.encounters?.[choice.encounterId] || character.customEncounters[choice.encounterId];
@@ -730,6 +764,26 @@ async function onChoice(choice) {
     }
   }
   character.energy = applyEnergyCost(character, (choice.abilityId || (choice.comboAbilities || []).length > 1) ? energyCost : undefined, CONTENT.rules);
+  // SNG-010: practice ledger — the single counting site
+  {
+    const usedIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
+    if (usedIds.length) recordUse(character, usedIds);
+    recordAspirationProgress(character, action, fullCatalog());
+    // SNG-011: precursor peril — using these changes you (extra alignment drift along the ability's axes)
+    for (const id of usedIds) {
+      const ab = fullCatalog()[id];
+      if (ab?.powerSystem === "precursor") {
+        const drift = CONTENT.rules.precursor?.perilDrift ?? 0.05;
+        const band = CONTENT.rules.precursor?.bandNotice ?? 0.4;
+        character.precursorAxes = character.precursorAxes || [];
+        for (const [ax, v] of Object.entries(ab.axes || {})) {
+          const cur = character.alignment[ax] || 0;
+          character.alignment[ax] = Math.max(-1, Math.min(1, cur + Math.sign(v) * drift));
+          if (Math.abs(character.alignment[ax]) >= band && !character.precursorAxes.includes(ax)) character.precursorAxes.push(ax);
+        }
+      }
+    }
+  }
   // meditation: engine-owned recovery, scaled by attunement — the centered refill faster
   if ((action.intentTags || []).includes("meditate") && ["crit_success", "success", "partial"].includes(resolution.degree)) {
     const rec = CONTENT.rules.recovery || {};
@@ -877,6 +931,11 @@ function renderMap(selectedId = null) {
         <title>${esc(tip)}</title>
         <circle class="hit" cx="${l.map.x}" cy="${l.map.y}" r="24"/>
         <circle cx="${l.map.x}" cy="${l.map.y}" r="${l.id === here ? 14 : 10}"/>
+        ${(() => { const sps = Object.values(character.placeMemory?.[l.id]?.subPlaces || {}); return sps.slice(0, 6).map((sp, si) => {
+          const ang = (si / Math.max(1, Math.min(sps.length, 6))) * Math.PI * 2 - Math.PI / 2;
+          const sx = l.map.x + Math.cos(ang) * 22, sy = l.map.y + Math.sin(ang) * 22;
+          return `<circle cx="${sx}" cy="${sy}" r="4" class="map-satellite ${sp.visited ? "visited" : "heard"}"><title>${esc(sp.name)}${sp.note ? " — " + esc(sp.note) : ""}${sp.visited ? "" : " (heard of)"}</title></circle>`;
+        }).join(""); })()}
         <text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
         ${visited && pm?.visits > 1 ? `<text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
       </g>`; }).join("")}
@@ -956,6 +1015,20 @@ function renderCharacterScreen() {
           ${canRank ? `<button class="grow-btn" data-rank2="${esc(a.abilityId)}">▲</button>` : ""}
           ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}</div>`; }).join("")}
       ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aspirations <span class="hint" style="text-transform:none">(declare what you're working toward — practice makes it free)</span></h3>
+      ${(character.practice?.aspirations || []).map(a => { const ab = fullCatalog()[a.abilityId]; const ripe = aspirationRipe(character, a.abilityId, rules); const need = rules.practice?.aspirationRipe ?? 10;
+        return `<div class="cs-attr"><span class="cs-attr-name" style="width:140px">${esc(ab?.name || a.abilityId)}</span>
+          <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, (a.progress || 0) / need * 100)}%"></div></div>
+          <span class="cs-val">${Math.min(a.progress || 0, need)}/${need}</span>
+          ${ripe && character.level >= (effectiveLevelReq(ab, character, rules) ?? 99) ? `<button class="grow-btn practiced" data-asplearn="${esc(a.abilityId)}" title="Fully practiced — learn free">✓</button>` : ""}
+          <button class="grow-btn" data-aspdrop="${esc(a.abilityId)}" title="Drop aspiration" style="background:var(--panel2); color:var(--ink-dim)">×</button>
+        </div>`; }).join("") || "<div class='insight'>none declared</div>"}
+      ${(character.practice?.aspirations || []).length < (rules.practice?.maxAspirations ?? 2) ? `
+        <select id="asp-pick" style="margin-top:6px; max-width:280px">
+          <option value="">Aspire toward…</option>
+          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && effectiveLevelReq(ab, character, rules) !== null && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${ab.powerSystem}, lv ${effectiveLevelReq(ab, character, rules)})</option>`).join("")}
+        </select>` : ""}
+    </div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aptitudes (you, the player)</h3>
       <div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests</h3>
@@ -966,6 +1039,14 @@ function renderCharacterScreen() {
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
   for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => { const r = rankUpAbility(character, btn.dataset.rank2, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
+  const aspPick = document.getElementById("asp-pick");
+  if (aspPick) aspPick.onchange = () => { if (aspPick.value) { const r = declareAspiration(character, aspPick.value, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); } };
+  for (const btn of app.querySelectorAll("[data-aspdrop]")) btn.onclick = () => { dropAspiration(character, btn.dataset.aspdrop); saveCharacter(character); renderCharacterScreen(); };
+  for (const btn of app.querySelectorAll("[data-asplearn]")) btn.onclick = () => {
+    const id = btn.dataset.asplearn;
+    const r = learnAbility(character, id, fullCatalog(), rules, { free: true });
+    if (r.ok) { dropAspiration(character, id); saveCharacter(character); renderCharacterScreen(); } else alert(r.why);
+  };
   document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -1211,6 +1292,12 @@ async function finishGambit(run) {
     cost += a.abilityId ? effectiveEnergyCost(fullCatalog()[a.abilityId], character, CONTENT.rules) : per;
   }
   character.energy = Math.max(0, character.energy - cost);
+  // practice ledger: each executed step with abilities counts once
+  for (const r of run.receipts) {
+    const a = g.actions[r.index];
+    const ids = [a?.abilityId, ...(a?.comboAbilities || [])].filter(Boolean);
+    if (ids.length) recordUse(character, ids);
+  }
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
   updateProfile(profile, allTags, CONTENT.rules.playerAptitudes);
@@ -1281,15 +1368,18 @@ function renderPlay(turn, opts = {}) {
         return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
           <span class="name">${esc(ab?.name || a.abilityId)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}</em>` : ""}
           ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend a skill point">▲</button>` : ""}
+          ${practiceRankReady(character, a.abilityId, CONTENT.rules) && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)] ?? 1) ? `<button class="grow-btn practiced" data-rankpractice="${esc(a.abilityId)}" title="Practiced enough — rank up free">▲free</button>` : ""}
           <span class="cost">(${ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : "?"} energy${ab && effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span></div>`;
       }).join("") || "<div class='insight'>none yet</div>"}
-      ${character.skillPoints > 0 ? Object.values(CONTENT.abilities).filter(ab => {
+      ${(character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules))) ? Object.values(CONTENT.abilities).filter(ab => {
           if (character.abilities.some(a => a.abilityId === ab.id)) return false;
+          if (character.skillPoints <= 0 && !aspirationRipe(character, ab.id, CONTENT.rules)) return false;
           const req = effectiveLevelReq(ab, character, CONTENT.rules);
           return req !== null && character.level >= req;
         }).map(ab => {
           const cross = effectiveLevelReq(ab, character, CONTENT.rules) !== (ab.levelReq || 1);
-          return `<button class="opt" data-learn="${esc(ab.id)}" title="${esc(ab.description)}" style="margin:2px 0; display:block; width:100%">Learn: ${esc(ab.name)} <span class="cost">(${ab.powerSystem === "valley_craft" ? "valley craft" : ab.powerSystem}${cross ? ", cross-trained" : ""})</span></button>`;
+          const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
+          return `<button class="opt ${ripe ? "practiced" : ""}" data-learn="${esc(ab.id)}" title="${esc(ab.description)}" style="margin:2px 0; display:block; width:100%">Learn: ${esc(ab.name)} <span class="cost">(${ab.powerSystem === "valley_craft" ? "valley craft" : ab.powerSystem}${cross ? ", cross-trained" : ""}${ripe ? " — FREE, practiced" : ""})</span></button>`;
         }).join("") : ""}
       ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
     </section>
@@ -1402,6 +1492,9 @@ function renderPlay(turn, opts = {}) {
     main += `<div class="beat">${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
+    for (const c of turn.choices || []) {
+      if (c.emergenceId && !validEmergenceId(character, CONTENT.emergence, CONTENT.rules, c.emergenceId)) c.emergenceId = null;
+    }
     main += `<div class="choices">${(turn.choices || []).map((c, i) => {
       let senseHtml = "", abilityHtml = "";
       const action = { label: c.label, attribute: c.attribute || "practical", axes: c.axes || {}, difficulty: c.difficulty || 0, tags: c.intentTags || [], abilityLevel: 0, planned: (c.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)) };
@@ -1534,15 +1627,29 @@ function renderPlay(turn, opts = {}) {
   for (const b of app.querySelectorAll("[data-grow]")) b.onclick = () => {
     if (spendSubPoint(character, b.dataset.grow, CONTENT.rules)) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, {}); }
   };
+  const afterRank = (abilityId, r) => {
+    if (abilityId === "old_roads" && r.newRank === 3 && !(character.precursorAccess || []).includes("address_sense")) {
+      character.precursorAccess = [...(character.precursorAccess || []), "address_sense"];
+    }
+    saveCharacter(character);
+    renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `${fullCatalog()[abilityId]?.name} advances to rank ${r.newRank}${r.viaPractice ? " — earned by practice, no point spent" : ""}.${abilityId === "old_roads" && r.newRank === 3 ? " The old roads remember you now: Address-Sense may be learned." : ""}` });
+  };
   for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
     const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules);
-    if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `${fullCatalog()[b.dataset.rankup]?.name} advances to rank ${r.newRank}.` }); }
-    else alert(r.why);
+    if (r.ok) afterRank(b.dataset.rankup, r); else alert(r.why);
+  };
+  for (const b of app.querySelectorAll("[data-rankpractice]")) b.onclick = () => {
+    const r = rankUpAbility(character, b.dataset.rankpractice, CONTENT.rules, { viaPractice: true });
+    if (r.ok) afterRank(b.dataset.rankpractice, r); else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
-    const r = learnAbility(character, b.dataset.learn, CONTENT.abilities, CONTENT.rules);
-    if (r.ok) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `You begin learning ${CONTENT.abilities[b.dataset.learn]?.name}.` }); }
-    else alert(r.why);
+    const free = aspirationRipe(character, b.dataset.learn, CONTENT.rules);
+    const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free });
+    if (r.ok) {
+      if (free) dropAspiration(character, b.dataset.learn);
+      saveCharacter(character);
+      renderPlay(turn || character.activeScene?.lastTurn || null, { aside: `You ${free ? "have practiced your way into" : "begin learning"} ${fullCatalog()[b.dataset.learn]?.name}${free ? " — no point spent" : ""}.` });
+    } else alert(r.why);
   };
   const findBtn = document.getElementById("party-find");
   if (findBtn) findBtn.onclick = async () => {

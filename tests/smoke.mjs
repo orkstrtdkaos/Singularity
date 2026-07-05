@@ -615,5 +615,55 @@ check('lookup works by either name', !!findItem(pack, 'Waystaff') && !!findItem(
 check('GM sees both names', invGM(pack).includes('Waystaff') && invGM(pack).includes('their name for: Resonance Lantern'));
 check('cap 40 chars', (nameItem(pack, 'Waystaff', 'x'.repeat(60)), pack.inventory[0].customName.length <= 40));
 
+// --- SNG-010: practice & emergence ---
+const { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } = await import('../engine/practice.js');
+const recipesFile = JSON.parse(readFileSync(join(root, 'content/packs/core/rules/emergence_recipes.json'), 'utf8'));
+const learner2 = { origin: 'valley', level: 3, abilities: [{ abilityId: 'prism_sight', level: 1 }, { abilityId: 'sonic_resonance', level: 1 }], discoveries: [], skillPoints: 0, practice: undefined };
+ensurePractice(learner2);
+recordUse(learner2, ['prism_sight']);
+check('use counts once', learner2.practice.uses.prism_sight === 1 && !learner2.practice.coActivations[Object.keys(learner2.practice.coActivations)[0]]);
+for (let i = 0; i < 5; i++) recordUse(learner2, ['prism_sight', 'sonic_resonance']);
+check('co-activation counts only multi-ability actions', Object.values(learner2.practice.coActivations)[0] === 5 && learner2.practice.uses.prism_sight === 6);
+check('not ripe below threshold', ripeCombos(learner2, recipesFile, rules).length === 0);
+recordUse(learner2, ['prism_sight', 'sonic_resonance']);
+const ripe = ripeCombos(learner2, recipesFile, rules);
+check('resonant_sight ripens at 6 co-activations', ripe.length === 1 && ripe[0].id === 'resonant_sight');
+check('GM notice lists exactly the ripe id', emergenceNoticeForGM(learner2, recipesFile, rules).includes('resonant_sight'));
+check('validEmergenceId rejects unknown and non-ripe', validEmergenceId(learner2, recipesFile, rules, 'true_ward') === null && validEmergenceId(learner2, recipesFile, rules, 'made-up') === null);
+const mintedCombo = acceptCombo(learner2, ripe[0], 'Echo-Eye', 9);
+check('accept mints exactly one discovery with recipe id', mintedCombo && mintedCombo.recipeId === 'resonant_sight' && learner2.discoveries.length === 1);
+check('minted combo no longer ripe', ripeCombos(learner2, recipesFile, rules).length === 0);
+// branch: prism_sight needs rank 2 + 8 uses
+learner2.abilities[0].level = 2;
+for (let i = 0; i < 2; i++) recordUse(learner2, ['prism_sight']);
+const rb = ripeBranches(learner2, recipesFile);
+check('branch ripens on uses + rank', rb.length === 1 && rb[0].id === 'prism_sight_deep_read');
+const br = acceptBranch(learner2, rb[0]);
+check('branch attaches free, once', br && learner2.abilities[0].branches.length === 1 && acceptBranch(learner2, rb[0]) === null);
+// aspirations
+const aspirant = { origin: 'harmonic', level: 2, abilities: [{ abilityId: 'sonic_resonance', level: 1 }], skillPoints: 0 };
+ensurePractice(aspirant);
+check('aspire caps at 2', declareAspiration(aspirant, 'echo_sense', rules).ok && declareAspiration(aspirant, 'stillness_field', rules).ok && declareAspiration(aspirant, 'tremor_sense', rules).ok === false);
+for (let i = 0; i < 10; i++) recordAspirationProgress(aspirant, { abilityId: 'sonic_resonance', tags: [] }, fullCat);
+check('same-system use feeds aspiration; ripe at 10', aspirationRipe(aspirant, 'echo_sense', rules) && aspirationRipe(aspirant, 'tremor_sense', rules) === false);
+check('free learn via ripe aspiration with 0 points', learnAbility(aspirant, 'echo_sense', fullCat, rules, { free: true }).ok && aspirant.skillPoints === 0);
+// use-ranking
+const ranker = { origin: 'harmonic', level: 3, abilities: [{ abilityId: 'sonic_resonance', level: 1 }], skillPoints: 0 };
+ensurePractice(ranker);
+for (let i = 0; i < 8; i++) recordUse(ranker, ['sonic_resonance']);
+check('practice-rank ready at threshold', practiceRankReady(ranker, 'sonic_resonance', rules));
+check('practice rank-up costs nothing', rankUpAbility(ranker, 'sonic_resonance', rules, { viaPractice: true }).ok && ranker.skillPoints === 0 && ranker.abilities[0].level === 2);
+check('not ready for rank 3 below 16 uses', practiceRankReady(ranker, 'sonic_resonance', rules) === false);
+// --- SNG-011: precursor gate + peril data ---
+const preCat = {};
+const prePack = JSON.parse(readFileSync(join(root, 'content/packs/core/abilities/precursor.json'), 'utf8'));
+for (const a of prePack.abilities) preCat[a.id] = { ...a, powerSystem: 'precursor' };
+const mundane = { origin: 'valley', level: 5, abilities: [], skillPoints: 5 };
+check('precursor closed without access (even valley, even high level)', effectiveLevelReq(preCat.address_sense, mundane, rules) === null);
+mundane.precursorAccess = ['address_sense'];
+check('unlocked precursor opens at its own levelReq', effectiveLevelReq(preCat.address_sense, mundane, rules) === 3);
+check('other precursor abilities stay closed', effectiveLevelReq(preCat.foreclose, mundane, rules) === null);
+check('precursor rules block shipped', rules.precursor.perilDrift === 0.05 && rules.precursor.bandNotice === 0.4);
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

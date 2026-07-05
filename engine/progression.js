@@ -101,17 +101,18 @@ export function spendSubPoint(character, sub, rules) {
   return true;
 }
 
-/** Rank up an owned ability (1 skill point). Ranks are level-gated. */
-export function rankUpAbility(character, abilityId, rules) {
+/** Rank up an owned ability (1 skill point, or FREE via practice). Level-gated. */
+export function rankUpAbility(character, abilityId, rules, opts = {}) {
   const owned = character.abilities.find(a => a.abilityId === abilityId);
-  if (!owned || (character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
+  if (!owned) return { ok: false, why: "not known" };
+  if (!opts.viaPractice && (character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
   const max = rules.leveling?.maxAbilityRank ?? 3;
   if (owned.level >= max) return { ok: false, why: "already mastered" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
   if (character.level < req) return { ok: false, why: `requires level ${req}` };
   owned.level++;
-  character.skillPoints--;
-  return { ok: true, newRank: owned.level };
+  if (!opts.viaPractice) character.skillPoints--;
+  return { ok: true, newRank: owned.level, viaPractice: !!opts.viaPractice };
 }
 
 /** SNG-003 access rule: own tradition at face value; valley folk take any system
@@ -123,6 +124,12 @@ export function effectiveLevelReq(ab, character, rules) {
   const sys = ab.powerSystem, origin = character.origin;
   const base = ab.levelReq || 1;
   if (sys === "learned") return base; // GM-granted, already personal
+  if (sys === "precursor") {
+    // SNG-011: the Precursor tier is never offered at creation or ordinary
+    // level-up — access is unlocked per-ability in fiction (remnant, quest,
+    // Old Roads mastery, a teacher). See character.precursorAccess.
+    return (character.precursorAccess || []).includes(ab.id) ? base : null;
+  }
   if (origin === "valley") return base;
   if (sys === origin) return base;
   if (sys === "valley_craft") return base + (rules?.leveling?.crossTraditionLevelPenalty ?? 1);
@@ -130,8 +137,8 @@ export function effectiveLevelReq(ab, character, rules) {
 }
 
 /** Learn a new ability (1 skill point), gated by effectiveLevelReq. */
-export function learnAbility(character, abilityId, catalog, rules) {
-  if ((character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
+export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
+  if (!opts.free && (character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
   const ab = catalog[abilityId];
   if (!ab) return { ok: false, why: "unknown ability" };
@@ -139,8 +146,8 @@ export function learnAbility(character, abilityId, catalog, rules) {
   if (req === null) return { ok: false, why: "wrong tradition" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
   character.abilities.push({ abilityId, level: 1 });
-  character.skillPoints--;
-  return { ok: true };
+  if (!opts.free) character.skillPoints--;
+  return { ok: true, free: !!opts.free };
 }
 
 // ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------

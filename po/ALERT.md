@@ -6,7 +6,7 @@
 
 ## PO closure — SNG-BATCH-2 (2026-07-06, Aevi)
 All phases closed_green after origin audit: facts.js / vectors.js / skilltree.js exist at HEAD; attribute gates + broad-vs-deep capacity genuinely ENFORCED in progression.js (meetsLearnGate/meetsRank3Gate/atCapacity); ESTABLISHED FACTS + PLAYER'S EXACT WORDS blocks wired into GM context (rules FCT, EW). Picker collapsible + tier/level indicators + rank-up highlight shipped; skill-KG graph rendered like the world map; player NPC-rename shipped. Phase 4 (item evolution) correctly deferred — needs PO Waystaff+Aevi seed content.
-**Erik ratification requested (load-bearing GM rules):** EW (exact-words narration), FCT (established-facts permanence + factUpdates + statusNote). Both implement fixes Erik requested; flagged per protocol — Erik: confirm or amend wording.
+**GM rules EW + FCT — RATIFIED as canon (Erik 2026-07-06, confirmed after reviewing exact wording).** EW (narrate to player's exact words), FCT (established facts permanent + factUpdates + statusNote). No further sign-off pending.
 
 ---
 

@@ -259,3 +259,15 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .intensity-surge { color: #d46a4a; }
 .intensity-conserve { color: #5aa8a0; }
 .roll-backlash { font-size: 12px; color: #d46a4a; margin: 2px 0 4px 2px; }
+
+/* Shared-scene non-destructive update banner (SNG-001) — never wipes your input */
+.party-banner { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 200;
+  display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 22px;
+  background: #241c14; border: 1px solid #d4a24a; box-shadow: 0 4px 16px rgba(0,0,0,0.4); max-width: 92vw; }
+.party-banner .pb-dot { width: 9px; height: 9px; border-radius: 50%; background: #5aa8a0; flex: none; animation: pb-pulse 1.6s ease-in-out infinite; }
+@keyframes pb-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.party-banner .pb-text { color: #e6d8c8; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.party-banner .pb-btn { background: #33260f; border: 1px solid #d4a24a; color: #f0e4d0; border-radius: 14px; padding: 4px 12px; cursor: pointer; font-size: 12px; flex: none; }
+.party-banner .pb-btn:hover { background: #4a3612; }
+.party-banner .pb-x { background: none; border: none; color: #8b7d6b; font-size: 18px; line-height: 1; cursor: pointer; padding: 0 2px; flex: none; }
+.party-banner .pb-x:hover { color: #e6d8c8; }

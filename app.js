@@ -32,7 +32,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.6";
+const APP_VERSION = "1.6.7";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -46,6 +46,7 @@ let askMode = false;     // input bar mode: false = act in scene, true = ask the
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
+let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
 let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
@@ -300,6 +301,7 @@ function enterPartyScene(scene) {
 async function leavePartyScene() {
   const id = character.sharedSceneId;
   if (partyPoll) { clearInterval(partyPoll); partyPoll = null; }
+  hidePartyBanner(true);
   sharedScene = null; character.sharedSceneId = null; saveCharacter(character);
   if (id) pushSceneWithMerge(id, s => removeMember(s, character.id));
   renderPlay(character.activeScene?.lastTurn || null, { aside: "You part ways with the party — solo play resumes." });
@@ -315,12 +317,47 @@ async function pollPartyScene() {
   if (hadNew) {
     seenBeats = remote.beats.length;
     for (const b of newBeats) sceneTurns.push({ summary: `${b.name}: ${b.summary}` });
-    if (newBeats.length && !busy) {
-      renderPlay(character.activeScene?.lastTurn || null, { aside: newBeats.map(b => `${b.name}: ${b.label}${b.degree ? ` (${b.degree.replace("_", " ")})` : ""} — ${b.summary}`).join("; ") });
+    if (newBeats.length) {
+      // NON-DESTRUCTIVE: never re-render from a poll (it would wipe the input + current
+      // beat). Stash the new beats and show a catch-up banner the player folds in when ready.
+      pendingPartyBeats.push(...newBeats);
+      showPartyBanner();
     }
-  } else if (!busy) {
-    renderPlay(character.activeScene?.lastTurn || null, {});
   }
+  // an empty poll (no new beats) does NOTHING to the DOM — your text + scene stay put.
+}
+
+/** Non-destructive toast: another player has acted. Injected directly into the DOM,
+ *  never through renderPlay, so the input box and current response are untouched. */
+function showPartyBanner() {
+  if (!pendingPartyBeats.length) return;
+  let el = document.getElementById("party-banner");
+  if (!el) { el = document.createElement("div"); el.id = "party-banner"; el.className = "party-banner"; document.body.appendChild(el); }
+  const names = [...new Set(pendingPartyBeats.map(b => b.name))].join(", ");
+  const yourTurn = sharedScene && isMyTurn(sharedScene, character.id);
+  el.innerHTML = `<span class="pb-dot"></span><span class="pb-text">${esc(names)} acted — ${pendingPartyBeats.length} update${pendingPartyBeats.length > 1 ? "s" : ""} ready${yourTurn ? " · your turn" : ""}</span><button class="pb-btn" id="pb-catchup">Catch up</button><button class="pb-x" id="pb-dismiss" title="Dismiss">×</button>`;
+  el.style.display = "flex";
+  document.getElementById("pb-catchup").onclick = catchUpParty;
+  document.getElementById("pb-dismiss").onclick = () => hidePartyBanner();
+}
+
+function hidePartyBanner(clear = false) {
+  const el = document.getElementById("party-banner");
+  if (el) el.style.display = "none";
+  if (clear) pendingPartyBeats = [];
+}
+
+/** Fold the pending party beats into the view — the ONE place a party update re-renders,
+ *  and it preserves whatever the player was typing. */
+function catchUpParty() {
+  const beats = pendingPartyBeats.slice();
+  pendingPartyBeats = [];
+  hidePartyBanner();
+  const draft = document.getElementById("freeform-input")?.value || "";
+  renderPlay(character.activeScene?.lastTurn || null, {
+    aside: beats.map(b => `${b.name}: ${b.label}${b.degree ? ` (${b.degree.replace("_", " ")})` : ""} — ${b.summary}`).join("; ")
+  });
+  if (draft) { const fi = document.getElementById("freeform-input"); if (fi) fi.value = draft; }
 }
 
 /** Publish my beat to the shared scene (fire-and-forget; solo play never blocks). */

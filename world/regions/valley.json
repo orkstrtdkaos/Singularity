@@ -1,10 +1,24 @@
 {
   "schemaVersion": 1,
   "regionId": "valley",
-  "name": "The Valley of Echoes",
-  "calendar": { "day": 1, "season": "late-spring", "year": 15 },
-  "activeEvents": [{ "eventId": "water_crisis", "stage": 1 }],
+  "calendar": {
+    "day": 1,
+    "season": "late-spring",
+    "year": 15
+  },
+  "activeEvents": [
+    {
+      "eventId": "water_crisis",
+      "stage": 1
+    }
+  ],
+  "eventStages": {
+    "water_crisis": {
+      "stage": 1,
+      "sinceDay": 2
+    }
+  },
   "spectrumDrift": {},
   "worldFlags": {},
-  "lastTick": null
+  "lastTick": "2026-07-06T15:50:49.258Z"
 }

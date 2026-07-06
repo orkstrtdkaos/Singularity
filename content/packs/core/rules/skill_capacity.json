@@ -1,7 +1,26 @@
 {
   "schemaVersion": 1,
-  "note": "Broad-vs-deep capacity (tier-slot mechanic). skillsKnownByLevel = max DISTINCT chosen abilities a character may hold at each level — the breadth cap. Level 1 = 2 (Erik ratified 2026-07-06: 'generic RPG quantity per level guide, level 1 = 2'). At the cap, skill points may still RANK UP owned abilities (depth) — that IS the broad-vs-deep tradeoff. Tier access is separately gated by each ability's levelReq. Generic linear default (level + 1); tunable.",
-  "skillsKnownByLevel": {"1":2,"2":3,"3":4,"4":5,"5":6,"6":7,"7":8,"8":9,"9":10,"10":11,"11":12,"12":13},
+  "note": "Broad-vs-deep capacity (tier-slot mechanic). skillsKnownByLevel = max DISTINCT chosen abilities a character may hold at each level \u2014 the breadth cap. Level 1 = 2 (Erik ratified 2026-07-06: 'generic RPG quantity per level guide, level 1 = 2'). At the cap, skill points may still RANK UP owned abilities (depth) \u2014 that IS the broad-vs-deep tradeoff. Tier access is separately gated by each ability's levelReq. Generic linear default (level + 1); tunable.",
+  "skillsKnownByLevel": {
+    "1": 2,
+    "2": 3,
+    "3": 4,
+    "4": 5,
+    "5": 6,
+    "6": 7,
+    "7": 8,
+    "8": 9,
+    "9": 10,
+    "10": 11,
+    "11": 12,
+    "12": 13
+  },
   "beyondTable": "level + 1",
-  "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points go to depth (rank-ups). Emergence combos/branches (SNG-010) and crit-discoveries do NOT count against the cap — earned techniques are free growth, not chosen breadth."
+  "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points go to depth (rank-ups). Emergence combos/branches (SNG-010) and crit-discoveries do NOT count against the cap \u2014 earned techniques are free growth, not chosen breadth.",
+  "crossClass": {
+    "ratified": "Erik 2026-07-06 \u2014 soft class cap: secondary-class abilities cost double, no hard rank ceiling",
+    "homeClass": "the character's origin power system (harmonic|radiant|valley_craft); precursor is learned-only",
+    "costMultiplier": 2,
+    "note": "Learning OR ranking an ability whose powerSystem is NOT the character's home class costs 2x skill points. No hard rank-2 ceiling \u2014 you CAN master a secondary class, it just costs. Preserves specialist-vs-generalist tension via price, not a wall. Stacks with the existing cross-training +1 levelReq. Precursor point-spend (after unlock) also pays the multiplier if precursor isn't home."
+  }
 }

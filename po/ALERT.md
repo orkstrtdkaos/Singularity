@@ -1,6 +1,6 @@
 # PO Alert — Singularity
 
-**Status:** SNG-BATCH-2 CLOSED GREEN (v1.5.0→v1.6.1, 327 checks, browser-verified). Next: SNG-BATCH-3 (world liveliness — random encounters + location affinities), run as one batch. Detailed prior specs preserved below.
+**Status:** complete_pending_review — SNG-BATCH-3 (v1.6.2→v1.6.4, results po/results/20260706_SNG-BATCH-3.md) AND SNG-BATCH-4 (v1.6.5→v1.6.6, results po/results/20260706_SNG-BATCH-4.md) built + shipped green (414 checks, browser-load-verified). Erik ran 'proceed to batch 3 and 4' — both done in one session. Also shipped out-of-band: fix(pages) .nojekyll (Jekyll build was FAILING, freezing the live site — now green), fix(party) actionable GitHub sync errors (his shared-scene 403 was a read-only PAT). OPEN — Erik preview-leg: combat feel (Fight decline/flee + duel rounds), affinity feel (aligned vs opposed in a tilted place), surge dial + backlash, Waystaff waking. GM contract flags awaiting Erik: EW/FCT (BATCH-2) + INTENSITY narration cue (BATCH-4). Only Aevi closes. Detailed prior specs preserved below.
 
 ---
 

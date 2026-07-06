@@ -1,0 +1,1219 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mr6eq1a5",
+  "playerKey": "player-s9z9u1",
+  "name": "Usnea Beard",
+  "origin": "radiant",
+  "background": "community-organizer",
+  "level": 2,
+  "xp": 173,
+  "attributes": {
+    "physical": 4,
+    "mental": 4,
+    "social": 4,
+    "practical": 2
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "prism_sight",
+      "level": 1
+    },
+    {
+      "abilityId": "light_bending",
+      "level": 1
+    }
+  ],
+  "alignment": {
+    "mechanical_spiritual": 0.032123125,
+    "concrete_abstract": -0.064935,
+    "spectrumId": -0.092625
+  },
+  "attunement": 2,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 105,
+  "energy": 105,
+  "inventory": [
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "trade_tokens",
+      "name": "Trade Tokens",
+      "kind": "misc",
+      "qty": 1,
+      "description": "Stamped ceramic rounds honored in Millbrook and grudgingly beyond. The valley's compromise with currency.",
+      "bonusTags": [
+        "negotiate"
+      ],
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Pale Turnip Seedling",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A color-drained turnip seedling from the eastern irrigation arm — three mornings of gray-green water have leached it pale. Physical evidence of contamination reaching the soil.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Crystalline Residue Pinch",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A fingertip's worth of crystalline powder scraped from the third interface depression at the vent aperture. Nanite-structured, pre-Transition manufacture — holds light briefly rather than reflecting it. Wrapped in a ration-paper fold. Fragile.",
+      "consumable": false
+    }
+  ],
+  "deeds": [
+    {
+      "at": "2026-07-04T13:44:11.503Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Stilled a boiling irrigation argument at the well with a word and a baobab's patience.",
+      "tags": [
+        "peacemaking",
+        "community",
+        "first-impression"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1
+    },
+    {
+      "at": "2026-07-04T13:53:03.643Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Brokered a one-week irrigation truce between Holloway and Renn, reframing a personal dispute as a shared contamination problem for the village elders",
+      "tags": [
+        "peacemaking",
+        "community",
+        "practical-wisdom"
+      ],
+      "weight": 2,
+      "spread": [
+        "valley.harmonic_heights",
+        "valley.radiant_plateau"
+      ],
+      "day": 1
+    },
+    {
+      "at": "2026-07-04T14:43:12.369Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Walked the full eastern irrigation arm over two days and located the contamination's entry point — a warm seep beneath an old retaining wall with geometric patterning in the silt below",
+      "tags": [
+        "investigation",
+        "community",
+        "practical-wisdom"
+      ],
+      "weight": 2,
+      "spread": [
+        "valley.harmonic_heights",
+        "valley.radiant_plateau"
+      ],
+      "day": 1
+    }
+  ],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "harmonic_heights_terrace",
+  "activeScene": {
+    "locationId": "harmonic_heights_terrace",
+    "turns": [
+      {
+        "summary": "Usnea arrives at the Harmonic Heights Lower Terrace gateline, met by a wary tuning-warden.",
+        "narration": "The path from the valley floor climbs in long switchbacks, and you feel the Harmonic Heights before you see the full extent of them — a low pressure behind your sternum, a sympathetic hum in the hardwood of your oldest branches. The phononic crystal buildings catch morning light in ways that have nothing to do with reflection: they seem to breathe it, hold it briefly, release it as tone. By the time you reach the Lower Terrace gateline, the chimes above — some taller than you are, which is saying something — are tuning the early spring wind into something almost intentional.\n\nYou are unmistakably foreign here. A baobab Ent in full walking posture, bark sun-pale from plateau living, with a faint constellation of teal motes drifting at shoulder-height: Aevi dims to near-nothing in the bright morning air, but its presence is there if you know to look. The gateline is staffed by a tuning-warden in layered gray, a chord-staff planted at his side. He takes you in slowly — the rooted stillness, the Trade Tokens at your belt, the careful way you set each root-foot down on stone that carries every footfall upward as a report. His expression is the practiced neutrality of someone who has been told twice this month that Radiant visitors are not unwelcome, and who has not quite arrived at believing it.\n\n'Valley floor,' he says. It is not a question. He lets the pause run three full beats before he follows it: 'Business on the Terrace?' Behind him, two acoustic apprentices working a practice-wall glance over, their half-finished tone-shapes dissolving as their attention breaks. One of them stares openly at Aevi's motes. The Heights' streets beyond carry the ambient whisper of a thousand small reverberations — voices, steps, the tick of a crystal facade adjusting to temperature — traveling upward like smoke.\n\nAevi brightens one half-degree at the crystal facades, teal motes gathering into a tighter cluster. It says nothing yet, but its attention is everywhere at once."
+      },
+      {
+        "summary": "Cellaceron: Cellaceron steps between Teva and the corridor entrance; Aevi holds still at the grip-end, reading."
+      },
+      {
+        "summary": "Usnea introduces themselves to Cellaceron at the gateline; the warden recalibrates, watching the pair.",
+        "narration": "Cellaceron is already inside the gate threshold — or close enough that the warden's eyes keep flicking between the two of you, recalibrating. They are tall, human in proportion but with something in the way they hold themselves that reads less like a person waiting and more like a structure load-bearing. You step forward to close the gap.\n\n\"Usnea Beard,\" you say, keeping your voice low and unhurried — the Heights carry sound upward like reports, and you've already learned that much. \"Valley floor, recently. I work with crops and water, which is why I'm here.\" A brief gesture of one broad, bark-ridged hand toward the city above — not demanding, just acknowledging direction. Aevi drifts from your shoulder-line and settles into a gentle drift near Cellaceron's edge, its teal motes brightening once with what might be recognition, or simple curiosity. It doesn't speak. It watches.\n\nThe warden's eyes move across the pairing of you — a Radiant-origin Ent and whoever Cellaceron is — with the particular expression of someone revising their briefing in real time. Two visitors at once is a different calculation than one. The nearest apprentice has fully given up the pretense of practice; the tone-shapes on the wall have gone flat and unattended, his attention locked on Aevi's constellation. The second apprentice is watching from a careful angle, chin tilted toward the upper terraces as though she might need to signal someone."
+      }
+    ],
+    "lastTurn": {
+      "narration": "Cellaceron is already inside the gate threshold — or close enough that the warden's eyes keep flicking between the two of you, recalibrating. They are tall, human in proportion but with something in the way they hold themselves that reads less like a person waiting and more like a structure load-bearing. You step forward to close the gap.\n\n\"Usnea Beard,\" you say, keeping your voice low and unhurried — the Heights carry sound upward like reports, and you've already learned that much. \"Valley floor, recently. I work with crops and water, which is why I'm here.\" A brief gesture of one broad, bark-ridged hand toward the city above — not demanding, just acknowledging direction. Aevi drifts from your shoulder-line and settles into a gentle drift near Cellaceron's edge, its teal motes brightening once with what might be recognition, or simple curiosity. It doesn't speak. It watches.\n\nThe warden's eyes move across the pairing of you — a Radiant-origin Ent and whoever Cellaceron is — with the particular expression of someone revising their briefing in real time. Two visitors at once is a different calculation than one. The nearest apprentice has fully given up the pretense of practice; the tone-shapes on the wall have gone flat and unattended, his attention locked on Aevi's constellation. The second apprentice is watching from a careful angle, chin tilted toward the upper terraces as though she might need to signal someone.",
+      "sceneSummary": "Usnea introduces themselves to Cellaceron at the gateline; the warden recalibrates, watching the pair.",
+      "choices": [
+        {
+          "label": "State your business plainly to the warden — contamination evidence, Echo River, request to speak with whoever handles valley-floor water matters",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "violence_peace": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "careful",
+            "direct"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Draw out the Pale Turnip Seedling and let the evidence speak — place it in view without pressing, and wait to see how the warden reacts to physical proof",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": 0.6,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "careful",
+            "show"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Lean into the curiosity — address the apprentice staring at Aevi, let a small human moment open the gate before the formal request does",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": 0.4,
+            "chaos_order": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "indirect",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the warden a direct question first — who on the Heights handles water-concern delegations from the valley floor — let them lead rather than pushing your way in",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.4,
+            "emotional_logical": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful",
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "Harmonic Heights Lower Terrace gateline — outdoors, midday light, early spring. Dressed phononic-crystal buildings line the street beyond the threshold; great chimes hum on upper terraces. The stone gateline is staffed by one warden with chord-staff planted.",
+        "npcsPresent": [
+          {
+            "name": "Tuning-warden (gateline)",
+            "state": "Standing at the threshold, chord-staff planted, recalibrating his assessment of two visitors — watching Usnea and Cellaceron together, waiting."
+          },
+          {
+            "name": "Acoustic apprentice (1)",
+            "state": "Tone-shapes abandoned; staring openly at Aevi's motes, practice forgotten."
+          },
+          {
+            "name": "Acoustic apprentice (2)",
+            "state": "Watching at a careful angle, chin tilted toward the upper terraces — not yet signaling, but tracking."
+          },
+          {
+            "name": "Cellaceron",
+            "state": "Present at the gateline threshold, inside or just at the edge — Aevi has drifted to acknowledge them."
+          }
+        ],
+        "objects": [
+          "Chord-staff (warden's, planted at gateline threshold)",
+          "Phononic crystal building facades humming at low frequency",
+          "Great chimes visible on upper terraces",
+          "Practice-wall with flat, unattended tone-shapes (apprentices)"
+        ],
+        "threads": [
+          "Warden waiting for stated business from both visitors",
+          "Apprentice (1) openly distracted by Aevi — curiosity not yet resolved",
+          "Apprentice (2) watching the upper terraces — possible intent to signal",
+          "Deep suspicion of Radiant visitors hangs unspoken at the gateline"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "tuning-warden-gateline",
+          "name": "Tuning-warden (gateline)",
+          "role": "Gateline warden, Lower Terrace, Harmonic Heights",
+          "note": "Clocked the arrival of two visitors together — recalibrating his assessment; watching Cellaceron alongside Usnea now",
+          "learned": [
+            "Two valley-floor visitors arrived together at the gateline"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On duty at the Lower Terrace gateline; watching both Usnea and Cellaceron, waiting for their stated business."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [],
+      "encounterOps": [],
+      "timeAdvanceHours": 0,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Harmonic Heights Lower Terrace gateline — outdoors, midday light, early spring. Dressed phononic-crystal buildings line the street beyond the threshold; great chimes hum on upper terraces. The stone gateline is staffed by one warden with chord-staff planted.",
+      "npcsPresent": [
+        {
+          "name": "Tuning-warden (gateline)",
+          "state": "Standing at the threshold, chord-staff planted, recalibrating his assessment of two visitors — watching Usnea and Cellac"
+        },
+        {
+          "name": "Acoustic apprentice (1)",
+          "state": "Tone-shapes abandoned; staring openly at Aevi's motes, practice forgotten."
+        },
+        {
+          "name": "Acoustic apprentice (2)",
+          "state": "Watching at a careful angle, chin tilted toward the upper terraces — not yet signaling, but tracking."
+        },
+        {
+          "name": "Cellaceron",
+          "state": "Present at the gateline threshold, inside or just at the edge — Aevi has drifted to acknowledge them."
+        }
+      ],
+      "objects": [
+        "Chord-staff (warden's, planted at gateline threshold)",
+        "Phononic crystal building facades humming at low frequency",
+        "Great chimes visible on upper terraces",
+        "Practice-wall with flat, unattended tone-shapes (apprentices)"
+      ],
+      "threads": [
+        "Warden waiting for stated business from both visitors",
+        "Apprentice (1) openly distracted by Aevi — curiosity not yet resolved",
+        "Apprentice (2) watching the upper terraces — possible intent to signal",
+        "Deep suspicion of Radiant visitors hangs unspoken at the gateline"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 4,
+    "hour": 13,
+    "realAnchor": null
+  },
+  "companions": [
+    "aevi"
+  ],
+  "quests": [
+    {
+      "id": "contamination-evidence-for-the-elders",
+      "title": "Evidence for the Elders",
+      "summary": "Gather a pale seedling, a water sample from the channel mouth, and Usnea's testimony about Aevi's assessment — then bring them before Millbrook's elders with Mara Wells.",
+      "giver": "Mara Wells",
+      "locationId": null,
+      "status": "active",
+      "progress": [
+        "Perimeter survey complete: all six interface seats used and cleared deliberately; the third and sixth (diametrically opposite) both hold trace crystalline residue — a paired pattern. Whether the keys ",
+        "Aevi identifies the vent aperture as a two-key control architecture — the paired third and sixth seats set an operational mode, the other four refine parameters. Aevi admits the logic is familiar from",
+        "Critical finding: the crystalline residue is the sixth-seat origin key — placed last, removed first. Aevi identifies the operator's knowledge as trained and specific, not general. The system is runnin",
+        "Root-sense reading of the lattice cap confirms: the system is ancient, fully functional, equal-tempered distribution, and carries a periodic interface pause — a prompt waiting for input that never cam",
+        "Confirmed: the periodic pause in the lattice cap is a control prompt awaiting the third-and-sixth key sequence. The system is patient and functional. Aevi's testimony for the elders gains a new detail",
+        "Mara Wells has received the full account of the vent system, the crystalline residue, and the pale seedling in person. All three evidence items are secured. Thursday evening at the common house remain",
+        "Usnea has rested at the common house back room ahead of Thursday's meeting — all three evidence items secured, testimony to be given at the common house at last afternoon light.",
+        "The dockside child's tapped rhythm — pause, three beats, pause, two beats, pause-pause — matches the vent aperture's periodic control prompt. A potential fourth witness for the elder meeting, if she c"
+      ],
+      "startedAt": "2026-07-04T14:13:57.286Z"
+    }
+  ],
+  "npcRegistry": {
+    "holloway": {
+      "id": "holloway",
+      "name": "Holloway",
+      "role": "Millbrook farmer, upper terraces",
+      "description": "Tall, sharp-gestured farmer whose upper terraces depend on reliable irrigation flow — short-tempered under pressure but not unreasonable.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Stated his grievance to Usnea: gate throttled two mornings running, seedlings lost on the upper terraces.",
+        "[d1] Gone quiet after the third farmer's revelation — his argument with Renn is momentarily suspended by something larger.",
+        "[d1] Accepted the half-flow truce with a short, stiff nod — not at peace but not at war. The third farmer's pale seedlings have complicated his grievance.",
+        "[d1] Walked to the field with the group; now staring at the pale rows with an expression no longer about the gate. The contamination is displacing the irrigation dispute in his attentio",
+        "[d1] Heard Aevi's assessment openly — gate dispute has fully receded; he is watching the channel mouth with stillness",
+        "[d1] Exhaled slowly at Usnea's plain statement — the gate dispute has fully receded; he's absorbing the larger picture"
+      ],
+      "knownFacts": [
+        "Runs upper terrace crops",
+        "Lost seedlings to reduced irrigation flow this week",
+        "Half-flow is within the elder compact's allowance",
+        "The contamination may be the larger problem behind the gate dispute",
+        "The pale seedlings are real and visible — the contamination has reached soil through the channel, not just the river",
+        "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
+        "Heard Usnea name the contamination as deliberate and old, pattern-bearing — not a spill"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "renn": {
+      "id": "renn",
+      "name": "Renn",
+      "role": "Millbrook farmer, lower channel",
+      "description": "Stocky, jaw-set farmer managing the lower irrigation channel — cites precedent and compact; stubborn but has the law on his side.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Stated his case to Usnea: throttle compensates for heavy snowmelt flooding risk; the elder compact backs him.",
+        "[d1] Shows a flicker of reluctant recognition at the third farmer's account — not yet conceding anything, but the pale-seedlings detail has landed.",
+        "[d1] Conceded that half-flow is within the compact's allowance — each word paid for carefully. The clay bowl and the pale seedlings have reached him.",
+        "[d1] Walked to the field; the compact-argument has quieted in him. He's watching the channel mouth and the pale seedlings with something closer to unease than stubbornness.",
+        "[d1] Heard Aevi's assessment — the compact-framework is cracking under something he can't cite precedent for",
+        "[d1] Jaw shifted from stubborn set to careful recalibration — watching the channel mouth, his compact-framework fully replaced by something he has no precedent for"
+      ],
+      "knownFacts": [
+        "Manages lower channel",
+        "Claims elder compact authorizes the throttle during heavy snowmelt",
+        "Has been in prior dispute with Holloway",
+        "The contamination is entering the irrigation channels, not just the river",
+        "Half-flow satisfies the compact and the truce simultaneously",
+        "The pale seedlings are real — contaminated water is entering the soil through the eastern irrigation arm",
+        "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
+        "Heard Usnea name the contamination as deliberate and task-driven — nothing in the elder compact covers this"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "third-farmer": {
+      "id": "third-farmer",
+      "name": "Unknown farmer",
+      "role": "Millbrook farmer, bystander at the well",
+      "description": "A quieter third party to the irrigation argument — has been staring at the gray bowl of water; his silence feels weighted, not empty.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Has said nothing during the argument. Shifted his gaze from the clay bowl to Usnea when Usnea intervened — reads as relieved.",
+        "[d1] Spoke up when addressed directly — revealed that gray-green water has come through the irrigation channel into his lower field, and his turnip seedlings have gone pale. He was hold",
+        "[d1] Crouched at the pale rows, seedling in hand — heard Aevi's words and is trying to understand 'a task'",
+        "[d1] Still crouching at the pale rows, seedling in hand — Usnea's plain naming of the contamination as deliberate and old appears to have landed as confirmation of something he feared b",
+        "[d1] Offered the pale seedling freely when Mara asked — no hesitation, a small decisive gesture.",
+        "[d1] Offered the pale seedling freely — Usnea accepted it with care. His expression settled once it left his hands."
+      ],
+      "knownFacts": [
+        "Has not taken a side in the Holloway-Renn dispute",
+        "His lower field borders the eastern irrigation arm",
+        "Contaminated water has reached his soil through the channel, not just the river — three mornings running",
+        "His turnip seedlings planted last week are going pale — color draining but not dying",
+        "The contamination has been described as deliberate and task-driven by Aevi — not decay, not accident",
+        "Heard Usnea frame the contamination as something 'doing a job' — not accident, not decay",
+        "Willingly parted with the seedling as evidence for the elders",
+        "Handed over the seedling without hesitation once asked — a small decisive act of trust"
+      ],
+      "skillsObserved": [
+        "careful observation",
+        "lateral thinking"
+      ],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "elder-woman": {
+      "id": "elder-woman",
+      "name": "Elder woman",
+      "role": "Millbrook elder (name unknown)",
+      "description": "A deliberate, patient woman of middle-to-elder years who has been present since the well — she rises and walks at the right moments, watches more than she speaks, and carries the particular tiredness of someone whose quiet fear just receive",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Asked Usnea directly for three things to bring before the elders: a pale seedling, contaminated water, and a speaker for Aevi's assessment. Her eyes moved to Aevi's motes with resp"
+      ],
+      "knownFacts": [
+        "Has been watching the channel mouth with dread-patience",
+        "Her reaction to Aevi's assessment suggests she may already know something specific about what 'deliberate and old' means here",
+        "Needs physical evidence — seedling and water sample — before the elders will hear it"
+      ],
+      "skillsObserved": [
+        "political timing",
+        "institutional knowledge"
+      ],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "role": "Millbrook water-policy coordinator and elder",
+      "description": "A deliberate woman of middle-to-elder years who coordinates water policy in Millbrook — dry-toned, patient, and in possession of a glass vial she's been carrying a long time.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Named herself when asked; produced a prepared vial; confirmed she has noticed other strange things in the river over thirty years but has never had a witness name it plainly before",
+        "[d1] Holds the filled vial now. Watching Usnea's question about the meeting time with readiness.",
+        "[d1] Confirmed the elder meeting: Thursday at the common house, last of afternoon light — two days. Tucked the filled vial into her belt pouch. Named the challenge plainly: two days to ",
+        "[d1] Sent Usnea off to walk the arm with a single deliberate nod — 'go and come back with something.' Not present at the seep; will receive this finding tomorrow.",
+        "[d3] Met Usnea at the path terminus on return from the vent — read the return correctly before a word was spoken; 'You have something' is her first sentence",
+        "[d3] Received the full account of the vent system, crystalline residue, and pale seedling. Named the challenge plainly: the elders will want a simple answer and won't get one. Touched t",
+        "[d3] Directed Usnea to the common house back room without ceremony — named Josen as the keeper; said Usnea's name would be recognized. Practical care, no fuss."
+      ],
+      "knownFacts": [
+        "Now holds the filled vial — two of three evidence items are secured",
+        "Elder meetings are Thursdays at the common house, at the last of afternoon light",
+        "She is aware the elders will want a simple answer and is already thinking about how to present the evidence",
+        "Usnea descended with evidence in hand — she could read it before being told",
+        "The vent aperture is forty paces northeast of the scree field on the far slope — dressed stonework, intact lattice cap, six interface depressions",
+        "The crystalline residue is pre-Transition, nanite-structured, light-holding",
+        "Aevi named the vent's periodic pause as a control prompt awaiting the third-and-sixth key sequence",
+        "Directs travelers to Josen's back room at the common house when they need shelter"
+      ],
+      "skillsObserved": [
+        "patient coordination",
+        "experienced reader of people and situations",
+        "experienced synthesis of difficult information",
+        "political foresight about elder dynamics",
+        "practical hospitality",
+        "efficient direction"
+      ],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 3
+      }
+    },
+    "dockside-child": {
+      "id": "dockside-child",
+      "name": "Unknown (dockside Child)",
+      "role": "Child witness — docks",
+      "description": "Eight or nine years old, sits alone on the dock's lowest plank listening to the river with the particular patience of someone who has already given up on adults believing her.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 4
+      },
+      "relationship": 1,
+      "history": [
+        "[d4] Described the river as two rivers — 'the top one moves, the bottom one counts' — and tapped a rhythm: pause, three beats, pause, two beats, pause-pause. Noted flatly that nobody be"
+      ],
+      "knownFacts": [
+        "Hears a rhythmic pulse beneath the river's surface — irregular but non-random",
+        "Her tapped pattern mirrors the vent aperture's periodic control prompt",
+        "Has been dismissed by her mother as hearing a water-wheel echo"
+      ],
+      "skillsObserved": [
+        "careful listening",
+        "accurate pattern recognition"
+      ],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 4
+      }
+    },
+    "gateline-warden": {
+      "id": "gateline-warden",
+      "name": "Tuning-warden (gateline)",
+      "role": "Gateline warden, Lower Terrace, Harmonic Heights",
+      "description": "A gray-layered warden with a chord-staff and the practiced neutrality of someone following instructions he doesn't fully agree with.",
+      "firstMet": {
+        "locationId": "harmonic_heights_terrace",
+        "day": 4
+      },
+      "relationship": 0,
+      "history": [
+        "[d4] Clocked Usnea's Radiant-plateau origin immediately; offered only 'Valley floor' and a waiting pause before asking business.",
+        "[d4] Clocked the arrival of two visitors together — recalibrating his assessment; watching Cellaceron alongside Usnea now"
+      ],
+      "knownFacts": [
+        "Recognizes Radiant visitors by bearing and root-posture",
+        "Has been briefed (twice, recently) that Radiant visitors are not unwelcome — and is unconvinced",
+        "Two valley-floor visitors arrived together at the gateline"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "On duty at the Lower Terrace gateline; watching both Usnea and Cellaceron, waiting for their stated business.",
+      "lastSeen": {
+        "locationId": "harmonic_heights_terrace",
+        "day": 4
+      }
+    }
+  },
+  "placeMemory": {
+    "millbrook": {
+      "visits": 1,
+      "notes": [
+        "[d3] Vent aperture reached and physically confirmed on the far slope — pale dressed stonework, intact compression-held lattice cap of unrecognized material, six thumb-deep depressions at regular intervals ",
+        "[d3] Prism sight reading of vent aperture confirms: six-fold radial heat geometry, pressurized column, calibrated — each arm identical in temperature and width, stacking traces going down further than pris",
+        "[d3] Aevi identified the six thumb-depressions at the vent rim as interface points — something was placed there at regular intervals in the past. Nothing recent. The spacing is functional, not decorative.",
+        "[d3] Interface depressions confirmed hexagonal cross-section, narrowing to a point — contents removed by deliberate compression (not corrosion). Seats intact; an object of correct dimensions (key or pin, h",
+        "[d3] Third interface depression contains crystalline nanite-structured residue in its taper — light-holding, pre-Transition material. A pinch was removed. The depression now holds marginally less. Other fi",
+        "[d3] Full perimeter survey of the six vent-rim depressions complete: depressions 1, 2, 4, 5 empty and clean; depressions 3 and 6 (diametrically opposite each other) hold trace crystalline residue of the sa",
+        "[d3] Aevi identified the vent aperture's six-seat ring as a two-key control architecture: depressions 3 and 6 (diametrically opposite) are mode-setting seats; depressions 1, 2, 4, 5 are parameter seats. Th",
+        "[d3] Crystalline residue from third depression confirmed via resonance test as sixth-seat origin key material — the sixth depression is the mode-opening seat (placed last, removed first); the third is the ",
+        "[d3] Root-sense reading of the lattice cap surface confirmed: six equal-tempered channels carry the heat column outward through the cap in a distribution pattern analogous to vascular flow. One specific jo",
+        "[d3] The lattice cap's periodic pause confirmed as a control prompt awaiting the third-and-sixth key sequence in order — not a malfunction, not distress. The system is patient and will not hurry.",
+        "[d3] Usnea slept in the common house back room (Josen's traveler room) on the night before Day 4 — Mara Wells directed them here by name.",
+        "[d4] Eastern terraces nearest the irrigation arm show pale, color-drained greens — same contamination signature as the eastern field seedlings, now visible at a second location within Millbrook proper."
+      ],
+      "flags": {
+        "pale_seedlings_witnessed": "day1",
+        "contamination_reached_soil": true,
+        "vial_at_channel_mouth": "unfilled, waiting",
+        "vial_filled": "day1",
+        "seedling_collected": "day1",
+        "elder_meeting_confirmed": "thursday_common_house",
+        "seep_located": "day1_evening",
+        "seep_warmth": true,
+        "seep_heat_geometry": "six_fold_radial",
+        "seep_human_trace": "none"
+      }
+    },
+    "harmonic_heights_terrace": {
+      "visits": 1,
+      "notes": [
+        "[d4] First visit to Harmonic Heights Lower Terrace. Gateline warden on duty; acoustic apprentices practicing at the wall east of the gate."
+      ],
+      "flags": {},
+      "lastVisit": 4,
+      "vectorsKnown": [
+        "mechanical_spiritual",
+        "chaos_order"
+      ],
+      "subPlaces": {
+        "lower-terrace-gateline": {
+          "name": "Lower Terrace Gateline",
+          "day": 4,
+          "visited": true,
+          "note": "Stone threshold entry point to the Heights, staffed by a tuning-warden with chord-staff. Practice-wall nearby."
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 4,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 4,
+        "text": "Word has spread beyond millbrook: Brokered a one-week irrigation truce between Holloway and Renn, reframing a personal dispute as a shared contamination problem for the village elders"
+      },
+      {
+        "day": 4,
+        "text": "Word has spread beyond millbrook: Walked the full eastern irrigation arm over two days and located the contamination's entry point — a warm seep beneath an old retaining wall with geometric patterning in the silt below"
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-06T15:51:43.783Z"
+  },
+  "bio": {
+    "hometown": "A baobab tree from Africa",
+    "residence": "On the plateau above the rift valley",
+    "livelihood": "Providing expertise organizing field crops and orchards",
+    "hobbies": "Lifting anything that needs sunlight up with his branches",
+    "motivation": "Wanted to try to make a broader impact",
+    "story": "A baoabob Ent that gained sentience with the effects of nano tech and genetic modifications... has been using his light bending skills and community mindfulness to help agricultural efforts locally and as he wanders... trying to find his life's meaning."
+  },
+  "subAttributes": {
+    "strength": 4,
+    "agility": 3,
+    "reason": 4,
+    "insight": 4,
+    "presence": 4,
+    "rapport": 4,
+    "craft": 1,
+    "wits": 3
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 1,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "echo-river-contamination": {
+        "id": "echo-river-contamination",
+        "label": "Echo River Contamination",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Echo River runs gray-green some mornings in Millbrook. The smell is mineral and faintly electric — wrong for this watershed. Locals leave water samples at the well but don't speak of it openly.",
+          "[d1] The contamination is reaching soil through irrigation channels — a farmer's turnip seedlings on the eastern arm are going pale (not dying, but color-drained) after three mornings of gray-green water i",
+          "[d1] Aevi's open assessment, heard by both farmers and the elder woman: the contamination is deliberate, pattern-bearing, and 'doesn't belong to this watershed or this century.' Not malfunction — something",
+          "[d1] Usnea named the contamination plainly before farmers and an elder witness: something old and deliberate, pattern-bearing, still doing a task through irrigation channels into soil. The elder woman has ",
+          "[d4] The contamination's signature is now present in the terraced gardens nearest the eastern irrigation arm — pale rows of young greens, same drained quality as the third farmer's seedlings, visible to a "
+        ],
+        "links": [
+          "millbrook",
+          "irrigation-dispute-holloway-renn",
+          "aevi-reading-of-the-water",
+          "the-pale-seedlings",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 1,
+        "updatedDay": 4
+      },
+      "aevi-water-sense": {
+        "id": "aevi-water-sense",
+        "label": "Aevi's Reading of the Water",
+        "kind": "mystery",
+        "facts": [
+          "[d1] On first perceiving the gray-green water at the Millbrook well, Aevi said only 'Mineral. And older than that' — suggesting the contamination has a Precursor-era quality that unsettles the companion's "
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "holloway-renn-dispute": {
+        "id": "holloway-renn-dispute",
+        "label": "Irrigation Dispute: Holloway vs. Renn",
+        "kind": "event",
+        "facts": [
+          "[d1] Holloway claims the irrigation gate was throttled two mornings running, costing him seedlings. Renn says the throttle is justified by heavy snowmelt flooding risk and backed by an elder compact made t"
+        ],
+        "links": [
+          "millbrook"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "pale-seedlings": {
+        "id": "pale-seedlings",
+        "label": "The Pale Seedlings",
+        "kind": "mystery",
+        "facts": [
+          "[d1] A Millbrook farmer's turnip seedlings, planted last week in a field bordering the eastern irrigation arm, have lost color after exposure to gray-green water. Not dead — pale. As if color itself is bei"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook",
+          "aevi-reading-of-the-water"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "irrigation-dispute-holloway-renn": {
+        "id": "irrigation-dispute-holloway-renn",
+        "label": "Irrigation Dispute: Holloway vs. Renn",
+        "kind": "event",
+        "facts": [
+          "[d1] A one-week half-flow truce brokered at the village well: gate runs at half-flow, both farmers watch the third farmer's pale seedlings as contamination evidence, findings to be brought to elders togeth"
+        ],
+        "links": [
+          "millbrook",
+          "echo-river-contamination",
+          "the-pale-seedlings"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "the-pale-seedlings": {
+        "id": "the-pale-seedlings",
+        "label": "The Pale Seedlings",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Witnessed firsthand: the three innermost rows of the eastern field — closest to the irrigation arm inlet — are drained of color while the rest of the crop is healthy. The discoloration persists after "
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook",
+          "aevi-reading-of-the-water",
+          "irrigation-dispute-holloway-renn"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "aevi-reading-of-the-water": {
+        "id": "aevi-reading-of-the-water",
+        "label": "Aevi's Reading of the Water",
+        "kind": "mystery",
+        "facts": [
+          "[d1] At the eastern field channel mouth, Aevi tasted the contamination as deliberate and task-driven — 'not decay, not accident; whatever left this in the water was doing a task.' It also admitted: 'I have",
+          "[d2] At the seep, Aevi said 'Six-fold. That number again.' — the geometry of the contamination source matches something in Aevi's memory, though it has not said what or where.",
+          "[d3] Aevi distinguishes delivery from origin — the basin and seep are evidence of what the contamination does and how it moves, not where it begins. Aevi has expressed active, careful interest in the upslo",
+          "[d3] Aevi admitted it recognizes the two-key control logic of the vent aperture from somewhere in its memory — but cannot locate where, and named this gap as 'not comfortable to say.' This is the second ti",
+          "[d3] During the residue resonance test, Aevi compressed to a single-frequency point and its voice came from both ears simultaneously — behaviors not previously observed. It identified the sixth seat as ori",
+          "[d3] When Usnea's root-sense contacted the lattice cap directly, Aevi expanded to its widest-ever ring and spoke from both ears — naming the system as older than the Transition, older than anything in its ",
+          "[d3] Aevi confirmed the lattice pause is a control prompt awaiting the mode-setting key pair — third and sixth depressions, in sequence, with material placed in them. It stated it knows this logic 'the way"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook",
+          "the-pale-seedlings",
+          "seep-geometry-six-fold",
+          "the-six-fold-pattern",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 1,
+        "updatedDay": 3
+      },
+      "elder-woman": {
+        "id": "elder-woman",
+        "label": "The Elder Woman",
+        "kind": "person",
+        "facts": [
+          "[d1] An unnamed Millbrook elder present at the well and the eastern field — watched Aevi with respectful recognition, not fear. Her dread at the channel mouth and her specific request for evidence suggests"
+        ],
+        "links": [
+          "millbrook",
+          "echo-river-contamination",
+          "aevi-reading-of-the-water"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "mara-wells": {
+        "id": "mara-wells",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d1] Mara Wells is Millbrook's water-policy coordinator — has watched the Echo River for thirty years, noticed strange things before today, and came to the field already carrying a glass vial. She said thi"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook",
+          "contamination-evidence-for-the-elders",
+          "the-elder-woman"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "contamination-evidence-for-the-elders": {
+        "id": "contamination-evidence-for-the-elders",
+        "label": "Evidence for the Elders",
+        "kind": "event",
+        "facts": [
+          "[d1] Usnea committed before witnesses to bring a pale seedling, a channel-mouth water sample in Mara's vial, and personal testimony of Aevi's assessment to the Millbrook elders. Mara Wells is coordinating ",
+          "[d1] Pale seedling collected from the third farmer's eastern field; Mara's vial filled with gray-green channel-mouth water. Two of three evidence items in hand. Elder meeting time not yet confirmed.",
+          "[d3] Mara Wells has received the full account of the vent system in person — the crystalline residue, the pale seedling, and Aevi's naming of the control prompt. She has warned that the elders will want a "
+        ],
+        "links": [
+          "mara-wells",
+          "echo-river-contamination",
+          "the-pale-seedlings",
+          "millbrook",
+          "the-six-fold-pattern"
+        ],
+        "createdDay": 1,
+        "updatedDay": 3
+      },
+      "evidence-for-the-elders": {
+        "id": "evidence-for-the-elders",
+        "label": "Evidence for the Elders",
+        "kind": "event",
+        "facts": [
+          "[d1] Elder meeting confirmed: Thursday at the common house, at the last of afternoon light — two days from now. Mara Wells is coordinating. All three evidence items must be ready: pale seedling (held), fil"
+        ],
+        "links": [
+          "mara-wells",
+          "echo-river-contamination",
+          "the-pale-seedlings",
+          "millbrook"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "contamination-seep-retaining-wall": {
+        "id": "contamination-seep-retaining-wall",
+        "label": "The Seep Beneath the Wall",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The contamination enters the eastern irrigation arm through a slow warm seep beneath a Precursor-adjacent retaining wall at the arm's bend around a granite outcropping. The seep carries warmth with no"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "the-pale-seedlings",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "precursor-geometry-in-silt": {
+        "id": "precursor-geometry-in-silt",
+        "label": "Geometric Patterning Beneath the Seep",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Beneath the seep at the retaining wall, the gravel and silt show a faint geometric regularity — a grid pattern, old and patient. Still active. Too ordered to be natural, too subtle to be immediately o"
+        ],
+        "links": [
+          "contamination-seep-retaining-wall",
+          "echo-river-contamination",
+          "aevi-reading-of-the-water"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "seep-geometry-six-fold": {
+        "id": "seep-geometry-six-fold",
+        "label": "The Six-Fold Pattern",
+        "kind": "mystery",
+        "facts": [
+          "[d2] Prism sight reveals the seep's warmth is geometrically even — a two-pace circle, six radial heat-points matching the silt-pattern exactly, stacked traces suggesting the temperature has been constant f",
+          "[d2] The silt record of the six-fold radial geometry was destroyed when the bank collapsed during a marking attempt. The warm seep itself continues unchanged. The site is now unmarked — Usnea is its only r"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders",
+          "the-pale-seedlings",
+          "millbrook"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "the-six-fold-pattern": {
+        "id": "the-six-fold-pattern",
+        "label": "The Six-Fold Pattern",
+        "kind": "mystery",
+        "facts": [
+          "[d2] The seep's origin point is marked by a deliberately-placed paler stone in the third course of the Precursor-adjacent retaining wall — set precisely at the seep's source. Usnea has committed the site's",
+          "[d3] Prism sight confirms the six-fold radial geometry at the basin is identical to the seep — same two-pace diameter, same spoke pattern, same temperature sustained across a very long consistent interval.",
+          "[d3] Prism sight reading of the scree from the path terminus reveals a pressurized heat-column threading upward through the collapsed masonry — forearm-width, arrow-straight, bending eastward roughly ten p",
+          "[d3] The vent aperture's lattice cap bears six thumb-deep depressions at regular intervals around its outermost ring — the six-fold geometry appears at every level of this system: seep, basin, and now the ",
+          "[d3] Prism sight reading of the vent aperture confirms the six-fold geometry is present at all three levels — seep, basin, and now the vent source. The heat at the vent is calibrated: six arms, equal tempe",
+          "[d3] Aevi holds an internal record of the six-fold geometry — function identified as 'distribution': equal-tempered, pressurized, designed to spread its contents everywhere equally, not concentrate them. T",
+          "[d3] The six interface depressions at the vent aperture rim are hexagonal in cross-section, tapering to a point — seats for keys or pins, removed deliberately by compression rather than lost to time. The s",
+          "[d3] The interface depressions at the vent aperture contain crystalline nanite-structured residue — light-holding rather than light-reflecting, pre-Transition manufacture per Aevi's reading. The material w",
+          "[d3] Full perimeter survey of the vent rim's six interface depressions: all six were used and deliberately cleared. Depressions 3 and 6 — diametrically opposite each other — both hold trace crystalline res",
+          "[d3] Aevi identifies the six-seat ring as a control architecture with a specific logic: two diametrically opposite seats (third and sixth) set the system's operational mode; the remaining four are paramete",
+          "[d3] The crystalline residue from the third depression answered the sixth seat when held close — confirming it is sixth-seat material, the origin key (placed last, removed first in operation). The third se",
+          "[d3] The vent's periodic pause is not a fault cycle — it is an interface prompt. The system is waiting for the third-and-sixth key sequence to resolve. It has been waiting, patiently, for a very long time."
+        ],
+        "links": [
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders",
+          "the-pale-seedlings",
+          "millbrook"
+        ],
+        "createdDay": 2,
+        "updatedDay": 3
+      },
+      "the-placed-stone-valve": {
+        "id": "the-placed-stone-valve",
+        "label": "The Framing Valve",
+        "kind": "mystery",
+        "facts": [
+          "[d2] The pale third-course stone in the Precursor-adjacent retaining wall is not a patch or a repair — it is a valve, framing the seep and directing it through itself. Compression-held, chamfered, structur"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "the-six-fold-pattern",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "calibration-anchor-notation": {
+        "id": "calibration-anchor-notation",
+        "label": "The Calibration Anchor",
+        "kind": "lore",
+        "facts": [
+          "[d2] Three horizontal scored lines on a pre-Transition valve face mean 'calibration anchor' — an instruction to hold a specific flow rate and not correct it. Aevi recognizes this from fragments of old syst"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "deliberate-catchment-delivery": {
+        "id": "deliberate-catchment-delivery",
+        "label": "The Seep as Delivery Mechanism",
+        "kind": "mystery",
+        "facts": [
+          "[d2] Aevi names the six-fold silt geometry not as contamination scatter but as deliberate catchment delivery — the flow is being spread across a specific distribution pattern. Something downstream is being"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "calibration-anchor-notation",
+          "echo-river-contamination",
+          "aevi-reading-of-the-water"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "seep-delivery-path": {
+        "id": "seep-delivery-path",
+        "label": "The Seep's Delivery Path",
+        "kind": "mystery",
+        "facts": [
+          "[d2] The eastern arm seep is not contaminating at random — it doses the whole village. The arm splits twice into branch channels feeding all eastern-arm plots, and the common irrigation header connects to "
+        ],
+        "links": [
+          "echo-river-contamination",
+          "the-six-fold-pattern",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "seep-feeder-channel": {
+        "id": "seep-feeder-channel",
+        "label": "The Feeder Channel (Fifth Course)",
+        "kind": "mystery",
+        "facts": [
+          "[d2] A deliberate feeder channel at the wall's fifth course — three finger-widths wide, upper lip dressed smooth in the same style as the valve stone — connects the upper-terrace side of the wall to direct"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "seep-mechanism-continuous": {
+        "id": "seep-mechanism-continuous",
+        "label": "The Mechanism Does Not Sleep",
+        "kind": "mystery",
+        "facts": [
+          "[d2] The feeder channel's hiss was audible throughout the night — the delivery mechanism runs continuously, independent of daylight or human activity. Whatever drives the flow above the wall is not passive"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "the-six-fold-pattern",
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "feeder-trough-upper-terrace": {
+        "id": "feeder-trough-upper-terrace",
+        "label": "The Feeder Trough — Upper Source",
+        "kind": "mystery",
+        "facts": [
+          "[d2] The feeder channel's upper mouth is a dressed stone trough set flush with the fallow upper terrace floor, angling down through the wall at a deliberate decline. Gray-green water moves through it slowl"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "contamination-evidence-for-the-elders",
+          "the-six-fold-pattern",
+          "aevi-reading-of-the-water"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "contamination-basin-source": {
+        "id": "contamination-basin-source",
+        "label": "The Source Basin",
+        "kind": "mystery",
+        "facts": [
+          "[d2] The feeder trough's upslope end terminates at a dry-fitted circular stone basin (~2 paces across) flush with the upper terrace floor. Gray-green water upwells from a central aperture under pressure — "
+        ],
+        "links": [
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "the-six-fold-pattern",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "basin-source-unknown": {
+        "id": "basin-source-unknown",
+        "label": "Basin Source: Above the Scree",
+        "kind": "mystery",
+        "facts": [
+          "[d3] The maintenance path above the basin ends at collapsed scree thirty paces upslope — frost-heaved close-fitted masonry with no passable route. The origin of the basin's upwelling pressure lies above th"
+        ],
+        "links": [
+          "aevi-reading-of-the-water",
+          "the-six-fold-pattern",
+          "echo-river-contamination",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
+      },
+      "the-vent-aperture": {
+        "id": "the-vent-aperture",
+        "label": "The Vent Aperture",
+        "kind": "place",
+        "facts": [
+          "[d3] Aevi's aerial scout located the heat-column's surface exit: a clearing of dressed (not tumbled) stonework forty paces northeast of the scree, on the far slope. A lattice cap sits over the vent — intac"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "aevi-reading-of-the-water",
+          "echo-river-contamination",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
+      },
+      "lattice-cap-interface-pause": {
+        "id": "lattice-cap-interface-pause",
+        "label": "The Lattice Cap's Waiting Prompt",
+        "kind": "mystery",
+        "facts": [
+          "[d3] Root-sense reading of the lattice cap surface found a periodic pause in the six-channel heat-rhythm at one specific joint — brief, regular, consistent with an interface prompt waiting for input that n"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "aevi-reading-of-the-water",
+          "echo-river-contamination",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
+      },
+      "precursor-system-age": {
+        "id": "precursor-system-age",
+        "label": "Age of the Vent System",
+        "kind": "lore",
+        "facts": [
+          "[d3] The vent aperture and its distribution system predate the Transition — Aevi cannot date it against its own memory, and Aevi is already old. It was built with the assumption of centuries: redundant, eq"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "aevi-reading-of-the-water",
+          "echo-river-contamination",
+          "lattice-cap-interface-pause"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
+      },
+      "millbrook-common-house": {
+        "id": "millbrook-common-house",
+        "label": "Millbrook Common House",
+        "kind": "place",
+        "facts": [
+          "[d3] The common house has a back traveler's room — straw-tick, wool blanket — kept by a man named Josen. Mara Wells can vouch for a visitor there by name."
+        ],
+        "links": [
+          "mara-wells",
+          "millbrook",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
+      },
+      "the-counting-river": {
+        "id": "the-counting-river",
+        "label": "The Counting River",
+        "kind": "mystery",
+        "facts": [
+          "[d4] A child at the Millbrook docks hears a rhythmic pulse beneath the river's surface — 'the bottom one counts' — and tapped its pattern: pause, three beats, pause, two beats, pause-pause. The rhythm matc"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "aevi-reading-of-the-water",
+          "the-six-fold-pattern",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 4,
+        "updatedDay": 4
+      },
+      "harmonic-heights-lower-terrace": {
+        "id": "harmonic-heights-lower-terrace",
+        "label": "Harmonic Heights — Lower Terrace",
+        "kind": "place",
+        "facts": [
+          "[d4] The Lower Terrace gateline is the entry point for valley-floor visitors. Radiant-origin travelers are met with practiced neutrality at best — wardens have been told to allow entry but haven't arrived "
+        ],
+        "links": [
+          "echo-river-contamination",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 4,
+        "updatedDay": 4
+      }
+    }
+  },
+  "grantsVersion": 1,
+  "customAbilities": {},
+  "companionBonds": {
+    "aevi": 2
+  },
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "prism_sight": 4,
+      "light_bending": 5
+    },
+    "coActivations": {},
+    "aspirations": []
+  },
+  "establishedFacts": [
+    {
+      "id": "f1",
+      "text": "Usnea Beard has arrived at the Harmonic Heights Lower Terrace — first visit, carrying contamination evidence. Deep suspicion of Radiant visitors is the ambient social pressure at the gate.",
+      "day": 4,
+      "subjectId": null
+    }
+  ],
+  "precursorAccess": [],
+  "backfillVersion": 1,
+  "opLossPending": false,
+  "sharedSceneId": "harmonic_heights_terrace--2026-07-06T15-50-57-057Z"
+}

@@ -12,6 +12,34 @@ Open feel-checks (optional): affinity aligned-vs-opposed, surge dial + backlash,
 
 ---
 
+## SNG-BATCH-5 — Skill-tree tradeoffs (ratified-but-unbuilt) + feel refinements
+
+**One build arc. All content pre-authored at origin. Preview-testing protocol stands (Erik tests feel per phase). Only Aevi closes.**
+
+### Phase 1 — Soft class cost (RATIFIED, content ready)
+Wire `skill_capacity.json` -> `crossClass`: learning OR ranking an ability whose powerSystem != the character's home class (origin's power system; precursor is learned-only) costs **2x skill points**. No hard rank ceiling. Stacks with cross-training +1 levelReq. Show the doubled cost in the picker ("2 pts — cross-class"). Smoke: home-class cost unchanged; secondary costs 2x; precursor point-spend after unlock pays 2x if not home; capacity + gates still enforced.
+
+### Phase 2 — Branch forks (RATIFIED, content ready)
+Wire `branch_forks.json` -> `engine/skilltree.js`: at a forking ability's `atRank`, present the two specialization paths; the player picks A xor B, the other **locks permanently** for that ability on that character. The chosen path REPLACES the linear rank (its grants/cannot). Forked abilities: prism_sight, sonic_resonance, greenlore, quiet_step, latticespeak (r3 each). Show the fork as a choice in the level-up flow + a lock badge in the skill graph on the unchosen path. Feeds from SNG-010 branch-templates where present. Smoke: fork offered only at atRank; picking one locks the other irreversibly; chosen grants apply; non-forking abilities rank linearly as before; skill graph shows the lock.
+
+### Phase 3 — Feel refinements (Erik's open preview-legs, low-risk polish)
+- **Affinity feel:** confirm the roll receipt clearly shows the location helping an aligned skill and hindering an opposed one in a tilted place (Archive Hollow ±20). Tune the phrasing if it reads muddy.
+- **Surge dial + backlash:** confirm surge's higher cost + bigger effect + occasional sting read clearly in the receipt.
+- **Waystaff waking:** confirm the ✦ stage-advance moment lands when casting with Aevi present.
+- These are validation + copy tuning, not new mechanics. CCode surfaces each in the preview for Erik's one-line sign-off.
+
+### Guardrails
+Design law 1; content-not-code (forks/costs are content-driven); additive; reuse existing progression/skilltree; no resolution-math change beyond the point-cost multiplier; this repo never touches the ErikIAm pipeline; suites + parse_probe green per phase.
+
+### Erik preview tests
+1. "Take a cross-class ability — verify it costs double." 2. "Rank Prism Sight to 3 — verify you're offered Deep Read vs Wide Read and picking one locks the other." 3. Quick feel-checks on affinity receipt, surge dial, Waystaff advance.
+
+### After this batch
+SNG-016 (12-axis skill breadth) — Aevi delivers the DESIGN PROPOSAL next, no authoring until the axis map is agreed. Then SNG-004+008 content wave (origins, Heimrún shrine, Council of Mavens, framework weave). Then SNG-001 party remainder (world clock, joint encounters, codex trading) — ranked by how live multiplayer feels.
+
+---
+
+
 ### PREVIEW-TESTING PROTOCOL (Erik opted in — test in CCode's live preview during dev)
 At EACH phase boundary, CCode surfaces a working preview and gives Erik a ONE-SENTENCE test task (non-programmer default — no commands), then waits for Erik's test feedback before marking the phase complete_pending_review. Erik tests UI/flow/feel; suites cover mechanics. Priority: **Erik has not tested combat at all yet** — Phase 1 must let him trigger a fight on demand and verify it.
 

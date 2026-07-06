@@ -1,18 +1,16 @@
 # PO Alert — Singularity
 
-**Status:** complete_pending_review — SNG-BATCH-3 (v1.6.2→v1.6.4, results po/results/20260706_SNG-BATCH-3.md) AND SNG-BATCH-4 (v1.6.5→v1.6.6, results po/results/20260706_SNG-BATCH-4.md) built + shipped green (414 checks, browser-load-verified). Erik ran 'proceed to batch 3 and 4' — both done in one session. Also shipped out-of-band: fix(pages) .nojekyll (Jekyll build was FAILING, freezing the live site — now green), fix(party) actionable GitHub sync errors (his shared-scene 403 was a read-only PAT). Erik preview-leg: **combat + random encounters VALIDATED by Erik 2026-07-06 ("worked ok, tried several encounters, all pretty good for a first cut")** — Phase 1 confirmed on the live build; accepted as first cut, refinement possible later. STILL OPEN (optional feel-checks): affinity feel (aligned vs opposed in a tilted place), surge dial + backlash, Waystaff waking. GM contract flags awaiting Erik: EW/FCT (BATCH-2) + INTENSITY narration cue (BATCH-4). Only Aevi closes. Detailed prior specs preserved below.
+**Status:** SNG-BATCH-3 + SNG-BATCH-4 CLOSED GREEN (Aevi 2026-07-06). v1.6.2→v1.6.6, 414 checks, combat + random encounters + item evolution + variable power all shipped and Erik-validated on the live build. Party play (phase 1) live and in active multi-player use (scene saves at origin); fix(party) non-destructive shared-scene + actionable sync errors shipped out-of-band. EW/FCT ratified (walkthrough). 
+
+**NEXT BUILD (2026-07-06):**
+1. **Finish the ratified-but-unbuilt tradeoffs** (fell through BATCH-4's frozen spec): soft class-cost 2x secondary (content READY: skill_capacity.json crossClass) + branch forks (mechanic specced; needs fork content + skilltree wiring). Tier-slot capacity already shipped (BATCH-2). Small, mostly content-ready — quickest win.
+2. **SNG-016 — 12-axis skill breadth:** Aevi OWES Erik a design proposal FIRST (which axes get their own system vs share; what a death/life craft, mind/body discipline, peace/violence path look like; how it recolors the skill graph + origins + location vectors). No authoring until the axis map is agreed. This is the big design direction and it gates a lot.
+3. **SNG-004 + SNG-008 — the world-depth content wave:** origins-as-content (incl. unusual-embodiment/ENT), the Heimrún rune shrine (daily omen), the Council of Mavens as petitionable NPCs, framework weave. Highest felt-value new feature.
+4. **SNG-001 party remainder:** world clock, codex trading, joint encounters — prioritize by how live multiplayer feels.
+Open feel-checks (optional): affinity aligned-vs-opposed, surge dial + backlash, Waystaff waking. Only new GM flag awaiting Erik: INTENSITY narration cue (minor).
+
 
 ---
-
-## PO closure — SNG-BATCH-2 (2026-07-06, Aevi)
-All phases closed_green after origin audit: facts.js / vectors.js / skilltree.js exist at HEAD; attribute gates + broad-vs-deep capacity genuinely ENFORCED in progression.js (meetsLearnGate/meetsRank3Gate/atCapacity); ESTABLISHED FACTS + PLAYER'S EXACT WORDS blocks wired into GM context (rules FCT, EW). Picker collapsible + tier/level indicators + rank-up highlight shipped; skill-KG graph rendered like the world map; player NPC-rename shipped. Phase 4 (item evolution) correctly deferred — needs PO Waystaff+Aevi seed content.
-**GM rules EW + FCT — RATIFIED as canon (Erik 2026-07-06, confirmed after reviewing exact wording).** EW (narrate to player's exact words), FCT (established facts permanent + factUpdates + statusNote). No further sign-off pending.
-
----
-
-## SNG-BATCH-3 — World Liveliness (Erik: run as one batch, 2026-07-06)
-
-**One build arc, phases in order, each shippable green. Content pre-authored at origin: `content/packs/valley/events/random_encounters.json`, `content/packs/core/rules/location_affinities.json`. Results: `po/results/YYYYMMDD_SNG-BATCH-3.md`. Only Aevi closes.**
 
 ### PREVIEW-TESTING PROTOCOL (Erik opted in — test in CCode's live preview during dev)
 At EACH phase boundary, CCode surfaces a working preview and gives Erik a ONE-SENTENCE test task (non-programmer default — no commands), then waits for Erik's test feedback before marking the phase complete_pending_review. Erik tests UI/flow/feel; suites cover mechanics. Priority: **Erik has not tested combat at all yet** — Phase 1 must let him trigger a fight on demand and verify it.

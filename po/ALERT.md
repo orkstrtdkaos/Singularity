@@ -55,6 +55,11 @@ Erik ratified 2026-07-06: (1) three steps, (2) Surge carries backlash, (3) auto-
 
 ---
 
+## SNG-016 — Skill-system breadth across the 12 axes (DESIGN THREAD, Erik 2026-07-06)
+
+Erik: "the lore talks about more axes... each will need skills." The 12-axis spectrum (emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation) is the framework's spine, but the 4 power systems cover only part of it. Rough current coverage: Harmonic ~ mechanical/order; Radiant ~ dark_light/truth; Valley Craft ~ concrete/body/individual; Precursor ~ destruction_creation/space_time/chaos. GAPS with no skills living on them: death_life, violence_peace, body_mind, emotional_logical, demonic_angelic, and chaos_order proper.
+**This is a breadth rethink, NOT a batch item yet.** Aevi to develop a design pass with Erik: does each axis get a power system, or do systems each span a few axes; what new thematic domains fill the gaps (a life/death craft? a mind/body discipline? a peace/violence path?); how the axis map shapes origins, the skill graph coloring, and location-vector alignment. Deliver as a design proposal for Erik's direction before any authoring. Do NOT auto-author new catalogs — this one gets thought through first.
+
 ## Task SNG-012 — Memory & Input Fidelity (HOTFIX — do FIRST, before SNG-011)
 
 Two live-play bugs (Erik 2026-07-06, screenshot: GM lost that Teva was already rescued from the resonance chamber). Shared root: the pipeline compresses information that should be preserved.
@@ -120,7 +125,7 @@ Erik ratified 2026-07-06: bump SNG-011 forward; render the skill catalog as a gr
 - **(i) Breadth-vs-depth class cap — RATIFIED (Erik 2026-07-06, SOFT version):** secondary (non-home) class abilities cost 2x skill points; NO hard rank ceiling. Content in skill_capacity.json (crossClass). Stacks with cross-training +1 levelReq. Build with SNG-015/capacity.
 - **(ii) Attribute requirements:** each ability gated behind a minimum in its governing sub-attribute, scaling with tier (draft: Tier T needs sub-attr ≥ 2T-ish; rank 3 a step higher). Uses existing sub-attribute pools (20/area, soft-cap knee 4) so gates can't all be cleared — investment becomes the tradeoff. Framework tie: attribute tilt = cosmic-address vector; what you can wield reflects who you've become. — Erik ratifies whether-gated + the curve (resolution-math).
 - **(iv) Tier-slot capacity (broad-vs-deep, Erik 2026-07-06 — lead tradeoff mechanic):** a D&D-slot-style capacity table — character level → how many ability SLOTS you hold per Tier, increasing with level (need not match D&D exactly). Each skill point either FILLS a tier slot with a new ability (broad) or RANKS UP an owned ability toward depth (deep); slots cap breadth per tier, finite points force the broad/deep/mixed choice. This can stand as the primary tradeoff even if (i)/(ii)/(iii) are deferred — it alone makes "go wide or go deep" a real decision. Capacity table lives in resolution.json `progression` block (Aevi tunes numbers once Erik ratifies the table SHAPE + growth curve). — Erik ratifies shape.
-- **(iii) Branch forks:** at rank 2/3, flagged abilities fork — pick specialization A xor B, the other locks. Feeds from SNG-010 branch-templates. Real opportunity cost. — Erik ratifies fork-with-lockout as a mechanic.
+- **(iii) Branch forks — RATIFIED (Erik 2026-07-06, build):** at rank 2/3, flagged abilities fork — pick specialization A xor B, the other locks. Feeds from SNG-010 branch-templates. Build with SNG-011/skilltree.
 - Once (i)/(ii)/(iii) shapes are ratified: Aevi authors the per-ability attribute-req numbers, the fork specialization content, and the class-cap wiring spec (numbers/content self-ratified; mechanic shape is Erik's).
 - Smoke: graph renders all classes incl. precursor with tier/levelReq/attribute-gate/fork encodings; gates block learn when unmet and clear when met; fork lockout holds; secondary-class rank-2 cap enforced.
 

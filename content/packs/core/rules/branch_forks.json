@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "note": "Branch forks (Erik ratified 2026-07-06, build). At a specified rank, an ability splits into two specializations — pick A xor B, the other locks permanently for that ability on that character. Real opportunity cost; feeds from SNG-010 branch-templates. Each fork: two paths, each a distinct rank-expression (grants/cannot) that REPLACES the linear rank. Authored by Aevi (PO). Only a curated set of abilities fork — most stay linear.",
+  "forks": {
+    "prism_sight": {
+      "atRank": 3,
+      "prompt": "Prism Sight has deepened enough to specialize. Two ways to see:",
+      "paths": {
+        "deep_read": {"name": "Deep Read", "grants": "Read an object's layered history in light — the order of what happened to it, not just what it is. Stratigraphy of a thing.", "cannot": "Needs stillness and minutes; a hostile or hurried scene forecloses it."},
+        "wide_read": {"name": "Wide Read", "grants": "Sweep a whole space at once — every seam, hollow, and hidden thing in a room resolves in one look.", "cannot": "Breadth costs depth — you see that a thing is there, not its history; once per location per visit."}
+      }
+    },
+    "sonic_resonance": {
+      "atRank": 3,
+      "prompt": "Sonic Resonance can be tuned toward force or toward finesse:",
+      "paths": {
+        "shatter": {"name": "Shattering Note", "grants": "Drive resonance to failure — crack stone, shatter a seal, bring a structure down at its weak point.", "cannot": "Destructive, loud, uncontrolled once released; never subtle, never repairs."},
+        "sustain": {"name": "Sustained Chord", "grants": "Hold a resonance steady and long — brace a failing structure, keep a mechanism cycling, carry a signal far.", "cannot": "Holding costs continuously; cannot break, only bear."}
+      }
+    },
+    "greenlore": {
+      "atRank": 3,
+      "prompt": "The old recipes run two directions:",
+      "paths": {
+        "healer": {"name": "The Mending Hand", "grants": "Brews that stabilize the dying, clear deep affliction, and knit what should not knit. The healer's road.", "cannot": "Never a weapon; the strongest mends exact a cost the GM names."},
+        "apothecary": {"name": "The Bitter Cabinet", "grants": "Read and craft the whole spectrum — sleep, clarity, palsy, worse. What heals and what harms share a shelf.", "cannot": "Knowing is not permission the world grants freely; reputation follows the cabinet."}
+      }
+    },
+    "quiet_step": {
+      "atRank": 3,
+      "prompt": "The unseen errand specializes toward solitude or company:",
+      "paths": {
+        "ghost": {"name": "The Ghost Road", "grants": "Move through the most-watched places as if the watch blinked; once a day break line-of-sight and simply be gone.", "cannot": "Solitary — the Ghost Road carries only you; Precursor sensors don't blink."},
+        "shepherd": {"name": "The Quiet Shepherd", "grants": "Move a small group unseen using your reads — bring others through where only you could go.", "cannot": "A group is louder than one; the more you carry the thinner the cover."}
+      }
+    },
+    "latticespeak": {
+      "atRank": 3,
+      "prompt": "Fluency in the old tongue turns toward listening or toward command:",
+      "paths": {
+        "diplomat": {"name": "The Long Parley", "grants": "Negotiate a live remnant toward dormancy; talk a waking system back to sleep. The peacemaker's fluency.", "cannot": "Parley is not control; a system can refuse, and refusing costs you standing with it."},
+        "operator": {"name": "The Sure Hand", "grants": "Ask a Precursor system to perform its function reliably, repeatably — make the old machinery WORK for you.", "cannot": "Operating deepens the drift most of all; what you run, you answer for."}
+      }
+    }
+  }
+}

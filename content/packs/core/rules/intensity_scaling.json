@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "note": "Variable-power ability use (Erik ratified 2026-07-06: three steps; Surge carries backlash; auto-default = minimum intensity the task needs via the sense filter). Conserve/Standard/Surge scale energy and effect. Surge risks backlash (reuse the existing novel-use/backlash system). AUTO never selects Surge — surge is always a deliberate player choice. Selectable via the action intensity dial. Tunable; shape ratified, numbers Aevi's.",
+  "steps": {
+    "conserve": {"energyMult": 0.6, "effectMod": -8,  "backlashChance": 0.0,  "note": "Lower energy, reduced effect — easy tasks or husbanding energy."},
+    "standard": {"energyMult": 1.0, "effectMod": 0,   "backlashChance": 0.0,  "note": "The ability as written."},
+    "surge":    {"energyMult": 1.6, "effectMod": 10,  "backlashChance": 0.25, "note": "Amplified reach/scope/bonus; backlash risk. Never auto-selected."}
+  },
+  "autoRule": "Engine picks the minimum intensity that clears the task difficulty via the sense filter: trivial/easy -> conserve, standard -> standard, hard-but-doable -> standard. NEVER auto-surge. Player may override to any step at the action point.",
+  "surgeBacklashByTier": {
+    "1": {"health": 3,  "energy": 4},
+    "2": {"health": 4,  "energy": 5},
+    "3": {"health": 6,  "energy": 7},
+    "4": {"health": 9,  "energy": 10},
+    "5": {"health": 12, "energy": 14}
+  },
+  "surgeBacklashNote": "Backlash chance rises on a failed/marginal roll. On backlash the wielder pays by the ability's Tier. High-tier surges (Foreclose T4, Unmake Seal/Hold the Aperture T5) are genuinely dangerous — fits their peril; a surged Foreclose that backlashes hurts.",
+  "floors": "Conserve cannot drop energy below 2 or take a rank-1 ability below baseline effect. Surge cannot exceed 2x standard energy after rounding. Intensity applies to the ROLL/effect, never bypasses attribute gates or levelReq."
+}

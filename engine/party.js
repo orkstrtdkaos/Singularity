@@ -116,17 +116,22 @@ export async function listScenesAt(locationId) {
 
 /** Push a scene mutation with SHA-conflict merge-retry. mutate(freshScene) must be
  *  idempotent (mergeBeat/addMember/setEncounterState all are). */
+let _lastSceneError = null;
+/** The reason the last shared-scene push failed (e.g. "GH_PUT_403"), or null. */
+export function lastSceneError() { return _lastSceneError; }
+
 export async function pushSceneWithMerge(sceneId, mutate, seedScene = null) {
-  if (!syncEnabled()) return null;
+  if (!syncEnabled()) { _lastSceneError = "sync not configured"; return null; }
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const remote = (await fetchRepoJSON(scenePath(sceneId))) || seedScene;
-      if (!remote) return null;
+      if (!remote) { _lastSceneError = "no scene and no seed"; return null; }
       const next = mutate(remote);
       await pushOwnedFile(scenePath(sceneId), next, `scene: ${sceneId}`);
+      _lastSceneError = null;
       return next;
     } catch (err) {
-      if (attempt === 2) { console.warn("[party] scene push failed:", err.message); return null; }
+      if (attempt === 2) { _lastSceneError = err.message; console.warn("[party] scene push failed:", err.message); return null; }
     }
   }
   return null;

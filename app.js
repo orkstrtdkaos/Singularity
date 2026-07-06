@@ -25,11 +25,11 @@ import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
-import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
+import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.2";
+const APP_VERSION = "1.6.3";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -257,17 +257,27 @@ function endEncounter(outcome) {
 
 // ---------- party (SNG-001 phase 1) ----------
 
+/** Turn a raw GitHub transport error into an actionable sentence for the player. */
+function syncErrorMessage(prefix) {
+  const e = lastSceneError() || "";
+  if (/403/.test(e)) return `${prefix}: your GitHub token can't WRITE to this repo. In GitHub → token settings, give it Contents: Read and write on the ${getSyncConfig().repo || "Singularity"} repo (classic tokens need the "repo" scope), then re-paste it in Settings.`;
+  if (/404/.test(e)) return `${prefix}: repo or path not found — check the owner and repo names in Settings.`;
+  if (/401/.test(e)) return `${prefix}: your GitHub token was rejected (expired or mistyped) — paste a fresh one in Settings.`;
+  if (/not configured/.test(e)) return `${prefix}: shared-world sync isn't set up — add your GitHub owner/repo/token in Settings first.`;
+  return `${prefix}${e ? " (" + e + ")" : ""}.`;
+}
+
 async function startPartyScene() {
   const stamp = new Date().toISOString().replace(/[:.]/g, "-");
   const scene = newSharedScene(character.currentLocationId, character, stamp);
   const pushed = await pushSceneWithMerge(scene.sceneId, s => s, scene);
-  if (!pushed) { alert("Could not create the shared scene (sync failed)."); return; }
+  if (!pushed) { alert(syncErrorMessage("Could not create the shared scene")); return; }
   enterPartyScene(pushed);
 }
 
 async function joinPartyScene(sceneId) {
   const joined = await pushSceneWithMerge(sceneId, s => addMember(s, character));
-  if (!joined) { alert("Could not join — the scene may be gone."); return; }
+  if (!joined) { alert(syncErrorMessage("Could not join the shared scene")); return; }
   enterPartyScene(joined);
 }
 

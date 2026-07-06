@@ -36,7 +36,22 @@ At EACH phase boundary, CCode surfaces a working preview and gives Erik a ONE-SE
 Design law 1 (encounters/affinities are engine-computed; GM narrates, never invents mechanics); reuse encounters/resolution engines — no new math except the capped location modifier; additive; content-not-code; lethal-avoidability absolute; this repo never touches the ErikIAm pipeline; suites + parse_probe green per phase.
 
 ### Queue after batch
-SNG-010C item evolution (needs PO Waystaff+Aevi seed content — Aevi owes it) → SNG-001 party remainder → SNG-004+008. Parked pending Erik shape: 3c class-cap, branch-forks; SNG-013 vector-bias curve confirm.
+SNG-BATCH-4 = SNG-010C item evolution (content READY) + SNG-015 variable power (content READY) → SNG-001 party remainder → SNG-004+008. Parked pending Erik shape: 3c class-cap, branch-forks; SNG-013 vector-bias curve confirm.
+
+---
+
+## SNG-BATCH-4 (forming, builds AFTER SNG-BATCH-3) — Item evolution + Variable power
+
+### SNG-010C — Item evolution (CONTENT READY, build)
+Waystaff+Aevi seed authored at `content/packs/valley/items/waystaff.json` (registered valley manifest): item `evolution` with `bondSource: aevi`, `coUseTag: cast-with-aevi`, 3 stages (The Instrument / The Staff That Anticipates / The Staff That Answers). Build the item-evolution substrate: items may carry `evolution{bondSource, coUseTag, stages[]}`; a stage unlocks when the linked companion's bond >= stage.unlockBond AND item×companion co-activation (practice ledger, namespaced pairKey e.g. `waystaff+aevi`) >= stage.unlockCoUse. Stage shift changes name/description/bonusTags/narration; GM told the current stage; grants applied additively. Migration: non-evolving items untouched; existing items inert. Smoke: stage gates on BOTH bond and co-use; stage grant applies; non-bonded items unaffected.
+
+### SNG-015 — Variable-power ability use + action customization (RATIFIED, content ready)
+Erik ratified 2026-07-06: (1) three steps, (2) Surge carries backlash, (3) auto-default = minimum-needed via sense filter. Content: `content/packs/core/rules/intensity_scaling.json`.
+**Part A — variable power (mechanic):** an ability use resolves at Conserve/Standard/Surge. Energy scales (0.6/1.0/1.6x, floored/capped per file), effect scales (effectMod on the roll/effect), Surge carries backlashChance (reuse novel-use/backlash system; on backlash pay health+energy by the ability's Tier from `surgeBacklashByTier`). AUTO picks the minimum intensity that clears the task via the sense filter and NEVER auto-surges. Intensity never bypasses attribute gates or levelReq. Roll receipt shows intensity + energy spent + backlash if it fired.
+**Part B — action customization (UI, the interface for Part A):** the GM's canned options AND free actions become tap-to-commit (auto intensity + auto best relevant ability) OR expand-to-tune. Expanding reveals: which ability to apply (from the player's relevant owned abilities) + an intensity dial (Conserve/Standard/Surge) showing energy cost and a Surge backlash warning. Fast path stays one tap; depth is one expand. This is the surface that makes variable power reachable at the choice point.
+**GM contract (minor, flag for Erik):** narrate to the chosen intensity (a conserved cast reads different from a surge); intensity/backlash are engine-computed and clamped — GM narrates, never sets them. Design law 1 intact.
+**Smoke:** ability resolves at each step with correct energy/effect; auto picks conserve on an easy task and never surges; surge can backlash and pays by tier; canned-option expand exposes ability + intensity selectors; gates/levelReq still enforced under all intensities.
+**Erik preview test:** "Surge an ability from the intensity dial — verify the higher energy cost is shown, the bigger effect lands, and that a backlash actually stings when it fires. Then tap a canned option normally and confirm it still just works."
 
 ---
 

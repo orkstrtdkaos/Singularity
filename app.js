@@ -26,9 +26,10 @@ import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath } from "./engine/party.js";
+import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.1";
+const APP_VERSION = "1.6.2";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -864,6 +865,50 @@ async function onFreeform(text) {
   });
 }
 
+/** Dev/test flag: ?dev=1 in the URL or localStorage singularity.dev="1". Gates the
+ *  encounter test panel — never shown in normal play. */
+function isDev() {
+  try { return new URLSearchParams(location.search).has("dev") || localStorage.getItem("singularity.dev") === "1"; }
+  catch { return false; }
+}
+
+/** Fire a specific random encounter (entry object) or a forced flavor (dev). Registers
+ *  any synthesized encounter def, then either opens a GM scene (narrative/opposed) or
+ *  renders an engine-built OFFER beat with a guaranteed decline path (challenge/duel). */
+async function fireEncounter(entryOrFlavor, { dev = false, news = [] } = {}) {
+  const table = CONTENT.randomEncounters;
+  if (!table) return false;
+  const entry = typeof entryOrFlavor === "string"
+    ? pickEncounter(table, hereNow(), Math.random, { flavor: entryOrFlavor, ignoreDanger: dev })
+    : entryOrFlavor;
+  if (!entry) { if (dev) renderPlay(character.activeScene?.lastTurn || null, { aside: `No ${entryOrFlavor} encounter fits here.` }); return false; }
+  const offer = buildOffer(entry, character, fullCatalog(), CONTENT.rules);
+  if (offer.def) {
+    character.customEncounters = character.customEncounters || {};
+    character.customEncounters[offer.def.id] = offer.def;
+    saveCharacter(character);
+  }
+  if (offer.routing === "narrative" || offer.routing === "opposed") {
+    await startScene(offer.prompt, news, dev ? `🔧 test: ${entry.flavor} (${entry.id})` : null);
+    return true;
+  }
+  // deterministic offer beat — decline/flee is on the table BEFORE engagement (SNG-002b)
+  const offerTurn = { narration: offer.narration, choices: offer.choices, sceneEnded: false };
+  if (character.activeScene) { character.activeScene.lastTurn = offerTurn; saveCharacter(character); }
+  renderPlay(offerTurn, { newsFlash: news, playerBeat: dev ? { label: `🔧 test encounter: ${entry.flavor} (${entry.id})` } : null });
+  return true;
+}
+
+/** On a trigger (travel/rest/enter/tick), maybe roll one encounter. Returns true if
+ *  one fired (so the caller skips the normal arrival/rest scene). */
+async function maybeRandomEncounter(trigger, news = []) {
+  const table = CONTENT.randomEncounters;
+  if (!table || !rollTrigger(trigger, hereNow(), table, Math.random)) return false;
+  const entry = pickEncounter(table, hereNow(), Math.random, {});
+  if (!entry) return false;
+  return fireEncounter(entry, { news });
+}
+
 async function travelTo(locId) {
   if (busy) return;
   character.currentLocationId = locId;
@@ -875,6 +920,7 @@ async function travelTo(locId) {
   notePerception(character, locId, CONTENT.locations[locId], { visited: true, usedAbilityIds: [] }, CONTENT.rules);
   saveCharacter(character);
   const news = await maybeTick();
+  if (await maybeRandomEncounter("onTravel", news)) return; // the road had something to say
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`, news);
 }
 
@@ -895,6 +941,7 @@ async function rest(kind = "sleep") {
   advanceClock(character.clock, r.hours);
   saveCharacter(character);
   const news = await maybeTick();
+  if (await maybeRandomEncounter("onRest", news)) return; // the night was not quiet
   startScene(`(The character takes a real night's rest here — camp, inn, or quiet corner. Narrate the rest briefly, then present what's happening when they get up. ${r.hours} hours have passed; do not grant additional energy — the engine already restored them.)`, news);
 }
 
@@ -1667,6 +1714,12 @@ function renderPlay(turn, opts = {}) {
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
       <button id="gambit-open" class="mode-toggle" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
+  if (isDev()) {
+    const flavors = ["beneficial", "benign", "beautiful", "dangerous", "theft", "chase", "fight"];
+    main += `<div class="dev-panel"><div class="dev-title">🔧 Test encounters (dev only)</div><div class="dev-btns">${
+      flavors.map(f => `<button class="dev-fire" data-fire="${f}">${f}</button>`).join("")
+    }</div><div class="dev-hint">Fires the flavor here (danger gate bypassed for testing). Fight/chase/dangerous show a decline/flee choice before anything starts.</div></div>`;
+  }
   main += `</div>`;
 
   chrome(`<div class="layout">${sheet}${main}</div>`);
@@ -1690,6 +1743,7 @@ function renderPlay(turn, opts = {}) {
     };
   }
   for (const btn of app.querySelectorAll("[data-travel]")) btn.onclick = () => travelTo(btn.dataset.travel);
+  for (const btn of app.querySelectorAll("[data-fire]")) btn.onclick = () => { if (!busy) fireEncounter(btn.dataset.fire, { dev: true }); };
   for (const btn of app.querySelectorAll("[data-join]")) btn.onclick = async () => {
     if (busy) return;
     const c = CONTENT.companions[btn.dataset.join];

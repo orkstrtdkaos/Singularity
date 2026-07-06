@@ -19,6 +19,7 @@ import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitRes
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "../engine/codex.js";
 import { sceneImage, locationImage } from "../engine/art.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -812,6 +813,76 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // ungated + under cap learns fine
   const room = { origin: "valley", level: 3, skillPoints: 3, abilities: [{ abilityId: "wayfinding", level: 1 }], subAttributes: {}, customAbilities: {} };
   check("ungated learn under cap succeeds", learnAbility(room, "greenlore", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);
+}
+
+// --- SNG-BATCH-3 Phase 1: random encounters (SNG-014) ---
+{
+  const table = JSON.parse(readFileSync(join(root, "content/packs/valley/events/random_encounters.json"), "utf8"));
+  const safe = { id: "millbrook", tags: ["village", "farming", "riverside"], dangerLevel: 0, communityId: "valley.millbrook" };
+  const zone = { id: "disputed_zone_fringe", tags: ["wilds", "interference", "dangerous"], dangerLevel: 3 };
+
+  // trigger chances respected: p=0 always fires (chance>0), p=1 never fires
+  check("trigger fires when roll below chance", rollTrigger("onTravel", zone, table, () => 0.0) === true);
+  check("trigger declines when roll above chance", rollTrigger("onTravel", safe, table, () => 0.999) === false);
+  check("safe/settled rest never triggers", rollTrigger("onRest", safe, table, () => 0.0) === false);
+  check("wilderness rest can trigger", rollTrigger("onRest", zone, table, () => 0.0) === true);
+
+  // danger weighting: peaceful flavors weigh higher in safe places, perilous higher in danger
+  check("peaceful flavor heavier in safe place", flavorMultiplier("beautiful", 0) > flavorMultiplier("beautiful", 4));
+  check("perilous flavor heavier in danger", flavorMultiplier("fight", 4) > flavorMultiplier("fight", 0));
+  check("grace floor: peaceful never zero even in danger", flavorMultiplier("beneficial", 4) >= 1);
+
+  // eligibility: a fight (minDanger 3) is NOT eligible in a danger-0 place, IS in danger-3
+  const fightEntry = table.encounters.find(e => e.id === "re_raider_duel");
+  check("fight ineligible in safe place", isEligible(fightEntry, safe) === false);
+  check("fight eligible in dangerous place", isEligible(fightEntry, zone) === true);
+  check("dev ignoreDanger overrides the gate", isEligible(fightEntry, safe, { ignoreDanger: true }) === true);
+
+  // flavor spread: every authored flavor is reachable via a forced dev pick (ignoreDanger)
+  for (const flavor of table.flavors) {
+    const picked = pickEncounter(table, safe, () => 0.0, { flavor, ignoreDanger: true });
+    check("dev trigger fires flavor: " + flavor, !!picked && picked.flavor === flavor);
+  }
+
+  // routing dispatches correctly
+  const charWith = ids => ({ abilities: ids.map(id => ({ abilityId: id, level: 1 })) });
+  const bare = charWith([]);
+  const narr = buildOffer(table.encounters.find(e => e.flavor === "beneficial" && e.routing === "narrative"), bare, {}, rules);
+  check("narrative routes to a GM prompt", narr.routing === "narrative" && typeof narr.prompt === "string" && narr.prompt.length > 20);
+  const opp = buildOffer(table.encounters.find(e => e.routing === "opposed"), bare, {}, rules);
+  check("opposed routes to a prompt naming a check", opp.routing === "opposed" && /check/i.test(opp.prompt));
+  const duel = buildOffer(fightEntry, bare, {}, rules);
+  check("duel routes to a duel def", duel.routing === "duel" && duel.def && duel.def.type === "duel");
+  const chase = buildOffer(table.encounters.find(e => e.id === "re_pursuit_flee"), bare, {}, rules);
+  check("chase routes to a challenge def", chase.routing === "challenge" && chase.def && chase.def.type === "challenge" && chase.def.stages.length === 3);
+
+  // synthesized duel is a valid, non-lethal, avoidable stat block
+  const dd = synthesizeDuelDef(fightEntry);
+  check("duel def non-lethal + avoidable", dd.lethal === false && dd.avoidable === true);
+  check("duel opponent health in 3..8", dd.opponent.health >= 3 && dd.opponent.health <= 8);
+  check("duel yieldAt below full health", dd.opponent.yieldAt >= 0 && dd.opponent.yieldAt < dd.opponent.health);
+
+  // HARD guardrail: every lethal-capable encounter's offer carries a decline path
+  for (const e of table.encounters.filter(canIncapacitate)) {
+    const offer = buildOffer(e, bare, {}, rules);
+    const hasDecline = (offer.choices || []).some(c => (c.intentTags || []).includes("retreat") && c.trivial) || offer.avoidable;
+    check("avoid path present for lethal-capable: " + e.id, !!hasDecline);
+    // engine-built offers put the decline BEFORE engagement (a real choice, not mid-fight)
+    if (offer.choices) check("decline is a real choice for: " + e.id, offer.choices.some(c => c.trivial && (c.intentTags||[]).includes("retreat")));
+  }
+
+  // peaceful-out ability resolves the encounter without a fight
+  const beastCreature = table.encounters.find(e => e.id === "re_creature_chase");
+  const withBeast = buildOffer(beastCreature, charWith(["beastfriend"]), { beastfriend: { name: "Beastfriend", axes: {} } }, rules);
+  check("peaceful-out choice appears when ability owned", withBeast.choices.some(c => c.abilityId === "beastfriend"));
+  const withoutBeast = buildOffer(beastCreature, bare, {}, rules);
+  check("no peaceful-out choice when ability not owned", !withoutBeast.choices.some(c => c.abilityId === "beastfriend"));
+
+  // mediator can defuse a fight
+  const medFight = buildOffer(fightEntry, charWith(["mediators_tongue"]), { mediators_tongue: { name: "Mediator's Tongue" } }, rules);
+  check("mediator defuse offered on a fight", medFight.choices.some(c => c.abilityId === "mediators_tongue"));
+
+  check("dangerOf clamps undefined to 0", dangerOf({}) === 0 && dangerOf({ dangerLevel: 9 }) === 4);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -26,6 +26,9 @@ export async function loadContent() {
   if (gatesPath) { try { attributeGates = await fetchJSON(`content/packs/core/${gatesPath}`); } catch { /* optional */ } }
   const capPath = (index.provides.rules || []).find(r => r.includes("skill_capacity"));
   if (capPath) { try { skillCapacity = await fetchJSON(`content/packs/core/${capPath}`); } catch { /* optional */ } }
+  let locationAffinities = { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} };
+  const affPath = (index.provides.rules || []).find(r => r.includes("location_affinities"));
+  if (affPath) { try { locationAffinities = await fetchJSON(`content/packs/core/${affPath}`); } catch { /* optional */ } }
 
   const abilities = {};
   for (const path of index.provides.abilities) {
@@ -50,9 +53,11 @@ export async function loadContent() {
     npcs[npc.id] = npc;
   }
   const events = {};
+  let randomEncounters = null;
   for (const path of valley.provides.events) {
     const ev = await fetchJSON(`content/packs/valley/${path}`);
-    events[ev.id] = ev;
+    if (ev.id) events[ev.id] = ev;
+    else if (path.includes("random_encounters")) randomEncounters = ev; // SNG-014 table (no id)
   }
   const companions = {};
   for (const path of valley.provides.companions || []) {
@@ -71,7 +76,7 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, emergence, attributeGates, skillCapacity, abilities, items, locations, npcs, events, companions, encounters, lore, region, startingLocation: valley.startingLocation };
+  return { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
 }
 
 async function fetchJSON(path) {

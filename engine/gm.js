@@ -60,7 +60,7 @@ The "scene" field is REQUIRED every turn: carry forward everything still true fr
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail }) {
+export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance }) {
   const parts = [];
   parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
   if (location.questSeeds?.length) parts.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
@@ -73,6 +73,10 @@ export function buildTurnContext({ character, location, region, lore, rules, res
   if (lore) parts.push(`## LORE (authoritative)\n${lore}`);
   if (region?.activeEvents?.length) parts.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
   if (newsDetail) parts.push(`## RECENT NEWS in the valley (rumors NPCs may repeat; things that happened while the character was elsewhere)\n${newsDetail}`);
+  if (itemAdvance) parts.push(`## AN ITEM WAKES (narrate this shift into the scene — a real, felt change in the object)
+${itemAdvance}`);
+  if (evolvedItemsDetail) parts.push(`## LIVING GEAR (evolving items the character carries — honor the current stage's character; never advance a stage yourself, the engine gates it)
+${evolvedItemsDetail}`);
   if (factsDetail) parts.push(`## ESTABLISHED FACTS (authoritative, persistent — never contradict; these are TRUE regardless of how many scenes have passed)\n${factsDetail}`);
   parts.push(`## CHARACTER\n${characterSheetSummary(character)}`);
   if (abilityLawDetail) parts.push(`## ABILITY LAW (rule 2 — what powers can, cannot, and are not for at current rank)\n${abilityLawDetail}`);

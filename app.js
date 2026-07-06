@@ -26,11 +26,12 @@ import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
+import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.4";
+const APP_VERSION = "1.6.5";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -190,6 +191,7 @@ function migrate(c) {
   ensureBonds(c);
   ensurePractice(c);
   ensureFacts(c);
+  refreshEvolvingItems(c, CONTENT.items); // SNG-010C: stamp current evolution stage on held evolving items
   if (!c.precursorAccess) c.precursorAccess = [];
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
@@ -535,7 +537,7 @@ async function startScene(prompt = "(Scene opening — set the scene where the c
   if (result) renderPlay(result.turn, { degraded: result.degraded, newsFlash: news, aside });
 }
 
-async function runGM({ resolution, playerInput, exactWords }) {
+async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   busy = true;
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
@@ -557,6 +559,8 @@ async function runGM({ resolution, playerInput, exactWords }) {
     abilityLawDetail: abilitiesForGM(character, fullCatalog()),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
     factsDetail: factsForGM(character),
+    evolvedItemsDetail: evolvedItemsForGM(character, CONTENT.items),
+    itemAdvance: (itemAdvance || []).map(a => `${a.itemName} has woken to Stage ${a.stage} "${a.stageName}": ${a.narrationHints}${a.grant ? ` (${a.grant})` : ""}`).join("; ") || null,
     opLossNote: character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex/FACT updates that occurred last beat — INCLUDING any name reveal (revealName) or established fact the fiction set. The narration advanced; the state did not." : null,
     emergenceDetail: emergenceNoticeForGM(character, CONTENT.emergence, CONTENT.rules),
     perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
@@ -722,6 +726,7 @@ function affinityFor(action, location = hereNow()) {
 
 async function onChoice(choice) {
   if (busy) return;
+  let itemsAdvanced = [];
   const location = hereNow();
   const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
 
@@ -813,6 +818,8 @@ async function onChoice(choice) {
   {
     const usedIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
     if (usedIds.length) recordUse(character, usedIds);
+    // SNG-010C: a cast channeled with a bond-source companion present wakes evolving gear
+    itemsAdvanced = noteCoUseAndRefresh(character, { usedAbilityIds: usedIds, activeCompanionIds: activeCompanions(character, CONTENT.companions).map(c => c.id), catalog: CONTENT.items });
     if (usedIds.length) notePerception(character, character.currentLocationId, hereNow(), { visited: true, usedAbilityIds: usedIds }, CONTENT.rules);
     recordAspirationProgress(character, action, fullCatalog());
     // SNG-011: precursor peril — using these changes you (extra alignment drift along the ability's axes)
@@ -859,8 +866,8 @@ async function onChoice(choice) {
     }
   }
   renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, resolution } });
-  const result = await runGM({ resolution, playerInput: null, exactWords: choice.exactWords || null });
-  if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, resolution }, degraded: result.degraded });
+  const result = await runGM({ resolution, playerInput: null, exactWords: choice.exactWords || null, itemAdvance: itemsAdvanced });
+  if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, resolution }, degraded: result.degraded, itemsAdvanced });
 }
 
 async function onFreeform(text) {
@@ -1681,6 +1688,7 @@ function renderPlay(turn, opts = {}) {
       main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}</div>${locBits}`;
     }
   }
+  if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");
   if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
   if (opts.aside) main += `<div class="beat"><em>${opts.aside.split("\n").map(esc).join("<br>")}</em></div>`;
   if (opts.gmAside) main += `<div class="gm-aside">${opts.gmAside.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;

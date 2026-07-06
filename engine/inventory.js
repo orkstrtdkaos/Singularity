@@ -107,8 +107,8 @@ export function equipmentBonus(character, actionTags = [], rules) {
   const helpers = [];
   for (const item of character.inventory || []) {
     if ((item.bonusTags || []).some(t => actionTags.includes(t))) {
-      bonus += per;
-      helpers.push(item.name);
+      bonus += per + (item.evoStage ? (item.evoStage - 1) * (rules.baseChance.evoStageStep ?? 2) : 0);
+      helpers.push(item.evoStageName || item.name);
     }
   }
   return { bonus: Math.min(cap, bonus), helpers };

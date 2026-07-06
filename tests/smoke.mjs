@@ -21,6 +21,7 @@ import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "../engi
 import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
+import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -942,6 +943,59 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
 
   // total capped: even a max-stack type + vector can't run away (typeCap 12, vectorCap 10)
   check("type stack respects typeCap", Math.abs(typeAffinity({ tags: ["precursor"], spectrum: {} }, { abilityId: "latticespeak", comboAbilities: ["old_roads"], axes: {}, intentTags: [] }, table).bonus) <= 12);
+}
+
+// --- SNG-BATCH-4: item evolution (SNG-010C) ---
+{
+  const waystaff = JSON.parse(readFileSync(join(root, "content/packs/valley/items/waystaff.json"), "utf8")).items[0];
+  const catalog = { waystaff };
+  const mk = () => ({ inventory: [{ id: "waystaff", name: "Waystaff", bonusTags: ["resonance", "focus"] }], companionBonds: {}, practice: { uses: {}, coActivations: {}, aspirations: {} } });
+
+  // stage gates on BOTH bond AND co-use — neither alone advances past stage 1
+  const c1 = mk();
+  check("starts at stage 1", currentStage("waystaff", c1, catalog).stage === 1);
+  c1.companionBonds.aevi = 8; // bond alone (co-use 0) cannot reach stage 2
+  check("bond alone does not advance (co-use gate holds)", currentStage("waystaff", c1, catalog).stage === 1);
+  const c2 = mk();
+  recordCoUse(c2, "waystaff", "aevi", 20); // co-use alone (bond 0) cannot advance
+  check("co-use alone does not advance (bond gate holds)", currentStage("waystaff", c2, catalog).stage === 1);
+
+  // both met -> stage 2 (bond>=4, coUse>=6)
+  const c3 = mk();
+  c3.companionBonds.aevi = 4; recordCoUse(c3, "waystaff", "aevi", 6);
+  check("both gates met reaches stage 2", currentStage("waystaff", c3, catalog).stage === 2);
+  // stage 3 needs bond>=8 AND coUse>=14
+  c3.companionBonds.aevi = 8; recordCoUse(c3, "waystaff", "aevi", 8); // total 14
+  check("both gates met reaches stage 3", currentStage("waystaff", c3, catalog).stage === 3);
+
+  // refresh stamps evoStage + bonusTags (grant applies additively via tags)
+  const adv = refreshEvolvingItems(c3, catalog);
+  check("refresh stamps current stage", c3.inventory[0].evoStage === 3);
+  check("stage 3 bonusTags applied (answer tag)", c3.inventory[0].bonusTags.includes("answer"));
+  check("refresh reports the advance", adv.some(a => a.stage === 3));
+
+  // co-use only counts a cast when the bond-source companion is present
+  const c4 = mk(); c4.companionBonds.aevi = 4;
+  noteCoUseAndRefresh(c4, { usedAbilityIds: ["resonant_sight"], activeCompanionIds: [], catalog }); // aevi absent
+  check("no co-use when companion absent", coUseCount(c4, "waystaff", "aevi") === 0);
+  for (let i = 0; i < 6; i++) noteCoUseAndRefresh(c4, { usedAbilityIds: ["resonant_sight"], activeCompanionIds: ["aevi"], catalog });
+  check("co-use counts casts with companion present", coUseCount(c4, "waystaff", "aevi") === 6);
+  check("cast-with-companion advanced the staff to stage 2", c4.inventory[0].evoStage === 2);
+
+  // a non-evolving item is completely unaffected
+  const plain = { inventory: [{ id: "waterskin", name: "Waterskin", bonusTags: [] }], companionBonds: { aevi: 10 }, practice: { coUse: {} } };
+  check("non-evolving item has no stage", currentStage("waterskin", plain, catalog) === null);
+  check("refresh leaves non-evolving items alone", (refreshEvolvingItems(plain, catalog), plain.inventory[0].evoStage === undefined));
+
+  // GM sees the current stage + foreshadow
+  const gm = evolvedItemsForGM(c3, catalog);
+  check("GM told the current evolving-item stage", /Stage 3/.test(gm) && /Waystaff/.test(gm));
+
+  // escalating focus bonus: higher stage grants more equipment bonus on a matching action
+  const rulesEvo = { baseChance: { equipmentBonus: 5, equipmentBonusCap: 20, evoStageStep: 2 } };
+  const s1 = equipmentBonus({ inventory: [{ name: "Waystaff", bonusTags: ["resonance"], evoStage: 1 }] }, ["resonance"], rulesEvo).bonus;
+  const s3 = equipmentBonus({ inventory: [{ name: "Waystaff", bonusTags: ["resonance"], evoStage: 3 }] }, ["resonance"], rulesEvo).bonus;
+  check("evolved gear grants an escalating focus bonus", s3 > s1);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

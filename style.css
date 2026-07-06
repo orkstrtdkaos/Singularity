@@ -237,3 +237,6 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 
 /* SNG-013 location affinity — the "why" line under the roll receipt */
 .roll-affinity { font-size: 11px; color: #7ba05b; margin: 2px 0 4px 2px; font-style: italic; }
+
+/* SNG-010C evolving gear — the moment it wakes */
+.item-woke { color: #d4a24a; border-left: 2px solid #d4a24a; padding-left: 8px; font-size: 13px; }

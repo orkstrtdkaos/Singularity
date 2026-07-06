@@ -40,6 +40,12 @@ SNG-BATCH-4 = SNG-010C item evolution (content READY) + SNG-015 variable power (
 
 ---
 
+## BUILD ORDER (Aevi's call, Erik delegated 2026-07-06)
+1. **SNG-BATCH-3** — random encounters + location affinities (incl. ratified vector-bias + amplitude). Biggest felt-variety win; Erik finally tests combat via the on-demand fight trigger. Independent, runs first.
+2. **SNG-BATCH-4** — all the ability/progression changes together so they land coherently: SNG-010C item evolution (Waystaff) + SNG-015 variable power + action customization + the three ratified tradeoffs (soft class-cost 2x, branch forks, tier-slot capacity). Phased, each independently shippable.
+3. **SNG-016** — 12-axis skill-breadth: Aevi delivers a DESIGN PROPOSAL for Erik's direction first; no authoring until the axis map is agreed. Comes after the batches.
+Rationale: world-liveliness first (independent, testable, combat gap closed), then one coherent progression/ability arc, then the breadth rethink done deliberately.
+
 ## SNG-BATCH-4 (forming, builds AFTER SNG-BATCH-3) — Item evolution + Variable power
 
 ### SNG-010C — Item evolution (CONTENT READY, build)

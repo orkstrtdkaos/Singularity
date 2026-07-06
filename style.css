@@ -234,3 +234,6 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .dev-fire { font-size: 12px; padding: 4px 9px; border: 1px solid #a6795c; border-radius: 6px; background: #221912; color: #e6d8c8; cursor: pointer; text-transform: capitalize; }
 .dev-fire:hover { background: #3a291b; }
 .dev-hint { font-size: 11px; color: #8b7d6b; margin-top: 5px; }
+
+/* SNG-013 location affinity — the "why" line under the roll receipt */
+.roll-affinity { font-size: 11px; color: #7ba05b; margin: 2px 0 4px 2px; font-style: italic; }

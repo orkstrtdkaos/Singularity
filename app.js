@@ -26,10 +26,11 @@ import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
+import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.3";
+const APP_VERSION = "1.6.4";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -712,6 +713,13 @@ function applyTurn(turn, resolution) {
   }
 }
 
+/** SNG-013: the current location's flat + vector modifier for an action, plus its
+ *  player-facing receipt strings. Perceived-axis detail respects SNG-011 vectorsKnown. */
+function affinityFor(action, location = hereNow()) {
+  const vectorsKnown = character.placeMemory?.[location?.id]?.vectorsKnown || [];
+  return locationAffinity(location, action, CONTENT.locationAffinities, { vectorsKnown });
+}
+
 async function onChoice(choice) {
   if (busy) return;
   const location = hereNow();
@@ -786,8 +794,10 @@ async function onChoice(choice) {
   if (encD) action.difficulty = (action.difficulty || 0) + encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules, character);
-  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
+  const aff = affinityFor(action, location);
+  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus });
   if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
+  if (aff.bonus !== 0) resolution.locationAffinity = affinityReceipt(aff);
   if (disc) resolution.usedDiscovery = disc.name;
   // novel use: breakthrough or backlash — the engine decides, the GM narrates
   if (action.novel) {
@@ -1667,7 +1677,8 @@ function renderPlay(turn, opts = {}) {
     if (opts.playerBeat.resolution) {
       const r = opts.playerBeat.resolution;
       const helpers = r.equipHelpers?.length ? ` · aided by ${r.equipHelpers.map(esc).join(", ")}` : "";
-      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}</div>`;
+      const locBits = r.locationAffinity?.length ? `<div class="roll-affinity">${r.locationAffinity.map(esc).join(" · ")}</div>` : "";
+      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}</div>${locBits}`;
     }
   }
   if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
@@ -1695,7 +1706,8 @@ function renderPlay(turn, opts = {}) {
         action.subAttribute = SUBS.includes(c.subAttribute) ? c.subAttribute : null;
         const equip = equipmentBonus(character, action.tags, rules);
         const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules, character);
-        const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus });
+        const aff = affinityFor(action, location);
+        const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus });
         const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
         if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
       }

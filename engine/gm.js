@@ -114,6 +114,7 @@ ${encounterDetail}`);
     if (resolution.discoveryEligible) block += `\nDISCOVERY-ELIGIBLE: narrate the breakthrough and return the "discovery" field naming the new technique.`;
     if (resolution.usedDiscovery) block += `\nUsing discovered technique: ${resolution.usedDiscovery} — earned skill, narrate with confidence.`;
     if (resolution.meditation) block += `\nMEDITATION (engine-applied): +${resolution.meditation.energy} energy restored — narrate the centering; do not grant additional energy.`;
+    if (resolution.locationAffinity?.length) block += `\nLOCATION AFFINITY (engine-applied — narrate why THIS place helped or resisted): ${resolution.locationAffinity.join("; ")}`;
     parts.push(block);
   }
   if (exactWords) parts.push(`## PLAYER'S EXACT WORDS (honor these specifics in the narration — the resolution says whether it worked; these say what was actually attempted, who to address, what to watch, how to act)\n${exactWords}`);

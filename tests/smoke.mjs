@@ -20,6 +20,7 @@ import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSu
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "../engine/codex.js";
 import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
+import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -883,6 +884,64 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("mediator defuse offered on a fight", medFight.choices.some(c => c.abilityId === "mediators_tongue"));
 
   check("dangerOf clamps undefined to 0", dangerOf({}) === 0 && dangerOf({ dangerLevel: 9 }) === 4);
+}
+
+// --- SNG-BATCH-3 Phase 2: location affinities (SNG-013) ---
+{
+  const table = JSON.parse(readFileSync(join(root, "content/packs/core/rules/location_affinities.json"), "utf8"));
+  const forge = { id: "smithy", tags: ["forge", "workshop"], spectrum: {} };
+  const wild = { id: "wilds", tags: ["wilds", "no-law"], spectrum: {} };
+  const archive = { id: "archive_hollow", tags: ["ruin", "archive"], spectrum: { concrete_abstract: 0.6, falsehood_truth: 0.4, mechanical_spiritual: -0.3 } };
+
+  // TYPE affinity: only applies in a tagged location, only to matching skills/attrs
+  const tinker = { attribute: "practical", abilityId: "tinkers_hand", axes: {}, intentTags: [] };
+  check("type bonus applies for matching ability in tagged place", typeAffinity(forge, tinker, table).bonus === 8);
+  check("type bonus zero for same ability in an untagged place", typeAffinity(wild, tinker, table).bonus === 0);
+  const craftAct = { attribute: "craft", subAttribute: "craft", axes: {}, intentTags: [] };
+  check("type bonus via attr_ key (forge craft)", typeAffinity(forge, craftAct, table).bonus === 4);
+
+  // tag aliasing: 'wilds' -> 'wild'; wayfinding helped, a social act hindered
+  const wayfind = { attribute: "practical", abilityId: "wayfinding", axes: {}, intentTags: [] };
+  check("aliased tag grants wilderness bonus", typeAffinity(wild, wayfind, table).bonus === 8);
+  const socialAct = { attribute: "social", subAttribute: "presence", axes: {}, intentTags: [] };
+  check("wild penalizes social", typeAffinity(wild, socialAct, table).bonus === -3);
+
+  // tag alias maps freeform ruin tags in a real location
+  const stonewise = { attribute: "mental", abilityId: "stonewise", axes: {}, intentTags: [] };
+  check("real ruin location grants stonewise", typeAffinity(archive, stonewise, table).bonus === 8);
+
+  // VECTOR alignment: aligned axis eases, opposed hardens, capped ±10
+  const alignedAct = { axes: { concrete_abstract: 0.5 } };   // matches archive's +0.6
+  const opposedAct = { axes: { concrete_abstract: -0.5 } };  // opposes it
+  const va = vectorAffinity(archive, alignedAct, table);
+  const vo = vectorAffinity(archive, opposedAct, table);
+  check("aligned axis eases the roll (positive)", va.bonus > 0);
+  check("opposed axis hardens the roll (negative)", vo.bonus < 0);
+  // baseline (unamplified) location caps at ±10
+  const plain = { id: "plainfield", tags: ["meadow"], spectrum: { concrete_abstract: 1, falsehood_truth: 1 } };
+  check("baseline vector modifier never exceeds +10", vectorAffinity(plain, { axes: { concrete_abstract: 1, falsehood_truth: 1 } }, table).bonus <= 10);
+  check("baseline vector modifier never below -10", vectorAffinity(plain, { axes: { concrete_abstract: -1, falsehood_truth: -1 } }, table).bonus >= -10);
+  // Aevi amplitude: a charged place (archive_hollow x2.0) swings past baseline, clamped <= 24
+  const ampBonus = vectorAffinity(archive, { axes: { concrete_abstract: 1, falsehood_truth: 1 } }, table).bonus;
+  check("amplified location swings past baseline cap", ampBonus > 10 && ampBonus <= 24);
+  check("archive_hollow effective cap is 20 (baseline 10 x 2.0)", vectorAffinity(archive, { axes: {} }, table).cap === 20);
+  // a weak axis (below strongThreshold) is NOT felt
+  const weakPlace = { spectrum: { chaos_order: 0.2 } };
+  check("weak axis (< threshold) contributes nothing", vectorAffinity(weakPlace, { axes: { chaos_order: 1 } }, table).bonus === 0);
+
+  // combined + receipt
+  const combined = locationAffinity(archive, { attribute: "mental", abilityId: "stonewise", axes: { concrete_abstract: 0.5 }, intentTags: [] }, table, { vectorsKnown: ["concrete_abstract"] });
+  check("combined folds type + vector", combined.bonus === combined.typeBonus + combined.vectorBonus && combined.typeBonus === 8 && combined.vectorBonus > 0);
+  const rc = affinityReceipt(combined);
+  check("receipt names the type bump", rc.some(b => /stonewise here/.test(b)));
+  check("receipt names a KNOWN aligned axis explicitly", rc.some(b => /aligned to/.test(b)));
+  // unknown axis -> vague honest reveal, never names the axis
+  const vague = locationAffinity(archive, { axes: { concrete_abstract: 0.5 }, intentTags: [] }, table, { vectorsKnown: [] });
+  const vagueRc = affinityReceipt(vague);
+  check("unperceived alignment stays vague", vagueRc.some(b => /the place favored this/.test(b)) && !vagueRc.some(b => /concrete/.test(b)));
+
+  // total capped: even a max-stack type + vector can't run away (typeCap 12, vectorCap 10)
+  check("type stack respects typeCap", Math.abs(typeAffinity({ tags: ["precursor"], spectrum: {} }, { abilityId: "latticespeak", comboAbilities: ["old_roads"], axes: {}, intentTags: [] }, table).bonus) <= 12);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

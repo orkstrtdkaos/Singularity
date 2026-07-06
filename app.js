@@ -26,12 +26,13 @@ import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
 import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
+import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.5";
+const APP_VERSION = "1.6.6";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -43,6 +44,8 @@ let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
+let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
+let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
 let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
@@ -745,6 +748,20 @@ async function onChoice(choice) {
     energyCost = choice.comboAbilities.reduce((sum, id) => sum + effectiveEnergyCost(fullCatalog()[id], character, CONTENT.rules), 0);
     abilityLevel = Math.min(...choice.comboAbilities.map(id => character.abilities.find(a => a.abilityId === id)?.level ?? 1));
   }
+  // SNG-015 variable power: only ability/combo uses scale. Player may set choice.intensity
+  // via the tune dial; otherwise AUTO picks the minimum intensity the task needs (never surge).
+  const usesAbility = !!(choice.abilityId || (choice.comboAbilities || []).length);
+  let intensity = "standard";
+  if (usesAbility) {
+    intensity = INTENSITIES.includes(choice.intensity) ? choice.intensity : null;
+    if (!intensity) {
+      const pAction = { label: choice.label, attribute: choice.attribute || "practical", subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null, axes: choice.axes || {}, difficulty: choice.difficulty || 0, tags: choice.intentTags || [], abilityLevel };
+      const pe = equipmentBonus(character, pAction.tags, CONTENT.rules).bonus + companionBonus(activeCompanions(character, CONTENT.companions), pAction.tags, CONTENT.rules, character).bonus + affinityFor(pAction, location).bonus;
+      const stdChance = successChance({ character, action: pAction, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: pe });
+      intensity = autoIntensity(stdChance, CONTENT.intensity);
+    }
+    if (energyCost != null) energyCost = scaledEnergy(energyCost, intensity, CONTENT.intensity);
+  }
   if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
   const action = {
     label: choice.label, attribute: choice.attribute || "practical",
@@ -800,9 +817,11 @@ async function onChoice(choice) {
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules, character);
   const aff = affinityFor(action, location);
-  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus });
+  const iMod = usesAbility ? effectMod(intensity, CONTENT.intensity) : 0;
+  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus + iMod });
   if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
   if (aff.bonus !== 0) resolution.locationAffinity = affinityReceipt(aff);
+  if (usesAbility) { resolution.intensity = intensity; resolution.energySpent = energyCost; }
   if (disc) resolution.usedDiscovery = disc.name;
   // novel use: breakthrough or backlash — the engine decides, the GM narrates
   if (action.novel) {
@@ -812,6 +831,12 @@ async function onChoice(choice) {
     } else if (resolution.degree === "crit_failure") {
       resolution.backlash = applyBacklash(character, CONTENT.rules);
     }
+  }
+  // SNG-015: a Surge that slips can bite — pay by the ability's Tier
+  if (usesAbility && intensity === "surge" && shouldBacklash("surge", resolution.degree, CONTENT.intensity, Math.random)) {
+    const surgedAb = fullCatalog()[choice.abilityId] || fullCatalog()[(choice.comboAbilities || [])[0]];
+    resolution.backlash = applySurgeBacklash(character, surgedAb, CONTENT.intensity);
+    resolution.surgeBacklash = true;
   }
   character.energy = applyEnergyCost(character, (choice.abilityId || (choice.comboAbilities || []).length > 1) ? energyCost : undefined, CONTENT.rules);
   // SNG-010: practice ledger — the single counting site
@@ -1685,7 +1710,9 @@ function renderPlay(turn, opts = {}) {
       const r = opts.playerBeat.resolution;
       const helpers = r.equipHelpers?.length ? ` · aided by ${r.equipHelpers.map(esc).join(", ")}` : "";
       const locBits = r.locationAffinity?.length ? `<div class="roll-affinity">${r.locationAffinity.map(esc).join(" · ")}</div>` : "";
-      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}</div>${locBits}`;
+      const intBit = r.intensity && r.intensity !== "standard" ? ` · <span class="intensity-${esc(r.intensity)}">${esc(r.intensity)}</span>${r.energySpent != null ? ` (${r.energySpent} energy)` : ""}` : "";
+      const blBit = r.surgeBacklash ? `<div class="roll-backlash">⚡ surge backlash: ${r.backlash.health} health, ${r.backlash.energy} energy</div>` : "";
+      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}${intBit}</div>${locBits}${blBit}`;
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");
@@ -1719,7 +1746,24 @@ function renderPlay(turn, opts = {}) {
         const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
         if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
       }
-      return `<button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>`;
+      // SNG-015 Part B: fast tap = auto intensity + default ability; ⚙ expand-to-tune
+      const canTune = !(c.trivial && !c.abilityId) && !c.encounterId && !c.emergenceId;
+      const gear = canTune ? `<button class="tune-toggle" data-tune="${i}" title="Tune which ability + how hard (Conserve / Standard / Surge)">⚙</button>` : "";
+      let panel = "";
+      if (canTune && tuneOpen === i) {
+        const owned = character.abilities.map(a => fullCatalog()[a.abilityId]).filter(Boolean);
+        const sel = tuneSel.abilityId;
+        const abChips = [`<button class="tune-ab ${!sel ? "sel" : ""}" data-tuneab="">raw (no ability)</button>`]
+          .concat(owned.map(ab => `<button class="tune-ab ${sel === ab.id ? "sel" : ""}" data-tuneab="${esc(ab.id)}">${esc(ab.name)}</button>`)).join("");
+        const baseCost = sel ? effectiveEnergyCost(fullCatalog()[sel], character, rules) : 0;
+        const intBtns = intensityOptions(baseCost, CONTENT.intensity).map(o =>
+          `<button class="tune-int intensity-${o.key} ${tuneSel.intensity === o.key ? "sel" : ""}" data-tunint="${o.key}">${o.label}${sel ? ` · ${o.energy}e` : ""}${o.warn ? " ⚠" : ""}</button>`).join("");
+        panel = `<div class="tune-panel"><div class="tune-row"><span class="tune-lbl">Apply</span>${abChips}</div>` +
+          `<div class="tune-row"><span class="tune-lbl">Intensity</span>${intBtns}</div>` +
+          (tuneSel.intensity === "surge" ? `<div class="tune-warn">⚡ Surge amplifies the effect but can backlash — the cost scales with the ability's Tier.</div>` : "") +
+          `<button class="tune-commit" data-tunecommit="${i}">Commit — ${esc(tuneSel.intensity)}${sel ? " " + esc(fullCatalog()[sel]?.name || sel) : ""}</button></div>`;
+      }
+      return `<div class="choice-wrap"><button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>${gear}${panel}</div>`;
     }).join("")}${(() => { const e = activeEnc(); if (!e) return ""; const d = e.def;
       const mk = (label, act, extra = "") => `<button class="choice enc-choice" data-encact="${act}"${extra}>${label}</button>`;
       let btns = "";
@@ -1758,6 +1802,23 @@ function renderPlay(turn, opts = {}) {
     for (const btn of app.querySelectorAll("[data-choice]")) {
       btn.onclick = () => onChoice(turn.choices[parseInt(btn.dataset.choice)]);
     }
+    // SNG-015 Part B: tune panel (ability + intensity) — re-renders to reflect selection
+    for (const btn of app.querySelectorAll("[data-tune]")) btn.onclick = (e) => {
+      e.stopPropagation();
+      const i = parseInt(btn.dataset.tune);
+      if (tuneOpen === i) { tuneOpen = null; }
+      else { tuneOpen = i; const c = turn.choices[i]; tuneSel = { abilityId: c.abilityId || undefined, intensity: "standard" }; }
+      renderPlay(turn, opts);
+    };
+    for (const btn of app.querySelectorAll("[data-tuneab]")) btn.onclick = () => { tuneSel.abilityId = btn.dataset.tuneab || undefined; renderPlay(turn, opts); };
+    for (const btn of app.querySelectorAll("[data-tunint]")) btn.onclick = () => { tuneSel.intensity = btn.dataset.tunint; renderPlay(turn, opts); };
+    for (const btn of app.querySelectorAll("[data-tunecommit]")) btn.onclick = () => {
+      const c = turn.choices[parseInt(btn.dataset.tunecommit)];
+      const merged = { ...c, abilityId: tuneSel.abilityId || null, intensity: tuneSel.intensity };
+      if (!tuneSel.abilityId) merged.comboAbilities = c.comboAbilities; // raw keeps any combo intent
+      tuneOpen = null;
+      onChoice(merged);
+    };
   }
   for (const btn of app.querySelectorAll("[data-encact]")) {
     btn.onclick = () => {

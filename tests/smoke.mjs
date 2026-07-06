@@ -22,6 +22,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
+import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -996,6 +997,52 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const s1 = equipmentBonus({ inventory: [{ name: "Waystaff", bonusTags: ["resonance"], evoStage: 1 }] }, ["resonance"], rulesEvo).bonus;
   const s3 = equipmentBonus({ inventory: [{ name: "Waystaff", bonusTags: ["resonance"], evoStage: 3 }] }, ["resonance"], rulesEvo).bonus;
   check("evolved gear grants an escalating focus bonus", s3 > s1);
+}
+
+// --- SNG-BATCH-4: variable power (SNG-015 Part A) ---
+{
+  const iRules = JSON.parse(readFileSync(join(root, "content/packs/core/rules/intensity_scaling.json"), "utf8"));
+
+  // energy scales per step, with floors/caps
+  check("conserve costs less energy than standard", scaledEnergy(20, "conserve", iRules) < 20);
+  check("standard = base energy", scaledEnergy(20, "standard", iRules) === 20);
+  check("surge costs more energy than standard", scaledEnergy(20, "surge", iRules) > 20);
+  check("conserve energy floor is 2", scaledEnergy(1, "conserve", iRules) === 2);
+  check("surge cannot exceed 2x standard", scaledEnergy(20, "surge", iRules) <= 40);
+
+  // effect scales: conserve reduces the roll, surge raises it
+  check("conserve effectMod is negative", effectMod("conserve", iRules) < 0);
+  check("surge effectMod is positive", effectMod("surge", iRules) > 0);
+
+  // AUTO picks the minimum intensity that clears the task, and NEVER surges
+  check("auto picks conserve on an easy task", autoIntensity(95, iRules) === "conserve");
+  check("auto picks standard on a hard-but-doable task", autoIntensity(50, iRules) === "standard");
+  let sawSurge = false;
+  for (let ch = 0; ch <= 100; ch += 5) if (autoIntensity(ch, iRules) === "surge") sawSurge = true;
+  check("auto NEVER selects surge at any difficulty", sawSurge === false);
+
+  // surge backlash pays by the ability's Tier (higher tier hurts more)
+  const t1 = { levelReq: 1 }, t4 = { levelReq: 4 };
+  check("surge backlash scales by tier", surgeBacklash(t4, iRules).health > surgeBacklash(t1, iRules).health);
+  const victim = { health: 30, energy: 30 };
+  const paid = applySurgeBacklash(victim, t4, iRules);
+  check("applied surge backlash deducts health + energy", victim.health < 30 && victim.energy < 30 && paid.health < 0);
+
+  // backlash only ever fires on a surge, and rises on a slipped roll
+  check("no backlash off-surge", shouldBacklash("standard", "crit_failure", iRules, () => 0) === false);
+  check("surge crit_failure very likely to backlash", shouldBacklash("surge", "crit_failure", iRules, () => 0.4) === true);
+  check("surge clean success rarely backlashes", shouldBacklash("surge", "crit_success", iRules, () => 0.2) === false);
+
+  // Part B dial descriptor exposes all three steps with energy + surge warning
+  const opts = intensityOptions(20, iRules);
+  check("dial exposes conserve/standard/surge", opts.map(o => o.key).join(",") === "conserve,standard,surge");
+  check("dial marks surge with a warning", opts.find(o => o.key === "surge").warn != null);
+  check("dial shows scaled energy per step", opts.find(o => o.key === "surge").energy > opts.find(o => o.key === "conserve").energy);
+
+  // intensity applies to roll/effect only — it does not alter the learn gate (SNG-013/BATCH-2)
+  // (gates/levelReq are enforced at learn/rank; a USE only involves an owned ability, so intensity
+  //  can never bypass them — asserted structurally: no intensity API touches gates)
+  check("INTENSITIES are exactly the three ratified steps", INTENSITIES.join(",") === "conserve,standard,surge");
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

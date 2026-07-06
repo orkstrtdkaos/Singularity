@@ -29,6 +29,9 @@ export async function loadContent() {
   let locationAffinities = { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} };
   const affPath = (index.provides.rules || []).find(r => r.includes("location_affinities"));
   if (affPath) { try { locationAffinities = await fetchJSON(`content/packs/core/${affPath}`); } catch { /* optional */ } }
+  let intensity = { steps: {} };
+  const intPath = (index.provides.rules || []).find(r => r.includes("intensity_scaling"));
+  if (intPath) { try { intensity = await fetchJSON(`content/packs/core/${intPath}`); } catch { /* optional */ } }
 
   const abilities = {};
   for (const path of index.provides.abilities) {
@@ -76,7 +79,7 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
+  return { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
 }
 
 async function fetchJSON(path) {

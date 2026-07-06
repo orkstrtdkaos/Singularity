@@ -240,3 +240,22 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 
 /* SNG-010C evolving gear — the moment it wakes */
 .item-woke { color: #d4a24a; border-left: 2px solid #d4a24a; padding-left: 8px; font-size: 13px; }
+
+/* SNG-015 variable power — tune panel + intensity + surge backlash */
+.choice-wrap { position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 4px; }
+.choice-wrap .choice { flex: 1; }
+.tune-toggle { background: #241c14; border: 1px solid #4a3c2c; color: #b7a488; border-radius: 6px; padding: 0 9px; cursor: pointer; font-size: 14px; align-self: stretch; }
+.tune-toggle:hover { background: #3a2d1e; color: #e6d8c8; }
+.tune-panel { flex-basis: 100%; margin: 4px 0 8px; padding: 8px; border: 1px solid #4a3c2c; border-radius: 8px; background: #1b140d; }
+.tune-row { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-bottom: 6px; }
+.tune-lbl { font-size: 11px; color: #8b7d6b; width: 62px; text-transform: uppercase; letter-spacing: 0.04em; }
+.tune-ab, .tune-int { font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid #4a3c2c; background: #241c14; color: #cdbfa8; cursor: pointer; }
+.tune-ab.sel, .tune-int.sel { border-color: #d4a24a; color: #f0e4d0; background: #33260f; }
+.tune-int.intensity-conserve.sel { border-color: #5aa8a0; }
+.tune-int.intensity-surge.sel { border-color: #d46a4a; }
+.tune-warn { font-size: 11px; color: #d46a4a; margin: 2px 0 6px; }
+.tune-commit { width: 100%; padding: 6px; border-radius: 6px; border: 1px solid #d4a24a; background: #33260f; color: #f0e4d0; cursor: pointer; font-size: 13px; text-transform: capitalize; }
+.tune-commit:hover { background: #4a3612; }
+.intensity-surge { color: #d46a4a; }
+.intensity-conserve { color: #5aa8a0; }
+.roll-backlash { font-size: 12px; color: #d46a4a; margin: 2px 0 4px 2px; }

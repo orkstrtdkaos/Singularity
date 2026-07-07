@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "wend_elder_saba",
+  "name": "Saba of the Long Road",
+  "role": "Dying Wend elder trying to reach a place she left as a child",
+  "homeLocation": "the_wend",
+  "communityId": "unspooling.wend",
+  "personality": {
+    "warmth": 0.8,
+    "trust": 0.5,
+    "candor": 0.8,
+    "patience": 0.9
+  },
+  "spectrum": {
+    "chaos_order": -0.4,
+    "emotional_logical": 0.4,
+    "death_life": 0.3
+  },
+  "voiceHints": "Warm, unhurried, tells the long version because the long version is the point. Carries every road she's walked in how she speaks. Dying and unafraid of it, only afraid of not finishing.",
+  "knowledge": [
+    "Every road, ford, and danger of the Unspooling and its marches",
+    "The Wend's ways of reading a stranger as kin or not",
+    "Where she's going, and why it matters more than her life"
+  ],
+  "wants": "To reach the place of her earliest memory before she dies, and to know the Wend will carry on without her.",
+  "fears": "Dying on the road with the last stretch unwalked, and leaving the road-family unheld.",
+  "reactsToReputation": {
+    "kind": "adopts them into the Wend on the spot",
+    "reliable": "trusts them to guide the family after",
+    "callous": "reads them true, and grieves the reading"
+  }
+}

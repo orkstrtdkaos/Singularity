@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "reachId": "the_riven_marches",
+  "note": "Locations of the violence_peace Reach, reached from the Gralloch's edge (violence-ward) or over the marches. Same asymmetry principle: violence_peace dominant, but the secondary axis rolls varied per node. Poles expressed as poleIntensity (independent), per the corrected model. Locations use full schema. Authored by Aevi (PO).",
+  "locations": [
+    {
+      "schemaVersion": 1, "id": "the_redline", "name": "The Redline", "regionId": "riven_marches", "communityId": "riven.redline",
+      "poleIntensity": {"violence": 0.75, "chaos": 0.3, "body": 0.3},
+      "spectrum": {"violence_peace": -0.75, "chaos_order": -0.3, "body_mind": -0.3},
+      "tags": ["marches", "warrior", "dangerous", "honor", "frontier"],
+      "connections": ["the_gralloch", "the_marchward"],
+      "descriptionSeed": "The violent frontier of the Marches \u2014 but honed, not feral. A warrior culture whose entire society is disciplined conflict: duels settle law, standing is won on the training-ground, and the Edge is taught to children as literacy. What rides with the violence here is BODY \u2014 the perfected physical, movement as language. Terrifying to a stranger, and rigorously fair once you learn the forms. Not the Gralloch's lawlessness; the opposite \u2014 violence with rules so strict they're almost peace.",
+      "loreRefs": ["the_twelve_reaches", "reach_violence_peace"],
+      "encounterFlavor": "Honed conflict as culture \u2014 a formal duel with witnesses, a child besting an adult by the forms, a challenge you can accept or honorably decline, a warrior reading your stance before your words.",
+      "dangerLevel": 4,
+      "encounterSeeds": ["re_raider_duel"],
+      "questSeeds": [
+        "You're challenged on arrival by custom \u2014 how you handle a duel you didn't want (fight, decline, turn it to a Contest) sets your whole standing in the Marches",
+        "A Marcher champion is being pushed toward a war they know is unjust; they want an outsider to give them a way to refuse without dishonor",
+        "The Edge is being taught to someone who shouldn't have it \u2014 a person whose rage the discipline can't hold; the Marchers are afraid of what they made"
+      ],
+      "map": {"x": 880, "y": 380}
+    },
+    {
+      "schemaVersion": 1, "id": "the_stillhold", "name": "The Stillhold", "regionId": "riven_marches", "communityId": "riven.stillhold",
+      "poleIntensity": {"peace": 0.85, "order": 0.4, "falsehood": 0.3},
+      "spectrum": {"violence_peace": 0.85, "chaos_order": 0.4, "falsehood_truth": -0.3},
+      "tags": ["marches", "peace", "walled", "sacred", "sealed"],
+      "connections": ["the_marchward"],
+      "descriptionSeed": "A walled city of absolute peace \u2014 no violence in living memory, no weapons, no raised voices. Beautiful, ordered, and subtly WRONG. What rides with the peace here is FALSEHOOD: the stillness rests on something no one is allowed to say, a load-bearing untruth so old it has become the air. The peace is real and the peace is a prison, and both are true. The counter-image of the Redline \u2014 and arguably the more dangerous place, because its foreclosure wears serenity.",
+      "loreRefs": ["the_twelve_reaches", "reach_violence_peace"],
+      "encounterFlavor": "Serene wrongness \u2014 a kindness with a warning under it, a question that makes everyone go quiet, a peace so total it reads as held breath, the slow realization that no one here is allowed to leave the subject alone.",
+      "dangerLevel": 2,
+      "questSeeds": [
+        "You're welcomed warmly and gently steered away from one question; following it is the whole arc, and the Stillhold will resist you with kindness, not force",
+        "Someone inside wants OUT \u2014 not of the city, of the silence; helping them speak the unsayable thing might free them or shatter the peace of thousands",
+        "The truth the Stillhold is built on is discoverable, and learning it forces the framework's exact question: is a peace built on a buried injustice worth keeping"
+      ],
+      "map": {"x": 940, "y": 460}
+    },
+    {
+      "schemaVersion": 1, "id": "the_marchward", "name": "The Marchward", "regionId": "riven_marches", "communityId": "riven.marchward",
+      "poleIntensity": {"peace": 0.4, "violence": 0.4, "truth": 0.4, "emotional": 0.3},
+      "spectrum": {"violence_peace": 0.0, "falsehood_truth": 0.4, "emotional_logical": 0.3},
+      "tags": ["marches", "border", "habitable", "waypoint", "neutral"],
+      "connections": ["the_redline", "the_stillhold", "the_gralloch"],
+      "descriptionSeed": "The habitable border-town between the Redline and the Stillhold \u2014 where the violence-pole and the peace-pole both run moderate and TRUTH runs high, because a place that touches both extremes learns to speak plainly or die. The natural base for exploring the Reach: warriors and peace-keepers drink at the same tables here and mean it, uneasily. A both-poles-moderate node \u2014 the March itself, made a town.",
+      "loreRefs": ["the_twelve_reaches", "reach_violence_peace"],
+      "encounterFlavor": "Uneasy honest coexistence \u2014 a Redline duelist and a Stillhold exile at the same hearth, a truth spoken because pretense is too expensive here, a mediation that could go either way, a place holding its own contradiction in the open.",
+      "dangerLevel": 2,
+      "questSeeds": [
+        "The Marchward survives by neutrality and someone is trying to break it \u2014 pull it toward the Redline or the Stillhold; holding the balance is the work",
+        "A Redliner and a Stillholder have fallen in love across the wall and both cultures are appalled; the Marchward is where they've fled",
+        "A truth from the Stillhold has leaked here and the Marchward has to decide whether to carry it to the world or bury it again"
+      ],
+      "map": {"x": 900, "y": 420}
+    }
+  ],
+  "asymmetry_note": "Three violence_peace nodes, varied second poles: the Redline rides BODY (honed martial culture), the Stillhold rides FALSEHOOD (peace on a buried lie \u2014 the surprising, damning secondary), the Marchward is both-moderate + TRUTH (the honest border). Same axis, three worlds: disciplined war, false peace, honest neutrality."
+}

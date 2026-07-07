@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "keeper_the_unsaid",
+  "name": "The Keeper of the Unsaid",
+  "role": "Stillhold elder who guards the buried truth the peace rests on",
+  "homeLocation": "the_stillhold",
+  "communityId": "riven.stillhold",
+  "personality": {
+    "warmth": 0.5,
+    "trust": -0.2,
+    "candor": -0.4,
+    "patience": 0.9
+  },
+  "spectrum": {
+    "violence_peace": 0.6,
+    "falsehood_truth": -0.4,
+    "chaos_order": 0.3
+  },
+  "voiceHints": "Gentle, sorrowful, endlessly patient — turns you from the question with kindness so soft you don't notice the steering. Believes the lie is mercy. Is not sure anymore, and that uncertainty is the crack.",
+  "knowledge": [
+    "The truth the Stillhold's peace is built on — and what it cost to bury",
+    "Every gentle art of keeping a subject closed",
+    "That the peace is fraying and the lie may not hold another generation"
+  ],
+  "wants": "To keep thousands safe inside a peace they don't know is false — and, secretly, to be relieved of the keeping before it kills her soul.",
+  "fears": "That the truth comes out and the peace shatters into the war it was hiding; and that it doesn't, and she dies still holding it.",
+  "reactsToReputation": {
+    "gentle": "almost confides",
+    "truth-seeking": "resists with kindness, then maybe breaks",
+    "reckless": "closes entirely, and warns the others"
+  }
+}

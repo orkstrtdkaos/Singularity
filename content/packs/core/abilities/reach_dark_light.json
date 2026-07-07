@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_dark_light",
+  "note": "Crafts of the Umbral Depths/Radiant Wastes Reach (dark_light axis). Umbracraft is the dark-pole tradition (the arts of the hidden, sight-without-light, what the light would destroy); Radiance the light-pole (revelation, the beam, the burning truth). Learned by traveling the Reach or training with Umbrals/Blazeborn. Radiant Plateau is a Valley-edge foothill of the light end; Prism Sight is folk-Radiance. Both drift the wielder toward their pole. Note: dark_light here is the MORAL/KNOWING sense as much as the literal \u2014 dark = concealed/harbored, light = revealed/exposed \u2014 which is why they can partly co-fire (a place both revealing and concealing). axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
+  "gated": "learned",
+  "abilities": [
+    {"id": "umbracraft", "name": "Umbracraft", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_dark_light", "attribute": "mental",
+     "axes": {"dark_light": -0.5, "concrete_abstract": 0.1, "chaos_order": -0.1}, "effectTags": ["conceal", "unseen", "harbor"],
+     "narrationHints": "The dark that hides and the dark that harbors \u2014 sight without light, the unseen made ally, the sheltering of what the blaze would burn.",
+     "description": "The dark-pole mastery: concealment, sight-without-light, and the harboring of what should not be exposed. Not evil \u2014 the necessary shadow.",
+     "notFor": "Harming from the dark for its own sake (that's a corruption Umbrals themselves fear); revealing (that's Radiance); places with no shadow to work.",
+     "tree": [
+       {"rank": 1, "name": "The Seeing Dark", "grants": "See truly in lightlessness; wrap yourself and a small space in concealment; find and use the shadows any place holds.", "cannot": "Total light defeats it; concealment hides, it does not defend."},
+       {"rank": 2, "name": "The Harbor", "grants": "Hide a person, a truth, or a thing so well even a searcher who knows it's there can't find it; move unseen through watched places; shelter what the light hunts.", "cannot": "Harboring something makes you responsible for it; some things should not be harbored, and the Harbor doesn't judge \u2014 you must."},
+       {"rank": 3, "name": "The Deep Umbral", "grants": "Command shadow at scale \u2014 hide a caravan, a rite, a rebellion; see into the hidden hearts of things and places; give sanctuary the Blaze cannot breach. The Underlight's power in miniature.", "cannot": "The wielder drifts dark-hot \u2014 and the one who harbors everything eventually harbors the things that should have faced the light; darkness total is its own foreclosure, a world that never has to be seen."}
+     ]},
+    {"id": "radiance", "name": "Radiance", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_dark_light", "attribute": "mental",
+     "axes": {"dark_light": 0.5, "falsehood_truth": 0.3, "concrete_abstract": 0.1}, "effectTags": ["reveal", "beam", "expose"],
+     "narrationHints": "Light that reveals and light that burns \u2014 the hidden dragged into day, the lie shown its own shape, the beam that ends what can't bear seeing.",
+     "description": "The light-pole mastery: revelation, exposure, and the burning beam. The full craft the Valley's Prism Sight only foreshadows.",
+     "notFor": "Concealment (that's Umbracraft); mercy (Radiance shows, it does not spare); truths that should stay harbored \u2014 it cannot choose, only reveal.",
+     "tree": [
+       {"rank": 1, "name": "The Revealing Light", "grants": "Throw light that shows things as they are \u2014 no illusion, no disguise, no shadow holds; a focused beam that can burn or blind.", "cannot": "Reveals surfaces and shapes, not hearts; light spent blinds you too."},
+       {"rank": 2, "name": "The Unshadowed", "grants": "Strip a place or person of every concealment at once; make a lie visibly a lie (unless it's built of true pieces \u2014 the Cathedral defeats this); a beam that ends a threat cleanly.", "cannot": "The convincing-lie-of-true-pieces survives it; some truths, revealed, do more harm than the hiding did \u2014 and Radiance can't tell which."},
+       {"rank": 3, "name": "The Blaze", "grants": "Revelation at scale \u2014 a whole deception undone, a hidden thing dragged into the light before a people, a beam that ends the unendurable. The Blaze's power in miniature.", "cannot": "The wielder drifts light-hot \u2014 and total revelation burns its own land to glass; the one who reveals everything leaves nothing sheltered enough to live; light absolute is foreclosure by exposure, a world with no shadow left to grow in."}
+     ]}
+  ]
+}

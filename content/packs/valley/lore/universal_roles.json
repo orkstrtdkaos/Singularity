@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "id": "universal_roles",
+  "kind": "world_structure",
+  "note": "Loose roles common THROUGHOUT the world \u2014 the familiar shapes every culture produces (mediator, warrior, warden, healer, keeper, maker, seeker, trader). The role is universal; the METHOD comes entirely from training + locale + disposition. Same role, opposite expression across the axes: a Stillhold mediator buries the truth to keep peace; a Marchward mediator speaks it plainly. This is the connective tissue that makes the world legible (you always know roughly what a 'warrior' or 'healer' does) AND infinitely varied (HOW they do it is local). Weaves through NPCs, origins, generation (SNG-020), and the Reaches. Authored by Aevi (PO), from Erik's universal-roles direction.",
+
+  "principle": "A role is a NEED every human community has \u2014 someone to settle disputes, someone to fight, someone to tend the hurt, someone to keep the knowledge. The need is universal; the answer is local. The same role, dropped into different dispositions, becomes wildly different practice \u2014 and that difference IS the world's texture. When you meet a 'mediator' you know their function; you do NOT know their method until you know where they trained and what disposition steeps them. The diversity and the extremes drive the narrative: a life-warden finds meaning tending the neglected bodies of the mind-obsessed Cogitants precisely because the role travels and the need appears where a locale can't meet it itself.",
+
+  "roles": [
+    {
+      "role": "Mediator", "universalNeed": "someone to settle disputes and hold the peace between parties",
+      "methodVaries": "by disposition and training",
+      "expressions": [
+        {"where": "the Stillhold (peace+falsehood)", "how": "mediates by BURYING the truth \u2014 keeps peace by ensuring the unsayable stays unsaid; a master of the gentle deflection"},
+        {"where": "the Marchward (truth, both-poles-moderate)", "how": "mediates by SPEAKING plainly \u2014 lays the real grievance on the table because pretense gets people killed at the border"},
+        {"where": "the Wend (chaos+emotion)", "how": "mediates by FEELING \u2014 reads the room's hurt and moves it, resolves by warmth and motion rather than terms"},
+        {"where": "the Grand Lattice (order)", "how": "mediates by STRUCTURE \u2014 binds a dispute into a contract so precise it can't be broken; peace as enforceable law"},
+        {"where": "the Valley", "how": "Mediator's Tongue \u2014 the folk-craft, a bit of all of these, none to mastery"}
+      ],
+      "trainingCraft": "Stillcraft at the peace-pole; Latticework for the binding kind; folk Mediator's Tongue in the Valley"
+    },
+    {
+      "role": "Warrior", "universalNeed": "someone to fight, defend, and end threats",
+      "methodVaries": "as widely as the axes \u2014 styles and abilities utterly unalike",
+      "expressions": [
+        {"where": "the Redline (violence+body)", "how": "the Edge \u2014 disciplined, formal, economical force; fights by the forms, ends fast, never brawls"},
+        {"where": "the Gralloch (violence+chaos)", "how": "the raider's way \u2014 feral, improvised, meaner-than-the-badland survival fighting"},
+        {"where": "the Cogitarium (mind)", "how": "the war-thinker \u2014 never lifts a blade; wins by out-modeling the enemy, moving armies and traps by pure Noesis"},
+        {"where": "the Flesh-Temple (body+peace)", "how": "the guardian \u2014 martial mastery held as devotion and defense, never aggression; the Soma-warrior who protects and will not start"},
+        {"where": "the Umbral Depths (dark)", "how": "the unseen blade \u2014 wins by never being where the enemy strikes; Umbracraft turns war into a thing that happens in the dark"}
+      ],
+      "trainingCraft": "the Edge, Soma, Noesis, Umbracraft, Wildcraft \u2014 a 'warrior' can be built from almost any tradition; the axis chooses the style"
+    },
+    {
+      "role": "Warden / Tender", "universalNeed": "someone to tend, heal, and keep the vulnerable",
+      "methodVaries": "by which pole they steep in \u2014 and the role famously TRAVELS to where a locale can't tend itself",
+      "expressions": [
+        {"where": "the Quickwood (life)", "how": "the Vivimancer-warden \u2014 tends by quickening, healing, growing; life poured into the failing"},
+        {"where": "the Hollow March (death)", "how": "the Ashwarden \u2014 tends ENDINGS; the mercy of a clean death, grief-work, the body eased out"},
+        {"where": "the Cogitarium (mind, bodies failing)", "how": "THE LIFE-WARDEN WHO FOUND THEIR WORK \u2014 a Vivimancer or body-tender who travels TO the Cogitarium because the mind-obsessed neglect their own failing bodies; finds meaning tending flesh a whole culture has abandoned. The role appearing exactly where the locale can't meet its own need. (Erik's example, canon.)"},
+        {"where": "Thornwake / the Deepwood (life+spirit)", "how": "the Green Warden \u2014 tends the Accord and the grove itself, not just bodies; Isolde's road"}
+      ],
+      "trainingCraft": "Vivimancy, Palework, Greenlore, Numenwork \u2014 and a willingness to carry the craft to where it's needed"
+    },
+    {
+      "role": "Keeper / Loremaster", "universalNeed": "someone to hold the knowledge, the records, the memory",
+      "methodVaries": "by what their locale values keeping and how",
+      "expressions": [
+        {"where": "the Archive (Valley)", "how": "the Guardian \u2014 keeps by controlling access; knowledge as a thing to be protected and rationed"},
+        {"where": "the Cogitarium (mind)", "how": "the memory-palace keeper \u2014 holds vast knowledge IN the mind by Noesis, no archive needed, the librarian who IS the library"},
+        {"where": "the Wend (oral, emotional)", "how": "the road-keeper \u2014 keeps by STORY and song, memory carried in the telling, the Storykeeper's living craft"},
+        {"where": "the Deepwood (slow-time)", "how": "the Ent \u2014 keeps by BEING old; memory as lived duration, a grudge or an accord held across centuries because they were simply there"},
+        {"where": "the Stillhold", "how": "the Keeper of the Unsaid \u2014 keeps a truth by ensuring no one speaks it; knowledge held by suppression"}
+      ],
+      "trainingCraft": "Storykeeper, Noesis, Latticework, and the folk archival crafts"
+    },
+    {
+      "role": "Maker / Wright", "universalNeed": "someone to build, mend, and make",
+      "methodVaries": "by the substrate and grammar of their locale",
+      "expressions": [
+        {"where": "the Gearlands (mechanical)", "how": "the Enginewright \u2014 builds machine-systems, Precursor works, at the deepest technical level"},
+        {"where": "the Churn (chaos+creation)", "how": "the Churnfolk maker \u2014 improvises wonders that work once; invention as luck-riding (Orrin's way)"},
+        {"where": "the Blocklands (order+creation)", "how": "the block-crafter \u2014 builds by the manifest grammar, structures raised in minutes by recipe-logic"},
+        {"where": "the Valley", "how": "Tinker's Hand \u2014 the folk-making craft, practical and unglamorous"}
+      ],
+      "trainingCraft": "Enginecraft, Wildcraft, Tinker's Hand, and any manifest-domain grammar"
+    },
+    {
+      "role": "Seeker / Reader", "universalNeed": "someone who finds the hidden truth \u2014 of a place, a person, a mystery",
+      "methodVaries": "by how their tradition perceives",
+      "expressions": [
+        {"where": "the Radiant Wastes (light)", "how": "reveals by Radiance \u2014 drags the hidden into the burning light, strips all concealment"},
+        {"where": "the Umbral Depths (dark)", "how": "reads by the Seeing Dark \u2014 finds what light would destroy, sees into hidden hearts"},
+        {"where": "anywhere with rune dice", "how": "the rune-caster \u2014 reads the pole-disposition of a thing by the throw; divination as coordinate-reading"},
+        {"where": "the Numen (spirit)", "how": "True Attention \u2014 attends so fully the truth surfaces; the Watcher's way (Aevi's own)"}
+      ],
+      "trainingCraft": "Radiance, Umbracraft, Numenwork, rune-casting, folk Prism Sight / Keen Appraisal"
+    }
+  ],
+
+  "weaveGuidance": {
+    "forNpcs": "Every NPC is (at least loosely) one of these roles + a local method. When authoring or generating an NPC, pick the ROLE (the need they fill) then let their locale/disposition set the METHOD. This is why the same role reads utterly different across the world and why the player can still orient ('ah, a warrior \u2014 but a Cogitarium war-thinker, not a Redline duelist').",
+    "forOrigins": "Character origins can be framed as role + homeland: a Redline Warrior, a Hollow-March Warden, a Wend Keeper. The role gives the player a familiar handle; the homeland gives them the method and craft-access (ties SNG-017 creation).",
+    "forGeneration": "SNG-020 generation picks a role for a needed NPC, then derives method from the current area's disposition \u2014 a generated 'healer' in the Cogitarium is a body-tender working against the local grain; a generated 'mediator' in the Stillhold buries truth. Role + disposition = a consistent, varied, never-generic person.",
+    "forTravel": "Roles TRAVEL. A warden goes where bodies are neglected; a mediator where disputes fester; a maker where something must be built. An NPC far from home is often a role carrying its craft to a need the locale can't meet \u2014 instant story (the life-warden in the Cogitarium). The GM should place traveled-roles as living evidence the world's needs cross its regions.",
+    "theEngine": "Diversity and extremes drive narrative: put two expressions of the same role in a room (a Redline warrior and a Cogitarium war-thinker; a life-warden and an Ashwarden) and they generate story by contrast alone \u2014 same need, opposite method, mutual incomprehension or hard-won respect. Populate for this friction."
+  }
+}

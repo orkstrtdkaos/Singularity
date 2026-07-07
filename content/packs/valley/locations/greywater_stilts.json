@@ -4,20 +4,50 @@
   "name": "The Greywater Stilts",
   "regionId": "valley",
   "communityId": "valley.greywater_stilts",
-  "spectrum": {"individual_collective": 0.5, "tradition_innovation": 0.4, "chaos_order": -0.2, "mechanical_spiritual": -0.3, "concrete_abstract": -0.3},
-  "tags": ["settlement", "marsh", "refugee", "adaptor", "self-governing", "unaligned"],
-  "connections": ["millbrook", "disputed_zone_fringe"],
-  "descriptionSeed": "A town built on stilts over the southern marsh by people who wanted out from under both cities \u2014 Adaptors, mostly, plus whoever else needed somewhere the aligned powers don't reach. Rope-walks lace between platforms; skiffs slide the channels below. They govern by a talking-circle that runs long and settles hard, and they're proud of owing nothing to the Heights or the Plateau. That independence is the whole story here: the Stilts are one bad season, one outside pressure, one internal fracture away from having to choose a side they swore they never would.",
-  "loreRefs": ["valley_primer"],
-  "npcsPresent": ["reed_mother_ossa", "the_ferryman_tam", "young_hollis"],
-  "encounterFlavor": "A community that runs itself and shows it \u2014 the talking-circle mid-argument, a marriage negotiated between platforms, a skiff-race, a newcomer being weighed for whether they'll take or give. Warm until it isn't.",
+  "spectrum": {
+    "individual_collective": 0.5,
+    "tradition_innovation": 0.4,
+    "chaos_order": -0.2,
+    "mechanical_spiritual": -0.3,
+    "concrete_abstract": -0.3
+  },
+  "tags": [
+    "settlement",
+    "marsh",
+    "refugee",
+    "adaptor",
+    "self-governing",
+    "unaligned"
+  ],
+  "connections": [
+    "millbrook",
+    "disputed_zone_fringe"
+  ],
+  "descriptionSeed": "A town built on stilts over the southern marsh by people who wanted out from under both cities — Adaptors, mostly, plus whoever else needed somewhere the aligned powers don't reach. Rope-walks lace between platforms; skiffs slide the channels below. They govern by a talking-circle that runs long and settles hard, and they're proud of owing nothing to the Heights or the Plateau. That independence is the whole story here: the Stilts are one bad season, one outside pressure, one internal fracture away from having to choose a side they swore they never would.",
+  "loreRefs": [
+    "valley_primer"
+  ],
+  "npcsPresent": [
+    "reed_mother_ossa",
+    "the_ferryman_tam",
+    "young_hollis"
+  ],
+  "encounterFlavor": "A community that runs itself and shows it — the talking-circle mid-argument, a marriage negotiated between platforms, a skiff-race, a newcomer being weighed for whether they'll take or give. Warm until it isn't.",
   "dangerLevel": 1,
   "image": "content/packs/valley/assets/greywater_stilts.jpg",
   "questSeeds": [
-    "Reed-Mother Ossa is dying and won't say so; the talking-circle has no agreed way to choose a successor and three factions are already maneuvering \u2014 an outsider could steady it or be used by it",
+    "Reed-Mother Ossa is dying and won't say so; the talking-circle has no agreed way to choose a successor and three factions are already maneuvering — an outsider could steady it or be used by it",
     "A Heights envoy has come with a generous offer that would end the Stilts' independence in exchange for safety; the town is genuinely split and wants a clear-eyed outsider to argue the case they can't argue without fighting",
     "Young Hollis wants to leave the marsh for the cities and their family is treating it as a betrayal; the real question underneath is whether the Stilts can survive its young people leaving",
     "The ferryman Tam knows every channel and every secret; he's being quietly blackmailed over one of them, and the leverage would sink more than him"
   ],
-  "map": {"x": 300, "y": 460}
+  "map": {
+    "x": 300,
+    "y": 460
+  },
+  "poleIntensity": {
+    "chaos": 0.2,
+    "mechanical": 0.3,
+    "concrete": 0.3
+  }
 }

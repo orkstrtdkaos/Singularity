@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_death_life",
+  "note": "The crafts of the Quickwood/Palelands Reach (death_life axis). Vivimancy is the life-pole tradition, Palework the death-pole. Learned by traveling the Reach or training under Rootkin/Ashwardens — NOT available at Valley creation; gated like precursor (learned). Higher tiers pull the wielder's own pole-intensity toward their pole (a Vivimancer drifts life-hot, a Paleworker death-hot) — the geography writes itself onto the practitioner. axes use signed values for engine compat. Authored by Aevi (PO), SNG-016 skill build-out.",
+  "gated": "learned",
+  "abilities": [
+    {"id": "quickening", "name": "Quickening", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_death_life", "attribute": "practical",
+     "axes": {"death_life": 0.5, "destruction_creation": 0.3}, "effectTags": ["heal", "grow", "life"],
+     "narrationHints": "Life poured where life was thin \u2014 a wound closing, a seed bursting, a dying thing pulled back toward the quick.",
+     "description": "Accelerate life: heal, grow, revive the nearly-gone. The Rootkin's first craft.",
+     "notFor": "Raising the truly dead (only the nearly-gone); creating life from nothing; halting decay that has finished.",
+     "tree": [
+       {"rank": 1, "name": "Green Touch", "grants": "Close wounds and speed healing on the living; coax rapid growth in plants; steady a failing pulse.", "cannot": "Nothing past death's threshold; overuse tires the wielder faster than it heals."},
+       {"rank": 2, "name": "The Quick Return", "grants": "Pull the nearly-dead back if reached in time; regrow what was lost (within reason); make barren ground bloom.", "cannot": "A return has a cost the GM names; the regrown is not always the same as the lost."},
+       {"rank": 3, "name": "Unstoppable Spring", "grants": "Life at flood \u2014 mass healing, land quickened for a season, a body remade toward health. The Heartroot's power in miniature.", "cannot": "It does not know when to stop \u2014 quickening can grow a thing past its right shape; the wielder drifts life-hot, and life that will not stop is its own horror (see the Quiet in the Quickwood)."}
+     ]},
+    {"id": "palework", "name": "Palework", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_death_life", "attribute": "mental",
+     "axes": {"death_life": -0.5, "chaos_order": 0.2}, "effectTags": ["end", "decay", "still"],
+     "narrationHints": "The mercy and the weight of endings \u2014 a thing allowed to stop, a rot read like a map, a stillness that is not cruelty.",
+     "description": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art \u2014 not killing, but tending the end.",
+     "notFor": "Murder (Palework eases ends, it does not force the living to die); necromancy/animation; stopping a death that must happen.",
+     "tree": [
+       {"rank": 1, "name": "The Easing", "grants": "Ease a dying thing's passing; read how and how long ago something died; grant true rest to what cannot find it.", "cannot": "Cannot kill the healthy; cannot bring back; the easing is a mercy, refused if unwilling."},
+       {"rank": 2, "name": "Reading the Rot", "grants": "Read decay like text \u2014 what killed a thing, what a ruin died of, what a blight will do next; halt a spreading rot by giving it a clean end.", "cannot": "Reading is not undoing; some rots refuse a clean end."},
+       {"rank": 3, "name": "The Long Stillness", "grants": "Grant endings at scale \u2014 a battlefield eased, a plague stopped by stilling its front, a thing that should have died a century ago finally allowed to. The mercy the life-Reach cannot give itself.", "cannot": "The wielder drifts death-hot; the Stillness is powerful enough to be mistaken for a weapon, and the mistake is fatal to trust; never raises, never forces."}
+     ]}
+  ]
+}

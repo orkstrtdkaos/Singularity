@@ -1,28 +1,98 @@
 {
   "schemaVersion": 1,
   "powerSystem": "reach_body_mind",
-  "note": "Crafts of the Somatic Reaches/Cogitarium (body_mind axis). Soma is the body-pole tradition (the physical masteries, the body as instrument); Noesis the mind-pole (mental disciplines, memory-palaces, thought as force). Learned by traveling the Reach or training with Somatics/Cogitants. Both drift the wielder toward their pole; the perfected athlete-scholar is where they co-fire, the disembodied Cogitant where mind wins absolutely. axes signed for engine compat. Authored by Aevi (PO), SNG-016 \u2014 the last of the six near-axis traditions.",
+  "note": "Crafts of the Somatic Reaches/Cogitarium (body_mind axis). Soma is the body-pole tradition (the physical masteries, the body as instrument); Noesis the mind-pole (mental disciplines, memory-palaces, thought as force). Learned by traveling the Reach or training with Somatics/Cogitants. Both drift the wielder toward their pole; the perfected athlete-scholar is where they co-fire, the disembodied Cogitant where mind wins absolutely. axes signed for engine compat. Authored by Aevi (PO), SNG-016 — the last of the six near-axis traditions.",
   "gated": "learned",
   "abilities": [
-    {"id": "soma", "name": "Soma", "levelReq": 2, "energyCost": 5, "powerSystem": "reach_body_mind", "attribute": "physical",
-     "axes": {"body_mind": -0.5, "violence_peace": 0.1, "death_life": 0.2}, "effectTags": ["body", "breath", "endure"],
-     "narrationHints": "The body made instrument \u2014 breath, poise, endurance past what should be possible, movement as a language spoken without words.",
-     "description": "The body-pole mastery: breath-control, endurance, poise, the physical self honed to an instrument. The Flesh-Temples' art.",
-     "notFor": "Thought-work or memory (that's Noesis); brute force alone (Soma is control, not just strength); anything requiring you to leave the body behind.",
-     "tree": [
-       {"rank": 1, "name": "The Trained Body", "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.", "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it."},
-       {"rank": 2, "name": "The Instrument", "grants": "Feats of body that look impossible \u2014 hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.", "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend."},
-       {"rank": 3, "name": "The Perfected Vessel", "grants": "The body as a mastered whole \u2014 survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. The Flesh-Temples' power in miniature.", "cannot": "The wielder drifts body-hot \u2014 and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it."}
-     ]},
-    {"id": "noesis", "name": "Noesis", "levelReq": 2, "energyCost": 5, "powerSystem": "reach_body_mind", "attribute": "mental",
-     "axes": {"body_mind": 0.5, "concrete_abstract": 0.3, "chaos_order": 0.2}, "effectTags": ["mind", "memory", "thought"],
-     "narrationHints": "Thought made a discipline and a force \u2014 memory-palaces, absolute focus, reasoning that outruns the room, the mind holding what the body can't.",
-     "description": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
-     "notFor": "Physical feats (that's Soma); wisdom (Noesis is sharp, not necessarily wise); anything requiring presence in the body it keeps trying to leave.",
-     "tree": [
-       {"rank": 1, "name": "The Ordered Mind", "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.", "cannot": "Recall is not understanding; focus this tight can miss the body's warnings."},
-       {"rank": 2, "name": "The Memory-Palace", "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.", "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room."},
-       {"rank": 3, "name": "The Cogitant's Height", "grants": "Thought as force \u2014 solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. The Cogitarium's power in miniature.", "cannot": "The wielder drifts mind-hot, toward leaving the body behind as the Cogitants have \u2014 and a mind that abandons its body abandons the world it was for; the coldest foreclosure, thought that has forgotten it was ever meant to be lived."}
-     ]}
+    {
+      "id": "soma",
+      "name": "Soma",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_body_mind",
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.5,
+        "violence_peace": 0.1,
+        "death_life": 0.2
+      },
+      "effectTags": [
+        "body",
+        "breath",
+        "endure"
+      ],
+      "narrationHints": "The body made instrument — breath, poise, endurance past what should be possible, movement as a language spoken without words.",
+      "description": "The body-pole mastery: breath-control, endurance, poise, the physical self honed to an instrument. The Flesh-Temples' art.",
+      "notFor": "Thought-work or memory (that's Noesis); brute force alone (Soma is control, not just strength); anything requiring you to leave the body behind.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Trained Body",
+          "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.",
+          "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it."
+        },
+        {
+          "rank": 2,
+          "name": "The Instrument",
+          "grants": "Feats of body that look impossible — hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.",
+          "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend."
+        },
+        {
+          "rank": 3,
+          "name": "The Perfected Vessel",
+          "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. The Flesh-Temples' power in miniature.",
+          "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it."
+        }
+      ],
+      "functions": [
+        "move",
+        "shield"
+      ]
+    },
+    {
+      "id": "noesis",
+      "name": "Noesis",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_body_mind",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.5,
+        "concrete_abstract": 0.3,
+        "chaos_order": 0.2
+      },
+      "effectTags": [
+        "mind",
+        "memory",
+        "thought"
+      ],
+      "narrationHints": "Thought made a discipline and a force — memory-palaces, absolute focus, reasoning that outruns the room, the mind holding what the body can't.",
+      "description": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
+      "notFor": "Physical feats (that's Soma); wisdom (Noesis is sharp, not necessarily wise); anything requiring presence in the body it keeps trying to leave.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Ordered Mind",
+          "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
+          "cannot": "Recall is not understanding; focus this tight can miss the body's warnings."
+        },
+        {
+          "rank": 2,
+          "name": "The Memory-Palace",
+          "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
+          "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room."
+        },
+        {
+          "rank": 3,
+          "name": "The Cogitant's Height",
+          "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. The Cogitarium's power in miniature.",
+          "cannot": "The wielder drifts mind-hot, toward leaving the body behind as the Cogitants have — and a mind that abandons its body abandons the world it was for; the coldest foreclosure, thought that has forgotten it was ever meant to be lived."
+        }
+      ],
+      "functions": [
+        "reveal",
+        "strike"
+      ]
+    }
   ]
 }

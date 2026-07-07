@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "the_coordinate_world",
+  "kind": "world_structure",
+  "note": "GM-facing structural bible for the whole world as a knowledge-graph in twelve-dimensional axis-space. A PLACE is a coordinate: a vector over the 12 axes, each in [-1,1]. PURITY = how strongly the coordinate leans on its dominant axes (few strong axes = pure/dangerous; many faint axes = mixed/habitable). The map is DISCOVERY of this graph: nodes reveal as reached, edges as crossed, fog over the full structure. Travel = graph traversal; moving toward a pole = climbing the purity gradient toward more power and more peril. This resolves geography, the 12-axis skill breadth, and leveling into one structure. The Valley is a Tier-2 triad basin near the origin. Authored by Aevi (PO) — Erik's 'map is discovery of the KG' insight, 2026.",
+
+  "axes": ["emotional_logical","falsehood_truth","demonic_angelic","violence_peace","concrete_abstract","mechanical_spiritual","chaos_order","dark_light","death_life","space_time","body_mind","destruction_creation"],
+
+  "purityModel": {
+    "definition": "A coordinate's purity is driven by its strongest axes and how few of them dominate. Formula (engine): dominance = sum of the top-k |axis| values; spread = count of axes with |v| >= 0.3. Purer = high dominance on few axes. Tiers below are named bands of this continuous measure.",
+    "tiers": [
+      {"tier": 0, "name": "Pole", "signature": "one axis at |v| ~0.9-1.0, others near zero", "count": "24 (twelve axes × two poles)", "character": "Purest. A single force at full strength. Barely habitable; arriving unready unmakes you. The single biggest center of each axis-end. Power at its most extreme and its most perilous.", "example": "The Heartroot (death_life +1.0): pure life, growth that will not stop, where a visitor is grown-into if they linger."},
+      {"tier": 1, "name": "Dyad Reach", "signature": "two axes at |v| ~0.6-0.8, rest faint", "count": "hundreds (axis-pairs × pole-combinations)", "character": "Two forces crossing. Specific and strange in ways no pole is — the character emerges from the COMBINATION. Habitable at the edges, deadly at the core. Most named 'Reaches' live here.", "example": "The Gearlands (mechanical_spiritual -0.7 × chaos_order +0.7): ordered machine-continents; grown-machines and dying gods live at other death_life×mech crossings."},
+      {"tier": 2, "name": "Triad Basin", "signature": "three axes at |v| ~0.4-0.6, moderate", "count": "thousands", "character": "Three forces in balance. Genuinely habitable — complex enough for civilization, not so pure it kills. Good homelands and good starting grounds. THE VALLEY IS ONE OF THESE.", "example": "The Valley of Echoes (mechanical_spiritual +0.3, death_life +0.3, chaos_order +0.2): habitable, layered, a fine beginning."},
+      {"tier": 3, "name": "Mixing Ground", "signature": "four to six axes at |v| ~0.2-0.4, all faint", "count": "vast", "character": "The great middle of the world. Least pure, most livable, most numerous — where ordinary life happens, where most people are born and die without ever seeing a pole. Rich in texture, low in extremity.", "example": "Endless farmlands, trade-webs, river-countries whose flavor is a soft blend of many axes."},
+      {"tier": 4, "name": "The Origin", "signature": "all axes near zero", "character": "The blandest, safest, most characterless ground — where nothing is strong and nothing is dangerous. The still point. Some seek it as refuge; it is also where nothing grows and nothing means much. The framework's warning about the un-propagated life lives here as a PLACE."}
+    ]
+  },
+
+  "graphAsMap": {
+    "nodes": "Each place is a node at its coordinate. Nodes carry the standard location schema PLUS their axis-vector.",
+    "edges": "Two places are adjacent (edge) when their coordinates are close in axis-space — you can walk between them because the world changes gradually. Long edges = hard, dangerous journeys across a lot of axis-distance (a March).",
+    "discovery": "The full graph exists but is FOGGED. A node reveals when reached (or clearly heard-of, as a dim node). An edge reveals when crossed or scouted. The player's known-map is a growing subgraph. This IS the KG made playable — literally: the codex/world-KG and the travel-map are the same structure at different zoom.",
+    "traversalMeaning": "Choosing a direction is choosing which axis to move along — which is choosing what to become more of (propagation as motion-shape). Toward a pole: more power, more peril, more purity. Toward the origin: safety, blandness, the un-propagated. The map is a moral-geometric instrument, not just wayfinding.",
+    "gradient": "Between any place and any pole runs a purity gradient — a walkable path of increasing intensity. The deep Precursor sites near the Valley are the first steps up the mechanical_spiritual gradient toward the Numen/Great Engine poles. What Sleeps Under is what waits far up that gradient."
+  },
+
+  "howThisResolvesEverything": {
+    "geography": "The world is now infinite-in-principle (a continuous coordinate space) but discovered finitely (the fogged graph). Beyond-the-Valley content is 'the next nodes up whichever gradient the player walks.'",
+    "skills": "A craft belongs to a coordinate-neighborhood. You learn a Reach's tradition by being IN that region of axis-space. The 12-axis skill gaps fill because each axis-direction is now a place you travel toward, gaining its crafts as you climb its gradient. SNG-016 resolved.",
+    "leveling": "Power is position. You grow by moving up gradients toward poles. Level is roughly how far from the origin you've dared to travel and hold. This makes advancement geographic and moral at once.",
+    "worldTick": "The meta-arcs (world_superstructure) are movements ALONG gradients — e.g. What Sleeps Under is the mechanical_spiritual pole's influence bleeding down-gradient toward the Valley. The grain of the world is the whole graph's tendency to drift toward foreclosure (collapse toward a pole, or flatten toward the origin) unless someone holds the aperture."
+  },
+
+  "buildPlan": "Populate outward from the Valley node along gradients. Tier-2 basins near the Valley first (habitable neighbors), then the Tier-1 Reaches they lean toward, with the Tier-0 poles as fogged, rumored, far nodes. Each real location file gains an axisVector; the engine derives adjacency/purity from vectors. Marches are the long edges. The six unbuilt Reaches from the_twelve_reaches stay as fogged far-nodes until a player's gradient reaches them."
+}

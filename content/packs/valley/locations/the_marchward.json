@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "the_marchward",
+  "name": "The Marchward",
+  "regionId": "riven_marches",
+  "communityId": "riven.marchward",
+  "poleIntensity": {
+    "peace": 0.4,
+    "violence": 0.4,
+    "truth": 0.4,
+    "emotional": 0.3
+  },
+  "spectrum": {
+    "violence_peace": 0.0,
+    "falsehood_truth": 0.4,
+    "emotional_logical": 0.3
+  },
+  "tags": [
+    "marches",
+    "border",
+    "habitable",
+    "waypoint",
+    "neutral"
+  ],
+  "connections": [
+    "the_redline",
+    "the_stillhold",
+    "the_gralloch"
+  ],
+  "descriptionSeed": "The habitable border-town between the Redline and the Stillhold — where the violence-pole and the peace-pole both run moderate and TRUTH runs high, because a place that touches both extremes learns to speak plainly or die. The natural base for exploring the Reach: warriors and peace-keepers drink at the same tables here and mean it, uneasily. A both-poles-moderate node — the March itself, made a town.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "reach_violence_peace"
+  ],
+  "encounterFlavor": "Uneasy honest coexistence — a Redline duelist and a Stillhold exile at the same hearth, a truth spoken because pretense is too expensive here, a mediation that could go either way, a place holding its own contradiction in the open.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "The Marchward survives by neutrality and someone is trying to break it — pull it toward the Redline or the Stillhold; holding the balance is the work",
+    "A Redliner and a Stillholder have fallen in love across the wall and both cultures are appalled; the Marchward is where they've fled",
+    "A truth from the Stillhold has leaked here and the Marchward has to decide whether to carry it to the world or bury it again"
+  ],
+  "map": {
+    "x": 900,
+    "y": 420
+  }
+}

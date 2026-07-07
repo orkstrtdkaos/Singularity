@@ -49,3 +49,8 @@ Erik 2026-07-07: once the basics exist, the engine should GENERATE new NPCs, loc
 *Both ratified-direction (Erik). SNG-019 is small (resolution + merge + UI). SNG-020 is medium and depends on SNG-019's entityId resolver. Fold into the systems batch.*
 
 *Updated 2026-07-07.*
+
+## SNG-021 — Living world (cyclical events + self-driven NPCs)
+Content ready: the_living_world.json (season×place festival/cycle table, recurring troubles, population doctrine). Engine: world-tick checks current season/day against the cycle table and surfaces 'what's happening here now' to the GM; key NPCs get an offscreen want-progress counter so a place MOVES between visits; failed-harvest + pass-freeze as world-tick conditions with cascading effects; generated NPCs (SNG-020) get a want on creation. Light additions to worldtick.js + a per-NPC arc-progress field. GM mandate: always able to answer 'what's happening here that isn't about me.' Smoke: arriving in a place during its festival season surfaces the festival; an NPC met twice has advanced their want; a failed harvest cascades pressure.
+
+*Updated 2026-07-07.*

@@ -3,38 +3,100 @@
   "id": "generative_substrate",
   "kind": "world_structure",
   "note": "The capstone: EVERY type of thing we authored by hand is a TEMPLATE the engine can generate more of, with persistence, so the world grows as people play it. Not just NPCs/locations (SNG-020's original scope) but companions, items, methods, jewels (co-firing nodes), manifest domains, arcs, cyclical events, universal-role instances, creatures. The authored content is the seed-corpus; generation extends it in-grain using the disposition model (poleIntensity) + universal roles as the grammar; persistence writes each generated thing as a durable node so it recurs, accumulates facts, and becomes as real as authored content. The line between authored and generated should be invisible downstream. Authored by Aevi (PO), from Erik's 'every type generatable-with-persistence, world grows as played' direction.",
-
-  "principle": "A living world can't be fully hand-authored \u2014 it must be able to GROW. Everything we built is really a template + examples: 'a location looks like THIS,' 'an NPC is role+method+want,' 'a jewel is two co-firing poles,' 'a domain is a seed-fiction + native-logic.' The engine, given the local disposition and the type, can author a NEW one in-grain, validate it against the schema, and PERSIST it as a durable node. Play generates world; world persists; the next player (or the same one, later) finds it there, changed by what happened. The corpus we authored is the taste and the guardrails; generation is the growth.",
-
+  "principle": "A living world can't be fully hand-authored — it must be able to GROW. Everything we built is really a template + examples: 'a location looks like THIS,' 'an NPC is role+method+want,' 'a jewel is two co-firing poles,' 'a domain is a seed-fiction + native-logic.' The engine, given the local disposition and the type, can author a NEW one in-grain, validate it against the schema, and PERSIST it as a durable node. Play generates world; world persists; the next player (or the same one, later) finds it there, changed by what happened. The corpus we authored is the taste and the guardrails; generation is the growth.",
   "generableTypes": [
-    {"type": "npc", "template": "npc schema", "grammar": "universal role + local disposition \u2192 method, want, fears, knowledge, voice", "persistExample": "a generated tollhand recurs with the same name, grudges, and accumulating facts"},
-    {"type": "location", "template": "location schema", "grammar": "local poleIntensity (\u00b1 rolled asymmetric secondary) + tags + questSeeds; inside a domain, obeys seedFiction", "persistExample": "a generated hollow can be re-entered, its state (who you met, what changed) intact"},
-    {"type": "companion", "template": "companion schema", "grammar": "a met NPC with a compatible want + a bond-grant derived from their role/craft + stages", "persistExample": "a generated companion earns a bond, evolves stages, remembers"},
-    {"type": "item / gear", "template": "item schema", "grammar": "local craft + materials + a bonusTags set; rarely an evolution track from a seed", "persistExample": "a named generated blade accumulates its own history and can evolve"},
-    {"type": "method", "template": "methods schema", "grammar": "a tool + a check that reveals or does something disposition-appropriate", "persistExample": "a folk divination method local to a region, learnable and persistent"},
-    {"type": "jewel (co-firing node)", "template": "cofiring_nodes schema", "grammar": "hold one pole hot, roll its OPPOSITE (or an improbable second) as co-firing \u2192 a doubly-charged place with built-in story", "persistExample": "a generated 'life-in-death' pocket persists as a discoverable, revisitable jewel"},
-    {"type": "manifest domain", "template": "manifest_locals schema", "grammar": "local disposition + a seed-fiction \u2192 native-logic; the Second Manifestation arc is the in-world reason new domains appear", "persistExample": "a domain that blooms during play stays, with its rules-as-law, for later visits"},
-    {"type": "arc / quest thread", "template": "superstructure/greater_arcs + questSeeds", "grammar": "a tension between two dispositions or factions + hinge NPCs + stages; local face of a greater arc where apt", "persistExample": "a generated feud advances offscreen via world-tick and resolves durably"},
-    {"type": "cyclical event", "template": "living_world schema", "grammar": "a place + season + its livelihood/culture \u2192 a festival or trouble on a repeating clock", "persistExample": "a generated festival recurs every year on its season, remembered between"},
-    {"type": "creature", "template": "bestiary (manifest_locals)", "grammar": "a native-domain disposition \u2192 a beast; diffusion weight places it out-of-context", "persistExample": "a generated drake has a lair, a range, and persists as a known threat"},
-    {"type": "role instance", "template": "universal_roles", "grammar": "role + this locale's method \u2192 a specific practitioner", "persistExample": "the region's mediator persists as a known, returnable figure"}
+    {
+      "type": "npc",
+      "template": "npc schema",
+      "grammar": "universal role + local disposition → method, want, fears, knowledge, voice",
+      "persistExample": "a generated tollhand recurs with the same name, grudges, and accumulating facts"
+    },
+    {
+      "type": "location",
+      "template": "location schema",
+      "grammar": "local poleIntensity (± rolled asymmetric secondary) + tags + questSeeds; inside a domain, obeys seedFiction",
+      "persistExample": "a generated hollow can be re-entered, its state (who you met, what changed) intact"
+    },
+    {
+      "type": "companion",
+      "template": "companion schema",
+      "grammar": "a met NPC with a compatible want + a bond-grant derived from their role/craft + stages",
+      "persistExample": "a generated companion earns a bond, evolves stages, remembers"
+    },
+    {
+      "type": "item / gear",
+      "template": "item schema",
+      "grammar": "local craft + materials + a bonusTags set; rarely an evolution track from a seed",
+      "persistExample": "a named generated blade accumulates its own history and can evolve"
+    },
+    {
+      "type": "method",
+      "template": "methods schema",
+      "grammar": "a tool + a check that reveals or does something disposition-appropriate",
+      "persistExample": "a folk divination method local to a region, learnable and persistent"
+    },
+    {
+      "type": "jewel (co-firing node)",
+      "template": "cofiring_nodes schema",
+      "grammar": "hold one pole hot, roll its OPPOSITE (or an improbable second) as co-firing → a doubly-charged place with built-in story",
+      "persistExample": "a generated 'life-in-death' pocket persists as a discoverable, revisitable jewel"
+    },
+    {
+      "type": "manifest domain",
+      "template": "manifest_locals schema",
+      "grammar": "local disposition + a seed-fiction → native-logic; the Second Manifestation arc is the in-world reason new domains appear",
+      "persistExample": "a domain that blooms during play stays, with its rules-as-law, for later visits"
+    },
+    {
+      "type": "arc / quest thread",
+      "template": "superstructure/greater_arcs + questSeeds",
+      "grammar": "a tension between two dispositions or factions + hinge NPCs + stages; local face of a greater arc where apt",
+      "persistExample": "a generated feud advances offscreen via world-tick and resolves durably"
+    },
+    {
+      "type": "cyclical event",
+      "template": "living_world schema",
+      "grammar": "a place + season + its livelihood/culture → a festival or trouble on a repeating clock",
+      "persistExample": "a generated festival recurs every year on its season, remembered between"
+    },
+    {
+      "type": "creature",
+      "template": "bestiary (manifest_locals)",
+      "grammar": "a native-domain disposition → a beast; diffusion weight places it out-of-context",
+      "persistExample": "a generated drake has a lair, a range, and persists as a known threat"
+    },
+    {
+      "type": "role instance",
+      "template": "universal_roles",
+      "grammar": "role + this locale's method → a specific practitioner",
+      "persistExample": "the region's mediator persists as a known, returnable figure"
+    },
+    {
+      "type": "ability",
+      "template": "ability schema (tree/functions/axes)",
+      "grammar": "local domain/tradition + a target FUNCTION (heal/shield/strike/reveal/conceal/bind/move/break/ward) → a new ability that serves that function the domain's way; born with its `functions` tag",
+      "persistExample": "a generated folk-ability of a region persists, learnable, function-tagged"
+    },
+    {
+      "type": "combination",
+      "template": "combination_recipes schema",
+      "grammar": "two owned abilities from different domains + their functions → a braided effect; generated in-grain when a player pairs two abilities no authored recipe covers",
+      "persistExample": "a discovered generated braid persists as a known technique, added to the discoverable set"
+    }
   ],
-
   "generationGrammar": {
-    "inputs": "type + current location's poleIntensity + any seedFiction (domain) + relevant universal role + active arc-pressure + season (for events). These are the constraints that keep a generated thing IN-GRAIN \u2014 consistent with where and when it appears.",
-    "process": "LLM-authors the thing to its schema under those constraints \u2192 validate against the schema (reject/repair malformed) \u2192 mint an entityId \u2192 persist. Same authoring quality bar as the hand-authored corpus, because it uses the corpus as few-shot taste.",
+    "inputs": "type + current location's poleIntensity + any seedFiction (domain) + relevant universal role + active arc-pressure + season (for events). These are the constraints that keep a generated thing IN-GRAIN — consistent with where and when it appears.",
+    "process": "LLM-authors the thing to its schema under those constraints → validate against the schema (reject/repair malformed) → mint an entityId → persist. Same authoring quality bar as the hand-authored corpus, because it uses the corpus as few-shot taste.",
     "inGrainGuarantee": "A thing generated in the Stillhold reads peace+falsehood; in the Blocklands, block-logic; a warrior generated at the Redline fights by the Edge, at the Cogitarium by Noesis. Disposition + role are the grammar, so generated content is never generic and never off-key for its place.",
-    "asymmetry": "For locations/jewels, roll the secondary axis varied (Erik's rule) so the next place over is in-grain but surprising \u2014 chaos here, but WHAT rides with it is rolled."
+    "asymmetry": "For locations/jewels, roll the secondary axis varied (Erik's rule) so the next place over is in-grain but surprising — chaos here, but WHAT rides with it is rolled.",
+    "functionAwareness": "Generation is FUNCTION-AWARE: a needed effect is chosen as a FUNCTION (heal/shield/strike/reveal/conceal/bind/move/break/ward), then expressed via the local domain's method — mirroring universal roles. A generated ability is born with its `functions` tag; a generated NPC's kit is chosen to cover the functions their role needs; a generated combination braids two functions across domains. This lets the engine reason by NEED ('this scene needs a shield here — generate/surface one in-grain') rather than by fixed lists."
   },
-
   "persistence": {
-    "store": "Generated entities persist as durable nodes: into the character's codex (person/place/lore/etc. with a stable entityId \u2014 ties SNG-019 resolution) AND/OR a per-save generated-content store keyed to the world-state, so they recur with identity, accumulate facts (via the facts ledger), and can be revisited.",
-    "sharedGrowth": "Because saves sync to the repo (party play), generated content CAN be promoted from a save into shared world content when it proves good \u2014 an optional path where play literally grows the canonical world. (Flagged, not required for v1: personal-save persistence first.)",
+    "store": "Generated entities persist as durable nodes: into the character's codex (person/place/lore/etc. with a stable entityId — ties SNG-019 resolution) AND/OR a per-save generated-content store keyed to the world-state, so they recur with identity, accumulate facts (via the facts ledger), and can be revisited.",
+    "sharedGrowth": "Because saves sync to the repo (party play), generated content CAN be promoted from a save into shared world content when it proves good — an optional path where play literally grows the canonical world. (Flagged, not required for v1: personal-save persistence first.)",
     "worldTickTie": "Persisted generated arcs/NPCs advance offscreen via the world-tick (SNG-021), so a generated feud or festival keeps living between visits.",
-    "noGhosts": "A generated thing is never a one-scene throwaway. Once it exists, it persists with the same identity \u2014 the failure mode this whole spec exists to kill."
+    "noGhosts": "A generated thing is never a one-scene throwaway. Once it exists, it persists with the same identity — the failure mode this whole spec exists to kill."
   },
-
-  "authoredVsGenerated": "Downstream, nothing distinguishes them: same schemas, same fields, same persistence. The authored corpus is the seed and the taste-standard; generation grows the world from it. Over time a heavily-played world is mostly generated content standing on an authored skeleton \u2014 which is exactly a world that grew because people lived in it.",
-
-  "buildImplication": "Generalizes SNG-020 from NPCs/locations to a single generate(type, context) path over all schema'd types, each with a template + validator, all persisting through the codex/facts + a generated-content store, all using disposition+role as grammar. Depends on SNG-019 (entity resolution) for clean persistence. Medium-large engine work, but ONE path serving all types rather than N systems. Flagged as the anchor of the systems batch. The content corpus (this whole session's authoring) IS the template library \u2014 no additional content owed; the engine reads the existing files as its few-shot seeds."
+  "authoredVsGenerated": "Downstream, nothing distinguishes them: same schemas, same fields, same persistence. The authored corpus is the seed and the taste-standard; generation grows the world from it. Over time a heavily-played world is mostly generated content standing on an authored skeleton — which is exactly a world that grew because people lived in it.",
+  "buildImplication": "Generalizes SNG-020 from NPCs/locations to a single generate(type, context) path over all schema'd types, each with a template + validator, all persisting through the codex/facts + a generated-content store, all using disposition+role as grammar. Depends on SNG-019 (entity resolution) for clean persistence. Medium-large engine work, but ONE path serving all types rather than N systems. Flagged as the anchor of the systems batch. The content corpus (this whole session's authoring) IS the template library — no additional content owed; the engine reads the existing files as its few-shot seeds."
 }

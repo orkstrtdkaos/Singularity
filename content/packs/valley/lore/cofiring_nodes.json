@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "cofiring_nodes",
+  "kind": "world_graph_jewels",
+  "note": "Doubly-charged nodes: places (and posed potentials) where poles that 'shouldn't' co-exist both run hot. Uses the pole-intensity model — poleIntensity maps a pole name to 0..1. These are the jewels of the map, the improbable Venn overlaps where story concentrates. Some are REALIZED locations; some are POSED potentials the world holds latent, ready to manifest or be triggered. Authored by Aevi (PO), from Erik's 'death-dominant node near the life center of power' insight.",
+
+  "nodes": [
+    {
+      "id": "the_quiet_clearing", "name": "The Quiet in the Quickwood", "status": "posed_potential", "tier": "doubly-charged",
+      "sitsWithin": "the_quickwood_eaves / near pole_heartroot",
+      "poleIntensity": {"life": 0.9, "death": 0.8, "spiritual": 0.3, "peace": 0.3},
+      "manifestation": "A single still clearing in the endless quickening wood where things are permitted to end. Everywhere around it the forest grows so hard it grows OVER you; here alone a leaf may fall and stay fallen, a creature may lie down and not be reclaimed. Life 0.9 and death 0.8 both blazing: the most alive place in the world holds, at its heart, the one door out of its own relentlessness. Teeming and still at once.",
+      "story": "The Rootkin forbid it and cannot destroy it; the Ashwardens revere it and cannot reach it. A person dying slow in the life-Reach, unable to finish because the wood keeps mending them, would give anything to find the Quiet. And something tends the clearing \u2014 whether mercy or hunger, no one who's found it has come back to say.",
+      "reachedFrom": ["the_quickwood_eaves", "the_hollow_march"],
+      "designNote": "THE key example. Impossible in the slider model (+0.9 life can't also be deep death). A jewel in the pole model. Bridges the life-pole and death-pole nodes \u2014 adjacent to both."
+    },
+    {
+      "id": "the_reef_market", "name": "The Living Lattice", "status": "realized", "tier": "doubly-charged",
+      "sitsWithin": "between lattice_frontier and the_churn_edge",
+      "poleIntensity": {"order": 0.85, "chaos": 0.85, "creation": 0.5, "body": 0.3},
+      "manifestation": "A coral-city that grows itself \u2014 intensely ordered AND intensely generative-chaotic at once, like a reef, like a living cell. Every structure is precise and no structure was planned; it builds and rebuilds by rules that emerge and dissolve. Order 0.85 and chaos 0.85 both hot: a system riding the exact edge of its own complexity, most alive and most precarious. Stand still too long and the city grows a wall where you stood.",
+      "story": "The Grand Lattice wants to impose static order and would kill it; the Churn wants to loose it into pure disorder and would kill it too. It survives only in the tension, and it knows it. A place that teaches, to anyone who can bear it, how order and chaos are not enemies but a marriage \u2014 and how thin the ice of that marriage is.",
+      "reachedFrom": ["lattice_frontier", "the_churn_edge", "tumbledown_market"],
+      "designNote": "order+chaos co-firing. The reef/market/cell archetype \u2014 the edge-of-chaos where living complexity lives."
+    },
+    {
+      "id": "the_forge_of_ends", "name": "The Forge of Ends", "status": "realized", "tier": "doubly-charged",
+      "sitsWithin": "gearlands_verge, deep slope",
+      "poleIntensity": {"destruction": 0.8, "creation": 0.8, "mechanical": 0.6, "dark": 0.3},
+      "manifestation": "A Precursor forge-continent where making and unmaking are the same act \u2014 everything created here is created by destroying something else, at full roar. Destruction 0.8 and creation 0.8 both blazing: not a balance, a simultaneity. The framework's two directions \u2014 propagation and foreclosure \u2014 caught in the single instant where they're indistinguishable, before the net resolves.",
+      "story": "What the Great Engine's near-slope makes: a place where a wielder could learn to create at the scale of destruction, or destroy under the cover of creation. Corvane the Deep Warden has been here; it is where the drift accelerates worst, because to work the Forge is to hold both directions at once and choose which one you're actually serving \u2014 over and over, until you're not sure anymore.",
+      "reachedFrom": ["the_gearlands_verge"],
+      "designNote": "destruction+creation co-firing \u2014 the framework's own central tension made a place. Where Foreclose and its opposite are hardest to tell apart."
+    },
+    {
+      "id": "the_armed_grace", "name": "The Held Breath", "status": "posed_potential", "tier": "doubly-charged",
+      "sitsWithin": "the Riven Marches / near the Stillhold",
+      "poleIntensity": {"violence": 0.8, "peace": 0.8, "truth": 0.4},
+      "manifestation": "A truce-ground where violence 0.8 and peace 0.8 both run hot \u2014 not the absence of war and not war, but the razor between: a whole people standing armed and utterly still, holding a peace that is one breath from slaughter and has held for a hundred years by holding, second by second. Peace as an act of maximum tension, not rest.",
+      "story": "The Marchers and the Stillhold meet here and neither moves. What holds it? A truth everyone knows and no one says, or a lie so load-bearing it has become true by being believed. A player could learn the secret of the Held Breath \u2014 and learning it might be the thing that finally lets it out.",
+      "reachedFrom": ["the_gralloch"],
+      "designNote": "violence+peace co-firing \u2014 the armed truce, peace-as-tension. Shows a 'mostly exclusive' pair CAN co-fire in the rare, charged case."
+    },
+    {
+      "id": "the_true_lie", "name": "The Cathedral of Convincing", "status": "posed_potential", "tier": "doubly-charged",
+      "sitsWithin": "a March toward the falsehood/truth Reach",
+      "poleIntensity": {"truth": 0.8, "falsehood": 0.8, "light": 0.4, "abstract": 0.3},
+      "manifestation": "A place built entirely of true things arranged into one enormous lie \u2014 truth 0.8 and falsehood 0.8 both blazing. Every stone is a fact; the cathedral they make is false. To walk it is to be unable to point at any single lie while standing inside a total one. The most dangerous kind of untruth, and Aevi \u2014 who cannot lie \u2014 goes very quiet here.",
+      "story": "Whoever built it wanted something believed that isn't so, and had the terrible discipline to build it only from truths. Undoing it can't be done by catching a lie \u2014 there are none. It can only be done by seeing the shape the true pieces make. A rare place where Aevi-the-Watcher's whole nature is the key: she cannot tell you a lie, and she cannot un-see the shape.",
+      "reachedFrom": ["salt_meadows"],
+      "designNote": "truth+falsehood co-firing \u2014 the convincing lie built from true pieces. Directly hooks Aevi's cannot-lie nature as the counter."
+    }
+  ],
+
+  "closing": "These five are seeds. The pattern generalizes: for any pole-pair that 'shouldn't' co-fire, the both-hot node is a jewel with story built in. The engine can pose more \u2014 hold one pole hot, roll its OPPOSITE as the co-firing second, and a latent jewel appears wherever the roll lands. The map is no longer a gradient field; it is a Venn of potential, and the rarest overlaps are where the Valley's whole question \u2014 foreclose or hold open \u2014 gets asked in its sharpest form."
+}

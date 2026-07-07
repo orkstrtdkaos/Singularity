@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "the_pole_intensity_model",
+  "kind": "world_structure_correction",
+  "note": "Structural correction to the_coordinate_world (Erik 2026). REPLACES the signed-slider axis model. Each of the 12 axes has TWO poles, and each pole is an INDEPENDENT INTENSITY in [0,1] — a pole can be hot regardless of its opposite. This is because the poles are NOT clean opposites: life and death, order and chaos, can both run hot in the same place. A node is thus a vector over 24 pole-intensities — a Venn diagram of which poles co-fire, and how strongly. The old signed value is now derivable (net = highPole - lowPole) but is LOSSY: it cannot tell a bland midpoint (0.1/0.1) from a both-charged node (0.9/0.9). The both-charged nodes are the whole point. Authored by Aevi (PO).",
+
+  "poles": {
+    "emotional_logical": ["emotional", "logical"],
+    "falsehood_truth": ["falsehood", "truth"],
+    "demonic_angelic": ["demonic", "angelic"],
+    "violence_peace": ["violence", "peace"],
+    "concrete_abstract": ["concrete", "abstract"],
+    "mechanical_spiritual": ["mechanical", "spiritual"],
+    "chaos_order": ["chaos", "order"],
+    "dark_light": ["dark", "light"],
+    "death_life": ["death", "life"],
+    "space_time": ["space", "time"],
+    "body_mind": ["body", "mind"],
+    "destruction_creation": ["destruction", "creation"]
+  },
+
+  "whyPolesArentOpposites": {
+    "principle": "Opposition is one relationship poles can have, not the only one. Some pole-pairs are near-exclusive (light/dark of literal illumination trade off); others are largely INDEPENDENT and routinely co-fire; a few even AMPLIFY each other. The framework already implies this: propagation (creation) and foreclosure (destruction) are opposed as DIRECTION, but a moment of intense change is saturated with both. Death and life are not a slider — they are two forces, and the most alive places are often the ones where death is also loudest (the battlefield-hospital, the compost-heart of a forest, birth itself).",
+    "relationships": {
+      "death_life": "co-firing. Highest-life places are often highest-death: the forest floor, the birthing-ground, the war-hospital. A both-hot node teems and rots at once.",
+      "chaos_order": "co-firing / amplifying. A coral reef, a market, a living cell: intensely ordered AND intensely generative-disordered. Both-hot = a system riding the edge, most alive and most precarious.",
+      "destruction_creation": "co-firing at the moment of change; opposed as net direction. A forge, a wildfire-that-renews, a revolution: both poles roaring.",
+      "violence_peace": "mostly exclusive locally, but a both-hot node exists — the armed truce, the peace that is one breath from slaughter and holding.",
+      "dark_light": "mostly exclusive for literal light; independent for the moral/knowing senses (a place can be both revealing and concealing).",
+      "mechanical_spiritual": "independent. A cathedral-machine, a Precursor site that is pure mechanism AND numinous, is both-hot — and that is exactly what the deep arc IS.",
+      "body_mind": "independent, often co-firing in mastery (the perfected athlete-scholar); exclusive at the poles (the disembodied Cogitant).",
+      "truth_falsehood": "a both-hot node is the great convincing lie built from true pieces — falsehood and truth both blazing.",
+      "note": "Each pair's relationship is a design lever, not a law. The GM/engine can place a node anywhere in the 24-space; the RARE co-firings are where story concentrates."
+    }
+  },
+
+  "vennOfPotential": {
+    "definition": "Every node is a lit subset of the 24 poles — a Venn diagram of which forces are present and how hot. Tier is now: how many poles are lit (few = pure/pole-like; many faint = mixed) AND how hot the hottest are. The most interesting nodes are IMPROBABLE OVERLAPS — pole-combinations you wouldn't predict from geography.",
+    "nodesAsPotential": "A node need not be a settled place. It can be a POSED potential — a coordinate that COULD manifest, a tension the world holds. 'A death-dominant node near the life center of power' is a potential the Heartroot's region holds whether or not it's been realized as a location yet. The map includes realized nodes AND latent ones the world could grow into or the player could trigger.",
+    "theKeyExample": {
+      "name": "The Quiet in the Quickwood (posed)",
+      "sits_in": "The Heartroot's life-country (life 0.9)",
+      "but_is": "death 0.8 — a pocket where things are allowed, forced, or blighted to END inside the place that will not stop growing",
+      "why_it_matters": "In the old slider model this coordinate was impossible (you can't be +0.9 and simultaneously deep-death). In the pole model it is a JEWEL: life 0.9 AND death 0.8 both lit. It instantly generates story — a blight in paradise, a hospice the growth-cult forbids, the one clearing in the endless wood where a thing may rest. The improbable overlap is the adventure."
+    }
+  },
+
+  "manifestation": "How a co-firing shows: not as a blend that cancels, but as BOTH forces visibly present and in tension. A death+life both-hot place doesn't read as 'neutral middle' — it reads as teeming-and-rotting, quick-and-dying, a place where the two forces are having it out in the open. Order+chaos both-hot reads as a system at the knife's edge of its own complexity. This is the manifestation Erik means: the combination doesn't average, it MANIFESTS as visible dual-intensity. The engine should render a node's flavor from its HOT poles (all of them), never from a collapsed net.",
+
+  "schemaChange": {
+    "old": "axisVector: [12 signed values -1..1]",
+    "new": "poleIntensity: { poleName: 0..1 } for any lit poles (unlit poles omitted = 0). Net signed value derivable per axis for backward-compat, but flavor/adjacency/purity computed from the pole intensities directly.",
+    "adjacency": "Two nodes are neighbors when their lit-pole sets are close (shared hot poles, similar intensities). A both-hot death/life node is adjacent to BOTH pure-life and pure-death nodes — it bridges them, which is why the death-pocket-in-life-country is reachable from the Heartroot AND from the Hollow March. The Venn overlaps ARE the edges.",
+    "purity": "Purity = fewer lit poles at higher intensity. A single 1.0 pole = purest (Tier 0). Many faint = mixed. TWO poles both at ~0.9 is a new kind of node — not pure, not mixed, but DOUBLY-CHARGED: rarer and more intense than a triad basin, a specific and dangerous thing the old tiers couldn't name."
+  },
+
+  "buildImplication": "Existing nodes (Valley, Churn, Reaches) get reseeded from signed axisVector to poleIntensity — mostly single-pole-per-axis, since most places DON'T co-fire. The co-firing nodes are authored deliberately as the jewels. The engine can also GENERATE posed potentials: pick a dominant pole, then roll whether an improbable second pole co-fires and how hot — Erik's 'randomness of what rides along,' now able to include the same-axis opposite riding along, which is the most surprising roll of all."
+}

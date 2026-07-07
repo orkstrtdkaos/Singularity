@@ -93,6 +93,193 @@
         "reveal",
         "ward"
       ]
+    },
+    {
+      "id": "mech_sense",
+      "name": "Mechanism-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
+      "description": "Perceive how a mechanism or system functions on sight.",
+      "notFor": "The why/meaning of it; living things.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Mechanism-Sense",
+          "grants": "Understand a device or machine-system's function and flaws at a glance.",
+          "cannot": "Function, not purpose; the numinous stays dark."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "numen_sense",
+      "name": "Numen-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The weight of meaning in a place felt on the skin.",
+      "description": "Sense where meaning runs dense — sacred ground, a charged moment, a numinous site.",
+      "notFor": "Reading mechanism; forcing the meaning.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Numen-Sense",
+          "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
+          "cannot": "Feel, not command; barren places read empty."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "mend_device",
+      "name": "Mend",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.3
+      },
+      "functions": [
+        "mend"
+      ],
+      "narrationHints": "Parts find their places and the dead thing hums again.",
+      "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
+      "notFor": "Precursor deep-systems (that's Enginecraft); living hurts.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Mend",
+          "grants": "Fix a broken tool, machine, or simple device reliably.",
+          "cannot": "Ordinary mechanism only; the deep works resist."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "steady_soul",
+      "name": "Steady the Soul",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.3
+      },
+      "functions": [
+        "heal"
+      ],
+      "narrationHints": "Presence alone, and the breaking person holds.",
+      "description": "Steady another's spirit in crisis by attention and presence — folk-Numenwork.",
+      "notFor": "Healing the body; compelling calm.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Steady the Soul",
+          "grants": "Calm and steady a person in spiritual/emotional crisis through pure presence.",
+          "cannot": "Opens the door, never shoves; the closed resist."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "command_engine",
+      "name": "Command the Small Engine",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.4,
+        "chaos_order": 0.2
+      },
+      "functions": [
+        "bind",
+        "mend"
+      ],
+      "narrationHints": "A word to the machine and it does the new thing.",
+      "description": "Direct a machine-system to reconfigure toward your intent — mid-tier Enginecraft.",
+      "notFor": "The meaning-layer; wishes the mechanism can't do.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Command the Small Engine",
+          "grants": "Make a device or system do something within its mechanism it wasn't set to.",
+          "cannot": "Only what the mechanism allows; meaning stays opaque."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "thin_place",
+      "name": "Open the Thin Place",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.4,
+        "concrete_abstract": 0.3
+      },
+      "functions": [
+        "reveal",
+        "ward"
+      ],
+      "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
+      "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
+      "notFor": "Where meaning is thin; forcing the world.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Open the Thin Place",
+          "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
+          "cannot": "Only where meaning is dense; costs proportional."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "meaning_engine",
+      "name": "The Meaning-Engine",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0.0
+      },
+      "functions": [
+        "mend",
+        "reveal"
+      ],
+      "narrationHints": "The machine runs on why, not just how.",
+      "description": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once.",
+      "notFor": "Pure-mechanism or pure-spirit approaches; shallow substrate.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Meaning-Engine",
+          "grants": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under.",
+          "cannot": "Needs dense substrate; what answers may not be tame."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
     }
   ]
 }

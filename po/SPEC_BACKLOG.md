@@ -37,19 +37,13 @@ Erik 2026-07-07: the codex reads as a running list; ~20 facts about Teva end up 
 - Caps already exist (60 topics, 12 facts/topic); raise factsPerTopic for primary characters if needed (a major NPC may warrant 20+).
 - Smoke: two differently-phrased facts about the same NPC land on one node; entityId beats label; the merge pass collapses a pre-fragmented save; UI shows nodes with nested facts + links, not a flat list.
 
-## SNG-020 — Generative content with persistence (new NPCs/locations/domains on the fly)
-Erik 2026-07-07: once the basics exist, the engine should GENERATE new NPCs, locations, etc. generatively AND persist them. Build on the authored content as templates/seeds:
-- **Generation.** When the GM needs a person/place not in CONTENT, generate one from the local disposition (poleIntensity of the current area), the schema (npc/location fields), and any seedFiction (manifest domain). Output validates against the schema; flavor pulls from the area's Reach + jewels + manifest-domain logic. A generated NPC gets personality/wants/fears/knowledge; a generated location gets poleIntensity + tags + questSeeds — same shape as authored content so nothing downstream knows the difference.
-- **Persistence.** A generated entity is WRITTEN as a durable node (into the character's codex as a person/place topic with entityId, and/or into a per-save generated-content store) so it recurs with the same identity, facts accumulate on it (via SNG-019), and it can be revisited. Generated NPCs persist their situation via the statusNote/facts machinery already built. No more one-scene ghosts.
-- **Consistency.** Generation is disposition-consistent: a person generated in the Stillhold reads peace+falsehood; a place generated in the Blocklands obeys block-logic. The coordinate model is the generator's grammar.
-- **Native-domain rules-as-law** (from manifest_locals): inside a manifest domain, generated content + GM narration obey the domain's nativeLogic.
-- **Engine needs:** a generate-entity path (LLM-authored to schema, validated), a persistent generated-content store keyed to the save, entityId minting that SNG-019's resolver honors, and disposition/seedFiction as generation inputs. Reuses codex + facts + npc/location schemas.
-- **Smoke:** a generated NPC persists across scenes with stable identity + accumulating facts; a generated location can be re-entered; generated content matches local disposition; a manifest-domain generation obeys its logic; nothing downstream distinguishes generated from authored.
-
-*Both ratified-direction (Erik). SNG-019 is small (resolution + merge + UI). SNG-020 is medium and depends on SNG-019's entityId resolver. Fold into the systems batch.*
-
-*Updated 2026-07-07.*
-
+## SNG-020 — Generative content with persistence (ALL types) — world grows through play
+GENERALIZED (Erik 2026-07-07): every authored type is a TEMPLATE; the engine generates more of each WITH PERSISTENCE, so the world grows as people play. Not just NPCs/locations — also companions, items, methods, jewels (co-firing nodes), manifest domains, arcs/quest-threads, cyclical events, creatures, universal-role instances. Framing: generative_substrate.json (template library = the whole authored corpus; grammar = poleIntensity disposition + universal role + seedFiction + arc-pressure + season).
+- **One path:** generate(type, context) over all schema'd types — LLM-authors to schema under local-disposition constraints, validates/repairs, mints entityId, persists. Uses the authored files as few-shot taste, so generated content matches quality + is in-grain (Stillhold-generated reads peace+falsehood; Redline warrior fights by the Edge; asymmetric secondary axis rolled for surprise).
+- **Persistence:** durable nodes in the codex (SNG-019 entityId resolution) + a per-save generated-content store; facts accumulate; world-tick (SNG-021) advances generated arcs/NPCs offscreen. No one-scene ghosts.
+- **Optional shared growth:** proven-good generated content promotable from a synced save into canonical world content — play literally grows the shared world (flag; personal-save persistence first).
+- **Depends on:** SNG-019 (clean entity persistence). Anchor of the systems batch. NO additional content owed — the corpus IS the template library.
+- **Smoke:** each type generates in-grain for its locale + persists with stable identity + accumulating facts; a generated location/domain is revisitable with state intact; a generated arc advances offscreen; authored vs generated indistinguishable downstream.
 ## SNG-021 — Living world (cyclical events + self-driven NPCs)
 Content ready: the_living_world.json (season×place festival/cycle table, recurring troubles, population doctrine). Engine: world-tick checks current season/day against the cycle table and surfaces 'what's happening here now' to the GM; key NPCs get an offscreen want-progress counter so a place MOVES between visits; failed-harvest + pass-freeze as world-tick conditions with cascading effects; generated NPCs (SNG-020) get a want on creation. Light additions to worldtick.js + a per-NPC arc-progress field. GM mandate: always able to answer 'what's happening here that isn't about me.' Smoke: arriving in a place during its festival season surfaces the festival; an NPC met twice has advanced their want; a failed harvest cascades pressure.
 

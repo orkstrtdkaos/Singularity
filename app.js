@@ -1010,6 +1010,7 @@ async function travelTo(locId) {
   saveCharacter(character);
   const news = await maybeTick();
   if (await maybeRandomEncounter("onTravel", news)) return; // the road had something to say
+  if (await maybeRandomEncounter("onEnterLocation", news)) return; // arrival itself had something waiting
   startScene(`(The character has just arrived here, traveling from elsewhere in the valley. Open the scene with the arrival.)`, news);
 }
 

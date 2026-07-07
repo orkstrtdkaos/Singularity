@@ -4,20 +4,52 @@
   "name": "Thornwake Glade",
   "regionId": "valley",
   "communityId": "valley.thornwake_glade",
-  "spectrum": {"mechanical_spiritual": 0.6, "death_life": 0.5, "individual_collective": -0.2, "concrete_abstract": -0.4, "chaos_order": -0.3},
-  "tags": ["wilds", "grove", "living", "sanctuary", "beast", "unaligned"],
-  "connections": ["disputed_zone_fringe", "old_switchback"],
-  "descriptionSeed": "Deep in the wilds where the interference thins, a grove that the transition changed rather than broke \u2014 old trees grown strange and deliberate, clearings that seem arranged, animals that watch too knowingly. Something tends this place. The few who live at its edge call themselves wardens and won't say to whom. For an ENT or a Beastfriend the Glade reads almost as home; for anyone else it's beautiful and quietly conditional \u2014 welcome is extended, and watched. No river-plot reaches here; the Glade's concerns are older and greener.",
-  "loreRefs": ["valley_primer", "precursor_glimpse"],
-  "npcsPresent": ["warden_isolde", "the_old_stag", "burr_the_foundling"],
+  "spectrum": {
+    "mechanical_spiritual": 0.6,
+    "death_life": 0.5,
+    "individual_collective": -0.2,
+    "concrete_abstract": -0.4,
+    "chaos_order": -0.3
+  },
+  "tags": [
+    "wilds",
+    "grove",
+    "living",
+    "sanctuary",
+    "beast",
+    "unaligned"
+  ],
+  "connections": [
+    "disputed_zone_fringe",
+    "old_switchback"
+  ],
+  "descriptionSeed": "Deep in the wilds where the interference thins, a grove that the transition changed rather than broke — old trees grown strange and deliberate, clearings that seem arranged, animals that watch too knowingly. Something tends this place. The few who live at its edge call themselves wardens and won't say to whom. For an ENT or a Beastfriend the Glade reads almost as home; for anyone else it's beautiful and quietly conditional — welcome is extended, and watched. No river-plot reaches here; the Glade's concerns are older and greener.",
+  "loreRefs": [
+    "valley_primer",
+    "precursor_glimpse"
+  ],
+  "npcsPresent": [
+    "warden_isolde",
+    "the_old_stag",
+    "burr_the_foundling"
+  ],
   "encounterFlavor": "A living quiet that pays attention. Beasts that parley if you know how; wardens who test your intent before your skill; the grove itself adjusting to whether you take or tend.",
   "dangerLevel": 2,
   "image": "content/packs/valley/assets/thornwake_glade.jpg",
   "questSeeds": [
-    "Warden Isolde tends the Glade for something she'll only call 'the Green Accord,' and it is failing \u2014 the grove is dreaming badly, and she needs someone who can walk the wilds to find why",
+    "Warden Isolde tends the Glade for something she'll only call 'the Green Accord,' and it is failing — the grove is dreaming badly, and she needs someone who can walk the wilds to find why",
     "A foundling child, Burr, was left at the Glade's edge and the grove has half-adopted them; the wardens disagree bitterly about whether to raise a human here or return them to people",
     "Poachers from the Disputed Zone are taking Glade-touched beasts to sell as curiosities; stopping them cleanly matters, because the Glade remembers who spills blood in it",
-    "The Old Stag \u2014 something between an animal and a presence \u2014 is dying, and what happens to the Green Accord when it does is a question the wardens are terrified to answer"
+    "The Old Stag — something between an animal and a presence — is dying, and what happens to the Green Accord when it does is a question the wardens are terrified to answer"
   ],
-  "map": {"x": 720, "y": 300}
+  "map": {
+    "x": 720,
+    "y": 300
+  },
+  "poleIntensity": {
+    "spiritual": 0.6,
+    "life": 0.5,
+    "concrete": 0.4,
+    "chaos": 0.3
+  }
 }

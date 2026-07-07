@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "warden_isolde",
+  "name": "Warden Isolde",
+  "role": "Keeper of the Green Accord at Thornwake Glade",
+  "homeLocation": "thornwake_glade",
+  "communityId": "valley.thornwake_glade",
+  "personality": {"warmth": 0.3, "trust": -0.2, "candor": 0.4, "patience": 0.7},
+  "spectrum": {"mechanical_spiritual": 0.6, "death_life": 0.5, "individual_collective": -0.2, "concrete_abstract": -0.3},
+  "voiceHints": "Still, rooted, speaks as if translating for someone not present. Tests intent before skill and welcome before trust. Devoted to a compact she'll only half-explain \u2014 the Green Accord \u2014 and frightened it's failing.",
+  "knowledge": [
+    "What the Green Accord is and what tends the Glade \u2014 knowledge she guards and doles out",
+    "That the grove is 'dreaming badly' and that the Old Stag's decline is at the root",
+    "How to move safely through the changed wilds, and how to read a beast's parley"
+  ],
+  "wants": "To keep the Accord \u2014 the pact between the Glade and whatever changed it \u2014 alive through the crisis coming with the Old Stag's death.",
+  "fears": "That the Accord ends with the Stag, and the Glade becomes just wilds again, or something worse than wilds.",
+  "reactsToReputation": {"tender": "opens the Accord to them slowly", "beast-friend": "recognizes kin, accelerates trust", "exploitative": "the Glade closes; welcome withdrawn"}
+}

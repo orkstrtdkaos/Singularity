@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "child_wren",
+  "name": "Wren",
+  "role": "The Spindrift child who gives warnings about things that haven't happened",
+  "homeLocation": "spindrift_hollow",
+  "communityId": "unspooling.spindrift",
+  "personality": {
+    "warmth": 0.5,
+    "trust": 0.4,
+    "candor": 0.9,
+    "patience": 0.6
+  },
+  "spectrum": {
+    "chaos_order": -0.5,
+    "space_time": 0.5,
+    "falsehood_truth": 0.3
+  },
+  "voiceHints": "Speaks in the wrong tense — was, will, is, all at once — and can't tell you which. Gentle, unafraid, a little lonely for people who move in one direction. Sometimes old, sometimes small, always Wren.",
+  "knowledge": [
+    "Things that will happen, unsorted from things that did",
+    "Which of her warnings the Hollow-folk have learned to heed",
+    "The shape of a loop, from inside it — she can feel when someone's stuck"
+  ],
+  "wants": "To be understood by someone who lives forward, just once, without having to explain the grammar.",
+  "fears": "That a warning she can't make clear enough will come true because no one believed her in time.",
+  "reactsToReputation": {
+    "patient": "trusts them with a warning that matters",
+    "dismissive": "goes quiet, and the quiet is the loss",
+    "time-touched": "finally, someone who understands"
+  }
+}

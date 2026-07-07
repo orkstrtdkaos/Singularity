@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "world_superstructure",
+  "kind": "meta_arc",
+  "note": "GM-EYES-ONLY superstructure. This is the GRAIN of the world, not a railroad. The Valley tends toward these movements whether or not the player touches them — offscreen NPCs act, factions press, the crisis ripens or is answered. The player can join an arc, deflect it, ignore it and feel its consequences arrive, or become its hinge. The world-tick advances these in the background; the GM surfaces them as rumor, weather, consequence. Nothing here is predestined — it is what happens if no one intervenes, and the shape it takes if someone does. State transitions are engine-tracked (see SNG spec: world-arc ledger); the GM narrates, never forces.",
+
+  "principle": "Everything tends toward foreclosure or opening. The framework's antagonist — contraction, premature foreclosure — is the world's default drift under neglect. Left alone, the Valley narrows: the crisis spreads, the cities harden, the free places get bought or absorbed, the old dangerous knowledge gets seized by whoever moves first. Intervention is what bends the grain toward opening instead. Goodness here is not a side quest; it is which way the whole structure leans.",
+
+  "arcs": [
+    {
+      "id": "arc_the_water",
+      "name": "The Second River",
+      "pressure": "high",
+      "tendency": "The contamination spreads from the Echo River outward. Untended, it reaches the well-water of Millbrook, then the terraced gardens, then the cities' lower districts within a season or two. The truth beneath it — a Precursor system waking under the valley, a 'second river' of coolant or codeye reactivating — stays buried unless someone digs.",
+      "stages": ["gray mornings dismissed", "livestock and crops failing", "a death that can't be denied", "panic and blame between communities", "the source found — or the valley emptying"],
+      "ifIgnored": "Millbrook empties first; refugees pressure the Stilts and the Roost; the cities close their gates; the Disputed Zone grows. The player feels this as worsening rumor, displaced NPCs appearing in other locations, prices rising.",
+      "ifEngaged": "Can be traced to the archive, the deep Precursor layer, and a choice about whether to shut the second river down (safe, but loses what it was keeping alive) or stabilize it (dangerous, but opening).",
+      "hingeNpcs": ["water_keeper", "archive_guardian", "high_luminary"],
+      "connectsTo": ["arc_the_archive", "arc_precursor_waking"]
+    },
+    {
+      "id": "arc_pass_takeover",
+      "name": "The Patient Buyer",
+      "pressure": "medium",
+      "tendency": "Someone is buying up pass-debts and Roost obligations cheaply and patiently, assembling ownership of the free crossroads by arithmetic instead of force. Untended, the Kestrel loses the Roost — and whoever holds it holds the throat between the cities, the wilds, and the country beyond the pass.",
+      "stages": ["a ledger discrepancy", "debts changing hands quietly", "the Kestrel isolated", "a call the Kestrel can't cover", "the Roost owned — by a name that turns out to matter"],
+      "ifIgnored": "The Roost falls to the buyer; tolls and passage tighten; the free crossroads becomes a chokepoint. Travel gets costlier and more watched across the whole map.",
+      "ifEngaged": "The buyer can be exposed, out-maneuvered, or revealed — and who they turn out to be (a city faction? Sable's missing run connects here) reframes the whole northern map.",
+      "hingeNpcs": ["the_kestrel", "sable_the_runner", "brann_tollhand"],
+      "connectsTo": ["arc_city_reach"]
+    },
+    {
+      "id": "arc_city_reach",
+      "name": "The Long Reach",
+      "pressure": "medium",
+      "tendency": "The two aligned cities — Harmonic Heights and Radiant Plateau — are each quietly extending control over the unaligned places, offering safety in exchange for autonomy. The Stilts' envoy, the pass-buying, pressure on Millbrook: facets of two powers preparing for a reckoning with each other and absorbing the middle first.",
+      "stages": ["generous offers", "the free places choosing sides", "an incident between the cities", "open rivalry", "a valley divided in two — or a third way found"],
+      "ifIgnored": "The unaligned world is absorbed piecemeal; the Valley polarizes toward a Heights-vs-Plateau confrontation the small communities get ground between.",
+      "ifEngaged": "A player can broker the free places into a bloc, tip the balance, expose what each city is really after, or find the third way the framework points at — expansion over the zero-sum contraction of two powers foreclosing on each other.",
+      "hingeNpcs": ["high_luminary", "elder_resonance", "reed_mother_ossa"],
+      "connectsTo": ["arc_pass_takeover", "arc_the_water"]
+    },
+    {
+      "id": "arc_precursor_waking",
+      "name": "What Sleeps Under",
+      "pressure": "slow-building",
+      "tendency": "The Precursor lattice under the valley is stirring — the water is one symptom, the Sunken Choir's returning voices another, the thin places Ember senses another. Something is waking, or being woken, and the archive holds the record of what it is. Untended, it wakes on its own schedule, indifferent.",
+      "stages": ["scattered anomalies", "the anomalies rhyming", "a site goes fully live", "the lattice acts", "contact — or catastrophe"],
+      "ifIgnored": "Builds toward a lattice-scale event the whole valley experiences; the deep arc that the water and the Choir and the Glade's failing Accord are all early tremors of. Glimpsed, never explained — until it can't be ignored.",
+      "ifEngaged": "The deepest arc; touches Foreclose and Hold the Aperture directly. Whether the waking is met with foreclosure (seal it, lose what it holds) or opening (hold the aperture, risk everything) is the framework's central question made playable. GM-guards the truth of what wakes.",
+      "hingeNpcs": ["archive_guardian", "the_old_stag", "old_choirmaster"],
+      "connectsTo": ["arc_the_water", "arc_the_archive", "arc_glade_accord"]
+    },
+    {
+      "id": "arc_glade_accord",
+      "name": "The Failing Accord",
+      "pressure": "slow-building",
+      "tendency": "The Green Accord that tends Thornwake Glade is failing as the Old Stag dies. Untended, the Glade reverts — or worse, becomes something ungoverned. One of the valley's few places of genuine opening goes dark.",
+      "stages": ["the grove dreaming badly", "beasts leaving or turning", "the Stag's decline visible", "the Accord's holder needed", "the Accord passed on — or broken"],
+      "ifIgnored": "The Glade closes; a source of the world's green goes out; the wilds get less merciful.",
+      "ifEngaged": "Someone attuned — an ENT, a Beastfriend, a Hold-the-Aperture wielder — could receive or renew the Accord. Ember may be the Glade's own attempt to send an heir out.",
+      "hingeNpcs": ["warden_isolde", "the_old_stag", "burr_the_foundling"],
+      "connectsTo": ["arc_precursor_waking"]
+    },
+    {
+      "id": "arc_the_archive",
+      "name": "The Question of Knowledge",
+      "pressure": "medium",
+      "tendency": "The Lost Archive holds the truth about the Transition, the Precursors, and what's waking — and the pressure to seize, burn, or open it is building from every side. Traditionalists want it sealed or destroyed; the cities want it controlled; the deep stacks are answering visitors on their own. Untended, someone forces the question by theft or fire.",
+      "stages": ["quiet pilgrimage and quiet theft", "a faction moves openly", "the Guardian besieged", "the deep stacks respond", "the archive opened, sealed, or lost"],
+      "ifIgnored": "The archive is taken or burned by whoever moves first, and the valley loses its one chance to understand what's happening to it before it happens.",
+      "ifEngaged": "The player becomes the swing vote on the framework's own question: what knowledge gets preserved, studied, or sealed. Quill's expulsion connects here; so does Aevi's own origin.",
+      "hingeNpcs": ["archive_guardian", "high_luminary"],
+      "connectsTo": ["arc_precursor_waking", "arc_the_water"]
+    }
+  ],
+
+  "convergence": "The arcs are not separate. The water, the Choir, the Glade, the thin places are all early tremors of What Sleeps Under; the pass-takeover and the city-reach are the human power scrambling to be holding the map when the deep thing wakes. A player who spends an entire game at the Roost dealing with debts is, without knowing it, inside the opening moves of the city-reach — and will feel What Sleeps Under arrive regardless. The grain runs toward a single question the whole structure is bent around: when the old sealed thing wakes, does the valley meet it by foreclosing or by holding the aperture open. Everything else is which hands are on the door when that moment comes."
+}

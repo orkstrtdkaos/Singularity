@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "the_stillhold",
+  "name": "The Stillhold",
+  "regionId": "riven_marches",
+  "communityId": "riven.stillhold",
+  "poleIntensity": {
+    "peace": 0.85,
+    "order": 0.4,
+    "falsehood": 0.3
+  },
+  "spectrum": {
+    "violence_peace": 0.85,
+    "chaos_order": 0.4,
+    "falsehood_truth": -0.3
+  },
+  "tags": [
+    "marches",
+    "peace",
+    "walled",
+    "sacred",
+    "sealed"
+  ],
+  "connections": [
+    "the_marchward"
+  ],
+  "descriptionSeed": "A walled city of absolute peace — no violence in living memory, no weapons, no raised voices. Beautiful, ordered, and subtly WRONG. What rides with the peace here is FALSEHOOD: the stillness rests on something no one is allowed to say, a load-bearing untruth so old it has become the air. The peace is real and the peace is a prison, and both are true. The counter-image of the Redline — and arguably the more dangerous place, because its foreclosure wears serenity.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "reach_violence_peace"
+  ],
+  "encounterFlavor": "Serene wrongness — a kindness with a warning under it, a question that makes everyone go quiet, a peace so total it reads as held breath, the slow realization that no one here is allowed to leave the subject alone.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "You're welcomed warmly and gently steered away from one question; following it is the whole arc, and the Stillhold will resist you with kindness, not force",
+    "Someone inside wants OUT — not of the city, of the silence; helping them speak the unsayable thing might free them or shatter the peace of thousands",
+    "The truth the Stillhold is built on is discoverable, and learning it forces the framework's exact question: is a peace built on a buried injustice worth keeping"
+  ],
+  "map": {
+    "x": 940,
+    "y": 460
+  }
+}

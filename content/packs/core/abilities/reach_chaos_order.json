@@ -91,6 +91,194 @@
         "bind",
         "shield"
       ]
+    },
+    {
+      "id": "chaos_sense",
+      "name": "Chaos-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "chaos_order": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "A feel for where a situation is about to come apart.",
+      "description": "Sense instability, imminent disorder, the fault-line in a plan.",
+      "notFor": "Predicting exactly how; ordered systems' inner logic.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Chaos-Sense",
+          "grants": "Feel where and roughly when something will break down; find the loose thread.",
+          "cannot": "Feel, not detail; the truly stable reads quiet."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
+    },
+    {
+      "id": "order_sense",
+      "name": "Order-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "chaos_order": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The hidden structure of a thing laid bare to a reading eye.",
+      "description": "Perceive the underlying order, rule, or pattern in a system.",
+      "notFor": "Improvised/random things; commanding the structure.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Order-Sense",
+          "grants": "See a system's structure, rules, and load-bearing points at a glance.",
+          "cannot": "Reads structure, not intent; pure chaos returns noise."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
+    },
+    {
+      "id": "scatter",
+      "name": "Scatter",
+      "levelReq": 2,
+      "energyCost": 4,
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": -0.4
+      },
+      "functions": [
+        "break",
+        "move"
+      ],
+      "narrationHints": "One shove and the neat thing is a mess and you're through the gap.",
+      "description": "Introduce sharp disorder — scatter a formation, foul a mechanism, open a gap in order.",
+      "notFor": "Choosing the result; re-ordering after.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Scatter",
+          "grants": "Disrupt a formation, jam a device, break a pattern to make an opening.",
+          "cannot": "You don't pick how it scatters; brief."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
+    },
+    {
+      "id": "truename_order",
+      "name": "Set in Order",
+      "levelReq": 2,
+      "energyCost": 4,
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": 0.4
+      },
+      "functions": [
+        "bind"
+      ],
+      "narrationHints": "A word, and the chaos falls into rank.",
+      "description": "Impose quick order on a small chaotic scene — rally a panic, sort a mess, steady a wobble.",
+      "notFor": "Large or willful chaos; permanence.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Set in Order",
+          "grants": "Calm a panicking group, quickly organize a chaotic space, steady a failing structure briefly.",
+          "cannot": "Small scale; slips without maintenance."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
+    },
+    {
+      "id": "probability_tilt",
+      "name": "Tilt",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "mental",
+      "axes": {
+        "chaos_order": -0.3,
+        "space_time": 0.1
+      },
+      "functions": [
+        "move",
+        "strike"
+      ],
+      "narrationHints": "The dice of the moment lean your way, just once, just enough.",
+      "description": "Nudge chance in a chaotic moment — the lucky slip, the fumbled guard, the door that happens to be open.",
+      "notFor": "Guaranteed outcomes; ordered/deterministic situations.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Tilt",
+          "grants": "Tilt an uncertain moment toward a good break for you.",
+          "cannot": "Only where chance is live; spends fast."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
+    },
+    {
+      "id": "the_fixed_point",
+      "name": "The Fixed Point",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "mental",
+      "axes": {
+        "chaos_order": 0.4,
+        "concrete_abstract": 0.2
+      },
+      "functions": [
+        "bind",
+        "shield"
+      ],
+      "narrationHints": "You become the one thing the chaos organizes around.",
+      "description": "Make yourself or a thing the stable anchor in disorder — others orient to you, the storm bends around.",
+      "notFor": "Stopping the chaos; moving while anchoring.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Fixed Point",
+          "grants": "Be the still, reliable point in a chaotic scene; let others rally to you.",
+          "cannot": "You must hold still; strong chaos still batters."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
+    },
+    {
+      "id": "riding_order",
+      "name": "The Riding Order",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": 0.0
+      },
+      "functions": [
+        "break",
+        "bind"
+      ],
+      "narrationHints": "Unmake and re-make in one motion — collapse it, and catch the pieces as what you need.",
+      "description": "The braid-craft: unmake a structure and re-bind its falling pieces into a new form mid-collapse.",
+      "notFor": "Slow, careful work; single-pole purity.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Riding Order",
+          "grants": "Break a thing and reforge its pieces into what you need in the same motion.",
+          "cannot": "A heartbeat's window; miss it and you've only made chaos."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
     }
   ]
 }

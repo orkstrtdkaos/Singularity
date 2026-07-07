@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "reachId": "the_somatic_reaches",
+  "note": "Locations of the body_mind Reach. Same asymmetry principle: body_mind dominant, varied secondary poles. Poles as poleIntensity. Full location schema. Authored by Aevi (PO).",
+  "locations": [
+    {
+      "schemaVersion": 1, "id": "the_flesh_temple", "name": "The High Temple of the Body", "regionId": "somatic_reaches", "communityId": "somatic.temple",
+      "poleIntensity": {"body": 0.8, "peace": 0.3, "life": 0.3},
+      "spectrum": {"body_mind": -0.8, "violence_peace": 0.3, "death_life": 0.3},
+      "tags": ["temple", "somatic", "disciplined", "sacred", "training"],
+      "connections": ["the_middle_way"],
+      "descriptionSeed": "A temple-city where the body is the whole practice \u2014 tiers of training-grounds rising a mountain, every soul honing breath, poise, and endurance as devotion. What rides with the body-pole here is LIFE and PEACE: this is not the martial Redline; it's serene, generative, a place of health raised to worship. And its flaw is its virtue's shadow \u2014 so devoted to the body that thought is neglected, and the Temple is slowly forgetting how to warn itself of dangers that aren't physical.",
+      "loreRefs": ["the_twelve_reaches", "reach_body_mind"],
+      "encounterFlavor": "Devotion made physical \u2014 a master holding an impossible pose at dawn, a child taught to breathe before to speak, a healing that is pure Soma, a warm incuriosity about anything that can't be trained into the flesh.",
+      "dangerLevel": 1,
+      "questSeeds": [
+        "The Temple faces a threat it can't punch \u2014 a rumor, a debt, a coming decision \u2014 and no one there has trained the mind to meet it; they need someone who thinks, and half of them resent needing it",
+        "A student's body has surpassed their teachers' and it's making them cruel; Soma without a mind to aim it is turning to arrogance, and the Temple doesn't have the vocabulary to name the problem",
+        "A Cogitant has come from across the Reach to 'save' the Temple from its ignorance and is making everything worse; bridging the two is the work"
+      ],
+      "map": {"x": 200, "y": 560}
+    },
+    {
+      "schemaVersion": 1, "id": "the_cogitarium", "name": "The Cogitarium", "regionId": "somatic_reaches", "communityId": "somatic.cogitarium",
+      "poleIntensity": {"mind": 0.85, "abstract": 0.5, "dark": 0.3},
+      "spectrum": {"body_mind": 0.85, "concrete_abstract": 0.5, "dark_light": -0.3},
+      "tags": ["mind", "floating", "cold", "abstract", "declining"],
+      "connections": ["the_middle_way"],
+      "descriptionSeed": "Floating thought-halls where the Cogitants have nearly left their bodies behind for pure mind \u2014 and are dying of it. What rides with the mind-pole here is ABSTRACT and a growing DARK: brilliance shading into a cold that forgets warmth, forgets the body, forgets the world thought was ever meant to serve. The most intelligent place in the world, quietly starving to death because it has decided the body is beneath it. Chilling, and pitiable, and a warning.",
+      "loreRefs": ["the_twelve_reaches", "reach_body_mind"],
+      "encounterFlavor": "Cold brilliance in decline \u2014 a mind that solves your problem and can't feed itself, a hall of thinkers who've forgotten to eat, a solution of terrifying elegance and no mercy, the slow horror of watching genius forget it has a body.",
+      "dangerLevel": 3,
+      "questSeeds": [
+        "A Cogitant has calculated the correct answer to a valley crisis and it's monstrous because it left out everything the body knows; the arc is showing them what their elegance costs",
+        "The Cogitarium is literally dying \u2014 bodies failing while minds soar \u2014 and some of them want to be saved and can't admit it; reaching them means arguing for the flesh they've abandoned",
+        "A young Cogitant hasn't gone cold yet and wants out before they do; getting them to the Temple, or the Middle Way, before the Cogitarium claims them"
+      ],
+      "map": {"x": 120, "y": 480}
+    },
+    {
+      "schemaVersion": 1, "id": "the_middle_way", "name": "The Middle Way", "regionId": "somatic_reaches", "communityId": "somatic.middleway",
+      "poleIntensity": {"body": 0.5, "mind": 0.5, "spiritual": 0.3},
+      "spectrum": {"body_mind": 0.0, "mechanical_spiritual": 0.3, "emotional_logical": 0.2},
+      "tags": ["habitable", "balanced", "waypoint", "school", "rare"],
+      "connections": ["the_flesh_temple", "the_cogitarium"],
+      "descriptionSeed": "The rare habitable heart of the Reach \u2014 a school-town where body and mind are held in DELIBERATE balance, the doubly-charged node made a home. Here alone the athlete-scholar is the ideal: perfected body AND ordered mind, each keeping the other honest. Both the Temple and the Cogitarium consider it a compromise; it considers them both cautionary tales. The natural base for the Reach, and the living argument against both poles' foreclosure.",
+      "loreRefs": ["the_twelve_reaches", "reach_body_mind", "cofiring_nodes"],
+      "encounterFlavor": "Balance held on purpose \u2014 a master who fights and reasons equally well, a lesson that trains breath and thought in one motion, a quiet pride in refusing both extremes, students who arrive broken from one pole and are made whole here.",
+      "dangerLevel": 1,
+      "questSeeds": [
+        "The Middle Way is pressured by both poles to 'pick a side' and stay neutral is the whole fight; it survives only as long as someone argues for the balance",
+        "A refugee from the Cogitarium and one from the Temple both come here broken in opposite ways, and healing each requires the thing the other fled",
+        "The Middle Way's method could save the dying Cogitarium \u2014 but the Cogitants would have to accept they were wrong, and pride may kill them first"
+      ],
+      "map": {"x": 160, "y": 520}
+    }
+  ],
+  "asymmetry_note": "Body_mind nodes with varied secondaries: the Flesh-Temple rides LIFE+PEACE (serene body-worship, not martial), the Cogitarium rides ABSTRACT+DARK (cold brilliance in decline), the Middle Way is both-poles-balanced + SPIRITUAL (the athlete-scholar ideal, a doubly-charged node made habitable). Same axis: devotion, decline, and balance."
+}

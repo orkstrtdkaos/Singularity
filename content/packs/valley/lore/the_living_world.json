@@ -2,70 +2,110 @@
   "schemaVersion": 1,
   "id": "the_living_world",
   "kind": "world_cycles",
-  "note": "The world runs on its own clocks, not the player's. Cyclical events keyed to the eight-season calendar (early-spring, late-spring, early-summer, late-summer, harvest, early-winter, deep-winter, thaw; 45 days each, 360-day year) and to specific places. Arriving anywhere means arriving IN THE MIDDLE OF SOMETHING. Plus the framing that makes the population self-driven \u2014 people pursuing their own passions on their own timelines, not standing by as quest-dispensers. Engine tie: the world-tick checks the current season/day against these cycles and surfaces what's happening where; the GM narrates the place as alive. Authored by Aevi (PO), from Erik's living-world direction.",
-
-  "principle": "A place is not a stage that waits for the player to walk on. It has a calendar, a livelihood, a rhythm of festival and hardship, and people mid-pursuit of their own wants. The player arrives DURING things: a harvest, a mourning, a market-high, a feud's flare, a courtship, a crisis that started before them and continues after. The diversity and the extremes are the engine of story \u2014 a passionate baker and a grieving warden and a scheming buyer, all pursuing their own arcs, collide into narrative without a quest ever being 'given.' The GM should be able to answer 'what's happening here right now' from the season and the place, always.",
-
+  "note": "The world runs on its own clocks, not the player's. Cyclical events keyed to the eight-season calendar (early-spring, late-spring, early-summer, late-summer, harvest, early-winter, deep-winter, thaw; 45 days each, 360-day year) and to specific places. Arriving anywhere means arriving IN THE MIDDLE OF SOMETHING. Plus the framing that makes the population self-driven — people pursuing their own passions on their own timelines, not standing by as quest-dispensers. Engine tie: the world-tick checks the current season/day against these cycles and surfaces what's happening where; the GM narrates the place as alive. Authored by Aevi (PO), from Erik's living-world direction.",
+  "principle": "A place is not a stage that waits for the player to walk on. It has a calendar, a livelihood, a rhythm of festival and hardship, and people mid-pursuit of their own wants. The player arrives DURING things: a harvest, a mourning, a market-high, a feud's flare, a courtship, a crisis that started before them and continues after. The diversity and the extremes are the engine of story — a passionate baker and a grieving warden and a scheming buyer, all pursuing their own arcs, collide into narrative without a quest ever being 'given.' The GM should be able to answer 'what's happening here right now' from the season and the place, always.",
   "seasonalCycles": [
-    {"season": "early-spring", "world": "Thaw's end; planting, first markets, the year's hope. Births and beginnings. The mood lifts.", "places": {
-      "millbrook": "Planting Days \u2014 the whole village in the fields; a good time to be owed a favor, a bad time to ask for hands",
-      "greywater_stilts": "The Waking of the Marsh \u2014 channels reopen, the talking-circle sets the year's terms, newcomers weighed",
-      "the_wend": "The road-people move again; the first caravan-weddings of the year"
-    }},
-    {"season": "late-spring", "world": "Growth, courtship, the Game's season opens in the cities. Energy high.", "places": {
-      "harmonic_heights_terrace": "The Resonance Trials \u2014 the Heights' great Game-season; standing won here shapes the year, and Ledda's old chord is renewed",
-      "radiant_plateau_edge": "The Kindling \u2014 lumens re-lit citywide in a festival of light; a courtship season under the Blaze's foothill",
-      "thornwake_glade": "The Green Quickening \u2014 the Glade at its most alive and most welcoming; the Accord's yearly renewal, this year in doubt"
-    }},
-    {"season": "early-summer", "world": "Trade peaks; the passes are open; travel and ambition. The world's busiest turning.", "places": {
-      "kestrels_roost": "The High Market \u2014 the year's great trade-fair; the Kestrel's ledger is fullest and most vulnerable; the Patient Buyer moves in the crowd",
-      "tumbledown_market": "The Churn's Making-Feast \u2014 inventors demonstrate the year's wonders, most of which work once",
-      "the_redline": "The Season of Challenges \u2014 the Marches' formal duels decide standing and law for the year"
-    }},
-    {"season": "late-summer", "world": "Heat, tension, the first shortages of a bad year showing. Feuds flare.", "places": {
-      "echo_river_crossing": "The water runs lowest and grayest \u2014 the crisis at its most visible; tempers between communities at their worst",
-      "the_gralloch": "The badland's cruelest season; the feuds peak; the thing under the violence stirs",
-      "the_stillhold": "The Silent Days \u2014 the peace-city's most sacred and most brittle festival; the buried truth closest to the surface"
-    }},
-    {"season": "harvest", "world": "The great gathering; plenty or its failure; the year judged. Gratitude and reckoning.", "places": {
-      "millbrook": "Harvest Home \u2014 the biggest festival of the Valley year; a failed harvest here is a catastrophe that ripples to every arc",
-      "salt_meadows": "The Salt-Cutting \u2014 the meadows' one busy season, the year's salt laid in",
-      "the_flesh_temple": "The Trials of the Body \u2014 the Temple's yearly feats-festival, devotion made spectacle"
-    }},
-    {"season": "early-winter", "world": "Battening down; the passes closing; stories and debts called in before the dark. Inward turn.", "places": {
-      "kestrels_roost": "The Last Caravans \u2014 the desperate rush over the pass before snow; Sable's disappearance-season; debts settled before the freeze",
-      "sunken_choir": "The Choir sings loudest in the first cold \u2014 the returning voices strongest; Vesper's hardest season",
-      "the_middle_way": "The Winter Discourses \u2014 body and mind schools debate through the long evenings"
-    }},
-    {"season": "deep-winter", "world": "Survival; isolation; the world small and close and honest. What holds, holds; what doesn't, breaks.", "places": {
-      "old_switchback": "The pass is shut; Greta's waystation is a lifeline or a tomb; travelers stranded together",
-      "the_cogitarium": "The minds soar while the bodies fail hardest \u2014 the Cogitarium's deadliest season, and its most brilliant",
-      "dw_the_moot": "The Deep Deliberation \u2014 the Ents' slow argument runs on, indifferent to the season that means nothing to them"
-    }},
-    {"season": "thaw", "world": "The breaking; floods, mud, released tension, grief for what winter took. The year's rawest turn.", "places": {
-      "the_hollow_march": "The Thaw-Deaths \u2014 the Ashwardens tend winter's toll; Palework's busiest, saddest season",
-      "greywater_stilts": "The Flood \u2014 the marsh at its most dangerous and most alive; the Stilts prove their independence or don't",
-      "dw_the_burnscar": "The green returns fiercest to the scar \u2014 the wound most present, the grudge most raw"
-    }}
+    {
+      "season": "early-spring",
+      "world": "Thaw's end; planting, first markets, the year's hope. Births and beginnings. The mood lifts.",
+      "places": {
+        "millbrook": "Planting Days — the whole village in the fields; a good time to be owed a favor, a bad time to ask for hands",
+        "greywater_stilts": "The Waking of the Marsh — channels reopen, the talking-circle sets the year's terms, newcomers weighed",
+        "the_wend": "The road-people move again; the first caravan-weddings of the year"
+      }
+    },
+    {
+      "season": "late-spring",
+      "world": "Growth, courtship, the Game's season opens in the cities. Energy high.",
+      "places": {
+        "harmonic_heights_terrace": "The Resonance Trials — the Heights' great Game-season; standing won here shapes the year, and Ledda's old chord is renewed",
+        "radiant_plateau_edge": "The Kindling — lumens re-lit citywide in a festival of light; a courtship season under the Blaze's foothill",
+        "thornwake_glade": "The Green Quickening — the Glade at its most alive and most welcoming; the Accord's yearly renewal, this year in doubt"
+      }
+    },
+    {
+      "season": "early-summer",
+      "world": "Trade peaks; the passes are open; travel and ambition. The world's busiest turning.",
+      "places": {
+        "kestrels_roost": "The High Market — the year's great trade-fair; the Kestrel's ledger is fullest and most vulnerable; the Patient Buyer moves in the crowd",
+        "tumbledown_market": "The Churn's Making-Feast — inventors demonstrate the year's wonders, most of which work once",
+        "the_redline": "The Season of Challenges — the Marches' formal duels decide standing and law for the year"
+      }
+    },
+    {
+      "season": "late-summer",
+      "world": "Heat, tension, the first shortages of a bad year showing. Feuds flare.",
+      "places": {
+        "echo_river_crossing": "The water runs lowest and grayest — the crisis at its most visible; tempers between communities at their worst",
+        "the_gralloch": "The badland's cruelest season; the feuds peak; the thing under the violence stirs",
+        "the_stillhold": "The Silent Days — the peace-city's most sacred and most brittle festival; the buried truth closest to the surface"
+      }
+    },
+    {
+      "season": "harvest",
+      "world": "The great gathering; plenty or its failure; the year judged. Gratitude and reckoning.",
+      "places": {
+        "millbrook": "Harvest Home — the biggest festival of the Valley year; a failed harvest here is a catastrophe that ripples to every arc",
+        "salt_meadows": "The Salt-Cutting — the meadows' one busy season, the year's salt laid in",
+        "the_flesh_temple": "The Trials of the Body — the Temple's yearly feats-festival, devotion made spectacle"
+      }
+    },
+    {
+      "season": "early-winter",
+      "world": "Battening down; the passes closing; stories and debts called in before the dark. Inward turn.",
+      "places": {
+        "kestrels_roost": "The Last Caravans — the desperate rush over the pass before snow; Sable's disappearance-season; debts settled before the freeze",
+        "sunken_choir": "The Choir sings loudest in the first cold — the returning voices strongest; Vesper's hardest season",
+        "the_middle_way": "The Winter Discourses — body and mind schools debate through the long evenings"
+      }
+    },
+    {
+      "season": "deep-winter",
+      "world": "Survival; isolation; the world small and close and honest. What holds, holds; what doesn't, breaks.",
+      "places": {
+        "old_switchback": "The pass is shut; Greta's waystation is a lifeline or a tomb; travelers stranded together",
+        "the_cogitarium": "The minds soar while the bodies fail hardest — the Cogitarium's deadliest season, and its most brilliant",
+        "dw_the_moot": "The Deep Deliberation — the Ents' slow argument runs on, indifferent to the season that means nothing to them"
+      }
+    },
+    {
+      "season": "thaw",
+      "world": "The breaking; floods, mud, released tension, grief for what winter took. The year's rawest turn.",
+      "places": {
+        "the_hollow_march": "The Thaw-Deaths — the Ashwardens tend winter's toll; Palework's busiest, saddest season",
+        "greywater_stilts": "The Flood — the marsh at its most dangerous and most alive; the Stilts prove their independence or don't",
+        "dw_the_burnscar": "The green returns fiercest to the scar — the wound most present, the grudge most raw"
+      }
+    }
   ],
-
   "recurringTroubles": [
-    {"id": "the_bad_year", "trigger": "a failed harvest (world-tick condition)", "effect": "cascades: Millbrook empties toward the Stilts and Roost, prices rise everywhere, the cities' offers to the free places sweeten and sharpen, every arc's pressure ticks up. A living-world consequence, not a scripted event."},
-    {"id": "the_pass_freeze", "trigger": "early-winter/deep-winter", "effect": "the northern map (Roost, Switchback, Churn) partly seals; travel there costs more and risks more; the Churn Reach is nearly cut off until thaw."},
-    {"id": "festival_collision", "trigger": "any festival + an active arc", "effect": "a festival is the perfect stage for an arc to erupt \u2014 an assassination at the High Market, a truth spoken at the Silent Days, a challenge at the Season of Challenges. The GM should collide cycles with arcs."}
+    {
+      "id": "the_bad_year",
+      "trigger": "a failed harvest (world-tick condition)",
+      "effect": "cascades: Millbrook empties toward the Stilts and Roost, prices rise everywhere, the cities' offers to the free places sweeten and sharpen, every arc's pressure ticks up. A living-world consequence, not a scripted event."
+    },
+    {
+      "id": "the_pass_freeze",
+      "trigger": "early-winter/deep-winter",
+      "effect": "the northern map (Roost, Switchback, Churn) partly seals; travel there costs more and risks more; the Churn Reach is nearly cut off until thaw."
+    },
+    {
+      "id": "festival_collision",
+      "trigger": "any festival + an active arc",
+      "effect": "a festival is the perfect stage for an arc to erupt — an assassination at the High Market, a truth spoken at the Silent Days, a challenge at the Season of Challenges. The GM should collide cycles with arcs."
+    }
   ],
-
   "populationDoctrine": {
-    "principle": "People are driven, passionate, and pursuing their OWN things \u2014 and sometimes just people. Not quest-dispensers. Every named NPC already has wants/fears; the living-world layer says: they pursue those wants ON THEIR OWN TIMELINE whether or not the player helps. The baker is trying to win the Making-Feast; the warden is fighting the Accord's failure; the buyer is buying. The player walks into lives already in motion.",
+    "principle": "People are driven, passionate, and pursuing their OWN things — and sometimes just people. Not quest-dispensers. Every named NPC already has wants/fears; the living-world layer says: they pursue those wants ON THEIR OWN TIMELINE whether or not the player helps. The baker is trying to win the Making-Feast; the warden is fighting the Accord's failure; the buyer is buying. The player walks into lives already in motion.",
     "guidance": [
-      "An NPC met twice should have MOVED \u2014 advanced their own want, suffered a setback, changed. The world-tick should let key NPCs progress their arcs offscreen (ties to worldtick + the superstructure).",
-      "Not everyone has a quest. Some people are just people \u2014 texture, warmth, a good meal, an opinion, a life being lived. The mundane makes the dramatic land. A world of only quest-givers is dead; a world of mostly-just-people with a few burning arcs is alive.",
+      "An NPC met twice should have MOVED — advanced their own want, suffered a setback, changed. The world-tick should let key NPCs progress their arcs offscreen (ties to worldtick + the superstructure).",
+      "Not everyone has a quest. Some people are just people — texture, warmth, a good meal, an opinion, a life being lived. The mundane makes the dramatic land. A world of only quest-givers is dead; a world of mostly-just-people with a few burning arcs is alive.",
       "Diversity and extremes drive narrative: a place of passionate opposites (a Redliner and a Stillholder, a Vivimancer and an Ashwarden, a Builder and a Dawnkeeper) generates story by friction, no quest required. Populate for CONTRAST.",
       "Motivation over function: describe a person by what they WANT, not what they offer the player. The offer emerges from the want when the player's path crosses it.",
       "Let people have off-days, moods, distractions. A blacksmith too grief-struck to work today is more real than one perpetually available. Reality over convenience."
     ],
-    "engineTie": "The world-tick advances key NPC wants offscreen (a progress counter per tracked NPC arc), so returning to a place shows change. Generated NPCs (SNG-020) get a want on creation so even procedural people are driven. Flagged to the spec backlog as a light world-tick addition."
+    "engineTie": "The world-tick advances key NPC wants offscreen (a progress counter per tracked NPC arc), so returning to a place shows change. Generated NPCs (SNG-020) get a want on creation so even procedural people are driven. Flagged to the spec backlog as a light world-tick addition.",
+    "universalRoles": "Every person fills a loose UNIVERSAL ROLE (mediator/warrior/warden/keeper/maker/seeker — see universal_roles.json) expressed through their locale's method. This is HOW to populate for contrast: same role + opposite disposition = built-in friction and story. A traveled-role (a life-warden tending the Cogitium's neglected bodies) is instant narrative — the role carried to a need its homeland can't meet. Describe a person by role+method+want, never by what they offer the player."
   },
-
   "gmMandate": "The GM can always answer 'what is happening here, right now, that has nothing to do with me' from: the season's cycle for this place + who's mid-pursuit of what + any arc-pressure currently here. Lead scenes with the place being alive; let the player's business intersect a world already in motion. Never a waiting stage."
 }

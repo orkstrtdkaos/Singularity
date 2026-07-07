@@ -40,6 +40,10 @@
           "grants": "Find and exploit a structure's resonant frequency: collapse a wall section, shatter quality steel, stun everyone in a small room (nonlethal); precise enough to break one link of a chain.",
           "cannot": "Not lethal by design — the field limits output near living tissue; exhausting (double energy) in Radiant territory."
         }
+      ],
+      "functions": [
+        "strike",
+        "break"
       ]
     },
     {
@@ -79,6 +83,9 @@
           "grants": "Hear actual words through barriers at ~20 paces; read a building's whole layout in a minute of stillness; detect the sub-sound of active nanite fields and Precursor machinery.",
           "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to."
         }
+      ],
+      "functions": [
+        "reveal"
       ]
     },
     {
@@ -117,6 +124,9 @@
           "grants": "Room-corner dome for up to four people, held a full scene if unmolested; turns crossbow bolts and a Radiant lance's first strike; can be tuned to let allies' actions pass outward.",
           "cannot": "Immobile once anchored; collapses instantly if you take a hit inside it; useless against the ground shaking."
         }
+      ],
+      "functions": [
+        "shield"
       ]
     },
     {
@@ -156,6 +166,9 @@
           "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge; sung over the wounded, grants deep restorative sleep.",
           "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden."
         }
+      ],
+      "functions": [
+        "bind"
       ]
     },
     {
@@ -195,6 +208,10 @@
           "grants": "Shape holes in the field — let one voice pass while all else stills; still an alarm bell mid-swing; grant a whole camp true rest.",
           "cannot": "A Harmonic adept notices the theft of sound instantly; holding a shaped field is exhausting (double energy)."
         }
+      ],
+      "functions": [
+        "bind",
+        "shield"
       ]
     },
     {
@@ -234,6 +251,9 @@
           "grants": "Standing still a full minute, read a hillside: every mover, every void, water veins, the grind of old machinery underground.",
           "cannot": "The minute of stillness is absolute — one step resets it; Precursor works read as SILENCE, and that silence is information others notice you noticing."
         }
+      ],
+      "functions": [
+        "reveal"
       ]
     },
     {
@@ -273,6 +293,10 @@
           "grants": "Rebuild from parts: a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal (carefully).",
           "cannot": "Every missing sliver stays missing; Precursor material refuses the song outright — it has its own, and yours is not invited."
         }
+      ],
+      "functions": [
+        "heal",
+        "mend"
       ]
     },
     {
@@ -312,6 +336,9 @@
           "grants": "A dozen move as one organism for a scene — a bucket-line, a fighting retreat, a barn-raising in an afternoon; the group ROLLS as if led by your presence.",
           "cannot": "When it ends, all of you feel the sudden loneliness; over-use breeds dependence a village elder will name to your face."
         }
+      ],
+      "functions": [
+        "bind"
       ]
     },
     {
@@ -351,6 +378,10 @@
           "grants": "Anchor against a rockslide's edge, a stampede, a Radiant lance's push; while anchored, your voice carries the stillness of something older than the argument.",
           "cannot": "You are a fixed target for anything ranged; unanchoring after a long hold costs a full breather."
         }
+      ],
+      "functions": [
+        "bind",
+        "ward"
       ]
     },
     {
@@ -390,6 +421,9 @@
           "grants": "For a dozen heartbeats, outrun a horse; cross a collapsing surface before it finishes falling; arrive with momentum that counts as force.",
           "cannot": "Once per scene; the stop costs a slide of several body-lengths — plan the landing or eat it."
         }
+      ],
+      "functions": [
+        "move"
       ]
     },
     {
@@ -429,6 +463,10 @@
           "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll.",
           "cannot": "Reading Precursor work at this depth is a two-way door — log what you learn AND accept being learned."
         }
+      ],
+      "functions": [
+        "break",
+        "strike"
       ]
     },
     {
@@ -468,6 +506,9 @@
           "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke.",
           "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back."
         }
+      ],
+      "functions": [
+        "reveal"
       ]
     }
   ]

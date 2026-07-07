@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1, "id": "the_blocklands", "name": "The Blocklands", "regionId": "manifest_domain", "communityId": "domain.blocklands",
+  "poleIntensity": {"order": 0.6, "creation": 0.6, "concrete": 0.5},
+  "spectrum": {"chaos_order": 0.6, "destruction_creation": 0.5, "concrete_abstract": -0.5},
+  "tags": ["manifest-domain", "blocklands", "craftable", "pocket-reality", "day-safe-night-lethal"],
+  "connections": ["the_gearlands_verge", "tumbledown_market"],
+  "seedFiction": "block-logic (a Minecraft-grammar manifestation)",
+  "nativeLogic": "Inside the Blocklands, matter resolves into discrete workable units. Anything can be gathered, broken into its components, and recombined by a crafting-grammar that ALWAYS works if you know the recipe \u2014 stone becomes tool becomes structure by rules the world enforces literally. You can build a wall, a bridge, a shelter in minutes from gathered units. Height, gravity, and daylight behave, mostly. But the rule that never bends: day is safe, and when the dark comes, things come with it \u2014 hostile, relentless, gone by dawn. Survive the nights and the Blocklands will give you anything you can build. The GM enforces this grammar as LAW while the party is inside: gathering and crafting succeed by recipe-logic, night is a survival clock, and the domain's physics override ordinary resolution.",
+  "descriptionSeed": "A pocket of the world where reality went blocky and buildable \u2014 hills that resolve into stackable units, trees that break into gatherable wood, a landscape that is the most generous workshop imaginable by day and a killing field by night. Order and creation both run hot here: everything is craftable, everything is lawful, and the one law you break at your peril is the dark. Crafters come to learn the grammar; some never leave, addicted to a world that always builds what you ask.",
+  "loreRefs": ["manifest_locals", "the_coordinate_world"],
+  "encounterFlavor": "Generative order with a clock \u2014 a structure raised in minutes, a recipe discovered, a rush to wall-in before dusk, the first sounds in the dark, a crafter who's been here too long and thinks in units now.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "A crafter came to master the grammar and has been trapped by nightfall for weeks, walling in and mining out, slowly forgetting the world isn't made of blocks; getting them out means getting them to WANT out",
+    "The block-grammar can build something the outside world needs \u2014 a structure, a device \u2014 that can only be made here, and only between dawns; a race against the dark",
+    "The Blocklands is bleeding \u2014 block-logic diffusing into the Gearlands next door, and things are starting to resolve into units where they shouldn't; finding why the pocket is spreading",
+    "Something in the night here is not a monster but a person, changed by too many dusks; the dark isn't only hostile, and that's worse"
+  ],
+  "map": {"x": 60, "y": 380}
+}

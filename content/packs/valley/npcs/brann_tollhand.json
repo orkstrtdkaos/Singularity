@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "brann_tollhand",
+  "name": "Brann Tollhand",
+  "role": "Toll-collector at the Roost's lower gate; small crook with a soft spot",
+  "homeLocation": "kestrels_roost",
+  "communityId": "valley.kestrels_roost",
+  "personality": {"warmth": 0.5, "trust": 0.2, "candor": -0.3, "patience": 0.4},
+  "spectrum": {"falsehood_truth": -0.4, "chaos_order": -0.2, "individual_collective": -0.3},
+  "voiceHints": "Loud, friendly, overexplains \u2014 the geniality of a man with something to hide. Skims a little off every toll and tells himself everyone does. Genuinely fond of the caravan kids; would take a beating before letting one go hungry.",
+  "knowledge": [
+    "The exact size of his own skim, and a growing dread that the Kestrel knows",
+    "Who comes and goes at odd hours \u2014 he sees everything at the gate and misses nothing but his own reflection",
+    "A caravan master is gunning to embarrass him publicly"
+  ],
+  "wants": "To keep his comfortable little racket and his good name both, which are becoming impossible to hold at once.",
+  "fears": "Being made an example of \u2014 losing not the money but the place, the kids, the only town that ever felt like his.",
+  "reactsToReputation": {"kind": "loyal, leaks useful gossip", "threatening": "folds fast, then resents", "honest": "nervous, avoidant, testable"}
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "walker_elder_thren",
+  "name": "Thren, Walker of the Thin Edge",
+  "role": "Ent elder arguing to keep the Deepwood woven into the world",
+  "homeLocation": "dw_the_thinedge",
+  "communityId": "domain.deepwood",
+  "personality": {
+    "warmth": 0.5,
+    "trust": 0.3,
+    "candor": 0.7,
+    "patience": 1.0
+  },
+  "spectrum": {
+    "death_life": 0.6,
+    "mechanical_spiritual": 0.5,
+    "violence_peace": 0.4,
+    "space_time": 0.4
+  },
+  "voiceHints": "Speaks in slow deep resonance, a full breath between clauses; a mere four centuries old, which makes him a hasty youth by Moot standards and the Walkers' best voice with humankind. Warm under the bark, and quietly desperate on a timescale humans can't see. To another Ent he speaks faster, almost eagerly.",
+  "knowledge": [
+    "The Walker case at the Moot, and exactly how it's losing",
+    "That the Old Stag of Thornwake is his kin-line's heir, and dying",
+    "The Burnscar's truth as the Walkers understand it — and where the Rootbound's account differs"
+  ],
+  "wants": "To prove the hasty world holds trust worth keeping, before the Rootbound seal the wood and the Green retreats from everything.",
+  "fears": "That he is the last Walker young enough to still believe in humankind, and that his believing will be the wood's undoing.",
+  "reactsToReputation": {
+    "patient": "opens fully — rare to find haste-born who can sit with him",
+    "ent-kin": "speaks as family, faster, with hope",
+    "hasty": "grieves the confirmation of the Rootbound's case"
+  }
+}

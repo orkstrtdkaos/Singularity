@@ -4,171 +4,515 @@
   "civilization": "valley",
   "abilities": [
     {
-      "id": "wayfinding", "name": "Wayfinding", "levelReq": 1, "energyCost": 4,
-      "axes": {"concrete_abstract": -0.4, "instinct_analysis": 0.2},
+      "id": "wayfinding",
+      "name": "Wayfinding",
+      "levelReq": 1,
+      "energyCost": 4,
+      "axes": {
+        "concrete_abstract": -0.4,
+        "instinct_analysis": 0.2
+      },
       "attribute": "practical",
-      "effectTags": ["track", "navigate", "terrain"],
+      "effectTags": [
+        "track",
+        "navigate",
+        "terrain"
+      ],
       "narrationHints": "Reading ground, growth, and weather-sign like text. Broken stems, pressed moss, the age of a print.",
       "description": "Read trails, weather-sign, and country to track, navigate, and estimate what passed and when.",
       "notFor": "Tracking through running water or across bare rock without a check; reading intent (only movement); urban crowds.",
       "tree": [
-        {"rank": 1, "name": "Trail Sense", "grants": "Follow a clear trail up to a day old; judge party size and burden; find water and shelter in known country.", "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check."},
-        {"rank": 2, "name": "Cold Trail", "grants": "Follow trails days old; read a campsite's story (numbers, mood, hurry); shortcut known routes — travel time -1h on familiar ground.", "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers."},
-        {"rank": 3, "name": "Country Speaks", "grants": "One look at open country reveals routes, hazards, and anything recently unusual; anticipate where quarry is HEADED, not just where it went.", "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you."}
+        {
+          "rank": 1,
+          "name": "Trail Sense",
+          "grants": "Follow a clear trail up to a day old; judge party size and burden; find water and shelter in known country.",
+          "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check."
+        },
+        {
+          "rank": 2,
+          "name": "Cold Trail",
+          "grants": "Follow trails days old; read a campsite's story (numbers, mood, hurry); shortcut known routes — travel time -1h on familiar ground.",
+          "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers."
+        },
+        {
+          "rank": 3,
+          "name": "Country Speaks",
+          "grants": "One look at open country reveals routes, hazards, and anything recently unusual; anticipate where quarry is HEADED, not just where it went.",
+          "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you."
+        }
+      ],
+      "functions": [
+        "move",
+        "reveal"
       ]
     },
     {
-      "id": "greenlore", "name": "Greenlore", "levelReq": 1, "energyCost": 5,
-      "axes": {"mechanical_spiritual": 0.1, "concrete_abstract": -0.3},
+      "id": "greenlore",
+      "name": "Greenlore",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "mechanical_spiritual": 0.1,
+        "concrete_abstract": -0.3
+      },
       "attribute": "mental",
-      "effectTags": ["heal", "plants", "remedy"],
+      "effectTags": [
+        "heal",
+        "plants",
+        "remedy"
+      ],
       "narrationHints": "Hedge-medicine with dirt under its nails. Poultices, bitter teas, knowing which mushroom forgives and which doesn't.",
       "description": "Field medicine and plant knowledge: remedies, poultices, antidotes, and what's safe to eat.",
       "notFor": "Surgery or broken bones beyond splinting; instant effects (remedies take time); anything without materials to hand.",
       "tree": [
-        {"rank": 1, "name": "Hedge Remedy", "grants": "Forage safe food and common medicinals; brew a poultice or tea that restores small health over a rest; identify common poisons.", "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour."},
-        {"rank": 2, "name": "Deep Pharmacopeia", "grants": "Counter most natural poisons and sickness; remedies now also restore energy; read a person's ailment from face, breath, and gait.", "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days."},
-        {"rank": 3, "name": "The Old Recipes", "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered flora on sight.", "cannot": "The strongest brews exact a cost the GM names; never resurrection; one legendary dose per day of gathering."}
+        {
+          "rank": 1,
+          "name": "Hedge Remedy",
+          "grants": "Forage safe food and common medicinals; brew a poultice or tea that restores small health over a rest; identify common poisons.",
+          "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour."
+        },
+        {
+          "rank": 2,
+          "name": "Deep Pharmacopeia",
+          "grants": "Counter most natural poisons and sickness; remedies now also restore energy; read a person's ailment from face, breath, and gait.",
+          "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days."
+        },
+        {
+          "rank": 3,
+          "name": "The Old Recipes",
+          "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered flora on sight.",
+          "cannot": "The strongest brews exact a cost the GM names; never resurrection; one legendary dose per day of gathering."
+        }
+      ],
+      "functions": [
+        "heal",
+        "mend"
       ]
     },
     {
-      "id": "mediators_tongue", "name": "Mediator's Tongue", "levelReq": 1, "energyCost": 5,
-      "axes": {"individual_collective": 0.4, "tradition_innovation": -0.2},
+      "id": "mediators_tongue",
+      "name": "Mediator's Tongue",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "individual_collective": 0.4,
+        "tradition_innovation": -0.2
+      },
       "attribute": "social",
-      "effectTags": ["calm", "negotiate", "truth"],
+      "effectTags": [
+        "calm",
+        "negotiate",
+        "truth"
+      ],
       "narrationHints": "The voice that lowers a room's temperature. Naming each side's real stake out loud until the knives feel silly.",
       "description": "De-escalate, arbitrate, and find the shape of a deal both sides can live with.",
       "notFor": "Deception (this craft is spent honestly or it stops working); commanding crowds; anyone with nothing left to lose.",
       "tree": [
-        {"rank": 1, "name": "Cool the Room", "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.", "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door."},
-        {"rank": 2, "name": "Fair Measure", "grants": "Broker deals that hold — agreements you mediate gain weight in the community ledger; call out a lie in negotiation and be believed.", "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal."},
-        {"rank": 3, "name": "The Binding Word", "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.", "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends."}
+        {
+          "rank": 1,
+          "name": "Cool the Room",
+          "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.",
+          "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door."
+        },
+        {
+          "rank": 2,
+          "name": "Fair Measure",
+          "grants": "Broker deals that hold — agreements you mediate gain weight in the community ledger; call out a lie in negotiation and be believed.",
+          "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal."
+        },
+        {
+          "rank": 3,
+          "name": "The Binding Word",
+          "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.",
+          "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends."
+        }
+      ],
+      "functions": [
+        "bind"
       ]
     },
     {
-      "id": "tinkers_hand", "name": "Tinker's Hand", "levelReq": 1, "energyCost": 5,
-      "axes": {"mechanical_spiritual": -0.5, "tradition_innovation": 0.3},
+      "id": "tinkers_hand",
+      "name": "Tinker's Hand",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "mechanical_spiritual": -0.5,
+        "tradition_innovation": 0.3
+      },
       "attribute": "practical",
-      "effectTags": ["repair", "craft", "jury_rig"],
+      "effectTags": [
+        "repair",
+        "craft",
+        "jury_rig"
+      ],
       "narrationHints": "Wire, wax, patience, and disrespect for the word 'broken.' Fixes that shouldn't hold but do.",
       "description": "Repair, improvise, and jury-rig — coaxing function from broken things with whatever's on hand.",
       "notFor": "Fine artisanship (it works, it isn't pretty); Precursor internals without study; making something from truly nothing.",
       "tree": [
-        {"rank": 1, "name": "Field Fix", "grants": "Repair common tools, gear, and mechanisms with scrounged parts; improvise a simple tool on the spot; judge what broke something.", "cannot": "Fixes are temporary under hard use; no locks, no Precursor work."},
-        {"rank": 2, "name": "Coaxing Function", "grants": "Open common locks and mechanisms; repairs now hold permanently; build compound devices (pulley rigs, traps, stills) from salvage.", "cannot": "Precursor mechanisms still resist; complex builds take a day and materials."},
-        {"rank": 3, "name": "Speaker to Machines", "grants": "Diagnose ANY mechanism by touch and sound, Precursor included; once per day, coax one dead device to run one more time; your builds count as quality goods.", "cannot": "Coaxed devices die again after; understanding Precursor function is not understanding purpose."}
+        {
+          "rank": 1,
+          "name": "Field Fix",
+          "grants": "Repair common tools, gear, and mechanisms with scrounged parts; improvise a simple tool on the spot; judge what broke something.",
+          "cannot": "Fixes are temporary under hard use; no locks, no Precursor work."
+        },
+        {
+          "rank": 2,
+          "name": "Coaxing Function",
+          "grants": "Open common locks and mechanisms; repairs now hold permanently; build compound devices (pulley rigs, traps, stills) from salvage.",
+          "cannot": "Precursor mechanisms still resist; complex builds take a day and materials."
+        },
+        {
+          "rank": 3,
+          "name": "Speaker to Machines",
+          "grants": "Diagnose ANY mechanism by touch and sound, Precursor included; once per day, coax one dead device to run one more time; your builds count as quality goods.",
+          "cannot": "Coaxed devices die again after; understanding Precursor function is not understanding purpose."
+        }
+      ],
+      "functions": [
+        "mend"
       ]
     },
     {
-      "id": "beastfriend", "name": "Beastfriend", "levelReq": 1, "energyCost": 6,
-      "axes": {"instinct_analysis": -0.5, "individual_collective": 0.2},
+      "id": "beastfriend",
+      "name": "Beastfriend",
+      "levelReq": 1,
+      "energyCost": 6,
+      "axes": {
+        "instinct_analysis": -0.5,
+        "individual_collective": 0.2
+      },
       "attribute": "social",
-      "effectTags": ["animals", "calm", "bond"],
+      "effectTags": [
+        "animals",
+        "calm",
+        "bond"
+      ],
       "narrationHints": "Stillness animals trust. Reading ears and hackles like weather; being read back and found harmless.",
       "description": "Calm, read, and work with animals — from skittish livestock to wary wild things.",
       "notFor": "Commanding animals against their nature; Precursor-altered creatures without a check; anything mid-frenzy.",
       "tree": [
-        {"rank": 1, "name": "Gentle Presence", "grants": "Calm domestic animals; read a beast's mood and recent past; wild animals don't flee your approach.", "cannot": "No commands — only trust; predators stay dangerous."},
-        {"rank": 2, "name": "Working Trust", "grants": "Ask simple tasks of animals that know you (carry, guard, find); a companion beast may take you on; sense what nearby animals sense.", "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight."},
-        {"rank": 3, "name": "The Old Accord", "grants": "Parley meaningfully with any natural creature; call for aid in wild country and something answers; Precursor-touched beasts recognize you as neutral.", "cannot": "What answers a call chooses its own price; the Accord breaks if you kill needlessly."}
+        {
+          "rank": 1,
+          "name": "Gentle Presence",
+          "grants": "Calm domestic animals; read a beast's mood and recent past; wild animals don't flee your approach.",
+          "cannot": "No commands — only trust; predators stay dangerous."
+        },
+        {
+          "rank": 2,
+          "name": "Working Trust",
+          "grants": "Ask simple tasks of animals that know you (carry, guard, find); a companion beast may take you on; sense what nearby animals sense.",
+          "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight."
+        },
+        {
+          "rank": 3,
+          "name": "The Old Accord",
+          "grants": "Parley meaningfully with any natural creature; call for aid in wild country and something answers; Precursor-touched beasts recognize you as neutral.",
+          "cannot": "What answers a call chooses its own price; the Accord breaks if you kill needlessly."
+        }
+      ],
+      "functions": [
+        "bind"
       ]
     },
     {
-      "id": "stonewise", "name": "Stonewise", "levelReq": 1, "energyCost": 5,
-      "axes": {"concrete_abstract": -0.5, "tradition_innovation": -0.2},
+      "id": "stonewise",
+      "name": "Stonewise",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "concrete_abstract": -0.5,
+        "tradition_innovation": -0.2
+      },
       "attribute": "mental",
-      "effectTags": ["structure", "terrain", "climb"],
+      "effectTags": [
+        "structure",
+        "terrain",
+        "climb"
+      ],
       "narrationHints": "Reading load paths and old repairs in a wall like a mason's diary. Knowing which ledge holds and which lies.",
       "description": "Read stone, structure, and ground: what holds, what's about to fail, what was built and why.",
       "notFor": "X-ray sight (reads surfaces and stresses, not hidden rooms directly); metallurgy; speed — a proper read takes minutes.",
       "tree": [
-        {"rank": 1, "name": "Sound Footing", "grants": "Judge whether floor, bridge, ledge, or wall will hold; find the safe climbing line; spot recent structural disturbance.", "cannot": "Deliberately disguised work needs a check; no read through cladding."},
-        {"rank": 2, "name": "Mason's Eye", "grants": "Date construction and read its story (repairs, sieges, haste); find the weak point that brings a structure down — or the brace that saves it; detect voids by resonance tap.", "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail."},
-        {"rank": 3, "name": "Bones of the World", "grants": "Read geology like architecture: predict collapse, slide, or sinkhole; navigate caves by stone-sense; Precursor construction yields its structural logic (not its purpose).", "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds."}
+        {
+          "rank": 1,
+          "name": "Sound Footing",
+          "grants": "Judge whether floor, bridge, ledge, or wall will hold; find the safe climbing line; spot recent structural disturbance.",
+          "cannot": "Deliberately disguised work needs a check; no read through cladding."
+        },
+        {
+          "rank": 2,
+          "name": "Mason's Eye",
+          "grants": "Date construction and read its story (repairs, sieges, haste); find the weak point that brings a structure down — or the brace that saves it; detect voids by resonance tap.",
+          "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail."
+        },
+        {
+          "rank": 3,
+          "name": "Bones of the World",
+          "grants": "Read geology like architecture: predict collapse, slide, or sinkhole; navigate caves by stone-sense; Precursor construction yields its structural logic (not its purpose).",
+          "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds."
+        }
+      ],
+      "functions": [
+        "reveal",
+        "mend"
       ]
     },
     {
-      "id": "rivercraft", "name": "Rivercraft", "levelReq": 1, "energyCost": 5,
-      "axes": {"instinct_analysis": -0.2, "concrete_abstract": -0.3},
+      "id": "rivercraft",
+      "name": "Rivercraft",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "instinct_analysis": -0.2,
+        "concrete_abstract": -0.3
+      },
       "attribute": "practical",
-      "effectTags": ["water", "weather", "boats"],
+      "effectTags": [
+        "water",
+        "weather",
+        "boats"
+      ],
       "narrationHints": "The river as a moody neighbor you've known for years. Reading current-braid and sky together.",
       "description": "Boats, currents, crossings, and weather-sense — the water-roads of the valley and what moves on them.",
       "notFor": "Open sea; fighting the water (it's about not fighting); breathing underwater.",
       "tree": [
-        {"rank": 1, "name": "River Legs", "grants": "Handle small craft in rough water; find the safe ford; read tomorrow's weather from sky and water; swim strongly burdened.", "cannot": "Rapids beyond class of your craft still say no; weather-sense is a day out, not a week."},
-        {"rank": 2, "name": "Current's Confidant", "grants": "Run water others portage; read what the river carries and where from (debris, silt, bodies of news); night navigation by sound of water alone.", "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths."},
-        {"rank": 3, "name": "Watershed Mind", "grants": "Hold the whole watershed in your head: predict flood and drought weeks out, trace ANY sample to its source reach, know where something dumped upstream comes ashore.", "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies."}
+        {
+          "rank": 1,
+          "name": "River Legs",
+          "grants": "Handle small craft in rough water; find the safe ford; read tomorrow's weather from sky and water; swim strongly burdened.",
+          "cannot": "Rapids beyond class of your craft still say no; weather-sense is a day out, not a week."
+        },
+        {
+          "rank": 2,
+          "name": "Current's Confidant",
+          "grants": "Run water others portage; read what the river carries and where from (debris, silt, bodies of news); night navigation by sound of water alone.",
+          "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths."
+        },
+        {
+          "rank": 3,
+          "name": "Watershed Mind",
+          "grants": "Hold the whole watershed in your head: predict flood and drought weeks out, trace ANY sample to its source reach, know where something dumped upstream comes ashore.",
+          "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies."
+        }
+      ],
+      "functions": [
+        "move"
       ]
     },
     {
-      "id": "quiet_step", "name": "Quiet Step", "levelReq": 1, "energyCost": 6,
-      "axes": {"individual_collective": -0.4, "instinct_analysis": -0.2},
+      "id": "quiet_step",
+      "name": "Quiet Step",
+      "levelReq": 1,
+      "energyCost": 6,
+      "axes": {
+        "individual_collective": -0.4,
+        "instinct_analysis": -0.2
+      },
       "attribute": "physical",
-      "effectTags": ["stealth", "scout", "evade"],
+      "effectTags": [
+        "stealth",
+        "scout",
+        "evade"
+      ],
       "narrationHints": "Moving like a held breath. Not invisibility — just never being where the eye lands.",
       "description": "Move unseen and unheard; scout, shadow, and slip away.",
       "notFor": "Open ground in daylight against alert watchers; staying hidden while acting loudly; groups — this craft is solitary.",
       "tree": [
-        {"rank": 1, "name": "Soft Ground", "grants": "Move silently over natural terrain; use shadow and cover to pass casual watch; shadow a person through a town unnoticed.", "cannot": "Alert sentries and open ground beat you without a check; armor noise is armor noise."},
-        {"rank": 2, "name": "Unremarked", "grants": "Pass alert watchers with cover; read a guard pattern in minutes and thread it; leave a pursuit behind in any broken country.", "cannot": "Animals still smell you; can't vanish from someone already watching you."},
-        {"rank": 3, "name": "The Unseen Errand", "grants": "Enter and leave watched places as if the watch blinked; move a small party quietly using your reads; once per day, break line-of-sight and be simply gone.", "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink."}
+        {
+          "rank": 1,
+          "name": "Soft Ground",
+          "grants": "Move silently over natural terrain; use shadow and cover to pass casual watch; shadow a person through a town unnoticed.",
+          "cannot": "Alert sentries and open ground beat you without a check; armor noise is armor noise."
+        },
+        {
+          "rank": 2,
+          "name": "Unremarked",
+          "grants": "Pass alert watchers with cover; read a guard pattern in minutes and thread it; leave a pursuit behind in any broken country.",
+          "cannot": "Animals still smell you; can't vanish from someone already watching you."
+        },
+        {
+          "rank": 3,
+          "name": "The Unseen Errand",
+          "grants": "Enter and leave watched places as if the watch blinked; move a small party quietly using your reads; once per day, break line-of-sight and be simply gone.",
+          "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink."
+        }
+      ],
+      "functions": [
+        "conceal",
+        "move"
       ]
     },
     {
-      "id": "storykeeper", "name": "Storykeeper", "levelReq": 1, "energyCost": 4,
-      "axes": {"tradition_innovation": -0.5, "concrete_abstract": 0.3},
+      "id": "storykeeper",
+      "name": "Storykeeper",
+      "levelReq": 1,
+      "energyCost": 4,
+      "axes": {
+        "tradition_innovation": -0.5,
+        "concrete_abstract": 0.3
+      },
       "attribute": "mental",
-      "effectTags": ["lore", "memory", "perform"],
+      "effectTags": [
+        "lore",
+        "memory",
+        "perform"
+      ],
       "narrationHints": "The one who holds the valley's memory out loud. A story for every stone, and the discipline to keep them straight.",
       "description": "Hold, recall, and deploy the valley's stories — living memory as a working tool.",
       "notFor": "Reading (this is oral craft); knowing what nobody ever told anyone; lying — a storykeeper's coin is accuracy.",
       "tree": [
-        {"rank": 1, "name": "Long Memory", "grants": "Recall any story you've heard verbatim; know the common lore of any valley place or family; earn welcome in a strange hall by performing.", "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust."},
-        {"rank": 2, "name": "The Threads Between", "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.", "cannot": "Implication isn't proof; steadying works once per group per trouble."},
-        {"rank": 3, "name": "Keeper of the Deep Stock", "grants": "Access the old stratum — pre-crisis stories most keepers lost; recognize when events are RHYMING with an old story and read the pattern forward; your tellings enter the community record with weight.", "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy."}
+        {
+          "rank": 1,
+          "name": "Long Memory",
+          "grants": "Recall any story you've heard verbatim; know the common lore of any valley place or family; earn welcome in a strange hall by performing.",
+          "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust."
+        },
+        {
+          "rank": 2,
+          "name": "The Threads Between",
+          "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.",
+          "cannot": "Implication isn't proof; steadying works once per group per trouble."
+        },
+        {
+          "rank": 3,
+          "name": "Keeper of the Deep Stock",
+          "grants": "Access the old stratum — pre-crisis stories most keepers lost; recognize when events are RHYMING with an old story and read the pattern forward; your tellings enter the community record with weight.",
+          "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy."
+        }
+      ],
+      "functions": [
+        "reveal",
+        "bind"
       ]
     },
     {
-      "id": "hearthbinding", "name": "Hearthbinding", "levelReq": 1, "energyCost": 5,
-      "axes": {"individual_collective": 0.5, "mechanical_spiritual": 0.2},
+      "id": "hearthbinding",
+      "name": "Hearthbinding",
+      "levelReq": 1,
+      "energyCost": 5,
+      "axes": {
+        "individual_collective": 0.5,
+        "mechanical_spiritual": 0.2
+      },
       "attribute": "social",
-      "effectTags": ["camp", "morale", "recover"],
+      "effectTags": [
+        "camp",
+        "morale",
+        "recover"
+      ],
       "narrationHints": "Making anywhere briefly home. The fire built right, the food that tastes like safety, watches that let people actually sleep.",
       "description": "Turn a stop into a hearth: camps, meals, and watch-order that restore a group beyond what rest alone gives.",
       "notFor": "Solo benefit (this craft is for groups); combat; hurry — a hearth takes an evening.",
       "tree": [
-        {"rank": 1, "name": "Good Camp", "grants": "Camps you make restore +2 extra health and energy to everyone overnight; cook a real meal from thin supplies; a night's watch order that actually works.", "cannot": "Needs an evening and minimal materials; no benefit in a hostile active scene."},
-        {"rank": 2, "name": "Table Peace", "grants": "Meals you host suspend quarrels at the fire — hostile parties will eat together; overnight recovery also clears one minor condition; travelers remember your camps and owe small warmth.", "cannot": "Peace lasts as long as the meal plus the night; deep feuds are suspended, not settled."},
-        {"rank": 3, "name": "The Standing Hearth", "grants": "A camp you keep three nights becomes a named place (enters place memory); companions and party bond faster at your fire (bond-relevant deeds count +1 weight); once per journey, a full night at your hearth restores as a rest at home.", "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated."}
+        {
+          "rank": 1,
+          "name": "Good Camp",
+          "grants": "Camps you make restore +2 extra health and energy to everyone overnight; cook a real meal from thin supplies; a night's watch order that actually works.",
+          "cannot": "Needs an evening and minimal materials; no benefit in a hostile active scene."
+        },
+        {
+          "rank": 2,
+          "name": "Table Peace",
+          "grants": "Meals you host suspend quarrels at the fire — hostile parties will eat together; overnight recovery also clears one minor condition; travelers remember your camps and owe small warmth.",
+          "cannot": "Peace lasts as long as the meal plus the night; deep feuds are suspended, not settled."
+        },
+        {
+          "rank": 3,
+          "name": "The Standing Hearth",
+          "grants": "A camp you keep three nights becomes a named place (enters place memory); companions and party bond faster at your fire (bond-relevant deeds count +1 weight); once per journey, a full night at your hearth restores as a rest at home.",
+          "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated."
+        }
+      ],
+      "functions": [
+        "bind",
+        "heal"
       ]
     },
     {
-      "id": "keen_appraisal", "name": "Keen Appraisal", "levelReq": 1, "energyCost": 4,
-      "axes": {"concrete_abstract": -0.2, "instinct_analysis": 0.4},
+      "id": "keen_appraisal",
+      "name": "Keen Appraisal",
+      "levelReq": 1,
+      "energyCost": 4,
+      "axes": {
+        "concrete_abstract": -0.2,
+        "instinct_analysis": 0.4
+      },
       "attribute": "mental",
-      "effectTags": ["observe", "value", "detail"],
+      "effectTags": [
+        "observe",
+        "value",
+        "detail"
+      ],
       "narrationHints": "The glance that inventories a room. Worth, wear, provenance, and the one thing that doesn't belong.",
       "description": "See what's actually there: value, provenance, condition, and the detail everyone else missed.",
       "notFor": "Speed-reading people's intent (objects and scenes, not minds); magic-sense; appraising the truly unique without comparables.",
       "tree": [
-        {"rank": 1, "name": "True Worth", "grants": "Price goods accurately at a glance; spot forgery, shoddy work, and hidden damage; notice the one detail out of place in a scene.", "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained."},
-        {"rank": 2, "name": "Provenance", "grants": "Read an object's history from wear (who used it, how, how long); estimate any collection's worth in minutes; spot a concealed item on a person by how they carry.", "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight."},
-        {"rank": 3, "name": "Nothing Hidden", "grants": "One sweep of a room yields its full inventory including the concealed (GM names what's findable); appraise the priceless by structural logic; your valuation is accepted as expert in any market.", "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft."}
+        {
+          "rank": 1,
+          "name": "True Worth",
+          "grants": "Price goods accurately at a glance; spot forgery, shoddy work, and hidden damage; notice the one detail out of place in a scene.",
+          "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained."
+        },
+        {
+          "rank": 2,
+          "name": "Provenance",
+          "grants": "Read an object's history from wear (who used it, how, how long); estimate any collection's worth in minutes; spot a concealed item on a person by how they carry.",
+          "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight."
+        },
+        {
+          "rank": 3,
+          "name": "Nothing Hidden",
+          "grants": "One sweep of a room yields its full inventory including the concealed (GM names what's findable); appraise the priceless by structural logic; your valuation is accepted as expert in any market.",
+          "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft."
+        }
+      ],
+      "functions": [
+        "reveal"
       ]
     },
     {
-      "id": "old_roads", "name": "Old Roads", "levelReq": 2, "energyCost": 7,
-      "axes": {"tradition_innovation": -0.3, "mechanical_spiritual": 0.3, "concrete_abstract": 0.2},
+      "id": "old_roads",
+      "name": "Old Roads",
+      "levelReq": 2,
+      "energyCost": 7,
+      "axes": {
+        "tradition_innovation": -0.3,
+        "mechanical_spiritual": 0.3,
+        "concrete_abstract": 0.2
+      },
       "attribute": "mental",
-      "effectTags": ["precursor", "salvage", "sense"],
+      "effectTags": [
+        "precursor",
+        "salvage",
+        "sense"
+      ],
       "narrationHints": "A feel for where the old world's bones run. Straight lines under crooked fields; doors that were never doors.",
       "description": "Sense, follow, and safely approach Precursor traces — the old roads under the valley's skin.",
       "notFor": "Understanding Precursor PURPOSE (only presence and pattern); activating anything; safety guarantees — this craft finds the door, not what's behind it.",
       "tree": [
-        {"rank": 1, "name": "The Straight Feeling", "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.", "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read."},
-        {"rank": 2, "name": "Reading the Bones", "grants": "Map a site's Precursor layout by walking it; judge whether a remnant is dormant, cycling, or waking; salvage from the edge of live systems without triggering them.", "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed."},
-        {"rank": 3, "name": "Where They Walked", "grants": "The deep net reveals itself: perceive the valley's whole Precursor lattice from any node; sense when the lattice CHANGES state anywhere on it; approach places that repel others.", "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed."}
+        {
+          "rank": 1,
+          "name": "The Straight Feeling",
+          "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.",
+          "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read."
+        },
+        {
+          "rank": 2,
+          "name": "Reading the Bones",
+          "grants": "Map a site's Precursor layout by walking it; judge whether a remnant is dormant, cycling, or waking; salvage from the edge of live systems without triggering them.",
+          "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed."
+        },
+        {
+          "rank": 3,
+          "name": "Where They Walked",
+          "grants": "The deep net reveals itself: perceive the valley's whole Precursor lattice from any node; sense when the lattice CHANGES state anywhere on it; approach places that repel others.",
+          "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed."
+        }
+      ],
+      "functions": [
+        "move",
+        "reveal"
       ]
     }
   ]

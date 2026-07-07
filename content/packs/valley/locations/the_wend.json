@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_wend",
+  "name": "The Wend",
+  "regionId": "unspooling",
+  "communityId": "unspooling.wend",
+  "axisVector": [
+    0.4,
+    0.2,
+    0,
+    -0.1,
+    -0.2,
+    -0.1,
+    -0.4,
+    0.2,
+    0.3,
+    0.1,
+    0.2,
+    0.2
+  ],
+  "spectrum": {
+    "chaos_order": -0.4,
+    "emotional_logical": 0.4,
+    "death_life": 0.3
+  },
+  "tags": [
+    "churn",
+    "march",
+    "habitable",
+    "wanderer",
+    "waypoint"
+  ],
+  "connections": [
+    "tumbledown_market",
+    "the_gralloch",
+    "spindrift_hollow"
+  ],
+  "descriptionSeed": "The gentlest node of the Unspooling — a wandering road-people whose whole culture is graceful motion, reached where the chaos thins back toward habitable. What rides with the chaos here is warmth: the Wend-folk feel their way through life, mourn openly, celebrate easily, and take in strays of every kind. The natural first foothold for a traveler out of the Valley into the Churn — chaos with a human face, and the road home still findable.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Warm restless motion — a caravan-wedding, a grief openly carried, a stranger welcomed and read at once, a song that everyone somehow knows, the offer to travel with them a while.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "The Wend take you in and, over the road, decide whether you're kin — a slow relationship that opens the whole Reach if it lands",
+    "A Wend elder is dying and wants to reach a place they left as a child before the end; the journey there crosses every danger of the Churn",
+    "Someone raised by the Wend wants to leave for a settled life and the road-family is grieving it as a small death; a familiar shape in a strange land"
+  ],
+  "map": {
+    "x": 780,
+    "y": 220
+  }
+}

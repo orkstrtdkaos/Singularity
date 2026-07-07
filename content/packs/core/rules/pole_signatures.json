@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "pole_signatures",
+  "kind": "social_mechanic_spec",
+  "note": "The content-and-resolution layer SNG-027 (social contest) leans on but left undefined. A pole-signature is the structured 'what moves this person, what hardens them, what they cannot be budged by' \u2014 derived from data NPCs already carry (spectrum/poleIntensity, want, fears, universalRole, roleMethod). It makes approach-FIT computable so a social contest isn't vibes: the same approach lands differently on a truth-culture NPC than a peace-culture one, mechanically. This doc defines the schema, the derivation, and the approach\u00d7signature resolution table. Authored by Aevi (PO), closing SNG-027's content gap.",
+
+  "signatureSchema": {
+    "note": "Added to NPC records (or derived on the fly by SNG-022 reconciliation for existing NPCs). All fields optional \u2014 the engine falls back to disposition-derived defaults.",
+    "fields": {
+      "movedBy": "array of approach-types this person is OPEN to (e.g. ['honor','truth','shared-feeling']). A well-fit approach here gets a FIT bonus.",
+      "hardenedBy": "array of approach-types that BACKFIRE (e.g. ['deception','pressure','sentiment']). Using one moves the meter the wrong way and/or spends patience.",
+      "immovableBy": "array of approach-types that simply don't work \u2014 no progress, no backfire, wasted beat (e.g. Vaskar immovableBy ['speed','charm','logic-alone']).",
+      "onlyMovedBy": "OPTIONAL hard gate \u2014 a single thing that is the ONLY real lever (e.g. Vaskar onlyMovedBy 'trust-demonstrated-over-time'; nothing else reaches threshold, only slows the loss). Use sparingly, for the immovable-by-design.",
+      "patience": "how many mis-steps before they disengage (low = touchy, high = will hear you out). Default from personality.patience.",
+      "tell": "a one-line GM hint surfaced when the player reads them (via Attention/rune-cast/Cold-Read), pointing at movedBy without stating the meter."
+    }
+  },
+
+  "approachTypes": [
+    {"type": "honor", "desc": "appeal to duty, reputation, the right thing by their code", "fitsPole": ["violence(discipline)","order","truth"]},
+    {"type": "truth", "desc": "lay out the real situation plainly, hide nothing", "fitsPole": ["truth","light"]},
+    {"type": "shared-feeling", "desc": "meet them in the emotion, feel-with (Pathos)", "fitsPole": ["emotional","life","peace"]},
+    {"type": "proof", "desc": "press a contradiction, argue it airtight (Logos)", "fitsPole": ["logical","order","mind"]},
+    {"type": "unmasking", "desc": "expose a lie or hidden thing (Verity)", "fitsPole": ["truth","light"]},
+    {"type": "de-escalation", "desc": "lower the temperature, make it safe (Stillcraft)", "fitsPole": ["peace"]},
+    {"type": "bond", "desc": "invoke a shared relationship, standing, or history", "fitsPole": ["emotional","life"]},
+    {"type": "offer", "desc": "a concrete trade \u2014 coin, favor, service", "fitsPole": ["mechanical","concrete","order"]},
+    {"type": "the-unsayable", "desc": "name the thing everyone avoids", "fitsPole": ["truth","chaos"], "note": "moves truth-cultures, HARDENS peace/falsehood-cultures (the Stillhold) \u2014 the signature reversal"},
+    {"type": "patience", "desc": "demonstrate durable commitment across real time", "fitsPole": ["time","spiritual"], "note": "the only lever for the deep-slow (Ents, Vaskar); can't be faked in one beat"},
+    {"type": "pressure", "desc": "threaten, push, force the pace", "fitsPole": ["violence"], "note": "moves the weak-willed, HARDENS the disciplined and the proud"},
+    {"type": "deception", "desc": "a lie or manipulation (Falsecraft)", "fitsPole": ["falsehood"], "note": "works on the credulous, BACKFIRES hard on truth-readers (Verity-users, Vael)"}
+  ],
+
+  "resolution": {
+    "fitBonus": "+15 to the social d100 when the approach is in movedBy (or its pole fits their disposition). Stacks with attribute + ability.",
+    "misfitPenalty": "-10 and the meter can move the WRONG way when the approach is in hardenedBy.",
+    "immovableWaste": "immovableBy approaches auto-fail the beat with no meter change but a patience spend \u2014 the GM narrates the bounce ('he hears you out, unmoved').",
+    "onlyMovedByGate": "if set, approaches outside it CANNOT cross the win-threshold \u2014 at best they slow the patience-drain; only the named lever actually wins. This is how 'Vaskar takes a century of trust' is real and not just flavor.",
+    "abilityAmplify": "a matching Reach ability makes an approach land harder: Pathos+shared-feeling, Logos+proof, Verity+unmasking, Stillcraft+de-escalation, Falsecraft+deception, mediators_tongue+bond/bridge. The ability is the method; the approach is the intent; fit is whether the person is open to it.",
+    "botchReadsFalse": "a botched READ (Attention/rune-cast to learn their signature) can report a FALSE lever \u2014 the player pursues honor on someone who's actually moved only by shared-feeling, and burns patience. Parallels the rune-cast botch."
+  },
+
+  "worked_examples": [
+    {"npc": "rootbound_vaskar", "movedBy": ["patience","honor"], "hardenedBy": ["pressure","deception"], "immovableBy": ["speed","charm","proof-alone"], "onlyMovedBy": "patience", "patience": 8, "tell": "He weighs you against a thousand years. Nothing you say today matters as much as what you do across time.", "why": "The Rootbound elder \u2014 Erik's 'trust demonstrated over duration' made mechanical. You literally cannot win him in one conversation; you can only avoid losing ground and earn the right to return."},
+    {"npc": "keeper_the_unsaid", "movedBy": ["shared-feeling","the-unsayable"], "hardenedBy": ["pressure"], "immovableBy": [], "patience": 5, "tell": "She turns you from the question with such kindness you almost don't notice. The lever is the thing she's protecting \u2014 name it gently.", "why": "The Stillhold keeper \u2014 the-unsayable MOVES her (she secretly wants relief) where it would HARDEN the culture around her. Signature and locale can differ."},
+    {"npc": "champion_vael", "movedBy": ["honor","truth"], "hardenedBy": ["deception","pressure"], "immovableBy": ["charm"], "patience": 6, "tell": "She reads a straight answer as respect and a maneuver as insult. Be plain or be gone.", "why": "The Marcher \u2014 deception BACKFIRES hard (she reads it true); honor and plain truth are the road."},
+    {"npc": "cogitant_ninefold", "movedBy": ["proof"], "hardenedBy": ["sentiment","pressure"], "immovableBy": ["bond"], "patience": 4, "tell": "Feeling is noise to them. Only a cleaner argument than theirs will move the mind \u2014 though the body underneath is another matter.", "why": "The war-thinker \u2014 proof is the only front door; but the hidden lever (their dying body, their subtracted warmth) is reachable another way, a deeper arc."}
+  ],
+
+  "buildImplication": "Adds an optional `poleSignature` object to NPC records; SNG-022 reconciliation derives a default one for existing NPCs from spectrum+want+fears+universalRole. SNG-027's social contest reads it for FIT. Generation (SNG-020) authors a signature for each generated NPC from its disposition+role. Content owed shrinks to: hand-author signatures on the ~dozen major arc-NPCs (the rest derive). This closes SNG-027's 'content owed' \u2014 the mechanic is now fully specified end to end."
+}

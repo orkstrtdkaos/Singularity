@@ -1,32 +1,52 @@
 # Singularity — Running Spec Backlog
 
-Engine-needing work accumulated during the 2026-07 content-expansion sessions. All CONTENT for these is authored/authorable at origin; these are the CODE pieces. Aevi maintains this list; Erik greenlights turning from content to systems. Nothing here blocks continued content authoring.
+Engine-needing work from the 2026-07 content-expansion sessions. ALL content for these is authored/authorable at origin; these are the CODE pieces. Detailed specs follow the roadmap. Aevi maintains; Erik greenlights turning from content to systems. Nothing here blocks continued content authoring.
 
----
+## Optimized roadmap (build order)
 
-## Pending ratified builds (small, content ready)
-- **SNG-BATCH-5** — soft class-cost (2x secondary) + branch forks + feel refinements. Content ready (skill_capacity.json crossClass, branch_forks.json). Ratified, assembled, awaiting CCode. *(Note: prior local CCode run reportedly got "almost all the way through" — verify state before re-running.)*
+**Foundation — build first, everything leans on these:**
+1. **SNG-019 Codex entity-resolution** — facts collect under primary nodes (alias/entityId resolution + merge + grouped UI). Small. Unblocks clean persistence for everything else.
+2. **SNG-022 Reconciliation engine** — brings existing characters + content to current on login/load (generalizes existing backfill.js). Small-medium. Without it, every feature below strands existing characters/content. The linchpin.
 
-## Systems batch candidates (medium specs; share machinery)
-- **Money + The Game + Recruitment** (the_game_and_coin.json content ready). Wallet + wealthLevel; location-flavored prices; Game-standing track + stake-transfer; recruit-as-party-member with joinReason {pay|purpose|bond} + loyalty. Reuses check/challenge/bond engines.
-- **SNG-017 — Creation overhaul.** Origins = areas of the world (not just Valley); start location follows origin; innate-talent step (innate_talents.json ready); ability pool from origin's tradition; optional will-channel pick. Data-drive from origins.json (Aevi owes content).
-- **SNG-018 — Romance/intimacy track.** Relationship track beyond bond; romanceable flag + fit-hints (Aevi owes content); staged, consent-respecting, GM-honored, surface-appropriate register. Reuses relationship/bond/reputation.
-- **SNG-016 — 12-axis skill breadth.** RESOLVED as design (Reaches = crafts; six near-axis traditions authored). Remaining: engine derives adjacency/purity from poleIntensity vectors; learning a Reach tradition gated by presence-in-region; geographic leveling. Design proposal delivered via the coordinate/Reach lore.
+**Spine — the growing, living, ending world (build after foundation):**
+3. **SNG-020 Generative-with-persistence (ALL types)** — one generate(type,context) path; world grows through play; depends on SNG-019. Medium-large; the anchor.
+4. **SNG-021 Living world** — seasonal cycles + self-driven NPCs offscreen; light world-tick additions.
+5. **SNG-024 Endings** — mortality/expiry/resolution; removes the "no deaths" clamp; the missing half of growth.
+6. **SNG-025 Player-spawned world-effects + counter-quests** — the headline emergent cross-player feature; composes SNG-024+020+019+party-sync.
 
-## Engine flags from world-model corrections (light)
-- **Pole-intensity model** — engine reads location.poleIntensity (independent 0..1 poles), computes co-firing + purity from it; net-signed derivable for back-compat. (Locations already reseeded.)
-- **Axes-as-disposition** — framing only; no mechanical change (GM narration guidance in world_framing.json).
-- **World (not Valley)** — later clean rename of valley/ pack to world/ (do NOT mid-flight; breaks manifest). Origins startable outside the Valley (ties to SNG-017).
-- **Manifest locals** — locations gain optional seedFiction + nativeLogic (GM enforces a native domain's internal rules as LAW inside it); creatures gain native-domain tag + diffusion weight so encounter tables place them out-of-context. Content-heavy, one light enforcement flag.
-- **Will-expression / Inscription** — abilities gain optional `inscribable` flag + rune-cost; inscription = slow/persistent cast channel; substrate-density gates where runes/inscription work. Cross-tradition modality.
-- **Innate talents** — creation stores character.talent; permanent, non-spendable; grows in expression. (Ties SNG-017.)
-- **Methods** — rune-casting/coordinate-reading/attunement resolve as tool-or-skill-gated checks that REVEAL poleIntensity (rune dice) or adjacency (compass); light method-resolution path.
+**Player-facing systems (parallel-able once foundation holds):**
+7. **SNG-017 Creation overhaul** — origins = areas-of-world (role+homeland), start-location follows origin, innate-talent step, origin-tradition ability pool. Content owed: origins.json.
+8. **SNG-018 Romance** — relationship track beyond bond; a slow social contest. Content owed: romanceable flags.
+9. **SNG-023 Character narrative log** — the readable Saga via logUpdates; SNG-022 reconstructs for old characters.
+10. **SNG-027 Social contest** — multi-beat weighty conversations; the game's center of gravity. Content owed: NPC pole-signatures (light).
+11. **Money + The Game + Recruitment** — wallet, Game-standing ladder, hire/purpose/bond recruits; shares reputation/economy machinery.
+12. **SNG-026 Skill functions + cross-domain combination** — function tags (DONE on 54 abilities) + braid engine extending SNG-010 emergence.
+
+**Deferred (liked, behind the spine):**
+- **SNG-028 Consequence-state** (wounds/drift/debt/faction as gating numbers) — reconciliation backfills drift when built.
+- **SNG-029 Downtime/player-pursuit** (the player's offscreen clock) — strong once the living world exists.
+
+**Ratified-and-waiting:** SNG-BATCH-5 (soft class-cost + branch forks; verify prior CCode state before re-run).
+
+## Suggested batches
+- **BATCH-6 (Foundation):** SNG-019 + SNG-022. Small, unblocks all. Start here.
+- **BATCH-7 (Living spine):** SNG-020 + SNG-021 + SNG-024 + SNG-025. The world that grows/lives/ends/marks.
+- **BATCH-8 (Player systems):** SNG-017 + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
+
+## Cross-cutting engine flags (fold into whichever batch touches them)
+- **poleIntensity** reading (independent 0..1 poles; co-firing/purity; net-signed derivable). Locations already reseeded.
+- **Manifest locals:** seedFiction + nativeLogic on locations (GM enforces domain rules-as-law inside); creature native-tag + diffusion weight.
+- **Will/Inscription:** abilities gain optional `inscribable` + rune-cost; substrate-density gates persistence.
+- **Innate talents:** character.talent (SNG-017 grants at creation; SNG-022 offers to existing).
+- **Methods:** rune-casting/coordinate-reading/attunement as tool/skill-gated checks revealing poleIntensity/adjacency.
+- **Skill-functions:** every ability (authored+generated) carries ≥1 function; SNG-022 back-tags; generation is function-aware; universal_roles maps role→functions.
+- **Axes-as-disposition / world-not-valley:** framing (GM narration); later clean rename valley/ → world/ (NOT mid-flight).
 
 ## Notes
-- All content (locations, NPCs, companions, items, Reach traditions, lore, jewels, domains) is authored directly to origin and needs no engine work to EXIST as data — only these systems to fully ACTIVATE their mechanics.
-- Suggested grouping when Erik greenlights: **SNG-BATCH-6 = SNG-017 creation + SNG-018 romance + money/Game/recruitment** (they share relationship + economy machinery). Pole-intensity + manifest-locals enforcement flags fold in as small additions.
+- All authored content (locations, NPCs, companions, items, traditions, lore, jewels, domains, cycles, roles, combinations) exists as data now; these systems ACTIVATE its mechanics. No additional content owed except the light items flagged per-spec (origins.json, romanceable flags, NPC pole-signatures).
+- Dependency spine: SNG-019 → SNG-022 → SNG-020 → (021, 024, 025) → player systems. Respect it; the foundation two are cheap and unblock the rest.
 
-*Maintained by Aevi (PO). Last updated 2026-07-07.*
+---
 
 ## SNG-019 — Codex entity-resolution (facts collect under primary nodes)
 Erik 2026-07-07: the codex reads as a running list; ~20 facts about Teva end up scattered instead of gathered under her node. Diagnosis (verified in engine/codex.js): the codex IS already a typed-node graph (topics keyed by slug, kind person/place/lore/event/faction/mystery, facts[], links[]). The bug is ENTITY RESOLUTION, not storage — applyCodexUpdates slugifies u.topic per update, so "Teva", "the woman in the chamber", "Teva the healer" mint three nodes. Fix so facts land on the right primary node:
@@ -115,5 +135,22 @@ Content ready: skill_functions.json (functions heal/shield/strike/reveal/conceal
 
 ## Skill-functions — woven through (2026-07-07)
 All 54 abilities now carry a `functions` tag; canon = every ability (authored or generated) has ≥1 function. Wirings: **SNG-026** (combination) matches braids by function pairs across domains. **SNG-020** generation is FUNCTION-AWARE — generate an ability/NPC-kit/braid to cover a needed function via local domain method (generative_substrate.json). **SNG-022** reconciliation adds a back-tag step: any ability record missing `functions` gets tagged on content-load; any NPC missing role/kit-function coverage flagged. **universal_roles** now maps each role to the functions it must cover (role-instance generation ensures kit spans them). GM reasons by need: 'what heals/shields/reveals here, and how?' — answerable from the tags. No new engine beyond the function-match in SNG-026 + the reconcile back-tag step.
+
+*Updated 2026-07-07.*
+
+## SNG-027 — Social contest (multi-beat conversations that matter)
+Erik 2026-07-07: combat + skill-checks are well-modeled; the game's actual center of gravity is TALK (the Green Schism, the Stillhold's buried truth, the Moot petition, romance, moving Vaskar across a century of grudge) yet weighty conversations resolve as one-off social checks. Add a lightweight multi-beat social contest — conversation with structure, the way combat has rounds.
+- **Model:** a scene enters "contest" when stakes + a resistant party warrant (GM- or content-flagged). Track a small state: the other party's DISPOSITION toward your aim (a meter, e.g. -3..+3), their pole-signature (what moves them: a Redliner moves on honor, a Stillholder on the unsayable, Vaskar ONLY on trust-demonstrated-over-time), and a patience/turns budget (some contests end if you overreach).
+- **Beats:** each player move is an APPROACH (appeal to their want, press a contradiction, share feeling, offer, concede, invoke a bond/standing) resolved by a social d100 + relevant attribute/ability + FIT (does this approach match their pole-signature?). Good fit + success moves the meter; misfit or botch can harden them or spend patience. Abilities plug in by function: Pathos (share feeling), Logos (press proof), Verity (unmask), Stillcraft (de-escalate), mediators_tongue (bridge). Universal-role method matters — the SAME approach lands differently on a truth-culture vs a peace-culture NPC.
+- **Resolution:** meter reaches +threshold = won (they agree/open/turn); -threshold or patience gone = failed (they close, and it persists — a burned Moot petition is remembered). Partial outcomes are the norm, not binary.
+- **Ties:** consumes the affinity idea (approach-fit = social affinity); pairs with romance (SNG-018 is a slow social contest with a different meter); the reputation/relationship engine carries the persistent result; the narrative log (SNG-023) records the turn. Botch-reads-false parallels the rune-cast botch.
+- **Framework:** the propagation/foreclosure tension in dialogue — do you open the other (hold the aperture) or corner/break them (foreclose)? Both are valid approaches with different persistent consequences.
+- **Content owed:** pole-signature + "what moves them" on major NPCs (light — derivable from existing want/fears + universalRole/roleMethod). Smoke: a weighty conversation runs multiple beats with a visible disposition meter; approach-fit matters; overreach can fail durably; abilities plug in by function; result persists to reputation + narrative log.
+
+## SNG-028 — Character consequence-state (wounds, drift, debt, faction standing) [KEPT, deferred]
+Erik likes this. Persistent tracked numbers on the character that GATE outcomes, not just narration: wounds/conditions, pole-drift vector (from abilities+deeds — already conceptual in the disposition model), debts owed, per-faction reputation. Gives propagation-vs-foreclosure teeth on the individual (a wielder drifting pole-hot toward foreclosure should FEEL it mechanically). Much of the weight is already carried by reputation + the drift concept + establishedFacts; this promotes them to gating state. Medium. Defer behind the spine — reconciliation (SNG-022) can backfill drift for existing characters when built.
+
+## SNG-029 — Downtime / player pursuit (the player's own offscreen clock) [KEPT, deferred]
+Erik likes this. The living world (SNG-021) has NPCs pursue wants offscreen; the PLAYER has no offscreen. A light downtime action between scenes: train (advance toward a learnable ability), craft/inscribe (make an item or a persistent ward), tend a relationship (advance a bond/romance), advance a project (a personal arc). Matches the world's own-clock doctrine to the player. Reuses world-tick + progression + inscription + relationship. Medium. Defer behind the spine; strong once the living world exists to pursue alongside.
 
 *Updated 2026-07-07.*

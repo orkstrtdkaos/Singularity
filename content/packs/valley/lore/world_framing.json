@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "world_framing",
+  "kind": "canon_correction",
+  "note": "Two canon corrections (Erik 2026). (1) The axes are CULTURAL/ENERGETIC disposition, not literal geography — a quality that saturates a people and their land, discovered by moving among peoples, not by walking miles on a grid. (2) 'The Valley' is ONE area, the first detailed; the content pack named 'valley/' is really the WORLD pack. This doc is the authoritative framing; the folder name is legacy and can be renamed later without breaking the manifest. Authored by Aevi (PO).",
+
+  "axes_are_disposition": {
+    "principle": "A Reach or a pole-intensity is not a place on a map you could survey. It is a CHARACTER OF PLACE-AND-PEOPLE — an ambient energy and a cultural temperature. A people can be 'order-steeped' the way a culture is formal; a valley can 'feel' grieving or teeming. The pole-intensities live in inhabitants, customs, mood, and the felt energy of the land, not in coordinates.",
+    "why_it_matters": [
+      "Co-firing makes sense as disposition: a people can be death-steeped AND teeming with life at once (the Quickwood) because it's a quality, not a location — two energies in one culture.",
+      "The map is a map of CHARACTERS-OF-PLACE, discovered by encountering peoples and their felt energy, not by measuring distance. Adjacency = cultural/energetic kinship, not miles.",
+      "A traveler doesn't 'walk up the order-gradient' geographically so much as move deeper into order-steeped peoples and lands until the energy is overwhelming. The pole is where a disposition runs pure enough to be dangerous.",
+      "Individuals carry pole-intensities too (see innate_talents, and a character's own drift): a person IS a small coordinate of dispositions. The land and its people share and shape each other's energy."
+    ],
+    "engine_note": "poleIntensity on a location = the ambient cultural/energetic disposition of that place-and-people. The Rune Dice read this disposition; affinities flex from it; drift moves a character's own disposition toward the poles they steep in. Nothing changes mechanically — only the FRAMING: describe places by their energy and people, not their grid position. The GM narrates a Reach as a felt quality, never as a region on a literal map."
+  },
+
+  "this_is_a_world": {
+    "principle": "The Valley of Echoes is ONE area — the first detailed, the starting basin. It is not the world. The content pack currently named 'valley/' holds world-wide content (the Reaches, the legends, the coordinate model, the far poles) and is properly the WORLD pack.",
+    "corrections": [
+      "Wherever lore says 'the valley' as if it were everything, read 'the known world' or the specific area meant. The Valley of Echoes is a named basin; the Reaches and poles are elsewhere in the world.",
+      "The four original power systems (Harmonic, Radiant, Valley Craft, Precursor) are the crafts of the VALLEY basin specifically — its local folk-traditions. The Reach traditions (Vivimancy, the Edge, Soma, etc.) are the crafts of OTHER parts of the world. This is already true in structure; the framing just makes it explicit.",
+      "Character origins should eventually be able to start OUTSIDE the Valley (a Marcher of the Redline, a Churnfolk maker, a Rootkin of the Quickwood) — not only Valley-natives. See creation_update spec.",
+      "'Begin in Millbrook' (the hardcoded start) is the VALLEY's starting town — correct for a Valley origin, wrong as a universal default. Start location should follow origin."
+    ],
+    "rename_note": "Do NOT rename the valley/ folder mid-flight (breaks manifest + CCode in-flight). Flagged for a later clean rename to world/ (or a world/ pack alongside a valley/ area-pack). Canon is corrected here now; the folder catches up later."
+  }
+}

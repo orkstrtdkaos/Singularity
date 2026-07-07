@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "ember",
+  "name": "Ember",
+  "role": "Companion \u2014 a Glade-touched fox-thing that chose to walk out of the wilds with you",
+  "appearance": "Fox-shaped but wrong-sized and too aware, coat the deep red of banked coals with a faint warmth to it that isn't quite normal fire. Moves like it's listening to two worlds. Left the Glade at your side and hasn't said why.",
+  "persona": "Ember is Glade-changed \u2014 an animal the grove made more than animal. Playful, mercurial, and unnervingly perceptive about the Precursor and the strange. It treats the wilds as home and the cities as a curious game. It bonded to you at Thornwake and the wardens found that significant in a way they wouldn't explain. It cannot speak, but it makes its meaning known, and it is drawn, always, toward the places the world went thin.",
+  "voiceHints": "Wordless \u2014 communicates in gesture, warmth, and where it chooses to look. Goes still and hot near Precursor activity. ENT and Beastfriend characters share a wavelength with it the GM should honor.",
+  "assistTags": ["sense-precursor", "navigate-wilds", "distract", "warm"],
+  "knowledge": [
+    "Senses Precursor activity and the 'thin places' before any instrument does \u2014 goes still and warm to warn you",
+    "Knows the wilds and the Glade's secret ways",
+    "Carries something of the Green Accord in it \u2014 what, even the wardens aren't sure"
+  ],
+  "boundaries": "Ember will not enter a place that reads as truly wrong to it \u2014 it plants, and its refusal is information. It will not harm a Glade-touched creature. It comes and goes on its own logic; a bonded player it always returns to. It cannot fight but can flare heat-and-light to break a moment.",
+  "hooks": "GM-EYES-ONLY: Ember may be the Green Accord's way of sending itself out into the valley \u2014 a seed, a scout, or an heir to what the Old Stag holds. The wardens' interest is not idle. Let this stay a slow, deniable mystery.",
+  "bondGrants": {
+    "id": "thin-place-sense",
+    "name": "Thin-Place Sense",
+    "description": "Ember's warning becomes reliable \u2014 it goes still and warm a clear beat before you enter Precursor-active or 'thin' ground, giving you the choice to ready, avoid, or approach with open eyes.",
+    "energyCost": 5,
+    "attribute": "mental",
+    "axes": {"mechanical_spiritual": 0.4, "space_time": 0.3},
+    "notFor": "Telling you WHAT the thin place is (only that it's there); human-shaped danger; being commanded past its own refusal.",
+    "taughtBy": "Ember (bond)"
+  },
+  "stages": [
+    {"stage": 1, "name": "The Grove's Loan", "narrationHints": "Present but half-wild, coming and going, testing whether the world beyond the Glade \u2014 and you \u2014 are worth staying for."},
+    {"stage": 2, "name": "The Kept Flame", "narrationHints": "Settled at your side now, its warmth a constant, its warnings unfailing \u2014 it has chosen you over the grove that made it, and something in the Glade feels that choice."}
+  ]
+}

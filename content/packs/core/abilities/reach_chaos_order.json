@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_chaos_order",
+  "note": "The crafts of the Unspooling/Lattice-Cities Reach (chaos_order axis). Wildcraft is the chaos-pole tradition, Latticework the order-pole. Learned by traveling the Reach or training with Churnfolk/Lattice-wrights. Higher tiers drift the wielder toward their pole. axes signed for engine compat. Authored by Aevi (PO), SNG-016 skill build-out.",
+  "gated": "learned",
+  "abilities": [
+    {"id": "wildcraft", "name": "Wildcraft", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_chaos_order", "attribute": "practical",
+     "axes": {"chaos_order": -0.5, "destruction_creation": 0.2}, "effectTags": ["improvise", "luck", "unmake-plan"],
+     "narrationHints": "The art of the unplanned \u2014 riding luck, breaking patterns, making the improvised thing work because you refused to plan it.",
+     "description": "The chaos-craft: improvisation as power, luck-riding, the unmaking of others' plans. The Churnfolk discipline of productive disorder.",
+     "notFor": "Reliable repeatable results (that's Latticework's job); fine control; anything that needs to work the same way twice.",
+     "tree": [
+       {"rank": 1, "name": "The Lucky Break", "grants": "Turn a chaotic moment to advantage; improvise a working solution from whatever's to hand; make one plan (yours or theirs) come apart usefully.", "cannot": "You don't choose HOW it breaks, only that it does; luck spent runs thin."},
+       {"rank": 2, "name": "Riding the Churn", "grants": "Thrive where others founder in disorder; read the grain of a chaotic situation and ride it; deny an enemy the predictability they rely on.", "cannot": "Cannot impose an outcome, only surf toward a good one; the ordered and prepared can still beat you."},
+       {"rank": 3, "name": "The Unspooling", "grants": "Unmake order at scale \u2014 a fortress's discipline, a system's certainty, a plan a season in the making, come apart; and out of the loosed chaos, seize the one opening that wouldn't have existed in order.", "cannot": "What you unspool you cannot re-order; the wielder drifts chaos-hot; the Grand Lattice marks you as an enemy."}
+     ]},
+    {"id": "latticework", "name": "Latticework", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_chaos_order", "attribute": "mental",
+     "axes": {"chaos_order": 0.5, "concrete_abstract": 0.2}, "effectTags": ["structure", "predict", "bind"],
+     "narrationHints": "Structure imposed and possibility bound \u2014 a plan that holds, a prediction that lands, a binding that will not slip.",
+     "description": "The order-craft: structure, prediction, law, the binding of possibility. The Lattice-Cities' discipline \u2014 order as power.",
+     "notFor": "Improvisation or the genuinely novel (that's Wildcraft); anything that needs to breathe or grow; controlling people's hearts (only their structures).",
+     "tree": [
+       {"rank": 1, "name": "The Sure Plan", "grants": "Build a plan that holds under pressure; predict a system's next move; impose enough order on chaos to act cleanly in it.", "cannot": "Prediction fails on the truly chaotic; a plan is not a guarantee, only good odds."},
+       {"rank": 2, "name": "The Binding Frame", "grants": "Bind a possibility down \u2014 make a thing reliably true, a route reliably safe, an agreement reliably kept; read a system deeply enough to break OR fortify it at the load-bearing point.", "cannot": "Binding is brittle against Wildcraft; over-bound systems can't adapt and shatter when they must."},
+       {"rank": 3, "name": "The Grand Order", "grants": "Impose structure at scale \u2014 a lawless place made orderly, a chaotic force predicted and countered, a possibility foreclosed by sheer structure. The Lattice's power in miniature.", "cannot": "The wielder drifts order-hot \u2014 and order at full strength IS the foreclosure the framework names as the enemy; the Churn and the free places will not forgive it; perfect order is a cage even when it's yours."}
+     ]}
+  ]
+}

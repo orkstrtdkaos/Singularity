@@ -93,6 +93,194 @@
         "reveal",
         "strike"
       ]
+    },
+    {
+      "id": "body_read",
+      "name": "Body-Read",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "A person's health, strength, and hurt read from how they stand.",
+      "description": "Read a body — its condition, hidden injury, strength, exhaustion, tells.",
+      "notFor": "Reading thoughts; healing.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Body-Read",
+          "grants": "Read another's physical condition, hidden hurts, and capacities at a glance.",
+          "cannot": "Body, not mind; the trained conceal tells."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
+    },
+    {
+      "id": "mind_read_folk",
+      "name": "Cold-Read",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The turn of a mind inferred from a hundred small signs.",
+      "description": "Infer another's thoughts and intent from micro-signals — not magic, mastery of tells.",
+      "notFor": "Actual telepathy; the disciplined/alien.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Cold-Read",
+          "grants": "Deduce a person's likely thoughts and next move from their signals.",
+          "cannot": "Inference, not certainty; masters and non-humans resist."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
+    },
+    {
+      "id": "second_wind",
+      "name": "Second Wind",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3
+      },
+      "functions": [
+        "heal",
+        "move"
+      ],
+      "narrationHints": "Past the wall, and the body finds more.",
+      "description": "Push the body past exhaustion, pain, or shock for a burst — folk-Soma.",
+      "notFor": "True healing; limitless use.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Second Wind",
+          "grants": "Ignore pain, fatigue, or shock for a short, decisive burst of physical effort.",
+          "cannot": "The body remembers the debt; overuse breaks you."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
+    },
+    {
+      "id": "total_focus",
+      "name": "Total Focus",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.3
+      },
+      "functions": [
+        "shield",
+        "reveal"
+      ],
+      "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
+      "description": "Enter absolute focus — ignore fear, distraction, and pain to think or work clean. Folk-Noesis.",
+      "notFor": "Physical feats; wisdom.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Total Focus",
+          "grants": "Focus so completely that fear, pain, and distraction fall away while you think or work.",
+          "cannot": "Can miss the body's warnings; tight focus narrows the view."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
+    },
+    {
+      "id": "perfect_motion",
+      "name": "Perfect Motion",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.4
+      },
+      "functions": [
+        "move",
+        "shield"
+      ],
+      "narrationHints": "The body does exactly and only what's needed, flawlessly.",
+      "description": "Execute a physical feat with impossible precision and economy — mid-tier Soma.",
+      "notFor": "Feats past the body's true ceiling; thought-work.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Perfect Motion",
+          "grants": "Perform a physical act at the very edge of the possible — balance, speed, precision, control.",
+          "cannot": "The true limit still holds; costs the body dearly."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
+    },
+    {
+      "id": "memory_palace",
+      "name": "Memory-Palace",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.4,
+        "concrete_abstract": 0.3
+      },
+      "functions": [
+        "reveal",
+        "bind"
+      ],
+      "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
+      "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
+      "notFor": "Wisdom; presence in the body it forgets.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Memory-Palace",
+          "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
+          "cannot": "Only as good as its inputs; living in the model loses the room."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
+    },
+    {
+      "id": "the_whole_act",
+      "name": "The Whole Act",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": 0.0
+      },
+      "functions": [
+        "move",
+        "reveal"
+      ],
+      "narrationHints": "Thought and motion stop being two things.",
+      "description": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal.",
+      "notFor": "Body-heavy or mind-heavy wielders (needs both near-equal); the extremes.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Whole Act",
+          "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
+          "cannot": "Needs both trained near-equal; the pure poles cannot do it."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
     }
   ]
 }

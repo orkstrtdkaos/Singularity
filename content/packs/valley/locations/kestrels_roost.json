@@ -4,21 +4,52 @@
   "name": "Kestrel's Roost",
   "regionId": "valley",
   "communityId": "valley.kestrels_roost",
-  "spectrum": {"chaos_order": -0.4, "individual_collective": -0.3, "falsehood_truth": -0.3, "tradition_innovation": 0.3, "concrete_abstract": -0.2},
-  "tags": ["trade-post", "mountain", "pass", "crossroads", "no-questions", "unaligned"],
-  "connections": ["radiant_plateau_edge", "disputed_zone_fringe", "old_switchback"],
-  "descriptionSeed": "A shelf of stone and timber wedged where three trails meet below the high pass \u2014 the last stop before the mountains and the first roof coming down. Everyone passing between the plateau, the wilds, and the country beyond the pass comes through the Roost, which means everyone's business does too. Cage-lanterns swing over a market that never fully closes; the Kestrel herself keeps the ledger of who owes whom, and up here that ledger is closer to law than anything the cities enforce. Nothing here is about the river. Up here the water runs clean and cold, and the trouble is entirely human.",
-  "loreRefs": ["valley_primer"],
-  "npcsPresent": ["the_kestrel", "brann_tollhand", "sable_the_runner"],
-  "encounterFlavor": "A crossroads that never sleeps \u2014 traders haggling in four dialects, debts called in, smuggled Precursor salvage under oilcloth, a knife-fight talked down before it starts, a caravan deciding whether to risk the pass before the snow.",
+  "spectrum": {
+    "chaos_order": -0.4,
+    "individual_collective": -0.3,
+    "falsehood_truth": -0.3,
+    "tradition_innovation": 0.3,
+    "concrete_abstract": -0.2
+  },
+  "tags": [
+    "trade-post",
+    "mountain",
+    "pass",
+    "crossroads",
+    "no-questions",
+    "unaligned"
+  ],
+  "connections": [
+    "radiant_plateau_edge",
+    "disputed_zone_fringe",
+    "old_switchback"
+  ],
+  "descriptionSeed": "A shelf of stone and timber wedged where three trails meet below the high pass — the last stop before the mountains and the first roof coming down. Everyone passing between the plateau, the wilds, and the country beyond the pass comes through the Roost, which means everyone's business does too. Cage-lanterns swing over a market that never fully closes; the Kestrel herself keeps the ledger of who owes whom, and up here that ledger is closer to law than anything the cities enforce. Nothing here is about the river. Up here the water runs clean and cold, and the trouble is entirely human.",
+  "loreRefs": [
+    "valley_primer"
+  ],
+  "npcsPresent": [
+    "the_kestrel",
+    "brann_tollhand",
+    "sable_the_runner"
+  ],
+  "encounterFlavor": "A crossroads that never sleeps — traders haggling in four dialects, debts called in, smuggled Precursor salvage under oilcloth, a knife-fight talked down before it starts, a caravan deciding whether to risk the pass before the snow.",
   "dangerLevel": 2,
   "image": "content/packs/valley/assets/kestrels_roost.jpg",
   "questSeeds": [
-    "The Kestrel's ledger has a discrepancy she can't afford to be seen investigating herself \u2014 someone is skimming salvage debts, and she needs an outsider she can deny hiring",
-    "Brann the tollhand takes a cut he shouldn't and everyone knows; a caravan master wants him embarrassed, not killed \u2014 there's a clever way to do it that could go wrong",
+    "The Kestrel's ledger has a discrepancy she can't afford to be seen investigating herself — someone is skimming salvage debts, and she needs an outsider she can deny hiring",
+    "Brann the tollhand takes a cut he shouldn't and everyone knows; a caravan master wants him embarrassed, not killed — there's a clever way to do it that could go wrong",
     "Sable runs messages over the pass and hasn't come back from the last run; her sister will pay, plead, or follow you up the switchback herself",
-    "A crate of Precursor salvage came through mislabeled and now two buyers think it's theirs \u2014 both are dangerous, and the truth of who it belongs to is uglier than either",
+    "A crate of Precursor salvage came through mislabeled and now two buyers think it's theirs — both are dangerous, and the truth of who it belongs to is uglier than either",
     "Someone is buying up pass-debts cheap and no one knows who or why; the pattern points at a slow, patient takeover of the Roost itself"
   ],
-  "map": {"x": 610, "y": 140}
+  "map": {
+    "x": 610,
+    "y": 140
+  },
+  "poleIntensity": {
+    "chaos": 0.4,
+    "falsehood": 0.3,
+    "concrete": 0.2
+  }
 }

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_violence_peace",
+  "note": "Crafts of the Riven Marches/Stillhold Reach (violence_peace axis). The Edge is the violence-pole tradition (honed conflict, the arts of force); Stillcraft the peace-pole (de-escalation, binding, true truce). Learned by traveling the Reach or training with Marchers/the Stillhold. Both drift the wielder toward their pole; the Held Breath jewel is where they co-fire. The Valley's Mediator's Tongue is a folk-shadow of Stillcraft. axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
+  "gated": "learned",
+  "abilities": [
+    {"id": "the_edge", "name": "The Edge", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_violence_peace", "attribute": "physical",
+     "axes": {"violence_peace": -0.5, "body_mind": -0.2, "chaos_order": 0.1}, "effectTags": ["combat", "force", "strike"],
+     "narrationHints": "Violence as a discipline, not a rage \u2014 economical, decisive, terrible in its precision. The Marchers do not brawl; they end.",
+     "description": "The violence-pole mastery: the martial disciplines honed to an art. Not fury \u2014 force made exact.",
+     "notFor": "Cruelty (the Edge is decisive, not sadistic \u2014 that's a different corruption); winning without cost; anything that must be gentle.",
+     "tree": [
+       {"rank": 1, "name": "The First Cut", "grants": "Strike with trained decisiveness; read a fight's shape and end it fast; stand where others break.", "cannot": "Force is force \u2014 it makes enemies and consequences; the Edge cannot un-hurt."},
+       {"rank": 2, "name": "The Marcher's Calm", "grants": "Fight many, fight cornered, fight wounded and keep the discipline; disarm and disable without killing when you choose; make your reputation do half the work.", "cannot": "The calm can slip; every use of the Edge writes on you; a foe past reason isn't disabled by skill alone."},
+       {"rank": 3, "name": "The Ender", "grants": "Meet even the great and the many; end a threat at the scale of a warband; the Edge at full mastery, where a single figure turns a field. The Redline's power in miniature.", "cannot": "The wielder drifts violence-hot \u2014 the Ender who forgets peace becomes the thing the Marches are fleeing from; force at this scale foreclosing on everything it touches."}
+     ]},
+    {"id": "stillcraft", "name": "Stillcraft", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_violence_peace", "attribute": "social",
+     "axes": {"violence_peace": 0.5, "emotional_logical": 0.1, "falsehood_truth": 0.2}, "effectTags": ["deescalate", "bind", "truce"],
+     "narrationHints": "Peace as an act, not an absence \u2014 the will to hold a room, a feud, a war from tipping, one breath at a time.",
+     "description": "The peace-pole mastery: de-escalation, arbitration, and the making of truces that hold. The full craft the Valley's Mediator's Tongue only shadows.",
+     "notFor": "Forcing calm on the unwilling (Stillcraft opens the door, never shoves through it); winning a fight (it prevents them); a peace built on a lie holds only until the lie breaks.",
+     "tree": [
+       {"rank": 1, "name": "The Held Room", "grants": "Halt a rising conflict before it breaks; read what each side truly needs; make yourself the still point a room organizes around.", "cannot": "Can't stop violence already loosed; the truly bent-on-blood pass through it."},
+       {"rank": 2, "name": "The Binding Truce", "grants": "Broker truces that HOLD \u2014 agreements weighted by your standing; bind two enemies to a peace neither wanted but both can live in; feel a truce start to fray before it snaps.", "cannot": "A truce is only as true as its terms; brokering a peace over an injustice buys time, not resolution \u2014 and Stillcraft knows the difference."},
+       {"rank": 3, "name": "The Long Peace", "grants": "Hold a peace at the scale of peoples \u2014 end a generational feud, stand a war down, keep a Held Breath from letting out. The Stillhold's power in miniature; the counter-road to the Ender.", "cannot": "The wielder drifts peace-hot \u2014 and peace at all costs becomes the Stillhold's prison, a stillness that forecloses on justice to keep the quiet. A peace that suppresses is its own violence, delayed."}
+     ]}
+  ]
+}

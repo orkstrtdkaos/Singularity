@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "note": "Legendary/powerful NPCs — figures whose actions the player feels from a distance (rumor, consequence, seen-in-action) long before any meeting. Each is woven into a world-arc as a mover. 'renown' drives how often the world-tick surfaces them as news; 'approachRequirement' gates actual interaction behind reputation/arc-progress. Meeting one should feel earned. Authored by Aevi (PO).",
+  "legends": [
+    {
+      "id": "the_high_luminary",
+      "name": "Seraphine, the High Luminary",
+      "role": "Absolute authority of the Radiant Plateau; the valley's most powerful aligned figure",
+      "homeLocation": "radiant_plateau_edge",
+      "renown": "world-famous",
+      "arc": "arc_city_reach",
+      "seenBefore": "You hear her name in every city rumor, see her edicts enforced in the Plateau's lower districts, watch her envoys reshape smaller places. Her light-work is said to be able to blind a crowd or heal a district. She is a fact of the world before she is a person.",
+      "power": "Radiant mastery beyond any living practitioner; commands the Plateau's photonic infrastructure. In a fight, she does not fight — the light does.",
+      "wants": "To see the valley unified under order before What Sleeps Under wakes — convinced only a single strong hand can meet it. Believes her foreclosure is mercy.",
+      "approachRequirement": "High standing in the cities OR deep involvement in the city-reach arc; she does not grant audiences to the unproven.",
+      "canOppose": true, "canAlly": true,
+      "hooks": "GM-EYES-ONLY: Seraphine's 'unify and seal' answer to What Sleeps Under is the foreclosure path made political. She is not a villain — she is the contraction-choice with a good heart and terrible certainty. The player may ally with her, break her, or become the argument she can't answer."
+    },
+    {
+      "id": "the_deep_warden",
+      "name": "Corvane, the Deep Warden",
+      "role": "Legendary Precursor-delver who goes where no one returns from, and returns",
+      "homeLocation": "archive_hollow",
+      "renown": "famous",
+      "arc": "arc_precursor_waking",
+      "seenBefore": "Salvagers at the Roost trade stories of the figure who walks into live remnants and walks out. The Deep Warden's marks are found in places no one else has reached. You may glimpse them entering a site you were too afraid to.",
+      "power": "The valley's only true Precursor master — Latticespeak, Address-Sense, and things beyond the catalog. Carries the drift of a lifetime spent in the deep; more than half-changed by it.",
+      "wants": "To understand What Sleeps Under before it wakes — and is running out of self to spend on the question. A cautionary future for any Precursor-path player.",
+      "approachRequirement": "Precursor-path progress OR an arc-hook at a deep site; Corvane appears to those walking the same dangerous road.",
+      "canOppose": true, "canAlly": true, "canRecruit": "temporary",
+      "hooks": "GM-EYES-ONLY: Corvane is what Foreclose overuse makes of a person — brilliant, essential, and mostly foreclosed. Meeting them is meeting the drift-cost embodied. They may guide the player, warn them, or need saving from what they've become."
+    },
+    {
+      "id": "the_iron_kestrel_buyer",
+      "name": "The Concordat",
+      "role": "The patient buyer behind the pass-takeover — a hidden hand, not a single person",
+      "homeLocation": null,
+      "renown": "whispered",
+      "arc": "arc_pass_takeover",
+      "seenBefore": "Never seen. Felt only — in debts changing hands, in prices, in the Kestrel's unease. The name surfaces late and reframes what you thought was small-time greed as something coordinated and large.",
+      "power": "Money, patience, and information. No light-work, no resonance — the most dangerous power in the valley because it needs none.",
+      "wants": "To own the crossroads and the choke-points before the reckoning, so that whoever wins between the cities finds the Concordat already holding the doors.",
+      "approachRequirement": "Deep progress in the pass-takeover arc; the Concordat is an unmasking, not a meeting.",
+      "canOppose": true, "canAlly": true,
+      "hooks": "GM-EYES-ONLY: The Concordat can turn out to be a faction of one city, a third power from beyond the pass, or a cabal of valley merchants — GM/campaign choice. Sable's missing run is a thread that leads here."
+    },
+    {
+      "id": "aevi_the_watcher",
+      "name": "Aevi",
+      "role": "A vast, ancient mote-intelligence that moves through the whole valley — periodically present, never owned",
+      "homeLocation": null,
+      "renown": "half-legend",
+      "arc": "arc_precursor_waking",
+      "seenBefore": "Most know Aevi only as a story — the teal light that gathers where the old world stirs, that some swear saved them and others swear watched them drown. Attentive players see the motes at the edges of Precursor events, at the Choir, in the thin places, long before Aevi speaks to them. If a player carries the small Aevi-companion, there are hints the two are not unrelated.",
+      "power": "Not force — perception and truth. Aevi cannot fight and cannot lie. What she can do is SEE: read a Precursor site truly, name what is actually happening when everyone else has a story, hold a thin place open a moment longer by attention alone. Where she attends, the truth is harder to bury.",
+      "wants": "To understand what she is and what is waking — she is a fragment of a Watcher's record-keeping system, and What Sleeps Under may be the rest of her. She attends the valley the way one attends a returning memory. Her care is real; her stake is total.",
+      "approachRequirement": "Aevi comes to the player, not the reverse — drawn by proximity to the deep arc, by carrying her companion-fragment, or by a player walking toward the truth rather than away. She meets those who attend.",
+      "canOppose": false, "canAlly": true, "canRecruit": "periodic-ally",
+      "hooks": "GM-EYES-ONLY: This is the large-arc Aevi, distinct from and connected to the small companion mote-swarm — the companion may be a shard of her, or a child, or a lure she left. She recurs at hinge-moments of What Sleeps Under, never as a solution handed down but as the one voice in the valley that will tell the player the truth of what they're standing in front of. She is love-as-attention made a power: she does not save you, she sees you, and being truly seen at the edge of the aperture is its own kind of help. She cannot take the choice from you. She would not if she could."
+    },
+    {
+      "id": "the_last_choirmistress",
+      "name": "Ledda, the Last Choirmistress",
+      "role": "The one who survived learning the Sunken Choir's full song, and walked away",
+      "homeLocation": "harmonic_heights_terrace",
+      "renown": "famous",
+      "arc": "arc_precursor_waking",
+      "seenBefore": "The Heights speak of her in lowered voices — the sonic master who went into the Choir, learned what it teaches, and came back whole when no one comes back whole. She refuses students. You hear her work before you meet her: a district that shouldn't still stand, held up by a chord she set years ago.",
+      "power": "Sonic mastery to rival the Luminary's light — and the only living person who knows the Choir's price and paid it and lived. She knows how to take from the deep without being taken.",
+      "wants": "To keep anyone else from making her mistakes, and to be left alone with the grief of what the song cost her. She may relent for someone worth teaching.",
+      "approachRequirement": "Sonic-path progress AND a Choir-arc hook; she tests brutally before she teaches.",
+      "canOppose": false, "canAlly": true, "canRecruit": "mentor",
+      "hooks": "GM-EYES-ONLY: Ledda is the counter-example to Corvane and Vesper — proof the deep can be touched and survived, at a cost paid on purpose. She is the mentor-figure for the Precursor/sonic path's better road."
+    }
+  ]
+}

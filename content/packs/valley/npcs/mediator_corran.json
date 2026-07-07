@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "mediator_corran",
+  "name": "Corran of the Marchward",
+  "role": "Neutral mediator holding the border town's balance",
+  "homeLocation": "the_marchward",
+  "communityId": "riven.marchward",
+  "personality": {
+    "warmth": 0.6,
+    "trust": 0.4,
+    "candor": 0.7,
+    "patience": 0.7
+  },
+  "spectrum": {
+    "violence_peace": 0.0,
+    "falsehood_truth": 0.5,
+    "emotional_logical": 0.3
+  },
+  "voiceHints": "Warm, plainspoken, allergic to pretense because pretense gets people killed here. Holds two furious sides at one table for a living. Tired in the way of someone who's the only adult in too many rooms.",
+  "knowledge": [
+    "Both cultures deeply — how a Redliner and a Stillholder each hear the same words differently",
+    "Stillcraft, folk-level — the real thing lives deeper in the Reach",
+    "Who's trying to break the Marchward's neutrality, and how"
+  ],
+  "wants": "To keep the Marchward honest and neutral — the one place the two extremes can meet without a lie or a blade.",
+  "fears": "The town pulled to one pole; being the mediator who finally fails and gets people killed.",
+  "reactsToReputation": {
+    "fair": "trusts them into the hard mediations",
+    "honest": "grateful — it's rare here",
+    "partisan": "keeps them at arm's length"
+  }
+}

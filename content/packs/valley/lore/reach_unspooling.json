@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "reachId": "the_unspooling",
+  "note": "Populated locations of the Churn Edge (Tier-1, chaos-dominant), reached over the pass from Kestrel's Roost. Design principle (Erik 2026): the dominant axis is chaos_order negative, but the SECONDARY and TERTIARY axes are deliberately varied and non-obvious per node — the world leans chaos here, but WHICH other force rides along is not symmetric. Each node is its own coordinate. axisVector order: [emotional_logical, falsehood_truth, demonic_angelic, violence_peace, concrete_abstract, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation]. Locations use the full location schema so the engine can load them as real places. Authored by Aevi (PO).",
+  "axisOrder": ["emotional_logical","falsehood_truth","demonic_angelic","violence_peace","concrete_abstract","mechanical_spiritual","chaos_order","dark_light","death_life","space_time","body_mind","destruction_creation"],
+
+  "locations": [
+    {
+      "schemaVersion": 1, "id": "tumbledown_market", "name": "Tumbledown", "regionId": "unspooling", "communityId": "unspooling.tumbledown",
+      "axisVector": [0.3,-0.2,0,0.1,-0.1,-0.2,-0.7,0.1,0.2,0.1,0.1,0.3],
+      "spectrum": {"chaos_order": -0.7, "emotional_logical": 0.3, "destruction_creation": 0.3},
+      "tags": ["market", "churn", "shifting", "trade", "unaligned"],
+      "connections": ["the_churn_edge", "kestrels_roost", "spindrift_hollow"],
+      "descriptionSeed": "A market that has never been in the same place twice \u2014 stalls, tents, and whole streets reassembling overnight by rules no one admits to. What rides along with the chaos here isn't danger, it's INVENTION: the Churnfolk make things, trade things, remake things, and the disorder is generative rather than violent. You can find anything in Tumbledown once. You can never find it twice.",
+      "loreRefs": ["the_twelve_reaches", "the_coordinate_world"],
+      "encounterFlavor": "Generative disorder \u2014 an inventor demonstrating a device that works once, a trade that can only be made today, a street that wasn't here yesterday and won't be tomorrow, a festival that started for no reason and everyone joined.",
+      "dangerLevel": 2,
+      "questSeeds": [
+        "A Churnfolk maker built something extraordinary and can't rebuild it \u2014 the market ate the method; recovering it means chasing a pattern that resists being pinned",
+        "Someone is trying to IMPOSE order on Tumbledown \u2014 fixing the market in place \u2014 and half the town is grateful and half is dying inside; the Lattice's reach is testing here",
+        "A stall you needed is gone and its keeper with it; finding a person in a place that rearranges itself is its own art"
+      ],
+      "map": {"x": 820, "y": 120}
+    },
+    {
+      "schemaVersion": 1, "id": "spindrift_hollow", "name": "Spindrift Hollow", "regionId": "unspooling", "communityId": "unspooling.spindrift",
+      "axisVector": [-0.2,0.1,0,-0.2,-0.3,0.1,-0.6,-0.2,0.1,0.4,-0.1,0.1],
+      "spectrum": {"chaos_order": -0.6, "space_time": 0.4, "concrete_abstract": -0.3},
+      "tags": ["churn", "temporal", "unstable", "strange", "sacred"],
+      "connections": ["tumbledown_market", "the_churn_edge"],
+      "descriptionSeed": "Here the chaos rides on TIME instead of matter \u2014 a hollow where moments don't queue politely. You'll meet someone before you're introduced, hear the end of a conversation first, wait an hour that costs a day or a day that costs an hour. The Hollow-folk have made a slow strange peace with it and speak in a grammar that assumes the listener already knows. What comes along with chaos here is the least obvious neighbor on the axis-map: space_time. No one would have guessed the next valley over from a trade-market would fold time.",
+      "loreRefs": ["the_twelve_reaches", "the_coordinate_world"],
+      "encounterFlavor": "Time out of joint \u2014 a warning that arrives after the danger, a debt paid before it's owed, an old woman who is also the child playing by the well, a moment you have to live twice to leave.",
+      "dangerLevel": 3,
+      "questSeeds": [
+        "A Hollow-child keeps giving warnings about things that haven't happened; some come true and the town can't tell prophecy from memory \u2014 and neither can she",
+        "Someone came to the Hollow to un-live a single moment and has been trying for years; helping them means deciding whether that mercy is even possible here",
+        "A traveler is stuck in a repeating hour and doesn't know it; breaking the loop from outside is delicate, and the Hollow may not want them released"
+      ],
+      "map": {"x": 900, "y": 200}
+    },
+    {
+      "schemaVersion": 1, "id": "the_gralloch", "name": "The Gralloch", "regionId": "unspooling", "communityId": "unspooling.gralloch",
+      "axisVector": [-0.1,-0.3,0.2,0.5,-0.2,-0.1,-0.5,-0.2,-0.1,0,0.2,-0.1],
+      "spectrum": {"chaos_order": -0.5, "violence_peace": 0.5, "demonic_angelic": 0.2},
+      "tags": ["churn", "lawless", "dangerous", "raider", "border"],
+      "connections": ["the_churn_edge", "the_gralloch"],
+      "descriptionSeed": "The dangerous face of the Churn \u2014 where the disorder rides VIOLENCE and something older and colder underneath it. A broken badland of feuding bands and worse things drawn to the lawlessness. Not every chaos-neighbor is generative Tumbledown or strange Spindrift; this one bites. The randomness of the axis-map put teeth here, and the wise cross it fast or not at all.",
+      "loreRefs": ["the_twelve_reaches", "the_coordinate_world"],
+      "encounterFlavor": "Raw lawless danger \u2014 a band demanding tribute, a settlement that survives by being meaner than the badland, a thing the feuds woke that neither side will name, a mercy that gets someone killed.",
+      "dangerLevel": 4,
+      "encounterSeeds": ["re_raider_duel", "re_toll_bandits", "re_pursuit_flee", "re_wrong_ground"],
+      "questSeeds": [
+        "Two bands are feuding over a well and a third thing neither will name is picking off both; ending the feud means facing what the violence is feeding",
+        "A settlement of people who fled here to be free is being extorted; they'd rather die than go back under a city, and they might",
+        "Something in the Gralloch's heart isn't a person and isn't quite a beast \u2014 the demonic_angelic thread here is faint but real, and it's getting stronger where blood spills"
+      ],
+      "map": {"x": 850, "y": 300}
+    },
+    {
+      "schemaVersion": 1, "id": "the_wend", "name": "The Wend", "regionId": "unspooling", "communityId": "unspooling.wend",
+      "axisVector": [0.4,0.2,0,-0.1,-0.2,-0.1,-0.4,0.2,0.3,0.1,0.2,0.2],
+      "spectrum": {"chaos_order": -0.4, "emotional_logical": 0.4, "death_life": 0.3},
+      "tags": ["churn", "march", "habitable", "wanderer", "waypoint"],
+      "connections": ["tumbledown_market", "the_gralloch", "spindrift_hollow"],
+      "descriptionSeed": "The gentlest node of the Unspooling \u2014 a wandering road-people whose whole culture is graceful motion, reached where the chaos thins back toward habitable. What rides with the chaos here is warmth: the Wend-folk feel their way through life, mourn openly, celebrate easily, and take in strays of every kind. The natural first foothold for a traveler out of the Valley into the Churn \u2014 chaos with a human face, and the road home still findable.",
+      "loreRefs": ["the_twelve_reaches", "the_coordinate_world"],
+      "encounterFlavor": "Warm restless motion \u2014 a caravan-wedding, a grief openly carried, a stranger welcomed and read at once, a song that everyone somehow knows, the offer to travel with them a while.",
+      "dangerLevel": 1,
+      "questSeeds": [
+        "The Wend take you in and, over the road, decide whether you're kin \u2014 a slow relationship that opens the whole Reach if it lands",
+        "A Wend elder is dying and wants to reach a place they left as a child before the end; the journey there crosses every danger of the Churn",
+        "Someone raised by the Wend wants to leave for a settled life and the road-family is grieving it as a small death; a familiar shape in a strange land"
+      ],
+      "map": {"x": 780, "y": 220}
+    }
+  ],
+
+  "asymmetry_note": "The four Churn nodes share chaos_order-negative as dominant, but their SECOND axes are deliberately unalike: Tumbledown rides destruction_creation (generative disorder), Spindrift rides space_time (the non-obvious one \u2014 a time-folding hollow next door to a market), the Gralloch rides violence_peace + a demonic_angelic thread (the one with teeth), the Wend rides emotional_logical + death_life (chaos with a warm human face). Same dominant force, four different worlds \u2014 this is the randomness Erik wanted: you know the chaos is coming, you do NOT know what rides with it until you arrive. The engine can generate more Churn nodes by holding chaos_order dominant and rolling the secondary/tertiary axes."
+}

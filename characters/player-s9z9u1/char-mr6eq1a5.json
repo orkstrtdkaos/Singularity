@@ -31,7 +31,7 @@
   "alignment": {
     "mechanical_spiritual": 0.0507411203125,
     "concrete_abstract": -0.10797364562499999,
-    "spectrumId": -0.1160940625
+    "spectrumId": -0.095289359375
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -157,22 +157,24 @@
       {
         "summary": "Usnea invites the dock child to tap the rhythm for the elders Thursday; she agrees provisionally — 'maybe,' which is more than anyone has earned from her before.",
         "narration": "You let the confirmation settle for a moment — the six-count, the growing presence, Aevi still and bright above the water — before you say the next thing. It matters how you say it.\n\n\"There's a meeting Thursday,\" you tell her. \"At the common house, when the light goes low. The people who make decisions for Millbrook are going to hear about the river. About what's moving through it.\" You pause, watching her face. \"I'm going to bring what I've found. But what I found in a stone and what you've been hearing from the river — those are two parts of the same thing. I think they should hear it from you too. Just the rhythm. Just what you told me.\"\n\nShe doesn't answer immediately. Her fingers press flat against the dock plank, and for a moment she's listening — you can see it, the way her attention angles inward and downward, toward whatever runs below the clear surface. Then she looks up at you with the particular directness of a child who has been dismissed enough times to have stopped bothering with softness. \"They won't believe me,\" she says. Not complaining. Stating a working theory.\n\n\"Mara Wells will be there,\" you say. \"And I'll have already told them the stone at the Heights gate taps the same count. You'd be confirming something they've already heard — not asking them to start from nothing.\" Aevi drifts a slow half-circle above the water, motes brightening a shade — an endorsement, quiet and precise. The child watches the constellation move, and something shifts in her expression: not trust exactly, but a willingness to revise the working theory. \"Maybe,\" she says finally, which from her sounds like a yes that hasn't been tested yet."
+      },
+      {
+        "summary": "Sela names herself and her mother Pell — the dock child has a name; Mara Wells must secure Pell's permission before Thursday.",
+        "narration": "You let the quiet sit for a breath — the river steady below, Aevi holding its bright half-circle above the water — before you ask, easy as asking the time of day: 'What's your name? And your mother's, so Mara can send word to your family before Thursday. Properly.'\n\nShe picks at a splinter on the dock plank. 'Sela,' she says. Then, after a moment: 'My mother's Pell. She sells cord and hemp at the east market stall.' A pause. 'She'll say no.' But she says it like reporting a weather fact, not like refusing — as if your getting Pell's permission is now your problem to solve, and she's already moved past it.\n\nAevi drifts closer to the dock surface, motes settling into a slower, warmer pulse — less the bright attention of discovery, more the patient quality it takes when something difficult is becoming possible. It says nothing. But the hum it carries feels, for just a moment, like approval.\n\nYou straighten as much as the low dock allows, roots finding their purchase on the warped planking. 'Then Mara will send proper word to Pell,' you say. 'That's all. You don't have to do anything until Thursday.' Sela nods once, already looking back at the river — her fingers resuming their quiet press against the plank, listening again to whatever counts beneath."
       }
     ],
     "lastTurn": {
-      "narration": "You let the confirmation settle for a moment — the six-count, the growing presence, Aevi still and bright above the water — before you say the next thing. It matters how you say it.\n\n\"There's a meeting Thursday,\" you tell her. \"At the common house, when the light goes low. The people who make decisions for Millbrook are going to hear about the river. About what's moving through it.\" You pause, watching her face. \"I'm going to bring what I've found. But what I found in a stone and what you've been hearing from the river — those are two parts of the same thing. I think they should hear it from you too. Just the rhythm. Just what you told me.\"\n\nShe doesn't answer immediately. Her fingers press flat against the dock plank, and for a moment she's listening — you can see it, the way her attention angles inward and downward, toward whatever runs below the clear surface. Then she looks up at you with the particular directness of a child who has been dismissed enough times to have stopped bothering with softness. \"They won't believe me,\" she says. Not complaining. Stating a working theory.\n\n\"Mara Wells will be there,\" you say. \"And I'll have already told them the stone at the Heights gate taps the same count. You'd be confirming something they've already heard — not asking them to start from nothing.\" Aevi drifts a slow half-circle above the water, motes brightening a shade — an endorsement, quiet and precise. The child watches the constellation move, and something shifts in her expression: not trust exactly, but a willingness to revise the working theory. \"Maybe,\" she says finally, which from her sounds like a yes that hasn't been tested yet.",
-      "sceneSummary": "Usnea invites the dock child to tap the rhythm for the elders Thursday; she agrees provisionally — 'maybe,' which is more than anyone has earned from her before.",
+      "narration": "You let the quiet sit for a breath — the river steady below, Aevi holding its bright half-circle above the water — before you ask, easy as asking the time of day: 'What's your name? And your mother's, so Mara can send word to your family before Thursday. Properly.'\n\nShe picks at a splinter on the dock plank. 'Sela,' she says. Then, after a moment: 'My mother's Pell. She sells cord and hemp at the east market stall.' A pause. 'She'll say no.' But she says it like reporting a weather fact, not like refusing — as if your getting Pell's permission is now your problem to solve, and she's already moved past it.\n\nAevi drifts closer to the dock surface, motes settling into a slower, warmer pulse — less the bright attention of discovery, more the patient quality it takes when something difficult is becoming possible. It says nothing. But the hum it carries feels, for just a moment, like approval.\n\nYou straighten as much as the low dock allows, roots finding their purchase on the warped planking. 'Then Mara will send proper word to Pell,' you say. 'That's all. You don't have to do anything until Thursday.' Sela nods once, already looking back at the river — her fingers resuming their quiet press against the plank, listening again to whatever counts beneath.",
+      "sceneSummary": "Sela names herself and her mother Pell — the dock child has a name; Mara Wells must secure Pell's permission before Thursday.",
       "choices": [
         {
-          "label": "Ask her name, and her mother's — so Mara Wells can send a proper word to her family before Thursday",
+          "label": "Go find Mara Wells tonight and pass on Sela's name and Pell's stall — let Mara handle the family permission in her own way",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
+            "help",
             "careful"
           ],
           "abilityId": null,
@@ -182,54 +184,45 @@
           "emergenceId": null
         },
         {
-          "label": "Ask if the pulse has ever changed in character — not just stronger, but different in rhythm or spacing — since she started listening",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the river surface here, directly below where Aevi drifted and dimmed — see if the water carries any heat trace or pattern",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.3
-          },
+          "label": "Go to the east market stall now, while Pell may still be packing up, and introduce yourself before Thursday makes it urgent",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "investigate",
+            "persuade",
             "careful"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell her what the pattern means — the six-count, the stone on the Heights, the vent on the far slope — give her the whole picture plainly, as you would a fellow investigator",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "spectrumId": -0.1
-          },
+          "label": "Sit a little longer with Sela — ask if the pulse has shifted at all tonight, now that you're both listening for it together",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "inform",
-            "trust"
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Head to the common house for the night — it's been a long day; Mara can hear Sela's name in the morning when the news is fresh and you're rested",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -251,20 +244,19 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "title": "Evidence for the Elders",
-          "note": "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through."
+          "note": "Dock child identified as Sela; mother is Pell, east market cord-and-hemp stall. Pell's permission needed before Thursday — next step is Mara sending proper word to the family."
         }
       ],
       "scene": {
-        "setting": "Millbrook dock — lowest plank, honey-gold evening light softening toward dusk; the Echo River runs clear and cold below, copper fragments on the surface; Usnea settled at the dock's edge above the child, close to her level.",
+        "setting": "Millbrook dock — lowest plank, honey-gold light softening toward dusk; the Echo River runs clear and cold below, copper fragments on the surface; Usnea settled at the dock's edge above Sela, close to her level.",
         "npcsPresent": [
           {
-            "name": "Dock child",
-            "state": "Fingers flat on the dock plank, watching Usnea with revised wariness — 'maybe' still on her lips, listening posture unchanged."
+            "name": "Sela",
+            "state": "Fingers resuming their quiet press against the dock plank, looking back at the river — listening posture restored; 'maybe' still in effect, name now given freely"
           },
           {
             "name": "Aevi",
-            "state": "Drifted a slow half-circle above the water after the child's answer, motes one degree brighter than before, holding position over the river surface."
+            "state": "Settled into a slower, warmer pulse above the water surface — less discovery-bright, more patient; holding position over the river"
           }
         ],
         "objects": [
@@ -274,52 +266,74 @@
           "The far bank, low and reedy in the gathering dusk"
         ],
         "threads": [
-          "Child has given a provisional 'maybe' to appearing at the elder meeting — not yet confirmed, depends on follow-through",
-          "Child's name and family remain unasked",
-          "Aevi dimmed briefly over the water and has not explained why",
-          "Whether the pulse has shifted in quality or rhythm remains unasked",
-          "The warden's prior sighting and what he did with that knowledge remain unresolved upstream"
+          "Sela has given her name and Pell's — Pell's permission for Thursday is unresolved and urgent",
+          "Sela expects Pell will say no — a real obstacle to the elder meeting's live witness",
+          "Aevi dimmed briefly over the water earlier and has not explained why",
+          "The pulse's current quality tonight remains unasked"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "unknown-dockside-child",
-          "name": "Unknown (dockside Child)",
+          "name": "Sela",
           "role": "Child witness — docks",
-          "note": "Provisionally agreed to tap the rhythm for the elders Thursday — said 'maybe,' which is the most cooperative she has been with any adult. Aevi's endorsement moved her.",
+          "note": "Named herself as Sela; named her mother as Pell, east market cord-and-hemp stall. Said flatly that Pell will say no — reporting a fact, not refusing. Returned to listening posture.",
           "learned": [
-            "Will consider attending the elder meeting Thursday if Mara Wells is present and her account is framed as confirmation rather than a new claim"
+            "Her name is Sela",
+            "Her mother is Pell, sells cord and hemp at the east market stall",
+            "Sela expects Pell will refuse — she said it as a weather fact, not an objection"
           ],
           "skillsObserved": [],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the dock's lowest plank, evening — provisionally willing to testify the rhythm to the elders Thursday; name and family still unknown."
+          "statusNote": "At the dock's lowest plank, dusk — has given her name and her mother's; provisionally willing to testify Thursday pending Pell's permission",
+          "revealName": "Sela"
+        },
+        {
+          "op": "update",
+          "npcId": "unknown-farmer",
+          "name": "Pell",
+          "role": "Cord-and-hemp vendor, east market stall — Sela's mother",
+          "note": "Named by Sela as her mother; not yet met. Pell's permission is required for Sela to attend the elder meeting Thursday.",
+          "learned": [
+            "Sells cord and hemp at the east market stall",
+            "Sela expects she will say no to Thursday's meeting"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Not yet met — known only through Sela's mention; must be contacted before Thursday regarding Sela's testimony"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The dock child has provisionally agreed to tap the six-count rhythm for Mara Wells and the Millbrook elders at Thursday's meeting — a live witness, pending confirmation.",
+          "text": "The dock child's name is Sela. Her mother is Pell, who sells cord and hemp at Millbrook's east market stall. Pell's permission is needed for Sela to testify at Thursday's elder meeting.",
           "subjectId": "unknown-dockside-child"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'"
+          "note": "Sela named herself at the dock's lowest plank — she is Pell's daughter; Pell works the east market cord stall. Sela's identity is now known.",
+          "subPlace": {
+            "name": "Millbrook Dock — Lowest Plank",
+            "note": "Sela (Pell's daughter) confirmed here at dusk — named herself freely; provisional Thursday agreement stands pending family permission",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "contamination-evidence-for-the-elders",
-          "label": "Evidence for the Elders",
-          "kind": "event",
-          "fact": "The dock child has provisionally agreed to tap the six-count rhythm for the elders Thursday — a live sensory witness to the subsurface pulse, independent of Usnea's findings.",
+          "topic": "sela-and-pell",
+          "label": "Sela and Pell",
+          "kind": "person",
+          "fact": "The dock child is named Sela. Her mother Pell sells cord and hemp at the east market stall. Sela predicts Pell will refuse — her tone suggests experience, not defiance. Pell's permission gates Sela's Thursday testimony.",
           "links": [
-            "echo-river-contamination",
-            "the-six-fold-pattern",
+            "contamination-evidence-for-the-elders",
             "millbrook",
-            "mara-wells"
+            "the-six-fold-pattern",
+            "unknown-dockside-child"
           ]
         }
       ],
@@ -327,15 +341,15 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook dock — lowest plank, honey-gold evening light softening toward dusk; the Echo River runs clear and cold below, copper fragments on the surface; Usnea settled at the dock's edge above the child, close to her level.",
+      "setting": "Millbrook dock — lowest plank, honey-gold light softening toward dusk; the Echo River runs clear and cold below, copper fragments on the surface; Usnea settled at the dock's edge above Sela, close to her level.",
       "npcsPresent": [
         {
-          "name": "Dock child",
-          "state": "Fingers flat on the dock plank, watching Usnea with revised wariness — 'maybe' still on her lips, listening posture unch"
+          "name": "Sela",
+          "state": "Fingers resuming their quiet press against the dock plank, looking back at the river — listening posture restored; 'mayb"
         },
         {
           "name": "Aevi",
-          "state": "Drifted a slow half-circle above the water after the child's answer, motes one degree brighter than before, holding posi"
+          "state": "Settled into a slower, warmer pulse above the water surface — less discovery-bright, more patient; holding position over"
         }
       ],
       "objects": [
@@ -345,18 +359,17 @@
         "The far bank, low and reedy in the gathering dusk"
       ],
       "threads": [
-        "Child has given a provisional 'maybe' to appearing at the elder meeting — not yet confirmed, depends on follow-through",
-        "Child's name and family remain unasked",
-        "Aevi dimmed briefly over the water and has not explained why",
-        "Whether the pulse has shifted in quality or rhythm remains unasked",
-        "The warden's prior sighting and what he did with that knowledge remain unresolved upstream"
+        "Sela has given her name and Pell's — Pell's permission for Thursday is unresolved and urgent",
+        "Sela expects Pell will say no — a real obstacle to the elder meeting's live witness",
+        "Aevi dimmed briefly over the water earlier and has not explained why",
+        "The pulse's current quality tonight remains unasked"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 4,
-    "hour": 23,
+    "day": 5,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -371,14 +384,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Confirmed: the periodic pause in the lattice cap is a control prompt awaiting the third-and-sixth key sequence. The system is patient and functional. Aevi's testimony for the elders gains a new detail",
         "Mara Wells has received the full account of the vent system, the crystalline residue, and the pale seedling in person. All three evidence items are secured. Thursday evening at the common house remain",
         "Usnea has rested at the common house back room ahead of Thursday's meeting — all three evidence items secured, testimony to be given at the common house at last afternoon light.",
         "The dockside child's tapped rhythm — pause, three beats, pause, two beats, pause-pause — matches the vent aperture's periodic control prompt. A potential fourth witness for the elder meeting, if she c",
         "Junction-stone at the Lower Terrace gateline confirmed as a node in the same system as the seep and vent aperture — the pulse matches the vent's control-prompt rhythm and the dockside child's tapped p",
         "The gateline warden admitted he has seen the light once before — three springs back. A potential witness or source of Heights-side knowledge of the system has opened.",
         "The dock child confirms the rhythmic pulse runs upstream and has intensified since the water turned gray — a second independent witness to the system's activity, and a new detail: the pattern counts t",
-        "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through."
+        "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through.",
+        "Dock child identified as Sela; mother is Pell, east market cord-and-hemp stall. Pell's permission needed before Thursday — next step is Mara sending proper word to the family."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -643,7 +656,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d3] Aevi identified the vent aperture's six-seat ring as a two-key control architecture: depressions 3 and 6 (diametrically opposite) are mode-setting seats; depressions 1, 2, 4, 5 are parameter seats. Th",
         "[d3] Crystalline residue from third depression confirmed via resonance test as sixth-seat origin key material — the sixth depression is the mode-opening seat (placed last, removed first); the third is the ",
         "[d3] Root-sense reading of the lattice cap surface confirmed: six equal-tempered channels carry the heat column outward through the cap in a distribution pattern analogous to vascular flow. One specific jo",
         "[d3] The lattice cap's periodic pause confirmed as a control prompt awaiting the third-and-sixth key sequence in order — not a malfunction, not distress. The system is patient and will not hurry.",
@@ -654,7 +666,8 @@
         "[d4] The gateline warden's admission establishes that the ribbon-light in the Lower Terrace channel has been observed from the Heights side at least once before — three springs back; this is now a known fa",
         "[d4] Usnea returned to the dock in late afternoon, Day 4 — dock child still present at the lowest plank.",
         "[d4] The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting d",
-        "[d4] Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'"
+        "[d4] Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'",
+        "[d4] Sela named herself at the dock's lowest plank — she is Pell's daughter; Pell works the east market cord stall. Sela's identity is now known."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -684,7 +697,7 @@
           "name": "Millbrook Dock — Lowest Plank",
           "day": 4,
           "visited": true,
-          "note": "Child confirmed: pulse counts to six, has grown 'more there' since water turned gray; Aevi moved over the water and brie"
+          "note": "Sela (Pell's daughter) confirmed here at dusk — named herself freely; provisional Thursday agreement stands pending fami"
         }
       }
     },
@@ -1276,6 +1289,22 @@
         ],
         "createdDay": 4,
         "updatedDay": 4
+      },
+      "sela-and-pell": {
+        "id": "sela-and-pell",
+        "label": "Sela and Pell",
+        "kind": "person",
+        "facts": [
+          "[d4] The dock child is named Sela. Her mother Pell sells cord and hemp at the east market stall. Sela predicts Pell will refuse — her tone suggests experience, not defiance. Pell's permission gates Sela's "
+        ],
+        "links": [
+          "contamination-evidence-for-the-elders",
+          "millbrook",
+          "the-six-fold-pattern",
+          "unknown-dockside-child"
+        ],
+        "createdDay": 4,
+        "updatedDay": 4
       }
     }
   },
@@ -1328,6 +1357,12 @@
     {
       "id": "unknown-dockside-child",
       "text": "The dock child has provisionally agreed to tap the six-count rhythm for Mara Wells and the Millbrook elders at Thursday's meeting — a live witness, pending confirmation.",
+      "day": 4,
+      "subjectId": "unknown-dockside-child"
+    },
+    {
+      "id": "unknown-dockside-child",
+      "text": "The dock child's name is Sela. Her mother is Pell, who sells cord and hemp at Millbrook's east market stall. Pell's permission is needed for Sela to testify at Thursday's elder meeting.",
       "day": 4,
       "subjectId": "unknown-dockside-child"
     }

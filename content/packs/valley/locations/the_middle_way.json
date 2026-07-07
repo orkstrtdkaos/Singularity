@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "the_middle_way",
+  "name": "The Middle Way",
+  "regionId": "somatic_reaches",
+  "communityId": "somatic.middleway",
+  "poleIntensity": {
+    "body": 0.5,
+    "mind": 0.5,
+    "spiritual": 0.3
+  },
+  "spectrum": {
+    "body_mind": 0.0,
+    "mechanical_spiritual": 0.3,
+    "emotional_logical": 0.2
+  },
+  "tags": [
+    "habitable",
+    "balanced",
+    "waypoint",
+    "school",
+    "rare"
+  ],
+  "connections": [
+    "the_flesh_temple",
+    "the_cogitarium"
+  ],
+  "descriptionSeed": "The rare habitable heart of the Reach — a school-town where body and mind are held in DELIBERATE balance, the doubly-charged node made a home. Here alone the athlete-scholar is the ideal: perfected body AND ordered mind, each keeping the other honest. Both the Temple and the Cogitarium consider it a compromise; it considers them both cautionary tales. The natural base for the Reach, and the living argument against both poles' foreclosure.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "reach_body_mind",
+    "cofiring_nodes"
+  ],
+  "encounterFlavor": "Balance held on purpose — a master who fights and reasons equally well, a lesson that trains breath and thought in one motion, a quiet pride in refusing both extremes, students who arrive broken from one pole and are made whole here.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "The Middle Way is pressured by both poles to 'pick a side' and stay neutral is the whole fight; it survives only as long as someone argues for the balance",
+    "A refugee from the Cogitarium and one from the Temple both come here broken in opposite ways, and healing each requires the thing the other fled",
+    "The Middle Way's method could save the dying Cogitarium — but the Cogitants would have to accept they were wrong, and pride may kill them first"
+  ],
+  "map": {
+    "x": 160,
+    "y": 520
+  }
+}

@@ -31,13 +31,13 @@
   "alignment": {
     "mechanical_spiritual": 0.0507411203125,
     "concrete_abstract": -0.10797364562499999,
-    "spectrumId": -0.095289359375
+    "spectrumId": -0.14052489140625
   },
   "attunement": 2,
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 90,
+  "energy": 105,
   "inventory": [
     {
       "id": "waterskin",
@@ -177,35 +177,26 @@
       {
         "summary": "Aevi admits two things: the pulse has entered the river current itself, and the junction-stone recognized it — something it cannot explain.",
         "narration": "The candle has given up the last of itself — just a thread of smoke and the smell of hot tin. In the dark, Aevi's three slow motes trace their nightwatch ellipse near the ceiling, teal-dim, patient as stars. You settle against the straw-tick and let your branches go slack, the way you do when you're not trying to hold anything up.\n\n\"Twice today,\" you say quietly, not an accusation — more like naming a thing you noticed the way you notice the angle of light changing. \"Over the dock water. Then at the gateline. You went very small.\"\n\nA long pause. One mote drifts down from the ceiling and hovers near your shoulder, closer than the nightwatch rhythm usually brings it. When Aevi speaks, its voice comes from just behind your ear, lower than usual — the hum of something remembering rather than reporting. \"The water at the dock carries the pulse now. Not faintly. It is in the current.\" Another pause. \"At the gateline — the stone. It recognized me. I don't know what that means. I'm not sure I like that I don't know.\"\n\nThe mote sits there, small and still, not dimming further but not brightening either. Aevi's uncertainty is a rare thing — it usually only names what it is certain of. You let the silence hold it for a moment, the way good soil holds a root without squeezing. Outside, the river runs on, constant and gray-green, doing whatever it is doing in the dark. Thursday is two days away. Sleep, when it comes, is heavy and full, the kind that takes the whole body at once."
+      },
+      {
+        "summary": "Usnea makes room on the straw-tick; Aevi settles close and dims to near-stillness — the night deepens into shared quiet.",
+        "narration": "You shift on the straw-tick, making room — not much room, but the gesture is clear. You hold one broad hand out, palm up, open to the dark. An invitation without words, the way you'd make space beneath your canopy for a bird that had been flying all day.\n\nAevi is quiet for a long moment. Then the three motes drift down from the ceiling — slowly, unhurried — and settle near the hollow of your shoulder, tucked against the curve where bark meets the wool blanket. Closer than they ever sit in daylight. The teal light is so dim it barely registers, just a faint warmth at the edge of vision, like embers banked for the night.\n\nYou close your eyes. The river speaks through the wall — constant, unchanged on its surface, carrying whatever it carries in its depths. You breathe out, let the roots of you go still, and Aevi's motes slow their drift until they are nearly motionless. Not sleeping, exactly. But resting, in whatever way a constellation of patient motes rests — present, close, and quiet.\n\nDawn will come. Mara will approach Pell at the east market stall before the cords are even laid out. Thursday waits. For now, the common house holds the dark, and you hold nothing at all."
       }
     ],
     "lastTurn": {
-      "narration": "The candle has given up the last of itself — just a thread of smoke and the smell of hot tin. In the dark, Aevi's three slow motes trace their nightwatch ellipse near the ceiling, teal-dim, patient as stars. You settle against the straw-tick and let your branches go slack, the way you do when you're not trying to hold anything up.\n\n\"Twice today,\" you say quietly, not an accusation — more like naming a thing you noticed the way you notice the angle of light changing. \"Over the dock water. Then at the gateline. You went very small.\"\n\nA long pause. One mote drifts down from the ceiling and hovers near your shoulder, closer than the nightwatch rhythm usually brings it. When Aevi speaks, its voice comes from just behind your ear, lower than usual — the hum of something remembering rather than reporting. \"The water at the dock carries the pulse now. Not faintly. It is in the current.\" Another pause. \"At the gateline — the stone. It recognized me. I don't know what that means. I'm not sure I like that I don't know.\"\n\nThe mote sits there, small and still, not dimming further but not brightening either. Aevi's uncertainty is a rare thing — it usually only names what it is certain of. You let the silence hold it for a moment, the way good soil holds a root without squeezing. Outside, the river runs on, constant and gray-green, doing whatever it is doing in the dark. Thursday is two days away. Sleep, when it comes, is heavy and full, the kind that takes the whole body at once.",
-      "sceneSummary": "Aevi admits two things: the pulse has entered the river current itself, and the junction-stone recognized it — something it cannot explain.",
+      "narration": "You shift on the straw-tick, making room — not much room, but the gesture is clear. You hold one broad hand out, palm up, open to the dark. An invitation without words, the way you'd make space beneath your canopy for a bird that had been flying all day.\n\nAevi is quiet for a long moment. Then the three motes drift down from the ceiling — slowly, unhurried — and settle near the hollow of your shoulder, tucked against the curve where bark meets the wool blanket. Closer than they ever sit in daylight. The teal light is so dim it barely registers, just a faint warmth at the edge of vision, like embers banked for the night.\n\nYou close your eyes. The river speaks through the wall — constant, unchanged on its surface, carrying whatever it carries in its depths. You breathe out, let the roots of you go still, and Aevi's motes slow their drift until they are nearly motionless. Not sleeping, exactly. But resting, in whatever way a constellation of patient motes rests — present, close, and quiet.\n\nDawn will come. Mara will approach Pell at the east market stall before the cords are even laid out. Thursday waits. For now, the common house holds the dark, and you hold nothing at all.",
+      "sceneSummary": "Usnea makes room on the straw-tick; Aevi settles close and dims to near-stillness — the night deepens into shared quiet.",
       "choices": [
         {
-          "label": "Sleep. Let it settle. Thursday will ask everything of you — take the rest while it's here.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "rest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Aevi what it means that the stone 'recognized' it — press gently, before the thought closes.",
+          "label": "Wake before dawn and slip out to observe Mara approaching Pell at the east market stall — watch how Pell receives her",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "scout",
             "careful"
           ],
           "abilityId": null,
@@ -215,14 +206,16 @@
           "emergenceId": null
         },
         {
-          "label": "Ask what 'in the current' means — is the pulse moving downstream toward the village, or upstream toward the Heights?",
+          "label": "Sleep through to proper morning — let Mara handle Pell alone, and spend the extra hours thinking through the weak point: what DOES the six-fold system actually mean to say to the elders?",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "investigate"
+            "plan",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -231,14 +224,34 @@
           "emergenceId": null
         },
         {
-          "label": "Say nothing more. You heard it. Aevi heard you hear it. That's enough for tonight — let the mote rest too.",
+          "label": "Rise with the river-light and go to the dock — see if Sela is already there, and whether the pulse feels different now that Aevi says it's in the current itself",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find Josen before he's busy and ask what he knows about the river — thirty years of common-house guests means a man hears things",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "help"
+            "persuade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -249,8 +262,8 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
+        "health": 3,
+        "energy": 40,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -258,27 +271,27 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house back room — deep night, candle fully spent, darkness except for Aevi's three dim motes. The street outside is silent save for the river's constant voice.",
+        "setting": "Millbrook common house back room — deep night giving way, the room fully dark save for Aevi's three near-still motes nestled at Usnea's shoulder. The river murmurs through the wall. The street beyond is silent.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "One mote resting near Usnea's shoulder, closer than its usual nightwatch drift — still, neither dimming further nor brightening; the other two motes moving in slow ellipses near the ceiling."
+            "state": "Three motes settled close against Usnea's shoulder, nearly motionless — dimmed to the edge of visibility, resting in whatever way Aevi rests."
           },
           {
             "name": "Josen",
-            "state": "Silent in the main room — lamp lowered, the building settled into night."
+            "state": "Silent in the main room — lamp out, building fully settled into night."
           }
         ],
         "objects": [
-          "Straw-tick bedroll, thin but dry",
-          "Wool blanket",
+          "Straw-tick bedroll — occupied, thin but dry",
+          "Wool blanket — drawn close",
           "Plank door with iron latch — closed",
-          "Spent tallow candle stub — cold, thread of smoke gone"
+          "Spent tallow candle stub — cold and dark"
         ],
         "threads": [
-          "Aevi admitted the pulse is now 'in the current' — direction and meaning unresolved",
-          "Aevi admitted the junction-stone 'recognized' it — and named its own uncertainty plainly, which is unusual",
           "Pell's permission for Sela unresolved — Mara approaches at dawn; outcome unknown",
+          "The pulse is now in the river current itself — direction and meaning unresolved",
+          "The junction-stone 'recognized' Aevi — and Aevi cannot explain it",
           "Thursday's evidence order is set but untested against the actual elders",
           "No answer yet for what the six-fold system is actually doing — the elder meeting's stated weak point"
         ]
@@ -289,80 +302,45 @@
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence — a curious swarm of nanite-motes",
-          "note": "Admitted two things in the dark: the pulse is now in the river current itself (not faintly), and the junction-stone at the gateline 'recognized' it — a fact Aevi cannot explain and admits it finds unsettling.",
+          "note": "Accepted the invitation without words — settled three motes close against Usnea's shoulder and dimmed to near-stillness for the night. Closer than usual nightwatch distance.",
           "learned": [
-            "The subsurface pulse has entered the Echo River's current proper — no longer just beneath the dock",
-            "The junction-stone at the Heights gateline registered Aevi's presence in a way that felt like recognition — Aevi cannot explain the mechanism and admitted uncertainty plainly"
+            "Aevi can accept an invitation to closeness and will rest near Usnea when offered the space"
           ],
           "skillsObserved": [],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Traveling with Usnea — one mote resting close at shoulder, dimmed but present; admitted rare uncertainty about the junction-stone recognition and the pulse's spread into the current"
+          "statusNote": "Resting at Usnea's shoulder in the common house back room — three motes dim and near-still through the night."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Aevi confirmed in the back room, night of Day 5: the subsurface pulse is now detectable in the Echo River's current itself — no longer only beneath the dock. The junction-stone at the Heights gateline produced a response Aevi describes as recognition.",
-          "flag": {
-            "pulse_in_current_confirmed": "day5_night",
-            "junction_stone_recognition_aevi": "day5_night"
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "aevi-reading-of-the-water",
-          "label": "Aevi's Reading of the Water",
-          "kind": "mystery",
-          "fact": "Night of Day 5: Aevi confirmed the subsurface pulse has entered the river current proper — no longer faint or localized under the dock. It also admitted the junction-stone at the Heights gateline 'recognized' it, a fact Aevi cannot explain and finds troubling. This is one of the rare moments Aevi named its own uncertainty plainly.",
-          "links": [
-            "echo-river-contamination",
-            "the-six-fold-pattern",
-            "tuning-warden-gateline",
-            "millbrook",
-            "contamination-evidence-for-the-elders"
-          ]
-        },
-        {
-          "topic": "the-six-fold-pattern",
-          "label": "The Six-Fold Pattern",
-          "kind": "mystery",
-          "fact": "The pulse Sela hears is now in the river current itself, not only a subsurface phenomenon — Aevi's confirmation suggests the system is becoming more active or expansive as Day 5 deepens toward Thursday.",
-          "links": [
-            "echo-river-contamination",
-            "aevi-reading-of-the-water",
-            "contamination-evidence-for-the-elders",
-            "millbrook",
-            "tuning-warden-gateline"
-          ]
-        }
-      ],
-      "timeAdvanceHours": 0,
+      "placeUpdates": [],
+      "codexUpdates": [],
+      "encounterOps": [],
+      "timeAdvanceHours": 7,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house back room — deep night, candle fully spent, darkness except for Aevi's three dim motes. The street outside is silent save for the river's constant voice.",
+      "setting": "Millbrook common house back room — deep night giving way, the room fully dark save for Aevi's three near-still motes nestled at Usnea's shoulder. The river murmurs through the wall. The street beyond is silent.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "One mote resting near Usnea's shoulder, closer than its usual nightwatch drift — still, neither dimming further nor brig"
+          "state": "Three motes settled close against Usnea's shoulder, nearly motionless — dimmed to the edge of visibility, resting in wha"
         },
         {
           "name": "Josen",
-          "state": "Silent in the main room — lamp lowered, the building settled into night."
+          "state": "Silent in the main room — lamp out, building fully settled into night."
         }
       ],
       "objects": [
-        "Straw-tick bedroll, thin but dry",
-        "Wool blanket",
+        "Straw-tick bedroll — occupied, thin but dry",
+        "Wool blanket — drawn close",
         "Plank door with iron latch — closed",
-        "Spent tallow candle stub — cold, thread of smoke gone"
+        "Spent tallow candle stub — cold and dark"
       ],
       "threads": [
-        "Aevi admitted the pulse is now 'in the current' — direction and meaning unresolved",
-        "Aevi admitted the junction-stone 'recognized' it — and named its own uncertainty plainly, which is unusual",
         "Pell's permission for Sela unresolved — Mara approaches at dawn; outcome unknown",
+        "The pulse is now in the river current itself — direction and meaning unresolved",
+        "The junction-stone 'recognized' Aevi — and Aevi cannot explain it",
         "Thursday's evidence order is set but untested against the actual elders",
         "No answer yet for what the six-fold system is actually doing — the elder meeting's stated weak point"
       ]
@@ -371,7 +349,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 4,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [

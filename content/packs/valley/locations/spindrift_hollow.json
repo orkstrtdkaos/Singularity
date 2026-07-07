@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "spindrift_hollow",
+  "name": "Spindrift Hollow",
+  "regionId": "unspooling",
+  "communityId": "unspooling.spindrift",
+  "axisVector": [
+    -0.2,
+    0.1,
+    0,
+    -0.2,
+    -0.3,
+    0.1,
+    -0.6,
+    -0.2,
+    0.1,
+    0.4,
+    -0.1,
+    0.1
+  ],
+  "spectrum": {
+    "chaos_order": -0.6,
+    "space_time": 0.4,
+    "concrete_abstract": -0.3
+  },
+  "tags": [
+    "churn",
+    "temporal",
+    "unstable",
+    "strange",
+    "sacred"
+  ],
+  "connections": [
+    "tumbledown_market",
+    "the_churn_edge"
+  ],
+  "descriptionSeed": "Here the chaos rides on TIME instead of matter — a hollow where moments don't queue politely. You'll meet someone before you're introduced, hear the end of a conversation first, wait an hour that costs a day or a day that costs an hour. The Hollow-folk have made a slow strange peace with it and speak in a grammar that assumes the listener already knows. What comes along with chaos here is the least obvious neighbor on the axis-map: space_time. No one would have guessed the next valley over from a trade-market would fold time.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Time out of joint — a warning that arrives after the danger, a debt paid before it's owed, an old woman who is also the child playing by the well, a moment you have to live twice to leave.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "A Hollow-child keeps giving warnings about things that haven't happened; some come true and the town can't tell prophecy from memory — and neither can she",
+    "Someone came to the Hollow to un-live a single moment and has been trying for years; helping them means deciding whether that mercy is even possible here",
+    "A traveler is stuck in a repeating hour and doesn't know it; breaking the loop from outside is delicate, and the Hollow may not want them released"
+  ],
+  "map": {
+    "x": 900,
+    "y": 200
+  }
+}

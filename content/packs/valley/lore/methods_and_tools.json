@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "methods_and_tools",
+  "kind": "methods",
+  "note": "Methods are learnable practices distinct from abilities — techniques anyone can attempt (skill-gated by check, not by power-system), and the tools that enable them. The Rune Dice are the flagship: a divination method that reads the pole-intensities of a place, person, or moment — tying divination directly to the coordinate-world model. Methods resolve through the normal engine (a check + GM narration); tools grant/enable them. Authored by Aevi (PO).",
+
+  "methods": [
+    {
+      "id": "rune_casting", "name": "Rune-Casting", "kind": "divination",
+      "tool": "rune_dice",
+      "attribute": "mental", "difficultyBase": 45,
+      "axes": {"falsehood_truth": 0.3, "mechanical_spiritual": 0.3, "concrete_abstract": 0.2},
+      "description": "Casting the rune dice to read the hidden shape of a place, a person, or a moment — which forces are present and how hot. A cast does not predict the future; it reads the PRESENT truly, surfacing the pole-intensities the caster couldn't otherwise perceive.",
+      "howItWorks": "The caster throws the dice and reads the faces that land. Each face maps to a pole; the faces that come up, and how they fall together, name which forces are lit in the thing cast-upon and roughly how strongly. Mechanically: a successful cast reveals a target's poleIntensity to the player (the fog lifts on that node's true nature); a strong success also reveals a co-firing the caster wouldn't have guessed (a jewel surfacing). A failed cast reads noise; a botch reads a plausible LIE — the dice can be wrong, and a caster who trusts a bad throw walks into it.",
+      "gmGuidance": "Use rune-casting to reveal a location's or NPC's pole-intensities when the player casts — it's the in-world instrument for the coordinate model. At a doubly-charged jewel, a good cast should name the improbable overlap ('death here, in all this life'). Never let it read the future; it reads what IS, harder to see.",
+      "learnedFrom": "Heights rune-readers, Wend road-casters, or self-taught with a set and time.",
+      "notFor": "Prophecy or fortune-telling (it reads the present, not the future); reading a mind's contents (only its pole-disposition); certainty (a botch lies)."
+    },
+    {
+      "id": "cartography", "name": "Coordinate-Reading", "kind": "navigation",
+      "tool": "axis_compass",
+      "attribute": "mental", "difficultyBase": 40,
+      "axes": {"space_time": 0.3, "concrete_abstract": 0.3},
+      "description": "Reading the axis-gradients of the land to know which way the world leans and how far to the next Reach — navigating the coordinate-world as geography.",
+      "howItWorks": "A successful read reveals adjacent nodes' rough direction and purity (which way is 'toward order,' how far to a pole, where a March lies). Ties travel to the graph: the reader sees edges before walking them.",
+      "gmGuidance": "Lets a player scout the graph a step ahead — reveal dim/heard-of nodes and their dominant pole without committing to the journey.",
+      "learnedFrom": "Lattice-wrights, Wend elders, Deep Wardens.",
+      "notFor": "Seeing a fogged pole's interior; safe passage guarantees (knowing the way is not surviving it)."
+    },
+    {
+      "id": "attunement_meditation", "name": "Attunement", "kind": "practice",
+      "tool": null,
+      "attribute": "social", "difficultyBase": 50,
+      "axes": {"mechanical_spiritual": 0.4, "body_mind": 0.2},
+      "description": "A quiet practice of matching one's own pole-disposition to a place or moment — sensing, and briefly holding, its true character. The folk-root of Numenwork's True Attention.",
+      "howItWorks": "On success, the practitioner reads the felt truth of the current scene (its hot poles) without a tool, and steadies themselves or another against its pull. Repeated attunement to one pole nudges the practitioner's own drift toward it — attention shapes the attender.",
+      "gmGuidance": "A tool-free, always-available way to surface a scene's character for a patient player; also the mechanism by which a character slowly becomes what they attend to.",
+      "learnedFrom": "Anyone who sits still long enough; formally, the Numinous.",
+      "notFor": "Commanding a place; fast results (attunement takes real time)."
+    }
+  ],
+
+  "tools": [
+    {
+      "id": "rune_dice", "name": "The Rune Dice", "kind": "focus",
+      "description": "A set of hand-cast dice — traditionally six, of dark stone, each face marked with a pole-glyph. No two makers' sets read quite alike, and a caster's own set, carried long enough, starts to fall truer for them and stranger for anyone else. Enables Rune-Casting; a fine set eases the read.",
+      "bonusTags": ["divination", "rune", "focus", "read-poles"],
+      "consumable": false,
+      "flavor": "The dice do not decide. They show. What you do with the showing is yours, and so is the mistake if the throw was a liar.",
+      "evolution": {"bondSource": null, "coUseTag": "rune-cast", "note": "A set carried and cast often attunes to its caster — reading truer for them, and refusing to read cleanly for a thief. Tool evolves on use alone.", "stages": [
+        {"stage": 1, "name": "A Maker's Set", "unlockBond": 0, "unlockCoUse": 0, "description": "Good stone, honest faces, no history with you yet.", "bonusTags": ["divination", "rune", "focus"], "narrationHints": "They land the way any dice land \u2014 truly enough, if you can read them."},
+        {"stage": 2, "name": "Your Set", "unlockBond": 0, "unlockCoUse": 10, "description": "The dice have learned your hand \u2014 they fall truer for you, and read muddy for anyone who lifts them.", "bonusTags": ["divination", "rune", "focus", "attune"], "grant": "Rune-Casts ease; a stolen set reads noise for the thief.", "narrationHints": "They warm to your throw now, and cool to a stranger's."},
+        {"stage": 3, "name": "The Speaking Stones", "unlockBond": 0, "unlockCoUse": 24, "description": "Cast long enough, the dice begin to answer questions you didn't ask aloud \u2014 and once in a while, before you throw.", "bonusTags": ["divination", "rune", "focus", "attune", "speak"], "grant": "Once per scene the dice may surface a reading unprompted \u2014 a warning, a hidden pole, a co-firing about to matter; GM-offered, at the edge of the useful and the eerie.", "narrationHints": "Sometimes they land before you've decided to throw. You've stopped being sure who's asking."}
+      ]}
+    },
+    {
+      "id": "axis_compass", "name": "Axis-Compass", "kind": "tool",
+      "description": "A Lattice-made instrument of nested rings that swing toward whichever pole runs strongest nearby \u2014 crude at a distance, precise up close. Enables Coordinate-Reading; the Wend prefer their own bones-and-memory method and call the compass a crutch.",
+      "bonusTags": ["navigation", "axis", "read-gradient"],
+      "consumable": false
+    },
+    {
+      "id": "readers_cloth", "name": "Reader's Cloth", "kind": "tool",
+      "description": "A marked casting-cloth that gives the rune dice a field to fall on and read against \u2014 the marks help sort a muddy throw. Rolls up small; every serious caster keeps one.",
+      "bonusTags": ["divination", "rune", "aid"],
+      "consumable": false
+    }
+  ]
+}

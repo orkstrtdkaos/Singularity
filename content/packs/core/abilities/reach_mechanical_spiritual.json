@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_mechanical_spiritual",
+  "note": "Crafts of the Gearlands/Numinous Reach (mechanical_spiritual axis) — the axis whose deep peak is What Sleeps Under. Enginecraft is the mechanical-pole tradition (Precursor arts at their most technical); Numenwork the spiritual-pole (the mystic disciplines the framework keeps converging toward). Learned by traveling the Reach or training with Enginewrights/the Numinous. Both drift the wielder toward their pole; the doubly-charged Forge of Ends is where they meet. Distinct from precursor.json: Precursor is the Valley's dangerous folk-access to the deep; these are the Reach's true traditions. axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
+  "gated": "learned",
+  "abilities": [
+    {"id": "enginecraft", "name": "Enginecraft", "levelReq": 3, "energyCost": 8, "powerSystem": "reach_mechanical_spiritual", "attribute": "practical",
+     "axes": {"mechanical_spiritual": -0.6, "concrete_abstract": 0.3, "chaos_order": 0.2}, "effectTags": ["machine", "precursor", "build"],
+     "narrationHints": "Mechanism as a language spoken fluently \u2014 systems built, run, and understood at a depth the Valley's tinkers only gesture at.",
+     "description": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
+     "notFor": "The numinous/meaning side of a Precursor site (that's Numenwork); life or growth; anything that must be felt rather than built.",
+     "tree": [
+       {"rank": 1, "name": "The Wright's Eye", "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.", "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist."},
+       {"rank": 2, "name": "System-Speaker", "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.", "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque \u2014 you move the body, not the meaning."},
+       {"rank": 3, "name": "Master of the Works", "grants": "Command machine-country \u2014 a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.", "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR \u2014 the framework's foreclosure by another road; and the Great Engine notices a rival wright."}
+     ]},
+    {"id": "numenwork", "name": "Numenwork", "levelReq": 3, "energyCost": 8, "powerSystem": "reach_mechanical_spiritual", "attribute": "social",
+     "axes": {"mechanical_spiritual": 0.6, "concrete_abstract": 0.3, "death_life": 0.2}, "effectTags": ["meaning", "spirit", "attend"],
+     "narrationHints": "The disciplines of pure meaning \u2014 attention made a force, presence that changes what it attends to, the material world going briefly negotiable.",
+     "description": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in.",
+     "notFor": "Building or commanding mechanism (that's Enginecraft); forcing an outcome (Numenwork attends, it does not compel); anything that treats spirit as a lever.",
+     "tree": [
+       {"rank": 1, "name": "True Attention", "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.", "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it."},
+       {"rank": 2, "name": "The Negotiable World", "grants": "Where meaning is dense, the material softens \u2014 a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.", "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending."},
+       {"rank": 3, "name": "The Standing Presence", "grants": "Attention as a force that holds \u2014 keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.", "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through."}
+     ]}
+  ]
+}

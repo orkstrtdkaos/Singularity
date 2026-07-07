@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "the_gralloch",
+  "name": "The Gralloch",
+  "regionId": "unspooling",
+  "communityId": "unspooling.gralloch",
+  "axisVector": [
+    -0.1,
+    -0.3,
+    0.2,
+    0.5,
+    -0.2,
+    -0.1,
+    -0.5,
+    -0.2,
+    -0.1,
+    0,
+    0.2,
+    -0.1
+  ],
+  "spectrum": {
+    "chaos_order": -0.5,
+    "violence_peace": 0.5,
+    "demonic_angelic": 0.2
+  },
+  "tags": [
+    "churn",
+    "lawless",
+    "dangerous",
+    "raider",
+    "border"
+  ],
+  "connections": [
+    "the_churn_edge",
+    "the_gralloch"
+  ],
+  "descriptionSeed": "The dangerous face of the Churn — where the disorder rides VIOLENCE and something older and colder underneath it. A broken badland of feuding bands and worse things drawn to the lawlessness. Not every chaos-neighbor is generative Tumbledown or strange Spindrift; this one bites. The randomness of the axis-map put teeth here, and the wise cross it fast or not at all.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Raw lawless danger — a band demanding tribute, a settlement that survives by being meaner than the badland, a thing the feuds woke that neither side will name, a mercy that gets someone killed.",
+  "dangerLevel": 4,
+  "encounterSeeds": [
+    "re_raider_duel",
+    "re_toll_bandits",
+    "re_pursuit_flee",
+    "re_wrong_ground"
+  ],
+  "questSeeds": [
+    "Two bands are feuding over a well and a third thing neither will name is picking off both; ending the feud means facing what the violence is feeding",
+    "A settlement of people who fled here to be free is being extorted; they'd rather die than go back under a city, and they might",
+    "Something in the Gralloch's heart isn't a person and isn't quite a beast — the demonic_angelic thread here is faint but real, and it's getting stronger where blood spills"
+  ],
+  "map": {
+    "x": 850,
+    "y": 300
+  }
+}

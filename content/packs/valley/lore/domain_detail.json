@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "domain_detail_and_connections",
+  "kind": "world_detail",
+  "note": "Interior detail for the manifest domains (the Blocklands, the Deepwood) and their cross-connections into the world graph. Each domain gets sub-regions, factions, and edges to neighboring nodes so it isn't an isolated pocket. Cross-connections are authored as graph edges + narrative bridges. Ties to manifest_locals (seedFiction/nativeLogic), world_node_atlas (the graph), world_superstructure (arcs). Authored by Aevi (PO).",
+
+  "the_blocklands": {
+    "interior": [
+      {"id": "blk_the_spawn", "name": "The Spawn Flats", "logic": "The safe entry-shelf where the block-grammar is gentlest — flat, resource-rich, forgiving. Newcomers learn to gather and craft here before the deeper strangeness. The one place in the Blocklands the night is survivable in the open, barely.", "hook": "Where trapped crafters cluster; a fragile society of the block-addicted, governed by whoever controls the best recipes."},
+      {"id": "blk_the_deepcuts", "name": "The Deepcuts", "logic": "Downward: mine-shafts that resolve into ever-rarer units, and the grammar grows stranger and richer the deeper you dig — better materials, worse nights. Greed's gradient made literal.", "hook": "The rarest crafting-units the outside world covets are here, guarded by the worst of the dark; a delve for those willing to trade nights for wealth."},
+      {"id": "blk_the_glitchlands", "name": "The Glitchlands", "logic": "The domain's edge, where block-logic frays against ordinary reality — half-resolved terrain, recipes that half-work, the grammar stuttering. Dangerous and revelatory: the seam where you can see the manifestation being run.", "hook": "The one place to study HOW the Blocklands works — and the leak-point where block-logic is diffusing into the Gearlands."}
+    ],
+    "factions": [
+      {"id": "blk_the_builders", "name": "The Builders", "what": "Crafters who've embraced the grammar and are raising something vast and permanent across generations of nights — a monument, a machine, a cathedral of blocks. Purpose-mad, not evil.", "wants": "To finish the Great Build, whatever it is, before the domain's leak unmakes it."},
+      {"id": "blk_the_dawnkeepers", "name": "The Dawnkeepers", "what": "Those trying to get people OUT — who see the block-addiction for the trap it is and ferry the willing back to the real world before the dusks claim their minds.", "wants": "To empty the Blocklands of the living before the diffusion or the dark takes them."}
+    ],
+    "crossConnections": [
+      {"to": "the_gearlands_verge", "edge": "the Glitchlands bleed into the Gearlands — block-logic diffusing where two ordered+creative dispositions touch; things resolve into units where they shouldn't", "arcTie": "arc_block_bleed"},
+      {"to": "tumbledown_market", "edge": "Churnfolk traders run block-touched tools and rare Deepcut units out to Tumbledown; the market and the Blocklands trade grammar for chaos", "arcTie": null}
+    ]
+  },
+
+  "the_deepwood": {
+    "interior": [
+      {"id": "dw_the_thinedge", "name": "The Thin Edge", "logic": "The outer Deepwood where the slow-time is mild and the Ents are youngest (mere centuries) — the habitable approach, of which Thornwake Glade is a far foothill. Time drags but doesn't drown.", "hook": "Where outsiders can treat with Ents without losing years; the Glade's Green Accord traces back to a compact made here."},
+      {"id": "dw_the_moot", "name": "The Standing Moot", "logic": "The heart-grove where the eldest Ents convene to decide things across decades. A single Moot can take a human lifetime to conclude. To petition the Moot is to commit to patience most cannot bear.", "hook": "The only body that can rule on an old wrong or grant an Ent leave to walk out; every deep Deepwood arc routes through the Moot's glacial judgment."},
+      {"id": "dw_the_burnscar", "name": "The Burnscar", "logic": "The deep-memory place where a great felling-or-burning was done to the Deepwood generations ago — still raw in Ent-time, the grudge that shapes how the whole domain treats humankind. Slow-time makes an old wound present.", "hook": "The root of the Deepwood's coming reckoning with the valley; healing it, or answering for it, is the domain's largest thread."}
+    ],
+    "factions": [
+      {"id": "dw_the_rootbound", "name": "The Rootbound", "what": "Ents who believe the wood should never again suffer humankind near it — isolationist, and, since the Burnscar, ascendant. They would have the Deepwood withdraw its green from the world entirely, the Glade included.", "wants": "To seal the Deepwood and let the hasty world rot without it."},
+      {"id": "dw_the_walkers", "name": "The Walkers", "what": "Ents who believe the wood must engage the world to survive it — who send heirs out (the Old Stag's line), keep the Accords, and argue against the Rootbound at the Moot across decades.", "wants": "To keep the Deepwood woven into the world, and to find humans worth trusting to prove the Rootbound wrong."}
+    ],
+    "crossConnections": [
+      {"to": "thornwake_glade", "edge": "Thornwake's Green Accord is a Walker-made compact from the Thin Edge; the Glade's failing Accord IS a front in the Deepwood's Rootbound-vs-Walker struggle", "arcTie": "arc_glade_accord"},
+      {"to": "the_quickwood_eaves", "edge": "the Deepwood and the Quickwood share the life-disposition and quietly disagree about it — the Ents' patient green vs the Quickwood's unstoppable spring; travelers pass between", "arcTie": "arc_green_schism"}
+    ]
+  },
+
+  "graph_updates": "These add nodes (blk_*, dw_*) and edges to the world graph. The domains are no longer isolated pockets: the Blocklands wires to the Gearlands (bleed) and the Churn (trade); the Deepwood wires to Thornwake (the Accord front) and the Quickwood (the green schism). Engine derives the new adjacencies from these + poleIntensity. The Glade's existing failing-Accord arc is now revealed as a front in a larger Deepwood civil argument."
+}

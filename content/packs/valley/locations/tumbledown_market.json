@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "tumbledown_market",
+  "name": "Tumbledown",
+  "regionId": "unspooling",
+  "communityId": "unspooling.tumbledown",
+  "axisVector": [
+    0.3,
+    -0.2,
+    0,
+    0.1,
+    -0.1,
+    -0.2,
+    -0.7,
+    0.1,
+    0.2,
+    0.1,
+    0.1,
+    0.3
+  ],
+  "spectrum": {
+    "chaos_order": -0.7,
+    "emotional_logical": 0.3,
+    "destruction_creation": 0.3
+  },
+  "tags": [
+    "market",
+    "churn",
+    "shifting",
+    "trade",
+    "unaligned"
+  ],
+  "connections": [
+    "the_churn_edge",
+    "kestrels_roost",
+    "spindrift_hollow"
+  ],
+  "descriptionSeed": "A market that has never been in the same place twice — stalls, tents, and whole streets reassembling overnight by rules no one admits to. What rides along with the chaos here isn't danger, it's INVENTION: the Churnfolk make things, trade things, remake things, and the disorder is generative rather than violent. You can find anything in Tumbledown once. You can never find it twice.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Generative disorder — an inventor demonstrating a device that works once, a trade that can only be made today, a street that wasn't here yesterday and won't be tomorrow, a festival that started for no reason and everyone joined.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A Churnfolk maker built something extraordinary and can't rebuild it — the market ate the method; recovering it means chasing a pattern that resists being pinned",
+    "Someone is trying to IMPOSE order on Tumbledown — fixing the market in place — and half the town is grateful and half is dying inside; the Lattice's reach is testing here",
+    "A stall you needed is gone and its keeper with it; finding a person in a place that rearranges itself is its own art"
+  ],
+  "map": {
+    "x": 820,
+    "y": 120
+  }
+}

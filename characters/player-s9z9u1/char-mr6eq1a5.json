@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 3,
-  "xp": 210,
+  "xp": 213,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -35,13 +35,13 @@
   "alignment": {
     "mechanical_spiritual": 0.06029386108203125,
     "concrete_abstract": -0.15334333419684765,
-    "spectrumId": -0.14022002876943357
+    "spectrumId": -0.13820902733096188
   },
   "attunement": 3,
   "maxHealth": 40,
   "health": 32,
   "maxEnergy": 110,
-  "energy": 84,
+  "energy": 79,
   "inventory": [
     {
       "id": "waterskin",
@@ -228,23 +228,28 @@
       {
         "summary": "Usnea stepped back; Mara reclaimed the thread — Pell is listening, still guarded, not yet open.",
         "narration": "You take one deliberate step back — not retreat, just room-making. Your bark settles, your branches still, and you let the silence you created belong to Mara now. Aevi dims to almost nothing at your shoulder, reading the same cue: this is not your moment to speak.\n\nMara moves into the space you've left. She doesn't reach for Pell or soften her voice into something careful — she simply stands where she is and lets the anger be what it is for a breath. Then she says, quietly, 'You're right to be angry. We came here talking about evidence and meetings and didn't start with what matters. Sela matters.' She doesn't rush the next sentence. 'We're not asking her to carry this. We're asking the elders to carry it — so she doesn't have to anymore.'\n\nPell's grip on the rope doesn't loosen, but her jaw shifts. She's still closed, still white-knuckled — but she's listening in the way a person listens when they're deciding whether to stay angry or let something land. The cart driver behind you has gone very still, the way people do when they realize they're witnessing something real.\n\nMara holds the quiet. She doesn't fill it. The damp canvas awning drips once onto the lane stones between you all."
+      },
+      {
+        "summary": "Usnea quietly asked whether the Thursday meeting could move — it cannot, but Mara named the open-door rule; Pell is now asking about the order of speakers.",
+        "narration": "You lean toward Mara just slightly — not a whisper, not quite open address — and let your voice carry to where Pell stands without aiming it at her directly. 'Mara. The common house on Thursday — is that fixed, or could it move somewhere Pell might come herself? See how the elders handle Sela before she has to be in it?' You keep your eyes on the middle distance, not on Pell, not performing it.\n\nMara doesn't answer immediately. She turns the question over once, visibly — you can see her running the political math behind her eyes, the five elders, Dresh's preference for the common house's table and its particular authority. Then she says, flat and honest: 'Dresh won't shift the venue. He anchors at the common house.' A pause. 'But the elders meet in the open room, not the back. Anyone in Millbrook can stand at the door.'\n\nPell's grip on the rope loosens a fraction — not release, but recalibration. Her eyes move from Mara to you and back, and something in the set of her jaw changes: not softer, but less purely closed. She is working out what 'stand at the door' means for her. Whether it means she can pull Sela out. Whether it means she keeps control.\n\nShe hasn't said yes. She hasn't said no. But she asks, quietly and without warmth: 'Who else speaks before her?'"
       }
     ],
     "lastTurn": {
-      "narration": "You take one deliberate step back — not retreat, just room-making. Your bark settles, your branches still, and you let the silence you created belong to Mara now. Aevi dims to almost nothing at your shoulder, reading the same cue: this is not your moment to speak.\n\nMara moves into the space you've left. She doesn't reach for Pell or soften her voice into something careful — she simply stands where she is and lets the anger be what it is for a breath. Then she says, quietly, 'You're right to be angry. We came here talking about evidence and meetings and didn't start with what matters. Sela matters.' She doesn't rush the next sentence. 'We're not asking her to carry this. We're asking the elders to carry it — so she doesn't have to anymore.'\n\nPell's grip on the rope doesn't loosen, but her jaw shifts. She's still closed, still white-knuckled — but she's listening in the way a person listens when they're deciding whether to stay angry or let something land. The cart driver behind you has gone very still, the way people do when they realize they're witnessing something real.\n\nMara holds the quiet. She doesn't fill it. The damp canvas awning drips once onto the lane stones between you all.",
-      "sceneSummary": "Usnea stepped back; Mara reclaimed the thread — Pell is listening, still guarded, not yet open.",
+      "narration": "You lean toward Mara just slightly — not a whisper, not quite open address — and let your voice carry to where Pell stands without aiming it at her directly. 'Mara. The common house on Thursday — is that fixed, or could it move somewhere Pell might come herself? See how the elders handle Sela before she has to be in it?' You keep your eyes on the middle distance, not on Pell, not performing it.\n\nMara doesn't answer immediately. She turns the question over once, visibly — you can see her running the political math behind her eyes, the five elders, Dresh's preference for the common house's table and its particular authority. Then she says, flat and honest: 'Dresh won't shift the venue. He anchors at the common house.' A pause. 'But the elders meet in the open room, not the back. Anyone in Millbrook can stand at the door.'\n\nPell's grip on the rope loosens a fraction — not release, but recalibration. Her eyes move from Mara to you and back, and something in the set of her jaw changes: not softer, but less purely closed. She is working out what 'stand at the door' means for her. Whether it means she can pull Sela out. Whether it means she keeps control.\n\nShe hasn't said yes. She hasn't said no. But she asks, quietly and without warmth: 'Who else speaks before her?'",
+      "sceneSummary": "Usnea quietly asked whether the Thursday meeting could move — it cannot, but Mara named the open-door rule; Pell is now asking about the order of speakers.",
       "choices": [
         {
-          "label": "Stay silent and still — let Mara finish working this; your presence as witness is enough.",
+          "label": "Answer Pell's question directly — name the order: seedling, water, Usnea's account, Aevi, the pattern — then Sela, last and briefly, just to tap the rhythm.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "spectrumId": -0.2
+            "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
+            "inform",
             "careful",
-            "support"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -253,55 +258,55 @@
           "emergenceId": null
         },
         {
-          "label": "Produce the Pale Turnip Seedling wordlessly — set it on the counter, no speech, let the physical evidence speak to a mother who works with her hands.",
+          "label": "Tell Pell she can stand at the door and pull Sela out at any moment — that authority stays with her, not the elders, not Mara, not you.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "spectrumId": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "careful",
+            "reassure"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay quiet — let Mara answer. You've given Pell the image of the open door; don't crowd it. Watch her face instead.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "observe",
+            "careful",
+            "patient"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Offer something tangible: show Pell the Pale Turnip Seedling — put the evidence in her hands so she understands what Sela's testimony sits beside, and what it means that a child felt it first.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
             "spectrumId": -0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "careful",
             "persuade",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Speak to Pell as one parent-figure to another — not about the meeting, not about the elders, but about what it means that Sela has been sitting alone at that dock for weeks, feeling something real, and no adult believed her.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara quietly — within Pell's hearing — whether the Thursday meeting could be moved to somewhere Pell herself could attend and see how Sela is treated by the elders before agreeing.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "plan",
-            "careful",
-            "persuade"
+            "demonstrate",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -319,35 +324,41 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "contamination-evidence-for-the-elders",
+          "note": "Pell asked who speaks before Sela — the conversation has moved from closed anger to cautious interrogation; permission is within reach but not given."
+        }
+      ],
       "scene": {
-        "setting": "East market lane, Millbrook — just past first light; Pell's cord-and-hemp stall at the corner of the row, canvas awning still damp with dew dripping onto lane stones. The lane is nearly empty; a stopped cart sits behind Usnea, driver gone very still.",
+        "setting": "East market lane, Millbrook — first light, dew dripping from Pell's canvas awning onto wet lane stones. The lane remains nearly empty.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing close to Pell, having just spoken — holding the quiet she created, not filling it, watching Pell's face for movement."
+            "state": "Standing close to Pell, having named the open-door rule — watching Pell's face, not filling the silence."
           },
           {
             "name": "Pell",
-            "state": "White-knuckled on the coiled rope, jaw shifted slightly — still closed, still angry, but listening in the way someone does when deciding whether to let something land."
+            "state": "Grip on the coiled rope slightly loosened — jaw recalibrating, eyes moving between Mara and Usnea. Has just asked, without warmth, who speaks before Sela."
           },
           {
             "name": "Cart driver (unnamed)",
-            "state": "Gone very still behind Usnea — an unintended witness, not intervening."
+            "state": "Still gone very still behind Usnea — an unintended witness, not intervening."
           }
         ],
         "objects": [
           "Pell's cord-and-hemp stall — canvas awning, rope samples on the counter",
-          "Coiled rope — in Pell's arm, gripped hard",
-          "East market lane — nearly empty, a stopped cart behind Usnea",
+          "Coiled rope — in Pell's arm, grip slightly loosened",
+          "East market lane — nearly empty, stopped cart behind Usnea",
           "Pale Turnip Seedling (in Usnea's inventory — visible if produced)",
           "Crystalline Residue Pinch (in Usnea's inventory — wrapped in ration-paper)"
         ],
         "threads": [
-          "Pell has not left and has not opened — the question of permission sits in the silence Mara just created",
-          "Mara is holding the quiet; she has made her bid and is waiting",
-          "The cart driver remains an unintended witness to whatever happens next",
-          "Whether Thursday's meeting could be moved to accommodate Pell's presence remains unaddressed"
+          "Pell has asked who speaks before Sela — the question is live, unanswered",
+          "The open-door rule named: Pell could stand at the threshold of the common house and watch",
+          "Pell has not given permission; she has not refused — the moment is fragile and alive",
+          "The cart driver remains an unintended witness to whatever happens next"
         ]
       },
       "npcUpdates": [
@@ -356,84 +367,99 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Millbrook water-policy coordinator and elder",
-          "note": "Stepped into the space Usnea made — named Sela plainly, reframed the ask as carrying weight off Sela rather than putting weight on her. Holding the silence she created.",
+          "note": "Named the practical reality plainly — Dresh won't move the venue, but the common house open room means Pell can stand at the door. Did not oversell it.",
           "learned": [
-            "Reframed the permission ask: not Sela carrying the testimony, but the elders carrying the burden so Sela doesn't have to"
+            "The common house open room is accessible to any Millbrook resident — Pell could observe before committing Sela"
           ],
           "skillsObserved": [
-            "silence as social tool",
-            "reframing under pressure",
-            "reading a room's stillness"
+            "frank constraint-naming",
+            "holding silence after a partial concession"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At Pell's cord stall, east market — having made her bid to recover the thread; holding the quiet, watching Pell."
+          "statusNote": "At Pell's cord stall — holding the quiet after naming the open-door option; watching Pell work through the question of speaker order."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
           "role": "Cord-and-hemp seller, east market; Sela's mother",
-          "note": "Jaw shifted from tight-set anger toward something less certain — still gripping the rope hard, face still closed, but listening differently after Mara's reframe. Has not walked away.",
+          "note": "Grip loosened fractionally when the open-door option was named. Asked, without warmth, who speaks before Sela — a question of process, not refusal.",
           "learned": [
-            "Heard Mara reframe the ask: the elders carry the burden, not Sela"
+            "The Thursday meeting is in the common house open room — she could stand at the door and watch",
+            "Sela would speak last and briefly"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "strategic interrogation — asking about structure before agreeing"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her cord stall — still angry, still white-knuckled, but visibly deciding whether to let Mara's words land. Permission unresolved."
+          "statusNote": "At her cord stall — grip slightly loosened, jaw recalibrating; asking about speaker order. Permission still unresolved but conversation is alive."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Mara reclaimed the conversation thread at Pell's stall after Usnea stepped back — reframed the ask around Sela's relief rather than the elders' need. Pell's jaw shifted; the moment is alive but unresolved.",
+          "note": "Pell asked about the speaker order at the Thursday meeting — the conversation at the stall has moved from anger to cautious interrogation; the open-door rule named as a path for Pell to observe.",
           "subPlace": {
             "name": "Pell's Cord Stall — East Market",
-            "note": "Mara's reframe landed partially — Pell still guarded but no longer purely closed; permission for Sela's testimony remains the open question.",
+            "note": "Pell asked who speaks before Sela — grip loosened slightly; open-door rule named by Mara; permission still pending but conversation active.",
             "visited": true
           }
         }
       ],
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "sela-and-pell",
+          "label": "Sela and Pell",
+          "kind": "person",
+          "fact": "Day 6 morning: Pell asked who speaks before Sela — a structural question, not a refusal. The common house open-room rule means Pell could stand at the door and watch the elders' treatment of Sela before committing. Permission remains unresolved but the conversation is alive.",
+          "links": [
+            "contamination-evidence-for-the-elders",
+            "millbrook",
+            "the-six-fold-pattern",
+            "mara-wells"
+          ]
+        }
+      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "East market lane, Millbrook — just past first light; Pell's cord-and-hemp stall at the corner of the row, canvas awning still damp with dew dripping onto lane stones. The lane is nearly empty; a stopped cart sits behind Usnea, driver gone very still.",
+      "setting": "East market lane, Millbrook — first light, dew dripping from Pell's canvas awning onto wet lane stones. The lane remains nearly empty.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing close to Pell, having just spoken — holding the quiet she created, not filling it, watching Pell's face for mov"
+          "state": "Standing close to Pell, having named the open-door rule — watching Pell's face, not filling the silence."
         },
         {
           "name": "Pell",
-          "state": "White-knuckled on the coiled rope, jaw shifted slightly — still closed, still angry, but listening in the way someone do"
+          "state": "Grip on the coiled rope slightly loosened — jaw recalibrating, eyes moving between Mara and Usnea. Has just asked, witho"
         },
         {
           "name": "Cart driver (unnamed)",
-          "state": "Gone very still behind Usnea — an unintended witness, not intervening."
+          "state": "Still gone very still behind Usnea — an unintended witness, not intervening."
         }
       ],
       "objects": [
         "Pell's cord-and-hemp stall — canvas awning, rope samples on the counter",
-        "Coiled rope — in Pell's arm, gripped hard",
-        "East market lane — nearly empty, a stopped cart behind Usnea",
+        "Coiled rope — in Pell's arm, grip slightly loosened",
+        "East market lane — nearly empty, stopped cart behind Usnea",
         "Pale Turnip Seedling (in Usnea's inventory — visible if produced)",
         "Crystalline Residue Pinch (in Usnea's inventory — wrapped in ration-paper)"
       ],
       "threads": [
-        "Pell has not left and has not opened — the question of permission sits in the silence Mara just created",
-        "Mara is holding the quiet; she has made her bid and is waiting",
-        "The cart driver remains an unintended witness to whatever happens next",
-        "Whether Thursday's meeting could be moved to accommodate Pell's presence remains unaddressed"
+        "Pell has asked who speaks before Sela — the question is live, unanswered",
+        "The open-door rule named: Pell could stand at the threshold of the common house and watch",
+        "Pell has not given permission; she has not refused — the moment is fragile and alive",
+        "The cart driver remains an unintended witness to whatever happens next"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -448,14 +474,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Sela's name and Pell's east-market stall passed to Mara Wells tonight; Mara will approach Pell at dawn before the stall opens.",
         "Mara has laid out Thursday's structure: physical evidence first (seedling, vial, residue), then Usnea's account, then Aevi, then the six-fold pattern, then Sela last. The weak point named: no answer y",
         "Day 5 dawn: Usnea confirms the pulse is now in the Echo River current itself — the system has expanded overnight. Sela was recently at the dock but has left; Pell's permission still unresolved.",
         "Day 5 dawn: six-fold pulse confirmed steady and 'cleaner' — more declarative than escalating. The system is not accelerating; it is settling into presence. Aevi's read: not a question anymore, a state",
         "Day 5 dawn: six-fold pulse traced upstream past the mill weir — extends at least 300 paces and crosses the weir into the mill-race. Aevi confirms it was only under the dock four days ago. The system i",
         "Day 5 dawn: six-fold pulse traced south to Millbrook's drinking wells — the system's reach now encompasses the village water supply. The dock is a middle, not an endpoint. New evidence that changes th",
         "Usnea delivered the well-contamination finding to Mara Wells mid-approach to Pell — stakes of Thursday's meeting have visibly shifted; Pell is now listening differently.",
-        "Usnea's direct appeal to Pell about the wells curdled into protective anger — Pell has not refused, but the approach has made permission harder to secure; Mara holds the thread now."
+        "Usnea's direct appeal to Pell about the wells curdled into protective anger — Pell has not refused, but the approach has made permission harder to secure; Mara holds the thread now.",
+        "Pell asked who speaks before Sela — the conversation has moved from closed anger to cautious interrogation; permission is within reach but not given."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -607,7 +633,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Sent Usnea off to walk the arm with a single deliberate nod — 'go and come back with something.' Not present at the seep; will receive this finding tomorrow.",
         "[d3] Met Usnea at the path terminus on return from the vent — read the return correctly before a word was spoken; 'You have something' is her first sentence",
         "[d3] Received the full account of the vent system, crystalline residue, and pale seedling. Named the challenge plainly: the elders will want a simple answer and won't get one. Touched t",
         "[d3] Directed Usnea to the common house back room without ceremony — named Josen as the keeper; said Usnea's name would be recognized. Practical care, no fuss.",
@@ -616,32 +641,33 @@
         "[d5] Received Usnea's thanks and returned to Josen without ceremony — the plan is set, nothing more to say tonight.",
         "[d6] Received the well-contamination finding from Usnea mid-approach to Pell — went still, dropped her careful social gesture, pivoted to a shorter and truer ask of Pell",
         "[d6] Gone still at Usnea's elbow after the misstep — reading Pell's face, waiting for an opening, not yet moving to recover the thread.",
-        "[d6] Stepped into the space Usnea made — named Sela plainly, reframed the ask as carrying weight off Sela rather than putting weight on her. Holding the silence she created."
+        "[d6] Stepped into the space Usnea made — named Sela plainly, reframed the ask as carrying weight off Sela rather than putting weight on her. Holding the silence she created.",
+        "[d6] Named the practical reality plainly — Dresh won't move the venue, but the common house open room means Pell can stand at the door. Did not oversell it."
       ],
       "knownFacts": [
-        "Aevi named the vent's periodic pause as a control prompt awaiting the third-and-sixth key sequence",
         "Directs travelers to Josen's back room at the common house when they need shelter",
         "Sela is the dock child — Pell's daughter; Pell sells cord and hemp at the east market stall; Sela predicts Pell will refuse",
         "Five elders will be present Thursday",
         "Councilor Dresh leads and trusts physical evidence first",
         "Mara's planned order: seedling/vial/residue → Usnea's account → Aevi → six-fold pattern → Sela",
         "The six-fold pulse has reached Millbrook's drinking wells — the village water supply is inside the system's reach",
-        "Reframed the permission ask: not Sela carrying the testimony, but the elders carrying the burden so Sela doesn't have to"
+        "Reframed the permission ask: not Sela carrying the testimony, but the elders carrying the burden so Sela doesn't have to",
+        "The common house open room is accessible to any Millbrook resident — Pell could observe before committing Sela"
       ],
       "skillsObserved": [
-        "frank identification of gaps",
-        "rapid recalibration under pressure",
         "plain speech when stakes change",
         "silence as social tool",
         "reframing under pressure",
-        "reading a room's stillness"
+        "reading a room's stillness",
+        "frank constraint-naming",
+        "holding silence after a partial concession"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 6
       },
-      "statusNote": "At Pell's cord stall, east market — having made her bid to recover the thread; holding the quiet, watching Pell."
+      "statusNote": "At Pell's cord stall — holding the quiet after naming the open-door option; watching Pell work through the question of speaker order."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -737,21 +763,25 @@
       "history": [
         "[d6] Found at her stall before it properly opened — was holding Mara at arm's length until Usnea arrived and named the wells; grip on the rope samples shifted; she is now listening diff",
         "[d6] Usnea named Sela's danger aloud before Pell was ready — her listening posture curdled from cautious-open to protective-closed; white-knuckled on the rope, face shut down. Has not w",
-        "[d6] Jaw shifted from tight-set anger toward something less certain — still gripping the rope hard, face still closed, but listening differently after Mara's reframe. Has not walked awa"
+        "[d6] Jaw shifted from tight-set anger toward something less certain — still gripping the rope hard, face still closed, but listening differently after Mara's reframe. Has not walked awa",
+        "[d6] Grip loosened fractionally when the open-door option was named. Asked, without warmth, who speaks before Sela — a question of process, not refusal."
       ],
       "knownFacts": [
         "Sela hears something others are beginning to feel",
         "The pulse has reached the drinking wells the whole village draws from",
         "Usnea believes the six-fold pulse runs directly under Millbrook's drinking wells — the wells Sela and the whole village use",
-        "Heard Mara reframe the ask: the elders carry the burden, not Sela"
+        "Heard Mara reframe the ask: the elders carry the burden, not Sela",
+        "The Thursday meeting is in the common house open room — she could stand at the door and watch",
+        "Sela would speak last and briefly"
       ],
       "skillsObserved": [
         "guarded listening",
         "reading a room's shift",
-        "protective instinct under pressure"
+        "protective instinct under pressure",
+        "strategic interrogation — asking about structure before agre"
       ],
       "status": "active",
-      "statusNote": "At her cord stall — still angry, still white-knuckled, but visibly deciding whether to let Mara's words land. Permission unresolved.",
+      "statusNote": "At her cord stall — grip slightly loosened, jaw recalibrating; asking about speaker order. Permission still unresolved but conversation is alive.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 6
@@ -762,7 +792,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d4] Sela named herself at the dock's lowest plank — she is Pell's daughter; Pell works the east market cord stall. Sela's identity is now known.",
         "[d5] Usnea passed Sela's name and Pell's stall to Mara Wells at the common house side entrance on the night of Day 4 — Mara committed to the dawn approach.",
         "[d5] Thursday's elder meeting structure discussed at the common house side entrance — Mara named five elders, Dresh as the physical-evidence anchor, and Sela as the final witness in the planned sequence.",
         "[d5] Usnea settled in Josen's back room for the night of Day 4 — the second time sleeping here.",
@@ -773,7 +802,8 @@
         "[d5] Day 5 dawn: six-fold pulse confirmed reaching Millbrook's drinking wells via south bank loam and buried clay pipes — the village water supply is inside the system's reach. Aevi named the dock as a mid",
         "[d6] Day 6 dawn: the well-contamination finding delivered at Pell's cord stall — Mara and Pell both present when named; Pell's permission for Sela's testimony still pending at this location.",
         "[d6] Usnea's direct appeal about the wells to Pell at her cord stall misfired — a cart driver was an unintended witness to the exchange; Pell's anger is now part of this stall's social memory.",
-        "[d6] Mara reclaimed the conversation thread at Pell's stall after Usnea stepped back — reframed the ask around Sela's relief rather than the elders' need. Pell's jaw shifted; the moment is alive but unreso"
+        "[d6] Mara reclaimed the conversation thread at Pell's stall after Usnea stepped back — reframed the ask around Sela's relief rather than the elders' need. Pell's jaw shifted; the moment is alive but unreso",
+        "[d6] Pell asked about the speaker order at the Thursday meeting — the conversation at the stall has moved from anger to cautious interrogation; the open-door rule named as a path for Pell to observe."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -835,7 +865,7 @@
           "name": "Pell's Cord Stall — East Market",
           "day": 6,
           "visited": true,
-          "note": "Mara's reframe landed partially — Pell still guarded but no longer purely closed; permission for Sela's testimony remain"
+          "note": "Pell asked who speaks before Sela — grip loosened slightly; open-door rule named by Mara; permission still pending but c"
         }
       }
     },
@@ -1440,7 +1470,8 @@
           "[d4] The dock child is named Sela. Her mother Pell sells cord and hemp at the east market stall. Sela predicts Pell will refuse — her tone suggests experience, not defiance. Pell's permission gates Sela's ",
           "[d5] Mara Wells now knows Sela's name and Pell's stall — she will approach Pell at dawn before the east market opens to request permission for Thursday. The obstacle is delegated to the person best placed ",
           "[d6] Day 6 dawn: Pell encountered directly at her east market stall — Mara's approach was underway; the well-contamination news shifted Pell's listening posture. Permission not yet given.",
-          "[d6] Day 6 dawn: Usnea's direct appeal naming Sela's danger out loud before Pell was ready triggered protective anger — Pell's grip went white-knuckled, face closed. She has not walked away, but permission"
+          "[d6] Day 6 dawn: Usnea's direct appeal naming Sela's danger out loud before Pell was ready triggered protective anger — Pell's grip went white-knuckled, face closed. She has not walked away, but permission",
+          "[d6] Day 6 morning: Pell asked who speaks before Sela — a structural question, not a refusal. The common house open-room rule means Pell could stand at the door and watch the elders' treatment of Sela befo"
         ],
         "links": [
           "contamination-evidence-for-the-elders",

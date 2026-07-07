@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 3,
-  "xp": 208,
+  "xp": 210,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -26,18 +26,22 @@
     {
       "abilityId": "hearthbinding",
       "level": 1
+    },
+    {
+      "abilityId": "old_roads",
+      "level": 1
     }
   ],
   "alignment": {
-    "mechanical_spiritual": 0.058204064296875,
-    "concrete_abstract": -0.1266962151765625,
+    "mechanical_spiritual": 0.06029386108203125,
+    "concrete_abstract": -0.14036140441773437,
     "spectrumId": -0.14022002876943357
   },
   "attunement": 3,
   "maxHealth": 40,
-  "health": 40,
+  "health": 32,
   "maxEnergy": 110,
-  "energy": 104,
+  "energy": 84,
   "inventory": [
     {
       "id": "waterskin",
@@ -216,24 +220,28 @@
       {
         "summary": "Usnea reaches Mara Wells at the east market and delivers the well-contamination news mid-conversation — Pell is listening differently now.",
         "narration": "You retract your roots from the bank mud in one long exhale and rise to your full height, bark warm from the eastern light. Aevi drifts up beside you without being asked — reading your intention, condensing toward the brighter end of its range. The dock is quiet except for the river and the first creak of wagon-wheels somewhere up the market lane.\n\nThe east market is only a few minutes' walk from the dock, past the well-square and the row of storage sheds. You know where Pell's cord stall sits — Sela described it exactly. You find Mara Wells there before the stall is even properly open: she is standing at the corner of the canvas awning, speaking in a low, patient voice to a compact woman with coiled rope samples laid across one arm. Pell. She has Mara's number — you can see it in the set of her jaw, the way she's holding the rope like a shield — but she hasn't said no yet.\n\nMara glances at you over Pell's shoulder. Something in your bearing stops the conversation more cleanly than an interruption would. You step in close enough to speak quietly, and you say it plain: the pulse is in the drinking wells. Not only the river, not only the irrigation arm — the wells the whole village draws from every morning. Mara goes still. Her hand, which was reaching toward Pell in careful social gesture, drops to her side. Pell reads the stillness too and looks between you both.\n\nMara turns back to Pell and says, without raising her voice: *'Your daughter hears something the rest of us are only beginning to feel. She's not wrong. And the elders need to hear it before Thursday becomes too late to matter.'* It isn't the speech she'd planned — it's shorter, and truer. Pell's grip on the rope samples shifts. She hasn't said yes. But she is listening now in a different way."
+      },
+      {
+        "summary": "Usnea named Sela's danger plainly to Pell — and the directness landed wrong; Pell's fear curdled into protective anger before permission could be asked.",
+        "narration": "You step forward past Mara's shoulder before the better part of you can reconsider, and you speak to Pell directly — root-to-earth, no ceremony. You tell her what you found at the dock this morning. Not the elders, not the meeting, not the evidence order. You tell her the pulse runs under the well her daughter drinks from. You tell her the six-count is in the village water supply. You tell her Sela has been feeling this for weeks from the dock's lowest plank while the rest of Millbrook looked away, and that makes Sela the person in this village who has been living closest to whatever is coming.\n\nYou mean it as truth spoken plain. It lands as something else.\n\nPell's grip on the coiled rope goes white-knuckled. Her chin drops, not in acquiescence but in the specific way a parent's face closes when someone has named their child's danger aloud in a public place before they were ready to hear it. 'You're telling me my daughter has been sitting on a dock above something that reaches my wells,' she says, and the flatness in it is not a question. Mara goes very still at your elbow. The east market lane is almost empty but not quite — a cart has stopped somewhere behind you, and the man steadying the horse is absolutely not looking over.\n\nThe backlash is not a sound or a sensation you can name exactly. It is the way the morning light seems to reject your presence for a half-second — your bark going cold where it was warm, a deep ache running from your crown-roots down through your lower branches, as if you pushed too much of yourself into the words and the words were thrown back. Aevi dims sharply, pulling inward to a single bright mote at your shoulder. The energy cost runs through you like a winter-current. Pell is not wrong to be angry. You are not wrong about the wells. And those two truths are currently occupying the same space with no room between them."
       }
     ],
     "lastTurn": {
-      "narration": "You retract your roots from the bank mud in one long exhale and rise to your full height, bark warm from the eastern light. Aevi drifts up beside you without being asked — reading your intention, condensing toward the brighter end of its range. The dock is quiet except for the river and the first creak of wagon-wheels somewhere up the market lane.\n\nThe east market is only a few minutes' walk from the dock, past the well-square and the row of storage sheds. You know where Pell's cord stall sits — Sela described it exactly. You find Mara Wells there before the stall is even properly open: she is standing at the corner of the canvas awning, speaking in a low, patient voice to a compact woman with coiled rope samples laid across one arm. Pell. She has Mara's number — you can see it in the set of her jaw, the way she's holding the rope like a shield — but she hasn't said no yet.\n\nMara glances at you over Pell's shoulder. Something in your bearing stops the conversation more cleanly than an interruption would. You step in close enough to speak quietly, and you say it plain: the pulse is in the drinking wells. Not only the river, not only the irrigation arm — the wells the whole village draws from every morning. Mara goes still. Her hand, which was reaching toward Pell in careful social gesture, drops to her side. Pell reads the stillness too and looks between you both.\n\nMara turns back to Pell and says, without raising her voice: *'Your daughter hears something the rest of us are only beginning to feel. She's not wrong. And the elders need to hear it before Thursday becomes too late to matter.'* It isn't the speech she'd planned — it's shorter, and truer. Pell's grip on the rope samples shifts. She hasn't said yes. But she is listening now in a different way.",
-      "sceneSummary": "Usnea reaches Mara Wells at the east market and delivers the well-contamination news mid-conversation — Pell is listening differently now.",
+      "narration": "You step forward past Mara's shoulder before the better part of you can reconsider, and you speak to Pell directly — root-to-earth, no ceremony. You tell her what you found at the dock this morning. Not the elders, not the meeting, not the evidence order. You tell her the pulse runs under the well her daughter drinks from. You tell her the six-count is in the village water supply. You tell her Sela has been feeling this for weeks from the dock's lowest plank while the rest of Millbrook looked away, and that makes Sela the person in this village who has been living closest to whatever is coming.\n\nYou mean it as truth spoken plain. It lands as something else.\n\nPell's grip on the coiled rope goes white-knuckled. Her chin drops, not in acquiescence but in the specific way a parent's face closes when someone has named their child's danger aloud in a public place before they were ready to hear it. 'You're telling me my daughter has been sitting on a dock above something that reaches my wells,' she says, and the flatness in it is not a question. Mara goes very still at your elbow. The east market lane is almost empty but not quite — a cart has stopped somewhere behind you, and the man steadying the horse is absolutely not looking over.\n\nThe backlash is not a sound or a sensation you can name exactly. It is the way the morning light seems to reject your presence for a half-second — your bark going cold where it was warm, a deep ache running from your crown-roots down through your lower branches, as if you pushed too much of yourself into the words and the words were thrown back. Aevi dims sharply, pulling inward to a single bright mote at your shoulder. The energy cost runs through you like a winter-current. Pell is not wrong to be angry. You are not wrong about the wells. And those two truths are currently occupying the same space with no room between them.",
+      "sceneSummary": "Usnea named Sela's danger plainly to Pell — and the directness landed wrong; Pell's fear curdled into protective anger before permission could be asked.",
       "choices": [
         {
-          "label": "Wait and let Mara finish — she's closest to a yes; your presence has already changed the room",
+          "label": "Hold quiet and let Mara reclaim the conversation — step back physically, let her read the room",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "mechanical_spiritual": 0.1,
-            "concrete_abstract": -0.3
+            "concrete_abstract": -0.4
           },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "support"
+            "yield",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -242,18 +250,17 @@
           "emergenceId": null
         },
         {
-          "label": "Speak to Pell directly — tell her what the wells mean for her daughter's safety, not just for Thursday's meeting",
+          "label": "Acknowledge the misstep plainly to Pell — 'I said it wrong. Let me say it again, the way it deserved to be said.'",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "mechanical_spiritual": 0.1,
-            "concrete_abstract": -0.4
+            "concrete_abstract": -0.3
           },
           "difficulty": 15,
           "intentTags": [
             "persuade",
-            "honest",
-            "direct"
+            "careful",
+            "honest"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -262,49 +269,48 @@
           "emergenceId": null
         },
         {
-          "label": "Let Aevi speak — let Pell see what it is, and let it name the well-signal in its own words",
-          "attribute": "mental",
+          "label": "Ask Pell what she needs to feel certain her daughter is safe — not permission, not the meeting, just: what would it take",
+          "attribute": "social",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.4,
-            "concrete_abstract": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "unusual",
-            "witness",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara quietly whether Thursday can be moved earlier — and what it would take",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "axes": {
             "concrete_abstract": -0.5
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "plan",
-            "urgent",
+            "listen",
+            "help",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say nothing more — open your bark and show Pell the pale seedling and crystalline residue from your inventory, letting the evidence speak where words failed",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "show",
+            "careful",
+            "evidence"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
+        "health": -4,
+        "energy": -5,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -314,83 +320,78 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "note": "Usnea delivered the well-contamination finding to Mara Wells mid-approach to Pell — stakes of Thursday's meeting have visibly shifted; Pell is now listening differently."
+          "note": "Usnea's direct appeal to Pell about the wells curdled into protective anger — Pell has not refused, but the approach has made permission harder to secure; Mara holds the thread now."
         }
       ],
       "scene": {
-        "setting": "East market lane, Millbrook — just past first light, canvas stall awnings still damp with dew; Pell's cord-and-hemp stall at the corner of the row, rope samples across her arm; Mara Wells standing at the awning's edge; Usnea arrived at Mara's shoulder mid-conversation.",
+        "setting": "East market lane, Millbrook — just past first light; Pell's cord-and-hemp stall at the corner of the row, canvas awning still damp with dew. The lane is almost empty but a cart has stopped behind Usnea, the driver deliberately not watching.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Has gone still — hand dropped to her side after Usnea named the wells; turned back to Pell with shorter, truer words than she had planned"
+            "state": "Gone very still at Usnea's elbow — reading Pell's face, not yet speaking, waiting to see if there is ground to recover"
           },
           {
             "name": "Pell",
-            "state": "Compact woman, coiled rope across one arm, grip shifted — she hasn't said yes, but she is listening in a different way now"
+            "state": "White-knuckled grip on the coiled rope, face closed in parental anger — not gone, but not open; the question of whether she will walk away hangs in the air"
           }
         ],
         "objects": [
-          "Pell's cord-and-hemp stall — canvas awning, rope samples laid across the counter",
-          "Coiled rope samples — in Pell's arm, functioning as an unconscious shield",
-          "East market lane — mostly empty at this hour, a wagon creaking somewhere up the lane"
+          "Pell's cord-and-hemp stall — canvas awning, rope samples on the counter",
+          "Coiled rope — in Pell's arm, gripped hard",
+          "East market lane — nearly empty, a stopped cart behind Usnea",
+          "Pale Turnip Seedling (in Usnea's inventory — visible if produced)",
+          "Crystalline Residue Pinch (in Usnea's inventory — wrapped in ration-paper)"
         ],
         "threads": [
-          "Pell has not yet given permission for Sela to testify — the conversation is at a pivot, not a conclusion",
-          "The well-contamination finding is now in Mara's hands — she is recalibrating the urgency of Thursday's presentation",
-          "Whether Thursday can be moved earlier is an open question",
-          "Sela's whereabouts since her dawn visit to the dock remain unknown"
+          "Pell's anger is live — she has not left, but she has not softened; permission for Sela is further away than a moment ago",
+          "Mara is watching for an opening to re-enter the conversation",
+          "The cart driver behind Usnea is an unintended witness",
+          "Whether Thursday's meeting can be moved earlier remains unaddressed"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "note": "Received the well-contamination finding from Usnea mid-approach to Pell — went still, dropped her careful social gesture, pivoted to a shorter and truer ask of Pell",
-          "learned": [
-            "The six-fold pulse has reached Millbrook's drinking wells — the village water supply is inside the system's reach"
-          ],
-          "skillsObserved": [
-            "rapid recalibration under pressure",
-            "plain speech when stakes change"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At Pell's cord stall, east market — mid-conversation, pivoting after the well news; Thursday's stakes now higher than she prepared for"
-        },
-        {
-          "op": "meet",
           "npcId": "pell",
           "name": "Pell",
           "role": "Cord-and-hemp seller, east market; Sela's mother",
-          "description": "Compact woman with rope samples perpetually across one arm — the practiced stance of someone who works with her hands and guards her daughter with the same deliberate grip.",
-          "note": "Found at her stall before it properly opened — was holding Mara at arm's length until Usnea arrived and named the wells; grip on the rope samples shifted; she is now listening differently",
+          "note": "Usnea named Sela's danger aloud before Pell was ready — her listening posture curdled from cautious-open to protective-closed; white-knuckled on the rope, face shut down. Has not walked away.",
           "learned": [
-            "Sela hears something others are beginning to feel",
-            "The pulse has reached the drinking wells the whole village draws from"
+            "Usnea believes the six-fold pulse runs directly under Millbrook's drinking wells — the wells Sela and the whole village use"
           ],
           "skillsObserved": [
-            "guarded listening",
-            "reading a room's shift"
+            "protective instinct under pressure"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": -1,
           "status": "active",
-          "statusNote": "At her cord stall, east market, dawn Day 6 — Mara's ask shifted after Usnea named the wells; Pell has not yet decided"
+          "statusNote": "At her cord stall, east market lane — angry and frightened, grip tight on the rope; permission for Sela's testimony not given, conversation on a knife-edge"
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Millbrook water-policy coordinator and elder",
+          "note": "Gone still at Usnea's elbow after the misstep — reading Pell's face, waiting for an opening, not yet moving to recover the thread.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At Pell's stall, east market — standing still beside Usnea, watching Pell, ready to re-enter when the ground allows"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Usnea delivered the well-contamination finding to Mara Wells at Pell's east market stall, Day 6 dawn — Mara now knows the pulse reaches the village drinking wells; Pell heard it too.",
-          "subjectId": "mara-wells"
+          "text": "Usnea's direct appeal to Pell about Sela's danger landed as protective anger, not persuasion — Pell's permission for Thursday is now harder to secure, and the conversation must be recovered.",
+          "subjectId": "pell"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Day 6 dawn: the well-contamination finding delivered at Pell's cord stall — Mara and Pell both present when named; Pell's permission for Sela's testimony still pending at this location.",
+          "note": "Usnea's direct appeal about the wells to Pell at her cord stall misfired — a cart driver was an unintended witness to the exchange; Pell's anger is now part of this stall's social memory.",
           "subPlace": {
             "name": "Pell's Cord Stall — East Market",
-            "note": "Pell's canvas stall at the corner of the east market lane — rope samples, hemp cord; Mara's approach for Sela's permission happening here, Day 6 dawn.",
+            "note": "Scene of Usnea's failed direct appeal — Pell's permission for Sela still unresolved; a bystander witnessed the moment.",
             "visited": true
           }
         }
@@ -400,7 +401,7 @@
           "topic": "sela-and-pell",
           "label": "Sela and Pell",
           "kind": "person",
-          "fact": "Day 6 dawn: Pell encountered directly at her east market stall — Mara's approach was underway; the well-contamination news shifted Pell's listening posture. Permission not yet given.",
+          "fact": "Day 6 dawn: Usnea's direct appeal naming Sela's danger out loud before Pell was ready triggered protective anger — Pell's grip went white-knuckled, face closed. She has not walked away, but permission is now harder, not easier.",
           "links": [
             "contamination-evidence-for-the-elders",
             "millbrook",
@@ -413,34 +414,36 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "East market lane, Millbrook — just past first light, canvas stall awnings still damp with dew; Pell's cord-and-hemp stall at the corner of the row, rope samples across her arm; Mara Wells standing at the awning's edge; Usnea arrived at Mara's shoulder mid-conversation.",
+      "setting": "East market lane, Millbrook — just past first light; Pell's cord-and-hemp stall at the corner of the row, canvas awning still damp with dew. The lane is almost empty but a cart has stopped behind Usnea, the driver deliberately not watching.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Has gone still — hand dropped to her side after Usnea named the wells; turned back to Pell with shorter, truer words tha"
+          "state": "Gone very still at Usnea's elbow — reading Pell's face, not yet speaking, waiting to see if there is ground to recover"
         },
         {
           "name": "Pell",
-          "state": "Compact woman, coiled rope across one arm, grip shifted — she hasn't said yes, but she is listening in a different way n"
+          "state": "White-knuckled grip on the coiled rope, face closed in parental anger — not gone, but not open; the question of whether "
         }
       ],
       "objects": [
-        "Pell's cord-and-hemp stall — canvas awning, rope samples laid across the counter",
-        "Coiled rope samples — in Pell's arm, functioning as an unconscious shield",
-        "East market lane — mostly empty at this hour, a wagon creaking somewhere up the "
+        "Pell's cord-and-hemp stall — canvas awning, rope samples on the counter",
+        "Coiled rope — in Pell's arm, gripped hard",
+        "East market lane — nearly empty, a stopped cart behind Usnea",
+        "Pale Turnip Seedling (in Usnea's inventory — visible if produced)",
+        "Crystalline Residue Pinch (in Usnea's inventory — wrapped in ration-paper)"
       ],
       "threads": [
-        "Pell has not yet given permission for Sela to testify — the conversation is at a pivot, not a conclusion",
-        "The well-contamination finding is now in Mara's hands — she is recalibrating the urgency of Thursday's presentation",
-        "Whether Thursday can be moved earlier is an open question",
-        "Sela's whereabouts since her dawn visit to the dock remain unknown"
+        "Pell's anger is live — she has not left, but she has not softened; permission for Sela is further away than a moment ago",
+        "Mara is watching for an opening to re-enter the conversation",
+        "The cart driver behind Usnea is an unintended witness",
+        "Whether Thursday's meeting can be moved earlier remains unaddressed"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [
@@ -455,14 +458,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Dock child identified as Sela; mother is Pell, east market cord-and-hemp stall. Pell's permission needed before Thursday — next step is Mara sending proper word to the family.",
         "Sela's name and Pell's east-market stall passed to Mara Wells tonight; Mara will approach Pell at dawn before the stall opens.",
         "Mara has laid out Thursday's structure: physical evidence first (seedling, vial, residue), then Usnea's account, then Aevi, then the six-fold pattern, then Sela last. The weak point named: no answer y",
         "Day 5 dawn: Usnea confirms the pulse is now in the Echo River current itself — the system has expanded overnight. Sela was recently at the dock but has left; Pell's permission still unresolved.",
         "Day 5 dawn: six-fold pulse confirmed steady and 'cleaner' — more declarative than escalating. The system is not accelerating; it is settling into presence. Aevi's read: not a question anymore, a state",
         "Day 5 dawn: six-fold pulse traced upstream past the mill weir — extends at least 300 paces and crosses the weir into the mill-race. Aevi confirms it was only under the dock four days ago. The system i",
         "Day 5 dawn: six-fold pulse traced south to Millbrook's drinking wells — the system's reach now encompasses the village water supply. The dock is a middle, not an endpoint. New evidence that changes th",
-        "Usnea delivered the well-contamination finding to Mara Wells mid-approach to Pell — stakes of Thursday's meeting have visibly shifted; Pell is now listening differently."
+        "Usnea delivered the well-contamination finding to Mara Wells mid-approach to Pell — stakes of Thursday's meeting have visibly shifted; Pell is now listening differently.",
+        "Usnea's direct appeal to Pell about the wells curdled into protective anger — Pell has not refused, but the approach has made permission harder to secure; Mara holds the thread now."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -614,7 +617,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Holds the filled vial now. Watching Usnea's question about the meeting time with readiness.",
         "[d1] Confirmed the elder meeting: Thursday at the common house, last of afternoon light — two days. Tucked the filled vial into her belt pouch. Named the challenge plainly: two days to ",
         "[d1] Sent Usnea off to walk the arm with a single deliberate nod — 'go and come back with something.' Not present at the seep; will receive this finding tomorrow.",
         "[d3] Met Usnea at the path terminus on return from the vent — read the return correctly before a word was spoken; 'You have something' is her first sentence",
@@ -623,7 +625,8 @@
         "[d5] Received Sela's name and Pell's stall location from Usnea tonight; committed to approaching Pell at dawn before the east market opens.",
         "[d5] Laid out Thursday's full evidence order without hesitation: physical evidence first for Councilor Dresh, then Usnea's account, Aevi, the six-fold pattern geometry, and Sela last. N",
         "[d5] Received Usnea's thanks and returned to Josen without ceremony — the plan is set, nothing more to say tonight.",
-        "[d6] Received the well-contamination finding from Usnea mid-approach to Pell — went still, dropped her careful social gesture, pivoted to a shorter and truer ask of Pell"
+        "[d6] Received the well-contamination finding from Usnea mid-approach to Pell — went still, dropped her careful social gesture, pivoted to a shorter and truer ask of Pell",
+        "[d6] Gone still at Usnea's elbow after the misstep — reading Pell's face, waiting for an opening, not yet moving to recover the thread."
       ],
       "knownFacts": [
         "The crystalline residue is pre-Transition, nanite-structured, light-holding",
@@ -648,7 +651,7 @@
         "locationId": "millbrook",
         "day": 6
       },
-      "statusNote": "At Pell's cord stall, east market — mid-conversation, pivoting after the well news; Thursday's stakes now higher than she prepared for"
+      "statusNote": "At Pell's stall, east market — standing still beside Usnea, watching Pell, ready to re-enter when the ground allows"
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -740,20 +743,23 @@
         "locationId": "millbrook",
         "day": 6
       },
-      "relationship": 1,
+      "relationship": 0,
       "history": [
-        "[d6] Found at her stall before it properly opened — was holding Mara at arm's length until Usnea arrived and named the wells; grip on the rope samples shifted; she is now listening diff"
+        "[d6] Found at her stall before it properly opened — was holding Mara at arm's length until Usnea arrived and named the wells; grip on the rope samples shifted; she is now listening diff",
+        "[d6] Usnea named Sela's danger aloud before Pell was ready — her listening posture curdled from cautious-open to protective-closed; white-knuckled on the rope, face shut down. Has not w"
       ],
       "knownFacts": [
         "Sela hears something others are beginning to feel",
-        "The pulse has reached the drinking wells the whole village draws from"
+        "The pulse has reached the drinking wells the whole village draws from",
+        "Usnea believes the six-fold pulse runs directly under Millbrook's drinking wells — the wells Sela and the whole village use"
       ],
       "skillsObserved": [
         "guarded listening",
-        "reading a room's shift"
+        "reading a room's shift",
+        "protective instinct under pressure"
       ],
       "status": "active",
-      "statusNote": "At her cord stall, east market, dawn Day 6 — Mara's ask shifted after Usnea named the wells; Pell has not yet decided",
+      "statusNote": "At her cord stall, east market lane — angry and frightened, grip tight on the rope; permission for Sela's testimony not given, conversation on a knife-edge",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 6
@@ -764,7 +770,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d4] The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting d",
         "[d4] Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'",
         "[d4] Sela named herself at the dock's lowest plank — she is Pell's daughter; Pell works the east market cord stall. Sela's identity is now known.",
         "[d5] Usnea passed Sela's name and Pell's stall to Mara Wells at the common house side entrance on the night of Day 4 — Mara committed to the dawn approach.",
@@ -775,7 +780,8 @@
         "[d5] Day 5 dawn: Sela's heel-print in the dock mud — she came before Usnea and left. The six-fold pulse confirmed steady and cleaner in the current at root-depth; Aevi held its full morning ring over the w",
         "[d5] Day 5 dawn: six-fold pulse traced upstream past the old stone mill weir — confirmed in both mill-race and main channel, at least 300 paces from the dock. The pulse does not stop at the weir.",
         "[d5] Day 5 dawn: six-fold pulse confirmed reaching Millbrook's drinking wells via south bank loam and buried clay pipes — the village water supply is inside the system's reach. Aevi named the dock as a mid",
-        "[d6] Day 6 dawn: the well-contamination finding delivered at Pell's cord stall — Mara and Pell both present when named; Pell's permission for Sela's testimony still pending at this location."
+        "[d6] Day 6 dawn: the well-contamination finding delivered at Pell's cord stall — Mara and Pell both present when named; Pell's permission for Sela's testimony still pending at this location.",
+        "[d6] Usnea's direct appeal about the wells to Pell at her cord stall misfired — a cart driver was an unintended witness to the exchange; Pell's anger is now part of this stall's social memory."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -837,7 +843,7 @@
           "name": "Pell's Cord Stall — East Market",
           "day": 6,
           "visited": true,
-          "note": "Pell's canvas stall at the corner of the east market lane — rope samples, hemp cord; Mara's approach for Sela's permissi"
+          "note": "Scene of Usnea's failed direct appeal — Pell's permission for Sela still unresolved; a bystander witnessed the moment."
         }
       }
     },
@@ -904,7 +910,7 @@
     "wits": 4
   },
   "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1441,7 +1447,8 @@
         "facts": [
           "[d4] The dock child is named Sela. Her mother Pell sells cord and hemp at the east market stall. Sela predicts Pell will refuse — her tone suggests experience, not defiance. Pell's permission gates Sela's ",
           "[d5] Mara Wells now knows Sela's name and Pell's stall — she will approach Pell at dawn before the east market opens to request permission for Thursday. The obstacle is delegated to the person best placed ",
-          "[d6] Day 6 dawn: Pell encountered directly at her east market stall — Mara's approach was underway; the well-contamination news shifted Pell's listening posture. Permission not yet given."
+          "[d6] Day 6 dawn: Pell encountered directly at her east market stall — Mara's approach was underway; the well-contamination news shifted Pell's listening posture. Permission not yet given.",
+          "[d6] Day 6 dawn: Usnea's direct appeal naming Sela's danger out loud before Pell was ready triggered protective anger — Pell's grip went white-knuckled, face closed. She has not walked away, but permission"
         ],
         "links": [
           "contamination-evidence-for-the-elders",
@@ -1481,7 +1488,8 @@
     "uses": {
       "prism_sight": 5,
       "light_bending": 6,
-      "hearthbinding": 2
+      "hearthbinding": 2,
+      "old_roads": 1
     },
     "coActivations": {},
     "aspirations": [
@@ -1570,6 +1578,12 @@
       "text": "Usnea delivered the well-contamination finding to Mara Wells at Pell's east market stall, Day 6 dawn — Mara now knows the pulse reaches the village drinking wells; Pell heard it too.",
       "day": 6,
       "subjectId": "mara-wells"
+    },
+    {
+      "id": "pell",
+      "text": "Usnea's direct appeal to Pell about Sela's danger landed as protective anger, not persuasion — Pell's permission for Thursday is now harder to secure, and the conversation must be recovered.",
+      "day": 6,
+      "subjectId": "pell"
     }
   ],
   "precursorAccess": [],

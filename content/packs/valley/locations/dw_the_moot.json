@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1, "id": "dw_the_moot", "name": "The Standing Moot", "regionId": "manifest_domain", "communityId": "domain.deepwood",
+  "poleIntensity": {"life": 0.7, "spiritual": 0.6, "time": 0.6, "peace": 0.5},
+  "spectrum": {"death_life": 0.7, "mechanical_spiritual": 0.6, "space_time": 0.6, "violence_peace": 0.5},
+  "tags": ["manifest-domain", "ent", "deepwood", "sacred", "slow-time", "council"],
+  "connections": ["dw_the_thinedge"],
+  "seedFiction": "the ENT race manifested",
+  "nativeLogic": "The heart-grove where the eldest Ents convene. Slow-time runs DEEP: a single Moot can take a human lifetime to conclude, a single speech a full day. To petition the Moot is to commit to patience beyond human endurance \u2014 unless you're an Ent, to whom this is simply how decisions are made. The Rootbound-vs-Walker argument is decided here, glacially. GM enforces slow-time as law: nothing is rushed, bribed, or deceived at speed; haste is answered by the grove itself.",
+  "descriptionSeed": "The oldest grove \u2014 Ents vast as hills standing in a ring that has held its shape for centuries, their voices a slow grinding music that takes a day to finish a thought. Here the Deepwood decides what it will be: sealed against humankind, or woven into the world. The very air is patient. A human could grow old waiting for a verdict; an Ent settles in and adds their voice to a debate their grandparents began.",
+  "loreRefs": ["manifest_locals", "domain_detail_and_connections", "greater_arcs"],
+  "encounterFlavor": "Glacial deliberation \u2014 an argument centuries old, a verdict that will outlive everyone waiting for it, the profound patience of beings who think in ages, the rare weight of being allowed to add your voice.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Petition the Moot to keep the Green Accord \u2014 the Green Schism arc's heart; only an Ent, or a human of monstrous patience, can bear the pace to argue it, and winning turns the Rootbound tide",
+    "The Rootbound are close to a sealing verdict; finding what would move even one elder Walker-ward is the long game",
+    "An Ent-character can claim standing at the Moot by lineage or deed \u2014 earning the right to speak is its own arc"
+  ],
+  "map": {"x": 50, "y": 300}
+}

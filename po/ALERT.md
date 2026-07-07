@@ -72,6 +72,35 @@ SNG-BATCH-4 = SNG-010C item evolution (content READY) + SNG-015 variable power (
 3. **SNG-016** — 12-axis skill-breadth: Aevi delivers a DESIGN PROPOSAL for Erik's direction first; no authoring until the axis map is agreed. Comes after the batches.
 Rationale: world-liveliness first (independent, testable, combat gap closed), then one coherent progression/ability arc, then the breadth rethink done deliberately.
 
+## SNG-017 — Character Creation overhaul (world-scale) + SNG-018 Romance (Erik 2026-07-07)
+
+Content for both is largely authorable/authored; the ENGINE pieces are specced here for CCode. Creation is the concrete ask (screen is behind the expansion); romance is likely-engine.
+
+### SNG-017 — Creation screen catches up to the world
+The current creation block (app.js ~387–525) is behind: hardcoded origin=valley, 3 origins, only harmonic/radiant/valley_craft abilities, always "Begin in Millbrook", no talents, no Reach traditions, no will-channel. Update:
+1. **Origin = area-of-the-world, not just Valley.** Offer origins across the world's detailed areas: Valley of Echoes (unaligned start, the gentle basin) PLUS at least the built Reaches as origins (Quickwood/Palelands, the Riven Marches, the Unspooling, the Somatic Reaches, Gearlands/Numinous, Umbral/Radiant). Origin sets: starting area/location (NOT always Millbrook — follow origin), starting craft access (a Marcher starts with the Edge/Stillcraft; a Rootkin with Vivimancy/Palework; a Valley-native with the folk systems), and starting ability count. Data-drive this from a new `content/packs/.../origins.json` (Aevi authors) so origins aren't hardcoded.
+2. **Innate talent step (SNG content ready: innate_talents.json).** Add a creation step: roll or choose one innate talent (weighted heavily to minor). Store on character.talent. Show its effect + notFor. Magician-class talents rare/flagged.
+3. **Ability pool reflects the origin's tradition** (not just the 3 Valley systems) — pull from whatever powerSystem(s) the chosen origin grants, using the existing levelReq<=1 filter; group by tradition with Tier badges (already have tierOf).
+4. **Optional will-channel affinity (will_expression_modality.json):** a light pick of a native channel (spoken default / born-inscriber / born-direct) that flavors early play; can defer to a v2 if scope tight.
+5. Keep the bio/story step and the ✦ weave. Update its hint copy: "the valley" → the chosen area.
+**Content Aevi owes:** `origins.json` (origin defs: area, startLocation, granted powerSystems, starting ability count, flavor). Then the screen data-drives from it.
+**Smoke:** each origin starts in the right area with the right craft pool + talent; Valley origin unchanged in feel; no hardcoded Millbrook for non-Valley origins.
+
+### SNG-018 — Romance / intimacy track (engine)
+Erik: "the game might need some romance too (might be engine)." It is — a relationship track beyond the companion bond.
+- **Model:** extend the existing relationship/reputation system with a romance track on eligible NPCs/companions: an affinity that grows through chosen interactions (not just quest completion), gated by consent/character-fit, with stages (rapport → warmth → attachment → committed). Reuse bond machinery where possible; romance is a distinct track that can co-exist with a platonic bond.
+- **Content-driven eligibility:** a `romanceable` flag + orientation/fit hints on NPC/companion records (Aevi authors which of the cast are romanceable and how they read). NOT everyone; authored deliberately.
+- **GM contract:** romance is player-initiated and consent-respecting; the GM never forces it, reads disinterest, and keeps register appropriate to the surface (claude.ai stays tasteful/fade-to-black; explicit content is out of scope for this surface). Adult, chosen, and declinable always.
+- **Tie-ins:** a committed romance can shift a companion's loyalty model (see recruitment: bond beyond pay/purpose); can hook world-arcs (the Redliner/Stillholder lovers at the Marchward; Vesper; Quill).
+- **Engine needs:** romance-track state per NPC, interaction hooks that advance it, stage gates, and a consent/interest check the GM honors. Reuses relationship + bond + reputation engines.
+- **Smoke:** romance advances only through chosen consenting interaction; disinterested/ineligible NPCs never advance; a committed romance persists and reads in later scenes; register stays surface-appropriate.
+**Content Aevi owes:** romanceable flags + read-hints on the eligible cast; a few authored romance arcs (the Marchward lovers as a template).
+
+### Sequencing
+Both are medium specs. Suggest: money+Game+recruitment spec (still pending) + SNG-017 creation + SNG-018 romance can form a "systems" batch (SNG-BATCH-6) once Erik greenlights turning from content to systems — they share the relationship/economy machinery. Aevi authors origins.json + romanceable flags as the content half meanwhile.
+
+---
+
 ## SNG-BATCH-4 (forming, builds AFTER SNG-BATCH-3) — Item evolution + Variable power
 
 ### SNG-010C — Item evolution (CONTENT READY, build)

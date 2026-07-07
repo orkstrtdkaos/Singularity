@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "innate_talents",
+  "kind": "origin_layer",
+  "note": "Every character is born with ONE innate talent — a knack the substrate wrote into them at their cosmic address, present from birth, not learned. Most are small; a rare few are enormous (Magician-class, in the Xanth sense). Rolled/chosen at creation, independent of power-system. A talent is a permanent expression of the character's own pole-signature — it is WHO THEY ARE made a small magic. Inspired by Xanth (a talent per person, trivial to world-shaking). The rare great talents are hooks for whole arcs. Authored by Aevi (PO), from Erik's Xanth framing.",
+
+  "principle": "The substrate wrote something into you before you could choose. Your talent is your coordinate made flesh — the one thing the world does FOR you without asking. Small talents flavor a life; great talents bend one. A player does not pick their power-system at birth, but they are born with this. It cannot be unlearned, only grown into or wasted.",
+
+  "tiers": {
+    "minor": "A small, specific, often situational knack. Charming but rarely decisive. The vast majority of people. (e.g. 'milk never sours in your hands', 'you always know which way is north', 'small animals trust you instantly'.)",
+    "notable": "A useful, repeatable knack with real edges. Shapes a livelihood or a reputation. (e.g. 'you can tell when someone lies', 'things you mend stay mended longer', 'you never get lost underground'.)",
+    "major": "A powerful talent that defines a person and draws notice. Uncommon. (e.g. 'you can calm any single creature or person for a breath', 'you always land unhurt', 'you can find any one lost thing once per day'.)",
+    "magician": "World-bending. Rare enough to be legend. Draws the attention of powers. A magician-class talent is a whole arc by itself. (e.g. 'what you truly promise, the world enforces', 'you can un-happen the last few seconds, once, at a terrible cost', 'living things grow toward you')."
+  },
+
+  "sampleTalents": [
+    {"id": "t_truesense", "name": "Truesense", "tier": "notable", "poleAffinity": ["truth"], "effect": "You feel it, a cold certainty, when someone speaks a deliberate lie to your face. Not what the truth is — only that this was a lie.", "notFor": "Self-deception, written lies, or the convincing-lie-of-true-pieces (the Cathedral of Convincing defeats it)."},
+    {"id": "t_surefoot", "name": "Surefoot", "tier": "minor", "poleAffinity": ["order","body"], "effect": "You do not fall. Ice, ledge, rope, deck — your feet keep you. Small, until the moment it isn't."},
+    {"id": "t_greenfinger", "name": "Greenfinger", "tier": "minor", "poleAffinity": ["life"], "effect": "Things grow better in your care. A folk-shadow of Vivimancy; enough to feed a family, not to heal a wound."},
+    {"id": "t_beastcalm", "name": "Beast-Calm", "tier": "major", "poleAffinity": ["peace","life"], "effect": "Once per scene you can still a single animal or beast into calm by meeting its eye — even a Glade-touched or maddened one, for a breath.", "notFor": "People; commanding, only calming; the calm is a breath, not a leash."},
+    {"id": "t_lasthope", "name": "Last Hope", "tier": "major", "poleAffinity": ["life","peace"], "effect": "When you should die, once, you don't — you wake later, spent and scarred, having somehow lived. Cannot be relied on; will not warn you when it's used up."},
+    {"id": "t_promisebound", "name": "Promise-Bound", "tier": "magician", "poleAffinity": ["truth","order"], "effect": "A promise you make in full earnest, the world itself enforces — on you as hard as on anyone. You cannot break a true promise; neither, once given to you, can they. Legendary, and a cage as much as a power.", "notFor": "Casual words (only full-earnest promises bind); escaping your own oath; forcing someone to promise."},
+    {"id": "t_unhappen", "name": "The Second Chance", "tier": "magician", "poleAffinity": ["time"], "effect": "Once — perhaps once in a life — you can un-happen the last several seconds and choose again, at a cost the world extracts elsewhere and later. You never know if it's still available until you reach for it.", "notFor": "Repeated use; undoing more than moments; knowing the price before you pay it."},
+    {"id": "t_drawn_life", "name": "The Drawn", "tier": "magician", "poleAffinity": ["life","spiritual"], "effect": "Living things — plants, beasts, in time even people — orient toward you, grow toward you, are eased near you. You are a small sun to the living. Powers notice. The Glade would want to know you; so would things that hunt the living.", "notFor": "Turning it off; it is always on, and being a beacon is not always safe."}
+  ],
+
+  "buildImplication": "Creation gains a talent step: roll or choose (weighted heavily toward minor). A character's talent should hook their pole-signature and can seed their arc — a magician-class talent is a reason powers seek them out (ties to the legends + world arcs). Talents are permanent, cannot be spent as skill points, and grow in expression as the character grows into their coordinate. The full talent list is open-ended content Aevi keeps authoring."
+}

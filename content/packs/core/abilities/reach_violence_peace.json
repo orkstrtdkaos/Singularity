@@ -92,6 +92,194 @@
         "bind",
         "shield"
       ]
+    },
+    {
+      "id": "read_the_fight",
+      "name": "Read the Fight",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The shape of the coming violence, seen a beat early.",
+      "description": "Read a fight's flow, a foe's next move, the moment before it breaks.",
+      "notFor": "Winning it for you; non-combat reads.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Read the Fight",
+          "grants": "See a fight's shape and a foe's tell a beat early; know when violence is about to erupt.",
+          "cannot": "Reads, not wins; the truly wild are harder to call."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
+    },
+    {
+      "id": "read_the_room",
+      "name": "Read the Room",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "Every unspoken tension in a room, felt at once.",
+      "description": "Sense a room's tensions, alliances, and the true temperature under the words.",
+      "notFor": "Resolving it (that's Stillcraft); combat.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Read the Room",
+          "grants": "Read the social tensions and true feeling in a gathering; find who's about to break the peace.",
+          "cannot": "Reads, not calms; the disciplined mask well."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
+    },
+    {
+      "id": "disarm",
+      "name": "Disarming Strike",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": -0.3,
+        "body_mind": -0.1
+      },
+      "functions": [
+        "strike",
+        "break"
+      ],
+      "narrationHints": "The blade leaves the hand before the hand knows it.",
+      "description": "End a threat without ending a life — disarm, disable, drop a foe clean. The Edge's mercy.",
+      "notFor": "Killing (this spares); many foes at once.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Disarming Strike",
+          "grants": "Disarm or disable a single foe without killing them.",
+          "cannot": "One foe; the desperate keep coming."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
+    },
+    {
+      "id": "calm_word",
+      "name": "The Calming Word",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.3
+      },
+      "functions": [
+        "bind",
+        "heal"
+      ],
+      "narrationHints": "A voice pitched just so, and the raised fist lowers.",
+      "description": "Talk a single person or small moment down from the edge of violence — folk-Stillcraft.",
+      "notFor": "Committed violence; crowds.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Calming Word",
+          "grants": "De-escalate one person or a small tense moment before it turns violent.",
+          "cannot": "Small scale; the set-on-blood pass through it."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
+    },
+    {
+      "id": "the_stand",
+      "name": "The Stand",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": -0.3,
+        "body_mind": -0.2
+      },
+      "functions": [
+        "shield"
+      ],
+      "narrationHints": "You do not move, and so the line holds.",
+      "description": "Hold a position or protect another under assault — the guardian's discipline.",
+      "notFor": "Winning ground (this holds it); ranged threats.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Stand",
+          "grants": "Stand firm protecting a spot or person; absorb an assault and keep the line.",
+          "cannot": "Holds, doesn't advance; overwhelming force still breaks through."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
+    },
+    {
+      "id": "broker_truce",
+      "name": "Broker Truce",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.4,
+        "falsehood_truth": 0.2
+      },
+      "functions": [
+        "bind"
+      ],
+      "narrationHints": "Two enemies, one held agreement, weighted by your word.",
+      "description": "Broker a real truce between hostile parties, weighted by your standing — mid-tier Stillcraft.",
+      "notFor": "Forcing peace; a peace over an injustice holds only briefly.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Broker Truce",
+          "grants": "Get two hostile parties to a truce that holds while its terms hold.",
+          "cannot": "Only as true as its terms; injustice buried buys time, not peace."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
+    },
+    {
+      "id": "the_held_breath",
+      "name": "The Held Breath",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.0
+      },
+      "functions": [
+        "bind",
+        "shield"
+      ],
+      "narrationHints": "Violence and peace both at a knife's edge, held by will alone.",
+      "description": "The braid-craft: hold a moment where violence is total and peace is total in perfect tension — an armed grace.",
+      "notFor": "Resolving the tension (this holds it); rest.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Held Breath",
+          "grants": "Hold a razor's-edge standoff open — maximum threat, maximum restraint — by sheer presence.",
+          "cannot": "Holds, doesn't end; exhausting; one slip and it looses."
+        }
+      ],
+      "powerSystem": "reach_violence_peace",
+      "gated": "learned"
     }
   ]
 }

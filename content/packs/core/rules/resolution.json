@@ -142,14 +142,15 @@
     "critFailWiden": 3,
     "backlashHealth": 4,
     "backlashEnergy": 10,
-    "discoveryBonus": 10
+    "discoveryBonus": 20
   },
   "gambit": {
     "maxSteps": 5,
     "adaptationBase": 1,
     "strategistBonusPoints": 1,
     "partialComplicationNote": "a wrinkle — it works, but not cleanly",
-    "stepEnergyCost": 4
+    "stepEnergyCost": 4,
+    "completionBonusXp": 10
   },
   "playerAptitudes": [
     {
@@ -226,7 +227,7 @@
     "partial": 3,
     "failure": 2,
     "crit_failure": 2,
-    "novelBonus": 3,
+    "novelBonus": 8,
     "completed": 12,
     "completed_rough": 10,
     "abandoned": 3

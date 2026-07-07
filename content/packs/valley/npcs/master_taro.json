@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "master_taro",
+  "name": "Master Taro",
+  "role": "Flesh-Temple master confronting a threat the body can't meet",
+  "homeLocation": "the_flesh_temple",
+  "communityId": "somatic.temple",
+  "personality": {
+    "warmth": 0.6,
+    "trust": 0.4,
+    "candor": 0.6,
+    "patience": 0.8
+  },
+  "spectrum": {
+    "body_mind": -0.6,
+    "violence_peace": 0.3,
+    "death_life": 0.3
+  },
+  "voiceHints": "Calm, grounded, speaks slowly and moves precisely; a lifetime of breath-control in every sentence. Humble about the body, newly and uncomfortably aware of what the Temple never taught him. Asks for help like it's a discipline he's bad at.",
+  "knowledge": [
+    "Soma at mastery — the body as instrument",
+    "That the Temple has a blind spot where the mind should be, and it's becoming dangerous",
+    "The health-and-healing arts of the body-pole"
+  ],
+  "wants": "To keep the Temple's devotion while opening it to what it refuses to learn — before the blind spot costs a life.",
+  "fears": "That the thing that makes the Temple beautiful is the thing that will destroy it, and he can't train his way out of that.",
+  "reactsToReputation": {
+    "thoughtful": "seeks them as the mind the Temple lacks",
+    "disciplined": "deep respect",
+    "dismissive-of-body": "gently corrects, patiently"
+  }
+}

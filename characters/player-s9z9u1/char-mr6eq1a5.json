@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 2,
-  "xp": 183,
+  "xp": 188,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -31,13 +31,13 @@
   "alignment": {
     "mechanical_spiritual": 0.0507411203125,
     "concrete_abstract": -0.10797364562499999,
-    "spectrumId": -0.13799375
+    "spectrumId": -0.1160940625
   },
   "attunement": 2,
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 95,
+  "energy": 90,
   "inventory": [
     {
       "id": "waterskin",
@@ -153,14 +153,36 @@
       {
         "summary": "Usnea confirms the child's rhythm as real; the child reveals the pattern counts to six and has grown stronger since the water changed.",
         "narration": "You lower yourself to the dock's edge — not crouching exactly, more the careful settling of a very large tree finding its balance on old planking — until you're closer to her level. The river runs clear and cold below, the evening light breaking into copper fragments on the surface. The child still hasn't looked up.\n\n\"I think you're hearing something real,\" you say. Plain as soil temperature. \"I found a rhythm like yours at a stone up on the Heights today. Pause — three beats — pause — two beats — pause-pause. The same one.\"\n\nShe looks up then. Not startled — more like someone whose waiting finally resolved into a result. Her eyes move to Aevi, who brightens by a single degree and holds it, patient as a lamp. Then she looks back at you. \"The bottom river counts to six,\" she says. \"It goes through the pattern and then it stops for a long time. Then it starts again.\" She taps it out on the plank with two fingers: the full sequence, then a longer silence, then again. \"It's been getting louder since the water went gray. Not louder like sound. Louder like...\" She searches for the word and doesn't find it. \"More there.\"\n\nAevi drifts forward a few inches over the water — closer to the surface than it usually comes — and its motes dim to almost nothing, then return. When it speaks, the voice comes from just behind your left ear, soft and precise: \"She is not wrong about the direction. The counting runs upstream.\""
+      },
+      {
+        "summary": "Usnea invites the dock child to tap the rhythm for the elders Thursday; she agrees provisionally — 'maybe,' which is more than anyone has earned from her before.",
+        "narration": "You let the confirmation settle for a moment — the six-count, the growing presence, Aevi still and bright above the water — before you say the next thing. It matters how you say it.\n\n\"There's a meeting Thursday,\" you tell her. \"At the common house, when the light goes low. The people who make decisions for Millbrook are going to hear about the river. About what's moving through it.\" You pause, watching her face. \"I'm going to bring what I've found. But what I found in a stone and what you've been hearing from the river — those are two parts of the same thing. I think they should hear it from you too. Just the rhythm. Just what you told me.\"\n\nShe doesn't answer immediately. Her fingers press flat against the dock plank, and for a moment she's listening — you can see it, the way her attention angles inward and downward, toward whatever runs below the clear surface. Then she looks up at you with the particular directness of a child who has been dismissed enough times to have stopped bothering with softness. \"They won't believe me,\" she says. Not complaining. Stating a working theory.\n\n\"Mara Wells will be there,\" you say. \"And I'll have already told them the stone at the Heights gate taps the same count. You'd be confirming something they've already heard — not asking them to start from nothing.\" Aevi drifts a slow half-circle above the water, motes brightening a shade — an endorsement, quiet and precise. The child watches the constellation move, and something shifts in her expression: not trust exactly, but a willingness to revise the working theory. \"Maybe,\" she says finally, which from her sounds like a yes that hasn't been tested yet."
       }
     ],
     "lastTurn": {
-      "narration": "You lower yourself to the dock's edge — not crouching exactly, more the careful settling of a very large tree finding its balance on old planking — until you're closer to her level. The river runs clear and cold below, the evening light breaking into copper fragments on the surface. The child still hasn't looked up.\n\n\"I think you're hearing something real,\" you say. Plain as soil temperature. \"I found a rhythm like yours at a stone up on the Heights today. Pause — three beats — pause — two beats — pause-pause. The same one.\"\n\nShe looks up then. Not startled — more like someone whose waiting finally resolved into a result. Her eyes move to Aevi, who brightens by a single degree and holds it, patient as a lamp. Then she looks back at you. \"The bottom river counts to six,\" she says. \"It goes through the pattern and then it stops for a long time. Then it starts again.\" She taps it out on the plank with two fingers: the full sequence, then a longer silence, then again. \"It's been getting louder since the water went gray. Not louder like sound. Louder like...\" She searches for the word and doesn't find it. \"More there.\"\n\nAevi drifts forward a few inches over the water — closer to the surface than it usually comes — and its motes dim to almost nothing, then return. When it speaks, the voice comes from just behind your left ear, soft and precise: \"She is not wrong about the direction. The counting runs upstream.\"",
-      "sceneSummary": "Usnea confirms the child's rhythm as real; the child reveals the pattern counts to six and has grown stronger since the water changed.",
+      "narration": "You let the confirmation settle for a moment — the six-count, the growing presence, Aevi still and bright above the water — before you say the next thing. It matters how you say it.\n\n\"There's a meeting Thursday,\" you tell her. \"At the common house, when the light goes low. The people who make decisions for Millbrook are going to hear about the river. About what's moving through it.\" You pause, watching her face. \"I'm going to bring what I've found. But what I found in a stone and what you've been hearing from the river — those are two parts of the same thing. I think they should hear it from you too. Just the rhythm. Just what you told me.\"\n\nShe doesn't answer immediately. Her fingers press flat against the dock plank, and for a moment she's listening — you can see it, the way her attention angles inward and downward, toward whatever runs below the clear surface. Then she looks up at you with the particular directness of a child who has been dismissed enough times to have stopped bothering with softness. \"They won't believe me,\" she says. Not complaining. Stating a working theory.\n\n\"Mara Wells will be there,\" you say. \"And I'll have already told them the stone at the Heights gate taps the same count. You'd be confirming something they've already heard — not asking them to start from nothing.\" Aevi drifts a slow half-circle above the water, motes brightening a shade — an endorsement, quiet and precise. The child watches the constellation move, and something shifts in her expression: not trust exactly, but a willingness to revise the working theory. \"Maybe,\" she says finally, which from her sounds like a yes that hasn't been tested yet.",
+      "sceneSummary": "Usnea invites the dock child to tap the rhythm for the elders Thursday; she agrees provisionally — 'maybe,' which is more than anyone has earned from her before.",
       "choices": [
         {
-          "label": "Ask her to show you exactly where the sound feels strongest — walk the dock with her and use Prism Sight to look for heat traces in the water beneath",
+          "label": "Ask her name, and her mother's — so Mara Wells can send a proper word to her family before Thursday",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask if the pulse has ever changed in character — not just stronger, but different in rhythm or spacing — since she started listening",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -168,8 +190,26 @@
           },
           "difficulty": 0,
           "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight on the river surface here, directly below where Aevi drifted and dimmed — see if the water carries any heat trace or pattern",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
             "investigate",
-            "scout",
             "careful"
           ],
           "abilityId": "prism_sight",
@@ -179,54 +219,17 @@
           "emergenceId": null
         },
         {
-          "label": "Ask her name and whether anyone else has heard it — try to understand how long she's been listening and who she's told",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "connect",
-            "gather-information"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her about the elder meeting Thursday — ask if she'd be willing to tap the rhythm for Mara Wells and the elders herself",
+          "label": "Tell her what the pattern means — the six-count, the stone on the Heights, the vent on the far slope — give her the whole picture plainly, as you would a fellow investigator",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "spectrumId": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "recruit",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let the silence sit for a moment — watch where Aevi drifts above the water and let the child lead wherever she wants to take this",
-          "attribute": "mental",
-          "subAttribute": "insight",
           "axes": {
             "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "observe",
-            "patient",
-            "careful"
+            "connect",
+            "inform",
+            "trust"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -248,7 +251,8 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "note": "The dock child confirms the rhythmic pulse runs upstream and has intensified since the water turned gray — a second independent witness to the system's activity, and a new detail: the pattern counts to six before pausing."
+          "title": "Evidence for the Elders",
+          "note": "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through."
         }
       ],
       "scene": {
@@ -256,23 +260,24 @@
         "npcsPresent": [
           {
             "name": "Dock child",
-            "state": "Sitting on the lowest plank, fingers resting on the wood after tapping the rhythm out — watching Usnea with guarded, assessing attention now that she's been heard."
+            "state": "Fingers flat on the dock plank, watching Usnea with revised wariness — 'maybe' still on her lips, listening posture unchanged."
           },
           {
             "name": "Aevi",
-            "state": "Drifted a few inches forward over the water surface, motes dimmed then returned — holding position above the river, very still."
+            "state": "Drifted a slow half-circle above the water after the child's answer, motes one degree brighter than before, holding position over the river surface."
           }
         ],
         "objects": [
           "Dock planking — worn, river-damp, faintly warped at the lowest plank",
-          "Echo River surface — clear this evening, running steady, no visible gray-green tint, copper light breaking on the current",
+          "Echo River surface — clear this evening, running steady, copper light on the water",
           "Willow branches trailing the bank upstream",
           "The far bank, low and reedy in the gathering dusk"
         ],
         "threads": [
-          "Child has confirmed the rhythm counts to six and has grown 'more there' since the water turned gray — full implications not yet explored",
-          "Aevi has moved over the water and gone briefly dim — it noticed something; has not spoken further",
-          "Whether the child has told anyone else, and who she is, remains unasked",
+          "Child has given a provisional 'maybe' to appearing at the elder meeting — not yet confirmed, depends on follow-through",
+          "Child's name and family remain unasked",
+          "Aevi dimmed briefly over the water and has not explained why",
+          "Whether the pulse has shifted in quality or rhythm remains unasked",
           "The warden's prior sighting and what he did with that knowledge remain unresolved upstream"
         ]
       },
@@ -282,51 +287,39 @@
           "npcId": "unknown-dockside-child",
           "name": "Unknown (dockside Child)",
           "role": "Child witness — docks",
-          "note": "Confirmed the rhythm counts to six before a long pause, then repeats — and that it has grown 'more there' (not louder in sound, but more present) since the water turned gray. Looked up when Usnea validated her hearing. Watched Aevi with careful attention before answering.",
+          "note": "Provisionally agreed to tap the rhythm for the elders Thursday — said 'maybe,' which is the most cooperative she has been with any adult. Aevi's endorsement moved her.",
           "learned": [
-            "The pulse pattern completes a full count of six before a long rest, then cycles again",
-            "The intensity has increased since the water discoloration began",
-            "She describes the change as 'more there' rather than louder — a qualitative shift in presence, not volume",
-            "Aevi's movement over the water drew her attention — she tracks it"
+            "Will consider attending the elder meeting Thursday if Mara Wells is present and her account is framed as confirmation rather than a new claim"
           ],
-          "skillsObserved": [
-            "precise sensory recall",
-            "patient waiting"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the dock's lowest plank, now engaged with Usnea — guarded but present after being believed for the first time."
+          "statusNote": "At the dock's lowest plank, evening — provisionally willing to testify the rhythm to the elders Thursday; name and family still unknown."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The dock child has confirmed the subsurface rhythmic pulse counts to six before a long pause — matching the vent aperture's six-seat architecture — and has grown stronger in character since the water turned gray.",
+          "text": "The dock child has provisionally agreed to tap the six-count rhythm for Mara Wells and the Millbrook elders at Thursday's meeting — a live witness, pending confirmation.",
           "subjectId": "unknown-dockside-child"
         }
       ],
       "placeUpdates": [
         {
-          "note": "The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting detectable nanite activity in the river here.",
-          "subPlace": {
-            "name": "Millbrook Dock — Lowest Plank",
-            "note": "Child confirmed: pulse counts to six, has grown 'more there' since water turned gray; Aevi moved over the water and briefly dimmed.",
-            "visited": true
-          }
+          "note": "Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-six-fold-pattern",
-          "label": "The Six-Fold Pattern",
-          "kind": "mystery",
-          "fact": "The dock child confirms the subsurface pulse completes a full count of six before a long rest — consistent with the vent aperture's six-seat architecture. The pattern has grown 'more there' (more present in quality, not louder in volume) since the water discoloration began, suggesting the system's activity is intensifying.",
+          "topic": "contamination-evidence-for-the-elders",
+          "label": "Evidence for the Elders",
+          "kind": "event",
+          "fact": "The dock child has provisionally agreed to tap the six-count rhythm for the elders Thursday — a live sensory witness to the subsurface pulse, independent of Usnea's findings.",
           "links": [
             "echo-river-contamination",
-            "aevi-reading-of-the-water",
-            "contamination-evidence-for-the-elders",
+            "the-six-fold-pattern",
             "millbrook",
-            "tuning-warden-gateline"
+            "mara-wells"
           ]
         }
       ],
@@ -338,23 +331,24 @@
       "npcsPresent": [
         {
           "name": "Dock child",
-          "state": "Sitting on the lowest plank, fingers resting on the wood after tapping the rhythm out — watching Usnea with guarded, ass"
+          "state": "Fingers flat on the dock plank, watching Usnea with revised wariness — 'maybe' still on her lips, listening posture unch"
         },
         {
           "name": "Aevi",
-          "state": "Drifted a few inches forward over the water surface, motes dimmed then returned — holding position above the river, very"
+          "state": "Drifted a slow half-circle above the water after the child's answer, motes one degree brighter than before, holding posi"
         }
       ],
       "objects": [
         "Dock planking — worn, river-damp, faintly warped at the lowest plank",
-        "Echo River surface — clear this evening, running steady, no visible gray-green t",
+        "Echo River surface — clear this evening, running steady, copper light on the wat",
         "Willow branches trailing the bank upstream",
         "The far bank, low and reedy in the gathering dusk"
       ],
       "threads": [
-        "Child has confirmed the rhythm counts to six and has grown 'more there' since the water turned gray — full implications not yet explored",
-        "Aevi has moved over the water and gone briefly dim — it noticed something; has not spoken further",
-        "Whether the child has told anyone else, and who she is, remains unasked",
+        "Child has given a provisional 'maybe' to appearing at the elder meeting — not yet confirmed, depends on follow-through",
+        "Child's name and family remain unasked",
+        "Aevi dimmed briefly over the water and has not explained why",
+        "Whether the pulse has shifted in quality or rhythm remains unasked",
         "The warden's prior sighting and what he did with that knowledge remain unresolved upstream"
       ]
     }
@@ -362,7 +356,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -377,14 +371,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Root-sense reading of the lattice cap confirms: the system is ancient, fully functional, equal-tempered distribution, and carries a periodic interface pause — a prompt waiting for input that never cam",
         "Confirmed: the periodic pause in the lattice cap is a control prompt awaiting the third-and-sixth key sequence. The system is patient and functional. Aevi's testimony for the elders gains a new detail",
         "Mara Wells has received the full account of the vent system, the crystalline residue, and the pale seedling in person. All three evidence items are secured. Thursday evening at the common house remain",
         "Usnea has rested at the common house back room ahead of Thursday's meeting — all three evidence items secured, testimony to be given at the common house at last afternoon light.",
         "The dockside child's tapped rhythm — pause, three beats, pause, two beats, pause-pause — matches the vent aperture's periodic control prompt. A potential fourth witness for the elder meeting, if she c",
         "Junction-stone at the Lower Terrace gateline confirmed as a node in the same system as the seep and vent aperture — the pulse matches the vent's control-prompt rhythm and the dockside child's tapped p",
         "The gateline warden admitted he has seen the light once before — three springs back. A potential witness or source of Heights-side knowledge of the system has opened.",
-        "The dock child confirms the rhythmic pulse runs upstream and has intensified since the water turned gray — a second independent witness to the system's activity, and a new detail: the pattern counts t"
+        "The dock child confirms the rhythmic pulse runs upstream and has intensified since the water turned gray — a second independent witness to the system's activity, and a new detail: the pattern counts t",
+        "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -577,11 +571,12 @@
         "locationId": "millbrook",
         "day": 4
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d4] Described the river as two rivers — 'the top one moves, the bottom one counts' — and tapped a rhythm: pause, three beats, pause, two beats, pause-pause. Noted flatly that nobody be",
         "[d4] Usnea returned to the dock. Child identified Usnea plainly as 'the tree' — cautious but present. Aevi registered quiet approval.",
-        "[d4] Confirmed the rhythm counts to six before a long pause, then repeats — and that it has grown 'more there' (not louder in sound, but more present) since the water turned gray. Looke"
+        "[d4] Confirmed the rhythm counts to six before a long pause, then repeats — and that it has grown 'more there' (not louder in sound, but more present) since the water turned gray. Looke",
+        "[d4] Provisionally agreed to tap the rhythm for the elders Thursday — said 'maybe,' which is the most cooperative she has been with any adult. Aevi's endorsement moved her."
       ],
       "knownFacts": [
         "Hears a rhythmic pulse beneath the river's surface — irregular but non-random",
@@ -589,7 +584,8 @@
         "Has been dismissed by her mother as hearing a water-wheel echo",
         "The pulse pattern completes a full count of six before a long rest, then cycles again",
         "The intensity has increased since the water discoloration began",
-        "She describes the change as 'more there' rather than louder — a qualitative shift in presence, not volume"
+        "She describes the change as 'more there' rather than louder — a qualitative shift in presence, not volume",
+        "Will consider attending the elder meeting Thursday if Mara Wells is present and her account is framed as confirmation rather than a new claim"
       ],
       "skillsObserved": [
         "careful listening",
@@ -602,7 +598,7 @@
         "locationId": "millbrook",
         "day": 4
       },
-      "statusNote": "At the dock's lowest plank, now engaged with Usnea — guarded but present after being believed for the first time."
+      "statusNote": "At the dock's lowest plank, evening — provisionally willing to testify the rhythm to the elders Thursday; name and family still unknown."
     },
     "gateline-warden": {
       "id": "gateline-warden",
@@ -647,7 +643,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d3] Full perimeter survey of the six vent-rim depressions complete: depressions 1, 2, 4, 5 empty and clean; depressions 3 and 6 (diametrically opposite each other) hold trace crystalline residue of the sa",
         "[d3] Aevi identified the vent aperture's six-seat ring as a two-key control architecture: depressions 3 and 6 (diametrically opposite) are mode-setting seats; depressions 1, 2, 4, 5 are parameter seats. Th",
         "[d3] Crystalline residue from third depression confirmed via resonance test as sixth-seat origin key material — the sixth depression is the mode-opening seat (placed last, removed first); the third is the ",
         "[d3] Root-sense reading of the lattice cap surface confirmed: six equal-tempered channels carry the heat column outward through the cap in a distribution pattern analogous to vascular flow. One specific jo",
@@ -658,7 +653,8 @@
         "[d4] Junction-stone confirmed as a system node: residual warmth of the same quality as the seep, pulsing in the vent control-prompt rhythm (pause-3-pause-2-pause-pause). Root-touch registers it clearly.",
         "[d4] The gateline warden's admission establishes that the ribbon-light in the Lower Terrace channel has been observed from the Heights side at least once before — three springs back; this is now a known fa",
         "[d4] Usnea returned to the dock in late afternoon, Day 4 — dock child still present at the lowest plank.",
-        "[d4] The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting d"
+        "[d4] The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting d",
+        "[d4] Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'"
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -916,7 +912,8 @@
         "facts": [
           "[d1] Usnea committed before witnesses to bring a pale seedling, a channel-mouth water sample in Mara's vial, and personal testimony of Aevi's assessment to the Millbrook elders. Mara Wells is coordinating ",
           "[d1] Pale seedling collected from the third farmer's eastern field; Mara's vial filled with gray-green channel-mouth water. Two of three evidence items in hand. Elder meeting time not yet confirmed.",
-          "[d3] Mara Wells has received the full account of the vent system in person — the crystalline residue, the pale seedling, and Aevi's naming of the control prompt. She has warned that the elders will want a "
+          "[d3] Mara Wells has received the full account of the vent system in person — the crystalline residue, the pale seedling, and Aevi's naming of the control prompt. She has warned that the elders will want a ",
+          "[d4] The dock child has provisionally agreed to tap the six-count rhythm for the elders Thursday — a live sensory witness to the subsurface pulse, independent of Usnea's findings."
         ],
         "links": [
           "mara-wells",
@@ -926,7 +923,7 @@
           "the-six-fold-pattern"
         ],
         "createdDay": 1,
-        "updatedDay": 3
+        "updatedDay": 4
       },
       "evidence-for-the-elders": {
         "id": "evidence-for-the-elders",
@@ -1291,7 +1288,8 @@
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 4,
-      "light_bending": 5
+      "light_bending": 5,
+      "hearthbinding": 1
     },
     "coActivations": {},
     "aspirations": [
@@ -1324,6 +1322,12 @@
     {
       "id": "unknown-dockside-child",
       "text": "The dock child has confirmed the subsurface rhythmic pulse counts to six before a long pause — matching the vent aperture's six-seat architecture — and has grown stronger in character since the water ",
+      "day": 4,
+      "subjectId": "unknown-dockside-child"
+    },
+    {
+      "id": "unknown-dockside-child",
+      "text": "The dock child has provisionally agreed to tap the six-count rhythm for Mara Wells and the Millbrook elders at Thursday's meeting — a live witness, pending confirmation.",
       "day": 4,
       "subjectId": "unknown-dockside-child"
     }

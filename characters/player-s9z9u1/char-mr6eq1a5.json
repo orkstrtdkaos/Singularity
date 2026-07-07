@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 3,
-  "xp": 203,
+  "xp": 208,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -29,15 +29,15 @@
     }
   ],
   "alignment": {
-    "mechanical_spiritual": 0.0507411203125,
-    "concrete_abstract": -0.10797364562499999,
+    "mechanical_spiritual": 0.058204064296875,
+    "concrete_abstract": -0.11757496334374999,
     "spectrumId": -0.14022002876943357
   },
   "attunement": 3,
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 110,
+  "energy": 104,
   "inventory": [
     {
       "id": "waterskin",
@@ -126,6 +126,21 @@
         "valley.radiant_plateau"
       ],
       "day": 1
+    },
+    {
+      "at": "2026-07-07T21:36:56.926Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Traced the six-fold pulse south to Millbrook's drinking wells — confirmed the village water supply is inside the system's reach",
+      "tags": [
+        "investigation",
+        "community",
+        "water-crisis"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 5
     }
   ],
   "relationships": {},
@@ -193,44 +208,47 @@
       {
         "summary": "Usnea traces the six-fold pulse upstream past the mill weir — it extends at least three hundred paces and is still spreading; Aevi confirms it was only under the dock four days ago.",
         "narration": "You don't rise from the dock's edge — you extend. Roots push along the wet planks, find the gap where dock meets bank, and sink into the muddy verge without ceremony. The pulse is immediate. You let it run you northward like a current finding its grade, your awareness sliding along the riverbank in the way water finds low ground — not a search, but a following.\n\nThe six-count rides the Echo River all the way to the first bend, where the bank curves and the willows dip their finger-roots into the shallows. Still there. You press further, reaching the old stone weir that divides the mill-race from the main channel — and the pulse crosses it. Both sides. It has no preference for the mill-race or the river proper; it moves through water the way a chord moves through air, indifferent to the vessel. You feel the moment your reach begins to thin, somewhere just past the weir's northern face, where a gravel bar breaks the current into braids — the pulse doesn't stop there, but it grows harder to distinguish from the river's own texture, the way a voice becomes hard to find in a crowd without disappearing entirely. Further than you expected. Much further.\n\nAevi pulls tight at your shoulder without quite touching you, its motes arranging themselves into a narrow filament — the pattern it makes when something has confirmed a suspicion rather than opened a question. When you finally draw your roots back and sit up, blinking against the gold that has begun to properly breach the eastern ridge, it speaks: \"Past the weir.\" A pause. \"When I first tasted it, it was only under the dock. That was four days ago.\" It does not say what that implies. It doesn't need to.\n\nThe river runs below you, silver-gray in the morning light, carrying the rhythm you now know reaches at least three hundred paces upstream — and possibly further still. Thursday is two days away. The elder meeting will need this: not just a pulse in one place, but a pulse that has a direction, a spread, a memory of when it wasn't there.\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "summary": "Six-fold pulse confirmed south toward Millbrook's drinking wells — the system's reach now encompasses the village water supply.",
+        "narration": "You don't lift your roots — you redirect them. The pulse has been running you north all morning; now you let it run you south, reversing the current of your attention the way a tree turns leaves when the light shifts. Your roots press deeper into the bank mud, past the cold surface layer, into the waterlogged dark where the river's underside speaks plainly.\n\nThe surge takes you further than you intended. The six-count floods your awareness — not just the signal, but the shape of the whole system at once, the way a bell's resonance fills a room rather than traveling across it. You feel the pulse pass under the dock, past the lowest plank where Sela's heel-print still holds its shape in the mud, and continue south without interruption. The village side. It flows through the loam beneath the west-bank gardens, follows the buried clay pipes that feed Millbrook's drinking wells, and arrives there — steady, patient, already present. The wells are inside the signal. They have been for some time; the mud's thermal record says so, and today the record is impossible to misread. This is not contamination arriving. This is contamination settled in.\n\nAevi's filament at your shoulder thickens into its full constellation — three motes becoming a dozen, teal brightening toward white at the center. It doesn't speak immediately. It hums a low frequency, the same one it uses near Precursor workmanship, and then says, simply: *Both directions. The pulse does not begin at the dock. The dock is a middle.* A pause, its motes still. *The wells are downstream of a node. Whatever the system is preparing, the preparation includes Millbrook's water supply. All of it.*\n\nYou pull your roots back slowly, and the morning snaps back into ordinary scale: gold light cresting the ridge-line now, the first smoke rising from Millbrook's chimneys, the smell of damp wood and early bread. The six-fold pulse continues in the current below, unhurried and unconcerned with what you've just understood. Thursday's meeting is two days away. The evidence you've gathered was enough for yesterday; this changes what the elders are walking into."
       }
     ],
     "lastTurn": {
-      "narration": "You don't rise from the dock's edge — you extend. Roots push along the wet planks, find the gap where dock meets bank, and sink into the muddy verge without ceremony. The pulse is immediate. You let it run you northward like a current finding its grade, your awareness sliding along the riverbank in the way water finds low ground — not a search, but a following.\n\nThe six-count rides the Echo River all the way to the first bend, where the bank curves and the willows dip their finger-roots into the shallows. Still there. You press further, reaching the old stone weir that divides the mill-race from the main channel — and the pulse crosses it. Both sides. It has no preference for the mill-race or the river proper; it moves through water the way a chord moves through air, indifferent to the vessel. You feel the moment your reach begins to thin, somewhere just past the weir's northern face, where a gravel bar breaks the current into braids — the pulse doesn't stop there, but it grows harder to distinguish from the river's own texture, the way a voice becomes hard to find in a crowd without disappearing entirely. Further than you expected. Much further.\n\nAevi pulls tight at your shoulder without quite touching you, its motes arranging themselves into a narrow filament — the pattern it makes when something has confirmed a suspicion rather than opened a question. When you finally draw your roots back and sit up, blinking against the gold that has begun to properly breach the eastern ridge, it speaks: \"Past the weir.\" A pause. \"When I first tasted it, it was only under the dock. That was four days ago.\" It does not say what that implies. It doesn't need to.\n\nThe river runs below you, silver-gray in the morning light, carrying the rhythm you now know reaches at least three hundred paces upstream — and possibly further still. Thursday is two days away. The elder meeting will need this: not just a pulse in one place, but a pulse that has a direction, a spread, a memory of when it wasn't there.\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Usnea traces the six-fold pulse upstream past the mill weir — it extends at least three hundred paces and is still spreading; Aevi confirms it was only under the dock four days ago.",
+      "narration": "You don't lift your roots — you redirect them. The pulse has been running you north all morning; now you let it run you south, reversing the current of your attention the way a tree turns leaves when the light shifts. Your roots press deeper into the bank mud, past the cold surface layer, into the waterlogged dark where the river's underside speaks plainly.\n\nThe surge takes you further than you intended. The six-count floods your awareness — not just the signal, but the shape of the whole system at once, the way a bell's resonance fills a room rather than traveling across it. You feel the pulse pass under the dock, past the lowest plank where Sela's heel-print still holds its shape in the mud, and continue south without interruption. The village side. It flows through the loam beneath the west-bank gardens, follows the buried clay pipes that feed Millbrook's drinking wells, and arrives there — steady, patient, already present. The wells are inside the signal. They have been for some time; the mud's thermal record says so, and today the record is impossible to misread. This is not contamination arriving. This is contamination settled in.\n\nAevi's filament at your shoulder thickens into its full constellation — three motes becoming a dozen, teal brightening toward white at the center. It doesn't speak immediately. It hums a low frequency, the same one it uses near Precursor workmanship, and then says, simply: *Both directions. The pulse does not begin at the dock. The dock is a middle.* A pause, its motes still. *The wells are downstream of a node. Whatever the system is preparing, the preparation includes Millbrook's water supply. All of it.*\n\nYou pull your roots back slowly, and the morning snaps back into ordinary scale: gold light cresting the ridge-line now, the first smoke rising from Millbrook's chimneys, the smell of damp wood and early bread. The six-fold pulse continues in the current below, unhurried and unconcerned with what you've just understood. Thursday's meeting is two days away. The evidence you've gathered was enough for yesterday; this changes what the elders are walking into.",
+      "sceneSummary": "Six-fold pulse confirmed south toward Millbrook's drinking wells — the system's reach now encompasses the village water supply.",
       "choices": [
         {
-          "label": "Turn south along the bank and feel downstream — find whether the pulse is also spreading toward the village side, toward Millbrook's drinking wells.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Go directly to Mara Wells at the east market — interrupt the Pell conversation if needed. The wells change the urgency of Thursday's presentation.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
+            "concrete_abstract": -0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "scout",
-            "investigate",
-            "careful"
+            "urgent",
+            "inform",
+            "escalate"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight to read the water's surface here — look for heat traces, patterns, or the light-holding quality of the residue spreading with the current.",
+          "label": "Use Prism Sight at the nearest well — read the heat trace at the well-mouth to establish when the pulse arrived and how long it has been here.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.4,
-            "mechanical_spiritual": 0.1
+            "concrete_abstract": -0.5
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
+            "investigate",
             "study",
-            "investigate"
+            "evidence"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -239,16 +257,17 @@
           "emergenceId": null
         },
         {
-          "label": "Head to the east market now — find Mara Wells and Pell's cord stall before the morning rush. The upstream spread changes the urgency of Thursday's meeting.",
+          "label": "Find Sela — she was here before dawn and left. If the wells are already inside the signal, she may have heard the change from inside the village, not just from the dock.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "chaos_order": 0.3
+            "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "plan"
+            "find",
+            "witness",
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -257,26 +276,37 @@
           "emergenceId": null
         },
         {
-          "label": "Stay at the dock and wait for Sela — she was here before dawn once. She may return, and what you've just felt upstream changes what you need from her testimony.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Stay at the dock and hold the full picture in mind before acting — map what you know about the system's reach (dock, weir, wells, seep) and look for what shape it makes.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "chaos_order": -0.2,
-            "mechanical_spiritual": 0.3
+            "concrete_abstract": -0.6
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "wait",
+            "study",
+            "plan",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Traced the six-fold pulse south to Millbrook's drinking wells — confirmed the village water supply is inside the system's reach",
+          "tags": [
+            "investigation",
+            "community",
+            "water-crisis"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
@@ -284,34 +314,47 @@
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "The six-fold subsurface pulse confirmed reaching Millbrook's drinking wells — the pre-Transition system's reach now encompasses the village water supply, not merely the river and irrigation channels",
+          "tags": [
+            "water-crisis",
+            "contamination",
+            "millbrook",
+            "wells",
+            "escalation"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {}
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "note": "Day 5 dawn: six-fold pulse traced upstream past the mill weir — extends at least 300 paces and crosses the weir into the mill-race. Aevi confirms it was only under the dock four days ago. The system is actively spreading. This is new evidence for Thursday."
+          "note": "Day 5 dawn: six-fold pulse traced south to Millbrook's drinking wells — the system's reach now encompasses the village water supply. The dock is a middle, not an endpoint. New evidence that changes the stakes of Thursday's presentation."
         }
       ],
       "scene": {
-        "setting": "Millbrook dock at first light — Usnea crouched at the dock's edge with roots just pulled back from the bank mud; the eastern sky now properly gold at the ridge-line, sunrise imminent; dew on the cobbles; the river current pulse-present and steady below, silver-gray in the growing light.",
+        "setting": "Millbrook dock at sunrise — the eastern ridge now properly gilded, first light warming the cobbles; Usnea at the dock's edge with roots just retracted from the bank mud; smoke beginning to rise from the village chimneys; the river current pulse-present and steady below.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Held in a narrow filament at Usnea's shoulder — the posture of confirmed suspicion rather than open inquiry; very still, just said its piece."
+            "state": "Full constellation — a dozen motes, teal brightening toward white at the center — holding the posture of confirmed alarm; very still after speaking"
           }
         ],
         "objects": [
-          "Lowest dock plank — empty, dew-damp",
-          "Fresh heel-print in dock mud — recent, child-sized",
-          "Echo River — six-fold pulse steady and clean, now confirmed extending past the mill weir upstream",
-          "Old stone weir — visible upstream where mill-race branches from the main channel, pulse crosses both sides"
+          "Lowest dock plank — dew-damp, Sela's heel-print still fresh in the mud below",
+          "Echo River — six-fold pulse steady, confirmed extending both upstream past the mill weir and downstream through the village water supply",
+          "Old stone weir — visible upstream where mill-race branches from the main channel",
+          "Millbrook drinking wells — downstream of Usnea's current position, now confirmed inside the pulse signal"
         ],
         "threads": [
-          "Sela was here before Usnea and has left — may return at the dock",
-          "Mara Wells is somewhere at the east market approaching Pell — outcome unknown",
-          "The pulse extends past the mill weir — downstream extent not yet checked; well-contamination risk unassessed",
-          "Thursday's elder meeting is two days away; the spreading pulse is new evidence not yet in the plan",
-          "Pell's permission for Sela's testimony still unresolved"
+          "The six-fold pulse reaches Millbrook's wells — the village water supply is inside the system's reach; elders do not yet know",
+          "Sela was here before dawn and has left — her whereabouts unknown",
+          "Mara Wells is at the east market approaching Pell — outcome of Pell's permission still unresolved",
+          "Thursday's elder meeting is two days away — the new well evidence changes the presentation's stakes",
+          "Downstream extent of the pulse now established; full geometry of the system still unmapped"
         ]
       },
       "npcUpdates": [
@@ -320,37 +363,39 @@
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence — nanite-mote swarm",
-          "note": "Confirmed the pulse was only under the dock four days ago — named the spread as a measured fact, not alarm. Arranged into narrow filament: confirmed suspicion, not new question.",
+          "note": "Named the dock as a midpoint, not an endpoint — confirmed the pulse reaches Millbrook's wells downstream and named it as the system preparing the village water supply. Expanded to full constellation, the posture it holds near Precursor workmanship.",
           "learned": [
-            "The six-fold pulse was localized under the dock four days ago — its current reach past the mill weir represents measurable expansion over a known timeframe"
+            "The six-fold pulse extends south through village loam to Millbrook's drinking wells — both directions from the dock",
+            "The dock is a middle of the system's reach, not an edge",
+            "The wells are downstream of a node — whatever the system prepares, Millbrook's full water supply is included"
           ],
           "skillsObserved": [
-            "temporal pattern tracking",
-            "comparative assessment"
+            "pattern synthesis",
+            "directional signal reading"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Traveling with Usnea at the Millbrook dock, dawn of Day 5 — held close after the upstream trace, motes in narrow filament."
+          "statusNote": "At Usnea's shoulder at the Millbrook dock — full constellation, teal-to-white, after naming the well-contamination reach"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Day 5 dawn: the six-fold pulse extends at least 300 paces upstream past the old stone weir, crossing into both the mill-race and the main channel. Aevi confirms it was only detectable under the dock four days ago — the system has measurably expanded its reach.",
-          "subjectId": null
+          "text": "Day 5 dawn: the six-fold pulse confirmed extending south through village loam to Millbrook's drinking wells — the village water supply is inside the system's signal. The dock is a midpoint, not an endpoint. The wells have been inside the signal long enough for the thermal record to show it clearly.",
+          "subjectId": "echo-river-contamination"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Day 5 dawn: six-fold pulse traced upstream past the old stone mill weir — confirmed in both mill-race and main channel, at least 300 paces from the dock. The pulse does not stop at the weir.",
+          "note": "Day 5 dawn: six-fold pulse confirmed reaching Millbrook's drinking wells via south bank loam and buried clay pipes — the village water supply is inside the system's reach. Aevi named the dock as a middle, not an edge.",
           "flag": {
-            "pulse_upstream_extent": "past_mill_weir_day5",
-            "pulse_crosses_mill_race": true
+            "well_contamination_confirmed": "day5_dawn",
+            "pulse_direction": "both_upstream_and_downstream"
           },
           "subPlace": {
-            "name": "Old Stone Mill Weir",
-            "note": "Day 5 dawn: six-fold pulse confirmed crossing both sides of the weir — mill-race and main channel. The pulse grows harder to read past the gravel bar north of the weir but does not stop.",
-            "visited": true
+            "name": "Millbrook Drinking Wells",
+            "note": "Day 5 dawn: six-fold pulse confirmed reaching well-mouths through south-bank loam — thermal record suggests the signal has been present for some time. Elders do not yet know.",
+            "visited": false
           }
         }
       ],
@@ -359,13 +404,25 @@
           "topic": "the-six-fold-pattern",
           "label": "The Six-Fold Pattern",
           "kind": "mystery",
-          "fact": "Day 5 dawn: Usnea traced the pulse upstream to at least 300 paces past the old stone mill weir — it crosses into the mill-race as readily as the main channel. Aevi confirmed the pulse was only detectable under the dock four days ago. The system is actively spreading, not holding position.",
+          "fact": "Day 5 dawn: six-fold pulse confirmed extending south through village loam to Millbrook's drinking wells — the dock is a midpoint of the system's reach, not an edge. The pulse runs both upstream (past the mill weir) and downstream (to the wells) without interruption. Aevi: 'Whatever the system is preparing, the preparation includes Millbrook's water supply. All of it.'",
           "links": [
             "echo-river-contamination",
             "aevi-reading-of-the-water",
             "contamination-evidence-for-the-elders",
             "millbrook",
-            "the-pale-seedlings"
+            "tuning-warden-gateline"
+          ]
+        },
+        {
+          "topic": "echo-river-contamination",
+          "label": "Echo River Contamination",
+          "kind": "mystery",
+          "fact": "Day 5 dawn: contamination signal now confirmed in Millbrook's drinking wells via south-bank clay pipes — not only the irrigation channels and river current. The system's preparation extends to the full village water supply.",
+          "links": [
+            "the-six-fold-pattern",
+            "aevi-reading-of-the-water",
+            "contamination-evidence-for-the-elders",
+            "millbrook"
           ]
         }
       ],
@@ -373,32 +430,32 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook dock at first light — Usnea crouched at the dock's edge with roots just pulled back from the bank mud; the eastern sky now properly gold at the ridge-line, sunrise imminent; dew on the cobbles; the river current pulse-present and steady below, silver-gray in the growing light.",
+      "setting": "Millbrook dock at sunrise — the eastern ridge now properly gilded, first light warming the cobbles; Usnea at the dock's edge with roots just retracted from the bank mud; smoke beginning to rise from the village chimneys; the river current pulse-present and steady below.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Held in a narrow filament at Usnea's shoulder — the posture of confirmed suspicion rather than open inquiry; very still,"
+          "state": "Full constellation — a dozen motes, teal brightening toward white at the center — holding the posture of confirmed alarm"
         }
       ],
       "objects": [
-        "Lowest dock plank — empty, dew-damp",
-        "Fresh heel-print in dock mud — recent, child-sized",
-        "Echo River — six-fold pulse steady and clean, now confirmed extending past the m",
-        "Old stone weir — visible upstream where mill-race branches from the main channel"
+        "Lowest dock plank — dew-damp, Sela's heel-print still fresh in the mud below",
+        "Echo River — six-fold pulse steady, confirmed extending both upstream past the m",
+        "Old stone weir — visible upstream where mill-race branches from the main channel",
+        "Millbrook drinking wells — downstream of Usnea's current position, now confirmed"
       ],
       "threads": [
-        "Sela was here before Usnea and has left — may return at the dock",
-        "Mara Wells is somewhere at the east market approaching Pell — outcome unknown",
-        "The pulse extends past the mill weir — downstream extent not yet checked; well-contamination risk unassessed",
-        "Thursday's elder meeting is two days away; the spreading pulse is new evidence not yet in the plan",
-        "Pell's permission for Sela's testimony still unresolved"
+        "The six-fold pulse reaches Millbrook's wells — the village water supply is inside the system's reach; elders do not yet know",
+        "Sela was here before dawn and has left — her whereabouts unknown",
+        "Mara Wells is at the east market approaching Pell — outcome of Pell's permission still unresolved",
+        "Thursday's elder meeting is two days away — the new well evidence changes the presentation's stakes",
+        "Downstream extent of the pulse now established; full geometry of the system still unmapped"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 5,
-    "hour": 23,
+    "day": 6,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -413,14 +470,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "The dock child confirms the rhythmic pulse runs upstream and has intensified since the water turned gray — a second independent witness to the system's activity, and a new detail: the pattern counts t",
         "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through.",
         "Dock child identified as Sela; mother is Pell, east market cord-and-hemp stall. Pell's permission needed before Thursday — next step is Mara sending proper word to the family.",
         "Sela's name and Pell's east-market stall passed to Mara Wells tonight; Mara will approach Pell at dawn before the stall opens.",
         "Mara has laid out Thursday's structure: physical evidence first (seedling, vial, residue), then Usnea's account, then Aevi, then the six-fold pattern, then Sela last. The weak point named: no answer y",
         "Day 5 dawn: Usnea confirms the pulse is now in the Echo River current itself — the system has expanded overnight. Sela was recently at the dock but has left; Pell's permission still unresolved.",
         "Day 5 dawn: six-fold pulse confirmed steady and 'cleaner' — more declarative than escalating. The system is not accelerating; it is settling into presence. Aevi's read: not a question anymore, a state",
-        "Day 5 dawn: six-fold pulse traced upstream past the mill weir — extends at least 300 paces and crosses the weir into the mill-race. Aevi confirms it was only under the dock four days ago. The system i"
+        "Day 5 dawn: six-fold pulse traced upstream past the mill weir — extends at least 300 paces and crosses the weir into the mill-race. Aevi confirms it was only under the dock four days ago. The system i",
+        "Day 5 dawn: six-fold pulse traced south to Millbrook's drinking wells — the system's reach now encompasses the village water supply. The dock is a middle, not an endpoint. New evidence that changes th"
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -610,7 +667,7 @@
     },
     "dockside-child": {
       "id": "dockside-child",
-      "name": "Unknown (dockside Child)",
+      "name": "Sela",
       "role": "Child witness — docks",
       "description": "Eight or nine years old, sits alone on the dock's lowest plank listening to the river with the particular patience of someone who has already given up on adults believing her.",
       "firstMet": {
@@ -622,7 +679,8 @@
         "[d4] Described the river as two rivers — 'the top one moves, the bottom one counts' — and tapped a rhythm: pause, three beats, pause, two beats, pause-pause. Noted flatly that nobody be",
         "[d4] Usnea returned to the dock. Child identified Usnea plainly as 'the tree' — cautious but present. Aevi registered quiet approval.",
         "[d4] Confirmed the rhythm counts to six before a long pause, then repeats — and that it has grown 'more there' (not louder in sound, but more present) since the water turned gray. Looke",
-        "[d4] Provisionally agreed to tap the rhythm for the elders Thursday — said 'maybe,' which is the most cooperative she has been with any adult. Aevi's endorsement moved her."
+        "[d4] Provisionally agreed to tap the rhythm for the elders Thursday — said 'maybe,' which is the most cooperative she has been with any adult. Aevi's endorsement moved her.",
+        "[d5] You know this person's name now: Sela (was \"Unknown (dockside Child)\")"
       ],
       "knownFacts": [
         "Hears a rhythmic pulse beneath the river's surface — irregular but non-random",
@@ -644,7 +702,11 @@
         "locationId": "millbrook",
         "day": 4
       },
-      "statusNote": "At the dock's lowest plank, evening — provisionally willing to testify the rhythm to the elders Thursday; name and family still unknown."
+      "statusNote": "At the dock's lowest plank, evening — provisionally willing to testify the rhythm to the elders Thursday; name and family still unknown.",
+      "aliases": [
+        "Unknown (dockside Child)"
+      ],
+      "nameRevealed": true
     },
     "gateline-warden": {
       "id": "gateline-warden",
@@ -689,7 +751,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d4] The gateline warden's admission establishes that the ribbon-light in the Lower Terrace channel has been observed from the Heights side at least once before — three springs back; this is now a known fa",
         "[d4] Usnea returned to the dock in late afternoon, Day 4 — dock child still present at the lowest plank.",
         "[d4] The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting d",
         "[d4] Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'",
@@ -700,7 +761,8 @@
         "[d5] Aevi confirmed in the back room, night of Day 5: the subsurface pulse is now detectable in the Echo River's current itself — no longer only beneath the dock. The junction-stone at the Heights gateline",
         "[d5] Dawn Day 5: the six-fold pulse rides the Echo River current at dock-level — detectable through root-contact without deep listening. The system has expanded its presence overnight.",
         "[d5] Day 5 dawn: Sela's heel-print in the dock mud — she came before Usnea and left. The six-fold pulse confirmed steady and cleaner in the current at root-depth; Aevi held its full morning ring over the w",
-        "[d5] Day 5 dawn: six-fold pulse traced upstream past the old stone mill weir — confirmed in both mill-race and main channel, at least 300 paces from the dock. The pulse does not stop at the weir."
+        "[d5] Day 5 dawn: six-fold pulse traced upstream past the old stone mill weir — confirmed in both mill-race and main channel, at least 300 paces from the dock. The pulse does not stop at the weir.",
+        "[d5] Day 5 dawn: six-fold pulse confirmed reaching Millbrook's drinking wells via south bank loam and buried clay pipes — the village water supply is inside the system's reach. Aevi named the dock as a mid"
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -751,6 +813,12 @@
           "day": 5,
           "visited": true,
           "note": "Day 5 dawn: six-fold pulse confirmed crossing both sides of the weir — mill-race and main channel. The pulse grows harde"
+        },
+        "millbrook-drinking-wells": {
+          "name": "Millbrook Drinking Wells",
+          "day": 5,
+          "visited": false,
+          "note": "Day 5 dawn: six-fold pulse confirmed reaching well-mouths through south-bank loam — thermal record suggests the signal h"
         }
       }
     },
@@ -831,17 +899,19 @@
           "[d1] The contamination is reaching soil through irrigation channels — a farmer's turnip seedlings on the eastern arm are going pale (not dying, but color-drained) after three mornings of gray-green water i",
           "[d1] Aevi's open assessment, heard by both farmers and the elder woman: the contamination is deliberate, pattern-bearing, and 'doesn't belong to this watershed or this century.' Not malfunction — something",
           "[d1] Usnea named the contamination plainly before farmers and an elder witness: something old and deliberate, pattern-bearing, still doing a task through irrigation channels into soil. The elder woman has ",
-          "[d4] The contamination's signature is now present in the terraced gardens nearest the eastern irrigation arm — pale rows of young greens, same drained quality as the third farmer's seedlings, visible to a "
+          "[d4] The contamination's signature is now present in the terraced gardens nearest the eastern irrigation arm — pale rows of young greens, same drained quality as the third farmer's seedlings, visible to a ",
+          "[d5] Day 5 dawn: contamination signal now confirmed in Millbrook's drinking wells via south-bank clay pipes — not only the irrigation channels and river current. The system's preparation extends to the ful"
         ],
         "links": [
           "millbrook",
           "irrigation-dispute-holloway-renn",
           "aevi-reading-of-the-water",
           "the-pale-seedlings",
-          "contamination-evidence-for-the-elders"
+          "contamination-evidence-for-the-elders",
+          "the-six-fold-pattern"
         ],
         "createdDay": 1,
-        "updatedDay": 4
+        "updatedDay": 5
       },
       "aevi-water-sense": {
         "id": "aevi-water-sense",
@@ -1063,7 +1133,6 @@
         "label": "The Six-Fold Pattern",
         "kind": "mystery",
         "facts": [
-          "[d3] The interface depressions at the vent aperture contain crystalline nanite-structured residue — light-holding rather than light-reflecting, pre-Transition manufacture per Aevi's reading. The material w",
           "[d3] Full perimeter survey of the vent rim's six interface depressions: all six were used and deliberately cleared. Depressions 3 and 6 — diametrically opposite each other — both hold trace crystalline res",
           "[d3] Aevi identifies the six-seat ring as a control architecture with a specific logic: two diametrically opposite seats (third and sixth) set the system's operational mode; the remaining four are paramete",
           "[d3] The crystalline residue from the third depression answered the sixth seat when held close — confirming it is sixth-seat material, the origin key (placed last, removed first in operation). The third se",
@@ -1074,7 +1143,8 @@
           "[d5] The pulse Sela hears is now in the river current itself, not only a subsurface phenomenon — Aevi's confirmation suggests the system is becoming more active or expansive as Day 5 deepens toward Thursda",
           "[d5] Day 5 dawn: the pulse is no longer beneath the river — it rides the current itself, felt through root-contact at dock-level without deep listening. The system has expanded its reach overnight. Sela's ",
           "[d5] Day 5 dawn: Usnea holds the pulse fully at dock-level — it is steady, not accelerating, but qualitatively cleaner than yesterday. Aevi names it 'less like a question, more like a statement.' The syste",
-          "[d5] Day 5 dawn: Usnea traced the pulse upstream to at least 300 paces past the old stone mill weir — it crosses into the mill-race as readily as the main channel. Aevi confirmed the pulse was only detecta"
+          "[d5] Day 5 dawn: Usnea traced the pulse upstream to at least 300 paces past the old stone mill weir — it crosses into the mill-race as readily as the main channel. Aevi confirmed the pulse was only detecta",
+          "[d5] Day 5 dawn: six-fold pulse confirmed extending south through village loam to Millbrook's drinking wells — the dock is a midpoint of the system's reach, not an edge. The pulse runs both upstream (past "
         ],
         "links": [
           "echo-river-contamination",
@@ -1383,14 +1453,14 @@
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 3
+    "aevi": 3.75
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 5,
       "light_bending": 6,
-      "hearthbinding": 1
+      "hearthbinding": 2
     },
     "coActivations": {},
     "aspirations": [
@@ -1467,6 +1537,12 @@
       "text": "Day 5 dawn: the six-fold pulse extends at least 300 paces upstream past the old stone weir, crossing into both the mill-race and the main channel. Aevi confirms it was only detectable under the dock f",
       "day": 5,
       "subjectId": null
+    },
+    {
+      "id": "echo-river-contamination",
+      "text": "Day 5 dawn: the six-fold pulse confirmed extending south through village loam to Millbrook's drinking wells — the village water supply is inside the system's signal. The dock is a midpoint, not an end",
+      "day": 5,
+      "subjectId": "echo-river-contamination"
     }
   ],
   "precursorAccess": [],

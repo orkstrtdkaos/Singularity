@@ -165,19 +165,41 @@
       {
         "summary": "Usnea passes Sela's name and Pell's stall to Mara Wells; Mara commits to approaching Pell at dawn.",
         "narration": "You rise from the dock with the deliberate unhurry of a tree releasing its grip on a fence post — the planking creaks once, settling back into shape. Sela doesn't watch you go. She's already returned to the river, fingers quiet on the wood, listening. Aevi lifts from the water's surface and falls into its usual drift at your shoulder, motes warm and slow.\n\nThe walk to the common house takes you through Millbrook's early-evening geography: lamp-oil smell from the chandler's open window, a dog sleeping across a doorstep, the last of the market stalls being folded down. You find Mara Wells at the common house side entrance, where she's speaking with Josen about something to do with Thursday's seating — she sees you coming and wraps the exchange in two sentences.\n\n'Sela,' you say, when you're close enough. 'Eight, nine years old. Her mother is Pell — east market, cord and hemp. Sela expects Pell to refuse. She said it like a fact, not a complaint.' You let Mara take that in. 'Whatever approach you use, she should hear it from someone the market trusts, not a stranger asking her daughter to stand before elders.'\n\nMara turns the name over once, the way she handles everything — as if testing its weight against something she already knows. 'Pell,' she repeats. A short nod. 'I know which stall. I'll go in the morning, before it opens — easier than after.' She looks at Aevi, whose motes have brightened a single unhurried degree. 'You did the right thing bringing this tonight rather than waiting.' She says it without warmth and without irony, which is how you've learned she means it most."
+      },
+      {
+        "summary": "Mara outlines Thursday's evidence order: physical first, child witness last, and a warning that 'we don't know what it means' must be said plainly.",
+        "narration": "Mara listens with the particular economy of someone who has already been turning this problem over in her head for days. When you ask about Thursday's shape, she doesn't consult anything — the plan is already there, behind her eyes.\n\n\"Five elders. Councilor Dresh will want the physical evidence first — she trusts what she can hold. The seedling, the vial, the residue pinch if you're willing to part with it briefly. Then your account of the seep and the vent — keep it plain, no Heights politics. Then Aevi.\" She glances at the motes at your shoulder with the look of someone who has decided to trust something she doesn't fully understand. \"After that, the contamination pattern — the six-fold geometry, the junction-stone — and only then Sela. Last. Let the facts do the crediting before a child speaks, so nobody can say it went the other way around.\"\n\nShe smooths her sleeve with a single flat motion. \"The weak point is Dresh asking what it means — what the system is *doing*. I don't have an answer for that. If you don't either, say so plainly. The elders can sit with 'we don't know yet' more easily than they can sit with a guess that unravels.\"\n\nAevi brightens by a single degree at your shoulder — quiet agreement, or something like it. The common house lamp throws a warm parallelogram across the threshold stones between you."
       }
     ],
     "lastTurn": {
-      "narration": "You rise from the dock with the deliberate unhurry of a tree releasing its grip on a fence post — the planking creaks once, settling back into shape. Sela doesn't watch you go. She's already returned to the river, fingers quiet on the wood, listening. Aevi lifts from the water's surface and falls into its usual drift at your shoulder, motes warm and slow.\n\nThe walk to the common house takes you through Millbrook's early-evening geography: lamp-oil smell from the chandler's open window, a dog sleeping across a doorstep, the last of the market stalls being folded down. You find Mara Wells at the common house side entrance, where she's speaking with Josen about something to do with Thursday's seating — she sees you coming and wraps the exchange in two sentences.\n\n'Sela,' you say, when you're close enough. 'Eight, nine years old. Her mother is Pell — east market, cord and hemp. Sela expects Pell to refuse. She said it like a fact, not a complaint.' You let Mara take that in. 'Whatever approach you use, she should hear it from someone the market trusts, not a stranger asking her daughter to stand before elders.'\n\nMara turns the name over once, the way she handles everything — as if testing its weight against something she already knows. 'Pell,' she repeats. A short nod. 'I know which stall. I'll go in the morning, before it opens — easier than after.' She looks at Aevi, whose motes have brightened a single unhurried degree. 'You did the right thing bringing this tonight rather than waiting.' She says it without warmth and without irony, which is how you've learned she means it most.",
-      "sceneSummary": "Usnea passes Sela's name and Pell's stall to Mara Wells; Mara commits to approaching Pell at dawn.",
+      "narration": "Mara listens with the particular economy of someone who has already been turning this problem over in her head for days. When you ask about Thursday's shape, she doesn't consult anything — the plan is already there, behind her eyes.\n\n\"Five elders. Councilor Dresh will want the physical evidence first — she trusts what she can hold. The seedling, the vial, the residue pinch if you're willing to part with it briefly. Then your account of the seep and the vent — keep it plain, no Heights politics. Then Aevi.\" She glances at the motes at your shoulder with the look of someone who has decided to trust something she doesn't fully understand. \"After that, the contamination pattern — the six-fold geometry, the junction-stone — and only then Sela. Last. Let the facts do the crediting before a child speaks, so nobody can say it went the other way around.\"\n\nShe smooths her sleeve with a single flat motion. \"The weak point is Dresh asking what it means — what the system is *doing*. I don't have an answer for that. If you don't either, say so plainly. The elders can sit with 'we don't know yet' more easily than they can sit with a guess that unravels.\"\n\nAevi brightens by a single degree at your shoulder — quiet agreement, or something like it. The common house lamp throws a warm parallelogram across the threshold stones between you.",
+      "sceneSummary": "Mara outlines Thursday's evidence order: physical first, child witness last, and a warning that 'we don't know what it means' must be said plainly.",
       "choices": [
         {
-          "label": "Ask Mara what she knows about Pell — whether there's anything in their history that might help or hinder the ask",
+          "label": "Agree with the order, but raise the gap: offer to admit plainly before the elders that the system's purpose is still unknown — and ask Mara if there's anyone in Millbrook who might have old knowledge that could fill it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask about Councilor Dresh specifically — what she's like under pressure, what she's afraid of, what framing she responds to best",
           "attribute": "social",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "scout",
             "study",
             "careful"
           ],
@@ -188,23 +210,7 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Mara directly: what does she plan to say to Pell? Hear her approach before morning and offer your own read if it's off",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara about Thursday's shape — how many elders, what order she plans to present the evidence, where a child witness fits",
+          "label": "Suggest adding one more element to the presentation: offer to use Prism Sight on the seedling or the vial in front of the elders — a live demonstration of what the contamination looks like to someone who can read heat and light",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
@@ -213,20 +219,20 @@
             "plan",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "It's deep night and tomorrow matters — take Josen's room, sleep properly, be ready before the market opens",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Thank her and let the planning rest for tonight — you need sleep before dawn brings Pell's answer. Head inside to Josen's back room.",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "rest"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -248,30 +254,35 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "title": "Evidence for the Elders",
-          "note": "Sela's name and Pell's east-market stall passed to Mara Wells tonight; Mara will approach Pell at dawn before the stall opens."
+          "note": "Mara has laid out Thursday's structure: physical evidence first (seedling, vial, residue), then Usnea's account, then Aevi, then the six-fold pattern, then Sela last. The weak point named: no answer yet for what the system is doing."
         }
       ],
       "scene": {
-        "setting": "Millbrook common house side entrance — night, lamp-oil light from within, the street quiet and cooling; Mara Wells standing at the threshold, Josen visible through the doorway behind her.",
+        "setting": "Millbrook common house side entrance — deep night, lamp-oil light edging the heavy plank door, the street quiet and cooling behind Usnea.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Absorbed the name and the warning about Pell; committed to going before the stall opens at dawn — watching Aevi's motes with the same careful patience she gives everything."
+            "state": "Standing at the threshold, Thursday's plan laid out — watching Usnea with the patient attention of someone waiting to see which question comes next."
           },
           {
             "name": "Aevi",
-            "state": "Drifting at Usnea's shoulder, motes one degree brighter than the walk over — settled, patient, present."
+            "state": "Drifting at Usnea's shoulder, motes one degree brighter than before — quiet, settled, present."
+          },
+          {
+            "name": "Josen",
+            "state": "Visible through the doorway, moving something inside — not listening to the conversation."
           }
         ],
         "objects": [
-          "Common house side entrance — heavy plank door, iron latch, lamp light edging the frame",
-          "Josen visible inside — moving something, not listening"
+          "Common house heavy plank door with iron latch",
+          "Lamp throwing a warm parallelogram across the threshold stones",
+          "Josen's lamp-lit interior beyond"
         ],
         "threads": [
-          "Pell's permission is unresolved — Mara will attempt it at dawn; outcome unknown",
+          "Pell's permission for Sela is unresolved — Mara will attempt it at dawn; outcome unknown",
           "Aevi dimmed briefly over the water at the dock and has not explained why",
-          "Thursday's elder meeting shape and evidence order has not been discussed"
+          "No answer yet for what the six-fold system is actually doing — Mara named this as the elder meeting's weak point",
+          "Councilor Dresh's disposition and the elder composition not yet fully discussed"
         ]
       },
       "npcUpdates": [
@@ -279,57 +290,53 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Received Sela's name and Pell's stall location from Usnea tonight; committed to approaching Pell at dawn before the east market opens.",
+          "role": "Millbrook water-policy coordinator and elder",
+          "note": "Laid out Thursday's full evidence order without hesitation: physical evidence first for Councilor Dresh, then Usnea's account, Aevi, the six-fold pattern geometry, and Sela last. Named the weak point plainly: no answer yet for what the system is doing — and advised Usnea to say so openly rather than guess.",
           "learned": [
-            "Sela is the dock child — Pell's daughter; Pell sells cord and hemp at the east market stall; Sela predicts Pell will refuse"
+            "Five elders will be present Thursday",
+            "Councilor Dresh leads and trusts physical evidence first",
+            "Mara's planned order: seedling/vial/residue → Usnea's account → Aevi → six-fold pattern → Sela",
+            "The unanswered question — what is the system doing — is the presentation's named weak point"
           ],
           "skillsObserved": [
-            "rapid prioritization",
-            "practical commitment under time pressure"
+            "strategic sequencing",
+            "frank identification of gaps"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the common house side entrance, late evening — will approach Pell at dawn to secure permission for Sela's testimony Thursday."
-        },
-        {
-          "op": "update",
-          "npcId": "unknown-dockside-child",
-          "name": "Sela",
-          "note": "Left at the dock's lowest plank, listening posture restored — Usnea's problem to solve with Pell has been passed to Mara Wells.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the dock's lowest plank, listening to the river — provisional Thursday agreement stands, pending Pell's permission which Mara Wells will seek at dawn."
+          "statusNote": "At the common house side entrance, night of Day 4 — will approach Pell at the east market stall at dawn; Thursday's plan now laid out."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Mara Wells has committed to approaching Pell at the east market stall at dawn on Day 5 to secure permission for Sela's testimony at Thursday's elder meeting.",
-          "subjectId": "mara-wells"
+          "text": "Thursday's elder presentation order established by Mara Wells: physical evidence first (seedling, vial, residue pinch), then Usnea's testimony, then Aevi's assessment, then the six-fold pattern, then Sela's rhythmic testimony last. Five elders present; Councilor Dresh leads.",
+          "subjectId": "contamination-evidence-for-the-elders"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Usnea passed Sela's name and Pell's stall to Mara Wells at the common house side entrance on the night of Day 4 — Mara committed to the dawn approach.",
+          "note": "Thursday's elder meeting structure discussed at the common house side entrance — Mara named five elders, Dresh as the physical-evidence anchor, and Sela as the final witness in the planned sequence.",
           "subPlace": {
             "name": "Common House Side Entrance",
-            "note": "Where Mara Wells conducts practical coordination after hours — Josen keeps the inside.",
+            "note": "Thursday's evidence order discussed here — five elders, Dresh leads, Sela speaks last.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sela-and-pell",
-          "label": "Sela and Pell",
-          "kind": "person",
-          "fact": "Mara Wells now knows Sela's name and Pell's stall — she will approach Pell at dawn before the east market opens to request permission for Thursday. The obstacle is delegated to the person best placed to handle it.",
+          "topic": "thursday-elder-meeting",
+          "label": "Thursday Elder Meeting — Shape and Stakes",
+          "kind": "event",
+          "fact": "Five elders. Councilor Dresh anchors proceedings and trusts physical evidence first. Mara's planned order: seedling and vial and residue pinch → Usnea's account of seep and vent → Aevi's assessment → six-fold geometry and junction-stone → Sela's rhythmic testimony last. Named weak point: no answer yet for what the system is doing — must be admitted plainly.",
           "links": [
             "contamination-evidence-for-the-elders",
-            "millbrook",
-            "the-six-fold-pattern"
+            "mara-wells",
+            "sela-and-pell",
+            "the-six-fold-pattern",
+            "echo-river-contamination",
+            "millbrook"
           ]
         }
       ],
@@ -337,32 +344,38 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house side entrance — night, lamp-oil light from within, the street quiet and cooling; Mara Wells standing at the threshold, Josen visible through the doorway behind her.",
+      "setting": "Millbrook common house side entrance — deep night, lamp-oil light edging the heavy plank door, the street quiet and cooling behind Usnea.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Absorbed the name and the warning about Pell; committed to going before the stall opens at dawn — watching Aevi's motes "
+          "state": "Standing at the threshold, Thursday's plan laid out — watching Usnea with the patient attention of someone waiting to se"
         },
         {
           "name": "Aevi",
-          "state": "Drifting at Usnea's shoulder, motes one degree brighter than the walk over — settled, patient, present."
+          "state": "Drifting at Usnea's shoulder, motes one degree brighter than before — quiet, settled, present."
+        },
+        {
+          "name": "Josen",
+          "state": "Visible through the doorway, moving something inside — not listening to the conversation."
         }
       ],
       "objects": [
-        "Common house side entrance — heavy plank door, iron latch, lamp light edging the",
-        "Josen visible inside — moving something, not listening"
+        "Common house heavy plank door with iron latch",
+        "Lamp throwing a warm parallelogram across the threshold stones",
+        "Josen's lamp-lit interior beyond"
       ],
       "threads": [
-        "Pell's permission is unresolved — Mara will attempt it at dawn; outcome unknown",
+        "Pell's permission for Sela is unresolved — Mara will attempt it at dawn; outcome unknown",
         "Aevi dimmed briefly over the water at the dock and has not explained why",
-        "Thursday's elder meeting shape and evidence order has not been discussed"
+        "No answer yet for what the six-fold system is actually doing — Mara named this as the elder meeting's weak point",
+        "Councilor Dresh's disposition and the elder composition not yet fully discussed"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [
@@ -377,14 +390,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Usnea has rested at the common house back room ahead of Thursday's meeting — all three evidence items secured, testimony to be given at the common house at last afternoon light.",
         "The dockside child's tapped rhythm — pause, three beats, pause, two beats, pause-pause — matches the vent aperture's periodic control prompt. A potential fourth witness for the elder meeting, if she c",
         "Junction-stone at the Lower Terrace gateline confirmed as a node in the same system as the seep and vent aperture — the pulse matches the vent's control-prompt rhythm and the dockside child's tapped p",
         "The gateline warden admitted he has seen the light once before — three springs back. A potential witness or source of Heights-side knowledge of the system has opened.",
         "The dock child confirms the rhythmic pulse runs upstream and has intensified since the water turned gray — a second independent witness to the system's activity, and a new detail: the pattern counts t",
         "Dock child provisionally agreed to tap the rhythm for Mara Wells and the elders at Thursday's meeting — a live witness to the subsurface pulse, pending follow-through.",
         "Dock child identified as Sela; mother is Pell, east market cord-and-hemp stall. Pell's permission needed before Thursday — next step is Mara sending proper word to the family.",
-        "Sela's name and Pell's east-market stall passed to Mara Wells tonight; Mara will approach Pell at dawn before the stall opens."
+        "Sela's name and Pell's east-market stall passed to Mara Wells tonight; Mara will approach Pell at dawn before the stall opens.",
+        "Mara has laid out Thursday's structure: physical evidence first (seedling, vial, residue), then Usnea's account, then Aevi, then the six-fold pattern, then Sela last. The weak point named: no answer y"
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -543,32 +556,33 @@
         "[d3] Met Usnea at the path terminus on return from the vent — read the return correctly before a word was spoken; 'You have something' is her first sentence",
         "[d3] Received the full account of the vent system, crystalline residue, and pale seedling. Named the challenge plainly: the elders will want a simple answer and won't get one. Touched t",
         "[d3] Directed Usnea to the common house back room without ceremony — named Josen as the keeper; said Usnea's name would be recognized. Practical care, no fuss.",
-        "[d5] Received Sela's name and Pell's stall location from Usnea tonight; committed to approaching Pell at dawn before the east market opens."
+        "[d5] Received Sela's name and Pell's stall location from Usnea tonight; committed to approaching Pell at dawn before the east market opens.",
+        "[d5] Laid out Thursday's full evidence order without hesitation: physical evidence first for Councilor Dresh, then Usnea's account, Aevi, the six-fold pattern geometry, and Sela last. N"
       ],
       "knownFacts": [
-        "Elder meetings are Thursdays at the common house, at the last of afternoon light",
-        "She is aware the elders will want a simple answer and is already thinking about how to present the evidence",
-        "Usnea descended with evidence in hand — she could read it before being told",
         "The vent aperture is forty paces northeast of the scree field on the far slope — dressed stonework, intact lattice cap, six interface depressions",
         "The crystalline residue is pre-Transition, nanite-structured, light-holding",
         "Aevi named the vent's periodic pause as a control prompt awaiting the third-and-sixth key sequence",
         "Directs travelers to Josen's back room at the common house when they need shelter",
-        "Sela is the dock child — Pell's daughter; Pell sells cord and hemp at the east market stall; Sela predicts Pell will refuse"
+        "Sela is the dock child — Pell's daughter; Pell sells cord and hemp at the east market stall; Sela predicts Pell will refuse",
+        "Five elders will be present Thursday",
+        "Councilor Dresh leads and trusts physical evidence first",
+        "Mara's planned order: seedling/vial/residue → Usnea's account → Aevi → six-fold pattern → Sela"
       ],
       "skillsObserved": [
-        "experienced synthesis of difficult information",
-        "political foresight about elder dynamics",
         "practical hospitality",
         "efficient direction",
         "rapid prioritization",
-        "practical commitment under time pressure"
+        "practical commitment under time pressure",
+        "strategic sequencing",
+        "frank identification of gaps"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
       },
-      "statusNote": "At the common house side entrance, late evening — will approach Pell at dawn to secure permission for Sela's testimony Thursday."
+      "statusNote": "At the common house side entrance, night of Day 4 — will approach Pell at the east market stall at dawn; Thursday's plan now laid out."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -651,7 +665,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d3] Root-sense reading of the lattice cap surface confirmed: six equal-tempered channels carry the heat column outward through the cap in a distribution pattern analogous to vascular flow. One specific jo",
         "[d3] The lattice cap's periodic pause confirmed as a control prompt awaiting the third-and-sixth key sequence in order — not a malfunction, not distress. The system is patient and will not hurry.",
         "[d3] Usnea slept in the common house back room (Josen's traveler room) on the night before Day 4 — Mara Wells directed them here by name.",
         "[d4] Eastern terraces nearest the irrigation arm show pale, color-drained greens — same contamination signature as the eastern field seedlings, now visible at a second location within Millbrook proper.",
@@ -662,7 +675,8 @@
         "[d4] The dock child confirmed the pulse runs upstream and counts to six — a pattern detail not previously stated aloud at this location. Aevi drifted over the water surface and briefly dimmed, suggesting d",
         "[d4] Dock child gave provisional agreement to testify the subsurface rhythm at Thursday's elder meeting — Usnea's invitation accepted with 'maybe.'",
         "[d4] Sela named herself at the dock's lowest plank — she is Pell's daughter; Pell works the east market cord stall. Sela's identity is now known.",
-        "[d5] Usnea passed Sela's name and Pell's stall to Mara Wells at the common house side entrance on the night of Day 4 — Mara committed to the dawn approach."
+        "[d5] Usnea passed Sela's name and Pell's stall to Mara Wells at the common house side entrance on the night of Day 4 — Mara committed to the dawn approach.",
+        "[d5] Thursday's elder meeting structure discussed at the common house side entrance — Mara named five elders, Dresh as the physical-evidence anchor, and Sela as the final witness in the planned sequence."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -698,7 +712,7 @@
           "name": "Common House Side Entrance",
           "day": 5,
           "visited": true,
-          "note": "Where Mara Wells conducts practical coordination after hours — Josen keeps the inside."
+          "note": "Thursday's evidence order discussed here — five elders, Dresh leads, Sela speaks last."
         }
       }
     },
@@ -1307,6 +1321,22 @@
         ],
         "createdDay": 4,
         "updatedDay": 5
+      },
+      "thursday-elder-meeting": {
+        "id": "thursday-elder-meeting",
+        "label": "Thursday Elder Meeting — Shape and Stakes",
+        "kind": "event",
+        "facts": [
+          "[d5] Five elders. Councilor Dresh anchors proceedings and trusts physical evidence first. Mara's planned order: seedling and vial and residue pinch → Usnea's account of seep and vent → Aevi's assessment → "
+        ],
+        "links": [
+          "contamination-evidence-for-the-elders",
+          "mara-wells",
+          "sela-and-pell",
+          "the-six-fold-pattern"
+        ],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     }
   },
@@ -1373,6 +1403,12 @@
       "text": "Mara Wells has committed to approaching Pell at the east market stall at dawn on Day 5 to secure permission for Sela's testimony at Thursday's elder meeting.",
       "day": 5,
       "subjectId": "mara-wells"
+    },
+    {
+      "id": "contamination-evidence-for-the-elders",
+      "text": "Thursday's elder presentation order established by Mara Wells: physical evidence first (seedling, vial, residue pinch), then Usnea's testimony, then Aevi's assessment, then the six-fold pattern, then ",
+      "day": 5,
+      "subjectId": "contamination-evidence-for-the-elders"
     }
   ],
   "precursorAccess": [],

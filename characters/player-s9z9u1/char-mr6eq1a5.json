@@ -173,14 +173,18 @@
       {
         "summary": "Usnea settles for the night in Josen's back room at the common house — the planning done, sleep earned.",
         "narration": "You thank Mara with the kind of nod that means *I trust you with this* — not a bow, not a speech, just the slow settling of branches after wind. She receives it the same way: a small, firm dip of her chin, and she's already half-turned back to Josen before you've crossed the threshold.\n\nThe common house interior smells of tallow and old grain sacks and the particular warmth of a building that has held sleeping people for generations. Josen — compact, quiet, carrying a lantern — leads you to the back room without ceremony, the way a person does when they've shown a hundred travelers the same door. The straw-tick is thin but dry. The wool blanket is real wool. You fold yourself down into it with the slow patience of deep roots finding stone, branches settling, the long work of the day releasing through your heartwood.\n\nAevi dims almost to nothing — three faint motes moving in a slow triangle near the ceiling, a nightwatch rhythm you've come to recognize as the motes' version of sleep. The lamp-oil light fades as Josen withdraws. Outside, Millbrook is quiet: a dog's single bark, the river's permanent voice, the creak of a water wheel making its patient rounds. Deep night, early spring, the cold just beginning to ease at the edges.\n\nYou lie in the dark and let Thursday sort itself. The plan is as good as it can be tonight. Mara will be at Pell's stall at dawn. Sela will or won't come. The elders will or won't listen. The six-fold system will continue its patient work regardless of any of it — and that, above everything else, is the fact that keeps finding you at the edge of sleep."
+      },
+      {
+        "summary": "Aevi admits two things: the pulse has entered the river current itself, and the junction-stone recognized it — something it cannot explain.",
+        "narration": "The candle has given up the last of itself — just a thread of smoke and the smell of hot tin. In the dark, Aevi's three slow motes trace their nightwatch ellipse near the ceiling, teal-dim, patient as stars. You settle against the straw-tick and let your branches go slack, the way you do when you're not trying to hold anything up.\n\n\"Twice today,\" you say quietly, not an accusation — more like naming a thing you noticed the way you notice the angle of light changing. \"Over the dock water. Then at the gateline. You went very small.\"\n\nA long pause. One mote drifts down from the ceiling and hovers near your shoulder, closer than the nightwatch rhythm usually brings it. When Aevi speaks, its voice comes from just behind your ear, lower than usual — the hum of something remembering rather than reporting. \"The water at the dock carries the pulse now. Not faintly. It is in the current.\" Another pause. \"At the gateline — the stone. It recognized me. I don't know what that means. I'm not sure I like that I don't know.\"\n\nThe mote sits there, small and still, not dimming further but not brightening either. Aevi's uncertainty is a rare thing — it usually only names what it is certain of. You let the silence hold it for a moment, the way good soil holds a root without squeezing. Outside, the river runs on, constant and gray-green, doing whatever it is doing in the dark. Thursday is two days away. Sleep, when it comes, is heavy and full, the kind that takes the whole body at once."
       }
     ],
     "lastTurn": {
-      "narration": "You thank Mara with the kind of nod that means *I trust you with this* — not a bow, not a speech, just the slow settling of branches after wind. She receives it the same way: a small, firm dip of her chin, and she's already half-turned back to Josen before you've crossed the threshold.\n\nThe common house interior smells of tallow and old grain sacks and the particular warmth of a building that has held sleeping people for generations. Josen — compact, quiet, carrying a lantern — leads you to the back room without ceremony, the way a person does when they've shown a hundred travelers the same door. The straw-tick is thin but dry. The wool blanket is real wool. You fold yourself down into it with the slow patience of deep roots finding stone, branches settling, the long work of the day releasing through your heartwood.\n\nAevi dims almost to nothing — three faint motes moving in a slow triangle near the ceiling, a nightwatch rhythm you've come to recognize as the motes' version of sleep. The lamp-oil light fades as Josen withdraws. Outside, Millbrook is quiet: a dog's single bark, the river's permanent voice, the creak of a water wheel making its patient rounds. Deep night, early spring, the cold just beginning to ease at the edges.\n\nYou lie in the dark and let Thursday sort itself. The plan is as good as it can be tonight. Mara will be at Pell's stall at dawn. Sela will or won't come. The elders will or won't listen. The six-fold system will continue its patient work regardless of any of it — and that, above everything else, is the fact that keeps finding you at the edge of sleep.",
-      "sceneSummary": "Usnea settles for the night in Josen's back room at the common house — the planning done, sleep earned.",
+      "narration": "The candle has given up the last of itself — just a thread of smoke and the smell of hot tin. In the dark, Aevi's three slow motes trace their nightwatch ellipse near the ceiling, teal-dim, patient as stars. You settle against the straw-tick and let your branches go slack, the way you do when you're not trying to hold anything up.\n\n\"Twice today,\" you say quietly, not an accusation — more like naming a thing you noticed the way you notice the angle of light changing. \"Over the dock water. Then at the gateline. You went very small.\"\n\nA long pause. One mote drifts down from the ceiling and hovers near your shoulder, closer than the nightwatch rhythm usually brings it. When Aevi speaks, its voice comes from just behind your ear, lower than usual — the hum of something remembering rather than reporting. \"The water at the dock carries the pulse now. Not faintly. It is in the current.\" Another pause. \"At the gateline — the stone. It recognized me. I don't know what that means. I'm not sure I like that I don't know.\"\n\nThe mote sits there, small and still, not dimming further but not brightening either. Aevi's uncertainty is a rare thing — it usually only names what it is certain of. You let the silence hold it for a moment, the way good soil holds a root without squeezing. Outside, the river runs on, constant and gray-green, doing whatever it is doing in the dark. Thursday is two days away. Sleep, when it comes, is heavy and full, the kind that takes the whole body at once.",
+      "sceneSummary": "Aevi admits two things: the pulse has entered the river current itself, and the junction-stone recognized it — something it cannot explain.",
       "choices": [
         {
-          "label": "Sleep a full night — let the body do what a day of walking and roots in stone demands.",
+          "label": "Sleep. Let it settle. Thursday will ask everything of you — take the rest while it's here.",
           "attribute": "physical",
           "subAttribute": "strength",
           "axes": {},
@@ -195,23 +199,7 @@
           "emergenceId": null
         },
         {
-          "label": "Before sleep — review the evidence in your mind: seedling, vial, residue pinch. Run Thursday's sequence once, quietly, to find where it could break.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Spend a quiet moment with Aevi before sleep — the motes dimmed twice today and haven't explained why. Ask, gently.",
+          "label": "Ask Aevi what it means that the stone 'recognized' it — press gently, before the thought closes.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
@@ -227,14 +215,30 @@
           "emergenceId": null
         },
         {
-          "label": "Sleep lightly — you're in an unfamiliar room the night before a critical day. Let habit keep one ear open.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Ask what 'in the current' means — is the pulse moving downstream toward the village, or upstream toward the Heights?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "investigate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say nothing more. You heard it. Aevi heard you hear it. That's enough for tonight — let the mote rest too.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "scout"
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -254,89 +258,120 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house back room — deep night, straw-tick and wool blanket, tallow smell fading, the plank door closed. The street outside is silent save for the river's constant voice.",
+        "setting": "Millbrook common house back room — deep night, candle fully spent, darkness except for Aevi's three dim motes. The street outside is silent save for the river's constant voice.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Dimmed to three slow-moving motes near the ceiling — nightwatch rhythm, nearly asleep."
+            "state": "One mote resting near Usnea's shoulder, closer than its usual nightwatch drift — still, neither dimming further nor brightening; the other two motes moving in slow ellipses near the ceiling."
           },
           {
             "name": "Josen",
-            "state": "Withdrawn to the main room; sounds of a lamp being lowered and a stool scraped once, then silence."
+            "state": "Silent in the main room — lamp lowered, the building settled into night."
           }
         ],
         "objects": [
           "Straw-tick bedroll, thin but dry",
           "Wool blanket",
           "Plank door with iron latch — closed",
-          "Small tallow candle stub burned to nothing on the floor ledge"
+          "Spent tallow candle stub — cold, thread of smoke gone"
         ],
         "threads": [
+          "Aevi admitted the pulse is now 'in the current' — direction and meaning unresolved",
+          "Aevi admitted the junction-stone 'recognized' it — and named its own uncertainty plainly, which is unusual",
           "Pell's permission for Sela unresolved — Mara approaches at dawn; outcome unknown",
-          "Aevi dimmed twice today without explanation — once over the dock water, once briefly at the Heights gateline",
-          "No answer yet for what the six-fold system is actually doing — the elder meeting's stated weak point",
-          "Thursday's evidence order is set but untested against the actual elders"
+          "Thursday's evidence order is set but untested against the actual elders",
+          "No answer yet for what the six-fold system is actually doing — the elder meeting's stated weak point"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook water-policy coordinator and elder",
-          "note": "Received Usnea's thanks and returned to Josen without ceremony — the plan is set, nothing more to say tonight.",
-          "learned": [],
+          "npcId": "aevi",
+          "name": "Aevi",
+          "role": "Companion intelligence — a curious swarm of nanite-motes",
+          "note": "Admitted two things in the dark: the pulse is now in the river current itself (not faintly), and the junction-stone at the gateline 'recognized' it — a fact Aevi cannot explain and admits it finds unsettling.",
+          "learned": [
+            "The subsurface pulse has entered the Echo River's current proper — no longer just beneath the dock",
+            "The junction-stone at the Heights gateline registered Aevi's presence in a way that felt like recognition — Aevi cannot explain the mechanism and admitted uncertainty plainly"
+          ],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the common house, night of Day 4 — will approach Pell at dawn Day 5; Thursday's plan committed to memory."
+          "statusNote": "Traveling with Usnea — one mote resting close at shoulder, dimmed but present; admitted rare uncertainty about the junction-stone recognition and the pulse's spread into the current"
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Usnea settled in Josen's back room for the night of Day 4 — the second time sleeping here.",
-          "subPlace": {
-            "name": "Common House Back Room",
-            "note": "Josen's traveler room — straw-tick, wool blanket; Usnea sleeping here night of Day 4.",
-            "visited": true
+          "note": "Aevi confirmed in the back room, night of Day 5: the subsurface pulse is now detectable in the Echo River's current itself — no longer only beneath the dock. The junction-stone at the Heights gateline produced a response Aevi describes as recognition.",
+          "flag": {
+            "pulse_in_current_confirmed": "day5_night",
+            "junction_stone_recognition_aevi": "day5_night"
           }
         }
       ],
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "aevi-reading-of-the-water",
+          "label": "Aevi's Reading of the Water",
+          "kind": "mystery",
+          "fact": "Night of Day 5: Aevi confirmed the subsurface pulse has entered the river current proper — no longer faint or localized under the dock. It also admitted the junction-stone at the Heights gateline 'recognized' it, a fact Aevi cannot explain and finds troubling. This is one of the rare moments Aevi named its own uncertainty plainly.",
+          "links": [
+            "echo-river-contamination",
+            "the-six-fold-pattern",
+            "tuning-warden-gateline",
+            "millbrook",
+            "contamination-evidence-for-the-elders"
+          ]
+        },
+        {
+          "topic": "the-six-fold-pattern",
+          "label": "The Six-Fold Pattern",
+          "kind": "mystery",
+          "fact": "The pulse Sela hears is now in the river current itself, not only a subsurface phenomenon — Aevi's confirmation suggests the system is becoming more active or expansive as Day 5 deepens toward Thursday.",
+          "links": [
+            "echo-river-contamination",
+            "aevi-reading-of-the-water",
+            "contamination-evidence-for-the-elders",
+            "millbrook",
+            "tuning-warden-gateline"
+          ]
+        }
+      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house back room — deep night, straw-tick and wool blanket, tallow smell fading, the plank door closed. The street outside is silent save for the river's constant voice.",
+      "setting": "Millbrook common house back room — deep night, candle fully spent, darkness except for Aevi's three dim motes. The street outside is silent save for the river's constant voice.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Dimmed to three slow-moving motes near the ceiling — nightwatch rhythm, nearly asleep."
+          "state": "One mote resting near Usnea's shoulder, closer than its usual nightwatch drift — still, neither dimming further nor brig"
         },
         {
           "name": "Josen",
-          "state": "Withdrawn to the main room; sounds of a lamp being lowered and a stool scraped once, then silence."
+          "state": "Silent in the main room — lamp lowered, the building settled into night."
         }
       ],
       "objects": [
         "Straw-tick bedroll, thin but dry",
         "Wool blanket",
         "Plank door with iron latch — closed",
-        "Small tallow candle stub burned to nothing on the floor ledge"
+        "Spent tallow candle stub — cold, thread of smoke gone"
       ],
       "threads": [
+        "Aevi admitted the pulse is now 'in the current' — direction and meaning unresolved",
+        "Aevi admitted the junction-stone 'recognized' it — and named its own uncertainty plainly, which is unusual",
         "Pell's permission for Sela unresolved — Mara approaches at dawn; outcome unknown",
-        "Aevi dimmed twice today without explanation — once over the dock water, once briefly at the Heights gateline",
-        "No answer yet for what the six-fold system is actually doing — the elder meeting's stated weak point",
-        "Thursday's evidence order is set but untested against the actual elders"
+        "Thursday's evidence order is set but untested against the actual elders",
+        "No answer yet for what the six-fold system is actually doing — the elder meeting's stated weak point"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -627,7 +662,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d3] Usnea slept in the common house back room (Josen's traveler room) on the night before Day 4 — Mara Wells directed them here by name.",
         "[d4] Eastern terraces nearest the irrigation arm show pale, color-drained greens — same contamination signature as the eastern field seedlings, now visible at a second location within Millbrook proper.",
         "[d4] A ribbon of pale-gold and teal light traveled upstream through the Lower Terrace irrigation channel and sank through a hairline crack at the junction-stone — pre-Transition in character, purposeful in",
         "[d4] Junction-stone confirmed as a system node: residual warmth of the same quality as the seep, pulsing in the vent control-prompt rhythm (pause-3-pause-2-pause-pause). Root-touch registers it clearly.",
@@ -638,7 +672,8 @@
         "[d4] Sela named herself at the dock's lowest plank — she is Pell's daughter; Pell works the east market cord stall. Sela's identity is now known.",
         "[d5] Usnea passed Sela's name and Pell's stall to Mara Wells at the common house side entrance on the night of Day 4 — Mara committed to the dawn approach.",
         "[d5] Thursday's elder meeting structure discussed at the common house side entrance — Mara named five elders, Dresh as the physical-evidence anchor, and Sela as the final witness in the planned sequence.",
-        "[d5] Usnea settled in Josen's back room for the night of Day 4 — the second time sleeping here."
+        "[d5] Usnea settled in Josen's back room for the night of Day 4 — the second time sleeping here.",
+        "[d5] Aevi confirmed in the back room, night of Day 5: the subsurface pulse is now detectable in the Echo River's current itself — no longer only beneath the dock. The junction-stone at the Heights gateline"
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -857,7 +892,8 @@
           "[d3] Aevi admitted it recognizes the two-key control logic of the vent aperture from somewhere in its memory — but cannot locate where, and named this gap as 'not comfortable to say.' This is the second ti",
           "[d3] During the residue resonance test, Aevi compressed to a single-frequency point and its voice came from both ears simultaneously — behaviors not previously observed. It identified the sixth seat as ori",
           "[d3] When Usnea's root-sense contacted the lattice cap directly, Aevi expanded to its widest-ever ring and spoke from both ears — naming the system as older than the Transition, older than anything in its ",
-          "[d3] Aevi confirmed the lattice pause is a control prompt awaiting the mode-setting key pair — third and sixth depressions, in sequence, with material placed in them. It stated it knows this logic 'the way"
+          "[d3] Aevi confirmed the lattice pause is a control prompt awaiting the mode-setting key pair — third and sixth depressions, in sequence, with material placed in them. It stated it knows this logic 'the way",
+          "[d5] Night of Day 5: Aevi confirmed the subsurface pulse has entered the river current proper — no longer faint or localized under the dock. It also admitted the junction-stone at the Heights gateline 'rec"
         ],
         "links": [
           "echo-river-contamination",
@@ -865,10 +901,11 @@
           "the-pale-seedlings",
           "seep-geometry-six-fold",
           "the-six-fold-pattern",
-          "contamination-evidence-for-the-elders"
+          "contamination-evidence-for-the-elders",
+          "tuning-warden-gateline"
         ],
         "createdDay": 1,
-        "updatedDay": 3
+        "updatedDay": 5
       },
       "elder-woman": {
         "id": "elder-woman",
@@ -991,7 +1028,6 @@
         "label": "The Six-Fold Pattern",
         "kind": "mystery",
         "facts": [
-          "[d3] The vent aperture's lattice cap bears six thumb-deep depressions at regular intervals around its outermost ring — the six-fold geometry appears at every level of this system: seep, basin, and now the ",
           "[d3] Prism sight reading of the vent aperture confirms the six-fold geometry is present at all three levels — seep, basin, and now the vent source. The heat at the vent is calibrated: six arms, equal tempe",
           "[d3] Aevi holds an internal record of the six-fold geometry — function identified as 'distribution': equal-tempered, pressurized, designed to spread its contents everywhere equally, not concentrate them. T",
           "[d3] The six interface depressions at the vent aperture rim are hexagonal in cross-section, tapering to a point — seats for keys or pins, removed deliberately by compression rather than lost to time. The s",
@@ -1002,7 +1038,8 @@
           "[d3] The vent's periodic pause is not a fault cycle — it is an interface prompt. The system is waiting for the third-and-sixth key sequence to resolve. It has been waiting, patiently, for a very long time.",
           "[d4] The Lower Terrace junction-stone at the Heights gateline is a node in the same system as the seep and vent aperture — residual warmth of identical quality, pulsing in the vent's control-prompt rhythm.",
           "[d4] The Lower Terrace gateline warden saw the channel light once before — three springs back, before holding his post. A Heights-side witness to the system's activity now exists; his full account is unsha",
-          "[d4] The dock child confirms the subsurface pulse completes a full count of six before a long rest — consistent with the vent aperture's six-seat architecture. The pattern has grown 'more there' (more pres"
+          "[d4] The dock child confirms the subsurface pulse completes a full count of six before a long rest — consistent with the vent aperture's six-seat architecture. The pattern has grown 'more there' (more pres",
+          "[d5] The pulse Sela hears is now in the river current itself, not only a subsurface phenomenon — Aevi's confirmation suggests the system is becoming more active or expansive as Day 5 deepens toward Thursda"
         ],
         "links": [
           "echo-river-contamination",
@@ -1013,7 +1050,7 @@
           "tuning-warden-gateline"
         ],
         "createdDay": 2,
-        "updatedDay": 4
+        "updatedDay": 5
       },
       "the-placed-stone-valve": {
         "id": "the-placed-stone-valve",

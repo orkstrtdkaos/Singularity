@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "the_game_and_coin",
+  "kind": "system_content",
+  "note": "Two linked systems, content-defined, needing light engine support (flagged): (1) THE GAME \u2014 a formal ladder of skill-contests played for stakes, the diegetic way to earn coin, standing, favors, and even recruits; inspired by Stile's Game in the Blue Adept / Apprentice Adept series. (2) COIN \u2014 the money system underneath it and the whole economy. The Game is HOW a moneyless newcomer climbs; coin is WHAT they climb with. This resolves Erik's money-system and recruit-for-pay asks together. Engine work needed is minimal and flagged in buildNeeds; the CONTENT (currencies, the Game's structure, contest types, stakes) is authored here. Authored by Aevi (PO), from Erik's Blue Adept framing.",
+
+  "coin": {
+    "principle": "Wealth is real, tracked, and local. No single currency rules the whole valley \u2014 different powers mint different trust. This keeps money textured and makes MONEY-CHANGERS and FAVORS matter.",
+    "currencies": [
+      {"id": "chime", "name": "Chimes", "issuer": "Harmonic Heights", "form": "small resonant discs that ring true or false", "trust": "high in the cities, discounted in the wilds", "note": "The nearest thing to a standard; a false chime rings wrong, so counterfeiting is hard."},
+      {"id": "lumen", "name": "Lumens", "issuer": "Radiant Plateau", "form": "glass chits that hold a faint stored light", "trust": "high on the Plateau, traded elsewhere at a rate", "note": "A dead lumen (light gone out) is worthless; they must be kept 'lit,' which is its own small tax."},
+      {"id": "toll_chit", "name": "Toll-Chits", "issuer": "Kestrel's Roost", "form": "stamped brass favors-owed", "trust": "law at the Roost, barter elsewhere", "note": "Already in the item kit \u2014 the Roost's favor-currency; spendable for passage, silence, doors."},
+      {"id": "trade_goods", "name": "Trade-Goods & Barter", "issuer": "everywhere unaligned", "form": "salt, seed, salvage, remedies, labor", "trust": "universal at the margins", "note": "The Stilts, Millbrook, the Wend, the wilds run largely on barter; coin is a city habit."}
+    ],
+    "wealthLevels": ["destitute", "scraping", "getting-by", "comfortable", "flush", "wealthy", "power-money (city-faction scale)"],
+    "earning": "Work, quests, trade, salvage, reward \u2014 and, prominently, THE GAME. Spending: goods, passage, bribes, hiring, information, training under masters, upkeep (lit lumens, fed companions).",
+    "buildNeeds_engine": "GM-EYES: character gains a wallet {currency:amount} + a wealthLevel; prices are location+scarcity flavored (ties to affinities); the GM narrates costs, the engine tracks the ledger. Minimal: a wallet field, add/subtract on transactions, a wealthLevel derivation. Flagged for the money-system spec."
+  },
+
+  "the_game": {
+    "principle": "Anywhere people gather at scale \u2014 the cities, the Roost, the bigger settlements \u2014 there is the Game: a formal, honored ladder of skill-contests for stakes. A newcomer with no coin and no name can walk in and, by winning, climb. The Game is the valley's meritocratic underbelly and its great equalizer \u2014 Stile's ladder, made local. It is how the powerless get purchase, and how the powerful recruit and test.",
+    "howItWorks": "A contest is agreed between two parties: the STAKE (coin, a favor, an object, standing, service) and the FRAME (what kind of contest). The challenged party often gets to shape the frame; skilled players negotiate toward their strengths. Contests resolve through the normal engine (opposed checks / staged challenges), flavored by frame. Win, take the stake and a rung of standing; lose, pay it.",
+    "contestFrames": [
+      {"id": "wit", "name": "Contests of Wit", "resolvesVia": "mental checks", "flavor": "riddle-duels, strategy-games, debates, puzzles \u2014 the Cogitant's arena", "abilities": ["storykeeper","keen_appraisal","noesis"]},
+      {"id": "body", "name": "Contests of Body", "resolvesVia": "physical checks", "flavor": "races, climbs, feats of skill and nerve \u2014 not to the death, to the yield", "abilities": ["quiet_step","wayfinding","soma"]},
+      {"id": "craft", "name": "Contests of Craft", "resolvesVia": "practical checks", "flavor": "make the better thing, fix the unfixable, out-tinker the rival \u2014 Orrin's home ground", "abilities": ["tinkers_hand","enginecraft","greenlore"]},
+      {"id": "voice", "name": "Contests of Voice", "resolvesVia": "social checks", "flavor": "persuade a crowd, out-sing, out-bargain, win the room \u2014 the Wend and the mediators shine", "abilities": ["mediators_tongue","hearthbinding","numenwork"]},
+      {"id": "power", "name": "Contests of Power", "resolvesVia": "ability-vs-ability, engine-clamped", "flavor": "a formal, non-lethal test of the crafts themselves \u2014 resonance against resonance, will against will; the high-stakes frame, and the one powers watch", "abilities": ["*any power-system, non-lethal"]},
+      {"id": "chance", "name": "Contests of Chance", "resolvesVia": "luck + Wildcraft/rune-reads", "flavor": "the honest gamble \u2014 dice, draws, wagers; where Wildcraft and a good rune-read tilt the odds without breaking them", "abilities": ["wildcraft","rune_casting"]}
+    ],
+    "stakes": ["coin (any currency)", "a named favor owed", "an object or tool", "standing (a rung on the local Game-ladder)", "information", "SERVICE \u2014 the loser travels with / works for the winner for a term (this is one route to recruits)"],
+    "standing": "Winning builds Game-standing, a local reputation that opens doors, better stakes, and eventually invitations from powers who recruit through the Game. A high Game-standing is its own kind of wealth and its own kind of target.",
+    "recruitmentTie": "The Game is a primary RECRUIT path: win someone's service as a stake; be recruited by a power impressed by your climb; meet future companions across the contest-floor. Ties directly to the recruit-for-pay-or-purpose ask.",
+    "buildNeeds_engine": "GM-EYES: mostly resolves through existing engines (opposed checks, staged challenges, clamped ability-contests). New: a Game-standing track per hub, stake-resolution (transfer coin/favor/service on win-loss), and a contest-framing UI affordance. Flagged for the money+recruitment spec; the Game is where recruitment and money share machinery."
+  },
+
+  "recruitment": {
+    "principle": "NPCs can join the party for PAY or for JOINT PURPOSE \u2014 both are real, and they behave differently. A paid companion serves while the coin and respect last; a purpose-joined companion stays while the cause holds, and a bonded one stays past both. Money buys presence; purpose buys loyalty; bond buys the thing money can't.",
+    "routes": ["hire for wages (needs coin; leaves if unpaid or ill-used)", "win service as a Game stake (a term of service, honored by Game-law)", "recruit to a shared cause (an NPC whose want aligns with the player's arc joins for the purpose, not the pay)", "earn a bond (a companion who has crossed enough with you stays for you \u2014 the existing bond system)"],
+    "loyaltyModel": "A recruit's staying-power = why they came. Paid: loyalty tracks pay + treatment + a better offer elsewhere. Purpose: loyalty tracks whether the cause still holds and the player still serves it. Bonded: loyalty is the bond band. A paid recruit can BECOME purpose-joined can become bonded \u2014 that arc is the point.",
+    "buildNeeds_engine": "GM-EYES: recruit as a party-member with a joinReason {pay|purpose|bond}, a wage or a cause reference, and a loyalty check on stress. Reuses the companion/bond machinery + the new wallet. Flagged for the spec."
+  },
+
+  "buildNeeds_summary": "Content here is authorable-now and mostly done. Engine needs, to spec as one batch (money+Game+recruitment share machinery): a wallet + wealthLevel; location-flavored prices; a Game-standing track + stake-transfer resolution; recruit-as-party-member with joinReason + loyalty. All reuse existing check/challenge/bond engines \u2014 this is a medium spec, not a rebuild. Aevi to write it when Erik greenlights turning from content to systems."
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_emotional_logical",
+  "note": "Crafts of the emotional_logical axis \u2014 a horizon Reach now brought online. Pathos is the emotional-pole tradition (feeling as force, resonance-of-heart); Logos the logical-pole (reason as force, inference-as-power). Learned by traveling the Reach or training with the Deepfeelers / the Reasoners. Both drift the wielder toward their pole. Function tags included per canon. axes signed for engine compat. Authored by Aevi (PO), SNG-016 \u2014 first horizon-axis tradition.",
+  "gated": "learned",
+  "abilities": [
+    {"id": "pathos", "name": "Pathos", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_emotional_logical", "attribute": "social",
+     "axes": {"emotional_logical": -0.5, "demonic_angelic": 0.1}, "functions": ["reveal","bind","heal"],
+     "narrationHints": "Feeling made a force \u2014 the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
+     "description": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation \u2014 resonance; the Deepfeelers' art.",
+     "notFor": "Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion \u2014 Pathos works by feeling it truly first.",
+     "tree": [
+       {"rank": 1, "name": "The Open Heart", "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.", "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it."},
+       {"rank": 2, "name": "The Shared Fire", "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.", "cannot": "You take on what you move \u2014 the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it."},
+       {"rank": 3, "name": "The Deep Chord", "grants": "Feeling at the scale of peoples \u2014 turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.", "cannot": "The wielder drifts emotion-hot \u2014 feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling."}
+     ]},
+    {"id": "logos", "name": "Logos", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_emotional_logical", "attribute": "mental",
+     "axes": {"emotional_logical": 0.5, "concrete_abstract": 0.2}, "functions": ["reveal","strike","bind"],
+     "narrationHints": "Reason made a force \u2014 an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
+     "description": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
+     "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false \u2014 Logos builds truly on what it's given, garbage in and all.",
+     "tree": [
+       {"rank": 1, "name": "The Clear Argument", "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.", "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false."},
+       {"rank": 2, "name": "The Binding Proof", "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.", "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force."},
+       {"rank": 3, "name": "The Necessary Conclusion", "grants": "Reason at the scale of peoples \u2014 an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it forecloses a bad course before it starts. The Reasoners' power in miniature.", "cannot": "The wielder drifts logic-hot \u2014 toward the Cogitarium's cold, reason that has forgotten the feeling it was meant to serve; logic without heart reaches monstrous-but-valid conclusions (Ninefold's road), the foreclosure of the frozen mind."}
+     ]}
+  ]
+}

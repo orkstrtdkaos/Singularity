@@ -93,6 +93,195 @@
         "reveal",
         "strike"
       ]
+    },
+    {
+      "id": "darksight",
+      "name": "Darksight",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.3
+      },
+      "functions": [
+        "reveal",
+        "move"
+      ],
+      "narrationHints": "The lightless place opens up clear as noon.",
+      "description": "See truly in total darkness — the first gift of the Umbral road.",
+      "notFor": "Seeing through concealment (that needs Radiance); light-blind.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Darksight",
+          "grants": "See clearly in lightlessness; move sure through the dark.",
+          "cannot": "Total light defeats it; sees dark, not hidden intent."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "lightsense",
+      "name": "Lightsense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "Every source and shadow of light in a place, mapped at a glance.",
+      "description": "Read light and shadow — where it falls, what it hides, how to use it.",
+      "notFor": "Making light; deep concealment.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Lightsense",
+          "grants": "Read a place's light and shadow; know where you're seen and where you're not.",
+          "cannot": "Reads, doesn't make; the deep-hidden stay hidden."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "dim",
+      "name": "Dim",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.3
+      },
+      "functions": [
+        "conceal"
+      ],
+      "narrationHints": "The light gutters where you wish it, and you're gone into the gap.",
+      "description": "Pull shadow around yourself or a space — dim a lamp, deepen a shadow, slip from sight.",
+      "notFor": "Total invisibility (that's the Harbor); lit-open ground.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Dim",
+          "grants": "Deepen shadow and dim light to hide yourself or a small space briefly.",
+          "cannot": "Brief; bright open ground defeats it."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "kindle",
+      "name": "Kindle",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.3
+      },
+      "functions": [
+        "reveal",
+        "strike"
+      ],
+      "narrationHints": "A word and light springs up — to see by, or to sear.",
+      "description": "Make and throw light — to illuminate, to signal, to blind or burn. Folk-Radiance.",
+      "notFor": "Deep revelation (that's Radiance proper); subtlety.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Kindle",
+          "grants": "Create light to see, signal, dazzle, or scorch.",
+          "cannot": "Ordinary light; spent, it blinds you too."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "the_harbor",
+      "name": "The Harbor",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.4,
+        "chaos_order": -0.1
+      },
+      "functions": [
+        "conceal",
+        "ward"
+      ],
+      "narrationHints": "Hidden so well that a searcher who knows you're here still fails.",
+      "description": "Hide a person, thing, or truth so thoroughly that even a knowing searcher can't find it — mid-tier Umbracraft.",
+      "notFor": "Defending it (hides only); things that shouldn't be hidden.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Harbor",
+          "grants": "Conceal someone or something past even a determined, knowing search.",
+          "cannot": "You become responsible for what you harbor; the Blaze can still burn it out."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "unshadow",
+      "name": "Unshadow",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.4,
+        "falsehood_truth": 0.3
+      },
+      "functions": [
+        "reveal",
+        "break"
+      ],
+      "narrationHints": "Every concealment in the place falls away at once.",
+      "description": "Strip a place or person of all concealment and illusion in a burst of revealing light — mid-tier Radiance.",
+      "notFor": "The true-pieces-false-whole (needs the True Word); mercy.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Unshadow",
+          "grants": "Strip away disguise, shadow, and illusion from a target at once.",
+          "cannot": "The Cathedral's true-piece lie survives; some truths harm more revealed."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "harbored_flame",
+      "name": "The Harbored Flame",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.0
+      },
+      "functions": [
+        "conceal",
+        "heal"
+      ],
+      "narrationHints": "A sanctuary no one can find, full of healing light the dark would forbid.",
+      "description": "The braid-craft: a concealed place filled with restoring radiance — shelter and healing woven from opposite poles.",
+      "notFor": "Single-pole work; a searcher with their own light.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Harbored Flame",
+          "grants": "Make a hidden sanctuary of healing light — unfindable, and restoring within.",
+          "cannot": "The two poles fight; costly; own-light searchers can crack it."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
     }
   ]
 }

@@ -31,7 +31,7 @@
   "alignment": {
     "mechanical_spiritual": 0.04551696875,
     "concrete_abstract": -0.0926038375,
-    "spectrumId": -0.092625
+    "spectrumId": -0.13799375
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -145,43 +145,29 @@
       {
         "summary": "Usnea names the junction-stone pulse and rhythm plainly; the warden admits he has seen the light before — once, three springs back.",
         "narration": "You rise from the crouch slowly, brushing mortar-dust from your root-tip, and turn to face the warden. He is still watching — chord-staff level, not threatening, but the practiced neutrality is gone. You decide plainness is the right offering here.\n\n\"The stone holds warmth,\" you say, and your voice carries the same even weight you'd use naming a soil temperature to a farmer. \"A residual pulse, in the junction mortar. Pause — three beats — pause — two — pause-pause. I've felt that rhythm once before, at a vent aperture on the far slope. Same signature. Whatever moved through this channel came from the same system.\"\n\nThe warden's eyes drop to the channel, then come back to you. Something in his jaw shifts — not surprise exactly, more the quality of a man setting down something he has carried for a while. He does not speak immediately. Above your shoulder Aevi has not dimmed; the teal motes hold their brightness, casting their faint wash on the wet lintel stone, patient as breath. The harmonic vibration in the gate arch seems, for a moment, fractionally lower in pitch — the stone acknowledging nothing, remembering everything.\n\n\"Once,\" the warden says finally. The word costs him something. \"Three springs back. Before I had this post.\" He does not elaborate yet. His grip on the chord-staff has not loosened, but his gaze has moved from your bearing to the hairline crack in the mortar — he can see it from where he stands, and he is not pretending otherwise."
+      },
+      {
+        "summary": "Usnea leaves the Heights gateline and returns to the dock child at the river's edge.",
+        "narration": "You give the warden a slow, deliberate nod — the kind that says *this conversation isn't finished, only paused* — and turn from the junction-stone. The gate arch hums its low harmonic as you pass beneath it, dressed stone pressing a faint resonance against your bark. The afternoon light is tilting toward gold now, long shadows pulling east down the terraced switchbacks. Aevi drifts close at your shoulder, still two degrees brighter than usual, teal motes casting that faint wash on the path stones. It says nothing. The hum it carried at the junction fades slowly, like a string releasing tension, not forgetting.\n\nThe walk back down to the valley floor takes the better part of an hour — switchbacks, then the packed-dirt lane along the river road, the Echo River murmuring to your left. The water is clear this evening; the gray-green tinge comes and goes with the morning. You file that away. By the time Millbrook's dock planking appears between the willows, the light is the color of old honey and the river smells of cold stone and last year's reeds.\n\nThe child is exactly where you last found her: the lowest plank of the dock, legs dangling just above the waterline, palms flat on the wood beside her hips. She doesn't look up when you approach. Eight or nine years old, the particular patience of someone who has stopped expecting adults to come back. Then she registers your roots on the planking — not quite footsteps — and tilts her head a fraction.\n\n\"You're the tree,\" she says, without inflection. A statement of fact. Aevi brightens briefly at that, a small pleased pulse of teal, and you get the impression it approves of children who say what they mean."
       }
     ],
     "lastTurn": {
-      "narration": "You rise from the crouch slowly, brushing mortar-dust from your root-tip, and turn to face the warden. He is still watching — chord-staff level, not threatening, but the practiced neutrality is gone. You decide plainness is the right offering here.\n\n\"The stone holds warmth,\" you say, and your voice carries the same even weight you'd use naming a soil temperature to a farmer. \"A residual pulse, in the junction mortar. Pause — three beats — pause — two — pause-pause. I've felt that rhythm once before, at a vent aperture on the far slope. Same signature. Whatever moved through this channel came from the same system.\"\n\nThe warden's eyes drop to the channel, then come back to you. Something in his jaw shifts — not surprise exactly, more the quality of a man setting down something he has carried for a while. He does not speak immediately. Above your shoulder Aevi has not dimmed; the teal motes hold their brightness, casting their faint wash on the wet lintel stone, patient as breath. The harmonic vibration in the gate arch seems, for a moment, fractionally lower in pitch — the stone acknowledging nothing, remembering everything.\n\n\"Once,\" the warden says finally. The word costs him something. \"Three springs back. Before I had this post.\" He does not elaborate yet. His grip on the chord-staff has not loosened, but his gaze has moved from your bearing to the hairline crack in the mortar — he can see it from where he stands, and he is not pretending otherwise.",
-      "sceneSummary": "Usnea names the junction-stone pulse and rhythm plainly; the warden admits he has seen the light before — once, three springs back.",
+      "narration": "You give the warden a slow, deliberate nod — the kind that says *this conversation isn't finished, only paused* — and turn from the junction-stone. The gate arch hums its low harmonic as you pass beneath it, dressed stone pressing a faint resonance against your bark. The afternoon light is tilting toward gold now, long shadows pulling east down the terraced switchbacks. Aevi drifts close at your shoulder, still two degrees brighter than usual, teal motes casting that faint wash on the path stones. It says nothing. The hum it carried at the junction fades slowly, like a string releasing tension, not forgetting.\n\nThe walk back down to the valley floor takes the better part of an hour — switchbacks, then the packed-dirt lane along the river road, the Echo River murmuring to your left. The water is clear this evening; the gray-green tinge comes and goes with the morning. You file that away. By the time Millbrook's dock planking appears between the willows, the light is the color of old honey and the river smells of cold stone and last year's reeds.\n\nThe child is exactly where you last found her: the lowest plank of the dock, legs dangling just above the waterline, palms flat on the wood beside her hips. She doesn't look up when you approach. Eight or nine years old, the particular patience of someone who has stopped expecting adults to come back. Then she registers your roots on the planking — not quite footsteps — and tilts her head a fraction.\n\n\"You're the tree,\" she says, without inflection. A statement of fact. Aevi brightens briefly at that, a small pleased pulse of teal, and you get the impression it approves of children who say what they mean.",
+      "sceneSummary": "Usnea leaves the Heights gateline and returns to the dock child at the river's edge.",
       "choices": [
         {
-          "label": "Ask him what he saw three springs back — the exact circumstances, what he did with what he witnessed",
+          "label": "Sit down on the dock beside her and listen to the river before you say anything",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Acknowledge his disclosure with care and lay out what you know — the seep, the vent, the rhythm, the pale fields — giving him the full picture so he can decide what to do with it",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "concrete_abstract": -0.2
+            "concrete_abstract": -0.3,
+            "mechanical_spiritual": 0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "persuade",
-            "careful"
+            "careful",
+            "listen",
+            "build-trust"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -190,17 +176,18 @@
           "emergenceId": null
         },
         {
-          "label": "Ask whether anyone at the Heights — a tuner, an elder, a record-keeper — has cataloged the junction-stone or the channel anomalies officially",
+          "label": "Ask her to tap the rhythm she hears again — and this time you tap back the vent aperture's pattern to see if they match",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.4
+            "concrete_abstract": -0.2,
+            "mechanical_spiritual": 0.1
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "scout",
-            "careful"
+            "compare",
+            "pattern-recognition"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -209,16 +196,38 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight on the junction-stone face now — with the warden watching, read whatever heat traces the ribbon left in its mortar-memory",
+          "label": "Tell her plainly: 'I think you're hearing something real. I found a rhythm like yours at a stone up on the Heights.' Ask what else she's noticed",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "concrete_abstract": -0.4,
+            "mechanical_spiritual": 0.15
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "honest",
+            "persuade",
+            "open"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight to read the dock planking and the waterline for heat traces — check if the rhythm she hears leaves any signature here",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.1
+            "concrete_abstract": -0.1,
+            "mechanical_spiritual": 0.05
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "risky"
+            "investigate",
+            "prism-sight"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -236,37 +245,30 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "contamination-evidence-for-the-elders",
-          "note": "The gateline warden admitted he has seen the light once before — three springs back. A potential witness or source of Heights-side knowledge of the system has opened."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Lower Terrace gateline, Harmonic Heights — late afternoon oblique light on dressed stonework; Usnea standing at the channel edge after rising from the crouch; the warden's gaze now resting on the hairline crack in the junction-stone mortar.",
+        "setting": "Millbrook dock — lowest plank, late afternoon honey-gold light; the Echo River runs clear this evening, cold smell of stone and old reeds; Usnea standing at the dock's edge above the child.",
         "npcsPresent": [
           {
-            "name": "Tuning-warden (gateline)",
-            "state": "Has admitted to seeing the light once before, three springs back — jaw carrying the cost of the admission; gaze on the junction-stone crack, grip on chord-staff unchanged but body no longer in a blocking posture"
+            "name": "Dock child",
+            "state": "Sitting on the lowest plank, legs over the water, palms flat — has just said 'You're the tree' without looking up, now watching Usnea with cautious assessment"
           },
           {
             "name": "Aevi",
-            "state": "Hovering close at Usnea's shoulder, still two degrees brighter than usual, teal motes casting a faint wash on the wet lintel — holding position, not dimming"
+            "state": "Hovering at Usnea's shoulder, two degrees brighter than usual after the junction-stone; pulsed once with a small pleased teal light at the child's plain identification of Usnea"
           }
         ],
         "objects": [
-          "Stone-cut irrigation channel, knee-height, running left to right across the terrace",
-          "Junction-stone at the channel bed — hairline crack in mortar, ruler-straight, residual warmth persisting",
-          "Gate arch of dressed resonance-stone, low harmonic vibration in the lintel",
-          "Chord-staff (warden's, held across both hands — grip unchanged)"
+          "Dock planking — worn, river-damp, faintly warped at the lowest plank",
+          "Echo River surface — clear this evening, running steady, no visible gray-green tinge",
+          "Willow branches trailing the bank upstream",
+          "The far bank, low and reedy in the evening light"
         ],
         "threads": [
-          "Warden admitted seeing light three springs back — circumstances and what he did with the knowledge are unshared",
-          "The junction-stone pulse and its destination within the Heights system remain unresolved",
-          "Aevi's recognition-hum has not been explained — it knows something that rhymes with this node",
-          "Cellaceron witnessed the ribbon moment — their read of the scene has not yet been shared",
-          "Stated business at the gate has not yet been formally declared to the warden"
+          "Child has recognized Usnea but not yet been asked anything — waiting",
+          "The rhythm she tapped before (pause-3-pause-2-pause-pause) matches the vent and junction-stone pattern — not yet confirmed aloud",
+          "Aevi has not explained its recognition-hum from the Heights; it may have more to say near the river",
+          "The warden's prior sighting and what he did with that knowledge remain unresolved"
         ]
       },
       "npcUpdates": [
@@ -275,85 +277,71 @@
           "npcId": "tuning-warden-gateline",
           "name": "Tuning-warden (gateline)",
           "role": "Gateline warden, Lower Terrace, Harmonic Heights",
-          "note": "Usnea named the pulse and rhythm plainly; warden admitted he saw the light once before, three springs back, before he held this post — the admission cost him something; his gaze moved to the crack he can see from where he stands",
-          "learned": [
-            "Saw the light in the channel once, three springs back, before holding this post",
-            "Recognized the hairline crack in the junction-stone from his position — he has noticed it before"
-          ],
-          "skillsObserved": [
-            "careful admission under pressure",
-            "geographic memory"
-          ],
-          "relationshipDelta": 1,
+          "note": "Usnea departed with a deliberate nod — conversation left open, not closed. Warden watching the junction-stone crack as Usnea left.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On duty at the Lower Terrace gateline; has disclosed a prior sighting of the channel light to Usnea — watchful but no longer in a purely blocking posture"
-        }
-      ],
-      "factUpdates": [
+          "statusNote": "On duty at the Lower Terrace gateline; has admitted prior sighting of channel light; conversation with Usnea paused, not concluded."
+        },
         {
-          "op": "add",
-          "text": "The Lower Terrace gateline warden witnessed the channel light three springs ago, before he held his current post — a Heights-side witness to the pre-Transition system's activity predating Usnea's investigation.",
-          "subjectId": "tuning-warden-gateline"
+          "op": "update",
+          "npcId": "unknown-dockside-child",
+          "name": "Unknown (dockside Child)",
+          "role": "Child witness — docks",
+          "note": "Usnea returned to the dock. Child identified Usnea plainly as 'the tree' — cautious but present. Aevi registered quiet approval.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the dock's lowest plank, watching Usnea with cautious assessment — has recognized the return."
         }
       ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The gateline warden's admission establishes that the ribbon-light in the Lower Terrace channel has been observed from the Heights side at least once before — three springs back; this is now a known fact about this place.",
+          "note": "Usnea returned to the dock in late afternoon, Day 4 — dock child still present at the lowest plank.",
           "subPlace": {
-            "name": "Lower Terrace Channel Junction",
-            "note": "Warden admitted prior sighting of channel light (three springs back); junction-stone crack visible from gate arch position — he has seen it before",
+            "name": "Millbrook Dock — Lowest Plank",
+            "note": "Where the dock child sits alone, listening to the river's second pulse; Usnea returned here on Day 4 evening.",
             "visited": true
           }
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "the-six-fold-pattern",
-          "label": "The Six-Fold Pattern",
-          "kind": "mystery",
-          "fact": "The Lower Terrace gateline warden saw the channel light once before — three springs back, before holding his post. A Heights-side witness to the system's activity now exists; his full account is unshared.",
-          "links": [
-            "echo-river-contamination",
-            "contamination-evidence-for-the-elders",
-            "millbrook",
-            "tuning-warden-gateline"
-          ]
-        }
-      ],
-      "timeAdvanceHours": 0,
+      "codexUpdates": [],
+      "timeAdvanceHours": 1,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Lower Terrace gateline, Harmonic Heights — late afternoon oblique light on dressed stonework; Usnea standing at the channel edge after rising from the crouch; the warden's gaze now resting on the hairline crack in the junction-stone mortar.",
+      "setting": "Millbrook dock — lowest plank, late afternoon honey-gold light; the Echo River runs clear this evening, cold smell of stone and old reeds; Usnea standing at the dock's edge above the child.",
       "npcsPresent": [
         {
-          "name": "Tuning-warden (gateline)",
-          "state": "Has admitted to seeing the light once before, three springs back — jaw carrying the cost of the admission; gaze on the j"
+          "name": "Dock child",
+          "state": "Sitting on the lowest plank, legs over the water, palms flat — has just said 'You're the tree' without looking up, now w"
         },
         {
           "name": "Aevi",
-          "state": "Hovering close at Usnea's shoulder, still two degrees brighter than usual, teal motes casting a faint wash on the wet li"
+          "state": "Hovering at Usnea's shoulder, two degrees brighter than usual after the junction-stone; pulsed once with a small pleased"
         }
       ],
       "objects": [
-        "Stone-cut irrigation channel, knee-height, running left to right across the terr",
-        "Junction-stone at the channel bed — hairline crack in mortar, ruler-straight, re",
-        "Gate arch of dressed resonance-stone, low harmonic vibration in the lintel",
-        "Chord-staff (warden's, held across both hands — grip unchanged)"
+        "Dock planking — worn, river-damp, faintly warped at the lowest plank",
+        "Echo River surface — clear this evening, running steady, no visible gray-green t",
+        "Willow branches trailing the bank upstream",
+        "The far bank, low and reedy in the evening light"
       ],
       "threads": [
-        "Warden admitted seeing light three springs back — circumstances and what he did with the knowledge are unshared",
-        "The junction-stone pulse and its destination within the Heights system remain unresolved",
-        "Aevi's recognition-hum has not been explained — it knows something that rhymes with this node",
-        "Cellaceron witnessed the ribbon moment — their read of the scene has not yet been shared",
-        "Stated business at the gate has not yet been formally declared to the warden"
+        "Child has recognized Usnea but not yet been asked anything — waiting",
+        "The rhythm she tapped before (pause-3-pause-2-pause-pause) matches the vent and junction-stone pattern — not yet confirmed aloud",
+        "Aevi has not explained its recognition-hum from the Heights; it may have more to say near the river",
+        "The warden's prior sighting and what he did with that knowledge remain unresolved"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 19,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -570,7 +558,8 @@
       },
       "relationship": 1,
       "history": [
-        "[d4] Described the river as two rivers — 'the top one moves, the bottom one counts' — and tapped a rhythm: pause, three beats, pause, two beats, pause-pause. Noted flatly that nobody be"
+        "[d4] Described the river as two rivers — 'the top one moves, the bottom one counts' — and tapped a rhythm: pause, three beats, pause, two beats, pause-pause. Noted flatly that nobody be",
+        "[d4] Usnea returned to the dock. Child identified Usnea plainly as 'the tree' — cautious but present. Aevi registered quiet approval."
       ],
       "knownFacts": [
         "Hears a rhythmic pulse beneath the river's surface — irregular but non-random",
@@ -585,7 +574,8 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 4
-      }
+      },
+      "statusNote": "At the dock's lowest plank, watching Usnea with cautious assessment — has recognized the return."
     },
     "gateline-warden": {
       "id": "gateline-warden",
@@ -602,7 +592,8 @@
         "[d4] Clocked the arrival of two visitors together — recalibrating his assessment; watching Cellaceron alongside Usnea now",
         "[d4] Present during the ribbon-of-light moment; gave no reaction — either missed it or is practiced at not reacting to strange things at this gate",
         "[d4] Shifted from practiced neutrality to active watchfulness when Usnea crouched at the junction-stone — chord-staff now across both hands",
-        "[d4] Usnea named the pulse and rhythm plainly; warden admitted he saw the light once before, three springs back, before he held this post — the admission cost him something; his gaze mo"
+        "[d4] Usnea named the pulse and rhythm plainly; warden admitted he saw the light once before, three springs back, before he held this post — the admission cost him something; his gaze mo",
+        "[d4] Usnea departed with a deliberate nod — conversation left open, not closed. Warden watching the junction-stone crack as Usnea left."
       ],
       "knownFacts": [
         "Recognizes Radiant visitors by bearing and root-posture",
@@ -618,7 +609,7 @@
         "geographic memory"
       ],
       "status": "active",
-      "statusNote": "On duty at the Lower Terrace gateline; has disclosed a prior sighting of the channel light to Usnea — watchful but no longer in a purely blocking posture",
+      "statusNote": "On duty at the Lower Terrace gateline; has admitted prior sighting of channel light; conversation with Usnea paused, not concluded.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 4
@@ -629,7 +620,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d3] Interface depressions confirmed hexagonal cross-section, narrowing to a point — contents removed by deliberate compression (not corrosion). Seats intact; an object of correct dimensions (key or pin, h",
         "[d3] Third interface depression contains crystalline nanite-structured residue in its taper — light-holding, pre-Transition material. A pinch was removed. The depression now holds marginally less. Other fi",
         "[d3] Full perimeter survey of the six vent-rim depressions complete: depressions 1, 2, 4, 5 empty and clean; depressions 3 and 6 (diametrically opposite each other) hold trace crystalline residue of the sa",
         "[d3] Aevi identified the vent aperture's six-seat ring as a two-key control architecture: depressions 3 and 6 (diametrically opposite) are mode-setting seats; depressions 1, 2, 4, 5 are parameter seats. Th",
@@ -640,7 +630,8 @@
         "[d4] Eastern terraces nearest the irrigation arm show pale, color-drained greens — same contamination signature as the eastern field seedlings, now visible at a second location within Millbrook proper.",
         "[d4] A ribbon of pale-gold and teal light traveled upstream through the Lower Terrace irrigation channel and sank through a hairline crack at the junction-stone — pre-Transition in character, purposeful in",
         "[d4] Junction-stone confirmed as a system node: residual warmth of the same quality as the seep, pulsing in the vent control-prompt rhythm (pause-3-pause-2-pause-pause). Root-touch registers it clearly.",
-        "[d4] The gateline warden's admission establishes that the ribbon-light in the Lower Terrace channel has been observed from the Heights side at least once before — three springs back; this is now a known fa"
+        "[d4] The gateline warden's admission establishes that the ribbon-light in the Lower Terrace channel has been observed from the Heights side at least once before — three springs back; this is now a known fa",
+        "[d4] Usnea returned to the dock in late afternoon, Day 4 — dock child still present at the lowest plank."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -665,6 +656,12 @@
           "day": 4,
           "visited": true,
           "note": "Warden admitted prior sighting of channel light (three springs back); junction-stone crack visible from gate arch positi"
+        },
+        "millbrook-dock-lowest-plank": {
+          "name": "Millbrook Dock — Lowest Plank",
+          "day": 4,
+          "visited": true,
+          "note": "Where the dock child sits alone, listening to the river's second pulse; Usnea returned here on Day 4 evening."
         }
       }
     },
@@ -710,7 +707,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-07T18:36:56.006Z"
+    "lastSharedReadAt": "2026-07-07T20:10:40.495Z"
   },
   "bio": {
     "hometown": "A baobab tree from Africa",
@@ -1301,5 +1298,5 @@
   "precursorAccess": [],
   "backfillVersion": 1,
   "opLossPending": false,
-  "sharedSceneId": "harmonic_heights_terrace--2026-07-06T15-50-57-057Z"
+  "sharedSceneId": null
 }

@@ -29,7 +29,7 @@
   "maxHealth": 25,
   "health": 25,
   "maxEnergy": 100,
-  "energy": 85,
+  "energy": 79,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -122,14 +122,18 @@
       {
         "summary": "Adelheid examines the silver-stemmed plants at the east edge — and feels a hum inside the stem.",
         "narration": "Piotr's hands still on the cord. He glances at you once, then at the bundle, then back — the practiced economy of a man who waits for permission he's already decided to give himself. Whatever Mara put in that note, he considers it his business the moment you're gone. You let him have that. The bundle is delivered; your task now is standing fifteen paces east, where the terrace stops being Piotr's and starts being something else's.\n\nThe silver-stemmed growth comes up to mid-thigh at its densest point, spilling past the terrace edge in a way that has nothing to do with how Piotr laid his irrigation lines. You crouch at the boundary and look without touching first. The leaves are broad, dark green on top — but underneath, that silver is almost metallic, catching the midday light in a way plant tissue shouldn't. The paired branching Mara mentioned is unmistakable up close: every node forks at exactly the same angle, left-right, left-right, like a notation rather than a growth. You have catalogued hundreds of herbs from two continents and studied the valley's post-Transition flora with half a dozen naturopaths. This pattern does not belong to any of them.\n\nYou open your Medic's Satchel slowly and reach for the folded linen you use for cuttings. The stems nearest the terrace edge are younger, thinner — a safer place to start than the dense interior. When your fingers close around the first stem to position your knife, you feel a faint, almost sub-audible hum move through it. Not vibration from the wind. From inside the plant. You hold very still."
+      },
+      {
+        "summary": "Adelheid touches the silver-stemmed plant and feels the internal hum; Aevi resonates toward it in quiet fascination.",
+        "narration": "Piotr's hands still on the cord — he glances once at you, once at the bundle, then back, the practiced economy of a man who has already decided the note is his business the moment you're gone. You let him have that. The bundle is delivered. Your task now is standing fifteen paces east, where the terrace stops being Piotr's and starts being something else's.\n\nThe silver-stemmed growth comes up to mid-thigh at its densest point, spilling past the terrace edge in a way that has nothing to do with how Piotr laid his irrigation lines. You crouch at the boundary and look before you touch. The leaves are broad, dark green above, silver beneath — that undersurface catches the midday light like hammered foil. The branching is what stops you: every node forks in paired symmetry, left and right, exact, the way living things almost never bother to be. It spreads outside the terrace grid as if the grid simply isn't a fact it has registered.\n\nYou press two fingers to the nearest stem. The hum arrives immediately — not through the air, not a surface tremor, but from inside the tissue itself, rising into your fingertips like a held note from a struck bell that hasn't quite finished sounding. Aevi drifts forward from your shoulder, motes pulling tight into a bright teal cluster just above the leaves. It doesn't speak. It hums back — a single, low frequency, barely audible — and the cluster brightens a fraction, as if listening for an answer.\n\nBehind you, Piotr has not moved. The cord on the bundle is still half-worked. He is watching you with the stillness of a man who has stood at this terrace edge before and chosen not to cross it."
       }
     ],
     "lastTurn": {
-      "narration": "Piotr's hands still on the cord. He glances at you once, then at the bundle, then back — the practiced economy of a man who waits for permission he's already decided to give himself. Whatever Mara put in that note, he considers it his business the moment you're gone. You let him have that. The bundle is delivered; your task now is standing fifteen paces east, where the terrace stops being Piotr's and starts being something else's.\n\nThe silver-stemmed growth comes up to mid-thigh at its densest point, spilling past the terrace edge in a way that has nothing to do with how Piotr laid his irrigation lines. You crouch at the boundary and look without touching first. The leaves are broad, dark green on top — but underneath, that silver is almost metallic, catching the midday light in a way plant tissue shouldn't. The paired branching Mara mentioned is unmistakable up close: every node forks at exactly the same angle, left-right, left-right, like a notation rather than a growth. You have catalogued hundreds of herbs from two continents and studied the valley's post-Transition flora with half a dozen naturopaths. This pattern does not belong to any of them.\n\nYou open your Medic's Satchel slowly and reach for the folded linen you use for cuttings. The stems nearest the terrace edge are younger, thinner — a safer place to start than the dense interior. When your fingers close around the first stem to position your knife, you feel a faint, almost sub-audible hum move through it. Not vibration from the wind. From inside the plant. You hold very still.",
-      "sceneSummary": "Adelheid examines the silver-stemmed plants at the east edge — and feels a hum inside the stem.",
+      "narration": "Piotr's hands still on the cord — he glances once at you, once at the bundle, then back, the practiced economy of a man who has already decided the note is his business the moment you're gone. You let him have that. The bundle is delivered. Your task now is standing fifteen paces east, where the terrace stops being Piotr's and starts being something else's.\n\nThe silver-stemmed growth comes up to mid-thigh at its densest point, spilling past the terrace edge in a way that has nothing to do with how Piotr laid his irrigation lines. You crouch at the boundary and look before you touch. The leaves are broad, dark green above, silver beneath — that undersurface catches the midday light like hammered foil. The branching is what stops you: every node forks in paired symmetry, left and right, exact, the way living things almost never bother to be. It spreads outside the terrace grid as if the grid simply isn't a fact it has registered.\n\nYou press two fingers to the nearest stem. The hum arrives immediately — not through the air, not a surface tremor, but from inside the tissue itself, rising into your fingertips like a held note from a struck bell that hasn't quite finished sounding. Aevi drifts forward from your shoulder, motes pulling tight into a bright teal cluster just above the leaves. It doesn't speak. It hums back — a single, low frequency, barely audible — and the cluster brightens a fraction, as if listening for an answer.\n\nBehind you, Piotr has not moved. The cord on the bundle is still half-worked. He is watching you with the stillness of a man who has stood at this terrace edge before and chosen not to cross it.",
+      "sceneSummary": "Adelheid touches the silver-stemmed plant and feels the internal hum; Aevi resonates toward it in quiet fascination.",
       "choices": [
         {
-          "label": "Use Echo Sense to listen through the plants — map what's beneath the soil here",
+          "label": "Use Echo Sense to probe the plant's interior — map what's underneath: root depth, density, whether the hum has a direction or source",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -138,8 +142,7 @@
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful",
-            "sense"
+            "careful"
           ],
           "abilityId": "echo_sense",
           "energyCost": 4,
@@ -148,7 +151,7 @@
           "emergenceId": null
         },
         {
-          "label": "Take the cutting anyway — knife clean and quick — and observe the cut stem closely",
+          "label": "Take a measured cutting — one stem with a paired node, wrapped in the folded linen from the Medic's Satchel — watching to see if the plant responds to the cut",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {
@@ -157,8 +160,7 @@
           "difficulty": 15,
           "intentTags": [
             "careful",
-            "study",
-            "gather"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -167,17 +169,16 @@
           "emergenceId": null
         },
         {
-          "label": "Pull your hand back and simply observe — sketch the branching pattern in the margin of your notes before you touch anything",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Turn and ask Piotr directly — how long has he been watching this growth, and has he ever touched it himself",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.5
+            "chaos_order": 0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "study",
-            "scout"
+            "persuade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -186,20 +187,21 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Piotr directly — does he know what this plant is, and has he touched it before",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Hold still and let the hum continue — close your eyes, focus on the frequency moving through your fingers, and see if your own harmonic training finds anything familiar in it",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "chaos_order": -0.2
+            "mechanical_spiritual": -0.2,
+            "concrete_abstract": -0.4
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "ask",
+            "study",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -213,32 +215,26 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "maras-errand",
-          "note": "Bundle delivered. Adelheid has reached the uncatalogued east-edge plants and felt a hum through the stem on first contact — active observation now underway."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Terrace Three east, above the mill, midday light full on the slope. Tidy brassica rows downhill; Adelheid is crouched at the east edge of the terrace, fingers on a silver-stemmed plant, knife half-drawn.",
+        "setting": "Terrace Three east, above the mill, midday light full on the slope. Tidy brassica rows downhill; Adelheid crouched at the east edge with two fingers pressed to a silver-stemmed plant, knife half-drawn. Aevi's motes clustered bright and close above the leaves.",
         "npcsPresent": [
           {
             "name": "Piotr",
-            "state": "Standing at the retaining wall downhill, bundle in both hands, cord half-worked loose — watching Adelheid at the plant edge with quiet attention, not approaching."
+            "state": "Standing at the retaining wall downhill, bundle in both hands, cord half-worked loose — watching Adelheid at the plant edge with the stillness of a man who has stood here before and chosen not to cross."
           }
         ],
         "objects": [
-          "Cloth-wrapped bundle (now with Piotr, cord partially loosened, clay jars inside)",
+          "Cloth-wrapped bundle (with Piotr, cord partially loosened, clay jars inside)",
           "Irrigation channel with fresh river-clay patch at far end",
-          "East-edge plant growth — dense, silver-undersided leaves, paired branching at every node, spreading beyond the terrace grid",
+          "East-edge plant growth — dense, silver-undersided leaves, exact paired branching at every node, spreading outside terrace grid",
           "Low stone retaining wall along the downhill side",
           "Piotr's tools — trowel, clay bucket, worn cloth cap set aside",
           "Adelheid's Medic's Satchel — open, folded cutting linen in hand"
         ],
         "threads": [
-          "A hum is moving through the plant stem from inside — source and meaning unknown",
-          "Piotr is watching but has not spoken — he may know something about this plant",
+          "A hum is moving through the plant stem from inside — source and meaning unknown; Aevi is resonating toward it",
+          "Piotr is watching but has not spoken — he may know something about this plant and why he never crosses the boundary",
           "Bundle not yet opened by Piotr; private plant note inside",
           "Mara's warning to proceed 'carefully' unresolved — nature and significance still unknown"
         ]
@@ -249,32 +245,26 @@
           "npcId": "piotr",
           "name": "Piotr",
           "role": "Terrace farmer, Terrace Three east",
-          "note": "Watched Adelheid move toward the silver-stemmed plants. Did not stop her. Did not look away. Holding the bundle still.",
+          "note": "Watched Adelheid make first contact with the silver-stemmed plants. Has not moved, has not spoken, has not crossed toward the east edge. His stillness reads as deliberate familiarity — not surprise.",
           "learned": [
-            "He watches the east-edge plants without approaching them — possible familiarity or wariness"
+            "He watches the east-edge plants without approaching — pattern suggests he has made a conscious choice not to touch them"
           ],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On Terrace Three east, holding Mara's bundle, watching Adelheid at the east edge with quiet, unreadable attention."
+          "statusNote": "On Terrace Three east, holding Mara's bundle, watching Adelheid at the east edge — cord still half-loosened, not yet opened."
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The silver-stemmed uncatalogued plants on Terrace Three east emit a faint internal hum when touched — not wind, not vibration, but originating from within the plant tissue.",
-          "subjectId": "uncatalogued-terrace-plants"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The silver-stemmed east-edge plants hum internally when touched — confirmed Day 1 midday by Adelheid on first direct contact.",
+          "note": "Aevi responded to the silver-stemmed plants with a low resonant hum and brightened — the motes pulled tight and close above the leaves, as if listening for an answer from the plant tissue.",
           "flag": {
-            "plant_hum_confirmed": "day1"
+            "aevi_resonated_with_plant": "day1"
           },
           "subPlace": {
             "name": "Terrace Three East",
-            "note": "East edge growth found to hum internally on contact — Adelheid crouched at boundary with knife drawn, Piotr watching.",
+            "note": "Aevi hummed toward the silver-stemmed east-edge plants on Day 1 — plants hum internally on contact, Aevi responded. Piotr watches from the retaining wall but does not cross to this edge.",
             "visited": true
           }
         }
@@ -284,13 +274,13 @@
           "topic": "uncatalogued-terrace-plants",
           "label": "Uncatalogued Terrace Plants",
           "kind": "mystery",
-          "fact": "On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired angles at every node) reads as systematic rather than biological. No matching species in two continents of herbal knowledge.",
+          "fact": "Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr watches from the retaining wall but never crosses to the east edge — his stillness reads as a chosen boundary, not ignorance.",
           "links": [
             "millbrook",
             "mara-wells",
             "valley-flora-post-transition",
             "maras-errand",
-            "echo-river-contamination"
+            "piotr"
           ]
         }
       ],
@@ -299,7 +289,7 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Terrace Three east, above the mill, midday light full on the slope. Tidy brassica rows downhill; Adelheid is crouched at the east edge of the terrace, fingers on a silver-stemmed plant, knife half-drawn.",
+      "setting": "Terrace Three east, above the mill, midday light full on the slope. Tidy brassica rows downhill; Adelheid crouched at the east edge with two fingers pressed to a silver-stemmed plant, knife half-drawn. Aevi's motes clustered bright and close above the leaves.",
       "npcsPresent": [
         {
           "name": "Piotr",
@@ -307,16 +297,16 @@
         }
       ],
       "objects": [
-        "Cloth-wrapped bundle (now with Piotr, cord partially loosened, clay jars inside)",
+        "Cloth-wrapped bundle (with Piotr, cord partially loosened, clay jars inside)",
         "Irrigation channel with fresh river-clay patch at far end",
-        "East-edge plant growth — dense, silver-undersided leaves, paired branching at ev",
+        "East-edge plant growth — dense, silver-undersided leaves, exact paired branching",
         "Low stone retaining wall along the downhill side",
         "Piotr's tools — trowel, clay bucket, worn cloth cap set aside",
         "Adelheid's Medic's Satchel — open, folded cutting linen in hand"
       ],
       "threads": [
-        "A hum is moving through the plant stem from inside — source and meaning unknown",
-        "Piotr is watching but has not spoken — he may know something about this plant",
+        "A hum is moving through the plant stem from inside — source and meaning unknown; Aevi is resonating toward it",
+        "Piotr is watching but has not spoken — he may know something about this plant and why he never crosses the boundary",
         "Bundle not yet opened by Piotr; private plant note inside",
         "Mara's warning to proceed 'carefully' unresolved — nature and significance still unknown"
       ]
@@ -325,10 +315,12 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
-  "companions": [],
+  "companions": [
+    "aevi"
+  ],
   "quests": [
     {
       "id": "maras-errand",
@@ -397,20 +389,22 @@
       "relationship": 1,
       "history": [
         "[d1] Received the bundle from Adelheid without questions. Confirmed the note is inside; stopped himself from opening it in front of her. Manner suggests he was expecting this delivery.",
-        "[d1] Watched Adelheid move toward the silver-stemmed plants. Did not stop her. Did not look away. Holding the bundle still."
+        "[d1] Watched Adelheid move toward the silver-stemmed plants. Did not stop her. Did not look away. Holding the bundle still.",
+        "[d1] Watched Adelheid make first contact with the silver-stemmed plants. Has not moved, has not spoken, has not crossed toward the east edge. His stillness reads as deliberate familiari"
       ],
       "knownFacts": [
         "Was expecting a delivery from Mara — recognized the bundle immediately",
         "Chose not to open the private plant note in Adelheid's presence",
         "Works Terrace Three east himself; knows this land well",
-        "He watches the east-edge plants without approaching them — possible familiarity or wariness"
+        "He watches the east-edge plants without approaching them — possible familiarity or wariness",
+        "He watches the east-edge plants without approaching — pattern suggests he has made a conscious choice not to touch them"
       ],
       "skillsObserved": [
         "careful handling of fragile goods",
         "economy of speech"
       ],
       "status": "active",
-      "statusNote": "On Terrace Three east, holding Mara's bundle, watching Adelheid at the east edge with quiet, unreadable attention.",
+      "statusNote": "On Terrace Three east, holding Mara's bundle, watching Adelheid at the east edge — cord still half-loosened, not yet opened.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -423,17 +417,19 @@
       "notes": [
         "[d1] The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons.",
         "[d1] Terrace Three east has an untended east edge colonized by an uncatalogued silver-leafed plant with paired branching at every node — spreading outside the terrace grid. First observed Day 1 midday.",
-        "[d1] The silver-stemmed east-edge plants hum internally when touched — confirmed Day 1 midday by Adelheid on first direct contact."
+        "[d1] The silver-stemmed east-edge plants hum internally when touched — confirmed Day 1 midday by Adelheid on first direct contact.",
+        "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum and brightened — the motes pulled tight and close above the leaves, as if listening for an answer from the plant tissue."
       ],
       "flags": {
-        "plant_hum_confirmed": "day1"
+        "plant_hum_confirmed": "day1",
+        "aevi_resonated_with_plant": "day1"
       },
       "subPlaces": {
         "terrace-three-east": {
           "name": "Terrace Three East",
           "day": 1,
           "visited": true,
-          "note": "East edge growth found to hum internally on contact — Adelheid crouched at boundary with knife drawn, Piotr watching."
+          "note": "Aevi hummed toward the silver-stemmed east-edge plants on Day 1 — plants hum internally on contact, Aevi responded. Piot"
         }
       },
       "vectorsKnown": [
@@ -553,7 +549,8 @@
         "facts": [
           "[d1] Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — ",
           "[d1] First direct observation on Terrace Three east: silver-undersided leaves, stems branching in paired nodes with unusual regularity — pattern feels almost systematic. Spreads outside the terrace layout.",
-          "[d1] On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired"
+          "[d1] On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired",
+          "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr w"
         ],
         "links": [
           "millbrook",
@@ -588,7 +585,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "echo_sense": 3,
+      "echo_sense": 5,
       "sonic_resonance": 2
     },
     "coActivations": {},
@@ -610,6 +607,6 @@
   ],
   "precursorAccess": [],
   "backfillVersion": 1,
-  "sharedSceneId": "millbrook--2026-07-08T17-58-43-164Z",
+  "sharedSceneId": null,
   "opLossPending": false
 }

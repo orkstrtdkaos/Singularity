@@ -36,8 +36,8 @@
     "mechanical_spiritual": 0.06727916802792969,
     "concrete_abstract": -0.14239235911265496,
     "spectrumId": -0.13025946480788345,
-    "dark_light": 0.034999999999999996,
-    "falsehood_truth": 0.07800000000000001
+    "dark_light": 0.06824999999999999,
+    "falsehood_truth": 0.11410000000000002
   },
   "attunement": 3,
   "maxHealth": 40,
@@ -185,64 +185,48 @@
       {
         "summary": "Usnea privately views Orla's memory glass using a braid of Light Bending and Prism Sight — and sees a Radiant engineer deliberately dosing the ford three days ago.",
         "narration": "You don't announce what you're doing. You simply shift your branches a fraction, letting the tower-light fall across your bark at a new angle — a small, deliberate redirection, the kind of adjustment that looks like posture. Haze Veil and Prism Sight braid together quietly, without strain: the bent light forms a shallow privacy around the glass's face, a shimmer-pocket just wide enough for your eyes. To Orla, to the apprentices, to the tower-panel workers, the disc remains fogged. To you, it opens.\n\nThe memory glass replays what light once touched at the ford-side boulder, three days ago, just before dawn. The image is flat and slightly past-tense in quality — the way old photographs feel fixed rather than alive. A figure stands at the water's edge in Radiant working clothes: an engineer's coat, a measuring brace on one wrist. He's pouring something from a sealed tube into the shallower current beside the boulder — not carelessly, not accidentally. Deliberately. He checks the tube, caps it, pockets it. Then he looks up, and the glass catches his face for one clear second before the light shifts and the memory blurs to nothing.\n\nAevi's motes press close to the disc's edge without quite touching it. They are very bright and very still — the particular stillness that means the swarm is not thinking so much as *recognizing*.\n\nYou let the shimmer-pocket dissolve and lower your branches to neutral. Orla is watching your face — or the place where a face would be, on bark — reading whatever she can read there. The apprentices haven't moved."
+      },
+      {
+        "summary": "Usnea names what the memory glass showed; Orla confirms prior knowledge of the coat and asks for a shared viewing to match what they each saw.",
+        "narration": "You let the shimmer-pocket dissolve and look at Orla directly. The tower-light settles back to its ordinary braided pattern across the lane. 'A Radiant engineer,' you say, keeping your voice level and low enough that it doesn't carry past the two of you. 'Working coat. Three days before this morning. He was pouring from a sealed tube into the ford current — deliberate, not accidental. Measured. He knew what he was doing.' You pause a breath. 'His face was clear in the glass for a moment. I don't know the name to put to it.'\n\nOrla doesn't flinch. She closes her fingers around the memory glass and holds it the way someone holds a thing they've been carrying alone for too long — relieved and not yet sure the relief is safe. Her amber collar catches a refracted beam and throws a brief spectrum across her jaw. 'I pulled it from the boulder the morning after I found the ford running gray,' she says, quiet and flat. 'I recognized the coat. I don't want to name him until I'm certain you've seen what I've seen — that we're describing the same moment.'\n\nShe extends the glass between two fingers, face up, toward you — an offer, not a demand. 'Will you look again? This time I'll watch the disc with you. Tell me when you see him turn.'\n\nAevi drifts closer to the disc's edge, motes pressing bright and absolutely still. One of the apprentices shifts weight behind you. Nothing in the lane moves except the slow upward glow of the pavers cycling amber to white."
       }
     ],
     "lastTurn": {
-      "narration": "You don't announce what you're doing. You simply shift your branches a fraction, letting the tower-light fall across your bark at a new angle — a small, deliberate redirection, the kind of adjustment that looks like posture. Haze Veil and Prism Sight braid together quietly, without strain: the bent light forms a shallow privacy around the glass's face, a shimmer-pocket just wide enough for your eyes. To Orla, to the apprentices, to the tower-panel workers, the disc remains fogged. To you, it opens.\n\nThe memory glass replays what light once touched at the ford-side boulder, three days ago, just before dawn. The image is flat and slightly past-tense in quality — the way old photographs feel fixed rather than alive. A figure stands at the water's edge in Radiant working clothes: an engineer's coat, a measuring brace on one wrist. He's pouring something from a sealed tube into the shallower current beside the boulder — not carelessly, not accidentally. Deliberately. He checks the tube, caps it, pockets it. Then he looks up, and the glass catches his face for one clear second before the light shifts and the memory blurs to nothing.\n\nAevi's motes press close to the disc's edge without quite touching it. They are very bright and very still — the particular stillness that means the swarm is not thinking so much as *recognizing*.\n\nYou let the shimmer-pocket dissolve and lower your branches to neutral. Orla is watching your face — or the place where a face would be, on bark — reading whatever she can read there. The apprentices haven't moved.",
-      "sceneSummary": "Usnea privately views Orla's memory glass using a braid of Light Bending and Prism Sight — and sees a Radiant engineer deliberately dosing the ford three days ago.",
+      "narration": "You let the shimmer-pocket dissolve and look at Orla directly. The tower-light settles back to its ordinary braided pattern across the lane. 'A Radiant engineer,' you say, keeping your voice level and low enough that it doesn't carry past the two of you. 'Working coat. Three days before this morning. He was pouring from a sealed tube into the ford current — deliberate, not accidental. Measured. He knew what he was doing.' You pause a breath. 'His face was clear in the glass for a moment. I don't know the name to put to it.'\n\nOrla doesn't flinch. She closes her fingers around the memory glass and holds it the way someone holds a thing they've been carrying alone for too long — relieved and not yet sure the relief is safe. Her amber collar catches a refracted beam and throws a brief spectrum across her jaw. 'I pulled it from the boulder the morning after I found the ford running gray,' she says, quiet and flat. 'I recognized the coat. I don't want to name him until I'm certain you've seen what I've seen — that we're describing the same moment.'\n\nShe extends the glass between two fingers, face up, toward you — an offer, not a demand. 'Will you look again? This time I'll watch the disc with you. Tell me when you see him turn.'\n\nAevi drifts closer to the disc's edge, motes pressing bright and absolutely still. One of the apprentices shifts weight behind you. Nothing in the lane moves except the slow upward glow of the pavers cycling amber to white.",
+      "sceneSummary": "Usnea names what the memory glass showed; Orla confirms prior knowledge of the coat and asks for a shared viewing to match what they each saw.",
       "choices": [
         {
-          "label": "Name what you saw — the figure, the tube, the act — directly to Orla. She's already kept this from the council; she deserves the plain truth, and she may recognize the face.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "View the glass again together — let Orla watch the disc while you narrate the moment he turns. Confirm you're describing the same engineer.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
             "falsehood_truth": 0.8,
-            "dark_light": 0.7
+            "dark_light": 0.6
           },
           "difficulty": 0,
           "intentTags": [
-            "confide",
-            "truth-telling",
-            "share-evidence"
+            "study",
+            "cooperate",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Orla if she knows the engineer's name before you describe what you saw — let her identify him without your description shaping her memory.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Orla what she knows about him — his role, his assignment, whether she thinks the dosing was sanctioned or personal.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.6,
+            "falsehood_truth": 0.7,
             "concrete_abstract": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
             "investigate",
-            "protect-testimony"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Orla who has access to the ford-side boulder — narrowing the field of suspects from the glass alone, before naming anything you saw.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "concrete_abstract": 0.3,
-            "falsehood_truth": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "investigate",
-            "scout",
+            "question",
             "careful"
           ],
           "abilityId": null,
@@ -252,18 +236,38 @@
           "emergenceId": null
         },
         {
-          "label": "Step away from Orla and the audience entirely — find a quieter corner of the lane to speak with Aevi first. The swarm recognized something in that glass, and you want to know what before this goes further.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Name the stakes plainly before going further — if you're about to identify a Radiant engineer by name, Orla needs to know it will eventually reach the elders in Millbrook, and the council here.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": 0.6,
-            "mechanical_spiritual": 0.4
+            "falsehood_truth": 0.9,
+            "violence_peace": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "consult",
+            "negotiate",
+            "honest",
             "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Glance at Aevi — the motes are pressed bright and still against the disc's edge in a way that means something. Ask, quietly, what it's tasting.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "dark_light": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful",
+            "consult-companion"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -275,7 +279,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -8,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -285,8 +289,7 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "title": "Evidence for the Elders",
-          "note": "Memory glass viewed: a Radiant engineer in working coat deliberately poured from a sealed tube into the ford current three days ago — a second source of contamination evidence, held outside council channels."
+          "note": "Orla confirms she recognizes the engineer's coat and withheld the glass deliberately — she may be able to name the figure. A shared viewing could lock down the identity before Thursday."
         }
       ],
       "scene": {
@@ -294,29 +297,29 @@
         "npcsPresent": [
           {
             "name": "Orla",
-            "state": "Watching Usnea's face carefully — reading whatever the bark shows. The memory glass is still held between two fingers, fogged at its edges."
+            "state": "Holding the memory glass face-up between two fingers, extended toward Usnea — waiting for a decision. Her other hand is still at her collar."
           },
           {
             "name": "Two apprentices",
-            "state": "Beam-tips cold, duel abandoned — still listening, not pretending otherwise."
+            "state": "Beam-tips cold, duel abandoned — watching Usnea and Orla without pretending otherwise."
           },
           {
             "name": "Two young men (tower panel)",
-            "state": "Fully still, tools forgotten — watching Usnea and Orla."
+            "state": "Tools still forgotten in hand — fully attending the exchange."
           }
         ],
         "objects": [
-          "Notice board at the district gate: EDGE DISTRICT ASSEMBLY — FILTRATION ENGINEER ACCOUNTABILITY, with 'whose count?' annotated below in a second hand",
-          "Memory glass disc — flat, fogged at edges, held in Orla's hand; its face is once again closed to all observers",
+          "Notice board at the district gate: EDGE DISTRICT ASSEMBLY — FILTRATION ENGINEER ACCOUNTABILITY (with 'whose count?' annotation below)",
+          "Memory glass disc — flat, fogged at edges, now held face-up in Orla's extended hand",
           "Aevi — motes pressed close to the disc's edge, very bright, very still",
           "Photonic-crystal towers actively braiding light overhead",
           "Light-guide pavers glowing upward in slow amber and white bands"
         ],
         "threads": [
-          "Orla is waiting to learn what Usnea saw in the glass — she has not asked aloud yet",
-          "Aevi recognized something in the memory glass and has not spoken",
-          "The apprentices and tower-panel workers are still present witnesses — anything said here is semi-public",
-          "The Radiant engineer in the memory glass has a face — but no name yet",
+          "Orla has confirmed she recognizes the engineer's coat and is waiting for a shared viewing to match identities",
+          "Aevi is reacting to the disc in a way it has not yet explained",
+          "The apprentices and tower-panel workers remain present witnesses — anything said aloud is semi-public",
+          "The Radiant engineer's face is known to Usnea; his name may be known to Orla",
           "The filtration engineer assembly notice and 'whose count?' annotation remain unaddressed"
         ]
       },
@@ -326,32 +329,34 @@
           "npcId": "orla",
           "name": "Orla",
           "role": "Optics-weaver, Edge District, Radiant Plateau",
-          "note": "Watched Usnea view the memory glass privately — reading whatever she could in Usnea's posture. Has not pressed for what was seen. Still holding the disc.",
+          "note": "Received Usnea's plain account — engineer, working coat, sealed tube, deliberate pour. Did not flinch. Confirmed she recognized the coat and pulled the glass the morning after the ford ran gray. Extended the glass for a shared second viewing.",
           "learned": [
-            "Usnea combined Light Bending and Prism Sight to view the glass privately — Orla witnessed the technique even if she couldn't see the image"
+            "Usnea saw the same deliberate act Orla suspects — a Radiant engineer dosing the ford three days before today",
+            "Orla recognized the working coat from the glass before naming it aloud — she has a candidate identity in mind",
+            "Orla chose to share the glass a second time, inviting Usnea to narrate the moment of the turn so they can match what each saw"
           ],
           "skillsObserved": [
-            "patient reading of non-verbal cues",
-            "deliberate restraint — not asking what Usnea saw"
+            "controlled emotional response under confirmation of feared news",
+            "deliberate information sequencing — confirming shared observation before naming"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "In the Edge District lane, holding the memory glass — waiting to learn what it showed Usnea."
+          "statusNote": "In the Edge District lane — has extended the memory glass for a second shared viewing; holds a suspected name she has not yet spoken aloud."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Orla's memory glass shows a Radiant engineer in working coat deliberately pouring from a sealed tube into the ford-side current three days ago — a deliberate act, not contamination from upstream. His face was captured clearly for one second before the light shifted.",
+          "text": "Orla recognized the working coat of the engineer in the memory glass before Usnea named it — she has a candidate identity in mind but has not spoken the name aloud. She pulled the glass the morning after the ford first ran gray.",
           "subjectId": "orla"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Usnea used a braid of Light Bending and Prism Sight in this lane to view Orla's memory glass privately — witnessed by apprentices and tower-panel workers.",
+          "note": "Orla extended the memory glass for a second shared viewing in the lane — the shared investigation into the engineer's identity is now the active center of the Edge District lane scene.",
           "subPlace": {
             "name": "Edge District Lane — Orla's patch",
-            "note": "Memory glass privately viewed here; face of a Radiant engineer captured in the ford record — deliberate dosing, three days ago.",
+            "note": "Orla extended the memory glass face-up toward Usnea for a second viewing — both parties now know they are describing the same moment; a name may follow.",
             "visited": true
           }
         }
@@ -361,13 +366,12 @@
           "topic": "orla-memory-glass-ford-record",
           "label": "Orla's Memory Glass — The Ford Record",
           "kind": "mystery",
-          "fact": "The glass shows a Radiant engineer in working coat deliberately pouring from a sealed tube into the ford current three days before Usnea's arrival — a purposeful act. His face was visible for one clear second. Aevi went very still and very bright when the image played.",
+          "fact": "Orla recognized the engineer's working coat before Usnea spoke the description — she has a candidate identity and is sequencing carefully, confirming shared observation before naming him. She pulled the glass the morning after the ford first ran gray.",
           "links": [
             "echo-river-contamination",
             "orla-optics-weaver",
             "radiant-plateau-edge-district",
-            "contamination-evidence-for-the-elders",
-            "aevi-reading-of-the-water"
+            "contamination-evidence-for-the-elders"
           ]
         }
       ],
@@ -379,29 +383,29 @@
       "npcsPresent": [
         {
           "name": "Orla",
-          "state": "Watching Usnea's face carefully — reading whatever the bark shows. The memory glass is still held between two fingers, f"
+          "state": "Holding the memory glass face-up between two fingers, extended toward Usnea — waiting for a decision. Her other hand is "
         },
         {
           "name": "Two apprentices",
-          "state": "Beam-tips cold, duel abandoned — still listening, not pretending otherwise."
+          "state": "Beam-tips cold, duel abandoned — watching Usnea and Orla without pretending otherwise."
         },
         {
           "name": "Two young men (tower panel)",
-          "state": "Fully still, tools forgotten — watching Usnea and Orla."
+          "state": "Tools still forgotten in hand — fully attending the exchange."
         }
       ],
       "objects": [
         "Notice board at the district gate: EDGE DISTRICT ASSEMBLY — FILTRATION ENGINEER ",
-        "Memory glass disc — flat, fogged at edges, held in Orla's hand; its face is once",
+        "Memory glass disc — flat, fogged at edges, now held face-up in Orla's extended h",
         "Aevi — motes pressed close to the disc's edge, very bright, very still",
         "Photonic-crystal towers actively braiding light overhead",
         "Light-guide pavers glowing upward in slow amber and white bands"
       ],
       "threads": [
-        "Orla is waiting to learn what Usnea saw in the glass — she has not asked aloud yet",
-        "Aevi recognized something in the memory glass and has not spoken",
-        "The apprentices and tower-panel workers are still present witnesses — anything said here is semi-public",
-        "The Radiant engineer in the memory glass has a face — but no name yet",
+        "Orla has confirmed she recognizes the engineer's coat and is waiting for a shared viewing to match identities",
+        "Aevi is reacting to the disc in a way it has not yet explained",
+        "The apprentices and tower-panel workers remain present witnesses — anything said aloud is semi-public",
+        "The Radiant engineer's face is known to Usnea; his name may be known to Orla",
         "The filtration engineer assembly notice and 'whose count?' annotation remain unaddressed"
       ]
     }
@@ -409,7 +413,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -424,14 +428,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Day 5 dawn: six-fold pulse traced south to Millbrook's drinking wells — the system's reach now encompasses the village water supply. The dock is a middle, not an endpoint. New evidence that changes th",
         "Usnea delivered the well-contamination finding to Mara Wells mid-approach to Pell — stakes of Thursday's meeting have visibly shifted; Pell is now listening differently.",
         "Usnea's direct appeal to Pell about the wells curdled into protective anger — Pell has not refused, but the approach has made permission harder to secure; Mara holds the thread now.",
         "Pell asked who speaks before Sela — the conversation has moved from closed anger to cautious interrogation; permission is within reach but not given.",
         "Pell heard the full speaker order — seedling, water, testimony, Aevi, pattern, then Sela last and briefly. She is testing it aloud rather than refusing. Permission still not given, but the question ha",
         "Pell's permission secured — Sela will testify Thursday, last and briefly, with Pell at the threshold holding veto. All witnesses and evidence now in hand for the elder presentation.",
         "Morning circuit confirmed: the six-fold pulse is settled and stable throughout Millbrook — wells, channels, embankment loam. Not expanding, but fully present. The system appears to have reached its op",
-        "Memory glass viewed: a Radiant engineer in working coat deliberately poured from a sealed tube into the ford current three days ago — a second source of contamination evidence, held outside council ch"
+        "Memory glass viewed: a Radiant engineer in working coat deliberately poured from a sealed tube into the ford current three days ago — a second source of contamination evidence, held outside council ch",
+        "Orla confirms she recognizes the engineer's coat and withheld the glass deliberately — she may be able to name the figure. A shared viewing could lock down the identity before Thursday."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -754,31 +758,33 @@
         "locationId": "radiant_plateau_edge",
         "day": 6
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d6] Introduced herself and immediately asked whether Usnea crossed the river ford below the plateau edge — a question with specific expectation behind it. Did not flinch at Aevi.",
         "[d6] Received Usnea's full account of the contamination — went still at 'six-fold count'; produced a memory glass pulled from the ford-side boulder three days ago that she has not shown",
-        "[d6] Watched Usnea view the memory glass privately — reading whatever she could in Usnea's posture. Has not pressed for what was seen. Still holding the disc."
+        "[d6] Watched Usnea view the memory glass privately — reading whatever she could in Usnea's posture. Has not pressed for what was seen. Still holding the disc.",
+        "[d6] Received Usnea's plain account — engineer, working coat, sealed tube, deliberate pour. Did not flinch. Confirmed she recognized the coat and pulled the glass the morning after the "
       ],
       "knownFacts": [
-        "Weaves optical records — light-impressions",
-        "Can identify Radiant origin by how a being holds light",
         "Asked about the river ford with deliberate specificity — expects news from the valley floor",
         "The ford runs gray-green in the mornings; farmers' seedlings are going pale",
         "A crystalline residue — nanite-structured, pre-Transition — was found at the seep under the old retaining wall",
         "The six-fold subsurface pulse is detectable in the river current",
-        "Usnea combined Light Bending and Prism Sight to view the glass privately — Orla witnessed the technique even if she couldn't see the image"
+        "Usnea combined Light Bending and Prism Sight to view the glass privately — Orla witnessed the technique even if she couldn't see the image",
+        "Usnea saw the same deliberate act Orla suspects — a Radiant engineer dosing the ford three days before today",
+        "Orla recognized the working coat from the glass before naming it aloud — she has a candidate identity in mind",
+        "Orla chose to share the glass a second time, inviting Usnea to narrate the moment of the turn so they can match what each saw"
       ],
       "skillsObserved": [
-        "deliberate questioning",
-        "active listening under professional calm",
         "deliberate information-withholding from the council",
         "hypothesis-testing through observation",
         "patient reading of non-verbal cues",
-        "deliberate restraint — not asking what Usnea saw"
+        "deliberate restraint — not asking what Usnea saw",
+        "controlled emotional response under confirmation of feared n",
+        "deliberate information sequencing — confirming shared observ"
       ],
       "status": "active",
-      "statusNote": "In the Edge District lane, holding the memory glass — waiting to learn what it showed Usnea.",
+      "statusNote": "In the Edge District lane — has extended the memory glass for a second shared viewing; holds a suspected name she has not yet spoken aloud.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 6
@@ -898,7 +904,8 @@
         "[d6] Edge District notice board at the gate carries a hand-lettered assembly notice about filtration engineers being required to account — with an anonymous second-hand annotation 'whose count?' added belo",
         "[d6] Orla the optics-weaver operates in the Edge District lane near the notice board — she weaves optical records and is tracking river news from the valley floor.",
         "[d6] Orla revealed she collected a memory glass from the ford-side boulder below the plateau edge three days ago — physical evidence of pre-knowledge of the contamination held outside council channels",
-        "[d6] Usnea used a braid of Light Bending and Prism Sight in this lane to view Orla's memory glass privately — witnessed by apprentices and tower-panel workers."
+        "[d6] Usnea used a braid of Light Bending and Prism Sight in this lane to view Orla's memory glass privately — witnessed by apprentices and tower-panel workers.",
+        "[d6] Orla extended the memory glass for a second shared viewing in the lane — the shared investigation into the engineer's identity is now the active center of the Edge District lane scene."
       ],
       "flags": {},
       "lastVisit": 6,
@@ -920,7 +927,7 @@
           "name": "Edge District Lane — Orla's patch",
           "day": 6,
           "visited": true,
-          "note": "Memory glass privately viewed here; face of a Radiant engineer captured in the ford record — deliberate dosing, three da"
+          "note": "Orla extended the memory glass face-up toward Usnea for a second viewing — both parties now know they are describing the"
         }
       }
     }
@@ -1589,7 +1596,8 @@
         "label": "Orla's Memory Glass — The Ford Record",
         "kind": "mystery",
         "facts": [
-          "[d6] The glass shows a Radiant engineer in working coat deliberately pouring from a sealed tube into the ford current three days before Usnea's arrival — a purposeful act. His face was visible for one clea"
+          "[d6] The glass shows a Radiant engineer in working coat deliberately pouring from a sealed tube into the ford current three days before Usnea's arrival — a purposeful act. His face was visible for one clea",
+          "[d6] Orla recognized the engineer's working coat before Usnea spoke the description — she has a candidate identity and is sequencing carefully, confirming shared observation before naming him. She pulled t"
         ],
         "links": [
           "echo-river-contamination",
@@ -1732,6 +1740,12 @@
     {
       "id": "orla",
       "text": "Orla's memory glass shows a Radiant engineer in working coat deliberately pouring from a sealed tube into the ford-side current three days ago — a deliberate act, not contamination from upstream. His ",
+      "day": 6,
+      "subjectId": "orla"
+    },
+    {
+      "id": "orla",
+      "text": "Orla recognized the working coat of the engineer in the memory glass before Usnea named it — she has a candidate identity in mind but has not spoken the name aloud. She pulled the glass the morning af",
       "day": 6,
       "subjectId": "orla"
     }

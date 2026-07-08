@@ -21,7 +21,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.14488125000000002
+    "spectrumId": -0.18763718750000002
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -159,41 +159,27 @@
       {
         "summary": "Brynjar reads the village annotations on the map board — common house, mill row, the terraces market — then turns toward the wayhouse.",
         "narration": "The map is valley-wide — rivers, ridges, faction territories — but someone has added finer Millbrook detail in a lighter hand along the bottom margin, the kind of local annotation that accumulates over years. You trace it with one finger, the oilcloth damp with morning dew.\n\nThere: a small square marked *common house* with a fire symbol, tucked between the wayhouse lane and the dock road — not quite the wayhouse itself, but close. North of it, a cluster of squares labeled *mill row*, which from the sound of the water wheels last evening you'd already half-located. And bracketed with a simple arc that means gathering, or market, or both: *the terraces*, up the slope from the well, where the lane widens before the gardens begin. A weekly mark beside it — the kind that means people meet on a fixed day. No date inked, but the fact that it's there at all is worth knowing.\n\nThe child with the bucket passes behind you on her way to the well, unhurried, paying you no attention. Up the lane, the wayhouse chimney is putting out thin steady smoke — breakfast smoke, not just banked coals. Mara is awake and moving. The report you owe her is overdue by about ten minutes of standing here, and the morning is not getting younger."
+      },
+      {
+        "summary": "Brynjar checks the common house at sunrise — no tree ents, two locals at breakfast, fire still warm.",
+        "narration": "You fold the oilcloth back over the map and head up the lane toward the common house — the square marked with a fire symbol, tucked between the wayhouse and the dock road. It's a low-ceilinged building with wide eaves and a door that hangs open in the early cold, the kind of place that's public by default rather than invitation. Inside: packed-earth floor, a long table with benches, a banked hearth still breathing warmth from last night. Morning light comes in through two unshuttered windows.\n\nNo tree ent. No carved wooden figure, no bark-skinned guardian in the corner, no ancient forest-being passing the time over a mug of something warm. What there is: two older women at the far end of the table with bowls, talking in low tones; a cord of firewood stacked against the east wall; a clay jug and some cups left out from last night. One of the women glances up at you — a stranger's glance, taking stock — then returns to her bowl without comment.\n\nUsnea is somewhere behind you in the lane, presumably having followed the smell of woodsmoke or the sound of activity, or possibly just the general direction of 'somewhere with a roof.' The common house is quiet and unhurried the way early mornings are when people haven't yet remembered what they're worried about.\n\nThe wayhouse chimney is still smoking up the lane. Mara Wells is awake and waiting, and your report is already running late."
       }
     ],
     "lastTurn": {
-      "narration": "The map is valley-wide — rivers, ridges, faction territories — but someone has added finer Millbrook detail in a lighter hand along the bottom margin, the kind of local annotation that accumulates over years. You trace it with one finger, the oilcloth damp with morning dew.\n\nThere: a small square marked *common house* with a fire symbol, tucked between the wayhouse lane and the dock road — not quite the wayhouse itself, but close. North of it, a cluster of squares labeled *mill row*, which from the sound of the water wheels last evening you'd already half-located. And bracketed with a simple arc that means gathering, or market, or both: *the terraces*, up the slope from the well, where the lane widens before the gardens begin. A weekly mark beside it — the kind that means people meet on a fixed day. No date inked, but the fact that it's there at all is worth knowing.\n\nThe child with the bucket passes behind you on her way to the well, unhurried, paying you no attention. Up the lane, the wayhouse chimney is putting out thin steady smoke — breakfast smoke, not just banked coals. Mara is awake and moving. The report you owe her is overdue by about ten minutes of standing here, and the morning is not getting younger.",
-      "sceneSummary": "Brynjar reads the village annotations on the map board — common house, mill row, the terraces market — then turns toward the wayhouse.",
+      "narration": "You fold the oilcloth back over the map and head up the lane toward the common house — the square marked with a fire symbol, tucked between the wayhouse and the dock road. It's a low-ceilinged building with wide eaves and a door that hangs open in the early cold, the kind of place that's public by default rather than invitation. Inside: packed-earth floor, a long table with benches, a banked hearth still breathing warmth from last night. Morning light comes in through two unshuttered windows.\n\nNo tree ent. No carved wooden figure, no bark-skinned guardian in the corner, no ancient forest-being passing the time over a mug of something warm. What there is: two older women at the far end of the table with bowls, talking in low tones; a cord of firewood stacked against the east wall; a clay jug and some cups left out from last night. One of the women glances up at you — a stranger's glance, taking stock — then returns to her bowl without comment.\n\nUsnea is somewhere behind you in the lane, presumably having followed the smell of woodsmoke or the sound of activity, or possibly just the general direction of 'somewhere with a roof.' The common house is quiet and unhurried the way early mornings are when people haven't yet remembered what they're worried about.\n\nThe wayhouse chimney is still smoking up the lane. Mara Wells is awake and waiting, and your report is already running late.",
+      "sceneSummary": "Brynjar checks the common house at sunrise — no tree ents, two locals at breakfast, fire still warm.",
       "choices": [
         {
-          "label": "Walk up the lane to Mara's Wayhouse and give your report — everything: the skiff, the trail, the second boot prints, the gray soil, the Disputed Zone.",
+          "label": "Go straight to the wayhouse and give Mara Wells the full report — contamination ribbons stronger upstream, gray soil above the fence, second boot prints on the trail, the Disputed Zone boundary",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "report",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stop at the common house first — get a read on who's up and about, and whether anyone else in the village has noticed the contamination getting worse.",
-          "attribute": "social",
-          "subAttribute": "presence",
           "axes": {
             "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "gather-information"
+            "help",
+            "report"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -202,38 +188,57 @@
           "emergenceId": null
         },
         {
-          "label": "Go down to the empty dock and take one more look at the river before reporting — read the contamination here at the village edge with fresh eyes and compare it to what you saw upstream.",
+          "label": "Sit at the table a moment and listen — the two women might know something about the trail, the second boot prints, or who's been moving through lately",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "spectrumId": -0.3
+            "spectrumId": -0.2
           },
           "difficulty": 15,
           "intentTags": [
-            "study",
+            "scout",
+            "listen",
             "careful"
           ],
-          "abilityId": "rivercraft",
-          "energyCost": 5,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask the child with the bucket a simple question before she reaches the well — whether the well water has looked different lately, and if anyone's been talking about it.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Grab a cup from the jug if there's anything left in it and take a moment's breather — you've been on foot since before dawn",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {
-            "spectrumId": 0.1
+            "spectrumId": 0
           },
           "difficulty": 0,
           "intentTags": [
-            "gather-information",
-            "help"
+            "rest"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the two women directly if they've seen anyone come down from the east fork trail in the last day or two — describe the smaller boot heel, the downstream direction",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "spectrumId": -0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "ask",
+            "investigate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -249,96 +254,70 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook lane junction at sunrise — Brynjar stands at the junction post, oilcloth map board open before him; wayhouse chimney smoking steadily up the lane; dock empty and quiet; thin gold morning light; early-spring cold.",
+        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; two windows letting in thin gold morning light.",
         "npcsPresent": [
           {
-            "name": "Child with a bucket",
-            "state": "Walking toward the well, unhurried, bucket in hand, back to Brynjar"
+            "name": "Two older women",
+            "state": "Eating from bowls at the far end of the long table; one glanced at Brynjar on entry, returned to her food without comment"
+          },
+          {
+            "name": "Usnea Beard",
+            "state": "Somewhere in the lane just outside — present but not yet in the building"
           }
         ],
         "objects": [
-          "Oilcloth map board nailed to the lane junction post — hand-inked valley map with local Millbrook annotations: common house (fire symbol), mill row, the terraces (weekly market arc)",
-          "River road running south toward the dock",
-          "Wayhouse — low wide building with smoking chimney up the lane",
-          "Millbrook River Dock — empty, morning quiet",
-          "Echo River — gray-green tinge visible in the shallows"
+          "Long table with benches",
+          "Banked hearth, still warm",
+          "Cord of firewood stacked against the east wall",
+          "Clay jug and cups on the table — left from last night",
+          "Two unshuttered windows",
+          "Wayhouse visible up the lane through the open door — chimney still smoking"
         ],
         "threads": [
           "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting",
-          "Map shows Disputed Zone begins past the high pasture fence — detail runs out there",
           "Second set of boot prints on the east bank trail running downstream — origin and identity unresolved",
           "Ritualized bout with the east bank traveler — postponed, not cancelled; her name still unknown",
-          "Contamination source estimated 2–4 km past the high pasture fence, within the Disputed Zone — unreached",
-          "Common house, mill row, and the terraces market now known as village landmarks"
+          "Contamination source estimated 2–4 km past the high pasture fence, within the Disputed Zone — unreached"
         ]
       },
       "npcUpdates": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Millbrook's common house sits between the wayhouse lane and the dock road; a weekly market or gathering occurs at the terraces above the well; mill row is north of the common house near the water wheels.",
-          "subjectId": "millbrook"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Map board lower margin carries local Millbrook annotations in a lighter hand: common house with fire symbol, mill row, and the terraces (weekly gathering/market arc above the well).",
+          "note": "Common house visited at sunrise — public space, open door, banked hearth, long table; two local women at breakfast; no unusual presences",
           "subPlace": {
             "name": "Millbrook Common House",
-            "note": "Marked on map board — between wayhouse lane and dock road, fire symbol.",
-            "visited": false
-          }
-        },
-        {
-          "subPlace": {
-            "name": "The Terraces",
-            "note": "Marked on map board above the well — weekly gathering or market, lane widens here before the gardens begin.",
-            "visited": false
-          }
-        },
-        {
-          "subPlace": {
-            "name": "Mill Row",
-            "note": "Cluster of structures north of common house near the water wheels — marked on the map board.",
-            "visited": false
+            "note": "Low-ceilinged public building between wayhouse lane and dock road; fire symbol on map; open mornings; packed-earth floor, long table, banked hearth",
+            "visited": true
           }
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "millbrook-layout",
-          "label": "Millbrook — Village Layout",
-          "kind": "place",
-          "fact": "Local annotations on the junction map board confirm: a common house between the wayhouse lane and dock road; mill row near the water wheels; the terraces above the well serving as a weekly market or gathering point.",
-          "links": [
-            "millbrook",
-            "mara-wells",
-            "millbrook-river-dock",
-            "east-fork-run"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook lane junction at sunrise — Brynjar stands at the junction post, oilcloth map board open before him; wayhouse chimney smoking steadily up the lane; dock empty and quiet; thin gold morning light; early-spring cold.",
+      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; two windows letting in thin gold morning light.",
       "npcsPresent": [
         {
-          "name": "Child with a bucket",
-          "state": "Walking toward the well, unhurried, bucket in hand, back to Brynjar"
+          "name": "Two older women",
+          "state": "Eating from bowls at the far end of the long table; one glanced at Brynjar on entry, returned to her food without commen"
+        },
+        {
+          "name": "Usnea Beard",
+          "state": "Somewhere in the lane just outside — present but not yet in the building"
         }
       ],
       "objects": [
-        "Oilcloth map board nailed to the lane junction post — hand-inked valley map with",
-        "River road running south toward the dock",
-        "Wayhouse — low wide building with smoking chimney up the lane",
-        "Millbrook River Dock — empty, morning quiet",
-        "Echo River — gray-green tinge visible in the shallows"
+        "Long table with benches",
+        "Banked hearth, still warm",
+        "Cord of firewood stacked against the east wall",
+        "Clay jug and cups on the table — left from last night",
+        "Two unshuttered windows",
+        "Wayhouse visible up the lane through the open door — chimney still smoking"
       ],
       "threads": [
         "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting",
-        "Map shows Disputed Zone begins past the high pasture fence — detail runs out there",
         "Second set of boot prints on the east bank trail running downstream — origin and identity unresolved",
         "Ritualized bout with the east bank traveler — postponed, not cancelled; her name still unknown",
         "Contamination source estimated 2–4 km past the high pasture fence, within the Disputed Zone — unreached"
@@ -348,7 +327,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [],
@@ -480,7 +459,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] Brynjar slept in the back-room pallet of Mara's Wayhouse the night before the east fork run — dry straw, coarse wool, two sleeping traders in the common room.",
         "[d2] Gravel bar just below east fork's first braid: skiff grounded here with sprung plank; gray-green contamination visibly ribboned in the white water; stock trail on east bank above flood line.",
         "[d2] An unnamed young traveler descended from the east bank stock trail onto the gravel bar at dawn — confirming the trail sees recent active use.",
         "[d2] Skiff tied off and abandoned on the gravel bar boulder — sprung plank, bailer still under thwart. Trail confirmed passable upstream to high pasture fence by a recent traveler.",
@@ -491,7 +469,8 @@
         "[d2] A flat packed-earth shelf above the east fork flood line exists approximately ten paces back from the main trail near the alder bend — used as bout ground; root wall on one side.",
         "[d2] Brynjar returned to Millbrook at sunrise via the east bank stock trail and river road — the wayhouse chimney is smoking, the dock is empty, the river still shows gray-green at the village edge.",
         "[d2] An oilcloth-covered map board stands at the lane junction post — hand-inked valley map kept by multiple hands; east fork stock trail and high pasture labeled; Disputed Zone marked beyond, detail absen",
-        "[d2] Map board lower margin carries local Millbrook annotations in a lighter hand: common house with fire symbol, mill row, and the terraces (weekly gathering/market arc above the well)."
+        "[d2] Map board lower margin carries local Millbrook annotations in a lighter hand: common house with fire symbol, mill row, and the terraces (weekly gathering/market arc above the well).",
+        "[d2] Common house visited at sunrise — public space, open door, banked hearth, long table; two local women at breakfast; no unusual presences"
       ],
       "flags": {},
       "lastVisit": 1,
@@ -545,8 +524,8 @@
         "millbrook-common-house": {
           "name": "Millbrook Common House",
           "day": 2,
-          "visited": false,
-          "note": "Marked on map board — between wayhouse lane and dock road, fire symbol."
+          "visited": true,
+          "note": "Low-ceilinged public building between wayhouse lane and dock road; fire symbol on map; open mornings; packed-earth floor"
         },
         "the-terraces": {
           "name": "The Terraces",
@@ -873,7 +852,7 @@
   ],
   "precursorAccess": [],
   "backfillVersion": 1,
-  "sharedSceneId": null,
+  "sharedSceneId": "millbrook--2026-07-08T21-14-55-035Z",
   "opLossPending": false,
   "opLossLog": [
     {

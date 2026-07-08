@@ -185,37 +185,27 @@
       {
         "summary": "Brynjar orders morning mead from the common house apprentice; Usnea steps out to signal Mara.",
         "narration": "The common house doesn't have a dedicated worker at this hour — it's a village building, not a tavern, and this early it runs on mutual courtesy. But there's a ceramic jug on the long table, and when you look around a young man in a flour-dusted apron is banking the fire back up with half-attention, clearly someone's apprentice doing the morning opening. You catch his eye and nod at the jug. 'Mead, if there is any?'\n\nHe straightens, wipes his hands on his apron, and checks the jug — lifts it, shakes it. A sound like a promise. 'Barley-mead,' he says, not unkindly. 'Morning batch, so it's yesterday's. Costs a nail or a trade.' He sets a clay cup in front of you without waiting for the answer, the way people do when they expect a transaction to complete itself.\n\nThe two women at the far end of the table don't look up. Through the open door, the wayhouse chimney is still drawing smoke up into the pale spring sky — Mara is awake and waiting. Usnea has already slipped outside to give the opening signal, which means whatever gathering Mara has planned is about to begin. The mead sits in front of you, fragrant and faintly cloudy, and the choice of whether to linger one more moment or head up the lane is still yours."
+      },
+      {
+        "summary": "Brynjar pays for the mead and learns heavy boots passed on the lane around second watch — nobody stopped in.",
+        "narration": "You dig a nail from the small pouch at your belt — the kind of exchange that needs no ceremony — and set it on the table beside the cup. The apprentice palms it without looking, already half-turned back to the fire. You lift the mead and take a slow first sip. Yesterday's batch, true enough: mildly sour, a little thin, but warm in the chest. Good enough for a morning that started before the birds.\n\nYou keep your voice easy, the question aimed at his back. \"Anyone come through before dawn? Heading north, maybe — or stopping in from the river road?\" The grey-braided woman at the far end of the table doesn't look up, but her spoon stops moving for just a moment.\n\nThe apprentice prods the coals and answers without turning. \"Nobody stopped in. But I heard boots on the lane around the second watch — that's not so strange, people heading to the dock early. Heavier step than a farmer, is all I noticed. Didn't come inside.\" He shrugs one shoulder, the kind of shrug that says it wasn't his business to look. \"Could've been a trader getting an early start.\"\n\nThrough the open door the wayhouse lane is quiet, morning light still pale gold across the packed earth. Mara's chimney sends up a slow, straight column of smoke — no wind to bend it. Whatever signal Usnea gave, the door at the top of the lane hasn't opened yet. The cup is warm between your hands and the mead is doing its small work. You have a moment before the meeting opens."
       }
     ],
     "lastTurn": {
-      "narration": "The common house doesn't have a dedicated worker at this hour — it's a village building, not a tavern, and this early it runs on mutual courtesy. But there's a ceramic jug on the long table, and when you look around a young man in a flour-dusted apron is banking the fire back up with half-attention, clearly someone's apprentice doing the morning opening. You catch his eye and nod at the jug. 'Mead, if there is any?'\n\nHe straightens, wipes his hands on his apron, and checks the jug — lifts it, shakes it. A sound like a promise. 'Barley-mead,' he says, not unkindly. 'Morning batch, so it's yesterday's. Costs a nail or a trade.' He sets a clay cup in front of you without waiting for the answer, the way people do when they expect a transaction to complete itself.\n\nThe two women at the far end of the table don't look up. Through the open door, the wayhouse chimney is still drawing smoke up into the pale spring sky — Mara is awake and waiting. Usnea has already slipped outside to give the opening signal, which means whatever gathering Mara has planned is about to begin. The mead sits in front of you, fragrant and faintly cloudy, and the choice of whether to linger one more moment or head up the lane is still yours.",
-      "sceneSummary": "Brynjar orders morning mead from the common house apprentice; Usnea steps out to signal Mara.",
+      "narration": "You dig a nail from the small pouch at your belt — the kind of exchange that needs no ceremony — and set it on the table beside the cup. The apprentice palms it without looking, already half-turned back to the fire. You lift the mead and take a slow first sip. Yesterday's batch, true enough: mildly sour, a little thin, but warm in the chest. Good enough for a morning that started before the birds.\n\nYou keep your voice easy, the question aimed at his back. \"Anyone come through before dawn? Heading north, maybe — or stopping in from the river road?\" The grey-braided woman at the far end of the table doesn't look up, but her spoon stops moving for just a moment.\n\nThe apprentice prods the coals and answers without turning. \"Nobody stopped in. But I heard boots on the lane around the second watch — that's not so strange, people heading to the dock early. Heavier step than a farmer, is all I noticed. Didn't come inside.\" He shrugs one shoulder, the kind of shrug that says it wasn't his business to look. \"Could've been a trader getting an early start.\"\n\nThrough the open door the wayhouse lane is quiet, morning light still pale gold across the packed earth. Mara's chimney sends up a slow, straight column of smoke — no wind to bend it. Whatever signal Usnea gave, the door at the top of the lane hasn't opened yet. The cup is warm between your hands and the mead is doing its small work. You have a moment before the meeting opens.",
+      "sceneSummary": "Brynjar pays for the mead and learns heavy boots passed on the lane around second watch — nobody stopped in.",
       "choices": [
         {
-          "label": "Pay the nail, drink quickly, and head straight up to Mara's wayhouse — she's been waiting long enough.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "move",
-            "practical"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Pay for the mead and take a slow sip — ask the apprentice if anyone passed through before dawn this morning.",
+          "label": "Head up to Mara's wayhouse now — the chimney's been smoking long enough; she's waiting.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "gather-information",
-            "scout"
+            "approach",
+            "report"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -224,34 +214,57 @@
           "emergenceId": null
         },
         {
-          "label": "Decline the mead for now and head directly to Mara's wayhouse — no time to settle into a cup.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Ask the apprentice to describe the boots more — heavy how? And which direction on the lane were they heading?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "move",
+            "study",
+            "question"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step to the door and look up the lane — see if Usnea is visible, or if anyone is near the wayhouse entrance.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "spectrumId": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "observe"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Finish the mead in one go, pay the apprentice a second nail for his trouble, and ask if the grey-braided woman knows anything about heavy boots on the lane at second watch.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "spectrumId": 0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "question",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Pay for the mead, take it with you, and walk up to the wayhouse cup in hand — no reason to rush or linger.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "move",
-            "relaxed"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -265,21 +278,28 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "east-fork-run",
+          "title": "East Fork at First Light",
+          "note": "Heavy boots heard on the wayhouse lane around second watch — nobody entered the common house. Direction and identity still unknown. Mara's meeting about to open."
+        }
+      ],
       "scene": {
-        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth being tended by a flour-dusted apprentice; thin gold morning light through two unshuttered windows.",
+        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth being tended by a flour-dusted apprentice; thin gold morning light through two unshuttered windows. Mara's wayhouse chimney visible up the lane, still smoking steadily.",
         "npcsPresent": [
           {
             "name": "Grey-braided woman",
-            "state": "Set her bowl down; not listening, or pretending not to."
+            "state": "Spoon paused mid-bowl — listening without appearing to."
           },
           {
             "name": "Older rounder woman",
-            "state": "Refilling her cup; settled in for a slow morning."
+            "state": "Refilling her cup; settled and unhurried."
           },
           {
             "name": "Common house apprentice",
-            "state": "Standing by the hearth, cup placed in front of Brynjar, waiting on the nail or trade."
+            "state": "Back to the fire, prodding coals; nail pocketed, transaction closed."
           }
         ],
         "objects": [
@@ -287,59 +307,82 @@
           "Banked hearth, being tended",
           "Cord of firewood stacked against the east wall",
           "Clay jug and cups on the table",
-          "Filled clay cup of barley-mead in front of Brynjar",
+          "Brynjar's half-drunk cup of barley-mead",
           "Two unshuttered windows",
           "Wayhouse visible up the lane through the open door — chimney still smoking"
         ],
         "threads": [
           "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting; Usnea has gone to give the opening signal",
-          "Apprentice waiting on payment for the mead — a nail or a trade",
+          "Heavy boots heard on the lane around second watch — heavier than a farmer, didn't stop inside; direction and identity unknown",
           "Dark-coated figure: walked the river road south-to-north two days ago before dawn — identity unknown",
           "East bank traveler identified as Venn family shepherd girl — name still unlearned, still upstream",
-          "Second set of boot prints on the east bank trail running downstream — origin unresolved",
-          "Ritualized bout with the east bank traveler — postponed, not cancelled"
+          "Second set of boot prints on the east bank trail running downstream — origin unresolved"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "common-house-apprentice",
           "name": "Common house apprentice",
           "role": "Morning tender of the common house fire and jug",
-          "description": "A young man in a flour-dusted apron, unhurried and practical — handles the morning opening with half-attention and quiet expectation of fair trade.",
-          "note": "Acknowledged Brynjar's request for mead without fuss; set a cup of barley-mead on the table and is waiting on a nail or trade in return.",
+          "note": "Accepted the nail for the mead without ceremony. Volunteered unprompted that heavy boots passed on the lane around second watch — nobody came inside. Called it heavier than a farmer.",
           "learned": [
-            "Charges a nail or a trade for the morning mead — barley batch, yesterday's"
+            "Heavy-stepped boots were heard on the wayhouse lane around second watch this morning — did not enter the common house"
           ],
           "skillsObserved": [
-            "practical hospitality"
+            "incidental observation",
+            "economy of words"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing by the common house hearth, waiting on payment for the mead."
+          "statusNote": "At the common house hearth; transaction complete; tending the morning fire."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [],
-      "encounterOps": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Heavy boots were heard on the wayhouse lane around second watch this morning — heavier step than a farmer, passed without stopping inside the common house. Direction and identity unknown.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "A heavy-stepped unknown passed the common house on the wayhouse lane around second watch (pre-dawn) — noted by the apprentice, nobody entered.",
+          "flag": {
+            "unknown_boots_lane": "second-watch-day3"
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "east-bank-stock-trail",
+          "label": "East Bank Stock Trail",
+          "kind": "mystery",
+          "fact": "Heavy boots were heard on the wayhouse lane around second watch on day 3 — heavier than a farmer's step, did not enter the common house. Possibly connected to the dark-coated figure seen on the river road two days prior.",
+          "links": [
+            "echo-river-contamination",
+            "east-fork-run",
+            "millbrook"
+          ]
+        }
+      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth being tended by a flour-dusted apprentice; thin gold morning light through two unshuttered windows.",
+      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth being tended by a flour-dusted apprentice; thin gold morning light through two unshuttered windows. Mara's wayhouse chimney visible up the lane, still smoking steadily.",
       "npcsPresent": [
         {
           "name": "Grey-braided woman",
-          "state": "Set her bowl down; not listening, or pretending not to."
+          "state": "Spoon paused mid-bowl — listening without appearing to."
         },
         {
           "name": "Older rounder woman",
-          "state": "Refilling her cup; settled in for a slow morning."
+          "state": "Refilling her cup; settled and unhurried."
         },
         {
           "name": "Common house apprentice",
-          "state": "Standing by the hearth, cup placed in front of Brynjar, waiting on the nail or trade."
+          "state": "Back to the fire, prodding coals; nail pocketed, transaction closed."
         }
       ],
       "objects": [
@@ -347,13 +390,13 @@
         "Banked hearth, being tended",
         "Cord of firewood stacked against the east wall",
         "Clay jug and cups on the table",
-        "Filled clay cup of barley-mead in front of Brynjar",
+        "Brynjar's half-drunk cup of barley-mead",
         "Two unshuttered windows",
         "Wayhouse visible up the lane through the open door — chimney still smoking"
       ],
       "threads": [
         "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting; Usnea has gone to give the opening signal",
-        "Apprentice waiting on payment for the mead — a nail or a trade",
+        "Heavy boots heard on the lane around second watch — heavier than a farmer, didn't stop inside; direction and identity unknown",
         "Dark-coated figure: walked the river road south-to-north two days ago before dawn — identity unknown",
         "East bank traveler identified as Venn family shepherd girl — name still unlearned, still upstream",
         "Second set of boot prints on the east bank trail running downstream — origin unresolved"
@@ -363,7 +406,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [],
@@ -376,14 +419,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Skiff's port plank sprung crossing into the braid; grounded on a gravel bar 12 meters short of the first braid's mouth. East bank has a narrow stock trail above flood line. The gray-green contaminatio",
         "Skiff held on the gravel bar with rope-work and a stranger's help; plank still sprung. Upstream path now contested between a limping boat repair and the stock trail on foot.",
         "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past",
         "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas",
         "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints",
         "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the f",
         "Brynjar has returned to Millbrook at sunrise with field observations — contamination ribbons stronger and columnar upstream, second unidentified boot prints on the trail, gray soil above the fence con",
-        "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke"
+        "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke",
+        "Heavy boots heard on the wayhouse lane around second watch — nobody entered the common house. Direction and identity still unknown. Mara's meeting about to open."
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -536,16 +579,20 @@
       },
       "relationship": 0,
       "history": [
-        "[d3] Acknowledged Brynjar's request for mead without fuss; set a cup of barley-mead on the table and is waiting on a nail or trade in return."
+        "[d3] Acknowledged Brynjar's request for mead without fuss; set a cup of barley-mead on the table and is waiting on a nail or trade in return.",
+        "[d3] Accepted the nail for the mead without ceremony. Volunteered unprompted that heavy boots passed on the lane around second watch — nobody came inside. Called it heavier than a farme"
       ],
       "knownFacts": [
-        "Charges a nail or a trade for the morning mead — barley batch, yesterday's"
+        "Charges a nail or a trade for the morning mead — barley batch, yesterday's",
+        "Heavy-stepped boots were heard on the wayhouse lane around second watch this morning — did not enter the common house"
       ],
       "skillsObserved": [
-        "practical hospitality"
+        "practical hospitality",
+        "incidental observation",
+        "economy of words"
       ],
       "status": "active",
-      "statusNote": "Standing by the common house hearth, waiting on payment for the mead.",
+      "statusNote": "At the common house hearth; transaction complete; tending the morning fire.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -575,7 +622,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] An unnamed young traveler descended from the east bank stock trail onto the gravel bar at dawn — confirming the trail sees recent active use.",
         "[d2] Skiff tied off and abandoned on the gravel bar boulder — sprung plank, bailer still under thwart. Trail confirmed passable upstream to high pasture fence by a recent traveler.",
         "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence.",
         "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
@@ -586,9 +632,12 @@
         "[d2] An oilcloth-covered map board stands at the lane junction post — hand-inked valley map kept by multiple hands; east fork stock trail and high pasture labeled; Disputed Zone marked beyond, detail absen",
         "[d2] Map board lower margin carries local Millbrook annotations in a lighter hand: common house with fire symbol, mill row, and the terraces (weekly gathering/market arc above the well).",
         "[d2] Common house visited at sunrise — public space, open door, banked hearth, long table; two local women at breakfast; no unusual presences",
-        "[d2] Common house locals confirm the Venn family as the regular users of the east bank stock trail; a dark-coated figure was seen on the river road two mornings ago before dawn."
+        "[d2] Common house locals confirm the Venn family as the regular users of the east bank stock trail; a dark-coated figure was seen on the river road two mornings ago before dawn.",
+        "[d3] A heavy-stepped unknown passed the common house on the wayhouse lane around second watch (pre-dawn) — noted by the apprentice, nobody entered."
       ],
-      "flags": {},
+      "flags": {
+        "unknown_boots_lane": "second-watch-day3"
+      },
       "lastVisit": 1,
       "vectorsKnown": [
         "violence_peace",
@@ -826,17 +875,19 @@
           "[d2] The trail leads to a high pasture fold above the fence, ~2 hours upstream at trail pace. The traveler walking it now is checking on three missing sheep — a practical errand that coincidentally puts th",
           "[d2] A second set of boot prints runs downstream in the trail mud — smaller heel, different tread, and fresher than the upstream traffic (made when the mud was wetter, i.e. within the last day or two). Not",
           "[d2] The east bank traveler accepted a ritualized bout — name for fence-help — with composed practicality. She chose the ground herself: a flat shelf above the flood line near the alder bend, ten paces off",
-          "[d2] The regular user of the east bank trail is the Venn family's shepherd daughter, who checks a fold above the high pasture fence every few weeks. A separate, unknown dark-coated figure walked the river "
+          "[d2] The regular user of the east bank trail is the Venn family's shepherd daughter, who checks a fold above the high pasture fence every few weeks. A separate, unknown dark-coated figure walked the river ",
+          "[d3] Heavy boots were heard on the wayhouse lane around second watch on day 3 — heavier than a farmer's step, did not enter the common house. Possibly connected to the dark-coated figure seen on the river "
         ],
         "links": [
           "echo-river-contamination",
           "east-fork-run",
           "east-fork-gravel-bar",
           "high-pasture-fence",
-          "disputed-zone"
+          "disputed-zone",
+          "millbrook"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "disputed-zone": {
         "id": "disputed-zone",
@@ -1009,6 +1060,12 @@
       "text": "The east bank traveler is almost certainly the Venn family's shepherd daughter — locals confirm the Venn family runs sheep on the second ridge and their girl checks the fold every few weeks.",
       "day": 2,
       "subjectId": "unknown-east-bank-traveler"
+    },
+    {
+      "id": "f15",
+      "text": "Heavy boots were heard on the wayhouse lane around second watch this morning — heavier step than a farmer, passed without stopping inside the common house. Direction and identity unknown.",
+      "day": 3,
+      "subjectId": null
     }
   ],
   "precursorAccess": [],

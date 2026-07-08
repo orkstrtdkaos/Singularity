@@ -6,10 +6,10 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 4,
-  "xp": 306,
+  "xp": 316,
   "attributes": {
     "physical": 4,
-    "mental": 4,
+    "mental": 5,
     "social": 4,
     "practical": 3
   },
@@ -17,7 +17,15 @@
   "abilities": [
     {
       "abilityId": "prism_sight",
-      "level": 2
+      "level": 2,
+      "branches": [
+        {
+          "id": "prism_sight_deep_read",
+          "name": "Deep Read",
+          "grants": "A specialization branch: with time and stillness, read an object's layered history in light — not just what it is, but the order of what happened to it.",
+          "cannot": "Needs minutes and quiet; a hurried or hostile scene forecloses it; history older than the material itself is silent."
+        }
+      ]
     },
     {
       "abilityId": "light_bending",
@@ -34,6 +42,10 @@
     {
       "abilityId": "motes-vigil",
       "level": 1
+    },
+    {
+      "abilityId": "daybreak_mantle",
+      "level": 1
     }
   ],
   "alignment": {
@@ -41,14 +53,14 @@
     "concrete_abstract": 0.04548989281459041,
     "spectrumId": -0.21505916698911481,
     "dark_light": 0.19177414280214844,
-    "falsehood_truth": 0.26428802996875,
-    "violence_peace": 0.1396888928125
+    "falsehood_truth": 0.2910736284703125,
+    "violence_peace": 0.172704448171875
   },
   "attunement": 4,
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 110,
+  "energy": 105,
   "inventory": [
     {
       "id": "waterskin",
@@ -157,7 +169,10 @@
         "water-crisis"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "valley.harmonic_heights",
+        "valley.radiant_plateau"
+      ],
       "_bonusApplied": 0.25,
       "day": 5
     },
@@ -175,6 +190,21 @@
       "spread": [],
       "_bonusApplied": 0.25,
       "day": 6
+    },
+    {
+      "at": "2026-07-08T17:47:46.091Z",
+      "locationId": "radiant_plateau_edge",
+      "communityId": "valley.millbrook",
+      "description": "Secured the tuning-warden's agreement to testify at Thursday's elder meeting — a Heights-side witness to the six-count pulse three springs before the crisis.",
+      "tags": [
+        "investigation",
+        "community",
+        "cross-faction"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 8
     }
   ],
   "relationships": {},
@@ -188,64 +218,29 @@
       {
         "summary": "The tuning-warden confirmed the six-count channel light he witnessed three springs ago — an unsanctioned memory that now places a Precursor conduit pulse at the Heights' own gateline years before the contamination crisis began.",
         "narration": "The Harmonic Heights lower terrace is cooler than the valley floor, the stone stairs worn smooth by generations of careful feet. The gateline sits where it always has — a low arch strung with a single chord-staff holder, a bench, and the gray-layered warden who has been standing here since before the water turned. He recognizes you before you reach the arch. His posture shifts the way a person's does when they've been half-expecting a conversation they weren't sure would come.\n\nYou don't circle it. You tell him what you found beneath the rim path: three braided alignments, six-count pulse, consistent intervals all the way down to the valley floor ford. You name the south switchback node. You name the conduit structure plainly — that the pulse doesn't originate in Millbrook, doesn't originate on the plateau, but travels from something deeper in the upper Disputed Zone along infrastructure older than anything standing in this valley. Then you ask, directly and without softening it: what did you see in the channel three springs ago?\n\nHe's quiet for long enough that Aevi brightens at your shoulder — a patient, attentive constellation. The warden's eyes don't leave the junction-stone crack in the channel trough. When he speaks, it's in the tone of someone setting down something heavy. Three springs ago, he tells you, before this post, before the current briefings — he was an apprentice running a supply circuit along the lower terrace channels. A morning like this one, early light, nothing wrong with the water. He crouched to check a flow-gate and the whole channel bottom lit up for about four seconds. Not reflected light. Light from inside the stone. A slow, even pulse — he'd never mentioned it to anyone because there was nothing to say. He thought he'd imagined it. The count, you ask quietly. He doesn't hesitate: six. Then a long pause. Then again.\n\nAevi says nothing. But the motes pull tight, very bright, very still — the particular stillness it holds when something clicks into a pattern it's been watching build for days. The warden looks at the junction-stone, then at you. 'The crack was there already,' he says. 'I thought the stone had always been cracked.' He straightens slowly, chord-staff settling across both hands — not a defensive gesture, just the grip of someone who's decided to stay present for what comes next.\n\n*✦ Your bond with Aevi deepens into something new: **Motes' Vigil**.*"
+      },
+      {
+        "summary": "The tuning-warden agrees to testify Thursday — a Heights-side witness to the six-count pulse, three springs before the crisis.",
+        "narration": "The warden is quiet for a long beat after you finish. He doesn't look at you — he looks at the junction-stone crack, the way a person looks at something they've been pretending isn't there. His chord-staff shifts once in his grip, then settles.\n\n\"Three springs is a long time to keep something quiet,\" he says finally. Not an excuse. Just a fact he's choosing to stop carrying alone. \"I didn't report it because I didn't have language for it. We don't have language for it. Light from inside the stone, six counts, a long pause. I was an apprentice. I told myself it was a trick of the water.\"\n\nAevi brightens at your shoulder — not the urgent flare of warning, but the slow steady intensification of something that recognizes itself being named. The warden notices. His eyes move to the motes, back to the crack, and you see the moment the decision finishes forming in him.\n\n\"Thursday,\" he says. \"I'll need to speak to the gate-senior before I come down — I can't leave the gateline without it sanctioned. But yes. If the elders need to hear what I saw, they should hear it.\" A pause. \"I won't dress it up. I'll say what happened and nothing more. Four seconds. Six counts. Light from inside the stone.\" He meets your eyes for the first time since you named the south switchback node. \"That's enough, isn't it. That's what you need.\"\n\nIt is. You tell him so. Behind him, the channel trough runs its ordinary afternoon water — and beneath it, below the mortar and the worn stone and thirty feet of packed earth, something old counts in sixes and waits."
       }
     ],
     "lastTurn": {
-      "narration": "The Harmonic Heights lower terrace is cooler than the valley floor, the stone stairs worn smooth by generations of careful feet. The gateline sits where it always has — a low arch strung with a single chord-staff holder, a bench, and the gray-layered warden who has been standing here since before the water turned. He recognizes you before you reach the arch. His posture shifts the way a person's does when they've been half-expecting a conversation they weren't sure would come.\n\nYou don't circle it. You tell him what you found beneath the rim path: three braided alignments, six-count pulse, consistent intervals all the way down to the valley floor ford. You name the south switchback node. You name the conduit structure plainly — that the pulse doesn't originate in Millbrook, doesn't originate on the plateau, but travels from something deeper in the upper Disputed Zone along infrastructure older than anything standing in this valley. Then you ask, directly and without softening it: what did you see in the channel three springs ago?\n\nHe's quiet for long enough that Aevi brightens at your shoulder — a patient, attentive constellation. The warden's eyes don't leave the junction-stone crack in the channel trough. When he speaks, it's in the tone of someone setting down something heavy. Three springs ago, he tells you, before this post, before the current briefings — he was an apprentice running a supply circuit along the lower terrace channels. A morning like this one, early light, nothing wrong with the water. He crouched to check a flow-gate and the whole channel bottom lit up for about four seconds. Not reflected light. Light from inside the stone. A slow, even pulse — he'd never mentioned it to anyone because there was nothing to say. He thought he'd imagined it. The count, you ask quietly. He doesn't hesitate: six. Then a long pause. Then again.\n\nAevi says nothing. But the motes pull tight, very bright, very still — the particular stillness it holds when something clicks into a pattern it's been watching build for days. The warden looks at the junction-stone, then at you. 'The crack was there already,' he says. 'I thought the stone had always been cracked.' He straightens slowly, chord-staff settling across both hands — not a defensive gesture, just the grip of someone who's decided to stay present for what comes next.\n\n*✦ Your bond with Aevi deepens into something new: **Motes' Vigil**.*",
-      "sceneSummary": "The tuning-warden confirmed the six-count channel light he witnessed three springs ago — an unsanctioned memory that now places a Precursor conduit pulse at the Heights' own gateline years before the contamination crisis began.",
+      "narration": "The warden is quiet for a long beat after you finish. He doesn't look at you — he looks at the junction-stone crack, the way a person looks at something they've been pretending isn't there. His chord-staff shifts once in his grip, then settles.\n\n\"Three springs is a long time to keep something quiet,\" he says finally. Not an excuse. Just a fact he's choosing to stop carrying alone. \"I didn't report it because I didn't have language for it. We don't have language for it. Light from inside the stone, six counts, a long pause. I was an apprentice. I told myself it was a trick of the water.\"\n\nAevi brightens at your shoulder — not the urgent flare of warning, but the slow steady intensification of something that recognizes itself being named. The warden notices. His eyes move to the motes, back to the crack, and you see the moment the decision finishes forming in him.\n\n\"Thursday,\" he says. \"I'll need to speak to the gate-senior before I come down — I can't leave the gateline without it sanctioned. But yes. If the elders need to hear what I saw, they should hear it.\" A pause. \"I won't dress it up. I'll say what happened and nothing more. Four seconds. Six counts. Light from inside the stone.\" He meets your eyes for the first time since you named the south switchback node. \"That's enough, isn't it. That's what you need.\"\n\nIt is. You tell him so. Behind him, the channel trough runs its ordinary afternoon water — and beneath it, below the mortar and the worn stone and thirty feet of packed earth, something old counts in sixes and waits.",
+      "sceneSummary": "The tuning-warden agrees to testify Thursday — a Heights-side witness to the six-count pulse, three springs before the crisis.",
       "choices": [
         {
-          "label": "Ask him to testify at Thursday's elder meeting — a Heights-side witness places the six-count pulse here years before the crisis began",
+          "label": "Ask what he'll need from the gate-senior to get sanctioned leave — and whether there's anything you can do to help that move faster.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.8,
-            "violence_peace": 0.8
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "recruit",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the junction-stone crack — read its light-history and confirm how long the pulse has run through this node",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.8,
-            "concrete_abstract": 0.6
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "investigate",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask him who else on the Heights might have seen the channel light — a warden's network runs deep, and you need to know how contained this knowledge is",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.6
+            "violence_peace": 0.9
           },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful",
-            "persuade"
+            "help",
+            "plan",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -254,48 +249,109 @@
           "emergenceId": null
         },
         {
-          "label": "Use Old Roads to feel the junction-stone node directly — confirm whether the conduit pulse runs up through the Heights' own channel infrastructure",
+          "label": "Use Old Roads on the junction-stone crack now, while you're both standing here — confirm whether the conduit pulse is live in this trough and let him feel what you're reading.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.7,
-            "concrete_abstract": 0.5
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": 0.6
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "investigate",
-            "risky"
+            "careful"
           ],
           "abilityId": "old_roads",
           "energyCost": 7,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Show him Orla's Memory Glass — let him see what the light at the ford-side boulder recorded. A Heights-witness who has seen the Radiant evidence is a stronger one.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.9,
+            "dark_light": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "reveal",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Thank him and leave it there — the agreement is clean, don't risk it with more. Ask only whether he can reach Thursday's common house before noon.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.7,
+            "violence_peace": 0.9
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Secured the tuning-warden's agreement to testify at Thursday's elder meeting — a Heights-side witness to the six-count pulse three springs before the crisis.",
+          "tags": [
+            "investigation",
+            "community",
+            "cross-faction"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "xp": 5
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "The Harmonic Heights gateline warden agreed to testify at Millbrook's Thursday elder meeting about six-count channel light witnessed three springs ago — placing the conduit pulse at the Heights years before the contamination crisis.",
+          "tags": [
+            "cross-faction",
+            "testimony",
+            "contamination-investigation"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "falsehood_truth": 0.05
+          }
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "note": "Tuning-warden confirmed he witnessed six-count channel light three springs ago at the Lower Terrace gateline — a Heights-side pre-crisis witness to the conduit pulse, now named and available."
+          "note": "Tuning-warden confirmed Thursday attendance — Heights-side witness secured. Will seek gate-senior sanction to leave the gateline."
         }
       ],
       "scene": {
-        "setting": "Harmonic Heights Lower Terrace gateline — a low stone arch with a chord-staff holder, midday light falling flat on worn stairs. The channel trough runs left of the gate; the junction-stone crack is visible in the trough mortar.",
+        "setting": "Harmonic Heights Lower Terrace gateline — low stone arch with chord-staff holder, midday light flat on worn stairs. Channel trough runs left of the gate; junction-stone crack visible in the mortar.",
         "npcsPresent": [
           {
             "name": "Tuning-warden (gateline)",
-            "state": "Standing at the arch, chord-staff across both hands, eyes moving between the junction-stone crack and Usnea — settled into presence, not closing the conversation"
+            "state": "Standing at the arch, chord-staff loose in both hands now — the decision made, posture slightly lighter. Eyes on the junction-stone crack."
           }
         ],
         "objects": [
@@ -307,9 +363,9 @@
           "Crystalline Residue Pinch (on Usnea's person)"
         ],
         "threads": [
-          "The warden has confirmed the six-count channel light — the conversation is open; he is waiting to see what Usnea does with that",
-          "The junction-stone crack sits unread by Prism Sight or Old Roads",
-          "Whether the Heights' own channel infrastructure carries the conduit pulse is still unconfirmed"
+          "The warden needs gate-senior sanction before he can leave the gateline for Thursday — that step is unsettled",
+          "The junction-stone crack sits unread by Prism Sight or Old Roads — whether the conduit pulse is live in this trough is still unconfirmed",
+          "The warden has not seen Orla's Memory Glass — he knows the Heights-side evidence but not the Radiant-side record"
         ]
       },
       "npcUpdates": [
@@ -318,36 +374,26 @@
           "npcId": "tuning-warden",
           "name": "Tuning-warden (gateline)",
           "role": "Gateline warden, Lower Terrace, Harmonic Heights",
-          "note": "Confirmed six-count channel light witnessed three springs ago — four seconds, light from inside the stone, six pulses then a long pause. Before his current post, before the contamination. He hadn't spoken of it because there was nothing to say — he thought he'd imagined it. Named the crack as pre-existing. Now standing present and undecided.",
+          "note": "Agreed to testify Thursday — will name the four seconds, six counts, light from inside the stone, nothing more. Needs gate-senior sanction to leave the gateline; will seek it himself.",
           "learned": [
-            "Three springs ago, crouching at a lower terrace flow-gate as an apprentice, he witnessed the channel bottom light up from inside the stone — four seconds, six-count pulse, then quiet",
-            "He kept the sighting to himself — no record, no report, no one told",
-            "He recognized the junction-stone crack before Usnea arrived — he has noticed it before and said nothing"
+            "Will testify Thursday with gate-senior approval",
+            "Describes the witnessed event in precise, unembellished terms — four seconds, six counts, light from inside the stone",
+            "Has been sitting with the unsanctioned memory for three springs; the decision to speak landed as relief, not fear"
           ],
           "skillsObserved": [
-            "precise sensory recall under pressure",
-            "deliberate honesty once the decision to speak is made"
+            "deliberate commitment once decision is made",
+            "precise unembellished recall under no pressure"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the Lower Terrace gateline — has confirmed the pre-crisis channel light sighting; conversation open, waiting to see what Usnea asks next."
+          "statusNote": "At the Lower Terrace gateline — committed to Thursday testimony pending gate-senior sanction; conversation open."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The Lower Terrace gateline warden witnessed six-count channel light from inside the stone at a lower terrace flow-gate three springs ago — before his current post, before the contamination crisis. He kept no record and told no one. He is a live Heights-side witness to the conduit pulse predating the crisis.",
+          "text": "The tuning-warden has agreed to testify at Thursday's Millbrook elder meeting — pending gate-senior sanction to leave the gateline. His testimony: four seconds, six counts, light from inside the stone, three springs ago.",
           "subjectId": "tuning-warden"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Tuning-warden confirmed pre-crisis six-count channel light at the Lower Terrace flow-gate area — this places the conduit pulse's presence at the Heights three springs before the current contamination crisis. The junction-stone crack was pre-existing and noticed by the warden before this conversation.",
-          "subPlace": {
-            "name": "Lower Terrace Gateline — Channel Trough",
-            "note": "Junction-stone crack confirmed pre-existing; warden's three-springs-back sighting of six-count inner-stone light places conduit pulse presence here before the contamination crisis began.",
-            "visited": true
-          }
         }
       ],
       "codexUpdates": [
@@ -355,25 +401,23 @@
           "topic": "tuning-warden-gateline",
           "label": "Tuning-Warden — Lower Terrace Gateline",
           "kind": "person",
-          "fact": "Day 8: Confirmed — three springs ago, as an apprentice, he witnessed six-count channel light from inside the stone at a lower terrace flow-gate. Kept no record. He is a live Heights-side witness to the conduit pulse predating the current contamination crisis by years.",
+          "fact": "Day 8 afternoon: agreed to testify Thursday — will name the six-count channel light precisely and without embellishment. Needs gate-senior sanction first; taking that step himself.",
           "links": [
             "the-six-fold-pattern",
-            "echo-river-contamination",
-            "harmonic-heights",
             "contamination-evidence-for-the-elders",
-            "precursor-alignment-plateau-rim"
+            "harmonic-heights",
+            "echo-river-contamination"
           ]
         },
         {
-          "topic": "the-six-fold-pattern",
-          "label": "The Six-Fold Pattern",
-          "kind": "mystery",
-          "fact": "Day 8: The six-count pulse was present at the Harmonic Heights lower terrace channel infrastructure three springs ago — before the contamination crisis, before the current warden's post. The conduit system was already active and undetected inside the Heights' own water channels years before Fendt's pour.",
+          "topic": "contamination-evidence-for-the-elders",
+          "label": "Evidence for the Elders",
+          "kind": "event",
+          "fact": "Thursday witness list now includes the tuning-warden — Heights-side testimony secured. The evidence sequence spans valley floor, Radiant Plateau, and Harmonic Heights.",
           "links": [
-            "echo-river-contamination",
             "tuning-warden-gateline",
-            "contamination-evidence-for-the-elders",
-            "harmonic-heights",
+            "the-six-fold-pattern",
+            "echo-river-contamination",
             "fendt-filtration-engineer"
           ]
         }
@@ -382,11 +426,11 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Harmonic Heights Lower Terrace gateline — a low stone arch with a chord-staff holder, midday light falling flat on worn stairs. The channel trough runs left of the gate; the junction-stone crack is visible in the trough mortar.",
+      "setting": "Harmonic Heights Lower Terrace gateline — low stone arch with chord-staff holder, midday light flat on worn stairs. Channel trough runs left of the gate; junction-stone crack visible in the mortar.",
       "npcsPresent": [
         {
           "name": "Tuning-warden (gateline)",
-          "state": "Standing at the arch, chord-staff across both hands, eyes moving between the junction-stone crack and Usnea — settled in"
+          "state": "Standing at the arch, chord-staff loose in both hands now — the decision made, posture slightly lighter. Eyes on the jun"
         }
       ],
       "objects": [
@@ -398,16 +442,16 @@
         "Crystalline Residue Pinch (on Usnea's person)"
       ],
       "threads": [
-        "The warden has confirmed the six-count channel light — the conversation is open; he is waiting to see what Usnea does with that",
-        "The junction-stone crack sits unread by Prism Sight or Old Roads",
-        "Whether the Heights' own channel infrastructure carries the conduit pulse is still unconfirmed"
+        "The warden needs gate-senior sanction before he can leave the gateline for Thursday — that step is unsettled",
+        "The junction-stone crack sits unread by Prism Sight or Old Roads — whether the conduit pulse is live in this trough is still unconfirmed",
+        "The warden has not seen Orla's Memory Glass — he knows the Heights-side evidence but not the Radiant-side record"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -422,14 +466,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "The Amber Lath keeper confirms the filtration array output count has been off for three consecutive runs — the district's own quiet record showing an anomaly that precedes Usnea's arrival and aligns w",
         "Eastern rim descent reveals three braided Precursor alignments beneath the plateau rim all running the six-count pulse — the distribution network is larger than Millbrook; the same hand built the plat",
         "Prism Sight surge from the rim confirms contamination signature at the ford and Millbrook, and the six-count pulse visible in valley light — but two pre-dawn figures climbing the south road in working",
         "Old Roads surge confirms a Precursor junction-node beneath the south road switchback — the filtration array was built on top of it deliberately. The six-count pulse fired from the node when Fendt's fi",
         "Eastern rim descent completed cleanly — Fendt and second figure left behind on south road. Memory glass intact. Eastern valley floor reached; Harmonic Heights accessible before Thursday.",
         "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger.",
         "Old Roads confirms the Precursor alignments beneath the plateau are structural conduit — the six-fold pulse travels from the upper Disputed Zone to the valley water table on shared infrastructure. The",
-        "Tuning-warden confirmed he witnessed six-count channel light three springs ago at the Lower Terrace gateline — a Heights-side pre-crisis witness to the conduit pulse, now named and available."
+        "Tuning-warden confirmed he witnessed six-count channel light three springs ago at the Lower Terrace gateline — a Heights-side pre-crisis witness to the conduit pulse, now named and available.",
+        "Tuning-warden confirmed Thursday attendance — Heights-side witness secured. Will seek gate-senior sanction to leave the gateline."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -670,7 +714,7 @@
         "locationId": "harmonic_heights_terrace",
         "day": 4
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d4] Clocked Usnea's Radiant-plateau origin immediately; offered only 'Valley floor' and a waiting pause before asking business.",
         "[d4] Clocked the arrival of two visitors together — recalibrating his assessment; watching Cellaceron alongside Usnea now",
@@ -678,26 +722,29 @@
         "[d4] Shifted from practiced neutrality to active watchfulness when Usnea crouched at the junction-stone — chord-staff now across both hands",
         "[d4] Usnea named the pulse and rhythm plainly; warden admitted he saw the light once before, three springs back, before he held this post — the admission cost him something; his gaze mo",
         "[d4] Usnea departed with a deliberate nod — conversation left open, not closed. Warden watching the junction-stone crack as Usnea left.",
-        "[d8] Confirmed six-count channel light witnessed three springs ago — four seconds, light from inside the stone, six pulses then a long pause. Before his current post, before the contami"
+        "[d8] Confirmed six-count channel light witnessed three springs ago — four seconds, light from inside the stone, six pulses then a long pause. Before his current post, before the contami",
+        "[d8] Agreed to testify Thursday — will name the four seconds, six counts, light from inside the stone, nothing more. Needs gate-senior sanction to leave the gateline; will seek it himse"
       ],
       "knownFacts": [
-        "Two valley-floor visitors arrived together at the gateline",
-        "May have seen strange light in the channel before and learned not to comment",
-        "Usnea crouched at the junction-stone and felt something in the mortar — the warden witnessed the crouch if not the sensation",
         "Saw the light in the channel once, three springs back, before holding this post",
         "Recognized the hairline crack in the junction-stone from his position — he has noticed it before",
         "Three springs ago, crouching at a lower terrace flow-gate as an apprentice, he witnessed the channel bottom light up from inside the stone — four seconds, six-c",
         "He kept the sighting to himself — no record, no report, no one told",
-        "He recognized the junction-stone crack before Usnea arrived — he has noticed it before and said nothing"
+        "He recognized the junction-stone crack before Usnea arrived — he has noticed it before and said nothing",
+        "Will testify Thursday with gate-senior approval",
+        "Describes the witnessed event in precise, unembellished terms — four seconds, six counts, light from inside the stone",
+        "Has been sitting with the unsanctioned memory for three springs; the decision to speak landed as relief, not fear"
       ],
       "skillsObserved": [
         "careful admission under pressure",
         "geographic memory",
         "precise sensory recall under pressure",
-        "deliberate honesty once the decision to speak is made"
+        "deliberate honesty once the decision to speak is made",
+        "deliberate commitment once decision is made",
+        "precise unembellished recall under no pressure"
       ],
       "status": "active",
-      "statusNote": "At the Lower Terrace gateline — has confirmed the pre-crisis channel light sighting; conversation open, waiting to see what Usnea asks next.",
+      "statusNote": "At the Lower Terrace gateline — committed to Thursday testimony pending gate-senior sanction; conversation open.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 8
@@ -1054,7 +1101,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 6,
+    "lastTickDay": 8,
     "eventStages": {
       "water_crisis": {
         "stage": 1,
@@ -1070,10 +1117,14 @@
       {
         "day": 4,
         "text": "Word has spread beyond millbrook: Walked the full eastern irrigation arm over two days and located the contamination's entry point — a warm seep beneath an old retaining wall with geometric patterning in the silt below"
+      },
+      {
+        "day": 8,
+        "text": "Word has spread beyond millbrook: Traced the six-fold pulse south to Millbrook's drinking wells — confirmed the village water supply is inside the system's reach"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-08T03:08:38.702Z"
+    "lastSharedReadAt": "2026-07-08T16:17:29.263Z"
   },
   "bio": {
     "hometown": "A baobab tree from Africa",
@@ -1086,15 +1137,15 @@
   "subAttributes": {
     "strength": 4,
     "agility": 3,
-    "reason": 4,
+    "reason": 5,
     "insight": 4,
     "presence": 4,
     "rapport": 4,
     "craft": 1,
     "wits": 4
   },
-  "pendingSubPoints": 1,
-  "skillPoints": 1,
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1264,7 +1315,8 @@
           "[d1] Pale seedling collected from the third farmer's eastern field; Mara's vial filled with gray-green channel-mouth water. Two of three evidence items in hand. Elder meeting time not yet confirmed.",
           "[d3] Mara Wells has received the full account of the vent system in person — the crystalline residue, the pale seedling, and Aevi's naming of the control prompt. She has warned that the elders will want a ",
           "[d4] The dock child has provisionally agreed to tap the six-count rhythm for the elders Thursday — a live sensory witness to the subsurface pulse, independent of Usnea's findings.",
-          "[d6] Day 6 morning: all witnesses and evidence now confirmed for Thursday — seedling, vial, residue pinch, Usnea's testimony, Aevi's reading, six-fold pattern, and Sela's live demonstration. Pell holds vet"
+          "[d6] Day 6 morning: all witnesses and evidence now confirmed for Thursday — seedling, vial, residue pinch, Usnea's testimony, Aevi's reading, six-fold pattern, and Sela's live demonstration. Pell holds vet",
+          "[d8] Thursday witness list now includes the tuning-warden — Heights-side testimony secured. The evidence sequence spans valley floor, Radiant Plateau, and Harmonic Heights."
         ],
         "links": [
           "mara-wells",
@@ -1272,10 +1324,12 @@
           "the-pale-seedlings",
           "millbrook",
           "the-six-fold-pattern",
-          "sela-and-pell"
+          "sela-and-pell",
+          "tuning-warden-gateline",
+          "fendt-filtration-engineer"
         ],
         "createdDay": 1,
-        "updatedDay": 6
+        "updatedDay": 8
       },
       "evidence-for-the-elders": {
         "id": "evidence-for-the-elders",
@@ -1963,7 +2017,8 @@
         "kind": "person",
         "facts": [
           "[d8] Day 8 approach: the warden's three-springs-back channel sighting predates his post and predates the current contamination crisis — if the conduit connects the Heights' channels to the system, he may b",
-          "[d8] Day 8: Confirmed — three springs ago, as an apprentice, he witnessed six-count channel light from inside the stone at a lower terrace flow-gate. Kept no record. He is a live Heights-side witness to th"
+          "[d8] Day 8: Confirmed — three springs ago, as an apprentice, he witnessed six-count channel light from inside the stone at a lower terrace flow-gate. Kept no record. He is a live Heights-side witness to th",
+          "[d8] Day 8 afternoon: agreed to testify Thursday — will name the six-count channel light precisely and without embellishment. Needs gate-senior sanction first; taking that step himself."
         ],
         "links": [
           "the-six-fold-pattern",
@@ -1997,7 +2052,7 @@
     }
   },
   "companionBonds": {
-    "aevi": 6
+    "aevi": 6.5
   },
   "practice": {
     "schemaVersion": 1,
@@ -2005,7 +2060,8 @@
       "prism_sight": 9,
       "light_bending": 10,
       "hearthbinding": 2,
-      "old_roads": 6
+      "old_roads": 6,
+      "daybreak_mantle": 1
     },
     "coActivations": {
       "light_bending+prism_sight": 1
@@ -2232,6 +2288,12 @@
     {
       "id": "tuning-warden",
       "text": "The Lower Terrace gateline warden witnessed six-count channel light from inside the stone at a lower terrace flow-gate three springs ago — before his current post, before the contamination crisis. He ",
+      "day": 8,
+      "subjectId": "tuning-warden"
+    },
+    {
+      "id": "tuning-warden",
+      "text": "The tuning-warden has agreed to testify at Thursday's Millbrook elder meeting — pending gate-senior sanction to leave the gateline. His testimony: four seconds, six counts, light from inside the stone",
       "day": 8,
       "subjectId": "tuning-warden"
     }

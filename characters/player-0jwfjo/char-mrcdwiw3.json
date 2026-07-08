@@ -21,7 +21,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.17409256171875
+    "spectrumId": -0.2153879336328125
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -178,22 +178,59 @@
       {
         "summary": "Brynjar briefs Usnea on the Venn shepherd and the dark-coated figure before heading to Mara's wayhouse.",
         "narration": "Usnea steps in and the outside cold comes with them — you catch the smell of damp wool and open air before the door-warmth reasserts itself. The two women at the table give them the same brief, incurious glance they gave you a minute ago, then return to their cups.\n\nYou shift on the bench and nod Usnea toward the seat beside you. \"Good timing,\" you say, low enough not to carry to the far end of the table. \"Two things worth knowing before we go up to Mara.\" You touch a finger to the table. \"The girl on the east bank trail — she's the Venn family's shepherd daughter. Makes regular runs up to a fold above the high pasture fence. So she's got a reason to be there, and she knows the terrain above the fence better than anyone else we're likely to meet.\" A second finger. \"And there was a dark-coated figure two mornings back — before dawn, from the south, walking the river road toward the east fork. Didn't stop here. Nobody knows them.\"\n\nYou let that sit a moment. Through the open door the wayhouse chimney is still threading smoke into the pale spring sky, straight and steady. Mara is awake and she's been waiting longer than is comfortable. \"The dark coat and the second boot prints downstream,\" you add quietly, \"I don't think that's coincidence. But I want to hear what Mara makes of it before I decide what it means.\"\n\nThe grey-braided woman at the far end sets her bowl down without comment — she's heard none of it, or pretends she hasn't, which amounts to the same thing. The older rounder woman refills her cup. Time to move."
+      },
+      {
+        "summary": "Usnea Beard: Usnea invites Brynjar to stay and hear the evidence, then steps outside to give Mara the opening signal."
+      },
+      {
+        "summary": "Brynjar orders morning mead from the common house apprentice; Usnea steps out to signal Mara.",
+        "narration": "The common house doesn't have a dedicated worker at this hour — it's a village building, not a tavern, and this early it runs on mutual courtesy. But there's a ceramic jug on the long table, and when you look around a young man in a flour-dusted apron is banking the fire back up with half-attention, clearly someone's apprentice doing the morning opening. You catch his eye and nod at the jug. 'Mead, if there is any?'\n\nHe straightens, wipes his hands on his apron, and checks the jug — lifts it, shakes it. A sound like a promise. 'Barley-mead,' he says, not unkindly. 'Morning batch, so it's yesterday's. Costs a nail or a trade.' He sets a clay cup in front of you without waiting for the answer, the way people do when they expect a transaction to complete itself.\n\nThe two women at the far end of the table don't look up. Through the open door, the wayhouse chimney is still drawing smoke up into the pale spring sky — Mara is awake and waiting. Usnea has already slipped outside to give the opening signal, which means whatever gathering Mara has planned is about to begin. The mead sits in front of you, fragrant and faintly cloudy, and the choice of whether to linger one more moment or head up the lane is still yours."
       }
     ],
     "lastTurn": {
-      "narration": "Usnea steps in and the outside cold comes with them — you catch the smell of damp wool and open air before the door-warmth reasserts itself. The two women at the table give them the same brief, incurious glance they gave you a minute ago, then return to their cups.\n\nYou shift on the bench and nod Usnea toward the seat beside you. \"Good timing,\" you say, low enough not to carry to the far end of the table. \"Two things worth knowing before we go up to Mara.\" You touch a finger to the table. \"The girl on the east bank trail — she's the Venn family's shepherd daughter. Makes regular runs up to a fold above the high pasture fence. So she's got a reason to be there, and she knows the terrain above the fence better than anyone else we're likely to meet.\" A second finger. \"And there was a dark-coated figure two mornings back — before dawn, from the south, walking the river road toward the east fork. Didn't stop here. Nobody knows them.\"\n\nYou let that sit a moment. Through the open door the wayhouse chimney is still threading smoke into the pale spring sky, straight and steady. Mara is awake and she's been waiting longer than is comfortable. \"The dark coat and the second boot prints downstream,\" you add quietly, \"I don't think that's coincidence. But I want to hear what Mara makes of it before I decide what it means.\"\n\nThe grey-braided woman at the far end sets her bowl down without comment — she's heard none of it, or pretends she hasn't, which amounts to the same thing. The older rounder woman refills her cup. Time to move.",
-      "sceneSummary": "Brynjar briefs Usnea on the Venn shepherd and the dark-coated figure before heading to Mara's wayhouse.",
+      "narration": "The common house doesn't have a dedicated worker at this hour — it's a village building, not a tavern, and this early it runs on mutual courtesy. But there's a ceramic jug on the long table, and when you look around a young man in a flour-dusted apron is banking the fire back up with half-attention, clearly someone's apprentice doing the morning opening. You catch his eye and nod at the jug. 'Mead, if there is any?'\n\nHe straightens, wipes his hands on his apron, and checks the jug — lifts it, shakes it. A sound like a promise. 'Barley-mead,' he says, not unkindly. 'Morning batch, so it's yesterday's. Costs a nail or a trade.' He sets a clay cup in front of you without waiting for the answer, the way people do when they expect a transaction to complete itself.\n\nThe two women at the far end of the table don't look up. Through the open door, the wayhouse chimney is still drawing smoke up into the pale spring sky — Mara is awake and waiting. Usnea has already slipped outside to give the opening signal, which means whatever gathering Mara has planned is about to begin. The mead sits in front of you, fragrant and faintly cloudy, and the choice of whether to linger one more moment or head up the lane is still yours.",
+      "sceneSummary": "Brynjar orders morning mead from the common house apprentice; Usnea steps out to signal Mara.",
       "choices": [
         {
-          "label": "Go straight up the lane to Mara's wayhouse and deliver the full report — the skiff, the trail, the boot prints, the dark coat, everything.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.2
-          },
+          "label": "Pay the nail, drink quickly, and head straight up to Mara's wayhouse — she's been waiting long enough.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "report",
+            "move",
+            "practical"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pay for the mead and take a slow sip — ask the apprentice if anyone passed through before dawn this morning.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "gather-information",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Decline the mead for now and head directly to Mara's wayhouse — no time to settle into a cup.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "move",
             "careful"
           ],
           "abilityId": null,
@@ -203,52 +240,14 @@
           "emergenceId": null
         },
         {
-          "label": "Before going to Mara, ask the rounder woman one more question — press gently on the dark-coated figure. Direction, build, anything she noticed.",
+          "label": "Pay for the mead, take it with you, and walk up to the wayhouse cup in hand — no reason to rush or linger.",
           "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "probe",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head to Mara but stop at the dock briefly on the way — check the river shallows with fresh eyes now that it's daylight.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "spectrumId": -0.3
-          },
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "rivercraft",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let Usnea lead the way to the wayhouse — you'll follow, and watch how Mara receives them. Learn something about how she reads strangers.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "observe",
-            "careful"
+            "move",
+            "relaxed"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -268,7 +267,7 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; thin gold morning light through two unshuttered windows.",
+        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth being tended by a flour-dusted apprentice; thin gold morning light through two unshuttered windows.",
         "npcsPresent": [
           {
             "name": "Grey-braided woman",
@@ -279,21 +278,23 @@
             "state": "Refilling her cup; settled in for a slow morning."
           },
           {
-            "name": "Usnea Beard",
-            "state": "Just sat beside Brynjar; coat still carrying the outside chill; briefed on the Venn shepherd and the dark coat."
+            "name": "Common house apprentice",
+            "state": "Standing by the hearth, cup placed in front of Brynjar, waiting on the nail or trade."
           }
         ],
         "objects": [
           "Long table with benches",
-          "Banked hearth, still warm",
+          "Banked hearth, being tended",
           "Cord of firewood stacked against the east wall",
           "Clay jug and cups on the table",
+          "Filled clay cup of barley-mead in front of Brynjar",
           "Two unshuttered windows",
           "Wayhouse visible up the lane through the open door — chimney still smoking"
         ],
         "threads": [
-          "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting",
-          "Dark-coated figure: walked the river road south-to-north two days ago before dawn, didn't stop — identity unknown; possibly linked to the downstream boot prints",
+          "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting; Usnea has gone to give the opening signal",
+          "Apprentice waiting on payment for the mead — a nail or a trade",
+          "Dark-coated figure: walked the river road south-to-north two days ago before dawn — identity unknown",
           "East bank traveler identified as Venn family shepherd girl — name still unlearned, still upstream",
           "Second set of boot prints on the east bank trail running downstream — origin unresolved",
           "Ritualized bout with the east bank traveler — postponed, not cancelled"
@@ -301,29 +302,32 @@
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "usnea-beard",
-          "name": "Usnea Beard",
-          "role": "party member",
-          "note": "Briefed by Brynjar on the Venn shepherd daughter and the dark-coated figure before heading to Mara.",
+          "op": "meet",
+          "npcId": "common-house-apprentice",
+          "name": "Common house apprentice",
+          "role": "Morning tender of the common house fire and jug",
+          "description": "A young man in a flour-dusted apron, unhurried and practical — handles the morning opening with half-attention and quiet expectation of fair trade.",
+          "note": "Acknowledged Brynjar's request for mead without fuss; set a cup of barley-mead on the table and is waiting on a nail or trade in return.",
           "learned": [
-            "The east bank traveler is almost certainly the Venn family's shepherd daughter",
-            "A dark-coated figure walked the river road south-to-north two days ago before dawn without stopping"
+            "Charges a nail or a trade for the morning mead — barley batch, yesterday's"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "practical hospitality"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present at the common house; just received Brynjar's briefing; ready to move to the wayhouse."
+          "statusNote": "Standing by the common house hearth, waiting on payment for the mead."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
       "codexUpdates": [],
+      "encounterOps": [],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; thin gold morning light through two unshuttered windows.",
+      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth being tended by a flour-dusted apprentice; thin gold morning light through two unshuttered windows.",
       "npcsPresent": [
         {
           "name": "Grey-braided woman",
@@ -334,31 +338,32 @@
           "state": "Refilling her cup; settled in for a slow morning."
         },
         {
-          "name": "Usnea Beard",
-          "state": "Just sat beside Brynjar; coat still carrying the outside chill; briefed on the Venn shepherd and the dark coat."
+          "name": "Common house apprentice",
+          "state": "Standing by the hearth, cup placed in front of Brynjar, waiting on the nail or trade."
         }
       ],
       "objects": [
         "Long table with benches",
-        "Banked hearth, still warm",
+        "Banked hearth, being tended",
         "Cord of firewood stacked against the east wall",
         "Clay jug and cups on the table",
+        "Filled clay cup of barley-mead in front of Brynjar",
         "Two unshuttered windows",
         "Wayhouse visible up the lane through the open door — chimney still smoking"
       ],
       "threads": [
-        "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting",
-        "Dark-coated figure: walked the river road south-to-north two days ago before dawn, didn't stop — identity unknown; possibly linked to the downstream boot prints",
+        "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting; Usnea has gone to give the opening signal",
+        "Apprentice waiting on payment for the mead — a nail or a trade",
+        "Dark-coated figure: walked the river road south-to-north two days ago before dawn — identity unknown",
         "East bank traveler identified as Venn family shepherd girl — name still unlearned, still upstream",
-        "Second set of boot prints on the east bank trail running downstream — origin unresolved",
-        "Ritualized bout with the east bank traveler — postponed, not cancelled"
+        "Second set of boot prints on the east bank trail running downstream — origin unresolved"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [],
@@ -518,6 +523,32 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
+      }
+    },
+    "common-house-apprentice": {
+      "id": "common-house-apprentice",
+      "name": "Common house apprentice",
+      "role": "Morning tender of the common house fire and jug",
+      "description": "A young man in a flour-dusted apron, unhurried and practical — handles the morning opening with half-attention and quiet expectation of fair trade.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 3
+      },
+      "relationship": 0,
+      "history": [
+        "[d3] Acknowledged Brynjar's request for mead without fuss; set a cup of barley-mead on the table and is waiting on a nail or trade in return."
+      ],
+      "knownFacts": [
+        "Charges a nail or a trade for the morning mead — barley batch, yesterday's"
+      ],
+      "skillsObserved": [
+        "practical hospitality"
+      ],
+      "status": "active",
+      "statusNote": "Standing by the common house hearth, waiting on payment for the mead.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 3
       }
     }
   },

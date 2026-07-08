@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 4,
-  "xp": 326,
+  "xp": 331,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -53,14 +53,14 @@
     "concrete_abstract": 0.04548989281459041,
     "spectrumId": -0.2543062086396591,
     "dark_light": 0.19177414280214844,
-    "falsehood_truth": 0.3115199470467968,
-    "violence_peace": 0.20906922576328124
+    "falsehood_truth": 0.320943949694457,
+    "violence_peace": 0.23361576447511717
   },
   "attunement": 4,
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 115,
+  "energy": 105,
   "inventory": [
     {
       "id": "waterskin",
@@ -252,24 +252,31 @@
       {
         "summary": "Usnea signals Brynjar to name the marker himself, gives Mara the opening nod, and steps forward to begin the elder presentation.",
         "narration": "You step back through the doorway just long enough to catch Brynjar's eye. He's already standing, cup drained, the apprentice moving off with the empty vessel. 'When the moment opens,' you tell him quietly, 'the marker — name it yourself, in your own words. Don't wait for me to introduce it.' He reads your face, nods once, the same decisive economy he's shown all morning. Aevi's motes pulse a soft teal at your shoulder and settle.\n\nOutside, the yard has that particular held-breath quality of people who have been waiting long enough to stop fidgeting. Holloway's arms are at his sides now. Renn stands a half-step back, jaw set but patient. The two unrecognized elders have stopped their murmured exchange and turned fully toward the door. The village child — not Sela — has gone very still in the dirt, some instinct for ceremony operating below the age of understanding.\n\nMara is at the foot of the steps, cloth bundle tucked under one arm, vial looped at her belt, reading your face with the efficiency of someone who has spent nine days learning exactly this expression. You give her the nod. She gives it back — small, complete, carrying everything that needed no words.\n\nYou turn to face the yard. The pale spring light is thin but present. Somewhere beyond the eastern path the tuning-warden is walking, two hours of ridge and loam between him and this threshold. Pell is not yet in sight, but her condition stands. The evidence is in your keeping. The sequence is ready. You step forward."
+      },
+      {
+        "summary": "Brynjar Andyrsson: Brynjar pays for the mead and learns heavy boots passed on the lane around second watch — nobody stopped in."
+      },
+      {
+        "summary": "Daybreak Mantle opens the elder presentation — yard and common house settle into attending stillness without a word spoken.",
+        "narration": "You don't announce the mantle. You simply let it kindle — the way a window lets in morning, not flooding but filling. The warmth moves through the yard ahead of any word, touching Holloway's set jaw and Renn's careful patience and the two elders near the side door, who straighten slightly without knowing why. The village child in the dirt goes still in a different way — not frozen, but attending. Aevi's motes dim to almost nothing at your shoulder, making room.\n\nThrough the open door behind you, the common house exhales. The orange coals, the cleared table, the fire-smell — it all carries forward into the yard as a single quiet pressure: *this is a place where something real is about to happen, and you are already part of it.* Brynjar is visible just inside, standing at the hearthstone, cup down. He reads the room from there and doesn't move yet.\n\nMara, at the foot of the steps, tips her chin once — the same economical nod she's been giving all morning. Cloth bundle under arm, vial at belt, she begins climbing toward the door. The yard is not silent; a wheel turns somewhere on the Echo River, a bird crosses the pale spring sky. But every person present is watching the threshold.\n\nYou step back inside to let the room follow."
       }
     ],
     "lastTurn": {
-      "narration": "You step back through the doorway just long enough to catch Brynjar's eye. He's already standing, cup drained, the apprentice moving off with the empty vessel. 'When the moment opens,' you tell him quietly, 'the marker — name it yourself, in your own words. Don't wait for me to introduce it.' He reads your face, nods once, the same decisive economy he's shown all morning. Aevi's motes pulse a soft teal at your shoulder and settle.\n\nOutside, the yard has that particular held-breath quality of people who have been waiting long enough to stop fidgeting. Holloway's arms are at his sides now. Renn stands a half-step back, jaw set but patient. The two unrecognized elders have stopped their murmured exchange and turned fully toward the door. The village child — not Sela — has gone very still in the dirt, some instinct for ceremony operating below the age of understanding.\n\nMara is at the foot of the steps, cloth bundle tucked under one arm, vial looped at her belt, reading your face with the efficiency of someone who has spent nine days learning exactly this expression. You give her the nod. She gives it back — small, complete, carrying everything that needed no words.\n\nYou turn to face the yard. The pale spring light is thin but present. Somewhere beyond the eastern path the tuning-warden is walking, two hours of ridge and loam between him and this threshold. Pell is not yet in sight, but her condition stands. The evidence is in your keeping. The sequence is ready. You step forward.",
-      "sceneSummary": "Usnea signals Brynjar to name the marker himself, gives Mara the opening nod, and steps forward to begin the elder presentation.",
+      "narration": "You don't announce the mantle. You simply let it kindle — the way a window lets in morning, not flooding but filling. The warmth moves through the yard ahead of any word, touching Holloway's set jaw and Renn's careful patience and the two elders near the side door, who straighten slightly without knowing why. The village child in the dirt goes still in a different way — not frozen, but attending. Aevi's motes dim to almost nothing at your shoulder, making room.\n\nThrough the open door behind you, the common house exhales. The orange coals, the cleared table, the fire-smell — it all carries forward into the yard as a single quiet pressure: *this is a place where something real is about to happen, and you are already part of it.* Brynjar is visible just inside, standing at the hearthstone, cup down. He reads the room from there and doesn't move yet.\n\nMara, at the foot of the steps, tips her chin once — the same economical nod she's been giving all morning. Cloth bundle under arm, vial at belt, she begins climbing toward the door. The yard is not silent; a wheel turns somewhere on the Echo River, a bird crosses the pale spring sky. But every person present is watching the threshold.\n\nYou step back inside to let the room follow.",
+      "sceneSummary": "Daybreak Mantle opens the elder presentation — yard and common house settle into attending stillness without a word spoken.",
       "choices": [
         {
-          "label": "Open by setting the physical evidence on the common house table — seedling, vial, residue — and letting it speak before you do",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Lead with the physical evidence — set the Pale Turnip Seedling and the Crystalline Residue Pinch on the table before Dresh, letting the objects do the first speaking.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "falsehood_truth": 0.8,
-            "concrete_abstract": -0.7
+            "concrete_abstract": -0.6,
+            "violence_peace": 0.6
           },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "demonstrate"
+            "present-evidence"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -278,36 +285,18 @@
           "emergenceId": null
         },
         {
-          "label": "Open with Daybreak Mantle lit — let the warmth settle the room before the first word lands, particularly for Dresh",
+          "label": "Open your testimony with the channel-mouth seep — what you found, what Aevi named, what it means for the village water. Let the account land before Mara adds the vial.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.5,
-            "violence_peace": 0.7
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "careful"
-          ],
-          "abilityId": "daybreak_mantle",
-          "energyCost": 6,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Open by speaking directly to Councilor Dresh — name what you've found, where you found it, and why it can't wait for a better morning",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.9,
-            "concrete_abstract": 0.3
+            "falsehood_truth": 0.8,
+            "concrete_abstract": -0.3
           },
           "difficulty": 15,
           "intentTags": [
             "persuade",
-            "plan"
+            "testify",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -316,21 +305,42 @@
           "emergenceId": null
         },
         {
-          "label": "Pause at the threshold and use Prism Sight to read the yard — catch the room's mood and any face that isn't what it presents before you commit to a first word",
+          "label": "Hold the room a moment before any evidence is placed — read Dresh's face with Prism Sight, gauging where his attention sits before you commit to Mara's sequence.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.6,
-            "concrete_abstract": -0.2
+            "concrete_abstract": 0.2,
+            "falsehood_truth": 0.5
           },
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
           "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let Mara lead — follow her to the table, standing at her side as the evidence is laid out, present but not ahead of the sequence she built.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "violence_peace": 0.7,
+            "chaos_order": 0.6
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "help",
+            "defer"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -338,7 +348,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -6,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -349,41 +359,41 @@
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
           "title": "Evidence for the Elders",
-          "note": "Usnea has given Brynjar his instruction and stepped forward — the presentation is opening now."
+          "note": "Elder presentation formally begun — Daybreak Mantle has settled the room; the evidence sequence is about to open."
         }
       ],
       "scene": {
-        "setting": "Millbrook common house doorway and yard, mid-morning — Usnea standing at the top of the steps facing the yard, pale spring light, fire visible through the open door behind them.",
+        "setting": "Millbrook common house interior and yard — Usnea has stepped back inside the doorway, pale spring light from the open door, coals warm orange at the hearth. The yard visible behind: Holloway, Renn, two unrecognized elders, and the village child all moving toward the entrance.",
         "npcsPresent": [
           {
-            "name": "Brynjar Andyrsson",
-            "state": "Inside, risen, cup set down — ready to enter the room and name the marker when the moment opens."
+            "name": "Mara Wells",
+            "state": "Climbing the steps — cloth bundle under arm, vial at belt, moving toward the table."
           },
           {
-            "name": "Mara Wells",
-            "state": "At the foot of the common house steps, cloth bundle under arm, vial at belt — has received Usnea's opening nod; ready to step inside."
+            "name": "Brynjar Andyrsson",
+            "state": "Standing at the hearthstone, cup down — watching the room assemble, waiting for his moment."
           },
           {
             "name": "Holloway",
-            "state": "In the yard, arms at his sides, risen from the low wall — waiting."
+            "state": "Moving in from the yard, arms at sides — drawn forward by the mantle's warmth."
           },
           {
             "name": "Renn",
-            "state": "Beside Holloway, jaw set, patient — waiting on Usnea's first word."
+            "state": "Following a half-step behind Holloway — jaw still set, but attentive."
           },
           {
             "name": "Two unrecognized elders",
-            "state": "Near the side entrance, murmur stopped — fully attentive toward the door."
+            "state": "Entering through the side door — murmur stopped, fully attending."
           },
           {
             "name": "Village child (not Sela)",
-            "state": "Gone still in the dirt, watching the threshold."
+            "state": "Just inside the threshold, sitting very still on the floor — watching."
           }
         ],
         "objects": [
-          "Fire — burned to warm orange coals (inside)",
-          "Long common house table — breakfast bowls cleared (inside)",
-          "Brynjar's cup — set on the hearthstone (inside)",
+          "Long common house table — breakfast bowls cleared, surface open",
+          "Fire — burned to warm orange coals",
+          "Brynjar's cup — set on the hearthstone",
           "Mara's cloth bundle — evidence materials (under her arm)",
           "Mara's glass vial — looped at her belt",
           "Pale Turnip Seedling — in Usnea's keeping",
@@ -392,84 +402,107 @@
           "Common house door — open to the yard"
         ],
         "threads": [
-          "Tuning-warden en route — expected before noon, not yet in the yard",
-          "Pell and Sela not yet sighted — permission granted but not yet physically present",
-          "Councilor Dresh inside since dawn — meeting ready to open on Usnea's first word",
-          "Brynjar's marker beyond the new pass — he will name it himself when the moment opens",
+          "Councilor Dresh — inside since dawn, position at the table not yet described; room about to fully assemble",
+          "Tuning-warden en route — expected before noon, not yet present",
+          "Pell and Sela not yet sighted — permission granted, conditions set, but not physically in the room",
+          "Brynjar's marker beyond the new pass — waiting for its moment",
           "Dark-coated figure on the river road two days ago — unnamed, unplaced"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "brynjar-andyrsson",
-          "name": "Brynjar Andyrsson",
-          "note": "Received Usnea's instruction to name the marker himself, in his own words, when the moment opens. Accepted without qualification.",
-          "learned": [
-            "Will name the marker to the room in his own voice — not introduced by Usnea"
-          ],
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Received Usnea's opening nod and is now climbing the steps into the common house — the presentation is in motion.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Inside the common house, ready to enter the presentation room and speak when the moment comes."
+          "statusNote": "Inside the common house, moving to the table with evidence bundle and vial — the presentation sequence is beginning."
         },
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "note": "Received Usnea's opening nod at the foot of the steps — meeting is now beginning.",
+          "npcId": "brynjar-andyrsson",
+          "name": "Brynjar Andyrsson",
+          "note": "Standing at the hearthstone as the room fills — watching, holding his marker-question, waiting for the moment Usnea indicated.",
           "learned": [],
+          "skillsObserved": [
+            "reading a room from the edges"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the common house steps — opening nod received, ready to move inside with the evidence."
+          "statusNote": "Inside the common house at the hearthstone — present for the full elder presentation, marker question held for the right moment."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Daybreak Mantle opened the Thursday elder presentation — yard and common house settled into attending stillness before any evidence was named. The room is assembled and ready.",
+          "subjectId": "contamination-evidence-for-the-elders"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Thursday elder presentation formally opened — Usnea stepped forward from the common house threshold, Mara received the opening nod, yard witnesses assembled.",
+          "note": "Thursday elder presentation begun — Daybreak Mantle kindled at the common house threshold; full assembly drawn inside by the warmth before the first evidence was placed.",
           "subPlace": {
-            "name": "Common House Yard — Outer gathering space",
-            "note": "Elder presentation opening moment — all yard witnesses assembled and still as Usnea steps forward.",
+            "name": "Common House Table — Elder Presentation",
+            "note": "Long table cleared for Thursday's evidence sequence — session opened, room assembled, evidence not yet laid.",
             "visited": true
           }
         }
       ],
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "contamination-evidence-for-the-elders",
+          "label": "Evidence for the Elders",
+          "kind": "event",
+          "fact": "Thursday morning: Daybreak Mantle opened the presentation — the room assembled and settled before the first word. Mara moving to the table; evidence sequence about to begin.",
+          "links": [
+            "mara-wells",
+            "millbrook",
+            "the-six-fold-pattern",
+            "sela-and-pell",
+            "tuning-warden-gateline",
+            "brynjar-andyrsson"
+          ]
+        }
+      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house doorway and yard, mid-morning — Usnea standing at the top of the steps facing the yard, pale spring light, fire visible through the open door behind them.",
+      "setting": "Millbrook common house interior and yard — Usnea has stepped back inside the doorway, pale spring light from the open door, coals warm orange at the hearth. The yard visible behind: Holloway, Renn, two unrecognized elders, and the village child all moving toward the entrance.",
       "npcsPresent": [
         {
-          "name": "Brynjar Andyrsson",
-          "state": "Inside, risen, cup set down — ready to enter the room and name the marker when the moment opens."
+          "name": "Mara Wells",
+          "state": "Climbing the steps — cloth bundle under arm, vial at belt, moving toward the table."
         },
         {
-          "name": "Mara Wells",
-          "state": "At the foot of the common house steps, cloth bundle under arm, vial at belt — has received Usnea's opening nod; ready to"
+          "name": "Brynjar Andyrsson",
+          "state": "Standing at the hearthstone, cup down — watching the room assemble, waiting for his moment."
         },
         {
           "name": "Holloway",
-          "state": "In the yard, arms at his sides, risen from the low wall — waiting."
+          "state": "Moving in from the yard, arms at sides — drawn forward by the mantle's warmth."
         },
         {
           "name": "Renn",
-          "state": "Beside Holloway, jaw set, patient — waiting on Usnea's first word."
+          "state": "Following a half-step behind Holloway — jaw still set, but attentive."
         },
         {
           "name": "Two unrecognized elders",
-          "state": "Near the side entrance, murmur stopped — fully attentive toward the door."
+          "state": "Entering through the side door — murmur stopped, fully attending."
         },
         {
           "name": "Village child (not Sela)",
-          "state": "Gone still in the dirt, watching the threshold."
+          "state": "Just inside the threshold, sitting very still on the floor — watching."
         }
       ],
       "objects": [
-        "Fire — burned to warm orange coals (inside)",
-        "Long common house table — breakfast bowls cleared (inside)",
-        "Brynjar's cup — set on the hearthstone (inside)",
+        "Long common house table — breakfast bowls cleared, surface open",
+        "Fire — burned to warm orange coals",
+        "Brynjar's cup — set on the hearthstone",
         "Mara's cloth bundle — evidence materials (under her arm)",
         "Mara's glass vial — looped at her belt",
         "Pale Turnip Seedling — in Usnea's keeping",
@@ -478,10 +511,10 @@
         "Common house door — open to the yard"
       ],
       "threads": [
-        "Tuning-warden en route — expected before noon, not yet in the yard",
-        "Pell and Sela not yet sighted — permission granted but not yet physically present",
-        "Councilor Dresh inside since dawn — meeting ready to open on Usnea's first word",
-        "Brynjar's marker beyond the new pass — he will name it himself when the moment opens",
+        "Councilor Dresh — inside since dawn, position at the table not yet described; room about to fully assemble",
+        "Tuning-warden en route — expected before noon, not yet present",
+        "Pell and Sela not yet sighted — permission granted, conditions set, but not physically in the room",
+        "Brynjar's marker beyond the new pass — waiting for its moment",
         "Dark-coated figure on the river road two days ago — unnamed, unplaced"
       ]
     }
@@ -489,7 +522,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -504,14 +537,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Tuning-warden confirmed he witnessed six-count channel light three springs ago at the Lower Terrace gateline — a Heights-side pre-crisis witness to the conduit pulse, now named and available.",
         "Tuning-warden confirmed Thursday attendance — Heights-side witness secured. Will seek gate-senior sanction to leave the gateline.",
         "Tuning-warden confirmed logistics — will seek gate-senior sanction before morning review, plans to arrive Millbrook common house before Thursday noon or send word by morning tone. Heights-side witness",
         "All witnesses confirmed — warden's Thursday logistics delivered to Mara Wells. Evidence sequence complete. Usnea rested the night before the presentation.",
         "Dawn of Thursday — rested, communed with Millbrook's essence, evidence intact. The presentation is hours away; warden sanction still unconfirmed.",
         "Thursday arrived — gate-senior sanction confirmed by morning tone; tuning-warden en route. Mara ready. All five elders present or arriving. The presentation is imminent.",
         "Usnea has given Mara the readiness signal — all witnesses and evidence in order; meeting opens on Usnea's step forward.",
-        "Usnea has given Brynjar his instruction and stepped forward — the presentation is opening now."
+        "Usnea has given Brynjar his instruction and stepped forward — the presentation is opening now.",
+        "Elder presentation formally begun — Daybreak Mantle has settled the room; the evidence sequence is about to open."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -663,7 +696,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Stepped into the space Usnea made — named Sela plainly, reframed the ask as carrying weight off Sela rather than putting weight on her. Holding the silence she created.",
         "[d6] Named the practical reality plainly — Dresh won't move the venue, but the common house open room means Pell can stand at the door. Did not oversell it.",
         "[d6] Held silence after Usnea named the order — did not add or qualify, letting the plainness of it stand. Watching Pell's face.",
         "[d6] Accepted Pell's condition plainly and immediately — 'Yes. That's yours to decide, at the door.' Did not qualify it or negotiate. The presentation is now fully assembled.",
@@ -672,7 +704,8 @@
         "[d9] Heard moving in the main room before full dawn — already preparing. Has not yet spoken with Usnea this morning.",
         "[d9] Received warden's morning-tone confirmation and relayed it to Usnea at the common house steps. Declared the presentation ready to open on Usnea's signal.",
         "[d9] Read Usnea's face from the yard and gave the quiet nod — meeting is ready to open on Usnea's forward step.",
-        "[d9] Received Usnea's opening nod at the foot of the steps — meeting is now beginning."
+        "[d9] Received Usnea's opening nod at the foot of the steps — meeting is now beginning.",
+        "[d9] Received Usnea's opening nod and is now climbing the steps into the common house — the presentation is in motion."
       ],
       "knownFacts": [
         "Councilor Dresh leads and trusts physical evidence first",
@@ -697,7 +730,7 @@
         "locationId": "millbrook",
         "day": 9
       },
-      "statusNote": "At the common house steps — opening nod received, ready to move inside with the evidence."
+      "statusNote": "Inside the common house, moving to the table with evidence bundle and vial — the presentation sequence is beginning."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -933,7 +966,8 @@
         "[d9] Usnea introduced themselves by name at the fireside — named the evidence, the warden's expected arrival, the shape of the morning.",
         "[d9] Named his stake plainly: came through the new pass three weeks ago, found a deliberately placed marker on the far side, followed the name 'Millbrook' and the water rumors here. Has",
         "[d9] Accepted Usnea's invitation to stay and hear the evidence; agreed to let his question about the marker surface in the room.",
-        "[d9] Received Usnea's instruction to name the marker himself, in his own words, when the moment opens. Accepted without qualification."
+        "[d9] Received Usnea's instruction to name the marker himself, in his own words, when the moment opens. Accepted without qualification.",
+        "[d9] Standing at the hearthstone as the room fills — watching, holding his marker-question, waiting for the moment Usnea indicated."
       ],
       "knownFacts": [
         "Arrived before Usnea",
@@ -947,10 +981,11 @@
       "skillsObserved": [
         "plain-speaking under assessment",
         "calm in unfamiliar company",
-        "decisive acceptance of an invitation, no hesitation"
+        "decisive acceptance of an invitation, no hesitation",
+        "reading a room from the edges"
       ],
       "status": "active",
-      "statusNote": "Inside the common house, ready to enter the presentation room and speak when the moment comes.",
+      "statusNote": "Inside the common house at the hearthstone — present for the full elder presentation, marker question held for the right moment.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 9
@@ -961,7 +996,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d6] Day 6 dawn: the well-contamination finding delivered at Pell's cord stall — Mara and Pell both present when named; Pell's permission for Sela's testimony still pending at this location.",
         "[d6] Usnea's direct appeal about the wells to Pell at her cord stall misfired — a cart driver was an unintended witness to the exchange; Pell's anger is now part of this stall's social memory.",
         "[d6] Mara reclaimed the conversation thread at Pell's stall after Usnea stepped back — reframed the ask around Sela's relief rather than the elders' need. Pell's jaw shifted; the moment is alive but unreso",
         "[d6] Pell asked about the speaker order at the Thursday meeting — the conversation at the stall has moved from anger to cautious interrogation; the open-door rule named as a path for Pell to observe.",
@@ -972,7 +1006,8 @@
         "[d9] Thursday morning: the common house yard assembled for the elder presentation — Holloway, Renn, and two unknown elders present before the meeting opened. Mara received warden's sanction by morning tone",
         "[d9] Brynjar Andyrsson present inside the common house at the fire on Thursday morning — a new arrival whose stake is not yet known.",
         "[d9] Brynjar Andyrsson present inside the common house at the fire — agreed to stay and hear the elder presentation; his marker-question now enters the room.",
-        "[d9] Thursday elder presentation formally opened — Usnea stepped forward from the common house threshold, Mara received the opening nod, yard witnesses assembled."
+        "[d9] Thursday elder presentation formally opened — Usnea stepped forward from the common house threshold, Mara received the opening nod, yard witnesses assembled.",
+        "[d9] Thursday elder presentation begun — Daybreak Mantle kindled at the common house threshold; full assembly drawn inside by the warmth before the first evidence was placed."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1059,6 +1094,12 @@
           "day": 9,
           "visited": true,
           "note": "Elder presentation opening moment — all yard witnesses assembled and still as Usnea steps forward."
+        },
+        "common-house-table-elder-presentation": {
+          "name": "Common House Table — Elder Presentation",
+          "day": 9,
+          "visited": true,
+          "note": "Long table cleared for Thursday's evidence sequence — session opened, room assembled, evidence not yet laid."
         }
       }
     },
@@ -1417,7 +1458,8 @@
           "[d6] Day 6 morning: all witnesses and evidence now confirmed for Thursday — seedling, vial, residue pinch, Usnea's testimony, Aevi's reading, six-fold pattern, and Sela's live demonstration. Pell holds vet",
           "[d8] Thursday witness list now includes the tuning-warden — Heights-side testimony secured. The evidence sequence spans valley floor, Radiant Plateau, and Harmonic Heights.",
           "[d8] Day 8 evening: all witnesses and evidence confirmed and relayed to Mara Wells. The sequence is complete — seedling, vial, residue, Usnea's testimony, Aevi's reading, six-fold pattern, the tuning-warde",
-          "[d9] Thursday: gate-senior sanction confirmed by morning tone — tuning-warden en route. All witnesses and evidence intact. Dresh inside since dawn. Meeting opens on Usnea's readiness."
+          "[d9] Thursday: gate-senior sanction confirmed by morning tone — tuning-warden en route. All witnesses and evidence intact. Dresh inside since dawn. Meeting opens on Usnea's readiness.",
+          "[d9] Thursday morning: Daybreak Mantle opened the presentation — the room assembled and settled before the first word. Mara moving to the table; evidence sequence about to begin."
         ],
         "links": [
           "mara-wells",
@@ -2199,7 +2241,7 @@
       "light_bending": 11,
       "hearthbinding": 3,
       "old_roads": 6,
-      "daybreak_mantle": 1
+      "daybreak_mantle": 2
     },
     "coActivations": {
       "light_bending+prism_sight": 2
@@ -2213,12 +2255,6 @@
     ]
   },
   "establishedFacts": [
-    {
-      "id": "echo-river-contamination",
-      "text": "The junction-stone crack at the Lower Terrace channel trough carries residual warmth matching the vent-aperture's six-fold heat signature, and pulses in the vent control-prompt rhythm — it is a node i",
-      "day": 4,
-      "subjectId": "echo-river-contamination"
-    },
     {
       "id": "tuning-warden-gateline",
       "text": "The Lower Terrace gateline warden witnessed the channel light three springs ago, before he held his current post — a Heights-side witness to the pre-Transition system's activity predating Usnea's inve",
@@ -2452,6 +2488,12 @@
       "text": "A deliberately placed marker was found beyond the new mountain pass approximately three weeks ago by Brynjar Andyrsson — not a waystation blaze, placement described as intentional. Author unknown. Bry",
       "day": 9,
       "subjectId": "brynjar-andyrsson"
+    },
+    {
+      "id": "contamination-evidence-for-the-elders",
+      "text": "Daybreak Mantle opened the Thursday elder presentation — yard and common house settled into attending stillness before any evidence was named. The room is assembled and ready.",
+      "day": 9,
+      "subjectId": "contamination-evidence-for-the-elders"
     }
   ],
   "precursorAccess": [],

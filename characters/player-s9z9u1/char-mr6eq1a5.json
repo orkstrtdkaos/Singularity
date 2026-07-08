@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 3,
-  "xp": 231,
+  "xp": 236,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -35,13 +35,15 @@
   "alignment": {
     "mechanical_spiritual": 0.06727916802792969,
     "concrete_abstract": -0.16567616748700525,
-    "spectrumId": -0.13025946480788345
+    "spectrumId": -0.13025946480788345,
+    "dark_light": 0.034999999999999996,
+    "falsehood_truth": 0.04000000000000001
   },
   "attunement": 3,
   "maxHealth": 40,
   "health": 32,
   "maxEnergy": 110,
-  "energy": 63,
+  "energy": 60,
   "inventory": [
     {
       "id": "waterskin",
@@ -171,65 +173,69 @@
       {
         "summary": "Usnea arrives at the Radiant Plateau Edge District at midday, drawing wary looks — and finds a posted notice about a filtration engineer accounting that smells like a quest seed.",
         "narration": "The road up from the valley floor takes the last hour through switchbacks cut into pale stone, and then the Radiant Plateau opens all at once — not a gradual reveal but a threshold, like stepping through a door into a room full of held breath. The Edge District greets you at midday, when the photonic-crystal towers are working hardest: light arrives from the south, gets caught, braided, redirected, and the streets below glow upward in slow bands of amber and white. Your bark absorbs it differently than skin would — you feel the warmth as a kind of pressure against your grain, pleasant and slightly wrong, the way a foreign dialect sounds almost familiar.\n\nAevi brightens the moment you cross into the district proper, the teal motes fanning out from your shoulder in a wider arc than usual, tasting something. You've learned to read that posture: interested, not alarmed. The light-guide pavers hum faintly under your roots — not the six-fold pulse of Millbrook, but something ordered and deliberate, a photonic heartbeat built into the infrastructure itself. Shopfronts display goods behind panels that shift color at the browsing angle; a pair of apprentices halfway down the lane exchange harmless needle-beams that scatter off each other in small starbursts, laughing. A woman in the amber-collared coat of a senior optics-weaver glances at you from across the street and doesn't look away as quickly as a stranger would.\n\nYou are large, rooted-looking, and conspicuously not Radiant. The district reads you in about three seconds — the bearing, the slow deliberate movement, the companion motes — and decides 'valley-floor' before you've spoken a word. Two young men near a tower access panel exchange a murmur. Not hostile. Wary, the way a community practices wariness as a craft. The amber-collared woman has taken two steps in your direction and stopped, head tilted, reconsidering. A posted notice board near the district gate carries a hand-lettered sheet: EDGE DISTRICT ASSEMBLY — FILTRATION ENGINEERS ACCOUNT REQUIRED — THIRD DAY HENCE. Someone has added, in a different hand below it: *whose count?*"
+      },
+      {
+        "summary": "Usnea approaches the amber-collared optics-weaver; she introduces herself as Orla and asks about the river ford — Aevi brightens with interest.",
+        "narration": "You turn toward the amber-collared woman and let your branches settle — not a bow, not a greeting exactly, just the particular stillness of a large thing choosing not to loom. The light-guide pavers throw upward warmth across your bark and she reads that, you think: the way the photonic district's own light is already comfortable with you, or at least not alarmed by you. Her professional attention sharpens into something less guarded.\n\n'Valley floor,' she says, not unkindly — it's a category, not a verdict. 'Radiant origin, though. I can tell by the way you hold light.' She closes the remaining two paces with the ease of someone who has assessed a thousand materials and found most of them interesting. Her collar catches a braided beam from the nearest tower and splits it into a brief arc of prismatic color across her jaw. 'Orla. I weave optical records — light-impressions, mostly.' She pauses, glancing at the notice board behind you. 'You came up the valley road today. Did you pass the river at the ford below the plateau edge?'\n\nAevi brightens at your shoulder — a slow, attentive brightening, the kind that means *she asked a real question*. The motes drift a fraction toward Orla, reading something in her nanite signature that earns cautious interest without declaring it. Orla notices: her eyes track the constellation for a moment with the practiced calm of someone who has seen unusual things in her line of work and learned not to flinch.\n\nBehind her, the two apprentices have stopped their needle-beam duel and are watching properly now, beam-tips still crackling harmless sparks between their fingers. Near the tower panel, the two young men are still quiet — not threatening, but tallying who you are against whatever it is they expected today."
       }
     ],
     "lastTurn": {
-      "narration": "The road up from the valley floor takes the last hour through switchbacks cut into pale stone, and then the Radiant Plateau opens all at once — not a gradual reveal but a threshold, like stepping through a door into a room full of held breath. The Edge District greets you at midday, when the photonic-crystal towers are working hardest: light arrives from the south, gets caught, braided, redirected, and the streets below glow upward in slow bands of amber and white. Your bark absorbs it differently than skin would — you feel the warmth as a kind of pressure against your grain, pleasant and slightly wrong, the way a foreign dialect sounds almost familiar.\n\nAevi brightens the moment you cross into the district proper, the teal motes fanning out from your shoulder in a wider arc than usual, tasting something. You've learned to read that posture: interested, not alarmed. The light-guide pavers hum faintly under your roots — not the six-fold pulse of Millbrook, but something ordered and deliberate, a photonic heartbeat built into the infrastructure itself. Shopfronts display goods behind panels that shift color at the browsing angle; a pair of apprentices halfway down the lane exchange harmless needle-beams that scatter off each other in small starbursts, laughing. A woman in the amber-collared coat of a senior optics-weaver glances at you from across the street and doesn't look away as quickly as a stranger would.\n\nYou are large, rooted-looking, and conspicuously not Radiant. The district reads you in about three seconds — the bearing, the slow deliberate movement, the companion motes — and decides 'valley-floor' before you've spoken a word. Two young men near a tower access panel exchange a murmur. Not hostile. Wary, the way a community practices wariness as a craft. The amber-collared woman has taken two steps in your direction and stopped, head tilted, reconsidering. A posted notice board near the district gate carries a hand-lettered sheet: EDGE DISTRICT ASSEMBLY — FILTRATION ENGINEERS ACCOUNT REQUIRED — THIRD DAY HENCE. Someone has added, in a different hand below it: *whose count?*",
-      "sceneSummary": "Usnea arrives at the Radiant Plateau Edge District at midday, drawing wary looks — and finds a posted notice about a filtration engineer accounting that smells like a quest seed.",
+      "narration": "You turn toward the amber-collared woman and let your branches settle — not a bow, not a greeting exactly, just the particular stillness of a large thing choosing not to loom. The light-guide pavers throw upward warmth across your bark and she reads that, you think: the way the photonic district's own light is already comfortable with you, or at least not alarmed by you. Her professional attention sharpens into something less guarded.\n\n'Valley floor,' she says, not unkindly — it's a category, not a verdict. 'Radiant origin, though. I can tell by the way you hold light.' She closes the remaining two paces with the ease of someone who has assessed a thousand materials and found most of them interesting. Her collar catches a braided beam from the nearest tower and splits it into a brief arc of prismatic color across her jaw. 'Orla. I weave optical records — light-impressions, mostly.' She pauses, glancing at the notice board behind you. 'You came up the valley road today. Did you pass the river at the ford below the plateau edge?'\n\nAevi brightens at your shoulder — a slow, attentive brightening, the kind that means *she asked a real question*. The motes drift a fraction toward Orla, reading something in her nanite signature that earns cautious interest without declaring it. Orla notices: her eyes track the constellation for a moment with the practiced calm of someone who has seen unusual things in her line of work and learned not to flinch.\n\nBehind her, the two apprentices have stopped their needle-beam duel and are watching properly now, beam-tips still crackling harmless sparks between their fingers. Near the tower panel, the two young men are still quiet — not threatening, but tallying who you are against whatever it is they expected today.",
+      "sceneSummary": "Usnea approaches the amber-collared optics-weaver; she introduces herself as Orla and asks about the river ford — Aevi brightens with interest.",
       "choices": [
         {
-          "label": "Approach the amber-collared optics-weaver who stopped and reconsidered — she's clearly read something in you worth a second look.",
+          "label": "Answer Orla's question about the river directly — tell her what you know about the contamination and watch how she receives it.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "dark_light": 0.7,
-            "falsehood_truth": 0.8
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "connect",
-            "probe",
-            "open"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the notice board more carefully — and use Prism Sight to check whether anyone's hands have touched it recently or whether the 'whose count?' addition is truly fresh.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.6,
+            "falsehood_truth": 0.8,
             "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "investigate",
+            "share",
+            "honest",
+            "probe"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn the question around — ask Orla what she expected to hear about the river, and why she's asking a stranger.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "concrete_abstract": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "probe",
+            "read-person",
             "careful"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Find somewhere to stand quietly in the filtered light and let the district come to you — watch how people move, what the towers are doing, where the tension lives.",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Ask about the assembly notice and the 'whose count?' annotation — use it as a way in, and let the river come up naturally.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "dark_light": 0.5,
-            "concrete_abstract": 0.4
+            "falsehood_truth": 0.6,
+            "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "observe",
-            "patient"
+            "investigate",
+            "conversation",
+            "indirect"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -238,22 +244,22 @@
           "emergenceId": null
         },
         {
-          "label": "Walk directly to the district gate and ask whoever is keeping it who you'd speak to about lodging and the lay of the district — a plain traveler's ask, nothing suspicious about it.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Use Prism Sight quietly — read Orla's recent heat traces while you talk, looking for signs of distress, urgency, or concealment on her collar and hands.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "dark_light": 0.6,
-            "falsehood_truth": 0.7
+            "dark_light": 0.7,
+            "falsehood_truth": 0.6
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "connect",
-            "orient",
-            "open"
+            "study",
+            "careful",
+            "ability-use"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -269,55 +275,79 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Edge District, Radiant Plateau — midday, early spring. The character stands just inside the district gate on light-guide pavers that glow upward in amber and white bands. Towers to the south are actively braiding sunlight; the lane ahead runs northwest toward a notice board and a small plaza where the amber-collared woman has paused mid-approach.",
+        "setting": "Edge District, Radiant Plateau — midday, early spring. Usnea stands on light-guide pavers two paces from the amber-collared optics-weaver, Orla, who has closed the distance and introduced herself. Towers braid sunlight overhead; the lane glows upward in amber and white.",
         "npcsPresent": [
           {
-            "name": "Amber-collared optics-weaver (unnamed)",
-            "state": "Stopped two paces toward Usnea, head tilted — reconsidering whether to approach; watching with professional attention"
+            "name": "Orla (optics-weaver, amber collar)",
+            "state": "Standing two paces from Usnea, alert and professionally curious — waiting for an answer to her question about the river ford"
           },
           {
-            "name": "Two apprentices (unnamed)",
-            "state": "Exchanging harmless needle-beams in the lane ahead, laughing — half-watching Usnea between shots"
+            "name": "Two apprentices",
+            "state": "Beam-tips still crackling between their fingers, but duel paused — watching Usnea and Orla properly now"
           },
           {
-            "name": "Two young men (unnamed)",
-            "state": "Near a tower access panel; murmured and gone quiet, watching"
+            "name": "Two young men (tower panel)",
+            "state": "Still and quiet near the tower access panel, watching and tallying"
           }
         ],
         "objects": [
-          "Notice board at the district gate with hand-lettered EDGE DISTRICT ASSEMBLY — FILTRATION ENGINEERS ACCOUNT REQUIRED — THIRD DAY HENCE",
+          "Notice board at the district gate with hand-lettered EDGE DISTRICT ASSEMBLY — FI",
           "Second-hand annotation in different ink below: 'whose count?'",
           "Photonic-crystal towers actively braiding light overhead",
           "Light-guide pavers glowing upward in slow amber and white bands"
         ],
         "threads": [
-          "Amber-collared optics-weaver is reconsidering an approach — something about Usnea caught her eye",
-          "The filtration engineer assembly notice and the 'whose count?' addition suggest a local tension with visible stakes",
-          "The district reads Usnea as valley-floor and non-Radiant; social wariness is present but not hostile"
+          "Orla has asked whether Usnea passed the river at the ford below the plateau edge — her question implies she expects specific news",
+          "The filtration engineer assembly notice and 'whose count?' annotation remain unaddressed",
+          "Aevi has brightened toward Orla — registering something worth watching in her nanite signature",
+          "The two young men near the tower panel are tallying Usnea against expectations"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "orla",
+          "name": "Orla",
+          "role": "Optics-weaver, Edge District, Radiant Plateau",
+          "description": "A precise woman in an amber collar who weaves optical records — light-impressions. Assesses materials and people with the same professional calm; noticed Usnea's Radiant-origin light-hold from across the lane.",
+          "note": "Introduced herself and immediately asked whether Usnea crossed the river ford below the plateau edge — a question with specific expectation behind it. Did not flinch at Aevi.",
+          "learned": [
+            "Weaves optical records — light-impressions",
+            "Can identify Radiant origin by how a being holds light",
+            "Asked about the river ford with deliberate specificity — expects news from the valley floor",
+            "Aevi registered her nanite signature as worth cautious interest"
+          ],
+          "skillsObserved": [
+            "material-and-person assessment",
+            "calm professional attention",
+            "deliberate questioning"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the Edge District lane, two paces from Usnea — waiting for an answer about the river ford."
+        }
+      ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Edge District notice board at the gate carries a hand-lettered assembly notice about filtration engineers being required to account — with an anonymous second-hand annotation 'whose count?' added below.",
+          "note": "Orla the optics-weaver operates in the Edge District lane near the notice board — she weaves optical records and is tracking river news from the valley floor.",
           "subPlace": {
-            "name": "Edge District Gate Notice Board",
-            "note": "Public posting point near the district entrance; current notice concerns filtration engineer accountability assembly in three days",
+            "name": "Edge District Lane — Orla's patch",
+            "note": "Where the amber-collared optics-weaver Orla works and watches; near the assembly notice board.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "radiant-plateau-edge-district",
-          "label": "Radiant Plateau — Edge District",
-          "kind": "place",
-          "fact": "Usnea arrived at midday on Day 6. The district reads outsiders fast — valley-floor bearing flagged immediately. Photonic-crystal towers braid sunlight actively; light-guide pavers carry an ordered photonic heartbeat distinct from the six-fold Millbrook pulse. A notice board at the gate carries an assembly demand for filtration engineers to account, with an anonymous annotation 'whose count?' suggesting the report's integrity is already in question locally.",
+          "topic": "orla-optics-weaver",
+          "label": "Orla — Optics-Weaver",
+          "kind": "person",
+          "fact": "Orla weaves optical records (light-impressions) in the Edge District. She identified Usnea's Radiant origin by light-hold alone and immediately asked about the river ford below the plateau edge — suggesting she is tracking the contamination or its symptoms from the Plateau side.",
           "links": [
             "echo-river-contamination",
-            "contamination-evidence-for-the-elders",
-            "thursday-elder-meeting-shape-and-stakes"
+            "radiant-plateau-edge-district",
+            "contamination-evidence-for-the-elders"
           ]
         }
       ],
@@ -325,19 +355,19 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Edge District, Radiant Plateau — midday, early spring. The character stands just inside the district gate on light-guide pavers that glow upward in amber and white bands. Towers to the south are actively braiding sunlight; the lane ahead runs northwest toward a notice board and a small plaza where the amber-collared woman has paused mid-approach.",
+      "setting": "Edge District, Radiant Plateau — midday, early spring. Usnea stands on light-guide pavers two paces from the amber-collared optics-weaver, Orla, who has closed the distance and introduced herself. Towers braid sunlight overhead; the lane glows upward in amber and white.",
       "npcsPresent": [
         {
-          "name": "Amber-collared optics-weaver (unnamed)",
-          "state": "Stopped two paces toward Usnea, head tilted — reconsidering whether to approach; watching with professional attention"
+          "name": "Orla (optics-weaver, amber collar)",
+          "state": "Standing two paces from Usnea, alert and professionally curious — waiting for an answer to her question about the river "
         },
         {
-          "name": "Two apprentices (unnamed)",
-          "state": "Exchanging harmless needle-beams in the lane ahead, laughing — half-watching Usnea between shots"
+          "name": "Two apprentices",
+          "state": "Beam-tips still crackling between their fingers, but duel paused — watching Usnea and Orla properly now"
         },
         {
-          "name": "Two young men (unnamed)",
-          "state": "Near a tower access panel; murmured and gone quiet, watching"
+          "name": "Two young men (tower panel)",
+          "state": "Still and quiet near the tower access panel, watching and tallying"
         }
       ],
       "objects": [
@@ -347,16 +377,17 @@
         "Light-guide pavers glowing upward in slow amber and white bands"
       ],
       "threads": [
-        "Amber-collared optics-weaver is reconsidering an approach — something about Usnea caught her eye",
-        "The filtration engineer assembly notice and the 'whose count?' addition suggest a local tension with visible stakes",
-        "The district reads Usnea as valley-floor and non-Radiant; social wariness is present but not hostile"
+        "Orla has asked whether Usnea passed the river at the ford below the plateau edge — her question implies she expects specific news",
+        "The filtration engineer assembly notice and 'whose count?' annotation remain unaddressed",
+        "Aevi has brightened toward Orla — registering something worth watching in her nanite signature",
+        "The two young men near the tower panel are tallying Usnea against expectations"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -691,6 +722,36 @@
         "locationId": "millbrook",
         "day": 6
       }
+    },
+    "orla": {
+      "id": "orla",
+      "name": "Orla",
+      "role": "Optics-weaver, Edge District, Radiant Plateau",
+      "description": "A precise woman in an amber collar who weaves optical records — light-impressions. Assesses materials and people with the same professional calm; noticed Usnea's Radiant-origin light-hold from across the lane.",
+      "firstMet": {
+        "locationId": "radiant_plateau_edge",
+        "day": 6
+      },
+      "relationship": 1,
+      "history": [
+        "[d6] Introduced herself and immediately asked whether Usnea crossed the river ford below the plateau edge — a question with specific expectation behind it. Did not flinch at Aevi."
+      ],
+      "knownFacts": [
+        "Weaves optical records — light-impressions",
+        "Can identify Radiant origin by how a being holds light",
+        "Asked about the river ford with deliberate specificity — expects news from the valley floor"
+      ],
+      "skillsObserved": [
+        "material-and-person assessment",
+        "calm professional attention",
+        "deliberate questioning"
+      ],
+      "status": "active",
+      "statusNote": "At the Edge District lane, two paces from Usnea — waiting for an answer about the river ford.",
+      "lastSeen": {
+        "locationId": "radiant_plateau_edge",
+        "day": 6
+      }
     }
   },
   "placeMemory": {
@@ -803,12 +864,17 @@
     "radiant_plateau_edge": {
       "visits": 1,
       "notes": [
-        "[d6] Edge District notice board at the gate carries a hand-lettered assembly notice about filtration engineers being required to account — with an anonymous second-hand annotation 'whose count?' added belo"
+        "[d6] Edge District notice board at the gate carries a hand-lettered assembly notice about filtration engineers being required to account — with an anonymous second-hand annotation 'whose count?' added belo",
+        "[d6] Orla the optics-weaver operates in the Edge District lane near the notice board — she weaves optical records and is tracking river news from the valley floor."
       ],
       "flags": {},
       "lastVisit": 6,
       "vectorsKnown": [
-        "dark_light"
+        "dark_light",
+        "falsehood_truth",
+        "concrete_abstract",
+        "mechanical_spiritual",
+        "violence_peace"
       ],
       "subPlaces": {
         "edge-district-gate-notice-board": {
@@ -816,6 +882,12 @@
           "day": 6,
           "visited": true,
           "note": "Public posting point near the district entrance; current notice concerns filtration engineer accountability assembly in "
+        },
+        "edge-district-lane-orla-s-patch": {
+          "name": "Edge District Lane — Orla's patch",
+          "day": 6,
+          "visited": true,
+          "note": "Where the amber-collared optics-weaver Orla works and watches; near the assembly notice board."
         }
       }
     }
@@ -841,7 +913,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-07T23:07:57.853Z"
+    "lastSharedReadAt": "2026-07-08T00:02:01.295Z"
   },
   "bio": {
     "hometown": "A baobab tree from Africa",
@@ -1447,6 +1519,21 @@
         ],
         "createdDay": 6,
         "updatedDay": 6
+      },
+      "orla-optics-weaver": {
+        "id": "orla-optics-weaver",
+        "label": "Orla — Optics-Weaver",
+        "kind": "person",
+        "facts": [
+          "[d6] Orla weaves optical records (light-impressions) in the Edge District. She identified Usnea's Radiant origin by light-hold alone and immediately asked about the river ford below the plateau edge — sugg"
+        ],
+        "links": [
+          "echo-river-contamination",
+          "radiant-plateau-edge-district",
+          "contamination-evidence-for-the-elders"
+        ],
+        "createdDay": 6,
+        "updatedDay": 6
       }
     }
   },
@@ -1458,7 +1545,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "prism_sight": 5,
+      "prism_sight": 6,
       "light_bending": 6,
       "hearthbinding": 2,
       "old_roads": 2

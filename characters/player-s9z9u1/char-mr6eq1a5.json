@@ -235,22 +235,31 @@
       {
         "summary": "Brynjar names his stake: a deliberate marker left beyond the new pass, and a question about whether it connects to the water crisis.",
         "narration": "Brynjar looks up from his cup — takes you in, all of you, the bark-textured presence and the teal motes drifting at your shoulder — and his expression does the small recalibration of someone meeting a thing they'd heard about but hadn't quite believed. He sets the cup down on the hearthstone.\n\n\"Came through the new pass,\" he says. No preamble. \"Three weeks back. Someone on the far side had left a marker — not random, not a waystation blaze. Deliberate placement. I wanted to know if anyone in the valley had put it there, and the name that kept coming up when I asked was Millbrook.\" He glances toward the ajar door, toward the yard where Mara and the others wait in the pale morning. \"Then I started hearing about the water. About a tree who'd been walking the irrigation channels and finding things nobody wanted to find.\" A brief, measured look back at you. \"Figured Thursday was worth the morning.\"\n\nAevi drifts a half-handspan closer to him — not alarmed, just attentive, the motes brightening fractionally with the particular quality they carry near something that connects to the larger pattern. Brynjar notices. He doesn't pull back.\n\n\"I don't have evidence for your elders,\" he adds. \"I have a question about whose marker that was and whether it has anything to do with why the river runs gray. If those aren't the same question, I'll stay out of your way.\""
+      },
+      {
+        "summary": "Brynjar Andyrsson: Two women at breakfast place the east bank traveler as a Venn family shepherd — and note a dark-coated figure who walked the river road south-to-north two days ago, before dawn, without stopping."
+      },
+      {
+        "summary": "Brynjar Andyrsson: Brynjar briefs Usnea on the Venn shepherd and the dark-coated figure before heading to Mara's wayhouse."
+      },
+      {
+        "summary": "Usnea invites Brynjar to stay and hear the evidence, then steps outside to give Mara the opening signal.",
+        "narration": "You meet Brynjar's gaze across the orange-coal warmth and give him the short version — the evidence, the witnesses, the sequence Mara has held together for nine days. Then you tell him the meeting is about to open and that his question about the marker belongs in the room, not in the lane. 'If someone placed that deliberately, the elders need to hear it named. Stay.' It is not a demand. It lands as an invitation from someone who has been collecting threads and knows when another one has arrived.\n\nBrynjar picks up his cup from the hearthstone, drains the last of it, and sets it down again — decisive. He nods once. 'I'll stay.' Aevi's motes drift a fraction closer to him, then settle back at your shoulder: a small, private endorsement.\n\nYou step through the ajar door into the yard. The light is still soft, early-spring pale, the kind that makes everything look like it hasn't decided yet. Mara is at the foot of the steps with her cloth bundle under one arm and the vial looped at her belt — she reads your face before you say a word and gives you the quiet nod that means *good, then we begin.* Holloway and Renn rise from the low wall almost simultaneously, the old reflex of men who have waited exactly as long as they intended to. The two unrecognized elders finish their murmured exchange and straighten. The child near the far wall drags a last line through the dirt and looks up.\n\nThe tuning-warden is not yet in the yard — but it is not yet noon, and the eastern path has two hours in it. You step forward to give Mara the signal."
       }
     ],
     "lastTurn": {
-      "narration": "Brynjar looks up from his cup — takes you in, all of you, the bark-textured presence and the teal motes drifting at your shoulder — and his expression does the small recalibration of someone meeting a thing they'd heard about but hadn't quite believed. He sets the cup down on the hearthstone.\n\n\"Came through the new pass,\" he says. No preamble. \"Three weeks back. Someone on the far side had left a marker — not random, not a waystation blaze. Deliberate placement. I wanted to know if anyone in the valley had put it there, and the name that kept coming up when I asked was Millbrook.\" He glances toward the ajar door, toward the yard where Mara and the others wait in the pale morning. \"Then I started hearing about the water. About a tree who'd been walking the irrigation channels and finding things nobody wanted to find.\" A brief, measured look back at you. \"Figured Thursday was worth the morning.\"\n\nAevi drifts a half-handspan closer to him — not alarmed, just attentive, the motes brightening fractionally with the particular quality they carry near something that connects to the larger pattern. Brynjar notices. He doesn't pull back.\n\n\"I don't have evidence for your elders,\" he adds. \"I have a question about whose marker that was and whether it has anything to do with why the river runs gray. If those aren't the same question, I'll stay out of your way.\"",
-      "sceneSummary": "Brynjar names his stake: a deliberate marker left beyond the new pass, and a question about whether it connects to the water crisis.",
+      "narration": "You meet Brynjar's gaze across the orange-coal warmth and give him the short version — the evidence, the witnesses, the sequence Mara has held together for nine days. Then you tell him the meeting is about to open and that his question about the marker belongs in the room, not in the lane. 'If someone placed that deliberately, the elders need to hear it named. Stay.' It is not a demand. It lands as an invitation from someone who has been collecting threads and knows when another one has arrived.\n\nBrynjar picks up his cup from the hearthstone, drains the last of it, and sets it down again — decisive. He nods once. 'I'll stay.' Aevi's motes drift a fraction closer to him, then settle back at your shoulder: a small, private endorsement.\n\nYou step through the ajar door into the yard. The light is still soft, early-spring pale, the kind that makes everything look like it hasn't decided yet. Mara is at the foot of the steps with her cloth bundle under one arm and the vial looped at her belt — she reads your face before you say a word and gives you the quiet nod that means *good, then we begin.* Holloway and Renn rise from the low wall almost simultaneously, the old reflex of men who have waited exactly as long as they intended to. The two unrecognized elders finish their murmured exchange and straighten. The child near the far wall drags a last line through the dirt and looks up.\n\nThe tuning-warden is not yet in the yard — but it is not yet noon, and the eastern path has two hours in it. You step forward to give Mara the signal.",
+      "sceneSummary": "Usnea invites Brynjar to stay and hear the evidence, then steps outside to give Mara the opening signal.",
       "choices": [
         {
-          "label": "Tell him plainly what you know — the six-fold pulse, the Precursor system, Fendt's pour — and ask him to describe the marker in detail.",
+          "label": "Give Mara the signal — begin the presentation now; the warden can be introduced when he arrives mid-sequence",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "share",
-            "probe",
-            "connect"
+            "lead",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -259,34 +268,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask him to describe the marker first — its shape, placement, material — before committing to what you share.",
+          "label": "Hold the opening briefly — scan the yard and road with Prism Sight for Pell and Sela before the meeting starts",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "probe",
-            "careful",
-            "listen"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on him — read the light-history around him for anything that would clarify whether his arrival is coincidence or design.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.6
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful",
-            "scout"
+            "scout",
+            "careful"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -295,15 +284,30 @@
           "emergenceId": null
         },
         {
-          "label": "Tell him the meeting is about to open — invite him to stay and hear the evidence, and let his question surface naturally in the room rather than in private.",
+          "label": "Ask Mara quietly whether Councilor Dresh should know about the marker and the dark-coated figure before the room opens",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "include",
-            "practical",
-            "move-forward"
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step briefly back inside and tell Brynjar to name the marker to the room himself, in his own words, when the moment opens",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -321,52 +325,60 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "contamination-evidence-for-the-elders",
+          "title": "Evidence for the Elders",
+          "note": "Usnea has given Mara the readiness signal — all witnesses and evidence in order; meeting opens on Usnea's step forward.",
+          "xpReward": 0
+        }
+      ],
       "scene": {
-        "setting": "Millbrook common house interior, mid-morning — fire burned to a warm orange bed, long table with cleared breakfast bowls, two women near the window, Brynjar by the fire, cup on hearthstone. Yard visible through ajar door: Mara, Holloway, Renn, two elders, child with stick.",
+        "setting": "Millbrook common house doorway and yard, mid-morning — Usnea standing at the threshold between interior and yard, pale spring light, fire visible through the open door behind them.",
         "npcsPresent": [
           {
             "name": "Brynjar Andyrsson",
-            "state": "Cup set on the hearthstone, looking up at Usnea — has just named his stake plainly: a deliberate marker beyond the new pass, a question about the water."
+            "state": "Inside, cup set down, risen from the fire — has agreed to stay and hear the evidence."
           },
           {
             "name": "Mara Wells",
-            "state": "Outside at the foot of the common house steps, cloth bundle under arm, vial at belt — waiting for Usnea's signal."
+            "state": "At the foot of the common house steps, cloth bundle under arm, vial at belt — has read Usnea's face and given the quiet nod; waiting for the signal to move."
           },
           {
             "name": "Holloway",
-            "state": "Seated on the low yard wall outside, arms crossed, watching Aevi's motes."
+            "state": "Has risen from the low yard wall, arms no longer crossed — ready."
           },
           {
             "name": "Renn",
-            "state": "Seated on the low yard wall beside Holloway, jaw set in patient mode."
+            "state": "Risen beside Holloway, jaw set, patient — waiting on movement."
           },
           {
             "name": "Two unrecognized elders",
-            "state": "Near the side entrance outside, talking quietly between themselves."
+            "state": "Have straightened from their murmured exchange near the side entrance — attentive."
           },
           {
             "name": "Village child (not Sela)",
-            "state": "Drawing in the dirt with a stick near the far wall outside."
+            "state": "Has stopped drawing in the dirt and is looking up toward the door."
           }
         ],
         "objects": [
-          "Fire — burned to warm orange coals",
-          "Long common house table — breakfast bowls cleared",
-          "Brynjar's cup — set on the hearthstone",
-          "Mara's cloth bundle (evidence materials, outside)",
-          "Mara's glass vial (looped at her belt, outside)",
-          "Pale Turnip Seedling (in Usnea's keeping)",
-          "Crystalline Residue Pinch (in Usnea's keeping)",
-          "Orla's Memory Glass (in Usnea's keeping)",
-          "Common house door, ajar to the yard"
+          "Fire — burned to warm orange coals (inside)",
+          "Long common house table — breakfast bowls cleared (inside)",
+          "Brynjar's cup — set on the hearthstone (inside)",
+          "Mara's cloth bundle — evidence materials (outside, under her arm)",
+          "Mara's glass vial — looped at her belt (outside)",
+          "Pale Turnip Seedling — in Usnea's keeping",
+          "Crystalline Residue Pinch — in Usnea's keeping",
+          "Orla's Memory Glass — in Usnea's keeping",
+          "Common house door — ajar to the yard"
         ],
         "threads": [
-          "Tuning-warden en route — expected before noon, not yet arrived",
-          "Pell and Sela not yet sighted in the yard",
-          "Councilor Dresh inside since dawn — meeting ready to open on Usnea's readiness",
-          "Mara waiting outside for Usnea's signal",
-          "Brynjar's marker beyond the new pass — deliberate placement, unknown author, possibly connected to the water crisis"
+          "Tuning-warden en route — expected before noon, not yet in the yard",
+          "Pell and Sela not yet sighted — permission granted but not yet physically present",
+          "Councilor Dresh inside since dawn — meeting ready to open on Usnea's signal",
+          "Brynjar's marker beyond the new pass — now in the room, to be named when the moment opens",
+          "Dark-coated figure on the river road two days ago — unnamed, unplaced"
         ]
       },
       "npcUpdates": [
@@ -374,43 +386,49 @@
           "op": "update",
           "npcId": "brynjar-andyrsson",
           "name": "Brynjar Andyrsson",
-          "role": "Traveler, arrived from beyond the new pass",
-          "note": "Named his stake plainly: came through the new pass three weeks ago, found a deliberately placed marker on the far side, followed the name 'Millbrook' and the water rumors here. Has no evidence for the elders — only a question about whose marker it was and whether it connects to the contamination.",
+          "note": "Accepted Usnea's invitation to stay and hear the evidence; agreed to let his question about the marker surface in the room.",
           "learned": [
-            "Passed through the new mountain pass approximately three weeks ago",
-            "Found a deliberately placed marker on the far side of the pass — not a waystation blaze, not random",
-            "Followed the name Millbrook and rumors of a tree walking the irrigation channels",
-            "His question: whose marker, and does it connect to the gray water",
-            "Aevi moved closer to him — attentive, not alarmed"
+            "The elder meeting is opening now — his marker question belongs in the room, not in private"
           ],
           "skillsObserved": [
-            "plain-speaking under assessment",
-            "calm in unfamiliar company"
+            "decisive acceptance of an invitation, no hesitation"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the Millbrook common house fireside — has named his stake; waiting on Usnea's next move before the elder meeting opens."
-        }
-      ],
-      "factUpdates": [
+          "statusNote": "Inside the common house, risen from the fire, ready to observe the elder presentation."
+        },
         {
-          "op": "add",
-          "text": "A deliberately placed marker was found beyond the new mountain pass approximately three weeks ago by Brynjar Andyrsson — not a waystation blaze, placement described as intentional. Author unknown. Brynjar believes it may connect to the valley water crisis.",
-          "subjectId": "brynjar-andyrsson"
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Read Usnea's face from the yard and gave the quiet nod — meeting is ready to open on Usnea's forward step.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house steps — evidence in hand, readiness confirmed, waiting for Usnea to step forward."
         }
       ],
-      "placeUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Brynjar Andyrsson present inside the common house at the fire — agreed to stay and hear the elder presentation; his marker-question now enters the room.",
+          "subPlace": {
+            "name": "Common House Fireside",
+            "note": "Brynjar risen from the fire, cup set down — witness to the opening of Thursday's elder presentation.",
+            "visited": true
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "the-new-pass-marker",
-          "label": "The Marker Beyond the Pass",
-          "kind": "mystery",
-          "fact": "A deliberately placed marker — not a waystation blaze — was found on the far side of the new mountain pass approximately three weeks ago by Brynjar Andyrsson. Author unknown. Brynjar followed it to Millbrook, connecting it in his mind to the water contamination.",
+          "topic": "brynjar-andyrsson",
+          "label": "Brynjar Andyrsson",
+          "kind": "person",
+          "fact": "Day 9 morning: accepted Usnea's invitation to stay for the elder presentation — his question about the deliberately placed marker beyond the new pass will surface in the room.",
           "links": [
-            "brynjar-andyrsson",
-            "millbrook",
-            "echo-river-contamination",
-            "the-six-fold-pattern"
+            "contamination-evidence-for-the-elders",
+            "millbrook"
           ]
         }
       ],
@@ -418,57 +436,57 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior, mid-morning — fire burned to a warm orange bed, long table with cleared breakfast bowls, two women near the window, Brynjar by the fire, cup on hearthstone. Yard visible through ajar door: Mara, Holloway, Renn, two elders, child with stick.",
+      "setting": "Millbrook common house doorway and yard, mid-morning — Usnea standing at the threshold between interior and yard, pale spring light, fire visible through the open door behind them.",
       "npcsPresent": [
         {
           "name": "Brynjar Andyrsson",
-          "state": "Cup set on the hearthstone, looking up at Usnea — has just named his stake plainly: a deliberate marker beyond the new p"
+          "state": "Inside, cup set down, risen from the fire — has agreed to stay and hear the evidence."
         },
         {
           "name": "Mara Wells",
-          "state": "Outside at the foot of the common house steps, cloth bundle under arm, vial at belt — waiting for Usnea's signal."
+          "state": "At the foot of the common house steps, cloth bundle under arm, vial at belt — has read Usnea's face and given the quiet "
         },
         {
           "name": "Holloway",
-          "state": "Seated on the low yard wall outside, arms crossed, watching Aevi's motes."
+          "state": "Has risen from the low yard wall, arms no longer crossed — ready."
         },
         {
           "name": "Renn",
-          "state": "Seated on the low yard wall beside Holloway, jaw set in patient mode."
+          "state": "Risen beside Holloway, jaw set, patient — waiting on movement."
         },
         {
           "name": "Two unrecognized elders",
-          "state": "Near the side entrance outside, talking quietly between themselves."
+          "state": "Have straightened from their murmured exchange near the side entrance — attentive."
         },
         {
           "name": "Village child (not Sela)",
-          "state": "Drawing in the dirt with a stick near the far wall outside."
+          "state": "Has stopped drawing in the dirt and is looking up toward the door."
         }
       ],
       "objects": [
-        "Fire — burned to warm orange coals",
-        "Long common house table — breakfast bowls cleared",
-        "Brynjar's cup — set on the hearthstone",
-        "Mara's cloth bundle (evidence materials, outside)",
-        "Mara's glass vial (looped at her belt, outside)",
-        "Pale Turnip Seedling (in Usnea's keeping)",
-        "Crystalline Residue Pinch (in Usnea's keeping)",
-        "Orla's Memory Glass (in Usnea's keeping)",
-        "Common house door, ajar to the yard"
+        "Fire — burned to warm orange coals (inside)",
+        "Long common house table — breakfast bowls cleared (inside)",
+        "Brynjar's cup — set on the hearthstone (inside)",
+        "Mara's cloth bundle — evidence materials (outside, under her arm)",
+        "Mara's glass vial — looped at her belt (outside)",
+        "Pale Turnip Seedling — in Usnea's keeping",
+        "Crystalline Residue Pinch — in Usnea's keeping",
+        "Orla's Memory Glass — in Usnea's keeping",
+        "Common house door — ajar to the yard"
       ],
       "threads": [
-        "Tuning-warden en route — expected before noon, not yet arrived",
-        "Pell and Sela not yet sighted in the yard",
-        "Councilor Dresh inside since dawn — meeting ready to open on Usnea's readiness",
-        "Mara waiting outside for Usnea's signal",
-        "Brynjar's marker beyond the new pass — deliberate placement, unknown author, possibly connected to the water crisis"
+        "Tuning-warden en route — expected before noon, not yet in the yard",
+        "Pell and Sela not yet sighted — permission granted but not yet physically present",
+        "Councilor Dresh inside since dawn — meeting ready to open on Usnea's signal",
+        "Brynjar's marker beyond the new pass — now in the room, to be named when the moment opens",
+        "Dark-coated figure on the river road two days ago — unnamed, unplaced"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 20,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -483,14 +501,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger.",
         "Old Roads confirms the Precursor alignments beneath the plateau are structural conduit — the six-fold pulse travels from the upper Disputed Zone to the valley water table on shared infrastructure. The",
         "Tuning-warden confirmed he witnessed six-count channel light three springs ago at the Lower Terrace gateline — a Heights-side pre-crisis witness to the conduit pulse, now named and available.",
         "Tuning-warden confirmed Thursday attendance — Heights-side witness secured. Will seek gate-senior sanction to leave the gateline.",
         "Tuning-warden confirmed logistics — will seek gate-senior sanction before morning review, plans to arrive Millbrook common house before Thursday noon or send word by morning tone. Heights-side witness",
         "All witnesses confirmed — warden's Thursday logistics delivered to Mara Wells. Evidence sequence complete. Usnea rested the night before the presentation.",
         "Dawn of Thursday — rested, communed with Millbrook's essence, evidence intact. The presentation is hours away; warden sanction still unconfirmed.",
-        "Thursday arrived — gate-senior sanction confirmed by morning tone; tuning-warden en route. Mara ready. All five elders present or arriving. The presentation is imminent."
+        "Thursday arrived — gate-senior sanction confirmed by morning tone; tuning-warden en route. Mara ready. All five elders present or arriving. The presentation is imminent.",
+        "Usnea has given Mara the readiness signal — all witnesses and evidence in order; meeting opens on Usnea's step forward."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -642,7 +660,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Received the well-contamination finding from Usnea mid-approach to Pell — went still, dropped her careful social gesture, pivoted to a shorter and truer ask of Pell",
         "[d6] Gone still at Usnea's elbow after the misstep — reading Pell's face, waiting for an opening, not yet moving to recover the thread.",
         "[d6] Stepped into the space Usnea made — named Sela plainly, reframed the ask as carrying weight off Sela rather than putting weight on her. Holding the silence she created.",
         "[d6] Named the practical reality plainly — Dresh won't move the venue, but the common house open room means Pell can stand at the door. Did not oversell it.",
@@ -651,7 +668,8 @@
         "[d6] Said nothing after Usnea's thanks — recognized the moment was finished and let it be. Satisfied.",
         "[d8] Received the warden's Thursday commitment — 'then Thursday holds.' Offered tea and a room without ceremony. Told Usnea to rest.",
         "[d9] Heard moving in the main room before full dawn — already preparing. Has not yet spoken with Usnea this morning.",
-        "[d9] Received warden's morning-tone confirmation and relayed it to Usnea at the common house steps. Declared the presentation ready to open on Usnea's signal."
+        "[d9] Received warden's morning-tone confirmation and relayed it to Usnea at the common house steps. Declared the presentation ready to open on Usnea's signal.",
+        "[d9] Read Usnea's face from the yard and gave the quiet nod — meeting is ready to open on Usnea's forward step."
       ],
       "knownFacts": [
         "Councilor Dresh leads and trusts physical evidence first",
@@ -676,7 +694,7 @@
         "locationId": "millbrook",
         "day": 9
       },
-      "statusNote": "At Millbrook common house steps — evidence in hand, meeting assembled, waiting for Usnea's readiness signal."
+      "statusNote": "At the common house steps — evidence in hand, readiness confirmed, waiting for Usnea to step forward."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -907,24 +925,27 @@
         "locationId": "millbrook",
         "day": 9
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d9] Usnea introduced themselves by name at the fireside — named the evidence, the warden's expected arrival, the shape of the morning.",
-        "[d9] Named his stake plainly: came through the new pass three weeks ago, found a deliberately placed marker on the far side, followed the name 'Millbrook' and the water rumors here. Has"
+        "[d9] Named his stake plainly: came through the new pass three weeks ago, found a deliberately placed marker on the far side, followed the name 'Millbrook' and the water rumors here. Has",
+        "[d9] Accepted Usnea's invitation to stay and hear the evidence; agreed to let his question about the marker surface in the room."
       ],
       "knownFacts": [
         "Arrived before Usnea",
         "Has been waiting by the fire since sunrise",
         "Passed through the new mountain pass approximately three weeks ago",
         "Found a deliberately placed marker on the far side of the pass — not a waystation blaze, not random",
-        "Followed the name Millbrook and rumors of a tree walking the irrigation channels"
+        "Followed the name Millbrook and rumors of a tree walking the irrigation channels",
+        "The elder meeting is opening now — his marker question belongs in the room, not in private"
       ],
       "skillsObserved": [
         "plain-speaking under assessment",
-        "calm in unfamiliar company"
+        "calm in unfamiliar company",
+        "decisive acceptance of an invitation, no hesitation"
       ],
       "status": "active",
-      "statusNote": "At the Millbrook common house fireside — has named his stake; waiting on Usnea's next move before the elder meeting opens.",
+      "statusNote": "Inside the common house, risen from the fire, ready to observe the elder presentation.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 9
@@ -935,7 +956,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d5] Day 5 dawn: six-fold pulse traced upstream past the old stone mill weir — confirmed in both mill-race and main channel, at least 300 paces from the dock. The pulse does not stop at the weir.",
         "[d5] Day 5 dawn: six-fold pulse confirmed reaching Millbrook's drinking wells via south bank loam and buried clay pipes — the village water supply is inside the system's reach. Aevi named the dock as a mid",
         "[d6] Day 6 dawn: the well-contamination finding delivered at Pell's cord stall — Mara and Pell both present when named; Pell's permission for Sela's testimony still pending at this location.",
         "[d6] Usnea's direct appeal about the wells to Pell at her cord stall misfired — a cart driver was an unintended witness to the exchange; Pell's anger is now part of this stall's social memory.",
@@ -946,7 +966,8 @@
         "[d6] Day 6 morning: the permission conversation closed at Pell's stall with a plain 'thank you' witnessed by the cart driver — no further asks made. The stall's social memory now holds a clean ending along",
         "[d6] Day 6 morning: six-fold pulse confirmed stable and settled throughout village loam, well-mouths, and channel margins — no longer expanding, now qualitatively confident. Children near dock spontaneousl",
         "[d9] Thursday morning: the common house yard assembled for the elder presentation — Holloway, Renn, and two unknown elders present before the meeting opened. Mara received warden's sanction by morning tone",
-        "[d9] Brynjar Andyrsson present inside the common house at the fire on Thursday morning — a new arrival whose stake is not yet known."
+        "[d9] Brynjar Andyrsson present inside the common house at the fire on Thursday morning — a new arrival whose stake is not yet known.",
+        "[d9] Brynjar Andyrsson present inside the common house at the fire — agreed to stay and hear the elder presentation; his marker-question now enters the room."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1026,7 +1047,7 @@
           "name": "Common House Fireside",
           "day": 9,
           "visited": true,
-          "note": "Long table, orange-coal fire, where Brynjar was waiting before the elder meeting opened."
+          "note": "Brynjar risen from the fire, cup set down — witness to the opening of Thursday's elder presentation."
         }
       }
     },
@@ -2109,7 +2130,8 @@
         "label": "Brynjar Andyrsson",
         "kind": "person",
         "facts": [
-          "[d9] Broad-shouldered traveler, arrived at Millbrook common house before sunrise on Thursday. Waited by the fire. Stake in the meeting unknown."
+          "[d9] Broad-shouldered traveler, arrived at Millbrook common house before sunrise on Thursday. Waited by the fire. Stake in the meeting unknown.",
+          "[d9] Day 9 morning: accepted Usnea's invitation to stay for the elder presentation — his question about the deliberately placed marker beyond the new pass will surface in the room."
         ],
         "links": [
           "millbrook",

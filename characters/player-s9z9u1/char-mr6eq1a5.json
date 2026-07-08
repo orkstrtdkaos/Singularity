@@ -50,10 +50,10 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.1004709766879462,
-    "concrete_abstract": 0.04548989281459041,
+    "concrete_abstract": 0.013215398173860894,
     "spectrumId": -0.2543062086396591,
     "dark_light": 0.19177414280214844,
-    "falsehood_truth": 0.320943949694457,
+    "falsehood_truth": 0.34489675220973415,
     "violence_peace": 0.2569349762513613,
     "chaos_order": 0.03
   },
@@ -209,6 +209,21 @@
       "spread": [],
       "_bonusApplied": 0.25,
       "day": 8
+    },
+    {
+      "at": "2026-07-08T22:02:01.674Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Named the seep, the lattice, the six-fold count, and Aevi's assessment plainly and in sequence before Millbrook's assembled elders — no softening, no qualification.",
+      "tags": [
+        "community",
+        "investigation",
+        "practical-wisdom"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 10
     }
   ],
   "relationships": {},
@@ -267,92 +282,105 @@
       {
         "summary": "Evidence laid on the common house table; Councilor Dresh calls for plain speech; Pell takes her post at the threshold.",
         "narration": "Mara moves to the table with the particular economy of someone who has rehearsed this in her sleep and is glad to finally be doing it. You fall into step a half-pace behind her right shoulder — present, not leading. The room closes around the table in a natural ring: Holloway to the left, Renn beside him, the two elders finding the far end, the village child still folded on the floor near the door like a dropped cloak that decided to stay. Brynjar hasn't moved from the hearthstone, but his stillness is a form of attention. Aevi drifts to your other shoulder, barely visible in the pale spring light — a patient constellation waiting.\n\nMara sets the cloth bundle on the table without ceremony. She unfolds it in three moves: the pale seedling first, its color-drained stem lying against the dark cloth like an accusation; then the glass vial beside it, river water still faintly gray-green even here; then she glances at you, and the gesture is clear — the Crystalline Residue Pinch is yours to place. You set the ration-paper fold beside the vial, careful as handling an egg. Three objects. Three mornings of a river running wrong. The table reads them faster than anyone speaks.\n\nCouncilor Dresh is already seated — you place the face now, a broad-shouldered woman at the table's center with the stillness of someone who came early and has been composing herself since. She looks at the seedling for a long moment before looking at Mara. 'Tell it plainly,' she says. Not permission. A preference stated as given. Mara nods once and opens her mouth to begin.\n\nAt the yard-facing door, a shadow shifts. Pell. She hasn't come in — she's taken a post at the threshold exactly as she said she would, rope samples still looped over one arm, watching the room with the focused quiet of someone who knows exactly why she's here and what she'll do if the answer changes."
+      },
+      {
+        "summary": "Usnea delivers plain testimony — seep, geometry, lattice-count, Aevi's assessment — to the assembled elders.",
+        "narration": "Mara finishes the physical evidence in four sentences — where each item came from, when, by whose hand — and then she steps back a half-pace and looks at you. The room follows her gaze.\n\nYou don't move from where you're standing. You let the table between you and the elders stay the table — a surface for objects, not a barrier. Aevi drifts to your left shoulder and holds there, motes barely visible in the morning light, the quiet of something paying close attention.\n\n'The seep is in the eastern irrigation arm,' you say. 'Beneath the old retaining wall, at a point where the stone shows geometric patterning in the silt below — not sediment-random, not erosion. Laid. The seep runs warm. I placed root-contact at the aperture on Day Four and felt a lattice beneath it — structured, pre-Transition, holding a count of six.' You pause a breath, let the number land. 'Six. Before a long rest. Then again. The residue in that fold of paper —' a nod to the crystalline pinch on the table '— holds light rather than reflecting it. Nanite-structured. It did not come from this watershed.' You look at Dresh, then Holloway, then the two far-end elders in turn. 'Aevi confirmed the count. Aevi also said — and I name this plainly, as asked — that the system reads as doing a job. Not decaying. Not leaking. Operating.' The teal motes at your shoulder pulse once, soft and steady, as if to say: *that is what I said, and it is still true.*\n\nThe room is quiet in the specific way that means people are holding the weight of a thing before deciding what to do with it. Renn's eyes are on the vial. Holloway hasn't moved. Pell, at the threshold, has gone very still."
       }
     ],
     "lastTurn": {
-      "narration": "Mara moves to the table with the particular economy of someone who has rehearsed this in her sleep and is glad to finally be doing it. You fall into step a half-pace behind her right shoulder — present, not leading. The room closes around the table in a natural ring: Holloway to the left, Renn beside him, the two elders finding the far end, the village child still folded on the floor near the door like a dropped cloak that decided to stay. Brynjar hasn't moved from the hearthstone, but his stillness is a form of attention. Aevi drifts to your other shoulder, barely visible in the pale spring light — a patient constellation waiting.\n\nMara sets the cloth bundle on the table without ceremony. She unfolds it in three moves: the pale seedling first, its color-drained stem lying against the dark cloth like an accusation; then the glass vial beside it, river water still faintly gray-green even here; then she glances at you, and the gesture is clear — the Crystalline Residue Pinch is yours to place. You set the ration-paper fold beside the vial, careful as handling an egg. Three objects. Three mornings of a river running wrong. The table reads them faster than anyone speaks.\n\nCouncilor Dresh is already seated — you place the face now, a broad-shouldered woman at the table's center with the stillness of someone who came early and has been composing herself since. She looks at the seedling for a long moment before looking at Mara. 'Tell it plainly,' she says. Not permission. A preference stated as given. Mara nods once and opens her mouth to begin.\n\nAt the yard-facing door, a shadow shifts. Pell. She hasn't come in — she's taken a post at the threshold exactly as she said she would, rope samples still looped over one arm, watching the room with the focused quiet of someone who knows exactly why she's here and what she'll do if the answer changes.",
-      "sceneSummary": "Evidence laid on the common house table; Councilor Dresh calls for plain speech; Pell takes her post at the threshold.",
+      "narration": "Mara finishes the physical evidence in four sentences — where each item came from, when, by whose hand — and then she steps back a half-pace and looks at you. The room follows her gaze.\n\nYou don't move from where you're standing. You let the table between you and the elders stay the table — a surface for objects, not a barrier. Aevi drifts to your left shoulder and holds there, motes barely visible in the morning light, the quiet of something paying close attention.\n\n'The seep is in the eastern irrigation arm,' you say. 'Beneath the old retaining wall, at a point where the stone shows geometric patterning in the silt below — not sediment-random, not erosion. Laid. The seep runs warm. I placed root-contact at the aperture on Day Four and felt a lattice beneath it — structured, pre-Transition, holding a count of six.' You pause a breath, let the number land. 'Six. Before a long rest. Then again. The residue in that fold of paper —' a nod to the crystalline pinch on the table '— holds light rather than reflecting it. Nanite-structured. It did not come from this watershed.' You look at Dresh, then Holloway, then the two far-end elders in turn. 'Aevi confirmed the count. Aevi also said — and I name this plainly, as asked — that the system reads as doing a job. Not decaying. Not leaking. Operating.' The teal motes at your shoulder pulse once, soft and steady, as if to say: *that is what I said, and it is still true.*\n\nThe room is quiet in the specific way that means people are holding the weight of a thing before deciding what to do with it. Renn's eyes are on the vial. Holloway hasn't moved. Pell, at the threshold, has gone very still.",
+      "sceneSummary": "Usnea delivers plain testimony — seep, geometry, lattice-count, Aevi's assessment — to the assembled elders.",
       "choices": [
         {
-          "label": "Deliver your testimony now — name the seep, the geometric silt, the root-contact reading, and Aevi's assessment — plainly, in sequence, as Mara's order calls for.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.8,
-            "concrete_abstract": -0.6
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "testify",
-            "careful",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Before your testimony, place Orla's Memory Glass beside the seedling and name what it shows — Fendt, the ford, the sealed tube — so Dresh sees the full physical evidence before any spoken word.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.9,
-            "concrete_abstract": -0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "testify",
-            "risky",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Catch Dresh's eye before speaking — read her face with Prism Sight for whatever she already suspects or fears, so your testimony lands where the room actually needs it.",
+          "label": "Let Aevi speak for itself — invite the motes to demonstrate the six-fold count directly for the room, making the rhythm visible rather than described.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.3,
-            "falsehood_truth": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful",
-            "scout"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Glance to Pell at the threshold — give her a plain acknowledging nod before the testimony begins, honoring her condition without making a show of it.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "violence_peace": 0.4
+            "concrete_abstract": 0.2,
+            "mechanical_spiritual": 0.3
           },
           "difficulty": 0,
           "intentTags": [
             "help",
             "careful"
           ],
+          "abilityId": "motes-vigil",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Place Orla's Memory Glass on the table now — name Fendt, name the act, name the disc — and offer to let the room see it.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "chaos_order": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold the Memory Glass for later in the sequence — let Dresh and the elders sit with the lattice-and-count testimony first, and watch who speaks next.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.3,
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "scout"
+          ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight — quietly, while the room sits with the testimony — to read the faces of the elders and Pell for the micro-signals of fear, recognition, or prior knowledge.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "concrete_abstract": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Named the seep, the lattice, the six-fold count, and Aevi's assessment plainly and in sequence before Millbrook's assembled elders — no softening, no qualification.",
+          "tags": [
+            "community",
+            "investigation",
+            "practical-wisdom"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
@@ -360,156 +388,165 @@
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "Usnea Beard named the eastern seep's geometry, the six-fold lattice count, and Aevi's assessment — 'operating, not decaying' — before Millbrook's full elder panel. The word 'deliberate' entered the common house record.",
+          "tags": [
+            "investigation",
+            "community",
+            "contamination"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "falsehood_truth": 0.1,
+            "chaos_order": -0.05
+          }
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
           "title": "Evidence for the Elders",
-          "note": "Physical evidence laid on the common house table — seedling, vial, residue pinch. Dresh calls for plain speech. Mara ready to begin. Pell holding the threshold."
+          "note": "Usnea delivered physical testimony — seep location, geometric silt, root-contact lattice reading, Aevi's six-fold count and 'operating' assessment — plainly and in sequence. Physical evidence and Usnea's testimony now complete. Aevi's direct presence confirmed to the room. Memory glass, tuning-warden, and Sela still to come."
         }
       ],
       "scene": {
-        "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. The long table is cleared and now holds the three evidence items. The room is fully assembled and waiting.",
+        "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items. Room is fully assembled; Usnea's testimony just concluded; the room is holding the weight of it.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing at the table's near end, bundle unfolded, opening her mouth to begin the testimony sequence."
+            "state": "Stepped back a half-pace after introducing the evidence — watching the room, ready to call the next speaker."
           },
           {
             "name": "Councilor Dresh",
-            "state": "Seated at the table's center, broad-shouldered, composed — looking at the pale seedling; just said 'tell it plainly.'"
+            "state": "Seated at table center, broad-shouldered, eyes on the crystalline residue pinch — hasn't spoken since 'tell it plainly.'"
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "Still at the hearthstone, cup down, watching the room with full quiet attention."
+            "state": "At the hearthstone, cup down, holding full quiet attention — marker-question still unspoken."
           },
           {
             "name": "Holloway",
-            "state": "Standing left of the table, arms at sides — looking at the seedling."
+            "state": "Standing left of the table, arms at sides — not looking at the seedling now; looking at Aevi's motes."
           },
           {
             "name": "Renn",
-            "state": "Beside Holloway, jaw still set but fully attending — eyes on the vial."
+            "state": "Beside Holloway, eyes on the vial — jaw set but attending completely."
           },
           {
             "name": "Two unrecognized elders",
-            "state": "At the far end of the table — silent, watching Mara."
+            "state": "At the far end of the table — one has leaned slightly forward; the other is very still."
           },
           {
             "name": "Village child (not Sela)",
-            "state": "Folded on the floor near the door, very still, watching."
+            "state": "Still folded near the door, watching Aevi with open attention."
           },
           {
             "name": "Pell",
-            "state": "Standing at the yard-facing threshold — rope over one arm, watching the room, holding her right of withdrawal."
+            "state": "At the yard-facing threshold — gone very still, rope over one arm, watching."
           }
         ],
         "objects": [
-          "Long common house table — cloth bundle unfolded; pale seedling, glass vial, and crystalline residue pinch laid in sequence",
+          "Long common house table — pale seedling, glass vial, crystalline residue pinch laid in sequence",
           "Orla's Memory Glass — in Usnea's keeping, not yet placed",
           "Fire — warm orange coals",
           "Brynjar's cup — set on hearthstone",
           "Common house door — open to the yard"
         ],
         "threads": [
-          "Councilor Dresh called for plain speech — Mara about to begin the testimony sequence",
-          "Orla's Memory Glass not yet placed or named to the room",
+          "Room is sitting with 'operating, not decaying' — Dresh has not yet responded",
+          "Orla's Memory Glass not yet placed or named",
           "Tuning-warden en route — expected before noon, not yet arrived",
-          "Pell at the threshold — conditions active, watching",
-          "Sela not yet sighted — will come when called, last in sequence",
-          "Brynjar's marker question waiting for its moment",
-          "Dark-coated figure on the river road — unnamed, unplaced"
+          "Pell at the threshold — conditions active, gone very still",
+          "Sela not yet sighted — comes last in sequence",
+          "Brynjar's marker-question still unspoken — waiting for the moment"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "councilor-dresh",
-          "name": "Councilor Dresh",
-          "role": "Millbrook elder, leads the Thursday presentation",
-          "description": "Broad-shouldered woman seated at the table's center — came early, composed herself since dawn, leads with preference not command.",
-          "note": "Seated at table center since dawn; looked at the seedling before looking at Mara; said 'tell it plainly' as a preference, not permission.",
-          "learned": [
-            "Leads the elder panel",
-            "Responds to physical evidence first — consistent with Mara's planned order",
-            "Prefers plain speech; stated it aloud before testimony began"
-          ],
-          "skillsObserved": [
-            "composed authority",
-            "economical direction"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Seated at the common house table, leading Thursday's elder presentation — waiting for testimony to begin."
-        },
-        {
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Laid the three evidence items in order — seedling, vial, residue pinch. Standing at the table's near end, opening to begin the testimony sequence.",
+          "note": "Stepped back after introducing physical evidence — handed the floor to Usnea cleanly. Sequence proceeding as planned.",
           "learned": [
-            "Executed the evidence-laying exactly as planned"
+            "Usnea delivered testimony in exact sequence — seep, geometry, lattice, Aevi's assessment"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — testimony sequence in motion, standing by to call next speaker."
+        },
+        {
+          "op": "update",
+          "npcId": "councilor-dresh",
+          "name": "Councilor Dresh",
+          "note": "Said nothing after Usnea's testimony. Eyes moved to the crystalline residue pinch. The silence reads as weight, not dismissal.",
+          "learned": [
+            "The seep is geometric — pre-Transition, laid, not natural",
+            "The system counts six before resting — then repeats",
+            "Aevi assessed it as operating, not decaying"
           ],
           "skillsObserved": [
-            "deliberate sequencing under pressure"
+            "controlled response under new information"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the common house table — evidence unfolded, about to deliver the opening testimony sequence."
+          "statusNote": "Seated at table center — absorbed the testimony, has not yet spoken or moved."
+        },
+        {
+          "op": "update",
+          "npcId": "holloway",
+          "name": "Holloway",
+          "note": "Stopped looking at the seedling and is now watching Aevi's motes — the shift from agricultural evidence to the living confirmation of it.",
+          "learned": [
+            "Aevi's pulse confirmed the six-fold count in real time"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing left of the table — watching Aevi, not the evidence."
+        },
+        {
+          "op": "update",
+          "npcId": "renn",
+          "name": "Renn",
+          "note": "Jaw still set but eyes fixed on the vial — attending completely. The compact-framework has been fully replaced by something he has no precedent for.",
+          "learned": [
+            "Seep is deliberate and pre-Transition — nothing in the elder compact addresses this"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Beside Holloway — full attention on the table, holding the weight of the testimony."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Arrived at the threshold exactly as promised — rope samples still over one arm, watching the room, holding her veto-at-the-door condition.",
+          "note": "Gone very still at the threshold after 'operating, not decaying' — the word deliberate in the record changes what Sela has been hearing into something adult and confirmed.",
           "learned": [
-            "Honored her own condition precisely — at the threshold before testimony began"
+            "The system beneath the river is operating — not an accident, not decay"
           ],
-          "skillsObserved": [
-            "keeping her own terms"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing at the common house yard-door threshold — watching the proceedings; holds the right to withdraw Sela if the room sits wrong."
-        },
-        {
-          "op": "update",
-          "npcId": "brynjar-andyrsson",
-          "name": "Brynjar Andyrsson",
-          "note": "Holding position at the hearthstone — watching the room assemble, marker-question still in hand, not yet spoken.",
-          "learned": [],
-          "skillsObserved": [
-            "patient waiting in unfamiliar company"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the common house hearthstone — present for the full presentation, marker-question waiting for the right moment."
+          "statusNote": "Standing at the common house yard-door threshold — very still, rope over arm, holding her right of withdrawal."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Councilor Dresh is present and leading the Thursday elder panel — broad-shouldered, seated at the table center since dawn, preference for plain speech stated before testimony began.",
-          "subjectId": "councilor-dresh"
-        },
-        {
-          "op": "add",
-          "text": "Pell is physically present at the common house threshold as promised — rope over one arm, holding her right to withdraw Sela if the room sits wrong.",
-          "subjectId": "pell"
-        },
-        {
-          "op": "add",
-          "text": "Physical evidence now laid on the common house table in sequence: pale turnip seedling, glass vial of gray-green river water, crystalline residue pinch. Dresh has seen them.",
+          "text": "Usnea delivered plain testimony to Millbrook's assembled elders — seep location, geometric silt, six-fold lattice count, Aevi's assessment ('operating, not decaying') — in exact sequence. The word 'deliberate' entered the common house record.",
           "subjectId": "contamination-evidence-for-the-elders"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Evidence laid on the common house table at Thursday's elder presentation — pale seedling, vial, residue pinch. Dresh seated at center, called for plain speech before testimony began. Pell at the threshold.",
+          "note": "Usnea's testimony delivered at the common house table — seep, geometry, lattice-count, Aevi's assessment named plainly to the full elder panel. The word 'deliberate' spoken aloud in this room.",
           "subPlace": {
             "name": "Common House Table — Elder Presentation",
-            "note": "Physical evidence placed: seedling, vial, residue pinch. Dresh leading. Mara at the near end. Testimony sequence beginning.",
+            "note": "Usnea's testimony complete — physical evidence and Aevi's assessment now part of the record. Memory glass, tuning-warden, and Sela still to come.",
             "visited": true
           }
         }
@@ -519,17 +556,16 @@
           "topic": "contamination-evidence-for-the-elders",
           "label": "Evidence for the Elders",
           "kind": "event",
-          "fact": "Thursday morning: physical evidence laid on the common house table in sequence — pale seedling, vial, residue pinch. Councilor Dresh present since dawn and leading the panel; called for plain speech. Pell holding the threshold. Testimony sequence beginning.",
+          "fact": "Thursday morning: Usnea delivered testimony in sequence — seep location, geometric silt, root-contact lattice, Aevi's six-fold count and 'operating, not decaying' assessment — to the full elder panel. Dresh absorbed it in silence. The word deliberate is now part of the common house record.",
           "links": [
-            "mara-wells",
             "echo-river-contamination",
-            "the-pale-seedlings",
-            "millbrook",
             "the-six-fold-pattern",
+            "aevi-reading-of-the-water",
+            "mara-wells",
+            "millbrook",
             "sela-and-pell",
             "tuning-warden-gateline",
-            "fendt-filtration-engineer",
-            "orlas-memory-glass-the-ford-record"
+            "fendt-filtration-engineer"
           ]
         }
       ],
@@ -537,61 +573,61 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. The long table is cleared and now holds the three evidence items. The room is fully assembled and waiting.",
+      "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items. Room is fully assembled; Usnea's testimony just concluded; the room is holding the weight of it.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at the table's near end, bundle unfolded, opening her mouth to begin the testimony sequence."
+          "state": "Stepped back a half-pace after introducing the evidence — watching the room, ready to call the next speaker."
         },
         {
           "name": "Councilor Dresh",
-          "state": "Seated at the table's center, broad-shouldered, composed — looking at the pale seedling; just said 'tell it plainly.'"
+          "state": "Seated at table center, broad-shouldered, eyes on the crystalline residue pinch — hasn't spoken since 'tell it plainly.'"
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "Still at the hearthstone, cup down, watching the room with full quiet attention."
+          "state": "At the hearthstone, cup down, holding full quiet attention — marker-question still unspoken."
         },
         {
           "name": "Holloway",
-          "state": "Standing left of the table, arms at sides — looking at the seedling."
+          "state": "Standing left of the table, arms at sides — not looking at the seedling now; looking at Aevi's motes."
         },
         {
           "name": "Renn",
-          "state": "Beside Holloway, jaw still set but fully attending — eyes on the vial."
+          "state": "Beside Holloway, eyes on the vial — jaw set but attending completely."
         },
         {
           "name": "Two unrecognized elders",
-          "state": "At the far end of the table — silent, watching Mara."
+          "state": "At the far end of the table — one has leaned slightly forward; the other is very still."
         },
         {
           "name": "Village child (not Sela)",
-          "state": "Folded on the floor near the door, very still, watching."
+          "state": "Still folded near the door, watching Aevi with open attention."
         },
         {
           "name": "Pell",
-          "state": "Standing at the yard-facing threshold — rope over one arm, watching the room, holding her right of withdrawal."
+          "state": "At the yard-facing threshold — gone very still, rope over one arm, watching."
         }
       ],
       "objects": [
-        "Long common house table — cloth bundle unfolded; pale seedling, glass vial, and ",
+        "Long common house table — pale seedling, glass vial, crystalline residue pinch l",
         "Orla's Memory Glass — in Usnea's keeping, not yet placed",
         "Fire — warm orange coals",
         "Brynjar's cup — set on hearthstone",
         "Common house door — open to the yard"
       ],
       "threads": [
-        "Councilor Dresh called for plain speech — Mara about to begin the testimony sequence",
-        "Orla's Memory Glass not yet placed or named to the room",
+        "Room is sitting with 'operating, not decaying' — Dresh has not yet responded",
+        "Orla's Memory Glass not yet placed or named",
         "Tuning-warden en route — expected before noon, not yet arrived",
-        "Pell at the threshold — conditions active, watching",
-        "Sela not yet sighted — will come when called, last in sequence"
+        "Pell at the threshold — conditions active, gone very still",
+        "Sela not yet sighted — comes last in sequence"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -606,14 +642,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Tuning-warden confirmed logistics — will seek gate-senior sanction before morning review, plans to arrive Millbrook common house before Thursday noon or send word by morning tone. Heights-side witness",
         "All witnesses confirmed — warden's Thursday logistics delivered to Mara Wells. Evidence sequence complete. Usnea rested the night before the presentation.",
         "Dawn of Thursday — rested, communed with Millbrook's essence, evidence intact. The presentation is hours away; warden sanction still unconfirmed.",
         "Thursday arrived — gate-senior sanction confirmed by morning tone; tuning-warden en route. Mara ready. All five elders present or arriving. The presentation is imminent.",
         "Usnea has given Mara the readiness signal — all witnesses and evidence in order; meeting opens on Usnea's step forward.",
         "Usnea has given Brynjar his instruction and stepped forward — the presentation is opening now.",
         "Elder presentation formally begun — Daybreak Mantle has settled the room; the evidence sequence is about to open.",
-        "Physical evidence laid on the common house table — seedling, vial, residue pinch. Dresh calls for plain speech. Mara ready to begin. Pell holding the threshold."
+        "Physical evidence laid on the common house table — seedling, vial, residue pinch. Dresh calls for plain speech. Mara ready to begin. Pell holding the threshold.",
+        "Usnea delivered physical testimony — seep location, geometric silt, root-contact lattice reading, Aevi's six-fold count and 'operating' assessment — plainly and in sequence. Physical evidence and Usne"
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -635,7 +671,8 @@
         "[d1] Accepted the half-flow truce with a short, stiff nod — not at peace but not at war. The third farmer's pale seedlings have complicated his grievance.",
         "[d1] Walked to the field with the group; now staring at the pale rows with an expression no longer about the gate. The contamination is displacing the irrigation dispute in his attentio",
         "[d1] Heard Aevi's assessment openly — gate dispute has fully receded; he is watching the channel mouth with stillness",
-        "[d1] Exhaled slowly at Usnea's plain statement — the gate dispute has fully receded; he's absorbing the larger picture"
+        "[d1] Exhaled slowly at Usnea's plain statement — the gate dispute has fully receded; he's absorbing the larger picture",
+        "[d10] Stopped looking at the seedling and is now watching Aevi's motes — the shift from agricultural evidence to the living confirmation of it."
       ],
       "knownFacts": [
         "Runs upper terrace crops",
@@ -644,14 +681,16 @@
         "The contamination may be the larger problem behind the gate dispute",
         "The pale seedlings are real and visible — the contamination has reached soil through the channel, not just the river",
         "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
-        "Heard Usnea name the contamination as deliberate and old, pattern-bearing — not a spill"
+        "Heard Usnea name the contamination as deliberate and old, pattern-bearing — not a spill",
+        "Aevi's pulse confirmed the six-fold count in real time"
       ],
       "skillsObserved": [],
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 1
-      }
+        "day": 10
+      },
+      "statusNote": "Standing left of the table — watching Aevi, not the evidence."
     },
     "renn": {
       "id": "renn",
@@ -669,24 +708,26 @@
         "[d1] Conceded that half-flow is within the compact's allowance — each word paid for carefully. The clay bowl and the pale seedlings have reached him.",
         "[d1] Walked to the field; the compact-argument has quieted in him. He's watching the channel mouth and the pale seedlings with something closer to unease than stubbornness.",
         "[d1] Heard Aevi's assessment — the compact-framework is cracking under something he can't cite precedent for",
-        "[d1] Jaw shifted from stubborn set to careful recalibration — watching the channel mouth, his compact-framework fully replaced by something he has no precedent for"
+        "[d1] Jaw shifted from stubborn set to careful recalibration — watching the channel mouth, his compact-framework fully replaced by something he has no precedent for",
+        "[d10] Jaw still set but eyes fixed on the vial — attending completely. The compact-framework has been fully replaced by something he has no precedent for."
       ],
       "knownFacts": [
-        "Manages lower channel",
         "Claims elder compact authorizes the throttle during heavy snowmelt",
         "Has been in prior dispute with Holloway",
         "The contamination is entering the irrigation channels, not just the river",
         "Half-flow satisfies the compact and the truce simultaneously",
         "The pale seedlings are real — contaminated water is entering the soil through the eastern irrigation arm",
         "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
-        "Heard Usnea name the contamination as deliberate and task-driven — nothing in the elder compact covers this"
+        "Heard Usnea name the contamination as deliberate and task-driven — nothing in the elder compact covers this",
+        "Seep is deliberate and pre-Transition — nothing in the elder compact addresses this"
       ],
       "skillsObserved": [],
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 1
-      }
+        "day": 10
+      },
+      "statusNote": "Beside Holloway — full attention on the table, holding the weight of the testimony."
     },
     "third-farmer": {
       "id": "third-farmer",
@@ -765,7 +806,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Held silence after Usnea named the order — did not add or qualify, letting the plainness of it stand. Watching Pell's face.",
         "[d6] Accepted Pell's condition plainly and immediately — 'Yes. That's yours to decide, at the door.' Did not qualify it or negotiate. The presentation is now fully assembled.",
         "[d6] Said nothing after Usnea's thanks — recognized the moment was finished and let it be. Satisfied.",
         "[d8] Received the warden's Thursday commitment — 'then Thursday holds.' Offered tea and a room without ceremony. Told Usnea to rest.",
@@ -774,17 +814,18 @@
         "[d9] Read Usnea's face from the yard and gave the quiet nod — meeting is ready to open on Usnea's forward step.",
         "[d9] Received Usnea's opening nod at the foot of the steps — meeting is now beginning.",
         "[d9] Received Usnea's opening nod and is now climbing the steps into the common house — the presentation is in motion.",
-        "[d9] Laid the three evidence items in order — seedling, vial, residue pinch. Standing at the table's near end, opening to begin the testimony sequence."
+        "[d9] Laid the three evidence items in order — seedling, vial, residue pinch. Standing at the table's near end, opening to begin the testimony sequence.",
+        "[d10] Stepped back after introducing physical evidence — handed the floor to Usnea cleanly. Sequence proceeding as planned."
       ],
       "knownFacts": [
-        "Mara's planned order: seedling/vial/residue → Usnea's account → Aevi → six-fold pattern → Sela",
         "The six-fold pulse has reached Millbrook's drinking wells — the village water supply is inside the system's reach",
         "Reframed the permission ask: not Sela carrying the testimony, but the elders carrying the burden so Sela doesn't have to",
         "The common house open room is accessible to any Millbrook resident — Pell could observe before committing Sela",
         "Pell's veto-at-the-door condition accepted — Mara carries this commitment into Thursday",
         "The tuning-warden confirmed, committed, and has logistics in hand — Heights-side testimony is real",
         "Gate-senior granted the tuning-warden sanction to leave the gateline — confirmed by morning tone Thursday",
-        "Executed the evidence-laying exactly as planned"
+        "Executed the evidence-laying exactly as planned",
+        "Usnea delivered testimony in exact sequence — seep, geometry, lattice, Aevi's assessment"
       ],
       "skillsObserved": [
         "immediate, unconditional acceptance of a reasonable conditio",
@@ -797,9 +838,9 @@
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 9
+        "day": 10
       },
-      "statusNote": "At the common house table — evidence unfolded, about to deliver the opening testimony sequence."
+      "statusNote": "At the common house table — testimony sequence in motion, standing by to call next speaker."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -910,17 +951,18 @@
         "[d6] Heard the full Thursday speaker order named plainly — confirmed Sela is last and brief. Repeated 'last and briefly' aloud in her own voice, testing whether it sounds true. No longe",
         "[d6] Set the rope down and granted permission — on her own terms. Pell at the threshold, Pell's decision if the room is wrong. Said 'last and briefly' a second time, as a condition met,",
         "[d6] Received a plain 'thank you' with no follow-up ask — accepted it without looking up; shoulders settled. The conversation closed clean.",
-        "[d9] Arrived at the threshold exactly as promised — rope samples still over one arm, watching the room, holding her veto-at-the-door condition."
+        "[d9] Arrived at the threshold exactly as promised — rope samples still over one arm, watching the room, holding her veto-at-the-door condition.",
+        "[d10] Gone very still at the threshold after 'operating, not decaying' — the word deliberate in the record changes what Sela has been hearing into something adult and confirmed."
       ],
       "knownFacts": [
-        "Usnea believes the six-fold pulse runs directly under Millbrook's drinking wells — the wells Sela and the whole village use",
         "Heard Mara reframe the ask: the elders carry the burden, not Sela",
         "The Thursday meeting is in the common house open room — she could stand at the door and watch",
         "Sela would speak last and briefly",
         "Thursday order: seedling → water → Usnea's account → Aevi → six-fold pattern → Sela last, tapping the rhythm once",
         "Pell's condition: she stands at the common house door Thursday and holds the right to withdraw Sela if the room sits wrong — this is non-negotiable and was acce",
         "A plain thanks with no ask attached lands differently than persuasion — Usnea left nothing unfinished",
-        "Honored her own condition precisely — at the threshold before testimony began"
+        "Honored her own condition precisely — at the threshold before testimony began",
+        "The system beneath the river is operating — not an accident, not decay"
       ],
       "skillsObserved": [
         "protective instinct under pressure",
@@ -931,10 +973,10 @@
         "keeping her own terms"
       ],
       "status": "active",
-      "statusNote": "Standing at the common house yard-door threshold — watching the proceedings; holds the right to withdraw Sela if the room sits wrong.",
+      "statusNote": "Standing at the common house yard-door threshold — very still, rope over arm, holding her right of withdrawal.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 9
+        "day": 10
       }
     },
     "orla": {
@@ -1074,22 +1116,27 @@
       },
       "relationship": 0,
       "history": [
-        "[d9] Seated at table center since dawn; looked at the seedling before looking at Mara; said 'tell it plainly' as a preference, not permission."
+        "[d9] Seated at table center since dawn; looked at the seedling before looking at Mara; said 'tell it plainly' as a preference, not permission.",
+        "[d10] Said nothing after Usnea's testimony. Eyes moved to the crystalline residue pinch. The silence reads as weight, not dismissal."
       ],
       "knownFacts": [
         "Leads the elder panel",
         "Responds to physical evidence first — consistent with Mara's planned order",
-        "Prefers plain speech; stated it aloud before testimony began"
+        "Prefers plain speech; stated it aloud before testimony began",
+        "The seep is geometric — pre-Transition, laid, not natural",
+        "The system counts six before resting — then repeats",
+        "Aevi assessed it as operating, not decaying"
       ],
       "skillsObserved": [
         "composed authority",
-        "economical direction"
+        "economical direction",
+        "controlled response under new information"
       ],
       "status": "active",
-      "statusNote": "Seated at the common house table, leading Thursday's elder presentation — waiting for testimony to begin.",
+      "statusNote": "Seated at table center — absorbed the testimony, has not yet spoken or moved.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 9
+        "day": 10
       }
     }
   },
@@ -1097,7 +1144,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d6] Mara reclaimed the conversation thread at Pell's stall after Usnea stepped back — reframed the ask around Sela's relief rather than the elders' need. Pell's jaw shifted; the moment is alive but unreso",
         "[d6] Pell asked about the speaker order at the Thursday meeting — the conversation at the stall has moved from anger to cautious interrogation; the open-door rule named as a path for Pell to observe.",
         "[d6] Usnea named the Thursday speaker order plainly at Pell's stall — seedling, water, testimony, Aevi, pattern, then Sela last and briefly. Pell repeated the phrase aloud. Permission still pending but con",
         "[d6] Day 6 morning: Pell set the coiled rope down and granted permission at her cord stall — the conversation closed here, complete. Pell's veto-at-the-door condition was accepted by Mara Wells in this spo",
@@ -1108,7 +1154,8 @@
         "[d9] Brynjar Andyrsson present inside the common house at the fire — agreed to stay and hear the elder presentation; his marker-question now enters the room.",
         "[d9] Thursday elder presentation formally opened — Usnea stepped forward from the common house threshold, Mara received the opening nod, yard witnesses assembled.",
         "[d9] Thursday elder presentation begun — Daybreak Mantle kindled at the common house threshold; full assembly drawn inside by the warmth before the first evidence was placed.",
-        "[d9] Evidence laid on the common house table at Thursday's elder presentation — pale seedling, vial, residue pinch. Dresh seated at center, called for plain speech before testimony began. Pell at the thres"
+        "[d9] Evidence laid on the common house table at Thursday's elder presentation — pale seedling, vial, residue pinch. Dresh seated at center, called for plain speech before testimony began. Pell at the thres",
+        "[d10] Usnea's testimony delivered at the common house table — seep, geometry, lattice-count, Aevi's assessment named plainly to the full elder panel. The word 'deliberate' spoken aloud in this room."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1200,7 +1247,7 @@
           "name": "Common House Table — Elder Presentation",
           "day": 9,
           "visited": true,
-          "note": "Physical evidence placed: seedling, vial, residue pinch. Dresh leading. Mara at the near end. Testimony sequence beginni"
+          "note": "Usnea's testimony complete — physical evidence and Aevi's assessment now part of the record. Memory glass, tuning-warden"
         }
       }
     },
@@ -1561,20 +1608,21 @@
           "[d8] Day 8 evening: all witnesses and evidence confirmed and relayed to Mara Wells. The sequence is complete — seedling, vial, residue, Usnea's testimony, Aevi's reading, six-fold pattern, the tuning-warde",
           "[d9] Thursday: gate-senior sanction confirmed by morning tone — tuning-warden en route. All witnesses and evidence intact. Dresh inside since dawn. Meeting opens on Usnea's readiness.",
           "[d9] Thursday morning: Daybreak Mantle opened the presentation — the room assembled and settled before the first word. Mara moving to the table; evidence sequence about to begin.",
-          "[d9] Thursday morning: physical evidence laid on the common house table in sequence — pale seedling, vial, residue pinch. Councilor Dresh present since dawn and leading the panel; called for plain speech. "
+          "[d9] Thursday morning: physical evidence laid on the common house table in sequence — pale seedling, vial, residue pinch. Councilor Dresh present since dawn and leading the panel; called for plain speech. ",
+          "[d10] Thursday morning: Usnea delivered testimony in sequence — seep location, geometric silt, root-contact lattice, Aevi's six-fold count and 'operating, not decaying' assessment — to the full elder panel."
         ],
         "links": [
-          "mara-wells",
-          "echo-river-contamination",
           "the-pale-seedlings",
           "millbrook",
           "the-six-fold-pattern",
           "sela-and-pell",
           "tuning-warden-gateline",
-          "fendt-filtration-engineer"
+          "fendt-filtration-engineer",
+          "aevi-reading-of-the-water",
+          "mara-wells"
         ],
         "createdDay": 1,
-        "updatedDay": 9
+        "updatedDay": 10
       },
       "evidence-for-the-elders": {
         "id": "evidence-for-the-elders",
@@ -2334,7 +2382,7 @@
     }
   },
   "companionBonds": {
-    "aevi": 6.5
+    "aevi": 7
   },
   "practice": {
     "schemaVersion": 1,
@@ -2357,12 +2405,6 @@
     ]
   },
   "establishedFacts": [
-    {
-      "id": "unknown-dockside-child",
-      "text": "The dock child's name is Sela. Her mother is Pell, who sells cord and hemp at Millbrook's east market stall. Pell's permission is needed for Sela to testify at Thursday's elder meeting.",
-      "day": 4,
-      "subjectId": "unknown-dockside-child"
-    },
     {
       "id": "mara-wells",
       "text": "Mara Wells has committed to approaching Pell at the east market stall at dawn on Day 5 to secure permission for Sela's testimony at Thursday's elder meeting.",
@@ -2595,6 +2637,12 @@
       "id": "contamination-evidence-for-the-elders",
       "text": "Physical evidence now laid on the common house table in sequence: pale turnip seedling, glass vial of gray-green river water, crystalline residue pinch. Dresh has seen them.",
       "day": 9,
+      "subjectId": "contamination-evidence-for-the-elders"
+    },
+    {
+      "id": "contamination-evidence-for-the-elders",
+      "text": "Usnea delivered plain testimony to Millbrook's assembled elders — seep location, geometric silt, six-fold lattice count, Aevi's assessment ('operating, not decaying') — in exact sequence. The word 'de",
+      "day": 10,
       "subjectId": "contamination-evidence-for-the-elders"
     }
   ],

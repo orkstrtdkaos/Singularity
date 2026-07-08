@@ -21,7 +21,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.19961853695117185
+    "spectrumId": -0.20463761010361325
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -200,23 +200,29 @@
       {
         "summary": "Brynjar and Usnea leave the common house and cross the lane to Mara's wayhouse.",
         "narration": "Usnea's warmth still hangs in the common house air — not heat exactly, more like the memory of a good fire, something that makes the shoulders drop and the breath slow. The two women finish their bowls without hurry. The apprentice prods the coals into a proper blaze. Nobody is holding anyone here.\n\nYou catch Usnea's ready look and give a small nod toward the lane. Time to go. You push up from the bench, sling the Traveler's Pack over one shoulder, and step around the long table toward the door. The cold morning air hits at the threshold — early-spring cold, the kind with teeth — and the wayhouse chimney is right there, a steady ribbon of woodsmoke curling up against the pale sky.\n\nThe lane is empty and quiet at this hour, packed earth still dark with dew. Somewhere up near the mill row a water wheel is turning, the low rhythmic knock of it carrying down through the cold. You walk the short stretch from the common house door to the wayhouse without hurry, Usnea at your side. Through the wayhouse window the banked-fire glow is visible — warm, deliberate, waiting. Mara is awake. She has been awake. The door stands just slightly ajar, smoke-smell and something cooking seeping through the gap.\n\nYou push it open and step inside."
+      },
+      {
+        "summary": "Usnea Beard: Evidence laid on the common house table; Councilor Dresh calls for plain speech; Pell takes her post at the threshold."
+      },
+      {
+        "summary": "Brynjar takes stock of the wayhouse — Mara alone, fire built, food ready, room deliberately cleared.",
+        "narration": "You let Usnea step past you and pull the door half-shut against the cold, buying yourself a breath to read the room. The wayhouse common room is low and warm — plank ceiling darkened by years of smoke, a single east-facing window throwing a bar of pale morning light across the long table. The banked fire has been fed up properly; it pops and settles with the confidence of a fire tended through the night. Something on the hearth smells of oats and dried herbs, the kind of porridge that's been sitting on a low heat since fourth watch.\n\nMara is behind the counter at the far end, not performing business — just standing, hands flat on the wood, watching you both come in. Her river-flat face gives nothing away, but the fire and the food are language enough: she stayed up. Whatever report you bring, she wanted it the moment it arrived. She's in the same coat she wore at the midnight dock two days ago, and if she slept at all it wasn't for long.\n\nNo one else is here. The common room benches are empty, the lane-door behind you the only entry. That means Mara kept it closed to morning traffic — unusual for a wayhouse, and deliberate. The room is hers and yours, and the open thread between all three of you pulls taut the moment your eyes meet hers.\n\nUsnea stands at your side, coat still dusted with dawn cold. Mara sets two bowls on the counter edge with the quiet efficiency of someone who knew exactly when you'd walk through the door."
       }
     ],
     "lastTurn": {
-      "narration": "Usnea's warmth still hangs in the common house air — not heat exactly, more like the memory of a good fire, something that makes the shoulders drop and the breath slow. The two women finish their bowls without hurry. The apprentice prods the coals into a proper blaze. Nobody is holding anyone here.\n\nYou catch Usnea's ready look and give a small nod toward the lane. Time to go. You push up from the bench, sling the Traveler's Pack over one shoulder, and step around the long table toward the door. The cold morning air hits at the threshold — early-spring cold, the kind with teeth — and the wayhouse chimney is right there, a steady ribbon of woodsmoke curling up against the pale sky.\n\nThe lane is empty and quiet at this hour, packed earth still dark with dew. Somewhere up near the mill row a water wheel is turning, the low rhythmic knock of it carrying down through the cold. You walk the short stretch from the common house door to the wayhouse without hurry, Usnea at your side. Through the wayhouse window the banked-fire glow is visible — warm, deliberate, waiting. Mara is awake. She has been awake. The door stands just slightly ajar, smoke-smell and something cooking seeping through the gap.\n\nYou push it open and step inside.",
-      "sceneSummary": "Brynjar and Usnea leave the common house and cross the lane to Mara's wayhouse.",
+      "narration": "You let Usnea step past you and pull the door half-shut against the cold, buying yourself a breath to read the room. The wayhouse common room is low and warm — plank ceiling darkened by years of smoke, a single east-facing window throwing a bar of pale morning light across the long table. The banked fire has been fed up properly; it pops and settles with the confidence of a fire tended through the night. Something on the hearth smells of oats and dried herbs, the kind of porridge that's been sitting on a low heat since fourth watch.\n\nMara is behind the counter at the far end, not performing business — just standing, hands flat on the wood, watching you both come in. Her river-flat face gives nothing away, but the fire and the food are language enough: she stayed up. Whatever report you bring, she wanted it the moment it arrived. She's in the same coat she wore at the midnight dock two days ago, and if she slept at all it wasn't for long.\n\nNo one else is here. The common room benches are empty, the lane-door behind you the only entry. That means Mara kept it closed to morning traffic — unusual for a wayhouse, and deliberate. The room is hers and yours, and the open thread between all three of you pulls taut the moment your eyes meet hers.\n\nUsnea stands at your side, coat still dusted with dawn cold. Mara sets two bowls on the counter edge with the quiet efficiency of someone who knew exactly when you'd walk through the door.",
+      "sceneSummary": "Brynjar takes stock of the wayhouse — Mara alone, fire built, food ready, room deliberately cleared.",
       "choices": [
         {
-          "label": "Give Mara a straight field report — east fork, grounded skiff, the stock trail, the gray soil above the pasture fence, the second boot prints — let her draw her own conclusions",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Lead with the facts — stock trail, sprung plank, stronger contamination ribbons upstream, the gray soil above the pasture fence, and the second set of boot prints coming back down",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
             "spectrumId": -0.2
           },
           "difficulty": 0,
           "intentTags": [
             "report",
-            "honest",
             "careful"
           ],
           "abilityId": null,
@@ -226,17 +232,16 @@
           "emergenceId": null
         },
         {
-          "label": "Lead with the heavy boots on the lane — put the unknown walker front and center before the upstream findings, and watch Mara's face when she hears it",
-          "attribute": "mental",
+          "label": "Ask about the heavy boots first — tell her what the apprentice heard, and watch her face when you do",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {
             "spectrumId": -0.1
           },
           "difficulty": 15,
           "intentTags": [
-            "scout",
             "study",
-            "careful"
+            "probe"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -245,37 +250,36 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Mara who else she's told about the contamination — before reporting anything — find out how contained this actually is",
+          "label": "Sit down and eat first — take the bowl she's offering, let the warmth settle in, and let Mara open at her own pace",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "spectrumId": -0.15
+            "spectrumId": 0.1
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "study",
+            "help",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Say nothing yet — take stock of who's in the wayhouse common room before opening up",
+          "label": "Lay the rivercraft reading on the table first — the contamination ribbons are columnar and tight, feeding a fast channel, getting stronger upstream. That's the shape of the problem.",
           "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "reason",
           "axes": {
             "spectrumId": -0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "report",
+            "study"
           ],
-          "abilityId": null,
+          "abilityId": "rivercraft",
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
@@ -293,28 +297,28 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room with a banked fire burning properly, the smell of woodsmoke and something cooking on the hearth. Morning light through a single east-facing window. Door just pushed open from the lane.",
+        "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut behind Brynjar and Usnea.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Present in the wayhouse — awake, fire maintained, something warm on the hearth; aware of arrivals."
+            "state": "Standing behind the counter, hands flat on the wood, two bowls set at the counter edge — watching Brynjar and Usnea, waiting for the report."
           },
           {
             "name": "Usnea Beard",
-            "state": "Stepped in from the lane alongside Brynjar; Daybreak Mantle warmth still faintly present; attentive."
+            "state": "Beside Brynjar, coat cold from the lane, attentive and still."
           }
         ],
         "objects": [
           "Banked hearth with active fire",
-          "Something cooking — smell of broth or porridge",
+          "Pot of oat porridge on the hearth — smells of dried herbs",
+          "Two bowls set on the counter edge",
           "Common room benches and long table",
-          "Mara's Traveler's Pack (or equivalent — her usual place behind the counter)",
-          "The lane visible through the still-open door"
+          "The lane visible through the half-shut door"
         ],
         "threads": [
-          "Mara expects a field report — east fork contamination, source, what was found",
+          "Mara expects a full field report — east fork contamination, what was found, what wasn't",
           "Heavy boots on the lane at second watch — heavier than a farmer, passed without stopping; direction and identity unknown",
-          "Dark-coated figure seen river road two days ago before dawn — identity unresolved",
+          "Dark-coated figure seen on river road two days ago before dawn — identity unresolved",
           "Second set of boot prints on the east bank trail running downstream — origin unresolved",
           "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream"
         ]
@@ -325,52 +329,70 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
-          "note": "Brynjar and Usnea have crossed the lane and entered the wayhouse — Mara is present, fire kept, something cooking; the report is about to begin.",
-          "learned": [],
-          "skillsObserved": [],
+          "note": "Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report.",
+          "learned": [
+            "Kept the common room clear of morning traffic — deliberate, not routine",
+            "Wore the same coat as the midnight dock watch; likely slept little or not at all"
+          ],
+          "skillsObserved": [
+            "overnight vigil",
+            "quiet hospitality as signal"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the wayhouse common room at sunrise; fire kept, food on; waiting for the east fork report from Brynjar and Usnea."
+          "statusNote": "In the wayhouse common room at sunrise — fire kept, food on, room deliberately cleared; waiting for Brynjar and Usnea's east fork report."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Brynjar and Usnea entered the wayhouse at sunrise to give Mara the field report — she was awake, fire up, food on the hearth.",
+          "note": "Wayhouse common room cleared of other guests at sunrise on day 3 — Mara kept it private for the east fork report.",
           "subPlace": {
             "name": "Mara's Wayhouse",
-            "note": "Active at sunrise — fire built up properly, something cooking, Mara present and waiting for the report.",
+            "note": "Common room cleared at sunrise; fire maintained overnight; two bowls of porridge set out; Mara waiting alone for the field report.",
             "visited": true
           }
         }
       ],
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "fact": "Cleared the wayhouse common room and maintained the fire through the night — she is treating the east fork report as serious enough to keep private. She did not sleep.",
+          "links": [
+            "echo-river-contamination",
+            "east-fork-run",
+            "millbrook"
+          ]
+        }
+      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room with a banked fire burning properly, the smell of woodsmoke and something cooking on the hearth. Morning light through a single east-facing window. Door just pushed open from the lane.",
+      "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut behind Brynjar and Usnea.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Present in the wayhouse — awake, fire maintained, something warm on the hearth; aware of arrivals."
+          "state": "Standing behind the counter, hands flat on the wood, two bowls set at the counter edge — watching Brynjar and Usnea, wai"
         },
         {
           "name": "Usnea Beard",
-          "state": "Stepped in from the lane alongside Brynjar; Daybreak Mantle warmth still faintly present; attentive."
+          "state": "Beside Brynjar, coat cold from the lane, attentive and still."
         }
       ],
       "objects": [
         "Banked hearth with active fire",
-        "Something cooking — smell of broth or porridge",
+        "Pot of oat porridge on the hearth — smells of dried herbs",
+        "Two bowls set on the counter edge",
         "Common room benches and long table",
-        "Mara's Traveler's Pack (or equivalent — her usual place behind the counter)",
-        "The lane visible through the still-open door"
+        "The lane visible through the half-shut door"
       ],
       "threads": [
-        "Mara expects a field report — east fork contamination, source, what was found",
+        "Mara expects a full field report — east fork contamination, what was found, what wasn't",
         "Heavy boots on the lane at second watch — heavier than a farmer, passed without stopping; direction and identity unknown",
-        "Dark-coated figure seen river road two days ago before dawn — identity unresolved",
+        "Dark-coated figure seen on river road two days ago before dawn — identity unresolved",
         "Second set of boot prints on the east bank trail running downstream — origin unresolved",
         "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream"
       ]
@@ -379,7 +401,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 5,
+    "hour": 6,
     "realAnchor": null
   },
   "companions": [],
@@ -420,7 +442,8 @@
         "[d2] Accepted Brynjar's plan without argument; offered the wayhouse pallet for the night and promised something hot at sunrise if he returns by then. Revealed the skiff holds (barely) a",
         "[d2] Walked Brynjar up the lane, settled him in the back-room pallet, said 'sunrise' and left without ceremony. Door closed before he could reply.",
         "[d2] Not present; Brynjar left before she had food ready. She expects a report by morning.",
-        "[d3] Brynjar and Usnea have crossed the lane and entered the wayhouse — Mara is present, fire kept, something cooking; the report is about to begin."
+        "[d3] Brynjar and Usnea have crossed the lane and entered the wayhouse — Mara is present, fire kept, something cooking; the report is about to begin.",
+        "[d3] Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report."
       ],
       "knownFacts": [
         "Runs the wayhouse up the lane from the dock",
@@ -428,17 +451,20 @@
         "Has kept a solo midnight watch on the river contamination for two weeks",
         "The rotting skiff at the dock is functional — barely — with a bailer under the thwart",
         "East fork: first braid approximately 3 km up; current increases significantly after dawn",
-        "She will have food ready at the wayhouse by sunrise if Brynjar returns"
+        "She will have food ready at the wayhouse by sunrise if Brynjar returns",
+        "Kept the common room clear of morning traffic — deliberate, not routine",
+        "Wore the same coat as the midnight dock watch; likely slept little or not at all"
       ],
       "skillsObserved": [
-        "patient observation",
         "quiet authority",
         "local river knowledge",
         "practical hospitality",
-        "economy of words"
+        "economy of words",
+        "overnight vigil",
+        "quiet hospitality as signal"
       ],
       "status": "active",
-      "statusNote": "In the wayhouse common room at sunrise; fire kept, food on; waiting for the east fork report from Brynjar and Usnea.",
+      "statusNote": "In the wayhouse common room at sunrise — fire kept, food on, room deliberately cleared; waiting for Brynjar and Usnea's east fork report.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -598,7 +624,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence.",
         "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
         "[d2] High pasture fence ~2 hrs upstream from the first braid: soil above it described as more mineral, coming up gray. A sheep fold exists above the fence — three ewes and a ram unaccounted for since autum",
         "[d2] A second set of boot prints discovered in the trail mud running downstream — smaller heel, fresher than upstream prints, made within the last day or two. Not the east bank traveler's boot.",
@@ -609,7 +634,8 @@
         "[d2] Common house visited at sunrise — public space, open door, banked hearth, long table; two local women at breakfast; no unusual presences",
         "[d2] Common house locals confirm the Venn family as the regular users of the east bank stock trail; a dark-coated figure was seen on the river road two mornings ago before dawn.",
         "[d3] A heavy-stepped unknown passed the common house on the wayhouse lane around second watch (pre-dawn) — noted by the apprentice, nobody entered.",
-        "[d3] Brynjar and Usnea entered the wayhouse at sunrise to give Mara the field report — she was awake, fire up, food on the hearth."
+        "[d3] Brynjar and Usnea entered the wayhouse at sunrise to give Mara the field report — she was awake, fire up, food on the hearth.",
+        "[d3] Wayhouse common room cleared of other guests at sunrise on day 3 — Mara kept it private for the east fork report."
       ],
       "flags": {
         "unknown_boots_lane": "second-watch-day3"
@@ -630,7 +656,7 @@
           "name": "Mara's Wayhouse",
           "day": 2,
           "visited": true,
-          "note": "Active at sunrise — fire built up properly, something cooking, Mara present and waiting for the report."
+          "note": "Common room cleared at sunrise; fire maintained overnight; two bowls of porridge set out; Mara waiting alone for the fie"
         },
         "east-fork-gravel-bar": {
           "name": "East Fork Gravel Bar",
@@ -784,7 +810,8 @@
         "facts": [
           "[d2] Runs Millbrook's wayhouse; self-described keeper of the village's difficult problems. Has watched the river contamination alone for two weeks. Suspects or is curious about the east fork as source.",
           "[d2] Has local knowledge of the east fork; confirmed the skiff is functional and will have food ready at the wayhouse at sunrise. Cautiously sharing the problem with Brynjar now.",
-          "[d2] An unnamed traveler on the east fork stock trail deflected a question about Mara's trustworthiness with quiet firmness — suggesting she has a positive reputation among people who use this trail, thoug"
+          "[d2] An unnamed traveler on the east fork stock trail deflected a question about Mara's trustworthiness with quiet firmness — suggesting she has a positive reputation among people who use this trail, thoug",
+          "[d3] Cleared the wayhouse common room and maintained the fire through the night — she is treating the east fork report as serious enough to keep private. She did not sleep."
         ],
         "links": [
           "echo-river-contamination",
@@ -794,7 +821,7 @@
           "east-bank-stock-trail"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "east-fork-run": {
         "id": "east-fork-run",

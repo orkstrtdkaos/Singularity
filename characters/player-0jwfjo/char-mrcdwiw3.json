@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 27,
+  "xp": 32,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -27,7 +27,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 70,
+  "energy": 65,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -143,42 +143,65 @@
       {
         "summary": "Brynjar reads the contamination ribbons through the alder and estimates the source 2–4 km further upstream; discovers a second set of boot prints on the trail running downstream.",
         "narration": "You slow your pace and let your eyes do the work — reading the east fork through the gaps in the alder screen the way you'd read a fire from the smoke, backward toward its source. The ribbons are finer close to the bank, coarser and more defined where the current drags them through the shallows. That matters. When mineral content intensifies like this — not dispersing, not fanning — it means the water hasn't had far to travel since it picked up the load. A wide, low-gradient stretch would spread the ribbons thin. Here they're still columnar, still coherent. The east fork is channeled tightly somewhere ahead, running fast and steep, and the source is feeding directly into that channel rather than leeching in slowly through bank soil.\n\nYou file the calculation away: the ribbons would look like this if the source were somewhere between two and four kilometers further upstream — close enough that the mineral content hasn't fully mixed into the water column, far enough that the gradient has had time to concentrate it. Past the high pasture fence, probably. Past wherever the traveler's sheep fold sits. Somewhere in that second ridge country the traveler came down from this morning.\n\nThe traveler is still a few paces ahead of you, moving steady. They haven't looked back. You match their pace and fall in behind them on the narrowing trail, and as you do you notice something you half-saw before and dismissed: the boot prints pressed into the softer mud at the trail edge here are not all the same direction. Most run upstream. One set, smaller and with a different heel shape, runs back down. Someone has made this trip recently, in both directions — and the downward prints are fresher, made when the mud was wetter, meaning whoever came down through here did so in the last day or two. It is not the traveler's boot — you can see those prints in front of you. Someone else has been this way."
+      },
+      {
+        "summary": "Brynjar challenges the east bank traveler to a name-for-help bout; they accept and lead him to a flat shelf above the flood line.",
+        "narration": "You pull up short on the trail and call ahead before the traveler rounds the alder. \"Here,\" you say, and there's enough of something in your voice that they do stop and look back. You lay it out square — a challenge, stakes and all, the kind of offer that at least has the dignity of honesty about it. Your fists aren't raised. You're just gesturing at a rough patch of flat trail between you. If I win, you give me your name. If you win, I help you with the fence problem. Deal?\n\nThe traveler stares at you for a moment that stretches long enough to count. Then something shifts behind their eyes — not warmth exactly, but something adjacent to it. Amusement, maybe, or a kind of grudging respect for the nerve of it. \"You want to fight me for my name.\" They say it flat, like they're testing the words for sense, and find them short. But they're still standing there, not walking away.\n\nThey turn fully toward you and look you over the way you might size up a ford — where's the depth, where's the current. \"Fine,\" they say at last. \"But I'm not fighting you on the trail. There's a flat shelf above the flood line, ten paces back.\" They don't wait for confirmation; they just angle up the bank toward it, assuming you'll follow. A sheep-person's practical calculus: the problem in front of them is more manageable than the awkward stranger behind them.\n\nThe shelf is maybe six paces across — packed earth, no loose stones, hemmed by a low root wall on one side and open air above the flood line on the other. The traveler shrugs off their patched wool coat and folds it over the root. They square up, weight easy and low, and look at you across the distance with the calm of someone who's wrestled wet sheep in the dark and doesn't find you particularly frightening. The east fork murmurs below. Morning light finally crests the ridge and hits the shelf gold and full. \"Name first, fight after,\" you'd said. They didn't agree to that order. Begin."
       }
     ],
     "lastTurn": {
-      "narration": "You slow your pace and let your eyes do the work — reading the east fork through the gaps in the alder screen the way you'd read a fire from the smoke, backward toward its source. The ribbons are finer close to the bank, coarser and more defined where the current drags them through the shallows. That matters. When mineral content intensifies like this — not dispersing, not fanning — it means the water hasn't had far to travel since it picked up the load. A wide, low-gradient stretch would spread the ribbons thin. Here they're still columnar, still coherent. The east fork is channeled tightly somewhere ahead, running fast and steep, and the source is feeding directly into that channel rather than leeching in slowly through bank soil.\n\nYou file the calculation away: the ribbons would look like this if the source were somewhere between two and four kilometers further upstream — close enough that the mineral content hasn't fully mixed into the water column, far enough that the gradient has had time to concentrate it. Past the high pasture fence, probably. Past wherever the traveler's sheep fold sits. Somewhere in that second ridge country the traveler came down from this morning.\n\nThe traveler is still a few paces ahead of you, moving steady. They haven't looked back. You match their pace and fall in behind them on the narrowing trail, and as you do you notice something you half-saw before and dismissed: the boot prints pressed into the softer mud at the trail edge here are not all the same direction. Most run upstream. One set, smaller and with a different heel shape, runs back down. Someone has made this trip recently, in both directions — and the downward prints are fresher, made when the mud was wetter, meaning whoever came down through here did so in the last day or two. It is not the traveler's boot — you can see those prints in front of you. Someone else has been this way.",
-      "sceneSummary": "Brynjar reads the contamination ribbons through the alder and estimates the source 2–4 km further upstream; discovers a second set of boot prints on the trail running downstream.",
+      "narration": "You pull up short on the trail and call ahead before the traveler rounds the alder. \"Here,\" you say, and there's enough of something in your voice that they do stop and look back. You lay it out square — a challenge, stakes and all, the kind of offer that at least has the dignity of honesty about it. Your fists aren't raised. You're just gesturing at a rough patch of flat trail between you. If I win, you give me your name. If you win, I help you with the fence problem. Deal?\n\nThe traveler stares at you for a moment that stretches long enough to count. Then something shifts behind their eyes — not warmth exactly, but something adjacent to it. Amusement, maybe, or a kind of grudging respect for the nerve of it. \"You want to fight me for my name.\" They say it flat, like they're testing the words for sense, and find them short. But they're still standing there, not walking away.\n\nThey turn fully toward you and look you over the way you might size up a ford — where's the depth, where's the current. \"Fine,\" they say at last. \"But I'm not fighting you on the trail. There's a flat shelf above the flood line, ten paces back.\" They don't wait for confirmation; they just angle up the bank toward it, assuming you'll follow. A sheep-person's practical calculus: the problem in front of them is more manageable than the awkward stranger behind them.\n\nThe shelf is maybe six paces across — packed earth, no loose stones, hemmed by a low root wall on one side and open air above the flood line on the other. The traveler shrugs off their patched wool coat and folds it over the root. They square up, weight easy and low, and look at you across the distance with the calm of someone who's wrestled wet sheep in the dark and doesn't find you particularly frightening. The east fork murmurs below. Morning light finally crests the ridge and hits the shelf gold and full. \"Name first, fight after,\" you'd said. They didn't agree to that order. Begin.",
+      "sceneSummary": "Brynjar challenges the east bank traveler to a name-for-help bout; they accept and lead him to a flat shelf above the flood line.",
       "choices": [
         {
-          "label": "Point out the second boot prints to the traveler and ask if they noticed anyone on the trail coming down",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Press hard from the start — close the distance fast and try to take them down before they find their footing",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {
-            "spectrumId": -0.1
+            "spectrumId": -0.3
           },
-          "difficulty": 0,
+          "difficulty": 20,
           "intentTags": [
-            "observe",
-            "share",
-            "open"
+            "attack",
+            "risky",
+            "gamble"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Say nothing yet — crouch and study the downward boot prints more carefully: heel depth, stride length, load weight, how fresh",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Keep light on your feet — read their stance and wait for an opening, don't give them yours",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "spectrumId": -0.2
+            "spectrumId": 0.1
           },
           "difficulty": 15,
           "intentTags": [
+            "careful",
             "scout",
-            "study",
+            "defend"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Try to talk through the bout itself — keep it loose and light, make it a game rather than a contest, let laughter do the work",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": 0.4
+          },
+          "difficulty": 20,
+          "intentTags": [
+            "persuade",
+            "help",
             "careful"
           ],
           "abilityId": null,
@@ -188,72 +211,63 @@
           "emergenceId": null
         },
         {
-          "label": "Share what you read from the water — your estimate of the source's distance — and use it to ask the traveler what terrain lies past the sheep fold in that second ridge country",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Use the terrain — you've been reading ground since before dawn; use the root wall and the slope to your advantage",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "spectrumId": 0
+            "spectrumId": -0.1
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "share",
-            "collaborate",
-            "practical"
+            "plan",
+            "scout",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Press ahead at a faster pace — the morning is burning and you need to get eyes on the high pasture fence country before you have to turn back for Mara's deadline",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "spectrumId": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "push",
-            "move",
-            "practical"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
         "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "east-fork-run",
+          "note": "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the flood line to settle it."
+        }
+      ],
       "scene": {
-        "setting": "East bank stock trail above the flood line, east fork of the Echo River. Pale gold light now cresting the eastern ridge — true sunrise minutes away. Trail has curved inland behind alder; east fork audible below and to the left. Gray-green mineral ribbons visible and noticeably stronger through brush gaps. Trail mud soft at the edges, boot prints legible.",
+        "setting": "A flat packed-earth shelf above the east fork flood line, hemmed by a root wall on one side and open hillside on the other. True sunrise gold now across the shelf. The east fork audible below and left; alder screen behind.",
         "npcsPresent": [
           {
             "name": "Unknown traveler (east bank)",
-            "state": "Walking a few paces ahead on the trail, eyes forward, pace steady — unaware Brynjar has stopped to read the trail surface"
+            "state": "Standing square on the shelf, patched wool coat folded on the root wall, weight low and easy — calm, sizing Brynjar up across six paces of open ground."
           }
         ],
         "objects": [
-          "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer under thwart",
-          "Gray-green mineral ribbons visible in east fork water through breaks in the alder — columnar, coherent, strengthening",
-          "Boot prints in trail mud — majority running upstream, one smaller-heeled set running downstream, fresher than the rest",
+          "Flat packed-earth shelf, six paces across",
+          "Root wall along one edge — low, ankle-height",
+          "Traveler's folded wool coat on the root wall",
           "Traveler's Pack (on Brynjar's back)",
           "Waterskin",
-          "Dried Rations"
+          "Dried Rations",
+          "East fork audible below — gray-green ribbons through the alder gaps"
         ],
         "threads": [
+          "Ritualized bout underway — stakes: traveler's name vs Brynjar's help with the fence problem",
           "Source estimated 2–4 km further upstream — past the high pasture fence",
-          "A second set of boot prints runs downstream, fresher than the upstream traffic — someone came down this trail in the last day or two",
-          "Traveler headed to high pasture fold above the fence — three ewes and a ram missing since autumn",
-          "Soil above the fence described as gray-mineral — possible surface contamination connection",
-          "Mara Wells expects a report by sunrise — morning is arriving fast",
-          "Traveler's name still unknown; relationship cooled but functional"
+          "Second set of boot prints in the trail mud running downstream — unaddressed",
+          "Mara Wells expects a report by sunrise — morning is here"
         ]
       },
       "npcUpdates": [
@@ -262,41 +276,38 @@
           "npcId": "unknown-east-bank-traveler",
           "name": "Unknown (east bank traveler)",
           "role": "Unnamed traveler on the east fork stock trail",
-          "note": "Walking ahead, unaware of the downstream boot prints Brynjar has just noticed. Still destination-focused — high pasture fold. Name still unasked this beat.",
+          "note": "Accepted Brynjar's challenge after a long beat of consideration — led him to a flat shelf above the flood line and squared up with calm, practical confidence. Shed the coat; weight easy and low. Name still unknown.",
           "learned": [
-            "Unaware Brynjar has stopped to read the trail surface — has not looked back"
+            "Accepted a ritualized bout with named stakes — willing to engage on Brynjar's terms even if skeptical",
+            "Chose the ground herself — knows to control terrain"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "composure under challenge",
+            "terrain selection",
+            "practical grappling stance"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Walking the east bank stock trail upstream with Brynjar; approaching the high pasture fence area; name still unknown"
+          "statusNote": "On the flat shelf above the east fork flood line, squared up for a ritualized bout with Brynjar — name vs fence-help. Coat off, calm, ready."
         }
       ],
-      "questUpdates": [
+      "factUpdates": [],
+      "placeUpdates": [
         {
-          "op": "progress",
-          "questId": "east-fork-run",
-          "note": "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints on the trail runs downstream, fresher than the rest — someone else has used this trail in the last day or two."
+          "note": "A flat packed-earth shelf above the east fork flood line exists approximately ten paces back from the main trail near the alder bend — used as bout ground; root wall on one side.",
+          "subPlace": {
+            "name": "East Fork Flood Shelf",
+            "note": "Flat ground above the flood line near the alder bend — used as bout ground between Brynjar and the east bank traveler.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "echo-river-contamination",
-          "label": "Echo River Contamination",
-          "kind": "mystery",
-          "fact": "Rivercraft reading of the east fork: contamination ribbons are still columnar and coherent at this distance, meaning the source is feeding directly into a tight, fast channel rather than leeching slowly through bank soil. Estimated 2–4 km further upstream — past the high pasture fence, likely in second-ridge country. Distance consistent with the ribbons not yet fully mixed into the water column.",
-          "links": [
-            "east-bank-stock-trail",
-            "high-pasture-fence",
-            "east-fork-run",
-            "millbrook"
-          ]
-        },
-        {
           "topic": "east-bank-stock-trail",
           "label": "East Bank Stock Trail",
           "kind": "mystery",
-          "fact": "A second set of boot prints runs downstream in the trail mud — smaller heel, different tread, and fresher than the upstream traffic (made when the mud was wetter, i.e. within the last day or two). Not the east bank traveler's boot. Someone else has traveled this trail recently in the downstream direction.",
+          "fact": "The east bank traveler accepted a ritualized bout — name for fence-help — with composed practicality. She chose the ground herself: a flat shelf above the flood line near the alder bend, ten paces off the main trail.",
           "links": [
             "echo-river-contamination",
             "east-fork-run",
@@ -304,48 +315,38 @@
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "A second set of boot prints discovered in the trail mud running downstream — smaller heel, fresher than upstream prints, made within the last day or two. Not the east bank traveler's boot.",
-          "subPlace": {
-            "name": "East Bank Stock Trail",
-            "note": "Second downward boot prints found — someone came down this trail recently, separate from the known traveler. Source estimated 2–4 km further upstream past the high pasture fence.",
-            "visited": true
-          }
-        }
-      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "East bank stock trail above the flood line, east fork of the Echo River. Pale gold light now cresting the eastern ridge — true sunrise minutes away. Trail has curved inland behind alder; east fork audible below and to the left. Gray-green mineral ribbons visible and noticeably stronger through brush gaps. Trail mud soft at the edges, boot prints legible.",
+      "setting": "A flat packed-earth shelf above the east fork flood line, hemmed by a root wall on one side and open hillside on the other. True sunrise gold now across the shelf. The east fork audible below and left; alder screen behind.",
       "npcsPresent": [
         {
           "name": "Unknown traveler (east bank)",
-          "state": "Walking a few paces ahead on the trail, eyes forward, pace steady — unaware Brynjar has stopped to read the trail surfac"
+          "state": "Standing square on the shelf, patched wool coat folded on the root wall, weight low and easy — calm, sizing Brynjar up a"
         }
       ],
       "objects": [
-        "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer",
-        "Gray-green mineral ribbons visible in east fork water through breaks in the alde",
-        "Boot prints in trail mud — majority running upstream, one smaller-heeled set run",
+        "Flat packed-earth shelf, six paces across",
+        "Root wall along one edge — low, ankle-height",
+        "Traveler's folded wool coat on the root wall",
         "Traveler's Pack (on Brynjar's back)",
         "Waterskin",
-        "Dried Rations"
+        "Dried Rations",
+        "East fork audible below — gray-green ribbons through the alder gaps"
       ],
       "threads": [
+        "Ritualized bout underway — stakes: traveler's name vs Brynjar's help with the fence problem",
         "Source estimated 2–4 km further upstream — past the high pasture fence",
-        "A second set of boot prints runs downstream, fresher than the upstream traffic — someone came down this trail in the last day or two",
-        "Traveler headed to high pasture fold above the fence — three ewes and a ram missing since autumn",
-        "Soil above the fence described as gray-mineral — possible surface contamination connection",
-        "Mara Wells expects a report by sunrise — morning is arriving fast"
+        "Second set of boot prints in the trail mud running downstream — unaddressed",
+        "Mara Wells expects a report by sunrise — morning is here"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [],
@@ -363,7 +364,8 @@
         "Skiff held on the gravel bar with rope-work and a stranger's help; plank still sprung. Upstream path now contested between a limping boat repair and the stock trail on foot.",
         "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past",
         "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas",
-        "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints"
+        "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints",
+        "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the f"
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -416,34 +418,35 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d2] Responded to Brynjar's shout from the stock trail; grabbed the bow painter without being asked; asked 'Heave or hold?' — practical, no fuss.",
         "[d2] Confirmed they came down the trail from the second ridge a couple of hours ago; trail holds to the high pasture fence roughly two km past the braid, narrow above that but passable.",
         "[d2] Brynjar's apology and full introduction — name, father's name, village of origin — landed without softening the chill. They closed the Mara topic with a single deflecting line ('Th",
         "[d2] Answered the straight question without deflection: headed to a high pasture fold above the fence to check on three ewes and a ram that didn't come down with the autumn flock. Also ",
-        "[d2] Walking ahead, unaware of the downstream boot prints Brynjar has just noticed. Still destination-focused — high pasture fold. Name still unasked this beat."
+        "[d2] Walking ahead, unaware of the downstream boot prints Brynjar has just noticed. Still destination-focused — high pasture fold. Name still unasked this beat.",
+        "[d2] Accepted Brynjar's challenge after a long beat of consideration — led him to a flat shelf above the flood line and squared up with calm, practical confidence. Shed the coat; weight"
       ],
       "knownFacts": [
-        "Observed the gray-green contamination further upstream — assessed it as visibly stronger there",
-        "Unmoved by charm and personal disclosure when their regard for Mara Wells is questioned",
         "Considers a bailer sufficient preparation — practical risk calculus",
         "Subject of Mara Wells is now a closed door",
         "Headed to a high pasture fold above the fence — three ewes and a ram missing since autumn",
         "Soil above the high pasture fence is more mineral than below it, comes up gray in places — noticed independently of the river question",
         "Estimates two hours to the fence at current pace",
-        "Unaware Brynjar has stopped to read the trail surface — has not looked back"
+        "Unaware Brynjar has stopped to read the trail surface — has not looked back",
+        "Accepted a ritualized bout with named stakes — willing to engage on Brynjar's terms even if skeptical",
+        "Chose the ground herself — knows to control terrain"
       ],
       "skillsObserved": [
-        "practical river-help",
-        "terrain reading",
-        "calm under uncertainty",
         "unprompted environmental observation",
         "terrain knowledge above the pasture fence",
-        "unprompted environmental observation — gray soil"
+        "unprompted environmental observation — gray soil",
+        "composure under challenge",
+        "terrain selection",
+        "practical grappling stance"
       ],
       "status": "active",
-      "statusNote": "Walking the east bank stock trail upstream with Brynjar; approaching the high pasture fence area; name still unknown",
+      "statusNote": "On the flat shelf above the east fork flood line, squared up for a ritualized bout with Brynjar — name vs fence-help. Coat off, calm, ready.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -473,7 +476,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d1] Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark.",
         "[d2] Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock.",
         "[d2] The rotting skiff confirmed functional by Mara — holds water, bailer under thwart; available for use at first light.",
         "[d2] Mara Wells's wayhouse has a pallet in the back room available to Brynjar at no charge; she will have hot food ready at sunrise.",
@@ -484,7 +486,8 @@
         "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence.",
         "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
         "[d2] High pasture fence ~2 hrs upstream from the first braid: soil above it described as more mineral, coming up gray. A sheep fold exists above the fence — three ewes and a ram unaccounted for since autum",
-        "[d2] A second set of boot prints discovered in the trail mud running downstream — smaller heel, fresher than upstream prints, made within the last day or two. Not the east bank traveler's boot."
+        "[d2] A second set of boot prints discovered in the trail mud running downstream — smaller heel, fresher than upstream prints, made within the last day or two. Not the east bank traveler's boot.",
+        "[d2] A flat packed-earth shelf above the east fork flood line exists approximately ten paces back from the main trail near the alder bend — used as bout ground; root wall on one side."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -522,6 +525,12 @@
           "day": 2,
           "visited": false,
           "note": "Named landmark ~2 km past the first braid; soil above goes gray-mineral; sheep fold beyond; east bank traveler's destina"
+        },
+        "east-fork-flood-shelf": {
+          "name": "East Fork Flood Shelf",
+          "day": 2,
+          "visited": true,
+          "note": "Flat ground above the flood line near the alder bend — used as bout ground between Brynjar and the east bank traveler."
         }
       }
     }
@@ -692,7 +701,8 @@
           "[d2] Someone was actively moving on the east bank trail at dawn — young, practical, traveling light. The trail is in current use, not merely historical.",
           "[d2] Trail is confirmed passable by recent foot traffic to the high pasture fence approximately 2 km past the first braid; narrows above that but does not vanish. Someone descended from the second ridge th",
           "[d2] The trail leads to a high pasture fold above the fence, ~2 hours upstream at trail pace. The traveler walking it now is checking on three missing sheep — a practical errand that coincidentally puts th",
-          "[d2] A second set of boot prints runs downstream in the trail mud — smaller heel, different tread, and fresher than the upstream traffic (made when the mud was wetter, i.e. within the last day or two). Not"
+          "[d2] A second set of boot prints runs downstream in the trail mud — smaller heel, different tread, and fresher than the upstream traffic (made when the mud was wetter, i.e. within the last day or two). Not",
+          "[d2] The east bank traveler accepted a ritualized bout — name for fence-help — with composed practicality. She chose the ground herself: a flat shelf above the flood line near the alder bend, ten paces off"
         ],
         "links": [
           "echo-river-contamination",

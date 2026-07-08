@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mr5ns3hh",
+  "playerKey": "player-54seyk",
+  "name": "Adelheid",
+  "origin": "harmonic",
+  "background": "medic",
+  "level": 1,
+  "xp": 13,
+  "attributes": {
+    "physical": 2,
+    "mental": 4,
+    "social": 3,
+    "practical": 4
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "echo_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "sonic_resonance",
+      "level": 1
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 25,
+  "health": 25,
+  "maxEnergy": 100,
+  "energy": 87,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "medics_satchel",
+      "name": "Medic's Satchel",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Herb rolls, boiled linen, needle and gut. Valley medicine — patient, practical, proven.",
+      "bonusTags": [
+        "heal",
+        "help"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "healing_draught",
+      "name": "Healing Draught",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Bitter green tincture from the terrace gardens. Knits small wounds and dulls big ones.",
+      "effects": {
+        "health": 8
+      },
+      "consumable": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "millbrook",
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "summary": "Adelheid arrives at Millbrook's river dock at dawn, finds thin catches and gray-green water, and is noticed by a sharp-eyed woman near the well.",
+        "narration": "The Echo River smells clean this morning — or almost clean. You arrived in Millbrook just before dawn, following the valley road down from the higher terraces, your Traveler's Pack pulling at your shoulders after three days of walking. Now the village is waking around you: smoke from cook-fires, the creak of water wheels catching the current, a dog barking at nothing near the granary. You're standing at the edge of the river dock, where wooden planks extend over brown-green water and two fishermen are hauling up nets with the particular silence of people who already know what they'll find.\n\nThe catch is thin. One of them, a heavyset woman with a sun-cracked face, shakes the net once and says nothing. The other, younger, stares at the water and then away. A faint gray-green iridescence hangs on the river's surface where the light catches it — like oil, but wrong. You've been long enough in mountain valleys to know this isn't right, but you've never seen this color before.\n\nNearby, the village well stands in a small plaza where two lanes meet. A handful of early risers are drawing water there instead of from the river, which tells you something about local habits. A woman in a patched green coat is moving between the well and the market stalls, directing a boy who's clearly her errand-runner, her manner efficient and appraising. She notices you noticing the river, and for a moment her eyes rest on your Medic's Satchel with calm, professional interest.\n\nYou don't know anyone here yet. The village doesn't know you. But the morning already has the quiet charge of a place where something is wrong and everyone is waiting for someone to say it first."
+      },
+      {
+        "summary": "Adelheid uses Echo Sense and discovers fish are avoiding the near bank; the riverbed shows an unnaturally flat, dense deposit.",
+        "narration": "You press your boot heel gently against the dock's worn planks and let the ability open — a quiet thing, more like tuning your ears to a lower register than any dramatic gesture. Echo Sense costs you four energy and gives you maybe two seconds of clean information.\n\nWhat comes back isn't nothing. Below the dock, the river runs at its usual early-spring push, current strong enough that you feel the planks shiver in your calves. Fish are present — more than the nets suggest — but they're hanging deep, pressed toward the opposite bank, as if the shallows under the dock are somewhere they'd rather not be. You map a dozen bodies clustered in one cold seam of the river where the bottom shelves into deeper water. In the immediate ten paces beneath you, the bottom itself is unusually flat and faintly dense — sediment, maybe, or something deposited in it. Not natural river-bottom texture.\n\nThe heavyset fisherwoman snaps her net once and mutters something you don't catch, then shoves it into a bucket. The young fisherman is still staring at a point three feet past his own reflection, the way people stare when they've already decided not to ask the question in front of them. Behind you, thirty paces up the lane, the woman in the patched green coat has stopped directing her errand-boy. She's looking at you with the direct, measuring calm of someone who catalogues strangers quickly and thoroughly.\n\nYou know two things the fishermen probably don't have language for yet: the fish aren't gone, they're avoiding something specific to this bank. And whatever is settling in the riverbed here is doing so with a flatness that silt doesn't usually manage on its own."
+      },
+      {
+        "summary": "Adelheid approaches the watching woman, who introduces herself as Mara Wells — Millbrook's de facto civic manager.",
+        "narration": "You turn from the water and walk the thirty paces up the lane toward her — no hesitation, no pretense of casualness. The woman in the patched green coat tracks your approach with the same measuring patience she's used since you arrived. Her errand-boy, maybe twelve, shifts from foot to foot and glances between you and her like he's waiting to see which way the weather breaks.\n\nShe speaks first, before you've quite closed the gap. \"Medic's Satchel, Harmonic cut to the stitching on the strap, and you spent four minutes watching a river that everyone here has decided not to look at.\" Her voice is dry, unhurried, the kind that expects to be answered honestly. \"You're not from Millbrook.\" It isn't a question. Her eyes drop briefly to the satchel, then back to your face.\n\nThe errand-boy takes his cue and sets down a cloth-wrapped bundle near the well's stone lip — something heavy, carefully packed — then steps back to a respectful distance. The woman extends a hand. Her grip, when she offers it, is firm and slightly rough, a worker's hand on a planner's frame. \"Mara Wells. I manage what passes for civic order in this village, which is less impressive than it sounds.\" A faint dry smile. \"And you are?\""
+      },
+      {
+        "summary": "Adelheid introduces herself honestly to Mara Wells, who offers a vague errand in return.",
+        "narration": "You take her hand — a firm grip, brief and direct. \"Adelheid. From Switzerland originally, though I've been living in the mountains above Jeonju for the past few years.\" You let that settle, then: \"Herbalist, mostly. Medic when someone needs it. I came down to learn what grows here before the season turns.\" A small pause, honest rather than dramatic. \"The water caught my eye because I've been watching rivers since I was seven, and that color doesn't belong there.\"\n\nMara Wells releases your hand and doesn't fill the silence immediately. She's reassessing — not suspiciously, more the way a careful person updates a working estimate. Behind you, the dock planks creak as the heavyset fisherwoman shifts her weight without approaching. The errand-boy glances at the cloth-wrapped bundle on the well's stone lip, then back to Mara, then carefully away.\n\n\"Adelheid.\" She says it once, like she's filing it. \"Switzerland is a long walk.\" Not quite a question. Her eyes drop briefly to your Medic's Satchel, then lift again. \"The plants here will be new to you, then. Some of what grows on the lower terraces has no name in any catalog I've seen — it's changed since the Transition, or it was always here and nobody wrote it down.\" She says it plainly, not as a gift, more as a fact she's deciding whether to use. \"I have an errand that would take someone with your eyes about an hour. The woman who used to do it left Millbrook three weeks ago and I haven't found a good replacement.\"\n\nShe doesn't look at the bundle yet. The morning light is strengthening behind her, first gold of early spring cutting along the lane, catching the faint iridescence on the river surface thirty paces down."
+      },
+      {
+        "summary": "```json\n{\n  \"narration\": \"You nod toward the cloth-wrapped bundle on the well's lip. \\\"I'll take it.",
+        "narration": "```json\n{\n  \"narration\": \"You nod toward the cloth-wrapped bundle on the well's lip. \\\"I'll take it. Where does it go?\\\" Simple, no conditions attached — and Mara's expression settles a notch, something confirmed rather than something decided.\\n\\nShe lifts the bundle and sets it in your hands. It's heavier than it looks — dense, maybe clay jars or packed root-stock, wrapped in oilcloth and bound with cord. \\\"Terrace three, east side. Ask for Piotr — he'll know what to do with it. Lane runs up behind the mill.\\\" She glances at the errand-boy, who takes the dismissal and vanishes around a stall corner. Then, quieter: \\\"There's a plant note inside. He doesn't need to know about that.\\\"\\n\\nYou fall into step together up the lane, away from the dock, market stalls half-open on either side and the smell of fresh bread cutting through the cool morning air. It's a natural moment to ask, and you take it: \\\"You mentioned plants with no catalog names on the lower terraces. I've been building out a new collection since I moved to Jeonju — there's a lot the old Swiss herbals don't account for, and that was before the Transition changed anything.\\\" You shift the bundle against your hip. \\\"What are you actually seeing?\\\"\\n\\nMara walks half a stride ahead, hands in her coat pockets, eyes on the lane. She takes a moment that feels considered rather than reluctant. \\\"Three I've found that don't match anything in the valley records. One's a creeper — grows on the damp stones near the lower irrigation channel, gray-green leaf, faint iridescence on the underside.\\\" She pauses just long enough to let that color register against everything you already noticed in the river. \\\"Started showing up about eighteen months ago. The others are slower-growing, harder to find. I have a cutting of one drying in my office.\\\" A sidelong glance. \\\"You'd know in about thirty seconds whether it's something you recognize.\\\"\",\n  \"sceneSummary\": \"Adelheid takes Mara's errand bundle and the two walk toward the eastern terraces, Mara describing three uncataloged plants — one with gray-green iridescent leaves, appearing eighteen months ago.\",\n  \"choices\": [\n    {\n      \"label\": \"Ask Mara directly about the gray-green iridescence — connect what she's describing to what you saw in the river\",\n      \"attribute\": \"mental\",\n      \"subAttribute\": \"insight\",\n      \"axes\": {},\n      \"difficulty\": 0,\n      \"intentTags\": [\"study\", \"connect\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": true\n    },\n    {\n      \"label\": \"Ask to see the cutting in her office before delivering the bundle — the plant detail might tell you something urgent\",\n      \"attribute\": \"social\",\n      \"subAttribute\": \"rapport\",\n      \"axes\": {},\n      \"difficulty\": 0,\n      \"intentTags\": [\"plan\", \"persuade\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": true\n    },\n    {\n      \"label\": \"Deliver the bundle to Piotr first, as asked — earn the trust before asking more questions\",\n      \"attribute\": \"practical\",\n      \"subAttribute\": \"wits\",\n      \"axes\": {},\n      \"difficulty\": 0,\n      \"intentTags\": [\"careful\", \"help\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": true\n    },\n    {\n      \"label\": \"Agree to look at the cutting, but steer the conversation toward who else in Millbrook has been watching the water and the plants — see if Mara is working this alone\",\n      \"attribute\": \"mental\",\n      \"subAttribute\": \"reason\",\n      \"axes\": {},\n      \"difficulty\": 15,\n      \"intentTags\": [\"scout\", \"study\", \"careful\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": false\n    }\n  ],\n  \"deeds\": [],\n  \"characterDeltas\": {\n    \"health\": 0,\n    \"energy\": 0,\n    \"inventoryAdd\": [],\n    \"inventoryRemove\": [],\n    \"xp\": 0\n  },\n  \"ledgerEvents\": [],\n  \"questUpdates\": [\n    {\n      \"op\": \"start\",\n      \"questId\": \"maras-errand\",\n      \"title\": \"Mara's Errand\",\n      \"summary\": \"Deliver a cloth-wrapped bundle (with a hidden plant note) to Piotr on the east side of terrace three — Mara's way of testing a newcomer's reliability.\",\n      \"giver\": \"Mara Wells\",\n      \"note\": \"Bundle is in Adelheid's hands. Contains jars or root-stock plus a concealed plant note; Piotr is the recipient.\",\n      \"xpReward\": 15\n    }\n  ],\n  \"scene\": {\n    \"setting\": \"Millbrook village lane, walking northeast from the well plaza toward the terrace lanes behind the mill. Early spring morning, sun fully up now, warming stone and fresh bread smell in the air. Adelheid carries the cloth-wrapped bundle; Mara Wells walks half a stride ahead.\",\n    \"npcsPresent\": [\n      {\"name\": \"Mara Wells\", \"state\": \"Walking beside Adelheid up the lane, hands in coat pockets, describing uncataloged plants in a measured, deliberate tone.\"}\n    ],\n    \"objects\": [\n      \"Cloth-wrapped bundle (heavy, oilcloth, cord-bound, now in Adelheid's arms — contains jars or root-stock plus a concealed plant note)\",\n      \"Market stalls half-open along the lane\",\n      \"Mill visible ahead at the lane's bend\",\n      \"Terrace lane rising behind the mill toward terrace three east\"\n    ],\n    \"threads\": [\n      \"Bundle must be delivered to Piotr on terrace three east — plant note inside is not for him to know about\",\n      \"Mara has described a gray-green iridescent creeper appearing ~18 months ago on damp stones near the lower irrigation channel — color matches the river\",\n      \"Mara has a cutting of one uncataloged plant drying in her office\",\n      \"Fish avoiding the near bank; riverbed unnaturally flat and dense under the dock\",\n      \"Fishermen at the dock still silent about the water\"\n    ]\n  },\n  \"npcUpdates\": [\n    {\n      \"op\": \"update\",\n      \"npcId\": \"mara-wells\",\n      \"name\": \"Mara Wells\",\n      \"role\": \"Millbrook civic manager\",\n      \"note\": \"Gave Adelheid the bundle errand with quiet instructions; disclosed the hidden plant note and Piotr's role; volunteered information about three uncataloged plants — including a gray-green iridescent creeper appearing 18 months ago near the lower irrigation channel. Has a cutting drying in her office.\",\n      \"learned\": [\n        \"She is actively tracking uncataloged plant species on the lower terraces — at least three identified\",\n        \"One plant has gray-green iridescent leaves and appeared ~18 months ago near the lower irrigation channel\",\n        \"She keeps a cutting in her office and is willing to show it to someone with botanical knowledge\",\n        \"She is using errands as a way to assess newcomers — the plant note hidden in the bundle suggests she has an information network of some kind\"\n      ],\n      \"skillsObserved\": [\"information economy\", \"botanical observation\", \"network management\"],\n      \"relationshipDelta\": 1,\n      \"status\": \"active\"\n    }\n  ],\n  \"placeUpdates\": [],\n  \"codexUpdates\": [\n    {\n      \"topic\": \"valley-flora-post-transition\",\n      \"label\": \"Valley Flora — Post-Transition\",\n      \"kind\": \"lore\",\n      \"fact\": \"Mara Wells has identified at least three plants on Millbrook's lower terraces with no match in valley records. One is a gray-green iridescent creeper growing on damp stones near the lower irrigation channel — it appeared approximately 18 months ago. The iridescent quality of its leaves matches the color of the river contamination. Mara has a cutting of one species drying in her office.\",\n      \"links\": [\"millbrook\", \"echo-river-contamination\", \"mara-wells\", \"maras-errand\"]\n    },\n    {\n      \"topic\": \"maras-errand\",\n      \"label\": \"Mara's Errand Network\",\n      \"kind\": \"person\",\n      \"fact\": \"Mara uses bundle deliveries as a trust test for newcomers. The bundle Adelheid carries contains a hidden plant note not intended for the recipient Piotr — suggesting Mara maintains a discreet information channel alongside her civic duties.\",\n      \"links\": [\"mara-wells\", \"millbrook\", \"maras-errand\"]\n    }\n  ],\n  \"timeAdvanceHours\": 0,\n  \"sceneEnded\": false\n}\n```"
+      },
+      {
+        "summary": "Mara confirms the errand to Piotr and quietly asks Adelheid to observe the uncatalogued plants on the east terrace — with permission to take cuttings.",
+        "narration": "You shift the bundle's weight to get a better feel for what's inside — dense and settled, the way packed roots or sealed clay sits differently from cloth or grain. Mara watches you find the balance without comment, which itself tells you something: she's used to people who handle things.\n\n\"Piotr,\" you repeat. \"Terrace three, east side, behind the mill. And the plant note stays between him and me.\" You meet her eyes to let her know you heard the second part clearly. She gives a single nod — not warm exactly, but satisfied. The kind of acknowledgment that passes between people who've decided, provisionally, to trust each other.\n\nShe doesn't let you go quite yet. Her voice drops enough that the fishwives at the stall twenty paces down the lane won't catch it. \"While you're up there — the east terrace borders the untended stretch. You'll see it. Plants coming up where nothing was catalogued before the Transition. I've been watching them for two seasons.\" A beat. \"If something looks like it doesn't belong, you have my permission to take a cutting. Carefully.\" The way she says *carefully* suggests she means something more specific than 'don't damage the roots.'\n\nShe steps back then, a clean dismissal — she has a village to manage and you have an errand to run. The morning is full now, light cutting down the lane between the stall awnings, and the path up toward the mill terraces begins just past the market's far end."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You shift the bundle's weight to get a better feel for what's inside — dense and settled, the way packed roots or sealed clay sits differently from cloth or grain. Mara watches you find the balance without comment, which itself tells you something: she's used to people who handle things.\n\n\"Piotr,\" you repeat. \"Terrace three, east side, behind the mill. And the plant note stays between him and me.\" You meet her eyes to let her know you heard the second part clearly. She gives a single nod — not warm exactly, but satisfied. The kind of acknowledgment that passes between people who've decided, provisionally, to trust each other.\n\nShe doesn't let you go quite yet. Her voice drops enough that the fishwives at the stall twenty paces down the lane won't catch it. \"While you're up there — the east terrace borders the untended stretch. You'll see it. Plants coming up where nothing was catalogued before the Transition. I've been watching them for two seasons.\" A beat. \"If something looks like it doesn't belong, you have my permission to take a cutting. Carefully.\" The way she says *carefully* suggests she means something more specific than 'don't damage the roots.'\n\nShe steps back then, a clean dismissal — she has a village to manage and you have an errand to run. The morning is full now, light cutting down the lane between the stall awnings, and the path up toward the mill terraces begins just past the market's far end.",
+      "sceneSummary": "Mara confirms the errand to Piotr and quietly asks Adelheid to observe the uncatalogued plants on the east terrace — with permission to take cuttings.",
+      "choices": [
+        {
+          "label": "Head straight to Terrace Three — deliver the bundle to Piotr and keep your eyes open on the way",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "observe"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pause at the untended stretch before delivering — study the uncatalogued plants in the morning light before anyone else is up there",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Echo Sense as you climb — feel out whether the terrace soil or the plant beds have that same flat, dense quality you detected in the riverbed",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "echo_sense",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stop at the dock first — a word with the fishermen while the morning is still quiet, before you climb",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "start",
+          "questId": "maras-errand",
+          "title": "Mara's Errand",
+          "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
+          "giver": "Mara Wells",
+          "note": "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only.",
+          "xpReward": 15
+        }
+      ],
+      "scene": {
+        "setting": "Millbrook village lane beside the well plaza, morning light now full and cutting between market stall awnings. Adelheid stands holding the cloth-wrapped bundle; Mara Wells has stepped back. The dock is thirty paces behind; the path toward the mill terraces begins at the lane's far end.",
+        "npcsPresent": [
+          {
+            "name": "Mara Wells",
+            "state": "Has stepped back — clean dismissal, already scanning the lane for her next task."
+          },
+          {
+            "name": "Heavyset fisherwoman",
+            "state": "Still at the dock, sorting her thin catch."
+          },
+          {
+            "name": "Young fisherman",
+            "state": "Still at the dock, staring at the gray-green water."
+          }
+        ],
+        "objects": [
+          "Cloth-wrapped bundle (now in Adelheid's hands — heavy, oilcloth and cord, clay jars or packed root-stock within; plant note inside)",
+          "Village well (stone lip, unattended now)",
+          "Dock planks over gray-green river water (thirty paces down the lane)",
+          "Two fishing nets with thin catch",
+          "Market stalls open along the lane"
+        ],
+        "threads": [
+          "Bundle must be delivered to Piotr, Terrace Three east, behind the mill — plant note inside is private",
+          "Mara has asked Adelheid to observe and potentially take cuttings from uncatalogued plants on the east terrace — her warning to do it 'carefully' implies something more than horticultural caution",
+          "Fish avoiding the near bank; riverbed unnaturally flat and dense under the dock",
+          "Fishermen at the dock still not speaking about the water openly"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Millbrook civic manager",
+          "note": "Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'carefully'.",
+          "learned": [
+            "Mara has been watching the uncatalogued east-terrace plants for two full seasons",
+            "She considers them significant enough to task a stranger with observing them on a first meeting",
+            "Her use of 'carefully' when describing cutting them implies she suspects they may react or matter in a way beyond ordinary botany"
+          ],
+          "skillsObserved": [
+            "information economy — shares just enough to create obligation",
+            "calm authority under morning bustle"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Adelheid is carrying Mara's cloth-wrapped bundle to Piotr on Terrace Three east, with a private plant note inside — errand accepted on Day 1 morning.",
+          "subjectId": "mara-wells"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons.",
+          "subPlace": {
+            "name": "Terrace Three East",
+            "note": "Farming terrace above the mill; east edge borders uncatalogued post-Transition plant growth. Piotr works or lives here.",
+            "visited": false
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "uncatalogued-terrace-plants",
+          "label": "Uncatalogued Terrace Plants",
+          "kind": "mystery",
+          "fact": "Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — her instruction to take cuttings 'carefully' implies more than ordinary botanical caution.",
+          "links": [
+            "millbrook",
+            "mara-wells",
+            "valley-flora-post-transition",
+            "maras-errand"
+          ]
+        },
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "fact": "Mara granted Adelheid permission to observe and take cuttings from the uncatalogued east-terrace plants — she has been tracking them for two seasons and trusts Adelheid's herbalist eye enough to delegate the observation on first meeting.",
+          "links": [
+            "millbrook",
+            "uncatalogued-terrace-plants",
+            "maras-errand"
+          ]
+        }
+      ],
+      "timeAdvanceHours": 0,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Millbrook village lane beside the well plaza, morning light now full and cutting between market stall awnings. Adelheid stands holding the cloth-wrapped bundle; Mara Wells has stepped back. The dock is thirty paces behind; the path toward the mill terraces begins at the lane's far end.",
+      "npcsPresent": [
+        {
+          "name": "Mara Wells",
+          "state": "Has stepped back — clean dismissal, already scanning the lane for her next task."
+        },
+        {
+          "name": "Heavyset fisherwoman",
+          "state": "Still at the dock, sorting her thin catch."
+        },
+        {
+          "name": "Young fisherman",
+          "state": "Still at the dock, staring at the gray-green water."
+        }
+      ],
+      "objects": [
+        "Cloth-wrapped bundle (now in Adelheid's hands — heavy, oilcloth and cord, clay j",
+        "Village well (stone lip, unattended now)",
+        "Dock planks over gray-green river water (thirty paces down the lane)",
+        "Two fishing nets with thin catch",
+        "Market stalls open along the lane"
+      ],
+      "threads": [
+        "Bundle must be delivered to Piotr, Terrace Three east, behind the mill — plant note inside is private",
+        "Mara has asked Adelheid to observe and potentially take cuttings from uncatalogued plants on the east terrace — her warning to do it 'carefully' implies somethi",
+        "Fish avoiding the near bank; riverbed unnaturally flat and dense under the dock",
+        "Fishermen at the dock still not speaking about the water openly"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 14,
+    "realAnchor": null
+  },
+  "companions": [],
+  "quests": [
+    {
+      "id": "maras-errand",
+      "title": "Mara's Errand",
+      "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
+      "giver": "Mara Wells",
+      "locationId": null,
+      "status": "active",
+      "progress": [
+        "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only."
+      ],
+      "startedAt": "2026-07-08T18:17:05.695Z"
+    }
+  ],
+  "npcRegistry": {
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "role": "Millbrook civic manager",
+      "description": "A sharp-eyed woman in a patched green coat; worker's hands, a planner's bearing, dry unhurried speech. Spotted Adelheid's satchel and Harmonic stitching before a word was exchanged.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Approached Adelheid directly, identified her as an outsider, introduced herself by name and role. Waiting for Adelheid's introduction.",
+        "[d1] Heard Adelheid's honest introduction — name, Swiss origin, Korean residency, herbalist-medic work. Filed it efficiently. Mentioned that valley plants have changed since the Transit",
+        "[d1] Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'car"
+      ],
+      "knownFacts": [
+        "She manages what passes for civic order in Millbrook",
+        "She noticed the Medic's Satchel and Harmonic stitching on sight",
+        "She has an errand-boy running something heavy to or from the well",
+        "Mara's previous errand-runner left Millbrook three weeks ago and hasn't been replaced",
+        "Mara considers the untamed lower-terrace plants significant enough to mention unprompted",
+        "Mara has been watching the uncatalogued east-terrace plants for two full seasons",
+        "She considers them significant enough to task a stranger with observing them on a first meeting",
+        "Her use of 'carefully' when describing cutting them implies she suspects they may react or matter in a way beyond ordinary botany"
+      ],
+      "skillsObserved": [
+        "sharp observation",
+        "calm authority",
+        "information economy — shares just enough to create interest",
+        "information economy — shares just enough to create obligatio",
+        "calm authority under morning bustle"
+      ],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds."
+    }
+  },
+  "placeMemory": {
+    "millbrook": {
+      "visits": 1,
+      "notes": [
+        "[d1] The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons."
+      ],
+      "flags": {},
+      "subPlaces": {
+        "terrace-three-east": {
+          "name": "Terrace Three East",
+          "day": 1,
+          "visited": false,
+          "note": "Farming terrace above the mill; east edge borders uncatalogued post-Transition plant growth. Piotr works or lives here."
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: The six-fold subsurface pulse confirmed reaching Millbrook's drinking wells — the pre-Transition system's reach now encompasses the village water supply, not merely the river and irrigation channels (ne"
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: Pell granted permission for Sela to testify at Thursday's elder meeting — on condition that Pell herself stands at the door and holds the right to call it off. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: A second anonymous annotation appeared on the Edge District assembly notice board — 'ask the river' — added in fresh ink on filtration run night. (near radiant plateau edge)"
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: The Harmonic Heights gateline warden agreed to testify at Millbrook's Thursday elder meeting about six-count channel light witnessed three springs ago — placing the conduit pulse at the Heights years  ("
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-08T17:54:30.076Z"
+  },
+  "bio": {
+    "hometown": "a small village in Switzerland",
+    "residence": "a mountain village in South Korea",
+    "livelihood": "making herbal remedies",
+    "hobbies": "watercolor painting, tea with the villagers",
+    "motivation": "she had to move to South Korea due to her parents' occupation",
+    "story": "Adelheid was always learning about plants in Switzerland and was known in her village for clever remedies and even special cough drops. She has been learning the new plants in South Korea and has studied with other naturopaths and herbalists and is creating her own now."
+  },
+  "subAttributes": {
+    "strength": 2,
+    "agility": 2,
+    "reason": 4,
+    "insight": 4,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 4,
+    "wits": 4
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "echo-river-contamination": {
+        "id": "echo-river-contamination",
+        "label": "Echo River Contamination",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Echo River runs with a gray-green iridescence on the surface, visible at Millbrook's dock on Day 1 morning. Fish catches are thin. Villagers draw from the well rather than the river without saying",
+          "[d1] Echo Sense reveals fish are actively avoiding the shallows near Millbrook's dock, clustering in deep cold water on the far bank. The riverbed beneath the dock is unnaturally flat and dense — not consi"
+        ],
+        "links": [
+          "millbrook"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "mara-wells": {
+        "id": "mara-wells",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d1] Mara Wells manages civic order in Millbrook — she spotted Adelheid's Medic's Satchel and Harmonic stitching immediately and initiated contact, suggesting she was already looking for someone useful.",
+          "[d1] Mara granted Adelheid permission to observe and take cuttings from the uncatalogued east-terrace plants — she has been tracking them for two seasons and trusts Adelheid's herbalist eye enough to deleg"
+        ],
+        "links": [
+          "millbrook",
+          "echo-river-contamination",
+          "uncatalogued-terrace-plants",
+          "maras-errand"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "valley-plants": {
+        "id": "valley-plants",
+        "label": "Valley Flora — Post-Transition",
+        "kind": "lore",
+        "facts": [
+          "[d1] Mara Wells notes that plants on the lower terraces around Millbrook have changed since the Transition — some have no name in any catalog. Either they evolved, or they were always here unrecorded. Pote"
+        ],
+        "links": [
+          "millbrook",
+          "mara-wells"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "uncatalogued-terrace-plants": {
+        "id": "uncatalogued-terrace-plants",
+        "label": "Uncatalogued Terrace Plants",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — "
+        ],
+        "links": [
+          "millbrook",
+          "mara-wells",
+          "valley-flora-post-transition",
+          "maras-errand"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "grantsVersion": 1,
+  "customAbilities": {},
+  "companionBonds": {},
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "echo_sense": 2,
+      "sonic_resonance": 2
+    },
+    "coActivations": {},
+    "aspirations": [
+      {
+        "abilityId": "chord_of_mending",
+        "since": "2026-07-08T17:56:44.256Z",
+        "progress": 0
+      }
+    ]
+  },
+  "establishedFacts": [
+    {
+      "id": "mara-wells",
+      "text": "Adelheid is carrying Mara's cloth-wrapped bundle to Piotr on Terrace Three east, with a private plant note inside — errand accepted on Day 1 morning.",
+      "day": 1,
+      "subjectId": "mara-wells"
+    }
+  ],
+  "precursorAccess": [],
+  "backfillVersion": 1,
+  "sharedSceneId": "millbrook--2026-07-08T17-58-43-164Z",
+  "opLossPending": false
+}

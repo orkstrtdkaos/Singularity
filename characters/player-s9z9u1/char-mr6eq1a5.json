@@ -34,10 +34,10 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.08996944914520653,
-    "concrete_abstract": -0.02371786812702678,
+    "concrete_abstract": 0.00746802527932456,
     "spectrumId": -0.21505916698911481,
     "dark_light": 0.19177414280214844,
-    "falsehood_truth": 0.21167648750000004,
+    "falsehood_truth": 0.23609266312500002,
     "violence_peace": 0.09439212500000001
   },
   "attunement": 3,
@@ -266,24 +266,26 @@
       {
         "summary": "Mental rehearsal and light-gathering both fail — the 'why' behind Fendt's act is the gap that breaks concentration.",
         "narration": "You settle deeper into the limestone hollow and let your attention do two things at once — a mistake you realize only when it's too late to stop it.\n\nThe rehearsal comes easily enough at first: the pale seedling, the crystalline residue pinch, Orla's Memory Glass warm against your heartwood, the six-fold pulse, Sela's tapping fingers, Pell at the door. A clean sequence, each piece in its place. You reach for the light at the same time — a quiet, economical gather, morning sun pooling into the upper canopy of your branch-mass, the kind of restrained working you've done a hundred times as you walk through orchards coaxing reluctant fruit into ripeness. Nothing dramatic. Just presence and patience and accumulated practice.\n\nBut the two threads catch on each other. The moment you bring Fendt into the sequence — the sealed tube, the pour, the second figure's dark coat — your attention snags on the gap you still can't answer: *why.* The question opens like a crack underfoot, and the light you were gathering scatters instead of pooling. Not a burn, not a surge-backlash — just the quiet failure of divided concentration, the light sliding off your branches like water off morning stone. Aevi's motes dim slightly, not in alarm but in something closer to recognition.\n\n\"The same hand,\" the swarm says again, very quietly, from somewhere near your knee. Not an answer — more like a reminder that the thing you're missing is the thing that would make the sequence whole. The evidence you carry names *what* and *who.* Nobody yet has named *why*, and your mind keeps finding that absence and falling into it, scattering whatever else you were holding."
+      },
+      {
+        "summary": "Aevi names the load-bearing truth: Fendt's pouring and the Disputed Zone site's reactivation are steps in a single plan — someone gave coordinated instructions to both.",
+        "narration": "You stop trying to do two things at once and simply ask.\n\n\"Aevi. 'The same hand.' Tell me what you mean.\"\n\nThe motes drift up from knee-height, brightening — not the flare of urgency but the slow, patient bloom of something that has been waiting to be asked. They settle into a loose knot in front of your face, the teal light clean in the morning air.\n\n\"Fendt poured into the river.\" A pause — not hesitation, but the kind of careful spacing that means the next piece matters. \"The nanite reclamation site in the upper Disputed Zone reactivated. The six-fold pulse is settling into the valley's water and soil.\" Another pause. \"These are not separate events reacting to each other. They are steps. Someone gave instructions — to Fendt, and to the site — and the instructions fit together. The contamination is not what Fendt caused. It is what Fendt completed.\"\n\nAevi dims slightly, as if the saying of it costs something. The motes hover close, very still.\n\n\"I do not know the hand. I know the shape of the grip.\""
       }
     ],
     "lastTurn": {
-      "narration": "You settle deeper into the limestone hollow and let your attention do two things at once — a mistake you realize only when it's too late to stop it.\n\nThe rehearsal comes easily enough at first: the pale seedling, the crystalline residue pinch, Orla's Memory Glass warm against your heartwood, the six-fold pulse, Sela's tapping fingers, Pell at the door. A clean sequence, each piece in its place. You reach for the light at the same time — a quiet, economical gather, morning sun pooling into the upper canopy of your branch-mass, the kind of restrained working you've done a hundred times as you walk through orchards coaxing reluctant fruit into ripeness. Nothing dramatic. Just presence and patience and accumulated practice.\n\nBut the two threads catch on each other. The moment you bring Fendt into the sequence — the sealed tube, the pour, the second figure's dark coat — your attention snags on the gap you still can't answer: *why.* The question opens like a crack underfoot, and the light you were gathering scatters instead of pooling. Not a burn, not a surge-backlash — just the quiet failure of divided concentration, the light sliding off your branches like water off morning stone. Aevi's motes dim slightly, not in alarm but in something closer to recognition.\n\n\"The same hand,\" the swarm says again, very quietly, from somewhere near your knee. Not an answer — more like a reminder that the thing you're missing is the thing that would make the sequence whole. The evidence you carry names *what* and *who.* Nobody yet has named *why*, and your mind keeps finding that absence and falling into it, scattering whatever else you were holding.",
-      "sceneSummary": "Mental rehearsal and light-gathering both fail — the 'why' behind Fendt's act is the gap that breaks concentration.",
+      "narration": "You stop trying to do two things at once and simply ask.\n\n\"Aevi. 'The same hand.' Tell me what you mean.\"\n\nThe motes drift up from knee-height, brightening — not the flare of urgency but the slow, patient bloom of something that has been waiting to be asked. They settle into a loose knot in front of your face, the teal light clean in the morning air.\n\n\"Fendt poured into the river.\" A pause — not hesitation, but the kind of careful spacing that means the next piece matters. \"The nanite reclamation site in the upper Disputed Zone reactivated. The six-fold pulse is settling into the valley's water and soil.\" Another pause. \"These are not separate events reacting to each other. They are steps. Someone gave instructions — to Fendt, and to the site — and the instructions fit together. The contamination is not what Fendt caused. It is what Fendt completed.\"\n\nAevi dims slightly, as if the saying of it costs something. The motes hover close, very still.\n\n\"I do not know the hand. I know the shape of the grip.\"",
+      "sceneSummary": "Aevi names the load-bearing truth: Fendt's pouring and the Disputed Zone site's reactivation are steps in a single plan — someone gave coordinated instructions to both.",
       "choices": [
         {
-          "label": "Let Aevi speak — ask directly what 'the same hand' means; stop carrying the phrase unanswered",
+          "label": "Ask what the shape of the grip means — press Aevi on what kind of entity or organization gives instructions to both a Precursor site and a living engineer",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.6,
-            "falsehood_truth": 0.7
+            "concrete_abstract": 0.7
           },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "listen",
             "careful"
           ],
           "abilityId": null,
@@ -293,38 +295,17 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight to read the valley floor below — find whether the ford's disturbed water still carries a readable light-trace from this distance",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.7,
-            "concrete_abstract": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Set the 'why' aside — do one thing only: run the evidence sequence clean, no light-work, just the order of presentation until it is second nature",
+          "label": "Sit with it — this reframes Thursday entirely. The elders need to hear not just what Fendt did but that it was a step in something larger. Rehearse how to name that without overreaching the evidence",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
-            "concrete_abstract": 0.2,
-            "falsehood_truth": 0.8
+            "concrete_abstract": 0.4,
+            "falsehood_truth": 0.6
           },
           "difficulty": 0,
           "intentTags": [
             "plan",
-            "careful",
-            "study"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -333,12 +314,11 @@
           "emergenceId": null
         },
         {
-          "label": "Rise and move — the hollow has done its work; descend to the valley floor and let forward motion settle what stillness won't",
+          "label": "Rise and move — carry this toward the Heights. The question of who gave the instructions is one for the elders and the Heights together, not for a limestone hollow on a hillside",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
-            "concrete_abstract": 0.2,
-            "violence_peace": 0.1
+            "violence_peace": 0.2
           },
           "difficulty": 0,
           "intentTags": [
@@ -348,6 +328,25 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Old Roads to check whether the Precursor alignments running underfoot here connect — not just in pulse, but in structure — to the reclamation site Aevi named in the Disputed Zone",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "risky"
+          ],
+          "abilityId": "old_roads",
+          "energyCost": 7,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -361,27 +360,33 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "contamination-evidence-for-the-elders",
+          "note": "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger."
+        }
+      ],
       "scene": {
-        "setting": "A shallow limestone hollow carved by an old drainage cut in the gravel shoulder above the valley floor — south-facing overhang trapping early spring warmth, Echo River visible below in morning light, Harmonic Heights terracing across the valley to the west in morning shadow.",
+        "setting": "A shallow limestone hollow in the gravel shoulder above the valley floor — south-facing overhang, Echo River flat and gleaming below, Harmonic Heights terracing visible across the valley in morning shadow.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Motes dimmed slightly, settled near knee-height — quietly repeating 'the same hand', dimmer than usual, as if recognizing the failure of divided attention"
+            "state": "Hovering at face-height, motes in a close still knot — dimmed slightly after speaking, holding the space after the words"
           }
         ],
         "objects": [
           "Orla's Memory Glass — warm against heartwood",
-          "Gravel descent path — continuing down toward valley floor",
+          "Gravel descent path — continuing toward valley floor",
           "Echo River — flat spring gleams below",
-          "Harmonic Heights terracing — visible across the valley, pale rose-gray stonework"
+          "Harmonic Heights terracing — pale rose-gray stonework, morning shadow"
         ],
         "threads": [
-          "Fendt and second figure on south road — purpose and destination unknown, behind plateau bulk",
-          "Three braided Precursor alignments confirmed underfoot throughout descent — six-count pulse steady",
-          "Thursday elder presentation — all evidence intact, Harmonic Heights reachable before deadline",
-          "Junction-node beneath south switchback — Aevi named 'the same hand'; still unresolved",
-          "Aevi's repeated phrase — 'the same hand' — not yet explained; concentration failure surfaced the gap: the evidence names what and who, but not why"
+          "Aevi's new framing: Fendt and the Disputed Zone site received coordinated instructions — a single directing hand, shape unknown",
+          "Thursday elder presentation — evidence intact, but the scope has shifted; elders will need to hear 'step in a plan', not just 'deliberate act'",
+          "Fendt and second figure on south road — purpose still unknown, now more troubling given coordinated-instruction frame",
+          "Old Roads alignments underfoot — six-count pulse steady; structural connection to upper Disputed Zone site unexplored",
+          "Harmonic Heights reachable before Thursday — path open"
         ]
       },
       "npcUpdates": [
@@ -390,26 +395,35 @@
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence — nanite-mote swarm",
-          "note": "Motes dimmed slightly at the concentration failure — not in alarm but in recognition. Repeated 'the same hand' again from near the knee, unprompted, as Usnea's rehearsal broke apart on the unanswered 'why'.",
+          "note": "Named the coordinating logic directly when asked: Fendt's act and the Disputed Zone reactivation are steps in a single set of instructions from one directing hand. Added: 'I do not know the hand. I know the shape of the grip.'",
           "learned": [
-            "Aevi appears to be using 'the same hand' as a signal toward the missing piece — the motive behind Fendt's act — not merely a description of Precursor architecture"
+            "The contamination is not what Fendt caused — it is what Fendt completed; the reactivation site and Fendt's pouring are coordinated steps",
+            "Aevi can distinguish between separate events reacting to each other and events that are steps in a single plan",
+            "Aevi does not know the identity of the directing hand, but recognizes the structural shape of coordinated instruction"
           ],
           "skillsObserved": [
-            "pattern recognition",
-            "patient repetition of an incomplete truth"
+            "pattern synthesis across disconnected events",
+            "careful epistemic precision — naming what is known and what is not"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present in the limestone hollow, motes near knee-height, quietly persistent about 'the same hand'"
+          "statusNote": "Present in the limestone hollow — dimmed slightly after naming the coordinated-instruction frame, holding close and still"
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Fendt's pouring into the Echo River and the Precursor reclamation site's reactivation in the upper Disputed Zone are coordinated steps in a single plan — not separate events. A directing hand gave instructions to both. Identity of that hand is unknown.",
+          "subjectId": "fendt-filtration-engineer"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand' from knee-height.",
-          "flag": {
-            "rehearsal_failure": "why_unknown",
-            "aevi_signal": "the_same_hand_repeated"
+          "note": "Aevi named the coordinating-instruction frame here — limestone hollow is where the evidence sequence became a plan with a directing hand behind it.",
+          "subPlace": {
+            "name": "Limestone Hollow — Gravel Shoulder Rest",
+            "note": "Site of Aevi's disclosure: Fendt and the Disputed Zone site received coordinated instructions from a single directing hand.",
+            "visited": true
           }
         }
       ],
@@ -417,14 +431,30 @@
         {
           "topic": "fendt-filtration-engineer",
           "label": "Fendt — Filtration Engineer",
-          "kind": "mystery",
-          "fact": "Day 8 morning: the evidence sequence names what Fendt did and who he is — but not why. The gap is load-bearing: without motive, the elders have an act without an explanation. Aevi's repeated 'the same hand' may be pointing at the answer.",
+          "kind": "person",
+          "fact": "Day 8 hollow: Aevi names Fendt's act not as cause but as completion — a step in coordinated instructions given alongside the Disputed Zone reactivation. Someone directed both. The 'why' is still open; the 'who gave the order' is now the real question.",
           "links": [
             "echo-river-contamination",
+            "the-six-fold-pattern",
             "orlas-memory-glass-the-ford-record",
             "contamination-evidence-for-the-elders",
+            "precursor-junction-node-south-switchback",
+            "two-figures-south-road-at-dawn"
+          ]
+        },
+        {
+          "topic": "coordinating-hand",
+          "label": "The Directing Hand",
+          "kind": "mystery",
+          "fact": "Aevi confirmed: the Disputed Zone reclamation site's reactivation and Fendt's deliberate pouring are steps in a single plan from one directing source. Aevi does not know the identity — only the shape of the grip: coordinated instructions given to both a Precursor system and a living engineer.",
+          "links": [
+            "fendt-filtration-engineer",
+            "echo-river-contamination",
             "the-six-fold-pattern",
-            "precursor-alignment-plateau-rim"
+            "contamination-evidence-for-the-elders",
+            "precursor-junction-node-south-switchback",
+            "two-figures-south-road-at-dawn",
+            "radiant-plateau-edge-district"
           ]
         }
       ],
@@ -432,32 +462,32 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A shallow limestone hollow carved by an old drainage cut in the gravel shoulder above the valley floor — south-facing overhang trapping early spring warmth, Echo River visible below in morning light, Harmonic Heights terracing across the valley to the west in morning shadow.",
+      "setting": "A shallow limestone hollow in the gravel shoulder above the valley floor — south-facing overhang, Echo River flat and gleaming below, Harmonic Heights terracing visible across the valley in morning shadow.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Motes dimmed slightly, settled near knee-height — quietly repeating 'the same hand', dimmer than usual, as if recognizin"
+          "state": "Hovering at face-height, motes in a close still knot — dimmed slightly after speaking, holding the space after the words"
         }
       ],
       "objects": [
         "Orla's Memory Glass — warm against heartwood",
-        "Gravel descent path — continuing down toward valley floor",
+        "Gravel descent path — continuing toward valley floor",
         "Echo River — flat spring gleams below",
-        "Harmonic Heights terracing — visible across the valley, pale rose-gray stonework"
+        "Harmonic Heights terracing — pale rose-gray stonework, morning shadow"
       ],
       "threads": [
-        "Fendt and second figure on south road — purpose and destination unknown, behind plateau bulk",
-        "Three braided Precursor alignments confirmed underfoot throughout descent — six-count pulse steady",
-        "Thursday elder presentation — all evidence intact, Harmonic Heights reachable before deadline",
-        "Junction-node beneath south switchback — Aevi named 'the same hand'; still unresolved",
-        "Aevi's repeated phrase — 'the same hand' — not yet explained; concentration failure surfaced the gap: the evidence names what and who, but not why"
+        "Aevi's new framing: Fendt and the Disputed Zone site received coordinated instructions — a single directing hand, shape unknown",
+        "Thursday elder presentation — evidence intact, but the scope has shifted; elders will need to hear 'step in a plan', not just 'deliberate act'",
+        "Fendt and second figure on south road — purpose still unknown, now more troubling given coordinated-instruction frame",
+        "Old Roads alignments underfoot — six-count pulse steady; structural connection to upper Disputed Zone site unexplored",
+        "Harmonic Heights reachable before Thursday — path open"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -472,14 +502,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Orla's memory glass is now in Usnea's keeping — a second physical evidence thread for Thursday: a Radiant engineer named, a deliberate act recorded in light, a valley-floor witness who saw it herself.",
         "Orla named the practical danger: Fendt may know the glass was taken; the south-face road passes his filtration array; the lower switchback warden shift answers to array supervisors during active filtr",
         "Old Roads confirms the south-face road is passable at surface level but a buried Precursor alignment runs perpendicular to the lower switchback — older than Fendt's warden post. Aevi resonated with re",
         "The Amber Lath keeper confirms the filtration array output count has been off for three consecutive runs — the district's own quiet record showing an anomaly that precedes Usnea's arrival and aligns w",
         "Eastern rim descent reveals three braided Precursor alignments beneath the plateau rim all running the six-count pulse — the distribution network is larger than Millbrook; the same hand built the plat",
         "Prism Sight surge from the rim confirms contamination signature at the ford and Millbrook, and the six-count pulse visible in valley light — but two pre-dawn figures climbing the south road in working",
         "Old Roads surge confirms a Precursor junction-node beneath the south road switchback — the filtration array was built on top of it deliberately. The six-count pulse fired from the node when Fendt's fi",
-        "Eastern rim descent completed cleanly — Fendt and second figure left behind on south road. Memory glass intact. Eastern valley floor reached; Harmonic Heights accessible before Thursday."
+        "Eastern rim descent completed cleanly — Fendt and second figure left behind on south road. Memory glass intact. Eastern valley floor reached; Harmonic Heights accessible before Thursday.",
+        "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -989,7 +1019,6 @@
     "radiant_plateau_edge": {
       "visits": 1,
       "notes": [
-        "[d6] Eastern Rim Descent named as operational route — longer than south-face road by half a morning, but passes no active array.",
         "[d7] The Edge District assembly notice board now carries two anonymous annotations: 'whose count?' (earlier) and 'ask the river' (Day 7, fresh ink, filtration run night).",
         "[d7] Keeper confirmed the filtration output count is posted on the district board after each run and has been off for three consecutive runs — no official explanation, annotation left standing. This is dis",
         "[d7] Usnea slept a full night in the east-facing room — rested and present before the eastern rim descent at dawn.",
@@ -1000,7 +1029,8 @@
         "[d8] Fendt and a second figure in a dark coat were observed climbing the south road before dawn on Day 8 — moving with deliberate purpose, not a routine array check. The second figure is shorter, darker co",
         "[d8] Eastern rim descent traversed successfully Day 8 morning — all three braided Precursor alignments crossed underfoot at intervals, six-count pulse steady throughout. Cliff shoulder confirmed as full si",
         "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
-        "[d8] Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand'"
+        "[d8] Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand'",
+        "[d8] Aevi named the coordinating-instruction frame here — limestone hollow is where the evidence sequence became a plan with a directing hand behind it."
       ],
       "flags": {
         "memory_glass_transferred": "true",
@@ -1087,7 +1117,7 @@
           "name": "Limestone Hollow — Gravel Shoulder Rest",
           "day": 8,
           "visited": true,
-          "note": "Natural drainage bowl in the slope above the valley floor — south overhang, morning warmth, good sightlines west to the "
+          "note": "Site of Aevi's disclosure: Fendt and the Disputed Zone site received coordinated instructions from a single directing ha"
         }
       }
     }
@@ -1789,7 +1819,8 @@
           "[d6] Fendt knows the memory glass existed at the ford-side boulder — he placed what it records there. He may know it has been removed. The south-face road to the valley floor passes his array, and tonight'",
           "[d7] The south-face secondary filtration array's output count has been off for three consecutive runs — the district board's own accounting shows a measurable discrepancy that supervisors have not explaine",
           "[d7] Fendt stopped at the Precursor junction-node beneath the south road switchback at dawn, Day 7 — the six-count pulse fired once from the node when he did. Whether he knows what he is standing on or is ",
-          "[d8] Day 8 morning: the evidence sequence names what Fendt did and who he is — but not why. The gap is load-bearing: without motive, the elders have an act without an explanation. Aevi's repeated 'the same"
+          "[d8] Day 8 morning: the evidence sequence names what Fendt did and who he is — but not why. The gap is load-bearing: without motive, the elders have an act without an explanation. Aevi's repeated 'the same",
+          "[d8] Day 8 hollow: Aevi names Fendt's act not as cause but as completion — a step in coordinated instructions given alongside the Disputed Zone reactivation. Someone directed both. The 'why' is still open;"
         ],
         "links": [
           "echo-river-contamination",
@@ -1958,6 +1989,22 @@
           "echo-river-contamination",
           "contamination-evidence-for-the-elders",
           "aevi-reading-of-the-water"
+        ],
+        "createdDay": 8,
+        "updatedDay": 8
+      },
+      "coordinating-hand": {
+        "id": "coordinating-hand",
+        "label": "The Directing Hand",
+        "kind": "mystery",
+        "facts": [
+          "[d8] Aevi confirmed: the Disputed Zone reclamation site's reactivation and Fendt's deliberate pouring are steps in a single plan from one directing source. Aevi does not know the identity — only the shape "
+        ],
+        "links": [
+          "fendt-filtration-engineer",
+          "echo-river-contamination",
+          "the-six-fold-pattern",
+          "contamination-evidence-for-the-elders"
         ],
         "createdDay": 8,
         "updatedDay": 8
@@ -2186,6 +2233,12 @@
       "text": "Eastern rim descent completed on Day 8 morning — clean passage to valley floor, no interception. Memory glass intact. Fendt and second figure last seen climbing south road, now behind plateau bulk.",
       "day": 8,
       "subjectId": null
+    },
+    {
+      "id": "fendt-filtration-engineer",
+      "text": "Fendt's pouring into the Echo River and the Precursor reclamation site's reactivation in the upper Disputed Zone are coordinated steps in a single plan — not separate events. A directing hand gave ins",
+      "day": 8,
+      "subjectId": "fendt-filtration-engineer"
     }
   ],
   "precursorAccess": [],

@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 0,
+  "xp": 5,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -25,7 +25,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -83,135 +83,56 @@
       {
         "summary": "Brynjar arrives by river at Millbrook's dark dock and is quietly assessed by a watchful local woman.",
         "narration": "The river brings you in just after dark, your small craft kissing the dock pilings with a hollow knock that echoes up the empty bank. Millbrook smells of woodsmoke, turned earth, and something faintly mineral — a green-gray tang off the water that you notice before you see it, a faint iridescence where lamplight catches the current near the dock. You tie off with your Hemp Rope (30 ft), looping it twice around a post worn smooth by a hundred other ropes, and step ashore onto planks that creak but hold.\n\nThe village is mostly shuttered. A single oil lamp swings on a hook above the dock steps, throwing amber rings on the mist. Upstream, water wheels turn in the dark — slow, patient rotations you can hear more than see. Someone has left a wooden crate of river stones arranged into a rough map near the dock steps; children's work, or a grown person's restlessness. The dock itself holds two flat-bottomed ferries and a rotting skiff that hasn't moved in months, plus a coil of old line and a battered tin cup someone forgot.\n\nThe only figure still out is a heavyset woman in her fifties sitting on an overturned barrel at the top of the dock steps, wrapped in a roughspun coat, watching you tie off with the calm attention of someone who has watched a thousand arrivals and found most of them wanting. She doesn't call out or step forward — just waits to see what you do. A wooden bucket sits beside her, its rim still damp. Behind her, up the lane, one window glows amber in what looks like a tavern or a wayhouse: conversation murmur, no music."
+      },
+      {
+        "summary": "Adelheid: Mara confirms the errand to Piotr and quietly asks Adelheid to observe the uncatalogued plants on the east terrace — with permission to take cuttings."
+      },
+      {
+        "summary": "Adelheid: Bundle delivered to Piotr on Terrace Three east; Adelheid observes the uncatalogued silver-stemmed plants at the terrace's edge."
+      },
+      {
+        "summary": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it",
+        "narration": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it — the way a man checks a line, nothing more. The water is close enough to touch. You don't touch it.\n\nThe color is wrong in the way that takes a riverman to name precisely: not algae, which blooms green and thick and smells of rot; not silt, which runs brown-gray and settles if you let a cup stand. This is a mineral iridescence, thin as oil on a cold morning but without the slick, rainbow shimmer of oil. Gray-green. Faint. It moves with the current rather than on top of it, as if something in the water column itself is lit from within. The smell confirms it — clean in the way that river smell is clean, no decay — but underneath that, something older. Stone. The inside of a cave. A smell that belongs underground and has no business being this far down.\n\nThe current reads normal for early spring snowmelt: good volume, steady pace, the cold that tells you the source is still high snowpack and not yet the warmer ground-fed trickle of late season. Whatever is producing the discoloration is upstream, dissolved evenly enough that it isn't pooling or streaking — it's been traveling a long way. Your weather-read off the water says tomorrow will be overcast, probably a light rain by midmorning, which will push the river up two hand-spans by nightfall. More volume means the color dilutes, which means most people will stop seeing it tomorrow and think the problem has passed on its own.\n\nWhen you straighten up and turn back toward the dock, the woman on the barrel still hasn't moved. She's watching you with the particular patience of someone who has decided that what a stranger does in the first two minutes tells her more than anything they'll say afterward. Her battered tin cup rests against her knee. Up the lane, the wayhouse window throws its square of amber warmth into the mist, and somewhere above the terraces, invisible in the dark, Adelheid is moving among silver-stemmed plants that have no right to be there either."
       }
     ],
     "lastTurn": {
-      "narration": "The river brings you in just after dark, your small craft kissing the dock pilings with a hollow knock that echoes up the empty bank. Millbrook smells of woodsmoke, turned earth, and something faintly mineral — a green-gray tang off the water that you notice before you see it, a faint iridescence where lamplight catches the current near the dock. You tie off with your Hemp Rope (30 ft), looping it twice around a post worn smooth by a hundred other ropes, and step ashore onto planks that creak but hold.\n\nThe village is mostly shuttered. A single oil lamp swings on a hook above the dock steps, throwing amber rings on the mist. Upstream, water wheels turn in the dark — slow, patient rotations you can hear more than see. Someone has left a wooden crate of river stones arranged into a rough map near the dock steps; children's work, or a grown person's restlessness. The dock itself holds two flat-bottomed ferries and a rotting skiff that hasn't moved in months, plus a coil of old line and a battered tin cup someone forgot.\n\nThe only figure still out is a heavyset woman in her fifties sitting on an overturned barrel at the top of the dock steps, wrapped in a roughspun coat, watching you tie off with the calm attention of someone who has watched a thousand arrivals and found most of them wanting. She doesn't call out or step forward — just waits to see what you do. A wooden bucket sits beside her, its rim still damp. Behind her, up the lane, one window glows amber in what looks like a tavern or a wayhouse: conversation murmur, no music.",
-      "sceneSummary": "Brynjar arrives by river at Millbrook's dark dock and is quietly assessed by a watchful local woman.",
+      "narration": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it — the way a man checks a line, nothing more. The water is close enough to touch. You don't touch it.\n\nThe color is wrong in the way that takes a riverman to name precisely: not algae, which blooms green and thick and smells of rot; not silt, which runs brown-gray and settles if you let a cup stand. This is a mineral iridescence, thin as oil on a cold morning but without the slick, rainbow shimmer of oil. Gray-green. Faint. It moves with the current rather than on top of it, as if something in the water column itself is lit from within. The smell confirms it — clean in the way that river smell is clean, no decay — but underneath that, something older. Stone. The inside of a cave. A smell that belongs underground and has no business being this far down.\n\nThe current reads normal for early spring snowmelt: good volume, steady pace, the cold that tells you the source is still high snowpack and not yet the warmer ground-fed trickle of late season. Whatever is producing the discoloration is upstream, dissolved evenly enough that it isn't pooling or streaking — it's been traveling a long way. Your weather-read off the water says tomorrow will be overcast, probably a light rain by midmorning, which will push the river up two hand-spans by nightfall. More volume means the color dilutes, which means most people will stop seeing it tomorrow and think the problem has passed on its own.\n\nWhen you straighten up and turn back toward the dock, the woman on the barrel still hasn't moved. She's watching you with the particular patience of someone who has decided that what a stranger does in the first two minutes tells her more than anything they'll say afterward. Her battered tin cup rests against her knee. Up the lane, the wayhouse window throws its square of amber warmth into the mist, and somewhere above the terraces, invisible in the dark, Adelheid is moving among silver-stemmed plants that have no right to be there either.",
+      "sceneSummary": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it",
+      "scene": null,
       "choices": [
         {
-          "label": "Approach the woman directly — greet her, mention you're passing through and looking for a place to sleep.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Look around carefully",
+          "attribute": "mental",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "introduce",
+            "investigate",
             "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          ]
         },
         {
-          "label": "Crouch at the dock's edge and read the river — check the water color, current, and smell with a riverman's eye before doing anything else.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Press on",
+          "attribute": "physical",
           "axes": {},
           "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "rivercraft",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "intentTags": []
         },
         {
-          "label": "Secure the craft properly, then head straight for the lit window — find the wayhouse and get a meal and a roof before anything else.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Give the woman a respectful nod and ask plainly: 'That water's wrong. How long has it been running that color?'",
+          "label": "Talk to whoever is nearby",
           "attribute": "social",
-          "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "introduce",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "scene": {
-        "setting": "Millbrook's river dock at night, early spring. Brynjar's craft is tied to a worn piling; the dock is empty except for the woman on her barrel and scattered dock detritus. A single lamp swings overhead. The lit wayhouse window glows up the lane behind her.",
-        "npcsPresent": [
-          {
-            "name": "Unknown woman, fifties, heavyset",
-            "state": "Seated on an overturned barrel at the top of the dock steps, watching Brynjar without speaking. Damp bucket beside her."
-          }
-        ],
-        "objects": [
-          "Worn dock pilings, Hemp Rope (30 ft) tied off",
-          "Two flat-bottomed ferries and a rotting skiff",
-          "A coil of old line",
-          "A battered tin cup",
-          "A child's arrangement of river stones in a rough map shape",
-          "A swinging oil lamp on a hook",
-          "A wooden bucket (damp rim)"
-        ],
-        "threads": [
-          "The woman is watching Brynjar and waiting — she hasn't spoken or moved",
-          "The river shows faint gray-green iridescence under lamplight",
-          "The lit wayhouse window suggests company and possibly food up the lane"
-        ]
-      },
-      "npcUpdates": [],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Millbrook dock at night: gray-green iridescence visible in the river under lamplight. An unknown local woman keeps a night watch here.",
-          "subPlace": {
-            "name": "Millbrook River Dock",
-            "note": "Wooden dock with two ferries and a rotting skiff; single lamp; top of steps leads up the lane to the wayhouse.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "echo-river-contamination",
-          "label": "Echo River Contamination",
-          "kind": "mystery",
-          "fact": "Even at night the Echo River shows a faint gray-green iridescence under lamplight at Millbrook's dock. The smell is mineral, not biological.",
-          "links": [
-            "millbrook"
+            "rapport"
           ]
         }
       ],
-      "timeAdvanceHours": 0,
-      "sceneEnded": false
+      "deeds": [],
+      "characterDeltas": {},
+      "relationshipDeltas": [],
+      "ledgerEvents": [],
+      "sceneEnded": false,
+      "_opNote": "This beat's state updates were lost — the GM will restate them next turn."
     },
     "sceneState": {
       "setting": "Millbrook's river dock at night, early spring. Brynjar's craft is tied to a worn piling; the dock is empty except for the woman on her barrel and scattered dock detritus. A single lamp swings overhead. The lit wayhouse window glows up the lane behind her.",
@@ -240,7 +161,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [],
@@ -376,7 +297,9 @@
   "companionBonds": {},
   "practice": {
     "schemaVersion": 1,
-    "uses": {},
+    "uses": {
+      "rivercraft": 1
+    },
     "coActivations": {},
     "aspirations": [
       {
@@ -390,5 +313,10 @@
   "precursorAccess": [],
   "backfillVersion": 1,
   "sharedSceneId": "millbrook--2026-07-08T17-58-43-164Z",
-  "opLossPending": false
+  "opLossPending": true,
+  "opLossLog": [
+    {
+      "at": "2026-07-08T18:24:42.775Z"
+    }
+  ]
 }

@@ -108,21 +108,43 @@
       {
         "summary": "Mara confirms the errand to Piotr and quietly asks Adelheid to observe the uncatalogued plants on the east terrace — with permission to take cuttings.",
         "narration": "You shift the bundle's weight to get a better feel for what's inside — dense and settled, the way packed roots or sealed clay sits differently from cloth or grain. Mara watches you find the balance without comment, which itself tells you something: she's used to people who handle things.\n\n\"Piotr,\" you repeat. \"Terrace three, east side, behind the mill. And the plant note stays between him and me.\" You meet her eyes to let her know you heard the second part clearly. She gives a single nod — not warm exactly, but satisfied. The kind of acknowledgment that passes between people who've decided, provisionally, to trust each other.\n\nShe doesn't let you go quite yet. Her voice drops enough that the fishwives at the stall twenty paces down the lane won't catch it. \"While you're up there — the east terrace borders the untended stretch. You'll see it. Plants coming up where nothing was catalogued before the Transition. I've been watching them for two seasons.\" A beat. \"If something looks like it doesn't belong, you have my permission to take a cutting. Carefully.\" The way she says *carefully* suggests she means something more specific than 'don't damage the roots.'\n\nShe steps back then, a clean dismissal — she has a village to manage and you have an errand to run. The morning is full now, light cutting down the lane between the stall awnings, and the path up toward the mill terraces begins just past the market's far end."
+      },
+      {
+        "summary": "Bundle delivered to Piotr on Terrace Three east; Adelheid observes the uncatalogued silver-stemmed plants at the terrace's edge.",
+        "narration": "The lane behind the mill is quieter than the well plaza — fewer stalls, more mud, the smell of turned earth and water-wheel damp. You shift the bundle against your hip and follow the path upward as it narrows between low stone walls. Early-spring growth pushes through the gaps: chickweed, dead nettle, the occasional volunteer barley. Nothing unusual yet, but you're paying attention the way Mara's word 'carefully' lodged in your mind like a splinter.\n\nTerrace Three announces itself as a wider shelf of land cut into the slope, bordered by a low retaining wall on the downhill side. Most of it is tidy — rows of early brassicas under light mulch, irrigation channels cut clean. The east edge is different. You notice it before you're even looking for it: the growth there is denser and lower to the ground, spreading in a way that doesn't follow the terrace's layout. Leaves with a faint silvery underside. Stems that branch in pairs at every node, very regular, almost too regular. No catalog entry surfaces in your memory to match the shape. You make a note to come back.\n\nPiotr is easy to find — a compact man in his fifties, kneeling at the far end of the terrace patching an irrigation channel with river clay, gray-streaked hair pushed back under a faded cloth cap. He looks up when he hears your footsteps and his gaze goes straight to the bundle before it reaches your face. He straightens, wipes his hands on his thighs, and comes to meet you. \"From Mara,\" you say, which is all you need to say. He takes the bundle in both hands with a care that tells you the clay jars inside matter to him, sets it on the wall, and begins working the cord loose with practiced fingers — then stops, glances at you. \"There's a note?\" \"Inside.\" \"Good.\" He doesn't open it in front of you."
       }
     ],
     "lastTurn": {
-      "narration": "You shift the bundle's weight to get a better feel for what's inside — dense and settled, the way packed roots or sealed clay sits differently from cloth or grain. Mara watches you find the balance without comment, which itself tells you something: she's used to people who handle things.\n\n\"Piotr,\" you repeat. \"Terrace three, east side, behind the mill. And the plant note stays between him and me.\" You meet her eyes to let her know you heard the second part clearly. She gives a single nod — not warm exactly, but satisfied. The kind of acknowledgment that passes between people who've decided, provisionally, to trust each other.\n\nShe doesn't let you go quite yet. Her voice drops enough that the fishwives at the stall twenty paces down the lane won't catch it. \"While you're up there — the east terrace borders the untended stretch. You'll see it. Plants coming up where nothing was catalogued before the Transition. I've been watching them for two seasons.\" A beat. \"If something looks like it doesn't belong, you have my permission to take a cutting. Carefully.\" The way she says *carefully* suggests she means something more specific than 'don't damage the roots.'\n\nShe steps back then, a clean dismissal — she has a village to manage and you have an errand to run. The morning is full now, light cutting down the lane between the stall awnings, and the path up toward the mill terraces begins just past the market's far end.",
-      "sceneSummary": "Mara confirms the errand to Piotr and quietly asks Adelheid to observe the uncatalogued plants on the east terrace — with permission to take cuttings.",
+      "narration": "The lane behind the mill is quieter than the well plaza — fewer stalls, more mud, the smell of turned earth and water-wheel damp. You shift the bundle against your hip and follow the path upward as it narrows between low stone walls. Early-spring growth pushes through the gaps: chickweed, dead nettle, the occasional volunteer barley. Nothing unusual yet, but you're paying attention the way Mara's word 'carefully' lodged in your mind like a splinter.\n\nTerrace Three announces itself as a wider shelf of land cut into the slope, bordered by a low retaining wall on the downhill side. Most of it is tidy — rows of early brassicas under light mulch, irrigation channels cut clean. The east edge is different. You notice it before you're even looking for it: the growth there is denser and lower to the ground, spreading in a way that doesn't follow the terrace's layout. Leaves with a faint silvery underside. Stems that branch in pairs at every node, very regular, almost too regular. No catalog entry surfaces in your memory to match the shape. You make a note to come back.\n\nPiotr is easy to find — a compact man in his fifties, kneeling at the far end of the terrace patching an irrigation channel with river clay, gray-streaked hair pushed back under a faded cloth cap. He looks up when he hears your footsteps and his gaze goes straight to the bundle before it reaches your face. He straightens, wipes his hands on his thighs, and comes to meet you. \"From Mara,\" you say, which is all you need to say. He takes the bundle in both hands with a care that tells you the clay jars inside matter to him, sets it on the wall, and begins working the cord loose with practiced fingers — then stops, glances at you. \"There's a note?\" \"Inside.\" \"Good.\" He doesn't open it in front of you.",
+      "sceneSummary": "Bundle delivered to Piotr on Terrace Three east; Adelheid observes the uncatalogued silver-stemmed plants at the terrace's edge.",
       "choices": [
         {
-          "label": "Head straight to Terrace Three — deliver the bundle to Piotr and keep your eyes open on the way",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Study the uncatalogued plants at the terrace's east edge — observe carefully before deciding whether to take cuttings",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful",
+            "observe"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Talk with Piotr — let him read the note if he wishes, and see what he's willing to share about the terrace or the plants",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "observe"
+            "talk",
+            "observe",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -131,30 +153,15 @@
           "emergenceId": null
         },
         {
-          "label": "Pause at the untended stretch before delivering — study the uncatalogued plants in the morning light before anyone else is up there",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Echo Sense as you climb — feel out whether the terrace soil or the plant beds have that same flat, dense quality you detected in the riverbed",
+          "label": "Use Echo Sense on the east-edge growth — press your awareness down through the soil to feel what the root structure is doing",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
             "study",
-            "scout"
+            "scout",
+            "careful"
           ],
           "abilityId": "echo_sense",
           "energyCost": 4,
@@ -163,14 +170,15 @@
           "emergenceId": null
         },
         {
-          "label": "Stop at the dock first — a word with the fishermen while the morning is still quiet, before you climb",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Take a small cutting from the uncatalogued plants now, before engaging Piotr further — observe the plant's immediate reaction to being cut",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "careful"
+            "careful",
+            "study",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -190,80 +198,69 @@
       "ledgerEvents": [],
       "questUpdates": [
         {
-          "op": "start",
+          "op": "progress",
           "questId": "maras-errand",
           "title": "Mara's Errand",
-          "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
-          "giver": "Mara Wells",
-          "note": "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only.",
-          "xpReward": 15
+          "note": "Bundle delivered to Piotr on Terrace Three east. Note left private. Uncatalogued plants observed at the east edge — study pending."
         }
       ],
       "scene": {
-        "setting": "Millbrook village lane beside the well plaza, morning light now full and cutting between market stall awnings. Adelheid stands holding the cloth-wrapped bundle; Mara Wells has stepped back. The dock is thirty paces behind; the path toward the mill terraces begins at the lane's far end.",
+        "setting": "Terrace Three east, above the mill, midday light full on the slope. Tidy brassica rows downhill; the east edge borders a denser, silver-leafed growth that follows no catalog. A low retaining wall runs the length of the terrace.",
         "npcsPresent": [
           {
-            "name": "Mara Wells",
-            "state": "Has stepped back — clean dismissal, already scanning the lane for her next task."
-          },
-          {
-            "name": "Heavyset fisherwoman",
-            "state": "Still at the dock, sorting her thin catch."
-          },
-          {
-            "name": "Young fisherman",
-            "state": "Still at the dock, staring at the gray-green water."
+            "name": "Piotr",
+            "state": "Standing at the retaining wall, bundle in both hands, cord half-worked loose — has paused before opening it, waiting for Adelheid to indicate she's done."
           }
         ],
         "objects": [
-          "Cloth-wrapped bundle (now in Adelheid's hands — heavy, oilcloth and cord, clay jars or packed root-stock within; plant note inside)",
-          "Village well (stone lip, unattended now)",
-          "Dock planks over gray-green river water (thirty paces down the lane)",
-          "Two fishing nets with thin catch",
-          "Market stalls open along the lane"
+          "Cloth-wrapped bundle (now with Piotr, cord partially loosened, clay jars inside)",
+          "Irrigation channel with fresh river-clay patch at far end",
+          "East-edge plant growth — dense, silver-undersided leaves, paired branching at every node, spreading outside the terrace grid",
+          "Low stone retaining wall along the downhill side",
+          "Piotr's tools — trowel, clay bucket, worn cloth cap set aside"
         ],
         "threads": [
-          "Bundle must be delivered to Piotr, Terrace Three east, behind the mill — plant note inside is private",
-          "Mara has asked Adelheid to observe and potentially take cuttings from uncatalogued plants on the east terrace — her warning to do it 'carefully' implies something more than horticultural caution",
-          "Fish avoiding the near bank; riverbed unnaturally flat and dense under the dock",
-          "Fishermen at the dock still not speaking about the water openly"
+          "Piotr has not yet opened the bundle or the private plant note — he is waiting",
+          "Uncatalogued silver-stemmed plants at the east edge: Mara's warning to proceed 'carefully' unresolved — nature and significance unknown",
+          "Bundle delivered but errand not fully complete until Adelheid observes the plants as Mara asked"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook civic manager",
-          "note": "Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'carefully'.",
+          "op": "meet",
+          "npcId": "piotr",
+          "name": "Piotr",
+          "role": "Terrace farmer, Terrace Three east",
+          "description": "A compact man in his fifties with gray-streaked hair; kneels in his field patching irrigation channels, hands permanently clay-stained. Speaks minimally. Recognized the bundle before he recognized Adelheid.",
+          "note": "Received the bundle from Adelheid without questions. Confirmed the note is inside; stopped himself from opening it in front of her. Manner suggests he was expecting this delivery.",
           "learned": [
-            "Mara has been watching the uncatalogued east-terrace plants for two full seasons",
-            "She considers them significant enough to task a stranger with observing them on a first meeting",
-            "Her use of 'carefully' when describing cutting them implies she suspects they may react or matter in a way beyond ordinary botany"
+            "Was expecting a delivery from Mara — recognized the bundle immediately",
+            "Chose not to open the private plant note in Adelheid's presence",
+            "Works Terrace Three east himself; knows this land well"
           ],
           "skillsObserved": [
-            "information economy — shares just enough to create obligation",
-            "calm authority under morning bustle"
+            "careful handling of fragile goods",
+            "economy of speech"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds."
+          "statusNote": "On Terrace Three east, holding Mara's bundle, waiting for Adelheid to finish."
         }
       ],
       "factUpdates": [
         {
-          "op": "add",
-          "text": "Adelheid is carrying Mara's cloth-wrapped bundle to Piotr on Terrace Three east, with a private plant note inside — errand accepted on Day 1 morning.",
-          "subjectId": "mara-wells"
+          "op": "resolve",
+          "text": "Adelheid delivered Mara's cloth-wrapped bundle to Piotr on Terrace Three east — errand fulfilled; private plant note left unopened in Adelheid's presence.",
+          "subjectId": "piotr"
         }
       ],
       "placeUpdates": [
         {
-          "note": "The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons.",
+          "note": "Terrace Three east has an untended east edge colonized by an uncatalogued silver-leafed plant with paired branching at every node — spreading outside the terrace grid. First observed Day 1 midday.",
           "subPlace": {
             "name": "Terrace Three East",
-            "note": "Farming terrace above the mill; east edge borders uncatalogued post-Transition plant growth. Piotr works or lives here.",
-            "visited": false
+            "note": "Farming terrace above the mill; Piotr works here. East edge borders dense uncatalogued silver-stemmed growth spreading beyond the terrace grid.",
+            "visited": true
           }
         }
       ],
@@ -272,64 +269,57 @@
           "topic": "uncatalogued-terrace-plants",
           "label": "Uncatalogued Terrace Plants",
           "kind": "mystery",
-          "fact": "Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — her instruction to take cuttings 'carefully' implies more than ordinary botanical caution.",
+          "fact": "First direct observation on Terrace Three east: silver-undersided leaves, stems branching in paired nodes with unusual regularity — pattern feels almost systematic. Spreads outside the terrace layout. No catalog match surfaces.",
           "links": [
             "millbrook",
             "mara-wells",
+            "maras-errand",
             "valley-flora-post-transition",
-            "maras-errand"
+            "piotr"
           ]
         },
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
+          "topic": "piotr",
+          "label": "Piotr",
           "kind": "person",
-          "fact": "Mara granted Adelheid permission to observe and take cuttings from the uncatalogued east-terrace plants — she has been tracking them for two seasons and trusts Adelheid's herbalist eye enough to delegate the observation on first meeting.",
+          "fact": "Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note.",
           "links": [
+            "mara-wells",
             "millbrook",
             "uncatalogued-terrace-plants",
             "maras-errand"
           ]
         }
       ],
-      "timeAdvanceHours": 0,
+      "timeAdvanceHours": 1,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook village lane beside the well plaza, morning light now full and cutting between market stall awnings. Adelheid stands holding the cloth-wrapped bundle; Mara Wells has stepped back. The dock is thirty paces behind; the path toward the mill terraces begins at the lane's far end.",
+      "setting": "Terrace Three east, above the mill, midday light full on the slope. Tidy brassica rows downhill; the east edge borders a denser, silver-leafed growth that follows no catalog. A low retaining wall runs the length of the terrace.",
       "npcsPresent": [
         {
-          "name": "Mara Wells",
-          "state": "Has stepped back — clean dismissal, already scanning the lane for her next task."
-        },
-        {
-          "name": "Heavyset fisherwoman",
-          "state": "Still at the dock, sorting her thin catch."
-        },
-        {
-          "name": "Young fisherman",
-          "state": "Still at the dock, staring at the gray-green water."
+          "name": "Piotr",
+          "state": "Standing at the retaining wall, bundle in both hands, cord half-worked loose — has paused before opening it, waiting for"
         }
       ],
       "objects": [
-        "Cloth-wrapped bundle (now in Adelheid's hands — heavy, oilcloth and cord, clay j",
-        "Village well (stone lip, unattended now)",
-        "Dock planks over gray-green river water (thirty paces down the lane)",
-        "Two fishing nets with thin catch",
-        "Market stalls open along the lane"
+        "Cloth-wrapped bundle (now with Piotr, cord partially loosened, clay jars inside)",
+        "Irrigation channel with fresh river-clay patch at far end",
+        "East-edge plant growth — dense, silver-undersided leaves, paired branching at ev",
+        "Low stone retaining wall along the downhill side",
+        "Piotr's tools — trowel, clay bucket, worn cloth cap set aside"
       ],
       "threads": [
-        "Bundle must be delivered to Piotr, Terrace Three east, behind the mill — plant note inside is private",
-        "Mara has asked Adelheid to observe and potentially take cuttings from uncatalogued plants on the east terrace — her warning to do it 'carefully' implies somethi",
-        "Fish avoiding the near bank; riverbed unnaturally flat and dense under the dock",
-        "Fishermen at the dock still not speaking about the water openly"
+        "Piotr has not yet opened the bundle or the private plant note — he is waiting",
+        "Uncatalogued silver-stemmed plants at the east edge: Mara's warning to proceed 'carefully' unresolved — nature and significance unknown",
+        "Bundle delivered but errand not fully complete until Adelheid observes the plants as Mara asked"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 14,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [],
@@ -342,7 +332,8 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only."
+        "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only.",
+        "Bundle delivered to Piotr on Terrace Three east. Note left private. Uncatalogued plants observed at the east edge — study pending."
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -386,21 +377,51 @@
         "day": 1
       },
       "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds."
+    },
+    "piotr": {
+      "id": "piotr",
+      "name": "Piotr",
+      "role": "Terrace farmer, Terrace Three east",
+      "description": "A compact man in his fifties with gray-streaked hair; kneels in his field patching irrigation channels, hands permanently clay-stained. Speaks minimally. Recognized the bundle before he recognized Adelheid.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Received the bundle from Adelheid without questions. Confirmed the note is inside; stopped himself from opening it in front of her. Manner suggests he was expecting this delivery."
+      ],
+      "knownFacts": [
+        "Was expecting a delivery from Mara — recognized the bundle immediately",
+        "Chose not to open the private plant note in Adelheid's presence",
+        "Works Terrace Three east himself; knows this land well"
+      ],
+      "skillsObserved": [
+        "careful handling of fragile goods",
+        "economy of speech"
+      ],
+      "status": "active",
+      "statusNote": "On Terrace Three east, holding Mara's bundle, waiting for Adelheid to finish.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons."
+        "[d1] The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons.",
+        "[d1] Terrace Three east has an untended east edge colonized by an uncatalogued silver-leafed plant with paired branching at every node — spreading outside the terrace grid. First observed Day 1 midday."
       ],
       "flags": {},
       "subPlaces": {
         "terrace-three-east": {
           "name": "Terrace Three East",
           "day": 1,
-          "visited": false,
-          "note": "Farming terrace above the mill; east edge borders uncatalogued post-Transition plant growth. Piotr works or lives here."
+          "visited": true,
+          "note": "Farming terrace above the mill; Piotr works here. East edge borders dense uncatalogued silver-stemmed growth spreading b"
         }
       }
     }
@@ -514,12 +535,29 @@
         "label": "Uncatalogued Terrace Plants",
         "kind": "mystery",
         "facts": [
-          "[d1] Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — "
+          "[d1] Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — ",
+          "[d1] First direct observation on Terrace Three east: silver-undersided leaves, stems branching in paired nodes with unusual regularity — pattern feels almost systematic. Spreads outside the terrace layout."
         ],
         "links": [
           "millbrook",
           "mara-wells",
           "valley-flora-post-transition",
+          "maras-errand"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "piotr": {
+        "id": "piotr",
+        "label": "Piotr",
+        "kind": "person",
+        "facts": [
+          "[d1] Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note."
+        ],
+        "links": [
+          "mara-wells",
+          "millbrook",
+          "uncatalogued-terrace-plants",
           "maras-errand"
         ],
         "createdDay": 1,
@@ -545,14 +583,7 @@
       }
     ]
   },
-  "establishedFacts": [
-    {
-      "id": "mara-wells",
-      "text": "Adelheid is carrying Mara's cloth-wrapped bundle to Piotr on Terrace Three east, with a private plant note inside — errand accepted on Day 1 morning.",
-      "day": 1,
-      "subjectId": "mara-wells"
-    }
-  ],
+  "establishedFacts": [],
   "precursorAccess": [],
   "backfillVersion": 1,
   "sharedSceneId": "millbrook--2026-07-08T17-58-43-164Z",

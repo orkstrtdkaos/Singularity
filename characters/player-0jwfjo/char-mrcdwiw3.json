@@ -105,36 +105,24 @@
       {
         "summary": "The dock-woman names herself: Mara Wells, wayhouse-keeper and Millbrook's unofficial keeper of hard problems.",
         "narration": "\"Before I answer that,\" you say, \"I'd like to know who I'm answering to. Two weeks of midnight watches isn't idle habit. Who are you, and why you?\"\n\nShe considers the question the way you'd consider a ford — measuring the depth before committing. Then she sets her tin cup down on the barrel beside her and lets her hands rest open on her knees, which you read as a choice to be readable.\n\n\"Mara Wells,\" she says. \"I run the wayhouse up the lane, and I've been Millbrook's informal keeper of difficult problems for longer than I'd like to count.\" A pause. \"When something starts going wrong and nobody wants to say it out loud, it usually falls to me to say it out loud. Or at least to stand where it's happening and watch it carefully until I understand what I'm dealing with.\" She glances at the river — just a flick, the automatic habit of someone who's been checking it every night for a fortnight. \"Everyone else has crops to tend in the morning. I have the luxury of keeping odd hours.\"\n\nShe picks the tin cup back up, cradles it. \"So. East fork or main channel. You've been on the water tonight — you've got fresher eyes than mine on which direction it's heavier from.\" Her own gaze moves, almost involuntarily, to the child's stone arrangement near the dock's edge — the eastern branch stones set slightly apart, like a small unanswered question in rock."
+      },
+      {
+        "summary": "Brynjar commits to taking the skiff up the east fork at first light; Mara offers him the wayhouse for the night.",
+        "narration": "You glance once at the rotting skiff tied at the dock's far end, then back to Mara. \"East fork,\" you say, because the child's stone map said so before either of you did. \"That's my best read tonight. But a read from the dock isn't the same as eyes on it. First light, if that skiff holds water, I'll take it up and see what's there to see. You'll have a proper answer by morning.\"\n\nMara's gaze follows yours to the skiff, then returns. She doesn't look hopeful, exactly — more like someone who has been holding a problem alone for a long time and has just handed one end of it to someone else. The relief is subtle enough that she probably doesn't mean to show it. She picks up her tin cup, finds it empty, and sets it back down.\n\n\"The skiff holds,\" she says. \"Barely. There's a bailer under the thwart.\" She pauses, and when she speaks again there's something quieter in it, something that costs her a fraction. \"East fork is three kilometers to the first braid. Whatever's in the water is coming from further than that, I think. You'll want an early start if you mean to get past the braid before the current picks up.\"\n\nShe stands then — heavier than she sat, the way people are after a long night — and tucks the tin cup under one arm. \"Wayhouse is open. There's a pallet in the back room, no charge, and I'll have something hot when the sun breaks if you're back by then.\" She says it practically, the way she'd say anything, but the offer is clear: she wants you where she can find you come morning."
       }
     ],
     "lastTurn": {
-      "narration": "\"Before I answer that,\" you say, \"I'd like to know who I'm answering to. Two weeks of midnight watches isn't idle habit. Who are you, and why you?\"\n\nShe considers the question the way you'd consider a ford — measuring the depth before committing. Then she sets her tin cup down on the barrel beside her and lets her hands rest open on her knees, which you read as a choice to be readable.\n\n\"Mara Wells,\" she says. \"I run the wayhouse up the lane, and I've been Millbrook's informal keeper of difficult problems for longer than I'd like to count.\" A pause. \"When something starts going wrong and nobody wants to say it out loud, it usually falls to me to say it out loud. Or at least to stand where it's happening and watch it carefully until I understand what I'm dealing with.\" She glances at the river — just a flick, the automatic habit of someone who's been checking it every night for a fortnight. \"Everyone else has crops to tend in the morning. I have the luxury of keeping odd hours.\"\n\nShe picks the tin cup back up, cradles it. \"So. East fork or main channel. You've been on the water tonight — you've got fresher eyes than mine on which direction it's heavier from.\" Her own gaze moves, almost involuntarily, to the child's stone arrangement near the dock's edge — the eastern branch stones set slightly apart, like a small unanswered question in rock.",
-      "sceneSummary": "The dock-woman names herself: Mara Wells, wayhouse-keeper and Millbrook's unofficial keeper of hard problems.",
+      "narration": "You glance once at the rotting skiff tied at the dock's far end, then back to Mara. \"East fork,\" you say, because the child's stone map said so before either of you did. \"That's my best read tonight. But a read from the dock isn't the same as eyes on it. First light, if that skiff holds water, I'll take it up and see what's there to see. You'll have a proper answer by morning.\"\n\nMara's gaze follows yours to the skiff, then returns. She doesn't look hopeful, exactly — more like someone who has been holding a problem alone for a long time and has just handed one end of it to someone else. The relief is subtle enough that she probably doesn't mean to show it. She picks up her tin cup, finds it empty, and sets it back down.\n\n\"The skiff holds,\" she says. \"Barely. There's a bailer under the thwart.\" She pauses, and when she speaks again there's something quieter in it, something that costs her a fraction. \"East fork is three kilometers to the first braid. Whatever's in the water is coming from further than that, I think. You'll want an early start if you mean to get past the braid before the current picks up.\"\n\nShe stands then — heavier than she sat, the way people are after a long night — and tucks the tin cup under one arm. \"Wayhouse is open. There's a pallet in the back room, no charge, and I'll have something hot when the sun breaks if you're back by then.\" She says it practically, the way she'd say anything, but the offer is clear: she wants you where she can find you come morning.",
+      "sceneSummary": "Brynjar commits to taking the skiff up the east fork at first light; Mara offers him the wayhouse for the night.",
       "choices": [
         {
-          "label": "Read the current weight and the stone map together — give Mara your best riverman's judgment on the east fork",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Accept Mara's offer — follow her up the lane to the wayhouse and sleep properly before the run",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "rivercraft",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Answer honestly: you can't be certain yet — and ask her what she knows about the east fork that made her eyes go there",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
+            "rest",
             "careful"
           ],
           "abilityId": null,
@@ -144,29 +132,46 @@
           "emergenceId": null
         },
         {
-          "label": "Ask about the child who arranged those stones — what do they know, and does Mara take them seriously?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "investigate",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Suggest you'll have a proper answer in the morning — after you've slept and taken the skiff up the east fork at first light to look",
+          "label": "Before turning in, spend a few minutes inspecting the skiff by lamplight — check what shape it's actually in for an early-morning run",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
+            "scout",
+            "careful",
+            "prepare"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Mara one more question before she goes — about the east fork itself, what's up there, who works that land",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "gather-information",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sleep rough here at the dock — bedroll from the Traveler's Pack, stay close to the water",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "rest",
             "scout"
           ],
           "abilityId": null,
@@ -185,83 +190,111 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "start",
+          "questId": "east-fork-run",
+          "title": "East Fork at First Light",
+          "summary": "Take the rotting skiff up the east fork at dawn and find the upstream source of the river's gray-green contamination.",
+          "giver": "Mara Wells",
+          "note": "Mara confirmed the skiff holds (barely, with a bailer), warned the first braid is 3 km up and the current picks up after dawn. She expects a report by morning.",
+          "xpReward": 25
+        }
+      ],
       "scene": {
-        "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge facing Mara Wells on her barrel; the single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
+        "setting": "Millbrook's river dock at night, early spring. Mara has risen from her barrel and stands at the dock's edge, tin cup tucked under her arm, ready to walk up the lane to the wayhouse. The single oil lamp swings overhead.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Seated on her barrel, tin cup cradled in both hands, watching Brynjar — she has just named herself and is waiting for his read on the east fork versus main channel"
+            "state": "Standing, tin cup under arm, facing Brynjar — she has just offered the wayhouse pallet and is waiting to see if he'll follow"
           }
         ],
         "objects": [
           "Worn dock pilings",
           "Hemp Rope (30 ft) tied off to a piling",
-          "Two flat-bottomed ferries and a rotting skiff",
+          "Two flat-bottomed ferries",
+          "A rotting skiff (Mara says it holds; bailer under the thwart)",
           "A coil of old line",
-          "A battered tin cup (in Mara's hands)",
-          "A child's arrangement of river stones in a rough map shape — eastern branch stones set slightly apart",
+          "A battered tin cup (now under Mara's arm, empty)",
+          "A child's arrangement of river stones — eastern branch stones set slightly apart",
           "A swinging oil lamp on a hook",
           "A wooden bucket (damp rim)"
         ],
         "threads": [
-          "Mara has asked directly whether the upstream source is the east fork or main channel — she's waiting for Brynjar's answer",
-          "Her eyes flicked to the child's stone map when asking — she may already suspect the east fork",
-          "The child who made the stone map and what they know remains unexplored",
-          "The river's gray-green iridescence continues; its upstream source is unconfirmed",
-          "The lit wayhouse window suggests warmth, company, and possibly food up the lane"
+          "East fork run committed to at first light — skiff ready, source unconfirmed",
+          "Mara's wayhouse is open; pallet in the back room offered at no charge",
+          "The child who made the stone map and what else they know remains unexplored",
+          "The river's gray-green iridescence continues; the east fork is the working hypothesis but unverified"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
-          "description": "A heavyset woman in her fifties with a river-flat voice, a measured manner, and a two-week habit of midnight watches at the dock.",
-          "note": "Named herself willingly when asked directly. Frames her watch as a practical duty — she holds hard truths when no one else will. Her eyes betrayed interest in the east fork unprompted.",
+          "note": "Accepted Brynjar's plan without argument; offered the wayhouse pallet for the night and promised something hot at sunrise if he returns by then. Revealed the skiff holds (barely) and that a bailer is under the thwart. Warned the first braid is 3 km up and the current picks up after dawn.",
           "learned": [
-            "Runs the wayhouse up the lane from the dock",
-            "Has been Millbrook's informal keeper of difficult problems for years",
-            "Has kept a solo midnight watch on the river contamination for two weeks",
-            "Her glance at the child's stone map suggests she already suspects the east fork as the source"
+            "The rotting skiff at the dock is functional — barely — with a bailer under the thwart",
+            "East fork: first braid approximately 3 km up; current increases significantly after dawn",
+            "She will have food ready at the wayhouse by sunrise if Brynjar returns"
           ],
           "skillsObserved": [
-            "patient observation",
-            "quiet authority"
+            "local river knowledge",
+            "practical hospitality"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the dock on her nightly watch; willing to talk and share what she knows"
+          "statusNote": "At the dock, about to walk up the lane to the wayhouse; has handed Brynjar one end of the contamination problem and is cautiously invested in his morning run"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The midnight dock-watcher is Mara Wells — wayhouse-keeper and Millbrook's informal keeper of hard problems. She has watched the contamination alone for two weeks.",
-          "subjectId": "mara-wells"
+          "text": "Brynjar has committed to taking the rotting skiff up the east fork at first light to investigate the contamination source; Mara Wells expects a report by morning.",
+          "subjectId": "east-fork-run"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock.",
+          "note": "The rotting skiff confirmed functional by Mara — holds water, bailer under thwart; available for use at first light.",
+          "subPlace": {
+            "name": "Millbrook River Dock",
+            "note": "Rotting skiff confirmed functional; bailer under thwart. East fork run planned for first light.",
+            "visited": true
+          }
+        },
+        {
+          "note": "Mara Wells's wayhouse has a pallet in the back room available to Brynjar at no charge; she will have hot food ready at sunrise.",
           "subPlace": {
             "name": "Mara's Wayhouse",
-            "note": "Mara Wells's wayhouse, up the lane from the dock — lit window visible at night, serves as informal community hub",
+            "note": "Back-room pallet offered to Brynjar; hot food promised at sunrise. Up the lane from the dock.",
             "visited": false
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "fact": "Runs Millbrook's wayhouse; self-described keeper of the village's difficult problems. Has watched the river contamination alone for two weeks. Suspects or is curious about the east fork as source.",
+          "topic": "east-fork-run",
+          "label": "East Fork Approach",
+          "kind": "place",
+          "fact": "First braid of the east fork is approximately 3 km upstream. Current picks up significantly after dawn. The contamination source is thought to lie beyond the first braid.",
           "links": [
             "echo-river-contamination",
             "millbrook",
-            "millbrook-river-dock"
+            "millbrook-river-dock",
+            "east-fork-run"
+          ]
+        },
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "fact": "Has local knowledge of the east fork; confirmed the skiff is functional and will have food ready at the wayhouse at sunrise. Cautiously sharing the problem with Brynjar now.",
+          "links": [
+            "echo-river-contamination",
+            "millbrook",
+            "east-fork-run"
           ]
         }
       ],
@@ -269,40 +302,53 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge facing Mara Wells on her barrel; the single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
+      "setting": "Millbrook's river dock at night, early spring. Mara has risen from her barrel and stands at the dock's edge, tin cup tucked under her arm, ready to walk up the lane to the wayhouse. The single oil lamp swings overhead.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Seated on her barrel, tin cup cradled in both hands, watching Brynjar — she has just named herself and is waiting for hi"
+          "state": "Standing, tin cup under arm, facing Brynjar — she has just offered the wayhouse pallet and is waiting to see if he'll fo"
         }
       ],
       "objects": [
         "Worn dock pilings",
         "Hemp Rope (30 ft) tied off to a piling",
-        "Two flat-bottomed ferries and a rotting skiff",
+        "Two flat-bottomed ferries",
+        "A rotting skiff (Mara says it holds; bailer under the thwart)",
         "A coil of old line",
-        "A battered tin cup (in Mara's hands)",
-        "A child's arrangement of river stones in a rough map shape — eastern branch ston",
+        "A battered tin cup (now under Mara's arm, empty)",
+        "A child's arrangement of river stones — eastern branch stones set slightly apart",
         "A swinging oil lamp on a hook",
         "A wooden bucket (damp rim)"
       ],
       "threads": [
-        "Mara has asked directly whether the upstream source is the east fork or main channel — she's waiting for Brynjar's answer",
-        "Her eyes flicked to the child's stone map when asking — she may already suspect the east fork",
-        "The child who made the stone map and what they know remains unexplored",
-        "The river's gray-green iridescence continues; its upstream source is unconfirmed",
-        "The lit wayhouse window suggests warmth, company, and possibly food up the lane"
+        "East fork run committed to at first light — skiff ready, source unconfirmed",
+        "Mara's wayhouse is open; pallet in the back room offered at no charge",
+        "The child who made the stone map and what else they know remains unexplored",
+        "The river's gray-green iridescence continues; the east fork is the working hypothesis but unverified"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [],
-  "quests": [],
+  "quests": [
+    {
+      "id": "east-fork-run",
+      "title": "East Fork at First Light",
+      "summary": "Take the rotting skiff up the east fork at dawn and find the upstream source of the river's gray-green contamination.",
+      "giver": "Mara Wells",
+      "locationId": null,
+      "status": "active",
+      "progress": [
+        "Mara confirmed the skiff holds (barely, with a bailer), warned the first braid is 3 km up and the current picks up after dawn. She expects a report by morning."
+      ],
+      "startedAt": "2026-07-08T19:12:29.917Z"
+    }
+  ],
   "npcRegistry": {
     "mara-wells": {
       "id": "mara-wells",
@@ -313,21 +359,27 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
-        "[d2] Named herself willingly when asked directly. Frames her watch as a practical duty — she holds hard truths when no one else will. Her eyes betrayed interest in the east fork unpromp"
+        "[d2] Named herself willingly when asked directly. Frames her watch as a practical duty — she holds hard truths when no one else will. Her eyes betrayed interest in the east fork unpromp",
+        "[d2] Accepted Brynjar's plan without argument; offered the wayhouse pallet for the night and promised something hot at sunrise if he returns by then. Revealed the skiff holds (barely) a"
       ],
       "knownFacts": [
         "Runs the wayhouse up the lane from the dock",
         "Has been Millbrook's informal keeper of difficult problems for years",
-        "Has kept a solo midnight watch on the river contamination for two weeks"
+        "Has kept a solo midnight watch on the river contamination for two weeks",
+        "The rotting skiff at the dock is functional — barely — with a bailer under the thwart",
+        "East fork: first braid approximately 3 km up; current increases significantly after dawn",
+        "She will have food ready at the wayhouse by sunrise if Brynjar returns"
       ],
       "skillsObserved": [
         "patient observation",
-        "quiet authority"
+        "quiet authority",
+        "local river knowledge",
+        "practical hospitality"
       ],
       "status": "active",
-      "statusNote": "At the dock on her nightly watch; willing to talk and share what she knows",
+      "statusNote": "At the dock, about to walk up the lane to the wayhouse; has handed Brynjar one end of the contamination problem and is cautiously invested in his morning run",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -359,7 +411,9 @@
       "notes": [
         "[d1] Millbrook dock at night: gray-green iridescence visible in the river under lamplight. An unknown local woman keeps a night watch here.",
         "[d1] Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark.",
-        "[d2] Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock."
+        "[d2] Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock.",
+        "[d2] The rotting skiff confirmed functional by Mara — holds water, bailer under thwart; available for use at first light.",
+        "[d2] Mara Wells's wayhouse has a pallet in the back room available to Brynjar at no charge; she will have hot food ready at sunrise."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -372,13 +426,13 @@
           "name": "Millbrook River Dock",
           "day": 1,
           "visited": true,
-          "note": "Wooden dock with two ferries and a rotting skiff; single swinging lamp; stone map near edge; unknown woman keeps night w"
+          "note": "Rotting skiff confirmed functional; bailer under thwart. East fork run planned for first light."
         },
         "mara-s-wayhouse": {
           "name": "Mara's Wayhouse",
           "day": 2,
           "visited": false,
-          "note": "Mara Wells's wayhouse, up the lane from the dock — lit window visible at night, serves as informal community hub"
+          "note": "Back-room pallet offered to Brynjar; hot food promised at sunrise. Up the lane from the dock."
         }
       }
     }
@@ -473,7 +527,24 @@
         "label": "Mara Wells",
         "kind": "person",
         "facts": [
-          "[d2] Runs Millbrook's wayhouse; self-described keeper of the village's difficult problems. Has watched the river contamination alone for two weeks. Suspects or is curious about the east fork as source."
+          "[d2] Runs Millbrook's wayhouse; self-described keeper of the village's difficult problems. Has watched the river contamination alone for two weeks. Suspects or is curious about the east fork as source.",
+          "[d2] Has local knowledge of the east fork; confirmed the skiff is functional and will have food ready at the wayhouse at sunrise. Cautiously sharing the problem with Brynjar now."
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook",
+          "millbrook-river-dock",
+          "east-fork-run"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "east-fork-run": {
+        "id": "east-fork-run",
+        "label": "East Fork Approach",
+        "kind": "place",
+        "facts": [
+          "[d2] First braid of the east fork is approximately 3 km upstream. Current picks up significantly after dawn. The contamination source is thought to lie beyond the first braid."
         ],
         "links": [
           "echo-river-contamination",
@@ -525,6 +596,12 @@
       "text": "The midnight dock-watcher is Mara Wells — wayhouse-keeper and Millbrook's informal keeper of hard problems. She has watched the contamination alone for two weeks.",
       "day": 2,
       "subjectId": "mara-wells"
+    },
+    {
+      "id": "east-fork-run",
+      "text": "Brynjar has committed to taking the rotting skiff up the east fork at first light to investigate the contamination source; Mara Wells expects a report by morning.",
+      "day": 2,
+      "subjectId": "east-fork-run"
     }
   ],
   "precursorAccess": [],

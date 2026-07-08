@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 5,
+  "xp": 8,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -25,7 +25,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 95,
+  "energy": 90,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -93,75 +93,203 @@
       {
         "summary": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it",
         "narration": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it — the way a man checks a line, nothing more. The water is close enough to touch. You don't touch it.\n\nThe color is wrong in the way that takes a riverman to name precisely: not algae, which blooms green and thick and smells of rot; not silt, which runs brown-gray and settles if you let a cup stand. This is a mineral iridescence, thin as oil on a cold morning but without the slick, rainbow shimmer of oil. Gray-green. Faint. It moves with the current rather than on top of it, as if something in the water column itself is lit from within. The smell confirms it — clean in the way that river smell is clean, no decay — but underneath that, something older. Stone. The inside of a cave. A smell that belongs underground and has no business being this far down.\n\nThe current reads normal for early spring snowmelt: good volume, steady pace, the cold that tells you the source is still high snowpack and not yet the warmer ground-fed trickle of late season. Whatever is producing the discoloration is upstream, dissolved evenly enough that it isn't pooling or streaking — it's been traveling a long way. Your weather-read off the water says tomorrow will be overcast, probably a light rain by midmorning, which will push the river up two hand-spans by nightfall. More volume means the color dilutes, which means most people will stop seeing it tomorrow and think the problem has passed on its own.\n\nWhen you straighten up and turn back toward the dock, the woman on the barrel still hasn't moved. She's watching you with the particular patience of someone who has decided that what a stranger does in the first two minutes tells her more than anything they'll say afterward. Her battered tin cup rests against her knee. Up the lane, the wayhouse window throws its square of amber warmth into the mist, and somewhere above the terraces, invisible in the dark, Adelheid is moving among silver-stemmed plants that have no right to be there either."
+      },
+      {
+        "summary": "Brynjar studies the iridescent water; the dock-woman breaks her silence and addresses him directly.",
+        "narration": "You rise from your crouch slowly, like a man who's satisfied himself about a thing he already suspected. The iridescence doesn't give you anything more. It just runs, quiet and wrong, past the pilings and south toward wherever the river goes in the dark.\n\nThe woman on the barrel hasn't moved. She's been watching you do all of that — the drop to the knee, the study, the deliberate not-touching — and something in her posture has shifted by maybe two degrees. Not warmer. More attentive. She lifts her battered tin cup, takes a measured sip of whatever's in it, and sets it back on her thigh.\n\n\"River man,\" she says. Not a question. Her voice is level, river-flat, the kind that doesn't carry farther than it needs to. \"That tell you anything, or just confirm what you already knew when you came in?\"\n\nThe lamp swings between you. Up the lane, the wayhouse window still burns yellow. The child's stone map lies at the dock's edge — riverbend, tributary, a cluster of pebbles where Millbrook would sit — and now that you're standing again you notice the stones along the eastern branch are arranged slightly apart from the others, as if whoever laid them out wasn't sure how to mark something that didn't have a name yet."
       }
     ],
     "lastTurn": {
-      "narration": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it — the way a man checks a line, nothing more. The water is close enough to touch. You don't touch it.\n\nThe color is wrong in the way that takes a riverman to name precisely: not algae, which blooms green and thick and smells of rot; not silt, which runs brown-gray and settles if you let a cup stand. This is a mineral iridescence, thin as oil on a cold morning but without the slick, rainbow shimmer of oil. Gray-green. Faint. It moves with the current rather than on top of it, as if something in the water column itself is lit from within. The smell confirms it — clean in the way that river smell is clean, no decay — but underneath that, something older. Stone. The inside of a cave. A smell that belongs underground and has no business being this far down.\n\nThe current reads normal for early spring snowmelt: good volume, steady pace, the cold that tells you the source is still high snowpack and not yet the warmer ground-fed trickle of late season. Whatever is producing the discoloration is upstream, dissolved evenly enough that it isn't pooling or streaking — it's been traveling a long way. Your weather-read off the water says tomorrow will be overcast, probably a light rain by midmorning, which will push the river up two hand-spans by nightfall. More volume means the color dilutes, which means most people will stop seeing it tomorrow and think the problem has passed on its own.\n\nWhen you straighten up and turn back toward the dock, the woman on the barrel still hasn't moved. She's watching you with the particular patience of someone who has decided that what a stranger does in the first two minutes tells her more than anything they'll say afterward. Her battered tin cup rests against her knee. Up the lane, the wayhouse window throws its square of amber warmth into the mist, and somewhere above the terraces, invisible in the dark, Adelheid is moving among silver-stemmed plants that have no right to be there either.",
-      "sceneSummary": "The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it",
-      "scene": null,
+      "narration": "You rise from your crouch slowly, like a man who's satisfied himself about a thing he already suspected. The iridescence doesn't give you anything more. It just runs, quiet and wrong, past the pilings and south toward wherever the river goes in the dark.\n\nThe woman on the barrel hasn't moved. She's been watching you do all of that — the drop to the knee, the study, the deliberate not-touching — and something in her posture has shifted by maybe two degrees. Not warmer. More attentive. She lifts her battered tin cup, takes a measured sip of whatever's in it, and sets it back on her thigh.\n\n\"River man,\" she says. Not a question. Her voice is level, river-flat, the kind that doesn't carry farther than it needs to. \"That tell you anything, or just confirm what you already knew when you came in?\"\n\nThe lamp swings between you. Up the lane, the wayhouse window still burns yellow. The child's stone map lies at the dock's edge — riverbend, tributary, a cluster of pebbles where Millbrook would sit — and now that you're standing again you notice the stones along the eastern branch are arranged slightly apart from the others, as if whoever laid them out wasn't sure how to mark something that didn't have a name yet.",
+      "sceneSummary": "Brynjar studies the iridescent water; the dock-woman breaks her silence and addresses him directly.",
       "choices": [
         {
-          "label": "Look around carefully",
-          "attribute": "mental",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "investigate",
-            "careful"
-          ]
-        },
-        {
-          "label": "Press on",
-          "attribute": "physical",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": []
-        },
-        {
-          "label": "Talk to whoever is nearby",
+          "label": "Answer honestly — tell her what you read from the water: mineral, not biological, moving in the column rather than on it. See what she adds.",
           "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "rapport"
-          ]
+            "honest",
+            "share",
+            "open"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn the question: ask her how long she's been sitting watch, and whether someone told her to or she started doing it herself.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "probe",
+            "careful",
+            "social"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Crouch again and use your rivercraft — read the current's direction and speed to try to work out roughly where upstream the color is coming from.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout",
+            "careful"
+          ],
+          "abilityId": "rivercraft",
+          "energyCost": 5,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Nod toward the stone map and ask her about the eastern branch — whoever laid those stones out wasn't sure what to call something.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "observe",
+            "probe",
+            "curious"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
-      "characterDeltas": {},
-      "relationshipDeltas": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "ledgerEvents": [],
-      "sceneEnded": false,
-      "_opNote": "This beat's state updates were lost — the GM will restate them next turn."
+      "questUpdates": [],
+      "scene": {
+        "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge; the woman sits on her barrel at the top of the steps. A single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
+        "npcsPresent": [
+          {
+            "name": "Unknown woman (fifties, heavyset)",
+            "state": "Seated on the barrel, tin cup on her thigh, watching Brynjar with a more attentive stillness than before — she has just spoken."
+          }
+        ],
+        "objects": [
+          "Worn dock pilings",
+          "Hemp Rope (30 ft) tied off to a piling",
+          "Two flat-bottomed ferries and a rotting skiff",
+          "A coil of old line",
+          "A battered tin cup (in the woman's hand)",
+          "A child's arrangement of river stones in a rough map shape — eastern branch stones set slightly apart",
+          "A swinging oil lamp on a hook",
+          "A wooden bucket (damp rim)"
+        ],
+        "threads": [
+          "The woman has broken silence and asked Brynjar a direct question — she's waiting for his answer",
+          "The river's gray-green iridescence continues; its upstream source is unknown",
+          "The child's stone map has an eastern branch marked oddly apart — unnamed, unresolved",
+          "The lit wayhouse window suggests company and possibly food up the lane"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "unknown-dock-woman",
+          "name": "Unknown woman",
+          "role": "Night watcher at Millbrook dock",
+          "note": "After watching Brynjar study the river without touching it, she broke her silence — called him a 'river man' and asked whether the water told him anything new or just confirmed what he already knew.",
+          "learned": [
+            "She watches the dock at night and has been observing newcomers carefully",
+            "She noticed Brynjar's rivercraft instincts immediately",
+            "She speaks with the flat economy of someone who doesn't waste words"
+          ],
+          "skillsObserved": [
+            "quiet assessment",
+            "patient watch-keeping"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Seated at the top of Millbrook's dock steps, night watch, just addressed Brynjar directly for the first time."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The gray-green iridescence in the Echo River is mineral, not biological — it moves within the water column rather than on the surface, without the rainbow shimmer of oil. The smell is clean-mineral.",
+          "subjectId": "echo-river-contamination"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark.",
+          "subPlace": {
+            "name": "Millbrook River Dock",
+            "note": "Wooden dock with two ferries and a rotting skiff; single swinging lamp; stone map near edge; unknown woman keeps night watch here.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "echo-river-contamination",
+          "label": "Echo River Contamination",
+          "kind": "mystery",
+          "fact": "The iridescence moves within the water column rather than on the surface — mineral-sourced, not biological. A riverman's reading suggests the origin is upstream. A child's dock-side stone map marks something on the eastern branch with unusual hesitation.",
+          "links": [
+            "millbrook",
+            "millbrook-river-dock"
+          ]
+        }
+      ],
+      "timeAdvanceHours": 0,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook's river dock at night, early spring. Brynjar's craft is tied to a worn piling; the dock is empty except for the woman on her barrel and scattered dock detritus. A single lamp swings overhead. The lit wayhouse window glows up the lane behind her.",
+      "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge; the woman sits on her barrel at the top of the steps. A single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
       "npcsPresent": [
         {
-          "name": "Unknown woman, fifties, heavyset",
-          "state": "Seated on an overturned barrel at the top of the dock steps, watching Brynjar without speaking. Damp bucket beside her."
+          "name": "Unknown woman (fifties, heavyset)",
+          "state": "Seated on the barrel, tin cup on her thigh, watching Brynjar with a more attentive stillness than before — she has just "
         }
       ],
       "objects": [
-        "Worn dock pilings, Hemp Rope (30 ft) tied off",
+        "Worn dock pilings",
+        "Hemp Rope (30 ft) tied off to a piling",
         "Two flat-bottomed ferries and a rotting skiff",
         "A coil of old line",
-        "A battered tin cup",
-        "A child's arrangement of river stones in a rough map shape",
+        "A battered tin cup (in the woman's hand)",
+        "A child's arrangement of river stones in a rough map shape — eastern branch ston",
         "A swinging oil lamp on a hook",
         "A wooden bucket (damp rim)"
       ],
       "threads": [
-        "The woman is watching Brynjar and waiting — she hasn't spoken or moved",
-        "The river shows faint gray-green iridescence under lamplight",
+        "The woman has broken silence and asked Brynjar a direct question — she's waiting for his answer",
+        "The river's gray-green iridescence continues; its upstream source is unknown",
+        "The child's stone map has an eastern branch marked oddly apart — unnamed, unresolved",
         "The lit wayhouse window suggests company and possibly food up the lane"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 1,
-    "hour": 23,
+    "day": 2,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [],
@@ -190,7 +318,8 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d1] Millbrook dock at night: gray-green iridescence visible in the river under lamplight. An unknown local woman keeps a night watch here."
+        "[d1] Millbrook dock at night: gray-green iridescence visible in the river under lamplight. An unknown local woman keeps a night watch here.",
+        "[d1] Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -203,7 +332,7 @@
           "name": "Millbrook River Dock",
           "day": 1,
           "visited": true,
-          "note": "Wooden dock with two ferries and a rotting skiff; single lamp; top of steps leads up the lane to the wayhouse."
+          "note": "Wooden dock with two ferries and a rotting skiff; single swinging lamp; stone map near edge; unknown woman keeps night w"
         }
       }
     }
@@ -282,10 +411,12 @@
         "label": "Echo River Contamination",
         "kind": "mystery",
         "facts": [
-          "[d1] Even at night the Echo River shows a faint gray-green iridescence under lamplight at Millbrook's dock. The smell is mineral, not biological."
+          "[d1] Even at night the Echo River shows a faint gray-green iridescence under lamplight at Millbrook's dock. The smell is mineral, not biological.",
+          "[d1] The iridescence moves within the water column rather than on the surface — mineral-sourced, not biological. A riverman's reading suggests the origin is upstream. A child's dock-side stone map marks so"
         ],
         "links": [
-          "millbrook"
+          "millbrook",
+          "millbrook-river-dock"
         ],
         "createdDay": 1,
         "updatedDay": 1
@@ -298,7 +429,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "rivercraft": 1
+      "rivercraft": 2
     },
     "coActivations": {},
     "aspirations": [
@@ -309,11 +440,18 @@
       }
     ]
   },
-  "establishedFacts": [],
+  "establishedFacts": [
+    {
+      "id": "echo-river-contamination",
+      "text": "The gray-green iridescence in the Echo River is mineral, not biological — it moves within the water column rather than on the surface, without the rainbow shimmer of oil. The smell is clean-mineral.",
+      "day": 1,
+      "subjectId": "echo-river-contamination"
+    }
+  ],
   "precursorAccess": [],
   "backfillVersion": 1,
   "sharedSceneId": "millbrook--2026-07-08T17-58-43-164Z",
-  "opLossPending": true,
+  "opLossPending": false,
   "opLossLog": [
     {
       "at": "2026-07-08T18:24:42.775Z"

@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 39,
+  "xp": 44,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -21,13 +21,13 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.20463761010361325
+    "spectrumId": -0.20940572959843257
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 55,
+  "energy": 52,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -207,23 +207,27 @@
       {
         "summary": "Brynjar takes stock of the wayhouse — Mara alone, fire built, food ready, room deliberately cleared.",
         "narration": "You let Usnea step past you and pull the door half-shut against the cold, buying yourself a breath to read the room. The wayhouse common room is low and warm — plank ceiling darkened by years of smoke, a single east-facing window throwing a bar of pale morning light across the long table. The banked fire has been fed up properly; it pops and settles with the confidence of a fire tended through the night. Something on the hearth smells of oats and dried herbs, the kind of porridge that's been sitting on a low heat since fourth watch.\n\nMara is behind the counter at the far end, not performing business — just standing, hands flat on the wood, watching you both come in. Her river-flat face gives nothing away, but the fire and the food are language enough: she stayed up. Whatever report you bring, she wanted it the moment it arrived. She's in the same coat she wore at the midnight dock two days ago, and if she slept at all it wasn't for long.\n\nNo one else is here. The common room benches are empty, the lane-door behind you the only entry. That means Mara kept it closed to morning traffic — unusual for a wayhouse, and deliberate. The room is hers and yours, and the open thread between all three of you pulls taut the moment your eyes meet hers.\n\nUsnea stands at your side, coat still dusted with dawn cold. Mara sets two bowls on the counter edge with the quiet efficiency of someone who knew exactly when you'd walk through the door."
+      },
+      {
+        "summary": "Brynjar delivers a clean rivercraft reading to Mara: point source, columnar ribbons, upper east fork; plus the second boot prints on the trail.",
+        "narration": "You step up to the counter and accept one of the bowls — warm pottery, oats still steaming — and set it down in front of you without eating. A gesture: I'm here to work, not breakfast. Mara doesn't move her hands from the wood, just watches.\n\n\"Contamination ribbons are columnar,\" you say, keeping it plain. \"Not spreading sideways through the bank, not leeching slow. They're feeding straight down a fast channel — tight and coherent. I read them from the stock trail above the first braid, where you can see both forks at once.\" You let that sit a moment. \"That means a point source. Something feeding directly into the upper east fork, not a wide seep across the watershed. And it's getting stronger upstream — I could see that much before I had to turn back.\"\n\nMara listens the way she does everything: without hurry, without leaning in. When you finish she draws a slow breath and straightens fractionally. \"How far up before you turned back?\"\n\n\"Past the braid, short of the high pasture fence. Skiff grounded on the gravel bar — sprung plank. Went on foot from there.\" You keep your voice level. \"There's something else. Second set of boot prints on the trail, running downstream. Fresher than the ones going up. Someone came down that trail recently — not the Venn girl, different heel. Whoever made those prints may have been closer to the source than I got.\""
       }
     ],
     "lastTurn": {
-      "narration": "You let Usnea step past you and pull the door half-shut against the cold, buying yourself a breath to read the room. The wayhouse common room is low and warm — plank ceiling darkened by years of smoke, a single east-facing window throwing a bar of pale morning light across the long table. The banked fire has been fed up properly; it pops and settles with the confidence of a fire tended through the night. Something on the hearth smells of oats and dried herbs, the kind of porridge that's been sitting on a low heat since fourth watch.\n\nMara is behind the counter at the far end, not performing business — just standing, hands flat on the wood, watching you both come in. Her river-flat face gives nothing away, but the fire and the food are language enough: she stayed up. Whatever report you bring, she wanted it the moment it arrived. She's in the same coat she wore at the midnight dock two days ago, and if she slept at all it wasn't for long.\n\nNo one else is here. The common room benches are empty, the lane-door behind you the only entry. That means Mara kept it closed to morning traffic — unusual for a wayhouse, and deliberate. The room is hers and yours, and the open thread between all three of you pulls taut the moment your eyes meet hers.\n\nUsnea stands at your side, coat still dusted with dawn cold. Mara sets two bowls on the counter edge with the quiet efficiency of someone who knew exactly when you'd walk through the door.",
-      "sceneSummary": "Brynjar takes stock of the wayhouse — Mara alone, fire built, food ready, room deliberately cleared.",
+      "narration": "You step up to the counter and accept one of the bowls — warm pottery, oats still steaming — and set it down in front of you without eating. A gesture: I'm here to work, not breakfast. Mara doesn't move her hands from the wood, just watches.\n\n\"Contamination ribbons are columnar,\" you say, keeping it plain. \"Not spreading sideways through the bank, not leeching slow. They're feeding straight down a fast channel — tight and coherent. I read them from the stock trail above the first braid, where you can see both forks at once.\" You let that sit a moment. \"That means a point source. Something feeding directly into the upper east fork, not a wide seep across the watershed. And it's getting stronger upstream — I could see that much before I had to turn back.\"\n\nMara listens the way she does everything: without hurry, without leaning in. When you finish she draws a slow breath and straightens fractionally. \"How far up before you turned back?\"\n\n\"Past the braid, short of the high pasture fence. Skiff grounded on the gravel bar — sprung plank. Went on foot from there.\" You keep your voice level. \"There's something else. Second set of boot prints on the trail, running downstream. Fresher than the ones going up. Someone came down that trail recently — not the Venn girl, different heel. Whoever made those prints may have been closer to the source than I got.\"",
+      "sceneSummary": "Brynjar delivers a clean rivercraft reading to Mara: point source, columnar ribbons, upper east fork; plus the second boot prints on the trail.",
       "choices": [
         {
-          "label": "Lead with the facts — stock trail, sprung plank, stronger contamination ribbons upstream, the gray soil above the pasture fence, and the second set of boot prints coming back down",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell Mara about the heavy boots on the lane at second watch — and ask if she knows who they belong to",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "spectrumId": -0.2
+            "violence_peace": 0.6
           },
           "difficulty": 0,
           "intentTags": [
-            "report",
-            "careful"
+            "share",
+            "probe"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -232,16 +236,18 @@
           "emergenceId": null
         },
         {
-          "label": "Ask about the heavy boots first — tell her what the apprentice heard, and watch her face when you do",
-          "attribute": "social",
+          "label": "Ask Mara directly: who else knew I was going up the east fork — and who might have reason to go up and come back down before dawn",
+          "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "spectrumId": -0.1
+            "violence_peace": 0.6,
+            "concrete_abstract": -0.4
           },
           "difficulty": 15,
           "intentTags": [
+            "probe",
             "study",
-            "probe"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -250,15 +256,16 @@
           "emergenceId": null
         },
         {
-          "label": "Sit down and eat first — take the bowl she's offering, let the warmth settle in, and let Mara open at her own pace",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Lay out everything at once — the Venn girl, the gray soil above the fence, the second prints, the heavy boots — and ask Mara what she makes of it together",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "spectrumId": 0.1
+            "concrete_abstract": -0.5
           },
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "share",
+            "plan",
             "careful"
           ],
           "abilityId": null,
@@ -268,18 +275,19 @@
           "emergenceId": null
         },
         {
-          "label": "Lay the rivercraft reading on the table first — the contamination ribbons are columnar and tight, feeding a fast channel, getting stronger upstream. That's the shape of the problem.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Let Usnea speak next — you've given the field reading; see what she adds before pressing further",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "spectrumId": -0.3
+            "violence_peace": 0.7
           },
           "difficulty": 0,
           "intentTags": [
-            "report",
-            "study"
+            "defer",
+            "careful",
+            "help"
           ],
-          "abilityId": "rivercraft",
+          "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
@@ -295,31 +303,38 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "east-fork-run",
+          "title": "East Fork at First Light",
+          "note": "Brynjar delivered the rivercraft field reading to Mara: point source, columnar ribbons strengthening upstream, fast channel. Second boot prints on the trail running downstream also reported."
+        }
+      ],
       "scene": {
         "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut behind Brynjar and Usnea.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing behind the counter, hands flat on the wood, two bowls set at the counter edge — watching Brynjar and Usnea, waiting for the report."
+            "state": "Standing behind the counter, hands flat on the wood, listening to the field report — asked how far up Brynjar turned back."
           },
           {
             "name": "Usnea Beard",
-            "state": "Beside Brynjar, coat cold from the lane, attentive and still."
+            "state": "Beside Brynjar at the counter, coat still cold from the lane, attending quietly."
           }
         ],
         "objects": [
           "Banked hearth with active fire",
           "Pot of oat porridge on the hearth — smells of dried herbs",
-          "Two bowls set on the counter edge",
+          "Two bowls set on the counter edge — Brynjar's accepted but untouched",
           "Common room benches and long table",
           "The lane visible through the half-shut door"
         ],
         "threads": [
-          "Mara expects a full field report — east fork contamination, what was found, what wasn't",
-          "Heavy boots on the lane at second watch — heavier than a farmer, passed without stopping; direction and identity unknown",
-          "Dark-coated figure seen on river road two days ago before dawn — identity unresolved",
-          "Second set of boot prints on the east bank trail running downstream — origin unresolved",
+          "Mara has asked how far up Brynjar turned back — question partially answered, awaiting follow-up",
+          "Second downward boot prints on the east bank trail — origin and identity unresolved; Mara now aware",
+          "Heavy boots on the lane at second watch — Mara not yet told",
+          "Dark-coated figure seen on river road two days ago — unresolved",
           "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream"
         ]
       },
@@ -329,40 +344,32 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
-          "note": "Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report.",
+          "note": "Received Brynjar's rivercraft reading without interruption — asked one sharp follow-up question (how far up before he turned back). Now aware of the second boot prints on the trail.",
           "learned": [
-            "Kept the common room clear of morning traffic — deliberate, not routine",
-            "Wore the same coat as the midnight dock watch; likely slept little or not at all"
+            "Contamination ribbons are columnar and tight — point source feeding a fast channel, not a broad seep",
+            "Contamination strengthens upstream — source is in the upper east fork",
+            "A second set of boot prints runs downstream on the east bank trail — fresher than the upward prints, different heel from the Venn girl"
           ],
-          "skillsObserved": [
-            "overnight vigil",
-            "quiet hospitality as signal"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the wayhouse common room at sunrise — fire kept, food on, room deliberately cleared; waiting for Brynjar and Usnea's east fork report."
+          "statusNote": "In the wayhouse common room at sunrise — receiving the east fork field report from Brynjar; has asked a follow-up question."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Wayhouse common room cleared of other guests at sunrise on day 3 — Mara kept it private for the east fork report.",
-          "subPlace": {
-            "name": "Mara's Wayhouse",
-            "note": "Common room cleared at sunrise; fire maintained overnight; two bowls of porridge set out; Mara waiting alone for the field report.",
-            "visited": true
-          }
-        }
-      ],
+      "placeUpdates": [],
       "codexUpdates": [
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "fact": "Cleared the wayhouse common room and maintained the fire through the night — she is treating the east fork report as serious enough to keep private. She did not sleep.",
+          "topic": "echo-river-contamination",
+          "label": "Echo River Contamination",
+          "kind": "mystery",
+          "fact": "Field reading confirmed: contamination ribbons are columnar and coherent — point source feeding a fast, tight channel in the upper east fork, not a wide seep. Source lies above the high pasture fence. Reported to Mara Wells at sunrise on day 3.",
           "links": [
-            "echo-river-contamination",
+            "mara-wells",
             "east-fork-run",
+            "east-bank-stock-trail",
+            "high-pasture-fence",
+            "disputed-zone",
             "millbrook"
           ]
         }
@@ -375,25 +382,25 @@
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing behind the counter, hands flat on the wood, two bowls set at the counter edge — watching Brynjar and Usnea, wai"
+          "state": "Standing behind the counter, hands flat on the wood, listening to the field report — asked how far up Brynjar turned bac"
         },
         {
           "name": "Usnea Beard",
-          "state": "Beside Brynjar, coat cold from the lane, attentive and still."
+          "state": "Beside Brynjar at the counter, coat still cold from the lane, attending quietly."
         }
       ],
       "objects": [
         "Banked hearth with active fire",
         "Pot of oat porridge on the hearth — smells of dried herbs",
-        "Two bowls set on the counter edge",
+        "Two bowls set on the counter edge — Brynjar's accepted but untouched",
         "Common room benches and long table",
         "The lane visible through the half-shut door"
       ],
       "threads": [
-        "Mara expects a full field report — east fork contamination, what was found, what wasn't",
-        "Heavy boots on the lane at second watch — heavier than a farmer, passed without stopping; direction and identity unknown",
-        "Dark-coated figure seen on river road two days ago before dawn — identity unresolved",
-        "Second set of boot prints on the east bank trail running downstream — origin unresolved",
+        "Mara has asked how far up Brynjar turned back — question partially answered, awaiting follow-up",
+        "Second downward boot prints on the east bank trail — origin and identity unresolved; Mara now aware",
+        "Heavy boots on the lane at second watch — Mara not yet told",
+        "Dark-coated figure seen on river road two days ago — unresolved",
         "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream"
       ]
     }
@@ -401,7 +408,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 6,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [],
@@ -414,14 +421,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Skiff held on the gravel bar with rope-work and a stranger's help; plank still sprung. Upstream path now contested between a limping boat repair and the stock trail on foot.",
         "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past",
         "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas",
         "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints",
         "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the f",
         "Brynjar has returned to Millbrook at sunrise with field observations — contamination ribbons stronger and columnar upstream, second unidentified boot prints on the trail, gray soil above the fence con",
         "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke",
-        "Heavy boots heard on the wayhouse lane around second watch — nobody entered the common house. Direction and identity still unknown. Mara's meeting about to open."
+        "Heavy boots heard on the wayhouse lane around second watch — nobody entered the common house. Direction and identity still unknown. Mara's meeting about to open.",
+        "Brynjar delivered the rivercraft field reading to Mara: point source, columnar ribbons strengthening upstream, fast channel. Second boot prints on the trail running downstream also reported."
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -443,17 +450,18 @@
         "[d2] Walked Brynjar up the lane, settled him in the back-room pallet, said 'sunrise' and left without ceremony. Door closed before he could reply.",
         "[d2] Not present; Brynjar left before she had food ready. She expects a report by morning.",
         "[d3] Brynjar and Usnea have crossed the lane and entered the wayhouse — Mara is present, fire kept, something cooking; the report is about to begin.",
-        "[d3] Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report."
+        "[d3] Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report.",
+        "[d3] Received Brynjar's rivercraft reading without interruption — asked one sharp follow-up question (how far up before he turned back). Now aware of the second boot prints on the trail"
       ],
       "knownFacts": [
-        "Runs the wayhouse up the lane from the dock",
-        "Has been Millbrook's informal keeper of difficult problems for years",
-        "Has kept a solo midnight watch on the river contamination for two weeks",
         "The rotting skiff at the dock is functional — barely — with a bailer under the thwart",
         "East fork: first braid approximately 3 km up; current increases significantly after dawn",
         "She will have food ready at the wayhouse by sunrise if Brynjar returns",
         "Kept the common room clear of morning traffic — deliberate, not routine",
-        "Wore the same coat as the midnight dock watch; likely slept little or not at all"
+        "Wore the same coat as the midnight dock watch; likely slept little or not at all",
+        "Contamination ribbons are columnar and tight — point source feeding a fast channel, not a broad seep",
+        "Contamination strengthens upstream — source is in the upper east fork",
+        "A second set of boot prints runs downstream on the east bank trail — fresher than the upward prints, different heel from the Venn girl"
       ],
       "skillsObserved": [
         "quiet authority",
@@ -464,7 +472,7 @@
         "quiet hospitality as signal"
       ],
       "status": "active",
-      "statusNote": "In the wayhouse common room at sunrise — fire kept, food on, room deliberately cleared; waiting for Brynjar and Usnea's east fork report.",
+      "statusNote": "In the wayhouse common room at sunrise — receiving the east fork field report from Brynjar; has asked a follow-up question.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -790,7 +798,8 @@
           "[d2] The gray-green mineral ribbons are visibly stronger further upstream on the east fork — confirmed by an independent observer (the east bank traveler) who passed the area this morning. The stock trail ",
           "[d2] From the stock trail above the braid, the gray-green mineral ribbons in the east fork are visibly stronger and more concentrated than at the gravel bar or at Millbrook — the contamination is direction",
           "[d2] Above the high pasture fence on the east fork, the soil itself comes up gray in places — the same mineral signature as the river contamination, now appearing in the surrounding terrain. This suggests ",
-          "[d2] Rivercraft reading of the east fork: contamination ribbons are still columnar and coherent at this distance, meaning the source is feeding directly into a tight, fast channel rather than leeching slow"
+          "[d2] Rivercraft reading of the east fork: contamination ribbons are still columnar and coherent at this distance, meaning the source is feeding directly into a tight, fast channel rather than leeching slow",
+          "[d3] Field reading confirmed: contamination ribbons are columnar and coherent — point source feeding a fast, tight channel in the upper east fork, not a wide seep. Source lies above the high pasture fence."
         ],
         "links": [
           "millbrook",
@@ -798,10 +807,11 @@
           "east-fork-run",
           "east-fork-gravel-bar",
           "east-bank-stock-trail",
-          "high-pasture-fence"
+          "high-pasture-fence",
+          "mara-wells"
         ],
         "createdDay": 1,
-        "updatedDay": 2
+        "updatedDay": 3
       },
       "mara-wells": {
         "id": "mara-wells",
@@ -963,7 +973,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "rivercraft": 5
+      "rivercraft": 6
     },
     "coActivations": {},
     "aspirations": [

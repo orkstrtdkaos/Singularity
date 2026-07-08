@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "medic",
   "level": 1,
-  "xp": 18,
+  "xp": 23,
   "attributes": {
     "physical": 2,
     "mental": 4,
@@ -31,7 +31,7 @@
   "maxHealth": 25,
   "health": 25,
   "maxEnergy": 100,
-  "energy": 73,
+  "energy": 68,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -78,6 +78,14 @@
         "health": 8
       },
       "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Silver-Stemmed Cutting (linen-wrapped)",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A two-node cutting from the uncatalogued east-terrace plants, wrapped in boiled linen. Root angle (20° below horizontal, south-southeast) and node spacing noted in charcoal on the margin. Pale sap at the cut end — no name for it yet.",
+      "consumable": false
     }
   ],
   "deeds": [],
@@ -132,22 +140,63 @@
       {
         "summary": "Echo Sense maps the silver-stemmed plants — the hum has a direction, the roots are unified, and Aevi names it: one system.",
         "narration": "You close your eyes and let the breath out slow. Four energy, conserved — a narrow beam rather than a flood. The echo goes in like a question asked quietly in a library.\n\nWhat comes back is not dramatic. It is precise. The roots of these plants go deep — deeper than brassicas have any business going, deeper than Piotr's irrigation lines, deeper than the terrace's own cut-stone foundation. You count them: six, seven main root channels, each dropping at the same angle, each spaced with the same interval as the branching above. The hum you felt through your fingers has a direction. It does not rise from the soil. It travels along the roots horizontally, south-southeast, disappearing past the range of your sense like a word spoken in the next room. Something is down there that the roots are reaching toward, or reaching from.\n\nAevi goes very still. The motes tighten into a single bright point above the nearest leaf and hold there, not humming now — listening. After a moment, a soft voice behind your ear: \"It is not one plant. It is one system.\" Then silence, which from Aevi counts as emphasis.\n\nPiotr has not moved. The cord is still half-worked. He is watching your face, not the plant."
+      },
+      {
+        "summary": "Adelheid takes a careful cutting from the silver-stemmed plants, notes the root angle and spacing in the linen wrap — Piotr watches the cutting, not her face.",
+        "narration": "You draw the knife clean and press the blade against a stem two nodes up from the soil — the way your teacher in Grindelwald showed you, angled cut, not a pull. The hum intensifies for one held breath, as if the plant notices, then settles back to its low continuous register. The cut is clean. A bead of pale sap forms at the wound: colorless, faintly viscous, nothing you have a name for yet.\n\nYou wrap the cutting in the folded linen from your Medic's Satchel before the sap dries, then set it on your knee and take out the stub of charcoal you keep tucked in the satchel's inner pocket. Root angle: roughly twenty degrees below horizontal, south-southeast — consistent across every channel you felt with Echo Sense. Node spacing: exact, uniform, paired — the same interval as the branching above ground, mirrored in the root structure below. You write the numbers on the linen margin in small clean script, the way you used to label pressed specimens for the Grindelwald herbarium.\n\nAevi drifts closer as you fold the linen, the mote-constellation pulling to a narrow cluster just above your hand. It says nothing — just that bright, watchful quiet it holds when something is interesting enough to silence it entirely. You hear Piotr shift his weight on the gravel downhill. He has still not spoken, still not moved toward you. But when you glance back at him, his eyes are on the wrapped cutting, not your face — and there is something in his stillness that is not quite patience."
       }
     ],
     "lastTurn": {
-      "narration": "You close your eyes and let the breath out slow. Four energy, conserved — a narrow beam rather than a flood. The echo goes in like a question asked quietly in a library.\n\nWhat comes back is not dramatic. It is precise. The roots of these plants go deep — deeper than brassicas have any business going, deeper than Piotr's irrigation lines, deeper than the terrace's own cut-stone foundation. You count them: six, seven main root channels, each dropping at the same angle, each spaced with the same interval as the branching above. The hum you felt through your fingers has a direction. It does not rise from the soil. It travels along the roots horizontally, south-southeast, disappearing past the range of your sense like a word spoken in the next room. Something is down there that the roots are reaching toward, or reaching from.\n\nAevi goes very still. The motes tighten into a single bright point above the nearest leaf and hold there, not humming now — listening. After a moment, a soft voice behind your ear: \"It is not one plant. It is one system.\" Then silence, which from Aevi counts as emphasis.\n\nPiotr has not moved. The cord is still half-worked. He is watching your face, not the plant.",
-      "sceneSummary": "Echo Sense maps the silver-stemmed plants — the hum has a direction, the roots are unified, and Aevi names it: one system.",
+      "narration": "You draw the knife clean and press the blade against a stem two nodes up from the soil — the way your teacher in Grindelwald showed you, angled cut, not a pull. The hum intensifies for one held breath, as if the plant notices, then settles back to its low continuous register. The cut is clean. A bead of pale sap forms at the wound: colorless, faintly viscous, nothing you have a name for yet.\n\nYou wrap the cutting in the folded linen from your Medic's Satchel before the sap dries, then set it on your knee and take out the stub of charcoal you keep tucked in the satchel's inner pocket. Root angle: roughly twenty degrees below horizontal, south-southeast — consistent across every channel you felt with Echo Sense. Node spacing: exact, uniform, paired — the same interval as the branching above ground, mirrored in the root structure below. You write the numbers on the linen margin in small clean script, the way you used to label pressed specimens for the Grindelwald herbarium.\n\nAevi drifts closer as you fold the linen, the mote-constellation pulling to a narrow cluster just above your hand. It says nothing — just that bright, watchful quiet it holds when something is interesting enough to silence it entirely. You hear Piotr shift his weight on the gravel downhill. He has still not spoken, still not moved toward you. But when you glance back at him, his eyes are on the wrapped cutting, not your face — and there is something in his stillness that is not quite patience.",
+      "sceneSummary": "Adelheid takes a careful cutting from the silver-stemmed plants, notes the root angle and spacing in the linen wrap — Piotr watches the cutting, not her face.",
       "choices": [
         {
-          "label": "Ask Piotr directly — does he know what's underneath, and how long the roots have been going that deep?",
+          "label": "Ask Piotr directly — what does he know about these plants? He's been watching them without touching them for reasons of his own.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold the wrapped cutting near the soil at the root mouth — see if the hum responds to proximity before you seal the linen closed.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.4,
+            "concrete_abstract": -0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pack the cutting away and head back down to Millbrook — the afternoon is still yours, and Mara will want to hear what you found. This errand has earned a report.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "direct",
-            "investigate"
+            "plan",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -156,48 +205,15 @@
           "emergenceId": null
         },
         {
-          "label": "Take a cutting now — careful, as Mara said — and note the root angle and spacing in the linen wrap before the memory fades.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "collect",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Follow the hum's direction with Echo Sense — scan south-southeast along the root line to see if it leads to something identifiable under the terrace.",
+          "label": "Look south-southeast from the terrace edge — try to place where that root angle would reach if it continues at the same pitch. Map it with your eyes and what you know of the valley floor below.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "probe",
-            "investigate",
-            "careful"
-          ],
-          "abilityId": "echo_sense",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Say nothing yet — sketch the root pattern and direction in your watercolors before anything shifts, then decide what to share.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": -0.5
+          },
           "difficulty": 0,
           "intentTags": [
-            "record",
-            "careful",
+            "scout",
             "study"
           ],
           "abilityId": null,
@@ -210,8 +226,16 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -4,
-        "inventoryAdd": [],
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Silver-Stemmed Cutting (linen-wrapped)",
+            "kind": "quest",
+            "description": "A two-node cutting from the uncatalogued east-terrace plants, wrapped in boiled linen. Root angle (20° below horizontal, south-southeast) and node spacing noted in charcoal on the margin. Pale sap at the cut end — no name for it yet.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
@@ -220,32 +244,31 @@
         {
           "op": "progress",
           "questId": "maras-errand",
-          "title": "Mara's Errand",
-          "note": "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelheid's face."
+          "note": "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's face."
         }
       ],
       "scene": {
-        "setting": "Terrace Three east, above the mill, midday light full on the slope. Adelheid crouched at the east edge, two fingers still on the silver stem, knife half-drawn, eyes just reopened after the Echo Sense pass. Aevi's motes compressed to a single bright point above the nearest leaf — very still.",
+        "setting": "Terrace Three east, above the mill, midday light full on the slope. Adelheid crouched at the east edge, the linen-wrapped cutting in her lap, knife put away, charcoal stub in hand. A pale bead of sap marks the plant's wound.",
         "npcsPresent": [
           {
             "name": "Piotr",
-            "state": "Standing at the retaining wall downhill, bundle in both hands, cord half-worked — watching Adelheid's face now, not the plant."
+            "state": "Standing at the retaining wall downhill, bundle still in both hands — watching the wrapped cutting now, not Adelheid's face. Has not spoken. Has not moved."
           }
         ],
         "objects": [
           "Cloth-wrapped bundle (with Piotr, cord half-loosened, clay jars inside)",
           "Irrigation channel with fresh river-clay patch at far end",
-          "East-edge plant growth — dense, silver-undersided leaves, exact paired branching, roots confirmed deep and unified",
+          "East-edge plant growth — dense, silver-undersided leaves, exact paired branching; one stem cut cleanly two nodes up, pale sap bead at the wound",
           "Low stone retaining wall along the downhill side",
           "Piotr's tools — trowel, clay bucket, worn cloth cap set aside",
-          "Adelheid's Medic's Satchel — open, folded cutting linen in hand"
+          "Adelheid's Medic's Satchel — open, Silver-Stemmed Cutting (linen-wrapped) resting on knee, charcoal stub in hand"
         ],
         "threads": [
           "The hum travels south-southeast along a unified root system — source or destination unknown, beyond Echo Sense range",
-          "Aevi has named it 'one system' and gone quiet — the motes are held very still",
-          "Piotr is watching Adelheid's face and has still said nothing — he may know what is down there",
+          "Aevi is very bright and very still above the wrapped cutting — went silent at the moment the blade touched the stem",
+          "Piotr's eyes are on the cutting, not Adelheid — he knows something about these plants",
           "Bundle not yet opened by Piotr; private plant note inside",
-          "Cutting not yet taken — Mara's 'carefully' still unresolved"
+          "Mara's 'carefully' — what it meant is still unresolved: the plant registered the cut with a momentary hum-spike"
         ]
       },
       "npcUpdates": [
@@ -254,34 +277,29 @@
           "npcId": "piotr",
           "name": "Piotr",
           "role": "Terrace farmer, Terrace Three east",
-          "note": "Watched Adelheid's face during the Echo Sense pass — not the plant, her face. Still has not spoken. Cord still half-worked.",
+          "note": "Watched Adelheid take the cutting. His eyes moved to the linen-wrapped cutting the moment the blade came away — not to Adelheid's face. Still has not spoken. Still has not moved toward the east edge.",
           "learned": [
-            "He watches Adelheid's expression during her ability use — suggesting he is waiting to see what she finds, not whether she uses an ability"
+            "His attention moved to the cutting the instant it was separated — suggesting the plant or its removal means something specific to him"
           ],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On Terrace Three east, holding Mara's bundle, watching Adelheid's face after the Echo Sense pass — has not spoken, has not moved."
+          "statusNote": "On Terrace Three east, bundle in both hands, watching the wrapped cutting — has still not spoken."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The silver-stemmed east-edge plants share a single unified root system that descends far deeper than the terrace cut — and the internal hum travels south-southeast along the roots, past the range of Echo Sense rank 1.",
+          "text": "A cutting from the silver-stemmed east-edge plants was taken on Day 1 midday — the plant registered the cut with a momentary spike in its internal hum before settling. Pale, nameless sap at the wound. Root angle and node spacing recorded in linen.",
           "subjectId": "uncatalogued-terrace-plants"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Echo Sense confirmed: the east-edge plant roots are unified and deep, angled south-southeast — the hum has a direction and a system behind it.",
+          "note": "One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession.",
           "flag": {
-            "root_system_unified": "day1",
-            "hum_direction": "south-southeast"
-          },
-          "subPlace": {
-            "name": "Terrace Three East",
-            "note": "Root system confirmed unified — hum travels south-southeast along shared roots, depth exceeds terrace foundation. Aevi named it 'one system.'",
-            "visited": true
+            "cutting_taken": "day1",
+            "plant_registered_cut": "true"
           }
         }
       ],
@@ -290,13 +308,13 @@
           "topic": "uncatalogued-terrace-plants",
           "label": "Uncatalogued Terrace Plants",
           "kind": "mystery",
-          "fact": "Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south-southeast along the root line and exits Echo Sense range without stopping. Aevi called it 'one system' and went very still.",
+          "fact": "The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, viscous, and nameless. Root angle confirmed 20° below horizontal, south-southeast, uniform across all channels.",
           "links": [
             "millbrook",
             "mara-wells",
-            "valley-flora-post-transition",
             "maras-errand",
-            "echo-river-contamination"
+            "echo-river-contamination",
+            "valley-flora-post-transition"
           ]
         }
       ],
@@ -304,11 +322,11 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Terrace Three east, above the mill, midday light full on the slope. Adelheid crouched at the east edge, two fingers still on the silver stem, knife half-drawn, eyes just reopened after the Echo Sense pass. Aevi's motes compressed to a single bright point above the nearest leaf — very still.",
+      "setting": "Terrace Three east, above the mill, midday light full on the slope. Adelheid crouched at the east edge, the linen-wrapped cutting in her lap, knife put away, charcoal stub in hand. A pale bead of sap marks the plant's wound.",
       "npcsPresent": [
         {
           "name": "Piotr",
-          "state": "Standing at the retaining wall downhill, bundle in both hands, cord half-worked — watching Adelheid's face now, not the "
+          "state": "Standing at the retaining wall downhill, bundle still in both hands — watching the wrapped cutting now, not Adelheid's f"
         }
       ],
       "objects": [
@@ -317,21 +335,21 @@
         "East-edge plant growth — dense, silver-undersided leaves, exact paired branching",
         "Low stone retaining wall along the downhill side",
         "Piotr's tools — trowel, clay bucket, worn cloth cap set aside",
-        "Adelheid's Medic's Satchel — open, folded cutting linen in hand"
+        "Adelheid's Medic's Satchel — open, Silver-Stemmed Cutting (linen-wrapped) restin"
       ],
       "threads": [
         "The hum travels south-southeast along a unified root system — source or destination unknown, beyond Echo Sense range",
-        "Aevi has named it 'one system' and gone quiet — the motes are held very still",
-        "Piotr is watching Adelheid's face and has still said nothing — he may know what is down there",
+        "Aevi is very bright and very still above the wrapped cutting — went silent at the moment the blade touched the stem",
+        "Piotr's eyes are on the cutting, not Adelheid — he knows something about these plants",
         "Bundle not yet opened by Piotr; private plant note inside",
-        "Cutting not yet taken — Mara's 'carefully' still unresolved"
+        "Mara's 'carefully' — what it meant is still unresolved: the plant registered the cut with a momentary hum-spike"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 19,
+    "hour": 20,
     "realAnchor": null
   },
   "companions": [
@@ -349,7 +367,8 @@
         "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only.",
         "Bundle delivered to Piotr on Terrace Three east. Note left private. Uncatalogued plants observed at the east edge — study pending.",
         "Bundle delivered. Adelheid has reached the uncatalogued east-edge plants and felt a hum through the stem on first contact — active observation now underway.",
-        "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelhe"
+        "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelhe",
+        "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's fa"
       ],
       "startedAt": "2026-07-08T18:17:05.695Z"
     }
@@ -408,7 +427,8 @@
         "[d1] Received the bundle from Adelheid without questions. Confirmed the note is inside; stopped himself from opening it in front of her. Manner suggests he was expecting this delivery.",
         "[d1] Watched Adelheid move toward the silver-stemmed plants. Did not stop her. Did not look away. Holding the bundle still.",
         "[d1] Watched Adelheid make first contact with the silver-stemmed plants. Has not moved, has not spoken, has not crossed toward the east edge. His stillness reads as deliberate familiari",
-        "[d1] Watched Adelheid's face during the Echo Sense pass — not the plant, her face. Still has not spoken. Cord still half-worked."
+        "[d1] Watched Adelheid's face during the Echo Sense pass — not the plant, her face. Still has not spoken. Cord still half-worked.",
+        "[d1] Watched Adelheid take the cutting. His eyes moved to the linen-wrapped cutting the moment the blade came away — not to Adelheid's face. Still has not spoken. Still has not moved to"
       ],
       "knownFacts": [
         "Was expecting a delivery from Mara — recognized the bundle immediately",
@@ -416,14 +436,15 @@
         "Works Terrace Three east himself; knows this land well",
         "He watches the east-edge plants without approaching them — possible familiarity or wariness",
         "He watches the east-edge plants without approaching — pattern suggests he has made a conscious choice not to touch them",
-        "He watches Adelheid's expression during her ability use — suggesting he is waiting to see what she finds, not whether she uses an ability"
+        "He watches Adelheid's expression during her ability use — suggesting he is waiting to see what she finds, not whether she uses an ability",
+        "His attention moved to the cutting the instant it was separated — suggesting the plant or its removal means something specific to him"
       ],
       "skillsObserved": [
         "careful handling of fragile goods",
         "economy of speech"
       ],
       "status": "active",
-      "statusNote": "On Terrace Three east, holding Mara's bundle, watching Adelheid's face after the Echo Sense pass — has not spoken, has not moved.",
+      "statusNote": "On Terrace Three east, bundle in both hands, watching the wrapped cutting — has still not spoken.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -438,13 +459,16 @@
         "[d1] Terrace Three east has an untended east edge colonized by an uncatalogued silver-leafed plant with paired branching at every node — spreading outside the terrace grid. First observed Day 1 midday.",
         "[d1] The silver-stemmed east-edge plants hum internally when touched — confirmed Day 1 midday by Adelheid on first direct contact.",
         "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum and brightened — the motes pulled tight and close above the leaves, as if listening for an answer from the plant tissue.",
-        "[d1] Echo Sense confirmed: the east-edge plant roots are unified and deep, angled south-southeast — the hum has a direction and a system behind it."
+        "[d1] Echo Sense confirmed: the east-edge plant roots are unified and deep, angled south-southeast — the hum has a direction and a system behind it.",
+        "[d1] One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession."
       ],
       "flags": {
         "plant_hum_confirmed": "day1",
         "aevi_resonated_with_plant": "day1",
         "root_system_unified": "day1",
-        "hum_direction": "south-southeast"
+        "hum_direction": "south-southeast",
+        "cutting_taken": "day1",
+        "plant_registered_cut": "true"
       },
       "subPlaces": {
         "terrace-three-east": {
@@ -573,13 +597,15 @@
           "[d1] First direct observation on Terrace Three east: silver-undersided leaves, stems branching in paired nodes with unusual regularity — pattern feels almost systematic. Spreads outside the terrace layout.",
           "[d1] On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired",
           "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr w",
-          "[d1] Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south"
+          "[d1] Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south",
+          "[d1] The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, vis"
         ],
         "links": [
           "millbrook",
           "mara-wells",
           "valley-flora-post-transition",
-          "maras-errand"
+          "maras-errand",
+          "echo-river-contamination"
         ],
         "createdDay": 1,
         "updatedDay": 1
@@ -605,7 +631,7 @@
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 0.25
+    "aevi": 0.5
   },
   "practice": {
     "schemaVersion": 1,
@@ -632,6 +658,12 @@
     {
       "id": "uncatalogued-terrace-plants",
       "text": "The silver-stemmed east-edge plants share a single unified root system that descends far deeper than the terrace cut — and the internal hum travels south-southeast along the roots, past the range of E",
+      "day": 1,
+      "subjectId": "uncatalogued-terrace-plants"
+    },
+    {
+      "id": "uncatalogued-terrace-plants",
+      "text": "A cutting from the silver-stemmed east-edge plants was taken on Day 1 midday — the plant registered the cut with a momentary spike in its internal hum before settling. Pale, nameless sap at the wound.",
       "day": 1,
       "subjectId": "uncatalogued-terrace-plants"
     }

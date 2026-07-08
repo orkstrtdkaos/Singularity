@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 32,
+  "xp": 37,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -21,13 +21,13 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.18763718750000002
+    "spectrumId": -0.183255328125
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 65,
+  "energy": 60,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -167,14 +167,21 @@
       {
         "summary": "Brynjar enters the common house at sunrise — two women at breakfast, fire still warm, Mara's wayhouse chimney smoking up the lane.",
         "narration": "The common house is exactly what the map promised: low eaves, open door, the smell of woodsmoke and something starchy still warm in a pot on the hearth's edge. You step inside and the packed-earth floor takes your weight without a creak. The two women at the far end of the table don't interrupt themselves — the nearer one glances at you the way you'd glance at a door swinging open on its own, just long enough to confirm it's not important, then goes back to her bowl.\n\nThe room is otherwise empty. Clay jug, a few cups, a cord of firewood stacked against the east wall. Through the open door behind you the lane runs up to the wayhouse, its chimney steady and honest — smoke straight up in the cold still air, which means Mara Wells has had a fire going for an hour at least. She's awake and she's waiting.\n\nUsnea is somewhere just outside in the lane — you heard boots on gravel as you came in — but hasn't followed you through the door yet. The morning is quiet enough that you can take a breath and collect yourself before you walk into the wayhouse conversation that is going to set the shape of the day."
+      },
+      {
+        "summary": "Usnea Beard: Usnea steps inside to find and introduce themselves to Brynjar by the common house fire."
+      },
+      {
+        "summary": "Two women at breakfast place the east bank traveler as a Venn family shepherd — and note a dark-coated figure who walked the river road south-to-north two days ago, before dawn, without stopping.",
+        "narration": "You settle onto the bench across from the two women — not too close, not hovering — and wait for a pause in their low conversation before you speak. \"The east bank stock trail,\" you say, keeping it easy, like it's a small thing. \"Does anyone use it regular this time of year?\"\n\nThe nearer woman — grey braid, clay-stained hands, a face built for patience — doesn't look up from her bowl right away. Then she does. \"Pasture folk, mostly. The Venn family runs sheep up the second ridge. Their girl goes up every few weeks to check the fold.\" She tilts her bowl toward her mouth for a last swallow. \"Wool-buyer out of the Heights passes through in autumn, but that's months off yet.\"\n\nThe other woman, older and rounder, sets down her cup. \"There was someone else, though. Day before yesterday, maybe.\" She frowns at the table as if the frown might sharpen her memory. \"Didn't come through the village. Went up the river road from the south end, early — before the dock woke. I only saw because I was up with a coughing grandchild.\" She shrugs: it's a small thing, or she's decided to treat it as one. \"Coat was dark. Didn't stop.\"\n\nShe refills her cup from the jug and offers you nothing more. Usnea steps in through the open door just as the older woman looks back down — a new presence in the warm room, the cold lane still on their coat."
       }
     ],
     "lastTurn": {
-      "narration": "The common house is exactly what the map promised: low eaves, open door, the smell of woodsmoke and something starchy still warm in a pot on the hearth's edge. You step inside and the packed-earth floor takes your weight without a creak. The two women at the far end of the table don't interrupt themselves — the nearer one glances at you the way you'd glance at a door swinging open on its own, just long enough to confirm it's not important, then goes back to her bowl.\n\nThe room is otherwise empty. Clay jug, a few cups, a cord of firewood stacked against the east wall. Through the open door behind you the lane runs up to the wayhouse, its chimney steady and honest — smoke straight up in the cold still air, which means Mara Wells has had a fire going for an hour at least. She's awake and she's waiting.\n\nUsnea is somewhere just outside in the lane — you heard boots on gravel as you came in — but hasn't followed you through the door yet. The morning is quiet enough that you can take a breath and collect yourself before you walk into the wayhouse conversation that is going to set the shape of the day.",
-      "sceneSummary": "Brynjar enters the common house at sunrise — two women at breakfast, fire still warm, Mara's wayhouse chimney smoking up the lane.",
+      "narration": "You settle onto the bench across from the two women — not too close, not hovering — and wait for a pause in their low conversation before you speak. \"The east bank stock trail,\" you say, keeping it easy, like it's a small thing. \"Does anyone use it regular this time of year?\"\n\nThe nearer woman — grey braid, clay-stained hands, a face built for patience — doesn't look up from her bowl right away. Then she does. \"Pasture folk, mostly. The Venn family runs sheep up the second ridge. Their girl goes up every few weeks to check the fold.\" She tilts her bowl toward her mouth for a last swallow. \"Wool-buyer out of the Heights passes through in autumn, but that's months off yet.\"\n\nThe other woman, older and rounder, sets down her cup. \"There was someone else, though. Day before yesterday, maybe.\" She frowns at the table as if the frown might sharpen her memory. \"Didn't come through the village. Went up the river road from the south end, early — before the dock woke. I only saw because I was up with a coughing grandchild.\" She shrugs: it's a small thing, or she's decided to treat it as one. \"Coat was dark. Didn't stop.\"\n\nShe refills her cup from the jug and offers you nothing more. Usnea steps in through the open door just as the older woman looks back down — a new presence in the warm room, the cold lane still on their coat.",
+      "sceneSummary": "Two women at breakfast place the east bank traveler as a Venn family shepherd — and note a dark-coated figure who walked the river road south-to-north two days ago, before dawn, without stopping.",
       "choices": [
         {
-          "label": "Go straight to the wayhouse — Mara has been waiting; give her the full report while the details are fresh.",
+          "label": "Thank them and head straight up to Mara's wayhouse — she's been waiting, and the dark-coated figure is new information she needs.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
@@ -182,8 +189,8 @@
           },
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "report"
+            "report",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -192,27 +199,45 @@
           "emergenceId": null
         },
         {
-          "label": "Pour yourself a cup from the clay jug and sit for a moment — catch your breath and organize your thoughts before you face Mara with half-formed guesses.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Ask the older woman to be more specific about the dark-coated figure — direction of travel, size, anything else she caught at that hour.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
             "spectrumId": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "plan"
+            "study",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Step back to the doorway and call Usnea in — whatever the wayhouse conversation becomes, having a witness or a second voice might matter.",
+          "label": "Ask if they know the Venn family — where their holding is, whether anyone's seen their girl come back down from the ridge yet.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Greet Usnea and share what you've just learned — the Venn shepherd, the dark-coated figure — before you both go to Mara.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
             "spectrumId": 0
           },
@@ -226,24 +251,6 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Try the two women at the table — ask casually whether either of them knows who else uses the east bank stock trail this time of year.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
       "deeds": [],
@@ -255,74 +262,197 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "east-fork-run",
+          "title": "East Fork at First Light",
+          "note": "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke, without stopping."
+        }
+      ],
       "scene": {
-        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; two windows letting in thin gold morning light.",
+        "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; thin gold morning light through two unshuttered windows.",
         "npcsPresent": [
           {
-            "name": "Two older women",
-            "state": "Eating from bowls at the far end of the long table; one glanced at Brynjar on entry, returned to her food without comment."
+            "name": "Grey-braided woman (clay-stained hands)",
+            "state": "Finished her bowl; gave the straight answer about Venn family and their shepherd girl; not unfriendly, not curious."
+          },
+          {
+            "name": "Older rounder woman",
+            "state": "Refilled her cup; volunteered the dark-coated figure without much weight — treating it as a small thing; looking back down at the table."
           },
           {
             "name": "Usnea Beard",
-            "state": "Somewhere in the lane just outside — present but not yet in the building."
+            "state": "Just stepped in through the open door from the cold lane; coat still carrying the outside chill."
           }
         ],
         "objects": [
           "Long table with benches",
           "Banked hearth, still warm",
           "Cord of firewood stacked against the east wall",
-          "Clay jug and cups on the table — left from last night",
+          "Clay jug and cups on the table",
           "Two unshuttered windows",
           "Wayhouse visible up the lane through the open door — chimney still smoking"
         ],
         "threads": [
           "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting",
-          "Second set of boot prints on the east bank trail running downstream — origin and identity unresolved",
-          "Ritualized bout with the east bank traveler — postponed, not cancelled; her name still unknown",
+          "Dark-coated figure: walked the river road south-to-north two days ago before dawn, didn't stop at the village — identity unknown",
+          "East bank traveler identified as Venn family shepherd girl — name still unlearned, still upstream",
+          "Second set of boot prints on the east bank trail running downstream — now plausibly linked to the dark-coated figure",
+          "Ritualized bout with the east bank traveler — postponed, not cancelled",
           "Contamination source estimated 2–4 km past the high pasture fence, within the Disputed Zone — unreached"
         ]
       },
-      "npcUpdates": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [],
-      "encounterOps": [],
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "grey-braided-woman",
+          "name": "Grey-braided woman",
+          "role": "Millbrook local, morning regular at the common house",
+          "description": "Patient-faced, clay-stained hands, grey braid — gave the straight answer about the Venn family without fuss.",
+          "note": "Named the Venn family as the regular users of the east bank stock trail; identified their girl as the one who checks the fold every few weeks.",
+          "learned": [
+            "Venn family runs sheep on the second ridge and uses the east bank stock trail regularly",
+            "Their daughter makes periodic trips to check the fold above the high pasture fence"
+          ],
+          "skillsObserved": [
+            "local knowledge, economy of words"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Finishing breakfast at the common house; not especially curious about Brynjar."
+        },
+        {
+          "op": "meet",
+          "npcId": "rounder-woman",
+          "name": "Rounder woman",
+          "role": "Millbrook local, morning regular at the common house",
+          "description": "Older and rounder than her companion; up at odd hours with a coughing grandchild; treats odd details as small things.",
+          "note": "Volunteered an unsolicited observation: a dark-coated figure walked the river road south-to-north two days ago before the dock woke — didn't stop, came from the south end.",
+          "learned": [
+            "A dark-coated figure was seen walking the river road from the south toward the east fork roughly two days ago, before dawn, without stopping at the village"
+          ],
+          "skillsObserved": [
+            "incidental observation"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Finishing breakfast at the common house."
+        },
+        {
+          "op": "update",
+          "npcId": "unknown-east-bank-traveler",
+          "name": "Unknown (east bank traveler)",
+          "role": "Unnamed traveler on the east fork stock trail",
+          "note": "Identified by village locals as the Venn family's shepherd girl — makes regular trips to the high pasture fold to check the fold. Name still unlearned.",
+          "learned": [
+            "Almost certainly the Venn family's daughter — local shepherd checking a fold above the high pasture fence where three ewes and a ram went missing in autumn"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Upstream on the east bank stock trail, heading toward the high pasture fold — bout postponed, name still unlearned."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A dark-coated figure was seen walking the river road from the south toward the east fork two days ago (day 1 of the current timeline) before the dock woke — didn't stop at the village. Identity unknown. Timing plausibly matches the fresher downstream boot prints found on the east bank stock trail.",
+          "subjectId": null
+        },
+        {
+          "op": "add",
+          "text": "The east bank traveler is almost certainly the Venn family's shepherd daughter — locals confirm the Venn family runs sheep on the second ridge and their girl checks the fold every few weeks.",
+          "subjectId": "unknown-east-bank-traveler"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Common house locals confirm the Venn family as the regular users of the east bank stock trail; a dark-coated figure was seen on the river road two mornings ago before dawn.",
+          "subPlace": {
+            "name": "Millbrook Common House",
+            "note": "Low-ceilinged public building between wayhouse lane and dock road; open mornings; packed-earth floor; grey-braided and rounder women breakfast here regularly.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "east-bank-stock-trail",
+          "label": "East Bank Stock Trail",
+          "kind": "mystery",
+          "fact": "The regular user of the east bank trail is the Venn family's shepherd daughter, who checks a fold above the high pasture fence every few weeks. A separate, unknown dark-coated figure walked the river road south-to-north two days ago before dawn — not stopping — whose timing matches the fresher downstream boot prints.",
+          "links": [
+            "echo-river-contamination",
+            "east-fork-run",
+            "high-pasture-fence",
+            "disputed-zone"
+          ]
+        },
+        {
+          "topic": "dark-coated-figure",
+          "label": "Dark-Coated Figure",
+          "kind": "mystery",
+          "fact": "Seen by a Millbrook local walking the river road from the south toward the east fork roughly two days ago, before the dock woke. Did not stop at the village. Identity unknown. May be the source of the fresher downstream boot prints on the east bank stock trail.",
+          "links": [
+            "east-bank-stock-trail",
+            "echo-river-contamination",
+            "east-fork-run",
+            "high-pasture-fence",
+            "disputed-zone"
+          ]
+        },
+        {
+          "topic": "venn-family",
+          "label": "Venn Family",
+          "kind": "person",
+          "fact": "A sheep-farming family who run their flock on the second ridge above Millbrook, using the east bank stock trail regularly. Their daughter checks a fold above the high pasture fence every few weeks — the east bank traveler Brynjar met is almost certainly her.",
+          "links": [
+            "east-bank-stock-trail",
+            "high-pasture-fence",
+            "millbrook"
+          ]
+        }
+      ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; two windows letting in thin gold morning light.",
+      "setting": "Millbrook common house at sunrise — packed-earth floor, wide eaves, door open to the cold lane; banked hearth still warm; thin gold morning light through two unshuttered windows.",
       "npcsPresent": [
         {
-          "name": "Two older women",
-          "state": "Eating from bowls at the far end of the long table; one glanced at Brynjar on entry, returned to her food without commen"
+          "name": "Grey-braided woman (clay-stained hands)",
+          "state": "Finished her bowl; gave the straight answer about Venn family and their shepherd girl; not unfriendly, not curious."
+        },
+        {
+          "name": "Older rounder woman",
+          "state": "Refilled her cup; volunteered the dark-coated figure without much weight — treating it as a small thing; looking back do"
         },
         {
           "name": "Usnea Beard",
-          "state": "Somewhere in the lane just outside — present but not yet in the building."
+          "state": "Just stepped in through the open door from the cold lane; coat still carrying the outside chill."
         }
       ],
       "objects": [
         "Long table with benches",
         "Banked hearth, still warm",
         "Cord of firewood stacked against the east wall",
-        "Clay jug and cups on the table — left from last night",
+        "Clay jug and cups on the table",
         "Two unshuttered windows",
         "Wayhouse visible up the lane through the open door — chimney still smoking"
       ],
       "threads": [
         "Mara Wells expects a report — wayhouse chimney smoking, she is awake and waiting",
-        "Second set of boot prints on the east bank trail running downstream — origin and identity unresolved",
-        "Ritualized bout with the east bank traveler — postponed, not cancelled; her name still unknown",
-        "Contamination source estimated 2–4 km past the high pasture fence, within the Disputed Zone — unreached"
+        "Dark-coated figure: walked the river road south-to-north two days ago before dawn, didn't stop at the village — identity unknown",
+        "East bank traveler identified as Venn family shepherd girl — name still unlearned, still upstream",
+        "Second set of boot prints on the east bank trail running downstream — now plausibly linked to the dark-coated figure",
+        "Ritualized bout with the east bank traveler — postponed, not cancelled"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 2,
-    "hour": 23,
+    "day": 3,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [],
@@ -335,14 +465,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Mara confirmed the skiff holds (barely, with a bailer), warned the first braid is 3 km up and the current picks up after dawn. She expects a report by morning.",
         "Skiff's port plank sprung crossing into the braid; grounded on a gravel bar 12 meters short of the first braid's mouth. East bank has a narrow stock trail above flood line. The gray-green contaminatio",
         "Skiff held on the gravel bar with rope-work and a stranger's help; plank still sprung. Upstream path now contested between a limping boat repair and the stock trail on foot.",
         "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past",
         "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas",
         "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints",
         "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the f",
-        "Brynjar has returned to Millbrook at sunrise with field observations — contamination ribbons stronger and columnar upstream, second unidentified boot prints on the trail, gray soil above the fence con"
+        "Brynjar has returned to Millbrook at sunrise with field observations — contamination ribbons stronger and columnar upstream, second unidentified boot prints on the trail, gray soil above the fence con",
+        "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke"
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -403,17 +533,18 @@
         "[d2] Answered the straight question without deflection: headed to a high pasture fold above the fence to check on three ewes and a ram that didn't come down with the autumn flock. Also ",
         "[d2] Walking ahead, unaware of the downstream boot prints Brynjar has just noticed. Still destination-focused — high pasture fold. Name still unasked this beat.",
         "[d2] Accepted Brynjar's challenge after a long beat of consideration — led him to a flat shelf above the flood line and squared up with calm, practical confidence. Shed the coat; weight",
-        "[d2] Brynjar called off the bout with a rain-check and turned back for Millbrook. The traveler stood down without protest — filed the postponement, picked up her coat, and continued ups"
+        "[d2] Brynjar called off the bout with a rain-check and turned back for Millbrook. The traveler stood down without protest — filed the postponement, picked up her coat, and continued ups",
+        "[d2] Identified by village locals as the Venn family's shepherd girl — makes regular trips to the high pasture fold to check the fold. Name still unlearned."
       ],
       "knownFacts": [
-        "Subject of Mara Wells is now a closed door",
         "Headed to a high pasture fold above the fence — three ewes and a ram missing since autumn",
         "Soil above the high pasture fence is more mineral than below it, comes up gray in places — noticed independently of the river question",
         "Estimates two hours to the fence at current pace",
         "Unaware Brynjar has stopped to read the trail surface — has not looked back",
         "Accepted a ritualized bout with named stakes — willing to engage on Brynjar's terms even if skeptical",
         "Chose the ground herself — knows to control terrain",
-        "Accepted the postponement without hostility — practical, not offended"
+        "Accepted the postponement without hostility — practical, not offended",
+        "Almost certainly the Venn family's daughter — local shepherd checking a fold above the high pasture fence where three ewes and a ram went missing in autumn"
       ],
       "skillsObserved": [
         "unprompted environmental observation",
@@ -424,7 +555,60 @@
         "practical grappling stance"
       ],
       "status": "active",
-      "statusNote": "Heading upstream on the east bank stock trail toward the high pasture fold; bout with Brynjar postponed — name still unlearned.",
+      "statusNote": "Upstream on the east bank stock trail, heading toward the high pasture fold — bout postponed, name still unlearned.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 2
+      }
+    },
+    "grey-braided-woman": {
+      "id": "grey-braided-woman",
+      "name": "Grey-braided woman",
+      "role": "Millbrook local, morning regular at the common house",
+      "description": "Patient-faced, clay-stained hands, grey braid — gave the straight answer about the Venn family without fuss.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 2
+      },
+      "relationship": 0,
+      "history": [
+        "[d2] Named the Venn family as the regular users of the east bank stock trail; identified their girl as the one who checks the fold every few weeks."
+      ],
+      "knownFacts": [
+        "Venn family runs sheep on the second ridge and uses the east bank stock trail regularly",
+        "Their daughter makes periodic trips to check the fold above the high pasture fence"
+      ],
+      "skillsObserved": [
+        "local knowledge, economy of words"
+      ],
+      "status": "active",
+      "statusNote": "Finishing breakfast at the common house; not especially curious about Brynjar.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 2
+      }
+    },
+    "rounder-woman": {
+      "id": "rounder-woman",
+      "name": "Rounder woman",
+      "role": "Millbrook local, morning regular at the common house",
+      "description": "Older and rounder than her companion; up at odd hours with a coughing grandchild; treats odd details as small things.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 2
+      },
+      "relationship": 0,
+      "history": [
+        "[d2] Volunteered an unsolicited observation: a dark-coated figure walked the river road south-to-north two days ago before the dock woke — didn't stop, came from the south end."
+      ],
+      "knownFacts": [
+        "A dark-coated figure was seen walking the river road from the south toward the east fork roughly two days ago, before dawn, without stopping at the village"
+      ],
+      "skillsObserved": [
+        "incidental observation"
+      ],
+      "status": "active",
+      "statusNote": "Finishing breakfast at the common house.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -454,7 +638,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] Gravel bar just below east fork's first braid: skiff grounded here with sprung plank; gray-green contamination visibly ribboned in the white water; stock trail on east bank above flood line.",
         "[d2] An unnamed young traveler descended from the east bank stock trail onto the gravel bar at dawn — confirming the trail sees recent active use.",
         "[d2] Skiff tied off and abandoned on the gravel bar boulder — sprung plank, bailer still under thwart. Trail confirmed passable upstream to high pasture fence by a recent traveler.",
         "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence.",
@@ -465,7 +648,8 @@
         "[d2] Brynjar returned to Millbrook at sunrise via the east bank stock trail and river road — the wayhouse chimney is smoking, the dock is empty, the river still shows gray-green at the village edge.",
         "[d2] An oilcloth-covered map board stands at the lane junction post — hand-inked valley map kept by multiple hands; east fork stock trail and high pasture labeled; Disputed Zone marked beyond, detail absen",
         "[d2] Map board lower margin carries local Millbrook annotations in a lighter hand: common house with fire symbol, mill row, and the terraces (weekly gathering/market arc above the well).",
-        "[d2] Common house visited at sunrise — public space, open door, banked hearth, long table; two local women at breakfast; no unusual presences"
+        "[d2] Common house visited at sunrise — public space, open door, banked hearth, long table; two local women at breakfast; no unusual presences",
+        "[d2] Common house locals confirm the Venn family as the regular users of the east bank stock trail; a dark-coated figure was seen on the river road two mornings ago before dawn."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -520,7 +704,7 @@
           "name": "Millbrook Common House",
           "day": 2,
           "visited": true,
-          "note": "Low-ceilinged public building between wayhouse lane and dock road; fire symbol on map; open mornings; packed-earth floor"
+          "note": "Low-ceilinged public building between wayhouse lane and dock road; open mornings; packed-earth floor; grey-braided and r"
         },
         "the-terraces": {
           "name": "The Terraces",
@@ -704,13 +888,15 @@
           "[d2] Trail is confirmed passable by recent foot traffic to the high pasture fence approximately 2 km past the first braid; narrows above that but does not vanish. Someone descended from the second ridge th",
           "[d2] The trail leads to a high pasture fold above the fence, ~2 hours upstream at trail pace. The traveler walking it now is checking on three missing sheep — a practical errand that coincidentally puts th",
           "[d2] A second set of boot prints runs downstream in the trail mud — smaller heel, different tread, and fresher than the upstream traffic (made when the mud was wetter, i.e. within the last day or two). Not",
-          "[d2] The east bank traveler accepted a ritualized bout — name for fence-help — with composed practicality. She chose the ground herself: a flat shelf above the flood line near the alder bend, ten paces off"
+          "[d2] The east bank traveler accepted a ritualized bout — name for fence-help — with composed practicality. She chose the ground herself: a flat shelf above the flood line near the alder bend, ten paces off",
+          "[d2] The regular user of the east bank trail is the Venn family's shepherd daughter, who checks a fold above the high pasture fence every few weeks. A separate, unknown dark-coated figure walked the river "
         ],
         "links": [
           "echo-river-contamination",
           "east-fork-run",
           "east-fork-gravel-bar",
-          "high-pasture-fence"
+          "high-pasture-fence",
+          "disputed-zone"
         ],
         "createdDay": 2,
         "updatedDay": 2
@@ -743,6 +929,37 @@
           "mara-wells",
           "millbrook-river-dock",
           "east-fork-run"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "dark-coated-figure": {
+        "id": "dark-coated-figure",
+        "label": "Dark-Coated Figure",
+        "kind": "mystery",
+        "facts": [
+          "[d2] Seen by a Millbrook local walking the river road from the south toward the east fork roughly two days ago, before the dock woke. Did not stop at the village. Identity unknown. May be the source of the"
+        ],
+        "links": [
+          "east-bank-stock-trail",
+          "echo-river-contamination",
+          "east-fork-run",
+          "high-pasture-fence"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "venn-family": {
+        "id": "venn-family",
+        "label": "Venn Family",
+        "kind": "person",
+        "facts": [
+          "[d2] A sheep-farming family who run their flock on the second ridge above Millbrook, using the east bank stock trail regularly. Their daughter checks a fold above the high pasture fence every few weeks — t"
+        ],
+        "links": [
+          "east-bank-stock-trail",
+          "high-pasture-fence",
+          "millbrook"
         ],
         "createdDay": 2,
         "updatedDay": 2
@@ -843,6 +1060,18 @@
       "text": "Millbrook's common house sits between the wayhouse lane and the dock road; a weekly market or gathering occurs at the terraces above the well; mill row is north of the common house near the water whee",
       "day": 2,
       "subjectId": "millbrook"
+    },
+    {
+      "id": "f13",
+      "text": "A dark-coated figure was seen walking the river road from the south toward the east fork two days ago (day 1 of the current timeline) before the dock woke — didn't stop at the village. Identity unknow",
+      "day": 2,
+      "subjectId": null
+    },
+    {
+      "id": "unknown-east-bank-traveler",
+      "text": "The east bank traveler is almost certainly the Venn family's shepherd daughter — locals confirm the Venn family runs sheep on the second ridge and their girl checks the fold every few weeks.",
+      "day": 2,
+      "subjectId": "unknown-east-bank-traveler"
     }
   ],
   "precursorAccess": [],

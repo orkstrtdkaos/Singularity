@@ -25,7 +25,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 90,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -109,36 +109,23 @@
       {
         "summary": "Brynjar commits to taking the skiff up the east fork at first light; Mara offers him the wayhouse for the night.",
         "narration": "You glance once at the rotting skiff tied at the dock's far end, then back to Mara. \"East fork,\" you say, because the child's stone map said so before either of you did. \"That's my best read tonight. But a read from the dock isn't the same as eyes on it. First light, if that skiff holds water, I'll take it up and see what's there to see. You'll have a proper answer by morning.\"\n\nMara's gaze follows yours to the skiff, then returns. She doesn't look hopeful, exactly — more like someone who has been holding a problem alone for a long time and has just handed one end of it to someone else. The relief is subtle enough that she probably doesn't mean to show it. She picks up her tin cup, finds it empty, and sets it back down.\n\n\"The skiff holds,\" she says. \"Barely. There's a bailer under the thwart.\" She pauses, and when she speaks again there's something quieter in it, something that costs her a fraction. \"East fork is three kilometers to the first braid. Whatever's in the water is coming from further than that, I think. You'll want an early start if you mean to get past the braid before the current picks up.\"\n\nShe stands then — heavier than she sat, the way people are after a long night — and tucks the tin cup under one arm. \"Wayhouse is open. There's a pallet in the back room, no charge, and I'll have something hot when the sun breaks if you're back by then.\" She says it practically, the way she'd say anything, but the offer is clear: she wants you where she can find you come morning."
+      },
+      {
+        "summary": "Brynjar follows Mara to the wayhouse and sleeps before the east fork run.",
+        "narration": "You fall into step behind Mara as she turns from the dock, the oil lamp swinging its last arc above the empty river. The lane is narrow and packed earth, softened by spring damp, and your boots make almost no sound. Hers do — a steady, unhurried tread that says she has walked this particular path ten thousand times and intends to walk it ten thousand more. The wayhouse resolves out of the dark ahead: a low, wide building with one amber window still lit, smoke threading from the chimney into the cold.\n\nInside is warmer than you expected and smells of dried herbs, woodsmoke, and the particular settled-in smell of a place that has absorbed decades of travelers passing through and staying and leaving. Mara leads you past a common room with a banked fire and two sleeping shapes bundled on benches — traders by the look of their packs — and through a low door at the back. The pallet is narrow and the blanket is coarse wool, but it is dry and the straw is recent enough to still smell faintly of summer.\n\n\"Sunrise,\" Mara says from the doorway, quiet enough not to carry. \"I'll have something hot.\" She pulls the door closed before you can answer.\n\nYou are asleep before you've finished thinking through the tidal push of the east fork's current. Somewhere between one breath and the next, the contamination problem becomes a dream of water the color of old copper, and you follow it upstream without arriving anywhere."
       }
     ],
     "lastTurn": {
-      "narration": "You glance once at the rotting skiff tied at the dock's far end, then back to Mara. \"East fork,\" you say, because the child's stone map said so before either of you did. \"That's my best read tonight. But a read from the dock isn't the same as eyes on it. First light, if that skiff holds water, I'll take it up and see what's there to see. You'll have a proper answer by morning.\"\n\nMara's gaze follows yours to the skiff, then returns. She doesn't look hopeful, exactly — more like someone who has been holding a problem alone for a long time and has just handed one end of it to someone else. The relief is subtle enough that she probably doesn't mean to show it. She picks up her tin cup, finds it empty, and sets it back down.\n\n\"The skiff holds,\" she says. \"Barely. There's a bailer under the thwart.\" She pauses, and when she speaks again there's something quieter in it, something that costs her a fraction. \"East fork is three kilometers to the first braid. Whatever's in the water is coming from further than that, I think. You'll want an early start if you mean to get past the braid before the current picks up.\"\n\nShe stands then — heavier than she sat, the way people are after a long night — and tucks the tin cup under one arm. \"Wayhouse is open. There's a pallet in the back room, no charge, and I'll have something hot when the sun breaks if you're back by then.\" She says it practically, the way she'd say anything, but the offer is clear: she wants you where she can find you come morning.",
-      "sceneSummary": "Brynjar commits to taking the skiff up the east fork at first light; Mara offers him the wayhouse for the night.",
+      "narration": "You fall into step behind Mara as she turns from the dock, the oil lamp swinging its last arc above the empty river. The lane is narrow and packed earth, softened by spring damp, and your boots make almost no sound. Hers do — a steady, unhurried tread that says she has walked this particular path ten thousand times and intends to walk it ten thousand more. The wayhouse resolves out of the dark ahead: a low, wide building with one amber window still lit, smoke threading from the chimney into the cold.\n\nInside is warmer than you expected and smells of dried herbs, woodsmoke, and the particular settled-in smell of a place that has absorbed decades of travelers passing through and staying and leaving. Mara leads you past a common room with a banked fire and two sleeping shapes bundled on benches — traders by the look of their packs — and through a low door at the back. The pallet is narrow and the blanket is coarse wool, but it is dry and the straw is recent enough to still smell faintly of summer.\n\n\"Sunrise,\" Mara says from the doorway, quiet enough not to carry. \"I'll have something hot.\" She pulls the door closed before you can answer.\n\nYou are asleep before you've finished thinking through the tidal push of the east fork's current. Somewhere between one breath and the next, the contamination problem becomes a dream of water the color of old copper, and you follow it upstream without arriving anywhere.",
+      "sceneSummary": "Brynjar follows Mara to the wayhouse and sleeps before the east fork run.",
       "choices": [
         {
-          "label": "Accept Mara's offer — follow her up the lane to the wayhouse and sleep properly before the run",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "rest",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Before turning in, spend a few minutes inspecting the skiff by lamplight — check what shape it's actually in for an early-morning run",
+          "label": "Wake before first light — get to the dock early, check the skiff over properly before Mara surfaces",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
             "careful",
             "prepare"
           ],
@@ -149,14 +136,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Mara one more question before she goes — about the east fork itself, what's up there, who works that land",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Wait for Mara's promised hot meal first — fuel before water",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "gather-information",
-            "plan"
+            "careful",
+            "rest"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -165,14 +152,30 @@
           "emergenceId": null
         },
         {
-          "label": "Sleep rough here at the dock — bedroll from the Traveler's Pack, stay close to the water",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Push off at first light as planned — read the east fork current using Rivercraft before committing to the braid",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "rivercraft",
+          "energyCost": 5,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Mara one more question before she disappears — about the child who made the stone map",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "rest",
-            "scout"
+            "plan",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -183,48 +186,35 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
+        "health": 3,
+        "energy": 40,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "start",
-          "questId": "east-fork-run",
-          "title": "East Fork at First Light",
-          "summary": "Take the rotting skiff up the east fork at dawn and find the upstream source of the river's gray-green contamination.",
-          "giver": "Mara Wells",
-          "note": "Mara confirmed the skiff holds (barely, with a bailer), warned the first braid is 3 km up and the current picks up after dawn. She expects a report by morning.",
-          "xpReward": 25
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Millbrook's river dock at night, early spring. Mara has risen from her barrel and stands at the dock's edge, tin cup tucked under her arm, ready to walk up the lane to the wayhouse. The single oil lamp swings overhead.",
+        "setting": "Back room of Mara's Wayhouse, deep night into early spring pre-dawn. A narrow pallet, coarse wool blanket, low ceiling, door closed. The common room beyond is quiet except for the banked fire settling.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing, tin cup under arm, facing Brynjar — she has just offered the wayhouse pallet and is waiting to see if he'll follow"
+            "state": "Retired to the wayhouse's main quarters; door closed; not present in the back room"
           }
         ],
         "objects": [
-          "Worn dock pilings",
-          "Hemp Rope (30 ft) tied off to a piling",
-          "Two flat-bottomed ferries",
-          "A rotting skiff (Mara says it holds; bailer under the thwart)",
-          "A coil of old line",
-          "A battered tin cup (now under Mara's arm, empty)",
-          "A child's arrangement of river stones — eastern branch stones set slightly apart",
-          "A swinging oil lamp on a hook",
-          "A wooden bucket (damp rim)"
+          "Narrow straw pallet",
+          "Coarse wool blanket",
+          "Traveler's Pack (set down by the pallet)",
+          "Waterskin",
+          "Hemp Rope (30 ft)",
+          "Dried Rations",
+          "Low door to the common room (closed)"
         ],
         "threads": [
-          "East fork run committed to at first light — skiff ready, source unconfirmed",
-          "Mara's wayhouse is open; pallet in the back room offered at no charge",
-          "The child who made the stone map and what else they know remains unexplored",
-          "The river's gray-green iridescence continues; the east fork is the working hypothesis but unverified"
+          "East fork run at first light — skiff ready at the dock, contamination source unconfirmed upstream",
+          "Mara's hot meal promised at sunrise",
+          "The child who made the stone map and what else they know remains unexplored"
         ]
       },
       "npcUpdates": [
@@ -233,105 +223,73 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
-          "note": "Accepted Brynjar's plan without argument; offered the wayhouse pallet for the night and promised something hot at sunrise if he returns by then. Revealed the skiff holds (barely) and that a bailer is under the thwart. Warned the first braid is 3 km up and the current picks up after dawn.",
-          "learned": [
-            "The rotting skiff at the dock is functional — barely — with a bailer under the thwart",
-            "East fork: first braid approximately 3 km up; current increases significantly after dawn",
-            "She will have food ready at the wayhouse by sunrise if Brynjar returns"
-          ],
+          "note": "Walked Brynjar up the lane, settled him in the back-room pallet, said 'sunrise' and left without ceremony. Door closed before he could reply.",
+          "learned": [],
           "skillsObserved": [
-            "local river knowledge",
-            "practical hospitality"
+            "practical hospitality",
+            "economy of words"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the dock, about to walk up the lane to the wayhouse; has handed Brynjar one end of the contamination problem and is cautiously invested in his morning run"
+          "statusNote": "Retired to her own quarters in the wayhouse; will have food ready at sunrise"
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Brynjar has committed to taking the rotting skiff up the east fork at first light to investigate the contamination source; Mara Wells expects a report by morning.",
-          "subjectId": "east-fork-run"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The rotting skiff confirmed functional by Mara — holds water, bailer under thwart; available for use at first light.",
-          "subPlace": {
-            "name": "Millbrook River Dock",
-            "note": "Rotting skiff confirmed functional; bailer under thwart. East fork run planned for first light.",
-            "visited": true
-          }
-        },
-        {
-          "note": "Mara Wells's wayhouse has a pallet in the back room available to Brynjar at no charge; she will have hot food ready at sunrise.",
+          "note": "Brynjar slept in the back-room pallet of Mara's Wayhouse the night before the east fork run — dry straw, coarse wool, two sleeping traders in the common room.",
           "subPlace": {
             "name": "Mara's Wayhouse",
-            "note": "Back-room pallet offered to Brynjar; hot food promised at sunrise. Up the lane from the dock.",
-            "visited": false
+            "note": "Low wide building up the lane from the dock; common room with banked fire and trader guests; back-room pallet used by Brynjar night of day 2.",
+            "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "east-fork-run",
-          "label": "East Fork Approach",
+          "topic": "maras-wayhouse",
+          "label": "Mara's Wayhouse",
           "kind": "place",
-          "fact": "First braid of the east fork is approximately 3 km upstream. Current picks up significantly after dawn. The contamination source is thought to lie beyond the first braid.",
+          "fact": "A low, wide building up the lane from Millbrook's dock. Common room sleeps travelers on benches; a back room with a straw pallet offered to Brynjar. Smells of dried herbs, woodsmoke, decades of passage.",
           "links": [
-            "echo-river-contamination",
+            "mara-wells",
             "millbrook",
             "millbrook-river-dock",
             "east-fork-run"
           ]
-        },
-        {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "fact": "Has local knowledge of the east fork; confirmed the skiff is functional and will have food ready at the wayhouse at sunrise. Cautiously sharing the problem with Brynjar now.",
-          "links": [
-            "echo-river-contamination",
-            "millbrook",
-            "east-fork-run"
-          ]
         }
       ],
-      "timeAdvanceHours": 0,
+      "timeAdvanceHours": 6,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook's river dock at night, early spring. Mara has risen from her barrel and stands at the dock's edge, tin cup tucked under her arm, ready to walk up the lane to the wayhouse. The single oil lamp swings overhead.",
+      "setting": "Back room of Mara's Wayhouse, deep night into early spring pre-dawn. A narrow pallet, coarse wool blanket, low ceiling, door closed. The common room beyond is quiet except for the banked fire settling.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing, tin cup under arm, facing Brynjar — she has just offered the wayhouse pallet and is waiting to see if he'll fo"
+          "state": "Retired to the wayhouse's main quarters; door closed; not present in the back room"
         }
       ],
       "objects": [
-        "Worn dock pilings",
-        "Hemp Rope (30 ft) tied off to a piling",
-        "Two flat-bottomed ferries",
-        "A rotting skiff (Mara says it holds; bailer under the thwart)",
-        "A coil of old line",
-        "A battered tin cup (now under Mara's arm, empty)",
-        "A child's arrangement of river stones — eastern branch stones set slightly apart",
-        "A swinging oil lamp on a hook",
-        "A wooden bucket (damp rim)"
+        "Narrow straw pallet",
+        "Coarse wool blanket",
+        "Traveler's Pack (set down by the pallet)",
+        "Waterskin",
+        "Hemp Rope (30 ft)",
+        "Dried Rations",
+        "Low door to the common room (closed)"
       ],
       "threads": [
-        "East fork run committed to at first light — skiff ready, source unconfirmed",
-        "Mara's wayhouse is open; pallet in the back room offered at no charge",
-        "The child who made the stone map and what else they know remains unexplored",
-        "The river's gray-green iridescence continues; the east fork is the working hypothesis but unverified"
+        "East fork run at first light — skiff ready at the dock, contamination source unconfirmed upstream",
+        "Mara's hot meal promised at sunrise",
+        "The child who made the stone map and what else they know remains unexplored"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 3,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [],
@@ -362,7 +320,8 @@
       "relationship": 2,
       "history": [
         "[d2] Named herself willingly when asked directly. Frames her watch as a practical duty — she holds hard truths when no one else will. Her eyes betrayed interest in the east fork unpromp",
-        "[d2] Accepted Brynjar's plan without argument; offered the wayhouse pallet for the night and promised something hot at sunrise if he returns by then. Revealed the skiff holds (barely) a"
+        "[d2] Accepted Brynjar's plan without argument; offered the wayhouse pallet for the night and promised something hot at sunrise if he returns by then. Revealed the skiff holds (barely) a",
+        "[d2] Walked Brynjar up the lane, settled him in the back-room pallet, said 'sunrise' and left without ceremony. Door closed before he could reply."
       ],
       "knownFacts": [
         "Runs the wayhouse up the lane from the dock",
@@ -376,10 +335,11 @@
         "patient observation",
         "quiet authority",
         "local river knowledge",
-        "practical hospitality"
+        "practical hospitality",
+        "economy of words"
       ],
       "status": "active",
-      "statusNote": "At the dock, about to walk up the lane to the wayhouse; has handed Brynjar one end of the contamination problem and is cautiously invested in his morning run",
+      "statusNote": "Retired to her own quarters in the wayhouse; will have food ready at sunrise",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -413,7 +373,8 @@
         "[d1] Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark.",
         "[d2] Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock.",
         "[d2] The rotting skiff confirmed functional by Mara — holds water, bailer under thwart; available for use at first light.",
-        "[d2] Mara Wells's wayhouse has a pallet in the back room available to Brynjar at no charge; she will have hot food ready at sunrise."
+        "[d2] Mara Wells's wayhouse has a pallet in the back room available to Brynjar at no charge; she will have hot food ready at sunrise.",
+        "[d2] Brynjar slept in the back-room pallet of Mara's Wayhouse the night before the east fork run — dry straw, coarse wool, two sleeping traders in the common room."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -431,8 +392,8 @@
         "mara-s-wayhouse": {
           "name": "Mara's Wayhouse",
           "day": 2,
-          "visited": false,
-          "note": "Back-room pallet offered to Brynjar; hot food promised at sunrise. Up the lane from the dock."
+          "visited": true,
+          "note": "Low wide building up the lane from the dock; common room with banked fire and trader guests; back-room pallet used by Br"
         }
       }
     }
@@ -550,6 +511,22 @@
           "echo-river-contamination",
           "millbrook",
           "millbrook-river-dock"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "maras-wayhouse": {
+        "id": "maras-wayhouse",
+        "label": "Mara's Wayhouse",
+        "kind": "place",
+        "facts": [
+          "[d2] A low, wide building up the lane from Millbrook's dock. Common room sleeps travelers on benches; a back room with a straw pallet offered to Brynjar. Smells of dried herbs, woodsmoke, decades of passag"
+        ],
+        "links": [
+          "mara-wells",
+          "millbrook",
+          "millbrook-river-dock",
+          "east-fork-run"
         ],
         "createdDay": 2,
         "updatedDay": 2

@@ -101,38 +101,41 @@
       {
         "summary": "Brynjar shares his mineral reading with the dock-woman; she confirms two weeks of silent observation and probes him about the upstream source.",
         "narration": "\"Mineral,\" you say, turning from the water to face her fully. \"Not algae, not runoff. It's moving in the column — that's the part that doesn't sit right. Surface contamination drifts, settles, breaks up. This is carried. Something upstream is putting it in, steady enough that it's still present at midnight.\" You let that land without embellishment. A riverman's report, not a speech.\n\nShe doesn't look surprised. She looks like a woman who has just heard her own private reckoning spoken back to her by a stranger, and is deciding what to do with that. She takes another slow sip from the tin cup, eyes moving once to the water and back to you.\n\n\"Two weeks,\" she says. \"Give or take. Started faint enough I thought I was dreaming it. Now I can see it without the lamp on a clear night.\" She turns the cup in her hands. \"Nobody wants to be the one who says it out loud in daylight. Bad for the mood. Bad for the market.\" A pause. \"You said upstream. East fork or main channel?\"\n\nShe's asking because she wants to know if you noticed the same thing the child's stones pointed to. Her eyes flick — brief, almost invisible — to the arrangement of pebbles near the dock's edge."
+      },
+      {
+        "summary": "The dock-woman names herself: Mara Wells, wayhouse-keeper and Millbrook's unofficial keeper of hard problems.",
+        "narration": "\"Before I answer that,\" you say, \"I'd like to know who I'm answering to. Two weeks of midnight watches isn't idle habit. Who are you, and why you?\"\n\nShe considers the question the way you'd consider a ford — measuring the depth before committing. Then she sets her tin cup down on the barrel beside her and lets her hands rest open on her knees, which you read as a choice to be readable.\n\n\"Mara Wells,\" she says. \"I run the wayhouse up the lane, and I've been Millbrook's informal keeper of difficult problems for longer than I'd like to count.\" A pause. \"When something starts going wrong and nobody wants to say it out loud, it usually falls to me to say it out loud. Or at least to stand where it's happening and watch it carefully until I understand what I'm dealing with.\" She glances at the river — just a flick, the automatic habit of someone who's been checking it every night for a fortnight. \"Everyone else has crops to tend in the morning. I have the luxury of keeping odd hours.\"\n\nShe picks the tin cup back up, cradles it. \"So. East fork or main channel. You've been on the water tonight — you've got fresher eyes than mine on which direction it's heavier from.\" Her own gaze moves, almost involuntarily, to the child's stone arrangement near the dock's edge — the eastern branch stones set slightly apart, like a small unanswered question in rock."
       }
     ],
     "lastTurn": {
-      "narration": "\"Mineral,\" you say, turning from the water to face her fully. \"Not algae, not runoff. It's moving in the column — that's the part that doesn't sit right. Surface contamination drifts, settles, breaks up. This is carried. Something upstream is putting it in, steady enough that it's still present at midnight.\" You let that land without embellishment. A riverman's report, not a speech.\n\nShe doesn't look surprised. She looks like a woman who has just heard her own private reckoning spoken back to her by a stranger, and is deciding what to do with that. She takes another slow sip from the tin cup, eyes moving once to the water and back to you.\n\n\"Two weeks,\" she says. \"Give or take. Started faint enough I thought I was dreaming it. Now I can see it without the lamp on a clear night.\" She turns the cup in her hands. \"Nobody wants to be the one who says it out loud in daylight. Bad for the mood. Bad for the market.\" A pause. \"You said upstream. East fork or main channel?\"\n\nShe's asking because she wants to know if you noticed the same thing the child's stones pointed to. Her eyes flick — brief, almost invisible — to the arrangement of pebbles near the dock's edge.",
-      "sceneSummary": "Brynjar shares his mineral reading with the dock-woman; she confirms two weeks of silent observation and probes him about the upstream source.",
+      "narration": "\"Before I answer that,\" you say, \"I'd like to know who I'm answering to. Two weeks of midnight watches isn't idle habit. Who are you, and why you?\"\n\nShe considers the question the way you'd consider a ford — measuring the depth before committing. Then she sets her tin cup down on the barrel beside her and lets her hands rest open on her knees, which you read as a choice to be readable.\n\n\"Mara Wells,\" she says. \"I run the wayhouse up the lane, and I've been Millbrook's informal keeper of difficult problems for longer than I'd like to count.\" A pause. \"When something starts going wrong and nobody wants to say it out loud, it usually falls to me to say it out loud. Or at least to stand where it's happening and watch it carefully until I understand what I'm dealing with.\" She glances at the river — just a flick, the automatic habit of someone who's been checking it every night for a fortnight. \"Everyone else has crops to tend in the morning. I have the luxury of keeping odd hours.\"\n\nShe picks the tin cup back up, cradles it. \"So. East fork or main channel. You've been on the water tonight — you've got fresher eyes than mine on which direction it's heavier from.\" Her own gaze moves, almost involuntarily, to the child's stone arrangement near the dock's edge — the eastern branch stones set slightly apart, like a small unanswered question in rock.",
+      "sceneSummary": "The dock-woman names herself: Mara Wells, wayhouse-keeper and Millbrook's unofficial keeper of hard problems.",
       "choices": [
         {
-          "label": "Tell her east fork — you read it in the current gradient, and the child's stone map says the same thing. Put it on the table.",
+          "label": "Read the current weight and the stone map together — give Mara your best riverman's judgment on the east fork",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "honest",
-            "share-information"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "rivercraft",
+          "energyCost": 5,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask what she knows before you give her the fork. A fair trade — she's been watching two weeks; she owes you something first.",
+          "label": "Answer honestly: you can't be certain yet — and ask her what she knows about the east fork that made her eyes go there",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "cautious",
-            "negotiate",
-            "read-person"
+            "persuade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -141,32 +144,30 @@
           "emergenceId": null
         },
         {
-          "label": "Offer to run the east fork at first light and bring her back something concrete — a water sample, a visual on the source. Turn observation into action.",
+          "label": "Ask about the child who arranged those stones — what do they know, and does Mara take them seriously?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "investigate",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Suggest you'll have a proper answer in the morning — after you've slept and taken the skiff up the east fork at first light to look",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "plan",
-            "volunteer",
-            "explore"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask who she is and why she's the one keeping a midnight watch while everyone else pretends not to notice.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "question",
-            "read-person",
-            "honest"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -186,11 +187,11 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge, facing the woman on the barrel; the single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
+        "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge facing Mara Wells on her barrel; the single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
         "npcsPresent": [
           {
-            "name": "Unknown woman (fifties, heavyset)",
-            "state": "Seated on her barrel, tin cup turning slowly in both hands, watching Brynjar with full attention — she has just asked him whether the source is east fork or main channel, and her eyes have briefly flicked to the child's stone map."
+            "name": "Mara Wells",
+            "state": "Seated on her barrel, tin cup cradled in both hands, watching Brynjar — she has just named herself and is waiting for his read on the east fork versus main channel"
           }
         ],
         "objects": [
@@ -198,55 +199,67 @@
           "Hemp Rope (30 ft) tied off to a piling",
           "Two flat-bottomed ferries and a rotting skiff",
           "A coil of old line",
-          "A battered tin cup (in the woman's hands)",
+          "A battered tin cup (in Mara's hands)",
           "A child's arrangement of river stones in a rough map shape — eastern branch stones set slightly apart",
           "A swinging oil lamp on a hook",
           "A wooden bucket (damp rim)"
         ],
         "threads": [
-          "The woman has asked directly whether the upstream source is the east fork or main channel — she's waiting for Brynjar's answer",
+          "Mara has asked directly whether the upstream source is the east fork or main channel — she's waiting for Brynjar's answer",
           "Her eyes flicked to the child's stone map when asking — she may already suspect the east fork",
-          "The woman's identity and her reason for keeping a two-week midnight watch are unknown",
+          "The child who made the stone map and what they know remains unexplored",
           "The river's gray-green iridescence continues; its upstream source is unconfirmed",
-          "The lit wayhouse window suggests company and possibly food up the lane"
+          "The lit wayhouse window suggests warmth, company, and possibly food up the lane"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "unknown-dock-woman",
-          "name": "Unknown woman (fifties, heavyset)",
-          "role": "Millbrook dock night-watcher",
-          "note": "Confirmed she has been watching the contamination silently for two weeks. Acknowledged that nobody wants to say it aloud in daylight. Asked Brynjar directly whether the source reads as east fork or main channel — her eyes briefly touched the child's stone map.",
+          "op": "meet",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
+          "description": "A heavyset woman in her fifties with a river-flat voice, a measured manner, and a two-week habit of midnight watches at the dock.",
+          "note": "Named herself willingly when asked directly. Frames her watch as a practical duty — she holds hard truths when no one else will. Her eyes betrayed interest in the east fork unprompted.",
           "learned": [
-            "Has been observing the river iridescence for approximately two weeks",
-            "Is aware the community is collectively suppressing the concern — 'bad for the mood, bad for the market'",
-            "Suspects or knows the source is directional — her question about east fork vs main channel was pointed"
+            "Runs the wayhouse up the lane from the dock",
+            "Has been Millbrook's informal keeper of difficult problems for years",
+            "Has kept a solo midnight watch on the river contamination for two weeks",
+            "Her glance at the child's stone map suggests she already suspects the east fork as the source"
           ],
           "skillsObserved": [
-            "sustained quiet observation",
-            "careful questioning"
+            "patient observation",
+            "quiet authority"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Seated at the Millbrook dock on her nightly watch; has opened a guarded but genuine exchange with Brynjar"
+          "statusNote": "At the dock on her nightly watch; willing to talk and share what she knows"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The dock-woman has been privately observing the river's gray-green contamination for approximately two weeks — silently, because the community is collectively avoiding saying it aloud in daylight.",
-          "subjectId": "unknown-dock-woman"
+          "text": "The midnight dock-watcher is Mara Wells — wayhouse-keeper and Millbrook's informal keeper of hard problems. She has watched the contamination alone for two weeks.",
+          "subjectId": "mara-wells"
         }
       ],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock.",
+          "subPlace": {
+            "name": "Mara's Wayhouse",
+            "note": "Mara Wells's wayhouse, up the lane from the dock — lit window visible at night, serves as informal community hub",
+            "visited": false
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "echo-river-contamination",
-          "label": "Echo River Contamination",
-          "kind": "mystery",
-          "fact": "The dock-woman has observed the iridescence for ~two weeks, growing visible enough to see without lamplight on clear nights. She independently suspects a directional upstream source — her question singled out the east fork specifically.",
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "fact": "Runs Millbrook's wayhouse; self-described keeper of the village's difficult problems. Has watched the river contamination alone for two weeks. Suspects or is curious about the east fork as source.",
           "links": [
+            "echo-river-contamination",
             "millbrook",
             "millbrook-river-dock"
           ]
@@ -256,11 +269,11 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge, facing the woman on the barrel; the single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
+      "setting": "Millbrook's river dock at night, early spring. Brynjar stands at the dock's edge facing Mara Wells on her barrel; the single oil lamp swings overhead. The lit wayhouse window glows up the lane.",
       "npcsPresent": [
         {
-          "name": "Unknown woman (fifties, heavyset)",
-          "state": "Seated on her barrel, tin cup turning slowly in both hands, watching Brynjar with full attention — she has just asked hi"
+          "name": "Mara Wells",
+          "state": "Seated on her barrel, tin cup cradled in both hands, watching Brynjar — she has just named herself and is waiting for hi"
         }
       ],
       "objects": [
@@ -268,29 +281,59 @@
         "Hemp Rope (30 ft) tied off to a piling",
         "Two flat-bottomed ferries and a rotting skiff",
         "A coil of old line",
-        "A battered tin cup (in the woman's hands)",
+        "A battered tin cup (in Mara's hands)",
         "A child's arrangement of river stones in a rough map shape — eastern branch ston",
         "A swinging oil lamp on a hook",
         "A wooden bucket (damp rim)"
       ],
       "threads": [
-        "The woman has asked directly whether the upstream source is the east fork or main channel — she's waiting for Brynjar's answer",
+        "Mara has asked directly whether the upstream source is the east fork or main channel — she's waiting for Brynjar's answer",
         "Her eyes flicked to the child's stone map when asking — she may already suspect the east fork",
-        "The woman's identity and her reason for keeping a two-week midnight watch are unknown",
+        "The child who made the stone map and what they know remains unexplored",
         "The river's gray-green iridescence continues; its upstream source is unconfirmed",
-        "The lit wayhouse window suggests company and possibly food up the lane"
+        "The lit wayhouse window suggests warmth, company, and possibly food up the lane"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 1,
+    "hour": 2,
     "realAnchor": null
   },
   "companions": [],
   "quests": [],
-  "npcRegistry": {},
+  "npcRegistry": {
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
+      "description": "A heavyset woman in her fifties with a river-flat voice, a measured manner, and a two-week habit of midnight watches at the dock.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 2
+      },
+      "relationship": 1,
+      "history": [
+        "[d2] Named herself willingly when asked directly. Frames her watch as a practical duty — she holds hard truths when no one else will. Her eyes betrayed interest in the east fork unpromp"
+      ],
+      "knownFacts": [
+        "Runs the wayhouse up the lane from the dock",
+        "Has been Millbrook's informal keeper of difficult problems for years",
+        "Has kept a solo midnight watch on the river contamination for two weeks"
+      ],
+      "skillsObserved": [
+        "patient observation",
+        "quiet authority"
+      ],
+      "status": "active",
+      "statusNote": "At the dock on her nightly watch; willing to talk and share what she knows",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 2
+      }
+    }
+  },
   "placeMemory": {
     "radiant_plateau_edge": {
       "visits": 2,
@@ -315,7 +358,8 @@
       "visits": 2,
       "notes": [
         "[d1] Millbrook dock at night: gray-green iridescence visible in the river under lamplight. An unknown local woman keeps a night watch here.",
-        "[d1] Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark."
+        "[d1] Child's stone map at dock edge has eastern branch stones set slightly apart from the rest — suggesting something upstream on that branch the child either couldn't name or wasn't sure how to mark.",
+        "[d2] Mara Wells identified as the woman keeping the nightly dock watch; her wayhouse is the lit building up the lane from the dock."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -329,6 +373,12 @@
           "day": 1,
           "visited": true,
           "note": "Wooden dock with two ferries and a rotting skiff; single swinging lamp; stone map near edge; unknown woman keeps night w"
+        },
+        "mara-s-wayhouse": {
+          "name": "Mara's Wayhouse",
+          "day": 2,
+          "visited": false,
+          "note": "Mara Wells's wayhouse, up the lane from the dock — lit window visible at night, serves as informal community hub"
         }
       }
     }
@@ -350,7 +400,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-08T19:03:30.142Z"
+    "lastSharedReadAt": "2026-07-08T19:07:10.529Z"
   },
   "bio": {
     "hometown": "A small northern village.",
@@ -417,6 +467,21 @@
         ],
         "createdDay": 1,
         "updatedDay": 2
+      },
+      "mara-wells": {
+        "id": "mara-wells",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d2] Runs Millbrook's wayhouse; self-described keeper of the village's difficult problems. Has watched the river contamination alone for two weeks. Suspects or is curious about the east fork as source."
+        ],
+        "links": [
+          "echo-river-contamination",
+          "millbrook",
+          "millbrook-river-dock"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
@@ -434,6 +499,11 @@
         "abilityId": "hearthbinding",
         "since": "2026-07-08T18:02:59.405Z",
         "progress": 0
+      },
+      {
+        "abilityId": "wayfinding",
+        "since": "2026-07-08T19:06:51.956Z",
+        "progress": 0
       }
     ]
   },
@@ -449,6 +519,12 @@
       "text": "The dock-woman has been privately observing the river's gray-green contamination for approximately two weeks — silently, because the community is collectively avoiding saying it aloud in daylight.",
       "day": 2,
       "subjectId": "unknown-dock-woman"
+    },
+    {
+      "id": "mara-wells",
+      "text": "The midnight dock-watcher is Mara Wells — wayhouse-keeper and Millbrook's informal keeper of hard problems. She has watched the contamination alone for two weeks.",
+      "day": 2,
+      "subjectId": "mara-wells"
     }
   ],
   "precursorAccess": [],

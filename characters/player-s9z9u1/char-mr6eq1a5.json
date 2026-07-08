@@ -5,8 +5,8 @@
   "name": "Usnea Beard",
   "origin": "radiant",
   "background": "community-organizer",
-  "level": 3,
-  "xp": 296,
+  "level": 4,
+  "xp": 301,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -33,18 +33,18 @@
     }
   ],
   "alignment": {
-    "mechanical_spiritual": 0.08996944914520653,
-    "concrete_abstract": 0.00746802527932456,
+    "mechanical_spiritual": 0.1004709766879462,
+    "concrete_abstract": 0.032094624015358335,
     "spectrumId": -0.21505916698911481,
     "dark_light": 0.19177414280214844,
     "falsehood_truth": 0.23609266312500002,
     "violence_peace": 0.09439212500000001
   },
-  "attunement": 3,
-  "maxHealth": 40,
-  "health": 40,
-  "maxEnergy": 110,
-  "energy": 44,
+  "attunement": 4,
+  "maxHealth": 45,
+  "health": 45,
+  "maxEnergy": 115,
+  "energy": 115,
   "inventory": [
     {
       "id": "waterskin",
@@ -270,37 +270,22 @@
       {
         "summary": "Aevi names the load-bearing truth: Fendt's pouring and the Disputed Zone site's reactivation are steps in a single plan — someone gave coordinated instructions to both.",
         "narration": "You stop trying to do two things at once and simply ask.\n\n\"Aevi. 'The same hand.' Tell me what you mean.\"\n\nThe motes drift up from knee-height, brightening — not the flare of urgency but the slow, patient bloom of something that has been waiting to be asked. They settle into a loose knot in front of your face, the teal light clean in the morning air.\n\n\"Fendt poured into the river.\" A pause — not hesitation, but the kind of careful spacing that means the next piece matters. \"The nanite reclamation site in the upper Disputed Zone reactivated. The six-fold pulse is settling into the valley's water and soil.\" Another pause. \"These are not separate events reacting to each other. They are steps. Someone gave instructions — to Fendt, and to the site — and the instructions fit together. The contamination is not what Fendt caused. It is what Fendt completed.\"\n\nAevi dims slightly, as if the saying of it costs something. The motes hover close, very still.\n\n\"I do not know the hand. I know the shape of the grip.\""
+      },
+      {
+        "summary": "Old Roads confirms the Precursor alignments run from beneath the plateau to the upper Disputed Zone — the six-fold pulse travels on shared infrastructure, not coincidence.",
+        "narration": "You press one palm-root flat against the gravel and let the working go quiet — not reaching, just listening. The Old Roads sense doesn't need force here; the alignments are close enough that they push back against your attention like a current you've stepped into rather than searched for.\n\nThree braided threads run beneath you, the same ones you crossed on the descent. But held still like this, with the hollow's south-facing warmth settling your root-mass into the scree, you catch what movement obscured: the threads don't terminate at the plateau rim. They angle. Downslope — below the valley floor, below the Echo River's bed — continuing in the same direction the contamination travels. Not toward Millbrook. Toward the upper Disputed Zone. The six-count pulse doesn't just rhyme with the reclamation site's rhythm; it travels on the same infrastructure. The alignments are conduit, not coincidence.\n\nAevi brightens by two degrees, motes pulling close. It says nothing, but the light holds.\n\nThe hollow gives you the last piece of the structural picture: whatever is happening in the Disputed Zone is using these alignments the way a farmer uses channels — to move something from source to destination, precisely, at intervals. Fendt's pour at the ford was one tap-point on a system that runs from the upper Zone to the valley's water table. The 'why' is still a gap. But the 'how' has just become a map.\n\n*You feel it settle into you — a new steadiness. (Level 4: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You stop trying to do two things at once and simply ask.\n\n\"Aevi. 'The same hand.' Tell me what you mean.\"\n\nThe motes drift up from knee-height, brightening — not the flare of urgency but the slow, patient bloom of something that has been waiting to be asked. They settle into a loose knot in front of your face, the teal light clean in the morning air.\n\n\"Fendt poured into the river.\" A pause — not hesitation, but the kind of careful spacing that means the next piece matters. \"The nanite reclamation site in the upper Disputed Zone reactivated. The six-fold pulse is settling into the valley's water and soil.\" Another pause. \"These are not separate events reacting to each other. They are steps. Someone gave instructions — to Fendt, and to the site — and the instructions fit together. The contamination is not what Fendt caused. It is what Fendt completed.\"\n\nAevi dims slightly, as if the saying of it costs something. The motes hover close, very still.\n\n\"I do not know the hand. I know the shape of the grip.\"",
-      "sceneSummary": "Aevi names the load-bearing truth: Fendt's pouring and the Disputed Zone site's reactivation are steps in a single plan — someone gave coordinated instructions to both.",
+      "narration": "You press one palm-root flat against the gravel and let the working go quiet — not reaching, just listening. The Old Roads sense doesn't need force here; the alignments are close enough that they push back against your attention like a current you've stepped into rather than searched for.\n\nThree braided threads run beneath you, the same ones you crossed on the descent. But held still like this, with the hollow's south-facing warmth settling your root-mass into the scree, you catch what movement obscured: the threads don't terminate at the plateau rim. They angle. Downslope — below the valley floor, below the Echo River's bed — continuing in the same direction the contamination travels. Not toward Millbrook. Toward the upper Disputed Zone. The six-count pulse doesn't just rhyme with the reclamation site's rhythm; it travels on the same infrastructure. The alignments are conduit, not coincidence.\n\nAevi brightens by two degrees, motes pulling close. It says nothing, but the light holds.\n\nThe hollow gives you the last piece of the structural picture: whatever is happening in the Disputed Zone is using these alignments the way a farmer uses channels — to move something from source to destination, precisely, at intervals. Fendt's pour at the ford was one tap-point on a system that runs from the upper Zone to the valley's water table. The 'why' is still a gap. But the 'how' has just become a map.\n\n*You feel it settle into you — a new steadiness. (Level 4: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Old Roads confirms the Precursor alignments run from beneath the plateau to the upper Disputed Zone — the six-fold pulse travels on shared infrastructure, not coincidence.",
       "choices": [
         {
-          "label": "Ask what the shape of the grip means — press Aevi on what kind of entity or organization gives instructions to both a Precursor site and a living engineer",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.7
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Sit with it — this reframes Thursday entirely. The elders need to hear not just what Fendt did but that it was a step in something larger. Rehearse how to name that without overreaching the evidence",
+          "label": "Commit the structural map to memory and move — Thursday is close and the elders need to hear 'conduit, not coincidence' before they decide what to do about the water",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
-            "concrete_abstract": 0.4,
-            "falsehood_truth": 0.6
+            "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
@@ -314,15 +299,54 @@
           "emergenceId": null
         },
         {
-          "label": "Rise and move — carry this toward the Heights. The question of who gave the instructions is one for the elders and the Heights together, not for a limestone hollow on a hillside",
+          "label": "Ask Aevi directly: does the alignment structure tell us anything about who built the tap-points — the filtration array, the ford — and when?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.5,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Before leaving the hollow, use Prism Sight to read the gravel and limestone here — if anyone else has stopped in this spot recently, the light will have caught it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "dark_light": 0.6,
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Head toward the Harmonic Heights now — the conduit structure changes the scale of the crisis, and the tuning-warden's sighting three springs ago may mean the Heights are already inside the system",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {
-            "violence_peace": 0.2
+            "violence_peace": 0.2,
+            "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "move",
+            "plan",
             "careful"
           ],
           "abilityId": null,
@@ -330,31 +354,12 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Use Old Roads to check whether the Precursor alignments running underfoot here connect — not just in pulse, but in structure — to the reclamation site Aevi named in the Disputed Zone",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.3,
-            "concrete_abstract": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "risky"
-          ],
-          "abilityId": "old_roads",
-          "energyCost": 7,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -7,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -364,7 +369,7 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "note": "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger."
+          "note": "Old Roads confirms the Precursor alignments beneath the plateau are structural conduit — the six-fold pulse travels from the upper Disputed Zone to the valley water table on shared infrastructure. The elders now need to hear 'tap-points on a delivery system', not just 'deliberate act'."
         }
       ],
       "scene": {
@@ -372,21 +377,22 @@
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Hovering at face-height, motes in a close still knot — dimmed slightly after speaking, holding the space after the words"
+            "state": "Motes pulled close at face-height, two degrees brighter than before — holding the space after the alignment confirmation, light steady and patient"
           }
         ],
         "objects": [
           "Orla's Memory Glass — warm against heartwood",
           "Gravel descent path — continuing toward valley floor",
           "Echo River — flat spring gleams below",
-          "Harmonic Heights terracing — pale rose-gray stonework, morning shadow"
+          "Harmonic Heights terracing — pale rose-gray stonework, morning shadow",
+          "Palm-root still flat against the gravel where the working was done"
         ],
         "threads": [
-          "Aevi's new framing: Fendt and the Disputed Zone site received coordinated instructions — a single directing hand, shape unknown",
-          "Thursday elder presentation — evidence intact, but the scope has shifted; elders will need to hear 'step in a plan', not just 'deliberate act'",
-          "Fendt and second figure on south road — purpose still unknown, now more troubling given coordinated-instruction frame",
-          "Old Roads alignments underfoot — six-count pulse steady; structural connection to upper Disputed Zone site unexplored",
-          "Harmonic Heights reachable before Thursday — path open"
+          "Precursor alignments confirmed as structural conduit — six-fold pulse travels from upper Disputed Zone to valley water table on shared infrastructure; tap-points include the ford and likely the filtration array",
+          "Aevi's framing: coordinated instructions from a single directing hand — 'why' still open",
+          "Thursday elder presentation — evidence scope now includes conduit structure, not just Fendt's deliberate act",
+          "Fendt and second figure on south road — purpose unknown, now more troubling against conduit frame",
+          "Harmonic Heights reachable before Thursday — tuning-warden's three-springs-back sighting may mean the Heights are already inside the system's reach"
         ]
       },
       "npcUpdates": [
@@ -394,67 +400,63 @@
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "role": "Companion intelligence — nanite-mote swarm",
-          "note": "Named the coordinating logic directly when asked: Fendt's act and the Disputed Zone reactivation are steps in a single set of instructions from one directing hand. Added: 'I do not know the hand. I know the shape of the grip.'",
+          "note": "Brightened two degrees when the alignment confirmation landed — silent affirmation, holding the space. No new words; the light said enough.",
           "learned": [
-            "The contamination is not what Fendt caused — it is what Fendt completed; the reactivation site and Fendt's pouring are coordinated steps",
-            "Aevi can distinguish between separate events reacting to each other and events that are steps in a single plan",
-            "Aevi does not know the identity of the directing hand, but recognizes the structural shape of coordinated instruction"
+            "The Precursor alignments beneath the plateau are structural conduit connecting the upper Disputed Zone to the valley water table — the six-fold pulse travels on shared infrastructure"
           ],
-          "skillsObserved": [
-            "pattern synthesis across disconnected events",
-            "careful epistemic precision — naming what is known and what is not"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present in the limestone hollow — dimmed slightly after naming the coordinated-instruction frame, holding close and still"
+          "statusNote": "Traveling with Usnea — in the limestone hollow above the valley floor, motes close and steady after the alignment confirmation"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Fendt's pouring into the Echo River and the Precursor reclamation site's reactivation in the upper Disputed Zone are coordinated steps in a single plan — not separate events. A directing hand gave instructions to both. Identity of that hand is unknown.",
-          "subjectId": "fendt-filtration-engineer"
+          "text": "The three Precursor alignments beneath the eastern rim path are structural conduit — the six-fold pulse travels on them from the upper Disputed Zone to the valley water table. The ford and the filtration array are tap-points on a delivery system, not isolated incidents.",
+          "subjectId": "echo-river-contamination"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Aevi named the coordinating-instruction frame here — limestone hollow is where the evidence sequence became a plan with a directing hand behind it.",
+          "note": "Old Roads working confirmed the Precursor alignments angle downslope below the valley floor toward the upper Disputed Zone — structural conduit for the six-fold pulse, not coincidental resonance. The hollow is the site of this structural confirmation.",
+          "flag": {
+            "alignment_conduit_confirmed": "true",
+            "direction": "upper_disputed_zone"
+          },
           "subPlace": {
             "name": "Limestone Hollow — Gravel Shoulder Rest",
-            "note": "Site of Aevi's disclosure: Fendt and the Disputed Zone site received coordinated instructions from a single directing hand.",
+            "note": "Old Roads confirmed alignment conduit structure here — six-fold pulse travels from upper Disputed Zone to valley water table on shared Precursor infrastructure. Palm-root contact point still warm.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "fendt-filtration-engineer",
-          "label": "Fendt — Filtration Engineer",
-          "kind": "person",
-          "fact": "Day 8 hollow: Aevi names Fendt's act not as cause but as completion — a step in coordinated instructions given alongside the Disputed Zone reactivation. Someone directed both. The 'why' is still open; the 'who gave the order' is now the real question.",
+          "topic": "precursor-alignments-plateau-rim",
+          "label": "Precursor Alignments — Plateau Rim",
+          "kind": "mystery",
+          "fact": "Day 8 hollow: Old Roads working confirms the three braided alignments beneath the eastern rim are structural conduit — not resonating with the Disputed Zone site but physically connected to it. The six-fold pulse travels on this infrastructure from the upper Zone to the valley water table. The ford and the filtration array are tap-points on a delivery system built into the valley's geology.",
           "links": [
-            "echo-river-contamination",
             "the-six-fold-pattern",
-            "orlas-memory-glass-the-ford-record",
+            "echo-river-contamination",
+            "fendt-filtration-engineer",
             "contamination-evidence-for-the-elders",
-            "precursor-junction-node-south-switchback",
-            "two-figures-south-road-at-dawn"
+            "the-directing-hand",
+            "aevi-reading-of-the-water"
           ]
         },
         {
-          "topic": "coordinating-hand",
+          "topic": "the-directing-hand",
           "label": "The Directing Hand",
           "kind": "mystery",
-          "fact": "Aevi confirmed: the Disputed Zone reclamation site's reactivation and Fendt's deliberate pouring are steps in a single plan from one directing source. Aevi does not know the identity — only the shape of the grip: coordinated instructions given to both a Precursor system and a living engineer.",
+          "fact": "Day 8 hollow: the conduit structure clarifies the scale — whoever directed Fendt and the Disputed Zone reactivation had knowledge of the Precursor alignment network running beneath the plateau and valley. The tap-points were chosen deliberately against a pre-existing map. The directing hand knew the valley's hidden infrastructure.",
           "links": [
             "fendt-filtration-engineer",
+            "precursor-alignments-plateau-rim",
             "echo-river-contamination",
             "the-six-fold-pattern",
-            "contamination-evidence-for-the-elders",
-            "precursor-junction-node-south-switchback",
-            "two-figures-south-road-at-dawn",
-            "radiant-plateau-edge-district"
+            "contamination-evidence-for-the-elders"
           ]
         }
       ],
@@ -466,28 +468,29 @@
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Hovering at face-height, motes in a close still knot — dimmed slightly after speaking, holding the space after the words"
+          "state": "Motes pulled close at face-height, two degrees brighter than before — holding the space after the alignment confirmation"
         }
       ],
       "objects": [
         "Orla's Memory Glass — warm against heartwood",
         "Gravel descent path — continuing toward valley floor",
         "Echo River — flat spring gleams below",
-        "Harmonic Heights terracing — pale rose-gray stonework, morning shadow"
+        "Harmonic Heights terracing — pale rose-gray stonework, morning shadow",
+        "Palm-root still flat against the gravel where the working was done"
       ],
       "threads": [
-        "Aevi's new framing: Fendt and the Disputed Zone site received coordinated instructions — a single directing hand, shape unknown",
-        "Thursday elder presentation — evidence intact, but the scope has shifted; elders will need to hear 'step in a plan', not just 'deliberate act'",
-        "Fendt and second figure on south road — purpose still unknown, now more troubling given coordinated-instruction frame",
-        "Old Roads alignments underfoot — six-count pulse steady; structural connection to upper Disputed Zone site unexplored",
-        "Harmonic Heights reachable before Thursday — path open"
+        "Precursor alignments confirmed as structural conduit — six-fold pulse travels from upper Disputed Zone to valley water table on shared infrastructure; tap-point",
+        "Aevi's framing: coordinated instructions from a single directing hand — 'why' still open",
+        "Thursday elder presentation — evidence scope now includes conduit structure, not just Fendt's deliberate act",
+        "Fendt and second figure on south road — purpose unknown, now more troubling against conduit frame",
+        "Harmonic Heights reachable before Thursday — tuning-warden's three-springs-back sighting may mean the Heights are already inside the system's reach"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -502,14 +505,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Orla named the practical danger: Fendt may know the glass was taken; the south-face road passes his filtration array; the lower switchback warden shift answers to array supervisors during active filtr",
         "Old Roads confirms the south-face road is passable at surface level but a buried Precursor alignment runs perpendicular to the lower switchback — older than Fendt's warden post. Aevi resonated with re",
         "The Amber Lath keeper confirms the filtration array output count has been off for three consecutive runs — the district's own quiet record showing an anomaly that precedes Usnea's arrival and aligns w",
         "Eastern rim descent reveals three braided Precursor alignments beneath the plateau rim all running the six-count pulse — the distribution network is larger than Millbrook; the same hand built the plat",
         "Prism Sight surge from the rim confirms contamination signature at the ford and Millbrook, and the six-count pulse visible in valley light — but two pre-dawn figures climbing the south road in working",
         "Old Roads surge confirms a Precursor junction-node beneath the south road switchback — the filtration array was built on top of it deliberately. The six-count pulse fired from the node when Fendt's fi",
         "Eastern rim descent completed cleanly — Fendt and second figure left behind on south road. Memory glass intact. Eastern valley floor reached; Harmonic Heights accessible before Thursday.",
-        "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger."
+        "Aevi names the coordinating logic: Fendt's act and the Disputed Zone reactivation are steps in a single plan from a single directing hand. The evidence now points past Fendt toward something larger.",
+        "Old Roads confirms the Precursor alignments beneath the plateau are structural conduit — the six-fold pulse travels from the upper Disputed Zone to the valley water table on shared infrastructure. The"
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -1019,7 +1022,6 @@
     "radiant_plateau_edge": {
       "visits": 1,
       "notes": [
-        "[d7] The Edge District assembly notice board now carries two anonymous annotations: 'whose count?' (earlier) and 'ask the river' (Day 7, fresh ink, filtration run night).",
         "[d7] Keeper confirmed the filtration output count is posted on the district board after each run and has been off for three consecutive runs — no official explanation, annotation left standing. This is dis",
         "[d7] Usnea slept a full night in the east-facing room — rested and present before the eastern rim descent at dawn.",
         "[d7] Usnea departed the Amber Lath at first light, eastern rim path — the keeper left water and cloth before dawn without waking them. No names exchanged.",
@@ -1030,7 +1032,8 @@
         "[d8] Eastern rim descent traversed successfully Day 8 morning — all three braided Precursor alignments crossed underfoot at intervals, six-count pulse steady throughout. Cliff shoulder confirmed as full si",
         "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
         "[d8] Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand'",
-        "[d8] Aevi named the coordinating-instruction frame here — limestone hollow is where the evidence sequence became a plan with a directing hand behind it."
+        "[d8] Aevi named the coordinating-instruction frame here — limestone hollow is where the evidence sequence became a plan with a directing hand behind it.",
+        "[d8] Old Roads working confirmed the Precursor alignments angle downslope below the valley floor toward the upper Disputed Zone — structural conduit for the six-fold pulse, not coincidental resonance. The "
       ],
       "flags": {
         "memory_glass_transferred": "true",
@@ -1117,7 +1120,7 @@
           "name": "Limestone Hollow — Gravel Shoulder Rest",
           "day": 8,
           "visited": true,
-          "note": "Site of Aevi's disclosure: Fendt and the Disputed Zone site received coordinated instructions from a single directing ha"
+          "note": "Old Roads confirmed alignment conduit structure here — six-fold pulse travels from upper Disputed Zone to valley water t"
         }
       }
     }
@@ -1163,8 +1166,8 @@
     "craft": 1,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1982,13 +1985,15 @@
         "label": "Precursor Alignments — Plateau Rim",
         "kind": "mystery",
         "facts": [
-          "[d8] Day 8 morning: six-count pulse confirmed at consistent intervals throughout the full eastern descent — the alignments are not confined to the rim's crown but run the whole slope to the valley floor. T"
+          "[d8] Day 8 morning: six-count pulse confirmed at consistent intervals throughout the full eastern descent — the alignments are not confined to the rim's crown but run the whole slope to the valley floor. T",
+          "[d8] Day 8 hollow: Old Roads working confirms the three braided alignments beneath the eastern rim are structural conduit — not resonating with the Disputed Zone site but physically connected to it. The si"
         ],
         "links": [
           "the-six-fold-pattern",
           "echo-river-contamination",
           "contamination-evidence-for-the-elders",
-          "aevi-reading-of-the-water"
+          "aevi-reading-of-the-water",
+          "fendt-filtration-engineer"
         ],
         "createdDay": 8,
         "updatedDay": 8
@@ -2008,13 +2013,29 @@
         ],
         "createdDay": 8,
         "updatedDay": 8
+      },
+      "the-directing-hand": {
+        "id": "the-directing-hand",
+        "label": "The Directing Hand",
+        "kind": "mystery",
+        "facts": [
+          "[d8] Day 8 hollow: the conduit structure clarifies the scale — whoever directed Fendt and the Disputed Zone reactivation had knowledge of the Precursor alignment network running beneath the plateau and val"
+        ],
+        "links": [
+          "fendt-filtration-engineer",
+          "precursor-alignments-plateau-rim",
+          "echo-river-contamination",
+          "the-six-fold-pattern"
+        ],
+        "createdDay": 8,
+        "updatedDay": 8
       }
     }
   },
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 5.5
+    "aevi": 5.75
   },
   "practice": {
     "schemaVersion": 1,
@@ -2022,7 +2043,7 @@
       "prism_sight": 9,
       "light_bending": 10,
       "hearthbinding": 2,
-      "old_roads": 5
+      "old_roads": 6
     },
     "coActivations": {
       "light_bending+prism_sight": 1
@@ -2239,6 +2260,12 @@
       "text": "Fendt's pouring into the Echo River and the Precursor reclamation site's reactivation in the upper Disputed Zone are coordinated steps in a single plan — not separate events. A directing hand gave ins",
       "day": 8,
       "subjectId": "fendt-filtration-engineer"
+    },
+    {
+      "id": "echo-river-contamination",
+      "text": "The three Precursor alignments beneath the eastern rim path are structural conduit — the six-fold pulse travels on them from the upper Disputed Zone to the valley water table. The ford and the filtrat",
+      "day": 8,
+      "subjectId": "echo-river-contamination"
     }
   ],
   "precursorAccess": [],

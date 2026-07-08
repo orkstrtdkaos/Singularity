@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrcdwiw3",
+  "playerKey": "player-0jwfjo",
+  "name": "Brynjar Andyrsson",
+  "origin": "valley",
+  "background": "survivalist",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 4,
+    "mental": 3,
+    "social": 3,
+    "practical": 4
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "rivercraft",
+      "level": 1
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "hemp_rope",
+      "name": "Hemp Rope (30 ft)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
+      "bonusTags": [
+        "climb"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "dried_rations",
+      "name": "Dried Rations",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Fish, fruit leather, hard bread. Two days if you're honest with yourself, three if you're not.",
+      "effects": {
+        "energy": 15
+      },
+      "consumable": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "radiant_plateau_edge",
+  "activeScene": {
+    "locationId": "radiant_plateau_edge",
+    "turns": [
+      {
+        "summary": "Brynjar arrives at the Edge District of the Radiant Plateau for the first time, taking in the photonic streets and noticing a detention notice for a Millbrook farmhand.",
+        "narration": "You arrive at the Edge District in the long gold of early afternoon, river-smell still on your coat, boots carrying a smear of Millbrook mud that looks almost brown against the light-guide pavement beneath your feet. The paving stones pulse with a slow, cool luminescence — not electric, not fire, something older and more deliberate — and when you step off the dirt track onto the first of them you feel the difference the way you'd feel stepping from soil onto packed ice: firmer, stranger, less forgiving. Towers of photonic crystal catch the sun at angles that shouldn't work and braid it into tight beams that thread between buildings like invisible rope made briefly visible. At the junction ahead, two apprentices are trading short bursts of coherent light across a practice square — harmless, judging by their laughter, though the flashes leave ghost-shapes on the eye.\n\nThe district is busy in the way of a place that runs on clarity: people move with purpose, conversations are clipped, and more than a few glance at you with the flat assessment of people unaccustomed to outsiders. Your hide-seller's coat and the Traveler's Pack mark you as valley-floor or beyond — neither Radiant nor Harmonic, which here is more or less the same thing: an unknown. A notice board near the square is plastered with tight, precise script: a posting for a licensed river-transport hire, a warning about the Echo River's coloration, and one sheet pinned crookedly at an angle that suggests urgency, with a hand-drawn sketch of a young face — a Millbrook farmhand, going by the cut of the clothes — above the word DETAINED.\n\nTo your right, a covered market stall catches your eye: the vendor has mirrors and glass pieces laid out on dark velvet, and the things catch light in a way that ordinary glass does not — depth inside them, movement, the sense that they're holding something back. Beyond the square, a broader avenue leads toward what must be the district's administrative core: taller towers, slower light. The air here smells faintly of hot quartz and something you can't name, not quite copper, not quite rain."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You arrive at the Edge District in the long gold of early afternoon, river-smell still on your coat, boots carrying a smear of Millbrook mud that looks almost brown against the light-guide pavement beneath your feet. The paving stones pulse with a slow, cool luminescence — not electric, not fire, something older and more deliberate — and when you step off the dirt track onto the first of them you feel the difference the way you'd feel stepping from soil onto packed ice: firmer, stranger, less forgiving. Towers of photonic crystal catch the sun at angles that shouldn't work and braid it into tight beams that thread between buildings like invisible rope made briefly visible. At the junction ahead, two apprentices are trading short bursts of coherent light across a practice square — harmless, judging by their laughter, though the flashes leave ghost-shapes on the eye.\n\nThe district is busy in the way of a place that runs on clarity: people move with purpose, conversations are clipped, and more than a few glance at you with the flat assessment of people unaccustomed to outsiders. Your hide-seller's coat and the Traveler's Pack mark you as valley-floor or beyond — neither Radiant nor Harmonic, which here is more or less the same thing: an unknown. A notice board near the square is plastered with tight, precise script: a posting for a licensed river-transport hire, a warning about the Echo River's coloration, and one sheet pinned crookedly at an angle that suggests urgency, with a hand-drawn sketch of a young face — a Millbrook farmhand, going by the cut of the clothes — above the word DETAINED.\n\nTo your right, a covered market stall catches your eye: the vendor has mirrors and glass pieces laid out on dark velvet, and the things catch light in a way that ordinary glass does not — depth inside them, movement, the sense that they're holding something back. Beyond the square, a broader avenue leads toward what must be the district's administrative core: taller towers, slower light. The air here smells faintly of hot quartz and something you can't name, not quite copper, not quite rain.",
+      "sceneSummary": "Brynjar arrives at the Edge District of the Radiant Plateau for the first time, taking in the photonic streets and noticing a detention notice for a Millbrook farmhand.",
+      "choices": [
+        {
+          "label": "Examine the detention notice on the board more closely — the sketch looks like someone who might know valley folk",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.7,
+            "concrete_abstract": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Approach the glass-and-mirror stall — those pieces catch light wrong, and you want to know why",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "mechanical_spiritual": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "curious"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Watch the apprentices' light-duel from a respectful distance — learn what you can about how this place works before announcing yourself",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "dark_light": 0.6,
+            "concrete_abstract": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Head directly up the main avenue toward the administrative towers — find someone in authority and introduce yourself before rumors do it for you",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.6,
+            "violence_peace": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "plan",
+            "bold"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "The Edge District of the Radiant Plateau, afternoon sun refracting through photonic-crystal towers into braided beams. Brynjar stands at a junction where a dirt track meets light-guide pavement, facing a small practice square.",
+        "npcsPresent": [
+          {
+            "name": "Two Radiant apprentices",
+            "state": "trading short light-bursts across the practice square, laughing"
+          },
+          {
+            "name": "Mirror-stall vendor",
+            "state": "seated behind a dark-velvet display of unusual glass pieces, watching the square"
+          }
+        ],
+        "objects": [
+          "Notice board with several postings — including a crookedly pinned detention sketch of a Millbrook farmhand",
+          "Light-guide pavement pulsing with cool luminescence underfoot",
+          "Photonic-crystal towers braiding sunlight into visible beams between buildings",
+          "Dark-velvet stall displaying mirrors and glass pieces that hold light strangely"
+        ],
+        "threads": [
+          "Detention notice for a Millbrook farmhand — evidence described as 'too neat'",
+          "The mirror vendor's glass pieces appear to contain something more than reflection",
+          "Radiant locals are quietly assessing the unfamiliar outsider"
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "First arrival at Edge District. Noticed detention notice for a Millbrook farmhand on the public board near the practice square. Mirror-stall vendor present with anomalous glass pieces.",
+          "subPlace": {
+            "name": "Edge District Practice Square",
+            "note": "A small open junction where apprentices drill with light-beams; notice board and mirror stall nearby",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "radiant-plateau-edge-district",
+          "label": "Radiant Plateau — Edge District",
+          "kind": "place",
+          "fact": "Light-guide pavement, photonic-crystal towers that braid sunlight into beams. Locals prize clarity but are masters of showing what they choose. Strangers are assessed quietly and given little initial trust.",
+          "links": [
+            "radiant-plateau"
+          ]
+        },
+        {
+          "topic": "millbrook-farmhand-detained",
+          "label": "Detained Millbrook Farmhand",
+          "kind": "event",
+          "fact": "A Millbrook farmhand has been detained in the Edge District. A notice with their sketch is posted publicly; the circumstances suggest the evidence may be fabricated.",
+          "links": [
+            "radiant-plateau-edge-district"
+          ]
+        }
+      ],
+      "timeAdvanceHours": 0,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Edge District of the Radiant Plateau, afternoon sun refracting through photonic-crystal towers into braided beams. Brynjar stands at a junction where a dirt track meets light-guide pavement, facing a small practice square.",
+      "npcsPresent": [
+        {
+          "name": "Two Radiant apprentices",
+          "state": "trading short light-bursts across the practice square, laughing"
+        },
+        {
+          "name": "Mirror-stall vendor",
+          "state": "seated behind a dark-velvet display of unusual glass pieces, watching the square"
+        }
+      ],
+      "objects": [
+        "Notice board with several postings — including a crookedly pinned detention sket",
+        "Light-guide pavement pulsing with cool luminescence underfoot",
+        "Photonic-crystal towers braiding sunlight into visible beams between buildings",
+        "Dark-velvet stall displaying mirrors and glass pieces that hold light strangely"
+      ],
+      "threads": [
+        "Detention notice for a Millbrook farmhand — evidence described as 'too neat'",
+        "The mirror vendor's glass pieces appear to contain something more than reflection",
+        "Radiant locals are quietly assessing the unfamiliar outsider"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 18,
+    "realAnchor": null
+  },
+  "companions": [],
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "radiant_plateau_edge": {
+      "visits": 2,
+      "notes": [
+        "[d1] First arrival at Edge District. Noticed detention notice for a Millbrook farmhand on the public board near the practice square. Mirror-stall vendor present with anomalous glass pieces."
+      ],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": [
+        "dark_light"
+      ],
+      "subPlaces": {
+        "edge-district-practice-square": {
+          "name": "Edge District Practice Square",
+          "day": 1,
+          "visited": true,
+          "note": "A small open junction where apprentices drill with light-beams; notice board and mirror stall nearby"
+        }
+      }
+    },
+    "millbrook": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": [
+        "violence_peace",
+        "concrete_abstract"
+      ]
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-08T18:14:31.150Z"
+  },
+  "bio": {
+    "hometown": "A small northern village.",
+    "residence": "They’ve been traveling and exploring the world.",
+    "livelihood": "They catch fish and wild game and sell hides, food etc.",
+    "hobbies": "Exploring new locations and places",
+    "motivation": "A yearning desire to explore",
+    "story": "Brynjar left his small northern village aboard a small river craft after experiencing a strange dream which has compelled him to travel and explore the world. He has been tackling this goal for a few weeks now trying to find the vision he saw in his dream, a peaceful land full of an abundance of life. He has been living a very nomadic life setting up camps and sleeping many nights under the stars and auroras."
+  },
+  "subAttributes": {
+    "strength": 4,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 4,
+    "wits": 3
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "radiant-plateau-edge-district": {
+        "id": "radiant-plateau-edge-district",
+        "label": "Radiant Plateau — Edge District",
+        "kind": "place",
+        "facts": [
+          "[d1] Light-guide pavement, photonic-crystal towers that braid sunlight into beams. Locals prize clarity but are masters of showing what they choose. Strangers are assessed quietly and given little initial "
+        ],
+        "links": [
+          "radiant-plateau"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "millbrook-farmhand-detained": {
+        "id": "millbrook-farmhand-detained",
+        "label": "Detained Millbrook Farmhand",
+        "kind": "event",
+        "facts": [
+          "[d1] A Millbrook farmhand has been detained in the Edge District. A notice with their sketch is posted publicly; the circumstances suggest the evidence may be fabricated."
+        ],
+        "links": [
+          "radiant-plateau-edge-district"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "grantsVersion": 1,
+  "customAbilities": {},
+  "companionBonds": {},
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {},
+    "coActivations": {},
+    "aspirations": [
+      {
+        "abilityId": "hearthbinding",
+        "since": "2026-07-08T18:02:59.405Z",
+        "progress": 0
+      }
+    ]
+  },
+  "establishedFacts": [],
+  "precursorAccess": [],
+  "backfillVersion": 1,
+  "sharedSceneId": "radiant_plateau_edge--2026-07-08T18-14-57-187Z",
+  "opLossPending": false
+}

@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 17,
+  "xp": 22,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -27,7 +27,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 80,
+  "energy": 75,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -135,22 +135,28 @@
       {
         "summary": "Brynjar's apology falls flat — the traveler closes the Mara topic and walks on; the contamination ribbons grow visibly stronger ahead.",
         "narration": "You turn toward them with open hands and an honest face, laying it out plainly — you meant no disrespect to Mara Wells, you're simply a man from Dýrheimr with a boat of his own sitting dry at the wayhouse while this borrowed wreck nearly swallowed him in the braid. You give your name the full weight of it: Brynjar, son of Andyr, out of Norskar. Your tone is genuine. Your expression is genuine. The words land anyway like a stone that skips wrong.\n\nThe traveler listens. They do not interrupt, which is its own kind of patience — but when you finish, they look at you the way someone looks at a map drawn by a person who's never walked the territory. Not hostile. Just unconvinced. 'The skiff has a bailer,' they say, as if that explains everything that needs explaining. 'Mara doesn't send people into trouble she hasn't already handed them a way out of.' They start walking again, eyes forward, and their posture makes clear that the subject of Mara Wells is now closed.\n\nThe trail curves with the bank and the sound of the braid drops behind a screen of alder. Full gray-blue light now, the sky a shade lighter than iron, and the east fork running loud and cold below. The gray-green mineral haze in the water is unmistakable from here — not a shimmer, not a surface slick, but a concentrated thread moving upstream through the white water like it knows where it's going. Stronger than at Millbrook. Stronger than at the bar. Your name is out in the open air and the stranger hasn't offered theirs back."
+      },
+      {
+        "summary": "The traveler reveals their purpose — three missing ewes and a ram, a high pasture fold — and mentions the soil above the fence goes gray.",
+        "narration": "You let the awkward silence run its course and then you ask the thing that's actually true: where were you headed, and why? No wrap of charm around it, no angle. Just the question.\n\nThe traveler walks two more paces before answering. When they do, they don't stop or look back — they keep their eyes on the trail ahead, where it bends around a stand of alder and climbs slightly from the flood line. \"High pasture fence,\" they say. \"There's a fold there. Three ewes and a ram that didn't come down with the rest of the flock at the end of autumn.\" A beat. \"Somebody has to go look.\"\n\nThat's it. No faction business, no mystery — a missing flock and a person who noticed. They move easy on the trail, picking the firmest ground through instinct, and after a moment they add, almost as an aside: \"The fence is about two hours from here at this pace. Trail's good to there. Above that it gets narrow and the soil's different — more mineral, comes up gray in places.\" They glance sideways at you briefly, acknowledging the obvious. The gray. Same word you'd use for the river.\n\nThe light is climbing — still pre-dawn blue, but the sky above the ridge to the east is going pale gold at the edge. Mara's sunrise is not a suggestion. The contamination ribbons thread bright and persistent through the gaps in the brush below, stronger every hundred meters, and now the traveler has handed you a landmark: a high pasture fence two hours out, and beyond it, ground that comes up gray."
       }
     ],
     "lastTurn": {
-      "narration": "You turn toward them with open hands and an honest face, laying it out plainly — you meant no disrespect to Mara Wells, you're simply a man from Dýrheimr with a boat of his own sitting dry at the wayhouse while this borrowed wreck nearly swallowed him in the braid. You give your name the full weight of it: Brynjar, son of Andyr, out of Norskar. Your tone is genuine. Your expression is genuine. The words land anyway like a stone that skips wrong.\n\nThe traveler listens. They do not interrupt, which is its own kind of patience — but when you finish, they look at you the way someone looks at a map drawn by a person who's never walked the territory. Not hostile. Just unconvinced. 'The skiff has a bailer,' they say, as if that explains everything that needs explaining. 'Mara doesn't send people into trouble she hasn't already handed them a way out of.' They start walking again, eyes forward, and their posture makes clear that the subject of Mara Wells is now closed.\n\nThe trail curves with the bank and the sound of the braid drops behind a screen of alder. Full gray-blue light now, the sky a shade lighter than iron, and the east fork running loud and cold below. The gray-green mineral haze in the water is unmistakable from here — not a shimmer, not a surface slick, but a concentrated thread moving upstream through the white water like it knows where it's going. Stronger than at Millbrook. Stronger than at the bar. Your name is out in the open air and the stranger hasn't offered theirs back.",
-      "sceneSummary": "Brynjar's apology falls flat — the traveler closes the Mara topic and walks on; the contamination ribbons grow visibly stronger ahead.",
+      "narration": "You let the awkward silence run its course and then you ask the thing that's actually true: where were you headed, and why? No wrap of charm around it, no angle. Just the question.\n\nThe traveler walks two more paces before answering. When they do, they don't stop or look back — they keep their eyes on the trail ahead, where it bends around a stand of alder and climbs slightly from the flood line. \"High pasture fence,\" they say. \"There's a fold there. Three ewes and a ram that didn't come down with the rest of the flock at the end of autumn.\" A beat. \"Somebody has to go look.\"\n\nThat's it. No faction business, no mystery — a missing flock and a person who noticed. They move easy on the trail, picking the firmest ground through instinct, and after a moment they add, almost as an aside: \"The fence is about two hours from here at this pace. Trail's good to there. Above that it gets narrow and the soil's different — more mineral, comes up gray in places.\" They glance sideways at you briefly, acknowledging the obvious. The gray. Same word you'd use for the river.\n\nThe light is climbing — still pre-dawn blue, but the sky above the ridge to the east is going pale gold at the edge. Mara's sunrise is not a suggestion. The contamination ribbons thread bright and persistent through the gaps in the brush below, stronger every hundred meters, and now the traveler has handed you a landmark: a high pasture fence two hours out, and beyond it, ground that comes up gray.",
+      "sceneSummary": "The traveler reveals their purpose — three missing ewes and a ram, a high pasture fold — and mentions the soil above the fence goes gray.",
       "choices": [
         {
-          "label": "Walk in silence for a stretch — let the tension breathe and watch how the stranger moves, reads the trail, reacts to the river",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "label": "Walk with them to the high pasture fence — two hours, same direction, trail talk or silence as it comes.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
             "careful",
-            "observe"
+            "travel",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -159,15 +165,17 @@
           "emergenceId": null
         },
         {
-          "label": "Use Rivercraft to read the contamination ribbons from the trail — direction, concentration, whether there's a definite point-source upstream",
+          "label": "Read the water through the brush gaps — use your river sense to gauge how far upstream the source might be from how the ribbons are strengthening.",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.1
+          },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful",
-            "scout"
+            "scout",
+            "careful"
           ],
           "abilityId": "rivercraft",
           "energyCost": 5,
@@ -176,30 +184,34 @@
           "emergenceId": null
         },
         {
-          "label": "Ask them a straight question — not about Mara, not about trust. Just: where were you headed on this trail, and why?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
+          "label": "Ask if they've seen the gray soil above the fence before this year — or if it's new.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0
+          },
+          "difficulty": 0,
           "intentTags": [
-            "persuade",
+            "study",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Drop the social repair entirely and push the pace — you have a deadline at sunrise and Mara's report matters more than making a friend",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Offer to help them find the missing sheep once you've seen what's above the fence — a concrete trade for what they clearly know about this terrain.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "careful"
+            "help",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -217,29 +229,36 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "east-fork-run",
+          "note": "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-season changes above the fence."
+        }
+      ],
       "scene": {
-        "setting": "East bank stock trail above the flood line, east fork of the Echo River. Full gray-blue pre-dawn light, no sun yet. Trail has curved inland behind a screen of alder; the braid is audible below but no longer visible at every step. Gray-green mineral ribbons clearly visible in the water when gaps open in the brush — noticeably stronger than at the gravel bar.",
+        "setting": "East bank stock trail above the flood line, east fork of the Echo River. Sky going pale gold at the ridge edge to the east — pre-dawn still, but sunrise close. Trail has curved inland behind alder; east fork audible below. Gray-green mineral ribbons visible and noticeably stronger through brush gaps in the water below.",
         "npcsPresent": [
           {
             "name": "Unknown traveler (east bank)",
-            "state": "Walking ahead on the trail, eyes forward, pace steady — has closed the subject of Mara Wells and not offered their own name back"
+            "state": "Walking ahead on the trail, eyes forward, pace steady — just answered where they're going; not hostile but not warm; watching the ground more than the river."
           }
         ],
         "objects": [
-          "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer, Hemp Rope (30 ft) — tied through bow ring to gravel bar boulder (behind them now, downstream)",
-          "Gray-green mineral ribbons visible in east fork water through breaks in the alder — visibly stronger and more concentrated than at the braid or at Millbrook",
+          "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer under thwart",
+          "Gray-green mineral ribbons visible in east fork water through breaks in the alder — visibly stronger than at the gravel bar",
           "Boot or hoof marks of uncertain age and direction in trail surface",
           "Traveler's Pack (on Brynjar's back)",
           "Waterskin",
           "Dried Rations"
         ],
         "threads": [
-          "Skiff grounded and abandoned — needs reporting to Mara; retrieval question open",
-          "Stranger traveling same trail: name still unknown, destination still unstated, relationship cooled and apology failed — subject of Mara Wells now firmly closed",
-          "Contamination ribbons grow visibly stronger upstream — source unknown but direction confirmed",
-          "High pasture fence ~2 km past the braid is the next named landmark",
-          "Mara Wells expects a report by sunrise — morning is advancing"
+          "Traveler headed to high pasture fence (~2 hrs) to find missing sheep — fold above the fence",
+          "Soil above the fence described as 'more mineral, comes up gray' — possible surface contamination connection",
+          "Contamination ribbons growing stronger upstream — source still unknown",
+          "Mara Wells expects a report by sunrise — morning is advancing fast",
+          "Traveler's name still unknown; relationship cooled but functional",
+          "Skiff abandoned on gravel bar — needs reporting to Mara"
         ]
       },
       "npcUpdates": [
@@ -248,26 +267,36 @@
           "npcId": "unknown-east-bank-traveler",
           "name": "Unknown (east bank traveler)",
           "role": "Unnamed traveler on the east fork stock trail",
-          "note": "Brynjar's apology and full introduction — name, father's name, village of origin — landed without softening the chill. They closed the Mara topic with a single deflecting line ('The skiff has a bailer') and resumed walking. Have not offered their own name.",
+          "note": "Answered the straight question without deflection: headed to a high pasture fold above the fence to check on three ewes and a ram that didn't come down with the autumn flock. Also noted the soil above the fence comes up gray — same mineral word as the river.",
           "learned": [
-            "Unmoved by charm and personal disclosure when their regard for Mara Wells is questioned",
-            "Considers a bailer sufficient preparation — practical risk calculus",
-            "Subject of Mara Wells is now a closed door"
+            "Headed to a high pasture fold above the fence — three ewes and a ram missing since autumn",
+            "Soil above the high pasture fence is more mineral than below it, comes up gray in places — noticed independently of the river question",
+            "Estimates two hours to the fence at current pace",
+            "Responds to direct, honest questions without agenda more readily than to charm or social maneuvering"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "terrain knowledge above the pasture fence",
+            "unprompted environmental observation — gray soil"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Walking the east bank stock trail upstream with Brynjar; name still unknown; relationship cooled after failed apology; destination still unstated."
+          "statusNote": "Walking the east bank stock trail upstream with Brynjar; destination confirmed as high pasture fold above the fence; name still unknown; relationship slightly warmer after straight question."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Soil above the high pasture fence on the east fork comes up gray in places — described independently by the east bank traveler, who has walked the terrain this season.",
+          "subjectId": "east-bank-stock-trail"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
+          "note": "High pasture fence ~2 hrs upstream from the first braid: soil above it described as more mineral, coming up gray. A sheep fold exists above the fence — three ewes and a ram unaccounted for since autumn.",
           "subPlace": {
-            "name": "East Bank Stock Trail",
-            "note": "Trail confirmed curving inland past the braid; contamination stronger and more directional from this vantage; stranger walking ahead, name ungiving.",
-            "visited": true
+            "name": "High Pasture Fence",
+            "note": "Named landmark ~2 km past the first braid; soil above goes gray-mineral; sheep fold beyond; east bank traveler's destination.",
+            "visited": false
           }
         }
       ],
@@ -276,12 +305,23 @@
           "topic": "echo-river-contamination",
           "label": "Echo River Contamination",
           "kind": "mystery",
-          "fact": "From the stock trail above the braid, the gray-green mineral ribbons in the east fork are visibly stronger and more concentrated than at the gravel bar or at Millbrook — the contamination is directional and intensifies upstream.",
+          "fact": "Above the high pasture fence on the east fork, the soil itself comes up gray in places — the same mineral signature as the river contamination, now appearing in the surrounding terrain. This suggests the contamination has a surface or subsurface land component, not only a waterborne one.",
           "links": [
-            "millbrook",
-            "east-fork-run",
             "east-bank-stock-trail",
-            "east-fork-gravel-bar"
+            "east-fork-run",
+            "millbrook",
+            "high-pasture-fence"
+          ]
+        },
+        {
+          "topic": "east-bank-stock-trail",
+          "label": "East Bank Stock Trail",
+          "kind": "place",
+          "fact": "The trail leads to a high pasture fold above the fence, ~2 hours upstream at trail pace. The traveler walking it now is checking on three missing sheep — a practical errand that coincidentally puts them near the contamination's likely source zone.",
+          "links": [
+            "echo-river-contamination",
+            "east-fork-run",
+            "high-pasture-fence"
           ]
         }
       ],
@@ -289,11 +329,11 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "East bank stock trail above the flood line, east fork of the Echo River. Full gray-blue pre-dawn light, no sun yet. Trail has curved inland behind a screen of alder; the braid is audible below but no longer visible at every step. Gray-green mineral ribbons clearly visible in the water when gaps open in the brush — noticeably stronger than at the gravel bar.",
+      "setting": "East bank stock trail above the flood line, east fork of the Echo River. Sky going pale gold at the ridge edge to the east — pre-dawn still, but sunrise close. Trail has curved inland behind alder; east fork audible below. Gray-green mineral ribbons visible and noticeably stronger through brush gaps in the water below.",
       "npcsPresent": [
         {
           "name": "Unknown traveler (east bank)",
-          "state": "Walking ahead on the trail, eyes forward, pace steady — has closed the subject of Mara Wells and not offered their own n"
+          "state": "Walking ahead on the trail, eyes forward, pace steady — just answered where they're going; not hostile but not warm; wat"
         }
       ],
       "objects": [
@@ -305,18 +345,18 @@
         "Dried Rations"
       ],
       "threads": [
-        "Skiff grounded and abandoned — needs reporting to Mara; retrieval question open",
-        "Stranger traveling same trail: name still unknown, destination still unstated, relationship cooled and apology failed — subject of Mara Wells now firmly closed",
-        "Contamination ribbons grow visibly stronger upstream — source unknown but direction confirmed",
-        "High pasture fence ~2 km past the braid is the next named landmark",
-        "Mara Wells expects a report by sunrise — morning is advancing"
+        "Traveler headed to high pasture fence (~2 hrs) to find missing sheep — fold above the fence",
+        "Soil above the fence described as 'more mineral, comes up gray' — possible surface contamination connection",
+        "Contamination ribbons growing stronger upstream — source still unknown",
+        "Mara Wells expects a report by sunrise — morning is advancing fast",
+        "Traveler's name still unknown; relationship cooled but functional"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [],
@@ -332,7 +372,8 @@
         "Mara confirmed the skiff holds (barely, with a bailer), warned the first braid is 3 km up and the current picks up after dawn. She expects a report by morning.",
         "Skiff's port plank sprung crossing into the braid; grounded on a gravel bar 12 meters short of the first braid's mouth. East bank has a narrow stock trail above flood line. The gray-green contaminatio",
         "Skiff held on the gravel bar with rope-work and a stranger's help; plank still sprung. Upstream path now contested between a limping boat repair and the stock trail on foot.",
-        "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past"
+        "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past",
+        "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas"
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -385,31 +426,33 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d2] Responded to Brynjar's shout from the stock trail; grabbed the bow painter without being asked; asked 'Heave or hold?' — practical, no fuss.",
         "[d2] Confirmed they came down the trail from the second ridge a couple of hours ago; trail holds to the high pasture fence roughly two km past the braid, narrow above that but passable.",
-        "[d2] Brynjar's apology and full introduction — name, father's name, village of origin — landed without softening the chill. They closed the Mara topic with a single deflecting line ('Th"
+        "[d2] Brynjar's apology and full introduction — name, father's name, village of origin — landed without softening the chill. They closed the Mara topic with a single deflecting line ('Th",
+        "[d2] Answered the straight question without deflection: headed to a high pasture fold above the fence to check on three ewes and a ram that didn't come down with the autumn flock. Also "
       ],
       "knownFacts": [
-        "Was on the east bank stock trail above the flood line at dawn",
-        "Comfortable around fast water and grounded boats",
-        "Came down the east bank stock trail from the second ridge approximately two hours before meeting Brynjar",
         "Trail is passable to the high pasture fence (~2 km past the braid); gets narrow above that",
         "Observed the gray-green contamination further upstream — assessed it as visibly stronger there",
         "Unmoved by charm and personal disclosure when their regard for Mara Wells is questioned",
         "Considers a bailer sufficient preparation — practical risk calculus",
-        "Subject of Mara Wells is now a closed door"
+        "Subject of Mara Wells is now a closed door",
+        "Headed to a high pasture fold above the fence — three ewes and a ram missing since autumn",
+        "Soil above the high pasture fence is more mineral than below it, comes up gray in places — noticed independently of the river question",
+        "Estimates two hours to the fence at current pace"
       ],
       "skillsObserved": [
-        "quick situational assessment",
         "practical river-help",
         "terrain reading",
         "calm under uncertainty",
-        "unprompted environmental observation"
+        "unprompted environmental observation",
+        "terrain knowledge above the pasture fence",
+        "unprompted environmental observation — gray soil"
       ],
       "status": "active",
-      "statusNote": "Walking the east bank stock trail upstream with Brynjar; name still unknown; relationship cooled after failed apology; destination still unstated.",
+      "statusNote": "Walking the east bank stock trail upstream with Brynjar; destination confirmed as high pasture fold above the fence; name still unknown; relationship slightly w",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -449,7 +492,8 @@
         "[d2] An unnamed young traveler descended from the east bank stock trail onto the gravel bar at dawn — confirming the trail sees recent active use.",
         "[d2] Skiff tied off and abandoned on the gravel bar boulder — sprung plank, bailer still under thwart. Trail confirmed passable upstream to high pasture fence by a recent traveler.",
         "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence.",
-        "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid."
+        "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
+        "[d2] High pasture fence ~2 hrs upstream from the first braid: soil above it described as more mineral, coming up gray. A sheep fold exists above the fence — three ewes and a ram unaccounted for since autum"
       ],
       "flags": {},
       "lastVisit": 1,
@@ -481,6 +525,12 @@
           "day": 2,
           "visited": true,
           "note": "Trail confirmed curving inland past the braid; contamination stronger and more directional from this vantage; stranger w"
+        },
+        "high-pasture-fence": {
+          "name": "High Pasture Fence",
+          "day": 2,
+          "visited": false,
+          "note": "Named landmark ~2 km past the first braid; soil above goes gray-mineral; sheep fold beyond; east bank traveler's destina"
         }
       }
     }
@@ -564,14 +614,16 @@
           "[d2] The dock-woman has observed the iridescence for ~two weeks, growing visible enough to see without lamplight on clear nights. She independently suspects a directional upstream source — her question sin",
           "[d2] At the east fork's first braid the gray-green mineral contamination is visibly concentrated — threading through the white water in consistent ribbons. Stronger and more visible here than at the Millbr",
           "[d2] The gray-green mineral ribbons are visibly stronger further upstream on the east fork — confirmed by an independent observer (the east bank traveler) who passed the area this morning. The stock trail ",
-          "[d2] From the stock trail above the braid, the gray-green mineral ribbons in the east fork are visibly stronger and more concentrated than at the gravel bar or at Millbrook — the contamination is direction"
+          "[d2] From the stock trail above the braid, the gray-green mineral ribbons in the east fork are visibly stronger and more concentrated than at the gravel bar or at Millbrook — the contamination is direction",
+          "[d2] Above the high pasture fence on the east fork, the soil itself comes up gray in places — the same mineral signature as the river contamination, now appearing in the surrounding terrain. This suggests "
         ],
         "links": [
           "millbrook",
           "millbrook-river-dock",
           "east-fork-run",
           "east-fork-gravel-bar",
-          "east-bank-stock-trail"
+          "east-bank-stock-trail",
+          "high-pasture-fence"
         ],
         "createdDay": 1,
         "updatedDay": 2
@@ -646,12 +698,14 @@
         "kind": "mystery",
         "facts": [
           "[d2] Someone was actively moving on the east bank trail at dawn — young, practical, traveling light. The trail is in current use, not merely historical.",
-          "[d2] Trail is confirmed passable by recent foot traffic to the high pasture fence approximately 2 km past the first braid; narrows above that but does not vanish. Someone descended from the second ridge th"
+          "[d2] Trail is confirmed passable by recent foot traffic to the high pasture fence approximately 2 km past the first braid; narrows above that but does not vanish. Someone descended from the second ridge th",
+          "[d2] The trail leads to a high pasture fold above the fence, ~2 hours upstream at trail pace. The traveler walking it now is checking on three missing sheep — a practical errand that coincidentally puts th"
         ],
         "links": [
           "echo-river-contamination",
           "east-fork-run",
-          "east-fork-gravel-bar"
+          "east-fork-gravel-bar",
+          "high-pasture-fence"
         ],
         "createdDay": 2,
         "updatedDay": 2
@@ -734,6 +788,12 @@
       "text": "The east fork skiff has been abandoned — tied off to a boulder on the gravel bar below the first braid. Brynjar is now proceeding on foot via the east bank stock trail.",
       "day": 2,
       "subjectId": "east-fork-run"
+    },
+    {
+      "id": "east-bank-stock-trail",
+      "text": "Soil above the high pasture fence on the east fork comes up gray in places — described independently by the east bank traveler, who has walked the terrain this season.",
+      "day": 2,
+      "subjectId": "east-bank-stock-trail"
     }
   ],
   "precursorAccess": [],

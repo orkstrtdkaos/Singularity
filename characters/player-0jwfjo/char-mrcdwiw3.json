@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 15,
+  "xp": 17,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -20,12 +20,14 @@
       "level": 1
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "spectrumId": -0.05
+  },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 85,
+  "energy": 80,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -129,36 +131,25 @@
       {
         "summary": "Brynjar's question about Mara Wells lands badly with the traveler — deflected without hostility, but the warmth drops a notch.",
         "narration": "The question lands harder than you intend it to.\n\nYou frame it casually enough — ask for a name, mention Mara Wells, let the real question come out at the end: trustworthy, you think? She pointed me at a rotting skiff. The young traveler stops walking. Not dramatically, not defensively — they just stop, one boot on a root crossing the trail, and look at you with an expression that takes a moment to read. It settles into something between mild offense and genuine puzzlement, the way a person looks when a stranger questions someone they respect.\n\n\"Mara Wells,\" they repeat, flat. They don't answer the name question. \"She keeps the wayhouse.\" A pause while they study you. \"You slept there last night and you're standing on her trail right now, so I'd say she's been fairly straight with you.\" The tone isn't hostile — it's measured, the way people speak when they're deciding how much further to bother. They don't offer anything about how they know her, or how well, or what history sits behind that flatness. That information has closed up like a hand.\n\nThey start walking again, eyes going back to the river below. The gray-green ribbons thread the white water in steady, unhurried lines, indifferent to the small drama on the bank above. Whatever you were hoping to learn about Mara from a stranger on a stock trail, you haven't learned it — and you've spent something in the asking. The traveler's easy cooperation from the gravel bar has gone a degree cooler.\n\nThe high pasture fence is still two kilometers ahead. The contamination is still getting stronger."
+      },
+      {
+        "summary": "Brynjar's apology falls flat — the traveler closes the Mara topic and walks on; the contamination ribbons grow visibly stronger ahead.",
+        "narration": "You turn toward them with open hands and an honest face, laying it out plainly — you meant no disrespect to Mara Wells, you're simply a man from Dýrheimr with a boat of his own sitting dry at the wayhouse while this borrowed wreck nearly swallowed him in the braid. You give your name the full weight of it: Brynjar, son of Andyr, out of Norskar. Your tone is genuine. Your expression is genuine. The words land anyway like a stone that skips wrong.\n\nThe traveler listens. They do not interrupt, which is its own kind of patience — but when you finish, they look at you the way someone looks at a map drawn by a person who's never walked the territory. Not hostile. Just unconvinced. 'The skiff has a bailer,' they say, as if that explains everything that needs explaining. 'Mara doesn't send people into trouble she hasn't already handed them a way out of.' They start walking again, eyes forward, and their posture makes clear that the subject of Mara Wells is now closed.\n\nThe trail curves with the bank and the sound of the braid drops behind a screen of alder. Full gray-blue light now, the sky a shade lighter than iron, and the east fork running loud and cold below. The gray-green mineral haze in the water is unmistakable from here — not a shimmer, not a surface slick, but a concentrated thread moving upstream through the white water like it knows where it's going. Stronger than at Millbrook. Stronger than at the bar. Your name is out in the open air and the stranger hasn't offered theirs back."
       }
     ],
     "lastTurn": {
-      "narration": "The question lands harder than you intend it to.\n\nYou frame it casually enough — ask for a name, mention Mara Wells, let the real question come out at the end: trustworthy, you think? She pointed me at a rotting skiff. The young traveler stops walking. Not dramatically, not defensively — they just stop, one boot on a root crossing the trail, and look at you with an expression that takes a moment to read. It settles into something between mild offense and genuine puzzlement, the way a person looks when a stranger questions someone they respect.\n\n\"Mara Wells,\" they repeat, flat. They don't answer the name question. \"She keeps the wayhouse.\" A pause while they study you. \"You slept there last night and you're standing on her trail right now, so I'd say she's been fairly straight with you.\" The tone isn't hostile — it's measured, the way people speak when they're deciding how much further to bother. They don't offer anything about how they know her, or how well, or what history sits behind that flatness. That information has closed up like a hand.\n\nThey start walking again, eyes going back to the river below. The gray-green ribbons thread the white water in steady, unhurried lines, indifferent to the small drama on the bank above. Whatever you were hoping to learn about Mara from a stranger on a stock trail, you haven't learned it — and you've spent something in the asking. The traveler's easy cooperation from the gravel bar has gone a degree cooler.\n\nThe high pasture fence is still two kilometers ahead. The contamination is still getting stronger.",
-      "sceneSummary": "Brynjar's question about Mara Wells lands badly with the traveler — deflected without hostility, but the warmth drops a notch.",
+      "narration": "You turn toward them with open hands and an honest face, laying it out plainly — you meant no disrespect to Mara Wells, you're simply a man from Dýrheimr with a boat of his own sitting dry at the wayhouse while this borrowed wreck nearly swallowed him in the braid. You give your name the full weight of it: Brynjar, son of Andyr, out of Norskar. Your tone is genuine. Your expression is genuine. The words land anyway like a stone that skips wrong.\n\nThe traveler listens. They do not interrupt, which is its own kind of patience — but when you finish, they look at you the way someone looks at a map drawn by a person who's never walked the territory. Not hostile. Just unconvinced. 'The skiff has a bailer,' they say, as if that explains everything that needs explaining. 'Mara doesn't send people into trouble she hasn't already handed them a way out of.' They start walking again, eyes forward, and their posture makes clear that the subject of Mara Wells is now closed.\n\nThe trail curves with the bank and the sound of the braid drops behind a screen of alder. Full gray-blue light now, the sky a shade lighter than iron, and the east fork running loud and cold below. The gray-green mineral haze in the water is unmistakable from here — not a shimmer, not a surface slick, but a concentrated thread moving upstream through the white water like it knows where it's going. Stronger than at Millbrook. Stronger than at the bar. Your name is out in the open air and the stranger hasn't offered theirs back.",
+      "sceneSummary": "Brynjar's apology falls flat — the traveler closes the Mara topic and walks on; the contamination ribbons grow visibly stronger ahead.",
       "choices": [
         {
-          "label": "Apologize plainly — you misjudged the question; say so without dressing it up.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Walk in silence for a stretch — let the tension breathe and watch how the stranger moves, reads the trail, reacts to the river",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "repair",
-            "honest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let it lie and walk — no explanation, no repair; just move upstream and let the silence work itself out.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "cautious",
+            "scout",
+            "careful",
             "observe"
           ],
           "abilityId": null,
@@ -168,14 +159,31 @@
           "emergenceId": null
         },
         {
-          "label": "Ask directly who they are and where they're headed — simpler question, less loaded; you still need to know who you're walking with.",
+          "label": "Use Rivercraft to read the contamination ribbons from the trail — direction, concentration, whether there's a definite point-source upstream",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful",
+            "scout"
+          ],
+          "abilityId": "rivercraft",
+          "energyCost": 5,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask them a straight question — not about Mara, not about trust. Just: where were you headed on this trail, and why?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "persuade",
-            "scout"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -184,18 +192,18 @@
           "emergenceId": null
         },
         {
-          "label": "Study the river below while you walk — use Rivercraft to read the contamination ribbons: steady, pulsed, seasonal? Does the pattern tell you anything about the source?",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Drop the social repair entirely and push the pace — you have a deadline at sunrise and Mara's report matters more than making a friend",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
+            "plan",
             "careful"
           ],
-          "abilityId": "rivercraft",
-          "energyCost": 5,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -211,17 +219,16 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "East bank stock trail above the flood line, east fork of the Echo River. Early spring morning, full gray-blue light, no sun yet. Narrow compressed-earth shelf through scrub oak and alder, running upstream parallel to the braid below.",
+        "setting": "East bank stock trail above the flood line, east fork of the Echo River. Full gray-blue pre-dawn light, no sun yet. Trail has curved inland behind a screen of alder; the braid is audible below but no longer visible at every step. Gray-green mineral ribbons clearly visible in the water when gaps open in the brush — noticeably stronger than at the gravel bar.",
         "npcsPresent": [
           {
             "name": "Unknown traveler (east bank)",
-            "state": "Walking ahead on the trail, eyes on the river below, posture a degree cooler than before — cooperative but no longer warm."
+            "state": "Walking ahead on the trail, eyes forward, pace steady — has closed the subject of Mara Wells and not offered their own name back"
           }
         ],
         "objects": [
-          "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer still under thwart",
-          "Hemp Rope (30 ft) — tied through bow ring to gravel bar boulder",
-          "Gray-green mineral ribbons visible in white water of the braid below — intensifying upstream",
+          "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer, Hemp Rope (30 ft) — tied through bow ring to gravel bar boulder (behind them now, downstream)",
+          "Gray-green mineral ribbons visible in east fork water through breaks in the alder — visibly stronger and more concentrated than at the braid or at Millbrook",
           "Boot or hoof marks of uncertain age and direction in trail surface",
           "Traveler's Pack (on Brynjar's back)",
           "Waterskin",
@@ -229,8 +236,8 @@
         ],
         "threads": [
           "Skiff grounded and abandoned — needs reporting to Mara; retrieval question open",
-          "Stranger traveling same trail: name still unknown, destination still unstated, relationship cooled after Mara question",
-          "Contamination ribbons grow stronger upstream — source unknown but direction confirmed",
+          "Stranger traveling same trail: name still unknown, destination still unstated, relationship cooled and apology failed — subject of Mara Wells now firmly closed",
+          "Contamination ribbons grow visibly stronger upstream — source unknown but direction confirmed",
           "High pasture fence ~2 km past the braid is the next named landmark",
           "Mara Wells expects a report by sunrise — morning is advancing"
         ]
@@ -239,35 +246,42 @@
         {
           "op": "update",
           "npcId": "unknown-east-bank-traveler",
-          "name": "Unknown traveler (east bank)",
+          "name": "Unknown (east bank traveler)",
           "role": "Unnamed traveler on the east fork stock trail",
-          "note": "Deflected Brynjar's question about Mara Wells without hostility but with clear measured coolness — did not give their name, did not explain their connection to Mara, but defended her implicitly. Relationship cooled.",
+          "note": "Brynjar's apology and full introduction — name, father's name, village of origin — landed without softening the chill. They closed the Mara topic with a single deflecting line ('The skiff has a bailer') and resumed walking. Have not offered their own name.",
           "learned": [
-            "Has some prior knowledge of or feeling about Mara Wells — defended her by implication without stating the connection",
-            "Did not answer the name question at all"
+            "Unmoved by charm and personal disclosure when their regard for Mara Wells is questioned",
+            "Considers a bailer sufficient preparation — practical risk calculus",
+            "Subject of Mara Wells is now a closed door"
           ],
-          "skillsObserved": [
-            "measured deflection",
-            "composed social boundary-setting"
-          ],
-          "relationshipDelta": -1,
+          "skillsObserved": [],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking the east bank stock trail upstream with Brynjar; name still unknown; now a degree cooler after the Mara question."
+          "statusNote": "Walking the east bank stock trail upstream with Brynjar; name still unknown; relationship cooled after failed apology; destination still unstated."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
+          "subPlace": {
+            "name": "East Bank Stock Trail",
+            "note": "Trail confirmed curving inland past the braid; contamination stronger and more directional from this vantage; stranger walking ahead, name ungiving.",
+            "visited": true
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "fact": "An unnamed traveler on the east fork stock trail deflected a question about Mara's trustworthiness with quiet firmness — suggesting she has a positive reputation among people who use this trail, though the connection is unstated.",
+          "topic": "echo-river-contamination",
+          "label": "Echo River Contamination",
+          "kind": "mystery",
+          "fact": "From the stock trail above the braid, the gray-green mineral ribbons in the east fork are visibly stronger and more concentrated than at the gravel bar or at Millbrook — the contamination is directional and intensifies upstream.",
           "links": [
-            "echo-river-contamination",
-            "east-bank-stock-trail",
+            "millbrook",
             "east-fork-run",
-            "millbrook"
+            "east-bank-stock-trail",
+            "east-fork-gravel-bar"
           ]
         }
       ],
@@ -275,17 +289,16 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "East bank stock trail above the flood line, east fork of the Echo River. Early spring morning, full gray-blue light, no sun yet. Narrow compressed-earth shelf through scrub oak and alder, running upstream parallel to the braid below.",
+      "setting": "East bank stock trail above the flood line, east fork of the Echo River. Full gray-blue pre-dawn light, no sun yet. Trail has curved inland behind a screen of alder; the braid is audible below but no longer visible at every step. Gray-green mineral ribbons clearly visible in the water when gaps open in the brush — noticeably stronger than at the gravel bar.",
       "npcsPresent": [
         {
           "name": "Unknown traveler (east bank)",
-          "state": "Walking ahead on the trail, eyes on the river below, posture a degree cooler than before — cooperative but no longer war"
+          "state": "Walking ahead on the trail, eyes forward, pace steady — has closed the subject of Mara Wells and not offered their own n"
         }
       ],
       "objects": [
         "Skiff tied to boulder on gravel bar below — abandoned, sprung port plank, bailer",
-        "Hemp Rope (30 ft) — tied through bow ring to gravel bar boulder",
-        "Gray-green mineral ribbons visible in white water of the braid below — intensify",
+        "Gray-green mineral ribbons visible in east fork water through breaks in the alde",
         "Boot or hoof marks of uncertain age and direction in trail surface",
         "Traveler's Pack (on Brynjar's back)",
         "Waterskin",
@@ -293,8 +306,8 @@
       ],
       "threads": [
         "Skiff grounded and abandoned — needs reporting to Mara; retrieval question open",
-        "Stranger traveling same trail: name still unknown, destination still unstated, relationship cooled after Mara question",
-        "Contamination ribbons grow stronger upstream — source unknown but direction confirmed",
+        "Stranger traveling same trail: name still unknown, destination still unstated, relationship cooled and apology failed — subject of Mara Wells now firmly closed",
+        "Contamination ribbons grow visibly stronger upstream — source unknown but direction confirmed",
         "High pasture fence ~2 km past the braid is the next named landmark",
         "Mara Wells expects a report by sunrise — morning is advancing"
       ]
@@ -303,7 +316,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [],
@@ -375,14 +388,18 @@
       "relationship": 0,
       "history": [
         "[d2] Responded to Brynjar's shout from the stock trail; grabbed the bow painter without being asked; asked 'Heave or hold?' — practical, no fuss.",
-        "[d2] Confirmed they came down the trail from the second ridge a couple of hours ago; trail holds to the high pasture fence roughly two km past the braid, narrow above that but passable."
+        "[d2] Confirmed they came down the trail from the second ridge a couple of hours ago; trail holds to the high pasture fence roughly two km past the braid, narrow above that but passable.",
+        "[d2] Brynjar's apology and full introduction — name, father's name, village of origin — landed without softening the chill. They closed the Mara topic with a single deflecting line ('Th"
       ],
       "knownFacts": [
         "Was on the east bank stock trail above the flood line at dawn",
         "Comfortable around fast water and grounded boats",
         "Came down the east bank stock trail from the second ridge approximately two hours before meeting Brynjar",
         "Trail is passable to the high pasture fence (~2 km past the braid); gets narrow above that",
-        "Observed the gray-green contamination further upstream — assessed it as visibly stronger there"
+        "Observed the gray-green contamination further upstream — assessed it as visibly stronger there",
+        "Unmoved by charm and personal disclosure when their regard for Mara Wells is questioned",
+        "Considers a bailer sufficient preparation — practical risk calculus",
+        "Subject of Mara Wells is now a closed door"
       ],
       "skillsObserved": [
         "quick situational assessment",
@@ -392,7 +409,7 @@
         "unprompted environmental observation"
       ],
       "status": "active",
-      "statusNote": "Walking the east bank stock trail upstream with Brynjar; name still unknown; destination unstated.",
+      "statusNote": "Walking the east bank stock trail upstream with Brynjar; name still unknown; relationship cooled after failed apology; destination still unstated.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -431,7 +448,8 @@
         "[d2] Gravel bar just below east fork's first braid: skiff grounded here with sprung plank; gray-green contamination visibly ribboned in the white water; stock trail on east bank above flood line.",
         "[d2] An unnamed young traveler descended from the east bank stock trail onto the gravel bar at dawn — confirming the trail sees recent active use.",
         "[d2] Skiff tied off and abandoned on the gravel bar boulder — sprung plank, bailer still under thwart. Trail confirmed passable upstream to high pasture fence by a recent traveler.",
-        "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence."
+        "[d2] East bank stock trail confirmed passable to high pasture fence (~2 km past braid) by traveler who descended it this morning. Trail narrow but continuous above the fence.",
+        "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -462,7 +480,7 @@
           "name": "East Bank Stock Trail",
           "day": 2,
           "visited": true,
-          "note": "Active use confirmed; stranger descended from second ridge this morning; Brynjar now ascending toward high pasture fence"
+          "note": "Trail confirmed curving inland past the braid; contamination stronger and more directional from this vantage; stranger w"
         }
       }
     }
@@ -545,7 +563,8 @@
           "[d1] The iridescence moves within the water column rather than on the surface — mineral-sourced, not biological. A riverman's reading suggests the origin is upstream. A child's dock-side stone map marks so",
           "[d2] The dock-woman has observed the iridescence for ~two weeks, growing visible enough to see without lamplight on clear nights. She independently suspects a directional upstream source — her question sin",
           "[d2] At the east fork's first braid the gray-green mineral contamination is visibly concentrated — threading through the white water in consistent ribbons. Stronger and more visible here than at the Millbr",
-          "[d2] The gray-green mineral ribbons are visibly stronger further upstream on the east fork — confirmed by an independent observer (the east bank traveler) who passed the area this morning. The stock trail "
+          "[d2] The gray-green mineral ribbons are visibly stronger further upstream on the east fork — confirmed by an independent observer (the east bank traveler) who passed the area this morning. The stock trail ",
+          "[d2] From the stock trail above the braid, the gray-green mineral ribbons in the east fork are visibly stronger and more concentrated than at the gravel bar or at Millbrook — the contamination is direction"
         ],
         "links": [
           "millbrook",

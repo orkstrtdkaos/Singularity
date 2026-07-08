@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 3,
-  "xp": 294,
+  "xp": 296,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -42,9 +42,9 @@
   },
   "attunement": 3,
   "maxHealth": 40,
-  "health": 39,
+  "health": 40,
   "maxEnergy": 110,
-  "energy": 38,
+  "energy": 44,
   "inventory": [
     {
       "id": "waterskin",
@@ -262,23 +262,28 @@
       {
         "summary": "Usnea rests in a sheltered limestone hollow above the valley floor — Aevi close, the Heights visible, Thursday still reachable.",
         "narration": "The gravel shoulder flattens where an old drainage cut has carved a shallow bowl into the hillside — not quite a hollow, but enough: a half-circle of limestone with a south-facing overhang that traps the early warmth and softens the spring wind. You fold yourself down into it, root-mass settling into the loose scree with the particular relief of weight finally distributed properly. The Echo River catches the light below in long, flat gleams. The Harmonic Heights terracing is visible across the valley — pale rose-gray stonework stepped up the western slope, still in morning shadow.\n\nAevi drifts down from shoulder-height to something closer to your lap — or what passes for a lap on an Ent at rest. The motes cluster loosely, a little brighter than their usual traveling glow. Neither of you speaks for a while. The valley breathes. A pair of swifts cut across the slope below, following the thermal that rises off the limestone.\n\n\"The same hand,\" Aevi says again, quietly, the way it sometimes returns to a thing it hasn't finished with. Not asking anything. Just keeping it present.\n\nYou have an hour and the weight of the plateau behind you. The memory glass rests warm against your heartwood — Orla's evidence, your obligation, intact. Thursday is real. The Harmonic Heights are visible from where you sit, and the valley floor between here and there is open country you've crossed before."
+      },
+      {
+        "summary": "Mental rehearsal and light-gathering both fail — the 'why' behind Fendt's act is the gap that breaks concentration.",
+        "narration": "You settle deeper into the limestone hollow and let your attention do two things at once — a mistake you realize only when it's too late to stop it.\n\nThe rehearsal comes easily enough at first: the pale seedling, the crystalline residue pinch, Orla's Memory Glass warm against your heartwood, the six-fold pulse, Sela's tapping fingers, Pell at the door. A clean sequence, each piece in its place. You reach for the light at the same time — a quiet, economical gather, morning sun pooling into the upper canopy of your branch-mass, the kind of restrained working you've done a hundred times as you walk through orchards coaxing reluctant fruit into ripeness. Nothing dramatic. Just presence and patience and accumulated practice.\n\nBut the two threads catch on each other. The moment you bring Fendt into the sequence — the sealed tube, the pour, the second figure's dark coat — your attention snags on the gap you still can't answer: *why.* The question opens like a crack underfoot, and the light you were gathering scatters instead of pooling. Not a burn, not a surge-backlash — just the quiet failure of divided concentration, the light sliding off your branches like water off morning stone. Aevi's motes dim slightly, not in alarm but in something closer to recognition.\n\n\"The same hand,\" the swarm says again, very quietly, from somewhere near your knee. Not an answer — more like a reminder that the thing you're missing is the thing that would make the sequence whole. The evidence you carry names *what* and *who.* Nobody yet has named *why*, and your mind keeps finding that absence and falling into it, scattering whatever else you were holding."
       }
     ],
     "lastTurn": {
-      "narration": "The gravel shoulder flattens where an old drainage cut has carved a shallow bowl into the hillside — not quite a hollow, but enough: a half-circle of limestone with a south-facing overhang that traps the early warmth and softens the spring wind. You fold yourself down into it, root-mass settling into the loose scree with the particular relief of weight finally distributed properly. The Echo River catches the light below in long, flat gleams. The Harmonic Heights terracing is visible across the valley — pale rose-gray stonework stepped up the western slope, still in morning shadow.\n\nAevi drifts down from shoulder-height to something closer to your lap — or what passes for a lap on an Ent at rest. The motes cluster loosely, a little brighter than their usual traveling glow. Neither of you speaks for a while. The valley breathes. A pair of swifts cut across the slope below, following the thermal that rises off the limestone.\n\n\"The same hand,\" Aevi says again, quietly, the way it sometimes returns to a thing it hasn't finished with. Not asking anything. Just keeping it present.\n\nYou have an hour and the weight of the plateau behind you. The memory glass rests warm against your heartwood — Orla's evidence, your obligation, intact. Thursday is real. The Harmonic Heights are visible from where you sit, and the valley floor between here and there is open country you've crossed before.",
-      "sceneSummary": "Usnea rests in a sheltered limestone hollow above the valley floor — Aevi close, the Heights visible, Thursday still reachable.",
+      "narration": "You settle deeper into the limestone hollow and let your attention do two things at once — a mistake you realize only when it's too late to stop it.\n\nThe rehearsal comes easily enough at first: the pale seedling, the crystalline residue pinch, Orla's Memory Glass warm against your heartwood, the six-fold pulse, Sela's tapping fingers, Pell at the door. A clean sequence, each piece in its place. You reach for the light at the same time — a quiet, economical gather, morning sun pooling into the upper canopy of your branch-mass, the kind of restrained working you've done a hundred times as you walk through orchards coaxing reluctant fruit into ripeness. Nothing dramatic. Just presence and patience and accumulated practice.\n\nBut the two threads catch on each other. The moment you bring Fendt into the sequence — the sealed tube, the pour, the second figure's dark coat — your attention snags on the gap you still can't answer: *why.* The question opens like a crack underfoot, and the light you were gathering scatters instead of pooling. Not a burn, not a surge-backlash — just the quiet failure of divided concentration, the light sliding off your branches like water off morning stone. Aevi's motes dim slightly, not in alarm but in something closer to recognition.\n\n\"The same hand,\" the swarm says again, very quietly, from somewhere near your knee. Not an answer — more like a reminder that the thing you're missing is the thing that would make the sequence whole. The evidence you carry names *what* and *who.* Nobody yet has named *why*, and your mind keeps finding that absence and falling into it, scattering whatever else you were holding.",
+      "sceneSummary": "Mental rehearsal and light-gathering both fail — the 'why' behind Fendt's act is the gap that breaks concentration.",
       "choices": [
         {
-          "label": "Turn the breather into proper preparation: run the Thursday sequence in your mind — the order Mara set, the evidence you carry, where the Fendt thread fits — and decide how to introduce the memory glass",
+          "label": "Let Aevi speak — ask directly what 'the same hand' means; stop carrying the phrase unanswered",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.8,
-            "concrete_abstract": 0.3
+            "concrete_abstract": 0.6,
+            "falsehood_truth": 0.7
           },
           "difficulty": 0,
           "intentTags": [
-            "plan",
+            "study",
+            "listen",
             "careful"
           ],
           "abilityId": null,
@@ -288,53 +293,16 @@
           "emergenceId": null
         },
         {
-          "label": "Hold the memory glass up in the morning light and watch it — see if the warmth and the angle of early sun coax anything new from its surface",
+          "label": "Use Prism Sight to read the valley floor below — find whether the ford's disturbed water still carries a readable light-trace from this distance",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "dark_light": 0.7,
-            "concrete_abstract": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": "prism_sight_deep_read"
-        },
-        {
-          "label": "Ask Aevi directly what it meant — 'the same hand' covers a lot of ground; you want to know what it actually suspects, not what it's careful about saying",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.7,
-            "mechanical_spiritual": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Scan the valley floor with Prism Sight before descending — check the Heights approach for anything that shouldn't be there, and see if the six-fold pulse shows in the light the way it did from the rim",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.6,
             "concrete_abstract": 0.4
           },
           "difficulty": 15,
           "intentTags": [
+            "study",
             "scout",
             "careful"
           ],
@@ -343,12 +311,51 @@
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Set the 'why' aside — do one thing only: run the evidence sequence clean, no light-work, just the order of presentation until it is second nature",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": 0.2,
+            "falsehood_truth": 0.8
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Rise and move — the hollow has done its work; descend to the valley floor and let forward motion settle what stillness won't",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "concrete_abstract": 0.2,
+            "violence_peace": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "move",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 1,
-        "energy": 10,
+        "health": 0,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -360,7 +367,7 @@
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Clustered closer than usual at lap-height — motes a little brighter, quietly repeating 'the same hand' as if chewing on it."
+            "state": "Motes dimmed slightly, settled near knee-height — quietly repeating 'the same hand', dimmer than usual, as if recognizing the failure of divided attention"
           }
         ],
         "objects": [
@@ -373,8 +380,8 @@
           "Fendt and second figure on south road — purpose and destination unknown, behind plateau bulk",
           "Three braided Precursor alignments confirmed underfoot throughout descent — six-count pulse steady",
           "Thursday elder presentation — all evidence intact, Harmonic Heights reachable before deadline",
-          "Junction-node beneath south switchback — Aevi named 'the same hand'; unresolved",
-          "Aevi's repeated phrase — 'the same hand' — not yet explained"
+          "Junction-node beneath south switchback — Aevi named 'the same hand'; still unresolved",
+          "Aevi's repeated phrase — 'the same hand' — not yet explained; concentration failure surfaced the gap: the evidence names what and who, but not why"
         ]
       },
       "npcUpdates": [
@@ -383,29 +390,45 @@
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence — nanite-mote swarm",
-          "note": "Settled close during the breather — motes brighter than traveling glow, repeating 'the same hand' quietly, not yet explaining what it means.",
+          "note": "Motes dimmed slightly at the concentration failure — not in alarm but in recognition. Repeated 'the same hand' again from near the knee, unprompted, as Usnea's rehearsal broke apart on the unanswered 'why'.",
           "learned": [
-            "Returns to 'the same hand' without prompting — treating it as an open question it hasn't resolved"
+            "Aevi appears to be using 'the same hand' as a signal toward the missing piece — the motive behind Fendt's act — not merely a description of Precursor architecture"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "pattern recognition",
+            "patient repetition of an incomplete truth"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At rest in the limestone hollow with Usnea — calm, close, quietly unresolved about the alignments."
+          "statusNote": "Present in the limestone hollow, motes near knee-height, quietly persistent about 'the same hand'"
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
-          "subPlace": {
-            "name": "Limestone Hollow — Gravel Shoulder Rest",
-            "note": "Natural drainage bowl in the slope above the valley floor — south overhang, morning warmth, good sightlines west to the Heights.",
-            "visited": true
+          "note": "Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand' from knee-height.",
+          "flag": {
+            "rehearsal_failure": "why_unknown",
+            "aevi_signal": "the_same_hand_repeated"
           }
         }
       ],
-      "codexUpdates": [],
-      "timeAdvanceHours": 1,
+      "codexUpdates": [
+        {
+          "topic": "fendt-filtration-engineer",
+          "label": "Fendt — Filtration Engineer",
+          "kind": "mystery",
+          "fact": "Day 8 morning: the evidence sequence names what Fendt did and who he is — but not why. The gap is load-bearing: without motive, the elders have an act without an explanation. Aevi's repeated 'the same hand' may be pointing at the answer.",
+          "links": [
+            "echo-river-contamination",
+            "orlas-memory-glass-the-ford-record",
+            "contamination-evidence-for-the-elders",
+            "the-six-fold-pattern",
+            "precursor-alignment-plateau-rim"
+          ]
+        }
+      ],
+      "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
@@ -413,7 +436,7 @@
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Clustered closer than usual at lap-height — motes a little brighter, quietly repeating 'the same hand' as if chewing on "
+          "state": "Motes dimmed slightly, settled near knee-height — quietly repeating 'the same hand', dimmer than usual, as if recognizin"
         }
       ],
       "objects": [
@@ -426,15 +449,15 @@
         "Fendt and second figure on south road — purpose and destination unknown, behind plateau bulk",
         "Three braided Precursor alignments confirmed underfoot throughout descent — six-count pulse steady",
         "Thursday elder presentation — all evidence intact, Harmonic Heights reachable before deadline",
-        "Junction-node beneath south switchback — Aevi named 'the same hand'; unresolved",
-        "Aevi's repeated phrase — 'the same hand' — not yet explained"
+        "Junction-node beneath south switchback — Aevi named 'the same hand'; still unresolved",
+        "Aevi's repeated phrase — 'the same hand' — not yet explained; concentration failure surfaced the gap: the evidence names what and who, but not why"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 6,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [
@@ -966,7 +989,6 @@
     "radiant_plateau_edge": {
       "visits": 1,
       "notes": [
-        "[d6] Orla named the eastern rim path as the safe descent — bypasses the south-face array road and the lower switchback warden entirely.",
         "[d6] Eastern Rim Descent named as operational route — longer than south-face road by half a morning, but passes no active array.",
         "[d7] The Edge District assembly notice board now carries two anonymous annotations: 'whose count?' (earlier) and 'ask the river' (Day 7, fresh ink, filtration run night).",
         "[d7] Keeper confirmed the filtration output count is posted on the district board after each run and has been off for three consecutive runs — no official explanation, annotation left standing. This is dis",
@@ -977,7 +999,8 @@
         "[d7] Old Roads surge from the rim's edge confirmed a Precursor junction-node beneath the south road lower switchback — the fourth alignment, older and fainter, terminates there capped with something dense ",
         "[d8] Fendt and a second figure in a dark coat were observed climbing the south road before dawn on Day 8 — moving with deliberate purpose, not a routine array check. The second figure is shorter, darker co",
         "[d8] Eastern rim descent traversed successfully Day 8 morning — all three braided Precursor alignments crossed underfoot at intervals, six-count pulse steady throughout. Cliff shoulder confirmed as full si",
-        "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights."
+        "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
+        "[d8] Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand'"
       ],
       "flags": {
         "memory_glass_transferred": "true",
@@ -1765,7 +1788,8 @@
           "[d6] Fendt operates the south-face secondary filtration array on the Radiant Plateau. He signed the purity reports during the contamination period. Orla identified him from the memory glass — the engineer ",
           "[d6] Fendt knows the memory glass existed at the ford-side boulder — he placed what it records there. He may know it has been removed. The south-face road to the valley floor passes his array, and tonight'",
           "[d7] The south-face secondary filtration array's output count has been off for three consecutive runs — the district board's own accounting shows a measurable discrepancy that supervisors have not explaine",
-          "[d7] Fendt stopped at the Precursor junction-node beneath the south road switchback at dawn, Day 7 — the six-count pulse fired once from the node when he did. Whether he knows what he is standing on or is "
+          "[d7] Fendt stopped at the Precursor junction-node beneath the south road switchback at dawn, Day 7 — the six-count pulse fired once from the node when he did. Whether he knows what he is standing on or is ",
+          "[d8] Day 8 morning: the evidence sequence names what Fendt did and who he is — but not why. The gap is load-bearing: without motive, the elders have an act without an explanation. Aevi's repeated 'the same"
         ],
         "links": [
           "echo-river-contamination",
@@ -1773,10 +1797,11 @@
           "radiant-plateau-edge-district",
           "contamination-evidence-for-the-elders",
           "precursor-junction-node-south-switchback",
-          "the-six-fold-pattern"
+          "the-six-fold-pattern",
+          "orlas-memory-glass-the-ford-record"
         ],
         "createdDay": 6,
-        "updatedDay": 7
+        "updatedDay": 8
       },
       "radiant-council-reflex": {
         "id": "radiant-council-reflex",
@@ -1942,13 +1967,13 @@
   "grantsVersion": 1,
   "customAbilities": {},
   "companionBonds": {
-    "aevi": 5.25
+    "aevi": 5.5
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 9,
-      "light_bending": 9,
+      "light_bending": 10,
       "hearthbinding": 2,
       "old_roads": 5
     },

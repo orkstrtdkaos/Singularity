@@ -471,6 +471,39 @@
       ],
       "powerSystem": "reach_dark_light",
       "gated": "learned"
+    },
+    {
+      "id": "shadowstep",
+      "name": "Shadowstep",
+      "levelReq": 3,
+      "energyCost": 7,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.4,
+        "space_time": 0.3
+      },
+      "functions": [
+        "move",
+        "conceal"
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "CHASE": 2,
+        "EXPLORE": 1
+      },
+      "narrationHints": "You step into one shadow and out of another, and the space between never had you in it.",
+      "description": "Shadow-teleport: move between two shadows you can see, unseen in the crossing. The infiltrator's fold — shorter than Shortfold but silent and hidden.",
+      "notFor": "Lit ground (needs shadow at both ends); long distance; overt arrival.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Shadowstep",
+          "grants": "Step instantly between two shadows within sight, unseen in the passage.",
+          "cannot": "Both ends need real shadow; total light strands you; shorter range than an overt fold."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
     }
   ]
 }

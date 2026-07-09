@@ -373,6 +373,39 @@
         "CHASE": 1,
         "DUEL": 1
       }
+    },
+    {
+      "id": "the_long_odds",
+      "name": "The Long Odds",
+      "levelReq": 5,
+      "energyCost": 10,
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": -0.4,
+        "space_time": 0.2
+      },
+      "functions": [
+        "move",
+        "break"
+      ],
+      "challengeProfile": {
+        "CHASE": 3,
+        "SURVIVE": 2,
+        "FIGHT": 1
+      },
+      "narrationHints": "Every break falls your way at once — the impossible escape, the pursuit that always closes.",
+      "description": "The chase capstone: in flight or pursuit, bend a whole cascade of chance — the gate that's open, the guard that looks away, the ledge that holds. The escape (or the catch) that shouldn't have been possible.",
+      "notFor": "Guaranteed outcomes (it's improbable, not certain); stationary situations; use twice quickly.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Long Odds",
+          "grants": "Turn a whole chase — escape a closing net, or run down a fleeing foe — by riding a cascade of lucky breaks no one could plan.",
+          "cannot": "Spends enormously; the ordered and prepared can still corner you; fails hard if the luck runs out mid-flight."
+        }
+      ],
+      "powerSystem": "reach_chaos_order",
+      "gated": "learned"
     }
   ]
 }

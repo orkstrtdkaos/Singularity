@@ -377,22 +377,26 @@
       {
         "summary": "Prism Sight founders in the coalfire's interference — Usnea reads the room on instinct alone.",
         "narration": "You let your eyes soften the way you've learned to — not staring, not unfocused, reading the light the way it pools in a face rather than the face itself. Four energy drawn quiet and CONSERVED, barely a shimmer at the edge of vision. The room is warm and coal-lit and absolutely the wrong conditions for this: the fire throws orange from the left, the open yard-light cuts silver through the door from the right, and every elder at the table is half-shadow, half-flare. The warden's voice is steady and plain, naming the gateline, naming the season three springs past, naming the flow-gate in words that carry no decoration. You try to catch Dresh's light-flush at the moment he says *six-count*. What you get instead is the fire's reflection rippling in the glass vial on the table, crossing Dresh's hands, crossing Holloway's jaw, crossing Pell's coil of rope — a wash of amber interference that smears every signal you might have read into useless warmth.\n\nAevi dims one precise degree at your shoulder. Not in alarm — in the quiet, slightly apologetic way it has when it notices you trying something that the conditions have already ruled out. The motes stay still, and stay silent.\n\nYou let the working go. It releases without drama — just a small, private failure, the power returning to you with nothing to show for it. The warden continues as if nothing happened, because nothing happened that he could see. You are left reading the room the way everyone else does: with your own two eyes, your own patience, and the particular attention of a very old thing that has learned to wait."
+      },
+      {
+        "summary": "Aevi reads the room's nanite-field quietly — old grief in the warden, structured holding in Dresh, the floor-pulse still listening.",
+        "narration": "You let the warden's voice carry the room and tip your chin just slightly — the small angle that means *you, not them*. Aevi condenses at your shoulder, bright enough to feel as warmth through bark, and the familiar resonance settles behind your ear like a hand placed gently there.\n\n\"Old grief,\" it says, barely voiced. \"Not fear. Something that was feared a long time ago and has since become a shape the body remembers. The warden's field is very clean — almost no nanite signature, which means what he carried in here is his own.\" A brief pause, the motes tightening into a closer cluster. \"The room itself is different. Dresh carries something structured — deliberate, organized, like a question she has been holding in a specific shape for longer than this morning. Holloway is louder than yesterday. Renn is quieter.\" Another pause, the hum dropping a register. \"The pulse beneath the floor is still answering. It has not changed since you last asked. It is listening the same way it was listening before any of you arrived.\"\n\nAt the table, the warden is arriving at it now — you hear the shift in his cadence, the slight flattening that precedes precision. *Four seconds. Six counts. Light from inside the stone.* His chord-staff leans against the north wall, loam at its base, still as a planted thing. Pell's rope coil has not moved, but her weight has shifted forward by a degree — one heel lifting, the way a person does when they are about to decide something and have not decided it yet.\n\nAevi dims back to its traveling brightness, a question asked and answered. The room holds the warden's words in the particular silence of people who recognize what they are hearing because some part of them already knew it."
       }
     ],
     "lastTurn": {
-      "narration": "You let your eyes soften the way you've learned to — not staring, not unfocused, reading the light the way it pools in a face rather than the face itself. Four energy drawn quiet and CONSERVED, barely a shimmer at the edge of vision. The room is warm and coal-lit and absolutely the wrong conditions for this: the fire throws orange from the left, the open yard-light cuts silver through the door from the right, and every elder at the table is half-shadow, half-flare. The warden's voice is steady and plain, naming the gateline, naming the season three springs past, naming the flow-gate in words that carry no decoration. You try to catch Dresh's light-flush at the moment he says *six-count*. What you get instead is the fire's reflection rippling in the glass vial on the table, crossing Dresh's hands, crossing Holloway's jaw, crossing Pell's coil of rope — a wash of amber interference that smears every signal you might have read into useless warmth.\n\nAevi dims one precise degree at your shoulder. Not in alarm — in the quiet, slightly apologetic way it has when it notices you trying something that the conditions have already ruled out. The motes stay still, and stay silent.\n\nYou let the working go. It releases without drama — just a small, private failure, the power returning to you with nothing to show for it. The warden continues as if nothing happened, because nothing happened that he could see. You are left reading the room the way everyone else does: with your own two eyes, your own patience, and the particular attention of a very old thing that has learned to wait.",
-      "sceneSummary": "Prism Sight founders in the coalfire's interference — Usnea reads the room on instinct alone.",
+      "narration": "You let the warden's voice carry the room and tip your chin just slightly — the small angle that means *you, not them*. Aevi condenses at your shoulder, bright enough to feel as warmth through bark, and the familiar resonance settles behind your ear like a hand placed gently there.\n\n\"Old grief,\" it says, barely voiced. \"Not fear. Something that was feared a long time ago and has since become a shape the body remembers. The warden's field is very clean — almost no nanite signature, which means what he carried in here is his own.\" A brief pause, the motes tightening into a closer cluster. \"The room itself is different. Dresh carries something structured — deliberate, organized, like a question she has been holding in a specific shape for longer than this morning. Holloway is louder than yesterday. Renn is quieter.\" Another pause, the hum dropping a register. \"The pulse beneath the floor is still answering. It has not changed since you last asked. It is listening the same way it was listening before any of you arrived.\"\n\nAt the table, the warden is arriving at it now — you hear the shift in his cadence, the slight flattening that precedes precision. *Four seconds. Six counts. Light from inside the stone.* His chord-staff leans against the north wall, loam at its base, still as a planted thing. Pell's rope coil has not moved, but her weight has shifted forward by a degree — one heel lifting, the way a person does when they are about to decide something and have not decided it yet.\n\nAevi dims back to its traveling brightness, a question asked and answered. The room holds the warden's words in the particular silence of people who recognize what they are hearing because some part of them already knew it.",
+      "sceneSummary": "Aevi reads the room's nanite-field quietly — old grief in the warden, structured holding in Dresh, the floor-pulse still listening.",
       "choices": [
         {
-          "label": "Stay quiet and let the warden's testimony run its full course — hold your position, let the room absorb, read what you can with plain attention.",
-          "attribute": "mental",
+          "label": "Watch Pell's weight-shift — read her arithmetic as the warden's six-count lands, and judge whether to catch her eye now or let her reach her own conclusion.",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "read",
             "careful",
-            "wait",
-            "observe"
+            "wait"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -401,15 +405,17 @@
           "emergenceId": null
         },
         {
-          "label": "Watch Pell specifically — her arithmetic is still running, and her read of the warden's words is the one that determines whether Sela comes forward. Track what settles or tightens in her.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "label": "After the warden finishes — place Orla's Memory Glass on the table in Dresh's plain sight, exactly as the sequence requires, without preamble.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "observe",
-            "careful"
+            "deliberate",
+            "sequence",
+            "reveal"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -418,15 +424,15 @@
           "emergenceId": null
         },
         {
-          "label": "Shift position so you stand nearer the far side of the table — angle to see Dresh's face and the two unrecognized elders when the warden names the stone light. Read their expressions plain, without any working.",
+          "label": "Ask Aevi silently whether the structured shape Dresh is holding — the organized question — has a nanite signature old enough to predate this week's evidence, or whether it was built from what she heard today.",
           "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "observe",
+            "study",
             "careful",
-            "scout"
+            "read"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -435,15 +441,17 @@
           "emergenceId": null
         },
         {
-          "label": "Let Aevi speak quietly into your ear — ask it what it tastes in the room's nanite-field as the warden's words land. Not a question for the table; a question for the oldest listener present.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "label": "Hold the room after the warden finishes — a breath of silence before the glass — and let Dresh name whether she is ready to receive named-actor evidence. Give her the space to lead.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "chaos_order": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful",
-            "help"
+            "wait",
+            "defer",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -455,7 +463,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -4,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -463,35 +471,35 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house interior — coallit and double-lit by the open yard door; long table at center with evidence laid out; warden at the near end, mid-testimony, speaking to Dresh.",
+        "setting": "Millbrook common house interior — coallit and double-lit by the open yard door; long table at center with evidence laid out; tuning-warden at the near end, mid-testimony, arriving at the six-count moment.",
         "npcsPresent": [
           {
             "name": "Tuning-warden (gateline)",
-            "state": "Standing at the table's near end — speaking plainly, naming the gateline and the season, working toward the six-count moment."
+            "state": "Arriving at the six-count precision — cadence flattened, words plain and exact. Four seconds. Six counts. Light from inside the stone."
           },
           {
             "name": "Pell",
-            "state": "Just inside the threshold, rope coil against her forearm — arithmetic running, watching the warden with full attention."
+            "state": "Just inside the threshold — rope coil against forearm, one heel slightly lifted, weight forward a degree. Arithmetic visibly shifting."
           },
           {
             "name": "Mara Wells",
-            "state": "At the table — hands folded, watching the warden with patient, thread-holding stillness."
+            "state": "At the table — hands folded, thread-holding stillness, watching the warden."
           },
           {
             "name": "Councilor Dresh",
-            "state": "Hands flat on the table, eyes on the warden — listening without expression."
+            "state": "Hands flat on the table — holding a structured question in a specific shape. Eyes on the warden, unreadable."
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "At the table's near corner, palms down — the warden's words mapping onto his own marker-find."
+            "state": "At the table's near corner, palms down — the warden's words mapping onto his marker-find."
           },
           {
             "name": "Holloway",
-            "state": "Eyes on the warden — the particular attention of someone who has already named his fear and is now measuring whether someone else's words confirm it."
+            "state": "Watching the warden — nanite-field louder than yesterday; the named fear now being tested against live testimony."
           },
           {
             "name": "Renn",
-            "state": "Jaw reset, watching the warden — waiting."
+            "state": "Jaw reset, watching — quieter than yesterday; sitting with the weight of what the warden is naming."
           },
           {
             "name": "Two unrecognized elders",
@@ -501,18 +509,17 @@
         "objects": [
           "Long common house table — pale seedling, glass vial, crystalline residue pinch laid in sequence",
           "Orla's Memory Glass — in Usnea's keeping, not yet placed",
-          "Tuning-warden's chord-staff — leaned against the wall, dark loam at the base",
+          "Tuning-warden's chord-staff — leaned against the north wall, dark loam at the base",
           "Waterskin — at Usnea's hip",
-          "Aevi — at Usnea's shoulder, dimmed one precise degree, very still",
-          "Coalfire — warm orange light, interfering with the yard-silver from the open door"
+          "Aevi — at Usnea's shoulder, returned to traveling brightness after the reading",
+          "Coalfire — warm orange light, interfering with yard-silver from the open door"
         ],
         "threads": [
-          "Tuning-warden's testimony underway — working toward the six-count light from inside the stone, three springs ago",
+          "Tuning-warden arriving at the six-count moment — the room is about to hear it spoken plainly for the first time by a Heights-side witness",
           "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden finishes",
-          "Pell's arithmetic still running — her read of the warden's words determines whether Sela's call comes closer",
-          "Prism Sight failed in the coalfire interference — Usnea is reading plain now",
-          "Dresh's reach-vs-reach-for question remains the room's shared frame",
-          "Holloway's fear of system awareness sitting alongside Brynjar's marker-find"
+          "Pell's arithmetic shifting — one heel up, a decision approaching",
+          "Dresh holding a structured question in a specific shape — older than this morning or built from today's evidence?",
+          "The floor-pulse still listening — unchanged, answering the room's presence"
         ]
       },
       "npcUpdates": [
@@ -521,34 +528,95 @@
           "npcId": "tuning-warden-gateline",
           "name": "Tuning-warden (gateline)",
           "role": "Gateline warden, Lower Terrace, Harmonic Heights",
-          "note": "Continued testimony — plain and unhurried, naming the gateline and the season before naming what he saw.",
-          "learned": [],
+          "note": "Arrived at the six-count precision in his testimony — cadence flattened, plain and exact. His nanite-field is almost clean — what he carries is his own, not system-mediated.",
+          "learned": [
+            "His nanite-field carries almost no external signature — what he brought into this room is purely personal testimony, no system resonance detectable by Aevi"
+          ],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing at the Millbrook common house table, mid-testimony — Heights-side pattern witness, three springs ago."
+          "statusNote": "Standing at the common house table, mid-testimony — delivering the six-count light account to Dresh and the assembled elders."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Cord-and-hemp seller, east market; Sela's mother",
+          "note": "Weight shifted forward by one degree — one heel lifting. The warden's approaching six-count has moved her arithmetic visibly.",
+          "learned": [
+            "Her body is ahead of her decision — one heel up, weight forward, the posture of someone about to resolve"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Just inside the common house threshold — rope coil against forearm, one heel lifted, arithmetic shifting as the warden approaches the six-count moment."
+        },
+        {
+          "op": "update",
+          "npcId": "councilor-dresh",
+          "name": "Councilor Dresh",
+          "role": "Millbrook elder, leads the Thursday presentation",
+          "note": "Aevi reads her nanite-field as carrying something structured and deliberate — a question held in a specific shape. Older than this morning, or built carefully from what she heard today — unclear.",
+          "learned": [
+            "Her nanite-field carries a structured, organized shape — a question held deliberately, not formed in the moment"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Hands flat on the table — holding a structured question in a specific shape, eyes on the warden, waiting for the six-count testimony."
+        },
+        {
+          "op": "update",
+          "npcId": "holloway",
+          "name": "Holloway",
+          "role": "Millbrook farmer, upper terraces",
+          "note": "Aevi notes his nanite-field is louder than yesterday — the named fear amplified, not resolved, by the warden's testimony building toward the six-count.",
+          "learned": [
+            "His nanite-field is louder than yesterday — the act of naming his fear did not quiet it; the warden's words are amplifying it"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — watching the warden, nanite-field louder than yesterday, testing his named fear against live Heights-side testimony."
+        },
+        {
+          "op": "update",
+          "npcId": "renn",
+          "name": "Renn",
+          "role": "Millbrook farmer, lower channel",
+          "note": "Aevi notes his nanite-field is quieter than yesterday — a different kind of settling.",
+          "learned": [
+            "His nanite-field is quieter than yesterday — something has resolved or been set down, at least temporarily"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — jaw reset, quieter than yesterday, waiting for the warden's six-count."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Prism Sight failed in the common house coalfire-and-doorlight interference — the mixed sources create a smear that defeats light-reading at rank 2. The room's lighting conditions are now known as unfavorable for photonic working.",
+          "note": "Aevi read the common house nanite-field during warden testimony — Dresh carries a structured question older than this morning; Holloway's field louder than yesterday; Renn quieter; warden's field almost clean (personal, not system-mediated); floor-pulse still answering and unchanged.",
           "flag": {
-            "prism_sight_interference": "coalfire_plus_yard_doorlight_mixed"
-          },
-          "subPlace": null
+            "aevi_room_read_day10": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "contamination-evidence-for-the-elders",
+          "topic": "evidence-for-the-elders",
           "label": "Evidence for the Elders",
           "kind": "event",
-          "fact": "Day 10 afternoon: Prism Sight failed in the common house — coalfire and yard-door light in conflict smear the light-reading. Usnea returned to plain attention for the warden's testimony.",
+          "fact": "Day 10 afternoon: Aevi read the common house nanite-field during warden testimony — Dresh holds a structured question in a specific shape (possibly older than today); Holloway's field louder (fear amplified, not resolved); Renn's quieter; warden's field almost clean (purely personal testimony, no system resonance); the floor-pulse is still answering and unchanged. Pell's arithmetic shifted — one heel lifted.",
           "links": [
             "tuning-warden-gateline",
+            "councilor-dresh",
+            "pell",
+            "the-six-fold-pattern",
+            "contamination-evidence-for-the-elders",
             "millbrook",
-            "the-six-fold-pattern"
+            "aevi-reading-of-the-water"
           ]
         }
       ],
@@ -556,35 +624,35 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior — coallit and double-lit by the open yard door; long table at center with evidence laid out; warden at the near end, mid-testimony, speaking to Dresh.",
+      "setting": "Millbrook common house interior — coallit and double-lit by the open yard door; long table at center with evidence laid out; tuning-warden at the near end, mid-testimony, arriving at the six-count moment.",
       "npcsPresent": [
         {
           "name": "Tuning-warden (gateline)",
-          "state": "Standing at the table's near end — speaking plainly, naming the gateline and the season, working toward the six-count mo"
+          "state": "Arriving at the six-count precision — cadence flattened, words plain and exact. Four seconds. Six counts. Light from ins"
         },
         {
           "name": "Pell",
-          "state": "Just inside the threshold, rope coil against her forearm — arithmetic running, watching the warden with full attention."
+          "state": "Just inside the threshold — rope coil against forearm, one heel slightly lifted, weight forward a degree. Arithmetic vis"
         },
         {
           "name": "Mara Wells",
-          "state": "At the table — hands folded, watching the warden with patient, thread-holding stillness."
+          "state": "At the table — hands folded, thread-holding stillness, watching the warden."
         },
         {
           "name": "Councilor Dresh",
-          "state": "Hands flat on the table, eyes on the warden — listening without expression."
+          "state": "Hands flat on the table — holding a structured question in a specific shape. Eyes on the warden, unreadable."
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "At the table's near corner, palms down — the warden's words mapping onto his own marker-find."
+          "state": "At the table's near corner, palms down — the warden's words mapping onto his marker-find."
         },
         {
           "name": "Holloway",
-          "state": "Eyes on the warden — the particular attention of someone who has already named his fear and is now measuring whether som"
+          "state": "Watching the warden — nanite-field louder than yesterday; the named fear now being tested against live testimony."
         },
         {
           "name": "Renn",
-          "state": "Jaw reset, watching the warden — waiting."
+          "state": "Jaw reset, watching — quieter than yesterday; sitting with the weight of what the warden is naming."
         },
         {
           "name": "Two unrecognized elders",
@@ -594,24 +662,24 @@
       "objects": [
         "Long common house table — pale seedling, glass vial, crystalline residue pinch l",
         "Orla's Memory Glass — in Usnea's keeping, not yet placed",
-        "Tuning-warden's chord-staff — leaned against the wall, dark loam at the base",
+        "Tuning-warden's chord-staff — leaned against the north wall, dark loam at the ba",
         "Waterskin — at Usnea's hip",
-        "Aevi — at Usnea's shoulder, dimmed one precise degree, very still",
-        "Coalfire — warm orange light, interfering with the yard-silver from the open doo"
+        "Aevi — at Usnea's shoulder, returned to traveling brightness after the reading",
+        "Coalfire — warm orange light, interfering with yard-silver from the open door"
       ],
       "threads": [
-        "Tuning-warden's testimony underway — working toward the six-count light from inside the stone, three springs ago",
+        "Tuning-warden arriving at the six-count moment — the room is about to hear it spoken plainly for the first time by a Heights-side witness",
         "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden finishes",
-        "Pell's arithmetic still running — her read of the warden's words determines whether Sela's call comes closer",
-        "Prism Sight failed in the coalfire interference — Usnea is reading plain now",
-        "Dresh's reach-vs-reach-for question remains the room's shared frame"
+        "Pell's arithmetic shifting — one heel up, a decision approaching",
+        "Dresh holding a structured question in a specific shape — older than this morning or built from today's evidence?",
+        "The floor-pulse still listening — unchanged, answering the room's presence"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -650,7 +718,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Walked to the field with the group; now staring at the pale rows with an expression no longer about the gate. The contamination is displacing the irrigation dispute in his attentio",
         "[d1] Heard Aevi's assessment openly — gate dispute has fully receded; he is watching the channel mouth with stillness",
         "[d1] Exhaled slowly at Usnea's plain statement — the gate dispute has fully receded; he's absorbing the larger picture",
         "[d10] Stopped looking at the seedling and is now watching Aevi's motes — the shift from agricultural evidence to the living confirmation of it.",
@@ -659,17 +726,18 @@
         "[d10] Eyes moved from the air above the residue pinch to Usnea's face after the wells-and-channels naming — the scope of 'inside the system's reach' has registered.",
         "[d10] Named his own question aloud unprompted — 'whether it knows we're here' — surprising himself with how it landed.",
         "[d10] No longer watching Usnea — eyes returned to the residue pinch, absorbing. His question ('whether it knows we're here') is now shared property of the room.",
-        "[d10] Eyes lifted from the residue pinch for the first time since he named his own fear — watching Brynjar, rearranging."
+        "[d10] Eyes lifted from the residue pinch for the first time since he named his own fear — watching Brynjar, rearranging.",
+        "[d10] Aevi notes his nanite-field is louder than yesterday — the named fear amplified, not resolved, by the warden's testimony building toward the six-count."
       ],
       "knownFacts": [
-        "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
         "Heard Usnea name the contamination as deliberate and old, pattern-bearing — not a spill",
         "Aevi's pulse confirmed the six-fold count in real time",
         "The six-fold count is a living rhythm, not a description — Aevi demonstrated it in the room",
         "The system's reach includes the upper terrace irrigation arm — his own fields are inside it",
         "His real fear is not agricultural but existential — whether the system has awareness of human presence",
         "His spoken fear landed harder than he expected — the room absorbed it, which settled something in him",
-        "A deliberately placed marker exists beyond the new mountain pass — the question of deliberate intent extends beyond the valley's water"
+        "A deliberately placed marker exists beyond the new mountain pass — the question of deliberate intent extends beyond the valley's water",
+        "His nanite-field is louder than yesterday — the act of naming his fear did not quiet it; the warden's words are amplifying it"
       ],
       "skillsObserved": [
         "honest self-disclosure under pressure"
@@ -679,7 +747,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "Left of the table — eyes on Brynjar; his fear of system awareness now complicated by a second axis of deliberate intent"
+      "statusNote": "At the common house table — watching the warden, nanite-field louder than yesterday, testing his named fear against live Heights-side testimony."
     },
     "renn": {
       "id": "renn",
@@ -692,7 +760,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Shows a flicker of reluctant recognition at the third farmer's account — not yet conceding anything, but the pale-seedlings detail has landed.",
         "[d1] Conceded that half-flow is within the compact's allowance — each word paid for carefully. The clay bowl and the pale seedlings have reached him.",
         "[d1] Walked to the field; the compact-argument has quieted in him. He's watching the channel mouth and the pale seedlings with something closer to unease than stubbornness.",
         "[d1] Heard Aevi's assessment — the compact-framework is cracking under something he can't cite precedent for",
@@ -701,17 +768,18 @@
         "[d10] Jaw unclenched during Aevi's demonstration — the visible count landed differently than a spoken description.",
         "[d10] Jaw unclenched during the demonstration — eyes fixed on the air above the residue pinch.",
         "[d10] Exhaled through his nose after Usnea named the clay pipes and the south embankment — the lower channel is explicitly inside the system's reach.",
-        "[d10] Nodded once at Holloway's words — a moment of shared ground with the man he has been arguing with for weeks."
+        "[d10] Nodded once at Holloway's words — a moment of shared ground with the man he has been arguing with for weeks.",
+        "[d10] Aevi notes his nanite-field is quieter than yesterday — a different kind of settling."
       ],
       "knownFacts": [
-        "The contamination is entering the irrigation channels, not just the river",
         "Half-flow satisfies the compact and the truce simultaneously",
         "The pale seedlings are real — contaminated water is entering the soil through the eastern irrigation arm",
         "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
         "Heard Usnea name the contamination as deliberate and task-driven — nothing in the elder compact covers this",
         "Seep is deliberate and pre-Transition — nothing in the elder compact addresses this",
         "The six-fold count made visible by Aevi — rhythm confirmed as real and present, not reported",
-        "The lower channel is confirmed inside the system's operational reach — the contamination is not upstream drift but active presence"
+        "The lower channel is confirmed inside the system's operational reach — the contamination is not upstream drift but active presence",
+        "His nanite-field is quieter than yesterday — something has resolved or been set down, at least temporarily"
       ],
       "skillsObserved": [],
       "status": "active",
@@ -719,7 +787,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "Beside Holloway — jaw reset, nodding at shared fear; compact-framework fully replaced by something older"
+      "statusNote": "At the common house table — jaw reset, quieter than yesterday, waiting for the warden's six-count."
     },
     "third-farmer": {
       "id": "third-farmer",
@@ -889,7 +957,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d8] Confirmed six-count channel light witnessed three springs ago — four seconds, light from inside the stone, six pulses then a long pause. Before his current post, before the contami",
         "[d8] Agreed to testify Thursday — will name the four seconds, six counts, light from inside the stone, nothing more. Needs gate-senior sanction to leave the gateline; will seek it himse",
         "[d8] Confirmed Thursday logistics without qualification — eastern path, two hours, gate-senior sanction before morning review, before noon or word by morning tone. The commitment is cle",
         "[d8] His Thursday commitment has been relayed to Mara Wells — the logistics are now part of the official evidence sequence.",
@@ -898,17 +965,18 @@
         "[d10] Arrived at the common house yard on time via the eastern path — muddy-booted from the descent, chord-staff in hand. Gave Usnea one small precise nod at the apple trees: the nod of ",
         "[d10] Received by Usnea at the apple trees — briefed on room state, sequence, and Dresh's preference for plain speech. Accepted the briefing with a single nod. Named 'plain speech' in hi",
         "[d10] Introduced by Usnea with a single sentence — name, post, what he witnessed — then given the floor entirely. Chord-staff set against the wall. Now speaking directly to Dresh.",
-        "[d10] Continued testimony — plain and unhurried, naming the gateline and the season before naming what he saw."
+        "[d10] Continued testimony — plain and unhurried, naming the gateline and the season before naming what he saw.",
+        "[d10] Arrived at the six-count precision in his testimony — cadence flattened, plain and exact. His nanite-field is almost clean — what he carries is his own, not system-mediated."
       ],
       "knownFacts": [
-        "Plans to walk the eastern path — approximately two hours to Millbrook",
         "Will send word by morning tone if sanction is denied",
         "Gate-senior granted sanction — warden cleared to testify Thursday",
         "Arrived alone from the eastern path, on schedule, in good order",
         "Room has been sitting with Dresh's reach-vs-reach-for question since midmorning",
         "He testifies first; memory glass second",
         "Dresh leads and prefers plain speech",
-        "Received a plain one-sentence introduction and immediately began testimony — no hesitation at the handoff"
+        "Received a plain one-sentence introduction and immediately began testimony — no hesitation at the handoff",
+        "His nanite-field carries almost no external signature — what he brought into this room is purely personal testimony, no system resonance detectable by Aevi"
       ],
       "skillsObserved": [
         "precise unembellished recall under no pressure",
@@ -919,7 +987,7 @@
         "clean acceptance of a handoff under a full room's attention"
       ],
       "status": "active",
-      "statusNote": "Standing at the Millbrook common house table, mid-testimony — Heights-side pattern witness, three springs ago.",
+      "statusNote": "Standing at the common house table, mid-testimony — delivering the six-count light account to Dresh and the assembled elders.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -936,7 +1004,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d10] Hand flat on the rope coil, fingers spread — quietly connecting Sela's six-count tap on the dock plank to the rhythm Aevi just demonstrated above the residue pinch. The arithmetic ",
         "[d10] Refused to send Sela forward — read the room as still-processing, not ready. Closed the door gently but firmly. Invoked her held right exactly as promised.",
         "[d10] Fingers separated on the rope coil after Dresh's question — the grip has eased slightly without her moving from the threshold.",
         "[d10] Fingers separated on the rope coil — not gripping. Watching the room's arithmetic settle. The silence has not alarmed her.",
@@ -945,17 +1012,18 @@
         "[d10] Neither fully inside nor out — holding parallel watch on the eastern lane with Usnea. No words exchanged; the shared attention is its own communication.",
         "[d10] Stood parallel watch with Usnea in silence — rope coil shifting from arm to arm the only sound between them. Now reading the warden's arrival from a half-step back.",
         "[d10] Rope coil settled against forearm at the sound of the warden's plain 'I can do plain speech' — a sound Usnea reads as a decision being made. Arithmetic visibly shifting.",
-        "[d10] Crossed the threshold with the warden and Usnea — now just inside the door, rope coil against her forearm, watching the warden's testimony with full arithmetic running."
+        "[d10] Crossed the threshold with the warden and Usnea — now just inside the door, rope coil against her forearm, watching the warden's testimony with full arithmetic running.",
+        "[d10] Weight shifted forward by one degree — one heel lifting. The warden's approaching six-count has moved her arithmetic visibly."
       ],
       "knownFacts": [
-        "The six-fold count Aevi demonstrated is the same rhythm Sela has been tapping since the water turned gray — Pell is making this connection in real time",
         "The room's silence after 'operating' reads as absorption, not acceptance — she distinguishes between the two and acted on the difference",
         "Dresh's framing of 'reach for' has given shape to something Pell has been feeling since Sela first described the pulse",
         "The room is doing something with the question without being pushed — she is reading whether this is absorption or readiness",
         "A deliberately placed marker was found beyond the new mountain pass — the deliberate intent question is larger than the village water",
         "Tuning-warden has arrived on time — the sequence is live",
         "Tuning-warden is composed and prepared — not uncertain or hesitant",
-        "Crossed into the common house proper for the first time — the threshold condition is being tested by the testimony itself"
+        "Crossed into the common house proper for the first time — the threshold condition is being tested by the testimony itself",
+        "Her body is ahead of her decision — one heel up, weight forward, the posture of someone about to resolve"
       ],
       "skillsObserved": [
         "testing information by repeating it",
@@ -966,7 +1034,7 @@
         "holding a condition under pressure without hostility"
       ],
       "status": "active",
-      "statusNote": "Just inside the common house threshold, watching the tuning-warden's testimony — Sela's call forward contingent on this moment landing right.",
+      "statusNote": "Just inside the common house threshold — rope coil against forearm, one heel lifted, arithmetic shifting as the warden approaches the six-count moment.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -1114,7 +1182,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d10] Said nothing after Usnea's testimony. Eyes moved to the crystalline residue pinch. The silence reads as weight, not dismissal.",
         "[d10] Watched Aevi demonstrate the six-fold count in silence — eyes moved from the residue pinch to the motes and back. Has not spoken since 'tell it plainly.'",
         "[d10] Spoke aloud after Aevi's demonstration — named 'operating' as a half-question directed at the room. First words since 'tell it plainly.'",
         "[d10] Hands flat on the table after Usnea confirmed 'operating' and named all three zones of reach — wells, channels, south embankment. Has not spoken since. Rereading the evidence seque",
@@ -1123,17 +1190,18 @@
         "[d10] Shifted from waiting to listening — hands laced, still holding Usnea with her gaze. The question she named has become the room's question.",
         "[d10] Hands came flat on the table again after Brynjar's account — the reweighing posture she took after Aevi's demonstration. Eyes on Brynjar.",
         "[d10] Named her preferred sequence aloud — warden first, memory glass second. Gave her reason plainly: let the room hold Heights-side and valley-side testimony before it looks at someone",
-        "[d10] Received Usnea's plain confirmation of the hold — hands stayed flat, sequence sits with the room."
+        "[d10] Received Usnea's plain confirmation of the hold — hands stayed flat, sequence sits with the room.",
+        "[d10] Aevi reads her nanite-field as carrying something structured and deliberate — a question held in a specific shape. Older than this morning, or built carefully from what she heard t"
       ],
       "knownFacts": [
-        "Aevi demonstrated the six-fold count directly above the residue pinch — three complete cycles, visible and unhurried",
         "Aevi's three-cycle demonstration witnessed directly — the six-fold count is real and present, not described",
         "The system's reach is confirmed across all three village water systems — wells, irrigation channels, south embankment clay pipes",
         "The system is task-driven, not decaying — Usnea's framing, confirmed directly",
         "The distinction between a system that reaches us passively and one that reaches for us deliberately is the question the evidence must answer",
         "The silence confirmed her question was worth asking — the room turned it over without being directed to",
         "A deliberately placed marker was found beyond the new mountain pass, above the high pasture fence — out of the Disputed Zone — approximately three weeks ago",
-        "Prefers testimony sequence that builds from pattern-witness to named-actor — keeps the room's judgment clean"
+        "Prefers testimony sequence that builds from pattern-witness to named-actor — keeps the room's judgment clean",
+        "Her nanite-field carries a structured, organized shape — a question held deliberately, not formed in the moment"
       ],
       "skillsObserved": [
         "controlled response under new information",
@@ -1144,7 +1212,7 @@
         "naming her own reasoning without prompting"
       ],
       "status": "active",
-      "statusNote": "At the common house table — sequence named, sitting with the reach-vs-reach-for question until the warden arrives.",
+      "statusNote": "Hands flat on the table — holding a structured question in a specific shape, eyes on the warden, waiting for the six-count testimony.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -1155,7 +1223,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d10] Day 10: Usnea confirmed 'operating' to Dresh and named all three water-system zones as inside the system's reach — this scope is now public record in the common house.",
         "[d10] Sequence paused at the threshold — Pell held her door-right; Sela's call deferred. The room is waiting for an elder to speak before the testimony sequence can resume.",
         "[d10] Dresh named the reach-vs-reach-for distinction aloud at the common house table — the room's real question is now on the floor, public and unresolved. Holloway named his fear of system awareness alongs",
         "[d10] The silence after Dresh's question was held deliberately by Usnea — the room turned the reach-vs-reach-for question over collectively, without direction. This moment is now part of the common house's ",
@@ -1166,7 +1233,8 @@
         "[d10] Tuning-warden arrived at the yard's eastern lane via the apple trees — Day 10 midday. The final witness sequence is now live in this yard.",
         "[d10] Tuning-warden received and briefed by Usnea at the apple trees — the final witness sequence stepped to the common house threshold on Day 10 midday.",
         "[d10] Tuning-warden introduced and given the floor at the common house table — Day 10 afternoon. Heights-side testimony now live. Chord-staff loam-mark on the north wall plaster.",
-        "[d10] Prism Sight failed in the common house coalfire-and-doorlight interference — the mixed sources create a smear that defeats light-reading at rank 2. The room's lighting conditions are now known as unfa"
+        "[d10] Prism Sight failed in the common house coalfire-and-doorlight interference — the mixed sources create a smear that defeats light-reading at rank 2. The room's lighting conditions are now known as unfa",
+        "[d10] Aevi read the common house nanite-field during warden testimony — Dresh carries a structured question older than this morning; Holloway's field louder than yesterday; Renn quieter; warden's field almo"
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1645,17 +1713,18 @@
           "[d9] Thursday morning: Usnea is rested, communed with Millbrook at dawn — village feels purposeful and held. Evidence sequence intact. Warden sanction unconfirmed. Fendt's motive still the gap.",
           "[d10] Day 10 Thursday: Aevi demonstrated the six-fold count directly above the crystalline residue pinch — three complete visible cycles above the table. Every elder in the room, Pell, and Brynjar witnessed",
           "[d10] Day 10 Thursday: Aevi demonstrated the six-fold count — three complete visible cycles above the residue pinch. Councilor Dresh broke the silence with 'operating' — the first elder to name the system's",
-          "[d10] Day 10: Usnea confirmed 'operating, task-driven, not decaying' to the full elder panel and named all three zones of reach — wells, irrigation channels, south embankment clay pipes — as inside the syst"
+          "[d10] Day 10: Usnea confirmed 'operating, task-driven, not decaying' to the full elder panel and named all three zones of reach — wells, irrigation channels, south embankment clay pipes — as inside the syst",
+          "[d10] Day 10 afternoon: Aevi read the common house nanite-field during warden testimony — Dresh holds a structured question in a specific shape (possibly older than today); Holloway's field louder (fear amp"
         ],
         "links": [
-          "mara-wells",
-          "echo-river-contamination",
           "the-pale-seedlings",
           "millbrook",
           "contamination-evidence-for-the-elders",
           "the-six-fold-pattern",
           "tuning-warden-gateline",
-          "aevi-reading-of-the-water"
+          "aevi-reading-of-the-water",
+          "councilor-dresh",
+          "pell"
         ],
         "createdDay": 1,
         "updatedDay": 10

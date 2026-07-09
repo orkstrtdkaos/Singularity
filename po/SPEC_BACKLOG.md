@@ -371,3 +371,12 @@ Erik 2026-07-07: (1) need travel skills — teleport, flight. (2) show the diffi
 - **Smoke:** each action shows a difficulty tier + an expandable exact modifier breakdown summing to a %; known bonuses are itemized with sources; unknown factors are listed as ? not hidden; surging updates the math live; the gambit assess uses the same format.
 
 *Updated 2026-07-07 — through SNG-047.*
+
+## SNG-048 — GM-assisted gambit planning (co-author the plan, don't just grade it)
+Erik 2026-07-07 (from live playtest): the GM should HELP the player build a gambit — take raw ideas, flag strong parts, suggest missing connective tissue, adapt input into a coherent plan. This is what makes gambits FUN vs a guessing-game. Observed in play: a player's two separate ideas (bait a committed strike + root the ground for a thicket) were actually ONE plan — the GM's job was to find the keystone step (rooting solves the dry-stone problem that blocked the other ideas) and sequence them so step 1 changes step 4's odds.
+- **GM planning contract:** when a player enters gambit-planning, the GM (a) reflects each idea back with what's STRONG and what's MISSING; (b) finds dependencies/keystones (which step enables others); (c) flags plan-killers (e.g. deception backfires at the Redline) and offers an in-world REFRAME (a grove isn't a trick, it's terrain); (d) proposes a sequenced plan the player approves/edits; (e) names the fragile step so the player chooses how to handle it.
+- **Adapt, don't replace:** the plan stays the PLAYER'S — GM suggests connective tissue and sequencing, never overrides the player's intent. Output is the player's ideas made coherent, not the GM's plan.
+- **Ties:** gambit builder (SNG-031 surfacing), assess-odds step (show-the-math SNG-047 — assess each proposed step's odds as the character would know them), challengeProfile (which of the player's skills fit each step), pole_signatures (an NPC's what-moves-them shapes social steps). The GM already has the pieces; this is a PROMPT/rule + the builder reading them.
+- **Smoke:** a player enters loose ideas; GM returns a sequenced plan naming keystone + fragile step + a reframe of any plan-killer; the plan is recognizably the player's ideas; each step shows its odds; the player can edit before running.
+
+*Updated 2026-07-07 — through SNG-048.*

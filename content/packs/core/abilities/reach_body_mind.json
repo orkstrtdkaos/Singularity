@@ -47,6 +47,11 @@
       "functions": [
         "move",
         "shield"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "CHASE",
+        "FIGHT"
       ]
     },
     {
@@ -92,6 +97,11 @@
       "functions": [
         "reveal",
         "strike"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "INVESTIGATE",
+        "PUZZLE"
       ]
     },
     {
@@ -118,7 +128,11 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT"
+      ]
     },
     {
       "id": "mind_read_folk",
@@ -144,7 +158,11 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
     },
     {
       "id": "second_wind",
@@ -171,7 +189,12 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SURVIVE",
+        "CHASE",
+        "FIGHT"
+      ]
     },
     {
       "id": "total_focus",
@@ -198,7 +221,12 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "PUZZLE",
+        "SURVIVE"
+      ]
     },
     {
       "id": "perfect_motion",
@@ -225,7 +253,12 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "DUEL",
+        "CHASE",
+        "EXPLORE"
+      ]
     },
     {
       "id": "memory_palace",
@@ -253,7 +286,11 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ]
     },
     {
       "id": "the_whole_act",
@@ -280,7 +317,11 @@
         }
       ],
       "powerSystem": "reach_body_mind",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL"
+      ]
     }
   ]
 }

@@ -41,7 +41,8 @@ Engine-needing work from the 2026-07 content-expansion sessions. ALL content for
 - **BATCH-6.5 (Fast fixes, parallel-able with anything):** SNG-030(rest) + SNG-031 (gambit surfacing+xp wire) + SNG-032 (narrative time). Small, high felt-impact; 032 is a GM-op + rule.
 - **BATCH-7 (Living spine):** SNG-020 + SNG-021 + SNG-024 + SNG-025 + SNG-034 (bestiary rides the encounter/living-world work). The world that grows/lives/ends/marks/breathes.
 - **BATCH-8 (Player systems):** SNG-017 (origins + ent-gating fix + SNG-036 martial paths ride together) + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
-- **BATCH-9 (Multiplayer + polish):** SNG-033 (party v2) + SNG-035 (imagery). Party v2 after foundation (needs entity/state discipline); imagery anytime.
+- **BATCH-9 (Multiplayer + polish):** SNG-033 (party v2) + SNG-037 (cross-char awareness) + SNG-038 (simultaneous turns) + SNG-035 (imagery). The multiplayer identity of the game — do together, after foundation.
+- **BATCH-0 (Hygiene, do ANYTIME, cheap):** SNG-040 (content CI) now; SNG-039 (onboarding) once creation/SNG-017 lands. 040 protects every future commit — arguably do it first.
 
 ## Cross-cutting engine flags (fold into whichever batch touches them)
 - **poleIntensity** reading (independent 0..1 poles; co-firing/purity; net-signed derivable). Locations already reseeded.
@@ -246,3 +247,29 @@ Erik 2026-07-07: player character narratives should be saved to the repo so the 
 - **Smoke:** a second player's recent doings appear as rumor/news in region; the GM references their trail without deciding for them; publicSummary updates on save; opt-out hides a character; no full-sheet leakage.
 
 *Updated 2026-07-07 — through SNG-037.*
+
+## SNG-038 — Simultaneous party turns (collect-then-resolve; one scene, many perspectives)
+Erik 2026-07-07: rather than strict round-robin, each party member CHOOSES an action before the GM writes; the GM then writes ONE shared scene resolving everyone's actions together, rendered from each player's PERSPECTIVE. Less turn-locking; more "there is a party you can aid or talk to." REPLACES party.js round-robin (turn pointer, one actor per GM write).
+- **Model — collect then resolve:** a shared beat has a COLLECTION phase (each present member submits an action; UI shows "waiting on N players" but nobody is locked — you can still Ask GM, talk, or aid) then a RESOLUTION phase (GM receives ALL submitted actions + the party's states and writes one coherent beat where the actions interleave). No dead waiting: a member who's slow can be marked "holds / follows the party's lead" so one AFK player doesn't stall the beat (timeout or a ready-check).
+- **One scene, many perspectives:** the beat is ONE shared canonical event (single scene-file append), but each player's CLIENT shows it framed from their character — "you" is them; co-characters are "Cellaceron swings his branch beside you." Cheap: GM writes the shared beat once + a short per-character perspective gloss (or the client re-points pronouns; GM-authored gloss is richer). Canonical facts identical for all; framing local.
+- **Party-aware actions (the real want):** action menu in a shared scene always includes party verbs — AID (add your roll/ability to another's action → the assist mechanic already exists via companions; generalize to players), TALK (in-scene to a co-character, doesn't spend the beat), GUARD (shield a co-character), COMBINE (two players' abilities braid via SNG-026 cross-domain — a shared-scene combination is a headline co-op moment). The GM is told: the party can help each other; surface it.
+- **Turns softened:** no hard lock. "Whose turn" becomes "who hasn't submitted this beat." Aid/talk/guard don't consume your action. Initiative only matters where fiction demands strict order (a duel round) — keep the round model there, use collect-resolve everywhere else.
+- **Ties:** SNG-033 (sheet-sync feeds the GM the party states it needs to resolve everyone), SNG-026 (cross-player COMBINE), SNG-001 (shared scene file is the substrate). Replaces the round-robin turn pointer.
+- **Smoke:** two players submit actions; GM writes one beat resolving both, each sees it in first-person; AID/TALK/GUARD don't cost a beat; a slow player is auto-held not blocking; two players can COMBINE abilities; no turn-lock "seems broken" state.
+
+## SNG-039 — First-session onboarding (teach the deep system by play)
+The game is deep (tiers, gates, poles, gambits, combinations, martial paths) and a new player lands with no ramp — unspecced entirely. Add a guided first session that teaches through play, not a manual.
+- **Model:** a short scripted-ish opening arc (3-5 beats) that introduces ONE mechanic at a time in fiction: first a plain choice + a skill check (learn the d100 feel), then an ability use (learn functions), then a small encounter (learn the encounter loop), then a moment that invites a novel typed action (teach that freeform is rewarded), then hand off to open play. Diegetic — a mentor NPC or a low-stakes situation, not tooltips.
+- **Progressive disclosure:** advanced surfaces (gambit builder, cross-domain combos, the skill graph) stay hidden/quiet until the player has the basics; the gambit chip (SNG-031) and combination discovery already gate themselves — lean on that.
+- **Creation ramp:** creation (SNG-017) offers a "guide me" path (pick a role+homeland archetype with a sensible kit) vs "full control" — so a new player isn't drowned in origins/talents/traditions turn one.
+- **Skippable:** returning players opt out; the onboarding flag lives on the profile.
+- **Smoke:** a brand-new character is walked through choice→check→ability→encounter→novel-action across a few beats; advanced UI stays quiet until earned; "guide me" creation yields a playable character in under a minute; skip works.
+
+## SNG-040 — Content validation CI (catch malformed packs at commit)
+~150 content files authored by hand; one malformed JSON or missing required field silently breaks a pack at load. Add a cheap guard.
+- **Model:** a validation script (node, no deps) run in a GitHub Action on push to content/**: (a) every .json parses; (b) required fields per type present (locations need id/poleIntensity-or-spectrum; abilities need id/functions/levelReq; NPCs need id/name; recipes need parts/functions); (c) cross-ref integrity — connections/parts/loreRefs point at ids that exist; (d) manifest lists match files present. Fail the Action (or comment) on violation.
+- **Also a local pre-push:** an update.bat / npm-script hook Erik can run before syncing.
+- **Reconciliation tie:** validation is the STATIC cousin of SNG-022 (which repairs at runtime) — CI catches authoring errors before they ship; reconciliation heals version drift on load. Both together = content stays sound.
+- **Smoke:** a broken JSON fails CI with a useful message; a dangling connection ref is flagged; a valid commit passes; the local hook catches it before push.
+
+*Updated 2026-07-07 — through SNG-040.*

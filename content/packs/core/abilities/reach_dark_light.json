@@ -47,6 +47,11 @@
       "functions": [
         "conceal",
         "move"
+      ],
+      "challengeTypes": [
+        "STEALTH",
+        "EXPLORE",
+        "FIGHT"
       ]
     },
     {
@@ -92,6 +97,10 @@
       "functions": [
         "reveal",
         "strike"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "INVESTIGATE"
       ]
     },
     {
@@ -119,7 +128,12 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "STEALTH",
+        "FIGHT"
+      ]
     },
     {
       "id": "lightsense",
@@ -145,7 +159,11 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "STEALTH",
+        "INVESTIGATE"
+      ]
     },
     {
       "id": "dim",
@@ -171,7 +189,11 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "STEALTH",
+        "CHASE"
+      ]
     },
     {
       "id": "kindle",
@@ -198,7 +220,12 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "EXPLORE",
+        "SURVIVE"
+      ]
     },
     {
       "id": "the_harbor",
@@ -226,7 +253,11 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "STEALTH",
+        "SURVIVE"
+      ]
     },
     {
       "id": "unshadow",
@@ -254,7 +285,12 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "INVESTIGATE",
+        "SOCIAL"
+      ]
     },
     {
       "id": "harbored_flame",
@@ -281,7 +317,11 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SURVIVE",
+        "STEALTH"
+      ]
     },
     {
       "id": "shroud",
@@ -308,7 +348,11 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "STEALTH",
+        "EXPLORE"
+      ]
     },
     {
       "id": "false_trail",
@@ -336,7 +380,11 @@
         }
       ],
       "powerSystem": "reach_dark_light",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "CHASE",
+        "STEALTH"
+      ]
     }
   ]
 }

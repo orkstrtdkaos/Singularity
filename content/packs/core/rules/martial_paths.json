@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "martial_paths",
+  "kind": "world_structure",
+  "note": "Three linked pieces (Erik 2026-07-07): (1) BASELINE DEFENSE \u2014 every character can defend itself, no build required; (2) MARTIAL BACKGROUNDS \u2014 warrior paths exist across ALL the axes: a chaos-warrior and an order-warrior share the same basic martial functions (strike/shield/move) expressed utterly differently through their Reach; (3) RACIAL/FORM KITS \u2014 a body brings its own weapons: an Ent fights with branch-clubs and root-work. Access model included. Extends universal_roles (Warrior role) + skill_functions (strike/shield by domain). Authored by Aevi (PO).",
+
+  "baselineDefense": {
+    "principle": "No character is helpless. Every character gets a BASELINE DEFENSE KIT free at creation \u2014 not a class, a floor: the universal animal competence of protecting yourself. Small numbers, always available, never gated.",
+    "kit": [
+      {"id": "brace", "name": "Brace", "functions": ["shield"], "grants": "Guard, block, dodge, cover \u2014 reduce incoming harm in a beat. Everyone can raise their arms.", "cannot": "Not armor; a Tier-III strike still hurts through it."},
+      {"id": "strike_basic", "name": "Strike", "functions": ["strike"], "grants": "Hit with what you have \u2014 fist, staff, stone, branch. Modest, honest damage.", "cannot": "Untrained force; the Edge's economy it is not."},
+      {"id": "break_away", "name": "Break Away", "functions": ["move"], "grants": "Disengage, flee, put distance or an obstacle between you and harm.", "cannot": "The faster or the prepared can still catch you."},
+      {"id": "raise_alarm", "name": "Raise the Alarm", "functions": ["reveal","bind"], "grants": "Call for help, alert, rally whoever's near \u2014 defense by numbers.", "cannot": "Someone must be near to hear."}
+    ],
+    "formModifier": "The kit expresses through the FORM: a human's Strike is a fist or staff; an ENT's Strike is a BRANCH-CLUB (a limb swung like a beam) and its Brace is BARKSKIN (the body IS armor); a Blocklands-native braces by raising a quick wall. Form-kits below.",
+    "engineNote": "Baseline kit = 4 free zero-cost abilities at creation, powerSystem 'baseline', excluded from skill-point costs and caps. SNG-022 reconciliation grants them to existing characters on login (your Ent gets its branch-club next login)."
+  },
+
+  "formKits": {
+    "note": "A body brings its own weapons and defenses \u2014 form-kits are small racial/physiology ability sets granted by ORIGIN FORM, on top of baseline. Manifest-race characters especially.",
+    "kits": [
+      {"form": "ent", "name": "The Grove's Arms", "grants": [
+        {"id": "branch_club", "name": "Branch-Club", "functions": ["strike"], "desc": "A limb swung like a falling beam \u2014 slow, enormous, honest. The Ent's Strike, writ in timber.", "cannot": "Slow \u2014 the quick sidestep it; fire answers it terribly."},
+        {"id": "barkskin", "name": "Barkskin", "functions": ["shield"], "desc": "The body is armor \u2014 blows land on bark and heartwood. Passive toughness + an active brace that shrugs ordinary strikes.", "cannot": "Fire and axe bite deep; bark regrows slow."},
+        {"id": "root_hold", "name": "Root-Hold", "functions": ["bind","shield"], "desc": "Roots driven into earth \u2014 immovable stance, or roots snared around a foe's legs. Bind and stand, both from below.", "cannot": "Needs earth (stone floors and city pavement resist); rooted means not moving."},
+        {"id": "root_reach", "name": "Root-Reach", "functions": ["move","reveal"], "desc": "Feel through the ground along root-lines \u2014 what walks nearby, where water runs; in living earth, a slow tunneling reach.", "cannot": "Range is soil-bound; dead ground is silent."}
+      ], "drift": "Form abilities carry the life/spiritual disposition; heavy use deepens the Ent's green nature."},
+      {"form": "blocklands_native", "name": "The Crafter's Reflex", "grants": [
+        {"id": "quick_wall", "name": "Quick Wall", "functions": ["shield"], "desc": "Snap a barrier together from whatever's near \u2014 the block-grammar's defense reflex, working (weakly) even outside the domain.", "cannot": "Outside the Blocklands it's improvised cover, not true block-work."}
+      ], "drift": "order/creation"},
+      {"form": "human_and_default", "name": "\u2014", "grants": [], "note": "Humans and unlisted forms use the plain baseline kit; their depth comes from training (backgrounds below)."}
+    ]
+  },
+
+  "martialBackgrounds": {
+    "principle": "Erik: 'A chaos warrior and an order warrior would be very different, but the same basic kind of skills \u2014 expressed novelly through their own reach combos.' Exactly. A MARTIAL BACKGROUND = the Warrior role + a Reach = a distinct fighting tradition. Same functions (strike/shield/move/break), utterly different expression. Each background grants: its Reach's martial-facing abilities as HOME tradition + a signature COMBO (the cross-domain braid that defines its style) + a defense identity.",
+    "backgrounds": [
+      {"id": "marcher", "name": "Marcher (violence+order)", "homeReach": "reach_violence_peace", "style": "The formal duelist \u2014 the Edge by the forms; economical, decisive, honorable.", "signatureCombo": "the_edge + latticework \u2192 'The Perfect Form' (a fight conducted like a proof \u2014 every strike lawful, every opening foreseen)", "defenseIdentity": "discipline \u2014 the form IS the armor"},
+      {"id": "churn_reaver", "name": "Churn-Reaver (violence+chaos)", "homeReach": "reach_chaos_order", "style": "The chaos-warrior \u2014 improvised weapons, broken footing, wins by the fight coming apart. Same strike/shield functions as the Marcher, nothing alike in expression.", "signatureCombo": "wildcraft + strike_basic \u2192 'The Unraveling Blow' (a strike that lands where the plan broke \u2014 damage scales with the disorder you made)", "defenseIdentity": "unpredictability \u2014 never where the blow lands"},
+      {"id": "temple_guardian", "name": "Temple Guardian (body+peace)", "homeReach": "reach_body_mind", "style": "The protector \u2014 Soma-mastery held as devotion; will not start, will absolutely finish.", "signatureCombo": "soma + stillcraft \u2192 'The Immovable Calm' (a guard that de-escalates \u2014 attackers strike, are absorbed, and somehow the fight is over)", "defenseIdentity": "the trained body as sanctuary \u2014 yours and others'"},
+      {"id": "war_thinker", "name": "War-Thinker (mind+order)", "homeReach": "reach_body_mind", "style": "The Cogitant fighter \u2014 never lifts a blade; the battlefield is a model and you are already checkmated.", "signatureCombo": "noesis + latticework \u2192 'The Foregone Conclusion' (out-model an opponent so completely their attack fails before it starts)", "defenseIdentity": "prediction \u2014 harm addressed before it exists"},
+      {"id": "umbral_blade", "name": "Umbral Blade (violence+dark)", "homeReach": "reach_dark_light", "style": "The unseen fighter \u2014 war as a thing that happens in the dark; one strike, from nowhere, finished.", "signatureCombo": "umbracraft + the_edge \u2192 'The Unseen Cut' (already authored \u2014 the braid IS this background's signature)", "defenseIdentity": "absence \u2014 you cannot hit what was never there"},
+      {"id": "green_warden_militant", "name": "Thorn-Warden (life+violence)", "homeReach": "reach_death_life", "style": "The grove's answer to the axe \u2014 living weapons, thorn and root and regrowth; the Ent's natural background. Fights so that things may keep living.", "signatureCombo": "root_hold + quickening \u2192 'The Grasping Green' (roots bind while living growth mends you mid-fight \u2014 attrition the green always wins)", "defenseIdentity": "regrowth \u2014 wound the warden, the warden heals; wound the grove, the grove remembers"},
+      {"id": "blaze_lance", "name": "Blaze-Lance (light+violence)", "homeReach": "reach_dark_light", "style": "The revealing strike \u2014 light as a weapon; nothing hidden, nothing spared.", "signatureCombo": "radiance + kindle \u2192 'The Judging Beam' (a strike that reveals as it burns \u2014 illusions die first, then the target's cover)", "defenseIdentity": "exposure \u2014 an enemy seen truly is half-beaten"},
+      {"id": "pale_reaper", "name": "Pale Reaper (death+peace)", "homeReach": "reach_death_life", "style": "The mercy that fights \u2014 an Ashwarden militant; ends what must end, cleanly, without hate. The most feared and gentlest style.", "signatureCombo": "palework + stillcraft \u2192 'The Quiet End' (a strike that concludes \u2014 against the dying, the raging, the unnatural, it simply finishes what was already ending)", "defenseIdentity": "acceptance \u2014 fear of the end is the opening; the Reaper has none"}
+    ],
+    "designNote": "Eight backgrounds from six Reaches \u2014 the axes multiply: violence crossed with order/chaos/dark/light/life/death yields distinct traditions, and body/mind yields two more without 'violence' at all. Any Reach pair with a strike-or-shield function makes a martial background. Generation (SNG-020) can author MORE backgrounds by the same grammar: Warrior role + Reach pair + signature braid."
+  },
+
+  "access": {
+    "atCreation": "Baseline kit: free, everyone. Form-kit: free with the form (an Ent is born with branches). Martial background: choose at creation as your ROLE+HOMELAND (SNG-017 origins) \u2014 grants the home Reach's martial abilities at base levelReq + the signature combo as a KNOWN technique.",
+    "inPlay": "Any background is learnable later through fiction \u2014 a teacher of that tradition, training at its home place (the Redline teaches Marcher; the Flesh-Temple teaches Guardian), or a quest \u2014 via character.traditionAccess (the generalized precursorAccess pattern from the SNG-017 addendum). The signature combo is discoverable by use like any braid (SNG-026).",
+    "entAnswer": "Erik's Ent, concretely: (1) next login, SNG-022 grants the baseline kit \u2014 it can Brace/Strike/Break Away NOW, expressed as timber and bark; (2) the ent form-kit gives Branch-Club, Barkskin, Root-Hold, Root-Reach \u2014 the club-branches and root-based skills asked for; (3) Thorn-Warden is its natural martial background, learnable from the Deepwood's Walkers or claimable at creation for new Ents; (4) Harmonic remains learnable at the Heights per the gating fix. The Ent is never again a powerful being that can't defend itself."
+  },
+
+  "buildImplication": "Content DONE here: baseline kit (4), ent form-kit (4), blocklands reflex (1), 8 martial backgrounds w/ signature combos. Engine (fold into SNG-017 + SNG-022 + SNG-026): (a) grant baseline at creation + reconcile-grant to existing characters; (b) form-kit granted by origin form; (c) background = origins.json entry granting homeReach abilities + signature combo; (d) new combos (Perfect Form, Unraveling Blow, Immovable Calm, Foregone Conclusion, Grasping Green, Judging Beam, Quiet End) added to combination_recipes as discoverable. No new systems \u2014 composition of existing ones."
+}

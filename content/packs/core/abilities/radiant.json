@@ -511,6 +511,33 @@
         "shield",
         "ward"
       ]
+    },
+    {
+      "id": "sun_seal",
+      "name": "Sun-Seal",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.4
+      },
+      "functions": [
+        "ward",
+        "shield"
+      ],
+      "narrationHints": "A sigil of stored daylight that answers the dark.",
+      "description": "Inscribe a ward of light — holds back shadow-things, illuminates on intrusion, a beacon that guards.",
+      "notFor": "Warding physical force; permanence without upkeep.",
+      "powerSystem": "radiant",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Sun-Seal",
+          "grants": "Ward a place against dark-drawn things; reveal any intrusion in light.",
+          "cannot": "Needs periodic re-lighting; physical foes ignore it."
+        }
+      ],
+      "gated": "learned"
     }
   ]
 }

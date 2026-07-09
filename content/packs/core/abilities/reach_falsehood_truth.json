@@ -1,28 +1,98 @@
 {
   "schemaVersion": 1,
   "powerSystem": "reach_falsehood_truth",
-  "note": "Crafts of the falsehood_truth axis \u2014 horizon Reach brought online. Falsecraft is the falsehood-pole tradition (illusion, the made-untrue, the necessary lie); Verity the truth-pole (the unmasking, the word that cannot be false). Learned by traveling the Reach or training with the Veilwrights / the Truthwardens. Both drift the wielder toward their pole. Directly hooks the Cathedral of Convincing and the True Word combination. Function tags per canon. axes signed. Authored by Aevi (PO), SNG-016.",
+  "note": "Crafts of the falsehood_truth axis — horizon Reach brought online. Falsecraft is the falsehood-pole tradition (illusion, the made-untrue, the necessary lie); Verity the truth-pole (the unmasking, the word that cannot be false). Learned by traveling the Reach or training with the Veilwrights / the Truthwardens. Both drift the wielder toward their pole. Directly hooks the Cathedral of Convincing and the True Word combination. Function tags per canon. axes signed. Authored by Aevi (PO), SNG-016.",
   "gated": "learned",
   "abilities": [
-    {"id": "falsecraft", "name": "Falsecraft", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_falsehood_truth", "attribute": "mental",
-     "axes": {"falsehood_truth": -0.5, "dark_light": -0.1}, "functions": ["conceal","reveal","bind"],
-     "narrationHints": "The made-untrue \u2014 an illusion that holds, a false face that fits, a story so well-built it stands on its own; the craft that knows exactly how a truth is faked, and so can catch it too.",
-     "description": "The falsehood-pole mastery: illusion, disguise, the constructed untruth \u2014 and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
-     "notFor": "Making a lie TRUE (it only makes it convincing); deceiving a Verity-master's unmasking; the wielder fooling themselves \u2014 Falsecraft that believes its own lies rots.",
-     "tree": [
-       {"rank": 1, "name": "The Fitting Mask", "grants": "Craft a convincing illusion or disguise; tell a lie built well enough to hold; SPOT a constructed untruth, because you know the joinery.", "cannot": "Illusion is not substance \u2014 tested hard, it fails; a Verity read can pierce it; the truly perceptive feel the seam."},
-       {"rank": 2, "name": "The Standing Lie", "grants": "Build an untruth that holds under scrutiny \u2014 a false history, a cover that survives questioning, an illusion that persists unwatched; unbuild another's lie by finding its load-bearing falsehood.", "cannot": "A lie built on discoverable fact cracks when the fact surfaces; the Cathedral (true pieces) is a different, harder thing; every lie you hold is weight."},
-       {"rank": 3, "name": "The Woven Untruth", "grants": "Falsehood at scale \u2014 a deception a whole people believes, an illusion over a place, a constructed truth that reshapes what everyone knows; and the mastery to unpick any of these in another's work. The Veilwrights' power in miniature; the craft that built the Cathedral of Convincing.", "cannot": "The wielder drifts falsehood-hot \u2014 until they can no longer find their own true ground; a person who can make anything believed eventually believes nothing, the foreclosure of the world going unreal."}
-     ]},
-    {"id": "verity", "name": "Verity", "levelReq": 2, "energyCost": 6, "powerSystem": "reach_falsehood_truth", "attribute": "mental",
-     "axes": {"falsehood_truth": 0.5, "dark_light": 0.2}, "functions": ["reveal","strike","break"],
-     "narrationHints": "The unmasking \u2014 a lie shown its own shape, a true word that cannot be false, a clarity that strips pretense whether or not the world is ready.",
-     "description": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art \u2014 and Aevi-the-Watcher's own road.",
-     "notFor": "Mercy (Verity shows, it does not spare); the convincing-lie-of-true-pieces, which needs the True Word combination, not raw Verity; choosing which truths should stay buried \u2014 Verity cannot, it only reveals.",
-     "tree": [
-       {"rank": 1, "name": "The Piercing Eye", "grants": "See through illusion, disguise, and the ordinary lie; know when a spoken thing is false; speak a plain truth others can't easily deny.", "cannot": "Sees the lie, not always the truth behind it; the Cathedral's true-pieces-false-whole survives raw piercing; a truth spoken is not a truth accepted."},
-       {"rank": 2, "name": "The Unmasking", "grants": "Strip a deception bare before others \u2014 a false face shown true, a standing lie collapsed, a liar's own words turned to expose them; hold a truth so plainly it becomes hard to bury again.", "cannot": "Some unmaskings do more harm than the lie did, and Verity can't tell which; the Cathedral needs the shape-seeing of the True Word braid; the powerful can suppress a proven truth by force."},
-       {"rank": 3, "name": "The Word That Holds", "grants": "Truth at scale \u2014 a deception undone before a people, a buried thing dragged into day, a word spoken so truly it cannot be unsaid or unbelieved. The Truthwardens' power in miniature; the pole Aevi-the-Watcher lives nearest.", "cannot": "The wielder drifts truth-hot \u2014 toward revealing everything, always, sparing nothing; total truth burns every shelter, the foreclosure of a world with no privacy, no mercy, no shadow left to heal in (the Blaze's cousin on another axis)."}
-     ]}
+    {
+      "id": "falsecraft",
+      "name": "Falsecraft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_falsehood_truth",
+      "attribute": "mental",
+      "axes": {
+        "falsehood_truth": -0.5,
+        "dark_light": -0.1
+      },
+      "functions": [
+        "conceal",
+        "reveal",
+        "bind"
+      ],
+      "narrationHints": "The made-untrue — an illusion that holds, a false face that fits, a story so well-built it stands on its own; the craft that knows exactly how a truth is faked, and so can catch it too.",
+      "description": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
+      "notFor": "Making a lie TRUE (it only makes it convincing); deceiving a Verity-master's unmasking; the wielder fooling themselves — Falsecraft that believes its own lies rots.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Fitting Mask",
+          "grants": "Craft a convincing illusion or disguise; tell a lie built well enough to hold; SPOT a constructed untruth, because you know the joinery.",
+          "cannot": "Illusion is not substance — tested hard, it fails; a Verity read can pierce it; the truly perceptive feel the seam."
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Lie",
+          "grants": "Build an untruth that holds under scrutiny — a false history, a cover that survives questioning, an illusion that persists unwatched; unbuild another's lie by finding its load-bearing falsehood.",
+          "cannot": "A lie built on discoverable fact cracks when the fact surfaces; the Cathedral (true pieces) is a different, harder thing; every lie you hold is weight."
+        },
+        {
+          "rank": 3,
+          "name": "The Woven Untruth",
+          "grants": "Falsehood at scale — a deception a whole people believes, an illusion over a place, a constructed truth that reshapes what everyone knows; and the mastery to unpick any of these in another's work. The Veilwrights' power in miniature; the craft that built the Cathedral of Convincing.",
+          "cannot": "The wielder drifts falsehood-hot — until they can no longer find their own true ground; a person who can make anything believed eventually believes nothing, the foreclosure of the world going unreal."
+        }
+      ],
+      "challengeTypes": [
+        "STEALTH",
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "verity",
+      "name": "Verity",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_falsehood_truth",
+      "attribute": "mental",
+      "axes": {
+        "falsehood_truth": 0.5,
+        "dark_light": 0.2
+      },
+      "functions": [
+        "reveal",
+        "strike",
+        "break"
+      ],
+      "narrationHints": "The unmasking — a lie shown its own shape, a true word that cannot be false, a clarity that strips pretense whether or not the world is ready.",
+      "description": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road.",
+      "notFor": "Mercy (Verity shows, it does not spare); the convincing-lie-of-true-pieces, which needs the True Word combination, not raw Verity; choosing which truths should stay buried — Verity cannot, it only reveals.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Piercing Eye",
+          "grants": "See through illusion, disguise, and the ordinary lie; know when a spoken thing is false; speak a plain truth others can't easily deny.",
+          "cannot": "Sees the lie, not always the truth behind it; the Cathedral's true-pieces-false-whole survives raw piercing; a truth spoken is not a truth accepted."
+        },
+        {
+          "rank": 2,
+          "name": "The Unmasking",
+          "grants": "Strip a deception bare before others — a false face shown true, a standing lie collapsed, a liar's own words turned to expose them; hold a truth so plainly it becomes hard to bury again.",
+          "cannot": "Some unmaskings do more harm than the lie did, and Verity can't tell which; the Cathedral needs the shape-seeing of the True Word braid; the powerful can suppress a proven truth by force."
+        },
+        {
+          "rank": 3,
+          "name": "The Word That Holds",
+          "grants": "Truth at scale — a deception undone before a people, a buried thing dragged into day, a word spoken so truly it cannot be unsaid or unbelieved. The Truthwardens' power in miniature; the pole Aevi-the-Watcher lives nearest.",
+          "cannot": "The wielder drifts truth-hot — toward revealing everything, always, sparing nothing; total truth burns every shelter, the foreclosure of a world with no privacy, no mercy, no shadow left to heal in (the Blaze's cousin on another axis)."
+        }
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE",
+        "FIGHT"
+      ]
+    }
   ]
 }

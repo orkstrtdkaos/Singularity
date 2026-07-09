@@ -282,6 +282,61 @@
       ],
       "powerSystem": "reach_dark_light",
       "gated": "learned"
+    },
+    {
+      "id": "shroud",
+      "name": "Shroud",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.4
+      },
+      "functions": [
+        "conceal",
+        "ward"
+      ],
+      "narrationHints": "A lasting cloak of shadow laid over a place or path.",
+      "description": "Lay a persistent concealment over an area — a hidden camp, a covered retreat, a path that resists being seen.",
+      "notFor": "Hiding a single moving person mid-chase; total darkness banishment.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Shroud",
+          "grants": "Conceal a place or route persistently so searchers pass it by.",
+          "cannot": "Bright light thins it; a knowing searcher with a lamp can work at it."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
+    },
+    {
+      "id": "false_trail",
+      "name": "False Trail",
+      "levelReq": 2,
+      "energyCost": 4,
+      "attribute": "practical",
+      "axes": {
+        "dark_light": -0.3,
+        "falsehood_truth": -0.2
+      },
+      "functions": [
+        "conceal",
+        "move"
+      ],
+      "narrationHints": "You leave the wrong story written in the dust behind you.",
+      "description": "Lay a misleading trail — tracks, signs, and traces that send pursuers the wrong way.",
+      "notFor": "Erasing all trace (that's harder); fooling a Verity-reader.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "False Trail",
+          "grants": "Send trackers and pursuers down a false path.",
+          "cannot": "A master tracker or truth-reader may catch the lie."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
     }
   ]
 }

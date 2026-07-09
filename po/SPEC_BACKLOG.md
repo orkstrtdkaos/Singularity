@@ -22,6 +22,14 @@ Engine-needing work from the 2026-07 content-expansion sessions. ALL content for
 11. **Money + The Game + Recruitment** — wallet, Game-standing ladder, hire/purpose/bond recruits; shares reputation/economy machinery.
 12. **SNG-026 Skill functions + cross-domain combination** — function tags (DONE on 54 abilities) + braid engine extending SNG-010 emergence.
 
+**Fixes & felt-quality (new, slot as noted):**
+13. **SNG-030/031 Encounter+gambit+novelty** — encounters+novelty SHIPPED; gambit surfacing small.
+14. **SNG-032 Narrative time** — timeOps GM op; fixes clock-vs-story drift. Small, do early.
+15. **SNG-033 Party v2** — character-sheet sync to shared scenes + proximity join + both-sided fact persistence.
+16. **SNG-034 Bestiary/wildlife** — creature pack (content, Aevi owes) + GM dressing rule + encounter entries.
+17. **SNG-035 Imagery** — portraits + moment art via imageOps; gallery in the Saga.
+18. **SNG-036 Martial paths** — baseline defense for ALL + form-kits (Ent!) + 8 martial backgrounds. Content DONE; engine rides SNG-017/022/026.
+
 **Deferred (liked, behind the spine):**
 - **SNG-028 Consequence-state** (wounds/drift/debt/faction as gating numbers) — reconciliation backfills drift when built.
 - **SNG-029 Downtime/player-pursuit** (the player's offscreen clock) — strong once the living world exists.
@@ -30,8 +38,10 @@ Engine-needing work from the 2026-07 content-expansion sessions. ALL content for
 
 ## Suggested batches
 - **BATCH-6 (Foundation):** SNG-019 + SNG-022. Small, unblocks all. Start here.
-- **BATCH-7 (Living spine):** SNG-020 + SNG-021 + SNG-024 + SNG-025. The world that grows/lives/ends/marks.
-- **BATCH-8 (Player systems):** SNG-017 + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
+- **BATCH-6.5 (Fast fixes, parallel-able with anything):** SNG-030(rest) + SNG-031 (gambit surfacing+xp wire) + SNG-032 (narrative time). Small, high felt-impact; 032 is a GM-op + rule.
+- **BATCH-7 (Living spine):** SNG-020 + SNG-021 + SNG-024 + SNG-025 + SNG-034 (bestiary rides the encounter/living-world work). The world that grows/lives/ends/marks/breathes.
+- **BATCH-8 (Player systems):** SNG-017 (origins + ent-gating fix + SNG-036 martial paths ride together) + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
+- **BATCH-9 (Multiplayer + polish):** SNG-033 (party v2) + SNG-035 (imagery). Party v2 after foundation (needs entity/state discipline); imagery anytime.
 
 ## Cross-cutting engine flags (fold into whichever batch touches them)
 - **poleIntensity** reading (independent 0..1 poles; co-firing/purity; net-signed derivable). Locations already reseeded.
@@ -216,3 +226,13 @@ Erik 2026-07-07: image generation is good — want more, showing the character, 
 Erik: "my ent can't choose resonant skills, why?" DIAGNOSED in progression.js effectiveLevelReq: non-valley origins get own-tradition + valley_craft(+1); harmonic<->radiant return null (forbidden). An Ent origin matches neither harmonic nor radiant → resonant abilities are null = never offered. The two-rival-civilizations rule predates the world model. FIX (fold into SNG-017): replace the hardcoded triangle with origins.json — each origin grants homeTraditions[]; ALL other traditions are learnable-through-fiction (teacher/travel/quest — the same unlock pattern precursorAccess already uses, generalized to character.traditionAccess[]). Reach traditions already model this ('learned'-gated). Result: an Ent CAN learn Harmonic — by training at the Heights, which is exactly the story it should take.
 
 *Updated 2026-07-07.*
+
+## SNG-036 — Martial paths (baseline defense + form-kits + martial backgrounds)
+Erik 2026-07-07: every character needs some way to defend itself; the Ent needs branch-clubs and root-skills; martial backgrounds should exist across the axes (a chaos-warrior and an order-warrior: same basic skills, expressed novelly through their Reach combos). Content DONE at content/packs/core/rules/martial_paths.json + 7 signature combos added to combination_recipes.json:
+- **Baseline defense kit** (Brace/Strike/Break Away/Raise the Alarm) — 4 free zero-cost abilities, powerSystem 'baseline', granted at creation; SNG-022 reconcile-grants to existing characters (Erik's Ent gets them next login). Expression follows FORM (an Ent's Strike = branch-club; Brace = barkskin).
+- **Form-kits** — origin-form ability sets: ENT (Branch-Club, Barkskin, Root-Hold, Root-Reach), Blocklands-native (Quick Wall); more authorable per form. Granted free by origin form.
+- **8 martial backgrounds** — Warrior role × Reach = distinct tradition: Marcher (violence+order), Churn-Reaver (violence+chaos), Temple Guardian (body+peace), War-Thinker (mind+order), Umbral Blade (violence+dark), Thorn-Warden (life+violence — the Ent's natural path), Blaze-Lance (light+violence), Pale Reaper (death+peace). Each grants home-Reach martial abilities + a signature combo (all 7 new braids authored + Unseen Cut). Generation (SNG-020) can author more by the same grammar.
+- **Engine (composition, no new systems):** grant baseline at creation + via SNG-022; form-kit by origin form; background as origins.json entry (SNG-017) granting homeReach + signature combo; combos discoverable per SNG-026.
+- **Smoke:** every new character has the 4 baseline abilities; an existing Ent gains baseline + form-kit on login and can Branch-Club/Root-Hold immediately; choosing Thorn-Warden at creation grants its kit + Grasping Green; a chaos-warrior and order-warrior demonstrably fight differently.
+
+*Updated 2026-07-07 — roadmap consolidated through SNG-036.*

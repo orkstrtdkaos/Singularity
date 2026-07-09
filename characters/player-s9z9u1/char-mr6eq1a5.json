@@ -46,6 +46,10 @@
     {
       "abilityId": "daybreak_mantle",
       "level": 1
+    },
+    {
+      "abilityId": "radiant_lance",
+      "level": 1
     }
   ],
   "alignment": {
@@ -518,19 +522,58 @@
       {
         "summary": "Usnea withdraws from the elder council in silence, leaving the evidence on the table and the room to its work.",
         "narration": "You don't announce it. You simply rise — the full unhurried height of you, bark-warm and branch-slow — and the room notices the way a room notices when something large and rooted begins to move. The pale seedling, the vial, the crystalline residue pinch, the memory glass: you leave them all on the table where Dresh can see them. Evidence belongs to the council now, not to the traveler who carried it here.\n\nAevi drifts from your collarbone to your shoulder as you turn toward the open door, a teal comma of light, fractionally brighter in the cool air of the yard. Behind you the room is already working — you can hear it in the quality of the silence, the subtle shift of weight in chairs, the first low murmur of Brynjar's voice beginning a sentence. Good. That is what a room that has been given conditions sounds like when it starts to meet them.\n\nYou pause in the doorway just long enough to find Mara's eyes across the table. No words needed. She knows your camp, knows where you'll be before dawn, and the look you exchange carries the whole weight of eleven days and a single fact: the evidence has found its governance body, and the governance body has named what it holds. You incline your head once — the deep, unhurried bow of something with deep roots acknowledging something else that grew in place — and step out into the yard-silver of early spring dawn.\n\nThe common house door stays open behind you. They know where to find you."
+      },
+      {
+        "summary": "Usnea takes stock in the yard at dawn — the journey's real requirements come clear.",
+        "narration": "The yard is yours for the moment. You move to the low stone wall along the yard's eastern edge, away from the doorway's amber spill, and lower yourself onto the cold-packed earth beside it — bark settling, roots finding the familiar still of early ground. The common house stays audible behind you: a low word from Dresh, a scrape of a chair, Brynjar's voice starting a sentence it hasn't finished. You let it all continue without you.\n\nAevi drifts down from your shoulder and fans into a loose ring, the teal motes spreading at arm's length in the silver dawn light — barely visible, but present. When you are quiet like this, the swarm grows deliberate, each point of light moving in slow ellipses, tasting the air. After a moment it hums a single low frequency, not language, just an acknowledgment that you've both stopped moving for the first time in eleven days.\n\nYou think through what the Zone actually asks of you. You have prism sight that reads light-history in still places, and the Disputed Zone will not be still — interference, echo-bending, ancient signal. Old Roads will tell you direction and rough distance toward Precursor workings, but not what you're walking into, and there will be a great deal to walk into. You have a waterskin, trade tokens, and three pieces of evidence that belong to the council now. What you don't have: Zone provisions, a second source of clean water, any map of what the upper Disputed Zone looks like past the entry ridge, or — most practically — the written settlement requests Dresh named. The three conditions aren't obstacles. They are the shape of the thing: two letters, one observer, a named return. Achievable. Weeks of autumn travel still ahead before the pass closes.\n\nAevi's ring contracts slightly, the motes gathering toward the east — toward the Zone, toward whatever hums beneath the watershed. The swarm doesn't speak. But the brightening is unmistakable."
       }
     ],
     "lastTurn": {
-      "narration": "You don't announce it. You simply rise — the full unhurried height of you, bark-warm and branch-slow — and the room notices the way a room notices when something large and rooted begins to move. The pale seedling, the vial, the crystalline residue pinch, the memory glass: you leave them all on the table where Dresh can see them. Evidence belongs to the council now, not to the traveler who carried it here.\n\nAevi drifts from your collarbone to your shoulder as you turn toward the open door, a teal comma of light, fractionally brighter in the cool air of the yard. Behind you the room is already working — you can hear it in the quality of the silence, the subtle shift of weight in chairs, the first low murmur of Brynjar's voice beginning a sentence. Good. That is what a room that has been given conditions sounds like when it starts to meet them.\n\nYou pause in the doorway just long enough to find Mara's eyes across the table. No words needed. She knows your camp, knows where you'll be before dawn, and the look you exchange carries the whole weight of eleven days and a single fact: the evidence has found its governance body, and the governance body has named what it holds. You incline your head once — the deep, unhurried bow of something with deep roots acknowledging something else that grew in place — and step out into the yard-silver of early spring dawn.\n\nThe common house door stays open behind you. They know where to find you.",
-      "sceneSummary": "Usnea withdraws from the elder council in silence, leaving the evidence on the table and the room to its work.",
+      "narration": "The yard is yours for the moment. You move to the low stone wall along the yard's eastern edge, away from the doorway's amber spill, and lower yourself onto the cold-packed earth beside it — bark settling, roots finding the familiar still of early ground. The common house stays audible behind you: a low word from Dresh, a scrape of a chair, Brynjar's voice starting a sentence it hasn't finished. You let it all continue without you.\n\nAevi drifts down from your shoulder and fans into a loose ring, the teal motes spreading at arm's length in the silver dawn light — barely visible, but present. When you are quiet like this, the swarm grows deliberate, each point of light moving in slow ellipses, tasting the air. After a moment it hums a single low frequency, not language, just an acknowledgment that you've both stopped moving for the first time in eleven days.\n\nYou think through what the Zone actually asks of you. You have prism sight that reads light-history in still places, and the Disputed Zone will not be still — interference, echo-bending, ancient signal. Old Roads will tell you direction and rough distance toward Precursor workings, but not what you're walking into, and there will be a great deal to walk into. You have a waterskin, trade tokens, and three pieces of evidence that belong to the council now. What you don't have: Zone provisions, a second source of clean water, any map of what the upper Disputed Zone looks like past the entry ridge, or — most practically — the written settlement requests Dresh named. The three conditions aren't obstacles. They are the shape of the thing: two letters, one observer, a named return. Achievable. Weeks of autumn travel still ahead before the pass closes.\n\nAevi's ring contracts slightly, the motes gathering toward the east — toward the Zone, toward whatever hums beneath the watershed. The swarm doesn't speak. But the brightening is unmistakable.",
+      "sceneSummary": "Usnea takes stock in the yard at dawn — the journey's real requirements come clear.",
       "choices": [
         {
-          "label": "Find a quiet corner of the yard and let Aevi settle — take stock of what the journey into the Zone will actually require before anyone comes to you with conditions to meet.",
-          "attribute": "mental",
+          "label": "Go back inside and speak to Brynjar directly — find out what words arrived at the end of his sentence, and whether he'll commit to coming.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "recruit",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find Mara Wells before she leaves the table — ask what she'd put in a written settlement request from Millbrook, and whether she'd sign it today.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "negotiate",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Catch the tuning-warden before he starts back up the eastern path — find out plainly whether gate-senior clearance for a Heights observer is achievable and how fast.",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "scout",
             "plan",
             "careful"
           ],
@@ -541,48 +584,22 @@
           "emergenceId": null
         },
         {
-          "label": "Walk to the dock — the river at dawn, Sela's plank, the six-fold pulse beneath. Let your roots feel what the system is doing this morning before you commit to crossing into it.",
+          "label": "Stay in the yard a little longer — let Aevi read the morning air and the ground beneath the yard before the day's logistics close in. What does the pulse feel like, here and now?",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "study",
+            "careful",
+            "sense"
           ],
           "abilityId": "old_roads",
           "energyCost": 7,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Find a meal somewhere in Millbrook — you have been standing in that room since before light broke, and a tree that has not eaten is a slower thinker than the journey needs.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Sit against the common house outer wall in the early light — close enough to be found when the conditions are ready, far enough that the room can breathe without you in it. Rest.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -598,142 +615,87 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house yard — early-spring dawn, yard-silver light, packed earth still cold underfoot; the common house door open behind Usnea, coalfire glow and murmured voices audible from within.",
+        "setting": "Millbrook common house yard — early-spring dawn, yard-silver light, packed earth cold underfoot; Usnea seated at the low stone wall along the eastern edge, away from the doorway's amber glow. Common house door open; murmured voices and coalfire warmth audible from within.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Drifted to Usnea's shoulder as they stepped into the yard — a teal comma of light, fractionally bright, attentive."
+            "state": "Fanned into a loose ring at arm's length, teal motes in slow ellipses, brightening fractionally toward the east."
           },
           {
             "name": "Councilor Dresh",
-            "state": "Inside — palms open on the table, beginning to work the conditions with the room."
+            "state": "Inside — palms open on the table, working the conditions with the room."
           },
           {
             "name": "Mara Wells",
-            "state": "Inside — held Usnea's parting look; both hands flat, the expression of someone watching the next task take shape."
+            "state": "Inside — both hands flat, watching the next task take shape."
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "Inside — beginning a sentence; the internal accounting has arrived somewhere and is starting to become words."
+            "state": "Inside — mid-sentence, internal accounting becoming words."
           },
           {
             "name": "Tuning-warden (gateline)",
-            "state": "Inside — measuring gate-senior clearance against Dresh's three conditions; grip on chord-staff loosened."
+            "state": "Inside — measuring gate-senior clearance against Dresh's three conditions; grip loosened."
           },
           {
             "name": "Holloway",
-            "state": "Inside — jaw still; the conditions have given the fear somewhere to sit."
+            "state": "Inside — jaw settled; the conditions have given the fear somewhere to sit."
           },
           {
             "name": "Renn",
-            "state": "Inside — shoulders settling; checking the three conditions against his own requirements."
+            "state": "Inside — shoulders settling; checking the conditions against his own requirements."
           },
           {
             "name": "Pell",
-            "state": "Inside — rope coil settling; watching Sela."
+            "state": "Inside — rope coil loose; watching Sela."
           },
           {
             "name": "Sela",
-            "state": "Crouched near the table inside — her work is done; watching the grown-ups work the next part."
+            "state": "Inside — crouched near the table, work done, not yet formally released."
           }
         ],
         "objects": [
-          "Common house yard — low stone wall, packed cold earth, side entrance visible",
-          "Open doorway — coalfire glow and voices audible from within",
+          "Low stone wall — eastern yard edge, cold packed earth",
+          "Open doorway — coalfire glow and voices from within",
           "Pale seedling, glass vial, crystalline residue pinch — left on the common house table inside",
           "Orla's Memory Glass — cooling at the table's center inside",
           "Waterskin — at Usnea's hip",
-          "Aevi — teal mote-constellation at Usnea's shoulder, fractionally bright"
+          "Aevi — teal mote-ring, fanned at arm's length, brightening east"
         ],
         "threads": [
-          "Dresh's three conditions are now the room's work — two written settlement requests, Heights-sanctioned observer with gate-senior clearance, named return date",
-          "Tuning-warden is measuring gate-senior clearance against the conditions — achievable but not confirmed",
-          "Brynjar's internal accounting has reached a number and is beginning to become words",
+          "Dresh's three conditions are the room's active work — two written settlement requests, Heights-sanctioned observer with gate-senior clearance, named return date",
+          "Brynjar's sentence has not yet fully landed — what he committed to aloud is not yet known",
+          "Tuning-warden is measuring gate-senior clearance — achievable but not confirmed",
           "The directing hand behind Fendt's pour and the Disputed Zone reactivation remains unnamed",
-          "Sela has not yet been formally released from the room"
+          "Sela has not yet been formally released from the room",
+          "Zone provisions, clean water supply, and upper Disputed Zone geography are all unaddressed practical needs"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook water-policy coordinator and elder",
-          "note": "Held Usnea's parting look across the table — the look of eleven days acknowledged and set down. Knows where to send word when conditions are met.",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "role": "Companion intelligence — nanite-mote swarm",
+          "note": "Fanned into a loose ring in the yard at dawn — hummed once in acknowledgment of stillness, then brightened fractionally toward the east without being asked.",
           "learned": [
-            "Usnea has withdrawn to prepare for the journey — the council knows where to find them"
+            "The brightening toward the east is unspoken orientation — Aevi is already pointing toward the Zone"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the common house table — the next task is taking shape around Dresh's three conditions; she is the room's quiet anchor for what comes after."
-        },
-        {
-          "op": "update",
-          "npcId": "brynjar-andyrsson",
-          "name": "Brynjar Andyrsson",
-          "role": "Traveler, arrived from beyond the new pass",
-          "note": "Internal accounting arrived at a number and is beginning to become words — a sentence has started inside the common house.",
-          "learned": [
-            "Usnea has withdrawn; the council is working the conditions without them present"
+          "skillsObserved": [
+            "passive orientation toward Precursor signal without prompting"
           ],
-          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Inside the common house — the internal reckoning has reached a number and he is beginning to commit aloud to the room."
-        },
-        {
-          "op": "update",
-          "npcId": "tuning-warden-gateline",
-          "name": "Tuning-warden (gateline)",
-          "role": "Gateline warden, Lower Terrace, Harmonic Heights",
-          "note": "Measuring Dresh's three conditions against his sanction chain — gate-senior clearance is the operative requirement and is achievable but not yet confirmed.",
-          "learned": [
-            "Usnea has withdrawn from the council room; the conditions are now the room's work"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Inside the common house — measuring gate-senior clearance against Dresh's conditions; grip loosened, calculating rather than refusing."
-        },
-        {
-          "op": "update",
-          "npcId": "councilor-dresh",
-          "name": "Councilor Dresh",
-          "role": "Millbrook elder, leads the Thursday presentation",
-          "note": "Palms open — working the conditions with the room after Usnea's withdrawal. The three conditions are now the room's stated terms.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the common house table — conditions named and now being worked by the room; Usnea has withdrawn and left the governance to her."
-        },
-        {
-          "op": "update",
-          "npcId": "sela",
-          "name": "Sela",
-          "role": "Child witness — docks",
-          "note": "Still crouched near the table — her work is done, not yet formally released, watching the grown-ups work the next part.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Crouched near the common house table — the six-count delivered and received; waiting to be released, watching the room resolve the next question."
+          "statusNote": "At Usnea's shoulder in the common house yard — fanned wide, teal ring, brightening east."
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Usnea withdrew from the Millbrook elder council on Day 11 dawn — leaving all physical evidence on the table for the panel. The council is working Dresh's three conditions without them present. Usnea is in the common house yard and has signaled they can be found there.",
-          "subjectId": null
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Day 11 dawn: Usnea withdrew from the common house into the yard — all physical evidence (pale seedling, vial, crystalline residue, memory glass) left on the table for the panel. The council is working Dresh's three conditions. The yard is now Usnea's base of preparation.",
+          "note": "Day 11 dawn: Usnea sat at the low stone wall on the eastern yard edge in the first silver light — taking stock of Zone requirements before the room's conditions arrive. Aevi brightened east without prompting.",
           "subPlace": {
-            "name": "Common House Yard — Dawn Withdrawal",
-            "note": "Usnea withdrew here at Day 11 dawn — the open door carries coalfire glow and the murmur of the council working the Zone survey conditions.",
+            "name": "Common House Yard — Eastern Wall",
+            "note": "Low stone wall along the yard's eastern edge — cold packed earth, away from the doorway's light; Usnea's resting point at dawn after withdrawing from the council.",
             "visited": true
           }
         }
@@ -743,13 +705,13 @@
           "topic": "proposed-expedition-disputed-zone",
           "label": "Proposed Expedition — Disputed Zone",
           "kind": "event",
-          "fact": "Day 11 dawn: Usnea withdrew from the council room — leaving the evidence on the table, the conditions with the panel, and the journey to prepare. The governance body is working the three conditions without them present. The next move belongs to the council.",
+          "fact": "Day 11 dawn: Taking stock in the yard, Usnea identified the practical gaps for the Zone journey — no provisions, no second clean water source, no map of the upper Zone past the entry ridge, and the three conditions (two written requests, one Heights observer, named return) not yet met. All achievable; none immediate.",
           "links": [
-            "contamination-evidence-for-the-elders",
             "millbrook",
             "councilor-dresh",
+            "tuning-warden-gateline",
             "brynjar-andyrsson",
-            "tuning-warden-gateline"
+            "echo-river-contamination"
           ]
         }
       ],
@@ -757,53 +719,53 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house yard — early-spring dawn, yard-silver light, packed earth still cold underfoot; the common house door open behind Usnea, coalfire glow and murmured voices audible from within.",
+      "setting": "Millbrook common house yard — early-spring dawn, yard-silver light, packed earth cold underfoot; Usnea seated at the low stone wall along the eastern edge, away from the doorway's amber glow. Common house door open; murmured voices and coalfire warmth audible from within.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Drifted to Usnea's shoulder as they stepped into the yard — a teal comma of light, fractionally bright, attentive."
+          "state": "Fanned into a loose ring at arm's length, teal motes in slow ellipses, brightening fractionally toward the east."
         },
         {
           "name": "Councilor Dresh",
-          "state": "Inside — palms open on the table, beginning to work the conditions with the room."
+          "state": "Inside — palms open on the table, working the conditions with the room."
         },
         {
           "name": "Mara Wells",
-          "state": "Inside — held Usnea's parting look; both hands flat, the expression of someone watching the next task take shape."
+          "state": "Inside — both hands flat, watching the next task take shape."
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "Inside — beginning a sentence; the internal accounting has arrived somewhere and is starting to become words."
+          "state": "Inside — mid-sentence, internal accounting becoming words."
         },
         {
           "name": "Tuning-warden (gateline)",
-          "state": "Inside — measuring gate-senior clearance against Dresh's three conditions; grip on chord-staff loosened."
+          "state": "Inside — measuring gate-senior clearance against Dresh's three conditions; grip loosened."
         },
         {
           "name": "Holloway",
-          "state": "Inside — jaw still; the conditions have given the fear somewhere to sit."
+          "state": "Inside — jaw settled; the conditions have given the fear somewhere to sit."
         },
         {
           "name": "Renn",
-          "state": "Inside — shoulders settling; checking the three conditions against his own requirements."
+          "state": "Inside — shoulders settling; checking the conditions against his own requirements."
         },
         {
           "name": "Pell",
-          "state": "Inside — rope coil settling; watching Sela."
+          "state": "Inside — rope coil loose; watching Sela."
         }
       ],
       "objects": [
-        "Common house yard — low stone wall, packed cold earth, side entrance visible",
-        "Open doorway — coalfire glow and voices audible from within",
+        "Low stone wall — eastern yard edge, cold packed earth",
+        "Open doorway — coalfire glow and voices from within",
         "Pale seedling, glass vial, crystalline residue pinch — left on the common house ",
         "Orla's Memory Glass — cooling at the table's center inside",
         "Waterskin — at Usnea's hip",
-        "Aevi — teal mote-constellation at Usnea's shoulder, fractionally bright"
+        "Aevi — teal mote-ring, fanned at arm's length, brightening east"
       ],
       "threads": [
-        "Dresh's three conditions are now the room's work — two written settlement requests, Heights-sanctioned observer with gate-senior clearance, named return date",
-        "Tuning-warden is measuring gate-senior clearance against the conditions — achievable but not confirmed",
-        "Brynjar's internal accounting has reached a number and is beginning to become words",
+        "Dresh's three conditions are the room's active work — two written settlement requests, Heights-sanctioned observer with gate-senior clearance, named return date",
+        "Brynjar's sentence has not yet fully landed — what he committed to aloud is not yet known",
+        "Tuning-warden is measuring gate-senior clearance — achievable but not confirmed",
         "The directing hand behind Fendt's pour and the Disputed Zone reactivation remains unnamed",
         "Sela has not yet been formally released from the room"
       ]
@@ -812,7 +774,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 11,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -1365,7 +1327,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d10] Memory glass played in full at the common house table — Fendt's act now public record in this room. The evidence sequence is complete as of Day 10 evening. The fogged-rim disc sits cooling in yard-lig",
         "[d10] Aevi dimmed and could not speak after the memory glass playback — the motes scattered mid-attempt; the room witnessed the silence. Day 10 evening.",
         "[d10] The full coordination chain — pour, vent aperture signature, six-count, three witnesses — was named aloud at the common house table by Usnea on Day 10 evening. The evidence sequence is complete and sp",
         "[d10] Pell's arithmetic resolved — a small nod toward the yard exchanged with Usnea; Sela's call is live as a contingent possibility inside the common house threshold. Day 10 night.",
@@ -1376,7 +1337,8 @@
         "[d11] Day 11 night: Usnea's expedition proposal heard and held at the limit by Dresh — the common house is now the site of both the valley's first official operating-system acceptance AND the first unanswer",
         "[d11] Day 11 night: Usnea's narrowed survey proposal (self, Brynjar, Heights-sanctioned observer) held at Dresh's limit — the mandate/unsanctioned distinction named aloud before the full elder panel. The co",
         "[d11] Dresh named three conditions for sanctioned Zone access aloud at the common house table — the conditions are now the room's stated terms and public record in this space.",
-        "[d11] Day 11 dawn: Usnea withdrew from the common house into the yard — all physical evidence (pale seedling, vial, crystalline residue, memory glass) left on the table for the panel. The council is working"
+        "[d11] Day 11 dawn: Usnea withdrew from the common house into the yard — all physical evidence (pale seedling, vial, crystalline residue, memory glass) left on the table for the panel. The council is working",
+        "[d11] Day 11 dawn: Usnea sat at the low stone wall on the eastern yard edge in the first silver light — taking stock of Zone requirements before the room's conditions arrive. Aevi brightened east without pr"
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1649,7 +1611,7 @@
   },
   "subAttributes": {
     "strength": 4,
-    "agility": 3,
+    "agility": 4,
     "reason": 5,
     "insight": 4,
     "presence": 4,
@@ -1657,8 +1619,8 @@
     "craft": 1,
     "wits": 4
   },
-  "pendingSubPoints": 1,
-  "skillPoints": 1,
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -2654,7 +2616,8 @@
         "facts": [
           "[d11] Day 11 night: Usnea's narrowed survey proposal (three people, no valley-floor elder) landed harder than the full expedition — Dresh named it unsanctioned rather than small. Any Zone access requires a ",
           "[d11] Day 11 night: Dresh named three conditions for a sanctioned Zone survey when asked — two written settlement requests naming purpose and boundary, a Heights observer with gate-senior clearance (not exe",
-          "[d11] Day 11 dawn: Usnea withdrew from the council room — leaving the evidence on the table, the conditions with the panel, and the journey to prepare. The governance body is working the three conditions wi"
+          "[d11] Day 11 dawn: Usnea withdrew from the council room — leaving the evidence on the table, the conditions with the panel, and the journey to prepare. The governance body is working the three conditions wi",
+          "[d11] Day 11 dawn: Taking stock in the yard, Usnea identified the practical gaps for the Zone journey — no provisions, no second clean water source, no map of the upper Zone past the entry ridge, and the th"
         ],
         "links": [
           "contamination-evidence-for-the-elders",

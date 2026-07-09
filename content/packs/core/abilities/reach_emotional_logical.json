@@ -46,7 +46,15 @@
       "challengeTypes": [
         "SOCIAL",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "INVESTIGATE": 2,
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "logos",
@@ -91,7 +99,14 @@
         "SOCIAL",
         "FIGHT",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SOCIAL": 2,
+        "PUZZLE": 1
+      }
     }
   ]
 }

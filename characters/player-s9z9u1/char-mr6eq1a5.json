@@ -339,22 +339,31 @@
       {
         "summary": "Usnea asks Dresh to sequence the final witnesses; Dresh calls for the tuning-warden first, then the memory glass.",
         "narration": "You step to the table's side — not between Brynjar and the elders, but close enough that your question is clearly yours to give. The room has done its arithmetic on the marker; you can see it in the way Dresh's hands are still flat on the table, fingers spread, the posture of someone who has received a thing and is deciding where to set it down.\n\n'Councilor.' Your voice is quiet and direct — no mantle, no warmth except what's already in the room. 'Two more witnesses are in sequence. One arrives before noon from the Heights — a warden who saw channel-light from inside the stone three springs ago, before the contamination began. The other is already in your keeping.' You set your fingers briefly on the memory glass at your side, not lifting it, just naming it. 'Tell me which you want first.'\n\nDresh lifts her gaze from the table surface to you. It is not a fast movement. She weighs the question the same way she weighed 'operating' — not for comfort, but for fit. Then she looks at the door, the pale spring yard beyond it, and back.\n\n'The warden,' she says. 'Height-side and valley-side before the glass. Let the room hold both before we look at someone's face.' Mara gives the smallest nod at the table's far end — the sequence is alive again, and the thread connecting it just pulled taut."
+      },
+      {
+        "summary": "Brynjar Andyrsson: Brynjar reads Usnea's trail-wear and Mara's quietly repositioned bench — she has prepared the room, not just the fire."
+      },
+      {
+        "summary": "Brynjar Andyrsson: Usnea shares the elder panel testimony — six-fold lattice, 'operating not decaying,' the word deliberate now in the room."
+      },
+      {
+        "summary": "Usnea holds the sequence plainly — Heights witness before noon, sit with the question until then. The room absorbs it and waits.",
+        "narration": "The room settles into the kind of quiet that isn't empty — every face in it doing something. Dresh's hands stay flat on the table. Renn exhales slowly through his nose. Holloway's eyes drift from Brynjar to the pale seedling and back, as if the two things are talking to each other in a language he's almost learned.\n\nYou speak once, plainly. 'The Heights witness walks the eastern path now. He should reach the yard before noon. Until then — the question Councilor Dresh named is the right one to sit with. We don't need to fill the silence.' You let it land without adding to it. Mara gives you a single nod from the table's near end — nothing performed in it, just acknowledgment that the thread is still held.\n\nAevi drifts close to your shoulder, motes dimmer than usual in the pale spring light, almost invisible except where the window catches them. It hums something barely audible — an old frequency, half a measure, then nothing. The fire holds its orange coals. The common house breathes around you: creak of a bench, a child shifting near the door, Pell's rope coil settling against her forearm.\n\nThe yard-door stands open. Somewhere beyond it, on a path that descends two hours from the Heights, a warden with a precise and unsanctioned memory is walking toward this room. The sequence is alive. You wait."
       }
     ],
     "lastTurn": {
-      "narration": "You step to the table's side — not between Brynjar and the elders, but close enough that your question is clearly yours to give. The room has done its arithmetic on the marker; you can see it in the way Dresh's hands are still flat on the table, fingers spread, the posture of someone who has received a thing and is deciding where to set it down.\n\n'Councilor.' Your voice is quiet and direct — no mantle, no warmth except what's already in the room. 'Two more witnesses are in sequence. One arrives before noon from the Heights — a warden who saw channel-light from inside the stone three springs ago, before the contamination began. The other is already in your keeping.' You set your fingers briefly on the memory glass at your side, not lifting it, just naming it. 'Tell me which you want first.'\n\nDresh lifts her gaze from the table surface to you. It is not a fast movement. She weighs the question the same way she weighed 'operating' — not for comfort, but for fit. Then she looks at the door, the pale spring yard beyond it, and back.\n\n'The warden,' she says. 'Height-side and valley-side before the glass. Let the room hold both before we look at someone's face.' Mara gives the smallest nod at the table's far end — the sequence is alive again, and the thread connecting it just pulled taut.",
-      "sceneSummary": "Usnea asks Dresh to sequence the final witnesses; Dresh calls for the tuning-warden first, then the memory glass.",
+      "narration": "The room settles into the kind of quiet that isn't empty — every face in it doing something. Dresh's hands stay flat on the table. Renn exhales slowly through his nose. Holloway's eyes drift from Brynjar to the pale seedling and back, as if the two things are talking to each other in a language he's almost learned.\n\nYou speak once, plainly. 'The Heights witness walks the eastern path now. He should reach the yard before noon. Until then — the question Councilor Dresh named is the right one to sit with. We don't need to fill the silence.' You let it land without adding to it. Mara gives you a single nod from the table's near end — nothing performed in it, just acknowledgment that the thread is still held.\n\nAevi drifts close to your shoulder, motes dimmer than usual in the pale spring light, almost invisible except where the window catches them. It hums something barely audible — an old frequency, half a measure, then nothing. The fire holds its orange coals. The common house breathes around you: creak of a bench, a child shifting near the door, Pell's rope coil settling against her forearm.\n\nThe yard-door stands open. Somewhere beyond it, on a path that descends two hours from the Heights, a warden with a precise and unsanctioned memory is walking toward this room. The sequence is alive. You wait.",
+      "sceneSummary": "Usnea holds the sequence plainly — Heights witness before noon, sit with the question until then. The room absorbs it and waits.",
       "choices": [
         {
-          "label": "Hold the sequence — tell the room plainly that the Heights witness is expected before noon and invite the elders to sit with the question until he arrives",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Step outside to the yard — watch the eastern path approach and be the first to meet the tuning-warden when he arrives",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "lead",
-            "hold"
+            "scout",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -363,17 +372,16 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight on the room while the sequence pauses — read who is still absorbing and who has already reached a conclusion",
-          "attribute": "mental",
+          "label": "While the room waits, move quietly to Pell at the threshold — read whether her arithmetic on Sela has shifted after Brynjar's marker-find",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {
-            "dark_light": 0.6,
-            "concrete_abstract": -0.3
+            "falsehood_truth": 0.6,
+            "violence_peace": 0.7
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "read",
             "careful"
           ],
           "abilityId": "prism_sight",
@@ -383,17 +391,16 @@
           "emergenceId": null
         },
         {
-          "label": "Step to Pell at the threshold — quietly and privately — and ask her how the room reads to her now, one observer to another",
+          "label": "Sit beside Brynjar at the table's corner — this is the moment to ask quietly what he knows about who might have placed that marker, and whether he expects anyone to follow him here",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "chaos_order": 0.3
+            "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "scout",
-            "careful"
+            "study",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -402,18 +409,21 @@
           "emergenceId": null
         },
         {
-          "label": "Walk outside to the yard and look down the eastern path — the tuning-warden should be visible by now if he left at first light",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
+          "label": "Use the waiting hour deliberately — draw the Orla's Memory Glass from your keeping and hold it in your hands, using Prism Sight to read the light it carries before it is placed on the table before the elders",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.7,
+            "dark_light": 0.5
+          },
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "wait"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -427,40 +437,33 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "contamination-evidence-for-the-elders",
-          "title": "Evidence for the Elders",
-          "note": "Dresh has sequenced the final witnesses — tuning-warden first, then the memory glass. The path to the glass is now formally open."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items; Orla's Memory Glass in Usnea's keeping, not yet placed. The room has resettled after Brynjar's account; Dresh has spoken the sequence aloud.",
+        "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items; Orla's Memory Glass in Usnea's keeping, not yet placed.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "At the table's near end — gave a small nod when Dresh named the sequence; holding the thread, ready"
+            "state": "At the table's near end — single nod given; holding the thread, waiting"
           },
           {
             "name": "Councilor Dresh",
-            "state": "Hands still flat on the table — called for Heights-side testimony first, then the glass; the sequence is hers now"
+            "state": "Hands still flat on the table — sequence named and held; sitting with the question"
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "At the table's near corner, palms down — marker named; waiting in the room's new stillness"
+            "state": "At the table's near corner, palms down — marker named; settled into the room's waiting"
           },
           {
             "name": "Holloway",
-            "state": "Eyes still on Brynjar — rearranging, sitting with the second axis of deliberate intent"
+            "state": "Eyes moving between Brynjar and the pale seedling — rearranging the two axes of deliberate intent"
           },
           {
             "name": "Renn",
-            "state": "Glancing between Brynjar and the evidence items — jaw set, absorbing"
+            "state": "Exhaled slowly; jaw set, absorbing the wait"
           },
           {
             "name": "Two unrecognized elders",
-            "state": "One leaned in; the other turned toward Dresh at the sequence-naming"
+            "state": "One leaned in; the other turned toward Dresh — both settled into the question"
           },
           {
             "name": "Village child (not Sela)",
@@ -468,7 +471,7 @@
           },
           {
             "name": "Pell",
-            "state": "At the yard-facing threshold — fingers open on the rope coil; reading the room's new arithmetic after Dresh's sequencing"
+            "state": "At the yard-facing threshold — fingers open on the rope coil; reading the room's arithmetic, still at her threshold"
           }
         ],
         "objects": [
@@ -489,95 +492,55 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "councilor-dresh",
-          "name": "Councilor Dresh",
-          "role": "Millbrook elder, leads the Thursday presentation",
-          "note": "Named her preferred sequence aloud — warden first, memory glass second. Gave her reason plainly: let the room hold Heights-side and valley-side testimony before it looks at someone's face.",
-          "learned": [
-            "Prefers testimony sequence that builds from pattern-witness to named-actor — keeps the room's judgment clean"
-          ],
-          "skillsObserved": [
-            "deliberate sequencing under uncertainty",
-            "naming her own reasoning without prompting"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the common house table — has sequenced the final two witnesses; waiting for the tuning-warden's arrival before noon"
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Gave a single nod at Usnea's plain hold of the sequence — thread acknowledged, no words needed. Waiting.",
+          "statusNote": "At the common house table — thread held, sequence alive, waiting for the tuning-warden before noon."
         },
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Millbrook water-policy coordinator and elder",
-          "note": "Gave a small nod when Dresh named the sequence — the thread is alive again and she is holding the table end.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the common house table — sequence resumed; holding the evidence order, waiting for the tuning-warden"
-        }
-      ],
-      "factUpdates": [
+          "npcId": "councilor-dresh",
+          "name": "Councilor Dresh",
+          "note": "Received Usnea's plain confirmation of the hold — hands stayed flat, sequence sits with the room.",
+          "statusNote": "At the common house table — sequence named, sitting with the reach-vs-reach-for question until the warden arrives."
+        },
         {
-          "op": "add",
-          "text": "Councilor Dresh named the final witness sequence aloud: tuning-warden first (Heights-side pattern testimony), then Orla's memory glass (named-actor evidence). The room has accepted this order.",
-          "subjectId": "contamination-evidence-for-the-elders"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Dresh spoke the final sequence aloud at the common house table — warden before glass. This sequencing is now public record in this room.",
-          "subPlace": {
-            "name": "Common House Table — Elder Presentation",
-            "note": "Dresh named the final sequence: tuning-warden first, memory glass second. Sequence is live and held.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "contamination-evidence-for-the-elders",
-          "label": "Evidence for the Elders",
-          "kind": "event",
-          "fact": "Day 10: Dresh sequenced the final witnesses — tuning-warden first (Heights-side pattern), then the memory glass (named actor). Her reason: let the room hold both before it looks at a face. The testimony path is now formally open.",
-          "links": [
-            "tuning-warden-gateline",
-            "orlas-memory-glass-the-ford-record",
-            "fendt-filtration-engineer",
-            "millbrook",
-            "the-six-fold-pattern"
-          ]
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Rope coil settled against her forearm — still at the threshold, arithmetic ongoing.",
+          "statusNote": "At the common house yard-facing threshold — door-right held; reading the room's quiet, arithmetic on Sela unresolved."
         }
       ],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items; Orla's Memory Glass in Usnea's keeping, not yet placed. The room has resettled after Brynjar's account; Dresh has spoken the sequence aloud.",
+      "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items; Orla's Memory Glass in Usnea's keeping, not yet placed.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "At the table's near end — gave a small nod when Dresh named the sequence; holding the thread, ready"
+          "state": "At the table's near end — single nod given; holding the thread, waiting"
         },
         {
           "name": "Councilor Dresh",
-          "state": "Hands still flat on the table — called for Heights-side testimony first, then the glass; the sequence is hers now"
+          "state": "Hands still flat on the table — sequence named and held; sitting with the question"
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "At the table's near corner, palms down — marker named; waiting in the room's new stillness"
+          "state": "At the table's near corner, palms down — marker named; settled into the room's waiting"
         },
         {
           "name": "Holloway",
-          "state": "Eyes still on Brynjar — rearranging, sitting with the second axis of deliberate intent"
+          "state": "Eyes moving between Brynjar and the pale seedling — rearranging the two axes of deliberate intent"
         },
         {
           "name": "Renn",
-          "state": "Glancing between Brynjar and the evidence items — jaw set, absorbing"
+          "state": "Exhaled slowly; jaw set, absorbing the wait"
         },
         {
           "name": "Two unrecognized elders",
-          "state": "One leaned in; the other turned toward Dresh at the sequence-naming"
+          "state": "One leaned in; the other turned toward Dresh — both settled into the question"
         },
         {
           "name": "Village child (not Sela)",
@@ -585,7 +548,7 @@
         },
         {
           "name": "Pell",
-          "state": "At the yard-facing threshold — fingers open on the rope coil; reading the room's new arithmetic after Dresh's sequencing"
+          "state": "At the yard-facing threshold — fingers open on the rope coil; reading the room's arithmetic, still at her threshold"
         }
       ],
       "objects": [
@@ -607,7 +570,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -794,7 +757,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d9] Heard moving in the main room before full dawn — already preparing. Has not yet spoken with Usnea this morning.",
         "[d9] Received warden's morning-tone confirmation and relayed it to Usnea at the common house steps. Declared the presentation ready to open on Usnea's signal.",
         "[d9] Read Usnea's face from the yard and gave the quiet nod — meeting is ready to open on Usnea's forward step.",
         "[d9] Received Usnea's opening nod at the foot of the steps — meeting is now beginning.",
@@ -803,7 +765,8 @@
         "[d10] Stepped back after introducing physical evidence — handed the floor to Usnea cleanly. Sequence proceeding as planned.",
         "[d10] Caught Usnea's eye after the wells-and-channels naming — the sequence is holding and she knows it. Waiting to call the next speaker.",
         "[d10] Caught Usnea's eye after Pell's refusal — patient, unalarmed. Sequence is paused, not broken; she is holding the table end.",
-        "[d10] Gave a small nod when Dresh named the sequence — the thread is alive again and she is holding the table end."
+        "[d10] Gave a small nod when Dresh named the sequence — the thread is alive again and she is holding the table end.",
+        "[d10] Gave a single nod at Usnea's plain hold of the sequence — thread acknowledged, no words needed. Waiting."
       ],
       "knownFacts": [
         "Reframed the permission ask: not Sela carrying the testimony, but the elders carrying the burden so Sela doesn't have to",
@@ -828,7 +791,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "At the common house table — sequence resumed; holding the evidence order, waiting for the tuning-warden"
+      "statusNote": "At the common house table — thread held, sequence alive, waiting for the tuning-warden before noon."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -932,7 +895,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d6] Received a plain 'thank you' with no follow-up ask — accepted it without looking up; shoulders settled. The conversation closed clean.",
         "[d9] Arrived at the threshold exactly as promised — rope samples still over one arm, watching the room, holding her veto-at-the-door condition.",
         "[d10] Gone very still at the threshold after 'operating, not decaying' — the word deliberate in the record changes what Sela has been hearing into something adult and confirmed.",
         "[d10] Stopped watching the room during Aevi's demonstration — hand on rope coil went flat, fingers spread. Is watching Aevi directly now.",
@@ -941,7 +903,8 @@
         "[d10] Refused to send Sela forward — read the room as still-processing, not ready. Closed the door gently but firmly. Invoked her held right exactly as promised.",
         "[d10] Fingers separated on the rope coil after Dresh's question — the grip has eased slightly without her moving from the threshold.",
         "[d10] Fingers separated on the rope coil — not gripping. Watching the room's arithmetic settle. The silence has not alarmed her.",
-        "[d10] Fingers tightened once on the rope coil then opened again — the marker-find has added something to her arithmetic. Still at the threshold."
+        "[d10] Fingers tightened once on the rope coil then opened again — the marker-find has added something to her arithmetic. Still at the threshold.",
+        "[d10] Rope coil settled against her forearm — still at the threshold, arithmetic ongoing."
       ],
       "knownFacts": [
         "The system beneath the river is operating — not an accident, not decay",
@@ -962,7 +925,7 @@
         "holding a condition under pressure without hostility"
       ],
       "status": "active",
-      "statusNote": "At the yard-facing threshold — fingers open on rope coil; re-reading the room's readiness after Brynjar's account",
+      "statusNote": "At the common house yard-facing threshold — door-right held; reading the room's quiet, arithmetic on Sela unresolved.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -1110,7 +1073,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d9] Seated at table center since dawn; looked at the seedling before looking at Mara; said 'tell it plainly' as a preference, not permission.",
         "[d10] Said nothing after Usnea's testimony. Eyes moved to the crystalline residue pinch. The silence reads as weight, not dismissal.",
         "[d10] Watched Aevi demonstrate the six-fold count in silence — eyes moved from the residue pinch to the motes and back. Has not spoken since 'tell it plainly.'",
         "[d10] Spoke aloud after Aevi's demonstration — named 'operating' as a half-question directed at the room. First words since 'tell it plainly.'",
@@ -1119,7 +1081,8 @@
         "[d10] Lifted her hands from the table and named the room's real question — reach vs. reach for — looking directly at Usnea. First full sentence since 'operating.'",
         "[d10] Shifted from waiting to listening — hands laced, still holding Usnea with her gaze. The question she named has become the room's question.",
         "[d10] Hands came flat on the table again after Brynjar's account — the reweighing posture she took after Aevi's demonstration. Eyes on Brynjar.",
-        "[d10] Named her preferred sequence aloud — warden first, memory glass second. Gave her reason plainly: let the room hold Heights-side and valley-side testimony before it looks at someone"
+        "[d10] Named her preferred sequence aloud — warden first, memory glass second. Gave her reason plainly: let the room hold Heights-side and valley-side testimony before it looks at someone",
+        "[d10] Received Usnea's plain confirmation of the hold — hands stayed flat, sequence sits with the room."
       ],
       "knownFacts": [
         "Aevi demonstrated the six-fold count directly above the residue pinch — three complete cycles, visible and unhurried",
@@ -1140,7 +1103,7 @@
         "naming her own reasoning without prompting"
       ],
       "status": "active",
-      "statusNote": "At the common house table — has sequenced the final two witnesses; waiting for the tuning-warden's arrival before noon",
+      "statusNote": "At the common house table — sequence named, sitting with the reach-vs-reach-for question until the warden arrives.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10

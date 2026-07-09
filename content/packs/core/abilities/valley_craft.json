@@ -514,6 +514,33 @@
         "move",
         "reveal"
       ]
+    },
+    {
+      "id": "blend_in",
+      "name": "Blend In",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "social",
+      "axes": {
+        "dark_light": -0.2,
+        "chaos_order": -0.1
+      },
+      "functions": [
+        "conceal"
+      ],
+      "narrationHints": "You become the least memorable person in the room.",
+      "description": "Pass unnoticed in a crowd or settlement — look like you belong, be forgotten.",
+      "notFor": "Hiding from someone actively hunting you by name; physical invisibility.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Blend In",
+          "grants": "Move through populated places without drawing notice or memory.",
+          "cannot": "A searcher who knows your face and is looking defeats it."
+        }
+      ],
+      "powerSystem": "valley_craft",
+      "gated": "learned"
     }
   ]
 }

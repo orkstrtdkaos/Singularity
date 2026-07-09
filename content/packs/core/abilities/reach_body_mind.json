@@ -52,7 +52,14 @@
         "SURVIVE",
         "CHASE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SURVIVE": 2
+      }
     },
     {
       "id": "noesis",
@@ -102,7 +109,13 @@
         "FIGHT",
         "INVESTIGATE",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 2,
+        "PUZZLE": 2,
+        "DUEL": 2
+      }
     },
     {
       "id": "body_read",
@@ -132,7 +145,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "mind_read_folk",
@@ -162,7 +180,12 @@
       "challengeTypes": [
         "SOCIAL",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "second_wind",
@@ -194,7 +217,12 @@
         "SURVIVE",
         "CHASE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "total_focus",
@@ -226,7 +254,12 @@
         "FIGHT",
         "PUZZLE",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "INVESTIGATE": 2
+      }
     },
     {
       "id": "perfect_motion",
@@ -258,7 +291,14 @@
         "DUEL",
         "CHASE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SURVIVE": 1
+      }
     },
     {
       "id": "memory_palace",
@@ -290,7 +330,14 @@
       "challengeTypes": [
         "INVESTIGATE",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "the_whole_act",
@@ -321,7 +368,14 @@
       "challengeTypes": [
         "FIGHT",
         "DUEL"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 3,
+        "EXPLORE": 2,
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     }
   ]
 }

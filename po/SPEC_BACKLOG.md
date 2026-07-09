@@ -273,3 +273,34 @@ The game is deep (tiers, gates, poles, gambits, combinations, martial paths) and
 - **Smoke:** a broken JSON fails CI with a useful message; a dangling connection ref is flagged; a valid commit passes; the local hook catches it before push.
 
 *Updated 2026-07-07 — through SNG-040.*
+
+## SNG-041 — Character build + leveling UX redesign (clean, intuitive, mobile-first)
+Erik 2026-07-07: the creation and leveling/skill-choosing experience needs to be clean and intuitive. AUDITED at origin (renderCreate ~410; skill graph ~1155; sheet section ~1611). Findings + redesign.
+
+**Findings (real friction):**
+- Creation is ONE dense wall (name+origin+background+12pt attributes+ability picker) then bio — no stepped progression, overwhelming turn one.
+- Origin list is the OLD triangle (harmonic/radiant/valley) hardcoded in the UI — same root as the Ent-gating bug; new origins/backgrounds (SNG-017/036) aren't offered.
+- Ability details live in HOVER TOOLTIPS — nonexistent on touch; mobile players pick abilities blind.
+- TWO leveling UIs for one task: a visual skill-GRAPH (1155) and a list-based sheet section (1611), with duplicated rank-up logic — inconsistent, confusing, double-maintenance.
+- Skill graph encodes owned/aspired/ripe/gated as ring-color + lock-icon only; "what does it do / can I afford it / what's it cost" is buried behind a legend.
+
+**Redesign — creation as a stepped wizard (one decision per screen):**
+1. Name + "guide me / full control" fork (SNG-039 onboarding tie).
+2. Origin = area-of-world (SNG-017 origins.json) with a one-line flavor + what it grants — card per origin, tap to pick, not a cramped button row.
+3. Background = role+homeland / martial path (SNG-036) as cards showing style + signature.
+4. Attributes: the point allocator, but with live "what this does" (physical→health/melee, etc.) inline, not implied.
+5. Abilities: TAP a tradition → see its abilities as CARDS (name, tier badge, function icons, plain CAN/CANNOT text VISIBLE not hover), tap to select; running "you've chosen N of M" + a plain-language summary. Baseline + form-kit shown as "already yours" (SNG-036).
+6. Bio (keep — it's good; the ✦ weave is a nice touch), then start at origin's location (not hardcoded Millbrook).
+
+**Redesign — ONE leveling surface:**
+- Collapse the two UIs into a single "Character" screen with a clear MODE: a readable list grouped by tradition (default, mobile-friendly) with an optional graph VIEW toggle for those who like the map — but both drive the SAME selection logic (one code path, not two).
+- Every ability row shows, WITHOUT hover: name, tier, function icons, owned-rank (or "new"), the exact cost (skill point / gated-by X / ripe-to-claim), and one-line CAN/CANNOT. A "learn"/"rank up" button is enabled/disabled with the REASON shown ("needs Finesse 3", "level 4", "1 skill pt") — never a mystery-disabled button.
+- Pending points (attribute/skill) surface as a clear top banner with a call to action, so a player never has unspent growth they didn't notice.
+- Legend replaced by plain labels on each row; ring-color can stay as reinforcement, not the sole signal.
+
+**Progressive disclosure:** advanced surfaces (cross-domain combos, the full graph, gambit) stay quiet until basics are owned (SNG-039). New player sees a clean short list; veteran can open the map.
+
+**Ties:** SNG-017 (origins/backgrounds feed the new pickers — do together), SNG-036 (baseline/form-kit/martial shown), SNG-039 (guide-me path + progressive disclosure), skill-functions (function icons on every ability). Mostly a UI rebuild over existing data; the data is ready.
+- **Smoke:** creation is a stepped wizard, one decision per screen, no hover-dependent info, all current origins/backgrounds offered; a mobile player can read every ability's effect + cost without hovering; one leveling surface (list default, graph optional) with reasons on every disabled action; unspent points are impossible to miss.
+
+*Updated 2026-07-07 — through SNG-041.*

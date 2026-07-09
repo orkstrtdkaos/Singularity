@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "cross_axis_modifiers",
+  "kind": "world_structure",
+  "note": "Erik correction 2026-07-07: the remaining/horizon Reaches (emotional_logical, falsehood_truth, demonic_angelic, concrete_abstract, space_time, destruction_creation) are NOT home traditions you travel to \u2014 they are CROSS-CUTTING axes that show up ANYWHERE, expressed as MODIFIER SKILLS. A modifier doesn't stand alone as 'a spell'; it RIDES on another ability/action, tinting it toward the axis. Anyone, from any tradition, can pick up a modifier \u2014 they're the universal coloration layer. This is why they were left thin: they were never meant to be 9-deep craft-columns. A Latticework strike MODIFIED toward destruction hits differently than the same strike modified toward creation. Modifiers are the 'what rides along' made playable. Authored by Aevi (PO), replacing the plan to pad these Reaches to parity.",
+
+  "principle": "A tradition gives you a METHOD (how you affect the world). A modifier gives you a COLORATION (which way that method leans on a universal axis). Modifiers are cross-Reach: an Umbral, a Vivimancer, and a Marcher can all learn 'Accelerate' (the time-modifier) and it rides their own abilities their own way. Modifiers are cheaper and shallower than tradition abilities (a modifier is usually 1-2 ranks, not a full tree) because their depth comes from WHAT THEY RIDE. They are how the horizon axes touch every character without every character traveling to a horizon Reach.",
+
+  "howModifiersWork": {
+    "attach": "A modifier tags onto an ability use or action in a beat: 'I strike (the Edge) \u2014 accelerated (time-modifier)' = the strike lands with time-stolen speed. The engine treats it as the base ability + a modifier effect + a modifier energy cost; the GM narrates the fusion.",
+    "acquire": "Modifiers are learned like abilities but gated LIGHTLY \u2014 no tradition-home requirement; picked up from a moment of contact with the axis (a place where it runs hot, a teacher, an experience). character.modifiers[]. Cheaper skill-point cost than tradition abilities.",
+    "stack": "One modifier per action (you can't accelerate AND slow the same strike). Modifiers can combine with cross-domain COMBINATIONS (a braid can itself be modified) \u2014 but that's advanced and costed.",
+    "drift": "Heavy use of one modifier drifts the wielder toward that axis-pole, same as tradition abilities \u2014 a character who accelerates everything drifts time-hot.",
+    "vsReaches": "The 6 BUILT Reaches (death/life, chaos/order, mech/spirit, violence/peace, dark/light, body/mind) stay full home-traditions \u2014 they're the axes dense enough to live in. The 6 HORIZON axes are modifier-layers \u2014 they're the axes that color rather than found. This is the real distinction the twelve-axis model was reaching for."
+  },
+
+  "modifierAxes": [
+    {
+      "axis": "emotional_logical", "modifiers": [
+        {"id": "mod_impassioned", "name": "Impassioned", "pole": "emotional", "ranks": 2, "ridesOn": "any social/strike/heal action", "effect": "The action carries FEELING \u2014 a strike with fury behind it hits harder but wilder; a plea with real emotion lands deeper; a heal that shares warmth. +impact, -precision.", "cannot": "Can't make a cold action; the feeling is real, so it costs you what you feel."},
+        {"id": "mod_calculated", "name": "Calculated", "pole": "logical", "ranks": 2, "ridesOn": "any action", "effect": "The action is REASONED \u2014 optimal, precise, the best move coldly found. +precision/efficiency, -the warmth or surprise that sometimes wins.", "cannot": "Can't inspire; the calculated move is never the beautiful one."}
+      ]
+    },
+    {
+      "axis": "falsehood_truth", "modifiers": [
+        {"id": "mod_veiled", "name": "Veiled", "pole": "falsehood", "ranks": 2, "ridesOn": "any action", "effect": "The action is DISGUISED \u2014 done under a false appearance; a strike that looks like a stumble, a cast that reads as something else, an approach that hides its intent. +deception, but a Verity-reader sees through it.", "cannot": "Can't change what the action IS, only how it reads; truth-readers pierce it."},
+        {"id": "mod_avowed", "name": "Avowed", "pole": "truth", "ranks": 2, "ridesOn": "any action", "effect": "The action is UNDENIABLY TRUE \u2014 done openly, provably, in a way that cannot later be disputed or unmasked. +credibility/permanence, but hides nothing and spares nothing.", "cannot": "Can't deceive; broadcasts intent; some things done avowedly can't be walked back."}
+      ]
+    },
+    {
+      "axis": "space_time", "modifiers": [
+        {"id": "mod_accelerated", "name": "Accelerated", "pole": "time", "ranks": 2, "ridesOn": "any physical/cast action", "effect": "The action is HASTENED \u2014 done faster than time should allow; extra speed, an extra beat, a strike before the eye tracks it. Powerful; costs energy and drifts time-hot.", "cannot": "Can't undo; the stolen time is paid back in exhaustion; deep-slow zones (the Deepwood) resist it."},
+        {"id": "mod_distanced", "name": "Distanced", "pole": "space", "ranks": 2, "ridesOn": "any action", "effect": "The action reaches ACROSS SPACE \u2014 done at range it shouldn't have, or with a spatial fold (strike a far foe, heal across a gap, be briefly where you aren't).", "cannot": "Range has a ceiling; folding space is costly and imprecise at distance."}
+      ]
+    },
+    {
+      "axis": "destruction_creation", "modifiers": [
+        {"id": "mod_unmaking", "name": "Unmaking", "pole": "destruction", "ranks": 2, "ridesOn": "any strike/break/action", "effect": "The action tends toward ENDING \u2014 it doesn't just affect, it diminishes: a strike that also degrades, a break that's permanent, an act that forecloses. +finality.", "cannot": "What you unmake this way doesn't come back; drifts destruction-hot; the framework's foreclosure made a modifier."},
+        {"id": "mod_generative", "name": "Generative", "pole": "creation", "ranks": 2, "ridesOn": "any heal/mend/make/action", "effect": "The action tends toward MAKING \u2014 it produces more than it spends: a heal that leaves you stronger, a build that seeds more building, an act that propagates. +growth.", "cannot": "Can grow past control (the overgrowth risk); creation without limit is its own danger (the Forge)."}
+      ]
+    },
+    {
+      "axis": "concrete_abstract", "modifiers": [
+        {"id": "mod_concrete", "name": "Made-Concrete", "pole": "concrete", "ranks": 2, "ridesOn": "any abstract/cast action", "effect": "The action is MADE LITERAL \u2014 a metaphor becomes a fact, an idea a thing, a threat a wall. Where substrate is dense, the abstract solidifies.", "cannot": "Needs meaning-density; the concretized thing is fixed, inflexible."},
+        {"id": "mod_abstracted", "name": "Abstracted", "pole": "abstract", "ranks": 2, "ridesOn": "any concrete action", "effect": "The action becomes CONCEPT \u2014 a wound made metaphor (and so healable as one), a wall made idea (and so passable), a thing lifted to pattern. The Numen road's edge.", "cannot": "The abstracted thing loses its literal force; hard to hold."}
+      ]
+    },
+    {
+      "axis": "demonic_angelic", "modifiers": [
+        {"id": "mod_infernal", "name": "Infernal-Touched", "pole": "demonic", "ranks": 2, "ridesOn": "any action", "effect": "The action draws on the CONTRACTIVE pole \u2014 power through cost, appetite, the will that consumes. Strong, and it takes something each time. The framework's 'evil as contraction' made a lever.", "cannot": "Always exacts a price (yours or another's); drifts demonic-hot; corrupts the overuser \u2014 the most dangerous modifier."},
+        {"id": "mod_radiant_grace", "name": "Grace-Touched", "pole": "angelic", "ranks": 2, "ridesOn": "any action", "effect": "The action draws on the EXPANSIVE pole \u2014 power through giving, the will that propagates outward without consuming. Costs YOU rather than another; blesses what it touches.", "cannot": "Gives more than it takes, so it can exhaust the giver; can't be turned to pure self-interest."}
+      ]
+    }
+  ],
+
+  "note_on_the_two_thin_reaches": "emotional_logical and falsehood_truth ALREADY have 2 full tradition-abilities each (Pathos/Logos, Falsecraft/Verity) \u2014 these STAY as the deep home-tradition option for someone who lives on that axis (a Deepfeeler, a Truthwarden). The MODIFIERS above are the shallow cross-cutting version anyone can pick up. So these two axes work BOTH ways: a full tradition for the rare native, a modifier for everyone else. The 4 never-built horizon axes are modifier-ONLY (no home tradition) \u2014 they're the truly cross-cutting ones.",
+
+  "buildImplication": "New content type: MODIFIERS (character.modifiers[]), lighter than abilities (1-2 ranks, ride-on not standalone, cheap acquire, no tradition-home gate). Engine: an action can carry an optional modifier tag \u2014 base ability + modifier effect + modifier cost; drift applies. 12 modifiers authored here (6 axes \u00d7 2 poles). Ties: intensity (a modified action can also be surged), combination (advanced: modify a braid), drift, SNG-042 progression (modifiers are a 6th light unlock channel: contact-with-axis). Flag SNG-043 for the engine ride-on path. This REPLACES padding the horizon Reaches \u2014 correct per Erik: they were always meant to show up anywhere as modifiers, not as places."
+}

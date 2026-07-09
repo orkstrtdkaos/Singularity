@@ -541,6 +541,59 @@
       ],
       "powerSystem": "valley_craft",
       "gated": "learned"
+    },
+    {
+      "id": "boundary_stone",
+      "name": "Boundary-Stone",
+      "levelReq": 2,
+      "energyCost": 4,
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": 0.2
+      },
+      "functions": [
+        "ward",
+        "bind"
+      ],
+      "narrationHints": "A marked stone set, and what it forbids stays out.",
+      "description": "Set a simple lasting ward at a threshold — keeps small beasts, weather, or casual trespass out of a camp or home.",
+      "notFor": "Stopping a determined intruder; grand wards.",
+      "powerSystem": "valley_craft",
+      "gated": "learned",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Boundary-Stone",
+          "grants": "Ward a camp or dwelling against animals, weather, and casual intrusion.",
+          "cannot": "A determined person walks through it; it deters, not stops."
+        }
+      ]
+    },
+    {
+      "id": "hunters_strike",
+      "name": "Hunter's Strike",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": -0.2
+      },
+      "functions": [
+        "strike"
+      ],
+      "narrationHints": "The practiced killing blow of someone who feeds a family by it.",
+      "description": "A trained practical strike — spear, sling, axe, bow — honest damage from a working hunter.",
+      "notFor": "Formal martial technique (the Edge); many foes.",
+      "powerSystem": "valley_craft",
+      "gated": "learned",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Hunter's Strike",
+          "grants": "Strike effectively with common weapons; land a killing blow on beast or foe.",
+          "cannot": "No warrior's forms; one target, honest force."
+        }
+      ]
     }
   ]
 }

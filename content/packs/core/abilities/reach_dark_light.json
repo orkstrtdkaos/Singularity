@@ -440,6 +440,37 @@
         "CHASE": 2,
         "EXPLORE": 2
       }
+    },
+    {
+      "id": "the_never_there",
+      "name": "The Never-There",
+      "levelReq": 5,
+      "energyCost": 10,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": -0.5
+      },
+      "functions": [
+        "conceal",
+        "move"
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "CHASE": 2
+      },
+      "narrationHints": "Not hidden — unhappened. You were never in the room; there is no trail because there was no one.",
+      "description": "The stealth capstone: an infiltration so complete it leaves no trace, no memory, no gap — not concealment but erasure of your passage. The Umbral master's highest work.",
+      "notFor": "Acting openly (any overt act breaks it); fooling a Verity-master mid-act; concealing others easily.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Never-There",
+          "grants": "Move through the most-watched place leaving no trace, memory, or evidence you were ever there.",
+          "cannot": "A single overt action ends it; a Verity-reader present may feel the absence; costs enormously to sustain."
+        }
+      ],
+      "powerSystem": "reach_dark_light",
+      "gated": "learned"
     }
   ]
 }

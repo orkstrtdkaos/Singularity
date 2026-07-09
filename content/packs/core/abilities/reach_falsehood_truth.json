@@ -109,6 +109,39 @@
         "SOCIAL": 2,
         "CHASE": 1
       }
+    },
+    {
+      "id": "the_whole_truth",
+      "name": "The Whole Truth",
+      "levelReq": 5,
+      "energyCost": 10,
+      "attribute": "mental",
+      "axes": {
+        "falsehood_truth": 0.5,
+        "dark_light": 0.2
+      },
+      "functions": [
+        "reveal",
+        "break"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SOCIAL": 2,
+        "DUEL": 1
+      },
+      "narrationHints": "Everything hidden in a place or person surfaces at once — every lie, every secret, the whole shape of the truth.",
+      "description": "The investigate capstone: lay bare the ENTIRE truth of a person, place, or mystery in one act — every deception, every hidden thing, the full pattern. Even the Cathedral of Convincing's true-pieces-false-whole yields to it.",
+      "notFor": "Truths that don't exist yet (the future); sparing what's revealed; forcing action on what's learned.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Whole Truth",
+          "grants": "Reveal the complete hidden truth of a subject at once — the only thing that cracks a lie built from true pieces.",
+          "cannot": "Overwhelming — you learn things you can't unlearn; the powerful will kill to keep some truths buried; reveals, cannot compel."
+        }
+      ],
+      "powerSystem": "reach_falsehood_truth",
+      "gated": "learned"
     }
   ]
 }

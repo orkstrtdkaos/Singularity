@@ -339,3 +339,13 @@ Erik 2026-07-07: the horizon axes were always meant to show up ANYWHERE as modif
 - **Smoke:** an action can take a modifier (accelerated strike costs more, hits faster, drifts time-hot); modifiers acquirable without a tradition home; one modifier per action; drift applies; the 6 modifier-only axes never appear as home traditions.
 
 *Updated 2026-07-07 — through SNG-043.*
+
+## SNG-044 — Challenge-utility tagging + coverage view + situational-skill reframes
+Erik: 'when am I going to use Palework?' Skills exist to aid through CHALLENGES (fight/duel/puzzle/chase/social/explore/survive/stealth/investigate) but some are authored thematically and read as situational. Findings in skill_utility_audit.json.
+- **challengeTypes[] on every ability** (back-tag pass, rides SNG-022; derivable from functions+effect). The game + player learn what each skill is FOR.
+- **SNG-041 skill UI gains a CHALLENGE-COVERAGE view:** 'in a FIGHT you have X,Y,Z; in a PUZZLE...' — so a player sees their teeth and gaps, not just a tradition list. Prevents accidental all-lore builds.
+- **Reframe ~6 flagged situational skills** (palework, the_last_gift, death-senses, held_breath/broker_truce/hold_the_aperture) — rewrite descriptions toward ACTIVE/novel uses (palework rots doors/bridges, reads battlefields, ends the won't-die, intimidates — a FIGHT/INVESTIGATE tool themed on endings, not an ending-detector). Content edit, Aevi.
+- **GM mandate:** honor + reward PLAUSIBLE novel skill uses (novelBonus already exists, SNG-030) — 'when do I use X' should have a dozen player-found answers. Principle=permission, challenge=occasion, creativity=bridge.
+- NO new skills; the fix is legibility + creativity-reward. Smoke: every ability shows its challenge-types; the skill screen shows fight/puzzle/chase coverage; a reframed Palework reads as usable in a live fight; the GM allows+rewards a novel use.
+
+*Updated 2026-07-07 — through SNG-044.*

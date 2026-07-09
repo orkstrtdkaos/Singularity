@@ -374,6 +374,70 @@
         "EXPLORE": 1,
         "FIGHT": 1
       }
+    },
+    {
+      "id": "shortfold",
+      "name": "Shortfold",
+      "levelReq": 3,
+      "energyCost": 7,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0.3,
+        "space_time": 0.4
+      },
+      "functions": [
+        "move"
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2,
+        "STEALTH": 1
+      },
+      "narrationHints": "The space between here and there folds for a step, and you are across it.",
+      "description": "A short-range teleport — fold the space between you and a spot you can SEE, and step through. Blink across a gap, past a door, out of a grip. Needs substrate to fold against.",
+      "notFor": "Somewhere unseen (line-of-sight only); long distance; carrying a crowd.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Shortfold",
+          "grants": "Instantly cross to a visible point within ~30 paces — through, past, or over what's between.",
+          "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt)."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
+    },
+    {
+      "id": "waygate",
+      "name": "Waygate",
+      "levelReq": 5,
+      "energyCost": 12,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0.5,
+        "space_time": 0.6
+      },
+      "functions": [
+        "move",
+        "bind"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "CHASE": 2
+      },
+      "narrationHints": "A door opens onto a place you have stood before, a hundred miles closed to a single step.",
+      "description": "The long teleport capstone: open a fold to a place you KNOW WELL (have been, and can hold clearly), crossing any distance. Move a small party through. The Precursor way-network's power, woken.",
+      "notFor": "Anywhere you haven't been/can't hold; instant repeat; an unwilling passenger.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Waygate",
+          "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once.",
+          "cannot": "Only to places held clearly in memory; enormous cost + cooldown; a botch opens the wrong gate, or a dangerous one."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned"
     }
   ]
 }

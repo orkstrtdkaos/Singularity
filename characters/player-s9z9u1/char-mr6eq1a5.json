@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 4,
-  "xp": 369,
+  "xp": 376,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -61,7 +61,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 41,
+  "energy": 36,
   "inventory": [
     {
       "id": "waterskin",
@@ -255,6 +255,21 @@
       "spread": [],
       "_bonusApplied": 0.25,
       "day": 10
+    },
+    {
+      "at": "2026-07-09T12:51:16.558Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses in plain speech before Millbrook's assembled elder panel.",
+      "tags": [
+        "investigation",
+        "community",
+        "practical-wisdom"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 10
     }
   ],
   "relationships": {},
@@ -413,21 +428,26 @@
       {
         "summary": "Aevi dims and cannot speak — the first word after the memory glass remains Dresh's.",
         "narration": "You open the space for Aevi with a small tilt of your head — an invitation, nothing more. The motes at your shoulder brighten fractionally, organizing into their near-shape, the posture they take when they have something worth saying.\n\nThen nothing. The condensing light scatters. Aevi dims — not the warning-dim of danger, but the slow fade of something that simply cannot be done. A single mote drifts down to the level of your collarbone and stays there, soft and still. The faintest hum, barely audible, like a word started and set aside.\n\nThe room notices. Not dramatically — eyes flick to the motes and away, reading the silence as its own kind of answer. But the moment you opened for testimony is closing without the words you needed to fill it, and Dresh's hands are still flat on the table, palms down, patient. The first word after the playback still belongs to her. She is watching you now, not the disc."
+      },
+      {
+        "summary": "Usnea named the full connection aloud — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses and both axes of the contamination in plain speech before the elder panel.",
+        "narration": "You let the silence hold for one more breath after Aevi's mote settles — then you fill it yourself. Not rushing. Not apologizing for the dimmed swarm at your collarbone.\n\n\"What you saw in the glass is the same signature as the vent aperture beneath the eastern retaining wall. The pour Fendt made into the ford — the particular way it dispersed, the timing — matches the pattern Aevi read from the crystalline residue on this table.\" You touch the folded ration-paper at the table's edge without lifting it. \"And that pattern counts to six. The same six the child at the docks has been hearing under the river since the water turned. The same six the warden named from inside the stone, three springs ago at the lower terrace flow-gate.\" You let that sit for a moment — three witnesses from three different vantage points naming the same count, the same presence, the same moment in a rhythm that predates all of them.\n\n\"One act by one person. One system underneath the watershed. The same pulse running through both.\" You set your hands flat on the table — the same posture Dresh chose, a deliberate echo. \"That is the connection. Not coincidence. Not drift. Coordination.\"\n\nDresh's eyes haven't moved from your face since you started. The room is very still — coalfire clicking softly, the yard-silver holding at the threshold. Whatever the first word after this is, it belongs to her."
       }
     ],
     "lastTurn": {
-      "narration": "You open the space for Aevi with a small tilt of your head — an invitation, nothing more. The motes at your shoulder brighten fractionally, organizing into their near-shape, the posture they take when they have something worth saying.\n\nThen nothing. The condensing light scatters. Aevi dims — not the warning-dim of danger, but the slow fade of something that simply cannot be done. A single mote drifts down to the level of your collarbone and stays there, soft and still. The faintest hum, barely audible, like a word started and set aside.\n\nThe room notices. Not dramatically — eyes flick to the motes and away, reading the silence as its own kind of answer. But the moment you opened for testimony is closing without the words you needed to fill it, and Dresh's hands are still flat on the table, palms down, patient. The first word after the playback still belongs to her. She is watching you now, not the disc.",
-      "sceneSummary": "Aevi dims and cannot speak — the first word after the memory glass remains Dresh's.",
+      "narration": "You let the silence hold for one more breath after Aevi's mote settles — then you fill it yourself. Not rushing. Not apologizing for the dimmed swarm at your collarbone.\n\n\"What you saw in the glass is the same signature as the vent aperture beneath the eastern retaining wall. The pour Fendt made into the ford — the particular way it dispersed, the timing — matches the pattern Aevi read from the crystalline residue on this table.\" You touch the folded ration-paper at the table's edge without lifting it. \"And that pattern counts to six. The same six the child at the docks has been hearing under the river since the water turned. The same six the warden named from inside the stone, three springs ago at the lower terrace flow-gate.\" You let that sit for a moment — three witnesses from three different vantage points naming the same count, the same presence, the same moment in a rhythm that predates all of them.\n\n\"One act by one person. One system underneath the watershed. The same pulse running through both.\" You set your hands flat on the table — the same posture Dresh chose, a deliberate echo. \"That is the connection. Not coincidence. Not drift. Coordination.\"\n\nDresh's eyes haven't moved from your face since you started. The room is very still — coalfire clicking softly, the yard-silver holding at the threshold. Whatever the first word after this is, it belongs to her.",
+      "sceneSummary": "Usnea named the full connection aloud — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses and both axes of the contamination in plain speech before the elder panel.",
       "choices": [
         {
-          "label": "Hold the silence. Don't rescue it — let the room sit with what the glass showed, and wait for Dresh to name what she holds.",
+          "label": "Wait in silence — hold the space and let Dresh speak first, without filling it further.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "wait"
+            "wait",
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -436,14 +456,18 @@
           "emergenceId": null
         },
         {
-          "label": "Speak plainly yourself — what the glass confirms, without Aevi's voice: deliberate pour, same signature as the vent aperture, same count as the wells. Name the connection in your own words.",
+          "label": "Name the gap directly to Dresh — the connection is established, but the directing hand behind both Fendt and the Disputed Zone reactivation remains unnamed. Invite the elders to name what questions they still need answered.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.8,
+            "chaos_order": 0.6
+          },
           "difficulty": 15,
           "intentTags": [
             "persuade",
-            "careful"
+            "careful",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -452,14 +476,16 @@
           "emergenceId": null
         },
         {
-          "label": "Turn to Pell. The rope coil is loose — her arithmetic has resolved. Ask, with a look or a word, whether Sela's call has come.",
+          "label": "Turn to Pell — quietly, across the room — and meet her eyes. Let her read that Sela's moment, if she judges it right, is still open.",
           "attribute": "social",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "careful"
+            "careful",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -468,83 +494,118 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Dresh directly what the panel needs next — don't try to name it for them. Let the elders name their own next question.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
+          "label": "Address Brynjar directly — the marker beyond the pass, the deliberate pour, and the Disputed Zone reactivation are three deliberate acts. Ask, plainly, whether he has any sense of which direction the marker faced.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "chaos_order": 0.4
+          },
+          "difficulty": 15,
           "intentTags": [
-            "help",
-            "careful"
+            "study",
+            "plan",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses in plain speech before Millbrook's assembled elder panel.",
+          "tags": [
+            "investigation",
+            "community",
+            "practical-wisdom"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
-        "xp": 0
+        "xp": 2
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
+      "ledgerEvents": [
+        {
+          "what": "Usnea named the coordination between Fendt's pour, the Precursor vent aperture signature, and the six-count in plain speech before Millbrook's assembled elder panel — three witnesses from three vantage points named in a single sequence. The connection is now public record in this room.",
+          "tags": [
+            "investigation",
+            "contamination",
+            "elder-session",
+            "millbrook"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "falsehood_truth": 0.2,
+            "chaos_order": 0.1
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "contamination-evidence-for-the-elders",
+          "title": "Evidence for the Elders",
+          "note": "Usnea named the full coordination chain in plain speech — pour, signature, six-count, three witnesses. The evidence sequence is fully spoken. The room holds the connection. The elders have not yet responded."
+        }
+      ],
       "scene": {
-        "setting": "Millbrook common house interior — coallit and yard-silver from the open door; the memory glass cooling at the table's center, playback complete; the room in a second, heavier silence with Aevi dimmed at Usnea's collarbone.",
+        "setting": "Millbrook common house interior — coallit and yard-silver from the open door; the memory glass cooling at the table's center, playback complete; Usnea's hands flat on the table, the room in a third, settled silence after the coordination chain was named aloud.",
         "npcsPresent": [
           {
             "name": "Councilor Dresh",
-            "state": "Palms flat on the table, eyes moved from the disc to Usnea — patient, waiting, first word not yet spoken."
+            "state": "Eyes on Usnea's face — palms flat, absorbing; the first word still hers, not yet spoken."
           },
           {
             "name": "Tuning-warden (gateline)",
-            "state": "Standing at the near end of the table — testimony complete, watching Usnea and the dimmed motes."
+            "state": "Standing at the near table end — chord-staff against the north wall, watching Usnea and the dimmed motes with quiet steadiness."
           },
           {
             "name": "Pell",
-            "state": "Just inside the threshold — rope coil hanging loose at her side, eyes on Usnea."
+            "state": "Just inside the threshold — rope coil loose at her side, eyes on Usnea; her arithmetic has resolved somewhere, direction still unspoken."
           },
           {
             "name": "Mara Wells",
-            "state": "At the table — still and attentive, eyes moving between Dresh and Usnea."
+            "state": "At the table — still, eyes moving between Dresh and Usnea; thread held."
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "At the table's near corner — watching the room, very still, cataloguing."
+            "state": "At the table's near corner — very still, watching the room, his marker-find and Fendt's named act sitting alongside each other in his reckoning."
           },
           {
             "name": "Holloway",
-            "state": "Expression past tight — jaw set, watching the dimmed motes."
+            "state": "Jaw set — the named fear now paired with a named actor and a coordination chain; watching the dimmed motes."
           },
           {
             "name": "Renn",
-            "state": "Both hands in lap, quiet — exhaled once, long and careful."
+            "state": "Both hands in lap, long exhale spent — quieter than he has been all session."
           },
           {
             "name": "Two unrecognized elders",
-            "state": "Both holding the silence, eyes on the table or the disc."
+            "state": "Eyes on the table or the disc — holding the silence."
           }
         ],
         "objects": [
-          "Long common house table — pale seedling, glass vial, crystalline residue pinch at center",
-          "Orla's memory glass — fogged-rim disc cooling at table center, playback complete",
+          "Long common house table — pale seedling, glass vial, crystalline residue pinch, Orla's memory glass (fogged-rim disc, cooling, playback complete)",
           "Tuning-warden's chord-staff — leaned against north wall, dark loam at the base",
           "Waterskin — at Usnea's hip",
-          "Aevi — dimmed to a single mote at collarbone level, soft and still",
+          "Aevi — single mote at collarbone level, dimmed, soft and still",
           "Coalfire — warm orange light, interfering with yard-silver from the open door"
         ],
         "threads": [
-          "Dresh has not yet spoken — the first elder word after playback is still hers; she is watching Usnea now",
+          "Dresh has not yet spoken — the first elder word after the coordination chain is still hers; she is watching Usnea",
           "Aevi dimmed and could not speak — the room noticed; the gap is present and unresolved",
-          "Pell's rope coil has gone loose — her arithmetic has resolved somewhere, direction not yet named",
-          "Sela's call is now live as a possibility — Pell holds it",
-          "Brynjar watching the room — his marker-find and Fendt's named act sit alongside each other in his reckoning",
-          "The floor-pulse unchanged beneath the common house — still listening"
+          "Pell's rope coil has gone loose — her arithmetic has resolved, direction not yet named; Sela's call is live as a possibility",
+          "Brynjar's marker-find and Fendt's named act now sit alongside each other in the room's reckoning",
+          "The directing hand behind both Fendt's pour and the Disputed Zone reactivation remains unnamed — the gap is present but not yet invited into the room's deliberation"
         ]
       },
       "npcUpdates": [
@@ -552,39 +613,107 @@
           "op": "update",
           "npcId": "councilor-dresh",
           "name": "Councilor Dresh",
-          "role": "Millbrook elder, leads the Thursday presentation",
-          "note": "Shifted eyes from the disc to Usnea after Aevi dimmed — patient, watching, first word still hers.",
+          "note": "Received the full coordination chain — pour, signature, six-count, three witnesses — in the same listening stillness. Eyes on Usnea's face; first word not yet spoken.",
           "learned": [
-            "Aevi attempted to speak after the playback and could not — the motes dimmed and scattered"
+            "Fendt's pour and the Precursor vent aperture signature share the same six-count pattern — confirmed by three independent witnesses from three vantage points"
           ],
-          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the common house table — memory glass received, watching Usnea after Aevi's failed attempt; first word after playback not yet spoken."
+          "statusNote": "At the common house table — absorbing the coordination chain, first word still hers."
+        },
+        {
+          "op": "update",
+          "npcId": "holloway",
+          "name": "Holloway",
+          "note": "His named fear of system awareness now paired with a named human actor coordinating alongside that system — the coordination chain visibly landed harder than any single piece of evidence.",
+          "learned": [
+            "The pour and the vent aperture signature share the same count — a person and a system, coordinated"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — jaw set, named fear now paired with a named actor and a full coordination chain."
+        },
+        {
+          "op": "update",
+          "npcId": "renn",
+          "name": "Renn",
+          "note": "The coordination chain landed in the quiet space he has settled into — the sequence complete, the connection named.",
+          "learned": [
+            "Three witnesses from three vantage points name the same six-count — the contamination is coordinated, not accidental"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — quietest he has been; the coordination chain absorbed."
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Thread held — the full evidence sequence is now spoken, all connections named. She is watching Dresh.",
+          "learned": [
+            "The coordination chain is now fully spoken in the room — the evidence sequence is complete"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — thread held, sequence complete, watching Dresh."
+        },
+        {
+          "op": "update",
+          "npcId": "brynjar-andyrsson",
+          "name": "Brynjar Andyrsson",
+          "note": "Very still at the corner — the coordination chain places his deliberately placed marker alongside two other deliberate acts in a single sequence.",
+          "learned": [
+            "The coordination chain now includes pour, signature, and six-count — three deliberate acts in a sequence that may extend to the marker beyond the pass"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table's near corner — his marker-find and the full coordination chain sitting alongside each other in his reckoning."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Rope coil loose — the coordination chain named aloud in the same room she is standing in. Her arithmetic has resolved somewhere; direction still unspoken.",
+          "learned": [
+            "The full coordination chain is now spoken — three witnesses, one sequence, one directing hand behind it"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Just inside the common house threshold — rope loose, arithmetic resolved, Sela's call live as a possibility; direction not yet named."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses in plain speech before Millbrook's assembled elder panel. This connection is now public record in the valley floor's governance body.",
+          "subjectId": "contamination-evidence-for-the-elders"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Aevi dimmed and could not speak after the memory glass playback — the motes scattered mid-attempt; the room witnessed the silence. Day 10 evening.",
-          "flag": {
-            "aevi_spoke_after_glass": "false",
-            "aevi_attempt_failed_day10": "true"
+          "note": "The full coordination chain — pour, vent aperture signature, six-count, three witnesses — was named aloud at the common house table by Usnea on Day 10 evening. The evidence sequence is complete and spoken. The room has not yet responded.",
+          "subPlace": {
+            "name": "Common House Table — Elder Presentation",
+            "note": "Coordination chain named complete — Fendt's pour, vent aperture signature, six-count, three witnesses. Evidence sequence closed. Elders' response pending. Day 10 evening.",
+            "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "evidence-for-the-elders",
+          "topic": "contamination-evidence-for-the-elders",
           "label": "Evidence for the Elders",
           "kind": "event",
-          "fact": "Day 10 evening: Aevi attempted to name what the glass confirms about the six-fold pattern and could not — the motes dimmed and scattered mid-attempt. The room noticed. Dresh's first word after playback remains unspoken; she is watching Usnea.",
+          "fact": "Day 10 evening: Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses (Aevi's residue reading, Sela's river-listening, the tuning-warden's lower terrace sighting) in plain speech before the elder panel. The connection between human act and Precursor system is now public record in this room. The directing hand behind both remains unnamed.",
           "links": [
-            "contamination-evidence-for-the-elders",
-            "aevi-reading-of-the-water",
-            "councilor-dresh",
             "the-six-fold-pattern",
-            "millbrook"
+            "fendt-filtration-engineer",
+            "echo-river-contamination",
+            "tuning-warden-gateline",
+            "orlas-memory-glass-the-ford-record",
+            "millbrook",
+            "councilor-dresh",
+            "brynjar-andyrsson"
           ]
         }
       ],
@@ -592,62 +721,61 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior — coallit and yard-silver from the open door; the memory glass cooling at the table's center, playback complete; the room in a second, heavier silence with Aevi dimmed at Usnea's collarbone.",
+      "setting": "Millbrook common house interior — coallit and yard-silver from the open door; the memory glass cooling at the table's center, playback complete; Usnea's hands flat on the table, the room in a third, settled silence after the coordination chain was named aloud.",
       "npcsPresent": [
         {
           "name": "Councilor Dresh",
-          "state": "Palms flat on the table, eyes moved from the disc to Usnea — patient, waiting, first word not yet spoken."
+          "state": "Eyes on Usnea's face — palms flat, absorbing; the first word still hers, not yet spoken."
         },
         {
           "name": "Tuning-warden (gateline)",
-          "state": "Standing at the near end of the table — testimony complete, watching Usnea and the dimmed motes."
+          "state": "Standing at the near table end — chord-staff against the north wall, watching Usnea and the dimmed motes with quiet stea"
         },
         {
           "name": "Pell",
-          "state": "Just inside the threshold — rope coil hanging loose at her side, eyes on Usnea."
+          "state": "Just inside the threshold — rope coil loose at her side, eyes on Usnea; her arithmetic has resolved somewhere, direction"
         },
         {
           "name": "Mara Wells",
-          "state": "At the table — still and attentive, eyes moving between Dresh and Usnea."
+          "state": "At the table — still, eyes moving between Dresh and Usnea; thread held."
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "At the table's near corner — watching the room, very still, cataloguing."
+          "state": "At the table's near corner — very still, watching the room, his marker-find and Fendt's named act sitting alongside each"
         },
         {
           "name": "Holloway",
-          "state": "Expression past tight — jaw set, watching the dimmed motes."
+          "state": "Jaw set — the named fear now paired with a named actor and a coordination chain; watching the dimmed motes."
         },
         {
           "name": "Renn",
-          "state": "Both hands in lap, quiet — exhaled once, long and careful."
+          "state": "Both hands in lap, long exhale spent — quieter than he has been all session."
         },
         {
           "name": "Two unrecognized elders",
-          "state": "Both holding the silence, eyes on the table or the disc."
+          "state": "Eyes on the table or the disc — holding the silence."
         }
       ],
       "objects": [
-        "Long common house table — pale seedling, glass vial, crystalline residue pinch a",
-        "Orla's memory glass — fogged-rim disc cooling at table center, playback complete",
+        "Long common house table — pale seedling, glass vial, crystalline residue pinch, ",
         "Tuning-warden's chord-staff — leaned against north wall, dark loam at the base",
         "Waterskin — at Usnea's hip",
-        "Aevi — dimmed to a single mote at collarbone level, soft and still",
+        "Aevi — single mote at collarbone level, dimmed, soft and still",
         "Coalfire — warm orange light, interfering with yard-silver from the open door"
       ],
       "threads": [
-        "Dresh has not yet spoken — the first elder word after playback is still hers; she is watching Usnea now",
+        "Dresh has not yet spoken — the first elder word after the coordination chain is still hers; she is watching Usnea",
         "Aevi dimmed and could not speak — the room noticed; the gap is present and unresolved",
-        "Pell's rope coil has gone loose — her arithmetic has resolved somewhere, direction not yet named",
-        "Sela's call is now live as a possibility — Pell holds it",
-        "Brynjar watching the room — his marker-find and Fendt's named act sit alongside each other in his reckoning"
+        "Pell's rope coil has gone loose — her arithmetic has resolved, direction not yet named; Sela's call is live as a possibility",
+        "Brynjar's marker-find and Fendt's named act now sit alongside each other in the room's reckoning",
+        "The directing hand behind both Fendt's pour and the Disputed Zone reactivation remains unnamed — the gap is present but not yet invited into the room's delibera"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -662,14 +790,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Brynjar named the deliberately placed marker beyond the new pass to the full elder panel — a second axis of deliberate intent now sits alongside the pulse from below. Orla's memory glass and the tunin",
         "Dresh has sequenced the final witnesses — tuning-warden first, then the memory glass. The path to the glass is now formally open.",
         "The tuning-warden has arrived at the common house yard — on time, via the eastern path, mud-booted from the descent. The final witness sequence can now begin.",
         "Tuning-warden received at the apple trees, briefed on the room's state — prepared to testify. The final witness sequence is now stepping through the door.",
         "Tuning-warden introduced and handed the floor — Heights-side testimony now underway. Memory glass remains in Usnea's keeping, to be placed second.",
         "Tuning-warden delivered Heights-side testimony — six-count, plain and complete. Dresh has called for the memory glass. Final evidence step is live.",
         "Orla named to the elder panel — chain of custody established, Fendt identified by name and role before the glass plays. Memory glass about to be activated.",
-        "Memory glass played in full before the elder panel — Fendt's deliberate pour confirmed, received in silence. The evidence chain is complete. Dresh and the room now hold the full sequence: seep, geomet"
+        "Memory glass played in full before the elder panel — Fendt's deliberate pour confirmed, received in silence. The evidence chain is complete. Dresh and the room now hold the full sequence: seep, geomet",
+        "Usnea named the full coordination chain in plain speech — pour, signature, six-count, three witnesses. The evidence sequence is fully spoken. The room holds the connection. The elders have not yet res"
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -686,7 +814,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d10] Stopped looking at the seedling and is now watching Aevi's motes — the shift from agricultural evidence to the living confirmation of it.",
         "[d10] Tracked Aevi's movement from the first drift forward — watched the count with close, quiet attention.",
         "[d10] Watched all three cycles with the same close quiet attention — eyes still on the space where the motes rested.",
         "[d10] Eyes moved from the air above the residue pinch to Usnea's face after the wells-and-channels naming — the scope of 'inside the system's reach' has registered.",
@@ -695,17 +822,18 @@
         "[d10] Eyes lifted from the residue pinch for the first time since he named his own fear — watching Brynjar, rearranging.",
         "[d10] Aevi notes his nanite-field is louder than yesterday — the named fear amplified, not resolved, by the warden's testimony building toward the six-count.",
         "[d10] Jaw tight after the warden's six-count testimony — the named fear amplified, not resolved, by live Heights-side confirmation.",
-        "[d10] Jaw past tight — the expression of a man who wanted to be wrong and wasn't. The named fear now paired with a named actor."
+        "[d10] Jaw past tight — the expression of a man who wanted to be wrong and wasn't. The named fear now paired with a named actor.",
+        "[d10] His named fear of system awareness now paired with a named human actor coordinating alongside that system — the coordination chain visibly landed harder than any single piece of ev"
       ],
       "knownFacts": [
-        "The six-fold count is a living rhythm, not a description — Aevi demonstrated it in the room",
         "The system's reach includes the upper terrace irrigation arm — his own fields are inside it",
         "His real fear is not agricultural but existential — whether the system has awareness of human presence",
         "His spoken fear landed harder than he expected — the room absorbed it, which settled something in him",
         "A deliberately placed marker exists beyond the new mountain pass — the question of deliberate intent extends beyond the valley's water",
         "His nanite-field is louder than yesterday — the act of naming his fear did not quiet it; the warden's words are amplifying it",
         "A Heights-side witness named the six-count from inside the stone three springs ago — his fear of system awareness has live corroboration now.",
-        "Fendt's deliberate pour confirmed — system intent and human intent now visible in the same room"
+        "Fendt's deliberate pour confirmed — system intent and human intent now visible in the same room",
+        "The pour and the vent aperture signature share the same count — a person and a system, coordinated"
       ],
       "skillsObserved": [
         "honest self-disclosure under pressure"
@@ -715,7 +843,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "At the common house table — holding the memory glass playback alongside his named fear of system awareness."
+      "statusNote": "At the common house table — jaw set, named fear now paired with a named actor and a full coordination chain."
     },
     "renn": {
       "id": "renn",
@@ -728,7 +856,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Heard Aevi's assessment — the compact-framework is cracking under something he can't cite precedent for",
         "[d1] Jaw shifted from stubborn set to careful recalibration — watching the channel mouth, his compact-framework fully replaced by something he has no precedent for",
         "[d10] Jaw still set but eyes fixed on the vial — attending completely. The compact-framework has been fully replaced by something he has no precedent for.",
         "[d10] Jaw unclenched during Aevi's demonstration — the visible count landed differently than a spoken description.",
@@ -737,17 +864,18 @@
         "[d10] Nodded once at Holloway's words — a moment of shared ground with the man he has been arguing with for weeks.",
         "[d10] Aevi notes his nanite-field is quieter than yesterday — a different kind of settling.",
         "[d10] Weight set down, not resolved — the warden's testimony landed differently than the contamination evidence; quieter, heavier.",
-        "[d10] Exhaled once, long and careful, both hands in his lap. The quietest he has been all session."
+        "[d10] Exhaled once, long and careful, both hands in his lap. The quietest he has been all session.",
+        "[d10] The coordination chain landed in the quiet space he has settled into — the sequence complete, the connection named."
       ],
       "knownFacts": [
-        "Aevi named the contamination as deliberate, task-driven, and older than this watershed",
         "Heard Usnea name the contamination as deliberate and task-driven — nothing in the elder compact covers this",
         "Seep is deliberate and pre-Transition — nothing in the elder compact addresses this",
         "The six-fold count made visible by Aevi — rhythm confirmed as real and present, not reported",
         "The lower channel is confirmed inside the system's operational reach — the contamination is not upstream drift but active presence",
         "His nanite-field is quieter than yesterday — something has resolved or been set down, at least temporarily",
         "The six-count testimony from a Heights-side witness sits differently than the valley-floor evidence — something has been set down in him.",
-        "Fendt's deliberate pour confirmed — the contamination has a human actor, not only a system"
+        "Fendt's deliberate pour confirmed — the contamination has a human actor, not only a system",
+        "Three witnesses from three vantage points name the same six-count — the contamination is coordinated, not accidental"
       ],
       "skillsObserved": [],
       "status": "active",
@@ -755,7 +883,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "At the common house table — weight fully set down, receiving what the glass confirmed."
+      "statusNote": "At the common house table — quietest he has been; the coordination chain absorbed."
     },
     "third-farmer": {
       "id": "third-farmer",
@@ -834,7 +962,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d9] Laid the three evidence items in order — seedling, vial, residue pinch. Standing at the table's near end, opening to begin the testimony sequence.",
         "[d10] Stepped back after introducing physical evidence — handed the floor to Usnea cleanly. Sequence proceeding as planned.",
         "[d10] Caught Usnea's eye after the wells-and-channels naming — the sequence is holding and she knows it. Waiting to call the next speaker.",
         "[d10] Caught Usnea's eye after Pell's refusal — patient, unalarmed. Sequence is paused, not broken; she is holding the table end.",
@@ -843,17 +970,18 @@
         "[d10] Clocked the failed hearthbinding attempt — eyes moved to Usnea's face with patient, unworried recognition. No comment. Thread still held.",
         "[d10] Noticed Aevi's brief brightening — registered Usnea's quiet pulse-check without needing it named aloud.",
         "[d10] Watched the warden cross the threshold and take the floor — thread held, sequence alive.",
-        "[d10] Eyes came to Usnea for the first time since the warden finished — the Orla-naming registered as significant."
+        "[d10] Eyes came to Usnea for the first time since the warden finished — the Orla-naming registered as significant.",
+        "[d10] Thread held — the full evidence sequence is now spoken, all connections named. She is watching Dresh."
       ],
       "knownFacts": [
-        "The tuning-warden confirmed, committed, and has logistics in hand — Heights-side testimony is real",
         "Gate-senior granted the tuning-warden sanction to leave the gateline — confirmed by morning tone Thursday",
         "Executed the evidence-laying exactly as planned",
         "Usnea delivered testimony in exact sequence — seep, geometry, lattice, Aevi's assessment",
         "Usnea named all three zones of reach to the elder panel — the scope is now public record in this room",
         "Usnea checked the six-fold pulse beneath the floor during the wait — it is steady and unchanged",
         "Orla withheld the glass from the Radiant council deliberately — a political choice with cost",
-        "Fendt is named and identified before the glass plays"
+        "Fendt is named and identified before the glass plays",
+        "The coordination chain is now fully spoken in the room — the evidence sequence is complete"
       ],
       "skillsObserved": [
         "knowing when a room is done",
@@ -868,7 +996,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "At the common house table — watching Usnea and the disc, thread held."
+      "statusNote": "At the common house table — thread held, sequence complete, watching Dresh."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -1104,7 +1232,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d9] Named his stake plainly: came through the new pass three weeks ago, found a deliberately placed marker on the far side, followed the name 'Millbrook' and the water rumors here. Has",
         "[d9] Accepted Usnea's invitation to stay and hear the evidence; agreed to let his question about the marker surface in the room.",
         "[d9] Received Usnea's instruction to name the marker himself, in his own words, when the moment opens. Accepted without qualification.",
         "[d9] Standing at the hearthstone as the room fills — watching, holding his marker-question, waiting for the moment Usnea indicated.",
@@ -1113,17 +1240,18 @@
         "[d10] Came fully upright from the hearthstone during the silence — eyes moved to the memory glass in Usnea's keeping, then to the table. The marker-question is visibly primed.",
         "[d10] Named the deliberately placed marker beyond the new pass to the full elder panel — hands on the table, plain-spoken, precise. Connected the marker to the reach-vs-reach-for framing",
         "[d10] Very still at the corner — the Orla-naming and Fendt's identification sitting alongside his marker-find. A named actor now visible in the room's evidence.",
-        "[d10] Watching the room rather than the disc — cataloguing, very still. His deliberately placed marker sits alongside Fendt's named act in his own reckoning."
+        "[d10] Watching the room rather than the disc — cataloguing, very still. His deliberately placed marker sits alongside Fendt's named act in his own reckoning.",
+        "[d10] Very still at the corner — the coordination chain places his deliberately placed marker alongside two other deliberate acts in a single sequence."
       ],
       "knownFacts": [
-        "Will name the marker to the room in his own voice — not introduced by Usnea",
         "Dresh's reach-vs-reach-for framing maps onto the deliberately placed marker beyond the pass — intent is the question in both cases",
         "The silence mapped his marker-question directly onto Dresh's reach-vs-reach-for framing — he is fitting the pieces together",
         "The marker was found above the high pasture fence, out of the Disputed Zone — not a waystation blaze, placed as if someone expected to be followed",
         "He came to Millbrook specifically because he heard a tree was walking the irrigation channels asking the same kind of question",
         "Orla withheld the glass from the Radiant council — a named individual made a deliberate choice about where the evidence surfaces",
         "Fendt: south-face filtration array operator, purity report signatory, named as the pouring figure",
-        "Fendt's deliberate pour confirmed — a named human actor working alongside the Precursor system; the question of who directed both is now live"
+        "Fendt's deliberate pour confirmed — a named human actor working alongside the Precursor system; the question of who directed both is now live",
+        "The coordination chain now includes pour, signature, and six-count — three deliberate acts in a sequence that may extend to the marker beyond the pass"
       ],
       "skillsObserved": [
         "decisive acceptance of an invitation, no hesitation",
@@ -1134,7 +1262,7 @@
         "precise word choice under pressure"
       ],
       "status": "active",
-      "statusNote": "At the common house table's near corner — the marker-find and Fendt's act sitting alongside each other in his reckoning.",
+      "statusNote": "At the common house table's near corner — his marker-find and the full coordination chain sitting alongside each other in his reckoning.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -1151,7 +1279,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d10] Lifted her hands from the table and named the room's real question — reach vs. reach for — looking directly at Usnea. First full sentence since 'operating.'",
         "[d10] Shifted from waiting to listening — hands laced, still holding Usnea with her gaze. The question she named has become the room's question.",
         "[d10] Hands came flat on the table again after Brynjar's account — the reweighing posture she took after Aevi's demonstration. Eyes on Brynjar.",
         "[d10] Named her preferred sequence aloud — warden first, memory glass second. Gave her reason plainly: let the room hold Heights-side and valley-side testimony before it looks at someone",
@@ -1160,17 +1287,18 @@
         "[d10] Absorbed the warden's testimony in full silence, then named her readiness plainly: 'The glass.' Called for the memory glass without elaboration.",
         "[d10] Received Orla's name and Fendt's name in the same breath — the chain of custody is now in her possession before the glass plays. Eyes on the disc.",
         "[d10] Received the memory glass playback in full silence — palms flat, eyes on the disc, absorbing. Has not yet spoken. Holds the room.",
-        "[d10] Shifted eyes from the disc to Usnea after Aevi dimmed — patient, watching, first word still hers."
+        "[d10] Shifted eyes from the disc to Usnea after Aevi dimmed — patient, watching, first word still hers.",
+        "[d10] Received the full coordination chain — pour, signature, six-count, three witnesses — in the same listening stillness. Eyes on Usnea's face; first word not yet spoken."
       ],
       "knownFacts": [
-        "Prefers testimony sequence that builds from pattern-witness to named-actor — keeps the room's judgment clean",
         "Her nanite-field carries a structured, organized shape — a question held deliberately, not formed in the moment",
         "Called for the memory glass after the warden's six-count — she has absorbed the Heights-side testimony and is ready for named-actor evidence.",
         "Orla is the optics-weaver who pulled the glass — her name, her role, her deliberate withholding from the Radiant council",
         "Fendt is operator of the south-face secondary filtration array and signatory to contamination-period purity reports",
         "The chain of custody runs: ford-side boulder — Orla — Usnea — this table",
         "Fendt's deliberate pour into the Echo River ford confirmed by photonic record — a person, a place, a choice, unhurried and without concealment",
-        "Aevi attempted to speak after the playback and could not — the motes dimmed and scattered"
+        "Aevi attempted to speak after the playback and could not — the motes dimmed and scattered",
+        "Fendt's pour and the Precursor vent aperture signature share the same six-count pattern — confirmed by three independent witnesses from three vantage points"
       ],
       "skillsObserved": [
         "deliberate speech — choosing the precise word that opens rat",
@@ -1181,7 +1309,7 @@
         "deliberate sequencing under absorption — named readiness wit"
       ],
       "status": "active",
-      "statusNote": "At the common house table — memory glass received, watching Usnea after Aevi's failed attempt; first word after playback not yet spoken.",
+      "statusNote": "At the common house table — absorbing the coordination chain, first word still hers.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -1192,7 +1320,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d10] Dresh spoke the final sequence aloud at the common house table — warden before glass. This sequencing is now public record in this room.",
         "[d10] Day 10: Usnea quietly confirmed via Old Roads that the six-fold pulse is stable and unchanged beneath the common house floor during the elder session wait — system holding its operational state.",
         "[d10] Usnea stepped out to the common house yard to hold watch on the eastern lane — established as the arrival point for the tuning-warden, sightline running between the two oldest apple trees.",
         "[d10] Tuning-warden arrived at the yard's eastern lane via the apple trees — Day 10 midday. The final witness sequence is now live in this yard.",
@@ -1203,7 +1330,8 @@
         "[d10] The tuning-warden's Heights-side testimony is now complete and received at the common house table — Dresh called for the memory glass. This sequence is now public record in this room.",
         "[d10] Orla named to the common house table — her deliberate withholding of the glass from the Radiant council is now public record in this room. Fendt named before playback. This is the moment the chain of ",
         "[d10] Memory glass played in full at the common house table — Fendt's act now public record in this room. The evidence sequence is complete as of Day 10 evening. The fogged-rim disc sits cooling in yard-lig",
-        "[d10] Aevi dimmed and could not speak after the memory glass playback — the motes scattered mid-attempt; the room witnessed the silence. Day 10 evening."
+        "[d10] Aevi dimmed and could not speak after the memory glass playback — the motes scattered mid-attempt; the room witnessed the silence. Day 10 evening.",
+        "[d10] The full coordination chain — pour, vent aperture signature, six-count, three witnesses — was named aloud at the common house table by Usnea on Day 10 evening. The evidence sequence is complete and sp"
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1295,7 +1423,7 @@
           "name": "Common House Table — Elder Presentation",
           "day": 9,
           "visited": true,
-          "note": "Memory glass playback complete — Fendt's pour received in silence by the full elder panel. Evidence chain closed. Day 10"
+          "note": "Coordination chain named complete — Fendt's pour, vent aperture signature, six-count, three witnesses. Evidence sequence"
         }
       }
     },
@@ -1647,7 +1775,6 @@
         "label": "Evidence for the Elders",
         "kind": "event",
         "facts": [
-          "[d9] Thursday morning: physical evidence laid on the common house table in sequence — pale seedling, vial, residue pinch. Councilor Dresh present since dawn and leading the panel; called for plain speech. ",
           "[d10] Thursday morning: Usnea delivered testimony in sequence — seep location, geometric silt, root-contact lattice, Aevi's six-fold count and 'operating, not decaying' assessment — to the full elder panel.",
           "[d10] Day 10 Thursday: Usnea asked the room what question it was sitting with — Dresh named it precisely: does the system reach us, or reach for us. Holloway named his own fear aloud: whether it knows we're",
           "[d10] Day 10: Usnea held silence after Dresh's reach-vs-reach-for question — the room absorbed it collectively; Brynjar primed for his marker-question, Pell's grip eased, Holloway turned inward. The questio",
@@ -1658,17 +1785,18 @@
           "[d10] Day 10 afternoon: Prism Sight failed in the common house — coalfire and yard-door light in conflict smear the light-reading. Usnea returned to plain attention for the warden's testimony.",
           "[d10] Day 10 afternoon: Tuning-warden delivered Heights-side testimony complete — four seconds, six counts, light from inside the stone, three springs ago. Dresh absorbed it and called for the memory glass.",
           "[d10] Day 10 afternoon: Usnea named Orla to the elder panel — her role, her deliberate withholding from the Radiant council, the cost it carried. Fendt named by role and purity-report signature before the g",
-          "[d10] Day 10 evening: Orla's memory glass played in full before Millbrook's assembled elder panel — Fendt's deliberate pour into the Echo River ford confirmed by photonic record, received in silence. The ev"
+          "[d10] Day 10 evening: Orla's memory glass played in full before Millbrook's assembled elder panel — Fendt's deliberate pour into the Echo River ford confirmed by photonic record, received in silence. The ev",
+          "[d10] Day 10 evening: Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses (Aevi's residue reading, Sela's river-listening, th"
         ],
         "links": [
-          "aevi-reading-of-the-water",
-          "mara-wells",
-          "brynjar-andyrsson",
           "orlas-memory-glass-the-ford-record",
           "millbrook",
           "the-six-fold-pattern",
           "councilor-dresh",
-          "pell"
+          "pell",
+          "fendt-filtration-engineer",
+          "echo-river-contamination",
+          "tuning-warden-gateline"
         ],
         "createdDay": 1,
         "updatedDay": 10
@@ -2475,7 +2603,7 @@
     }
   },
   "companionBonds": {
-    "aevi": 8.75
+    "aevi": 9.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -2499,12 +2627,6 @@
     ]
   },
   "establishedFacts": [
-    {
-      "id": "orla",
-      "text": "Orla's strategic intent: she wants Usnea to carry the Fendt identification valley-side so the Radiant council must answer the contamination evidence in two places simultaneously — Millbrook elders and",
-      "day": 6,
-      "subjectId": "orla"
-    },
     {
       "id": "orla",
       "text": "Orla's memory glass is now in Usnea's keeping — transferred in the Edge District lane, Day 6 afternoon. It records Fendt pouring from a sealed tube into the ford current three days ago. Usnea is the c",
@@ -2738,6 +2860,12 @@
       "text": "Orla's memory glass has been played in full before Millbrook's assembled elder panel — Fendt's deliberate pour into the Echo River ford is now public record in the valley floor's governance body. The ",
       "day": 10,
       "subjectId": "orla"
+    },
+    {
+      "id": "contamination-evidence-for-the-elders",
+      "text": "Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses in plain speech before Millbrook's assembled elder panel. This conn",
+      "day": 10,
+      "subjectId": "contamination-evidence-for-the-elders"
     }
   ],
   "precursorAccess": [],

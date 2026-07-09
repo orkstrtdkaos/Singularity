@@ -50,7 +50,15 @@
       ],
       "challengeTypes": [
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "PUZZLE": 3,
+        "SOCIAL": 2,
+        "SURVIVE": 1,
+        "EXPLORE": 1,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "numenwork",
@@ -100,7 +108,15 @@
         "INVESTIGATE",
         "SOCIAL",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SURVIVE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     },
     {
       "id": "mech_sense",
@@ -130,7 +146,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "numen_sense",
@@ -160,7 +181,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "mend_device",
@@ -190,7 +216,12 @@
       "challengeTypes": [
         "PUZZLE",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "PUZZLE": 1,
+        "SURVIVE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "steady_soul",
@@ -220,7 +251,10 @@
       "challengeTypes": [
         "SOCIAL",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3
+      }
     },
     {
       "id": "command_engine",
@@ -252,7 +286,15 @@
       "challengeTypes": [
         "PUZZLE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "DUEL": 1,
+        "PUZZLE": 1,
+        "SURVIVE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "thin_place",
@@ -285,7 +327,15 @@
         "PUZZLE",
         "EXPLORE",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SURVIVE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     },
     {
       "id": "meaning_engine",
@@ -316,7 +366,14 @@
       "challengeTypes": [
         "PUZZLE",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "PUZZLE": 2,
+        "SURVIVE": 1,
+        "EXPLORE": 1,
+        "FIGHT": 1
+      }
     }
   ]
 }

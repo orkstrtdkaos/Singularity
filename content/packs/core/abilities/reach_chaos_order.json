@@ -46,6 +46,11 @@
       "functions": [
         "break",
         "move"
+      ],
+      "challengeTypes": [
+        "CHASE",
+        "FIGHT",
+        "PUZZLE"
       ]
     },
     {
@@ -90,6 +95,11 @@
       "functions": [
         "bind",
         "shield"
+      ],
+      "challengeTypes": [
+        "PUZZLE",
+        "FIGHT",
+        "SOCIAL"
       ]
     },
     {
@@ -116,7 +126,11 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ]
     },
     {
       "id": "order_sense",
@@ -142,7 +156,11 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ]
     },
     {
       "id": "scatter",
@@ -169,7 +187,12 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "CHASE",
+        "PUZZLE"
+      ]
     },
     {
       "id": "truename_order",
@@ -195,7 +218,12 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT",
+        "SURVIVE"
+      ]
     },
     {
       "id": "probability_tilt",
@@ -223,7 +251,12 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL",
+        "CHASE"
+      ]
     },
     {
       "id": "the_fixed_point",
@@ -251,7 +284,11 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SURVIVE"
+      ]
     },
     {
       "id": "riding_order",
@@ -278,7 +315,11 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "PUZZLE"
+      ]
     }
   ]
 }

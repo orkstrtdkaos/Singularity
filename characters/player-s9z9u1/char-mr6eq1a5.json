@@ -369,21 +369,29 @@
       {
         "summary": "Usnea receives the tuning-warden at the apple trees and names the room's state plainly; he is prepared and ready to testify.",
         "narration": "You step away from the wall as the tuning-warden clears the apple trees, moving to meet him in the lane before the yard proper — far enough from the open door that you can speak without the room hearing, close enough that anyone inside watching will read it as a welcome. He is muddier than you expected, the eastern path having given him the full treatment of a wet spring morning, and his chord-staff is flecked at the base with dark loam. He stops when he sees you coming and holds.\n\n\"Room's been sitting with a question since midmorning,\" you say, keeping your voice low and even. \"Five elders. Dresh leads — she prefers plain speech, and she'll get it. The scope is already on the table. What they don't yet have is the Heights-side witness.\" You let that land. \"You go first. The memory glass comes second.\"\n\nHe takes that in with the same deliberate economy he showed you on the gateline. One small nod — not agreement, exactly, but the specific acknowledgment of a man who has been rehearsing his four seconds for three springs and is ready to stop rehearsing. His eyes move past your shoulder to the open common house door, to the warm coallight and the edge of the long table visible through it, and something in the set of his jaw eases fractionally.\n\n\"Plain speech,\" he says. \"I can do plain speech.\" He shifts the chord-staff to his off hand and follows you toward the door. Behind you, you hear Pell's rope coil settle against her forearm — a sound like a decision being made."
+      },
+      {
+        "summary": "Usnea walks the tuning-warden into the common house and hands him the floor with a single sentence.",
+        "narration": "You turn with him toward the open door, and the three of you — warden, Pell a half-step behind, Aevi a faint constellation at your shoulder — cross the threshold together. The coallight is warmer than the yard. The long table comes into full view: Mara's steady hands, Dresh's flat palms, Brynjar's settled weight, Holloway's eyes already lifting from the seedling. The two unrecognized elders have turned as one.\n\nYou step to the near end of the table and stop. One breath. Then, simply: \"This is the tuning-warden of the lower terrace gateline. He was there. Three springs ago — before the contamination, before any of this was a question — he saw the six-count light from inside the stone. He's come from the Heights to say so plainly.\"\n\nThat's all. You move two steps left and stop, opening the floor like a door being unlatched. The warden comes forward. He sets his chord-staff against the wall with care — the dark loam at its base leaves a faint smear on the plaster — and he looks at Dresh first, as someone who has been told who leads, and he begins.\n\nAevi brightens half a degree at your shoulder — not enough to draw eyes, just enough that you feel it — and goes very still."
       }
     ],
     "lastTurn": {
-      "narration": "You step away from the wall as the tuning-warden clears the apple trees, moving to meet him in the lane before the yard proper — far enough from the open door that you can speak without the room hearing, close enough that anyone inside watching will read it as a welcome. He is muddier than you expected, the eastern path having given him the full treatment of a wet spring morning, and his chord-staff is flecked at the base with dark loam. He stops when he sees you coming and holds.\n\n\"Room's been sitting with a question since midmorning,\" you say, keeping your voice low and even. \"Five elders. Dresh leads — she prefers plain speech, and she'll get it. The scope is already on the table. What they don't yet have is the Heights-side witness.\" You let that land. \"You go first. The memory glass comes second.\"\n\nHe takes that in with the same deliberate economy he showed you on the gateline. One small nod — not agreement, exactly, but the specific acknowledgment of a man who has been rehearsing his four seconds for three springs and is ready to stop rehearsing. His eyes move past your shoulder to the open common house door, to the warm coallight and the edge of the long table visible through it, and something in the set of his jaw eases fractionally.\n\n\"Plain speech,\" he says. \"I can do plain speech.\" He shifts the chord-staff to his off hand and follows you toward the door. Behind you, you hear Pell's rope coil settle against her forearm — a sound like a decision being made.",
-      "sceneSummary": "Usnea receives the tuning-warden at the apple trees and names the room's state plainly; he is prepared and ready to testify.",
+      "narration": "You turn with him toward the open door, and the three of you — warden, Pell a half-step behind, Aevi a faint constellation at your shoulder — cross the threshold together. The coallight is warmer than the yard. The long table comes into full view: Mara's steady hands, Dresh's flat palms, Brynjar's settled weight, Holloway's eyes already lifting from the seedling. The two unrecognized elders have turned as one.\n\nYou step to the near end of the table and stop. One breath. Then, simply: \"This is the tuning-warden of the lower terrace gateline. He was there. Three springs ago — before the contamination, before any of this was a question — he saw the six-count light from inside the stone. He's come from the Heights to say so plainly.\"\n\nThat's all. You move two steps left and stop, opening the floor like a door being unlatched. The warden comes forward. He sets his chord-staff against the wall with care — the dark loam at its base leaves a faint smear on the plaster — and he looks at Dresh first, as someone who has been told who leads, and he begins.\n\nAevi brightens half a degree at your shoulder — not enough to draw eyes, just enough that you feel it — and goes very still.",
+      "sceneSummary": "Usnea walks the tuning-warden into the common house and hands him the floor with a single sentence.",
       "choices": [
         {
-          "label": "Walk him in and introduce him to the room with a single sentence — his name, his post, why he's here — then step back and give him the floor entirely.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
+          "label": "Hold still and listen — let the warden's testimony run without any intervention from you. Watch the elders' faces for what his words land on.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.7,
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
+            "observe",
             "careful",
-            "help"
+            "patient"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -392,13 +400,17 @@
           "emergenceId": null
         },
         {
-          "label": "Before entering, spend a moment to check on Pell — read whether she's ready to let the warden's presence move her arithmetic, or still holding.",
-          "attribute": "social",
+          "label": "Use Prism Sight to read the room as he speaks — catch what shifts in the faces around the table, whose light-flush changes at which word.",
+          "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.8,
+            "mechanical_spiritual": 0.2
+          },
           "difficulty": 15,
           "intentTags": [
-            "scout",
+            "study",
+            "read",
             "careful"
           ],
           "abilityId": "prism_sight",
@@ -408,14 +420,18 @@
           "emergenceId": null
         },
         {
-          "label": "Walk him in quietly — no introduction, no framing. Let the room read his muddy boots and his chord-staff and arrive at their own conclusions before he speaks.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Watch Pell specifically — she is still running her arithmetic. Her read of the warden's testimony will tell you whether Sela's call is closer or further away.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "chaos_order": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "plan"
+            "observe",
+            "scout",
+            "patient"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -424,18 +440,22 @@
           "emergenceId": null
         },
         {
-          "label": "Ask him quietly, before you go in — whether the gate-senior knows what he's about to name, or only that he's been granted leave to testify.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "label": "When the warden finishes, before the room can exhale and scatter, bring the memory glass to the table — Dresh called for it second, and the moment to place it will be exact.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "chaos_order": 0.6,
+            "falsehood_truth": 0.6
+          },
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "plan"
+            "plan",
+            "careful",
+            "deliberate"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -453,60 +473,60 @@
         {
           "op": "progress",
           "questId": "contamination-evidence-for-the-elders",
-          "note": "Tuning-warden received at the apple trees, briefed on the room's state — prepared to testify. The final witness sequence is now stepping through the door."
+          "title": "Evidence for the Elders",
+          "note": "Tuning-warden introduced and handed the floor — Heights-side testimony now underway. Memory glass remains in Usnea's keeping, to be placed second."
         }
       ],
       "scene": {
-        "setting": "Millbrook common house yard — cold pale spring morning, packed-earth yard, low stone wall at the eastern edge; the tuning-warden now beside Usnea at the yard's threshold, turning toward the open common house door; warm coallight and the long table visible through the gap.",
+        "setting": "Millbrook common house interior — coallit, long table at center; warden standing at the near end, chord-staff against the wall, addressing Dresh and the assembled elders. Usnea two steps left of where she stood, having yielded the floor.",
         "npcsPresent": [
           {
             "name": "Tuning-warden (gateline)",
-            "state": "Chord-staff shifted to off hand, jaw fractionally eased — briefed and moving toward the door with Usnea."
+            "state": "Standing at the table's near end, eyes on Dresh — speaking plainly, beginning his testimony."
           },
           {
             "name": "Pell",
-            "state": "Half-step behind, rope coil settled against forearm — arithmetic shifting; reading the warden's composure."
+            "state": "Just inside the threshold, rope coil against her forearm — arithmetic still running, watching the warden with full attention."
           },
           {
             "name": "Mara Wells",
-            "state": "Inside at the common house table — thread held, watching the doorway."
+            "state": "At the table — thread held; watching the warden with the particular patience of someone who has been waiting for this moment a long time."
           },
           {
             "name": "Councilor Dresh",
-            "state": "Inside, hands flat on the table — waiting for the sequence to begin."
+            "state": "Hands flat on the table, eyes on the warden — listening."
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "Inside at the table's near corner, palms down — settled."
+            "state": "At the table's near corner, palms down, settled — warden's words mapping onto his own marker-find."
           },
           {
             "name": "Holloway",
-            "state": "Inside — eyes drifting between the seedling and the doorway now."
+            "state": "Eyes up from the seedling, on the warden — listening with the particular attention of someone who has already named their own fear aloud."
           },
           {
             "name": "Renn",
-            "state": "Inside — jaw reset, waiting."
+            "state": "Jaw reset, watching the warden — waiting."
           },
           {
             "name": "Two unrecognized elders",
-            "state": "Inside — both turned toward the doorway, sensing the arrival."
+            "state": "Both turned toward the warden, fully attending."
           }
         ],
         "objects": [
-          "Low stone wall at the yard's eastern edge",
-          "Common house door — open, warm coallight beyond",
-          "Long common house table inside — pale seedling, glass vial, crystalline residue pinch in sequence",
-          "Orla's Memory Glass — in Usnea's keeping, not yet placed on the table",
+          "Long common house table — pale seedling, glass vial, crystalline residue pinch laid in sequence",
+          "Orla's Memory Glass — in Usnea's keeping, not yet placed",
+          "Tuning-warden's chord-staff — leaned against the wall, dark loam at the base leaving a faint smear on the plaster",
           "Waterskin — at Usnea's hip",
-          "Aevi — at Usnea's shoulder, dimmed to firefly-flicker in the daylight",
-          "Tuning-warden's chord-staff — flecked with dark loam at the base, shifted to his off hand"
+          "Aevi — at Usnea's shoulder, brightened half a degree, very still",
+          "Coalfire — warm light, steady"
         ],
         "threads": [
-          "Tuning-warden is prepared and at the threshold — the testimony sequence is about to begin",
-          "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden's testimony",
-          "Pell's arithmetic shifting — reading the warden's composure, rope coil settled",
-          "Dresh's reach-vs-reach-for question still the room's shared frame",
-          "Holloway's fear of system awareness sitting alongside Brynjar's marker-find"
+          "Tuning-warden's testimony is underway — Heights-side pattern witness, three springs ago, six-count light from inside the stone",
+          "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden finishes",
+          "Pell's arithmetic still running — her read of the testimony will determine whether Sela's call comes closer",
+          "Dresh's reach-vs-reach-for question remains the room's shared frame — the warden's testimony speaks directly to pattern, not named actor",
+          "Holloway's fear of system awareness sitting in the room alongside Brynjar's marker-find"
         ]
       },
       "npcUpdates": [
@@ -514,41 +534,58 @@
           "op": "update",
           "npcId": "tuning-warden-gateline",
           "name": "Tuning-warden (gateline)",
-          "note": "Received by Usnea at the apple trees — briefed on room state, sequence, and Dresh's preference for plain speech. Accepted the briefing with a single nod. Named 'plain speech' in his own voice. Chord-staff shifted to off hand; following Usnea to the door.",
+          "role": "Gateline warden, Lower Terrace, Harmonic Heights",
+          "note": "Introduced by Usnea with a single sentence — name, post, what he witnessed — then given the floor entirely. Chord-staff set against the wall. Now speaking directly to Dresh.",
           "learned": [
-            "Room has been sitting with Dresh's reach-vs-reach-for question since midmorning",
-            "He testifies first; memory glass second",
-            "Dresh leads and prefers plain speech"
+            "Received a plain one-sentence introduction and immediately began testimony — no hesitation at the handoff"
           ],
           "skillsObserved": [
-            "calm reception of a briefing under pressure",
-            "self-composure at the point of commitment"
+            "clean acceptance of a handoff under a full room's attention"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the Millbrook common house yard threshold — briefed, prepared, moving to testify."
+          "statusNote": "Standing at the Millbrook common house table, delivering Heights-side pattern testimony to the assembled elders."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Rope coil settled against forearm at the sound of the warden's plain 'I can do plain speech' — a sound Usnea reads as a decision being made. Arithmetic visibly shifting.",
+          "role": "Cord-and-hemp seller, east market; Sela's mother",
+          "note": "Crossed the threshold with the warden and Usnea — now just inside the door, rope coil against her forearm, watching the warden's testimony with full arithmetic running.",
           "learned": [
-            "Tuning-warden is composed and prepared — not uncertain or hesitant"
+            "Crossed into the common house proper for the first time — the threshold condition is being tested by the testimony itself"
           ],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the common house yard threshold — rope coil settled, arithmetic shifting as she reads the warden's composure."
+          "statusNote": "Just inside the common house threshold, watching the tuning-warden's testimony — Sela's call forward contingent on this moment landing right."
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Millbrook water-policy coordinator and elder",
+          "note": "Watched the warden cross the threshold and take the floor — thread held, sequence alive.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — watching the tuning-warden's testimony with patient attention."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The tuning-warden has been formally introduced to the Millbrook elder panel and is delivering Heights-side testimony — the final witness sequence is now fully underway in the common house.",
+          "subjectId": "tuning-warden-gateline"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Tuning-warden received and briefed by Usnea at the apple trees — the final witness sequence stepped to the common house threshold on Day 10 midday.",
+          "note": "Tuning-warden introduced and given the floor at the common house table — Day 10 afternoon. Heights-side testimony now live. Chord-staff loam-mark on the north wall plaster.",
           "subPlace": {
-            "name": "Common House Yard — Apple Tree Lane",
-            "note": "The point where Usnea met the tuning-warden and named the room's state before walking him in — Day 10 midday.",
+            "name": "Common House Table — Elder Presentation",
+            "note": "Tuning-warden now standing at the near end, delivering testimony to Dresh and the assembled elders — Day 10 afternoon.",
             "visited": true
           }
         }
@@ -558,13 +595,13 @@
           "topic": "contamination-evidence-for-the-elders",
           "label": "Evidence for the Elders",
           "kind": "event",
-          "fact": "Day 10 midday: Usnea received the tuning-warden at the apple trees and named the room's state in one sentence — scope on the table, Dresh leading, plain speech required, warden first. He accepted the briefing and named 'plain speech' in his own voice before following Usnea to the door. The final witness sequence is now at the threshold.",
+          "fact": "Day 10 afternoon: Usnea introduced the tuning-warden with a single sentence and stepped back — Heights-side testimony now underway at the common house table. Memory glass waits second.",
           "links": [
             "tuning-warden-gateline",
+            "orlas-memory-glass-the-ford-record",
             "mara-wells",
             "millbrook",
-            "the-six-fold-pattern",
-            "orlas-memory-glass-the-ford-record"
+            "the-six-fold-pattern"
           ]
         }
       ],
@@ -572,63 +609,62 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house yard — cold pale spring morning, packed-earth yard, low stone wall at the eastern edge; the tuning-warden now beside Usnea at the yard's threshold, turning toward the open common house door; warm coallight and the long table visible through the gap.",
+      "setting": "Millbrook common house interior — coallit, long table at center; warden standing at the near end, chord-staff against the wall, addressing Dresh and the assembled elders. Usnea two steps left of where she stood, having yielded the floor.",
       "npcsPresent": [
         {
           "name": "Tuning-warden (gateline)",
-          "state": "Chord-staff shifted to off hand, jaw fractionally eased — briefed and moving toward the door with Usnea."
+          "state": "Standing at the table's near end, eyes on Dresh — speaking plainly, beginning his testimony."
         },
         {
           "name": "Pell",
-          "state": "Half-step behind, rope coil settled against forearm — arithmetic shifting; reading the warden's composure."
+          "state": "Just inside the threshold, rope coil against her forearm — arithmetic still running, watching the warden with full atten"
         },
         {
           "name": "Mara Wells",
-          "state": "Inside at the common house table — thread held, watching the doorway."
+          "state": "At the table — thread held; watching the warden with the particular patience of someone who has been waiting for this mo"
         },
         {
           "name": "Councilor Dresh",
-          "state": "Inside, hands flat on the table — waiting for the sequence to begin."
+          "state": "Hands flat on the table, eyes on the warden — listening."
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "Inside at the table's near corner, palms down — settled."
+          "state": "At the table's near corner, palms down, settled — warden's words mapping onto his own marker-find."
         },
         {
           "name": "Holloway",
-          "state": "Inside — eyes drifting between the seedling and the doorway now."
+          "state": "Eyes up from the seedling, on the warden — listening with the particular attention of someone who has already named thei"
         },
         {
           "name": "Renn",
-          "state": "Inside — jaw reset, waiting."
+          "state": "Jaw reset, watching the warden — waiting."
         },
         {
           "name": "Two unrecognized elders",
-          "state": "Inside — both turned toward the doorway, sensing the arrival."
+          "state": "Both turned toward the warden, fully attending."
         }
       ],
       "objects": [
-        "Low stone wall at the yard's eastern edge",
-        "Common house door — open, warm coallight beyond",
-        "Long common house table inside — pale seedling, glass vial, crystalline residue ",
-        "Orla's Memory Glass — in Usnea's keeping, not yet placed on the table",
+        "Long common house table — pale seedling, glass vial, crystalline residue pinch l",
+        "Orla's Memory Glass — in Usnea's keeping, not yet placed",
+        "Tuning-warden's chord-staff — leaned against the wall, dark loam at the base lea",
         "Waterskin — at Usnea's hip",
-        "Aevi — at Usnea's shoulder, dimmed to firefly-flicker in the daylight",
-        "Tuning-warden's chord-staff — flecked with dark loam at the base, shifted to his"
+        "Aevi — at Usnea's shoulder, brightened half a degree, very still",
+        "Coalfire — warm light, steady"
       ],
       "threads": [
-        "Tuning-warden is prepared and at the threshold — the testimony sequence is about to begin",
-        "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden's testimony",
-        "Pell's arithmetic shifting — reading the warden's composure, rope coil settled",
-        "Dresh's reach-vs-reach-for question still the room's shared frame",
-        "Holloway's fear of system awareness sitting alongside Brynjar's marker-find"
+        "Tuning-warden's testimony is underway — Heights-side pattern witness, three springs ago, six-count light from inside the stone",
+        "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden finishes",
+        "Pell's arithmetic still running — her read of the testimony will determine whether Sela's call comes closer",
+        "Dresh's reach-vs-reach-for question remains the room's shared frame — the warden's testimony speaks directly to pattern, not named actor",
+        "Holloway's fear of system awareness sitting in the room alongside Brynjar's marker-find"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -643,14 +679,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Usnea confirmed 'operating' to Dresh and named all three zones of reach — wells, channels, south embankment. Memory glass not yet placed; tuning-warden not yet arrived; Sela not yet called.",
         "Sela call failed — Pell held her door-right; room still processing. Memory glass not yet placed; tuning-warden not yet arrived; Sela on hold until the elders speak.",
         "Dresh names the room's real question aloud — reach vs. reach for. The sequence has a direction now; memory glass and tuning-warden still waiting.",
         "Dresh's reach-vs-reach-for question now belongs to the whole room — the silence drew every elder into it. Orla's glass and the tuning-warden remain; Brynjar's marker-question is primed.",
         "Brynjar named the deliberately placed marker beyond the new pass to the full elder panel — a second axis of deliberate intent now sits alongside the pulse from below. Orla's memory glass and the tunin",
         "Dresh has sequenced the final witnesses — tuning-warden first, then the memory glass. The path to the glass is now formally open.",
         "The tuning-warden has arrived at the common house yard — on time, via the eastern path, mud-booted from the descent. The final witness sequence can now begin.",
-        "Tuning-warden received at the apple trees, briefed on the room's state — prepared to testify. The final witness sequence is now stepping through the door."
+        "Tuning-warden received at the apple trees, briefed on the room's state — prepared to testify. The final witness sequence is now stepping through the door.",
+        "Tuning-warden introduced and handed the floor — Heights-side testimony now underway. Memory glass remains in Usnea's keeping, to be placed second."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -815,7 +851,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d9] Received Usnea's opening nod at the foot of the steps — meeting is now beginning.",
         "[d9] Received Usnea's opening nod and is now climbing the steps into the common house — the presentation is in motion.",
         "[d9] Laid the three evidence items in order — seedling, vial, residue pinch. Standing at the table's near end, opening to begin the testimony sequence.",
         "[d10] Stepped back after introducing physical evidence — handed the floor to Usnea cleanly. Sequence proceeding as planned.",
@@ -824,7 +859,8 @@
         "[d10] Gave a small nod when Dresh named the sequence — the thread is alive again and she is holding the table end.",
         "[d10] Gave a single nod at Usnea's plain hold of the sequence — thread acknowledged, no words needed. Waiting.",
         "[d10] Clocked the failed hearthbinding attempt — eyes moved to Usnea's face with patient, unworried recognition. No comment. Thread still held.",
-        "[d10] Noticed Aevi's brief brightening — registered Usnea's quiet pulse-check without needing it named aloud."
+        "[d10] Noticed Aevi's brief brightening — registered Usnea's quiet pulse-check without needing it named aloud.",
+        "[d10] Watched the warden cross the threshold and take the floor — thread held, sequence alive."
       ],
       "knownFacts": [
         "The common house open room is accessible to any Millbrook resident — Pell could observe before committing Sela",
@@ -849,7 +885,7 @@
         "locationId": "millbrook",
         "day": 10
       },
-      "statusNote": "At the common house table — thread held, sequence alive, waiting for the tuning-warden before noon."
+      "statusNote": "At the common house table — watching the tuning-warden's testimony with patient attention."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -906,7 +942,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d4] Usnea named the pulse and rhythm plainly; warden admitted he saw the light once before, three springs back, before he held this post — the admission cost him something; his gaze mo",
         "[d4] Usnea departed with a deliberate nod — conversation left open, not closed. Warden watching the junction-stone crack as Usnea left.",
         "[d8] Confirmed six-count channel light witnessed three springs ago — four seconds, light from inside the stone, six pulses then a long pause. Before his current post, before the contami",
         "[d8] Agreed to testify Thursday — will name the four seconds, six counts, light from inside the stone, nothing more. Needs gate-senior sanction to leave the gateline; will seek it himse",
@@ -915,28 +950,29 @@
         "[d9] Gate-senior sanction confirmed by morning tone — warden is en route on the eastern path. Expected before noon.",
         "[d10] Expected before noon via the eastern path — Usnea now holding watch from the yard for his arrival.",
         "[d10] Arrived at the common house yard on time via the eastern path — muddy-booted from the descent, chord-staff in hand. Gave Usnea one small precise nod at the apple trees: the nod of ",
-        "[d10] Received by Usnea at the apple trees — briefed on room state, sequence, and Dresh's preference for plain speech. Accepted the briefing with a single nod. Named 'plain speech' in hi"
+        "[d10] Received by Usnea at the apple trees — briefed on room state, sequence, and Dresh's preference for plain speech. Accepted the briefing with a single nod. Named 'plain speech' in hi",
+        "[d10] Introduced by Usnea with a single sentence — name, post, what he witnessed — then given the floor entirely. Chord-staff set against the wall. Now speaking directly to Dresh."
       ],
       "knownFacts": [
-        "Will seek gate-senior sanction before morning review on Thursday",
         "Plans to walk the eastern path — approximately two hours to Millbrook",
         "Will send word by morning tone if sanction is denied",
         "Gate-senior granted sanction — warden cleared to testify Thursday",
         "Arrived alone from the eastern path, on schedule, in good order",
         "Room has been sitting with Dresh's reach-vs-reach-for question since midmorning",
         "He testifies first; memory glass second",
-        "Dresh leads and prefers plain speech"
+        "Dresh leads and prefers plain speech",
+        "Received a plain one-sentence introduction and immediately began testimony — no hesitation at the handoff"
       ],
       "skillsObserved": [
-        "deliberate commitment once decision is made",
         "precise unembellished recall under no pressure",
         "precise logistical commitment under no pressure",
         "reliable commitment — arrived exactly as promised",
         "calm reception of a briefing under pressure",
-        "self-composure at the point of commitment"
+        "self-composure at the point of commitment",
+        "clean acceptance of a handoff under a full room's attention"
       ],
       "status": "active",
-      "statusNote": "At the Millbrook common house yard threshold — briefed, prepared, moving to testify.",
+      "statusNote": "Standing at the Millbrook common house table, delivering Heights-side pattern testimony to the assembled elders.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -953,7 +989,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d10] Hand went flat on the rope coil during the demonstration — fingers spread. Watching Aevi directly, not the room.",
         "[d10] Hand flat on the rope coil, fingers spread — quietly connecting Sela's six-count tap on the dock plank to the rhythm Aevi just demonstrated above the residue pinch. The arithmetic ",
         "[d10] Refused to send Sela forward — read the room as still-processing, not ready. Closed the door gently but firmly. Invoked her held right exactly as promised.",
         "[d10] Fingers separated on the rope coil after Dresh's question — the grip has eased slightly without her moving from the threshold.",
@@ -962,17 +997,18 @@
         "[d10] Rope coil settled against her forearm — still at the threshold, arithmetic ongoing.",
         "[d10] Neither fully inside nor out — holding parallel watch on the eastern lane with Usnea. No words exchanged; the shared attention is its own communication.",
         "[d10] Stood parallel watch with Usnea in silence — rope coil shifting from arm to arm the only sound between them. Now reading the warden's arrival from a half-step back.",
-        "[d10] Rope coil settled against forearm at the sound of the warden's plain 'I can do plain speech' — a sound Usnea reads as a decision being made. Arithmetic visibly shifting."
+        "[d10] Rope coil settled against forearm at the sound of the warden's plain 'I can do plain speech' — a sound Usnea reads as a decision being made. Arithmetic visibly shifting.",
+        "[d10] Crossed the threshold with the warden and Usnea — now just inside the door, rope coil against her forearm, watching the warden's testimony with full arithmetic running."
       ],
       "knownFacts": [
-        "The six-fold count is the same rhythm Sela has been hearing — confirmed visibly in the room",
         "The six-fold count Aevi demonstrated is the same rhythm Sela has been tapping since the water turned gray — Pell is making this connection in real time",
         "The room's silence after 'operating' reads as absorption, not acceptance — she distinguishes between the two and acted on the difference",
         "Dresh's framing of 'reach for' has given shape to something Pell has been feeling since Sela first described the pulse",
         "The room is doing something with the question without being pushed — she is reading whether this is absorption or readiness",
         "A deliberately placed marker was found beyond the new mountain pass — the deliberate intent question is larger than the village water",
         "Tuning-warden has arrived on time — the sequence is live",
-        "Tuning-warden is composed and prepared — not uncertain or hesitant"
+        "Tuning-warden is composed and prepared — not uncertain or hesitant",
+        "Crossed into the common house proper for the first time — the threshold condition is being tested by the testimony itself"
       ],
       "skillsObserved": [
         "testing information by repeating it",
@@ -983,7 +1019,7 @@
         "holding a condition under pressure without hostility"
       ],
       "status": "active",
-      "statusNote": "At the common house yard threshold — rope coil settled, arithmetic shifting as she reads the warden's composure.",
+      "statusNote": "Just inside the common house threshold, watching the tuning-warden's testimony — Sela's call forward contingent on this moment landing right.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 10
@@ -1172,7 +1208,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d10] Usnea's testimony delivered at the common house table — seep, geometry, lattice-count, Aevi's assessment named plainly to the full elder panel. The word 'deliberate' spoken aloud in this room.",
         "[d10] Aevi completed three visible cycles of the six-fold count above the residue pinch at the common house table — every elder present witnessed it. Dresh spoke 'operating' aloud. This room now holds that ",
         "[d10] Day 10: Usnea confirmed 'operating' to Dresh and named all three water-system zones as inside the system's reach — this scope is now public record in the common house.",
         "[d10] Sequence paused at the threshold — Pell held her door-right; Sela's call deferred. The room is waiting for an elder to speak before the testimony sequence can resume.",
@@ -1183,7 +1218,8 @@
         "[d10] Day 10: Usnea quietly confirmed via Old Roads that the six-fold pulse is stable and unchanged beneath the common house floor during the elder session wait — system holding its operational state.",
         "[d10] Usnea stepped out to the common house yard to hold watch on the eastern lane — established as the arrival point for the tuning-warden, sightline running between the two oldest apple trees.",
         "[d10] Tuning-warden arrived at the yard's eastern lane via the apple trees — Day 10 midday. The final witness sequence is now live in this yard.",
-        "[d10] Tuning-warden received and briefed by Usnea at the apple trees — the final witness sequence stepped to the common house threshold on Day 10 midday."
+        "[d10] Tuning-warden received and briefed by Usnea at the apple trees — the final witness sequence stepped to the common house threshold on Day 10 midday.",
+        "[d10] Tuning-warden introduced and given the floor at the common house table — Day 10 afternoon. Heights-side testimony now live. Chord-staff loam-mark on the north wall plaster."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1275,7 +1311,7 @@
           "name": "Common House Table — Elder Presentation",
           "day": 9,
           "visited": true,
-          "note": "Six-fold pulse confirmed steady beneath the floor via quiet Old Roads read — Day 10 morning, during the wait for the tun"
+          "note": "Tuning-warden now standing at the near end, delivering testimony to Dresh and the assembled elders — Day 10 afternoon."
         }
       }
     },
@@ -1627,7 +1663,6 @@
         "label": "Evidence for the Elders",
         "kind": "event",
         "facts": [
-          "[d6] Day 6 morning: all witnesses and evidence now confirmed for Thursday — seedling, vial, residue pinch, Usnea's testimony, Aevi's reading, six-fold pattern, and Sela's live demonstration. Pell holds vet",
           "[d8] Thursday witness list now includes the tuning-warden — Heights-side testimony secured. The evidence sequence spans valley floor, Radiant Plateau, and Harmonic Heights.",
           "[d8] Day 8 evening: all witnesses and evidence confirmed and relayed to Mara Wells. The sequence is complete — seedling, vial, residue, Usnea's testimony, Aevi's reading, six-fold pattern, the tuning-warde",
           "[d9] Thursday: gate-senior sanction confirmed by morning tone — tuning-warden en route. All witnesses and evidence intact. Dresh inside since dawn. Meeting opens on Usnea's readiness.",
@@ -1638,7 +1673,8 @@
           "[d10] Day 10: Usnea held silence after Dresh's reach-vs-reach-for question — the room absorbed it collectively; Brynjar primed for his marker-question, Pell's grip eased, Holloway turned inward. The questio",
           "[d10] Day 10: Dresh sequenced the final witnesses — tuning-warden first (Heights-side pattern), then the memory glass (named actor). Her reason: let the room hold both before it looks at a face. The testimo",
           "[d10] Day 10 midday: The tuning-warden arrived at the Millbrook common house yard on schedule via the eastern path — muddy-booted, chord-staff in hand. The final witness sequence is now live.",
-          "[d10] Day 10 midday: Usnea received the tuning-warden at the apple trees and named the room's state in one sentence — scope on the table, Dresh leading, plain speech required, warden first. He accepted the "
+          "[d10] Day 10 midday: Usnea received the tuning-warden at the apple trees and named the room's state in one sentence — scope on the table, Dresh leading, plain speech required, warden first. He accepted the ",
+          "[d10] Day 10 afternoon: Usnea introduced the tuning-warden with a single sentence and stepped back — Heights-side testimony now underway at the common house table. Memory glass waits second."
         ],
         "links": [
           "tuning-warden-gateline",
@@ -2460,12 +2496,6 @@
   },
   "establishedFacts": [
     {
-      "id": "f16",
-      "text": "Day 6 morning circuit: the six-fold pulse is confirmed stable, settled, and non-expanding throughout Millbrook — wells, channels, south embankment loam. The system has reached its apparent operational",
-      "day": 6,
-      "subjectId": null
-    },
-    {
       "id": "orla",
       "text": "Orla the optics-weaver pulled a memory glass from the ford-side boulder three days ago and has deliberately withheld it from the Radiant council — she believes it shows evidence that a Radiant filtrat",
       "day": 6,
@@ -2698,6 +2728,12 @@
       "text": "The tuning-warden arrived at Millbrook common house yard before noon on Thursday — via the eastern path, on time, alone. The final witness sequence is now live.",
       "day": 10,
       "subjectId": "tuning-warden"
+    },
+    {
+      "id": "tuning-warden-gateline",
+      "text": "The tuning-warden has been formally introduced to the Millbrook elder panel and is delivering Heights-side testimony — the final witness sequence is now fully underway in the common house.",
+      "day": 10,
+      "subjectId": "tuning-warden-gateline"
     }
   ],
   "precursorAccess": [],

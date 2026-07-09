@@ -107,6 +107,38 @@
         "SOCIAL": 2,
         "PUZZLE": 1
       }
+    },
+    {
+      "id": "the_turning_word",
+      "name": "The Turning Word",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "social",
+      "axes": {
+        "emotional_logical": -0.2
+      },
+      "functions": [
+        "bind",
+        "reveal",
+        "heal"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "DUEL": 1
+      },
+      "narrationHints": "The room turns — a crowd, a court, a mob — moved as one by the exact true thing said the exact right way.",
+      "description": "The social capstone: move a whole gathering at once — turn a hostile crowd, sway a council, stop a mob — by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
+      "notFor": "Individual mind-control; moving those with no shared feeling or reason; forcing against a set will.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Turning Word",
+          "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
+          "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move."
+        }
+      ],
+      "powerSystem": "reach_emotional_logical",
+      "gated": "learned"
     }
   ]
 }

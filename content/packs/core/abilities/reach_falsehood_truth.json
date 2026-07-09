@@ -47,7 +47,15 @@
         "STEALTH",
         "SOCIAL",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "INVESTIGATE": 2,
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "verity",
@@ -92,7 +100,15 @@
         "SOCIAL",
         "INVESTIGATE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "FIGHT": 2,
+        "PUZZLE": 2,
+        "DUEL": 2,
+        "SOCIAL": 2,
+        "CHASE": 1
+      }
     }
   ]
 }

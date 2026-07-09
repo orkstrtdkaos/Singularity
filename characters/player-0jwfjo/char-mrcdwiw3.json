@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "survivalist",
   "level": 1,
-  "xp": 44,
+  "xp": 47,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -21,14 +21,14 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.20940572959843257,
+    "spectrumId": -0.21393544311851093,
     "concrete_abstract": -0.025
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 52,
+  "energy": 47,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -216,77 +216,89 @@
       {
         "summary": "Brynjar lays out the full picture; Mara connects the downstream boot prints to the pre-dawn lane passage and asks where the unknown traveler came from.",
         "narration": "You pick up the bowl finally — something to do with your hands — and lay it all out in order, the way you'd read a river: upstream to downstream, source to mouth. The Venn girl on the stock trail, headed for the fold above the high pasture fence. The gray soil she mentioned unprompted, coming up mineral above the fence line. The second boot prints you found in the mud below the alder bend — smaller heel, fresher than hers, running downstream. And then the heavy boots the common house apprentice heard on the wayhouse lane around second watch this morning, heavier than a farmer's step, not stopping inside.\n\nMara lets you finish without interrupting. Her hands stay flat on the counter but her weight shifts slightly forward by the end — a small thing, but you notice it. She's quiet for a moment, working through the sequence. Usnea is still at your shoulder, coat cold from the lane, saying nothing.\n\n\"Two sets of feet,\" Mara says at last. Her voice is flat and precise, the river-note in it stronger than usual. \"The girl goes up to her fold — that's known, that's regular. Someone else comes down. And by second watch they're walking this lane.\" She lifts one hand from the wood and taps the counter once, not agitated, just marking the count. \"That's not a farmer checking irrigation. That's someone who went up into the upper east fork — past the fence — and came back before dawn and didn't stop to knock on a single door.\"\n\nShe moves then, pulling the pot of porridge off the hearth hook and setting a second bowl in front of Usnea without being asked. \"Eat. Both of you.\" It isn't hospitality exactly — it's buying herself a moment to think out loud. \"The soil going gray above the fence, the point source you read — whatever is up there, someone's been to see it already. The question I'm sitting with now is whether they came from inside the valley or from the other side of the pass.\" She looks at you directly. \"You're the one who walked that trail. What did the prints tell you about direction of travel?\""
+      },
+      {
+        "summary": "Brynjar's trail-read confirms the prints came from above the high pasture fence — out of the Disputed Zone — but the exact origin distance stays uncertain.",
+        "narration": "You set the bowl down and close your eyes for a moment — not long, just long enough to walk the trail back in your mind. Heel depth in the clay below the alder bend. Stride length, the way the tread bit in on the inside edge. Mud displacement heavier on the toe than the heel, which means downhill pace, weight carried forward.\n\nThe prints were moving fast. Not panicked, but purposeful — someone who wanted ground behind them before the village woke. The heel depth tells you something too: those boots had weight in them, or the person wearing them was carrying a load. Either way, the mud said they'd come a distance before they hit the trail near the alder bend.\n\n\"They came from above the fence,\" you tell Mara. \"I'd stake my reading on the direction — downhill stride, toe-heavy displacement, moving at pace. But I can't tell you how far above. I picked them up below the alder bend. Whether they started at the fence line or two ridges past it—\" you shake your head. \"That part I didn't read closely enough.\"\n\nMara is still for a moment. Then she straightens from the counter and looks past you toward the half-shut lane door, as though she can see the road all the way to the pass from here. \"Above the fence is the Disputed Zone,\" she says, flat and plain. \"Below the fence is Venn land.\" She lets that sit — the math is not complicated. The Venn girl uses this trail, but she was heading *up*, not down, when you met her. Those second prints were already there. \"Someone came out of the Zone before second watch and walked my lane without knocking.\" Usnea hasn't spoken yet, and the room is holding its breath around the three of you."
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the bowl finally — something to do with your hands — and lay it all out in order, the way you'd read a river: upstream to downstream, source to mouth. The Venn girl on the stock trail, headed for the fold above the high pasture fence. The gray soil she mentioned unprompted, coming up mineral above the fence line. The second boot prints you found in the mud below the alder bend — smaller heel, fresher than hers, running downstream. And then the heavy boots the common house apprentice heard on the wayhouse lane around second watch this morning, heavier than a farmer's step, not stopping inside.\n\nMara lets you finish without interrupting. Her hands stay flat on the counter but her weight shifts slightly forward by the end — a small thing, but you notice it. She's quiet for a moment, working through the sequence. Usnea is still at your shoulder, coat cold from the lane, saying nothing.\n\n\"Two sets of feet,\" Mara says at last. Her voice is flat and precise, the river-note in it stronger than usual. \"The girl goes up to her fold — that's known, that's regular. Someone else comes down. And by second watch they're walking this lane.\" She lifts one hand from the wood and taps the counter once, not agitated, just marking the count. \"That's not a farmer checking irrigation. That's someone who went up into the upper east fork — past the fence — and came back before dawn and didn't stop to knock on a single door.\"\n\nShe moves then, pulling the pot of porridge off the hearth hook and setting a second bowl in front of Usnea without being asked. \"Eat. Both of you.\" It isn't hospitality exactly — it's buying herself a moment to think out loud. \"The soil going gray above the fence, the point source you read — whatever is up there, someone's been to see it already. The question I'm sitting with now is whether they came from inside the valley or from the other side of the pass.\" She looks at you directly. \"You're the one who walked that trail. What did the prints tell you about direction of travel?\"",
-      "sceneSummary": "Brynjar lays out the full picture; Mara connects the downstream boot prints to the pre-dawn lane passage and asks where the unknown traveler came from.",
+      "narration": "You set the bowl down and close your eyes for a moment — not long, just long enough to walk the trail back in your mind. Heel depth in the clay below the alder bend. Stride length, the way the tread bit in on the inside edge. Mud displacement heavier on the toe than the heel, which means downhill pace, weight carried forward.\n\nThe prints were moving fast. Not panicked, but purposeful — someone who wanted ground behind them before the village woke. The heel depth tells you something too: those boots had weight in them, or the person wearing them was carrying a load. Either way, the mud said they'd come a distance before they hit the trail near the alder bend.\n\n\"They came from above the fence,\" you tell Mara. \"I'd stake my reading on the direction — downhill stride, toe-heavy displacement, moving at pace. But I can't tell you how far above. I picked them up below the alder bend. Whether they started at the fence line or two ridges past it—\" you shake your head. \"That part I didn't read closely enough.\"\n\nMara is still for a moment. Then she straightens from the counter and looks past you toward the half-shut lane door, as though she can see the road all the way to the pass from here. \"Above the fence is the Disputed Zone,\" she says, flat and plain. \"Below the fence is Venn land.\" She lets that sit — the math is not complicated. The Venn girl uses this trail, but she was heading *up*, not down, when you met her. Those second prints were already there. \"Someone came out of the Zone before second watch and walked my lane without knocking.\" Usnea hasn't spoken yet, and the room is holding its breath around the three of you.",
+      "sceneSummary": "Brynjar's trail-read confirms the prints came from above the high pasture fence — out of the Disputed Zone — but the exact origin distance stays uncertain.",
       "choices": [
         {
-          "label": "Read the trail from memory — heel depth, stride length, mud displacement — and give Mara your best read on whether those prints came from above the fence or below it",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Mara directly: has anyone from outside the valley passed through Millbrook recently — someone she'd remember?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "spectrumId": -0.3
+            "violence_peace": 0.7,
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "ask",
+            "probe",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Suggest going back up the trail today — follow those prints to their origin before the next rain wipes them",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "violence_peace": 0.5,
+            "concrete_abstract": -0.5
           },
           "difficulty": 15,
           "intentTags": [
-            "study",
+            "plan",
+            "scout",
             "careful"
           ],
-          "abilityId": "rivercraft",
-          "energyCost": 5,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell her you can't say for certain from memory — but propose going back up the trail now, before rain or foot traffic obscures the prints further",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "spectrumId": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara who in the valley would have reason to go up past the fence and stay quiet about it — she's been watching this longer than anyone",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Name the pass directly — ask if she's heard anything about the new route opening, or whether anyone local has talked about crossing it",
+          "label": "Ask if anyone in Millbrook knows the Disputed Zone well enough to say what's up there above the fence — a local guide, an elder, an old trapper",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "spectrumId": 0
+            "violence_peace": 0.6,
+            "concrete_abstract": -0.2
           },
           "difficulty": 0,
           "intentTags": [
+            "ask",
+            "scout",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Eat the porridge and let the silence hold — sometimes the person with the most information fills it themselves",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "violence_peace": 0.8,
+            "concrete_abstract": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "wait",
             "study",
-            "plan"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -308,34 +320,36 @@
         {
           "op": "progress",
           "questId": "east-fork-run",
-          "note": "Mara connects the downstream prints to the pre-dawn lane passage — someone went past the high pasture fence and returned before dawn without speaking to anyone. She raises the question of whether they came from inside the valley or from the other side of the new mountain pass."
+          "title": "East Fork at First Light",
+          "note": "Trail-read confirms the second boot prints came from above the high pasture fence — out of the Disputed Zone — though exact origin distance is uncertain. Mara has now named the implication aloud: someone came out of the Zone before second watch and walked her lane without stopping.",
+          "xpReward": 25
         }
       ],
       "scene": {
-        "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut behind Brynjar and Usnea.",
+        "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing behind the counter, porridge pot set back from the hook, hands returning to the wood — has just voiced the connection between the downstream prints and the pre-dawn lane passage, and asked Brynjar what direction the prints came from."
+            "state": "Standing behind the counter, eyes on the half-shut lane door — processing the implication that the prints came from the Disputed Zone."
           },
           {
             "name": "Usnea Beard",
-            "state": "At the counter beside Brynjar, a bowl of porridge now in front of them, listening."
+            "state": "At the counter beside Brynjar, bowl in front of them, holding the silence."
           }
         ],
         "objects": [
           "Banked hearth with active fire",
           "Pot of oat porridge returned to hearth-side",
-          "Two bowls on the counter — Brynjar's accepted and in hand, Usnea's just set out",
+          "Two bowls on the counter — Brynjar's set down, Usnea's in front of them",
           "Common room benches and long table",
           "The lane visible through the half-shut door"
         ],
         "threads": [
-          "Mara has asked what direction the second boot prints indicate — inside the valley or from beyond the pass",
-          "Heavy boots on the lane at second watch — Mara has now connected this to the downstream prints",
+          "Mara has just named the implication aloud: someone came out of the Disputed Zone before second watch and walked her lane without stopping",
+          "Exact origin of the unknown prints above the fence — uncertain, unresolved",
           "Dark-coated figure seen on river road two days ago — still unresolved",
           "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream",
-          "Whether the unknown traveler came from past the new mountain pass — newly raised question"
+          "Whether the unknown traveler came from past the new mountain pass — still open"
         ]
       },
       "npcUpdates": [
@@ -344,49 +358,48 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
-          "note": "Received the full picture — Venn girl, gray soil, second prints, heavy boots — and synthesized it immediately: two separate sets of feet, one known regular, one unknown who went past the fence and returned pre-dawn without stopping anywhere. Raised the question of whether the unknown came from inside the valley or from beyond the new pass.",
+          "note": "Received Brynjar's trail-read — confirmed above-the-fence origin — and named the implication plainly: Disputed Zone, before second watch, no knock. She's standing very still now.",
           "learned": [
-            "Heavy boots on the wayhouse lane at second watch are likely connected to the downstream boot prints on the east bank trail",
-            "Someone traveled to the upper east fork — past the high pasture fence — and returned before dawn on day 3 without speaking to anyone in Millbrook",
-            "The unknown traveler may have come from beyond the new mountain pass"
+            "The second boot prints came from above the high pasture fence — Disputed Zone territory — based on Brynjar's trail-read of heel depth and stride",
+            "Exact origin distance above the fence remains uncertain"
           ],
           "skillsObserved": [
-            "rapid synthesis of field intelligence",
-            "pattern recognition across separate observations"
+            "rapid synthesis under pressure",
+            "plain speech under strain"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the wayhouse common room — has connected the downstream prints to the pre-dawn lane passage; now asking Brynjar about the direction those prints came from."
+          "statusNote": "In the wayhouse common room — has just named aloud that the unknown traveler came out of the Disputed Zone before second watch without stopping."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Mara Wells has connected the second downstream boot prints on the east bank trail to the heavy-stepped figure heard on the wayhouse lane at second watch on day 3 — one person, went up past the high pasture fence and returned pre-dawn without stopping at any door. Origin — inside the valley or beyond the new pass — unknown.",
-          "subjectId": null
+          "text": "Brynjar's trail-read establishes the second boot prints came from above the high pasture fence — Disputed Zone territory — based on downhill stride, toe-heavy mud displacement, and purposeful pace. Exact distance above the fence is uncertain.",
+          "subjectId": "east-bank-stock-trail"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Mara has raised aloud the possibility that the unknown traveler came through the new mountain pass rather than from within the valley — this question now sits in the wayhouse.",
+          "note": "Trail-read confirms second boot prints originated from above the high pasture fence (Disputed Zone) — downhill stride, toe-heavy displacement, fast purposeful pace. Exact origin distance unknown.",
           "flag": {
-            "unknown_traveler_origin_raised": "day3-sunrise"
+            "second_prints_origin": "above-fence-disputed-zone",
+            "origin_distance": "uncertain"
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "unknown-traveler",
+          "topic": "the-unknown-traveler",
           "label": "The Unknown Traveler",
           "kind": "mystery",
-          "fact": "Someone — not the Venn shepherd girl — traveled up the east bank stock trail past the high pasture fence and returned before dawn on day 3, passing on the wayhouse lane around second watch without stopping at any door. Mara raises the possibility they came from beyond the new mountain pass rather than from within the valley.",
+          "fact": "Trail-read confirms the second boot prints came from above the high pasture fence — out of the Disputed Zone — based on downhill stride and toe-heavy mud displacement. Exact origin distance is uncertain. Mara has named it plainly: someone came out of the Zone before second watch and walked the wayhouse lane without stopping.",
           "links": [
             "east-bank-stock-trail",
             "high-pasture-fence",
             "echo-river-contamination",
             "east-fork-run",
-            "millbrook",
-            "mara-wells"
+            "disputed-zone"
           ]
         }
       ],
@@ -394,37 +407,37 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut behind Brynjar and Usnea.",
+      "setting": "Millbrook wayhouse interior at sunrise — low-ceilinged common room, fire built up properly, oat porridge on the hearth. Morning light through the east-facing window. Lane-door half-shut.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing behind the counter, porridge pot set back from the hook, hands returning to the wood — has just voiced the conn"
+          "state": "Standing behind the counter, eyes on the half-shut lane door — processing the implication that the prints came from the "
         },
         {
           "name": "Usnea Beard",
-          "state": "At the counter beside Brynjar, a bowl of porridge now in front of them, listening."
+          "state": "At the counter beside Brynjar, bowl in front of them, holding the silence."
         }
       ],
       "objects": [
         "Banked hearth with active fire",
         "Pot of oat porridge returned to hearth-side",
-        "Two bowls on the counter — Brynjar's accepted and in hand, Usnea's just set out",
+        "Two bowls on the counter — Brynjar's set down, Usnea's in front of them",
         "Common room benches and long table",
         "The lane visible through the half-shut door"
       ],
       "threads": [
-        "Mara has asked what direction the second boot prints indicate — inside the valley or from beyond the pass",
-        "Heavy boots on the lane at second watch — Mara has now connected this to the downstream prints",
+        "Mara has just named the implication aloud: someone came out of the Disputed Zone before second watch and walked her lane without stopping",
+        "Exact origin of the unknown prints above the fence — uncertain, unresolved",
         "Dark-coated figure seen on river road two days ago — still unresolved",
         "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream",
-        "Whether the unknown traveler came from past the new mountain pass — newly raised question"
+        "Whether the unknown traveler came from past the new mountain pass — still open"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [],
@@ -437,14 +450,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas",
         "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints",
         "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the f",
         "Brynjar has returned to Millbrook at sunrise with field observations — contamination ribbons stronger and columnar upstream, second unidentified boot prints on the trail, gray soil above the fence con",
         "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke",
         "Heavy boots heard on the wayhouse lane around second watch — nobody entered the common house. Direction and identity still unknown. Mara's meeting about to open.",
         "Brynjar delivered the rivercraft field reading to Mara: point source, columnar ribbons strengthening upstream, fast channel. Second boot prints on the trail running downstream also reported.",
-        "Mara connects the downstream prints to the pre-dawn lane passage — someone went past the high pasture fence and returned before dawn without speaking to anyone. She raises the question of whether they"
+        "Mara connects the downstream prints to the pre-dawn lane passage — someone went past the high pasture fence and returned before dawn without speaking to anyone. She raises the question of whether they",
+        "Trail-read confirms the second boot prints came from above the high pasture fence — out of the Disputed Zone — though exact origin distance is uncertain. Mara has now named the implication aloud: some"
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -468,28 +481,29 @@
         "[d3] Brynjar and Usnea have crossed the lane and entered the wayhouse — Mara is present, fire kept, something cooking; the report is about to begin.",
         "[d3] Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report.",
         "[d3] Received Brynjar's rivercraft reading without interruption — asked one sharp follow-up question (how far up before he turned back). Now aware of the second boot prints on the trail",
-        "[d3] Received the full picture — Venn girl, gray soil, second prints, heavy boots — and synthesized it immediately: two separate sets of feet, one known regular, one unknown who went pa"
+        "[d3] Received the full picture — Venn girl, gray soil, second prints, heavy boots — and synthesized it immediately: two separate sets of feet, one known regular, one unknown who went pa",
+        "[d3] Received Brynjar's trail-read — confirmed above-the-fence origin — and named the implication plainly: Disputed Zone, before second watch, no knock. She's standing very still now."
       ],
       "knownFacts": [
-        "Kept the common room clear of morning traffic — deliberate, not routine",
-        "Wore the same coat as the midnight dock watch; likely slept little or not at all",
         "Contamination ribbons are columnar and tight — point source feeding a fast channel, not a broad seep",
         "Contamination strengthens upstream — source is in the upper east fork",
         "A second set of boot prints runs downstream on the east bank trail — fresher than the upward prints, different heel from the Venn girl",
         "Heavy boots on the wayhouse lane at second watch are likely connected to the downstream boot prints on the east bank trail",
         "Someone traveled to the upper east fork — past the high pasture fence — and returned before dawn on day 3 without speaking to anyone in Millbrook",
-        "The unknown traveler may have come from beyond the new mountain pass"
+        "The unknown traveler may have come from beyond the new mountain pass",
+        "The second boot prints came from above the high pasture fence — Disputed Zone territory — based on Brynjar's trail-read of heel depth and stride",
+        "Exact origin distance above the fence remains uncertain"
       ],
       "skillsObserved": [
-        "practical hospitality",
-        "economy of words",
         "overnight vigil",
         "quiet hospitality as signal",
         "rapid synthesis of field intelligence",
-        "pattern recognition across separate observations"
+        "pattern recognition across separate observations",
+        "rapid synthesis under pressure",
+        "plain speech under strain"
       ],
       "status": "active",
-      "statusNote": "In the wayhouse common room — has connected the downstream prints to the pre-dawn lane passage; now asking Brynjar about the direction those prints came from.",
+      "statusNote": "In the wayhouse common room — has just named aloud that the unknown traveler came out of the Disputed Zone before second watch without stopping.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -649,7 +663,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] High pasture fence ~2 hrs upstream from the first braid: soil above it described as more mineral, coming up gray. A sheep fold exists above the fence — three ewes and a ram unaccounted for since autum",
         "[d2] A second set of boot prints discovered in the trail mud running downstream — smaller heel, fresher than upstream prints, made within the last day or two. Not the east bank traveler's boot.",
         "[d2] A flat packed-earth shelf above the east fork flood line exists approximately ten paces back from the main trail near the alder bend — used as bout ground; root wall on one side.",
         "[d2] Brynjar returned to Millbrook at sunrise via the east bank stock trail and river road — the wayhouse chimney is smoking, the dock is empty, the river still shows gray-green at the village edge.",
@@ -660,11 +673,14 @@
         "[d3] A heavy-stepped unknown passed the common house on the wayhouse lane around second watch (pre-dawn) — noted by the apprentice, nobody entered.",
         "[d3] Brynjar and Usnea entered the wayhouse at sunrise to give Mara the field report — she was awake, fire up, food on the hearth.",
         "[d3] Wayhouse common room cleared of other guests at sunrise on day 3 — Mara kept it private for the east fork report.",
-        "[d3] Mara has raised aloud the possibility that the unknown traveler came through the new mountain pass rather than from within the valley — this question now sits in the wayhouse."
+        "[d3] Mara has raised aloud the possibility that the unknown traveler came through the new mountain pass rather than from within the valley — this question now sits in the wayhouse.",
+        "[d3] Trail-read confirms second boot prints originated from above the high pasture fence (Disputed Zone) — downhill stride, toe-heavy displacement, fast purposeful pace. Exact origin distance unknown."
       ],
       "flags": {
         "unknown_boots_lane": "second-watch-day3",
-        "unknown_traveler_origin_raised": "day3-sunrise"
+        "unknown_traveler_origin_raised": "day3-sunrise",
+        "second_prints_origin": "above-fence-disputed-zone",
+        "origin_distance": "uncertain"
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -1002,6 +1018,22 @@
         ],
         "createdDay": 3,
         "updatedDay": 3
+      },
+      "the-unknown-traveler": {
+        "id": "the-unknown-traveler",
+        "label": "The Unknown Traveler",
+        "kind": "mystery",
+        "facts": [
+          "[d3] Trail-read confirms the second boot prints came from above the high pasture fence — out of the Disputed Zone — based on downhill stride and toe-heavy mud displacement. Exact origin distance is uncerta"
+        ],
+        "links": [
+          "east-bank-stock-trail",
+          "high-pasture-fence",
+          "echo-river-contamination",
+          "east-fork-run"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     }
   },
@@ -1011,7 +1043,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "rivercraft": 6
+      "rivercraft": 7
     },
     "coActivations": {},
     "aspirations": [
@@ -1123,6 +1155,12 @@
       "text": "Mara Wells has connected the second downstream boot prints on the east bank trail to the heavy-stepped figure heard on the wayhouse lane at second watch on day 3 — one person, went up past the high pa",
       "day": 3,
       "subjectId": null
+    },
+    {
+      "id": "east-bank-stock-trail",
+      "text": "Brynjar's trail-read establishes the second boot prints came from above the high pasture fence — Disputed Zone territory — based on downhill stride, toe-heavy mud displacement, and purposeful pace. Ex",
+      "day": 3,
+      "subjectId": "east-bank-stock-trail"
     }
   ],
   "precursorAccess": [],

@@ -48,7 +48,12 @@
       "challengeTypes": [
         "FIGHT",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "PUZZLE": 2
+      }
     },
     {
       "id": "echo_sense",
@@ -94,7 +99,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "resonant_shield",
@@ -139,7 +149,12 @@
       "challengeTypes": [
         "FIGHT",
         "DUEL"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SURVIVE": 1
+      }
     },
     {
       "id": "harmonic_voice",
@@ -185,7 +200,12 @@
       "challengeTypes": [
         "SOCIAL",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "stillness_field",
@@ -232,7 +252,12 @@
       "challengeTypes": [
         "STEALTH",
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "FIGHT": 2,
+        "DUEL": 2
+      }
     },
     {
       "id": "tremor_sense",
@@ -278,7 +303,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "chord_of_mending",
@@ -326,7 +356,13 @@
         "SURVIVE",
         "PUZZLE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "PUZZLE": 2,
+        "EXPLORE": 1,
+        "CHASE": 1
+      }
     },
     {
       "id": "voice_of_the_flock",
@@ -372,7 +408,12 @@
       "challengeTypes": [
         "EXPLORE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "resonant_anchor",
@@ -419,7 +460,15 @@
       "challengeTypes": [
         "SURVIVE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "SURVIVE": 2,
+        "FIGHT": 1,
+        "DUEL": 1,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     },
     {
       "id": "drumline_stride",
@@ -465,7 +514,11 @@
       "challengeTypes": [
         "CHASE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "shatterpoint",
@@ -512,7 +565,13 @@
       "challengeTypes": [
         "FIGHT",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "PUZZLE": 2,
+        "DUEL": 2,
+        "CHASE": 1
+      }
     },
     {
       "id": "echo_memory",
@@ -557,7 +616,12 @@
       ],
       "challengeTypes": [
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     }
   ]
 }

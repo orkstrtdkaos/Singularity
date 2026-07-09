@@ -349,3 +349,9 @@ Erik: 'when am I going to use Palework?' Skills exist to aid through CHALLENGES 
 - NO new skills; the fix is legibility + creativity-reward. Smoke: every ability shows its challenge-types; the skill screen shows fight/puzzle/chase coverage; a reframed Palework reads as usable in a live fight; the GM allows+rewards a novel use.
 
 *Updated 2026-07-07 — through SNG-044.*
+
+## SNG-045 — Skill-battle system (contested, energy-weighted, multi-turn) + SNG-044 done
+SNG-044 DONE: all 112 abilities tagged with challengeProfile (challenge-type→proficiency 0-3, tier-scaled — T4+ epic at their best, T1 good at 1-2); gap analysis run; 6 capstones authored filling EXPLORE/DUEL/CHASE/SOCIAL/STEALTH/INVESTIGATE epic holes (Pathless Way, Last Form, Long Odds, Turning Word, Never-There, Whole Truth). Every challenge now has a high-tier capstone.
+SNG-045 (skill_battle_system.json): contested skill-vs-skill resolution. Triggered when two wills contest the SAME outcome with skills (conceal-vs-reveal, strike-vs-shield, Falsecraft-vs-Verity). Per round both declare skill+intensity(energy); roll d100+attr+tierBonus+MATCHUP; winner shifts a momentum meter by margin; ENERGY ATTRITION can decide it (run out = lose regardless of rolls); tier gives power AND stamina; Surge-botch backlashes; resolves at meter-end/exhaustion/yield. Matchup table (function-vs-function edges + domain/pole modifiers + location disposition) — being the right TOOL beats raw rolls. **Unifies SNG-027:** social-contest is the SOCIAL flavor of this one engine; combat/duel/infiltration are other flavors. Engine: skill-battle mode beside single-check; reads challengeProfile+functions+intensity+tier. Smoke: multi-round conceal-vs-reveal; attrition decides independent of rolls; matchup edge beats rolls; social-contest runs through same engine.
+
+*Updated 2026-07-07 — through SNG-045.*

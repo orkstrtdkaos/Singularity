@@ -51,7 +51,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "latticespeak",
@@ -100,7 +105,14 @@
       "challengeTypes": [
         "PUZZLE",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "DUEL": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "wake_the_line",
@@ -150,7 +162,13 @@
       "challengeTypes": [
         "PUZZLE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "DUEL": 2,
+        "PUZZLE": 2,
+        "CHASE": 1
+      }
     },
     {
       "id": "foreclose",
@@ -200,7 +218,14 @@
       "challengeTypes": [
         "FIGHT",
         "DUEL"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "PUZZLE": 2,
+        "SOCIAL": 2,
+        "DUEL": 2,
+        "CHASE": 1
+      }
     },
     {
       "id": "unmake_seal",
@@ -248,7 +273,13 @@
       ],
       "challengeTypes": [
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "PUZZLE": 3,
+        "FIGHT": 2,
+        "CHASE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "hold_the_aperture",
@@ -299,7 +330,15 @@
         "SURVIVE",
         "PUZZLE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "PUZZLE": 2,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     }
   ]
 }

@@ -47,6 +47,9 @@
       "functions": [
         "mend",
         "bind"
+      ],
+      "challengeTypes": [
+        "PUZZLE"
       ]
     },
     {
@@ -92,6 +95,11 @@
       "functions": [
         "reveal",
         "ward"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL",
+        "SURVIVE"
       ]
     },
     {
@@ -118,7 +126,11 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ]
     },
     {
       "id": "numen_sense",
@@ -144,7 +156,11 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ]
     },
     {
       "id": "mend_device",
@@ -170,7 +186,11 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "SURVIVE"
+      ]
     },
     {
       "id": "steady_soul",
@@ -196,7 +216,11 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "SURVIVE"
+      ]
     },
     {
       "id": "command_engine",
@@ -224,7 +248,11 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "FIGHT"
+      ]
     },
     {
       "id": "thin_place",
@@ -252,7 +280,12 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "EXPLORE",
+        "SURVIVE"
+      ]
     },
     {
       "id": "meaning_engine",
@@ -279,7 +312,11 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "INVESTIGATE"
+      ]
     }
   ]
 }

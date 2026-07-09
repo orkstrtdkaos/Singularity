@@ -44,6 +44,10 @@
       "functions": [
         "move",
         "reveal"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "INVESTIGATE"
       ]
     },
     {
@@ -87,6 +91,9 @@
       "functions": [
         "heal",
         "mend"
+      ],
+      "challengeTypes": [
+        "SURVIVE"
       ]
     },
     {
@@ -129,6 +136,9 @@
       ],
       "functions": [
         "bind"
+      ],
+      "challengeTypes": [
+        "SOCIAL"
       ]
     },
     {
@@ -171,6 +181,10 @@
       ],
       "functions": [
         "mend"
+      ],
+      "challengeTypes": [
+        "PUZZLE",
+        "SURVIVE"
       ]
     },
     {
@@ -213,6 +227,11 @@
       ],
       "functions": [
         "bind"
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "EXPLORE",
+        "STEALTH"
       ]
     },
     {
@@ -256,6 +275,10 @@
       "functions": [
         "reveal",
         "mend"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "PUZZLE"
       ]
     },
     {
@@ -298,6 +321,11 @@
       ],
       "functions": [
         "move"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "CHASE",
+        "SURVIVE"
       ]
     },
     {
@@ -341,6 +369,10 @@
       "functions": [
         "conceal",
         "move"
+      ],
+      "challengeTypes": [
+        "STEALTH",
+        "CHASE"
       ]
     },
     {
@@ -384,6 +416,10 @@
       "functions": [
         "reveal",
         "bind"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL"
       ]
     },
     {
@@ -427,6 +463,9 @@
       "functions": [
         "bind",
         "heal"
+      ],
+      "challengeTypes": [
+        "SURVIVE"
       ]
     },
     {
@@ -469,6 +508,10 @@
       ],
       "functions": [
         "reveal"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL"
       ]
     },
     {
@@ -513,6 +556,10 @@
       "functions": [
         "move",
         "reveal"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "INVESTIGATE"
       ]
     },
     {
@@ -540,7 +587,11 @@
         }
       ],
       "powerSystem": "valley_craft",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "STEALTH",
+        "SOCIAL"
+      ]
     },
     {
       "id": "boundary_stone",
@@ -567,6 +618,10 @@
           "grants": "Ward a camp or dwelling against animals, weather, and casual intrusion.",
           "cannot": "A determined person walks through it; it deters, not stops."
         }
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "EXPLORE"
       ]
     },
     {
@@ -593,6 +648,9 @@
           "grants": "Strike effectively with common weapons; land a killing blow on beast or foe.",
           "cannot": "No warrior's forms; one target, honest force."
         }
+      ],
+      "challengeTypes": [
+        "FIGHT"
       ]
     }
   ]

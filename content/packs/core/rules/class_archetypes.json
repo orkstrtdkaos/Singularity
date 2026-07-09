@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "id": "class_archetypes",
+  "kind": "world_structure",
+  "note": "The full class picture. Erik: we did martial \u2014 what about magi, stealth, etc.? Answer: this world doesn't have fixed classes; it has ARCHETYPES = a universal-role lens \u00d7 a Reach, exactly like martial backgrounds (martial_paths.json) = Warrior \u00d7 Reach. A 'magus' isn't one class \u2014 it's the SEEKER/MAKER lens expressed through whichever Reach, so a chaos-magus and an order-magus are as different as a chaos-warrior and an order-warrior. This doc names the non-martial archetype families, what each IS in this world, and which Reaches express it. Archetypes are soft: a character is really 'this role, from this place, drifting this pole' \u2014 the archetype is the recognizable shape, not a locked class. Extends universal_roles + skill_functions + martial_paths. Authored by Aevi (PO)."
+
+,
+  "principle": "Every archetype = a ROLE (the need it fills) \u00d7 a REACH (the method). The functions are universal (a magus and a warrior both need to affect the world); the flavor is the Reach's. There is no 'mage class' \u2014 there is the way order shapes reality (Latticework), the way chaos does (Wildcraft), the way meaning does (Numenwork). Pick a role-shape and a home, and the archetype falls out. This keeps the world legible (you recognize a 'stealth' character) AND infinitely varied (an Umbral stealth and a Wildcraft stealth share nothing but the goal).",
+
+  "archetypes": [
+    {
+      "archetype": "Magus / Shaper", "role": "Seeker+Maker", "whatItIsHere": "One who bends reality directly through a tradition's deep principle \u2014 the closest thing to a 'mage.' Not one class: the shaping IS the Reach. A Magus reshapes the world by the grammar of their pole.",
+      "byReach": [
+        {"reach": "chaos_order", "as": "The Latticewright (order-magus) \u2014 binds reality into rule and structure; vs the Unspooler (chaos-magus) who breaks and improvises. Same 'shape reality,' opposite method."},
+        {"reach": "mechanical_spiritual", "as": "The Numen (spirit-magus) \u2014 shapes by meaning and attention; vs the Enginewright (mechanism-magus) who shapes by built system."},
+        {"reach": "death_life", "as": "The Vivimancer / Paleworker \u2014 shapes the quick and the ending."},
+        {"reach": "dark_light", "as": "The Radiant / Umbral \u2014 shapes by revelation or concealment."}
+      ],
+      "signature": "deep single-Reach mastery; the Magus is who drifts pole-hot fastest \u2014 the classic power-vs-foreclosure temptation.",
+      "coreFunctions": ["bind","break","reveal","mend"]
+    },
+    {
+      "archetype": "Shadow / Stealth", "role": "Seeker (unseen)", "whatItIsHere": "One who works unseen \u2014 infiltration, concealment, the unwitnessed act. Fits this world through MORE than one Reach, which makes 'stealth' genuinely varied.",
+      "byReach": [
+        {"reach": "dark_light", "as": "The Umbral \u2014 the true stealth-tradition: Seeing Dark, the Harbor, move unseen. Hides in shadow."},
+        {"reach": "chaos_order", "as": "The Churn-ghost \u2014 hides in NOISE and unpredictability; lost in chaos rather than shadow."},
+        {"reach": "falsehood_truth", "as": "The Veilwright \u2014 stealth by DISGUISE and illusion, not darkness; hidden in plain sight behind a false face."},
+        {"reach": "body_mind", "as": "The Soma-ghost \u2014 stealth by perfect bodily control; the silent, still, unnoticed body."}
+      ],
+      "signature": "conceal+move heavy; the archetype the current corpus UNDER-serves (only 8 conceal abilities) \u2014 flagged for expansion.",
+      "coreFunctions": ["conceal","move","reveal"]
+    },
+    {
+      "archetype": "Seer / Reader", "role": "Seeker (revealing)", "whatItIsHere": "One who perceives the hidden truth \u2014 of a place, a person, a mystery, the coordinate-world itself. This world is BUILT for seers (rune-casting reads pole-intensities; the whole map is discoverable). The most world-native archetype.",
+      "byReach": [
+        {"reach": "falsehood_truth", "as": "The Truthwarden (Verity) \u2014 pierces deception, speaks the unfalsifiable word."},
+        {"reach": "dark_light", "as": "The Radiant seer \u2014 reveals by burning light; nothing hidden survives."},
+        {"reach": "mechanical_spiritual", "as": "The Attender (Numenwork) \u2014 True Attention; reads meaning-truth."},
+        {"reach": "emotional_logical", "as": "The Reader \u2014 Pathos (reads feeling) or Logos (deduces truth)."}
+      ],
+      "signature": "reveal-heavy \u2014 the corpus's MOST-served function (41!), so seers are rich; the risk is reveal-glut (see skill audit).",
+      "coreFunctions": ["reveal","conceal"]
+    },
+    {
+      "archetype": "Warden / Healer", "role": "Warden", "whatItIsHere": "One who tends, heals, and keeps the vulnerable \u2014 already deep (martial_paths Thorn-Warden is its militant cousin). The peaceful healer-archetype.",
+      "byReach": [
+        {"reach": "death_life", "as": "Vivimancer (heals the living) / Ashwarden (tends the dying) \u2014 the two faces."},
+        {"reach": "mechanical_spiritual", "as": "The Steadier (Numenwork) \u2014 heals spirit by presence."},
+        {"reach": "emotional_logical", "as": "The Deepfeeler (Pathos) \u2014 heals feeling, shares grief."},
+        {"reach": "body_mind", "as": "The Soma-tender \u2014 heals by bodily craft."}
+      ],
+      "signature": "heal+shield+ward; travels to where a locale can't tend itself (the life-warden in the Cogitarium).",
+      "coreFunctions": ["heal","mend","shield","ward"]
+    },
+    {
+      "archetype": "Artificer / Maker", "role": "Maker", "whatItIsHere": "One who builds, mends, inscribes, and makes \u2014 the crafter. Fits this world sharply through the substrate/inscription model: a Maker who INSCRIBES leaves persistent will behind them.",
+      "byReach": [
+        {"reach": "mechanical_spiritual", "as": "The Enginewright \u2014 deep machine/Precursor building."},
+        {"reach": "chaos_order", "as": "The Churn-maker (Orrin) \u2014 improvised wonders / the Latticewright \u2014 structured build."},
+        {"reach": "manifest_domain", "as": "The Block-crafter \u2014 builds by manifest grammar."}
+      ],
+      "signature": "mend+bind+ward; the natural INSCRIPTION user (will_expression_modality) \u2014 leaves wards, sigils, persistent works.",
+      "coreFunctions": ["mend","bind","ward","break"]
+    },
+    {
+      "archetype": "Voice / Mediator", "role": "Mediator", "whatItIsHere": "One who moves people \u2014 negotiation, de-escalation, persuasion, rousing. The social 'class,' and the natural driver of SNG-027 social contests. This world's talk-heavy center of gravity.",
+      "byReach": [
+        {"reach": "violence_peace", "as": "The Stillcrafter \u2014 de-escalates, brokers truce."},
+        {"reach": "emotional_logical", "as": "The Deepfeeler (Pathos, moves by feeling) / the Reasoner (Logos, moves by proof)."},
+        {"reach": "falsehood_truth", "as": "The Veilwright (persuades by constructed story) / Truthwarden (by unfalsifiable truth)."}
+      ],
+      "signature": "bind+reveal social; carries the social-contest system; pairs with universal_roles Mediator.",
+      "coreFunctions": ["bind","reveal","heal"]
+    }
+  ],
+
+  "howClassesWork": {
+    "notFixed": "A character is not 'a Magus.' They are a role-shape + a homeland + a drift. 'Magus' is the recognizable name for Seeker+Maker-through-a-Reach. This is why the game needs no class list \u2014 the archetypes EMERGE from role\u00d7reach, and a player can blend (a Seer who also fights = a Blaze-Lance who reads truth).",
+    "atCreation": "SNG-017 creation offers role+homeland; the archetype is the flavor label shown ('you're shaping up as an Umbral Shadow'). Guide-me mode picks a coherent archetype kit; full-control blends freely.",
+    "multiclass": "Blending is the cross-Reach combination system (SNG-026) \u2014 a two-archetype character is literally a walking source of cross-domain braids. The class-cost/capacity system (skill_capacity crossClass) prices the breadth; combination is the payoff. Multiclassing isn't bolted on \u2014 it's the core depth mechanic.",
+    "generation": "SNG-020 authors NPCs as archetype instances (role\u00d7reach\u00d7disposition), so generated characters read as recognizable types without a class enum."
+  },
+
+  "buildImplication": "No new engine \u2014 archetypes are a LENS over existing role+reach+function data, surfaced as flavor labels at creation/level-up (SNG-041 UI can show 'you're becoming a ___'). Content: this doc + the martial_paths doc together name the full archetype space. The skill-audit (separate) addresses whether each archetype's abilities are actually good. Flag: Shadow/stealth (conceal) and the two thin new Reaches (emotional_logical, falsehood_truth at 2 each) are under-served \u2014 expand for archetype parity."
+}

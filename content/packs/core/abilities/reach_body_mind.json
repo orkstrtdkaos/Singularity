@@ -376,6 +376,39 @@
         "FIGHT": 1,
         "PUZZLE": 1
       }
+    },
+    {
+      "id": "pathless_way",
+      "name": "The Pathless Way",
+      "levelReq": 5,
+      "energyCost": 10,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3,
+        "space_time": 0.2
+      },
+      "functions": [
+        "move",
+        "shield"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "CHASE": 2,
+        "SURVIVE": 2
+      },
+      "narrationHints": "The unclimbable is climbed, the uncrossable crossed — the body finds a way where there is none.",
+      "description": "The traversal capstone: cross terrain that stops everyone else — sheer faces, killing cold, drowning fords, the deep dark — by mastery of the body pushed past every ordinary limit.",
+      "notFor": "Teleportation or flight (it's mastery, not magic); carrying others easily; ignoring true lethality unwarned.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Pathless Way",
+          "grants": "Cross the uncrossable — any natural barrier yields to enough skill, breath, and will; lead a party through what would kill them alone.",
+          "cannot": "The truly impossible (a sheer mile of ice in a storm) still exacts a price; you can fail, spectacularly, and the fall is real."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
     }
   ]
 }

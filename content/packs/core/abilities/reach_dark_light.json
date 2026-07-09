@@ -52,7 +52,12 @@
         "STEALTH",
         "EXPLORE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "radiance",
@@ -101,7 +106,14 @@
       "challengeTypes": [
         "FIGHT",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "PUZZLE": 1,
+        "SOCIAL": 1
+      }
     },
     {
       "id": "darksight",
@@ -133,7 +145,12 @@
         "EXPLORE",
         "STEALTH",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "lightsense",
@@ -163,7 +180,12 @@
       "challengeTypes": [
         "STEALTH",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "dim",
@@ -193,7 +215,10 @@
       "challengeTypes": [
         "STEALTH",
         "CHASE"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3
+      }
     },
     {
       "id": "kindle",
@@ -225,7 +250,12 @@
         "FIGHT",
         "EXPLORE",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 2,
+        "DUEL": 2
+      }
     },
     {
       "id": "the_harbor",
@@ -257,7 +287,12 @@
       "challengeTypes": [
         "STEALTH",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "SURVIVE": 2,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "unshadow",
@@ -290,7 +325,13 @@
         "FIGHT",
         "INVESTIGATE",
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "PUZZLE": 2,
+        "FIGHT": 1,
+        "CHASE": 1
+      }
     },
     {
       "id": "harbored_flame",
@@ -321,7 +362,11 @@
       "challengeTypes": [
         "SURVIVE",
         "STEALTH"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "SURVIVE": 3
+      }
     },
     {
       "id": "shroud",
@@ -352,7 +397,12 @@
       "challengeTypes": [
         "STEALTH",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "SURVIVE": 2,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "false_trail",
@@ -384,7 +434,12 @@
       "challengeTypes": [
         "CHASE",
         "STEALTH"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     }
   ]
 }

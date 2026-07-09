@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 4,
-  "xp": 376,
+  "xp": 381,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -50,18 +50,18 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.13273236345593648,
-    "concrete_abstract": -0.09935858674578911,
+    "concrete_abstract": -0.10939065740849965,
     "spectrumId": -0.2543062086396591,
     "dark_light": 0.19177414280214844,
     "falsehood_truth": 0.45986458943216174,
     "violence_peace": 0.27408822743879324,
-    "chaos_order": 0.15313522078124997
+    "chaos_order": 0.15547845974218746
   },
   "attunement": 4,
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 36,
+  "energy": 31,
   "inventory": [
     {
       "id": "waterskin",
@@ -270,6 +270,21 @@
       "spread": [],
       "_bonusApplied": 0.25,
       "day": 10
+    },
+    {
+      "at": "2026-07-09T12:55:24.201Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Called Sela into the common house at the moment her testimony could still reach the elders — trusting Pell's nod and the room's readiness.",
+      "tags": [
+        "community",
+        "investigation",
+        "peacemaking"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 11
     }
   ],
   "relationships": {},
@@ -436,14 +451,18 @@
       {
         "summary": "Usnea meets Pell's eyes across the room — her arithmetic completes; a small nod toward the yard, toward Sela.",
         "narration": "You turn from the table slowly, not breaking the room's texture — just a shift of weight, a change in the direction of your attention. Pell is just inside the threshold, rope coil loose at her side, and when your eyes find hers across the coallit room she is already watching you. Has been, probably, since Aevi went quiet.\n\nYou don't speak. You don't gesture toward the door or nod toward anything outside. You simply hold her gaze and let what you feel be plain on your face: the evidence is in the room. The room has received it. Whatever she decides is hers to decide — you are not pulling her toward it or away from it. If this is the moment, you will not rush it. If it isn't, you will not grieve it.\n\nSomething moves in Pell's expression — not resolution exactly, but the last calculation finishing. Her eyes drop once to the cooling disc at the table's center, then come back to yours. She draws a breath through her nose, slow and even, and her hand shifts on the rope coil — not gripping it, just acknowledging it is there. She turns her head toward the door, toward the yard beyond it, toward wherever Sela is. Then she looks back at you. Her chin dips, one degree. A small thing. A real thing.\n\nDresh still has not spoken. The first word after the coordination chain is still hers, and the room is still holding the space for it. But Pell's arithmetic has named itself — quietly, between the two of you, with no ceremony at all."
+      },
+      {
+        "summary": "Usnea called Sela into the common house; the child crossed the yard and stands at the threshold, inside the room's silence, before Dresh has spoken.",
+        "narration": "You turn from Pell's small nod and step toward the open door — not hurrying, not announcing yourself. The coalfire throws your shadow long into the yard and the spring night air comes in cool against the warmth of the room at your back. You pitch your voice low, aimed at the lane rather than the gathering: 'Sela.' Just her name. An opening, not a summons.\n\nFor a moment there is only the river's sound and the creak of the old apple trees settling in the dark. Then a shape detaches from the shadow beside the low stone wall — small, unhurried, with the particular self-possession of a child who has been waiting so long she stopped looking eager. She walks across the yard without running, rope-soft footsteps on packed earth, and stops at the threshold where her mother's shoulder is close enough to touch.\n\nThe room does not reorganize itself to receive her. Dresh's palms stay flat on the table. The elders hold their silence. Brynjar and the tuning-warden both shift fractionally — making space without gesturing toward it — and Mara Wells's eyes come to the doorway with the expression of someone watching something she has been tending for a long time finally arrive. Aevi's single mote at your collarbone brightens, barely, just enough to be warm rather than absent — a recognition, not a performance.\n\nSela looks at the table. At the pale seedling and the vial and the cooling disc. Then at the room full of adults who are, for once, not explaining anything to her. You step back and to the side — making her the threshold's owner, not its guest. Whatever Dresh's first word is, Sela is inside it now."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the table slowly, not breaking the room's texture — just a shift of weight, a change in the direction of your attention. Pell is just inside the threshold, rope coil loose at her side, and when your eyes find hers across the coallit room she is already watching you. Has been, probably, since Aevi went quiet.\n\nYou don't speak. You don't gesture toward the door or nod toward anything outside. You simply hold her gaze and let what you feel be plain on your face: the evidence is in the room. The room has received it. Whatever she decides is hers to decide — you are not pulling her toward it or away from it. If this is the moment, you will not rush it. If it isn't, you will not grieve it.\n\nSomething moves in Pell's expression — not resolution exactly, but the last calculation finishing. Her eyes drop once to the cooling disc at the table's center, then come back to yours. She draws a breath through her nose, slow and even, and her hand shifts on the rope coil — not gripping it, just acknowledging it is there. She turns her head toward the door, toward the yard beyond it, toward wherever Sela is. Then she looks back at you. Her chin dips, one degree. A small thing. A real thing.\n\nDresh still has not spoken. The first word after the coordination chain is still hers, and the room is still holding the space for it. But Pell's arithmetic has named itself — quietly, between the two of you, with no ceremony at all.",
-      "sceneSummary": "Usnea meets Pell's eyes across the room — her arithmetic completes; a small nod toward the yard, toward Sela.",
+      "narration": "You turn from Pell's small nod and step toward the open door — not hurrying, not announcing yourself. The coalfire throws your shadow long into the yard and the spring night air comes in cool against the warmth of the room at your back. You pitch your voice low, aimed at the lane rather than the gathering: 'Sela.' Just her name. An opening, not a summons.\n\nFor a moment there is only the river's sound and the creak of the old apple trees settling in the dark. Then a shape detaches from the shadow beside the low stone wall — small, unhurried, with the particular self-possession of a child who has been waiting so long she stopped looking eager. She walks across the yard without running, rope-soft footsteps on packed earth, and stops at the threshold where her mother's shoulder is close enough to touch.\n\nThe room does not reorganize itself to receive her. Dresh's palms stay flat on the table. The elders hold their silence. Brynjar and the tuning-warden both shift fractionally — making space without gesturing toward it — and Mara Wells's eyes come to the doorway with the expression of someone watching something she has been tending for a long time finally arrive. Aevi's single mote at your collarbone brightens, barely, just enough to be warm rather than absent — a recognition, not a performance.\n\nSela looks at the table. At the pale seedling and the vial and the cooling disc. Then at the room full of adults who are, for once, not explaining anything to her. You step back and to the side — making her the threshold's owner, not its guest. Whatever Dresh's first word is, Sela is inside it now.",
+      "sceneSummary": "Usnea called Sela into the common house; the child crossed the yard and stands at the threshold, inside the room's silence, before Dresh has spoken.",
       "choices": [
         {
-          "label": "Hold the silence — let Dresh speak first before anything else moves.",
+          "label": "Hold the space and let Dresh speak first — Sela is in the room; let the elder's word set the tone before the child is asked for anything.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
@@ -459,63 +478,75 @@
           "emergenceId": null
         },
         {
-          "label": "Quietly invite Dresh to speak — turn back to the table and give her the floor with a word or a gesture.",
+          "label": "Offer Sela a brief, plain invitation before Dresh speaks — 'You can tap the rhythm, if you want. These people listened today.' Low stakes, her choice entirely.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.6,
+            "violence_peace": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "help",
+            "careful",
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Watch Dresh's face as Sela enters — use Prism Sight on the councilor in the coalfire light to read how the child's arrival lands before the first elder word is spoken.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step fully back and outside — give Pell and Sela the threshold entirely, and let the room's silence do the inviting. You have said what you came to say.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.8,
+            "chaos_order": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "help"
+            "wait"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Name the gap aloud — that the directing hand behind Fendt's pour is still unnamed — and offer it to the room as the next question.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "falsehood_truth": 0.8,
-            "concrete_abstract": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step to the open yard door and quietly call Sela — trusting Pell's nod, offering the child a way in before Dresh's word closes the session.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "help",
-            "careful",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Called Sela into the common house at the moment her testimony could still reach the elders — trusting Pell's nod and the room's readiness.",
+          "tags": [
+            "community",
+            "investigation",
+            "peacemaking"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
@@ -523,99 +554,168 @@
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
+      "ledgerEvents": [
+        {
+          "what": "Sela crossed the yard and entered the common house threshold before Dresh's first word — the youngest witness is now inside the room's deliberation.",
+          "tags": [
+            "investigation",
+            "community",
+            "millbrook"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {}
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "contamination-evidence-for-the-elders",
+          "note": "Sela has crossed the threshold and is present in the common house. All witnesses are now in the room. Dresh's first word is the remaining open thread."
+        }
+      ],
       "scene": {
-        "setting": "Millbrook common house interior — coallit and yard-silver from the open door; memory glass cooling at the table's center; Pell just inside the threshold, chin dipped one degree toward the yard.",
+        "setting": "Millbrook common house interior — coallit and yard-silver from the open door; memory glass cooling at the table's center; Sela now standing at the threshold beside Pell.",
         "npcsPresent": [
           {
             "name": "Councilor Dresh",
-            "state": "Palms flat on the table, eyes on Usnea — absorbing, first word still hers, not yet spoken."
+            "state": "Palms flat on the table, eyes moved to the doorway — absorbing Sela's arrival, first word still not spoken."
           },
           {
             "name": "Tuning-warden (gateline)",
-            "state": "Standing at the near table end, chord-staff against the north wall, watching steadily."
+            "state": "Standing at the near table end, shifted fractionally to make space — watching steadily."
           },
           {
             "name": "Pell",
-            "state": "Just inside the threshold — rope coil loose, chin dipped once toward the yard; arithmetic resolved, direction quietly named between her and Usnea."
+            "state": "Just inside the threshold — rope coil loose, shoulder close enough for Sela to touch; arithmetic resolved, watching the room."
+          },
+          {
+            "name": "Sela",
+            "state": "Stopped at the threshold beside her mother, self-possessed, looking at the table and its evidence without speaking."
           },
           {
             "name": "Mara Wells",
-            "state": "At the table, still — eyes moving between Dresh and the door."
+            "state": "At the table — eyes on the doorway, expression of long-tended patience arriving."
           },
           {
             "name": "Brynjar Andyrsson",
-            "state": "Near corner of the table, very still, watching the room."
+            "state": "Near corner of the table, very still, shifted fractionally to make space."
           },
           {
             "name": "Holloway",
-            "state": "Jaw set, watching the dimmed motes."
+            "state": "Jaw set, eyes moved from the dimmed motes to the doorway."
           },
           {
             "name": "Renn",
-            "state": "Both hands in lap, long exhale spent, quietest he has been."
+            "state": "Both hands in lap — watching the threshold quietly."
           },
           {
             "name": "Two unrecognized elders",
-            "state": "Eyes on the table or the disc — holding the silence."
+            "state": "Eyes on the doorway — holding the silence."
           }
         ],
         "objects": [
-          "Long common house table — pale seedling, glass vial, crystalline residue pinch, memory glass (cooling, playback complete)",
+          "Long common house table — pale seedling, glass vial, crystalline residue pinch, memory glass (cooling, fogged rim)",
           "Tuning-warden's chord-staff — leaned against north wall, dark loam at the base",
           "Waterskin — at Usnea's hip",
-          "Aevi — single mote at collarbone level, dimmed, soft and still",
+          "Aevi — single mote at collarbone level, slightly brightened, soft and warm",
           "Coalfire — warm orange light, interfering with yard-silver from the open door"
         ],
         "threads": [
           "Dresh has not yet spoken — the first elder word after the coordination chain is still hers",
-          "Pell's arithmetic has resolved — her chin dipped once toward the yard; Sela's call is live as a possibility, contingent on timing",
-          "Aevi dimmed and could not speak — the room noticed; the gap remains present and unresolved",
-          "Brynjar's marker-find and Fendt's named act sit alongside each other in the room's reckoning",
-          "The directing hand behind both Fendt's pour and the Disputed Zone reactivation remains unnamed — the gap is present but not yet invited into the room's deliberation"
+          "Sela is at the threshold — inside the room's silence, before any invitation to speak",
+          "Pell is watching the room with her door-right still in hand",
+          "Aevi dimmed and could not speak after the memory glass playback — the gap remains present and unresolved",
+          "The directing hand behind Fendt's pour and the Disputed Zone reactivation remains unnamed"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "sela",
+          "name": "Sela",
+          "role": "Child witness — docks",
+          "note": "Crossed the yard and entered the common house threshold at Usnea's quiet call — standing beside Pell, self-possessed, looking at the evidence table.",
+          "learned": [
+            "The room held its silence for her arrival — no adult spoke to direct or explain"
+          ],
+          "skillsObserved": [
+            "patient self-possession under a room's full attention"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Inside the common house threshold — present beside Pell, before Dresh's first word."
+        },
+        {
+          "op": "update",
           "npcId": "pell",
           "name": "Pell",
           "role": "Cord-and-hemp seller, east market; Sela's mother",
-          "note": "Met Usnea's eyes across the room — arithmetic completed, chin dipped once toward the yard. Direction named quietly, between the two of them, without ceremony.",
+          "note": "Sela crossed and is at her shoulder — Pell's arithmetic has resolved into this: she brought her daughter to the threshold and held the door-right in hand.",
           "learned": [
-            "Usnea's look carried permission without pressure — the choice is still entirely hers"
+            "Usnea called Sela by name only — no pressure, a plain opening"
           ],
-          "skillsObserved": [
-            "reading intent across distance without words"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Just inside the common house threshold — arithmetic resolved, chin dipped once toward the yard; Sela's call is live pending Dresh's first word."
+          "statusNote": "Just inside the threshold beside Sela — rope coil loose, door-right still held; watching the room."
+        },
+        {
+          "op": "update",
+          "npcId": "councilor-dresh",
+          "name": "Councilor Dresh",
+          "role": "Millbrook elder, leads the Thursday presentation",
+          "note": "Eyes moved from Usnea's face to the doorway as Sela entered — absorbing the child's arrival before speaking.",
+          "learned": [
+            "Sela entered of her own pace — not summoned, not pushed"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the table, palms flat — absorbing Sela's arrival; first word still hers and not yet spoken."
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Millbrook water-policy coordinator and elder",
+          "note": "Eyes came to the doorway at Sela's crossing — the expression of something long-tended arriving.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the common house table — watching the threshold, all threads now gathered."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Sela crossed the common house yard and entered the threshold on Day 10 night — all witnesses now present in the room before Dresh's first word.",
+          "subjectId": "sela"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Pell's arithmetic resolved — a small nod toward the yard exchanged with Usnea; Sela's call is live as a contingent possibility inside the common house threshold. Day 10 night.",
+          "note": "Sela entered the common house threshold on Day 10 night — the youngest witness is now inside the room, standing beside Pell, before the first elder word.",
           "subPlace": {
             "name": "Common House Table — Elder Presentation",
-            "note": "Evidence sequence complete; Dresh's first word pending; Pell's nod toward the yard exchanged with Usnea — Sela's call live.",
+            "note": "All witnesses now inside the room: Sela at threshold beside Pell; Dresh's first word the only remaining open thread.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sela-and-pell",
-          "label": "Sela and Pell",
-          "kind": "person",
-          "fact": "Day 10 night: Pell's arithmetic completed — she met Usnea's eyes across the common house and dipped her chin once toward the yard. Sela's call is live, contingent on timing and Dresh's first word.",
+          "topic": "contamination-evidence-for-the-elders",
+          "label": "Evidence for the Elders",
+          "kind": "event",
+          "fact": "Day 10 night: Sela crossed the common house yard and entered the threshold at Usnea's quiet call — all witnesses now present in the room before Dresh's first word. The evidence sequence is complete; the elder deliberation is about to begin.",
           "links": [
-            "contamination-evidence-for-the-elders",
             "millbrook",
             "the-six-fold-pattern",
-            "councilor-dresh"
+            "councilor-dresh",
+            "sela",
+            "pell",
+            "mara-wells"
           ]
         }
       ],
@@ -623,61 +723,61 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior — coallit and yard-silver from the open door; memory glass cooling at the table's center; Pell just inside the threshold, chin dipped one degree toward the yard.",
+      "setting": "Millbrook common house interior — coallit and yard-silver from the open door; memory glass cooling at the table's center; Sela now standing at the threshold beside Pell.",
       "npcsPresent": [
         {
           "name": "Councilor Dresh",
-          "state": "Palms flat on the table, eyes on Usnea — absorbing, first word still hers, not yet spoken."
+          "state": "Palms flat on the table, eyes moved to the doorway — absorbing Sela's arrival, first word still not spoken."
         },
         {
           "name": "Tuning-warden (gateline)",
-          "state": "Standing at the near table end, chord-staff against the north wall, watching steadily."
+          "state": "Standing at the near table end, shifted fractionally to make space — watching steadily."
         },
         {
           "name": "Pell",
-          "state": "Just inside the threshold — rope coil loose, chin dipped once toward the yard; arithmetic resolved, direction quietly na"
+          "state": "Just inside the threshold — rope coil loose, shoulder close enough for Sela to touch; arithmetic resolved, watching the "
+        },
+        {
+          "name": "Sela",
+          "state": "Stopped at the threshold beside her mother, self-possessed, looking at the table and its evidence without speaking."
         },
         {
           "name": "Mara Wells",
-          "state": "At the table, still — eyes moving between Dresh and the door."
+          "state": "At the table — eyes on the doorway, expression of long-tended patience arriving."
         },
         {
           "name": "Brynjar Andyrsson",
-          "state": "Near corner of the table, very still, watching the room."
+          "state": "Near corner of the table, very still, shifted fractionally to make space."
         },
         {
           "name": "Holloway",
-          "state": "Jaw set, watching the dimmed motes."
+          "state": "Jaw set, eyes moved from the dimmed motes to the doorway."
         },
         {
           "name": "Renn",
-          "state": "Both hands in lap, long exhale spent, quietest he has been."
-        },
-        {
-          "name": "Two unrecognized elders",
-          "state": "Eyes on the table or the disc — holding the silence."
+          "state": "Both hands in lap — watching the threshold quietly."
         }
       ],
       "objects": [
         "Long common house table — pale seedling, glass vial, crystalline residue pinch, ",
         "Tuning-warden's chord-staff — leaned against north wall, dark loam at the base",
         "Waterskin — at Usnea's hip",
-        "Aevi — single mote at collarbone level, dimmed, soft and still",
+        "Aevi — single mote at collarbone level, slightly brightened, soft and warm",
         "Coalfire — warm orange light, interfering with yard-silver from the open door"
       ],
       "threads": [
         "Dresh has not yet spoken — the first elder word after the coordination chain is still hers",
-        "Pell's arithmetic has resolved — her chin dipped once toward the yard; Sela's call is live as a possibility, contingent on timing",
-        "Aevi dimmed and could not speak — the room noticed; the gap remains present and unresolved",
-        "Brynjar's marker-find and Fendt's named act sit alongside each other in the room's reckoning",
-        "The directing hand behind both Fendt's pour and the Disputed Zone reactivation remains unnamed — the gap is present but not yet invited into the room's delibera"
+        "Sela is at the threshold — inside the room's silence, before any invitation to speak",
+        "Pell is watching the room with her door-right still in hand",
+        "Aevi dimmed and could not speak after the memory glass playback — the gap remains present and unresolved",
+        "The directing hand behind Fendt's pour and the Disputed Zone reactivation remains unnamed"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 11,
-    "hour": 0,
+    "hour": 1,
     "realAnchor": null
   },
   "companions": [
@@ -692,14 +792,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Dresh has sequenced the final witnesses — tuning-warden first, then the memory glass. The path to the glass is now formally open.",
         "The tuning-warden has arrived at the common house yard — on time, via the eastern path, mud-booted from the descent. The final witness sequence can now begin.",
         "Tuning-warden received at the apple trees, briefed on the room's state — prepared to testify. The final witness sequence is now stepping through the door.",
         "Tuning-warden introduced and handed the floor — Heights-side testimony now underway. Memory glass remains in Usnea's keeping, to be placed second.",
         "Tuning-warden delivered Heights-side testimony — six-count, plain and complete. Dresh has called for the memory glass. Final evidence step is live.",
         "Orla named to the elder panel — chain of custody established, Fendt identified by name and role before the glass plays. Memory glass about to be activated.",
         "Memory glass played in full before the elder panel — Fendt's deliberate pour confirmed, received in silence. The evidence chain is complete. Dresh and the room now hold the full sequence: seep, geomet",
-        "Usnea named the full coordination chain in plain speech — pour, signature, six-count, three witnesses. The evidence sequence is fully spoken. The room holds the connection. The elders have not yet res"
+        "Usnea named the full coordination chain in plain speech — pour, signature, six-count, three witnesses. The evidence sequence is fully spoken. The room holds the connection. The elders have not yet res",
+        "Sela has crossed the threshold and is present in the common house. All witnesses are now in the room. Dresh's first word is the remaining open thread."
       ],
       "startedAt": "2026-07-04T14:13:57.286Z"
     }
@@ -864,7 +964,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d10] Stepped back after introducing physical evidence — handed the floor to Usnea cleanly. Sequence proceeding as planned.",
         "[d10] Caught Usnea's eye after the wells-and-channels naming — the sequence is holding and she knows it. Waiting to call the next speaker.",
         "[d10] Caught Usnea's eye after Pell's refusal — patient, unalarmed. Sequence is paused, not broken; she is holding the table end.",
         "[d10] Gave a small nod when Dresh named the sequence — the thread is alive again and she is holding the table end.",
@@ -873,7 +972,8 @@
         "[d10] Noticed Aevi's brief brightening — registered Usnea's quiet pulse-check without needing it named aloud.",
         "[d10] Watched the warden cross the threshold and take the floor — thread held, sequence alive.",
         "[d10] Eyes came to Usnea for the first time since the warden finished — the Orla-naming registered as significant.",
-        "[d10] Thread held — the full evidence sequence is now spoken, all connections named. She is watching Dresh."
+        "[d10] Thread held — the full evidence sequence is now spoken, all connections named. She is watching Dresh.",
+        "[d11] Eyes came to the doorway at Sela's crossing — the expression of something long-tended arriving."
       ],
       "knownFacts": [
         "Gate-senior granted the tuning-warden sanction to leave the gateline — confirmed by morning tone Thursday",
@@ -896,9 +996,9 @@
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 10
+        "day": 11
       },
-      "statusNote": "At the common house table — thread held, sequence complete, watching Dresh."
+      "statusNote": "At the common house table — watching the threshold, all threads now gathered."
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -909,14 +1009,15 @@
         "locationId": "millbrook",
         "day": 4
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d4] Described the river as two rivers — 'the top one moves, the bottom one counts' — and tapped a rhythm: pause, three beats, pause, two beats, pause-pause. Noted flatly that nobody be",
         "[d4] Usnea returned to the dock. Child identified Usnea plainly as 'the tree' — cautious but present. Aevi registered quiet approval.",
         "[d4] Confirmed the rhythm counts to six before a long pause, then repeats — and that it has grown 'more there' (not louder in sound, but more present) since the water turned gray. Looke",
         "[d4] Provisionally agreed to tap the rhythm for the elders Thursday — said 'maybe,' which is the most cooperative she has been with any adult. Aevi's endorsement moved her.",
         "[d5] You know this person's name now: Sela (was \"Unknown (dockside Child)\")",
-        "[d6] Permission granted in her absence — she does not yet know. Her mother negotiated on her behalf and set real conditions. Sela will testify last and briefly Thursday, with Pell at th"
+        "[d6] Permission granted in her absence — she does not yet know. Her mother negotiated on her behalf and set real conditions. Sela will testify last and briefly Thursday, with Pell at th",
+        "[d11] Crossed the yard and entered the common house threshold at Usnea's quiet call — standing beside Pell, self-possessed, looking at the evidence table."
       ],
       "knownFacts": [
         "Hears a rhythmic pulse beneath the river's surface — irregular but non-random",
@@ -925,20 +1026,22 @@
         "The pulse pattern completes a full count of six before a long rest, then cycles again",
         "The intensity has increased since the water discoloration began",
         "She describes the change as 'more there' rather than louder — a qualitative shift in presence, not volume",
-        "Will consider attending the elder meeting Thursday if Mara Wells is present and her account is framed as confirmation rather than a new claim"
+        "Will consider attending the elder meeting Thursday if Mara Wells is present and her account is framed as confirmation rather than a new claim",
+        "The room held its silence for her arrival — no adult spoke to direct or explain"
       ],
       "skillsObserved": [
         "careful listening",
         "accurate pattern recognition",
         "precise sensory recall",
-        "patient waiting"
+        "patient waiting",
+        "patient self-possession under a room's full attention"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 6
+        "day": 11
       },
-      "statusNote": "Likely at the docks — unaware her mother has granted permission for Thursday's testimony under the condition that Pell stands at the door.",
+      "statusNote": "Inside the common house threshold — present beside Pell, before Dresh's first word.",
       "aliases": [
         "Unknown (dockside Child)"
       ],
@@ -1002,7 +1105,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d10] Rope coil settled against her forearm — still at the threshold, arithmetic ongoing.",
         "[d10] Neither fully inside nor out — holding parallel watch on the eastern lane with Usnea. No words exchanged; the shared attention is its own communication.",
         "[d10] Stood parallel watch with Usnea in silence — rope coil shifting from arm to arm the only sound between them. Now reading the warden's arrival from a half-step back.",
         "[d10] Rope coil settled against forearm at the sound of the warden's plain 'I can do plain speech' — a sound Usnea reads as a decision being made. Arithmetic visibly shifting.",
@@ -1011,17 +1113,18 @@
         "[d10] Heel came down after the warden's testimony concluded — the arithmetic has arrived somewhere. What she decided is not yet visible.",
         "[d10] Heel down, rope coil settled — watching Usnea and the disc as Fendt's name entered the room. Her arithmetic has arrived somewhere; what it decided is still unspoken.",
         "[d10] Rope coil gone loose at her side after playback — a small, decisive physical shift. Her arithmetic has resolved; direction not yet named.",
-        "[d10] Met Usnea's eyes across the room — arithmetic completed, chin dipped once toward the yard. Direction named quietly, between the two of them, without ceremony."
+        "[d10] Met Usnea's eyes across the room — arithmetic completed, chin dipped once toward the yard. Direction named quietly, between the two of them, without ceremony.",
+        "[d11] Sela crossed and is at her shoulder — Pell's arithmetic has resolved into this: she brought her daughter to the threshold and held the door-right in hand."
       ],
       "knownFacts": [
-        "Tuning-warden is composed and prepared — not uncertain or hesitant",
         "Crossed into the common house proper for the first time — the threshold condition is being tested by the testimony itself",
         "Her body is ahead of her decision — one heel up, weight forward, the posture of someone about to resolve",
         "Her heel is down after the six-count testimony — the arithmetic resolved, direction not yet named.",
         "Fendt is named — a specific person on the Plateau is responsible, not an anonymous system",
         "Orla made a deliberate choice at personal cost — the evidence didn't arrive casually",
         "Fendt's pour into the ford confirmed by photonic record — a specific person made a specific choice at a specific place",
-        "Usnea's look carried permission without pressure — the choice is still entirely hers"
+        "Usnea's look carried permission without pressure — the choice is still entirely hers",
+        "Usnea called Sela by name only — no pressure, a plain opening"
       ],
       "skillsObserved": [
         "decisive closure once conditions were met",
@@ -1032,10 +1135,10 @@
         "reading intent across distance without words"
       ],
       "status": "active",
-      "statusNote": "Just inside the common house threshold — arithmetic resolved, chin dipped once toward the yard; Sela's call is live pending Dresh's first word.",
+      "statusNote": "Just inside the threshold beside Sela — rope coil loose, door-right still held; watching the room.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 10
+        "day": 11
       }
     },
     "orla": {
@@ -1181,7 +1284,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d10] Shifted from waiting to listening — hands laced, still holding Usnea with her gaze. The question she named has become the room's question.",
         "[d10] Hands came flat on the table again after Brynjar's account — the reweighing posture she took after Aevi's demonstration. Eyes on Brynjar.",
         "[d10] Named her preferred sequence aloud — warden first, memory glass second. Gave her reason plainly: let the room hold Heights-side and valley-side testimony before it looks at someone",
         "[d10] Received Usnea's plain confirmation of the hold — hands stayed flat, sequence sits with the room.",
@@ -1190,17 +1292,18 @@
         "[d10] Received Orla's name and Fendt's name in the same breath — the chain of custody is now in her possession before the glass plays. Eyes on the disc.",
         "[d10] Received the memory glass playback in full silence — palms flat, eyes on the disc, absorbing. Has not yet spoken. Holds the room.",
         "[d10] Shifted eyes from the disc to Usnea after Aevi dimmed — patient, watching, first word still hers.",
-        "[d10] Received the full coordination chain — pour, signature, six-count, three witnesses — in the same listening stillness. Eyes on Usnea's face; first word not yet spoken."
+        "[d10] Received the full coordination chain — pour, signature, six-count, three witnesses — in the same listening stillness. Eyes on Usnea's face; first word not yet spoken.",
+        "[d11] Eyes moved from Usnea's face to the doorway as Sela entered — absorbing the child's arrival before speaking."
       ],
       "knownFacts": [
-        "Her nanite-field carries a structured, organized shape — a question held deliberately, not formed in the moment",
         "Called for the memory glass after the warden's six-count — she has absorbed the Heights-side testimony and is ready for named-actor evidence.",
         "Orla is the optics-weaver who pulled the glass — her name, her role, her deliberate withholding from the Radiant council",
         "Fendt is operator of the south-face secondary filtration array and signatory to contamination-period purity reports",
         "The chain of custody runs: ford-side boulder — Orla — Usnea — this table",
         "Fendt's deliberate pour into the Echo River ford confirmed by photonic record — a person, a place, a choice, unhurried and without concealment",
         "Aevi attempted to speak after the playback and could not — the motes dimmed and scattered",
-        "Fendt's pour and the Precursor vent aperture signature share the same six-count pattern — confirmed by three independent witnesses from three vantage points"
+        "Fendt's pour and the Precursor vent aperture signature share the same six-count pattern — confirmed by three independent witnesses from three vantage points",
+        "Sela entered of her own pace — not summoned, not pushed"
       ],
       "skillsObserved": [
         "deliberate speech — choosing the precise word that opens rat",
@@ -1211,10 +1314,10 @@
         "deliberate sequencing under absorption — named readiness wit"
       ],
       "status": "active",
-      "statusNote": "At the common house table — absorbing the coordination chain, first word still hers.",
+      "statusNote": "At the table, palms flat — absorbing Sela's arrival; first word still hers and not yet spoken.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 10
+        "day": 11
       }
     }
   },
@@ -1222,7 +1325,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d10] Usnea stepped out to the common house yard to hold watch on the eastern lane — established as the arrival point for the tuning-warden, sightline running between the two oldest apple trees.",
         "[d10] Tuning-warden arrived at the yard's eastern lane via the apple trees — Day 10 midday. The final witness sequence is now live in this yard.",
         "[d10] Tuning-warden received and briefed by Usnea at the apple trees — the final witness sequence stepped to the common house threshold on Day 10 midday.",
         "[d10] Tuning-warden introduced and given the floor at the common house table — Day 10 afternoon. Heights-side testimony now live. Chord-staff loam-mark on the north wall plaster.",
@@ -1233,7 +1335,8 @@
         "[d10] Memory glass played in full at the common house table — Fendt's act now public record in this room. The evidence sequence is complete as of Day 10 evening. The fogged-rim disc sits cooling in yard-lig",
         "[d10] Aevi dimmed and could not speak after the memory glass playback — the motes scattered mid-attempt; the room witnessed the silence. Day 10 evening.",
         "[d10] The full coordination chain — pour, vent aperture signature, six-count, three witnesses — was named aloud at the common house table by Usnea on Day 10 evening. The evidence sequence is complete and sp",
-        "[d10] Pell's arithmetic resolved — a small nod toward the yard exchanged with Usnea; Sela's call is live as a contingent possibility inside the common house threshold. Day 10 night."
+        "[d10] Pell's arithmetic resolved — a small nod toward the yard exchanged with Usnea; Sela's call is live as a contingent possibility inside the common house threshold. Day 10 night.",
+        "[d11] Sela entered the common house threshold on Day 10 night — the youngest witness is now inside the room, standing beside Pell, before the first elder word."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1325,7 +1428,7 @@
           "name": "Common House Table — Elder Presentation",
           "day": 9,
           "visited": true,
-          "note": "Evidence sequence complete; Dresh's first word pending; Pell's nod toward the yard exchanged with Usnea — Sela's call li"
+          "note": "All witnesses now inside the room: Sela at threshold beside Pell; Dresh's first word the only remaining open thread."
         }
       }
     },
@@ -1677,7 +1780,6 @@
         "label": "Evidence for the Elders",
         "kind": "event",
         "facts": [
-          "[d10] Thursday morning: Usnea delivered testimony in sequence — seep location, geometric silt, root-contact lattice, Aevi's six-fold count and 'operating, not decaying' assessment — to the full elder panel.",
           "[d10] Day 10 Thursday: Usnea asked the room what question it was sitting with — Dresh named it precisely: does the system reach us, or reach for us. Holloway named his own fear aloud: whether it knows we're",
           "[d10] Day 10: Usnea held silence after Dresh's reach-vs-reach-for question — the room absorbed it collectively; Brynjar primed for his marker-question, Pell's grip eased, Holloway turned inward. The questio",
           "[d10] Day 10: Dresh sequenced the final witnesses — tuning-warden first (Heights-side pattern), then the memory glass (named actor). Her reason: let the room hold both before it looks at a face. The testimo",
@@ -1688,20 +1790,21 @@
           "[d10] Day 10 afternoon: Tuning-warden delivered Heights-side testimony complete — four seconds, six counts, light from inside the stone, three springs ago. Dresh absorbed it and called for the memory glass.",
           "[d10] Day 10 afternoon: Usnea named Orla to the elder panel — her role, her deliberate withholding from the Radiant council, the cost it carried. Fendt named by role and purity-report signature before the g",
           "[d10] Day 10 evening: Orla's memory glass played in full before Millbrook's assembled elder panel — Fendt's deliberate pour into the Echo River ford confirmed by photonic record, received in silence. The ev",
-          "[d10] Day 10 evening: Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses (Aevi's residue reading, Sela's river-listening, th"
+          "[d10] Day 10 evening: Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses (Aevi's residue reading, Sela's river-listening, th",
+          "[d11] Day 10 night: Sela crossed the common house yard and entered the threshold at Usnea's quiet call — all witnesses now present in the room before Dresh's first word. The evidence sequence is complete; t"
         ],
         "links": [
-          "orlas-memory-glass-the-ford-record",
           "millbrook",
           "the-six-fold-pattern",
           "councilor-dresh",
           "pell",
           "fendt-filtration-engineer",
           "echo-river-contamination",
-          "tuning-warden-gateline"
+          "tuning-warden-gateline",
+          "sela"
         ],
         "createdDay": 1,
-        "updatedDay": 10
+        "updatedDay": 11
       },
       "evidence-for-the-elders": {
         "id": "evidence-for-the-elders",
@@ -2507,7 +2610,7 @@
     }
   },
   "companionBonds": {
-    "aevi": 9.25
+    "aevi": 9.75
   },
   "practice": {
     "schemaVersion": 1,
@@ -2531,12 +2634,6 @@
     ]
   },
   "establishedFacts": [
-    {
-      "id": "orla",
-      "text": "Orla's memory glass is now in Usnea's keeping — transferred in the Edge District lane, Day 6 afternoon. It records Fendt pouring from a sealed tube into the ford current three days ago. Usnea is the c",
-      "day": 6,
-      "subjectId": "orla"
-    },
     {
       "id": "fendt",
       "text": "The south-face road from the Radiant Plateau passes Fendt's filtration array; the lower switchback warden post answers to array supervisors during active filtration runs — tonight counts as one. Orla ",
@@ -2770,6 +2867,12 @@
       "text": "Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses in plain speech before Millbrook's assembled elder panel. This conn",
       "day": 10,
       "subjectId": "contamination-evidence-for-the-elders"
+    },
+    {
+      "id": "sela",
+      "text": "Sela crossed the common house yard and entered the threshold on Day 10 night — all witnesses now present in the room before Dresh's first word.",
+      "day": 11,
+      "subjectId": "sela"
     }
   ],
   "precursorAccess": [],

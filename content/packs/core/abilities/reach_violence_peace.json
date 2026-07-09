@@ -46,6 +46,10 @@
       ],
       "functions": [
         "strike"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL"
       ]
     },
     {
@@ -91,6 +95,11 @@
       "functions": [
         "bind",
         "shield"
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT",
+        "DUEL"
       ]
     },
     {
@@ -117,7 +126,12 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL",
+        "INVESTIGATE"
+      ]
     },
     {
       "id": "read_the_room",
@@ -143,7 +157,11 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
     },
     {
       "id": "disarm",
@@ -171,7 +189,11 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL"
+      ]
     },
     {
       "id": "calm_word",
@@ -198,7 +220,11 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT"
+      ]
     },
     {
       "id": "the_stand",
@@ -225,7 +251,11 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SURVIVE"
+      ]
     },
     {
       "id": "broker_truce",
@@ -252,7 +282,11 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT"
+      ]
     },
     {
       "id": "the_held_breath",
@@ -279,7 +313,12 @@
         }
       ],
       "powerSystem": "reach_violence_peace",
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "DUEL",
+        "FIGHT",
+        "SOCIAL"
+      ]
     }
   ]
 }

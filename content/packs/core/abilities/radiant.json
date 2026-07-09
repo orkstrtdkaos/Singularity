@@ -48,7 +48,12 @@
       "challengeTypes": [
         "STEALTH",
         "CHASE"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "prism_sight",
@@ -95,7 +100,12 @@
         "INVESTIGATE",
         "STEALTH",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "radiant_lance",
@@ -141,7 +151,11 @@
       "challengeTypes": [
         "FIGHT",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2
+      }
     },
     {
       "id": "daybreak_mantle",
@@ -186,7 +200,12 @@
       ],
       "challengeTypes": [
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SURVIVE": 1
+      }
     },
     {
       "id": "light_well",
@@ -233,7 +252,12 @@
       "challengeTypes": [
         "SURVIVE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "INVESTIGATE": 2,
+        "FIGHT": 1
+      }
     },
     {
       "id": "sun_coax",
@@ -278,7 +302,12 @@
       ],
       "challengeTypes": [
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "PUZZLE": 1,
+        "SURVIVE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "afterimage",
@@ -325,7 +354,10 @@
         "DUEL",
         "CHASE",
         "STEALTH"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3
+      }
     },
     {
       "id": "clarity_lens",
@@ -371,7 +403,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "glimmer_script",
@@ -417,7 +454,12 @@
       "challengeTypes": [
         "EXPLORE",
         "STEALTH"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 2,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     },
     {
       "id": "beacon_thread",
@@ -464,7 +506,14 @@
       "challengeTypes": [
         "EXPLORE",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "dawn_surgery",
@@ -510,7 +559,12 @@
       ],
       "challengeTypes": [
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "PUZZLE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "prism_ward",
@@ -558,7 +612,14 @@
         "SURVIVE",
         "STEALTH",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "DUEL": 2,
+        "SURVIVE": 2,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     },
     {
       "id": "sun_seal",
@@ -590,7 +651,14 @@
         "SURVIVE",
         "EXPLORE",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      }
     }
   ]
 }

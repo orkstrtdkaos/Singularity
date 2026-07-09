@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "skill_utility_audit",
+  "kind": "design_audit",
+  "note": "Erik's meta-critique 2026-07-07: in D&D a spell's USE is obvious (Fireball = fight, now). Many of ours are authored THEMATICALLY (express their Reach's philosophy) but don't answer the player's real question: 'I'm in a fight/puzzle/duel/chase \u2014 what do I reach for?' The Palework problem: 'craft of good endings' is beautiful lore but reads as 'useful when something's already dying,' which is rarely the pressure. Skills exist to AID THE CHARACTER THROUGH CHALLENGES. This audit categorizes all 106 by challenge-utility, flags the thematically-pretty-but-tactically-weak, and opens novel uses. Authored by Aevi (PO).",
+
+  "challengeTypes": ["FIGHT (combat, threats to survive)","DUEL (formal 1v1, honor-bound)","PUZZLE (locks, mechanisms, mysteries to solve)","CHASE (pursuit, escape, race)","SOCIAL (persuade, deceive, mediate, intimidate)","EXPLORE (navigate, find, traverse)","SURVIVE (heal, endure, sustain, weather)","STEALTH (infiltrate, hide, unseen action)","INVESTIGATE (read, sense, learn truth)"],
+
+  "utilityLens_theProblem": {
+    "clearUse": "Most skills DO have obvious challenge-use once you look: radiant_lance=FIGHT (sever rope/scorch hand), the_edge=FIGHT/DUEL, quiet_step=STEALTH, staunch=SURVIVE, unmake_seal=PUZZLE. The function-tags already point at challenge-type (strike\u2192FIGHT, conceal\u2192STEALTH, heal\u2192SURVIVE, reveal\u2192INVESTIGATE, bind\u2192SOCIAL/control, move\u2192CHASE/EXPLORE).",
+    "theWeakOnes": "A minority are SITUATIONAL-DEPENDENT \u2014 they need the world to already be in a specific state to matter, so a player rarely gets to CHOOSE them under pressure:",
+    "flagged": [
+      {"skill": "palework", "problem": "needs something dying/dead to act on \u2014 'when do I use this?' is exactly Erik's complaint. As written it's INVESTIGATE (read decay) + a niche SURVIVE (grant rest). Rarely a live tactical lever.", "fix": "reframe its ACTIVE uses: wither-adjacent (accelerate an enemy's fatigue/a rope's rot MID-FIGHT), read-the-dead as an INVESTIGATE staple (a battlefield tells you who/what/how \u2014 useful at any crime/aftermath scene), and 'grant rest' as an anti-undead/anti-suffering COMBAT tool vs things that won't stay down. Palework should be a FIGHT/INVESTIGATE tool that happens to be themed on endings, not an ending-detector."},
+      {"skill": "the_last_gift", "problem": "only fires on the dying \u2014 pure situational.", "fix": "keep as a rare poignant beat, but add a live edge: the lucid interval can extract a last TRUTH (INVESTIGATE) or a dying foe's cooperation (SOCIAL) \u2014 now it's a tool you'd seek a dying NPC to use."},
+      {"skill": "death_ward / deathsense / lifesense", "problem": "sense-skills that are pure INVESTIGATE with narrow triggers.", "fix": "fine as investigate utility, but make them TACTICAL: lifesense = find the hidden ambusher / the one survivor (FIGHT/STEALTH counter); deathsense = detect the trap that killed the last person (PUZZLE)."},
+      {"skill": "numen_sense / address_sense / echo_memory / storykeeper", "problem": "flavor-rich INVESTIGATE skills with no fight/chase use \u2014 fine, but they cluster; a character heavy in these has lore and no teeth.", "fix": "not broken \u2014 but the UI must show a player their FIGHT/SURVIVE coverage so they don't accidentally build all-lore. (SNG-041 challenge-coverage meter.)"},
+      {"skill": "the_held_breath / broker_truce / hold_the_aperture", "problem": "powerful but abstract \u2014 a player may not see the FIGHT/SOCIAL use.", "fix": "clarify: held_breath = DUEL/standoff control (freeze a fight you can't win yet); broker_truce = end a FIGHT without dying; hold_the_aperture = the anti-foreclose SURVIVE/PUZZLE clutch (the collapsing bridge stays crossable). Present them by their challenge-use, not their philosophy."}
+    ]
+  },
+
+  "categorization_byChallenge": {
+    "FIGHT": ["sonic_resonance","resonant_shield","shatterpoint","radiant_lance","hunters_strike","wake_the_line","foreclose","wither","the_edge","disarm","the_stand","radiance","kindle","noesis","second_wind","the_whole_act","probability_tilt","scatter","logos(intimidate)","palework(vs-undead)","riding_order","unshadow"],
+    "DUEL": ["the_edge","disarm","read_the_fight","the_held_breath","perfect_motion","the_whole_act","afterimage","probability_tilt","stillcraft(refuse)"],
+    "PUZZLE": ["shatterpoint","unmake_seal","latticespeak","enginecraft","mend_device","command_engine","order_sense","chaos_sense","stonewise","clarity_lens","deathsense(traps)","address_sense","meaning_engine","riding_order"],
+    "CHASE": ["drumline_stride","rivercraft","wildcraft","afterimage","false_trail","distanced-mod","accelerated-mod","quiet_step","perfect_motion","probability_tilt","scatter"],
+    "SOCIAL": ["harmonic_voice","mediators_tongue","daybreak_mantle","stillcraft","calm_word","broker_truce","pathos","logos","falsecraft","verity","read_the_room","beastfriend","the_last_gift(extract)","numenwork"],
+    "EXPLORE": ["wayfinding","rivercraft","old_roads","drumline_stride","darksight","stonewise","address_sense","distanced-mod","glimmer_script","hold_the_aperture"],
+    "SURVIVE": ["staunch","greenlore","chord_of_mending","dawn_surgery","quickening","graftlife","hearthbinding","sun_coax","light_well","soma","second_wind","hold_the_aperture","harbored_flame","steady_soul"],
+    "STEALTH": ["quiet_step","light_bending","afterimage","dim","the_harbor","shroud","false_trail","blend_in","umbracraft","falsecraft","stillness_field","veiled-mod"],
+    "INVESTIGATE": ["echo_sense","tremor_sense","prism_sight","clarity_lens","keen_appraisal","storykeeper","echo_memory","address_sense","lifesense","deathsense","mech_sense","numen_sense","body_read","mind_read_folk","memory_palace","read_the_fight","read_the_room","order_sense","chaos_sense","palework(read-dead)","verity","numenwork"]
+  },
+
+  "coverageFindings": {
+    "wellCovered": "INVESTIGATE (huge \u2014 the reveal-glut in challenge terms), SURVIVE, SOCIAL, STEALTH all have deep options.",
+    "thinnerThanExpected": "PUZZLE has options but they're INVESTIGATE-flavored (sense the answer) more than SOLVE it \u2014 few skills that MANIPULATE a mechanism/lock actively. DUEL leans on a handful. Pure damage-FIGHT is adequate but concentrated in the Edge/Radiant/Harmonic \u2014 a life or spirit character has few direct-harm options (by design, but they need CONTROL options to compensate: bind, scatter, wither, foreclose \u2014 make sure those read as 'your fight tools').",
+    "theRealFix": "Not more skills \u2014 PRESENTATION + a few reframes. (1) Tag every ability with challengeTypes[] so the game (and player) knows what each is FOR. (2) SNG-041 skill screen shows a CHALLENGE-COVERAGE view: 'in a FIGHT you have: X, Y, Z' \u2014 so a player sees their teeth (or lack). (3) Reframe the ~6 flagged situational skills toward active uses. (4) GM guidance: when a skill's obvious use is narrow, the GM should honor NOVEL uses generously (below)."
+  },
+
+  "novelUses": {
+    "principle": "The deepest answer to 'when do I use this?' is: MORE OFTEN THAN ITS OBVIOUS USE, if the game rewards creativity. A skill's value = obvious uses + novel uses the GM allows. This is where the cross-domain combination system and the novelty-reward (SNG-030) already point \u2014 lean in hard.",
+    "examples": [
+      {"skill": "palework", "obvious": "ease a death", "novel": "rot the wooden door off its hinges (PUZZLE); wither the rope bridge behind you (CHASE); read the battlefield-dead to reconstruct the ambush (INVESTIGATE); threaten a foe with a clean end they can FEEL coming (SOCIAL/intimidate); end a Precursor-thing that won't die (FIGHT)."},
+      {"skill": "chord_of_mending", "obvious": "fix a cracked blade", "novel": "seal a leaking boat mid-CHASE; mend a snapped rope over a chasm (EXPLORE); repair the mechanism you need (PUZZLE); un-break the thing an enemy just broke."},
+      {"skill": "harmonic_voice", "obvious": "calm a crowd", "novel": "steady your own panicking party mid-FIGHT (morale as a resource); soothe a beast blocking the path (EXPLORE); defuse a DUEL before blades."},
+      {"skill": "prism_sight", "obvious": "see heat traces", "novel": "tell which door was JUST used (CHASE/STEALTH); find the person hiding by body-heat (FIGHT); read whether the food is poisoned-hot (SURVIVE); see the recent handprint on the lockbox (INVESTIGATE)."},
+      {"skill": "beastfriend", "obvious": "calm a dog", "novel": "turn a guard-beast against its owner (STEALTH); read a horse to know who rode it (INVESTIGATE); call birds as a distraction (CHASE)."},
+      {"skill": "the_fixed_point", "obvious": "be the calm center", "novel": "anchor an ally who's about to break (FIGHT morale); hold your footing in a collapsing room (SURVIVE); be the one thing a chaos-illusion can't move (PUZZLE)."}
+    ],
+    "gmMandate": "When a player proposes a novel use that's PLAUSIBLE for the skill's principle, the GM should allow it (a check if contested) and REWARD it (novelty XP, SNG-030). 'When do I use Palework?' should have a dozen player-found answers, not one. The skill's principle is the permission; the challenge is the occasion; the player's creativity is the bridge."
+  },
+
+  "buildImplication": "Add challengeTypes[] to every ability (derivable largely from functions + effect \u2014 a back-tag pass, rides SNG-022). SNG-041 skill UI gains a CHALLENGE-COVERAGE view ('what do I bring to a fight/puzzle/chase?') alongside the by-tradition and by-function views. Reframe the ~6 flagged situational skills' descriptions toward active/novel uses (content edit, Aevi). GM rule: honor + reward novel skill uses (already half-there via novelBonus). NO new skills needed \u2014 the fix is making what each skill is FOR legible, and making creativity pay. Flag SNG-044."
+}

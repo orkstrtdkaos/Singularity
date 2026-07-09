@@ -50,7 +50,11 @@
       "challengeTypes": [
         "FIGHT",
         "DUEL"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "DUEL": 3
+      }
     },
     {
       "id": "stillcraft",
@@ -100,7 +104,13 @@
         "SOCIAL",
         "FIGHT",
         "DUEL"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SURVIVE": 1
+      }
     },
     {
       "id": "read_the_fight",
@@ -131,7 +141,12 @@
         "FIGHT",
         "DUEL",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "read_the_room",
@@ -161,7 +176,12 @@
       "challengeTypes": [
         "SOCIAL",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "disarm",
@@ -193,7 +213,12 @@
       "challengeTypes": [
         "FIGHT",
         "DUEL"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "PUZZLE": 2
+      }
     },
     {
       "id": "calm_word",
@@ -224,7 +249,12 @@
       "challengeTypes": [
         "SOCIAL",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "SOCIAL": 2,
+        "FIGHT": 1
+      }
     },
     {
       "id": "the_stand",
@@ -255,7 +285,12 @@
       "challengeTypes": [
         "FIGHT",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "SURVIVE": 1
+      }
     },
     {
       "id": "broker_truce",
@@ -286,7 +321,12 @@
       "challengeTypes": [
         "SOCIAL",
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "the_held_breath",
@@ -318,7 +358,13 @@
         "DUEL",
         "FIGHT",
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "DUEL": 3,
+        "SOCIAL": 2,
+        "FIGHT": 2,
+        "SURVIVE": 1
+      }
     }
   ]
 }

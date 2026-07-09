@@ -659,6 +659,39 @@
         "EXPLORE": 1,
         "STEALTH": 1
       }
+    },
+    {
+      "id": "light_borne",
+      "name": "Light-Borne",
+      "levelReq": 5,
+      "energyCost": 12,
+      "attribute": "mental",
+      "axes": {
+        "dark_light": 0.4,
+        "space_time": 0.2
+      },
+      "functions": [
+        "move",
+        "reveal"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "CHASE": 2,
+        "FIGHT": 1
+      },
+      "narrationHints": "Made briefly of your own held light, you rise — and for a while the ground is a suggestion.",
+      "description": "True flight, radiant: become light-buoyant and fly under control for a sustained interval — hover, rise, cross open sky. Blazingly visible (you ARE a light), so no stealth, but the sky is yours.",
+      "notFor": "Stealth (you're a beacon); night-hiding; indefinite flight.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Light-Borne",
+          "grants": "Fly under full control for a sustained interval — hover, climb, cross the open air.",
+          "cannot": "You shine — seen for miles, no concealment; the interval ends and you must be down or near it; costly."
+        }
+      ],
+      "powerSystem": "radiant",
+      "gated": "learned"
     }
   ]
 }

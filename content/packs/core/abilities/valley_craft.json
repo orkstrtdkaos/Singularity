@@ -48,7 +48,12 @@
       "challengeTypes": [
         "EXPLORE",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2,
+        "INVESTIGATE": 2
+      }
     },
     {
       "id": "greenlore",
@@ -94,7 +99,12 @@
       ],
       "challengeTypes": [
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "PUZZLE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "mediators_tongue",
@@ -139,7 +149,12 @@
       ],
       "challengeTypes": [
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "tinkers_hand",
@@ -185,7 +200,12 @@
       "challengeTypes": [
         "PUZZLE",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "PUZZLE": 1,
+        "SURVIVE": 1,
+        "EXPLORE": 1
+      }
     },
     {
       "id": "beastfriend",
@@ -232,7 +252,12 @@
         "SOCIAL",
         "EXPLORE",
         "STEALTH"
-      ]
+      ],
+      "challengeProfile": {
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "stonewise",
@@ -279,7 +304,12 @@
       "challengeTypes": [
         "EXPLORE",
         "PUZZLE"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "rivercraft",
@@ -326,7 +356,11 @@
         "EXPLORE",
         "CHASE",
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "quiet_step",
@@ -373,7 +407,12 @@
       "challengeTypes": [
         "STEALTH",
         "CHASE"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3,
+        "CHASE": 2,
+        "EXPLORE": 2
+      }
     },
     {
       "id": "storykeeper",
@@ -420,7 +459,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "SOCIAL": 2,
+        "FIGHT": 1
+      }
     },
     {
       "id": "hearthbinding",
@@ -466,7 +510,12 @@
       ],
       "challengeTypes": [
         "SURVIVE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "SOCIAL": 2,
+        "FIGHT": 1
+      }
     },
     {
       "id": "keen_appraisal",
@@ -512,7 +561,12 @@
       "challengeTypes": [
         "INVESTIGATE",
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "old_roads",
@@ -560,7 +614,14 @@
       "challengeTypes": [
         "EXPLORE",
         "INVESTIGATE"
-      ]
+      ],
+      "challengeProfile": {
+        "CHASE": 2,
+        "EXPLORE": 2,
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      }
     },
     {
       "id": "blend_in",
@@ -591,7 +652,10 @@
       "challengeTypes": [
         "STEALTH",
         "SOCIAL"
-      ]
+      ],
+      "challengeProfile": {
+        "STEALTH": 3
+      }
     },
     {
       "id": "boundary_stone",
@@ -622,7 +686,15 @@
       "challengeTypes": [
         "SURVIVE",
         "EXPLORE"
-      ]
+      ],
+      "challengeProfile": {
+        "SURVIVE": 2,
+        "SOCIAL": 2,
+        "EXPLORE": 1,
+        "STEALTH": 1,
+        "FIGHT": 1,
+        "DUEL": 1
+      }
     },
     {
       "id": "hunters_strike",
@@ -651,7 +723,11 @@
       ],
       "challengeTypes": [
         "FIGHT"
-      ]
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2
+      }
     }
   ]
 }

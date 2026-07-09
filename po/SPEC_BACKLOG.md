@@ -304,3 +304,28 @@ Erik 2026-07-07: the creation and leveling/skill-choosing experience needs to be
 - **Smoke:** creation is a stepped wizard, one decision per screen, no hover-dependent info, all current origins/backgrounds offered; a mobile player can read every ability's effect + cost without hovering; one leveling surface (list default, graph optional) with reasons on every disabled action; unspent points are impossible to miss.
 
 *Updated 2026-07-07 — through SNG-041.*
+
+## SNG-042 — Skill audit: usefulness, consolidation, and progression-unlock logic
+Erik 2026-07-07: are the current skills useful or trash? Should they combine into functional areas? Need logic on progression unlocks. AUDITED the full ability corpus (100 abilities, function-tagged) at origin.
+
+**Verdict: NOT trash — the corpus is good and characterful (each ability has crisp CAN/CANNOT, no pure filler). But it has real IMBALANCES:**
+- **Function glut/gaps:** reveal=41 (!), bind=25, heal=15, move=15, shield=14, strike=13, break=13, mend=11, ward=8, conceal=8. Reveal is 3× over-served; conceal/ward/strike are thin. A Shadow (conceal) or defender (ward) archetype has few real options while every tradition can "sense" things ten ways.
+- **Tradition imbalance:** the 3 original + 6 built Reaches sit at 9-12 abilities; the 2 newest Reaches (emotional_logical, falsehood_truth) are stuck at 2. Precursor at 6 (intentionally gated). Uneven archetype support.
+- **Overlap within functions:** many near-duplicate "senses" across traditions (echo_sense, tremor_sense, deathsense, lifesense, mech_sense, numen_sense, body_read, chaos_sense, order_sense...). Not wrong — each is flavored to its Reach — but the PLAYER sees ten sense-abilities and can't tell which matters. This is a PRESENTATION problem (group by function — SNG-041) more than a content one; don't delete flavor, GROUP it.
+
+**Actions:**
+1. **Don't combine/delete — GROUP.** The abilities aren't redundant, they're the same FUNCTION through different Reaches (the whole design). Fix is UI (SNG-041): present the skill list grouped by FUNCTION as an option ("everything that REVEALS"), so a player shopping for a shield sees the 14 shields across traditions, not a maze. Keep every ability; change how they're shown.
+2. **Rebalance by expansion, not cutting:** bring emotional_logical + falsehood_truth to ~9 (breadth pass, like the other Reaches got); add conceal/ward/strike abilities where archetypes are starved (Shadow needs more conceal; Artificer more ward). Target rough function parity so every archetype has real choices.
+3. **Trim reveal-glut gently:** don't delete, but ensure new abilities skew AWAY from reveal; consider merging the most redundant same-Reach senses (e.g. if one Reach has 2 near-identical senses) into one with a richer tree. Audit per-Reach for internal dupes only.
+
+**PROGRESSION-UNLOCK LOGIC (the real ask — currently ad-hoc, needs a stated model):**
+- **Tier gates (exist, keep):** Tier I-V by levelReq; attribute-gates on Tier III+ (attribute_gates.json). Rule: an ability's TIER = how deep in a tradition it sits; you can't take Tier III before the level + attribute floor.
+- **Tradition access (the SNG-017 fix, state it as law):** origin grants HOME tradition(s) free-to-tier; OTHER traditions require traditionAccess earned in fiction (teacher/travel/quest). No more hardcoded triangle. Reaches are 'learned'-gated already — generalize.
+- **Breadth cost (exists, keep):** cross-tradition abilities cost more (skill_capacity crossClass / crossTraditionLevelPenalty) — going wide is priced; going deep is cheaper. This is what makes archetype identity mean something.
+- **The unlock SPINE (new, stated):** a clean rule for what opens when — (a) LEVEL raises your tier ceiling; (b) ATTRIBUTES gate Tier III+ within a tradition; (c) FICTION opens new traditions (traditionAccess) and the Precursor tier (precursorAccess); (d) PRACTICE/USE ripens aspired abilities toward a free claim (the practice/aspiration system already exists — surface it); (e) COMBINATION unlocks by owning both parts + discovery (SNG-026). Five clear channels, each visible to the player with its requirement stated (SNG-041's "reasons on disabled actions").
+- **Doc it:** a progression.md content doc stating this spine so it's canon, not scattered across engine files.
+
+**Ties:** SNG-041 (function-grouping UI + reasons-shown), SNG-017 (traditionAccess), SNG-036/class_archetypes (archetype parity is the balance target), SNG-026 (combination unlock). Mostly content-balance + one stated model + UI grouping; the engine mechanics largely exist, they need STATING and BALANCING.
+- **Smoke:** function coverage roughly even across the 9-10 functions; every archetype has ≥5 real ability choices; the skill screen can group by function; each ability's unlock requirement is visible and follows the stated 5-channel spine; the two thin Reaches reach ~9.
+
+*Updated 2026-07-07 — through SNG-042.*

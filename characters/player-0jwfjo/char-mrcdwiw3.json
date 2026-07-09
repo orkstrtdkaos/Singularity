@@ -21,7 +21,8 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.20940572959843257
+    "spectrumId": -0.20940572959843257,
+    "concrete_abstract": -0.025
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -211,62 +212,45 @@
       {
         "summary": "Brynjar delivers a clean rivercraft reading to Mara: point source, columnar ribbons, upper east fork; plus the second boot prints on the trail.",
         "narration": "You step up to the counter and accept one of the bowls — warm pottery, oats still steaming — and set it down in front of you without eating. A gesture: I'm here to work, not breakfast. Mara doesn't move her hands from the wood, just watches.\n\n\"Contamination ribbons are columnar,\" you say, keeping it plain. \"Not spreading sideways through the bank, not leeching slow. They're feeding straight down a fast channel — tight and coherent. I read them from the stock trail above the first braid, where you can see both forks at once.\" You let that sit a moment. \"That means a point source. Something feeding directly into the upper east fork, not a wide seep across the watershed. And it's getting stronger upstream — I could see that much before I had to turn back.\"\n\nMara listens the way she does everything: without hurry, without leaning in. When you finish she draws a slow breath and straightens fractionally. \"How far up before you turned back?\"\n\n\"Past the braid, short of the high pasture fence. Skiff grounded on the gravel bar — sprung plank. Went on foot from there.\" You keep your voice level. \"There's something else. Second set of boot prints on the trail, running downstream. Fresher than the ones going up. Someone came down that trail recently — not the Venn girl, different heel. Whoever made those prints may have been closer to the source than I got.\""
+      },
+      {
+        "summary": "Brynjar lays out the full picture; Mara connects the downstream boot prints to the pre-dawn lane passage and asks where the unknown traveler came from.",
+        "narration": "You pick up the bowl finally — something to do with your hands — and lay it all out in order, the way you'd read a river: upstream to downstream, source to mouth. The Venn girl on the stock trail, headed for the fold above the high pasture fence. The gray soil she mentioned unprompted, coming up mineral above the fence line. The second boot prints you found in the mud below the alder bend — smaller heel, fresher than hers, running downstream. And then the heavy boots the common house apprentice heard on the wayhouse lane around second watch this morning, heavier than a farmer's step, not stopping inside.\n\nMara lets you finish without interrupting. Her hands stay flat on the counter but her weight shifts slightly forward by the end — a small thing, but you notice it. She's quiet for a moment, working through the sequence. Usnea is still at your shoulder, coat cold from the lane, saying nothing.\n\n\"Two sets of feet,\" Mara says at last. Her voice is flat and precise, the river-note in it stronger than usual. \"The girl goes up to her fold — that's known, that's regular. Someone else comes down. And by second watch they're walking this lane.\" She lifts one hand from the wood and taps the counter once, not agitated, just marking the count. \"That's not a farmer checking irrigation. That's someone who went up into the upper east fork — past the fence — and came back before dawn and didn't stop to knock on a single door.\"\n\nShe moves then, pulling the pot of porridge off the hearth hook and setting a second bowl in front of Usnea without being asked. \"Eat. Both of you.\" It isn't hospitality exactly — it's buying herself a moment to think out loud. \"The soil going gray above the fence, the point source you read — whatever is up there, someone's been to see it already. The question I'm sitting with now is whether they came from inside the valley or from the other side of the pass.\" She looks at you directly. \"You're the one who walked that trail. What did the prints tell you about direction of travel?\""
       }
     ],
     "lastTurn": {
-      "narration": "You step up to the counter and accept one of the bowls — warm pottery, oats still steaming — and set it down in front of you without eating. A gesture: I'm here to work, not breakfast. Mara doesn't move her hands from the wood, just watches.\n\n\"Contamination ribbons are columnar,\" you say, keeping it plain. \"Not spreading sideways through the bank, not leeching slow. They're feeding straight down a fast channel — tight and coherent. I read them from the stock trail above the first braid, where you can see both forks at once.\" You let that sit a moment. \"That means a point source. Something feeding directly into the upper east fork, not a wide seep across the watershed. And it's getting stronger upstream — I could see that much before I had to turn back.\"\n\nMara listens the way she does everything: without hurry, without leaning in. When you finish she draws a slow breath and straightens fractionally. \"How far up before you turned back?\"\n\n\"Past the braid, short of the high pasture fence. Skiff grounded on the gravel bar — sprung plank. Went on foot from there.\" You keep your voice level. \"There's something else. Second set of boot prints on the trail, running downstream. Fresher than the ones going up. Someone came down that trail recently — not the Venn girl, different heel. Whoever made those prints may have been closer to the source than I got.\"",
-      "sceneSummary": "Brynjar delivers a clean rivercraft reading to Mara: point source, columnar ribbons, upper east fork; plus the second boot prints on the trail.",
+      "narration": "You pick up the bowl finally — something to do with your hands — and lay it all out in order, the way you'd read a river: upstream to downstream, source to mouth. The Venn girl on the stock trail, headed for the fold above the high pasture fence. The gray soil she mentioned unprompted, coming up mineral above the fence line. The second boot prints you found in the mud below the alder bend — smaller heel, fresher than hers, running downstream. And then the heavy boots the common house apprentice heard on the wayhouse lane around second watch this morning, heavier than a farmer's step, not stopping inside.\n\nMara lets you finish without interrupting. Her hands stay flat on the counter but her weight shifts slightly forward by the end — a small thing, but you notice it. She's quiet for a moment, working through the sequence. Usnea is still at your shoulder, coat cold from the lane, saying nothing.\n\n\"Two sets of feet,\" Mara says at last. Her voice is flat and precise, the river-note in it stronger than usual. \"The girl goes up to her fold — that's known, that's regular. Someone else comes down. And by second watch they're walking this lane.\" She lifts one hand from the wood and taps the counter once, not agitated, just marking the count. \"That's not a farmer checking irrigation. That's someone who went up into the upper east fork — past the fence — and came back before dawn and didn't stop to knock on a single door.\"\n\nShe moves then, pulling the pot of porridge off the hearth hook and setting a second bowl in front of Usnea without being asked. \"Eat. Both of you.\" It isn't hospitality exactly — it's buying herself a moment to think out loud. \"The soil going gray above the fence, the point source you read — whatever is up there, someone's been to see it already. The question I'm sitting with now is whether they came from inside the valley or from the other side of the pass.\" She looks at you directly. \"You're the one who walked that trail. What did the prints tell you about direction of travel?\"",
+      "sceneSummary": "Brynjar lays out the full picture; Mara connects the downstream boot prints to the pre-dawn lane passage and asks where the unknown traveler came from.",
       "choices": [
         {
-          "label": "Tell Mara about the heavy boots on the lane at second watch — and ask if she knows who they belong to",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "violence_peace": 0.6
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "share",
-            "probe"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Mara directly: who else knew I was going up the east fork — and who might have reason to go up and come back down before dawn",
+          "label": "Read the trail from memory — heel depth, stride length, mud displacement — and give Mara your best read on whether those prints came from above the fence or below it",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "violence_peace": 0.6,
-            "concrete_abstract": -0.4
+            "spectrumId": -0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "probe",
             "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "rivercraft",
+          "energyCost": 5,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Lay out everything at once — the Venn girl, the gray soil above the fence, the second prints, the heavy boots — and ask Mara what she makes of it together",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell her you can't say for certain from memory — but propose going back up the trail now, before rain or foot traffic obscures the prints further",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "concrete_abstract": -0.5
+            "spectrumId": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "share",
             "plan",
-            "careful"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -275,17 +259,34 @@
           "emergenceId": null
         },
         {
-          "label": "Let Usnea speak next — you've given the field reading; see what she adds before pressing further",
+          "label": "Ask Mara who in the valley would have reason to go up past the fence and stay quiet about it — she's been watching this longer than anyone",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "violence_peace": 0.7
+            "spectrumId": 0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "defer",
-            "careful",
-            "help"
+            "persuade",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Name the pass directly — ask if she's heard anything about the new route opening, or whether anyone local has talked about crossing it",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "spectrumId": 0
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -307,8 +308,7 @@
         {
           "op": "progress",
           "questId": "east-fork-run",
-          "title": "East Fork at First Light",
-          "note": "Brynjar delivered the rivercraft field reading to Mara: point source, columnar ribbons strengthening upstream, fast channel. Second boot prints on the trail running downstream also reported."
+          "note": "Mara connects the downstream prints to the pre-dawn lane passage — someone went past the high pasture fence and returned before dawn without speaking to anyone. She raises the question of whether they came from inside the valley or from the other side of the new mountain pass."
         }
       ],
       "scene": {
@@ -316,26 +316,26 @@
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing behind the counter, hands flat on the wood, listening to the field report — asked how far up Brynjar turned back."
+            "state": "Standing behind the counter, porridge pot set back from the hook, hands returning to the wood — has just voiced the connection between the downstream prints and the pre-dawn lane passage, and asked Brynjar what direction the prints came from."
           },
           {
             "name": "Usnea Beard",
-            "state": "Beside Brynjar at the counter, coat still cold from the lane, attending quietly."
+            "state": "At the counter beside Brynjar, a bowl of porridge now in front of them, listening."
           }
         ],
         "objects": [
           "Banked hearth with active fire",
-          "Pot of oat porridge on the hearth — smells of dried herbs",
-          "Two bowls set on the counter edge — Brynjar's accepted but untouched",
+          "Pot of oat porridge returned to hearth-side",
+          "Two bowls on the counter — Brynjar's accepted and in hand, Usnea's just set out",
           "Common room benches and long table",
           "The lane visible through the half-shut door"
         ],
         "threads": [
-          "Mara has asked how far up Brynjar turned back — question partially answered, awaiting follow-up",
-          "Second downward boot prints on the east bank trail — origin and identity unresolved; Mara now aware",
-          "Heavy boots on the lane at second watch — Mara not yet told",
-          "Dark-coated figure seen on river road two days ago — unresolved",
-          "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream"
+          "Mara has asked what direction the second boot prints indicate — inside the valley or from beyond the pass",
+          "Heavy boots on the lane at second watch — Mara has now connected this to the downstream prints",
+          "Dark-coated figure seen on river road two days ago — still unresolved",
+          "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream",
+          "Whether the unknown traveler came from past the new mountain pass — newly raised question"
         ]
       },
       "npcUpdates": [
@@ -344,33 +344,49 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Wayhouse-keeper and Millbrook's informal keeper of difficult problems",
-          "note": "Received Brynjar's rivercraft reading without interruption — asked one sharp follow-up question (how far up before he turned back). Now aware of the second boot prints on the trail.",
+          "note": "Received the full picture — Venn girl, gray soil, second prints, heavy boots — and synthesized it immediately: two separate sets of feet, one known regular, one unknown who went past the fence and returned pre-dawn without stopping anywhere. Raised the question of whether the unknown came from inside the valley or from beyond the new pass.",
           "learned": [
-            "Contamination ribbons are columnar and tight — point source feeding a fast channel, not a broad seep",
-            "Contamination strengthens upstream — source is in the upper east fork",
-            "A second set of boot prints runs downstream on the east bank trail — fresher than the upward prints, different heel from the Venn girl"
+            "Heavy boots on the wayhouse lane at second watch are likely connected to the downstream boot prints on the east bank trail",
+            "Someone traveled to the upper east fork — past the high pasture fence — and returned before dawn on day 3 without speaking to anyone in Millbrook",
+            "The unknown traveler may have come from beyond the new mountain pass"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "rapid synthesis of field intelligence",
+            "pattern recognition across separate observations"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the wayhouse common room at sunrise — receiving the east fork field report from Brynjar; has asked a follow-up question."
+          "statusNote": "In the wayhouse common room — has connected the downstream prints to the pre-dawn lane passage; now asking Brynjar about the direction those prints came from."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Mara Wells has connected the second downstream boot prints on the east bank trail to the heavy-stepped figure heard on the wayhouse lane at second watch on day 3 — one person, went up past the high pasture fence and returned pre-dawn without stopping at any door. Origin — inside the valley or beyond the new pass — unknown.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Mara has raised aloud the possibility that the unknown traveler came through the new mountain pass rather than from within the valley — this question now sits in the wayhouse.",
+          "flag": {
+            "unknown_traveler_origin_raised": "day3-sunrise"
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "echo-river-contamination",
-          "label": "Echo River Contamination",
+          "topic": "unknown-traveler",
+          "label": "The Unknown Traveler",
           "kind": "mystery",
-          "fact": "Field reading confirmed: contamination ribbons are columnar and coherent — point source feeding a fast, tight channel in the upper east fork, not a wide seep. Source lies above the high pasture fence. Reported to Mara Wells at sunrise on day 3.",
+          "fact": "Someone — not the Venn shepherd girl — traveled up the east bank stock trail past the high pasture fence and returned before dawn on day 3, passing on the wayhouse lane around second watch without stopping at any door. Mara raises the possibility they came from beyond the new mountain pass rather than from within the valley.",
           "links": [
-            "mara-wells",
-            "east-fork-run",
             "east-bank-stock-trail",
             "high-pasture-fence",
-            "disputed-zone",
-            "millbrook"
+            "echo-river-contamination",
+            "east-fork-run",
+            "millbrook",
+            "mara-wells"
           ]
         }
       ],
@@ -382,33 +398,33 @@
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing behind the counter, hands flat on the wood, listening to the field report — asked how far up Brynjar turned bac"
+          "state": "Standing behind the counter, porridge pot set back from the hook, hands returning to the wood — has just voiced the conn"
         },
         {
           "name": "Usnea Beard",
-          "state": "Beside Brynjar at the counter, coat still cold from the lane, attending quietly."
+          "state": "At the counter beside Brynjar, a bowl of porridge now in front of them, listening."
         }
       ],
       "objects": [
         "Banked hearth with active fire",
-        "Pot of oat porridge on the hearth — smells of dried herbs",
-        "Two bowls set on the counter edge — Brynjar's accepted but untouched",
+        "Pot of oat porridge returned to hearth-side",
+        "Two bowls on the counter — Brynjar's accepted and in hand, Usnea's just set out",
         "Common room benches and long table",
         "The lane visible through the half-shut door"
       ],
       "threads": [
-        "Mara has asked how far up Brynjar turned back — question partially answered, awaiting follow-up",
-        "Second downward boot prints on the east bank trail — origin and identity unresolved; Mara now aware",
-        "Heavy boots on the lane at second watch — Mara not yet told",
-        "Dark-coated figure seen on river road two days ago — unresolved",
-        "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream"
+        "Mara has asked what direction the second boot prints indicate — inside the valley or from beyond the pass",
+        "Heavy boots on the lane at second watch — Mara has now connected this to the downstream prints",
+        "Dark-coated figure seen on river road two days ago — still unresolved",
+        "East bank traveler (Venn shepherd girl) — name still unlearned, still upstream",
+        "Whether the unknown traveler came from past the new mountain pass — newly raised question"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 7,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [],
@@ -421,14 +437,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Skiff abandoned on the gravel bar with sprung plank; Brynjar now on foot on the east bank stock trail. Stranger confirms contamination visibly stronger upstream; high pasture fence roughly two km past",
         "Traveler's destination confirmed: high pasture fence, two hours upstream. Beyond the fence, soil comes up gray — same mineral signature as the river. A new landmark and a potential witness to pre-seas",
         "River-sense read: contamination ribbons still columnar and coherent — source estimated 2–4 km further upstream, past the high pasture fence, likely in second-ridge country. A second set of boot prints",
         "Contamination ribbons growing stronger on the east bank trail; Brynjar has challenged the east bank traveler to a ritual bout — name-for-help — and they've accepted. Moving to a flat shelf above the f",
         "Brynjar has returned to Millbrook at sunrise with field observations — contamination ribbons stronger and columnar upstream, second unidentified boot prints on the trail, gray soil above the fence con",
         "Two women at the common house place the east bank traveler as the Venn family's shepherd girl — and name a dark-coated figure who walked the river road south-to-north two days ago before the dock woke",
         "Heavy boots heard on the wayhouse lane around second watch — nobody entered the common house. Direction and identity still unknown. Mara's meeting about to open.",
-        "Brynjar delivered the rivercraft field reading to Mara: point source, columnar ribbons strengthening upstream, fast channel. Second boot prints on the trail running downstream also reported."
+        "Brynjar delivered the rivercraft field reading to Mara: point source, columnar ribbons strengthening upstream, fast channel. Second boot prints on the trail running downstream also reported.",
+        "Mara connects the downstream prints to the pre-dawn lane passage — someone went past the high pasture fence and returned before dawn without speaking to anyone. She raises the question of whether they"
       ],
       "startedAt": "2026-07-08T19:12:29.917Z"
     }
@@ -451,28 +467,29 @@
         "[d2] Not present; Brynjar left before she had food ready. She expects a report by morning.",
         "[d3] Brynjar and Usnea have crossed the lane and entered the wayhouse — Mara is present, fire kept, something cooking; the report is about to begin.",
         "[d3] Alone in the wayhouse at sunrise — fire maintained through the night, food ready, room cleared of other guests. Waiting for the east fork report.",
-        "[d3] Received Brynjar's rivercraft reading without interruption — asked one sharp follow-up question (how far up before he turned back). Now aware of the second boot prints on the trail"
+        "[d3] Received Brynjar's rivercraft reading without interruption — asked one sharp follow-up question (how far up before he turned back). Now aware of the second boot prints on the trail",
+        "[d3] Received the full picture — Venn girl, gray soil, second prints, heavy boots — and synthesized it immediately: two separate sets of feet, one known regular, one unknown who went pa"
       ],
       "knownFacts": [
-        "The rotting skiff at the dock is functional — barely — with a bailer under the thwart",
-        "East fork: first braid approximately 3 km up; current increases significantly after dawn",
-        "She will have food ready at the wayhouse by sunrise if Brynjar returns",
         "Kept the common room clear of morning traffic — deliberate, not routine",
         "Wore the same coat as the midnight dock watch; likely slept little or not at all",
         "Contamination ribbons are columnar and tight — point source feeding a fast channel, not a broad seep",
         "Contamination strengthens upstream — source is in the upper east fork",
-        "A second set of boot prints runs downstream on the east bank trail — fresher than the upward prints, different heel from the Venn girl"
+        "A second set of boot prints runs downstream on the east bank trail — fresher than the upward prints, different heel from the Venn girl",
+        "Heavy boots on the wayhouse lane at second watch are likely connected to the downstream boot prints on the east bank trail",
+        "Someone traveled to the upper east fork — past the high pasture fence — and returned before dawn on day 3 without speaking to anyone in Millbrook",
+        "The unknown traveler may have come from beyond the new mountain pass"
       ],
       "skillsObserved": [
-        "quiet authority",
-        "local river knowledge",
         "practical hospitality",
         "economy of words",
         "overnight vigil",
-        "quiet hospitality as signal"
+        "quiet hospitality as signal",
+        "rapid synthesis of field intelligence",
+        "pattern recognition across separate observations"
       ],
       "status": "active",
-      "statusNote": "In the wayhouse common room at sunrise — receiving the east fork field report from Brynjar; has asked a follow-up question.",
+      "statusNote": "In the wayhouse common room — has connected the downstream prints to the pre-dawn lane passage; now asking Brynjar about the direction those prints came from.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -632,7 +649,6 @@
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] Trail curves behind alder screen past the gravel bar; gray-green contamination ribbons visibly stronger from this stretch — more concentrated and directional than at the braid.",
         "[d2] High pasture fence ~2 hrs upstream from the first braid: soil above it described as more mineral, coming up gray. A sheep fold exists above the fence — three ewes and a ram unaccounted for since autum",
         "[d2] A second set of boot prints discovered in the trail mud running downstream — smaller heel, fresher than upstream prints, made within the last day or two. Not the east bank traveler's boot.",
         "[d2] A flat packed-earth shelf above the east fork flood line exists approximately ten paces back from the main trail near the alder bend — used as bout ground; root wall on one side.",
@@ -643,10 +659,12 @@
         "[d2] Common house locals confirm the Venn family as the regular users of the east bank stock trail; a dark-coated figure was seen on the river road two mornings ago before dawn.",
         "[d3] A heavy-stepped unknown passed the common house on the wayhouse lane around second watch (pre-dawn) — noted by the apprentice, nobody entered.",
         "[d3] Brynjar and Usnea entered the wayhouse at sunrise to give Mara the field report — she was awake, fire up, food on the hearth.",
-        "[d3] Wayhouse common room cleared of other guests at sunrise on day 3 — Mara kept it private for the east fork report."
+        "[d3] Wayhouse common room cleared of other guests at sunrise on day 3 — Mara kept it private for the east fork report.",
+        "[d3] Mara has raised aloud the possibility that the unknown traveler came through the new mountain pass rather than from within the valley — this question now sits in the wayhouse."
       ],
       "flags": {
-        "unknown_boots_lane": "second-watch-day3"
+        "unknown_boots_lane": "second-watch-day3",
+        "unknown_traveler_origin_raised": "day3-sunrise"
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -719,7 +737,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 2,
+    "lastTickDay": 3,
     "eventStages": {
       "water_crisis": {
         "stage": 1,
@@ -731,10 +749,14 @@
       {
         "day": 1,
         "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 3,
+        "text": "Word reaches you: Usnea Beard named the eastern seep's geometry, the six-fold lattice count, and Aevi's assessment — 'operating, not decaying' — before Millbrook's full elder panel. The word 'deliberate' entered the co ("
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-08T21:11:49.292Z"
+    "lastSharedReadAt": "2026-07-09T01:00:45.382Z"
   },
   "bio": {
     "hometown": "A small northern village.",
@@ -964,6 +986,22 @@
         ],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "unknown-traveler": {
+        "id": "unknown-traveler",
+        "label": "The Unknown Traveler",
+        "kind": "mystery",
+        "facts": [
+          "[d3] Someone — not the Venn shepherd girl — traveled up the east bank stock trail past the high pasture fence and returned before dawn on day 3, passing on the wayhouse lane around second watch without sto"
+        ],
+        "links": [
+          "east-bank-stock-trail",
+          "high-pasture-fence",
+          "echo-river-contamination",
+          "east-fork-run"
+        ],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     }
   },
@@ -1077,6 +1115,12 @@
     {
       "id": "f15",
       "text": "Heavy boots were heard on the wayhouse lane around second watch this morning — heavier step than a farmer, passed without stopping inside the common house. Direction and identity unknown.",
+      "day": 3,
+      "subjectId": null
+    },
+    {
+      "id": "f16",
+      "text": "Mara Wells has connected the second downstream boot prints on the east bank trail to the heavy-stepped figure heard on the wayhouse lane at second watch on day 3 — one person, went up past the high pa",
       "day": 3,
       "subjectId": null
     }

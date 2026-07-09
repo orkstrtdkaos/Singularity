@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "skill_battle_system",
+  "kind": "combat_mechanic_spec",
+  "note": "Erik 2026-07-07: when using skills and having skills used against you, there should sometimes be a SKILL BATTLE \u2014 the types of skills used, the energy applied, etc. all determine the effect, resolving over several turns. This is contested skill-vs-skill: not one roll, but an exchange where matchup + investment + tier decide who prevails. Builds on the d100 resolution, intensity_scaling (energy), challengeProfile (matchup), and the social-contest structure (SNG-027 is the SOCIAL flavor of this). Authored by Aevi (PO)."
+
+,
+  "whenItTriggers": {
+    "principle": "Not every skill use is a battle. A skill-battle happens when two wills contest the SAME outcome with skills \u2014 my Umbracraft conceal vs your Radiance reveal; my Foreclose vs your Hold-the-Aperture; my the-Edge strike vs your the-Stand shield; my Falsecraft lie vs your Verity. When one side acts and the other RESISTS with a skill (rather than just taking it), it's a battle.",
+    "vsSingleCheck": "A skill used against the unresisting WORLD is a single check (pick a lock, cross a river). A skill used against a RESISTING will that answers with its own skill escalates to a battle. The GM (or engine) flags the contest when both sides commit skills to opposite outcomes.",
+    "duration": "Short battles resolve in one exchange (one skill each, compare). Bigger ones run MULTIPLE ROUNDS \u2014 a back-and-forth where each round shifts a momentum meter until one side breaks, yields, or achieves their outcome. Tier and stakes set the length: a Tier-V clash of masters is a several-round set-piece."
+  },
+
+  "resolution": {
+    "theExchange": "Each round, both sides declare a skill + an INTENSITY (energy poured in: Conserve 0.6x / Standard / Surge 1.6x, per intensity_scaling). Each rolls d100 + attribute + ability-tier bonus + MATCHUP bonus. Higher net wins the round and shifts the momentum meter toward their outcome by the margin.",
+    "matchup": "The core of it \u2014 skills are strong/weak against each other by FUNCTION and DOMAIN (like the pole relationships). A conceal vs a reveal: reveal has the edge (light finds shadow) unless the concealer out-tiers or out-spends. A strike vs a shield: shield blunts but doesn't win; a strike vs a bind: the bound striker is at disadvantage. The matchup table (below) gives a bonus/penalty; being the RIGHT tool for the contest is worth more than raw rolls.",
+    "energyEconomy": "Intensity is the gamble: Surge (1.6x) adds power but drains energy fast and risks backlash (25% by tier); Conserve (0.6x) is sustainable but weak. A skill-battle is also a WAR OF ATTRITION \u2014 whoever runs out of energy first loses the ability to contest, even if winning on rolls. Managing the energy curve across rounds IS the skill of skill-battling. A master who Surges every round wins fast or collapses.",
+    "tierWeight": "Higher-tier skills hit harder in the matchup (a Tier-V ability brings a large flat edge) AND have the stamina to sustain more rounds (their epic proficiency means fewer wasted exchanges). This is why tier matters: not just bigger numbers, but the ability to WIN or OUTLAST across a multi-round contest.",
+    "momentumMeter": "A -X..+X meter; each round's winner pushes it by their margin. Reaching one end = that side achieves their outcome (the truth revealed, the escape made, the lie held, the strike landed decisively). A big enough single-round win (a Surged Tier-V crit) can end it in one blow; evenly matched wills grind across rounds.",
+    "outcomes": "Win (your outcome happens), Break (opponent out of energy/yields \u2014 your outcome + they're spent), Stalemate (both exhausted, neither prevails, the situation resolves by fiction), Backlash-loss (you Surged and botched \u2014 your outcome fails AND you take the backlash)."
+  },
+
+  "matchupTable": {
+    "note": "Function-vs-function edges in a contest. +2 strong edge, +1 slight, 0 neutral, defensive functions BLUNT rather than beat. Domain/pole relationships (cofiring, opposition) modify further. The GM/engine reads this to set each round's matchup bonus.",
+    "edges": [
+      {"attacker": "reveal", "vs": "conceal", "result": "+2 reveal \u2014 light finds shadow (unless concealer out-tiers/out-spends)"},
+      {"attacker": "conceal", "vs": "reveal", "result": "-2 \u2014 but a Tier gap or Surge can flip it; the Never-There beats ordinary reveal"},
+      {"attacker": "strike", "vs": "shield", "result": "0 \u2014 shield BLUNTS (reduces margin), doesn't win; sustained striking wears a shield down"},
+      {"attacker": "strike", "vs": "bind", "result": "+1 attacker if free; -2 if the striker is the one bound"},
+      {"attacker": "break", "vs": "ward", "result": "+1 break \u2014 unmaking beats holding, but a Tier-V ward (hold_the_aperture) resists"},
+      {"attacker": "bind", "vs": "move", "result": "+2 bind \u2014 you can't flee what holds you (unless move out-tiers)"},
+      {"attacker": "move", "vs": "bind", "result": "-2 \u2014 but Break-Away/Pathless-Way can slip a lesser bind"},
+      {"attacker": "reveal(truth)", "vs": "conceal(falsehood)", "result": "+2 \u2014 Verity vs Falsecraft; the Whole Truth beats even the true-pieces lie"},
+      {"attacker": "heal", "vs": "break/strike", "result": "attrition \u2014 heal doesn't beat a strike but OUTLASTS it (Rooted Stand); a war of endurance"},
+      {"attacker": "same-function", "vs": "same-function", "result": "pure contest \u2014 tier + energy + roll decide; two concealers, two strikers: the better-invested wins"}
+    ],
+    "domainModifiers": "Opposed poles clash HARDER (bigger swings, faster resolution): life vs death, order vs chaos, light vs dark contesting is volatile. Co-firing/adjacent poles interact oddly (a life-user vs a death-user at the Quiet-in-the-Quickwood fight on strange ground). The GM applies a situational modifier from the location's disposition too \u2014 fighting a shadow-battle in the Radiant Wastes favors the light."
+  },
+
+  "examples": [
+    {"battle": "Umbral infiltrator (the Never-There, T5) vs a Radiant warden (Radiance, T2)", "how": "conceal vs reveal = -2 base for the concealer, BUT the T5-vs-T2 gap (+large) and a Surge flip it. Round 1 the warden's Radiance sweeps (reveal edge), infiltrator Surges the Never-There to erase the trace faster than light maps it. 2-3 rounds; if the infiltrator's energy holds, the warden is left staring at an empty room. If it runs out, the light catches the afterimage."},
+    {"battle": "Falsecraft liar vs Verity truth-reader", "how": "the signature skill-battle. Each round the liar layers falsehood, the reader peels it. Verity has the +2 truth-vs-falsehood edge, so the liar must out-tier or out-spend. A master liar (Woven Untruth, T3) vs an apprentice reader can hold; the Whole Truth (T5) cracks anything. Momentum = how much of the lie stands when the dust settles."},
+    {"battle": "the Edge duelist (Last Form, T5) vs a Churn-reaver (Unraveling Blow, T3)", "how": "strike vs strike, but the reaver's CHAOS domain resists the Edge's ORDER-read \u2014 the Last Form needs a form to read, and chaos gives it none (-matchup). The duelist's tier edge vs the reaver's matchup edge: a real contest, several rounds, decided by who commits energy at the right moment."}
+  ],
+
+  "buildImplication": "Engine: a skill-battle mode alongside single-check resolution \u2014 triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine \u2014 unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."
+}

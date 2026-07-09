@@ -329,3 +329,13 @@ Erik 2026-07-07: are the current skills useful or trash? Should they combine int
 - **Smoke:** function coverage roughly even across the 9-10 functions; every archetype has ≥5 real ability choices; the skill screen can group by function; each ability's unlock requirement is visible and follows the stated 5-channel spine; the two thin Reaches reach ~9.
 
 *Updated 2026-07-07 — through SNG-042.*
+
+## SNG-043 — Modifier skills (horizon axes as ride-on modifiers) + SNG-042 rebalance (partly DONE)
+Erik 2026-07-07: the horizon axes were always meant to show up ANYWHERE as modifiers, not home traditions. Content DONE: cross_axis_modifiers.json (12 modifiers, 6 horizon axes × 2 poles — Accelerated/Distanced, Unmaking/Generative, Impassioned/Calculated, Veiled/Avowed, Made-Concrete/Abstracted, Infernal/Grace-Touched). Also DONE: SNG-042 function rebalance — conceal 8→11, ward 8→11, strike 13→14 (Shroud/False Trail/Blend In/Boundary-Stone/Sun-Seal/Hunter's Strike).
+- **Engine (new content TYPE):** character.modifiers[]; an action can carry ONE optional modifier tag → base ability + modifier effect + modifier energy cost; GM narrates the fusion; drift applies toward the axis-pole. Lighter than abilities (1-2 ranks, cheap acquire, no tradition-home gate). Acquire via contact-with-axis (place/teacher/experience) — the 6th unlock channel in SNG-042's spine.
+- **Advanced:** a modifier can ride a cross-domain COMBINATION (costed); intensity-surge can stack on a modified action. Both gated/priced.
+- **Distinction now canon:** 6 BUILT Reaches = home traditions (dense enough to live in); 6 HORIZON axes = modifier layers (color, don't found). emotional_logical + falsehood_truth work BOTH ways (deep tradition for natives, modifier for all).
+- **Remaining SNG-042 work:** reveal-glut (41) addressed by UI grouping not cutting (SNG-041); progression 5+1-channel spine to doc as progression.md; per-Reach internal dupe audit.
+- **Smoke:** an action can take a modifier (accelerated strike costs more, hits faster, drifts time-hot); modifiers acquirable without a tradition home; one modifier per action; drift applies; the 6 modifier-only axes never appear as home traditions.
+
+*Updated 2026-07-07 — through SNG-043.*

@@ -409,6 +409,38 @@
       ],
       "powerSystem": "reach_body_mind",
       "gated": "learned"
+    },
+    {
+      "id": "skydancer",
+      "name": "Skydancer",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3,
+        "space_time": 0.2
+      },
+      "functions": [
+        "move"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "CHASE": 3,
+        "FIGHT": 1
+      },
+      "narrationHints": "The body treats the air like ground — a leap becomes a bound becomes something the earth stopped being able to stop.",
+      "description": "Flight-by-mastery: prodigious leaps, wall-runs, glides, and air-steps that keep you aloft in bursts. Not true hovering — a body so trained the air briefly holds it. Cross rooftops, chasms, close on a fleeing foe from above.",
+      "notFor": "Sustained hovering or true flight (it's bursts, momentum-bound); carrying heavy loads aloft.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Skydancer",
+          "grants": "Move through the air in bounds, glides, and wall-runs — cross gaps, scale heights, drop on a target.",
+          "cannot": "Momentum-bound (you must keep moving, no hover); a mistimed step falls; heavy burden grounds you."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned"
     }
   ]
 }

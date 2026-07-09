@@ -45,6 +45,10 @@
       ],
       "functions": [
         "heal"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "FIGHT"
       ]
     },
     {
@@ -89,6 +93,12 @@
       "functions": [
         "break",
         "heal"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT",
+        "PUZZLE",
+        "SOCIAL"
       ]
     },
     {
@@ -114,6 +124,10 @@
           "grants": "Feel where a thing has died or is dying nearby; judge how long ago; sense a life near its end.",
           "cannot": "Reads presence, not cause; the healthy hide nothing to find."
         }
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
       ]
     },
     {
@@ -139,6 +153,11 @@
           "grants": "Feel living things through walls and dark; judge their vigor; notice one hiding.",
           "cannot": "Vigor, not identity; the barely-alive read faint."
         }
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT",
+        "STEALTH"
       ]
     },
     {
@@ -164,6 +183,10 @@
           "grants": "Stop bleeding, stabilize a crashing body, buy time for real healing.",
           "cannot": "Buys time; does not mend; the already-dead are past it."
         }
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "FIGHT"
       ]
     },
     {
@@ -190,6 +213,11 @@
           "grants": "Rot or wilt a plant, a wooden thing, a small living obstacle; weaken a living foe's grip or vigor by a touch.",
           "cannot": "Slow against a strong will; the Ashwardens frown on it turned toward people."
         }
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "PUZZLE",
+        "CHASE"
       ]
     },
     {
@@ -217,6 +245,9 @@
           "grants": "Regrow a lost finger, mend a crippling wound over time, restore a blighted field to growth.",
           "cannot": "The regrown is never quite the lost; costs the wielder deeply."
         }
+      ],
+      "challengeTypes": [
+        "SURVIVE"
       ]
     },
     {
@@ -244,6 +275,11 @@
           "grants": "Ward a space so a death goes undisturbed, or so what should stay dead cannot rise or reach in.",
           "cannot": "Wards the threshold, not the outcome; a strong enough wrongness strains it."
         }
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "FIGHT",
+        "STEALTH"
       ]
     },
     {
@@ -271,6 +307,10 @@
           "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
           "cannot": "Does not postpone death; the gift is the hour, not more hours."
         }
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
       ]
     }
   ]

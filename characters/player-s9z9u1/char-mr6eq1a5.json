@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 4,
-  "xp": 353,
+  "xp": 355,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -61,7 +61,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 77,
+  "energy": 68,
   "inventory": [
     {
       "id": "waterskin",
@@ -349,14 +349,34 @@
       {
         "summary": "Usnea holds the sequence plainly — Heights witness before noon, sit with the question until then. The room absorbs it and waits.",
         "narration": "The room settles into the kind of quiet that isn't empty — every face in it doing something. Dresh's hands stay flat on the table. Renn exhales slowly through his nose. Holloway's eyes drift from Brynjar to the pale seedling and back, as if the two things are talking to each other in a language he's almost learned.\n\nYou speak once, plainly. 'The Heights witness walks the eastern path now. He should reach the yard before noon. Until then — the question Councilor Dresh named is the right one to sit with. We don't need to fill the silence.' You let it land without adding to it. Mara gives you a single nod from the table's near end — nothing performed in it, just acknowledgment that the thread is still held.\n\nAevi drifts close to your shoulder, motes dimmer than usual in the pale spring light, almost invisible except where the window catches them. It hums something barely audible — an old frequency, half a measure, then nothing. The fire holds its orange coals. The common house breathes around you: creak of a bench, a child shifting near the door, Pell's rope coil settling against her forearm.\n\nThe yard-door stands open. Somewhere beyond it, on a path that descends two hours from the Heights, a warden with a precise and unsanctioned memory is walking toward this room. The sequence is alive. You wait."
+      },
+      {
+        "summary": "Hearthbinding fails to settle the room — the waiting tension runs too high for comfort to take hold.",
+        "narration": "You ease back from the table and let your attention drop inward, reaching for the slow warmth that hearthbinding opens when there's time and minimal materials — a meal from thin supplies, comfort conjured from a fire and good intent. Your roots find the hearth's orange coals, feel the dried herbs hanging near the door, the waterskin at your hip, the grain-dust still in the air from yesterday's baking. It should be enough. You begin to gather.\n\nBut the room is wrong for it. Hearthbinding needs an evening settling into itself — firelight lengthening, shoulders dropping, the particular quiet of people who have stopped performing readiness. What you have instead is a room wound tight around a question it hasn't answered yet. Every face is working. Pell's fingers haven't left the rope. Dresh's hands are flat on the table like she's keeping it from rising. The hearth's warmth is there, but it won't be shaped — it just sits in the grate and flickers, indifferent.\n\nThe motes at your shoulder dim briefly, a soft teal dimming that Aevi uses when something hasn't worked the way you meant. You shift weight from one root to another — the small, involuntary adjustment of a large creature recalibrating — and the motion draws a glance from the village child near the door, who has been watching the room and now watches you instead. The attempted warmth lands as a slight restlessness: Renn resets his jaw, Holloway blinks, Mara's eyes move to your face with the patient, unworried expression of someone who saw what you tried and knows why it didn't take.\n\nThe comfort isn't ruined — the fire still burns, the waterskin still exists, the room isn't worse for the attempt. But the moment for that particular kindness hasn't come yet. The room will need to exhale first."
       }
     ],
     "lastTurn": {
-      "narration": "The room settles into the kind of quiet that isn't empty — every face in it doing something. Dresh's hands stay flat on the table. Renn exhales slowly through his nose. Holloway's eyes drift from Brynjar to the pale seedling and back, as if the two things are talking to each other in a language he's almost learned.\n\nYou speak once, plainly. 'The Heights witness walks the eastern path now. He should reach the yard before noon. Until then — the question Councilor Dresh named is the right one to sit with. We don't need to fill the silence.' You let it land without adding to it. Mara gives you a single nod from the table's near end — nothing performed in it, just acknowledgment that the thread is still held.\n\nAevi drifts close to your shoulder, motes dimmer than usual in the pale spring light, almost invisible except where the window catches them. It hums something barely audible — an old frequency, half a measure, then nothing. The fire holds its orange coals. The common house breathes around you: creak of a bench, a child shifting near the door, Pell's rope coil settling against her forearm.\n\nThe yard-door stands open. Somewhere beyond it, on a path that descends two hours from the Heights, a warden with a precise and unsanctioned memory is walking toward this room. The sequence is alive. You wait.",
-      "sceneSummary": "Usnea holds the sequence plainly — Heights witness before noon, sit with the question until then. The room absorbs it and waits.",
+      "narration": "You ease back from the table and let your attention drop inward, reaching for the slow warmth that hearthbinding opens when there's time and minimal materials — a meal from thin supplies, comfort conjured from a fire and good intent. Your roots find the hearth's orange coals, feel the dried herbs hanging near the door, the waterskin at your hip, the grain-dust still in the air from yesterday's baking. It should be enough. You begin to gather.\n\nBut the room is wrong for it. Hearthbinding needs an evening settling into itself — firelight lengthening, shoulders dropping, the particular quiet of people who have stopped performing readiness. What you have instead is a room wound tight around a question it hasn't answered yet. Every face is working. Pell's fingers haven't left the rope. Dresh's hands are flat on the table like she's keeping it from rising. The hearth's warmth is there, but it won't be shaped — it just sits in the grate and flickers, indifferent.\n\nThe motes at your shoulder dim briefly, a soft teal dimming that Aevi uses when something hasn't worked the way you meant. You shift weight from one root to another — the small, involuntary adjustment of a large creature recalibrating — and the motion draws a glance from the village child near the door, who has been watching the room and now watches you instead. The attempted warmth lands as a slight restlessness: Renn resets his jaw, Holloway blinks, Mara's eyes move to your face with the patient, unworried expression of someone who saw what you tried and knows why it didn't take.\n\nThe comfort isn't ruined — the fire still burns, the waterskin still exists, the room isn't worse for the attempt. But the moment for that particular kindness hasn't come yet. The room will need to exhale first.",
+      "sceneSummary": "Hearthbinding fails to settle the room — the waiting tension runs too high for comfort to take hold.",
       "choices": [
         {
-          "label": "Step outside to the yard — watch the eastern path approach and be the first to meet the tuning-warden when he arrives",
+          "label": "Offer the Waterskin around the table — simple, direct, no craft needed. People who are thirsty can drink.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside to the common house yard and watch for the tuning-warden on the eastern path — give the room its space and have eyes ready when he arrives.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
@@ -372,35 +392,17 @@
           "emergenceId": null
         },
         {
-          "label": "While the room waits, move quietly to Pell at the threshold — read whether her arithmetic on Sela has shifted after Brynjar's marker-find",
+          "label": "Sit with Pell at the threshold — not to push Sela's testimony, just to keep her company while the room waits. Let her read settle without pressure.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "axes": {
             "falsehood_truth": 0.6,
             "violence_peace": 0.7
           },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Sit beside Brynjar at the table's corner — this is the moment to ask quietly what he knows about who might have placed that marker, and whether he expects anyone to follow him here",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "plan"
+            "help",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -409,20 +411,19 @@
           "emergenceId": null
         },
         {
-          "label": "Use the waiting hour deliberately — draw the Orla's Memory Glass from your keeping and hold it in your hands, using Prism Sight to read the light it carries before it is placed on the table before the elders",
+          "label": "Use Old Roads to sense whether the six-fold pulse is still steady beneath the common house floor right now — quietly, roots down, a check rather than a demonstration.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.7,
-            "dark_light": 0.5
+            "mechanical_spiritual": 0.3
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
+          "abilityId": "old_roads",
+          "energyCost": 7,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -431,7 +432,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -5,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -439,15 +440,15 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items; Orla's Memory Glass in Usnea's keeping, not yet placed.",
+        "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth unresponsive to hearthbinding, room still tightly wound around Dresh's unanswered question.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "At the table's near end — single nod given; holding the thread, waiting"
+            "state": "At the table's near end — eyes moved to Usnea's face after the failed attempt; patient, unworried, thread still held"
           },
           {
             "name": "Councilor Dresh",
-            "state": "Hands still flat on the table — sequence named and held; sitting with the question"
+            "state": "Hands still flat on the table — sequence held; sitting with the reach-vs-reach-for question"
           },
           {
             "name": "Brynjar Andyrsson",
@@ -455,38 +456,40 @@
           },
           {
             "name": "Holloway",
-            "state": "Eyes moving between Brynjar and the pale seedling — rearranging the two axes of deliberate intent"
+            "state": "Blinked at the restlessness — eyes drifting between Brynjar and the pale seedling, rearranging the two axes of intent"
           },
           {
             "name": "Renn",
-            "state": "Exhaled slowly; jaw set, absorbing the wait"
+            "state": "Reset his jaw at the slight restlessness — absorbing the wait, lower channel arithmetic ongoing"
           },
           {
             "name": "Two unrecognized elders",
-            "state": "One leaned in; the other turned toward Dresh — both settled into the question"
+            "state": "One leaned in; the other turned toward Dresh — both settled into the question, undisturbed"
           },
           {
             "name": "Village child (not Sela)",
-            "state": "Near the door — watching the room rather than any single person"
+            "state": "Near the door — was watching the room; now watching Usnea after the weight-shift"
           },
           {
             "name": "Pell",
-            "state": "At the yard-facing threshold — fingers open on the rope coil; reading the room's arithmetic, still at her threshold"
+            "state": "At the yard-facing threshold — fingers still open on the rope coil; reading the room's arithmetic, undisturbed by the attempt"
           }
         ],
         "objects": [
           "Long common house table — pale seedling, glass vial, crystalline residue pinch",
           "Orla's Memory Glass — in Usnea's keeping, not yet placed on the table",
-          "Fire — warm orange coals at the hearth",
+          "Fire — warm orange coals at the hearth, unresponsive",
           "Brynjar's cup — set on hearthstone",
-          "Common house door — open to the yard"
+          "Common house door — open to the yard",
+          "Waterskin — at Usnea's hip"
         ],
         "threads": [
           "Tuning-warden en route — expected before noon, not yet arrived; Dresh has named him first in the sequence",
           "Orla's Memory Glass not yet placed — Dresh called for it second, after the warden's testimony",
           "Pell's read on the room's readiness for Sela still open — sequence may resume after the glass",
           "Holloway's fear of system awareness still resonating alongside Brynjar's marker-find",
-          "Dresh's reach-vs-reach-for question now the room's shared frame for all three axes of evidence"
+          "Dresh's reach-vs-reach-for question now the room's shared frame for all three axes of evidence",
+          "Hearthbinding attempted and failed — room too tense for comfort to settle; no lasting harm"
         ]
       },
       "npcUpdates": [
@@ -494,37 +497,31 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Gave a single nod at Usnea's plain hold of the sequence — thread acknowledged, no words needed. Waiting.",
+          "role": "Millbrook water-policy coordinator and elder",
+          "note": "Clocked the failed hearthbinding attempt — eyes moved to Usnea's face with patient, unworried recognition. No comment. Thread still held.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
           "statusNote": "At the common house table — thread held, sequence alive, waiting for the tuning-warden before noon."
-        },
-        {
-          "op": "update",
-          "npcId": "councilor-dresh",
-          "name": "Councilor Dresh",
-          "note": "Received Usnea's plain confirmation of the hold — hands stayed flat, sequence sits with the room.",
-          "statusNote": "At the common house table — sequence named, sitting with the reach-vs-reach-for question until the warden arrives."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Rope coil settled against her forearm — still at the threshold, arithmetic ongoing.",
-          "statusNote": "At the common house yard-facing threshold — door-right held; reading the room's quiet, arithmetic on Sela unresolved."
         }
       ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth. Long table holds the three evidence items; Orla's Memory Glass in Usnea's keeping, not yet placed.",
+      "setting": "Millbrook common house interior — pale spring morning light through the open yard-door, orange coals at the hearth unresponsive to hearthbinding, room still tightly wound around Dresh's unanswered question.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "At the table's near end — single nod given; holding the thread, waiting"
+          "state": "At the table's near end — eyes moved to Usnea's face after the failed attempt; patient, unworried, thread still held"
         },
         {
           "name": "Councilor Dresh",
-          "state": "Hands still flat on the table — sequence named and held; sitting with the question"
+          "state": "Hands still flat on the table — sequence held; sitting with the reach-vs-reach-for question"
         },
         {
           "name": "Brynjar Andyrsson",
@@ -532,31 +529,32 @@
         },
         {
           "name": "Holloway",
-          "state": "Eyes moving between Brynjar and the pale seedling — rearranging the two axes of deliberate intent"
+          "state": "Blinked at the restlessness — eyes drifting between Brynjar and the pale seedling, rearranging the two axes of intent"
         },
         {
           "name": "Renn",
-          "state": "Exhaled slowly; jaw set, absorbing the wait"
+          "state": "Reset his jaw at the slight restlessness — absorbing the wait, lower channel arithmetic ongoing"
         },
         {
           "name": "Two unrecognized elders",
-          "state": "One leaned in; the other turned toward Dresh — both settled into the question"
+          "state": "One leaned in; the other turned toward Dresh — both settled into the question, undisturbed"
         },
         {
           "name": "Village child (not Sela)",
-          "state": "Near the door — watching the room rather than any single person"
+          "state": "Near the door — was watching the room; now watching Usnea after the weight-shift"
         },
         {
           "name": "Pell",
-          "state": "At the yard-facing threshold — fingers open on the rope coil; reading the room's arithmetic, still at her threshold"
+          "state": "At the yard-facing threshold — fingers still open on the rope coil; reading the room's arithmetic, undisturbed by the at"
         }
       ],
       "objects": [
         "Long common house table — pale seedling, glass vial, crystalline residue pinch",
         "Orla's Memory Glass — in Usnea's keeping, not yet placed on the table",
-        "Fire — warm orange coals at the hearth",
+        "Fire — warm orange coals at the hearth, unresponsive",
         "Brynjar's cup — set on hearthstone",
-        "Common house door — open to the yard"
+        "Common house door — open to the yard",
+        "Waterskin — at Usnea's hip"
       ],
       "threads": [
         "Tuning-warden en route — expected before noon, not yet arrived; Dresh has named him first in the sequence",
@@ -570,7 +568,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 10,
-    "hour": 10,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [
@@ -757,7 +755,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d9] Received warden's morning-tone confirmation and relayed it to Usnea at the common house steps. Declared the presentation ready to open on Usnea's signal.",
         "[d9] Read Usnea's face from the yard and gave the quiet nod — meeting is ready to open on Usnea's forward step.",
         "[d9] Received Usnea's opening nod at the foot of the steps — meeting is now beginning.",
         "[d9] Received Usnea's opening nod and is now climbing the steps into the common house — the presentation is in motion.",
@@ -766,7 +763,8 @@
         "[d10] Caught Usnea's eye after the wells-and-channels naming — the sequence is holding and she knows it. Waiting to call the next speaker.",
         "[d10] Caught Usnea's eye after Pell's refusal — patient, unalarmed. Sequence is paused, not broken; she is holding the table end.",
         "[d10] Gave a small nod when Dresh named the sequence — the thread is alive again and she is holding the table end.",
-        "[d10] Gave a single nod at Usnea's plain hold of the sequence — thread acknowledged, no words needed. Waiting."
+        "[d10] Gave a single nod at Usnea's plain hold of the sequence — thread acknowledged, no words needed. Waiting.",
+        "[d10] Clocked the failed hearthbinding attempt — eyes moved to Usnea's face with patient, unworried recognition. No comment. Thread still held."
       ],
       "knownFacts": [
         "Reframed the permission ask: not Sela carrying the testimony, but the elders carrying the burden so Sela doesn't have to",
@@ -2377,14 +2375,14 @@
     }
   },
   "companionBonds": {
-    "aevi": 7.5
+    "aevi": 7.75
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 11,
       "light_bending": 11,
-      "hearthbinding": 3,
+      "hearthbinding": 4,
       "old_roads": 6,
       "daybreak_mantle": 4,
       "motes-vigil": 1

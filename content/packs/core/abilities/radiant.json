@@ -44,6 +44,10 @@
       "functions": [
         "conceal",
         "move"
+      ],
+      "challengeTypes": [
+        "STEALTH",
+        "CHASE"
       ]
     },
     {
@@ -86,6 +90,11 @@
       ],
       "functions": [
         "reveal"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "STEALTH",
+        "FIGHT"
       ]
     },
     {
@@ -128,6 +137,10 @@
       ],
       "functions": [
         "strike"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "PUZZLE"
       ]
     },
     {
@@ -170,6 +183,9 @@
       ],
       "functions": [
         "shield"
+      ],
+      "challengeTypes": [
+        "SOCIAL"
       ]
     },
     {
@@ -213,6 +229,10 @@
       "functions": [
         "reveal",
         "heal"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "EXPLORE"
       ]
     },
     {
@@ -255,6 +275,9 @@
       ],
       "functions": [
         "mend"
+      ],
+      "challengeTypes": [
+        "SURVIVE"
       ]
     },
     {
@@ -297,6 +320,11 @@
       ],
       "functions": [
         "conceal"
+      ],
+      "challengeTypes": [
+        "DUEL",
+        "CHASE",
+        "STEALTH"
       ]
     },
     {
@@ -339,6 +367,10 @@
       ],
       "functions": [
         "reveal"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
       ]
     },
     {
@@ -381,6 +413,10 @@
       ],
       "functions": [
         "ward"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "STEALTH"
       ]
     },
     {
@@ -424,6 +460,10 @@
       "functions": [
         "reveal",
         "bind"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "INVESTIGATE"
       ]
     },
     {
@@ -467,6 +507,9 @@
       "functions": [
         "heal",
         "mend"
+      ],
+      "challengeTypes": [
+        "SURVIVE"
       ]
     },
     {
@@ -510,6 +553,11 @@
       "functions": [
         "shield",
         "ward"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "STEALTH",
+        "INVESTIGATE"
       ]
     },
     {
@@ -537,7 +585,12 @@
           "cannot": "Needs periodic re-lighting; physical foes ignore it."
         }
       ],
-      "gated": "learned"
+      "gated": "learned",
+      "challengeTypes": [
+        "SURVIVE",
+        "EXPLORE",
+        "FIGHT"
+      ]
     }
   ]
 }

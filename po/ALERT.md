@@ -6,6 +6,8 @@
 
 **ACTIVE BUILD — SNG-BATCH-6 (Foundation) [pointed 2026-07-10, Aevi PO]:** SNG-019 (Codex entity-resolution) → SNG-022 (Reconciliation engine), in that order. Both specs complete at po/SPEC_BACKLOG.md (`## SNG-019`, `## SNG-022`); engine-only, no content owed; the dependency-spine linchpins that unblock SNG-020/021/024/025. Preview-testing protocol stands (preview + one-line Erik test per phase). **Fold the 2 post-BATCH-5 test reds into this pass, but NAME them + root-cause at close** (suspected origin: the caching restructure that touched prompt assembly) — do not wave-fold into a green count. Suite + parse_probe green per phase. Only Aevi closes.
 
+**SNG-BATCH-6 SHIPPED (2026-07-10, CCode) — awaiting Erik preview-legs before complete_pending_review:** v1.7.1, 475 checks + parse_probe green, live-verified. Results: po/results/20260710_SNG-BATCH-6.md. The 2 reds NAMED + root-caused there (catalog expansion ~28→117 w/ 1-rank seeds; discoveryBonus 10→20 commit 6bfb98d crossing the d100 ceiling) — NOT the caching restructure (disproven at origin 4d85cc7). Erik one-liners: (1) Codex grouped-by-kind w/ gathered facts+aliases under one node per person; (2) load a character → 'The world has grown' note if duplicates healed, nothing regressed.
+
 **OPEN LOOPS (not CCode build work):** (a) BATCH-5 awaits Erik's 3 preview-legs then Aevi close. (b) SNG-016 (12-axis skill breadth) is GATED on an Aevi design proposal to Erik — no build until the axis map is agreed.
 
 **NEXT BUILD (2026-07-06):**

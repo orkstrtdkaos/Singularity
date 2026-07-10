@@ -440,3 +440,26 @@ Random character (Nix, chaos/order adept: Latticework, Wildcraft, The Long Odds,
 - Tighter plans = harder; surface this to the player (fewer steps chosen = higher stakes, a real tradeoff to offer at planning time).
 
 *Updated 2026-07-07 — third playtest logged; gambit DEFINITION captured.*
+
+## SNG-049 — Approach-neutrality: reward the player's mode, not the designer's
+Erik 2026-07-07 (load-bearing correction): the recurring keystones across all three playtests — reframe-the-tool, find-the-seam, question-the-clock — are ERIK'S cognitive style (he wins by changing the rules of a situation), NOT universal gambit rules. Every co-authored solution bent that way because the co-author's mind bends that way. RISK: encoding those three moves as "how challenges are solved" hardcodes one play style into the engine and silently punishes players who think differently. FIX: make approach-neutrality a first-class design constraint.
+
+**Principle:** a challenge/gambit must have MULTIPLE genuinely-viable solution MODES, and the engine/GM must reward the mode the player actually brings — not funnel toward the clever-reframe. Rule-bending is ONE valid mode among several, not the intended answer.
+
+**Solution modes to keep first-class (non-exhaustive):**
+- **Rule-bender / reframe** (Erik's mode): change the situation's terms, find the seam, question the premise. Already well-supported — do NOT let it become the default.
+- **Direct / force:** meet the challenge head-on with power and skill. A strong-enough strike, a high-enough roll, raw capability should WIN, not just "fail unless you were clever." (The duel should be winnable by actually out-dueling.)
+- **Social / relational:** win by people — persuade, ally, intimidate, mediate. (Pole-signatures + skill-battle already support; ensure it's a full path, not a flavor.)
+- **Attrition / patience:** grind it down, outlast, chip away. The slow sure method should reach the same win.
+- **Preparation / logistics:** win by having set up correctly beforehand — the by-the-book professional who out-executes.
+- **Knowledge / investigation:** win by knowing the thing — the right fact, the read, the lore.
+
+**Engine/GM implications:**
+- **Challenge authoring must offer ≥3 distinct MODE-paths**, not 3 flavors of one mode. A challenge solvable only by reframe is a BUG (it's an Erik-puzzle, not a game challenge). Content-validation (SNG-040) could even flag single-mode challenges.
+- **GM rule:** honor the mode the player commits to; find the version of success THAT mode reaches. Do not steer a force-player toward a clever trick or a clever-player toward a slugfest. Reward what they bring.
+- **Difficulty parity:** no mode should be strictly dominant or strictly punished. A direct solution may cost more resources; a reframe may cost more setup; a social path may cost standing — different costs, comparable viability.
+- **Ties SNG-048 (planning-assist must adapt to the player's mode, not impose the GM's), SNG-042/044 (challengeProfile ensures every challenge has skills across modes), pole_signatures + skill-battle (social/force paths), gambit definition (multi-approach is already core — this ensures the approaches span MODES not just tactics).**
+- **Meta-guardrail for the AI GM specifically:** the model co-authoring with a player WILL drift toward that player's cognitive style (observed live this session). The GM prompt must explicitly hold open modes the current player ISN'T using, so a rule-bender still meets real brute-force options and vice-versa. Approach-neutrality is a stated GM discipline, not an emergent hope.
+- **Smoke:** a challenge can be won by force, by reframe, by social, by attrition, by preparation, by knowledge — each reaching a satisfying (not consolation) success; the GM rewards the committed mode; no single mode is the "real" answer; single-mode challenges are flagged.
+
+*Updated 2026-07-07 — through SNG-049 (approach-neutrality).*

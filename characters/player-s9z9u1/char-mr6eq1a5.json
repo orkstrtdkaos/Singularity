@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 5,
-  "xp": 432,
+  "xp": 439,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -57,7 +57,7 @@
     "concrete_abstract": -0.13222506831117092,
     "spectrumId": -0.36066078563242765,
     "dark_light": 0.212185435662041,
-    "falsehood_truth": 0.4863588322461797,
+    "falsehood_truth": 0.4970408906338707,
     "violence_peace": 0.33483389400033525,
     "chaos_order": 0.20508567720038504,
     "death_life": 0.03
@@ -66,7 +66,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 107,
+  "energy": 102,
   "inventory": [
     {
       "id": "waterskin",
@@ -131,6 +131,14 @@
       "kind": "misc",
       "qty": 1,
       "description": "A charcoal-on-hide copy of the new mountain pass route and approximately two hours' ridge country beyond — shows the pass entry clearly; the interior is inference. Rolled and carried with the waterskin.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Accountability Notice Copy",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A handwritten copy of the Edge District filtration accountability notice, with the red-chalk annotation 'Fendt, south array' reproduced in ink — and beneath it, in a different hand: 'ask the river.' Made by the Amber Lath keeper this afternoon in case Usnea didn't return.",
       "consumable": false
     }
   ],
@@ -372,42 +380,29 @@
       {
         "summary": "Prism Sight confirms the keeper is sequencing her information — she has more, and is watching to see if what she offered was enough.",
         "narration": "The lamp behind the keeper burns warm and low — good light for reading, the kind that catches the small betrayals on a face without announcing itself. You let Prism Sight settle in, quiet as a slow blink, the light-history of the room layering over what you see now. Nothing theatrical. Just looking, the way a tree looks: patient, present, taking in everything without rushing it.\n\nShe holds still as she speaks — explaining the red chalk, the supervisor inaction, the accountability notice. Her face is composed and deliberate. But the light remembers a small thing: a fraction of a second where her eyes moved not to the door, not to you, but down and left — the tell of someone organizing what to lead with rather than simply answering. She isn't lying. She's sequencing. There is something she knows, and she has decided to give you part of it, and she is watching to see if the part she gave is sufficient.\n\nHer posture doesn't change. She refills the clay cup without being asked, sets it back on the counter with the same small precision. The tell is gone almost before you catch it — a single layer beneath the calm surface, sealed back into professional stillness. Whatever she is holding, it is not for tonight unless you ask for it by name.\n\nAevi drifts closer to the lamp's edge, motes barely visible in the warm light, and says nothing. But the constellation tightens, just slightly."
+      },
+      {
+        "summary": "The keeper revealed a supervisor marked Fendt themselves and filed nothing — and the accountability notice copy carries an unknown annotation: 'ask the river.'",
+        "narration": "The lamp holds steady between you. You set both hands flat on the counter — not a demand, just presence — and say it plainly: \"There's something you decided not to lead with. What was it?\"\n\nA beat. Her eyes drop once, briefly, and come back up. Then she gives a small nod — not concession exactly, more the movement of someone who expected this question and is satisfied it arrived. She reaches below the counter and produces a folded slip of parchment, sets it down between the clay cup and the lamp.\n\n\"The red chalk was added this afternoon. That's true, and I told you that.\" She smooths the edge of the parchment without unfolding it. \"What I didn't lead with: the chalk wasn't put there by a citizen or a worker. One of the filtration array supervisors added it themselves. I saw them do it. Then they walked away and filed nothing.\" She pauses. \"In thirty years of watching this board, I have never seen a supervisor mark their own subordinate and leave the record empty. That isn't caution. That's a supervisor making sure something is visible before they're told to make it invisible.\"\n\nAevi brightens at your shoulder — a slow pulse, three beats, not the alarm-flare but the frequency of paying attention to this. The parchment on the counter appears to be a handwritten copy of the original accountability notice text, with the red chalk annotation reproduced in ordinary ink at the bottom: Fendt, south array. Underneath it, in a different hand, something smaller: ask the river.\n\nThe keeper's eyes are steady on you. \"I didn't know if you'd come back tonight. I copied it this afternoon in case you didn't.\""
       }
     ],
     "lastTurn": {
-      "narration": "The lamp behind the keeper burns warm and low — good light for reading, the kind that catches the small betrayals on a face without announcing itself. You let Prism Sight settle in, quiet as a slow blink, the light-history of the room layering over what you see now. Nothing theatrical. Just looking, the way a tree looks: patient, present, taking in everything without rushing it.\n\nShe holds still as she speaks — explaining the red chalk, the supervisor inaction, the accountability notice. Her face is composed and deliberate. But the light remembers a small thing: a fraction of a second where her eyes moved not to the door, not to you, but down and left — the tell of someone organizing what to lead with rather than simply answering. She isn't lying. She's sequencing. There is something she knows, and she has decided to give you part of it, and she is watching to see if the part she gave is sufficient.\n\nHer posture doesn't change. She refills the clay cup without being asked, sets it back on the counter with the same small precision. The tell is gone almost before you catch it — a single layer beneath the calm surface, sealed back into professional stillness. Whatever she is holding, it is not for tonight unless you ask for it by name.\n\nAevi drifts closer to the lamp's edge, motes barely visible in the warm light, and says nothing. But the constellation tightens, just slightly.",
-      "sceneSummary": "Prism Sight confirms the keeper is sequencing her information — she has more, and is watching to see if what she offered was enough.",
+      "narration": "The lamp holds steady between you. You set both hands flat on the counter — not a demand, just presence — and say it plainly: \"There's something you decided not to lead with. What was it?\"\n\nA beat. Her eyes drop once, briefly, and come back up. Then she gives a small nod — not concession exactly, more the movement of someone who expected this question and is satisfied it arrived. She reaches below the counter and produces a folded slip of parchment, sets it down between the clay cup and the lamp.\n\n\"The red chalk was added this afternoon. That's true, and I told you that.\" She smooths the edge of the parchment without unfolding it. \"What I didn't lead with: the chalk wasn't put there by a citizen or a worker. One of the filtration array supervisors added it themselves. I saw them do it. Then they walked away and filed nothing.\" She pauses. \"In thirty years of watching this board, I have never seen a supervisor mark their own subordinate and leave the record empty. That isn't caution. That's a supervisor making sure something is visible before they're told to make it invisible.\"\n\nAevi brightens at your shoulder — a slow pulse, three beats, not the alarm-flare but the frequency of paying attention to this. The parchment on the counter appears to be a handwritten copy of the original accountability notice text, with the red chalk annotation reproduced in ordinary ink at the bottom: Fendt, south array. Underneath it, in a different hand, something smaller: ask the river.\n\nThe keeper's eyes are steady on you. \"I didn't know if you'd come back tonight. I copied it this afternoon in case you didn't.\"",
+      "sceneSummary": "The keeper revealed a supervisor marked Fendt themselves and filed nothing — and the accountability notice copy carries an unknown annotation: 'ask the river.'",
       "choices": [
         {
-          "label": "Ask her directly: 'What did you decide not to tell me first?' — name what the Prism Sight caught; give her a chance to offer the rest.",
+          "label": "Take the parchment and ask her directly about the second hand — who wrote 'ask the river,' and when.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.7
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "confront",
-            "careful",
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her the elder panel accepted the evidence before asking anything — give her the news she doesn't yet have, and see what it loosens.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.6
+            "falsehood_truth": 0.8,
+            "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "share",
-            "trust"
+            "study",
+            "careful",
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -416,33 +411,57 @@
           "emergenceId": null
         },
         {
-          "label": "Ask about the supervisor inaction specifically — not the chalk, not Fendt: who didn't act, and what that means in district politics.",
+          "label": "Use Prism Sight on the parchment itself — read its light-history to see who handled it and when 'ask the river' was added.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.3
+            "dark_light": 0.7,
+            "falsehood_truth": 0.6
           },
           "difficulty": 15,
           "intentTags": [
             "study",
+            "careful",
             "investigate"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Settle in, take the cup, and let the silence work — she's already decided to give you more; sometimes waiting is the right tool.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Thank her for the copy, then cross to Orla's workshop now — she needs to know about the supervisor's move before morning.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "falsehood_truth": 0.5
+            "concrete_abstract": 0.2,
+            "chaos_order": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "wait",
+            "plan",
+            "move",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask her what she thinks the supervisor wanted — her thirty years of board-watching is worth more than speculation.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "concrete_abstract": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "ask",
+            "listen",
             "careful"
           ],
           "abilityId": null,
@@ -455,33 +474,57 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -4,
-        "inventoryAdd": [],
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Accountability Notice Copy",
+            "kind": "quest",
+            "description": "A handwritten copy of the Edge District filtration accountability notice, with the red-chalk annotation 'Fendt, south array' reproduced in ink — and beneath it, in a different hand: 'ask the river.' Made by the Amber Lath keeper this afternoon in case Usnea didn't return.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
         "inventoryRemove": [],
-        "xp": 0
+        "xp": 2
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "A filtration array supervisor marked their own subordinate — Fendt — on the Edge District accountability board and filed no accompanying record. A keeper of thirty years has never seen this before.",
+          "tags": [
+            "radiant-plateau",
+            "fendt",
+            "filtration",
+            "accountability",
+            "institutional-break"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "falsehood_truth": 0.05
+          }
+        }
+      ],
       "questUpdates": [],
       "scene": {
-        "setting": "Amber Lath Wayhouse, Edge District, Radiant Plateau — early night, ground-floor counter, warm lamp-light, cedar door closed behind Usnea. The district outside is quiet and settling.",
+        "setting": "Amber Lath Wayhouse, Edge District, Radiant Plateau — early night, ground-floor counter, warm lamp-light. Cedar door closed behind Usnea. The parchment copy now lies on the counter between the clay cup and the lamp.",
         "npcsPresent": [
           {
             "name": "Amber Lath Keeper",
-            "state": "Standing behind the low counter, clay cup refilled and set back precisely — composed, sequencing, watching to see if what she offered was sufficient."
+            "state": "Standing behind the counter, hands smoothed flat after setting down the parchment — watching Usnea steadily, the composed relief of someone who held something correctly and has now passed it on."
           }
         ],
         "objects": [
           "clay cup on the counter (refilled, set back precisely)",
           "low counter — plain wood, well-worn",
           "lamp behind the keeper — warm, low",
+          "Accountability Notice Copy — folded parchment now on the counter, ink reproduction of the red-chalk annotation plus 'ask the river' in a second hand",
           "Upper Zone Ridge Map (rolled, in inventory)",
           "Orla's Memory Glass (in inventory)"
         ],
         "threads": [
-          "The keeper is holding something back — Prism Sight confirmed she is sequencing, not withholding entirely; the rest requires asking by name.",
-          "Orla does not yet know Millbrook's elder panel accepted the evidence — still needs to be told.",
-          "Fendt's name in red chalk on the accountability assembly board — supervisors have not removed it; the inaction has meaning the keeper has not fully named.",
-          "Dresh's three conditions are being worked by the council — Orla may be part of securing a Plateau-side written request."
+          "Who wrote 'ask the river' on the accountability notice — and when.",
+          "The supervisor marked Fendt and filed nothing — a deliberate act of exposure before a cover-up.",
+          "Orla does not yet know about the supervisor's move or Millbrook's elder panel acceptance.",
+          "Dresh's three conditions are being worked by the Millbrook council — Orla may be part of securing a Plateau-side written request."
         ]
       },
       "npcUpdates": [
@@ -490,32 +533,64 @@
           "npcId": "amber-lath-keeper",
           "name": "Amber Lath Keeper",
           "role": "Wayhouse keeper, Edge District, Radiant Plateau",
-          "note": "Prism Sight caught a down-left eye movement — she organized what to lead with rather than simply answering. She is sequencing information deliberately, watching to see if the part she gave was sufficient.",
+          "note": "Revealed her withheld information when asked directly by name — a supervisor (not a citizen) added the red chalk annotation, watched by the keeper, then filed nothing. Produced a handwritten copy of the notice including a second annotation in an unknown hand: 'ask the river.' Copied it in anticipation of Usnea not returning.",
           "learned": [
-            "Is holding additional information about the red-chalk addition or supervisor inaction — sequencing it, not refusing it; waiting to see if Usnea asks by name."
+            "A filtration array supervisor added the 'Fendt, south array' chalk themselves — not a citizen complaint but an internal move, deliberate and unrecorded.",
+            "The keeper has watched this accountability board for thirty years and has never seen a supervisor mark their own subordinate without filing.",
+            "The parchment copy carries a second annotation in a different hand: 'ask the river' — origin unknown.",
+            "She copied the notice herself this afternoon, anticipating Usnea might not return."
           ],
           "skillsObserved": [
-            "deliberate information sequencing under observation",
-            "maintaining composure under Prism Sight reading"
+            "thirty-year institutional memory of the district accountability board",
+            "precise observation of who touched the chalk and when",
+            "proactive evidence preservation under uncertainty"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the Amber Lath counter — has given partial information about the accountability board; holding more, watching to see if Usnea asks directly."
+          "statusNote": "At the Amber Lath counter — has now fully disclosed what she held back; the sequencing is complete."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A filtration array supervisor added 'Fendt, south array' in red chalk to the Edge District accountability board themselves — then walked away and filed nothing. Witnessed by the Amber Lath keeper. In her thirty years, she has never seen a supervisor mark their own subordinate without filing. The annotation copy also carries a second line in an unknown hand: 'ask the river.'",
+          "subjectId": "amber-lath-keeper"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The Amber Lath keeper produced a handwritten copy of the accountability notice (including 'ask the river' in a second hand) — she made it this afternoon in case Usnea didn't return. The full disclosure is now complete.",
+          "subPlace": {
+            "name": "Amber Lath Wayhouse",
+            "note": "Keeper revealed: a supervisor, not a citizen, added the red chalk annotation and filed nothing. Parchment copy now in Usnea's possession.",
+            "visited": true
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "amber-lath-keeper",
-          "label": "Amber Lath Keeper",
+          "topic": "fendt-filtration-engineer",
+          "label": "Fendt — Filtration Engineer",
           "kind": "person",
-          "entityId": "amber-lath-keeper",
-          "fact": "Day 11 night: Prism Sight confirmed the keeper is sequencing her information about the red-chalk addition and supervisor inaction — she has more than she led with, and is watching to see if the partial account satisfies. Not deceptive; deliberate.",
+          "entityId": "fendt-filtration-engineer",
+          "fact": "A filtration array supervisor added 'Fendt, south array' to the district accountability board themselves and filed nothing — a deliberate act of internal exposure witnessed by the Amber Lath keeper of thirty years. The supervisor appears to be making something visible before being told to make it invisible.",
           "links": [
             "radiant-plateau-edge-district",
+            "contamination-evidence-for-the-elders",
+            "echo-river-contamination",
+            "orla"
+          ]
+        },
+        {
+          "topic": "ask-the-river",
+          "label": "'Ask the River' — Unknown Annotation",
+          "kind": "mystery",
+          "fact": "A second line appeared on the Edge District accountability notice copy in a hand different from the supervisor's chalk addition: 'ask the river.' Origin, author, and meaning unknown. The Amber Lath keeper reproduced it faithfully in her copy without explanation.",
+          "links": [
             "fendt-filtration-engineer",
-            "contamination-evidence-for-the-elders"
+            "echo-river-contamination",
+            "the-six-fold-pattern",
+            "radiant-plateau-edge-district"
           ]
         }
       ],
@@ -523,32 +598,33 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Amber Lath Wayhouse, Edge District, Radiant Plateau — early night, ground-floor counter, warm lamp-light, cedar door closed behind Usnea. The district outside is quiet and settling.",
+      "setting": "Amber Lath Wayhouse, Edge District, Radiant Plateau — early night, ground-floor counter, warm lamp-light. Cedar door closed behind Usnea. The parchment copy now lies on the counter between the clay cup and the lamp.",
       "npcsPresent": [
         {
           "name": "Amber Lath Keeper",
-          "state": "Standing behind the low counter, clay cup refilled and set back precisely — composed, sequencing, watching to see if wha"
+          "state": "Standing behind the counter, hands smoothed flat after setting down the parchment — watching Usnea steadily, the compose"
         }
       ],
       "objects": [
         "clay cup on the counter (refilled, set back precisely)",
         "low counter — plain wood, well-worn",
         "lamp behind the keeper — warm, low",
+        "Accountability Notice Copy — folded parchment now on the counter, ink reproducti",
         "Upper Zone Ridge Map (rolled, in inventory)",
         "Orla's Memory Glass (in inventory)"
       ],
       "threads": [
-        "The keeper is holding something back — Prism Sight confirmed she is sequencing, not withholding entirely; the rest requires asking by name.",
-        "Orla does not yet know Millbrook's elder panel accepted the evidence — still needs to be told.",
-        "Fendt's name in red chalk on the accountability assembly board — supervisors have not removed it; the inaction has meaning the keeper has not fully named.",
-        "Dresh's three conditions are being worked by the council — Orla may be part of securing a Plateau-side written request."
+        "Who wrote 'ask the river' on the accountability notice — and when.",
+        "The supervisor marked Fendt and filed nothing — a deliberate act of exposure before a cover-up.",
+        "Orla does not yet know about the supervisor's move or Millbrook's elder panel acceptance.",
+        "Dresh's three conditions are being worked by the Millbrook council — Orla may be part of securing a Plateau-side written request."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 11,
-    "hour": 23,
+    "day": 12,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -973,35 +1049,36 @@
         "locationId": "radiant_plateau_edge",
         "day": 7
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d7] Recognized 'from the weaver's patch' immediately and handed over a room-chit without asking Usnea's name. Offered broth and noted the east-facing room takes morning light — a detai",
         "[d7] Answered the 'whose count?' question with full informational calm — explained the filtration output count system, named it as off for three runs, and noted that no official explana",
         "[d7] Usnea finished the broth in silence, thanked her plainly with both hands on the bowl, and went upstairs without further ask. The keeper accepted it with a single nod — a settled ac",
         "[d7] Left a folded cloth and clay cup of water on the counter before dawn — no note, no name. The house was empty when Usnea descended. A last practical courtesy, offered and complete.",
         "[d11] Confirmed word of Millbrook's naming of Fendt reached the district by morning via a Heights trader. Noted unprompted that Fendt's name appeared in red chalk on the accountability a",
-        "[d11] Prism Sight caught a down-left eye movement — she organized what to lead with rather than simply answering. She is sequencing information deliberately, watching to see if the part "
+        "[d11] Prism Sight caught a down-left eye movement — she organized what to lead with rather than simply answering. She is sequencing information deliberately, watching to see if the part ",
+        "[d11] Revealed her withheld information when asked directly by name — a supervisor (not a citizen) added the red chalk annotation, watched by the keeper, then filed nothing. Produced a h"
       ],
       "knownFacts": [
-        "The count has been off — not by much, but measurably — for the last three consecutive runs",
-        "Supervisors have posted no explanation for the discrepancy",
-        "A plain, contained guest who takes exactly what is offered and no more — she will remember that.",
         "Prepares for guest departure silently, before dawn — the care is in the logistics, not the conversation",
         "Word of Millbrook's decision traveled up the eastern path with a Heights trader by Day 11 morning",
         "A second line was added to the district accountability assembly notice in red chalk this afternoon: 'Fendt, south array'",
         "Fendt's supervisors have not removed the chalk addition — the inaction is noted as meaningful",
-        "Is holding additional information about the red-chalk addition or supervisor inaction — sequencing it, not refusing it; waiting to see if Usnea asks by name."
+        "Is holding additional information about the red-chalk addition or supervisor inaction — sequencing it, not refusing it; waiting to see if Usnea asks by name.",
+        "A filtration array supervisor added the 'Fendt, south array' chalk themselves — not a citizen complaint but an internal move, deliberate and unrecorded.",
+        "The keeper has watched this accountability board for thirty years and has never seen a supervisor mark their own subordinate without filing.",
+        "The parchment copy carries a second annotation in a different hand: 'ask the river' — origin unknown."
       ],
       "skillsObserved": [
-        "calibrated information-sharing — named exactly what she know",
-        "reading a guest's position accurately from minimal signals",
-        "precise retention of district news without prompting",
         "reading the significance of institutional inaction",
         "deliberate information sequencing under observation",
-        "maintaining composure under Prism Sight reading"
+        "maintaining composure under Prism Sight reading",
+        "thirty-year institutional memory of the district accountabil",
+        "precise observation of who touched the chalk and when",
+        "proactive evidence preservation under uncertainty"
       ],
       "status": "active",
-      "statusNote": "At the Amber Lath counter — has given partial information about the accountability board; holding more, watching to see if Usnea asks directly.",
+      "statusNote": "At the Amber Lath counter — has now fully disclosed what she held back; the sequencing is complete.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 11
@@ -1263,7 +1340,6 @@
     "radiant_plateau_edge": {
       "visits": 2,
       "notes": [
-        "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
         "[d8] Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand'",
         "[d8] Aevi named the coordinating-instruction frame here — limestone hollow is where the evidence sequence became a plan with a directing hand behind it.",
         "[d8] Old Roads working confirmed the Precursor alignments angle downslope below the valley floor toward the upper Disputed Zone — structural conduit for the six-fold pulse, not coincidental resonance. The ",
@@ -1274,7 +1350,8 @@
         "[d9] Usnea communed with Millbrook's essence at dawn Thursday — the village read as poised, purposeful, six-fold pulse steady through the wells and foundations. Light-harvest attempt failed; attention alre",
         "[d11] Old Roads failed to read the buried alignment in the open meadow — the soil here is too palimpsest with irrigation cuts and mill runoff. The alignment exists but requires longer contact or ground past",
         "[d11] Usnea returned to the Edge District on Day 11 afternoon — post-elder-presentation, carrying Orla's news back to her source.",
-        "[d11] Day 11 night: Fendt's name added in red chalk to the district accountability assembly notice — supervisors did not remove it as of early evening. Word of Millbrook's elder decision reached the distric"
+        "[d11] Day 11 night: Fendt's name added in red chalk to the district accountability assembly notice — supervisors did not remove it as of early evening. Word of Millbrook's elder decision reached the distric",
+        "[d11] The Amber Lath keeper produced a handwritten copy of the accountability notice (including 'ask the river' in a second hand) — she made it this afternoon in case Usnea didn't return. The full disclosur"
       ],
       "flags": {
         "memory_glass_transferred": "true",
@@ -1319,7 +1396,7 @@
           "name": "Amber Lath Wayhouse",
           "day": 6,
           "visited": true,
-          "note": "Two lanes north of the Edge District lane — keeper responds to 'from the weaver's patch'; quiet house, no names asked, e"
+          "note": "Keeper revealed: a supervisor, not a citizen, added the red chalk annotation and filed nothing. Parchment copy now in Us"
         },
         "eastern-rim-descent": {
           "name": "Eastern Rim Descent",
@@ -2002,7 +2079,8 @@
           "[d8] Day 8 hollow: Aevi names Fendt's act not as cause but as completion — a step in coordinated instructions given alongside the Disputed Zone reactivation. Someone directed both. The 'why' is still open;",
           "[d10] Day 10 evening: Fendt's deliberate pour into the Echo River ford confirmed by photonic record before Millbrook's elder panel — the act is now public knowledge in the valley floor's governance body. A ",
           "[d11] Day 11 night: Fendt's name appeared in red chalk on the Edge District accountability assembly board — 'Fendt, south array.' The addition was made this afternoon; his supervisors had not removed it by ",
-          "[d11] Day 11 night: Prism Sight confirmed the keeper is sequencing her information about the red-chalk addition and supervisor inaction — she has more than she led with, and is watching to see if the partia"
+          "[d11] Day 11 night: Prism Sight confirmed the keeper is sequencing her information about the red-chalk addition and supervisor inaction — she has more than she led with, and is watching to see if the partia",
+          "[d11] A filtration array supervisor added 'Fendt, south array' to the district accountability board themselves and filed nothing — a deliberate act of internal exposure witnessed by the Amber Lath keeper of"
         ],
         "links": [
           "radiant-plateau-edge-district",
@@ -2263,6 +2341,23 @@
         "createdDay": 11,
         "updatedDay": 11,
         "aliases": []
+      },
+      "ask-the-river": {
+        "id": "ask-the-river",
+        "label": "'Ask the River' — Unknown Annotation",
+        "kind": "mystery",
+        "facts": [
+          "[d11] A second line appeared on the Edge District accountability notice copy in a hand different from the supervisor's chalk addition: 'ask the river.' Origin, author, and meaning unknown. The Amber Lath ke"
+        ],
+        "links": [
+          "fendt-filtration-engineer",
+          "echo-river-contamination",
+          "the-six-fold-pattern",
+          "radiant-plateau-edge-district"
+        ],
+        "aliases": [],
+        "createdDay": 11,
+        "updatedDay": 11
       }
     }
   },
@@ -2311,12 +2406,6 @@
     ]
   },
   "establishedFacts": [
-    {
-      "id": "f31",
-      "text": "Prism Sight surge from the plateau rim at dawn, Day 7: two figures climbing the south road before first light — one in a filtration operative's working coat, moving with deliberate speed. Approximatel",
-      "day": 7,
-      "subjectId": null
-    },
     {
       "id": "fendt-filtration-engineer",
       "text": "A Precursor junction-node sits beneath the south road lower switchback, directly under Fendt's filtration array — the array was built on top of it. The six-count pulse fired once from the node when th",
@@ -2548,6 +2637,12 @@
     {
       "id": "amber-lath-keeper",
       "text": "Fendt's name appeared in red chalk on the Edge District accountability assembly notice board on Day 11 afternoon — 'Fendt, south array.' Fendt's supervisors had not removed it as of early evening.",
+      "day": 11,
+      "subjectId": "amber-lath-keeper"
+    },
+    {
+      "id": "amber-lath-keeper",
+      "text": "A filtration array supervisor added 'Fendt, south array' in red chalk to the Edge District accountability board themselves — then walked away and filed nothing. Witnessed by the Amber Lath keeper. In ",
       "day": 11,
       "subjectId": "amber-lath-keeper"
     }

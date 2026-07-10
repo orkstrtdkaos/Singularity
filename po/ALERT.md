@@ -2,6 +2,8 @@
 
 **Status:** SNG-BATCH-3 + SNG-BATCH-4 CLOSED GREEN (Aevi 2026-07-06). v1.6.2→v1.6.6, 414 checks, combat + random encounters + item evolution + variable power all shipped and Erik-validated on the live build. Party play (phase 1) live and in active multi-player use (scene saves at origin); fix(party) non-destructive shared-scene + actionable sync errors shipped out-of-band. EW/FCT ratified (walkthrough). 
 
+**SNG-BATCH-5 complete_pending_review (2026-07-10, CCode):** soft class cost + branch forks shipped v1.6.9 (442 checks, verified live). Results: po/results/20260710_SNG-BATCH-5.md. Phase 3 feel-checks OPEN as Erik preview-legs (affinity receipt / surge dial / Waystaff waking + the two new: cross-class cost, fork choice). Only Aevi closes.
+
 **NEXT BUILD (2026-07-06):**
 1. **Finish the ratified-but-unbuilt tradeoffs** (fell through BATCH-4's frozen spec): soft class-cost 2x secondary (content READY: skill_capacity.json crossClass) + branch forks (mechanic specced; needs fork content + skilltree wiring). Tier-slot capacity already shipped (BATCH-2). Small, mostly content-ready — quickest win.
 2. **SNG-016 — 12-axis skill breadth:** Aevi OWES Erik a design proposal FIRST (which axes get their own system vs share; what a death/life craft, mind/body discipline, peace/violence path look like; how it recolors the skill graph + origins + location vectors). No authoring until the axis map is agreed. This is the big design direction and it gates a lot.

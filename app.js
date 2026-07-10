@@ -24,7 +24,7 @@ import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAsp
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
-import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel } from "./engine/skilltree.js";
+import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
@@ -32,7 +32,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.6.8";
+const APP_VERSION = "1.6.9";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -197,6 +197,7 @@ function migrate(c) {
   ensureFacts(c);
   refreshEvolvingItems(c, CONTENT.items); // SNG-010C: stamp current evolution stage on held evolving items
   if (!c.precursorAccess) c.precursorAccess = [];
+  if (!c.forkChoices) c.forkChoices = {}; // SNG-BATCH-5 Phase 2: permanent branch-fork picks
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
   if (needsBackfill(c)) {
@@ -596,7 +597,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, fullCatalog()),
+    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
     factsDetail: factsForGM(character),
     evolvedItemsDetail: evolvedItemsForGM(character, CONTENT.items),
@@ -1056,7 +1057,7 @@ async function onAsk(text) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, fullCatalog()),
+    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
   }, text);
   busy = false;
@@ -1154,7 +1155,7 @@ function renderMap(selectedId = null) {
 
 function renderSkillGraph(selectedId = null) {
   const model = skillGraphModel(fullCatalog(), CONTENT.emergence, character, {
-    attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity,
+    attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, branchForks: CONTENT.branchForks,
     preds: {
       isRipe: id => ripeCombos(character, CONTENT.emergence, CONTENT.rules).some(r => r.id === id) || ripeBranches(character, CONTENT.emergence).some(t => t.id === id),
       isAspired: id => (character.practice?.aspirations || []).some(a => a.abilityId === id)
@@ -1185,6 +1186,7 @@ function renderSkillGraph(selectedId = null) {
         <circle class="hit" cx="${p.x}" cy="${p.y}" r="18"/>
         <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${n.owned ? classColor(n.cls) : "#23262e"}" stroke="${classColor(n.cls)}"/>
         ${n.locked ? `<text x="${p.x}" y="${p.y - r - 3}" text-anchor="middle" class="graph-lock">🔒</text>` : ""}
+        ${n.forks ? `<text x="${p.x - r - 5}" y="${p.y + 4}" text-anchor="middle" class="graph-fork ${n.forkChosen ? "chosen" : ""}">⑂</text>` : ""}
         <text x="${p.x + r + 4}" y="${p.y + 3}" class="graph-node-label ${n.owned ? "owned" : ""}">${esc(n.name)} <tspan class="graph-tier">${n.tier}</tspan></text>
       </g>`; }).join("")}
     ${virtuals.map(vid => { const p = pos[vid]; return `<g class="graph-node virtual" data-skillnode="${esc(vid)}"><title>${esc(recipeName(vid))}</title>
@@ -1200,6 +1202,7 @@ function renderSkillGraph(selectedId = null) {
       ${sel.owned ? `<span class="rep-band trusted">owned · rank ${sel.rank}</span>` : ""}</div>
     <div class="hint">Level requirement: ${sel.levelReq}${sel.gated ? ` · ${(() => { const g = gateFor(sel.id, CONTENT.attributeGates); return `needs ${g.subAttribute} ${g.learnMin} (rank 3: ${g.rank3Min})`; })()}` : ""}${sel.locked ? ` · 🔒 ${esc(sel.lockText)}` : ""}</div>
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
+    ${sel.forks ? `<div class="codex-fact fork-note"><strong>⑂ Fork at rank ${sel.forkAt}:</strong> ${sel.forkChosen ? `specialized as <em>${esc(sel.forkChosen)}</em> — <span class="fp-cannot">${esc(sel.forkLocked)} locked forever</span>` : "a permanent A-or-B specialization when you rank into it — the path you don't take locks."}</div>` : ""}
     ${(selAb?.tree || []).map(t => `<div class="codex-fact"><strong>${tierOf(sel.levelReq)}·r${t.rank} ${esc(t.name)}:</strong> ${esc(t.grants)} <em>(cannot: ${esc(t.cannot)})</em></div>`).join("")}
   </div>` : "";
 
@@ -1277,7 +1280,14 @@ function renderCharacterScreen() {
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
-  for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => { const r = rankUpAbility(character, btn.dataset.rank2, rules, { attributeGates: CONTENT.attributeGates }); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
+  for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => {
+    const id = btn.dataset.rank2;
+    const owned = character.abilities.find(a => a.abilityId === id);
+    const doRank = () => { const r = rankUpAbility(character, id, rules, rankOptsFor()); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
+    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) {
+      renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); doRank(); });
+    } else doRank();
+  };
   const aspPick = document.getElementById("asp-pick");
   if (aspPick) aspPick.onchange = () => { if (aspPick.value) { const r = declareAspiration(character, aspPick.value, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); } };
   for (const btn of app.querySelectorAll("[data-aspdrop]")) btn.onclick = () => { dropAspiration(character, btn.dataset.aspdrop); saveCharacter(character); renderCharacterScreen(); };
@@ -1614,12 +1624,13 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</h3>
       ${character.abilities.map(a => {
         const ab = fullCatalog()[a.abilityId];
-        const rank = ab?.tree?.find(t => t.rank === a.level);
+        const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
+        const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
         const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
-        const canRank = character.skillPoints > 0 && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
+        const canRank = character.skillPoints >= rankCost && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
         return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
-          <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${ab ? tierOf(ab.levelReq) : "?"}">${ab ? tierOf(ab.levelReq) : "?"}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}</em>` : ""}
-          ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend a skill point">▲</button>` : ""}
+          <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${ab ? tierOf(ab.levelReq) : "?"}">${ab ? tierOf(ab.levelReq) : "?"}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
+          ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend ${rankCost} skill point${rankCost > 1 ? "s (cross-class)" : ""}">▲${rankCost > 1 ? "×" + rankCost : ""}</button>` : ""}
           ${practiceRankReady(character, a.abilityId, CONTENT.rules) && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)] ?? 1) ? `<button class="grow-btn practiced" data-rankpractice="${esc(a.abilityId)}" title="Practiced enough — rank up free">▲free</button>` : ""}
           <span class="cost">(${ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : "?"} energy${ab && effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span></div>`;
       }).join("") || "<div class='insight'>none yet</div>"}
@@ -1643,8 +1654,10 @@ function renderPlay(turn, opts = {}) {
             const capBlock = cap && ab.powerSystem !== "learned";
             const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
             const cross = effectiveLevelReq(ab, character, CONTENT.rules) !== (ab.levelReq || 1);
-            const blocked = !gate.ok || capBlock;
-            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + (gate.ok ? "" : " — " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${cross ? ", cross" : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : ""}</span></button>`;
+            const learnCost = skillPointCost(ab, character, CONTENT.skillCapacity);
+            const tooExpensive = !ripe && character.skillPoints < learnCost;
+            const blocked = !gate.ok || capBlock || tooExpensive;
+            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + (gate.ok ? "" : " — " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${cross ? ", cross" : ""}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
           }).join("")}</details>`).join("");
         return capLine + groups;
       })()}
@@ -1950,21 +1963,36 @@ function renderPlay(turn, opts = {}) {
       character.precursorAccess = [...(character.precursorAccess || []), "address_sense"];
     }
     saveCharacter(character);
-    // rank-up highlight: show exactly what the new rank grants (and its new limit)
+    // rank-up highlight: show exactly what the new rank grants (fork-aware) and its new limit
     const ab = fullCatalog()[abilityId];
-    const gained = ab?.tree?.find(t => t.rank === r.newRank);
-    let aside = `${ab?.name} advances to rank ${r.newRank}${r.viaPractice ? " — earned by practice, no point spent" : ""}.`;
-    if (gained) aside += `\n✦ Now: ${gained.name} — ${gained.grants}\n△ New limit: ${gained.cannot}`;
+    const gained = rankExpression(character, ab, r.newRank, CONTENT.branchForks);
+    const spent = r.viaPractice ? " — earned by practice, no point spent" : (r.cost > 1 ? ` — ${r.cost} skill points (cross-class)` : "");
+    let aside = `${ab?.name} advances to rank ${r.newRank}${spent}.`;
+    if (gained) aside += `\n✦ Now: ${gained.name}${gained.forked ? " (specialized)" : ""} — ${gained.grants}\n△ New limit: ${gained.cannot}`;
     if (abilityId === "old_roads" && r.newRank === 3) aside += "\nThe old roads remember you now: Address-Sense may be learned.";
     renderPlay(turn || character.activeScene?.lastTurn || null, { aside });
   };
+  // SNG-BATCH-5 Phase 2: fork chooser — the player picks A xor B; the other locks permanently.
+  const offerFork = (abilityId, viaPractice) => renderForkModal(abilityId, (key) => {
+    setFork(character, abilityId, key, CONTENT.branchForks);
+    const r = rankUpAbility(character, abilityId, CONTENT.rules, viaPractice ? { viaPractice: true, ...rankOpts() } : rankOpts());
+    if (r.ok) afterRank(abilityId, r); else alert(r.why);
+  });
+  const rankOpts = () => ({ attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, catalog: fullCatalog() });
   for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
-    const r = rankUpAbility(character, b.dataset.rankup, CONTENT.rules, { attributeGates: CONTENT.attributeGates });
-    if (r.ok) afterRank(b.dataset.rankup, r); else alert(r.why);
+    const id = b.dataset.rankup;
+    // SNG-BATCH-5 Phase 2: a fork blocks the linear rank — the player must choose a path first
+    const owned = character.abilities.find(a => a.abilityId === id);
+    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) { offerFork(id, false); return; }
+    const r = rankUpAbility(character, id, CONTENT.rules, rankOpts());
+    if (r.ok) afterRank(id, r); else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-rankpractice]")) b.onclick = () => {
-    const r = rankUpAbility(character, b.dataset.rankpractice, CONTENT.rules, { viaPractice: true, attributeGates: CONTENT.attributeGates });
-    if (r.ok) afterRank(b.dataset.rankpractice, r); else alert(r.why);
+    const id = b.dataset.rankpractice;
+    const owned = character.abilities.find(a => a.abilityId === id);
+    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) { offerFork(id, true); return; }
+    const r = rankUpAbility(character, id, CONTENT.rules, { viaPractice: true, ...rankOpts() });
+    if (r.ok) afterRank(id, r); else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
     const free = aspirationRipe(character, b.dataset.learn, CONTENT.rules);
@@ -2001,5 +2029,32 @@ function renderPlay(turn, opts = {}) {
 // ---------- utils ----------
 
 function esc(s) { return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+/** SNG-BATCH-5 Phase 2: shared fork-choice modal. Renders the two paths; calls
+ *  onPick(pathKey) after the player confirms. The caller locks the fork + ranks. */
+function renderForkModal(abilityId, onPick) {
+  const ab = fullCatalog()[abilityId];
+  const f = CONTENT.branchForks?.forks?.[abilityId];
+  if (!f) return;
+  const paths = forkPaths(abilityId, CONTENT.branchForks);
+  document.getElementById("fork-modal")?.remove();
+  const el = document.createElement("div");
+  el.id = "fork-modal"; el.className = "fork-modal";
+  el.innerHTML = `<div class="fork-card"><div class="fork-title">${esc(ab?.name || abilityId)} — Rank ${f.atRank}: choose a path</div>` +
+    `<div class="fork-prompt">${esc(f.prompt)}</div><div class="fork-paths">${paths.map(p =>
+      `<button class="fork-path" data-forkpick="${esc(p.key)}"><div class="fp-name">${esc(p.name)}</div><div class="fp-grants">${esc(p.grants)}</div><div class="fp-cannot">△ ${esc(p.cannot)}</div></button>`).join("")}</div>` +
+    `<div class="fork-warn">Permanent — the path you don't take locks forever for this ability.</div>` +
+    `<button class="fork-cancel" id="fork-cancel">Not yet</button></div>`;
+  document.body.appendChild(el);
+  for (const btn of el.querySelectorAll("[data-forkpick]")) btn.onclick = () => {
+    const key = btn.dataset.forkpick;
+    if (!confirm(`Lock in "${f.paths[key].name}"? The other path is gone for good.`)) return;
+    el.remove();
+    onPick(key);
+  };
+  document.getElementById("fork-cancel").onclick = () => el.remove();
+}
+
+function rankOptsFor() { return { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, catalog: fullCatalog() }; }
 function pct(v, max) { return Math.round((v / Math.max(1, max)) * 100); }
 function clampInt(v, min, max) { return Math.max(min, Math.min(max, v | 0)); }

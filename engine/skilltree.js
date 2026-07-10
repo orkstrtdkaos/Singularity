@@ -74,18 +74,24 @@ export function atCapacity(character, skillCapacity) {
 
 /** Build a render-ready node/edge model of the whole catalog for a character.
  *  preds: { isRipe(id), isAspired(id) } supplied by the app (practice-aware). */
-export function skillGraphModel(catalog, emergence, character, { attributeGates, skillCapacity, preds = {} } = {}) {
+export function skillGraphModel(catalog, emergence, character, { attributeGates, skillCapacity, branchForks = null, preds = {} } = {}) {
   const owned = new Map((character.abilities || []).map(a => [a.abilityId, a.level]));
   const cap = atCapacity(character, skillCapacity);
   const nodes = Object.values(catalog).map(ab => {
     const gate = gateFor(ab.id, attributeGates);
     const learnGate = meetsLearnGate(character, ab.id, attributeGates);
+    // SNG-BATCH-5 Phase 2: fork state for the node badge/detail
+    const fork = forkFor(ab.id, branchForks);
+    const chosen = fork ? chosenFork(character, ab.id, branchForks) : null;
+    const lockedPath = fork && chosen ? forkPaths(ab.id, branchForks).find(p => p.key !== chosen.key) : null;
     return {
       id: ab.id, name: ab.name, cls: ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
       owned: owned.has(ab.id), rank: owned.get(ab.id) || 0,
       ripe: preds.isRipe ? !!preds.isRipe(ab.id) : false,
       aspired: preds.isAspired ? !!preds.isAspired(ab.id) : false,
       gated: !!gate,
+      forks: !!fork, forkAt: fork?.atRank || null,
+      forkChosen: chosen?.name || null, forkLocked: lockedPath?.name || null,
       locked: !owned.has(ab.id) && (!learnGate.ok || (cap && ab.powerSystem !== "learned")),
       lockText: !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — deepen owned skills" : "")
     };
@@ -99,4 +105,81 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     if (ids.has(t.growsAbility)) edges.push({ from: t.growsAbility, to: t.id, kind: "branch", virtual: t.id });
   }
   return { nodes, edges };
+}
+
+// ---------- SNG-BATCH-5 Phase 1: soft class cost (cross-class = 2x points) ----------
+
+/** The character's HOME power system, derived from origin. Valley folk are
+ *  valley_craft natives; harmonic/radiant origins are their own class. Precursor
+ *  is never home (learned-only), so it always pays the cross-class multiplier. */
+export function homeClassOf(character) {
+  const o = character?.origin;
+  if (o === "harmonic") return "harmonic";
+  if (o === "radiant") return "radiant";
+  return "valley_craft"; // valley (and any default)
+}
+
+const CLASS_SYSTEMS = ["harmonic", "radiant", "valley_craft", "precursor"];
+
+/** Is this ability outside the character's home class? Only the four class systems
+ *  count; learned/discovery (earned techniques) are never "cross-class". */
+export function isCrossClass(ability, character) {
+  const sys = ability?.powerSystem;
+  if (!sys || !CLASS_SYSTEMS.includes(sys)) return false;
+  return sys !== homeClassOf(character);
+}
+
+/** Skill-point cost to learn or rank an ability: 1 normally, ×multiplier cross-class. */
+export function skillPointCost(ability, character, skillCapacity) {
+  const mult = skillCapacity?.crossClass?.costMultiplier ?? 2;
+  return isCrossClass(ability, character) ? mult : 1;
+}
+
+// ---------- SNG-BATCH-5 Phase 2: branch forks ----------
+
+export function forkFor(abilityId, branchForks) {
+  return branchForks?.forks?.[abilityId] || null;
+}
+
+/** The two paths of a fork as [{key, name, grants, cannot}, …], or [] if none. */
+export function forkPaths(abilityId, branchForks) {
+  const f = forkFor(abilityId, branchForks);
+  return f ? Object.entries(f.paths || {}).map(([key, v]) => ({ key, ...v })) : [];
+}
+
+/** The character's chosen fork path for an ability, or null if unchosen/none. */
+export function chosenFork(character, abilityId, branchForks) {
+  const key = character?.forkChoices?.[abilityId];
+  if (!key) return null;
+  const path = forkFor(abilityId, branchForks)?.paths?.[key];
+  return path ? { key, ...path } : null;
+}
+
+/** True when ranking this ability TO targetRank hits a fork that isn't resolved yet. */
+export function forkPending(character, abilityId, targetRank, branchForks) {
+  const f = forkFor(abilityId, branchForks);
+  if (!f || targetRank !== f.atRank) return false;
+  return !character?.forkChoices?.[abilityId];
+}
+
+/** Lock in a fork path — permanent once set. Returns false if none / already chosen / bad key. */
+export function setFork(character, abilityId, pathKey, branchForks) {
+  const f = forkFor(abilityId, branchForks);
+  if (!f || !f.paths?.[pathKey]) return false;
+  character.forkChoices = character.forkChoices || {};
+  if (character.forkChoices[abilityId]) return false; // permanent
+  character.forkChoices[abilityId] = pathKey;
+  return true;
+}
+
+/** Effective rank-expression for display: the chosen fork path REPLACES the linear
+ *  tree entry once the ability is at/past the fork rank; otherwise the linear entry. */
+export function rankExpression(character, ability, level, branchForks) {
+  const f = forkFor(ability?.id, branchForks);
+  if (f && level >= f.atRank) {
+    const chosen = chosenFork(character, ability.id, branchForks);
+    if (chosen) return { name: chosen.name, grants: chosen.grants, cannot: chosen.cannot, forked: true, pathKey: chosen.key };
+  }
+  const t = ability?.tree?.find(x => x.rank === level);
+  return t ? { name: t.name, grants: t.grants, cannot: t.cannot, forked: false } : null;
 }

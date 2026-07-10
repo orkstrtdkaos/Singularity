@@ -271,3 +271,21 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .party-banner .pb-btn:hover { background: #4a3612; }
 .party-banner .pb-x { background: none; border: none; color: #8b7d6b; font-size: 18px; line-height: 1; cursor: pointer; padding: 0 2px; flex: none; }
 .party-banner .pb-x:hover { color: #e6d8c8; }
+
+/* SNG-BATCH-5 branch forks — the choose-a-path modal */
+.fork-modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.55); padding: 16px; }
+.fork-card { background: #1b140d; border: 1px solid #d4a24a; border-radius: 12px; max-width: 560px; width: 100%; padding: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); }
+.fork-title { color: #f0e4d0; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.fork-prompt { color: #cdbfa8; font-size: 13px; font-style: italic; margin-bottom: 12px; }
+.fork-paths { display: flex; flex-direction: column; gap: 8px; }
+.fork-path { text-align: left; background: #241c14; border: 1px solid #4a3c2c; border-radius: 8px; padding: 10px; cursor: pointer; }
+.fork-path:hover { border-color: #d4a24a; background: #2c2013; }
+.fp-name { color: #d4a24a; font-weight: 600; font-size: 14px; margin-bottom: 3px; }
+.fp-grants { color: #e6d8c8; font-size: 12px; }
+.fp-cannot { color: #a08b6f; font-size: 12px; margin-top: 3px; }
+.fork-warn { color: #d46a4a; font-size: 11px; margin: 10px 0 8px; }
+.fork-cancel { width: 100%; padding: 6px; background: #241c14; border: 1px solid #4a3c2c; color: #b7a488; border-radius: 6px; cursor: pointer; }
+.graph-fork-lock { fill: #a08b6f; }
+.graph-fork { font-size: 11px; fill: #a08b6f; }
+.graph-fork.chosen { fill: #d4a24a; }
+.fork-note strong { color: #d4a24a; }

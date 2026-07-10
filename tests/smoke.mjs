@@ -22,6 +22,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
+import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 
 // stub localStorage for worldtime settings in Node
@@ -568,7 +569,8 @@ check('own tradition at face value', effectiveLevelReq(fullCat.stillness_field, 
 check('cross-training into valley_craft costs +1', effectiveLevelReq(fullCat.wayfinding, hChar, rules) === 2);
 check('other civ tradition closed', effectiveLevelReq(fullCat.light_well, hChar, rules) === null);
 check('valley takes everything natively', effectiveLevelReq(fullCat.light_well, { origin: 'valley', level: 1 }, rules) === 1 && effectiveLevelReq(fullCat.wayfinding, { origin: 'valley', level: 1 }, rules) === 1);
-const crossLearner = { origin: 'radiant', level: 1, skillPoints: 1, abilities: [] };
+// SNG-BATCH-5: valley_craft is cross-class for a radiant origin → 2 skill points
+const crossLearner = { origin: 'radiant', level: 1, skillPoints: 2, abilities: [] };
 check('cross-training gate blocks at low level', learnAbility(crossLearner, 'wayfinding', fullCat, rules).why.includes('cross-training'));
 crossLearner.level = 2;
 check('cross-training opens at effective level', learnAbility(crossLearner, 'wayfinding', fullCat, rules).ok);
@@ -1043,6 +1045,90 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // (gates/levelReq are enforced at learn/rank; a USE only involves an owned ability, so intensity
   //  can never bypass them — asserted structurally: no intensity API touches gates)
   check("INTENSITIES are exactly the three ratified steps", INTENSITIES.join(",") === "conserve,standard,surge");
+}
+
+// --- SNG-BATCH-5 Phase 1: soft class cost (cross-class = 2x) ---
+{
+  const cap5 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_capacity.json"), "utf8"));
+  const cat5 = {};
+  for (const g of ["harmonic","radiant","valley_craft","precursor"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+g+".json"),"utf8")); for (const a of pk.abilities) cat5[a.id] = {...a, powerSystem: pk.powerSystem}; }
+  const harm = { origin: "harmonic" };
+  const rad = { origin: "radiant" };
+  const val = { origin: "valley" };
+  check("home class of harmonic origin", homeClassOf(harm) === "harmonic");
+  check("home class of valley origin is valley_craft", homeClassOf(val) === "valley_craft");
+  // a harmonic ability is home for harmonic, cross for radiant/valley
+  const harmAb = Object.values(cat5).find(a => a.powerSystem === "harmonic");
+  const valAb = Object.values(cat5).find(a => a.powerSystem === "valley_craft");
+  const precAb = Object.values(cat5).find(a => a.powerSystem === "precursor");
+  check("home-class ability is not cross-class", isCrossClass(harmAb, harm) === false);
+  check("other class ability IS cross-class", isCrossClass(harmAb, rad) === true);
+  check("valley_craft is home for valley origin", isCrossClass(valAb, val) === false);
+  check("precursor is never home (always cross)", isCrossClass(precAb, harm) === true && isCrossClass(precAb, val) === true);
+  check("cross-class costs the ratified multiplier (2)", skillPointCost(harmAb, rad, cap5) === 2);
+  check("home-class costs 1", skillPointCost(harmAb, harm, cap5) === 1);
+
+  // ENFORCEMENT in learn/rank
+  const h1 = { origin: "harmonic", level: 5, skillPoints: 1, abilities: [], subAttributes: {}, customAbilities: {} };
+  // learning a home-class harmonic ability costs 1 (assume a T1 harmonic ability exists)
+  const homeT1 = Object.values(cat5).find(a => a.powerSystem === "harmonic" && (a.levelReq||1) === 1);
+  if (homeT1) check("home-class learn spends 1 point", (learnAbility(h1, homeT1.id, cat5, rules, { skillCapacity: cap5 }).ok) && h1.skillPoints === 0);
+  // cross-class learn needs 2 points
+  const h2 = { origin: "harmonic", level: 5, skillPoints: 1, abilities: [], subAttributes: {}, customAbilities: {} };
+  const crossT1 = Object.values(cat5).find(a => a.powerSystem === "valley_craft" && (a.levelReq||1) === 1);
+  if (crossT1) check("cross-class learn blocked with 1 point", learnAbility(h2, crossT1.id, cat5, rules, { skillCapacity: cap5 }).why.includes("cross-class"));
+  if (crossT1) { h2.skillPoints = 2; check("cross-class learn spends 2 points", learnAbility(h2, crossT1.id, cat5, rules, { skillCapacity: cap5 }).ok && h2.skillPoints === 0); }
+  // cross-class RANK also costs 2
+  if (crossT1) {
+    const h3 = { origin: "harmonic", level: 5, skillPoints: 1, abilities: [{ abilityId: crossT1.id, level: 1 }], subAttributes: {}, customAbilities: {} };
+    check("cross-class rank blocked with 1 point", rankUpAbility(h3, crossT1.id, rules, { catalog: cat5, skillCapacity: cap5 }).why.includes("cross-class"));
+    h3.skillPoints = 2;
+    const rr = rankUpAbility(h3, crossT1.id, rules, { catalog: cat5, skillCapacity: cap5 });
+    check("cross-class rank spends 2 points", rr.ok && rr.cost === 2 && h3.skillPoints === 0);
+  }
+}
+
+// --- SNG-BATCH-5 Phase 2: branch forks ---
+{
+  const forks = JSON.parse(readFileSync(join(root, "content/packs/core/rules/branch_forks.json"), "utf8"));
+  const psAb = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/harmonic.json"), "utf8")).abilities.find(a => a.id === "sonic_resonance") ||
+               JSON.parse(readFileSync(join(root, "content/packs/core/abilities/radiant.json"), "utf8")).abilities.find(a => a.id === "prism_sight");
+  // use prism_sight from whichever pack holds it
+  let prism = null;
+  for (const g of ["harmonic","radiant","valley_craft"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+g+".json"),"utf8")); const a = pk.abilities.find(x => x.id === "prism_sight"); if (a) prism = { ...a, powerSystem: pk.powerSystem }; }
+
+  check("branch_forks defines prism_sight fork at rank 3", forkFor("prism_sight", forks)?.atRank === 3);
+  check("fork has exactly two paths", forkPaths("prism_sight", forks).length === 2);
+
+  const c = { forkChoices: {} };
+  // fork pending only at atRank and while unchosen
+  check("fork NOT pending below atRank", forkPending(c, "prism_sight", 2, forks) === false);
+  check("fork pending at atRank when unchosen", forkPending(c, "prism_sight", 3, forks) === true);
+  check("non-forking ability never pends", forkPending(c, "wayfinding", 3, forks) === false);
+
+  // choosing locks permanently
+  check("setFork picks a path", setFork(c, "prism_sight", "deep_read", forks) === true);
+  check("chosen fork readable", chosenFork(c, "prism_sight", forks)?.key === "deep_read");
+  check("fork no longer pending after choice", forkPending(c, "prism_sight", 3, forks) === false);
+  check("re-choosing is refused (permanent)", setFork(c, "prism_sight", "wide_read", forks) === false);
+  check("still deep_read after refused re-choose", c.forkChoices.prism_sight === "deep_read");
+
+  // rank expression: chosen fork REPLACES the linear tree entry at/above atRank
+  const exprChosen = rankExpression(c, prism, 3, forks);
+  check("rank expr uses the chosen fork path", exprChosen.forked === true && /Deep Read/i.test(exprChosen.name));
+  check("chosen fork carries its grants/cannot", !!exprChosen.grants && !!exprChosen.cannot);
+  // below the fork rank, expression is the linear tree entry
+  const exprLinear = rankExpression(c, prism, 2, forks);
+  check("below atRank uses linear tree", exprLinear && exprLinear.forked === false);
+  // an unchosen fork ability at atRank falls back to linear (until picked)
+  const c2 = { forkChoices: {} };
+  const exprUnchosen = rankExpression(c2, prism, 3, forks);
+  check("unchosen fork at atRank falls back to linear tree", !exprUnchosen || exprUnchosen.forked === false);
+
+  // GM ability law reflects the chosen fork
+  const gmChar = { abilities: [{ abilityId: "prism_sight", level: 3 }], forkChoices: { prism_sight: "wide_read" }, discoveries: [] };
+  const gm = abilitiesForGM(gmChar, { prism_sight: prism }, forks);
+  check("GM sees the specialized fork name", /Wide Read/i.test(gm) && /specialized fork/i.test(gm));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -8,7 +8,7 @@
 //     critical success mints a permanent named technique with a standing bonus.
 
 import { slugify } from "./quests.js";
-import { meetsLearnGate, meetsRank3Gate, atCapacity } from "./skilltree.js";
+import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression } from "./skilltree.js";
 
 export const SUB_OF = {
   strength: "physical", agility: "physical",
@@ -106,7 +106,6 @@ export function spendSubPoint(character, sub, rules) {
 export function rankUpAbility(character, abilityId, rules, opts = {}) {
   const owned = character.abilities.find(a => a.abilityId === abilityId);
   if (!owned) return { ok: false, why: "not known" };
-  if (!opts.viaPractice && (character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
   const max = rules.leveling?.maxAbilityRank ?? 3;
   if (owned.level >= max) return { ok: false, why: "already mastered" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
@@ -115,9 +114,13 @@ export function rankUpAbility(character, abilityId, rules, opts = {}) {
     const g = meetsRank3Gate(character, abilityId, opts.attributeGates);
     if (!g.ok) return { ok: false, why: g.why };
   }
+  // SNG-BATCH-5: affordability last — cross-class abilities cost 2x (opts.catalog resolves the class)
+  const ab = (opts.catalog || {})[abilityId];
+  const cost = opts.viaPractice ? 0 : skillPointCost(ab, character, opts.skillCapacity);
+  if (!opts.viaPractice && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (cross-class)` : "no points" };
   owned.level++;
-  if (!opts.viaPractice) character.skillPoints--;
-  return { ok: true, newRank: owned.level, viaPractice: !!opts.viaPractice };
+  if (!opts.viaPractice) character.skillPoints -= cost;
+  return { ok: true, newRank: owned.level, viaPractice: !!opts.viaPractice, cost };
 }
 
 /** SNG-003 access rule: own tradition at face value; valley folk take any system
@@ -143,7 +146,6 @@ export function effectiveLevelReq(ab, character, rules) {
 
 /** Learn a new ability (1 skill point), gated by effectiveLevelReq. */
 export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
-  if (!opts.free && (character.skillPoints || 0) < 1) return { ok: false, why: "no points" };
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
   const ab = catalog[abilityId];
   if (!ab) return { ok: false, why: "unknown ability" };
@@ -157,9 +159,12 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (opts.skillCapacity && atCapacity(character, opts.skillCapacity)) {
     return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one" };
   }
+  // SNG-BATCH-5: affordability last — cross-class abilities cost 2x skill points
+  const cost = opts.free ? 0 : skillPointCost(ab, character, opts.skillCapacity);
+  if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (cross-class)` : "no points" };
   character.abilities.push({ abilityId, level: 1 });
-  if (!opts.free) character.skillPoints--;
-  return { ok: true, free: !!opts.free };
+  if (!opts.free) character.skillPoints -= cost;
+  return { ok: true, free: !!opts.free, cost };
 }
 
 // ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------
@@ -246,13 +251,14 @@ export function applyBacklash(character, rules) {
 
 /** Ability detail block for the GM: exactly what each rank grants, what it cannot
  *  do, what it's not for — plus earned techniques. This is the GM's law for powers. */
-export function abilitiesForGM(character, catalog) {
+export function abilitiesForGM(character, catalog, branchForks = null) {
   const lines = [];
   for (const owned of character.abilities || []) {
     const ab = catalog[owned.abilityId];
     if (!ab) continue;
-    const rank = ab.tree?.find(t => t.rank === owned.level);
-    lines.push(`### ${ab.name} — rank ${owned.level}${rank ? ` "${rank.name}"` : ""} (${ab.energyCost} energy)` +
+    // SNG-BATCH-5: a chosen fork path REPLACES the linear rank expression for the GM too
+    const rank = (branchForks && rankExpression(character, ab, owned.level, branchForks)) || ab.tree?.find(t => t.rank === owned.level);
+    lines.push(`### ${ab.name} — rank ${owned.level}${rank ? ` "${rank.name}"${rank.forked ? " (specialized fork)" : ""}` : ""} (${ab.energyCost} energy)` +
       (rank ? `\nCAN: ${rank.grants}\nCANNOT (at this rank): ${rank.cannot}` : `\n${ab.description}`) +
       (ab.notFor ? `\nNOT FOR: ${ab.notFor}` : ""));
   }

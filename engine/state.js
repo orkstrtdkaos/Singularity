@@ -32,6 +32,9 @@ export async function loadContent() {
   let intensity = { steps: {} };
   const intPath = (index.provides.rules || []).find(r => r.includes("intensity_scaling"));
   if (intPath) { try { intensity = await fetchJSON(`content/packs/core/${intPath}`); } catch { /* optional */ } }
+  let branchForks = { forks: {} };
+  const forkPath = (index.provides.rules || []).find(r => r.includes("branch_forks"));
+  if (forkPath) { try { branchForks = await fetchJSON(`content/packs/core/${forkPath}`); } catch { /* optional */ } }
 
   const abilities = {};
   for (const path of index.provides.abilities) {
@@ -79,7 +82,7 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
+  return { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
 }
 
 async function fetchJSON(path) {

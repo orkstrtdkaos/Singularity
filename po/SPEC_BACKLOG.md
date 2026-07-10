@@ -38,6 +38,7 @@ Engine-needing work from the 2026-07 content-expansion sessions. ALL content for
 
 ## Suggested batches
 - **BATCH-6 (Foundation):** SNG-019 + SNG-022. Small, unblocks all. Start here.
+- **BATCH-7 (Trustworthy player state):** identity + per-character style (seed-from-aggregate) + cross-device load-latest + inventory/quest resolver-hardening. First consumer of BATCH-6; starts after BATCH-6 closes. Erik-directed 2026-07-10.
 - **BATCH-6.5 (Fast fixes, parallel-able with anything):** SNG-030(rest) + SNG-031 (gambit surfacing+xp wire) + SNG-032 (narrative time). Small, high felt-impact; 032 is a GM-op + rule.
 - **BATCH-7 (Living spine):** SNG-020 + SNG-021 + SNG-024 + SNG-025 + SNG-034 (bestiary rides the encounter/living-world work). The world that grows/lives/ends/marks/breathes.
 - **BATCH-8 (Player systems):** SNG-017 (origins + ent-gating fix + SNG-036 martial paths ride together) + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
@@ -506,3 +507,46 @@ Gambit {
 - **Smoke:** a gambit exists fully (goal, optional direct path, 3-5 steps each with primary+secondary+open, accrual) before the player acts; each step is presented with revealing scenario + 2-3 costed combo seeds + the open option; the plan is discussed with visible odds before rolling; passes/fails accumulate benefits/drawbacks that change later steps; a high-tier direct solution can (sometimes) shortcut the whole thing.
 
 *Updated 2026-07-07 — through SNG-050 (gambit architecture).*
+
+---
+
+## SNG-BATCH-7 — Trustworthy player state across devices (first consumer of the BATCH-6 foundation)
+
+**Depends on: BATCH-6 (SNG-019 entity-resolution + SNG-022 reconcile) CLOSED GREEN. Do NOT start before that — every phase consumes the resolver and/or the reconcile engine.** Erik-directed 2026-07-10; Aevi PO. Preview-testing protocol stands (preview + one-line Erik test per phase). Only Aevi closes.
+
+**Theme:** the foundation gets APPLIED to everything the player leans on — identity, per-character earned style, items, quests — and that state follows the player across devices. Path-(a) scope (Erik + family Erik sets up across their own devices; NO public multi-user auth).
+
+### Phase 1 — Player identity + per-character play-style (seed-from-aggregate)
+- **profile.json → identity anchor.** Keep `playerKey` / `displayName` / `charactersPlayed`; MOVE `tendencies` / `aptitudes` / `actionCount` off the profile onto the CHARACTER record. The profile's remaining job is identity — which is exactly what Phase 2 login/sync needs.
+- **Character gains its own style.** `character.tendencies{}` + `character.aptitudes[]` + `character.actionCount`, accrued from how THAT character is played. Locate the accrual writer (wherever tendencies currently increment on the profile) and point it at the ACTIVE character.
+- **sense.js untouched** — it already takes `aptitudeMods` as a param; the CALLER sources mods from `character.aptitudes` instead of the profile. resolution.json bonuses key off character aptitudes.
+- **SNG-022 migration step** (reconcileVersion bump): for each character in a profile's `charactersPlayed`, SEED `character.tendencies/aptitudes` from the player's current aggregate profile (Erik's call: seed-from-aggregate so nothing earned is lost), then diverge per-character. Idempotent; derives from durable state (the aggregate is what exists). Login note: "your characters now carry their own play-style."
+- **Identity mechanism (path a, no real auth):** on a device with no identity set, show a pick-your-player screen (list `players/*` displayNames + "new player"); store chosen `playerKey` in localStorage. Tether Maven-select pattern. Repo-write PAT stays device-config for now (family devices Erik sets up carry his write PAT; blast-radius = Singularity-repo-write only — path-a boundary, flagged).
+- **Smoke:** play Cellaceron strategically → his tendencies rise, Usnea's don't; existing chars seed from aggregate on first login then diverge; sense/resolution read character aptitudes; profile holds only identity.
+
+### Phase 2 — Cross-device persistence (load-latest, guarded)
+- On open/login after identity resolves, PULL the authoritative latest character state from the sync repo and reconcile against local (SNG-022 load-time reconcile). `engine/sync.js` is already the transport (single-owner character/profile writes, append-only ledgers) — extend, don't replace; concurrency law intact.
+- **STALE-LOCAL-OVERWRITE GUARD (non-negotiable — named failure mode, already bitten):** per-character `updatedAt`/version; NEWER wins; NEVER let an older local save clobber a fresher remote. On genuine both-advanced conflict, keep remote + preserve local as a recovery copy + surface to player. Guard fires in BOTH directions (stale local over fresh remote, and stale remote over fresh local).
+- **Smoke:** play on device A (newer), open device B with stale local → B loads A's latest, no clobber; play offline then reconnect → newer local pushes, older remote doesn't overwrite; guard blocks stale-over-fresh both directions.
+
+### Phase 3 — Inventory + quest robustness (apply the resolver; stop losing state)
+- **ROOT FIX — wire the SNG-019 entity-resolution primitive into BOTH quests.js and inventory.js.** Today both match by loose name/id/title equality and SILENTLY DROP on mismatch (quest progress on a drifted title `continue`s; item stacks fork on phrasing). Replace with resolve-before-mint/drop:
+  - **Quests:** resolve `u.questId`/`u.title` against existing quests by id + alias + fuzzy title before minting or dropping. A progress/complete op that resolves updates the right quest; mint only on genuine no-match; **NEVER silently drop** — if truly unresolvable, surface a note ("couldn't match that quest"), don't swallow.
+  - **Inventory:** resolve incoming against existing by id + catalog-name + alias before stacking/minting; GM phrasing variants collapse to one stack; catalog re-link on any resolvable name, not just at normalize.
+- **Quest ↔ codex linkage:** quest `giver`/`locationId` resolve to codex entityIds (SNG-019 nodes) so a quest about Teva links her node.
+- **SNG-022 reconcile back-tag:** existing saves' quests/items resolved + deduped on load (repair already-fragmented state); dangling giver/location refs wired to now-existing nodes or flagged.
+- **Player-facing surfacing (the "managing" half):** a reliable quest log (active/completed/failed + progress) + inventory panel (use/name/drop, stacks correct) that always reflects true engine state. Depth of management UI = Erik's preview-leg to tune.
+- **Smoke:** GM progresses a quest with a drifted title → updates the right quest (no drop, no dupe); two phrasings of one item → one stack; a pre-fragmented save's dupes collapse on load; a quest links to its giver's codex node; player log/panel matches engine state exactly.
+
+### Guardrails
+Design law 1 (engine gates/resolves, GM narrates); reuse the SNG-019 resolver + SNG-022 reconcile — do NOT reinvent either; sync concurrency law intact; additive/content-not-code where possible; no resolution-math change; this repo never touches the ErikIAm pipeline; suites + parse_probe green per phase.
+
+### Erik preview tests (per phase)
+1. "Play Cellaceron on a planned/strategic action a few turns — verify HE gains strategist while Usnea's style doesn't move, and that your old characters kept their current style after the update."
+2. "Play a character on your phone, then open the game on your computer — verify it loads the phone's latest state, not an old local copy."
+3. "Run a quest through progress→complete and pick up/use a couple items — verify nothing silently vanishes, the quest log + inventory always match what happened, and duplicate-named items stack instead of splitting."
+
+
+## Known debt from the 2026-07-07 content-wave (surfaced by the BATCH-6 test-red root-cause, 2026-07-10)
+- **Seed abilities want full trees:** the catalog expansion (~28 → 117) added ~60 one-rank seed abilities without `notFor` — engine-safe but shallow. Test now asserts the preserved contract (28+ fully-treed core + every ability engine-safe). OWED: author full trees for the seeds over time. Aevi content task, low-urgency.
+- **discoveryBonus balance check:** commit 6bfb98d raised discoveryBonus 10→20; the raise slammed a fixture past the d100 ceiling (95) — test now asserts the clamped contract (correct fix). OPEN DESIGN Q for Erik: is +20 intended, or does it make discovered techniques near-always ceiling-out? Keep vs tune is Erik's balance call.

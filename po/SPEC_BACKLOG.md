@@ -421,3 +421,22 @@ Playtested a romance beat (Cellaceron × Teva). Findings for the romance spec:
 - **Age/consent gate is REQUIRED content-safety, not flavor:** NPC records must carry a canonical adult age for any romance eligibility; an 'aged-up in this scene' wrapper is NOT acceptable — fix the character record instead (did this for Teva: authored at 21). The romance system must hard-gate on canonical adult age and never romance a minor-canon character regardless of framing.
 
 *Updated 2026-07-07.*
+
+## Playtest findings 2026-07-07 (3) — "The Commission House Lockdown" (logistics gambit vs a system)
+Random character (Nix, chaos/order adept: Latticework, Wildcraft, The Long Odds, Riding Order, Waygate-dip). GM-simulated as the app's API GM would run it. A theft-retrieval gone sideways when the building locked down for a DIFFERENT thief; the antagonist was a SYSTEM (ward, sweep, questioning, clock), no villain to out-talk. Won clean, never made as the thief. Third distinct gambit shape (vs Redline social-duel, Silent Door party-puzzle).
+
+**THE DEFINITION (Erik, load-bearing) — what makes a gambit a gambit, engine rule:**
+- **A gambit is a set of connected challenges forming a whole**, each solvable MULTIPLE ways, planned across before running. Not turn-by-turn; the plan is committed then swept with maneuvers live inside.
+- **The NECESSARY ELEMENTS are what define it, not the step count.** The GM must frame a gambit as: (a) 3–5 connected challenges, (b) each with multiple viable approaches, (c) a spine where earlier steps change later ones, (d) stacked fallbacks.
+- **Fewer steps are HARDER; fallback requires MORE steps.** Key scaling rule: a tight 3-step plan is high-difficulty (less slack); invoking a fallback ADDS steps to the gambit (a failed primary branches into a longer path). The gambit can GROW mid-run as fallbacks fire. Difficulty ≈ inverse of step-count-slack; a fallback trades a failed short path for a viable longer one.
+
+**Validated — fallbacks are the whole point:** Step 3 (clearance) primary line (Riding Order + truth) ROLLED 51 and FAILED; the gambit survived because a character-fit fallback (Wildcraft confusing-account) was stacked and caught it (79). Single-path plans die there; a gambit absorbs the bad roll. Both poles fired (order softened, chaos escaped) — character-native again.
+
+**New shape confirmed — logistics-gambit-vs-system:** no villain, antagonist = ward+sweep+questioning+clock. Wins on maneuver and reframe (the keystone: stop folding OUT through the ward, fold small/sideways into an already-cleared room — repositioning, not escape). Reframe-the-tool is the recurring keystone move across all three playtests.
+
+**GM/engine implications (fold into SNG-048 + gambit surfacing SNG-031):**
+- GM frames gambits by the NECESSARY ELEMENTS (connected challenges, multi-approach, spine, fallbacks) — not a fixed template.
+- Fallbacks EXTEND the gambit dynamically; the plan is not fixed-length.
+- Tighter plans = harder; surface this to the player (fewer steps chosen = higher stakes, a real tradeoff to offer at planning time).
+
+*Updated 2026-07-07 — third playtest logged; gambit DEFINITION captured.*

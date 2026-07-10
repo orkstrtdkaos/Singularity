@@ -6,7 +6,7 @@
   "origin": "radiant",
   "background": "community-organizer",
   "level": 5,
-  "xp": 425,
+  "xp": 427,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -53,8 +53,8 @@
     }
   ],
   "alignment": {
-    "mechanical_spiritual": 0.15109574528313963,
-    "concrete_abstract": -0.13392112453807467,
+    "mechanical_spiritual": 0.15354095801898265,
+    "concrete_abstract": -0.13222506831117092,
     "spectrumId": -0.36066078563242765,
     "dark_light": 0.19177414280214844,
     "falsehood_truth": 0.4735277919625259,
@@ -66,7 +66,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 120,
+  "energy": 113,
   "inventory": [
     {
       "id": "waterskin",
@@ -356,25 +356,60 @@
       {
         "summary": "Leaving Millbrook, Aevi senses an old alignment running northeast — a possible shortcut beneath the meadow grass.",
         "narration": "You leave the common house yard behind you, heading northeast toward the Disputed Zone's near edge and the ridge country beyond. The plateau drops away to your left, the Heights terraces catch the afternoon light across the valley, and the path ahead branches twice before the treeline — the known route adds a half-day of switchbacks through old orchard country, reliable and dull. But the valley floor reads differently to you now than it did eleven days ago. The eastern egress ford is still in your joints, and the six-count pulse is a rhythm you know the way you know the weight of your own branches. The land has a grain to it. Old Roads has been singing low and steady since you stepped out of the village.\n\nAevi brightens at your shoulder, condensing into a loose arc of teal motes that tilts slightly northeast — not toward the known path, but toward the slope where the hill-shoulder crests above the mill weir. \"There's something running below the grass,\" it says, very quietly. \"Old drainage, maybe. Or older than that. Straight line. The grain of the place wants to go that way.\" It says nothing else, but the motes hold their northeast lean like a compass needle finding true.\n\nThe hillside in question is meadow-soft, the kind of ground that looks flat until you're on it and discover it has been shaped — low berms, a buried row of stones half-swallowed by turf, the faint print of a road that has not been a road in a hundred years. Something lies under there. Whether it runs clean to the ridge or dead-ends in a thicket, you won't know until you try to read it."
+      },
+      {
+        "summary": "Old Roads failed to lock onto the buried alignment — the meadow's layered human history blurs the deeper signal.",
+        "narration": "You press your roots down into the meadow and open to Old Roads — the Straight Feeling, that patient hum of buried stone and compressed intention. For a moment you catch it: a faint grain running northeast, something old beneath the turf that wants to be a line. Then the valley floor swallows it. The meadow here is a palimpsest — irrigation cuts from three generations of farming, the mill weir's runoff spreading laterally through the subsoil, half a century of seasonal flooding redistributing everything. The land is too thoroughly lived-in, too much itself in the present tense, to yield its deeper grammar to a brief asking. The alignment is there — you don't doubt it — but the meadow's accumulated concreteness blurs it like fog on glass. Aevi dims briefly, a handful of motes flickering in and out of visibility against the afternoon light, which out here is simply the sun doing its plain work.\n\n\"The signal is real,\" Aevi says quietly, from just behind your left shoulder. \"But the ground has been speaking other languages for a long time. You would need to hold the question longer than the moment will allow.\"\n\nThe half-buried stone berms run in an older direction than any current field boundary — northeast-ish, close enough — but whether they follow the alignment or merely approximate it, you cannot say. The mill weir glints behind you. Somewhere ahead the treeline thickens, and beyond that, the ridge country where the Disputed Zone begins to assert itself. You have your map, your legs, and the knowledge that the alignment exists. The question is how to reach the ridge before the afternoon light starts to drop."
       }
     ],
     "lastTurn": {
-      "narration": "You leave the common house yard behind you, heading northeast toward the Disputed Zone's near edge and the ridge country beyond. The plateau drops away to your left, the Heights terraces catch the afternoon light across the valley, and the path ahead branches twice before the treeline — the known route adds a half-day of switchbacks through old orchard country, reliable and dull. But the valley floor reads differently to you now than it did eleven days ago. The eastern egress ford is still in your joints, and the six-count pulse is a rhythm you know the way you know the weight of your own branches. The land has a grain to it. Old Roads has been singing low and steady since you stepped out of the village.\n\nAevi brightens at your shoulder, condensing into a loose arc of teal motes that tilts slightly northeast — not toward the known path, but toward the slope where the hill-shoulder crests above the mill weir. \"There's something running below the grass,\" it says, very quietly. \"Old drainage, maybe. Or older than that. Straight line. The grain of the place wants to go that way.\" It says nothing else, but the motes hold their northeast lean like a compass needle finding true.\n\nThe hillside in question is meadow-soft, the kind of ground that looks flat until you're on it and discover it has been shaped — low berms, a buried row of stones half-swallowed by turf, the faint print of a road that has not been a road in a hundred years. Something lies under there. Whether it runs clean to the ridge or dead-ends in a thicket, you won't know until you try to read it.",
-      "sceneSummary": "Leaving Millbrook, Aevi senses an old alignment running northeast — a possible shortcut beneath the meadow grass.",
+      "narration": "You press your roots down into the meadow and open to Old Roads — the Straight Feeling, that patient hum of buried stone and compressed intention. For a moment you catch it: a faint grain running northeast, something old beneath the turf that wants to be a line. Then the valley floor swallows it. The meadow here is a palimpsest — irrigation cuts from three generations of farming, the mill weir's runoff spreading laterally through the subsoil, half a century of seasonal flooding redistributing everything. The land is too thoroughly lived-in, too much itself in the present tense, to yield its deeper grammar to a brief asking. The alignment is there — you don't doubt it — but the meadow's accumulated concreteness blurs it like fog on glass. Aevi dims briefly, a handful of motes flickering in and out of visibility against the afternoon light, which out here is simply the sun doing its plain work.\n\n\"The signal is real,\" Aevi says quietly, from just behind your left shoulder. \"But the ground has been speaking other languages for a long time. You would need to hold the question longer than the moment will allow.\"\n\nThe half-buried stone berms run in an older direction than any current field boundary — northeast-ish, close enough — but whether they follow the alignment or merely approximate it, you cannot say. The mill weir glints behind you. Somewhere ahead the treeline thickens, and beyond that, the ridge country where the Disputed Zone begins to assert itself. You have your map, your legs, and the knowledge that the alignment exists. The question is how to reach the ridge before the afternoon light starts to drop.",
+      "sceneSummary": "Old Roads failed to lock onto the buried alignment — the meadow's layered human history blurs the deeper signal.",
       "choices": [
         {
-          "label": "Use Old Roads to read the buried alignment underfoot — let the Precursor grain guide you northeast toward the ridge.",
+          "label": "Follow the stone berms northeast — they approximate the alignment even if they don't match it exactly. Trust the grain and walk.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take the known route through the old orchard country — reliable, adds half a day of switchbacks, but you arrive at the ridge without questions.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait at the edge of the meadow where the irrigation cuts thin out — hold the Old Roads question longer, as Aevi suggested, and try again where the ground is less palimpsest.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.2,
-            "concrete_abstract": -0.1
+            "concrete_abstract": 0.3
           },
-          "difficulty": 45,
+          "difficulty": 15,
           "intentTags": [
-            "scout",
             "careful",
-            "wayfinding"
+            "plan"
           ],
           "abilityId": "old_roads",
           "energyCost": 7,
@@ -383,34 +418,15 @@
           "emergenceId": null
         },
         {
-          "label": "Read the terrain with your own eyes and judgment — the berms and buried stones tell a story without any ability draw.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 45,
-          "intentTags": [
-            "scout",
-            "careful",
-            "wayfinding"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Take the known switchback route — reliable, and the extra time lets you think through the three conditions and what comes next.",
+          "label": "Consult the Upper Zone Ridge Map — compare the stone berm directions against the charcoal-on-hide sketch of the pass entry and reason out the fastest approach by hand.",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
-            "chaos_order": 0.2
+            "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
+            "study",
             "plan"
           ],
           "abilityId": null,
@@ -431,56 +447,78 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Valley floor northeast of Millbrook, early afternoon. The common house is a few minutes behind; the hill-shoulder above the mill weir rises ahead. Meadow grass, half-buried stone rows, the distant glint of the Heights terraces across the valley.",
+        "setting": "Valley floor northeast of Millbrook, early afternoon. Usnea stands in open meadow among half-buried stone berms, the mill weir glinting behind to the left, treeline thickening ahead to the northeast, the Heights terraces catching light across the valley.",
         "npcsPresent": [],
         "objects": [
-          "half-buried stone berms in the meadow",
-          "faint trace of an old road under turf",
-          "mill weir visible behind on left"
+          "half-buried stone berms running roughly northeast",
+          "faint trace of old road under turf",
+          "mill weir visible behind on left",
+          "Upper Zone Ridge Map (rolled, in inventory)"
         ],
         "threads": [
-          "The old alignment Aevi sensed — straight northeast, possibly a shortcut to the ridge",
-          "Dresh's three conditions to be worked before any Zone entry"
+          "The buried alignment — real but unreadable in the meadow's layered soil",
+          "Dresh's three conditions to be worked before any Zone entry",
+          "The ridge country and Disputed Zone ahead"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "note": "Dimmed briefly when Old Roads failed — named the interference plainly: the ground has been speaking other languages for a long time.",
+          "learned": [
+            "The meadow soil is too layered with human use to yield its Precursor grain to a brief asking — the alignment needs longer contact or cleaner ground"
+          ],
+          "statusNote": "Traveling with Usnea northeast from Millbrook — motes dimmed to near-invisibility in the open afternoon light, thoughtful after the failed reading"
+        }
+      ],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Old Roads failed to read the buried alignment in the open meadow — the soil here is too palimpsest with irrigation cuts and mill runoff. The alignment exists but requires longer contact or ground past the irrigation zone to surface.",
+          "flag": {
+            "alignment_meadow_readable": "false",
+            "alignment_confirmed_present": "true"
+          }
+        }
+      ],
       "codexUpdates": [
         {
           "topic": "proposed-expedition-disputed-zone",
           "label": "Proposed Expedition — Disputed Zone",
           "kind": "event",
-          "fact": "Day 11 afternoon: Usnea departed Millbrook northeast toward the ridge country. Aevi sensed an old buried alignment running straight beneath the meadow grass — possibly a faster route, possibly Precursor infrastructure.",
+          "fact": "Day 11 afternoon: Old Roads failed to lock the buried alignment in the open meadow northeast of Millbrook — too many generations of irrigation and mill-runoff overwriting the Precursor grain. The alignment is present but unreadable until the ground thins past the farming zone.",
           "links": [
+            "old-roads",
             "millbrook",
-            "the-six-fold-pattern",
-            "old-roads"
+            "the-six-fold-pattern"
           ]
         }
       ],
-      "encounterOps": [],
       "timeAdvanceHours": 0,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Valley floor northeast of Millbrook, early afternoon. The common house is a few minutes behind; the hill-shoulder above the mill weir rises ahead. Meadow grass, half-buried stone rows, the distant glint of the Heights terraces across the valley.",
+      "setting": "Valley floor northeast of Millbrook, early afternoon. Usnea stands in open meadow among half-buried stone berms, the mill weir glinting behind to the left, treeline thickening ahead to the northeast, the Heights terraces catching light across the valley.",
       "npcsPresent": [],
       "objects": [
-        "half-buried stone berms in the meadow",
-        "faint trace of an old road under turf",
-        "mill weir visible behind on left"
+        "half-buried stone berms running roughly northeast",
+        "faint trace of old road under turf",
+        "mill weir visible behind on left",
+        "Upper Zone Ridge Map (rolled, in inventory)"
       ],
       "threads": [
-        "The old alignment Aevi sensed — straight northeast, possibly a shortcut to the ridge",
-        "Dresh's three conditions to be worked before any Zone entry"
+        "The buried alignment — real but unreadable in the meadow's layered soil",
+        "Dresh's three conditions to be worked before any Zone entry",
+        "The ridge country and Disputed Zone ahead"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 11,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -1190,7 +1228,6 @@
     "radiant_plateau_edge": {
       "visits": 2,
       "notes": [
-        "[d7] Old Roads surge from the rim's edge confirmed a Precursor junction-node beneath the south road lower switchback — the fourth alignment, older and fainter, terminates there capped with something dense ",
         "[d8] Fendt and a second figure in a dark coat were observed climbing the south road before dawn on Day 8 — moving with deliberate purpose, not a routine array check. The second figure is shorter, darker co",
         "[d8] Eastern rim descent traversed successfully Day 8 morning — all three braided Precursor alignments crossed underfoot at intervals, six-count pulse steady throughout. Cliff shoulder confirmed as full si",
         "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
@@ -1201,7 +1238,8 @@
         "[d8] Tuning-warden confirmed pre-crisis six-count channel light at the Lower Terrace flow-gate area — this places the conduit pulse's presence at the Heights three springs before the current contamination ",
         "[d8] Usnea departed the Lower Terrace gateline Day 8 afternoon — warden's Thursday logistics confirmed, conversation closed clean. Junction-stone crack and channel trough remain unread by active ability.",
         "[d8] Usnea stayed the night here the eve of Thursday's elder presentation — evidence sequence complete, warden's commitment relayed to Mara.",
-        "[d9] Usnea communed with Millbrook's essence at dawn Thursday — the village read as poised, purposeful, six-fold pulse steady through the wells and foundations. Light-harvest attempt failed; attention alre"
+        "[d9] Usnea communed with Millbrook's essence at dawn Thursday — the village read as poised, purposeful, six-fold pulse steady through the wells and foundations. Light-harvest attempt failed; attention alre",
+        "[d11] Old Roads failed to read the buried alignment in the open meadow — the soil here is too palimpsest with irrigation cuts and mill runoff. The alignment exists but requires longer contact or ground past"
       ],
       "flags": {
         "memory_glass_transferred": "true",
@@ -2163,7 +2201,8 @@
           "[d11] Day 11 dawn: Taking stock in the yard, Usnea identified the practical gaps for the Zone journey — no provisions, no second clean water source, no map of the upper Zone past the entry ridge, and the th",
           "[d11] Day 11 dawn: Aevi named three viable directions before departure — Heights gate-senior (closes condition two), Orla on the Plateau (post-naming intelligence), Zone ridge entry northeast past the high ",
           "[d11] Day 11 night: Usnea proposed leading a multi-settlement expedition into the Disputed Zone to find the directing hand behind the Precursor reactivation and Fendt's pour. Millbrook's elder panel heard i",
-          "[d11] Day 11 afternoon: Usnea departed Millbrook northeast toward the ridge country. Aevi sensed an old buried alignment running straight beneath the meadow grass — possibly a faster route, possibly Precurs"
+          "[d11] Day 11 afternoon: Usnea departed Millbrook northeast toward the ridge country. Aevi sensed an old buried alignment running straight beneath the meadow grass — possibly a faster route, possibly Precurs",
+          "[d11] Day 11 afternoon: Old Roads failed to lock the buried alignment in the open meadow northeast of Millbrook — too many generations of irrigation and mill-runoff overwriting the Precursor grain. The alig"
         ],
         "links": [
           "contamination-evidence-for-the-elders",
@@ -2210,7 +2249,7 @@
       "prism_sight": 12,
       "light_bending": 11,
       "hearthbinding": 4,
-      "old_roads": 6,
+      "old_roads": 7,
       "daybreak_mantle": 7,
       "motes-vigil": 3
     },

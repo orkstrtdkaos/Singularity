@@ -54,12 +54,12 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.15109574528313963,
-    "concrete_abstract": -0.10939065740849965,
+    "concrete_abstract": -0.13392112453807467,
     "spectrumId": -0.36066078563242765,
     "dark_light": 0.19177414280214844,
     "falsehood_truth": 0.4735277919625259,
     "violence_peace": 0.33483389400033525,
-    "chaos_order": 0.20535334442145795,
+    "chaos_order": 0.20508567720038504,
     "death_life": 0.03
   },
   "attunement": 5,
@@ -112,6 +112,25 @@
       "kind": "quest",
       "qty": 1,
       "description": "A fogged-edge photonic disc that replays what light touched at the ford-side boulder three days ago. Shows a Radiant engineer — Fendt — deliberately pouring from a sealed tube into the Echo River ford current. Warm from handling. Fragile.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Trail Provisions",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Dried apple rings, hard tack, cured river-fish rope, seed-oil in a clay bottle, and a wedge of hard yellow cheese — three days' solid traveling food. From Josset's stall, three ceramic rounds.",
+      "effects": {
+        "energy": 15
+      },
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Upper Zone Ridge Map",
+      "kind": "misc",
+      "qty": 1,
+      "description": "A charcoal-on-hide copy of the new mountain pass route and approximately two hours' ridge country beyond — shows the pass entry clearly; the interior is inference. Rolled and carried with the waterskin.",
       "consumable": false
     }
   ],
@@ -530,23 +549,24 @@
       {
         "summary": "Aevi lays out three directions — Heights gate-senior, Plateau's Orla, or the Zone ridge — and notes the practical gaps before any of them.",
         "narration": "You turn your attention to the ring of teal motes drifting at arm's length in the silver dawn. 'Where do we go next?' you ask, low enough that the question belongs to the yard and not the room behind you.\n\nAevi doesn't answer immediately. The motes complete a full slow ellipse, then contract slightly — the swarm's version of gathering thought. When the voice comes it arrives from just behind your left ear, the way it always does, quiet and precise. 'Three directions. The Disputed Zone is the question, but the Zone requires the three conditions — and none of those three conditions are in the Zone.' A brief pause, the motes brightening fractionally eastward, the same pull they've shown since you sat down. 'The upper Disputed Zone entry is northeast of here — the old ridge track past the high pasture fence, where Brynjar found his marker. Half a day's walk without provisions.' The motes shift south for just a moment. 'The Plateau has Orla — and whatever the filtration board shows now that Fendt is named. She would know if anything has changed.' Then the light steadies back to east, patient and unhurried. 'The Heights has the gate-senior. The clearance the tuning-warden needs runs through that office. Without it, the second condition cannot close.'\n\nThe motes settle into stillness, the ring re-expanding to its resting diameter. Aevi adds one thing more: 'You have no provisions. The waterskin is full, but a day into the Zone on water alone is not wise. And the Zone entry ridge — what lives up there since the reactivation — I cannot taste from here.' It does not say *be careful*. It never does. But the motes have not dimmed, which means it is not worried. It is attending."
+      },
+      {
+        "summary": "Usnea resupplied in Millbrook — provisions from Josset, clean water from the mill-weir hillside cistern, and a partial upper-Zone map from a market trader.",
+        "narration": "You rise from the cold stone wall and let the yard settle behind you — the common house still murmuring, Aevi contracting to a close shoulder-point as you step through the side gate and onto Millbrook's main lane. The village is awake in the way of farming communities: not loudly, but thoroughly. Smoke from cook-fires, a cart wheel grinding on cobble somewhere east, the smell of turned soil and the faint mineral edge the river has carried all spring.\n\nThe market quarter is a short walk. You move through it the way a baobab moves through anything — unhurried, too large to be ignored, and nobody in Millbrook pretends not to know your face by now. The cord-and-hemp stall is shuttered — Pell is still inside the common house — but the provision stall beside it is open, run by a broad man named Josset who sells dried apple rings, hard tack, seed-oil in clay bottles, and ropes of cured river-fish. He sees you coming and starts wrapping before you've asked. 'Heard what the elders are working on,' he says, without looking up. 'You're going up-valley.' It isn't a question. You trade three ceramic rounds and he adds a wedge of hard yellow cheese to the bundle without comment.\n\nThe second water source takes longer. The river is out; the main well has run gray three mornings running. But there is a spring-fed cistern on the north side of the mill weir — fed by a hillside seep that predates the irrigation system and sits above the contamination's known reach. Mara Wells mentioned it once, in passing, and the knowledge held. You fill the waterskin there, the water cold and clean and tasting of limestone rather than the faint metallic note the river carries now. Aevi brightens a half-step at the contact — confirming what the tongue already said.\n\nThe map is the harder ask. No one in Millbrook holds a chart of the upper Disputed Zone — the elders keep sketches of the valley floor and the lower passes, and a trader two stalls down has a rough copy of the mountain pass route Brynjar walked, drawn in charcoal on cured hide. It shows the new pass clearly and continues perhaps two hours' walk into the ridge country beyond — enough to find the entry, not enough to navigate the interior. You trade two tokens for it and roll it carefully. It is something. Aevi hums a low, attentive frequency. 'The ridge line is accurate,' it says. 'The rest is inference.' You fold it against the waterskin. Inference is where you live."
       }
     ],
     "lastTurn": {
-      "narration": "You turn your attention to the ring of teal motes drifting at arm's length in the silver dawn. 'Where do we go next?' you ask, low enough that the question belongs to the yard and not the room behind you.\n\nAevi doesn't answer immediately. The motes complete a full slow ellipse, then contract slightly — the swarm's version of gathering thought. When the voice comes it arrives from just behind your left ear, the way it always does, quiet and precise. 'Three directions. The Disputed Zone is the question, but the Zone requires the three conditions — and none of those three conditions are in the Zone.' A brief pause, the motes brightening fractionally eastward, the same pull they've shown since you sat down. 'The upper Disputed Zone entry is northeast of here — the old ridge track past the high pasture fence, where Brynjar found his marker. Half a day's walk without provisions.' The motes shift south for just a moment. 'The Plateau has Orla — and whatever the filtration board shows now that Fendt is named. She would know if anything has changed.' Then the light steadies back to east, patient and unhurried. 'The Heights has the gate-senior. The clearance the tuning-warden needs runs through that office. Without it, the second condition cannot close.'\n\nThe motes settle into stillness, the ring re-expanding to its resting diameter. Aevi adds one thing more: 'You have no provisions. The waterskin is full, but a day into the Zone on water alone is not wise. And the Zone entry ridge — what lives up there since the reactivation — I cannot taste from here.' It does not say *be careful*. It never does. But the motes have not dimmed, which means it is not worried. It is attending.",
-      "sceneSummary": "Aevi lays out three directions — Heights gate-senior, Plateau's Orla, or the Zone ridge — and notes the practical gaps before any of them.",
+      "narration": "You rise from the cold stone wall and let the yard settle behind you — the common house still murmuring, Aevi contracting to a close shoulder-point as you step through the side gate and onto Millbrook's main lane. The village is awake in the way of farming communities: not loudly, but thoroughly. Smoke from cook-fires, a cart wheel grinding on cobble somewhere east, the smell of turned soil and the faint mineral edge the river has carried all spring.\n\nThe market quarter is a short walk. You move through it the way a baobab moves through anything — unhurried, too large to be ignored, and nobody in Millbrook pretends not to know your face by now. The cord-and-hemp stall is shuttered — Pell is still inside the common house — but the provision stall beside it is open, run by a broad man named Josset who sells dried apple rings, hard tack, seed-oil in clay bottles, and ropes of cured river-fish. He sees you coming and starts wrapping before you've asked. 'Heard what the elders are working on,' he says, without looking up. 'You're going up-valley.' It isn't a question. You trade three ceramic rounds and he adds a wedge of hard yellow cheese to the bundle without comment.\n\nThe second water source takes longer. The river is out; the main well has run gray three mornings running. But there is a spring-fed cistern on the north side of the mill weir — fed by a hillside seep that predates the irrigation system and sits above the contamination's known reach. Mara Wells mentioned it once, in passing, and the knowledge held. You fill the waterskin there, the water cold and clean and tasting of limestone rather than the faint metallic note the river carries now. Aevi brightens a half-step at the contact — confirming what the tongue already said.\n\nThe map is the harder ask. No one in Millbrook holds a chart of the upper Disputed Zone — the elders keep sketches of the valley floor and the lower passes, and a trader two stalls down has a rough copy of the mountain pass route Brynjar walked, drawn in charcoal on cured hide. It shows the new pass clearly and continues perhaps two hours' walk into the ridge country beyond — enough to find the entry, not enough to navigate the interior. You trade two tokens for it and roll it carefully. It is something. Aevi hums a low, attentive frequency. 'The ridge line is accurate,' it says. 'The rest is inference.' You fold it against the waterskin. Inference is where you live.",
+      "sceneSummary": "Usnea resupplied in Millbrook — provisions from Josset, clean water from the mill-weir hillside cistern, and a partial upper-Zone map from a market trader.",
       "choices": [
         {
-          "label": "Go into Millbrook and resupply before leaving — find provisions, a second water source, and any map of the upper Zone the village might hold.",
+          "label": "Head for the Harmonic Heights gate-senior directly — close condition two before anything else moves",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.6,
-            "chaos_order": 0.2
-          },
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "prepare",
+            "travel",
             "careful"
           ],
           "abilityId": null,
@@ -556,17 +576,14 @@
           "emergenceId": null
         },
         {
-          "label": "Walk back inside and speak to Brynjar before the room disperses — find out what his sentence landed on, and whether he'll put his name to one of the two written settlement requests.",
+          "label": "Return to the common house before leaving — hear what sentence Brynjar finished and whether the conditions have found any traction",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "concrete_abstract": -0.4,
-            "falsehood_truth": 0.3
-          },
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "plan"
+            "scout",
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -575,37 +592,33 @@
           "emergenceId": null
         },
         {
-          "label": "Walk to the Harmonic Heights today — reach the gate-senior's office and try to secure the clearance the tuning-warden needs, closing the second condition before anything else moves.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "mechanical_spiritual": 0.2,
-            "chaos_order": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Wait here in the yard a little longer — see who comes out of the common house and what the room has decided before choosing a direction.",
+          "label": "Use Old Roads at the mill weir before leaving — the hillside seep sits above the contamination's reach, but the pulse that runs beneath Millbrook does not stop at the weir",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "concrete_abstract": -0.3,
-            "chaos_order": 0.2
+            "mechanical_spiritual": 0.2
           },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "old_roads",
+          "energyCost": 7,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find Mara Wells before leaving — give her the map sketch's details and ask whether the elders have any contact at the Heights who could speed the gate-senior request",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "help",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -617,170 +630,132 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Trail Provisions",
+            "kind": "consumable",
+            "description": "Dried apple rings, hard tack, cured river-fish rope, seed-oil in a clay bottle, and a wedge of hard yellow cheese — three days' solid traveling food. From Josset's stall, three ceramic rounds.",
+            "consumable": true,
+            "effects": {
+              "health": 0,
+              "energy": 15
+            }
+          },
+          {
+            "name": "Upper Zone Ridge Map",
+            "kind": "misc",
+            "description": "A charcoal-on-hide copy of the new mountain pass route and approximately two hours' ridge country beyond — shows the pass entry clearly; the interior is inference. Rolled and carried with the waterskin.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook common house yard — early-spring dawn, yard-silver light, packed earth cold underfoot; Usnea seated at the low stone wall along the eastern edge. Common house door open; murmured voices and coalfire warmth audible from within.",
+        "setting": "Millbrook market quarter — early morning, spring light strengthening from the east, cook-fire smoke drifting south; Usnea standing at the edge of the north mill-weir path, waterskin full, provisions and map in hand.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Ring re-expanded to resting diameter, motes in slow ellipses, steady eastward lean — has just finished speaking."
-          },
-          {
-            "name": "Councilor Dresh",
-            "state": "Inside — palms open on the table, working the conditions with the room."
-          },
-          {
-            "name": "Mara Wells",
-            "state": "Inside — both hands flat, watching the next task take shape."
-          },
-          {
-            "name": "Brynjar Andyrsson",
-            "state": "Inside — mid-sentence, internal accounting becoming words."
-          },
-          {
-            "name": "Tuning-warden (gateline)",
-            "state": "Inside — measuring gate-senior clearance against Dresh's three conditions; grip loosened."
-          },
-          {
-            "name": "Holloway",
-            "state": "Inside — jaw settled; the conditions have given the fear somewhere to sit."
-          },
-          {
-            "name": "Renn",
-            "state": "Inside — shoulders settling; checking the conditions against his own requirements."
-          },
-          {
-            "name": "Pell",
-            "state": "Inside — rope coil loose; watching Sela."
+            "state": "Close shoulder-point, brightened slightly after the clean water contact — humming a low attentive frequency."
           }
         ],
         "objects": [
-          "Low stone wall — eastern yard edge, cold packed earth",
-          "Open doorway — coalfire glow and voices from within",
-          "Pale seedling, glass vial, crystalline residue pinch — left on the common house table",
-          "Orla's Memory Glass — cooling at the table's center inside",
-          "Waterskin — at Usnea's hip",
-          "Aevi — teal mote-ring, fanned at arm's length, resting diameter, eastward lean"
+          "Trail Provisions — wrapped bundle, Josset's stall cord still around it",
+          "Waterskin — full, hillside-cistern water, cold and limestone-clean",
+          "Upper Zone Ridge Map — charcoal on cured hide, rolled tight",
+          "Trade Tokens — two remaining"
         ],
         "threads": [
-          "Dresh's three conditions are the room's active work — two written settlement requests, Heights-sanctioned observer with gate-senior clearance, named return date",
-          "Brynjar's sentence has not yet fully landed — what he committed to aloud is not yet known",
-          "Tuning-warden is measuring gate-senior clearance — achievable but not confirmed",
-          "The directing hand behind Fendt's pour and the Disputed Zone reactivation remains unnamed",
-          "Sela has not yet been formally released from the room",
-          "Practical gaps identified: no provisions, no second clean water source, no map of the upper Zone past the entry ridge"
+          "Dresh's three conditions still being worked inside the common house — Brynjar's sentence unfinished when Usnea left",
+          "Heights gate-senior clearance not yet confirmed — condition two open",
+          "The directing hand behind Fendt's pour and the Zone reactivation unnamed",
+          "Upper Zone interior beyond the ridge map's edge remains uncharted"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "role": "Companion intelligence — nanite-mote swarm",
-          "note": "Named three directions plainly — Heights gate-senior, Plateau's Orla, Zone ridge — and flagged the practical gaps: no provisions, no Zone map, unknown conditions on the ridge since reactivation.",
+          "op": "meet",
+          "npcId": "josset",
+          "name": "Josset",
+          "role": "Provision stall keeper, Millbrook market quarter",
+          "description": "A broad, efficient man who runs the provision stall beside Pell's cord shop — starts wrapping before you ask, and adds the cheese without prompting.",
+          "note": "Wrapped provisions and traded three ceramic tokens — added hard yellow cheese without comment; named the destination ('you're going up-valley') without asking.",
           "learned": [
-            "Zone entry ridge conditions since reactivation are unreadable from Millbrook distance",
-            "Three directions exist: Heights gate-senior closes condition two; Orla holds post-naming Plateau intelligence; Zone ridge is the destination but requires conditions to close first"
+            "Knows Usnea by face and deed — aware of the elder meeting's direction"
           ],
           "skillsObserved": [
-            "strategic direction-naming",
-            "practical gap identification"
+            "efficient provisioning",
+            "reading a traveler's needs without prompting"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Traveling with Usnea — in the common house yard, resting-ring diameter, eastward lean steady after delivering directions."
+          "statusNote": "At his stall in Millbrook market quarter — open for business, aware of the common house proceedings."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A hillside-fed cistern on the north side of the Millbrook mill weir supplies clean water above the contamination's reach — confirmed clean by Aevi on Day 11 morning.",
+          "subjectId": "millbrook"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Day 11 dawn: Aevi named three practical gaps from the common house yard — no provisions, no second water source, no Zone map past the entry ridge. Identified before departure.",
+          "note": "Day 11 morning: hillside-fed cistern north of the mill weir confirmed as a clean secondary water source above the contamination's reach — Aevi verified it. Usnea filled the waterskin here.",
           "subPlace": {
-            "name": "Common House Yard — Eastern Wall",
-            "note": "Usnea's sitting place in the silver dawn — where the journey's requirements were named aloud before departure.",
+            "name": "Mill Weir Hillside Cistern",
+            "note": "Spring-fed cistern on the north side of the mill weir — predates the irrigation system, sits above the contamination's known reach. Cold, limestone-clean water confirmed Day 11.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "proposed-expedition-disputed-zone",
-          "label": "Proposed Expedition — Disputed Zone",
-          "kind": "event",
-          "fact": "Day 11 dawn: Aevi named three viable directions before departure — Heights gate-senior (closes condition two), Orla on the Plateau (post-naming intelligence), Zone ridge entry northeast past the high pasture fence. Practical gaps confirmed: no provisions, no Zone map, ridge conditions since reactivation unknown from Millbrook distance.",
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "Day 11: A hillside-fed cistern north of the mill weir provides clean water above the contamination's reach — the only confirmed secondary source inside the village. A market trader holds a partial pass-and-ridge map showing two hours' travel beyond the new mountain pass entry; the interior is inference.",
           "links": [
-            "millbrook",
-            "councilor-dresh",
-            "tuning-warden-gateline",
-            "brynjar-andyrsson",
-            "orla-optics-weaver",
-            "contamination-evidence-for-the-elders"
+            "echo-river-contamination",
+            "the-six-fold-pattern",
+            "proposed-expedition-disputed-zone"
           ]
         }
       ],
-      "timeAdvanceHours": 0,
+      "timeAdvanceHours": 1,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook common house yard — early-spring dawn, yard-silver light, packed earth cold underfoot; Usnea seated at the low stone wall along the eastern edge. Common house door open; murmured voices and coalfire warmth audible from within.",
+      "setting": "Millbrook market quarter — early morning, spring light strengthening from the east, cook-fire smoke drifting south; Usnea standing at the edge of the north mill-weir path, waterskin full, provisions and map in hand.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Ring re-expanded to resting diameter, motes in slow ellipses, steady eastward lean — has just finished speaking."
-        },
-        {
-          "name": "Councilor Dresh",
-          "state": "Inside — palms open on the table, working the conditions with the room."
-        },
-        {
-          "name": "Mara Wells",
-          "state": "Inside — both hands flat, watching the next task take shape."
-        },
-        {
-          "name": "Brynjar Andyrsson",
-          "state": "Inside — mid-sentence, internal accounting becoming words."
-        },
-        {
-          "name": "Tuning-warden (gateline)",
-          "state": "Inside — measuring gate-senior clearance against Dresh's three conditions; grip loosened."
-        },
-        {
-          "name": "Holloway",
-          "state": "Inside — jaw settled; the conditions have given the fear somewhere to sit."
-        },
-        {
-          "name": "Renn",
-          "state": "Inside — shoulders settling; checking the conditions against his own requirements."
-        },
-        {
-          "name": "Pell",
-          "state": "Inside — rope coil loose; watching Sela."
+          "state": "Close shoulder-point, brightened slightly after the clean water contact — humming a low attentive frequency."
         }
       ],
       "objects": [
-        "Low stone wall — eastern yard edge, cold packed earth",
-        "Open doorway — coalfire glow and voices from within",
-        "Pale seedling, glass vial, crystalline residue pinch — left on the common house ",
-        "Orla's Memory Glass — cooling at the table's center inside",
-        "Waterskin — at Usnea's hip",
-        "Aevi — teal mote-ring, fanned at arm's length, resting diameter, eastward lean"
+        "Trail Provisions — wrapped bundle, Josset's stall cord still around it",
+        "Waterskin — full, hillside-cistern water, cold and limestone-clean",
+        "Upper Zone Ridge Map — charcoal on cured hide, rolled tight",
+        "Trade Tokens — two remaining"
       ],
       "threads": [
-        "Dresh's three conditions are the room's active work — two written settlement requests, Heights-sanctioned observer with gate-senior clearance, named return date",
-        "Brynjar's sentence has not yet fully landed — what he committed to aloud is not yet known",
-        "Tuning-warden is measuring gate-senior clearance — achievable but not confirmed",
-        "The directing hand behind Fendt's pour and the Disputed Zone reactivation remains unnamed",
-        "Sela has not yet been formally released from the room"
+        "Dresh's three conditions still being worked inside the common house — Brynjar's sentence unfinished when Usnea left",
+        "Heights gate-senior clearance not yet confirmed — condition two open",
+        "The directing hand behind Fendt's pour and the Zone reactivation unnamed",
+        "Upper Zone interior beyond the ridge map's edge remains uncharted"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 11,
-    "hour": 10,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [
@@ -1327,13 +1302,39 @@
         "locationId": "millbrook",
         "day": 11
       }
+    },
+    "josset": {
+      "id": "josset",
+      "name": "Josset",
+      "role": "Provision stall keeper, Millbrook market quarter",
+      "description": "A broad, efficient man who runs the provision stall beside Pell's cord shop — starts wrapping before you ask, and adds the cheese without prompting.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 11
+      },
+      "relationship": 1,
+      "history": [
+        "[d11] Wrapped provisions and traded three ceramic tokens — added hard yellow cheese without comment; named the destination ('you're going up-valley') without asking."
+      ],
+      "knownFacts": [
+        "Knows Usnea by face and deed — aware of the elder meeting's direction"
+      ],
+      "skillsObserved": [
+        "efficient provisioning",
+        "reading a traveler's needs without prompting"
+      ],
+      "status": "active",
+      "statusNote": "At his stall in Millbrook market quarter — open for business, aware of the common house proceedings.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 11
+      }
     }
   },
   "placeMemory": {
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d10] The full coordination chain — pour, vent aperture signature, six-count, three witnesses — was named aloud at the common house table by Usnea on Day 10 evening. The evidence sequence is complete and sp",
         "[d10] Pell's arithmetic resolved — a small nod toward the yard exchanged with Usnea; Sela's call is live as a contingent possibility inside the common house threshold. Day 10 night.",
         "[d11] Sela entered the common house threshold on Day 10 night — the youngest witness is now inside the room, standing beside Pell, before the first elder word.",
         "[d11] Day 11 night: Sela tapped the six-count into the packed-earth common house floor — the sound of it received by the full elder panel in silence. The room holds the complete evidence sequence: warden, g",
@@ -1344,7 +1345,8 @@
         "[d11] Dresh named three conditions for sanctioned Zone access aloud at the common house table — the conditions are now the room's stated terms and public record in this space.",
         "[d11] Day 11 dawn: Usnea withdrew from the common house into the yard — all physical evidence (pale seedling, vial, crystalline residue, memory glass) left on the table for the panel. The council is working",
         "[d11] Day 11 dawn: Usnea sat at the low stone wall on the eastern yard edge in the first silver light — taking stock of Zone requirements before the room's conditions arrive. Aevi brightened east without pr",
-        "[d11] Day 11 dawn: Aevi named three practical gaps from the common house yard — no provisions, no second water source, no Zone map past the entry ridge. Identified before departure."
+        "[d11] Day 11 dawn: Aevi named three practical gaps from the common house yard — no provisions, no second water source, no Zone map past the entry ridge. Identified before departure.",
+        "[d11] Day 11 morning: hillside-fed cistern north of the mill weir confirmed as a clean secondary water source above the contamination's reach — Aevi verified it. Usnea filled the waterskin here."
       ],
       "flags": {
         "pale_seedlings_witnessed": "day1",
@@ -1605,7 +1607,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-09T19:12:12.032Z"
+    "lastSharedReadAt": "2026-07-10T21:08:10.023Z"
   },
   "bio": {
     "hometown": "A baobab tree from Africa",
@@ -1641,94 +1643,60 @@
           "[d1] Aevi's open assessment, heard by both farmers and the elder woman: the contamination is deliberate, pattern-bearing, and 'doesn't belong to this watershed or this century.' Not malfunction — something",
           "[d1] Usnea named the contamination plainly before farmers and an elder witness: something old and deliberate, pattern-bearing, still doing a task through irrigation channels into soil. The elder woman has ",
           "[d4] The contamination's signature is now present in the terraced gardens nearest the eastern irrigation arm — pale rows of young greens, same drained quality as the third farmer's seedlings, visible to a ",
+          "[d4] A child at the Millbrook docks hears a rhythmic pulse beneath the river's surface — 'the bottom one counts' — and tapped its pattern: pause, three beats, pause, two beats, pause-pause. The rhythm matc",
           "[d5] Day 5 dawn: contamination signal now confirmed in Millbrook's drinking wells via south-bank clay pipes — not only the irrigation channels and river current. The system's preparation extends to the ful",
           "[d7] Day 7 dawn from the rim: the ford-side boulder's surrounding water carries a residual iridescence in the surface tension — something recently disturbed there, consistent with Fendt's pouring event in "
         ],
         "links": [
           "millbrook",
-          "irrigation-dispute-holloway-renn",
+          "holloway-renn-dispute",
           "aevi-reading-of-the-water",
-          "the-pale-seedlings",
+          "pale-seedlings",
           "contamination-evidence-for-the-elders",
           "the-six-fold-pattern",
           "fendt-filtration-engineer",
-          "orlas-memory-glass-the-ford-record"
+          "orla-memory-glass-ford-record"
         ],
         "createdDay": 1,
-        "updatedDay": 7
-      },
-      "aevi-water-sense": {
-        "id": "aevi-water-sense",
-        "label": "Aevi's Reading of the Water",
-        "kind": "mystery",
-        "facts": [
-          "[d1] On first perceiving the gray-green water at the Millbrook well, Aevi said only 'Mineral. And older than that' — suggesting the contamination has a Precursor-era quality that unsettles the companion's "
-        ],
-        "links": [
-          "echo-river-contamination",
-          "millbrook"
-        ],
-        "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 7,
+        "aliases": [
+          "The Counting River"
+        ]
       },
       "holloway-renn-dispute": {
         "id": "holloway-renn-dispute",
         "label": "Irrigation Dispute: Holloway vs. Renn",
         "kind": "event",
         "facts": [
-          "[d1] Holloway claims the irrigation gate was throttled two mornings running, costing him seedlings. Renn says the throttle is justified by heavy snowmelt flooding risk and backed by an elder compact made t"
+          "[d1] Holloway claims the irrigation gate was throttled two mornings running, costing him seedlings. Renn says the throttle is justified by heavy snowmelt flooding risk and backed by an elder compact made t",
+          "[d1] A one-week half-flow truce brokered at the village well: gate runs at half-flow, both farmers watch the third farmer's pale seedlings as contamination evidence, findings to be brought to elders togeth"
         ],
         "links": [
-          "millbrook"
+          "millbrook",
+          "echo-river-contamination",
+          "pale-seedlings"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "pale-seedlings": {
         "id": "pale-seedlings",
         "label": "The Pale Seedlings",
         "kind": "mystery",
         "facts": [
-          "[d1] A Millbrook farmer's turnip seedlings, planted last week in a field bordering the eastern irrigation arm, have lost color after exposure to gray-green water. Not dead — pale. As if color itself is bei"
-        ],
-        "links": [
-          "echo-river-contamination",
-          "millbrook",
-          "aevi-reading-of-the-water"
-        ],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "irrigation-dispute-holloway-renn": {
-        "id": "irrigation-dispute-holloway-renn",
-        "label": "Irrigation Dispute: Holloway vs. Renn",
-        "kind": "event",
-        "facts": [
-          "[d1] A one-week half-flow truce brokered at the village well: gate runs at half-flow, both farmers watch the third farmer's pale seedlings as contamination evidence, findings to be brought to elders togeth"
-        ],
-        "links": [
-          "millbrook",
-          "echo-river-contamination",
-          "the-pale-seedlings"
-        ],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "the-pale-seedlings": {
-        "id": "the-pale-seedlings",
-        "label": "The Pale Seedlings",
-        "kind": "mystery",
-        "facts": [
+          "[d1] A Millbrook farmer's turnip seedlings, planted last week in a field bordering the eastern irrigation arm, have lost color after exposure to gray-green water. Not dead — pale. As if color itself is bei",
           "[d1] Witnessed firsthand: the three innermost rows of the eastern field — closest to the irrigation arm inlet — are drained of color while the rest of the crop is healthy. The discoloration persists after "
         ],
         "links": [
           "echo-river-contamination",
           "millbrook",
           "aevi-reading-of-the-water",
-          "irrigation-dispute-holloway-renn"
+          "holloway-renn-dispute"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "aevi-reading-of-the-water": {
         "id": "aevi-reading-of-the-water",
@@ -1736,6 +1704,7 @@
         "kind": "mystery",
         "facts": [
           "[d1] At the eastern field channel mouth, Aevi tasted the contamination as deliberate and task-driven — 'not decay, not accident; whatever left this in the water was doing a task.' It also admitted: 'I have",
+          "[d1] On first perceiving the gray-green water at the Millbrook well, Aevi said only 'Mineral. And older than that' — suggesting the contamination has a Precursor-era quality that unsettles the companion's ",
           "[d2] At the seep, Aevi said 'Six-fold. That number again.' — the geometry of the contamination source matches something in Aevi's memory, though it has not said what or where.",
           "[d3] Aevi distinguishes delivery from origin — the basin and seep are evidence of what the contamination does and how it moves, not where it begins. Aevi has expressed active, careful interest in the upslo",
           "[d3] Aevi admitted it recognizes the two-key control logic of the vent aperture from somewhere in its memory — but cannot locate where, and named this gap as 'not comfortable to say.' This is the second ti",
@@ -1747,14 +1716,14 @@
         "links": [
           "echo-river-contamination",
           "millbrook",
-          "the-pale-seedlings",
-          "seep-geometry-six-fold",
+          "pale-seedlings",
           "the-six-fold-pattern",
           "contamination-evidence-for-the-elders",
           "tuning-warden-gateline"
         ],
         "createdDay": 1,
-        "updatedDay": 5
+        "updatedDay": 5,
+        "aliases": []
       },
       "elder-woman": {
         "id": "elder-woman",
@@ -1769,7 +1738,8 @@
           "aevi-reading-of-the-water"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "mara-wells": {
         "id": "mara-wells",
@@ -1785,113 +1755,60 @@
           "the-elder-woman"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "aliases": []
       },
       "contamination-evidence-for-the-elders": {
         "id": "contamination-evidence-for-the-elders",
         "label": "Evidence for the Elders",
         "kind": "event",
         "facts": [
-          "[d10] Day 10 midday: The tuning-warden arrived at the Millbrook common house yard on schedule via the eastern path — muddy-booted, chord-staff in hand. The final witness sequence is now live.",
-          "[d10] Day 10 midday: Usnea received the tuning-warden at the apple trees and named the room's state in one sentence — scope on the table, Dresh leading, plain speech required, warden first. He accepted the ",
-          "[d10] Day 10 afternoon: Usnea introduced the tuning-warden with a single sentence and stepped back — Heights-side testimony now underway at the common house table. Memory glass waits second.",
-          "[d10] Day 10 afternoon: Prism Sight failed in the common house — coalfire and yard-door light in conflict smear the light-reading. Usnea returned to plain attention for the warden's testimony.",
-          "[d10] Day 10 afternoon: Tuning-warden delivered Heights-side testimony complete — four seconds, six counts, light from inside the stone, three springs ago. Dresh absorbed it and called for the memory glass.",
           "[d10] Day 10 afternoon: Usnea named Orla to the elder panel — her role, her deliberate withholding from the Radiant council, the cost it carried. Fendt named by role and purity-report signature before the g",
           "[d10] Day 10 evening: Orla's memory glass played in full before Millbrook's assembled elder panel — Fendt's deliberate pour into the Echo River ford confirmed by photonic record, received in silence. The ev",
           "[d10] Day 10 evening: Usnea named the full coordination chain — Fendt's pour, the vent aperture signature, and the six-count — linking all three witnesses (Aevi's residue reading, Sela's river-listening, th",
+          "[d10] Day 10 Thursday: Aevi demonstrated the six-fold count directly above the crystalline residue pinch — three complete visible cycles above the table. Every elder in the room, Pell, and Brynjar witnessed",
+          "[d10] Day 10 Thursday: Aevi demonstrated the six-fold count — three complete visible cycles above the residue pinch. Councilor Dresh broke the silence with 'operating' — the first elder to name the system's",
+          "[d10] Day 10: Usnea confirmed 'operating, task-driven, not decaying' to the full elder panel and named all three zones of reach — wells, irrigation channels, south embankment clay pipes — as inside the syst",
+          "[d10] Day 10 afternoon: Aevi read the common house nanite-field during warden testimony — Dresh holds a structured question in a specific shape (possibly older than today); Holloway's field louder (fear amp",
+          "[d10] Day 10 evening: Aevi attempted to name what the glass confirms about the six-fold pattern and could not — the motes dimmed and scattered mid-attempt. The room noticed. Dresh's first word after playbac",
           "[d11] Day 10 night: Sela crossed the common house yard and entered the threshold at Usnea's quiet call — all witnesses now present in the room before Dresh's first word. The evidence sequence is complete; t",
           "[d11] Day 11 night: Sela tapped the six-count rhythm into the common house floor from memory — the fourth independent confirmation of the pattern before Millbrook's assembled elder panel. The evidence seque",
           "[d11] Day 11 night: Daybreak Mantle settled over the common house after Sela's six-count — the room's long weight eased into readiness without resolving what Dresh must name. The evidence sequence is comple",
           "[d11] Day 11 night: Councilor Dresh formally accepted the evidence before Millbrook's assembled elder panel — 'this panel can no longer pretend it is not operating.' The panel named the system as operating,"
         ],
         "links": [
-          "millbrook",
-          "the-six-fold-pattern",
           "councilor-dresh",
           "pell",
           "fendt-filtration-engineer",
           "echo-river-contamination",
           "tuning-warden-gateline",
-          "sela"
+          "sela",
+          "pale-seedlings",
+          "aevi-reading-of-the-water"
         ],
         "createdDay": 1,
-        "updatedDay": 11
-      },
-      "evidence-for-the-elders": {
-        "id": "evidence-for-the-elders",
-        "label": "Evidence for the Elders",
-        "kind": "event",
-        "facts": [
-          "[d1] Elder meeting confirmed: Thursday at the common house, at the last of afternoon light — two days from now. Mara Wells is coordinating. All three evidence items must be ready: pale seedling (held), fil",
-          "[d9] Thursday morning: Usnea is rested, communed with Millbrook at dawn — village feels purposeful and held. Evidence sequence intact. Warden sanction unconfirmed. Fendt's motive still the gap.",
-          "[d10] Day 10 Thursday: Aevi demonstrated the six-fold count directly above the crystalline residue pinch — three complete visible cycles above the table. Every elder in the room, Pell, and Brynjar witnessed",
-          "[d10] Day 10 Thursday: Aevi demonstrated the six-fold count — three complete visible cycles above the residue pinch. Councilor Dresh broke the silence with 'operating' — the first elder to name the system's",
-          "[d10] Day 10: Usnea confirmed 'operating, task-driven, not decaying' to the full elder panel and named all three zones of reach — wells, irrigation channels, south embankment clay pipes — as inside the syst",
-          "[d10] Day 10 afternoon: Aevi read the common house nanite-field during warden testimony — Dresh holds a structured question in a specific shape (possibly older than today); Holloway's field louder (fear amp",
-          "[d10] Day 10 evening: Aevi attempted to name what the glass confirms about the six-fold pattern and could not — the motes dimmed and scattered mid-attempt. The room noticed. Dresh's first word after playbac"
-        ],
-        "links": [
-          "the-pale-seedlings",
-          "millbrook",
-          "contamination-evidence-for-the-elders",
-          "the-six-fold-pattern",
-          "tuning-warden-gateline",
-          "aevi-reading-of-the-water",
-          "councilor-dresh",
-          "pell"
-        ],
-        "createdDay": 1,
-        "updatedDay": 10
+        "updatedDay": 11,
+        "aliases": []
       },
       "contamination-seep-retaining-wall": {
         "id": "contamination-seep-retaining-wall",
         "label": "The Seep Beneath the Wall",
         "kind": "mystery",
         "facts": [
-          "[d1] The contamination enters the eastern irrigation arm through a slow warm seep beneath a Precursor-adjacent retaining wall at the arm's bend around a granite outcropping. The seep carries warmth with no"
+          "[d1] The contamination enters the eastern irrigation arm through a slow warm seep beneath a Precursor-adjacent retaining wall at the arm's bend around a granite outcropping. The seep carries warmth with no",
+          "[d1] Beneath the seep at the retaining wall, the gravel and silt show a faint geometric regularity — a grid pattern, old and patient. Still active. Too ordered to be natural, too subtle to be immediately o"
         ],
         "links": [
           "echo-river-contamination",
-          "the-pale-seedlings",
+          "pale-seedlings",
           "aevi-reading-of-the-water",
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 1,
-        "updatedDay": 1
-      },
-      "precursor-geometry-in-silt": {
-        "id": "precursor-geometry-in-silt",
-        "label": "Geometric Patterning Beneath the Seep",
-        "kind": "mystery",
-        "facts": [
-          "[d1] Beneath the seep at the retaining wall, the gravel and silt show a faint geometric regularity — a grid pattern, old and patient. Still active. Too ordered to be natural, too subtle to be immediately o"
-        ],
-        "links": [
-          "contamination-seep-retaining-wall",
-          "echo-river-contamination",
-          "aevi-reading-of-the-water"
-        ],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "seep-geometry-six-fold": {
-        "id": "seep-geometry-six-fold",
-        "label": "The Six-Fold Pattern",
-        "kind": "mystery",
-        "facts": [
-          "[d2] Prism sight reveals the seep's warmth is geometrically even — a two-pace circle, six radial heat-points matching the silt-pattern exactly, stacked traces suggesting the temperature has been constant f",
-          "[d2] The silt record of the six-fold radial geometry was destroyed when the bank collapsed during a marking attempt. The warm seep itself continues unchanged. The site is now unmarked — Usnea is its only r"
-        ],
-        "links": [
-          "echo-river-contamination",
-          "aevi-reading-of-the-water",
-          "contamination-evidence-for-the-elders",
-          "the-pale-seedlings",
-          "millbrook"
-        ],
-        "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 1,
+        "aliases": [
+          "Geometric Patterning Beneath the Seep"
+        ]
       },
       "the-six-fold-pattern": {
         "id": "the-six-fold-pattern",
@@ -1912,17 +1829,18 @@
           "[d10] Day 10 morning: pulse confirmed steady and unchanged beneath the Millbrook common house floor during the elder session — six counts, long rest, six counts. System is running at its operational plateau"
         ],
         "links": [
-          "the-pale-seedlings",
           "millbrook",
           "tuning-warden-gateline",
-          "precursor-alignment-plateau-rim",
+          "precursor-alignments-plateau-rim",
           "radiant-plateau-edge-district",
           "harmonic-heights",
           "echo-river-contamination",
-          "aevi-reading-of-the-water"
+          "aevi-reading-of-the-water",
+          "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 10
+        "updatedDay": 10,
+        "aliases": []
       },
       "the-placed-stone-valve": {
         "id": "the-placed-stone-valve",
@@ -1938,7 +1856,8 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "aliases": []
       },
       "calibration-anchor-notation": {
         "id": "calibration-anchor-notation",
@@ -1954,39 +1873,29 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "aliases": []
       },
       "deliberate-catchment-delivery": {
         "id": "deliberate-catchment-delivery",
         "label": "The Seep as Delivery Mechanism",
         "kind": "mystery",
         "facts": [
-          "[d2] Aevi names the six-fold silt geometry not as contamination scatter but as deliberate catchment delivery — the flow is being spread across a specific distribution pattern. Something downstream is being"
+          "[d2] Aevi names the six-fold silt geometry not as contamination scatter but as deliberate catchment delivery — the flow is being spread across a specific distribution pattern. Something downstream is being",
+          "[d2] The eastern arm seep is not contaminating at random — it doses the whole village. The arm splits twice into branch channels feeding all eastern-arm plots, and the common irrigation header connects to "
         ],
         "links": [
           "the-six-fold-pattern",
           "calibration-anchor-notation",
           "echo-river-contamination",
-          "aevi-reading-of-the-water"
-        ],
-        "createdDay": 2,
-        "updatedDay": 2
-      },
-      "seep-delivery-path": {
-        "id": "seep-delivery-path",
-        "label": "The Seep's Delivery Path",
-        "kind": "mystery",
-        "facts": [
-          "[d2] The eastern arm seep is not contaminating at random — it doses the whole village. The arm splits twice into branch channels feeding all eastern-arm plots, and the common irrigation header connects to "
-        ],
-        "links": [
-          "echo-river-contamination",
-          "the-six-fold-pattern",
           "aevi-reading-of-the-water",
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "aliases": [
+          "The Seep's Delivery Path"
+        ]
       },
       "seep-feeder-channel": {
         "id": "seep-feeder-channel",
@@ -2002,7 +1911,8 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "aliases": []
       },
       "seep-mechanism-continuous": {
         "id": "seep-mechanism-continuous",
@@ -2018,7 +1928,8 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "aliases": []
       },
       "feeder-trough-upper-terrace": {
         "id": "feeder-trough-upper-terrace",
@@ -2034,14 +1945,16 @@
           "aevi-reading-of-the-water"
         ],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "aliases": []
       },
       "contamination-basin-source": {
         "id": "contamination-basin-source",
         "label": "The Source Basin",
         "kind": "mystery",
         "facts": [
-          "[d2] The feeder trough's upslope end terminates at a dry-fitted circular stone basin (~2 paces across) flush with the upper terrace floor. Gray-green water upwells from a central aperture under pressure — "
+          "[d2] The feeder trough's upslope end terminates at a dry-fitted circular stone basin (~2 paces across) flush with the upper terrace floor. Gray-green water upwells from a central aperture under pressure — ",
+          "[d3] The maintenance path above the basin ends at collapsed scree thirty paces upslope — frost-heaved close-fitted masonry with no passable route. The origin of the basin's upwelling pressure lies above th"
         ],
         "links": [
           "echo-river-contamination",
@@ -2050,23 +1963,10 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 2,
-        "updatedDay": 2
-      },
-      "basin-source-unknown": {
-        "id": "basin-source-unknown",
-        "label": "Basin Source: Above the Scree",
-        "kind": "mystery",
-        "facts": [
-          "[d3] The maintenance path above the basin ends at collapsed scree thirty paces upslope — frost-heaved close-fitted masonry with no passable route. The origin of the basin's upwelling pressure lies above th"
-        ],
-        "links": [
-          "aevi-reading-of-the-water",
-          "the-six-fold-pattern",
-          "echo-river-contamination",
-          "contamination-evidence-for-the-elders"
-        ],
-        "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 3,
+        "aliases": [
+          "Basin Source: Above the Scree"
+        ]
       },
       "the-vent-aperture": {
         "id": "the-vent-aperture",
@@ -2082,7 +1982,8 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 3,
+        "aliases": []
       },
       "lattice-cap-interface-pause": {
         "id": "lattice-cap-interface-pause",
@@ -2098,7 +1999,8 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 3,
+        "aliases": []
       },
       "precursor-system-age": {
         "id": "precursor-system-age",
@@ -2114,38 +2016,31 @@
           "lattice-cap-interface-pause"
         ],
         "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 3,
+        "aliases": []
       },
       "millbrook-common-house": {
         "id": "millbrook-common-house",
         "label": "Millbrook Common House",
         "kind": "place",
         "facts": [
-          "[d3] The common house has a back traveler's room — straw-tick, wool blanket — kept by a man named Josen. Mara Wells can vouch for a visitor there by name."
+          "[d3] The common house has a back traveler's room — straw-tick, wool blanket — kept by a man named Josen. Mara Wells can vouch for a visitor there by name.",
+          "[d11] Day 11: A hillside-fed cistern north of the mill weir provides clean water above the contamination's reach — the only confirmed secondary source inside the village. A market trader holds a partial pas"
         ],
         "links": [
           "mara-wells",
           "millbrook",
-          "contamination-evidence-for-the-elders"
+          "contamination-evidence-for-the-elders",
+          "echo-river-contamination",
+          "the-six-fold-pattern",
+          "proposed-expedition-disputed-zone"
         ],
         "createdDay": 3,
-        "updatedDay": 3
-      },
-      "the-counting-river": {
-        "id": "the-counting-river",
-        "label": "The Counting River",
-        "kind": "mystery",
-        "facts": [
-          "[d4] A child at the Millbrook docks hears a rhythmic pulse beneath the river's surface — 'the bottom one counts' — and tapped its pattern: pause, three beats, pause, two beats, pause-pause. The rhythm matc"
+        "updatedDay": 11,
+        "aliases": [
+          "Millbrook"
         ],
-        "links": [
-          "echo-river-contamination",
-          "aevi-reading-of-the-water",
-          "the-six-fold-pattern",
-          "contamination-evidence-for-the-elders"
-        ],
-        "createdDay": 4,
-        "updatedDay": 4
+        "entityId": "millbrook"
       },
       "harmonic-heights-lower-terrace": {
         "id": "harmonic-heights-lower-terrace",
@@ -2164,7 +2059,8 @@
           "the-six-fold-pattern"
         ],
         "createdDay": 4,
-        "updatedDay": 4
+        "updatedDay": 4,
+        "aliases": []
       },
       "precursor-light-ribbon": {
         "id": "precursor-light-ribbon",
@@ -2180,7 +2076,8 @@
           "millbrook"
         ],
         "createdDay": 4,
-        "updatedDay": 4
+        "updatedDay": 4,
+        "aliases": []
       },
       "sela-and-pell": {
         "id": "sela-and-pell",
@@ -2206,7 +2103,8 @@
           "councilor-dresh"
         ],
         "createdDay": 4,
-        "updatedDay": 10
+        "updatedDay": 10,
+        "aliases": []
       },
       "thursday-elder-meeting": {
         "id": "thursday-elder-meeting",
@@ -2222,7 +2120,8 @@
           "the-six-fold-pattern"
         ],
         "createdDay": 5,
-        "updatedDay": 5
+        "updatedDay": 5,
+        "aliases": []
       },
       "radiant-plateau-edge-district": {
         "id": "radiant-plateau-edge-district",
@@ -2242,7 +2141,8 @@
           "amber-lath-keeper"
         ],
         "createdDay": 6,
-        "updatedDay": 7
+        "updatedDay": 7,
+        "aliases": []
       },
       "orla-optics-weaver": {
         "id": "orla-optics-weaver",
@@ -2259,23 +2159,8 @@
           "fendt-filtration-engineer"
         ],
         "createdDay": 6,
-        "updatedDay": 6
-      },
-      "orla-memory-glass": {
-        "id": "orla-memory-glass",
-        "label": "Orla's Memory Glass — The Ford Record",
-        "kind": "mystery",
-        "facts": [
-          "[d6] Orla pulled a fogged-edge memory glass from the ford-side boulder three days ago. It replays what light touched there. She has not shown it to the Radiant council — implying she believes a filtration "
-        ],
-        "links": [
-          "echo-river-contamination",
-          "orla-optics-weaver",
-          "radiant-plateau-edge-district",
-          "contamination-evidence-for-the-elders"
-        ],
-        "createdDay": 6,
-        "updatedDay": 6
+        "updatedDay": 6,
+        "aliases": []
       },
       "orla-memory-glass-ford-record": {
         "id": "orla-memory-glass-ford-record",
@@ -2283,16 +2168,22 @@
         "kind": "mystery",
         "facts": [
           "[d6] The glass shows a Radiant engineer in working coat deliberately pouring from a sealed tube into the ford current three days before Usnea's arrival — a purposeful act. His face was visible for one clea",
-          "[d6] Orla recognized the engineer's working coat before Usnea spoke the description — she has a candidate identity and is sequencing carefully, confirming shared observation before naming him. She pulled t"
+          "[d6] Orla recognized the engineer's working coat before Usnea spoke the description — she has a candidate identity and is sequencing carefully, confirming shared observation before naming him. She pulled t",
+          "[d6] Orla pulled a fogged-edge memory glass from the ford-side boulder three days ago. It replays what light touched there. She has not shown it to the Radiant council — implying she believes a filtration ",
+          "[d6] Day 6 afternoon: the disc is now in Usnea's keeping, transferred in the Edge District lane. Usnea will carry it as valley-floor witness to Thursday's elder presentation — the council will have to answ",
+          "[d10] Day 10: Orla named to Millbrook elders — her strategic choice to route the glass valley-side rather than to the Radiant council is now public. Fendt identified by name and role before playback. The gl"
         ],
         "links": [
           "echo-river-contamination",
           "orla-optics-weaver",
           "radiant-plateau-edge-district",
-          "contamination-evidence-for-the-elders"
+          "contamination-evidence-for-the-elders",
+          "fendt-filtration-engineer",
+          "orla"
         ],
         "createdDay": 6,
-        "updatedDay": 6
+        "updatedDay": 10,
+        "aliases": []
       },
       "fendt-filtration-engineer": {
         "id": "fendt-filtration-engineer",
@@ -2314,11 +2205,12 @@
           "contamination-evidence-for-the-elders",
           "precursor-junction-node-south-switchback",
           "the-six-fold-pattern",
-          "orlas-memory-glass-the-ford-record",
+          "orla-memory-glass-ford-record",
           "millbrook"
         ],
         "createdDay": 6,
-        "updatedDay": 10
+        "updatedDay": 10,
+        "aliases": []
       },
       "radiant-council-reflex": {
         "id": "radiant-council-reflex",
@@ -2334,23 +2226,8 @@
           "echo-river-contamination"
         ],
         "createdDay": 6,
-        "updatedDay": 6
-      },
-      "orlas-memory-glass-ford-record": {
-        "id": "orlas-memory-glass-ford-record",
-        "label": "Orla's Memory Glass — The Ford Record",
-        "kind": "mystery",
-        "facts": [
-          "[d6] Day 6 afternoon: the disc is now in Usnea's keeping, transferred in the Edge District lane. Usnea will carry it as valley-floor witness to Thursday's elder presentation — the council will have to answ"
-        ],
-        "links": [
-          "echo-river-contamination",
-          "orla-optics-weaver",
-          "fendt-filtration-engineer",
-          "contamination-evidence-for-the-elders"
-        ],
-        "createdDay": 6,
-        "updatedDay": 6
+        "updatedDay": 6,
+        "aliases": []
       },
       "south-face-switchback-alignment": {
         "id": "south-face-switchback-alignment",
@@ -2366,7 +2243,8 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 6,
-        "updatedDay": 6
+        "updatedDay": 6,
+        "aliases": []
       },
       "amber-lath-wayhouse": {
         "id": "amber-lath-wayhouse",
@@ -2382,7 +2260,8 @@
           "fendt-filtration-engineer"
         ],
         "createdDay": 6,
-        "updatedDay": 7
+        "updatedDay": 7,
+        "aliases": []
       },
       "eastern-rim-descent": {
         "id": "eastern-rim-descent",
@@ -2397,30 +2276,16 @@
           "contamination-evidence-for-the-elders"
         ],
         "createdDay": 6,
-        "updatedDay": 6
-      },
-      "precursor-alignment-plateau-rim": {
-        "id": "precursor-alignment-plateau-rim",
-        "label": "Precursor Alignments — Plateau Rim",
-        "kind": "mystery",
-        "facts": [
-          "[d7] Day 7 dawn: three braided Precursor alignments run beneath the eastern rim path, crossing perpendicular at intervals. All carry the same six-count pulse as Millbrook's wells and the Echo River dock. O"
-        ],
-        "links": [
-          "the-six-fold-pattern",
-          "echo-river-contamination",
-          "contamination-evidence-for-the-elders",
-          "aevi-reading-of-the-water"
-        ],
-        "createdDay": 7,
-        "updatedDay": 7
+        "updatedDay": 6,
+        "aliases": []
       },
       "south-road-figures": {
         "id": "south-road-figures",
         "label": "Two Figures — South Road at Dawn",
         "kind": "mystery",
         "facts": [
-          "[d7] Day 7 dawn: Prism Sight surge from the rim caught two figures climbing the south road before first light — one in a filtration operative's working coat, moving with deliberate purposeful speed. Approx"
+          "[d7] Day 7 dawn: Prism Sight surge from the rim caught two figures climbing the south road before first light — one in a filtration operative's working coat, moving with deliberate purposeful speed. Approx",
+          "[d8] Day 8 deep night/dawn: a second unidentified figure accompanies Fendt on the south road climb — shorter, darker coat, half a pace behind. Neither moving like routine array maintenance. Fendt's face ti"
         ],
         "links": [
           "fendt-filtration-engineer",
@@ -2429,7 +2294,8 @@
           "echo-river-contamination"
         ],
         "createdDay": 7,
-        "updatedDay": 7
+        "updatedDay": 8,
+        "aliases": []
       },
       "precursor-junction-node-south-switchback": {
         "id": "precursor-junction-node-south-switchback",
@@ -2441,33 +2307,19 @@
         "links": [
           "the-six-fold-pattern",
           "fendt-filtration-engineer",
-          "precursor-alignment-plateau-rim",
+          "precursor-alignments-plateau-rim",
           "echo-river-contamination"
         ],
         "createdDay": 7,
-        "updatedDay": 7
-      },
-      "two-figures-south-road": {
-        "id": "two-figures-south-road",
-        "label": "Two Figures — South Road at Dawn",
-        "kind": "mystery",
-        "facts": [
-          "[d8] Day 8 deep night/dawn: a second unidentified figure accompanies Fendt on the south road climb — shorter, darker coat, half a pace behind. Neither moving like routine array maintenance. Fendt's face ti"
-        ],
-        "links": [
-          "fendt-filtration-engineer",
-          "radiant-plateau-edge-district",
-          "contamination-evidence-for-the-elders",
-          "echo-river-contamination"
-        ],
-        "createdDay": 8,
-        "updatedDay": 8
+        "updatedDay": 7,
+        "aliases": []
       },
       "precursor-alignments-plateau-rim": {
         "id": "precursor-alignments-plateau-rim",
         "label": "Precursor Alignments — Plateau Rim",
         "kind": "mystery",
         "facts": [
+          "[d7] Day 7 dawn: three braided Precursor alignments run beneath the eastern rim path, crossing perpendicular at intervals. All carry the same six-count pulse as Millbrook's wells and the Echo River dock. O",
           "[d8] Day 8 morning: six-count pulse confirmed at consistent intervals throughout the full eastern descent — the alignments are not confined to the rim's crown but run the whole slope to the valley floor. T",
           "[d8] Day 8 hollow: Old Roads working confirms the three braided alignments beneath the eastern rim are structural conduit — not resonating with the Disputed Zone site but physically connected to it. The si"
         ],
@@ -2478,40 +2330,28 @@
           "aevi-reading-of-the-water",
           "fendt-filtration-engineer"
         ],
-        "createdDay": 8,
-        "updatedDay": 8
+        "createdDay": 7,
+        "updatedDay": 8,
+        "aliases": []
       },
       "coordinating-hand": {
         "id": "coordinating-hand",
         "label": "The Directing Hand",
         "kind": "mystery",
         "facts": [
-          "[d8] Aevi confirmed: the Disputed Zone reclamation site's reactivation and Fendt's deliberate pouring are steps in a single plan from one directing source. Aevi does not know the identity — only the shape "
+          "[d8] Aevi confirmed: the Disputed Zone reclamation site's reactivation and Fendt's deliberate pouring are steps in a single plan from one directing source. Aevi does not know the identity — only the shape ",
+          "[d8] Day 8 hollow: the conduit structure clarifies the scale — whoever directed Fendt and the Disputed Zone reactivation had knowledge of the Precursor alignment network running beneath the plateau and val"
         ],
         "links": [
           "fendt-filtration-engineer",
           "echo-river-contamination",
           "the-six-fold-pattern",
-          "contamination-evidence-for-the-elders"
+          "contamination-evidence-for-the-elders",
+          "precursor-alignments-plateau-rim"
         ],
         "createdDay": 8,
-        "updatedDay": 8
-      },
-      "the-directing-hand": {
-        "id": "the-directing-hand",
-        "label": "The Directing Hand",
-        "kind": "mystery",
-        "facts": [
-          "[d8] Day 8 hollow: the conduit structure clarifies the scale — whoever directed Fendt and the Disputed Zone reactivation had knowledge of the Precursor alignment network running beneath the plateau and val"
-        ],
-        "links": [
-          "fendt-filtration-engineer",
-          "precursor-alignments-plateau-rim",
-          "echo-river-contamination",
-          "the-six-fold-pattern"
-        ],
-        "createdDay": 8,
-        "updatedDay": 8
+        "updatedDay": 8,
+        "aliases": []
       },
       "tuning-warden-gateline": {
         "id": "tuning-warden-gateline",
@@ -2531,7 +2371,8 @@
           "millbrook"
         ],
         "createdDay": 8,
-        "updatedDay": 8
+        "updatedDay": 8,
+        "aliases": []
       },
       "brynjar-andyrsson": {
         "id": "brynjar-andyrsson",
@@ -2549,7 +2390,8 @@
           "echo-river-contamination"
         ],
         "createdDay": 9,
-        "updatedDay": 10
+        "updatedDay": 10,
+        "aliases": []
       },
       "the-new-pass-marker": {
         "id": "the-new-pass-marker",
@@ -2565,7 +2407,8 @@
           "the-six-fold-pattern"
         ],
         "createdDay": 9,
-        "updatedDay": 9
+        "updatedDay": 9,
+        "aliases": []
       },
       "the-mountain-pass-marker": {
         "id": "the-mountain-pass-marker",
@@ -2581,39 +2424,8 @@
           "millbrook"
         ],
         "createdDay": 10,
-        "updatedDay": 10
-      },
-      "orlas-memory-glass-the-ford-record": {
-        "id": "orlas-memory-glass-the-ford-record",
-        "label": "Orla's Memory Glass — the Ford Record",
-        "kind": "mystery",
-        "facts": [
-          "[d10] Day 10: Orla named to Millbrook elders — her strategic choice to route the glass valley-side rather than to the Radiant council is now public. Fendt identified by name and role before playback. The gl"
-        ],
-        "links": [
-          "orla",
-          "fendt-filtration-engineer",
-          "echo-river-contamination",
-          "contamination-evidence-for-the-elders"
-        ],
-        "createdDay": 10,
-        "updatedDay": 10
-      },
-      "disputed-zone-expedition": {
-        "id": "disputed-zone-expedition",
-        "label": "Proposed Expedition — Disputed Zone",
-        "kind": "event",
-        "facts": [
-          "[d11] Day 11 night: Usnea proposed leading a multi-settlement expedition into the Disputed Zone to find the directing hand behind the Precursor reactivation and Fendt's pour. Millbrook's elder panel heard i"
-        ],
-        "links": [
-          "contamination-evidence-for-the-elders",
-          "millbrook",
-          "echo-river-contamination",
-          "brynjar-andyrsson"
-        ],
-        "createdDay": 11,
-        "updatedDay": 11
+        "updatedDay": 10,
+        "aliases": []
       },
       "proposed-expedition-disputed-zone": {
         "id": "proposed-expedition-disputed-zone",
@@ -2624,17 +2436,20 @@
           "[d11] Day 11 night: Dresh named three conditions for a sanctioned Zone survey when asked — two written settlement requests naming purpose and boundary, a Heights observer with gate-senior clearance (not exe",
           "[d11] Day 11 dawn: Usnea withdrew from the council room — leaving the evidence on the table, the conditions with the panel, and the journey to prepare. The governance body is working the three conditions wi",
           "[d11] Day 11 dawn: Taking stock in the yard, Usnea identified the practical gaps for the Zone journey — no provisions, no second clean water source, no map of the upper Zone past the entry ridge, and the th",
-          "[d11] Day 11 dawn: Aevi named three viable directions before departure — Heights gate-senior (closes condition two), Orla on the Plateau (post-naming intelligence), Zone ridge entry northeast past the high "
+          "[d11] Day 11 dawn: Aevi named three viable directions before departure — Heights gate-senior (closes condition two), Orla on the Plateau (post-naming intelligence), Zone ridge entry northeast past the high ",
+          "[d11] Day 11 night: Usnea proposed leading a multi-settlement expedition into the Disputed Zone to find the directing hand behind the Precursor reactivation and Fendt's pour. Millbrook's elder panel heard i"
         ],
         "links": [
           "contamination-evidence-for-the-elders",
           "millbrook",
           "councilor-dresh",
           "tuning-warden-gateline",
-          "brynjar-andyrsson"
+          "brynjar-andyrsson",
+          "echo-river-contamination"
         ],
         "createdDay": 11,
-        "updatedDay": 11
+        "updatedDay": 11,
+        "aliases": []
       }
     }
   },
@@ -2683,12 +2498,6 @@
     ]
   },
   "establishedFacts": [
-    {
-      "id": "fendt-filtration-engineer",
-      "text": "The Radiant filtration array output count has been measurably off for three consecutive runs — district board shows the anomaly; supervisors have posted no explanation and no official has removed the ",
-      "day": 7,
-      "subjectId": "fendt-filtration-engineer"
-    },
     {
       "id": "precursor-alignment-plateau-rim",
       "text": "Three braided Precursor alignments run beneath the Radiant Plateau's eastern rim path, crossing perpendicular at regular intervals — all carrying the same six-count pulse as Millbrook's wells and the ",
@@ -2922,10 +2731,19 @@
       "text": "Usnea withdrew from the Millbrook elder council on Day 11 dawn — leaving all physical evidence on the table for the panel. The council is working Dresh's three conditions without them present. Usnea i",
       "day": 11,
       "subjectId": null
+    },
+    {
+      "id": "millbrook",
+      "text": "A hillside-fed cistern on the north side of the Millbrook mill weir supplies clean water above the contamination's reach — confirmed clean by Aevi on Day 11 morning.",
+      "day": 11,
+      "subjectId": "millbrook"
     }
   ],
   "precursorAccess": [],
   "backfillVersion": 1,
   "opLossPending": false,
-  "sharedSceneId": null
+  "sharedSceneId": null,
+  "forkChoices": {},
+  "customEncounters": {},
+  "reconcileVersion": 2
 }

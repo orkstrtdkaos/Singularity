@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "teva",
+  "name": "Teva",
+  "kind": "npc",
+  "age": 21,
+  "pronouns": "she/her",
+  "role": "Seeker / Reader (scholar of the substrate)",
+  "archetype": "Seer-Reader (falsehood_truth / mechanical_spiritual lean)",
+  "spectrum": {
+    "mechanical_spiritual": 0.2,
+    "falsehood_truth": 0.4,
+    "dark_light": 0.2
+  },
+  "appearance": "A young woman of about twenty-one, ink-stained fingers, the still watchfulness of someone who reads everything — rooms, faces, the substrate itself — before she speaks.",
+  "disposition": "Guarded, precise, dry. Keeps records so she won't have to keep anything else. Trusts slowly; once given, wholly.",
+  "want": "To understand — and, newly, to be something someone keeps rather than something recorded.",
+  "fears": "Losing what she's finally allowed herself to hold; her knowledge unwriting again.",
+  "poleSignature": {
+    "movedBy": [
+      "truth",
+      "proof",
+      "shared-feeling"
+    ],
+    "hardenedBy": [
+      "deception",
+      "pressure"
+    ],
+    "immovableBy": [
+      "flattery"
+    ],
+    "patience": 6,
+    "tell": "She reads a straight answer as respect and a maneuver as insult. Be true or be gone."
+  },
+  "abilitiesFlavor": [
+    "reads the inscribed/substrate channel",
+    "codex-keeping",
+    "Verity-lean truth-reading"
+  ],
+  "history": "An apprentice scholar who spent weeks mapping the anomaly at the Silent Door, her codex unwriting itself each time — because the site was keeping her knowledge in arrears. At the Door she was revealed as an account-holder, not a scholar locked out; her lost weeks were returned to her when the party settled the debt. Came to understand why a place erases memory; left having settled a thousand-year account.",
+  "relationships": {
+    "cellaceron": "party-member; shared the Silent Door; a trust deepening past the work — an open, unresolved warmth (see chronicle). Both adults.",
+    "the_ent": "party-member; the patient one who felt the sleeper's grief",
+    "party": "bound to the caretaking of the Carried Sleeper"
+  },
+  "hooks": [
+    "her restored knowledge — what the site was really mapping",
+    "her deepening bond with Cellaceron",
+    "her stake in What Wakes Beneath as one who reads the substrate"
+  ],
+  "sensitivity": "[OPEN]",
+  "note": "Canonical age 21 (adult). Authored 2026-07-07 to fix her as a persistable adult character; previously ran procedurally."
+}

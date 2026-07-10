@@ -20,6 +20,7 @@ import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effecti
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
+import { reconcile } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
@@ -32,7 +33,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.0";
+const APP_VERSION = "1.7.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -208,6 +209,11 @@ function migrate(c) {
       companionCatalog: CONTENT.companions
     });
   }
+  // SNG-022: versioned reconciliation — bring the character up to everything now built.
+  // Idempotent (reconcileVersion gate); player-facing results surface as a login moment.
+  const rec = reconcile(c, "character", { content: CONTENT });
+  if (rec.playerFacing && (rec.notes.length || rec.offers.length)) c._reconcileNotes = rec.notes;
+  if (rec.warnings.length) console.warn("[reconcile] character:", rec.warnings);
   return c;
 }
 
@@ -225,6 +231,17 @@ function groupNpcsByLocation(registry) {
 /** Ability catalog including GM-granted learned abilities on this character. */
 function fullCatalog() {
   return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
+}
+
+/** SNG-019: known-entity id→name maps for codex entity resolution — the ids the GM
+ *  sees in context (met people from the registry, authored NPCs, world locations). */
+function codexEntities() {
+  const people = {};
+  for (const [id, n] of Object.entries(CONTENT.npcs || {})) people[id] = n.name || id;
+  for (const [id, n] of Object.entries(character?.npcRegistry || {})) people[id] = n.name || id;
+  const places = {};
+  for (const [id, l] of Object.entries(CONTENT.locations || {})) places[id] = l.name || id;
+  return { people, places };
 }
 
 function senseTierFor() {
@@ -562,6 +579,13 @@ async function enterPlay() {
     saveCharacter(character);
     if (lines.length) backfillAside = "Catching up on all you've done:\n• " + lines.join("\n• ");
   }
+  // SNG-022: the login moment — if reconciliation applied anything player-facing, say so
+  if (character._reconcileNotes?.length) {
+    const growth = "The world has grown:\n• " + character._reconcileNotes.join("\n• ");
+    backfillAside = backfillAside ? backfillAside + "\n\n" + growth : growth;
+    delete character._reconcileNotes;
+    saveCharacter(character);
+  }
   if (character.activeScene?.turns?.length) {
     sceneTurns = character.activeScene.turns;
     sceneState = character.activeScene.sceneState || null;
@@ -663,7 +687,7 @@ function applyTurn(turn, resolution) {
     }
   }
   // people & places remember (typed ops, clamped)
-  const memCtx = { locationId: location.id, day: readClock(character.clock).day };
+  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities() };
   applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
   // legacy relationshipDeltas: tolerated but may only UPDATE existing people —
   // this path once minted duplicate id-named registry entries
@@ -1395,8 +1419,9 @@ function renderCodexScreen(query = "", openTopicId = null) {
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
     ${open ? `
       <div class="codex-topic-page">
-        <div class="codex-kind">${esc(open.kind)}</div>
+        <div class="codex-kind">${esc(open.kind)}${open.entityId ? ` <span class="codex-anchor" title="anchored to a known entity">◈ ${esc(open.entityId)}</span>` : ""}</div>
         <h3 class="codex-title">${esc(open.label)}</h3>
+        ${(open.aliases || []).length ? `<div class="codex-aliases">also called: ${open.aliases.map(esc).join(" · ")}</div>` : ""}
         ${open.facts.length ? open.facts.map(f => `<div class="codex-fact">${esc(f)}</div>`).join("") : "<div class='insight'>known of, little learned yet</div>"}
         ${open.links.length ? `<div class="codex-links">linked: ${open.links.map(l => {
           const t = character.codex.topics[l];
@@ -1405,11 +1430,28 @@ function renderCodexScreen(query = "", openTopicId = null) {
         <button class="btn secondary" id="codex-close-topic" style="margin-top:12px">All topics</button>
       </div>` : `
       <div class="codex-list">
-        ${results.length ? results.map(t => `
-          <button class="codex-item" data-topic="${esc(t.id)}">
-            <span class="codex-kind">${esc(t.kind)}</span> <strong>${esc(t.label)}</strong>
-            <span class="hint">${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}</span>
-          </button>`).join("") : "<div class='insight'>Nothing cataloged yet — knowledge accumulates as you learn things that matter.</div>"}
+        ${results.length ? (() => {
+          // SNG-019: group by kind — primary entities first, facts nested under their node
+          const KIND_ORDER = ["person", "place", "faction", "event", "mystery", "lore"];
+          const KIND_LABEL = { person: "People", place: "Places", faction: "Factions", event: "Events", mystery: "Mysteries", lore: "Lore" };
+          const byKind = {};
+          for (const t of results) (byKind[t.kind] = byKind[t.kind] || []).push(t);
+          return KIND_ORDER.filter(k => byKind[k]?.length).map(k => `
+            <div class="codex-group"><div class="codex-group-title">${KIND_LABEL[k]}</div>
+            ${byKind[k].sort((a, b) => (b.entityId ? 1 : 0) - (a.entityId ? 1 : 0) || b.facts.length - a.facts.length).map(t => `
+              <div class="codex-node">
+                <button class="codex-item" data-topic="${esc(t.id)}">
+                  <strong>${esc(t.label)}</strong>${t.entityId ? ` <span class="codex-anchor" title="known entity">◈</span>` : ""}
+                  ${(t.aliases || []).length ? `<span class="codex-aliases-inline">· also: ${t.aliases.slice(0, 2).map(esc).join(", ")}${t.aliases.length > 2 ? "…" : ""}</span>` : ""}
+                  <span class="hint">${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}</span>
+                </button>
+                ${t.facts.slice(-3).map(f => `<div class="codex-fact nested">${esc(f)}</div>`).join("")}
+                ${t.links.length ? `<div class="codex-links nested">${t.links.slice(0, 5).map(l => {
+                  const lt = character.codex.topics[l];
+                  return lt ? `<button class="codex-link" data-topic="${esc(l)}">${esc(lt.label)}</button>` : "";
+                }).join(" ")}</div>` : ""}
+              </div>`).join("")}</div>`).join("");
+        })() : "<div class='insight'>Nothing cataloged yet — knowledge accumulates as you learn things that matter.</div>"}
       </div>`}
     <button class="btn secondary" id="codex-back" style="margin-top:12px">Back to the valley</button>
   </div>`);

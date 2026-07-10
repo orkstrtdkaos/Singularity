@@ -3,6 +3,8 @@
 // via sync.js pushes character + player profile to the shared repo when a PAT is
 // configured. Content packs always load from the served repo files.
 
+import { reconcileContent } from "./reconcile.js";
+
 const LS = {
   character: id => `singularity.character.${id}`,
   characterIndex: "singularity.characters",
@@ -82,7 +84,11 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  return { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
+  // SNG-022: bring every loaded record up to current (derive missing additive fields,
+  // flag dangling cross-refs). In-memory only — Pages files are static.
+  try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }
+  return content;
 }
 
 async function fetchJSON(path) {

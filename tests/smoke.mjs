@@ -17,7 +17,8 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/p
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
-import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "../engine/codex.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics } from "../engine/codex.js";
+import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
@@ -324,7 +325,9 @@ const minted = recordDiscovery(hero2, { name: "Echo-Guided Push", description: "
 check("discovery mints once", minted && recordDiscovery(hero2, { name: "Echo-Guided Push", abilityIds: ["sonic_resonance", "echo_sense"], noveltyHint: "push through wall" }) === null);
 check("known combo found regardless of hint", !!knownDiscovery(hero2, ["echo_sense", "sonic_resonance"]));
 const discChance = successChance({ character: hero2, action: { ...novelAction, novel: true, discoveryBonus: rules.novel.discoveryBonus }, location: { spectrum: {} }, rules });
-check("discovered technique earns bonus instead of surcharge", discChance === plainChance + rules.novel.discoveryBonus);
+// RED #2 (post-BATCH-5): commit 6bfb98d raised novel.discoveryBonus 10→20; the fixture's
+// plainChance + 20 now crosses d100.ceilingChance, so assert the CLAMPED contract.
+check("discovered technique earns bonus instead of surcharge (ceiling-clamped)", discChance === Math.min(rules.d100.ceilingChance, plainChance + rules.novel.discoveryBonus) && discChance > plainChance - rules.novel.difficultySurcharge);
 check("ability law lists discovered techniques", abilitiesForGM(hero2, abilityCatalog).includes("Echo-Guided Push"));
 
 // --- codex (knowledge graph) ---
@@ -563,7 +566,13 @@ for (const f of ['harmonic', 'radiant', 'valley_craft']) {
   const pk = JSON.parse(readFileSync(join(root, 'content/packs/core/abilities/' + f + '.json'), 'utf8'));
   for (const a of pk.abilities) { check('no id collision: ' + a.id, !fullCat[a.id]); fullCat[a.id] = { ...a, powerSystem: pk.powerSystem }; }
 }
-check('catalog is 28+ abilities with trees', Object.keys(fullCat).length >= 28 && Object.values(fullCat).every(a => a.tree?.length === 3 && a.notFor));
+// RED #1 (post-BATCH-5): the 2026-07-07 catalog expansion (~28 → 117 abilities) added
+// tradition packs whose entries are 1-rank seeds without notFor — the old every-ability
+// invariant no longer describes the authored corpus. Preserved contract: the CORE
+// catalog stays fully treed, and EVERY ability (seed or full) is engine-safe.
+const fullyTreed = Object.values(fullCat).filter(a => a.tree?.length === 3 && a.notFor);
+check('core catalog keeps 28+ fully-treed abilities (3 ranks + notFor)', fullyTreed.length >= 28);
+check('every ability is engine-safe (id/name/description/energy/class)', Object.values(fullCat).every(a => a.id && a.name && a.description && typeof a.energyCost === "number" && a.powerSystem));
 const hChar = { origin: 'harmonic', level: 1 };
 check('own tradition at face value', effectiveLevelReq(fullCat.stillness_field, hChar, rules) === 1);
 check('cross-training into valley_craft costs +1', effectiveLevelReq(fullCat.wayfinding, hChar, rules) === 2);
@@ -1129,6 +1138,103 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const gmChar = { abilities: [{ abilityId: "prism_sight", level: 3 }], forkChoices: { prism_sight: "wide_read" }, discoveries: [] };
   const gm = abilitiesForGM(gmChar, { prism_sight: prism }, forks);
   check("GM sees the specialized fork name", /Wide Read/i.test(gm) && /specialized fork/i.test(gm));
+}
+
+// --- SNG-BATCH-6 Phase 1: codex entity-resolution (SNG-019) ---
+{
+  const day = (d) => ({ day: d });
+  const entities = { people: { teva: "Teva" }, places: { archive_hollow: "Archive Hollow" } };
+
+  // two differently-phrased facts about the same NPC land on ONE node
+  const c1 = { codex: null };
+  ensureCodex(c1);
+  applyCodexUpdates(c1, [{ topic: "Teva", kind: "person", fact: "She grew up in the Heights." }], { ...day(1), entities });
+  applyCodexUpdates(c1, [{ topic: "Teva the healer", kind: "person", fact: "She trained under Maren." }], { ...day(2), entities });
+  const c1nodes = Object.values(c1.codex.topics);
+  check("differently-phrased facts land on one node", c1nodes.length === 1 && c1nodes[0].facts.length === 2);
+  check("node anchored to the known entity id", c1nodes[0].entityId === "teva");
+  check("alias recorded for the variant phrasing", (c1nodes[0].aliases || []).some(a => /healer/i.test(a)));
+
+  // entityId beats label: a totally different label with entityId lands on the same node
+  applyCodexUpdates(c1, [{ topic: "the woman from the chamber", kind: "person", entityId: "teva", fact: "She was rescued from the resonance chamber." }], { ...day(3), entities });
+  check("entityId beats label", Object.values(c1.codex.topics).length === 1 && c1.codex.topics[Object.keys(c1.codex.topics)[0]].facts.length === 3);
+
+  // conservative matching: similar-but-different names do NOT collapse
+  check("namesMatch: containment works", namesMatch("Teva", "Teva the healer") === true);
+  check("namesMatch: Mara does not match Maren", namesMatch("Mara", "Maren") === false);
+  check("namesMatch: short fragments guarded", namesMatch("va", "Teva") === false);
+
+  // place anchoring
+  const c2 = { codex: null }; ensureCodex(c2);
+  applyCodexUpdates(c2, [{ topic: "the Archive Hollow", kind: "place", fact: "The seal hums below hearing." }], { ...day(1), entities });
+  applyCodexUpdates(c2, [{ topic: "Archive Hollow", kind: "place", fact: "The Guardian watches every attempt." }], { ...day(2), entities });
+  check("place phrasings collapse to the location node", Object.values(c2.codex.topics).length === 1 && Object.values(c2.codex.topics)[0].entityId === "archive-hollow");
+
+  // primary (anchored) nodes hold more facts than the ordinary cap
+  const c3 = { codex: null }; ensureCodex(c3);
+  for (let i = 0; i < 30; i++) applyCodexUpdates(c3, [{ topic: "Teva", kind: "person", entityId: "teva", fact: "Fact number " + i + " about her." }], { ...day(i), entities });
+  check("primary node holds 20+ facts (raised cap)", Object.values(c3.codex.topics)[0].facts.length >= 20);
+
+  // merge tool: pre-fragmented save collapses; links rewire; second run is a no-op
+  const frag = { codex: { schemaVersion: 1, topics: {
+    "teva": { id: "teva", label: "Teva", kind: "person", entityId: "teva", facts: ["[d1] A"], links: ["archive-hollow"], aliases: [] },
+    "teva-the-healer": { id: "teva-the-healer", label: "Teva the healer", kind: "person", facts: ["[d2] B", "[d1] A"], links: [], aliases: [] },
+    "the-healer": { id: "the-healer", label: "the healer Teva", kind: "person", facts: ["[d3] C"], links: ["teva-the-healer"], aliases: [] },
+    "archive-hollow": { id: "archive-hollow", label: "Archive Hollow", kind: "place", facts: [], links: ["teva-the-healer"], aliases: [] }
+  } } };
+  const merged = mergeCodexTopics(frag);
+  const after = Object.values(frag.codex.topics);
+  check("merge collapses the fragmented person nodes", merged.length === 2 && after.filter(t => t.kind === "person").length === 1);
+  const teva = frag.codex.topics["teva"];
+  check("facts concatenated + deduped chronologically", teva && teva.facts.length === 3);
+  check("merge rewires links to the primary", frag.codex.topics["archive-hollow"].links.includes("teva"));
+  check("merge is idempotent", mergeCodexTopics(frag).length === 0);
+}
+
+// --- SNG-BATCH-6 Phase 2: reconciliation engine (SNG-022) ---
+{
+  // character pass: additive fields initialize; version gates; second run no-op
+  const oldSave = { level: 3, abilities: [], codex: { schemaVersion: 1, topics: {
+    "mara": { id: "mara", label: "Mara", kind: "person", facts: ["[d1] Keeper of water."], links: [], aliases: [] },
+    "mara-the-keeper": { id: "mara-the-keeper", label: "Mara the keeper", kind: "person", facts: ["[d2] She holds the gate codes."], links: [], aliases: [] }
+  } } };
+  const r1 = reconcile(oldSave, "character", {});
+  check("reconcile applies owed steps on first run", r1.applied.includes("codex-entity-merge") && r1.applied.includes("additive-fields"));
+  check("codex-merge healed the fragmented save", Object.keys(oldSave.codex.topics).length === 1);
+  check("additive fields initialized to safe defaults", Array.isArray(oldSave.establishedFacts) && typeof oldSave.forkChoices === "object" && Array.isArray(oldSave.precursorAccess));
+  check("nothing fabricated (defaults are EMPTY)", oldSave.establishedFacts.length === 0 && Object.keys(oldSave.forkChoices).length === 0);
+  check("player-facing merge surfaces a login note", r1.playerFacing === true && r1.notes.some(n => /codex/i.test(n)));
+  check("reconcileVersion stamped", oldSave.reconcileVersion >= 2);
+  const r2 = reconcile(oldSave, "character", {});
+  check("running reconcile twice changes nothing", r2.applied.length === 0 && r2.notes.length === 0);
+
+  // GRANTS are offered, never auto-imposed (synthetic step registry)
+  const grantee = { reconcileVersion: 0 };
+  const synthetic = [{ version: 1, id: "test-talent", playerFacing: true,
+    apply: (c) => ({ offers: [{ id: "talent", label: "Choose an innate talent", options: ["echo-sense", "stone-sense"] }] }) }];
+  const r3 = reconcile(grantee, "character", {}, synthetic);
+  check("a power GRANT is surfaced as an offer", r3.offers.length === 1 && r3.offers[0].options.length === 2);
+  check("the offer did NOT auto-apply anything", grantee.talent === undefined);
+
+  // a broken step never blocks the pass
+  const r4 = reconcile({ reconcileVersion: 0 }, "character", {}, [
+    { version: 1, id: "boom", apply: () => { throw new Error("step exploded"); } },
+    { version: 2, id: "fine", apply: (c) => { c.ok = true; return { notes: ["ok"] }; } }
+  ]);
+  check("a broken step is contained (warning, pass continues)", r4.warnings.some(w => /boom/.test(w)) && r4.applied.includes("fine"));
+
+  // content pass: poleIntensity derives to the hand-authored shape; existing untouched
+  const spectrums = JSON.parse(readFileSync(join(root, "content/packs/core/spectrums.json"), "utf8"));
+  const authored = JSON.parse(readFileSync(join(root, "content/packs/valley/locations/millbrook.json"), "utf8"));
+  const bare = { id: "test-place", spectrum: { ...authored.spectrum }, connections: ["millbrook", "nowhere-real"] };
+  const content = { spectrums, locations: { "test-place": bare, "millbrook": JSON.parse(JSON.stringify(authored)) } };
+  const authoredPI = JSON.stringify(authored.poleIntensity);
+  const summary = reconcileContent(content);
+  check("missing poleIntensity derives from spectrum", JSON.stringify(content.locations["test-place"].poleIntensity) === authoredPI);
+  check("authored poleIntensity untouched", JSON.stringify(content.locations["millbrook"].poleIntensity) === authoredPI);
+  check("dangling connection flagged, not removed", summary.warnings.some(w => /nowhere-real/.test(w)) && content.locations["test-place"].connections.includes("nowhere-real"));
+  const summary2 = reconcileContent(content);
+  check("content reconcile idempotent", summary2.applied === 0);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

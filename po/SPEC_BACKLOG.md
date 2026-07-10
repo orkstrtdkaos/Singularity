@@ -468,3 +468,41 @@ Erik 2026-07-07 (load-bearing): the recurring keystones (reframe, find-the-seam,
 - **Smoke:** every challenge offers direct/subtle/social/rule-bending/attrition/prep/knowledge paths as applicable AND accepts a novel unlisted approach, each reaching satisfying success; novelty is rewarded, not merely permitted; single-mode challenges surface as under-built.
 
 *Updated 2026-07-07 — through SNG-049 (approach-neutrality).*
+
+## SNG-050 — Gambit ARCHITECTURE: pre-structured, consequence-accumulating, plan-then-deploy
+Erik 2026-07-07: every gambit must be STRUCTURED BEFORE the player engages — not improvised turn-by-turn. The GM instantiates a pre-built gambit object, then runs the player through plan-then-deploy. This is the blueprint the API GM runs from. Consolidates the gambit definition (SNG-048), multi-mode (SNG-049), show-the-math (SNG-047), planning-assist into one authored structure.
+
+**A gambit is a pre-built OBJECT, generated at instantiation (before player sees it):**
+```
+Gambit {
+  goal            // the win condition(s)
+  directSolution? // OPTIONAL single high-tier path: one epic skill/combo that can (maybe) achieve the whole goal alone — high cost/risk, not always present, the "if you're strong enough" shortcut
+  steps[3-5] {    // the connected challenges forming the whole
+    scenario      // rich detail describing the obstacle — written to REVEAL paths & potential helpers (NPCs, terrain, tools, timing) without naming the solution
+    primaryPaths[]   // pre-established main ways to clear this step (mode-spanning per SNG-049)
+    secondaryPaths[] // pre-established fallbacks (invoked on primary failure; extend the gambit per SNG-048 "fallbacks add steps")
+    openSlot      // the always-present generative path: any novel approach evaluated on merits + rewarded (SNG-049)
+    accrual { onPass:[], onFail:[] } // BENEFITS and DRAWBACKS that ACCUMULATE across the gambit — a pass may grant an advantage that eases a later step; a fail may add a complication (alarm rising, a wound, a watcher) carried forward. State persists step-to-step.
+  }
+}
+```
+
+**Pre-structuring rules:**
+- **Primary AND secondary paths are established BEFORE engagement** — the GM authors the whole tree up front so the world is consistent (no making it up under the player). Instantiation can be at gambit-start; must complete before the player plans.
+- **Accumulating consequences are the spine:** passes and failures leave marks that carry forward — benefits stack (a scouted step eases the approach; an ally won helps later) and drawbacks stack (a raised alarm, spent energy, a suspicious guard). The gambit's difficulty is DYNAMIC, shaped by how prior steps went. This is what makes it a whole, not a checklist.
+- **Optional direct solution:** some gambits CAN be cracked by one high-tier skill/combo (a T5 capstone, a perfect combination) — high risk/cost, may fail catastrophically, not guaranteed to exist. When present, it's the "are you strong/bold enough to skip the plan?" option.
+
+**The PLAN-THEN-DEPLOY interaction (per step and per gambit):**
+1. **GM presents the scenario with revealing detail** — describes the obstacle so its texture points at paths and potential helpers (the terrain, who's around, what's to hand, the timing) WITHOUT stating the answer.
+2. **GM offers a couple of concrete combo suggestions** — "you could try [skill]+[attribute] to [effect]" / "[skill]+[skill] combo might [effect]" — 2-3 seed options spanning modes (SNG-049), each shown with what the player can KNOW of the math (difficulty tier + known modifiers + unknowns as ?, per SNG-047).
+3. **GM always names the OPEN option** — "— or something of your own" — and commits to evaluating it on merits + rewarding novelty.
+4. **The plan is TALKED OUT first** — player and GM discuss the approach, see the (knowable) odds, weigh paths, before anything rolls. Planning is a real phase, not a prompt.
+5. **THEN deployed** — resolve with maneuvers live inside; accrual updates; move to next step (or a fallback, which extends the gambit).
+
+**Engine implications:**
+- A gambit GENERATOR that builds the object from the situation (ties SNG-020 generation, SNG-048 planning-assist, SNG-031 surfacing). The GM prompt authors steps with primary/secondary/open + accrual before presenting.
+- Persistent gambit STATE (accrued benefits/drawbacks) across steps — lives on the scene/character; read-before-write each step.
+- Show-the-math (SNG-047) fires at the PLAN stage per option, not just at execution.
+- **Smoke:** a gambit exists fully (goal, optional direct path, 3-5 steps each with primary+secondary+open, accrual) before the player acts; each step is presented with revealing scenario + 2-3 costed combo seeds + the open option; the plan is discussed with visible odds before rolling; passes/fails accumulate benefits/drawbacks that change later steps; a high-tier direct solution can (sometimes) shortcut the whole thing.
+
+*Updated 2026-07-07 — through SNG-050 (gambit architecture).*

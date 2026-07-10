@@ -397,3 +397,18 @@ A full gambit run (Ent community-organizer vs a Marcher champion in a duel he co
 **Fold into:** SNG-048 (planning), gambit surfacing SNG-031, and a GM-guidance doc note on gambit beat-types (social-first, honest-misdirection, own-mechanic-reversal, character-native). No new engine — GM-craft + planning-assist.
 
 *Updated 2026-07-07 — playtest findings logged.*
+
+## Playtest findings 2026-07-07 (2) — "The Silent Door" (party puzzle-dungeon gambit)
+A 3-person puzzle-gambit (player-as-Cellaceron; GM ran the Ent + Teva + the site) at a waking Precursor vault — What Sleeps Under. Resolved by UNDERSTANDING not force: the "toll" was a deposit-to-reclaim, the "clock" was the sleeper rising to be claimed (not a threat), the sleeper a living thing a dying Precursor entrusted to the future. Won by a promise ("bring what you left into the warmth, through our own warmth"), not a withdrawal. Findings:
+
+**Confirmed SNG-038 (simultaneous party turns) is ESSENTIAL, not nice-to-have:** the player twice caught the GM running a called-for SIMULTANEOUS 3-channel read as sequential round-robin. The whole solve depended on each member reading what the OTHERS triggered in the SAME beat — partial views snapping into one picture. Round-robin literally cannot express this puzzle. Priority-bump SNG-038; the collect-then-resolve model + one-shared-beat rendering is required for co-op puzzles, not just combat.
+
+**New finding — puzzle-gambits RESIST the gambit frame:** puzzles FEEL stepwise, so the GM kept collapsing "declare plan → resolve with maneuvers inside" into turn-by-turn "now what?" prompting. The player flagged it directly ("this has turned into turn-by-turn instead of a gambit"). GM RULE: even puzzle-gambits want the whole approach committed then swept; hold the plan-level view harder against the puzzle's stepwise pull. Add to SNG-048 planning-assist: for puzzles, explicitly re-offer "commit the full plan" once the party has enough info, don't drip beats.
+
+**New finding — "question the clock" is a peak player move:** the player asked "why does the countdown matter if it's locked in the vault?" — which inverted the whole scene (the clock was benign). GM guidance: when a player interrogates a pressure assumption, REWARD it — let the assumption be genuinely wrong sometimes. Not every clock is a threat; a site that punishes force but rewards understanding is a richer antagonist than a timer. Ties the non-adversarial-site design (the sleeper).
+
+**New finding — the cost must be REAL even in a non-combat win:** the door refused tolls that cost nothing; the winning claim offered "time, money, plans, as needed." A caretaker's true price = your future bent around another's need. Design: withdrawal/claim gambits should demand an ongoing responsibility, not a one-time payment — the honest version of a toll.
+
+**Fold into:** SNG-038 (priority up), SNG-048 (puzzle planning-assist rule), and a GM beat-types note (question-the-clock, non-adversarial-site, cost-as-responsibility) alongside the Redline patterns.
+
+*Updated 2026-07-07 — second playtest logged.*

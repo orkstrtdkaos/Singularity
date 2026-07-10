@@ -412,3 +412,12 @@ A 3-person puzzle-gambit (player-as-Cellaceron; GM ran the Ent + Teva + the site
 **Fold into:** SNG-038 (priority up), SNG-048 (puzzle planning-assist rule), and a GM beat-types note (question-the-clock, non-adversarial-site, cost-as-responsibility) alongside the Redline patterns.
 
 *Updated 2026-07-07 — second playtest logged.*
+
+## SNG-018 note — romance-system finding (from a test run)
+Playtested a romance beat (Cellaceron × Teva). Findings for the romance spec:
+- **Romance lands when rooted in shared history**, not stat-attraction — the scene worked because the Silent Door gave them a real thing gone-through-together; the system should gate/strengthen romance on accumulated shared events (ties SNG-037 cross-char awareness + the chronicle).
+- **The charged beat is the CHOOSING**, not mechanics — the peak is the mutual yes / closing distance; write to that and FADE there. Keep the camera on wanting-and-almost.
+- **Register: warm, emotionally-real, fade-at-the-yes.** No explicit content generated; the tension carries it.
+- **Age/consent gate is REQUIRED content-safety, not flavor:** NPC records must carry a canonical adult age for any romance eligibility; an 'aged-up in this scene' wrapper is NOT acceptable — fix the character record instead (did this for Teva: authored at 21). The romance system must hard-gate on canonical adult age and never romance a minor-canon character regardless of framing.
+
+*Updated 2026-07-07.*

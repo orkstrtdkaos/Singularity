@@ -4,6 +4,10 @@
 
 **SNG-BATCH-5 complete_pending_review (2026-07-10, CCode):** soft class cost + branch forks shipped v1.6.9 (442 checks, verified live). Results: po/results/20260710_SNG-BATCH-5.md. Phase 3 feel-checks OPEN as Erik preview-legs (affinity receipt / surge dial / Waystaff waking + the two new: cross-class cost, fork choice). Only Aevi closes.
 
+**ACTIVE BUILD — SNG-BATCH-6 (Foundation) [pointed 2026-07-10, Aevi PO]:** SNG-019 (Codex entity-resolution) → SNG-022 (Reconciliation engine), in that order. Both specs complete at po/SPEC_BACKLOG.md (`## SNG-019`, `## SNG-022`); engine-only, no content owed; the dependency-spine linchpins that unblock SNG-020/021/024/025. Preview-testing protocol stands (preview + one-line Erik test per phase). **Fold the 2 post-BATCH-5 test reds into this pass, but NAME them + root-cause at close** (suspected origin: the caching restructure that touched prompt assembly) — do not wave-fold into a green count. Suite + parse_probe green per phase. Only Aevi closes.
+
+**OPEN LOOPS (not CCode build work):** (a) BATCH-5 awaits Erik's 3 preview-legs then Aevi close. (b) SNG-016 (12-axis skill breadth) is GATED on an Aevi design proposal to Erik — no build until the axis map is agreed.
+
 **NEXT BUILD (2026-07-06):**
 1. **Finish the ratified-but-unbuilt tradeoffs** (fell through BATCH-4's frozen spec): soft class-cost 2x secondary (content READY: skill_capacity.json crossClass) + branch forks (mechanic specced; needs fork content + skilltree wiring). Tier-slot capacity already shipped (BATCH-2). Small, mostly content-ready — quickest win.
 2. **SNG-016 — 12-axis skill breadth:** Aevi OWES Erik a design proposal FIRST (which axes get their own system vs share; what a death/life craft, mind/body discipline, peace/violence path look like; how it recolors the skill graph + origins + location vectors). No authoring until the axis map is agreed. This is the big design direction and it gates a lot.

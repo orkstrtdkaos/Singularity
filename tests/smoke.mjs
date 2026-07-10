@@ -17,7 +17,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/p
 import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
-import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics } from "../engine/codex.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
@@ -1235,6 +1235,56 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("dangling connection flagged, not removed", summary.warnings.some(w => /nowhere-real/.test(w)) && content.locations["test-place"].connections.includes("nowhere-real"));
   const summary2 = reconcileContent(content);
   check("content reconcile idempotent", summary2.applied === 0);
+}
+
+// --- SNG-019 addendum (Erik preview feedback): player allocation + suggestions ---
+{
+  const mk = () => ({ codex: { schemaVersion: 2, topics: {
+    "teva": { id: "teva", label: "Teva", kind: "person", entityId: "teva", facts: ["[d1] Grew up in the Heights."], links: [], aliases: ["Teva the healer"] },
+    "the-healer-of-the-chamber": { id: "the-healer-of-the-chamber", label: "the healer of the chamber", kind: "person", facts: ["[d3] She knows the old cadence.", "[d2] Rescued from the chamber."], links: ["archive-hollow"], aliases: [] },
+    "the-rescue": { id: "the-rescue", label: "The rescue from the chamber", kind: "event", facts: ["[d2] The seal opened at dawn."], links: ["the-healer-of-the-chamber"], aliases: [] },
+    "millbrook-mill": { id: "millbrook-mill", label: "The old mill", kind: "place", facts: ["[d4] Grain comes in from the terraces."], links: [], aliases: [] }
+  } } });
+
+  // suggestions: shared alias/label token ("healer") surfaces the pair; unrelated stays out
+  const c = mk();
+  const sug = suggestMerges(c);
+  check("suggestion surfaces the shared-token pair", sug.some(x => (x.aId === "teva" && x.bId === "the-healer-of-the-chamber") || (x.bId === "teva" && x.aId === "the-healer-of-the-chamber")));
+  check("unrelated node not suggested against teva", !sug.some(x => (x.aId === "millbrook-mill" && x.bId === "teva") || (x.bId === "millbrook-mill" && x.aId === "teva")));
+
+  // NOT-THE-SAME verdict: excluded from suggestions AND from auto-merge forever
+  const c2 = mk();
+  markNotSame(c2, "teva", "the-healer-of-the-chamber");
+  check("not-same pair excluded from suggestions", !suggestMerges(c2).some(x => (x.aId === "teva" && x.bId === "the-healer-of-the-chamber") || (x.bId === "teva" && x.aId === "the-healer-of-the-chamber")));
+  // force a would-be auto-merge situation: give the fragment a containment label
+  c2.codex.topics["the-healer-of-the-chamber"].label = "Teva of the chamber";
+  check("not-same verdict blocks auto-merge too", mergeCodexTopics(c2).length === 0 && Object.keys(c2.codex.topics).length === 4);
+
+  // mergeInto: player folds ANY entry into ANY other (event into person allowed — their call)
+  const c3 = mk();
+  const target = mergeInto(c3, "the-rescue", "teva");
+  check("mergeInto folds across kinds on player judgment", target && target.id === "teva" && !c3.codex.topics["the-rescue"]);
+  check("folded label becomes an alias", target.aliases.some(a => /rescue/i.test(a)));
+  check("target kind wins", target.kind === "person");
+  // links elsewhere rewire to the primary
+  check("inbound links rewired to primary", !Object.values(c3.codex.topics).some(t => t.links.includes("the-rescue")));
+
+  // facts re-sort chronologically after a merge
+  const c4 = mk();
+  mergeInto(c4, "the-healer-of-the-chamber", "teva");
+  const days = c4.codex.topics["teva"].facts.map(f => Number(/\[d(\d+)\]/.exec(f)[1]));
+  check("merged facts are chronological", days.every((d, i) => i === 0 || d >= days[i - 1]));
+
+  // cascade: a manual merge's new alias lets the standing auto-tidy collapse a third node
+  const c5 = mk();
+  c5.codex.topics["the-healer-again"] = { id: "the-healer-again", label: "the healer of the chamber, again", kind: "person", facts: ["[d5] Still healing."], links: [], aliases: [] };
+  mergeInto(c5, "the-healer-of-the-chamber", "teva"); // teva gains alias "the healer of the chamber"
+  const cascaded = mergeCodexTopics(c5);
+  check("manual merge cascades the auto-tidy", cascaded.length >= 1 && !c5.codex.topics["the-healer-again"]);
+
+  // mergeInto guards: missing ids / self-merge are no-ops
+  const c6 = mk();
+  check("mergeInto rejects self and missing ids", mergeInto(c6, "teva", "teva") === null && mergeInto(c6, "ghost", "teva") === null && Object.keys(c6.codex.topics).length === 4);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

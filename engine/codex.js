@@ -129,10 +129,56 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
   return touched;
 }
 
+/** Absorb topic s into primary p: facts concatenate (deduped, re-sorted chronological),
+ *  links + aliases union, inbound links elsewhere rewire to p, s is deleted. */
+function absorb(topics, p, s) {
+  const bare = f => f.slice(f.indexOf("]") + 2);
+  for (const f of s.facts) if (!p.facts.some(x => bare(x) === bare(f))) p.facts.push(f);
+  const dayOf = f => { const m = /^\[d(\d+)\]/.exec(f); return m ? Number(m[1]) : 0; };
+  p.facts.sort((x, y) => dayOf(x) - dayOf(y)); // stable: same-day facts keep insertion order
+  p.facts = p.facts.slice(-(p.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic));
+  for (const l of s.links) if (l !== p.id && !p.links.includes(l)) p.links.push(l);
+  p.links = p.links.slice(-CAPS.linksPerTopic);
+  recordAlias(p, s.label);
+  for (const al of s.aliases || []) recordAlias(p, al);
+  if (!p.entityId && s.entityId) p.entityId = s.entityId;
+  if (s.createdDay != null) p.createdDay = Math.min(p.createdDay ?? s.createdDay, s.createdDay);
+  if (s.updatedDay != null) p.updatedDay = Math.max(p.updatedDay ?? 0, s.updatedDay);
+  delete topics[s.id];
+  for (const t of Object.values(topics)) {
+    t.links = t.links.map(l => (l === s.id ? p.id : l)).filter((l, k, arr) => l !== t.id && arr.indexOf(l) === k);
+  }
+}
+
+const pairKey = (aId, bId) => [aId, bId].sort().join("::");
+
+/** Player verdict: these two are NOT the same thing. Auto-merge and suggestions
+ *  respect this forever (until one of the ids disappears). */
+export function markNotSame(character, aId, bId) {
+  ensureCodex(character);
+  const list = character.codex.notSame || (character.codex.notSame = []);
+  const key = pairKey(aId, bId);
+  if (!list.includes(key)) list.push(key);
+}
+function isNotSame(codex, aId, bId) {
+  return (codex.notSame || []).includes(pairKey(aId, bId));
+}
+
+/** SNG-019 player allocation: merge ANY topic into ANY other — the player's judgment
+ *  overrides every heuristic. Source's label becomes an alias of the target; target's
+ *  kind wins. Returns the target node, or null if either id is missing. */
+export function mergeInto(character, sourceId, targetId) {
+  ensureCodex(character);
+  const topics = character.codex.topics;
+  const s = topics[sourceId], p = topics[targetId];
+  if (!s || !p || sourceId === targetId) return null;
+  absorb(topics, p, s);
+  return p;
+}
+
 /** SNG-019 merge tool: collapse duplicate topics into their primary node — high-confidence
- *  only (same entityId, or matching label/alias with compatible kind). Facts concatenate
- *  (deduped, chronological), links + aliases union, links elsewhere rewire to the primary.
- *  Idempotent; safe on unfragmented saves. Returns [{into, absorbed}] for reporting. */
+ *  only (same entityId, or matching label/alias with compatible kind). Respects the
+ *  player's not-same verdicts. Idempotent. Returns [{into, absorbed}] for reporting. */
 export function mergeCodexTopics(character) {
   ensureCodex(character);
   const topics = character.codex.topics;
@@ -149,6 +195,7 @@ export function mergeCodexTopics(character) {
     for (let i = 0; i < list.length; i++) {
       for (let j = i + 1; j < list.length; j++) {
         const a = list[i], b = list[j];
+        if (isNotSame(character.codex, a.id, b.id)) continue;
         const sameEntity = a.entityId && b.entityId && a.entityId === b.entityId;
         const nameHit = (namesMatch(a.label, b.label) ||
           (a.aliases || []).some(x => namesMatch(x, b.label)) ||
@@ -156,20 +203,7 @@ export function mergeCodexTopics(character) {
         if (!sameEntity && !nameHit) continue;
         // primary: anchored > higher-rank kind > more facts
         const [p, s] = priOf(a) >= priOf(b) ? [a, b] : [b, a];
-        const bare = f => f.slice(f.indexOf("]") + 2);
-        for (const f of s.facts) if (!p.facts.some(x => bare(x) === bare(f))) p.facts.push(f);
-        p.facts = p.facts.slice(-(p.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic));
-        for (const l of s.links) if (l !== p.id && !p.links.includes(l)) p.links.push(l);
-        p.links = p.links.slice(-CAPS.linksPerTopic);
-        recordAlias(p, s.label);
-        for (const al of s.aliases || []) recordAlias(p, al);
-        if (!p.entityId && s.entityId) p.entityId = s.entityId;
-        if (s.createdDay != null) p.createdDay = Math.min(p.createdDay ?? s.createdDay, s.createdDay);
-        if (s.updatedDay != null) p.updatedDay = Math.max(p.updatedDay ?? 0, s.updatedDay);
-        delete topics[s.id];
-        for (const t of Object.values(topics)) {
-          t.links = t.links.map(l => (l === s.id ? p.id : l)).filter((l, k, arr) => l !== t.id && arr.indexOf(l) === k);
-        }
+        absorb(topics, p, s);
         merged.push({ into: p.label, absorbed: s.label });
         changed = true;
         break outer;
@@ -177,6 +211,44 @@ export function mergeCodexTopics(character) {
     }
   }
   return merged;
+}
+
+/** SNG-019 suggestions: medium-confidence duplicate candidates for the PLAYER to judge —
+ *  looser than auto-merge (shared substantial name-token via label/alias, mutual links,
+ *  or link overlap), same-kind-compatible, not-same verdicts excluded. Sorted by score. */
+export function suggestMerges(character, { max = 6 } = {}) {
+  ensureCodex(character);
+  const topics = Object.values(character.codex.topics);
+  const STOP = new Set(["the", "a", "an", "of", "in", "at", "on", "from", "with", "and", "for", "to",
+    "woman", "man", "girl", "boy", "person", "one", "who", "that", "this", "old", "young", "new"]);
+  const tokensOf = t => {
+    const out = new Set();
+    for (const s of [t.label, ...(t.aliases || [])]) {
+      for (const w of normNameTokens(s)) if (w.length >= 4 && !STOP.has(w)) out.add(w);
+    }
+    return out;
+  };
+  const compatible = (a, b) => a.kind === b.kind || a.kind === "lore" || b.kind === "lore";
+  const toks = new Map(topics.map(t => [t.id, tokensOf(t)]));
+  const out = [];
+  for (let i = 0; i < topics.length; i++) {
+    for (let j = i + 1; j < topics.length; j++) {
+      const a = topics[i], b = topics[j];
+      if (!compatible(a, b)) continue;
+      if (isNotSame(character.codex, a.id, b.id)) continue;
+      let score = 0;
+      const shared = [...toks.get(a.id)].filter(w => toks.get(b.id).has(w));
+      score += shared.length * 2;
+      if (a.links.includes(b.id) || b.links.includes(a.id)) score += 2;
+      score += a.links.filter(l => b.links.includes(l)).length;
+      if (score >= 2) out.push({ aId: a.id, bId: b.id, a: a.label, b: b.label, score, shared });
+    }
+  }
+  return out.sort((x, y) => y.score - x.score).slice(0, max);
+}
+
+function normNameTokens(s) {
+  return String(s || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").split(/\s+/).filter(Boolean);
 }
 
 /** Topics relevant right now: linked to this location, tied to active quests,

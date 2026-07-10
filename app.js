@@ -19,7 +19,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/pl
 import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
-import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex } from "./engine/codex.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
@@ -33,7 +33,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.1";
+const APP_VERSION = "1.7.2";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -192,6 +192,7 @@ function migrate(c) {
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
   ensureCodex(c);
+  mergeCodexTopics(c); // standing high-confidence tidy — idempotent; player's not-same verdicts respected; manual merges cascade via their new aliases
   if (!c.customAbilities) c.customAbilities = {};
   ensureBonds(c);
   ensurePractice(c);
@@ -1411,9 +1412,10 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
 
 // ---------- codex: the character's knowledge graph ----------
 
-function renderCodexScreen(query = "", openTopicId = null) {
+function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   const results = searchCodex(character, query);
   const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
+  const suggestions = !open ? suggestMerges(character) : [];
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Codex — what ${esc(character.name)} knows</h2>
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
@@ -1422,13 +1424,30 @@ function renderCodexScreen(query = "", openTopicId = null) {
         <div class="codex-kind">${esc(open.kind)}${open.entityId ? ` <span class="codex-anchor" title="anchored to a known entity">◈ ${esc(open.entityId)}</span>` : ""}</div>
         <h3 class="codex-title">${esc(open.label)}</h3>
         ${(open.aliases || []).length ? `<div class="codex-aliases">also called: ${open.aliases.map(esc).join(" · ")}</div>` : ""}
+        ${mergeMode ? (() => {
+          // SNG-019 allocation: fold THIS entry into the one it really belongs to
+          const others = Object.values(character.codex.topics).filter(t => t.id !== open.id);
+          const sug = suggestMerges(character, { max: 12 }).filter(s => s.aId === open.id || s.bId === open.id)
+            .map(s => (s.aId === open.id ? s.bId : s.aId));
+          const rank = t => (sug.includes(t.id) ? 0 : t.kind === open.kind ? 1 : 2);
+          const sorted = others.sort((a, b) => rank(a) - rank(b) || b.facts.length - a.facts.length);
+          return `<div class="codex-merge-pick"><div class="hint">Everything here (facts, links) moves onto the entry you pick; "${esc(open.label)}" becomes one of its names. Permanent.</div>
+            ${sorted.map(t => `<button class="opt codex-merge-target ${sug.includes(t.id) ? "suggested" : ""}" data-mergetarget="${esc(t.id)}">
+              ${sug.includes(t.id) ? "◈ " : ""}${esc(t.label)} <span class="cost">${esc(t.kind)} · ${t.facts.length} fact${t.facts.length === 1 ? "" : "s"}</span></button>`).join("")}
+            <button class="btn secondary" id="codex-merge-cancel" style="margin-top:8px">Cancel</button></div>`;
+        })() : `
         ${open.facts.length ? open.facts.map(f => `<div class="codex-fact">${esc(f)}</div>`).join("") : "<div class='insight'>known of, little learned yet</div>"}
         ${open.links.length ? `<div class="codex-links">linked: ${open.links.map(l => {
           const t = character.codex.topics[l];
           return t ? `<button class="codex-link" data-topic="${esc(l)}">${esc(t.label)}</button>` : `<span class="codex-link dead">${esc(l)}</span>`;
         }).join(" ")}</div>` : ""}
+        <button class="opt" id="codex-merge-mode" style="margin-top:10px">⇆ This is the same as another entry…</button>`}
         <button class="btn secondary" id="codex-close-topic" style="margin-top:12px">All topics</button>
       </div>` : `
+      ${suggestions.length ? `<div class="codex-suggestions"><div class="codex-group-title">These look like the same thing — your call</div>
+        ${suggestions.map((s, i) => `<div class="codex-sug-row"><span class="codex-sug-pair">«${esc(s.a)}» ↔ «${esc(s.b)}»</span>
+          <button class="opt codex-sug-btn" data-sugmerge="${i}">Merge</button>
+          <button class="opt codex-sug-btn dim" data-sugnot="${i}">Not the same</button></div>`).join("")}</div>` : ""}
       <div class="codex-list">
         ${results.length ? (() => {
           // SNG-019: group by kind — primary entities first, facts nested under their node
@@ -1461,6 +1480,40 @@ function renderCodexScreen(query = "", openTopicId = null) {
   for (const b of app.querySelectorAll("[data-topic]")) b.onclick = () => renderCodexScreen(query, b.dataset.topic);
   const closeT = document.getElementById("codex-close-topic");
   if (closeT) closeT.onclick = () => renderCodexScreen(query, null);
+  // SNG-019 allocation handlers: merge mode, target pick, suggestion verdicts
+  const mm = document.getElementById("codex-merge-mode");
+  if (mm) mm.onclick = () => renderCodexScreen(query, openTopicId, true);
+  const mc = document.getElementById("codex-merge-cancel");
+  if (mc) mc.onclick = () => renderCodexScreen(query, openTopicId, false);
+  for (const b of app.querySelectorAll("[data-mergetarget]")) b.onclick = () => {
+    const target = character.codex.topics[b.dataset.mergetarget];
+    if (!target || !open) return;
+    if (!confirm(`Fold "${open.label}" into "${target.label}"? Its facts and links move there, and "${open.label}" becomes one of its names. This can't be undone.`)) return;
+    mergeInto(character, open.id, target.id);
+    mergeCodexTopics(character); // the new alias may cascade more duplicates together
+    saveCharacter(character);
+    renderCodexScreen(query, target.id);
+  };
+  for (const b of app.querySelectorAll("[data-sugmerge]")) b.onclick = () => {
+    const s = suggestions[parseInt(b.dataset.sugmerge)];
+    if (!s) return;
+    const A = character.codex.topics[s.aId], B = character.codex.topics[s.bId];
+    if (!A || !B) return;
+    // primary: anchored entity first, then the fuller node
+    const [into, from] = (B.entityId && !A.entityId) || (!A.entityId === !B.entityId && B.facts.length > A.facts.length) ? [B, A] : [A, B];
+    if (!confirm(`Merge "${from.label}" into "${into.label}"?`)) return;
+    mergeInto(character, from.id, into.id);
+    mergeCodexTopics(character);
+    saveCharacter(character);
+    renderCodexScreen(query, null);
+  };
+  for (const b of app.querySelectorAll("[data-sugnot]")) b.onclick = () => {
+    const s = suggestions[parseInt(b.dataset.sugnot)];
+    if (!s) return;
+    markNotSame(character, s.aId, s.bId); // remembered — never suggested or auto-merged again
+    saveCharacter(character);
+    renderCodexScreen(query, null);
+  };
   document.getElementById("codex-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 

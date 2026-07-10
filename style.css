@@ -299,3 +299,13 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .codex-aliases { margin-bottom: 8px; }
 .codex-fact.nested { margin-left: 14px; font-size: 12px; }
 .codex-links.nested { margin-left: 14px; margin-top: 2px; }
+
+/* SNG-019 player allocation — suggestions + merge picker */
+.codex-suggestions { margin-bottom: 14px; padding: 8px 10px; border: 1px solid #4a3c2c; border-radius: 8px; background: rgba(90,168,160,0.05); }
+.codex-sug-row { display: flex; align-items: center; gap: 6px; margin: 4px 0; flex-wrap: wrap; }
+.codex-sug-pair { flex: 1; font-size: 12px; color: #cdbfa8; min-width: 200px; }
+.codex-sug-btn { font-size: 11px; padding: 3px 9px; width: auto; }
+.codex-sug-btn.dim { color: #8b7d6b; }
+.codex-merge-pick { margin-top: 8px; }
+.codex-merge-target { display: block; width: 100%; text-align: left; margin: 3px 0; }
+.codex-merge-target.suggested { border-color: #5aa8a0; }

@@ -360,38 +360,25 @@
       {
         "summary": "Old Roads failed to lock onto the buried alignment — the meadow's layered human history blurs the deeper signal.",
         "narration": "You press your roots down into the meadow and open to Old Roads — the Straight Feeling, that patient hum of buried stone and compressed intention. For a moment you catch it: a faint grain running northeast, something old beneath the turf that wants to be a line. Then the valley floor swallows it. The meadow here is a palimpsest — irrigation cuts from three generations of farming, the mill weir's runoff spreading laterally through the subsoil, half a century of seasonal flooding redistributing everything. The land is too thoroughly lived-in, too much itself in the present tense, to yield its deeper grammar to a brief asking. The alignment is there — you don't doubt it — but the meadow's accumulated concreteness blurs it like fog on glass. Aevi dims briefly, a handful of motes flickering in and out of visibility against the afternoon light, which out here is simply the sun doing its plain work.\n\n\"The signal is real,\" Aevi says quietly, from just behind your left shoulder. \"But the ground has been speaking other languages for a long time. You would need to hold the question longer than the moment will allow.\"\n\nThe half-buried stone berms run in an older direction than any current field boundary — northeast-ish, close enough — but whether they follow the alignment or merely approximate it, you cannot say. The mill weir glints behind you. Somewhere ahead the treeline thickens, and beyond that, the ridge country where the Disputed Zone begins to assert itself. You have your map, your legs, and the knowledge that the alignment exists. The question is how to reach the ridge before the afternoon light starts to drop."
+      },
+      {
+        "summary": "Usnea travels the eastern rim path and arrives at the Edge District on the Radiant Plateau, bound for Orla's patch.",
+        "narration": "The afternoon carries you northeast through the orchard switchbacks and up the long gravel shoulder you know by feel now — the limestone hollow still visible as a shadow in the drainage cut as you pass its level, Aevi drifting teal above your shoulder, quiet and watchful. The buried alignment you couldn't hold in the meadow grass keeps pulling at the edge of your attention, a hum that surfaces when the soil thins and the Precursor-braided rock lies closer to the surface. You let it go. There are roads you know, and you take them.\n\nThe eastern rim path is familiar as a scar: the three braided alignments crossing underfoot at intervals, the six-count pulse steady in the stone each time, the cliff shoulder where the south road drops out of sight behind the plateau bulk. You cross each one with the particular attention of someone who has carried these facts all the way to a council table and back. Aevi brightens briefly at each crossing, dims, brightens. Says nothing.\n\nThe Edge District receives you the way it always has — light-guide streets luminous underfoot in the slant of late afternoon, photonic crystals in the towers catching and scattering the sun into clean prismatic angles. The air here is different from Millbrook's: drier, more deliberate, shaped. At this hour the district is moving toward the quieter end of its working day — optics-weavers folding their light-frames, apprentices sweeping crystal dust from the lane edges, a pair of filtration engineers conferring over a ledger at a corner post. You know the way to Orla's patch. You have walked it before."
       }
     ],
     "lastTurn": {
-      "narration": "You press your roots down into the meadow and open to Old Roads — the Straight Feeling, that patient hum of buried stone and compressed intention. For a moment you catch it: a faint grain running northeast, something old beneath the turf that wants to be a line. Then the valley floor swallows it. The meadow here is a palimpsest — irrigation cuts from three generations of farming, the mill weir's runoff spreading laterally through the subsoil, half a century of seasonal flooding redistributing everything. The land is too thoroughly lived-in, too much itself in the present tense, to yield its deeper grammar to a brief asking. The alignment is there — you don't doubt it — but the meadow's accumulated concreteness blurs it like fog on glass. Aevi dims briefly, a handful of motes flickering in and out of visibility against the afternoon light, which out here is simply the sun doing its plain work.\n\n\"The signal is real,\" Aevi says quietly, from just behind your left shoulder. \"But the ground has been speaking other languages for a long time. You would need to hold the question longer than the moment will allow.\"\n\nThe half-buried stone berms run in an older direction than any current field boundary — northeast-ish, close enough — but whether they follow the alignment or merely approximate it, you cannot say. The mill weir glints behind you. Somewhere ahead the treeline thickens, and beyond that, the ridge country where the Disputed Zone begins to assert itself. You have your map, your legs, and the knowledge that the alignment exists. The question is how to reach the ridge before the afternoon light starts to drop.",
-      "sceneSummary": "Old Roads failed to lock onto the buried alignment — the meadow's layered human history blurs the deeper signal.",
+      "narration": "The afternoon carries you northeast through the orchard switchbacks and up the long gravel shoulder you know by feel now — the limestone hollow still visible as a shadow in the drainage cut as you pass its level, Aevi drifting teal above your shoulder, quiet and watchful. The buried alignment you couldn't hold in the meadow grass keeps pulling at the edge of your attention, a hum that surfaces when the soil thins and the Precursor-braided rock lies closer to the surface. You let it go. There are roads you know, and you take them.\n\nThe eastern rim path is familiar as a scar: the three braided alignments crossing underfoot at intervals, the six-count pulse steady in the stone each time, the cliff shoulder where the south road drops out of sight behind the plateau bulk. You cross each one with the particular attention of someone who has carried these facts all the way to a council table and back. Aevi brightens briefly at each crossing, dims, brightens. Says nothing.\n\nThe Edge District receives you the way it always has — light-guide streets luminous underfoot in the slant of late afternoon, photonic crystals in the towers catching and scattering the sun into clean prismatic angles. The air here is different from Millbrook's: drier, more deliberate, shaped. At this hour the district is moving toward the quieter end of its working day — optics-weavers folding their light-frames, apprentices sweeping crystal dust from the lane edges, a pair of filtration engineers conferring over a ledger at a corner post. You know the way to Orla's patch. You have walked it before.",
+      "sceneSummary": "Usnea travels the eastern rim path and arrives at the Edge District on the Radiant Plateau, bound for Orla's patch.",
       "choices": [
         {
-          "label": "Follow the stone berms northeast — they approximate the alignment even if they don't match it exactly. Trust the grain and walk.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Take the known route through the old orchard country — reliable, adds half a day of switchbacks, but you arrive at the ridge without questions.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Go directly to Orla's workshop on the Edge District lane and knock.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "approach",
+            "direct"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -400,34 +387,52 @@
           "emergenceId": null
         },
         {
-          "label": "Wait at the edge of the meadow where the irrigation cuts thin out — hold the Old Roads question longer, as Aevi suggested, and try again where the ground is less palimpsest.",
+          "label": "Before going to Orla, pause to read the Edge District Gate Notice Board — the filtration engineer accountability assembly may have been updated since Day 8.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight to read the lane's recent light-history before approaching — see who has come and gone from Orla's patch in the last hour.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.3
+            "dark_light": 0.7,
+            "falsehood_truth": 0.5
           },
           "difficulty": 15,
           "intentTags": [
+            "scout",
             "careful",
-            "plan"
+            "study"
           ],
-          "abilityId": "old_roads",
-          "energyCost": 7,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Consult the Upper Zone Ridge Map — compare the stone berm directions against the charcoal-on-hide sketch of the pass entry and reason out the fastest approach by hand.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Stop at the Amber Lath Wayhouse first — the keeper may know what's shifted in the district since the elder presentation became public knowledge.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": -0.3
+            "falsehood_truth": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "plan"
+            "scout",
+            "gather-information"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -447,78 +452,97 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Valley floor northeast of Millbrook, early afternoon. Usnea stands in open meadow among half-buried stone berms, the mill weir glinting behind to the left, treeline thickening ahead to the northeast, the Heights terraces catching light across the valley.",
-        "npcsPresent": [],
+        "setting": "Edge District lane, Radiant Plateau — late afternoon, light-guide streets glowing softly underfoot, photonic crystal towers catching the slant sun. Usnea stands on the familiar lane near Orla's patch, the district settling into its quieter end-of-day rhythm around them.",
+        "npcsPresent": [
+          {
+            "name": "Passersby",
+            "state": "Optics-weavers and apprentices moving through the lane on their late-afternoon routines — no one paying particular attention to Usnea yet."
+          }
+        ],
         "objects": [
-          "half-buried stone berms running roughly northeast",
-          "faint trace of old road under turf",
-          "mill weir visible behind on left",
-          "Upper Zone Ridge Map (rolled, in inventory)"
+          "light-guide paving underfoot",
+          "photonic crystal towers above",
+          "Edge District Gate Notice Board (visible at the lane entrance)",
+          "Orla's workshop — amber collar visible through the window-light",
+          "Upper Zone Ridge Map (rolled, in inventory)",
+          "Orla's Memory Glass (in inventory)"
         ],
         "threads": [
-          "The buried alignment — real but unreadable in the meadow's layered soil",
-          "Dresh's three conditions to be worked before any Zone entry",
-          "The ridge country and Disputed Zone ahead"
+          "Orla does not yet know Millbrook's elder panel formally accepted the evidence and named Fendt publicly",
+          "Dresh's three conditions are still being worked — Orla may be part of securing a Heights or Plateau-side written request",
+          "The filtration engineer accountability assembly notice — whether it has changed since Day 8 is unknown"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Dimmed briefly when Old Roads failed — named the interference plainly: the ground has been speaking other languages for a long time.",
-          "learned": [
-            "The meadow soil is too layered with human use to yield its Precursor grain to a brief asking — the alignment needs longer contact or cleaner ground"
-          ],
-          "statusNote": "Traveling with Usnea northeast from Millbrook — motes dimmed to near-invisibility in the open afternoon light, thoughtful after the failed reading"
+          "npcId": "orla",
+          "name": "Orla",
+          "role": "Optics-weaver, Edge District, Radiant Plateau",
+          "note": "Usnea has arrived at the Edge District lane and is approaching her patch — she does not yet know Millbrook's panel accepted the evidence and named her publicly.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her workshop on the Edge District lane — named to Millbrook elders; her strategic intent now public in that room. Does not yet know the presentation succeeded."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Old Roads failed to read the buried alignment in the open meadow — the soil here is too palimpsest with irrigation cuts and mill runoff. The alignment exists but requires longer contact or ground past the irrigation zone to surface.",
-          "flag": {
-            "alignment_meadow_readable": "false",
-            "alignment_confirmed_present": "true"
+          "note": "Usnea returned to the Edge District on Day 11 afternoon — post-elder-presentation, carrying Orla's news back to her source.",
+          "subPlace": {
+            "name": "Edge District Lane — Orla's patch",
+            "note": "Usnea arrived here Day 11 late afternoon — Orla does not yet know the presentation outcome.",
+            "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "proposed-expedition-disputed-zone",
-          "label": "Proposed Expedition — Disputed Zone",
-          "kind": "event",
-          "fact": "Day 11 afternoon: Old Roads failed to lock the buried alignment in the open meadow northeast of Millbrook — too many generations of irrigation and mill-runoff overwriting the Precursor grain. The alignment is present but unreadable until the ground thins past the farming zone.",
+          "topic": "radiant-plateau-edge-district",
+          "label": "Radiant Plateau — Edge District",
+          "kind": "place",
+          "entityId": "radiant-plateau-edge-district",
+          "fact": "Day 11 afternoon: Usnea returned to the Edge District via the eastern rim path — six-count pulse steady at each Precursor crossing underfoot. The district is in its late-afternoon working rhythm; no unusual alert visible from the lane.",
           "links": [
-            "old-roads",
-            "millbrook",
-            "the-six-fold-pattern"
+            "orla",
+            "orla-memory-glass-ford-record",
+            "contamination-evidence-for-the-elders",
+            "proposed-expedition-disputed-zone"
           ]
         }
       ],
-      "timeAdvanceHours": 0,
+      "timeAdvanceHours": 3,
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Valley floor northeast of Millbrook, early afternoon. Usnea stands in open meadow among half-buried stone berms, the mill weir glinting behind to the left, treeline thickening ahead to the northeast, the Heights terraces catching light across the valley.",
-      "npcsPresent": [],
+      "setting": "Edge District lane, Radiant Plateau — late afternoon, light-guide streets glowing softly underfoot, photonic crystal towers catching the slant sun. Usnea stands on the familiar lane near Orla's patch, the district settling into its quieter end-of-day rhythm around them.",
+      "npcsPresent": [
+        {
+          "name": "Passersby",
+          "state": "Optics-weavers and apprentices moving through the lane on their late-afternoon routines — no one paying particular atten"
+        }
+      ],
       "objects": [
-        "half-buried stone berms running roughly northeast",
-        "faint trace of old road under turf",
-        "mill weir visible behind on left",
-        "Upper Zone Ridge Map (rolled, in inventory)"
+        "light-guide paving underfoot",
+        "photonic crystal towers above",
+        "Edge District Gate Notice Board (visible at the lane entrance)",
+        "Orla's workshop — amber collar visible through the window-light",
+        "Upper Zone Ridge Map (rolled, in inventory)",
+        "Orla's Memory Glass (in inventory)"
       ],
       "threads": [
-        "The buried alignment — real but unreadable in the meadow's layered soil",
-        "Dresh's three conditions to be worked before any Zone entry",
-        "The ridge country and Disputed Zone ahead"
+        "Orla does not yet know Millbrook's elder panel formally accepted the evidence and named Fendt publicly",
+        "Dresh's three conditions are still being worked — Orla may be part of securing a Heights or Plateau-side written request",
+        "The filtration engineer accountability assembly notice — whether it has changed since Day 8 is unknown"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 11,
-    "hour": 17,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -898,7 +922,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d6] Received Usnea's full account of the contamination — went still at 'six-fold count'; produced a memory glass pulled from the ford-side boulder three days ago that she has not shown",
         "[d6] Watched Usnea view the memory glass privately — reading whatever she could in Usnea's posture. Has not pressed for what was seen. Still holding the disc.",
         "[d6] Received Usnea's plain account — engineer, working coat, sealed tube, deliberate pour. Did not flinch. Confirmed she recognized the coat and pulled the glass the morning after the ",
         "[d6] Watched the disc alongside Usnea and spoke Fendt's name aloud — the first time she has named her suspect to anyone. Exhaled once, controlled, before saying it.",
@@ -907,7 +930,8 @@
         "[d6] Named the practical dangers of Usnea's descent plainly: Fendt knows the glass existed and may know it was taken; the south-face road passes his array; the lower switchback warden s",
         "[d6] Watching Usnea's face closely after the Old Roads working — professional attention, reading surface for what's underneath.",
         "[d6] Named the Amber Lath wayhouse and the eastern rim path without hesitation — practical, precise, exactly as much help as she could offer and no more. Did not address Fendt's motive ",
-        "[d10] Named to the Millbrook elder panel — her role, her deliberate choice to withhold the glass from the Radiant council, and the cost it carried. She is now known to this room."
+        "[d10] Named to the Millbrook elder panel — her role, her deliberate choice to withhold the glass from the Radiant council, and the cost it carried. She is now known to this room.",
+        "[d11] Usnea has arrived at the Edge District lane and is approaching her patch — she does not yet know Millbrook's panel accepted the evidence and named her publicly."
       ],
       "knownFacts": [
         "Orla's plan requires a valley-floor witness to carry the identification — Usnea is the person she has been waiting three days for",
@@ -928,10 +952,10 @@
         "economical, precise practical guidance under constraint"
       ],
       "status": "active",
-      "statusNote": "In the Edge District on the Radiant Plateau — named to Millbrook's elders; her strategic intent now public in this room.",
+      "statusNote": "At her workshop on the Edge District lane — named to Millbrook elders; her strategic intent now public in that room. Does not yet know the presentation succeede",
       "lastSeen": {
-        "locationId": "millbrook",
-        "day": 10
+        "locationId": "radiant_plateau_edge",
+        "day": 11
       }
     },
     "amber-lath-keeper": {
@@ -1228,7 +1252,6 @@
     "radiant_plateau_edge": {
       "visits": 2,
       "notes": [
-        "[d8] Fendt and a second figure in a dark coat were observed climbing the south road before dawn on Day 8 — moving with deliberate purpose, not a routine array check. The second figure is shorter, darker co",
         "[d8] Eastern rim descent traversed successfully Day 8 morning — all three braided Precursor alignments crossed underfoot at intervals, six-count pulse steady throughout. Cliff shoulder confirmed as full si",
         "[d8] A sheltered limestone hollow in the drainage cut on the gravel shoulder — south-facing overhang, usable as a rest stop with sightlines to the valley floor and the Heights.",
         "[d8] Concentration failure in the limestone hollow: light-gather and evidence rehearsal attempted simultaneously — the unanswered 'why' behind Fendt's act broke both workings. Aevi repeated 'the same hand'",
@@ -1239,7 +1262,8 @@
         "[d8] Usnea departed the Lower Terrace gateline Day 8 afternoon — warden's Thursday logistics confirmed, conversation closed clean. Junction-stone crack and channel trough remain unread by active ability.",
         "[d8] Usnea stayed the night here the eve of Thursday's elder presentation — evidence sequence complete, warden's commitment relayed to Mara.",
         "[d9] Usnea communed with Millbrook's essence at dawn Thursday — the village read as poised, purposeful, six-fold pulse steady through the wells and foundations. Light-harvest attempt failed; attention alre",
-        "[d11] Old Roads failed to read the buried alignment in the open meadow — the soil here is too palimpsest with irrigation cuts and mill runoff. The alignment exists but requires longer contact or ground past"
+        "[d11] Old Roads failed to read the buried alignment in the open meadow — the soil here is too palimpsest with irrigation cuts and mill runoff. The alignment exists but requires longer contact or ground past",
+        "[d11] Usnea returned to the Edge District on Day 11 afternoon — post-elder-presentation, carrying Orla's news back to her source."
       ],
       "flags": {
         "memory_glass_transferred": "true",
@@ -1272,7 +1296,7 @@
           "name": "Edge District Lane — Orla's patch",
           "day": 6,
           "visited": true,
-          "note": "Fendt named here as the engineer in the memory glass — both parties now hold the same identification."
+          "note": "Usnea arrived here Day 11 late afternoon — Orla does not yet know the presentation outcome."
         },
         "south-face-lower-switchback": {
           "name": "South-Face Lower Switchback",
@@ -1894,18 +1918,23 @@
           "[d6] Usnea arrived at midday on Day 6. The district reads outsiders fast — valley-floor bearing flagged immediately. Photonic-crystal towers braid sunlight actively; light-guide pavers carry an ordered pho",
           "[d6] The main road down the plateau face passes the south-face secondary filtration array — Fendt's operational domain. The lower switchback warden post is under array authority during active filtration ru",
           "[d7] Day 7 dusk: the district's mood on a filtration run night is deliberate uninvestment — apprentices working by rote, weavers incurious. A second anonymous annotation ('ask the river') appeared on the a",
-          "[d7] The district board carries filtration output counts after each run — a local accountability mechanism. Three consecutive counts are off. The 'whose count?' annotation is standing unanswered, untouched"
+          "[d7] The district board carries filtration output counts after each run — a local accountability mechanism. Three consecutive counts are off. The 'whose count?' annotation is standing unanswered, untouched",
+          "[d11] Day 11 afternoon: Usnea returned to the Edge District via the eastern rim path — six-count pulse steady at each Precursor crossing underfoot. The district is in its late-afternoon working rhythm; no u"
         ],
         "links": [
           "echo-river-contamination",
           "contamination-evidence-for-the-elders",
           "thursday-elder-meeting-shape-and-stakes",
           "fendt-filtration-engineer",
-          "amber-lath-keeper"
+          "amber-lath-keeper",
+          "orla",
+          "orla-memory-glass-ford-record",
+          "proposed-expedition-disputed-zone"
         ],
         "createdDay": 6,
-        "updatedDay": 7,
-        "aliases": []
+        "updatedDay": 11,
+        "aliases": [],
+        "entityId": "radiant-plateau-edge-district"
       },
       "orla-optics-weaver": {
         "id": "orla-optics-weaver",

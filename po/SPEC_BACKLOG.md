@@ -441,25 +441,30 @@ Random character (Nix, chaos/order adept: Latticework, Wildcraft, The Long Odds,
 
 *Updated 2026-07-07 — third playtest logged; gambit DEFINITION captured.*
 
-## SNG-049 — Approach-neutrality: reward the player's mode, not the designer's
-Erik 2026-07-07 (load-bearing correction): the recurring keystones across all three playtests — reframe-the-tool, find-the-seam, question-the-clock — are ERIK'S cognitive style (he wins by changing the rules of a situation), NOT universal gambit rules. Every co-authored solution bent that way because the co-author's mind bends that way. RISK: encoding those three moves as "how challenges are solved" hardcodes one play style into the engine and silently punishes players who think differently. FIX: make approach-neutrality a first-class design constraint.
+## SNG-049 — Multi-mode generative challenge design (provide options; reward novelty)
+Erik 2026-07-07 (load-bearing): the recurring keystones (reframe, find-the-seam, question-the-clock) are ERIK'S style, not universal rules. Rather than "hold other modes open AGAINST drift" (a fragile negative guard), phrase the whole system POSITIVELY and generatively — the engine's job is to PROVIDE options, and to always leave an open generative slot that rewards novelty. Positive structure maintains itself; negative guards erode.
 
-**Principle:** a challenge/gambit must have MULTIPLE genuinely-viable solution MODES, and the engine/GM must reward the mode the player actually brings — not funnel toward the clever-reframe. Rule-bending is ONE valid mode among several, not the intended answer.
+**Core principle (positive):** every challenge PROVIDES multiple genuine solution modes AND keeps an open-ended generative path. The GM's job is to offer and reward paths — including ones no one pre-listed. Success is defined by the mode the player brings.
 
-**Solution modes to keep first-class (non-exhaustive):**
-- **Rule-bender / reframe** (Erik's mode): change the situation's terms, find the seam, question the premise. Already well-supported — do NOT let it become the default.
-- **Direct / force:** meet the challenge head-on with power and skill. A strong-enough strike, a high-enough roll, raw capability should WIN, not just "fail unless you were clever." (The duel should be winnable by actually out-dueling.)
-- **Social / relational:** win by people — persuade, ally, intimidate, mediate. (Pole-signatures + skill-battle already support; ensure it's a full path, not a flavor.)
-- **Attrition / patience:** grind it down, outlast, chip away. The slow sure method should reach the same win.
-- **Preparation / logistics:** win by having set up correctly beforehand — the by-the-book professional who out-executes.
-- **Knowledge / investigation:** win by knowing the thing — the right fact, the read, the lore.
+**The GM/engine PROVIDES options for (all positively stated — offer these, reward these):**
+- **Provide a DIRECT path** — meet it head-on with power/skill; enough capability wins outright.
+- **Provide a SUBTLE path** — stealth, misdirection, work unseen.
+- **Provide a SOCIAL path** — persuade, ally, intimidate, mediate.
+- **Provide a RULE-BENDING path** — reframe the terms, find the seam, question the premise. (One option among many.)
+- **Provide an ATTRITION path** — outlast, grind, chip it down.
+- **Provide a PREPARATION path** — win by having set up well; out-execute by the book.
+- **Provide a KNOWLEDGE path** — win by knowing the right fact/read/lore.
 
-**Engine/GM implications:**
-- **Challenge authoring must offer ≥3 distinct MODE-paths**, not 3 flavors of one mode. A challenge solvable only by reframe is a BUG (it's an Erik-puzzle, not a game challenge). Content-validation (SNG-040) could even flag single-mode challenges.
-- **GM rule:** honor the mode the player commits to; find the version of success THAT mode reaches. Do not steer a force-player toward a clever trick or a clever-player toward a slugfest. Reward what they bring.
-- **Difficulty parity:** no mode should be strictly dominant or strictly punished. A direct solution may cost more resources; a reframe may cost more setup; a social path may cost standing — different costs, comparable viability.
-- **Ties SNG-048 (planning-assist must adapt to the player's mode, not impose the GM's), SNG-042/044 (challengeProfile ensures every challenge has skills across modes), pole_signatures + skill-battle (social/force paths), gambit definition (multi-approach is already core — this ensures the approaches span MODES not just tactics).**
-- **Meta-guardrail for the AI GM specifically:** the model co-authoring with a player WILL drift toward that player's cognitive style (observed live this session). The GM prompt must explicitly hold open modes the current player ISN'T using, so a rule-bender still meets real brute-force options and vice-versa. Approach-neutrality is a stated GM discipline, not an emergent hope.
-- **Smoke:** a challenge can be won by force, by reframe, by social, by attrition, by preparation, by knowledge — each reaching a satisfying (not consolation) success; the GM rewards the committed mode; no single mode is the "real" answer; single-mode challenges are flagged.
+**The open generative slot (always present, the important part):**
+- **Every challenge keeps an OPEN GENERATIVE STRUCTURE** — a path for approaches nobody enumerated. When a player brings something the listed modes don't cover, the GM EVALUATES IT ON ITS MERITS and lets it succeed if the fiction supports it — and REWARDS the novelty (novelBonus/discovery, SNG-030). The listed modes are seeds, not walls. The generative slot is where the game stays alive.
+- This makes the mode-list non-exhaustive BY DESIGN: it exists to inspire and guarantee coverage, never to bound what can work. A brand-new approach is a first-class citizen, not an exception the GM tolerates.
+
+**Engine/GM implications (positive framing):**
+- **Challenge authoring PROVIDES ≥3 distinct mode-paths + the open generative slot.** A challenge that only admits one mode is under-built; author it wider. (SNG-040 CI can surface single-mode challenges as a coverage gap.)
+- **GM discipline: offer paths across modes AND stay ready to reward the unlisted one.** Find the version of success the player's chosen (or invented) approach reaches. Reward what they bring.
+- **Difficulty parity:** modes carry different COSTS (force=resources, reframe=setup, social=standing, attrition=time) at comparable viability — none is the "real" answer, and the generative path is costed on its merits.
+- **Novelty is structural, not a bonus tacked on:** the generative slot + novelty reward (SNG-030) together mean creativity is a designed-in win condition, always available, at every challenge.
+- **Ties:** SNG-048 (planning-assist offers mode-options + welcomes the player's own), SNG-042/044 (challengeProfile guarantees skills span modes), SNG-030 (novelty reward powers the generative slot), gambit definition (multi-approach core).
+- **Smoke:** every challenge offers direct/subtle/social/rule-bending/attrition/prep/knowledge paths as applicable AND accepts a novel unlisted approach, each reaching satisfying success; novelty is rewarded, not merely permitted; single-mode challenges surface as under-built.
 
 *Updated 2026-07-07 — through SNG-049 (approach-neutrality).*

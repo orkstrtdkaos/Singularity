@@ -380,3 +380,20 @@ Erik 2026-07-07 (from live playtest): the GM should HELP the player build a gamb
 - **Smoke:** a player enters loose ideas; GM returns a sequenced plan naming keystone + fragile step + a reframe of any plan-killer; the plan is recognizably the player's ideas; each step shows its odds; the player can edit before running.
 
 *Updated 2026-07-07 — through SNG-048.*
+
+## Playtest findings 2026-07-07 — "The Unwinnable Duel at the Redline" (Ent gambit)
+A full gambit run (Ent community-organizer vs a Marcher champion in a duel he couldn't win head-on). Outcome: total victory, duel WON BY NEVER BEING FOUGHT — the puppeteer behind the challenge was exposed and destroyed by his own weaponized honor-forms; the champion refused the unjust fight and became an ally. Validates + surfaces:
+
+**Validated SNG-048 (GM-assisted planning):** the fun came from the GM finding the keystone the player couldn't see (rooting the stone solved the dry-ground problem blocking every other idea) and REFRAMING plan-killers in-world (grow a grove = not deception but "an Ent fighting at full size"; the honor-forms reward it). The GM co-authored, never overrode. Confirmed: this is THE gambit feature.
+
+**New finding — SOCIAL/POLITICAL gambits are top-tier, combat-as-held-fallback:** the most satisfying gambit had ZERO combat tools fire — club never swung, switches never ticked, root-lock never closed. They were held in RESERVE, which is precisely what let the player gamble on the social play. Design principle: **a great gambit stacks graceful degradation so the bold line is safe — multiple fallbacks must all fail to lose, one must work to win.** The player had 3 live fallbacks and needed none.
+
+**New finding — "honest misdirection" is the anti-gimmick core:** every layer was TRUE (the grove was the Ent; the truth was true; the crowd believed because it was real; the villain fell to his own forms). Nothing was a trick. Contrast a gimmick = a die roll in a costume. GM rule: reward plans whose power comes from what an opponent MISUNDERSTANDS, not from what the player fakes.
+
+**New finding — character-native victory:** the Ent won as what it IS (organizer, patient grove-being, fights-by-becoming-a-forest), not as a generic warrior. Gambits should be a showcase for the specific character. Ties challengeProfile + archetypes: the system should surface a character's NATIVE gambit angles.
+
+**New finding — turning an opponent's own mechanic back on them is a peak beat:** offering the puppeteer the duel he engineered for someone else (forms he weaponized now his cage) was the climax. GM guidance: look for the move where the antagonist's own tool/scheme becomes the trap. High-leverage narrative pattern; worth surfacing to the GM as a beat-type.
+
+**Fold into:** SNG-048 (planning), gambit surfacing SNG-031, and a GM-guidance doc note on gambit beat-types (social-first, honest-misdirection, own-mechanic-reversal, character-native). No new engine — GM-craft + planning-assist.
+
+*Updated 2026-07-07 — playtest findings logged.*

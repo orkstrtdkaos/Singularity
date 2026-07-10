@@ -60,57 +60,68 @@ The "scene" field is REQUIRED every turn: carry forward everything still true fr
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
 
 /** Build the context block the GM sees each turn. */
-export function buildTurnContext({ character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance }) {
-  const parts = [];
-  parts.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
-  if (location.questSeeds?.length) parts.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
-  if (opLossNote) parts.push(`## PREVIOUS TURN OPS LOST\n${opLossNote}`);
-  if (timeLabel) parts.push(`## CURRENT TIME\n${timeLabel}`);
+/** SNG runtime prompt-cache tiers (stable → volatile). Every byte in system/world/
+ *  scene/state must be identical turn-to-turn EXCEPT when the underlying data really
+ *  changes (travel, scene shift, state) — NO timestamps / run-ids / rng / session vars
+ *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
+ *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
+export function tierParts(ctx) {
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance } = ctx;
+  const system = [], world = [], scene = [], state = [], player = [];
+
+  // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
   if (rules?.recovery) {
     const rec = rules.recovery;
-    parts.push(`## RECOVERY GUIDE (rule 8 — when the character eats, drinks, or rests in-scene, grant EXACTLY these through characterDeltas energy/health + timeAdvanceHours; never more; meals require food to actually exist in inventory or scene)\nmeal +${rec.meal} energy · hearty meal +${rec.heartyMeal} · drink +${rec.drink} · breather (1h off their feet) +${rec.breather.energy} energy +${rec.breather.health} health · full sleep (${rec.sleep.hours}h) +${rec.sleep.energy} energy +${rec.sleep.health} health · meditation: ENGINE-APPLIED (never grant energy for it yourself — the resolution block will show what it restored; just narrate the centering)`);
+    system.push(`## RECOVERY GUIDE (rule 8 — when the character eats, drinks, or rests in-scene, grant EXACTLY these through characterDeltas energy/health + timeAdvanceHours; never more; meals require food to actually exist in inventory or scene)\nmeal +${rec.meal} energy · hearty meal +${rec.heartyMeal} · drink +${rec.drink} · breather (1h off their feet) +${rec.breather.energy} energy +${rec.breather.health} health · full sleep (${rec.sleep.hours}h) +${rec.sleep.energy} energy +${rec.sleep.health} health · meditation: ENGINE-APPLIED (never grant energy for it yourself — the resolution block will show what it restored; just narrate the centering)`);
   }
-  if (lore) parts.push(`## LORE (authoritative)\n${lore}`);
-  if (region?.activeEvents?.length) parts.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
-  if (newsDetail) parts.push(`## RECENT NEWS in the valley (rumors NPCs may repeat; things that happened while the character was elsewhere)\n${newsDetail}`);
-  if (itemAdvance) parts.push(`## AN ITEM WAKES (narrate this shift into the scene — a real, felt change in the object)
-${itemAdvance}`);
-  if (evolvedItemsDetail) parts.push(`## LIVING GEAR (evolving items the character carries — honor the current stage's character; never advance a stage yourself, the engine gates it)
-${evolvedItemsDetail}`);
-  if (factsDetail) parts.push(`## ESTABLISHED FACTS (authoritative, persistent — never contradict; these are TRUE regardless of how many scenes have passed)\n${factsDetail}`);
-  parts.push(`## CHARACTER\n${characterSheetSummary(character)}`);
-  if (abilityLawDetail) parts.push(`## ABILITY LAW (rule 2 — what powers can, cannot, and are not for at current rank)\n${abilityLawDetail}`);
-  if (inventoryDetail) parts.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
-  if (partyDetail) parts.push(`## PARTY — other PLAYERS' characters in this shared scene (present and active; narrate them in, never decide for them)
-${partyDetail}`);
-  if (companionsDetail) parts.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);
-  if (questsDetail) parts.push(`## ACTIVE QUESTS\n${questsDetail}`);
-  if (npcRegistryDetail) parts.push(`## KNOWN PEOPLE (established fact — see rule 14; reuse these people, never reinvent them)\n${npcRegistryDetail}`);
-  if (emergenceDetail) parts.push(`## RIPE EMERGENCE (rule 19 — practice has ripened these; you may OFFER them in-fiction via a choice's "emergenceId", exactly these ids, nothing else)\n${emergenceDetail}`);
-  if (perilNote) parts.push(`## PRECURSOR DRIFT\n${perilNote}`);
-  if (availableEncounters) parts.push(`## AVAILABLE ENCOUNTERS at this location (rule 18 — offer ONLY these ids via a choice's "encounterId" when the fiction invites it)
-${availableEncounters}`);
-  if (encounterDetail) parts.push(`## ACTIVE ENCOUNTER (rule 18 — narrate this receipt; never advance its state yourself)
-${encounterDetail}`);
-  if (codexDetail) parts.push(`## CODEX — what ${character.name} KNOWS that's relevant here (rule 17; don't re-explain, let them act on it)\n${codexDetail}`);
-  if (placeMemoryDetail) parts.push(`## PLACE HISTORY — what ${character.name} knows changed here (established fact — see rule 15)\n${placeMemoryDetail}`);
-  parts.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
-  if (character.chronicle?.length) parts.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-16).join("\n")}`);
+
+  // ---- TIER 2: world model — location, lore, NPC registry, tradition, world events ----
+  world.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
+  if (location.questSeeds?.length) world.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
+  if (lore) world.push(`## LORE (authoritative)\n${lore}`);
+  if (region?.activeEvents?.length) world.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
+  if (newsDetail) world.push(`## RECENT NEWS in the valley (rumors NPCs may repeat; things that happened while the character was elsewhere)\n${newsDetail}`);
+  if (abilityLawDetail) world.push(`## ABILITY LAW (rule 2 — what powers can, cannot, and are not for at current rank)\n${abilityLawDetail}`);
+  if (npcRegistryDetail) world.push(`## KNOWN PEOPLE (established fact — see rule 14; reuse these people, never reinvent them)\n${npcRegistryDetail}`);
+  if (codexDetail) world.push(`## CODEX — what ${character.name} KNOWS that's relevant here (rule 17; don't re-explain, let them act on it)\n${codexDetail}`);
+  if (placeMemoryDetail) world.push(`## PLACE HISTORY — what ${character.name} knows changed here (established fact — see rule 15)\n${placeMemoryDetail}`);
+  world.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
+  if (availableEncounters) world.push(`## AVAILABLE ENCOUNTERS at this location (rule 18 — offer ONLY these ids via a choice's "encounterId" when the fiction invites it)\n${availableEncounters}`);
+
+  // ---- TIER 3: immediate scene — what's set, present, and carried right now ----
   if (sceneState) {
-    parts.push(`## CURRENT SCENE STATE (AUTHORITATIVE — do not contradict; see rule 13)\nSetting: ${sceneState.setting}\nPresent: ${(sceneState.npcsPresent || []).map(n => `${n.name} (${n.state})`).join("; ") || "no one else"}\nObjects: ${(sceneState.objects || []).join(", ") || "nothing notable"}\nOpen threads: ${(sceneState.threads || []).join("; ") || "none"}`);
+    scene.push(`## CURRENT SCENE STATE (AUTHORITATIVE — do not contradict; see rule 13)\nSetting: ${sceneState.setting}\nPresent: ${(sceneState.npcsPresent || []).map(n => `${n.name} (${n.state})`).join("; ") || "no one else"}\nObjects: ${(sceneState.objects || []).join(", ") || "nothing notable"}\nOpen threads: ${(sceneState.threads || []).join("; ") || "none"}`);
   }
+  if (partyDetail) scene.push(`## PARTY — other PLAYERS' characters in this shared scene (present and active; narrate them in, never decide for them)\n${partyDetail}`);
+  if (companionsDetail) scene.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);
+  if (inventoryDetail) scene.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
+  if (evolvedItemsDetail) scene.push(`## LIVING GEAR (evolving items the character carries — honor the current stage's character; never advance a stage yourself, the engine gates it)\n${evolvedItemsDetail}`);
+  if (questsDetail) scene.push(`## ACTIVE QUESTS\n${questsDetail}`);
+  if (emergenceDetail) scene.push(`## RIPE EMERGENCE (rule 19 — practice has ripened these; you may OFFER them in-fiction via a choice's "emergenceId", exactly these ids, nothing else)\n${emergenceDetail}`);
+  if (perilNote) scene.push(`## PRECURSOR DRIFT\n${perilNote}`);
+  if (encounterDetail) scene.push(`## ACTIVE ENCOUNTER (rule 18 — narrate this receipt; never advance its state yourself)\n${encounterDetail}`);
+
+  // ---- TIER 4: rolling game-state + conversation history up to the previous turn ----
+  if (factsDetail) state.push(`## ESTABLISHED FACTS (authoritative, persistent — never contradict; these are TRUE regardless of how many scenes have passed)\n${factsDetail}`);
+  state.push(`## CHARACTER\n${characterSheetSummary(character)}`);
+  if (character.chronicle?.length) state.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-16).join("\n")}`);
   if (recentTurns?.length) {
     // older beats as one-line summaries, the last few in full — continuity needs texture
     const rendered = recentTurns.map((t, i) => {
       if (typeof t === "string") return t; // legacy shape
       return i >= recentTurns.length - 3 && t.narration ? `${t.summary}\nFULL TEXT: ${t.narration.slice(0, 700)}` : t.summary;
     });
-    parts.push(`## THIS SCENE SO FAR (oldest first)\n${rendered.join("\n---\n")}`);
+    state.push(`## THIS SCENE SO FAR (oldest first)\n${rendered.join("\n---\n")}`);
   }
+
+  // ---- AFTER breakpoint 4 (UNCACHED): this-turn ephemeral inputs ----
+  if (opLossNote) player.push(`## PREVIOUS TURN OPS LOST\n${opLossNote}`);
+  if (timeLabel) player.push(`## CURRENT TIME\n${timeLabel}`);
+  if (itemAdvance) player.push(`## AN ITEM WAKES (narrate this shift into the scene — a real, felt change in the object)\n${itemAdvance}`);
   if (resolution?.gambit) {
-    parts.push(`## RESOLUTION — GAMBIT (already rolled by the engine; narrate the whole run per rule 15A)\nGoal: ${resolution.gambit.goal}\nOutcome: ${resolution.gambit.outcome}\n${resolution.gambit.steps.join("\n")}`);
+    player.push(`## RESOLUTION — GAMBIT (already rolled by the engine; narrate the whole run per rule 15A)\nGoal: ${resolution.gambit.goal}\nOutcome: ${resolution.gambit.outcome}\n${resolution.gambit.steps.join("\n")}`);
   } else if (resolution?.degree === "auto") {
-    parts.push(`## RESOLUTION\nAction: ${resolution.action.label}\nNo roll — routine action with no real chance of failure. Narrate it naturally and move the scene forward.`);
+    player.push(`## RESOLUTION\nAction: ${resolution.action.label}\nNo roll — routine action with no real chance of failure. Narrate it naturally and move the scene forward.`);
   } else if (resolution) {
     let block = `## RESOLUTION (already rolled by the engine — narrate this outcome)\nAction: ${resolution.action.label}\nResult: ${resolution.degree} (rolled ${resolution.roll} vs ${resolution.chance})`;
     if (resolution.action.novel) block += `\nNOVEL USE${resolution.action.comboAbilities?.length ? ` — combining: ${resolution.action.comboAbilities.join(" + ")}` : ""}${resolution.action.noveltyHint ? ` (${resolution.action.noveltyHint})` : ""} — see rule 16.`;
@@ -120,11 +131,32 @@ ${encounterDetail}`);
     if (resolution.meditation) block += `\nMEDITATION (engine-applied): +${resolution.meditation.energy} energy restored — narrate the centering; do not grant additional energy.`;
     if (resolution.locationAffinity?.length) block += `\nLOCATION AFFINITY (engine-applied — narrate why THIS place helped or resisted): ${resolution.locationAffinity.join("; ")}`;
     if (resolution.intensity && resolution.intensity !== "standard") block += `\nINTENSITY: ${resolution.intensity.toUpperCase()} — narrate to it (a CONSERVE cast reads restrained and economical; a SURGE reads as pushing the power hard).${resolution.surgeBacklash ? " The surge BACKLASHED — narrate the power snapping back as real cost." : ""}`;
-    parts.push(block);
+    player.push(block);
   }
-  if (exactWords) parts.push(`## PLAYER'S EXACT WORDS (honor these specifics in the narration — the resolution says whether it worked; these say what was actually attempted, who to address, what to watch, how to act)\n${exactWords}`);
-  if (playerInput) parts.push(`## PLAYER SAYS\n${playerInput}`);
-  return parts.join("\n\n");
+  if (exactWords) player.push(`## PLAYER'S EXACT WORDS (honor these specifics in the narration — the resolution says whether it worked; these say what was actually attempted, who to address, what to watch, how to act)\n${exactWords}`);
+  if (playerInput) player.push(`## PLAYER SAYS\n${playerInput}`);
+
+  return { system, world, scene, state, player };
+}
+
+/** Cache-tier blocks for the runtime prompt: four stable→volatile prefix tiers, then the
+ *  uncached player turn. Tier 1's constant rules are folded onto GM_SYSTEM by the caller. */
+export function buildTiers(ctx) {
+  const t = tierParts(ctx);
+  return {
+    rules: t.system.join("\n\n"),
+    world: t.world.join("\n\n"),
+    scene: t.scene.join("\n\n"),
+    state: t.state.join("\n\n"),
+    player: t.player.join("\n\n")
+  };
+}
+
+/** Flat context (for the ask-GM / intent-parse paths that don't tier-cache). Same
+ *  content as the tiers, joined in stable→volatile order. */
+export function buildTurnContext(ctx) {
+  const t = tierParts(ctx);
+  return [...t.system, ...t.world, ...t.scene, ...t.state, ...t.player].join("\n\n");
 }
 
 function characterSheetSummary(c) {
@@ -189,10 +221,20 @@ export function salvageOps(raw) {
 const PROSE_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG in the Valley of Echoes. Narrate the current beat in 2-4 tight paragraphs of second-person present-tense prose. Honor the resolution outcome and scene state provided. Reply with PROSE ONLY — no JSON, no lists, no headers.`;
 
 export async function gmTurn(ctx) {
-  const content = buildTurnContext(ctx);
+  const content = buildTurnContext(ctx); // flat — used only by the prose fallback
+  // Prompt-cache tiers (stable → volatile), each a cached system block: [1] GM system +
+  // rules, [2] world model, [3] immediate scene, [4] rolling state + history. The player's
+  // turn (resolution + words + time) is the UNCACHED user message after the last breakpoint.
+  const t = buildTiers(ctx);
+  const systemBlocks = [
+    { text: GM_SYSTEM + (t.rules ? "\n\n" + t.rules : "") },
+    { text: t.world }, { text: t.scene }, { text: t.state }
+  ].filter(b => b.text && b.text.trim());
+  const userContent = (t.player && t.player.trim()) ? t.player : "(Continue the scene from the state above.)";
+  const gmOpts = { task: "gm-narrate", systemBlocks, cacheKey: "singularity-runtime" };
   let raw = "";
   try {
-    raw = await callClaude([{ role: "user", content }], { task: "gm-narrate", system: GM_SYSTEM });
+    raw = await callClaude([{ role: "user", content: userContent }], gmOpts);
     const turn = parseLooseJSON(raw);
     if (!turn.narration || !Array.isArray(turn.choices)) throw new Error("BAD_SHAPE");
     return { ok: true, turn };
@@ -202,10 +244,10 @@ export async function gmTurn(ctx) {
     // (a) ONE automatic retry with a terse valid-JSON nudge
     try {
       const retryRaw = await callClaude([
-        { role: "user", content },
+        { role: "user", content: userContent },
         { role: "assistant", content: String(raw).slice(0, 4000) },
         { role: "user", content: "Your reply was invalid or truncated JSON. Emit the SAME turn again as a single complete valid JSON object only — no fences, no prose outside it." }
-      ], { task: "gm-narrate", system: GM_SYSTEM });
+      ], gmOpts);
       const retryTurn = parseLooseJSON(retryRaw);
       if (retryTurn.narration && Array.isArray(retryTurn.choices)) {
         return { ok: true, turn: retryTurn, retried: true };

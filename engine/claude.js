@@ -15,6 +15,29 @@ const MODEL_MAP = {
 
 const BUDGETS = { "gm-narrate": 8000, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "intent-parse": 1024, "chronicle-compress": 1024, _default: 2048 };
 
+// Minimum cacheable prefix, per model (Anthropic silently skips caching below this,
+// with no write premium). A breakpoint on a sub-min block is wasted — we fold small
+// tiers forward so a breakpoint only lands where it can actually cache.
+const MIN_CACHE_TOKENS = { "claude-sonnet-4-6": 2048, "claude-haiku-4-5-20251001": 4096, _default: 2048 };
+const CHARS_PER_TOKEN = 4; // rough estimate for the fold heuristic
+
+/** Assemble the `system` array from stable→volatile tier blocks. Folds any tier below
+ *  the model's cache minimum into the next tier (so we never spend one of the 4
+ *  breakpoints on a block too small to cache), and puts a 1h-TTL cache_control on each
+ *  resulting block — the four-tier cached prefix IS the runtime prompt cache. */
+function buildSystemArray(systemBlocks, model) {
+  const min = MIN_CACHE_TOKENS[model] || MIN_CACHE_TOKENS._default;
+  const texts = systemBlocks.map(b => b.text).filter(t => t && t.trim());
+  const folded = [];
+  let buf = "";
+  for (let i = 0; i < texts.length; i++) {
+    buf = buf ? buf + "\n\n" + texts[i] : texts[i];
+    const bigEnough = Math.ceil(buf.length / CHARS_PER_TOKEN) >= min;
+    if (bigEnough || i === texts.length - 1) { folded.push(buf); buf = ""; }
+  }
+  return folded.slice(0, 4).map(text => ({ type: "text", text, cache_control: { type: "ephemeral", ttl: "1h" } }));
+}
+
 export function getApiKey() { return localStorage.getItem("singularity.anthropicKey") || ""; }
 export function setApiKey(k) { localStorage.setItem("singularity.anthropicKey", k.trim()); }
 
@@ -26,17 +49,19 @@ export async function callClaude(messages, opts = {}) {
   const key = getApiKey();
   if (!key) throw new Error("NO_API_KEY");
 
-  // Prompt caching (GA — no beta header). Caching is a PREFIX match, and the only
-  // reliably-stable prefix across our per-turn calls is the system prompt (GM_SYSTEM
-  // et al. are constants). Cache it as a content block so it's written once and read
-  // on every subsequent call within the 5-min TTL. The previous top-level cache_control
-  // auto-placed the breakpoint on the LAST block — the volatile per-turn context — so
-  // every request wrote a fresh entry and nothing was ever read (0% hit rate). The big
-  // per-turn context stays uncached (it changes every turn); the system prompt is the win.
-  // Sub-2048-token system prompts (e.g. haiku glossary/translate) silently skip caching
-  // with no write premium, so marking every call is safe.
+  // Prompt caching (GA — no beta header). Caching is a PREFIX match: identical bytes
+  // before a cache_control breakpoint are written once, then read on every subsequent
+  // call within the TTL. Two modes:
+  //  • opts.systemBlocks — the runtime 4-tier prefix (GM system+rules / world / scene /
+  //    rolling state), each a 1h-cached block; the volatile player turn is the (uncached)
+  //    user message after the last breakpoint. See engine/gm.js gmTurn.
+  //  • opts.system (string) — a single cached system prompt (meta / one-off calls).
+  // NOTE: Anthropic caches by prefix hash + org — there is NO client-supplied cache key
+  // (prompt_cache_key is an OpenAI parameter; sending it here would 400). opts.cacheKey
+  // is accepted for call-site intent but not sent on the wire.
   const body = { model, max_tokens, messages };
-  if (opts.system) body.system = [{ type: "text", text: opts.system, cache_control: { type: "ephemeral" } }];
+  if (opts.systemBlocks?.length) body.system = buildSystemArray(opts.systemBlocks, model);
+  else if (opts.system) body.system = [{ type: "text", text: opts.system, cache_control: { type: "ephemeral", ttl: "1h" } }];
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",

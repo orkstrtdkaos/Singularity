@@ -548,3 +548,11 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 **Erik use-test:** "Open the dev panel — verify all shipped legs are listed, you can mark each pass/fail/feels-off, and the tally + your marks persist as you play."
 
 *Directly clears the verification bottleneck (po/PREVIEW_LEGS.md). Small CCode UI build + an Aevi data file (authored). Good fast-follow — arguably worth slotting AHEAD of the lower-urgency fast-follows since it accelerates closing everything else.*
+
+---
+
+## SNG-052 — Adult-gate checkbox persistence (Erik live 2026-07-11)
+**Bug:** the 'Adult gate' checkbox unchecks on reopen even though R+ persists. Root cause: unlike the 'minor' checkbox (app.js ~188, bound to `isMinorProfile(profile)`), the adult-gate box (~189) is bound to NOTHING — renders blank every time, read only at save as a one-shot authorization; the rating stores, the confirmation doesn't. 🔧 CCode. Aevi PO.
+**Fix:** persist `profile.rating.adultVerified=true` when the gate authorizes an R/R+ set; bind the checkbox to it (`${profile.rating?.adultVerified ? 'checked':''}`) so it stays checked once confirmed. Unchecking+save clears it and drops the ceiling below R (existing refuse-and-explain). Minor-protection floor unaffected. Suites+parse_probe green.
+**Erik test:** set R+ with the adult box → reopen Settings → box stays checked, R+ holds.
+*Small UX bug; off critical path.*

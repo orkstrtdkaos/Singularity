@@ -30,6 +30,7 @@ import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, ap
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
+import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -1919,6 +1920,95 @@ await (async () => {
   recordAttention(a, "keep", 1);      // +4
   recordAttention(b, "interact", 1);  // +2
   check("2b: a ⭐ keep outweighs a single ordinary interaction", a._gen.engagementScore > b._gen.engagementScore);
+})();
+
+// --- SNG-BATCH-9 Phase 3: shared-world promotion + contradiction rank + rating-lens ---
+await (async () => {
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  const llm = (o) => async () => o;
+
+  // a twice-⭐-kept entity reaches nominated — the promotion gate
+  const c = { id: "p1", name: "Aria", level: 4 };
+  const rec = await generate("npc", { character: c, day: 1, rating: "PG-13", playerKey: "erik", location: { id: "roost", name: "Roost", spectrum: {} } },
+    { callJSON: llm({ name: "Warden Holt", role: "keeps the old gate", spectrum: {}, fears: "f", wants: "w", homeLocation: "roost" }), schema: npcSchema });
+  recordAttention(rec, "keep", 2); recordAttention(rec, "keep", 2);
+  check("P3: a twice-kept entity is nominated (promotion candidate)", rec._gen.tier === "nominated");
+
+  const cands = promotionCandidates(c);
+  check("P3: promotionCandidates surfaces the nominated entity", cands.length === 1 && cands[0].record.id === rec.id);
+
+  // a canon record preserves the source id + rating/weight/provenance, drops the private _gen
+  const cr0 = buildCanonRecord(rec, { worldDay: 5 });
+  check("P3: a canon record preserves the id, drops _gen, carries rating+weight+provenance",
+    cr0.id === rec.id && !cr0._gen && cr0._canon.entityId === rec.id && cr0._canon.rating === "PG-13" && cr0._canon.weight >= 4 && !!cr0._canon.provenance);
+
+  // 1. EARNED auto-promotion into an empty store → lands canonical
+  const store = ensureCanonStore({}, "valley");
+  const p1 = promoteInto(store, cands, { authored: {}, worldDay: 11, rng: () => 0.99 });
+  check("P3: a candidate with no collision lands canonical", p1.results[0].outcome === "landed" && store.entities[rec.id]?._canon.tier === "canonical");
+
+  // promoted-marker makes it idempotent (not re-offered)
+  rec._gen.promotedWorldDay = 11;
+  check("P3: a promoted entity is not re-offered as a candidate (idempotent)", promotionCandidates(c).length === 0);
+
+  // 2. CONTRADICTION → RANK
+  //   the weighted opposed roll is decided by realness
+  check("P3: the opposed roll is weighted by realness (strong beats weak, weak loses to strong)",
+    resolveContradiction(30, 3, () => 0.5).incomingWins && !resolveContradiction(3, 30, () => 0.5).incomingWins);
+  check("P3: authored spine (weight 100) almost always outranks a generated challenger",
+    AUTHORED_CANON_WEIGHT === 100 && resolveContradiction(10, 100, () => 0.2).incomingWins === false);
+
+  //   a weak challenger colliding with the AUTHORED spine becomes a variant (spine holds)
+  const weak = { id: "warden-holt", name: "Warden Holt", role: "an imposter at the gate", _gen: { type: "npc", tier: "nominated", birthWeight: 2, engagementScore: 8, rating: "PG-13", provenance: {} } };
+  const authored = { "warden-holt": { id: "warden-holt", name: "Warden Holt", role: "the authored gatekeeper" } };
+  const store2 = ensureCanonStore({}, "valley");
+  const pAuth = promoteInto(store2, [{ record: weak, weight: effectiveWeight(weak) }], { authored, worldDay: 11, rng: () => 0.5 });
+  check("P3: a weak entity colliding with the authored spine becomes a variant (spine holds)",
+    pAuth.results[0].outcome === "variant" && store2.variants.length === 1 && !store2.entities["warden-holt"]);
+  check("P3: findCanonCollision finds the authored spine first", findCanonCollision("npc", "Warden Holt", { canon: {}, authored }).where === "authored");
+
+  //   a strong challenger OUT-rolls standing generated canon → it takes the slot, loser → variant
+  const store3 = ensureCanonStore({}, "valley");
+  store3.entities["mill"] = { id: "mill", name: "The Old Mill", descriptionSeed: "a quiet mill", _canon: { entityId: "mill", type: "location", weight: 2, tier: "canonical", rating: "G" } };
+  const strong = { id: "mill", name: "The Old Mill", descriptionSeed: "a roaring haunted mill", _gen: { type: "location", tier: "nominated", birthWeight: 20, engagementScore: 20, rating: "PG", provenance: {} } };
+  const pWon = promoteInto(store3, [{ record: strong, weight: effectiveWeight(strong) }], { authored: {}, worldDay: 12, rng: () => 0.01 });
+  check("P3: a strong challenger out-rolls standing canon → canonical; loser persists as a variant",
+    pWon.results[0].outcome === "won" && store3.entities["mill"]._canon.weight >= 20 && store3.variants.some(v => v._canon.weight === 2));
+
+  //   concurrency merge: higher-weight holds canonical, other → variant
+  const sa = ensureCanonStore({}, "valley"); sa.entities["x"] = { id: "x", name: "X", _canon: { entityId: "x", weight: 5, tier: "canonical" } };
+  const sb = ensureCanonStore({}, "valley"); sb.entities["x"] = { id: "x", name: "X", _canon: { entityId: "x", weight: 9, tier: "canonical" } };
+  const merged = mergeCanonStores(sa, sb);
+  check("P3 concurrency: a concurrent-promotion race keeps the higher-weight canonical, other → variant",
+    merged.entities["x"]._canon.weight === 9 && merged.variants.some(v => v._canon.weight === 5));
+
+  // 3. RATING-LENS (floors absolute)
+  check("P3 lens: at/below the ceiling shows as-is", lensDecision("R", RATING_LEVEL["R"], "a brutal duel") === "show");
+  check("P3 lens: above-ceiling violence adapts down (re-narrated)", lensDecision("R", RATING_LEVEL["PG"], "a bloody, brutal duel") === "adapt");
+  check("P3 lens: above-ceiling SEXUAL content hard-filters (no in-ceiling analog)", lensDecision("R+", RATING_LEVEL["PG"], "an erotic, seductive figure") === "filter");
+  check("P3 lens: unrated (authored) content is never rating-gated", lensDecision(null, RATING_LEVEL["G"], "anything") === "show");
+  check("P3 lens: a minor viewer never gets gore softened into view (hard exclude, never softened)",
+    lensDecision("R", RATING_LEVEL["PG-13"], "a gory massacre", { viewerIsMinor: true }) === "filter");
+
+  //   canonForViewer resolves the whole superset for a viewer
+  const store4 = ensureCanonStore({}, "valley");
+  store4.entities["a"] = { id: "a", name: "Gentle Guide", role: "a kind soul", _canon: { entityId: "a", type: "npc", rating: "G", tier: "canonical" } };
+  store4.entities["b"] = { id: "b", name: "Blood Knight", role: "a bloody, brutal warrior", _canon: { entityId: "b", type: "npc", rating: "R", tier: "canonical" } };
+  store4.entities["s"] = { id: "s", name: "Seductress", role: "an erotic, seductive presence", _canon: { entityId: "s", type: "npc", rating: "R+", tier: "canonical" } };
+  const gView = canonForViewer(store4, { rating: { preset: "G", isMinor: false } });
+  const gIds = gView.map(v => v.record.id);
+  check("P3 lens: a G viewer sees the gentle entity as-is", gView.find(v => v.record.id === "a")?.decision === "show");
+  check("P3 lens: a G viewer gets the violent entity dialed down (adapted), not raw",
+    gView.find(v => v.record.id === "b")?.decision === "adapt" && /dialed down/.test(JSON.stringify(gView.find(v => v.record.id === "b").record)));
+  check("P3 lens: a G viewer never sees the sexual entity (filtered absent)", !gIds.includes("s"));
+  const rpView = canonForViewer(store4, { rating: { preset: "R+" } });
+  check("P3 lens: the top-ceiling (R+) viewer sees the full superset as-is", rpView.length === 3 && rpView.every(v => v.decision === "show"));
+  const rView = canonForViewer(store4, { rating: { preset: "R" } });
+  check("P3 lens: an R viewer still can't see above-ceiling R+ sexual content (filtered)", rView.length === 2 && !rView.some(v => v.record.id === "s"));
+
+  //   adaptView only dials DOWN — a floor can never be re-crossed
+  const av = adaptView(store4.entities["b"], "G");
+  check("P3 lens: adaptView neutralizes above-ceiling intensity + tags the view", av._lens.adaptedTo === "G" && !/bloody/.test(av.role));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

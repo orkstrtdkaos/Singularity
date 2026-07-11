@@ -14,8 +14,9 @@ import { callClaudeJSON } from "./claude.js";
 import { applyNpcUpdates } from "./npcs.js";
 import { applyCodexUpdates } from "./codex.js";
 import { generatedRecords } from "./generate.js";
-import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile } from "./sync.js";
+import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
 import { absoluteWorldDay, worldDayAt } from "./worldtime.js";
+import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
 
 const NEWS_CAP = 20;
 const NEWS_TRAVEL_DAYS = 3;
@@ -171,6 +172,71 @@ export async function syncSharedWorld({ character, content }) {
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
   return { synced: true, news: news.map(n => n.text) };
+}
+
+// ---------- SNG-BATCH-9 Phase 3: shared-world promotion + rating-lens ----------
+
+const CANON_PATH = (region = "valley") => `world/canon/${region}.json`;
+
+/** EARNED auto-promotion + the rating-lens read (best-effort, never throws). When sync is on:
+ *   1. PROMOTE — every local nominated-tier entity that hasn't landed yet is contended into the
+ *      shared-canon store: no collision → lands canonical; a collision fires the weighted opposed
+ *      roll (realness vs realness; authored spine at a high floor) → winner canonical, loser a
+ *      persisting variant/rumor. The contest runs INSIDE the merge callback against the freshly-
+ *      read remote, so concurrent promoters never clobber (SHA-retry re-contests).
+ *   2. READ — the resulting store is resolved through THIS viewer's rating-lens (at/below their
+ *      ceiling; above-ceiling adapts down or filters absent; floors absolute) and returned as the
+ *      viewer's slice for GM surfacing + hydration.
+ *  Marks promoted local records idempotently (`_gen.promotedWorldDay` + `_gen.canonTier`) so a
+ *  landed entity never re-promotes. Gated: promotes whenever candidates exist; refreshes the
+ *  view at most once per elapsed world-day when there's nothing to promote (network thrift).
+ *  region + authoredFor + now injectable for tests. */
+export async function syncSharedCanon({ character, profile, content, region = "valley", now = Date.now(), authoredFor = null } = {}) {
+  if (!syncEnabled() || !character) return { synced: false, promoted: [], view: [] };
+  if (!character.worldState) character.worldState = initWorldState(1);
+  const ws = character.worldState;
+  const worldDay = absoluteWorldDay(now);
+  const candidates = promotionCandidates(character);
+  const dueForRead = ws.lastCanonWorldDay == null || (worldDay - ws.lastCanonWorldDay) >= 1;
+  if (!candidates.length && !dueForRead) return { synced: false, promoted: [], view: [] };
+
+  const authored = authoredFor || ((type) =>
+    type === "npc" ? (content?.npcs || {}) :
+    type === "location" ? (content?.locations || {}) :
+    type === "arc" ? Object.fromEntries((content?.greaterArcs || []).map(a => [a.id, a])) : {});
+
+  let store = null;
+  let promoted = [];
+  try {
+    if (candidates.length) {
+      // promote inside the merge: contest against the FRESHLY-read remote; a concurrent write
+      // triggers a re-read + re-contest (pushMergedFile), so promoters never clobber.
+      let lastResults = [];
+      await pushMergedFile(CANON_PATH(region), (remote) => {
+        const s = ensureCanonStore(remote || {}, region);
+        const out = promoteInto(s, candidates, { authored, worldDay });
+        lastResults = out.results;
+        return out.store;
+      }, `canon: ${candidates.length} promotion(s) from ${character.name || character.id}`);
+      promoted = lastResults;
+      // mark local records landed (idempotent) — buildCanonRecord keeps the source id, so a
+      // result's entityId is exactly its local record's id — so it never re-promotes.
+      for (const r of lastResults) {
+        const target = candidates.find(c => c.record.id === r.entityId)?.record;
+        if (target?._gen) { target._gen.promotedWorldDay = worldDay; target._gen.canonTier = r.outcome === "variant" ? "variant" : "canonical"; }
+      }
+      // re-read the consolidated store for the viewer slice
+      store = await fetchRepoJSON(CANON_PATH(region));
+    } else {
+      store = await fetchRepoJSON(CANON_PATH(region));
+    }
+  } catch (err) {
+    console.warn("[canon] shared-canon sync skipped:", err.message);
+    return { synced: false, promoted, view: [] };
+  }
+  ws.lastCanonWorldDay = worldDay;
+  const view = store ? canonForViewer(ensureCanonStore(store, region), profile) : [];
+  return { synced: true, promoted, view };
 }
 
 // ---------- SNG-BATCH-9 Phase 2: living advancement (offscreen) ----------

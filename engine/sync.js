@@ -88,6 +88,28 @@ export async function pushOwnedFile(path, obj, message) {
   }
 }
 
+/** Read-MERGE-write a SHARED file safely (region state, shared canon). Unlike pushOwnedFile
+ *  (single-writer files), this re-runs mergeFn against the FRESHLY-read remote on every attempt,
+ *  so two clients writing concurrently never clobber each other — the loser's write re-merges
+ *  onto the winner's. mergeFn(remoteParsedOrNull) → the object to write. Returns the PUT result,
+ *  or null if mergeFn yields null (nothing to write). Up to 3 attempts on SHA conflict. */
+export async function pushMergedFile(path, mergeFn, message) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const existing = await ghGet(path);
+    let remote = null;
+    if (existing) {
+      try { remote = JSON.parse(decodeURIComponent(escape(atob(existing.content.replace(/\n/g, ""))))); } catch { remote = null; }
+    }
+    const merged = mergeFn(remote);
+    if (merged == null) return null;
+    try {
+      return await ghPut(path, JSON.stringify(merged, null, 2), message, existing?.sha);
+    } catch (err) {
+      if (!/409|422/.test(err.message) || attempt === 2) throw err;
+    }
+  }
+}
+
 /** Append events to this month's ledger file. Read-modify-write with retry —
  *  append-only means a retry can never destroy someone else's entry. */
 export async function appendLedger(events, characterId) {

@@ -17,7 +17,7 @@ import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
-import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.1";
+const APP_VERSION = "1.8.2";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -48,6 +48,7 @@ let askMode = false;     // input bar mode: false = act in scene, true = ask the
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
 let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the current scene
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
+let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
@@ -596,8 +597,60 @@ async function maybeTick() {
   await runWorldTick({ character, content: CONTENT, currentDay });
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
   await advanceGeneratedOffscreen({ character }); // SNG-BATCH-9 Phase 2: your established grown world moved on while away
+  // SNG-BATCH-9 Phase 3: earn nominated entities into shared canon + read the shared world back
+  // through THIS viewer's rating-lens. No-op without sync. Never throws.
+  try {
+    const canon = await syncSharedCanon({ character, profile, content: CONTENT });
+    sharedCanonView = canon.view || [];
+    hydrateCanonIntoContent(sharedCanonView);
+    surfacePromotions(canon.promoted || []);
+  } catch (err) { console.warn("[canon] tick skipped:", err?.message); }
   saveCharacter(character);
   return takeUnseenNews(character);
+}
+
+/** Make the viewer's rating-lensed shared canon revisitable: merge canonical entities from OTHER
+ *  players into the live CONTENT maps (authored + this character's own local content always win a
+ *  clash). The records are already lens-resolved (shown/adapted) — a filtered one never arrives. */
+function hydrateCanonIntoContent(view) {
+  for (const { record } of view || []) {
+    const type = record?._canon?.type;
+    if (type === "location" && !CONTENT.locations[record.id]) CONTENT.locations[record.id] = record;
+    else if (type === "npc" && !CONTENT.npcs[record.id]) CONTENT.npcs[record.id] = record;
+  }
+}
+
+/** One-time beat when THIS character's grown entity earns its way into the shared world. */
+function surfacePromotions(promoted) {
+  const landed = (promoted || []).filter(p => p.outcome === "landed" || p.outcome === "won");
+  if (!landed.length || !character.worldState) return;
+  const wd = absoluteWorldDay();
+  const items = landed.map(p => {
+    const rec = findGenerated(character, p.entityId);
+    const name = rec?.name || p.entityId;
+    return { day: readClock(character.clock).day, worldDay: wd,
+      text: `${name} has become part of the wider world — other travelers may now meet what you grew.` };
+  });
+  character.worldState.unseenNews = [...(character.worldState.unseenNews || []), ...items].slice(-20);
+}
+
+/** SNG-BATCH-9 Phase 3: the shared-canon block for the GM — canonical figures/places/threads that
+ *  OTHER players grew real, already resolved through this viewer's rating-lens (adapted lines
+ *  carry a dial-down note; filtered ones never appear). Bounded. Returns null if none. */
+function sharedCanonForGM() {
+  if (!sharedCanonView.length) return null;
+  const brief = (r) => {
+    const t = r._canon?.type;
+    const base = t === "npc" ? (r.role || "") : t === "location" ? (r.descriptionSeed || "") : (r.tendency || "");
+    return String(base).slice(0, 90);
+  };
+  const lines = sharedCanonView.slice(0, 8).map(({ record, decision }) => {
+    const t = record._canon?.type || "thing";
+    const tier = record._canon?.tier === "variant" ? "rumored" : "canon";
+    const lens = decision === "adapt" ? " [dialed to your ceiling]" : "";
+    return `- ${record.name} (${t}, shared ${tier}${lens}): ${brief(record)}`;
+  });
+  return lines.join("\n");
 }
 
 /** The current location with the world's spectrum drift applied. */
@@ -842,6 +895,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
     livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }), // §2: proactively surface only LIVE (non-dormant) grown content
+    sharedCanonDetail: sharedCanonForGM(), // Phase 3: OTHER players' promoted canon, rating-lensed for this viewer
     worldDateLabel: worldDate().label // SNG-041: the shared absolute calendar (references-not-invents)
   });
   busy = false;

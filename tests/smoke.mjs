@@ -8,7 +8,7 @@ import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
-import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
+import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent } from "../engine/gm.js";
@@ -1761,6 +1761,27 @@ await (async () => {
     check("engage: a connected grown location surfaces in the living-world block, tier-tagged", /The Deep Index \(location, established/.test(live || ""));
   }
 })();
+
+// --- SNG-041 Phase 41a: shared world epoch — one world, one clock ---
+{
+  const epoch = { atMs: Date.UTC(2026, 6, 1), worldDay: 1, rate: 1 };
+  check("worldclock: epoch moment is world-day 1", absoluteWorldDay(Date.UTC(2026, 6, 1, 6), epoch) === 1);
+  check("worldclock: +10 real days = world-day 11 (real pace)", absoluteWorldDay(Date.UTC(2026, 6, 11), epoch) === 11);
+  // THE fix: two characters at different journey-days read the SAME absolute at one real moment
+  const momentMs = Date.UTC(2026, 6, 20, 15);
+  const charA = { clock: newClock(8) };   // journey-day 8
+  const charB = { clock: newClock(11) };  // journey-day 11 (the Ent)
+  check("worldclock: two chars at different journey-days share ONE absolute world-day",
+    absoluteWorldDay(momentMs, epoch) === absoluteWorldDay(momentMs, epoch) &&
+    readClock(charA.clock).day !== readClock(charB.clock).day);
+  check("worldclock: worldDayAt reconciles a real-time ISO stamp to the absolute", worldDayAt("2026-07-11T00:00:00Z", epoch) === 11);
+  check("worldclock: unknown stamp → null (derives-never-fabricates)", worldDayAt("not-a-date", epoch) === null);
+  check("worldclock: worldDate carries day + season + label", (() => { const wd = worldDate(Date.UTC(2026, 6, 11), epoch); return wd.worldDay === 11 && !!wd.season && /World-day 11/.test(wd.label); })());
+  check("worldclock: relativeWorldDays phrases distance from the viewer's now", relativeWorldDays(5, 11) === "6 days ago" && relativeWorldDays(11, 11) === "today" && relativeWorldDays(10, 11) === "yesterday");
+  check("worldclock: relative(unknown) is graceful", relativeWorldDays(null, 11) === "at an unknown time");
+  check("worldclock: getWorldEpoch returns a usable default epoch (no override set)", (() => { const e = getWorldEpoch(); return Number.isFinite(e.atMs) && e.worldDay >= 1 && e.rate > 0; })());
+  check("worldclock: before the epoch clamps to world-day 1 (no negative days)", absoluteWorldDay(Date.UTC(2020, 0, 1), epoch) === 1);
+}
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

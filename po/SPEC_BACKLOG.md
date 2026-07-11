@@ -413,6 +413,8 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 
 **Erik-directed 2026-07-11.** Aevi PO; only Aevi closes. **ALREADY BUILT (renderMap, app.js ~1310):** SVG map from `location.map.x/y` + connection edges; current-location "you are here"; visited-vs-heard-of for PLACES (placeMemory) AND sub-places (satellites, visited/heard grammar); reachability, danger, travel button, details panel (description/vectors/notes/visit-history). So position + discovered/heard for PLACES works and is per-character. This spec adds only what's missing.
 
+**RENDERING DIRECTION (Erik-clarified 2026-07-11):** the target is a RENDERED, ILLUSTRATED map with per-location/scene ICONOGRAPHY — NOT the current abstract circles-and-lines node graph. Upgrade the visual layer to: terrain/region fills tinted by disposition (poleIntensity), per-location ICONS derived from tags (market/stall, shrine/sacred, ruin/precursor, churn/unstable, waystation, danger, etc.), connection paths drawn as trails/roads/rivers — THEN the Phase-1 KG overlay and Phase-2 multi-area on top. **⛔ ONE FORK (Erik to steer) — rendering approach:** (a) rich stylized DATA-DRIVEN SVG map [Aevi rec — scales to BATCH-9 generated locations automatically, icons from tags, deterministic + stable]; (b) an authored base-map ART image + icon overlay [prettier for the fixed Valley, but breaks for generated / other-region locations]; (c) AI-generated map art [fragile — hard to keep geographically consistent with the location graph, regeneration churn]. Aevi recommends (a): illustrated-feeling yet data-driven, so the generative world and multi-area come for free. Confirm before build.
+
 **Phase 1 — KG/codex overlay (see the THINGS, not just the places). 🔧 CCode.** Overlay discovered/heard-of ENTITIES (NPCs, legends, lore, notable items) onto the map, mirroring the place visited/heard grammar:
 - Pull from the codex (SNG-019). Each entity with a resolvable location (NPC `homeLocation`, a fact/news location) places near that node; **discovered** (met/seen firsthand) renders solid; **heard-of-only** (mentioned in facts/news, not encountered) renders dimmed/dashed — same visual language as sub-places.
 - Toggle-able overlay (map ⇄ map+KG) so the base map never clutters.
@@ -433,3 +435,20 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview tests:** (1) "Open the map — verify people/things you've met show up ON the map (solid), things you've only heard of show dimmed, and you can toggle the knowledge overlay on/off." (2) "Play a character that starts in a different area — verify the map centers on THEIR area and reveals as they explore, not a fixed Valley view."
 
 *Phase 1 builds on the existing map — off the critical path, can go anytime. Phase 2 pairs with BATCH-9 (generated locations need coords). Auto-positioning is engine; no content owed.*
+
+---
+
+## SNG-047 — Skill sidebar UI (group by type, show functions, adopt the orphan)
+
+**Erik-found in live play 2026-07-11:** the ABILITIES sidebar is a flat list (rank · technique · energy "was N"); it should group by skill type, show each ability's functions, and the discovered combo (✦ Resonant Sight) dangles orphaned at the bottom. Aevi PO; only Aevi closes. **🔧 BUILD OWNER: CCode** (UI). No content owed — functions + parts already in the data.
+
+1. **Group by type/tradition.** Section the list under power-system groups (harmonic / radiant / valley_craft / precursor / learned / discovery) — the SAME taxonomy as the map's color-encoding, so "type" reads consistently across the app. Collapsible section headers.
+2. **Show functions.** Each ability displays its `functions` tags (heal / shield / strike / reveal / conceal / bind / move / break / ward) as small icons or chips — the player sees what an ability DOES at a glance, not only its name and technique.
+3. **Adopt the orphan (combos/discoveries).** The ✦ discovered combo (Resonant Sight) gets a home: grouped under a "Discoveries / Combinations" section (or nested under its domain), and — using `combination_recipes.parts` — SHOWS its source abilities so it reads as a braid of X + Y, not a floating entry. Link ✦ to its parent abilities.
+4. **UI TLC.** Consistent rows (rank · technique · function chips · energy), clear group headers, keep the ⓘ info affordance. Scannable, grouped, legible.
+
+**Guardrails.** Reuse ability `functions` + `combination_recipes.parts` + existing rank/energy display (don't reinvent); grouping is display-only (no mechanic change); collapsible so a big kit stays manageable. Suites + parse_probe green.
+
+**Erik preview test:** "Open your abilities — verify they're grouped by type with function icons shown, and your combo (Resonant Sight) is grouped as a discovery that shows what two abilities make it, not stranded at the bottom."
+
+*UI polish; OFF the BATCH-9/dating critical path. CCode UI build, no content owed.*

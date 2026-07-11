@@ -419,6 +419,8 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 - **Layer 3 — Per-location art (c): generated-and-PERSISTED location images.** Each place gets its OWN illustrated image, generated ONCE on discovery/visit and CACHED (persists — never regenerated), shown in the location detail / when you're there. Bounded per-place, NOT a whole-map generation → no geographic-consistency problem (Erik's key insight). Ties the image-gen infra (Z-Image) + SNG-035 imagery; a BATCH-9 generated location is born with BOTH its data AND its image. 🔧 CCode pipeline (generate-once-and-cache) + image-gen.
 Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a content asset (Aevi). Layer 3 = generate-once-and-cache pipeline + image-gen; pairs with BATCH-9 + SNG-035. Content-safe: original environment art only (no IP, no people). **UNBLOCKED — Layer 1 buildable now.**
 
+**WORLD SCOPE (Erik 2026-07-11):** the world is NOT just the Valley. "valley" is regionId of the FIRST authored region; the world spans MULTIPLE regions. Layer 2 base-map art is therefore **per-region** (the Valley first; other regions get their own base image, or fall back to Layer-1 terrain fills). Layer-1 multi-region auto-positioning already structures this. The GM's "Valley of Echoes" framing generalizes as regions come online — narration + map + generation all region-aware, Valley-as-one-region not Valley-as-world.
+
 **Phase 1 — KG/codex overlay (see the THINGS, not just the places). 🔧 CCode.** Overlay discovered/heard-of ENTITIES (NPCs, legends, lore, notable items) onto the map, mirroring the place visited/heard grammar:
 - Pull from the codex (SNG-019). Each entity with a resolvable location (NPC `homeLocation`, a fact/news location) places near that node; **discovered** (met/seen firsthand) renders solid; **heard-of-only** (mentioned in facts/news, not encountered) renders dimmed/dashed — same visual language as sub-places.
 - Toggle-able overlay (map ⇄ map+KG) so the base map never clutters.
@@ -456,3 +458,25 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 **Erik preview test:** "Open your abilities — verify they're grouped by type with function icons shown, and your combo (Resonant Sight) is grouped as a discovery that shows what two abilities make it, not stranded at the bottom."
 
 *UI polish; OFF the BATCH-9/dating critical path. CCode UI build, no content owed.*
+
+---
+
+## SNG-048 — Narrative register keyed to disposition (concrete by default, poetic where warranted)
+
+**Erik-found in live play 2026-07-11:** despite GM rule 5 ("Grounded hopeful-strange tone... never purple"), the GM over-writes abstractly EVERYWHERE (e.g. "the ground here is releasing something so slow it doesn't register as heat — more like a long exhale the soil has been making for years") — poetic but alienating; most players go "WHAT?!". Erik: default to CONCRETE for most narration; reserve poetic/abstract for places the world warrants it — shift voice by the axes vectors. Aevi PO; only Aevi closes. **🔧 BUILD OWNER: CCode** (GM contract).
+
+**The in-grain hook:** the world already HAS a `concrete_abstract` spectrum axis (among the 12: emotional_logical, falsehood_truth, demonic_angelic, violence_peace, **concrete_abstract**, mechanical_spiritual, chaos_order, dark_light, death_life, space_time, body_mind, destruction_creation). So "voice by axes" maps DIRECTLY — narrative register IS the `concrete_abstract` axis expressing through the prose. Not an arbitrary rule; the place's own disposition sets its voice.
+
+**Fix:**
+1. **Default HARD toward concrete.** Strengthen rule 5: the DEFAULT register is grounded, plain, sensory-literal — describe what's actually there in words a person gets on first read. Metaphor sparing; no abstract personification of ordinary things. (The soil-exhale line is simply wrong in a market or on a road.)
+2. **Disposition-keyed register cue (engine → GM).** Compute a register from the location's `concrete_abstract` axis + overall charge (`poleIntensity`), fed to the GM like the existing INTENSITY cue (gm.js ~139):
+   - concrete-leaning / low-charge / ordinary place → CONCRETE prose (default).
+   - abstract-pole / high-charge / sacred·temporal·precursor·strange place → register EARNS its way toward the poetic/abstract/lyrical (the soil-exhale line belongs HERE, not everywhere).
+   - middle band → mostly concrete, a touch of strange.
+3. **Axis-flavored voice (fuller version).** Which axes are charged colors the register: truth-pole → stark/clear; falsehood → slippery/indirect; mechanical_spiritual spiritual → lyrical, mechanical → precise/clinical-strange; death_life / chaos_order etc. tint word-choice. Core lever stays concrete_abstract + charge; the rest is flavor.
+
+**Guardrails.** Engine computes the register cue from existing spectrum/poleIntensity (no new data); GM narrates to it (contract change, no mechanic change); default concrete unless the place earns otherwise. Suites + parse_probe green.
+
+**Erik preview test:** "Play through an ordinary place (market, road, waystation) and a genuinely strange/charged one — verify the ordinary place reads concrete and clear (no soil-exhales), and the poetic register only appears where the world is actually abstract or charged."
+
+*GM-contract change — small, HIGH felt-impact (it colors every scene). Off the BATCH-9/dating critical path but worth doing soon.*

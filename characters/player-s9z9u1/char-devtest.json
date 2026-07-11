@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 20,
+  "xp": 42,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -40,7 +40,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 85,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -114,9 +114,33 @@
       "qty": 1,
       "description": "Two more flat grey stones from the Edge District light-guide street, mineral-veined, smelling faintly of old bonding compound on their undersides.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Lower Filtration Ledger",
+      "kind": "quest",
+      "qty": 1,
+      "description": "The official measurement log for the Radiant Plateau's lower filtration arrays. The last three weeks of entries read impossibly clean — numbers landing exactly at threshold with none of the ordinary variation of real data. Fendt's initials appear at the bottom of each entry.",
+      "consumable": false
     }
   ],
-  "deeds": [],
+  "deeds": [
+    {
+      "at": "2026-07-11T22:11:38.201Z",
+      "locationId": "radiant_plateau_edge",
+      "communityId": "valley.radiant-plateau",
+      "description": "Infiltrated a sealed array-office in the Edge District and removed the falsified filtration ledger — clean, unseen, and without force.",
+      "tags": [
+        "infiltration",
+        "investigation",
+        "evidence"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 1,
+      "worldDay": 11
+    }
+  ],
   "relationships": {},
   "chronicle": [],
   "currentLocationId": "radiant_plateau_edge",
@@ -130,24 +154,41 @@
       {
         "summary": "Pulled two more paving-stones loose and stowed them; three total in pack now.",
         "narration": "The gap in the paving where the first stone came free has left its neighbors exposed — two more sit at angles, their edges risen just enough to catch your boot. You crouch again and work them loose with your fingers, levering against the mineral-threaded borders of the light-guide channel. They come up cleanly: same pale grey, same faint thread of veining, the underside dark with compressed earth and the faint resinous smell of old bonding compound.\n\nThree stones now rattle softly in your pack against the mess kit. They're heavy enough to notice. Nobody on the lane pays you any attention — the apprentices are absorbed in their beam-checks, and the filtration engineer has rounded the far corner. Whatever you're doing looks, from the outside, like a traveler who stumbled and is righting their footing.\n\nThe accountability board is still in clear view. Fendt's name in red chalk, unaccompanied, waiting. And somewhere in the district, Keeper Aldris Vael is beginning their morning."
+      },
+      {
+        "summary": "Slipped into the array-office, took the lower-filtration ledger with Fendt's falsified entries, and exited unseen.",
+        "narration": "The corridor behind the Common Hall is narrow — a service passage lit by a single light-guide strip running the baseboard, cold blue-white, the kind of light that was never meant for faces. You flatten yourself into an alcove and watch. Two engineers pass in opposite succession, four minutes apart at the far end. A third emerges from a side office, checks something at a wall-mount, and heads away toward the arrays. After that, twelve clear minutes. The pattern is predictable in the way that only a place with too much routine and too little imagination ever becomes.\n\nThe office door is a simple spring-lever lock mounted in a frame that was built to keep weather out, not people. Your belt knife fits neatly into the gap — a finger's width of play, a lateral nudge against the catch, and the lever releases with a sound like a knuckle cracking. You're inside before the echo dies.\n\nThe array-office smells of lamp-oil and old paper. Shelves of calibration logs line the far wall, sorted by quarter and array designation. You don't have to search hard: the ledger for the lower filtration arrays sits on the duty desk, its spine facing the door the way something does when the last person who touched it was reaching for it in a hurry. You open it to the last three weeks. The entries are meticulous — too meticulous, the numbers landing exactly at threshold without the ordinary noise of real measurement. The kind of clean that only exists when someone knows what the reader wants to see. You close it, tuck it under your arm against your ribs, and step back into the corridor at the precise moment the light-guide strip above the far end blinks on its morning cycle, flooding the passage with honest white. The twelve minutes are not yet gone. You walk out like someone who was never not supposed to be here.\n\nIn your pack the three paving-stones shift as you move. Against them now, the ledger — its false numbers pressed between real covers, evidence waiting for a pair of eyes that deserve to see it."
       }
     ],
     "lastTurn": {
-      "narration": "The gap in the paving where the first stone came free has left its neighbors exposed — two more sit at angles, their edges risen just enough to catch your boot. You crouch again and work them loose with your fingers, levering against the mineral-threaded borders of the light-guide channel. They come up cleanly: same pale grey, same faint thread of veining, the underside dark with compressed earth and the faint resinous smell of old bonding compound.\n\nThree stones now rattle softly in your pack against the mess kit. They're heavy enough to notice. Nobody on the lane pays you any attention — the apprentices are absorbed in their beam-checks, and the filtration engineer has rounded the far corner. Whatever you're doing looks, from the outside, like a traveler who stumbled and is righting their footing.\n\nThe accountability board is still in clear view. Fendt's name in red chalk, unaccompanied, waiting. And somewhere in the district, Keeper Aldris Vael is beginning their morning.",
-      "sceneSummary": "Pulled two more paving-stones loose and stowed them; three total in pack now.",
+      "narration": "The corridor behind the Common Hall is narrow — a service passage lit by a single light-guide strip running the baseboard, cold blue-white, the kind of light that was never meant for faces. You flatten yourself into an alcove and watch. Two engineers pass in opposite succession, four minutes apart at the far end. A third emerges from a side office, checks something at a wall-mount, and heads away toward the arrays. After that, twelve clear minutes. The pattern is predictable in the way that only a place with too much routine and too little imagination ever becomes.\n\nThe office door is a simple spring-lever lock mounted in a frame that was built to keep weather out, not people. Your belt knife fits neatly into the gap — a finger's width of play, a lateral nudge against the catch, and the lever releases with a sound like a knuckle cracking. You're inside before the echo dies.\n\nThe array-office smells of lamp-oil and old paper. Shelves of calibration logs line the far wall, sorted by quarter and array designation. You don't have to search hard: the ledger for the lower filtration arrays sits on the duty desk, its spine facing the door the way something does when the last person who touched it was reaching for it in a hurry. You open it to the last three weeks. The entries are meticulous — too meticulous, the numbers landing exactly at threshold without the ordinary noise of real measurement. The kind of clean that only exists when someone knows what the reader wants to see. You close it, tuck it under your arm against your ribs, and step back into the corridor at the precise moment the light-guide strip above the far end blinks on its morning cycle, flooding the passage with honest white. The twelve minutes are not yet gone. You walk out like someone who was never not supposed to be here.\n\nIn your pack the three paving-stones shift as you move. Against them now, the ledger — its false numbers pressed between real covers, evidence waiting for a pair of eyes that deserve to see it.",
+      "sceneSummary": "Slipped into the array-office, took the lower-filtration ledger with Fendt's falsified entries, and exited unseen.",
       "choices": [
         {
-          "label": "Approach the accountability board and read it closely — use Prism Sight to catch any light-trace of who wrote the marking or when",
+          "label": "Bring the ledger directly to Keeper Aldris Vael — find them now before the morning shift changes hands",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "direct",
+            "reveal",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight on the ledger in a quiet spot — read its light-history for who last handled it and when",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.7,
-            "falsehood_truth": 0.8
-          },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "careful"
+            "careful",
+            "investigate"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -156,55 +197,30 @@
           "emergenceId": null
         },
         {
-          "label": "Ask one of the apprentices who Fendt is and where they work — casual, as if you're a visitor trying to get your bearings",
+          "label": "Find High Luminary Sera's representative — this ledger is exactly the kind of outside verification she needs",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "dark_light": 0.5
-          },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Find Keeper Aldris Vael directly — ask at the Common Hall where they start their morning",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.6,
-            "dark_light": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
+            "scout",
             "plan",
             "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Echo Memory near the accountability board — stand quietly and listen for the tone of whoever placed the marking",
+          "label": "Find a quiet alcove and use Echo Memory on the office — listen for what the last argument there sounded like",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "dark_light": 0.4,
-            "falsehood_truth": 0.7
-          },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "investigate",
+            "careful",
+            "study"
           ],
           "abilityId": "echo_memory",
           "energyCost": 11,
@@ -213,14 +229,26 @@
           "emergenceId": null
         }
       ],
+      "deeds": [
+        {
+          "description": "Infiltrated a sealed array-office in the Edge District and removed the falsified filtration ledger — clean, unseen, and without force.",
+          "tags": [
+            "infiltration",
+            "investigation",
+            "evidence"
+          ],
+          "weight": 2,
+          "communityId": "valley.radiant-plateau"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
         "inventoryAdd": [
           {
-            "name": "Loose Paving-Stones x2",
-            "kind": "misc",
-            "description": "Two more flat grey stones from the Edge District light-guide street, mineral-veined, smelling faintly of old bonding compound on their undersides.",
+            "name": "Lower Filtration Ledger",
+            "kind": "quest",
+            "description": "The official measurement log for the Radiant Plateau's lower filtration arrays. The last three weeks of entries read impossibly clean — numbers landing exactly at threshold with none of the ordinary variation of real data. Fendt's initials appear at the bottom of each entry.",
             "consumable": false,
             "effects": {}
           }
@@ -228,61 +256,115 @@
         "inventoryRemove": [],
         "xp": 0
       },
+      "ledgerEvents": [
+        {
+          "what": "The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District.",
+          "tags": [
+            "evidence",
+            "filtration",
+            "water-crisis",
+            "fendt"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "start",
+          "questId": "the-clean-numbers",
+          "title": "The Clean Numbers",
+          "summary": "Obtain and deliver evidence of Fendt's falsified filtration purity reports to someone who can act on them — before the cover-up goes deeper.",
+          "giver": "circumstance / Keeper Aldris Vael (context)",
+          "note": "Ledger now in hand. Fendt's initials on three weeks of impossible entries. Next step: who receives this, and what do they do with it?"
+        }
+      ],
       "scene": {
-        "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Two more paving-stones now pulled from the same gap. Early spring light filters through the crystal towers overhead.",
+        "setting": "Edge District, Radiant Plateau — morning. Standing in the service corridor behind the Common Hall, one step from the lane, the array-office door closed behind you. The light-guide strip along the baseboard runs cold blue-white. Early spring light begins to warm the crystal towers visible through the corridor's far mouth.",
         "npcsPresent": [
           {
             "name": "Apprentices (several)",
-            "state": "checking braided beams between the towers for overnight drift"
-          },
-          {
-            "name": "Filtration engineer (unnamed)",
-            "state": "has rounded the far corner, out of immediate view"
+            "state": "still visible between the towers on the lane outside, absorbed in beam-checks"
           }
         ],
         "objects": [
-          "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record",
-          "Crystal towers catching and braiding morning light",
+          "Lower Filtration Ledger — now in your possession, tucked under your arm",
+          "Array-office door — closed, re-latched behind you",
+          "Light-guide strip — cold blue-white, running the baseboard of the service corridor",
+          "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record, visible from the lane",
           "Light-guide street paving — gap now notably wider with three stones removed"
         ],
         "threads": [
           "Fendt's red chalk marking sits unanswered on the board",
-          "Keeper Aldris Vael is somewhere in the district, beginning their morning"
+          "Keeper Aldris Vael is somewhere in the district, beginning their morning",
+          "The ledger in your hands is evidence — its value depends entirely on whose hands receive it next",
+          "The array-office will be noticed as entered if anyone checks the door carefully"
         ]
       },
+      "npcUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The lower filtration ledger — containing three weeks of falsified purity entries under Fendt's initials — has been removed from the array-office in the Edge District by Test Hero.",
+          "subjectId": "fendt"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider.",
+          "note": "The lower filtration ledger is no longer in the array-office — removed this morning. The door was re-latched but shows signs of forced entry on close inspection.",
           "flag": {
-            "paving_stones_removed_count": 3
+            "array_office_ledger_removed": true,
+            "array_office_entry_evidence": "belt-knife lever marks on latch"
+          },
+          "subPlace": {
+            "name": "Array Office (behind Common Hall)",
+            "note": "Sealed service office for lower filtration array records — ledger now missing, latch slightly marked.",
+            "visited": true
           }
         }
       ],
+      "codexUpdates": [
+        {
+          "topic": "lower-filtration-ledger",
+          "label": "Lower Filtration Ledger",
+          "kind": "event",
+          "fact": "Three weeks of entries in Fendt's hand read exactly at threshold — no natural measurement noise. The falsification is careful, practiced, and recent. The ledger is now in Test Hero's possession.",
+          "links": [
+            "the-clean-numbers",
+            "fendt-board-marking",
+            "water-crisis",
+            "radiant-plateau",
+            "keeper-aldris-vael"
+          ]
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "Brief crouch-and-gather, no meaningful time elapsed"
-      }
+        "hoursPassed": 0.5,
+        "why": "A careful scout, a picked lock, and a quiet exit — fifteen minutes of held breath in the service corridor."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Two more paving-stones now pulled from the same gap. Early spring light filters through the crystal towers overhead.",
+      "setting": "Edge District, Radiant Plateau — morning. Standing in the service corridor behind the Common Hall, one step from the lane, the array-office door closed behind you. The light-guide strip along the baseboard runs cold blue-white. Early spring light begins to warm the crystal towers visible through the corridor's far mouth.",
       "npcsPresent": [
         {
           "name": "Apprentices (several)",
-          "state": "checking braided beams between the towers for overnight drift"
-        },
-        {
-          "name": "Filtration engineer (unnamed)",
-          "state": "has rounded the far corner, out of immediate view"
+          "state": "still visible between the towers on the lane outside, absorbed in beam-checks"
         }
       ],
       "objects": [
+        "Lower Filtration Ledger — now in your possession, tucked under your arm",
+        "Array-office door — closed, re-latched behind you",
+        "Light-guide strip — cold blue-white, running the baseboard of the service corrid",
         "District Common Hall accountability board — Fendt's name in red chalk, no accomp",
-        "Crystal towers catching and braiding morning light",
         "Light-guide street paving — gap now notably wider with three stones removed"
       ],
       "threads": [
         "Fendt's red chalk marking sits unanswered on the board",
-        "Keeper Aldris Vael is somewhere in the district, beginning their morning"
+        "Keeper Aldris Vael is somewhere in the district, beginning their morning",
+        "The ledger in your hands is evidence — its value depends entirely on whose hands receive it next",
+        "The array-office will be noticed as entered if anyone checks the door carefully"
       ]
     }
   },
@@ -304,6 +386,21 @@
         "Stone picked up and stowed — objective fulfilled."
       ],
       "resolvedAt": "2026-07-11T22:04:27.070Z"
+    },
+    {
+      "id": "the-clean-numbers",
+      "title": "The Clean Numbers",
+      "summary": "Obtain and deliver evidence of Fendt's falsified filtration purity reports to someone who can act on them — before the cover-up goes deeper.",
+      "giver": "circumstance / Keeper Aldris Vael (context)",
+      "giverEntityId": null,
+      "locationId": null,
+      "locationEntityId": null,
+      "status": "active",
+      "progress": [
+        "Ledger now in hand. Fendt's initials on three weeks of impossible entries. Next step: who receives this, and what do they do with it?"
+      ],
+      "aliases": [],
+      "startedAt": "2026-07-11T22:11:38.224Z"
     }
   ],
   "npcRegistry": {},
@@ -313,12 +410,15 @@
       "notes": [
         "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
         "[d1] One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach.",
-        "[d1] Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider."
+        "[d1] Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider.",
+        "[d1] The lower filtration ledger is no longer in the array-office — removed this morning. The door was re-latched but shows signs of forced entry on close inspection."
       ],
       "flags": {
         "fendt_board_marking": "red_chalk_no_record",
         "paving_stone_removed": "true",
-        "paving_stones_removed_count": "3"
+        "paving_stones_removed_count": "3",
+        "array_office_ledger_removed": true,
+        "array_office_entry_evidence": "belt-knife lever marks on latch"
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -330,6 +430,12 @@
           "day": 1,
           "visited": true,
           "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare di"
+        },
+        "array-office-behind-common-hall-": {
+          "name": "Array Office (behind Common Hall)",
+          "day": 1,
+          "visited": true,
+          "note": "Sealed service office for lower filtration array records — ledger now missing, latch slightly marked."
         }
       }
     }
@@ -488,19 +594,40 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "lower-filtration-ledger": {
+        "id": "lower-filtration-ledger",
+        "label": "Lower Filtration Ledger",
+        "kind": "event",
+        "facts": [
+          "[d1] Three weeks of entries in Fendt's hand read exactly at threshold — no natural measurement noise. The falsification is careful, practiced, and recent. The ledger is now in Test Hero's possession."
+        ],
+        "links": [
+          "the-clean-numbers",
+          "fendt-board-marking",
+          "water-crisis",
+          "radiant-plateau"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "social": 0.990025,
-    "strategic": 1.995
+    "social": 0.985074875,
+    "strategic": 5.985025,
+    "cautious": 2,
+    "cerebral": 1,
+    "physical": 1,
+    "ruthless": 1
   },
   "aptitudes": [],
-  "actionCount": 3,
+  "actionCount": 4,
   "grantsVersion": 1,
   "reconcileVersion": 4,
-  "updatedAt": 1783807533780,
-  "rev": 19,
+  "updatedAt": 1783807898225,
+  "rev": 22,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -514,6 +641,12 @@
       "text": "Fendt's purity reports for the lower filtration arrays read impossibly clean — showing purified water against a river that has run gray-green for two months. The data is false. This was revealed by Ke",
       "day": 1,
       "subjectId": "keeper-aldris-vael"
+    },
+    {
+      "id": "fendt",
+      "text": "The lower filtration ledger — containing three weeks of falsified purity entries under Fendt's initials — has been removed from the array-office in the Edge District by Test Hero.",
+      "day": 1,
+      "subjectId": "fendt"
     }
   ],
   "generated": {
@@ -625,7 +758,9 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "boundary_stone": 1
+      "boundary_stone": 1,
+      "echo_memory": 1,
+      "prism_sight": 1
     },
     "coActivations": {},
     "aspirations": []

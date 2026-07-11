@@ -1783,5 +1783,66 @@ await (async () => {
   check("worldclock: before the epoch clamps to world-day 1 (no negative days)", absoluteWorldDay(Date.UTC(2020, 0, 1), epoch) === 1);
 }
 
+// --- SNG-041 Phase 41b: stamp events/news on the absolute + cross-character reconcile ---
+await (async () => {
+  // runWorldTick stamps news with the absolute world-day (news-spread path: a big deed travels)
+  const character = {
+    id: "c-a", name: "A", deeds: [{ communityId: "valley.alpha", weight: 3, day: 1, description: "pulled a child from the flood", spread: [] }],
+    npcRegistry: {}, worldState: initWorldState(1)
+  };
+  const content = {
+    region: { activeEvents: [] }, events: {},
+    locations: { l1: { communityId: "valley.alpha" }, l2: { communityId: "valley.beta" } }
+  };
+  const res = await runWorldTick({ character, content, currentDay: 6, evolveNpcs: null });
+  const spread = (character.worldState.news || []).find(n => /spread beyond/i.test(n.text));
+  check("41b: world-tick news is stamped with the absolute world-day", !!spread && Number.isFinite(spread.worldDay));
+  check("41b: the same news keeps the local journey-day too", !!spread && spread.day === 6);
+
+  // newsForGM dates on the shared calendar when known, falls back to journey-day (backward-safe)
+  const ch2 = { worldState: { news: [
+    { day: 6, worldDay: 208, text: "a bridge fell in the far reach" },   // SNG-041 item
+    { day: 4, text: "an older rumor with no world-day" }                  // pre-SNG-041 item
+  ] } };
+  const gm = newsForGM(ch2);
+  check("41b: newsForGM shows the shared world-day for a stamped item", /\[world-day 208\] a bridge fell/.test(gm));
+  check("41b: newsForGM falls back to the journey-day for a legacy item (no fabricated date)", /\[day 4\] an older rumor/.test(gm));
+
+  // RECONCILIATION invariant: two characters at different journey-days, viewing the SAME
+  // cross-character event (same real-time .at), compute the SAME shared world-day for it.
+  const epoch = { atMs: Date.UTC(2026, 6, 1), worldDay: 1, rate: 1 };
+  const eventAt = "2026-07-15T09:00:00Z"; // char A's deed, real-time
+  const asSeenByA = worldDayAt(eventAt, epoch);
+  const asSeenByB = worldDayAt(eventAt, epoch); // char B, different journey-day, same event
+  check("41b: a cross-character event dates to ONE shared world-day for every viewer", asSeenByA === asSeenByB && asSeenByA === 15);
+})();
+
+// --- SNG-041 Phase 41c: hybrid two-clock — GM world-date + references-not-invents + cross tag ---
+{
+  const baseCtx = () => ({
+    character: { name: "Ash", origin: "valley", background: "medic", level: 3, attributes: { physical: 2, mental: 2, social: 2, practical: 2 }, health: 10, maxHealth: 10, energy: 10, maxEnergy: 10, abilities: [], alignment: {} },
+    location: { name: "Archive Hollow", descriptionSeed: "a sink of old stacks", spectrum: {}, questSeeds: [] },
+    rules: {}, timeLabel: "Day 8, morning (late-spring)"
+  });
+
+  // the GM is given the SHARED world calendar + told to reference-not-invent dates
+  const withWorld = buildTurnContext({ ...baseCtx(), worldDateLabel: "World-day 208 (harvest)" });
+  check("41c: GM context surfaces the shared world calendar", /World-day 208 \(harvest\)/.test(withWorld) && /shared world calendar/i.test(withWorld));
+  check("41c: GM is told to reference dates as given, never invent a bare day-number", /never invent a bare day-number/i.test(withWorld));
+  check("41c: the local journey clock is still present alongside the world calendar", /Day 8, morning/.test(withWorld));
+  // backward-safe: no worldDateLabel → no crash, no shared-calendar line
+  const withoutWorld = buildTurnContext(baseCtx());
+  check("41c: omitting the world calendar is graceful (still renders current time)", /CURRENT TIME/.test(withoutWorld) && !/shared world calendar/i.test(withoutWorld));
+
+  // a boundary-crossing (impactsLocal) news item renders with its text + shared date
+  const ch = { worldState: { news: [{ day: 8, worldDay: 208, text: "This reaches your area — a warband nears the mill", impactsLocal: true }] } };
+  check("41c: an impactsLocal item renders on the shared calendar with its crossing phrasing", /\[world-day 208\] This reaches your area/.test(newsForGM(ch)));
+
+  // the GM contract + the ledger boundary rule shipped (raw-source contract check)
+  const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("41c: ledger contract carries the impactsLocal cross-boundary flag", /"ledgerEvents"[\s\S]{0,200}"impactsLocal"/.test(gmSrc));
+  check("41c: the boundary rule tells the GM when impactsLocal crosses", /materially reach ANOTHER character's immediate area/i.test(gmSrc));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

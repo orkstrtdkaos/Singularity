@@ -13,6 +13,7 @@
 import { callClaudeJSON } from "./claude.js";
 import { applyNpcUpdates } from "./npcs.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile } from "./sync.js";
+import { absoluteWorldDay, worldDayAt } from "./worldtime.js";
 
 const NEWS_CAP = 20;
 const NEWS_TRAVEL_DAYS = 3;
@@ -100,7 +101,9 @@ export async function runWorldTick({ character, content, currentDay, evolveNpcs 
 
   ws.lastTickDay = currentDay;
   if (news.length) {
-    const stamped = news.map(n => ({ day: currentDay, text: n }));
+    // SNG-041: stamp the absolute world-day (shared calendar) alongside the local journey-day.
+    const wd = absoluteWorldDay();
+    const stamped = news.map(n => ({ day: currentDay, worldDay: wd, text: n }));
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -125,7 +128,7 @@ export async function syncSharedWorld({ character, content }) {
           ws.eventStages[eventId] = { ...st };
           const ev = content.events[eventId];
           const def = ev?.stages.find(s => s.stage === st.stage);
-          if (ev && def) news.push(`${ev.name} stands at ${def.name} across the valley: ${def.summary}`);
+          if (ev && def) news.push({ text: `${ev.name} stands at ${def.name} across the valley: ${def.summary}`, worldDay: absoluteWorldDay() });
         }
       }
     }
@@ -138,7 +141,14 @@ export async function syncSharedWorld({ character, content }) {
     const since = ws.lastSharedReadAt || "1970";
     const ledger = await fetchLedger(0);
     const fromOthers = ledger.filter(e => e.who !== character.id && e.at > since && e.visibility !== "hidden").slice(-5);
-    for (const e of fromOthers) news.push(`Word reaches you: ${e.what}${e.where ? ` (near ${e.where.replace(/_/g, " ")})` : ""}`);
+    // SNG-041 RECONCILIATION: another character's event dates by the SHARED absolute world-day
+    // (derived from its real-time .at, or its own worldDay stamp) — so their timeline and yours
+    // share ONE calendar. This is the fix for the Day-8-vs-Day-11 drift.
+    for (const e of fromOthers) news.push({
+      text: `${e.impactsLocal ? "This reaches your area — " : "Word reaches you: "}${e.what}${e.where ? ` (near ${e.where.replace(/_/g, " ")})` : ""}`,
+      worldDay: e.worldDay ?? worldDayAt(e.at),
+      impactsLocal: !!e.impactsLocal // SNG-041: a boundary-crossing distant event (far-world → local frame)
+    });
     ws.lastSharedReadAt = new Date().toISOString();
     // 3. push the consolidated region state back (SHA-retry inside pushOwnedFile)
     await pushOwnedFile("world/regions/valley.json", {
@@ -152,11 +162,13 @@ export async function syncSharedWorld({ character, content }) {
     console.warn("[sharedworld] consolidation skipped:", err.message);
   }
   if (news.length) {
-    const stamped = news.map(n => ({ day: ws.lastTickDay, text: String(n).slice(0, 220) }));
+    // each item carries its OWN absolute world-day (a cross-character event keeps the date it
+    // actually happened; a local merge stamps now) — so the shared calendar stays coherent.
+    const stamped = news.map(n => ({ day: ws.lastTickDay, worldDay: n.worldDay ?? absoluteWorldDay(), text: String(n.text).slice(0, 220), ...(n.impactsLocal ? { impactsLocal: true } : {}) }));
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
-  return { synced: true, news };
+  return { synced: true, news: news.map(n => n.text) };
 }
 
 /** Pull (and clear) news the player hasn't seen — shown once on return to play. */
@@ -170,7 +182,9 @@ export function takeUnseenNews(character) {
 export function newsForGM(character) {
   const news = character.worldState?.news || [];
   if (!news.length) return null;
-  return news.slice(-8).map(n => `- [day ${n.day}] ${n.text}`).join("\n");
+  // SNG-041: date on the SHARED absolute world-day when known (so cross-character news lines up);
+  // fall back to the local journey-day for pre-SNG-041 items (derives-never-fabricates).
+  return news.slice(-8).map(n => `- [${Number.isFinite(n.worldDay) ? `world-day ${n.worldDay}` : `day ${n.day}`}] ${n.text}`).join("\n");
 }
 
 /** The AI pass: what happened to known people while the character was away. */

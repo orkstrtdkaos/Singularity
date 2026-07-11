@@ -38,7 +38,7 @@ REPLY FORMAT — a single JSON object, no other text:
   "choices": [{"label": "...", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": 0.4}, "difficulty": 0, "intentTags": ["..."], "abilityId": null, "energyCost": null, "trivial": false, "encounterId": null, "emergenceId": null}],
   "deeds": [{"description": "...", "tags": ["..."], "weight": 1, "communityId": "valley.millbrook"}],
   "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [{"name": "...", "kind": "weapon|tool|consumable|quest|misc", "description": "...", "consumable": false, "effects": {"health": 0, "energy": 0}}], "inventoryRemove": ["exact item name"], "xp": 0},
-  "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}}],
+  "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}, "impactsLocal": false}],
   "questUpdates": [{"op": "start|progress|complete|fail", "questId": "kebab-id", "title": "...", "summary": "...", "giver": "...", "note": "...", "xpReward": 25}],
   "scene": {"setting": "1-2 sentences: EXACTLY where the character is (indoor/outdoor, position, lighting, weather)", "npcsPresent": [{"name": "...", "state": "what they're doing right now"}], "objects": ["notable objects in view or reach"], "threads": ["unresolved in-scene threads (a question hanging, someone waiting for an answer)"]},
   "npcUpdates": [{"op": "meet|update", "npcId": "kebab-id (stable across scenes)", "name": "...", "role": "...", "description": "one line, on meet", "note": "what passed between you this beat", "learned": ["fact about them / something they experienced"], "skillsObserved": ["skill they demonstrated"], "relationshipDelta": 1, "status": "active|injured|missing|dead|departed", "statusNote": "their CURRENT situation in one line (rescued and safe at the mill, injured in the Zone, now travels with the party) — fed every turn, not just once", "revealName": "their true name, ONLY when the fiction reveals the identity of a known-but-unnamed person"}],
@@ -59,7 +59,7 @@ REPLY FORMAT — a single JSON object, no other text:
 "generateRequest": THE WORLD GROWS THROUGH PLAY. When the fiction reaches for a person, place, or thread that is NOT already in KNOWN PEOPLE / the current location / your given place ids — a new face at a gate, a room beyond a door the player just opened, a tension worth its own thread — emit a lightweight "generateRequest" naming its type + a one-line hint, and narrate only lightly around it ("someone steps from the toll-hut"). DO NOT invent the full character/place details inline — the engine authors the durable, in-grain entity from this place's disposition and hands it back, so it persists and recurs with a stable identity. PREFER REUSE: if the scene calls for someone you already know, use them — request a new entity ONLY for genuinely new content. Omit the field entirely on a normal beat. (Reactive only — you request when the fiction needs it; the world does not spawn on its own here.)
 "discovery" ONLY when the resolution block explicitly says DISCOVERY-ELIGIBLE (a critical success on a novel or combined ability use). Otherwise omit it entirely.
 The "scene" field is REQUIRED every turn: carry forward everything still true from the current scene state, change only what this beat actually changed.
-Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
+Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world. Set "impactsLocal": true on a ledger event ONLY when its consequence would materially reach ANOTHER character's immediate area or active quest (a war nearing a shared town, a time-critical threat) — such an event crosses the far-world/local boundary and surfaces prominently to whoever it affects on return; ordinary consequences leave it false.`;
 
 /** Build the context block the GM sees each turn. */
 /** SNG runtime prompt-cache tiers (stable → volatile). Every byte in system/world/
@@ -68,7 +68,7 @@ Choices: 3 or 4, genuinely different approaches (not flavors of the same one). d
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, livingWorldDetail } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, livingWorldDetail, worldDateLabel } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -122,7 +122,7 @@ export function tierParts(ctx) {
 
   // ---- AFTER breakpoint 4 (UNCACHED): this-turn ephemeral inputs ----
   if (opLossNote) player.push(`## PREVIOUS TURN OPS LOST\n${opLossNote}`);
-  if (timeLabel) player.push(`## CURRENT TIME\n${timeLabel}`);
+  if (timeLabel) player.push(`## CURRENT TIME\n${timeLabel}${worldDateLabel ? `\nShared world calendar (SNG-041 — the ONE calendar every character shares; the far world runs on this in real time): ${worldDateLabel}` : ""}\n(Reference dates ONLY as given here — the engine owns the calendar; never invent a bare day-number.)`);
   if (itemAdvance) player.push(`## AN ITEM WAKES (narrate this shift into the scene — a real, felt change in the object)\n${itemAdvance}`);
   if (resolution?.gambit) {
     player.push(`## RESOLUTION — GAMBIT (already rolled by the engine; narrate the whole run per rule 15A)\nGoal: ${resolution.gambit.goal}\nOutcome: ${resolution.gambit.outcome}\n${resolution.gambit.steps.join("\n")}`);

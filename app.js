@@ -12,7 +12,7 @@ import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.9";
+const APP_VERSION = "1.8.0";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -840,7 +840,8 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
-    livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }) // §2: proactively surface only LIVE (non-dormant) grown content
+    livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }), // §2: proactively surface only LIVE (non-dormant) grown content
+    worldDateLabel: worldDate().label // SNG-041: the shared absolute calendar (references-not-invents)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -877,10 +878,13 @@ function applyTurn(turn, resolution) {
   for (const item of d.inventoryAdd || []) addItem(character, item, CONTENT.items);
   for (const item of d.inventoryRemove || []) removeItem(character, typeof item === "string" ? item : item?.name);
 
-  // deeds → reputation (day-stamped so news spread knows when they happened)
+  // deeds → reputation (day-stamped so news spread knows when they happened; SNG-041 also
+  // stamps the shared absolute world-day so a deed dates the same on every character's calendar)
+  const wdNow = absoluteWorldDay();
   for (const deed of turn.deeds || []) {
     const recorded = recordDeed(character, { ...deed, locationId: location.id, communityId: deed.communityId ?? location.communityId }, mods);
     recorded.day = dayNow;
+    recorded.worldDay = wdNow;
   }
   // companion bonds grow through shared life (engine-owned; GM has no op)
   {
@@ -1006,9 +1010,10 @@ function applyTurn(turn, resolution) {
   // shared-world consequences (best-effort, never blocks play)
   if (syncEnabled()) {
     const events = (turn.ledgerEvents || []).map(e => ({
-      schemaVersion: 1, at: new Date().toISOString(), who: character.id, playerKey: profile.playerKey,
+      schemaVersion: 1, at: new Date().toISOString(), worldDay: absoluteWorldDay(), who: character.id, playerKey: profile.playerKey,
       where: location.id, what: String(e.what || "").slice(0, 200), tags: e.tags || [],
-      spectrumDeltas: e.spectrumDeltas || {}, visibility: e.visibility || "witnessed"
+      spectrumDeltas: e.spectrumDeltas || {}, visibility: e.visibility || "witnessed",
+      impactsLocal: !!e.impactsLocal // SNG-041: crosses the far-world/local boundary to whoever it affects
     }));
     if (events.length) appendLedger(events, character.id).catch(err => console.warn("[ledger]", err.message));
     backupSaves(character, profile);
@@ -2097,7 +2102,7 @@ function renderPlay(turn, opts = {}) {
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag">${esc(time.label)}</span></div>
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag" title="Your journey clock (local, play-paced) · the shared world calendar (SNG-041, real-time)">${esc(time.label)} <span class="world-day-tag">· world-day ${absoluteWorldDay()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";
       if (d.type === "duel") status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;

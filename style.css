@@ -329,3 +329,6 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 /* SNG-BATCH-9 §3: content-rating settings controls */
 .rating-check { display:block; margin-top:6px; font-size:0.92em; color:var(--ink-soft,#b8b8c8); cursor:pointer; }
 .rating-check input { margin-right:6px; vertical-align:middle; }
+
+/* SNG-041: the shared world calendar chip beside the local journey clock */
+.world-day-tag { opacity: 0.7; font-variant-numeric: tabular-nums; }

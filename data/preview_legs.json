@@ -2,23 +2,151 @@
   "schemaVersion": 1,
   "id": "preview_legs",
   "note": "Dev/test checklist data for the in-app preview-legs panel (SNG-051). Solo legs run anytime; cross-player legs need GitHub sync configured on two profiles. Aevi owns this data file; CCode owns the panel that renders it.",
-  "buildVersion": "1.8.2",
+  "buildVersion": "1.8.3",
   "legs": [
-    { "id": "b5-crossclass", "batch": "BATCH-5", "mode": "solo", "title": "Cross-class cost", "do": "Take or rank an ability outside your class.", "pass": "Costs double — picker shows 2 pts, button reads ▲×2." },
-    { "id": "b5-fork", "batch": "BATCH-5", "mode": "solo", "title": "Branch fork lock", "do": "Rank Prism Sight to 3.", "pass": "Offers two paths, locks the unchosen one permanently, marks ⑂ on sheet + skill graph." },
-    { "id": "b5-feel", "batch": "BATCH-5", "mode": "solo", "title": "Phase-3 feel-checks", "do": "In a charged/tilted place do an aligned vs opposed action; try the surge dial; wake the Waystaff.", "pass": "Aligned action gets a 'the place favored this' receipt; surge = power now + backlash after; Waystaff shows ✦." },
-    { "id": "b7-style", "batch": "BATCH-7", "mode": "solo", "title": "Per-character play-style", "do": "Play Cellaceron on planned/strategic actions a few turns.", "pass": "HE gains 'strategist'; Usnea's style doesn't move; old characters kept the style they had." },
-    { "id": "b7-inv", "batch": "BATCH-7", "mode": "solo", "title": "Quest + inventory robustness", "do": "Run a quest progress→complete and pick up/use a couple items.", "pass": "Nothing silently vanishes; Quest Log matches; duplicate-named items stack instead of splitting." },
-    { "id": "b8-gambit", "batch": "BATCH-8", "mode": "solo", "title": "Gambit surfacing + XP", "do": "Enter a multi-obstacle scene, then a plain 1-2 choice scene; run a gambit to completion.", "pass": "Hint appears on the plan-apt scene, NOT the plain one; completion awards +10 XP. (If the hint feels too frequent, that's SNG-043, not a fail.)" },
-    { "id": "b8-time", "batch": "BATCH-8", "mode": "solo", "title": "Narrative time", "do": "Sleep, then have a short conversation.", "pass": "Sleep jumps the clock ~8h; conversation ticks minutes; the story's time-of-day matches the clock." },
-    { "id": "b9p1-generate", "batch": "BATCH-9 P1", "mode": "solo", "title": "Generate anchor", "do": "Walk somewhere the fiction hasn't authored.", "pass": "A new in-grain place/person is minted, persists, is revisitable with facts intact, and reads like the LOCAL disposition — not generic." },
-    { "id": "b9p1-rating", "batch": "BATCH-9 P1", "mode": "solo", "title": "Rating ceiling", "do": "Set your profile R+ then G and play the same beat; try to set a minor profile above PG.", "pass": "Intensity differs by ceiling; a minor profile CANNOT be set above PG." },
-    { "id": "sng041-clock", "batch": "SNG-041", "mode": "solo", "title": "One world, one clock", "do": "With two characters at different personal day-counts, trigger an event/away-digest.", "pass": "Both reference the SAME absolute world-date for the same event; each still shows its own journey-day." },
-    { "id": "b9p2-offscreen", "batch": "BATCH-9 P2", "mode": "solo", "title": "Living advancement", "do": "Leave an established grown entity across a real-time gap, then return.", "pass": "It has moved on plausibly; the away-digest dates its deeds on the shared clock, on-or-before now." },
-    { "id": "b9p2-keep", "batch": "BATCH-9 P2", "mode": "solo", "title": "Keep + nominate", "do": "⭐ Keep a grown entity; leave another ignored.", "pass": "The kept one holds/climbs; the ignored one fades; some grown things surface as ★ Notable atop the Codex." },
-    { "id": "b9p3-promote", "batch": "BATCH-9 P3", "mode": "cross-player", "title": "Earned promotion", "do": "Grow an entity to nominated tier on profile A (sync on).", "pass": "It promotes into shared canon; a synced profile B receives it." },
-    { "id": "b9p3-lens", "batch": "BATCH-9 P3", "mode": "cross-player", "title": "Rating-lens", "do": "Set profile B to a lower rating (e.g. G) and view an above-ceiling entity.", "pass": "It comes through dialed-DOWN (softer wording), or ABSENT for sexual/gore — never softened-into-view." },
-    { "id": "b9p3-contradiction", "batch": "BATCH-9 P3", "mode": "cross-player", "title": "Contradiction → rank", "do": "Force a promoted entity that collides with existing canon.", "pass": "Resolves by realness-weight into a loud canonical truth + a persisting variant/rumor; authored core canon holds." },
-    { "id": "b9p3-floor", "batch": "BATCH-9 P3", "mode": "cross-player", "title": "Minor-protection floor", "do": "View shared canon on a minor profile.", "pass": "Gore/sexual content is HARD-EXCLUDED (absent), NOT softened. The family-safety floor — confirm directly." }
+    {
+      "id": "b5-crossclass",
+      "batch": "BATCH-5",
+      "mode": "solo",
+      "title": "Cross-class cost",
+      "do": "Take or rank an ability outside your class.",
+      "pass": "Costs double — picker shows 2 pts, button reads ▲×2."
+    },
+    {
+      "id": "b5-fork",
+      "batch": "BATCH-5",
+      "mode": "solo",
+      "title": "Branch fork lock",
+      "do": "Rank Prism Sight to 3.",
+      "pass": "Offers two paths, locks the unchosen one permanently, marks ⑂ on sheet + skill graph."
+    },
+    {
+      "id": "b5-feel",
+      "batch": "BATCH-5",
+      "mode": "solo",
+      "title": "Phase-3 feel-checks",
+      "do": "In a charged/tilted place do an aligned vs opposed action; try the surge dial; wake the Waystaff.",
+      "pass": "Aligned action gets a 'the place favored this' receipt; surge = power now + backlash after; Waystaff shows ✦."
+    },
+    {
+      "id": "b7-style",
+      "batch": "BATCH-7",
+      "mode": "solo",
+      "title": "Per-character play-style",
+      "do": "Play Cellaceron on planned/strategic actions a few turns.",
+      "pass": "HE gains 'strategist'; Usnea's style doesn't move; old characters kept the style they had."
+    },
+    {
+      "id": "b7-inv",
+      "batch": "BATCH-7",
+      "mode": "solo",
+      "title": "Quest + inventory robustness",
+      "do": "Run a quest progress→complete and pick up/use a couple items.",
+      "pass": "Nothing silently vanishes; Quest Log matches; duplicate-named items stack instead of splitting."
+    },
+    {
+      "id": "b8-gambit",
+      "batch": "BATCH-8",
+      "mode": "solo",
+      "title": "Gambit surfacing + XP",
+      "do": "Enter a multi-obstacle scene, then a plain 1-2 choice scene; run a gambit to completion.",
+      "pass": "Hint appears on the plan-apt scene, NOT the plain one; completion awards +10 XP. (If the hint feels too frequent, that's SNG-043, not a fail.)"
+    },
+    {
+      "id": "b8-time",
+      "batch": "BATCH-8",
+      "mode": "solo",
+      "title": "Narrative time",
+      "do": "Sleep, then have a short conversation.",
+      "pass": "Sleep jumps the clock ~8h; conversation ticks minutes; the story's time-of-day matches the clock."
+    },
+    {
+      "id": "b9p1-generate",
+      "batch": "BATCH-9 P1",
+      "mode": "solo",
+      "title": "Generate anchor",
+      "do": "Walk somewhere the fiction hasn't authored.",
+      "pass": "A new in-grain place/person is minted, persists, is revisitable with facts intact, and reads like the LOCAL disposition — not generic."
+    },
+    {
+      "id": "b9p1-rating",
+      "batch": "BATCH-9 P1",
+      "mode": "solo",
+      "title": "Rating ceiling",
+      "do": "Set your profile R+ then G and play the same beat; try to set a minor profile above PG.",
+      "pass": "Intensity differs by ceiling; a minor profile CANNOT be set above PG."
+    },
+    {
+      "id": "sng041-clock",
+      "batch": "SNG-041",
+      "mode": "solo",
+      "title": "One world, one clock",
+      "do": "With two characters at different personal day-counts, trigger an event/away-digest.",
+      "pass": "Both reference the SAME absolute world-date for the same event; each still shows its own journey-day."
+    },
+    {
+      "id": "b9p2-offscreen",
+      "batch": "BATCH-9 P2",
+      "mode": "solo",
+      "title": "Living advancement",
+      "do": "Leave an established grown entity across a real-time gap, then return.",
+      "pass": "It has moved on plausibly; the away-digest dates its deeds on the shared clock, on-or-before now."
+    },
+    {
+      "id": "b9p2-keep",
+      "batch": "BATCH-9 P2",
+      "mode": "solo",
+      "title": "Keep + nominate",
+      "do": "⭐ Keep a grown entity; leave another ignored.",
+      "pass": "The kept one holds/climbs; the ignored one fades; some grown things surface as ★ Notable atop the Codex."
+    },
+    {
+      "id": "b9p3-promote",
+      "batch": "BATCH-9 P3",
+      "mode": "cross-player",
+      "title": "Earned promotion",
+      "do": "Grow an entity to nominated tier on profile A (sync on).",
+      "pass": "It promotes into shared canon; a synced profile B receives it."
+    },
+    {
+      "id": "b9p3-lens",
+      "batch": "BATCH-9 P3",
+      "mode": "cross-player",
+      "title": "Rating-lens",
+      "do": "Set profile B to a lower rating (e.g. G) and view an above-ceiling entity.",
+      "pass": "It comes through dialed-DOWN (softer wording), or ABSENT for sexual/gore — never softened-into-view."
+    },
+    {
+      "id": "b9p3-contradiction",
+      "batch": "BATCH-9 P3",
+      "mode": "cross-player",
+      "title": "Contradiction → rank",
+      "do": "Force a promoted entity that collides with existing canon.",
+      "pass": "Resolves by realness-weight into a loud canonical truth + a persisting variant/rumor; authored core canon holds."
+    },
+    {
+      "id": "b9p3-floor",
+      "batch": "BATCH-9 P3",
+      "mode": "cross-player",
+      "title": "Minor-protection floor",
+      "do": "View shared canon on a minor profile.",
+      "pass": "Gore/sexual content is HARD-EXCLUDED (absent), NOT softened. The family-safety floor — confirm directly."
+    },
+    {
+      "id": "sng035-portrait",
+      "batch": "SNG-035",
+      "mode": "solo",
+      "title": "Character portrait",
+      "do": "Create a character (or hit a milestone) with imagery on.",
+      "pass": "A Pollinations portrait generates from your appearance/origin/gear, renders in-game, and PERSISTS (cached — doesn't regenerate on revisit); toggle off suppresses it."
+    },
+    {
+      "id": "sng035-scene",
+      "batch": "SNG-035",
+      "mode": "solo",
+      "title": "Location / moment art",
+      "do": "Discover a new place, or hit a big beat (discovery, gambit run).",
+      "pass": "An in-grain image appears for the place/moment and persists; stays within your rating ceiling."
+    }
   ]
 }

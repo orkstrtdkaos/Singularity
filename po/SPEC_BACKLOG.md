@@ -37,13 +37,15 @@ Engine-needing work from the 2026-07 content-expansion sessions. ALL content for
 **Ratified-and-waiting:** SNG-BATCH-5 (soft class-cost + branch forks; verify prior CCode state before re-run).
 
 ## Suggested batches
-- **BATCH-6 (Foundation):** SNG-019 + SNG-022. CLOSED GREEN 2026-07-10 (v1.7.2, 486 checks).
-- **BATCH-7 (Trustworthy player state):** identity + per-character style (seed-from-aggregate) + cross-device load-latest + inventory/quest resolver-hardening. ACTIVE 2026-07-10. First consumer of the foundation.
-- **BATCH-8 (Fast high-impact — surface what's built, fix the clock):** SNG-031 (gambit surfacing) + SNG-030-remainder (completionBonusXp wire) + SNG-032 (narrative time). Small, ready, highest felt-impact/effort — a fully-built system nobody can find + a felt clock bug. Parallel-able; **NEXT-READY** after BATCH-7. Spec body below.
-- **BATCH-9 (Living spine):** SNG-020 (the anchor) + SNG-021 + SNG-024 + SNG-025 + SNG-034. The world that grows/lives/ends/marks/breathes. Aevi to spec with care — the strategic next-after.
-- **BATCH-10 (Player systems):** SNG-017 (origins + ent-gating fix + SNG-036 martial paths ride together) + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
-- **BATCH-11 (Multiplayer + polish):** SNG-033 (party v2) + SNG-037 (cross-char awareness) + SNG-038 (simultaneous turns) + SNG-035 (imagery). The multiplayer identity; do together, after foundation.
-- **BATCH-0 (Hygiene, do ANYTIME, cheap):** SNG-040 (content CI) now; SNG-039 (onboarding) once creation/SNG-017 lands. 040 protects every future commit.
+- **BATCH-6 (Foundation):** SNG-019 + SNG-022. ✅ CLOSED GREEN 2026-07-10 (v1.7.2).
+- **BATCH-7 (Trustworthy player state):** identity + per-char style + cross-device + inventory/quest hardening. ✅ SHIPPED v1.7.5 — awaiting Erik legs.
+- **BATCH-8 (Fast high-impact):** gambit surfacing + completion-XP + narrative time. ✅ SHIPPED v1.7.6 — awaiting Erik legs.
+- **SNG-041 (Absolute world dating — one world, one clock):** shared real-time epoch for the far world + play-paced local frame + consequence coupling. ✅ ANCHOR RESOLVED — **NEXT BUILD, ahead of BATCH-9** (so the generative world is born date-coherent).
+- **BATCH-9 (Living spine / generative anchor):** Phase 1 = generate(type,context) + NPCs/locations/arcs + engagement governor + weight-realness + content-rating (R+). ON DECK. Ph2 (offscreen advance + ⭐ + nomination) / Ph3 (shared promotion + rating-lens) designed. The strategic build.
+- **SNG-042 (Legends & Villains):** power-tiered recurring heroes + villains (epic→riffraff) + dramatic-beat deployment. RIDES BATCH-9 (after Ph1, best with Ph2). Aevi owes authored anchors.
+- **BATCH-10 (Player systems):** SNG-017 origins + martial (036) + SNG-018 + 023 + 027 + money/Game/recruitment + 026.
+- **BATCH-11 (Multiplayer + polish):** SNG-033 party v2 + 037 + 038 + 035 imagery.
+- **BATCH-0 (Hygiene, anytime):** SNG-040 content CI now; SNG-039 onboarding once creation lands.
 
 *Renumbered 2026-07-10 (Aevi): resolved the dual-BATCH-7 collision — trustworthy-state kept 7, living-spine → 9, downstream +1. Build order per the dependency spine unchanged; labels now unambiguous.*
 
@@ -279,7 +281,7 @@ The game is deep (tiers, gates, poles, gambits, combinations, martial paths) and
 
 ## SNG-041 — Absolute world dating (one world, one clock)
 
-**Fast-fix, ships AHEAD of BATCH-9. ⛔ ONE FORK GATES THE BUILD (see below) — do NOT start until Erik ratifies the anchor.** Erik-found+clarified live 2026-07-11; Aevi PO. Preview-testing protocol. Only Aevi closes.
+**Fast-fix, ships AHEAD of BATCH-9. ✅ ANCHOR RESOLVED 2026-07-11 (hybrid — below); BUILDABLE.** Erik-found+clarified live 2026-07-11; Aevi PO. Preview-testing protocol. Only Aevi closes.
 
 **Root cause (corrected — Erik-clarified + confirmed in code).** Time is PER-CHARACTER: `worldtime.js newClock(startDay=1)` gives every character its own Day-1 origin, so "Day 8" (this character) and "Day 11" (the Ent character) are independent relative counts with NO shared reference. A shared-world event carried the Ent's relative Day-11 into this character's Day-8 frame; they can't reconcile because no absolute exists. worldtime.js's own comment already flags it: *"for v0.5 shared worlds: time mode must become a WORLD-level choice — one world, one clock."* No shared epoch exists yet (search: 0 matches). SNG-041 IS that.
 
@@ -290,10 +292,11 @@ The game is deep (tiers, gates, poles, gambits, combinations, martial paths) and
 4. **Keep the per-character journey-day as optional flavor** (Erik: "keep it if useful") — a separate "days you've played" counter shown alongside/instead of the absolute date. DISPLAY layer, NOT the reconciliation key.
 5. **Catch-up on load.** On load, advance the character to the current absolute world-day and run the worldtick for elapsed absolute days (worldtick already gap-advances — formalize against the shared clock).
 
-**⛔ [ERIK DECISION — GATES BUILD] What anchors the absolute world-clock?**
-- **(a) Real wall-clock (RECOMMENDED):** the world ages in real-time from a shared epoch (at the world ratio). Automatic, genuinely shared, reconciles cross-character for free, matches the existing `realAnchor` machinery AND worldtick's "the world moves while you're away." Cost: the world ages when you're not playing.
-- **(b) Shared narrative epoch:** the world-day advances only through play (world waits for you). But "shared" gets messy — if characters play independently, whose play advances the shared clock? Needs a designated driver; fights itself.
-- Aevi recommends (a); it's the only clean shared reference and the code already leans there. **CCode: do not build until Erik picks.**
+**ANCHOR RESOLVED (Erik 2026-07-11) — HYBRID, two coupled clocks:**
+- **Distant / ambient world → (a) real-time absolute.** The away-digest, propagating events, traveling figures, distant wars, and ALL cross-character reconciliation run on the shared real-time epoch. The far world ages whether or not you play.
+- **Active local frame (current area + active quests) → (b) play-paced.** Advances by narrative time (SNG-032); waits for the player. You never lose a quest window or an active scene to inactivity.
+- **Consequence coupling — (a) OVERRIDES (b) when real-time passage would materially affect the active area/quest.** A distant real-timed event tagged as impacting your area/quest (a war reaching your town; a genuinely time-critical quest) promotes into the local frame and applies on return (worldtick already gap-applies — this tags WHICH events cross the boundary and lets real consequence override the play-paced default).
+Net: two clocks reconciled on the absolute — real-time governs the far world + cross-character stamps; play-time governs your immediate scene; impactful distant events cross the boundary. **BUILDABLE — no longer gated.**
 
 **Guardrails.** Engine owns dates (GM references/narrates, never authors bare day-numbers); backward-safe (legacy per-character clocks migrate to the shared epoch; unknown = unknown, no fabricated absolute dates — derives-never-fabricates); reuse worldtime.js + facts.js + worldtick.js (extend, don't reinvent); suites + parse_probe green.
 

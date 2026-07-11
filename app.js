@@ -9,7 +9,7 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacte
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
-import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable } from "./engine/generate.js";
+import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays } from "./engine/worldtime.js";
@@ -17,7 +17,7 @@ import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
-import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.0";
+const APP_VERSION = "1.8.1";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -595,6 +595,7 @@ async function maybeTick() {
   const currentDay = readClock(character.clock).day;
   await runWorldTick({ character, content: CONTENT, currentDay });
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
+  await advanceGeneratedOffscreen({ character }); // SNG-BATCH-9 Phase 2: your established grown world moved on while away
   saveCharacter(character);
   return takeUnseenNews(character);
 }
@@ -1683,6 +1684,19 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
         <div class="codex-kind">${esc(open.kind)}${open.entityId ? ` <span class="codex-anchor" title="anchored to a known entity">◈ ${esc(open.entityId)}</span>` : ""}</div>
         <h3 class="codex-title">${esc(open.label)}</h3>
         ${(open.aliases || []).length ? `<div class="codex-aliases">also called: ${open.aliases.map(esc).join(" · ")}</div>` : ""}
+        ${(() => {
+          // SNG-BATCH-9 Phase 2: a GROWN entity carries a canon-tier badge + a one-tap ⭐ Keep
+          // (the explicit engagement boost — available, never nagged). Nominated = a promotion
+          // candidate toward shared canon (Phase 3).
+          const g = open.entityId ? findGenerated(character, open.entityId) : null;
+          if (!g?._gen) return "";
+          const tier = g._gen.tier;
+          const badge = tier === "nominated" ? "★ notable — nomination candidate" : tier === "established" ? "◆ established in your world" : "◇ freshly grown";
+          return `<div class="gen-canon ${tier}">
+            <span class="gen-tier" title="grown through play · weight ${effectiveWeight(g)}${g._gen.rating ? ` · ${g._gen.rating}` : ""}">${badge}</span>
+            <button class="opt gen-keep" data-keep="${esc(open.entityId)}" title="Keep this — mark it as one that matters to you. Raises it toward notable. Never nags.">⭐ Keep</button>
+          </div>`;
+        })()}
         ${mergeMode ? (() => {
           // SNG-019 allocation: fold THIS entry into the one it really belongs to
           const others = Object.values(character.codex.topics).filter(t => t.id !== open.id);
@@ -1703,6 +1717,14 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
         <button class="opt" id="codex-merge-mode" style="margin-top:10px">⇆ This is the same as another entry…</button>`}
         <button class="btn secondary" id="codex-close-topic" style="margin-top:12px">All topics</button>
       </div>` : `
+      ${(() => {
+        // SNG-BATCH-9 Phase 2 §3: entities that grew into 'notable' (nominated) surface as
+        // promotion candidates toward shared canon. Surfacing only — tap to open + ⭐/keep.
+        const noms = nominationsFor(character);
+        if (!noms.length) return "";
+        return `<div class="codex-nominations"><div class="codex-group-title">★ Notable — grown into your world's canon</div>
+          ${noms.slice(0, 6).map(n => `<button class="opt codex-nom" data-topic="${esc(n.id)}" title="weight ${n.weight}${n.rating ? ` · ${n.rating}` : ""} — a candidate to become shared-world canon">★ ${esc(n.name)} <span class="cost">${esc(n.type)}</span></button>`).join("")}</div>`;
+      })()}
       ${suggestions.length ? `<div class="codex-suggestions"><div class="codex-group-title">These look like the same thing — your call</div>
         ${suggestions.map((s, i) => `<div class="codex-sug-row"><span class="codex-sug-pair">«${esc(s.a)}» ↔ «${esc(s.b)}»</span>
           <button class="opt codex-sug-btn" data-sugmerge="${i}">Merge</button>
@@ -1739,6 +1761,14 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   for (const b of app.querySelectorAll("[data-topic]")) b.onclick = () => renderCodexScreen(query, b.dataset.topic);
   const closeT = document.getElementById("codex-close-topic");
   if (closeT) closeT.onclick = () => renderCodexScreen(query, null);
+  // SNG-BATCH-9 Phase 2: ⭐ keep — the explicit engagement boost (raises toward notable)
+  for (const b of app.querySelectorAll("[data-keep]")) b.onclick = () => {
+    const rec = findGenerated(character, b.dataset.keep);
+    if (!rec) return;
+    recordAttention(rec, "keep", readClock(character.clock).day);
+    saveCharacter(character);
+    renderCodexScreen(query, openTopicId);
+  };
   // SNG-019 allocation handlers: merge mode, target pick, suggestion verdicts
   const mm = document.getElementById("codex-merge-mode");
   if (mm) mm.onclick = () => renderCodexScreen(query, openTopicId, true);

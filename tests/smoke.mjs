@@ -14,7 +14,7 @@ import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests } f
 import { sanitizeScene, buildTurnContext, sanitizeIntent } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
-import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
+import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
@@ -28,7 +28,7 @@ import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseA
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
-import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM } from "../engine/generate.js";
+import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 
 // stub localStorage for worldtime settings in Node
@@ -1843,6 +1843,83 @@ await (async () => {
   check("41c: ledger contract carries the impactsLocal cross-boundary flag", /"ledgerEvents"[\s\S]{0,200}"impactsLocal"/.test(gmSrc));
   check("41c: the boundary rule tells the GM when impactsLocal crosses", /materially reach ANOTHER character's immediate area/i.test(gmSrc));
 }
+
+// --- SNG-BATCH-9 Phase 2a: offscreen advancement of established generated entities ---
+await (async () => {
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  const llm = (o) => async () => o;
+  const character = { id: "p2", level: 4 };
+  // an established NPC (attended) + a fresh one (ignored)
+  const est = await generate("npc", { character, day: 1, location: { id: "kestrels_roost", name: "Kestrel's Roost", spectrum: {} } },
+    { callJSON: llm({ name: "Rell Marketwarden", role: "a stall-boss with ambitions", spectrum: { chaos: 0.3 }, fears: "irrelevance", wants: "to own the whole market row", homeLocation: "kestrels_roost" }), schema: npcSchema });
+  recordAttention(est, "interact", 1); recordAttention(est, "interact", 1); // -> established
+  const fresh = await generate("npc", { character, day: 1, location: { id: "kestrels_roost", name: "Kestrel's Roost", spectrum: {} } },
+    { callJSON: llm({ name: "Quiet Sib", role: "a passing tinker", spectrum: {}, fears: "x", wants: "to move on", homeLocation: "kestrels_roost" }), schema: npcSchema });
+  check("2a: precondition — one established, one fresh", est._gen.tier === "established" && fresh._gen.tier === "fresh");
+
+  // first observation only anchors the shared-clock baseline (nothing elapsed yet)
+  const now0 = Date.UTC(2026, 6, 10);
+  const first = await advanceGeneratedOffscreen({ character, now: now0, evolveFn: async () => ({ developments: [{ entityId: est.id, note: "SHOULD NOT FIRE YET" }] }) });
+  check("2a: first tick just anchors the baseline (no advancement)", first.length === 0 && character.worldState.lastTickWorldDay != null);
+
+  // real time passes → established advances offscreen, dated on the shared clock; fresh does NOT
+  const now1 = Date.UTC(2026, 6, 20); // 10 world-days later
+  let sawEntities = null;
+  const evolve = async ({ entities }) => { sawEntities = entities.map(e => e.id); return { developments: [{ entityId: est.id, note: "muscled two rivals off the row" }] }; };
+  const news = await advanceGeneratedOffscreen({ character, now: now1, evolveFn: evolve });
+  check("2a: only established/nominated entities are offered to the advance pass", sawEntities && sawEntities.includes(est.id) && !sawEntities.includes(fresh.id));
+  check("2a: the established entity moved on (offscreen log grew)", (est._gen.offscreen || []).length === 1 && /muscled two rivals/.test(est._gen.offscreen[0].note));
+  check("2a: away-digest item is dated on the shared world-clock, on-or-before now", news.length === 1 && news[0].worldDay === absoluteWorldDay(now1) && news[0].worldDay <= absoluteWorldDay(now1));
+  check("2a: the development accumulated on the entity's codex node ('moved on')", (character.codex?.topics?.[est.id]?.facts || []).some(fct => /while away/.test(fct) && /muscled/.test(fct)));
+  check("2a: the fresh entity did NOT advance", !(fresh._gen.offscreen || []).length);
+
+  // governor: a save with NO established entities advances the baseline but produces nothing
+  const c2 = { id: "p2b", level: 2 };
+  await generate("npc", { character: c2, day: 1, location: { id: "x", name: "X", spectrum: {} } }, { callJSON: llm({ name: "Nobody Notable", role: "y", spectrum: {}, fears: "z" }), schema: npcSchema }); // stays fresh
+  await advanceGeneratedOffscreen({ character: c2, now: now0 }); // anchor
+  const none = await advanceGeneratedOffscreen({ character: c2, now: now1, evolveFn: async () => ({ developments: [{ entityId: "whoever", note: "n/a" }] }) });
+  check("2a: nothing established → no offscreen news (governor holds)", none.length === 0);
+
+  // never throws: a failing advance pass is swallowed
+  let threw = false, res = [];
+  try { character.worldState.lastTickWorldDay = absoluteWorldDay(now1) - 5; res = await advanceGeneratedOffscreen({ character, now: now1, evolveFn: async () => { throw new Error("AI down"); } }); }
+  catch { threw = true; }
+  check("2a: a failing advance pass never throws (returns empty)", !threw && Array.isArray(res) && res.length === 0);
+})();
+
+// --- SNG-BATCH-9 Phase 2b: ⭐ keep boost + nomination surfacing ---
+await (async () => {
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  const llm = (o) => async () => o;
+  const c = { id: "k1", level: 3 };
+  const rec = await generate("npc", { character: c, day: 1, rating: "PG-13", location: { id: "roost", name: "Roost", spectrum: {} } },
+    { callJSON: llm({ name: "Kept Figure", role: "someone the player marked", spectrum: {}, fears: "x", wants: "y", homeLocation: "roost" }), schema: npcSchema });
+  check("2b: a fresh entity is not yet notable", rec._gen.tier === "fresh" && nominationsFor(c).length === 0);
+
+  // one ⭐ keep is a strong explicit boost → established (durable canon)
+  recordAttention(rec, "keep", 2);
+  check("2b: one ⭐ keep raises a fresh entity to established", rec._gen.tier === "established");
+  // a second keep pushes it to nominated (the promotion queue)
+  recordAttention(rec, "keep", 2);
+  check("2b: a second ⭐ keep reaches nominated", rec._gen.tier === "nominated");
+
+  // nomination surfacing: it appears as a candidate, provenance + rating carried
+  const noms = nominationsFor(c);
+  check("2b: the nominated entity surfaces as a promotion candidate", noms.length === 1 && noms[0].id === rec.id && noms[0].type === "npc");
+  check("2b: the nomination carries weight + rating-tag (Phase-3 zero-rework)", noms[0].weight === effectiveWeight(rec) && noms[0].rating === "PG-13");
+  check("2b: the nomination carries provenance", !!noms[0].provenance);
+
+  // findGenerated resolves an entity by id across types (the codex ⭐/badge lookup)
+  check("2b: findGenerated resolves a generated entity by id", findGenerated(c, rec.id) === rec && findGenerated(c, "nope") === null);
+
+  // keep is stronger than an ordinary interaction (the explicit-vs-implicit complement)
+  const c2 = { id: "k2", level: 3 };
+  const a = await generate("npc", { character: c2, day: 1, location: { id: "x", name: "X", spectrum: {} } }, { callJSON: llm({ name: "Kept", role: "r", spectrum: {}, fears: "f" }), schema: npcSchema });
+  const b = await generate("npc", { character: c2, day: 1, location: { id: "x", name: "X", spectrum: {} } }, { callJSON: llm({ name: "Touched", role: "r", spectrum: {}, fears: "f" }), schema: npcSchema });
+  recordAttention(a, "keep", 1);      // +4
+  recordAttention(b, "interact", 1);  // +2
+  check("2b: a ⭐ keep outweighs a single ordinary interaction", a._gen.engagementScore > b._gen.engagementScore);
+})();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

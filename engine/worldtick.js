@@ -12,6 +12,8 @@
 
 import { callClaudeJSON } from "./claude.js";
 import { applyNpcUpdates } from "./npcs.js";
+import { applyCodexUpdates } from "./codex.js";
+import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile } from "./sync.js";
 import { absoluteWorldDay, worldDayAt } from "./worldtime.js";
 
@@ -169,6 +171,63 @@ export async function syncSharedWorld({ character, content }) {
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
   return { synced: true, news: news.map(n => n.text) };
+}
+
+// ---------- SNG-BATCH-9 Phase 2: living advancement (offscreen) ----------
+
+/** Advance ESTABLISHED-tier generated entities while the player was away. Gated by the
+ *  Phase-1 engagement governor (only established/nominated advance — fresh/dormant stay put)
+ *  and by REAL-time elapsed world-days (the far world ages in real time, SNG-041). Each
+ *  development is imagined per the entity's want/tension + disposition (derives-never-
+ *  fabricates — no drastic/contradicting/future-dated turns), applied as an accumulated
+ *  fact on the entity's codex node + an away-digest item DATED on the shared absolute clock
+ *  (on-or-before now). Never throws. evolveFn + now injectable for tests. */
+export async function advanceGeneratedOffscreen({ character, evolveFn = aiGeneratedEvolution, now = Date.now() } = {}) {
+  if (!character?.generated) return [];
+  if (!character.worldState) character.worldState = initWorldState(1);
+  const ws = character.worldState;
+  const currentWorldDay = absoluteWorldDay(now);
+  const elapsedWorldDays = currentWorldDay - (ws.lastTickWorldDay ?? currentWorldDay);
+  // first observation just anchors the shared-clock baseline; nothing has elapsed yet
+  if (ws.lastTickWorldDay == null) { ws.lastTickWorldDay = currentWorldDay; return []; }
+  if (elapsedWorldDays <= 0) return [];
+
+  const established = [...generatedRecords(character, "npc"), ...generatedRecords(character, "arc")]
+    .filter(r => r._gen && (r._gen.tier === "established" || r._gen.tier === "nominated"));
+  ws.lastTickWorldDay = currentWorldDay; // advance the baseline even if nothing's established yet
+  if (!established.length || !evolveFn) return [];
+
+  const news = [];
+  try {
+    const result = await evolveFn({ character, entities: established.slice(0, 4), elapsedWorldDays, currentWorldDay });
+    for (const dev of (result?.developments || []).slice(0, 4)) {
+      const rec = established.find(r => r.id === dev.entityId);
+      if (!rec || !dev.note) continue;
+      const note = String(dev.note).slice(0, 200);
+      rec._gen.offscreen = [...(rec._gen.offscreen || []), { worldDay: currentWorldDay, note }].slice(-8);
+      // accumulate the development on the entity's codex node so it "moved on" + surfaces
+      try { applyCodexUpdates(character, [{ entityId: rec.id, label: rec.name, kind: rec._gen.type === "npc" ? "person" : "lore", fact: `[while away] ${note}` }], { day: ws.lastTickDay ?? null }); } catch { /* codex mirror is a convenience */ }
+      news.push({ text: `${rec.name}: ${note}`, worldDay: currentWorldDay });
+    }
+  } catch (err) { console.warn("[offscreen-gen] skipped:", err.message); return []; }
+
+  if (news.length) {
+    const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: String(n.text).slice(0, 220) }));
+    ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+  }
+  return news;
+}
+
+/** The AI pass: what an established generated figure/thread did offscreen, in-grain. */
+async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay }) {
+  const list = entities.map(e => e._gen.type === "npc"
+    ? `- ${e.id}: ${e.name} (npc) — wants: ${e.wants || "?"}; role: ${e.role || "?"}; disposition: ${JSON.stringify(e.spectrum || e.poleIntensity || {})}`
+    : `- ${e.id}: ${e.name} (arc) — tension: ${e.tendency || "?"}; pressure: ${e.pressure || "?"}`
+  ).join("\n");
+  const sys = `You advance the OFFSCREEN lives of established figures and threads in an RPG while the player was away. ${elapsedWorldDays} world-days passed. For AT MOST 4 of them, decide ONE small, grounded, IN-GRAIN development that follows from their want/tension + disposition — no drastic turns, nothing that contradicts what's known, NOTHING set in the future. Reply ONLY JSON: {"developments":[{"entityId":"exact-id-from-the-list","note":"one sentence: what moved for them while away"}]}`;
+  const content = `World-days passed: ${elapsedWorldDays} (now world-day ${currentWorldDay}).\n\nESTABLISHED FIGURES & THREADS:\n${list}`;
+  return callClaudeJSON([{ role: "user", content }], { task: "world-tick", system: sys, maxTokens: 1024 });
 }
 
 /** Pull (and clear) news the player hasn't seen — shown once on return to play. */

@@ -307,7 +307,7 @@ export async function generate(type, context = {}, deps = {}) {
 
 const TIER_AT = { established: 3, nominated: 8 };   // engagementScore thresholds
 const FRESH_WINDOW_DAYS = 4;                          // untouched-fresh grace before it goes dormant
-const ATTENTION_WEIGHT = { revisit: 2, interact: 2, fact: 1, quest: 2, session: 1 };
+const ATTENTION_WEIGHT = { revisit: 2, interact: 2, fact: 1, quest: 2, session: 1, keep: 4 }; // keep = the explicit ⭐ (Phase 2): one tap reaches established, two reach nominated
 const ATTENTION_CAP = 60;
 
 /** Record an implicit engagement signal on a generated entity (revisit / interact / fact /
@@ -382,6 +382,21 @@ export function livingWorldForGM(character, { locationId = null, day = null } = 
     return (r.tendency || "").slice(0, 90);
   };
   return here.slice(0, 8).map(r => `- ${r.name} (${r._gen.type}, ${r._gen.tier}, weight ${effectiveWeight(r)}): ${brief(r)}`).join("\n");
+}
+
+/** Find a generated record by entityId across all types (for the codex ⭐/badge UI). */
+export function findGenerated(character, entityId) {
+  for (const t of GEN_TYPES) { const rec = character?.generated?.[t]?.[entityId]; if (rec) return rec; }
+  return null;
+}
+
+/** SNG-BATCH-9 Phase 2 §3: entities that crossed established→nominated — the promotion-candidate
+ *  queue toward Phase 3 shared canon. SURFACING ONLY (no promotion here); provenance + rating
+ *  carried so Phase-3 promotion is zero-rework. */
+export function nominationsFor(character) {
+  return [...generatedRecords(character, "npc"), ...generatedRecords(character, "location"), ...generatedRecords(character, "arc")]
+    .filter(r => r._gen?.tier === "nominated")
+    .map(r => ({ id: r.id, name: r.name, type: r._gen.type, weight: effectiveWeight(r), rating: r._gen.rating || null, provenance: r._gen.provenance || null }));
 }
 
 // ---------- prompt assembly (pure) ----------

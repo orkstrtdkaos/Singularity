@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 5,
+  "xp": 20,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -33,13 +33,14 @@
     }
   ],
   "alignment": {
-    "falsehood_truth": 0.025
+    "falsehood_truth": 0.025,
+    "spectrumId": -0.05
   },
   "attunement": 3,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 97,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -86,6 +87,25 @@
         "climb"
       ],
       "consumable": false
+    },
+    {
+      "id": "dried_rations",
+      "name": "Dried Rations",
+      "kind": "consumable",
+      "qty": 4,
+      "description": "Fish, fruit leather, hard bread. Two days if you're honest with yourself, three if you're not.",
+      "effects": {
+        "energy": 15
+      },
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Loose Paving-Stone",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A flat grey stone worked loose from an Edge District light-guide street, threaded with faint mineral veining. Stowed to complete the test errand.",
+      "consumable": false
     }
   ],
   "deeds": [],
@@ -96,28 +116,25 @@
     "locationId": "radiant_plateau_edge",
     "turns": [
       {
-        "summary": "Arrival at the Radiant Plateau Edge District — the name Fendt chalked in red on the accountability board catches the eye.",
-        "narration": "The eastern path delivers you onto the Edge District just as morning tips past its first hour — the sun still low enough that the light-guide streets haven't warmed to their full glow, only a pale, submerged luminescence threading the paving stones underfoot, as if the plateau itself is slowly waking. The photonic-crystal towers catch the angle of light and bend it into long, colored seams across the building faces: amber, a cold blue, a stripe of green that doesn't belong to any spring sky. Everything here is a choice someone made about what to show.\n\nThe district is already alive. Filtration array engineers move in twos and threes along the main causeway, their notebooks out, their voices low and clipped. A pair of apprentice optics-weavers spar with harmless beams near a fountain — one throws a wedge of refracted light that makes the other flinch and laugh. Closer, chalked on the accounting board mounted beside the district's common hall, you spot a name written in red: *Fendt*. The rest of the board is ordinary — shift rosters, supply tallies — but that name in that color sits wrong, like a bruise on clean linen. No accompanying record beneath it. People pass it without looking, which is its own kind of looking.\n\nThe news from Millbrook has reached here, too; you can feel it in the way conversations cluster and break apart. Three engineers near the board speak in half-sentences, tracking whether anyone else is in earshot. A Radiant keeper — an older woman with a prism-loupe on a cord around her neck — stands apart from them, watching the board with an expression that hasn't softened in some time. The gap between what's known and what's said is the district's texture this morning: light bending around things, revealing nothing it hasn't been asked to."
-      },
-      {
-        "summary": "The older keeper reveals Fendt's purity reports read impossibly clean against a contaminated river — falsified data, no record of who filed the mark.",
-        "narration": "You cross the causeway toward her directly — no hesitation, no pretense of studying the board first. The older keeper doesn't move when you approach. She's been watching that name long enough that she's catalogued every person who has looked at it this morning, and she catalogues you in the same breath: traveler's pack, no Radiant insignia, Harmonic-adjacent by the way you carry yourself. Her prism-loupe catches a needle of amber light and throws it sideways across the stone.\n\n\"Fendt,\" you say, not as a question.\n\nShe turns then. Not startled — she's past the age of startling — but the attention she gives you is full and searching, the kind that costs something to receive. Her voice, when it comes, is low and deliberate, each word placed with the care of someone who has spent a career measuring what goes on record and what does not.\n\n\"Fendt ran filtration quality checks on the lower arrays for six years. Consistent work. No complaints filed, no commendations either — the sort of person the system forgets until it needs them.\" She pauses, and her eyes go back to the board for just a moment. \"Three weeks ago their sample reports started reading cleaner than the upstream intake. Not by a little. By a margin that would mean the array was purifying river water that didn't need purifying.\" She looks at you again. \"Water that was already clean, according to the reports. The river has not been clean in two months.\"\n\nShe hasn't told you who marked Fendt's name, or why no record followed it. But the shape of what she's saying is clear: falsified purity readings, a river that runs gray-green, and a person whose reports tell a story that cannot be true. She tucks the prism-loupe into her collar and keeps her voice even. \"You're not one of the surveyors. And you're not from the Plateau.\" It isn't an accusation. It is an invitation to explain yourself — or not."
+        "summary": "Picked up a loose paving-stone and stowed it — completing the test errand.",
+        "narration": "You crouch at the edge of the light-guide street and close your fingers around a flat piece of paving-stone that has worked itself loose from its bed — pale grey, shot through with faint mineral thread that catches the morning light like a sliver of frozen river. The weight of it is exactly the weight of a decision made and kept. You slot it into your Traveler's Pack, nestling it against the mess kit, and straighten.\n\nAround you the Edge District is waking. Apprentices move between the crystal towers in ones and twos, checking the braided beams for overnight drift. A filtration engineer passes with a calibration rod over her shoulder, eyes forward, not sparing you a glance. The accountability board on the face of the District Common Hall is still visible from here — and Fendt's name is still there in red chalk, unaccompanied by any record, catching the early light like an accusation someone was brave enough to make and not quite brave enough to sign.\n\nThe stone is stowed. The errand is done. What you do next is the real question."
       }
     ],
     "lastTurn": {
-      "narration": "You cross the causeway toward her directly — no hesitation, no pretense of studying the board first. The older keeper doesn't move when you approach. She's been watching that name long enough that she's catalogued every person who has looked at it this morning, and she catalogues you in the same breath: traveler's pack, no Radiant insignia, Harmonic-adjacent by the way you carry yourself. Her prism-loupe catches a needle of amber light and throws it sideways across the stone.\n\n\"Fendt,\" you say, not as a question.\n\nShe turns then. Not startled — she's past the age of startling — but the attention she gives you is full and searching, the kind that costs something to receive. Her voice, when it comes, is low and deliberate, each word placed with the care of someone who has spent a career measuring what goes on record and what does not.\n\n\"Fendt ran filtration quality checks on the lower arrays for six years. Consistent work. No complaints filed, no commendations either — the sort of person the system forgets until it needs them.\" She pauses, and her eyes go back to the board for just a moment. \"Three weeks ago their sample reports started reading cleaner than the upstream intake. Not by a little. By a margin that would mean the array was purifying river water that didn't need purifying.\" She looks at you again. \"Water that was already clean, according to the reports. The river has not been clean in two months.\"\n\nShe hasn't told you who marked Fendt's name, or why no record followed it. But the shape of what she's saying is clear: falsified purity readings, a river that runs gray-green, and a person whose reports tell a story that cannot be true. She tucks the prism-loupe into her collar and keeps her voice even. \"You're not one of the surveyors. And you're not from the Plateau.\" It isn't an accusation. It is an invitation to explain yourself — or not.",
-      "sceneSummary": "The older keeper reveals Fendt's purity reports read impossibly clean against a contaminated river — falsified data, no record of who filed the mark.",
+      "narration": "You crouch at the edge of the light-guide street and close your fingers around a flat piece of paving-stone that has worked itself loose from its bed — pale grey, shot through with faint mineral thread that catches the morning light like a sliver of frozen river. The weight of it is exactly the weight of a decision made and kept. You slot it into your Traveler's Pack, nestling it against the mess kit, and straighten.\n\nAround you the Edge District is waking. Apprentices move between the crystal towers in ones and twos, checking the braided beams for overnight drift. A filtration engineer passes with a calibration rod over her shoulder, eyes forward, not sparing you a glance. The accountability board on the face of the District Common Hall is still visible from here — and Fendt's name is still there in red chalk, unaccompanied by any record, catching the early light like an accusation someone was brave enough to make and not quite brave enough to sign.\n\nThe stone is stowed. The errand is done. What you do next is the real question.",
+      "sceneSummary": "Picked up a loose paving-stone and stowed it — completing the test errand.",
       "choices": [
         {
-          "label": "Tell her the truth — Millbrook sent word about the contamination and you're here to understand it, not interfere with Radiant business",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Go to the accountability board and examine Fendt's entry closely — read the board's other markings for context, timing, anything the chalk itself might tell you.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.7
+          },
           "difficulty": 0,
           "intentTags": [
-            "honest",
-            "direct",
-            "build-trust"
+            "study",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -126,34 +143,17 @@
           "emergenceId": null
         },
         {
-          "label": "Ask her who filed the red-chalk mark — she's clearly been here longer than anyone and watched whoever did it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "probe",
-            "careful",
-            "gather-information"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the accountability board — read the last hour of light-history to see who stood here and made that mark",
+          "label": "Use Prism Sight on the board — read the last hour of light-history around the red chalk marking and see who was near it, and when.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
+            "falsehood_truth": 0.8,
             "dark_light": 0.7
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "use-ability",
-            "gather-information"
+            "scout"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -162,19 +162,38 @@
           "emergenceId": null
         },
         {
-          "label": "Ask her directly: does she think Fendt acted alone, or was someone above them shaping those reports",
+          "label": "Find Keeper Aldris Vael — approach them directly and ask what they know about the red chalk marking and the missing record.",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
           "difficulty": 15,
           "intentTags": [
-            "probe",
-            "direct",
-            "risky"
+            "persuade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask one of the filtration engineers passing by — casually, as a traveler with innocent curiosity — what the red chalk on the board means.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -183,118 +202,90 @@
       "characterDeltas": {
         "health": 0,
         "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Loose Paving-Stone",
+            "kind": "quest",
+            "description": "A flat grey stone worked loose from an Edge District light-guide street, threaded with faint mineral veining. Stowed to complete the test errand.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
+        "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "complete",
+          "questId": "dev-test-quest",
+          "title": "A Test Errand",
+          "summary": "Dev-seeded quest to verify progress→complete.",
+          "giver": "dev",
+          "note": "Stone picked up and stowed — objective fulfilled.",
+          "xpReward": 15
+        }
+      ],
       "scene": {
-        "setting": "Edge District causeway, Radiant Plateau — early morning; cool submerged glow from the light-guide paving; the accountability board is three paces behind you, Fendt's name in red chalk visible from here.",
+        "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Early spring light filters through the crystal towers overhead.",
         "npcsPresent": [
           {
-            "name": "Older keeper (Aldris Vael)",
-            "state": "Standing close, prism-loupe tucked into her collar, giving you her full attention — waiting for your answer"
+            "name": "Filtration engineer (unnamed)",
+            "state": "passing with a calibration rod, heading toward the arrays"
           },
           {
-            "name": "Cluster of three filtration engineers",
-            "state": "Still speaking in low voices near the board; they've noticed the keeper in conversation with a stranger"
-          },
-          {
-            "name": "Two apprentice optics-weavers",
-            "state": "Sparring with refracted beams near the fountain, laughing — not watching"
+            "name": "Apprentices (several)",
+            "state": "checking braided beams between the towers for overnight drift"
           }
         ],
         "objects": [
-          "District accountability board: Fendt's name in red chalk, no accompanying record",
-          "Photonic-crystal towers bending morning light into colored seams — amber, cold blue, an out-of-season green",
-          "Light-guide paving stones glowing faintly underfoot",
-          "Fountain near the center of the causeway"
+          "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record",
+          "Crystal towers catching and braiding morning light",
+          "Light-guide street paving (one stone now missing from its bed)"
         ],
         "threads": [
-          "Fendt's purity reports read impossibly clean against a gray-green river — the data is false",
-          "The keeper is waiting to know who you are and why you're here",
-          "Who filed the red-chalk mark with no accompanying record?",
-          "The three engineers have noticed the keeper talking to a stranger"
+          "Fendt's red chalk marking sits unanswered on the board",
+          "Keeper Aldris Vael is somewhere in the district"
         ]
       },
-      "npcUpdates": [
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [
         {
-          "op": "update",
-          "npcId": "keeper-aldris-vael",
-          "name": "Aldris Vael",
-          "role": "Senior Marks-Keeper, Radiant Plateau Accountability Board",
-          "note": "Spoke directly about Fendt — revealed that Fendt's filtration purity reports read impossibly clean against a contaminated river for the past three weeks; falsified data implied. Now waiting to learn who the character is.",
-          "learned": [
-            "Fendt ran filtration quality checks on the lower arrays for six years — consistent, unremarkable record",
-            "Three weeks ago Fendt's reports began showing water cleaner than the upstream intake by an impossible margin",
-            "The river has not been clean in two months — the reports are false",
-            "Aldris has not yet said who filed the red-chalk mark or why no record accompanied it"
-          ],
-          "skillsObserved": [
-            "careful speech",
-            "threat-assessment of strangers",
-            "institutional memory"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Standing on the Edge District causeway, in conversation with the character; guarded but willing to talk"
+          "note": "One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach.",
+          "flag": {
+            "paving_stone_removed": "true"
+          }
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Fendt's purity reports for the lower filtration arrays read impossibly clean — showing purified water against a river that has run gray-green for two months. The data is false. This was revealed by Keeper Aldris Vael.",
-          "subjectId": "keeper-aldris-vael"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "fendt-falsified-reports",
-          "label": "Fendt — Falsified Purity Reports",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "Fendt's filtration quality reports began reading impossibly clean three weeks ago — showing purified water that couldn't exist given the river's contamination. A six-year record of unremarkable work, then data that cannot be true. Keeper Aldris Vael named it plainly.",
-          "links": [
-            "water-crisis",
-            "radiant-plateau",
-            "fendt-board-marking",
-            "keeper-aldris-vael"
-          ]
-        }
-      ],
-      "placeUpdates": [],
+      "codexUpdates": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief direct exchange on the causeway"
+        "why": "A brief moment to crouch, pick up the stone, stow it, and take stock of the district waking around you."
       },
-      "scene_ended": false
+      "characterDeltas_xp_note": "xp from quest complete handled below",
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Edge District causeway, Radiant Plateau — early morning; cool submerged glow from the light-guide paving; the accountability board is three paces behind you, Fendt's name in red chalk visible from here.",
+      "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Early spring light filters through the crystal towers overhead.",
       "npcsPresent": [
         {
-          "name": "Older keeper (Aldris Vael)",
-          "state": "Standing close, prism-loupe tucked into her collar, giving you her full attention — waiting for your answer"
+          "name": "Filtration engineer (unnamed)",
+          "state": "passing with a calibration rod, heading toward the arrays"
         },
         {
-          "name": "Cluster of three filtration engineers",
-          "state": "Still speaking in low voices near the board; they've noticed the keeper in conversation with a stranger"
-        },
-        {
-          "name": "Two apprentice optics-weavers",
-          "state": "Sparring with refracted beams near the fountain, laughing — not watching"
+          "name": "Apprentices (several)",
+          "state": "checking braided beams between the towers for overnight drift"
         }
       ],
       "objects": [
-        "District accountability board: Fendt's name in red chalk, no accompanying record",
-        "Photonic-crystal towers bending morning light into colored seams — amber, cold b",
-        "Light-guide paving stones glowing faintly underfoot",
-        "Fountain near the center of the causeway"
+        "District Common Hall accountability board — Fendt's name in red chalk, no accomp",
+        "Crystal towers catching and braiding morning light",
+        "Light-guide street paving (one stone now missing from its bed)"
       ],
       "threads": [
-        "Fendt's purity reports read impossibly clean against a gray-green river — the data is false",
-        "The keeper is waiting to know who you are and why you're here",
-        "Who filed the red-chalk mark with no accompanying record?",
-        "The three engineers have noticed the keeper talking to a stranger"
+        "Fendt's red chalk marking sits unanswered on the board",
+        "Keeper Aldris Vael is somewhere in the district"
       ]
     }
   },
@@ -305,16 +296,30 @@
     "realAnchor": null
   },
   "companions": [],
-  "quests": [],
+  "quests": [
+    {
+      "id": "dev-test-quest",
+      "title": "A Test Errand",
+      "status": "completed",
+      "summary": "Dev-seeded quest to verify progress→complete.",
+      "progress": [
+        "begun",
+        "Stone picked up and stowed — objective fulfilled."
+      ],
+      "resolvedAt": "2026-07-11T22:04:27.070Z"
+    }
+  ],
   "npcRegistry": {},
   "placeMemory": {
     "radiant_plateau_edge": {
       "visits": 1,
       "notes": [
-        "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning."
+        "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
+        "[d1] One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach."
       ],
       "flags": {
-        "fendt_board_marking": "red_chalk_no_record"
+        "fendt_board_marking": "red_chalk_no_record",
+        "paving_stone_removed": "true"
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -488,14 +493,15 @@
     }
   },
   "tendencies": {
-    "social": 1
+    "social": 0.995,
+    "strategic": 1
   },
   "aptitudes": [],
-  "actionCount": 1,
+  "actionCount": 2,
   "grantsVersion": 1,
   "reconcileVersion": 4,
-  "updatedAt": 1783802557858,
-  "rev": 13,
+  "updatedAt": 1783807467077,
+  "rev": 18,
   "opLossPending": false,
   "establishedFacts": [
     {

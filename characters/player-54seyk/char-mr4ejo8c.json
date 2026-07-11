@@ -896,77 +896,59 @@
       {
         "summary": "Cellaceron reads Teva's emotional state during care — tiredness, old solitude, and a small question satisfied.",
         "narration": "You let her work. Teva's hands are competent — she presses the bruised liverwort mat against your forearm with the flat of her thumb, not hard, just steady — and while she does you watch her face. Prism Sight at a conserved hum, barely a flicker behind your eyes, the way you'd hold a candle near a page without setting it alight. You're reading the last hour's light off her skin: the microflush at her jaw when she concentrates, the small tension that comes and goes around her eyes.\n\nYou ask her where she's from. Not the Heights — that's clear from how she holds the staff — and the question lands gently enough that she doesn't flinch from it. She says she's from the valley floor originally, one of the Adaptor settlements two ridges east of Millbrook, came up to the Heights at fourteen because a tuning-warden heard her hold a resonance note for eleven seconds without training. She says this without pride, almost like reporting someone else's story. Her hands don't stop moving while she talks.\n\nWhat you read under the words is cleaner than the words. She's not frightened of you — the flush-pattern that reads as wariness is absent. There's something older there, a tiredness that sits below the current alertness, the kind that comes from having been alone with something difficult for a long time. When she smooths the liverwort flat against your wrist she glances up once, meets your eyes for a breath, and whatever she finds there seems to satisfy a small question she hadn't asked aloud. Then she looks back down at the work. The four-second count has paused — she's fully here, not half-tracking the interval. That, more than anything else, tells you something real."
+      },
+      {
+        "summary": "Cellaceron thanks Teva plainly — she receives it, names her own solitude, and names the count's presence without fear.",
+        "narration": "You say it quietly, without building up to it. \"It's nice not to carry this alone.\" The words come out simpler than you intended — plainer — and that turns out to be exactly right.\n\nTeva doesn't answer immediately. Her thumb makes one last pass over the liverwort mat, pressing it flat, and then her hands go still on your forearm. She doesn't pull away. In the beeswax taper's warm glow her face is readable without any help from Prism Sight: something in her has settled, the way a chord does when the last note finally lands. \"I wasn't,\" she says after a moment, \"expecting anyone to come looking.\" Not self-pity. Just the fact of it, offered plainly, the way she offers everything.\n\nAbove you on the berm, Aevi's motes have drawn slightly closer together — not alarmed, not signaling. Only attending. The shimmer-draft murmurs against the earthen wall and holds. Outside the alcove the Disputed Zone breathes its slow, wrong-temperature exhale, the ground releasing something it's been holding since before anyone here was born. You are sixty paces from a corridor you haven't yet walked, a seam running northeast-by-east beneath old stone, and a mark in this girl's chest that pulses on a four-second clock. All of that is still true. But right now Teva is here, and you are here, and that is also true.\n\nShe glances down at the Waystaff across her knees, then back at the taper. \"The count's still there,\" she says, almost to herself. \"I can feel it waiting.\" She doesn't sound frightened of it. She sounds like someone who has decided to trust the person beside her enough to say that out loud."
       }
     ],
     "lastTurn": {
-      "narration": "You let her work. Teva's hands are competent — she presses the bruised liverwort mat against your forearm with the flat of her thumb, not hard, just steady — and while she does you watch her face. Prism Sight at a conserved hum, barely a flicker behind your eyes, the way you'd hold a candle near a page without setting it alight. You're reading the last hour's light off her skin: the microflush at her jaw when she concentrates, the small tension that comes and goes around her eyes.\n\nYou ask her where she's from. Not the Heights — that's clear from how she holds the staff — and the question lands gently enough that she doesn't flinch from it. She says she's from the valley floor originally, one of the Adaptor settlements two ridges east of Millbrook, came up to the Heights at fourteen because a tuning-warden heard her hold a resonance note for eleven seconds without training. She says this without pride, almost like reporting someone else's story. Her hands don't stop moving while she talks.\n\nWhat you read under the words is cleaner than the words. She's not frightened of you — the flush-pattern that reads as wariness is absent. There's something older there, a tiredness that sits below the current alertness, the kind that comes from having been alone with something difficult for a long time. When she smooths the liverwort flat against your wrist she glances up once, meets your eyes for a breath, and whatever she finds there seems to satisfy a small question she hadn't asked aloud. Then she looks back down at the work. The four-second count has paused — she's fully here, not half-tracking the interval. That, more than anything else, tells you something real.",
-      "sceneSummary": "Cellaceron reads Teva's emotional state during care — tiredness, old solitude, and a small question satisfied.",
+      "narration": "You say it quietly, without building up to it. \"It's nice not to carry this alone.\" The words come out simpler than you intended — plainer — and that turns out to be exactly right.\n\nTeva doesn't answer immediately. Her thumb makes one last pass over the liverwort mat, pressing it flat, and then her hands go still on your forearm. She doesn't pull away. In the beeswax taper's warm glow her face is readable without any help from Prism Sight: something in her has settled, the way a chord does when the last note finally lands. \"I wasn't,\" she says after a moment, \"expecting anyone to come looking.\" Not self-pity. Just the fact of it, offered plainly, the way she offers everything.\n\nAbove you on the berm, Aevi's motes have drawn slightly closer together — not alarmed, not signaling. Only attending. The shimmer-draft murmurs against the earthen wall and holds. Outside the alcove the Disputed Zone breathes its slow, wrong-temperature exhale, the ground releasing something it's been holding since before anyone here was born. You are sixty paces from a corridor you haven't yet walked, a seam running northeast-by-east beneath old stone, and a mark in this girl's chest that pulses on a four-second clock. All of that is still true. But right now Teva is here, and you are here, and that is also true.\n\nShe glances down at the Waystaff across her knees, then back at the taper. \"The count's still there,\" she says, almost to herself. \"I can feel it waiting.\" She doesn't sound frightened of it. She sounds like someone who has decided to trust the person beside her enough to say that out loud.",
+      "sceneSummary": "Cellaceron thanks Teva plainly — she receives it, names her own solitude, and names the count's presence without fear.",
       "choices": [
         {
-          "label": "Ask her what she heard — specifically — that first drew her into the Zone alone. Let the silence after the question do its work.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Teva what the count feels like from the inside — not its direction, but its texture. Is it the chamber calling, or something else?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.7,
-            "emotional_logical": -0.2
+            "emotional_logical": -0.3,
+            "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "inquire",
+            "study",
             "listen",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Tell her what you found in the forward alcove — the two-author scored mark, the seam bearing — and watch how she takes new information about the place that marked her.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.6,
-            "concrete_abstract": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "share",
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask her directly: the count pulls a different direction than the seam — does she think those are two separate things, or two ways of reaching one thing?",
+          "label": "Tell her what you know about the seam — two bearings, two features or one. Make the thinking shared, not just the feeling.",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
-            "concrete_abstract": 0.4,
+            "concrete_abstract": 0.1,
             "chaos_order": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "inquire",
-            "plan"
+            "plan",
+            "share",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Let the moment breathe. Say nothing more — just rest, conserve what energy you have left, and let Aevi's watch carry the night a little longer before anything else needs deciding.",
+          "label": "Rest. The taper will hold for hours yet, the berm is solid, and Aevi is watching. Sleep while you can — the corridor will be there at first light.",
           "attribute": "physical",
           "subAttribute": "strength",
-          "axes": {},
+          "axes": {
+            "violence_peace": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "rest",
@@ -974,25 +956,47 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Ask Aevi — quietly, directly — what it recognized at the shimmer crossing. It's been patient enough; it's time.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "ask",
+            "careful",
+            "listen"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry, beeswax taper burning warm on its flat ledge. Liverwort mat applied and pressed flat against Cellaceron's forearm; green scent fading. Shimmer-draft held by the berm.",
+        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry, beeswax taper burning warm on its flat ledge. Liverwort mat pressed flat and held on Cellaceron's forearm; Teva's hands resting still there, not withdrawn.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Seated at the alcove entry, hands still on the liverwort dressing at Cellaceron's wrist; four-second count paused, fully present, eyes down at the work after the brief glance up."
+            "state": "Hands resting on the liverwort dressing at Cellaceron's forearm, still; four-second count waiting quietly in her, unnamed but present; something settled in her expression."
           },
           {
             "name": "Aevi",
-            "state": "Holding berm-crest watch, motes blue-teal and steady — attending without intruding."
+            "state": "Motes drawn fractionally closer together on the berm-crest — attending, not alarmed; blue-teal and steady."
           }
         ],
         "objects": [
@@ -1005,14 +1009,14 @@
           "relay counterfoil — in pocket",
           "resonance crystals — untuned (four nodes, three charged, one shallow)",
           "bark-press paper (three sheets)",
-          "liverwort mat — forward alcove (pressed flat against Cellaceron's forearm, diminished)"
+          "liverwort mat — forward alcove (pressed flat against Cellaceron's forearm, diminishing)"
         ],
         "threads": [
           "Teva's four-second count pulls a different direction than the northeast-by-east seam — two bearings, one feature or two?",
           "Aevi has still not named what it recognized at the shimmer crossing",
           "Three temporal layers in the diagonal groove — unread; Zone interference blocked the sequence",
           "Subsurface seam confirmed northeast-by-east, intersecting corridor ~40 paces in",
-          "Teva paused her count — fully present for the first time since camp; a small question in her seemed satisfied"
+          "Teva named the count's presence openly — neither afraid nor resolved about what it means"
         ]
       },
       "npcUpdates": [
@@ -1021,51 +1025,49 @@
           "npcId": "teva-anselvar-missing-apprentice",
           "name": "Teva",
           "role": "Traveling companion, former missing apprentice",
-          "note": "Administered liverwort care to Cellaceron's forearm while answering a question about her past — valley floor origin, Adaptor settlement two ridges east of Millbrook, brought to the Heights at fourteen for holding an eleven-second resonance note untrained. Said it without pride. Four-second count paused while she talked — fully present. A brief glance up met Cellaceron's eyes and seemed to satisfy a small unspoken question.",
+          "note": "Received Cellaceron's gratitude plainly; named her own solitude without self-pity; named the count's continued presence without fear — a shift toward trust and shared purpose.",
           "learned": [
-            "Teva is from an Adaptor settlement two ridges east of Millbrook — valley floor origin, not Heights-born",
-            "Brought to the Heights at fourteen after a tuning-warden heard her hold a resonance note for eleven seconds without training",
-            "Carries a tiredness that predates the Zone — old solitude, not current fear",
-            "Not frightened of Cellaceron — wariness-flush absent; a small question satisfied by direct eye contact"
+            "The four-second count is still present in her — she can feel it waiting; she is not frightened of it"
           ],
-          "skillsObserved": [
-            "poultice application — competent, steady-thumbed, unhurried"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Traveling with Cellaceron in the Disputed Zone, night camp; administering care; four-second count paused for the first time since entry — present and orienting."
+          "statusNote": "Traveling with Cellaceron at northern alcove camp, Zone night 1; mark fading but count felt internally; trust deepening after shared care and plain speech."
         }
       ],
+      "factUpdates": [],
+      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "teva-anselvar-missing-apprentice",
           "label": "Teva",
           "kind": "person",
           "entityId": "teva-anselvar-missing-apprentice",
-          "fact": "Valley floor origin — Adaptor settlement two ridges east of Millbrook; brought to the Heights at fourteen after holding an eleven-second resonance note untrained. Carries old tiredness, not current fear. Not wary of Cellaceron; a question satisfied by direct eye contact.",
+          "fact": "Teva was not expecting anyone to come looking — she names the solitude plainly. The four-second count is still present in her body; she can feel it waiting. She is not frightened of it.",
           "links": [
-            "second-step-boundary-marker",
             "second-river-rising",
-            "the-chamber-beyond-the-threshold"
+            "the-chamber-beyond-the-threshold",
+            "scored-mark-forward-alcove",
+            "northern-alcove-camp"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet exchange during care — one question, one answer, a moment of attention."
+        "why": "A quiet exchange of a few words — a short breath of shared feeling in the alcove dark."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry, beeswax taper burning warm on its flat ledge. Liverwort mat applied and pressed flat against Cellaceron's forearm; green scent fading. Shimmer-draft held by the berm.",
+      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry, beeswax taper burning warm on its flat ledge. Liverwort mat pressed flat and held on Cellaceron's forearm; Teva's hands resting still there, not withdrawn.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Seated at the alcove entry, hands still on the liverwort dressing at Cellaceron's wrist; four-second count paused, fully"
+          "state": "Hands resting on the liverwort dressing at Cellaceron's forearm, still; four-second count waiting quietly in her, unname"
         },
         {
           "name": "Aevi",
-          "state": "Holding berm-crest watch, motes blue-teal and steady — attending without intruding."
+          "state": "Motes drawn fractionally closer together on the berm-crest — attending, not alarmed; blue-teal and steady."
         }
       ],
       "objects": [
@@ -1085,7 +1087,7 @@
         "Aevi has still not named what it recognized at the shimmer crossing",
         "Three temporal layers in the diagonal groove — unread; Zone interference blocked the sequence",
         "Subsurface seam confirmed northeast-by-east, intersecting corridor ~40 paces in",
-        "Teva paused her count — fully present for the first time since camp; a small question in her seemed satisfied"
+        "Teva named the count's presence openly — neither afraid nor resolved about what it means"
       ]
     }
   },
@@ -1905,13 +1907,15 @@
         "facts": [
           "[d8] Teva is tracking the four-second interval as a compass bearing — lips moving continuously, two directional hand-signals during scout both confirmed accurate by the Resonant Sight braid. She is not cou",
           "[d8] Teva's four-second count-bearing does not align with the northeast-by-east seam bearing from the forward alcove diagonal — she noted the divergence immediately, as a second data point. Two directional",
-          "[d8] Valley floor origin — Adaptor settlement two ridges east of Millbrook; brought to the Heights at fourteen after holding an eleven-second resonance note untrained. Carries old tiredness, not current fe"
+          "[d8] Valley floor origin — Adaptor settlement two ridges east of Millbrook; brought to the Heights at fourteen after holding an eleven-second resonance note untrained. Carries old tiredness, not current fe",
+          "[d8] Teva was not expecting anyone to come looking — she names the solitude plainly. The four-second count is still present in her body; she can feel it waiting. She is not frightened of it."
         ],
         "links": [
           "second-river-rising",
           "the-chamber-beyond-the-threshold",
           "second-step-boundary-marker",
-          "scored-mark-forward-alcove"
+          "scored-mark-forward-alcove",
+          "northern-alcove-camp"
         ],
         "aliases": [
           "Teva"
@@ -2170,13 +2174,13 @@
   "customEncounters": {},
   "reconcileVersion": 4,
   "tendencies": {
-    "cerebral": 56.7163777442543,
-    "strategic": 78.17912351565236,
-    "cautious": 67.06441707288339,
-    "social": 43.194440250035804,
-    "generous": 23.55084154225582,
-    "risky": 3.851041273849519,
-    "carousing": 0.5134164023722473
+    "cerebral": 56.43279585553303,
+    "strategic": 77.7882278980741,
+    "cautious": 66.72909498751898,
+    "social": 44.97846804878562,
+    "generous": 23.433087334544542,
+    "risky": 3.8317860674802713,
+    "carousing": 0.510849320360386
   },
   "aptitudes": [
     "strategist",
@@ -2184,9 +2188,9 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 171,
-  "updatedAt": 1783784150702,
-  "rev": 22,
+  "actionCount": 172,
+  "updatedAt": 1783784299489,
+  "rev": 23,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

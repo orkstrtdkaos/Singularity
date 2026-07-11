@@ -12,7 +12,7 @@ import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -36,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.12";
+const APP_VERSION = "1.8.13";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -187,6 +187,93 @@ function saveLegStatus(map) { try { localStorage.setItem("singularity.previewLeg
 
 let _previewLegsData = null; // cached fetch of the Aevi-owned data file
 
+// SNG-051 addendum: the ▶ Run-this-scenario runner. Each force intent resolves against the
+// EXISTING primitives (travel/setRating/rest/generate/clock-jump/screens) — no new mechanics.
+// Dev-only (the panel is devEnabled-gated). Cross-player / two-character legs stay manual.
+// Unknown intent → no runner entry → the button renders as "(unsupported intent)".
+function legNeedsCharacter(intent) {
+  return ["openSkillPicker", "setupSkill", "travelToDisposition", "enterPlanApt", "timeAction", "generateHere", "jumpClock", "openCodex", "portraitBeat", "grantTestState"].includes(intent);
+}
+
+const LEG_RUNNERS = {
+  openSkillPicker: () => { renderCharacterScreen(); },
+  openCodex: () => { renderCodexScreen(); },
+  setupSkill: (f) => {
+    // dev grant: give the skill at the requested rank so the fork/rank UI is reachable
+    const id = f.skill;
+    if (id && CONTENT.abilities[id] && !character.abilities.some(a => a.abilityId === id)) {
+      character.abilities.push({ abilityId: id, level: Math.max(1, f.atRank || 1) });
+    } else if (id) { const owned = character.abilities.find(a => a.abilityId === id); if (owned) owned.level = Math.max(owned.level, f.atRank || owned.level); }
+    character.skillPoints = Math.max(character.skillPoints || 0, 2);
+    saveCharacter(character);
+    renderCharacterScreen();
+  },
+  setRating: (f) => {
+    const target = (f.cycle && f.cycle[0]) || f.preset || "R+";
+    if (RATING_LEVEL[target] >= RATING_LEVEL["R"]) { profile.rating = profile.rating || {}; profile.rating.adultVerified = true; }
+    const rv = setRating(profile, target, { authority: "erik", adultGate: true });
+    saveProfile(profile);
+    renderSettings(rv.ok ? `🔧 Test: ceiling set to ${target}. ${f.cycle ? "Re-run to cycle to " + f.cycle.slice(1).join(" / ") + "." : ""}` : "Rating unchanged — " + rv.reason);
+  },
+  travelToDisposition: () => {
+    // travel to the most strongly-charged (tilted) known location, preferring a reachable one
+    const charge = l => Math.max(0, ...Object.values(l.poleIntensity || {}).map(v => Math.abs(v)), 0);
+    const here = character.currentLocationId;
+    const conn = new Set(CONTENT.locations[here]?.connections || []);
+    const cands = Object.values(CONTENT.locations).filter(l => l.id !== here).sort((a, b) => charge(b) - charge(a));
+    const pick = cands.find(l => conn.has(l.id)) || cands[0];
+    if (pick) travelTo(pick.id); else renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No charged location found to travel to." });
+  },
+  enterPlanApt: () => {
+    startScene("(DEV/TEST: open a plan-apt, multi-obstacle scene — present a situation with several distinct sequential obstacles and 3-4 choices whose intentTags include plan/scout/prepare, so a gambit is genuinely apt.)");
+  },
+  timeAction: (f) => { rest(f.action === "breather" ? "breather" : "sleep"); },
+  generateHere: () => {
+    // synthesize a GM generate request so the world grows here now (reuses the real path)
+    const type = "location";
+    handleGenerateRequests({ generateRequest: [{ type, hint: "a place just past the edge of the known", why: "dev test: force a generation" }] })
+      .then(grown => renderPlay(character.activeScene?.lastTurn || null, { aside: grown.length ? `🔧 Generated: ${grown.map(g => g.name).join(", ")} — revisit to confirm it persists.` : "🔧 Nothing minted (governor or reuse) — try again or move to an unauthored edge." }))
+      .catch(() => renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 Generation failed (needs an API key)." }));
+  },
+  jumpClock: async (f) => {
+    // DEV-ONLY: shift the shared world epoch earlier so the absolute world-day jumps forward N,
+    // then run the tick so offscreen advancement / away-digest apply. Reversible via re-setting.
+    const days = Math.max(1, f.advanceWorldDays || f.days || 1);
+    const ep = getWorldEpoch();
+    setWorldEpoch({ atMs: ep.atMs - days * 86400000, worldDay: ep.worldDay, rate: ep.rate });
+    const news = await maybeTick();
+    renderPlay(character.activeScene?.lastTurn || null, { newsFlash: news, aside: `🔧 DEV: jumped the shared clock +${days} world-day(s) → now world-day ${absoluteWorldDay()}. Return to play to see what advanced.` });
+  },
+  portraitBeat: () => {
+    if (!imagesEnabled()) { renderSettings("🔧 Turn on Scene & item art → Generate first, then run this leg."); return; }
+    ensureCharacterPortrait(character, { force: true, milestone: `test v${APP_VERSION}` });
+    saveCharacter(character);
+    renderGallery();
+  },
+  grantTestState: () => {
+    // a quest in progress + two duplicate-named items, so the resolver/quest-log leg is reachable
+    character.quests = character.quests || [];
+    if (!character.quests.some(q => q.id === "dev-test-quest")) character.quests.push({ id: "dev-test-quest", title: "A Test Errand", status: "active", summary: "Dev-seeded quest to verify progress→complete.", progress: ["begun"] });
+    try { addItem(character, "dried_rations", CONTENT.items); addItem(character, "dried_rations", CONTENT.items); } catch { /* catalog id may differ */ }
+    saveCharacter(character);
+    renderCharacterScreen();
+  }
+};
+
+/** Run a preview leg's forced scenario (dev-only). Guards intents that need an active character. */
+function runPreviewLeg(leg) {
+  const f = leg?.force;
+  const intent = f && f.intent;
+  const runner = intent && LEG_RUNNERS[intent];
+  if (!runner) return; // manual / unknown — no-op (button wasn't rendered as runnable)
+  if (legNeedsCharacter(intent) && !character) {
+    alert("Start or select a character first, then run this leg from 🧪 Legs.");
+    renderRoster();
+    return;
+  }
+  try { runner(f); } catch (err) { alert("Couldn't run this scenario: " + (err?.message || err)); }
+}
+
 async function renderPreviewLegs() {
   if (!_previewLegsData) {
     try {
@@ -204,11 +291,20 @@ async function renderPreviewLegs() {
 
   const legRow = (l) => {
     const st = status[l.id]?.status || "untried";
+    // SNG-051 addendum: a leg with a resolvable force intent gets a ▶ Run button; a null/manual
+    // force (cross-player, or a leg needing two characters) is labelled manual, no button.
+    const intent = l.force && l.force.intent;
+    const runnable = intent && LEG_RUNNERS[intent];
+    const runCtl = intent
+      ? `<button class="leg-run" data-legrun="${esc(l.id)}">▶ Run this scenario</button>`
+      : (l.force === null && l.mode === "cross-player") ? `<span class="leg-manual">manual — needs two synced profiles</span>`
+      : (l.force && l.force.manual) ? `<span class="leg-manual">manual — ${esc(l.force.manual)}</span>` : "";
+    const runDisabled = intent && !runnable ? ` <span class="leg-manual" title="the runner doesn't know '${esc(intent)}' yet">(unsupported intent)</span>` : "";
     return `<div class="leg-row leg-${st}">
       <div class="leg-head"><span class="leg-batch">${esc(l.batch)}</span> <strong>${esc(l.title)}</strong></div>
       <div class="leg-do"><em>Do:</em> ${esc(l.do)}</div>
       <div class="leg-pass"><em>Pass:</em> ${esc(l.pass)}</div>
-      <div class="leg-status-row">${LEG_STATUS.map(s => `<button class="leg-btn ${st === s ? "on" : ""}" data-leg="${esc(l.id)}" data-status="${s}">${LEG_STATUS_LABEL[s]}</button>`).join("")}</div>
+      <div class="leg-status-row">${LEG_STATUS.map(s => `<button class="leg-btn ${st === s ? "on" : ""}" data-leg="${esc(l.id)}" data-status="${s}">${LEG_STATUS_LABEL[s]}</button>`).join("")}${runCtl}${runDisabled}</div>
       <input class="leg-note" data-legnote="${esc(l.id)}" placeholder="note (optional)…" value="${esc(status[l.id]?.note || "")}">
     </div>`;
   };
@@ -239,6 +335,10 @@ async function renderPreviewLegs() {
     const id = inp.dataset.legnote;
     map[id] = { ...(map[id] || {}), note: inp.value.slice(0, 300) };
     saveLegStatus(map);
+  };
+  for (const b of app.querySelectorAll("[data-legrun]")) b.onclick = () => {
+    const leg = legs.find(l => l.id === b.dataset.legrun);
+    if (leg) runPreviewLeg(leg);
   };
   document.getElementById("legs-copy").onclick = async () => {
     const map = loadLegStatus();

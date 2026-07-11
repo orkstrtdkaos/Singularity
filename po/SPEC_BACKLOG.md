@@ -556,3 +556,12 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 **Fix:** persist `profile.rating.adultVerified=true` when the gate authorizes an R/R+ set; bind the checkbox to it (`${profile.rating?.adultVerified ? 'checked':''}`) so it stays checked once confirmed. Unchecking+save clears it and drops the ceiling below R (existing refuse-and-explain). Minor-protection floor unaffected. Suites+parse_probe green.
 **Erik test:** set R+ with the adult box → reopen Settings → box stays checked, R+ holds.
 *Small UX bug; off critical path.*
+
+### SNG-051 addendum — "▶ Run this scenario" (force each leg's setup, Erik-directed 2026-07-11). 🔧 CCode.
+SNG-051 shipped as a passive checklist; Erik wants to RUN each leg from the list — force its scenario like the encounter trigger — instead of reproducing it by hand.
+- Each forceable leg now carries a `force` intent in data/preview_legs.json (Aevi-authored, intent-level). Render a **▶ Run this scenario** button on any leg with a non-null `force`.
+- The runner RESOLVES the intent against content + the EXISTING primitives (no new mechanics): `travelToDisposition`→travel to a matching high-poleIntensity location; `setRating`→setRating (cycles for the R+/G leg); `enterPlanApt`→drop into a multi-obstacle scene; `startEncounter`/`openSkillPicker`/`openCodex`/`generateHere`→the existing calls; `timeAction`→the sleep/rest action; `jumpClock`→advance the shared world-day N (DEV-ONLY time-jump — never in normal play); `grantTestState`/`setupSkill`/`selectCharacter`→dev setup. After setup, return to play in the ready state so Erik verifies + marks pass/fail in one flow.
+- **Cross-player legs (`force:null`) get NO run button** — labeled 'manual: needs two synced profiles.' Cross-device likewise.
+- Dev-only (already gated by devEnabled). Clock-jumps + grants are dev affordances, never player-facing. Never mutates a synced save destructively — dev setup is local/reversible where possible; warn if a leg would alter real state.
+- Extensible: new force-intents are added to the JSON by Aevi; the runner's vocabulary grows with them. Unknown intent → button disabled with a tooltip, never a crash.
+**Erik use-test:** open 🧪 Legs → hit ▶ Run on a solo leg → the game sets up that scenario → verify + mark pass. *Turns the checklist into a one-click test-runner — the real bottleneck-killer.*

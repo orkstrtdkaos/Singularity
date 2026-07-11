@@ -7,10 +7,10 @@ import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle } from "../engine/playerprofile.js";
-import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "../engine/inventory.js";
+import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
-import { applyQuestUpdates, questsForGM, slugify } from "../engine/quests.js";
+import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
@@ -21,6 +21,7 @@ import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, 
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict } from "../engine/sync.js";
+import { namesMatch as nm2 } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -1377,6 +1378,81 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // missing remote / missing local degrade safely
   check("no remote → local wins, no conflict", resolveSaveConflict(A, null).winner === A && !resolveSaveConflict(A, null).conflict);
   check("no local → remote wins, no conflict", resolveSaveConflict(null, B).winner === B && !resolveSaveConflict(null, B).conflict);
+}
+
+// --- SNG-BATCH-7 Phase 3: quest + inventory resolver-hardening ---
+{
+  const entities = { people: { teva: "Teva", maren: "Maren" }, places: { millbrook: "Millbrook" } };
+
+  // shared name primitive is the SNG-019 matcher, now dependency-free
+  check("namematch primitive shared with codex", nm2("Teva", "Teva the healer") === true && nm2("Mara", "Maren") === false);
+
+  // a drifted-title progress op UPDATES the right quest (no drop, no dupe)
+  const c = { quests: [], xp: 0 };
+  applyQuestUpdates(c, [{ op: "start", title: "The Second River", summary: "Find the source.", giver: "Teva" }], { entities });
+  check("start links giver to a codex entityId", c.quests[0].giverEntityId === "teva");
+  applyQuestUpdates(c, [{ op: "progress", title: "the second-river matter", note: "Found the first spring." }], { entities });
+  check("drifted-title progress updates the SAME quest (no dupe)", c.quests.length === 1 && c.quests[0].progress.length === 1);
+  check("drifted title recorded as a quest alias", (c.quests[0].aliases || []).some(a => /second-river matter/i.test(a)));
+
+  // complete on a drifted title resolves + awards xp
+  applyQuestUpdates(c, [{ op: "complete", questId: "the-second-river", note: "The source is found.", xpReward: 30 }], { entities });
+  check("complete resolves the drifted quest + awards xp", c.quests[0].status === "completed" && c.xp === 30);
+
+  // an UNRESOLVABLE op NEVER silently drops — it surfaces a note
+  const notes = applyQuestUpdates(c, [{ op: "progress", title: "a quest that does not exist at all", note: "?" }], { entities });
+  check("unresolvable quest op surfaces a note, does not vanish", notes.some(n => /couldn't match/i.test(n)));
+
+  // start that resolves to an existing quest does not fork a duplicate
+  const c2 = { quests: [], xp: 0 };
+  applyQuestUpdates(c2, [{ op: "start", title: "Clear the Blocked Well" }], { entities });
+  applyQuestUpdates(c2, [{ op: "start", title: "the blocked well", note: "again" }], { entities });
+  check("re-start of the same quest does not duplicate", c2.quests.length === 1);
+
+  // resolveQuest direct
+  check("resolveQuest matches by fuzzy title", resolveQuest(c2, { title: "the blocked well" })?.id === c2.quests[0].id);
+  check("resolveQuest returns null on genuine no-match", resolveQuest(c2, { title: "totally unrelated" }) === null);
+
+  // dedupeQuests repairs a pre-resolver fragmented save
+  const frag = { quests: [
+    { id: "second-river", title: "The Second River", status: "active", progress: ["[a]"], aliases: [] },
+    { id: "the-river-quest", title: "the river quest (Second River)", status: "active", progress: ["[b]"], aliases: [] },
+    { id: "unrelated", title: "Guard the Mill", status: "active", progress: [], aliases: [] }
+  ] };
+  const qm = dedupeQuests(frag);
+  check("dedupeQuests collapses fuzzy-duplicate quests", qm.length === 1 && frag.quests.length === 2);
+  check("dedupeQuests keeps unrelated quest", frag.quests.some(q => q.id === "unrelated"));
+  check("dedupeQuests unions progress", frag.quests.find(q => /Second River/i.test(q.title)).progress.length === 2);
+  check("dedupeQuests idempotent", dedupeQuests(frag).length === 0);
+
+  // --- inventory ---
+  const ch = { inventory: [] };
+  addItem(ch, "waterskin", {});
+  addItem(ch, "a waterskin", {});         // phrasing variant
+  addItem(ch, "the Waterskin", {});       // another
+  check("phrasing variants collapse onto one stack", ch.inventory.length === 1 && ch.inventory[0].qty === 3);
+  check("drifted phrasings recorded as item aliases", (ch.inventory[0].aliases || []).length >= 1);
+
+  // resolveInventoryItem direct
+  check("resolveInventoryItem matches fuzzy", resolveInventoryItem(ch, "waterskin", {})?.name.toLowerCase().includes("waterskin"));
+  check("resolveInventoryItem null on no-match", resolveInventoryItem(ch, "obsidian dagger", {}) === null);
+
+  // catalog re-link on a resolvable name (uncataloged stack gains catalog fields)
+  const cat = { travelers_pack: { id: "travelers_pack", name: "Traveler's Pack", kind: "tool", bonusTags: ["carry"], effects: {} } };
+  const ch2 = { inventory: [{ id: null, name: "Traveler's Pack", kind: "misc", qty: 1 }] };
+  addItem(ch2, { id: "travelers_pack", name: "Traveler's Pack" }, cat);
+  check("addItem re-links an uncataloged stack to the catalog", ch2.inventory[0].id === "travelers_pack" && ch2.inventory[0].bonusTags?.includes("carry"));
+
+  // dedupeInventory repairs forked stacks
+  const invFrag = { inventory: [
+    { id: null, name: "healing draught", kind: "consumable", qty: 2, aliases: [] },
+    { id: null, name: "a healing draught", kind: "consumable", qty: 1, aliases: [] },
+    { id: null, name: "rope", kind: "tool", qty: 1, aliases: [] }
+  ] };
+  const im = dedupeInventory(invFrag, {});
+  check("dedupeInventory merges forked stacks + sums qty", im.length === 1 && invFrag.inventory.length === 2 && invFrag.inventory.find(i => /healing/i.test(i.name)).qty === 3);
+  check("dedupeInventory keeps distinct items", invFrag.inventory.some(i => i.name === "rope"));
+  check("dedupeInventory idempotent", dedupeInventory(invFrag, {}).length === 0);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

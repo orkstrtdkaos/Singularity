@@ -14,6 +14,8 @@
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
 import { mergeCodexTopics } from "./codex.js";
+import { dedupeQuests } from "./quests.js";
+import { dedupeInventory } from "./inventory.js";
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -71,6 +73,20 @@ export const CHARACTER_STEPS = [
         return { notes: ["your characters now carry their own play-style"] };
       }
       return {};
+    }
+  },
+  {
+    version: 4, id: "quest-inventory-resolve", playerFacing: false,
+    // SNG-BATCH-7 Phase 3: repair state a pre-resolver save fragmented — collapse
+    // duplicate quests (drifted titles) + duplicate item stacks (phrasing variants).
+    // Silent (a repair): the quest log + inventory just render correctly afterward.
+    apply: (c, ctx) => {
+      const qm = dedupeQuests(c);
+      const im = dedupeInventory(c, ctx.content?.items || {});
+      const parts = [];
+      if (qm.length) parts.push(`merged ${qm.length} duplicate quest(s)`);
+      if (im.length) parts.push(`stacked ${im.length} duplicate item(s)`);
+      return parts.length ? { notes: parts } : {};
     }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

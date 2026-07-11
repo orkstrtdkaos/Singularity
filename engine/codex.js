@@ -6,6 +6,8 @@
 // back the topics RELEVANT to where the character is and what they're pursuing.
 
 import { slugify } from "./quests.js";
+import { normName, namesMatch } from "./namematch.js";
+export { namesMatch }; // back-compat: callers/tests import namesMatch from codex.js
 
 const KINDS = ["mystery", "faction", "lore", "event", "person", "place"];
 // SNG-019: a PRIMARY node (anchored to a known entity via entityId) holds more facts —
@@ -19,23 +21,7 @@ export function ensureCodex(character) {
 }
 
 // ---------- SNG-019: entity resolution — facts collect under primary nodes ----------
-
-/** Normalize a name for matching: lowercase, strip punctuation + leading articles. */
-function normName(s) {
-  return String(s || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim()
-    .replace(/^(the|a|an) /, "");
-}
-
-/** Conservative name match: normalized equality, or whole-word containment where the
- *  contained name is substantial (>=4 chars) — "Teva" matches "Teva the healer", not "va". */
-export function namesMatch(a, b) {
-  const na = normName(a), nb = normName(b);
-  if (!na || !nb) return false;
-  if (na === nb) return true;
-  const [short, long] = na.length <= nb.length ? [na, nb] : [nb, na];
-  if (short.length < 4) return false;
-  return new RegExp(`(^| )${short.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}( |$)`).test(long);
-}
+// (normName + namesMatch live in namematch.js so quests/inventory share them.)
 
 /** Resolve an incoming codexUpdate to an existing topic (or a canonical anchor).
  *  Order: explicit entityId → known-entity name anchor (ctx.entities) → label/alias scan.

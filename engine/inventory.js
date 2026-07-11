@@ -1,7 +1,37 @@
 // inventory.js — items as first-class objects the character can access and USE.
 // Storage shape on character.inventory: {id?, name, kind, qty, description?, effects?,
-// bonusTags?, consumable?, image?}. Legacy saves held plain strings — normalize
+// bonusTags?, consumable?, image?, aliases?}. Legacy saves held plain strings — normalize
 // migrates them losslessly (additive-schema law: old saves keep working).
+//
+// SNG-BATCH-7 Phase 3: RESOLVE incoming items against the stack the SAME way the codex
+// resolves entities — by id, catalog-name, custom name, alias, then fuzzy name-match — so
+// GM phrasing variants ("a waterskin" / "the waterskin") collapse onto one stack instead
+// of forking. Catalog re-link happens on any resolvable name, not just at normalize.
+
+import { namesMatch, resolveByName } from "./namematch.js";
+
+/** Find the existing stack an incoming item belongs to (id → name/custom/alias → fuzzy). */
+export function resolveInventoryItem(character, incoming, catalog = {}) {
+  const inv = character.inventory || [];
+  const id = typeof incoming === "object" ? (incoming.id || null) : null;
+  if (id) { const byId = inv.find(m => m.id === id); if (byId) return byId; }
+  const name = typeof incoming === "string" ? incoming : (incoming?.name || "");
+  if (!name) return null;
+  // exact name / custom name first (cheap, precise)
+  const exact = inv.find(m => m.name.toLowerCase() === name.toLowerCase() || (m.customName || "").toLowerCase() === name.toLowerCase());
+  if (exact) return exact;
+  // then fuzzy against name + customName + aliases (drifted phrasings)
+  return resolveByName(name, inv, {
+    getLabel: m => m.name,
+    getAliases: m => [m.customName, ...(m.aliases || [])].filter(Boolean)
+  });
+}
+
+function recordItemAlias(it, name) {
+  if (!name || name.toLowerCase() === it.name.toLowerCase()) return;
+  it.aliases = it.aliases || [];
+  if (!it.aliases.some(a => a.toLowerCase() === name.toLowerCase())) it.aliases = [...it.aliases, String(name).slice(0, 60)].slice(-4);
+}
 
 /** Normalize a character's inventory in place: strings → item objects,
  *  known names re-linked to the catalog so they regain effects/bonuses. */
@@ -48,10 +78,48 @@ export function addItem(character, incoming, catalog = {}) {
       image: incoming.image
     };
   }
-  const existing = character.inventory.find(m => m.name.toLowerCase() === item.name.toLowerCase());
-  if (existing) existing.qty += item.qty;
-  else if (character.inventory.length < 30) character.inventory.push(item);
+  // SNG-BATCH-7 Phase 3: resolve to an existing stack (fuzzy), not just exact-name
+  const existing = resolveInventoryItem(character, item, catalog);
+  if (existing) {
+    existing.qty += item.qty;
+    recordItemAlias(existing, item.name); // remember the drifted phrasing
+    if (!existing.id && item.id) Object.assign(existing, fromCatalog(catalog[item.id] || item, existing.qty)); // late catalog re-link
+    return existing;
+  }
+  if (character.inventory.length < 30) character.inventory.push(item);
   return item;
+}
+
+/** SNG-BATCH-7 Phase 3 reconcile: collapse duplicate stacks a pre-resolver save forked
+ *  (fuzzy name/custom/alias match), summing quantities + catalog-relinking. Idempotent.
+ *  Returns [{into, absorbed, qty}]. */
+export function dedupeInventory(character, catalog = {}) {
+  const inv = character.inventory || [];
+  const merged = [];
+  let changed = true;
+  while (changed) {
+    changed = false;
+    outer:
+    for (let i = 0; i < inv.length; i++) {
+      for (let j = i + 1; j < inv.length; j++) {
+        const a = inv[i], b = inv[j];
+        const match = (a.id && a.id === b.id) || namesMatch(a.name, b.name) ||
+          (a.aliases || []).some(x => namesMatch(x, b.name)) || (b.aliases || []).some(x => namesMatch(x, a.name));
+        if (!match) continue;
+        // primary: cataloged beats uncataloged, then larger stack
+        const [p, s] = ((a.id ? 1 : 0) * 100 + a.qty) >= ((b.id ? 1 : 0) * 100 + b.qty) ? [a, b] : [b, a];
+        p.qty += s.qty;
+        recordItemAlias(p, s.name);
+        if (s.customName && !p.customName) p.customName = s.customName;
+        if (!p.id && s.id) Object.assign(p, fromCatalog(catalog[s.id] || s, p.qty));
+        inv.splice(inv.indexOf(s), 1);
+        merged.push({ into: p.name, absorbed: s.name, qty: p.qty });
+        changed = true;
+        break outer;
+      }
+    }
+  }
+  return merged;
 }
 
 /** Player names an item (agency, no GM involvement). Original name kept as subtitle. */

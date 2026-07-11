@@ -33,7 +33,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.4";
+const APP_VERSION = "1.7.5";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -826,8 +826,10 @@ function applyTurn(turn, resolution) {
   for (const msg of applyLevelUps(character, CONTENT.rules)) {
     turn.narration += `\n\n*You feel it settle into you — a new steadiness. (${msg})*`;
   }
-  // quests: typed ops from the GM, applied within bounds
-  applyQuestUpdates(character, turn.questUpdates || []);
+  // quests: typed ops from the GM, applied within bounds; ctx.entities links giver/location
+  // to codex nodes and lets the resolver match drifted titles (SNG-BATCH-7 Phase 3)
+  const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
+  if (questNotes.some(n => /couldn't match/i.test(n))) console.warn("[quests]", questNotes.filter(n => /couldn't match/i.test(n)));
   // time passes with the story (story mode; real mode advances itself) — plus
   // any in-scene hours the GM reported (sleep, waits, long work)
   const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0));
@@ -1448,6 +1450,7 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
     <p class="map-details-desc">${esc(q.summary)}</p>
     <div class="hint">${q.giver ? `From ${esc(q.giver)} · ` : ""}started ${q.startedAt ? "day " + esc(String(q.startedAtDay ?? "").trim() || new Date(q.startedAt).toLocaleDateString()) : "a while back"}</div>
+    ${q.giverEntityId && character.codex?.topics?.[q.giverEntityId] ? `<button class="codex-link" data-questgiver="${esc(q.giverEntityId)}" style="margin-top:6px">◈ ${esc(character.codex.topics[q.giverEntityId].label)} in Codex</button>` : ""}
     ${q.progress?.length ? `<div style="margin-top:12px"><h3 class="codex-title" style="font-size:15px">The story so far</h3>${q.progress.map(p => `<div class="codex-fact">${esc(p)}</div>`).join("")}</div>` : ""}
     <div style="margin-top:14px">
       ${guidance ? `<div class="gm-aside">${guidance.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>` : ""}
@@ -1458,6 +1461,8 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
     <button class="btn secondary" id="quest-back" style="margin-top:14px">Back</button>
   </div>`);
   document.getElementById("quest-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  const gv = document.getElementById("quest-back")?.parentElement?.querySelector("[data-questgiver]") || app.querySelector("[data-questgiver]");
+  if (gv) gv.onclick = () => renderCodexScreen("", gv.dataset.questgiver);
   const rBtn = document.getElementById("quest-resolve");
   if (rBtn) rBtn.onclick = () => {
     if (!confirm(`Mark "${q.title}" complete? Use this when the story finished it but the tracker missed it.`)) return;
@@ -1481,6 +1486,24 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
     }, `Give me practical guidance on my quest "${q.title}": what are 2-3 sensible next steps from where I am, who might help or know more, and roughly how difficult does this look? Spoiler-safe only.`);
     renderQuestDetail(questId, result.ok ? result.text : "The GM stumbled: " + result.error, false);
   };
+}
+
+/** SNG-BATCH-7 Phase 3: the full quest log — active / completed / failed, with progress. */
+function renderQuestLog() {
+  const q = character.quests || [];
+  const group = st => q.filter(x => x.status === st);
+  const row = x => `<button class="quest quest-click" data-quest="${esc(x.id)}" style="display:block;width:100%;text-align:left;margin:3px 0">
+      <span class="quest-title">${esc(x.title)}</span>${x.giver ? ` <span class="cost">from ${esc(x.giver)}${x.giverEntityId && character.codex?.topics?.[x.giverEntityId] ? " ◈" : ""}</span>` : ""}
+      <div class="quest-note">${esc(x.progress?.length ? x.progress[x.progress.length - 1] : x.summary)}</div></button>`;
+  const section = (title, list) => list.length ? `<div class="codex-group"><div class="codex-group-title">${title} (${list.length})</div>${list.map(row).join("")}</div>` : "";
+  chrome(`<div class="screen" style="max-width:680px">
+    <h2>Quest Log</h2>
+    ${q.length ? section("Active", group("active")) + section("Completed", group("completed")) + section("Failed", group("failed"))
+      : "<div class='insight'>No undertakings yet — the valley will provide.</div>"}
+    <button class="btn secondary" id="ql-back" style="margin-top:12px">Back to the valley</button>
+  </div>`);
+  for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
+  document.getElementById("ql-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 // ---------- codex: the character's knowledge graph ----------
@@ -1851,7 +1874,7 @@ function renderPlay(turn, opts = {}) {
         <button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>
           <div class="quest-note">${esc(q.progress?.length ? q.progress[q.progress.length - 1] : q.summary)}</div>
         </button>`).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
-      ${(character.quests || []).some(q => q.status !== "active") ? `<div class="quest-done">${(character.quests || []).filter(q => q.status === "completed").length} completed · ${(character.quests || []).filter(q => q.status === "failed").length} failed</div>` : ""}
+      ${(character.quests || []).length ? `<button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>` : ""}
     </section>
     ${syncEnabled() ? `<section><h3>Party</h3>
       ${sharedScene ? `
@@ -2100,6 +2123,7 @@ function renderPlay(turn, opts = {}) {
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
+  const qlBtn = document.getElementById("open-questlog"); if (qlBtn) qlBtn.onclick = () => renderQuestLog();
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
   const charBtn = document.getElementById("open-character"); if (charBtn) charBtn.onclick = () => renderCharacterScreen();
   const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();

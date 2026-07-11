@@ -581,3 +581,43 @@ Engine/UX-only (no content owed); design law 1 (engine owns time + XP, GM declar
 ### Erik preview tests (per phase)
 1. "Walk into a scene with a couple of obstacles or a plan-ish choice — verify a 'Plan a Gambit' chip appears by the input; then a plain single-obstacle scene — verify NO chip. Run a gambit to completion and confirm the bonus XP lands (planning should out-pay winging it)."
 2. "Sleep, or take a long journey, then check the clock — verify time jumped hours (not one beat) and the time-of-day the narration describes matches the world clock. Then have a short conversation — verify it only ticked minutes."
+
+---
+
+## SNG-BATCH-9 — Generative living world (the anchor) · Phase 1
+
+**Depends on: BATCH-6 (SNG-019 resolver + SNG-022 reconcile) — DONE. Pairs with SNG-021 world-tick for Phase 2.** Erik-directed full design 2026-07-10 (all forks resolved this session); Aevi PO. Preview-testing protocol. Only Aevi closes.
+
+**Theme — the anchor.** One `generate(type, context)` path so the world grows through play, governed by attention, born personal, promotable to shared canon. The generation *grammar IS the framework*: poleIntensity (disposition) + universal role + seedFiction + arc-pressure + season → every generated entity is a cosmic address instantiated at the local grain (a Cogitarium healer works against the grain; a Stillhold mediator buries truth). This spec records the full Phase 1–3 arc so the store is built forward-compatible from day one — zero rework when shared-world turns on.
+
+### Phase 1 scope (the BATCH-9 opener)
+Core generate path + **NPCs, locations, arcs/quest-threads** + engagement-score governor + personal-canon tiering + content-rating (profile ceiling: narrate-to + generate-to). All content born PERSONAL; store built promotable.
+
+**1. `generate(type, context)` core.** One schema-driven path over a type registry (Phase 1: npc, location, arc). SEPARATE structured call, not GM-inline: the GM emits a lightweight `generateRequest` ("an NPC here" / "a place beyond this door" / "a thread from this tension"); engine runs schema-constrained JSON generation, few-shot from the authored corpus (in-grain taste), under the local grammar from context. Validate → auto-repair from context defaults → minimal authored stub if still invalid; NEVER halts the turn. Mint entityId via the SNG-019 resolver (**resolve-before-mint** — never duplicate an existing entity); persist to codex + per-save generated store. Trigger **REACTIVE only** (just-in-time; ambient generation is SNG-021, out of scope here). **Governor at the call:** per-scene/session generation cap + resolve-before-generate (reuse over mint) + cost-aware.
+
+**2. Engagement score + personal-canon tiers (the governor).** Every generated entity carries `engagementScore` fed by IMPLICIT signal — revisits, repeat interactions, facts accreted (SNG-019 counts them), quest-linkage, cross-session survival. Tiers: **fresh** (provisional) → **established** (durable personal canon; world-tick-eligible) → **nominated** (promotion queue, Phase 3). Untouched `fresh` within a window DEMOTES: drops out of world-tick + proactive GM reference — **never deleted** (what happened happened), just stops propagating. This is the anti-sprawl governor: attention keeps a thing real, inattention lets it go dormant — propagation as the test of what's real. **Realness = WEIGHT = birth-power (the level/power of the character it was generated for) + accumulated attention.** Two roads to real: born strong, or grown strong. Weight recorded at birth; drives contradiction-resolution + promotion in Phase 3.
+
+**3. Content rating (profile ceiling).** Rating lives on the player profile (BATCH-7 identity anchor). Dimensions: violence/gore, sexual, language, dread — each leveled; presets **G / PG / PG-13 / R / R+** set all at once (dials adjustable within a preset). **R+ = maximum intensity, all details** (full gritty/gory/sexual). Three consumers: (a) **GM narration tone** — GM narrates to the requesting player's ceiling [gm.js rule reading profile.rating; PULL-FORWARD candidate — a profile field + one rule, shippable ahead of the anchor]; (b) **generation ceiling** — `generate()` authors to the requesting player's ceiling; (c) **shared-canon visibility** (Phase 3) — every entity rating-tagged, each player sees the shared world through their OWN ceiling lens. **CEILING CONTROL (load-bearing):** rating ceiling is ERIK-SET per family profile (path-a). A profile CANNOT self-elevate. R/R+ require an adult gate Erik controls. A minor profile CANNOT be set to or self-select R/R+.
+
+**4. THE FLOORS (rating-independent, always on — non-negotiable).**
+- **Disallowed-content floor** is absolute and independent of rating. R+ scales intensity UP toward it; NEVER unlocks prohibited content. Enforced at **generation time** (birth-time validator — one more pass at the existing validate step), because earned-auto-promote means there is no human gate downstream.
+- **Minor protection (absolute):** no generated entity who is a minor is EVER eligible for romantic/sexual content at ANY tier for ANY requesting player. Content sexualizing minors is prohibited-floor — never generated, narrated, or promoted. In the family-shared world, sub-ceiling players (incl. minor profiles) are HARD-EXCLUDED from above-ceiling content — absent, not softened.
+
+**5. Store built promotable (forward-compat).** Per entity: entityId, type, birth-weight, engagementScore/tier, rating-tag, provenance (who/where/when), attention history. Clean provenance from day one so Phase 3 promotion is zero-rework. All Phase 1 content is PERSONAL canon.
+
+### Recorded for later phases (build the store right now)
+- **Phase 2:** offscreen advancement of generated arcs/NPCs (world-tick, SNG-021 couple) + explicit ⭐ "keep" boost (available, never nagged) + nomination surfacing.
+- **Phase 3 — shared-world promotion ("everyone's play grows the world"):**
+  - **EARNED auto-promotion:** born personal at birth-weight; auto-promotes to shared canon when weight (birth-power + attention) crosses the established threshold. The threshold IS the gate — no human curator. (Erik: earned, not instant.)
+  - **CONTRADICTION → RANK, not reject:** promoted content colliding with canon fires an opposed roll weighted by each side's realness (weight). Winner = LOUD canonical reality; loser drops to a **variant/rumor tier** — persists, discoverable, contestable later. Authored core canon sits at a high weight floor (designed spine stays stable; generated content layers on). The setting's physics: a Falsehood/Truth-axis world resolves competing realities by propagating power; contradiction held in the total, not deleted.
+  - **RATING-LENS on the shared world:** shared canon is a superset; each player receives the subset at/below their ceiling. Above-ceiling content that CAN dial down → **ADAPTIVE RE-NARRATION** (same canonical entity re-rendered per ceiling — a scarred brutal warlord for R+, a stern old soldier for G; costs a re-narration call per entity). Above-ceiling content that CANNOT honestly dial down (an arc that IS the horror; explicit R+) → **FILTER** (absent from lower worlds; generator substitutes in-ceiling content). Filter is the floor, adaptive the enhancement for the tone-adaptable subset. This is what lets Erik's R+, Courtney's G, and a minor's G coexist in ONE growing world without tone-bleed — the family-shared world's core safety mechanism.
+
+### Guardrails
+Design law 1 (engine owns the schema'd mint + scoring + resolution; GM emits requests + narrates); resolve-before-mint (SNG-019); born-current via reconcile (SNG-022); derives-never-fabricates; generation never halts a turn; governor caps generation; the two floors enforced at birth, rating-independent, absolute; suites + parse_probe green per phase; never touches ErikIAm.
+
+### Erik preview tests (Phase 1)
+1. "Walk somewhere the fiction hasn't authored — verify a new in-grain place/person is minted, persists, is revisitable with facts intact, and reads like the LOCAL disposition, not generic."
+2. "Set your profile to R+ and play a violent or intimate beat — verify full-intensity narration; set a test profile to G and play the same beat — verify it comes back gentle. Confirm a minor profile cannot be set above PG."
+3. "Generate a few things, then ignore some and return to others — verify the returned-to ones stay vivid/advance and the ignored ones quietly fade from what the GM raises, WITHOUT being deleted from your codex."
+
+*Phase 1 = the BATCH-9 opener; starts after BATCH-8. Rating-tone (consumer #1) is a pull-forward candidate for R+ play sooner.*

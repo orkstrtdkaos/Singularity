@@ -390,3 +390,19 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview test:** "Carry a loaded inventory into a few different situations — verify only the genuinely relevant (best) item gives a bonus, stacking several matching items doesn't pile up, and the Pack stops helping with things a bag shouldn't."
 
 *Fast-follow balance fix; OFF the BATCH-9/dating critical path. Part A = small CCode engine change; Part B = Aevi content audit.*
+
+---
+
+## SNG-045 — Player identity dedup (one person, one profile)
+
+**Erik-found in live play 2026-07-11:** the "Who's playing?" picker shows TWO "Erik" profiles (`player-54seyk` → char-mr4ejo8c + char-mr5ns3hh; `player-s9z9u1` → char-mr6eq1a5), both him. Root cause: identity is keyed PER-DEVICE — `playerKey` is generated fresh per device, so "Erik" entered on his phone and on his computer minted two profiles. BATCH-7 P2 synced CHARACTERS across devices but NOT identity, so one person fragmented into multiple profiles. Aevi PO; only Aevi closes.
+
+**Part A — reconcile existing duplicates (🔧 BUILD OWNER: CCode; SNG-022-style migration step).** Merge same-displayName duplicate profiles: UNION charactersPlayed, merge per-character play-style (per-char records already separate → mostly a union, no double-count), choose one canonical playerKey, retire/redirect the duplicate (keep a redirect so old-device localStorage still resolves). Idempotent, backward-safe, derives-never-fabricates. For Erik: 54seyk + s9z9u1 → ONE Erik owning char-mr4ejo8c + char-mr5ns3hh + char-mr6eq1a5. **Leave "Drizzy" (0jwfjo) alone** — distinct name, not flagged.
+
+**Part B — prevent future duplicates (🔧 BUILD OWNER: CCode; identity fix).** The picker resolves by PERSON, not per-device key: selecting/entering an EXISTING displayName on a new device attaches to the existing profile (match by displayName or a stable person-key), rather than minting a new playerKey. The picker also collapses identical-name entries (display dedupe) even ahead of the merge. "New player" only when the name is genuinely new.
+
+**Guardrails.** Reconcile owns the merge (safe, idempotent); NEVER destroy a character or a play-style record; keep a redirect for retired keys; ties to BATCH-7 identity + cross-device (P2) + SNG-041 shared model. Suites + parse_probe green.
+
+**Erik preview test:** "After the fix, open 'Who's playing?' — verify ONE Erik owning all your characters; then start on a different device and pick Erik — verify it attaches to the same profile, not a new one."
+
+*BATCH-7 identity refinement; OFF the BATCH-9/dating critical path; fast-follow (live annoyance — you're seeing two of yourself). Pairs naturally with SNG-041's shared-identity work.*

@@ -228,3 +228,5 @@ Design law 1 intact; content-not-code (no ability/location specifics in engine);
 ---
 
 *Task ledger between Aevi (PO) and Claude Code build sessions. Template/flow: `SYSTEM_SPEC.md` §10. Results → `po/results/`. Only Aevi closes. Queue: `po/BACKLOG.md`.*
+
+**CACHE-GHOST FLAG RESOLVED (Aevi 2026-07-11, verified at HEAD):** the 4-tier 1h-TTL prompt cache IS built/wired/live (claude.js ~L38 + gm.js tierParts/buildTiers, gmTurn ~L228-234, cacheKey "singularity-runtime", commit d32b45d1). CCode's "never built" was a good-faith miss (version-string reasoning, not code). NOT re-pointed — it's done. Only open thread: confirm runtime amortization improved vs the old 0.24x (dashboard check).

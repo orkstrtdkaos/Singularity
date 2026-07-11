@@ -303,3 +303,31 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview test:** "With two characters at different personal day-counts, trigger an event / away-digest — verify both reference the SAME absolute world-date for the same event, and each still shows its own journey-day if kept."
 
 *Still ahead of BATCH-9 — the generative world needs the shared absolute so generated cross-character events are born reconcilable, not each inventing its own Day 1.*
+
+---
+
+## SNG-042 — Legends & Villains (the world's great figures)
+
+**Content + systems. RIDES ON BATCH-9** (needs the generate path + weight/engagement + codex recurrence). Earliest after BATCH-9 Phase 1; best paired with Phase 2 offscreen advancement (legends move through the world between appearances). Erik-directed 2026-07-11; Aevi PO. **Aevi owes the authored legend/villain anchors before build.** Only Aevi closes.
+
+**Idea (Erik).** The world should occasionally deploy powerful named figures in dramatic beats — a hero whose power you witness in a huge battle, a rescue from a doomed situation, a legend passing by who gives advice or a task — and it needs villains across the whole spectrum, epic to riffraff. Threads the world together through recurring great figures.
+
+**1. Power-tier spectrum on NPCs.** Add a tier — legendary/epic → regional/notable → local/riffraff — on both heroic and villainous alignment. Generation-at-tier: `generate("npc", {tier, alignment, …})` mints a figure at the requested power, born at high birth-weight for legendary (the BATCH-9 weight system then makes them real + recurring by default). Villain ladder: riffraff (petty bandits/thugs) → regional (a warlord, a corrupt supervisor — cf. the live Fendt thread) → epic (an arc-defining antagonist).
+
+**2. The Legends roster.** A few HAND-AUTHORED anchors (2–3 iconic heroes + 1–2 epic villains, in-grain to the Valley, high weight-floor so they're stable canon) + generatable great-NPCs for mid/low tiers. Modeled as high-power universal-role instances (`universal_roles.json` already gives role → disposition-expression; a legend is a role at legendary tier with a signature + a presence pattern).
+
+**3. Dramatic-beat deployment (the novel system — "legend surfacing").** The engine detects beat-types where a great figure's appearance lands and deploys one in-grain, RARELY (a special beat, not every scene — governed like gambit surfacing so it never cheapens):
+- **Doomed / overwhelming odds → a hero intervenes / rescues** (relief + witnessing power).
+- **A set-piece battle → the character WITNESSES a legend's power** (scale-setting — you see what the best can do).
+- **A mundane crossing → a passing legend offers advice or a task** (threading + hooks; the world feels populated by greatness).
+- **A villain's shadow → riffraff / lieutenants appear, escalating toward the epic villain** (a menace ladder that scales to the character's power/arc).
+
+**4. Threading via recurrence.** Legends are high-weight recurring codex entities (SNG-019 resolution + BATCH-9 weight): the hero from the battle passes by later with advice; early riffraff foreshadow the epic villain; a rescuer remembers you. With Phase-2 offscreen advancement, legends MOVE through the world between appearances (the traveling hero's deeds reach you via the away-digest, dated on the SNG-041 shared clock). The world threads itself through their recurrence.
+
+**5. Governors.** Rare, earned deployment (legend appearances are special); power-appropriate (no epic villain for a tavern scuffle); villain tier scales to the character's arc (riffraff early, epic as climax); rating-aware (a legend's brutality respects the player's content ceiling — ties the BATCH-9 rating-lens).
+
+**Guardrails.** Engine detects the beat + selects the figure; GM narrates. Rare/governed — don't cheapen greatness by overuse. Reuse generate path + weight + codex + universal_roles (don't reinvent). Rating-aware. Suites + parse_probe green.
+
+**Erik preview test:** "Get into a genuinely doomed fight — verify a hero can intervene and you feel the gap between your power and theirs; later, verify that same hero (or their reputation) recurs — a passing word, a task, an appearance — not a one-off; and verify a villain ladder (riffraff now, something bigger implied)."
+
+*Rides BATCH-9; earliest after Phase 1, best with Phase 2. Aevi authors the legend/villain anchors before build.*

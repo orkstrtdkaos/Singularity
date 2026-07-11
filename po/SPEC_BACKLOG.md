@@ -228,6 +228,19 @@ Erik 2026-07-07: image generation is good — want more, showing the character, 
 - **Engine:** an imageOps path (GM emits prompt; app calls the image endpoint; result renders in the turn + saves to the character's gallery/saga). Cost-aware: off by default on metered accounts, on where Erik runs it.
 - **Smoke:** creation yields a portrait; a discovery beat yields art; gallery persists in the Saga (ties SNG-023); toggle works.
 
+### BUILD-READY CONSOLIDATION (Aevi 2026-07-11 — Erik wants this NOW: "start seeing the characters"). 🔧 CCode.
+Verified at HEAD: the game has NO image pipeline yet (0 portrait/imagegen refs); `schemas/location.json` already has an `image` field, `schemas/npc.json` has `appearance` (text). So this is FOUNDATION-then-CONSUMERS, and it UNIFIES SNG-035 + SNG-046 Layer 3 into ONE visual pipeline (build once).
+- **Phase 1 — the image pipeline (imageOps foundation).** One path: assemble a prompt (character: appearance+origin+gear+arc; location: disposition+tags+seedFiction; a shared world/region STYLE-PREFIX for consistency) → call the image endpoint → **persist-once-and-CACHE** (born-with-image, same discipline as the per-location/NPC generate pattern — never regenerate) → display in-app + save to the character's gallery/Saga (ties SNG-023). Toggleable; cost-aware (default-off on metered accounts, on where Erik runs it).
+  - **⛔ ONE CCODE DECISION — the image endpoint.** The game is client-side (Pages) and needs a SECURE way to call image-gen. Reuse the existing LLM-call/proxy pattern (the game already calls an LLM via deps/callJSON); the image endpoint is ERIK-CONFIGURED like the sync PAT (endpoint + key in Settings, never client-hardcoded). Z-Image/HF is the infra behind Aevi's portraits — same family. CCode picks the concrete wiring; Erik configures the endpoint.
+- **Phase 2 — consumers (all ride the ONE pipeline):**
+  - **CHARACTER PORTRAITS** — at creation + on milestone (level tier, evolution stage). The headline "seeing the characters."
+  - **NPC PORTRAITS** — authored + generated NPCs + SNG-042 legends; a GENERATED NPC is BORN with its portrait (folds into the BATCH-9 generate path).
+  - **LOCATION IMAGES** — this IS SNG-046 Layer 3. UNIFY; do not build twice. A discovered/generated place born with its image.
+  - **MOMENT ART** — big beats (discovery, gambit run, Tier-IV use, world-effect) → GM emits `imagePrompt`, clamped ~1/scene, toggleable.
+- **FLOORS APPLY TO IMAGES TOO (non-negotiable):** a generated portrait/scene honors the player's rating ceiling AND the absolute minor-protection floor — route image prompts through the same floor logic as text (`enforceFloors`); no image ever sexualizes a minor or exceeds a viewer's ceiling. Content-safe: original character/environment art, no IP, no real people.
+- **Priority: TOP build-value right now.** Phase 1 (pipeline) unblocks every consumer; then portraits are the fastest, highest-delight win.
+
+
 ## SNG-017 addendum — the Ent/resonant gating fix (root cause found)
 Erik: "my ent can't choose resonant skills, why?" DIAGNOSED in progression.js effectiveLevelReq: non-valley origins get own-tradition + valley_craft(+1); harmonic<->radiant return null (forbidden). An Ent origin matches neither harmonic nor radiant → resonant abilities are null = never offered. The two-rival-civilizations rule predates the world model. FIX (fold into SNG-017): replace the hardcoded triangle with origins.json — each origin grants homeTraditions[]; ALL other traditions are learnable-through-fiction (teacher/travel/quest — the same unlock pattern precursorAccess already uses, generalized to character.traditionAccess[]). Reach traditions already model this ('learned'-gated). Result: an Ent CAN learn Harmonic — by training at the Heights, which is exactly the story it should take.
 

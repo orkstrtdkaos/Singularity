@@ -10,7 +10,11 @@
       "mode": "solo",
       "title": "Cross-class cost",
       "do": "Take or rank an ability outside your class.",
-      "pass": "Costs double — picker shows 2 pts, button reads ▲×2."
+      "pass": "Costs double — picker shows 2 pts, button reads ▲×2.",
+      "force": {
+        "intent": "openSkillPicker",
+        "note": "with a cross-class ability available to take"
+      }
     },
     {
       "id": "b5-fork",
@@ -18,7 +22,13 @@
       "mode": "solo",
       "title": "Branch fork lock",
       "do": "Rank Prism Sight to 3.",
-      "pass": "Offers two paths, locks the unchosen one permanently, marks ⑂ on sheet + skill graph."
+      "pass": "Offers two paths, locks the unchosen one permanently, marks ⑂ on sheet + skill graph.",
+      "force": {
+        "intent": "setupSkill",
+        "skill": "prism_sight",
+        "atRank": 2,
+        "note": "leave the rank-3 fork pending"
+      }
     },
     {
       "id": "b5-feel",
@@ -26,7 +36,11 @@
       "mode": "solo",
       "title": "Phase-3 feel-checks",
       "do": "In a charged/tilted place do an aligned vs opposed action; try the surge dial; wake the Waystaff.",
-      "pass": "Aligned action gets a 'the place favored this' receipt; surge = power now + backlash after; Waystaff shows ✦."
+      "pass": "Aligned action gets a 'the place favored this' receipt; surge = power now + backlash after; Waystaff shows ✦.",
+      "force": {
+        "intent": "travelToDisposition",
+        "need": "high-charge / tilted location (strong poleIntensity)"
+      }
     },
     {
       "id": "b7-style",
@@ -34,7 +48,12 @@
       "mode": "solo",
       "title": "Per-character play-style",
       "do": "Play Cellaceron on planned/strategic actions a few turns.",
-      "pass": "HE gains 'strategist'; Usnea's style doesn't move; old characters kept the style they had."
+      "pass": "HE gains 'strategist'; Usnea's style doesn't move; old characters kept the style they had.",
+      "force": {
+        "intent": "selectCharacter",
+        "who": "Cellaceron",
+        "then": "offer a planned/strategic action"
+      }
     },
     {
       "id": "b7-inv",
@@ -42,7 +61,14 @@
       "mode": "solo",
       "title": "Quest + inventory robustness",
       "do": "Run a quest progress→complete and pick up/use a couple items.",
-      "pass": "Nothing silently vanishes; Quest Log matches; duplicate-named items stack instead of splitting."
+      "pass": "Nothing silently vanishes; Quest Log matches; duplicate-named items stack instead of splitting.",
+      "force": {
+        "intent": "grantTestState",
+        "give": [
+          "a quest in progress",
+          "two duplicate-named items"
+        ]
+      }
     },
     {
       "id": "b8-gambit",
@@ -50,7 +76,11 @@
       "mode": "solo",
       "title": "Gambit surfacing + XP",
       "do": "Enter a multi-obstacle scene, then a plain 1-2 choice scene; run a gambit to completion.",
-      "pass": "Hint appears on the plan-apt scene, NOT the plain one; completion awards +10 XP. (If the hint feels too frequent, that's SNG-043, not a fail.)"
+      "pass": "Hint appears on the plan-apt scene, NOT the plain one; completion awards +10 XP. (If the hint feels too frequent, that's SNG-043, not a fail.)",
+      "force": {
+        "intent": "enterPlanApt",
+        "note": "a multi-obstacle, plan-apt scene"
+      }
     },
     {
       "id": "b8-time",
@@ -58,7 +88,11 @@
       "mode": "solo",
       "title": "Narrative time",
       "do": "Sleep, then have a short conversation.",
-      "pass": "Sleep jumps the clock ~8h; conversation ticks minutes; the story's time-of-day matches the clock."
+      "pass": "Sleep jumps the clock ~8h; conversation ticks minutes; the story's time-of-day matches the clock.",
+      "force": {
+        "intent": "timeAction",
+        "action": "sleep"
+      }
     },
     {
       "id": "b9p1-generate",
@@ -66,7 +100,11 @@
       "mode": "solo",
       "title": "Generate anchor",
       "do": "Walk somewhere the fiction hasn't authored.",
-      "pass": "A new in-grain place/person is minted, persists, is revisitable with facts intact, and reads like the LOCAL disposition — not generic."
+      "pass": "A new in-grain place/person is minted, persists, is revisitable with facts intact, and reads like the LOCAL disposition — not generic.",
+      "force": {
+        "intent": "generateHere",
+        "note": "move to an unauthored edge so the next step mints a place"
+      }
     },
     {
       "id": "b9p1-rating",
@@ -74,7 +112,14 @@
       "mode": "solo",
       "title": "Rating ceiling",
       "do": "Set your profile R+ then G and play the same beat; try to set a minor profile above PG.",
-      "pass": "Intensity differs by ceiling; a minor profile CANNOT be set above PG."
+      "pass": "Intensity differs by ceiling; a minor profile CANNOT be set above PG.",
+      "force": {
+        "intent": "setRating",
+        "cycle": [
+          "R+",
+          "G"
+        ]
+      }
     },
     {
       "id": "sng041-clock",
@@ -82,7 +127,11 @@
       "mode": "solo",
       "title": "One world, one clock",
       "do": "With two characters at different personal day-counts, trigger an event/away-digest.",
-      "pass": "Both reference the SAME absolute world-date for the same event; each still shows its own journey-day."
+      "pass": "Both reference the SAME absolute world-date for the same event; each still shows its own journey-day.",
+      "force": {
+        "intent": null,
+        "manual": "needs two characters at different personal day-counts"
+      }
     },
     {
       "id": "b9p2-offscreen",
@@ -90,7 +139,12 @@
       "mode": "solo",
       "title": "Living advancement",
       "do": "Leave an established grown entity across a real-time gap, then return.",
-      "pass": "It has moved on plausibly; the away-digest dates its deeds on the shared clock, on-or-before now."
+      "pass": "It has moved on plausibly; the away-digest dates its deeds on the shared clock, on-or-before now.",
+      "force": {
+        "intent": "jumpClock",
+        "advanceWorldDays": 3,
+        "note": "dev-only time-jump; then return to see an established entity advanced"
+      }
     },
     {
       "id": "b9p2-keep",
@@ -98,7 +152,11 @@
       "mode": "solo",
       "title": "Keep + nominate",
       "do": "⭐ Keep a grown entity; leave another ignored.",
-      "pass": "The kept one holds/climbs; the ignored one fades; some grown things surface as ★ Notable atop the Codex."
+      "pass": "The kept one holds/climbs; the ignored one fades; some grown things surface as ★ Notable atop the Codex.",
+      "force": {
+        "intent": "openCodex",
+        "note": "on a grown/established entity, to ⭐ Keep it"
+      }
     },
     {
       "id": "b9p3-promote",
@@ -106,7 +164,8 @@
       "mode": "cross-player",
       "title": "Earned promotion",
       "do": "Grow an entity to nominated tier on profile A (sync on).",
-      "pass": "It promotes into shared canon; a synced profile B receives it."
+      "pass": "It promotes into shared canon; a synced profile B receives it.",
+      "force": null
     },
     {
       "id": "b9p3-lens",
@@ -114,7 +173,8 @@
       "mode": "cross-player",
       "title": "Rating-lens",
       "do": "Set profile B to a lower rating (e.g. G) and view an above-ceiling entity.",
-      "pass": "It comes through dialed-DOWN (softer wording), or ABSENT for sexual/gore — never softened-into-view."
+      "pass": "It comes through dialed-DOWN (softer wording), or ABSENT for sexual/gore — never softened-into-view.",
+      "force": null
     },
     {
       "id": "b9p3-contradiction",
@@ -122,7 +182,8 @@
       "mode": "cross-player",
       "title": "Contradiction → rank",
       "do": "Force a promoted entity that collides with existing canon.",
-      "pass": "Resolves by realness-weight into a loud canonical truth + a persisting variant/rumor; authored core canon holds."
+      "pass": "Resolves by realness-weight into a loud canonical truth + a persisting variant/rumor; authored core canon holds.",
+      "force": null
     },
     {
       "id": "b9p3-floor",
@@ -130,7 +191,8 @@
       "mode": "cross-player",
       "title": "Minor-protection floor",
       "do": "View shared canon on a minor profile.",
-      "pass": "Gore/sexual content is HARD-EXCLUDED (absent), NOT softened. The family-safety floor — confirm directly."
+      "pass": "Gore/sexual content is HARD-EXCLUDED (absent), NOT softened. The family-safety floor — confirm directly.",
+      "force": null
     },
     {
       "id": "sng035-portrait",
@@ -138,7 +200,11 @@
       "mode": "solo",
       "title": "Character portrait",
       "do": "Create a character (or hit a milestone) with imagery on.",
-      "pass": "A Pollinations portrait generates from your appearance/origin/gear, renders in-game, and PERSISTS (cached — doesn't regenerate on revisit); toggle off suppresses it."
+      "pass": "A Pollinations portrait generates from your appearance/origin/gear, renders in-game, and PERSISTS (cached — doesn't regenerate on revisit); toggle off suppresses it.",
+      "force": {
+        "intent": "portraitBeat",
+        "note": "new character or a level milestone with imagery on"
+      }
     },
     {
       "id": "sng035-scene",
@@ -146,7 +212,12 @@
       "mode": "solo",
       "title": "Location / moment art",
       "do": "Discover a new place, or hit a big beat (discovery, gambit run).",
-      "pass": "An in-grain image appears for the place/moment and persists; stays within your rating ceiling."
+      "pass": "An in-grain image appears for the place/moment and persists; stays within your rating ceiling.",
+      "force": {
+        "intent": "generateHere",
+        "note": "discover a new place to trigger scene art"
+      }
     }
-  ]
+  ],
+  "forceVocabulary": "intent-level setup hints for the SNG-051 'Run this scenario' button. CCode resolves each intent against content + existing primitives (travel/setRating/startEncounter/generate/clock-jump). Cross-player legs have no force (need two synced profiles → manual)."
 }

@@ -9,7 +9,7 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacte
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
-import { generate, ensureGenerated, generatedRecords } from "./engine/generate.js";
+import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.8";
+const APP_VERSION = "1.7.9";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -374,6 +374,17 @@ function hydrateGeneratedIntoContent(c) {
   ensureGenerated(c);
   for (const rec of generatedRecords(c, "location")) if (!CONTENT.locations[rec.id]) CONTENT.locations[rec.id] = rec;
   for (const rec of generatedRecords(c, "npc")) if (!CONTENT.npcs[rec.id]) CONTENT.npcs[rec.id] = rec;
+}
+
+/** §2 engagement: record an implicit attention signal on a generated entity by id (across
+ *  all types). Attention keeps a grown thing real + surfacing; inattention lets it go dormant. */
+function noteGeneratedAttention(id, kind, day) {
+  if (!id || !character.generated) return;
+  const slug = String(id);
+  for (const type of ["npc", "location", "arc"]) {
+    const rec = character.generated[type]?.[slug];
+    if (rec) { recordAttention(rec, kind, day); return; }
+  }
 }
 
 /** Few-shot taste for generation: a few AUTHORED records of the type, disposition-near the
@@ -828,7 +839,8 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
-    ratingDetail: ratingLineForGM() // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
+    ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
+    livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }) // §2: proactively surface only LIVE (non-dormant) grown content
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -907,6 +919,10 @@ function applyTurn(turn, resolution) {
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
   applyFactUpdates(character, turn.factUpdates || [], memCtx);
+  // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
+  // attention — it keeps them real + surfacing. (Revisiting a grown place is signaled in travelTo.)
+  for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);
+  for (const u of turn.codexUpdates || []) if (u.entityId) noteGeneratedAttention(u.entityId, "fact", memCtx.day);
   if (character.activeEncounter && turn.encounterOps) {
     const encA = activeEnc();
     if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state));
@@ -1242,6 +1258,7 @@ async function maybeRandomEncounter(trigger, news = []) {
 
 async function travelTo(locId) {
   if (busy) return;
+  noteGeneratedAttention(locId, "revisit", readClock(character.clock).day); // §2: returning to a grown place keeps it alive
   character.currentLocationId = locId;
   character.activeScene = null;
   sceneTurns = [];

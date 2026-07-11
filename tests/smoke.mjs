@@ -28,7 +28,7 @@ import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseA
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
-import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors } from "../engine/generate.js";
+import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 
 // stub localStorage for worldtime settings in Node
@@ -1695,6 +1695,71 @@ await (async () => {
   const rec2 = await generate("npc", { ...ctx, character: { id: "c9b", level: 3 } }, { callJSON: llm({ name: "Dara", role: "a market broker", age: 40, wants: "coin and comfort", spectrum: {}, fears: "loss", voiceHints: "wry" }), schema: npcSchema });
   check("tag: a generated entity carries the requesting ceiling as its rating tag", rec2._gen.rating === "R+");
   check("tag: an adult generated NPC is romance-eligible", rec2._gen.romanceEligible === true);
+})();
+
+// --- SNG-BATCH-9 Phase 1d: engagement governor + canon tiers ---
+await (async () => {
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  const locSchema = JSON.parse(readFileSync(join(root, "schemas/location.schema.json"), "utf8"));
+  const llm = (o) => async () => o;
+  const mkNpc = async (name, character, day = 1) => generate("npc", { character, day, location: { id: "archive_hollow", name: "Archive Hollow", spectrum: {} } }, { callJSON: llm({ name, role: "a figure of the hollow", spectrum: { truth: 0.3 }, fears: "x", homeLocation: "archive_hollow" }), schema: npcSchema });
+
+  // birth: fresh, weight = birth-power, score 0
+  {
+    const c = { id: "e1", level: 4 };
+    const n = await mkNpc("Osric", c, 1);
+    check("engage: born fresh with score 0 + weight from birth-power", n._gen.tier === "fresh" && n._gen.engagementScore === 0 && effectiveWeight(n) === 4);
+  }
+
+  // attention drives the tier: fresh -> established -> nominated
+  {
+    const c = { id: "e2", level: 2 };
+    const n = await mkNpc("Bex", c, 1);
+    recordAttention(n, "interact", 1); recordAttention(n, "interact", 1); // +4 -> established
+    check("engage: a couple interactions promote fresh -> established", n._gen.tier === "established");
+    check("engage: weight grows with accumulated attention", effectiveWeight(n) === 2 + Math.floor(n._gen.engagementScore / 2));
+    for (let i = 0; i < 4; i++) recordAttention(n, "revisit", 2); // push past nominated
+    check("engage: sustained attention reaches nominated (promotion queue)", n._gen.tier === "nominated");
+  }
+
+  // ESTABLISHED is durable — it does NOT go dormant from inattention
+  {
+    const c = { id: "e3", level: 3 };
+    const n = await mkNpc("Cass", c, 1);
+    recordAttention(n, "interact", 1); recordAttention(n, "interact", 1); // established
+    check("engage: established is never dormant, even long untouched", isDormant(n, { day: 100 }) === false && isSurfaceable(n, { day: 100 }) === true);
+  }
+
+  // FRESH goes dormant past the window (stops propagating) — but is NEVER deleted
+  {
+    const c = { id: "e4", level: 1 };
+    const n = await mkNpc("Dob", c, 1);        // fresh, last attention day 1
+    check("engage: fresh + recently seen still surfaces", isSurfaceable(n, { day: 3 }) === true);
+    check("engage: fresh + untouched past the window goes dormant", isDormant(n, { day: 10 }) === true && isSurfaceable(n, { day: 10 }) === false);
+    check("engage: dormant is NOT deletion — the record still exists in the store", generatedRecords(c, "npc").some(r => r.id === n.id));
+  }
+
+  // Erik test 3: return-to keeps it alive; ignored one fades — from the SAME store
+  {
+    const c = { id: "e5", level: 2 };
+    const kept = await mkNpc("Returned-To", c, 1);
+    const ignored = await mkNpc("Ignored", c, 1);
+    // player returns to 'kept' on day 9 (a revisit-class signal); 'ignored' gets nothing
+    recordAttention(kept, "revisit", 9);
+    const live = livingWorldForGM(c, { locationId: "archive_hollow", day: 11 });
+    check("engage: the returned-to entity still surfaces to the GM", /Returned-To/.test(live || ""));
+    check("engage: the ignored entity has faded from what the GM raises", !/Ignored/.test(live || ""));
+    check("engage: BUT the faded entity is still in the codex/store (not deleted)", generatedRecords(c, "npc").some(r => r.name === "Ignored"));
+  }
+
+  // livingWorldForGM relevance + tier tagging
+  {
+    const c = { id: "e6", level: 5 };
+    const loc = await generate("location", { character: c, day: 1, location: { id: "archive_hollow", name: "Archive Hollow", spectrum: {}, connections: [] } }, { callJSON: llm({ name: "The Deep Index", regionId: "valley", communityId: null, spectrum: {}, poleIntensity: {}, tags: [], connections: ["archive_hollow"], descriptionSeed: "shelves without end", loreRefs: [], encounterFlavor: "", questSeeds: [], map: { x: 1, y: 2 } }), schema: locSchema });
+    recordAttention(loc, "revisit", 1); recordAttention(loc, "revisit", 1); // established
+    const live = livingWorldForGM(c, { locationId: "archive_hollow", day: 1 });
+    check("engage: a connected grown location surfaces in the living-world block, tier-tagged", /The Deep Index \(location, established/.test(live || ""));
+  }
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

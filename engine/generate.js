@@ -299,6 +299,91 @@ export async function generate(type, context = {}, deps = {}) {
   return persistGenerated(context.character, type, entity, deps);
 }
 
+// ---------- SNG-BATCH-9 §2: engagement governor + canon tiers ----------
+// Realness = WEIGHT = birth-power + accumulated attention. Attention keeps a thing real;
+// inattention lets it go dormant (stops PROPAGATING — never deleted; what happened happened).
+// Phase-1-clean: this scores, tiers, and gates PROACTIVE SURFACING. It does NOT advance
+// entities offscreen — that world-tick coupling is Phase 2, gated on SNG-041 (the one clock).
+
+const TIER_AT = { established: 3, nominated: 8 };   // engagementScore thresholds
+const FRESH_WINDOW_DAYS = 4;                          // untouched-fresh grace before it goes dormant
+const ATTENTION_WEIGHT = { revisit: 2, interact: 2, fact: 1, quest: 2, session: 1 };
+const ATTENTION_CAP = 60;
+
+/** Record an implicit engagement signal on a generated entity (revisit / interact / fact /
+ *  quest / session). Mutates `_gen`; bumps the score, stamps the day, recomputes the tier. */
+export function recordAttention(entity, kind = "interact", day = null) {
+  const g = entity?._gen;
+  if (!g) return entity;
+  g.engagementScore = Math.min(ATTENTION_CAP, (g.engagementScore || 0) + (ATTENTION_WEIGHT[kind] || 1));
+  if (day != null) g.lastAttentionDay = day;
+  else if (g.lastAttentionDay == null) g.lastAttentionDay = g.createdDay ?? null;
+  g.attentionHistory = [...(g.attentionHistory || []), { kind, day: day ?? null }].slice(-24);
+  recomputeTier(entity);
+  return entity;
+}
+
+/** Realness = birth-power + accumulated attention. Drives contradiction-resolution +
+ *  promotion in Phase 3; recorded from birth so promotion is zero-rework. */
+export function effectiveWeight(entity) {
+  const g = entity?._gen || {};
+  return (g.birthWeight || 1) + Math.floor((g.engagementScore || 0) / 2);
+}
+
+/** Recompute the canon tier from the score. ESTABLISHED is durable personal canon — once
+ *  earned it does not fall back from inattention (only FRESH goes dormant). Returns the tier. */
+export function recomputeTier(entity) {
+  const g = entity?._gen;
+  if (!g) return "fresh";
+  const s = g.engagementScore || 0;
+  if (s >= TIER_AT.nominated) g.tier = "nominated";
+  else if (s >= TIER_AT.established) g.tier = "established";
+  else if (g.tier !== "established" && g.tier !== "nominated") g.tier = "fresh";
+  return g.tier;
+}
+
+/** Is a FRESH entity dormant (untouched past the window)? Dormant = stops propagating —
+ *  drops out of proactive GM reference (and, in Phase 2, the world-tick). Established/
+ *  nominated are never dormant. Never means deleted. */
+export function isDormant(entity, { day = null, window = FRESH_WINDOW_DAYS } = {}) {
+  const g = entity?._gen;
+  if (!g || g.tier === "established" || g.tier === "nominated") return false;
+  const since = g.lastAttentionDay ?? g.createdDay; // never-attended fresh ages from its birth day
+  if (day == null || since == null) return false;    // no clock info → not dormant
+  return (day - since) > window;
+}
+
+/** Should this entity be surfaced PROACTIVELY to the GM right now? Durable canon always;
+ *  fresh only while still warm. Dormant fresh stays in the store + codex (revisitable),
+ *  it just stops being raised at the player. */
+export function isSurfaceable(entity, opts = {}) {
+  const g = entity?._gen;
+  if (!g) return true; // authored / unmanaged content always surfaces
+  return !isDormant(entity, opts);
+}
+
+/** The proactive "living world" block for the GM: surfaceable generated entities relevant
+ *  HERE, tagged by tier so the GM references durable ones naturally + never re-introduces
+ *  them as new. Dormant fresh are excluded (faded), not deleted. Returns null if none. */
+export function livingWorldForGM(character, { locationId = null, day = null } = {}) {
+  const recs = [...generatedRecords(character, "npc"), ...generatedRecords(character, "location"), ...generatedRecords(character, "arc")];
+  const rel = (r) => {
+    const t = r._gen?.type;
+    if (t === "location") return r.id === locationId || (r.connections || []).includes(locationId);
+    if (t === "npc") return r.homeLocation === locationId || !locationId;
+    return true; // arcs are ambient
+  };
+  const here = recs.filter(r => isSurfaceable(r, { day }) && rel(r));
+  if (!here.length) return null;
+  const brief = (r) => {
+    const t = r._gen?.type;
+    if (t === "npc") return (r.role || "").slice(0, 90);
+    if (t === "location") return (r.descriptionSeed || "").slice(0, 90);
+    return (r.tendency || "").slice(0, 90);
+  };
+  return here.slice(0, 8).map(r => `- ${r.name} (${r._gen.type}, ${r._gen.tier}, weight ${effectiveWeight(r)}): ${brief(r)}`).join("\n");
+}
+
 // ---------- prompt assembly (pure) ----------
 
 /** Build the schema-constrained generation prompt from the substrate grammar + local

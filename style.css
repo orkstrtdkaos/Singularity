@@ -234,6 +234,8 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .leg-run { font-family: var(--font-ui); font-size: 12px; padding: 3px 12px; border-radius: 6px; border: 1px solid var(--accent2); background: var(--accent2); color: #14110c; cursor: pointer; margin-left: 6px; }
 .leg-run:hover { filter: brightness(1.1); }
 .leg-manual { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); margin-left: 6px; font-style: italic; }
+/* SNG-046 Layer 3: per-location image in the map detail */
+.location-image { width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; display: block; }
 /* SNG-043 gambit builder feedback */
 .g-energy { color: var(--accent2); font-size: 12px; }
 .gambit-total { font-family: var(--font-ui); font-size: 13px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; color: var(--ink-dim); }

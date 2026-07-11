@@ -36,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.13";
+const APP_VERSION = "1.8.14";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -632,6 +632,31 @@ function ensureCharacterPortrait(c, { force = false, milestone = null } = {}) {
   return url;
 }
 
+/** SNG-046 Layer 3: the persisted image for a location (no minting) — an authored/born-with
+ *  image on the record, else this character's cached generate-once image. For display. */
+function locationImageFor(locId) {
+  return CONTENT.locations[locId]?.image || character?.locationImages?.[locId] || null;
+}
+
+/** SNG-046 Layer 3: generate-ONCE-and-CACHE a place's image on discovery/visit. An authored or
+ *  born-with-image location keeps its own; otherwise mint one and cache it on the character
+ *  (persists in the save; never regenerated) + drop it in the gallery. No-op when art is off. */
+function ensureLocationImage(locId) {
+  if (!imagesEnabled()) return null;
+  const loc = CONTENT.locations[locId];
+  if (!loc) return null;
+  if (loc.image) return loc.image;                          // authored or born-with-image
+  character.locationImages = character.locationImages || {};
+  if (character.locationImages[locId]) return character.locationImages[locId]; // cached — never regen
+  const url = ensureImage({ id: loc.id, name: loc.name, descriptionSeed: loc.descriptionSeed, poleIntensity: loc.poleIntensity },
+    "location", { ratingLevel: viewerRatingLevel(), field: "image" });
+  if (url) {
+    character.locationImages[locId] = url;
+    addGalleryImage(character, { kind: "location", prompt: loc.name, url, caption: loc.name, worldDay: absoluteWorldDay() });
+  }
+  return url;
+}
+
 /** On a level-up that crosses a character tier (every 2 levels), re-mint the portrait — the
  *  character visibly grows. Returns a short note if a new portrait landed, else null. */
 function refreshPortraitMilestone(c, prevLevel) {
@@ -715,18 +740,18 @@ async function handleGenerateRequests(turn) {
       known: { authored, generated: character.generated?.[type] || {} },
       examples: pickExamples(type, location), substrate: CONTENT.substrate, genBudget: budget
     };
+    // SNG-035/046-L3: born-WITH-image is now IN the generate path (deps.imageFor) so the record
+    // arrives with its picture regardless of caller — the app just injects the art builder.
+    const imageFor = (entity, t) => imagesEnabled() ? ensureImage(entity, t, { ratingLevel: viewerRatingLevel() }) : null;
     let rec = null;
-    try { rec = await generate(type, ctx, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas[type], applyCodexUpdates, codexCtx: memCtx }); }
+    try { rec = await generate(type, ctx, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas[type], applyCodexUpdates, codexCtx: memCtx, imageFor }); }
     catch { rec = null; }
     if (rec && rec._gen && !before.has(rec.id)) {              // a NEW mint (not a reuse of authored/existing)
       sceneGenCount++;
-      // SNG-035: a generated NPC/location is BORN with its image (persist-once on the record,
-      // rides the generated store). Routed through the floors (minor-protection from _gen). L3 map.
-      if ((type === "npc" || type === "location") && imagesEnabled()) {
-        try {
-          const url = ensureImage(rec, type, { ratingLevel: viewerRatingLevel() });
-          if (url) addGalleryImage(character, { kind: type, prompt: rec.name, url, caption: rec.name, worldDay: absoluteWorldDay() });
-        } catch (err) { console.warn("[art] born-with-image skipped:", err?.message); }
+      // the record was born with its image in generate(); mirror it into the gallery
+      if ((type === "npc" || type === "location") && rec.image) {
+        try { addGalleryImage(character, { kind: type, prompt: rec.name, url: rec.image, caption: rec.name, worldDay: absoluteWorldDay() }); }
+        catch (err) { console.warn("[art] gallery add skipped:", err?.message); }
       }
       // SNG-046: a generated location gets stable map coords on mint (near its parent) so it
       // appears on the map immediately and never jumps between renders.
@@ -1639,6 +1664,7 @@ async function travelTo(locId) {
   advanceClock(character.clock, ADVANCE.travel);
   notePlaceVisit(character, locId, readClock(character.clock).day);
   notePerception(character, locId, CONTENT.locations[locId], { visited: true, usedAbilityIds: [] }, CONTENT.rules);
+  try { ensureLocationImage(locId); } catch { /* SNG-046 L3: art is a convenience; never block travel */ }
   saveCharacter(character);
   const news = await maybeTick();
   if (await maybeRandomEncounter("onTravel", news)) return; // the road had something to say
@@ -1760,6 +1786,7 @@ function renderMap(selectedId = null) {
         ${l.dangerLevel >= 3 ? `<span class="rep-band wary">dangerous</span>` : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
       </div>
+      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       ${visited
         ? `<p class="map-details-desc">${esc(l.descriptionSeed.slice(0, 260))}${l.descriptionSeed.length > 260 ? "…" : ""}</p>
            ${(() => { const vs = vectorSummary(character, l.id, l, CONTENT.spectrums, CONTENT.rules); return vs ? `<div class="place-vectors">${esc(vs)}</div>` : ""; })()}

@@ -2240,5 +2240,25 @@ await (async () => {
   check("SNG-052: R without the gate or a verification is still refused", canSetRating(p3, "R", { authority: "erik", adultGate: false }).ok === false);
 })();
 
+// --- born-with-image IN the generate path (deps.imageFor) ---
+await (async () => {
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  const locSchema = JSON.parse(readFileSync(join(root, "schemas/location.schema.json"), "utf8"));
+  const llm = (o) => async () => o;
+  const imageFor = (entity, t) => `img://${t}/${entity.id}`; // injected builder, provider-agnostic
+  const c = { id: "img1", level: 2 };
+  const npc = await generate("npc", { character: c, day: 1, location: { id: "x", name: "X", spectrum: {} } },
+    { callJSON: llm({ name: "Imaged Warden", role: "keeps the gate", spectrum: {}, fears: "f", wants: "w", homeLocation: "x" }), schema: npcSchema, imageFor });
+  check("born-with-image: a generated NPC arrives WITH its image, in the store", npc.image === `img://npc/${npc.id}` && c.generated.npc[npc.id].image === npc.image);
+  const loc = await generate("location", { character: c, day: 1, location: { id: "x", name: "X", regionId: "valley", spectrum: {}, poleIntensity: {} } },
+    { callJSON: llm({ name: "Imaged Hollow", regionId: "valley", spectrum: {}, poleIntensity: {}, descriptionSeed: "a hollow", tags: [], connections: [] }), schema: locSchema, imageFor });
+  check("born-with-image: a generated location arrives WITH its image", loc.image === `img://location/${loc.id}`);
+  // no imageFor → no image stamped (caller opted out / art off) — never blocks the mint
+  const c2 = { id: "img2", level: 2 };
+  const npc2 = await generate("npc", { character: c2, day: 1, location: { id: "x", name: "X", spectrum: {} } },
+    { callJSON: llm({ name: "Plain Warden", role: "r", spectrum: {}, fears: "f" }), schema: npcSchema });
+  check("born-with-image: no imageFor → no image, mint still succeeds", npc2.image === undefined && !!npc2._gen);
+})();
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

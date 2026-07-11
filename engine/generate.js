@@ -300,6 +300,13 @@ export async function generate(type, context = {}, deps = {}) {
   // structural minor protection: a minor NPC is never romance/sexual-eligible, any tier, any player
   entity._gen.romanceEligible = !(type === "npc" && isMinorEntity(entity));
   if (floored.action !== "clean") entity._gen.floor = floored.action;
+  // SNG-035/046-L3: born-WITH-image — an injected image builder stamps the record's picture at
+  // mint, so a generated NPC/location arrives with its art regardless of the caller (persist-once;
+  // the URL rides the store + sync). Injected (deps.imageFor) so the engine stays image-provider-
+  // agnostic + headless-testable. Never throws — a missing image never blocks a mint.
+  if (deps.imageFor && (type === "npc" || type === "location") && !entity.image) {
+    try { const url = deps.imageFor(entity, type); if (url) entity.image = url; } catch { /* art is a convenience */ }
+  }
   return persistGenerated(context.character, type, entity, deps);
 }
 

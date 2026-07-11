@@ -406,3 +406,30 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview test:** "After the fix, open 'Who's playing?' — verify ONE Erik owning all your characters; then start on a different device and pick Erik — verify it attaches to the same profile, not a new one."
 
 *BATCH-7 identity refinement; OFF the BATCH-9/dating critical path; fast-follow (live annoyance — you're seeing two of yourself). Pairs naturally with SNG-041's shared-identity work.*
+
+---
+
+## SNG-046 — World map: KG overlay + multi-area (see where you are, and where the things are)
+
+**Erik-directed 2026-07-11.** Aevi PO; only Aevi closes. **ALREADY BUILT (renderMap, app.js ~1310):** SVG map from `location.map.x/y` + connection edges; current-location "you are here"; visited-vs-heard-of for PLACES (placeMemory) AND sub-places (satellites, visited/heard grammar); reachability, danger, travel button, details panel (description/vectors/notes/visit-history). So position + discovered/heard for PLACES works and is per-character. This spec adds only what's missing.
+
+**Phase 1 — KG/codex overlay (see the THINGS, not just the places). 🔧 CCode.** Overlay discovered/heard-of ENTITIES (NPCs, legends, lore, notable items) onto the map, mirroring the place visited/heard grammar:
+- Pull from the codex (SNG-019). Each entity with a resolvable location (NPC `homeLocation`, a fact/news location) places near that node; **discovered** (met/seen firsthand) renders solid; **heard-of-only** (mentioned in facts/news, not encountered) renders dimmed/dashed — same visual language as sub-places.
+- Toggle-able overlay (map ⇄ map+KG) so the base map never clutters.
+- Optional relationship edges: where the codex knows a link (Fendt→Edge District, a lieutenant→Grael), draw a faint line — literally "the KG overlaid on the map."
+- Click an entity → its codex entry.
+- Smoke: a met NPC shows solid at its place; a heard-of legend (e.g. Kesh from a rumor) shows dimmed near where it was heard; toggle works; clicking opens the codex.
+
+**Phase 2 — Multi-area + auto-positioning (different start areas + generated world). 🔧 CCode. Pairs with BATCH-9.** The map assumes authored Valley coords; characters starting in DIFFERENT areas and BATCH-9 GENERATED locations have none:
+- Auto-position locations lacking `map.x/y`: deterministic + stable layout (region-grid or force-directed from `connections` + `regionId`), so a location never jumps between renders.
+- Multi-region layout: group by `regionId`; the map covers/pans multiple regions; on open, CENTER/reveal on the character's ACTUAL current area (a character who starts elsewhere sees their area, not an empty Valley corner).
+- Generated locations (BATCH-9) get auto-coords on mint so they appear immediately.
+- Smoke: a character starting outside the Valley sees a map centered on their area; a generated location appears positioned near its connections; multi-region pan works.
+
+**Phase 3 (optional/later) — party/shared view.** Show where each party character is on one map. Ties SNG-033 (party v2) + SNG-037 (cross-char awareness). Deferred — Phase 1+2 deliver the core ask.
+
+**Guardrails.** Reuse renderMap + placeMemory + codex (SNG-019); KG overlay is additive + toggle (never clutters the base map); auto-positioning deterministic + stable; per-character view (each character's own discovered/heard set); Phase 2 pairs with BATCH-9 generated-location coords. Aevi owes no content (uses codex + existing coords). Suites + parse_probe green.
+
+**Erik preview tests:** (1) "Open the map — verify people/things you've met show up ON the map (solid), things you've only heard of show dimmed, and you can toggle the knowledge overlay on/off." (2) "Play a character that starts in a different area — verify the map centers on THEIR area and reveals as they explore, not a fixed Valley view."
+
+*Phase 1 builds on the existing map — off the critical path, can go anytime. Phase 2 pairs with BATCH-9 (generated locations need coords). Auto-positioning is engine; no content owed.*

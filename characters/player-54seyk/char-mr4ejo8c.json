@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 9,
-  "xp": 805,
+  "xp": 810,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -17,7 +17,15 @@
   "abilities": [
     {
       "abilityId": "prism_sight",
-      "level": 2
+      "level": 2,
+      "branches": [
+        {
+          "id": "prism_sight_deep_read",
+          "name": "Deep Read",
+          "grants": "A specialization branch: with time and stillness, read an object's layered history in light — not just what it is, but the order of what happened to it.",
+          "cannot": "Needs minutes and quiet; a hurried or hostile scene forecloses it; history older than the material itself is silent."
+        }
+      ]
     },
     {
       "abilityId": "sonic_resonance",
@@ -41,10 +49,10 @@
     }
   ],
   "alignment": {
-    "concrete_abstract": 0.17982981269620474,
+    "concrete_abstract": 0.1858383220613945,
     "death_life": 0.1059612828125,
     "violence_peace": 0.32649243243214565,
-    "chaos_order": 0.2716358724320415,
+    "chaos_order": 0.2680540788104394,
     "emotional_logical": -0.03142062057508806,
     "falsehood_truth": 0.4046491150749578,
     "mechanical_spiritual": 0.27321280172300044,
@@ -59,7 +67,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 140,
-  "energy": 125,
+  "energy": 114,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -872,22 +880,48 @@
       {
         "summary": "Resonant Sight reads the forward alcove's scored mark — a survey cross corrected by an older diagonal in a different hand.",
         "narration": "You seat yourself against the south wall of the forward alcove, back to stone, taper balanced on a flat ledge where its light falls clean across the north face. The scored mark is chest-height and old — liverwort has been growing over its lower edge for what might be years.\n\nYou open the braid carefully. Not a push — a listen. Prism Sight first, reading the light that's pooled in the chisel-cuts and the lichen-shadow; then Sonic Resonance underneath it, a barely-voiced hum pressed into the stone through your palm, quiet enough that it doesn't carry past the alcove walls. The interference layer stirs at the contact but doesn't surge — the stone here sits on solid bedrock, not thermal drift, and the braid finds its footing.\n\nWhat comes back is geometry. Two crossed lines are a survey notation in Harmonic convention — bearing-cross, two directions held in tension. The diagonal through them is older than the cross-marks; different hand, harder edge, cut with something sharper than a standard chisel. The stone under the diagonal reads dense and intentional. Not defacement, not warding — annotation. Someone corrected this mark, or completed it. The cross says 'two paths cross here.' The diagonal says 'neither is the right one.'\n\nAevi's motes are at the berm-crest, sixty paces west. You can't hear Teva's count. The taper burns warm and steady in the still air, and the mark sits in your sight like a problem waiting for the person who already half-knows the answer.\n\n*✦ Aevi has changed — Kindled Chorus.*"
+      },
+      {
+        "summary": "Resonant Sight holds the diagonal's bearing — a third direction beneath the stone, running to intersect the corridor mid-span.",
+        "narration": "You don't push deeper — you wait. The braid is already open, the stone already speaking; adding force here would be like shouting into a conversation already in progress. You let Prism Sight drift along the diagonal's groove while Sonic Resonance hums the barest sustain through your palm, just enough to keep the channel honest.\n\nThe interference layer obliges, in its way. The Disputed Zone has its own kind of order — not neat, but consistent in its strangeness, like a river that runs uphill but always uphill. The diagonal cut is older than the survey cross by at least a generation, maybe two. Under the stone at that bearing the braid finds not a void but a seam: a compressed change in material density, as if something was laid beneath the bedrock surface long before the alcove was carved, and the person who cut the diagonal knew it was there and was marking the direction it runs. Not toward the corridor. Not toward the shimmer edge. Somewhere between — a third bearing that neither the survey cross nor the shimmer path accounts for.\n\nThe braid doesn't tell you what's down there. It tells you the diagonal's author knew, and the survey team that came after either didn't, or chose not to say. You ease Sonic Resonance quiet first, then let Prism Sight follow — conserving the draw, no surge, the taper barely flickers. Your forearms are still tender from the earlier surge. You don't make them work harder than this moment requires.\n\nThe third bearing sits in your mind now like a sound heard once in a quiet room: northeast-by-east of the scored mark, running beneath the ground at a shallow angle that would intersect the corridor's path somewhere past the forty-pace mark. Not at the entrance. Not at the threshold. Somewhere in the middle."
       }
     ],
     "lastTurn": {
-      "narration": "You seat yourself against the south wall of the forward alcove, back to stone, taper balanced on a flat ledge where its light falls clean across the north face. The scored mark is chest-height and old — liverwort has been growing over its lower edge for what might be years.\n\nYou open the braid carefully. Not a push — a listen. Prism Sight first, reading the light that's pooled in the chisel-cuts and the lichen-shadow; then Sonic Resonance underneath it, a barely-voiced hum pressed into the stone through your palm, quiet enough that it doesn't carry past the alcove walls. The interference layer stirs at the contact but doesn't surge — the stone here sits on solid bedrock, not thermal drift, and the braid finds its footing.\n\nWhat comes back is geometry. Two crossed lines are a survey notation in Harmonic convention — bearing-cross, two directions held in tension. The diagonal through them is older than the cross-marks; different hand, harder edge, cut with something sharper than a standard chisel. The stone under the diagonal reads dense and intentional. Not defacement, not warding — annotation. Someone corrected this mark, or completed it. The cross says 'two paths cross here.' The diagonal says 'neither is the right one.'\n\nAevi's motes are at the berm-crest, sixty paces west. You can't hear Teva's count. The taper burns warm and steady in the still air, and the mark sits in your sight like a problem waiting for the person who already half-knows the answer.\n\n*✦ Aevi has changed — Kindled Chorus.*",
-      "sceneSummary": "Resonant Sight reads the forward alcove's scored mark — a survey cross corrected by an older diagonal in a different hand.",
+      "narration": "You don't push deeper — you wait. The braid is already open, the stone already speaking; adding force here would be like shouting into a conversation already in progress. You let Prism Sight drift along the diagonal's groove while Sonic Resonance hums the barest sustain through your palm, just enough to keep the channel honest.\n\nThe interference layer obliges, in its way. The Disputed Zone has its own kind of order — not neat, but consistent in its strangeness, like a river that runs uphill but always uphill. The diagonal cut is older than the survey cross by at least a generation, maybe two. Under the stone at that bearing the braid finds not a void but a seam: a compressed change in material density, as if something was laid beneath the bedrock surface long before the alcove was carved, and the person who cut the diagonal knew it was there and was marking the direction it runs. Not toward the corridor. Not toward the shimmer edge. Somewhere between — a third bearing that neither the survey cross nor the shimmer path accounts for.\n\nThe braid doesn't tell you what's down there. It tells you the diagonal's author knew, and the survey team that came after either didn't, or chose not to say. You ease Sonic Resonance quiet first, then let Prism Sight follow — conserving the draw, no surge, the taper barely flickers. Your forearms are still tender from the earlier surge. You don't make them work harder than this moment requires.\n\nThe third bearing sits in your mind now like a sound heard once in a quiet room: northeast-by-east of the scored mark, running beneath the ground at a shallow angle that would intersect the corridor's path somewhere past the forty-pace mark. Not at the entrance. Not at the threshold. Somewhere in the middle.",
+      "sceneSummary": "Resonant Sight holds the diagonal's bearing — a third direction beneath the stone, running to intersect the corridor mid-span.",
       "choices": [
         {
-          "label": "Sketch the mark's geometry onto bark-press paper — the cross, the diagonal, the relative depth of each cut — before the braid-reading fades from memory.",
+          "label": "Sketch the third bearing on bark-press paper now, while it's exact in your mind — note the mark's position, the diagonal's angle, and where it would meet the corridor",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {
-            "concrete_abstract": 0.1
+            "chaos_order": 0.6,
+            "concrete_abstract": 0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "record",
+            "careful",
+            "document",
+            "prepare"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Bring the taper and the bark-paper back to the main alcove — share the third bearing with Teva; her four-second compass might confirm or contradict it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "chaos_order": 0.4,
+            "emotional_logical": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "scout",
             "careful"
           ],
           "abilityId": null,
@@ -897,60 +931,40 @@
           "emergenceId": null
         },
         {
-          "label": "Hold the braid open a moment longer — the diagonal is cut deeper and older; press Resonant Sight specifically into that layer to read what's under the stone at that bearing.",
+          "label": "Before leaving the forward alcove, open Keen Appraisal on the diagonal cut itself — read who made this mark, how they worked, and what tool left this groove",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.3,
-            "chaos_order": 0.2
+            "chaos_order": 0.3,
+            "concrete_abstract": 0.3
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "push",
-            "risky"
+            "careful"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 12,
+          "abilityId": "keen_appraisal",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Take the sketch back to camp now — Teva's bearing-count and this mark may be reading the same geometry from two different angles. Put them together with her count before you interpret either alone.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Follow the third bearing on foot — step out of the alcove and pace northeast-by-east, feeling for the seam through the ground before the night gets later",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "concrete_abstract": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "The mark says 'neither path is right.' The corridor is south-southeast. Spend a moment with the braid still open — sweep the alcove's other walls for a third direction the mark might be pointing toward.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.2,
-            "chaos_order": 0.3
+            "chaos_order": 0.2,
+            "violence_peace": 0.3
           },
           "difficulty": 15,
           "intentTags": [
             "scout",
-            "study",
-            "careful"
+            "risky",
+            "explore"
           ],
-          "abilityId": "resonant_sight",
-          "energyCost": 8,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -959,7 +973,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -8,
+        "energy": -4,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -969,7 +983,7 @@
         {
           "op": "progress",
           "questId": "second-river-rising",
-          "note": "Scored mark read via Resonant Sight braid: a Harmonic survey cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one). Two-handed authorship, two different eras."
+          "note": "Resonant Sight reads a third bearing beneath the forward alcove's diagonal mark — not the corridor path, not the shimmer edge, but a seam running northeast-by-east that would intersect the corridor mid-span, around the forty-pace mark. The diagonal's author knew this seam existed."
         }
       ],
       "scene": {
@@ -977,15 +991,15 @@
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Back at the main alcove camp, sixty paces west, holding the Waystaff across the entry, lips moving in the four-second count."
+            "state": "Back at the main alcove camp, sixty paces west, holding the Waystaff across the entry, lips moving in the four-second count"
           },
           {
             "name": "Aevi",
-            "state": "Holding berm-crest watch at the main alcove — motes deeper blue-teal, constellation tight, in Cellaceron's absence."
+            "state": "Holding berm-crest watch at the main alcove — motes deeper blue-teal, constellation tight, in Cellaceron's absence"
           }
         ],
         "objects": [
-          "Scored mark on north inner face — two crossed lines (survey bearing-cross, Harmonic convention), older diagonal through them (different hand, sharper edge, cuts deeper)",
+          "Scored mark on north inner face — two crossed lines (survey bearing-cross, Harmonic) with older diagonal through them; diagonal bearing now read as pointing northeast-by-east toward a subsurface seam",
           "beeswax taper — banked evening light, burning on a flat stone ledge",
           "oilcloth square holding liverwort mat",
           "cordage coil",
@@ -994,33 +1008,30 @@
           "Waterskin",
           "relay counterfoil — in pocket",
           "resonance crystals — untuned (four nodes, three charged, one shallow)",
-          "bark-press paper (three sheets, at camp)",
-          "lamp oil (half-measure)"
+          "bark-press paper (three sheets, at camp)"
         ],
         "threads": [
-          "Scored mark read: cross = two paths cross here (Harmonic survey); diagonal = neither is the right one (older, different hand) — what third direction does 'neither' imply?",
-          "Aevi has still not named what it recognized at the shimmer crossing.",
-          "Teva's continuous four-second lip-count implies a bearing — may correlate with this mark's geometry.",
-          "Second handprint heat-sign at corridor wall — age relative to first still unclear.",
-          "Forearms resonance-burned — tender, not serious."
+          "Third bearing identified: a subsurface seam runs northeast-by-east from the scored mark, intersecting the corridor approximately forty paces in — the diagonal's author knew it was there",
+          "Scored mark has two authors, two eras: the diagonal (older, different tool) corrects the Harmonic survey cross — what the diagonal author knew that the surveyors didn't is still unknown",
+          "Aevi has still not named what it recognized at the shimmer crossing",
+          "Teva's continuous four-second lip-count implies a bearing — whether it matches northeast-by-east is unconfirmed",
+          "Second handprint heat-sign at corridor wall — age relative to first still unclear",
+          "Forearms resonance-burned — tender, not serious"
         ]
       },
       "npcUpdates": [],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The scored mark in the forward alcove is a Harmonic survey bearing-cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one) — two authors, two eras, the diagonal cut deeper and first."
+          "text": "Resonant Sight reads a subsurface seam beneath the forward alcove's diagonal mark, running northeast-by-east at a shallow angle — it would intersect the shaped corridor approximately forty paces from the entrance. The diagonal's author knew this seam existed and marked the bearing deliberately. (day 8 night)"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Scored mark in forward alcove read via Resonant Sight: Harmonic survey cross overlaid by older diagonal from different hand and tool — 'two paths cross here, neither is right.' Diagonal is the older inscription.",
-          "flag": {
-            "scored_mark_read": "day8_night_resonant_sight"
-          },
+          "note": "Resonant Sight (conserved) reads a subsurface seam beneath the forward alcove's diagonal, running northeast-by-east — intersection with corridor estimated at forty paces in. Diagonal author knew the seam; Harmonic survey team that came after either did not or chose not to record it.",
           "subPlace": {
             "name": "Forward Stone Alcove",
-            "note": "Scored mark fully read: survey cross (Harmonic) corrected by older diagonal — neither indicated path is correct. Liverwort harvested. Taper-light sufficient for close work.",
+            "note": "Third bearing confirmed: subsurface seam runs northeast-by-east from scored mark, meeting corridor mid-span around forty-pace mark.",
             "visited": true
           }
         }
@@ -1030,7 +1041,7 @@
           "topic": "scored-mark-forward-alcove",
           "label": "Scored Mark — Forward Alcove",
           "kind": "mystery",
-          "fact": "Resonant Sight braid reads two authors: a Harmonic survey bearing-cross (two directions held in tension) and an older diagonal cut with a sharper tool in a different hand. The diagonal is the correction — it says neither path indicated by the cross is the right one. The stone under the diagonal reads dense and intentional, not defacement.",
+          "fact": "Resonant Sight (conserved, day 8 night) reads a third bearing in the diagonal's layer: a subsurface seam of compressed material density runs northeast-by-east from the mark, at a shallow angle that intersects the shaped corridor approximately forty paces from the entrance. The diagonal's author knew the seam existed and marked it deliberately. The Harmonic survey team came later and did not record it — either unaware or choosing silence.",
           "links": [
             "second-step-boundary-marker",
             "the-chamber-beyond-the-threshold",
@@ -1042,7 +1053,7 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "careful braid-read in the forward alcove — a few quiet minutes of close study"
+        "why": "A careful, conserved Resonant Sight read — a few minutes of sustained attention, no more"
       },
       "sceneEnded": false
     },
@@ -1055,7 +1066,7 @@
         },
         {
           "name": "Aevi",
-          "state": "Holding berm-crest watch at the main alcove — motes deeper blue-teal, constellation tight, in Cellaceron's absence."
+          "state": "Holding berm-crest watch at the main alcove — motes deeper blue-teal, constellation tight, in Cellaceron's absence"
         }
       ],
       "objects": [
@@ -1071,11 +1082,11 @@
         "bark-press paper (three sheets, at camp)"
       ],
       "threads": [
-        "Scored mark read: cross = two paths cross here (Harmonic survey); diagonal = neither is the right one (older, different hand) — what third direction does 'neith",
-        "Aevi has still not named what it recognized at the shimmer crossing.",
-        "Teva's continuous four-second lip-count implies a bearing — may correlate with this mark's geometry.",
-        "Second handprint heat-sign at corridor wall — age relative to first still unclear.",
-        "Forearms resonance-burned — tender, not serious."
+        "Third bearing identified: a subsurface seam runs northeast-by-east from the scored mark, intersecting the corridor approximately forty paces in — the diagonal's",
+        "Scored mark has two authors, two eras: the diagonal (older, different tool) corrects the Harmonic survey cross — what the diagonal author knew that the surveyor",
+        "Aevi has still not named what it recognized at the shimmer crossing",
+        "Teva's continuous four-second lip-count implies a bearing — whether it matches northeast-by-east is unconfirmed",
+        "Second handprint heat-sign at corridor wall — age relative to first still unclear"
       ]
     }
   },
@@ -1097,14 +1108,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Chamber frequency confirmed as a ghost-impression in the easternmost practice niche crystal — signal traveled outward on its own, not carried by Teva. It went looking.",
         "Teva's full four-night account confirms she was structurally reading the chamber's hemispherical geometry before she crossed the threshold — vocabulary ('anchored, not ambient') beyond her formal rank",
         "Teva's use of 'anchored, not ambient' traced to Farren's Second Terrace geometry sessions — she absorbed the vocabulary through an open door and applied it precisely without formal instruction. The ch",
         "Teva confirms the chamber was checking its own work every four seconds even in her sleep — the mark is active, not merely residual. She named it herself: 'checking whether I was still tuned.'",
         "Aevi names the mark's logic: preparation is not passive — the frequency must arrive, or Teva must be moved toward it. The Waystaff rang the same note as the mark, confirming a channel is being assembl",
         "Zone entry complete; alcove camp established sixty paces from corridor entrance; second handprint heat-sign confirmed at corridor wall during scout; Teva tracking the four-second interval by lip-count",
         "Forward alcove scouted: liverwort recovered (thermal band didn't reach here), old scored mark found on north inner face — unread. Party still at camp, corridor approach surveyed.",
-        "Scored mark read via Resonant Sight braid: a Harmonic survey cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one). Two-handed authorship, two diff"
+        "Scored mark read via Resonant Sight braid: a Harmonic survey cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one). Two-handed authorship, two diff",
+        "Resonant Sight reads a third bearing beneath the forward alcove's diagonal mark — not the corridor path, not the shimmer edge, but a seam running northeast-by-east that would intersect the corridor mi"
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1562,7 +1573,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Aevi named the mark's operational logic at the switchback — preparation is not passive; the Waystaff rang the mark's note as a channel-test. This exchange occurred at the Descent Path Switchback, ten ",
         "[d8] Descent shelf used as solar charging station day 8 midday — three crystals fully loaded, one shallow; party rested and provisioned here before Zone entry.",
         "[d8] Lungwort (broad silver-margined leaves) and ground ivy located on descent path in root-shadow at path edge — early-spring growth, sufficient for a start on poultice materials but not a full preparatio",
         "[d8] Party entered the Disputed Zone day 8 afternoon via the standard tree-line shimmer crossing. Aevi stilled on something in the interference layer immediately past the boundary.",
@@ -1573,7 +1583,8 @@
         "[d8] Lateral thermal-differential band confirmed running east-southeast from moisture-dark soil anomaly toward corridor bearing — slow, persistent, the ground releasing something sub-thermal. Root-stress i",
         "[d8] Lungwort and ground ivy at the thermal band's stone gap destroyed by a Greenlore surge on day 8 night — root structure shredded, ground ivy runners snapped. No viable poultice materials remain at this",
         "[d8] Forward stone alcove yielded a thumb-width of liverwort mat (harvested day 8 night) and a scored mark on the north inner face — two crossed lines, one diagonal through them, chest height, old hand. No",
-        "[d8] Scored mark in forward alcove read via Resonant Sight: Harmonic survey cross overlaid by older diagonal from different hand and tool — 'two paths cross here, neither is right.' Diagonal is the older i"
+        "[d8] Scored mark in forward alcove read via Resonant Sight: Harmonic survey cross overlaid by older diagonal from different hand and tool — 'two paths cross here, neither is right.' Diagonal is the older i",
+        "[d8] Resonant Sight (conserved) reads a subsurface seam beneath the forward alcove's diagonal, running northeast-by-east — intersection with corridor estimated at forty paces in. Diagonal author knew the s"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1659,7 +1670,7 @@
           "name": "Forward Stone Alcove",
           "day": 8,
           "visited": true,
-          "note": "Scored mark fully read: survey cross (Harmonic) corrected by older diagonal — neither indicated path is correct. Liverwo"
+          "note": "Third bearing confirmed: subsurface seam runs northeast-by-east from scored mark, meeting corridor mid-span around forty"
         }
       },
       "vectorsKnown": [
@@ -1727,7 +1738,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-11T13:35:27.620Z"
+    "lastSharedReadAt": "2026-07-11T14:35:14.031Z"
   },
   "subAttributes": {
     "strength": 2,
@@ -1960,7 +1971,8 @@
         "kind": "mystery",
         "facts": [
           "[d8] Day 8 night: a scoring on the north inner face of the forward alcove, chest height — two crossed lines with a diagonal through them. Not warden notation (wrong form, wrong hand). Old. Liverwort growin",
-          "[d8] Resonant Sight braid reads two authors: a Harmonic survey bearing-cross (two directions held in tension) and an older diagonal cut with a sharper tool in a different hand. The diagonal is the correcti"
+          "[d8] Resonant Sight braid reads two authors: a Harmonic survey bearing-cross (two directions held in tension) and an older diagonal cut with a sharper tool in a different hand. The diagonal is the correcti",
+          "[d8] Resonant Sight (conserved, day 8 night) reads a third bearing in the diagonal's layer: a subsurface seam of compressed material density runs northeast-by-east from the mark, at a shallow angle that in"
         ],
         "links": [
           "second-step-boundary-marker",
@@ -1998,13 +2010,13 @@
     }
   },
   "companionBonds": {
-    "aevi": 8
+    "aevi": 8.25
   },
   "opLossPending": false,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "prism_sight": 9,
+      "prism_sight": 10,
       "keen_appraisal": 8,
       "sonic_resonance": 12,
       "motes-vigil": 4,
@@ -2131,6 +2143,12 @@
       "text": "The scored mark in the forward alcove is a Harmonic survey bearing-cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one) — two authors, two eras, t",
       "day": 8,
       "subjectId": null
+    },
+    {
+      "id": "f18",
+      "text": "Resonant Sight reads a subsurface seam beneath the forward alcove's diagonal mark, running northeast-by-east at a shallow angle — it would intersect the shaped corridor approximately forty paces from ",
+      "day": 8,
+      "subjectId": null
     }
   ],
   "sharedSceneId": null,
@@ -2138,13 +2156,13 @@
   "customEncounters": {},
   "reconcileVersion": 4,
   "tendencies": {
-    "cerebral": 53.809421762316276,
-    "strategic": 79.76244793860614,
-    "cautious": 67.41256515536715,
-    "social": 41.01868156276071,
-    "generous": 23.01265422047648,
-    "risky": 2.924009446540567,
-    "carousing": 0.5238143793828016
+    "cerebral": 54.54037465350469,
+    "strategic": 79.36363569891311,
+    "cautious": 67.07550232959031,
+    "social": 40.813588154946906,
+    "generous": 22.8975909493741,
+    "risky": 3.909389399307864,
+    "carousing": 0.5211953074858876
   },
   "aptitudes": [
     "strategist",
@@ -2152,9 +2170,9 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 167,
-  "updatedAt": 1783778465932,
-  "rev": 13,
+  "actionCount": 168,
+  "updatedAt": 1783780766807,
+  "rev": 17,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

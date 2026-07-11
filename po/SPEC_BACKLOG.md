@@ -497,4 +497,10 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 3. Which pole-cultures does Erik AUTHOR (his key civilizations) vs let BATCH-9 GENERATE in-grain?
 4. Organizing principle: "pole = a people with a disposition + a discipline/medium" (Harmonic=sonic, Radiant=photonic are MEDIUM-defined — are other poles medium-defined too, or purely disposition-defined)?
 
+**REFINEMENTS (Erik 2026-07-11, ongoing — build as we go):**
+- **Bearer varies.** A pole/axis-end is borne by a CIVILIZATION *or* a RELIGION *or* a CULT (of purity) *or* an order — not always a full people. Cults occupy the PURE extreme (a pure pole is unlivable at civilization-scale — only a cult sustains it; civilizations cluster NEAR but not AT the poles).
+- **Cultures are multi-axis PROFILES, not single poles.** Primary pole + secondary leans. Radiant = LIGHT-primary + ORDER-secondary. Harmonic = ORDER-primary, SOUND-medium (answers Decision-2 for Harmonic: its pole is order). A culture has a full spectrum fingerprint like a location/character.
+- **Intra-culture VARIANCE.** Individuals vary around the cultural norm — you'll find light+CHAOS practitioners among the light+order Radiants. A culture is a DISTRIBUTION, not a monolith (Erik's clone-tree/variance = interiority, at civilization scale). Heterodox practitioners live at the tails.
+- **GEOGRAPHY = DISPOSITION.** Regions are positioned by their dispositional profile; ADJACENT regions share axes. The valley is a CROSSING of order + light + practical → Harmonic (order/sound) sits next to Radiant (light/order) beside the valleyfolk (practical) BECAUSE they share those leans. Proximity = dispositional kinship. **→ constrains SNG-046 map auto-positioning: place regions by disposition-similarity, not arbitrary layout — the map is a projection of dispositional space.**
+
 *Foundational; off any critical path; deliberate. Aevi brings the design proposal → Erik steers → Aevi authors the refactor spec + authored culture anchors + folds in the access gates. NOT build-ready until steered.*

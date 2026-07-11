@@ -166,20 +166,26 @@ export function consumeItem(character, name) {
   return fx;
 }
 
-/** Equipment bonus for an action: +N per owned item whose bonusTags intersect the
- *  action's intent tags (capped). Data-driven from rules.baseChance.equipmentBonus. */
+/** Equipment bonus for an action: the BEST-matching item's bonus, not a sum over every
+ *  broadly-tagged item in the bag (SNG-044 — the right tool helps; a bag of tools does not help
+ *  more). Only the top `equipmentBonusTopN` contributors (default 1) count; the total cap stays
+ *  a backstop. `helpers` names which item(s) actually aided, so the roll receipt can say so.
+ *  Data-driven from rules.baseChance. */
 export function equipmentBonus(character, actionTags = [], rules) {
   const per = rules.baseChance.equipmentBonus ?? 5;
   const cap = rules.baseChance.equipmentBonusCap ?? 10;
-  let bonus = 0;
-  const helpers = [];
+  const topN = Math.max(1, rules.baseChance.equipmentBonusTopN ?? 1);
+  const contributors = [];
   for (const item of character.inventory || []) {
     if ((item.bonusTags || []).some(t => actionTags.includes(t))) {
-      bonus += per + (item.evoStage ? (item.evoStage - 1) * (rules.baseChance.evoStageStep ?? 2) : 0);
-      helpers.push(item.evoStageName || item.name);
+      const b = per + (item.evoStage ? (item.evoStage - 1) * (rules.baseChance.evoStageStep ?? 2) : 0);
+      contributors.push({ b, name: item.evoStageName || item.name });
     }
   }
-  return { bonus: Math.min(cap, bonus), helpers };
+  contributors.sort((a, z) => z.b - a.b);               // best tool first
+  const chosen = contributors.slice(0, topN);            // only the best (or top-N), never the pile
+  const bonus = Math.min(cap, chosen.reduce((s, c) => s + c.b, 0));
+  return { bonus, helpers: chosen.map(c => c.name) };
 }
 
 /** One-line inventory summary for the GM prompt. */

@@ -2159,5 +2159,29 @@ await (async () => {
   check("SNG-046: overlay entities carry a codex topicId for click-through", overlay.every(e => !!e.topicId));
 })();
 
+// --- SNG-044: item relevance + bonus-count cap (best tool, not a pile) ---
+(() => {
+  const R = { baseChance: { equipmentBonus: 5, equipmentBonusCap: 20, evoStageStep: 2 } };
+  // three broadly-matching items no longer STACK — only the best contributes
+  const hoard = { inventory: [
+    { name: "Rope", bonusTags: ["climb"] },
+    { name: "Traveler's Pack", bonusTags: ["climb"] },
+    { name: "Piton", bonusTags: ["climb"] }
+  ] };
+  const r = equipmentBonus(hoard, ["climb"], R);
+  check("SNG-044: three matching items give the BEST single bonus, not the sum", r.bonus === 5 && r.helpers.length === 1);
+  // the strongest (evolved) item wins the slot and is named as the helper
+  const mixed = { inventory: [
+    { name: "Plain Knife", bonusTags: ["attack"] },
+    { name: "Waystaff", bonusTags: ["attack"], evoStage: 3, evoStageName: "The Staff That Answers" }
+  ] };
+  const rm = equipmentBonus(mixed, ["attack"], R);
+  check("SNG-044: the strongest tool wins the slot and is named", rm.bonus === 5 + 2 * 2 && rm.helpers[0] === "The Staff That Answers");
+  // top-N is tunable (a deliberate 'two tools' rule), still capped
+  const r2 = equipmentBonus(hoard, ["climb"], { baseChance: { ...R.baseChance, equipmentBonusTopN: 2 } });
+  check("SNG-044: equipmentBonusTopN is tunable (top-2 sums the two best)", r2.bonus === 10 && r2.helpers.length === 2);
+  check("SNG-044: the total cap still backstops", equipmentBonus(mixed, ["attack"], { baseChance: { ...R.baseChance, equipmentBonusCap: 6, equipmentBonusTopN: 2 } }).bonus === 6);
+})();
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

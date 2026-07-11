@@ -9,7 +9,8 @@ const LS = {
   character: id => `singularity.character.${id}`,
   characterIndex: "singularity.characters",
   profile: key => `singularity.profile.${key}`,
-  playerKey: "singularity.playerKey"
+  playerKey: "singularity.playerKey",
+  redirect: key => `singularity.profileRedirect.${key}` // SNG-045: retired dup key → canonical
 };
 
 // ---------- content packs ----------
@@ -134,9 +135,105 @@ export function eventsForGM(region, eventMap) {
 export function getPlayerKey() {
   let k = localStorage.getItem(LS.playerKey);
   if (!k) { k = "player-" + Math.random().toString(36).slice(2, 8); localStorage.setItem(LS.playerKey, k); }
+  // SNG-045: if this device's key was retired into a canonical profile, follow the redirect
+  const canon = resolvePlayerKey(k);
+  if (canon !== k) { localStorage.setItem(LS.playerKey, canon); k = canon; }
   return k;
 }
-export function setPlayerKey(k) { localStorage.setItem(LS.playerKey, k.trim()); }
+export function setPlayerKey(k) { localStorage.setItem(LS.playerKey, resolvePlayerKey(k.trim())); }
+
+// ---------- SNG-045: player identity dedup (one person, one profile) ----------
+
+/** Follow the retired-key → canonical redirect chain (cycle-guarded). A key with no redirect
+ *  resolves to itself. */
+export function resolvePlayerKey(key, guard = 0) {
+  if (!key || guard > 20) return key;
+  const to = localStorage.getItem(LS.redirect(key));
+  return to && to !== key ? resolvePlayerKey(to, guard + 1) : key;
+}
+
+/** PURE: given the list of profiles, decide which same-displayName groups merge and which key
+ *  is canonical. currentKey (if in a group) wins the canonical slot; else the profile with the
+ *  most characters, tie-broken by playerKey (deterministic). Returns [{ name, canonicalKey,
+ *  retiredKeys[] }] for groups of size >= 2 only. */
+export function planPlayerDedup(profiles, currentKey = null) {
+  const groups = {};
+  for (const p of profiles) {
+    const name = String(p.displayName || p.playerKey || "").trim().toLowerCase();
+    if (!name) continue;
+    (groups[name] = groups[name] || []).push(p);
+  }
+  const out = [];
+  for (const [name, members] of Object.entries(groups)) {
+    if (members.length < 2) continue;
+    const score = (p) => (p.playerKey === currentKey ? 1e9 : 0) + (p.charactersPlayed?.length || 0);
+    const sorted = [...members].sort((a, b) => score(b) - score(a) || String(a.playerKey).localeCompare(String(b.playerKey)));
+    const canonical = sorted[0];
+    out.push({ name, canonicalKey: canonical.playerKey, retiredKeys: sorted.slice(1).map(p => p.playerKey) });
+  }
+  return out;
+}
+
+/** Apply the dedup plan to localStorage: union charactersPlayed, reassign each retired profile's
+ *  characters to the canonical key, keep a set rating over a default one, write a redirect for
+ *  each retired key, delete the retired profile. Idempotent (a second run finds no duplicates).
+ *  Repoints this device's key if it was retired. Returns a summary of what merged. */
+export function dedupePlayers() {
+  const profiles = listPlayerProfiles();
+  const currentRaw = localStorage.getItem(LS.playerKey);
+  const plan = planPlayerDedup(profiles, currentRaw);
+  const merged = [];
+  for (const g of plan) {
+    const canonical = loadProfile(g.canonicalKey);
+    if (!canonical) continue;
+    canonical.charactersPlayed = canonical.charactersPlayed || [];
+    for (const retiredKey of g.retiredKeys) {
+      const dup = loadProfile(retiredKey);
+      if (!dup) continue;
+      // reassign the duplicate's characters to the canonical owner
+      for (const id of (dup.charactersPlayed || [])) {
+        const c = loadCharacter(id);
+        if (c) { c.playerKey = g.canonicalKey; saveCharacter(c); }
+        if (!canonical.charactersPlayed.includes(id)) canonical.charactersPlayed.push(id);
+      }
+      // also catch any device-local characters that name the retired key but weren't listed
+      for (const entry of listCharacters()) {
+        const c = loadCharacter(entry.id);
+        if (c && c.playerKey === retiredKey) { c.playerKey = g.canonicalKey; saveCharacter(c); if (!canonical.charactersPlayed.includes(c.id)) canonical.charactersPlayed.push(c.id); }
+      }
+      // prefer a deliberately-set rating over a default one
+      if (dup.rating && !dup.rating.isMinor && dup.rating.preset && dup.rating.setBy && (!canonical.rating || !canonical.rating.setBy)) canonical.rating = dup.rating;
+      // a minor flag on either side is preserved (protective)
+      if (dup.rating?.isMinor) { canonical.rating = canonical.rating || {}; canonical.rating.isMinor = true; }
+      localStorage.setItem(LS.redirect(retiredKey), g.canonicalKey);
+      localStorage.removeItem(LS.profile(retiredKey));
+    }
+    saveProfile(canonical);
+    merged.push({ name: g.name, canonicalKey: g.canonicalKey, retired: g.retiredKeys });
+  }
+  // repoint this device if its raw key was retired
+  if (currentRaw) { const canon = resolvePlayerKey(currentRaw); if (canon !== currentRaw) localStorage.setItem(LS.playerKey, canon); }
+  return merged;
+}
+
+/** Full profile objects on this device (not just {playerKey,displayName}). */
+export function listPlayerProfiles() {
+  const out = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (!key || !key.startsWith("singularity.profile.")) continue;
+    try { const p = JSON.parse(localStorage.getItem(key)); if (p?.playerKey) out.push(p); } catch { /* skip */ }
+  }
+  return out;
+}
+
+/** SNG-045 Part B: find an existing profile by display name (case-insensitive) — so entering a
+ *  name that already exists ATTACHES to that person instead of minting a new per-device key. */
+export function findProfileByName(displayName) {
+  const target = String(displayName || "").trim().toLowerCase();
+  if (!target) return null;
+  return listPlayerProfiles().find(p => String(p.displayName || "").trim().toLowerCase() === target) || null;
+}
 
 /** SNG-BATCH-7 Phase 1: has THIS device chosen a player yet? (non-creating). */
 export function hasChosenPlayer() { return !!localStorage.getItem(LS.playerKey); }

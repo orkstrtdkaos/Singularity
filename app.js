@@ -1,7 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.6";
+const APP_VERSION = "1.8.7";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -71,6 +71,9 @@ let seenBeats = 0;       // remote beats already rendered
     app.innerHTML = `<div class="boot">Failed to load content packs: ${esc(err.message)}<br>Serve this folder over HTTP (packs load via fetch).</div>`;
     return;
   }
+  // SNG-045: collapse same-name duplicate profiles (one person fragmented across devices into
+  // multiple per-device keys) into one canonical profile owning all their characters. Idempotent.
+  try { dedupePlayers(); } catch (err) { console.warn("[identity] dedup skipped:", err?.message); }
   // SNG-BATCH-7 Phase 1: identity first. If this device hasn't chosen a player but
   // knows more than one, ask who's playing (path-a family devices); otherwise proceed.
   if (!hasChosenPlayer() && listPlayers().length > 1) { renderPlayerPick(); return; }
@@ -126,10 +129,15 @@ function renderPlayerPick(msg = "") {
   document.getElementById("player-new").onclick = () => {
     const name = prompt("New player name:");
     if (name === null) return;
-    const key = "player-" + Math.random().toString(36).slice(2, 8);
-    setPlayerKey(key);
-    profile = newProfile(key, name.trim());
-    saveProfile(profile);
+    // SNG-045 Part B: entering an EXISTING name attaches to that person, never mints a duplicate.
+    const existing = findProfileByName(name.trim());
+    if (existing) { setPlayerKey(existing.playerKey); loadIdentity(); }
+    else {
+      const key = "player-" + Math.random().toString(36).slice(2, 8);
+      setPlayerKey(key);
+      profile = newProfile(key, name.trim());
+      saveProfile(profile);
+    }
     if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
     else renderRoster();
   };

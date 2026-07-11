@@ -32,10 +32,17 @@ import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubE
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
+import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } from "../engine/state.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
-globalThis.localStorage = { getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, String(v)), removeItem: k => store.delete(k) };
+globalThis.localStorage = {
+  getItem: k => store.get(k) ?? null,
+  setItem: (k, v) => store.set(k, String(v)),
+  removeItem: k => store.delete(k),
+  get length() { return store.size; },
+  key: i => [...store.keys()][i] ?? null
+};
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rules = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
@@ -2077,6 +2084,46 @@ await (async () => {
   check("SNG-048: G rating directs a chaste register", /chaste|gentle/i.test(ratingRegister("G")));
   check("SNG-048: R+ directs the FULL mature register — evocative, not explicit", /full mature register/i.test(ratingRegister("R+")) && /not (graphic|explicit)/i.test(ratingRegister("R+")));
   check("SNG-048: an unknown preset falls back to a safe mid register", /tension|feeling/i.test(ratingRegister("???")));
+})();
+
+// --- SNG-045: player identity dedup (one person, one profile) ---
+(() => {
+  // PURE planner: two "Erik" profiles merge; the current key wins canonical; "Drizzy" is untouched
+  const profs = [
+    { playerKey: "player-54seyk", displayName: "Erik", charactersPlayed: ["char-a", "char-b"] },
+    { playerKey: "player-s9z9u1", displayName: "Erik", charactersPlayed: ["char-c"] },
+    { playerKey: "player-0jwfjo", displayName: "Drizzy", charactersPlayed: ["char-d"] }
+  ];
+  const plan = planPlayerDedup(profs, "player-s9z9u1");
+  check("SNG-045: planner merges same-name profiles, leaves distinct names alone", plan.length === 1 && plan[0].name === "erik");
+  check("SNG-045: the current device's key wins the canonical slot", plan[0].canonicalKey === "player-s9z9u1" && plan[0].retiredKeys.includes("player-54seyk"));
+  check("SNG-045: with no current key, the profile with the most characters is canonical", planPlayerDedup(profs)[0].canonicalKey === "player-54seyk");
+
+  // APPLY to localStorage: seed two Eriks + a Drizzy, then dedupe
+  store.clear();
+  const put = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+  put("singularity.profile.player-54seyk", { playerKey: "player-54seyk", displayName: "Erik", charactersPlayed: ["char-a"], rating: { preset: "R", setBy: "erik" } });
+  put("singularity.profile.player-s9z9u1", { playerKey: "player-s9z9u1", displayName: "Erik", charactersPlayed: ["char-c"], rating: { preset: "PG-13" } });
+  put("singularity.profile.player-0jwfjo", { playerKey: "player-0jwfjo", displayName: "Drizzy", charactersPlayed: ["char-d"] });
+  put("singularity.character.char-a", { id: "char-a", name: "Cellaceron", playerKey: "player-54seyk", level: 3 });
+  put("singularity.character.char-c", { id: "char-c", name: "Usnea", playerKey: "player-s9z9u1", level: 2 });
+  put("singularity.character.char-d", { id: "char-d", name: "Drizzy's", playerKey: "player-0jwfjo", level: 1 });
+  put("singularity.characters", [{ id: "char-a" }, { id: "char-c" }, { id: "char-d" }]);
+  localStorage.setItem("singularity.playerKey", "player-s9z9u1");
+
+  const merged = dedupePlayers();
+  check("SNG-045: dedupe merges the two Eriks into one group", merged.length === 1 && merged[0].name === "erik");
+  const canon = JSON.parse(localStorage.getItem("singularity.profile.player-s9z9u1"));
+  check("SNG-045: the canonical Erik now owns BOTH characters", canon.charactersPlayed.includes("char-a") && canon.charactersPlayed.includes("char-c"));
+  check("SNG-045: the retired dup profile is removed", localStorage.getItem("singularity.profile.player-54seyk") === null);
+  check("SNG-045: a redirect resolves the retired key to canonical", resolvePlayerKey("player-54seyk") === "player-s9z9u1");
+  check("SNG-045: the reassigned character now names the canonical owner", JSON.parse(localStorage.getItem("singularity.character.char-a")).playerKey === "player-s9z9u1");
+  check("SNG-045: a deliberately-set rating (R) is preferred over the default", canon.rating.preset === "R");
+  check("SNG-045: Drizzy (distinct name) is left completely alone", !!localStorage.getItem("singularity.profile.player-0jwfjo") && JSON.parse(localStorage.getItem("singularity.character.char-d")).playerKey === "player-0jwfjo");
+  check("SNG-045: findProfileByName resolves an existing person (attach, don't mint)", findProfileByName("erik")?.playerKey === "player-s9z9u1");
+  // idempotent: a second pass finds nothing to merge
+  check("SNG-045: dedupe is idempotent (second run merges nothing)", dedupePlayers().length === 0);
+  store.clear();
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

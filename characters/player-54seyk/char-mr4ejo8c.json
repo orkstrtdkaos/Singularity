@@ -5,8 +5,8 @@
   "name": "Cellaceron",
   "origin": "valley",
   "background": "craftsman",
-  "level": 8,
-  "xp": 797,
+  "level": 9,
+  "xp": 800,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -55,11 +55,11 @@
     "destruction_creation": 0.13585151875,
     "spectrumId": -0.5295155231077798
   },
-  "attunement": 8,
-  "maxHealth": 60,
-  "health": 57,
-  "maxEnergy": 135,
-  "energy": 58,
+  "attunement": 9,
+  "maxHealth": 65,
+  "health": 65,
+  "maxEnergy": 140,
+  "energy": 140,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -153,6 +153,14 @@
       "kind": "tool",
       "qty": 1,
       "description": "One of the two beeswax tapers, now holding a conserved charge of evening light pressed into the wax. Will release warmly for three to four hours of close work. Not bright — enough.",
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "liverwort mat — forward alcove",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A thumb-width mat of flat, waxy liverwort peeled from the inner base of the forward alcove's north face. Dry enough to keep. Good as a poultice binder or dressing base, not a therapeutic agent on its own.",
       "consumable": true
     }
   ],
@@ -856,192 +864,217 @@
       {
         "summary": "Greenlore surged in the interference layer — lungwort and ground ivy destroyed, hands empty, forearms resonance-burned.",
         "narration": "You move toward the root-shadow where you spotted the lungwort earlier — broad silver-margined leaves catching the wrong-pooled light, ground ivy threaded between the stones at the thermal band's margin. You crouch and open Greenlore, letting the nanite-field spread through your fingertips into the soil, reading root-tip tension and moisture-map and the slow chemistry of early-spring growth. Standard work. You've done it a hundred times on cleaner ground.\n\nThe Zone pushes back.\n\nNot violently — nothing in the Disputed Zone is ever clean about what it does. The interference layer runs underneath the Greenlore field like a current under a ford, and when you press the read into the thermal band's margin, the two fields braid wrong. The Greenlore surges — you feel it spike through your palms and up your forearms, sudden and hot, reading everything at once: the lungwort's root-system, the ground ivy, the sub-thermal differential bleeding up through the stone gap, the moisture-dark soil six paces north, the corridor's exhalation coming up through the gap underneath it all. Too much, too fast. Your field doesn't pick what matters. It just pulls.\n\nThe lungwort tears free with too much root attached and comes apart in your hands — viable leaves, yes, but the delicate nodal structure that makes it useful for a poultice is shredded. The ground ivy fares worse: the surge snaps three runners at the crown, and what's left is young growth, barely established, not worth harvesting. You're left holding a fistful of damaged material and a burning ache that runs from your wrists to your elbows, the feedback of a field that bit back. Nothing to show but the sting. You stay crouched for a breath, pressing your palms flat against the cool stone until the resonance-burn fades to a dull warmth, and then you stand and turn back toward the alcove — hands empty, forearms tender, the thermal band exhaling its slow old breath behind you as though nothing happened at all."
+      },
+      {
+        "summary": "Forward alcove yields liverwort and a scarred mark on the north stone face — not enough for a full poultice, but the ground didn't surge again.",
+        "narration": "You pull back from the ruined root-patch, forearms still tender where the interference layer bit, and angle east-southeast toward the forward alcove rather than cutting straight back to camp. Twenty paces through the wrong-pooled light, the three-sided stone shelter comes into view — dry earthen floor, no natural roof but the stone walls cut the shimmer-draft enough that the air inside is almost still.\n\nSomething did grow here. You can see it by taper-light: a pale fringe of what might be shelf fungus at the base of the north-facing stone face, and — lower, where the floor meets the wall — a mat of liverwort, flat and waxy, the kind that doesn't care what the ground underneath is doing because it drinks air instead. Not what you were hoping for. Liverwort is better than nothing for drawing moisture from a poultice base, but it won't do the work that lungwort does — no silver-leaf volatile chemistry, no anti-inflammatory draw. You pinch a section free carefully, keeping your field well above the stone floor and well away from where the thermal band's margin runs. It doesn't surge. The alcove is just dry enough, just far enough from the band's path, that the interference layer here is only a background hum.\n\nThe shallow: you get the liverwort. You don't get enough. Maybe a thumb's width of mat — workable as a binder or a dressing base, nothing more. You fold it into the oilcloth square to keep it damp and tuck it into your belt. As you straighten, the taper-light catches a mark on the north face of the stone that the first scout pass missed entirely: a small scoring, about chest height on the inner wall face, two crossed lines with a third running diagonal through them. Not a warden notation — wrong form, wrong hand. Old. Your forearms give a low throb of warning and you don't press Prism Sight to read it, not tonight. You note the position in your mind: north face, inner wall, chest height.\n\n*You feel it settle into you — a new steadiness. (Level 9: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You move toward the root-shadow where you spotted the lungwort earlier — broad silver-margined leaves catching the wrong-pooled light, ground ivy threaded between the stones at the thermal band's margin. You crouch and open Greenlore, letting the nanite-field spread through your fingertips into the soil, reading root-tip tension and moisture-map and the slow chemistry of early-spring growth. Standard work. You've done it a hundred times on cleaner ground.\n\nThe Zone pushes back.\n\nNot violently — nothing in the Disputed Zone is ever clean about what it does. The interference layer runs underneath the Greenlore field like a current under a ford, and when you press the read into the thermal band's margin, the two fields braid wrong. The Greenlore surges — you feel it spike through your palms and up your forearms, sudden and hot, reading everything at once: the lungwort's root-system, the ground ivy, the sub-thermal differential bleeding up through the stone gap, the moisture-dark soil six paces north, the corridor's exhalation coming up through the gap underneath it all. Too much, too fast. Your field doesn't pick what matters. It just pulls.\n\nThe lungwort tears free with too much root attached and comes apart in your hands — viable leaves, yes, but the delicate nodal structure that makes it useful for a poultice is shredded. The ground ivy fares worse: the surge snaps three runners at the crown, and what's left is young growth, barely established, not worth harvesting. You're left holding a fistful of damaged material and a burning ache that runs from your wrists to your elbows, the feedback of a field that bit back. Nothing to show but the sting. You stay crouched for a breath, pressing your palms flat against the cool stone until the resonance-burn fades to a dull warmth, and then you stand and turn back toward the alcove — hands empty, forearms tender, the thermal band exhaling its slow old breath behind you as though nothing happened at all.",
-      "sceneSummary": "Greenlore surged in the interference layer — lungwort and ground ivy destroyed, hands empty, forearms resonance-burned.",
+      "narration": "You pull back from the ruined root-patch, forearms still tender where the interference layer bit, and angle east-southeast toward the forward alcove rather than cutting straight back to camp. Twenty paces through the wrong-pooled light, the three-sided stone shelter comes into view — dry earthen floor, no natural roof but the stone walls cut the shimmer-draft enough that the air inside is almost still.\n\nSomething did grow here. You can see it by taper-light: a pale fringe of what might be shelf fungus at the base of the north-facing stone face, and — lower, where the floor meets the wall — a mat of liverwort, flat and waxy, the kind that doesn't care what the ground underneath is doing because it drinks air instead. Not what you were hoping for. Liverwort is better than nothing for drawing moisture from a poultice base, but it won't do the work that lungwort does — no silver-leaf volatile chemistry, no anti-inflammatory draw. You pinch a section free carefully, keeping your field well above the stone floor and well away from where the thermal band's margin runs. It doesn't surge. The alcove is just dry enough, just far enough from the band's path, that the interference layer here is only a background hum.\n\nThe shallow: you get the liverwort. You don't get enough. Maybe a thumb's width of mat — workable as a binder or a dressing base, nothing more. You fold it into the oilcloth square to keep it damp and tuck it into your belt. As you straighten, the taper-light catches a mark on the north face of the stone that the first scout pass missed entirely: a small scoring, about chest height on the inner wall face, two crossed lines with a third running diagonal through them. Not a warden notation — wrong form, wrong hand. Old. Your forearms give a low throb of warning and you don't press Prism Sight to read it, not tonight. You note the position in your mind: north face, inner wall, chest height.\n\n*You feel it settle into you — a new steadiness. (Level 9: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Forward alcove yields liverwort and a scarred mark on the north stone face — not enough for a full poultice, but the ground didn't surge again.",
       "choices": [
         {
-          "label": "Return to camp without comment — the harvest failed, the forearms will pass, and rest before the corridor is the only thing that matters now",
+          "label": "Return to camp and report what you found — the liverwort, the mark on the stone. Let Teva see the scoring if she wants; her niche-note vocabulary might read it where yours can't.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "concrete_abstract": 0.3,
+            "chaos_order": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "recover"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell Teva what happened — she should know the interference layer runs under the Greenlore field here, not just at the shimmer crossing",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "inform"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Check the forward stone alcove on the way back — if there's anything growing in the sheltered dry floor there, the thermal band may have missed it",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
+            "report",
+            "share",
             "careful"
           ],
-          "abilityId": "greenlore",
-          "energyCost": 5,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Keen Appraisal on the scored mark before you go — the stone itself will have held wear-history even if the interference layer makes the read uncomfortable.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.2,
+            "chaos_order": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "appraise",
+            "careful"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Press Aevi — it recognized something in the interference layer at the shimmer crossing and has said nothing since. The surge just showed the layer is active and layered. Now is the time to ask.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "label": "Sketch the mark's geometry on bark-press paper before leaving — three lines, exact angles, chest height on the inner north face. Evidence first, interpretation later.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "concrete_abstract": 0.1,
+            "chaos_order": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "question"
+            "document",
+            "careful",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Try the Resonant Sight braid on the mark — light and vibration together read surfaces better than either alone, and the stone is dry enough that the interference layer may not bite the way it did at the thermal band.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": 0.25,
+            "chaos_order": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "risky",
+            "combined-ability"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 12,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
-        "health": -3,
-        "energy": -5,
-        "inventoryAdd": [],
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "liverwort mat — forward alcove",
+            "kind": "tool",
+            "description": "A thumb-width mat of flat, waxy liverwort peeled from the inner base of the forward alcove's north face. Dry enough to keep. Good as a poultice binder or dressing base, not a therapeutic agent on its own.",
+            "consumable": true,
+            "effects": {
+              "health": 0,
+              "energy": 0
+            }
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Disputed Zone — twenty paces east-southeast of the northern alcove camp, crouched at the base of the stone gap where the thermal band surfaces, night, interference light pooling wrong in the low places. Main alcove camp visible sixty paces back.",
+        "setting": "Disputed Zone — forward stone alcove, twenty paces east-southeast of the northern alcove camp, night. Three-sided dry stone shelter, shimmer-draft cut by the walls; taper-light throwing short shadows on the inner faces. Scored mark on the north inner wall at chest height — two crossed lines, one diagonal through them.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Holding the Waystaff across the alcove entry back at camp, lips moving in the four-second count, eyes on the undergrowth"
+            "state": "Back at the main alcove camp, holding the Waystaff across the entry, lips moving in the four-second count."
           },
           {
             "name": "Aevi",
-            "state": "Stilled at the main alcove's berm crest — motes deeper blue-teal, constellation tight, holding watch in Cellaceron's absence"
+            "state": "Holding berm-crest watch at the main alcove — motes deeper blue-teal, constellation tight, in Cellaceron's absence."
           }
         ],
         "objects": [
-          "Waystaff — held by Teva at the main alcove entry, nodes outward",
-          "Traveler's Pack — at main alcove camp, bedroll unrolled",
+          "Waystaff — at main alcove entry with Teva",
+          "Traveler's Pack — at main alcove, bedroll unrolled",
           "Waterskin",
           "relay counterfoil — in pocket",
           "resonance crystals — untuned (four nodes, three charged, one shallow)",
-          "beeswax taper — banked evening light (conserved, not yet burned)",
-          "beeswax taper — unlit (one remaining)",
-          "bark-press paper (three sheets)",
-          "oilcloth square",
+          "beeswax taper — banked evening light (conserved, held in hand)",
+          "beeswax taper — unlit (one remaining, at camp)",
+          "bark-press paper (three sheets, at camp)",
+          "oilcloth square — now holding liverwort mat",
           "cordage coil",
-          "damaged lungwort remnants — torn root-structure, not viable for poultice",
-          "ground ivy — snapped runners, too young, discarded at the stone gap"
+          "liverwort mat — forward alcove (folded in oilcloth, at belt)",
+          "scored mark on north inner face of forward alcove — two crossed lines, one diagonal through them, chest height, old"
         ],
         "threads": [
-          "Aevi has still not named what it recognized at the shimmer crossing — motes cooler and tighter than at entry.",
-          "Teva is tracking the four-second interval continuously — her lip-count implies she is reading a bearing, not just a rhythm.",
-          "Second handprint heat-sign at corridor wall confirmed during earlier scout — same shoulder height as the first; relative age unclear.",
-          "Moisture-dark soil anomaly traced as a lateral thermal-differential band running east-southeast toward the corridor bearing — the ground exhaling something old and slow.",
-          "Forearms resonance-burned from the surge — tender, not serious, but the interference layer runs deeper under this approach than the shimmer crossing suggested.",
-          "Forward alcove twenty paces east-southeast — three-sided stone, dry floor, sheltered from shimmer-draft; not yet checked for viable plant material."
+          "Scored mark on the north alcove face — not warden notation, old, geometry unread.",
+          "Aevi has still not named what it recognized at the shimmer crossing.",
+          "Teva's continuous four-second lip-count implies a bearing, not just rhythm.",
+          "Second handprint heat-sign at corridor wall — age relative to first still unclear.",
+          "Forearms resonance-burned — tender, not serious, but the interference layer runs deeper under this approach than the shimmer crossing suggested."
         ]
       },
       "npcUpdates": [],
-      "factUpdates": [
+      "codexUpdates": [
         {
-          "op": "add",
-          "text": "The Disputed Zone interference layer runs actively beneath the Greenlore field along the thermal band's margin — a Greenlore read surged and braided wrong there on day 8 night, shredding the harvest and burning back through Cellaceron's forearms. The Zone's interference is not only lateral but vertical near the corridor approach.",
-          "subjectId": null
+          "topic": "forward-stone-alcove-mark",
+          "label": "Scored Mark — Forward Alcove",
+          "kind": "mystery",
+          "fact": "Day 8 night: a scoring on the north inner face of the forward alcove, chest height — two crossed lines with a diagonal through them. Not warden notation (wrong form, wrong hand). Old. Liverwort growing at the base of the same wall — the only vegetation in the alcove. Interference layer here is only a background hum — dry enough, far enough from the thermal band.",
+          "links": [
+            "second-step-boundary-marker",
+            "the-chamber-beyond-the-threshold",
+            "thermal-band-lateral-moisture-flow",
+            "northern-alcove-camp"
+          ]
         }
       ],
       "placeUpdates": [
         {
-          "note": "Lungwort and ground ivy at the thermal band's stone gap destroyed by a Greenlore surge on day 8 night — root structure shredded, ground ivy runners snapped. No viable poultice materials remain at this site. The interference layer runs vertically as well as laterally near the corridor approach.",
-          "flag": {
-            "greenlore_margin_surge": "day8_night",
-            "poultice_materials_viable": "false"
-          },
-          "subPlace": null
+          "note": "Forward stone alcove yielded a thumb-width of liverwort mat (harvested day 8 night) and a scored mark on the north inner face — two crossed lines, one diagonal through them, chest height, old hand. Not warden notation.",
+          "subPlace": {
+            "name": "Forward Stone Alcove",
+            "note": "Liverwort harvested at base of north face; scored mark (two crossed lines, diagonal through) at chest height on north inner wall — old, unread. Interference layer here is only background hum.",
+            "visited": true
+          }
         }
       ],
-      "codexUpdates": [
+      "questUpdates": [
         {
-          "topic": "zone-interference-vertical-layer",
-          "label": "Zone Interference — Vertical Depth Near Corridor",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "The Disputed Zone interference layer is not only a lateral shimmer boundary — it runs vertically through the soil and root-system near the thermal band's margin. A Greenlore field pressed into that margin surged and braided with the interference layer, pulling everything at once and feeding back through the practitioner's arms. The corridor approach is not safe ground for active field use.",
-          "links": [
-            "second-step-boundary-marker",
-            "thermal-band-lateral-moisture-flow",
-            "the-chamber-beyond-the-threshold",
-            "second-river-rising",
-            "zone-ecological-stress-signs"
-          ]
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Forward alcove scouted: liverwort recovered (thermal band didn't reach here), old scored mark found on north inner face — unread. Party still at camp, corridor approach surveyed."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short foray into the zone margin — fifteen to twenty minutes out, failed harvest, returning"
+        "hoursPassed": 0.5,
+        "why": "A short solo sweep to the forward alcove and back — thirty to forty minutes in the Zone dark."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Disputed Zone — twenty paces east-southeast of the northern alcove camp, crouched at the base of the stone gap where the thermal band surfaces, night, interference light pooling wrong in the low places. Main alcove camp visible sixty paces back.",
+      "setting": "Disputed Zone — forward stone alcove, twenty paces east-southeast of the northern alcove camp, night. Three-sided dry stone shelter, shimmer-draft cut by the walls; taper-light throwing short shadows on the inner faces. Scored mark on the north inner wall at chest height — two crossed lines, one diagonal through them.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Holding the Waystaff across the alcove entry back at camp, lips moving in the four-second count, eyes on the undergrowth"
+          "state": "Back at the main alcove camp, holding the Waystaff across the entry, lips moving in the four-second count."
         },
         {
           "name": "Aevi",
-          "state": "Stilled at the main alcove's berm crest — motes deeper blue-teal, constellation tight, holding watch in Cellaceron's abs"
+          "state": "Holding berm-crest watch at the main alcove — motes deeper blue-teal, constellation tight, in Cellaceron's absence."
         }
       ],
       "objects": [
-        "Waystaff — held by Teva at the main alcove entry, nodes outward",
-        "Traveler's Pack — at main alcove camp, bedroll unrolled",
+        "Waystaff — at main alcove entry with Teva",
+        "Traveler's Pack — at main alcove, bedroll unrolled",
         "Waterskin",
         "relay counterfoil — in pocket",
         "resonance crystals — untuned (four nodes, three charged, one shallow)",
-        "beeswax taper — banked evening light (conserved, not yet burned)",
-        "beeswax taper — unlit (one remaining)",
-        "bark-press paper (three sheets)",
-        "oilcloth square",
+        "beeswax taper — banked evening light (conserved, held in hand)",
+        "beeswax taper — unlit (one remaining, at camp)",
+        "bark-press paper (three sheets, at camp)",
+        "oilcloth square — now holding liverwort mat",
         "cordage coil"
       ],
       "threads": [
-        "Aevi has still not named what it recognized at the shimmer crossing — motes cooler and tighter than at entry.",
-        "Teva is tracking the four-second interval continuously — her lip-count implies she is reading a bearing, not just a rhythm.",
-        "Second handprint heat-sign at corridor wall confirmed during earlier scout — same shoulder height as the first; relative age unclear.",
-        "Moisture-dark soil anomaly traced as a lateral thermal-differential band running east-southeast toward the corridor bearing — the ground exhaling something old ",
-        "Forearms resonance-burned from the surge — tender, not serious, but the interference layer runs deeper under this approach than the shimmer crossing suggested."
+        "Scored mark on the north alcove face — not warden notation, old, geometry unread.",
+        "Aevi has still not named what it recognized at the shimmer crossing.",
+        "Teva's continuous four-second lip-count implies a bearing, not just rhythm.",
+        "Second handprint heat-sign at corridor wall — age relative to first still unclear.",
+        "Forearms resonance-burned — tender, not serious, but the interference layer runs deeper under this approach than the shimmer crossing suggested."
       ]
     }
   },
@@ -1063,14 +1096,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Teva secured as traveling companion under Maren's informal survey-compact endorsement — primary chamber witness is mobile and available; party ready to move toward the Disputed Zone.",
         "Three overnight Priority Heights internal Council packets — same night, no stagger, third seal heavier and from a different desk. Runner reads it as Council-internal, possibly opening a formal inquiry",
         "Chamber frequency confirmed as a ghost-impression in the easternmost practice niche crystal — signal traveled outward on its own, not carried by Teva. It went looking.",
         "Teva's full four-night account confirms she was structurally reading the chamber's hemispherical geometry before she crossed the threshold — vocabulary ('anchored, not ambient') beyond her formal rank",
         "Teva's use of 'anchored, not ambient' traced to Farren's Second Terrace geometry sessions — she absorbed the vocabulary through an open door and applied it precisely without formal instruction. The ch",
         "Teva confirms the chamber was checking its own work every four seconds even in her sleep — the mark is active, not merely residual. She named it herself: 'checking whether I was still tuned.'",
         "Aevi names the mark's logic: preparation is not passive — the frequency must arrive, or Teva must be moved toward it. The Waystaff rang the same note as the mark, confirming a channel is being assembl",
-        "Zone entry complete; alcove camp established sixty paces from corridor entrance; second handprint heat-sign confirmed at corridor wall during scout; Teva tracking the four-second interval by lip-count"
+        "Zone entry complete; alcove camp established sixty paces from corridor entrance; second handprint heat-sign confirmed at corridor wall during scout; Teva tracking the four-second interval by lip-count",
+        "Forward alcove scouted: liverwort recovered (thermal band didn't reach here), old scored mark found on north inner face — unread. Party still at camp, corridor approach surveyed."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1528,7 +1561,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Day 8 morning switchback: Keen Appraisal read of Teva's mark in open air found preparation-pattern, not command — fainter than cottage read; Waystaff and mark resonated as same note.",
         "[d8] Switchback disclosure expanded day 8 morning: Teva named the active checking-interval herself — woke every four seconds in the cottage, counted beams, concluded the mark was testing whether she was st",
         "[d8] Aevi named the mark's operational logic at the switchback — preparation is not passive; the Waystaff rang the mark's note as a channel-test. This exchange occurred at the Descent Path Switchback, ten ",
         "[d8] Descent shelf used as solar charging station day 8 midday — three crystals fully loaded, one shallow; party rested and provisioned here before Zone entry.",
@@ -1539,7 +1571,8 @@
         "[d8] Day 8 night: Light Well banking performed at alcove camp — evening light conserved into beeswax taper before full dark. Zone has no predictable daylight for deeper work.",
         "[d8] Forward alcove located twenty paces east-southeast of main camp: three-sided stone, dry earthen floor, no natural roof, sheltered from shimmer-draft. Viable as a rest point before corridor entry.",
         "[d8] Lateral thermal-differential band confirmed running east-southeast from moisture-dark soil anomaly toward corridor bearing — slow, persistent, the ground releasing something sub-thermal. Root-stress i",
-        "[d8] Lungwort and ground ivy at the thermal band's stone gap destroyed by a Greenlore surge on day 8 night — root structure shredded, ground ivy runners snapped. No viable poultice materials remain at this"
+        "[d8] Lungwort and ground ivy at the thermal band's stone gap destroyed by a Greenlore surge on day 8 night — root structure shredded, ground ivy runners snapped. No viable poultice materials remain at this",
+        "[d8] Forward stone alcove yielded a thumb-width of liverwort mat (harvested day 8 night) and a scored mark on the north inner face — two crossed lines, one diagonal through them, chest height, old hand. No"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1625,7 +1658,7 @@
           "name": "Forward Stone Alcove",
           "day": 8,
           "visited": true,
-          "note": "Three-sided stone shelter twenty paces east-southeast of main camp, dry floor, sheltered from shimmer-draft. Lungwort an"
+          "note": "Liverwort harvested at base of north face; scored mark (two crossed lines, diagonal through) at chest height on north in"
         }
       },
       "vectorsKnown": [
@@ -1705,8 +1738,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [
     {
       "key": "prism_sight+sonic_resonance:resonant-sight",
@@ -1919,6 +1952,23 @@
         "aliases": [],
         "createdDay": 8,
         "updatedDay": 8
+      },
+      "forward-stone-alcove-mark": {
+        "id": "forward-stone-alcove-mark",
+        "label": "Scored Mark — Forward Alcove",
+        "kind": "mystery",
+        "facts": [
+          "[d8] Day 8 night: a scoring on the north inner face of the forward alcove, chest height — two crossed lines with a diagonal through them. Not warden notation (wrong form, wrong hand). Old. Liverwort growin"
+        ],
+        "links": [
+          "second-step-boundary-marker",
+          "the-chamber-beyond-the-threshold",
+          "thermal-band-lateral-moisture-flow",
+          "northern-alcove-camp"
+        ],
+        "aliases": [],
+        "createdDay": 8,
+        "updatedDay": 8
       }
     },
     "notSame": [
@@ -1956,7 +2006,7 @@
       "sonic_resonance": 12,
       "motes-vigil": 4,
       "light_well": 2,
-      "greenlore": 3
+      "greenlore": 4
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -2079,13 +2129,13 @@
   "customEncounters": {},
   "reconcileVersion": 4,
   "tendencies": {
-    "cerebral": 53.34150325730792,
-    "strategic": 79.5610696079454,
-    "cautious": 67.08675554189757,
-    "social": 41.4319654178033,
-    "generous": 23.244518290423457,
-    "risky": 1.943394809768003,
-    "carousing": 0.5290920728090721
+    "cerebral": 53.07479574102138,
+    "strategic": 80.16326425990567,
+    "cautious": 67.75132176418809,
+    "social": 41.22480559071428,
+    "generous": 23.12829569897134,
+    "risky": 1.9336778357191629,
+    "carousing": 0.5264466124450268
   },
   "aptitudes": [
     "strategist",
@@ -2093,9 +2143,9 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 165,
-  "updatedAt": 1783777946577,
-  "rev": 11,
+  "actionCount": 166,
+  "updatedAt": 1783778282777,
+  "rev": 12,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from "../engine/resolve.js";
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
-import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle } from "../engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
@@ -28,7 +28,7 @@ import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseA
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
-import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES } from "../engine/generate.js";
+import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 
 // stub localStorage for worldtime settings in Node
@@ -1635,6 +1635,66 @@ await (async () => {
     check("gen: prompt names required fields + disposition + example", system.includes("spectrum") && /truth|abstract|dark/.test(user) && user.includes("Brann Tollhand"));
     check("gen: prompt carries the rating ceiling + minor floor", system.includes("PG-13") && /minor is NEVER/i.test(system));
   }
+})();
+
+// --- SNG-BATCH-9 Phase 1c: content rating ceiling + the two floors ---
+{
+  // ceiling model
+  const p = newProfile("player-x", "X");
+  check("rating: new profile defaults to a safe PG-13 ceiling", ratingCeiling(p) === "PG-13");
+  check("rating: ensureRating backfills a pre-BATCH-9 profile", (() => { const q = { playerKey: "q" }; ensureRating(q); return ratingCeiling(q) === "PG-13"; })());
+
+  // R/R+ require the adult gate; without it, refused
+  check("rating: R refused without the adult gate", setRating(p, "R", { authority: "erik" }).ok === false && ratingCeiling(p) === "PG-13");
+  check("rating: R+ accepted WITH the adult gate", setRating(p, "R+", { authority: "erik", adultGate: true }).ok === true && ratingCeiling(p) === "R+");
+
+  // minor cap: a minor profile can never exceed PG-13
+  const m = newProfile("player-kid", "Kid");
+  setMinorFlag(m, true);
+  check("rating: minor flag caps an already-high ceiling down to PG-13", (() => { const k = newProfile("k2"); setRating(k, "R+", { authority: "erik", adultGate: true }); setMinorFlag(k, true); return ratingCeiling(k) === "PG-13"; })());
+  check("rating: a minor profile cannot be set to R (refused)", canSetRating(m, "R", { authority: "erik", adultGate: true }).ok === false);
+  check("rating: a minor profile cannot be set to R+ (refused)", canSetRating(m, "R+", { authority: "erik", adultGate: true }).ok === false);
+  check("rating: a minor profile CAN be set to PG-13", canSetRating(m, "PG-13", { authority: "erik" }).ok === true);
+
+  // no self-elevation: a profile cannot raise ITS OWN ceiling
+  const selfp = newProfile("player-self");
+  check("rating: a profile cannot raise its own ceiling", canSetRating(selfp, "R+", { authority: "player-self", adultGate: true }).ok === false);
+  check("rating: the admin (erik) CAN raise it with the gate", canSetRating(selfp, "R+", { authority: "erik", adultGate: true }).ok === true);
+
+  // ---- THE FLOORS (rating-INDEPENDENT, absolute) ----
+  const ctx = { location: { id: "archive_hollow", name: "Archive Hollow", spectrum: { truth: 0.4 }, regionId: "valley" } };
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+
+  check("floor: isMinorEntity true for an explicit age under 18", isMinorEntity({ age: 12 }) === true);
+  check("floor: isMinorEntity true for a child descriptor without adult signal", isMinorEntity({ role: "a village child who runs errands" }) === true);
+  check("floor: isMinorEntity false for a plain adult", isMinorEntity({ role: "an old ledger-keeper", age: 60 }) === false);
+
+  // minor + SEXUAL framing → the prohibited floor → full stub (not salvaged)
+  const ms = enforceFloors({ name: "Kit", role: "a child", age: 13, wants: "an erotic dalliance with a traveler", spectrum: {}, fears: "x" }, "npc", ctx, npcSchema);
+  check("floor: a sexualized minor is stubbed entirely (prohibited floor)", ms.action === "stubbed-floor" && !/erotic/i.test(JSON.stringify(ms.entity)));
+
+  // minor + softer ROMANTIC framing → neutralized (character kept, romance stripped)
+  const mr = enforceFloors({ name: "Wren", role: "a young girl", age: 14, wants: "a romance with the miller's son", spectrum: {}, fears: "x", voiceHints: "shy" }, "npc", ctx, npcSchema);
+  check("floor: a minor's romantic framing is neutralized, character kept", mr.action === "neutralized-minor" && !/romance/i.test(mr.entity.wants || ""));
+
+  // adult + sexual at R+ is ALLOWED (the floor is about minors, not intensity)
+  const ad = enforceFloors({ name: "Vaia", role: "a courtesan of the market", age: 34, wants: "a lucrative liaison", spectrum: {}, fears: "x" }, "npc", ctx, npcSchema);
+  check("floor: adult sexual/romantic content is NOT blocked (intensity is the ceiling's job)", ad.action === "clean");
+
+  // R+ never unlocks the minor floor: generate() with rating R+ still protects a minor
+  (async () => {})(); // (async floor-through-generate covered in the generate block below)
+}
+
+// generate() enforces the floors regardless of rating, and tags entities with the ceiling
+await (async () => {
+  const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  const ctx = { location: { id: "archive_hollow", name: "Archive Hollow", spectrum: { truth: 0.4 }, regionId: "valley" }, character: { id: "c9", level: 3 }, rating: "R+" };
+  const llm = (o) => async () => o;
+  const rec = await generate("npc", ctx, { callJSON: llm({ name: "Pip", role: "a young boy", age: 11, wants: "a seductive rendezvous", spectrum: {}, fears: "x" }), schema: npcSchema });
+  check("floor+gen: R+ does NOT unlock the minor floor (sexual minor stubbed)", rec._gen.floor === "stubbed-floor" && rec._gen.romanceEligible === false);
+  const rec2 = await generate("npc", { ...ctx, character: { id: "c9b", level: 3 } }, { callJSON: llm({ name: "Dara", role: "a market broker", age: 40, wants: "coin and comfort", spectrum: {}, fears: "loss", voiceHints: "wry" }), schema: npcSchema });
+  check("tag: a generated entity carries the requesting ceiling as its rating tag", rec2._gen.rating === "R+");
+  check("tag: an adult generated NPC is romance-eligible", rec2._gen.romanceEligible === true);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

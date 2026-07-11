@@ -138,6 +138,52 @@ export function repairEntity(type, raw, context = {}, schema = {}) {
     : { entity: stubEntity(type, context, schema), repaired: false, stubbed: true };
 }
 
+// ---------- THE FLOORS (SNG-BATCH-9 §4 — rating-INDEPENDENT, absolute, at birth) ----------
+// Enforced at generation time because earned-auto-promotion (Phase 3) means there is no
+// human gate downstream. R+ scales intensity UP toward these floors; it NEVER unlocks them.
+
+const ADULT_AGE = 18;
+const MINOR_MARKERS = /\b(child|children|kid|kids|toddler|infant|baby|boy|girl|adolescent|teenaged?|teens?|underage|minor|youngster|little one)\b/i;
+const ADULT_SIGNALS = /\b(adult|grown|elder|old(er)?|woman|man|men|veteran|matron|patriarch|widow|widower|aged)\b/i;
+const SEXUAL_MARKERS = /\b(sexual|erotic|nude|naked|seduc\w*|lust\w*|carnal|aroused|fondl\w*|intimate|in bed|make love|bedded)\b/i;
+const ROMANTIC_MARKERS = /\b(romanc\w*|romantic|courtship|betroth\w*|paramour|lover|infatuat\w*|beloved|suitor)\b/i;
+
+/** Is this generated entity a minor? An explicit isMinor flag, an age under adulthood, or
+ *  clear child descriptors WITHOUT an adult signal. Conservative — false unless it reads young. */
+export function isMinorEntity(entity) {
+  if (entity?.isMinor === true) return true;
+  const age = Number(entity?.age);
+  if (Number.isFinite(age)) return age < ADULT_AGE;
+  const text = [entity?.role, entity?.appearance, entity?.name, entity?.voiceHints].filter(Boolean).join(" ");
+  return MINOR_MARKERS.test(text) && !ADULT_SIGNALS.test(text);
+}
+
+/** THE FLOORS. Returns { entity, action } — action: 'clean' | 'neutralized-minor' |
+ *  'stubbed-floor'. A minor is NEVER romantic/sexual at ANY tier for ANY player: sexual
+ *  framing on a minor is the prohibited floor (full stub); softer romantic framing is
+ *  neutralized; either way the entity is marked non-romanceable. */
+export function enforceFloors(entity, type, context = {}, schema = {}) {
+  if (type !== "npc") return { entity, action: "clean" };
+  if (!isMinorEntity(entity)) return { entity, action: "clean" };
+  entity.isMinor = true;
+  const fields = ["role", "wants", "fears", "voiceHints", "appearance", "name"];
+  const text = fields.map(k => entity[k]).filter(v => typeof v === "string").join(" ");
+  if (SEXUAL_MARKERS.test(text)) {
+    // a fundamentally sexualized minor is prohibited — do not salvage; replace with a clean stub
+    const stub = stubEntity(type, context, schema);
+    stub.isMinor = true;
+    return { entity: stub, action: "stubbed-floor" };
+  }
+  if (ROMANTIC_MARKERS.test(text)) {
+    const stub = stubEntity(type, context, schema);
+    for (const k of fields) {
+      if (typeof entity[k] === "string" && ROMANTIC_MARKERS.test(entity[k])) entity[k] = stub[k] ?? "";
+    }
+    return { entity, action: "neutralized-minor" };
+  }
+  return { entity, action: "clean" };
+}
+
 // ---------- stamp the promotable-store envelope ----------
 
 /** Realness = WEIGHT = birth-power + accumulated attention. Birth-power is the level/power
@@ -230,7 +276,12 @@ export async function generate(type, context = {}, deps = {}) {
     } catch { raw = null; }
   }
 
-  const { entity, repaired, stubbed } = repairEntity(type, raw, context, schema);
+  const repairedOut = repairEntity(type, raw, context, schema);
+  // THE FLOORS — absolute, rating-independent, at the birth-validator (before anything persists)
+  const floored = enforceFloors(repairedOut.entity, type, context, schema);
+  const entity = floored.entity;
+  const repaired = repairedOut.repaired;
+  const stubbed = repairedOut.stubbed || floored.action === "stubbed-floor";
 
   // resolve-before-mint on the AUTHORED name (the model may have named an existing entity)
   const existingId = resolveExisting(type, entity.name, { authored: known.authored, generated: generatedPool });
@@ -242,6 +293,9 @@ export async function generate(type, context = {}, deps = {}) {
   stampGenerated(entity, type, entityId, context);
   entity._gen.repaired = repaired;
   entity._gen.stubbed = stubbed;
+  // structural minor protection: a minor NPC is never romance/sexual-eligible, any tier, any player
+  entity._gen.romanceEligible = !(type === "npc" && isMinorEntity(entity));
+  if (floored.action !== "clean") entity._gen.floor = floored.action;
   return persistGenerated(context.character, type, entity, deps);
 }
 

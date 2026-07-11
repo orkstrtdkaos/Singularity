@@ -5,7 +5,7 @@ import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, 
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
-import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle } from "./engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.7";
+const APP_VERSION = "1.7.8";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -78,6 +78,7 @@ let seenBeats = 0;       // remote beats already rendered
 /** Resolve the active profile from the chosen (or auto-created) player key. */
 function loadIdentity() {
   profile = loadProfile(getPlayerKey()) || newProfile(getPlayerKey());
+  ensureRating(profile); // SNG-BATCH-9: backfill the content-rating ceiling on pre-BATCH-9 profiles
 }
 
 /** SNG-BATCH-7 Phase 2: reconcile a local character against the sync repo's authoritative
@@ -179,6 +180,13 @@ function renderSettings(note = "") {
       <input id="set-repo" value="${esc(sc.repo)}" placeholder="Repo (e.g. Singularity)" style="margin-bottom:6px">
       <input id="set-pat" type="password" value="${esc(sc.pat)}" placeholder="GitHub PAT with contents:write">
       <div class="hint">When set, your character, player profile, and world events back up to the shared repo. Leave empty for local-only play.</div></div>
+    <div class="field"><label>Content rating — the ceiling for this profile</label>
+      <select id="set-rating">
+        ${RATING_ORDER.map(r => `<option value="${r}" ${ratingCeiling(profile) === r ? "selected" : ""} ${isMinorProfile(profile) && RATING_LEVEL[r] > RATING_LEVEL["PG-13"] ? "disabled" : ""}>${r}${r === "R+" ? " — maximum intensity, all details" : ""}</option>`).join("")}
+      </select>
+      <label class="rating-check"><input type="checkbox" id="set-minor" ${isMinorProfile(profile) ? "checked" : ""}> This profile is a minor — caps at PG-13; can never be set to R or R+</label>
+      <label class="rating-check"><input type="checkbox" id="set-adultgate"> Adult gate — authorize R / R+ for this profile (required for R and above)</label>
+      <div class="hint">Sets how intense narration and generated content get: G · PG · PG-13 · R · R+ (full intensity). Two floors are ALWAYS on regardless of ceiling: never any prohibited content, and a minor is never portrayed in romantic or sexual content.</div></div>
     <button class="btn" id="set-save">Save</button>
     <div class="footer-note">Save data is in this browser. Use Export on the Characters screen to move it.</div>
   </div>`);
@@ -193,6 +201,13 @@ function renderSettings(note = "") {
       repo: document.getElementById("set-repo").value,
       pat: document.getElementById("set-pat").value
     });
+    // SNG-BATCH-9 §3: content ceiling. Minor flag first (it can cap the ceiling), then the
+    // preset with the adult gate. A refused change keeps the old ceiling + shows why.
+    setMinorFlag(profile, document.getElementById("set-minor").checked);
+    const wantRating = document.getElementById("set-rating").value;
+    const rv = setRating(profile, wantRating, { authority: "erik", adultGate: document.getElementById("set-adultgate").checked });
+    saveProfile(profile);
+    if (!rv.ok) { renderSettings("Content rating unchanged — " + rv.reason + `. (Still ${ratingCeiling(profile)}.)`); return; }
     renderRoster();
   };
 }
@@ -337,6 +352,18 @@ function senseTierFor() {
   return senseTier({ character, action: {}, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(character, CONTENT.rules.playerAptitudes) });
 }
 
+// ---------- SNG-BATCH-9: content rating (the profile ceiling) ----------
+
+/** The active player's content ceiling preset (feeds generation + the per-entity tag). */
+function ratingCeilingNow() { return ratingCeiling(profile); }
+
+/** The CONTENT CEILING block fed to the GM (consumer a: narration tone). Names the ceiling
+ *  + the two absolute floors. Cached in tier 1 (stable per session). */
+function ratingLineForGM() {
+  const preset = ratingCeiling(profile);
+  return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.`;
+}
+
 // ---------- SNG-BATCH-9: generative living world ----------
 
 /** Merge THIS character's grown world into the live CONTENT maps so every existing lookup
@@ -394,7 +421,8 @@ async function handleGenerateRequests(turn) {
     const ctx = {
       location, character, playerKey: getPlayerKey(), day: time.day, season: time.season || null,
       hint: req.hint, why: req.why, birthPower: character.level,
-      rating: null,                                            // 1c wires the profile content-ceiling here
+      rating: ratingCeilingNow(),                              // §3 consumer (b+c): generate to the ceiling + tag the entity
+
       known: { authored, generated: character.generated?.[type] || {} },
       examples: pickExamples(type, location), substrate: CONTENT.substrate, genBudget: budget
     };
@@ -799,7 +827,8 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
-    partyDetail: partyBlockForGM(sharedScene, character.id)
+    partyDetail: partyBlockForGM(sharedScene, character.id),
+    ratingDetail: ratingLineForGM() // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }

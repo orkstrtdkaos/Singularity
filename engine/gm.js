@@ -68,7 +68,7 @@ Choices: 3 or 4, genuinely different approaches (not flavors of the same one). d
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -76,6 +76,9 @@ export function tierParts(ctx) {
     const rec = rules.recovery;
     system.push(`## RECOVERY GUIDE (rule 8 — when the character eats, drinks, or rests in-scene, grant EXACTLY these through characterDeltas energy/health + timeAdvanceHours; never more; meals require food to actually exist in inventory or scene)\nmeal +${rec.meal} energy · hearty meal +${rec.heartyMeal} · drink +${rec.drink} · breather (1h off their feet) +${rec.breather.energy} energy +${rec.breather.health} health · full sleep (${rec.sleep.hours}h) +${rec.sleep.energy} energy +${rec.sleep.health} health · meditation: ENGINE-APPLIED (never grant energy for it yourself — the resolution block will show what it restored; just narrate the centering)`);
   }
+  // SNG-BATCH-9 §3 consumer (a): narrate to THIS player's content ceiling — no more intense,
+  // and no less where the grain calls for it. The two floors are absolute regardless.
+  if (ratingDetail) system.push(ratingDetail);
 
   // ---- TIER 2: world model — location, lore, NPC registry, tradition, world events ----
   world.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);

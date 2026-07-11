@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from "../engine/resolve.js";
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
-import { newProfile, updateProfile, aptitudeMods, deriveAptitudes } from "../engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
@@ -18,7 +18,7 @@ import { initWorldState, runWorldTick, buildRegionView, effectiveLocation, takeU
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
-import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS } from "../engine/reconcile.js";
+import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
@@ -1285,6 +1285,55 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // mergeInto guards: missing ids / self-merge are no-ops
   const c6 = mk();
   check("mergeInto rejects self and missing ids", mergeInto(c6, "teva", "teva") === null && mergeInto(c6, "ghost", "teva") === null && Object.keys(c6.codex.topics).length === 4);
+}
+
+// --- SNG-BATCH-7 Phase 1: per-character play-style + seed-from-aggregate ---
+{
+  const apts = rules.playerAptitudes;
+  const strat = apts.find(a => a.tendency === "strategic");
+
+  // profile is IDENTITY only now
+  const prof = newProfile("player-x", "Erik");
+  check("new profile carries no play-style (identity only)", prof.tendencies === undefined && prof.aptitudes === undefined && Array.isArray(prof.charactersPlayed));
+
+  // style accrues on the CHARACTER passed as the holder
+  const cel = { name: "Cellaceron" };
+  ensureCharacterStyle(cel);
+  check("ensureCharacterStyle inits empty style", Object.keys(cel.tendencies).length === 0 && cel.aptitudes.length === 0 && cel.actionCount === 0);
+  for (let i = 0; i < strat.threshold + 2; i++) updateProfile(cel, ["plan"], apts);
+  check("planned play raises THIS character's strategic tendency", cel.tendencies.strategic > 0 && cel.actionCount === strat.threshold + 2);
+  check("crossing threshold earns the aptitude on the character", cel.aptitudes.includes(strat.id));
+  check("aptitudeMods read from the character", Object.keys(aptitudeMods(cel, apts)).length > 0);
+
+  // a DIFFERENT character sharing the same player does NOT inherit that style
+  const usn = { name: "Usnea" };
+  ensureCharacterStyle(usn);
+  updateProfile(usn, ["persuade"], apts);
+  check("a different character's style is independent", !(usn.aptitudes || []).includes(strat.id) && !usn.tendencies.strategic);
+
+  // reconcile v3 seed-from-aggregate: an existing character with no style inherits the
+  // player's current aggregate ONCE, then is idempotent
+  const aggregate = { playerKey: "player-x", displayName: "Erik",
+    tendencies: { strategic: 12, generous: 5 }, aptitudes: [strat.id], actionCount: 40, charactersPlayed: ["old-char"] };
+  const oldChar = { name: "Veteran", reconcileVersion: 2 }; // pre-Phase-1 save
+  const r1 = reconcile(oldChar, "character", { profile: aggregate });
+  check("seed step applied on first login", r1.applied.includes("seed-character-style"));
+  check("existing character seeded from the player aggregate", oldChar.tendencies.strategic === 12 && oldChar.aptitudes.includes(strat.id) && oldChar.actionCount === 40);
+  check("seed surfaces a login note", r1.playerFacing && r1.notes.some(n => /play-style/i.test(n)));
+  const before = JSON.stringify(oldChar.tendencies);
+  const r2 = reconcile(oldChar, "character", { profile: aggregate });
+  check("seed is idempotent (does not re-seed)", r2.applied.length === 0 && JSON.stringify(oldChar.tendencies) === before);
+
+  // a character born current (stamped top version) never seeds from the aggregate
+  const fresh = { name: "Newborn", reconcileVersion: topReconcileVersion("character"), tendencies: {}, aptitudes: [], actionCount: 0 };
+  reconcile(fresh, "character", { profile: aggregate });
+  check("fresh character born-current does NOT inherit aggregate style", Object.keys(fresh.tendencies).length === 0 && fresh.actionCount === 0);
+  check("topReconcileVersion covers the seed step", topReconcileVersion("character") >= 3);
+
+  // a character that already has its own style is not overwritten by the seed
+  const played = { name: "Played", reconcileVersion: 2, tendencies: { social: 9 }, aptitudes: [], actionCount: 9 };
+  reconcile(played, "character", { profile: aggregate });
+  check("seed never clobbers a character that already has style", played.tendencies.social === 9 && !played.tendencies.strategic);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

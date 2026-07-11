@@ -126,6 +126,23 @@ export function getPlayerKey() {
 }
 export function setPlayerKey(k) { localStorage.setItem(LS.playerKey, k.trim()); }
 
+/** SNG-BATCH-7 Phase 1: has THIS device chosen a player yet? (non-creating). */
+export function hasChosenPlayer() { return !!localStorage.getItem(LS.playerKey); }
+
+/** All players known on this device — every stored profile. (Phase 2 syncs more down.) */
+export function listPlayers() {
+  const out = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (!key || !key.startsWith("singularity.profile.")) continue;
+    try {
+      const p = JSON.parse(localStorage.getItem(key));
+      if (p?.playerKey) out.push({ playerKey: p.playerKey, displayName: p.displayName || p.playerKey });
+    } catch { /* skip corrupt */ }
+  }
+  return out;
+}
+
 export function listCharacters() {
   try { return JSON.parse(localStorage.getItem(LS.characterIndex) || "[]"); } catch { return []; }
 }

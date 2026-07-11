@@ -51,10 +51,38 @@ export const CHARACTER_STEPS = [
       ensure("discoveries", []);
       return added.length ? { notes: [`initialized: ${added.join(", ")}`] } : {};
     }
+  },
+  {
+    version: 3, id: "seed-character-style", playerFacing: true,
+    // SNG-BATCH-7 Phase 1: play-style moved profile → character. Seed each existing
+    // character's tendencies/aptitudes from the player's CURRENT aggregate profile once,
+    // so nothing earned is lost; then it diverges per-character. Derives from durable
+    // state (the aggregate is what exists); only seeds a character that has no style yet.
+    apply: (c, ctx) => {
+      if (!c.tendencies) c.tendencies = {};
+      if (!c.aptitudes) c.aptitudes = [];
+      if (c.actionCount == null) c.actionCount = 0;
+      const prof = ctx.profile;
+      const hasStyle = Object.keys(c.tendencies).length > 0 || (c.actionCount || 0) > 0;
+      if (!hasStyle && prof && Object.keys(prof.tendencies || {}).length) {
+        c.tendencies = { ...prof.tendencies };
+        c.aptitudes = [...(prof.aptitudes || [])];
+        c.actionCount = prof.actionCount || 0;
+        return { notes: ["your characters now carry their own play-style"] };
+      }
+      return {};
+    }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.
 ];
+
+/** Highest registered step version for a kind — a freshly-created entity stamps this so
+ *  no migration step (e.g. seed-from-aggregate) fires on something born current. */
+export function topReconcileVersion(kind) {
+  const reg = kind === "character" ? CHARACTER_STEPS : CONTENT_STEPS[kind] || [];
+  return reg.reduce((m, s) => Math.max(m, s.version), 0);
+}
 
 // ---------- content migration steps (run on content-load, per kind) ----------
 

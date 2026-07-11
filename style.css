@@ -309,3 +309,11 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .codex-merge-pick { margin-top: 8px; }
 .codex-merge-target { display: block; width: 100%; text-align: left; margin: 3px 0; }
 .codex-merge-target.suggested { border-color: #5aa8a0; }
+
+/* SNG-BATCH-7 Phase 1: player identity picker + roster header */
+.roster-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+.roster-player { font-size: 12px; color: #a08b6f; }
+.roster-player strong { color: #d4a24a; }
+.link-btn { background: none; border: none; color: #5aa8a0; cursor: pointer; font-size: 12px; text-decoration: underline; padding: 0 2px; }
+.player-pick { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.player-choice { text-align: center; }

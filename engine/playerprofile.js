@@ -1,7 +1,10 @@
-// playerprofile.js — tracks the HUMAN, not the character.
-// Every action carries intent tags; those accumulate as tendencies on the
-// player's profile (persisting across characters). Crossing thresholds grants
-// aptitudes — with bonuses AND costs — that feed straight into resolve.js.
+// playerprofile.js — play-style accrual + player identity.
+// SNG-BATCH-7 Phase 1: the profile is now IDENTITY (playerKey/displayName/
+// charactersPlayed); the earned STYLE (tendencies/aptitudes/actionCount) lives on
+// each CHARACTER — accrued from how THAT character is played. These functions are
+// generic over any "style holder" (a character); the caller passes the character.
+// Every action carries intent tags; those accumulate as tendencies; crossing
+// thresholds grants aptitudes — bonuses AND costs — that feed straight into resolve.js.
 
 const TAG_TO_TENDENCY = {
   plan: "strategic", scout: "strategic", prepare: "strategic", ambush: "strategic",
@@ -17,20 +20,30 @@ const TAG_TO_TENDENCY = {
 
 const DECAY = 0.995; // per action — old habits fade slowly if behavior changes
 
+/** Identity-only now (SNG-BATCH-7): playerKey / displayName / charactersPlayed. */
 export function newProfile(playerKey, displayName = "") {
-  return { schemaVersion: 1, playerKey, displayName, tendencies: {}, aptitudes: [], actionCount: 0, charactersPlayed: [], history: [] };
+  return { schemaVersion: 2, playerKey, displayName, charactersPlayed: [], history: [] };
 }
 
-/** Feed one action's intent tags into the profile. Mutates and returns profile. */
-export function updateProfile(profile, intentTags = [], rulesAptitudes = []) {
-  for (const k of Object.keys(profile.tendencies)) profile.tendencies[k] *= DECAY;
+/** Ensure a character carries its own play-style fields (safe empty defaults). */
+export function ensureCharacterStyle(c) {
+  if (!c.tendencies) c.tendencies = {};
+  if (!c.aptitudes) c.aptitudes = [];
+  if (c.actionCount == null) c.actionCount = 0;
+  return c;
+}
+
+/** Feed one action's intent tags into a STYLE HOLDER (a character). Mutates + returns it. */
+export function updateProfile(holder, intentTags = [], rulesAptitudes = []) {
+  ensureCharacterStyle(holder);
+  for (const k of Object.keys(holder.tendencies)) holder.tendencies[k] *= DECAY;
   for (const tag of intentTags) {
     const tendency = TAG_TO_TENDENCY[tag] || null;
-    if (tendency) profile.tendencies[tendency] = (profile.tendencies[tendency] || 0) + 1;
+    if (tendency) holder.tendencies[tendency] = (holder.tendencies[tendency] || 0) + 1;
   }
-  profile.actionCount = (profile.actionCount || 0) + 1;
-  profile.aptitudes = deriveAptitudes(profile, rulesAptitudes);
-  return profile;
+  holder.actionCount = (holder.actionCount || 0) + 1;
+  holder.aptitudes = deriveAptitudes(holder, rulesAptitudes);
+  return holder;
 }
 
 /** Which aptitudes has this player earned? Data-driven from core rules. */

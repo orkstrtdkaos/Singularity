@@ -1,11 +1,11 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
-import { newProfile, updateProfile, aptitudeMods, profileInsight } from "./engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey } from "./engine/claude.js";
@@ -20,7 +20,7 @@ import { initWorldState, runWorldTick, syncSharedWorld, buildRegionView, effecti
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
-import { reconcile } from "./engine/reconcile.js";
+import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
@@ -33,7 +33,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.2";
+const APP_VERSION = "1.7.3";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -64,10 +64,47 @@ let seenBeats = 0;       // remote beats already rendered
     app.innerHTML = `<div class="boot">Failed to load content packs: ${esc(err.message)}<br>Serve this folder over HTTP (packs load via fetch).</div>`;
     return;
   }
-  profile = loadProfile(getPlayerKey()) || newProfile(getPlayerKey());
+  // SNG-BATCH-7 Phase 1: identity first. If this device hasn't chosen a player but
+  // knows more than one, ask who's playing (path-a family devices); otherwise proceed.
+  if (!hasChosenPlayer() && listPlayers().length > 1) { renderPlayerPick(); return; }
+  loadIdentity();
   if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
   else renderRoster();
 })();
+
+/** Resolve the active profile from the chosen (or auto-created) player key. */
+function loadIdentity() {
+  profile = loadProfile(getPlayerKey()) || newProfile(getPlayerKey());
+}
+
+/** "Who's playing?" — pick an existing player on this device, or start a new one. */
+function renderPlayerPick(msg = "") {
+  const players = listPlayers();
+  app.innerHTML = `<div class="app-boot"><div class="screen" style="max-width:460px;margin:40px auto">
+    <h2>Who's playing?</h2>
+    ${msg ? `<p class="hint">${esc(msg)}</p>` : ""}
+    <div class="player-pick">
+      ${players.map(p => `<button class="btn player-choice" data-player="${esc(p.playerKey)}">${esc(p.displayName)}</button>`).join("")}
+      <button class="btn secondary" id="player-new" style="margin-top:8px">+ New player</button>
+    </div>
+  </div>`;
+  for (const b of app.querySelectorAll("[data-player]")) b.onclick = () => {
+    setPlayerKey(b.dataset.player);
+    loadIdentity();
+    if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
+    else renderRoster();
+  };
+  document.getElementById("player-new").onclick = () => {
+    const name = prompt("New player name:");
+    if (name === null) return;
+    const key = "player-" + Math.random().toString(36).slice(2, 8);
+    setPlayerKey(key);
+    profile = newProfile(key, name.trim());
+    saveProfile(profile);
+    if (!getApiKey()) renderSettings("Welcome. Add your Anthropic API key to begin.");
+    else renderRoster();
+  };
+}
 
 // ---------- shared chrome ----------
 
@@ -140,8 +177,10 @@ function renderSettings(note = "") {
 
 function renderRoster() {
   const chars = listCharacters();
+  const players = listPlayers();
   chrome(`<div class="screen">
-    <h2>Your Characters</h2>
+    <div class="roster-head"><h2>Your Characters</h2>
+      <span class="roster-player">Playing as <strong>${esc(profile.displayName || profile.playerKey)}</strong>${players.length > 1 ? ` <button class="link-btn" id="switch-player">switch</button>` : ""}</span></div>
     ${chars.length === 0 ? `<p class="hint" style="margin-bottom:14px">No characters yet. The valley is waiting.</p>` : ""}
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
@@ -153,10 +192,9 @@ function renderRoster() {
       <button class="btn secondary" id="export-save">Export saves</button>
       <button class="btn secondary" id="import-save">Import</button>
     </div>
-    <div class="field" style="margin-top:14px">
-      <div class="insight">${esc(profileInsight(profile, CONTENT.rules.playerAptitudes))}</div>
-    </div>
   </div>`);
+  const sw = document.getElementById("switch-player");
+  if (sw) sw.onclick = () => renderPlayerPick();
   document.getElementById("new-char").onclick = () => renderCreate();
   document.getElementById("export-save").onclick = () => {
     const chars2 = listCharacters();
@@ -192,6 +230,7 @@ function migrate(c) {
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
   ensureCodex(c);
+  ensureCharacterStyle(c); // SNG-BATCH-7: per-character play-style fields
   mergeCodexTopics(c); // standing high-confidence tidy — idempotent; player's not-same verdicts respected; manual merges cascade via their new aliases
   if (!c.customAbilities) c.customAbilities = {};
   ensureBonds(c);
@@ -212,7 +251,8 @@ function migrate(c) {
   }
   // SNG-022: versioned reconciliation — bring the character up to everything now built.
   // Idempotent (reconcileVersion gate); player-facing results surface as a login moment.
-  const rec = reconcile(c, "character", { content: CONTENT });
+  // profile passed so the Phase-1 seed step can copy the player's aggregate style once.
+  const rec = reconcile(c, "character", { content: CONTENT, profile });
   if (rec.playerFacing && (rec.notes.length || rec.offers.length)) c._reconcileNotes = rec.notes;
   if (rec.warnings.length) console.warn("[reconcile] character:", rec.warnings);
   return c;
@@ -246,7 +286,7 @@ function codexEntities() {
 }
 
 function senseTierFor() {
-  return senseTier({ character, action: {}, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(profile, CONTENT.rules.playerAptitudes) });
+  return senseTier({ character, action: {}, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(character, CONTENT.rules.playerAptitudes) });
 }
 
 /** Active encounter def + state, or null. */
@@ -550,7 +590,9 @@ function renderCreate() {
     };
     ensureSubAttributes(character);
     ensureCodex(character);
+    ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
+    character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
     saveCharacter(character); saveProfile(profile);
@@ -646,7 +688,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
 function applyTurn(turn, resolution) {
   const location = CONTENT.locations[character.currentLocationId];
   const dayNow = readClock(character.clock).day;
-  const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
+  const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
 
   // deltas from the GM (bounded trust: clamp everything)
   const d = turn.characterDeltas || {};
@@ -715,7 +757,7 @@ function applyTurn(turn, resolution) {
   }
   // the HUMAN's profile learns from the intent tags of the chosen action
   if (resolution?.action?.intentTags?.length) {
-    updateProfile(profile, resolution.action.intentTags, CONTENT.rules.playerAptitudes);
+    updateProfile(character, resolution.action.intentTags, CONTENT.rules.playerAptitudes);
   }
   // discoveries: only mintable when the engine flagged this resolution eligible
   if (turn.discovery && resolution?.discoveryEligible) {
@@ -794,7 +836,7 @@ async function onChoice(choice) {
   if (busy) return;
   let itemsAdvanced = [];
   const location = hereNow();
-  const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
+  const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
 
   // ability gating + energy (combos draw from every ability involved; practiced
   // power costs less — effectiveEnergyCost scales with level and rank)
@@ -1295,8 +1337,8 @@ function renderCharacterScreen() {
         ${branches.map(t => `<div class="cs-ability"><strong>${esc(t.name)}</strong> <span class="hint">(branch: grows ${t.growsAbility})</span> <button class="grow-btn practiced" data-claimbranch="${esc(t.id)}">claim</button><div class="hint">${esc(t.grants.slice(0, 120))}</div></div>`).join("")}
       </div>`;
     })()}
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aptitudes (you, the player)</h3>
-      <div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Play-style (${esc(character.name)}'s own)</h3>
+      <div class="insight">${esc(profileInsight(character, rules.playerAptitudes))}</div></div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
@@ -1521,7 +1563,7 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
 
 function gambitCtx() {
   const location = hereNow();
-  const mods = aptitudeMods(profile, CONTENT.rules.playerAptitudes);
+  const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
   const comps = activeCompanions(character, CONTENT.companions);
   return {
     character, location, rules: CONTENT.rules, aptitudeMods: mods,
@@ -1657,7 +1699,7 @@ async function finishGambit(run) {
   }
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
-  updateProfile(profile, allTags, CONTENT.rules.playerAptitudes);
+  updateProfile(character, allTags, CONTENT.rules.playerAptitudes);
   saveProfile(profile); saveCharacter(character);
   const rough = run.receipts.some(r => r.complication || r.viaFallback || r.rerolled || r.degree === "failure" || r.degree === "crit_failure");
   const outcome = run.abandoned ? "abandoned" : rough ? "completed_rough" : "completed";
@@ -1701,7 +1743,7 @@ function useItem(name) {
 function renderPlay(turn, opts = {}) {
   const location = hereNow();
   const rules = CONTENT.rules;
-  const mods = aptitudeMods(profile, rules.playerAptitudes);
+  const mods = aptitudeMods(character, rules.playerAptitudes);
   const rep = location.communityId ? standingWith(character, location.communityId, rules) : null;
 
   const sheet = `<div class="sheet">
@@ -1819,7 +1861,7 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Standing here</h3>
       ${rep ? `<span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span>` : `<span class="insight">no community claims this place</span>`}
     </section>
-    <section><h3>You, the player</h3><div class="insight">${esc(profileInsight(profile, rules.playerAptitudes))}</div></section>
+    <section><h3>Play-style</h3><div class="insight">${esc(profileInsight(character, rules.playerAptitudes))}</div></section>
     <section><h3>Map & Rest</h3>
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${rules.recovery?.breather?.energy ?? 10} energy, 1h)</button>

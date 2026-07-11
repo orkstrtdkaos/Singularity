@@ -1,7 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
@@ -9,7 +9,7 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacte
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey } from "./engine/claude.js";
-import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger } from "./engine/sync.js";
+import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
@@ -33,7 +33,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.3";
+const APP_VERSION = "1.7.4";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -75,6 +75,27 @@ let seenBeats = 0;       // remote beats already rendered
 /** Resolve the active profile from the chosen (or auto-created) player key. */
 function loadIdentity() {
   profile = loadProfile(getPlayerKey()) || newProfile(getPlayerKey());
+}
+
+/** SNG-BATCH-7 Phase 2: reconcile a local character against the sync repo's authoritative
+ *  copy — NEWER WINS, a stale local is never used, and a genuine both-advanced conflict
+ *  preserves the losing copy as a recovery file + surfaces a note. Never blocks play. */
+async function syncPullCharacter(local) {
+  if (!local || !syncEnabled()) return { character: local, note: null };
+  let remote = null;
+  try { remote = await fetchRemoteCharacter(local.playerKey, local.id); }
+  catch (err) { console.warn("[sync] pull failed — using local:", err.message); return { character: local, note: null }; }
+  if (!remote) return { character: local, note: null };
+  const res = resolveSaveConflict(local, remote);
+  if (res.reason === "remote-newer") {
+    if (res.conflict) preserveRecovery(local, "local"); // both advanced — don't lose local work
+    adoptRemoteCharacter(remote);
+    return { character: remote, note: res.conflict
+      ? "Loaded the newer version from another device — this device's local changes were kept as a recovery copy."
+      : "Loaded your latest from another device." };
+  }
+  if (res.conflict) { preserveRecovery(remote, "remote"); return { character: local, note: "Kept this device's newer version — the other device's copy was saved as a recovery copy." }; }
+  return { character: local, note: null };
 }
 
 /** "Who's playing?" — pick an existing player on this device, or start a new one. */
@@ -212,7 +233,17 @@ function renderRoster() {
     input.click();
   };
   for (const btn of app.querySelectorAll("[data-play]")) {
-    btn.onclick = () => { const c = migrate(loadCharacter(btn.dataset.play)); if (c.dead) { alert(c.name + " fell in the valley. Their story is over."); return; } character = c; saveCharacter(character); enterPlay(); };
+    btn.onclick = async () => {
+      btn.disabled = true; btn.textContent = "Loading…";
+      // SNG-BATCH-7 Phase 2: pull the authoritative latest from the sync repo BEFORE
+      // migrate/play, so a stale local copy is replaced (never re-stamped as "fresh").
+      const pull = await syncPullCharacter(loadCharacter(btn.dataset.play));
+      const c = migrate(pull.character);
+      if (c.dead) { alert(c.name + " fell in the valley. Their story is over."); renderRoster(); return; }
+      character = c;
+      if (pull.note) character._reconcileNotes = [...(character._reconcileNotes || []), pull.note];
+      saveCharacter(character); enterPlay();
+    };
   }
 }
 

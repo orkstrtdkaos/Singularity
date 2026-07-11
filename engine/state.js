@@ -147,11 +147,31 @@ export function listCharacters() {
   try { return JSON.parse(localStorage.getItem(LS.characterIndex) || "[]"); } catch { return []; }
 }
 
-export function saveCharacter(c) {
+export function saveCharacter(c, { stamp = true } = {}) {
+  // SNG-BATCH-7 Phase 2: stamp last-write time + a monotonic rev so cross-device
+  // load-latest can tell which copy is fresher. Adopting a remote copy passes
+  // stamp:false to preserve the remote's own timestamps.
+  if (stamp) { c.updatedAt = Date.now(); c.rev = (c.rev || 0) + 1; }
   localStorage.setItem(LS.character(c.id), JSON.stringify(c));
   const idx = listCharacters().filter(e => e.id !== c.id);
   idx.push({ id: c.id, name: c.name, level: c.level, origin: c.origin });
   localStorage.setItem(LS.characterIndex, JSON.stringify(idx));
+}
+
+/** SNG-BATCH-7 Phase 2: write a version pulled from the sync repo to local storage,
+ *  preserving its updatedAt/rev and marking THIS as the last synced point. */
+export function adoptRemoteCharacter(remote) {
+  remote.syncedAt = remote.updatedAt || 0;
+  saveCharacter(remote, { stamp: false });
+  return remote;
+}
+
+/** Preserve a losing copy under a recovery key so a both-advanced conflict never
+ *  destroys work. Returns the recovery key. */
+export function preserveRecovery(c, tag = "") {
+  const key = `singularity.recovery.${c.id}.${c.updatedAt || 0}${tag ? "." + tag : ""}`;
+  localStorage.setItem(key, JSON.stringify(c));
+  return key;
 }
 
 export function loadCharacter(id) {

@@ -20,6 +20,7 @@ import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSu
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
+import { resolveSaveConflict } from "../engine/sync.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -1334,6 +1335,48 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const played = { name: "Played", reconcileVersion: 2, tendencies: { social: 9 }, aptitudes: [], actionCount: 9 };
   reconcile(played, "character", { profile: aggregate });
   check("seed never clobbers a character that already has style", played.tendencies.social === 9 && !played.tendencies.strategic);
+}
+
+// --- SNG-BATCH-7 Phase 2: cross-device load-latest (stale-overwrite guard) ---
+{
+  // NEWER WINS by updatedAt
+  const A = { id: "c", updatedAt: 100, rev: 3, syncedAt: 100 };
+  const B = { id: "c", updatedAt: 200, rev: 4, syncedAt: 100 };
+  check("remote newer wins", resolveSaveConflict(A, B).winner === B && resolveSaveConflict(A, B).reason === "remote-newer");
+  check("local newer wins", resolveSaveConflict(B, A).winner === B && resolveSaveConflict(B, A).reason === "local-newer");
+
+  // GUARD: a stale local never wins over a fresher remote (both directions)
+  const staleLocal = { id: "c", updatedAt: 50, rev: 1, syncedAt: 50 };
+  const freshRemote = { id: "c", updatedAt: 500, rev: 9, syncedAt: 50 };
+  check("stale local does NOT clobber fresh remote", resolveSaveConflict(staleLocal, freshRemote).winner === freshRemote);
+  check("fresh local is NOT clobbered by stale remote", resolveSaveConflict(freshRemote, staleLocal).winner === freshRemote);
+
+  // NO false conflict when only one side advanced since the common sync point
+  const base = { id: "c", updatedAt: 100, rev: 2, syncedAt: 100 };  // untouched since sync
+  const advanced = { id: "c", updatedAt: 300, rev: 5, syncedAt: 100 }; // this side advanced
+  check("one-sided advance is not a conflict (fast-forward)", resolveSaveConflict(base, advanced).conflict === false && resolveSaveConflict(base, advanced).winner === advanced);
+
+  // GENUINE both-advanced conflict: both moved past the shared base → loser preserved
+  const localDiverged = { id: "c", updatedAt: 400, rev: 6, syncedAt: 100 };
+  const remoteDiverged = { id: "c", updatedAt: 350, rev: 7, syncedAt: 100 };
+  const conf = resolveSaveConflict(localDiverged, remoteDiverged);
+  check("both-advanced is flagged a conflict", conf.conflict === true);
+  check("conflict keeps the newer, preserves the loser", conf.winner === localDiverged && conf.loser === remoteDiverged);
+
+  // never-synced first pull: newer wins, but NOT flagged a conflict (no common base)
+  const neverSyncedLocal = { id: "c", updatedAt: 10, rev: 1 };  // no syncedAt
+  const remoteExisting = { id: "c", updatedAt: 20, rev: 1 };
+  const first = resolveSaveConflict(neverSyncedLocal, remoteExisting);
+  check("first-ever pull is fast-forward, not a conflict", first.conflict === false && first.winner === remoteExisting && first.loser === null);
+
+  // rev breaks an updatedAt tie
+  const t1 = { id: "c", updatedAt: 100, rev: 2, syncedAt: 100 };
+  const t2 = { id: "c", updatedAt: 100, rev: 5, syncedAt: 100 };
+  check("equal timestamps: higher rev wins", resolveSaveConflict(t1, t2).winner === t2);
+
+  // missing remote / missing local degrade safely
+  check("no remote → local wins, no conflict", resolveSaveConflict(A, null).winner === A && !resolveSaveConflict(A, null).conflict);
+  check("no local → remote wins, no conflict", resolveSaveConflict(null, B).winner === B && !resolveSaveConflict(null, B).conflict);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

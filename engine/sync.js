@@ -109,13 +109,58 @@ export async function appendLedger(events, characterId) {
   }
 }
 
-/** Best-effort character + profile backup. Failures log, never block play. */
+// ---------- SNG-BATCH-7 Phase 2: cross-device load-latest with a stale-overwrite guard ----------
+
+function charPath(playerKey, id) { return `characters/${playerKey}/${id}.json`; }
+
+/** Fetch a character's authoritative remote state (or null). */
+export async function fetchRemoteCharacter(playerKey, characterId) {
+  return fetchRepoJSON(charPath(playerKey, characterId));
+}
+
+/** PURE. Decide which of two versions of the same character wins, and whether it's a
+ *  genuine both-advanced conflict. NEWER WINS (updatedAt primary, rev tiebreak). A
+ *  conflict is only flagged when BOTH sides advanced past a known common sync point
+ *  (syncedAt) — then the loser must be preserved, never silently dropped.
+ *  Returns { winner, loser, conflict, reason }. loser is non-null ONLY on conflict. */
+export function resolveSaveConflict(local, remote) {
+  if (!remote) return { winner: local, loser: null, conflict: false, reason: "no-remote" };
+  if (!local) return { winner: remote, loser: null, conflict: false, reason: "no-local" };
+  const lu = local.updatedAt || 0, ru = remote.updatedAt || 0;
+  const synced = local.syncedAt || 0;
+  const conflict = synced > 0 && lu > synced && ru > synced && lu !== ru; // both moved since last common sync
+  const remoteWins = ru > lu || (ru === lu && (remote.rev || 0) > (local.rev || 0));
+  const winner = remoteWins ? remote : local;
+  const loser = remoteWins ? local : remote;
+  return { winner, loser: conflict ? loser : null, conflict, reason: remoteWins ? "remote-newer" : "local-newer" };
+}
+
+/** PUSH GUARD: never let a stale local overwrite a fresher remote. Re-reads remote and
+ *  refuses the write if remote is newer than what we're about to push. Returns
+ *  { ok, reason, remote? }. */
+export async function pushCharacterGuarded(character) {
+  if (!syncEnabled()) return { ok: false, reason: "sync-off" };
+  const path = charPath(character.playerKey, character.id);
+  const remote = await fetchRepoJSON(path);
+  if (remote && (remote.updatedAt || 0) > (character.updatedAt || 0)) {
+    return { ok: false, reason: "remote-newer", remote }; // guard fires: don't clobber a fresher remote
+  }
+  await pushOwnedFile(path, character, `save: ${character.name}`);
+  return { ok: true, reason: "pushed" };
+}
+
+/** Best-effort character + profile backup. Character push goes through the stale-overwrite
+ *  guard; a refusal (a fresher remote appeared mid-session) logs and never blocks play —
+ *  the next open reconciles it. Failures log, never block play. */
 export async function backupSaves(character, profile) {
-  if (!syncEnabled()) return;
+  if (!syncEnabled()) return { ok: false, reason: "sync-off" };
   try {
-    await pushOwnedFile(`characters/${character.playerKey}/${character.id}.json`, character, `save: ${character.name}`);
+    const r = await pushCharacterGuarded(character);
+    if (!r.ok && r.reason === "remote-newer") console.warn("[sync] a fresher remote exists — skipped push to avoid clobber; reopen to reconcile.");
     if (profile) await pushOwnedFile(`players/${profile.playerKey}/profile.json`, profile, `profile: ${profile.playerKey}`);
+    return r;
   } catch (err) {
     console.warn("[sync] backup failed (play continues):", err.message);
+    return { ok: false, reason: err.message };
   }
 }

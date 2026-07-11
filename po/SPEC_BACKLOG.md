@@ -506,3 +506,22 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 - **GEOGRAPHY = DISPOSITION.** Regions are positioned by their dispositional profile; ADJACENT regions share axes. The valley is a CROSSING of order + light + practical → Harmonic (order/sound) sits next to Radiant (light/order) beside the valleyfolk (practical) BECAUSE they share those leans. Proximity = dispositional kinship. **→ constrains SNG-046 map auto-positioning: place regions by disposition-similarity, not arbitrary layout — the map is a projection of dispositional space.**
 
 *Foundational; off any critical path; deliberate. Aevi brings the design proposal → Erik steers → Aevi authors the refactor spec + authored culture anchors + folds in the access gates. NOT build-ready until steered.*
+
+---
+
+## SNG-051 — In-app dev preview-legs panel (clear the verification bottleneck from inside the game)
+
+**Erik-directed 2026-07-11.** Aevi PO. **🔧 BUILD OWNER: CCode** (app/UI code). **Aevi owns the data** (`data/preview_legs.json`, authored — 16 legs across the shipped-awaiting-legs batches; CCode may relocate the path to fit app structure). Rationale: verification is the current critical path; putting the checklist IN the dev build lets Erik run legs and mark them without juggling po/PREVIEW_LEGS.md alongside the game.
+
+**Build:**
+- **Dev-only panel** (behind a dev flag / local-preview build; NOT shown to players) that renders `preview_legs.json`: each leg as a row — batch · title · "do" · "pass" · a status toggle (pass / fail / feels-off / untried).
+- **Persist status locally** (in-memory or the existing local store; no new browser-storage dependency beyond what the app already uses) so a session's progress survives navigation.
+- **Group by mode** (solo vs cross-player) and by batch; show a simple "N of 16 verified" tally.
+- Optional nicety (not required): a per-leg note field so Erik can jot a "feels-off" comment inline; and a copy-summary button so the results paste straight to Aevi for closing.
+- Reads the data file; if it's absent, the panel no-ops gracefully.
+
+**Guardrails.** Dev-only (never a player-facing surface); data-driven (panel renders whatever legs the JSON holds — Aevi updates the data as batches ship/close, CCode never edits the list); additive; no engine/mechanic change; suites + parse_probe green.
+
+**Erik use-test:** "Open the dev panel — verify all shipped legs are listed, you can mark each pass/fail/feels-off, and the tally + your marks persist as you play."
+
+*Directly clears the verification bottleneck (po/PREVIEW_LEGS.md). Small CCode UI build + an Aevi data file (authored). Good fast-follow — arguably worth slotting AHEAD of the lower-urgency fast-follows since it accelerates closing everything else.*

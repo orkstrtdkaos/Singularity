@@ -11,7 +11,7 @@ import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, i
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests } from "../engine/quests.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent } from "../engine/gm.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
@@ -2057,6 +2057,26 @@ await (async () => {
   addGalleryImage(c, { kind: "portrait", url: "u1", caption: "dup" }); // dedup by url
   addGalleryImage(c, { kind: "moment", url: "u2", caption: "two" });
   check("SNG-035: gallery dedupes by url + prepends newest-first", c.gallery.length === 2 && c.gallery[0].url === "u2");
+})();
+
+// --- SNG-048: narrative register = f(disposition, rating) ---
+(() => {
+  // an ordinary place (concrete-leaning, low charge) → concrete
+  const market = narrativeRegister({ spectrum: { concrete_abstract: -0.2 }, poleIntensity: { concrete: 0.2 } });
+  check("SNG-048: an ordinary concrete place defaults to the concrete register", market.band === "concrete" && /concrete|plainly|literal/i.test(market.cue));
+  // a strange, charged, abstract place → poetic earned
+  const remnant = narrativeRegister({ spectrum: { concrete_abstract: 0.6 }, poleIntensity: { abstract: 0.7 } });
+  check("SNG-048: an abstract, charged place earns the poetic register", remnant.band === "poetic" && /lyrical|reach|strange/i.test(remnant.cue));
+  // a mild-abstract but low-charge place → the middle band (still mostly concrete)
+  const mid = narrativeRegister({ spectrum: { concrete_abstract: 0.25 }, poleIntensity: { abstract: 0.3 } });
+  check("SNG-048: a mildly-abstract low-charge place stays mostly concrete", mid.band === "mostly-concrete");
+  // axis tint flavors word-choice without changing the core band
+  const truthy = narrativeRegister({ spectrum: { concrete_abstract: -0.3, falsehood_truth: 0.6 }, poleIntensity: { concrete: 0.3 } });
+  check("SNG-048: a truth-charged place tints the register stark/clear", /stark|clear/i.test(truthy.cue));
+  // rating as DIRECTION
+  check("SNG-048: G rating directs a chaste register", /chaste|gentle/i.test(ratingRegister("G")));
+  check("SNG-048: R+ directs the FULL mature register — evocative, not explicit", /full mature register/i.test(ratingRegister("R+")) && /not (graphic|explicit)/i.test(ratingRegister("R+")));
+  check("SNG-048: an unknown preset falls back to a safe mid register", /tension|feeling/i.test(ratingRegister("???")));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

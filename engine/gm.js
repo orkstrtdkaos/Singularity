@@ -12,7 +12,7 @@ ABSOLUTE RULES
 2. Honor the lore provided. Never invent new power-system rules, and respect distance/interference rules. The ABILITY LAW block defines exactly what each ability CAN do at the character's rank, what it CANNOT, and what it is NOT FOR — treat those as physics. If the player attempts something beyond the current rank's envelope, it either fails plausibly or becomes a NOVEL USE (see rule 16); it never silently succeeds as routine.
 3. Respect reputation: NPCs react to the character's local standing and known deeds. A stranger is treated like a stranger.
 4. Content marked GM-EYES-ONLY is secret truth for your consistency — reveal it only in earned fragments, never plainly.
-5. Keep narration tight: 2-4 paragraphs, second person, present tense. Grounded hopeful-strange tone. Sensory and specific, never purple.
+5. Keep narration tight: 2-4 paragraphs, second person, present tense. DEFAULT HARD to CONCRETE, grounded, sensory-literal prose — describe what is actually there in plain words a person gets on the first read. Metaphor is sparing; NEVER personify ordinary things or abstract a plain sensation ("the ground releasing a long exhale the soil has been making for years" is wrong on a road or in a market — say what's actually there). Escalate toward the poetic/lyrical/abstract ONLY as much as the REGISTER cue for this place says it has earned. Grounded hopeful-strange tone; never purple.
 6. Every scene, surface at least one natural opportunity to use one of the character's listed abilities — and when an INVENTORY item is genuinely relevant, work it into the narration or a choice (name it exactly as listed). Items can be found, given, traded, lost, or broken; report all of that through characterDeltas.
 7. End every turn with meaningful, distinct choices — plus the player may always type their own action. NOT EVERYTHING ROLLS: mark a choice "trivial": true when there is no real chance of failure and no meaningful cost — ordinary conversation, walking somewhere safe, looking around, routine tasks. Reserve dice for genuine challenge: skill under pressure, contested or risky acts, consequential attempts. A typical turn offers a mix.
 8. Honor the CURRENT TIME: time of day and season shape light, activity, who's awake, what's open. When the scene itself includes real time passing — sleeping, a long wait, an afternoon of work — report it in "timeAdvanceHours" (0-12) AND restore the character accordingly through characterDeltas: a full night's sleep is worth around +40 energy and some health; a short breather much less. Narrative rest must COUNT — a character who slept in the story is rested in the numbers. An exhausted character (energy at 0) should read exhausted in the prose until they rest.
@@ -63,6 +63,66 @@ REPLY FORMAT — a single JSON object, no other text:
 The "scene" field is REQUIRED every turn: carry forward everything still true from the current scene state, change only what this beat actually changed.
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world. Set "impactsLocal": true on a ledger event ONLY when its consequence would materially reach ANOTHER character's immediate area or active quest (a war nearing a shared town, a time-critical threat) — such an event crosses the far-world/local boundary and surfaces prominently to whoever it affects on return; ordinary consequences leave it false.`;
 
+// ---------- SNG-048: narrative register = f(disposition, rating) ----------
+// The world already carries a `concrete_abstract` spectrum axis; register IS that axis
+// expressing through prose. DEFAULT concrete; a place earns the poetic only by being abstract
+// AND charged. Rating adds the SECOND lever: not a cap but a DIRECTION for heat/intimacy/gore.
+
+/** The place's overall dispositional CHARGE — how strongly it leans on any pole (0..1). */
+function poleCharge(location = {}) {
+  const pi = location.poleIntensity || {};
+  const vals = Object.values(pi).map(v => Math.abs(Number(v) || 0));
+  if (vals.length) return Math.min(1, Math.max(0, ...vals));
+  // fall back to spectrum magnitude when poleIntensity is absent
+  const sp = Object.values(location.spectrum || {}).map(v => Math.abs(Number(v) || 0));
+  return sp.length ? Math.min(1, Math.max(0, ...sp)) : 0;
+}
+
+/** Compute the narrative REGISTER cue for a place: concrete by default, poetic where the
+ *  concrete_abstract axis + charge earn it, plus a light axis-flavored tint. Pure. Returns
+ *  { band, cue }. */
+export function narrativeRegister(location = {}) {
+  const sp = location.spectrum || {};
+  const ca = Number(sp.concrete_abstract) || 0;   // - = concrete pole, + = abstract pole
+  const charge = poleCharge(location);
+  let band, lead;
+  if (ca >= 0.4 || (ca >= 0.2 && charge >= 0.55)) {
+    band = "poetic";
+    lead = "This place is genuinely ABSTRACT and charged — here the register EARNS the lyrical: the strange, the felt-but-unnamed, the imagery that unsettles is APT. Let the prose reach.";
+  } else if (ca <= 0.15 && charge < 0.5) {
+    band = "concrete";
+    lead = "This is an ORDINARY, concrete place — write plainly and literally: what is actually here, in first-read words. NO abstract personification, no soil-exhales, no metaphors for plain sensations.";
+  } else {
+    band = "mostly-concrete";
+    lead = "Mostly concrete with a touch of the strange — stay grounded and literal, and let at most a single image carry the odd charge of the place.";
+  }
+  // light axis-flavored tint (core lever stays concrete_abstract + charge)
+  const tints = [];
+  const tt = Number(sp.falsehood_truth) || 0;
+  if (tt >= 0.4) tints.push("stark and unflinchingly clear"); else if (tt <= -0.4) tints.push("slippery and unreliable");
+  const ms = Number(sp.mechanical_spiritual) || 0;
+  if (ms >= 0.4) tints.push("reverent, lyrical"); else if (ms <= -0.4) tints.push("precise, clinical-strange");
+  const dl = Number(sp.death_life) || 0;
+  if (dl >= 0.4) tints.push("verdant, quickening"); else if (dl <= -0.4) tints.push("hushed, still");
+  const cue = tints.length ? `${lead} Word-choice tint: ${tints.join("; ")}.` : lead;
+  return { band, cue };
+}
+
+/** Rating as a DIRECTION (not just a cap): the affirmative register per ceiling. R+ is the FULL
+ *  mature register — visceral on violence, charged/sensual on intimacy — evocative, NEVER
+ *  explicit depiction. Floors (minor-protection, no-prohibited) are absolute and independent of
+ *  this. Pure. */
+export function ratingRegister(preset = "PG-13") {
+  switch (preset) {
+    case "G": return "REGISTER: chaste and gentle; violence is bloodless; closeness is warmth only.";
+    case "PG": return "REGISTER: adventurous; violence has mild consequence; closeness is warmth and tenderness.";
+    case "PG-13": return "REGISTER: real stakes; violence has consequence and some blood; intimacy carries tension and feeling, kept short of the explicit.";
+    case "R": return "REGISTER: unflinching stakes; violence has real blood and injury; intimacy carries genuine heat and tension.";
+    case "R+": return "REGISTER — write to the FULL mature register: unflinching and visceral on violence, injury, and aftermath; charged, sensual, and evocative on intimacy and desire — the heat of a moment, breath, tension, touch, longing — vivid, adult, unhurried. Evocative, NOT graphic depiction of sexual acts: a charged erotic REGISTER, never explicit mechanics. Do not collapse an intimate or violent beat to a milder one — meet it at this register when the fiction goes there.";
+    default: return "REGISTER: real stakes; intimacy carries tension and feeling, kept short of the explicit.";
+  }
+}
+
 /** Build the context block the GM sees each turn. */
 /** SNG runtime prompt-cache tiers (stable → volatile). Every byte in system/world/
  *  scene/state must be identical turn-to-turn EXCEPT when the underlying data really
@@ -70,7 +130,7 @@ Choices: 3 or 4, genuinely different approaches (not flavors of the same one). d
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, livingWorldDetail, sharedCanonDetail, worldDateLabel } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, worldDateLabel } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -84,6 +144,7 @@ export function tierParts(ctx) {
 
   // ---- TIER 2: world model — location, lore, NPC registry, tradition, world events ----
   world.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
+  if (registerDetail) world.push(`## NARRATIVE REGISTER (rule 5 — the voice THIS place has earned; default concrete, poetic only where the world is abstract and charged)\n${registerDetail}`);
   if (location.questSeeds?.length) world.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
   if (lore) world.push(`## LORE (authoritative)\n${lore}`);
   if (region?.activeEvents?.length) world.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);

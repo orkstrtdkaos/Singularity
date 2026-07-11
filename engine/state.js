@@ -84,7 +84,19 @@ export async function loadContent() {
   }
   const region = await fetchJSON("world/regions/valley.json");
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, startingLocation: valley.startingLocation };
+  // SNG-BATCH-9: the generative substrate grammar + the derived validation schemas that
+  // generate(type, context) authors against. Optional — a fetch miss disables generation
+  // (the GM's generateRequest is simply ignored) but never breaks content load.
+  let substrate = null;
+  try { substrate = await fetchJSON("content/packs/valley/lore/generative_substrate.json"); } catch { /* generation off */ }
+  let greaterArcs = [];
+  try { greaterArcs = (await fetchJSON("content/packs/valley/lore/greater_arcs.json")).arcs || []; } catch { /* no arc few-shot */ }
+  const genSchemas = {};
+  for (const t of ["npc", "location", "arc"]) {
+    try { genSchemas[t] = await fetchJSON(`schemas/${t}.schema.json`); } catch { /* type ungeneratable */ }
+  }
+
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

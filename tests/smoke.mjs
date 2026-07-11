@@ -28,6 +28,8 @@ import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseA
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
+import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES } from "../engine/generate.js";
+import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -1558,6 +1560,82 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("defaultFor yields a schema-valid stub per type", defaultFor({ type: "array" }).length === 0 && defaultFor({ type: "string" }) === "" && defaultFor({ type: "integer" }) === 0);
   check("defaultFor(enum) picks the most-permissive (last) option", defaultFor({ type: "string", enum: ["world", "regional", "local"] }) === "local");
 }
+
+// --- SNG-BATCH-9 Phase 1b: generate(type,context) core + promotable store ---
+await (async () => {
+  const rjc = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
+  const npcSchema = rjc("schemas/npc.schema.json");
+  const locSchema = rjc("schemas/location.schema.json");
+  const arcSchema = rjc("schemas/arc.schema.json");
+  const substrate = rjc("content/packs/valley/lore/generative_substrate.json");
+  const archive = rjc("content/packs/valley/locations/archive_hollow.json");
+  const brann = rjc("content/packs/valley/npcs/brann_tollhand.json");
+  const llm = (obj) => async () => obj;
+  const base = (over = {}) => ({ location: archive, character: { id: "c1", level: 5 }, playerKey: "erik", day: 3, ...over });
+
+  // good NPC → validates, persists, _gen sidecar, codex mirror
+  {
+    const good = { name: "Sella Dun", role: "a ledger-keeper", spectrum: { truth: 0.4 }, fears: "erasure", wants: "to be believed", knowledge: ["who signs in at night"], voiceHints: "clipped", personality: { warmth: 0.1 }, reactsToReputation: { honest: "opens up" }, communityId: "valley.millbrook", homeLocation: "archive_hollow" };
+    const c = base();
+    const rec = await generate("npc", c, { callJSON: llm(good), schema: npcSchema, applyCodexUpdates: applyCodexUpdatesGen });
+    check("gen: good NPC persists + is schema-valid", rec && validate(rec, npcSchema).valid);
+    check("gen: NPC _gen sidecar (tier fresh, weight=level)", rec._gen?.tier === "fresh" && rec._gen.birthWeight === 5);
+    check("gen: store holds the minted entity", generatedRecords(c.character, "npc").length === 1);
+    check("gen: persistence dropped a codex node", !!c.character.codex?.topics?.["sella-dun"]);
+    check("gen: provenance has an SNG-041 worldDay slot", "worldDay" in rec._gen.provenance);
+  }
+  // missing-required → repaired; garbage → stubbed + in-grain
+  {
+    const c1 = base();
+    const r1 = await generate("npc", c1, { callJSON: llm({ name: "Half Man", role: "a shade" }), schema: npcSchema });
+    check("gen: missing-required NPC repaired to valid", validate(r1, npcSchema).valid && r1._gen.repaired === true);
+    const c2 = base({ hint: "a watcher in the stacks" });
+    const r2 = await generate("npc", c2, { callJSON: llm(null), schema: npcSchema });
+    check("gen: garbage output → schema-valid stub", validate(r2, npcSchema).valid && r2._gen.stubbed === true);
+    check("gen: stub is in-grain (inherits locale spectrum)", JSON.stringify(r2.spectrum) === JSON.stringify(archive.spectrum));
+  }
+  // resolve-before-mint: authored reuse + generated reuse
+  {
+    const c = base({ hint: "Brann Tollhand", known: { authored: { brann_tollhand: brann }, generated: {} } });
+    const rec = await generate("npc", c, { callJSON: llm({ name: "IGNORED", role: "x", spectrum: {}, fears: "y" }), schema: npcSchema });
+    check("gen: hint naming an authored NPC reuses it (no mint)", rec === brann && generatedRecords(c.character, "npc").length === 0);
+    const c2 = base();
+    const first = await generate("npc", c2, { callJSON: llm({ name: "Vetch", role: "a fixer", spectrum: { chaos: 0.3 }, fears: "debt" }), schema: npcSchema });
+    const again = await generate("npc", c2, { callJSON: llm({ name: "vetch", role: "another", spectrum: {}, fears: "z" }), schema: npcSchema });
+    check("gen: re-minting same name reuses (no duplicate)", again.id === first.id && generatedRecords(c2.character, "npc").length === 1);
+  }
+  // governor + never-throws
+  {
+    const c = base({ genBudget: 0 });
+    const rec = await generate("npc", c, { callJSON: llm({ name: "Nobody", role: "x", spectrum: {}, fears: "y" }), schema: npcSchema });
+    check("gen: governor at budget 0 declines to mint", rec === null && generatedRecords(c.character, "npc").length === 0);
+    let threw = false, r = null;
+    try { r = await generate("npc", base({ hint: "a door-shade" }), { callJSON: async () => { throw new Error("API down"); }, schema: npcSchema }); } catch { threw = true; }
+    check("gen: a thrown LLM call never halts (stub returned)", !threw && validate(r, npcSchema).valid && r._gen.stubbed);
+  }
+  // location + arc types
+  {
+    const c = base();
+    const loc = await generate("location", c, { callJSON: llm({ name: "The Understacks", regionId: "valley", communityId: null, spectrum: { truth: 0.5 }, poleIntensity: { truth: 0.5 }, tags: ["ruin"], connections: ["archive_hollow"], descriptionSeed: "deeper still", loreRefs: [], encounterFlavor: "cold", questSeeds: [], map: { x: 230, y: 110 } }), schema: locSchema });
+    check("gen: location generates + validates + connects back", validate(loc, locSchema).valid && loc.connections.includes("archive_hollow"));
+    const arc = await generate("arc", c, { callJSON: llm({ name: "The Naming Below", scale: "local", pressure: "medium", tendency: "the stacks want names", crossesRegions: ["Archive Hollow"], hingeNpcs: ["archive_guardian"], ifIgnored: "escalates", ifEngaged: "answered" }), schema: arcSchema });
+    check("gen: arc generates + validates (scale local)", validate(arc, arcSchema).valid && arc.scale === "local");
+  }
+  // pure units
+  check("gen: mintId avoids collision with -2", mintId("Teva", { teva: 1 }) === "teva-2");
+  check("gen: resolveExisting matches whole-word containment", resolveExisting("npc", "Teva", { authored: { teva_healer: { name: "Teva the healer" } } }) === "teva_healer");
+  check("gen: resolveExisting returns null for a new name", resolveExisting("npc", "Zorbo", { authored: { teva: { name: "Teva" } } }) === null);
+  check("gen: birthWeight reads character level", birthWeightOf({ character: { level: 7 } }) === 7);
+  for (const [t, sc] of [["npc", npcSchema], ["location", locSchema], ["arc", arcSchema]]) {
+    check("gen: stub(" + t + ") is schema-valid", validate(stubEntity(t, base(), sc), sc).valid);
+  }
+  // prompt assembly (pure)
+  {
+    const { system, user } = buildGeneratePrompt("npc", { location: archive, hint: "a scribe", rating: "PG-13" }, { schema: npcSchema, examples: [brann], substrate });
+    check("gen: prompt names required fields + disposition + example", system.includes("spectrum") && /truth|abstract|dark/.test(user) && user.includes("Brann Tollhand"));
+    check("gen: prompt carries the rating ceiling + minor floor", system.includes("PG-13") && /minor is NEVER/i.test(system));
+  }
+})();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

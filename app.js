@@ -8,7 +8,8 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
-import { getApiKey, setApiKey } from "./engine/claude.js";
+import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
+import { generate, ensureGenerated, generatedRecords } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES } from "./engine/worldtime.js";
@@ -33,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.6";
+const APP_VERSION = "1.7.7";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -46,6 +47,7 @@ let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
 let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the current scene
+let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
@@ -333,6 +335,80 @@ function codexEntities() {
 
 function senseTierFor() {
   return senseTier({ character, action: {}, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(character, CONTENT.rules.playerAptitudes) });
+}
+
+// ---------- SNG-BATCH-9: generative living world ----------
+
+/** Merge THIS character's grown world into the live CONTENT maps so every existing lookup
+ *  (travel, hereNow, registry, codex resolution) treats generated content as first-class —
+ *  authored vs generated indistinguishable downstream. Authored wins any id clash (and
+ *  resolve-before-mint makes clashes impossible anyway). Called on enterPlay. */
+function hydrateGeneratedIntoContent(c) {
+  ensureGenerated(c);
+  for (const rec of generatedRecords(c, "location")) if (!CONTENT.locations[rec.id]) CONTENT.locations[rec.id] = rec;
+  for (const rec of generatedRecords(c, "npc")) if (!CONTENT.npcs[rec.id]) CONTENT.npcs[rec.id] = rec;
+}
+
+/** Few-shot taste for generation: a few AUTHORED records of the type, disposition-near the
+ *  place when we can tell — the generator matches their quality + voice, staying in-grain. */
+function pickExamples(type, location) {
+  if (type === "npc") {
+    const all = Object.values(CONTENT.npcs || {}).filter(n => n.spectrum && !n._gen);
+    const here = all.filter(n => n.homeLocation === location?.id);
+    return (here.length ? here : all).slice(0, 3);
+  }
+  if (type === "location") {
+    const all = Object.values(CONTENT.locations || {}).filter(l => l.poleIntensity && !l._gen);
+    const near = all.filter(l => (location?.connections || []).includes(l.id));
+    return (near.length ? near : all).slice(0, 3);
+  }
+  if (type === "arc") {
+    return (CONTENT.greaterArcs || []).slice(0, 2).map(a => ({
+      id: a.id, name: a.name, scale: a.scale, pressure: a.pressure, tendency: a.tendency,
+      hingeNpcs: a.hingeNpcs, ifIgnored: a.ifIgnored, ifEngaged: a.ifEngaged
+    }));
+  }
+  return [];
+}
+
+/** The GM asked the world to grow. For each request (governor-capped per scene), author the
+ *  durable in-grain entity via generate(), register it live so it's usable + revisitable NOW,
+ *  and return light notes to surface. Never throws — generation must not halt a turn. */
+async function handleGenerateRequests(turn) {
+  const reqs = Array.isArray(turn.generateRequest) ? turn.generateRequest
+    : (turn.generateRequest ? [turn.generateRequest] : []);
+  if (!reqs.length) return [];
+  ensureGenerated(character);
+  const location = hereNow();
+  const time = readClock(character.clock);
+  const memCtx = { locationId: location.id, day: time.day, entities: codexEntities() };
+  const notes = [];
+  for (const req of reqs.slice(0, 3)) {
+    const type = req?.type;
+    if (!["npc", "location", "arc"].includes(type)) continue;
+    if (!CONTENT.genSchemas?.[type]) continue;                 // generation disabled for this type
+    const budget = Math.max(0, 3 - sceneGenCount);              // per-scene governor cap
+    if (budget <= 0) break;
+    const authored = type === "npc" ? CONTENT.npcs : type === "location" ? CONTENT.locations : {};
+    const before = new Set(Object.keys(character.generated?.[type] || {}));
+    const ctx = {
+      location, character, playerKey: getPlayerKey(), day: time.day, season: time.season || null,
+      hint: req.hint, why: req.why, birthPower: character.level,
+      rating: null,                                            // 1c wires the profile content-ceiling here
+      known: { authored, generated: character.generated?.[type] || {} },
+      examples: pickExamples(type, location), substrate: CONTENT.substrate, genBudget: budget
+    };
+    let rec = null;
+    try { rec = await generate(type, ctx, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas[type], applyCodexUpdates, codexCtx: memCtx }); }
+    catch { rec = null; }
+    if (rec && rec._gen && !before.has(rec.id)) {              // a NEW mint (not a reuse of authored/existing)
+      sceneGenCount++;
+      if (type === "location") CONTENT.locations[rec.id] = rec;
+      else if (type === "npc") CONTENT.npcs[rec.id] = rec;
+      notes.push({ type, name: rec.name, id: rec.id });
+    }
+  }
+  return notes;
 }
 
 /** Active encounter def + state, or null. */
@@ -653,6 +729,7 @@ function renderCreate() {
 async function enterPlay() {
   sceneTurns = [];
   sceneState = null;
+  hydrateGeneratedIntoContent(character); // SNG-BATCH-9: make this character's grown world live + revisitable
   if (character.sharedSceneId && syncEnabled()) {
     fetchScene(character.sharedSceneId).then(sc => {
       if (sc && sc.party.some(m => m.characterId === character.id)) { sharedScene = sc; seenBeats = sc.beats.length; if (!partyPoll) partyPoll = setInterval(pollPartyScene, 20000); }
@@ -686,6 +763,7 @@ async function enterPlay() {
 
 async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = [], aside = null) {
   gambitHintDismissed = false; // SNG-031: a new scene may be plan-apt again
+  sceneGenCount = 0;           // SNG-BATCH-9: fresh generation budget each scene
   if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
   renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news, aside });
   const result = await runGM({ resolution: null, playerInput: prompt });
@@ -729,6 +807,19 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   if (result.opsLost) { character.opLossPending = true; character.opLossLog = [...(character.opLossLog || []), { at: new Date().toISOString() }].slice(-3); }
   else character.opLossPending = false;
   applyTurn(result.turn, resolution);
+  // SNG-BATCH-9: the world grows through play — mint any entities the fiction reached for,
+  // persist them durable + in-grain, and surface a light note. A generation failure never
+  // halts the turn (the narration already stands).
+  if (result.turn.generateRequest) {
+    try {
+      const grown = await handleGenerateRequests(result.turn);
+      if (grown.length) {
+        result.turn.narration = (result.turn.narration || "") + "\n\n" + grown.map(g =>
+          `*✦ The world grows — **${g.name}** ${g.type === "location" ? "takes shape here, and will be here when you return" : g.type === "npc" ? "is now a real presence in this place" : "begins to stir as a thread of its own"}.*`).join("\n");
+        saveCharacter(character);
+      }
+    } catch (err) { console.warn("[generate] request handling skipped:", err?.message); }
+  }
   return result;
 }
 

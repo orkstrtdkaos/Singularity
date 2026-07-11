@@ -33,6 +33,7 @@ import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } from "../engine/state.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2124,6 +2125,38 @@ await (async () => {
   // idempotent: a second pass finds nothing to merge
   check("SNG-045: dedupe is idempotent (second run merges nothing)", dedupePlayers().length === 0);
   store.clear();
+})();
+
+// --- SNG-046 Layer 1: world-map foundation (auto-position + icons + KG overlay) ---
+(() => {
+  const locs = [
+    { id: "millbrook", map: { x: 200, y: 200 }, connections: ["dock"] },
+    { id: "dock", connections: ["millbrook"] },              // coordless → placed near millbrook
+    { id: "far-remnant", connections: [], regionId: "reach" } // orphan → hash grid
+  ];
+  const pos = autoMapPositions(locs);
+  check("SNG-046: authored coords are preserved exactly", pos.millbrook.x === 200 && pos.millbrook.y === 200);
+  check("SNG-046: a coordless location is placed near a positioned neighbour", pos.dock && Math.hypot(pos.dock.x - 200, pos.dock.y - 200) < 110);
+  check("SNG-046: an orphan location still gets stable coords", Number.isFinite(pos["far-remnant"].x) && Number.isFinite(pos["far-remnant"].y));
+  check("SNG-046: positioning is deterministic (same input → same output)", JSON.stringify(autoMapPositions(locs)) === JSON.stringify(pos));
+
+  const c1 = coordForGenerated("new-hollow", { x: 300, y: 300 }, { a: { x: 300, y: 300 } });
+  check("SNG-046: a generated location gets stable coords near its parent, not on top of it", Math.hypot(c1.x - 300, c1.y - 300) > 20 && Math.hypot(c1.x - 300, c1.y - 300) < 110);
+  check("SNG-046: coordForGenerated is deterministic", JSON.stringify(coordForGenerated("new-hollow", { x: 300, y: 300 }, {})) === JSON.stringify(coordForGenerated("new-hollow", { x: 300, y: 300 }, {})));
+
+  check("SNG-046: tag→icon picks the specific glyph, falls back to a marker", iconForTags(["market"]) === "🏪" && iconForTags(["shrine"]) === "⛩" && iconForTags([]) === "◈");
+  check("SNG-046: terrain tint derives from the dominant pole", terrainClass({ poleIntensity: { abstract: 0.7 } }) === "terrain-abstract" && terrainClass({ poleIntensity: { order: 0.1 } }) === "terrain-neutral");
+
+  // KG overlay: a met person shows solid, a heard-of person dimmed; both near their home node
+  const char = {
+    codex: { topics: { warden: { id: "warden", kind: "person", entityId: "warden", label: "The Warden" }, kesh: { id: "kesh", kind: "person", entityId: "kesh", label: "Kesh" }, mill: { id: "mill", kind: "place", entityId: "millbrook", label: "Millbrook" } } },
+    npcRegistry: { warden: { id: "warden", homeLocation: "millbrook" } }
+  };
+  const npcs = { warden: { id: "warden", homeLocation: "millbrook" }, kesh: { id: "kesh", homeLocation: "millbrook" } };
+  const overlay = kgOverlayEntities(char, pos, npcs);
+  check("SNG-046: KG overlay places person-entities with a resolvable home (place topics excluded)", overlay.length === 2 && overlay.every(e => e.locationId === "millbrook"));
+  check("SNG-046: a met person is discovered (solid), a heard-of one is not", overlay.find(e => e.entityId === "warden").discovered === true && overlay.find(e => e.entityId === "kesh").discovered === false);
+  check("SNG-046: overlay entities carry a codex topicId for click-through", overlay.every(e => !!e.topicId));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

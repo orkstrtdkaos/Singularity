@@ -119,6 +119,21 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .map-node.unvisited circle:not(.hit) { opacity: .45; }
 .map-node.unvisited .map-label { opacity: .5; }
 .map-node.danger circle:not(.hit) { stroke: var(--danger); }
+/* SNG-046 Layer 1: iconography, terrain tints, KG overlay */
+.map-icon { font-size: 13px; pointer-events: none; }
+.map-node.unvisited .map-icon { display: none; }
+.map-node.terrain-abstract circle:not(.hit), .map-node.terrain-spiritual circle:not(.hit) { fill: #2b2540; }
+.map-node.terrain-order circle:not(.hit), .map-node.terrain-mechanical circle:not(.hit) { fill: #23303a; }
+.map-node.terrain-chaos circle:not(.hit), .map-node.terrain-churn circle:not(.hit) { fill: #3a2a23; }
+.map-node.terrain-life circle:not(.hit) { fill: #23361f; }
+.map-node.terrain-death circle:not(.hit) { fill: #2a2a2e; }
+.map-node.terrain-light circle:not(.hit) { fill: #3a361f; }
+.map-node.terrain-dark circle:not(.hit) { fill: #1e2026; }
+.map-kg { cursor: pointer; }
+.map-kg circle { fill: var(--accent2); stroke: #14110c; stroke-width: 1; }
+.map-kg.heard circle { fill: transparent; stroke: var(--accent2); stroke-dasharray: 2 2; }
+.map-kg-label { font-family: var(--font-ui); font-size: 9px; fill: var(--accent2); pointer-events: none; }
+.map-kg.heard .map-kg-label { opacity: .6; }
 .map-details { background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-top: 12px; font-family: var(--font-ui); font-size: 13px; }
 .map-details-head { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; }
 .map-details-head h3 { font-family: var(--font); color: var(--accent); font-weight: normal; font-size: 17px; }

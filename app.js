@@ -14,6 +14,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -34,7 +35,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.7";
+const APP_VERSION = "1.8.8";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -50,6 +51,7 @@ let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the 
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
+let mapShowKG = false;   // SNG-046: knowledge-overlay toggle on the world map
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
@@ -582,6 +584,12 @@ async function handleGenerateRequests(turn) {
           const url = ensureImage(rec, type, { ratingLevel: viewerRatingLevel() });
           if (url) addGalleryImage(character, { kind: type, prompt: rec.name, url, caption: rec.name, worldDay: absoluteWorldDay() });
         } catch (err) { console.warn("[art] born-with-image skipped:", err?.message); }
+      }
+      // SNG-046: a generated location gets stable map coords on mint (near its parent) so it
+      // appears on the map immediately and never jumps between renders.
+      if (type === "location" && (!rec.map || !Number.isFinite(rec.map.x))) {
+        const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
+        rec.map = coordForGenerated(rec.id, hereNow().map, existing);
       }
       if (type === "location") CONTENT.locations[rec.id] = rec;
       else if (type === "npc") CONTENT.npcs[rec.id] = rec;
@@ -1558,31 +1566,42 @@ function renderMap(selectedId = null) {
   }
   const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
   const isVisited = id => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
+  // SNG-046 Layer 1: every location gets stable coords (authored kept; coordless + generated
+  // placed deterministically), a tag-derived icon, and a disposition terrain tint.
+  const pos = autoMapPositions(locs);
+  const kg = mapShowKG ? kgOverlayEntities(character, pos, CONTENT.npcs) : [];
   const svg = `<svg viewBox="0 0 800 440" class="world-map">
     <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
-    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}</text>
-    ${edges.map(([a, b]) => { const A = CONTENT.locations[a].map, B = CONTENT.locations[b].map;
+    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}${mapShowKG ? " · showing known people" : ""}</text>
+    ${edges.map(([a, b]) => { const A = pos[a], B = pos[b];
       return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""}"/>`; }).join("")}
     ${locs.map(l => {
+      const P = pos[l.id];
       const visited = isVisited(l.id);
       const reachable = connectedToHere.includes(l.id);
       const pm = character.placeMemory?.[l.id];
-      const cls = `map-node ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${l.dangerLevel >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
+      const cls = `map-node ${terrainClass(l)} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${l.dangerLevel >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
       const tip = visited
         ? `${l.name}${l.id === here ? " — you are here" : ""}${pm?.visits ? ` · ${pm.visits} visit${pm.visits > 1 ? "s" : ""}` : ""}${l.dangerLevel >= 3 ? " · DANGEROUS" : ""}${reachable ? " · one travel away" : ""}`
         : `Unknown place — you've only heard of it${reachable ? " · one travel away" : ""}`;
       return `<g class="${cls}" data-mapsel="${esc(l.id)}">
         <title>${esc(tip)}</title>
-        <circle class="hit" cx="${l.map.x}" cy="${l.map.y}" r="24"/>
-        <circle cx="${l.map.x}" cy="${l.map.y}" r="${l.id === here ? 14 : 10}"/>
+        <circle class="hit" cx="${P.x}" cy="${P.y}" r="24"/>
+        <circle cx="${P.x}" cy="${P.y}" r="${l.id === here ? 14 : 10}"/>
+        ${visited ? `<text x="${P.x}" y="${P.y + 5}" text-anchor="middle" class="map-icon">${iconForTags(l.tags)}</text>` : ""}
         ${(() => { const sps = Object.values(character.placeMemory?.[l.id]?.subPlaces || {}); return sps.slice(0, 6).map((sp, si) => {
           const ang = (si / Math.max(1, Math.min(sps.length, 6))) * Math.PI * 2 - Math.PI / 2;
-          const sx = l.map.x + Math.cos(ang) * 22, sy = l.map.y + Math.sin(ang) * 22;
+          const sx = P.x + Math.cos(ang) * 22, sy = P.y + Math.sin(ang) * 22;
           return `<circle cx="${sx}" cy="${sy}" r="4" class="map-satellite ${sp.visited ? "visited" : "heard"}"><title>${esc(sp.name)}${sp.note ? " — " + esc(sp.note) : ""}${sp.visited ? "" : " (heard of)"}</title></circle>`;
         }).join(""); })()}
-        <text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
-        ${visited && pm?.visits > 1 ? `<text x="${l.map.x}" y="${l.map.y + (l.map.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
+        <text x="${P.x}" y="${P.y + (P.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
+        ${visited && pm?.visits > 1 ? `<text x="${P.x}" y="${P.y + (P.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
       </g>`; }).join("")}
+    ${kg.map(e => `<g class="map-kg ${e.discovered ? "met" : "heard"}" data-kgtopic="${esc(e.topicId)}">
+        <title>${esc(e.label)}${e.discovered ? " — you've met them" : " — you've only heard of them"}</title>
+        <circle cx="${e.x}" cy="${e.y}" r="6"/>
+        <text x="${e.x}" y="${e.y - 9}" text-anchor="middle" class="map-kg-label">${esc(e.label.slice(0, 16))}</text>
+      </g>`).join("")}
   </svg>`;
   // details panel for the selected node — travel is an explicit button, never a stray click
   let details = "";
@@ -1611,11 +1630,14 @@ function renderMap(selectedId = null) {
   }
   chrome(`<div class="screen" style="max-width:860px">
     <h2>World Map</h2>
-    <p class="hint" style="margin-bottom:8px">Gold ring: you are here. Hover a place for a quick read; click it for details and travel.</p>
+    <p class="hint" style="margin-bottom:8px">Gold ring: you are here. Hover a place for a quick read; click it for details and travel. Icons hint at what a place is.</p>
+    <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle">${mapShowKG ? "✓ " : ""}Show known people</button></div>
     ${svg}
     ${details}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
+  document.getElementById("map-kg-toggle").onclick = () => { mapShowKG = !mapShowKG; renderMap(selectedId); };
+  for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
   const travelBtn = document.getElementById("map-travel");
   if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);

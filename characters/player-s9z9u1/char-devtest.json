@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 0,
+  "xp": 5,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -32,12 +32,14 @@
       "level": 1
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "falsehood_truth": 0.025
+  },
   "attunement": 3,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 97,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -96,24 +98,62 @@
       {
         "summary": "Arrival at the Radiant Plateau Edge District — the name Fendt chalked in red on the accountability board catches the eye.",
         "narration": "The eastern path delivers you onto the Edge District just as morning tips past its first hour — the sun still low enough that the light-guide streets haven't warmed to their full glow, only a pale, submerged luminescence threading the paving stones underfoot, as if the plateau itself is slowly waking. The photonic-crystal towers catch the angle of light and bend it into long, colored seams across the building faces: amber, a cold blue, a stripe of green that doesn't belong to any spring sky. Everything here is a choice someone made about what to show.\n\nThe district is already alive. Filtration array engineers move in twos and threes along the main causeway, their notebooks out, their voices low and clipped. A pair of apprentice optics-weavers spar with harmless beams near a fountain — one throws a wedge of refracted light that makes the other flinch and laugh. Closer, chalked on the accounting board mounted beside the district's common hall, you spot a name written in red: *Fendt*. The rest of the board is ordinary — shift rosters, supply tallies — but that name in that color sits wrong, like a bruise on clean linen. No accompanying record beneath it. People pass it without looking, which is its own kind of looking.\n\nThe news from Millbrook has reached here, too; you can feel it in the way conversations cluster and break apart. Three engineers near the board speak in half-sentences, tracking whether anyone else is in earshot. A Radiant keeper — an older woman with a prism-loupe on a cord around her neck — stands apart from them, watching the board with an expression that hasn't softened in some time. The gap between what's known and what's said is the district's texture this morning: light bending around things, revealing nothing it hasn't been asked to."
+      },
+      {
+        "summary": "The older keeper reveals Fendt's purity reports read impossibly clean against a contaminated river — falsified data, no record of who filed the mark.",
+        "narration": "You cross the causeway toward her directly — no hesitation, no pretense of studying the board first. The older keeper doesn't move when you approach. She's been watching that name long enough that she's catalogued every person who has looked at it this morning, and she catalogues you in the same breath: traveler's pack, no Radiant insignia, Harmonic-adjacent by the way you carry yourself. Her prism-loupe catches a needle of amber light and throws it sideways across the stone.\n\n\"Fendt,\" you say, not as a question.\n\nShe turns then. Not startled — she's past the age of startling — but the attention she gives you is full and searching, the kind that costs something to receive. Her voice, when it comes, is low and deliberate, each word placed with the care of someone who has spent a career measuring what goes on record and what does not.\n\n\"Fendt ran filtration quality checks on the lower arrays for six years. Consistent work. No complaints filed, no commendations either — the sort of person the system forgets until it needs them.\" She pauses, and her eyes go back to the board for just a moment. \"Three weeks ago their sample reports started reading cleaner than the upstream intake. Not by a little. By a margin that would mean the array was purifying river water that didn't need purifying.\" She looks at you again. \"Water that was already clean, according to the reports. The river has not been clean in two months.\"\n\nShe hasn't told you who marked Fendt's name, or why no record followed it. But the shape of what she's saying is clear: falsified purity readings, a river that runs gray-green, and a person whose reports tell a story that cannot be true. She tucks the prism-loupe into her collar and keeps her voice even. \"You're not one of the surveyors. And you're not from the Plateau.\" It isn't an accusation. It is an invitation to explain yourself — or not."
       }
     ],
     "lastTurn": {
-      "narration": "The eastern path delivers you onto the Edge District just as morning tips past its first hour — the sun still low enough that the light-guide streets haven't warmed to their full glow, only a pale, submerged luminescence threading the paving stones underfoot, as if the plateau itself is slowly waking. The photonic-crystal towers catch the angle of light and bend it into long, colored seams across the building faces: amber, a cold blue, a stripe of green that doesn't belong to any spring sky. Everything here is a choice someone made about what to show.\n\nThe district is already alive. Filtration array engineers move in twos and threes along the main causeway, their notebooks out, their voices low and clipped. A pair of apprentice optics-weavers spar with harmless beams near a fountain — one throws a wedge of refracted light that makes the other flinch and laugh. Closer, chalked on the accounting board mounted beside the district's common hall, you spot a name written in red: *Fendt*. The rest of the board is ordinary — shift rosters, supply tallies — but that name in that color sits wrong, like a bruise on clean linen. No accompanying record beneath it. People pass it without looking, which is its own kind of looking.\n\nThe news from Millbrook has reached here, too; you can feel it in the way conversations cluster and break apart. Three engineers near the board speak in half-sentences, tracking whether anyone else is in earshot. A Radiant keeper — an older woman with a prism-loupe on a cord around her neck — stands apart from them, watching the board with an expression that hasn't softened in some time. The gap between what's known and what's said is the district's texture this morning: light bending around things, revealing nothing it hasn't been asked to.",
-      "sceneSummary": "Arrival at the Radiant Plateau Edge District — the name Fendt chalked in red on the accountability board catches the eye.",
+      "narration": "You cross the causeway toward her directly — no hesitation, no pretense of studying the board first. The older keeper doesn't move when you approach. She's been watching that name long enough that she's catalogued every person who has looked at it this morning, and she catalogues you in the same breath: traveler's pack, no Radiant insignia, Harmonic-adjacent by the way you carry yourself. Her prism-loupe catches a needle of amber light and throws it sideways across the stone.\n\n\"Fendt,\" you say, not as a question.\n\nShe turns then. Not startled — she's past the age of startling — but the attention she gives you is full and searching, the kind that costs something to receive. Her voice, when it comes, is low and deliberate, each word placed with the care of someone who has spent a career measuring what goes on record and what does not.\n\n\"Fendt ran filtration quality checks on the lower arrays for six years. Consistent work. No complaints filed, no commendations either — the sort of person the system forgets until it needs them.\" She pauses, and her eyes go back to the board for just a moment. \"Three weeks ago their sample reports started reading cleaner than the upstream intake. Not by a little. By a margin that would mean the array was purifying river water that didn't need purifying.\" She looks at you again. \"Water that was already clean, according to the reports. The river has not been clean in two months.\"\n\nShe hasn't told you who marked Fendt's name, or why no record followed it. But the shape of what she's saying is clear: falsified purity readings, a river that runs gray-green, and a person whose reports tell a story that cannot be true. She tucks the prism-loupe into her collar and keeps her voice even. \"You're not one of the surveyors. And you're not from the Plateau.\" It isn't an accusation. It is an invitation to explain yourself — or not.",
+      "sceneSummary": "The older keeper reveals Fendt's purity reports read impossibly clean against a contaminated river — falsified data, no record of who filed the mark.",
       "choices": [
         {
-          "label": "Study the board up close — read the entry carefully, note who's watching, and use Prism Sight to catch any micro-reaction from the engineers nearby",
+          "label": "Tell her the truth — Millbrook sent word about the contamination and you're here to understand it, not interfere with Radiant business",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "honest",
+            "direct",
+            "build-trust"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask her who filed the red-chalk mark — she's clearly been here longer than anyone and watched whoever did it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "probe",
+            "careful",
+            "gather-information"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight on the accountability board — read the last hour of light-history to see who stood here and made that mark",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "dark_light": 0.6,
-            "falsehood_truth": 0.3
+            "dark_light": 0.7
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study",
-            "scout"
+            "use-ability",
+            "gather-information"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -122,54 +162,19 @@
           "emergenceId": null
         },
         {
-          "label": "Approach the older keeper with the prism-loupe — ask her directly what Fendt did to earn a red-chalk name with no record filed",
+          "label": "Ask her directly: does she think Fendt acted alone, or was someone above them shaping those reports",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.5
-          },
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "ask"
+            "probe",
+            "direct",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Drift near the cluster of engineers and listen — let them talk, say nothing, and see what the morning's gossip gives you for free",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {
-            "dark_light": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Find somewhere to eat and get your bearings first — a bench near the fountain, watch the district wake up, and take stock of what you know before you move",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -178,148 +183,118 @@
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Edge District, Radiant Plateau — early morning, sun low and catching the crystal towers at a shallow angle; light-guide streets emit a cool submerged glow; outdoor causeway near the district common hall.",
+        "setting": "Edge District causeway, Radiant Plateau — early morning; cool submerged glow from the light-guide paving; the accountability board is three paces behind you, Fendt's name in red chalk visible from here.",
         "npcsPresent": [
           {
-            "name": "Older keeper (prism-loupe around neck)",
-            "state": "standing apart from the engineers, watching the accountability board with a closed, unreadable expression"
+            "name": "Older keeper (Aldris Vael)",
+            "state": "Standing close, prism-loupe tucked into her collar, giving you her full attention — waiting for your answer"
           },
           {
             "name": "Cluster of three filtration engineers",
-            "state": "speaking in low, incomplete sentences near the accountability board, tracking who's within earshot"
+            "state": "Still speaking in low voices near the board; they've noticed the keeper in conversation with a stranger"
           },
           {
             "name": "Two apprentice optics-weavers",
-            "state": "sparring with harmless refracted beams near the fountain, laughing"
+            "state": "Sparring with refracted beams near the fountain, laughing — not watching"
           }
         ],
         "objects": [
-          "District accountability board: Fendt's name written in red chalk, no accompanying record filed beneath it; surrounding entries are routine shift rosters and supply tallies",
-          "Photonic-crystal towers catching morning light into colored seams across building faces",
+          "District accountability board: Fendt's name in red chalk, no accompanying record",
+          "Photonic-crystal towers bending morning light into colored seams — amber, cold blue, an out-of-season green",
           "Light-guide paving stones glowing faintly underfoot",
           "Fountain near the center of the causeway"
         ],
         "threads": [
-          "Fendt's name in red chalk with no filed record — who marked it, and why?",
-          "The three engineers are clearly discussing something they don't want overheard",
-          "The older keeper has been watching that board longer than casual interest warrants"
+          "Fendt's purity reports read impossibly clean against a gray-green river — the data is false",
+          "The keeper is waiting to know who you are and why you're here",
+          "Who filed the red-chalk mark with no accompanying record?",
+          "The three engineers have noticed the keeper talking to a stranger"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "keeper-aldris-vael",
+          "name": "Aldris Vael",
+          "role": "Senior Marks-Keeper, Radiant Plateau Accountability Board",
+          "note": "Spoke directly about Fendt — revealed that Fendt's filtration purity reports read impossibly clean against a contaminated river for the past three weeks; falsified data implied. Now waiting to learn who the character is.",
+          "learned": [
+            "Fendt ran filtration quality checks on the lower arrays for six years — consistent, unremarkable record",
+            "Three weeks ago Fendt's reports began showing water cleaner than the upstream intake by an impossible margin",
+            "The river has not been clean in two months — the reports are false",
+            "Aldris has not yet said who filed the red-chalk mark or why no record accompanied it"
+          ],
+          "skillsObserved": [
+            "careful speech",
+            "threat-assessment of strangers",
+            "institutional memory"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Standing on the Edge District causeway, in conversation with the character; guarded but willing to talk"
+        }
+      ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Fendt's name appeared in red chalk on the Edge District accountability board with no accompanying record — a filtration array supervisor marked them and filed nothing; a keeper of thirty years has never seen this done before.",
-          "subjectId": null
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
-          "flag": {
-            "fendt_board_marking": "red_chalk_no_record"
-          },
-          "subPlace": {
-            "name": "District Common Hall",
-            "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare disciplinary markings.",
-            "visited": true
-          }
+          "text": "Fendt's purity reports for the lower filtration arrays read impossibly clean — showing purified water against a river that has run gray-green for two months. The data is false. This was revealed by Keeper Aldris Vael.",
+          "subjectId": "keeper-aldris-vael"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "fendt-marking",
-          "label": "Fendt — Red Chalk Marking",
+          "topic": "fendt-falsified-reports",
+          "label": "Fendt — Falsified Purity Reports",
           "kind": "mystery",
           "entityId": null,
-          "fact": "A filtration array supervisor marked their subordinate Fendt in red chalk on the Edge District accountability board and filed no record — a thing no keeper of thirty years has seen done before. The name reached the board by World-day 11 morning.",
+          "fact": "Fendt's filtration quality reports began reading impossibly clean three weeks ago — showing purified water that couldn't exist given the river's contamination. A six-year record of unremarkable work, then data that cannot be true. Keeper Aldris Vael named it plainly.",
           "links": [
+            "water-crisis",
             "radiant-plateau",
-            "water-crisis"
-          ]
-        },
-        {
-          "topic": "millbrook-elder-decision",
-          "label": "Millbrook Elder Panel — Precursor Recognition",
-          "kind": "event",
-          "entityId": null,
-          "fact": "Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley and named it publicly — the first governance body in the valley to do so. Sela demonstrated the six-fold rhythm before them; the youngest witness confirmed the pattern from inside the stone.",
-          "links": [
-            "millbrook",
-            "precursor-system"
-          ]
-        },
-        {
-          "topic": "precursor-system",
-          "label": "Precursor System — Beneath the Valley",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "An operating Precursor system beneath the valley has been officially named by Millbrook's elders. Usnea proposed a multi-settlement expedition into the Disputed Zone to investigate; the panel could not act on it — the gap between evidence and action was named openly.",
-          "links": [
-            "millbrook-elder-decision",
-            "disputed-zone",
-            "water-crisis"
-          ]
-        },
-        {
-          "topic": "water-crisis",
-          "label": "The Water Crisis — Discoloration Stage",
-          "kind": "event",
-          "entityId": null,
-          "fact": "The Echo River runs gray-green on bad mornings. Fish catches are down across the valley. Communities murmur but cooperate. The crisis stands at the Discoloration stage as of World-day 11.",
-          "links": [
-            "echo-river",
-            "millbrook",
-            "radiant-plateau"
+            "fendt-board-marking",
+            "keeper-aldris-vael"
           ]
         }
       ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "the older Radiant keeper with a prism-loupe around her neck — a veteran of thirty years who's watching the accountability board with visible unease; she knows something is wrong with the Fendt marking",
-          "why": "She is present in the scene and the player may address her directly; she needs a stable identity, name, and history to persist across the investigation"
-        }
-      ],
+      "placeUpdates": [],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "Arrival beat — no meaningful time has elapsed beyond the journey, which was already accounted for"
+        "hoursPassed": 0.25,
+        "why": "A brief direct exchange on the causeway"
       },
-      "sceneEnded": false
+      "scene_ended": false
     },
     "sceneState": {
-      "setting": "Edge District, Radiant Plateau — early morning, sun low and catching the crystal towers at a shallow angle; light-guide streets emit a cool submerged glow; outdoor causeway near the district common hall.",
+      "setting": "Edge District causeway, Radiant Plateau — early morning; cool submerged glow from the light-guide paving; the accountability board is three paces behind you, Fendt's name in red chalk visible from here.",
       "npcsPresent": [
         {
-          "name": "Older keeper (prism-loupe around neck)",
-          "state": "standing apart from the engineers, watching the accountability board with a closed, unreadable expression"
+          "name": "Older keeper (Aldris Vael)",
+          "state": "Standing close, prism-loupe tucked into her collar, giving you her full attention — waiting for your answer"
         },
         {
           "name": "Cluster of three filtration engineers",
-          "state": "speaking in low, incomplete sentences near the accountability board, tracking who's within earshot"
+          "state": "Still speaking in low voices near the board; they've noticed the keeper in conversation with a stranger"
         },
         {
           "name": "Two apprentice optics-weavers",
-          "state": "sparring with harmless refracted beams near the fountain, laughing"
+          "state": "Sparring with refracted beams near the fountain, laughing — not watching"
         }
       ],
       "objects": [
-        "District accountability board: Fendt's name written in red chalk, no accompanyin",
-        "Photonic-crystal towers catching morning light into colored seams across buildin",
+        "District accountability board: Fendt's name in red chalk, no accompanying record",
+        "Photonic-crystal towers bending morning light into colored seams — amber, cold b",
         "Light-guide paving stones glowing faintly underfoot",
         "Fountain near the center of the causeway"
       ],
       "threads": [
-        "Fendt's name in red chalk with no filed record — who marked it, and why?",
-        "The three engineers are clearly discussing something they don't want overheard",
-        "The older keeper has been watching that board longer than casual interest warrants"
+        "Fendt's purity reports read impossibly clean against a gray-green river — the data is false",
+        "The keeper is waiting to know who you are and why you're here",
+        "Who filed the red-chalk mark with no accompanying record?",
+        "The three engineers have noticed the keeper talking to a stranger"
       ]
     }
   },
@@ -479,16 +454,48 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "keeper-aldris-vael": {
+        "id": "keeper-aldris-vael",
+        "label": "Keeper Aldris Vael",
+        "kind": "person",
+        "facts": [
+          "[d1] Senior Marks-Keeper, Radiant Plateau Accountability Board"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "keeper-aldris-vael",
+        "updatedDay": 1
+      },
+      "fendt-falsified-reports": {
+        "id": "fendt-falsified-reports",
+        "label": "Fendt — Falsified Purity Reports",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Fendt's filtration quality reports began reading impossibly clean three weeks ago — showing purified water that couldn't exist given the river's contamination. A six-year record of unremarkable work, "
+        ],
+        "links": [
+          "water-crisis",
+          "radiant-plateau",
+          "fendt-board-marking",
+          "keeper-aldris-vael"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
-  "tendencies": {},
+  "tendencies": {
+    "social": 1
+  },
   "aptitudes": [],
-  "actionCount": 0,
+  "actionCount": 1,
   "grantsVersion": 1,
   "reconcileVersion": 4,
-  "updatedAt": 1783802356584,
-  "rev": 10,
+  "updatedAt": 1783802557858,
+  "rev": 13,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -496,12 +503,126 @@
       "text": "Fendt's name appeared in red chalk on the Edge District accountability board with no accompanying record — a filtration array supervisor marked them and filed nothing; a keeper of thirty years has nev",
       "day": 1,
       "subjectId": null
+    },
+    {
+      "id": "keeper-aldris-vael",
+      "text": "Fendt's purity reports for the lower filtration arrays read impossibly clean — showing purified water against a river that has run gray-green for two months. The data is false. This was revealed by Ke",
+      "day": 1,
+      "subjectId": "keeper-aldris-vael"
     }
   ],
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "keeper-aldris-vael": {
+        "schemaVersion": 1,
+        "id": "keeper-aldris-vael",
+        "name": "Keeper Aldris Vael",
+        "role": "Senior Marks-Keeper, Radiant Plateau Accountability Board",
+        "homeLocation": "radiant_plateau_edge",
+        "communityId": "valley.radiant_plateau",
+        "personality": {
+          "warmth": 0.65,
+          "trust": 0.35,
+          "candor": 0.55,
+          "patience": 0.8
+        },
+        "spectrum": {
+          "dark_light": 0.75,
+          "falsehood_truth": 0.85,
+          "concrete_abstract": 0.6,
+          "emotional_logical": 0.45
+        },
+        "voiceHints": "Measured cadence, the kind built by thirty years of reading light rather than speaking into it. Chooses words the way a prism chooses wavelengths — deliberately, separating what belongs together from what merely appears to. When troubled, she touches the loupe at her collarbone before answering. Her silences are longer than they need to be and mean more than they say.",
+        "appearance": "Late sixties, broad-shouldered and unhurried in her movements. Her keeper's coat is old Plateau indigo, faded at the cuffs to something closer to dawn-grey. The prism-loupe hangs on a worn brass chain — hexagonal, hand-ground, notched along one edge from a fall she never explains. Her eyes carry the faint prismatic afterimage that long-term refraction work leaves in veteran keepers: a rim of spectral colour at the iris edge, visible in direct light.",
+        "knowledge": [
+          "The Fendt grain-mark currently posted to the accountability board carries a refraction signature that does not resolve cleanly under her loupe — the internal scatter pattern suggests the mark was struck from a die that has been subtly re-cut, not simply worn",
+          "She has seen die-wear, forgery, and honest error in thirty years; this reads as none of the three, and that is precisely what frightens her",
+          "The Fendt consignment passed the junior keeper's table three weeks ago, in the last days of winter, during the transitional period when the board rotates its verification staff — a gap she now suspects was not accidental",
+          "There is a Plateau record, mid-archive, of a similar anomalous mark appearing once before, roughly forty years prior; the case was closed without a finding and the original examiner's notes are missing",
+          "She knows every keeper currently seated on the accountability board by temperament and habit; she is watching two of them more carefully than the board's posted work would explain"
+        ],
+        "wants": "To hold the mark up to a second pair of trained eyes she trusts before she says a word aloud — she needs confirmation that what she sees is real, not the pattern-hunger of an old keeper who has looked through glass too long. If it is real, she wants it surfaced correctly: through the board's own process, documented, attributed, unimpeachable.",
+        "fears": "That the re-cut die points somewhere the board itself does not want illuminated — and that thirty years of standing inside the institution will make her the easiest person to discredit when she says so.",
+        "functions": [
+          "reveal",
+          "ward"
+        ],
+        "abilities": [
+          {
+            "id": "prismatic_discernment",
+            "label": "Prismatic Discernment",
+            "functions": [
+              "reveal"
+            ],
+            "description": "Through her prism-loupe, Aldris can read the internal refraction signature of any Plateau mark, die-impression, or sealed document. Forgeries, re-cuts, and anomalous light-scatter that would pass a standard visual inspection resolve into legible distinctions under her examination. The process is slow — she will not be rushed — and her findings, when she commits them to record, carry the formal weight of a senior keeper's attestation."
+          },
+          {
+            "id": "procedural_ward",
+            "label": "Procedural Ward",
+            "functions": [
+              "ward"
+            ],
+            "description": "Aldris knows exactly which documentation pathways, filing sequences, and board protocols make a finding difficult to quietly undo. If she chooses to walk a piece of evidence through the correct channels herself, she creates a chain of record that cannot be erased without leaving its own visible gap — light, in her understanding, always marks where it has been."
+          }
+        ],
+        "reactsToReputation": {
+          "truth-seeker": "exhales slowly, uncurls slightly, will show the loupe reading unprompted if she judges the player ready to understand what they are looking at",
+          "deceiver": "becomes courteous and completely opaque; continues to touch the loupe but stops looking through it in the player's presence",
+          "institution-loyalist": "grows visibly tired; gives correct, careful, unhelpful answers until she decides whether the loyalty runs deeper than the institution or only as deep as its convenience",
+          "outsider-investigator": "weighs them against the risk of bringing an uncontrolled light source into a room she is still trying to read; may ask one precise, unexpected question before deciding"
+        },
+        "seasonalDetail": "Early spring means the accountability board's annual re-certification cycle has just opened — all marks logged in the winter quarter are under review. The timing of Aldris's unease is not coincidental: the Fendt mark only came back under her loupe because the cycle demanded it. She has been sitting with what she saw for four days.",
+        "_gen": {
+          "entityId": "keeper-aldris-vael",
+          "type": "npc",
+          "birthWeight": 5,
+          "engagementScore": 2,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-devtest",
+            "locationId": "radiant_plateau_edge",
+            "day": 1,
+            "worldDay": null,
+            "hint": "the older Radiant keeper with a prism-loupe around her neck — a veteran of thirty years who's watching the accountabilit",
+            "why": "She is present in the scene and the player may address her directly; she needs a stable identity, name, and history to p"
+          },
+          "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 1
+            }
+          ],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true,
+          "lastAttentionDay": 1
+        },
+        "image": "https://image.pollinations.ai/prompt/character%20portrait%2C%20Keeper%20Aldris%20Vael%2C%20Senior%20Marks-Keeper%2C%20Radiant%20Plateau%20Accountability%20Board.%20Late%20sixties%2C%20broad-shouldered%20and%20unhurried%20in%20her%20movements.%20Her%20keeper's%20coat%20is%20old%20Plateau%20indigo%2C%20faded%20at%20the%20cuffs%20to%20something%20closer%20to%20dawn-grey.%20The%20prism-loupe%20hangs%20on%20a%20worn%20brass%20chain%20%E2%80%94%20hexagonal%2C%20hand-ground%2C%20notched%20along%20one%20edge%20from%20a%20fall%20she%20never%20explains.%20Her%20eyes%20carry%20the%20faint%20prismatic%20afterimage%20that%20long-term%20refraction%20work%20leaves%20in%20veteran%20keepers%3A%20a%20rim%20of%20spectral%20colour%20at%20the%20iris%20edge%2C%20visible%20in%20direct%20light.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49313&nologo=true"
+      }
+    },
     "location": {},
     "arc": {}
+  },
+  "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Keeper Aldris Vael",
+      "url": "https://image.pollinations.ai/prompt/character%20portrait%2C%20Keeper%20Aldris%20Vael%2C%20Senior%20Marks-Keeper%2C%20Radiant%20Plateau%20Accountability%20Board.%20Late%20sixties%2C%20broad-shouldered%20and%20unhurried%20in%20her%20movements.%20Her%20keeper's%20coat%20is%20old%20Plateau%20indigo%2C%20faded%20at%20the%20cuffs%20to%20something%20closer%20to%20dawn-grey.%20The%20prism-loupe%20hangs%20on%20a%20worn%20brass%20chain%20%E2%80%94%20hexagonal%2C%20hand-ground%2C%20notched%20along%20one%20edge%20from%20a%20fall%20she%20never%20explains.%20Her%20eyes%20carry%20the%20faint%20prismatic%20afterimage%20that%20long-term%20refraction%20work%20leaves%20in%20veteran%20keepers%3A%20a%20rim%20of%20spectral%20colour%20at%20the%20iris%20edge%2C%20visible%20in%20direct%20light.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49313&nologo=true",
+      "caption": "Keeper Aldris Vael",
+      "worldDay": 11,
+      "at": "2026-07-11T20:39:49.006Z"
+    }
+  ],
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "boundary_stone": 1
+    },
+    "coActivations": {},
+    "aspirations": []
   }
 }

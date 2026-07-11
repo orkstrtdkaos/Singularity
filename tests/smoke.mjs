@@ -33,6 +33,7 @@ import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } from "../engine/state.js";
+import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
 
@@ -2216,6 +2217,27 @@ await (async () => {
   const dir = legendDeploymentForGM(heroDeploy, { ratingPreset: "R" });
   check("SNG-042: the GM directive names the beat + figure + ceiling", /GREAT FIGURE/.test(dir) && /R ceiling/.test(dir));
   check("SNG-042: no directive when nothing deploys", legendDeploymentForGM({ deploy: false }) === null);
+})();
+
+// --- SNG-052: adult-gate persistence ---
+(() => {
+  const p = { playerKey: "px", rating: defaultRating() };
+  check("SNG-052: a fresh profile is not adult-verified", p.rating.adultVerified === false);
+  // authorizing R with the gate persists adultVerified
+  setRating(p, "R", { authority: "erik", adultGate: true });
+  check("SNG-052: authorizing R with the gate persists adultVerified", p.rating.preset === "R" && p.rating.adultVerified === true);
+  // reopening: the persisted verification satisfies the gate (no re-check needed)
+  check("SNG-052: persisted adultVerified satisfies the gate on a later set", canSetRating(p, "R+", { authority: "erik", adultGate: p.rating.adultVerified }).ok === true);
+  // a sub-R set leaves the verification intact (Erik can dip to G temporarily)
+  setRating(p, "G", { authority: "erik", adultGate: true });
+  check("SNG-052: a sub-R set keeps adultVerified intact", p.rating.adultVerified === true);
+  // revoke clears it and drops any R/R+ ceiling
+  const p2 = { playerKey: "py", rating: { ...defaultRating(), preset: "R+", adultVerified: true } };
+  revokeAdultGate(p2);
+  check("SNG-052: revoke clears adultVerified and drops the ceiling below R", p2.rating.adultVerified === false && RATING_LEVEL[p2.rating.preset] < RATING_LEVEL["R"]);
+  // an R set WITHOUT the gate (and no persisted verification) is still refused (floor intact)
+  const p3 = { playerKey: "pz", rating: defaultRating() };
+  check("SNG-052: R without the gate or a verification is still refused", canSetRating(p3, "R", { authority: "erik", adultGate: false }).ok === false);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

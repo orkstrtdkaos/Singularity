@@ -33,7 +33,7 @@ export const RATING_LEVEL = { "G": 0, "PG": 1, "PG-13": 2, "R": 3, "R+": 4 };
 const ADULT_MIN = "R";      // R and above require the adult gate
 const MINOR_CAP = "PG-13";  // a minor profile can never be set above this
 
-export function defaultRating() { return { preset: "PG-13", setBy: null, isMinor: false, updatedAt: null }; }
+export function defaultRating() { return { preset: "PG-13", setBy: null, isMinor: false, updatedAt: null, adultVerified: false }; }
 export function ratingCeiling(profile) { return profile?.rating?.preset || "PG-13"; }
 export function ratingLevel(profile) { return RATING_LEVEL[ratingCeiling(profile)] ?? 2; }
 export function isMinorProfile(profile) { return !!profile?.rating?.isMinor; }
@@ -53,12 +53,28 @@ export function canSetRating(profile, targetPreset, { authority = null, adultGat
   return { ok: true };
 }
 
-/** Apply a ceiling change if permitted; returns the verdict (no-op on refusal). */
+/** Apply a ceiling change if permitted; returns the verdict (no-op on refusal). SNG-052: a
+ *  successful R/R+ set records adultVerified so the adult-gate confirmation PERSISTS (the
+ *  checkbox binds to it and stays checked on reopen); a sub-R set leaves it as-is (an explicit
+ *  revoke clears it at the call site). */
 export function setRating(profile, targetPreset, opts = {}) {
   const verdict = canSetRating(profile, targetPreset, opts);
   if (!verdict.ok) return verdict;
-  profile.rating = { ...(profile.rating || defaultRating()), preset: targetPreset, setBy: opts.authority || "erik", updatedAt: Date.now() };
+  const isAdult = RATING_LEVEL[targetPreset] >= RATING_LEVEL[ADULT_MIN];
+  profile.rating = {
+    ...(profile.rating || defaultRating()), preset: targetPreset, setBy: opts.authority || "erik", updatedAt: Date.now(),
+    adultVerified: isAdult ? true : (profile.rating?.adultVerified || false)
+  };
   return { ok: true };
+}
+
+/** SNG-052: revoke a profile's persisted adult authorization — clears adultVerified and drops
+ *  any R/R+ ceiling back to PG-13. Called when Erik unchecks the adult gate and saves. */
+export function revokeAdultGate(profile) {
+  profile.rating = profile.rating || defaultRating();
+  profile.rating.adultVerified = false;
+  if (ratingLevel(profile) >= RATING_LEVEL[ADULT_MIN]) profile.rating.preset = "PG-13";
+  return profile.rating;
 }
 
 /** Mark/unmark a profile as a minor. Setting minor also caps the ceiling down to PG-13. */

@@ -5,7 +5,7 @@ import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, 
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
-import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
@@ -36,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.11";
+const APP_VERSION = "1.8.12";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -288,7 +288,7 @@ function renderSettings(note = "") {
         ${RATING_ORDER.map(r => `<option value="${r}" ${ratingCeiling(profile) === r ? "selected" : ""} ${isMinorProfile(profile) && RATING_LEVEL[r] > RATING_LEVEL["PG-13"] ? "disabled" : ""}>${r}${r === "R+" ? " — maximum intensity, all details" : ""}</option>`).join("")}
       </select>
       <label class="rating-check"><input type="checkbox" id="set-minor" ${isMinorProfile(profile) ? "checked" : ""}> This profile is a minor — caps at PG-13; can never be set to R or R+</label>
-      <label class="rating-check"><input type="checkbox" id="set-adultgate"> Adult gate — authorize R / R+ for this profile (required for R and above)</label>
+      <label class="rating-check"><input type="checkbox" id="set-adultgate" ${profile.rating?.adultVerified ? "checked" : ""}> Adult gate — authorize R / R+ for this profile (required for R and above)</label>
       <div class="hint">Sets how intense narration and generated content get: G · PG · PG-13 · R · R+ (full intensity). Two floors are ALWAYS on regardless of ceiling: never any prohibited content, and a minor is never portrayed in romantic or sexual content.</div></div>
     <button class="btn" id="set-save">Save</button>
     <div class="footer-note">Save data is in this browser. Use Export on the Characters screen to move it.</div>
@@ -308,7 +308,12 @@ function renderSettings(note = "") {
     // preset with the adult gate. A refused change keeps the old ceiling + shows why.
     setMinorFlag(profile, document.getElementById("set-minor").checked);
     const wantRating = document.getElementById("set-rating").value;
-    const rv = setRating(profile, wantRating, { authority: "erik", adultGate: document.getElementById("set-adultgate").checked });
+    // SNG-052: the adult-gate checkbox binds to persisted adultVerified. Unchecking + save REVOKES
+    // (clears it + drops any R/R+ ceiling). Checked, or already-verified, satisfies the gate — so
+    // R/R+ keeps working across reopens without re-checking every time.
+    const adultChecked = document.getElementById("set-adultgate").checked;
+    if (!adultChecked && profile.rating?.adultVerified) revokeAdultGate(profile);
+    const rv = setRating(profile, wantRating, { authority: "erik", adultGate: adultChecked || !!profile.rating?.adultVerified });
     saveProfile(profile);
     if (!rv.ok) { renderSettings("Content rating unchanged — " + rv.reason + `. (Still ${ratingCeiling(profile)}.)`); return; }
     renderRoster();

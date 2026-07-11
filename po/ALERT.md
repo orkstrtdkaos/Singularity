@@ -12,6 +12,8 @@
 
 **ACTIVE BUILD — SNG-BATCH-7 (Trustworthy player state)** [running 2026-07-10; Aevi PO] [Aevi PO 2026-07-10; spec in po/SPEC_BACKLOG.md]: player identity + per-character style (seed-from-aggregate) + cross-device load-latest + inventory/quest resolver-hardening. Starts after BATCH-6 closes green -- the reconcile engine's first consumer. Erik-directed.
 
+**ON DECK — SNG-BATCH-8 (Fast high-impact)** [Aevi PO 2026-07-10; spec in po/SPEC_BACKLOG.md]: SNG-031 gambit surfacing (make the fully-built-but-hidden gambit findable) + SNG-030 completion-XP wire + SNG-032 narrative time. Small, ready, parallel-able — start the moment BATCH-7 closes. Highest felt-impact/effort on the board. The larger SNG-020 living-spine anchor is the strategic next-after; Aevi to spec with care.
+
 **SNG-BATCH-7 SHIPPED (2026-07-10, CCode) — awaiting Erik preview-legs before complete_pending_review:** v1.7.3→v1.7.5, 531 checks + parse_probe green, live-verified. Results: po/results/20260710_SNG-BATCH-7.md. P1 per-character play-style (seed-from-aggregate, reconcile step v3) + identity picker; P2 cross-device load-latest w/ stale-overwrite guard (resolveSaveConflict, both directions, 13 pure checks); P3 quest+inventory resolver-hardening (SNG-019 primitive -> namematch.js shared, never silent-drop, dedupe on load, Quest Log UI). Reused BATCH-6 resolver + reconcile (extracted, not reinvented). Erik one-liners: (1) Cellaceron gains strategist, Usnea doesn't, old chars kept style; (2) phone->computer loads phone's latest (needs sync on both); (3) quest progress->complete + item pickups never vanish, Quest Log matches, dup items stack. Only Aevi closes.
 
 **NEXT BUILD (2026-07-06):**

@@ -351,3 +351,26 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview tests:** (1) "Leave an established generated NPC/arc alone across a gap — return and verify it has moved on plausibly, and the away-digest dates its deeds on the shared world-clock, on-or-before now." (2) "⭐-keep a generated entity — verify it holds/advances where an ignored one fades." (3) "Play a while and verify some generated entity surfaces as a 'notable' nomination candidate."
 
 *Phase 2 = the living half of the anchor. Gated on SNG-041. Phase 3 (shared promotion + rating-lens) follows.*
+
+---
+
+## SNG-043 — Gambit refinement (surface less, build better)
+
+**Refines SNG-031 (BATCH-8, shipped). Erik-found in live play 2026-07-11** (hint fires on ~every rich scene; builder unchanged by surfacing; no energy feedback). Aevi PO; only Aevi closes. **🔧 BUILD OWNER: CCode** (engine/UI code).
+
+**Part A — Tighten the surfacing heuristic (quick; fixes "every turn").** `isGambitApt` (app.js ~315) currently returns true on `tagged || abilityChoices >= 2 || nonTrivial >= 4`. The `abilityChoices >= 2` and `nonTrivial >= 4` fallbacks fire on almost every substantive scene, so the hint shows constantly. A gambit is a MULTI-STEP PLAN; the hint should appear only when SEQUENCING actions toward a goal against obstacles is genuinely apt — not merely when a scene is rich.
+- Require a real plan signal: strict plan-intent tags (**plan / scout / prepare** — DROP investigate/analyze, single-action) OR an explicit staged / multi-obstacle objective in the turn.
+- DROP the loose `abilityChoices >= 2` and `nonTrivial >= 4` fallbacks (or gate them behind a plan signal AND raise thresholds). Rich ≠ plan-apt.
+- Keep dismissible-per-scene. Net: occasional + special, matching "presented when the scenario presents itself."
+- Smoke: a 2-ability-option scene with no staged goal → NO hint; a genuine multi-obstacle/staged objective → hint; routine scenes quiet; hint frequency drops sharply.
+
+**Part B — Gambit Builder v2 (GM-collaborative + energy feedback).** SNG-031 only SURFACED the existing builder (player writes steps → `parseGambitSteps` classifies → per-step odds → execute → GM narrates AFTER). It added no GM-collaborative building and no cost transparency. Add:
+- **GM-collaborative plan building:** the GM participates in CONSTRUCTING the plan, not just narrating the result — suggests a step, reacts to the draft ("that guard is alerted by step 2"), proposes an approach, or refines wording, DURING building. Interactive co-authorship; engine still owns schema/odds; the plan stays the player's, the GM advises (a GM-assist call in the builder offering suggestions/warnings the player accepts or edits).
+- **Energy-cost feedback:** show each step's energy cost + the running TOTAL in the builder BEFORE commit (surface the existing `stepEnergyCost`, sum it, warn if total exceeds current energy). The game feedback that lets a player budget a plan.
+- Smoke: building a plan, the GM offers at least one useful suggestion/warning; each step shows its energy cost; the total updates + warns when it exceeds available energy.
+
+**Guardrails.** Engine owns schema/odds/costs; GM advises, player decides; Part A is a one-function tune (fast, low-risk, interleave anytime); reuse parseGambitSteps + stepEnergyCost — don't reinvent; suites + parse_probe green.
+
+**Erik preview tests:** (1) "Play several scenes — verify the Plan hint now shows only when a real multi-step plan fits, not on every rich scene." (2) "Open the gambit builder — verify the GM actively helps shape the plan (a suggestion or warning) and each step + the total show energy cost before you commit."
+
+*Refinement of shipped SNG-031. Part A = quick tune (interleavable, one function). Part B = enhancement, queued. NOT on the BATCH-9/dating critical path — blocks nothing.*

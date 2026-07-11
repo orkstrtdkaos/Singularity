@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.5";
+const APP_VERSION = "1.8.6";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -415,18 +415,22 @@ function fullCatalog() {
   return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
 }
 
-/** SNG-031: is this turn genuinely a "make a plan" moment? Reads signals the engine
- *  already emits — plan/scout/prepare-tagged choices, or multiple distinct challenging
- *  options (two abilities relevant, or 3+ non-trivial choices). Conservative on purpose:
- *  a chip that fires every turn is as dead as one that never fires. */
+/** SNG-031 + SNG-043 Part A: is this turn genuinely a "make a plan" moment? A gambit is a
+ *  MULTI-STEP PLAN — the hint should appear only when SEQUENCING actions toward a goal against
+ *  obstacles is genuinely apt, not merely when a scene is rich. Requires a real plan signal:
+ *  a STRICT plan-intent tag (plan/scout/prepare — investigate/analyze dropped; single-action) OR
+ *  an explicit staged/multi-obstacle objective the GM framed. The loose abilityChoices>=2 /
+ *  nonTrivial>=4 fallbacks are removed — rich ≠ plan-apt (they fired on nearly every scene). */
 function isGambitApt(turn) {
   const choices = turn?.choices || [];
   if (choices.length < 3) return false; // need real options to plan among
-  const PLAN_TAGS = new Set(["plan", "scout", "prepare", "investigate", "analyze"]);
-  const tagged = choices.some(c => (c.intentTags || []).some(t => PLAN_TAGS.has(t)));
-  const abilityChoices = choices.filter(c => c.abilityId).length;
-  const nonTrivial = choices.filter(c => !c.trivial && !c.encounterId && !c.emergenceId).length;
-  return tagged || abilityChoices >= 2 || nonTrivial >= 4;
+  const PLAN_TAGS = new Set(["plan", "scout", "prepare"]);
+  const planTagged = choices.some(c => (c.intentTags || []).some(t => PLAN_TAGS.has(t)));
+  // an explicit staged/multi-obstacle objective (a GM-flagged staged choice, or a scene carrying
+  // multiple named threads to sequence through) — future-proof + reliable when present
+  const stagedObjective = choices.some(c => c.staged === true || c.multiStep === true)
+    || (Array.isArray(turn?.scene?.threads) && turn.scene.threads.length >= 3);
+  return planTagged || stagedObjective;
 }
 
 /** SNG-019: known-entity id→name maps for codex entity resolution — the ids the GM
@@ -2060,24 +2064,39 @@ function gambitCtx() {
   };
 }
 
+/** SNG-043 Part B: the energy a planned step will cost — the ability's effective cost when the
+ *  step uses one, else the flat per-step default. Lets the builder budget a plan before commit. */
+function gambitStepEnergy(action) {
+  const flat = CONTENT.rules.gambit?.stepEnergyCost ?? 4;
+  if (action?.abilityId) { const ab = fullCatalog()[action.abilityId]; if (ab) return effectiveEnergyCost(ab, character, CONTENT.rules); }
+  return flat;
+}
+
 function renderGambitBuilder(status = "") {
   if (!gambitDraft) gambitDraft = { goal: "", steps: [{ text: "", fallback: "" }], assessed: null };
   const g = gambitDraft;
   const max = CONTENT.rules.gambit?.maxSteps ?? 5;
+  // SNG-043 Part B: per-step + total energy, known once the plan is assessed (steps parsed)
+  const stepEnergy = g.actions ? g.actions.map(gambitStepEnergy) : null;
+  const totalEnergy = stepEnergy ? stepEnergy.reduce((a, b) => a + b, 0) : null;
+  const overBudget = totalEnergy != null && totalEnergy > (character.energy ?? 0);
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Plan a Gambit</h2>
     <p class="hint" style="margin-bottom:12px">Declare a sequence of moves. Assess it to read your odds (as far as your experience allows), then run it. A failed step forces a decision: fallback, adapt, press on, or abandon. Adaptation points available: <strong>${adaptationPointsFor(profile, CONTENT.rules)}</strong>.</p>
     <div class="field"><label>Goal</label><input id="g-goal" value="${esc(g.goal)}" placeholder="e.g. get the falsified purity logs out of the array office"></div>
     ${g.steps.map((s, i) => `
       <div class="field gambit-step">
-        <label>Step ${i + 1}${g.assessed?.steps[i] ? ` — <span class="g-chance">${g.assessed.steps[i].sense.text ? esc(g.assessed.steps[i].sense.text) : "no read"}</span>${g.assessed.weakIndex === i ? ` <span class="g-weak">⚠ weakest link</span>` : ""}` : ""}</label>
+        <label>Step ${i + 1}${g.assessed?.steps[i] ? ` — <span class="g-chance">${g.assessed.steps[i].sense.text ? esc(g.assessed.steps[i].sense.text) : "no read"}</span>${g.assessed.weakIndex === i ? ` <span class="g-weak">⚠ weakest link</span>` : ""}` : ""}${stepEnergy ? ` <span class="g-energy">· ${stepEnergy[i]} energy</span>` : ""}</label>
         <input class="g-step" data-i="${i}" value="${esc(s.text)}" placeholder="what you'll do">
         <input class="g-fallback" data-i="${i}" value="${esc(s.fallback)}" placeholder="fallback if it goes wrong (optional)" style="margin-top:4px; opacity:.8">
         ${g.steps.length > 1 ? `<button class="opt g-remove" data-i="${i}" style="margin-top:4px">remove</button>` : ""}
       </div>`).join("")}
-    <div style="display:flex; gap:8px; margin-bottom:14px;">
+    ${totalEnergy != null ? `<div class="gambit-total ${overBudget ? "over" : ""}">Total plan cost: <strong>${totalEnergy} energy</strong> of ${character.energy ?? 0} available${overBudget ? " — ⚠ this plan costs more energy than you have; expect to fall short partway" : ""}</div>` : ""}
+    ${g.gmAdvice ? `<div class="gambit-advice">✦ GM: ${esc(g.gmAdvice)}</div>` : ""}
+    <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
       ${g.steps.length < max ? `<button class="btn secondary" id="g-add">+ step</button>` : ""}
       <button class="btn secondary" id="g-assess">Assess plan</button>
+      <button class="btn secondary" id="g-advise">✦ GM, look at this</button>
       <button class="btn" id="g-run" ${g.assessed ? "" : "disabled"}>Run it</button>
       <button class="btn secondary" id="g-cancel">Back</button>
     </div>
@@ -2088,7 +2107,7 @@ function renderGambitBuilder(status = "") {
     for (const el of app.querySelectorAll(".g-step")) g.steps[+el.dataset.i].text = el.value;
     for (const el of app.querySelectorAll(".g-fallback")) g.steps[+el.dataset.i].fallback = el.value;
   };
-  for (const el of app.querySelectorAll(".g-step, .g-fallback, #g-goal")) el.oninput = () => { g.assessed = null; };
+  for (const el of app.querySelectorAll(".g-step, .g-fallback, #g-goal")) el.oninput = () => { g.assessed = null; g.actions = null; g.gmAdvice = null; };
   for (const b of app.querySelectorAll(".g-remove")) b.onclick = () => { read(); g.steps.splice(+b.dataset.i, 1); g.assessed = null; renderGambitBuilder(); };
   const add = document.getElementById("g-add");
   if (add) add.onclick = () => { read(); g.steps.push({ text: "", fallback: "" }); g.assessed = null; renderGambitBuilder(); };
@@ -2107,6 +2126,28 @@ function renderGambitBuilder(status = "") {
     } catch (err) {
       renderGambitBuilder("Couldn't read the plan (" + err.message.slice(0, 60) + ") — try again.");
     }
+  };
+  const advise = document.getElementById("g-advise");
+  if (advise) advise.onclick = async () => {
+    read();
+    const texts = g.steps.map(s => s.text.trim()).filter(Boolean);
+    if (!g.goal.trim() || !texts.length) { renderGambitBuilder("Give the plan a goal and a step first, then ask the GM."); return; }
+    renderGambitBuilder("The GM studies your plan…");
+    const location = hereNow();
+    const time = readClock(character.clock);
+    // SNG-043 Part B: GM-collaborative building — one concrete suggestion or warning on the DRAFT
+    const q = `[Gambit builder] Look at this DRAFT plan I'm assembling and give me ONE concrete, specific suggestion or warning about its sequencing or risk — a single sentence of advice (not a narration of any outcome; nothing is attempted yet). Goal: "${g.goal}". Steps so far: ${texts.map((t, i) => `${i + 1}) ${t}`).join("; ")}.`;
+    const result = await gmAsk({
+      character, location, rules: CONTENT.rules,
+      lore: loreForLocation(location, CONTENT.lore),
+      region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
+      recentTurns: sceneTurns.slice(-6), timeLabel: time.label,
+      inventoryDetail: inventoryForGM(character), sceneState,
+      npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
+      abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks)
+    }, q);
+    g.gmAdvice = result.ok ? String(result.text).slice(0, 400) : "The GM couldn't weigh in (" + String(result.error).slice(0, 50) + ") — plan on.";
+    renderGambitBuilder();
   };
   document.getElementById("g-run").onclick = () => { read(); runGambit(); };
 }

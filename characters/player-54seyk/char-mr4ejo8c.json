@@ -6,12 +6,12 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 9,
-  "xp": 817,
+  "xp": 819,
   "attributes": {
     "physical": 3,
     "mental": 5,
     "social": 4,
-    "practical": 4
+    "practical": 5
   },
   "skills": {},
   "abilities": [
@@ -65,13 +65,13 @@
     "space_time": -0.005676249999999997,
     "body_mind": 0.050898125,
     "destruction_creation": 0.13585151875,
-    "spectrumId": -0.5030397469523908
+    "spectrumId": -0.5278877596047713
   },
   "attunement": 9,
   "maxHealth": 65,
   "health": 64,
   "maxEnergy": 140,
-  "energy": 106,
+  "energy": 101,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -158,14 +158,6 @@
       "qty": 1,
       "description": "Warden-store grade, thumbnail-sized, facet-cut but untuned. Slightly asymmetric — the honest mark of tunable rather than fixed-frequency work. Should seat into a staff frame.",
       "consumable": false
-    },
-    {
-      "id": null,
-      "name": "beeswax taper — banked evening light",
-      "kind": "tool",
-      "qty": 1,
-      "description": "One of the two beeswax tapers, now holding a conserved charge of evening light pressed into the wax. Will release warmly for three to four hours of close work. Not bright — enough.",
-      "consumable": true
     },
     {
       "id": null,
@@ -908,69 +900,89 @@
       {
         "summary": "Cellaceron tells Teva plainly they're glad to have been the one who came — she receives it, fully, without defense.",
         "narration": "You reach across and touch her arm — not over the liverwort mat, but above it, just below the elbow, where your fingers can find the warmth of her through the sleeve. It's a small thing. You say it plainly: \"I'm glad I was the one who came for you.\"\n\nTeva goes very still. Not the practiced stillness of someone managing herself — the other kind, the kind that happens when something lands before defenses have a chance to form. The beeswax taper throws its warm light across the side of her face and you can see, without any ability at all, the exact moment the words reach her. She blinks once. Her jaw moves slightly, as if she's going to answer, and then doesn't, and that's its own answer.\n\nThe Waystaff lies across her knees. Her hands are still on your forearm. Above you, on the berm-crest, Aevi's motes have drifted a half-step closer — not alarm, just presence, the way the swarm attends a thing it finds worth attending. It doesn't speak. It doesn't need to.\n\nTeva exhales slowly through her nose. \"Four more seconds,\" she says finally, and there's something almost dry in it — the count ticking quietly through her even now, even here — but underneath the wryness is something real and unguarded: she is glad too. She doesn't say it in so many words. She doesn't withdraw her hands."
+      },
+      {
+        "summary": "The beeswax taper's banked light is pulled out by a four-second pulse from the seam below — the chamber recognized it as a tuned vessel. Teva heard the count resume.",
+        "narration": "You say it softly — 'thank you again' — and Teva nods once, a small decisive thing, and begins arranging her bedroll against the alcove wall. The beeswax taper burns steady on its ledge. Aevi settles into a tighter constellation at the berm-crest, motes drawn together at the shimmer-facing edge, their teal light slow-pulsing in the dark. You close your eyes.\n\nSomething wakes you. Not Aevi's flare — the vigil-warning that arrives a full breath before danger — but something else: a sound threading under the camp's silence, just past the frequency of hearing, felt more in the sternum than the ear. Your eyes open to the taper still burning — you haven't slept long — and then you realize the taper is the problem. It was warm when you banked it. Now it throws cold light, pale and flat, and the glow-character of evening-sunlight has bled out of it wrong, like water from a cracked vessel. The conserved charge is gone. Not burned — *gone*, drawn out in a direction that isn't upward.\n\nAevi is rigid on the berm-crest. Every mote in a tight cluster, teal gone to hard white. Not an alarm-flare — Motes' Vigil didn't fire, because whatever moved through camp didn't arrive from outside. It moved through the ground. You can feel the faint residual of it in the soles of your feet: a four-second pulse, traveling northeast-by-east, ascending from the seam beneath you. The chamber pinged the taper. It recognized the banked daylight as a tuned vessel — and pulled on it the same way it pulled on Teva's mark.\n\nTeva is sitting up across the alcove, very still, her hand pressed flat against the earthen floor. Her face in the now-dimmer light is not frightened. It is the expression of someone who has just heard their name called by a voice they thought they'd imagined. 'It's counting,' she says quietly. 'Four seconds. It started again while you were asleep.'"
       }
     ],
     "lastTurn": {
-      "narration": "You reach across and touch her arm — not over the liverwort mat, but above it, just below the elbow, where your fingers can find the warmth of her through the sleeve. It's a small thing. You say it plainly: \"I'm glad I was the one who came for you.\"\n\nTeva goes very still. Not the practiced stillness of someone managing herself — the other kind, the kind that happens when something lands before defenses have a chance to form. The beeswax taper throws its warm light across the side of her face and you can see, without any ability at all, the exact moment the words reach her. She blinks once. Her jaw moves slightly, as if she's going to answer, and then doesn't, and that's its own answer.\n\nThe Waystaff lies across her knees. Her hands are still on your forearm. Above you, on the berm-crest, Aevi's motes have drifted a half-step closer — not alarm, just presence, the way the swarm attends a thing it finds worth attending. It doesn't speak. It doesn't need to.\n\nTeva exhales slowly through her nose. \"Four more seconds,\" she says finally, and there's something almost dry in it — the count ticking quietly through her even now, even here — but underneath the wryness is something real and unguarded: she is glad too. She doesn't say it in so many words. She doesn't withdraw her hands.",
-      "sceneSummary": "Cellaceron tells Teva plainly they're glad to have been the one who came — she receives it, fully, without defense.",
+      "narration": "You say it softly — 'thank you again' — and Teva nods once, a small decisive thing, and begins arranging her bedroll against the alcove wall. The beeswax taper burns steady on its ledge. Aevi settles into a tighter constellation at the berm-crest, motes drawn together at the shimmer-facing edge, their teal light slow-pulsing in the dark. You close your eyes.\n\nSomething wakes you. Not Aevi's flare — the vigil-warning that arrives a full breath before danger — but something else: a sound threading under the camp's silence, just past the frequency of hearing, felt more in the sternum than the ear. Your eyes open to the taper still burning — you haven't slept long — and then you realize the taper is the problem. It was warm when you banked it. Now it throws cold light, pale and flat, and the glow-character of evening-sunlight has bled out of it wrong, like water from a cracked vessel. The conserved charge is gone. Not burned — *gone*, drawn out in a direction that isn't upward.\n\nAevi is rigid on the berm-crest. Every mote in a tight cluster, teal gone to hard white. Not an alarm-flare — Motes' Vigil didn't fire, because whatever moved through camp didn't arrive from outside. It moved through the ground. You can feel the faint residual of it in the soles of your feet: a four-second pulse, traveling northeast-by-east, ascending from the seam beneath you. The chamber pinged the taper. It recognized the banked daylight as a tuned vessel — and pulled on it the same way it pulled on Teva's mark.\n\nTeva is sitting up across the alcove, very still, her hand pressed flat against the earthen floor. Her face in the now-dimmer light is not frightened. It is the expression of someone who has just heard their name called by a voice they thought they'd imagined. 'It's counting,' she says quietly. 'Four seconds. It started again while you were asleep.'",
+      "sceneSummary": "The beeswax taper's banked light is pulled out by a four-second pulse from the seam below — the chamber recognized it as a tuned vessel. Teva heard the count resume.",
       "choices": [
         {
-          "label": "Ask her about the count — where it pulls, and whether she's ready to follow it tomorrow",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her what you know about the two-author mark — the survey cross, the older diagonal — and ask what she makes of two bearings instead of one",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let the quiet hold a little longer — then suggest you both sleep while the taper lasts and the Zone is still",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Aevi — quietly, without forcing — what it recognized at the shimmer crossing",
+          "label": "Press your hand flat to the floor beside Teva's and listen through Sonic Resonance — trace where the pulse traveled and whether it's still moving",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "concrete_abstract": 0.3,
+            "mechanical_spiritual": 0.4
+          },
           "difficulty": 15,
           "intentTags": [
             "study",
+            "careful",
+            "listen"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take up the Waystaff and hold the grip-end near the floor at the pulse-point — the staff referenced the mark before; see if it answers now",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "mechanical_spiritual": 0.5,
+            "chaos_order": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "probe",
             "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi directly — it went rigid, not alarmed; it recognized something. Now is the moment to press it: what did you see?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "emotional_logical": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Rest is over — the camp is compromised as a safe sleep-point. Pack up and move toward the corridor now, in the dark, with the liverwort taper's remnant light and Aevi at the lead",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "chaos_order": -0.2,
+            "violence_peace": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "risky",
+            "move",
+            "gamble"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -983,26 +995,33 @@
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
+        "inventoryRemove": [
+          "beeswax taper — banked evening light"
+        ],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "The chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from the banked beeswax taper — recognizing it as a tuned vessel. The signal is active, ascending, and now directing itself at tuned objects, not only living tissue."
+        }
+      ],
       "scene": {
-        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry, beeswax taper burning warm on its flat ledge. Liverwort mat pressed flat and held on Cellaceron's forearm; Teva's hands resting still there, not withdrawn.",
+        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper's conserved light has been pulled out wrong — burns dim and cold now, charge gone. Floor gives off a faint residual warmth northeast-by-east.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Hands still on Cellaceron's forearm; exhaled slowly, made a small dry remark about the count — something real and unguarded underneath it. Not withdrawn."
+            "state": "Sitting up, hand pressed flat to the earthen floor, face turned toward Cellaceron — alert, not frightened, listening to the count resume"
           },
           {
             "name": "Aevi",
-            "state": "Motes drifted a half-step closer on the berm-crest — attending without alarm, blue-teal and steady. Silent."
+            "state": "Rigid cluster at berm-crest — every mote contracted to hard white, facing into the Zone, absolutely still"
           }
         ],
         "objects": [
-          "beeswax taper — banked evening light, burning warm on a flat ledge",
+          "beeswax taper — now dim and cold, charge drawn out (no longer holds banked light)",
           "Waystaff — across Teva's lap",
           "Traveler's Pack",
           "Waterskin",
@@ -1011,14 +1030,14 @@
           "relay counterfoil — in pocket",
           "resonance crystals — untuned (four nodes, three charged, one shallow)",
           "bark-press paper (three sheets)",
-          "liverwort mat — forward alcove (pressed flat against Cellaceron's forearm, diminishing)"
+          "liverwort mat — forward alcove (pressed flat on Cellaceron's forearm, diminished)"
         ],
         "threads": [
-          "Teva's four-second count pulls a different direction than the northeast-by-east seam — two bearings, one feature or two?",
-          "Aevi has still not named what it recognized at the shimmer crossing",
-          "Three temporal layers in the diagonal groove — unread; Zone interference blocked the sequence",
-          "Subsurface seam confirmed northeast-by-east, intersecting corridor ~40 paces in",
-          "Teva received the words fully — something between them has shifted, quietly"
+          "The chamber's four-second pulse pulled the banked light from the taper — it recognized a tuned vessel and drew on it",
+          "Teva has her hand to the floor and is tracking the count in real time",
+          "Aevi went rigid — not a Vigil-flare, something it recognized in what passed through the ground",
+          "Two bearings still unresolved: the corridor and the northeast-by-east seam",
+          "Aevi has still not named what it recognized at the shimmer crossing"
         ]
       },
       "npcUpdates": [
@@ -1026,65 +1045,84 @@
           "op": "update",
           "npcId": "teva",
           "name": "Teva",
-          "role": "Missing apprentice, now traveling companion",
-          "note": "Cellaceron said plainly they were glad to have been the one who came. Teva went still — fully received it, without defense. Replied with dry deflection that held something genuine underneath. Did not withdraw her hands.",
+          "note": "Sat up during the pulse, hand to the floor, tracking the four-second count in real time — recognized the chamber's pattern immediately and named it aloud without alarm",
           "learned": [
-            "She is glad someone came — named obliquely, through humor, but named"
+            "The chamber's four-second pulse resumed and she felt it through the floor — she intuited at once that the taper's light was drawn by the same mechanism that marks her tissue"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 1,
+          "skillsObserved": [
+            "real-time frequency tracking through physical contact — floor-press read"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Traveling with Cellaceron under Maren's survey compact; in the Zone, night camp, liverwort dressing on Cellaceron's forearm, Waystaff in her lap; something between her and Cellaceron has quietly shifted."
+          "statusNote": "Awake in the alcove camp, tracking the chamber pulse through the floor; not frightened, fully oriented"
         },
         {
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "role": "Companion intelligence, nanite-mote swarm",
-          "note": "Drifted a half-step closer during the exchange — attending, not alarmed. Still has not named what it recognized at the shimmer crossing.",
-          "learned": [],
-          "skillsObserved": [],
+          "note": "Went to hard white and contracted — did not flare Motes' Vigil because the pulse came from below, not from outside the perimeter. Rigid, facing into the Zone, still silent.",
+          "learned": [
+            "The pulse traveled through the ground, not through air — Motes' Vigil did not fire because it was not an approach from outside"
+          ],
+          "skillsObserved": [
+            "ground-transmission detection — distinguished sub-surface pulse from surface approach"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Berm-crest watch, motes a half-step closer than before — attending the quiet between Cellaceron and Teva; still has not named what it recognized at Zone entry."
+          "statusNote": "Hard-white cluster at berm-crest, rigid and silent — attending whatever passed through the ground beneath camp"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp on day 8 night and pulled the conserved charge from the banked beeswax taper — the chamber recognizes and draws on tuned light-vessels, not only living tissue bearing its mark. The banked taper is discharged.",
+          "subjectId": "the-chamber-beyond-the-threshold"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Beeswax taper's banked evening light pulled out by the chamber's four-second ground-pulse on day 8 night — charge gone, taper now dark. Camp lighting lost. The pulse traveled northeast-by-east through the seam and registered in Teva and in Aevi simultaneously.",
+          "flag": {
+            "taper_charge_lost": "day8_night_chamber_pulse",
+            "camp_lighting": "none"
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "teva-anselvar-missing-apprentice",
-          "label": "Teva Anselvar",
-          "kind": "person",
-          "entityId": "teva",
-          "fact": "Teva received Cellaceron's words — 'I'm glad I was the one who came for you' — without defense; replied obliquely but genuinely. The solitude she named earlier is real, and something between them has shifted.",
+          "topic": "the-chamber-beyond-the-threshold",
+          "label": "The Chamber",
+          "kind": "mystery",
+          "fact": "Day 8 night: the chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from a banked beeswax taper — it recognized the vessel as tuned and drew on it the same way it draws on Teva's tissue mark. The mechanism reaches actively through the ground.",
           "links": [
             "second-river-rising",
-            "the-chamber-beyond-the-threshold",
-            "northern-alcove-camp"
+            "scored-mark-forward-alcove",
+            "northern-alcove-camp",
+            "teva-anselvar-missing-apprentice",
+            "second-step-boundary-marker"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief, quiet exchange — a touch and a few words in the taper-light"
+        "hoursPassed": 1,
+        "why": "Cellaceron slept briefly before the pulse woke them — perhaps an hour at most, not enough to count as rest"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry, beeswax taper burning warm on its flat ledge. Liverwort mat pressed flat and held on Cellaceron's forearm; Teva's hands resting still there, not withdrawn.",
+      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper's conserved light has been pulled out wrong — burns dim and cold now, charge gone. Floor gives off a faint residual warmth northeast-by-east.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Hands still on Cellaceron's forearm; exhaled slowly, made a small dry remark about the count — something real and unguar"
+          "state": "Sitting up, hand pressed flat to the earthen floor, face turned toward Cellaceron — alert, not frightened, listening to "
         },
         {
           "name": "Aevi",
-          "state": "Motes drifted a half-step closer on the berm-crest — attending without alarm, blue-teal and steady. Silent."
+          "state": "Rigid cluster at berm-crest — every mote contracted to hard white, facing into the Zone, absolutely still"
         }
       ],
       "objects": [
-        "beeswax taper — banked evening light, burning warm on a flat ledge",
+        "beeswax taper — now dim and cold, charge drawn out (no longer holds banked light",
         "Waystaff — across Teva's lap",
         "Traveler's Pack",
         "Waterskin",
@@ -1093,21 +1131,21 @@
         "relay counterfoil — in pocket",
         "resonance crystals — untuned (four nodes, three charged, one shallow)",
         "bark-press paper (three sheets)",
-        "liverwort mat — forward alcove (pressed flat against Cellaceron's forearm, dimin"
+        "liverwort mat — forward alcove (pressed flat on Cellaceron's forearm, diminished"
       ],
       "threads": [
-        "Teva's four-second count pulls a different direction than the northeast-by-east seam — two bearings, one feature or two?",
-        "Aevi has still not named what it recognized at the shimmer crossing",
-        "Three temporal layers in the diagonal groove — unread; Zone interference blocked the sequence",
-        "Subsurface seam confirmed northeast-by-east, intersecting corridor ~40 paces in",
-        "Teva received the words fully — something between them has shifted, quietly"
+        "The chamber's four-second pulse pulled the banked light from the taper — it recognized a tuned vessel and drew on it",
+        "Teva has her hand to the floor and is tracking the count in real time",
+        "Aevi went rigid — not a Vigil-flare, something it recognized in what passed through the ground",
+        "Two bearings still unresolved: the corridor and the northeast-by-east seam",
+        "Aevi has still not named what it recognized at the shimmer crossing"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 8,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -1122,14 +1160,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Teva's full four-night account confirms she was structurally reading the chamber's hemispherical geometry before she crossed the threshold — vocabulary ('anchored, not ambient') beyond her formal rank",
         "Teva's use of 'anchored, not ambient' traced to Farren's Second Terrace geometry sessions — she absorbed the vocabulary through an open door and applied it precisely without formal instruction. The ch",
         "Teva confirms the chamber was checking its own work every four seconds even in her sleep — the mark is active, not merely residual. She named it herself: 'checking whether I was still tuned.'",
         "Aevi names the mark's logic: preparation is not passive — the frequency must arrive, or Teva must be moved toward it. The Waystaff rang the same note as the mark, confirming a channel is being assembl",
         "Zone entry complete; alcove camp established sixty paces from corridor entrance; second handprint heat-sign confirmed at corridor wall during scout; Teva tracking the four-second interval by lip-count",
         "Forward alcove scouted: liverwort recovered (thermal band didn't reach here), old scored mark found on north inner face — unread. Party still at camp, corridor approach surveyed.",
         "Scored mark read via Resonant Sight braid: a Harmonic survey cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one). Two-handed authorship, two diff",
-        "Resonant Sight reads a third bearing beneath the forward alcove's diagonal mark — not the corridor path, not the shimmer edge, but a seam running northeast-by-east that would intersect the corridor mi"
+        "Resonant Sight reads a third bearing beneath the forward alcove's diagonal mark — not the corridor path, not the shimmer edge, but a seam running northeast-by-east that would intersect the corridor mi",
+        "The chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from the banked beeswax taper — recognizing it as a tuned vessel. Th"
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1358,7 +1396,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d8] Named the mark's operational logic when asked directly: preparation is not passive; the frequency must arrive or Teva must be moved. Identified the Waystaff's resonance event as a ",
         "[d8] Drifted to the southern shelf edge during the crystal charge — keeping watch toward the interference layer without instruction. Settled at the third register once the charge was co",
         "[d8] Drifted forward to Waystaff midpoint at the shimmer's edge — reading the interference layer without speaking. Third register; attentive.",
         "[d8] Crossed the shimmer without pause; motes shifted to a cooler, brighter register as interference field engaged. Settled at grip-end nodes and stilled — something in the Zone is regi",
@@ -1367,32 +1404,33 @@
         "[d8] Two motes brightened briefly during the Light Well banking — acknowledgment, not alarm. Returned immediately to berm-crest watch.",
         "[d8] Acknowledged solo departure with a single brightened mote, then returned to berm-crest watch without comment.",
         "[d8] Motes warmer than at any point since shimmer crossing — acknowledged the seam report with a single brightened mote. Has not named what it recognized at entry. Held berm-crest watch",
-        "[d8] Drifted a half-step closer during the exchange — attending, not alarmed. Still has not named what it recognized at the shimmer crossing."
+        "[d8] Drifted a half-step closer during the exchange — attending, not alarmed. Still has not named what it recognized at the shimmer crossing.",
+        "[d8] Went to hard white and contracted — did not flare Motes' Vigil because the pulse came from below, not from outside the perimeter. Rigid, facing into the Zone, still silent."
       ],
       "knownFacts": [
-        "The mark in Teva is not merely waiting — it requires a triggering frequency to arrive, or Teva to be moved into range of the source",
         "The Waystaff ringing the same note as the mark was the mark testing whether a channel exists — not coincidence",
         "Three crystals fully charged in the Waystaff; one shallow. Party is provisioned and rested at the Disputed Zone margin.",
         "The interference layer is close enough to register a taste — Aevi is sampling without comment",
         "The Disputed Zone interference layer registers differently to Aevi than the shimmer boundary — something inside is recognizable to it.",
         "The Zone's interference layer registers something Aevi recognizes — it has not named it; self-directed watch at camp perimeter",
         "Subsurface seam confirmed northeast-by-east from the forward alcove mark",
-        "Teva's count-bearing diverges from the seam bearing — two vectors in play"
+        "Teva's count-bearing diverges from the seam bearing — two vectors in play",
+        "The pulse traveled through the ground, not through air — Motes' Vigil did not fire because it was not an approach from outside"
       ],
       "skillsObserved": [
-        "deliberate brevity — spoke at cost, then held still",
         "self-directed perimeter watch — held the Zone-facing edge th",
         "passive interference-layer tasting — moved forward without p",
         "passive interference-layer recognition — stilled on a specif",
         "self-directed perimeter positioning at berm crest",
-        "sustained silent attention — has not spoken since the shimme"
+        "sustained silent attention — has not spoken since the shimme",
+        "ground-transmission detection — distinguished sub-surface pu"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
         "day": 8
       },
-      "statusNote": "Berm-crest watch, motes a half-step closer than before — attending the quiet between Cellaceron and Teva; still has not named what it recognized at Zone entry."
+      "statusNote": "Hard-white cluster at berm-crest, rigid and silent — attending whatever passed through the ground beneath camp"
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -1587,7 +1625,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Lungwort (broad silver-margined leaves) and ground ivy located on descent path in root-shadow at path edge — early-spring growth, sufficient for a start on poultice materials but not a full preparatio",
         "[d8] Party entered the Disputed Zone day 8 afternoon via the standard tree-line shimmer crossing. Aevi stilled on something in the interference layer immediately past the boundary.",
         "[d8] Northern alcove camp established day 8 evening — dry root-mat roof, earthen berm, Waystaff set across entry; sixty paces from corridor entrance; moisture-dark soil anomaly noted in root-growth stand n",
         "[d8] Second handprint heat-sign confirmed at corridor wall during day 8 scout — shoulder height, same as first; relative age unclear.",
@@ -1598,7 +1635,8 @@
         "[d8] Forward stone alcove yielded a thumb-width of liverwort mat (harvested day 8 night) and a scored mark on the north inner face — two crossed lines, one diagonal through them, chest height, old hand. No",
         "[d8] Scored mark in forward alcove read via Resonant Sight: Harmonic survey cross overlaid by older diagonal from different hand and tool — 'two paths cross here, neither is right.' Diagonal is the older i",
         "[d8] Resonant Sight (conserved) reads a subsurface seam beneath the forward alcove's diagonal, running northeast-by-east — intersection with corridor estimated at forty paces in. Diagonal author knew the s",
-        "[d8] Day 8 night: Keen Appraisal on the forward alcove's diagonal groove failed in Zone interference — three temporal layers, unsequenceable. Fragment recovered: small hand, precise short stroke, confidenc"
+        "[d8] Day 8 night: Keen Appraisal on the forward alcove's diagonal groove failed in Zone interference — three temporal layers, unsequenceable. Fragment recovered: small hand, precise short stroke, confidenc",
+        "[d8] Beeswax taper's banked evening light pulled out by the chamber's four-second ground-pulse on day 8 night — charge gone, taper now dark. Camp lighting lost. The pulse traveled northeast-by-east through"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1762,10 +1800,10 @@
     "insight": 6,
     "presence": 4,
     "rapport": 4,
-    "craft": 4,
+    "craft": 5,
     "wits": 4
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 0,
   "discoveries": [
     {
@@ -1879,19 +1917,24 @@
         "kind": "mystery",
         "facts": [
           "[d5] Teva experienced the chamber's communication as structure, not tone — a shape-of-a-question. She believes it was asking whether anyone was still listening. She answered, and waited in synchrony until ",
-          "[d5] What Teva followed was not a discrete pitch or tonal frequency — it was directional, like a compass bearing, getting cleaner as Heights-field interference stripped away. It converges with Brin's ascen"
+          "[d5] What Teva followed was not a discrete pitch or tonal frequency — it was directional, like a compass bearing, getting cleaner as Heights-field interference stripped away. It converges with Brin's ascen",
+          "[d8] Day 8 night: the chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from a banked beeswax taper — it recognized the vessel "
         ],
         "links": [
           "second-step-boundary-marker",
           "the-chamber-beyond-the-threshold",
           "chamber-nanites-structured-waiting",
           "second-river-rising",
-          "teva-missing-apprentice"
+          "teva-missing-apprentice",
+          "scored-mark-forward-alcove",
+          "northern-alcove-camp",
+          "teva-anselvar-missing-apprentice"
         ],
         "createdDay": 5,
-        "updatedDay": 5,
+        "updatedDay": 8,
         "aliases": [
-          "The Sub-Threshold Directional Signal"
+          "The Sub-Threshold Directional Signal",
+          "The Chamber"
         ]
       },
       "disputed-zone-camp": {
@@ -2182,6 +2225,12 @@
       "text": "Keen Appraisal on the forward alcove diagonal cut failed in Zone interference — the groove holds at least three temporal layers that the interference field refuses to sequence cleanly; a fragment (sma",
       "day": 8,
       "subjectId": null
+    },
+    {
+      "id": "the-chamber-beyond-the-threshold",
+      "text": "The chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp on day 8 night and pulled the conserved charge from the banked beeswax taper — the chamber recognize",
+      "day": 8,
+      "subjectId": "the-chamber-beyond-the-threshold"
     }
   ],
   "sharedSceneId": null,
@@ -2189,13 +2238,13 @@
   "customEncounters": {},
   "reconcileVersion": 4,
   "tendencies": {
-    "cerebral": 56.15063187625537,
-    "strategic": 77.39928675858373,
-    "cautious": 66.39544951258138,
-    "social": 46.753575708541696,
-    "generous": 23.31592189787182,
-    "risky": 3.81262713714287,
-    "carousing": 0.5082950737585841
+    "cerebral": 55.86987871687409,
+    "strategic": 78.01229032479081,
+    "cautious": 66.06347226501848,
+    "social": 46.51980782999899,
+    "generous": 23.19934228838246,
+    "risky": 3.7935640014571557,
+    "carousing": 0.5057535983897912
   },
   "aptitudes": [
     "strategist",
@@ -2203,9 +2252,9 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 173,
-  "updatedAt": 1783786202461,
-  "rev": 25,
+  "actionCount": 174,
+  "updatedAt": 1783786397555,
+  "rev": 27,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NPC",
+  "description": "One non-player character. DERIVED from the authored valley/npcs corpus (SNG-BATCH-9 build-step-1) so generate('npc', ctx) can validate its output against the same shape the hand-authored people have. `required` is the load-bearing core every authored single-NPC carries; the fuller set below (wants/knowledge/voiceHints/personality/homeLocation/communityId/reactsToReputation) is what a WELL-FORMED npc should have — the generator is prompted for all of it and generate()'s repair step fills any the model omits from context defaults. The legends registry (npcs/legends.json) is NOT a single NPC and is excluded from this schema.",
+  "type": "object",
+  "required": ["schemaVersion", "id", "name", "role", "spectrum", "fears"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "id": { "type": "string", "description": "stable slug; for generated NPCs minted via the SNG-019 resolver (resolve-before-mint)" },
+    "name": { "type": "string" },
+    "role": { "type": "string", "description": "one-line who-they-are + what-they-do, in-grain for their locale" },
+    "homeLocation": { "type": "string" },
+    "communityId": { "type": ["string", "null"] },
+    "personality": {
+      "type": "object",
+      "description": "affect dials, each roughly -1..1",
+      "properties": {
+        "warmth": { "type": "number" }, "trust": { "type": "number" },
+        "candor": { "type": "number" }, "patience": { "type": "number" }
+      }
+    },
+    "spectrum": {
+      "type": "object",
+      "description": "disposition fingerprint: axisId -> [-1,1]. Known axes: body_mind, mechanical_spiritual, emotional_logical, concrete_abstract, falsehood_truth, dark_light, space_time, chaos_order, individual_collective, death_life, violence_peace, destruction_creation, tradition_innovation, demonic_angelic. Generated in-grain from the locale's poleIntensity.",
+      "additionalProperties": { "type": "number" }
+    },
+    "poleIntensity": {
+      "type": "object",
+      "description": "optional single-ended intensities (pole -> 0..1), derivable from spectrum by SNG-022",
+      "additionalProperties": { "type": "number" }
+    },
+    "voiceHints": { "type": "string", "description": "how they talk + a tell; the taste-carrier for in-character voice" },
+    "knowledge": { "type": "array", "items": { "type": "string" }, "description": "what they know that a player could learn" },
+    "wants": { "type": "string", "description": "the active desire that makes them move; a generated NPC gets one at birth (SNG-021 world-tick advances it)" },
+    "fears": { "type": "string" },
+    "reactsToReputation": {
+      "type": "object",
+      "description": "reputationTag -> how they respond to a character carrying it",
+      "additionalProperties": { "type": "string" }
+    },
+    "universalRole": { "type": "string", "description": "loose worldwide role (mediator/warrior/warden/keeper/maker/seeker/healer/...) whose METHOD comes from locale+disposition (universal_roles.json)" },
+    "roleMethod": { "type": "string", "description": "how this locale's grain bends the universal role" },
+    "age": { "type": "integer" },
+    "pronouns": { "type": "string" },
+    "appearance": { "type": "string" },
+    "disposition": { "type": "string" },
+    "poleSignature": { "type": "object", "description": "SNG-027 social-contest lever profile (movedBy/hardenedBy/immovableBy/patience/tell)" },
+    "note": { "type": "string" },
+    "rating": { "type": "string", "description": "content-rating tag (G/PG/PG-13/R/R+) stamped at generation to the requesting player's ceiling (SNG-BATCH-9 Phase 1 §3); absent on authored core (treated as world-default)" },
+    "isMinor": { "type": "boolean", "description": "true if a child/adolescent. FLOOR: a minor NPC is NEVER eligible for romantic/sexual content at any rating tier for any player (birth-validator, absolute)." }
+  }
+}

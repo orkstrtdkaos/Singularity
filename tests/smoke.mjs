@@ -1,6 +1,6 @@
 // Node smoke test for the pure engine modules (no browser needed).
 // Run: node tests/smoke.mjs
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from "../engine/resolve.js";
@@ -27,6 +27,7 @@ import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from 
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
+import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -1510,6 +1511,52 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const t0 = readClock(clock).absoluteHour ?? null;
   advanceClock(clock, 0.5);
   check("advanceClock accepts a fractional (minutes) tick", readClock(clock) && (t0 === null || true));
+}
+
+// --- SNG-BATCH-9 Phase 1a: derived schemas validate the authored corpus (build-step-1) ---
+{
+  const rj = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
+  const npcSchema = rj("schemas/npc.schema.json");
+  const locSchema = rj("schemas/location.schema.json");
+  const arcSchema = rj("schemas/arc.schema.json");
+
+  // every authored NPC (except the legends registry) validates against the derived npc schema
+  const npcDir = join(root, "content/packs/valley/npcs");
+  let npcOk = 0, npcBad = 0;
+  for (const fn of readdirSync(npcDir).filter(n => n.endsWith(".json") && n !== "legends.json")) {
+    const r = validate(rj("content/packs/valley/npcs/" + fn), npcSchema);
+    if (r.valid) npcOk++; else { npcBad++; }
+  }
+  check("all authored NPCs validate against npc.schema.json", npcBad === 0 && npcOk >= 29);
+
+  // every authored location validates
+  let locOk = 0, locBad = 0;
+  for (const pack of ["core", "valley"]) {
+    let names = [];
+    try { names = readdirSync(join(root, "content/packs/" + pack + "/locations")); } catch { continue; }
+    for (const fn of names.filter(n => n.endsWith(".json"))) {
+      const r = validate(rj("content/packs/" + pack + "/locations/" + fn), locSchema);
+      if (r.valid) locOk++; else locBad++;
+    }
+  }
+  check("all authored locations validate against location.schema.json", locBad === 0 && locOk >= 26);
+
+  // every authored greater-arc validates
+  const arcs = rj("content/packs/valley/lore/greater_arcs.json").arcs;
+  check("all authored arcs validate against arc.schema.json", arcs.every(a => validate(a, arcSchema).valid) && arcs.length >= 5);
+
+  // the validator REJECTS malformed input (not vacuously passing)
+  check("npc validator rejects a record missing required fields", validate({ schemaVersion: 1 }, npcSchema).valid === false);
+  check("spectrum-value type is enforced (must be numeric)", validate({ id: "x", name: "y", role: "z", fears: "f", schemaVersion: 1, spectrum: { chaos_order: "hot" } }, npcSchema).valid === false);
+  check("arc scale enum is enforced", validate({ id: "x", name: "y", scale: "galactic", pressure: "p", tendency: "t", crossesRegions: [], hingeNpcs: [], ifIgnored: "i", ifEngaged: "e" }, arcSchema).valid === false);
+
+  // repair helpers behave
+  check("missingRequired lists exactly the absent required keys", (() => {
+    const m = missingRequired({ schemaVersion: 1, id: "a", name: "b" }, npcSchema);
+    return m.includes("role") && m.includes("spectrum") && m.includes("fears") && !m.includes("id");
+  })());
+  check("defaultFor yields a schema-valid stub per type", defaultFor({ type: "array" }).length === 0 && defaultFor({ type: "string" }) === "" && defaultFor({ type: "integer" }) === 0);
+  check("defaultFor(enum) picks the most-permissive (last) option", defaultFor({ type: "string", enum: ["world", "regional", "local"] }) === "local");
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arc",
+  "description": "One arc / quest-thread. DERIVED from greater_arcs.json arcs[] (SNG-BATCH-9 build-step-1). Arcs are STRUCTURAL, not prose few-shot: a tension between two dispositions or factions + hinge NPCs + a fork (ifIgnored vs ifEngaged). `required` is the shape all 5 authored greater-arcs share. generate('arc', ctx) authors a LOCAL thread from an active tension in the scene — smaller scale, local hinge NPCs — validating against this same shape; the world-tick (SNG-021, Phase 2) advances it offscreen. `scale` gains 'local' for generated threads. connectsTo/convergenceNote/claimedNodes are optional (a fresh local feud may connect to nothing; repair defaults connectsTo to []).",
+  "type": "object",
+  "required": ["id", "name", "scale", "pressure", "tendency", "crossesRegions", "hingeNpcs", "ifIgnored", "ifEngaged"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "description": "present on standalone generated arc records; authored arcs inherit greater_arcs.json's file-level version as array elements" },
+    "id": { "type": "string", "description": "stable slug; generated arcs mint via the SNG-019 resolver" },
+    "name": { "type": "string" },
+    "scale": { "type": "string", "enum": ["world", "regional", "local"], "description": "'local' = a generated quest-thread; 'regional'/'world' = authored greater arcs" },
+    "pressure": { "type": "string", "description": "the burn rate / weight of the arc (e.g. 'slow-building', 'medium', 'the deep clock')" },
+    "tendency": { "type": "string", "description": "the tension: which direction it pulls untended — the two dispositions/factions in conflict" },
+    "crossesRegions": { "type": "array", "items": { "type": "string" }, "description": "where it plays; a local thread may name a single place" },
+    "hingeNpcs": { "type": "array", "items": { "type": "string" }, "description": "the people the arc turns on; generated arcs name local NPCs (authored or generated)" },
+    "ifIgnored": { "type": "string", "description": "what happens if the player never engages — the untended drift" },
+    "ifEngaged": { "type": "string", "description": "what a player who leans in can change — the fork's other branch" },
+    "connectsTo": { "type": "array", "items": { "type": "string" }, "description": "other arc ids this feeds; a generated local face may connect up to a greater arc where apt" },
+    "convergenceNote": { "type": "string" },
+    "claimedNodes": { "type": "array", "items": { "type": "object" } },
+    "stages": { "type": "array", "items": { "type": "string" }, "description": "optional ordered beats the arc moves through as it advances" },
+    "factions": { "type": "array", "items": { "type": "string" } },
+    "rating": { "type": "string", "description": "content-rating tag stamped at generation (SNG-BATCH-9 §3)" }
+  }
+}

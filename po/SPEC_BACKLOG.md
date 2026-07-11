@@ -308,7 +308,7 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 
 ## SNG-042 — Legends & Villains (the world's great figures)
 
-**Content + systems. RIDES ON BATCH-9** (needs the generate path + weight/engagement + codex recurrence). Earliest after BATCH-9 Phase 1; best paired with Phase 2 offscreen advancement (legends move through the world between appearances). Erik-directed 2026-07-11; Aevi PO. **Aevi owes the authored legend/villain anchors before build.** Only Aevi closes.
+**Content + systems. RIDES ON BATCH-9** (needs the generate path + weight/engagement + codex recurrence). Earliest after BATCH-9 Phase 1; best paired with Phase 2 offscreen advancement (legends move through the world between appearances). Erik-directed 2026-07-11; Aevi PO. **ANCHORS AUTHORED ✅** content/packs/valley/lore/legends.json (dff4c4f5): 3 heroes (Kesh/witness, Iselde/advice, Alder/rescue) + 2 villains (Halvex epic-rewriter, Grael regional-threads-Fendt); riffraff generatable. Content gate cleared. Only Aevi closes.
 
 **Idea (Erik).** The world should occasionally deploy powerful named figures in dramatic beats — a hero whose power you witness in a huge battle, a rescue from a doomed situation, a legend passing by who gives advice or a task — and it needs villains across the whole spectrum, epic to riffraff. Threads the world together through recurring great figures.
 
@@ -330,7 +330,7 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 
 **Erik preview test:** "Get into a genuinely doomed fight — verify a hero can intervene and you feel the gap between your power and theirs; later, verify that same hero (or their reputation) recurs — a passing word, a task, an appearance — not a one-off; and verify a villain ladder (riffraff now, something bigger implied)."
 
-*Rides BATCH-9; earliest after Phase 1, best with Phase 2. Aevi authors the legend/villain anchors before build.*
+*Rides BATCH-9; earliest after Phase 1, best with Phase 2. **ANCHORS AUTHORED ✅** content/packs/valley/lore/legends.json (dff4c4f5): 3 heroes (Kesh/witness, Iselde/advice, Alder/rescue) + 2 villains (Halvex epic-rewriter, Grael regional-threads-Fendt); riffraff generatable. Content gate cleared.*
 
 ---
 

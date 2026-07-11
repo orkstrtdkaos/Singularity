@@ -31,6 +31,7 @@ import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
+import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2009,6 +2010,53 @@ await (async () => {
   //   adaptView only dials DOWN — a floor can never be re-crossed
   const av = adaptView(store4.entities["b"], "G");
   check("P3 lens: adaptView neutralizes above-ceiling intensity + tags the view", av._lens.adaptedTo === "G" && !/bloody/.test(av.role));
+})();
+
+// --- SNG-035: imagery pipeline (floors on images + prompt assembly + persist-once + gallery) ---
+(() => {
+  // THE FLOORS on image prompts
+  check("SNG-035 floor: sexual content is stripped from any prompt at any ceiling",
+    !/erotic|nude|seductive/i.test(sanitizeImagePrompt("an erotic nude seductive figure", { ratingLevel: RATING_LEVEL["R+"] })));
+  check("SNG-035 floor: gore descriptors are stripped below an R ceiling (the 'no gore' tone is kept)",
+    (() => { const p = sanitizeImagePrompt("a bloody gory battlefield", { ratingLevel: RATING_LEVEL["PG"] }); return !/\bbloody\b|\bgory\b/i.test(p) && /no gore/.test(p); })());
+  check("SNG-035 floor: R+ can keep dark intensity (gore descriptor survives at the top ceiling)",
+    /\bgory\b/i.test(sanitizeImagePrompt("a gory duel", { ratingLevel: RATING_LEVEL["R+"] })));
+  check("SNG-035 floor: a MINOR subject is forced child-safe (no romance/sexual/gore) at ANY ceiling",
+    (() => { const p = sanitizeImagePrompt("a seductive romantic bloody teenager", { ratingLevel: RATING_LEVEL["R+"], isMinor: true }); return /child|age-appropriate|wholesome/.test(p) && !/seductive|romantic|bloody/i.test(p); })());
+  check("SNG-035 floor: every prompt carries the absolute safety tail", /no text, no watermark/.test(sanitizeImagePrompt("anything", {})));
+
+  // isMinorSubject
+  check("SNG-035: isMinorSubject flags a generated minor (romanceEligible false)", isMinorSubject({ _gen: { romanceEligible: false } }) === true);
+  check("SNG-035: isMinorSubject flags by age + clears an adult", isMinorSubject({ age: 12 }) === true && isMinorSubject({ role: "an old woman" }) === false);
+
+  // prompt assembly
+  const seed = characterPromptSeed({ name: "Aria", origin: "valley-native", inventory: [{ name: "belt knife" }], bio: { motivation: "to find her brother" } });
+  check("SNG-035: characterPromptSeed weaves name + origin + gear + arc", /Aria/.test(seed) && /valley native/.test(seed) && /belt knife/.test(seed));
+  check("SNG-035: assembleImagePrompt(location) uses the descriptionSeed", /old mill/i.test(assembleImagePrompt("location", { name: "Mill", descriptionSeed: "an old mill by the water" })));
+  check("SNG-035: imageURLFor builds a keyless Pollinations URL with the encoded prompt", (() => { const u = imageURLFor("npc", "a brave knight", "knight-1"); return u.startsWith("https://image.pollinations.ai/prompt/") && /brave/.test(u) && /nologo=true/.test(u); })());
+
+  // persist-once (born-with-image) — needs art generation ON
+  localStorage.setItem("singularity.artMode", "generate");
+  const npc = { id: "gate-warden", name: "Gate Warden", role: "keeps the lower gate" };
+  const url1 = ensureImage(npc, "npc", { ratingLevel: 2 });
+  check("SNG-035: ensureImage mints + persists an image on the record (born-with-image)", !!url1 && npc.image === url1);
+  const url2 = ensureImage(npc, "npc", { ratingLevel: 2 });
+  check("SNG-035: ensureImage is persist-ONCE — a second call returns the stored URL unchanged", url2 === url1);
+  const pc = { id: "c9", name: "Hero", origin: "valley-native", inventory: [] };
+  ensureImage(pc, "character", { ratingLevel: 2 });
+  check("SNG-035: a character's image persists on `portrait` (not `image`)", !!pc.portrait && pc.image === undefined);
+  // art OFF → no mint
+  localStorage.setItem("singularity.artMode", "static");
+  const off = { id: "x", name: "Nobody" };
+  check("SNG-035: with art off, ensureImage never mints", ensureImage(off, "npc", {}) === null && off.image === undefined);
+  localStorage.removeItem("singularity.artMode");
+
+  // gallery
+  const c = { id: "g1", name: "Gal" }; ensureGallery(c);
+  addGalleryImage(c, { kind: "portrait", url: "u1", caption: "one" });
+  addGalleryImage(c, { kind: "portrait", url: "u1", caption: "dup" }); // dedup by url
+  addGalleryImage(c, { kind: "moment", url: "u2", caption: "two" });
+  check("SNG-035: gallery dedupes by url + prepends newest-first", c.gallery.length === 2 && c.gallery[0].url === "u2");
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

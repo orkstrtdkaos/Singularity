@@ -13,7 +13,7 @@ import { generate, ensureGenerated, generatedRecords, recordAttention, livingWor
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays } from "./engine/worldtime.js";
-import { locationImage, sceneImage, itemImage, getArtMode, setArtMode, ART_MODES } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.2";
+const APP_VERSION = "1.8.3";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -49,6 +49,7 @@ let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-gro
 let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the current scene
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
+let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
@@ -365,6 +366,33 @@ function ratingLineForGM() {
   return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.`;
 }
 
+// ---------- SNG-035: imagery (portraits + moment art + gallery) ----------
+
+/** The viewing player's content ceiling as a numeric level (the image floor input). */
+function viewerRatingLevel() { return ratingLevel(profile); }
+
+/** Give a character its portrait (born-with-image; persist-once) + drop it in the gallery.
+ *  `force` re-mints on a milestone (a new seed so the image changes). No-op when art is off. */
+function ensureCharacterPortrait(c, { force = false, milestone = null } = {}) {
+  if (!c || !imagesEnabled()) return null;
+  const seedKey = `${c.id}${milestone ? `-lvl${c.level}` : ""}`;
+  const url = ensureImage(c, "character", { ratingLevel: viewerRatingLevel(), isMinor: false, seedKey, force });
+  if (url) addGalleryImage(c, { kind: "portrait", prompt: c.name, url,
+    caption: milestone ? `${c.name} — ${milestone}` : `${c.name} — ${String(c.origin || "").replace(/[-_]/g, " ")}`,
+    worldDay: absoluteWorldDay() });
+  return url;
+}
+
+/** On a level-up that crosses a character tier (every 2 levels), re-mint the portrait — the
+ *  character visibly grows. Returns a short note if a new portrait landed, else null. */
+function refreshPortraitMilestone(c, prevLevel) {
+  if (!imagesEnabled() || c.level <= prevLevel) return null;
+  const tier = lvl => Math.ceil(lvl / 2);
+  if (tier(c.level) === tier(prevLevel)) return null;
+  const url = ensureCharacterPortrait(c, { force: true, milestone: `level ${c.level}` });
+  return url ? "A new portrait captures who you've become." : null;
+}
+
 // ---------- SNG-BATCH-9: generative living world ----------
 
 /** Merge THIS character's grown world into the live CONTENT maps so every existing lookup
@@ -443,6 +471,14 @@ async function handleGenerateRequests(turn) {
     catch { rec = null; }
     if (rec && rec._gen && !before.has(rec.id)) {              // a NEW mint (not a reuse of authored/existing)
       sceneGenCount++;
+      // SNG-035: a generated NPC/location is BORN with its image (persist-once on the record,
+      // rides the generated store). Routed through the floors (minor-protection from _gen). L3 map.
+      if ((type === "npc" || type === "location") && imagesEnabled()) {
+        try {
+          const url = ensureImage(rec, type, { ratingLevel: viewerRatingLevel() });
+          if (url) addGalleryImage(character, { kind: type, prompt: rec.name, url, caption: rec.name, worldDay: absoluteWorldDay() });
+        } catch (err) { console.warn("[art] born-with-image skipped:", err?.message); }
+      }
       if (type === "location") CONTENT.locations[rec.id] = rec;
       else if (type === "npc") CONTENT.npcs[rec.id] = rec;
       notes.push({ type, name: rec.name, id: rec.id });
@@ -810,6 +846,8 @@ function renderCreate() {
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
+    ensureGallery(character);
+    ensureCharacterPortrait(character); // SNG-035: born seeing the character (no-op unless art=generate)
     saveCharacter(character); saveProfile(profile);
     enterPlay();
   }
@@ -857,6 +895,7 @@ async function enterPlay() {
 async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = [], aside = null) {
   gambitHintDismissed = false; // SNG-031: a new scene may be plan-apt again
   sceneGenCount = 0;           // SNG-BATCH-9: fresh generation budget each scene
+  sceneArtCount = 0;           // SNG-035: fresh moment-art budget each scene
   if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
   renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news, aside });
   const result = await runGM({ resolution: null, playerInput: prompt });
@@ -916,6 +955,20 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
         saveCharacter(character);
       }
     } catch (err) { console.warn("[generate] request handling skipped:", err?.message); }
+  }
+  // SNG-035: MOMENT ART — the GM flagged this beat worth a picture. Build it through the floors,
+  // attach to the turn for render, drop it in the gallery. Clamped ~1/scene; art-off = no-op.
+  if (result.turn.imagePrompt && imagesEnabled() && sceneArtCount < 1) {
+    try {
+      const moment = { id: `moment-${character.id}-${Date.now().toString(36)}`, prompt: String(result.turn.imagePrompt).slice(0, 300) };
+      const url = ensureImage(moment, "moment", { ratingLevel: viewerRatingLevel(), isMinor: false, field: "image" });
+      if (url) {
+        result.turn.momentArt = url;
+        sceneArtCount++;
+        addGalleryImage(character, { kind: "moment", prompt: moment.prompt, url, caption: (result.turn.sceneSummary || "").slice(0, 90), worldDay: absoluteWorldDay() });
+        saveCharacter(character);
+      }
+    } catch (err) { console.warn("[art] moment art skipped:", err?.message); }
   }
   return result;
 }
@@ -1034,9 +1087,12 @@ function applyTurn(turn, resolution) {
 *✦ New ability learned: **${def.name}**${def.taughtBy ? ` (from ${def.taughtBy})` : ""} — ${def.description.slice(0, 120)}*`;
   }
   // level up: banked growth the player chooses to spend
+  const prevLevel = character.level;
   for (const msg of applyLevelUps(character, CONTENT.rules)) {
     turn.narration += `\n\n*You feel it settle into you — a new steadiness. (${msg})*`;
   }
+  const portraitNote = refreshPortraitMilestone(character, prevLevel); // SNG-035: milestone portrait
+  if (portraitNote) turn.narration += `\n\n*✦ ${portraitNote}*`;
   // quests: typed ops from the GM, applied within bounds; ctx.entities links giver/location
   // to codex nodes and lets the resolver match drifted titles (SNG-BATCH-7 Phase 3)
   const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
@@ -1543,9 +1599,20 @@ function renderCharacterScreen() {
   const soft = rules.baseChance?.attributeSoftCap ?? 4;
   const b = character.bio || {};
   const xpNeed = character.level * (rules.leveling?.xpPerLevel ?? 100);
+  const galleryCount = (character.gallery || []).length;
   chrome(`<div class="screen" style="max-width:760px">
-    <h2>${esc(character.name)}</h2>
-    <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+    <div class="cs-header">
+      ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" onerror="this.style.display='none'">` : ""}
+      <div class="cs-header-text">
+        <h2 style="margin:0">${esc(character.name)}</h2>
+        <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+        <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap">
+          ${imagesEnabled() && !character.portrait ? `<button class="opt" id="cs-gen-portrait">✦ Generate portrait</button>` : ""}
+          ${imagesEnabled() && character.portrait ? `<button class="opt" id="cs-regen-portrait" title="Re-mint the portrait">↻ New portrait</button>` : ""}
+          <button class="opt" id="cs-gallery">🖼 Gallery${galleryCount ? ` (${galleryCount})` : ""}</button>
+        </div>
+      </div>
+    </div>
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
       ${b.story ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""}</div>` : ""}
@@ -1627,7 +1694,34 @@ function renderCharacterScreen() {
     renderCharacterScreen();
   };
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillGraph();
+  // SNG-035 portrait + gallery controls
+  const genP = document.getElementById("cs-gen-portrait");
+  if (genP) genP.onclick = () => { ensureCharacterPortrait(character); saveCharacter(character); renderCharacterScreen(); };
+  const regenP = document.getElementById("cs-regen-portrait");
+  if (regenP) regenP.onclick = () => { ensureCharacterPortrait(character, { force: true, milestone: `level ${character.level}` }); saveCharacter(character); renderCharacterScreen(); };
+  const galB = document.getElementById("cs-gallery");
+  if (galB) galB.onclick = () => renderGallery();
   document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+/** SNG-035: the Saga gallery — every image this character has accrued (portraits, born-with-image
+ *  people/places, moment art), newest first. */
+function renderGallery() {
+  const gallery = character.gallery || [];
+  chrome(`<div class="screen" style="max-width:860px">
+    <h2>${esc(character.name)} — Gallery</h2>
+    <p class="hint" style="margin-bottom:12px">${imagesEnabled()
+      ? "Portraits, people and places you've grown, and the moments worth a picture. New art is added as you play."
+      : "Image generation is off. Turn on <strong>Settings → Scene &amp; item art → Generate</strong> to start seeing the world."}</p>
+    ${gallery.length ? `<div class="gallery-grid">${gallery.map(g => `
+      <figure class="gallery-item">
+        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <figcaption>${esc(g.caption || g.kind)}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
+      </figure>`).join("")}</div>`
+      : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}
+    <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>
+  </div>`);
+  document.getElementById("gal-back").onclick = () => renderCharacterScreen();
 }
 
 function renderInventoryScreen(openName = null) {
@@ -2153,7 +2247,7 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Items</h3>
       ${(character.inventory || []).map(it => {
         const open = examinedItem === it.name;
-        const img = open ? itemImage(it) : null;
+        const img = open ? itemImage(it, { ratingLevel: viewerRatingLevel() }) : null;
         return `<div class="item ${open ? "open" : ""}">
           <button class="item-name" data-examine="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
           ${open ? `<div class="item-detail">
@@ -2182,7 +2276,7 @@ function renderPlay(turn, opts = {}) {
     </section>
   </div>`;
 
-  const banner = sceneImage(location, sceneState);
+  const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel() });
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
@@ -2221,6 +2315,7 @@ function renderPlay(turn, opts = {}) {
 
   if (turn) {
     main += `<div class="beat">${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+    if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="a moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     for (const c of turn.choices || []) {

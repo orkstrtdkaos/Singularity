@@ -186,6 +186,16 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 /* ---------- play area ---------- */
 .play { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; min-height: 70vh; display: flex; flex-direction: column; }
 .scene-banner { width: calc(100% + 48px); margin: -20px -24px 14px; border-radius: 10px 10px 0 0; max-height: 220px; object-fit: cover; display: block; }
+/* SNG-035 imagery */
+.cs-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 6px; }
+.cs-portrait { width: 120px; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); flex-shrink: 0; }
+.cs-header-text { flex: 1; min-width: 0; }
+.moment-art { margin: 4px 0 12px; }
+.moment-art img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.gallery-item { margin: 0; }
+.gallery-item img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }
+.gallery-item figcaption { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); margin-top: 4px; line-height: 1.3; }
 .location-tag { font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2); margin-bottom: 12px; display: flex; justify-content: space-between; }
 .time-tag { color: var(--ink-dim); letter-spacing: 1px; text-transform: none; }
 .transcript { flex: 1; }

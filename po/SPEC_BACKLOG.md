@@ -374,3 +374,19 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview tests:** (1) "Play several scenes — verify the Plan hint now shows only when a real multi-step plan fits, not on every rich scene." (2) "Open the gambit builder — verify the GM actively helps shape the plan (a suggestion or warning) and each step + the total show energy cost before you commit."
 
 *Refinement of shipped SNG-031. Part A = quick tune (interleavable, one function). Part B = enhancement, queued. NOT on the BATCH-9/dating critical path — blocks nothing.*
+
+---
+
+## SNG-044 — Item relevance + bonus-count cap (stop inventory stacking)
+
+**Erik-found in live play 2026-07-11:** the Traveler's Pack (and items generally) aid too many situations; hoarding broadly-tagged items stacks bonuses. `inventory.js equipmentBonus` (~L169) currently adds **+N PER owned item** whose bonusTags intersect the action's intent tags, capped ONLY on the TOTAL (`equipmentBonusCap=10`) — so the NUMBER of contributors is uncapped and broad-tagged items help nearly everywhere. Aevi PO; only Aevi closes.
+
+**Part A — cap the CONTRIBUTOR COUNT (engine; 🔧 BUILD OWNER: CCode).** Change `equipmentBonus` from sum-over-all-matching to **best-matching-item-only** (or top-2 max, tunable), so you get the BEST tool's bonus, not a pile of mediocre ones. Principle: *the right tool helps; a bag of tools does not help more.* Keep `equipmentBonusCap` as a backstop. Surface WHICH item aided the roll (LLW transparency — the player sees "your climbing rope helped here," not an opaque +N).
+
+**Part B — detail item relevance (content; Aevi authors).** Audit item `bonusTags` so each aids SPECIFIC, appropriate situations, not broad utility. The **Traveler's Pack** especially: it is a container / general-carry, not a universal aid — its bonusTags should be narrow (having-the-right-small-thing in a prep/survival context) or empty, never a broad combat/social/everything bump. This is the "detail out what's useful when" pass — Aevi authors it (like the legend anchors).
+
+**Guardrails.** Engine owns the count-cap + total-cap; content owns relevance. Reuse existing bonusTags/equipmentBonus (don't reinvent). Backward-safe (best-of is a strict narrowing; no schema change). Suites + parse_probe green.
+
+**Erik preview test:** "Carry a loaded inventory into a few different situations — verify only the genuinely relevant (best) item gives a bonus, stacking several matching items doesn't pile up, and the Pack stops helping with things a bag shouldn't."
+
+*Fast-follow balance fix; OFF the BATCH-9/dating critical path. Part A = small CCode engine change; Part B = Aevi content audit.*

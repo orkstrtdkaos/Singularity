@@ -35,7 +35,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.8";
+const APP_VERSION = "1.8.9";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -423,6 +423,14 @@ function groupNpcsByLocation(registry) {
 /** Ability catalog including GM-granted learned abilities on this character. */
 function fullCatalog() {
   return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
+}
+
+// SNG-047: an ability's FUNCTIONS as small labelled chips — what it DOES at a glance.
+const FN_ICON = { heal: "✚", shield: "⛨", strike: "⚔", reveal: "◉", conceal: "◌", bind: "⛓", move: "➤", break: "✷", ward: "⬡" };
+function functionChips(ab) {
+  const fns = ab?.functions || [];
+  if (!fns.length) return "";
+  return `<span class="fn-chips">${fns.map(f => `<span class="fn-chip" title="${esc(f)}">${FN_ICON[f] || "•"} ${esc(f)}</span>`).join("")}</span>`;
 }
 
 /** SNG-031 + SNG-043 Part A: is this turn genuinely a "make a plan" moment? A gambit is a
@@ -2327,18 +2335,30 @@ function renderPlay(turn, opts = {}) {
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>
     <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</h3>
-      ${character.abilities.map(a => {
-        const ab = fullCatalog()[a.abilityId];
-        const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
-        const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
-        const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
-        const canRank = character.skillPoints >= rankCost && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
-        return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
-          <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${ab ? tierOf(ab.levelReq) : "?"}">${ab ? tierOf(ab.levelReq) : "?"}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
-          ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend ${rankCost} skill point${rankCost > 1 ? "s (cross-class)" : ""}">▲${rankCost > 1 ? "×" + rankCost : ""}</button>` : ""}
-          ${practiceRankReady(character, a.abilityId, CONTENT.rules) && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)] ?? 1) ? `<button class="grow-btn practiced" data-rankpractice="${esc(a.abilityId)}" title="Practiced enough — rank up free">▲free</button>` : ""}
-          <span class="cost">(${ab ? effectiveEnergyCost(ab, character, CONTENT.rules) : "?"} energy${ab && effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span></div>`;
-      }).join("") || "<div class='insight'>none yet</div>"}
+      ${(() => {
+        // SNG-047: group owned abilities by type/tradition (same taxonomy as the skill graph),
+        // show each ability's FUNCTIONS as chips (what it DOES at a glance).
+        const owned = character.abilities.map(a => ({ a, ab: fullCatalog()[a.abilityId] })).filter(x => x.ab);
+        if (!owned.length) return "<div class='insight'>none yet</div>";
+        const byClass = {};
+        for (const o of owned) (byClass[o.ab.powerSystem] = byClass[o.ab.powerSystem] || []).push(o);
+        const CLASS_ORDER = ["harmonic", "radiant", "valley_craft", "precursor", "baseline", "learned"];
+        const order = [...CLASS_ORDER.filter(c => byClass[c]), ...Object.keys(byClass).filter(c => !CLASS_ORDER.includes(c)).sort()];
+        const row = ({ a, ab }) => {
+          const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
+          const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
+          const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
+          const canRank = character.skillPoints >= rankCost && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
+          return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
+            <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
+            ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend ${rankCost} skill point${rankCost > 1 ? "s (cross-class)" : ""}">▲${rankCost > 1 ? "×" + rankCost : ""}</button>` : ""}
+            ${practiceRankReady(character, a.abilityId, CONTENT.rules) && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)] ?? 1) ? `<button class="grow-btn practiced" data-rankpractice="${esc(a.abilityId)}" title="Practiced enough — rank up free">▲free</button>` : ""}
+            <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
+            ${functionChips(ab)}</div>`;
+        };
+        return order.map(cls => `<details class="skill-group" open><summary>${esc(classLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+          byClass[cls].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
+      })()}
       ${(() => {
         const canShow = character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules));
         if (!canShow) return "";
@@ -2366,7 +2386,11 @@ function renderPlay(turn, opts = {}) {
           }).join("")}</details>`).join("");
         return capLine + groups;
       })()}
-      ${(character.discoveries || []).length ? `<div class="discoveries">${character.discoveries.map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)}</div>`).join("")}</div>` : ""}
+      ${(character.discoveries || []).length ? `<details class="skill-group discoveries" open><summary>Discoveries &amp; Combinations <span class="cost">(${character.discoveries.length})</span></summary>${character.discoveries.map(d => {
+        // SNG-047: adopt the orphan combo — show the source abilities it braids (recipe parts)
+        const parts = (d.abilityIds || []).map(id => fullCatalog()[id]?.name || id.replace(/-/g, " "));
+        return `<div class="ability discovery-row" title="${esc(d.description || "")}">✦ <span class="name">${esc(d.name)}</span>${parts.length ? ` <span class="combo-parts">= ${parts.map(esc).join(" + ")}</span>` : ""}</div>`;
+      }).join("")}</details>` : ""}
     </section>
     <section><h3>People you know</h3>
       ${(() => {

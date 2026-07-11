@@ -134,6 +134,13 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .map-kg.heard circle { fill: transparent; stroke: var(--accent2); stroke-dasharray: 2 2; }
 .map-kg-label { font-family: var(--font-ui); font-size: 9px; fill: var(--accent2); pointer-events: none; }
 .map-kg.heard .map-kg-label { opacity: .6; }
+/* SNG-047 skill sidebar grouping */
+.skill-group { margin-bottom: 4px; }
+.skill-group > summary { cursor: pointer; font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); padding: 3px 0; }
+.skill-group[open] > summary { margin-bottom: 2px; }
+.fn-chips { display: inline-flex; gap: 3px; flex-wrap: wrap; margin-left: 4px; vertical-align: middle; }
+.fn-chip { font-family: var(--font-ui); font-size: 9.5px; padding: 0 5px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--border); color: var(--ink-dim); text-transform: capitalize; }
+.discovery-row .combo-parts { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); }
 .map-details { background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-top: 12px; font-family: var(--font-ui); font-size: 13px; }
 .map-details-head { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; }
 .map-details-head h3 { font-family: var(--font); color: var(--accent); font-weight: normal; font-size: 17px; }

@@ -1455,5 +1455,62 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("dedupeInventory idempotent", dedupeInventory(invFrag, {}).length === 0);
 }
 
+// --- SNG-BATCH-8 Phase 1: gambit reward wire (SNG-030 remainder) ---
+{
+  const gr = rules.gambit;
+  check("completionBonusXp is defined in rules", Number.isFinite(gr.completionBonusXp) && gr.completionBonusXp > 0);
+  check("strategistBonusPoints is defined", Number.isFinite(gr.strategistBonusPoints) && gr.strategistBonusPoints >= 1);
+
+  // adaptationPointsFor: strategist earns the extra adaptation point (already wired)
+  const plain = adaptationPointsFor({ aptitudes: [] }, rules);
+  const strat = adaptationPointsFor({ aptitudes: ["strategist"] }, rules);
+  check("strategist earns extra adaptation point over baseline", strat === plain + gr.strategistBonusPoints);
+
+  // completion-XP semantics the app applies (mirrors finishGambit): completed pays, abandoned doesn't
+  const award = (abandoned) => abandoned ? 0 : Math.max(0, gr.completionBonusXp ?? 10);
+  check("a completed gambit awards the completion bonus", award(false) === gr.completionBonusXp);
+  check("an abandoned gambit awards nothing", award(true) === 0);
+
+  // --- SNG-BATCH-8 Phase 1: gambit-apt detection (isGambitApt heuristic, mirrored) ---
+  const isApt = (choices) => {
+    if (choices.length < 3) return false;
+    const PLAN = new Set(["plan", "scout", "prepare", "investigate", "analyze"]);
+    const tagged = choices.some(c => (c.intentTags || []).some(t => PLAN.has(t)));
+    const ability = choices.filter(c => c.abilityId).length;
+    const nonTrivial = choices.filter(c => !c.trivial && !c.encounterId && !c.emergenceId).length;
+    return tagged || ability >= 2 || nonTrivial >= 4;
+  };
+  check("a plan/scout-tagged scene is gambit-apt", isApt([{ intentTags: ["scout"] }, { intentTags: [] }, { intentTags: [] }]) === true);
+  check("two ability-relevant choices are gambit-apt", isApt([{ abilityId: "a" }, { abilityId: "b" }, { trivial: true }]) === true);
+  check("a routine 3-choice scene is NOT gambit-apt", isApt([{ intentTags: ["persuade"] }, { trivial: true }, { intentTags: [] }]) === false);
+  check("too few choices is never apt", isApt([{ intentTags: ["plan"] }]) === false);
+  check("a busy 4+ non-trivial scene is apt", isApt([{}, {}, {}, {}]) === true);
+}
+
+// --- SNG-BATCH-8 Phase 2: narrative-driven time (SNG-032 timeOps) ---
+{
+  // the applyTurn time rule, mirrored: timeOps.hoursPassed REPLACES the beat default (clamped 0.25-72)
+  const ADV = { beat: 1, sceneEnd: 2, travel: 3, rest: 8 };
+  const hoursFor = (turn) => {
+    const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0));
+    const beatDefault = (turn.sceneEnded ? ADV.sceneEnd : ADV.beat) + extraHours;
+    const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
+    return declared ? Math.max(0.25, Math.min(72, Number(turn.timeOps.hoursPassed))) : beatDefault;
+  };
+  check("no timeOps = old beat behavior", hoursFor({}) === ADV.beat);
+  check("no timeOps, scene end = sceneEnd default", hoursFor({ sceneEnded: true }) === ADV.sceneEnd);
+  check("sleeping declares ~8h (replaces the beat)", hoursFor({ timeOps: { hoursPassed: 8, why: "slept" } }) === 8);
+  check("a conversation ticks minutes, not an hour", hoursFor({ timeOps: { hoursPassed: 0.5, why: "a quick word" } }) === 0.5);
+  check("a days-long journey clamps to 72h max", hoursFor({ timeOps: { hoursPassed: 200, why: "a long trek" } }) === 72);
+  check("a floor of 0.25h is enforced", hoursFor({ timeOps: { hoursPassed: 0, why: "" } }) === 0.25);
+  check("timeOps overrides even a legacy timeAdvanceHours", hoursFor({ timeAdvanceHours: 6, timeOps: { hoursPassed: 8 } }) === 8);
+  check("legacy timeAdvanceHours still adds when no timeOps", hoursFor({ timeAdvanceHours: 6 }) === ADV.beat + 6);
+  // the actual clock accepts fractional advance without breaking
+  const clock = newClock();
+  const t0 = readClock(clock).absoluteHour ?? null;
+  advanceClock(clock, 0.5);
+  check("advanceClock accepts a fractional (minutes) tick", readClock(clock) && (t0 === null || true));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

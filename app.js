@@ -33,7 +33,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.7.5";
+const APP_VERSION = "1.7.6";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -45,6 +45,7 @@ let busy = false;
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
+let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the current scene
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
@@ -303,6 +304,20 @@ function groupNpcsByLocation(registry) {
 /** Ability catalog including GM-granted learned abilities on this character. */
 function fullCatalog() {
   return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
+}
+
+/** SNG-031: is this turn genuinely a "make a plan" moment? Reads signals the engine
+ *  already emits — plan/scout/prepare-tagged choices, or multiple distinct challenging
+ *  options (two abilities relevant, or 3+ non-trivial choices). Conservative on purpose:
+ *  a chip that fires every turn is as dead as one that never fires. */
+function isGambitApt(turn) {
+  const choices = turn?.choices || [];
+  if (choices.length < 3) return false; // need real options to plan among
+  const PLAN_TAGS = new Set(["plan", "scout", "prepare", "investigate", "analyze"]);
+  const tagged = choices.some(c => (c.intentTags || []).some(t => PLAN_TAGS.has(t)));
+  const abilityChoices = choices.filter(c => c.abilityId).length;
+  const nonTrivial = choices.filter(c => !c.trivial && !c.encounterId && !c.emergenceId).length;
+  return tagged || abilityChoices >= 2 || nonTrivial >= 4;
 }
 
 /** SNG-019: known-entity id→name maps for codex entity resolution — the ids the GM
@@ -670,6 +685,7 @@ async function enterPlay() {
 }
 
 async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = [], aside = null) {
+  gambitHintDismissed = false; // SNG-031: a new scene may be plan-apt again
   if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
   renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news, aside });
   const result = await runGM({ resolution: null, playerInput: prompt });
@@ -830,10 +846,15 @@ function applyTurn(turn, resolution) {
   // to codex nodes and lets the resolver match drifted titles (SNG-BATCH-7 Phase 3)
   const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
   if (questNotes.some(n => /couldn't match/i.test(n))) console.warn("[quests]", questNotes.filter(n => /couldn't match/i.test(n)));
-  // time passes with the story (story mode; real mode advances itself) — plus
-  // any in-scene hours the GM reported (sleep, waits, long work)
+  // SNG-032 narrative-driven time: when the fiction moves time (a night's sleep, a
+  // journey montage, a long vigil — or a quick exchange), the GM declares it via
+  // timeOps.hoursPassed and the engine advances the clock to match, INSTEAD of the fixed
+  // beat default. Narration LEADS the clock, never trails. Fallback = old beat behavior.
   const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0));
-  advanceClock(character.clock, (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours);
+  const beatDefault = (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours;
+  const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
+  const hours = declared ? Math.max(0.25, Math.min(72, Number(turn.timeOps.hoursPassed))) : beatDefault;
+  advanceClock(character.clock, hours);
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // party: publish this beat to the shared scene (fire-and-forget)
@@ -1754,9 +1775,17 @@ async function finishGambit(run) {
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
   updateProfile(character, allTags, CONTENT.rules.playerAptitudes);
-  saveProfile(profile); saveCharacter(character);
   const rough = run.receipts.some(r => r.complication || r.viaFallback || r.rerolled || r.degree === "failure" || r.degree === "crit_failure");
   const outcome = run.abandoned ? "abandoned" : rough ? "completed_rough" : "completed";
+  // SNG-030 remainder: a carried-out plan PAYS — award the completion bonus so planning
+  // out-earns improvising (strategist's adaptation points are already granted at build).
+  let bonusXp = 0;
+  if (!run.abandoned) {
+    bonusXp = Math.max(0, CONTENT.rules.gambit?.completionBonusXp ?? 10);
+    character.xp = (character.xp || 0) + bonusXp;
+    for (const msg of applyLevelUps(character, CONTENT.rules)) { /* level-ups from the bonus land now */ }
+  }
+  saveProfile(profile); saveCharacter(character);
   const resolution = gambitResolutionForGM(g.goal, run.receipts, g.actions, outcome);
   // novel steps inside a gambit carry the same stakes: backlash on crit failure,
   // a mintable technique on crit success
@@ -1770,9 +1799,10 @@ async function finishGambit(run) {
       resolution.action.noveltyHint = a.noveltyHint || "";
     }
   }
-  renderPlay(null, { thinking: "The run unfolds…", playerBeat: { label: `GAMBIT: ${g.goal} (${outcome.replace("_", " ")})` } });
+  const gLabel = `GAMBIT: ${g.goal} (${outcome.replace("_", " ")}${bonusXp ? `, +${bonusXp} xp` : ""})`;
+  renderPlay(null, { thinking: "The run unfolds…", playerBeat: { label: gLabel } });
   const result = await runGM({ resolution, playerInput: null });
-  if (result) renderPlay(result.turn, { playerBeat: { label: `GAMBIT: ${g.goal} (${outcome.replace("_", " ")})` }, degraded: result.degraded });
+  if (result) renderPlay(result.turn, { playerBeat: { label: gLabel }, degraded: result.degraded });
 }
 
 function useItem(name) {
@@ -2021,6 +2051,13 @@ function renderPlay(turn, opts = {}) {
   }
   main += `</div>`;
   if (turn || opts.error || opts.gmAside || opts.aside || (!busy && !opts.thinking)) {
+    // SNG-031: surface the (fully-built) gambit system on genuinely plan-apt turns
+    const apt = !askMode && isGambitApt(turn) && !gambitHintDismissed;
+    if (apt) {
+      main += `<div class="gambit-hint"><span>This looks like a job for a plan.</span>
+        <button class="opt" id="gambit-hint-go">⚙ Plan a Gambit</button>
+        <button class="gambit-hint-x" id="gambit-hint-x" title="Not now">×</button></div>`;
+    }
     main += `<div class="freeform">
       <div class="mode-chips">
         <button id="mode-act" class="mode-chip ${askMode ? "" : "active"}" title="Act in the scene">Act</button>
@@ -2028,7 +2065,7 @@ function renderPlay(turn, opts = {}) {
       </div>
       <input id="freeform-input" placeholder="${askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
-      <button id="gambit-open" class="mode-toggle" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
+      <button id="gambit-open" class="mode-toggle ${apt ? "apt" : ""}" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
   if (isDev()) {
     const flavors = ["beneficial", "benign", "beautiful", "dangerous", "theft", "chase", "fight"];
@@ -2214,6 +2251,10 @@ function renderPlay(turn, opts = {}) {
   }
   const gambitBtn = document.getElementById("gambit-open");
   if (gambitBtn) gambitBtn.onclick = () => renderGambitBuilder();
+  const ghGo = document.getElementById("gambit-hint-go");
+  if (ghGo) ghGo.onclick = () => renderGambitBuilder();
+  const ghX = document.getElementById("gambit-hint-x");
+  if (ghX) ghX.onclick = () => { gambitHintDismissed = true; renderPlay(turn, opts); };
   const retry = document.getElementById("retry");
   if (retry) retry.onclick = () => startScene("(Retry the previous beat — pick up smoothly from where the story last stood.)");
 }

@@ -317,3 +317,11 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .link-btn { background: none; border: none; color: #5aa8a0; cursor: pointer; font-size: 12px; text-decoration: underline; padding: 0 2px; }
 .player-pick { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
 .player-choice { text-align: center; }
+
+/* SNG-031 gambit surfacing — the plan-apt hint chip + prominent Plan button */
+.gambit-hint { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; padding: 7px 10px; border: 1px solid #5aa8a0; border-radius: 20px; background: rgba(90,168,160,0.08); font-size: 13px; color: #cdbfa8; }
+.gambit-hint span { flex: 1; }
+.gambit-hint .opt { width: auto; padding: 4px 12px; font-size: 12px; }
+.gambit-hint-x { background: none; border: none; color: #8b7d6b; font-size: 16px; cursor: pointer; padding: 0 2px; }
+.gambit-hint-x:hover { color: #e6d8c8; }
+.mode-toggle.apt { border-color: #5aa8a0; color: #5aa8a0; box-shadow: 0 0 0 1px #5aa8a0 inset; }

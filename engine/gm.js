@@ -49,12 +49,12 @@ REPLY FORMAT — a single JSON object, no other text:
   "encounterOps": [{"op": "tactic", "tag": "an opponent tacticTag"}, {"op": "complication", "text": "environmental pressure, once per encounter"}],
   "newEncounter": {"type": "duel", "name": "...", "setup": "...", "lethal": false, "opponent": {"name": "...", "health": 4, "threat": 35, "yieldAt": 1, "fleeDifficulty": 15, "tacticTags": ["..."]}},
   "unlockPrecursor": {"abilityId": "a precursor ability id", "via": "how the fiction granted access — remnant, quest reward, teacher"},
-  "timeAdvanceHours": 0,
+  "timeOps": {"hoursPassed": 0, "why": "why time moved this much — 'slept till morning', 'a day on the road', 'a quick word'"},
   "newAbility": {"id": "kebab-id", "name": "...", "description": "what it functionally does AND its limits", "energyCost": 8, "attribute": "physical|mental|social|practical", "axes": {"spectrumId": 0.4}, "notFor": "what it is inappropriate for", "taughtBy": "who or what taught it"},
   "sceneEnded": false
 }
 "newAbility" is RARE: only when the fiction genuinely earns a wholly new capability — explicit training with a master, a quest's reward, a profound unlock. Not for variations of existing abilities (that's a discovery). The engine caps how many a character can hold; omit the field otherwise.
-"timeAdvanceHours": in-scene hours beyond the beat itself (sleep, waits, long work) — 0 for a normal beat, up to 12.
+"timeOps": TIME MOVES WITH THE FICTION — narration LEADS the world clock, never trails it. Emit "timeOps" with hoursPassed whenever the scene's own elapsed time is anything but a normal short beat: a night's sleep (~8h), a journey or montage (many hours to a day+), a long vigil or watch, OR a quick exchange (a brief conversation is 0.25–0.5h, LESS than a beat — not an hour). The world advances to EXACTLY the hours you declare (0.25–72), replacing the default beat tick; if your prose moves the scene to morning, emit the hours that get there so CURRENT TIME and your narration always agree. A normal beat needs no timeOps. For a rest, ALSO grant recovery via characterDeltas (rule 8). ("timeAdvanceHours" is the legacy field — prefer timeOps.)
 "discovery" ONLY when the resolution block explicitly says DISCOVERY-ELIGIBLE (a critical success on a novel or combined ability use). Otherwise omit it entirely.
 The "scene" field is REQUIRED every turn: carry forward everything still true from the current scene state, change only what this beat actually changed.
 Choices: 3 or 4, genuinely different approaches (not flavors of the same one). difficulty: 0 routine, 15 hard, 30 very hard. intentTags describe the PLAYER's approach (plan/scout/attack/persuade/study/gamble/help/steal/risky/careful/...). Include "deeds" ONLY for memorable acts a community would talk about (weight -3..+3); routine actions produce none. Include "ledgerEvents" ONLY for consequences that should persist in the shared world.`;
@@ -192,7 +192,7 @@ export function salvageNarration(raw) {
  *  ops that later clamp-validate will ever apply — salvage never widens trust. */
 export function salvageOps(raw) {
   const out = {};
-  const keys = ["questUpdates", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas"];
+  const keys = ["questUpdates", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps"];
   const text = String(raw || "");
   for (const key of keys) {
     const m = text.indexOf('"' + key + '"');

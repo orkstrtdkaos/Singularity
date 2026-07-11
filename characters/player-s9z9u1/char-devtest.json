@@ -34,7 +34,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.025,
-    "spectrumId": -0.05
+    "spectrumId": -0.0975
   },
   "attunement": 3,
   "maxHealth": 30,
@@ -106,6 +106,14 @@
       "qty": 1,
       "description": "A flat grey stone worked loose from an Edge District light-guide street, threaded with faint mineral veining. Stowed to complete the test errand.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Loose Paving-Stones x2",
+      "kind": "misc",
+      "qty": 1,
+      "description": "Two more flat grey stones from the Edge District light-guide street, mineral-veined, smelling faintly of old bonding compound on their undersides.",
+      "consumable": false
     }
   ],
   "deeds": [],
@@ -118,42 +126,28 @@
       {
         "summary": "Picked up a loose paving-stone and stowed it — completing the test errand.",
         "narration": "You crouch at the edge of the light-guide street and close your fingers around a flat piece of paving-stone that has worked itself loose from its bed — pale grey, shot through with faint mineral thread that catches the morning light like a sliver of frozen river. The weight of it is exactly the weight of a decision made and kept. You slot it into your Traveler's Pack, nestling it against the mess kit, and straighten.\n\nAround you the Edge District is waking. Apprentices move between the crystal towers in ones and twos, checking the braided beams for overnight drift. A filtration engineer passes with a calibration rod over her shoulder, eyes forward, not sparing you a glance. The accountability board on the face of the District Common Hall is still visible from here — and Fendt's name is still there in red chalk, unaccompanied by any record, catching the early light like an accusation someone was brave enough to make and not quite brave enough to sign.\n\nThe stone is stowed. The errand is done. What you do next is the real question."
+      },
+      {
+        "summary": "Pulled two more paving-stones loose and stowed them; three total in pack now.",
+        "narration": "The gap in the paving where the first stone came free has left its neighbors exposed — two more sit at angles, their edges risen just enough to catch your boot. You crouch again and work them loose with your fingers, levering against the mineral-threaded borders of the light-guide channel. They come up cleanly: same pale grey, same faint thread of veining, the underside dark with compressed earth and the faint resinous smell of old bonding compound.\n\nThree stones now rattle softly in your pack against the mess kit. They're heavy enough to notice. Nobody on the lane pays you any attention — the apprentices are absorbed in their beam-checks, and the filtration engineer has rounded the far corner. Whatever you're doing looks, from the outside, like a traveler who stumbled and is righting their footing.\n\nThe accountability board is still in clear view. Fendt's name in red chalk, unaccompanied, waiting. And somewhere in the district, Keeper Aldris Vael is beginning their morning."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the edge of the light-guide street and close your fingers around a flat piece of paving-stone that has worked itself loose from its bed — pale grey, shot through with faint mineral thread that catches the morning light like a sliver of frozen river. The weight of it is exactly the weight of a decision made and kept. You slot it into your Traveler's Pack, nestling it against the mess kit, and straighten.\n\nAround you the Edge District is waking. Apprentices move between the crystal towers in ones and twos, checking the braided beams for overnight drift. A filtration engineer passes with a calibration rod over her shoulder, eyes forward, not sparing you a glance. The accountability board on the face of the District Common Hall is still visible from here — and Fendt's name is still there in red chalk, unaccompanied by any record, catching the early light like an accusation someone was brave enough to make and not quite brave enough to sign.\n\nThe stone is stowed. The errand is done. What you do next is the real question.",
-      "sceneSummary": "Picked up a loose paving-stone and stowed it — completing the test errand.",
+      "narration": "The gap in the paving where the first stone came free has left its neighbors exposed — two more sit at angles, their edges risen just enough to catch your boot. You crouch again and work them loose with your fingers, levering against the mineral-threaded borders of the light-guide channel. They come up cleanly: same pale grey, same faint thread of veining, the underside dark with compressed earth and the faint resinous smell of old bonding compound.\n\nThree stones now rattle softly in your pack against the mess kit. They're heavy enough to notice. Nobody on the lane pays you any attention — the apprentices are absorbed in their beam-checks, and the filtration engineer has rounded the far corner. Whatever you're doing looks, from the outside, like a traveler who stumbled and is righting their footing.\n\nThe accountability board is still in clear view. Fendt's name in red chalk, unaccompanied, waiting. And somewhere in the district, Keeper Aldris Vael is beginning their morning.",
+      "sceneSummary": "Pulled two more paving-stones loose and stowed them; three total in pack now.",
       "choices": [
         {
-          "label": "Go to the accountability board and examine Fendt's entry closely — read the board's other markings for context, timing, anything the chalk itself might tell you.",
+          "label": "Approach the accountability board and read it closely — use Prism Sight to catch any light-trace of who wrote the marking or when",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.7
+            "dark_light": 0.7,
+            "falsehood_truth": 0.8
           },
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the board — read the last hour of light-history around the red chalk marking and see who was near it, and when.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.8,
-            "dark_light": 0.7
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
@@ -162,51 +156,71 @@
           "emergenceId": null
         },
         {
-          "label": "Find Keeper Aldris Vael — approach them directly and ask what they know about the red chalk marking and the missing record.",
+          "label": "Ask one of the apprentices who Fendt is and where they work — casual, as if you're a visitor trying to get your bearings",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.6
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask one of the filtration engineers passing by — casually, as a traveler with innocent curiosity — what the red chalk on the board means.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.4
+            "falsehood_truth": 0.3,
+            "dark_light": 0.5
           },
           "difficulty": 0,
           "intentTags": [
             "persuade",
-            "plan"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Find Keeper Aldris Vael directly — ask at the Common Hall where they start their morning",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.6,
+            "dark_light": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Echo Memory near the accountability board — stand quietly and listen for the tone of whoever placed the marking",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "dark_light": 0.4,
+            "falsehood_truth": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "echo_memory",
+          "energyCost": 11,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
         "inventoryAdd": [
           {
-            "name": "Loose Paving-Stone",
-            "kind": "quest",
-            "description": "A flat grey stone worked loose from an Edge District light-guide street, threaded with faint mineral veining. Stowed to complete the test errand.",
+            "name": "Loose Paving-Stones x2",
+            "kind": "misc",
+            "description": "Two more flat grey stones from the Edge District light-guide street, mineral-veined, smelling faintly of old bonding compound on their undersides.",
             "consumable": false,
             "effects": {}
           }
@@ -214,78 +228,61 @@
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "complete",
-          "questId": "dev-test-quest",
-          "title": "A Test Errand",
-          "summary": "Dev-seeded quest to verify progress→complete.",
-          "giver": "dev",
-          "note": "Stone picked up and stowed — objective fulfilled.",
-          "xpReward": 15
-        }
-      ],
       "scene": {
-        "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Early spring light filters through the crystal towers overhead.",
+        "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Two more paving-stones now pulled from the same gap. Early spring light filters through the crystal towers overhead.",
         "npcsPresent": [
-          {
-            "name": "Filtration engineer (unnamed)",
-            "state": "passing with a calibration rod, heading toward the arrays"
-          },
           {
             "name": "Apprentices (several)",
             "state": "checking braided beams between the towers for overnight drift"
+          },
+          {
+            "name": "Filtration engineer (unnamed)",
+            "state": "has rounded the far corner, out of immediate view"
           }
         ],
         "objects": [
           "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record",
           "Crystal towers catching and braiding morning light",
-          "Light-guide street paving (one stone now missing from its bed)"
+          "Light-guide street paving — gap now notably wider with three stones removed"
         ],
         "threads": [
           "Fendt's red chalk marking sits unanswered on the board",
-          "Keeper Aldris Vael is somewhere in the district"
+          "Keeper Aldris Vael is somewhere in the district, beginning their morning"
         ]
       },
-      "npcUpdates": [],
-      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach.",
+          "note": "Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider.",
           "flag": {
-            "paving_stone_removed": "true"
+            "paving_stones_removed_count": 3
           }
         }
       ],
-      "codexUpdates": [],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief moment to crouch, pick up the stone, stow it, and take stock of the district waking around you."
-      },
-      "characterDeltas_xp_note": "xp from quest complete handled below",
-      "sceneEnded": false
+        "hoursPassed": 0.1,
+        "why": "Brief crouch-and-gather, no meaningful time elapsed"
+      }
     },
     "sceneState": {
-      "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Early spring light filters through the crystal towers overhead.",
+      "setting": "Edge District, Radiant Plateau — morning. Standing on a light-guide street a short walk from the District Common Hall, whose exterior accountability board faces the lane in clear view. Two more paving-stones now pulled from the same gap. Early spring light filters through the crystal towers overhead.",
       "npcsPresent": [
-        {
-          "name": "Filtration engineer (unnamed)",
-          "state": "passing with a calibration rod, heading toward the arrays"
-        },
         {
           "name": "Apprentices (several)",
           "state": "checking braided beams between the towers for overnight drift"
+        },
+        {
+          "name": "Filtration engineer (unnamed)",
+          "state": "has rounded the far corner, out of immediate view"
         }
       ],
       "objects": [
         "District Common Hall accountability board — Fendt's name in red chalk, no accomp",
         "Crystal towers catching and braiding morning light",
-        "Light-guide street paving (one stone now missing from its bed)"
+        "Light-guide street paving — gap now notably wider with three stones removed"
       ],
       "threads": [
         "Fendt's red chalk marking sits unanswered on the board",
-        "Keeper Aldris Vael is somewhere in the district"
+        "Keeper Aldris Vael is somewhere in the district, beginning their morning"
       ]
     }
   },
@@ -315,11 +312,13 @@
       "visits": 1,
       "notes": [
         "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
-        "[d1] One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach."
+        "[d1] One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach.",
+        "[d1] Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider."
       ],
       "flags": {
         "fendt_board_marking": "red_chalk_no_record",
-        "paving_stone_removed": "true"
+        "paving_stone_removed": "true",
+        "paving_stones_removed_count": "3"
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -493,15 +492,15 @@
     }
   },
   "tendencies": {
-    "social": 0.995,
-    "strategic": 1
+    "social": 0.990025,
+    "strategic": 1.995
   },
   "aptitudes": [],
-  "actionCount": 2,
+  "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 4,
-  "updatedAt": 1783807467077,
-  "rev": 18,
+  "updatedAt": 1783807533780,
+  "rev": 19,
   "opLossPending": false,
   "establishedFacts": [
     {

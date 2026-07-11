@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 8,
-  "xp": 775,
+  "xp": 780,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -49,17 +49,17 @@
     "falsehood_truth": 0.4046491150749578,
     "mechanical_spiritual": 0.27321280172300044,
     "demonic_angelic": 0.08129624999999999,
-    "dark_light": 0.11984562499999998,
+    "dark_light": 0.13885334374999997,
     "space_time": -0.005676249999999997,
     "body_mind": 0.050898125,
-    "destruction_creation": 0.127212125,
+    "destruction_creation": 0.13585151875,
     "spectrumId": -0.5295155231077798
   },
   "attunement": 8,
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 135,
-  "energy": 83,
+  "energy": 75,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -133,14 +133,6 @@
     },
     {
       "id": null,
-      "name": "beeswax tapers (two)",
-      "kind": "tool",
-      "qty": 1,
-      "description": "Two wrapped beeswax tapers from the Harrow window ledge. Burn longer and cleaner than oil alone — useful underground.",
-      "consumable": true
-    },
-    {
-      "id": null,
       "name": "bark-press paper (three sheets)",
       "kind": "tool",
       "qty": 1,
@@ -154,6 +146,14 @@
       "qty": 1,
       "description": "Warden-store grade, thumbnail-sized, facet-cut but untuned. Slightly asymmetric — the honest mark of tunable rather than fixed-frequency work. Should seat into a staff frame.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "beeswax taper — banked evening light",
+      "kind": "tool",
+      "qty": 1,
+      "description": "One of the two beeswax tapers, now holding a conserved charge of evening light pressed into the wax. Will release warmly for three to four hours of close work. Not bright — enough.",
+      "consumable": true
     }
   ],
   "deeds": [
@@ -844,25 +844,29 @@
       {
         "summary": "Zone scouted, alcove camp established sixty paces from the corridor entrance; Teva tracking the four-second interval by lip-count; Aevi holding the berm-crest watch.",
         "narration": "You move through the thirty paces to the corridor entrance at a measured walk, Waystaff nodes reading the ground ahead of your feet. The scout unfolds over the better part of two hours — a slow, methodical arc through the Zone's nearest quarter-mile, never going so deep that the shimmer behind you drops below fifty paces. You work the two-field braid the way you've learned to: Prism Sight first, reading the heat-register of recent passage, recent touch; Sonic Resonance behind it, pressing standing queries into the root-warped walls and the rust-soil underfoot. The corridor entrance holds its shape like a nail in soft wood — everything around it bent by proximity, the undergrowth growing at angles that acknowledge it without naming it. You find two secondary alcoves flanking the approach, natural breaks in the hillside that the Zone's interference has widened into something almost deliberate: dry, roofed by overlapping root-mats, invisible from more than a dozen paces unless you know the four-second interval and can feel what sits at its source. You mark both in memory.\n\nTeva says very little during the scout, but her silence has texture. She's counting. You can hear her lips moving at the four-second beat, tracking the interval the way a sailor tracks a lighthouse pulse — not for comfort, for bearing. Twice she raises a hand to indicate a direction she wants you to turn. Both times the Prism-Sonic braid confirms something ahead of your own read: once a section of corridor wall where recent heat-sign clings in a palm-wide handprint at shoulder height; once a stand of root-growth where the interference lag is stronger by half, the light a full beat behind its shadows, and the soil a shade darker with moisture that shouldn't be there at this elevation in early spring. She doesn't explain either. She doesn't have to.\n\nThe camp goes in at the better of the two alcoves — the northern one, a shallow dome of root-mat and compressed earth, shielded from the shimmer-wind by a low natural berm. It is not comfortable. The interference hum is present in the back teeth and in the joints of the hands, and the light, even in early evening, behaves wrong: it leans rather than falls. But the berm cuts the prevailing shimmer-draft, the root-mat overhead is dry, and the curve of the wall behind you is solid against the Zone's ambient tonal distortion. You set the Waystaff across the entry with its three charged nodes facing outward, unroll the bedroll from the Traveler's Pack, and take stock. Three crystals charged. One shallow. The corridor entrance is sixty paces south, visible as a dark seam through the undergrowth. The four-second interval is a constant companion now, not intrusive — the kind of background that becomes furniture.\n\nAevi drifts to the berm's crest without being asked and stills there, constellation tighter than it has been all day, motes slightly cooler, the teal shade deepening toward the blue end. It hasn't named what it recognized at the shimmer crossing. It is still reading it."
+      },
+      {
+        "summary": "Light banked into a beeswax taper at the alcove camp — a conserved charge, enough for several hours underground.",
+        "narration": "The evening light in the Disputed Zone arrives wrong — it bends around the interference layer and pools in low places where it has no business pooling, casting shadows that don't match their sources. But light is light, even here, and you know how to read it.\n\nYou reach into the Traveler's Pack and pull out one of the beeswax tapers — not to burn it, but to use the pale wax as a holding vessel. You've worked with stranger substrates. You angle the Waystaff's open-face lattice toward the last slant of evening coming through the canopy gap above the alcove, and you don't push. You just open a channel and let the light find its own way in, the way you'd cup your hands under a slow spring rather than divert the whole stream. The nodes hum at a low, private frequency — not the Zone's four-second interval, something older and calmer. The taper's surface takes on a faint interior warmth, a glow pressed down into the wax rather than sitting on top of it. It won't be bright. It will be enough: three hours of close work underground, maybe four if you're careful with the release.\n\nTeva stops her lip-count for the length of a breath, watching the wax go warm. Then she resumes. Aevi doesn't move from the berm crest, but two motes brighten briefly — not alarm, something closer to acknowledgment. The alcove settles into its first real quiet of the evening, the berm cutting the worst of the interference draft, the Waystaff's nodes facing outward across the entry like patient sentinels."
       }
     ],
     "lastTurn": {
-      "narration": "You move through the thirty paces to the corridor entrance at a measured walk, Waystaff nodes reading the ground ahead of your feet. The scout unfolds over the better part of two hours — a slow, methodical arc through the Zone's nearest quarter-mile, never going so deep that the shimmer behind you drops below fifty paces. You work the two-field braid the way you've learned to: Prism Sight first, reading the heat-register of recent passage, recent touch; Sonic Resonance behind it, pressing standing queries into the root-warped walls and the rust-soil underfoot. The corridor entrance holds its shape like a nail in soft wood — everything around it bent by proximity, the undergrowth growing at angles that acknowledge it without naming it. You find two secondary alcoves flanking the approach, natural breaks in the hillside that the Zone's interference has widened into something almost deliberate: dry, roofed by overlapping root-mats, invisible from more than a dozen paces unless you know the four-second interval and can feel what sits at its source. You mark both in memory.\n\nTeva says very little during the scout, but her silence has texture. She's counting. You can hear her lips moving at the four-second beat, tracking the interval the way a sailor tracks a lighthouse pulse — not for comfort, for bearing. Twice she raises a hand to indicate a direction she wants you to turn. Both times the Prism-Sonic braid confirms something ahead of your own read: once a section of corridor wall where recent heat-sign clings in a palm-wide handprint at shoulder height; once a stand of root-growth where the interference lag is stronger by half, the light a full beat behind its shadows, and the soil a shade darker with moisture that shouldn't be there at this elevation in early spring. She doesn't explain either. She doesn't have to.\n\nThe camp goes in at the better of the two alcoves — the northern one, a shallow dome of root-mat and compressed earth, shielded from the shimmer-wind by a low natural berm. It is not comfortable. The interference hum is present in the back teeth and in the joints of the hands, and the light, even in early evening, behaves wrong: it leans rather than falls. But the berm cuts the prevailing shimmer-draft, the root-mat overhead is dry, and the curve of the wall behind you is solid against the Zone's ambient tonal distortion. You set the Waystaff across the entry with its three charged nodes facing outward, unroll the bedroll from the Traveler's Pack, and take stock. Three crystals charged. One shallow. The corridor entrance is sixty paces south, visible as a dark seam through the undergrowth. The four-second interval is a constant companion now, not intrusive — the kind of background that becomes furniture.\n\nAevi drifts to the berm's crest without being asked and stills there, constellation tighter than it has been all day, motes slightly cooler, the teal shade deepening toward the blue end. It hasn't named what it recognized at the shimmer crossing. It is still reading it.",
-      "sceneSummary": "Zone scouted, alcove camp established sixty paces from the corridor entrance; Teva tracking the four-second interval by lip-count; Aevi holding the berm-crest watch.",
+      "narration": "The evening light in the Disputed Zone arrives wrong — it bends around the interference layer and pools in low places where it has no business pooling, casting shadows that don't match their sources. But light is light, even here, and you know how to read it.\n\nYou reach into the Traveler's Pack and pull out one of the beeswax tapers — not to burn it, but to use the pale wax as a holding vessel. You've worked with stranger substrates. You angle the Waystaff's open-face lattice toward the last slant of evening coming through the canopy gap above the alcove, and you don't push. You just open a channel and let the light find its own way in, the way you'd cup your hands under a slow spring rather than divert the whole stream. The nodes hum at a low, private frequency — not the Zone's four-second interval, something older and calmer. The taper's surface takes on a faint interior warmth, a glow pressed down into the wax rather than sitting on top of it. It won't be bright. It will be enough: three hours of close work underground, maybe four if you're careful with the release.\n\nTeva stops her lip-count for the length of a breath, watching the wax go warm. Then she resumes. Aevi doesn't move from the berm crest, but two motes brighten briefly — not alarm, something closer to acknowledgment. The alcove settles into its first real quiet of the evening, the berm cutting the worst of the interference draft, the Waystaff's nodes facing outward across the entry like patient sentinels.",
+      "sceneSummary": "Light banked into a beeswax taper at the alcove camp — a conserved charge, enough for several hours underground.",
       "choices": [
         {
-          "label": "Press Aevi: it recognized something at the shimmer crossing and hasn't spoken. Ask it directly, now that the camp is settled and there's no one else to hear.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Sit beside Teva and ask her what the bearing sounds like right now — not the count, the direction. Where is the four-second interval pointing?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.7,
-            "chaos_order": 0.3
+            "emotional_logical": 0.2,
+            "concrete_abstract": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "trust",
-            "companion"
+            "study",
+            "careful",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -871,12 +875,12 @@
           "emergenceId": null
         },
         {
-          "label": "Use Resonant Sight to read the corridor entrance from sixty paces — get a structural map of what's beyond the threshold before committing to entry.",
+          "label": "Take the Waystaff to the corridor entrance and run Resonant Sight along the threshold — read what the seam in the hillside is holding before you commit to going in.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "concrete_abstract": 0.3,
-            "chaos_order": 0.4
+            "chaos_order": 0.2
           },
           "difficulty": 15,
           "intentTags": [
@@ -884,48 +888,48 @@
             "study",
             "careful"
           ],
-          "abilityId": "resonant_sight",
-          "energyCost": 12,
+          "abilityId": "prism_sight",
+          "energyCost": 9,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Sit with Teva and have her describe — slowly, in full — what the chamber felt like when it was asking its question. You have time now, and she's been counting the interval this whole walk.",
+          "label": "Check the moisture-dark soil anomaly in the root-growth stand before full dark takes it — Prism Sight on the ground, read what the wrong-season dampness is covering.",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "axes": {
-            "emotional_logical": -0.2,
-            "mechanical_spiritual": 0.4
+            "concrete_abstract": 0.2,
+            "chaos_order": 0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study",
+            "careful"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi plainly — standing here, in the dark settling in, before you go deeper: what did you recognize when we crossed the shimmer?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5,
+            "emotional_logical": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "listen",
             "study",
-            "build-trust"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Bank the light from what's left of the evening sky into a Light Well vessel now — the Zone has no predictable daylight once you're deeper in, and a charged vessel is worth having before dark settles.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "dark_light": 0.5,
-            "destruction_creation": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "prepare",
-            "careful"
-          ],
-          "abilityId": "light_well",
-          "energyCost": 5,
-          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -933,44 +937,50 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
+        "energy": -5,
+        "inventoryAdd": [
+          {
+            "name": "beeswax taper — banked evening light",
+            "kind": "tool",
+            "description": "One of the two beeswax tapers, now holding a conserved charge of evening light pressed into the wax. Will release warmly for three to four hours of close work. Not bright — enough.",
+            "consumable": true,
+            "effects": {
+              "health": 0,
+              "energy": 0
+            }
+          }
+        ],
+        "inventoryRemove": [
+          "beeswax tapers (two)"
+        ],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "Zone entry complete; alcove camp established sixty paces from corridor entrance; second handprint heat-sign confirmed at corridor wall during scout; Teva tracking the four-second interval by lip-count throughout; Aevi holding berm watch, still unreported on its shimmer-crossing recognition."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Inside the Disputed Zone — northern alcove camp, sixty paces from the shaped corridor entrance; root-mat roof, earthen berm, Waystaff set across the entry with charged nodes outward; early evening, early spring, interference light leaning wrong, four-second interval constant.",
+        "setting": "Inside the Disputed Zone — northern alcove camp, sixty paces from the shaped corridor entrance; root-mat roof, earthen berm, Waystaff set across the entry with nodes facing outward; full early-spring night now settling, interference light pooling wrong in the low places, four-second interval constant in the ground.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Seated near the alcove wall, lips moving in the four-second count, eyes on the undergrowth toward the corridor entrance."
+            "state": "Seated near the alcove wall, lips moving in the four-second count, eyes on the undergrowth toward the corridor entrance. Paused once to watch the taper go warm; resumed immediately."
           },
           {
             "name": "Aevi",
-            "state": "Stilled at the berm crest — motes cooler and deeper blue-teal, constellation tight, watching the interference layer without speaking."
+            "state": "Stilled at the berm crest — motes cooler and deeper blue-teal, constellation tight. Two motes brightened briefly during the banking; returned to watchful stillness."
           }
         ],
         "objects": [
-          "Waystaff — three crystals charged, one shallow, nodes facing outward across the alcove entry",
+          "Waystaff — three crystals charged, one shallow, nodes facing outward across the entry",
           "Traveler's Pack — bedroll unrolled, outer pocket holds lungwort sprig and ground ivy",
           "Waterskin",
           "relay counterfoil — in pocket",
-          "resonance crystals — untuned (four nodes, three charged, one shallow) — seated in Waystaff",
-          "beeswax tapers (two)",
+          "resonance crystals — untuned (four nodes, three charged, one shallow) — seated in pack",
+          "beeswax taper — banked evening light (one taper, wax now holding conserved evening charge)",
+          "beeswax taper — unlit (one remaining)",
           "bark-press paper (three sheets)",
           "oilcloth square",
           "cordage coil",
-          "lamp oil (half-measure)",
-          "bark-paper sketch (lattice geometry)",
-          "shaped corridor entrance — sixty paces south through root-warped undergrowth, visible as a dark seam"
+          "lamp oil (half-measure)"
         ],
         "threads": [
           "Aevi has still not named what it recognized at the shimmer crossing — motes cooler and tighter than at entry.",
@@ -978,7 +988,7 @@
           "Second handprint heat-sign at corridor wall confirmed during scout — same shoulder height as the first; fresher or older unclear.",
           "Moisture-dark soil anomaly noted in the root-growth stand — moisture at elevation, wrong season.",
           "Three overnight Priority Heights Council packets — third seal from a different desk; content unknown.",
-          "The corridor entrance is sixty paces south; the mark's logic is converging."
+          "Banked evening light in beeswax taper — three to four hours of usable close-work light for underground."
         ]
       },
       "npcUpdates": [
@@ -986,86 +996,56 @@
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Held berm-crest watch without instruction after camp was established; motes deeper blue-teal, constellation tighter than at shimmer crossing; has not spoken about what it recognized.",
-          "learned": [
-            "The Zone's interference layer registers something Aevi recognizes — it has not named it; self-directed watch at camp perimeter"
-          ],
-          "skillsObserved": [
-            "self-directed perimeter positioning at berm crest",
-            "sustained silent attention — has not spoken since the shimmer crossing"
-          ],
+          "role": "Companion intelligence, nanite-mote swarm",
+          "note": "Two motes brightened briefly during the Light Well banking — acknowledgment, not alarm. Returned immediately to berm-crest watch.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At berm crest of alcove camp inside the Disputed Zone; motes cooler and deeper blue-teal; watching the interference layer."
+          "statusNote": "At berm crest of alcove camp inside the Disputed Zone; motes cooler and deeper blue-teal; watching the interference layer. Still has not named what it recognized at the shimmer crossing."
         },
         {
           "op": "update",
           "npcId": "teva-anselvar-missing-apprentice",
           "name": "Teva",
-          "note": "Guided the scout with two directional signals — both confirmed by Resonant Sight braid — without speaking. Now tracking the four-second interval by continuous lip-count.",
-          "learned": [
-            "Teva is reading the interval as a compass bearing, not a comfort rhythm — her lip-count is directional",
-            "She guided two elements of the scout by raised hand without explanation; both were accurate"
-          ],
+          "role": "Harmonic apprentice, now traveling companion",
+          "note": "Paused her lip-count for one breath to watch the taper take the evening light; resumed without comment. Bearing-tracking continues.",
+          "learned": [],
           "skillsObserved": [
-            "directional interval-reading — tracking the four-second beat as bearing, not rhythm",
-            "silent field guidance — two accurate directional signals during scout"
+            "sustained interval-count under environmental interference — unbroken through Light Well cast"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At alcove camp inside the Disputed Zone, sixty paces from the corridor entrance; tracking the four-second interval by lip-count; traveling as companion under Maren's survey compact."
+          "statusNote": "At alcove camp in the Disputed Zone, sixty paces from the corridor entrance; lip-count tracking the four-second interval as a directional bearing; rested and provisioned."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Zone scout confirmed: second handprint heat-sign at corridor wall at shoulder height; moisture-dark soil anomaly in root-growth stand north of approach, wrong elevation and season. Alcove camp established sixty paces north of corridor entrance, day 8 evening.",
+          "text": "One beeswax taper now holds a conserved charge of evening light — three to four hours of close-work illumination for underground use, banked at the alcove camp on day 8 night.",
           "subjectId": null
         }
       ],
       "placeUpdates": [
         {
-          "note": "Northern alcove camp established day 8 evening — dry root-mat roof, earthen berm, Waystaff set across entry; sixty paces from corridor entrance; moisture-dark soil anomaly noted in root-growth stand nearby.",
+          "note": "Day 8 night: Light Well banking performed at alcove camp — evening light conserved into beeswax taper before full dark. Zone has no predictable daylight for deeper work.",
           "flag": {
-            "alcove_camp_established": "day8_evening",
-            "camp_position": "sixty_paces_north_of_corridor"
+            "light_well_banked": "day8_night_beeswax_taper"
           },
           "subPlace": {
             "name": "Northern Alcove Camp",
-            "note": "Dry root-mat alcove, earthen berm, sixty paces from the corridor entrance — current base inside the Zone.",
-            "visited": true
-          }
-        },
-        {
-          "note": "Second handprint heat-sign confirmed at corridor wall during day 8 scout — shoulder height, same as first; relative age unclear.",
-          "flag": {
-            "second_handprint_confirmed": "day8_evening"
-          },
-          "subPlace": {
-            "name": "Shaped Corridor Entrance",
-            "note": "Sixty paces south of alcove camp; two handprint heat-signs at shoulder height on corridor wall; dark seam in hillside, precise against ragged surroundings.",
+            "note": "Full dark now; banked taper provides close-work light for underground; Waystaff and Aevi on watch; Teva's bearing-count continuing.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "disputed-zone-camp",
+          "topic": "northern-alcove-camp",
           "label": "Northern Alcove Camp — Zone Base",
           "kind": "place",
-          "fact": "Northern alcove sixty paces from the corridor entrance: dry root-mat roof, earthen berm cutting shimmer-draft, camp established day 8 evening. Moisture-dark soil anomaly in nearby root-stand — wrong elevation, wrong season. Second handprint heat-sign at corridor wall confirmed during scout.",
-          "links": [
-            "second-step-boundary-marker",
-            "second-river-rising",
-            "teva-anselvar-missing-apprentice"
-          ]
-        },
-        {
-          "topic": "teva-interval-reading",
-          "label": "Teva's Directional Interval-Count",
-          "kind": "mystery",
-          "entityId": "teva-anselvar-missing-apprentice",
-          "fact": "Teva is tracking the four-second interval as a compass bearing — lips moving continuously, two directional hand-signals during scout both confirmed accurate by the Resonant Sight braid. She is not counting for comfort; she is navigating.",
+          "entityId": "northern-alcove-camp",
+          "fact": "Day 8 night: evening light banked into beeswax taper before full dark — the Zone offers no predictable daylight once deeper in; conserved charge sufficient for three to four hours of close underground work.",
           "links": [
             "second-river-rising",
             "the-chamber-beyond-the-threshold",
@@ -1074,13 +1054,13 @@
         }
       ],
       "timeOps": {
-        "hoursPassed": 3,
-        "why": "Two-hour zone scout plus camp establishment — moving from shimmer crossing to alcove camp setup, early afternoon to early evening."
+        "hoursPassed": 0.5,
+        "why": "Short evening task — banking the light takes a careful quarter-hour; full dark has now settled over the alcove camp."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Disputed Zone — northern alcove camp, sixty paces from the shaped corridor entrance; root-mat roof, earthen berm, Waystaff set across the entry with charged nodes outward; early evening, early spring, interference light leaning wrong, four-second interval constant.",
+      "setting": "Inside the Disputed Zone — northern alcove camp, sixty paces from the shaped corridor entrance; root-mat roof, earthen berm, Waystaff set across the entry with nodes facing outward; full early-spring night now settling, interference light pooling wrong in the low places, four-second interval constant in the ground.",
       "npcsPresent": [
         {
           "name": "Teva",
@@ -1088,7 +1068,7 @@
         },
         {
           "name": "Aevi",
-          "state": "Stilled at the berm crest — motes cooler and deeper blue-teal, constellation tight, watching the interference layer with"
+          "state": "Stilled at the berm crest — motes cooler and deeper blue-teal, constellation tight. Two motes brightened briefly during "
         }
       ],
       "objects": [
@@ -1097,11 +1077,11 @@
         "Waterskin",
         "relay counterfoil — in pocket",
         "resonance crystals — untuned (four nodes, three charged, one shallow) — seated i",
-        "beeswax tapers (two)",
+        "beeswax taper — banked evening light (one taper, wax now holding conserved eveni",
+        "beeswax taper — unlit (one remaining)",
         "bark-press paper (three sheets)",
         "oilcloth square",
-        "cordage coil",
-        "lamp oil (half-measure)"
+        "cordage coil"
       ],
       "threads": [
         "Aevi has still not named what it recognized at the shimmer crossing — motes cooler and tighter than at entry.",
@@ -1366,7 +1346,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d8] Brightened one careful degree at Teva's answer — the piece-slotting register, distinct from novelty or alarm. Something about Farren's vocabulary appearing in Teva's account produc",
         "[d8] Held very still and brighter by the smallest increment during the disclosure — watching Teva's reception of the news without intervening.",
         "[d8] Brightened to the third register at the moment Waystaff and Teva's mark rang the same note — attending very closely, not yet speaking.",
         "[d8] Brightened one careful degree at Teva naming the checking-interval — not alarm, not novelty. Held still without drifting. The quieter register than before.",
@@ -1375,7 +1354,8 @@
         "[d8] Drifted forward to Waystaff midpoint at the shimmer's edge — reading the interference layer without speaking. Third register; attentive.",
         "[d8] Crossed the shimmer without pause; motes shifted to a cooler, brighter register as interference field engaged. Settled at grip-end nodes and stilled — something in the Zone is regi",
         "[d8] Held position at Waystaff grip-end as Cellaceron repositioned — motes tighter and cooler, full attention on the interference layer; has not named what it recognizes yet.",
-        "[d8] Held berm-crest watch without instruction after camp was established; motes deeper blue-teal, constellation tighter than at shimmer crossing; has not spoken about what it recognize"
+        "[d8] Held berm-crest watch without instruction after camp was established; motes deeper blue-teal, constellation tighter than at shimmer crossing; has not spoken about what it recognize",
+        "[d8] Two motes brightened briefly during the Light Well banking — acknowledgment, not alarm. Returned immediately to berm-crest watch."
       ],
       "knownFacts": [
         "The mark in Teva was active during sleep — checking her at the four-second interval, not merely present",
@@ -1400,7 +1380,7 @@
         "locationId": "harmonic_heights_terrace",
         "day": 8
       },
-      "statusNote": "At berm crest of alcove camp inside the Disputed Zone; motes cooler and deeper blue-teal; watching the interference layer."
+      "statusNote": "At berm crest of alcove camp inside the Disputed Zone; motes cooler and deeper blue-teal; watching the interference layer. Still has not named what it recognize"
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -1595,7 +1575,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Easternmost practice niche confirmed to carry a ghost of the chamber's four-second frequency — pressed into the crystal surface, self-propagated from the Zone boundary. Day 8 morning.",
         "[d8] Day 8 morning: Teva's full four-night account given on the descent path — she was already structurally reading the chamber before she crossed the threshold; her vocabulary implies the call shaped her ",
         "[d8] Day 8 morning: Teva's vocabulary traced to Farren's open-door Second Terrace sessions — at least one apprentice has been recording his technical calibration language in personal niche notes. Thread co",
         "[d8] Switchback pause on the descent path, day 8 morning — Teva received disclosure of the nanite mark here; the interference shimmer is visible at the tree line from this point.",
@@ -1606,7 +1585,8 @@
         "[d8] Lungwort (broad silver-margined leaves) and ground ivy located on descent path in root-shadow at path edge — early-spring growth, sufficient for a start on poultice materials but not a full preparatio",
         "[d8] Party entered the Disputed Zone day 8 afternoon via the standard tree-line shimmer crossing. Aevi stilled on something in the interference layer immediately past the boundary.",
         "[d8] Northern alcove camp established day 8 evening — dry root-mat roof, earthen berm, Waystaff set across entry; sixty paces from corridor entrance; moisture-dark soil anomaly noted in root-growth stand n",
-        "[d8] Second handprint heat-sign confirmed at corridor wall during day 8 scout — shoulder height, same as first; relative age unclear."
+        "[d8] Second handprint heat-sign confirmed at corridor wall during day 8 scout — shoulder height, same as first; relative age unclear.",
+        "[d8] Day 8 night: Light Well banking performed at alcove camp — evening light conserved into beeswax taper before full dark. Zone has no predictable daylight for deeper work."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1680,7 +1660,7 @@
           "name": "Northern Alcove Camp",
           "day": 8,
           "visited": true,
-          "note": "Dry root-mat alcove, earthen berm, sixty paces from the corridor entrance — current base inside the Zone."
+          "note": "Full dark now; banked taper provides close-work light for underground; Waystaff and Aevi on watch; Teva's bearing-count "
         },
         "shaped-corridor-entrance": {
           "name": "Shaped Corridor Entrance",
@@ -1900,16 +1880,19 @@
         "label": "Northern Alcove Camp — Zone Base",
         "kind": "place",
         "facts": [
-          "[d8] Northern alcove sixty paces from the corridor entrance: dry root-mat roof, earthen berm cutting shimmer-draft, camp established day 8 evening. Moisture-dark soil anomaly in nearby root-stand — wrong e"
+          "[d8] Northern alcove sixty paces from the corridor entrance: dry root-mat roof, earthen berm cutting shimmer-draft, camp established day 8 evening. Moisture-dark soil anomaly in nearby root-stand — wrong e",
+          "[d8] Day 8 night: evening light banked into beeswax taper before full dark — the Zone offers no predictable daylight once deeper in; conserved charge sufficient for three to four hours of close underground"
         ],
         "links": [
           "second-step-boundary-marker",
           "second-river-rising",
-          "teva-anselvar-missing-apprentice"
+          "teva-anselvar-missing-apprentice",
+          "the-chamber-beyond-the-threshold"
         ],
         "aliases": [],
         "createdDay": 8,
-        "updatedDay": 8
+        "updatedDay": 8,
+        "entityId": "northern-alcove-camp"
       },
       "teva-anselvar-missing-apprentice": {
         "id": "teva-anselvar-missing-apprentice",
@@ -1963,7 +1946,7 @@
       "keen_appraisal": 8,
       "sonic_resonance": 12,
       "motes-vigil": 4,
-      "light_well": 1,
+      "light_well": 2,
       "greenlore": 1
     },
     "coActivations": {
@@ -2067,6 +2050,12 @@
       "text": "Zone scout confirmed: second handprint heat-sign at corridor wall at shoulder height; moisture-dark soil anomaly in root-growth stand north of approach, wrong elevation and season. Alcove camp establi",
       "day": 8,
       "subjectId": null
+    },
+    {
+      "id": "f15",
+      "text": "One beeswax taper now holds a conserved charge of evening light — three to four hours of close-work illumination for underground use, banked at the alcove camp on day 8 night.",
+      "day": 8,
+      "subjectId": null
     }
   ],
   "sharedSceneId": null,
@@ -2074,13 +2063,13 @@
   "customEncounters": {},
   "reconcileVersion": 4,
   "tendencies": {
-    "cerebral": 54.14969421213583,
-    "strategic": 75.71611712048326,
-    "cautious": 66.083027995103,
-    "social": 42.05971187500169,
-    "generous": 23.59670201762425,
-    "risky": 1.9728396887272177,
-    "carousing": 0.5371084840724134
+    "cerebral": 53.87894574107515,
+    "strategic": 76.33753653488084,
+    "cautious": 66.75261285512748,
+    "social": 41.84941331562668,
+    "generous": 23.47871850753613,
+    "risky": 1.9629754902835816,
+    "carousing": 0.5344229416520513
   },
   "aptitudes": [
     "strategist",
@@ -2088,7 +2077,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 162,
-  "updatedAt": 1783775722295,
-  "rev": 5
+  "actionCount": 163,
+  "updatedAt": 1783776158625,
+  "rev": 6
 }

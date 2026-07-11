@@ -34,7 +34,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.3";
+const APP_VERSION = "1.8.4";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -63,6 +63,8 @@ let seenBeats = 0;       // remote beats already rendered
 // ---------- boot ----------
 
 (async function boot() {
+  // SNG-051: a one-time `?dev=1` visit opts this browser into the dev preview-legs panel.
+  try { if (/[?&]dev=1\b/.test(location.search)) localStorage.setItem("singularity.dev", "1"); } catch { /* ignore */ }
   try {
     CONTENT = await loadContent();
   } catch (err) {
@@ -142,11 +144,99 @@ function chrome(inner) {
       <div class="actions">
         <button id="nav-roster">Characters</button>
         <button id="nav-settings">Settings</button>
+        ${devEnabled() ? `<button id="nav-dev" title="Dev preview-legs checklist">🧪 Legs</button>` : ""}
       </div>
     </div>
     ${inner}`;
   document.getElementById("nav-roster").onclick = () => renderRoster();
   document.getElementById("nav-settings").onclick = () => renderSettings();
+  const devBtn = document.getElementById("nav-dev");
+  if (devBtn) devBtn.onclick = () => renderPreviewLegs();
+}
+
+// ---------- SNG-051: dev preview-legs panel (dev-only; clears the verification bottleneck) ----------
+
+/** Dev mode: on localhost/preview, or once a `?dev=1` visit (or manual flag) opts this browser in.
+ *  Never shown to a normal player on the live build unless they explicitly enabled it. */
+function devEnabled() {
+  try {
+    if (localStorage.getItem("singularity.dev") === "1") return true;
+    if (/^(localhost|127\.0\.0\.1|\[::1\])/.test(location.hostname)) return true;
+  } catch { /* ignore */ }
+  return false;
+}
+
+const LEG_STATUS = ["untried", "pass", "fail", "feels-off"];
+const LEG_STATUS_LABEL = { untried: "· untried", pass: "✓ pass", fail: "✗ fail", "feels-off": "~ feels-off" };
+
+function loadLegStatus() {
+  try { return JSON.parse(localStorage.getItem("singularity.previewLegs") || "{}"); } catch { return {}; }
+}
+function saveLegStatus(map) { try { localStorage.setItem("singularity.previewLegs", JSON.stringify(map)); } catch { /* ignore */ } }
+
+let _previewLegsData = null; // cached fetch of the Aevi-owned data file
+
+async function renderPreviewLegs() {
+  if (!_previewLegsData) {
+    try {
+      const res = await fetch(`data/preview_legs.json?cb=${Date.now()}`);
+      _previewLegsData = res.ok ? await res.json() : { legs: [] };
+    } catch { _previewLegsData = { legs: [] }; }
+  }
+  const legs = _previewLegsData.legs || [];
+  const status = loadLegStatus();
+  const verified = legs.filter(l => status[l.id]?.status === "pass").length;
+  // group by mode → batch
+  const byMode = {};
+  for (const l of legs) (byMode[l.mode] = byMode[l.mode] || []).push(l);
+  const MODE_LABEL = { solo: "Solo (play anytime)", "cross-player": "Cross-player (needs sync on two profiles)" };
+
+  const legRow = (l) => {
+    const st = status[l.id]?.status || "untried";
+    return `<div class="leg-row leg-${st}">
+      <div class="leg-head"><span class="leg-batch">${esc(l.batch)}</span> <strong>${esc(l.title)}</strong></div>
+      <div class="leg-do"><em>Do:</em> ${esc(l.do)}</div>
+      <div class="leg-pass"><em>Pass:</em> ${esc(l.pass)}</div>
+      <div class="leg-status-row">${LEG_STATUS.map(s => `<button class="leg-btn ${st === s ? "on" : ""}" data-leg="${esc(l.id)}" data-status="${s}">${LEG_STATUS_LABEL[s]}</button>`).join("")}</div>
+      <input class="leg-note" data-legnote="${esc(l.id)}" placeholder="note (optional)…" value="${esc(status[l.id]?.note || "")}">
+    </div>`;
+  };
+
+  chrome(`<div class="screen" style="max-width:820px">
+    <h2>🧪 Preview Legs <span class="hint" style="text-transform:none">— ${verified} of ${legs.length} verified${_previewLegsData.buildVersion ? ` · data for v${esc(_previewLegsData.buildVersion)}` : ""}</span></h2>
+    <p class="hint" style="margin-bottom:12px">Mark each leg as you test it. Marks persist in this browser. Data is authored by Aevi (<code>data/preview_legs.json</code>).</p>
+    ${legs.length ? Object.keys(byMode).map(mode => `
+      <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(MODE_LABEL[mode] || mode)}</h3>
+      ${byMode[mode].map(legRow).join("")}</div>`).join("")
+      : "<div class='insight'>No preview-legs data found (data/preview_legs.json absent).</div>"}
+    <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap">
+      <button class="btn secondary" id="legs-copy">Copy summary for Aevi</button>
+      <button class="btn secondary" id="legs-back">Back</button>
+    </div>
+    <div class="hint" id="legs-copied" style="margin-top:8px"></div>
+  </div>`);
+
+  for (const b of app.querySelectorAll("[data-leg]")) b.onclick = () => {
+    const map = loadLegStatus();
+    const id = b.dataset.leg;
+    map[id] = { ...(map[id] || {}), status: b.dataset.status };
+    saveLegStatus(map);
+    renderPreviewLegs();
+  };
+  for (const inp of app.querySelectorAll("[data-legnote]")) inp.onchange = () => {
+    const map = loadLegStatus();
+    const id = inp.dataset.legnote;
+    map[id] = { ...(map[id] || {}), note: inp.value.slice(0, 300) };
+    saveLegStatus(map);
+  };
+  document.getElementById("legs-copy").onclick = async () => {
+    const map = loadLegStatus();
+    const lines = legs.map(l => { const s = map[l.id] || {}; return `- [${(s.status || "untried").toUpperCase()}] ${l.batch} · ${l.title}${s.note ? ` — ${s.note}` : ""}`; });
+    const summary = `Preview legs (${verified}/${legs.length} pass) — build data v${_previewLegsData.buildVersion || "?"}\n${lines.join("\n")}`;
+    try { await navigator.clipboard.writeText(summary); document.getElementById("legs-copied").textContent = "Copied to clipboard."; }
+    catch { document.getElementById("legs-copied").textContent = summary; }
+  };
+  document.getElementById("legs-back").onclick = () => renderRoster();
 }
 
 // ---------- settings ----------

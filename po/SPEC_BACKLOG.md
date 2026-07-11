@@ -492,6 +492,16 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 
 **Erik preview test:** "Play through an ordinary place (market, road, waystation) and a genuinely strange/charged one — verify the ordinary place reads concrete and clear (no soil-exhales), and the poetic register only appears where the world is actually abstract or charged."
 
+### RATING-REGISTER MAP (Erik 2026-07-11 — the "R+ chokes on romance/intimacy" fix). 🔧 CCode.
+**Diagnosis (verified at HEAD):** the rating reaches the GM ONLY as a CEILING (gm.js ~79: "narrate to this content ceiling — no more intense") — a CAP, not a DIRECTION. There is NO rating→register map (search: 0). So at R+ the model is *permitted* up to R+ but never *directed* to write the full mature register — and with only a permission + its own default caution it collapses intimacy to PG even when R+ is set. Gore fares better only because violence has other prompt cues; romance has none.
+**Fix — flip rating from cap to DIRECTION; add an affirmative rating-register map (within the rules — erotic REGISTER, not explicit depiction):**
+- **G / PG:** chaste, gentle; violence bloodless; intimacy is warmth and closeness only.
+- **PG-13 / R:** real stakes; violence has consequence and blood; intimacy carries heat and tension.
+- **R+:** the FULL mature register — unflinching and visceral on violence, injury, and gore; charged, sensual, and evocative on intimacy and desire (the heat of a moment, tension, breath, touch, longing) — vivid, adult, unhurried. **Evocative, not graphically explicit** — a charged erotic REGISTER, never depiction of sexual acts. This is the exact line the model honors AND the one Erik draws.
+- Fold into SNG-048: **register = f(disposition [concrete↔poetic], rating ceiling [chaste↔charged/mature]).** Disposition sets the poetry; rating sets the heat.
+- **Both floors unchanged + absolute:** minor-protection (a minor is never in romantic/sexual framing for any viewer) and no-prohibited-content stay hard, independent of ceiling. R+ raises the register toward the floor; it never touches it.
+**Effect:** R+ narration comes back charged and sensual on intimacy AND visceral on gore — the choke was a missing direction, not a missing permission.
+
 *GM-contract change — small, HIGH felt-impact (it colors every scene). Off the BATCH-9/dating critical path but worth doing soon.*
 
 ---

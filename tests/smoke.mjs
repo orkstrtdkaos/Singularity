@@ -34,6 +34,7 @@ import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonColli
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } from "../engine/state.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
+import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2181,6 +2182,40 @@ await (async () => {
   const r2 = equipmentBonus(hoard, ["climb"], { baseChance: { ...R.baseChance, equipmentBonusTopN: 2 } });
   check("SNG-044: equipmentBonusTopN is tunable (top-2 sums the two best)", r2.bonus === 10 && r2.helpers.length === 2);
   check("SNG-044: the total cap still backstops", equipmentBonus(mixed, ["attack"], { baseChance: { ...R.baseChance, equipmentBonusCap: 6, equipmentBonusTopN: 2 } }).bonus === 6);
+})();
+
+// --- SNG-042: legends & villains (power-tier + governed surfacing) ---
+(() => {
+  // load the authored roster from the real content file (green gate: it parses + normalizes)
+  const legendsFile = JSON.parse(readFileSync(join(root, "content/packs/valley/lore/legends.json"), "utf8"));
+  const { roster } = loadLegends(legendsFile);
+  check("SNG-042: the authored legends roster loads as NPC-shaped canon", roster.length >= 5 && roster.every(r => r.id && r.name && r.legend));
+  check("SNG-042: an epic villain (Halvex) is a high-weight legendary figure", (() => { const h = roster.find(r => /halvex/i.test(r.id)); return h && h.legend.alignment === "villain" && h.legend.weight === LEGEND_TIER_WEIGHT.legendary; })());
+
+  // power-tier weights + arc scaling
+  check("SNG-042: legendary is born far heavier than riffraff", tierBirthWeight("legendary") > tierBirthWeight("regional") && tierBirthWeight("regional") > tierBirthWeight("riffraff"));
+  check("SNG-042: the tier scales to the character's arc", tierForArc(1) === "riffraff" && tierForArc(5) === "regional" && tierForArc(8) === "legendary");
+
+  // governed surfacing: the cooldown holds greatness rare
+  const alwaysFire = () => 0; // rng that always passes the rarity gate
+  const onCooldown = legendSurfacing({ beatType: "witness_power", roster, governor: { lastDeployDay: 10 }, arcLevel: 8, worldDay: 12, rng: alwaysFire });
+  check("SNG-042: the cooldown suppresses a deploy inside minGapDays", onCooldown.deploy === false);
+  // past the cooldown + rarity, a hero anchor surfaces for a heroic beat
+  const heroDeploy = legendSurfacing({ beatType: "doomed_rescue", roster, governor: {}, arcLevel: 8, worldDay: 20, rng: alwaysFire });
+  check("SNG-042: a heroic beat surfaces a hero figure (never a villain)", heroDeploy.deploy && heroDeploy.alignment === "hero" && (!heroDeploy.figure || heroDeploy.figure.legend.alignment === "hero"));
+  // a villain beat only ever surfaces a villain
+  const villainDeploy = legendSurfacing({ beatType: "villain_escalation", roster, governor: {}, arcLevel: 8, worldDay: 20, rng: alwaysFire });
+  check("SNG-042: a villain-escalation beat surfaces a villain", villainDeploy.deploy && villainDeploy.alignment === "villain");
+  // the rarity roll keeps even an apt beat mostly quiet
+  const quiet = legendSurfacing({ beatType: "witness_power", roster, governor: {}, arcLevel: 8, worldDay: 20, rng: () => 0.99 });
+  check("SNG-042: the rarity roll keeps most apt beats quiet", quiet.deploy === false);
+  // an invalid/absent beat never deploys
+  check("SNG-042: a non-beat never deploys", legendSurfacing({ beatType: null, roster, rng: alwaysFire }).deploy === false);
+
+  // GM directive is rating-aware and names the figure; nothing when no deploy
+  const dir = legendDeploymentForGM(heroDeploy, { ratingPreset: "R" });
+  check("SNG-042: the GM directive names the beat + figure + ceiling", /GREAT FIGURE/.test(dir) && /R ceiling/.test(dir));
+  check("SNG-042: no directive when nothing deploys", legendDeploymentForGM({ deploy: false }) === null);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

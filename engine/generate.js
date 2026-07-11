@@ -215,6 +215,10 @@ export function stampGenerated(entity, type, entityId, context = {}) {
     attentionHistory: [],
     createdDay: context.day ?? null
   };
+  // SNG-042: a figure generated at a power tier carries its tier + alignment so the weight
+  // system + legend surfacing treat it as the great figure it was minted to be.
+  if (context.legendTier) entity._gen.legendTier = context.legendTier;
+  if (context.alignment) entity._gen.alignment = context.alignment;
   return entity;
 }
 

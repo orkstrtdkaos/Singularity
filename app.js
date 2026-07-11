@@ -15,6 +15,7 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
+import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -35,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.10";
+const APP_VERSION = "1.8.11";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -478,6 +479,35 @@ function ratingLineForGM() {
   // SNG-048: rating is a DIRECTION, not only a cap — the affirmative register comes with the ceiling
   // so R+ actually writes the full mature register instead of collapsing intimacy to PG.
   return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ${ratingRegister(preset)} ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.`;
+}
+
+// ---------- SNG-042: legends & villains (governed dramatic-beat deployment) ----------
+
+/** The beat-type this moment qualifies as for a great figure's appearance, or null. Conservative
+ *  — only clear set-pieces qualify; legendSurfacing then governs whether one actually shows. */
+function detectLegendBeat() {
+  const enc = activeEnc();
+  if (enc) {
+    if (enc.def.lethal && character.health <= character.maxHealth * 0.35) return "doomed_rescue"; // real peril
+    if (enc.def.type === "challenge" || enc.def.type === "duel") return "witness_power";           // a set-piece
+  }
+  return null;
+}
+
+/** If a beat qualifies and the governor + rarity allow, choose a great figure to surface and
+ *  return the GM directive (rating-aware); else null. Records the deploy so greatness stays rare. */
+function maybeLegendDetail() {
+  if (!CONTENT.legends?.roster?.length) return null;
+  const beatType = detectLegendBeat();
+  if (!beatType) return null;
+  const dep = legendSurfacing({
+    beatType, roster: CONTENT.legends.roster,
+    governor: character.legendGovernor || {}, arcLevel: character.level, worldDay: absoluteWorldDay()
+  });
+  if (!dep.deploy) return null;
+  character.legendGovernor = { lastDeployDay: absoluteWorldDay(), lastBeat: beatType };
+  // a named anchor is already canon in CONTENT.npcs; recurrence rides the codex + weight
+  return legendDeploymentForGM(dep, { ratingPreset: ratingCeiling(profile) });
 }
 
 // ---------- SNG-035: imagery (portraits + moment art + gallery) ----------
@@ -1054,6 +1084,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
     registerDetail: narrativeRegister(location).cue, // SNG-048: the voice this place has earned (concrete default)
+    legendDetail: maybeLegendDetail(), // SNG-042: a great figure surfaces on a qualifying beat (governed, rare, rating-aware)
     livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }), // §2: proactively surface only LIVE (non-dormant) grown content
     sharedCanonDetail: sharedCanonForGM(), // Phase 3: OTHER players' promoted canon, rating-lensed for this viewer
     worldDateLabel: worldDate().label // SNG-041: the shared absolute calendar (references-not-invents)

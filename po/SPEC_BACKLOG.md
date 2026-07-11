@@ -37,13 +37,15 @@ Engine-needing work from the 2026-07 content-expansion sessions. ALL content for
 **Ratified-and-waiting:** SNG-BATCH-5 (soft class-cost + branch forks; verify prior CCode state before re-run).
 
 ## Suggested batches
-- **BATCH-6 (Foundation):** SNG-019 + SNG-022. Small, unblocks all. Start here.
-- **BATCH-7 (Trustworthy player state):** identity + per-character style (seed-from-aggregate) + cross-device load-latest + inventory/quest resolver-hardening. First consumer of BATCH-6; starts after BATCH-6 closes. Erik-directed 2026-07-10.
-- **BATCH-6.5 (Fast fixes, parallel-able with anything):** SNG-030(rest) + SNG-031 (gambit surfacing+xp wire) + SNG-032 (narrative time). Small, high felt-impact; 032 is a GM-op + rule.
-- **BATCH-7 (Living spine):** SNG-020 + SNG-021 + SNG-024 + SNG-025 + SNG-034 (bestiary rides the encounter/living-world work). The world that grows/lives/ends/marks/breathes.
-- **BATCH-8 (Player systems):** SNG-017 (origins + ent-gating fix + SNG-036 martial paths ride together) + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
-- **BATCH-9 (Multiplayer + polish):** SNG-033 (party v2) + SNG-037 (cross-char awareness) + SNG-038 (simultaneous turns) + SNG-035 (imagery). The multiplayer identity of the game — do together, after foundation.
-- **BATCH-0 (Hygiene, do ANYTIME, cheap):** SNG-040 (content CI) now; SNG-039 (onboarding) once creation/SNG-017 lands. 040 protects every future commit — arguably do it first.
+- **BATCH-6 (Foundation):** SNG-019 + SNG-022. CLOSED GREEN 2026-07-10 (v1.7.2, 486 checks).
+- **BATCH-7 (Trustworthy player state):** identity + per-character style (seed-from-aggregate) + cross-device load-latest + inventory/quest resolver-hardening. ACTIVE 2026-07-10. First consumer of the foundation.
+- **BATCH-8 (Fast high-impact — surface what's built, fix the clock):** SNG-031 (gambit surfacing) + SNG-030-remainder (completionBonusXp wire) + SNG-032 (narrative time). Small, ready, highest felt-impact/effort — a fully-built system nobody can find + a felt clock bug. Parallel-able; **NEXT-READY** after BATCH-7. Spec body below.
+- **BATCH-9 (Living spine):** SNG-020 (the anchor) + SNG-021 + SNG-024 + SNG-025 + SNG-034. The world that grows/lives/ends/marks/breathes. Aevi to spec with care — the strategic next-after.
+- **BATCH-10 (Player systems):** SNG-017 (origins + ent-gating fix + SNG-036 martial paths ride together) + SNG-018 + SNG-023 + SNG-027 + money/Game/recruitment + SNG-026. Shares relationship/economy machinery.
+- **BATCH-11 (Multiplayer + polish):** SNG-033 (party v2) + SNG-037 (cross-char awareness) + SNG-038 (simultaneous turns) + SNG-035 (imagery). The multiplayer identity; do together, after foundation.
+- **BATCH-0 (Hygiene, do ANYTIME, cheap):** SNG-040 (content CI) now; SNG-039 (onboarding) once creation/SNG-017 lands. 040 protects every future commit.
+
+*Renumbered 2026-07-10 (Aevi): resolved the dual-BATCH-7 collision — trustworthy-state kept 7, living-spine → 9, downstream +1. Build order per the dependency spine unchanged; labels now unambiguous.*
 
 ## Cross-cutting engine flags (fold into whichever batch touches them)
 - **poleIntensity** reading (independent 0..1 poles; co-firing/purity; net-signed derivable). Locations already reseeded.
@@ -550,3 +552,32 @@ Design law 1 (engine gates/resolves, GM narrates); reuse the SNG-019 resolver + 
 ## Known debt from the 2026-07-07 content-wave (surfaced by the BATCH-6 test-red root-cause, 2026-07-10)
 - **Seed abilities want full trees:** the catalog expansion (~28 → 117) added ~60 one-rank seed abilities without `notFor` — engine-safe but shallow. Test now asserts the preserved contract (28+ fully-treed core + every ability engine-safe). OWED: author full trees for the seeds over time. Aevi content task, low-urgency.
 - **discoveryBonus balance check:** commit 6bfb98d raised discoveryBonus 10→20; the raise slammed a fixture past the d100 ceiling (95) — test now asserts the clamped contract (correct fix). OPEN DESIGN Q for Erik: is +20 intended, or does it make discovered techniques near-always ceiling-out? Keep vs tune is Erik's balance call.
+
+---
+
+## SNG-BATCH-8 — Fast high-impact (surface what's built, fix the clock)
+
+**Depends on: nothing unbuilt — parallel-able; slots the moment BATCH-7 closes.** All three specs complete at origin. Erik-directed (get-next-ready) 2026-07-10; Aevi PO. Preview-testing protocol stands. Only Aevi closes.
+
+**Theme:** the biggest wins right now aren't new systems — they're making a fully-built system *findable* and fixing a felt clock bug. Small effort, high felt-impact. Keeps CCode moving while the SNG-020 living-spine anchor gets a careful spec.
+
+### Phase 1 — Gambit surfacing (SNG-031) + completion-XP wire (SNG-030 remainder)
+The gambit system is fully built (gambit.js, builder UI, rule 15A cinematic narration, stepEnergyCost, completionBonusXp=10) but reachable ONLY via the ⚙ Plan button with zero prompting — so nobody finds it. Surface it against signals the engine ALREADY emits — no new GM plumbing.
+- **Signal (already present):** turn choices carry `intentTags` (gm.js ~60/297) incl. `plan`/`scout`/`prepare`. A scene with ≥2 distinct obstacles, or choices tagged plan/scout/prepare, or a stated multi-part goal, is gambit-apt.
+- **Surface it (any/all, all cheap):** (1) **Hint chip** near the freeform input on gambit-apt turns — "This looks like a job for a plan — [Plan a Gambit]", dismissible, wires to existing `renderGambitBuilder()`. (2) **⚙ Plan prominent-when-apt, quiet-when-not** (pure UX; float/style up on apt turns, overflow otherwise). (3) **Optional GM offer line** (rule 15A extension): one plain-language nudge on multi-obstacle scenes — a sentence, not a mechanic.
+- **REWARD WIRE (SNG-030 remainder):** `executeGambit`'s success path must READ + AWARD `gambit.completionBonusXp` (value already in resolution.json; engine may not currently apply it). Confirm `strategistBonusPoints` (1) AND the completion bonus both land — planning must pay over improvising.
+- **GUARDRAIL — don't nag:** chip appears ONLY on genuinely gambit-apt turns and is dismissible for the scene. A world that shouts "plan!" every turn is as dead as one that never mentions it.
+- **Smoke:** multi-obstacle scene surfaces the chip; a routine scene does NOT; tapping opens the builder; completing a gambit awards completionBonusXp + strategist points; the Plan affordance is prominent only when apt.
+
+### Phase 2 — Narrative-driven time (SNG-032)
+Erik-flagged bug: the clock only advances by fixed beat amounts (ADVANCE.beat/turn, sceneEnd, travel) — sleeping 8h, a days-long montage, and a 20-min chat all tick the same. "World time says deep night but the narrative has it morning."
+- **Fix:** add a `timeOps` GM op `{"hoursPassed": N, "why": "slept till morning"}`. When the fiction moves time (sleep, a night's rest, a journey montage, a long vigil, a quick exchange), the GM declares it; engine applies `advanceClock(hours)` INSTEAD of the beat default for that turn (beat default remains fallback when no timeOps). Clamp sane (0.25–72h). Conversations default LOW (a beat = 15–30 min, not an hour+).
+- **Sync rule:** narration LEADS the clock, never trails — if the GM's narration moves to morning, it emits the timeOps that gets the world there. GM already receives `timeLabel`.
+- **Smoke:** sleeping advances ~8h; a conversation advances minutes-to-an-hour; timeLabel + narration agree every turn; travel/rest still work; no timeOps = old behavior.
+
+### Guardrails
+Engine/UX-only (no content owed); design law 1 (engine owns time + XP, GM declares/narrates); additive (timeOps optional, chip dismissible, all backward-safe); don't-nag on surfacing; suites + parse_probe green per phase; never touches the ErikIAm pipeline.
+
+### Erik preview tests (per phase)
+1. "Walk into a scene with a couple of obstacles or a plan-ish choice — verify a 'Plan a Gambit' chip appears by the input; then a plain single-obstacle scene — verify NO chip. Run a gambit to completion and confirm the bonus XP lands (planning should out-pay winging it)."
+2. "Sleep, or take a long journey, then check the clock — verify time jumped hours (not one beat) and the time-of-day the narration describes matches the world clock. Then have a short conversation — verify it only ticked minutes."

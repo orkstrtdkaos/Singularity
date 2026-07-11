@@ -21,7 +21,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -36,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.14";
+const APP_VERSION = "1.8.15";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -191,20 +191,84 @@ let _previewLegsData = null; // cached fetch of the Aevi-owned data file
 // EXISTING primitives (travel/setRating/rest/generate/clock-jump/screens) — no new mechanics.
 // Dev-only (the panel is devEnabled-gated). Cross-player / two-character legs stay manual.
 // Unknown intent → no runner entry → the button renders as "(unsupported intent)".
-function legNeedsCharacter(intent) {
-  return ["openSkillPicker", "setupSkill", "travelToDisposition", "enterPlanApt", "timeAction", "generateHere", "jumpClock", "openCodex", "portraitBeat", "grantTestState"].includes(intent);
+/** DEV: ensure a fully-equipped test character is active so any leg has its prerequisites — a
+ *  mid-level hero with a home ability, a CROSS-CLASS forkable ability (prism_sight), open skill
+ *  points, and maxed sub-attributes so ability gates pass. Reused if it already exists. Idempotent. */
+function ensureTestCharacter() {
+  const rules = CONTENT.rules;
+  let c = loadCharacter("char-devtest");
+  if (!c) {
+    const homeAb = Object.values(CONTENT.abilities).find(a => a.powerSystem === "harmonic" && (a.levelReq || 1) <= 1);
+    const abilities = [];
+    if (homeAb) abilities.push({ abilityId: homeAb.id, level: 1 });
+    if (CONTENT.abilities.prism_sight) abilities.push({ abilityId: "prism_sight", level: 2 }); // cross-class (radiant) + forks at r3
+    c = {
+      schemaVersion: 1, id: "char-devtest", playerKey: getPlayerKey(),
+      name: "Test Hero (dev)", origin: "harmonic", background: "craftsman",
+      level: 5, xp: 0,
+      attributes: { physical: 3, mental: 3, social: 3, practical: 3 },
+      skills: {}, abilities, alignment: {}, attunement: 3,
+      maxHealth: 30, health: 30, maxEnergy: rules.energy?.max ?? 100, energy: rules.energy?.max ?? 100,
+      inventory: startingGear("craftsman"),
+      deeds: [], relationships: {}, chronicle: [],
+      currentLocationId: CONTENT.startingLocation, activeScene: null,
+      clock: newClock(), companions: [], quests: [], npcRegistry: {}, placeMemory: {},
+      worldState: initWorldState(1), bio: null
+    };
+    ensureSubAttributes(c);
+    for (const s of SUBS) c.subAttributes[s] = Math.max(c.subAttributes[s] || 0, 6); // clear ability gates
+    syncParentAttributes(c);
+    ensureCodex(c); ensureCharacterStyle(c);
+    c.grantsVersion = 1; c.reconcileVersion = topReconcileVersion("character");
+    if (!profile.charactersPlayed.includes(c.id)) profile.charactersPlayed.push(c.id);
+    saveProfile(profile);
+  }
+  c.skillPoints = Math.max(c.skillPoints || 0, 3);          // always enough points to spend/rank
+  c.pendingSubPoints = Math.max(c.pendingSubPoints || 0, 2);
+  c.energy = c.maxEnergy; c.health = c.maxHealth;
+  character = c;
+  saveCharacter(character);
+  return character;
+}
+
+/** DEV: seed a GROWN (generated) entity into the active character so the codex Keep/nominate flow
+ *  is testable offline (reuses the real generate path with a fake author). Returns its id. */
+async function seedGrownEntity() {
+  const loc = hereNow();
+  const fake = () => async () => ({ name: "Test Grown Warden", role: "a figure grown for the Keep test", spectrum: loc.spectrum || {}, fears: "being forgotten", wants: "to matter", homeLocation: loc.id });
+  const rec = await generate("npc", {
+    character, location: loc, day: readClock(character.clock).day, rating: ratingCeilingNow(),
+    known: { authored: CONTENT.npcs, generated: character.generated?.npc || {} }, genBudget: 5
+  }, { callJSON: fake(), schema: CONTENT.genSchemas?.npc || {}, applyCodexUpdates, codexCtx: { locationId: loc.id } });
+  if (rec?._gen) {
+    recordAttention(rec, "keep", readClock(character.clock).day); // → established, so it's clearly grown
+    saveCharacter(character);
+    return rec.id;
+  }
+  return null;
 }
 
 const LEG_RUNNERS = {
-  openSkillPicker: () => { renderCharacterScreen(); },
-  openCodex: () => { renderCodexScreen(); },
-  setupSkill: (f) => {
-    // dev grant: give the skill at the requested rank so the fork/rank UI is reachable
-    const id = f.skill;
-    if (id && CONTENT.abilities[id] && !character.abilities.some(a => a.abilityId === id)) {
-      character.abilities.push({ abilityId: id, level: Math.max(1, f.atRank || 1) });
-    } else if (id) { const owned = character.abilities.find(a => a.abilityId === id); if (owned) owned.level = Math.max(owned.level, f.atRank || owned.level); }
+  openSkillPicker: () => {
+    // "spend 2 skill points / take a cross-class ability" — grant the points so it's runnable
+    ensureTestCharacter();
     character.skillPoints = Math.max(character.skillPoints || 0, 2);
+    saveCharacter(character);
+    renderCharacterScreen();
+  },
+  openCodex: async () => {
+    ensureTestCharacter();
+    const id = await seedGrownEntity();
+    renderCodexScreen("", id || null);
+  },
+  setupSkill: (f) => {
+    // grant the skill at the requested rank so the fork/rank-up is one click away
+    ensureTestCharacter();
+    const id = f.skill || "prism_sight";
+    if (CONTENT.abilities[id] && !character.abilities.some(a => a.abilityId === id)) {
+      character.abilities.push({ abilityId: id, level: Math.max(1, f.atRank || 2) });
+    } else { const owned = character.abilities.find(a => a.abilityId === id); if (owned) owned.level = Math.max(owned.level, f.atRank || 2); }
+    character.skillPoints = Math.max(character.skillPoints || 0, 3);
     saveCharacter(character);
     renderCharacterScreen();
   },
@@ -216,6 +280,7 @@ const LEG_RUNNERS = {
     renderSettings(rv.ok ? `🔧 Test: ceiling set to ${target}. ${f.cycle ? "Re-run to cycle to " + f.cycle.slice(1).join(" / ") + "." : ""}` : "Rating unchanged — " + rv.reason);
   },
   travelToDisposition: () => {
+    ensureTestCharacter();
     // travel to the most strongly-charged (tilted) known location, preferring a reachable one
     const charge = l => Math.max(0, ...Object.values(l.poleIntensity || {}).map(v => Math.abs(v)), 0);
     const here = character.currentLocationId;
@@ -225,17 +290,30 @@ const LEG_RUNNERS = {
     if (pick) travelTo(pick.id); else renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No charged location found to travel to." });
   },
   enterPlanApt: () => {
-    startScene("(DEV/TEST: open a plan-apt, multi-obstacle scene — present a situation with several distinct sequential obstacles and 3-4 choices whose intentTags include plan/scout/prepare, so a gambit is genuinely apt.)");
+    // "set up a gambit so I can run it" — open the builder PRE-FILLED with a runnable plan
+    ensureTestCharacter();
+    gambitDraft = {
+      goal: "get past the sealed array-office door and out with the ledger",
+      steps: [
+        { text: "scout the corridor for the guard's rounds", fallback: "wait in the alcove until they pass" },
+        { text: "pick or force the office lock", fallback: "slip in behind the clerk on their next trip" },
+        { text: "take the ledger and leave the way you came", fallback: "go out the window onto the ledge" }
+      ],
+      assessed: null
+    };
+    renderGambitBuilder("🔧 Test plan loaded — hit Assess plan (needs an API key), then Run it.");
   },
-  timeAction: (f) => { rest(f.action === "breather" ? "breather" : "sleep"); },
+  timeAction: (f) => { ensureTestCharacter(); rest(f.action === "breather" ? "breather" : "sleep"); },
   generateHere: () => {
+    ensureTestCharacter();
     // synthesize a GM generate request so the world grows here now (reuses the real path)
     const type = "location";
     handleGenerateRequests({ generateRequest: [{ type, hint: "a place just past the edge of the known", why: "dev test: force a generation" }] })
-      .then(grown => renderPlay(character.activeScene?.lastTurn || null, { aside: grown.length ? `🔧 Generated: ${grown.map(g => g.name).join(", ")} — revisit to confirm it persists.` : "🔧 Nothing minted (governor or reuse) — try again or move to an unauthored edge." }))
+      .then(grown => renderPlay(character.activeScene?.lastTurn || null, { aside: grown.length ? `🔧 Generated: ${grown.map(g => g.name).join(", ")} — revisit to confirm it persists.` : "🔧 Nothing minted (governor or reuse, or needs an API key) — try again or move to an unauthored edge." }))
       .catch(() => renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 Generation failed (needs an API key)." }));
   },
   jumpClock: async (f) => {
+    ensureTestCharacter();
     // DEV-ONLY: shift the shared world epoch earlier so the absolute world-day jumps forward N,
     // then run the tick so offscreen advancement / away-digest apply. Reversible via re-setting.
     const days = Math.max(1, f.advanceWorldDays || f.days || 1);
@@ -245,32 +323,38 @@ const LEG_RUNNERS = {
     renderPlay(character.activeScene?.lastTurn || null, { newsFlash: news, aside: `🔧 DEV: jumped the shared clock +${days} world-day(s) → now world-day ${absoluteWorldDay()}. Return to play to see what advanced.` });
   },
   portraitBeat: () => {
+    ensureTestCharacter();
     if (!imagesEnabled()) { renderSettings("🔧 Turn on Scene & item art → Generate first, then run this leg."); return; }
     ensureCharacterPortrait(character, { force: true, milestone: `test v${APP_VERSION}` });
     saveCharacter(character);
     renderGallery();
   },
   grantTestState: () => {
+    ensureTestCharacter();
     // a quest in progress + two duplicate-named items, so the resolver/quest-log leg is reachable
     character.quests = character.quests || [];
     if (!character.quests.some(q => q.id === "dev-test-quest")) character.quests.push({ id: "dev-test-quest", title: "A Test Errand", status: "active", summary: "Dev-seeded quest to verify progress→complete.", progress: ["begun"] });
     try { addItem(character, "dried_rations", CONTENT.items); addItem(character, "dried_rations", CONTENT.items); } catch { /* catalog id may differ */ }
     saveCharacter(character);
     renderCharacterScreen();
+  },
+  selectCharacter: (f) => {
+    // play as a named character if it exists, else fall back to the dev test hero
+    const who = f.who;
+    const found = who && listCharacters().find(e => (e.name || "").toLowerCase().includes(String(who).toLowerCase()));
+    if (found) { character = loadCharacter(found.id); saveCharacter(character); }
+    else ensureTestCharacter();
+    renderCharacterScreen();
   }
 };
 
-/** Run a preview leg's forced scenario (dev-only). Guards intents that need an active character. */
+/** Run a preview leg's forced scenario (dev-only). Every character-needing runner self-provisions
+ *  the dev test hero (ensureTestCharacter), so nothing is blocked on there being an active save. */
 function runPreviewLeg(leg) {
   const f = leg?.force;
   const intent = f && f.intent;
   const runner = intent && LEG_RUNNERS[intent];
   if (!runner) return; // manual / unknown — no-op (button wasn't rendered as runnable)
-  if (legNeedsCharacter(intent) && !character) {
-    alert("Start or select a character first, then run this leg from 🧪 Legs.");
-    renderRoster();
-    return;
-  }
   try { runner(f); } catch (err) { alert("Couldn't run this scenario: " + (err?.message || err)); }
 }
 
@@ -1924,10 +2008,11 @@ function renderCharacterScreen() {
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span></h3>
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
-        const canRank = character.skillPoints > 0 && a.level < (rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
-        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+        const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity); // SNG-047+: cross-class doubles
+        const canRank = character.skillPoints >= rankCost && a.level < (rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
+        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}${rankCost > 1 ? ", cross-class" : ""}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
-          ${canRank ? `<button class="grow-btn" data-rank2="${esc(a.abilityId)}">▲</button>` : ""}
+          ${canRank ? `<button class="grow-btn" data-rank2="${esc(a.abilityId)}" title="Spend ${rankCost} skill point${rankCost > 1 ? "s (cross-class)" : ""}">▲${rankCost > 1 ? "×" + rankCost : ""}</button>` : ""}
           ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}</div>`; }).join("")}
       ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aspirations <span class="hint" style="text-transform:none">(declare what you're working toward — practice makes it free)</span></h3>

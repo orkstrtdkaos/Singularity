@@ -331,3 +331,21 @@ Net: two clocks reconciled on the absolute — real-time governs the far world +
 **Erik preview test:** "Get into a genuinely doomed fight — verify a hero can intervene and you feel the gap between your power and theirs; later, verify that same hero (or their reputation) recurs — a passing word, a task, an appearance — not a one-off; and verify a villain ladder (riffraff now, something bigger implied)."
 
 *Rides BATCH-9; earliest after Phase 1, best with Phase 2. Aevi authors the legend/villain anchors before build.*
+
+---
+
+## SNG-BATCH-9 Phase 2 — Living advancement (offscreen + curation)
+
+**⛔ DEPENDS ON: BATCH-9 Phase 1 (generate + weight) AND SNG-041 (shared absolute dating) — SNG-041 REQUIRED FIRST.** Offscreen advancement surfaces cross-character dated events (the away-digest); without the shared clock they drift exactly like the live Day-8/Day-11 bug, multiplied across every generated entity. Do NOT build Phase 2 until SNG-041 has landed. Pairs with SNG-021 world-tick. Aevi PO; only Aevi closes.
+
+**1. Offscreen advancement.** Established-tier generated entities (NPCs, arcs) advance while the player is away — the world-tick moves them per their disposition + arc-pressure; their deeds/changes surface in the away-digest, **dated on the SNG-041 shared absolute clock** (real-time far world). fresh/demoted entities do NOT advance (the engagement governor from Phase 1). Legends (SNG-042) ride this path — a traveling hero's offscreen deeds reach you as dated news.
+
+**2. Explicit ⭐ "keep" boost.** A one-tap keep on a generated entity's codex page adds an engagement boost (available, never nagged) — the explicit complement to Phase 1's implicit engagement score. Raises the entity's attention weight toward established/nominated.
+
+**3. Nomination surfacing.** Entities crossing the established→nominated weight threshold surface as promotion candidates (the queue toward Phase 3 shared-canon), provenance intact, rating-tag carried. Surfacing only — no promotion yet (that's Phase 3).
+
+**Guardrails.** Only established-tier advances offscreen (governor); advancement is disposition-consistent (no off-grain drift); away-digest dated coherently via SNG-041 (no future-date-as-current-news); derives-never-fabricates; reuse worldtick + weight + codex; suites + parse_probe green.
+
+**Erik preview tests:** (1) "Leave an established generated NPC/arc alone across a gap — return and verify it has moved on plausibly, and the away-digest dates its deeds on the shared world-clock, on-or-before now." (2) "⭐-keep a generated entity — verify it holds/advances where an ignored one fades." (3) "Play a while and verify some generated entity surfaces as a 'notable' nomination candidate."
+
+*Phase 2 = the living half of the anchor. Gated on SNG-041. Phase 3 (shared promotion + rating-lens) follows.*

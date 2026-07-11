@@ -480,3 +480,21 @@ Build order: **Layer 1 first (foundation, UNBLOCKED, CCode).** Layer 2 = a conte
 **Erik preview test:** "Play through an ordinary place (market, road, waystation) and a genuinely strange/charged one — verify the ordinary place reads concrete and clear (no soil-exhales), and the poetic register only appears where the world is actually abstract or charged."
 
 *GM-contract change — small, HIGH felt-impact (it colors every scene). Off the BATCH-9/dating critical path but worth doing soon.*
+
+---
+
+## SNG-050 — Pole-as-civilization refactor + cultural generation [DESIGN STAGE — awaiting Erik's steer]
+
+**Erik-raised 2026-07-11.** The power system has TWO inconsistent organizing principles: named CIVILIZATION systems (Harmonic/sonic/the Heights; Radiant/photonic = LIGHT — a real people + territory) vs combined-AXIS reaches (`reach_dark_light` etc. — one tradition spanning BOTH poles). Symptom: `reach_dark_light` swallows light+dark as one, but Radiant IS the light pole already → malformed + duplicative, and the dark pole has no people. Repeats across every combined reach. Erik's principle: **EACH POLE of each axis = a distinct civilization/people/tradition/region.**
+
+**Proposed architecture.** An axis = the TENSION between two pole-peoples (not one tradition). Split each combined reach into its two poles; reconcile named systems onto poles (Radiant = light pole ✓; `reach_dark_light`'s DARK abilities [Umbracraft / Shroud / Shadowstep / The Never-There] → a new DARK people, its LIGHT abilities [Radiance / Kindle / Lightsense] → Radiant). Each pole-tradition gets a PEOPLE, a REGION (distinct area), an aesthetic, and a defined relationship to its opposed pole. Cultural GENERATION fills the ~20 missing pole-cultures — authored anchors for Erik's key civilizations + BATCH-9 in-grain generation for the rest — to "make the distinct areas obvious in lore."
+
+**Reshapes:** the skill-ACCESS gates (the SNG-049 idea) become PER-POLE-PEOPLE — you learn a pole-tradition from its people: native (your origin culture), in their region (location-active), or via a teacher/tome of that people. Access + refactor are ONE system. **Pairs with:** BATCH-9 (cultural generation at civilization scale IS the generative anchor's job), SNG-046 (each culture = a distinct map area / base-art region), SNG-048 (each pole's disposition flavors its narrative voice).
+
+**⛔ DECISIONS PENDING ERIK (his world — do not build until steered):**
+1. Do ALL 12 axes split into two pole-peoples (24 cultures), or a CURATED SUBSET fleshed as full civilizations with the rest looser?
+2. How do existing named systems map to poles? Radiant = light (confirmed). What AXIS is HARMONIC (sonic)? Where do valley_craft (generalist?) + precursor (ancient/mechanical?) sit — poles, or special systems OUTSIDE the pole matrix?
+3. Which pole-cultures does Erik AUTHOR (his key civilizations) vs let BATCH-9 GENERATE in-grain?
+4. Organizing principle: "pole = a people with a disposition + a discipline/medium" (Harmonic=sonic, Radiant=photonic are MEDIUM-defined — are other poles medium-defined too, or purely disposition-defined)?
+
+*Foundational; off any critical path; deliberate. Aevi brings the design proposal → Erik steers → Aevi authors the refactor spec + authored culture anchors + folds in the access gates. NOT build-ready until steered.*

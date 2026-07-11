@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "id": "char-devtest",
+  "playerKey": "player-s9z9u1",
+  "name": "Test Hero (dev)",
+  "origin": "harmonic",
+  "background": "craftsman",
+  "level": 5,
+  "xp": 0,
+  "attributes": {
+    "physical": 6,
+    "mental": 7,
+    "social": 6,
+    "practical": 6
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "sonic_resonance",
+      "level": 1
+    },
+    {
+      "abilityId": "prism_sight",
+      "level": 2
+    },
+    {
+      "abilityId": "echo_memory",
+      "level": 1
+    },
+    {
+      "abilityId": "boundary_stone",
+      "level": 1
+    }
+  ],
+  "alignment": {},
+  "attunement": 3,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "belt_knife",
+      "name": "Belt Knife",
+      "kind": "weapon",
+      "qty": 1,
+      "description": "A plain working blade — more tool than weapon, but it has been both.",
+      "bonusTags": [
+        "attack",
+        "force"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "hemp_rope",
+      "name": "Hemp Rope (30 ft)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
+      "bonusTags": [
+        "climb"
+      ],
+      "consumable": false
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "radiant_plateau_edge",
+  "activeScene": {
+    "locationId": "radiant_plateau_edge",
+    "turns": [
+      {
+        "summary": "Arrival at the Radiant Plateau Edge District — the name Fendt chalked in red on the accountability board catches the eye.",
+        "narration": "The eastern path delivers you onto the Edge District just as morning tips past its first hour — the sun still low enough that the light-guide streets haven't warmed to their full glow, only a pale, submerged luminescence threading the paving stones underfoot, as if the plateau itself is slowly waking. The photonic-crystal towers catch the angle of light and bend it into long, colored seams across the building faces: amber, a cold blue, a stripe of green that doesn't belong to any spring sky. Everything here is a choice someone made about what to show.\n\nThe district is already alive. Filtration array engineers move in twos and threes along the main causeway, their notebooks out, their voices low and clipped. A pair of apprentice optics-weavers spar with harmless beams near a fountain — one throws a wedge of refracted light that makes the other flinch and laugh. Closer, chalked on the accounting board mounted beside the district's common hall, you spot a name written in red: *Fendt*. The rest of the board is ordinary — shift rosters, supply tallies — but that name in that color sits wrong, like a bruise on clean linen. No accompanying record beneath it. People pass it without looking, which is its own kind of looking.\n\nThe news from Millbrook has reached here, too; you can feel it in the way conversations cluster and break apart. Three engineers near the board speak in half-sentences, tracking whether anyone else is in earshot. A Radiant keeper — an older woman with a prism-loupe on a cord around her neck — stands apart from them, watching the board with an expression that hasn't softened in some time. The gap between what's known and what's said is the district's texture this morning: light bending around things, revealing nothing it hasn't been asked to."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The eastern path delivers you onto the Edge District just as morning tips past its first hour — the sun still low enough that the light-guide streets haven't warmed to their full glow, only a pale, submerged luminescence threading the paving stones underfoot, as if the plateau itself is slowly waking. The photonic-crystal towers catch the angle of light and bend it into long, colored seams across the building faces: amber, a cold blue, a stripe of green that doesn't belong to any spring sky. Everything here is a choice someone made about what to show.\n\nThe district is already alive. Filtration array engineers move in twos and threes along the main causeway, their notebooks out, their voices low and clipped. A pair of apprentice optics-weavers spar with harmless beams near a fountain — one throws a wedge of refracted light that makes the other flinch and laugh. Closer, chalked on the accounting board mounted beside the district's common hall, you spot a name written in red: *Fendt*. The rest of the board is ordinary — shift rosters, supply tallies — but that name in that color sits wrong, like a bruise on clean linen. No accompanying record beneath it. People pass it without looking, which is its own kind of looking.\n\nThe news from Millbrook has reached here, too; you can feel it in the way conversations cluster and break apart. Three engineers near the board speak in half-sentences, tracking whether anyone else is in earshot. A Radiant keeper — an older woman with a prism-loupe on a cord around her neck — stands apart from them, watching the board with an expression that hasn't softened in some time. The gap between what's known and what's said is the district's texture this morning: light bending around things, revealing nothing it hasn't been asked to.",
+      "sceneSummary": "Arrival at the Radiant Plateau Edge District — the name Fendt chalked in red on the accountability board catches the eye.",
+      "choices": [
+        {
+          "label": "Study the board up close — read the entry carefully, note who's watching, and use Prism Sight to catch any micro-reaction from the engineers nearby",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "dark_light": 0.6,
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Approach the older keeper with the prism-loupe — ask her directly what Fendt did to earn a red-chalk name with no record filed",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Drift near the cluster of engineers and listen — let them talk, say nothing, and see what the morning's gossip gives you for free",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "dark_light": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find somewhere to eat and get your bearings first — a bench near the fountain, watch the district wake up, and take stock of what you know before you move",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "Edge District, Radiant Plateau — early morning, sun low and catching the crystal towers at a shallow angle; light-guide streets emit a cool submerged glow; outdoor causeway near the district common hall.",
+        "npcsPresent": [
+          {
+            "name": "Older keeper (prism-loupe around neck)",
+            "state": "standing apart from the engineers, watching the accountability board with a closed, unreadable expression"
+          },
+          {
+            "name": "Cluster of three filtration engineers",
+            "state": "speaking in low, incomplete sentences near the accountability board, tracking who's within earshot"
+          },
+          {
+            "name": "Two apprentice optics-weavers",
+            "state": "sparring with harmless refracted beams near the fountain, laughing"
+          }
+        ],
+        "objects": [
+          "District accountability board: Fendt's name written in red chalk, no accompanying record filed beneath it; surrounding entries are routine shift rosters and supply tallies",
+          "Photonic-crystal towers catching morning light into colored seams across building faces",
+          "Light-guide paving stones glowing faintly underfoot",
+          "Fountain near the center of the causeway"
+        ],
+        "threads": [
+          "Fendt's name in red chalk with no filed record — who marked it, and why?",
+          "The three engineers are clearly discussing something they don't want overheard",
+          "The older keeper has been watching that board longer than casual interest warrants"
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Fendt's name appeared in red chalk on the Edge District accountability board with no accompanying record — a filtration array supervisor marked them and filed nothing; a keeper of thirty years has never seen this done before.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
+          "flag": {
+            "fendt_board_marking": "red_chalk_no_record"
+          },
+          "subPlace": {
+            "name": "District Common Hall",
+            "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare disciplinary markings.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "fendt-marking",
+          "label": "Fendt — Red Chalk Marking",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "A filtration array supervisor marked their subordinate Fendt in red chalk on the Edge District accountability board and filed no record — a thing no keeper of thirty years has seen done before. The name reached the board by World-day 11 morning.",
+          "links": [
+            "radiant-plateau",
+            "water-crisis"
+          ]
+        },
+        {
+          "topic": "millbrook-elder-decision",
+          "label": "Millbrook Elder Panel — Precursor Recognition",
+          "kind": "event",
+          "entityId": null,
+          "fact": "Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley and named it publicly — the first governance body in the valley to do so. Sela demonstrated the six-fold rhythm before them; the youngest witness confirmed the pattern from inside the stone.",
+          "links": [
+            "millbrook",
+            "precursor-system"
+          ]
+        },
+        {
+          "topic": "precursor-system",
+          "label": "Precursor System — Beneath the Valley",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "An operating Precursor system beneath the valley has been officially named by Millbrook's elders. Usnea proposed a multi-settlement expedition into the Disputed Zone to investigate; the panel could not act on it — the gap between evidence and action was named openly.",
+          "links": [
+            "millbrook-elder-decision",
+            "disputed-zone",
+            "water-crisis"
+          ]
+        },
+        {
+          "topic": "water-crisis",
+          "label": "The Water Crisis — Discoloration Stage",
+          "kind": "event",
+          "entityId": null,
+          "fact": "The Echo River runs gray-green on bad mornings. Fish catches are down across the valley. Communities murmur but cooperate. The crisis stands at the Discoloration stage as of World-day 11.",
+          "links": [
+            "echo-river",
+            "millbrook",
+            "radiant-plateau"
+          ]
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "the older Radiant keeper with a prism-loupe around her neck — a veteran of thirty years who's watching the accountability board with visible unease; she knows something is wrong with the Fendt marking",
+          "why": "She is present in the scene and the player may address her directly; she needs a stable identity, name, and history to persist across the investigation"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Arrival beat — no meaningful time has elapsed beyond the journey, which was already accounted for"
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Edge District, Radiant Plateau — early morning, sun low and catching the crystal towers at a shallow angle; light-guide streets emit a cool submerged glow; outdoor causeway near the district common hall.",
+      "npcsPresent": [
+        {
+          "name": "Older keeper (prism-loupe around neck)",
+          "state": "standing apart from the engineers, watching the accountability board with a closed, unreadable expression"
+        },
+        {
+          "name": "Cluster of three filtration engineers",
+          "state": "speaking in low, incomplete sentences near the accountability board, tracking who's within earshot"
+        },
+        {
+          "name": "Two apprentice optics-weavers",
+          "state": "sparring with harmless refracted beams near the fountain, laughing"
+        }
+      ],
+      "objects": [
+        "District accountability board: Fendt's name written in red chalk, no accompanyin",
+        "Photonic-crystal towers catching morning light into colored seams across buildin",
+        "Light-guide paving stones glowing faintly underfoot",
+        "Fountain near the center of the causeway"
+      ],
+      "threads": [
+        "Fendt's name in red chalk with no filed record — who marked it, and why?",
+        "The three engineers are clearly discussing something they don't want overheard",
+        "The older keeper has been watching that board longer than casual interest warrants"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 11,
+    "realAnchor": null
+  },
+  "companions": [],
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "radiant_plateau_edge": {
+      "visits": 1,
+      "notes": [
+        "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning."
+      ],
+      "flags": {
+        "fendt_board_marking": "red_chalk_no_record"
+      },
+      "lastVisit": 1,
+      "vectorsKnown": [
+        "dark_light"
+      ],
+      "subPlaces": {
+        "district-common-hall": {
+          "name": "District Common Hall",
+          "day": 1,
+          "visited": true,
+          "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare di"
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 11,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Sela tapped the six-fold rhythm into the Millbrook common house floor before the assembled elder panel — the youngest witness named the pattern from the inside of the stone, confirmed by three vantage ("
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Millbrook's elder panel formally accepted the evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Usnea proposed leading a multi-settlement expedition into the Disputed Zone before Millbrook's assembled elder panel — the room could not follow; the gap between evidence and action named openly. (near "
+      },
+      {
+        "day": 1,
+        "worldDay": 10,
+        "text": "Word reaches you: Word of Millbrook's elder decision — and Fendt's public naming — reached the Radiant Plateau Edge District by Day 11 night via the eastern path. Fendt's name appeared in red chalk on the district acco ("
+      },
+      {
+        "day": 1,
+        "worldDay": 10,
+        "text": "Word reaches you: A filtration array supervisor marked their own subordinate — Fendt — on the Edge District accountability board and filed no accompanying record. A keeper of thirty years has never seen this before. (nea"
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-11T20:38:29.343Z",
+    "lastCanonWorldDay": 11
+  },
+  "bio": null,
+  "subAttributes": {
+    "strength": 6,
+    "agility": 6,
+    "reason": 6,
+    "insight": 8,
+    "presence": 6,
+    "rapport": 6,
+    "craft": 6,
+    "wits": 6
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 3,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "fendt-marking": {
+        "id": "fendt-marking",
+        "label": "Fendt — Red Chalk Marking",
+        "kind": "mystery",
+        "facts": [
+          "[d1] A filtration array supervisor marked their subordinate Fendt in red chalk on the Edge District accountability board and filed no record — a thing no keeper of thirty years has seen done before. The na"
+        ],
+        "links": [
+          "radiant-plateau",
+          "water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "millbrook-elder-decision": {
+        "id": "millbrook-elder-decision",
+        "label": "Millbrook Elder Panel — Precursor Recognition",
+        "kind": "event",
+        "facts": [
+          "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley and named it publicly — the first governance body in the valley to do so. Sela demonstrated the s"
+        ],
+        "links": [
+          "millbrook",
+          "precursor-system"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "precursor-system": {
+        "id": "precursor-system",
+        "label": "Precursor System — Beneath the Valley",
+        "kind": "mystery",
+        "facts": [
+          "[d1] An operating Precursor system beneath the valley has been officially named by Millbrook's elders. Usnea proposed a multi-settlement expedition into the Disputed Zone to investigate; the panel could no"
+        ],
+        "links": [
+          "millbrook-elder-decision",
+          "disputed-zone",
+          "water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "water-crisis": {
+        "id": "water-crisis",
+        "label": "The Water Crisis — Discoloration Stage",
+        "kind": "event",
+        "facts": [
+          "[d1] The Echo River runs gray-green on bad mornings. Fish catches are down across the valley. Communities murmur but cooperate. The crisis stands at the Discoloration stage as of World-day 11."
+        ],
+        "links": [
+          "echo-river",
+          "millbrook",
+          "radiant-plateau"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {},
+  "aptitudes": [],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "reconcileVersion": 4,
+  "updatedAt": 1783802356584,
+  "rev": 10,
+  "opLossPending": false,
+  "establishedFacts": [
+    {
+      "id": "f1",
+      "text": "Fendt's name appeared in red chalk on the Edge District accountability board with no accompanying record — a filtration array supervisor marked them and filed nothing; a keeper of thirty years has nev",
+      "day": 1,
+      "subjectId": null
+    }
+  ],
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  }
+}

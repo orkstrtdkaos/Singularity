@@ -283,6 +283,8 @@ The game is deep (tiers, gates, poles, gambits, combinations, martial paths) and
 
 **Fast-fix, ships AHEAD of BATCH-9. ✅ ANCHOR RESOLVED 2026-07-11 (hybrid — below); BUILDABLE.** Erik-found+clarified live 2026-07-11; Aevi PO. Preview-testing protocol. Only Aevi closes.
 
+**🔧 BUILD OWNER: CCode.** SNG-041 is ENGINE CODE — shared world epoch in worldtime.js, event/fact/news stamping with the absolute world-day, worldtick cross-character reconciliation, GM-references-not-invents contract. Aevi's part (spec authoring + fork-resolution + unblock) is COMPLETE; Aevi authors specs/ledger/content, NOT engine implementation. **CCode builds SNG-041 as its next build after Phase 1 — do not stop expecting Aevi to land it.** Aevi closes after Erik's browser-leg.
+
 **Root cause (corrected — Erik-clarified + confirmed in code).** Time is PER-CHARACTER: `worldtime.js newClock(startDay=1)` gives every character its own Day-1 origin, so "Day 8" (this character) and "Day 11" (the Ent character) are independent relative counts with NO shared reference. A shared-world event carried the Ent's relative Day-11 into this character's Day-8 frame; they can't reconcile because no absolute exists. worldtime.js's own comment already flags it: *"for v0.5 shared worlds: time mode must become a WORLD-level choice — one world, one clock."* No shared epoch exists yet (search: 0 matches). SNG-041 IS that.
 
 **Fix — establish the shared absolute.**

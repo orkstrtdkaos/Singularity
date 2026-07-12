@@ -22,6 +22,7 @@
 | **SNG-067/068/069 (P1)** | v1.8.33 | The commit boundary — creation no longer commits before confirm. Prologue: abilities reconcile vs CONFIRMED domains (grandfather + primary-grant), background is CHOSEN (categorized), sidebar shows only met companions. |
 | **SNG-077** | v1.8.34 | Gambit hint no longer constant — the GM declares `gambitApt`; the engine decides show (dismissal sticks + cooldown). |
 | **SNG-066** | v1.8.35 | In-game ⚑ Feedback — one tap; version/screen/character/location/last-turn/errors auto-attach; append-only to `po/feedback/`, queued if sync off. |
+| **SNG-080** | v1.8.36 | The world must PUSH — quiet-turn pacing (escalating, register/danger-aware, tightens a live quest thread); danger graduated + findable on the map. |
 
 ---
 
@@ -60,7 +61,7 @@ CCode's ROUND 2 caught Aevi in four places. **All accepted; `SYSTEM_SPEC.md` is 
 
 ---
 
-## 🔴 SNG-080 — **THE WORLD MUST PUSH** (Erik: *"I haven't gotten into ANY fights... I wanted more things to start happening"*)
+## ✅ SNG-080 SHIPPED v1.8.36 — **THE WORLD MUST PUSH** (Erik: *"I haven't gotten into ANY fights... I wanted more things to start happening"*)
 **Diagnosed: Erik has never left the safest place in the world.** Millbrook is a farming village and **ZERO fight-capable encounters are eligible there** (the 8 that can fire: 3 beneficial · 2 benign · 2 beautiful · 1 theft). That is CORRECT for a village. **The defect is that the world is REACTIVE — it waits for him.** *(Also `millbrook.json` has NO `dangerLevel` field → floored to the gentlest tier. CI should require it.)*
 **Fix — three pressures, all using systems that already exist:** (1) **THE VILLAIN ACTS ON A CLOCK.** Grael's thread is LIVE in Erik's world (Fendt, the ledger, the water crisis) and **nothing is firing it.** If Erik ignores it, Grael should WIN — another name on the board, the water worsens, and **it arrives at him.** *(The quest's own "you walked away" outcome already specifies this.)* (2) **THE WORLD REACHES HIM** — `worldtick` already has `impactsLocal`; a propagating consequence must sometimes surface as a **SCENE**, not a line in a digest. **Riffraff arrive. A messenger finds him. A body turns up.** (3) **QUEST HOOKS COME TO HIM** — `questSeeds` woven "when the scene needs drive" is too passive.
 **THE PACING RULE (the actually-missing thing): track QUIET TURNS; after a threshold, THE WORLD ACTS** — rumor → someone with a problem → a hook that won't wait → something arriving. **The player must never have to ask the world to be interesting.** Pressure respects the place: *in Millbrook that's a frightened neighbour, not a bandit ambush.* **And make danger FINDABLE** — colour `dangerLevel` on the map; the Disputed Zone is on his doorstep and nothing has invited him in.

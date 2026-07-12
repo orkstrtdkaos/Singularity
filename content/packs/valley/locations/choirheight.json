@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "choirheight",
+  "name": "Choir-Height",
+  "regionId": "the_ascent",
+  "communityId": "seraphic.choirheight",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.7,
+    0.0,
+    0.0,
+    0.0,
+    0.4,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "demonic_angelic": 0.7,
+    "chaos_order": 0.4,
+    "dark_light": 0.3
+  },
+  "tags": [
+    "seraphic",
+    "angelic",
+    "city",
+    "tiered",
+    "home",
+    "sacred"
+  ],
+  "connections": [
+    "the_mercy_house",
+    "the_unfallen"
+  ],
+  "descriptionSeed": "Tiered spires, choral certainty that is genuinely hard to bear, and a mercy that is entirely real and administered from above. The Seraphic Orders will forgive you, and it will not be a formality, and it will change you — and they will also judge you, and that will not be a formality either, and there is no appeal.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Seraphs whose kindness is real and whose certainty is total; a judgment being pronounced, correctly; someone forgiven and visibly remade by it.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A judgment was pronounced on an innocent and it BOUND, and the Orders cannot unmake it and will not admit that",
+    "A Seraph has begun to doubt, and doubt is not a thing this people has a procedure for"
+  ],
+  "map": {
+    "x": 360,
+    "y": 60
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

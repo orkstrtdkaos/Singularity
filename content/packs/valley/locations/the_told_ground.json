@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_told_ground",
+  "name": "The Told Ground",
+  "regionId": "the_stark_reach",
+  "communityId": "verist.toldground",
+  "axisVector": [
+    0.0,
+    0.6,
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "falsehood_truth": 0.6,
+    "violence_peace": -0.2,
+    "death_life": -0.2
+  },
+  "tags": [
+    "verist",
+    "truth",
+    "sacred",
+    "memorial",
+    "social"
+  ],
+  "connections": [
+    "the_unblinking_stone"
+  ],
+  "descriptionSeed": "A field of plain stones, each carrying one true sentence somebody could not say in life. Anyone may add one. Nobody may remove one. It is the most devastating place in the world and the Verists picnic there, because to them the alternative — a world where those sentences stayed unsaid — is the horror.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "People reading; people carving; someone who has come to add a stone and cannot do it; a stone with your name on it, and it was not you who put it there.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A stone has appeared that names a living person's secret and they have come to break it",
+    "Someone has removed a stone, which has never happened"
+  ],
+  "map": {
+    "x": 225,
+    "y": 400
+  },
+  "poleIntensity": 0.6
+}

@@ -665,3 +665,39 @@ Only once the corpus is final: redesign the tree/graph around the civilization s
 **Erik test:** "Travel somewhere — verify the header, the sheet, and the map all say where you actually are, immediately."
 
 *Small but corrosive — it makes the player distrust the world state. Worth doing early.*
+---
+
+## SNG-057 — Companion choice + naming (stop everyone having an Aevi)
+
+**Erik-directed 2026-07-11:** *"we need more starting companions, or at least let the player name the companion... otherwise we'll all have Aevi's."* 🔧 CCode (UI/engine). **Content DONE** — Aevi authored 5 new companions. Aevi PO.
+
+**Content shipped (roster now 9):** existing `aevi` (nanite-motes), `bristle`, `ember` (Glade-fox), `quill` — plus new: **`tal`** (a road-met human apprentice — the ONLY companion who can be hurt, frightened, and killed; that vulnerability IS the mechanic), **`coil`** (a Precursor maintenance-mechanism that has adopted you as its assignment; the name-echo with Halvex Coil is deliberate and Coil does not know), **`hush`** (an Umbral-touched thing of the deep dark — not friendly, LOYAL, which is colder and more durable), **`marrow`** (an Ashwarden-touched corvid that attends endings and will not lie about yours), **`sprig`** (a Rootkin cutting that is slowly, publicly becoming a person — a child measured in centuries). Deliberate spread across the great circle: mechanical, dark, death, life, and one plain human.
+
+**Build:**
+1. **Companion CHOICE at character creation** — present the starting-eligible roster (`startingOption: true`) with name, role, appearance; player picks. **Aevi must stop being the silent default.**
+2. **Companion NAMING** — the player may rename their companion (like the `✎ Appearance` editor from SNG-053). Stored on the character's companion record; the GM uses the chosen name throughout. Keep the canonical `id` for content lookup; `displayName` is the player's.
+3. Both surfaces feed the GM + portraits (a renamed companion still generates from its authored `appearance`).
+4. Migration: existing characters keep their companion; naming is additive.
+
+**Erik test:** "Create a character — verify you're offered a real roster (not handed Aevi), and that you can name whoever you pick, and the GM calls them by that name."
+
+---
+
+## SNG-058 — Party leader (the leader decides; the turn-by-turn stays everyone's)
+
+**Erik-directed 2026-07-11:** *"for party play, pick a leader. The leader chooses where the party goes and makes the decisions, except in turn-by-turn portions — battles, skills, etc."* 🔧 CCode. Aevi PO. **Extends SNG-033 (party v2) / SNG-038 (simultaneous turns).**
+
+**The split — this is the whole spec:**
+- **LEADER decides (party-level, one voice):** where the party travels, which quest/thread to pursue, party-level dialogue choices and negotiations, when to rest/camp, whether to accept an offer. One person steers; the party doesn't deadlock in a committee.
+- **EVERYONE decides (individual, turn-by-turn):** their own combat actions, their own ability/skill use, their own gambit steps, their own character choices within a scene. **Your character is always yours.** The leader never plays your turn.
+
+**Build:**
+1. **Leader selection** on party formation (`engine/party.js` — shared scene already exists): a designated `leaderId`; visible to all members; transferable by consent (leader hands it off, or party re-picks).
+2. **Route party-level prompts to the leader only.** Non-leaders SEE the choice and the leader's decision (with a short "waiting on {leader}" state) but do not each get asked. This kills the N-players-all-answering-a-travel-prompt problem.
+3. **Turn-by-turn stays per-player** — combat, skills, gambits, personal actions resolve exactly as they do now (`isMyTurn`, per-character resolution). No change to the individual loop.
+4. **Non-leader voice (light):** allow a quick "suggest / object" signal to the leader — surfaced, not binding. Leadership isn't a gag order.
+5. Solo play is completely unchanged (a solo player is trivially their own leader).
+
+**Erik test:** "Form a party of two, pick a leader — verify only the leader is prompted for travel and party decisions (the other sees it), but BOTH players still choose their own actions in a fight."
+
+*This is what makes multi-player actually playable — the family can share a world without every road-fork becoming a negotiation.*

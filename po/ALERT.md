@@ -19,6 +19,7 @@
 | **SNG-076** | v1.8.32 | Authored prose renders in FULL (was cut mid-word); model output clamps on a word boundary. |
 | **SNG-070** | v1.8.30 | **GM corrections — the game self-heals.** A bounded `stateOps` (repair, not wish): fix a wrong field/domain/entity/quest/location, engine-refuses any advance, every change logged. |
 | **SNG-052** | ✔ | Adult-gate checkbox persistence |
+| **SNG-067/068/069 (P1)** | v1.8.33 | The commit boundary — creation no longer commits before confirm. Prologue: abilities reconcile vs CONFIRMED domains (grandfather + primary-grant), background is CHOSEN (categorized), sidebar shows only met companions. |
 
 ---
 
@@ -37,7 +38,7 @@
 **SNG-043 Part A SHIPPED CORRECTLY — Aevi's SPEC was the bug.** `isGambitApt` is exactly as specced (`>=3 choices && (planTagged || threads>=3)`), but **both disjuncts fire on ordinary scenes**: `plan` is 1 of 10 generic approach tags (a *style*, not a structure), and `scene.threads` are **conversational** (*"a question hanging"*) — any decent social scene has three. **Aevi keyed the hint on style + texture instead of the gambit condition: multiple OBSTACLES that must be SEQUENCED.**
 **Fix — stop guessing, let the GM say so:** add a GM field **`gambitApt: true`**, emitted ONLY for a genuine multi-obstacle objective where ordering the approach would matter (*"a rich conversation is NOT gambit-apt; a careful approach to a SINGLE obstacle is NOT gambit-apt; most turns, omit it"*). Then **`isGambitApt = turn.gambitApt === true`** — **drop `planTagged` and the thread-count entirely.** Law 1 holds: the GM proposes, the engine still decides (cooldown · dismissal · sanity check). **Make dismissal actually stick for the scene** + an N-turn cooldown. **Bias hard toward silence** — a hint shown too rarely costs a missed feature; one shown constantly costs the player's attention entirely, and Erik is already there.
 
-### 3. **P1 — the commit boundary** (SNG-067/068/069 are ONE defect)
+### 3. ✅ P1 SHIPPED v1.8.33 — the commit boundary (SNG-067/068/069 were one defect; prologue path fixed)
 `grep` at v1.8.23 showed **zero** commit-boundary functions. Draft → confirm → commit. Nothing writes to the character until the player says yes; everything stays re-choosable. `[CCODE: 16 'draft' refs at HEAD — is this partially shipped? confirm]`
 
 ### 4. **SNG-066 — feedback** (auto-captured context: version · character · domains · location · last GM turn · console errors). Turns Erik's screenshot-archaeology into one-click reports.

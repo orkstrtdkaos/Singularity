@@ -878,3 +878,38 @@ Everything else — 26 pre-existing Valley/Marches/Churn/Deepwood locations, all
 **✍️ AEVI OWES:** the schema + a first set of authored structured quests — starting with the ones the world is already pointing at: **Grael's ledger and the Fendt thread** (live in Erik's game), the Blaze's expansion, the Unlit taking someone from the Underlight, the tree in the Slow Orchard planted for someone missing, and a Halvex "patched" arc.
 
 **Erik test:** "Take a quest — verify it tells you what's at stake and who pays if you walk away, that it has real stages with clear objectives, that there's more than one way through it, and that finishing it CHANGES something you can go back and see."
+---
+
+## SNG-BATCH-10 — Plug In The World (the content exists; the engine doesn't read it)
+
+**Aevi PO, 2026-07-11. Verified at HEAD v1.8.21.** CCode has shipped the Prologue, the Library, portraits, born-with-image, legends, tradition-grouped skills and zoom. But **three major systems Aevi authored are sitting at origin unread by the engine.** This batch connects them. Nothing here needs new content — it all exists and is manifest-registered.
+
+### Phase 1 — THE DOMAIN GATES (the great circle does not actually gate anything) 🔧 CCode
+**Probe at HEAD: `primaryDomain`/`secondaryDomain` → 0 refs.** SNG-055 was never built. Skills now GROUP by tradition (good) but nothing GATES them — the "learn any Reach's capstone by picking it" hole Erik found is still open, and the great circle is currently decoration.
+- Character carries **primary / secondary / tertiary** domains. In the Prologue they CRYSTALLIZE from play (the tradition-tags on the 48 paths, tallied — `prologue.json → closingReveal`); in quick-start the player picks them. Confirm-before-commit either way.
+- **Gate `meetsLearnGate`/`effectiveLevelReq` off ring DISTANCE**, read from `traditions.json → theGreatCircle` (`ring`, `distances`, `opposite`) — **never hardcode the ring**: primary = full · adjacent (1 step) = free but NO capstones · secondary = tier III · tertiary (a ring-neighbor of secondary) = tier II · 2+ steps = skill-point penalty scaling with distance · **antipode (12 steps) = CLOSED**.
+- **The only crossings:** combination abilities (above all the cross-pole braids) and artifact/extreme-circumstance grants. *A Blazeborn can never learn Umbracraft — but a Blazeborn who has held both can carry The Harbored Flame.* That is the payoff and it does not exist until this ships.
+- Also honor the tradition-access gates: native (origin) / in-region / teacher-or-tome; folk traditions OPEN; capstones need standing.
+- **Migrate** existing characters: infer domains from what they hold; grandfather anything now out-of-domain. Nobody loses a skill.
+
+### Phase 2 — STARTING LOCATION (19 homelands exist; nobody can start in one) 🔧 CCode
+**Probe at HEAD: `startingRegion` → 0 refs.** `origins.json` maps all 27 origins to a homeland across 24 regions — and creation still puts everyone in the Valley.
+- Creation offers **STARTING LOCATION**, defaulting to the origin's homeland (`origin.startingRegion` / `startingLocation`), and always also offering **the Valley** (a character who already left — their `whyYouAreHere` is the reason) and **The Crossing** (the center — where nobody is from and everybody is).
+- Feed the origin's `whyYouAreHere` to the GM as opening context. Nobody is anywhere by accident.
+- This also unblocks SNG-055's **in-region** access path (currently unreachable) and SNG-046 Phase-2's multi-area map (nothing to show).
+
+### Phase 3 — QUESTS (authored quests do not load; quests have no structure) 🔧 CCode
+**Probe at HEAD: `provides.quests` in `state.js` → 0 refs.** `content/packs/valley/quests.json` exists and IS manifest-registered and **will not load** — there is no loader branch for it.
+- Add the `quests` loader branch (same shape as npcs/locations).
+- Implement **SNG-065 structured quests** in `engine/quests.js`: stakes, engine-testable stage conditions, multiple routes, **branched outcomes**, and a `consequences` block the engine APPLIES on resolution (codex writes · NPC state · people/faction disposition · location state · a propagating world-event dated on the shared clock). Schema: `content/packs/core/rules/quest_structure.json`.
+- **The rule:** a quest that changes nothing durable is not allowed to be a quest. Quest log shows stakes + stage objective, not just a title.
+- Authored and waiting: **The Edge District Ledger** (Grael/Fendt — *live in Erik's game*; 6 routes, 4 outcomes, including "you walked away" as a real outcome with a real cost) and **The Tree That Waits**. NPCs `fendt` + `keeper_ilma` exist.
+
+### Phase 4 — CONTENT CI (SNG-040/064 — the insurance) 🔧 CCode
+The manifest bug (the live game ran on **six locations** for weeks, silently) is the argument. Fail the build on:
+- a content file on disk not listed in a manifest · a manifest path with no file · **a `provides.*` key the loader does not handle** (← this is exactly what bit quests) · a dangling connection · a one-way edge · an unreachable location · a content file failing its schema (this would have caught Aevi's poleIntensity bug at commit).
+
+### Then (fast-follows, already specced)
+SNG-056 (location-header desync) → SNG-058 (party leader) → SNG-052 (adult-gate checkbox persistence) → SNG-054 Phase 2 (skill-tree viz redesign, now that the corpus is final).
+
+**Erik test (the whole batch):** "Make a character — verify you start in your PEOPLE'S homeland, that your domains gate what you can learn (and your antipode simply isn't offered), and that you can take a quest that tells you what's at stake, has real stages, more than one way through, and changes something you can go back and see."

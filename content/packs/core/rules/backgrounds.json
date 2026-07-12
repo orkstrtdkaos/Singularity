@@ -2,97 +2,439 @@
   "schemaVersion": 1,
   "id": "backgrounds",
   "kind": "creation",
-  "note": "SNG-063 — BACKGROUND is WHAT YOU DID, orthogonal to WHO YOUR PEOPLE ARE (origin). A Cogitant can be a soldier; a Marcher can be a healer — and both are more interesting than the obvious pairing. Expanded from the 5 hardcoded in app.js. Authored by Aevi 2026-07-11.",
+  "note": "SNG-069 (Erik: 'I didn't get to choose my occupation or background... the martial disciplines and magical backgrounds should be here as well as many others'). BACKGROUND is WHAT YOU DID and HOW YOU CAME TO YOUR CRAFT — orthogonal to ORIGIN (which people you are from) and to DOMAIN (which craft you practice). A Cogitant duelist, a Marcher physician, a self-taught Umbral — all better than the obvious pairing. Expanded 15 → 40 across 6 categories. Authored by Aevi 2026-07-11.",
+  "categories": {
+    "martial": "Martial disciplines — HOW you fight, which is a different question from whether you can.",
+    "practitioner": "How you came to your craft. This is the world's 'magical background': in Singularity the crafts ARE the magic, so what matters is LINEAGE — temple-trained, self-taught, precursor-marked, battlefield-taught, apprenticed to a legend, or you did it once by accident and have never understood how.",
+    "craft": "Making, trading, growing, surviving — hands and materials.",
+    "learned": "Records, medicine, law, maps — the disciplines of knowing.",
+    "social": "Rooms, tables, crowds, and the things said in them.",
+    "marginal": "The edges — exile, theft, ruin, drift. Not lesser; differently placed."
+  },
+  "rules": {
+    "orthogonal": "Backgrounds are NOT gated by origin or domain. A Cogitant soldier and a Marcher healer are the interesting ones.",
+    "playerChooses": "MANDATORY: the player CHOOSES their background. It must never be auto-assigned (Erik, live: 'I didn't get to choose my occupation or background'). In the Prologue, offer the choice at the reveal alongside the domain confirm — the scene may SUGGEST one based on how they played, but the player decides.",
+    "affinity": "`affinity` lists challenge types this background helps with. Flavor + a small modifier; never a gate."
+  },
   "backgrounds": [
     {
-      "id": "former-professional",
-      "name": "Former Professional",
-      "description": "Pre-Transition career skills, and the connections that came with them — some of which still answer.",
-      "gmHint": "Knows procedure, paperwork, and who to call. Uneasy with how little of it still works."
+      "id": "duelist",
+      "name": "Duelist",
+      "category": "martial",
+      "description": "One blade, one opponent, one exchange. You were trained for the moment where it is only the two of you and everything is decided in about a second.",
+      "gmHint": "Reads a single opponent perfectly and a melee badly. Contemptuous of brawls. Has killed, formally, and it was witnessed.",
+      "affinity": [
+        "FIGHT"
+      ]
     },
     {
-      "id": "community-organizer",
-      "name": "Community Organizer",
-      "description": "You held a group of people together through something. It worked, mostly.",
-      "gmHint": "Reads a room's factions instantly. Cannot stop trying to fix them."
+      "id": "line_soldier",
+      "name": "Line-Soldier",
+      "category": "martial",
+      "description": "You stood in a line with people on either side of you and you did not step back. That is the whole art and it is harder than it sounds.",
+      "gmHint": "Thinks in formations. Trusts the person beside them instantly and completely, which has been exploited.",
+      "affinity": [
+        "FIGHT"
+      ]
+    },
+    {
+      "id": "skirmisher",
+      "name": "Skirmisher",
+      "category": "martial",
+      "description": "You fought in the gaps — flanks, woods, night. Never a fair fight if you could help it, and you could usually help it.",
+      "gmHint": "Instinctively finds the angle nobody is watching. Uncomfortable in the open. Bad at ceremony.",
+      "affinity": [
+        "FIGHT",
+        "CHASE"
+      ]
+    },
+    {
+      "id": "warden",
+      "name": "Warden / Guard",
+      "category": "martial",
+      "description": "You protected a place, or a person, or a road, for years, and mostly nothing happened, and you stayed ready anyway.",
+      "gmHint": "Watches doors. Has the specific patience of someone who has waited a decade for one bad night.",
+      "affinity": [
+        "FIGHT",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "hunter",
+      "name": "Hunter",
+      "category": "martial",
+      "description": "You tracked, waited, and killed what you needed and nothing you didn't. The old Valley ethic in a single motion.",
+      "gmHint": "Reads ground and weather. Uneasy about hunting people, and has, and doesn't discuss it.",
+      "affinity": [
+        "EXPLORE",
+        "FIGHT"
+      ]
+    },
+    {
+      "id": "bodyguard",
+      "name": "Bodyguard",
+      "category": "martial",
+      "description": "Your job was for somebody else to survive. Sometimes they did.",
+      "gmHint": "Places themselves between people and doors without noticing they are doing it. Cannot enjoy a meal facing away from the room.",
+      "affinity": [
+        "FIGHT",
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "war_leader",
+      "name": "War-Leader",
+      "category": "martial",
+      "description": "You gave the orders. Some of them got people killed and some of them were right and a few were both.",
+      "gmHint": "Assesses a fight as a problem of resources and morale. Carries a specific list of names.",
+      "affinity": [
+        "FIGHT",
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "arena_fighter",
+      "name": "Arena Fighter",
+      "category": "martial",
+      "description": "You fought for a crowd, for money, under rules — and you have thought a great deal about the difference between a contest and a killing.",
+      "gmHint": "Performs. Knows exactly how to make a fight look better than it is. Has met the Coliseum's champions.",
+      "affinity": [
+        "FIGHT",
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "temple_trained",
+      "name": "Temple-Trained",
+      "category": "practitioner",
+      "description": "You learned your craft properly, in a house of it, from people who had done it for generations. You know the forms. You also know what the forms cost.",
+      "gmHint": "Cites the correct method. Genuinely pained by sloppy practice. Has a teacher whose approval still matters.",
+      "affinity": [
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "self_taught",
+      "name": "Self-Taught / Hedge-Practitioner",
+      "category": "practitioner",
+      "description": "Nobody taught you. You worked it out, alone, from wreckage and stubbornness, and you have gaps a temple-trained practitioner would find horrifying and instincts they will never have.",
+      "gmHint": "Unorthodox and effective. Bristles at correction. Occasionally does something no trained practitioner would think to try, and it works.",
+      "affinity": [
+        "EXPLORE"
+      ]
+    },
+    {
+      "id": "lineage_taught",
+      "name": "Lineage-Taught",
+      "category": "practitioner",
+      "description": "Your craft came down through your family, and it came with obligations, and you did not get to decline either.",
+      "gmHint": "Carries the family's reputation whether they want it or not. Someone, somewhere, is owed.",
+      "affinity": [
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "precursor_marked",
+      "name": "Precursor-Marked",
+      "category": "practitioner",
+      "description": "Something in the old lattice touched you and did not entirely let go. You did not ask for this and you cannot give it back.",
+      "gmHint": "The old works notice them. Address-Sense comes unbidden. Something is faintly, permanently different about them, and people can tell.",
+      "affinity": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ]
+    },
+    {
+      "id": "battlefield_taught",
+      "name": "Battlefield-Taught",
+      "category": "practitioner",
+      "description": "You learned your craft while it was being used on you. There was no theory and there was no second attempt.",
+      "gmHint": "Fast, brutal, and effective under pressure; theoretically shaky. Cannot explain WHY it works, only THAT it does.",
+      "affinity": [
+        "FIGHT"
+      ]
+    },
+    {
+      "id": "apprenticed_to_a_legend",
+      "name": "Apprenticed to a Legend",
+      "category": "practitioner",
+      "description": "You were taught by one of the great ones. You were not their best student. You are still better than almost everyone else.",
+      "gmHint": "Name-drops nothing, ever, and it comes out anyway. Measures themselves against an impossible standard, permanently.",
+      "affinity": [
+        "INVESTIGATE",
+        "FIGHT"
+      ]
+    },
+    {
+      "id": "found_it_by_accident",
+      "name": "Found It By Accident",
+      "category": "practitioner",
+      "description": "You did a thing you should not have been able to do, once, in a bad moment, and you have spent every year since trying to understand what happened.",
+      "gmHint": "Genuinely does not know their own ceiling. Frightened of their own craft in a way trained practitioners find superstitious.",
+      "affinity": [
+        "EXPLORE"
+      ]
     },
     {
       "id": "craftsman",
       "name": "Craftsman / Artisan",
+      "category": "craft",
       "description": "Making, mending, material sense. Your hands know things your mouth cannot explain.",
-      "gmHint": "Assesses everything by how it was made. Physically pained by shoddy work."
+      "gmHint": "Assesses everything by how it was made. Physically pained by shoddy work.",
+      "affinity": [
+        "EXPLORE",
+        "INVESTIGATE"
+      ]
     },
     {
-      "id": "survivalist",
-      "name": "Survivalist",
-      "description": "You have been cold, hungry, and alone, and you came back, and you know exactly what that took.",
-      "gmHint": "Always knows the exits, the water, and how many days of food. Finds comfort suspicious."
+      "id": "mechanist",
+      "name": "Mechanist / Engineer",
+      "category": "craft",
+      "description": "Systems, pressure, tolerance, failure. You have taken apart things that were not supposed to be taken apart.",
+      "gmHint": "Sees the mechanism under everything, including institutions and people. This is sometimes a gift.",
+      "affinity": [
+        "INVESTIGATE"
+      ]
     },
     {
-      "id": "medical",
-      "name": "Medical Practitioner",
-      "description": "You have had your hands inside someone who was dying. Sometimes it worked.",
-      "gmHint": "Triages automatically, including people who did not ask. Does not flinch, and that unsettles people."
+      "id": "smith",
+      "name": "Smith",
+      "category": "craft",
+      "description": "Heat, metal, and the specific stubbornness of a material that must be persuaded rather than forced.",
+      "gmHint": "Strong hands, long patience, and an unnerving stillness. Judges a person by their tools.",
+      "affinity": [
+        "EXPLORE",
+        "FIGHT"
+      ]
     },
     {
-      "id": "soldier",
-      "name": "Soldier / Guard",
-      "description": "You carried a weapon for someone else's reasons and you were good at it.",
-      "gmHint": "Reads violence before it arrives. Sleeps badly. Does not talk about the one that went wrong."
-    },
-    {
-      "id": "scholar",
-      "name": "Scholar / Archivist",
-      "description": "You spent years with the records, and you know how much of what everyone believes is simply not in them.",
-      "gmHint": "Cites sources unprompted. Genuinely delighted by a primary document. Distrusts a story with no paper."
+      "id": "builder",
+      "name": "Builder",
+      "category": "craft",
+      "description": "Walls, roofs, bridges — things that must hold with people underneath them.",
+      "gmHint": "Assesses every structure for load and failure, unconsciously, always. Sleeps badly under bad beams.",
+      "affinity": [
+        "EXPLORE"
+      ]
     },
     {
       "id": "trader",
       "name": "Trader / Merchant",
+      "category": "craft",
       "description": "Roads, prices, and the exact moment a deal turns. You have been cheated and you learned from it.",
-      "gmHint": "Prices everything reflexively, including favors. Knows what a thing is worth to THIS person, which is different."
-    },
-    {
-      "id": "smuggler",
-      "name": "Smuggler / Thief",
-      "description": "You moved what was not supposed to move. You were caught once, and only once.",
-      "gmHint": "Notices the locks, the sightlines, the guard's habits. Cannot walk into a room without casing it."
-    },
-    {
-      "id": "storyteller",
-      "name": "Storyteller / Performer",
-      "description": "You have held a room. You know that the true thing and the thing they will listen to are not always the same, and you have made your peace with that.",
-      "gmHint": "Instinctively shapes events into narrative. Sometimes the shaping is the lie."
+      "gmHint": "Prices everything reflexively, including favors. Knows what a thing is worth to THIS person, which is different.",
+      "affinity": [
+        "SOCIAL"
+      ]
     },
     {
       "id": "farmer",
       "name": "Farmer / Herder",
-      "description": "Seasons, soil, animals, and the specific patience of people who cannot hurry the thing they depend on.",
-      "gmHint": "Unhurried in a way that infuriates cities. Right about the weather. Right about the animal."
+      "category": "craft",
+      "description": "Seasons, soil, animals, and the patience of people who cannot hurry the thing they depend on.",
+      "gmHint": "Unhurried in a way that infuriates cities. Right about the weather. Right about the animal.",
+      "affinity": [
+        "EXPLORE"
+      ]
     },
     {
-      "id": "river-runner",
+      "id": "river_runner",
       "name": "River-Runner",
-      "description": "The Valley's waterways, the crossings, the currents. You have pulled people out and you have failed to.",
-      "gmHint": "Reads water the way others read faces. Uncomfortable far from it."
+      "category": "craft",
+      "description": "The waterways, the crossings, the currents. You have pulled people out and you have failed to.",
+      "gmHint": "Reads water the way others read faces. Uncomfortable far from it.",
+      "affinity": [
+        "EXPLORE",
+        "CHASE"
+      ]
     },
     {
-      "id": "orphan",
-      "name": "Street-Raised",
-      "description": "Nobody raised you and you raised yourself, and you are not going to make a speech about it.",
-      "gmHint": "Trusts slowly and completely. Very hard to shock. Hoards small things."
+      "id": "survivalist",
+      "name": "Survivalist",
+      "category": "craft",
+      "description": "You have been cold, hungry, and alone, and you came back, and you know exactly what that took.",
+      "gmHint": "Always knows the exits, the water, and the days of food. Finds comfort suspicious.",
+      "affinity": [
+        "EXPLORE"
+      ]
+    },
+    {
+      "id": "scholar",
+      "name": "Scholar",
+      "category": "learned",
+      "description": "Years with the records, and the knowledge of how much of what everyone believes is simply not in them.",
+      "gmHint": "Cites sources unprompted. Delighted by a primary document. Distrusts a story with no paper.",
+      "affinity": [
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "archivist",
+      "name": "Archivist",
+      "category": "learned",
+      "description": "You keep what would otherwise be lost, and you have watched people try very hard to lose specific things.",
+      "gmHint": "Notices what is MISSING from a record, which is a rarer skill than reading one.",
+      "affinity": [
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "physician",
+      "name": "Physician",
+      "category": "learned",
+      "description": "You have had your hands inside someone who was dying. Sometimes it worked.",
+      "gmHint": "Triages automatically, including people who did not ask. Does not flinch, and that unsettles people.",
+      "affinity": [
+        "INVESTIGATE",
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "lawspeaker",
+      "name": "Lawspeaker",
+      "category": "learned",
+      "description": "You know what the rules actually say, as opposed to what everyone assumes, and the gap is where you live.",
+      "gmHint": "Finds the clause. Infuriating and indispensable in roughly equal measure.",
+      "affinity": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "cartographer",
+      "name": "Cartographer",
+      "category": "learned",
+      "description": "You made maps, which means you have been to the edges of them.",
+      "gmHint": "Cannot stop orienting. Deeply disturbed by a place that resists being mapped.",
+      "affinity": [
+        "EXPLORE"
+      ]
+    },
+    {
+      "id": "envoy",
+      "name": "Envoy / Diplomat",
+      "category": "social",
+      "description": "You spoke for people who could not be in the room, to people who did not want them there.",
+      "gmHint": "Reads a table instantly. Never says the first thing. Has sold something out and thinks about it.",
+      "affinity": [
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "performer",
+      "name": "Performer / Storyteller",
+      "category": "social",
+      "description": "You have held a room. You know the true thing and the thing they will listen to are not always the same.",
+      "gmHint": "Shapes events into narrative instinctively. Sometimes the shaping is the lie.",
+      "affinity": [
+        "SOCIAL"
+      ]
     },
     {
       "id": "devotee",
       "name": "Devotee",
+      "category": "social",
       "description": "You gave years to a practice, an order, or a certainty — and you either kept it or you did not, and either way it shaped you.",
-      "gmHint": "Has a discipline. Keeps it, or misses it. Reacts strongly to other people's faith."
+      "gmHint": "Has a discipline. Keeps it, or misses it. Reacts strongly to other people's faith.",
+      "affinity": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
     },
     {
-      "id": "ruin-picker",
+      "id": "organizer",
+      "name": "Community Organizer",
+      "category": "social",
+      "description": "You held a group of people together through something. It worked, mostly.",
+      "gmHint": "Reads a room's factions instantly. Cannot stop trying to fix them.",
+      "affinity": [
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "broker",
+      "name": "Broker / Fixer",
+      "category": "social",
+      "description": "You know who wants what and who has it, and you take a cut for closing the distance.",
+      "gmHint": "Knows a guy. Genuinely knows a guy. Owes and is owed, extensively.",
+      "affinity": [
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "spy",
+      "name": "Spy / Listener",
+      "category": "social",
+      "description": "You were somewhere you should not have been, listening, for years, and nobody ever knew.",
+      "gmHint": "Remembers everything anyone says near them. Lies smoothly and dislikes doing it.",
+      "affinity": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "smuggler",
+      "name": "Smuggler / Thief",
+      "category": "marginal",
+      "description": "You moved what was not supposed to move. You were caught once, and only once.",
+      "gmHint": "Notices the locks, the sightlines, the guard's habits. Cannot walk into a room without casing it.",
+      "affinity": [
+        "CHASE",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "orphan",
+      "name": "Street-Raised",
+      "category": "marginal",
+      "description": "Nobody raised you and you raised yourself, and you are not going to make a speech about it.",
+      "gmHint": "Trusts slowly and completely. Very hard to shock. Hoards small things.",
+      "affinity": [
+        "CHASE",
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "exile",
+      "name": "Exile",
+      "category": "marginal",
+      "description": "You cannot go home. You know exactly why. You may or may not think it was fair.",
+      "gmHint": "Guarded about their own past in a way that reads as arrogance. Reacts badly to being judged by strangers.",
+      "affinity": [
+        "SOCIAL"
+      ]
+    },
+    {
+      "id": "ruin_picker",
       "name": "Ruin-Picker",
+      "category": "marginal",
       "description": "You went into the Precursor places and came out with things, and you are still here, which puts you in a small category.",
-      "gmHint": "Fearless about old tech in a way that alarms sensible people. Has an unexplained scar and a rule about doors."
+      "gmHint": "Fearless about old tech in a way that alarms sensible people. Has an unexplained scar and a rule about doors.",
+      "affinity": [
+        "EXPLORE",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "id": "drifter",
+      "name": "Drifter",
+      "category": "marginal",
+      "description": "You have been everywhere and stayed nowhere and it stopped being a phase some time ago.",
+      "gmHint": "Knows a little about everywhere and belongs nowhere. Leaves before it gets hard.",
+      "affinity": [
+        "EXPLORE"
+      ]
+    },
+    {
+      "id": "former_professional",
+      "name": "Former Professional",
+      "category": "marginal",
+      "description": "Pre-Transition career skills, and the connections that came with them — some of which still answer.",
+      "gmHint": "Knows procedure and who to call. Uneasy with how little of it still works.",
+      "affinity": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ]
     }
   ]
 }

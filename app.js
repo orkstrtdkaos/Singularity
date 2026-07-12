@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.22";
+const APP_VERSION = "1.8.23";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1252,6 +1252,27 @@ function backgroundsFallback() {
   ];
 }
 
+// SNG-BATCH-10 Phase 2: STARTING LOCATION. Every origin has a homeland (origins.json startingLocation)
+// and creation defaults to it — but a player may always also start in the Valley (a character who
+// already left) or at The Crossing (the center, where nobody is from). Ids read from content.
+const VALLEY_START = "millbrook", CROSSING_START = "the_crossing";
+function originRecord(originId) { return (CONTENT.origins?.length ? CONTENT.origins : originsFallback()).find(o => o.id === originId) || {}; }
+function homelandFor(originId) { return originRecord(originId).startingLocation || CONTENT.startingLocation || VALLEY_START; }
+/** The three offered starts (deduped): the origin's homeland (default) · the Valley · The Crossing.
+ *  Only offers a location the content actually loaded, so a missing file never mints a broken start. */
+function startingLocationChoices(originId) {
+  const home = homelandFor(originId), seen = new Set(), out = [];
+  const add = (id, label, why) => {
+    if (!id || seen.has(id)) return; const loc = CONTENT.locations?.[id]; if (!loc) return;
+    seen.add(id); out.push({ id, label: label || loc.name || id, why });
+  };
+  add(home, (CONTENT.locations?.[home]?.name || null), "your people's homeland — where you are from");
+  add(VALLEY_START, "The Valley", "a character who already left home; the Valley is where you landed");
+  add(CROSSING_START, "The Crossing", "the center — where nobody is from and everybody is");
+  return out;
+}
+function defaultStart(originId) { const c = startingLocationChoices(originId); return (c.find(x => x.id === homelandFor(originId)) || c[0])?.id || CONTENT.startingLocation; }
+
 function renderCreate() {
   const state = { name: "", origin: "valleyfolk", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
     domains: { primary: null, secondary: null, tertiary: null }, companionId: null, companionName: "", form: "",
@@ -1280,9 +1301,13 @@ function renderCreate() {
       <div class="field"><label>Name</label><input id="c-name" value="${esc(state.name)}"></div>
       <div class="field"><label>Form / appearance <span class="hint" style="text-transform:none">(leads the portrait — blank = an ordinary person)</span></label>
         <textarea id="c-form" rows="2" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood">${esc(state.form)}</textarea></div>
-      <div class="field"><label>Origin — which people are you from? <span class="hint" style="text-transform:none">(you begin in the Valley regardless)</span></label>
+      <div class="field"><label>Origin — which people are you from?</label>
         <select id="c-origin">${origins.map(o => `<option value="${esc(o.id)}" ${state.origin === o.id ? "selected" : ""}>${esc(o.name)}${o.homeRegion && o.homeRegion !== "valley" ? " — of the " + esc(String(o.homeRegion).replace(/_/g, " ")) : ""}</option>`).join("")}</select>
         <div class="hint">${esc(org?.description || "")}${org?.whyYouAreHere ? ` <em>${esc(org.whyYouAreHere)}</em>` : ""}</div></div>
+      ${(() => { const sc = startingLocationChoices(state.origin); if (!sc.length) return ""; if (!sc.some(c => c.id === state.startingLocation)) state.startingLocation = defaultStart(state.origin);
+        return `<div class="field"><label>Starting location <span class="hint" style="text-transform:none">(defaults to your homeland)</span></label>
+        <select id="c-startloc">${sc.map(c => `<option value="${esc(c.id)}" ${state.startingLocation === c.id ? "selected" : ""}>${esc(c.label)}</option>`).join("")}</select>
+        <div class="hint">${esc((sc.find(c => c.id === state.startingLocation) || sc[0]).why)}</div></div>`; })()}
       <div class="field"><label>Background — what did you do?</label>
         <select id="c-bg">${bgs.map(b => `<option value="${esc(b.id)}" ${state.background === b.id ? "selected" : ""}>${esc(b.name)}</option>`).join("")}</select>
         <div class="hint">${esc(bg?.description || "")}</div></div>
@@ -1297,7 +1322,8 @@ function renderCreate() {
 
     document.getElementById("c-name").oninput = e => { state.name = e.target.value; document.getElementById("c-done").disabled = !(state.name.trim() && left === 0); };
     document.getElementById("c-form").oninput = e => { state.form = e.target.value; };
-    document.getElementById("c-origin").onchange = e => { state.origin = e.target.value; state.domains = { primary: null, secondary: null, tertiary: null }; draw(); };
+    document.getElementById("c-origin").onchange = e => { state.origin = e.target.value; state.domains = { primary: null, secondary: null, tertiary: null }; state.startingLocation = defaultStart(state.origin); draw(); };
+    const slSel = document.getElementById("c-startloc"); if (slSel) slSel.onchange = e => { state.startingLocation = e.target.value; draw(); };
     document.getElementById("c-bg").onchange = e => { state.background = e.target.value; draw(); };
     for (const b of app.querySelectorAll("[data-inc]")) b.onclick = () => { const k = b.dataset.inc; if (state.attrs[k] < 4 && left > 0) state.attrs[k]++; draw(); };
     for (const b of app.querySelectorAll("[data-dec]")) b.onclick = () => { const k = b.dataset.dec; if (state.attrs[k] > 1) state.attrs[k]--; draw(); };
@@ -1447,7 +1473,7 @@ function renderCreate() {
       <div class="field"><label>Their story so far</label><textarea id="bio-story" rows="4" style="width:100%" placeholder="A few sentences tying it together">${esc(bio.story)}</textarea></div>
       <div style="display:flex; gap:8px;">
         <button class="btn secondary" id="bio-weave">✦ Weave it for me</button>
-        <button class="btn" id="bio-done">Begin in Millbrook</button>
+        <button class="btn" id="bio-done">Begin in ${esc(CONTENT.locations?.[state.startingLocation || defaultStart(state.origin)]?.name || "the Valley")}</button>
       </div>
       <div class="hint" id="bio-status" style="margin-top:8px"></div>
     </div>`);
@@ -1487,7 +1513,7 @@ function renderCreate() {
       maxEnergy: rules.energy.max, energy: rules.energy.max,
       inventory: startingGear(state.background),
       deeds: [], relationships: {}, chronicle: [],
-      currentLocationId: CONTENT.startingLocation,
+      currentLocationId: state.startingLocation || defaultStart(state.origin) || CONTENT.startingLocation,
       activeScene: null,
       clock: newClock(),
       // SNG-057: the chosen companion (string id — recruitment/backfill shape) + the player's name
@@ -1561,9 +1587,13 @@ function renderCreate() {
       <div class="field"><label>Name</label><input id="p-name" value="${esc(state.name)}"></div>
       <div class="field"><label>What do they look like? <span class="hint" style="text-transform:none">(form/species — leads the portrait; blank = an ordinary person)</span></label>
         <textarea id="p-form" rows="2" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood, moss-bearded">${esc(state.form)}</textarea></div>
-      <div class="field"><label>Which people are you from? <span class="hint" style="text-transform:none">(you begin in the Valley regardless — origin is who your people are)</span></label>
+      <div class="field"><label>Which people are you from? <span class="hint" style="text-transform:none">(origin is who your people are)</span></label>
         <select id="p-origin">${origins.map(o => `<option value="${esc(o.id)}" ${state.origin === o.id ? "selected" : ""}>${esc(o.name)}${o.homeRegion && o.homeRegion !== "valley" ? " — of the " + esc(String(o.homeRegion).replace(/_/g, " ")) : ""}</option>`).join("")}</select>
         <div class="hint">${esc(org?.whyYouAreHere || org?.description || "")}</div></div>
+      ${(() => { const sc = startingLocationChoices(state.origin); if (!sc.length) return ""; if (!sc.some(c => c.id === state.startingLocation)) state.startingLocation = defaultStart(state.origin);
+        return `<div class="field"><label>Where do you begin? <span class="hint" style="text-transform:none">(defaults to your homeland)</span></label>
+        <select id="p-startloc">${sc.map(c => `<option value="${esc(c.id)}" ${state.startingLocation === c.id ? "selected" : ""}>${esc(c.label)}</option>`).join("")}</select>
+        <div class="hint">${esc((sc.find(c => c.id === state.startingLocation) || sc[0]).why)}</div></div>`; })()}
       <div style="display:flex; gap:8px; margin-top:8px">
         <button class="btn secondary" id="p-back">Back</button>
         <button class="btn" id="p-go" ${state.name.trim() ? "" : "disabled"}>Choose an opening</button>
@@ -1572,7 +1602,8 @@ function renderCreate() {
     const nm = document.getElementById("p-name");
     nm.oninput = () => { state.name = nm.value; document.getElementById("p-go").disabled = !state.name.trim(); };
     document.getElementById("p-form").oninput = e => { state.form = e.target.value; };
-    document.getElementById("p-origin").onchange = e => { state.origin = e.target.value; renderPrologueIntro(); };
+    document.getElementById("p-origin").onchange = e => { state.origin = e.target.value; state.startingLocation = defaultStart(state.origin); renderPrologueIntro(); };
+    const pSl = document.getElementById("p-startloc"); if (pSl) pSl.onchange = e => { state.startingLocation = e.target.value; renderPrologueIntro(); };
     document.getElementById("p-back").onclick = () => renderCreateDoor();
     document.getElementById("p-go").onclick = () => { state.name = nm.value.trim(); state.form = document.getElementById("p-form").value.trim(); renderPrologueOpening(); };
   }

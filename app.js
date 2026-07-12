@@ -38,7 +38,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.33";
+const APP_VERSION = "1.8.34";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -51,6 +51,7 @@ let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
 let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the current scene
+let gambitHintCooldown = 0;      // SNG-077: turns to stay quiet after a hint is dismissed
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
@@ -820,15 +821,12 @@ function functionChips(ab) {
  *  an explicit staged/multi-obstacle objective the GM framed. The loose abilityChoices>=2 /
  *  nonTrivial>=4 fallbacks are removed — rich ≠ plan-apt (they fired on nearly every scene). */
 function isGambitApt(turn) {
-  const choices = turn?.choices || [];
-  if (choices.length < 3) return false; // need real options to plan among
-  const PLAN_TAGS = new Set(["plan", "scout", "prepare"]);
-  const planTagged = choices.some(c => (c.intentTags || []).some(t => PLAN_TAGS.has(t)));
-  // an explicit staged/multi-obstacle objective (a GM-flagged staged choice, or a scene carrying
-  // multiple named threads to sequence through) — future-proof + reliable when present
-  const stagedObjective = choices.some(c => c.staged === true || c.multiStep === true)
-    || (Array.isArray(turn?.scene?.threads) && turn.scene.threads.length >= 3);
-  return planTagged || stagedObjective;
+  // SNG-077: the GM DECLARES aptness (turn.gambitApt === true) — emitted only for a genuine
+  // multi-obstacle objective where ORDERING the approach matters. We no longer guess from style
+  // tags or conversational threads (both fired on nearly every scene). The engine still decides
+  // whether to SHOW it (below): need real options to plan among; bias hard toward silence.
+  if (turn?.gambitApt !== true) return false;
+  return (turn?.choices || []).length >= 2;
 }
 
 /** SNG-019: known-entity id→name maps for codex entity resolution — the ids the GM
@@ -2090,6 +2088,7 @@ function applyTurn(turn, resolution) {
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // SNG-075: the valley is alive in narrative play too — maybe turn something up (woven next turn)
   maybeNarrativeEncounter(turn, resolution);
+  if (gambitHintCooldown > 0) gambitHintCooldown--; // SNG-077: tick down the gambit-hint quiet period
   // party: publish this beat to the shared scene (fire-and-forget)
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
   // chronicle + scene persistence
@@ -3763,7 +3762,7 @@ function renderPlay(turn, opts = {}) {
   main += `</div>`;
   if (turn || opts.error || opts.gmAside || opts.aside || (!busy && !opts.thinking)) {
     // SNG-031: surface the (fully-built) gambit system on genuinely plan-apt turns
-    const apt = !askMode && isGambitApt(turn) && !gambitHintDismissed;
+    const apt = !askMode && isGambitApt(turn) && !gambitHintDismissed && gambitHintCooldown <= 0;
     if (apt) {
       main += `<div class="gambit-hint"><span>This looks like a job for a plan.</span>
         <button class="opt" id="gambit-hint-go">⚙ Plan a Gambit</button>
@@ -3978,7 +3977,7 @@ function renderPlay(turn, opts = {}) {
   const ghGo = document.getElementById("gambit-hint-go");
   if (ghGo) ghGo.onclick = () => renderGambitBuilder();
   const ghX = document.getElementById("gambit-hint-x");
-  if (ghX) ghX.onclick = () => { gambitHintDismissed = true; renderPlay(turn, opts); };
+  if (ghX) ghX.onclick = () => { gambitHintDismissed = true; gambitHintCooldown = 4; renderPlay(turn, opts); }; // SNG-077: dismissal sticks + a cooldown
   const retry = document.getElementById("retry");
   if (retry) retry.onclick = () => startScene("(Retry the previous beat — pick up smoothly from where the story last stood.)");
 }

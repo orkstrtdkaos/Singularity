@@ -36,7 +36,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } f
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
-import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains } from "../engine/traditions.js";
+import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains } from "../engine/traditions.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2303,6 +2303,16 @@ await (async () => {
   const inf = inferDomains([{ abilityId: "umbracraft" }, { abilityId: "umbracraft" }, { abilityId: "false_true" }], { umbracraft: { tradition: "umbral" }, false_true: { tradition: "veilwright" } }, idx);
   check("SNG-055: inferDomains derives primary from the most-held tradition", inf?.primary === "umbral" && inf?.secondary === "veilwright");
   check("SNG-055: a pre-domain (null) character stays fully open", domainAccess(antiAb, 5, {}, idx).allowed === true);
+
+  // SNG-062: domains CRYSTALLIZE from played tradition-tags
+  const crys = crystallizeDomains({ umbral: 3, veilwright: 2, blazeborn: 1 }, idx);
+  check("SNG-062: the heaviest tag becomes the primary", crys?.primary === "umbral");
+  check("SNG-062: the secondary is never the primary's antipode", crys?.secondary !== antipodeOf("umbral", idx));
+  check("SNG-062: the tertiary is a ring-neighbour of the secondary (or null)", !crys?.tertiary || neighborsOf(crys.secondary, idx).includes(crys.tertiary));
+  check("SNG-062: no tags → no domains (folk-only stays open)", crystallizeDomains({ radiant_folk: 4 }, idx) === null);
+  // a real prologue playthrough: the tags produce a coherent, self-consistent ring position
+  const played = crystallizeDomains({ stillhold: 2, marcher: 1, verist: 1 }, idx);
+  check("SNG-062: a played spread crystallizes a valid primary with a non-antipode secondary", played?.primary === "stillhold" && played.secondary && played.secondary !== antipodeOf("stillhold", idx));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

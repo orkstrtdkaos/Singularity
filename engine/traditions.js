@@ -110,6 +110,32 @@ export function domainAccess(ability, tier, domains, index) {
   return { allowed: true, penalty, band: "far", reason: `${Number.isFinite(steps) ? steps : "many"} steps from your nearest domain — costs more` };
 }
 
+/** SNG-062: crystallize domains from the tradition-tags a player ACCRUED by how they played the
+ *  prologue. The heaviest tag is the PRIMARY; the SECONDARY is the 2nd-heaviest if it's within 3
+ *  ring-steps of the primary (and not its antipode), else a ring-neighbour of the primary; the
+ *  TERTIARY is a ring-neighbour of the secondary (not the primary, not an antipode of either).
+ *  Pure. Returns { primary, secondary, tertiary } or null if no pole tags. */
+export function crystallizeDomains(tags = {}, index) {
+  if (!index) return null;
+  const ranked = Object.entries(tags)
+    .filter(([t]) => !isFolkTradition(t, index) && index.byId?.[t])
+    .sort((a, b) => b[1] - a[1]).map(([t]) => t);
+  if (!ranked.length) return null;
+  const primary = ranked[0];
+  const antiP = antipodeOf(primary, index);
+  const nbrsP = new Set(neighborsOf(primary, index));
+  let secondary = ranked.find(t => t !== primary && t !== antiP && (ringDistance(t, primary, index) ?? 99) <= 3)
+    || [...nbrsP].find(Boolean) || null;
+  let tertiary = null;
+  if (secondary) {
+    const antiS = antipodeOf(secondary, index);
+    const nbrsS = new Set(neighborsOf(secondary, index));
+    tertiary = ranked.find(t => t !== primary && t !== secondary && t !== antiP && t !== antiS && nbrsS.has(t))
+      || [...nbrsS].find(t => t !== primary && t !== antiP) || null;
+  }
+  return { primary, secondary, tertiary };
+}
+
 /** SNG-059 migration: infer a legacy character's domains from the traditions of the abilities they
  *  already hold. Most-represented tradition → primary; next distinct → secondary; a ring-neighbour
  *  of the secondary (if held) → tertiary. Folk-only characters get no domain (stay open). Nobody

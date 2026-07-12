@@ -16,7 +16,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
-import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains } from "./engine/traditions.js";
+import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.18";
+const APP_VERSION = "1.8.19";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -731,6 +731,29 @@ function traditionLabel(traditionId) {
 /** The tradition an ability belongs to (its `tradition` field or the reverse map). */
 function abilityTradition(ability) { return traditionOf(ability, CONTENT.traditionIndex); }
 
+/** SNG-055/062: the great-circle SVG — 24 traditions on a ring, chosen ones lit, the antipode axis
+ *  drawn, closed poles marked. Shared by the quick-start domain step and the prologue reveal.
+ *  `selectable(t)` marks a node clickable (emits data-dom); the caller wires clicks. */
+function domainCircleSVG(idx, { primary = null, secondary = null, tertiary = null, closed = new Set(), selectable = () => false, centerTop = "", centerSub = "" } = {}) {
+  const order = ringOrder(idx);
+  const cx = 260, cy = 210, R = 165, n = order.length || 24;
+  const nodes = order.map((t, i) => { const ang = (i / n) * Math.PI * 2 - Math.PI / 2; return { t, x: cx + Math.cos(ang) * R, y: cy + Math.sin(ang) * R }; });
+  const roleOf = t => t === primary ? "primary" : t === secondary ? "secondary" : t === tertiary ? "tertiary" : closed.has(t) ? "closed" : selectable(t) ? "pickable" : "dim";
+  const antiP = primary ? antipodeOf(primary, idx) : null;
+  const at = t => nodes.find(z => z.t === t);
+  return `<svg viewBox="0 0 520 430" class="great-circle">
+    <circle cx="${cx}" cy="${cy}" r="${R}" class="gc-ring"/>
+    ${primary && antiP && at(primary) && at(antiP) ? `<line x1="${at(primary).x}" y1="${at(primary).y}" x2="${at(antiP).x}" y2="${at(antiP).y}" class="gc-axis"/>` : ""}
+    ${nodes.map(nd => { const role = roleOf(nd.t); const st = (idx.stations || []).find(s => s.traditionId === nd.t);
+      return `<g class="gc-node gc-${role}" ${selectable(nd.t) ? `data-dom="${esc(nd.t)}"` : ""}>
+        <title>${esc(traditionLabel(nd.t))}${st?.pole ? " — " + esc(st.pole) : ""}${closed.has(nd.t) ? " (CLOSED — the far pole of an axis you chose)" : ""}</title>
+        <circle cx="${nd.x}" cy="${nd.y}" r="10"/>
+        <text x="${nd.x}" y="${nd.y - 14}" text-anchor="middle" class="gc-label">${esc(st?.pole || nd.t).slice(0, 10)}</text></g>`; }).join("")}
+    <text x="${cx}" y="${cy - 4}" text-anchor="middle" class="gc-center">${esc(centerTop)}</text>
+    <text x="${cx}" y="${cy + 14}" text-anchor="middle" class="gc-center-sub">${esc(centerSub)}</text>
+  </svg>`;
+}
+
 /** SNG-055 domain verdict for an ability given THIS character's chosen domains. */
 function domainVerdict(ability) {
   return domainAccess(ability, ability?.levelReq || 1, character?.domains, CONTENT.traditionIndex);
@@ -1220,7 +1243,9 @@ const BACKGROUNDS = [
 
 function renderCreate() {
   const state = { name: "", origin: "valley", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
-    domains: { primary: null, secondary: null, tertiary: null }, companionId: null, companionName: "", form: "" };
+    domains: { primary: null, secondary: null, tertiary: null }, companionId: null, companionName: "", form: "",
+    // SNG-062 prologue accrual
+    prologue: { openingId: null, step: 0, tags: {}, granted: [], reasons: [] } };
   const POOL = 12;
 
   function abilityChoices() {
@@ -1303,25 +1328,9 @@ function renderCreate() {
       if (phase === "tertiary") return t !== d.primary && t !== d.secondary && terNbrs.has(t);
       return false;
     };
-    // ring geometry
-    const cx = 260, cy = 210, R = 165, n = order.length || 24;
-    const nodes = order.map((t, i) => {
-      const ang = (i / n) * Math.PI * 2 - Math.PI / 2;
-      return { t, x: cx + Math.cos(ang) * R, y: cy + Math.sin(ang) * R };
-    });
-    const roleOf = (t) => t === d.primary ? "primary" : t === d.secondary ? "secondary" : t === d.tertiary ? "tertiary" : closed.has(t) ? "closed" : selectable(t) ? "pickable" : "dim";
-    const svg = `<svg viewBox="0 0 520 430" class="great-circle">
-      <circle cx="${cx}" cy="${cy}" r="${R}" class="gc-ring"/>
-      ${nodes.map(nd => { const role = roleOf(nd.t); const st = CONTENT.traditionIndex.stations.find(s => s.traditionId === nd.t);
-        return `<g class="gc-node gc-${role}" ${selectable(nd.t) ? `data-dom="${esc(nd.t)}"` : ""}>
-          <title>${esc(traditionLabel(nd.t))}${st?.pole ? " — " + esc(st.pole) : ""}${closed.has(nd.t) ? " (CLOSED — the far pole of an axis you chose)" : ""}</title>
-          <circle cx="${nd.x}" cy="${nd.y}" r="10"/>
-          <text x="${nd.x}" y="${nd.y - 14}" text-anchor="middle" class="gc-label">${esc(st?.pole || nd.t).slice(0, 10)}</text>
-        </g>`; }).join("")}
-      ${d.primary && antiP ? `<line x1="${nodes.find(z => z.t === d.primary).x}" y1="${nodes.find(z => z.t === d.primary).y}" x2="${nodes.find(z => z.t === antiP)?.x}" y2="${nodes.find(z => z.t === antiP)?.y}" class="gc-axis"/>` : ""}
-      <text x="${cx}" y="${cy - 4}" text-anchor="middle" class="gc-center">${phase === "done" ? "your domains" : "choose your " + phase}</text>
-      <text x="${cx}" y="${cy + 14}" text-anchor="middle" class="gc-center-sub">${phase === "tertiary" ? "a neighbour of your secondary" : phase === "done" ? "" : "the opposite pole closes"}</text>
-    </svg>`;
+    const svg = domainCircleSVG(idx, { primary: d.primary, secondary: d.secondary, tertiary: d.tertiary, closed, selectable,
+      centerTop: phase === "done" ? "your domains" : "choose your " + phase,
+      centerSub: phase === "tertiary" ? "a neighbour of your secondary" : phase === "done" ? "" : "the opposite pole closes" });
     const slot = (label, t) => `<div class="dom-slot"><span class="dom-slot-label">${label}</span> ${t ? `<strong>${esc(traditionLabel(t))}</strong>` : "<em>—</em>"}</div>`;
     chrome(`<div class="screen" style="max-width:640px">
       <h2>Your place on the Great Circle</h2>
@@ -1331,7 +1340,7 @@ function renderCreate() {
       ${closed.size ? `<div class="hint">Closed to you: ${[...closed].map(t => esc(traditionLabel(t))).join(", ")}</div>` : ""}
       <div style="display:flex; gap:8px; margin-top:12px">
         <button class="btn secondary" id="dom-reset">↺ Redo</button>
-        <button class="btn" id="dom-done" ${phase === "done" ? "" : "disabled"}>Next: your companion</button>
+        <button class="btn" id="dom-done" ${phase === "done" ? "" : "disabled"}>${state.domainReturn === "prologue" ? "Confirm — this is who I am" : "Next: your companion"}</button>
       </div>
     </div>`);
     for (const b of app.querySelectorAll("[data-dom]")) b.onclick = () => {
@@ -1342,7 +1351,8 @@ function renderCreate() {
       renderDomainStep();
     };
     document.getElementById("dom-reset").onclick = () => { state.domains = { primary: null, secondary: null, tertiary: null }; renderDomainStep(); };
-    document.getElementById("dom-done").onclick = () => renderCompanionStep();
+    // SNG-062: when adjusting from the prologue reveal, the domain step confirms → finish the prologue
+    document.getElementById("dom-done").onclick = () => { if (state.domainReturn === "prologue") { state.domainReturn = null; finishPrologue(); } else renderCompanionStep(); };
   }
 
   // SNG-059 / SNG-057: choose + name a companion from the authored starting roster.
@@ -1473,7 +1483,166 @@ function renderCreate() {
     enterPlay();
   }
 
-  draw();
+  // ---------- SNG-062: THE PROLOGUE — creation as a played scene ----------
+
+  const PRO = () => CONTENT.prologue; // the authored prologue content (or null)
+  const opening = () => (PRO()?.openings || []).find(o => o.id === state.prologue.openingId);
+
+  /** The door: play the opening (recommended) or the quick-start form (express lane). */
+  function renderCreateDoor() {
+    if (!PRO()?.openings?.length) { draw(); return; } // no prologue content → straight to the form
+    chrome(`<div class="screen" style="max-width:620px">
+      <h2>Begin</h2>
+      <p class="hint" style="margin-bottom:16px">Two ways to make a character. Play the opening and the world tells you who you turned out to be. Or build one yourself, if you already know.</p>
+      <div class="create-door">
+        <button class="door-card" id="door-play">
+          <strong>▶ Play the opening</strong>
+          <span>Recommended — pick a name and a look, then live a short scene. Your skills, your companion, and your place on the great circle come from what you actually do. You'll learn the game by playing it.</span>
+        </button>
+        <button class="door-card" id="door-form">
+          <strong>⚡ Quick start</strong>
+          <span>Build it yourself — name, form, domains on the circle, starting abilities, companion. The express lane for when you already know who you are. Same character either way.</span>
+        </button>
+      </div>
+    </div>`);
+    document.getElementById("door-play").onclick = () => renderPrologueIntro();
+    document.getElementById("door-form").onclick = () => draw();
+  }
+
+  /** Prologue step 1: name + form only. */
+  function renderPrologueIntro() {
+    chrome(`<div class="screen" style="max-width:600px">
+      <h2>Before the scene</h2>
+      <p class="hint" style="margin-bottom:12px">Two things, then we begin. Everything else you'll discover by playing.</p>
+      <div class="field"><label>Name</label><input id="p-name" value="${esc(state.name)}"></div>
+      <div class="field"><label>What do they look like? <span class="hint" style="text-transform:none">(form/species — leads the portrait; blank = an ordinary person)</span></label>
+        <textarea id="p-form" rows="2" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood, moss-bearded">${esc(state.form)}</textarea></div>
+      <div style="display:flex; gap:8px; margin-top:8px">
+        <button class="btn secondary" id="p-back">Back</button>
+        <button class="btn" id="p-go" ${state.name.trim() ? "" : "disabled"}>Choose an opening</button>
+      </div>
+    </div>`);
+    const nm = document.getElementById("p-name");
+    nm.oninput = () => { state.name = nm.value; document.getElementById("p-go").disabled = !state.name.trim(); };
+    document.getElementById("p-form").oninput = e => { state.form = e.target.value; };
+    document.getElementById("p-back").onclick = () => renderCreateDoor();
+    document.getElementById("p-go").onclick = () => { state.name = nm.value.trim(); state.form = document.getElementById("p-form").value.trim(); renderPrologueOpening(); };
+  }
+
+  /** Prologue step 2: choose which opening to play (or let the valley pick). */
+  function renderPrologueOpening() {
+    const ops = PRO().openings;
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>${esc(state.name)}, where does it find you?</h2>
+      <p class="hint" style="margin-bottom:12px">Each opening is a different kind of trouble. There is no wrong one — every road makes a whole person.</p>
+      ${ops.map(o => `<button class="opening-card" data-open="${esc(o.id)}">
+        <strong>${esc(o.name)}</strong> <span class="opening-tone">${esc(o.tone)}</span>
+        <span class="opening-hook">${esc(o.hook)}</span></button>`).join("")}
+      <button class="btn secondary" id="open-surprise" style="margin-top:10px">Surprise me</button>
+    </div>`);
+    const start = (id) => { state.prologue = { openingId: id, step: 0, tags: {}, granted: [], reasons: [] }; renderPrologueProblem(); };
+    for (const b of app.querySelectorAll("[data-open]")) b.onclick = () => start(b.dataset.open);
+    document.getElementById("open-surprise").onclick = () => start(ops[Math.floor(Math.random() * ops.length)].id);
+  }
+
+  /** Prologue step 3: play the current problem — pick a path, see the outcome, accrue. */
+  function renderPrologueProblem(outcomeShown = null) {
+    const o = opening();
+    const probs = o.problems || [];
+    const i = state.prologue.step;
+    if (i >= probs.length) { renderPrologueCompanion(); return; }
+    const p = probs[i];
+    chrome(`<div class="screen" style="max-width:640px">
+      <div class="prologue-progress">${probs.map((_, k) => `<span class="${k < i ? "done" : k === i ? "now" : ""}"></span>`).join("")}</div>
+      <h2>${esc(o.name)}</h2>
+      ${i === 0 && !outcomeShown ? `<p class="prologue-hook">${esc(o.hook)}</p>` : ""}
+      ${outcomeShown ? `<div class="prologue-outcome"><p>${esc(outcomeShown)}</p><button class="btn" id="p-continue">Go on</button></div>` : `
+        <p class="prologue-situation">${esc(p.situation)}</p>
+        <div class="prologue-paths">
+          ${(p.paths || []).map((path, pi) => `<button class="prologue-path" data-path="${pi}">${esc(path.label)}</button>`).join("")}
+        </div>`}
+    </div>`);
+    if (outcomeShown) { document.getElementById("p-continue").onclick = () => { state.prologue.step++; renderPrologueProblem(); }; return; }
+    for (const b of app.querySelectorAll("[data-path]")) b.onclick = () => {
+      const path = p.paths[+b.dataset.path];
+      if (path.tradition) state.prologue.tags[path.tradition] = (state.prologue.tags[path.tradition] || 0) + 1;
+      if (path.grantsAbility && !state.prologue.granted.includes(path.grantsAbility)) state.prologue.granted.push(path.grantsAbility);
+      state.prologue.reasons.push({ label: path.label, outcome: path.outcome, tradition: path.tradition });
+      renderPrologueProblem(path.outcome || "It is done.");
+    };
+  }
+
+  /** Prologue step 4: the companion arrives IN the scene — choose + name who stays. */
+  function renderPrologueCompanion() {
+    const o = opening();
+    const beat = o.companionBeat || {};
+    const offered = (beat.offer || []).map(id => CONTENT.companions[id]).filter(c => c && c.startingOption);
+    if (!offered.length) { renderPrologueReveal(); return; }
+    if (!state.companionId) state.companionId = offered[0].id;
+    const chosen = offered.find(c => c.id === state.companionId) || offered[0];
+    const arrival = beat.arrivals?.[chosen.id] || chosen.appearance || "";
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>Someone stayed</h2>
+      <p class="prologue-situation">${esc(beat.situation || "When it was over, someone was still there.")}</p>
+      <div class="companion-pick" style="margin-top:10px">
+        ${offered.map(c => `<button class="companion-card ${c.id === state.companionId ? "selected" : ""}" data-comp="${esc(c.id)}"><strong>${esc(c.name)}</strong></button>`).join("")}
+      </div>
+      <div class="companion-detail"><p class="map-details-desc">${esc(arrival)}</p>
+        <div class="field" style="margin-top:8px"><label>Name them (optional)</label><input id="comp-name" value="${esc(state.companionName)}" placeholder="${esc(chosen.name)}"></div></div>
+      <div style="display:flex; gap:8px; margin-top:12px">
+        <button class="btn secondary" id="comp-solo">No one stays</button>
+        <button class="btn" id="comp-done">This one</button>
+      </div>
+    </div>`);
+    for (const b of app.querySelectorAll("[data-comp]")) b.onclick = () => { state.companionName = document.getElementById("comp-name").value.trim(); state.companionId = b.dataset.comp; renderPrologueCompanion(); };
+    document.getElementById("comp-name").oninput = e => { state.companionName = e.target.value.trim(); };
+    document.getElementById("comp-solo").onclick = () => { state.companionId = null; state.companionName = ""; renderPrologueReveal(); };
+    document.getElementById("comp-done").onclick = () => { state.companionName = document.getElementById("comp-name").value.trim(); renderPrologueReveal(); };
+  }
+
+  /** Prologue step 5: domains CRYSTALLIZE from how they played — shown on the circle, with the
+   *  reasons in their own actions, then CONFIRMED (mandatory). The player keeps the last word. */
+  function renderPrologueReveal(adjustPhase = null) {
+    const idx = CONTENT.traditionIndex;
+    if (!idx) { finishPrologue(); return; }
+    if (!state.domains.primary) state.domains = crystallizeDomains(state.prologue.tags, idx) || { primary: null, secondary: null, tertiary: null };
+    const d = state.domains;
+    // ADJUST mode reuses the pickable circle (re-run the domain picker seeded from the crystallized result)
+    if (adjustPhase) { renderDomainStep(); return; }
+    const nm = t => t ? traditionLabel(t) : "—";
+    const reasons = state.prologue.reasons.filter(r => r.tradition).slice(-4);
+    const circle = domainCircleSVG(idx, { primary: d.primary, secondary: d.secondary, tertiary: d.tertiary,
+      closed: new Set([d.primary && antipodeOf(d.primary, idx), d.secondary && antipodeOf(d.secondary, idx)].filter(Boolean)),
+      selectable: () => false, centerTop: "who you are", centerSub: nm(d.primary) });
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>This is who you turned out to be</h2>
+      ${circle}
+      <div class="dom-slots"><div class="dom-slot"><span class="dom-slot-label">Primary</span> <strong>${esc(nm(d.primary))}</strong></div>
+        <div class="dom-slot"><span class="dom-slot-label">Secondary</span> <strong>${esc(nm(d.secondary))}</strong></div>
+        <div class="dom-slot"><span class="dom-slot-label">Tertiary</span> <strong>${esc(nm(d.tertiary))}</strong></div></div>
+      <div class="prologue-reasons"><p class="hint">Because, in the scene:</p>
+        ${reasons.map(r => `<div class="prologue-reason">— ${esc(r.label)}</div>`).join("")}</div>
+      <p class="hint" style="margin-top:8px">The far pole of what you are is closed to you — only the great braids cross it. Is that who you are? You may adjust.</p>
+      <div style="display:flex; gap:8px; margin-top:10px">
+        <button class="btn secondary" id="reveal-adjust">Adjust on the circle</button>
+        <button class="btn" id="reveal-confirm">Yes — this is who I am</button>
+      </div>
+    </div>`);
+    document.getElementById("reveal-adjust").onclick = () => { state.domainReturn = "prologue"; state.domains = { primary: null, secondary: null, tertiary: null }; renderDomainStep(); };
+    document.getElementById("reveal-confirm").onclick = () => finishPrologue();
+  }
+
+  /** Out the far side: a complete character, domains set, abilities they USED, a named companion. */
+  function finishPrologue() {
+    // starting abilities = the abilities they actually used (that exist in the catalog)
+    state.abilities = (state.prologue.granted || []).filter(id => CONTENT.abilities[id]);
+    // a light bio seeded from the opening so the GM has grounding
+    const o = opening();
+    const bio = o ? { motivation: o.hook, story: `Their first day in the world was ${o.name.toLowerCase()} — ${state.prologue.reasons.map(r => r.label.toLowerCase().replace(/\.$/, "")).slice(0, 2).join("; ")}.` } : null;
+    finish(bio);
+  }
+
+  renderCreateDoor();
 }
 
 // ---------- play ----------

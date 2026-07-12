@@ -106,13 +106,17 @@ export async function loadContent() {
   for (const t of ["npc", "location", "arc"]) {
     try { genSchemas[t] = await fetchJSON(`schemas/${t}.schema.json`); } catch { /* type ungeneratable */ }
   }
+  // SNG-062: the Prologue — character creation as a played opening. Fetched directly. Optional
+  // (absence falls back to the quick-start form; never breaks load).
+  let prologue = null;
+  try { prologue = await fetchJSON("content/packs/valley/prologue.json"); } catch { /* no prologue → form only */ }
   // SNG-042: the world's great figures. Authored anchors load as high-weight reusable canon
   // (hydrated into npcs so SNG-019 resolves them by name + the GM reuses, never reinvents).
   let legends = { roster: [], beats: {}, tiers: {} };
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

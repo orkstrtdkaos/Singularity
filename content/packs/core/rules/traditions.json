@@ -502,14 +502,17 @@
       "bearer": "civilization",
       "cultOfPurity": "appetite without limit — the Devouring",
       "aesthetic": "horned architecture, bargains, an honesty about appetite the pious lack",
-      "abilities": [],
+      "abilities": [
+        "descent",
+        "appetite_sense",
+        "the_offered_price"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "seraphic",
@@ -527,14 +530,17 @@
       "bearer": "civilization",
       "cultOfPurity": "purity that would burn the impure — the Unfallen",
       "aesthetic": "tiered spires, unbearable choral certainty, mercy administered from above",
-      "abilities": [],
+      "abilities": [
+        "ascent",
+        "the_measuring_eye",
+        "the_shielding_word"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "mason",
@@ -552,14 +558,17 @@
       "bearer": "civilization",
       "cultOfPurity": "the real reduced to only the touchable — the Leaden",
       "aesthetic": "stone, weight, ledgers, a deep suspicion of anything that cannot be weighed",
-      "abilities": [],
+      "abilities": [
+        "thingcraft",
+        "stone_read",
+        "the_plain_fact"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "figurist",
@@ -577,14 +586,17 @@
       "bearer": "civilization",
       "cultOfPurity": "abstraction that has forgotten bodies suffer — the Untethered",
       "aesthetic": "impossible geometry, buildings that are arguments, a place that resists being mapped",
-      "abilities": [],
+      "abilities": [
+        "formcraft",
+        "pattern_sense",
+        "the_walking_figure"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "horizon",
@@ -602,14 +614,16 @@
       "bearer": "civilization",
       "cultOfPurity": "those who never arrive anywhere at all — the Unlanded",
       "aesthetic": "tents and roads, distance as home, a people with no fixed anything",
-      "abilities": [],
+      "abilities": [
+        "spanwork",
+        "way_sense"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "hourkeeper",
@@ -627,14 +641,16 @@
       "bearer": "civilization",
       "cultOfPurity": "those who will not let a moment pass — the Stopped",
       "aesthetic": "clock-towers, archives that run forward, an unbearable patience",
-      "abilities": [],
+      "abilities": [
+        "hourcraft",
+        "hour_sense"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "unmaker",
@@ -652,14 +668,16 @@
       "bearer": "civilization",
       "cultOfPurity": "unmaking as its own end — the Scouring",
       "aesthetic": "controlled ruin, beautiful demolitions, an ethic of clearing",
-      "abilities": [],
+      "abilities": [
+        "ruinwork",
+        "fault_sense"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     },
     {
       "traditionId": "wright",
@@ -677,14 +695,16 @@
       "bearer": "civilization",
       "cultOfPurity": "making that cannot stop to ask whether it should — the Ceaseless",
       "aesthetic": "scaffolds forever, half-built cathedrals, the joy and the waste of it",
-      "abilities": [],
+      "abilities": [
+        "makecraft",
+        "makers_eye"
+      ],
       "access": {
         "native": true,
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "STUB — corpus owed",
-      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+      "status": "built"
     }
   ],
   "folkTraditions": [
@@ -871,7 +891,7 @@
     "abilityToTradition": "derive from traditions[].abilities + folkTraditions[].abilities + specialSystems[].abilities + crossPoleBraids"
   },
   "owed": {
-    "corpusCompletion": "8 stub traditions (demonic_angelic, concrete_abstract, space_time, destruction_creation × 2 poles) owe ability trees. ~60 one-rank seed abilities across built traditions owe full rank I–V trees (the 2026-07-07 content-wave debt).",
-    "combinationPass": "SNG-054 Phase 1 remainder — systematic within-tradition, kin-civilization, and cross-axis combinations (combination_recipes.json)."
+    "corpusDepth": "The 8 newly-built pole-traditions have anchor + core techniques (full rank I–III). They can be DEEPENED later (more techniques, capstones) as their regions come into play — but every tradition is now playable.",
+    "combinationPass": "COMPLETE for the current corpus (44 recipes, tiered). New combos accrue as the corpus deepens."
   }
 }

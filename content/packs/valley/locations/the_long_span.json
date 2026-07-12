@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "the_long_span",
+  "name": "The Long Span",
+  "regionId": "the_open_reach",
+  "communityId": "horizon.longspan",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.3,
+    0.0,
+    0.0,
+    -0.7,
+    -0.2,
+    0.0
+  ],
+  "spectrum": {
+    "space_time": -0.7,
+    "chaos_order": -0.3,
+    "body_mind": -0.2
+  },
+  "tags": [
+    "horizon",
+    "space",
+    "travel",
+    "road",
+    "home",
+    "nomad"
+  ],
+  "connections": [
+    "the_wayhouse",
+    "the_unlanded"
+  ],
+  "descriptionSeed": "Not a city — a MOVING settlement, tents and roads and a people for whom everywhere is a place not yet arrived. The Horizon-Walkers have no fixed anything and consider that a completed thought rather than a lack. Staying, to them, is the strange behavior that requires explanation.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Walkers who will take you anywhere and will not stay; a settlement that will be somewhere else next month; someone who stopped walking, and what it did to them.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A Walker has stopped, and their people are treating it like a death",
+    "The Span's route has been blocked, and they have never had to go AROUND anything"
+  ],
+  "map": {
+    "x": 440,
+    "y": 470
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

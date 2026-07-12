@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "archivist_lom",
+  "name": "Archivist Lom",
+  "role": "Cogitant of the Cogitarium — a vast interior in a very thin body",
+  "homeLocation": "the_cogitarium",
+  "communityId": "cogitant.cogitarium",
+  "personality": {
+    "warmth": 0.3,
+    "trust": 0.3,
+    "candor": 0.7,
+    "patience": 0.6
+  },
+  "spectrum": {
+    "body_mind": 0.8,
+    "emotional_logical": 0.6,
+    "concrete_abstract": 0.3
+  },
+  "voiceHints": "Follows your reasoning three steps past where you stopped and then waits, politely, for you to catch up. Forgets to eat. Finds bodies broadly inconvenient.",
+  "knowledge": [
+    "Anything he has ever attended to, perfectly, forever",
+    "The shape of an argument before it is finished",
+    "What the Cogitarium's deepest memory-palaces cost the people who built them, because he is in one"
+  ],
+  "wants": "To finish the thought.",
+  "fears": "That the thought will finish him first, and that he will not notice.",
+  "reactsToReputation": {
+    "clever": "delighted, immediately",
+    "emotional": "he is genuinely trying and genuinely failing",
+    "kind": "it confuses him and he thinks about it for weeks"
+  }
+}

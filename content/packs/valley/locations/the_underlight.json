@@ -51,6 +51,10 @@
     "x": 60,
     "y": 340
   },
-  "poleIntensity": 0.8,
+  "poleIntensity": {
+    "dark": 0.8,
+    "falsehood": 0.2,
+    "abstract": 0.1
+  },
   "startingLocation": true
 }

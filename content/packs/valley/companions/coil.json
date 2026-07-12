@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "coil",
+  "name": "Coil",
+  "startingOption": true,
+  "role": "Companion — a Precursor maintenance-thing that has adopted you as its assignment",
+  "appearance": "A hand-span of articulated brass-dark segments, walking on too many precise legs, with a single lens that irises when it is thinking. It carries a lamp it did not make and will not explain. Old. Repaired many times, some of the repairs by itself, one of them badly.",
+  "persona": "Coil is a mechanism with a job it can no longer perform, in a world that no longer has the thing it was maintaining. It has, in the absence of its original assignment, decided that YOU are the assignment. It is fastidious, literal, and quietly devoted. It does not understand metaphor and has stopped admitting this. It repairs things compulsively, including things you were using.",
+  "voiceHints": "Clicks and lens-irises; speaks in short, formal, oddly-antique phrasings when it speaks at all. Refers to you as 'the current assignment' early, and simply by name much later, and does not explain the change.",
+  "assistTags": [
+    "mend",
+    "analyze",
+    "light",
+    "precursor"
+  ],
+  "knowledge": [
+    "Precursor mechanism at a depth no living Enginewright can match — and it will not explain HOW it knows, because it does not know that it knows",
+    "The correct maintenance procedure for eleven things that no longer exist",
+    "Where the old service-ways run under the Valley"
+  ],
+  "boundaries": "Coil will not damage a Precursor working, even one that is killing you — it will simply stop and wait, and this is not negotiable. It cannot fight. It does not lie but it omits, extensively, and considers this different.",
+  "hooks": "GM-EYES-ONLY: Coil's original assignment was almost certainly one of the deep works Halvex Coil is now rewriting. It does not know this. When it finds out, it will have to choose between its function and its assignment, and that is its whole arc. The name-echo is not a coincidence and Coil does not know that either.",
+  "bondGrants": {
+    "id": "the-old-procedure",
+    "name": "The Old Procedure",
+    "description": "Coil recognizes a Precursor mechanism and simply performs the correct procedure on it — opening, quieting, or waking it as the situation needs. It does not explain and cannot be hurried.",
+    "energyCost": 5,
+    "attribute": "mental",
+    "axes": {
+      "mechanical_spiritual": -0.5,
+      "concrete_abstract": -0.2
+    },
+    "notFor": "Damaging Precursor work; anything organic; being asked WHY the procedure is correct.",
+    "taughtBy": "Coil (bond)"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "The Assignment",
+      "narrationHints": "Follows at a precise distance. Repairs your gear without being asked and without being thanked."
+    },
+    {
+      "stage": 2,
+      "name": "The Kept Lamp",
+      "narrationHints": "Walks ahead now, lamp raised, choosing the footing. Has begun to anticipate what you will need."
+    },
+    {
+      "stage": 3,
+      "name": "The Chosen Function",
+      "narrationHints": "Has decided that YOU are the work — not a substitute for the work, the work itself — and something in the old lattice noticed it decide."
+    }
+  ]
+}

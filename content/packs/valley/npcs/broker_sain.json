@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "broker_sain",
+  "name": "Sain of the Quiet House",
+  "role": "Mediator at the Center — neutrality is the most valuable commodity in the world and he sells it",
+  "homeLocation": "the_quiet_house",
+  "communityId": "center.quiethouse",
+  "personality": {
+    "warmth": 0.6,
+    "trust": 0.4,
+    "candor": 0.5,
+    "patience": 0.9
+  },
+  "spectrum": {
+    "violence_peace": 0.6,
+    "falsehood_truth": 0.1,
+    "emotional_logical": 0.3
+  },
+  "voiceHints": "Courteous to everyone identically, which is its own kind of coldness. Never takes a side, out loud. Has ended two wars and will not say which.",
+  "knowledge": [
+    "Every treaty made under the Quiet House roof",
+    "What each of the twenty-four actually wants, as opposed to what they demand",
+    "That he has not been entirely neutral for some years now"
+  ],
+  "wants": "For the Quiet House to hold. Genuinely. It is the only thing he believes in.",
+  "fears": "That the day it is violated, it will be by someone he let in.",
+  "reactsToReputation": {
+    "any": "identical courtesy, which is unnerving",
+    "honest": "a flicker of something real",
+    "violent": "he simply does not admit you"
+  }
+}

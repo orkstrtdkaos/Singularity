@@ -1199,3 +1199,29 @@ The clamps are *correct in origin*: they bound GM-generated strings so a runaway
 **Erik test:** "Open the Quest Log — verify the stakes read to the end. Trigger an away-digest — verify each item reads to the end. Then confirm a long GM narration still can't blow up the layout."
 
 *Priority: HIGH. The prose IS the game — this is the one thing that must not be quietly damaged. And it is damaging the authored content most, because authored content is the longest.*
+---
+
+## SNG-077 — Gambit hint still constant: **Aevi's heuristic was wrong, not CCode's build**
+
+**Erik, 2026-07-12:** *"When is the gambit fix coming? the one where the gambit suggestion isn't constantly on the screen?"* 🔧 CCode. Aevi PO.
+
+### PWSV (HEAD v1.8.29) — **SNG-043 Part A SHIPPED CORRECTLY.** The spec was the bug.
+`isGambitApt` (app.js:822) is exactly what Aevi specced — ≥3 choices, and `planTagged || stagedObjective`; the loose `abilityChoices>=2` / `nonTrivial>=4` fallbacks are gone. **CCode built the spec faithfully. The spec was still too loose, and that is Aevi's error.**
+
+**Both surviving disjuncts fire on ordinary scenes:**
+1. **`planTagged`** — `plan` is one of **ten generic approach tags** the GM assigns (`plan/scout/attack/persuade/study/gamble/help/steal/risky/careful`, gm.js:68). It marks a **careful STYLE**, which describes most thoughtful choices in this game. **It does not mean "this scene needs a plan."**
+2. **`scene.threads >= 3`** — the GM is told threads are *"unresolved in-scene threads (a question hanging, someone waiting for an answer)"* (gm.js:43). Those are **CONVERSATIONAL**. Any decent social scene carries three.
+
+**Root error: I keyed the hint on STYLE and CONVERSATIONAL TEXTURE, not on the gambit condition — multiple OBSTACLES that must be SEQUENCED THROUGH toward a goal.** No proxy signal in the current turn payload actually carries that.
+
+### Fix — stop guessing. **Let the GM say so.**
+The GM is the only party that knows whether a scene is *"get past the guard, cross the yard, open the vault"* or *"have a conversation."* Proxy heuristics cannot recover that, and every attempt to tune them will keep mis-firing.
+
+1. **Add a GM field: `gambitApt: true`** — emitted **only** when the scene genuinely presents a **multi-obstacle objective that would reward sequencing**. Instruct explicitly and narrowly: *"Set `gambitApt` ONLY when there are two or more distinct obstacles between the character and a stated goal, such that ordering the approach would matter. A rich conversation is NOT gambit-apt. A careful or planned approach to a SINGLE obstacle is NOT gambit-apt. Most turns: omit it."*
+2. **`isGambitApt` = `turn.gambitApt === true`.** Drop `planTagged` and the thread-count entirely. *(Design law 1 holds: the GM PROPOSES, the engine still decides — it applies cooldown, dismissal and the ≥3-choice sanity check.)*
+3. **Suppression that actually sticks:** dismissed = dismissed **for the scene**, and a **cooldown of N turns** after any dismissal or completed gambit. `[CCODE: confirm the existing per-scene dismissal actually persists — Erik reports it does not]`
+4. **Bias hard toward silence.** A gambit is a *special* affordance. **If in doubt, do not show it.** The failure mode of a hint shown too rarely is a player who misses a feature; the failure mode of one shown constantly is a player who stops seeing the UI at all — and Erik is already there.
+
+**Erik test:** "Play a dozen ordinary turns — verify the Plan hint does NOT appear. Then walk into something with real staged obstacles — verify it does, once, and stays gone after you dismiss it."
+
+*Aevi's note for the record: SNG-043 Part A shipped exactly as specced and Erik still has the bug. This is a spec defect, not a build defect. It is also exactly what ROUND 2 exists to catch — and Part A skipped it, because I called it "a one-function tune."*

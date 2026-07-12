@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_appetite_halls",
+  "name": "The Appetite-Halls",
+  "regionId": "the_descent",
+  "communityId": "abyssal.halls",
+  "axisVector": [
+    -0.4,
+    0.0,
+    -0.5,
+    0.0,
+    0.0,
+    0.0,
+    -0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "demonic_angelic": -0.5,
+    "emotional_logical": -0.4,
+    "chaos_order": -0.3
+  },
+  "tags": [
+    "abyssal",
+    "demonic",
+    "social",
+    "strange",
+    "sacred"
+  ],
+  "connections": [
+    "the_bargain_gate"
+  ],
+  "descriptionSeed": "Where the Choir does its real work: naming, out loud, the wants people cannot admit to. It is a confession that is not a confession, because nobody is forgiven and nothing is required — you are simply, finally, told what you are hungry for. Many people find it the most liberating hour of their lives. Many people never recover.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Choir-singers who name the thing under your thing; a person hearing their own appetite spoken for the first time; a Seraphic envoy who came to condemn this and is very quiet.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "Someone was named and it was WRONG, and the Choir does not make that mistake, and so it was not wrong",
+    "A Seraph has asked the Choir to name THEIR appetite"
+  ],
+  "map": {
+    "x": 310,
+    "y": 495
+  },
+  "poleIntensity": 0.6
+}

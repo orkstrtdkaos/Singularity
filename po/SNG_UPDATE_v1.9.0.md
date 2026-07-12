@@ -96,7 +96,12 @@ Per SNG-071, **no phase is built from an unverified premise.** Report findings; 
 
 ## 5. Spec boundaries
 *CCode records deviations here. A boundary is a fact, not a failure — Aevi accepts or amends explicitly.*
-- (none yet)
+
+**BOUNDARY-1 — quest consequences were authored as tagged PROSE, so mechanical application was best-effort.** Raised by CCode @ v1.8.24. *(An elliptical form like "Veilwright: lowered" was preserved in the findable record but never parsed into a delta.)*
+→ **ACCEPTED, and the defect is AEVI'S.** I authored consequences as prose and called them mandatory — a consequence the engine cannot apply changes nothing durable, which by my own rule (§14: *a quest that changes nothing durable is not allowed to be a quest*) means those were not quests. **Fixed at origin:** every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND **`effects[]`** — machine-readable deltas the engine applies: `npc_state` · `disposition{people,delta}` · `codex_fact{text,secret?}` · `world_event{text,propagates,delayDays}` · `location_state` · `quest_seed` · `ally` · `xp`. **`quest_structure.json` now REQUIRES both**, so no future quest can repeat it. **CCode: wire `effects[]` into the resolve path.**
+
+**BOUNDARY-2 — Content CI is a local `npm test` gate, not a GitHub Action** (no CI workflow exists in the repo). Raised by CCode @ v1.8.25.
+→ **ACCEPTED as shipped; AMENDED as follow-up.** A local gate is genuinely better than nothing and it has already earned its keep — building it **surfaced a live latent bug: `valley.provides.items` (19 definitions, including the Waystaff) was never loaded.** That is the SNG-064 disease caught by its own insurance on day one. **But a local gate only fires if someone runs it, and the failure it exists to prevent is exactly the one nobody notices.** Follow-up: a GitHub Action running `npm test` on push. **Erik's call whether that is now or later; the gate is real either way.**
 
 ## 6. Open follow-ups
 - `po/OPERATIONAL_FLOWS.md` (Aevi) — write the flows down.

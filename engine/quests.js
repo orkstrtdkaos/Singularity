@@ -158,7 +158,9 @@ export function isRealQuest(def) {
   return !!(def && def.stakes && Array.isArray(def.stages) && def.stages.length && Array.isArray(def.outcomes) && def.outcomes.length);
 }
 
-/** Normalize an authored quest into a not-yet-started character-quest record. */
+/** Normalize an authored quest into a not-yet-started character-quest record. Outcomes carry both
+ *  `narration` (authored prose, the chronicle voice) and `effects[]` (machine-readable deltas the
+ *  engine applies). Legacy outcomes with only `consequences[]` are still honored (prose fallback). */
 export function structuredQuestRecord(def) {
   return {
     id: slugify(def.id), title: def.name || def.id, structured: true, status: "available",
@@ -167,7 +169,11 @@ export function structuredQuestRecord(def) {
     region: def.region || null, tier: def.tier || null,
     stages: (def.stages || []).map(s => ({ id: s.id, objective: s.objective, condition: s.condition, change: s.change })),
     routes: def.routes || {},
-    outcomes: (def.outcomes || []).map(o => ({ id: o.id, name: o.name, summary: o.summary, consequences: o.consequences || [] })),
+    outcomes: (def.outcomes || []).map(o => ({
+      id: o.id, name: o.name, summary: o.summary,
+      narration: o.narration || o.consequences || [],   // prose for the chronicle (legacy: consequences)
+      effects: o.effects || null                          // machine-readable deltas (null → legacy prose parse)
+    })),
     stageIndex: 0, completedStages: [], progress: [], aliases: []
   };
 }
@@ -200,39 +206,96 @@ export function completeQuestStage(character, questId, stageId) {
   return { ok: true, change, stage: q.stages[si], nextStage: q.stages[q.stageIndex] || null };
 }
 
-/** Apply an outcome's tagged-prose consequences as durably as the text allows. ALWAYS records a
- *  findable chronicle entry (the schema's floor); best-effort parses WORLD-EVENT (a propagating
- *  event dated on the shared clock), disposition shifts, and NPC state. ctx.recordEvent is an
- *  optional sink so the engine stays decoupled from sync. Returns the list of applied changes. */
-function applyQuestConsequences(character, quest, outcome, ctx = {}) {
+/** SNG-BATCH-10 BOUNDARY-1 CLOSE: apply an outcome's MACHINE-READABLE effects[] deterministically.
+ *  Every effect type from quest_structure.json is handled and lands somewhere durable + findable.
+ *  ctx.recordEvent is an optional sink (dated propagating events) so the engine stays decoupled
+ *  from sync; ctx.recordFact pins a findable fact. Returns the list of applied changes + total xp. */
+function applyQuestEffects(character, quest, effects, ctx = {}) {
   const applied = [];
   character.peopleDisposition = character.peopleDisposition || {};
   character.worldEvents = character.worldEvents || [];
-  for (const raw of outcome.consequences || []) {
+  character.npcRegistry = character.npcRegistry || {};
+  character.locationState = character.locationState || {};
+  let xp = 0;
+  const pinFact = (text, secret) => { if (typeof ctx.recordFact === "function") { try { ctx.recordFact({ text, secret: !!secret }); } catch { /* sink optional */ } } };
+  for (const e of effects || []) {
+    if (!e || !e.type) continue;
+    switch (e.type) {
+      // NPC + people keys are authored content ids (underscores intact) — never slugify them.
+      case "npc_state": {
+        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, questState: e.state, questNote: e.note || null }; }
+        applied.push({ type: "npc_state", npc: e.npc, state: e.state });
+        break;
+      }
+      case "disposition": {
+        if (e.people && Number.isFinite(e.delta)) { character.peopleDisposition[e.people] = (character.peopleDisposition[e.people] || 0) + e.delta; applied.push({ type: "disposition", people: e.people, delta: e.delta }); }
+        break;
+      }
+      case "codex_fact": {
+        if (e.text) { pinFact(e.text, e.secret); applied.push({ type: "codex_fact", text: e.text, secret: !!e.secret }); }
+        break;
+      }
+      case "world_event": {
+        if (e.text) {
+          const day = (ctx.worldDay ?? null); const at = day == null ? null : day + (Number.isFinite(e.delayDays) ? e.delayDays : 0);
+          const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: String(e.text).slice(0, 300), worldDay: at, propagates: e.propagates !== false };
+          character.worldEvents.push(ev);
+          if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink optional */ } }
+          applied.push({ type: "world_event", text: ev.text, worldDay: at });
+        }
+        break;
+      }
+      case "location_state": {
+        if (e.location) { const l = e.location; character.locationState[l] = { ...(character.locationState[l] || {}), change: e.change || null, questId: quest.id }; applied.push({ type: "location_state", location: e.location, change: e.change }); }
+        break;
+      }
+      case "quest_seed": {
+        if (e.text) { pinFact(`A thread opens: ${e.text}`, false); applied.push({ type: "quest_seed", text: e.text }); }
+        break;
+      }
+      case "ally": {
+        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, ally: true, allyNote: e.note || null }; applied.push({ type: "ally", npc: e.npc }); }
+        break;
+      }
+      case "xp": {
+        xp += Math.max(0, Math.min(60, e.amount | 0)); applied.push({ type: "xp", amount: e.amount | 0 });
+        break;
+      }
+      default: applied.push({ type: "unknown", raw: e.type });
+    }
+  }
+  return { applied, xp };
+}
+
+/** Legacy fallback: parse tagged-prose consequences when an outcome has no effects[] (old saves /
+ *  pre-effects content). Best-effort; the chronicle write is still the findable floor. */
+function applyQuestProse(character, quest, prose, ctx = {}) {
+  const applied = [];
+  character.peopleDisposition = character.peopleDisposition || {};
+  character.worldEvents = character.worldEvents || [];
+  for (const raw of prose || []) {
     const c = String(raw);
     if (/world[-\s]?event/i.test(c)) {
       const text = c.replace(/^[^:]*world[-\s]?event[^:]*:\s*/i, "").trim() || c;
       const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: text.slice(0, 240), worldDay: ctx.worldDay ?? null, propagates: true };
       character.worldEvents.push(ev);
       if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink optional */ } }
-      applied.push({ type: "world-event", text: ev.text });
+      applied.push({ type: "world_event", text: ev.text });
     }
     const dm = c.match(/([A-Za-z][\w'-]*(?:\s+[A-Za-z][\w'-]*)?)\s+disposition[^.]*?\b(strongly\s+raised|raised|lowered|wary\s+respect)/i);
     if (dm) {
-      const who = dm[1].trim().toLowerCase().replace(/\s+/g, "_");
-      const word = dm[2].toLowerCase();
+      const who = slugify(dm[1].trim()); const word = dm[2].toLowerCase();
       const delta = /lower/.test(word) ? -1 : /strong/.test(word) ? 2 : 1;
       character.peopleDisposition[who] = (character.peopleDisposition[who] || 0) + delta;
-      applied.push({ type: "disposition", who, delta });
+      applied.push({ type: "disposition", people: who, delta });
     }
-    const nm = c.match(/NPC state:\s*([a-z]+)/i);
-    if (nm) applied.push({ type: "npc-state", state: nm[1].toLowerCase() });
   }
   return applied;
 }
 
-/** Resolve a structured quest at a chosen outcome — APPLIES its consequences. The floor: a
- *  findable chronicle entry so the player can always go back and SEE what they did. */
+/** Resolve a structured quest at a chosen outcome — APPLIES its consequences. Prefers the authored
+ *  machine-readable effects[]; falls back to prose parsing for legacy outcomes. The floor either way:
+ *  a findable chronicle entry so the player can always go back and SEE what they did. */
 export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) {
   const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
   if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
@@ -241,14 +304,20 @@ export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) 
   q.status = "resolved";
   q.outcomeId = outcome.id; q.outcomeName = outcome.name;
   q.resolvedAt = ctx.nowISO || null; q.resolvedWorldDay = ctx.worldDay ?? null;
-  const applied = applyQuestConsequences(character, q, outcome, ctx);
+  let applied, xp;
+  if (Array.isArray(outcome.effects) && outcome.effects.length) {
+    ({ applied, xp } = applyQuestEffects(character, q, outcome.effects, ctx));
+    if (!xp) xp = Math.max(0, Math.min(60, ctx.xpReward | 0 || 30)); // effects[] with no xp effect → default award
+  } else {
+    applied = applyQuestProse(character, q, outcome.narration || [], ctx);
+    xp = Math.max(0, Math.min(60, ctx.xpReward | 0 || 30));
+  }
   character.chronicle = character.chronicle || [];
   character.chronicle.push({
     kind: "quest_resolved", questId: q.id, title: q.title, outcome: outcome.name,
-    summary: outcome.summary, consequences: outcome.consequences || [],
+    summary: outcome.summary, narration: outcome.narration || [],
     worldDay: ctx.worldDay ?? null, at: ctx.nowISO || null
   });
-  const xp = Math.max(0, Math.min(60, ctx.xpReward | 0 || 30));
   character.xp = (character.xp || 0) + xp;
   return { ok: true, outcome, applied, xp };
 }

@@ -119,5 +119,25 @@ for (const pack of PACKS) {
   }
 }
 
+// (6) quest integrity (SNG-065 + BOUNDARY-1): real quests, resolvable giver/region, and every
+// outcome carries machine-readable effects[] — prose alone is not a durable consequence.
+{
+  const qf = existsSync(join(root, "content/packs/valley/quests.json")) ? rj("content/packs/valley/quests.json") : { quests: [] };
+  const defs = qf.quests || [];
+  const npcIds = new Set(readdirSync(join(root, "content/packs/valley/npcs")).filter(f => f.endsWith(".json")).map(f => f.replace(".json", "")));
+  const regionIds = [];
+  for (const f of readdirSync(join(root, "content/packs/valley/locations")).filter(x => x.endsWith(".json"))) { const j = rj(`content/packs/valley/locations/${f}`); if (j.regionId && !regionIds.includes(j.regionId)) regionIds.push(j.regionId); }
+  for (const q of defs) {
+    check(`quest ${q.id} names its stakes + stages + outcomes (is a quest, not an errand)`, !!(q.stakes && (q.stages || []).length && (q.outcomes || []).length), "the schema's THE RULE");
+    if (q.giver) check(`quest ${q.id} giver "${q.giver}" resolves to an authored NPC`, npcIds.has(q.giver), "no such npc file");
+    if (q.region && regionIds.length) check(`quest ${q.id} region "${q.region}" is a real region`, regionIds.includes(q.region), "no location carries that regionId");
+    for (const o of q.outcomes || []) {
+      check(`quest ${q.id} outcome "${o.id}" carries machine-readable effects[]`, Array.isArray(o.effects) && o.effects.length > 0, "prose alone is not a consequence the engine can apply (BOUNDARY-1)");
+      const durable = (o.effects || []).some(e => ["npc_state", "disposition", "codex_fact", "world_event", "location_state", "ally"].includes(e.type));
+      check(`quest ${q.id} outcome "${o.id}" has at least one DURABLE, findable effect`, durable, "xp/quest_seed alone changes nothing you can go back and see");
+    }
+  }
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

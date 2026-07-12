@@ -2370,13 +2370,30 @@ await (async () => {
   const routes = routesForCharacter(char.quests[0], char);
   check("SNG-065: the character's domains light the routes they open (verist + lattice)", routes.filter(r => r.open).map(r => r.trad).sort().join(",") === "lattice,verist");
 
-  // resolve at an outcome — APPLIES consequences durably (chronicle write is the floor)
-  const events = [];
-  const outcomeId = q.outcomes[0].id;
-  const res = resolveStructuredQuest(char, q.id, outcomeId, { worldDay: 13, nowISO: "2026-07-13T00:00:00Z", recordEvent: e => events.push(e) });
-  check("SNG-065: resolving applies the outcome + writes a FINDABLE chronicle record (the floor)", res.ok && char.quests[0].status === "resolved" && char.chronicle.some(c => c.kind === "quest_resolved" && c.outcome === q.outcomes[0].name));
-  check("SNG-065: a WORLD-EVENT consequence propagates (dated on the shared clock) via the sink", char.quests[0].outcomes[0].consequences.some(c => /world[-\s]?event/i.test(c)) ? (events.length >= 1 && events[0].worldDay === 13) : true);
-  check("SNG-065: resolution awards xp and a resolved quest can't be re-resolved", char.xp > 0 && !resolveStructuredQuest(char, q.id, outcomeId, {}).ok);
+  // resolve at an outcome — APPLIES machine-readable effects[] durably (chronicle write is the floor)
+  const events = [], facts = [];
+  const outcomeDef = ledger.outcomes[0];
+  const outcomeId = outcomeDef.id;
+  const res = resolveStructuredQuest(char, q.id, outcomeId, { worldDay: 13, nowISO: "2026-07-13T00:00:00Z", recordEvent: e => events.push(e), recordFact: f => facts.push(f) });
+  check("SNG-065: resolving applies the outcome + writes a FINDABLE chronicle record (the floor)", res.ok && char.quests[0].status === "resolved" && char.chronicle.some(c => c.kind === "quest_resolved" && c.outcome === outcomeDef.name));
+
+  // BOUNDARY-1 CLOSE: effects[] are applied DETERMINISTICALLY (not prose-parsed)
+  const effTypes = new Set((outcomeDef.effects || []).map(e => e.type));
+  check("SNG-BOUNDARY-1: the authored outcome carries machine-readable effects[]", Array.isArray(outcomeDef.effects) && outcomeDef.effects.length > 0);
+  if (effTypes.has("disposition")) { const d = outcomeDef.effects.find(e => e.type === "disposition"); check("SNG-BOUNDARY-1: a disposition effect applies the EXACT authored delta (not a parsed guess)", char.peopleDisposition[d.people] === d.delta); }
+  if (effTypes.has("world_event")) { const w = outcomeDef.effects.find(e => e.type === "world_event"); check("SNG-BOUNDARY-1: a world_event propagates dated on the shared clock + delayDays", events.some(e => e.worldDay === 13 + (w.delayDays || 0))); }
+  if (effTypes.has("codex_fact")) check("SNG-BOUNDARY-1: a codex_fact is pinned as a findable record via the sink", facts.length >= 1);
+  if (effTypes.has("npc_state")) { const n = outcomeDef.effects.find(e => e.type === "npc_state"); check("SNG-BOUNDARY-1: an npc_state effect writes the NPC's quest state durably", char.npcRegistry[n.npc]?.questState === n.state); }
+  if (effTypes.has("ally")) { const a = outcomeDef.effects.find(e => e.type === "ally"); check("SNG-BOUNDARY-1: an ally effect binds the NPC to the character", char.npcRegistry[a.npc]?.ally === true); }
+  const xpEff = (outcomeDef.effects || []).find(e => e.type === "xp");
+  check("SNG-065: resolution awards xp and a resolved quest can't be re-resolved", char.xp === (xpEff ? xpEff.amount : 30) && !resolveStructuredQuest(char, q.id, outcomeId, {}).ok);
+
+  // legacy fallback: an outcome with prose-only narration (no effects[]) still resolves + records
+  const legacyChar = { name: "L", quests: [], xp: 0, chronicle: [], domains: {} };
+  const legacyDef = { id: "legacy_q", name: "Legacy", stakes: "someone pays", stages: [{ id: "s1", objective: "o", condition: "c", change: "ch" }], routes: {}, outcomes: [{ id: "o1", name: "Done", summary: "s", narration: ["Verist disposition toward you: raised."] }] };
+  startStructuredQuest(legacyChar, legacyDef, {});
+  const legRes = resolveStructuredQuest(legacyChar, "legacy_q", "o1", { worldDay: 5 });
+  check("SNG-BOUNDARY-1: a legacy prose-only outcome still resolves via the fallback parser", legRes.ok && legacyChar.peopleDisposition.verist >= 1 && legacyChar.chronicle.some(c => c.kind === "quest_resolved"));
 
   // availability gating: region match offers it, already-held excludes it
   const fresh = { quests: [] };

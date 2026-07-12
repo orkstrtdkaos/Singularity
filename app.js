@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.25";
+const APP_VERSION = "1.8.26";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2800,7 +2800,7 @@ function renderStructuredQuestDetail(q) {
       ${q.outcomes.map(o => `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
         <strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`).join("")}`
     : `<h3 class="codex-title" style="font-size:15px;margin-top:16px">What you did</h3>
-      ${(q.outcomes.find(o => o.id === q.outcomeId)?.consequences || []).map(c => `<div class="codex-fact">${esc(c)}</div>`).join("")}`}
+      ${((q.outcomes.find(o => o.id === q.outcomeId)?.narration) || (q.outcomes.find(o => o.id === q.outcomeId)?.consequences) || []).map(c => `<div class="codex-fact">${esc(c)}</div>`).join("")}`}
     <button class="btn secondary" id="sq-back" style="margin-top:16px">Back</button>
   </div>`);
   document.getElementById("sq-back").onclick = () => renderQuestLog();
@@ -2811,11 +2811,24 @@ function renderStructuredQuestDetail(q) {
   for (const b of app.querySelectorAll("[data-outcome]")) b.onclick = () => {
     const o = q.outcomes.find(x => x.id === b.dataset.outcome);
     if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
-    const r = resolveStructuredQuest(character, q.id, b.dataset.outcome, { worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(), recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day: readClock(character.clock).day }) });
+    const day = readClock(character.clock).day;
+    const r = resolveStructuredQuest(character, q.id, b.dataset.outcome, {
+      worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
+      // both sinks land the machine-readable effects[] durably: propagating world-events + pinned facts
+      recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),
+      recordFact: f => applyFactUpdates(character, [{ op: "add", text: f.text }], { day }),
+    });
     if (r.ok) {
       saveCharacter(character);
-      const changes = r.applied.length ? "\n\nWhat changed: " + r.applied.map(a => a.type === "world-event" ? "a ripple spreads through the world" : a.type === "disposition" ? `${a.who.replace(/_/g, " ")} feel differently about you` : a.state).join("; ") : "";
-      renderPlay(character.activeScene?.lastTurn || null, { aside: `${q.title} — ${o.name} (+${r.xp} xp).${changes}` });
+      const say = a => a.type === "world_event" ? "a ripple spreads through the world"
+        : a.type === "disposition" ? `${String(a.people).replace(/_/g, " ")} feel ${a.delta >= 0 ? "warmer" : "colder"} toward you`
+        : a.type === "npc_state" ? `${String(a.npc).replace(/_/g, " ")} is ${a.state}`
+        : a.type === "ally" ? `${String(a.npc).replace(/_/g, " ")} stands with you`
+        : a.type === "location_state" ? "a place changes"
+        : a.type === "quest_seed" ? "a new thread opens"
+        : a.type === "codex_fact" ? "the record remembers" : null;
+      const changes = [...new Set(r.applied.map(say).filter(Boolean))];
+      renderPlay(character.activeScene?.lastTurn || null, { aside: `${q.title} — ${o.name} (+${r.xp} xp).${changes.length ? "\n\nWhat changed: " + changes.join("; ") + "." : ""}` });
     } else alert(r.why || "Couldn't resolve.");
   };
 }

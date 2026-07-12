@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "the_underlight",
+  "name": "The Underlight",
+  "regionId": "umbral_depths",
+  "communityId": "umbral.underlight",
+  "axisVector": [
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    0.1,
+    0.0,
+    0.0,
+    -0.8,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "dark_light": -0.8,
+    "falsehood_truth": -0.2,
+    "concrete_abstract": 0.1
+  },
+  "tags": [
+    "umbral",
+    "dark",
+    "city",
+    "sacred",
+    "home"
+  ],
+  "connections": [
+    "the_lampless_market",
+    "the_harborward",
+    "the_slow_stair"
+  ],
+  "descriptionSeed": "The great dark, and it is a CITY. Not caves — architecture: terraces and bridges and windows that face nothing, all of it built by people who have never needed a lamp to see it. Sound carries strangely and courteously here; you are always aware of exactly how many people are near you and none of them are looking at you, because looking is not how anyone here sees. The Umbrals are not hiding. They are simply home, and the dark is not the absence of their light — it IS their light.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Umbral hosts who are unfailingly courteous and slightly amused by your groping; lamp-blind newcomers; things that use the dark and are not people.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A surface-dweller has brought a lamp into the city and nobody will say the thing that everyone is thinking",
+    "Something in the deep terraces has been taking people, and the Umbrals will not call it a monster, and that is somehow worse"
+  ],
+  "map": {
+    "x": 60,
+    "y": 340
+  },
+  "poleIntensity": 0.8,
+  "startingLocation": true
+}

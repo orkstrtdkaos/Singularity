@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "wellspring",
+  "name": "Wellspring",
+  "regionId": "the_feeling_coast",
+  "communityId": "threnodist.wellspring",
+  "axisVector": [
+    -0.7,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "emotional_logical": -0.7,
+    "death_life": 0.3,
+    "falsehood_truth": 0.2
+  },
+  "tags": [
+    "threnodist",
+    "emotional",
+    "city",
+    "sacred",
+    "home",
+    "social"
+  ],
+  "connections": [
+    "the_grief_house",
+    "the_wellspring_deep"
+  ],
+  "descriptionSeed": "A tidal city where nobody feels anything privately. Grief is conducted in public halls; joy is conducted in public halls; the architecture is SHAPED for feeling and it amplifies it deliberately. Visitors either weep within a day or flee within a day, and the Threnodists consider both responses entirely healthy and neither of them embarrassing.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Threnodists who will ask you what you are actually feeling and will not accept 'fine'; a public grieving in full flood; someone who has held something in for years and is about to not.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Someone has come to Wellspring specifically to feel something for the first time, and it may kill them",
+    "A Syllogist envoy is here and is being slowly, kindly destroyed"
+  ],
+  "map": {
+    "x": 270,
+    "y": 80
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

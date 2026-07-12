@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_lampless_market",
+  "name": "The Lampless Market",
+  "regionId": "umbral_depths",
+  "communityId": "umbral.market",
+  "axisVector": [
+    0.0,
+    -0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.1,
+    -0.6,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "dark_light": -0.6,
+    "falsehood_truth": -0.3,
+    "chaos_order": -0.1
+  },
+  "tags": [
+    "umbral",
+    "dark",
+    "market",
+    "trade",
+    "social"
+  ],
+  "connections": [
+    "the_underlight",
+    "the_slow_stair"
+  ],
+  "descriptionSeed": "Trade conducted entirely by touch, voice and reputation. Nothing is displayed because display is meaningless here; you ask, and you are told, and the telling is binding. Umbral merchants find the surface habit of LOOKING at goods before buying them frankly indecent — as if a seller's word were insufficient. Prices are honest. Lies here are not immoral so much as impractical: in a place where nobody can see your face, your word is the only face you have.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Merchants whose word is iron; surface traders sweating in the dark; a fence who harbors what the light hunts, and does it as a public service.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Someone has been buying up harbored things and not harboring them",
+    "A surface merchant wants to bring lanterns to market and cannot understand why this is an atrocity"
+  ],
+  "map": {
+    "x": 40,
+    "y": 300
+  },
+  "poleIntensity": 0.6
+}

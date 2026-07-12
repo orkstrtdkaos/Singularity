@@ -1,7 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.26";
+const APP_VERSION = "1.8.27";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1980,6 +1980,20 @@ function applyTurn(turn, resolution) {
   const hours = declared ? Math.max(0.25, Math.min(72, Number(turn.timeOps.hoursPassed))) : beatDefault;
   advanceClock(character.clock, hours);
   if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
+  // SNG-056: THE HEADER FOLLOWS THE FICTION. When the GM narration moved the character to a real
+  // place, update the AUTHORITATIVE currentLocationId so every location surface (header, map "you
+  // are here", GM context) agrees with the prose — instead of the header showing a stale place.
+  const moveRef = turn.moveTo && (turn.moveTo.location || turn.moveTo.id || turn.moveTo);
+  if (moveRef) {
+    const destId = resolveLocationId(moveRef, CONTENT.locations);
+    if (destId && destId !== character.currentLocationId) {
+      character.currentLocationId = destId;
+      noteGeneratedAttention(destId, "revisit", readClock(character.clock).day);
+      notePlaceVisit(character, destId, readClock(character.clock).day);
+      try { notePerception(character, destId, CONTENT.locations[destId], { visited: true, usedAbilityIds: [] }, CONTENT.rules); } catch { /* perception is a convenience */ }
+      try { ensureLocationImage(destId); } catch { /* art never blocks a move */ }
+    }
+  }
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // party: publish this beat to the shared scene (fire-and-forget)

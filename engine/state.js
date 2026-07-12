@@ -17,6 +17,20 @@ const LS = {
 
 // ---------- content packs ----------
 
+/** SNG-056: resolve a GM `moveTo` reference (an id or a place name) to a real loaded location id,
+ *  or null if it names nowhere that exists. Exact id → slugified id → exact name → loose name. Pure. */
+export function resolveLocationId(ref, locations = {}) {
+  if (!ref) return null;
+  const raw = String(ref).trim();
+  if (locations[raw]) return raw;
+  const slug = raw.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/(^_|_$)/g, "");
+  if (locations[slug]) return slug;
+  const lc = raw.toLowerCase();
+  for (const [k, l] of Object.entries(locations)) if ((l.name || "").toLowerCase() === lc) return k;
+  for (const [k, l] of Object.entries(locations)) { const n = (l.name || "").toLowerCase(); if (n && (n.includes(lc) || lc.includes(n))) return k; }
+  return null;
+}
+
 export async function loadContent() {
   const index = await fetchJSON("content/packs/core/manifest.json");
   const valley = await fetchJSON("content/packs/valley/manifest.json");

@@ -32,7 +32,7 @@ import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubE
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
-import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } from "../engine/state.js";
+import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
@@ -2399,6 +2399,16 @@ await (async () => {
   const fresh = { quests: [] };
   const avail = availableStructuredQuests(fresh, defs, { region: ledger.region });
   check("SNG-065: a quest is offered where its region matches, and not once it's in the log", avail.some(d => d.id === ledger.id) && !availableStructuredQuests(char, defs, { region: ledger.region }).some(d => d.id === ledger.id));
+})();
+
+// --- SNG-056: the GM moveTo op resolves a place ref to the authoritative location id ---
+(() => {
+  const locs = { harmonic_heights_terrace: { name: "Harmonic Heights — Lower Terrace" }, disputed_zone_fringe: { name: "The Disputed Zone" }, millbrook: { name: "Millbrook" } };
+  check("SNG-056: an exact id resolves", resolveLocationId("disputed_zone_fringe", locs) === "disputed_zone_fringe");
+  check("SNG-056: an exact name resolves to its id (the header can follow the fiction)", resolveLocationId("The Disputed Zone", locs) === "disputed_zone_fringe");
+  check("SNG-056: a loose name fragment resolves", resolveLocationId("disputed zone", locs) === "disputed_zone_fringe");
+  check("SNG-056: a place that does not exist resolves to null (the engine only honors real moves)", resolveLocationId("Castle Nowhere", locs) === null);
+  check("SNG-056: an empty ref is null", resolveLocationId("", locs) === null && resolveLocationId(null, locs) === null);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

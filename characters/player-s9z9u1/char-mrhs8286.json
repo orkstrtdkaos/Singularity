@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.13147997109374998
+    "spectrumId": -0.13990597253906248
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -178,23 +178,25 @@
       {
         "summary": "Silas introduces himself properly; Aldric names the village blacksmith Pell on the south lane as the local source for heavy hunting hardware.",
         "narration": "You pick up the two cloth-wrapped parcels — solid weight, the perch smell faintly through the fabric — and tuck them into the pack. \"Silas Weir,\" you say, settling the straps. \"Appreciate the fair trade, Aldric.\"\n\nHe dips his chin — the acknowledgment of a man who doesn't waste ceremony. \"Weir.\" He's already lifting the first rabbit toward the iron hook, orienting it by habit. \"Bowyer's not in the village. Had one, moved on two winters back — nobody filled it.\" He loops the cord and steps back to check the hang. \"Blacksmith you want is Pell. Works the forge on the south lane, past the elder's post. Does edge work, hardware, repairs. If you need heavier iron — snares, spear-tips, that kind of thing — she's your person.\" A pause, and he glances at Huginn, who has settled on the low beam above the door and is watching the rabbits go up with professional interest. \"Your bird always watch the hang like that?\"\n\nHuginn does not move. Its eye catches the fire-glow from the banked coals and holds it.\n\n\"Mostly,\" you say.\n\nAldric makes a sound that isn't quite a laugh, picks up his fillet knife, and gets back to work — the conversation closed in the comfortable way of a man satisfied with what just happened, not the closed way of one who isn't."
+      },
+      {
+        "summary": "Silas arrives at Pell's forge on the south lane and gets his first look at her stock.",
+        "narration": "You step out of the smokehouse into the lane's morning light, Huginn dropping from the beam to your shoulder in one unhurried movement. The hickory smell follows you half a block, then gives way to woodsmoke and damp stone and the ordinary business of a village mid-morning. The main lane runs straight past the well — you can see the rope and bucket, a woman drawing water, two children arguing about something near the post — and then south, past a low building with an elder's mark on the doorframe, the lane narrows and the forge smell starts before the building is visible: hot iron, coal dust, the particular dry heat that comes off a working fire even through two feet of stone wall.\n\nPell's forge is a squat structure set back from the lane, the front half open under a wide overhang where the light is better for close work. The woman inside has her back to you when you arrive — she's running a file along something clamped in the vise, long strokes, steady pressure, not looking up. The shop front is organized the way a competent person organizes things: not pretty, but findable. Iron hooks in rows. Coils of heavier chain. A board hung with flat snare plates, toggle-springs, and the kind of anchoring stakes that go into root-tangled ground and stay there. On a lower shelf, three spear-tips in descending weight — the middle one broad-bladed, designed for boar or heavy game, the lightest a proper hunting point with a clean taper.\n\nHuginn eyes the spear-tips with the patient interest it gives to most things. Pell finishes the stroke she was on, sets the file down, and turns — takes in the pack, the bird on your shoulder, and you, in that order."
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the two cloth-wrapped parcels — solid weight, the perch smell faintly through the fabric — and tuck them into the pack. \"Silas Weir,\" you say, settling the straps. \"Appreciate the fair trade, Aldric.\"\n\nHe dips his chin — the acknowledgment of a man who doesn't waste ceremony. \"Weir.\" He's already lifting the first rabbit toward the iron hook, orienting it by habit. \"Bowyer's not in the village. Had one, moved on two winters back — nobody filled it.\" He loops the cord and steps back to check the hang. \"Blacksmith you want is Pell. Works the forge on the south lane, past the elder's post. Does edge work, hardware, repairs. If you need heavier iron — snares, spear-tips, that kind of thing — she's your person.\" A pause, and he glances at Huginn, who has settled on the low beam above the door and is watching the rabbits go up with professional interest. \"Your bird always watch the hang like that?\"\n\nHuginn does not move. Its eye catches the fire-glow from the banked coals and holds it.\n\n\"Mostly,\" you say.\n\nAldric makes a sound that isn't quite a laugh, picks up his fillet knife, and gets back to work — the conversation closed in the comfortable way of a man satisfied with what just happened, not the closed way of one who isn't.",
-      "sceneSummary": "Silas introduces himself properly; Aldric names the village blacksmith Pell on the south lane as the local source for heavy hunting hardware.",
+      "narration": "You step out of the smokehouse into the lane's morning light, Huginn dropping from the beam to your shoulder in one unhurried movement. The hickory smell follows you half a block, then gives way to woodsmoke and damp stone and the ordinary business of a village mid-morning. The main lane runs straight past the well — you can see the rope and bucket, a woman drawing water, two children arguing about something near the post — and then south, past a low building with an elder's mark on the doorframe, the lane narrows and the forge smell starts before the building is visible: hot iron, coal dust, the particular dry heat that comes off a working fire even through two feet of stone wall.\n\nPell's forge is a squat structure set back from the lane, the front half open under a wide overhang where the light is better for close work. The woman inside has her back to you when you arrive — she's running a file along something clamped in the vise, long strokes, steady pressure, not looking up. The shop front is organized the way a competent person organizes things: not pretty, but findable. Iron hooks in rows. Coils of heavier chain. A board hung with flat snare plates, toggle-springs, and the kind of anchoring stakes that go into root-tangled ground and stay there. On a lower shelf, three spear-tips in descending weight — the middle one broad-bladed, designed for boar or heavy game, the lightest a proper hunting point with a clean taper.\n\nHuginn eyes the spear-tips with the patient interest it gives to most things. Pell finishes the stroke she was on, sets the file down, and turns — takes in the pack, the bird on your shoulder, and you, in that order.",
+      "sceneSummary": "Silas arrives at Pell's forge on the south lane and gets his first look at her stock.",
       "choices": [
         {
-          "label": "Head to Pell's forge on the south lane — look at what she stocks, ask about heavier snare iron or a hunting spear",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.3
-          },
+          "label": "Look over the snare hardware carefully — toggles, stakes, plate sizes — and ask Pell what she recommends for the terrain north of the village",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "trade"
+            "study",
+            "practical"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -203,15 +205,29 @@
           "emergenceId": null
         },
         {
-          "label": "Stop at Mara Wells's red door first — Aldric's name waives the finder's fee, and she may stock traps already made",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.2
-          },
+          "label": "Ask about the middle spear-tip — price, weight, what it's balanced for",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "trade",
+            "study",
+            "practical"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Introduce yourself and mention Aldric sent you — let the smokehouse referral do its work before asking anything specific",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
             "careful"
           ],
           "abilityId": null,
@@ -221,38 +237,18 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Aldric one more thing before you leave — what he's personally seen of the gray-green water, and how long it's been going",
+          "label": "Use Order-Sense on the forge and shop front — read the structure of the operation before you commit to anything",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.1
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Leave the smokehouse and take a slow walk through the village lane — get a feel for who's out and what's moving this morning",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {
-            "spectrumId": -0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -266,102 +262,109 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Silas has arrived at Pell's forge — the next step in equipping for sustained hunting north of the village."
+        }
+      ],
       "scene": {
-        "setting": "Millbrook smokehouse interior — squat stone building off the main lane, low beam ceiling, blue hickory smoke threading the eave. Mid-morning light through the low doorway. Rabbits and pigeon now on the iron racks; two provision parcels in Silas's pack.",
+        "setting": "Pell's forge, south lane of Millbrook — a squat stone building set back under a wide work overhang, open front, mid-morning light and forge heat. Coal smoke and hot iron in the air.",
         "npcsPresent": [
           {
-            "name": "Aldric",
-            "state": "back to filleting, rabbits hung — satisfied with the exchange, conversation closed naturally"
-          },
-          {
-            "name": "Huginn",
-            "state": "perched on the low beam above the door, watching the hung rabbits with calm, professional stillness"
+            "name": "Pell",
+            "state": "Has just set down her file and turned to face Silas — taking in the pack, Huginn, and him, in that order. Not yet spoken."
           }
         ],
         "objects": [
-          "Iron racks — gray-gilled river perch, now joined by two rabbits and the pigeon",
-          "Fillet knife (in Aldric's hand, working)",
-          "Cutting block (dark with use, cleared)",
-          "Banked fire beneath the racks",
-          "Canvas apron (worn by Aldric)"
+          "Iron hooks in rows along the shop wall",
+          "Coils of heavier chain",
+          "Board hung with snare plates, toggle-springs, and anchoring stakes",
+          "Three spear-tips on a lower shelf — heavy boar-point, broad mid-weight, light hunting taper",
+          "File and vise (workpiece clamped, mid-job)",
+          "Forge fire (working heat, coals banked but live)"
         ],
         "threads": [
-          "Pell the blacksmith — south lane, past the elder's post — named as the source for heavier iron hunting hardware",
-          "Mara Wells — red door east of the well — traps and hardware, finder's fee waived with Aldric's name",
-          "The upstream contamination — Aldric's firsthand observations unasked"
+          "Pell has clocked Silas and Huginn — not yet greeted; her read of him is forming",
+          "Aldric's referral is unspoken — could change the temperature of the introduction",
+          "Snare hardware and spear-tips are visible and in reach — a purchasing decision is ahead"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "aldric",
-          "name": "Aldric",
-          "role": "Smokehouse operator, Millbrook",
-          "note": "Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, spear-tips, edge work. No bowyer in the village; the last one left two winters back.",
+          "op": "meet",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook — south lane forge",
+          "description": "A working blacksmith running a tidy, unsentimental shop — file in hand, back to the door until the work is done. Practical organizer; reacts to competence over charm.",
+          "note": "First sighting — she turned when Silas arrived and is reading him before speaking.",
           "learned": [
-            "No bowyer currently in Millbrook — position unfilled since two winters ago",
-            "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit"
+            "Operates the only forge in Millbrook",
+            "Stocks snare hardware, chain, spear-tips, and edge work supplies",
+            "Named by Aldric as the village source for heavier hunting iron"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "file work",
+            "shop organization"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the smokehouse, back to filleting — satisfied with the exchange, conversation naturally closed."
+          "statusNote": "At her forge on the south lane, mid-morning, mid-job — just turned to face Silas."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters.",
+          "note": "Pell's forge visited on World-day 12 — stocks snare hardware (plates, toggles, stakes), chain, and three grades of spear-tip. Open-front under a wide overhang, south lane past the elder's post.",
           "subPlace": {
             "name": "Pell's Forge",
-            "note": "South lane, past the elder's post — blacksmith Pell, edge work and hunting hardware",
-            "visited": false
+            "note": "South lane past the elder's post — blacksmith Pell, edge work, snare iron, spear-tips. Visited World-day 12.",
+            "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "millbrook",
-          "label": "Millbrook",
-          "kind": "place",
-          "entityId": "millbrook",
-          "fact": "No bowyer in the village — the last one left two winters back, position unfilled. The blacksmith is Pell, south lane past the elder's post: edge work, hardware, snare iron, spear-tips.",
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Village blacksmith at the south-lane forge — stocks snare hardware, chain, and hunting spear-tips in three weights. Practical and organized; named by Aldric as the source for heavier hunting iron.",
           "links": [
+            "millbrook",
             "aldric",
             "aldric-provisioning-deal"
           ]
         }
       ],
+      "generateRequest": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange — introductions and a quick question about craftspeople"
+        "why": "Short walk south through Millbrook from the smokehouse to Pell's forge."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook smokehouse interior — squat stone building off the main lane, low beam ceiling, blue hickory smoke threading the eave. Mid-morning light through the low doorway. Rabbits and pigeon now on the iron racks; two provision parcels in Silas's pack.",
+      "setting": "Pell's forge, south lane of Millbrook — a squat stone building set back under a wide work overhang, open front, mid-morning light and forge heat. Coal smoke and hot iron in the air.",
       "npcsPresent": [
         {
-          "name": "Aldric",
-          "state": "back to filleting, rabbits hung — satisfied with the exchange, conversation closed naturally"
-        },
-        {
-          "name": "Huginn",
-          "state": "perched on the low beam above the door, watching the hung rabbits with calm, professional stillness"
+          "name": "Pell",
+          "state": "Has just set down her file and turned to face Silas — taking in the pack, Huginn, and him, in that order. Not yet spoken"
         }
       ],
       "objects": [
-        "Iron racks — gray-gilled river perch, now joined by two rabbits and the pigeon",
-        "Fillet knife (in Aldric's hand, working)",
-        "Cutting block (dark with use, cleared)",
-        "Banked fire beneath the racks",
-        "Canvas apron (worn by Aldric)"
+        "Iron hooks in rows along the shop wall",
+        "Coils of heavier chain",
+        "Board hung with snare plates, toggle-springs, and anchoring stakes",
+        "Three spear-tips on a lower shelf — heavy boar-point, broad mid-weight, light hu",
+        "File and vise (workpiece clamped, mid-job)",
+        "Forge fire (working heat, coals banked but live)"
       ],
       "threads": [
-        "Pell the blacksmith — south lane, past the elder's post — named as the source for heavier iron hunting hardware",
-        "Mara Wells — red door east of the well — traps and hardware, finder's fee waived with Aldric's name",
-        "The upstream contamination — Aldric's firsthand observations unasked"
+        "Pell has clocked Silas and Huginn — not yet greeted; her read of him is forming",
+        "Aldric's referral is unspoken — could change the temperature of the introduction",
+        "Snare hardware and spear-tips are visible and in reach — a purchasing decision is ahead"
       ]
     }
   },
@@ -389,7 +392,8 @@
       "status": "active",
       "progress": [
         "Deal struck on World-day 12, morning. Aldric has his eye on the gray-gilled perch and wants real information about the upstream situation.",
-        "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment."
+        "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment.",
+        "Silas has arrived at Pell's forge — the next step in equipping for sustained hunting north of the village."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -510,6 +514,35 @@
         "locationId": "millbrook",
         "day": 1
       }
+    },
+    "pell": {
+      "id": "pell",
+      "name": "Pell",
+      "role": "Village blacksmith, Millbrook — south lane forge",
+      "description": "A working blacksmith running a tidy, unsentimental shop — file in hand, back to the door until the work is done. Practical organizer; reacts to competence over charm.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] First sighting — she turned when Silas arrived and is reading him before speaking."
+      ],
+      "knownFacts": [
+        "Operates the only forge in Millbrook",
+        "Stocks snare hardware, chain, spear-tips, and edge work supplies",
+        "Named by Aldric as the village source for heavier hunting iron"
+      ],
+      "skillsObserved": [
+        "file work",
+        "shop organization"
+      ],
+      "status": "active",
+      "statusNote": "At her forge on the south lane, mid-morning, mid-job — just turned to face Silas.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -524,7 +557,8 @@
         "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
         "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra",
         "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
-        "[d1] Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters."
+        "[d1] Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters.",
+        "[d1] Pell's forge visited on World-day 12 — stocks snare hardware (plates, toggles, stakes), chain, and three grades of spear-tip. Open-front under a wide overhang, south lane past the elder's post."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -559,8 +593,8 @@
         "pell-s-forge": {
           "name": "Pell's Forge",
           "day": 1,
-          "visited": false,
-          "note": "South lane, past the elder's post — blacksmith Pell, edge work and hunting hardware"
+          "visited": true,
+          "note": "South lane past the elder's post — blacksmith Pell, edge work, snare iron, spear-tips. Visited World-day 12."
         }
       },
       "vectorsKnown": [
@@ -784,20 +818,38 @@
         "createdDay": 1,
         "entityId": "water-keeper",
         "updatedDay": 1
+      },
+      "pell": {
+        "id": "pell",
+        "label": "Pell",
+        "kind": "person",
+        "facts": [
+          "[d1] Village blacksmith at the south-lane forge — stocks snare hardware, chain, and hunting spear-tips in three weights. Practical and organized; named by Aldric as the source for heavier hunting iron."
+        ],
+        "links": [
+          "millbrook",
+          "aldric",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "pell",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 11.645545725354394,
-    "cerebral": 4.8375022557698415,
-    "social": 4.945718043575437,
-    "generous": 5.847253631351312,
-    "cautious": 1.9505955218094844
+    "strategic": 11.587317996727622,
+    "cerebral": 4.8133147444909925,
+    "social": 4.92098945335756,
+    "generous": 6.8180173631945555,
+    "cautious": 1.940842544200437
   },
   "aptitudes": [
-    "strategist"
+    "strategist",
+    "good_samaritan"
   ],
-  "actionCount": 10,
+  "actionCount": 11,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -819,8 +871,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783891303009,
-  "rev": 25,
+  "updatedAt": 1783891614265,
+  "rev": 26,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -23,6 +23,7 @@
 | **SNG-077** | v1.8.34 | Gambit hint no longer constant — the GM declares `gambitApt`; the engine decides show (dismissal sticks + cooldown). |
 | **SNG-066** | v1.8.35 | In-game ⚑ Feedback — one tap; version/screen/character/location/last-turn/errors auto-attach; append-only to `po/feedback/`, queued if sync off. |
 | **SNG-080** | v1.8.36 | The world must PUSH — quiet-turn pacing (escalating, register/danger-aware, tightens a live quest thread); danger graduated + findable on the map. |
+| **SNG-073** | v1.8.38 | **The Skill Wheel** — the skill tree IS the great circle: tiers radiate inward, folk at centre, precursor outside, cross-pole braids as diameters, antipode struck through. |
 
 ---
 
@@ -60,7 +61,7 @@ sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" })
 
 ### 4. ✅ SNG-066 SHIPPED v1.8.35 — feedback (auto-captured context: version · character · domains · location · last GM turn · console errors). Turns Erik's screenshot-archaeology into one-click reports.
 
-### 5. **SNG-073 — The Skill Wheel** (supersedes SNG-054 Ph2). The skill tree **becomes** the great circle: tiers radiate inward · folk crafts at the centre · precursor outside the ring · **cross-pole braids drawn as diameters through the centre** · **antipode dark and struck through.**
+### 5. ✅ SNG-073 SHIPPED v1.8.38 — The Skill Wheel (supersedes SNG-054 Ph2). The skill tree **becomes** the great circle: tiers radiate inward · folk crafts at the centre · precursor outside the ring · **cross-pole braids drawn as diameters through the centre** · **antipode dark and struck through.**
 
 ### 6. **SNG-058 — party leader.**
 

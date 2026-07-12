@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_unplanned_room",
+  "name": "The Unplanned Room",
+  "regionId": "the_lattice_cities",
+  "communityId": "lattice.unplanned",
+  "axisVector": [
+    -0.3,
+    -0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "chaos_order": 0.2,
+    "falsehood_truth": -0.2,
+    "emotional_logical": -0.3
+  },
+  "tags": [
+    "lattice",
+    "order",
+    "secret",
+    "strange",
+    "sacred",
+    "social"
+  ],
+  "connections": [
+    "tier_seven"
+  ],
+  "descriptionSeed": "There is one room in the Grand Lattice that is not on any plan. Nobody scheduled it. Nobody knows who made it. The Lattice-Cities have known about it for two hundred years and have never removed it, and cannot explain why, and become extremely uncomfortable when asked. People go there. They do not do anything in particular. They come back and cannot say what for.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "People sitting in a room doing nothing, which is the single most transgressive act in this civilization; an official who has come here every week for thirty years and has never filed it.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "The Lattice has finally scheduled the Unplanned Room for removal",
+    "Someone has begun MAPPING the room, and the mapping is the violation, not the room"
+  ],
+  "map": {
+    "x": 495,
+    "y": 200
+  },
+  "poleIntensity": 0.3
+}

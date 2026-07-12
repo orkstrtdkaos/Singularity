@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_proof_halls",
+  "name": "The Proof-Halls",
+  "regionId": "the_reasoned_hold",
+  "communityId": "syllogist.proofhalls",
+  "axisVector": [
+    0.6,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "emotional_logical": 0.6,
+    "falsehood_truth": 0.5,
+    "mechanical_spiritual": -0.2
+  },
+  "tags": [
+    "syllogist",
+    "logical",
+    "archive",
+    "study",
+    "sacred"
+  ],
+  "connections": [
+    "the_axiom"
+  ],
+  "descriptionSeed": "Every argument the Syllogists have ever made, kept, in order, with its errors annotated by the people who made them. The Proof-Halls are an intellectual monument and a two-thousand-year exercise in public humility: every wrong turn is preserved, signed, and taught.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Scholars who will show you their own worst mistake with something like pride; a proof half-finished for a century; an argument here that touches something the Verists say plainly and the Syllogists have not yet been able to derive.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A proof in the Halls has been quietly altered, and altering a proof is the worst crime this people has",
+    "A visiting Threnodist has said one sentence that a hall full of Syllogists cannot refute and cannot accept"
+  ],
+  "map": {
+    "x": 180,
+    "y": 160
+  },
+  "poleIntensity": 0.6
+}

@@ -37,7 +37,7 @@ import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
-import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains } from "../engine/traditions.js";
+import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "../engine/traditions.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2322,6 +2322,17 @@ await (async () => {
   const primaryOffered = domainAccess({ id: "y", tradition: "umbral", levelReq: 1 }, 1, domainsUV, idx).allowed;
   const folkOffered = domainAccess({ id: "z", tradition: "radiant_folk", levelReq: 1 }, 1, domainsUV, idx).allowed;
   check("SNG-063: a domain-filtered starting list excludes the antipode, keeps primary + folk", antipodeOffered === false && primaryOffered === true && folkOffered === true);
+
+  // SNG-068A: the Silas fix — starting abilities reconcile against the CONFIRMED domains.
+  // Silas earned his ANTIPODE's craft during play but CONFIRMED primary = umbral (knows nothing umbral).
+  const cat068 = { blaze_a: { id: "blaze_a", tradition: "blazeborn", levelReq: 1 }, veil_a: { id: "veil_a", tradition: "veilwright", levelReq: 1 },
+    umbral_lo: { id: "umbral_lo", tradition: "umbral", levelReq: 1 }, umbral_hi: { id: "umbral_hi", tradition: "umbral", levelReq: 3 } };
+  const rec = reconcileStartingAbilities(["blaze_a", "veil_a"], { primary: "umbral", secondary: "veilwright", tertiary: null }, cat068, idx);
+  check("SNG-068A: a character with no CONFIRMED-primary ability is granted the lowest-tier one (an umbral knows something umbral)", rec.grantedFromPrimary === "umbral_lo" && rec.abilities.includes("umbral_lo"));
+  check("SNG-068A: earned abilities are KEPT (nothing stripped) — the antipode one is grandfathered + flagged", rec.abilities.includes("blaze_a") && rec.grandfathered.includes("blaze_a"));
+  // a character who already holds a primary ability gets no extra grant
+  const rec2 = reconcileStartingAbilities(["umbral_lo"], { primary: "umbral" }, cat068, idx);
+  check("SNG-068A: a character who already knows their primary craft gets no extra grant", rec2.grantedFromPrimary === null && rec2.abilities.length === 1);
 
   // SNG-BATCH-10 Phase 1: the domain gate is now ENGINE-ENFORCED in learnAbility (not just the
   // picker) — the "learn any capstone" hole is closed even on non-picker learn paths. Origin=valley

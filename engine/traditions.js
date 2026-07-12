@@ -136,6 +136,27 @@ export function crystallizeDomains(tags = {}, index) {
   return { primary, secondary, tertiary };
 }
 
+/** SNG-068A: reconcile a prologue character's STARTING abilities against their CONFIRMED domains.
+ *  Keeps every earned ability ("you did this, so you know this") — nothing is stripped — but:
+ *   - flags any that fall OUTSIDE the confirmed domains as `grandfathered` (the player is told),
+ *   - grants ONE ability from the CONFIRMED PRIMARY if the character has none there (a wright must
+ *     know something wright — the missing step that produced the Silas bug).
+ *  Pure. Returns { abilities:[ids], grantedFromPrimary:id|null, grandfathered:[ids] }. */
+export function reconcileStartingAbilities(earnedIds = [], domains = {}, catalog = {}, index) {
+  const earned = earnedIds.filter(id => catalog[id]);
+  if (!index || !domains?.primary) return { abilities: [...earned], grantedFromPrimary: null, grandfathered: [] };
+  const grandfathered = earned.filter(id => !domainAccess(catalog[id], catalog[id].levelReq || 1, domains, index).allowed);
+  const hasPrimary = earned.some(id => traditionOf(catalog[id], index) === domains.primary);
+  let grantedFromPrimary = null;
+  if (!hasPrimary) {
+    const cand = Object.values(catalog)
+      .filter(ab => traditionOf(ab, index) === domains.primary && !earned.includes(ab.id))
+      .sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1))[0];
+    if (cand) grantedFromPrimary = cand.id;
+  }
+  return { abilities: [...earned, ...(grantedFromPrimary ? [grantedFromPrimary] : [])], grantedFromPrimary, grandfathered };
+}
+
 /** SNG-059 migration: infer a legacy character's domains from the traditions of the abilities they
  *  already hold. Most-represented tradition → primary; next distinct → secondary; a ring-neighbour
  *  of the secondary (if held) → tertiary. Folk-only characters get no domain (stay open). Nobody

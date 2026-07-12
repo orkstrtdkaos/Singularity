@@ -17,7 +17,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
-import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains } from "./engine/traditions.js";
+import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -38,7 +38,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.32";
+const APP_VERSION = "1.8.33";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1287,6 +1287,20 @@ function backgroundsFallback() {
   ];
 }
 
+// SNG-069A: a categorized background <select> — browsable by category, used by BOTH creation doors.
+// Background is CHOSEN, never gated by origin/domain (a Cogitant duelist is a legitimate character).
+const BG_CATEGORY_LABEL = { martial: "Martial", practitioner: "Practitioner (how you came to your craft)", craft: "Craft", learned: "Learned", social: "Social", marginal: "Marginal" };
+function backgroundOptionsHTML(selectedId) {
+  const bgs = CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback();
+  const cats = [...new Set(bgs.map(b => b.category).filter(Boolean))];
+  if (!cats.length) return bgs.map(b => `<option value="${esc(b.id)}" ${selectedId === b.id ? "selected" : ""}>${esc(b.name)}</option>`).join("");
+  const order = ["martial", "practitioner", "craft", "learned", "social", "marginal"];
+  return order.filter(c => cats.includes(c)).map(cat => `<optgroup label="${esc(BG_CATEGORY_LABEL[cat] || cat)}">${
+    bgs.filter(b => b.category === cat).map(b => `<option value="${esc(b.id)}" ${selectedId === b.id ? "selected" : ""}>${esc(b.name)}</option>`).join("")
+  }</optgroup>`).join("");
+}
+function backgroundById(id) { return (CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback()).find(b => b.id === id) || null; }
+
 // SNG-BATCH-10 Phase 2: STARTING LOCATION. Every origin has a homeland (origins.json startingLocation)
 // and creation defaults to it — but a player may always also start in the Valley (a character who
 // already left) or at The Crossing (the center, where nobody is from). Ids read from content.
@@ -1343,8 +1357,8 @@ function renderCreate() {
         return `<div class="field"><label>Starting location <span class="hint" style="text-transform:none">(defaults to your homeland)</span></label>
         <select id="c-startloc">${sc.map(c => `<option value="${esc(c.id)}" ${state.startingLocation === c.id ? "selected" : ""}>${esc(c.label)}</option>`).join("")}</select>
         <div class="hint">${esc((sc.find(c => c.id === state.startingLocation) || sc[0]).why)}</div></div>`; })()}
-      <div class="field"><label>Background — what did you do?</label>
-        <select id="c-bg">${bgs.map(b => `<option value="${esc(b.id)}" ${state.background === b.id ? "selected" : ""}>${esc(b.name)}</option>`).join("")}</select>
+      <div class="field"><label>Background — what did you do? <span class="hint" style="text-transform:none">(browsable by category; never gated by your people)</span></label>
+        <select id="c-bg">${backgroundOptionsHTML(state.background)}</select>
         <div class="hint">${esc(bg?.description || "")}</div></div>
       <div class="field"><label>Attributes — points left: <strong>${left}</strong> (each 1–4)</label>
         ${Object.entries(state.attrs).map(([k, v]) => `
@@ -1578,6 +1592,8 @@ function renderCreate() {
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
     if (!profile.charactersPlayed.includes(character.id)) profile.charactersPlayed.push(character.id);
+    // SNG-068A: carry the prologue ability-reconcile note into the first scene so nothing is silent
+    if (state._prologueReconcileNote) character._creationAside = state._prologueReconcileNote;
     ensureGallery(character);
     ensureCharacterPortrait(character); // SNG-035: born seeing the character (no-op unless art=generate)
     saveCharacter(character); saveProfile(profile);
@@ -1737,22 +1753,39 @@ function renderCreate() {
       <div class="prologue-reasons"><p class="hint">Because, in the scene:</p>
         ${reasons.map(r => `<div class="prologue-reason">— ${esc(r.label)}</div>`).join("")}</div>
       <p class="hint" style="margin-top:8px">The far pole of what you are is closed to you — only the great braids cross it. Is that who you are? You may adjust.</p>
+      <div class="field" style="margin-top:12px"><label>And what did you DO before this? <span class="hint" style="text-transform:none">(your background — you choose; the scene doesn't decide it for you)</span></label>
+        <select id="reveal-bg">${backgroundOptionsHTML(state.background)}</select>
+        <div class="hint" id="reveal-bg-hint">${esc(backgroundById(state.background)?.description || "")}</div></div>
       <div style="display:flex; gap:8px; margin-top:10px">
         <button class="btn secondary" id="reveal-adjust">Adjust on the circle</button>
         <button class="btn" id="reveal-confirm">Yes — this is who I am</button>
       </div>
     </div>`);
     document.getElementById("reveal-adjust").onclick = () => { state.domainReturn = "prologue"; state.domains = { primary: null, secondary: null, tertiary: null }; renderDomainStep(); };
-    document.getElementById("reveal-confirm").onclick = () => finishPrologue();
+    const rbg = document.getElementById("reveal-bg");
+    if (rbg) rbg.onchange = e => { state.background = e.target.value; const h = document.getElementById("reveal-bg-hint"); if (h) h.textContent = backgroundById(state.background)?.description || ""; };
+    document.getElementById("reveal-confirm").onclick = () => { if (rbg) state.background = rbg.value; finishPrologue(); };
   }
 
-  /** Out the far side: a complete character, domains set, abilities they USED, a named companion. */
+  /** Out the far side: a complete character. SNG-068A: abilities are RECONCILED against the
+   *  CONFIRMED domains (not the ones the game guessed). The prologue-earned abilities are kept —
+   *  "you did this, so you know this" — but any that fall outside the confirmed domains are
+   *  GRANDFATHERED explicitly and the player is told; and the character is granted at least one
+   *  ability from their CONFIRMED PRIMARY (a wright must know something wright). */
   function finishPrologue() {
-    // starting abilities = the abilities they actually used (that exist in the catalog)
-    state.abilities = (state.prologue.granted || []).filter(id => CONTENT.abilities[id]);
+    const { abilities, grantedFromPrimary, grandfathered } = reconcileStartingAbilities(
+      state.prologue.granted || [], state.domains, CONTENT.abilities, CONTENT.traditionIndex);
+    state.abilities = abilities;
     // a light bio seeded from the opening so the GM has grounding
     const o = opening();
-    const bio = o ? { motivation: o.hook, story: `Their first day in the world was ${o.name.toLowerCase()} — ${state.prologue.reasons.map(r => r.label.toLowerCase().replace(/\.$/, "")).slice(0, 2).join("; ")}.` } : null;
+    let story = o ? `Their first day in the world was ${o.name.toLowerCase()} — ${state.prologue.reasons.map(r => r.label.toLowerCase().replace(/\.$/, "")).slice(0, 2).join("; ")}.` : "";
+    if (grandfathered.length) story += ` They did things in that first day their people would not have taught them — ${grandfathered.map(id => CONTENT.abilities[id].name).join(", ")} stay with them, earned outside their craft.`;
+    const bio = (o || grandfathered.length) ? { motivation: o?.hook || null, story: story.trim() } : null;
+    // tell the player what was reconciled, so nothing is silently changed (Law 9)
+    const notes = [];
+    if (grantedFromPrimary) notes.push(`your people's craft is yours: you begin knowing ${CONTENT.abilities[grantedFromPrimary].name}`);
+    if (grandfathered.length) notes.push(`what you did in the fire stays with you, though it is not your people's craft: ${grandfathered.map(id => CONTENT.abilities[id].name).join(", ")}`);
+    state._prologueReconcileNote = notes.length ? notes.join("; ") + "." : null;
     finish(bio);
   }
 
@@ -1785,6 +1818,12 @@ async function enterPlay() {
     const growth = "The world has grown:\n• " + character._reconcileNotes.join("\n• ");
     backfillAside = backfillAside ? backfillAside + "\n\n" + growth : growth;
     delete character._reconcileNotes;
+    saveCharacter(character);
+  }
+  // SNG-068A: the creation reconcile note (abilities matched to your CONFIRMED people) — say it once.
+  if (character._creationAside) {
+    backfillAside = backfillAside ? character._creationAside + "\n\n" + backfillAside : character._creationAside;
+    delete character._creationAside;
     saveCharacter(character);
   }
   if (character.activeScene?.turns?.length) {
@@ -3590,10 +3629,9 @@ function renderPlay(turn, opts = {}) {
           <button class="opt companion-rename" data-rename="${esc(id)}" title="Name them">✎</button>
           <button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>`;
       }).join("")}
-      ${Object.values(CONTENT.companions).filter(c => !(character.companions || []).includes(c.id)).map(c =>
-        `<button class="opt" data-join="${esc(c.id)}" style="margin:2px 0; display:block; width:100%" title="${esc(c.persona.slice(0, 140))}">Travel with ${esc(c.name)}</button>`
-      ).join("")}
-      ${!Object.keys(CONTENT.companions).length ? "<div class='insight'>you travel alone</div>" : ""}
+      ${/* SNG-068B: a companion you have not MET must not exist to you — no roster recruit-menu here.
+            The full roster appears only in the quick-start picker + the prologue's companionBeat. */""}
+      ${!(character.companions || []).length ? "<div class='insight'>you travel alone — someone may yet fall in beside you</div>" : ""}
     </section>
     <section><h3>Items</h3>
       ${(character.inventory || []).map(it => {

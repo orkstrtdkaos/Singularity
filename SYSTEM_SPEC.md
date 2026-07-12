@@ -299,6 +299,10 @@ Plus: suites + `parse_probe` green, **fresh-port boot check** (a temporal-dead-z
 - **2 combination recipes reference abilities that do not exist** (`strike_basic`, `root_hold`).
 - **`SPEC_BACKLOG.md` / `ALERT.md` are append-only sediment (~100KB+)** — retire as primary surfaces; versioned specs + current-status-only alert.
 - **Thin regions** (riven_marches / somatic_reaches / unspooling at 3–4 locations) want ~6.
+- **✅ RESOLVED by BATCH-10 (v1.8.22–25):** domain gates now ENGINE-ENFORCED (antipode blocked) · starting location offered · quests load + resolve with durable consequences · Content CI exists (`tests/content_ci.mjs`).
+- **🐛 CAUGHT BY THE NEW CI ON DAY ONE:** `valley.provides.items` (19 definitions, **including the Waystaff**) was never loaded — a third instance of the Law-10 disease, found by its own insurance. Fixed.
+- **Quest consequences now require `effects[]`** (machine-readable) alongside `narration` (prose). Prose alone is not a consequence — the engine cannot apply it. *(Aevi's authoring defect; CCode flagged rather than guessed.)*
+- **Content CI is a LOCAL `npm test` gate, not a GitHub Action.** A gate that only fires when someone remembers to run it is weak against exactly the failure it exists to prevent. **Follow-up: a GH Action on push.**
 - `[CCODE: add every debt you can see that I cannot]`
 
 ---

@@ -913,3 +913,38 @@ The manifest bug (the live game ran on **six locations** for weeks, silently) is
 SNG-056 (location-header desync) → SNG-058 (party leader) → SNG-052 (adult-gate checkbox persistence) → SNG-054 Phase 2 (skill-tree viz redesign, now that the corpus is final).
 
 **Erik test (the whole batch):** "Make a character — verify you start in your PEOPLE'S homeland, that your domains gate what you can learn (and your antipode simply isn't offered), and that you can take a quest that tells you what's at stake, has real stages, more than one way through, and changes something you can go back and see."
+---
+
+## SNG-066 — In-game feedback / bug report (Tether-style) ⭐
+
+**Erik-directed 2026-07-11:** *"we should build in a feedback/bug report feature, just like Tether's."* 🔧 CCode. Aevi PO. **Verified at HEAD: no feedback mechanism exists in the game (0 code refs).**
+
+**Why this earns its place immediately:** every bug this session has been reported by Erik taking a screenshot, describing the situation, and Aevi then spending 2–4 tool calls reconstructing *where he was, what version, what state*. **A feedback button that auto-captures the context turns a 5-minute archaeology dig into a one-click report.** The Fendt date-drift, the duplicate-Erik picker, the gambit-every-turn, the Ent portrait, the location-header desync, the redo bug — every one would have arrived pre-diagnosed.
+
+**Build — the value is in the AUTO-CAPTURED CONTEXT, not the text box:**
+1. **A persistent, unobtrusive `⚑ Feedback` control** (header, beside Legs) — available on every screen, including creation and the prologue.
+2. **One-tap type:** `🐛 Bug` · `💡 Idea` · `🤔 Felt off` (the third matters — "this isn't broken, it's just wrong" is most of Erik's best feedback and has nowhere to go today).
+3. **AUTO-CAPTURE, no typing required:** app version · screen/route · character id + level + domains + origin · current location + region · active quest/scene · last GM turn (truncated) · last player action · any console errors since load · timestamp (shared world-day AND real). The player adds a sentence; the system supplies the forensics.
+4. **Write to origin like Tether does** — append to `po/feedback/YYYY-MM-DD.md` (or a `feedback.jsonl`) via the existing sync PAT + `pushMergedFile` (read-merge-write-retry — concurrent reporters must not clobber). If sync is off, queue locally and flush when it returns; **never lose a report**.
+5. **Confirm to the player** that it landed, with the entry id.
+6. **Aevi reads `po/feedback/` at session-open** and triages into the backlog. Erik never has to re-describe a bug again.
+
+**Guardrails.** No PII beyond what the save already holds. Redact the sync PAT and any credential from captured state (**never** dump the whole config object). Respect the rating ceiling in any captured GM text. Feedback is append-only; nothing is ever overwritten.
+
+**Erik test:** "Hit ⚑ Feedback mid-scene, pick 'Felt off', type one sentence — verify it lands in the repo WITH your version, location, character and last turn attached, and that Aevi can read it without asking you a single follow-up question."
+
+---
+
+## SNG-067 — Creation "redo" cannot repick the primary domain (Erik live, v1.8.22)
+
+**Erik-found in live play 2026-07-11, immediately after BATCH-10 Ph1 shipped the domain gate:** *"I hit 'redo' on the great circle during character creation and it did not let me repick the primary domain."* 🔧 CCode. Aevi PO. **This violates the Prologue's own mandatory rule.**
+
+**Why it's a real bug and not a nit:** `prologue.json → closingReveal.confirm` says **"MANDATORY. Nothing commits until the player says yes."** And SNG-062's design law: *"Revealed, then confirmed — the player keeps the last word."* A redo that cannot actually re-choose the primary domain means the domain is **imposed**, which is precisely the failure the confirm step exists to prevent. It is also the single most consequential choice in the game (the antipode is CLOSED forever), so it is the worst one to get stuck with.
+
+**Fix:** `redo` must return the player to a genuinely re-choosable state:
+- Primary **and** secondary **and** tertiary all re-selectable (tertiary re-constrained to a ring-neighbor of whatever secondary they land on).
+- Clear the derived state on redo — do not leave a stale crystallized primary underneath the re-render (**suspected root cause: the reveal is recomputed from the tallied prologue tags, so "redo" re-derives the SAME answer instead of handing control to the player**).
+- Redo should offer BOTH: *re-derive from my play* (recompute the tally) and *let me choose* (free pick on the ring, with the reveal's reasoning still shown as advice, not as a lock).
+- Applies to quick-start too: domains must remain editable until the final commit.
+
+**Erik test:** "In creation, hit redo on the great circle — verify you can actually pick a different primary, that secondary/tertiary re-open with it, and that nothing commits until you confirm."

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_blaze",
+  "name": "The Blaze",
+  "regionId": "radiant_wastes",
+  "communityId": "blazeborn.blaze",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    -0.4,
+    0.0,
+    0.0,
+    -0.4
+  ],
+  "spectrum": {
+    "dark_light": 1.0,
+    "death_life": -0.4,
+    "destruction_creation": -0.4
+  },
+  "tags": [
+    "blazeborn",
+    "light",
+    "locus",
+    "cult",
+    "dangerous",
+    "sacred"
+  ],
+  "connections": [
+    "glasshome"
+  ],
+  "descriptionSeed": "The pure pole, and it is expanding. A light so total it has sterilized the land to glass and is still going — and the ones who live IN it are not a civilization anymore, they are a devotion. They have burned away everything that could cast a shadow, including most of what made them people, and they are radiantly happy about it. The Blazeborn do not go here. The Blaze comes to them, a little further every year.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "The Blaze-devoted, who are joyous and empty; land that was a town last decade; something that survived in there and should not have.",
+  "dangerLevel": 5,
+  "questSeeds": [
+    "The Blaze has taken a settlement and the Blazeborn are pretending it was a planned evacuation",
+    "Someone has walked INTO the Blaze on purpose and sent back a message"
+  ],
+  "map": {
+    "x": 680,
+    "y": 360
+  },
+  "poleIntensity": 0.98
+}

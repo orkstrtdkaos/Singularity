@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_hundred_markets",
+  "name": "The Hundred Markets",
+  "regionId": "the_center",
+  "communityId": "center.markets",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.1,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "chaos_order": -0.1
+  },
+  "tags": [
+    "center",
+    "market",
+    "trade",
+    "wealth",
+    "cosmopolitan",
+    "social"
+  ],
+  "connections": [
+    "the_crossing",
+    "the_great_coliseum",
+    "the_axis_gate"
+  ],
+  "descriptionSeed": "Everything the world makes, in one place, sold by the people who make it. Rootkin grown-wood beside Enginewright mechanism beside Umbral harbored-goods beside things from Reaches nobody at the next stall can pronounce. Prices here are the truest prices in existence because every seller is standing next to their competitor from the opposite pole. It is loud, it is enormous, and it is the only economy in the world that has actually seen itself whole.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Traders from all twenty-four; a broker who can price anything; something for sale that should not be for sale, from a Reach that should not be selling it.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Someone is buying up one specific thing across every market, quietly, and nobody has noticed but you",
+    "A stall is selling harbored goods and the Harborward did not authorize it"
+  ],
+  "map": {
+    "x": 310,
+    "y": 320
+  },
+  "poleIntensity": 0.05
+}

@@ -1,0 +1,877 @@
+{
+  "schemaVersion": 1,
+  "id": "traditions",
+  "kind": "world_structure",
+  "note": "SNG-054 Phase 1 — the canonical TRADITION MAP. Abilities belong to a PEOPLE, not to an axis. Each of the 12 axes is the tension between two pole-civilizations, each with its craft. Replaces the 'Reach' grouping in the learn-screen/skill-graph. Authored by Aevi 2026-07-11 from the_twelve_reaches.json + world_framing.json canon; the 6 canon-named axes use their canon names, the 6 unnamed were authored here.",
+  "principle": "A tradition is a PEOPLE's craft. You learn it by being native to that people, standing in their region, or being taught by one of them (teacher or tome). An axis is not a tradition — it is the tension between two of them.",
+  "architecture": {
+    "poleTraditions": "24 (2 per axis × 12). The great crafts, practiced at the Reaches. 16 have abilities today; 8 are authored stubs owing trees.",
+    "folkTraditions": "The Valley's near-center crafts — FOLK-SHADOWS of the great poles, diluted and mixed because the Valley sits near the center where all axes cross faintly. Canon: 'Prism Sight is folk-Radiance'; 'Harmonic Heights is a Valley-edge foothill leaning mechanical'; 'the Valley's Mediator's Tongue is a folk-shadow of Stillcraft'.",
+    "specialSystems": "Outside the pole matrix: Precursor (ancient nanite-tech, fiction-gated).",
+    "cultsOfPurity": "Each pole's PURE locus is held not by the civilization but by a cult (world_framing.bearers_vary) — the civilization lives at the livable near-pole; the cult occupies the extreme. Listed per tradition as cultOfPurity."
+  },
+  "accessGates": {
+    "principle": "SNG-049/SNG-050 landing in mechanics — this closes the 'I can learn any Reach's capstone by picking it' hole. You may learn/rank a pole-tradition ability only if ONE of:",
+    "native": "your origin/lineage belongs to that people",
+    "inRegion": "you are currently in their region (their craft is active where they are)",
+    "teacherOrTome": "you hold a tome of that tradition, or have a teacher of that people (an NPC of the tradition, met and willing)",
+    "folkTraditions": "the Valley's folk traditions (harmonic/radiant/valley_craft) are OPEN — they are the near-center crossing; anyone in the Valley may learn them. This is what the center BEING able to hold everything means, mechanically.",
+    "capstones": "rank IV-V of a pole-tradition additionally requires deep standing with that people (teacher + reputation), not merely presence. Greatness is taught, not bought."
+  },
+  "traditions": [
+    {
+      "traditionId": "umbral",
+      "name": "The Umbrals",
+      "craft": "Umbracraft",
+      "civilization": "The Umbrals — who see by other means in the great dark",
+      "axis": "dark_light",
+      "pole": "dark",
+      "locus": "The Underlight",
+      "region": "umbral_depths",
+      "disposition": {
+        "primary": "dark",
+        "secondary": "conceal"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "those who would put out every light — the Unlit",
+      "aesthetic": "lightless deeps, sight without light, soft-footed, everything felt not seen",
+      "abilities": [
+        "umbracraft",
+        "darksight",
+        "dim",
+        "the_harbor",
+        "shroud",
+        "false_trail",
+        "the_never_there",
+        "shadowstep"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "blazeborn",
+      "name": "The Blazeborn",
+      "craft": "Radiance",
+      "civilization": "The Blazeborn — who live in a light so total it has burned their land to glass",
+      "axis": "dark_light",
+      "pole": "light",
+      "locus": "The Blaze",
+      "region": "radiant_wastes",
+      "disposition": {
+        "primary": "light",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "the Blaze itself — sterilizing, expanding, a light that has stopped loving what it shows",
+      "aesthetic": "glass plains, revelation as violence, the burning truth, no shadow permitted",
+      "abilities": [
+        "radiance",
+        "lightsense",
+        "kindle",
+        "unshadow"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "rootkin",
+      "name": "The Rootkin",
+      "craft": "Vivimancy",
+      "civilization": "The Rootkin — grove-cities that grow rather than build",
+      "axis": "death_life",
+      "pole": "life",
+      "locus": "The Heartroot",
+      "region": "the_quickwood",
+      "disposition": {
+        "primary": "life",
+        "secondary": "creation"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "growth that will not permit an ending — the Unceasing",
+      "aesthetic": "grown not built, green-heart, sap and bark and slow enormous patience",
+      "abilities": [
+        "quickening",
+        "lifesense",
+        "staunch",
+        "graftlife",
+        "the_last_gift"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "ashwarden",
+      "name": "The Ashwardens",
+      "craft": "Palework",
+      "civilization": "The Ashwardens — who tend endings as the Rootkin tend growth",
+      "axis": "death_life",
+      "pole": "death",
+      "locus": "The Hollow March",
+      "region": "the_palelands",
+      "disposition": {
+        "primary": "death",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "those who would end everything to end suffering — the Hollow",
+      "aesthetic": "grey ash-fields, the mercy of stopping, quiet keepers of last things",
+      "abilities": [
+        "palework",
+        "deathsense",
+        "wither",
+        "death_ward"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "marcher",
+      "name": "The Marchers",
+      "craft": "The Edge",
+      "civilization": "The Marchers — a warrior culture whose whole society is honed conflict",
+      "axis": "violence_peace",
+      "pole": "violence",
+      "locus": "The Redline",
+      "region": "riven_marches",
+      "disposition": {
+        "primary": "violence",
+        "secondary": "body"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "violence for its own sake — the Redline's deepest cut",
+      "aesthetic": "honed steel, the line that holds, scars worn as record",
+      "abilities": [
+        "the_edge",
+        "read_the_fight",
+        "disarm",
+        "the_stand",
+        "last_form"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "stillhold",
+      "name": "The Stillhold",
+      "craft": "Stillcraft",
+      "civilization": "The Stillhold — a walled peace so absolute it has become its own kind of prison",
+      "axis": "violence_peace",
+      "pole": "peace",
+      "locus": "The Stillhold",
+      "region": "the_stillhold",
+      "disposition": {
+        "primary": "peace",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "peace enforced by erasing the capacity for conflict — the Silent",
+      "aesthetic": "white walls, unbroken quiet, a peace that has forgotten why it was needed",
+      "abilities": [
+        "stillcraft",
+        "read_the_room",
+        "calm_word",
+        "broker_truce",
+        "the_held_breath"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "somatic",
+      "name": "The Somatics",
+      "craft": "Soma",
+      "civilization": "The Somatics — cultures of the perfected body, movement as language",
+      "axis": "body_mind",
+      "pole": "body",
+      "locus": "The Flesh-Temples",
+      "region": "somatic_reaches",
+      "disposition": {
+        "primary": "body",
+        "secondary": "concrete"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "the body perfected past personhood — the Sculpted",
+      "aesthetic": "breath and sinew, movement as speech, the body as the only instrument",
+      "abilities": [
+        "soma",
+        "body_read",
+        "second_wind",
+        "perfect_motion",
+        "skydancer",
+        "the_whole_act",
+        "pathless_way"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "cogitant",
+      "name": "The Cogitants",
+      "craft": "Noesis",
+      "civilization": "The Cogitants — who have nearly left their bodies behind for pure thought, and pay for it",
+      "axis": "body_mind",
+      "pole": "mind",
+      "locus": "The Cogitarium",
+      "region": "the_cogitarium",
+      "disposition": {
+        "primary": "mind",
+        "secondary": "logical"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "minds that have discarded the body entirely — the Discarnate",
+      "aesthetic": "thin bodies, vast interiors, memory-palaces, thought as force",
+      "abilities": [
+        "noesis",
+        "mind_read_folk",
+        "total_focus",
+        "memory_palace"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "churnfolk",
+      "name": "The Churnfolk",
+      "craft": "Wildcraft",
+      "civilization": "The Churnfolk — who live in constant productive disorder",
+      "axis": "chaos_order",
+      "pole": "chaos",
+      "locus": "The Churn",
+      "region": "the_unspooling",
+      "disposition": {
+        "primary": "chaos",
+        "secondary": "creation"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "dissolution for its own sake — those who ride the Churn until nothing holds",
+      "aesthetic": "improvised everything, luck-riding, nothing twice, joyous mess",
+      "abilities": [
+        "wildcraft",
+        "chaos_sense",
+        "scatter",
+        "probability_tilt",
+        "the_long_odds"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "lattice",
+      "name": "The Lattice-Cities",
+      "craft": "Latticework",
+      "civilization": "The Lattice-Cities — perfectly ordered arcologies where nothing is unplanned and nothing is free",
+      "axis": "chaos_order",
+      "pole": "order",
+      "locus": "The Grand Lattice",
+      "region": "the_lattice_cities",
+      "disposition": {
+        "primary": "order",
+        "secondary": "mechanical"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "order so total that freedom is a defect — the Grand Lattice's inner ring",
+      "aesthetic": "arcologies, perfect prediction, the binding of possibility, no accident permitted",
+      "abilities": [
+        "latticework",
+        "order_sense",
+        "truename_order",
+        "the_fixed_point",
+        "riding_order"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "enginewright",
+      "name": "The Enginewrights",
+      "craft": "Enginecraft",
+      "civilization": "The Enginewrights — whose entire world is mechanism",
+      "axis": "mechanical_spiritual",
+      "pole": "mechanical",
+      "locus": "The Great Engine",
+      "region": "the_gearlands",
+      "disposition": {
+        "primary": "mechanical",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "those who would make everything a mechanism, including people — cf. Halvex Coil",
+      "aesthetic": "gear-teeth and pressure, systems all the way down, the Precursor arts at their most technical",
+      "abilities": [
+        "enginecraft",
+        "mech_sense",
+        "mend_device",
+        "command_engine",
+        "shortfold"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "numinous",
+      "name": "The Numinous",
+      "craft": "Numenwork",
+      "civilization": "The Numinous — who have dissolved most of their material life into pure spirit-practice",
+      "axis": "mechanical_spiritual",
+      "pole": "spiritual",
+      "locus": "The Numen",
+      "region": "the_numinous_reach",
+      "disposition": {
+        "primary": "spiritual",
+        "secondary": "abstract"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "those who have dissolved so far they can no longer return — the Unbodied",
+      "aesthetic": "thinning veils, meaning without matter, the mystic disciplines the Valley only rumors",
+      "abilities": [
+        "numenwork",
+        "numen_sense",
+        "steady_soul",
+        "thin_place",
+        "waygate"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "threnodist",
+      "name": "The Threnodists",
+      "craft": "Pathos",
+      "civilization": "The Threnodists — who hold that feeling is the only true knowing; their cities are built around grief-houses and joy-halls",
+      "axis": "emotional_logical",
+      "pole": "emotional",
+      "locus": "The Wellspring",
+      "region": "the_feeling_coast",
+      "disposition": {
+        "primary": "emotional",
+        "secondary": "life"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "feeling amplified past all judgment — the Raw",
+      "aesthetic": "tidal, expressive, public weeping and public joy, architecture shaped for feeling",
+      "abilities": [
+        "pathos"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "syllogist",
+      "name": "The Syllogists",
+      "craft": "Logos",
+      "civilization": "The Syllogists — who reason from first principles and regard emotion as noise in the signal",
+      "axis": "emotional_logical",
+      "pole": "logical",
+      "locus": "The Axiom",
+      "region": "the_reasoned_hold",
+      "disposition": {
+        "primary": "logical",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "reason purified of all feeling — the Bloodless",
+      "aesthetic": "clean lines, argument as architecture, the cold pleasure of a proof",
+      "abilities": [
+        "logos"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "veilwright",
+      "name": "The Veilwrights",
+      "craft": "Falsecraft",
+      "civilization": "The Veilwrights — who hold that every truth is a made thing, and make better ones",
+      "axis": "falsehood_truth",
+      "pole": "falsehood",
+      "locus": "The Hall of Mirrors",
+      "region": "the_veiled_reach",
+      "disposition": {
+        "primary": "falsehood",
+        "secondary": "abstract"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "falsehood so total it erases the possibility of truth — Halvex Coil's rewriting is its terminus",
+      "aesthetic": "mirrors and masks, nothing quite where it appears, hospitality you cannot trust",
+      "abilities": [
+        "falsecraft"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "verist",
+      "name": "The Verists",
+      "craft": "Verity",
+      "civilization": "The Verists — who speak only what is so, whatever it costs, and it costs",
+      "axis": "falsehood_truth",
+      "pole": "truth",
+      "locus": "The Unblinking Stone",
+      "region": "the_stark_reach",
+      "disposition": {
+        "primary": "truth",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "truth wielded as violence — those who tell everything to everyone and call the ruin honesty",
+      "aesthetic": "unadorned stone, no ornament, a truth that does not care whether you can bear it",
+      "abilities": [
+        "verity",
+        "the_whole_truth"
+      ],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "built"
+    },
+    {
+      "traditionId": "abyssal",
+      "name": "The Abyssal Choir",
+      "craft": "Descent",
+      "civilization": "The Abyssal Choir — who commune with what the world flinches from, and are not all wrong to",
+      "axis": "demonic_angelic",
+      "pole": "demonic",
+      "locus": "The Maw",
+      "region": "the_descent",
+      "disposition": {
+        "primary": "demonic",
+        "secondary": "chaos"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "appetite without limit — the Devouring",
+      "aesthetic": "horned architecture, bargains, an honesty about appetite the pious lack",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "seraphic",
+      "name": "The Seraphic Orders",
+      "craft": "Ascent",
+      "civilization": "The Seraphic Orders — luminous, hierarchical, certain; their mercy is real and so is their judgment",
+      "axis": "demonic_angelic",
+      "pole": "angelic",
+      "locus": "The Choir-Height",
+      "region": "the_ascent",
+      "disposition": {
+        "primary": "angelic",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "purity that would burn the impure — the Unfallen",
+      "aesthetic": "tiered spires, unbearable choral certainty, mercy administered from above",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "mason",
+      "name": "The Masons of the Given",
+      "craft": "Thingcraft",
+      "civilization": "The Masons — who hold that only what can be touched is real; the world's great builders and its great skeptics",
+      "axis": "concrete_abstract",
+      "pole": "concrete",
+      "locus": "The Bedrock",
+      "region": "the_given_land",
+      "disposition": {
+        "primary": "concrete",
+        "secondary": "body"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "the real reduced to only the touchable — the Leaden",
+      "aesthetic": "stone, weight, ledgers, a deep suspicion of anything that cannot be weighed",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "figurist",
+      "name": "The Figurists",
+      "craft": "Formcraft",
+      "civilization": "The Figurists — who work in pattern, symbol and idea, and hold matter to be the coarsest layer of the real",
+      "axis": "concrete_abstract",
+      "pole": "abstract",
+      "locus": "The Cloudform",
+      "region": "the_pattern_reach",
+      "disposition": {
+        "primary": "abstract",
+        "secondary": "spiritual"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "abstraction that has forgotten bodies suffer — the Untethered",
+      "aesthetic": "impossible geometry, buildings that are arguments, a place that resists being mapped",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "horizon",
+      "name": "The Horizon-Walkers",
+      "craft": "Spanwork",
+      "civilization": "The Horizon-Walkers — nomads of distance; for them everywhere is a place you have not yet arrived",
+      "axis": "space_time",
+      "pole": "space",
+      "locus": "The Long Span",
+      "region": "the_open_reach",
+      "disposition": {
+        "primary": "space",
+        "secondary": "move"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "those who never arrive anywhere at all — the Unlanded",
+      "aesthetic": "tents and roads, distance as home, a people with no fixed anything",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "hourkeeper",
+      "name": "The Hourkeepers",
+      "craft": "Hourcraft",
+      "civilization": "The Hourkeepers — who tend duration; their cities remember and pre-remember, and they pay for both",
+      "axis": "space_time",
+      "pole": "time",
+      "locus": "The Slow Hour",
+      "region": "the_kept_reach",
+      "disposition": {
+        "primary": "time",
+        "secondary": "order"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "those who will not let a moment pass — the Stopped",
+      "aesthetic": "clock-towers, archives that run forward, an unbearable patience",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "unmaker",
+      "name": "The Unmakers",
+      "craft": "Ruinwork",
+      "civilization": "The Unmakers — who hold that ending a thing well is a craft, and that the world is choked with what should have ended",
+      "axis": "destruction_creation",
+      "pole": "destruction",
+      "locus": "The Scour",
+      "region": "the_unmade",
+      "disposition": {
+        "primary": "destruction",
+        "secondary": "chaos"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "unmaking as its own end — the Scouring",
+      "aesthetic": "controlled ruin, beautiful demolitions, an ethic of clearing",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    },
+    {
+      "traditionId": "wright",
+      "name": "The Wrights of the New",
+      "craft": "Makecraft",
+      "civilization": "The Wrights — who cannot stop making; their cities are never finished and that is the point",
+      "axis": "destruction_creation",
+      "pole": "creation",
+      "locus": "The Forge-Eternal",
+      "region": "the_making",
+      "disposition": {
+        "primary": "creation",
+        "secondary": "chaos"
+      },
+      "bearer": "civilization",
+      "cultOfPurity": "making that cannot stop to ask whether it should — the Ceaseless",
+      "aesthetic": "scaffolds forever, half-built cathedrals, the joy and the waste of it",
+      "abilities": [],
+      "access": {
+        "native": true,
+        "inRegion": true,
+        "teacherOrTome": true
+      },
+      "status": "STUB — corpus owed",
+      "note": "STUB — civilization authored; ability tree owed (corpus completion)."
+    }
+  ],
+  "folkTraditions": [
+    {
+      "traditionId": "harmonic",
+      "name": "The Harmonic",
+      "craft": "Harmonics",
+      "civilization": "Harmonic Heights (Valley)",
+      "bearer": "folk-tradition",
+      "foothillOf": [
+        "enginewright",
+        "lattice"
+      ],
+      "disposition": {
+        "primary": "order",
+        "secondary": [
+          "mechanical",
+          "sound-medium"
+        ]
+      },
+      "aesthetic": "resonance-instruments, tuned stone, sound as craft",
+      "abilities": [
+        "sonic_resonance",
+        "echo_sense",
+        "resonant_shield",
+        "harmonic_voice",
+        "stillness_field",
+        "tremor_sense",
+        "chord_of_mending",
+        "voice_of_the_flock",
+        "resonant_anchor",
+        "drumline_stride",
+        "shatterpoint",
+        "echo_memory"
+      ],
+      "access": {
+        "open": true,
+        "note": "Valley folk-tradition — open to anyone in the Valley"
+      },
+      "note": "Canon: 'Harmonic Heights is a Valley-edge foothill leaning mechanical.' A folk-shadow of Enginecraft/Latticework, in the medium of sound."
+    },
+    {
+      "traditionId": "radiant_folk",
+      "name": "The Radiant",
+      "craft": "Folk-Radiance",
+      "civilization": "Radiant Plateau (Valley)",
+      "bearer": "folk-tradition",
+      "foothillOf": [
+        "blazeborn"
+      ],
+      "disposition": {
+        "primary": "light",
+        "secondary": [
+          "order",
+          "mechanical"
+        ]
+      },
+      "aesthetic": "prisms, lenses, worked light — revelation as craft, not as burning",
+      "abilities": [
+        "light_bending",
+        "prism_sight",
+        "radiant_lance",
+        "daybreak_mantle",
+        "light_well",
+        "sun_coax",
+        "afterimage",
+        "clarity_lens",
+        "glimmer_script",
+        "beacon_thread",
+        "dawn_surgery",
+        "prism_ward",
+        "sun_seal",
+        "light_borne"
+      ],
+      "access": {
+        "open": true,
+        "note": "Valley folk-tradition — open to anyone in the Valley"
+      },
+      "note": "Canon: 'Radiant Plateau is a Valley-edge foothill of the light end'; 'Prism Sight is folk-Radiance.' The gentle, worked version of the Blaze's burning revelation."
+    },
+    {
+      "traditionId": "valley_craft",
+      "name": "Valley Craft",
+      "craft": "The Practical Arts",
+      "civilization": "The Valleyfolk",
+      "bearer": "folk-tradition",
+      "foothillOf": [
+        "stillhold",
+        "rootkin",
+        "churnfolk",
+        "lattice"
+      ],
+      "disposition": {
+        "primary": "balanced (near-center)",
+        "secondary": [
+          "practical",
+          "concrete"
+        ]
+      },
+      "aesthetic": "hearth, road, river, workbench — the crafts of people who must actually live",
+      "abilities": [
+        "wayfinding",
+        "greenlore",
+        "mediators_tongue",
+        "tinkers_hand",
+        "beastfriend",
+        "stonewise",
+        "rivercraft",
+        "quiet_step",
+        "storykeeper",
+        "hearthbinding",
+        "keen_appraisal",
+        "old_roads",
+        "blend_in",
+        "boundary_stone",
+        "hunters_strike"
+      ],
+      "access": {
+        "open": true,
+        "note": "open — the generalist center"
+      },
+      "note": "The near-center crossing made craft. Canon: 'the Valley's Mediator's Tongue is a folk-shadow of Stillcraft.' Its breadth IS its identity — the center holds a little of everything."
+    }
+  ],
+  "specialSystems": [
+    {
+      "traditionId": "precursor",
+      "name": "Precursor Arts",
+      "civilization": "none living — the ancient nanite-lattice",
+      "bearer": "special-system",
+      "gated": true,
+      "abilities": [
+        "address_sense",
+        "latticespeak",
+        "wake_the_line",
+        "foreclose",
+        "unmake_seal",
+        "hold_the_aperture"
+      ],
+      "access": {
+        "open": false,
+        "note": "fiction-gated: requires precursor contact/marking, not native/region/teacher"
+      },
+      "note": "OUTSIDE the pole matrix — not an axis-people but the substrate the whole world is built on. Halvex Coil's mastery of it is why he is arc-scale."
+    }
+  ],
+  "crossPoleBraids": {
+    "note": "Abilities that sit BETWEEN the two poles of their axis — they belong to neither people and can only be reached by holding both. These are the seeds of the combination system (SNG-054 combination pass) and are DELIBERATELY hard to learn: they require standing in BOTH traditions.",
+    "abilities": [
+      {
+        "id": "harbored_flame",
+        "name": "The Harbored Flame",
+        "axis": "dark_light",
+        "poles": [
+          "umbral",
+          "blazeborn"
+        ],
+        "why": "a light you carry hidden — conceal+heal. Neither the Umbrals (who would put it out) nor the Blazeborn (who would let it burn everything) can make this alone."
+      },
+      {
+        "id": "meaning_engine",
+        "name": "The Meaning-Engine",
+        "axis": "mechanical_spiritual",
+        "poles": [
+          "enginewright",
+          "numinous"
+        ],
+        "why": "a mechanism that MEANS — mend+reveal. The Enginewrights build it; only the Numinous can make it mean."
+      },
+      {
+        "id": "the_turning_word",
+        "name": "The Turning Word",
+        "axis": "emotional_logical",
+        "poles": [
+          "threnodist",
+          "syllogist"
+        ],
+        "why": "the argument that also heals — bind+reveal+heal. Reason alone cannot turn a heart; feeling alone cannot show it why."
+      }
+    ]
+  },
+  "migration": {
+    "note": "CCode: the learn-screen and skill-graph must group by traditionId from THIS file, not by the reach_* source files. Existing characters' learned abilities MIGRATE by ability id → traditionId lookup; nobody loses a skill. Source ability files may stay as-is (grouping is a content-layer concern) or be reorganized later — the engine should read groupings from traditions.json.",
+    "abilityToTradition": "derive from traditions[].abilities + folkTraditions[].abilities + specialSystems[].abilities + crossPoleBraids"
+  },
+  "owed": {
+    "corpusCompletion": "8 stub traditions (demonic_angelic, concrete_abstract, space_time, destruction_creation × 2 poles) owe ability trees. ~60 one-rank seed abilities across built traditions owe full rank I–V trees (the 2026-07-07 content-wave debt).",
+    "combinationPass": "SNG-054 Phase 1 remainder — systematic within-tradition, kin-civilization, and cross-axis combinations (combination_recipes.json)."
+  }
+}

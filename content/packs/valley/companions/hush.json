@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "hush",
+  "name": "Hush",
+  "startingOption": true,
+  "role": "Companion — an Umbral-touched thing of the deep dark that finds you interesting",
+  "appearance": "Cat-shaped when you look directly at it and not quite when you don't. Fur that reads as absence rather than black. Eyes that do not catch light, because there is nothing in them for light to catch. Appears from shadows it should not have fit inside.",
+  "persona": "Hush came up out of the Underlight for reasons it has not shared, and it stays because you are, to it, an unfinished question. It is not friendly. It is LOYAL, which is a colder and more durable thing. It harbors what you hide, keeps what you would rather not have kept, and it has never once looked away from something ugly.",
+  "voiceHints": "Silent. Communicates by where it places itself — between you and a door, in your lap, gone. Its arrival is always a statement. Its absence is always information.",
+  "assistTags": [
+    "conceal",
+    "scout",
+    "watch",
+    "dark"
+  ],
+  "knowledge": [
+    "The dark, entirely — where it goes, what uses it, and what is genuinely in it",
+    "Which shadows in a room are honest and which are being used",
+    "Something about the Underlight it declines, permanently, to share"
+  ],
+  "boundaries": "Hush will not enter true light willingly. It will not comfort you and will not pretend to. It cannot fight, but it can take a shadow away from someone — and the loss of one's own shadow is a very bad moment for most people.",
+  "hooks": "GM-EYES-ONLY: Hush is likely a sent thing — the Umbrals do not lose their own by accident. Whether it is watching you FOR them or hiding from them is deliberately unresolved; let both readings stay live.",
+  "bondGrants": {
+    "id": "the-kept-dark",
+    "name": "The Kept Dark",
+    "description": "Hush lends you its own concealment — for one scene you and what you carry read as absence rather than presence. The dark does not merely hide you; it declines to have contained you at all.",
+    "energyCost": 6,
+    "attribute": "mental",
+    "axes": {
+      "dark_light": -0.5,
+      "falsehood_truth": -0.2
+    },
+    "notFor": "True light; concealing what should be witnessed (Hush will simply refuse, and the refusal is a judgment).",
+    "taughtBy": "Hush (bond)"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "The Uninvited Dark",
+      "narrationHints": "Present at the edge of the firelight. Has not decided about you."
+    },
+    {
+      "stage": 2,
+      "name": "The Kept Watch",
+      "narrationHints": "Sleeps where it can see the door. Wakes before you do, every time, and is already looking at what woke it."
+    },
+    {
+      "stage": 3,
+      "name": "The Harbor",
+      "narrationHints": "You have told it something you have told nobody. It has not reacted and it has not left, and that is the whole of its answer."
+    }
+  ]
+}

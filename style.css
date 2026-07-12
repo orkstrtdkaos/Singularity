@@ -271,6 +271,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .gc-dim .gc-label { opacity: .3; }
 .gc-center { font-family: var(--font-ui); font-size: 13px; fill: var(--accent2); text-transform: uppercase; letter-spacing: 1px; }
 .gc-center-sub { font-family: var(--font-ui); font-size: 10px; fill: var(--ink-dim); }
+/* SNG-074 dev badge */
+.dev-badge { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 5px; font-family: var(--font-ui); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; background: var(--danger); color: #fff; vertical-align: middle; }
 /* SNG-065 structured quests */
 .quest-stakes { margin: 10px 0; padding: 10px 12px; border-left: 3px solid var(--danger); background: var(--panel2); border-radius: 0 8px 8px 0; font-size: 14px; }
 .quest-stakes-label { display: block; font-family: var(--font-ui); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--danger); margin-bottom: 3px; }

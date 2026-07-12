@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.28";
+const APP_VERSION = "1.8.29";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -74,8 +74,16 @@ const NARRATIVE_ENCOUNTER_COOLDOWN = 3;
 // ---------- boot ----------
 
 (async function boot() {
-  // SNG-051: a one-time `?dev=1` visit opts this browser into the dev preview-legs panel.
-  try { if (/[?&]dev=1\b/.test(location.search)) localStorage.setItem("singularity.dev", "1"); } catch { /* ignore */ }
+  // SNG-074: dev mode is OPT-IN, VISIBLE, and REVERSIBLE. `?dev=1` opts in for THIS SESSION only
+  // (sessionStorage — a reload without the param returns a clean player view); `?dev=0` clears
+  // everything; and the old sticky `localStorage "singularity.dev"` is migrated OUT so no family
+  // member is ever permanently trapped in dev mode. A deliberate persistent opt-in lives in Settings.
+  try {
+    const p = new URLSearchParams(location.search);
+    if (p.get("dev") === "1") sessionStorage.setItem("singularity.dev", "1");
+    if (p.get("dev") === "0") { sessionStorage.removeItem("singularity.dev"); localStorage.removeItem("singularity.devPersist"); }
+    if (localStorage.getItem("singularity.dev") === "1") localStorage.removeItem("singularity.dev"); // retire the sticky flag
+  } catch { /* ignore */ }
   wireLightbox(); // SNG-053: click any image → larger view
   try {
     CONTENT = await loadContent();
@@ -160,7 +168,7 @@ function renderPlayerPick(msg = "") {
 function chrome(inner) {
   app.innerHTML = `
     <div class="topbar">
-      <div><h1>SINGULARITY</h1><span class="sub">The Valley of Echoes — v${APP_VERSION}</span></div>
+      <div><h1>SINGULARITY</h1><span class="sub">The Valley of Echoes — v${APP_VERSION}</span>${isDevMode() ? ` <span class="dev-badge" title="Developer mode is ON. Turn it off in Settings, or reload without ?dev=1.">DEV</span>` : ""}</div>
       <div class="actions">
         <button id="nav-roster">Characters</button>
         <button id="nav-settings">Settings</button>
@@ -227,15 +235,31 @@ function wireLightbox() {
 
 // ---------- SNG-051: dev preview-legs panel (dev-only; clears the verification bottleneck) ----------
 
-/** Dev mode: on localhost/preview, or once a `?dev=1` visit (or manual flag) opts this browser in.
- *  Never shown to a normal player on the live build unless they explicitly enabled it. */
-function devEnabled() {
+/** SNG-074: the ONE dev-mode source of truth — opt-in, visible, reversible.
+ *  ON when: this URL has `?dev=1` · a dev host (localhost/preview) · this session opted in
+ *  (`?dev=1` earlier this session) · a DELIBERATE persistent opt-in from Settings.
+ *  `?dev=0` in the URL always wins OFF. No sticky localStorage flag, so a family member can
+ *  never be trapped in dev mode — a plain reload on the live URL is a clean player view. */
+function isDevMode() {
   try {
-    if (localStorage.getItem("singularity.dev") === "1") return true;
+    const p = new URLSearchParams(location.search);
+    if (p.get("dev") === "0") return false;
+    if (p.get("dev") === "1") return true;
     if (/^(localhost|127\.0\.0\.1|\[::1\])/.test(location.hostname)) return true;
+    if (sessionStorage.getItem("singularity.dev") === "1") return true;
+    if (localStorage.getItem("singularity.devPersist") === "1") return true;
   } catch { /* ignore */ }
   return false;
 }
+/** Set/clear the DELIBERATE persistent dev opt-in (the Settings toggle). */
+function setDevPersist(on) {
+  try {
+    if (on) localStorage.setItem("singularity.devPersist", "1");
+    else { localStorage.removeItem("singularity.devPersist"); sessionStorage.removeItem("singularity.dev"); }
+  } catch { /* ignore */ }
+}
+// devEnabled()/isDev() are the historical names — both now resolve to the single model above.
+function devEnabled() { return isDevMode(); }
 
 const LEG_STATUS = ["untried", "pass", "fail", "feels-off"];
 const LEG_STATUS_LABEL = { untried: "· untried", pass: "✓ pass", fail: "✗ fail", "feels-off": "~ feels-off" };
@@ -585,6 +609,9 @@ function renderSettings(note = "") {
       <label class="rating-check"><input type="checkbox" id="set-minor" ${isMinorProfile(profile) ? "checked" : ""}> This profile is a minor — caps at PG-13; can never be set to R or R+</label>
       <label class="rating-check"><input type="checkbox" id="set-adultgate" ${profile.rating?.adultVerified ? "checked" : ""}> Adult gate — authorize R / R+ for this profile (required for R and above)</label>
       <div class="hint">Sets how intense narration and generated content get: G · PG · PG-13 · R · R+ (full intensity). Two floors are ALWAYS on regardless of ceiling: never any prohibited content, and a minor is never portrayed in romantic or sexual content.</div></div>
+    <div class="field"><label>Developer mode</label>
+      <label class="rating-check"><input type="checkbox" id="set-dev" ${(() => { try { return localStorage.getItem("singularity.devPersist") === "1"; } catch { return false; } })() ? "checked" : ""}> Show developer tools (the 🧪 Legs panel, test-encounter buttons, the scenario runner)</label>
+      <div class="hint">Off by default — normal play never shows dev tools. ${isDevMode() ? `<strong>Dev mode is currently ON</strong>${(() => { try { return new URLSearchParams(location.search).get("dev") === "1"; } catch { return false; } })() ? " for this URL (reload without <code>?dev=1</code> for a clean player view)" : /^(localhost|127\\.0\\.0\\.1)/.test(location.hostname) ? " because this is a local dev host" : ""}. ` : ""}Ticking this box is a deliberate, persistent opt-in on this browser; untick + Save to turn it fully off.</div></div>
     <button class="btn" id="set-save">Save</button>
     <div class="footer-note">Save data is in this browser. Use Export on the Characters screen to move it.</div>
   </div>`);
@@ -602,6 +629,7 @@ function renderSettings(note = "") {
     // SNG-BATCH-9 §3: content ceiling. Minor flag first (it can cap the ceiling), then the
     // preset with the adult gate. A refused change keeps the old ceiling + shows why.
     setMinorFlag(profile, document.getElementById("set-minor").checked);
+    setDevPersist(document.getElementById("set-dev").checked); // SNG-074: deliberate, reversible dev opt-in
     const wantRating = document.getElementById("set-rating").value;
     // SNG-052: the adult-gate checkbox binds to persisted adultVerified. Unchecking + save REVOKES
     // (clears it + drops any R/R+ ceiling). Checked, or already-verified, satisfies the gate — so
@@ -2233,12 +2261,8 @@ async function onFreeform(text) {
   });
 }
 
-/** Dev/test flag: ?dev=1 in the URL or localStorage singularity.dev="1". Gates the
- *  encounter test panel — never shown in normal play. */
-function isDev() {
-  try { return new URLSearchParams(location.search).has("dev") || localStorage.getItem("singularity.dev") === "1"; }
-  catch { return false; }
-}
+/** Historical name for the encounter test panel gate — resolves to the single SNG-074 model. */
+function isDev() { return isDevMode(); }
 
 /** Fire a specific random encounter (entry object) or a forced flavor (dev). Registers
  *  any synthesized encounter def, then either opens a GM scene (narrative/opposed) or

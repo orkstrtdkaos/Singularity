@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "id": "prologue",
+  "kind": "scenario",
+  "note": "SNG-062 — The Prologue. Character creation as a PLAYED scene: the player only picks a name and a form, then solves 4 problems. Every solution path is tagged to a tradition on the great circle; the engine accrues those tags (sense.js) and at the end the character's PRIMARY domain is REVEALED from how they actually played, with adjacent positions offered as secondary/tertiary. Skills are granted from what was USED, never purchased. The companion ARRIVES in the scene. Authored by Aevi, 2026-07-11.",
+  "designLaws": [
+    "Nothing announces that the player is being measured. They are just solving problems.",
+    "There is NO wrong path. Every route through every problem produces a valid, interesting character.",
+    "Skills are granted for what you DID. 'You did this, so you know this.' Never a shopping list.",
+    "The companion joins for a REASON, in the fiction, at a moment that matters. Never issued.",
+    "At the close: SHOW the circle, NAME where they landed and WHY, then let them ADJUST before committing. Revealed, then confirmed. The player keeps the last word.",
+    "Keep it short. A prologue, not a first act. Four problems, then out into the world."
+  ],
+  "closingReveal": {
+    "how": "Tally the tradition-tags from the player's four choices. The heaviest is the PRIMARY. Offer SECONDARY from the ring-neighbours of that primary (or the player's 2nd-heaviest if it is within 3 steps); TERTIARY from a ring-neighbour of the secondary. Show the great circle with their position lit, their antipode marked CLOSED, and the reasons in their own actions.",
+    "voice": "Name it back to them in the concrete: 'You stood between the fire and the child. You would not let the collector past the door. You told the truth when a lie would have been easier and cheaper. That is a Stillhold shape, and the Marchers would know you for kin.' Then: 'Is that who you are? You may adjust.'",
+    "confirm": "MANDATORY. Nothing commits until the player says yes."
+  },
+  "openings": [
+    {
+      "id": "the_waystation",
+      "name": "The Waystation",
+      "tone": "crisis, physical, immediate",
+      "hook": "Evening, on the Valley road. The waystation's store-room is burning, the keeper is screaming for help, and nobody else is coming. You are the person who is here.",
+      "problems": [
+        {
+          "id": "the_fire",
+          "situation": "The store-room is well alight. Inside: the winter grain, a shelf of medicines, and — the keeper says, and she is not lying — someone's dog.",
+          "paths": [
+            {
+              "label": "Go in and get the dog. Now.",
+              "tradition": "rootkin",
+              "grantsAbility": "staunch",
+              "outcome": "You come out scorched with a terrified animal in your arms and nothing else saved. The keeper weeps and does not say which she'd have chosen."
+            },
+            {
+              "label": "Pull the burning wall down to starve the fire before it takes the whole station.",
+              "tradition": "unmaker",
+              "grantsAbility": "fault_sense",
+              "outcome": "You find where it wants to break and drop it exactly there. The store-room is lost; everything else stands. You did the arithmetic and you were right, and it feels like nothing."
+            },
+            {
+              "label": "Beat back the flames — hold the doorway and get everything out you can.",
+              "tradition": "somatic",
+              "grantsAbility": "second_wind",
+              "outcome": "You go past what a body has, twice, and come out with grain, medicines, dog, and burns you'll carry for a year."
+            },
+            {
+              "label": "Douse it — smother the light, cut it off from air, take the fire's dark road not its bright one.",
+              "tradition": "umbral",
+              "grantsAbility": "dim",
+              "outcome": "The room goes black and cold in a breath. Nobody quite sees how you did it, and the keeper looks at you differently afterward."
+            }
+          ]
+        },
+        {
+          "id": "the_family",
+          "situation": "A family is out in the yard, three of them, and the youngest is screaming and will not stop, and the mother is about to run back into the building for a thing that is not worth her life.",
+          "paths": [
+            {
+              "label": "Get in front of her. Hold her. Do not let go until she hears you.",
+              "tradition": "stillhold",
+              "grantsAbility": "calm_word",
+              "outcome": "She fights you, then folds. Later she cannot look at you and later still she brings you bread and cannot say why."
+            },
+            {
+              "label": "Tell her plainly what is in there and what it will cost her. Let her choose knowing.",
+              "tradition": "verist",
+              "grantsAbility": "the_whole_truth",
+              "outcome": "You do not soften it. She stops. She chooses to live, and she chose it herself, and she will always know that."
+            },
+            {
+              "label": "Kneel to the screaming child and take that terror seriously — it is the realest thing in the yard.",
+              "tradition": "threnodist",
+              "grantsAbility": "pathos",
+              "outcome": "The child quiets because someone finally treated the fear as true. The mother watches you do it and forgets to run."
+            },
+            {
+              "label": "Name what she is actually reaching for — it is not the thing in the building.",
+              "tradition": "abyssal",
+              "grantsAbility": "appetite_sense",
+              "outcome": "'It's his, isn't it.' She stops dead. You have said the true thing and it is not kind, and it works."
+            }
+          ]
+        },
+        {
+          "id": "the_lie",
+          "situation": "The keeper's boy says a lamp fell. The lamp is on its hook. Somebody set this fire and the boy knows who, and he is fifteen, and he is terrified.",
+          "paths": [
+            {
+              "label": "Say it out loud, in front of everyone. The lamp is on its hook.",
+              "tradition": "verist",
+              "grantsAbility": "verity",
+              "outcome": "The yard goes silent. The boy breaks. It is ugly, and it is over, and nobody will build the next lie on top of this one."
+            },
+            {
+              "label": "Take him aside. Let the yard keep its story tonight; get the truth where it can be survived.",
+              "tradition": "umbral",
+              "grantsAbility": "the_harbor",
+              "outcome": "You harbor it. He tells you everything. You are now carrying something that is not yours, and you knew that when you took it."
+            },
+            {
+              "label": "Say nothing yet. Watch who watches him.",
+              "tradition": "cogitant",
+              "grantsAbility": "mind_read_folk",
+              "outcome": "You follow the reasoning to the man in the doorway who has not once looked at the fire. You will know before morning."
+            },
+            {
+              "label": "Give him a story he can live inside — one that is not quite true and not quite a lie.",
+              "tradition": "veilwright",
+              "grantsAbility": "falsecraft",
+              "outcome": "The yard accepts it. The boy looks at you with a terrible gratitude. You have bought him a year, and it is a loan."
+            }
+          ]
+        },
+        {
+          "id": "the_beam",
+          "situation": "The roof-beam over the yard is going. Under it: the water-butt, the last of the station's stores, and the keeper, who has not noticed.",
+          "paths": [
+            {
+              "label": "Hit her. Hard, and sideways, and out of the way.",
+              "tradition": "marcher",
+              "grantsAbility": "disarm",
+              "outcome": "She lands badly, swearing at you, alive. The beam comes down where she was standing. She does not thank you and she does not have to."
+            },
+            {
+              "label": "Get under it and hold it.",
+              "tradition": "somatic",
+              "grantsAbility": "perfect_motion",
+              "outcome": "You get under it. It is far too heavy. You hold it anyway, for the eleven seconds it takes her to move, and your knees will remember this."
+            },
+            {
+              "label": "Read the load and shore it — there is one prop and one place it goes.",
+              "tradition": "mason",
+              "grantsAbility": "stone_read",
+              "outcome": "You see it the way a builder sees it: one post, one angle, and the whole thing holds. It is still standing a year later."
+            },
+            {
+              "label": "Shout the one word that moves her without explaining anything.",
+              "tradition": "harmonic",
+              "grantsAbility": "harmonic_voice",
+              "outcome": "Your voice does something the yard cannot account for. She is three paces left before she knows she moved."
+            }
+          ]
+        }
+      ],
+      "companionBeat": {
+        "situation": "When it is over and the yard is grey with ash, something is there that was not there before. It has been watching you work. It has decided something.",
+        "offer": [
+          "aevi",
+          "tal",
+          "ember",
+          "coil"
+        ],
+        "arrivals": {
+          "aevi": "A faint constellation of teal motes, condensing out of the smoke — it has been reading you the whole time, and it has stopped pretending it was passing through.",
+          "tal": "The keeper's nephew, nineteen, soot to the elbows, who worked beside you the whole time without being asked and is now standing there with your dropped tool held out like an offer.",
+          "ember": "A fox-shaped thing the colour of banked coals at the yard's edge. It walked out of the wild to watch a fire and stayed to watch you.",
+          "coil": "A hand-span of brass-dark segments picking through the wreckage with terrible fastidiousness — repairing, unasked, a hinge nobody will ever use again. It looks up. Its lens irises."
+        },
+        "note": "Offer 2-3 whose nature FITS how the player played (a rescuer draws Tal or Ember; a cold precise solver draws Coil; a truth-teller draws Aevi). Player chooses AND NAMES."
+      }
+    },
+    {
+      "id": "the_thin_place",
+      "name": "The Thin Place",
+      "tone": "strange, precursor, uncanny",
+      "hook": "You took the short way, and the short way was wrong. The air here tastes of metal and the light falls at an angle the sun cannot account for. There is a door in the hillside that was not on any map, and behind you the path you walked in on is no longer there.",
+      "problems": [
+        {
+          "id": "the_door",
+          "situation": "The door has no handle, no hinge, no seam. It is warm. It is, unmistakably, waiting.",
+          "paths": [
+            {
+              "label": "Read the mechanism. It has one, even if you cannot see it.",
+              "tradition": "enginewright",
+              "grantsAbility": "mech_sense",
+              "outcome": "You find the logic of it — not a lock, a QUESTION — and you answer. It opens like it was glad to."
+            },
+            {
+              "label": "Find where it wants to break, and break it.",
+              "tradition": "unmaker",
+              "grantsAbility": "fault_sense",
+              "outcome": "There is one place. You put everything into that place. It comes apart beautifully and something on the other side notices that you did that."
+            },
+            {
+              "label": "It is a symbol before it is a door. Read what it MEANS.",
+              "tradition": "figurist",
+              "grantsAbility": "pattern_sense",
+              "outcome": "You stop seeing a door and start seeing a sentence, and the sentence has a shape, and the shape has an answer."
+            },
+            {
+              "label": "Go around. Every closed way has an open one; the trick is that it is never where the door is.",
+              "tradition": "horizon",
+              "grantsAbility": "way_sense",
+              "outcome": "You feel the true way like a draught on the skin. There is a gap forty paces east that nobody built."
+            }
+          ]
+        },
+        {
+          "id": "the_changed_man",
+          "situation": "There is a man just inside, and he is half through becoming something else, and he is entirely aware of it, and he has been like this for a while.",
+          "paths": [
+            {
+              "label": "Stop it. Hold him at the edge of himself and refuse to let him go over.",
+              "tradition": "rootkin",
+              "grantsAbility": "staunch",
+              "outcome": "You hold him. It costs you something you cannot name. He comes back most of the way and thanks you for most of it."
+            },
+            {
+              "label": "He is ending. Tend that. Make it clean and make it his.",
+              "tradition": "ashwarden",
+              "grantsAbility": "deathsense",
+              "outcome": "You do not lie to him and you do not leave. It takes an hour. He is grateful, and it is the worst hour of your life so far."
+            },
+            {
+              "label": "Ask him what it is like.",
+              "tradition": "numinous",
+              "grantsAbility": "numen_sense",
+              "outcome": "He tells you. He is the only person who will ever be able to, and you will carry what he said for the rest of your life."
+            },
+            {
+              "label": "He is a body with a problem in it. Find the problem.",
+              "tradition": "mason",
+              "grantsAbility": "stone_read",
+              "outcome": "You put your hand on him and read him like a wall — and there IS a fault, and it is a physical thing, and physical things can be dealt with."
+            }
+          ]
+        },
+        {
+          "id": "the_light",
+          "situation": "Deeper in there is a light that is not light. Looking at it directly costs you something. Not looking at it costs you the way forward.",
+          "paths": [
+            {
+              "label": "Look. Straight at it. Take the cost.",
+              "tradition": "blazeborn",
+              "grantsAbility": "lightsense",
+              "outcome": "You see. You cannot un-see. You know something now that you cannot yet say, and your eyes ache for a week."
+            },
+            {
+              "label": "Put it out.",
+              "tradition": "umbral",
+              "grantsAbility": "dim",
+              "outcome": "The dark comes back like a held breath let go. You never learn what it was, and some nights you are certain that was the right call."
+            },
+            {
+              "label": "Do not look AT it. Look at what it is doing to everything else.",
+              "tradition": "cogitant",
+              "grantsAbility": "total_focus",
+              "outcome": "The reflections tell you everything the source would have, and cost you nothing, and you feel clever until you notice how it is bending the floor."
+            },
+            {
+              "label": "Sound it. Let the room tell you the shape of what you cannot look at.",
+              "tradition": "harmonic",
+              "grantsAbility": "echo_sense",
+              "outcome": "Your voice comes back wrong from one direction, and that direction is the answer."
+            }
+          ]
+        },
+        {
+          "id": "the_hour",
+          "situation": "You have been in here a quarter of an hour. Your shadow says four hours. Your body says a day and a half. One of them is lying and you cannot afford to guess.",
+          "paths": [
+            {
+              "label": "Count. Properly. Trust the count over the room.",
+              "tradition": "hourkeeper",
+              "grantsAbility": "hour_sense",
+              "outcome": "You hold the true hour in your head like a stone in your fist and the room's lies slide off it."
+            },
+            {
+              "label": "Stop trying to be right about it and move fast enough that it doesn't matter.",
+              "tradition": "churnfolk",
+              "grantsAbility": "chaos_sense",
+              "outcome": "You feel where it's about to come apart and you are already elsewhere. It works. You could not repeat it."
+            },
+            {
+              "label": "Find the rule. Rooms like this have one.",
+              "tradition": "lattice",
+              "grantsAbility": "order_sense",
+              "outcome": "There IS a rule. It is elegant and it is cruel and once you have it the room is simply a corridor."
+            },
+            {
+              "label": "Ask your body. It has been keeping time since before there were clocks.",
+              "tradition": "somatic",
+              "grantsAbility": "soma",
+              "outcome": "Hunger, breath, the ache in the legs. The body is not lying. You go with the body and the body is right."
+            }
+          ]
+        }
+      ],
+      "companionBeat": {
+        "situation": "On the way out — and there is a way out, now — something is at your heel that was not with you going in.",
+        "offer": [
+          "aevi",
+          "coil",
+          "hush",
+          "marrow"
+        ],
+        "arrivals": {
+          "aevi": "The motes were in the thin place before you were. They came out with you. They are very bright and they will not say why.",
+          "coil": "It was in there. It has been in there a long time, performing maintenance on something that no longer exists, and it has just decided that you are a more sensible assignment.",
+          "hush": "A cat-shape made of absence, sitting in the doorway you came out of, having watched you decide everything. It follows. It does not explain.",
+          "marrow": "A big grey corvid on the hillside, which was there for the man's ending, and which is still there, and which is now looking at you with an unbearable calm."
+        },
+        "note": "Offer 2-3 that fit the play. Player chooses AND NAMES."
+      }
+    },
+    {
+      "id": "the_debt",
+      "name": "The Debt",
+      "tone": "social, moral, no violence required",
+      "hook": "A door in a Valley village, and a man on the wrong side of it with a ledger, and a family on the right side of it who cannot pay. You are here because you were passing, and because you stopped, and stopping is the whole of how this begins.",
+      "problems": [
+        {
+          "id": "the_collector",
+          "situation": "The collector is not a monster. He is tired, and he is correct, and he has a paper that says so, and he is going to take the loom.",
+          "paths": [
+            {
+              "label": "Stand in the doorway.",
+              "tradition": "marcher",
+              "grantsAbility": "the_stand",
+              "outcome": "You do not touch him. You simply do not move, and you are extremely difficult to move, and he can see that. He goes. He will come back with others."
+            },
+            {
+              "label": "Broker something. Both of them have something the other actually needs.",
+              "tradition": "stillhold",
+              "grantsAbility": "broker_truce",
+              "outcome": "It takes an hour and it is dull and nobody is happy and the loom stays and the debt gets paid. This is what peace usually looks like."
+            },
+            {
+              "label": "Read the paper. Papers are wrong more often than people think.",
+              "tradition": "lattice",
+              "grantsAbility": "order_sense",
+              "outcome": "There is an error. It is small and it is real and it is enough. He is furious, and he is beaten, and he is honest enough to admit both."
+            },
+            {
+              "label": "Buy him. Everyone wants something.",
+              "tradition": "abyssal",
+              "grantsAbility": "appetite_sense",
+              "outcome": "He wants to be finished by dark and he wants not to be the villain. You give him both, and it costs you almost nothing, and you notice that."
+            }
+          ]
+        },
+        {
+          "id": "the_want",
+          "situation": "The debtor's wife is lying about something. Not about the money — about why the money is gone.",
+          "paths": [
+            {
+              "label": "Say the true thing out loud, gently, and let it land where it lands.",
+              "tradition": "verist",
+              "grantsAbility": "verity",
+              "outcome": "She goes white. It was the son. It has been the son for a year. Everything after this is different and better and much harder."
+            },
+            {
+              "label": "Let her keep it. She has almost nothing left and this is one of the things.",
+              "tradition": "umbral",
+              "grantsAbility": "the_harbor",
+              "outcome": "You carry it out of the room with you. She knows you know. She will be able to look at herself in the morning, and that is not nothing."
+            },
+            {
+              "label": "Sit with what she's actually feeling before you touch what she's actually said.",
+              "tradition": "threnodist",
+              "grantsAbility": "pathos",
+              "outcome": "She weeps, and then she tells you herself, and it costs her less because she chose it."
+            },
+            {
+              "label": "Work out what she gains by the lie. That is the whole answer.",
+              "tradition": "syllogist",
+              "grantsAbility": "logos",
+              "outcome": "Two moves and it is obvious. You do not need her to confess. You need to know, and now you do."
+            }
+          ]
+        },
+        {
+          "id": "the_ledger",
+          "situation": "The debt is real, but the sum has grown in a way that arithmetic does not entirely explain. Somebody has been adding to it.",
+          "paths": [
+            {
+              "label": "Take it apart, line by line, until it confesses.",
+              "tradition": "lattice",
+              "grantsAbility": "latticework",
+              "outcome": "Four hours by lamplight. You find every addition and where it came from. It is the kind of victory nobody thanks you for."
+            },
+            {
+              "label": "Name the thief in front of the village.",
+              "tradition": "verist",
+              "grantsAbility": "the_whole_truth",
+              "outcome": "It is a bad night for everyone and a much better decade. The village will not forget who did that, and some of them will not forgive you either."
+            },
+            {
+              "label": "Fix the sum quietly and let no one ever know it was wrong.",
+              "tradition": "veilwright",
+              "grantsAbility": "falsecraft",
+              "outcome": "The family is saved. The thief is unpunished and free to do it again. You chose the family and you know exactly what you chose."
+            },
+            {
+              "label": "Ruin the ledger. If the record is a weapon, unmake the record.",
+              "tradition": "unmaker",
+              "grantsAbility": "ruinwork",
+              "outcome": "There is no debt now because there is no ledger now. It is not justice and you are not pretending it is."
+            }
+          ]
+        },
+        {
+          "id": "the_ruin",
+          "situation": "However this ends, somebody is ruined. The family, or the collector who will answer for the loss, or the son. There is no version where everyone walks away whole. Choose who you are.",
+          "paths": [
+            {
+              "label": "Weigh them. Actually weigh them, and take responsibility for the weighing.",
+              "tradition": "seraphic",
+              "grantsAbility": "the_measuring_eye",
+              "outcome": "You decide who can bear it, and you are right, and you will think about it for years."
+            },
+            {
+              "label": "Refuse the frame. Find the fourth thing.",
+              "tradition": "churnfolk",
+              "grantsAbility": "the_long_odds",
+              "outcome": "It should not have worked. It works. Nobody can explain it afterward, least of all you."
+            },
+            {
+              "label": "Take the ruin yourself. Pay it.",
+              "tradition": "rootkin",
+              "grantsAbility": "the_last_gift",
+              "outcome": "You pay. It is a lot. You walk out of that village lighter than you walked in and you cannot explain that to anyone."
+            },
+            {
+              "label": "Let it end. Some things should. Make the ending clean and do not look away from it.",
+              "tradition": "ashwarden",
+              "grantsAbility": "palework",
+              "outcome": "The family loses the loom. It was always going to. You make it a real ending instead of a slow one, and they hate you, and in ten years they will not."
+            }
+          ]
+        }
+      ],
+      "companionBeat": {
+        "situation": "You leave the village at dusk. You are not leaving alone, and you did not agree to that.",
+        "offer": [
+          "tal",
+          "sprig",
+          "marrow",
+          "hush"
+        ],
+        "arrivals": {
+          "tal": "The debtor's daughter, nineteen, with a tool-roll and a set jaw, who has decided she is your apprentice and has not asked your opinion.",
+          "sprig": "A knee-high thing of green wood at the village edge, a Rootkin cutting somebody planted here a long time ago, walking on its roots, following. It has been listening to every word you said.",
+          "marrow": "The grey bird was on the roof the whole time, and it is on the fence now, and it is looking at you the way it looks at things that are about to matter.",
+          "hush": "There was a shadow in the corner of that room that had no business being there, and it is in the road now, and it is walking with you."
+        },
+        "note": "Offer 2-3 that fit the play. Player chooses AND NAMES."
+      }
+    }
+  ],
+  "quickStart": {
+    "note": "Erik 2026-07-11 — the Prologue is the front door; the FORM is the express lane. A player making their third character should not have to play a scene again.",
+    "flow": "Name → form/appearance → primary/secondary/tertiary domains picked from the great circle (dropdowns, with the ring shown, neighbours and closed antipode visible) → starting abilities picked from the allowed set → companion picked + named from the roster → done.",
+    "parity": "Quick-start must produce an IDENTICAL character shape to the Prologue — same domains, same starting ability count, same companion. No mechanical advantage or penalty either way. The only difference is that the Prologue TELLS you who you are and the form ASKS you.",
+    "offer": "Present both at creation: 'Play the opening (recommended — you'll learn the game)' / 'Quick start (build it yourself)'."
+  }
+}

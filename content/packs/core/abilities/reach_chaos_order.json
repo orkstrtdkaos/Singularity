@@ -58,7 +58,8 @@
         "EXPLORE": 2,
         "FIGHT": 1,
         "SURVIVE": 1
-      }
+      },
+      "tradition": "churnfolk"
     },
     {
       "id": "latticework",
@@ -113,7 +114,8 @@
         "FIGHT": 2,
         "DUEL": 2,
         "SURVIVE": 1
-      }
+      },
+      "tradition": "lattice"
     },
     {
       "id": "chaos_sense",
@@ -160,7 +162,8 @@
         "INVESTIGATE": 2,
         "FIGHT": 1,
         "PUZZLE": 1
-      }
+      },
+      "tradition": "churnfolk"
     },
     {
       "id": "order_sense",
@@ -207,7 +210,8 @@
         "INVESTIGATE": 2,
         "FIGHT": 1,
         "PUZZLE": 1
-      }
+      },
+      "tradition": "lattice"
     },
     {
       "id": "scatter",
@@ -257,7 +261,8 @@
         "CHASE": 2,
         "EXPLORE": 2,
         "FIGHT": 1
-      }
+      },
+      "tradition": "churnfolk"
     },
     {
       "id": "truename_order",
@@ -305,7 +310,8 @@
         "SOCIAL": 2,
         "FIGHT": 1,
         "DUEL": 1
-      }
+      },
+      "tradition": "lattice"
     },
     {
       "id": "probability_tilt",
@@ -356,7 +362,8 @@
         "EXPLORE": 2,
         "FIGHT": 2,
         "DUEL": 2
-      }
+      },
+      "tradition": "churnfolk"
     },
     {
       "id": "the_fixed_point",
@@ -406,7 +413,8 @@
         "FIGHT": 2,
         "DUEL": 2,
         "SURVIVE": 2
-      }
+      },
+      "tradition": "lattice"
     },
     {
       "id": "riding_order",
@@ -444,7 +452,8 @@
         "FIGHT": 1,
         "CHASE": 1,
         "DUEL": 1
-      }
+      },
+      "tradition": "lattice"
     },
     {
       "id": "the_long_odds",
@@ -477,7 +486,8 @@
         }
       ],
       "powerSystem": "reach_chaos_order",
-      "gated": "learned"
+      "gated": "learned",
+      "tradition": "churnfolk"
     }
   ]
 }

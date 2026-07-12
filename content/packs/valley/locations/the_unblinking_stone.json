@@ -50,6 +50,10 @@
     "x": 200,
     "y": 380
   },
-  "poleIntensity": 0.7,
+  "poleIntensity": {
+    "truth": 0.7,
+    "order": 0.3,
+    "logical": 0.2
+  },
   "startingLocation": true
 }

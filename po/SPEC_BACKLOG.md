@@ -972,3 +972,24 @@ SNG-056 (location-header desync) → SNG-058 (party leader) → SNG-052 (adult-g
 - A companion you have not met must not exist to you. (Same principle as the Codex's discovery gate — and note the sidebar's *"PEOPLE YOU KNOW — no one yet"* gets this right; companions should behave the same way.)
 
 **Erik test:** "Play the prologue, ADJUST your domains at the reveal, then confirm — verify your starting abilities match the domains you CHOSE (plus any prologue-earned ones, clearly labelled as earned-outside-your-people), and that your sidebar shows only the one companion who actually stayed."
+---
+
+## SNG-069 — Background is AUTO-ASSIGNED (and the set was thin) ⛔
+
+**Erik-found in live play 2026-07-11:** *"I didn't get to choose my occupation or background. This area needs more depth populated — the martial disciplines and magical backgrounds should be here as well as many others."* His live character reads **"wright · craftsman"** — he chose neither. 🔧 CCode (the choice) + ✍️ Aevi (the content, DONE).
+
+### A. THE BUG — the player never chooses 🔧 CCode
+**The Prologue auto-assigned a background.** This is the same disease as SNG-067/068 (**creation commits before the player confirms**) and it is now three-for-three: the domain was imposed, the abilities were derived from the imposed domain, and the background was assigned outright.
+**Fix:** the player CHOOSES their background — always, in both doors.
+- **In the Prologue:** offer it at the reveal, beside the domain confirm. The scene may **SUGGEST** one from how they played (*"you took things apart to solve two of the four problems — Mechanist?"*) — **suggestion, never assignment.** Same law as the domain: revealed, then confirmed; the player keeps the last word.
+- **In quick-start:** a normal pick, browsable by category.
+- **Never gate backgrounds by origin or domain.** A Cogitant duelist and a Marcher physician are the *interesting* characters and the system must permit them.
+
+### B. THE CONTENT — expanded 15 → 40, across 6 categories ✍️ AEVI (DONE, at origin)
+`content/packs/core/rules/backgrounds.json` — now categorized so a long list stays navigable:
+- **MARTIAL (8)** — the disciplines Erik asked for: **Duelist** (one blade, one opponent, everything decided in about a second) · **Line-Soldier** (you did not step back; that is the whole art) · **Skirmisher** · **Warden** (a decade of readiness for one bad night) · **Hunter** · **Bodyguard** · **War-Leader** (some orders got people killed, some were right, a few were both) · **Arena Fighter** (has thought hard about the difference between a contest and a killing).
+- **PRACTITIONER (7) — this is the "magical background."** In Singularity the *crafts ARE the magic*, so the meaningful question isn't *what* magic but **how you came to yours**: **Temple-Trained** · **Self-Taught / Hedge-Practitioner** (gaps that would horrify a temple, instincts they will never have) · **Lineage-Taught** (it came with obligations you didn't get to decline) · **Precursor-Marked** (something in the old lattice touched you and did not entirely let go) · **Battlefield-Taught** (no theory, no second attempt) · **Apprenticed to a Legend** (you were not their best student; you are still better than almost everyone) · **Found It By Accident** (you did a thing once, in a bad moment, and have spent every year since trying to understand it).
+- **CRAFT (8)** · **LEARNED (5)** · **SOCIAL (6)** · **MARGINAL (6)** — smuggler, exile, ruin-picker, drifter, street-raised.
+- Each carries a `gmHint` (how they *behave*, not just what they did) and an `affinity` (challenge types they help with — a modifier, never a gate).
+
+**Erik test:** "Make a character — verify you CHOOSE your background from a real, categorized list including martial disciplines and practitioner lineages, that the game may suggest but never assigns, and that a Cogitant can be a duelist."

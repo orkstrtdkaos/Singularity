@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "the_hall_of_mirrors",
+  "name": "The Hall of Mirrors",
+  "regionId": "the_veiled_reach",
+  "communityId": "veilwright.hall",
+  "axisVector": [
+    0.0,
+    -0.7,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "falsehood_truth": -0.7,
+    "concrete_abstract": 0.3,
+    "dark_light": -0.2
+  },
+  "tags": [
+    "veilwright",
+    "falsehood",
+    "city",
+    "strange",
+    "home",
+    "social"
+  ],
+  "connections": [
+    "the_kindly_court",
+    "the_last_mask"
+  ],
+  "descriptionSeed": "A city where every truth is understood to be a made thing, so the Veilwrights simply make better ones. Nothing is quite where it appears; hospitality is lavish and cannot be trusted; and everyone is scrupulously honest about the fact that they are lying, which they consider a higher form of candor than the Verists' brutality. They are charming. They mean it. Both of those are also true.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Hosts of impeccable warmth who have told you nine untrue things; a mask that fits too well; a Verist envoy visibly aging by the hour.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "A truth has gotten loose in the Hall and is doing damage",
+    "Someone made a false version of a person and the false version is better and the person knows"
+  ],
+  "map": {
+    "x": 120,
+    "y": 230
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

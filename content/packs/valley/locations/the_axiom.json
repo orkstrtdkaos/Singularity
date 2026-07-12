@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_axiom",
+  "name": "The Axiom",
+  "regionId": "the_reasoned_hold",
+  "communityId": "syllogist.axiom",
+  "axisVector": [
+    0.7,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "emotional_logical": 0.7,
+    "chaos_order": 0.4,
+    "concrete_abstract": 0.2
+  },
+  "tags": [
+    "syllogist",
+    "logical",
+    "city",
+    "order",
+    "home"
+  ],
+  "connections": [
+    "the_proof_halls",
+    "the_bloodless_hold"
+  ],
+  "descriptionSeed": "A city built like an argument, from premises, in order. Everything is derivable. The Syllogists are courteous, precise, and genuinely humble in the specific sense that they will abandon any position the moment it is shown false — which is a virtue nobody expects and which makes them extremely hard to hate and extremely tiring to love.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Syllogists who will follow your reasoning further than you have; a public disproof, conducted gently, of something a visitor has believed their whole life; a proof nobody can break and everybody hates.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A proof has been produced that is valid and whose conclusion is monstrous, and nobody can find the error",
+    "A Syllogist has begun to suspect that something true cannot be reached by reasoning, and is terrified"
+  ],
+  "map": {
+    "x": 200,
+    "y": 140
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

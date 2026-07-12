@@ -271,6 +271,41 @@ img[data-lightbox] { cursor: zoom-in; }
 .gc-dim .gc-label { opacity: .3; }
 .gc-center { font-family: var(--font-ui); font-size: 13px; fill: var(--accent2); text-transform: uppercase; letter-spacing: 1px; }
 .gc-center-sub { font-family: var(--font-ui); font-size: 10px; fill: var(--ink-dim); }
+/* SNG-073 the skill wheel */
+.skill-wheel { width: 100%; height: auto; }
+.wheel-ring { fill: none; stroke: var(--border); stroke-width: 1.5; }
+.wheel-inner { fill: none; stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 5; opacity: .5; }
+.wheel-folk-zone { fill: rgba(123,160,91,0.06); stroke: #7ba05b; stroke-width: 1; stroke-dasharray: 2 4; opacity: .7; }
+.wheel-center-label { font-family: var(--font-ui); font-size: 12px; letter-spacing: 2px; fill: #7ba05b; }
+.wheel-center-sub { font-family: var(--font-ui); font-size: 8.5px; fill: var(--ink-dim); }
+.wheel-precursor-label { font-family: var(--font-ui); font-size: 10px; letter-spacing: 1px; fill: #a678c8; opacity: .8; }
+.wheel-spoke { stroke: var(--border); stroke-width: 1; opacity: .35; }
+.wheel-spoke.primary { stroke: var(--accent); stroke-width: 2.5; opacity: .9; }
+.wheel-spoke.secondary { stroke: var(--accent2); stroke-width: 2; opacity: .8; }
+.wheel-spoke.tertiary { stroke: #9a7b4a; stroke-width: 1.5; opacity: .7; }
+.wheel-spoke.kin { stroke: var(--accent2); opacity: .45; }
+.wheel-spoke.closed { stroke: var(--danger); opacity: .25; }
+.wheel-strike { stroke: var(--danger); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .55; }
+.wheel-braid { pointer-events: stroke; }
+.wheel-braid.cross-pole { stroke: var(--accent); stroke-width: 3.5; opacity: 1; }
+.wheel-braid.kin { stroke: var(--accent2); stroke-width: 2; opacity: .85; }
+.wheel-braid.cross-axis { stroke: #c99; stroke-width: 1.5; opacity: .8; stroke-dasharray: 4 3; }
+.wheel-trad.primary circle { stroke-width: 3; }
+.wheel-trad.closed circle { stroke: var(--danger); }
+.wheel-pole-label { font-family: var(--font-ui); font-size: 9px; fill: var(--ink-dim); text-transform: capitalize; pointer-events: none; }
+.wheel-trad.primary .wheel-pole-label { fill: var(--accent); }
+.wheel-trad.closed .wheel-pole-label { fill: var(--danger); opacity: .6; }
+.wheel-node { cursor: pointer; }
+.wheel-node .hit { fill: transparent; }
+.wheel-node:hover circle:not(.hit) { stroke-width: 3; }
+.wheel-node.owned circle:not(.hit) { stroke-width: 2.5; }
+.wheel-node.closed { opacity: .5; }
+.wheel-node.closed circle:not(.hit) { fill: transparent !important; }
+.wheel-node-strike { stroke: var(--danger); stroke-width: 1.5; }
+.wheel-node.barred { opacity: .4; }
+.wheel-node.dim { opacity: .6; }
+.wheel-node.precursor circle:not(.hit) { stroke-dasharray: 2 2; }
+.wheel-node.selected circle:not(.hit) { stroke-width: 4; }
 /* SNG-080 danger, findable on the map (graduated ring + chip) */
 .danger-ring { fill: none; stroke-width: 2; opacity: .85; pointer-events: none; }
 .danger-ring.dl2 { stroke: #c9a24a; }

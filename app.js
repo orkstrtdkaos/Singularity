@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.37";
+const APP_VERSION = "1.8.38";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2694,6 +2694,180 @@ function renderMap(selectedId = null) {
 
 // ---------- skill KG graph (SNG-011 Phase 3a — rendered like the world map) ----------
 
+// ---------- SNG-073: THE SKILL WHEEL — the skill tree IS the great circle ----------
+// Polar layout, radius = tier. 24 tradition nodes on the ring (read from traditions.json, never
+// hardcoded); each people's abilities radiate INWARD (V at the node, I near the centre — depth is
+// mastery). Folk crafts at the CENTRE (open to all). Precursor OUTSIDE the ring (the substrate).
+// Known braids drawn as connections — cross-pole braids as the DIAMETER through the centre. The
+// antipode is dark and struck through, directly across the wheel. Access, lore and geometry, one picture.
+
+const WHEEL = { size: 920, cx: 460, cy: 460, rNode: 355, rInner: 150, rFolk: 78, rPrecursor: 405 };
+function wheelTierRadius(tier) { const t = Math.max(1, Math.min(5, tier || 1)); return WHEEL.rInner + (t - 1) / 4 * (WHEEL.rNode - WHEEL.rInner); }
+function wheelAngle(posIndex, n) { return (posIndex / (n || 24)) * Math.PI * 2 - Math.PI / 2; }
+function wheelPt(ang, r) { return { x: WHEEL.cx + Math.cos(ang) * r, y: WHEEL.cy + Math.sin(ang) * r }; }
+
+/** Build every ability's position + state for the wheel. Pure over CONTENT + character. */
+function buildWheelModel() {
+  const idx = CONTENT.traditionIndex;
+  const order = ringOrder(idx);              // 24 tradition ids by ring position
+  const n = order.length || 24;
+  const posOf = t => order.indexOf(t);
+  const cat = fullCatalog();
+  const owned = new Set((character.abilities || []).map(a => a.abilityId));
+  const domains = character.domains || {};
+  const nodes = [];
+  // group abilities: pole-tradition spokes · folk centre · precursor outer ring
+  const byTrad = {}, folk = [], precursor = [];
+  for (const ab of Object.values(cat)) {
+    const trad = traditionOf(ab, idx);
+    if (ab.powerSystem === "precursor") { precursor.push(ab); continue; }
+    if (trad && isFolkTradition(trad, idx)) { folk.push(ab); continue; }
+    if (trad && posOf(trad) >= 0) { (byTrad[trad] = byTrad[trad] || []).push(ab); continue; }
+    if (!trad || ab.powerSystem === "learned") { folk.push(ab); continue; } // ungoverned/learned → centre
+  }
+  const mk = (ab, x, y, ang) => {
+    const trad = traditionOf(ab, idx);
+    const v = domainAccess(ab, ab.levelReq || 1, domains, idx);
+    nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: trad || ab.powerSystem || "learned",
+      x, y, ang, owned: owned.has(ab.id), band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
+      barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor" });
+  };
+  // spokes: fan same-tier abilities by a small angular offset around the spoke
+  for (const [trad, abs] of Object.entries(byTrad)) {
+    const ang0 = wheelAngle(posOf(trad), n);
+    const byTier = {};
+    for (const ab of abs) (byTier[ab.levelReq || 1] = byTier[ab.levelReq || 1] || []).push(ab);
+    for (const [lv, list] of Object.entries(byTier)) {
+      const r = wheelTierRadius(Number(lv));
+      list.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
+        const spread = (i - (list.length - 1) / 2) * 0.05; // radians of fan
+        const a = ang0 + spread; const p = wheelPt(a, r); mk(ab, p.x, p.y, a);
+      });
+    }
+  }
+  // folk centre: a small ring near the middle
+  folk.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
+    const a = (i / Math.max(1, folk.length)) * Math.PI * 2 - Math.PI / 2; const p = wheelPt(a, WHEEL.rFolk); mk(ab, p.x, p.y, a);
+  });
+  // precursor: outside the ring, spread all the way round (not axis-aligned)
+  precursor.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
+    const a = (i / Math.max(1, precursor.length)) * Math.PI * 2 - Math.PI / 2; const p = wheelPt(a, WHEEL.rPrecursor); mk(ab, p.x, p.y, a);
+  });
+  return { idx, order, n, nodes, posOf };
+}
+
+/** Classify + collect the KNOWN braids (discoveries) as drawable connections. */
+function wheelBraids(model) {
+  const idx = model.idx, cat = fullCatalog();
+  const out = [];
+  for (const d of character.discoveries || []) {
+    const parts = (d.abilityIds || []).filter(id => cat[id]);
+    if (parts.length < 2) continue;
+    const t1 = traditionOf(cat[parts[0]], idx), t2 = traditionOf(cat[parts[1]], idx);
+    if (!t1 || !t2) continue;
+    let kind = "cross-axis";
+    if (antipodeOf(t1, idx) === t2) kind = "cross-pole";
+    else if (t1 === t2) kind = "within";
+    else if (ringDistance(t1, t2, idx) === 1) kind = "kin";
+    out.push({ name: d.name, kind, t1, t2 });
+  }
+  return out;
+}
+
+function renderSkillWheel(selectedId = null) {
+  const idx = CONTENT.traditionIndex;
+  if (!idx) { renderSkillGraph(selectedId); return; } // no ring loaded → fall back to the list graph
+  const m = buildWheelModel();
+  const domains = character.domains || {};
+  const primary = domains.primary, secondary = domains.secondary;
+  const antiP = primary ? antipodeOf(primary, idx) : null, antiS = secondary ? antipodeOf(secondary, idx) : null;
+  const S = WHEEL;
+  // the 24 tradition nodes on the ring + their spokes
+  const ringNodes = m.order.map((t, i) => { const ang = wheelAngle(i, m.n); const p = wheelPt(ang, S.rNode); const st = (idx.stations || []).find(s => s.traditionId === t);
+    const closed = t === antiP || t === antiS; const isPrimary = t === primary, isSecondary = t === secondary, isTertiary = t === domains.tertiary;
+    const kin = primary && ringDistance(t, primary, idx) === 1;
+    return { t, ang, ...p, pole: st?.pole || t, closed, isPrimary, isSecondary, isTertiary, kin }; });
+  const braids = wheelBraids(m);
+  const centerPt = { x: S.cx, y: S.cy };
+  const nodeFor = t => ringNodes.find(r => r.t === t);
+
+  const svg = `<svg id="skill-svg" viewBox="0 0 ${S.size} ${S.size}" class="world-map skill-wheel" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
+    <circle cx="${S.cx}" cy="${S.cy}" r="${S.rNode}" class="wheel-ring"/>
+    <circle cx="${S.cx}" cy="${S.cy}" r="${S.rInner}" class="wheel-inner"/>
+    <circle cx="${S.cx}" cy="${S.cy}" r="${S.rFolk + 24}" class="wheel-folk-zone"/>
+    <text x="${S.cx}" y="${S.cy - 2}" text-anchor="middle" class="wheel-center-label">FOLK</text>
+    <text x="${S.cx}" y="${S.cy + 14}" text-anchor="middle" class="wheel-center-sub">open to all</text>
+    <text x="${S.cx}" y="${S.cy - S.rPrecursor - 8}" text-anchor="middle" class="wheel-precursor-label">· PRECURSOR — the substrate, outside the poles ·</text>
+    ${/* faint spokes */""}
+    ${ringNodes.map(rn => { const inner = wheelPt(rn.ang, S.rInner); return `<line x1="${inner.x}" y1="${inner.y}" x2="${rn.x}" y2="${rn.y}" class="wheel-spoke ${rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : rn.closed ? "closed" : ""}"/>`; }).join("")}
+    ${/* antipode: struck through, dark, across the wheel */""}
+    ${ringNodes.filter(r => r.closed).map(rn => { const opp = wheelPt(rn.ang, S.rNode + 18); return `<line x1="${S.cx}" y1="${S.cy}" x2="${opp.x}" y2="${opp.y}" class="wheel-strike"/>`; }).join("")}
+    ${/* braids — known discoveries only */""}
+    ${braids.map(b => { const A = nodeFor(b.t1), B = nodeFor(b.t2); if (!A) return "";
+      if (b.kind === "cross-pole" && B) return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-braid cross-pole"><title>${esc(b.name)} — a cross-pole braid: holding an axis whole</title></line>`;
+      if (b.kind === "kin" && B) return `<path d="M ${A.x} ${A.y} Q ${S.cx + (A.x + B.x - 2 * S.cx) * 0.7} ${S.cy + (A.y + B.y - 2 * S.cy) * 0.7} ${B.x} ${B.y}" class="wheel-braid kin" fill="none"><title>${esc(b.name)} — a kin braid</title></path>`;
+      if (B) return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-braid cross-axis"><title>${esc(b.name)} — a cross-axis braid</title></line>`;
+      return ""; }).join("")}
+    ${/* tradition ring nodes + pole labels */""}
+    ${ringNodes.map(rn => { const lp = wheelPt(rn.ang, S.rNode + 30);
+      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""}">
+        <circle cx="${rn.x}" cy="${rn.y}" r="7" fill="${rn.closed ? "transparent" : traditionColor(rn.t)}" stroke="${traditionColor(rn.t)}"/>
+        <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(String(rn.pole).slice(0, 12))}</text></g>`; }).join("")}
+    ${/* ability nodes */""}
+    ${m.nodes.map(nd => { const r = 5 + (nd.levelReq - 1) * 1.2;
+      const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${selectedId === nd.id ? "selected" : ""}`;
+      return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(nd.name + " — " + traditionLabel(nd.cls) + " · Tier " + nd.tier + (nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : ""))}</title>
+        <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
+        <circle cx="${nd.x}" cy="${nd.y}" r="${r}" fill="${nd.owned ? traditionColor(nd.cls) : "#20242c"}" stroke="${nd.closed ? "var(--danger)" : traditionColor(nd.cls)}"/>
+        ${nd.closed ? `<line x1="${nd.x - r - 2}" y1="${nd.y - r - 2}" x2="${nd.x + r + 2}" y2="${nd.y + r + 2}" class="wheel-node-strike"/>` : ""}
+      </g>`; }).join("")}
+  </g></svg>`;
+
+  const sel = selectedId ? m.nodes.find(nd => nd.id === selectedId) : null;
+  const selAb = sel ? fullCatalog()[sel.id] : null;
+  const gateLine = sel ? (sel.closed ? "🚫 CLOSED — your antipode; only a cross-pole braid crosses it"
+    : sel.band === "primary" ? "✦ your primary domain — all tiers, no penalty"
+    : sel.band === "adjacent" ? (sel.allowed ? "free — kin of your primary (no capstones)" : "🔒 near a people is not being of them — no capstones")
+    : sel.band === "secondary" ? (sel.allowed ? "your secondary — up to Tier III" : "🔒 your secondary tops out at Tier III")
+    : sel.band === "tertiary" ? (sel.allowed ? "your tertiary — up to Tier II" : "🔒 your tertiary tops out at Tier II")
+    : sel.band === "folk" ? "open — a folk craft of the Valley"
+    : sel.band === "far" ? `costs more — ${sel.penalty}× skill points, ${Math.max(2, sel.penalty)} steps out`
+    : "learnable") : "";
+  const details = sel ? `<div class="map-details">
+    <div class="map-details-head"><h3>${esc(sel.name)}</h3>
+      <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
+      ${sel.owned ? `<span class="rep-band trusted">owned</span>` : ""}</div>
+    <div class="hint">${esc(gateLine)}${selAb?.energyCost ? ` · energy ${selAb.energyCost}` : ""}${(selAb?.functions || []).length ? ` · ${selAb.functions.join(", ")}` : ""}</div>
+    <p class="map-details-desc">${esc(selAb?.description || "")}</p>
+    ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
+  </div>` : "";
+
+  chrome(`<div class="screen" style="max-width:980px">
+    <h2>The Skill Wheel</h2>
+    <p class="hint" style="margin-bottom:8px">The great circle IS your skill tree. Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; the <strong>folk crafts</strong> sit at the centre (open to all); <strong>precursor</strong> rings the outside; a <strong>braid you know</strong> draws a line through the middle; and your <strong>antipode is dark, struck through</strong>, across the wheel. Depth = mastery. <strong>Scroll to zoom, drag to pan.</strong></p>
+    <div class="graph-wrap" id="graph-wrap">
+      <div class="graph-zoom-ctl">
+        <button id="gz-in" title="Zoom in">＋</button>
+        <button id="gz-out" title="Zoom out">－</button>
+        <button id="gz-fit" title="Fit to view">⤢</button>
+      </div>
+      ${svg}
+    </div>
+    ${details}
+    <div style="display:flex; gap:8px; margin-top:12px">
+      <button class="btn secondary" id="wheel-back">Back</button>
+      <button class="btn secondary" id="wheel-list">List view</button>
+    </div>
+  </div>`);
+  wireSkillGraphViewport();
+  for (const g of app.querySelectorAll("[data-wheelnode]")) g.onclick = () => {
+    if (_graphDidPan) { _graphDidPan = false; return; }
+    renderSkillWheel(g.dataset.wheelnode === selectedId ? null : g.dataset.wheelnode);
+  };
+  document.getElementById("wheel-back").onclick = () => { graphView = null; renderCharacterScreen(); };
+  document.getElementById("wheel-list").onclick = () => { graphView = null; renderSkillGraph(); };
+}
+
 function renderSkillGraph(selectedId = null) {
   const model = skillGraphModel(fullCatalog(), CONTENT.emergence, character, {
     attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, branchForks: CONTENT.branchForks,
@@ -2759,7 +2933,10 @@ function renderSkillGraph(selectedId = null) {
       ${svg}
     </div>
     ${details}
-    <button class="btn secondary" id="graph-back" style="margin-top:12px">Back</button>
+    <div style="display:flex; gap:8px; margin-top:12px">
+      <button class="btn secondary" id="graph-back">Back</button>
+      <button class="btn secondary" id="graph-wheel">✦ Wheel view</button>
+    </div>
   </div>`);
   wireSkillGraphViewport();
   for (const g of app.querySelectorAll("[data-skillnode]")) g.onclick = (ev) => {
@@ -2767,6 +2944,7 @@ function renderSkillGraph(selectedId = null) {
     renderSkillGraph(g.dataset.skillnode === selectedId ? null : g.dataset.skillnode);
   };
   document.getElementById("graph-back").onclick = () => { graphView = null; renderCharacterScreen(); };
+  document.getElementById("graph-wheel").onclick = () => { graphView = null; renderSkillWheel(); };
 }
 
 // SNG-054 Phase 0: pan/zoom for the skill graph (the fixed viewBox overflowed unusably on
@@ -2895,7 +3073,7 @@ function renderCharacterScreen() {
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
-    <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">🗺 Skill Graph</button>
+    <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
@@ -2928,7 +3106,7 @@ function renderCharacterScreen() {
     if (tpl) { acceptBranch(character, tpl); saveCharacter(character); }
     renderCharacterScreen();
   };
-  const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillGraph();
+  const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillWheel();
   // SNG-053 form editor: describe the character's physical form so the portrait renders it
   const formB = document.getElementById("cs-form");
   if (formB) formB.onclick = () => {

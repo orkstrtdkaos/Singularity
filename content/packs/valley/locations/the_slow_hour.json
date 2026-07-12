@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "the_slow_hour",
+  "name": "The Slow Hour",
+  "regionId": "the_kept_reach",
+  "communityId": "hourkeeper.slowhour",
+  "axisVector": [
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    0.7,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "space_time": 0.7,
+    "chaos_order": 0.4,
+    "emotional_logical": 0.2
+  },
+  "tags": [
+    "hourkeeper",
+    "time",
+    "city",
+    "archive",
+    "home",
+    "strange"
+  ],
+  "connections": [
+    "the_forward_archive",
+    "the_stopped"
+  ],
+  "descriptionSeed": "Clock-towers and an unbearable patience. The Hourkeepers tend duration — they remember, and they PRE-remember, and they pay for both. Conversations here have gaps in them because your interlocutor is also, partly, elsewhen. They are the saddest people in the world and among the kindest, because they know how much time everything has.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Hourkeepers who know exactly how long you have and will not say; a clock that runs forward into next year; someone grieving a death that has not happened.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "An Hourkeeper has pre-remembered something terrible and cannot say it and cannot stop knowing it",
+    "A pre-memory has been WRONG, for the first time in living memory, and that is worse"
+  ],
+  "map": {
+    "x": 455,
+    "y": 110
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

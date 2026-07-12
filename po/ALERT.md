@@ -21,6 +21,7 @@
 | **SNG-052** | ✔ | Adult-gate checkbox persistence |
 | **SNG-067/068/069 (P1)** | v1.8.33 | The commit boundary — creation no longer commits before confirm. Prologue: abilities reconcile vs CONFIRMED domains (grandfather + primary-grant), background is CHOSEN (categorized), sidebar shows only met companions. |
 | **SNG-077** | v1.8.34 | Gambit hint no longer constant — the GM declares `gambitApt`; the engine decides show (dismissal sticks + cooldown). |
+| **SNG-066** | v1.8.35 | In-game ⚑ Feedback — one tap; version/screen/character/location/last-turn/errors auto-attach; append-only to `po/feedback/`, queued if sync off. |
 
 ---
 
@@ -42,7 +43,7 @@
 ### 3. ✅ P1 SHIPPED v1.8.33 — the commit boundary (SNG-067/068/069 were one defect; prologue path fixed)
 `grep` at v1.8.23 showed **zero** commit-boundary functions. Draft → confirm → commit. Nothing writes to the character until the player says yes; everything stays re-choosable. `[CCODE: 16 'draft' refs at HEAD — is this partially shipped? confirm]`
 
-### 4. **SNG-066 — feedback** (auto-captured context: version · character · domains · location · last GM turn · console errors). Turns Erik's screenshot-archaeology into one-click reports.
+### 4. ✅ SNG-066 SHIPPED v1.8.35 — feedback (auto-captured context: version · character · domains · location · last GM turn · console errors). Turns Erik's screenshot-archaeology into one-click reports.
 
 ### 5. **SNG-073 — The Skill Wheel** (supersedes SNG-054 Ph2). The skill tree **becomes** the great circle: tiers radiate inward · folk crafts at the centre · precursor outside the ring · **cross-pole braids drawn as diameters through the centre** · **antipode dark and struck through.**
 

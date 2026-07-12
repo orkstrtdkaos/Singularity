@@ -51,6 +51,10 @@
     "x": 140,
     "y": 300
   },
-  "poleIntensity": 0.7,
+  "poleIntensity": {
+    "concrete": 0.7,
+    "body": 0.3,
+    "order": 0.2
+  },
   "startingLocation": true
 }

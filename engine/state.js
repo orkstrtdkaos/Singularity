@@ -106,6 +106,11 @@ export async function loadContent() {
   for (const t of ["npc", "location", "arc"]) {
     try { genSchemas[t] = await fetchJSON(`schemas/${t}.schema.json`); } catch { /* type ungeneratable */ }
   }
+  // SNG-063: origins (27 peoples) + backgrounds (15) — authored content (were hardcoded). Fetched
+  // directly; optional (creation falls back to a minimal set if absent).
+  let origins = [], backgrounds = [];
+  try { origins = (await fetchJSON("content/packs/core/rules/origins.json")).origins || []; } catch { /* fallback in-app */ }
+  try { backgrounds = (await fetchJSON("content/packs/core/rules/backgrounds.json")).backgrounds || []; } catch { /* fallback in-app */ }
   // SNG-062: the Prologue — character creation as a played opening. Fetched directly. Optional
   // (absence falls back to the quick-start form; never breaks load).
   let prologue = null;
@@ -116,7 +121,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

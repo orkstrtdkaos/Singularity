@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.19";
+const APP_VERSION = "1.8.20";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1233,89 +1233,117 @@ function startingGear(background) {
   return ids.map(id => CONTENT.items[id]).filter(Boolean).map(it => fromCatalog(it));
 }
 
-const BACKGROUNDS = [
-  ["former-professional", "Former Professional", "Pre-Transition career skills and connections"],
-  ["community-organizer", "Community Organizer", "Conflict resolution, trust networks"],
-  ["craftsman", "Craftsman / Artisan", "Making, mending, material sense"],
-  ["survivalist", "Survivalist", "Trails, weather, staying alive outdoors"],
-  ["medic", "Medical Practitioner", "Healing arts, herbal and practical"]
-];
+// SNG-063: origins + backgrounds are authored content (origins.json/backgrounds.json). These
+// fallbacks only fire if the content files fail to load, so creation never dead-ends.
+function originsFallback() {
+  return [
+    { id: "valleyfolk", name: "Valleyfolk", nativeTradition: "valley_craft", homeRegion: "valley", description: "Born to the Valley floor." },
+    { id: "harmonic", name: "Harmonic", nativeTradition: "harmonic", homeRegion: "valley", description: "Of the resonant Heights." },
+    { id: "radiant_plateau", name: "Radiant", nativeTradition: "radiant_folk", homeRegion: "valley", description: "Of the light Plateau." }
+  ];
+}
+function backgroundsFallback() {
+  return [
+    { id: "craftsman", name: "Craftsman / Artisan", description: "Making, mending, material sense." },
+    { id: "survivalist", name: "Survivalist", description: "Trails, weather, staying alive outdoors." },
+    { id: "medic", name: "Medical Practitioner", description: "Healing arts, herbal and practical." }
+  ];
+}
 
 function renderCreate() {
-  const state = { name: "", origin: "valley", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
+  const state = { name: "", origin: "valleyfolk", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
     domains: { primary: null, secondary: null, tertiary: null }, companionId: null, companionName: "", form: "",
     // SNG-062 prologue accrual
     prologue: { openingId: null, step: 0, tags: {}, granted: [], reasons: [] } };
   const POOL = 12;
 
-  function abilityChoices() {
-    const fake = { origin: state.origin, level: 1 };
-    return Object.values(CONTENT.abilities).filter(a => {
-      const req = effectiveLevelReq(a, fake, CONTENT.rules);
-      return req !== null && req <= 1;
-    });
-  }
-  function maxAbilities() { return state.origin === "valley" ? 1 : 2; }
+  const ORIGINS = () => CONTENT.origins?.length ? CONTENT.origins : originsFallback();
+  const BGS = () => CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback();
+  function maxAbilities() { return 2; } // SNG-063: fixed count, now filtered by domains
 
+  /** SNG-063 quick-start step 1: NAME → FORM → ORIGIN → BACKGROUND → attributes.
+   *  NO abilities here — abilities come AFTER domains (the order fix), filtered by them. */
   function draw() {
     const spent = Object.values(state.attrs).reduce((a, b) => a + b, 0);
     const left = POOL - spent;
-    const okAb = abilityChoices();
-    state.abilities = state.abilities.filter(id => okAb.some(a => a.id === id)).slice(0, maxAbilities());
-    const valid = state.name.trim().length > 0 && left === 0 && state.abilities.length === maxAbilities();
+    const origins = ORIGINS(), bgs = BGS();
+    if (!origins.some(o => o.id === state.origin)) state.origin = origins[0]?.id || "valleyfolk";
+    if (!bgs.some(b => b.id === state.background)) state.background = bgs[0]?.id || "craftsman";
+    const org = origins.find(o => o.id === state.origin);
+    const bg = bgs.find(b => b.id === state.background);
+    const valid = state.name.trim().length > 0 && left === 0;
 
     chrome(`<div class="screen">
       <h2>New Character</h2>
       <div class="field"><label>Name</label><input id="c-name" value="${esc(state.name)}"></div>
-      <div class="field"><label>Origin</label>
-        <div class="opt-row">
-          ${[["harmonic", "Harmonic Heights (sonic)"], ["radiant", "Radiant Plateau (light)"], ["valley", "Valley floor (unaligned)"]]
-            .map(([v, l]) => `<button class="opt ${state.origin === v ? "selected" : ""}" data-origin="${v}">${l}</button>`).join("")}
-        </div>
-        <div class="hint">${state.origin === "valley" ? "Unaligned: start with 1 ability from either system; more options open later through play." : "Start with 2 abilities of your civilization's system."}</div></div>
-      <div class="field"><label>Background</label>
-        <div class="opt-row">${BACKGROUNDS.map(([v, l]) => `<button class="opt ${state.background === v ? "selected" : ""}" data-bg="${v}">${l}</button>`).join("")}</div>
-        <div class="hint">${esc(BACKGROUNDS.find(b => b[0] === state.background)[2])}</div></div>
+      <div class="field"><label>Form / appearance <span class="hint" style="text-transform:none">(leads the portrait — blank = an ordinary person)</span></label>
+        <textarea id="c-form" rows="2" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood">${esc(state.form)}</textarea></div>
+      <div class="field"><label>Origin — which people are you from? <span class="hint" style="text-transform:none">(you begin in the Valley regardless)</span></label>
+        <select id="c-origin">${origins.map(o => `<option value="${esc(o.id)}" ${state.origin === o.id ? "selected" : ""}>${esc(o.name)}${o.homeRegion && o.homeRegion !== "valley" ? " — of the " + esc(String(o.homeRegion).replace(/_/g, " ")) : ""}</option>`).join("")}</select>
+        <div class="hint">${esc(org?.description || "")}${org?.whyYouAreHere ? ` <em>${esc(org.whyYouAreHere)}</em>` : ""}</div></div>
+      <div class="field"><label>Background — what did you do?</label>
+        <select id="c-bg">${bgs.map(b => `<option value="${esc(b.id)}" ${state.background === b.id ? "selected" : ""}>${esc(b.name)}</option>`).join("")}</select>
+        <div class="hint">${esc(bg?.description || "")}</div></div>
       <div class="field"><label>Attributes — points left: <strong>${left}</strong> (each 1–4)</label>
         ${Object.entries(state.attrs).map(([k, v]) => `
           <div class="point-row">
             <button data-dec="${k}">−</button><span class="pips">${"●".repeat(v)}${"○".repeat(4 - v)}</span><button data-inc="${k}">+</button>
             <span style="text-transform:capitalize">${k}</span>
           </div>`).join("")}</div>
-      <div class="field"><label>Abilities — choose ${maxAbilities()}</label>
-        ${(() => {
-          // SNG-059: group starting abilities by TRADITION (the people), not powerSystem/reach
-          const byTrad = {};
-          for (const a of okAb) { const t = traditionOf(a, CONTENT.traditionIndex) || a.powerSystem || "folk"; (byTrad[t] = byTrad[t] || []).push(a); }
-          return Object.keys(byTrad).map(t => `
-            <div class="sys-group"><div class="sys-label">${esc(traditionLabel(t))}</div>
-            <div class="opt-row">${byTrad[t].map(a => { const r1 = a.tree?.find(t => t.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div></div>`).join("");
-        })()}
-        <div class="hint">${state.abilities.map(id => { const a = CONTENT.abilities[id]; const r1 = a.tree?.find(t => t.rank === 1); return r1 ? `<strong>${esc(a.name)}</strong> — rank 1 “${esc(r1.name)}”: ${esc(r1.grants)}` : esc(a.description); }).join("<br>") || "Hover an ability to see exactly what its first rank can and cannot do."}</div></div>
-      <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your domain on the great circle</button>
+      <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your domains on the great circle</button>
     </div>`);
 
-    document.getElementById("c-name").oninput = e => { state.name = e.target.value; document.getElementById("c-done").disabled = !(state.name.trim() && left === 0 && state.abilities.length === maxAbilities()); };
-    for (const b of app.querySelectorAll("[data-origin]")) b.onclick = () => { state.origin = b.dataset.origin; state.abilities = []; draw(); };
-    for (const b of app.querySelectorAll("[data-bg]")) b.onclick = () => { state.background = b.dataset.bg; draw(); };
+    document.getElementById("c-name").oninput = e => { state.name = e.target.value; document.getElementById("c-done").disabled = !(state.name.trim() && left === 0); };
+    document.getElementById("c-form").oninput = e => { state.form = e.target.value; };
+    document.getElementById("c-origin").onchange = e => { state.origin = e.target.value; state.domains = { primary: null, secondary: null, tertiary: null }; draw(); };
+    document.getElementById("c-bg").onchange = e => { state.background = e.target.value; draw(); };
     for (const b of app.querySelectorAll("[data-inc]")) b.onclick = () => { const k = b.dataset.inc; if (state.attrs[k] < 4 && left > 0) state.attrs[k]++; draw(); };
     for (const b of app.querySelectorAll("[data-dec]")) b.onclick = () => { const k = b.dataset.dec; if (state.attrs[k] > 1) state.attrs[k]--; draw(); };
+    document.getElementById("c-done").onclick = () => { state.form = document.getElementById("c-form").value.trim(); renderDomainStep(); };
+  }
+
+  /** SNG-063 quick-start step 3 (AFTER domains): abilities FILTERED to what the domains permit. */
+  function renderAbilityStep() {
+    const okAb = Object.values(CONTENT.abilities).filter(a => {
+      if ((a.levelReq || 1) > 1) return false;
+      const dv = domainAccess(a, a.levelReq || 1, state.domains, CONTENT.traditionIndex);
+      return dv.allowed;
+    });
+    state.abilities = state.abilities.filter(id => okAb.some(a => a.id === id)).slice(0, maxAbilities());
+    const byTrad = {};
+    for (const a of okAb) { const t = traditionOf(a, CONTENT.traditionIndex) || a.powerSystem || "folk"; (byTrad[t] = byTrad[t] || []).push(a); }
+    chrome(`<div class="screen">
+      <h2>What have you learned?</h2>
+      <p class="hint" style="margin-bottom:10px">Choose <strong>${maxAbilities()}</strong>. Only the crafts your domains open to you are shown — your primary, its kin, your secondary and tertiary, and the Valley's open folk arts. The far pole of what you are isn't here.</p>
+      ${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(t => `
+        <div class="sys-group"><div class="sys-label">${esc(traditionLabel(t))}</div>
+        <div class="opt-row">${byTrad[t].map(a => { const r1 = a.tree?.find(x => x.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div></div>`).join("") || "<div class='insight'>No level-1 abilities available for your domains — you'll learn as you play.</div>"}
+      <div style="display:flex; gap:8px; margin-top:12px">
+        <button class="btn secondary" id="ab-back">Back</button>
+        <button class="btn" id="ab-done" ${state.abilities.length === maxAbilities() || !okAb.length ? "" : "disabled"}>Next: your companion</button>
+      </div>
+    </div>`);
     for (const b of app.querySelectorAll("[data-ab]")) b.onclick = () => {
       const id = b.dataset.ab;
       if (state.abilities.includes(id)) state.abilities = state.abilities.filter(x => x !== id);
       else if (state.abilities.length < maxAbilities()) state.abilities.push(id);
-      draw();
+      renderAbilityStep();
     };
-    document.getElementById("c-done").onclick = () => renderDomainStep();
+    document.getElementById("ab-back").onclick = () => renderDomainStep();
+    document.getElementById("ab-done").onclick = () => renderCompanionStep();
   }
 
   // SNG-059 / SNG-055: pick primary / secondary / tertiary domains on THE GREAT CIRCLE. The ring,
   // neighbours, and antipodes are read from CONTENT.traditionIndex — never hardcoded.
   function renderDomainStep() {
     const idx = CONTENT.traditionIndex;
-    if (!idx) { renderCompanionStep(); return; } // no traditions content → skip gracefully
+    if (!idx) { renderAbilityStep(); return; } // no traditions content → skip gracefully
     const order = ringOrder(idx);
     const d = state.domains;
+    // SNG-063: origin SEEDS the circle — a pole-people's native tradition pre-fills the primary
+    // (the player can Redo to change it); folk origins stay open (no seed).
+    const nativeT = (ORIGINS().find(o => o.id === state.origin) || {}).nativeTradition;
+    if (!d.primary && nativeT && !isFolkTradition(nativeT, idx) && idx.byId?.[nativeT]) d.primary = nativeT;
     const phase = !d.primary ? "primary" : !d.secondary ? "secondary" : !d.tertiary ? "tertiary" : "done";
     const antiP = d.primary ? antipodeOf(d.primary, idx) : null;
     const antiS = d.secondary ? antipodeOf(d.secondary, idx) : null;
@@ -1351,14 +1379,14 @@ function renderCreate() {
       renderDomainStep();
     };
     document.getElementById("dom-reset").onclick = () => { state.domains = { primary: null, secondary: null, tertiary: null }; renderDomainStep(); };
-    // SNG-062: when adjusting from the prologue reveal, the domain step confirms → finish the prologue
-    document.getElementById("dom-done").onclick = () => { if (state.domainReturn === "prologue") { state.domainReturn = null; finishPrologue(); } else renderCompanionStep(); };
+    // SNG-062: prologue-adjust confirms → finish; SNG-063: quick-start goes to abilities (AFTER domains)
+    document.getElementById("dom-done").onclick = () => { if (state.domainReturn === "prologue") { state.domainReturn = null; finishPrologue(); } else renderAbilityStep(); };
   }
 
   // SNG-059 / SNG-057: choose + name a companion from the authored starting roster.
   function renderCompanionStep() {
     const roster = Object.values(CONTENT.companions || {}).filter(c => c.startingOption);
-    if (!roster.length) { renderFormStep(); return; }
+    if (!roster.length) { renderBioStep(); return; }
     if (!state.companionId) state.companionId = roster[0].id;
     const chosen = roster.find(c => c.id === state.companionId) || roster[0];
     chrome(`<div class="screen" style="max-width:640px">
@@ -1377,7 +1405,7 @@ function renderCreate() {
       </div>
       <div style="display:flex; gap:8px; margin-top:12px">
         <button class="btn secondary" id="comp-solo">Begin alone</button>
-        <button class="btn" id="comp-done">Next: your look</button>
+        <button class="btn" id="comp-done">Next: your story</button>
       </div>
     </div>`);
     for (const b of app.querySelectorAll("[data-comp]")) b.onclick = () => {
@@ -1385,8 +1413,8 @@ function renderCreate() {
       state.companionId = b.dataset.comp; renderCompanionStep();
     };
     document.getElementById("comp-name").oninput = e => { state.companionName = e.target.value.trim(); };
-    document.getElementById("comp-solo").onclick = () => { state.companionId = null; state.companionName = ""; renderFormStep(); };
-    document.getElementById("comp-done").onclick = () => { state.companionName = document.getElementById("comp-name").value.trim(); renderFormStep(); };
+    document.getElementById("comp-solo").onclick = () => { state.companionId = null; state.companionName = ""; renderBioStep(); };
+    document.getElementById("comp-done").onclick = () => { state.companionName = document.getElementById("comp-name").value.trim(); renderBioStep(); };
   }
 
   // SNG-059 / SNG-053: describe the character's physical FORM so the portrait is right on first render.
@@ -1443,6 +1471,9 @@ function renderCreate() {
       playerKey: profile.playerKey,
       name: state.name.trim(),
       origin: state.origin,
+      // SNG-063: origin = which PEOPLE you're from → native tradition (home class) + why you're here
+      nativeTradition: (ORIGINS().find(o => o.id === state.origin) || {}).nativeTradition || null,
+      whyHere: (ORIGINS().find(o => o.id === state.origin) || {}).whyYouAreHere || null,
       background: state.background,
       level: 1, xp: 0,
       attributes: { ...state.attrs },
@@ -1470,6 +1501,13 @@ function renderCreate() {
       form: state.form || undefined,
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
+    // SNG-063: nobody is in the Valley by accident — fold the origin's whyYouAreHere into the bio
+    // so the GM has it as grounding (origin = people, starting location = Valley).
+    if (character.whyHere) {
+      character.bio = character.bio || {};
+      if (!character.bio.motivation) character.bio.motivation = character.whyHere;
+      else if (!/(came|left|here)/i.test(character.bio.story || "")) character.bio.story = ((character.bio.story || "") + " " + character.whyHere).trim();
+    }
     ensureSubAttributes(character);
     ensureCodex(character);
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
@@ -1509,14 +1547,21 @@ function renderCreate() {
     document.getElementById("door-form").onclick = () => draw();
   }
 
-  /** Prologue step 1: name + form only. */
+  /** Prologue step 1 (SNG-063 order): name → form → origin (light seed — your people). Domains and
+   *  skills come LATER, from play. */
   function renderPrologueIntro() {
+    const origins = ORIGINS();
+    if (!origins.some(o => o.id === state.origin)) state.origin = origins[0]?.id || "valleyfolk";
+    const org = origins.find(o => o.id === state.origin);
     chrome(`<div class="screen" style="max-width:600px">
       <h2>Before the scene</h2>
-      <p class="hint" style="margin-bottom:12px">Two things, then we begin. Everything else you'll discover by playing.</p>
+      <p class="hint" style="margin-bottom:12px">A few things, then we begin. Who you become on the circle, and what you can do, you'll find out by playing.</p>
       <div class="field"><label>Name</label><input id="p-name" value="${esc(state.name)}"></div>
       <div class="field"><label>What do they look like? <span class="hint" style="text-transform:none">(form/species — leads the portrait; blank = an ordinary person)</span></label>
         <textarea id="p-form" rows="2" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood, moss-bearded">${esc(state.form)}</textarea></div>
+      <div class="field"><label>Which people are you from? <span class="hint" style="text-transform:none">(you begin in the Valley regardless — origin is who your people are)</span></label>
+        <select id="p-origin">${origins.map(o => `<option value="${esc(o.id)}" ${state.origin === o.id ? "selected" : ""}>${esc(o.name)}${o.homeRegion && o.homeRegion !== "valley" ? " — of the " + esc(String(o.homeRegion).replace(/_/g, " ")) : ""}</option>`).join("")}</select>
+        <div class="hint">${esc(org?.whyYouAreHere || org?.description || "")}</div></div>
       <div style="display:flex; gap:8px; margin-top:8px">
         <button class="btn secondary" id="p-back">Back</button>
         <button class="btn" id="p-go" ${state.name.trim() ? "" : "disabled"}>Choose an opening</button>
@@ -1525,6 +1570,7 @@ function renderCreate() {
     const nm = document.getElementById("p-name");
     nm.oninput = () => { state.name = nm.value; document.getElementById("p-go").disabled = !state.name.trim(); };
     document.getElementById("p-form").oninput = e => { state.form = e.target.value; };
+    document.getElementById("p-origin").onchange = e => { state.origin = e.target.value; renderPrologueIntro(); };
     document.getElementById("p-back").onclick = () => renderCreateDoor();
     document.getElementById("p-go").onclick = () => { state.name = nm.value.trim(); state.form = document.getElementById("p-form").value.trim(); renderPrologueOpening(); };
   }

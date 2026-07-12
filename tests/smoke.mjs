@@ -2313,6 +2313,14 @@ await (async () => {
   // a real prologue playthrough: the tags produce a coherent, self-consistent ring position
   const played = crystallizeDomains({ stillhold: 2, marcher: 1, verist: 1 }, idx);
   check("SNG-062: a played spread crystallizes a valid primary with a non-antipode secondary", played?.primary === "stillhold" && played.secondary && played.secondary !== antipodeOf("stillhold", idx));
+
+  // SNG-063: the ability list is FILTERED by domains — the antipode is never offered, the primary is
+  const domainsUV = { primary: "umbral", secondary: "veilwright", tertiary: "abyssal" };
+  const l1 = Object.values(tf).flat ? [] : []; // (abilities live in ability files; assert the gate directly)
+  const antipodeOffered = domainAccess({ id: "x", tradition: "blazeborn", levelReq: 1 }, 1, domainsUV, idx).allowed;
+  const primaryOffered = domainAccess({ id: "y", tradition: "umbral", levelReq: 1 }, 1, domainsUV, idx).allowed;
+  const folkOffered = domainAccess({ id: "z", tradition: "radiant_folk", levelReq: 1 }, 1, domainsUV, idx).allowed;
+  check("SNG-063: a domain-filtered starting list excludes the antipode, keeps primary + folk", antipodeOffered === false && primaryOffered === true && folkOffered === true);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

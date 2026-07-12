@@ -113,6 +113,9 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
  *  valley_craft natives; harmonic/radiant origins are their own class. Precursor
  *  is never home (learned-only), so it always pays the cross-class multiplier. */
 export function homeClassOf(character) {
+  // SNG-063: a character's people is authored (character.nativeTradition from origins.json). Prefer
+  // it; fall back to the legacy origin ids so old saves and the domain model both keep working.
+  if (character?.nativeTradition) return character.nativeTradition;
   const o = character?.origin;
   if (o === "harmonic") return "harmonic";
   if (o === "radiant") return "radiant";

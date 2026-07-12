@@ -1225,3 +1225,44 @@ The GM is the only party that knows whether a scene is *"get past the guard, cro
 **Erik test:** "Play a dozen ordinary turns — verify the Plan hint does NOT appear. Then walk into something with real staged obstacles — verify it does, once, and stays gone after you dismiss it."
 
 *Aevi's note for the record: SNG-043 Part A shipped exactly as specced and Erik still has the bug. This is a spec defect, not a build defect. It is also exactly what ROUND 2 exists to catch — and Part A skipped it, because I called it "a one-function tune."*
+---
+
+## SNG-078 — Balance sensitivity harness (level 1→100) + ⚠️ A MAJOR FINDING
+
+**Erik-directed 2026-07-12:** *"when can we do sensitivity analysis on all the parts of the game, taken from lvl 1 to 100?"* ✍️ Aevi (first-order analytic pass — DONE, below) + 🔧 CCode (the harness).
+
+### ⚠️ FIRST-ORDER FINDING (analytic, computed from `resolution.json` @ HEAD — this is arithmetic, not opinion)
+
+**The game ceilings out at level 5.**
+
+| Difficulty | Hits the 95% clamp at |
+|---|---|
+| Routine (0) | **level 2** |
+| Hard (15) | **level 3** |
+| Very hard (30) | **level 5** |
+
+**Cause:** `attributeMultiplier: 20` against a soft cap of 4 → **an attribute of 4 is 80% chance ON ITS OWN**, before skill (+10/pt), ability rank (+5), equipment (+10), companion (+10), or spectral fit (+25). Difficulty tops out at **30**. So the hardest thing the GM can pose is beaten by a level-3 character, and a level-5 character with gear, a companion and good alignment sits at 95% on *very hard* with **~45 points of unused headroom.**
+
+**And level 100 does not exist:** `subAttributeCap: 20` · `maxAbilityRank: 3` → **mechanical growth stops around level 20.** Beyond that the level number rises and nothing changes.
+
+**The honest caveat — where tension DOES still live:** it comes entirely from **modifiers, not the curve**. Acting *against* a place's grain (−25), exhausted (−10), on a *novel* action (−15) takes a 95 down to 45. **So the game is tense when you are misaligned, tired, or reaching past what you know — and a formality otherwise.** That is a defensible design. It is probably not the one Erik chose.
+
+**⛔ ERIK'S CALL (do not tune without him):** possible levers — lower `attributeMultiplier` (20 → ~8–10) · widen/scale the difficulty band (0/15/30 is too narrow to matter) · scale challenge with level · make the soft cap bite harder. **Aevi will not touch balance numbers unilaterally.**
+
+### The harness (CCode) — what analytic math CANNOT see
+The engine is pure and headless-testable (Law: `engine/*` is pure logic). A sim harness is cheap and becomes a **permanent regression gate**, like `check_pipeline` but for balance.
+
+**`tests/balance_sim.mjs` — simulate archetypal builds from level 1 → the true cap, and report:**
+1. **Success-chance distribution** per level × difficulty × alignment (aligned / neutral / against-grain), Monte-Carlo over the d100 — *where does the game actually stop being uncertain?*
+2. **Energy economy.** Max 100 · action 5 · abilities 4–15 · **recovery is ACTIVE-ONLY** (breather +10/1h, sleep +40/8h, meditation 10+2×attunement) · **no passive regen** (`regenPerRest` is a dead key — CCode's §22 finding). *Can a character sustain a scene? A day? Is the ability-cost curve survivable at high rank?*
+3. **XP pacing.** `xpPerLevel: 100` → level 100 = 10,000 xp ≈ **2,000 rolled actions**. *What is the real level after 10 / 50 / 200 hours of play? What is the effective cap?*
+4. **The discovery bonus.** `+20` replacing `−15` is a **35-point swing.** *(Erik parked this for exactly this analysis.)* **Does a discovered technique simply ceiling out?** — the analytic pass says almost certainly yes.
+5. **Domain access economics.** Does the distance-penalty ever make an out-of-domain ability worth taking? Are tier IV–V capstones reachable within the real level cap?
+6. **Combination viability.** Are the 44 combos reachable? Are the cross-pole braids (the moral centerpiece) actually attainable in a normal campaign, or theoretical?
+7. **Encounter/danger scaling.** `dangerLevel` 1–5 vs a character who auto-succeeds from level 5 — *is any encounter ever a threat?*
+
+**Output:** a markdown report + a machine-readable summary, run under `npm test` as a **regression gate**: fail if the ceiling-out level moves, so nobody silently re-breaks the curve.
+
+**Erik test:** "Run the harness — see, in one table, at what level each difficulty stops mattering, whether energy constrains anything, and how long a real campaign takes to hit the cap."
+
+*This is the single highest-leverage engineering task left. Every balance conversation until now has been vibes; this makes it arithmetic.*

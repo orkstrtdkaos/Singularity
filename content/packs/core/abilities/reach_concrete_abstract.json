@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_concrete_abstract",
+  "gated": "learned",
+  "note": "Crafts of The Given Land/The Pattern Reach (concrete_abstract axis). THINGCRAFT is the concrete-pole craft of the Masons of the Given — only what can be touched is real; the world's great builders and its great skeptics. FORMCRAFT is the abstract-pole craft of the Figurists — pattern, symbol and idea, who hold matter to be the coarsest layer of the real. This is the axis the GM's own narrative REGISTER rides on (SNG-048): concrete places speak plainly, abstract places earn their poetry. Authored by Aevi, SNG-054.",
+  "abilities": [
+    {
+      "id": "thingcraft",
+      "name": "Thingcraft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_concrete_abstract",
+      "attribute": "physical",
+      "axes": {
+        "concrete_abstract": -0.5,
+        "mechanical_spiritual": -0.2,
+        "body_mind": -0.2
+      },
+      "functions": [
+        "mend",
+        "shield",
+        "break"
+      ],
+      "narrationHints": "He puts his hand on the stone and the stone tells him the truth, because stone does not do anything else.",
+      "description": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
+      "notFor": "Symbol, glamour, and argument (Formcraft's country); anything that requires believing in what cannot be weighed.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Weighed Thing",
+          "grants": "Know a thing's true weight, material, soundness and worth by touch — no lie of appearance survives your hand.",
+          "cannot": "It tells you what a thing IS, never what it means or what it is for."
+        },
+        {
+          "rank": 2,
+          "name": "The Set Stone",
+          "grants": "Set a thing so it STAYS — a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
+          "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it."
+        },
+        {
+          "rank": 3,
+          "name": "The Denial",
+          "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
+          "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "FIGHT",
+        "INVESTIGATE"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "INVESTIGATE": 2
+      }
+    },
+    {
+      "id": "stone_read",
+      "name": "Stone-Read",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_concrete_abstract",
+      "attribute": "physical",
+      "axes": {
+        "concrete_abstract": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The material gives up its history under his palm.",
+      "description": "Read a material's truth by touch — the first gift of the Given.",
+      "notFor": "Reading meaning or intent; anything not physically present.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Stone-Read",
+          "grants": "Know what a material truly is, and whether it is sound.",
+          "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Grain",
+          "grants": "Read a thing's history in its material — the stresses it took, the repairs, the day it nearly broke.",
+          "cannot": "History, not future. It reports what happened, not what happens next."
+        },
+        {
+          "rank": 3,
+          "name": "The Given Word",
+          "grants": "The material of a whole structure is legible at once — every fault, every honest joint, every lie the builder told.",
+          "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "EXPLORE": 2
+      }
+    },
+    {
+      "id": "the_plain_fact",
+      "name": "The Plain Fact",
+      "levelReq": 3,
+      "energyCost": 5,
+      "powerSystem": "reach_concrete_abstract",
+      "attribute": "physical",
+      "axes": {
+        "concrete_abstract": -0.4,
+        "falsehood_truth": 0.2
+      },
+      "functions": [
+        "break",
+        "reveal"
+      ],
+      "narrationHints": "He says the flat thing and the beautiful argument in the room dies of it.",
+      "description": "Reduce a soaring abstraction to the plain touchable fact under it — and everyone present sees the fact.",
+      "notFor": "Anything that is genuinely NOT reducible to a touchable fact. Some things aren't, and the Masons' great blindness is not believing that.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Plain Fact",
+          "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
+          "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails."
+        },
+        {
+          "rank": 2,
+          "name": "The Bedrock",
+          "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis — and if it has none, that becomes visible to all.",
+          "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation."
+        },
+        {
+          "rank": 3,
+          "name": "The Only Real",
+          "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase — no symbol acts, no figure walks.",
+          "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "INVESTIGATE": 2
+      }
+    },
+    {
+      "id": "formcraft",
+      "name": "Formcraft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_concrete_abstract",
+      "attribute": "mental",
+      "axes": {
+        "concrete_abstract": 0.5,
+        "mechanical_spiritual": 0.2
+      },
+      "functions": [
+        "bind",
+        "reveal",
+        "conceal"
+      ],
+      "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
+      "description": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
+      "notFor": "Anything that requires the touchable to be primary; the Masons' Denial defeats it outright.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Pattern Eye",
+          "grants": "See the pattern, symbol, or structure a thing is an instance OF — the form behind the fact.",
+          "cannot": "Seeing a form does not give you power over its instance. Not yet."
+        },
+        {
+          "rank": 2,
+          "name": "The Figure",
+          "grants": "Make a symbol that ACTS — a mark, a shape, a figure that does in the world what it means.",
+          "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised."
+        },
+        {
+          "rank": 3,
+          "name": "The Argument Made Real",
+          "grants": "Build an idea into the world so completely that it becomes a fact others must move around — a rule, a boundary, a truth-in-effect.",
+          "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SOCIAL": 2
+      }
+    },
+    {
+      "id": "pattern_sense",
+      "name": "Pattern-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_concrete_abstract",
+      "attribute": "mental",
+      "axes": {
+        "concrete_abstract": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The repetition surfaces — this has a shape, and the shape has a name.",
+      "description": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+      "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Pattern-Sense",
+          "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
+          "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly."
+        },
+        {
+          "rank": 2,
+          "name": "The Named Form",
+          "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
+          "cannot": "Once you can see it everywhere, you will see it where it is not."
+        },
+        {
+          "rank": 3,
+          "name": "The Formal Reach",
+          "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
+          "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3
+      }
+    },
+    {
+      "id": "the_walking_figure",
+      "name": "The Walking Figure",
+      "levelReq": 3,
+      "energyCost": 7,
+      "powerSystem": "reach_concrete_abstract",
+      "attribute": "mental",
+      "axes": {
+        "concrete_abstract": 0.4,
+        "chaos_order": 0.1
+      },
+      "functions": [
+        "bind",
+        "strike",
+        "conceal"
+      ],
+      "narrationHints": "The mark she drew stands up off the wall and goes to do the thing it means.",
+      "description": "Send a made figure to act at a distance — a symbol given errand and enough form to run it.",
+      "notFor": "Making a figure that means what you did not mean; the figure will do the second thing, not the first.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Walking Figure",
+          "grants": "Send a figure to carry a meaning somewhere — a warning, a ward, a binding — and it arrives and acts.",
+          "cannot": "It acts once and it is spent. And it acts on what it MEANS."
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Figure",
+          "grants": "The figure persists — it keeps meaning, keeps acting, keeps the ward or the rule in force after you have gone.",
+          "cannot": "A standing figure is a rule nobody is supervising. It will apply itself to cases you never imagined."
+        },
+        {
+          "rank": 3,
+          "name": "The Figure That Learns",
+          "grants": "The figure adapts its meaning to circumstance — it keeps doing what you MEANT even where you did not foresee.",
+          "cannot": "Now it is deciding what you meant. The Figurists' oldest disasters all begin with a figure that was quite sure it understood."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SOCIAL",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "SOCIAL": 3
+      }
+    }
+  ]
+}

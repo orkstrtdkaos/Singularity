@@ -226,52 +226,79 @@
       {
         "summary": "Pell describes the north wood from memory — wet ground, a granite shelf, boar likely in the lower section.",
         "narration": "The hand-axe can wait another few minutes. You're working the second skinner along the flat stone when you pitch your voice across the shop..."
+      },
+      {
+        "summary": "Pell maps the north wood from memory — solo hunting, the wet lower section, the granite shelf as a natural backstop.",
+        "narration": "You set the second skinner on the bench and look over at Pell, keeping your voice easy — the question landing between strokes of her file, not against them.\n\nShe answers without stopping work. \"Lower section, mostly. Where the ground goes soft from the slope springs — you can read the trails better there, soil takes a print.\" A pause while she repositions the piece in the vise. \"Alone, those years. Forge wasn't busy enough to need a second hand, so I took a bow out Thursday mornings when the light was right.\" The file resumes. \"Deer, mostly. A few good days on turkey. Went as far north as that granite shelf I mentioned — twice, maybe three times. Ate lunch up there and came back down the east trail.\"\n\nHuginn shifts on the hook-row, one foot to the other, and Pell glances at the bird without comment — the third time she's done that, you've noticed, but she's never addressed it.\n\n\"Alone,\" she says again, and it doesn't sound like a complaint or a boast, just a fact she's accounting for. \"Different thing, three of us going in with a spear. The lower section will hear us coming. Boar sounder's probably bedded in the wet ground by the springs — that's where the rooting's best. We push north quiet and let the shelf work as a backstop if something goes wrong.\""
       }
     ],
     "lastTurn": {
-      "narration": "The hand-axe can wait another few minutes. You're working the second skinner along the flat stone when you pitch your voice across the shop...",
-      "sceneSummary": "Pell describes the north wood from memory — wet ground, a granite shelf, boar likely in the lower section.",
+      "narration": "You set the second skinner on the bench and look over at Pell, keeping your voice easy — the question landing between strokes of her file, not against them.\n\nShe answers without stopping work. \"Lower section, mostly. Where the ground goes soft from the slope springs — you can read the trails better there, soil takes a print.\" A pause while she repositions the piece in the vise. \"Alone, those years. Forge wasn't busy enough to need a second hand, so I took a bow out Thursday mornings when the light was right.\" The file resumes. \"Deer, mostly. A few good days on turkey. Went as far north as that granite shelf I mentioned — twice, maybe three times. Ate lunch up there and came back down the east trail.\"\n\nHuginn shifts on the hook-row, one foot to the other, and Pell glances at the bird without comment — the third time she's done that, you've noticed, but she's never addressed it.\n\n\"Alone,\" she says again, and it doesn't sound like a complaint or a boast, just a fact she's accounting for. \"Different thing, three of us going in with a spear. The lower section will hear us coming. Boar sounder's probably bedded in the wet ground by the springs — that's where the rooting's best. We push north quiet and let the shelf work as a backstop if something goes wrong.\"",
+      "sceneSummary": "Pell maps the north wood from memory — solo hunting, the wet lower section, the granite shelf as a natural backstop.",
       "choices": [
         {
-          "label": "Assess the hand-axe hairline before touching it with a tool",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask what season she stopped — and whether something specific drove her back to the forge full-time.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "assess"
+            "converse",
+            "learn"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Move straight to the froe's sprung collar — re-seat it if you can",
+          "label": "Ask about the east trail she mentioned — is it wide enough for three, or will we be going in single file?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "spectrumId": -0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Pick up the hand-axe and assess the hairline in the eye — figure out whether it needs to be set aside or can be worked safely.",
           "attribute": "practical",
           "subAttribute": "craft",
+          "axes": {
+            "spectrumId": -0.5
+          },
           "difficulty": 15,
           "intentTags": [
-            "repair",
+            "assess",
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Pell how much Corvin actually understands about what a sounder can do",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Your own action",
+          "label": "Use Order-Sense on the hand-axe — read the hairline's structure before you touch it with a tool.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "spectrumId": -0.3
+          },
           "difficulty": 0,
-          "intentTags": [],
-          "trivial": true
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         }
       ],
       "scene": {
@@ -279,11 +306,11 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Back at her own vise, file moving in short precise strokes, resumed after answering."
+            "state": "Back at her own vise, file moving in short precise strokes, answering without stopping work."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the iron hook-row, shifted weight once, watching the lane."
+            "state": "Shifted weight on the hook-row — watching Pell, then the lane, unhurried."
           }
         ],
         "objects": [
@@ -296,13 +323,14 @@
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
           "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil-wiped), light point"
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oiled), light"
         ],
         "threads": [
           "Hand-axe hairline in the eye — needs assessment before edge work",
           "Froe sprung collar — last structural piece in the backlog",
           "Corvin still to be found and invited — east furlong, not yet contacted",
-          "Hunt departs once backlog is clear"
+          "Hunt departs once backlog is clear",
+          "Pell's east trail — mentioned but not detailed"
         ]
       },
       "npcUpdates": [
@@ -310,26 +338,31 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that the granite shelf is bad ground to be caught between boar and.",
+          "role": "Village blacksmith, Millbrook — south lane forge",
+          "note": "Described her north-wood hunting history — solo, lower section, wet ground by the slope springs, turkey and deer. Got as far as the granite shelf two or three times. Noted the east trail as the return route. Named the wet lower section as the likely boar bedding ground.",
           "learned": [
-            "Stopped hunting the north meadows four to five years ago when the forge had enough work",
-            "The north wood's lower section stays wet from slope-fed springs — prime rooting ground for boar",
-            "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south",
-            "The boar sounder is likely working the wet lower section, not the granite shelf"
+            "Hunted the north wood alone, on Thursday mornings when forge work was slow",
+            "Stayed mostly to the lower section where soil takes a print — good trail-reading",
+            "Reached the granite shelf two or three times; used the east trail to come back down",
+            "Assesses the boar sounder as likely bedded in wet ground near the slope springs",
+            "Recommends using the shelf as a natural backstop if the push goes wrong"
           ],
           "skillsObserved": [
-            "practical field knowledge",
-            "honest risk assessment"
+            "field tactics",
+            "terrain memory",
+            "honest self-assessment"
           ],
-          "statusNote": "At her forge on the south lane — working her own backlog, file in hand."
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her forge on the south lane — working her vise, engaged but not interrupted."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "north-wood",
-          "label": "The North Wood",
+          "topic": "north-wood-terrain",
+          "label": "North Wood — Terrain & Access",
           "kind": "place",
-          "fact": "Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite shelf is bad ground to be caught between boar and.",
+          "fact": "Pell hunted the lower north wood solo for several years — wet ground from slope springs, best trail-reading in the valley floor section. A granite shelf sits roughly a quarter-mile north of the fence line; the east trail runs back down from it. The sounder is likely bedded in the wet lower section where rooting is best. The shelf works as a natural backstop if a push goes wrong.",
           "links": [
             "millbrook",
             "aldric-provisioning-deal",
@@ -340,7 +373,7 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief working conversation at the sharpening station"
+        "why": "A brief exchange mid-work — a question and a considered answer."
       }
     },
     "sceneState": {
@@ -348,11 +381,11 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Back at her own vise, file moving in short precise strokes, resumed after answering."
+          "state": "Back at her own vise, file moving in short precise strokes, answering without stopping work."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the iron hook-row, shifted weight once, watching the lane."
+          "state": "Shifted weight on the hook-row — watching Pell, then the lane, unhurried."
         }
       ],
       "objects": [
@@ -365,13 +398,14 @@
         "Iron hooks in rows along the shop wall",
         "Coils of heavier chain (full)",
         "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-        "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil-"
+        "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oile"
       ],
       "threads": [
         "Hand-axe hairline in the eye — needs assessment before edge work",
         "Froe sprung collar — last structural piece in the backlog",
         "Corvin still to be found and invited — east furlong, not yet contacted",
-        "Hunt departs once backlog is clear"
+        "Hunt departs once backlog is clear",
+        "Pell's east trail — mentioned but not detailed"
       ]
     }
   },
@@ -512,7 +546,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Received Aldric's name from Silas without visible change of expression — confirmation accepted. Now waiting for the ask.",
         "[d1] Silas admired her craft and asked if she hunts — she confirmed a past hunting life, eased her posture, and opened the transaction. Now waiting to hear what he needs.",
         "[d1] Silas offered forge-labor in exchange for hunting company north of the village. Pell absorbed the squall without comment, named her two pressing problems (edge-work backlog, snare ",
         "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe",
@@ -521,28 +554,29 @@
         "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look",
         "[d1] Agreed to the three-way hunt arrangement — modification on the light point at cost, no margin, on the condition a capable person is beside Corvin in the north wood. Committed to wa",
         "[d1] Working her own vise in comfortable parallel — the arrangement settled, no need to manage it.",
-        "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that "
+        "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that ",
+        "[d1] Described her north-wood hunting history — solo, lower section, wet ground by the slope springs, turkey and deer. Got as far as the granite shelf two or three times. Noted the east"
       ],
       "knownFacts": [
-        "Corvin claims there's a boar sounder working the north wood — he wants to be the one who handles it",
-        "The modification Silas described (thickened sleeve, reinforced spine) is work Pell can do",
-        "Corvin's coin may not cover both the point and the modification",
         "Corvin being brave in the wrong moment is a specific concern — she has read him carefully enough to name it as a risk",
         "She supplies the modification at cost when the safety calculus changes — practical ethics, not charity",
         "Stopped hunting the north meadows four to five years ago when the forge had enough work",
         "The north wood's lower section stays wet from slope-fed springs — prime rooting ground for boar",
-        "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south"
+        "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south",
+        "Hunted the north wood alone, on Thursday mornings when forge work was slow",
+        "Stayed mostly to the lower section where soil takes a print — good trail-reading",
+        "Reached the granite shelf two or three times; used the east trail to come back down"
       ],
       "skillsObserved": [
-        "accurate practical assessment",
-        "honest accounting of customer limitations",
-        "risk assessment",
         "practical negotiation",
         "practical field knowledge",
-        "honest risk assessment"
+        "honest risk assessment",
+        "field tactics",
+        "terrain memory",
+        "honest self-assessment"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — working her own backlog, file in hand.",
+      "statusNote": "At her forge on the south lane — working her vise, engaged but not interrupted.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -654,7 +688,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-12T21:49:23.868Z",
+    "lastSharedReadAt": "2026-07-12T23:20:32.713Z",
     "lastTickWorldDay": 12,
     "lastCanonWorldDay": 12
   },
@@ -890,7 +924,8 @@
         "label": "The North Wood",
         "kind": "place",
         "facts": [
-          "[d1] Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite sh"
+          "[d1] Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite sh",
+          "[d1] Pell hunted the lower north wood solo for several years — wet ground from slope springs, best trail-reading in the valley floor section. A granite shelf sits roughly a quarter-mile north of the fence "
         ],
         "links": [
           "millbrook",
@@ -898,25 +933,27 @@
           "pell",
           "corvin"
         ],
-        "aliases": [],
+        "aliases": [
+          "North Wood — Terrain & Access"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 15.925885954582919,
-    "cerebral": 6.481364540246448,
-    "social": 17.3026162166754,
-    "generous": 7.452261956906743,
-    "cautious": 4.7382360712365585
+    "strategic": 16.846256524810002,
+    "cerebral": 7.448957717545215,
+    "social": 17.21610313559202,
+    "generous": 7.415000647122209,
+    "cautious": 4.714544890880376
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "good_samaritan"
   ],
-  "actionCount": 22,
+  "actionCount": 23,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -938,8 +975,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783898320469,
-  "rev": 40,
+  "updatedAt": 1783898561982,
+  "rev": 43,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

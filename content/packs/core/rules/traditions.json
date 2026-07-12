@@ -54,12 +54,48 @@
       "opposite": "blazeborn",
       "adjacent": [
         {
+          "traditionId": "threnodist",
+          "steps": 1
+        },
+        {
           "traditionId": "veilwright",
-          "sharedLeans": [
-            "falsehood"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 0,
+        "degrees": 0.0,
+        "neighbors": [
+          "threnodist",
+          "veilwright"
+        ],
+        "antipode": "blazeborn"
+      },
+      "distances": {
+        "veilwright": 1,
+        "abyssal": 2,
+        "churnfolk": 3,
+        "unmaker": 4,
+        "ashwarden": 5,
+        "marcher": 6,
+        "somatic": 7,
+        "mason": 8,
+        "horizon": 9,
+        "enginewright": 10,
+        "syllogist": 11,
+        "blazeborn": 12,
+        "verist": 11,
+        "seraphic": 10,
+        "lattice": 9,
+        "wright": 8,
+        "rootkin": 7,
+        "stillhold": 6,
+        "cogitant": 5,
+        "figurist": 4,
+        "hourkeeper": 3,
+        "numinous": 2,
+        "threnodist": 1
+      }
     },
     {
       "traditionId": "blazeborn",
@@ -92,54 +128,48 @@
       "opposite": "umbral",
       "adjacent": [
         {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
           "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         },
         {
           "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 12,
+        "degrees": 180.0,
+        "neighbors": [
+          "syllogist",
+          "verist"
+        ],
+        "antipode": "umbral"
+      },
+      "distances": {
+        "umbral": 12,
+        "veilwright": 11,
+        "abyssal": 10,
+        "churnfolk": 9,
+        "unmaker": 8,
+        "ashwarden": 7,
+        "marcher": 6,
+        "somatic": 5,
+        "mason": 4,
+        "horizon": 3,
+        "enginewright": 2,
+        "syllogist": 1,
+        "verist": 1,
+        "seraphic": 2,
+        "lattice": 3,
+        "wright": 4,
+        "rootkin": 5,
+        "stillhold": 6,
+        "cogitant": 7,
+        "figurist": 8,
+        "hourkeeper": 9,
+        "numinous": 10,
+        "threnodist": 11
+      }
     },
     {
       "traditionId": "rootkin",
@@ -173,24 +203,48 @@
       "opposite": "ashwarden",
       "adjacent": [
         {
-          "traditionId": "churnfolk",
-          "sharedLeans": [
-            "creation"
-          ]
-        },
-        {
-          "traditionId": "threnodist",
-          "sharedLeans": [
-            "life"
-          ]
-        },
-        {
           "traditionId": "wright",
-          "sharedLeans": [
-            "creation"
-          ]
+          "steps": 1
+        },
+        {
+          "traditionId": "stillhold",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 17,
+        "degrees": 255.0,
+        "neighbors": [
+          "wright",
+          "stillhold"
+        ],
+        "antipode": "ashwarden"
+      },
+      "distances": {
+        "umbral": 7,
+        "veilwright": 8,
+        "abyssal": 9,
+        "churnfolk": 10,
+        "unmaker": 11,
+        "ashwarden": 12,
+        "marcher": 11,
+        "somatic": 10,
+        "mason": 9,
+        "horizon": 8,
+        "enginewright": 7,
+        "syllogist": 6,
+        "blazeborn": 5,
+        "verist": 4,
+        "seraphic": 3,
+        "lattice": 2,
+        "wright": 1,
+        "stillhold": 1,
+        "cogitant": 2,
+        "figurist": 3,
+        "hourkeeper": 4,
+        "numinous": 5,
+        "threnodist": 6
+      }
     },
     {
       "traditionId": "ashwarden",
@@ -223,54 +277,48 @@
       "opposite": "rootkin",
       "adjacent": [
         {
-          "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "unmaker",
+          "steps": 1
         },
         {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "marcher",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 5,
+        "degrees": 75.0,
+        "neighbors": [
+          "unmaker",
+          "marcher"
+        ],
+        "antipode": "rootkin"
+      },
+      "distances": {
+        "umbral": 5,
+        "veilwright": 4,
+        "abyssal": 3,
+        "churnfolk": 2,
+        "unmaker": 1,
+        "marcher": 1,
+        "somatic": 2,
+        "mason": 3,
+        "horizon": 4,
+        "enginewright": 5,
+        "syllogist": 6,
+        "blazeborn": 7,
+        "verist": 8,
+        "seraphic": 9,
+        "lattice": 10,
+        "wright": 11,
+        "rootkin": 12,
+        "stillhold": 11,
+        "cogitant": 10,
+        "figurist": 9,
+        "hourkeeper": 8,
+        "numinous": 7,
+        "threnodist": 6
+      }
     },
     {
       "traditionId": "marcher",
@@ -304,18 +352,48 @@
       "opposite": "stillhold",
       "adjacent": [
         {
-          "traditionId": "mason",
-          "sharedLeans": [
-            "body"
-          ]
+          "traditionId": "ashwarden",
+          "steps": 1
         },
         {
           "traditionId": "somatic",
-          "sharedLeans": [
-            "body"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 6,
+        "degrees": 90.0,
+        "neighbors": [
+          "ashwarden",
+          "somatic"
+        ],
+        "antipode": "stillhold"
+      },
+      "distances": {
+        "umbral": 6,
+        "veilwright": 5,
+        "abyssal": 4,
+        "churnfolk": 3,
+        "unmaker": 2,
+        "ashwarden": 1,
+        "somatic": 1,
+        "mason": 2,
+        "horizon": 3,
+        "enginewright": 4,
+        "syllogist": 5,
+        "blazeborn": 6,
+        "verist": 7,
+        "seraphic": 8,
+        "lattice": 9,
+        "wright": 10,
+        "rootkin": 11,
+        "stillhold": 12,
+        "cogitant": 11,
+        "figurist": 10,
+        "hourkeeper": 9,
+        "numinous": 8,
+        "threnodist": 7
+      }
     },
     {
       "traditionId": "stillhold",
@@ -349,54 +427,48 @@
       "opposite": "marcher",
       "adjacent": [
         {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "rootkin",
+          "steps": 1
         },
         {
-          "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "cogitant",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 18,
+        "degrees": 270.0,
+        "neighbors": [
+          "rootkin",
+          "cogitant"
+        ],
+        "antipode": "marcher"
+      },
+      "distances": {
+        "umbral": 6,
+        "veilwright": 7,
+        "abyssal": 8,
+        "churnfolk": 9,
+        "unmaker": 10,
+        "ashwarden": 11,
+        "marcher": 12,
+        "somatic": 11,
+        "mason": 10,
+        "horizon": 9,
+        "enginewright": 8,
+        "syllogist": 7,
+        "blazeborn": 6,
+        "verist": 5,
+        "seraphic": 4,
+        "lattice": 3,
+        "wright": 2,
+        "rootkin": 1,
+        "cogitant": 1,
+        "figurist": 2,
+        "hourkeeper": 3,
+        "numinous": 4,
+        "threnodist": 5
+      }
     },
     {
       "traditionId": "somatic",
@@ -432,19 +504,48 @@
       "opposite": "cogitant",
       "adjacent": [
         {
-          "traditionId": "mason",
-          "sharedLeans": [
-            "body",
-            "concrete"
-          ]
+          "traditionId": "marcher",
+          "steps": 1
         },
         {
-          "traditionId": "marcher",
-          "sharedLeans": [
-            "body"
-          ]
+          "traditionId": "mason",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 7,
+        "degrees": 105.0,
+        "neighbors": [
+          "marcher",
+          "mason"
+        ],
+        "antipode": "cogitant"
+      },
+      "distances": {
+        "umbral": 7,
+        "veilwright": 6,
+        "abyssal": 5,
+        "churnfolk": 4,
+        "unmaker": 3,
+        "ashwarden": 2,
+        "marcher": 1,
+        "mason": 1,
+        "horizon": 2,
+        "enginewright": 3,
+        "syllogist": 4,
+        "blazeborn": 5,
+        "verist": 6,
+        "seraphic": 7,
+        "lattice": 8,
+        "wright": 9,
+        "rootkin": 10,
+        "stillhold": 11,
+        "cogitant": 12,
+        "figurist": 11,
+        "hourkeeper": 10,
+        "numinous": 9,
+        "threnodist": 8
+      }
     },
     {
       "traditionId": "cogitant",
@@ -477,12 +578,48 @@
       "opposite": "somatic",
       "adjacent": [
         {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "logical"
-          ]
+          "traditionId": "stillhold",
+          "steps": 1
+        },
+        {
+          "traditionId": "figurist",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 19,
+        "degrees": 285.0,
+        "neighbors": [
+          "stillhold",
+          "figurist"
+        ],
+        "antipode": "somatic"
+      },
+      "distances": {
+        "umbral": 5,
+        "veilwright": 6,
+        "abyssal": 7,
+        "churnfolk": 8,
+        "unmaker": 9,
+        "ashwarden": 10,
+        "marcher": 11,
+        "somatic": 12,
+        "mason": 11,
+        "horizon": 10,
+        "enginewright": 9,
+        "syllogist": 8,
+        "blazeborn": 7,
+        "verist": 6,
+        "seraphic": 5,
+        "lattice": 4,
+        "wright": 3,
+        "rootkin": 2,
+        "stillhold": 1,
+        "figurist": 1,
+        "hourkeeper": 2,
+        "numinous": 3,
+        "threnodist": 4
+      }
     },
     {
       "traditionId": "churnfolk",
@@ -516,37 +653,48 @@
       "opposite": "lattice",
       "adjacent": [
         {
-          "traditionId": "wright",
-          "sharedLeans": [
-            "chaos",
-            "creation"
-          ]
-        },
-        {
           "traditionId": "abyssal",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "horizon",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "rootkin",
-          "sharedLeans": [
-            "creation"
-          ]
+          "steps": 1
         },
         {
           "traditionId": "unmaker",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 3,
+        "degrees": 45.0,
+        "neighbors": [
+          "abyssal",
+          "unmaker"
+        ],
+        "antipode": "lattice"
+      },
+      "distances": {
+        "umbral": 3,
+        "veilwright": 2,
+        "abyssal": 1,
+        "unmaker": 1,
+        "ashwarden": 2,
+        "marcher": 3,
+        "somatic": 4,
+        "mason": 5,
+        "horizon": 6,
+        "enginewright": 7,
+        "syllogist": 8,
+        "blazeborn": 9,
+        "verist": 10,
+        "seraphic": 11,
+        "lattice": 12,
+        "wright": 11,
+        "rootkin": 10,
+        "stillhold": 9,
+        "cogitant": 8,
+        "figurist": 7,
+        "hourkeeper": 6,
+        "numinous": 5,
+        "threnodist": 4
+      }
     },
     {
       "traditionId": "lattice",
@@ -580,55 +728,48 @@
       "opposite": "churnfolk",
       "adjacent": [
         {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "mechanical",
-            "order"
-          ]
-        },
-        {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
           "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         },
         {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "wright",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 15,
+        "degrees": 225.0,
+        "neighbors": [
+          "seraphic",
+          "wright"
+        ],
+        "antipode": "churnfolk"
+      },
+      "distances": {
+        "umbral": 9,
+        "veilwright": 10,
+        "abyssal": 11,
+        "churnfolk": 12,
+        "unmaker": 11,
+        "ashwarden": 10,
+        "marcher": 9,
+        "somatic": 8,
+        "mason": 7,
+        "horizon": 6,
+        "enginewright": 5,
+        "syllogist": 4,
+        "blazeborn": 3,
+        "verist": 2,
+        "seraphic": 1,
+        "wright": 1,
+        "rootkin": 2,
+        "stillhold": 3,
+        "cogitant": 4,
+        "figurist": 5,
+        "hourkeeper": 6,
+        "numinous": 7,
+        "threnodist": 8
+      }
     },
     {
       "traditionId": "enginewright",
@@ -662,55 +803,48 @@
       "opposite": "numinous",
       "adjacent": [
         {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "mechanical",
-            "order"
-          ]
-        },
-        {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "horizon",
+          "steps": 1
         },
         {
           "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 10,
+        "degrees": 150.0,
+        "neighbors": [
+          "horizon",
+          "syllogist"
+        ],
+        "antipode": "numinous"
+      },
+      "distances": {
+        "umbral": 10,
+        "veilwright": 9,
+        "abyssal": 8,
+        "churnfolk": 7,
+        "unmaker": 6,
+        "ashwarden": 5,
+        "marcher": 4,
+        "somatic": 3,
+        "mason": 2,
+        "horizon": 1,
+        "syllogist": 1,
+        "blazeborn": 2,
+        "verist": 3,
+        "seraphic": 4,
+        "lattice": 5,
+        "wright": 6,
+        "rootkin": 7,
+        "stillhold": 8,
+        "cogitant": 9,
+        "figurist": 10,
+        "hourkeeper": 11,
+        "numinous": 12,
+        "threnodist": 11
+      }
     },
     {
       "traditionId": "numinous",
@@ -744,19 +878,48 @@
       "opposite": "enginewright",
       "adjacent": [
         {
-          "traditionId": "figurist",
-          "sharedLeans": [
-            "abstract",
-            "spiritual"
-          ]
+          "traditionId": "hourkeeper",
+          "steps": 1
         },
         {
-          "traditionId": "veilwright",
-          "sharedLeans": [
-            "abstract"
-          ]
+          "traditionId": "threnodist",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 22,
+        "degrees": 330.0,
+        "neighbors": [
+          "hourkeeper",
+          "threnodist"
+        ],
+        "antipode": "enginewright"
+      },
+      "distances": {
+        "umbral": 2,
+        "veilwright": 3,
+        "abyssal": 4,
+        "churnfolk": 5,
+        "unmaker": 6,
+        "ashwarden": 7,
+        "marcher": 8,
+        "somatic": 9,
+        "mason": 10,
+        "horizon": 11,
+        "enginewright": 12,
+        "syllogist": 11,
+        "blazeborn": 10,
+        "verist": 9,
+        "seraphic": 8,
+        "lattice": 7,
+        "wright": 6,
+        "rootkin": 5,
+        "stillhold": 4,
+        "cogitant": 3,
+        "figurist": 2,
+        "hourkeeper": 1,
+        "threnodist": 1
+      }
     },
     {
       "traditionId": "threnodist",
@@ -786,12 +949,48 @@
       "opposite": "syllogist",
       "adjacent": [
         {
-          "traditionId": "rootkin",
-          "sharedLeans": [
-            "life"
-          ]
+          "traditionId": "numinous",
+          "steps": 1
+        },
+        {
+          "traditionId": "umbral",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 23,
+        "degrees": 345.0,
+        "neighbors": [
+          "numinous",
+          "umbral"
+        ],
+        "antipode": "syllogist"
+      },
+      "distances": {
+        "umbral": 1,
+        "veilwright": 2,
+        "abyssal": 3,
+        "churnfolk": 4,
+        "unmaker": 5,
+        "ashwarden": 6,
+        "marcher": 7,
+        "somatic": 8,
+        "mason": 9,
+        "horizon": 10,
+        "enginewright": 11,
+        "syllogist": 12,
+        "blazeborn": 11,
+        "verist": 10,
+        "seraphic": 9,
+        "lattice": 8,
+        "wright": 7,
+        "rootkin": 6,
+        "stillhold": 5,
+        "cogitant": 4,
+        "figurist": 3,
+        "hourkeeper": 2,
+        "numinous": 1
+      }
     },
     {
       "traditionId": "syllogist",
@@ -821,60 +1020,48 @@
       "opposite": "threnodist",
       "adjacent": [
         {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "enginewright",
+          "steps": 1
         },
         {
           "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "cogitant",
-          "sharedLeans": [
-            "logical"
-          ]
-        },
-        {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 11,
+        "degrees": 165.0,
+        "neighbors": [
+          "enginewright",
+          "blazeborn"
+        ],
+        "antipode": "threnodist"
+      },
+      "distances": {
+        "umbral": 11,
+        "veilwright": 10,
+        "abyssal": 9,
+        "churnfolk": 8,
+        "unmaker": 7,
+        "ashwarden": 6,
+        "marcher": 5,
+        "somatic": 4,
+        "mason": 3,
+        "horizon": 2,
+        "enginewright": 1,
+        "blazeborn": 1,
+        "verist": 2,
+        "seraphic": 3,
+        "lattice": 4,
+        "wright": 5,
+        "rootkin": 6,
+        "stillhold": 7,
+        "cogitant": 8,
+        "figurist": 9,
+        "hourkeeper": 10,
+        "numinous": 11,
+        "threnodist": 12
+      }
     },
     {
       "traditionId": "veilwright",
@@ -904,24 +1091,48 @@
       "opposite": "verist",
       "adjacent": [
         {
-          "traditionId": "figurist",
-          "sharedLeans": [
-            "abstract"
-          ]
-        },
-        {
-          "traditionId": "numinous",
-          "sharedLeans": [
-            "abstract"
-          ]
-        },
-        {
           "traditionId": "umbral",
-          "sharedLeans": [
-            "falsehood"
-          ]
+          "steps": 1
+        },
+        {
+          "traditionId": "abyssal",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 1,
+        "degrees": 15.0,
+        "neighbors": [
+          "umbral",
+          "abyssal"
+        ],
+        "antipode": "verist"
+      },
+      "distances": {
+        "umbral": 1,
+        "abyssal": 1,
+        "churnfolk": 2,
+        "unmaker": 3,
+        "ashwarden": 4,
+        "marcher": 5,
+        "somatic": 6,
+        "mason": 7,
+        "horizon": 8,
+        "enginewright": 9,
+        "syllogist": 10,
+        "blazeborn": 11,
+        "verist": 12,
+        "seraphic": 11,
+        "lattice": 10,
+        "wright": 9,
+        "rootkin": 8,
+        "stillhold": 7,
+        "cogitant": 6,
+        "figurist": 5,
+        "hourkeeper": 4,
+        "numinous": 3,
+        "threnodist": 2
+      }
     },
     {
       "traditionId": "verist",
@@ -952,54 +1163,48 @@
       "opposite": "veilwright",
       "adjacent": [
         {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
           "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         },
         {
           "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 13,
+        "degrees": 195.0,
+        "neighbors": [
+          "blazeborn",
+          "seraphic"
+        ],
+        "antipode": "veilwright"
+      },
+      "distances": {
+        "umbral": 11,
+        "veilwright": 12,
+        "abyssal": 11,
+        "churnfolk": 10,
+        "unmaker": 9,
+        "ashwarden": 8,
+        "marcher": 7,
+        "somatic": 6,
+        "mason": 5,
+        "horizon": 4,
+        "enginewright": 3,
+        "syllogist": 2,
+        "blazeborn": 1,
+        "seraphic": 1,
+        "lattice": 2,
+        "wright": 3,
+        "rootkin": 4,
+        "stillhold": 5,
+        "cogitant": 6,
+        "figurist": 7,
+        "hourkeeper": 8,
+        "numinous": 9,
+        "threnodist": 10
+      }
     },
     {
       "traditionId": "abyssal",
@@ -1031,30 +1236,48 @@
       "opposite": "seraphic",
       "adjacent": [
         {
+          "traditionId": "veilwright",
+          "steps": 1
+        },
+        {
           "traditionId": "churnfolk",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "horizon",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "unmaker",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "wright",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 2,
+        "degrees": 30.0,
+        "neighbors": [
+          "veilwright",
+          "churnfolk"
+        ],
+        "antipode": "seraphic"
+      },
+      "distances": {
+        "umbral": 2,
+        "veilwright": 1,
+        "churnfolk": 1,
+        "unmaker": 2,
+        "ashwarden": 3,
+        "marcher": 4,
+        "somatic": 5,
+        "mason": 6,
+        "horizon": 7,
+        "enginewright": 8,
+        "syllogist": 9,
+        "blazeborn": 10,
+        "verist": 11,
+        "seraphic": 12,
+        "lattice": 11,
+        "wright": 10,
+        "rootkin": 9,
+        "stillhold": 8,
+        "cogitant": 7,
+        "figurist": 6,
+        "hourkeeper": 5,
+        "numinous": 4,
+        "threnodist": 3
+      }
     },
     {
       "traditionId": "seraphic",
@@ -1086,54 +1309,48 @@
       "opposite": "abyssal",
       "adjacent": [
         {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "hourkeeper",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "verist",
+          "steps": 1
         },
         {
           "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 14,
+        "degrees": 210.0,
+        "neighbors": [
+          "verist",
+          "lattice"
+        ],
+        "antipode": "abyssal"
+      },
+      "distances": {
+        "umbral": 10,
+        "veilwright": 11,
+        "abyssal": 12,
+        "churnfolk": 11,
+        "unmaker": 10,
+        "ashwarden": 9,
+        "marcher": 8,
+        "somatic": 7,
+        "mason": 6,
+        "horizon": 5,
+        "enginewright": 4,
+        "syllogist": 3,
+        "blazeborn": 2,
+        "verist": 1,
+        "lattice": 1,
+        "wright": 2,
+        "rootkin": 3,
+        "stillhold": 4,
+        "cogitant": 5,
+        "figurist": 6,
+        "hourkeeper": 7,
+        "numinous": 8,
+        "threnodist": 9
+      }
     },
     {
       "traditionId": "mason",
@@ -1166,18 +1383,47 @@
       "adjacent": [
         {
           "traditionId": "somatic",
-          "sharedLeans": [
-            "body",
-            "concrete"
-          ]
+          "steps": 1
         },
         {
-          "traditionId": "marcher",
-          "sharedLeans": [
-            "body"
-          ]
+          "traditionId": "horizon",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 8,
+        "degrees": 120.0,
+        "neighbors": [
+          "somatic",
+          "horizon"
+        ],
+        "antipode": "figurist"
+      },
+      "distances": {
+        "umbral": 8,
+        "veilwright": 7,
+        "abyssal": 6,
+        "churnfolk": 5,
+        "unmaker": 4,
+        "ashwarden": 3,
+        "marcher": 2,
+        "somatic": 1,
+        "horizon": 1,
+        "enginewright": 2,
+        "syllogist": 3,
+        "blazeborn": 4,
+        "verist": 5,
+        "seraphic": 6,
+        "lattice": 7,
+        "wright": 8,
+        "rootkin": 9,
+        "stillhold": 10,
+        "cogitant": 11,
+        "figurist": 12,
+        "hourkeeper": 11,
+        "numinous": 10,
+        "threnodist": 9
+      }
     },
     {
       "traditionId": "figurist",
@@ -1209,19 +1455,48 @@
       "opposite": "mason",
       "adjacent": [
         {
-          "traditionId": "numinous",
-          "sharedLeans": [
-            "abstract",
-            "spiritual"
-          ]
+          "traditionId": "cogitant",
+          "steps": 1
         },
         {
-          "traditionId": "veilwright",
-          "sharedLeans": [
-            "abstract"
-          ]
+          "traditionId": "hourkeeper",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 20,
+        "degrees": 300.0,
+        "neighbors": [
+          "cogitant",
+          "hourkeeper"
+        ],
+        "antipode": "mason"
+      },
+      "distances": {
+        "umbral": 4,
+        "veilwright": 5,
+        "abyssal": 6,
+        "churnfolk": 7,
+        "unmaker": 8,
+        "ashwarden": 9,
+        "marcher": 10,
+        "somatic": 11,
+        "mason": 12,
+        "horizon": 11,
+        "enginewright": 10,
+        "syllogist": 9,
+        "blazeborn": 8,
+        "verist": 7,
+        "seraphic": 6,
+        "lattice": 5,
+        "wright": 4,
+        "rootkin": 3,
+        "stillhold": 2,
+        "cogitant": 1,
+        "hourkeeper": 1,
+        "numinous": 2,
+        "threnodist": 3
+      }
     },
     {
       "traditionId": "horizon",
@@ -1252,30 +1527,48 @@
       "opposite": "hourkeeper",
       "adjacent": [
         {
-          "traditionId": "abyssal",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "traditionId": "mason",
+          "steps": 1
         },
         {
-          "traditionId": "churnfolk",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "unmaker",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "wright",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "traditionId": "enginewright",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 9,
+        "degrees": 135.0,
+        "neighbors": [
+          "mason",
+          "enginewright"
+        ],
+        "antipode": "hourkeeper"
+      },
+      "distances": {
+        "umbral": 9,
+        "veilwright": 8,
+        "abyssal": 7,
+        "churnfolk": 6,
+        "unmaker": 5,
+        "ashwarden": 4,
+        "marcher": 3,
+        "somatic": 2,
+        "mason": 1,
+        "enginewright": 1,
+        "syllogist": 2,
+        "blazeborn": 3,
+        "verist": 4,
+        "seraphic": 5,
+        "lattice": 6,
+        "wright": 7,
+        "rootkin": 8,
+        "stillhold": 9,
+        "cogitant": 10,
+        "figurist": 11,
+        "hourkeeper": 12,
+        "numinous": 11,
+        "threnodist": 10
+      }
     },
     {
       "traditionId": "hourkeeper",
@@ -1306,54 +1599,48 @@
       "opposite": "horizon",
       "adjacent": [
         {
-          "traditionId": "ashwarden",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "figurist",
+          "steps": 1
         },
         {
-          "traditionId": "blazeborn",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "enginewright",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "lattice",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "seraphic",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "stillhold",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "syllogist",
-          "sharedLeans": [
-            "order"
-          ]
-        },
-        {
-          "traditionId": "verist",
-          "sharedLeans": [
-            "order"
-          ]
+          "traditionId": "numinous",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 21,
+        "degrees": 315.0,
+        "neighbors": [
+          "figurist",
+          "numinous"
+        ],
+        "antipode": "horizon"
+      },
+      "distances": {
+        "umbral": 3,
+        "veilwright": 4,
+        "abyssal": 5,
+        "churnfolk": 6,
+        "unmaker": 7,
+        "ashwarden": 8,
+        "marcher": 9,
+        "somatic": 10,
+        "mason": 11,
+        "horizon": 12,
+        "enginewright": 11,
+        "syllogist": 10,
+        "blazeborn": 9,
+        "verist": 8,
+        "seraphic": 7,
+        "lattice": 6,
+        "wright": 5,
+        "rootkin": 4,
+        "stillhold": 3,
+        "cogitant": 2,
+        "figurist": 1,
+        "numinous": 1,
+        "threnodist": 2
+      }
     },
     {
       "traditionId": "unmaker",
@@ -1384,24 +1671,48 @@
       "opposite": "wright",
       "adjacent": [
         {
-          "traditionId": "abyssal",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
           "traditionId": "churnfolk",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "steps": 1
         },
         {
-          "traditionId": "horizon",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "traditionId": "ashwarden",
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 4,
+        "degrees": 60.0,
+        "neighbors": [
+          "churnfolk",
+          "ashwarden"
+        ],
+        "antipode": "wright"
+      },
+      "distances": {
+        "umbral": 4,
+        "veilwright": 3,
+        "abyssal": 2,
+        "churnfolk": 1,
+        "ashwarden": 1,
+        "marcher": 2,
+        "somatic": 3,
+        "mason": 4,
+        "horizon": 5,
+        "enginewright": 6,
+        "syllogist": 7,
+        "blazeborn": 8,
+        "verist": 9,
+        "seraphic": 10,
+        "lattice": 11,
+        "wright": 12,
+        "rootkin": 11,
+        "stillhold": 10,
+        "cogitant": 9,
+        "figurist": 8,
+        "hourkeeper": 7,
+        "numinous": 6,
+        "threnodist": 5
+      }
     },
     {
       "traditionId": "wright",
@@ -1432,31 +1743,48 @@
       "opposite": "unmaker",
       "adjacent": [
         {
-          "traditionId": "churnfolk",
-          "sharedLeans": [
-            "chaos",
-            "creation"
-          ]
-        },
-        {
-          "traditionId": "abyssal",
-          "sharedLeans": [
-            "chaos"
-          ]
-        },
-        {
-          "traditionId": "horizon",
-          "sharedLeans": [
-            "chaos"
-          ]
+          "traditionId": "lattice",
+          "steps": 1
         },
         {
           "traditionId": "rootkin",
-          "sharedLeans": [
-            "creation"
-          ]
+          "steps": 1
         }
-      ]
+      ],
+      "ring": {
+        "position": 16,
+        "degrees": 240.0,
+        "neighbors": [
+          "lattice",
+          "rootkin"
+        ],
+        "antipode": "unmaker"
+      },
+      "distances": {
+        "umbral": 8,
+        "veilwright": 9,
+        "abyssal": 10,
+        "churnfolk": 11,
+        "unmaker": 12,
+        "ashwarden": 11,
+        "marcher": 10,
+        "somatic": 9,
+        "mason": 8,
+        "horizon": 7,
+        "enginewright": 6,
+        "syllogist": 5,
+        "blazeborn": 4,
+        "verist": 3,
+        "seraphic": 2,
+        "lattice": 1,
+        "rootkin": 1,
+        "stillhold": 2,
+        "cogitant": 3,
+        "figurist": 4,
+        "hourkeeper": 5,
+        "numinous": 6,
+        "threnodist": 7
+      }
     }
   ],
   "folkTraditions": [
@@ -1648,13 +1976,169 @@
   },
   "domainAccessModel": {
     "note": "SNG-055 — Erik's domain-access model (2026-07-11). Access is a function of DISPOSITIONAL GEOGRAPHY: what you can learn tracks what you are near. Adjacency is computed from shared leans (world_framing: 'adjacency = kinship'); opposite is the other pole of your own axis.",
-    "primary": "Chosen at character build. FULL access, all tiers, no cost penalty.",
-    "adjacentToPrimary": "Free access (no cost penalty) to ALL TIERS EXCEPT the highest (L4-L5 capstones). Being near a people is not being of them — greatness is still theirs to give.",
-    "secondary": "Chosen at character build. Access up to TIER III.",
-    "tertiary": "Chosen at character build; MUST be adjacent to the secondary. Access up to TIER II.",
+    "primary": "Chosen at build. Station 0. FULL access, all tiers, no penalty.",
+    "adjacentToPrimary": "steps=1 (its 2 ring-neighbors). Free (no penalty) to all tiers EXCEPT the highest (L4-L5 capstones). Being NEAR a people is not being OF them.",
+    "secondary": "Chosen at build. Up to TIER III.",
+    "tertiary": "Chosen at build; MUST be a ring-neighbour (steps=1) of the secondary. Up to TIER II.",
     "adjacentToAnyChosen": "Accessible, but with a SKILL-POINT PENALTY (the existing cross-class multiplier). All other gates still apply.",
     "opposedToPrimaryOrSecondary": "CLOSED. You cannot learn the opposite pole of what you are. The axis is a tension, and you have already chosen your end of it.",
-    "exceptions": "COMBINATION skills (cross-pole braids especially — they are the ONLY sanctioned way to touch your opposite, and that is exactly what makes them meaningful), and abilities granted by ARTIFACT or extreme circumstance. Otherwise: closed is closed.",
-    "designNote": "The closed-opposite rule is what gives the cross-pole braids (harbored_flame, meaning_engine, the_turning_word) their weight: holding an axis WHOLE is forbidden to you by ordinary means and reachable only by braiding. A Blazeborn cannot learn Umbracraft — but a Blazeborn who has genuinely held both can carry The Harbored Flame."
+    "exceptions": "COMBINATION abilities — above all the cross-pole BRAIDS — and artifact/extreme-circumstance grants. The braid is the ONLY sanctioned road to your own antipode, which is precisely what makes carrying one mean something.",
+    "designNote": "The closed-opposite rule is what gives the cross-pole braids (harbored_flame, meaning_engine, the_turning_word) their weight: holding an axis WHOLE is forbidden to you by ordinary means and reachable only by braiding. A Blazeborn cannot learn Umbracraft — but a Blazeborn who has genuinely held both can carry The Harbored Flame.",
+    "geometry": "Access is DISTANCE on the great circle. Uniform for every people — no primary is structurally richer than another.",
+    "penalizedRing": "Anything at steps 2+ from every chosen domain is reachable at a SKILL-POINT PENALTY that scales with distance (further = dearer). All other gates still apply.",
+    "closed": "The ANTIPODE (steps=12) of your primary, and the antipode of your secondary, are CLOSED. You cannot learn the far side of an axis you have chosen an end of."
+  },
+  "theGreatCircle": {
+    "principle": "The 24 traditions stand on a GREAT CIRCLE — 12 diameters, one per axis, each pole ANTIPODAL to its own opposite. The walk around the ring is a smooth dispositional gradient: kin stand beside kin, and the far side of the world is the far side of yourself. (Erik 2026-07-11: 'a great circle, like the facets of Tether' — Tether's 12 facets, the world's 12 axes, the same twelve-fold shape.)",
+    "why_it_is_fair": "Every tradition has IDENTICAL topology: exactly 2 neighbors, exactly 1 antipode, and the same distance-profile to everything else. The earlier shared-leans graph was lopsided (order-leaning peoples had 5+ neighbors; the Umbrals had 1). The circle fixes that by GEOMETRY rather than by patching — no people is structurally advantaged.",
+    "stations": [
+      {
+        "position": 0,
+        "traditionId": "umbral",
+        "pole": "dark",
+        "antipode": "blazeborn"
+      },
+      {
+        "position": 1,
+        "traditionId": "veilwright",
+        "pole": "falsehood",
+        "antipode": "verist"
+      },
+      {
+        "position": 2,
+        "traditionId": "abyssal",
+        "pole": "demonic",
+        "antipode": "seraphic"
+      },
+      {
+        "position": 3,
+        "traditionId": "churnfolk",
+        "pole": "chaos",
+        "antipode": "lattice"
+      },
+      {
+        "position": 4,
+        "traditionId": "unmaker",
+        "pole": "destruction",
+        "antipode": "wright"
+      },
+      {
+        "position": 5,
+        "traditionId": "ashwarden",
+        "pole": "death",
+        "antipode": "rootkin"
+      },
+      {
+        "position": 6,
+        "traditionId": "marcher",
+        "pole": "violence",
+        "antipode": "stillhold"
+      },
+      {
+        "position": 7,
+        "traditionId": "somatic",
+        "pole": "body",
+        "antipode": "cogitant"
+      },
+      {
+        "position": 8,
+        "traditionId": "mason",
+        "pole": "concrete",
+        "antipode": "figurist"
+      },
+      {
+        "position": 9,
+        "traditionId": "horizon",
+        "pole": "space",
+        "antipode": "hourkeeper"
+      },
+      {
+        "position": 10,
+        "traditionId": "enginewright",
+        "pole": "mechanical",
+        "antipode": "numinous"
+      },
+      {
+        "position": 11,
+        "traditionId": "syllogist",
+        "pole": "logical",
+        "antipode": "threnodist"
+      },
+      {
+        "position": 12,
+        "traditionId": "blazeborn",
+        "pole": "light",
+        "antipode": "umbral"
+      },
+      {
+        "position": 13,
+        "traditionId": "verist",
+        "pole": "truth",
+        "antipode": "veilwright"
+      },
+      {
+        "position": 14,
+        "traditionId": "seraphic",
+        "pole": "angelic",
+        "antipode": "abyssal"
+      },
+      {
+        "position": 15,
+        "traditionId": "lattice",
+        "pole": "order",
+        "antipode": "churnfolk"
+      },
+      {
+        "position": 16,
+        "traditionId": "wright",
+        "pole": "creation",
+        "antipode": "unmaker"
+      },
+      {
+        "position": 17,
+        "traditionId": "rootkin",
+        "pole": "life",
+        "antipode": "ashwarden"
+      },
+      {
+        "position": 18,
+        "traditionId": "stillhold",
+        "pole": "peace",
+        "antipode": "marcher"
+      },
+      {
+        "position": 19,
+        "traditionId": "cogitant",
+        "pole": "mind",
+        "antipode": "somatic"
+      },
+      {
+        "position": 20,
+        "traditionId": "figurist",
+        "pole": "abstract",
+        "antipode": "mason"
+      },
+      {
+        "position": 21,
+        "traditionId": "hourkeeper",
+        "pole": "time",
+        "antipode": "horizon"
+      },
+      {
+        "position": 22,
+        "traditionId": "numinous",
+        "pole": "spiritual",
+        "antipode": "enginewright"
+      },
+      {
+        "position": 23,
+        "traditionId": "threnodist",
+        "pole": "emotional",
+        "antipode": "syllogist"
+      }
+    ],
+    "distanceMetric": "steps = min(|i-j|, 24-|i-j|). 0 = self. 1 = adjacent (kin). 12 = antipode (your own axis-opposite). Distance IS dispositional distance IS geographic distance — the map, the skill graph, and the moral geography are one shape.",
+    "readingTheRing": "Walk it and the gradient reads true: dark → falsehood → demonic → chaos → destruction → death → violence → body → concrete → space → mechanical → logical → LIGHT → truth → angelic → order → creation → life → peace → mind → abstract → time → spiritual → emotional → (back to dark). Concealment shades into deception; ruin shades into ending; reason shades into revelation; spirit shades into feeling; feeling shades back into what we hide.",
+    "sphereNote": "The circle is the SPINE. If richer adjacency is later wanted, the ring is the equator of a sphere and secondary rings can be added above/below without disturbing the antipodal law (i ↔ i+12) — every extension must preserve it."
   }
 }

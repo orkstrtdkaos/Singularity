@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_service_ways",
+  "name": "The Service Ways",
+  "regionId": "the_gearlands",
+  "communityId": "enginewright.serviceways",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.5,
+    0.0,
+    -0.2,
+    0.0,
+    -0.2,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "mechanical_spiritual": -0.5,
+    "dark_light": -0.2,
+    "space_time": -0.2
+  },
+  "tags": [
+    "enginewright",
+    "mechanical",
+    "precursor",
+    "travel",
+    "dangerous",
+    "strange"
+  ],
+  "connections": [
+    "pressureholt"
+  ],
+  "descriptionSeed": "Precursor tunnels the Enginewrights inherited, mapped for four centuries and still not fully mapped. They run under everything — under the Gearlands, under the Valley, under places the Wrights have not admitted to. Something down here is still running its original errand and the Wrights are extremely careful not to interrupt it.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Way-crews with excellent maps and a lot of rules; a Precursor mechanism performing a task nobody understands; Coil-kind, doing maintenance in the dark.",
+  "dangerLevel": 4,
+  "questSeeds": [
+    "A service way has opened into somewhere that was not on any map, including the Precursors'",
+    "The thing that still runs down here has begun running FASTER"
+  ],
+  "map": {
+    "x": 460,
+    "y": 145
+  },
+  "poleIntensity": 0.5
+}

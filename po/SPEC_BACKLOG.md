@@ -565,3 +565,45 @@ SNG-051 shipped as a passive checklist; Erik wants to RUN each leg from the list
 - Dev-only (already gated by devEnabled). Clock-jumps + grants are dev affordances, never player-facing. Never mutates a synced save destructively — dev setup is local/reversible where possible; warn if a leg would alter real state.
 - Extensible: new force-intents are added to the JSON by Aevi; the runner's vocabulary grows with them. Unknown intent → button disabled with a tooltip, never a crash.
 **Erik use-test:** open 🧪 Legs → hit ▶ Run on a solo leg → the game sets up that scenario → verify + mark pass. *Turns the checklist into a one-click test-runner — the real bottleneck-killer.*
+---
+
+## SNG-053 — Portrait fidelity (form-led prompt) + image lightbox
+
+**Erik-found in live play 2026-07-11:** his ENT character rendered as a plain human. 🔧 CCode. Aevi PO.
+
+**Root cause (verified, art.js ~146 `characterPromptSeed`):** the prompt LEADS with the literal words `"character portrait"` — which biases the model to a human subject — then appends `origin` as a bare slug (`a ent`) mid-string. Nothing conveys the FORM. Worse, the character schema has NO species/kind/form field at all (props: origin, background, …) — so an Ent's non-human physiology never reaches the image at all.
+
+**Fix:**
+1. **Form leads the prompt.** Resolve the character's origin/lineage to its authored FORM DESCRIPTION from content (origins carry descriptive text — use it, not the slug) and put it FIRST: e.g. `"a towering treefolk being of bark and heartwood, moss-bearded, eyes like knots of amber — full-body portrait"` rather than `"character portrait … a ent"`. Non-human forms must OPEN the prompt; the generic `"character portrait"` prefix is what's overriding them.
+2. **Add a `form`/`lineage` concept** (character schema + generated NPCs) carrying a short physical-form description, defaulting from origin. Human is one value among many, not the unstated default.
+3. **NPC + generated-entity portraits get the same fix** — a generated non-human NPC must render non-human (ties the born-with-image work).
+4. **Lightbox:** portraits/scene art are CLICKABLE → open a larger view (modal, click/esc to dismiss, arrow-through the gallery if easy). Applies to character, NPC, location, moment art.
+5. Keep the deterministic seed (same subject → same image) + the existing SAFETY_TAIL and rating/minor floors unchanged.
+
+**Erik test:** "Regenerate your Ent's portrait — it should read unmistakably as an Ent (bark, limbs, non-human), not a human. Click any portrait — it opens larger."
+
+*Small, high-delight. Portraits are the feature Erik most wants right; a wrong-species portrait is worse than none.*
+
+---
+
+## SNG-054 — Skill system: civilization alignment → corpus completion → THEN visualization
+
+**Erik-directed 2026-07-11.** *"The skills need to be aligned to the civilizations like we discussed — right now they're listed by Reach. The whole thing needs to be polished so all skills are laid out, most combinations are thought of, and THEN we can figure out how to visualize the tree."* **Erik's sequencing is the spec: CONTENT FIRST, VISUALIZATION AFTER.** Don't build a beautiful tree around a corpus that's about to be reorganized.
+
+### Phase 0 — INTERIM zoom/pan (do NOW; Erik literally can't use the screen). 🔧 CCode. Small.
+`renderSkillGraph` (app.js ~1912) emits a fixed-viewBox SVG — on desktop the graph overflows with no zoom. Add zoom (wheel/pinch + +/− buttons), pan (drag), fit-to-view, and a reset. Pure viewport work on the existing render — NOT the redesign (that waits for Phase 2). Unblocks Erik immediately.
+
+### Phase 1 — CIVILIZATION ALIGNMENT + CORPUS COMPLETION (content). ✍️ **AEVI AUTHORS.** The real work.
+The learn-screen lists `Learn Reach_dark_light (13)` etc. — but a Reach is an AXIS (the tension between two peoples), NOT a tradition. Per canon (`the_twelve_reaches.json` + `world_framing.json`): **each POLE of each axis is a civilization/people, and abilities belong to a PEOPLE, not to an axis.** Fix at the content layer:
+- **Split every combined reach into its two pole-traditions.** `reach_dark_light` → **Umbral** (dark: Umbracraft, Shroud, Shadowstep, Unshadow, The Never-There) + **Radiant/Blazeborn** (light: Radiance, Kindle, Lightsense, The Harbored Flame). Same for every other combined reach. Abilities regroup under the PEOPLE who practice them.
+- **Reconcile the existing named systems** (Harmonic = order+mechanical+sound; Radiant = light+order+mechanical) onto their poles; keep valley_craft + precursor OUTSIDE the pole matrix (generalist / ancient-tech, not axis-peoples).
+- **Complete the corpus:** every pole-tradition gets a full, coherent tree (ranks I–V, no one-rank orphans — this closes the ~60 seed-ability debt from the 2026-07-07 content wave). Flesh the 6 unbuilt Reaches (emotional_logical, falsehood_truth, demonic_angelic, concrete_abstract, space_time, destruction_creation) into their pole-peoples.
+- **COMBINATION PASS:** systematically work the cross-tradition combos — `combination_recipes.json` already holds the pattern (`parts` + `functions` + `domains`). Think through the space: within-tradition braids, adjacent-civilization combos (kin peoples who share secondary leans), and cross-axis combos (the rare, powerful, strange ones). "Most combinations thought of" is the bar.
+- **This IS SNG-050 landing in mechanics** — the pole-as-civilization refactor stops being lore and becomes the skill system. Access gates fall out naturally: you learn a people's tradition by being NATIVE to it, being IN their region, or having a TEACHER/TOME of that people (fixes the "I can learn any Reach's capstone by picking it" hole Erik found — the gates were never built for reaches).
+
+### Phase 2 — VISUALIZATION (after Phase 1 settles). 🔧 CCode.
+Only once the corpus is final: redesign the tree/graph around the civilization structure — group by PEOPLE, show tradition identity (color/aesthetic per civilization, consistent with the map), make combinations visible as braids between trees, legible at desktop scale. Erik: *"THEN we can figure out how to visualize."* Design the viz to the finished corpus, not to the current mess.
+
+**Guardrails.** Content changes are additive/migration-safe — existing characters' learned abilities must MIGRATE to their new tradition grouping (reconcile step; nobody loses a skill). Engine reads groupings from content (don't hardcode civilizations in code). Suites + parse_probe green.
+
+**Sequence: Phase 0 (CCode, now) → Phase 1 (Aevi content, the big one) → Phase 2 (CCode viz).**

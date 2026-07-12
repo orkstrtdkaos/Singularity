@@ -1312,3 +1312,43 @@ It makes the world's *geography* the progression, without a single artificial ga
 He cannot fight because he does not know where fighting is. **The map should show danger** (SNG-046 Layer 1: `dangerLevel` per location — colour it). **The GM should give him reasons to go** — the Disputed Zone is on his doorstep and nothing has invited him into it.
 
 **Erik test:** "Sit in Millbrook doing ordinary things — verify the world does not let you be bored: within a handful of turns something arrives, someone needs something, or Grael's thread tightens. Then verify the map tells you where the dangerous places are."
+---
+
+## SNG-081 — 🚨 THE GM IS HAVING A CONVERSATION WITH ITSELF (the player's words are never kept)
+
+**Erik, 2026-07-12:** *"the GM seems to completely refuse any romancing of NPCs... I put several romance type things in there — calling the hunt she's going on with me a date... it's almost like it's not seeing my actual words."* **He is exactly right, and it is not a refusal.** 🔧 CCode. Aevi PO. **HIGHEST PRIORITY — this is the deepest defect found in the project.**
+
+### PWSV (HEAD v1.8.29) — definitive
+```js
+// app.js:2211 — the ONLY thing pushed to turn history
+sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" });
+```
+```js
+// gm.js:187 — how that history is rendered back into the prompt
+return i >= recentTurns.length - 3 && t.narration
+  ? `${t.summary}\nFULL TEXT: ${t.narration.slice(0, 700)}` : t.summary;
+```
+**The turn record stores ONLY the GM's own `sceneSummary` and `narration`. The player's input is NEVER stored.**
+
+**Therefore the "conversation history" the GM receives is a MONOLOGUE OF ITS OWN PROSE.** The player's words reach it for **exactly one turn** (via `exactWords`, in the uncached player tier at the very end of the prompt). **If that turn's narration does not catch the nuance, it is gone forever** — and on the next turn the history contains only what the GM itself said.
+
+**So when the GM told Erik *"no romantic overtures have appeared in the scene text because none have been played yet"* — from its view of history, that was TRUE.** It was not refusing. It was blind.
+
+### This is not a romance bug. It is a total-continuity bug.
+**Every nuance the player puts into their own words dies after one turn:** a promise made · a name used · a tone set · a joke · a threat · a plan · a flirtation · a refusal · a stated intention. The GM can only ever see the parts of the player *it happened to echo back in its own prose*. **This is almost certainly the root cause of the general "the GM doesn't respond to what I actually do" feeling** — and it silently contradicts Design Law 4 (permanence) and the GM's own rule 13 (scene permanence), because the player's half of the scene has no permanence at all.
+
+### Fix
+1. **Store the player's turn.** The turn record becomes:
+   `{ player: <exactWords ?? label>, summary, narration }`
+2. **Render the history as an actual DIALOGUE**, not a monologue:
+   ```
+   YOU: "let's call this hunt a date"
+   GM:  <summary / full narration>
+   ```
+3. **Keep the player's words in FULL for the recent window** (they are short; the GM's prose is the long part). If anything must be clamped, clamp the GM's side — **never the player's.** *(Ties SNG-076: the player's own words are the last thing that should ever be truncated.)*
+4. **Persist it in the save** so continuity survives a reload — a scene reloaded from disk must not lose the player's half.
+5. `[CCODE: check every other `recentTurns` call-site — 1976, 2571, 3042, 3509 — they all inherit this.]`
+
+**Erik test:** "Say something distinctive — flirt, make a promise, name someone — then, three turns later, ask the GM about it. Verify it KNOWS what you said, in your words, and can quote it back."
+
+*Aevi's note: this is the single most consequential bug in the project. The world remembers everything — facts, codex, places, chronicle, the shared canon across characters — and forgets the player. It has been listening to itself the entire time.*

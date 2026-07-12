@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_weighing_yard",
+  "name": "The Weighing Yard",
+  "regionId": "the_given_land",
+  "communityId": "mason.weighingyard",
+  "axisVector": [
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    -0.5,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "concrete_abstract": -0.5,
+    "falsehood_truth": 0.4,
+    "chaos_order": 0.3
+  },
+  "tags": [
+    "mason",
+    "concrete",
+    "market",
+    "craft",
+    "social"
+  ],
+  "connections": [
+    "bedrock"
+  ],
+  "descriptionSeed": "Where anything can be brought to be assessed, and the assessment is final and honest and completely indifferent to what you were hoping. The Weighing Yard has never been wrong about a material, and it has been catastrophically wrong about several things that were not materials, and it has learned nothing from this.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Assessors of terrifying competence; a thing being weighed that should not be weighed; someone whose life's work has just been priced.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A Precursor object has been brought to be weighed and the Yard cannot, and this is intolerable to them",
+    "A person has asked to be weighed, and the Yard is considering it"
+  ],
+  "map": {
+    "x": 120,
+    "y": 325
+  },
+  "poleIntensity": 0.6
+}

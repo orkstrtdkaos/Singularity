@@ -26,6 +26,17 @@
 
 ---
 
+## 🚨🚨 SNG-081 — **THE GM IS HAVING A CONVERSATION WITH ITSELF.** BUILD THIS FIRST. (Erik live 2026-07-12)
+```js
+// app.js:2211 — the ONLY thing pushed to turn history
+sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" });
+```
+**The turn record stores ONLY the GM's own summary + narration. The player's input is NEVER stored.** The "conversation history" the GM receives is **a MONOLOGUE OF ITS OWN PROSE.** The player's words reach it for **exactly one turn** (`exactWords`, in the uncached tail) — and if that turn's narration doesn't catch the nuance, **it is gone forever.**
+**Erik's romantic overtures were not refused — the GM was BLIND to them.** Its reply (*"none have been played yet"*) was **TRUE from its view of history.** It only ever sees what it said.
+**⚠️ THIS IS NOT A ROMANCE BUG. It is a total-continuity bug.** Every nuance the player puts in their own words dies after one turn: **a promise · a name · a tone · a joke · a threat · a plan · a flirtation · a stated intention.** The GM can only see the parts of the player it happened to echo back. **This is almost certainly the root cause of the general "the GM doesn't respond to what I actually do" feeling** — and it silently breaks Design Law 4 (permanence) and the GM's own rule 13, because **the player's half of the scene has no permanence at all.**
+**Fix:** store `{ player: exactWords ?? label, summary, narration }` · render history as a **real DIALOGUE** (`YOU: … / GM: …`) · **keep the player's words in FULL** — if anything is clamped, clamp the GM's side, **never the player's** (ties SNG-076) · persist in the save so a reload doesn't lose the player's half · audit every `recentTurns` call-site (1976, 2571, 3042, 3509 — they all inherit this).
+*The world remembers everything — facts, codex, places, chronicle, shared canon across characters — and forgets the player. It has been listening to itself the entire time.*
+
 ## ⛔ NEXT — BUILD IN THIS ORDER (Erik-directed; supersedes CCode's earlier queue)
 
 ### 1. ✅ SNG-076 SHIPPED v1.8.32 — authored prose renders in full; model output word-boundary-clamped

@@ -38,7 +38,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.34";
+const APP_VERSION = "1.8.35";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -52,6 +52,9 @@ let askMode = false;     // input bar mode: false = act in scene, true = ask the
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
 let gambitHintDismissed = false; // SNG-031: gambit hint chip dismissed for the current scene
 let gambitHintCooldown = 0;      // SNG-077: turns to stay quiet after a hint is dismissed
+// SNG-066: feedback forensics — the value is the AUTO-CAPTURED CONTEXT, not the text box.
+let _capturedErrors = [];        // runtime errors since load (for a one-click pre-diagnosed report)
+let lastPlayerAction = null;     // the last choice the player took
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
@@ -76,6 +79,12 @@ const NARRATIVE_ENCOUNTER_COOLDOWN = 3;
 // ---------- boot ----------
 
 (async function boot() {
+  // SNG-066: capture runtime errors since load so a feedback report arrives pre-diagnosed.
+  try {
+    const noteErr = m => { _capturedErrors = [..._capturedErrors, String(m).slice(0, 300)].slice(-10); };
+    window.addEventListener("error", e => noteErr(e.message || e.error?.message || "error"));
+    window.addEventListener("unhandledrejection", e => noteErr("unhandled: " + (e.reason?.message || e.reason || "rejection")));
+  } catch { /* ignore */ }
   // SNG-074: dev mode is OPT-IN, VISIBLE, and REVERSIBLE. `?dev=1` opts in for THIS SESSION only
   // (sessionStorage — a reload without the param returns a clean player view); `?dev=0` clears
   // everything; and the old sticky `localStorage "singularity.dev"` is migrated OUT so no family
@@ -174,12 +183,15 @@ function chrome(inner) {
       <div class="actions">
         <button id="nav-roster">Characters</button>
         <button id="nav-settings">Settings</button>
+        <button id="nav-feedback" title="Feedback / bug report — your version, location, character and last turn attach automatically">⚑ Feedback</button>
         ${devEnabled() ? `<button id="nav-dev" title="Dev preview-legs checklist">🧪 Legs</button>` : ""}
       </div>
     </div>
     ${inner}`;
   document.getElementById("nav-roster").onclick = () => renderRoster();
   document.getElementById("nav-settings").onclick = () => renderSettings();
+  const fbBtn = document.getElementById("nav-feedback");
+  if (fbBtn) fbBtn.onclick = () => { _feedbackType = "bug"; openFeedback(); };
   const devBtn = document.getElementById("nav-dev");
   if (devBtn) devBtn.onclick = () => renderPreviewLegs();
 }
@@ -483,6 +495,98 @@ function runPreviewLeg(leg) {
   const runner = intent && LEG_RUNNERS[intent];
   if (!runner) return; // manual / unknown — no-op (button wasn't rendered as runnable)
   try { runner(f); } catch (err) { alert("Couldn't run this scenario: " + (err?.message || err)); }
+}
+
+// ---------- SNG-066: feedback / bug report with auto-captured context ----------
+// The value is the FORENSICS, not the text box: a one-click report arrives with the version,
+// screen, character, location, last GM turn, last action and any errors already attached, so a
+// 5-minute archaeology dig becomes a one-tap report. Append-only to the repo; never lose one.
+
+/** Gather the forensic context. Redacts credentials — never dumps the config object. */
+function buildFeedbackContext() {
+  const ctx = { appVersion: APP_VERSION, at: new Date().toISOString(), screen: _feedbackScreenLabel() };
+  try { ctx.worldDay = absoluteWorldDay(); } catch { /* pre-boot */ }
+  if (typeof character !== "undefined" && character) {
+    ctx.character = { id: character.id, name: character.name, level: character.level, origin: character.origin, nativeTradition: character.nativeTradition || null, domains: character.domains || null, background: character.background };
+    ctx.location = (() => { const l = CONTENT.locations?.[character.currentLocationId]; return { id: character.currentLocationId, name: l?.name || null, regionId: l?.regionId || null }; })();
+    const activeQuests = (character.quests || []).filter(q => q.status === "active").map(q => q.title || q.id);
+    if (activeQuests.length) ctx.activeQuests = activeQuests;
+    ctx.journeyDay = (() => { try { return readClock(character.clock).day; } catch { return null; } })();
+  }
+  if (typeof sceneState !== "undefined" && sceneState?.setting) ctx.scene = String(sceneState.setting).slice(0, 200);
+  const lastTurn = (typeof sceneTurns !== "undefined" && sceneTurns.length) ? sceneTurns[sceneTurns.length - 1] : (character?.activeScene?.lastTurn || null);
+  if (lastTurn) ctx.lastGmTurn = smartClamp(lastTurn.summary || lastTurn.narration || "", 400);
+  if (lastPlayerAction) ctx.lastAction = String(lastPlayerAction).slice(0, 160);
+  if (_capturedErrors.length) ctx.errors = _capturedErrors.slice(-5);
+  return ctx;
+}
+function _feedbackScreenLabel() {
+  const h = document.querySelector(".screen h2, .play .location-tag, .topbar h1");
+  const inPlay = !!document.querySelector(".play");
+  return (inPlay ? "play" : (document.querySelector(".screen h2")?.textContent || "app")).slice(0, 60);
+}
+function feedbackQueue() { try { return JSON.parse(localStorage.getItem("singularity.feedbackQueue") || "[]"); } catch { return []; } }
+function saveFeedbackQueue(q) { try { localStorage.setItem("singularity.feedbackQueue", JSON.stringify(q.slice(-50))); } catch { /* ignore */ } }
+
+/** Push one entry (+ any queued) to the repo, append-only, SHA-retry. Returns {ok, id, queued}. */
+async function submitFeedback(entry) {
+  const pending = [...feedbackQueue(), entry];
+  if (!syncEnabled()) { saveFeedbackQueue(pending); return { ok: false, queued: true, id: entry.id }; }
+  const day = entry.at.slice(0, 10);
+  try {
+    await pushMergedFile(`po/feedback/${day}.json`, remote => {
+      const entries = [...(remote?.entries || [])];
+      for (const e of pending) if (!entries.some(x => x.id === e.id)) entries.push(e);
+      return { schemaVersion: 1, day, entries };
+    }, `feedback: ${entry.type} from ${entry.context?.character?.name || "a player"} (${pending.length})`);
+    saveFeedbackQueue([]); // flushed
+    return { ok: true, id: entry.id, flushed: pending.length };
+  } catch (err) {
+    saveFeedbackQueue(pending); // never lose it
+    return { ok: false, queued: true, id: entry.id, error: err?.message };
+  }
+}
+
+let _feedbackType = "bug";
+function openFeedback() {
+  const ctx = buildFeedbackContext();
+  const TYPES = [["bug", "🐛 Bug"], ["idea", "💡 Idea"], ["feel", "🤔 Felt off"]];
+  const q = feedbackQueue().length;
+  chrome(`<div class="screen" style="max-width:560px">
+    <h2>⚑ Feedback</h2>
+    <p class="hint" style="margin-bottom:10px">One tap, one sentence. Your version, where you are, your character and the last beat attach automatically — Aevi reads it without asking a single follow-up.</p>
+    <div class="fb-types">${TYPES.map(([id, label]) => `<button class="fb-type ${id === _feedbackType ? "on" : ""}" data-fbtype="${id}">${label}</button>`).join("")}</div>
+    <div class="field" style="margin-top:10px"><label>What happened, or what felt off?</label>
+      <textarea id="fb-text" rows="4" style="width:100%" placeholder="e.g. the header said Harmonic Heights but I was in the Disputed Zone"></textarea></div>
+    <details class="fb-context"><summary>What will be attached (${Object.keys(ctx).length} fields)</summary>
+      <pre class="fb-context-pre">${esc(JSON.stringify(ctx, null, 2))}</pre></details>
+    ${!syncEnabled() ? `<div class="hint">⚠️ Sync is off — this will be SAVED and sent the next time sync is on (nothing is lost).</div>` : ""}
+    ${q ? `<div class="hint">${q} earlier report${q === 1 ? "" : "s"} waiting to send — they'll flush with this one.</div>` : ""}
+    <div style="display:flex; gap:8px; margin-top:12px">
+      <button class="btn" id="fb-send">Send</button>
+      <button class="btn secondary" id="fb-cancel">Cancel</button>
+    </div>
+    <div class="hint" id="fb-status" style="margin-top:8px"></div>
+  </div>`);
+  for (const b of app.querySelectorAll("[data-fbtype]")) b.onclick = () => { _feedbackType = b.dataset.fbtype; openFeedback(); };
+  document.getElementById("fb-cancel").onclick = () => { if (character && character.activeScene) enterPlay(); else renderRoster(); };
+  document.getElementById("fb-send").onclick = async () => {
+    const text = document.getElementById("fb-text").value.trim();
+    const status = document.getElementById("fb-status");
+    const entry = { id: "fb-" + Date.now().toString(36), type: _feedbackType, text: text.slice(0, 2000), player: profile?.displayName || null, context: buildFeedbackContext() };
+    status.textContent = "Sending…";
+    const r = await submitFeedback(entry);
+    if (r.ok) status.textContent = `✓ Sent — thank you. Entry ${r.id}${r.flushed > 1 ? ` (+${r.flushed - 1} queued)` : ""}. Aevi will see it at session-open.`;
+    else if (r.queued) status.textContent = `✓ Saved as ${r.id}${syncEnabled() ? " — the send failed, it will retry next time" : " — will send when sync is on"}. Nothing is lost.`;
+    else status.textContent = "Couldn't save that — try again.";
+  };
+}
+
+/** Flush any queued feedback when sync is available (called at boot / on enter-play). */
+async function flushFeedbackQueue() {
+  if (!syncEnabled() || !feedbackQueue().length) return;
+  const q = feedbackQueue();
+  try { const r = await submitFeedback(q[q.length - 1]); if (r.ok) { /* submitFeedback flushes all */ } } catch { /* keep queued */ }
 }
 
 async function renderPreviewLegs() {
@@ -1795,6 +1899,7 @@ function renderCreate() {
 async function enterPlay() {
   sceneTurns = [];
   sceneState = null;
+  flushFeedbackQueue(); // SNG-066: send any feedback captured while sync was off
   hydrateGeneratedIntoContent(character); // SNG-BATCH-9: make this character's grown world live + revisitable
   if (character.sharedSceneId && syncEnabled()) {
     fetchScene(character.sharedSceneId).then(sc => {
@@ -2121,6 +2226,7 @@ function affinityFor(action, location = hereNow()) {
 
 async function onChoice(choice) {
   if (busy) return;
+  lastPlayerAction = choice?.label || choice?.exactWords || null; // SNG-066: for feedback forensics
   let itemsAdvanced = [];
   const location = hereNow();
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);

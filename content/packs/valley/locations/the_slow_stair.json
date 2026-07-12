@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_slow_stair",
+  "name": "The Slow Stair",
+  "regionId": "umbral_depths",
+  "communityId": "umbral.stair",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.3,
+    0.0,
+    -0.2,
+    -0.2,
+    0.0
+  ],
+  "spectrum": {
+    "dark_light": -0.3,
+    "space_time": -0.2,
+    "body_mind": -0.2
+  },
+  "tags": [
+    "umbral",
+    "liminal",
+    "travel",
+    "road",
+    "threshold"
+  ],
+  "connections": [
+    "the_underlight",
+    "the_lampless_market"
+  ],
+  "descriptionSeed": "The long way up and out — days of ascending stair, and the dark thinning by degrees, and the first grey suggestion of a world that uses eyes. Umbrals coming up go blind for a week at the top and consider it a reasonable toll. Surface folk coming down go blind immediately and consider it a catastrophe. Halfway there is a landing where both kinds of people sit and wait to adjust, and it is the most honest room in the world.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Half-blind travelers in both directions; a landing-keeper who has seen everyone's first moment; smugglers who use the stair precisely because it is slow.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Someone went up the stair and came back down changed, and will not say what they saw at the top",
+    "The stair is being watched, from above, by someone who does not want it used"
+  ],
+  "map": {
+    "x": 90,
+    "y": 300
+  },
+  "poleIntensity": 0.3
+}

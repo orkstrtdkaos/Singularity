@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.037650937499999995
+    "spectrumId": -0.085768390625
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -84,6 +84,17 @@
         "climb"
       ],
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Preserved Trail Parcel",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
     }
   ],
   "deeds": [
@@ -159,22 +170,72 @@
       {
         "summary": "Silas and Aldric the smokehouse man strike a provisioning deal — hunting in exchange for food and supplies, with a mutual interest in the river contamination.",
         "narration": "You set the pigeon on the cutting block — not as a donation, as an opening. \"Fresh bird,\" you say. \"Cleaned this morning. I'm in the area a few days, maybe more. I hunt well, and I'm heading north anyway. If you want, I keep bringing what I take — whatever the meadows give — and in return you help provision me. Meal and supplies where you can spare them.\"\n\nThe man's eyes move from the pigeon to you, doing the arithmetic. He turns the bird over with two fingers, checking the work. The cleaning is clean. He sets it down.\n\n\"North,\" he says. It's not quite a question. \"River's running gray up that way. Wouldn't go far north without a reason.\" A beat. He's still holding the fillet knife, loose. \"You mentioned keeping an eye on the catches.\" His chin tips toward the gray-gilled perch on the rack. \"You see something up there worth seeing, I want to hear it. Same terms — you bring what you take, I keep you fed and supply what I can spare. No guarantees on quantity. The shortage hits my accounts too.\"\n\nHe picks up the pigeon, turns to the second rack, and makes space. \"Name's Aldric,\" he says, without looking back. \"You need a meal now or after?\""
+      },
+      {
+        "summary": "Silas hands over two rabbits and the pigeon; Aldric trades preserved food and names Mara Wells at the supply store for hunting kit.",
+        "narration": "You unshoulder the pack and pull the two rabbits free — cleaned, tied at the hocks with a twist of cord, still cold from the morning. You lay them beside the pigeon on the cutting block. Aldric looks at the three of them together: the birds flanking the pair of rabbits, the arrangement tidy. His expression doesn't change much, but his knife hand relaxes another degree.\n\n\"Two rabbits and the pigeon,\" you say. \"For preserved food — something that travels. And I've got a question alongside that, if you'll take it.\"\n\nAldric turns one rabbit over, checks the belly cut, nods once. The work is good and he can see it. He sets it back. \"I can do dried perch — what's left of decent quality — and some salted pork. Small parcel, but it'll hold a week on the road.\" He moves to the far rack and starts pulling wrapped parcels from a shelf beneath it, not hurrying. \"The question?\"\n\n\"Hunting kit,\" you say. \"Traps, snares — anything that helps me bring you more of this. Or a name, if you know one.\" Aldric sets a cloth-wrapped parcel on the block and tilts his head toward the village lane. \"Mara Wells keeps the supply store — east side of the well, red door. She stocks rope, hardware, occasionally traps when someone trades one in. Tell her the smokehouse sent you and she won't charge you a finder's fee on top.\" He wraps a second parcel, smaller, and knots it. His eyes go to the rabbits again — already thinking ahead to the rack. \"Snares you'll do better setting yourself. Deadfalls too. But Mara's your first stop.\""
       }
     ],
     "lastTurn": {
-      "narration": "You set the pigeon on the cutting block — not as a donation, as an opening. \"Fresh bird,\" you say. \"Cleaned this morning. I'm in the area a few days, maybe more. I hunt well, and I'm heading north anyway. If you want, I keep bringing what I take — whatever the meadows give — and in return you help provision me. Meal and supplies where you can spare them.\"\n\nThe man's eyes move from the pigeon to you, doing the arithmetic. He turns the bird over with two fingers, checking the work. The cleaning is clean. He sets it down.\n\n\"North,\" he says. It's not quite a question. \"River's running gray up that way. Wouldn't go far north without a reason.\" A beat. He's still holding the fillet knife, loose. \"You mentioned keeping an eye on the catches.\" His chin tips toward the gray-gilled perch on the rack. \"You see something up there worth seeing, I want to hear it. Same terms — you bring what you take, I keep you fed and supply what I can spare. No guarantees on quantity. The shortage hits my accounts too.\"\n\nHe picks up the pigeon, turns to the second rack, and makes space. \"Name's Aldric,\" he says, without looking back. \"You need a meal now or after?\"",
-      "sceneSummary": "Silas and Aldric the smokehouse man strike a provisioning deal — hunting in exchange for food and supplies, with a mutual interest in the river contamination.",
+      "narration": "You unshoulder the pack and pull the two rabbits free — cleaned, tied at the hocks with a twist of cord, still cold from the morning. You lay them beside the pigeon on the cutting block. Aldric looks at the three of them together: the birds flanking the pair of rabbits, the arrangement tidy. His expression doesn't change much, but his knife hand relaxes another degree.\n\n\"Two rabbits and the pigeon,\" you say. \"For preserved food — something that travels. And I've got a question alongside that, if you'll take it.\"\n\nAldric turns one rabbit over, checks the belly cut, nods once. The work is good and he can see it. He sets it back. \"I can do dried perch — what's left of decent quality — and some salted pork. Small parcel, but it'll hold a week on the road.\" He moves to the far rack and starts pulling wrapped parcels from a shelf beneath it, not hurrying. \"The question?\"\n\n\"Hunting kit,\" you say. \"Traps, snares — anything that helps me bring you more of this. Or a name, if you know one.\" Aldric sets a cloth-wrapped parcel on the block and tilts his head toward the village lane. \"Mara Wells keeps the supply store — east side of the well, red door. She stocks rope, hardware, occasionally traps when someone trades one in. Tell her the smokehouse sent you and she won't charge you a finder's fee on top.\" He wraps a second parcel, smaller, and knots it. His eyes go to the rabbits again — already thinking ahead to the rack. \"Snares you'll do better setting yourself. Deadfalls too. But Mara's your first stop.\"",
+      "sceneSummary": "Silas hands over two rabbits and the pigeon; Aldric trades preserved food and names Mara Wells at the supply store for hunting kit.",
       "choices": [
         {
-          "label": "Take a meal now — you've been on the road since early morning and the energy would be useful before heading anywhere.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "spectrumId": -0.1
-          },
+          "label": "Head to Mara Wells's supply store — red door, east of the well — and see what hunting kit she has in stock",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "rest",
+            "explore",
+            "trade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aldric more about Mara Wells before you go — what kind of woman is she, and what does she want from strangers",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Before leaving, ask Aldric what he's actually seen upstream — exact mornings, how far the gray-green reached, whether anything else came with it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "investigate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take the provisions, thank Aldric, and head north to the meadows — set some deadfall traps and scout the upstream bend before the morning's gone",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
             "careful"
           ],
           "abilityId": null,
@@ -182,206 +243,137 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Ask Aldric what he actually thinks is causing the gray-green water — he's been watching this longer than you have.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Numen-Sense here in the smokehouse — the building sits over older ground and you want to know if anything is thinner than it should be.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": 0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "numen_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Head out now — the deal is struck and the morning is still young. Go north toward the upstream bend and look at the water up close.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "spectrumId": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Struck a fair provisioning arrangement with Aldric the smokehouse man — hunting for the village in exchange for food and supplies, and offered to keep watch on what's damaging the river catch.",
-          "tags": [
-            "helpful",
-            "practical",
-            "community"
-          ],
-          "weight": 1,
-          "communityId": "valley.millbrook"
-        }
-      ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [],
+        "inventoryAdd": [
+          {
+            "name": "Preserved Trail Parcel",
+            "kind": "consumable",
+            "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
+            "consumable": true,
+            "effects": {
+              "health": 0,
+              "energy": 10
+            }
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
-          "op": "start",
+          "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "title": "Meat for the Smokehouse",
-          "summary": "Hunt the meadows north of Millbrook and bring Aldric what you take — he feeds you and supplies what he can spare. He wants to know anything you find that explains the declining catches.",
-          "giver": "Aldric (smokehouse man)",
-          "note": "Deal struck on World-day 12, morning. Aldric has his eye on the gray-gilled perch and wants real information about the upstream situation.",
-          "xpReward": 20
+          "note": "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment."
         }
       ],
       "scene": {
-        "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, the pigeon now laid beside the two racks of river perch.",
+        "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Two rabbits and the pigeon now laid on the cutting block; two cloth-wrapped provision parcels beside them.",
         "npcsPresent": [
           {
-            "name": "Aldric (Smokehouse Man)",
-            "state": "setting the pigeon on the second rack, making space, apron dark with the morning's work — waiting on Silas's answer about the meal"
+            "name": "Aldric",
+            "state": "wrapping a second provision parcel, already eyeing the rabbits for the rack — work ahead of him, satisfied with the exchange"
           }
         ],
         "objects": [
-          "Pigeon (fresh, cleaned — now on Aldric's rack)",
+          "Two cleaned rabbits (on cutting block, delivered)",
+          "Pigeon (on cutting block, delivered)",
+          "Two cloth-wrapped provision parcels (dried perch and salted pork — ready for Silas)",
           "Two racks of gray-gilled river perch on iron hooks",
-          "Fillet knife (lowered, resting on the cutting block)",
-          "Cutting block (dark with use, wear centered and even)",
+          "Fillet knife (resting on cutting block, relaxed)",
+          "Cutting block (dark with use)",
           "Canvas apron (worn)",
           "Banked fire beneath the racks"
         ],
         "threads": [
-          "Aldric waiting to know if Silas wants a meal now or later",
-          "The upstream contamination — Aldric has noticed and wants to hear what Silas finds",
-          "The gray-gilled perch on the rack are a visible marker of the crisis, right here in the room"
+          "Aldric named Mara Wells — red door east of the well — as the source for traps and hunting hardware",
+          "The upstream contamination — Aldric's interest and what he knows firsthand remains unasked",
+          "First delivery complete; next delivery expected"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "aldric",
           "name": "Aldric",
           "role": "Smokehouse operator, Millbrook",
-          "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone who has worked the same fire for twenty years. Runs the village's preserved-fish distribution on fixed accounts; absorbed the catch decline quietly until now.",
-          "note": "Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space for the pigeon on the rack.",
+          "note": "Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for traps and hunting hardware, and named the smokehouse as a reference.",
           "learned": [
-            "His name is Aldric",
-            "He's aware the gray-green water comes from upstream and has been watching it",
-            "He runs fixed accounts — the catch decline is already hitting his regular customers",
-            "He wants real information about what's causing the fish shortage, not just meat"
+            "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
+            "Telling Mara 'the smokehouse sent you' waives her finder's fee"
           ],
           "skillsObserved": [
-            "fillet work",
             "supply accounting",
-            "practical negotiation"
+            "practical negotiation",
+            "fillet work"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the smokehouse, deal struck with Silas — provisioning arrangement, expects hunting deliveries and upstream information."
+          "statusNote": "At the smokehouse, first delivery received, provisions exchanged — expects ongoing hunting deliveries and upstream information from Silas"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Silas struck a provisioning deal with Aldric the smokehouse man on World-day 12 — hunting in exchange for food and supplies, with Aldric asking for any information Silas finds about the upstream contamination affecting the fish catch.",
+          "text": "Silas made his first hunting delivery to Aldric on World-day 12 — two rabbits and the pigeon. Aldric provided preserved trail food in return. The provisioning arrangement is now active.",
           "subjectId": "aldric"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second rack.",
+          "note": "Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
           "subPlace": {
             "name": "Smokehouse",
-            "note": "Operated by Aldric — fixed-account preserved fish distribution. Deal struck with Silas on World-day 12: hunting in exchange for provisions and upstream information.",
+            "note": "First delivery made — rabbits and pigeon on the rack; Aldric named Mara Wells (red door, east of the well) as the source for hunting equipment",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "aldric",
-          "label": "Aldric",
+          "topic": "mara-wells",
+          "label": "Mara Wells",
           "kind": "person",
-          "entityId": "aldric",
-          "fact": "Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas on World-day 12.",
-          "links": [
-            "millbrook",
-            "water-crisis-discoloration",
-            "aldric-provisioning-deal"
-          ]
-        },
-        {
-          "topic": "water-crisis-discoloration",
-          "label": "The River's Discoloration",
-          "kind": "event",
-          "fact": "Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real information.",
+          "fact": "Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the first stop for hunting equipment.",
           "links": [
             "millbrook",
             "aldric",
-            "disputed-zone"
+            "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief negotiation — the deal was struck in a few exchanges"
+        "why": "A brief exchange at the smokehouse — parcels handed over, directions given"
       }
     },
     "sceneState": {
-      "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, the pigeon now laid beside the two racks of river perch.",
+      "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Two rabbits and the pigeon now laid on the cutting block; two cloth-wrapped provision parcels beside them.",
       "npcsPresent": [
         {
-          "name": "Aldric (Smokehouse Man)",
-          "state": "setting the pigeon on the second rack, making space, apron dark with the morning's work — waiting on Silas's answer abou"
+          "name": "Aldric",
+          "state": "wrapping a second provision parcel, already eyeing the rabbits for the rack — work ahead of him, satisfied with the exch"
         }
       ],
       "objects": [
-        "Pigeon (fresh, cleaned — now on Aldric's rack)",
+        "Two cleaned rabbits (on cutting block, delivered)",
+        "Pigeon (on cutting block, delivered)",
+        "Two cloth-wrapped provision parcels (dried perch and salted pork — ready for Sil",
         "Two racks of gray-gilled river perch on iron hooks",
-        "Fillet knife (lowered, resting on the cutting block)",
-        "Cutting block (dark with use, wear centered and even)",
+        "Fillet knife (resting on cutting block, relaxed)",
+        "Cutting block (dark with use)",
         "Canvas apron (worn)",
         "Banked fire beneath the racks"
       ],
       "threads": [
-        "Aldric waiting to know if Silas wants a meal now or later",
-        "The upstream contamination — Aldric has noticed and wants to hear what Silas finds",
-        "The gray-gilled perch on the rack are a visible marker of the crisis, right here in the room"
+        "Aldric named Mara Wells — red door east of the well — as the source for traps and hunting hardware",
+        "The upstream contamination — Aldric's interest and what he knows firsthand remains unasked",
+        "First delivery complete; next delivery expected"
       ]
     }
   },
@@ -408,7 +400,8 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Deal struck on World-day 12, morning. Aldric has his eye on the gray-gilled perch and wants real information about the upstream situation."
+        "Deal struck on World-day 12, morning. Aldric has his eye on the gray-gilled perch and wants real information about the upstream situation.",
+        "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -503,14 +496,17 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
-        "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f"
+        "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
+        "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t"
       ],
       "knownFacts": [
         "His name is Aldric",
         "He's aware the gray-green water comes from upstream and has been watching it",
-        "He runs fixed accounts — the catch decline is already hitting his regular customers"
+        "He runs fixed accounts — the catch decline is already hitting his regular customers",
+        "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
+        "Telling Mara 'the smokehouse sent you' waives her finder's fee"
       ],
       "skillsObserved": [
         "fillet work",
@@ -518,7 +514,7 @@
         "practical negotiation"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse, deal struck with Silas — provisioning arrangement, expects hunting deliveries and upstream information.",
+      "statusNote": "At the smokehouse, first delivery received, provisions exchanged — expects ongoing hunting deliveries and upstream information from Silas",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -535,7 +531,8 @@
         "[d1] The resurrected rabbit entered Millbrook's south fence line heading into the village — alive, oriented south, seam intact. World-day 12.",
         "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
         "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
-        "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra"
+        "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra",
+        "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -565,7 +562,7 @@
           "name": "Smokehouse",
           "day": 1,
           "visited": true,
-          "note": "Operated by Aldric — fixed-account preserved fish distribution. Deal struck with Silas on World-day 12: hunting in excha"
+          "note": "First delivery made — rabbits and pigeon on the rack; Aldric named Mara Wells (red door, east of the well) as the source"
         }
       },
       "vectorsKnown": [
@@ -618,7 +615,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-12T17:43:25.805Z",
+    "lastSharedReadAt": "2026-07-12T17:47:32.652Z",
     "lastTickWorldDay": 12,
     "lastCanonWorldDay": 12
   },
@@ -769,20 +766,37 @@
         "createdDay": 1,
         "entityId": "aldric",
         "updatedDay": 1
+      },
+      "water-keeper": {
+        "id": "water-keeper",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs"
+        ],
+        "links": [
+          "millbrook",
+          "aldric",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "water-keeper",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 10.757855332294028,
-    "cerebral": 4.88624252495628,
-    "social": 1.9703725093562658,
-    "generous": 4.901142528068798,
-    "cautious": 1.970248753121875
+    "strategic": 11.704066055632557,
+    "cerebral": 4.861811312331499,
+    "social": 2.9605206468094845,
+    "generous": 5.876636815428454,
+    "cautious": 1.9603975093562658
   },
   "aptitudes": [
     "strategist"
   ],
-  "actionCount": 8,
+  "actionCount": 9,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -804,8 +818,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783878353994,
-  "rev": 21,
+  "updatedAt": 1783878649800,
+  "rev": 24,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -829,6 +843,12 @@
     {
       "id": "aldric",
       "text": "Silas struck a provisioning deal with Aldric the smokehouse man on World-day 12 — hunting in exchange for food and supplies, with Aldric asking for any information Silas finds about the upstream conta",
+      "day": 1,
+      "subjectId": "aldric"
+    },
+    {
+      "id": "aldric",
+      "text": "Silas made his first hunting delivery to Aldric on World-day 12 — two rabbits and the pigeon. Aldric provided preserved trail food in return. The provisioning arrangement is now active.",
       "day": 1,
       "subjectId": "aldric"
     }

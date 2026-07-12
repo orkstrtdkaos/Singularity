@@ -737,3 +737,40 @@ Only once the corpus is final: redesign the tree/graph around the civilization s
 - **Generation assist:** BATCH-9's `generate()` can populate the interiors once a region's anchors + grammar are authored — author the SPINE, generate the flesh.
 
 *Aevi's lane. The largest remaining content gap in the project. Nothing is blocked on CCode.*
+---
+
+## SNG-061 — The Library (make the lore readable)
+
+**Erik-directed 2026-07-11:** *"the codex needs to have the lore accessible... in case someone wants to read about places and people."* 🔧 CCode. Aevi PO. **Content already exists** — 26 lore files (~180KB) in `content/packs/valley/lore/`, currently unreadable in-game.
+
+**Two tiers — keep them distinct:**
+1. **THE LIBRARY (open — the world's guide).** Always readable, no discovery gate. This is the setting: `the_twelve_reaches` (the peoples and their crafts), `traditions.json` (**render the GREAT CIRCLE — the 24 traditions, the 12 axes, who stands beside whom and who stands across**), `world_framing`, `the_coordinate_world` (incl. **theCenter** and its Coliseum), `the_pole_intensity_model`, `universal_roles`, `power_systems`, `valley_primer`, `precursors`, `the_game_and_coin`, `greater_arcs`. A player — or Brooklyn, before she ever plays — can sit and read the world. Browsable by category: **Peoples & Traditions · The World · The Valley · Powers & Crafts.**
+2. **THE CODEX (discovered — YOUR world).** What THIS character has found: places visited, people met, things heard of, facts accreted. Already exists (SNG-019 + the map's visited/heard grammar). Keep the discovery gate — it's the record of *your* passage.
+
+**Build:** a Library section (alongside the Codex) that renders the lore JSON/MD as readable prose — headings, entries, cross-links. Entries link INTO the codex where the player has met the thing ("you have been here" / "you have met her"), and the codex links OUT to the Library for background. **Never leak `hooks` / GM-EYES-ONLY fields** — those are authored into several lore + NPC + companion files and must be filtered from any player-facing render. Also surface the great circle as a *readable* thing, not just a gating mechanism — it's the most beautiful structure in the world and nobody can currently see it.
+
+**Erik test:** "Open the Library — read about the Umbrals, the Rootkin, the great circle, the Coliseum, without having discovered any of it. Then open the Codex — see only what your character actually found."
+
+---
+
+## SNG-062 — The Prologue: character creation as a PLAYED scene (supersedes SNG-059's form approach; absorbs SNG-039)
+
+**Erik-directed 2026-07-11:** *"a beginning quest — for character creation. They pick a few things and then are walked through a random encounter or scenario that makes them choose their domains and skills to succeed. After that they have a complete character and a new companion — ready for the world!"* 🔧 CCode. Aevi PO (owes the prologue scenario content). **⭐ TOP PRIORITY — replaces SNG-059's dropdown builder. Brooklyn should get THIS.**
+
+**Why this is the right shape (not just nicer):** the engine ALREADY derives disposition from what a player actually does (`sense.js` tendencies → aptitudes). A form asks you to *declare* who you are; the prologue lets you *find out*. Character creation stops being data-entry and becomes the first thing that happens to you. It also teaches the deep system by play — which is exactly SNG-039's brief, so **SNG-039 is absorbed here.**
+
+**The flow:**
+1. **Pick a few things (minimal):** name, **form/appearance** (SNG-053 — an Ent must never arrive human), and a light temperament/origin seed. That's all. No domain dropdown.
+2. **Play the opening scenario.** A short scene with 3–4 problems, each solvable several ways — force, guile, care, reason, craft, concealment, endurance, negotiation. Every solution path maps to a tradition on the great circle. The player just *acts*; nothing announces that they're being measured.
+3. **Skills emerge from use, not purchase.** You get the abilities you actually *used* — "you did this, so you know this" — instead of spending points on a list you don't understand yet. (This is the practice/discovery system doing what it already does, at rank 0.)
+4. **The companion arrives IN the scene** and joins for a *reason* — they help at a moment that matters, or you help them. Offer 2–3 from the 9-strong roster (SNG-057) whose nature fits how you've been playing, and let the player choose AND NAME who stays. **A companion you met is worth more than one you were issued.**
+5. **Domains CRYSTALLIZE at the end — revealed, then CONFIRMED.** The accrued tendencies name your primary tradition; secondary/tertiary are offered from ring-adjacent positions consistent with how you played. **Show the player the circle, show them where they landed and WHY ("you talked your way past the gate; you stood between them and harm"), and let them adjust before committing.** Revealed, not imposed — the player keeps the last word.
+6. **Out the far side:** a complete character, domains set on the circle, starting abilities they've already *used*, a named companion who joined for a reason — and a player who now knows how the game works because they just played it.
+
+**Guardrails.** The prologue must be replayable/varied (several openings — Aevi authors 2–3, and BATCH-9 `generate()` can vary the texture). Never punish a "wrong" choice — every path leads to a valid character. Confirm-before-commit is mandatory (no locked-in domain the player didn't intend). Keep it SHORT — a prologue, not a first act. Migration: existing characters keep everything; they're offered a one-time domain-confirm.
+
+**✍️ AEVI OWES:** the prologue scenario content — 2–3 openings, each with problems that fan across the circle (a fight, a locked way, a frightened person, a broken thing, a lie), plus the companion-arrival beats.
+
+**Erik test:** "Have Brooklyn play the prologue — verify she never picks a domain from a list, that the scene tells her who she turned out to be and why, that she chose and named the companion who showed up, and that she can adjust before committing."
+
+*Supersedes the SNG-059 dropdown builder (SNG-059's four components remain the REQUIREMENTS; this is the delivery). Absorbs SNG-039 onboarding.*

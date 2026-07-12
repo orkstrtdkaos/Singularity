@@ -1167,3 +1167,35 @@ On the UI path an encounter is a card. **In narrative play it must arrive INSIDE
 - Low-danger locations still skew beneficial/benign/**beautiful**. *The valley is hopeful-strange, not grim.*
 
 **Erik test:** "Play narratively for a while — travel and camp by describing it, never touching the map — verify things happen to you: a Rootkin answers a question you asked twenty minutes ago; the road has something to say. Then have a short conversation — verify it stays quiet."
+---
+
+## SNG-076 — Authored prose is being truncated mid-word ⛔
+
+**Erik-found live 2026-07-12:** *"the text in many places gets cut off — see the Quest Log, but also in the news when word spreads."* 🔧 CCode. Aevi PO.
+
+### PWSV (measured at HEAD v1.8.25) — hard character slices on authored text
+| Site | Code | Effect |
+|---|---|---|
+| `engine/quests.js:65` | `summary: String(...).slice(0, 240)` | **Quest stakes die at 240 chars** → *"…and Ove…"* |
+| `engine/quests.js:50` | `clampNote = n => String(n).slice(0, 200)` | stage notes truncated |
+| `engine/worldtick.js:170, 281` | `String(n.text).slice(0, 220)` | **away-digest cut mid-word** → *"the district acco ("* |
+| `engine/worldtick.js:98` | `String(n).slice(0, 200)` | news truncated at source |
+
+### Root cause — **two distinct bugs, and the first one is conceptual**
+
+**1. AUTHORED content is being clamped as if it were untrusted model output.**
+The clamps are *correct in origin*: they bound GM-generated strings so a runaway model cannot write 10KB into a field. **But authored content is not untrusted** — quest premise, stakes, stage objectives and outcome narration come from content packs, are deliberately written, and are already finite. **Clamping them is not a safety measure; it is vandalism of the thing the player is meant to read.**
+> **Rule:** *authored content renders in full. Model output is clamped. These are different classes of string and must be treated as such.*
+
+**2. Every clamp cuts mid-word with no ellipsis logic.** `slice(0, N)` on prose produces `"and Ove"`, `"the district acco ("`. Even where clamping is right, **the cut is wrong.**
+
+### Fix
+1. **Authored strings are NOT clamped.** Quest `premise` · `stakes` · stage `objective` · outcome `narration` · location `descriptionSeed` · NPC/companion prose — all render **in full**. `[CCODE: audit every clamp and classify the string's ORIGIN — content pack vs model]`
+2. **Where a clamp IS correct (model output), clamp properly:** cut on a **word boundary**, append a real ellipsis, and **make it expandable** ("… more") rather than destroyed. **Never lose text the player might want.**
+3. **Raise the model-output storage bounds** so a normal sentence survives (220 chars is under two sentences of GM prose — a stored news item should not lose its own verb). Suggest ~600 for stored news/notes; the bound exists to stop runaway output, not to fit a UI.
+4. **The away-digest specifically:** entries render whole, or are expandable. *A propagating world-event is one of the few places the world speaks to you unprompted — losing its second half is losing the point of it.*
+5. CSS: no `line-clamp`/`overflow:hidden` on prose panels. `[CCODE: confirm]`
+
+**Erik test:** "Open the Quest Log — verify the stakes read to the end. Trigger an away-digest — verify each item reads to the end. Then confirm a long GM narration still can't blow up the layout."
+
+*Priority: HIGH. The prose IS the game — this is the one thing that must not be quietly damaged. And it is damaging the authored content most, because authored content is the longest.*

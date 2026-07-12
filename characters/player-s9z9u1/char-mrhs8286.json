@@ -238,86 +238,102 @@
       {
         "summary": "Froe collar reset and seated; backlog cleared except the hand-axe waiting on bar stock for its heat-collar.",
         "narration": "The hand-axe goes back on the bench with a light click, out of the way of the sharpening station but within reach when Pell wants it. You tell her the crack's old and stopped — heat-collar on the eye wall before any edge work, and you'll need a strip of bar stock for it. She makes a sound that means *noted* and reaches past the vise for a short length of flat iron without being asked.\n\nThe froe is last in the pile for a reason. You work the collar free with the belt knife's spine and two fingers, checking the set of the sprung ring against the blade's shoulder. It's not broken — the iron stretched rather than cracked, which means the fix is a careful squeeze in the vise and a reset of the collar's seat, not a re-forge. Pell's vise is a good one. You crank it down slow, feeling for the give, and the collar closes back to its proper line with a short complaint of metal. You dress the seat with three strokes of the file, check the blade doesn't rock, and set the froe on the bench beside the billhook.\n\nStructural work: done. The rack holds the drawknife, billhook, both skinners, and the froe — all clean. The hand-axe sits apart, waiting on its heat-collar. You straighten, roll your shoulder once, and look across the shop at Pell. Huginn shifts on the hook-row and resettles, one talon curling around the iron like punctuation.\n\n\"Collar piece,\" you say to Pell, meaning the bar stock for the axe. It's the one question still open between you and a clear backlog."
+      },
+      {
+        "summary": "Bar stock confirmed — Pell supplies a clean strip for the hand-axe heat-collar; the backlog is fully within reach of completion.",
+        "narration": "Pell sets the flat iron on the bench between you and taps it once with her knuckle — a short strip, maybe nine inches, quarter-inch thickness. 'That'll collar it,' she says, and goes back to the vise.\n\nYou pick it up and turn it in the light from the overhang. The grain is clean, no laminations, good working temperature from sitting near the forge. You hold it against the eye wall of the hand-axe — the fit is workable; you'll need to bring the strip to a slight curve before seating it, but the stock is right. You tell her so.\n\n'Then set it when you're ready.' She doesn't look up. 'Fire's banked. Take what heat you need.'\n\nHuginn shifts on the hook-row — one talon, then the other — and resettles with the unhurried patience of something that has watched many small problems get solved and found none of them surprising. The forge breathes its low steady heat. The hand-axe question is answered; the backlog, all of it, is now within reach of being closed."
       }
     ],
     "lastTurn": {
-      "narration": "The hand-axe goes back on the bench with a light click, out of the way of the sharpening station but within reach when Pell wants it. You tell her the crack's old and stopped — heat-collar on the eye wall before any edge work, and you'll need a strip of bar stock for it. She makes a sound that means *noted* and reaches past the vise for a short length of flat iron without being asked.\n\nThe froe is last in the pile for a reason. You work the collar free with the belt knife's spine and two fingers, checking the set of the sprung ring against the blade's shoulder. It's not broken — the iron stretched rather than cracked, which means the fix is a careful squeeze in the vise and a reset of the collar's seat, not a re-forge. Pell's vise is a good one. You crank it down slow, feeling for the give, and the collar closes back to its proper line with a short complaint of metal. You dress the seat with three strokes of the file, check the blade doesn't rock, and set the froe on the bench beside the billhook.\n\nStructural work: done. The rack holds the drawknife, billhook, both skinners, and the froe — all clean. The hand-axe sits apart, waiting on its heat-collar. You straighten, roll your shoulder once, and look across the shop at Pell. Huginn shifts on the hook-row and resettles, one talon curling around the iron like punctuation.\n\n\"Collar piece,\" you say to Pell, meaning the bar stock for the axe. It's the one question still open between you and a clear backlog.",
-      "sceneSummary": "Froe collar reset and seated; backlog cleared except the hand-axe waiting on bar stock for its heat-collar.",
+      "narration": "Pell sets the flat iron on the bench between you and taps it once with her knuckle — a short strip, maybe nine inches, quarter-inch thickness. 'That'll collar it,' she says, and goes back to the vise.\n\nYou pick it up and turn it in the light from the overhang. The grain is clean, no laminations, good working temperature from sitting near the forge. You hold it against the eye wall of the hand-axe — the fit is workable; you'll need to bring the strip to a slight curve before seating it, but the stock is right. You tell her so.\n\n'Then set it when you're ready.' She doesn't look up. 'Fire's banked. Take what heat you need.'\n\nHuginn shifts on the hook-row — one talon, then the other — and resettles with the unhurried patience of something that has watched many small problems get solved and found none of them surprising. The forge breathes its low steady heat. The hand-axe question is answered; the backlog, all of it, is now within reach of being closed.",
+      "sceneSummary": "Bar stock confirmed — Pell supplies a clean strip for the hand-axe heat-collar; the backlog is fully within reach of completion.",
       "choices": [
         {
-          "label": "She has bar stock that'll serve — work out the collar stock between you and close the question.",
+          "label": "Work the collar now — bring the strip to heat, curve it, and seat it on the eye wall. Close the backlog entirely.",
           "attribute": "practical",
           "subAttribute": "craft",
+          "axes": {
+            "spectrumId": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "practical",
-            "careful"
+            "careful",
+            "craft",
+            "finish"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "She's short the right gauge — ask where in the village you'd find off-cut iron. Mara Wells or someone else with scrap.",
+          "label": "Hand-axe is in good shape and you know the fix — ask Pell now if she knows where Corvin's east furlong is. Start pulling the hunt party together while the iron's still warm.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "ask",
-            "practical"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "With the structural work done, ask Pell when she wants to move on Corvin — the backlog is nearly clear, and the hunt needs a third before it has a shape.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "axes": {
+            "spectrumId": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
             "plan",
-            "ask"
+            "help",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Your own action — say or do something specific at the forge, or step away from it entirely.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Use Order-Sense on the bar stock itself before you collar it — read the strip's load structure and make sure the heat-curve will seat true.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "free"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": true
+        },
+        {
+          "label": "Set the collar work aside for a moment and step to the shop's open front — look out at the lane and take the morning's measure. Who's moving, what's the river light doing, is anything different today.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "lightsense",
+          "energyCost": 3,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning.",
+        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring mid-morning light through the overhang opening. Forge banked low, heat steady.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "At her vise, file paused — waiting on the bar-stock question."
+            "state": "Back at the vise, file resumed, not watching — content the bar-stock question is settled."
           },
           {
             "name": "Huginn",
-            "state": "Resettled on the hook-row, one talon around the iron, watching the shop."
+            "state": "Resettled on the hook-row, both talons settled, watching the shop with its usual unhurried attention."
           }
         ],
         "objects": [
-          "Drawknife — corrected, set aside on the rack",
-          "Billhook — face-work complete, set aside on the rack",
-          "Two skinning blades — both sharpened, on the rack",
-          "Froe — collar reset and seated, set aside on the rack",
-          "Hand-axe — hairline in the eye wall (old stop-crack, not in weld) — heat-collar needed; bar stock question open",
+          "Drawknife — corrected, on the rack",
+          "Billhook — face-work complete, on the rack",
+          "Two skinning blades — sharpened, on the rack",
+          "Froe — collar reset and seated, on the rack",
+          "Hand-axe — hairline in eye wall (stop-crack, old); heat-collar needed; bar stock now confirmed and in hand",
+          "Bar stock strip — nine inches, quarter-inch, clean grain; in Silas's hand",
           "Sharpening station: flat stone, slip, leather strop",
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
@@ -325,68 +341,42 @@
           "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oiled), light point"
         ],
         "threads": [
-          "Hand-axe needs a heat-collar — bar stock question open with Pell",
+          "Heat-collar on the hand-axe — bar stock in hand, forge banked and ready; one task remaining to fully close the backlog",
           "Corvin still to be found and invited — east furlong, not yet contacted",
           "Hunt departs once backlog is fully clear"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the collar fix was named.",
-          "learned": [
-            "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At her forge on the south lane — vise paused, waiting on the bar-stock answer."
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced elsewhere.",
-          "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Structural backlog cleared except hand-axe; bar-stock question open; hunt party of three still forming.",
-            "visited": true
-          }
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A focused half-hour of collar work and bench sorting — froe reset, hand-axe assessed and set aside."
+        "hoursPassed": 0.25,
+        "why": "A brief exchange to confirm bar stock — a few minutes at the bench"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning.",
+      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring mid-morning light through the overhang opening. Forge banked low, heat steady.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "At her vise, file paused — waiting on the bar-stock question."
+          "state": "Back at the vise, file resumed, not watching — content the bar-stock question is settled."
         },
         {
           "name": "Huginn",
-          "state": "Resettled on the hook-row, one talon around the iron, watching the shop."
+          "state": "Resettled on the hook-row, both talons settled, watching the shop with its usual unhurried attention."
         }
       ],
       "objects": [
-        "Drawknife — corrected, set aside on the rack",
-        "Billhook — face-work complete, set aside on the rack",
-        "Two skinning blades — both sharpened, on the rack",
-        "Froe — collar reset and seated, set aside on the rack",
-        "Hand-axe — hairline in the eye wall (old stop-crack, not in weld) — heat-collar ",
+        "Drawknife — corrected, on the rack",
+        "Billhook — face-work complete, on the rack",
+        "Two skinning blades — sharpened, on the rack",
+        "Froe — collar reset and seated, on the rack",
+        "Hand-axe — hairline in eye wall (stop-crack, old); heat-collar needed; bar stock",
+        "Bar stock strip — nine inches, quarter-inch, clean grain; in Silas's hand",
         "Sharpening station: flat stone, slip, leather strop",
         "Iron hooks in rows along the shop wall",
         "Coils of heavier chain (full)",
-        "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-        "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oile"
+        "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake"
       ],
       "threads": [
-        "Hand-axe needs a heat-collar — bar stock question open with Pell",
+        "Heat-collar on the hand-axe — bar stock in hand, forge banked and ready; one task remaining to fully close the backlog",
         "Corvin still to be found and invited — east furlong, not yet contacted",
         "Hunt departs once backlog is fully clear"
       ]
@@ -926,11 +916,11 @@
     }
   },
   "tendencies": {
-    "strategic": 16.67821511597502,
-    "cerebral": 8.369654364312701,
-    "social": 17.04437250681449,
-    "generous": 7.341036015667165,
-    "cautious": 6.662517305593844
+    "strategic": 16.594824040395146,
+    "cerebral": 8.327806092491137,
+    "social": 16.959150644280417,
+    "generous": 7.3043308355888295,
+    "cautious": 7.629204719065875
   },
   "aptitudes": [
     "strategist",
@@ -938,7 +928,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 25,
+  "actionCount": 26,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -960,8 +950,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783898827357,
-  "rev": 45,
+  "updatedAt": 1783898952927,
+  "rev": 46,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

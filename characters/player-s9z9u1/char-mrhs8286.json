@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.085768390625
+    "spectrumId": -0.13147997109374998
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -174,20 +174,26 @@
       {
         "summary": "Silas hands over two rabbits and the pigeon; Aldric trades preserved food and names Mara Wells at the supply store for hunting kit.",
         "narration": "You unshoulder the pack and pull the two rabbits free — cleaned, tied at the hocks with a twist of cord, still cold from the morning. You lay them beside the pigeon on the cutting block. Aldric looks at the three of them together: the birds flanking the pair of rabbits, the arrangement tidy. His expression doesn't change much, but his knife hand relaxes another degree.\n\n\"Two rabbits and the pigeon,\" you say. \"For preserved food — something that travels. And I've got a question alongside that, if you'll take it.\"\n\nAldric turns one rabbit over, checks the belly cut, nods once. The work is good and he can see it. He sets it back. \"I can do dried perch — what's left of decent quality — and some salted pork. Small parcel, but it'll hold a week on the road.\" He moves to the far rack and starts pulling wrapped parcels from a shelf beneath it, not hurrying. \"The question?\"\n\n\"Hunting kit,\" you say. \"Traps, snares — anything that helps me bring you more of this. Or a name, if you know one.\" Aldric sets a cloth-wrapped parcel on the block and tilts his head toward the village lane. \"Mara Wells keeps the supply store — east side of the well, red door. She stocks rope, hardware, occasionally traps when someone trades one in. Tell her the smokehouse sent you and she won't charge you a finder's fee on top.\" He wraps a second parcel, smaller, and knots it. His eyes go to the rabbits again — already thinking ahead to the rack. \"Snares you'll do better setting yourself. Deadfalls too. But Mara's your first stop.\""
+      },
+      {
+        "summary": "Silas introduces himself properly; Aldric names the village blacksmith Pell on the south lane as the local source for heavy hunting hardware.",
+        "narration": "You pick up the two cloth-wrapped parcels — solid weight, the perch smell faintly through the fabric — and tuck them into the pack. \"Silas Weir,\" you say, settling the straps. \"Appreciate the fair trade, Aldric.\"\n\nHe dips his chin — the acknowledgment of a man who doesn't waste ceremony. \"Weir.\" He's already lifting the first rabbit toward the iron hook, orienting it by habit. \"Bowyer's not in the village. Had one, moved on two winters back — nobody filled it.\" He loops the cord and steps back to check the hang. \"Blacksmith you want is Pell. Works the forge on the south lane, past the elder's post. Does edge work, hardware, repairs. If you need heavier iron — snares, spear-tips, that kind of thing — she's your person.\" A pause, and he glances at Huginn, who has settled on the low beam above the door and is watching the rabbits go up with professional interest. \"Your bird always watch the hang like that?\"\n\nHuginn does not move. Its eye catches the fire-glow from the banked coals and holds it.\n\n\"Mostly,\" you say.\n\nAldric makes a sound that isn't quite a laugh, picks up his fillet knife, and gets back to work — the conversation closed in the comfortable way of a man satisfied with what just happened, not the closed way of one who isn't."
       }
     ],
     "lastTurn": {
-      "narration": "You unshoulder the pack and pull the two rabbits free — cleaned, tied at the hocks with a twist of cord, still cold from the morning. You lay them beside the pigeon on the cutting block. Aldric looks at the three of them together: the birds flanking the pair of rabbits, the arrangement tidy. His expression doesn't change much, but his knife hand relaxes another degree.\n\n\"Two rabbits and the pigeon,\" you say. \"For preserved food — something that travels. And I've got a question alongside that, if you'll take it.\"\n\nAldric turns one rabbit over, checks the belly cut, nods once. The work is good and he can see it. He sets it back. \"I can do dried perch — what's left of decent quality — and some salted pork. Small parcel, but it'll hold a week on the road.\" He moves to the far rack and starts pulling wrapped parcels from a shelf beneath it, not hurrying. \"The question?\"\n\n\"Hunting kit,\" you say. \"Traps, snares — anything that helps me bring you more of this. Or a name, if you know one.\" Aldric sets a cloth-wrapped parcel on the block and tilts his head toward the village lane. \"Mara Wells keeps the supply store — east side of the well, red door. She stocks rope, hardware, occasionally traps when someone trades one in. Tell her the smokehouse sent you and she won't charge you a finder's fee on top.\" He wraps a second parcel, smaller, and knots it. His eyes go to the rabbits again — already thinking ahead to the rack. \"Snares you'll do better setting yourself. Deadfalls too. But Mara's your first stop.\"",
-      "sceneSummary": "Silas hands over two rabbits and the pigeon; Aldric trades preserved food and names Mara Wells at the supply store for hunting kit.",
+      "narration": "You pick up the two cloth-wrapped parcels — solid weight, the perch smell faintly through the fabric — and tuck them into the pack. \"Silas Weir,\" you say, settling the straps. \"Appreciate the fair trade, Aldric.\"\n\nHe dips his chin — the acknowledgment of a man who doesn't waste ceremony. \"Weir.\" He's already lifting the first rabbit toward the iron hook, orienting it by habit. \"Bowyer's not in the village. Had one, moved on two winters back — nobody filled it.\" He loops the cord and steps back to check the hang. \"Blacksmith you want is Pell. Works the forge on the south lane, past the elder's post. Does edge work, hardware, repairs. If you need heavier iron — snares, spear-tips, that kind of thing — she's your person.\" A pause, and he glances at Huginn, who has settled on the low beam above the door and is watching the rabbits go up with professional interest. \"Your bird always watch the hang like that?\"\n\nHuginn does not move. Its eye catches the fire-glow from the banked coals and holds it.\n\n\"Mostly,\" you say.\n\nAldric makes a sound that isn't quite a laugh, picks up his fillet knife, and gets back to work — the conversation closed in the comfortable way of a man satisfied with what just happened, not the closed way of one who isn't.",
+      "sceneSummary": "Silas introduces himself properly; Aldric names the village blacksmith Pell on the south lane as the local source for heavy hunting hardware.",
       "choices": [
         {
-          "label": "Head to Mara Wells's supply store — red door, east of the well — and see what hunting kit she has in stock",
+          "label": "Head to Pell's forge on the south lane — look at what she stocks, ask about heavier snare iron or a hunting spear",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "explore",
+            "help",
             "trade"
           ],
           "abilityId": null,
@@ -197,14 +203,16 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Aldric more about Mara Wells before you go — what kind of woman is she, and what does she want from strangers",
+          "label": "Stop at Mara Wells's red door first — Aldric's name waives the finder's fee, and she may stock traps already made",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "trade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -213,14 +221,16 @@
           "emergenceId": null
         },
         {
-          "label": "Before leaving, ask Aldric what he's actually seen upstream — exact mornings, how far the gray-green reached, whether anything else came with it",
+          "label": "Ask Aldric one more thing before you leave — what he's personally seen of the gray-green water, and how long it's been going",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "investigate"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -229,10 +239,12 @@
           "emergenceId": null
         },
         {
-          "label": "Take the provisions, thank Aldric, and head north to the meadows — set some deadfall traps and scout the upstream bend before the morning's gone",
-          "attribute": "practical",
+          "label": "Leave the smokehouse and take a slow walk through the village lane — get a feel for who's out and what's moving this morning",
+          "attribute": "mental",
           "subAttribute": "wits",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
             "scout",
@@ -249,51 +261,35 @@
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [
-          {
-            "name": "Preserved Trail Parcel",
-            "kind": "consumable",
-            "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
-            "consumable": true,
-            "effects": {
-              "health": 0,
-              "energy": 10
-            }
-          }
-        ],
+        "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Two rabbits and the pigeon now laid on the cutting block; two cloth-wrapped provision parcels beside them.",
+        "setting": "Millbrook smokehouse interior — squat stone building off the main lane, low beam ceiling, blue hickory smoke threading the eave. Mid-morning light through the low doorway. Rabbits and pigeon now on the iron racks; two provision parcels in Silas's pack.",
         "npcsPresent": [
           {
             "name": "Aldric",
-            "state": "wrapping a second provision parcel, already eyeing the rabbits for the rack — work ahead of him, satisfied with the exchange"
+            "state": "back to filleting, rabbits hung — satisfied with the exchange, conversation closed naturally"
+          },
+          {
+            "name": "Huginn",
+            "state": "perched on the low beam above the door, watching the hung rabbits with calm, professional stillness"
           }
         ],
         "objects": [
-          "Two cleaned rabbits (on cutting block, delivered)",
-          "Pigeon (on cutting block, delivered)",
-          "Two cloth-wrapped provision parcels (dried perch and salted pork — ready for Silas)",
-          "Two racks of gray-gilled river perch on iron hooks",
-          "Fillet knife (resting on cutting block, relaxed)",
-          "Cutting block (dark with use)",
-          "Canvas apron (worn)",
-          "Banked fire beneath the racks"
+          "Iron racks — gray-gilled river perch, now joined by two rabbits and the pigeon",
+          "Fillet knife (in Aldric's hand, working)",
+          "Cutting block (dark with use, cleared)",
+          "Banked fire beneath the racks",
+          "Canvas apron (worn by Aldric)"
         ],
         "threads": [
-          "Aldric named Mara Wells — red door east of the well — as the source for traps and hunting hardware",
-          "The upstream contamination — Aldric's interest and what he knows firsthand remains unasked",
-          "First delivery complete; next delivery expected"
+          "Pell the blacksmith — south lane, past the elder's post — named as the source for heavier iron hunting hardware",
+          "Mara Wells — red door east of the well — traps and hardware, finder's fee waived with Aldric's name",
+          "The upstream contamination — Aldric's firsthand observations unasked"
         ]
       },
       "npcUpdates": [
@@ -302,46 +298,36 @@
           "npcId": "aldric",
           "name": "Aldric",
           "role": "Smokehouse operator, Millbrook",
-          "note": "Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for traps and hunting hardware, and named the smokehouse as a reference.",
+          "note": "Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, spear-tips, edge work. No bowyer in the village; the last one left two winters back.",
           "learned": [
-            "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
-            "Telling Mara 'the smokehouse sent you' waives her finder's fee"
+            "No bowyer currently in Millbrook — position unfilled since two winters ago",
+            "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit"
           ],
-          "skillsObserved": [
-            "supply accounting",
-            "practical negotiation",
-            "fillet work"
-          ],
-          "relationshipDelta": 1,
+          "skillsObserved": [],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the smokehouse, first delivery received, provisions exchanged — expects ongoing hunting deliveries and upstream information from Silas"
+          "statusNote": "At the smokehouse, back to filleting — satisfied with the exchange, conversation naturally closed."
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas made his first hunting delivery to Aldric on World-day 12 — two rabbits and the pigeon. Aldric provided preserved trail food in return. The provisioning arrangement is now active.",
-          "subjectId": "aldric"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
+          "note": "Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters.",
           "subPlace": {
-            "name": "Smokehouse",
-            "note": "First delivery made — rabbits and pigeon on the rack; Aldric named Mara Wells (red door, east of the well) as the source for hunting equipment",
-            "visited": true
+            "name": "Pell's Forge",
+            "note": "South lane, past the elder's post — blacksmith Pell, edge work and hunting hardware",
+            "visited": false
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "fact": "Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the first stop for hunting equipment.",
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "No bowyer in the village — the last one left two winters back, position unfilled. The blacksmith is Pell, south lane past the elder's post: edge work, hardware, snare iron, spear-tips.",
           "links": [
-            "millbrook",
             "aldric",
             "aldric-provisioning-deal"
           ]
@@ -349,31 +335,33 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the smokehouse — parcels handed over, directions given"
-      }
+        "why": "a short exchange — introductions and a quick question about craftspeople"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Two rabbits and the pigeon now laid on the cutting block; two cloth-wrapped provision parcels beside them.",
+      "setting": "Millbrook smokehouse interior — squat stone building off the main lane, low beam ceiling, blue hickory smoke threading the eave. Mid-morning light through the low doorway. Rabbits and pigeon now on the iron racks; two provision parcels in Silas's pack.",
       "npcsPresent": [
         {
           "name": "Aldric",
-          "state": "wrapping a second provision parcel, already eyeing the rabbits for the rack — work ahead of him, satisfied with the exch"
+          "state": "back to filleting, rabbits hung — satisfied with the exchange, conversation closed naturally"
+        },
+        {
+          "name": "Huginn",
+          "state": "perched on the low beam above the door, watching the hung rabbits with calm, professional stillness"
         }
       ],
       "objects": [
-        "Two cleaned rabbits (on cutting block, delivered)",
-        "Pigeon (on cutting block, delivered)",
-        "Two cloth-wrapped provision parcels (dried perch and salted pork — ready for Sil",
-        "Two racks of gray-gilled river perch on iron hooks",
-        "Fillet knife (resting on cutting block, relaxed)",
-        "Cutting block (dark with use)",
-        "Canvas apron (worn)",
-        "Banked fire beneath the racks"
+        "Iron racks — gray-gilled river perch, now joined by two rabbits and the pigeon",
+        "Fillet knife (in Aldric's hand, working)",
+        "Cutting block (dark with use, cleared)",
+        "Banked fire beneath the racks",
+        "Canvas apron (worn by Aldric)"
       ],
       "threads": [
-        "Aldric named Mara Wells — red door east of the well — as the source for traps and hunting hardware",
-        "The upstream contamination — Aldric's interest and what he knows firsthand remains unasked",
-        "First delivery complete; next delivery expected"
+        "Pell the blacksmith — south lane, past the elder's post — named as the source for heavier iron hunting hardware",
+        "Mara Wells — red door east of the well — traps and hardware, finder's fee waived with Aldric's name",
+        "The upstream contamination — Aldric's firsthand observations unasked"
       ]
     }
   },
@@ -499,14 +487,17 @@
       "relationship": 2,
       "history": [
         "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
-        "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t"
+        "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t",
+        "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s"
       ],
       "knownFacts": [
         "His name is Aldric",
         "He's aware the gray-green water comes from upstream and has been watching it",
         "He runs fixed accounts — the catch decline is already hitting his regular customers",
         "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
-        "Telling Mara 'the smokehouse sent you' waives her finder's fee"
+        "Telling Mara 'the smokehouse sent you' waives her finder's fee",
+        "No bowyer currently in Millbrook — position unfilled since two winters ago",
+        "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit"
       ],
       "skillsObserved": [
         "fillet work",
@@ -514,7 +505,7 @@
         "practical negotiation"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse, first delivery received, provisions exchanged — expects ongoing hunting deliveries and upstream information from Silas",
+      "statusNote": "At the smokehouse, back to filleting — satisfied with the exchange, conversation naturally closed.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -532,7 +523,8 @@
         "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
         "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
         "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra",
-        "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return."
+        "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
+        "[d1] Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -563,6 +555,12 @@
           "day": 1,
           "visited": true,
           "note": "First delivery made — rabbits and pigeon on the rack; Aldric named Mara Wells (red door, east of the well) as the source"
+        },
+        "pell-s-forge": {
+          "name": "Pell's Forge",
+          "day": 1,
+          "visited": false,
+          "note": "South lane, past the elder's post — blacksmith Pell, edge work and hunting hardware"
         }
       },
       "vectorsKnown": [
@@ -686,11 +684,14 @@
           "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. A figure named Usnea prop",
           "[d1] The cookhouse woman's wariness at a stranger with uncanny company suggests Millbrook's openness to outsiders is thinner than the village's unaligned reputation implies — at least at ground level, on t",
           "[d1] The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even befo",
-          "[d1] The smokehouse operates on fixed accounts — preserved fish distributed to regular customers on a list older than the operator's apron. One man, one fire, no experimentation. The fish shortage is alrea"
+          "[d1] The smokehouse operates on fixed accounts — preserved fish distributed to regular customers on a list older than the operator's apron. One man, one fire, no experimentation. The fish shortage is alrea",
+          "[d1] No bowyer in the village — the last one left two winters back, position unfilled. The blacksmith is Pell, south lane past the elder's post: edge work, hardware, snare iron, spear-tips."
         ],
         "links": [
           "disputed-zone",
-          "water-crisis-discoloration"
+          "water-crisis-discoloration",
+          "aldric",
+          "aldric-provisioning-deal"
         ],
         "aliases": [
           "Millbrook's Elder Declaration",
@@ -787,16 +788,16 @@
     }
   },
   "tendencies": {
-    "strategic": 11.704066055632557,
-    "cerebral": 4.861811312331499,
-    "social": 2.9605206468094845,
-    "generous": 5.876636815428454,
-    "cautious": 1.9603975093562658
+    "strategic": 11.645545725354394,
+    "cerebral": 4.8375022557698415,
+    "social": 4.945718043575437,
+    "generous": 5.847253631351312,
+    "cautious": 1.9505955218094844
   },
   "aptitudes": [
     "strategist"
   ],
-  "actionCount": 9,
+  "actionCount": 10,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -818,8 +819,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783878649800,
-  "rev": 24,
+  "updatedAt": 1783891303009,
+  "rev": 25,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

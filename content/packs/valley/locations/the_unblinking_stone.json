@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_unblinking_stone",
+  "name": "The Unblinking Stone",
+  "regionId": "the_stark_reach",
+  "communityId": "verist.stone",
+  "axisVector": [
+    0.2,
+    0.7,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "falsehood_truth": 0.7,
+    "chaos_order": 0.3,
+    "emotional_logical": 0.2
+  },
+  "tags": [
+    "verist",
+    "truth",
+    "city",
+    "stark",
+    "home"
+  ],
+  "connections": [
+    "the_told_ground",
+    "the_flensing"
+  ],
+  "descriptionSeed": "Unadorned stone, no ornament, no comfort, and no lies. The Verists say what is so, whatever it costs, and it costs. They are not cruel — many of them are gentle — but they will tell you the thing nobody has ever told you, on the day you meet, and they will not apologize, and years later you may be grateful.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Verists who tell you the exact truth about yourself within an hour; a visitor reeling from it; a Verist who is dying of the truth they told and does not regret it.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A truth has been told that has ruined an innocent and the teller was correct to tell it",
+    "The Verists have learned something about the Valley and are coming to say it out loud"
+  ],
+  "map": {
+    "x": 200,
+    "y": 380
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

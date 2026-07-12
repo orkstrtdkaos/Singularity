@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.025374999999999995
+    "spectrumId": -0.029106249999999993
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -132,23 +132,27 @@
       {
         "summary": "Silas is turned away at the cookhouse — a stranger with strange company — though a boy in the back takes an interest.",
         "narration": "The cookhouse is a low building behind the well — smoke-stained, with a half-door propped open and the smell of rendered fat and yesterday's onions coming through it. A woman with flour on her wrists and an expression like a door that doesn't want to open stands behind the counter, already watching you approach. You set the pigeon on the counter. Cleaned, fresh, a decent bird.\n\nShe looks at it. Then at you. Her eyes go to Huginn on your shoulder — or wherever the bird has chosen to perch this moment — and something in her face closes the rest of the way. A stranger walking in off the south lane, uncanny company, dropping a dead bird on her prep surface. Whatever you hoped to open with, it isn't working. 'We've got our own fowl,' she says, flat, and doesn't reach for it. 'Leave it at the smokehouse if you want coin. I'm not running a trading post.'\n\nShe turns back to her work. The half-door is still open — you're not thrown out — but the conversation that would have come with a meal and a willing ear isn't on offer here. One other person is in the room: a boy, maybe twelve, sweeping the floor near the back wall. He glanced up at you when you came in. He's glancing up again now, with the particular attention children give to things adults refuse to look at."
+      },
+      {
+        "summary": "Silas takes the pigeon to the smokehouse and meets the man working there.",
+        "narration": "You pick the pigeon back up off the counter. The cookhouse woman's shoulders drop half an inch — relief, not disappointment. The boy in the back watches you tuck the bird under your arm, his broom going still.\n\nThe smokehouse is easy enough to find: follow the lane past the well, turn where the smell of hickory and rendered fat sharpens into something purposeful. It's a squat stone building with a low doorway and a wedge of smoke leaking from the eave-gap, thin and blue in the cold morning air. The door stands open. Inside, two broad racks of fish hang on iron hooks over a banked fire — river perch, by the look of them, a little gray at the gill, which explains the early nets.\n\nA man in his late forties stands at a cutting block near the back wall, working a fillet knife with the economy of someone who has done this every morning of his life. He has the blocky forearms of a man who handles wet wood and heavy loads, and a canvas apron gone dark with use. He glances up when you step through the doorway. His eyes tick to Huginn — wherever the bird has settled — and then to the pigeon in your hand, in that order. The bird gets a longer look than the man does.\n\n\"Cookhouse send you?\" he says. No warmth, no hostility. Just the flat factual register of someone who has a lot of fish to process and wants to know if your business is worth stopping for."
       }
     ],
     "lastTurn": {
-      "narration": "The cookhouse is a low building behind the well — smoke-stained, with a half-door propped open and the smell of rendered fat and yesterday's onions coming through it. A woman with flour on her wrists and an expression like a door that doesn't want to open stands behind the counter, already watching you approach. You set the pigeon on the counter. Cleaned, fresh, a decent bird.\n\nShe looks at it. Then at you. Her eyes go to Huginn on your shoulder — or wherever the bird has chosen to perch this moment — and something in her face closes the rest of the way. A stranger walking in off the south lane, uncanny company, dropping a dead bird on her prep surface. Whatever you hoped to open with, it isn't working. 'We've got our own fowl,' she says, flat, and doesn't reach for it. 'Leave it at the smokehouse if you want coin. I'm not running a trading post.'\n\nShe turns back to her work. The half-door is still open — you're not thrown out — but the conversation that would have come with a meal and a willing ear isn't on offer here. One other person is in the room: a boy, maybe twelve, sweeping the floor near the back wall. He glanced up at you when you came in. He's glancing up again now, with the particular attention children give to things adults refuse to look at.",
-      "sceneSummary": "Silas is turned away at the cookhouse — a stranger with strange company — though a boy in the back takes an interest.",
+      "narration": "You pick the pigeon back up off the counter. The cookhouse woman's shoulders drop half an inch — relief, not disappointment. The boy in the back watches you tuck the bird under your arm, his broom going still.\n\nThe smokehouse is easy enough to find: follow the lane past the well, turn where the smell of hickory and rendered fat sharpens into something purposeful. It's a squat stone building with a low doorway and a wedge of smoke leaking from the eave-gap, thin and blue in the cold morning air. The door stands open. Inside, two broad racks of fish hang on iron hooks over a banked fire — river perch, by the look of them, a little gray at the gill, which explains the early nets.\n\nA man in his late forties stands at a cutting block near the back wall, working a fillet knife with the economy of someone who has done this every morning of his life. He has the blocky forearms of a man who handles wet wood and heavy loads, and a canvas apron gone dark with use. He glances up when you step through the doorway. His eyes tick to Huginn — wherever the bird has settled — and then to the pigeon in your hand, in that order. The bird gets a longer look than the man does.\n\n\"Cookhouse send you?\" he says. No warmth, no hostility. Just the flat factual register of someone who has a lot of fish to process and wants to know if your business is worth stopping for.",
+      "sceneSummary": "Silas takes the pigeon to the smokehouse and meets the man working there.",
       "choices": [
         {
-          "label": "Leave the pigeon on the counter as a gift with no strings, and go — let the gesture stand without pushing",
+          "label": "Offer the pigeon straight — a fair price, no talk, just a clean trade",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
             "spectrumId": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "gracious",
-            "withdraw"
+            "trade",
+            "straightforward"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -157,16 +161,16 @@
           "emergenceId": null
         },
         {
-          "label": "Address the boy directly — ask him what he's heard about the river; children notice things adults won't say aloud",
+          "label": "Trade the pigeon for information — ask about the smokehouse's buyers, the fish catches, or the river",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {
-            "spectrumId": -0.2
+            "spectrumId": 0.1
           },
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "persuade",
+            "trade",
+            "gather-information",
             "careful"
           ],
           "abilityId": null,
@@ -176,37 +180,39 @@
           "emergenceId": null
         },
         {
-          "label": "Take the pigeon to the smokehouse as she suggested — see who's working there and whether they're more willing to talk",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the cookhouse itself before leaving — read its structure, its patterns of use, its load-bearing routines; sometimes a room tells you what the people won't",
+          "label": "Use Order-Sense quietly on the smokehouse itself — read the structure of this operation, who it serves, where the weight falls",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "spectrumId": -0.4
+            "spectrumId": -0.2
           },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "careful"
+            "careful",
+            "scout"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask him directly about the gray fish — the early nets, the bad catches — and let that open the conversation",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "gather-information",
+            "direct",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -223,74 +229,53 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Millbrook cookhouse, behind the village well — a low smoke-stained building, half-door open, cold morning light coming in from the lane. Early spring, mid-morning, clear.",
+        "setting": "Millbrook smokehouse — a squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch hanging on iron hooks.",
         "npcsPresent": [
           {
-            "name": "Cookhouse woman",
-            "state": "turned back to her prep work, flour on her wrists, has said her piece"
-          },
-          {
-            "name": "Boy (sweeping)",
-            "state": "sweeping the back of the room, glancing up at Silas with undisguised curiosity"
-          },
-          {
-            "name": "Huginn",
-            "state": "somewhere nearby, performing indifference, noted by the cookhouse woman"
+            "name": "Smokehouse Man",
+            "state": "standing at the cutting block with a fillet knife, watching Silas, waiting for an answer to his question"
           }
         ],
         "objects": [
-          "Fresh Game (1 pigeon) — on the counter, unclaimed",
-          "Prep counter — flour-dusted",
-          "Broom (boy's)",
-          "Half-door — open, not blocking"
+          "Pigeon (fresh, cleaned, under Silas's arm)",
+          "Two racks of river perch on iron hooks",
+          "Fillet knife (in the man's hand)",
+          "Cutting block (dark with use)",
+          "Canvas apron (worn)",
+          "Banked fire beneath the racks"
         ],
         "threads": [
-          "The cookhouse woman won't trade or talk — a stranger with strange company reads as trouble",
-          "The boy in the back is paying attention where the adult refused to",
-          "The pigeon is still unclaimed on the counter",
-          "The smokehouse was mentioned as the place to take game for coin"
+          "The smokehouse man is waiting to hear if Silas's business is worth his time",
+          "The gray-gilled perch on the racks suggest the fish catch is already compromised",
+          "Huginn's presence has been noted — the man clocked the bird before the pigeon"
         ]
       },
       "npcUpdates": [
         {
           "op": "meet",
-          "npcId": "cookhouse-woman",
-          "name": "Cookhouse Woman",
-          "role": "Cookhouse operator, Millbrook",
-          "description": "Flour-wrists, flat affect, door-that-doesn't-want-to-open energy — runs the cookhouse behind the well and doesn't trust strangers with strange birds.",
-          "note": "Refused the pigeon and the implied trade. Turned back to her work. Not hostile, just closed.",
+          "npcId": "smokehouse-man",
+          "name": "Smokehouse Man",
+          "role": "Smokehouse operator, Millbrook",
+          "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone with a full morning's work ahead. Noticed Huginn before he noticed the pigeon.",
+          "note": "Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage",
           "learned": [
-            "Wary of Silas specifically — the uncanny company (Huginn) registered visibly",
-            "Directed him to the smokehouse for game trades"
+            "Works the smokehouse mornings; has a full rack of gray-gilled perch — catches are down and the quality is suffering"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": -1,
-          "status": "active",
-          "statusNote": "At the cookhouse behind the well, working prep, conversation closed."
-        },
-        {
-          "op": "meet",
-          "npcId": "cookhouse-boy",
-          "name": "Boy (name unknown)",
-          "role": "Sweeping the cookhouse, possibly cookhouse-woman's son or apprentice",
-          "description": "Maybe twelve, broom in hand — giving Silas the kind of attention children give to things adults refuse to look at.",
-          "note": "Said nothing yet. Watching openly.",
-          "learned": [
-            "Noticed Silas and Huginn where the woman would not engage"
+          "skillsObserved": [
+            "fillet work"
           ],
-          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the back of the cookhouse, sweeping, watching Silas."
+          "statusNote": "At the smokehouse off the main lane, working a morning fillet session, waiting on Silas's answer"
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
+          "note": "The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled river perch, consistent with compromised catches.",
           "subPlace": {
-            "name": "Cookhouse",
-            "note": "Low smoke-stained building behind the well — flour, rendered fat, half-door. Operator is closed to strangers; a boy sweeps the back.",
+            "name": "Smokehouse",
+            "note": "Stone building off the main lane — hickory smoke, iron racks, fillet work every morning. Operator noted Huginn before the pigeon.",
             "visited": true
           }
         }
@@ -301,7 +286,7 @@
           "label": "Millbrook",
           "kind": "place",
           "entityId": "millbrook",
-          "fact": "The cookhouse woman's wariness at a stranger with uncanny company suggests Millbrook's openness to outsiders is thinner than the village's unaligned reputation implies — at least at ground level, on the lane.",
+          "fact": "The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even before the nets are pulled early.",
           "links": [
             "water-crisis-discoloration"
           ]
@@ -309,37 +294,30 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the cookhouse — the conversation closed quickly."
+        "why": "A short walk from the cookhouse to the smokehouse — just a few minutes down the lane"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook cookhouse, behind the village well — a low smoke-stained building, half-door open, cold morning light coming in from the lane. Early spring, mid-morning, clear.",
+      "setting": "Millbrook smokehouse — a squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch hanging on iron hooks.",
       "npcsPresent": [
         {
-          "name": "Cookhouse woman",
-          "state": "turned back to her prep work, flour on her wrists, has said her piece"
-        },
-        {
-          "name": "Boy (sweeping)",
-          "state": "sweeping the back of the room, glancing up at Silas with undisguised curiosity"
-        },
-        {
-          "name": "Huginn",
-          "state": "somewhere nearby, performing indifference, noted by the cookhouse woman"
+          "name": "Smokehouse Man",
+          "state": "standing at the cutting block with a fillet knife, watching Silas, waiting for an answer to his question"
         }
       ],
       "objects": [
-        "Fresh Game (1 pigeon) — on the counter, unclaimed",
-        "Prep counter — flour-dusted",
-        "Broom (boy's)",
-        "Half-door — open, not blocking"
+        "Pigeon (fresh, cleaned, under Silas's arm)",
+        "Two racks of river perch on iron hooks",
+        "Fillet knife (in the man's hand)",
+        "Cutting block (dark with use)",
+        "Canvas apron (worn)",
+        "Banked fire beneath the racks"
       ],
       "threads": [
-        "The cookhouse woman won't trade or talk — a stranger with strange company reads as trouble",
-        "The boy in the back is paying attention where the adult refused to",
-        "The pigeon is still unclaimed on the counter",
-        "The smokehouse was mentioned as the place to take game for coin"
+        "The smokehouse man is waiting to hear if Silas's business is worth his time",
+        "The gray-gilled perch on the racks suggest the fish catch is already compromised",
+        "Huginn's presence has been noted — the man clocked the bird before the pigeon"
       ]
     }
   },
@@ -405,6 +383,32 @@
         "locationId": "millbrook",
         "day": 1
       }
+    },
+    "smokehouse-man": {
+      "id": "smokehouse-man",
+      "name": "Smokehouse Man",
+      "role": "Smokehouse operator, Millbrook",
+      "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone with a full morning's work ahead. Noticed Huginn before he noticed the pigeon.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage"
+      ],
+      "knownFacts": [
+        "Works the smokehouse mornings; has a full rack of gray-gilled perch — catches are down and the quality is suffering"
+      ],
+      "skillsObserved": [
+        "fillet work"
+      ],
+      "status": "active",
+      "statusNote": "At the smokehouse off the main lane, working a morning fillet session, waiting on Silas's answer",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -415,7 +419,8 @@
         "[d1] A dead rabbit was raised to life here on World-day 12 — the air smelled of metal for one sharp second, then cleared. The thing happened at the base of the fence-post by the river path.",
         "[d1] Order-Sense revealed a structural seam in the resurrected rabbit — a second pattern woven through its original architecture, stable and of unknown authorship. The animal remains oriented south toward ",
         "[d1] The resurrected rabbit entered Millbrook's south fence line heading into the village — alive, oriented south, seam intact. World-day 12.",
-        "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company."
+        "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
+        "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -440,6 +445,12 @@
           "day": 1,
           "visited": true,
           "note": "Low smoke-stained building behind the well — flour, rendered fat, half-door. Operator is closed to strangers; a boy swee"
+        },
+        "smokehouse": {
+          "name": "Smokehouse",
+          "day": 1,
+          "visited": true,
+          "note": "Stone building off the main lane — hickory smoke, iron racks, fillet work every morning. Operator noted Huginn before th"
         }
       },
       "vectorsKnown": [
@@ -559,7 +570,8 @@
         "kind": "event",
         "facts": [
           "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. A figure named Usnea prop",
-          "[d1] The cookhouse woman's wariness at a stranger with uncanny company suggests Millbrook's openness to outsiders is thinner than the village's unaligned reputation implies — at least at ground level, on t"
+          "[d1] The cookhouse woman's wariness at a stranger with uncanny company suggests Millbrook's openness to outsiders is thinner than the village's unaligned reputation implies — at least at ground level, on t",
+          "[d1] The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even befo"
         ],
         "links": [
           "disputed-zone",
@@ -625,14 +637,16 @@
     }
   },
   "tendencies": {
-    "strategic": 7.8905985012499995,
-    "cerebral": 3.95019975,
-    "social": 0.985074875,
-    "generous": 2.955224625,
-    "cautious": 0.990025
+    "strategic": 8.851145508743748,
+    "cerebral": 3.9304487512499997,
+    "social": 0.9801495006250001,
+    "generous": 3.940448501875,
+    "cautious": 0.985074875
   },
-  "aptitudes": [],
-  "actionCount": 5,
+  "aptitudes": [
+    "strategist"
+  ],
+  "actionCount": 6,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -654,8 +668,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783877103193,
-  "rev": 16,
+  "updatedAt": 1783877199730,
+  "rev": 17,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

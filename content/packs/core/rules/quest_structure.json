@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "quest_structure",
+  "kind": "rules",
+  "note": "SNG-065 — the shape a quest must have. Authored by Aevi 2026-07-11 on Erik's direction: 'I want the quests to be meaningful and have some concrete structure.'",
+  "theRule": "IF YOU CANNOT NAME THE COST OF IGNORING IT, IT IS NOT A QUEST. It is an errand. Errands are fine; they are not quests and must not be logged as such.",
+  "required": {
+    "premise": "The situation, plainly. Two sentences.",
+    "stakes": "What is at risk, and WHO PAYS if the player walks away. Mandatory. This is the field that separates a quest from a fetch.",
+    "axis": "The axis this quest lives ON. A quest is a TENSION BETWEEN TWO POLES — that is what makes it a dilemma instead of a chore. If you cannot name the axis, the quest has no spine.",
+    "traditions": "Which peoples' crafts open routes through it. Feeds the multi-route requirement.",
+    "stages": "2-5. Each: objective (one sentence, player-statable) + condition (ENGINE-TESTABLE: place reached / person spoken to / thing obtained / truth learned / roll passed) + change (what shifts in the world when this stage lands). NO vague 'investigate further'.",
+    "routes": "Force, guile, care, reason, craft, concealment, truth, endurance. A quest with ONE solution is a lock, not a story. Routes fan across the great circle so a player's domains change how they approach it.",
+    "outcomes": "2-4 BRANCHED endings. NOT success/fail — WHICH success. Each names its own consequences.",
+    "consequences": "MANDATORY, per outcome. At least one DURABLE change: a codex fact, an NPC's life/standing/death, a people's disposition toward you, a location's state, or a world-event that PROPAGATES (dated on the shared clock, surfacing later via the away-digest). A quest that changes nothing durable is not allowed to be a quest."
+  },
+  "optional": {
+    "legend": "The SNG-042 figure this touches, if any.",
+    "giver": "NPC id.",
+    "region": "Where it lives.",
+    "tier": "riffraff / regional / epic — scales with the player's arc."
+  },
+  "designLaws": [
+    "The best quests have no clean exit. Someone is worse off whatever you choose; the quest is about WHO, and that is the player's to answer for.",
+    "Never punish the route. Force, guile, and care are all legitimate; they lead to DIFFERENT outcomes, not better and worse ones.",
+    "The consequence must be findable later. If the player cannot go back and SEE what they did, it did not happen.",
+    "A quest should make at least one person permanently different — including, sometimes, the player."
+  ]
+}

@@ -136,7 +136,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -179,6 +179,7 @@ export function tierParts(ctx) {
   if (perilNote) scene.push(`## PRECURSOR DRIFT\n${perilNote}`);
   if (encounterDetail) scene.push(`## ACTIVE ENCOUNTER (rule 18 — narrate this receipt; never advance its state yourself)\n${encounterDetail}`);
   if (encounterWeaveDetail) scene.push(`## SOMETHING HAPPENS (SNG-075 — the engine rolled this on the time your last beat took; weave it in, do not announce it as a system event)\n${encounterWeaveDetail}`);
+  if (worldPressureDetail) scene.push(`## THE WORLD ACTS (SNG-080 — the scene has been quiet too long; make something happen, in-fiction, this turn)\n${worldPressureDetail}`);
 
   // ---- TIER 4: rolling game-state + conversation history up to the previous turn ----
   if (factsDetail) state.push(`## ESTABLISHED FACTS (authoritative, persistent — never contradict; these are TRUE regardless of how many scenes have passed)\n${factsDetail}`);

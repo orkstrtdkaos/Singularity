@@ -34,6 +34,7 @@ import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonColli
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
+import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
@@ -2494,6 +2495,18 @@ await (async () => {
   const body = clamped.replace(/…$/, "");
   check("SNG-076: an over-long MODEL string cuts on a WORD boundary, never mid-word", clamped.endsWith("…") && long.startsWith(body) && (long[body.length] === " " || long[body.length] === undefined));
   check("SNG-076: the clamp never leaves a dangling partial word", body.split(" ").every(w => long.split(" ").includes(w)));
+})();
+
+// --- SNG-080: the world must PUSH (quiet-turn pacing) ---
+(() => {
+  check("SNG-080: under the threshold the world stays quiet", pressureTier(2, 0) === 0 && pressureTier(0, 0) === 0);
+  check("SNG-080: at the threshold the world ACTS (tier 1)", pressureTier(3, 0) === 1);
+  check("SNG-080: an ignored world ESCALATES (streak raises the tier, capped at 4)", pressureTier(3, 1) === 2 && pressureTier(3, 3) === 4 && pressureTier(3, 9) === 4);
+  check("SNG-080: an eventful turn resets quiet (encounter / quest change / scene end)", isEventfulTurn({ encounterActive: true }) && isEventfulTurn({ questChanged: true }) && isEventfulTurn({ woveEncounter: true }) && isEventfulTurn({ sceneEnded: true }) && !isEventfulTurn({}));
+  const safe = pressureDirective(2, 0, ["The Edge District Ledger"]);
+  check("SNG-080: pressure in a SAFE place is human/small, never a bandit ambush, and tightens a live thread", /frightened neighbour|human and small/.test(safe) && /NEVER a bandit ambush/.test(safe) && /Edge District Ledger/.test(safe) && /antagonist acts on their own clock/.test(safe));
+  const deadly = pressureDirective(4, 4, []);
+  check("SNG-080: pressure in a DANGEROUS place can have teeth, and tier 4 makes something ARRIVE", /can have teeth/.test(deadly) && /ARRIVES/.test(deadly));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

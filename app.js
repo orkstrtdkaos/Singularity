@@ -36,9 +36,10 @@ import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, ap
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
+import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.35";
+const APP_VERSION = "1.8.36";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -75,6 +76,10 @@ let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to injec
 let sceneEncounterFired = false;// one narrative encounter per scene
 let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
 const NARRATIVE_ENCOUNTER_COOLDOWN = 3;
+// SNG-080: the world must push. Track quiet turns; past a threshold, the world ACTS.
+let quietTurns = 0;             // consecutive uneventful GM turns
+let pressureStreak = 0;         // pressures applied in the current idle streak (escalation level)
+let pendingPressure = null;     // a world-pressure directive to weave into the next GM turn
 
 // ---------- boot ----------
 
@@ -1943,6 +1948,7 @@ async function startScene(prompt = "(Scene opening — set the scene where the c
   sceneGenCount = 0;           // SNG-BATCH-9: fresh generation budget each scene
   sceneArtCount = 0;           // SNG-035: fresh moment-art budget each scene
   sceneEncounterFired = false; // SNG-075: one narrative encounter per scene, reset here
+  quietTurns = 0; pressureStreak = 0; // SNG-080: a fresh scene starts the idle count over
   if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
   renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news, aside });
   const result = await runGM({ resolution: null, playerInput: prompt });
@@ -1958,6 +1964,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     (weave.perilous ? ` This could turn dangerous — you MUST present a way to decline, flee, or avoid it as a clear choice BEFORE any engagement. Never narrate the character as already fighting or already harmed.` : ` Let it be a small, real thing on the road${weave.flavor && /benef|benign|beaut/.test(weave.flavor) ? " — a grace, not a threat" : ""}.`) +
     (weave.loreTier === "precursor-glimpse" ? ` This touches the Precursor — glimpsed, never explained.` : ``)
   ) : null;
+  const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
@@ -1986,6 +1993,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
     encounterWeaveDetail, // SNG-075: a narrative-time encounter to weave into THIS turn's fiction
+    worldPressureDetail,  // SNG-080: after quiet turns, a directive to make the world ACT
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
@@ -2193,6 +2201,8 @@ function applyTurn(turn, resolution) {
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // SNG-075: the valley is alive in narrative play too — maybe turn something up (woven next turn)
   maybeNarrativeEncounter(turn, resolution);
+  // SNG-080: the world must PUSH — if nothing has happened for a while, make it happen (woven next turn)
+  maybeWorldPressure(turn, resolution);
   if (gambitHintCooldown > 0) gambitHintCooldown--; // SNG-077: tick down the gambit-hint quiet period
   // party: publish this beat to the shared scene (fire-and-forget)
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
@@ -2487,6 +2497,26 @@ function maybeNarrativeEncounter(turn, resolution) {
   turnsSinceEncounter = 0;
 }
 
+/** SNG-080: the world must PUSH. Count quiet turns; past the threshold, hand the NEXT GM turn a
+ *  pressure directive (escalating, register/danger-aware, tightening a live quest thread). If the
+ *  world already acted this beat (an encounter, a quest change, a scene end), the streak resets —
+ *  the player never has to ask the world to be interesting, and never gets buried in it either. */
+function maybeWorldPressure(turn, resolution) {
+  const woveEncounter = !!pendingWeave; // SNG-075 just set one → the world already acted this beat
+  const questChanged = !!(turn?.questUpdates?.length || turn?.stateOps?.length);
+  const eventful = isEventfulTurn({ encounterActive: !!activeEnc(), questChanged, woveEncounter, sceneEnded: turn?.sceneEnded });
+  if (eventful) { quietTurns = 0; pressureStreak = 0; return; }
+  if (gambitDraft) return; // don't interrupt a plan being built
+  quietTurns++;
+  const tier = pressureTier(quietTurns, pressureStreak);
+  if (tier <= 0) return;
+  const loc = hereNow();
+  const questTitles = (character.quests || []).filter(q => q.status === "active").map(q => q.title || q.id);
+  pendingPressure = pressureDirective(tier, loc?.dangerLevel || 0, questTitles);
+  pressureStreak++;   // the next pressure escalates
+  quietTurns = 0;     // space them out — another threshold of quiet before the next push
+}
+
 async function travelTo(locId) {
   if (busy) return;
   noteGeneratedAttention(locId, "revisit", readClock(character.clock).day); // §2: returning to a grown place keeps it alive
@@ -2557,6 +2587,9 @@ async function onAsk(text) {
 
 // ---------- world map ----------
 
+// SNG-080: danger, made legible on the map — so the player can SEE where fighting lives.
+function dangerLabel(dl) { return ["safe", "quiet", "uneasy", "dangerous", "deadly"][Math.max(0, Math.min(4, dl | 0))]; }
+
 function renderMap(selectedId = null) {
   const locs = Object.values(CONTENT.locations);
   const here = character.currentLocationId;
@@ -2584,13 +2617,15 @@ function renderMap(selectedId = null) {
       const visited = isVisited(l.id);
       const reachable = connectedToHere.includes(l.id);
       const pm = character.placeMemory?.[l.id];
-      const cls = `map-node ${terrainClass(l)} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${l.dangerLevel >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
+      const dl = Math.max(0, Math.min(4, l.dangerLevel | 0)); // SNG-080: graduated danger, findable on the map
+      const cls = `map-node ${terrainClass(l)} dl${dl} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${dl >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
       const tip = visited
-        ? `${l.name}${l.id === here ? " — you are here" : ""}${pm?.visits ? ` · ${pm.visits} visit${pm.visits > 1 ? "s" : ""}` : ""}${l.dangerLevel >= 3 ? " · DANGEROUS" : ""}${reachable ? " · one travel away" : ""}`
+        ? `${l.name}${l.id === here ? " — you are here" : ""}${pm?.visits ? ` · ${pm.visits} visit${pm.visits > 1 ? "s" : ""}` : ""}${dl >= 1 ? ` · ${dangerLabel(dl)}` : ""}${reachable ? " · one travel away" : ""}`
         : `Unknown place — you've only heard of it${reachable ? " · one travel away" : ""}`;
       return `<g class="${cls}" data-mapsel="${esc(l.id)}">
         <title>${esc(tip)}</title>
         <circle class="hit" cx="${P.x}" cy="${P.y}" r="24"/>
+        ${dl >= 2 ? `<circle class="danger-ring dl${dl}" cx="${P.x}" cy="${P.y}" r="${(l.id === here ? 14 : 10) + 4}"/>` : ""}
         <circle cx="${P.x}" cy="${P.y}" r="${l.id === here ? 14 : 10}"/>
         ${visited ? `<text x="${P.x}" y="${P.y + 5}" text-anchor="middle" class="map-icon">${iconForTags(l.tags)}</text>` : ""}
         ${(() => { const sps = Object.values(character.placeMemory?.[l.id]?.subPlaces || {}); return sps.slice(0, 6).map((sp, si) => {
@@ -2617,7 +2652,7 @@ function renderMap(selectedId = null) {
     details = `<div class="map-details">
       <div class="map-details-head">
         <h3>${esc(visited ? l.name : "An unknown place")}</h3>
-        ${l.dangerLevel >= 3 ? `<span class="rep-band wary">dangerous</span>` : ""}
+        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(4, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(4, l.dangerLevel | 0)))}</span>` : `<span class="rep-band trusted">safe</span>`}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
       </div>
       ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}

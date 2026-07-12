@@ -271,6 +271,15 @@ img[data-lightbox] { cursor: zoom-in; }
 .gc-dim .gc-label { opacity: .3; }
 .gc-center { font-family: var(--font-ui); font-size: 13px; fill: var(--accent2); text-transform: uppercase; letter-spacing: 1px; }
 .gc-center-sub { font-family: var(--font-ui); font-size: 10px; fill: var(--ink-dim); }
+/* SNG-080 danger, findable on the map (graduated ring + chip) */
+.danger-ring { fill: none; stroke-width: 2; opacity: .85; pointer-events: none; }
+.danger-ring.dl2 { stroke: #c9a24a; }
+.danger-ring.dl3 { stroke: #d47a3a; }
+.danger-ring.dl4 { stroke: var(--danger); stroke-dasharray: 3 3; }
+.danger-chip.dl1 { border-color: #8a8a5a; color: #b7b77a; }
+.danger-chip.dl2 { border-color: #c9a24a; color: #c9a24a; }
+.danger-chip.dl3 { border-color: #d47a3a; color: #d47a3a; }
+.danger-chip.dl4 { border-color: var(--danger); color: var(--danger); }
 /* SNG-066 feedback */
 .fb-types { display: flex; gap: 8px; flex-wrap: wrap; }
 .fb-type { font-family: var(--font-ui); font-size: 14px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink); cursor: pointer; }

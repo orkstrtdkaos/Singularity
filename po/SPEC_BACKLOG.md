@@ -948,3 +948,27 @@ SNG-056 (location-header desync) → SNG-058 (party leader) → SNG-052 (adult-g
 - Applies to quick-start too: domains must remain editable until the final commit.
 
 **Erik test:** "In creation, hit redo on the great circle — verify you can actually pick a different primary, that secondary/tertiary re-open with it, and that nothing commits until you confirm."
+---
+
+## SNG-068 — Creation commits things BEFORE the confirm (abilities + companions)
+
+**Erik-found in live play 2026-07-11 (v1.8.21/22).** 🔧 CCode. Aevi PO. **Sibling of SNG-067 — same root cause: creation commits state before the player confirms.**
+
+### A. Starting abilities are derived from the PROVISIONAL domains, not the confirmed ones ⛔
+**Evidence (Erik's live character):** *Silas Weir* — primary domain **wright** — holds **Lightsense (Blazeborn)**, **Order-Sense (Lattice-Cities)**, **Numen-Sense (Numinous)**. **Not one is a wright ability.**
+**Root cause (app.js ~1617):** `state.prologue.granted.push(path.grantsAbility)` fires the moment a path is chosen — abilities accrue DURING the prologue. The reveal then derives domains from the tallied tags. **If the player ADJUSTS their domains at the confirm step, the granted abilities are never recomputed.** The character ends up with skills belonging to the domains the game GUESSED, not the ones they CHOSE.
+**This violates SNG-063's hard order rule** (`NAME → FORM → ORIGIN → DOMAINS → ABILITIES`) at the exact point it matters most.
+
+**Fix — reconcile abilities AFTER the domain confirm:**
+- On confirm (and on any adjust), **re-derive the starting ability set against the FINAL domains.**
+- **Prologue-earned abilities are legitimately earned** — *"you did this, so you know this"* is a design law and must not be silently stripped. Keep them, but if an earned ability now falls outside the confirmed domains, **GRANDFATHER it explicitly and say so** ("you did this in the fire; it stays with you, though it is not your people's craft"). It is a nice piece of characterization, not a bug — *provided the player is told*.
+- **AND the character must receive starting ability/ies from their CONFIRMED PRIMARY domain.** A wright who knows nothing wright is broken. This is the actual missing step.
+- Applies to quick-start identically: abilities offered only AFTER domains lock, filtered to what the domains permit.
+
+### B. The companion sidebar lists companions the player has never met ⛔
+**Erik:** *"all companions are listed on the sidebar still — they shouldn't appear unless found in the game."*
+`engine/companions.js → activeCompanions()` is CORRECT (it maps `character.companions`). So the bug is a **different render path** that is iterating the CONTENT roster (`CONTENT.companions` / the 9 `startingOption` entries) instead of the character's acquired list. Find it and point it at `activeCompanions(character, CONTENT.companions)`.
+- **Rule:** the play sidebar shows ONLY companions the character actually HAS. The full roster appears in exactly two places: the quick-start picker, and the prologue's `companionBeat.offer` (2–4, filtered). Nowhere else.
+- A companion you have not met must not exist to you. (Same principle as the Codex's discovery gate — and note the sidebar's *"PEOPLE YOU KNOW — no one yet"* gets this right; companions should behave the same way.)
+
+**Erik test:** "Play the prologue, ADJUST your domains at the reveal, then confirm — verify your starting abilities match the domains you CHOSE (plus any prologue-earned ones, clearly labelled as earned-outside-your-people), and that your sidebar shows only the one companion who actually stayed."

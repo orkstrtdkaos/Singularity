@@ -993,3 +993,56 @@ SNG-056 (location-header desync) → SNG-058 (party leader) → SNG-052 (adult-g
 - Each carries a `gmHint` (how they *behave*, not just what they did) and an `affinity` (challenge types they help with — a modifier, never a gate).
 
 **Erik test:** "Make a character — verify you CHOOSE your background from a real, categorized list including martial disciplines and practitioner lineages, that the game may suggest but never assigns, and that a Cogitant can be a duelist."
+---
+
+## SNG-070 — GM corrections: the game self-heals
+
+**Erik-directed 2026-07-11:** *"we need a GM mechanic where we can have the GM change things for us. That way the game can self heal."* 🔧 CCode. Aevi PO.
+
+**The case, made by this session:** the background was auto-assigned · the domain couldn't be repicked · the abilities came from the wrong domains · the location header desynced · a companion appeared who was never met. **Every one of those needed a code fix and a redeploy to make one player's save correct.** That is the wrong loop. The GM is already sitting in the world with full state access — it should be able to *fix the world*.
+
+**Build — a bounded `stateOps` GM operation:**
+- Player asks in-scene (the existing **Ask GM** affordance): *"my background should be Duelist"* · *"I never met this companion"* · *"this quest is stuck"* · *"the header says I'm in the wrong place."*
+- The GM emits a **`stateOps`** op the engine validates and applies: correct a background / domain / origin · remove an entity the player never acquired · unstick or re-stage a quest · re-anchor the current location · fix a codex fact · repair a bad companion entry.
+- **Narrate it in-fiction where possible** ("you were never a craftsman — that was someone else's story"), but the *mechanism* is a plain state correction, and it must be honest about being one.
+
+**⛔ GUARDRAILS — this is a repair tool, not a wish tool. Non-negotiable:**
+- **Allowed:** fix data that is *wrong* — a field the player never chose, an entity they never acquired, a stuck stage, a desynced pointer.
+- **Refused:** granting XP, levels, items, abilities outside the domain gates, or anything that *advances* rather than *repairs*. Power comes from play. The GM may not hand it over, and must say so plainly and warmly when asked.
+- **Every correction is LOGGED** to the ledger (what changed, from → to, why, world-day) — append-only, reviewable, and it shows up in the save's history. A silent state edit is worse than a bug.
+- **Bounded to the asking player's own character/save.** Never touches shared canon (a promoted entity is repaired via the normal contradiction path, not a GM edit).
+- **Reversible:** the ledger entry is enough to undo it.
+- Respect the floors: corrections cannot raise a rating ceiling or bypass minor-protection.
+
+**Erik test:** "Tell the GM your background is wrong and should be Duelist — verify it's corrected, narrated, and logged. Then ask it for 500 XP — verify it declines, plainly and without being a prig about it."
+
+*This makes the game self-healing: a data bug becomes a conversation instead of a CCode ticket. It does not excuse the bugs — but it means Erik and his family are never STUCK with one.*
+
+---
+
+## SNG-071 — PO discipline: port the Tether pipeline to Singularity ⭐
+
+**Erik-directed 2026-07-11:** *"this game is getting to be large enough to warrant some additional discipline. You have PO duties from Tether that should apply here — the way you write and have CCode review specs, the technical spec, etc."* ✍️ Aevi (process) + 🔧 CCode (`check_pipeline.py`).
+
+### Aevi's honest diagnosis (from the graph — OpFlow_SessionOpen, TetherV525Spec_20260504)
+**Tether's cycle:** Aevi (PO) authors **ROUND 1** → reviewer does **ROUND 2 substrate verification against origin** → amendments → **spec promotes** → CCode executes → `complete_pending_review` → Aevi **review-closes** → `check_pipeline.py` (11 automated checks) gates it. Specs carry: **inline pre-work scope verification** (empirical measurement *before* authoring), phased plans (P1–P5), a **verification-post-ship** section, a **live anchor**, and **spec boundaries** CCode surfaces and Aevi accepts or amends.
+
+**What I have actually been doing in Singularity: idea → spec → CCode builds. There is no ROUND 2.** The cost is measurable, all of it from this session:
+- **poleIntensity:** I authored 66 locations against a *remembered* schema shape. A ROUND-2 read of `location.schema.json` would have caught it before a single file was written.
+- **"Domain gates don't exist":** I asserted from a probe that was already stale — CCode had shipped them. I specced a batch around a false premise.
+- **The manifest bug:** the live game ran on **six locations** for weeks. No pipeline check existed to notice. Tether has eleven.
+- **SNG-067/068/069:** three specs written as three bugs when they are one defect. A ROUND-2 pass would have named the shared root cause first.
+
+### The port — adopt these five, drop nothing else
+1. **TWO-ROUND SPEC CYCLE (the big one).** Aevi authors **ROUND 1 (proposal)**. **CCode performs ROUND 2: substrate verification against origin** — does the code actually do what the spec assumes? do the schemas match? is the premise still true at HEAD? CCode returns findings; **Aevi amends and only then PROMOTES the spec to buildable.** *No spec is built from an unverified premise.* Small bug-fixes may skip ROUND 2; anything touching data shape, engine contracts, or more than one file does not.
+2. **PRE-WORK SCOPE VERIFICATION, INLINE IN THE SPEC.** Every spec opens with **what was measured at HEAD, and when** — file paths, line refs, counts, probe results. Not "I think X is missing" but "`grep primaryDomain app.js` → 0 refs @ v1.8.21." **My own rule, which I have been breaking: read the schema/origin BEFORE authoring, and record what I read in the spec.**
+3. **`check_pipeline.py` — the automated gate CCode owes.** Tether has 11 checks. Singularity has 0. Minimum set (this is SNG-040/064 generalized): manifest parity · manifest paths resolve · **every `provides.*` key has a loader** · no dangling connections · no one-way edges · no unreachable locations · every content file validates against its schema · every ability has a `tradition` · every quest's giver/region resolves · version-line consistency. **Green is required to close anything.**
+4. **STATUS LIFECYCLE, stated explicitly:** `queued → in_progress → complete_pending_review → review-closed → superseded`. Nothing is "done" without a review-close. Only Aevi closes (already true).
+5. **SPEC BOUNDARIES are first-class.** When CCode deviates from a spec, it names the boundary in the results file (it already does this — the `poleIntensity` flag was exactly right). Aevi **accepts or amends** — explicitly, in the ledger. A boundary is a fact, not a failure.
+
+### Artifacts
+- `po/OPERATIONAL_FLOWS.md` — the flows above, written down (Tether has one; Singularity does not).
+- **Retire the ever-growing `SPEC_BACKLOG.md` as the primary surface.** It is now ~100KB of append-only sediment. Per-item specs promote to versioned docs; the backlog becomes an index. (Tether uses `TETHER_UPDATE_vX.XX.md` + `PIPELINE_ALERT.md` + `STATE.md`.)
+- `po/ALERT.md` is the same append-only problem. It should carry **current status only**; history lives in results files and the graph.
+
+**First application: SNG-BATCH-10 gets a ROUND 2 before any more of it is built.** Given that its premise ("domain gates don't exist") was already stale when I wrote it, that is not a formality.

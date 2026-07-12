@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "tier_seven",
+  "name": "Tier Seven",
+  "regionId": "the_lattice_cities",
+  "communityId": "lattice.tier7",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    -0.3,
+    0.7,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "chaos_order": 0.7,
+    "mechanical_spiritual": -0.3,
+    "concrete_abstract": -0.2
+  },
+  "tags": [
+    "lattice",
+    "order",
+    "city",
+    "arcology",
+    "home"
+  ],
+  "connections": [
+    "the_unplanned_room",
+    "the_grand_lattice"
+  ],
+  "descriptionSeed": "One level of one arcology, and it is a perfect machine for living. Nothing is unplanned. Your work, your meal, your route, your hour of rest, your suitable partner — all optimized, all correct, all genuinely BETTER than what you would have chosen. The Lattice-folk are not oppressed; they are well-served, and they will tell you so, and they will be telling the truth, and the truth is somehow the most disturbing part.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Citizens who are content and correct; a scheduler who knows where you will be tomorrow; someone who deviated by four minutes and is being gently, thoroughly helped.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A citizen has begun doing one small thing that was not on their schedule, every day, and the Lattice has noticed",
+    "The optimizer has produced an outcome that is optimal and monstrous, and it is not wrong"
+  ],
+  "map": {
+    "x": 520,
+    "y": 180
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

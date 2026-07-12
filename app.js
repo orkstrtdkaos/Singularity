@@ -10,7 +10,7 @@ import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene, narrativeRegist
 import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
-import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict } from "./engine/sync.js";
+import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
@@ -36,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.15";
+const APP_VERSION = "1.8.16";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -184,6 +184,47 @@ function loadLegStatus() {
   try { return JSON.parse(localStorage.getItem("singularity.previewLegs") || "{}"); } catch { return {}; }
 }
 function saveLegStatus(map) { try { localStorage.setItem("singularity.previewLegs", JSON.stringify(map)); } catch { /* ignore */ } }
+
+// SNG-051 auto-verify: a leg's pass-condition is detected as it HAPPENS in real play (dev boxes
+// only), marks it pass, and — when sync is on — REPORTS it to Aevi via a synced status file so
+// the verified leg drops out of the active checklist. Never touches normal players (devEnabled).
+const LEG_STATUS_PATH = "data/preview_legs_status.json";
+let _reportingLegs = false;
+
+/** Fire-and-forget: push all locally-verified-but-unreported legs to the synced status file Aevi
+ *  reads, then mark them reported (so they clear from the panel). No-op without sync. */
+async function reportLegStatus() {
+  if (!devEnabled() || !syncEnabled() || _reportingLegs) return;
+  const map = loadLegStatus();
+  const toReport = Object.entries(map).filter(([, s]) => s.status === "pass" && !s.reported);
+  if (!toReport.length) return;
+  _reportingLegs = true;
+  try {
+    await pushMergedFile(LEG_STATUS_PATH, (remote) => {
+      const store = (remote && typeof remote === "object") ? remote : {};
+      store.schemaVersion = 1; store.id = "preview_legs_status"; store.verified = store.verified || {};
+      for (const [id, s] of toReport) store.verified[id] = { status: "pass", auto: !!s.auto, note: s.note || "", at: s.at || Date.now(), by: profile?.displayName || profile?.playerKey || "dev" };
+      store.updatedAt = new Date().toISOString();
+      return store;
+    }, `preview-legs: ${toReport.length} verified in play`);
+    const m2 = loadLegStatus();
+    for (const [id] of toReport) m2[id] = { ...(m2[id] || {}), reported: true };
+    saveLegStatus(m2);
+  } catch { /* offline / no write — stays unreported, retried on the next detection */ }
+  finally { _reportingLegs = false; }
+}
+
+/** Auto-mark a preview leg verified when its pass-condition fires in real play. Dev-only; idempotent
+ *  (won't downgrade a manual mark or re-mark a reported one); reports to Aevi when sync is on. */
+function autoVerifyLeg(legId, note) {
+  if (!devEnabled() || !legId) return;
+  const map = loadLegStatus();
+  const cur = map[legId];
+  if (cur?.status === "pass") { if (!cur.reported) reportLegStatus(); return; }
+  map[legId] = { ...(cur || {}), status: "pass", auto: true, note: note || cur?.note || "auto-detected in play", at: Date.now() };
+  saveLegStatus(map);
+  reportLegStatus();
+}
 
 let _previewLegsData = null; // cached fetch of the Aevi-owned data file
 
@@ -367,14 +408,22 @@ async function renderPreviewLegs() {
   }
   const legs = _previewLegsData.legs || [];
   const status = loadLegStatus();
-  const verified = legs.filter(l => status[l.id]?.status === "pass").length;
-  // group by mode → batch
+  // A leg CLEARS (drops out of the active checklist) once its verification is reported back to
+  // Aevi (status[id].reported) OR Aevi has marked it closed in the data file (l.closed / top-level
+  // closed[]). Everything else stays active.
+  const closedIds = new Set([...(_previewLegsData.closed || []), ...legs.filter(l => l.closed === true).map(l => l.id)]);
+  const isCleared = l => !!status[l.id]?.reported || closedIds.has(l.id);
+  const active = legs.filter(l => !isCleared(l));
+  const cleared = legs.filter(isCleared);
+  const verifiedActive = active.filter(l => status[l.id]?.status === "pass").length;
+  // group ACTIVE by mode → batch
   const byMode = {};
-  for (const l of legs) (byMode[l.mode] = byMode[l.mode] || []).push(l);
+  for (const l of active) (byMode[l.mode] = byMode[l.mode] || []).push(l);
   const MODE_LABEL = { solo: "Solo (play anytime)", "cross-player": "Cross-player (needs sync on two profiles)" };
 
   const legRow = (l) => {
     const st = status[l.id]?.status || "untried";
+    const auto = st === "pass" && status[l.id]?.auto ? ` <span class="leg-auto" title="${esc(status[l.id]?.note || "auto-detected in play")}">auto ✓</span>` : "";
     // SNG-051 addendum: a leg with a resolvable force intent gets a ▶ Run button; a null/manual
     // force (cross-player, or a leg needing two characters) is labelled manual, no button.
     const intent = l.force && l.force.intent;
@@ -385,7 +434,7 @@ async function renderPreviewLegs() {
       : (l.force && l.force.manual) ? `<span class="leg-manual">manual — ${esc(l.force.manual)}</span>` : "";
     const runDisabled = intent && !runnable ? ` <span class="leg-manual" title="the runner doesn't know '${esc(intent)}' yet">(unsupported intent)</span>` : "";
     return `<div class="leg-row leg-${st}">
-      <div class="leg-head"><span class="leg-batch">${esc(l.batch)}</span> <strong>${esc(l.title)}</strong></div>
+      <div class="leg-head"><span class="leg-batch">${esc(l.batch)}</span> <strong>${esc(l.title)}</strong>${auto}</div>
       <div class="leg-do"><em>Do:</em> ${esc(l.do)}</div>
       <div class="leg-pass"><em>Pass:</em> ${esc(l.pass)}</div>
       <div class="leg-status-row">${LEG_STATUS.map(s => `<button class="leg-btn ${st === s ? "on" : ""}" data-leg="${esc(l.id)}" data-status="${s}">${LEG_STATUS_LABEL[s]}</button>`).join("")}${runCtl}${runDisabled}</div>
@@ -394,12 +443,14 @@ async function renderPreviewLegs() {
   };
 
   chrome(`<div class="screen" style="max-width:820px">
-    <h2>🧪 Preview Legs <span class="hint" style="text-transform:none">— ${verified} of ${legs.length} verified${_previewLegsData.buildVersion ? ` · data for v${esc(_previewLegsData.buildVersion)}` : ""}</span></h2>
-    <p class="hint" style="margin-bottom:12px">Mark each leg as you test it. Marks persist in this browser. Data is authored by Aevi (<code>data/preview_legs.json</code>).</p>
-    ${legs.length ? Object.keys(byMode).map(mode => `
+    <h2>🧪 Preview Legs <span class="hint" style="text-transform:none">— ${verifiedActive} of ${active.length} left${cleared.length ? ` · ${cleared.length} cleared` : ""}${_previewLegsData.buildVersion ? ` · data for v${esc(_previewLegsData.buildVersion)}` : ""}</span></h2>
+    <p class="hint" style="margin-bottom:12px">Legs auto-mark <strong>auto ✓</strong> when their moment happens in play${syncEnabled() ? " and report to Aevi automatically" : ""}. A leg drops out once it's verified back to Aevi (or Aevi closes it). Data authored by Aevi (<code>data/preview_legs.json</code>).</p>
+    ${active.length ? Object.keys(byMode).map(mode => `
       <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(MODE_LABEL[mode] || mode)}</h3>
       ${byMode[mode].map(legRow).join("")}</div>`).join("")
-      : "<div class='insight'>No preview-legs data found (data/preview_legs.json absent).</div>"}
+      : "<div class='insight'>🎉 Nothing left in this checklist — every leg is verified &amp; reported to Aevi.</div>"}
+    ${cleared.length ? `<details class="cs-block"><summary class="codex-title" style="font-size:15px; cursor:pointer">✓ ${cleared.length} cleared — verified &amp; reported to Aevi</summary>
+      ${cleared.map(l => `<div class="leg-cleared"><span class="leg-batch">${esc(l.batch)}</span> ${esc(l.title)} <span class="hint">${closedIds.has(l.id) ? "closed by Aevi" : "reported"}${status[l.id]?.note ? " · " + esc(status[l.id].note) : ""}</span></div>`).join("")}</details>` : ""}
     <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap">
       <button class="btn secondary" id="legs-copy">Copy summary for Aevi</button>
       <button class="btn secondary" id="legs-back">Back</button>
@@ -499,6 +550,7 @@ function renderSettings(note = "") {
     if (!adultChecked && profile.rating?.adultVerified) revokeAdultGate(profile);
     const rv = setRating(profile, wantRating, { authority: "erik", adultGate: adultChecked || !!profile.rating?.adultVerified });
     saveProfile(profile);
+    if (rv.ok) autoVerifyLeg("b9p1-rating", `ceiling set to ${wantRating}`); // SNG-051 auto-verify
     if (!rv.ok) { renderSettings("Content rating unchanged — " + rv.reason + `. (Still ${ratingCeiling(profile)}.)`); return; }
     renderRoster();
   };
@@ -710,9 +762,10 @@ function ensureCharacterPortrait(c, { force = false, milestone = null } = {}) {
   if (!c || !imagesEnabled()) return null;
   const seedKey = `${c.id}${milestone ? `-lvl${c.level}` : ""}`;
   const url = ensureImage(c, "character", { ratingLevel: viewerRatingLevel(), isMinor: false, seedKey, force });
-  if (url) addGalleryImage(c, { kind: "portrait", prompt: c.name, url,
+  if (url) { addGalleryImage(c, { kind: "portrait", prompt: c.name, url,
     caption: milestone ? `${c.name} — ${milestone}` : `${c.name} — ${String(c.origin || "").replace(/[-_]/g, " ")}`,
     worldDay: absoluteWorldDay() });
+    autoVerifyLeg("sng035-portrait", "a portrait was generated + persisted"); } // SNG-051 auto-verify
   return url;
 }
 
@@ -737,6 +790,7 @@ function ensureLocationImage(locId) {
   if (url) {
     character.locationImages[locId] = url;
     addGalleryImage(character, { kind: "location", prompt: loc.name, url, caption: loc.name, worldDay: absoluteWorldDay() });
+    autoVerifyLeg("sng035-scene", "a location image generated + cached on visit"); // SNG-051 auto-verify
   }
   return url;
 }
@@ -846,6 +900,8 @@ async function handleGenerateRequests(turn) {
       if (type === "location") CONTENT.locations[rec.id] = rec;
       else if (type === "npc") CONTENT.npcs[rec.id] = rec;
       notes.push({ type, name: rec.name, id: rec.id });
+      autoVerifyLeg("b9p1-generate", `minted a ${type}: ${rec.name}`);          // SNG-051 auto-verify
+      if (rec.image) autoVerifyLeg("sng035-scene", `generated ${type} born with its image`);
     }
   }
   return notes;
@@ -996,7 +1052,8 @@ async function maybeTick() {
   const currentDay = readClock(character.clock).day;
   await runWorldTick({ character, content: CONTENT, currentDay });
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
-  await advanceGeneratedOffscreen({ character }); // SNG-BATCH-9 Phase 2: your established grown world moved on while away
+  const offscreen = await advanceGeneratedOffscreen({ character }); // SNG-BATCH-9 Phase 2: your established grown world moved on while away
+  if (offscreen && offscreen.length) autoVerifyLeg("b9p2-offscreen", "an established entity advanced offscreen; away-digest dated"); // SNG-051 auto-verify
   // SNG-BATCH-9 Phase 3: earn nominated entities into shared canon + read the shared world back
   // through THIS viewer's rating-lens. No-op without sync. Never throws.
   try {
@@ -1004,6 +1061,8 @@ async function maybeTick() {
     sharedCanonView = canon.view || [];
     hydrateCanonIntoContent(sharedCanonView);
     surfacePromotions(canon.promoted || []);
+    if ((canon.promoted || []).length) autoVerifyLeg("b9p3-promote", "an entity promoted into shared canon");
+    if (sharedCanonView.some(v => v.decision === "adapt" || v.decision === "filter")) autoVerifyLeg("b9p3-lens", "shared canon dialed down/filtered by the rating-lens");
   } catch (err) { console.warn("[canon] tick skipped:", err?.message); }
   saveCharacter(character);
   return takeUnseenNews(character);
@@ -1463,6 +1522,7 @@ function applyTurn(turn, resolution) {
   // to codex nodes and lets the resolver match drifted titles (SNG-BATCH-7 Phase 3)
   const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
   if (questNotes.some(n => /couldn't match/i.test(n))) console.warn("[quests]", questNotes.filter(n => /couldn't match/i.test(n)));
+  if (questNotes.some(n => /complet/i.test(n))) autoVerifyLeg("b7-inv", "a quest progressed to complete"); // SNG-051 auto-verify
   // SNG-032 narrative-driven time: when the fiction moves time (a night's sleep, a
   // journey montage, a long vigil — or a quick exchange), the GM declares it via
   // timeOps.hoursPassed and the engine advances the clock to match, INSTEAD of the fixed
@@ -1472,6 +1532,7 @@ function applyTurn(turn, resolution) {
   const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
   const hours = declared ? Math.max(0.25, Math.min(72, Number(turn.timeOps.hoursPassed))) : beatDefault;
   advanceClock(character.clock, hours);
+  if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // party: publish this beat to the shared scene (fire-and-forget)
@@ -2051,9 +2112,10 @@ function renderCharacterScreen() {
   for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => {
     const id = btn.dataset.rank2;
     const owned = character.abilities.find(a => a.abilityId === id);
-    const doRank = () => { const r = rankUpAbility(character, id, rules, rankOptsFor()); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
+    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1; // SNG-051: cross-class = 2 pts
+    const doRank = () => { const r = rankUpAbility(character, id, rules, rankOptsFor()); if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
     if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) {
-      renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); doRank(); });
+      renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); doRank(); });
     } else doRank();
   };
   const aspPick = document.getElementById("asp-pick");
@@ -2297,6 +2359,7 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
     const rec = findGenerated(character, b.dataset.keep);
     if (!rec) return;
     recordAttention(rec, "keep", readClock(character.clock).day);
+    autoVerifyLeg("b9p2-keep", `⭐ Kept a grown entity → ${rec._gen?.tier}`); // SNG-051 auto-verify
     saveCharacter(character);
     renderCodexScreen(query, openTopicId);
   };
@@ -2524,6 +2587,7 @@ async function finishGambit(run) {
     bonusXp = Math.max(0, CONTENT.rules.gambit?.completionBonusXp ?? 10);
     character.xp = (character.xp || 0) + bonusXp;
     for (const msg of applyLevelUps(character, CONTENT.rules)) { /* level-ups from the bonus land now */ }
+    autoVerifyLeg("b8-gambit", `ran a gambit to completion (+${bonusXp} xp)`); // SNG-051 auto-verify
   }
   saveProfile(profile); saveCharacter(character);
   const resolution = gambitResolutionForGM(g.goal, run.receipts, g.actions, outcome);
@@ -2961,6 +3025,7 @@ function renderPlay(turn, opts = {}) {
   // SNG-BATCH-5 Phase 2: fork chooser — the player picks A xor B; the other locks permanently.
   const offerFork = (abilityId, viaPractice) => renderForkModal(abilityId, (key) => {
     setFork(character, abilityId, key, CONTENT.branchForks);
+    autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); // SNG-051 auto-verify
     const r = rankUpAbility(character, abilityId, CONTENT.rules, viaPractice ? { viaPractice: true, ...rankOpts() } : rankOpts());
     if (r.ok) afterRank(abilityId, r); else alert(r.why);
   });
@@ -2970,8 +3035,9 @@ function renderPlay(turn, opts = {}) {
     // SNG-BATCH-5 Phase 2: a fork blocks the linear rank — the player must choose a path first
     const owned = character.abilities.find(a => a.abilityId === id);
     if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) { offerFork(id, false); return; }
+    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1; // SNG-051: cross-class = 2 pts
     const r = rankUpAbility(character, id, CONTENT.rules, rankOpts());
-    if (r.ok) afterRank(id, r); else alert(r.why);
+    if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); afterRank(id, r); } else alert(r.why);
   };
   for (const b of app.querySelectorAll("[data-rankpractice]")) b.onclick = () => {
     const id = b.dataset.rankpractice;

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "ceriad",
+  "name": "Ceriad of the Harborward",
+  "role": "Harbor-keeper of the Underlight — she takes in what the light would burn and does not ask why",
+  "homeLocation": "the_harborward",
+  "communityId": "umbral.harborward",
+  "personality": {
+    "warmth": 0.6,
+    "trust": 0.5,
+    "candor": 0.7,
+    "patience": 0.9
+  },
+  "spectrum": {
+    "dark_light": -0.7,
+    "violence_peace": 0.4,
+    "falsehood_truth": 0.2
+  },
+  "voiceHints": "Unhurried, unshockable, and does not fill silences. Never asks what you did. Will tell you plainly if she thinks you are lying to yourself, which is the only lie she objects to.",
+  "knowledge": [
+    "Who is harbored in the Underlight, and she will not tell you",
+    "That at least one of them should not be, and she harbors them anyway",
+    "The exact argument the Blazeborn make, because she has heard it many times and has never once been able to answer it"
+  ],
+  "wants": "For the Harborward to remain a place that does not decide.",
+  "fears": "The day something she harbored does the thing she was warned it would do.",
+  "reactsToReputation": {
+    "any": "she takes you as you come",
+    "judging": "she becomes very still and very polite",
+    "harbored": "she will stand between you and anyone, and never mention it"
+  }
+}

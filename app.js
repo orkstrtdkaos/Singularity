@@ -16,6 +16,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
+import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -36,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.17";
+const APP_VERSION = "1.8.18";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -720,6 +721,30 @@ function fullCatalog() {
   return { ...CONTENT.abilities, ...(character?.customAbilities || {}) };
 }
 
+// SNG-059: display label for a tradition id — the people's name from traditions.json, else prettified.
+function traditionLabel(traditionId) {
+  const t = CONTENT.traditionIndex?.byId?.[traditionId];
+  if (t?.name) return t.name;
+  return String(traditionId || "").replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+}
+
+/** The tradition an ability belongs to (its `tradition` field or the reverse map). */
+function abilityTradition(ability) { return traditionOf(ability, CONTENT.traditionIndex); }
+
+/** SNG-055 domain verdict for an ability given THIS character's chosen domains. */
+function domainVerdict(ability) {
+  return domainAccess(ability, ability?.levelReq || 1, character?.domains, CONTENT.traditionIndex);
+}
+
+/** A stable color for a tradition/class id — known power-systems keep their authored color; a
+ *  tradition (people) gets a deterministic hue so each civilization reads consistently. SNG-059. */
+const KNOWN_CLASSES = new Set(["harmonic", "radiant", "valley_craft", "precursor", "learned", "discovery", "baseline"]);
+function traditionColor(id) {
+  if (KNOWN_CLASSES.has(id)) return classColor(id);
+  let h = 0; for (const ch of String(id || "")) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  return `hsl(${h} 55% 62%)`;
+}
+
 // SNG-047: an ability's FUNCTIONS as small labelled chips — what it DOES at a glance.
 const FN_ICON = { heal: "✚", shield: "⛨", strike: "⚔", reveal: "◉", conceal: "◌", bind: "⛓", move: "➤", break: "✷", ward: "⬡" };
 function functionChips(ab) {
@@ -1194,7 +1219,8 @@ const BACKGROUNDS = [
 ];
 
 function renderCreate() {
-  const state = { name: "", origin: "valley", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [] };
+  const state = { name: "", origin: "valley", background: "craftsman", attrs: { physical: 3, mental: 3, social: 3, practical: 3 }, abilities: [],
+    domains: { primary: null, secondary: null, tertiary: null }, companionId: null, companionName: "", form: "" };
   const POOL = 12;
 
   function abilityChoices() {
@@ -1232,11 +1258,16 @@ function renderCreate() {
             <span style="text-transform:capitalize">${k}</span>
           </div>`).join("")}</div>
       <div class="field"><label>Abilities — choose ${maxAbilities()}</label>
-        ${["harmonic", "radiant", "valley_craft"].filter(sys => okAb.some(a => a.powerSystem === sys)).map(sys => `
-          <div class="sys-group"><div class="sys-label">${sys === "valley_craft" ? "Valley Craft" : sys[0].toUpperCase() + sys.slice(1)}</div>
-          <div class="opt-row">${okAb.filter(a => a.powerSystem === sys).map(a => { const r1 = a.tree?.find(t => t.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div></div>`).join("")}
+        ${(() => {
+          // SNG-059: group starting abilities by TRADITION (the people), not powerSystem/reach
+          const byTrad = {};
+          for (const a of okAb) { const t = traditionOf(a, CONTENT.traditionIndex) || a.powerSystem || "folk"; (byTrad[t] = byTrad[t] || []).push(a); }
+          return Object.keys(byTrad).map(t => `
+            <div class="sys-group"><div class="sys-label">${esc(traditionLabel(t))}</div>
+            <div class="opt-row">${byTrad[t].map(a => { const r1 = a.tree?.find(t => t.rank === 1); return `<button class="opt ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : ""))}">${esc(a.name)}</button>`; }).join("")}</div></div>`).join("");
+        })()}
         <div class="hint">${state.abilities.map(id => { const a = CONTENT.abilities[id]; const r1 = a.tree?.find(t => t.rank === 1); return r1 ? `<strong>${esc(a.name)}</strong> — rank 1 “${esc(r1.name)}”: ${esc(r1.grants)}` : esc(a.description); }).join("<br>") || "Hover an ability to see exactly what its first rank can and cannot do."}</div></div>
-      <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your story</button>
+      <button class="btn" id="c-done" ${valid ? "" : "disabled"}>Next: your domain on the great circle</button>
     </div>`);
 
     document.getElementById("c-name").oninput = e => { state.name = e.target.value; document.getElementById("c-done").disabled = !(state.name.trim() && left === 0 && state.abilities.length === maxAbilities()); };
@@ -1250,7 +1281,115 @@ function renderCreate() {
       else if (state.abilities.length < maxAbilities()) state.abilities.push(id);
       draw();
     };
-    document.getElementById("c-done").onclick = () => renderBioStep();
+    document.getElementById("c-done").onclick = () => renderDomainStep();
+  }
+
+  // SNG-059 / SNG-055: pick primary / secondary / tertiary domains on THE GREAT CIRCLE. The ring,
+  // neighbours, and antipodes are read from CONTENT.traditionIndex — never hardcoded.
+  function renderDomainStep() {
+    const idx = CONTENT.traditionIndex;
+    if (!idx) { renderCompanionStep(); return; } // no traditions content → skip gracefully
+    const order = ringOrder(idx);
+    const d = state.domains;
+    const phase = !d.primary ? "primary" : !d.secondary ? "secondary" : !d.tertiary ? "tertiary" : "done";
+    const antiP = d.primary ? antipodeOf(d.primary, idx) : null;
+    const antiS = d.secondary ? antipodeOf(d.secondary, idx) : null;
+    const closed = new Set([antiP, antiS].filter(Boolean));
+    const terNbrs = d.secondary ? new Set(neighborsOf(d.secondary, idx)) : new Set();
+    const selectable = (t) => {
+      if (closed.has(t)) return false;
+      if (phase === "primary") return true;
+      if (phase === "secondary") return t !== d.primary;
+      if (phase === "tertiary") return t !== d.primary && t !== d.secondary && terNbrs.has(t);
+      return false;
+    };
+    // ring geometry
+    const cx = 260, cy = 210, R = 165, n = order.length || 24;
+    const nodes = order.map((t, i) => {
+      const ang = (i / n) * Math.PI * 2 - Math.PI / 2;
+      return { t, x: cx + Math.cos(ang) * R, y: cy + Math.sin(ang) * R };
+    });
+    const roleOf = (t) => t === d.primary ? "primary" : t === d.secondary ? "secondary" : t === d.tertiary ? "tertiary" : closed.has(t) ? "closed" : selectable(t) ? "pickable" : "dim";
+    const svg = `<svg viewBox="0 0 520 430" class="great-circle">
+      <circle cx="${cx}" cy="${cy}" r="${R}" class="gc-ring"/>
+      ${nodes.map(nd => { const role = roleOf(nd.t); const st = CONTENT.traditionIndex.stations.find(s => s.traditionId === nd.t);
+        return `<g class="gc-node gc-${role}" ${selectable(nd.t) ? `data-dom="${esc(nd.t)}"` : ""}>
+          <title>${esc(traditionLabel(nd.t))}${st?.pole ? " — " + esc(st.pole) : ""}${closed.has(nd.t) ? " (CLOSED — the far pole of an axis you chose)" : ""}</title>
+          <circle cx="${nd.x}" cy="${nd.y}" r="10"/>
+          <text x="${nd.x}" y="${nd.y - 14}" text-anchor="middle" class="gc-label">${esc(st?.pole || nd.t).slice(0, 10)}</text>
+        </g>`; }).join("")}
+      ${d.primary && antiP ? `<line x1="${nodes.find(z => z.t === d.primary).x}" y1="${nodes.find(z => z.t === d.primary).y}" x2="${nodes.find(z => z.t === antiP)?.x}" y2="${nodes.find(z => z.t === antiP)?.y}" class="gc-axis"/>` : ""}
+      <text x="${cx}" y="${cy - 4}" text-anchor="middle" class="gc-center">${phase === "done" ? "your domains" : "choose your " + phase}</text>
+      <text x="${cx}" y="${cy + 14}" text-anchor="middle" class="gc-center-sub">${phase === "tertiary" ? "a neighbour of your secondary" : phase === "done" ? "" : "the opposite pole closes"}</text>
+    </svg>`;
+    const slot = (label, t) => `<div class="dom-slot"><span class="dom-slot-label">${label}</span> ${t ? `<strong>${esc(traditionLabel(t))}</strong>` : "<em>—</em>"}</div>`;
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>Your place on the Great Circle</h2>
+      <p class="hint" style="margin-bottom:8px">Twelve axes, twenty-four peoples — a ring where every craft sits opposite its antithesis. Your <strong>primary</strong> is who you are (all you can master); <strong>secondary</strong> reaches tier III; <strong>tertiary</strong> (a neighbour of your secondary) reaches tier II. The <strong>opposite pole</strong> of what you choose is closed to you forever — only the great braids cross it.</p>
+      ${svg}
+      <div class="dom-slots">${slot("Primary", d.primary)}${slot("Secondary", d.secondary)}${slot("Tertiary", d.tertiary)}</div>
+      ${closed.size ? `<div class="hint">Closed to you: ${[...closed].map(t => esc(traditionLabel(t))).join(", ")}</div>` : ""}
+      <div style="display:flex; gap:8px; margin-top:12px">
+        <button class="btn secondary" id="dom-reset">↺ Redo</button>
+        <button class="btn" id="dom-done" ${phase === "done" ? "" : "disabled"}>Next: your companion</button>
+      </div>
+    </div>`);
+    for (const b of app.querySelectorAll("[data-dom]")) b.onclick = () => {
+      const t = b.dataset.dom;
+      if (phase === "primary") d.primary = t;
+      else if (phase === "secondary") d.secondary = t;
+      else if (phase === "tertiary") d.tertiary = t;
+      renderDomainStep();
+    };
+    document.getElementById("dom-reset").onclick = () => { state.domains = { primary: null, secondary: null, tertiary: null }; renderDomainStep(); };
+    document.getElementById("dom-done").onclick = () => renderCompanionStep();
+  }
+
+  // SNG-059 / SNG-057: choose + name a companion from the authored starting roster.
+  function renderCompanionStep() {
+    const roster = Object.values(CONTENT.companions || {}).filter(c => c.startingOption);
+    if (!roster.length) { renderFormStep(); return; }
+    if (!state.companionId) state.companionId = roster[0].id;
+    const chosen = roster.find(c => c.id === state.companionId) || roster[0];
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>Who walks with you?</h2>
+      <p class="hint" style="margin-bottom:10px">A companion is yours from the first step. Pick who — and call them what you like.</p>
+      <div class="companion-pick">
+        ${roster.map(c => `<button class="companion-card ${c.id === state.companionId ? "selected" : ""}" data-comp="${esc(c.id)}">
+          <strong>${esc(c.name)}</strong>
+          <span class="companion-role">${esc((c.role || "").split("—").slice(1).join("—").trim() || c.role || "")}</span>
+        </button>`).join("")}
+      </div>
+      <div class="companion-detail">
+        <p class="map-details-desc">${esc((chosen.appearance || "").slice(0, 260))}</p>
+        <div class="field" style="margin-top:8px"><label>Name them (optional)</label>
+          <input id="comp-name" value="${esc(state.companionName)}" placeholder="${esc(chosen.name)}"></div>
+      </div>
+      <div style="display:flex; gap:8px; margin-top:12px">
+        <button class="btn secondary" id="comp-solo">Begin alone</button>
+        <button class="btn" id="comp-done">Next: your look</button>
+      </div>
+    </div>`);
+    for (const b of app.querySelectorAll("[data-comp]")) b.onclick = () => {
+      state.companionName = document.getElementById("comp-name").value.trim();
+      state.companionId = b.dataset.comp; renderCompanionStep();
+    };
+    document.getElementById("comp-name").oninput = e => { state.companionName = e.target.value.trim(); };
+    document.getElementById("comp-solo").onclick = () => { state.companionId = null; state.companionName = ""; renderFormStep(); };
+    document.getElementById("comp-done").onclick = () => { state.companionName = document.getElementById("comp-name").value.trim(); renderFormStep(); };
+  }
+
+  // SNG-059 / SNG-053: describe the character's physical FORM so the portrait is right on first render.
+  function renderFormStep() {
+    chrome(`<div class="screen" style="max-width:640px">
+      <h2>What do they look like?</h2>
+      <p class="hint" style="margin-bottom:10px">Describe their physical form — species, build, features. This LEADS the portrait, so a non-human (an Ent, a construct) renders true from the start. Leave it blank for an ordinary person.</p>
+      <div class="field"><textarea id="form-text" rows="3" style="width:100%" placeholder="e.g. a towering treefolk of bark and heartwood, moss-bearded, eyes like knots of amber">${esc(state.form)}</textarea></div>
+      <div style="display:flex; gap:8px; margin-top:8px">
+        <button class="btn" id="form-done">Next: your story</button>
+      </div>
+    </div>`);
+    document.getElementById("form-done").onclick = () => { state.form = document.getElementById("form-text").value.trim(); renderBioStep(); };
   }
 
   function renderBioStep(bio = { hometown: "", residence: "", livelihood: "", hobbies: "", motivation: "", story: "" }) {
@@ -1308,11 +1447,17 @@ function renderCreate() {
       currentLocationId: CONTENT.startingLocation,
       activeScene: null,
       clock: newClock(),
-      companions: [],
+      // SNG-057: the chosen companion (string id — recruitment/backfill shape) + the player's name
+      companions: state.companionId ? [state.companionId] : [],
+      companionNames: state.companionId && state.companionName ? { [state.companionId]: state.companionName } : {},
       quests: [],
       npcRegistry: {},
       placeMemory: {},
       worldState: initWorldState(1),
+      // SNG-055: the domains chosen on the great circle (what this character can ever learn)
+      domains: (state.domains && state.domains.primary) ? { ...state.domains } : null,
+      // SNG-053: the physical form leads the portrait
+      form: state.form || undefined,
       bio: bio && Object.values(bio).some(v => v) ? bio : null
     };
     ensureSubAttributes(character);
@@ -2047,14 +2192,14 @@ function renderSkillGraph(selectedId = null) {
   const recipeName = id => (CONTENT.emergence.recipes || []).find(r => r.id === id)?.name || (CONTENT.emergence.branchTemplates || []).find(t => t.id === id)?.name || id;
 
   const svg = `<svg id="skill-svg" viewBox="0 0 ${width} ${height}" class="world-map skill-graph" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
-    ${classes.map((cls, ci) => `<text x="${padX + ci * colW}" y="36" text-anchor="middle" class="graph-class-label" fill="${classColor(cls)}">${esc(classLabel(cls))}</text>`).join("")}
+    ${classes.map((cls, ci) => `<text x="${padX + ci * colW}" y="36" text-anchor="middle" class="graph-class-label" fill="${traditionColor(cls)}">${esc(traditionLabel(cls))}</text>`).join("")}
     ${virtuals.length ? `<text x="${padX + classes.length * colW + 20}" y="36" text-anchor="middle" class="graph-class-label" fill="${classColor("discovery")}">Emergence</text>` : ""}
     ${model.edges.map(e => { const A = pos[e.from], B = pos[e.virtual]; return A && B ? `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="graph-edge ${e.kind}"/>` : ""; }).join("")}
     ${model.nodes.map(n => { const p = pos[n.id]; const r = 6 + (n.levelReq - 1) * 1.5;
       const cls = `graph-node ${n.owned ? "owned" : ""} ${n.ripe ? "ripe" : ""} ${n.aspired ? "aspired" : ""} ${n.locked ? "locked" : ""} ${selectedId === n.id ? "selected" : ""}`;
       return `<g class="${cls}" data-skillnode="${esc(n.id)}"><title>${esc(n.name + " — Tier " + n.tier + " (L" + n.levelReq + ")" + (n.owned ? ", rank " + n.rank : "") + (n.locked ? " 🔒 " + n.lockText : ""))}</title>
         <circle class="hit" cx="${p.x}" cy="${p.y}" r="18"/>
-        <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${n.owned ? classColor(n.cls) : "#23262e"}" stroke="${classColor(n.cls)}"/>
+        <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${n.owned ? traditionColor(n.cls) : "#23262e"}" stroke="${traditionColor(n.cls)}"/>
         ${n.locked ? `<text x="${p.x}" y="${p.y - r - 3}" text-anchor="middle" class="graph-lock">🔒</text>` : ""}
         ${n.forks ? `<text x="${p.x - r - 5}" y="${p.y + 4}" text-anchor="middle" class="graph-fork ${n.forkChosen ? "chosen" : ""}">⑂</text>` : ""}
         <text x="${p.x + r + 4}" y="${p.y + 3}" class="graph-node-label ${n.owned ? "owned" : ""}">${esc(n.name)} <tspan class="graph-tier">${n.tier}</tspan></text>
@@ -2068,7 +2213,7 @@ function renderSkillGraph(selectedId = null) {
   const selAb = sel ? fullCatalog()[sel.id] : null;
   const details = sel ? `<div class="map-details">
     <div class="map-details-head"><h3>${esc(sel.name)}</h3>
-      <span class="rep-band" style="border-color:${classColor(sel.cls)};color:${classColor(sel.cls)}">${esc(classLabel(sel.cls))} · Tier ${sel.tier}</span>
+      <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
       ${sel.owned ? `<span class="rep-band trusted">owned · rank ${sel.rank}</span>` : ""}</div>
     <div class="hint">Level requirement: ${sel.levelReq}${sel.gated ? ` · ${(() => { const g = gateFor(sel.id, CONTENT.attributeGates); return `needs ${g.subAttribute} ${g.learnMin} (rank 3: ${g.rank3Min})`; })()}` : ""}${sel.locked ? ` · 🔒 ${esc(sel.lockText)}` : ""}</div>
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
@@ -2783,10 +2928,10 @@ function renderPlay(turn, opts = {}) {
         // show each ability's FUNCTIONS as chips (what it DOES at a glance).
         const owned = character.abilities.map(a => ({ a, ab: fullCatalog()[a.abilityId] })).filter(x => x.ab);
         if (!owned.length) return "<div class='insight'>none yet</div>";
+        // SNG-059: group owned abilities by TRADITION (the people they belong to), not powerSystem/reach
         const byClass = {};
-        for (const o of owned) (byClass[o.ab.powerSystem] = byClass[o.ab.powerSystem] || []).push(o);
-        const CLASS_ORDER = ["harmonic", "radiant", "valley_craft", "precursor", "baseline", "learned"];
-        const order = [...CLASS_ORDER.filter(c => byClass[c]), ...Object.keys(byClass).filter(c => !CLASS_ORDER.includes(c)).sort()];
+        for (const o of owned) { const key = abilityTradition(o.ab) || o.ab.powerSystem || "learned"; (byClass[key] = byClass[key] || []).push(o); }
+        const order = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b)));
         const row = ({ a, ab }) => {
           const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
           const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
@@ -2799,7 +2944,7 @@ function renderPlay(turn, opts = {}) {
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
             ${functionChips(ab)}</div>`;
         };
-        return order.map(cls => `<details class="skill-group" open><summary>${esc(classLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+        return order.map(cls => `<details class="skill-group" open><summary>${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
       })()}
       ${(() => {
@@ -2810,22 +2955,27 @@ function renderPlay(turn, opts = {}) {
           if (character.abilities.some(a => a.abilityId === ab.id)) return false;
           if (character.skillPoints <= 0 && !aspirationRipe(character, ab.id, CONTENT.rules)) return false;
           const req = effectiveLevelReq(ab, character, CONTENT.rules);
-          return req !== null && character.level >= req;
+          if (req === null || character.level < req) return false;
+          // SNG-055: the domain gate decides what's OFFERED — the antipode of a chosen pole and
+          // over-tier picks (secondary>III, tertiary>II, kin-capstones) simply aren't shown.
+          return domainVerdict(ab).allowed;
         });
         const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points now deepen owned skills" : ""}</div>`;
         if (!learnable.length) return capLine;
+        // SNG-059: group the learn list by TRADITION (the people)
         const byClass = {};
-        for (const ab of learnable) (byClass[ab.powerSystem] = byClass[ab.powerSystem] || []).push(ab);
-        const groups = Object.keys(byClass).sort().map(cls => `<details class="learn-group"><summary>Learn ${esc(classLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+        for (const ab of learnable) { const key = abilityTradition(ab) || ab.powerSystem || "learned"; (byClass[key] = byClass[key] || []).push(ab); }
+        const groups = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(cls => `<details class="learn-group"><summary>Learn ${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((a,b)=>(a.levelReq||1)-(b.levelReq||1)).map(ab => {
             const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
             const capBlock = cap && ab.powerSystem !== "learned";
             const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
-            const cross = effectiveLevelReq(ab, character, CONTENT.rules) !== (ab.levelReq || 1);
-            const learnCost = skillPointCost(ab, character, CONTENT.skillCapacity);
+            const dv = domainVerdict(ab); // SNG-055 band + skill-point penalty
+            const learnCost = Math.max(skillPointCost(ab, character, CONTENT.skillCapacity), dv.penalty);
             const tooExpensive = !ripe && character.skillPoints < learnCost;
             const blocked = !gate.ok || capBlock || tooExpensive;
-            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + (gate.ok ? "" : " — " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${cross ? ", cross" : ""}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
+            const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";
+            return `<button class="opt ${ripe ? "practiced" : ""} ${blocked ? "locked" : ""}" ${blocked ? "disabled" : `data-learn="${esc(ab.id)}"`} title="${esc(ab.description + " — " + dv.reason + (gate.ok ? "" : " · " + gate.why))}" style="margin:2px 0; display:block; width:100%"><span class="tier-badge">${tierOf(ab.levelReq)}</span> ${esc(ab.name)} <span class="cost">L${ab.levelReq || 1}${bandTag}${learnCost > 1 ? ` · ${learnCost} pts` : ""}${ripe ? " — FREE" : ""}${!gate.ok ? " 🔒 " + esc(gate.why) : capBlock ? " 🔒 at capacity" : tooExpensive ? " 🔒 need " + learnCost + " pts" : ""}</span></button>`;
           }).join("")}</details>`).join("");
         return capLine + groups;
       })()}
@@ -2867,8 +3017,12 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Companions</h3>
       ${(character.companions || []).map(id => {
         const c = CONTENT.companions[id];
-        return c ? `<div class="companion"><span class="companion-name">${esc(c.name)}</span> <span class="rep-band ${bondOf(character, c.id, CONTENT.rules).bond >= 3 ? "trusted" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${bondOf(character, c.id, CONTENT.rules).bond}${bondOf(character, c.id, CONTENT.rules).stage === 2 ? " · stage 2" : ""}</span> <span class="cost">${esc(c.role)}</span>
-          <button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>` : "";
+        if (!c) return "";
+        const dn = character.companionNames?.[id] || c.name; // SNG-057: player's chosen name
+        const b = bondOf(character, c.id, CONTENT.rules);
+        return `<div class="companion"><span class="companion-name">${esc(dn)}</span>${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""} <span class="rep-band ${b.bond >= 3 ? "trusted" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}${b.stage === 2 ? " · stage 2" : ""}</span> <span class="cost">${esc(c.role)}</span>
+          <button class="opt companion-rename" data-rename="${esc(id)}" title="Name them">✎</button>
+          <button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>`;
       }).join("")}
       ${Object.values(CONTENT.companions).filter(c => !(character.companions || []).includes(c.id)).map(c =>
         `<button class="opt" data-join="${esc(c.id)}" style="margin:2px 0; display:block; width:100%" title="${esc(c.persona.slice(0, 140))}">Travel with ${esc(c.name)}</button>`
@@ -3077,10 +3231,20 @@ function renderPlay(turn, opts = {}) {
   };
   for (const btn of app.querySelectorAll("[data-part]")) btn.onclick = () => {
     const c = CONTENT.companions[btn.dataset.part];
-    if (!confirm(`Part ways with ${c.name}?`)) return;
+    if (!confirm(`Part ways with ${character.companionNames?.[c.id] || c.name}?`)) return;
     character.companions = character.companions.filter(id => id !== c.id);
     saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `${c.name} drifts on — for now.` });
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${character.companionNames?.[c.id] || c.name} drifts on — for now.` });
+  };
+  // SNG-057: rename a companion (the GM + portraits use the chosen name)
+  for (const btn of app.querySelectorAll("[data-rename]")) btn.onclick = () => {
+    const id = btn.dataset.rename; const c = CONTENT.companions[id]; if (!c) return;
+    const next = prompt(`What do you call ${c.name}?`, character.companionNames?.[id] || c.name);
+    if (next === null) return;
+    character.companionNames = character.companionNames || {};
+    if (next.trim() && next.trim() !== c.name) character.companionNames[id] = next.trim(); else delete character.companionNames[id];
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, {});
   };
   for (const btn of app.querySelectorAll("[data-examine]")) btn.onclick = () => {
     examinedItem = examinedItem === btn.dataset.examine ? null : btn.dataset.examine;

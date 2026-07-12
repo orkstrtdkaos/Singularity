@@ -1,31 +1,48 @@
 {
   "schemaVersion": 1,
   "id": "bristle",
+  "startingOption": true,
   "name": "Bristle",
-  "role": "Companion \u2014 a scarred marsh-hound with more sense than most people",
-  "appearance": "A big, wire-coated hound the color of wet reeds, one ear notched, eyes the yellow-green of marsh light. Moves quiet for its size and watches doorways before it watches you. When it decides you're pack, the whole body changes \u2014 looser, closer, a warmth it doesn't give strangers.",
-  "persona": "Bristle is plain-hearted and hard to fool. It came off the Greywater channels half-starved and chose you before you chose it, which it will never let you forget. It is brave to a fault, loyal past sense, and it reads people the way Tam reads water \u2014 it will growl low at someone smiling and lean into someone the whole town distrusts, and it is almost always right. It grieves openly and forgives slowly.",
-  "voiceHints": "Doesn't speak \u2014 communicates in posture, sound, and the uncanny accuracy of its likes and dislikes. The GM narrates its reads as a pressure the player learns to trust. Beastfriend characters can parley with it properly.",
-  "assistTags": ["track", "guard", "intimidate", "sense-danger"],
+  "role": "Companion — a scarred marsh-hound with more sense than most people",
+  "appearance": "A big, wire-coated hound the color of wet reeds, one ear notched, eyes the yellow-green of marsh light. Moves quiet for its size and watches doorways before it watches you. When it decides you're pack, the whole body changes — looser, closer, a warmth it doesn't give strangers.",
+  "persona": "Bristle is plain-hearted and hard to fool. It came off the Greywater channels half-starved and chose you before you chose it, which it will never let you forget. It is brave to a fault, loyal past sense, and it reads people the way Tam reads water — it will growl low at someone smiling and lean into someone the whole town distrusts, and it is almost always right. It grieves openly and forgives slowly.",
+  "voiceHints": "Doesn't speak — communicates in posture, sound, and the uncanny accuracy of its likes and dislikes. The GM narrates its reads as a pressure the player learns to trust. Beastfriend characters can parley with it properly.",
+  "assistTags": [
+    "track",
+    "guard",
+    "intimidate",
+    "sense-danger"
+  ],
   "knowledge": [
-    "Reads a person's true intent faster than any skill check \u2014 growls at hidden hostility, warms to hidden kindness",
+    "Reads a person's true intent faster than any skill check — growls at hidden hostility, warms to hidden kindness",
     "Knows the marsh channels and wild trails by scent",
     "Remembers everyone who ever hurt it, and everyone who ever fed it"
   ],
-  "boundaries": "Bristle will not abandon you in danger and will not attack someone it reads as innocent no matter the command \u2014 it plants and growls instead. It cannot be made to like someone it distrusts; that read is not for sale. It fights, but a fight can get it hurt, and it remembers who let that happen.",
-  "hooks": "GM-EYES-ONLY: Bristle's uncanny reads may be more than instinct \u2014 something in the marsh changed its line. Let it stay ambiguous; never confirm it's more than a very good dog.",
+  "boundaries": "Bristle will not abandon you in danger and will not attack someone it reads as innocent no matter the command — it plants and growls instead. It cannot be made to like someone it distrusts; that read is not for sale. It fights, but a fight can get it hurt, and it remembers who let that happen.",
+  "hooks": "GM-EYES-ONLY: Bristle's uncanny reads may be more than instinct — something in the marsh changed its line. Let it stay ambiguous; never confirm it's more than a very good dog.",
   "bondGrants": {
     "id": "pack-sense",
     "name": "Pack-Sense",
-    "description": "Bristle's read becomes yours \u2014 once per scene, before you commit to trusting or entering something, it tells you plainly (growl or lean) whether the danger is people-shaped or place-shaped.",
+    "description": "Bristle's read becomes yours — once per scene, before you commit to trusting or entering something, it tells you plainly (growl or lean) whether the danger is people-shaped or place-shaped.",
     "energyCost": 4,
     "attribute": "social",
-    "axes": {"instinct_analysis": -0.5, "falsehood_truth": 0.3},
+    "axes": {
+      "instinct_analysis": -0.5,
+      "falsehood_truth": 0.3
+    },
     "notFor": "Reading Precursor threat (it has no scent for that); replacing your own judgment on what to DO with the read.",
     "taughtBy": "Bristle (bond)"
   },
   "stages": [
-    {"stage": 1, "name": "The Stray That Stayed", "narrationHints": "Wary, watchful, keeping a body-length of distance even as it follows \u2014 a dog deciding whether the world is safe again."},
-    {"stage": 2, "name": "Pack", "narrationHints": "The distance is gone \u2014 it sleeps against you, fights beside you without being asked, and grieves your hurts as its own. What it gives now, it gives whole."}
+    {
+      "stage": 1,
+      "name": "The Stray That Stayed",
+      "narrationHints": "Wary, watchful, keeping a body-length of distance even as it follows — a dog deciding whether the world is safe again."
+    },
+    {
+      "stage": 2,
+      "name": "Pack",
+      "narrationHints": "The distance is gone — it sleeps against you, fights beside you without being asked, and grieves your hurts as its own. What it gives now, it gives whole."
+    }
   ]
 }

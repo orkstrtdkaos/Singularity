@@ -253,6 +253,34 @@ img[data-lightbox] { cursor: zoom-in; }
 .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 60px; border: none; background: rgba(0,0,0,.4); color: #fff; font-size: 30px; cursor: pointer; border-radius: 8px; }
 .lightbox-nav.prev { left: -52px; } .lightbox-nav.next { right: -52px; }
 @media (max-width: 640px) { .lightbox-nav.prev { left: 4px; } .lightbox-nav.next { right: 4px; } }
+/* SNG-059 creation v2: the great circle domain picker */
+.great-circle { width: 100%; max-height: 60vh; display: block; }
+.gc-ring { fill: none; stroke: var(--border); stroke-width: 1.5; }
+.gc-axis { stroke: var(--danger); stroke-width: 1.5; stroke-dasharray: 4 4; opacity: .6; }
+.gc-node circle { fill: var(--panel2); stroke: var(--ink-dim); stroke-width: 1.5; }
+.gc-node .gc-label { font-family: var(--font-ui); font-size: 8.5px; fill: var(--ink-dim); text-transform: capitalize; pointer-events: none; }
+.gc-pickable { cursor: pointer; }
+.gc-pickable circle { stroke: var(--accent2); }
+.gc-pickable:hover circle { fill: #253038; stroke-width: 3; }
+.gc-primary circle { fill: var(--accent); stroke: var(--accent); }
+.gc-secondary circle { fill: var(--accent2); stroke: var(--accent2); }
+.gc-tertiary circle { fill: #9a7b4a; stroke: #9a7b4a; }
+.gc-closed circle { fill: transparent; stroke: var(--danger); }
+.gc-closed .gc-label { fill: var(--danger); opacity: .7; }
+.gc-dim circle { opacity: .35; }
+.gc-dim .gc-label { opacity: .3; }
+.gc-center { font-family: var(--font-ui); font-size: 13px; fill: var(--accent2); text-transform: uppercase; letter-spacing: 1px; }
+.gc-center-sub { font-family: var(--font-ui); font-size: 10px; fill: var(--ink-dim); }
+.dom-slots { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.dom-slot { flex: 1; min-width: 140px; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-family: var(--font-ui); font-size: 13px; }
+.dom-slot-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); display: block; }
+/* companion picker */
+.companion-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.companion-card { text-align: left; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink); cursor: pointer; }
+.companion-card.selected { border-color: var(--accent2); background: #253038; }
+.companion-card strong { display: block; font-family: var(--font); }
+.companion-role { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); }
+.companion-detail { margin-top: 10px; }
 /* SNG-046 Layer 3: per-location image in the map detail */
 .location-image { width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; display: block; }
 /* SNG-043 gambit builder feedback */

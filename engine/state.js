@@ -5,6 +5,7 @@
 
 import { reconcileContent } from "./reconcile.js";
 import { loadLegends } from "./legends.js";
+import { buildTraditionIndex } from "./traditions.js";
 
 const LS = {
   character: id => `singularity.character.${id}`,
@@ -39,6 +40,14 @@ export async function loadContent() {
   let branchForks = { forks: {} };
   const forkPath = (index.provides.rules || []).find(r => r.includes("branch_forks"));
   if (forkPath) { try { branchForks = await fetchJSON(`content/packs/core/${forkPath}`); } catch { /* optional */ } }
+  // SNG-055/059: the great-circle traditions map (domain-access model). Fetched directly (not yet
+  // in the manifest). Optional — absence leaves the domain gates ungoverned (open), never breaks load.
+  let traditions = null, traditionIndex = null;
+  try {
+    const tradPath = (index.provides.rules || []).find(r => r.includes("traditions"));
+    traditions = await fetchJSON(tradPath ? `content/packs/core/${tradPath}` : "content/packs/core/rules/traditions.json");
+    traditionIndex = buildTraditionIndex(traditions);
+  } catch { /* domains ungoverned */ }
 
   const abilities = {};
   for (const path of index.provides.abilities) {
@@ -103,7 +112,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

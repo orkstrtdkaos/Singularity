@@ -16,6 +16,7 @@
 import { mergeCodexTopics } from "./codex.js";
 import { dedupeQuests } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
+import { inferDomains } from "./traditions.js";
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -50,6 +51,7 @@ export const CHARACTER_STEPS = [
       ensure("customEncounters", {});
       ensure("placeMemory", {});
       ensure("companions", []);
+      ensure("companionNames", {}); // SNG-057
       ensure("discoveries", []);
       return added.length ? { notes: [`initialized: ${added.join(", ")}`] } : {};
     }
@@ -87,6 +89,23 @@ export const CHARACTER_STEPS = [
       if (qm.length) parts.push(`merged ${qm.length} duplicate quest(s)`);
       if (im.length) parts.push(`stacked ${im.length} duplicate item(s)`);
       return parts.length ? { notes: parts } : {};
+    }
+  },
+  {
+    version: 5, id: "infer-domains", playerFacing: true,
+    // SNG-055/059: a character built before the great circle gets domains INFERRED from what they
+    // already hold (most-held tradition → primary, etc.). Nobody loses an ability — already-owned
+    // abilities rank freely regardless of domain (only LEARNING new ones is gated), so out-of-domain
+    // holdings are grandfathered. Folk-only characters stay open (no domains).
+    apply: (c, ctx) => {
+      if (c.domains?.primary) return {};
+      const idx = ctx.content?.traditionIndex;
+      if (!idx) return {};
+      const inf = inferDomains(c.abilities || [], ctx.content.abilities || {}, idx);
+      if (!inf) return {};
+      c.domains = inf;
+      const nm = t => idx.byId?.[t]?.name || t;
+      return { notes: [`Your place on the great circle is set (from what you've mastered): ${nm(inf.primary)}${inf.secondary ? " · " + nm(inf.secondary) : ""}${inf.tertiary ? " · " + nm(inf.tertiary) : ""}. Nothing you already hold is lost.`] };
     }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content

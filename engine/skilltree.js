@@ -85,7 +85,7 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     const chosen = fork ? chosenFork(character, ab.id, branchForks) : null;
     const lockedPath = fork && chosen ? forkPaths(ab.id, branchForks).find(p => p.key !== chosen.key) : null;
     return {
-      id: ab.id, name: ab.name, cls: ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
+      id: ab.id, name: ab.name, cls: ab.tradition || ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
       owned: owned.has(ab.id), rank: owned.get(ab.id) || 0,
       ripe: preds.isRipe ? !!preds.isRipe(ab.id) : false,
       aspired: preds.isAspired ? !!preds.isAspired(ab.id) : false,

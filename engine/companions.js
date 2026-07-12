@@ -71,5 +71,15 @@ function companionLine(c) {
 
 /** Resolve a character's companion ids against the loaded content. */
 export function activeCompanions(character, companionCatalog = {}) {
-  return (character.companions || []).map(id => companionCatalog[id]).filter(Boolean);
+  // SNG-057: entries are string ids (recruitment/backfill shape); the player's chosen name lives in
+  // character.companionNames[id] (an object entry with displayName is also honored, defensively).
+  // A renamed companion presents as `name` (GM + portraits use it); its authored name is kept.
+  const names = character.companionNames || {};
+  return (character.companions || []).map(entry => {
+    const id = typeof entry === "string" ? entry : entry?.id;
+    const base = companionCatalog[id];
+    if (!base) return null;
+    const dn = names[id] || (typeof entry === "object" ? entry.displayName : null);
+    return dn ? { ...base, name: dn, canonicalName: base.name } : base;
+  }).filter(Boolean);
 }

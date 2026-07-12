@@ -1,31 +1,48 @@
 {
   "schemaVersion": 1,
   "id": "quill",
+  "startingOption": true,
   "name": "Quill",
-  "role": "Companion \u2014 a disgraced Heights scholar chasing a question the cities won't ask",
-  "appearance": "Thin, ink-stained, perpetually cold, wrapped in a coat with more pockets than sense \u2014 each holding a notebook, a lens, a pressed sample. Younger than the stoop suggests. Eyes that light up mid-sentence when an idea catches.",
-  "persona": "Quill was expelled from the Radiant Plateau's scholar-houses for asking the wrong question too loudly, and has been chasing it through the valley's ruins and rumors ever since. Brilliant, socially clumsy, incapable of leaving a mystery alone. Talks too much when excited and goes silent when hurt. Loyal to whoever takes their questions seriously \u2014 which, before you, was no one. Would walk into a Precursor site it knows is dangerous because it needs to KNOW.",
-  "voiceHints": "Fast, digressive, footnotes its own sentences. Warms fast, wounds easy. Says 'oh \u2014 oh, that's interesting' at the worst moments. Under the chatter, a real and lonely courage.",
-  "assistTags": ["study", "analyze", "precursor-lore", "recall"],
+  "role": "Companion — a disgraced Heights scholar chasing a question the cities won't ask",
+  "appearance": "Thin, ink-stained, perpetually cold, wrapped in a coat with more pockets than sense — each holding a notebook, a lens, a pressed sample. Younger than the stoop suggests. Eyes that light up mid-sentence when an idea catches.",
+  "persona": "Quill was expelled from the Radiant Plateau's scholar-houses for asking the wrong question too loudly, and has been chasing it through the valley's ruins and rumors ever since. Brilliant, socially clumsy, incapable of leaving a mystery alone. Talks too much when excited and goes silent when hurt. Loyal to whoever takes their questions seriously — which, before you, was no one. Would walk into a Precursor site it knows is dangerous because it needs to KNOW.",
+  "voiceHints": "Fast, digressive, footnotes its own sentences. Warms fast, wounds easy. Says 'oh — oh, that's interesting' at the worst moments. Under the chatter, a real and lonely courage.",
+  "assistTags": [
+    "study",
+    "analyze",
+    "precursor-lore",
+    "recall"
+  ],
   "knowledge": [
-    "Deep book-knowledge of pre-Transition history, Precursor theory, and the cities' politics \u2014 more than the Archive Guardian will admit is loose in the world",
-    "The question that got them expelled, which they'll share only once they trust you \u2014 and which matters",
+    "Deep book-knowledge of pre-Transition history, Precursor theory, and the cities' politics — more than the Archive Guardian will admit is loose in the world",
+    "The question that got them expelled, which they'll share only once they trust you — and which matters",
     "How to read Precursor inscription, partially, dangerously"
   ],
-  "boundaries": "Quill will not destroy knowledge or watch it destroyed \u2014 will physically interpose. Will not betray a confidence, having been betrayed by the loss of their own. Their curiosity can override their caution; a bonded player becomes the brake, and Quill knows it and is grateful.",
-  "hooks": "GM-EYES-ONLY: The question Quill was expelled for touches the true history of the Great Transition \u2014 the messier version the Archive Guardian guards. Quill is closer to it than anyone in the cities and doesn't fully know how close. Let it converge slowly with the deep lore.",
+  "boundaries": "Quill will not destroy knowledge or watch it destroyed — will physically interpose. Will not betray a confidence, having been betrayed by the loss of their own. Their curiosity can override their caution; a bonded player becomes the brake, and Quill knows it and is grateful.",
+  "hooks": "GM-EYES-ONLY: The question Quill was expelled for touches the true history of the Great Transition — the messier version the Archive Guardian guards. Quill is closer to it than anyone in the cities and doesn't fully know how close. Let it converge slowly with the deep lore.",
   "bondGrants": {
     "id": "scholars-margin",
     "name": "Scholar's Margin",
-    "description": "Quill has read around the edges of almost everything \u2014 once per scene, on a lore, Precursor, or history question, they surface a real fragment that opens an approach you wouldn't have found. Sometimes it's even relevant.",
+    "description": "Quill has read around the edges of almost everything — once per scene, on a lore, Precursor, or history question, they surface a real fragment that opens an approach you wouldn't have found. Sometimes it's even relevant.",
     "energyCost": 4,
     "attribute": "mental",
-    "axes": {"concrete_abstract": 0.4, "tradition_innovation": 0.2},
+    "axes": {
+      "concrete_abstract": 0.4,
+      "tradition_innovation": 0.2
+    },
     "notFor": "Combat, physical tasks, or anything requiring Quill to be brief; the fragment informs, it does not guarantee.",
     "taughtBy": "Quill (bond)"
   },
   "stages": [
-    {"stage": 1, "name": "The Expelled Scholar", "narrationHints": "Guarded under the chatter, testing whether you're another person who'll tell them to stop asking \u2014 not yet trusting that you won't."},
-    {"stage": 2, "name": "The Fellow Traveler", "narrationHints": "The guardedness gone \u2014 they share the real question now, think out loud in your presence, trust you with the dangerous half of their curiosity. Braver with you than alone, and warmer than the cities ever let them be."}
+    {
+      "stage": 1,
+      "name": "The Expelled Scholar",
+      "narrationHints": "Guarded under the chatter, testing whether you're another person who'll tell them to stop asking — not yet trusting that you won't."
+    },
+    {
+      "stage": 2,
+      "name": "The Fellow Traveler",
+      "narrationHints": "The guardedness gone — they share the real question now, think out loud in your presence, trust you with the dangerous half of their curiosity. Braver with you than alone, and warmer than the cities ever let them be."
+    }
   ]
 }

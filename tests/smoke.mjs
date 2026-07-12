@@ -36,6 +36,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName } f
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
+import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains } from "../engine/traditions.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2263,6 +2264,45 @@ await (async () => {
   const npc2 = await generate("npc", { character: c2, day: 1, location: { id: "x", name: "X", spectrum: {} } },
     { callJSON: llm({ name: "Plain Warden", role: "r", spectrum: {}, fears: "f" }), schema: npcSchema });
   check("born-with-image: no imageFor → no image, mint still succeeds", npc2.image === undefined && !!npc2._gen);
+})();
+
+// --- SNG-055/059: the great circle domain-access model (read from the real traditions.json) ---
+(() => {
+  const tf = JSON.parse(readFileSync(join(root, "content/packs/core/rules/traditions.json"), "utf8"));
+  const idx = buildTraditionIndex(tf);
+  check("SNG-055: the index reads all 24 ring stations + ability→tradition map", ringOrder(idx).length === 24 && Object.keys(idx.abilityToTradition).length > 100);
+  // umbral ↔ blazeborn are antipodal (dark_light); 12 steps apart
+  check("SNG-055: antipode == the axis-opposite (umbral↔blazeborn)", antipodeOf("umbral", idx) === "blazeborn" && ringDistance("umbral", "blazeborn", idx) === 12);
+  check("SNG-055: ring-neighbours are 1 step; tertiary is constrained to secondary's neighbours", neighborsOf("umbral", idx).every(n => ringDistance("umbral", n, idx) === 1) && neighborsOf("umbral", idx).length === 2);
+  check("SNG-055: folk traditions are open", isFolkTradition("radiant_folk", idx) || isFolkTradition("harmonic", idx));
+
+  // pick a real pole ability + its tradition to exercise the access bands
+  const umbralAb = { id: "umbracraft", tradition: "umbral", levelReq: 1 };
+  const domains = { primary: "umbral", secondary: "veilwright", tertiary: neighborsOf("veilwright", idx).find(n => n !== "umbral") };
+  check("SNG-055: primary domain — full access, no penalty", domainAccess(umbralAb, 5, domains, idx).allowed && domainAccess(umbralAb, 5, domains, idx).penalty === 1 && domainAccess(umbralAb, 5, domains, idx).band === "primary");
+  // secondary caps at tier III
+  const secAb = { id: "x", tradition: "veilwright", levelReq: 1 };
+  check("SNG-055: secondary — allowed to III, blocked at IV", domainAccess(secAb, 3, domains, idx).allowed && !domainAccess(secAb, 4, domains, idx).allowed);
+  // tertiary caps at tier II
+  const terAb = { id: "y", tradition: domains.tertiary, levelReq: 1 };
+  check("SNG-055: tertiary — allowed to II, blocked at III", domainAccess(terAb, 2, domains, idx).allowed && !domainAccess(terAb, 3, domains, idx).allowed);
+  // the antipode of primary is CLOSED
+  const antiAb = { id: "z", tradition: "blazeborn", levelReq: 1 };
+  check("SNG-055: the antipode of your primary is CLOSED (not offered)", domainAccess(antiAb, 1, domains, idx).allowed === false && domainAccess(antiAb, 1, domains, idx).band === "closed");
+  // a kin (adjacent to primary) is free except capstones
+  const kin = neighborsOf("umbral", idx).find(n => n !== "veilwright") || neighborsOf("umbral", idx)[0];
+  const kinAb = { id: "k", tradition: kin, levelReq: 1 };
+  check("SNG-055: adjacent-to-primary is free below capstone, blocked at capstone", domainAccess(kinAb, 3, domains, idx).allowed && domainAccess(kinAb, 3, domains, idx).penalty === 1 && !domainAccess({ ...kinAb, levelReq: 5 }, 5, domains, idx).allowed);
+  // a far, non-antipode tradition — allowed but costs more
+  const far = ringOrder(idx).find(t => t !== "umbral" && t !== "blazeborn" && ringDistance(t, "umbral", idx) >= 3 && t !== domains.secondary && t !== domains.tertiary);
+  check("SNG-055: a far tradition is learnable but costs extra", far && domainAccess({ id: "f", tradition: far, levelReq: 1 }, 1, domains, idx).allowed && domainAccess({ id: "f", tradition: far, levelReq: 1 }, 1, domains, idx).penalty >= 2);
+  // folk is always open, no penalty, even with domains chosen
+  check("SNG-055: folk stays open with a penalty of 1", domainAccess({ id: "lb", tradition: "radiant_folk", levelReq: 1 }, 3, domains, idx).allowed && domainAccess({ id: "lb", tradition: "radiant_folk", levelReq: 1 }, 3, domains, idx).penalty === 1);
+
+  // migration: infer domains from held abilities (nobody loses one — grandfathered)
+  const inf = inferDomains([{ abilityId: "umbracraft" }, { abilityId: "umbracraft" }, { abilityId: "false_true" }], { umbracraft: { tradition: "umbral" }, false_true: { tradition: "veilwright" } }, idx);
+  check("SNG-055: inferDomains derives primary from the most-held tradition", inf?.primary === "umbral" && inf?.secondary === "veilwright");
+  check("SNG-055: a pre-domain (null) character stays fully open", domainAccess(antiAb, 5, {}, idx).allowed === true);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

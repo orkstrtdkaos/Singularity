@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_destruction_creation",
+  "gated": "learned",
+  "note": "Crafts of The Unmade/The Making (destruction_creation axis). RUINWORK is the destruction-pole craft of the Unmakers — who hold that ending a thing WELL is a craft, and that the world is choked with what should have ended; MAKECRAFT is the creation-pole craft of the Wrights of the New, who cannot stop making and whose cities are never finished, which is the point. Neither is villainous: an Unmaker's clearing is a mercy and a Wright's ceaselessness is a waste. Authored by Aevi, SNG-054.",
+  "abilities": [
+    {
+      "id": "ruinwork",
+      "name": "Ruinwork",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_destruction_creation",
+      "attribute": "physical",
+      "axes": {
+        "destruction_creation": -0.5,
+        "chaos_order": -0.2
+      },
+      "functions": [
+        "break",
+        "reveal"
+      ],
+      "narrationHints": "It comes down the way he said it would, exactly where he said, and nothing else is touched.",
+      "description": "The destruction-pole mastery: ending things well. Not violence — DEMOLITION, with an ethic: what should end, ends cleanly, and what should stand is left standing.",
+      "notFor": "Ending what should stand (the Unmakers' whole discipline is that line); making; anything that requires patience with a dead thing.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Fault Line",
+          "grants": "See exactly where a thing wants to break — a wall, a plan, an alliance, an argument.",
+          "cannot": "Seeing the fault is not being right that it should be broken."
+        },
+        {
+          "rank": 2,
+          "name": "The Clean Break",
+          "grants": "Break precisely at the fault — the thing comes apart where you chose and nowhere else.",
+          "cannot": "Precise is not reversible. A clean break is still a break."
+        },
+        {
+          "rank": 3,
+          "name": "The Good Ending",
+          "grants": "End a thing WELL — a building, an institution, a life's work, a war — so that what it was is honored and what comes after is not poisoned by how it went.",
+          "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "EXPLORE",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "EXPLORE": 2
+      }
+    },
+    {
+      "id": "fault_sense",
+      "name": "Fault-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_destruction_creation",
+      "attribute": "physical",
+      "axes": {
+        "destruction_creation": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "He looks at the thing and sees where it is already halfway to failing.",
+      "description": "See where a thing is failing, or wants to — the first gift of the Unmade.",
+      "notFor": "Seeing what should be built (Maker's-Eye); mending.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Fault-Sense",
+          "grants": "See where a structure, plan, or relationship is under stress and where it will give.",
+          "cannot": "Seeing the fault does not tell you whether to press it."
+        },
+        {
+          "rank": 2,
+          "name": "The Rotten Beam",
+          "grants": "Find the ONE piece whose failure brings the rest — the keystone of the collapse.",
+          "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is."
+        },
+        {
+          "rank": 3,
+          "name": "The Whole Failing",
+          "grants": "Read the entire arc of a thing's decline — how it will end, in what order, and how long it has.",
+          "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3
+      }
+    },
+    {
+      "id": "makecraft",
+      "name": "Makecraft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_destruction_creation",
+      "attribute": "physical",
+      "axes": {
+        "destruction_creation": 0.5,
+        "chaos_order": -0.1
+      },
+      "functions": [
+        "mend",
+        "bind",
+        "shield"
+      ],
+      "narrationHints": "It was not there this morning. It is there now, and it is not finished, and it is beautiful.",
+      "description": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them.",
+      "notFor": "Finishing (the Wrights are constitutionally bad at it); unmaking; making a thing that will not want to keep growing.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Raised Thing",
+          "grants": "Make something real, quickly — a bridge, a shelter, a tool, a wall — out of what is to hand.",
+          "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere."
+        },
+        {
+          "rank": 2,
+          "name": "The Made Better",
+          "grants": "Make a thing better than it was — improve in the making, so what you raise exceeds what stood.",
+          "cannot": "Better by whose measure? The Wrights improve what nobody asked to have improved, constantly."
+        },
+        {
+          "rank": 3,
+          "name": "The Unfinished",
+          "grants": "Deliberately leave a made thing incomplete — and it KEEPS MAKING ITSELF, growing on, adapting, never done.",
+          "cannot": "It never stops. The Forge-Eternal is what a whole city of this becomes, and the Wrights are genuinely unsure whether it is a triumph."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "FIGHT": 2
+      }
+    },
+    {
+      "id": "makers_eye",
+      "name": "Maker's-Eye",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_destruction_creation",
+      "attribute": "physical",
+      "axes": {
+        "destruction_creation": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "She looks at the pile of junk and sees the thing it is about to be.",
+      "description": "See what a thing could become — the first gift of the Making.",
+      "notFor": "Seeing what a thing IS (Stone-Read); seeing where it fails (Fault-Sense). This sees what it COULD be.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Maker's-Eye",
+          "grants": "See what could be made from what is here — materials, ruins, a half-broken thing.",
+          "cannot": "Seeing what could be made is not knowing whether it should be."
+        },
+        {
+          "rank": 2,
+          "name": "The Better Shape",
+          "grants": "See the better form a thing is capable of, and the shortest road to it.",
+          "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone."
+        },
+        {
+          "rank": 3,
+          "name": "The Thing It Wants to Be",
+          "grants": "See what a thing, a place, or a person is REACHING toward — the shape it would take if nothing stopped it.",
+          "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3
+      }
+    }
+  ]
+}

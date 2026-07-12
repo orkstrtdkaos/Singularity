@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_great_coliseum",
+  "name": "The Great Coliseum",
+  "regionId": "the_center",
+  "communityId": "center.coliseum",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "violence_peace": -0.2,
+    "chaos_order": 0.2
+  },
+  "tags": [
+    "center",
+    "coliseum",
+    "spectacle",
+    "contest",
+    "wealth",
+    "prestige"
+  ],
+  "connections": [
+    "the_crossing",
+    "the_hundred_markets"
+  ],
+  "descriptionSeed": "Champions of every Reach, in ritual contest, for entertainment and wealth and prestige — and the whole world watches. This is where a Blazeborn and an Umbral can face each other and NOT annihilate each other, because here it is a game with rules and an audience, and both walk out. The Coliseum is the center's genius: it takes the thing that would otherwise be a war and makes it a spectacle people pay to see. It is also, obviously, a war being held very carefully in a bottle.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Champions of the twenty-four; bookmakers who know the odds across every axis; a fighter who has stopped being able to tell contest from war.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "A contest is going to become a real killing and everyone can feel it",
+    "A champion has been asked to throw a bout, and the person asking represents their entire people"
+  ],
+  "map": {
+    "x": 380,
+    "y": 300
+  },
+  "poleIntensity": 0.15
+}

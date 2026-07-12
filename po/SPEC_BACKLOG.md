@@ -701,3 +701,39 @@ Only once the corpus is final: redesign the tree/graph around the civilization s
 **Erik test:** "Form a party of two, pick a leader — verify only the leader is prompted for travel and party decisions (the other sees it), but BOTH players still choose their own actions in a fight."
 
 *This is what makes multi-player actually playable — the family can share a world without every road-fork becoming a negotiation.*
+---
+
+## SNG-059 — Character creation v2 (the builder must catch up to the content) ⭐ PRIORITY
+
+**Erik-directed 2026-07-11 — Brooklyn is about to make a character.** 🔧 CCode. Aevi PO. **All content is AUTHORED and at origin; only the builder is missing.**
+
+**Verified at HEAD (v1.8.17) — the builder has NONE of the new content:** 0 `startingOption` refs (no companion roster), 0 domain-choice refs (no primary/secondary/tertiary), skills still grouped by reach. A character created today gets Aevi by default with no choice, no domain pick, and the un-regrouped skill blob. **This is the first thing a new player sees and it is the most out-of-date surface in the game.**
+
+**Ship these as ONE coherent creation flow (they're all specced; do them together, not piecemeal):**
+1. **DOMAIN CHOICE (SNG-055)** — pick primary / secondary / tertiary on the great circle (tertiary constrained to a ring-neighbor of the secondary). Read the ring from `traditions.json`. Show the circle: what you're near, and what your antipode (closed) is. **This is now the most interesting decision in creation** — it defines what you can ever learn.
+2. **COMPANION CHOICE + NAMING (SNG-057)** — offer the roster (9 authored: aevi, bristle, ember, quill, tal, coil, hush, marrow, sprig) with name/role/appearance; let the player name whoever they pick. **Aevi must stop being the default.**
+3. **FORM / APPEARANCE (SNG-053, shipped)** — surface the appearance editor IN creation, not only on the sheet, so the portrait is right from the first render (an Ent should never arrive human).
+4. **SKILL GROUPING BY `tradition`** (SNG-054/055) — the learn screen must group by people, not axis, and enforce the access gates, from creation onward.
+5. Origin / background stay as they are.
+
+**⚠️ STARTING AREAS — the honest answer is there are none (Aevi, verified):** the **Valley is the ONLY playable region** (`content/packs/valley`, 26 locations; it is the only pack besides `core`). The 24 traditions' homelands (Umbral Depths, the Redline, the Cogitarium, the Quickwood…) exist in **LORE ONLY** — no location files, no content, nothing to travel to. Consequences: (a) creation cannot offer alternate starting areas; (b) **SNG-055's "learn a tradition by being IN their region" access path is currently UNREACHABLE** — only *native* and *teacher/tome* work; (c) SNG-046 Phase 2 (multi-area map) has nothing to render. **This is the single biggest content gap in the project and it is AEVI's lane** — see SNG-060.
+
+**Erik test:** "Have Brooklyn make a character — verify she picks her domains on the circle, picks AND names her companion, describes her form, and her skill screen is grouped by people with the gates enforced."
+
+*Priority: this is the new-player surface, and a real new player is about to hit it.*
+
+---
+
+## SNG-060 — The world beyond the Valley (regions as playable content) ✍️ AEVI CONTENT
+
+**Aevi-flagged 2026-07-11 (verified at HEAD).** The world has 24 traditions with named homelands, a great circle, a generative engine, a multi-region map, and region-gated skill access — **but only ONE playable region exists.** `content/packs/valley` (26 locations) is the only pack. Every other homeland is lore.
+
+**What this blocks:** alternate starting areas (SNG-059); the "in-region" access path of the domain model (SNG-055) — currently unreachable; SNG-046 Phase 2 multi-area map (nothing to show); SNG-042 legends who live elsewhere; the whole promise that the world is bigger than the Valley.
+
+**The work (Aevi authors; CCode needs no new engine — the pack/location/region machinery already exists and BATCH-9 can generate into it):**
+- **Phase 1 — one neighbouring region, done properly** as the template: a ring-adjacent homeland (natural first: **Harmonic Heights' neighbours** or the **Radiant Wastes / the Blaze**, since the Valley already touches the light end). Locations, NPCs, encounters, seedFiction, poleIntensity, a way in from the Valley. Proves the multi-region path end-to-end.
+- **Phase 2 — the near ring:** the homelands the Valley actually borders (per the great circle + the Valley's own dispositional position as a near-center crossing).
+- **Phase 3 — the far reaches + the CENTER.** The center-city and its Coliseum (`the_coordinate_world.json → theCenter`) is the highest-value single location in the world: net-neutral, holds every disposition, the one place any people can meet its opposite safely. It is where legends, factions, and the whole cast can plausibly cross paths.
+- **Generation assist:** BATCH-9's `generate()` can populate the interiors once a region's anchors + grammar are authored — author the SPINE, generate the flesh.
+
+*Aevi's lane. The largest remaining content gap in the project. Nothing is blocked on CCode.*

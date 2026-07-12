@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.23339233358181882
+    "spectrumId": -0.2367227169027279
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -242,39 +242,23 @@
       {
         "summary": "Bar stock confirmed — Pell supplies a clean strip for the hand-axe heat-collar; the backlog is fully within reach of completion.",
         "narration": "Pell sets the flat iron on the bench between you and taps it once with her knuckle — a short strip, maybe nine inches, quarter-inch thickness. 'That'll collar it,' she says, and goes back to the vise.\n\nYou pick it up and turn it in the light from the overhang. The grain is clean, no laminations, good working temperature from sitting near the forge. You hold it against the eye wall of the hand-axe — the fit is workable; you'll need to bring the strip to a slight curve before seating it, but the stock is right. You tell her so.\n\n'Then set it when you're ready.' She doesn't look up. 'Fire's banked. Take what heat you need.'\n\nHuginn shifts on the hook-row — one talon, then the other — and resettles with the unhurried patience of something that has watched many small problems get solved and found none of them surprising. The forge breathes its low steady heat. The hand-axe question is answered; the backlog, all of it, is now within reach of being closed."
+      },
+      {
+        "summary": "Hand-axe heat-collar seated and finished — Pell's backlog fully cleared; hunt can now be organized.",
+        "narration": "You set the bar stock flat on the forge's edge and wait for the color. Pell's fire is banked low, steady heat rather than fierce — right for collar work, which wants the iron compliant, not liquid. The strip picks up the warmth slowly, dull gray going to a faint reddish suggestion, then to the clear orange that means it'll move. You pull it with the tongs, lay it across the horn, and work it with the ball of a small hammer — four taps, a check against the eye wall's curve, three more. The iron takes the shape without complaint. Good stock.\n\nYou reheat once to let the metal settle, then drive the collar onto the eye wall while everything is still warm — tapping around the circumference evenly, no forcing, just persuasion. It seats with a small, final click that feels more definitive than it sounds. When it cools you run your thumb around the seam: flush, no gap, no rock. The stop-crack is bridged and contained. The axe can go back to work.\n\nYou set it on the rack beside the drawknife and the billhook. The sharpening station is clear. The rack holds all five pieces — drawknife, billhook, two skinners, froe — and now the hand-axe, collar bright against the older iron. The backlog is done.\n\nPell comes over without ceremony, picks up the hand-axe, and works the head with her thumb the same way you did. She nods once — not praise exactly, more like a measurement confirmed. 'That'll hold.' She hangs it back herself, in its own spot on the hook-row, and turns to face you properly for the first time since you started. 'So. North wood. Find Corvin, and we go.'"
       }
     ],
     "lastTurn": {
-      "narration": "Pell sets the flat iron on the bench between you and taps it once with her knuckle — a short strip, maybe nine inches, quarter-inch thickness. 'That'll collar it,' she says, and goes back to the vise.\n\nYou pick it up and turn it in the light from the overhang. The grain is clean, no laminations, good working temperature from sitting near the forge. You hold it against the eye wall of the hand-axe — the fit is workable; you'll need to bring the strip to a slight curve before seating it, but the stock is right. You tell her so.\n\n'Then set it when you're ready.' She doesn't look up. 'Fire's banked. Take what heat you need.'\n\nHuginn shifts on the hook-row — one talon, then the other — and resettles with the unhurried patience of something that has watched many small problems get solved and found none of them surprising. The forge breathes its low steady heat. The hand-axe question is answered; the backlog, all of it, is now within reach of being closed.",
-      "sceneSummary": "Bar stock confirmed — Pell supplies a clean strip for the hand-axe heat-collar; the backlog is fully within reach of completion.",
+      "narration": "You set the bar stock flat on the forge's edge and wait for the color. Pell's fire is banked low, steady heat rather than fierce — right for collar work, which wants the iron compliant, not liquid. The strip picks up the warmth slowly, dull gray going to a faint reddish suggestion, then to the clear orange that means it'll move. You pull it with the tongs, lay it across the horn, and work it with the ball of a small hammer — four taps, a check against the eye wall's curve, three more. The iron takes the shape without complaint. Good stock.\n\nYou reheat once to let the metal settle, then drive the collar onto the eye wall while everything is still warm — tapping around the circumference evenly, no forcing, just persuasion. It seats with a small, final click that feels more definitive than it sounds. When it cools you run your thumb around the seam: flush, no gap, no rock. The stop-crack is bridged and contained. The axe can go back to work.\n\nYou set it on the rack beside the drawknife and the billhook. The sharpening station is clear. The rack holds all five pieces — drawknife, billhook, two skinners, froe — and now the hand-axe, collar bright against the older iron. The backlog is done.\n\nPell comes over without ceremony, picks up the hand-axe, and works the head with her thumb the same way you did. She nods once — not praise exactly, more like a measurement confirmed. 'That'll hold.' She hangs it back herself, in its own spot on the hook-row, and turns to face you properly for the first time since you started. 'So. North wood. Find Corvin, and we go.'",
+      "sceneSummary": "Hand-axe heat-collar seated and finished — Pell's backlog fully cleared; hunt can now be organized.",
       "choices": [
         {
-          "label": "Work the collar now — bring the strip to heat, curve it, and seat it on the eye wall. Close the backlog entirely.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "spectrumId": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "craft",
-            "finish"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Hand-axe is in good shape and you know the fix — ask Pell now if she knows where Corvin's east furlong is. Start pulling the hunt party together while the iron's still warm.",
+          "label": "Head to the east furlong now to find Corvin — the sooner he's brought in, the sooner the hunt can depart.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.1
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
             "help",
             "scout"
           ],
@@ -283,12 +267,38 @@
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the bar stock itself before you collar it — read the strip's load structure and make sure the heat-curve will seat true.",
+          "label": "Before you go, ask Pell what she actually knows about the boar sounder — numbers seen, how recently, which direction it was working the lower section.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.4
-          },
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Stop at Mara Wells's supply store on the way — the smokehouse referral waives the finder's fee, and traps or rope could matter north of the fence line.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense on the snare plates and toggle-springs on Pell's board before you leave — check whether any of the hardware is faulty before it goes north with you.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study",
@@ -296,23 +306,23 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": true
-        },
+          "trivial": false
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
         {
-          "label": "Set the collar work aside for a moment and step to the shop's open front — look out at the lane and take the morning's measure. Who's moving, what's the river light doing, is anything different today.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "lightsense",
-          "energyCost": 3,
-          "trivial": true
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Forge backlog fully cleared — hand-axe heat-collar seated. Pell confirmed ready to walk north once Corvin is found. Hunt party of three one step from departure."
         }
       ],
       "scene": {
@@ -320,11 +330,11 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Back at the vise, file resumed, not watching — content the bar-stock question is settled."
+            "state": "Standing at the hook-row, hand-axe just rehung in its spot — facing Silas directly for the first time since the work began. Ready to talk next steps."
           },
           {
             "name": "Huginn",
-            "state": "Resettled on the hook-row, both talons settled, watching the shop with its usual unhurried attention."
+            "state": "On the hook-row, both talons settled, watching the shop with its usual unhurried attention."
           }
         ],
         "objects": [
@@ -332,35 +342,82 @@
           "Billhook — face-work complete, on the rack",
           "Two skinning blades — sharpened, on the rack",
           "Froe — collar reset and seated, on the rack",
-          "Hand-axe — hairline in eye wall (stop-crack, old); heat-collar needed; bar stock now confirmed and in hand",
-          "Bar stock strip — nine inches, quarter-inch, clean grain; in Silas's hand",
-          "Sharpening station: flat stone, slip, leather strop",
+          "Hand-axe — heat-collar seated, eye wall bridged; on the rack, backlog complete",
+          "Sharpening station: flat stone, slip, leather strop — cleared",
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
-          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stakes",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oiled), light point"
+          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stakes"
         ],
         "threads": [
-          "Heat-collar on the hand-axe — bar stock in hand, forge banked and ready; one task remaining to fully close the backlog",
-          "Corvin still to be found and invited — east furlong, not yet contacted",
-          "Hunt departs once backlog is fully clear"
+          "Corvin still to be found — east furlong, not yet contacted; hunt cannot depart without him",
+          "Mara Wells's supply store not yet visited — smokehouse referral standing, no finder's fee owed"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook — south lane forge",
+          "note": "Inspected the finished hand-axe herself — confirmed the collar with her thumb, rehung it in its spot. Turned to face Silas directly and named the next step: find Corvin, then go north.",
+          "learned": [
+            "Backlog fully cleared to her satisfaction — all five pieces done, hand-axe included"
+          ],
+          "skillsObserved": [
+            "quality assessment — thumb-check on collar work, no words needed"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her forge on the south lane — backlog done, waiting on Corvin's confirmation before the north-wood hunt departs."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Pell's forge backlog fully cleared on World-day 12 morning — all five pieces done including the hand-axe heat-collar. Pell confirmed ready to walk north once Corvin is found.",
+          "subjectId": "pell"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Hand-axe heat-collar seated and finished on World-day 12 morning — backlog completely cleared. All five tools on the rack. Forge ready for normal work.",
+          "flag": {
+            "backlog_cleared": "true",
+            "hand_axe_collar_done": "true"
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
+          "links": [
+            "millbrook",
+            "aldric-provisioning-deal",
+            "corvin"
+          ]
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange to confirm bar stock — a few minutes at the bench"
-      }
+        "hoursPassed": 0.5,
+        "why": "collar work at the forge — heating, shaping, seating, cooling"
+      },
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring mid-morning light through the overhang opening. Forge banked low, heat steady.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Back at the vise, file resumed, not watching — content the bar-stock question is settled."
+          "state": "Standing at the hook-row, hand-axe just rehung in its spot — facing Silas directly for the first time since the work beg"
         },
         {
           "name": "Huginn",
-          "state": "Resettled on the hook-row, both talons settled, watching the shop with its usual unhurried attention."
+          "state": "On the hook-row, both talons settled, watching the shop with its usual unhurried attention."
         }
       ],
       "objects": [
@@ -368,17 +425,15 @@
         "Billhook — face-work complete, on the rack",
         "Two skinning blades — sharpened, on the rack",
         "Froe — collar reset and seated, on the rack",
-        "Hand-axe — hairline in eye wall (stop-crack, old); heat-collar needed; bar stock",
-        "Bar stock strip — nine inches, quarter-inch, clean grain; in Silas's hand",
-        "Sharpening station: flat stone, slip, leather strop",
+        "Hand-axe — heat-collar seated, eye wall bridged; on the rack, backlog complete",
+        "Sharpening station: flat stone, slip, leather strop — cleared",
         "Iron hooks in rows along the shop wall",
         "Coils of heavier chain (full)",
         "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake"
       ],
       "threads": [
-        "Heat-collar on the hand-axe — bar stock in hand, forge banked and ready; one task remaining to fully close the backlog",
-        "Corvin still to be found and invited — east furlong, not yet contacted",
-        "Hunt departs once backlog is fully clear"
+        "Corvin still to be found — east furlong, not yet contacted; hunt cannot depart without him",
+        "Mara Wells's supply store not yet visited — smokehouse referral standing, no finder's fee owed"
       ]
     }
   },
@@ -411,7 +466,8 @@
         "Silas has offered forge-labor to Pell in exchange for hunting company north of the village — negotiation ongoing at the forge.",
         "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now.",
         "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear.",
-        "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set."
+        "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set.",
+        "Forge backlog fully cleared — hand-axe heat-collar seated. Pell confirmed ready to walk north once Corvin is found. Hunt party of three one step from departure."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -519,7 +575,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe",
         "[d1] Returned to her own vise-work without ceremony after Silas began the backlog — one glance at his angle, no comment. Baseline trust registered through silence.",
         "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th",
         "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look",
@@ -528,28 +583,29 @@
         "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that ",
         "[d1] Described her north-wood hunting history — solo, lower section, wet ground by the slope springs, turkey and deer. Got as far as the granite shelf two or three times. Noted the east",
         "[d1] Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open.",
-        "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c"
+        "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c",
+        "[d1] Inspected the finished hand-axe herself — confirmed the collar with her thumb, rehung it in its spot. Turned to face Silas directly and named the next step: find Corvin, then go no"
       ],
       "knownFacts": [
-        "Stopped hunting the north meadows four to five years ago when the forge had enough work",
         "The north wood's lower section stays wet from slope-fed springs — prime rooting ground for boar",
         "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south",
         "Hunted the north wood alone, on Thursday mornings when forge work was slow",
         "Stayed mostly to the lower section where soil takes a print — good trail-reading",
         "Reached the granite shelf two or three times; used the east trail to come back down",
         "The hand-axe hairline is an old stop-crack in the eye wall — hasn't reached the weld or the bit; needs a heat-collar before edge work proceeds",
-        "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting"
+        "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting",
+        "Backlog fully cleared to her satisfaction — all five pieces done, hand-axe included"
       ],
       "skillsObserved": [
-        "practical negotiation",
         "practical field knowledge",
         "honest risk assessment",
         "field tactics",
         "terrain memory",
-        "honest self-assessment"
+        "honest self-assessment",
+        "quality assessment — thumb-check on collar work, no words ne"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — vise paused, waiting on the bar-stock answer.",
+      "statusNote": "At her forge on the south lane — backlog done, waiting on Corvin's confirmation before the north-wood hunt departs.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -560,7 +616,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
         "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra",
         "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
         "[d1] Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters.",
@@ -571,13 +626,16 @@
         "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
         "[d1] Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited.",
         "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
-        "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e"
+        "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e",
+        "[d1] Hand-axe heat-collar seated and finished on World-day 12 morning — backlog completely cleared. All five tools on the rack. Forge ready for normal work."
       ],
       "flags": {
         "resurrection_occurred": true,
         "rabbit_seam_found": true,
         "rabbit_entered_village": true,
-        "boar_sounder_north_wood": true
+        "boar_sounder_north_wood": true,
+        "backlog_cleared": "true",
+        "hand_axe_collar_done": "true"
       },
       "subPlaces": {
         "upper-meadow-north-of-millbrook-": {
@@ -844,13 +902,15 @@
           "[d1] Used to hunt the north meadows until the forge had enough work to make it a second job — there's a former hunter's knowledge still in her.",
           "[d1] Has an edge-work backlog and needs snare hardware restocked before north meadow runs are worth attempting — offered a labor-for-hunting-company deal in response to Silas's proposal.",
           "[d1] Accepts competence as currency — naming the froe's sprung collar (not just 'bent') closed the deal. Backlog labor in exchange for hunting company north of the village, terms agreed.",
-          "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read."
+          "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
+          "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north."
         ],
         "links": [
           "millbrook",
           "aldric",
           "aldric-provisioning-deal",
-          "water-crisis-discoloration"
+          "water-crisis-discoloration",
+          "corvin"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -916,11 +976,11 @@
     }
   },
   "tendencies": {
-    "strategic": 16.594824040395146,
-    "cerebral": 8.327806092491137,
-    "social": 16.959150644280417,
-    "generous": 7.3043308355888295,
-    "cautious": 7.629204719065875
+    "strategic": 16.51184992019317,
+    "cerebral": 8.286167062028682,
+    "social": 16.874354891059014,
+    "generous": 7.267809181410885,
+    "cautious": 8.591058695470545
   },
   "aptitudes": [
     "strategist",
@@ -928,7 +988,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 26,
+  "actionCount": 27,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -950,8 +1010,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783898952927,
-  "rev": 46,
+  "updatedAt": 1783899068216,
+  "rev": 47,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -993,6 +1053,12 @@
     {
       "id": "pell",
       "text": "Pell agreed to join a three-way boar hunt in the north wood — modification on the light spear-tip at cost (covered by Silas), Corvin to be invited. Hunt departs once the forge backlog is clear.",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell's forge backlog fully cleared on World-day 12 morning — all five pieces done including the hand-axe heat-collar. Pell confirmed ready to walk north once Corvin is found.",
       "day": 1,
       "subjectId": "pell"
     }

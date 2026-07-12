@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_thinning",
+  "name": "The Thinning",
+  "regionId": "the_numinous_reach",
+  "communityId": "numinous.thinning",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4,
+    0.7,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "mechanical_spiritual": 0.7,
+    "concrete_abstract": 0.4,
+    "space_time": 0.2
+  },
+  "tags": [
+    "numinous",
+    "spiritual",
+    "sacred",
+    "strange",
+    "home"
+  ],
+  "connections": [
+    "the_lampless_hermitage",
+    "the_numen"
+  ],
+  "descriptionSeed": "A settlement where the veil is thin enough to feel and the residents have stopped finding that remarkable. Buildings here are provisional — the Numinous find permanent architecture a slightly embarrassing attachment. People are kind, dreamy, and prone to stopping mid-sentence because something more interesting than you is happening adjacent to reality.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Numinous who are gentle and not entirely present; a visitor having their first genuine numinous experience and coming apart a little; something on the other side that has noticed you.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "Someone crossed over and came back WRONG, and the Numinous will not call it wrong",
+    "The veil is thinning further, and it is not the Numinous doing it"
+  ],
+  "map": {
+    "x": 400,
+    "y": 90
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

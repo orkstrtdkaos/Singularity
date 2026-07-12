@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_wayhouse",
+  "name": "The Wayhouse",
+  "regionId": "the_open_reach",
+  "communityId": "horizon.wayhouse",
+  "axisVector": [
+    -0.2,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.4,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "space_time": -0.4,
+    "falsehood_truth": 0.2,
+    "emotional_logical": -0.2
+  },
+  "tags": [
+    "horizon",
+    "space",
+    "travel",
+    "social",
+    "refuge"
+  ],
+  "connections": [
+    "the_long_span"
+  ],
+  "descriptionSeed": "The only fixed structure the Horizon-Walkers maintain, and they are embarrassed by it. It exists because people who are not Walkers need somewhere to be found. Every road in the world has, at some point, been described here.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Way-keepers who know every route there is; a traveler who has come to be found; maps that are better than any government's.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "Someone has been waiting at the Wayhouse for eleven years for a person who is not coming",
+    "A road exists on the Wayhouse maps that does not exist on the ground"
+  ],
+  "map": {
+    "x": 415,
+    "y": 495
+  },
+  "poleIntensity": 0.5
+}

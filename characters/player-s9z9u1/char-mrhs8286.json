@@ -234,105 +234,100 @@
       {
         "summary": "Order-Sense reads the hand-axe hairline — an old stop-crack in the eye wall, not in the weld; needs a heat-collar before edge work.",
         "narration": "You set the second skinner aside and pick up the hand-axe. It's a good weight — the head still true, the handle seasoned hardwood, iron poll polished from years of palm-work. The hairline is visible only at a certain angle, a thin shadow running from the back of the eye toward the cheek.\n\nYou let Order-Sense in quietly, the way you'd hold a door open just enough to read the room beyond. The axe's structure resolves — the grain of the iron, the weld seam from the eye's original shaping, the load paths that run through the head when it meets wood. The hairline sits in the eye wall, not the cheek. It hasn't propagated into the weld, and it hasn't reached the bit. The crack is old — winter cold most likely, maybe one hard knock against a frozen post — and it stopped when the stress did. The iron around it is sound.\n\nYou turn the axe once in your hands and set it back on the bench. Not a grinding job. Not even a wedge-set. The eye wall needs a brace-wrap and a heat-collar to keep the crack from walking any further, and then the edge work can proceed without risk. You glance toward Pell's vise. \"Hand-axe hairline is in the eye wall — old stop-crack, hasn't moved into the weld. It needs a heat-collar before I put edge on it. You have bar stock light enough for a wrap?\""
+      },
+      {
+        "summary": "Froe collar reset and seated; backlog cleared except the hand-axe waiting on bar stock for its heat-collar.",
+        "narration": "The hand-axe goes back on the bench with a light click, out of the way of the sharpening station but within reach when Pell wants it. You tell her the crack's old and stopped — heat-collar on the eye wall before any edge work, and you'll need a strip of bar stock for it. She makes a sound that means *noted* and reaches past the vise for a short length of flat iron without being asked.\n\nThe froe is last in the pile for a reason. You work the collar free with the belt knife's spine and two fingers, checking the set of the sprung ring against the blade's shoulder. It's not broken — the iron stretched rather than cracked, which means the fix is a careful squeeze in the vise and a reset of the collar's seat, not a re-forge. Pell's vise is a good one. You crank it down slow, feeling for the give, and the collar closes back to its proper line with a short complaint of metal. You dress the seat with three strokes of the file, check the blade doesn't rock, and set the froe on the bench beside the billhook.\n\nStructural work: done. The rack holds the drawknife, billhook, both skinners, and the froe — all clean. The hand-axe sits apart, waiting on its heat-collar. You straighten, roll your shoulder once, and look across the shop at Pell. Huginn shifts on the hook-row and resettles, one talon curling around the iron like punctuation.\n\n\"Collar piece,\" you say to Pell, meaning the bar stock for the axe. It's the one question still open between you and a clear backlog."
       }
     ],
     "lastTurn": {
-      "narration": "You set the second skinner aside and pick up the hand-axe. It's a good weight — the head still true, the handle seasoned hardwood, iron poll polished from years of palm-work. The hairline is visible only at a certain angle, a thin shadow running from the back of the eye toward the cheek.\n\nYou let Order-Sense in quietly, the way you'd hold a door open just enough to read the room beyond. The axe's structure resolves — the grain of the iron, the weld seam from the eye's original shaping, the load paths that run through the head when it meets wood. The hairline sits in the eye wall, not the cheek. It hasn't propagated into the weld, and it hasn't reached the bit. The crack is old — winter cold most likely, maybe one hard knock against a frozen post — and it stopped when the stress did. The iron around it is sound.\n\nYou turn the axe once in your hands and set it back on the bench. Not a grinding job. Not even a wedge-set. The eye wall needs a brace-wrap and a heat-collar to keep the crack from walking any further, and then the edge work can proceed without risk. You glance toward Pell's vise. \"Hand-axe hairline is in the eye wall — old stop-crack, hasn't moved into the weld. It needs a heat-collar before I put edge on it. You have bar stock light enough for a wrap?\"",
-      "sceneSummary": "Order-Sense reads the hand-axe hairline — an old stop-crack in the eye wall, not in the weld; needs a heat-collar before edge work.",
+      "narration": "The hand-axe goes back on the bench with a light click, out of the way of the sharpening station but within reach when Pell wants it. You tell her the crack's old and stopped — heat-collar on the eye wall before any edge work, and you'll need a strip of bar stock for it. She makes a sound that means *noted* and reaches past the vise for a short length of flat iron without being asked.\n\nThe froe is last in the pile for a reason. You work the collar free with the belt knife's spine and two fingers, checking the set of the sprung ring against the blade's shoulder. It's not broken — the iron stretched rather than cracked, which means the fix is a careful squeeze in the vise and a reset of the collar's seat, not a re-forge. Pell's vise is a good one. You crank it down slow, feeling for the give, and the collar closes back to its proper line with a short complaint of metal. You dress the seat with three strokes of the file, check the blade doesn't rock, and set the froe on the bench beside the billhook.\n\nStructural work: done. The rack holds the drawknife, billhook, both skinners, and the froe — all clean. The hand-axe sits apart, waiting on its heat-collar. You straighten, roll your shoulder once, and look across the shop at Pell. Huginn shifts on the hook-row and resettles, one talon curling around the iron like punctuation.\n\n\"Collar piece,\" you say to Pell, meaning the bar stock for the axe. It's the one question still open between you and a clear backlog.",
+      "sceneSummary": "Froe collar reset and seated; backlog cleared except the hand-axe waiting on bar stock for its heat-collar.",
       "choices": [
         {
-          "label": "Let Pell handle the collar work — she knows her own iron. Move to the froe's sprung collar while she prepares the wrap.",
+          "label": "She has bar stock that'll serve — work out the collar stock between you and close the question.",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "collaborate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Pell to walk you through the collar work so you can do it yourself — you want to know the technique.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "learn",
+            "practical",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Set the hand-axe aside for Pell and finish the froe's sprung collar yourself — clear the structural work, then come back for edge-work on the axe once it's wrapped.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
+          "label": "She's short the right gauge — ask where in the village you'd find off-cut iron. Mara Wells or someone else with scrap.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "methodical"
+            "ask",
+            "practical"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Pell what she knows about Corvin's east-furlong farm while your hands work the froe — learn what you're walking into before you invite him.",
+          "label": "With the structural work done, ask Pell when she wants to move on Corvin — the backlog is nearly clear, and the hunt needs a third before it has a shape.",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "gather-information",
-            "plan"
+            "plan",
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Your own action — say or do something specific at the forge, or step away from it entirely.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "free"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
         "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "At her own vise, file moving in short precise strokes — paused when Silas spoke, waiting on his read."
+            "state": "At her vise, file paused — waiting on the bar-stock question."
           },
           {
             "name": "Huginn",
-            "state": "Shifted weight on the hook-row — watching the hand-axe, then Silas, unhurried."
+            "state": "Resettled on the hook-row, one talon around the iron, watching the shop."
           }
         ],
         "objects": [
-          "Drawknife — corrected, set aside",
-          "Billhook — face-work complete, set aside",
-          "Two skinning blades — both sharpened, on the bench",
-          "Hand-axe — hairline in the eye wall (old stop-crack, not in weld) — needs heat-collar before edge work",
-          "Froe — sprung collar, at the bottom of the pile",
+          "Drawknife — corrected, set aside on the rack",
+          "Billhook — face-work complete, set aside on the rack",
+          "Two skinning blades — both sharpened, on the rack",
+          "Froe — collar reset and seated, set aside on the rack",
+          "Hand-axe — hairline in the eye wall (old stop-crack, not in weld) — heat-collar needed; bar stock question open",
           "Sharpening station: flat stone, slip, leather strop",
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
-          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oiled), light point (plain)"
+          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stakes",
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oiled), light point"
         ],
         "threads": [
-          "Hand-axe needs a heat-collar before edge work — bar stock question open to Pell",
-          "Froe sprung collar — last structural piece in the backlog",
+          "Hand-axe needs a heat-collar — bar stock question open with Pell",
           "Corvin still to be found and invited — east furlong, not yet contacted",
-          "Hunt departs once backlog is clear"
+          "Hunt departs once backlog is fully clear"
         ]
       },
       "npcUpdates": [
@@ -341,65 +336,49 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open.",
+          "note": "Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the collar fix was named.",
           "learned": [
-            "The hand-axe hairline is an old stop-crack in the eye wall — hasn't reached the weld or the bit; needs a heat-collar before edge work proceeds"
+            "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting"
           ],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her forge on the south lane — paused at the vise, waiting on Silas's read of the hand-axe."
+          "statusNote": "At her forge on the south lane — vise paused, waiting on the bar-stock answer."
         }
       ],
-      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
+          "note": "Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced elsewhere.",
           "subPlace": {
             "name": "Pell's Forge",
-            "note": "Hand-axe assessed and set aside pending heat-collar; froe still last in the backlog.",
+            "note": "Structural backlog cleared except hand-axe; bar-stock question open; hunt party of three still forming.",
             "visited": true
           }
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal"
-          ]
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short diagnostic pause — Order-Sense read and finding called out"
-      },
-      "gambitApt": false,
-      "sceneEnded": false
+        "hoursPassed": 0.5,
+        "why": "A focused half-hour of collar work and bench sorting — froe reset, hand-axe assessed and set aside."
+      }
     },
     "sceneState": {
       "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "At her own vise, file moving in short precise strokes — paused when Silas spoke, waiting on his read."
+          "state": "At her vise, file paused — waiting on the bar-stock question."
         },
         {
           "name": "Huginn",
-          "state": "Shifted weight on the hook-row — watching the hand-axe, then Silas, unhurried."
+          "state": "Resettled on the hook-row, one talon around the iron, watching the shop."
         }
       ],
       "objects": [
-        "Drawknife — corrected, set aside",
-        "Billhook — face-work complete, set aside",
-        "Two skinning blades — both sharpened, on the bench",
-        "Hand-axe — hairline in the eye wall (old stop-crack, not in weld) — needs heat-c",
-        "Froe — sprung collar, at the bottom of the pile",
+        "Drawknife — corrected, set aside on the rack",
+        "Billhook — face-work complete, set aside on the rack",
+        "Two skinning blades — both sharpened, on the rack",
+        "Froe — collar reset and seated, set aside on the rack",
+        "Hand-axe — hairline in the eye wall (old stop-crack, not in weld) — heat-collar ",
         "Sharpening station: flat stone, slip, leather strop",
         "Iron hooks in rows along the shop wall",
         "Coils of heavier chain (full)",
@@ -407,10 +386,9 @@
         "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oile"
       ],
       "threads": [
-        "Hand-axe needs a heat-collar before edge work — bar stock question open to Pell",
-        "Froe sprung collar — last structural piece in the backlog",
+        "Hand-axe needs a heat-collar — bar stock question open with Pell",
         "Corvin still to be found and invited — east furlong, not yet contacted",
-        "Hunt departs once backlog is clear"
+        "Hunt departs once backlog is fully clear"
       ]
     }
   },
@@ -551,7 +529,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Silas offered forge-labor in exchange for hunting company north of the village. Pell absorbed the squall without comment, named her two pressing problems (edge-work backlog, snare ",
         "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe",
         "[d1] Returned to her own vise-work without ceremony after Silas began the backlog — one glance at his angle, no comment. Baseline trust registered through silence.",
         "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th",
@@ -560,17 +537,18 @@
         "[d1] Working her own vise in comfortable parallel — the arrangement settled, no need to manage it.",
         "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that ",
         "[d1] Described her north-wood hunting history — solo, lower section, wet ground by the slope springs, turkey and deer. Got as far as the granite shelf two or three times. Noted the east",
-        "[d1] Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open."
+        "[d1] Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open.",
+        "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c"
       ],
       "knownFacts": [
-        "She supplies the modification at cost when the safety calculus changes — practical ethics, not charity",
         "Stopped hunting the north meadows four to five years ago when the forge had enough work",
         "The north wood's lower section stays wet from slope-fed springs — prime rooting ground for boar",
         "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south",
         "Hunted the north wood alone, on Thursday mornings when forge work was slow",
         "Stayed mostly to the lower section where soil takes a print — good trail-reading",
         "Reached the granite shelf two or three times; used the east trail to come back down",
-        "The hand-axe hairline is an old stop-crack in the eye wall — hasn't reached the weld or the bit; needs a heat-collar before edge work proceeds"
+        "The hand-axe hairline is an old stop-crack in the eye wall — hasn't reached the weld or the bit; needs a heat-collar before edge work proceeds",
+        "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting"
       ],
       "skillsObserved": [
         "practical negotiation",
@@ -581,7 +559,7 @@
         "honest self-assessment"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — paused at the vise, waiting on Silas's read of the hand-axe.",
+      "statusNote": "At her forge on the south lane — vise paused, waiting on the bar-stock answer.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -592,7 +570,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
         "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
         "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra",
         "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
@@ -603,7 +580,8 @@
         "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use.",
         "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
         "[d1] Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited.",
-        "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell."
+        "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
+        "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -640,7 +618,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Hand-axe assessed and set aside pending heat-collar; froe still last in the backlog."
+          "note": "Structural backlog cleared except hand-axe; bar-stock question open; hunt party of three still forming."
         }
       },
       "vectorsKnown": [
@@ -948,11 +926,11 @@
     }
   },
   "tendencies": {
-    "strategic": 16.762025242185953,
-    "cerebral": 8.411712928957488,
-    "social": 17.13002261991406,
-    "generous": 7.3779256438865986,
-    "cautious": 5.690972166425974
+    "strategic": 16.67821511597502,
+    "cerebral": 8.369654364312701,
+    "social": 17.04437250681449,
+    "generous": 7.341036015667165,
+    "cautious": 6.662517305593844
   },
   "aptitudes": [
     "strategist",
@@ -960,7 +938,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 24,
+  "actionCount": 25,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -982,8 +960,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783898678325,
-  "rev": 44,
+  "updatedAt": 1783898827357,
+  "rev": 45,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

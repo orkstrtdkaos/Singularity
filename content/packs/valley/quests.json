@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "id": "quests_structured",
+  "kind": "quests",
+  "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11.",
+  "quests": [
+    {
+      "id": "the_edge_district_ledger",
+      "name": "The Edge District Ledger",
+      "region": "valley",
+      "tier": "regional",
+      "giver": "fendt",
+      "legend": "overseer_grael",
+      "axis": "falsehood_truth",
+      "traditions": [
+        "verist",
+        "veilwright",
+        "lattice",
+        "umbral",
+        "abyssal",
+        "stillhold"
+      ],
+      "premise": "A filtration supervisor named Fendt was marked on the Edge District accountability board by his own superior — and no accompanying record was filed. A keeper of thirty years says she has never seen that happen. Fendt is going to be ruined by a piece of paper that does not exist.",
+      "stakes": "If you walk away: Fendt is stripped and exiled within the season, the water-filtration failure he was blamed for goes uncorrected because the man who understood it is gone, and Overseer Grael's method — a name on a board, no record, no appeal — is confirmed as something that works. He will use it again. He has used it before.",
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "Find out what the missing record would have said.",
+          "condition": "Speak with Fendt OR obtain the filtration log for the marked period.",
+          "change": "Codex: Fendt's account is recorded — and it does not match the board."
+        },
+        {
+          "id": "s2",
+          "objective": "Find who marked him, and why there is no record.",
+          "condition": "Identify Overseer Grael as the marking authority (via the board's own chain, the keeper's testimony, or Grael himself).",
+          "change": "Codex: Grael is entered as an entity, linked to Fendt. He becomes aware that someone is looking."
+        },
+        {
+          "id": "s3",
+          "objective": "Find out whether the marking is a pattern.",
+          "condition": "Locate at least one prior unrecorded marking (the keeper remembers; the archive half-remembers; Grael's own ledger will say if you can reach it).",
+          "change": "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you."
+        },
+        {
+          "id": "s4",
+          "objective": "Decide what the truth is for.",
+          "condition": "Resolve — see outcomes.",
+          "change": "The district changes. So does Fendt. So, one way or another, does Grael."
+        }
+      ],
+      "routes": {
+        "verist": "Say it plainly, in public, at the board. Truth as a hammer.",
+        "lattice": "Take the ledger apart line by line until the arithmetic confesses. He is beaten by his own records.",
+        "veilwright": "Make a better record. Save Fendt with a truth you built. It works, and you know what you did.",
+        "umbral": "Harbor Fendt. Get him out. He lives; the district does not change.",
+        "abyssal": "Name what Grael actually wants — a quiet district and not to be the villain — and give him a way to have both, at a price.",
+        "stillhold": "Broker it. Fendt is restored quietly, Grael saves face, nobody is punished, and the method survives."
+      },
+      "outcomes": [
+        {
+          "id": "exposed",
+          "name": "Grael Exposed",
+          "summary": "The pattern is made public and holds. Grael falls.",
+          "consequences": [
+            "Grael is stripped and removed (NPC state: fallen). His lieutenants scatter into the district as riffraff-tier antagonists.",
+            "Fendt is restored, and is permanently in your debt, and is not entirely grateful about it.",
+            "The thirty-year keeper is vindicated and becomes an ally who will never lie to you.",
+            "WORLD-EVENT (propagates): 'the Edge District accountability board was opened' — reaches other districts on the shared clock. Other markings begin to be questioned. Some of them should not be.",
+            "Verist disposition toward you: strongly raised. Veilwright: lowered."
+          ]
+        },
+        {
+          "id": "saved_quietly",
+          "name": "Fendt Saved, Grael Standing",
+          "summary": "Fendt is safe. The method is intact.",
+          "consequences": [
+            "Fendt lives and is restored or extracted — but the board's method is confirmed as survivable, which is not the same as beaten.",
+            "Grael remains, and he now knows your face, and he is patient.",
+            "Codex: 'Grael's method' recorded as an unresolved pattern. It will recur.",
+            "WORLD-EVENT: another name appears on the board within the season, and that one you will not be there for."
+          ]
+        },
+        {
+          "id": "bargained",
+          "name": "The Bargain",
+          "summary": "Grael gets what he actually wanted. So does Fendt. So, in a smaller way, do you.",
+          "consequences": [
+            "Fendt restored; Grael's face saved; the district quiets. It is a genuinely good outcome and it is also a deal with a man who ruins people.",
+            "Grael's disposition toward you: WARY RESPECT. He will deal with you again. That is a door, and it is also a rope.",
+            "Abyssal disposition raised. Seraphic lowered — the Orders would have judged him."
+          ]
+        },
+        {
+          "id": "walked_away",
+          "name": "You Walked Away",
+          "summary": "You had other things to do.",
+          "consequences": [
+            "Fendt is stripped and exiled. The filtration failure goes uncorrected and worsens.",
+            "The keeper of thirty years stops speaking to anyone about anything.",
+            "WORLD-EVENT: the water problem escalates on the shared clock and reaches you later, larger, as someone else's crisis.",
+            "This outcome is REAL and is not a failure state. It is a choice with a cost, and the cost arrives."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the_tree_that_waits",
+      "name": "The Tree That Waits",
+      "region": "the_quickwood",
+      "tier": "regional",
+      "giver": null,
+      "legend": null,
+      "axis": "death_life",
+      "traditions": [
+        "rootkin",
+        "ashwarden",
+        "hourkeeper",
+        "verist"
+      ],
+      "premise": "In the Slow Orchard there is a tree, planted three hundred years ago for a specific person, and it is about to fruit. The person it was planted for has not arrived. The Rootkin who planted it is still alive and has been waiting the entire time.",
+      "stakes": "If you walk away: the fruit falls and is not eaten, and the planter — who has waited three centuries and is now near the end of even a Rootkin life — dies having been wrong about the one thing they staked a life on. The Rootkin will not say this is a tragedy. It is.",
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "Find out who the tree was planted for.",
+          "condition": "Speak with the planter, or read the Orchard's own record.",
+          "change": "Codex: the name. It is a name from outside the Quickwood, and it is not a Rootkin name."
+        },
+        {
+          "id": "s2",
+          "objective": "Find out what became of them.",
+          "condition": "Trace the name (the Hourkeepers' archive knows; the Ashwardens at the Hollowing know; someone in the Valley remembers).",
+          "change": "Codex: the truth. It is not a happy one and it has been true for a long time."
+        },
+        {
+          "id": "s3",
+          "objective": "Decide what to do with a three-hundred-year truth.",
+          "condition": "Resolve — see outcomes.",
+          "change": "The planter learns, or does not."
+        }
+      ],
+      "routes": {
+        "verist": "Tell the planter plainly. They have earned the truth and it will end them.",
+        "veilwright": "Give them a story they can finish their life inside. It is a kindness and it is a lie.",
+        "rootkin": "Find someone the tree could still be for. Meaning is not fixed; it can be re-rooted.",
+        "ashwarden": "Tend the ending. The tree, the wait, and the planter — bring all three to a clean close.",
+        "hourkeeper": "Show them the whole duration. Not the ending — the WAITING, and what it was worth on its own terms."
+      },
+      "outcomes": [
+        {
+          "id": "told",
+          "name": "Told",
+          "summary": "The planter learns the truth and does not survive it long.",
+          "consequences": [
+            "The planter dies within the season. They thank you. It is the worst thanks you have ever received.",
+            "Codex: the tree's true history, permanently recorded.",
+            "Verist disposition raised. Rootkin disposition: complicated — they respect it and will not forgive it quickly.",
+            "The tree fruits. Someone must eat it. That is a separate problem and it is now yours."
+          ]
+        },
+        {
+          "id": "rerooted",
+          "name": "Re-Rooted",
+          "summary": "You find the tree a new person to have been for.",
+          "consequences": [
+            "The planter accepts it — Rootkin believe meaning grows, and this is the argument they have been making for three hundred years.",
+            "A new NPC enters your world permanently, bound to you by a debt they did not ask for.",
+            "Rootkin disposition strongly raised. The Slow Orchard adds a stone with your name on it.",
+            "WORLD-EVENT: the story propagates. Rootkin elsewhere hear that someone re-rooted a three-century wait."
+          ]
+        },
+        {
+          "id": "the_kind_story",
+          "name": "The Kind Story",
+          "summary": "You let them finish believing.",
+          "consequences": [
+            "The planter dies content, and wrong, and you carry that.",
+            "Veilwright disposition raised. Verist LOWERED — and a Verist NPC who knows what you did will say so, out loud, at the worst possible moment.",
+            "Codex: the true history is recorded and marked SECRET — it is in your world and nobody else's."
+          ]
+        }
+      ]
+    }
+  ]
+}

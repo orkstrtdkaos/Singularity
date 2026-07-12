@@ -804,3 +804,21 @@ Abilities are **GATED BY DOMAINS** (SNG-055: primary full · adjacent minus caps
 **Build:** read origins + backgrounds from content (delete the hardcoded arrays); enforce the order; filter the ability list by the chosen domains; show the origin's `whyYouAreHere` and pass it to the GM as opening context.
 
 **Erik test:** "Start creation — verify you pick an origin from many peoples (not 3 places), a background from a real list, and that you CANNOT see or pick abilities until your domains are set — and then only ones your domains allow."
+
+---
+
+## SNG-060 — The world beyond the Valley (UPDATED: 7 playable regions; the Valley is no longer the only start)
+
+**Erik-directed 2026-07-11:** *"I don't want the Valley to be the only starting location — can you flesh out others?"* ✍️ **AEVI CONTENT.** 🔧 CCode only needs to OFFER the choice at creation.
+
+**⚠️ AEVI CORRECTION (own it):** I earlier told Erik the Valley was the only playable region. **That was wrong** — I read the pack name instead of each location's `regionId`. Reading properly: **five regions already existed** (valley 11 · manifest_domain 5 — the Deepwood/Ent lands · unspooling 4 — the Churn · riven_marches 3 · somatic_reaches 3). They were thin and nothing OFFERED them, but they were real.
+
+**Authored now (+10 locations, 2 NEW regions — the two biggest missing poles):**
+- **`umbral_depths` (dark pole, 5):** The Underlight (a CITY, not caves — the Umbrals are not hiding, they are home) · The Lampless Market (trade by touch and word; a lie here is impractical, not immoral) · **The Harborward** (where they keep what the light would burn — the moral center of the Umbral people, and the reason the Blazeborn call them criminal; both are right) · The Slow Stair (the long way up; the landing where both kinds of blind sit and wait, the most honest room in the world) · **The Unlit Deep** (the CULT of the pure pole — a civilization can live NEAR a pole; only a cult can live AT one).
+- **`the_quickwood` (life pole, 5):** The Heartroot (a city that was GROWN, still growing, the Rootkin who planted it alive and calling it a promising start) · Grovehome · **The Slow Orchard** (trees that take a lifetime to fruit, tended by people who will taste them; there is a tree here planted for someone not yet born) · The Greenward (a wall they'd rather not have needed; the century-long argument about it still running) · **The Hollowing** (the Ashwarden border — antipodes with a working border and an exhausted mutual respect).
+
+**Origins now map to HOMELANDS (`origins.json`):** 11 origins start AT HOME (Umbral → the Underlight; Rootkin → the Heartroot; Marcher → the Marchward; Stillhold → the Stillhold; Cogitant → the Cogitarium; Somatic → the Flesh-Temple; Churnfolk → Tumbledown Market; Ashwarden → the Hollowing; + the 3 Valley folk). The other 16 begin in the Valley **as travelers** — not because the Valley is a default, but because **they LEFT, and the leaving is their story** (their `whyYouAreHere` already says so, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met).
+
+**🔧 CCode:** offer STARTING LOCATION at creation. Default to the origin's homeland where one exists; let the player choose the Valley instead (a character who has already left). Where none exists, say so honestly: *'the Reaches of your people are not yet mapped; you begin far from home.'*
+
+**Still owed (Aevi):** flesh the thin regions (riven_marches, somatic_reaches, unspooling at 3–4 locations each want ~6); more pole homelands; and **the CENTER + its Coliseum** — still the single highest-value unbuilt location in the world.

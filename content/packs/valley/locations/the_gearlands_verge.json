@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "the_gearlands_verge",
+  "name": "The Gearlands Verge",
+  "regionId": "the_gearlands",
+  "communityId": "enginewright.verge",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    -0.4,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "mechanical_spiritual": -0.4,
+    "chaos_order": 0.2,
+    "concrete_abstract": -0.2
+  },
+  "tags": [
+    "enginewright",
+    "mechanical",
+    "border",
+    "road",
+    "craft",
+    "liminal"
+  ],
+  "connections": [
+    "the_service_ways",
+    "the_blocklands",
+    "pressureholt"
+  ],
+  "descriptionSeed": "The border-works: where the Gearlands' mechanism meets ground that is not yet mechanism. Everything here is under construction, or under repair, or under a tarpaulin with a very precise label. The Wrights are extending, patiently, and they are not asking.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Verge-crews extending the works; a boundary-marker that has moved since last season; someone from the Blocklands come to complain, again, and be listened to, and be ignored, kindly.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "The Verge has extended over something that was being used",
+    "A Blocklands community has been offered improvement and does not want it and the Wrights genuinely cannot parse the refusal"
+  ],
+  "map": {
+    "x": 500,
+    "y": 145
+  },
+  "poleIntensity": 0.5
+}

@@ -328,6 +328,540 @@
       "effect": "A strike that concludes — against the dying, the raging, the unnatural, it simply finishes what was already ending. The Pale Reaper's mercy.",
       "cannot": "Cannot end what is whole and healthy — it concludes, never murders.",
       "discovery": "Ashwarden-taught, rarely; or use — ease + still in violence"
+    },
+    {
+      "id": "the_hidden_road",
+      "name": "The Hidden Road",
+      "parts": [
+        "shadowstep",
+        "false_trail"
+      ],
+      "functions": [
+        "move",
+        "conceal"
+      ],
+      "domains": [
+        "umbral"
+      ],
+      "effect": "You step the dark from one place to another while a convincing trail walks somewhere else entirely. Pursuit follows the trail; you were never on it.",
+      "cannot": "The decoy trail must end somewhere plausible. A pursuer who reaches its end and finds nothing knows exactly what you did.",
+      "discovery": "use — shadowstep away in the same beat you lay a false trail; or taught in the Underlight",
+      "combinationTier": "within-tradition"
+    },
+    {
+      "id": "the_deep_quiet",
+      "name": "The Deep Quiet",
+      "parts": [
+        "stillcraft",
+        "the_held_breath"
+      ],
+      "functions": [
+        "bind",
+        "shield"
+      ],
+      "domains": [
+        "stillhold"
+      ],
+      "effect": "A silence so complete that violence loses its footing inside it — nobody can find the moment to begin.",
+      "cannot": "The instant the quiet breaks, everything it was holding arrives at once, and all of it at you.",
+      "discovery": "use — hold the breath while binding a room; or taught at the Stillhold",
+      "combinationTier": "within-tradition"
+    },
+    {
+      "id": "the_whole_body",
+      "name": "The Whole Body",
+      "parts": [
+        "soma",
+        "perfect_motion"
+      ],
+      "functions": [
+        "move",
+        "shield"
+      ],
+      "domains": [
+        "somatic"
+      ],
+      "effect": "Body and motion become one instrument — you move through a fight, a fall, a crowd as though the world had agreed to make room.",
+      "cannot": "It is still a body. It can still be outnumbered, and it still has to land.",
+      "discovery": "use — perfect motion inside a somatic exertion; or trained at the Flesh-Temples",
+      "combinationTier": "within-tradition"
+    },
+    {
+      "id": "the_counted_end",
+      "name": "The Counted End",
+      "parts": [
+        "palework",
+        "deathsense"
+      ],
+      "functions": [
+        "reveal",
+        "break"
+      ],
+      "domains": [
+        "ashwarden"
+      ],
+      "effect": "You see an ending's exact hour and can bring it to that hour precisely — no sooner, no crueller, no waste. The Ashwarden mercy.",
+      "cannot": "It cannot bring an ending that was not already coming. Used to hasten what should have lived, it marks the wielder — permanently, visibly.",
+      "discovery": "use — read a death, then tend it in the same beat; or taught in the Hollow March",
+      "combinationTier": "within-tradition"
+    },
+    {
+      "id": "the_lattice_engine",
+      "name": "The Lattice-Engine",
+      "parts": [
+        "latticework",
+        "enginecraft"
+      ],
+      "functions": [
+        "bind",
+        "mend"
+      ],
+      "domains": [
+        "lattice",
+        "enginewright"
+      ],
+      "effect": "Structure and mechanism braided: a system that not only runs but CANNOT run wrong — it corrects itself toward its design.",
+      "cannot": "A self-correcting system corrects toward the design it was given. If the design is wrong, it will pursue that wrongness perfectly and forever.",
+      "discovery": "use — bind a structure while mending its mechanism; taught wherever the Gearlands meet the Grand Lattice",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_sung_lattice",
+      "name": "The Sung Lattice",
+      "parts": [
+        "sonic_resonance",
+        "latticework"
+      ],
+      "functions": [
+        "bind",
+        "break"
+      ],
+      "domains": [
+        "harmonic",
+        "lattice"
+      ],
+      "effect": "Order given a voice: a structure sung into or out of true. The Harmonics' folk-craft reaching up toward what the Lattice-Cities do at scale.",
+      "cannot": "The Valley's sung version is small. Against a true Lattice working, it is a folk song against a cathedral.",
+      "discovery": "use — resonate against a bound structure; or shown by any Lattice-trained visitor to the Heights",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_grown_ward",
+      "name": "The Grown Ward",
+      "parts": [
+        "quickening",
+        "boundary_stone"
+      ],
+      "functions": [
+        "ward",
+        "heal"
+      ],
+      "domains": [
+        "rootkin",
+        "valley_craft"
+      ],
+      "effect": "A boundary that is ALIVE — it grows into place, roots, and thickens over years. The Valley's oldest walls were made this way, and they are still growing.",
+      "cannot": "It takes time to become anything. Planted today, it wards almost nothing; the Rootkin plant for grandchildren.",
+      "discovery": "use — quicken a set boundary; or learned at Thornwake Glade",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_tended_end",
+      "name": "The Tended End",
+      "parts": [
+        "palework",
+        "greenlore"
+      ],
+      "functions": [
+        "heal",
+        "break"
+      ],
+      "domains": [
+        "ashwarden",
+        "valley_craft"
+      ],
+      "effect": "Decay guided rather than merely allowed — a thing rots the right way, into the right soil, and feeds what comes next.",
+      "cannot": "It is a slow craft, and it will not be hurried for your grief. Some things you want ended are ended usefully only over years.",
+      "discovery": "use — pale-work something with a green hand; or taught where the Palelands meet the Quickwood",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_read_engine",
+      "name": "The Read Engine",
+      "parts": [
+        "mech_sense",
+        "noesis"
+      ],
+      "functions": [
+        "reveal"
+      ],
+      "domains": [
+        "enginewright",
+        "cogitant"
+      ],
+      "effect": "Machine-sense and mind-craft together: you do not merely read what a mechanism does — you reconstruct the MIND that designed it, and think its next thought.",
+      "cannot": "Reconstructing a designer is not knowing them. The Cogitants warn that you are, in the end, reading yourself.",
+      "discovery": "use — read a mechanism while holding it in a memory-palace; or in the Cogitarium's engine-halls",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_singing_dark",
+      "name": "The Singing Dark",
+      "parts": [
+        "sonic_resonance",
+        "darksight"
+      ],
+      "functions": [
+        "reveal",
+        "move"
+      ],
+      "domains": [
+        "harmonic",
+        "umbral"
+      ],
+      "effect": "See by sound where there is no light at all — the black is mapped by echo, and it is MORE legible than sight would make it.",
+      "cannot": "A silent dark defeats it entirely. And the sound you make to see with, others can hear.",
+      "discovery": "use — resonate in true darkness; a common Umbral trade-craft picked up by Harmonic travelers",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_burning_truth",
+      "name": "The Burning Truth",
+      "parts": [
+        "radiance",
+        "verity"
+      ],
+      "functions": [
+        "reveal",
+        "strike"
+      ],
+      "domains": [
+        "blazeborn",
+        "verist"
+      ],
+      "effect": "Revelation as a weapon: a truth spoken and LIT at once, that cannot be looked away from and cannot be denied by anyone present.",
+      "cannot": "It burns what it lands on, including bystanders, including you. Both peoples who make it consider it a last resort; both use it more than they admit.",
+      "discovery": "use — speak a true thing while kindling revelation; taught nowhere willingly",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_kind_lie",
+      "name": "The Kind Lie",
+      "parts": [
+        "falsecraft",
+        "pathos"
+      ],
+      "functions": [
+        "conceal",
+        "heal"
+      ],
+      "domains": [
+        "veilwright",
+        "threnodist"
+      ],
+      "effect": "A falsehood built entirely out of care — it holds someone up who would not survive the true thing today, and it holds only until they can.",
+      "cannot": "It is still a lie, and it has a shelf life. When it fails — and it fails — the fall is longer for the height you gave them.",
+      "discovery": "use — conceal a truth while tending the feeling under it; the Veilwrights teach it as an act of mercy and the Verists call that the greatest lie of all",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_cold_shadow",
+      "name": "The Cold Shadow",
+      "parts": [
+        "umbracraft",
+        "logos"
+      ],
+      "functions": [
+        "conceal",
+        "bind"
+      ],
+      "domains": [
+        "umbral",
+        "syllogist"
+      ],
+      "effect": "Reasoning that hides itself: you build an argument, a plan, a case that is airtight and that nobody can find the shape of until it closes.",
+      "cannot": "The argument still has to be sound. A hidden bad argument is simply a bad argument nobody caught yet — until they do.",
+      "discovery": "use — conceal a chain of reasoning as you build it; a Cogitarium technique the Umbrals perfected",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_stopped_hour",
+      "name": "The Stopped Hour",
+      "parts": [
+        "the_fixed_point",
+        "death_ward"
+      ],
+      "functions": [
+        "ward",
+        "bind"
+      ],
+      "domains": [
+        "lattice",
+        "ashwarden"
+      ],
+      "effect": "You become the fixed point a death cannot get past — not turning the hour aside but REFUSING it, and the refusal holds because you do not move.",
+      "cannot": "You must not move. Not to eat, not to strike, not to save a second person. The hour waits exactly as long as you do.",
+      "discovery": "use — anchor yourself while warding a death; there is no school that teaches this and several that forbid it",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_wild_green",
+      "name": "The Wild Green",
+      "parts": [
+        "wildcraft",
+        "greenlore"
+      ],
+      "functions": [
+        "heal",
+        "break"
+      ],
+      "domains": [
+        "churnfolk",
+        "valley_craft"
+      ],
+      "effect": "Growth let entirely off its leash — a wound closes wrong and strong, a wall goes green and comes apart, a field becomes a jungle in a season.",
+      "cannot": "You cannot aim it and you cannot call it back. The Churnfolk think that is the point and the Valleyfolk think that is the problem.",
+      "discovery": "use — quicken something without binding what it becomes; the Churn teaches it by accident, constantly",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_shrouded_wound",
+      "name": "The Shrouded Wound",
+      "parts": [
+        "shroud",
+        "staunch"
+      ],
+      "functions": [
+        "conceal",
+        "heal"
+      ],
+      "domains": [
+        "umbral",
+        "rootkin"
+      ],
+      "effect": "Hold a mortal wound closed AND hide that you are hurt at all — you walk out of the room, and nobody knows to follow.",
+      "cannot": "You are still holding a mortal wound closed. The shroud buys you distance, not time, and the moment you let either go, both fail.",
+      "discovery": "use — staunch a wound while shrouding yourself in the same beat",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_measured_ruin",
+      "name": "The Measured Ruin",
+      "parts": [
+        "wither",
+        "order_sense"
+      ],
+      "functions": [
+        "break",
+        "reveal"
+      ],
+      "domains": [
+        "ashwarden",
+        "lattice"
+      ],
+      "effect": "Decay applied with a designer's precision — this beam and not that one, this hinge, this word in the contract. The building comes down exactly where you meant.",
+      "cannot": "It requires you to be RIGHT about the structure. A measured ruin against a misread design brings down something you needed.",
+      "discovery": "use — read a structure's order, then wither its load-bearing piece",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_open_mind",
+      "name": "The Open Mind",
+      "parts": [
+        "thin_place",
+        "memory_palace"
+      ],
+      "functions": [
+        "reveal",
+        "ward"
+      ],
+      "domains": [
+        "numinous",
+        "cogitant"
+      ],
+      "effect": "You open a thin place INSIDE a memory-palace — a room in your own mind where the numinous can be met, held, and walked away from safely.",
+      "cannot": "Safely is doing a great deal of work in that sentence. What you invite into your own mind has an address there now.",
+      "discovery": "use — open a thin place while standing in the palace; the Numinous permit this only to their own, and the Cogitants do it anyway",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_harbored_truth",
+      "name": "The Harbored Truth",
+      "parts": [
+        "the_harbor",
+        "verity"
+      ],
+      "functions": [
+        "conceal",
+        "reveal"
+      ],
+      "domains": [
+        "umbral",
+        "verist"
+      ],
+      "effect": "Keep a true thing hidden and INTACT — unspoken, unweakened, unrotted — until the hour it can be spoken and land with its whole weight.",
+      "cannot": "The truth keeps; the person waiting does not. Harboring a truth someone needed today in order to deploy it beautifully next year is a betrayal wearing patience.",
+      "discovery": "use — harbor something and hold it true in one beat; the Verists debate endlessly whether this counts as honesty",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_bright_blade",
+      "name": "The Bright Blade",
+      "parts": [
+        "kindle",
+        "the_edge"
+      ],
+      "functions": [
+        "strike",
+        "reveal"
+      ],
+      "domains": [
+        "blazeborn",
+        "marcher"
+      ],
+      "effect": "A struck light that is also a struck blade — the blow lands and REVEALS, and what it reveals is often why the blow was necessary.",
+      "cannot": "Everyone sees what it reveals, including things you would rather not have shown, including about yourself.",
+      "discovery": "use — kindle in the same motion as an edge-strike; common in the Redline's border wars",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_still_engine",
+      "name": "The Still Engine",
+      "parts": [
+        "stillcraft",
+        "command_engine"
+      ],
+      "functions": [
+        "bind",
+        "mend"
+      ],
+      "domains": [
+        "stillhold",
+        "enginewright"
+      ],
+      "effect": "Command a mechanism to STOP and hold it stopped — a mill, a gate, a war-engine, a lock — bound in a peace it cannot argue with.",
+      "cannot": "Machines do not resent being stopped, but their owners do. And a stopped engine is still an engine; someone will start it again.",
+      "discovery": "use — bind an engine you have commanded; the Stillhold's quietest and least-loved export",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_borrowed_hour",
+      "name": "The Borrowed Hour",
+      "parts": [
+        "second_wind",
+        "death_ward"
+      ],
+      "functions": [
+        "heal",
+        "ward"
+      ],
+      "domains": [
+        "somatic",
+        "ashwarden"
+      ],
+      "effect": "Refuse your own ending AND keep moving through it — a body that should be down is up, finishing what it came to do.",
+      "cannot": "The hour is BORROWED. When you set it down, it arrives complete and all at once, and it does not negotiate. Somatics who do this twice do not do it a third time.",
+      "discovery": "use — take a second wind while warding your own death; no tradition teaches it and every tradition knows someone who did it",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_named_chaos",
+      "name": "The Named Chaos",
+      "parts": [
+        "truename_order",
+        "chaos_sense"
+      ],
+      "functions": [
+        "bind",
+        "reveal"
+      ],
+      "domains": [
+        "lattice",
+        "churnfolk"
+      ],
+      "effect": "Name the order inside a chaos — not imposing structure but FINDING the one that was already there, and setting the thing into it.",
+      "cannot": "There is not always one there. The Lattice's oldest error is naming an order onto a chaos that had none, and the chaos always eventually says so.",
+      "discovery": "use — sense a chaos, then name its order in the same beat; the one craft both peoples claim to have invented",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_long_memory",
+      "name": "The Long Memory",
+      "parts": [
+        "echo_memory",
+        "storykeeper"
+      ],
+      "functions": [
+        "reveal",
+        "bind"
+      ],
+      "domains": [
+        "harmonic",
+        "valley_craft"
+      ],
+      "effect": "A place's echo and a people's story braided into one telling — you recover not just what happened here but what it MEANT to those it happened to.",
+      "cannot": "Meaning is not fact. What the story remembers and what the echo records will sometimes disagree, and you must choose which to carry.",
+      "discovery": "use — read a place's echo while keeping its story; the Valley's finest folk-craft and it knows it",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_lit_lattice",
+      "name": "The Lit Lattice",
+      "parts": [
+        "glimmer_script",
+        "latticework"
+      ],
+      "functions": [
+        "ward",
+        "bind"
+      ],
+      "domains": [
+        "radiant_folk",
+        "lattice"
+      ],
+      "effect": "Written light bound into structure — a ward that is also a LAW: it does not merely block, it states the rule it is enforcing, and everyone can read it.",
+      "cannot": "A stated rule can be argued with, lawyered, and found a gap in. A silent ward cannot. The Lattice considers the legibility worth it; the Umbrals find it hilarious.",
+      "discovery": "use — bind a glimmer-script into a structure; standard at any Lattice border",
+      "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_unmade_seal",
+      "name": "The Unmade Seal",
+      "parts": [
+        "unmake_seal",
+        "scatter"
+      ],
+      "functions": [
+        "break"
+      ],
+      "domains": [
+        "precursor",
+        "churnfolk"
+      ],
+      "effect": "A Precursor seal not picked but SCATTERED — its coherence unmade, so the lock stops being a lock rather than being opened.",
+      "cannot": "What the seal was holding closed is now simply open, and nobody planned for that, including you. The Precursors sealed things for reasons.",
+      "discovery": "use — scatter a seal you have addressed; the Churnfolk's favorite crime",
+      "combinationTier": "cross-axis"
+    },
+    {
+      "id": "the_beast_read",
+      "name": "The Beast-Read",
+      "parts": [
+        "beastfriend",
+        "body_read"
+      ],
+      "functions": [
+        "reveal",
+        "bind"
+      ],
+      "domains": [
+        "valley_craft",
+        "somatic"
+      ],
+      "effect": "Read an animal as a body rather than a mystery — its fear, its intent, the half-second before it bolts or bites — and answer it in kind.",
+      "cannot": "An animal read is not an animal tamed. Knowing exactly why it is about to bite you is not the same as it not biting you.",
+      "discovery": "use — body-read a creature you are befriending",
+      "combinationTier": "kin-civilization"
     }
   ],
   "discoverability": {
@@ -336,5 +870,11 @@
     "byTeaching": "Masters know braids; a teacher (named in each recipe's discovery) can grant one directly, at a price or a bond.",
     "generative": "SNG-020 can author a NEW braid in-grain when a player creatively pairs two owned abilities no authored recipe covers — validated, persisted, added to the discoverable set. The recipe list GROWS through play.",
     "engineTie": "Recipes carry `parts` (the two ability ids), `functions`, `domains`, `discovery`. The engine: on a two-ability beat, check for a matching recipe (authored or generate one); gate on owning both; surface + persist the discovery. Extends emergence-recipes (SNG-010). Flagged to SNG-026."
+  },
+  "combinationTiers": {
+    "within-tradition": "Two crafts of the SAME people. The most learnable — their own masters teach these.",
+    "kin-civilization": "Two peoples who share a secondary disposition lean and therefore a border (world_framing: adjacency = kinship). Learnable where their lands meet.",
+    "cross-axis": "Two peoples from entirely different axes. Rare, powerful, strange — usually discovered by USE, in a moment where someone needed both at once. Few are taught anywhere.",
+    "cross-pole": "The two poles of a SINGLE axis — the braids that belong to neither people and require standing in both (harbored_flame, meaning_engine, the_turning_word). The hardest and the most meaningful: to hold an axis whole rather than choose an end of it."
   }
 }

@@ -57,6 +57,19 @@ CCode's ROUND 2 caught Aevi in four places. **All accepted; `SYSTEM_SPEC.md` is 
 
 ---
 
+## 🚨 SNG-078 — **THE GAME CEILINGS OUT AT LEVEL 5** (Aevi, analytic from `resolution.json` @ HEAD)
+| Difficulty | hits the 95% clamp at |
+|---|---|
+| Routine (0) | **level 2** |
+| Hard (15) | **level 3** |
+| Very hard (30) | **level 5** |
+
+**Cause:** `attributeMultiplier: 20` vs `attributeSoftCap: 4` → **an attribute of 4 is 80% ON ITS OWN**, before skill (+10/pt), rank (+5), equipment (+10), companion (+10), spectral fit (+25). Difficulty tops out at **30**. A level-5 character with gear + companion + alignment sits at 95% on *very hard* with **~45 points of unused headroom**.
+**And level 100 does not exist:** `subAttributeCap: 20` + `maxAbilityRank: 3` → **mechanical growth stops ~level 20.**
+**Where tension DOES survive:** modifiers only — against-grain (−25), exhausted (−10), novel (−15) drop a 95 to 45. *The game is tense when you're misaligned, tired, or reaching past what you know — and a formality otherwise.*
+**⛔ ERIK'S CALL. Aevi will NOT tune balance numbers unilaterally.** Levers: lower `attributeMultiplier` (20 → ~8-10) · widen/scale the difficulty band (0/15/30 is too narrow to bite) · scale challenge with level · make the soft cap bite harder.
+**🔧 CCode: `tests/balance_sim.mjs`** — headless sim (the engine is pure), lvl 1 → true cap, reporting: chance distribution × difficulty × alignment · **energy economy** (recovery is ACTIVE-ONLY; `regenPerRest` is dead) · XP pacing (10,000 xp ≈ 2,000 actions for lvl 100) · **the +20 discovery bonus** (Erik parked it for exactly this) · domain-access economics · are the **cross-pole braids** actually attainable · encounter danger vs a character who auto-succeeds from level 5. **Run it under `npm test` as a regression gate** so nobody silently re-breaks the curve.
+
 ## 🎯 ERIK'S CALL (design, not a bug)
 **Should a place CHANGE you?** The world's premise is that its physics *is* disposition — and standing a long time in the Redline, or the Cogitarium, or the Unlit Deep, *ought* to leave a mark. Today the place **taxes or favours a roll** and nothing more; it never shapes who you become. **The mechanic Aevi documented does not exist, and Aevi should not have claimed it did.** Building it is a real feature (a slow spectrum-pull toward a place's poles, with decay), and it would make "geography = disposition" true of *people*, not just terrain. **Erik decides whether that is a feature or a road not taken.**
 

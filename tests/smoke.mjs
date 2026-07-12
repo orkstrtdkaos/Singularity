@@ -22,7 +22,7 @@ import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconci
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict } from "../engine/sync.js";
 import { namesMatch as nm2 } from "../engine/namematch.js";
-import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf } from "../engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
@@ -2409,6 +2409,22 @@ await (async () => {
   check("SNG-056: a loose name fragment resolves", resolveLocationId("disputed zone", locs) === "disputed_zone_fringe");
   check("SNG-056: a place that does not exist resolves to null (the engine only honors real moves)", resolveLocationId("Castle Nowhere", locs) === null);
   check("SNG-056: an empty ref is null", resolveLocationId("", locs) === null && resolveLocationId(null, locs) === null);
+})();
+
+// --- SNG-075: encounters fire in NARRATIVE play, bound to narrative TIME ---
+(() => {
+  const table = { triggerRules: { onNarrativeTime: {}, onTravel: { chance: 0.35 }, onRest: { chance: 0.15 } }, encounters: [] };
+  const quiet = { dangerLevel: 0 }, road = { dangerLevel: 2 };
+  // a quick exchange stays quiet; a half-day's walk is likely eventful; a trek caps out
+  check("SNG-075: a 20-minute beat is nearly silent (~1%)", narrativeTimeChance(0.33, quiet, table) < 0.03);
+  check("SNG-075: a half-day walk (~6h) is eventful (~24%)", narrativeTimeChance(6, quiet, table) > 0.2 && narrativeTimeChance(6, quiet, table) < 0.35);
+  check("SNG-075: chance rises with hours and is capped", narrativeTimeChance(72, quiet, table) === narrativeTimeChance(72, quiet, table) && narrativeTimeChance(72, quiet, table) <= 0.6 * 1.0 + 1e-9);
+  check("SNG-075: danger nudges the chance up", narrativeTimeChance(6, road, table) > narrativeTimeChance(6, quiet, table));
+  check("SNG-075: zero elapsed time never fires", narrativeTimeChance(0, road, table) === 0 && rollNarrativeTime(0, road, table, () => 0) === false);
+  // classification drives which trigger model applies
+  check("SNG-075: a sleep/camp beat classifies as REST", classifyNarrativeKind({ why: "bedded down for the night", hoursPassed: 8 }) === "rest" && classifyNarrativeKind({ intentTags: ["camp"], hoursPassed: 8 }) === "rest");
+  check("SNG-075: a road/journey beat classifies as TRAVEL", classifyNarrativeKind({ why: "a day on the road", hoursPassed: 10 }) === "travel" && classifyNarrativeKind({ intentTags: ["journey"], hoursPassed: 6 }) === "travel");
+  check("SNG-075: plain elapsed time classifies as TIME; a zero-hour beat is NONE", classifyNarrativeKind({ why: "a long talk", hoursPassed: 3 }) === "time" && classifyNarrativeKind({ why: "a quick word", hoursPassed: 0 }) === "none");
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

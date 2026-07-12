@@ -60,6 +60,36 @@ export function rollTrigger(trigger, location, table, rng = Math.random) {
   return rng() < chance;
 }
 
+// ---------- SNG-075: encounters fire in NARRATIVE play, bound to narrative TIME ----------
+// The engine already knows how long the fiction took (timeOps.hoursPassed). Narrative time IS
+// the encounter window: a quick exchange stays quiet; a half-day's walk is likely eventful.
+// Rates default here (a mechanic, not content) but a content pack MAY override via
+// triggerRules.onNarrativeTime {ratePerHour, maxChance}.
+
+/** Probability that a stretch of narrative time turns something up. ~ratePerHour × hours,
+ *  danger-weighted, clamped. Pure. */
+export function narrativeTimeChance(hoursPassed, location, table) {
+  const tr = table?.triggerRules?.onNarrativeTime || {};
+  const ratePerHour = Number.isFinite(tr.ratePerHour) ? tr.ratePerHour : 0.04; // ~4%/hr (spec)
+  const cap = Number.isFinite(tr.maxChance) ? tr.maxChance : 0.6;
+  const h = Math.max(0, Number(hoursPassed) || 0);
+  const base = Math.min(cap, ratePerHour * h);
+  return Math.min(0.9, base * (1 + dangerOf(location) * 0.1));
+}
+export function rollNarrativeTime(hoursPassed, location, table, rng = Math.random) {
+  return rng() < narrativeTimeChance(hoursPassed, location, table);
+}
+
+/** Classify what a GM turn's elapsed fiction was — a rest, a journey, or just time passing —
+ *  from intent tags + the timeOps `why`. Drives which trigger model applies. Pure. */
+export function classifyNarrativeKind({ intentTags = [], why = "", hoursPassed = 0 } = {}) {
+  const tags = (intentTags || []).map(t => String(t).toLowerCase());
+  const w = String(why || "").toLowerCase();
+  if (tags.some(t => /rest|sleep|camp/.test(t)) || /sleep|slept|camp|rest|the night|bed down|made camp/.test(w)) return "rest";
+  if (tags.some(t => /travel|journey|road|trek|march/.test(t)) || /road|journey|travel|trek|march|walk|rode|a day.*(?:road|country)|on foot/.test(w)) return "travel";
+  return (Number(hoursPassed) || 0) > 0 ? "time" : "none";
+}
+
 /** Choose one encounter for this location. If a flavor is forced (dev trigger),
  *  restrict to it; ignoreDanger lets a dev fire a fight anywhere for testing. */
 export function pickEncounter(table, location, rng = Math.random, { flavor = null, ignoreDanger = false } = {}) {

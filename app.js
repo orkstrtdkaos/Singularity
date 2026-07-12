@@ -34,10 +34,10 @@ import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncoun
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.27";
+const APP_VERSION = "1.8.28";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -64,6 +64,12 @@ let lastPlayerText = ""; // last freeform/ask input — restored into the box if
 let sharedScene = null;  // SNG-001: the shared scene object (party play), null when solo
 let partyPoll = null;    // poll timer while a shared scene is active
 let seenBeats = 0;       // remote beats already rendered
+// SNG-075: encounters in narrative play — an encounter selected by the narrative-time roll waits
+// here to be WOVEN into the next GM turn (never a modal). One per scene + a turn cooldown.
+let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to inject next turn
+let sceneEncounterFired = false;// one narrative encounter per scene
+let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
+const NARRATIVE_ENCOUNTER_COOLDOWN = 3;
 
 // ---------- boot ----------
 
@@ -1765,6 +1771,7 @@ async function startScene(prompt = "(Scene opening — set the scene where the c
   gambitHintDismissed = false; // SNG-031: a new scene may be plan-apt again
   sceneGenCount = 0;           // SNG-BATCH-9: fresh generation budget each scene
   sceneArtCount = 0;           // SNG-035: fresh moment-art budget each scene
+  sceneEncounterFired = false; // SNG-075: one narrative encounter per scene, reset here
   if (news.length) prompt += ` (Since the character last played, the world moved: ${news.map(n => n.text).join(" / ")} — let the scene reflect what applies here.)`;
   renderPlay(null, { thinking: "The valley takes shape…", newsFlash: news, aside });
   const result = await runGM({ resolution: null, playerInput: prompt });
@@ -1773,6 +1780,13 @@ async function startScene(prompt = "(Scene opening — set the scene where the c
 
 async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   busy = true;
+  // SNG-075: an encounter the narrative-time roll turned up last beat is WOVEN into this turn.
+  const weave = pendingWeave; pendingWeave = null;
+  const encounterWeaveDetail = weave ? (
+    `An encounter is occurring — weave it INTO the scene now, as part of what is happening (no aside, no genre-break): ${weave.seed}` +
+    (weave.perilous ? ` This could turn dangerous — you MUST present a way to decline, flee, or avoid it as a clear choice BEFORE any engagement. Never narrate the character as already fighting or already harmed.` : ` Let it be a small, real thing on the road${weave.flavor && /benef|benign|beaut/.test(weave.flavor) ? " — a grace, not a threat" : ""}.`) +
+    (weave.loreTier === "precursor-glimpse" ? ` This touches the Precursor — glimpsed, never explained.` : ``)
+  ) : null;
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
@@ -1800,6 +1814,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     emergenceDetail: emergenceNoticeForGM(character, CONTENT.emergence, CONTENT.rules),
     perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
+    encounterWeaveDetail, // SNG-075: a narrative-time encounter to weave into THIS turn's fiction
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
@@ -1996,6 +2011,8 @@ function applyTurn(turn, resolution) {
   }
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
+  // SNG-075: the valley is alive in narrative play too — maybe turn something up (woven next turn)
+  maybeNarrativeEncounter(turn, resolution);
   // party: publish this beat to the shared scene (fire-and-forget)
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
   // chronicle + scene persistence
@@ -2258,6 +2275,38 @@ async function maybeRandomEncounter(trigger, news = []) {
   const entry = pickEncounter(table, hereNow(), Math.random, {});
   if (!entry) return false;
   return fireEncounter(entry, { news });
+}
+
+/** SNG-075: after a narrative GM turn, MAYBE turn something up — bound to how long the fiction
+ *  took, and WOVEN into the next turn (never a card). Suppressed during combat/gambit, once per
+ *  scene, on a cooldown, and on an intense/intimate beat. Stashes a seed; the next runGM injects it. */
+function maybeNarrativeEncounter(turn, resolution) {
+  turnsSinceEncounter++;
+  const table = CONTENT.randomEncounters;
+  if (!table) return;
+  // SUPPRESSION CONDITIONS: a live encounter · a gambit in play · a scene that just ended · one
+  // already woven this scene · still within the cooldown · an explicitly intense/intimate beat.
+  if (activeEnc() || gambitDraft) return;
+  if (turn?.sceneEnded) return;
+  if (sceneEncounterFired) return;
+  if (turnsSinceEncounter <= NARRATIVE_ENCOUNTER_COOLDOWN) return;
+  if (sceneState?.intense || sceneState?.intimate) return;
+  const intentTags = resolution?.action?.intentTags || resolution?.intentTags || [];
+  if (intentTags.some(t => /intimate|climax|grief|vigil|mourn/.test(String(t).toLowerCase()))) return;
+  const hoursPassed = Number(turn?.timeOps?.hoursPassed) || 0;
+  const kind = classifyNarrativeKind({ intentTags, why: turn?.timeOps?.why || "", hoursPassed });
+  if (kind === "none") return;
+  const loc = hereNow();
+  const fired = kind === "rest" ? rollTrigger("onRest", loc, table, Math.random)
+    : kind === "travel" ? rollTrigger("onTravel", loc, table, Math.random)
+    : rollNarrativeTime(hoursPassed, loc, table, Math.random);
+  if (!fired) return;
+  const entry = pickEncounter(table, loc, Math.random, {});
+  if (!entry) return;
+  // WEAVE, DO NOT INTERRUPT: no card, no scene change — stash the seed for the next GM turn.
+  pendingWeave = { seed: entry.seed, flavor: entry.flavor, perilous: canIncapacitate(entry), loreTier: entry.loreTier || null };
+  sceneEncounterFired = true;
+  turnsSinceEncounter = 0;
 }
 
 async function travelTo(locId) {

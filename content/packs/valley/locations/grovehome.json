@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "grovehome",
+  "name": "Grovehome",
+  "regionId": "the_quickwood",
+  "communityId": "rootkin.grovehome",
+  "axisVector": [
+    -0.2,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.6,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "death_life": 0.6,
+    "emotional_logical": -0.2,
+    "violence_peace": 0.3
+  },
+  "tags": [
+    "rootkin",
+    "life",
+    "community",
+    "market",
+    "social"
+  ],
+  "connections": [
+    "the_heartroot",
+    "the_slow_orchard"
+  ],
+  "descriptionSeed": "Where the Rootkin meet the world — the only Quickwood settlement that keeps human hours, because trade requires it and the Rootkin find that funny. Grovehome is patient in a way that reads as either profound hospitality or maddening obstruction depending on how much of a hurry you are in. Deals here are made slowly and kept forever. The Rootkin have never once broken a bargain and they have also never once made one quickly.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Traders who have learned to wait; a Rootkin negotiator who will outlive your grandchildren and knows it; humans who came for a season and stayed a decade.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A trade agreement made ninety years ago is coming due and nobody alive on the human side knew about it",
+    "Somebody is cutting living wood in the Quickwood and the Rootkin have not yet decided what to do about it"
+  ],
+  "map": {
+    "x": 650,
+    "y": 240
+  },
+  "poleIntensity": 0.6
+}

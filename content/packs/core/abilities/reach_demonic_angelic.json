@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_demonic_angelic",
+  "gated": "learned",
+  "note": "Crafts of The Descent/The Ascent (demonic_angelic axis). DESCENT is the demonic-pole craft of the Abyssal Choir — appetite, bargain, the honesty about hunger the pious lack; ASCENT is the angelic-pole craft of the Seraphic Orders — mercy, judgment, luminous certainty. Neither is 'evil' or 'good' in the flat sense: the Choir's honesty about want is a real virtue and the Orders' certainty is a real danger. The pure loci (The Maw, The Choir-Height) are cult-held. Authored by Aevi, SNG-054.",
+  "abilities": [
+    {
+      "id": "descent",
+      "name": "Descent",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_demonic_angelic",
+      "attribute": "social",
+      "axes": {
+        "demonic_angelic": -0.5,
+        "chaos_order": -0.2,
+        "emotional_logical": -0.2
+      },
+      "functions": [
+        "bind",
+        "reveal",
+        "strike"
+      ],
+      "narrationHints": "Something in the room admits what it wants, and the admitting has teeth.",
+      "description": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger.",
+      "notFor": "Pretending you do not want what you want (that is the Orders' failure, not the Choir's); mercy without price; anything that requires you to be innocent.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Named Want",
+          "grants": "Name what a person actually wants — not what they claim, not what they should — and speak it aloud so they hear it.",
+          "cannot": "Naming a want is not granting it. Some people will hate you forever for the naming."
+        },
+        {
+          "rank": 2,
+          "name": "The Bargain",
+          "grants": "Strike a binding bargain: both sides get what they truly want, and both sides pay what it truly costs.",
+          "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting."
+        },
+        {
+          "rank": 3,
+          "name": "The Deep Descent",
+          "grants": "Descend into a person, a place, or an institution and surface with its true engine — the appetite it is actually running on, however it dresses.",
+          "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "INVESTIGATE": 2
+      }
+    },
+    {
+      "id": "appetite_sense",
+      "name": "Appetite-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_demonic_angelic",
+      "attribute": "social",
+      "axes": {
+        "demonic_angelic": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "You can feel the shape of what they are hungry for before they say a word.",
+      "description": "Sense the true want under the presented want — the first gift of the Descent.",
+      "notFor": "Reading facts (that is Verity); reading feeling (that is Pathos). This reads HUNGER.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Appetite-Sense",
+          "grants": "Feel what a person actually wants, beneath what they are asking for.",
+          "cannot": "It reads want, not intent. What they will DO about the want is a different craft."
+        },
+        {
+          "rank": 2,
+          "name": "The Hollow Read",
+          "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
+          "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it."
+        },
+        {
+          "rank": 3,
+          "name": "The Whole Hunger",
+          "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
+          "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3
+      }
+    },
+    {
+      "id": "the_offered_price",
+      "name": "The Offered Price",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_demonic_angelic",
+      "attribute": "social",
+      "axes": {
+        "demonic_angelic": -0.4,
+        "falsehood_truth": 0.2
+      },
+      "functions": [
+        "bind",
+        "reveal"
+      ],
+      "narrationHints": "The price is named plainly, and it is worse for being fair.",
+      "description": "Name the true price of a thing someone wants — exactly, honestly, with nothing hidden.",
+      "notFor": "Lying about the price (Falsecraft's country, and the Choir despises it); forcing the taking.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Offered Price",
+          "grants": "Name what a thing will truly cost the person who wants it. They may still take it.",
+          "cannot": "Naming the price does not stop them. It only means they cannot say they were not told."
+        },
+        {
+          "rank": 2,
+          "name": "The Held Price",
+          "grants": "The price, once named and accepted, BINDS — it will be paid, in the coin named, whatever they do afterward.",
+          "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them."
+        },
+        {
+          "rank": 3,
+          "name": "The True Cost",
+          "grants": "Name what a course of action will ultimately cost — not the ledger price, the real one, years out.",
+          "cannot": "People do not believe true costs. The Choir's oldest grief is being right and ignored."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3
+      }
+    },
+    {
+      "id": "ascent",
+      "name": "Ascent",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_demonic_angelic",
+      "attribute": "mental",
+      "axes": {
+        "demonic_angelic": 0.5,
+        "chaos_order": 0.2,
+        "dark_light": 0.2
+      },
+      "functions": [
+        "heal",
+        "ward",
+        "bind"
+      ],
+      "narrationHints": "The light here does not warm. It measures.",
+      "description": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger.",
+      "notFor": "Doubt (the Orders have very little); mercy that costs the giver nothing; being wrong gracefully.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Measuring Eye",
+          "grants": "See a person's moral weight — what they have done, what it cost others, what they carry.",
+          "cannot": "It measures the deed, not the person. The Orders forget this distinction constantly and catastrophically."
+        },
+        {
+          "rank": 2,
+          "name": "The Mercy",
+          "grants": "Grant a real absolution — lift a weight a person has carried, genuinely, and they will feel it leave.",
+          "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you."
+        },
+        {
+          "rank": 3,
+          "name": "The Judgment",
+          "grants": "Pronounce a judgment that BINDS — it is true, everyone present knows it is true, and it does not come undone.",
+          "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "INVESTIGATE": 2
+      }
+    },
+    {
+      "id": "the_measuring_eye",
+      "name": "The Weighing Look",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_demonic_angelic",
+      "attribute": "mental",
+      "axes": {
+        "demonic_angelic": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "You are being looked at by something that is adding you up.",
+      "description": "See the moral weight a person carries — the first gift of the Ascent.",
+      "notFor": "Reading want (Appetite-Sense); reading truth (Verity). This reads WEIGHT — deed and cost.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Weighing Look",
+          "grants": "See roughly what a person carries — the harm done, the harm borne.",
+          "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons."
+        },
+        {
+          "rank": 2,
+          "name": "The Clear Ledger",
+          "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
+          "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin."
+        },
+        {
+          "rank": 3,
+          "name": "The Unblinking Measure",
+          "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
+          "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3
+      }
+    },
+    {
+      "id": "the_shielding_word",
+      "name": "The Shielding Word",
+      "levelReq": 3,
+      "energyCost": 6,
+      "powerSystem": "reach_demonic_angelic",
+      "attribute": "mental",
+      "axes": {
+        "demonic_angelic": 0.4,
+        "violence_peace": 0.2
+      },
+      "functions": [
+        "shield",
+        "ward"
+      ],
+      "narrationHints": "A word is spoken and the blow simply does not arrive.",
+      "description": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
+      "notFor": "Warding what deserves to land (the Orders will not, and this is either integrity or arrogance depending on who you ask).",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Shielding Word",
+          "grants": "Ward one person from one harm with a spoken certainty.",
+          "cannot": "You must actually believe it. A hollow word wards nothing, and everyone can hear the hollow."
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Ward",
+          "grants": "The ward holds over a place and a people, for as long as you keep speaking for them.",
+          "cannot": "You must keep speaking. And you must keep meaning it, which is harder."
+        },
+        {
+          "rank": 3,
+          "name": "The Unbroken Word",
+          "grants": "A ward that holds after you have gone — a word spoken so wholly it keeps standing on its own.",
+          "cannot": "It stands on what you meant when you said it. If you change, it does not. Sister Alder's ward is of this kind, and she has thought about that a great deal."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SOCIAL": 2
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "quests_structured",
   "kind": "quests",
-  "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11.",
+  "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess.",
   "quests": [
     {
       "id": "the_edge_district_ledger",
@@ -61,44 +61,179 @@
           "id": "exposed",
           "name": "Grael Exposed",
           "summary": "The pattern is made public and holds. Grael falls.",
-          "consequences": [
+          "narration": [
             "Grael is stripped and removed (NPC state: fallen). His lieutenants scatter into the district as riffraff-tier antagonists.",
             "Fendt is restored, and is permanently in your debt, and is not entirely grateful about it.",
             "The thirty-year keeper is vindicated and becomes an ally who will never lie to you.",
             "WORLD-EVENT (propagates): 'the Edge District accountability board was opened' — reaches other districts on the shared clock. Other markings begin to be questioned. Some of them should not be.",
             "Verist disposition toward you: strongly raised. Veilwright: lowered."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "grael",
+              "state": "fallen",
+              "note": "stripped and removed; lieutenants scatter as riffraff-tier antagonists"
+            },
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "restored",
+              "note": "permanently in your debt, and not entirely grateful about it"
+            },
+            {
+              "type": "ally",
+              "npc": "keeper_ilma",
+              "note": "vindicated; will never lie to you"
+            },
+            {
+              "type": "disposition",
+              "people": "verist",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "veilwright",
+              "delta": -1
+            },
+            {
+              "type": "codex_fact",
+              "text": "The Edge District accountability board was opened. Grael's pattern of unrecorded markings is a matter of record."
+            },
+            {
+              "type": "world_event",
+              "text": "Word spreads that the Edge District board was opened; other districts begin questioning their own markings — some of which should not be.",
+              "propagates": true,
+              "delayDays": 3
+            },
+            {
+              "type": "xp",
+              "amount": 30
+            }
           ]
         },
         {
           "id": "saved_quietly",
           "name": "Fendt Saved, Grael Standing",
           "summary": "Fendt is safe. The method is intact.",
-          "consequences": [
+          "narration": [
             "Fendt lives and is restored or extracted — but the board's method is confirmed as survivable, which is not the same as beaten.",
             "Grael remains, and he now knows your face, and he is patient.",
             "Codex: 'Grael's method' recorded as an unresolved pattern. It will recur.",
             "WORLD-EVENT: another name appears on the board within the season, and that one you will not be there for."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "safe",
+              "note": "restored or extracted; the method survives"
+            },
+            {
+              "type": "npc_state",
+              "npc": "grael",
+              "state": "standing",
+              "note": "knows your face now, and is patient"
+            },
+            {
+              "type": "codex_fact",
+              "text": "Grael's method — a name on the board, no record filed — remains an unresolved pattern."
+            },
+            {
+              "type": "world_event",
+              "text": "Another name appears on the Edge District board within the season, and you are not there for it.",
+              "propagates": true,
+              "delayDays": 20
+            },
+            {
+              "type": "xp",
+              "amount": 25
+            }
           ]
         },
         {
           "id": "bargained",
           "name": "The Bargain",
           "summary": "Grael gets what he actually wanted. So does Fendt. So, in a smaller way, do you.",
-          "consequences": [
+          "narration": [
             "Fendt restored; Grael's face saved; the district quiets. It is a genuinely good outcome and it is also a deal with a man who ruins people.",
             "Grael's disposition toward you: WARY RESPECT. He will deal with you again. That is a door, and it is also a rope.",
             "Abyssal disposition raised. Seraphic lowered — the Orders would have judged him."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "restored"
+            },
+            {
+              "type": "npc_state",
+              "npc": "grael",
+              "state": "standing",
+              "note": "wary respect; will deal with you again — a door, and a rope"
+            },
+            {
+              "type": "disposition",
+              "people": "abyssal",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "seraphic",
+              "delta": -1
+            },
+            {
+              "type": "codex_fact",
+              "text": "You made a bargain with Overseer Grael. It was fair. That is the part that stays with you."
+            },
+            {
+              "type": "xp",
+              "amount": 25
+            }
           ]
         },
         {
           "id": "walked_away",
           "name": "You Walked Away",
           "summary": "You had other things to do.",
-          "consequences": [
+          "narration": [
             "Fendt is stripped and exiled. The filtration failure goes uncorrected and worsens.",
             "The keeper of thirty years stops speaking to anyone about anything.",
             "WORLD-EVENT: the water problem escalates on the shared clock and reaches you later, larger, as someone else's crisis.",
             "This outcome is REAL and is not a failure state. It is a choice with a cost, and the cost arrives."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "exiled",
+              "note": "stripped; the filtration failure goes uncorrected"
+            },
+            {
+              "type": "npc_state",
+              "npc": "keeper_ilma",
+              "state": "silent",
+              "note": "stops speaking to anyone about anything"
+            },
+            {
+              "type": "location_state",
+              "location": "radiant_plateau_edge",
+              "change": "water_crisis_worsens"
+            },
+            {
+              "type": "world_event",
+              "text": "The Edge District water problem escalates and reaches you later, larger, as someone else's crisis.",
+              "propagates": true,
+              "delayDays": 30
+            },
+            {
+              "type": "codex_fact",
+              "text": "You walked away from the Edge District ledger. This is a real outcome, not a failure — and it has a cost, and the cost arrives."
+            },
+            {
+              "type": "xp",
+              "amount": 10
+            }
           ]
         }
       ]
@@ -151,32 +286,118 @@
           "id": "told",
           "name": "Told",
           "summary": "The planter learns the truth and does not survive it long.",
-          "consequences": [
+          "narration": [
             "The planter dies within the season. They thank you. It is the worst thanks you have ever received.",
             "Codex: the tree's true history, permanently recorded.",
             "Verist disposition raised. Rootkin disposition: complicated — they respect it and will not forgive it quickly.",
             "The tree fruits. Someone must eat it. That is a separate problem and it is now yours."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "thessa_root",
+              "state": "dying",
+              "note": "dies within the season; thanks you — the worst thanks you have received"
+            },
+            {
+              "type": "disposition",
+              "people": "verist",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "rootkin",
+              "delta": -1,
+              "note": "they respect it and will not forgive it quickly"
+            },
+            {
+              "type": "codex_fact",
+              "text": "The tree in the Slow Orchard was planted for someone who never came, and Thessa Root learned it from you."
+            },
+            {
+              "type": "quest_seed",
+              "text": "The tree fruits. Someone must eat it. That is now your problem."
+            },
+            {
+              "type": "xp",
+              "amount": 30
+            }
           ]
         },
         {
           "id": "rerooted",
           "name": "Re-Rooted",
           "summary": "You find the tree a new person to have been for.",
-          "consequences": [
+          "narration": [
             "The planter accepts it — Rootkin believe meaning grows, and this is the argument they have been making for three hundred years.",
             "A new NPC enters your world permanently, bound to you by a debt they did not ask for.",
             "Rootkin disposition strongly raised. The Slow Orchard adds a stone with your name on it.",
             "WORLD-EVENT: the story propagates. Rootkin elsewhere hear that someone re-rooted a three-century wait."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "thessa_root",
+              "state": "content",
+              "note": "Rootkin believe meaning grows; this is the argument she has been making for three centuries"
+            },
+            {
+              "type": "disposition",
+              "people": "rootkin",
+              "delta": 3
+            },
+            {
+              "type": "codex_fact",
+              "text": "The Slow Orchard's oldest tree was re-rooted — given a new person to have been for. A stone there carries your name."
+            },
+            {
+              "type": "world_event",
+              "text": "Rootkin elsewhere hear that someone re-rooted a three-century wait.",
+              "propagates": true,
+              "delayDays": 10
+            },
+            {
+              "type": "xp",
+              "amount": 35
+            }
           ]
         },
         {
           "id": "the_kind_story",
           "name": "The Kind Story",
           "summary": "You let them finish believing.",
-          "consequences": [
+          "narration": [
             "The planter dies content, and wrong, and you carry that.",
             "Veilwright disposition raised. Verist LOWERED — and a Verist NPC who knows what you did will say so, out loud, at the worst possible moment.",
             "Codex: the true history is recorded and marked SECRET — it is in your world and nobody else's."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "thessa_root",
+              "state": "dying_content",
+              "note": "dies content, and wrong, and you carry that"
+            },
+            {
+              "type": "disposition",
+              "people": "veilwright",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "verist",
+              "delta": -2,
+              "note": "a Verist who knows will say so, out loud, at the worst possible moment"
+            },
+            {
+              "type": "codex_fact",
+              "text": "You let Thessa Root finish believing. The true history is recorded — and it is in your world and nobody else's.",
+              "secret": true
+            },
+            {
+              "type": "xp",
+              "amount": 25
+            }
           ]
         }
       ]

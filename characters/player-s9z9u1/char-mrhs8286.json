@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.2185585851327953
+    "spectrumId": -0.20763065587615553
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -214,39 +214,25 @@
       {
         "summary": "Silas strips his shirt in the forge-warmth and proposes a modified light spear-tip that might actually serve Corvin's boar-hunting ambitions.",
         "narration": "The billhook is as good as it's going to get without a full re-face, so you set the file down, pull it from the vise, and tug your shirt off over your head in one motion — the kind of casual efficiency that belongs to someone who's worked enough hot shops to stop caring about formality. You drape the shirt over the end of the sharpening station and pick the slip stone up again. The forge is warm enough to earn it.\n\nHuginn makes no comment. Pell doesn't look up, but she doesn't not look, either — a craftsman's peripheral awareness, the same sense she'd use to track where an apprentice's hands are near a fire. You start the edge work on the billhook's curved face and keep your voice easy.\n\n\"What's Corvin actually hunting?\"\n\nA pause. Pell's file keeps its rhythm. \"Says boar. Heard there's a sounder working the north wood, wants to be the one who does something about it.\"\n\n\"Mid-weight point won't stop a boar at the shoulder.\" You tilt the blade to check the edge in the forge light. \"But a light point isn't all wrong if the geometry's modified — socket sleeve thickened, spine reinforced behind the socket so the shaft doesn't torque. He'd need the right shaft length and the nerve to use the throat rather than going through the side.\" You let that sit. \"That work you could do?\"\n\nNow she does turn — quarter-turn, the minimum. Her eyes move from the billhook to your hands to your face, in that order. \"I could do it. Collar and sleeve work, yes. Whether the boy has the nerve is a separate question.\" She turns back. \"And whether he has the coin for the modification on top of the point.\""
+      },
+      {
+        "summary": "Pell agrees to the three-way hunt arrangement — modification at cost, no margin, on the condition Silas keeps Corvin from doing something permanent.",
+        "narration": "You work the billhook's curved face with the slip stone while you lay it out — not a pitch, just a practical arrangement stated plainly. You'll cover the modification cost on the light point. You bring the finished piece to Corvin before the hunt, on the road north. Pell comes along, Corvin gets his spear and his adventure, and you get decent company in the north wood. Three people who know what they're doing are better than one person who doesn't, against a sounder.\n\nPell is quiet for long enough that you hear the froe shift in its pile. Then she sets her file down on the anvil ledge — not put away, just paused — and looks at you directly for the first time since you started the drawknife.\n\n\"Corvin doesn't know what he doesn't know about boar,\" she says. The tone is not unkind. It's the same register she'd use to say the bevel is wrong. \"That's the problem. You take him north with a point he just received this morning, he'll be brave about it in the wrong moment.\"\n\nShe picks the file back up. Works two strokes. \"But someone capable is beside him, that changes the math.\" Another stroke. \"You cover the modification, I supply it at cost. No margin — that's what it's worth if you're also keeping the boy from doing something permanent.\" A quarter-turn glance, the same one she gave your file angle. \"I'll walk north with you. He can carry his own spear.\""
       }
     ],
     "lastTurn": {
-      "narration": "The billhook is as good as it's going to get without a full re-face, so you set the file down, pull it from the vise, and tug your shirt off over your head in one motion — the kind of casual efficiency that belongs to someone who's worked enough hot shops to stop caring about formality. You drape the shirt over the end of the sharpening station and pick the slip stone up again. The forge is warm enough to earn it.\n\nHuginn makes no comment. Pell doesn't look up, but she doesn't not look, either — a craftsman's peripheral awareness, the same sense she'd use to track where an apprentice's hands are near a fire. You start the edge work on the billhook's curved face and keep your voice easy.\n\n\"What's Corvin actually hunting?\"\n\nA pause. Pell's file keeps its rhythm. \"Says boar. Heard there's a sounder working the north wood, wants to be the one who does something about it.\"\n\n\"Mid-weight point won't stop a boar at the shoulder.\" You tilt the blade to check the edge in the forge light. \"But a light point isn't all wrong if the geometry's modified — socket sleeve thickened, spine reinforced behind the socket so the shaft doesn't torque. He'd need the right shaft length and the nerve to use the throat rather than going through the side.\" You let that sit. \"That work you could do?\"\n\nNow she does turn — quarter-turn, the minimum. Her eyes move from the billhook to your hands to your face, in that order. \"I could do it. Collar and sleeve work, yes. Whether the boy has the nerve is a separate question.\" She turns back. \"And whether he has the coin for the modification on top of the point.\"",
-      "sceneSummary": "Silas strips his shirt in the forge-warmth and proposes a modified light spear-tip that might actually serve Corvin's boar-hunting ambitions.",
+      "narration": "You work the billhook's curved face with the slip stone while you lay it out — not a pitch, just a practical arrangement stated plainly. You'll cover the modification cost on the light point. You bring the finished piece to Corvin before the hunt, on the road north. Pell comes along, Corvin gets his spear and his adventure, and you get decent company in the north wood. Three people who know what they're doing are better than one person who doesn't, against a sounder.\n\nPell is quiet for long enough that you hear the froe shift in its pile. Then she sets her file down on the anvil ledge — not put away, just paused — and looks at you directly for the first time since you started the drawknife.\n\n\"Corvin doesn't know what he doesn't know about boar,\" she says. The tone is not unkind. It's the same register she'd use to say the bevel is wrong. \"That's the problem. You take him north with a point he just received this morning, he'll be brave about it in the wrong moment.\"\n\nShe picks the file back up. Works two strokes. \"But someone capable is beside him, that changes the math.\" Another stroke. \"You cover the modification, I supply it at cost. No margin — that's what it's worth if you're also keeping the boy from doing something permanent.\" A quarter-turn glance, the same one she gave your file angle. \"I'll walk north with you. He can carry his own spear.\"",
+      "sceneSummary": "Pell agrees to the three-way hunt arrangement — modification at cost, no margin, on the condition Silas keeps Corvin from doing something permanent.",
       "choices": [
         {
-          "label": "Offer to split the modification cost with Pell in exchange for a cut if Corvin buys — a small investment in good will with the east furlong farmer.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "invest",
-            "community"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Keep working the backlog — pick up the first skinning blade and suggest Pell simply name a fair price to Corvin for the modification; let her decide.",
+          "label": "Agree to the terms and finish the backlog — the hunt goes north once the pile is clear.",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "work",
+            "agree",
             "careful",
-            "help"
+            "work"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -255,32 +241,43 @@
           "emergenceId": null
         },
         {
-          "label": "Ask where the sounder's been spotted — a boar run north of the village is exactly the kind of intelligence worth having before you plan a hunting trip with Pell.",
+          "label": "Ask where to find Corvin — float the plan to him now, before the backlog is done, so he's ready.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Press Pell on what she means — what has Corvin done before that makes her worry about brave in the wrong moment?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask what a boar sounder in the north wood actually means — how many animals, how much sign, whether anyone's been up there to look.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "plan",
-            "gather-information"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Suggest Pell let you be there when Corvin next comes in — you can talk him through what a boar take actually requires and let him decide if the heavier point makes sense.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "mediate",
-            "teach"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -298,22 +295,28 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set."
+        }
+      ],
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Billhook face-work nearly done at the sharpening station; Silas shirtless, Pell at her own vise.",
+        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Billhook face-work complete, set in the spare vise; Silas shirtless at the sharpening station.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Back to her vise-work after a quarter-turn assessment — filed the answer about Corvin's coin without elaborating further."
+            "state": "Back to filing at her own vise, having agreed to the hunt arrangement — file moving, posture settled, the matter decided."
           },
           {
             "name": "Huginn",
-            "state": "On the iron hook-row, watching the lane. Made no comment about the shirt."
+            "state": "On the iron hook-row, watching the lane. Unchanged."
           }
         ],
         "objects": [
           "Drawknife — corrected, set aside on the sharpening station",
-          "Billhook — edge-work nearly complete, in the spare vise",
+          "Billhook — face-work complete, in the spare vise",
           "Two skinning blades — sound but dull, waiting their turn",
           "Hand-axe — hairline in the eye, still in the pile",
           "Froe — sprung collar, at the bottom of the pile",
@@ -321,14 +324,13 @@
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
           "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil thinned from handling), light point",
-          "Silas's shirt — draped over the end of the sharpening station"
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil thinned from handling), light point"
         ],
         "threads": [
-          "Backlog labor underway — billhook nearly done, two skinners, hand-axe, froe remain",
-          "Corvin's coin problem: modification + point together may be beyond him",
-          "Boar sounder reportedly working the north wood — relevant to the hunting trip plan",
-          "Hunting trip north still to be scheduled once the backlog is clear"
+          "Backlog labor underway — two skinners, hand-axe, froe remain",
+          "Hunt arrangement agreed: Pell at cost, Corvin to be invited, north wood once backlog is clear",
+          "Corvin's location unknown — east furlong, but not yet contacted",
+          "Pell's concern about Corvin being brave in the wrong moment — not yet elaborated"
         ]
       },
       "npcUpdates": [
@@ -337,27 +339,34 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look — hands, then face — before returning to work.",
+          "note": "Agreed to the three-way hunt arrangement — modification on the light point at cost, no margin, on the condition a capable person is beside Corvin in the north wood. Committed to walking north herself.",
           "learned": [
-            "Corvin claims there's a boar sounder working the north wood — he wants to be the one who handles it",
-            "The modification Silas described (thickened sleeve, reinforced spine) is work Pell can do",
-            "Corvin's coin may not cover both the point and the modification"
+            "Corvin being brave in the wrong moment is a specific concern — she has read him carefully enough to name it as a risk",
+            "She supplies the modification at cost when the safety calculus changes — practical ethics, not charity"
           ],
           "skillsObserved": [
-            "accurate practical assessment",
-            "honest accounting of customer limitations"
+            "risk assessment",
+            "practical negotiation"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At her forge on the south lane — Silas working the backlog beside her, discussing Corvin's situation."
+          "statusNote": "At her forge on the south lane — hunt arrangement agreed, continuing backlog filing."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Pell agreed to join a three-way boar hunt in the north wood — modification on the light spear-tip at cost (covered by Silas), Corvin to be invited. Hunt departs once the forge backlog is clear.",
+          "subjectId": "pell"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
-          "flag": {
-            "boar_sounder_north_wood": true
+          "note": "Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited.",
+          "subPlace": {
+            "name": "Pell's Forge",
+            "note": "Three-way boar hunt arranged here — Pell in, Corvin pending, departs post-backlog.",
+            "visited": true
           }
         }
       ],
@@ -366,47 +375,35 @@
           "topic": "corvin",
           "label": "Corvin",
           "kind": "person",
-          "entityId": "corvin",
-          "fact": "Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulder; a sleeve-and-spine modification could work, but his coin may not cover both the point and the modification.",
+          "fact": "Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlong.",
           "links": [
             "millbrook",
             "pell",
-            "aldric-provisioning-deal"
-          ]
-        },
-        {
-          "topic": "millbrook-north-wood-boar",
-          "label": "Boar Sounder — North Wood",
-          "kind": "event",
-          "fact": "A sounder of boar has been spotted working the north wood above Millbrook. Corvin from the east furlong has heard of it and wants to act on it. Relevant to any hunting trip north of the village.",
-          "links": [
-            "corvin",
-            "pell",
-            "millbrook",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Brief conversation during ongoing forge work — a few minutes of exchange."
-      }
+        "why": "A short exchange at the forge vise — the arrangement settled in a few sentences."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Billhook face-work nearly done at the sharpening station; Silas shirtless, Pell at her own vise.",
+      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Billhook face-work complete, set in the spare vise; Silas shirtless at the sharpening station.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Back to her vise-work after a quarter-turn assessment — filed the answer about Corvin's coin without elaborating further"
+          "state": "Back to filing at her own vise, having agreed to the hunt arrangement — file moving, posture settled, the matter decided"
         },
         {
           "name": "Huginn",
-          "state": "On the iron hook-row, watching the lane. Made no comment about the shirt."
+          "state": "On the iron hook-row, watching the lane. Unchanged."
         }
       ],
       "objects": [
         "Drawknife — corrected, set aside on the sharpening station",
-        "Billhook — edge-work nearly complete, in the spare vise",
+        "Billhook — face-work complete, in the spare vise",
         "Two skinning blades — sound but dull, waiting their turn",
         "Hand-axe — hairline in the eye, still in the pile",
         "Froe — sprung collar, at the bottom of the pile",
@@ -417,10 +414,10 @@
         "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil "
       ],
       "threads": [
-        "Backlog labor underway — billhook nearly done, two skinners, hand-axe, froe remain",
-        "Corvin's coin problem: modification + point together may be beyond him",
-        "Boar sounder reportedly working the north wood — relevant to the hunting trip plan",
-        "Hunting trip north still to be scheduled once the backlog is clear"
+        "Backlog labor underway — two skinners, hand-axe, froe remain",
+        "Hunt arrangement agreed: Pell at cost, Corvin to be invited, north wood once backlog is clear",
+        "Corvin's location unknown — east furlong, but not yet contacted",
+        "Pell's concern about Corvin being brave in the wrong moment — not yet elaborated"
       ]
     }
   },
@@ -452,7 +449,8 @@
         "Silas has arrived at Pell's forge — the next step in equipping for sustained hunting north of the village.",
         "Silas has offered forge-labor to Pell in exchange for hunting company north of the village — negotiation ongoing at the forge.",
         "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now.",
-        "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear."
+        "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear.",
+        "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -558,7 +556,7 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d1] First sighting — she turned when Silas arrived and is reading him before speaking.",
         "[d1] Silas introduced himself with a light, self-aware remark about his order of attention — Pell stopped filing, turned, took in Huginn and then him, and gave her name back without cer",
@@ -568,28 +566,29 @@
         "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe",
         "[d1] Returned to her own vise-work without ceremony after Silas began the backlog — one glance at his angle, no comment. Baseline trust registered through silence.",
         "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th",
-        "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look"
+        "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look",
+        "[d1] Agreed to the three-way hunt arrangement — modification on the light point at cost, no margin, on the condition a capable person is beside Corvin in the north wood. Committed to wa"
       ],
       "knownFacts": [
-        "Is actively considering the offer — not declined",
-        "Silas knows forge work well enough to read a backlog at a glance — identified fault in the eye of the hand-axe and the sprung collar on the froe without touchin",
         "Accepts correct technique wordlessly — that one glance was the whole review",
         "A young man named Corvin from the east furlong visits repeatedly to handle the mid-weight spear-tip but cannot afford it",
         "Pell's read: the light point won't serve boar work, and Corvin probably doesn't know yet what he doesn't know",
         "Corvin claims there's a boar sounder working the north wood — he wants to be the one who handles it",
         "The modification Silas described (thickened sleeve, reinforced spine) is work Pell can do",
-        "Corvin's coin may not cover both the point and the modification"
+        "Corvin's coin may not cover both the point and the modification",
+        "Corvin being brave in the wrong moment is a specific concern — she has read him carefully enough to name it as a risk",
+        "She supplies the modification at cost when the safety calculus changes — practical ethics, not charity"
       ],
       "skillsObserved": [
-        "direct negotiation",
-        "accurate fault-reading",
         "vise work, filing",
         "terse observation",
         "accurate practical assessment",
-        "honest accounting of customer limitations"
+        "honest accounting of customer limitations",
+        "risk assessment",
+        "practical negotiation"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — Silas working the backlog beside her, discussing Corvin's situation.",
+      "statusNote": "At her forge on the south lane — hunt arrangement agreed, continuing backlog filing.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -600,7 +599,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Order-Sense revealed a structural seam in the resurrected rabbit — a second pattern woven through its original architecture, stable and of unknown authorship. The animal remains oriented south toward ",
         "[d1] The resurrected rabbit entered Millbrook's south fence line heading into the village — alive, oriented south, seam intact. World-day 12.",
         "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
         "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
@@ -611,7 +609,8 @@
         "[d1] A brief squall passed through on World-day 12 mid-morning — lane stones briefly wet, air sharp and cold after. Cleared fast.",
         "[d1] Labor deal struck at Pell's forge on World-day 12 — Silas to clear the backlog (drawknife, billhook, two skinners, hand-axe, froe) in exchange for hunting company north of the village.",
         "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use.",
-        "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric."
+        "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
+        "[d1] Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -648,7 +647,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Drawknife corrected and set aside — backlog clearing underway. Four pieces remain."
+          "note": "Three-way boar hunt arranged here — Pell in, Corvin pending, departs post-backlog."
         }
       },
       "vectorsKnown": [
@@ -902,7 +901,8 @@
         "kind": "person",
         "facts": [
           "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe",
-          "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde"
+          "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde",
+          "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon"
         ],
         "links": [
           "millbrook",
@@ -934,18 +934,18 @@
     }
   },
   "tendencies": {
-    "strategic": 12.126855793152695,
-    "cerebral": 6.579565375927843,
-    "social": 14.544646889583293,
-    "generous": 6.550021851797553,
-    "cautious": 4.810026315244878
+    "strategic": 13.066221514186932,
+    "cerebral": 6.546667549048204,
+    "social": 16.471923655135377,
+    "generous": 6.517271742538565,
+    "cautious": 4.785976183668653
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "good_samaritan"
   ],
-  "actionCount": 19,
+  "actionCount": 20,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -967,8 +967,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783897325377,
-  "rev": 37,
+  "updatedAt": 1783897570076,
+  "rev": 38,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1004,6 +1004,12 @@
     {
       "id": "pell",
       "text": "Silas struck a labor deal with Pell the blacksmith — clearing her edge-work backlog in exchange for hunting company north of the village. Work begins now.",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell agreed to join a three-way boar hunt in the north wood — modification on the light spear-tip at cost (covered by Silas), Corvin to be invited. Hunt departs once the forge backlog is clear.",
       "day": 1,
       "subjectId": "pell"
     }

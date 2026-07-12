@@ -769,7 +769,15 @@ Only once the corpus is final: redesign the tree/graph around the civilization s
 
 **Guardrails.** The prologue must be replayable/varied (several openings — Aevi authors 2–3, and BATCH-9 `generate()` can vary the texture). Never punish a "wrong" choice — every path leads to a valid character. Confirm-before-commit is mandatory (no locked-in domain the player didn't intend). Keep it SHORT — a prologue, not a first act. Migration: existing characters keep everything; they're offered a one-time domain-confirm.
 
-**✍️ AEVI OWES:** the prologue scenario content — 2–3 openings, each with problems that fan across the circle (a fight, a locked way, a frightened person, a broken thing, a lie), plus the companion-arrival beats.
+**✅ PROLOGUE CONTENT AUTHORED (Aevi 2026-07-11) — `content/packs/valley/prologue.json`.** 3 openings · 12 problems · **48 solution paths reaching 24 traditions** (every corner of the great circle is reachable, so any way a player leans, the ring can name them):
+- **The Waystation** (crisis, physical, immediate) — a burning store-room, a family in the yard, a boy lying about a lamp, a beam about to fall.
+- **The Thin Place** (strange, precursor, uncanny) — a door with no seam, a man half-become-something-else, a light that costs you to look at, an hour that will not agree with itself.
+- **The Debt** (social, moral, no violence required) — a collector who is tired and correct, a wife lying about the wrong thing, a ledger that has been added to, and a close where SOMEBODY is ruined whatever you do.
+Each path carries `tradition` + `grantsAbility` + an authored `outcome` (so the engine tags disposition and grants the skill you actually USED). Each opening has a **companionBeat** with per-companion arrival prose — the companion is met, never issued.
+
+**🚪 QUICK-START (Erik 2026-07-11) — the form stays, as the EXPRESS LANE.** Present both at creation: *'Play the opening (recommended — you'll learn the game)'* / *'Quick start (build it yourself)'*. Quick-start = name → form → primary/secondary/tertiary picked from the circle (ring shown, neighbours + closed antipode visible) → starting abilities from the allowed set → companion picked + named. **PARITY IS MANDATORY:** identical character shape, same domain count, same starting-ability count, same companion — no mechanical advantage or penalty either way. The only difference is that the Prologue TELLS you who you are and the form ASKS you. (Spec in `prologue.json → quickStart`.)
+
+**AEVI OWED (was):** the prologue scenario content — 2–3 openings, each with problems that fan across the circle (a fight, a locked way, a frightened person, a broken thing, a lie), plus the companion-arrival beats.
 
 **Erik test:** "Have Brooklyn play the prologue — verify she never picks a domain from a list, that the scene tells her who she turned out to be and why, that she chose and named the companion who showed up, and that she can adjust before committing."
 

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "craftsman",
   "level": 1,
-  "xp": 75,
+  "xp": 80,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -31,13 +31,13 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.14126514021650388
+    "spectrumId": -0.1842018832056787
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 52,
+  "energy": 47,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -190,23 +190,27 @@
       {
         "summary": "Order-Sense reads the forge — snare stock is depleting, mid-weight spear-tip has had hands on it repeatedly, edge work is the shop's real load.",
         "narration": "You don't answer right away. Instead you let your attention settle — not on Pell but through her, past the turned face and into the shop's structure beneath. Order-Sense comes up quiet and clear, the way it does when a system is well-maintained: you feel the forge's logic in a breath.\n\nThe spear-tips are the leading edge. Three grades, all accounted for, none of them moving fast — the heavy boar-point has a thin coat of oil that says it's been sitting, but the mid-weight shows recent handling on the tang, a worn patch where someone kept picking it up and setting it back down. Somebody is thinking about buying it and hasn't. The snare hardware is different: the toggle-springs on the board are down to four pairs, and the anchor stakes have gaps in the row where a full set used to hang. That stock is depleting and not being replaced at pace — either the supplier is slow or Pell hasn't ordered, which means either coin or materials, not demand. The chain coils are full. The file on the vise jaw is a third through its working life. The forge itself is burning efficiently, nothing wasted.\n\nWhat she's prioritizing: edge work and repairs. What's scarce: snare hardware. Where the pressure is: the mid-weight spear-tip, the one someone keeps reconsidering.\n\nYou look back at her. \"Aldric sent me,\" you say. \"Though I'd have found the smoke on my own eventually.\""
+      },
+      {
+        "summary": "Silas charms Pell by admiring her craft and asking if she hunts — the door opens.",
+        "narration": "You let the Order-Sense reading settle and meet her eyes directly. \"But Aldric sent me for the hardware,\" you say, \"and I came for the woman who makes it.\" You gesture at the board — the snare plates, the toggle-springs, the anchor stakes with their visible gaps — and then back to the vise, the file, the workpiece still clamped mid-job. \"You run a tidy shop. Everything in its place, stock you can account for at a glance. I find that genuinely impressive.\"\n\nPell's expression doesn't shift much, but something in her posture does — a slight unfolding, the way a person eases when they've been read accurately rather than flattered. She picks the file back up and turns it once in her hand, not resuming work, just holding it.\n\n\"Aldric,\" she says, flat, confirming rather than asking. Then: \"Do you hunt?\"\n\n\"Looking to,\" you say. \"North meadows, mostly. Maybe further upstream if the trails hold.\" A pause. \"Do you?\"\n\nShe glances at Huginn, who has been watching her with the particular patience of something that has seen a great deal more than it mentions. \"Used to,\" Pell says. \"Before the forge had enough work to make it a second job.\" Her eyes come back to you. \"Snare hardware. Chain. What weight of tip are you after?\" She's not warm, exactly — but the door is open now, and she walked to it herself."
       }
     ],
     "lastTurn": {
-      "narration": "You don't answer right away. Instead you let your attention settle — not on Pell but through her, past the turned face and into the shop's structure beneath. Order-Sense comes up quiet and clear, the way it does when a system is well-maintained: you feel the forge's logic in a breath.\n\nThe spear-tips are the leading edge. Three grades, all accounted for, none of them moving fast — the heavy boar-point has a thin coat of oil that says it's been sitting, but the mid-weight shows recent handling on the tang, a worn patch where someone kept picking it up and setting it back down. Somebody is thinking about buying it and hasn't. The snare hardware is different: the toggle-springs on the board are down to four pairs, and the anchor stakes have gaps in the row where a full set used to hang. That stock is depleting and not being replaced at pace — either the supplier is slow or Pell hasn't ordered, which means either coin or materials, not demand. The chain coils are full. The file on the vise jaw is a third through its working life. The forge itself is burning efficiently, nothing wasted.\n\nWhat she's prioritizing: edge work and repairs. What's scarce: snare hardware. Where the pressure is: the mid-weight spear-tip, the one someone keeps reconsidering.\n\nYou look back at her. \"Aldric sent me,\" you say. \"Though I'd have found the smoke on my own eventually.\"",
-      "sceneSummary": "Order-Sense reads the forge — snare stock is depleting, mid-weight spear-tip has had hands on it repeatedly, edge work is the shop's real load.",
+      "narration": "You let the Order-Sense reading settle and meet her eyes directly. \"But Aldric sent me for the hardware,\" you say, \"and I came for the woman who makes it.\" You gesture at the board — the snare plates, the toggle-springs, the anchor stakes with their visible gaps — and then back to the vise, the file, the workpiece still clamped mid-job. \"You run a tidy shop. Everything in its place, stock you can account for at a glance. I find that genuinely impressive.\"\n\nPell's expression doesn't shift much, but something in her posture does — a slight unfolding, the way a person eases when they've been read accurately rather than flattered. She picks the file back up and turns it once in her hand, not resuming work, just holding it.\n\n\"Aldric,\" she says, flat, confirming rather than asking. Then: \"Do you hunt?\"\n\n\"Looking to,\" you say. \"North meadows, mostly. Maybe further upstream if the trails hold.\" A pause. \"Do you?\"\n\nShe glances at Huginn, who has been watching her with the particular patience of something that has seen a great deal more than it mentions. \"Used to,\" Pell says. \"Before the forge had enough work to make it a second job.\" Her eyes come back to you. \"Snare hardware. Chain. What weight of tip are you after?\" She's not warm, exactly — but the door is open now, and she walked to it herself.",
+      "sceneSummary": "Silas charms Pell by admiring her craft and asking if she hunts — the door opens.",
       "choices": [
         {
-          "label": "Ask about the mid-weight spear-tip — someone's been picking it up. Find out who, and why they keep putting it back.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Tell her what game you're after and buy the mid-weight spear-tip and two pairs of toggle-spring snares — the basics for north-meadow work.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
             "spectrumId": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "connect"
+            "trade",
+            "practical"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -215,34 +219,35 @@
           "emergenceId": null
         },
         {
-          "label": "Go straight to business — you need snare hardware: plates, toggles, stakes. Ask what she has and what it'll cost you.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask about the mid-weight tip — who's been handling it and walking away? That's a buyer who keeps hesitating, and you're curious why.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "spectrumId": -0.3
+            "spectrumId": 0.1
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "plan",
-            "careful"
+            "probe",
+            "social",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell her you're hunting north of the village and ask what she'd recommend for the terrain — let her read the job.",
+          "label": "Mention the upstream meadows — ask if she's heard anything from hunters who've been further north, closer to where the river turns gray.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
             "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "scout"
+            "gather-info",
+            "social"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -251,110 +256,112 @@
           "emergenceId": null
         },
         {
-          "label": "Buy the mid-weight spear-tip outright — it's the right weight for the north meadow, and you don't need to explain the read.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Offer a trade — hardware now against a share of whatever you bring back from the north meadows, the same arrangement you have with Aldric.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "spectrumId": -0.2
+            "spectrumId": -0.3
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "careful",
-            "plan"
+            "negotiate",
+            "gamble",
+            "social"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang, mid-morning light and forge heat, coal smoke and hot iron. Pell has turned to face Silas; he has just answered her question.",
+        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang, mid-morning light and forge heat. Pell is standing at the vise, file in hand, door now open after Silas's approach.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the vise, file set aside — received Aldric's name, now reading Silas with level attention, waiting to hear what he needs."
+            "state": "Standing at the vise, file held loose in her hand — posture slightly eased, door open, waiting to hear what hardware he needs."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the iron hook-row, settled, occasionally turning one eye toward the forge fire."
+            "state": "On the iron hook-row, watching Pell with unhurried patience."
           }
         ],
         "objects": [
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
-          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stakes (gaps in the row)",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-weight (worn on the tang from repeated handling), light hunting tip",
-          "File set across vise jaw, workpiece still clamped mid-job",
+          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stakes",
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-weight (tang worn from repeated handling), light tip",
+          "File held in Pell's hand, workpiece still clamped in vise",
           "Forge fire (working heat, coals banked but live)",
           "Silas's pack set down inside the overhang shade"
         ],
         "threads": [
-          "Pell has received Aldric's name — her posture has not changed but the confirmation landed; she's deciding what to do with it",
-          "Snare hardware stock is depleted and not replenishing at pace — source of pressure in the shop",
-          "Mid-weight spear-tip has been handled repeatedly by an undisclosed buyer who keeps declining"
+          "Pell has opened the conversation — she's waiting to hear what weight of tip and what hardware Silas needs",
+          "She hunted until the forge got busy enough — there's a former hunter in her, not fully buried",
+          "The mid-weight spear-tip has been handled repeatedly by an undisclosed buyer who keeps declining"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "aldric",
+          "name": "Aldric",
+          "role": "Smokehouse operator, Millbrook",
+          "note": "Silas invoked his name to confirm the referral to Pell — name landed clean.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the smokehouse, back to filleting after the delivery."
+        },
+        {
+          "op": "update",
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Received Aldric's name from Silas without visible change of expression — confirmation accepted. Now waiting for the ask.",
+          "note": "Silas admired her craft and asked if she hunts — she confirmed a past hunting life, eased her posture, and opened the transaction. Now waiting to hear what he needs.",
           "learned": [
-            "Aldric directed Silas to her forge",
-            "Silas came for hunting hardware, not repair work"
+            "Used to hunt before the forge had enough work to make it a second job",
+            "Responds to accurate reading of her work over flattery",
+            "Confirmed Aldric's referral without ceremony"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "practical assessment",
+            "clean negotiation posture"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the forge, mid-morning — file set aside, facing Silas, waiting to hear what he needs."
+          "statusNote": "At her forge on the south lane, door open — engaged with Silas and waiting to hear his hardware needs."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "pell",
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "Order-Sense reads her shop: snare hardware is the scarce stock — toggle-springs down to four pairs, anchor stakes with visible gaps. Edge work and repairs are her real load. The mid-weight spear-tip has been handled repeatedly by someone who keeps not buying it.",
+          "fact": "Used to hunt the north meadows until the forge had enough work to make it a second job — there's a former hunter's knowledge still in her.",
           "links": [
             "millbrook",
-            "aldric",
-            "aldric-provisioning-deal"
+            "aldric-provisioning-deal",
+            "water-crisis-discoloration"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the forge — a sense-read and a single answer."
-      },
-      "sceneEnded": false
+        "why": "A brief exchange at the forge — the conversation finding its footing."
+      }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang, mid-morning light and forge heat, coal smoke and hot iron. Pell has turned to face Silas; he has just answered her question.",
+      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang, mid-morning light and forge heat. Pell is standing at the vise, file in hand, door now open after Silas's approach.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the vise, file set aside — received Aldric's name, now reading Silas with level attention, waiting to hear w"
+          "state": "Standing at the vise, file held loose in her hand — posture slightly eased, door open, waiting to hear what hardware he "
         },
         {
           "name": "Huginn",
-          "state": "Perched on the iron hook-row, settled, occasionally turning one eye toward the forge fire."
+          "state": "On the iron hook-row, watching Pell with unhurried patience."
         }
       ],
       "objects": [
@@ -362,14 +369,14 @@
         "Coils of heavier chain (full)",
         "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
         "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-wei",
-        "File set across vise jaw, workpiece still clamped mid-job",
+        "File held in Pell's hand, workpiece still clamped in vise",
         "Forge fire (working heat, coals banked but live)",
         "Silas's pack set down inside the overhang shade"
       ],
       "threads": [
-        "Pell has received Aldric's name — her posture has not changed but the confirmation landed; she's deciding what to do with it",
-        "Snare hardware stock is depleted and not replenishing at pace — source of pressure in the shop",
-        "Mid-weight spear-tip has been handled repeatedly by an undisclosed buyer who keeps declining"
+        "Pell has opened the conversation — she's waiting to hear what weight of tip and what hardware Silas needs",
+        "She hunted until the forge got busy enough — there's a former hunter in her, not fully buried",
+        "The mid-weight spear-tip has been handled repeatedly by an undisclosed buyer who keeps declining"
       ]
     }
   },
@@ -502,7 +509,8 @@
       "history": [
         "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
         "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t",
-        "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s"
+        "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s",
+        "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean."
       ],
       "knownFacts": [
         "His name is Aldric",
@@ -519,7 +527,7 @@
         "practical negotiation"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse, back to filleting — satisfied with the exchange, conversation naturally closed.",
+      "statusNote": "At the smokehouse, back to filleting after the delivery.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -534,29 +542,32 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] First sighting — she turned when Silas arrived and is reading him before speaking.",
         "[d1] Silas introduced himself with a light, self-aware remark about his order of attention — Pell stopped filing, turned, took in Huginn and then him, and gave her name back without cer",
-        "[d1] Received Aldric's name from Silas without visible change of expression — confirmation accepted. Now waiting for the ask."
+        "[d1] Received Aldric's name from Silas without visible change of expression — confirmation accepted. Now waiting for the ask.",
+        "[d1] Silas admired her craft and asked if she hunts — she confirmed a past hunting life, eased her posture, and opened the transaction. Now waiting to hear what he needs."
       ],
       "knownFacts": [
-        "Operates the only forge in Millbrook",
-        "Stocks snare hardware, chain, spear-tips, and edge work supplies",
-        "Named by Aldric as the village source for heavier hunting iron",
         "Responds to a direct, un-flattering opener with dry patience",
         "Names herself without prompting once she decides to engage",
         "Clocked Huginn first — notes the uncanny without making a scene of it",
         "Aldric directed Silas to her forge",
-        "Silas came for hunting hardware, not repair work"
+        "Silas came for hunting hardware, not repair work",
+        "Used to hunt before the forge had enough work to make it a second job",
+        "Responds to accurate reading of her work over flattery",
+        "Confirmed Aldric's referral without ceremony"
       ],
       "skillsObserved": [
         "file work",
         "shop organization",
-        "quick practical assessment"
+        "quick practical assessment",
+        "practical assessment",
+        "clean negotiation posture"
       ],
       "status": "active",
-      "statusNote": "At the forge, mid-morning — file set aside, facing Silas, waiting to hear what he needs.",
+      "statusNote": "At her forge on the south lane, door open — engaged with Silas and waiting to hear his hardware needs.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -844,12 +855,14 @@
         "facts": [
           "[d1] Village blacksmith at the south-lane forge — stocks snare hardware, chain, and hunting spear-tips in three weights. Practical and organized; named by Aldric as the source for heavier hunting iron.",
           "[d1] Responds to a self-deprecating opener with dry patience — gave her name without ceremony once she decided to engage. Clocked Huginn without fuss. Asked directly whether Aldric sent Silas.",
-          "[d1] Order-Sense reads her shop: snare hardware is the scarce stock — toggle-springs down to four pairs, anchor stakes with visible gaps. Edge work and repairs are her real load. The mid-weight spear-tip h"
+          "[d1] Order-Sense reads her shop: snare hardware is the scarce stock — toggle-springs down to four pairs, anchor stakes with visible gaps. Edge work and repairs are her real load. The mid-weight spear-tip h",
+          "[d1] Used to hunt the north meadows until the forge had enough work to make it a second job — there's a former hunter's knowledge still in her."
         ],
         "links": [
           "millbrook",
           "aldric",
-          "aldric-provisioning-deal"
+          "aldric-provisioning-deal",
+          "water-crisis-discoloration"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -859,17 +872,18 @@
     }
   },
   "tendencies": {
-    "strategic": 11.471734499710264,
-    "cerebral": 5.765301929914695,
-    "social": 6.861902583560318,
-    "generous": 6.7500076399966895,
-    "cautious": 2.9214826398220373
+    "strategic": 11.414375827211712,
+    "cerebral": 5.736475420265121,
+    "social": 9.827593070642516,
+    "generous": 6.716257601796706,
+    "cautious": 2.906875226622927
   },
   "aptitudes": [
     "strategist",
+    "silver_tongue",
     "good_samaritan"
   ],
-  "actionCount": 13,
+  "actionCount": 14,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -891,8 +905,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783891974805,
-  "rev": 29,
+  "updatedAt": 1783892183802,
+  "rev": 30,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

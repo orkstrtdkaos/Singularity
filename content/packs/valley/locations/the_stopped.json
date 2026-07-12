@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_stopped",
+  "name": "The Stopped",
+  "regionId": "the_kept_reach",
+  "communityId": "hourkeeper.stopped",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.5,
+    0.0,
+    -0.3,
+    1.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "space_time": 1.0,
+    "death_life": -0.3,
+    "chaos_order": 0.5
+  },
+  "tags": [
+    "hourkeeper",
+    "time",
+    "locus",
+    "cult",
+    "dangerous",
+    "sacred"
+  ],
+  "connections": [
+    "the_slow_hour"
+  ],
+  "descriptionSeed": "The pure pole: those who will not let a moment pass. The Stopped have held one hour so hard that they are still inside it, and they will invite you in, and it is the most beautiful hour of their lives, and they have been in it for two hundred years.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "The Stopped, who are radiant and not moving; an hour offered to you, and it is a good hour; time behaving very badly at the edges.",
+  "dangerLevel": 5,
+  "questSeeds": [
+    "Someone has entered a Stopped hour to bring a person out and has not returned",
+    "The Stopped hour is SPREADING, slowly, and the things inside it have stopped too"
+  ],
+  "map": {
+    "x": 430,
+    "y": 80
+  },
+  "poleIntensity": 0.98
+}

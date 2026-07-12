@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_kindly_court",
+  "name": "The Kindly Court",
+  "regionId": "the_veiled_reach",
+  "communityId": "veilwright.court",
+  "axisVector": [
+    -0.3,
+    -0.5,
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "falsehood_truth": -0.5,
+    "emotional_logical": -0.3,
+    "violence_peace": 0.4
+  },
+  "tags": [
+    "veilwright",
+    "falsehood",
+    "sanctuary",
+    "social",
+    "refuge"
+  ],
+  "connections": [
+    "the_hall_of_mirrors"
+  ],
+  "descriptionSeed": "Where the Veilwrights practice their craft as mercy — building people a truth they can survive today, until they can bear the real one. It is the moral heart of the Veilwright argument, and the Verists call it the greatest lie of all, and neither side has ever won this fight because both keep producing people who were saved by the other.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Court-wrights who have kept someone alive with a story; a person living inside a made truth, happily; the day one of those stories comes due.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A kindly lie has been believed so long it has become the person's only self, and the truth would erase them",
+    "A Verist has come to tell someone the truth, out of love, and they are right and it will destroy them"
+  ],
+  "map": {
+    "x": 100,
+    "y": 255
+  },
+  "poleIntensity": 0.6
+}

@@ -101,6 +101,21 @@
       "spread": [],
       "day": 1,
       "worldDay": 12
+    },
+    {
+      "at": "2026-07-12T17:45:53.990Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Struck a fair provisioning arrangement with Aldric the smokehouse man — hunting for the village in exchange for food and supplies, and offered to keep watch on what's damaging the river catch.",
+      "tags": [
+        "helpful",
+        "practical",
+        "community"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 12
     }
   ],
   "relationships": {},
@@ -140,77 +155,81 @@
       {
         "summary": "Order-Sense reads the smokehouse as a fragile fixed-account operation absorbing slow damage from the fish shortage — the pigeon has leverage.",
         "narration": "The smokehouse man is still watching you, fillet knife easy in his hand, waiting for a reason to either talk or get back to his fish.\n\nYou give him a small nod — *a moment* — and let Order-Sense open quietly, the way you'd ease a door rather than push it. No reach, no press. Just attention, going a little deeper than the eyes.\n\nThe structure resolves. The smokehouse is a load-bearing thing in a simple economy: one man, one fire, the village's protein through the shoulder months when the river gives less. The rack capacity says he processes more than he sells fresh — most of it goes preserved, distributed, probably on account. The wear on the cutting block is centered and even, which is the mark of someone who has done the same motion for years without variation. This is not a tradesman who experiments. He serves a list of regular customers, and the list is probably older than his apron.\n\nThe weight, though — the weight falls on the fish. Two racks of perch, gray-gilled, not bad enough to pull but not what a morning's work should look like. The fire is banked lower than the space needs, which means he's stretching the wood. Catches are down, quality is sliding, and a man who runs on accounts and regulars cannot easily absorb that kind of slow erosion.\n\nThe pigeon under your arm is suddenly more interesting than it was a minute ago.\n\n\"Cookhouse didn't send me,\" you say. \"Came on my own. Two rabbits in the pack, this pigeon, all fresh this morning. Thought you might have more use for variety than your rack does right now.\""
+      },
+      {
+        "summary": "Silas and Aldric the smokehouse man strike a provisioning deal — hunting in exchange for food and supplies, with a mutual interest in the river contamination.",
+        "narration": "You set the pigeon on the cutting block — not as a donation, as an opening. \"Fresh bird,\" you say. \"Cleaned this morning. I'm in the area a few days, maybe more. I hunt well, and I'm heading north anyway. If you want, I keep bringing what I take — whatever the meadows give — and in return you help provision me. Meal and supplies where you can spare them.\"\n\nThe man's eyes move from the pigeon to you, doing the arithmetic. He turns the bird over with two fingers, checking the work. The cleaning is clean. He sets it down.\n\n\"North,\" he says. It's not quite a question. \"River's running gray up that way. Wouldn't go far north without a reason.\" A beat. He's still holding the fillet knife, loose. \"You mentioned keeping an eye on the catches.\" His chin tips toward the gray-gilled perch on the rack. \"You see something up there worth seeing, I want to hear it. Same terms — you bring what you take, I keep you fed and supply what I can spare. No guarantees on quantity. The shortage hits my accounts too.\"\n\nHe picks up the pigeon, turns to the second rack, and makes space. \"Name's Aldric,\" he says, without looking back. \"You need a meal now or after?\""
       }
     ],
     "lastTurn": {
-      "narration": "The smokehouse man is still watching you, fillet knife easy in his hand, waiting for a reason to either talk or get back to his fish.\n\nYou give him a small nod — *a moment* — and let Order-Sense open quietly, the way you'd ease a door rather than push it. No reach, no press. Just attention, going a little deeper than the eyes.\n\nThe structure resolves. The smokehouse is a load-bearing thing in a simple economy: one man, one fire, the village's protein through the shoulder months when the river gives less. The rack capacity says he processes more than he sells fresh — most of it goes preserved, distributed, probably on account. The wear on the cutting block is centered and even, which is the mark of someone who has done the same motion for years without variation. This is not a tradesman who experiments. He serves a list of regular customers, and the list is probably older than his apron.\n\nThe weight, though — the weight falls on the fish. Two racks of perch, gray-gilled, not bad enough to pull but not what a morning's work should look like. The fire is banked lower than the space needs, which means he's stretching the wood. Catches are down, quality is sliding, and a man who runs on accounts and regulars cannot easily absorb that kind of slow erosion.\n\nThe pigeon under your arm is suddenly more interesting than it was a minute ago.\n\n\"Cookhouse didn't send me,\" you say. \"Came on my own. Two rabbits in the pack, this pigeon, all fresh this morning. Thought you might have more use for variety than your rack does right now.\"",
-      "sceneSummary": "Order-Sense reads the smokehouse as a fragile fixed-account operation absorbing slow damage from the fish shortage — the pigeon has leverage.",
+      "narration": "You set the pigeon on the cutting block — not as a donation, as an opening. \"Fresh bird,\" you say. \"Cleaned this morning. I'm in the area a few days, maybe more. I hunt well, and I'm heading north anyway. If you want, I keep bringing what I take — whatever the meadows give — and in return you help provision me. Meal and supplies where you can spare them.\"\n\nThe man's eyes move from the pigeon to you, doing the arithmetic. He turns the bird over with two fingers, checking the work. The cleaning is clean. He sets it down.\n\n\"North,\" he says. It's not quite a question. \"River's running gray up that way. Wouldn't go far north without a reason.\" A beat. He's still holding the fillet knife, loose. \"You mentioned keeping an eye on the catches.\" His chin tips toward the gray-gilled perch on the rack. \"You see something up there worth seeing, I want to hear it. Same terms — you bring what you take, I keep you fed and supply what I can spare. No guarantees on quantity. The shortage hits my accounts too.\"\n\nHe picks up the pigeon, turns to the second rack, and makes space. \"Name's Aldric,\" he says, without looking back. \"You need a meal now or after?\"",
+      "sceneSummary": "Silas and Aldric the smokehouse man strike a provisioning deal — hunting in exchange for food and supplies, with a mutual interest in the river contamination.",
       "choices": [
         {
-          "label": "Offer a straight barter — the pigeon and both rabbits for smoked fish, salt, or coin; let him name what's fair.",
+          "label": "Take a meal now — you've been on the road since early morning and the energy would be useful before heading anywhere.",
           "attribute": "practical",
-          "subAttribute": "craft",
+          "subAttribute": "wits",
           "axes": {
             "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "trade",
+            "rest",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Lead with the fish — ask him plainly about the gray gills, the low catches; make the conversation about his problem, not your trade.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "listen",
-            "build-trust"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Offer the pigeon for one favor: an introduction — you want to meet whoever in Millbrook deals with the river, the water, the upstream.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Ask Aldric what he actually thinks is causing the gray-green water — he's been watching this longer than you have.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "spectrumId": 0.2
+            "spectrumId": -0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "persuade",
+            "study",
             "plan"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Numen-Sense here in the smokehouse — the building sits over older ground and you want to know if anything is thinner than it should be.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Say nothing more yet; let him name his terms — you've shown the goods, read the room; wait and see what he reaches for first.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Head out now — the deal is struck and the morning is still young. Go north toward the upstream bend and look at the water up close.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "spectrumId": -0.2
+            "spectrumId": 0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "wait",
-            "scout"
+            "scout",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -219,89 +238,150 @@
           "emergenceId": null
         }
       ],
+      "deeds": [
+        {
+          "description": "Struck a fair provisioning arrangement with Aldric the smokehouse man — hunting for the village in exchange for food and supplies, and offered to keep watch on what's damaging the river catch.",
+          "tags": [
+            "helpful",
+            "practical",
+            "community"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "start",
+          "questId": "aldric-provisioning-deal",
+          "title": "Meat for the Smokehouse",
+          "summary": "Hunt the meadows north of Millbrook and bring Aldric what you take — he feeds you and supplies what he can spare. He wants to know anything you find that explains the declining catches.",
+          "giver": "Aldric (smokehouse man)",
+          "note": "Deal struck on World-day 12, morning. Aldric has his eye on the gray-gilled perch and wants real information about the upstream situation.",
+          "xpReward": 20
+        }
+      ],
       "scene": {
-        "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch on iron hooks.",
+        "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, the pigeon now laid beside the two racks of river perch.",
         "npcsPresent": [
           {
-            "name": "Smokehouse Man",
-            "state": "standing at the cutting block with fillet knife in hand, listening, waiting on Silas's terms"
+            "name": "Aldric (Smokehouse Man)",
+            "state": "setting the pigeon on the second rack, making space, apron dark with the morning's work — waiting on Silas's answer about the meal"
           }
         ],
         "objects": [
-          "Pigeon (fresh, cleaned, under Silas's arm)",
+          "Pigeon (fresh, cleaned — now on Aldric's rack)",
           "Two racks of gray-gilled river perch on iron hooks",
-          "Fillet knife (in the man's hand)",
+          "Fillet knife (lowered, resting on the cutting block)",
           "Cutting block (dark with use, wear centered and even)",
           "Canvas apron (worn)",
-          "Banked fire beneath the racks (lower than the space needs — wood being stretched)"
+          "Banked fire beneath the racks"
         ],
         "threads": [
-          "Smokehouse man is weighing the trade offer — waiting for terms",
-          "Gray-gilled perch on the racks signal the fish shortage is already hurting this operation",
-          "Huginn's presence still noted; the man clocked the bird before the pigeon"
+          "Aldric waiting to know if Silas wants a meal now or later",
+          "The upstream contamination — Aldric has noticed and wants to hear what Silas finds",
+          "The gray-gilled perch on the rack are a visible marker of the crisis, right here in the room"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "smokehouse-man",
-          "name": "Smokehouse Man",
+          "op": "meet",
+          "npcId": "aldric",
+          "name": "Aldric",
           "role": "Smokehouse operator, Millbrook",
-          "note": "Order-Sense read the operation around him — fixed accounts, regular customers, the weight falling on fish quality; he's absorbing slow loss from the catch decline. Silas named himself as independent, showed the morning's take.",
+          "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone who has worked the same fire for twenty years. Runs the village's preserved-fish distribution on fixed accounts; absorbed the catch decline quietly until now.",
+          "note": "Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space for the pigeon on the rack.",
           "learned": [
-            "Runs a fixed-account operation serving regular customers — not a speculative trader",
-            "Banked fire lower than needed — stretching wood supply alongside fish supply",
-            "Gray-gilled perch suggest quality has been sliding for some time, not just today"
+            "His name is Aldric",
+            "He's aware the gray-green water comes from upstream and has been watching it",
+            "He runs fixed accounts — the catch decline is already hitting his regular customers",
+            "He wants real information about what's causing the fish shortage, not just meat"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "fillet work",
+            "supply accounting",
+            "practical negotiation"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the smokehouse cutting block, listening to Silas's opening offer, knife in hand."
+          "statusNote": "At the smokehouse, deal struck with Silas — provisioning arrangement, expects hunting deliveries and upstream information."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Silas struck a provisioning deal with Aldric the smokehouse man on World-day 12 — hunting in exchange for food and supplies, with Aldric asking for any information Silas finds about the upstream contamination affecting the fish catch.",
+          "subjectId": "aldric"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second rack.",
+          "subPlace": {
+            "name": "Smokehouse",
+            "note": "Operated by Aldric — fixed-account preserved fish distribution. Deal struck with Silas on World-day 12: hunting in exchange for provisions and upstream information.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "millbrook-smokehouse-economy",
-          "label": "Millbrook Smokehouse — Structure",
-          "kind": "place",
-          "entityId": "millbrook",
-          "fact": "The smokehouse operates on fixed accounts — preserved fish distributed to regular customers on a list older than the operator's apron. One man, one fire, no experimentation. The fish shortage is already visible in gray-gilled perch and a banked fire stretching limited wood. The operation is load-bearing for village protein and is quietly under strain.",
+          "topic": "aldric",
+          "label": "Aldric",
+          "kind": "person",
+          "entityId": "aldric",
+          "fact": "Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas on World-day 12.",
           "links": [
             "millbrook",
-            "water-crisis-discoloration"
+            "water-crisis-discoloration",
+            "aldric-provisioning-deal"
+          ]
+        },
+        {
+          "topic": "water-crisis-discoloration",
+          "label": "The River's Discoloration",
+          "kind": "event",
+          "fact": "Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real information.",
+          "links": [
+            "millbrook",
+            "aldric",
+            "disputed-zone"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange in the smokehouse doorway"
-      },
-      "sceneEnded": false
+        "why": "A brief negotiation — the deal was struck in a few exchanges"
+      }
     },
     "sceneState": {
-      "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch on iron hooks.",
+      "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, the pigeon now laid beside the two racks of river perch.",
       "npcsPresent": [
         {
-          "name": "Smokehouse Man",
-          "state": "standing at the cutting block with fillet knife in hand, listening, waiting on Silas's terms"
+          "name": "Aldric (Smokehouse Man)",
+          "state": "setting the pigeon on the second rack, making space, apron dark with the morning's work — waiting on Silas's answer abou"
         }
       ],
       "objects": [
-        "Pigeon (fresh, cleaned, under Silas's arm)",
+        "Pigeon (fresh, cleaned — now on Aldric's rack)",
         "Two racks of gray-gilled river perch on iron hooks",
-        "Fillet knife (in the man's hand)",
+        "Fillet knife (lowered, resting on the cutting block)",
         "Cutting block (dark with use, wear centered and even)",
         "Canvas apron (worn)",
-        "Banked fire beneath the racks (lower than the space needs — wood being stretched"
+        "Banked fire beneath the racks"
       ],
       "threads": [
-        "Smokehouse man is weighing the trade offer — waiting for terms",
-        "Gray-gilled perch on the racks signal the fish shortage is already hurting this operation",
-        "Huginn's presence still noted; the man clocked the bird before the pigeon"
+        "Aldric waiting to know if Silas wants a meal now or later",
+        "The upstream contamination — Aldric has noticed and wants to hear what Silas finds",
+        "The gray-gilled perch on the rack are a visible marker of the crisis, right here in the room"
       ]
     }
   },
@@ -317,7 +397,23 @@
   "companionNames": {
     "marrow": "Huginn"
   },
-  "quests": [],
+  "quests": [
+    {
+      "id": "aldric-provisioning-deal",
+      "title": "Meat for the Smokehouse",
+      "summary": "Hunt the meadows north of Millbrook and bring Aldric what you take — he feeds you and supplies what he can spare. He wants to know anything you find that explains the declining catches.",
+      "giver": "Aldric (smokehouse man)",
+      "giverEntityId": "smokehouse-man",
+      "locationId": null,
+      "locationEntityId": null,
+      "status": "active",
+      "progress": [
+        "Deal struck on World-day 12, morning. Aldric has his eye on the gray-gilled perch and wants real information about the upstream situation."
+      ],
+      "aliases": [],
+      "startedAt": "2026-07-12T17:45:53.994Z"
+    }
+  ],
   "npcRegistry": {
     "cookhouse-woman": {
       "id": "cookhouse-woman",
@@ -397,6 +493,36 @@
         "locationId": "millbrook",
         "day": 1
       }
+    },
+    "aldric": {
+      "id": "aldric",
+      "name": "Aldric",
+      "role": "Smokehouse operator, Millbrook",
+      "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone who has worked the same fire for twenty years. Runs the village's preserved-fish distribution on fixed accounts; absorbed the catch decline ",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f"
+      ],
+      "knownFacts": [
+        "His name is Aldric",
+        "He's aware the gray-green water comes from upstream and has been watching it",
+        "He runs fixed accounts — the catch decline is already hitting his regular customers"
+      ],
+      "skillsObserved": [
+        "fillet work",
+        "supply accounting",
+        "practical negotiation"
+      ],
+      "status": "active",
+      "statusNote": "At the smokehouse, deal struck with Silas — provisioning arrangement, expects hunting deliveries and upstream information.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -408,7 +534,8 @@
         "[d1] Order-Sense revealed a structural seam in the resurrected rabbit — a second pattern woven through its original architecture, stable and of unknown authorship. The animal remains oriented south toward ",
         "[d1] The resurrected rabbit entered Millbrook's south fence line heading into the village — alive, oriented south, seam intact. World-day 12.",
         "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
-        "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive"
+        "[d1] The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled rive",
+        "[d1] Aldric (smokehouse operator) has a provisioning arrangement with Silas Weir — hunting deliveries expected, information about the upstream contamination requested. The pigeon now hangs on the second ra"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -438,7 +565,7 @@
           "name": "Smokehouse",
           "day": 1,
           "visited": true,
-          "note": "Stone building off the main lane — hickory smoke, iron racks, fillet work every morning. Operator noted Huginn before th"
+          "note": "Operated by Aldric — fixed-account preserved fish distribution. Deal struck with Silas on World-day 12: hunting in excha"
         }
       },
       "vectorsKnown": [
@@ -491,7 +618,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-12T17:14:55.378Z",
+    "lastSharedReadAt": "2026-07-12T17:43:25.805Z",
     "lastTickWorldDay": 12,
     "lastCanonWorldDay": 12
   },
@@ -527,11 +654,13 @@
         "kind": "event",
         "facts": [
           "[d1] The Echo River runs gray-green on bad mornings in Millbrook — observed firsthand at the dock. A fisherman pulled his nets in early. The discoloration appears to drift in slow wreaths from upstream. Fi",
-          "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be "
+          "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be ",
+          "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor"
         ],
         "links": [
           "millbrook",
-          "disputed-zone"
+          "disputed-zone",
+          "aldric"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -623,20 +752,37 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "aldric": {
+        "id": "aldric",
+        "label": "Aldric",
+        "kind": "person",
+        "facts": [
+          "[d1] Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas o"
+        ],
+        "links": [
+          "millbrook",
+          "water-crisis-discoloration",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "aldric",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 9.806889781200029,
-    "cerebral": 4.91079650749375,
-    "social": 0.9752487531218751,
-    "generous": 3.9207462593656253,
-    "cautious": 1.980149500625
+    "strategic": 10.757855332294028,
+    "cerebral": 4.88624252495628,
+    "social": 1.9703725093562658,
+    "generous": 4.901142528068798,
+    "cautious": 1.970248753121875
   },
   "aptitudes": [
     "strategist"
   ],
-  "actionCount": 7,
+  "actionCount": 8,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -658,8 +804,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783878093551,
-  "rev": 18,
+  "updatedAt": 1783878353994,
+  "rev": 21,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -679,6 +825,12 @@
       "text": "Silas Weir raised a cleaned, dead rabbit back to life in Millbrook's upper meadow on World-day 12 — no ritual, no understood mechanism; the valley's old grain answered something in him. The animal is ",
       "day": 1,
       "subjectId": null
+    },
+    {
+      "id": "aldric",
+      "text": "Silas struck a provisioning deal with Aldric the smokehouse man on World-day 12 — hunting in exchange for food and supplies, with Aldric asking for any information Silas finds about the upstream conta",
+      "day": 1,
+      "subjectId": "aldric"
     }
   ],
   "practice": {
@@ -702,7 +854,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 1.25
+    "marrow": 1.75
   },
   "customAbilities": {},
   "precursorAccess": [],

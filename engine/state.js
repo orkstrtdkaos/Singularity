@@ -60,6 +60,13 @@ export async function loadContent() {
     const pack = await fetchJSON(`content/packs/core/${path}`);
     for (const it of pack.items) items[it.id] = it;
   }
+  // SNG-BATCH-10 Phase 4: valley.provides.items was declared but the loader never read it — the
+  // Waystaff, riven-gear and valley-kit item defs (19 items) silently did not load, the same class
+  // of bug as quests. Now they do. Optional; a miss leaves the core items intact.
+  for (const path of valley.provides.items || []) {
+    try { const pack = await fetchJSON(`content/packs/valley/${path}`); for (const it of pack.items || []) items[it.id] = it; }
+    catch { /* valley items optional */ }
+  }
 
   const locations = {};
   for (const path of valley.provides.locations) {

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_forward_archive",
+  "name": "The Forward Archive",
+  "regionId": "the_kept_reach",
+  "communityId": "hourkeeper.archive",
+  "axisVector": [
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.6,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "space_time": 0.6,
+    "falsehood_truth": 0.3,
+    "concrete_abstract": 0.2
+  },
+  "tags": [
+    "hourkeeper",
+    "time",
+    "archive",
+    "study",
+    "sacred",
+    "strange"
+  ],
+  "connections": [
+    "the_slow_hour"
+  ],
+  "descriptionSeed": "Records of things that have not happened yet, filed with the same rigor as things that have, and annotated with how confident the archivist was. Most of it is right. The wrong entries are kept too, and they are the most-read shelves in the building.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Archivists who will show you the entry about your own death and ask if you would like tea; a shelf of futures that did not happen; an entry with your name on it, dated soon.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "An entry has appeared in the Archive that no archivist wrote",
+    "Someone has read their own entry and is now trying to make it false, which the Archive anticipated"
+  ],
+  "map": {
+    "x": 475,
+    "y": 135
+  },
+  "poleIntensity": 0.6
+}

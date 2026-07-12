@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_mercy_house",
+  "name": "The Mercy-House",
+  "regionId": "the_ascent",
+  "communityId": "seraphic.mercyhouse",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.6,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "demonic_angelic": 0.6,
+    "violence_peace": 0.5,
+    "death_life": 0.3
+  },
+  "tags": [
+    "seraphic",
+    "angelic",
+    "sanctuary",
+    "heal",
+    "refuge",
+    "sacred"
+  ],
+  "connections": [
+    "choirheight"
+  ],
+  "descriptionSeed": "Where the Orders take weight off people — genuinely, permanently, at real cost to the one who lifts it. A Seraph who grants mercy CARRIES what they lifted. The Mercy-House is full of people who have taken on other people's worst things and are still standing, and it is the strongest argument this civilization has, and it is a very good one.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Mercy-bearers who are carrying more than you can imagine; someone set down after twenty years; **Sister Alder**, if she is anywhere, is sometimes here.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A mercy-bearer is carrying something that is killing them and will not set it down",
+    "Someone is here to ask mercy for a thing that should not be forgiven, and their case is good"
+  ],
+  "map": {
+    "x": 340,
+    "y": 85
+  },
+  "poleIntensity": 0.6
+}

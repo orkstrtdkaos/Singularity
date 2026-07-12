@@ -1094,3 +1094,39 @@ Erik saw 1–2 choices per group because the flat list showed only what his prov
 **Interaction:** hover/tap an ability → name, tier, energy, functions, and its gate status ("free — kin of your primary" / "+2 pts — three steps out" / "closed — your antipode"). Zoom + pan (SNG-054 Phase 0 already shipped). Center-out is also the natural read order for a new player.
 
 **Erik test:** "Open the skill wheel — verify your primary's spoke runs out to its capstone, your kin are beside you, the folk crafts sit at the center, precursor rings the outside, your antipode is dark across the wheel, and any braid you know draws a line through the middle."
+---
+
+## SNG-074 — ⛔ Dev mode is STICKY WITH NO OFF SWITCH (dev tooling on the live URL)
+
+**Erik-found in live play 2026-07-12:** *"The dev content has leached into the non-dev page... in the normal url I get the leg button and the encounters button."* 🔧 CCode. Aevi PO. **Blocks handing the game to Brooklyn.**
+
+### Root cause (measured at HEAD v1.8.25)
+```js
+// app.js:72  — a single ?dev=1 visit writes a PERMANENT flag
+if (/[?&]dev=1\b/.test(location.search)) localStorage.setItem("singularity.dev", "1");
+
+// app.js:226 — devEnabled() reads ONLY that flag
+function devEnabled() {
+  if (localStorage.getItem("singularity.dev") === "1") return true;
+  if (/^(localhost|127\.0\.0\.1|\[::1\])/.test(location.hostname)) return true;
+  return false;
+}
+```
+**It is not a leak — it is stickiness.** One `?dev=1` visit opts the *browser* in **permanently, on every URL, forever, with no way out.** The code comment (*"Never shown to a normal player… unless they explicitly enabled it"*) is technically true and practically useless: **there is no un-enable.**
+
+### Why this is more than an annoyance
+1. **Erik has no clean player view** — he literally cannot see what Brooklyn will see, and he is about to hand her the game.
+2. **A family member who ever opens a `?dev=1` link** (bookmarked, pasted, shared) **is permanently dev-enabled** — with the dev-only clock-jump, forced encounters, and state grants (SNG-051's runner) live in their save.
+3. Dev affordances **mutate state**. That is fine for a dev; it is not fine for a twelve-year-old who clicked a link.
+
+### Fix — dev must be OPT-IN, VISIBLE, and REVERSIBLE
+1. **On the production host, `?dev=1` is SESSION-SCOPED, not persisted.** Present in the current URL → dev on. Reload without it → **clean player view.** *This alone guarantees the family can never be stuck in dev mode.*
+2. **`?dev=0` immediately clears the flag** (and any legacy persisted flag), belt-and-braces.
+3. **A visible Settings toggle** — "Developer mode" — off by default, with an explicit off. If a persistent opt-in is wanted, it lives HERE, chosen deliberately, not caught from a URL.
+4. **A visible `DEV` badge in the header whenever dev is active.** Ambiguity about whether you are in dev mode is itself the bug. Erik must be able to tell at a glance which view he is looking at.
+5. **localhost/preview auto-on stays** — that is a dev environment and is correct.
+6. **Audit every dev surface** and confirm each is behind `devEnabled()`/`isDev()`: the 🧪 Legs panel · Test-encounters buttons · the SNG-051 "Run this scenario" runner (clock-jump, grants, setRating) · anything else. `[CCODE: enumerate — there are ~54 dev-surface refs at HEAD; confirm all are gated]`
+
+**Erik test:** "Open the live URL in a normal window — verify NO Legs button and NO test-encounters panel. Then open it with `?dev=1` — verify they appear and a DEV badge shows. Reload without the param — verify they're gone again. Then check Settings has a Developer-mode toggle that's off by default."
+
+*Priority: HIGH. This is the last thing between Erik and being able to verify the real player experience before his daughter plays.*

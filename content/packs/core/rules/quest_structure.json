@@ -12,7 +12,7 @@
     "stages": "2-5. Each: objective (one sentence, player-statable) + condition (ENGINE-TESTABLE: place reached / person spoken to / thing obtained / truth learned / roll passed) + change (what shifts in the world when this stage lands). NO vague 'investigate further'.",
     "routes": "Force, guile, care, reason, craft, concealment, truth, endurance. A quest with ONE solution is a lock, not a story. Routes fan across the great circle so a player's domains change how they approach it.",
     "outcomes": "2-4 BRANCHED endings. NOT success/fail — WHICH success. Each names its own consequences.",
-    "consequences": "MANDATORY, per outcome. At least one DURABLE change: a codex fact, an NPC's life/standing/death, a people's disposition toward you, a location's state, or a world-event that PROPAGATES (dated on the shared clock, surfacing later via the away-digest). A quest that changes nothing durable is not allowed to be a quest."
+    "consequences": "MANDATORY, per outcome. TWO PARTS, BOTH REQUIRED: (1) `narration` — the authored prose (the chronicle voice). (2) `effects[]` — MACHINE-READABLE deltas the engine APPLIES. Prose alone is NOT a consequence: the engine cannot parse 'Veilwright: lowered' into a delta, so a prose-only outcome changes nothing durable and therefore is not a quest (see theRule). Effect types: `npc_state{npc,state,note}` · `disposition{people,delta}` · `codex_fact{text,secret?}` · `world_event{text,propagates,delayDays}` · `location_state{location,change}` · `quest_seed{text}` · `ally{npc}` · `xp{amount}`. At least one effect must be DURABLE and FINDABLE later."
   },
   "optional": {
     "legend": "The SNG-042 figure this touches, if any.",
@@ -25,5 +25,15 @@
     "Never punish the route. Force, guile, and care are all legitimate; they lead to DIFFERENT outcomes, not better and worse ones.",
     "The consequence must be findable later. If the player cannot go back and SEE what they did, it did not happen.",
     "A quest should make at least one person permanently different — including, sometimes, the player."
-  ]
+  ],
+  "effectVocabulary": {
+    "npc_state": "an NPC's life/standing/death changes",
+    "disposition": "a PEOPLE's stance toward you (+/- integer)",
+    "codex_fact": "a permanent, findable record; `secret:true` = yours alone",
+    "world_event": "propagates on the shared clock; `delayDays` = when it reaches you",
+    "location_state": "a place changes",
+    "quest_seed": "this outcome opens the next thing",
+    "ally": "an NPC becomes bound to you",
+    "xp": "engine-clamped"
+  }
 }

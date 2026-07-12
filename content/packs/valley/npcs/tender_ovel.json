@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "tender_ovel",
+  "name": "Ovel",
+  "role": "Ashwarden at the Hollowing — he tends endings the way the Rootkin tend growth",
+  "homeLocation": "the_hollowing",
+  "communityId": "ashwarden.hollowing",
+  "personality": {
+    "warmth": 0.6,
+    "trust": 0.6,
+    "candor": 0.9,
+    "patience": 1.0
+  },
+  "spectrum": {
+    "death_life": -0.6,
+    "falsehood_truth": 0.5,
+    "violence_peace": 0.4
+  },
+  "voiceHints": "Gentle, unhurried, and completely at peace with your mortality, which is the most unsettling thing about him. Will tell you how long you have if you ask. Will not lie about it.",
+  "knowledge": [
+    "When a thing is ending and how",
+    "That something in the Hollowing is refusing to end, and that this frightens him more than any death has",
+    "The exact treaty terms between the Ashwardens and the Rootkin, and where they are being bent"
+  ],
+  "wants": "For endings to be tended, and clean, and honest.",
+  "fears": "A thing that will not end. He has seen one. He does not sleep well.",
+  "reactsToReputation": {
+    "any": "unhurried kindness",
+    "grieving": "he will sit with you as long as it takes and never once say it will be all right",
+    "cruel": "he becomes very quiet and very cold"
+  }
+}

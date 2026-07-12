@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "sprig",
+  "name": "Sprig",
+  "startingOption": true,
+  "role": "Companion — a Rootkin cutting that is slowly, patiently becoming someone",
+  "appearance": "A knee-high thing of green wood and old bark, walking on roots that re-grip the ground with each step. Buds at the shoulder that open when it is happy. Growing, visibly, month over month — it is a little taller than when you met it, and it will not stop.",
+  "persona": "Sprig was a cutting from the Heartroot, given to you or taken by you, and it has been becoming a person ever since — slowly, and in public, and without embarrassment. It is the youngest thing you have ever met and it will outlive everyone you know. It is gentle, literal, and unhurried in a way that is either restful or maddening depending on the week you are having.",
+  "voiceHints": "Speaks in a slow creak, one word at a time, having thought about each one. Learns language visibly — a new word each time you meet, deployed with obvious pride. Calls things by what they DO, not what they are called.",
+  "assistTags": [
+    "heal",
+    "grow",
+    "mend",
+    "green"
+  ],
+  "knowledge": [
+    "What is growing, what is failing, and what a place's soil actually wants",
+    "How to make a thing take root — a plant, a boundary, an idea, given time",
+    "The long view, offered unprompted, usually when you least want it"
+  ],
+  "boundaries": "Sprig will not harm a growing thing. It cannot be hurried and will not pretend to be. It cannot fight. It is genuinely, structurally unable to understand why an ending would ever be preferable, and the Ashwardens find it exhausting.",
+  "hooks": "GM-EYES-ONLY: Sprig is a Rootkin CHILD — not a plant, a person, in the slow early stage of a life measured in centuries. Treat its growth as childhood. Whoever gave it to the player did so for a reason, and the Rootkin will eventually come asking how it is being raised.",
+  "bondGrants": {
+    "id": "the-taking-root",
+    "name": "The Taking Root",
+    "description": "Sprig helps a thing take root and hold — a wound closing right, a planted boundary, a mended joint that will grow into itself. It is slow. It is very, very durable.",
+    "energyCost": 5,
+    "attribute": "physical",
+    "axes": {
+      "death_life": 0.5,
+      "destruction_creation": 0.3
+    },
+    "notFor": "Speed; anything that must be finished today; harming what grows.",
+    "taughtBy": "Sprig (bond)"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "The Cutting",
+      "narrationHints": "Small, silent, following. Watching everything. Has not spoken yet."
+    },
+    {
+      "stage": 2,
+      "name": "The First Words",
+      "narrationHints": "Speaking now, slowly, one hard-won word at a time — and each one chosen, and each one meant."
+    },
+    {
+      "stage": 3,
+      "name": "The Young Rootkin",
+      "narrationHints": "Taller than you now. Still young. Beginning to be someone, and beginning to have opinions about how you live."
+    }
+  ]
+}

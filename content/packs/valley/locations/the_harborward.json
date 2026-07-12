@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_harborward",
+  "name": "The Harborward",
+  "regionId": "umbral_depths",
+  "communityId": "umbral.harborward",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    -0.7,
+    0.2,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "dark_light": -0.7,
+    "violence_peace": 0.3,
+    "death_life": 0.2
+  },
+  "tags": [
+    "umbral",
+    "dark",
+    "sanctuary",
+    "sacred",
+    "refuge"
+  ],
+  "connections": [
+    "the_underlight",
+    "the_unlit_deep"
+  ],
+  "descriptionSeed": "Where the Umbrals keep what the light would burn. Refugees, heretics, banned books, people the Blaze has judged — all of them harbored, none of them questioned, all of them the Umbrals' responsibility now. The Harborward is the moral center of the Umbral people and the reason the Blazeborn consider them a criminal civilization. Both are correct. Some of what is harbored here should not be, and the Umbrals know it, and they harbor it anyway, because the alternative is a place that decides.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Refugees who will not say what they fled; harbor-keepers who never ask; something harbored a long time ago that should perhaps be looked at again.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "Something harbored here is genuinely monstrous and the Harborward will not give it up",
+    "A Blazeborn delegation has come to demand a name, and they are not wrong to"
+  ],
+  "map": {
+    "x": 30,
+    "y": 380
+  },
+  "poleIntensity": 0.7
+}

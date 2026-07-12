@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_scour",
+  "name": "The Scour",
+  "regionId": "the_unmade",
+  "communityId": "unmaker.scour",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    0.0,
+    -0.2,
+    0.0,
+    0.0,
+    -0.7
+  ],
+  "spectrum": {
+    "destruction_creation": -0.7,
+    "chaos_order": -0.2,
+    "death_life": -0.2
+  },
+  "tags": [
+    "unmaker",
+    "destruction",
+    "city",
+    "craft",
+    "home"
+  ],
+  "connections": [
+    "the_clearing_ground",
+    "the_scouring"
+  ],
+  "descriptionSeed": "A city of controlled ruin and beautiful demolitions, where ending a thing WELL is a craft and the world is held to be choked with what should have ended. The Unmakers are not nihilists — they are gardeners with a very long view of what needs clearing, and they are usually right, and being usually right is not the same as being welcome.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Unmakers who look at your work and see where it should end; a demolition that is genuinely beautiful; a Wright envoy in visible distress.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "Something is being scheduled for ending and the Unmakers are RIGHT and it is beloved",
+    "An Unmaker has ended something that should have stood, and knew it, and did it anyway"
+  ],
+  "map": {
+    "x": 580,
+    "y": 450
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

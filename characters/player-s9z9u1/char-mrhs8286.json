@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.17743008961346876
+    "spectrumId": -0.2185585851327953
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -210,23 +210,26 @@
       {
         "summary": "Billhook work underway; Pell names Corvin — a farmer's son who keeps handling the mid-weight spear-tip without buying.",
         "narration": "The billhook comes next. You clamp it in the spare vise — the face is worn to a convex hollow, somebody's been treating it like an axe rather than a blade — and you take the bastard file to it in long, even strokes, letting the metal tell you where it wants to go. The rhythm settles, and after a few minutes you speak into it without breaking stride.\n\n\"The mid-weight spear-tip on the lower shelf.\" You don't look up. \"Someone's been at it enough to rub the oil thin on the socket, but they're not buying. Seems like a specific kind of wanting.\"\n\nPell is quiet for a beat — the sound of her file running across whatever she's dressing in the vise. Then: \"Boy named Corvin. Farms east furlong with his father. Comes in every few days, picks it up, puts it down. Tips over his head right now — can't afford the mid-weight, and the light point won't do what he needs for boar.\" A pause. \"Or what he thinks he needs. Probably doesn't know yet that he doesn't know.\"\n\nHuginn makes a short sound from the hook-row — not quite a croak, more a dry tick, like a knuckle on hollow wood. Pell doesn't look at the bird, but her filing slows for half a second before it resumes. You lift the billhook, sight along the face: flat now, the hollow chased out. You move to the slip stone and start on the edge."
+      },
+      {
+        "summary": "Silas strips his shirt in the forge-warmth and proposes a modified light spear-tip that might actually serve Corvin's boar-hunting ambitions.",
+        "narration": "The billhook is as good as it's going to get without a full re-face, so you set the file down, pull it from the vise, and tug your shirt off over your head in one motion — the kind of casual efficiency that belongs to someone who's worked enough hot shops to stop caring about formality. You drape the shirt over the end of the sharpening station and pick the slip stone up again. The forge is warm enough to earn it.\n\nHuginn makes no comment. Pell doesn't look up, but she doesn't not look, either — a craftsman's peripheral awareness, the same sense she'd use to track where an apprentice's hands are near a fire. You start the edge work on the billhook's curved face and keep your voice easy.\n\n\"What's Corvin actually hunting?\"\n\nA pause. Pell's file keeps its rhythm. \"Says boar. Heard there's a sounder working the north wood, wants to be the one who does something about it.\"\n\n\"Mid-weight point won't stop a boar at the shoulder.\" You tilt the blade to check the edge in the forge light. \"But a light point isn't all wrong if the geometry's modified — socket sleeve thickened, spine reinforced behind the socket so the shaft doesn't torque. He'd need the right shaft length and the nerve to use the throat rather than going through the side.\" You let that sit. \"That work you could do?\"\n\nNow she does turn — quarter-turn, the minimum. Her eyes move from the billhook to your hands to your face, in that order. \"I could do it. Collar and sleeve work, yes. Whether the boy has the nerve is a separate question.\" She turns back. \"And whether he has the coin for the modification on top of the point.\""
       }
     ],
     "lastTurn": {
-      "narration": "The billhook comes next. You clamp it in the spare vise — the face is worn to a convex hollow, somebody's been treating it like an axe rather than a blade — and you take the bastard file to it in long, even strokes, letting the metal tell you where it wants to go. The rhythm settles, and after a few minutes you speak into it without breaking stride.\n\n\"The mid-weight spear-tip on the lower shelf.\" You don't look up. \"Someone's been at it enough to rub the oil thin on the socket, but they're not buying. Seems like a specific kind of wanting.\"\n\nPell is quiet for a beat — the sound of her file running across whatever she's dressing in the vise. Then: \"Boy named Corvin. Farms east furlong with his father. Comes in every few days, picks it up, puts it down. Tips over his head right now — can't afford the mid-weight, and the light point won't do what he needs for boar.\" A pause. \"Or what he thinks he needs. Probably doesn't know yet that he doesn't know.\"\n\nHuginn makes a short sound from the hook-row — not quite a croak, more a dry tick, like a knuckle on hollow wood. Pell doesn't look at the bird, but her filing slows for half a second before it resumes. You lift the billhook, sight along the face: flat now, the hollow chased out. You move to the slip stone and start on the edge.",
-      "sceneSummary": "Billhook work underway; Pell names Corvin — a farmer's son who keeps handling the mid-weight spear-tip without buying.",
+      "narration": "The billhook is as good as it's going to get without a full re-face, so you set the file down, pull it from the vise, and tug your shirt off over your head in one motion — the kind of casual efficiency that belongs to someone who's worked enough hot shops to stop caring about formality. You drape the shirt over the end of the sharpening station and pick the slip stone up again. The forge is warm enough to earn it.\n\nHuginn makes no comment. Pell doesn't look up, but she doesn't not look, either — a craftsman's peripheral awareness, the same sense she'd use to track where an apprentice's hands are near a fire. You start the edge work on the billhook's curved face and keep your voice easy.\n\n\"What's Corvin actually hunting?\"\n\nA pause. Pell's file keeps its rhythm. \"Says boar. Heard there's a sounder working the north wood, wants to be the one who does something about it.\"\n\n\"Mid-weight point won't stop a boar at the shoulder.\" You tilt the blade to check the edge in the forge light. \"But a light point isn't all wrong if the geometry's modified — socket sleeve thickened, spine reinforced behind the socket so the shaft doesn't torque. He'd need the right shaft length and the nerve to use the throat rather than going through the side.\" You let that sit. \"That work you could do?\"\n\nNow she does turn — quarter-turn, the minimum. Her eyes move from the billhook to your hands to your face, in that order. \"I could do it. Collar and sleeve work, yes. Whether the boy has the nerve is a separate question.\" She turns back. \"And whether he has the coin for the modification on top of the point.\"",
+      "sceneSummary": "Silas strips his shirt in the forge-warmth and proposes a modified light spear-tip that might actually serve Corvin's boar-hunting ambitions.",
       "choices": [
         {
-          "label": "Keep working and ask more about Corvin — what does he actually need it for, and why is boar on a furlong farmer's mind?",
+          "label": "Offer to split the modification cost with Pell in exchange for a cut if Corvin buys — a small investment in good will with the east furlong farmer.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "listen"
+            "negotiate",
+            "invest",
+            "community"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -235,16 +238,15 @@
           "emergenceId": null
         },
         {
-          "label": "Stay quiet and keep clearing the backlog — finish the billhook and move to the skinners. Let the work speak.",
+          "label": "Keep working the backlog — pick up the first skinning blade and suggest Pell simply name a fair price to Corvin for the modification; let her decide.",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {
-            "spectrumId": -0.5
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "work",
-            "careful"
+            "careful",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -253,58 +255,65 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Pell if there's any way to fit Corvin for the light point — modify it so it does what he needs. A forge problem worth solving.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "spectrumId": -0.4
-          },
-          "difficulty": 15,
+          "label": "Ask where the sounder's been spotted — a boar run north of the village is exactly the kind of intelligence worth having before you plan a hunting trip with Pell.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "help",
-            "craft",
-            "plan"
+            "scout",
+            "plan",
+            "gather-information"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Order-Sense on the shop's whole situation — let it read what Corvin's repeated visits and the low snare stock mean together as a system.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.2
-          },
+          "label": "Suggest Pell let you be there when Corvin next comes in — you can talk him through what a boar take actually requires and let him decide if the heavier point makes sense.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "sense"
+            "help",
+            "mediate",
+            "teach"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, lane stones dry now. Mid-morning. Billhook face-ground and edge-work underway at the sharpening station; Pell at her own vise across the shop.",
+        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Billhook face-work nearly done at the sharpening station; Silas shirtless, Pell at her own vise.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Filing steadily at her own vise, back mostly to Silas — spoke without turning around."
+            "state": "Back to her vise-work after a quarter-turn assessment — filed the answer about Corvin's coin without elaborating further."
           },
           {
             "name": "Huginn",
-            "state": "On the iron hook-row, watching the lane. Made one dry tick-sound at Pell's answer."
+            "state": "On the iron hook-row, watching the lane. Made no comment about the shirt."
           }
         ],
         "objects": [
           "Drawknife — corrected, set aside on the sharpening station",
-          "Billhook — face-ground, edge-work in progress on the slip stone",
+          "Billhook — edge-work nearly complete, in the spare vise",
           "Two skinning blades — sound but dull, waiting their turn",
           "Hand-axe — hairline in the eye, still in the pile",
           "Froe — sprung collar, at the bottom of the pile",
@@ -312,12 +321,13 @@
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
           "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil rubbed thin at socket), light point"
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil thinned from handling), light point",
+          "Silas's shirt — draped over the end of the sharpening station"
         ],
         "threads": [
-          "Backlog labor underway — billhook edge in progress, three pieces remain after",
-          "Corvin (east furlong farmer's son) keeps handling the mid-weight spear-tip without buying — can't afford it, light point won't do what he thinks he needs",
-          "Snare hardware stock low — restocking needed before north meadow runs",
+          "Backlog labor underway — billhook nearly done, two skinners, hand-axe, froe remain",
+          "Corvin's coin problem: modification + point together may be beyond him",
+          "Boar sounder reportedly working the north wood — relevant to the hunting trip plan",
           "Hunting trip north still to be scheduled once the backlog is clear"
         ]
       },
@@ -327,18 +337,28 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed through it.",
+          "note": "Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look — hands, then face — before returning to work.",
           "learned": [
-            "A young man named Corvin from the east furlong visits repeatedly to handle the mid-weight spear-tip but cannot afford it",
-            "Pell's read: the light point won't serve boar work, and Corvin probably doesn't know yet what he doesn't know"
+            "Corvin claims there's a boar sounder working the north wood — he wants to be the one who handles it",
+            "The modification Silas described (thickened sleeve, reinforced spine) is work Pell can do",
+            "Corvin's coin may not cover both the point and the modification"
           ],
           "skillsObserved": [
-            "practical assessment",
-            "terse observation"
+            "accurate practical assessment",
+            "honest accounting of customer limitations"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her forge on the south lane — Silas working the backlog beside her, Corvin named as an ongoing pattern."
+          "statusNote": "At her forge on the south lane — Silas working the backlog beside her, discussing Corvin's situation."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
+          "flag": {
+            "boar_sounder_north_wood": true
+          }
         }
       ],
       "codexUpdates": [
@@ -346,33 +366,47 @@
           "topic": "corvin",
           "label": "Corvin",
           "kind": "person",
-          "fact": "A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pell's read: he doesn't know yet what he doesn't know.",
+          "entityId": "corvin",
+          "fact": "Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulder; a sleeve-and-spine modification could work, but his coin may not cover both the point and the modification.",
           "links": [
             "millbrook",
-            "pell"
+            "pell",
+            "aldric-provisioning-deal"
+          ]
+        },
+        {
+          "topic": "millbrook-north-wood-boar",
+          "label": "Boar Sounder — North Wood",
+          "kind": "event",
+          "fact": "A sounder of boar has been spotted working the north wood above Millbrook. Corvin from the east furlong has heard of it and wants to act on it. Relevant to any hunting trip north of the village.",
+          "links": [
+            "corvin",
+            "pell",
+            "millbrook",
+            "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short stretch of forge work and a brief exchange"
+        "why": "Brief conversation during ongoing forge work — a few minutes of exchange."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, lane stones dry now. Mid-morning. Billhook face-ground and edge-work underway at the sharpening station; Pell at her own vise across the shop.",
+      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Billhook face-work nearly done at the sharpening station; Silas shirtless, Pell at her own vise.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Filing steadily at her own vise, back mostly to Silas — spoke without turning around."
+          "state": "Back to her vise-work after a quarter-turn assessment — filed the answer about Corvin's coin without elaborating further"
         },
         {
           "name": "Huginn",
-          "state": "On the iron hook-row, watching the lane. Made one dry tick-sound at Pell's answer."
+          "state": "On the iron hook-row, watching the lane. Made no comment about the shirt."
         }
       ],
       "objects": [
         "Drawknife — corrected, set aside on the sharpening station",
-        "Billhook — face-ground, edge-work in progress on the slip stone",
+        "Billhook — edge-work nearly complete, in the spare vise",
         "Two skinning blades — sound but dull, waiting their turn",
         "Hand-axe — hairline in the eye, still in the pile",
         "Froe — sprung collar, at the bottom of the pile",
@@ -383,9 +417,9 @@
         "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil "
       ],
       "threads": [
-        "Backlog labor underway — billhook edge in progress, three pieces remain after",
-        "Corvin (east furlong farmer's son) keeps handling the mid-weight spear-tip without buying — can't afford it, light point won't do what he thinks he needs",
-        "Snare hardware stock low — restocking needed before north meadow runs",
+        "Backlog labor underway — billhook nearly done, two skinners, hand-axe, froe remain",
+        "Corvin's coin problem: modification + point together may be beyond him",
+        "Boar sounder reportedly working the north wood — relevant to the hunting trip plan",
         "Hunting trip north still to be scheduled once the backlog is clear"
       ]
     }
@@ -533,28 +567,29 @@
         "[d1] Silas offered forge-labor in exchange for hunting company north of the village. Pell absorbed the squall without comment, named her two pressing problems (edge-work backlog, snare ",
         "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe",
         "[d1] Returned to her own vise-work without ceremony after Silas began the backlog — one glance at his angle, no comment. Baseline trust registered through silence.",
-        "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th"
+        "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th",
+        "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look"
       ],
       "knownFacts": [
-        "Confirmed Aldric's referral without ceremony",
-        "Has a backlog of edge work she needs cleared",
-        "Snare hardware needs restocking before north meadow runs are worth anything",
         "Is actively considering the offer — not declined",
         "Silas knows forge work well enough to read a backlog at a glance — identified fault in the eye of the hand-axe and the sprung collar on the froe without touchin",
         "Accepts correct technique wordlessly — that one glance was the whole review",
         "A young man named Corvin from the east furlong visits repeatedly to handle the mid-weight spear-tip but cannot afford it",
-        "Pell's read: the light point won't serve boar work, and Corvin probably doesn't know yet what he doesn't know"
+        "Pell's read: the light point won't serve boar work, and Corvin probably doesn't know yet what he doesn't know",
+        "Corvin claims there's a boar sounder working the north wood — he wants to be the one who handles it",
+        "The modification Silas described (thickened sleeve, reinforced spine) is work Pell can do",
+        "Corvin's coin may not cover both the point and the modification"
       ],
       "skillsObserved": [
-        "practical assessment",
-        "clean negotiation posture",
         "direct negotiation",
         "accurate fault-reading",
         "vise work, filing",
-        "terse observation"
+        "terse observation",
+        "accurate practical assessment",
+        "honest accounting of customer limitations"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — Silas working the backlog beside her, Corvin named as an ongoing pattern.",
+      "statusNote": "At her forge on the south lane — Silas working the backlog beside her, discussing Corvin's situation.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -565,7 +600,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] A dead rabbit was raised to life here on World-day 12 — the air smelled of metal for one sharp second, then cleared. The thing happened at the base of the fence-post by the river path.",
         "[d1] Order-Sense revealed a structural seam in the resurrected rabbit — a second pattern woven through its original architecture, stable and of unknown authorship. The animal remains oriented south toward ",
         "[d1] The resurrected rabbit entered Millbrook's south fence line heading into the village — alive, oriented south, seam intact. World-day 12.",
         "[d1] The cookhouse behind the well is operated by a wary woman who turned away a stranger's trade — stranger-wariness is high here, especially with uncanny company.",
@@ -576,12 +610,14 @@
         "[d1] Pell's forge visited on World-day 12 — stocks snare hardware (plates, toggles, stakes), chain, and three grades of spear-tip. Open-front under a wide overhang, south lane past the elder's post.",
         "[d1] A brief squall passed through on World-day 12 mid-morning — lane stones briefly wet, air sharp and cold after. Cleared fast.",
         "[d1] Labor deal struck at Pell's forge on World-day 12 — Silas to clear the backlog (drawknife, billhook, two skinners, hand-axe, froe) in exchange for hunting company north of the village.",
-        "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use."
+        "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use.",
+        "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric."
       ],
       "flags": {
         "resurrection_occurred": true,
         "rabbit_seam_found": true,
-        "rabbit_entered_village": true
+        "rabbit_entered_village": true,
+        "boar_sounder_north_wood": true
       },
       "subPlaces": {
         "upper-meadow-north-of-millbrook-": {
@@ -865,11 +901,31 @@
         "label": "Corvin",
         "kind": "person",
         "facts": [
-          "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe"
+          "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe",
+          "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde"
         ],
         "links": [
           "millbrook",
-          "pell"
+          "pell",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1,
+        "entityId": "corvin"
+      },
+      "millbrook-north-wood-boar": {
+        "id": "millbrook-north-wood-boar",
+        "label": "Boar Sounder — North Wood",
+        "kind": "event",
+        "facts": [
+          "[d1] A sounder of boar has been spotted working the north wood above Millbrook. Corvin from the east furlong has heard of it and wants to act on it. Relevant to any hunting trip north of the village."
+        ],
+        "links": [
+          "corvin",
+          "pell",
+          "millbrook",
+          "aldric-provisioning-deal"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -878,18 +934,18 @@
     }
   },
   "tendencies": {
-    "strategic": 12.187794766987633,
-    "cerebral": 6.612628518520445,
-    "social": 11.602660190535973,
-    "generous": 6.582936534469902,
-    "cautious": 4.834197301753646
+    "strategic": 12.126855793152695,
+    "cerebral": 6.579565375927843,
+    "social": 14.544646889583293,
+    "generous": 6.550021851797553,
+    "cautious": 4.810026315244878
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "good_samaritan"
   ],
-  "actionCount": 18,
+  "actionCount": 19,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -911,8 +967,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783897074757,
-  "rev": 36,
+  "updatedAt": 1783897325377,
+  "rev": 37,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -13,6 +13,7 @@
 import { callClaudeJSON } from "./claude.js";
 import { applyNpcUpdates } from "./npcs.js";
 import { applyCodexUpdates } from "./codex.js";
+import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
 import { absoluteWorldDay, worldDayAt } from "./worldtime.js";
@@ -95,7 +96,7 @@ export async function runWorldTick({ character, content, currentDay, evolveNpcs 
       const result = await evolveNpcs({ character, content, elapsed, currentDay });
       if (result?.npcUpdates?.length) {
         applyNpcUpdates(character, result.npcUpdates.slice(0, 3).map(u => ({ ...u, op: "update" })), { day: currentDay });
-        for (const n of (result.news || []).slice(0, 3)) news.push(String(n).slice(0, 200));
+        for (const n of (result.news || []).slice(0, 3)) news.push(smartClamp(n, 600));
       }
     } catch (err) {
       console.warn("[worldtick] npc evolution skipped:", err.message);
@@ -167,7 +168,7 @@ export async function syncSharedWorld({ character, content }) {
   if (news.length) {
     // each item carries its OWN absolute world-day (a cross-character event keeps the date it
     // actually happened; a local merge stamps now) — so the shared calendar stays coherent.
-    const stamped = news.map(n => ({ day: ws.lastTickDay, worldDay: n.worldDay ?? absoluteWorldDay(), text: String(n.text).slice(0, 220), ...(n.impactsLocal ? { impactsLocal: true } : {}) }));
+    const stamped = news.map(n => ({ day: ws.lastTickDay, worldDay: n.worldDay ?? absoluteWorldDay(), text: smartClamp(n.text, 600), ...(n.impactsLocal ? { impactsLocal: true } : {}) }));
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -269,7 +270,7 @@ export async function advanceGeneratedOffscreen({ character, evolveFn = aiGenera
     for (const dev of (result?.developments || []).slice(0, 4)) {
       const rec = established.find(r => r.id === dev.entityId);
       if (!rec || !dev.note) continue;
-      const note = String(dev.note).slice(0, 200);
+      const note = smartClamp(dev.note, 600);
       rec._gen.offscreen = [...(rec._gen.offscreen || []), { worldDay: currentWorldDay, note }].slice(-8);
       // accumulate the development on the entity's codex node so it "moved on" + surfaces
       try { applyCodexUpdates(character, [{ entityId: rec.id, label: rec.name, kind: rec._gen.type === "npc" ? "person" : "lore", fact: `[while away] ${note}` }], { day: ws.lastTickDay ?? null }); } catch { /* codex mirror is a convenience */ }
@@ -278,7 +279,7 @@ export async function advanceGeneratedOffscreen({ character, evolveFn = aiGenera
   } catch (err) { console.warn("[offscreen-gen] skipped:", err.message); return []; }
 
   if (news.length) {
-    const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: String(n.text).slice(0, 220) }));
+    const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600) }));
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }

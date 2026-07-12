@@ -9,7 +9,7 @@
 // unresolvable op SURFACES a note instead of vanishing, and a "start" that resolves to an
 // existing quest doesn't fork a duplicate. Giver/location tie to codex entityIds.
 
-import { namesMatch, resolveByName } from "./namematch.js";
+import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
 
 /** Resolve an incoming quest op to an existing quest: exact id → slugified-title id →
  *  title/alias fuzzy. Returns the quest or null. */
@@ -47,7 +47,7 @@ function entityIdFor(name, pool) {
 export function applyQuestUpdates(character, updates = [], ctx = {}) {
   character.quests = character.quests || [];
   const notes = [];
-  const clampNote = n => String(n).slice(0, 200);
+  const clampNote = n => smartClamp(n, 600); // SNG-076: model note — bound generously, on a word boundary
   for (const u of updates.slice(0, 4)) {
     const op = u.op;
     const existing = resolveQuest(character, u);
@@ -62,7 +62,7 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
       character.quests.push({
         id,
         title: String(u.title || "A new undertaking").slice(0, 80),
-        summary: String(u.summary || u.note || "").slice(0, 240),
+        summary: smartClamp(u.summary || u.note || "", 600), // SNG-076: model quest summary — word-boundary clamp
         giver: u.giver ? String(u.giver).slice(0, 60) : null,
         giverEntityId: entityIdFor(u.giver, ctx.entities?.people),
         locationId: u.locationId || null,
@@ -238,7 +238,7 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
       case "world_event": {
         if (e.text) {
           const day = (ctx.worldDay ?? null); const at = day == null ? null : day + (Number.isFinite(e.delayDays) ? e.delayDays : 0);
-          const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: String(e.text).slice(0, 300), worldDay: at, propagates: e.propagates !== false };
+          const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: smartClamp(e.text, 800), worldDay: at, propagates: e.propagates !== false }; // SNG-076: authored effect text — render whole (generous safety bound only)
           character.worldEvents.push(ev);
           if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink optional */ } }
           applied.push({ type: "world_event", text: ev.text, worldDay: at });
@@ -277,7 +277,7 @@ function applyQuestProse(character, quest, prose, ctx = {}) {
     const c = String(raw);
     if (/world[-\s]?event/i.test(c)) {
       const text = c.replace(/^[^:]*world[-\s]?event[^:]*:\s*/i, "").trim() || c;
-      const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: text.slice(0, 240), worldDay: ctx.worldDay ?? null, propagates: true };
+      const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: smartClamp(text, 800), worldDay: ctx.worldDay ?? null, propagates: true }; // SNG-076: authored/derived consequence — word-boundary
       character.worldEvents.push(ev);
       if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink optional */ } }
       applied.push({ type: "world_event", text: ev.text });

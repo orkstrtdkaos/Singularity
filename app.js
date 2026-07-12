@@ -38,7 +38,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.31";
+const APP_VERSION = "1.8.32";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2478,7 +2478,7 @@ function renderMap(selectedId = null) {
       </div>
       ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
       ${visited
-        ? `<p class="map-details-desc">${esc(l.descriptionSeed.slice(0, 260))}${l.descriptionSeed.length > 260 ? "…" : ""}</p>
+        ? `<p class="map-details-desc">${esc(l.descriptionSeed)}</p>${/* SNG-076: authored descriptionSeed renders IN FULL */""}
            ${(() => { const vs = vectorSummary(character, l.id, l, CONTENT.spectrums, CONTENT.rules); return vs ? `<div class="place-vectors">${esc(vs)}</div>` : ""; })()}
            ${pm?.visits ? `<div class="hint">${pm.visits} visit${pm.visits > 1 ? "s" : ""}${pm.lastVisit != null ? ` · last on day ${pm.lastVisit}` : ""}</div>` : ""}
            ${pm?.notes?.length ? `<div class="map-details-notes">${pm.notes.slice(-3).map(n => `<div class="codex-fact">${esc(n)}</div>`).join("")}</div>` : ""}
@@ -2947,7 +2947,7 @@ function renderQuestLog() {
   const availSection = avail.length ? `<div class="codex-group"><div class="codex-group-title">Available here (${avail.length})</div>${avail.map(def => `
       <div class="quest" style="margin:3px 0">
         <span class="quest-title">${esc(def.name)}</span> <span class="cost">${esc(String(def.axis || "").replace(/_/g, "↔"))}</span>
-        <div class="quest-note"><strong>Stakes:</strong> ${esc(String(def.stakes).slice(0, 180))}${def.stakes.length > 180 ? "…" : ""}</div>
+        <div class="quest-note"><strong>Stakes:</strong> ${esc(String(def.stakes || ""))}</div>${/* SNG-076: authored stakes render IN FULL — the prose IS the game */""}
         <button class="btn" data-startquest="${esc(def.id)}" style="margin-top:6px">Take it on</button>
       </div>`).join("")}</div>` : "";
   chrome(`<div class="screen" style="max-width:680px">

@@ -21,7 +21,7 @@ import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, 
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict } from "../engine/sync.js";
-import { namesMatch as nm2 } from "../engine/namematch.js";
+import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -2471,6 +2471,18 @@ await (async () => {
   // an explicit refuse op lands in refused; abilities/inventory fields are forbidden
   check("SNG-070: an explicit refuse is recorded, and abilities/inventory are forbidden fields", applyStateOps(base(), [{ op: "refuse", what: "500 xp" }], ctx).refused.length === 1 && applyStateOps(base(), [{ op: "correctField", field: "abilities", to: "x" }], ctx).refused.length === 1);
   check("SNG-070: describeCorrection gives a human line", /background corrected/.test(describeCorrection({ field: "background", to: "duelist" })));
+})();
+
+// --- SNG-076: authored prose is not truncated mid-word ---
+(() => {
+  const short = "Fendt is going to be ruined by a piece of paper that does not exist.";
+  check("SNG-076: text under the bound is returned WHOLE (authored prose renders in full)", smartClamp(short, 600) === short);
+  check("SNG-076: a real authored stakes string (240+ chars) survives at the 600 bound", smartClamp("x".repeat(300).replace(/x/g, "a "), 600).length > 240);
+  const long = "the district accountability board was opened and word travels to the other reaches where markings begin to be questioned";
+  const clamped = smartClamp(long, 40);
+  const body = clamped.replace(/…$/, "");
+  check("SNG-076: an over-long MODEL string cuts on a WORD boundary, never mid-word", clamped.endsWith("…") && long.startsWith(body) && (long[body.length] === " " || long[body.length] === undefined));
+  check("SNG-076: the clamp never leaves a dangling partial word", body.split(" ").every(w => long.split(" ").includes(w)));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

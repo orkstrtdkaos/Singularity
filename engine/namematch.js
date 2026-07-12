@@ -2,6 +2,18 @@
 // quests, and inventory all resolve entities the SAME way without a circular import
 // (codex imports slugify from quests, so quests can't import back from codex). No deps.
 
+/** SNG-076: clamp MODEL output on a WORD BOUNDARY with a real ellipsis — never mid-word, never
+ *  losing a word's tail like `slice()` does. AUTHORED content is never clamped (it is finite and
+ *  meant to be read); this exists only to bound untrusted model strings, and generously. */
+export function smartClamp(text, max = 600) {
+  const s = String(text ?? "");
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  const body = lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut;
+  return body.replace(/[\s,;:.!?—-]+$/, "") + "…";
+}
+
 /** Normalize a name for matching: lowercase, strip punctuation + a leading article. */
 export function normName(s) {
   return String(s || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\s+/g, " ").trim()

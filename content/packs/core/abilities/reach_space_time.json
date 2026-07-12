@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "powerSystem": "reach_space_time",
+  "gated": "learned",
+  "note": "Crafts of The Open Reach/The Kept Reach (space_time axis). SPANWORK is the space-pole craft of the Horizon-Walkers — nomads for whom everywhere is a place not yet arrived; HOURCRAFT is the time-pole craft of the Hourkeepers, who tend duration and pay for it. The Valley's Shortfold and Waygate are folk-shadows of Spanwork. NOTE (engine): these crafts touch the world-clock (SNG-041) — hour-craft effects are LOCAL to the active frame and never rewrite the shared absolute clock. Authored by Aevi, SNG-054.",
+  "abilities": [
+    {
+      "id": "spanwork",
+      "name": "Spanwork",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_space_time",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.5,
+        "chaos_order": -0.1
+      },
+      "functions": [
+        "move",
+        "reveal"
+      ],
+      "narrationHints": "The distance was there a moment ago. It is somehow no longer the point.",
+      "description": "The space-pole mastery: distance as a material to be worked. To a Horizon-Walker, 'far' is a claim, and claims can be argued with.",
+      "notFor": "Time (Hourcraft's country); arriving somewhere you cannot picture.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Long Stride",
+          "grants": "Cover ground far past what a body should — a day's march in an hour, tirelessly.",
+          "cannot": "The ground is still crossed. What is on it still meets you."
+        },
+        {
+          "rank": 2,
+          "name": "The Closed Distance",
+          "grants": "Close a distance you can see — arrive at the far ridge, the far bank, the far door, without crossing the between.",
+          "cannot": "You must SEE it. And whatever was in the between is still in the between, un-dealt-with."
+        },
+        {
+          "rank": 3,
+          "name": "The Open Reach",
+          "grants": "Distance stops being an obstacle for you and those you carry — the far place is simply a place you may be.",
+          "cannot": "The world is very large. Horizon-Walkers at this depth stop being FROM anywhere, and it is not always a gift."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "CHASE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "CHASE": 3
+      }
+    },
+    {
+      "id": "way_sense",
+      "name": "Way-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_space_time",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.3
+      },
+      "functions": [
+        "reveal",
+        "move"
+      ],
+      "narrationHints": "He knows which way, and does not know how he knows.",
+      "description": "Know where you are, where things lie, and the true way between — the first gift of the Open Reach.",
+      "notFor": "Reading time; knowing what waits at the far end.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Way-Sense",
+          "grants": "Never be lost. Know your bearing, your distance, and the shape of the way ahead.",
+          "cannot": "Knowing the way is not knowing what is on it."
+        },
+        {
+          "rank": 2,
+          "name": "The Read Road",
+          "grants": "Read a route's true cost before walking it — where it will be hard, where it will be watched, where it lies.",
+          "cannot": "A read road is still a road. It does not walk itself."
+        },
+        {
+          "rank": 3,
+          "name": "The Whole Map",
+          "grants": "Hold a region entire in your sense of it — every way in, every way out, every gap between the ways.",
+          "cannot": "Regions change. The map you hold is the one you built, and it ages."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "CHASE"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "CHASE": 2
+      }
+    },
+    {
+      "id": "hourcraft",
+      "name": "Hourcraft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_space_time",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.5,
+        "chaos_order": 0.2
+      },
+      "functions": [
+        "bind",
+        "reveal",
+        "ward"
+      ],
+      "narrationHints": "The moment does not pass. It sits there, being looked at.",
+      "description": "The time-pole mastery: duration tended, held, and read. The Hourkeepers remember forward and backward, and pay for both.",
+      "notFor": "Space (Spanwork's country); undoing what happened — nothing undoes.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Kept Hour",
+          "grants": "Hold a moment exactly — perceive it whole, at length, while it is still happening.",
+          "cannot": "The moment still passes for everyone else. You get to look; you do not get to act longer."
+        },
+        {
+          "rank": 2,
+          "name": "The Slow Hour",
+          "grants": "Slow duration around you — a fight, a fall, a conversation stretches, and you have room inside it.",
+          "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless."
+        },
+        {
+          "rank": 3,
+          "name": "The Pre-Remembered",
+          "grants": "Remember forward — an hour that has not happened arrives in you as memory does, with a memory's specificity and a memory's unreliability.",
+          "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "FIGHT": 2
+      }
+    },
+    {
+      "id": "hour_sense",
+      "name": "Hour-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_space_time",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "She knows how long it has been, and how long it has left.",
+      "description": "Know duration truly — how long since, how long until — the first gift of the Kept Reach.",
+      "notFor": "Knowing WHAT will happen. This knows WHEN.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Hour-Sense",
+          "grants": "Know exactly how long since a thing happened, and how long until a thing due will come.",
+          "cannot": "When, never what. The hour is knowable; the event is not."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Count",
+          "grants": "Read the age of a place, a wound, a working, or a lie — and when it will fail.",
+          "cannot": "It counts. It does not care whether you are ready."
+        },
+        {
+          "rank": 3,
+          "name": "The Kept Ledger",
+          "grants": "Hold the whole duration of a place or a people — its beginning, its hours, and the hour it is running out of.",
+          "cannot": "Knowing a people's remaining hours and being unable to say so is the Hourkeepers' particular grief."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3
+      }
+    }
+  ]
+}

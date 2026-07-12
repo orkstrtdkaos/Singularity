@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.20";
+const APP_VERSION = "1.8.21";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -624,8 +624,9 @@ function renderRoster() {
         <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
         <div><button class="btn" data-play="${esc(c.id)}">Play</button></div>
       </div>`).join("")}</div>
-    <div style="margin-top:16px; display:flex; gap:8px;">
+    <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="btn" id="new-char">New Character</button>
+      <button class="btn secondary" id="open-library">📖 The Library</button>
       <button class="btn secondary" id="export-save">Export saves</button>
       <button class="btn secondary" id="import-save">Import</button>
     </div>
@@ -633,6 +634,7 @@ function renderRoster() {
   const sw = document.getElementById("switch-player");
   if (sw) sw.onclick = () => renderPlayerPick();
   document.getElementById("new-char").onclick = () => renderCreate();
+  document.getElementById("open-library").onclick = () => renderLibrary();
   document.getElementById("export-save").onclick = () => {
     const chars2 = listCharacters();
     const blob = new Blob([exportSave(chars2[0]?.id, profile.playerKey)], { type: "application/json" });
@@ -2754,6 +2756,140 @@ function renderQuestLog() {
   document.getElementById("ql-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
+// ---------- SNG-061: THE LIBRARY (the world's guide — open, readable, no discovery gate) ----------
+// Renders the authored lore as readable prose, browsable by category, with THE GREAT CIRCLE shown
+// as a readable thing (not just a gate). GM-EYES-ONLY / hooks / secret fields are FILTERED from
+// every render — the Library is the player's book, never the GM's. Distinct from the discovered
+// Codex (what THIS character has actually found), which keeps its discovery gate.
+
+const LIBRARY_INDEX = [
+  { cat: "Peoples & Traditions", entries: [
+    { id: "great_circle", label: "The Great Circle", kind: "circle" },
+    { id: "reaches", label: "The Twelve Reaches", path: "content/packs/valley/lore/the_twelve_reaches.json", kind: "json" },
+  ] },
+  { cat: "The World", entries: [
+    { id: "framing", label: "The Shape of the World", path: "content/packs/valley/lore/world_framing.json", kind: "json" },
+    { id: "coordinate", label: "The Coordinate World & the Center", path: "content/packs/valley/lore/the_coordinate_world.json", kind: "json" },
+    { id: "poles", label: "Pole & Intensity", path: "content/packs/valley/lore/the_pole_intensity_model.json", kind: "json" },
+  ] },
+  { cat: "The Valley", entries: [
+    { id: "primer", label: "A Valley Primer", path: "content/packs/valley/lore/valley_primer.md", kind: "md" },
+    { id: "precursors", label: "The Precursors", path: "content/packs/valley/lore/precursors.md", kind: "md" },
+  ] },
+  { cat: "Powers & Crafts", entries: [
+    { id: "powers", label: "The Power Systems", path: "content/packs/valley/lore/power_systems.md", kind: "md" },
+    { id: "roles", label: "Universal Roles", path: "content/packs/valley/lore/universal_roles.json", kind: "json" },
+    { id: "game", label: "The Game & the Coin", path: "content/packs/valley/lore/the_game_and_coin.json", kind: "json" },
+    { id: "arcs", label: "Greater Arcs", path: "content/packs/valley/lore/greater_arcs.json", kind: "json" },
+  ] },
+];
+
+const _libCache = {};
+async function libFetch(path, kind) {
+  if (_libCache[path] !== undefined) return _libCache[path];
+  try { const res = await fetch(path); _libCache[path] = res.ok ? (kind === "md" ? await res.text() : await res.json()) : null; }
+  catch { _libCache[path] = null; }
+  return _libCache[path];
+}
+
+// GM-only / meta keys never shown to the player.
+const LIB_SKIP = /^(schemaVersion|id|kind|note|designNote|buildPlan|buildNeeds.*|owed|migration|status|version|packId)$/i;
+const LIB_SECRET = /(gm[_A-Z]|gmeyes|eyes.?only|secret|hidden|hook|mandate|internal|_pat|token|guidance)/i;
+function libSkipKey(k) { return LIB_SKIP.test(k) || LIB_SECRET.test(k); }
+function libPretty(k) { return String(k).replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b\w/g, c => c.toUpperCase()); }
+
+/** Generic lore → readable HTML. Walks objects/arrays into headings + prose; filters GM fields. */
+function loreToHtml(value, depth = 0) {
+  if (value == null) return "";
+  if (typeof value === "string") return `<p class="lore-p">${esc(value)}</p>`;
+  if (typeof value === "number" || typeof value === "boolean") return `<p class="lore-p">${esc(String(value))}</p>`;
+  if (Array.isArray(value)) {
+    if (!value.length) return "";
+    if (value.every(v => typeof v === "string")) return `<ul class="lore-list">${value.map(v => `<li>${esc(v)}</li>`).join("")}</ul>`;
+    return value.map(v => {
+      if (v && typeof v === "object") {
+        const title = v.name || v.title || v.label || v.people || v.craft || v.role || v.id;
+        return `<div class="lore-entry">${title ? `<h4 class="lore-h">${esc(libPretty(title))}</h4>` : ""}${loreToHtml(stripTitle(v), depth + 1)}</div>`;
+      }
+      return loreToHtml(v, depth + 1);
+    }).join("");
+  }
+  if (typeof value === "object") {
+    return Object.entries(value).filter(([k]) => !libSkipKey(k)).map(([k, v]) => {
+      const H = depth <= 0 ? "h3" : "h4";
+      if (typeof v === "string" || typeof v === "number" || typeof v === "boolean")
+        return `<div class="lore-field"><span class="lore-key">${esc(libPretty(k))}:</span> ${esc(String(v))}</div>`;
+      const inner = loreToHtml(v, depth + 1);
+      return inner ? `<div class="lore-section"><${H} class="lore-h">${esc(libPretty(k))}</${H}>${inner}</div>` : "";
+    }).join("");
+  }
+  return "";
+}
+function stripTitle(o) { const c = { ...o }; for (const k of ["name", "title", "label"]) delete c[k]; return c; }
+
+/** Inline markdown emphasis on already-escaped text: **bold**, *italic* / _italic_. */
+function libInline(escaped) {
+  return escaped
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>")
+    .replace(/\b_([^_\n]+)_\b/g, "<em>$1</em>");
+}
+
+/** Minimal markdown → HTML for the .md lore (headings, lists, paragraphs, inline emphasis). */
+function libMdToHtml(md) {
+  const lines = String(md || "").split(/\r?\n/);
+  let html = "", inList = false;
+  const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
+  const ln = s => libInline(esc(s));
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    if (/^#{3,}\s/.test(line)) { closeList(); html += `<h4 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h4>`; }
+    else if (/^##\s/.test(line)) { closeList(); html += `<h3 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h3>`; }
+    else if (/^#\s/.test(line)) { closeList(); html += `<h2 class="lore-h">${ln(line.replace(/^#+\s/, ""))}</h2>`; }
+    else if (/^[-*]\s/.test(line)) { if (!inList) { html += "<ul class='lore-list'>"; inList = true; } html += `<li>${ln(line.replace(/^[-*]\s/, ""))}</li>`; }
+    else if (!line.trim()) { closeList(); }
+    else { closeList(); html += `<p class="lore-p">${ln(line)}</p>`; }
+  }
+  closeList();
+  return html;
+}
+
+/** The great circle, rendered as a readable centerpiece + the 24 peoples with their crafts. */
+function libGreatCircle() {
+  const idx = CONTENT.traditionIndex;
+  if (!idx) return "<div class='insight'>The great circle is not loaded.</div>";
+  const circle = domainCircleSVG(idx, { selectable: () => false, centerTop: "the great circle", centerSub: "twelve axes · twenty-four peoples" });
+  const rows = ringOrder(idx).map(t => { const tr = idx.byId?.[t]; const st = (idx.stations || []).find(s => s.traditionId === t);
+    return tr ? `<div class="lore-entry"><h4 class="lore-h">${esc(tr.name || t)}${tr.craft ? ` <span class="hint">— ${esc(tr.craft)}</span>` : ""}</h4>
+      <div class="lore-field"><span class="lore-key">Pole:</span> ${esc(st?.pole || tr.pole || "?")} · <span class="lore-key">Across the ring:</span> ${esc(traditionLabel(antipodeOf(t, idx)))}</div>
+      ${tr.civilization ? `<p class="lore-p">${esc(tr.civilization)}</p>` : ""}${tr.aesthetic ? `<p class="lore-p"><em>${esc(tr.aesthetic)}</em></p>` : ""}</div>` : ""; }).join("");
+  const folk = (CONTENT.traditions?.folkTraditions || []).map(f => `<div class="lore-field"><span class="lore-key">${esc(f.name || f.traditionId)}:</span> ${esc(f.aesthetic || "a Valley folk-craft, open to all")}</div>`).join("");
+  return `${circle}
+    <p class="lore-p">Twelve axes of the world, each a tension between two peoples — and every craft sits directly across the ring from its antithesis. Kin stand beside kin; the far pole of what you are is closed to you, reachable only by the great braids.</p>
+    <h3 class="lore-h">The Twenty-Four Peoples</h3>${rows}
+    ${folk ? `<h3 class="lore-h">The Valley's Folk Crafts (open to all)</h3>${folk}` : ""}`;
+}
+
+async function renderLibrary(catIdx = 0, entryId = null) {
+  const cat = LIBRARY_INDEX[catIdx] || LIBRARY_INDEX[0];
+  const entry = (cat.entries.find(e => e.id === entryId)) || cat.entries[0];
+  let body = "";
+  if (entry.kind === "circle") body = libGreatCircle();
+  else { const data = await libFetch(entry.path, entry.kind);
+    body = data == null ? "<div class='insight'>This entry could not be loaded.</div>"
+      : entry.kind === "md" ? libMdToHtml(data) : loreToHtml(data, 0); }
+  chrome(`<div class="screen" style="max-width:820px">
+    <h2>📖 The Library <span class="hint" style="text-transform:none">— the world's guide, open to read</span></h2>
+    <div class="library-cats">${LIBRARY_INDEX.map((c, i) => `<button class="lib-cat ${i === catIdx ? "on" : ""}" data-libcat="${i}">${esc(c.cat)}</button>`).join("")}</div>
+    <div class="library-entries">${cat.entries.map(e => `<button class="lib-entry ${e.id === entry.id ? "on" : ""}" data-libentry="${esc(e.id)}">${esc(e.label)}</button>`).join("")}</div>
+    <div class="library-body"><h3 class="lore-title">${esc(entry.label)}</h3>${body}</div>
+    <button class="btn secondary" id="lib-back" style="margin-top:14px">Back</button>
+  </div>`);
+  for (const b of app.querySelectorAll("[data-libcat]")) b.onclick = () => renderLibrary(+b.dataset.libcat, null);
+  for (const b of app.querySelectorAll("[data-libentry]")) b.onclick = () => renderLibrary(catIdx, b.dataset.libentry);
+  document.getElementById("lib-back").onclick = () => { if (character) renderPlay(character.activeScene?.lastTurn || null, {}); else renderRoster(); };
+}
+
 // ---------- codex: the character's knowledge graph ----------
 
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
@@ -3271,8 +3407,9 @@ function renderPlay(turn, opts = {}) {
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${rules.recovery?.breather?.energy ?? 10} energy, 1h)</button>
       <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${rules.recovery?.sleep?.energy ?? 40} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
     </section>
-    <section><h3>Codex</h3>
-      <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} cataloged — open</button>
+    <section><h3>Codex &amp; Library</h3>
+      <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>
+      <button class="opt" id="open-library" style="display:block; width:100%; margin-top:6px">📖 The Library — read the world</button>
     </section>
   </div>`;
 
@@ -3493,6 +3630,7 @@ function renderPlay(turn, opts = {}) {
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
   const qlBtn = document.getElementById("open-questlog"); if (qlBtn) qlBtn.onclick = () => renderQuestLog();
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
+  const libBtn = document.getElementById("open-library"); if (libBtn) libBtn.onclick = () => renderLibrary();
   const charBtn = document.getElementById("open-character"); if (charBtn) charBtn.onclick = () => renderCharacterScreen();
   const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();
   const ff = document.getElementById("freeform-input");

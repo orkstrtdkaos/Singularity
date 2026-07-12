@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "the_heartroot",
+  "name": "The Heartroot",
+  "regionId": "the_quickwood",
+  "communityId": "rootkin.heartroot",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.1,
+    0.0,
+    0.8,
+    0.0,
+    0.0,
+    0.4
+  ],
+  "spectrum": {
+    "death_life": 0.8,
+    "destruction_creation": 0.4,
+    "chaos_order": -0.1
+  },
+  "tags": [
+    "rootkin",
+    "life",
+    "city",
+    "grown",
+    "sacred",
+    "home"
+  ],
+  "connections": [
+    "grovehome",
+    "the_slow_orchard",
+    "the_greenward"
+  ],
+  "descriptionSeed": "A city that was GROWN. Not built from wood — grown, over four hundred years, and still growing, and the Rootkin who planted its first hall are alive and consider it a promising start. The halls widen a finger's breadth a year. The doors are living wood and know you after the third visit. Everything here is on a timescale that makes visitors feel like weather — brief, loud, and not really the point. It is the least anxious place in the world and it will drive you slowly out of your mind.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Rootkin who answer a question next week and consider that prompt; a grown hall that has decided it does not like you; saplings who are people and are three.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A section of the city has begun growing WRONG and nobody will say the word 'sick'",
+    "A visitor promised something forty years ago and the city remembers, and the visitor is back"
+  ],
+  "map": {
+    "x": 620,
+    "y": 200
+  },
+  "poleIntensity": 0.8,
+  "startingLocation": true
+}

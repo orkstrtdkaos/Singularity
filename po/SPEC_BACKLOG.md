@@ -782,3 +782,25 @@ Each path carries `tradition` + `grantsAbility` + an authored `outcome` (so the 
 **Erik test:** "Have Brooklyn play the prologue — verify she never picks a domain from a list, that the scene tells her who she turned out to be and why, that she chose and named the companion who showed up, and that she can adjust before committing."
 
 *Supersedes the SNG-059 dropdown builder (SNG-059's four components remain the REQUIREMENTS; this is the delivery). Absorbs SNG-039 onboarding.*
+---
+
+## SNG-063 — Creation content + the ORDER fix (domains gate skills; origin ≠ starting location)
+
+**Erik-found in live play 2026-07-11 (creation screen):** *"still the 3 starting locations... a limited set of backgrounds. Plus you can choose skills before you get through your domain choices — that's backwards."* 🔧 CCode. **Content AUTHORED.** Aevi PO.
+
+**Verified at HEAD:** origins and backgrounds were **HARDCODED in app.js** (3 origins @ ~L1272, 5 `BACKGROUNDS` @ ~L1236) — no content file existed. Now authored:
+- **`content/packs/core/rules/origins.json` — 27 origins** (was 3).
+- **`content/packs/core/rules/backgrounds.json` — 15 backgrounds** (was 5).
+
+**🔑 THE UNLOCK — ORIGIN ≠ STARTING LOCATION.** They were fused; separating them is the fix and it makes the world large immediately:
+- **ORIGIN = WHICH PEOPLE YOU ARE FROM.** All 24 pole-peoples + the 3 Valley folk-traditions. It grants **NATIVE access** to that people's tradition (SNG-055) and seeds your position on the great circle. Every origin carries a `whyYouAreHere` — nobody is in the Valley by accident, and the GM should use it.
+- **STARTING LOCATION = where you begin play = the Valley, always** (the only playable region until SNG-060). **A character can be an Umbral who came to the Valley** — native Umbral craft, Valley streets. The world feels big without waiting on SNG-060.
+- **BACKGROUND = WHAT YOU DID**, orthogonal to origin. A Cogitant soldier and a Marcher healer are both more interesting than the obvious pairing. Do not gate backgrounds by origin.
+
+**⛔ THE ORDER FIX (the actual bug — this is a hard rule, not a preference):**
+**NAME → FORM → ORIGIN → DOMAINS → ABILITIES → COMPANION.**
+Abilities are **GATED BY DOMAINS** (SNG-055: primary full · adjacent minus capstones · secondary tier III · tertiary tier II · penalized ring · **antipode CLOSED**). Offering an ability list *before* domains are chosen shows the player skills they may not be able to learn, and makes the gates unenforceable. **Domains must be locked before a single ability is offered, and the ability list must then be FILTERED to what those domains actually permit.** Origin comes first because it seeds the domain (native access). Same rule in BOTH doors — in the Prologue (SNG-062) the domains crystallize from play and *then* the granted abilities are confirmed; in quick-start the player picks domains and *then* sees only legal abilities.
+
+**Build:** read origins + backgrounds from content (delete the hardcoded arrays); enforce the order; filter the ability list by the chosen domains; show the origin's `whyYouAreHere` and pass it to the GM as opening context.
+
+**Erik test:** "Start creation — verify you pick an origin from many peoples (not 3 places), a background from a real list, and that you CANNOT see or pick abilities until your domains are set — and then only ones your domains allow."

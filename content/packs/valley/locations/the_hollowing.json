@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_hollowing",
+  "name": "The Hollowing",
+  "regionId": "the_quickwood",
+  "communityId": "ashwarden.hollowing",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    -0.6,
+    0.0,
+    0.0,
+    -0.3
+  ],
+  "spectrum": {
+    "death_life": -0.6,
+    "destruction_creation": -0.3,
+    "chaos_order": 0.2
+  },
+  "tags": [
+    "ashwarden",
+    "death",
+    "border",
+    "grey",
+    "liminal",
+    "dangerous"
+  ],
+  "connections": [
+    "the_greenward"
+  ],
+  "descriptionSeed": "Where the Quickwood stops and the grey begins. This is the Ashwardens' edge — the near-march of the Palelands — and it is not a wasteland. It is TENDED. Things end here, correctly and on time, and the Ashwardens walk it with the same care the Rootkin walk their orchard. The two peoples are antipodes and they have a working border and a mutual, exhausted respect, and each thinks the other is making a category error about the nature of existence.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Ashwardens who are unhurried and kind and completely at peace with your mortality; things ending on schedule; something that is NOT ending on schedule, and that is the problem.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "Something in the Hollowing is refusing to end, and the Ashwardens want help, and the Rootkin are pretending not to be delighted",
+    "A Rootkin has crossed into the Hollowing to save something, and that is, by treaty, a very serious act"
+  ],
+  "map": {
+    "x": 570,
+    "y": 330
+  },
+  "poleIntensity": 0.7
+}

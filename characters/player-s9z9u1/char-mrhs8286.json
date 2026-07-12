@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.24724912308234775
+    "spectrumId": -0.22988666692823034
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -222,113 +222,85 @@
       {
         "summary": "Both skinners brought to a clean edge; Silas settles into the backlog rhythm, hand-axe and froe still waiting.",
         "narration": "The two skinners are next. You pick up the first one and find the edge with your thumb — not dull so much as rolled, the kind of wear that comes from someone stropping against the grain — and you set it bevel-down on the flat stone with a grin you don't quite suppress. Three people. A blacksmith who used to hunt, a farmer's son who wants to prove something, and you. The north wood is going to be interesting.\n\nPell doesn't notice the grin, or notices and files it away. She's back at her own vise, the file moving in the short, precise strokes of someone addressing a specific problem rather than running a general course. Her shoulders are set square and her left hand braces with the kind of practiced tension that doesn't waste effort — years of forge-habit in the geometry of it. You clock it the way you'd clock any good technique: once, honestly, then back to your own work.\n\nThe first skinner comes right with two passes on the stone and three on the strop. You hold it up, catch the light from the open front of the shop, tilt it until the bevel shows clean. Good. You set it on the bench and pick up the second. The rhythm is easy now — the slip stone, the strop, the quarter-turn check. Huginn shifts on the hook-row, one foot to the other, watching something on the lane that apparently concludes to its satisfaction. It settles.\n\nThe hand-axe is going to be the interesting one. You can already see the hairline in the eye from here, and you leave it for last, working the second skinner down to a clean edge while the forge warmth does its job on your back. The arrangement sits comfortable in your chest — not a prize, just a thing that came together the way good work sometimes does, one honest assessment meeting another."
+      },
+      {
+        "summary": "Pell describes the north wood from memory — wet ground, a granite shelf, boar likely in the lower section.",
+        "narration": "The hand-axe can wait another few minutes. You're working the second skinner along the flat stone when you pitch your voice across the shop..."
       }
     ],
     "lastTurn": {
-      "narration": "The two skinners are next. You pick up the first one and find the edge with your thumb — not dull so much as rolled, the kind of wear that comes from someone stropping against the grain — and you set it bevel-down on the flat stone with a grin you don't quite suppress. Three people. A blacksmith who used to hunt, a farmer's son who wants to prove something, and you. The north wood is going to be interesting.\n\nPell doesn't notice the grin, or notices and files it away. She's back at her own vise, the file moving in the short, precise strokes of someone addressing a specific problem rather than running a general course. Her shoulders are set square and her left hand braces with the kind of practiced tension that doesn't waste effort — years of forge-habit in the geometry of it. You clock it the way you'd clock any good technique: once, honestly, then back to your own work.\n\nThe first skinner comes right with two passes on the stone and three on the strop. You hold it up, catch the light from the open front of the shop, tilt it until the bevel shows clean. Good. You set it on the bench and pick up the second. The rhythm is easy now — the slip stone, the strop, the quarter-turn check. Huginn shifts on the hook-row, one foot to the other, watching something on the lane that apparently concludes to its satisfaction. It settles.\n\nThe hand-axe is going to be the interesting one. You can already see the hairline in the eye from here, and you leave it for last, working the second skinner down to a clean edge while the forge warmth does its job on your back. The arrangement sits comfortable in your chest — not a prize, just a thing that came together the way good work sometimes does, one honest assessment meeting another.",
-      "sceneSummary": "Both skinners brought to a clean edge; Silas settles into the backlog rhythm, hand-axe and froe still waiting.",
+      "narration": "The hand-axe can wait another few minutes. You're working the second skinner along the flat stone when you pitch your voice across the shop...",
+      "sceneSummary": "Pell describes the north wood from memory — wet ground, a granite shelf, boar likely in the lower section.",
       "choices": [
         {
-          "label": "Tackle the hand-axe next — the hairline in the eye needs careful judgment about whether it's safe to sharpen or needs to go to the fire first. Ask Pell's read on it.",
+          "label": "Assess the hand-axe hairline before touching it with a tool",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {
-            "spectrumId": -0.3
-          },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "consult"
+            "assess"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Work the hand-axe on your own judgment — assess the hairline, decide whether the eye needs a wedge or a wrap before you touch the edge, and handle it without interrupting Pell.",
+          "label": "Move straight to the froe's sprung collar — re-seat it if you can",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {
-            "spectrumId": -0.4
-          },
           "difficulty": 15,
           "intentTags": [
-            "careful",
-            "study",
-            "plan"
+            "repair",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "While the rhythm is easy, open a line of conversation with Pell — ask how long it's been since she ran the north meadows and what she remembers about the wood up there.",
+          "label": "Ask Pell how much Corvin actually understands about what a sounder can do",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.1
-          },
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "help"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use Order-Sense on the hand-axe before touching it — read the hairline's structure to know exactly how deep it runs and whether edge-work will open it.",
+          "label": "Your own action",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.5
-          },
           "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "intentTags": [],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Silas shirtless at the sharpening station.",
+        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "At her own vise, file moving in short precise strokes, back to her own work."
+            "state": "Back at her own vise, file moving in short precise strokes, resumed after answering."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the iron hook-row, watching the lane."
+            "state": "Settled on the iron hook-row, shifted weight once, watching the lane."
           }
         ],
         "objects": [
           "Drawknife — corrected, set aside",
-          "Billhook — face-work complete, in the spare vise",
-          "Two skinning blades — both now sharpened, on the bench",
+          "Billhook — face-work complete, set aside",
+          "Two skinning blades — both sharpened, on the bench",
           "Hand-axe — hairline in the eye, still waiting",
           "Froe — sprung collar, at the bottom of the pile",
           "Sharpening station: flat stone, slip, leather strop",
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
           "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil thinned from handling), light point"
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil-wiped), light point"
         ],
         "threads": [
           "Hand-axe hairline in the eye — needs assessment before edge work",
-          "Froe sprung collar — still waiting at the bottom of the pile",
+          "Froe sprung collar — last structural piece in the backlog",
           "Corvin still to be found and invited — east furlong, not yet contacted",
           "Hunt departs once backlog is clear"
         ]
@@ -338,44 +310,66 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Working her own vise in comfortable parallel — the arrangement settled, no need to manage it.",
-          "statusNote": "At her forge on the south lane — working her own backlog in parallel with Silas.",
-          "relationshipDelta": 0
+          "note": "Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that the granite shelf is bad ground to be caught between boar and.",
+          "learned": [
+            "Stopped hunting the north meadows four to five years ago when the forge had enough work",
+            "The north wood's lower section stays wet from slope-fed springs — prime rooting ground for boar",
+            "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south",
+            "The boar sounder is likely working the wet lower section, not the granite shelf"
+          ],
+          "skillsObserved": [
+            "practical field knowledge",
+            "honest risk assessment"
+          ],
+          "statusNote": "At her forge on the south lane — working her own backlog, file in hand."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "north-wood",
+          "label": "The North Wood",
+          "kind": "place",
+          "fact": "Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite shelf is bad ground to be caught between boar and.",
+          "links": [
+            "millbrook",
+            "aldric-provisioning-deal",
+            "pell",
+            "corvin"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quarter-hour of steady skinner work at the sharpening station."
+        "why": "A brief working conversation at the sharpening station"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning. Silas shirtless at the sharpening station.",
+      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Spring air, forge-warm inside. Mid-morning.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "At her own vise, file moving in short precise strokes, back to her own work."
+          "state": "Back at her own vise, file moving in short precise strokes, resumed after answering."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the iron hook-row, watching the lane."
+          "state": "Settled on the iron hook-row, shifted weight once, watching the lane."
         }
       ],
       "objects": [
         "Drawknife — corrected, set aside",
-        "Billhook — face-work complete, in the spare vise",
-        "Two skinning blades — both now sharpened, on the bench",
+        "Billhook — face-work complete, set aside",
+        "Two skinning blades — both sharpened, on the bench",
         "Hand-axe — hairline in the eye, still waiting",
         "Froe — sprung collar, at the bottom of the pile",
         "Sharpening station: flat stone, slip, leather strop",
         "Iron hooks in rows along the shop wall",
         "Coils of heavier chain (full)",
         "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-        "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil "
+        "Three spear-tips on the lower shelf — heavy boar-point (oiled), mid-weight (oil-"
       ],
       "threads": [
         "Hand-axe hairline in the eye — needs assessment before edge work",
-        "Froe sprung collar — still waiting at the bottom of the pile",
+        "Froe sprung collar — last structural piece in the backlog",
         "Corvin still to be found and invited — east furlong, not yet contacted",
         "Hunt departs once backlog is clear"
       ]
@@ -518,7 +512,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Silas introduced himself with a light, self-aware remark about his order of attention — Pell stopped filing, turned, took in Huginn and then him, and gave her name back without cer",
         "[d1] Received Aldric's name from Silas without visible change of expression — confirmation accepted. Now waiting for the ask.",
         "[d1] Silas admired her craft and asked if she hunts — she confirmed a past hunting life, eased her posture, and opened the transaction. Now waiting to hear what he needs.",
         "[d1] Silas offered forge-labor in exchange for hunting company north of the village. Pell absorbed the squall without comment, named her two pressing problems (edge-work backlog, snare ",
@@ -527,28 +520,29 @@
         "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th",
         "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look",
         "[d1] Agreed to the three-way hunt arrangement — modification on the light point at cost, no margin, on the condition a capable person is beside Corvin in the north wood. Committed to wa",
-        "[d1] Working her own vise in comfortable parallel — the arrangement settled, no need to manage it."
+        "[d1] Working her own vise in comfortable parallel — the arrangement settled, no need to manage it.",
+        "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that "
       ],
       "knownFacts": [
-        "Accepts correct technique wordlessly — that one glance was the whole review",
-        "A young man named Corvin from the east furlong visits repeatedly to handle the mid-weight spear-tip but cannot afford it",
-        "Pell's read: the light point won't serve boar work, and Corvin probably doesn't know yet what he doesn't know",
         "Corvin claims there's a boar sounder working the north wood — he wants to be the one who handles it",
         "The modification Silas described (thickened sleeve, reinforced spine) is work Pell can do",
         "Corvin's coin may not cover both the point and the modification",
         "Corvin being brave in the wrong moment is a specific concern — she has read him carefully enough to name it as a risk",
-        "She supplies the modification at cost when the safety calculus changes — practical ethics, not charity"
+        "She supplies the modification at cost when the safety calculus changes — practical ethics, not charity",
+        "Stopped hunting the north meadows four to five years ago when the forge had enough work",
+        "The north wood's lower section stays wet from slope-fed springs — prime rooting ground for boar",
+        "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south"
       ],
       "skillsObserved": [
-        "vise work, filing",
-        "terse observation",
         "accurate practical assessment",
         "honest accounting of customer limitations",
         "risk assessment",
-        "practical negotiation"
+        "practical negotiation",
+        "practical field knowledge",
+        "honest risk assessment"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — working her own backlog in parallel with Silas.",
+      "statusNote": "At her forge on the south lane — working her own backlog, file in hand.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -890,22 +884,39 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "north-wood": {
+        "id": "north-wood",
+        "label": "The North Wood",
+        "kind": "place",
+        "facts": [
+          "[d1] Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite sh"
+        ],
+        "links": [
+          "millbrook",
+          "aldric-provisioning-deal",
+          "pell",
+          "corvin"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 15.000890406615998,
-    "cerebral": 6.513934211302963,
-    "social": 17.3895640368597,
-    "generous": 6.484685383825872,
-    "cautious": 4.76204630275031
+    "strategic": 15.925885954582919,
+    "cerebral": 6.481364540246448,
+    "social": 17.3026162166754,
+    "generous": 7.452261956906743,
+    "cautious": 4.7382360712365585
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "good_samaritan"
   ],
-  "actionCount": 21,
+  "actionCount": 22,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -927,8 +938,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783898154785,
-  "rev": 39,
+  "updatedAt": 1783898320469,
+  "rev": 40,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

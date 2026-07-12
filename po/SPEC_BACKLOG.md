@@ -1266,3 +1266,49 @@ The engine is pure and headless-testable (Law: `engine/*` is pure logic). A sim 
 **Erik test:** "Run the harness — see, in one table, at what level each difficulty stops mattering, whether energy constrains anything, and how long a real campaign takes to hit the cap."
 
 *This is the single highest-leverage engineering task left. Every balance conversation until now has been vibes; this makes it arithmetic.*
+---
+
+## SNG-079 — Difficulty by AXIAL MISALIGNMENT: the great circle IS the difficulty curve ⭐
+
+**Erik-directed 2026-07-12:** *"balance the game so the challenges are appropriate to the level, and some things are just beyond your level. That means some regions are not really able to be explored until you are powerful enough to overcome the disadvantages due to axial misalignment."* 🔧 CCode. Aevi PO. **Depends on SNG-078 (the harness) to tune the numbers.**
+
+**This is the best structural idea in the balance space and half of it already exists.** Spectral fit is already ±25 and every location already carries `poleIntensity` (0.05 at The Crossing → **0.98 at the Blaze / the Unlit Deep / the Grand Lattice**). It simply doesn't **bite**, because base chance is so inflated (attr 4 = 80 alone, SNG-078) that −25 barely dents it.
+
+### The model
+1. **Misalignment penalty scales with `poleIntensity` × ring-distance from the place's pole.**
+   *The Crossing (0.05) is easy for everyone — that IS the centre's meaning. A pure locus (0.98) is brutal for anyone not of that pole.* **Your ANTIPODE region is the hardest place in the world FOR YOU — and it is a different place for every character.** The map becomes a difficulty map, and the difficulty map is *personal*.
+2. **Widen the spectral band** so it can actually gate (±25 → a scaled range the harness sizes). A Blazeborn in the Unlit Deep should be *crushed* until they are strong enough — or braided enough — to bear it.
+3. **Lower base chance + widen the difficulty band** (SNG-078: `attributeMultiplier` 20 → ~8–10; difficulty 0/15/30 → a range that still means something at high level). **Without this, no gate can hold.**
+4. **Some things are simply BEYOND you, and the game must say so.** A low-level character attempting a pure-locus action should see a chance near the 5% floor and be *told* why: *"this place is against you in every way you are."* **A refusal that explains itself is a signpost; a silent 5% is a mystery.**
+5. **Challenge scales with region danger**, not only with the GM's 0/15/30. `[CCODE: propose the coupling]`
+
+### Why this is right and not just harder
+It makes the world's *geography* the progression, without a single artificial gate. **You don't unlock a region — you become able to survive it.** And the way you become able is either to grow, or to *change what you are* (drift — see the §9 open question), or to **braid** (hold both poles). **The cross-pole braid stops being a curiosity and becomes the key to the far side of the world.**
+
+**Erik test:** "Walk toward a pure locus at low level — verify actions there are genuinely brutal and the game TELLS you why. Then verify The Crossing is welcoming to everyone, and your antipode region is the worst place in the world for you specifically."
+
+---
+
+## SNG-080 — The world must PUSH (nothing is happening to Erik) 🔴
+
+**Erik, 2026-07-12:** *"I haven't gotten into ANY fights or anything yet. I wanted more things to start happening but haven't had a chance to experience it."* 🔧 CCode. Aevi PO.
+
+### PWSV — diagnosed, and it is not (only) a bug
+**Erik has never left the safest place in the world.** Millbrook is a peaceful farming village, and **at Millbrook exactly ZERO fight-capable encounters are eligible** — the 8 that can fire there are 3 beneficial, 2 benign, 2 beautiful, 1 theft. **No fight. No danger. No chase.** That is *correct* for a farming village.
+**The real defect: the world is REACTIVE. It waits for him.** Nothing pushes him out, nothing comes to him, and nothing tells him where danger lives.
+*(Also: `millbrook.json` has **no `dangerLevel` field at all** → floored to the gentlest tier. `[CCODE: audit — how many original locations are missing it? CI should require it.]`)*
+
+### Fix — three pressures, all cheap, all using systems that already exist
+1. **THE VILLAIN ACTS.** `legends.js` has the deployment beats (`villain_escalation`) and **Overseer Grael's thread is already live in Erik's world** (Fendt, the ledger, the water crisis). **Escalation must be on a CLOCK, not on the player's initiative.** If Erik ignores it, Grael should *win* — another name on the board, the water worsens, and it **arrives at him**. *(The Edge District Ledger's "you walked away" outcome already specifies exactly this. Nothing is firing it.)*
+2. **THE WORLD REACHES HIM.** `worldtick` already dates and propagates events and has `impactsLocal`. **Use it to push:** a propagating consequence should surface as a *scene*, not just a line in the digest. **Riffraff arrive. A messenger finds him. A body turns up.** The away-digest tells him the world moved; it should sometimes move *onto him*.
+3. **QUEST HOOKS COME TO HIM.** Locations carry `questSeeds` and the GM is told to weave them "when the scene needs drive." **That is too passive.** After N quiet turns, the GM should be *instructed* to introduce pressure — a hook, an arrival, a demand. **A quiet village is a setting, not a scene.**
+
+### The pacing rule (the thing that is actually missing)
+**Track quiet turns. After a threshold, the world ACTS.** Escalating: a rumor → a person with a problem → a hook that will not wait → something arriving. **The player should never have to ask the world to be interesting.**
+- Respect the register and the danger of the place — *pressure in Millbrook is a frightened neighbour, not a bandit ambush.* **Danger lives elsewhere, and the game must make that legible and desirable, not merely true.**
+- Suppress during a live scene/quest climax (as SNG-075 does).
+
+### Also: make danger FINDABLE
+He cannot fight because he does not know where fighting is. **The map should show danger** (SNG-046 Layer 1: `dangerLevel` per location — colour it). **The GM should give him reasons to go** — the Disputed Zone is on his doorstep and nothing has invited him into it.
+
+**Erik test:** "Sit in Millbrook doing ordinary things — verify the world does not let you be bored: within a handful of turns something arrives, someone needs something, or Grael's thread tightens. Then verify the map tells you where the dangerous places are."

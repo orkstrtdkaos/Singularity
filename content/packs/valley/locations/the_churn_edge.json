@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "the_churn_edge",
+  "name": "The Churn Edge",
+  "regionId": "unspooling",
+  "communityId": "churnfolk.edge",
+  "axisVector": [
+    0.0,
+    -0.1,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.5,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "chaos_order": -0.5,
+    "space_time": 0.3,
+    "falsehood_truth": -0.1
+  },
+  "tags": [
+    "churnfolk",
+    "chaos",
+    "border",
+    "liminal",
+    "unstable",
+    "road"
+  ],
+  "connections": [
+    "spindrift_hollow",
+    "the_gralloch",
+    "tumbledown_market",
+    "the_wend"
+  ],
+  "descriptionSeed": "The margin where the Unspooling starts unspooling. Things here are mostly reliable, which is the local way of saying that they are usually reliable, which is the local way of saying that they were reliable the last time anyone checked. The Churnfolk find the surface world's expectation of consistency charmingly superstitious.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Edge-folk who are cheerful about the unreliable; a road that was here yesterday; someone from the ordered world having a very bad afternoon.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "The Edge is creeping outward and the Churnfolk think this is fine and interesting",
+    "Something reliable has appeared in the Churn, and it should not have, and it is not moving"
+  ],
+  "map": {
+    "x": 440,
+    "y": 395
+  },
+  "poleIntensity": 0.5
+}

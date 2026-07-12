@@ -30,7 +30,7 @@
       "region": "umbral_depths",
       "disposition": {
         "primary": "dark",
-        "secondary": "conceal"
+        "secondary": "falsehood"
       },
       "bearer": "civilization",
       "cultOfPurity": "those who would put out every light — the Unlit",
@@ -50,7 +50,16 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "blazeborn",
+      "adjacent": [
+        {
+          "traditionId": "veilwright",
+          "sharedLeans": [
+            "falsehood"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "blazeborn",
@@ -79,7 +88,58 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "umbral",
+      "adjacent": [
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "rootkin",
@@ -109,7 +169,28 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "ashwarden",
+      "adjacent": [
+        {
+          "traditionId": "churnfolk",
+          "sharedLeans": [
+            "creation"
+          ]
+        },
+        {
+          "traditionId": "threnodist",
+          "sharedLeans": [
+            "life"
+          ]
+        },
+        {
+          "traditionId": "wright",
+          "sharedLeans": [
+            "creation"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "ashwarden",
@@ -138,7 +219,58 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "rootkin",
+      "adjacent": [
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "marcher",
@@ -168,7 +300,22 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "stillhold",
+      "adjacent": [
+        {
+          "traditionId": "mason",
+          "sharedLeans": [
+            "body"
+          ]
+        },
+        {
+          "traditionId": "somatic",
+          "sharedLeans": [
+            "body"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "stillhold",
@@ -198,7 +345,58 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "marcher",
+      "adjacent": [
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "somatic",
@@ -230,7 +428,23 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "cogitant",
+      "adjacent": [
+        {
+          "traditionId": "mason",
+          "sharedLeans": [
+            "body",
+            "concrete"
+          ]
+        },
+        {
+          "traditionId": "marcher",
+          "sharedLeans": [
+            "body"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "cogitant",
@@ -259,7 +473,16 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "somatic",
+      "adjacent": [
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "logical"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "churnfolk",
@@ -289,7 +512,41 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "lattice",
+      "adjacent": [
+        {
+          "traditionId": "wright",
+          "sharedLeans": [
+            "chaos",
+            "creation"
+          ]
+        },
+        {
+          "traditionId": "abyssal",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "horizon",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "rootkin",
+          "sharedLeans": [
+            "creation"
+          ]
+        },
+        {
+          "traditionId": "unmaker",
+          "sharedLeans": [
+            "chaos"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "lattice",
@@ -319,7 +576,59 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "churnfolk",
+      "adjacent": [
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "mechanical",
+            "order"
+          ]
+        },
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "enginewright",
@@ -349,7 +658,59 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "numinous",
+      "adjacent": [
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "mechanical",
+            "order"
+          ]
+        },
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "numinous",
@@ -379,7 +740,23 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "enginewright",
+      "adjacent": [
+        {
+          "traditionId": "figurist",
+          "sharedLeans": [
+            "abstract",
+            "spiritual"
+          ]
+        },
+        {
+          "traditionId": "veilwright",
+          "sharedLeans": [
+            "abstract"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "threnodist",
@@ -405,7 +782,16 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "syllogist",
+      "adjacent": [
+        {
+          "traditionId": "rootkin",
+          "sharedLeans": [
+            "life"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "syllogist",
@@ -431,7 +817,64 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "threnodist",
+      "adjacent": [
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "cogitant",
+          "sharedLeans": [
+            "logical"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "veilwright",
@@ -457,7 +900,28 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "verist",
+      "adjacent": [
+        {
+          "traditionId": "figurist",
+          "sharedLeans": [
+            "abstract"
+          ]
+        },
+        {
+          "traditionId": "numinous",
+          "sharedLeans": [
+            "abstract"
+          ]
+        },
+        {
+          "traditionId": "umbral",
+          "sharedLeans": [
+            "falsehood"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "verist",
@@ -484,7 +948,58 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "veilwright",
+      "adjacent": [
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "abyssal",
@@ -512,7 +1027,34 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "seraphic",
+      "adjacent": [
+        {
+          "traditionId": "churnfolk",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "horizon",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "unmaker",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "wright",
+          "sharedLeans": [
+            "chaos"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "seraphic",
@@ -540,7 +1082,58 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "abyssal",
+      "adjacent": [
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "hourkeeper",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "mason",
@@ -568,7 +1161,23 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "figurist",
+      "adjacent": [
+        {
+          "traditionId": "somatic",
+          "sharedLeans": [
+            "body",
+            "concrete"
+          ]
+        },
+        {
+          "traditionId": "marcher",
+          "sharedLeans": [
+            "body"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "figurist",
@@ -596,7 +1205,23 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "mason",
+      "adjacent": [
+        {
+          "traditionId": "numinous",
+          "sharedLeans": [
+            "abstract",
+            "spiritual"
+          ]
+        },
+        {
+          "traditionId": "veilwright",
+          "sharedLeans": [
+            "abstract"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "horizon",
@@ -609,7 +1234,7 @@
       "region": "the_open_reach",
       "disposition": {
         "primary": "space",
-        "secondary": "move"
+        "secondary": "chaos"
       },
       "bearer": "civilization",
       "cultOfPurity": "those who never arrive anywhere at all — the Unlanded",
@@ -623,7 +1248,34 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "hourkeeper",
+      "adjacent": [
+        {
+          "traditionId": "abyssal",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "churnfolk",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "unmaker",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "wright",
+          "sharedLeans": [
+            "chaos"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "hourkeeper",
@@ -650,7 +1302,58 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "horizon",
+      "adjacent": [
+        {
+          "traditionId": "ashwarden",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "blazeborn",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "enginewright",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "lattice",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "seraphic",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "stillhold",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "syllogist",
+          "sharedLeans": [
+            "order"
+          ]
+        },
+        {
+          "traditionId": "verist",
+          "sharedLeans": [
+            "order"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "unmaker",
@@ -677,7 +1380,28 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "wright",
+      "adjacent": [
+        {
+          "traditionId": "abyssal",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "churnfolk",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "horizon",
+          "sharedLeans": [
+            "chaos"
+          ]
+        }
+      ]
     },
     {
       "traditionId": "wright",
@@ -704,7 +1428,35 @@
         "inRegion": true,
         "teacherOrTome": true
       },
-      "status": "built"
+      "status": "built",
+      "opposite": "unmaker",
+      "adjacent": [
+        {
+          "traditionId": "churnfolk",
+          "sharedLeans": [
+            "chaos",
+            "creation"
+          ]
+        },
+        {
+          "traditionId": "abyssal",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "horizon",
+          "sharedLeans": [
+            "chaos"
+          ]
+        },
+        {
+          "traditionId": "rootkin",
+          "sharedLeans": [
+            "creation"
+          ]
+        }
+      ]
     }
   ],
   "folkTraditions": [
@@ -893,5 +1645,16 @@
   "owed": {
     "corpusDepth": "The 8 newly-built pole-traditions have anchor + core techniques (full rank I–III). They can be DEEPENED later (more techniques, capstones) as their regions come into play — but every tradition is now playable.",
     "combinationPass": "COMPLETE for the current corpus (44 recipes, tiered). New combos accrue as the corpus deepens."
+  },
+  "domainAccessModel": {
+    "note": "SNG-055 — Erik's domain-access model (2026-07-11). Access is a function of DISPOSITIONAL GEOGRAPHY: what you can learn tracks what you are near. Adjacency is computed from shared leans (world_framing: 'adjacency = kinship'); opposite is the other pole of your own axis.",
+    "primary": "Chosen at character build. FULL access, all tiers, no cost penalty.",
+    "adjacentToPrimary": "Free access (no cost penalty) to ALL TIERS EXCEPT the highest (L4-L5 capstones). Being near a people is not being of them — greatness is still theirs to give.",
+    "secondary": "Chosen at character build. Access up to TIER III.",
+    "tertiary": "Chosen at character build; MUST be adjacent to the secondary. Access up to TIER II.",
+    "adjacentToAnyChosen": "Accessible, but with a SKILL-POINT PENALTY (the existing cross-class multiplier). All other gates still apply.",
+    "opposedToPrimaryOrSecondary": "CLOSED. You cannot learn the opposite pole of what you are. The axis is a tension, and you have already chosen your end of it.",
+    "exceptions": "COMBINATION skills (cross-pole braids especially — they are the ONLY sanctioned way to touch your opposite, and that is exactly what makes them meaningful), and abilities granted by ARTIFACT or extreme circumstance. Otherwise: closed is closed.",
+    "designNote": "The closed-opposite rule is what gives the cross-pole braids (harbored_flame, meaning_engine, the_turning_word) their weight: holding an axis WHOLE is forbidden to you by ordinary means and reachable only by braiding. A Blazeborn cannot learn Umbracraft — but a Blazeborn who has genuinely held both can carry The Harbored Flame."
   }
 }

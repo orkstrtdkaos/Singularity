@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "the_quickwood_eaves",
+  "name": "The Quickwood Eaves",
+  "regionId": "the_quickwood",
+  "communityId": "rootkin.eaves",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.1,
+    0.0,
+    -0.2,
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "death_life": 0.4,
+    "chaos_order": -0.2,
+    "concrete_abstract": -0.1
+  },
+  "tags": [
+    "rootkin",
+    "life",
+    "border",
+    "liminal",
+    "wild",
+    "road"
+  ],
+  "connections": [
+    "the_greenward",
+    "dw_the_thinedge",
+    "ent_deepwood",
+    "grovehome"
+  ],
+  "descriptionSeed": "Where the grown city thins into ordinary forest and ordinary forest thins into the Deepwood. The Eaves are the Rootkin's front door and they have deliberately not marked it — you know you have arrived when the trees start being interested in you.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Eave-wardens who were watching you long before you saw them; Deepwood things that come to the edge and no further; travelers who cannot tell where the wild ends and the city begins.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Something has come out of the Deepwood into the Eaves and the wardens have not reported it",
+    "A traveler entered the Eaves a month ago and the trees will not say where they went"
+  ],
+  "map": {
+    "x": 560,
+    "y": 270
+  },
+  "poleIntensity": 0.4
+}

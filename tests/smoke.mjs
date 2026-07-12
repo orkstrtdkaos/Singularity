@@ -33,6 +33,7 @@ import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
+import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
@@ -2425,6 +2426,47 @@ await (async () => {
   check("SNG-075: a sleep/camp beat classifies as REST", classifyNarrativeKind({ why: "bedded down for the night", hoursPassed: 8 }) === "rest" && classifyNarrativeKind({ intentTags: ["camp"], hoursPassed: 8 }) === "rest");
   check("SNG-075: a road/journey beat classifies as TRAVEL", classifyNarrativeKind({ why: "a day on the road", hoursPassed: 10 }) === "travel" && classifyNarrativeKind({ intentTags: ["journey"], hoursPassed: 6 }) === "travel");
   check("SNG-075: plain elapsed time classifies as TIME; a zero-hour beat is NONE", classifyNarrativeKind({ why: "a long talk", hoursPassed: 3 }) === "time" && classifyNarrativeKind({ why: "a quick word", hoursPassed: 0 }) === "none");
+})();
+
+// --- SNG-070: GM corrections — the game self-heals (REPAIR, not WISH) ---
+(() => {
+  const bgs = [{ id: "duelist" }, { id: "craftsman" }];
+  const idx = { byId: { wright: {}, blazeborn: {}, verist: {} } };
+  const locs = { millbrook: { name: "Millbrook" }, the_underlight: { name: "The Underlight" } };
+  const ctx = { backgrounds: bgs, traditionIndex: idx, locations: locs, resolveLocationId, worldDay: 12, nowISO: "2026-07-12T00:00:00Z" };
+  const base = () => ({ background: "craftsman", origin: "wright", domains: { primary: "wright", secondary: null, tertiary: null }, abilities: [{ abilityId: "lightsense", level: 1 }], companions: ["aevi"], companionNames: { aevi: "Spark" }, quests: [{ id: "stuck", structured: true, status: "active", stageIndex: 0, stages: [{ id: "s1" }, { id: "s2" }] }], codex: { topics: { grael: { summary: "old" } } }, npcRegistry: {}, xp: 100, level: 3, currentLocationId: millloc() });
+  function millloc() { return "millbrook"; }
+
+  // REPAIR: a wrong background is corrected, logged, from→to
+  const c1 = base(); const r1 = applyStateOps(c1, [{ op: "correctField", field: "background", to: "duelist", why: "should be a duelist" }], ctx);
+  check("SNG-070: a wrong background is corrected + logged (from → to, why, world-day)", r1.applied.length === 1 && c1.background === "duelist" && c1.corrections.length === 1 && c1.corrections[0].from === "craftsman" && c1.corrections[0].to === "duelist" && c1.corrections[0].worldDay === 12);
+
+  // REFUSE: an advance (xp/level) is refused and NOTHING changes
+  const c2 = base(); const r2 = applyStateOps(c2, [{ op: "correctField", field: "xp", to: 600 }, { op: "correctField", field: "level", to: 10 }], ctx);
+  check("SNG-070: xp/level are REFUSED (repair, not wish) — nothing advances", r2.applied.length === 0 && r2.refused.length === 2 && c2.xp === 100 && c2.level === 3);
+
+  // REPAIR: a domain the game guessed is re-chosen — but held abilities are NOT removed (grandfathered)
+  const c3 = base(); const r3 = applyStateOps(c3, [{ op: "correctDomain", slot: "primary", to: "verist", why: "I chose verist" }], ctx);
+  check("SNG-070: a domain correction re-chooses + does NOT touch held abilities (grandfathered)", r3.applied.length === 1 && c3.domains.primary === "verist" && c3.abilities.length === 1);
+  check("SNG-070: a bogus tradition is refused", applyStateOps(base(), [{ op: "correctDomain", slot: "primary", to: "notapeople" }], ctx).refused.length === 1);
+
+  // REPAIR: remove an entity never acquired; a non-existent one is refused
+  const c4 = base(); const r4 = applyStateOps(c4, [{ op: "removeEntity", kind: "companion", id: "aevi", why: "never met them" }], ctx);
+  check("SNG-070: an unmet companion is removed + logged", r4.applied.length === 1 && c4.companions.length === 0 && !c4.companionNames.aevi);
+  check("SNG-070: removing a non-existent entity is refused, not silently applied", applyStateOps(base(), [{ op: "removeEntity", kind: "companion", id: "ghost" }], ctx).refused.length === 1);
+
+  // REPAIR: unstick a quest; re-anchor a location; fix a codex fact
+  const c5 = base(); applyStateOps(c5, [{ op: "unstickQuest", questId: "stuck", toStage: "s2", why: "stage never advanced" }], ctx);
+  check("SNG-070: a stuck quest can be re-staged", c5.quests[0].stageIndex === 1);
+  const c6 = base(); const r6 = applyStateOps(c6, [{ op: "reanchorLocation", to: "The Underlight", why: "header was wrong" }], ctx);
+  check("SNG-070: a desynced location is re-anchored to a real place (by name)", r6.applied.length === 1 && c6.currentLocationId === "the_underlight");
+  check("SNG-070: re-anchoring to nowhere is refused", applyStateOps(base(), [{ op: "reanchorLocation", to: "Castle Nowhere" }], ctx).refused.length === 1);
+  const c7 = base(); applyStateOps(c7, [{ op: "fixCodexFact", topicId: "grael", text: "the corrected truth", why: "was false" }], ctx);
+  check("SNG-070: a false codex fact is corrected", c7.codex.topics.grael.summary === "the corrected truth");
+
+  // an explicit refuse op lands in refused; abilities/inventory fields are forbidden
+  check("SNG-070: an explicit refuse is recorded, and abilities/inventory are forbidden fields", applyStateOps(base(), [{ op: "refuse", what: "500 xp" }], ctx).refused.length === 1 && applyStateOps(base(), [{ op: "correctField", field: "abilities", to: "x" }], ctx).refused.length === 1);
+  check("SNG-070: describeCorrection gives a human line", /background corrected/.test(describeCorrection({ field: "background", to: "duelist" })));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

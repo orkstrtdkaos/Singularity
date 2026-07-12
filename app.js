@@ -8,6 +8,7 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "./engine/quests.js";
+import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile } from "./engine/sync.js";
@@ -37,7 +38,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.29";
+const APP_VERSION = "1.8.30";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2037,6 +2038,15 @@ function applyTurn(turn, resolution) {
       try { ensureLocationImage(destId); } catch { /* art never blocks a move */ }
     }
   }
+  // SNG-070: the game self-heals — apply any bounded GM corrections to THIS save (repair, not wish;
+  // every change validated + logged). Surface what changed so the player can see + trust it.
+  if (turn.stateOps?.length) {
+    const r = applyStateOps(character, turn.stateOps, {
+      backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations,
+      resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString()
+    });
+    if (r.applied.length) character._correctionAside = "Set right: " + r.applied.map(describeCorrection).join("; ") + ".";
+  }
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // SNG-075: the valley is alive in narrative play too — maybe turn something up (woven next turn)
@@ -3456,6 +3466,8 @@ function useItem(name) {
 // ---------- play rendering ----------
 
 function renderPlay(turn, opts = {}) {
+  // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.
+  if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
   const location = hereNow();
   const rules = CONTENT.rules;
   const mods = aptitudeMods(character, rules.playerAptitudes);

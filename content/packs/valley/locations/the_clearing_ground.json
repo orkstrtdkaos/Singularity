@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "the_clearing_ground",
+  "name": "The Clearing Ground",
+  "regionId": "the_unmade",
+  "communityId": "unmaker.clearing",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    -0.5
+  ],
+  "spectrum": {
+    "destruction_creation": -0.5,
+    "death_life": 0.2,
+    "chaos_order": 0.2
+  },
+  "tags": [
+    "unmaker",
+    "destruction",
+    "sacred",
+    "craft",
+    "social"
+  ],
+  "connections": [
+    "the_scour"
+  ],
+  "descriptionSeed": "Where things are brought to be ended properly — a failing institution, a life's work that has become a cage, a war. The Unmakers end it, honor it, and make sure what comes after is not poisoned by how it went. It is a genuine mercy and almost nobody thanks them.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Clearers who treat an ending with more respect than most people treat a life; a thing being ended well; someone who has brought their own work here and cannot let go of it.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "Someone has brought a PERSON to the Clearing Ground",
+    "A war has been brought here to be ended, and both sides came, and they are in the same room"
+  ],
+  "map": {
+    "x": 605,
+    "y": 475
+  },
+  "poleIntensity": 0.6
+}

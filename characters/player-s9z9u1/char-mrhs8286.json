@@ -1,0 +1,479 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrhs8286",
+  "playerKey": "player-s9z9u1",
+  "name": "Silas Weir",
+  "origin": "wright",
+  "nativeTradition": "wright",
+  "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
+  "background": "craftsman",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 3,
+    "mental": 3,
+    "social": 3,
+    "practical": 3
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "numen_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "lightsense",
+      "level": 1
+    },
+    {
+      "abilityId": "order_sense",
+      "level": 1
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "belt_knife",
+      "name": "Belt Knife",
+      "kind": "weapon",
+      "qty": 1,
+      "description": "A plain working blade — more tool than weapon, but it has been both.",
+      "bonusTags": [
+        "attack",
+        "force"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "hemp_rope",
+      "name": "Hemp Rope (30 ft)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
+      "bonusTags": [
+        "climb"
+      ],
+      "consumable": false
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "millbrook",
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "summary": "Silas arrives in Millbrook at first light — the river runs gray-green, the villagers are quiet, and the weight of the valley's unresolved crisis hangs over everything.",
+        "narration": "The Echo River is the first thing you notice — or rather, what's wrong with it. You came down into Millbrook along the eastern track before full light, and the water caught the early sun in a way clean water shouldn't: a faint greenish cast, like verdigris on old copper, drifting in slow wreaths from the upstream bend. By the time you reached the dock, a fisherman was already pulling in his nets early, jaw set, not talking about why.\n\nMillbrook wakes with the kind of noise that means people are pretending harder than usual. The water-wheel at the north mill turns steadily; children are shouting somewhere up the terraced gardens; a cart horse stands patient outside the cooperage. The village well — a broad stone collar near the market square — has a small knot of people around it, three women and an old man, speaking low. One of them glances at the river and then doesn't again. You are a stranger here, pack still on your back, dust of the road still on your boots, and nobody has looked at you twice yet except for a carrion bird the size of a small cat that has settled on the dock-post beside you and is regarding the morning with the calm of something that has nowhere better to be.\n\nHuginn shifts its weight once, unhurried, and makes a sound low in its chest — not a croak, more of a consideration. The gray-green tinge in the water catches a shaft of light and, just for a moment, looks almost organized: a slow pulse rather than a drift. Then it's gone, just discolored water again, and a child runs past the dock chasing a rolling hoop and pays the river no attention at all.\n\nYou know, from talk on the road these last days, that Millbrook's elders have formally named what everyone else is still tiptoeing around — a Precursor system, operating, beneath the valley. You know someone named Fendt has been marked, publicly, on a board in the Radiant Plateau's Edge District, and that the ledger containing three weeks of falsified water readings under that name has since gone missing. The gap between what is known and what anyone is doing about it is wide and getting wider. This village is at the bottom of that gap. And you are standing in it, on the first morning of spring, with a knife at your belt and a bird at your shoulder and no particular reason anyone here should listen to you yet."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Echo River is the first thing you notice — or rather, what's wrong with it. You came down into Millbrook along the eastern track before full light, and the water caught the early sun in a way clean water shouldn't: a faint greenish cast, like verdigris on old copper, drifting in slow wreaths from the upstream bend. By the time you reached the dock, a fisherman was already pulling in his nets early, jaw set, not talking about why.\n\nMillbrook wakes with the kind of noise that means people are pretending harder than usual. The water-wheel at the north mill turns steadily; children are shouting somewhere up the terraced gardens; a cart horse stands patient outside the cooperage. The village well — a broad stone collar near the market square — has a small knot of people around it, three women and an old man, speaking low. One of them glances at the river and then doesn't again. You are a stranger here, pack still on your back, dust of the road still on your boots, and nobody has looked at you twice yet except for a carrion bird the size of a small cat that has settled on the dock-post beside you and is regarding the morning with the calm of something that has nowhere better to be.\n\nHuginn shifts its weight once, unhurried, and makes a sound low in its chest — not a croak, more of a consideration. The gray-green tinge in the water catches a shaft of light and, just for a moment, looks almost organized: a slow pulse rather than a drift. Then it's gone, just discolored water again, and a child runs past the dock chasing a rolling hoop and pays the river no attention at all.\n\nYou know, from talk on the road these last days, that Millbrook's elders have formally named what everyone else is still tiptoeing around — a Precursor system, operating, beneath the valley. You know someone named Fendt has been marked, publicly, on a board in the Radiant Plateau's Edge District, and that the ledger containing three weeks of falsified water readings under that name has since gone missing. The gap between what is known and what anyone is doing about it is wide and getting wider. This village is at the bottom of that gap. And you are standing in it, on the first morning of spring, with a knife at your belt and a bird at your shoulder and no particular reason anyone here should listen to you yet.",
+      "sceneSummary": "Silas arrives in Millbrook at first light — the river runs gray-green, the villagers are quiet, and the weight of the valley's unresolved crisis hangs over everything.",
+      "choices": [
+        {
+          "label": "Use Order-Sense on the river itself — read the discoloration's structure: is it random contamination or something with pattern?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.2,
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk over to the well — join the knot of villagers talking low and listen before you speak.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "chaos_order": 0.3,
+            "violence_peace": 0.6
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find the fisherman who pulled in his nets early — ask him directly what he's seen and when it started.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "violence_peace": 0.6,
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Numen-Sense here at the dock — feel whether the place itself registers the river as thin or significant.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.2,
+            "death_life": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "numen_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "Millbrook's river dock, early morning, first day of spring. The Echo River runs with a faint gray-green tinge from the upstream bend; the sky is pale and cold-clear.",
+        "npcsPresent": [
+          {
+            "name": "Fisherman (unnamed)",
+            "state": "Has pulled in nets early and is coiling them on the dock boards, jaw set, not engaging passersby"
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the dock-post beside Silas, watching the water with preternatural calm"
+          },
+          {
+            "name": "Villagers at the well (3 women, 1 old man)",
+            "state": "Speaking in low voices near the well in the market square; one glanced at the river and stopped"
+          }
+        ],
+        "objects": [
+          "Echo River — gray-green tinge drifting from upstream bend",
+          "Fishing nets, coiled and pulled early",
+          "Village well with stone collar, market-square adjacent",
+          "North mill water-wheel, turning",
+          "Cart horse outside the cooperage"
+        ],
+        "threads": [
+          "The river's discoloration — organized pulse or random contamination?",
+          "Villagers at the well speaking low — about the water?",
+          "The fisherman who pulled in early — what has he seen?",
+          "Silas is a stranger; no one here knows him yet"
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Silas arrived in Millbrook on World-day 12 as a complete stranger — no reputation, no contacts, pack still on his back.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "water-crisis-discoloration",
+          "label": "The River's Discoloration",
+          "kind": "event",
+          "entityId": null,
+          "fact": "The Echo River runs gray-green on bad mornings in Millbrook — observed firsthand at the dock. A fisherman pulled his nets in early. The discoloration appears to drift in slow wreaths from upstream. Fish catches are down valley-wide.",
+          "links": [
+            "millbrook",
+            "disputed-zone"
+          ]
+        },
+        {
+          "topic": "fendt-falsified-ledger",
+          "label": "Fendt and the Falsified Ledger",
+          "kind": "event",
+          "entityId": null,
+          "fact": "Someone named Fendt had their name marked in red chalk on the Radiant Plateau Edge District accountability board by their own supervisor. Three weeks of falsified water-purity readings under Fendt's initials were found — and the ledger has since gone missing from the array-office.",
+          "links": [
+            "water-crisis-discoloration",
+            "radiant-plateau-edge"
+          ]
+        },
+        {
+          "topic": "millbrook-elder-declaration",
+          "label": "Millbrook's Elder Declaration",
+          "kind": "event",
+          "entityId": "millbrook",
+          "fact": "Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. A figure named Usnea proposed a multi-settlement expedition into the Disputed Zone; the room could not follow.",
+          "links": [
+            "disputed-zone",
+            "water-crisis-discoloration"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Early morning arrival and first survey of the dock — a short half-hour from the edge of town to this moment"
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Millbrook's river dock, early morning, first day of spring. The Echo River runs with a faint gray-green tinge from the upstream bend; the sky is pale and cold-clear.",
+      "npcsPresent": [
+        {
+          "name": "Fisherman (unnamed)",
+          "state": "Has pulled in nets early and is coiling them on the dock boards, jaw set, not engaging passersby"
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on the dock-post beside Silas, watching the water with preternatural calm"
+        },
+        {
+          "name": "Villagers at the well (3 women, 1 old man)",
+          "state": "Speaking in low voices near the well in the market square; one glanced at the river and stopped"
+        }
+      ],
+      "objects": [
+        "Echo River — gray-green tinge drifting from upstream bend",
+        "Fishing nets, coiled and pulled early",
+        "Village well with stone collar, market-square adjacent",
+        "North mill water-wheel, turning",
+        "Cart horse outside the cooperage"
+      ],
+      "threads": [
+        "The river's discoloration — organized pulse or random contamination?",
+        "Villagers at the well speaking low — about the water?",
+        "The fisherman who pulled in early — what has he seen?",
+        "Silas is a stranger; no one here knows him yet"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "marrow"
+  ],
+  "companionNames": {
+    "marrow": "Huginn"
+  },
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "millbrook": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 12,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Millbrook's elder panel formally accepted the evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Usnea proposed leading a multi-settlement expedition into the Disputed Zone before Millbrook's assembled elder panel — the room could not follow; the gap between evidence and action named openly. (near "
+      },
+      {
+        "day": 1,
+        "worldDay": 10,
+        "text": "Word reaches you: Word of Millbrook's elder decision — and Fendt's public naming — reached the Radiant Plateau Edge District by Day 11 night via the eastern path. Fendt's name appeared in red chalk on the district acco ("
+      },
+      {
+        "day": 1,
+        "worldDay": 10,
+        "text": "Word reaches you: A filtration array supervisor marked their own subordinate — Fendt — on the Edge District accountability board and filed no accompanying record. A keeper of thirty years has never seen this before. (nea"
+      },
+      {
+        "day": 1,
+        "worldDay": 11,
+        "text": "This reaches your area — The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District. (near radiant plateau edge)",
+        "impactsLocal": true
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-12T12:41:04.072Z",
+    "lastTickWorldDay": 12,
+    "lastCanonWorldDay": 12
+  },
+  "domains": {
+    "primary": "wright",
+    "secondary": "cogitant",
+    "tertiary": "figurist"
+  },
+  "form": "Pale slight framed Necromancer - handsome intensity in the eyes and the hold of the clutching hand - green/blue power emanating from him with his undead Raven on his shoulder.",
+  "bio": {
+    "motivation": "You took the short way, and the short way was wrong. The air here tastes of metal and the light falls at an angle the sun cannot account for. There is a door in the hillside that was not on any map, and behind you the path you walked in on is no longer there.",
+    "story": "Their first day in the world was the thin place — it is a symbol before it is a door. read what it means; ask him what it is like. You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "water-crisis-discoloration": {
+        "id": "water-crisis-discoloration",
+        "label": "The River's Discoloration",
+        "kind": "event",
+        "facts": [
+          "[d1] The Echo River runs gray-green on bad mornings in Millbrook — observed firsthand at the dock. A fisherman pulled his nets in early. The discoloration appears to drift in slow wreaths from upstream. Fi"
+        ],
+        "links": [
+          "millbrook",
+          "disputed-zone"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "fendt-falsified-ledger": {
+        "id": "fendt-falsified-ledger",
+        "label": "Fendt and the Falsified Ledger",
+        "kind": "event",
+        "facts": [
+          "[d1] Someone named Fendt had their name marked in red chalk on the Radiant Plateau Edge District accountability board by their own supervisor. Three weeks of falsified water-purity readings under Fendt's i"
+        ],
+        "links": [
+          "water-crisis-discoloration",
+          "radiant-plateau-edge"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "millbrook": {
+        "id": "millbrook",
+        "label": "Millbrook",
+        "kind": "event",
+        "facts": [
+          "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. A figure named Usnea prop"
+        ],
+        "links": [
+          "disputed-zone",
+          "water-crisis-discoloration"
+        ],
+        "aliases": [
+          "Millbrook's Elder Declaration"
+        ],
+        "createdDay": 1,
+        "entityId": "millbrook",
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {},
+  "aptitudes": [],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "reconcileVersion": 5,
+  "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Silas Weir",
+      "url": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
+      "caption": "Silas Weir — wright",
+      "worldDay": 12,
+      "at": "2026-07-12T12:41:03.559Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
+  "updatedAt": 1783860108321,
+  "rev": 3,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "opLossPending": false,
+  "establishedFacts": [
+    {
+      "id": "f1",
+      "text": "Silas arrived in Millbrook on World-day 12 as a complete stranger — no reputation, no contacts, pack still on his back.",
+      "day": 1,
+      "subjectId": null
+    }
+  ]
+}

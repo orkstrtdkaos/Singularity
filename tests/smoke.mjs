@@ -10,7 +10,7 @@ import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharact
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
-import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests } from "../engine/quests.js";
+import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
@@ -2347,6 +2347,41 @@ await (async () => {
   check("SNG-BATCH-10: no domains (legacy) → the gate is a no-op, learning stays open", learnAbility(b10leg, "bright_burn", b10cat, rules, { traditionIndex: idx }).ok);
   const b10noidx = b10char();
   check("SNG-BATCH-10: no traditionIndex passed → gate is a no-op (backward-safe callers)", learnAbility(b10noidx, "bright_burn", b10cat, rules, {}).ok);
+})();
+
+// --- SNG-BATCH-10 Phase 3 / SNG-065: structured quests load + resolve with durable consequences ---
+(() => {
+  const qf = JSON.parse(readFileSync(join(root, "content/packs/valley/quests.json"), "utf8"));
+  const defs = qf.quests || [];
+  check("SNG-065: the authored quests parse and are REAL quests (stakes + stages + outcomes)", defs.length >= 1 && defs.every(isRealQuest));
+  const ledger = defs.find(d => d.id === "the_edge_district_ledger") || defs[0];
+  check("SNG-065: an errand (no stakes) is NOT a real quest", !isRealQuest({ id: "fetch", name: "Fetch", stages: [{}], outcomes: [{}] }));
+
+  const char = { name: "Q", quests: [], xp: 0, chronicle: [], clock: null, domains: { primary: "verist", secondary: "lattice", tertiary: null } };
+  const started = startStructuredQuest(char, ledger, { worldDay: 12, nowISO: "2026-07-12T00:00:00Z" });
+  check("SNG-065: startStructuredQuest adds a structured, active quest with stakes", started.ok && char.quests.length === 1 && char.quests[0].structured && char.quests[0].status === "active" && !!char.quests[0].stakes);
+  check("SNG-065: starting the same quest twice never forks a duplicate", !startStructuredQuest(char, ledger, {}).ok && char.quests.length === 1);
+
+  const q = char.quests[0];
+  const cs = completeQuestStage(char, q.id, q.stages[0].id);
+  check("SNG-065: completing a stage records its change as findable progress + advances the pointer", cs.ok && char.quests[0].stageIndex === 1 && char.quests[0].progress.includes(q.stages[0].change));
+
+  // routes the character's domains open (verist primary, lattice secondary)
+  const routes = routesForCharacter(char.quests[0], char);
+  check("SNG-065: the character's domains light the routes they open (verist + lattice)", routes.filter(r => r.open).map(r => r.trad).sort().join(",") === "lattice,verist");
+
+  // resolve at an outcome — APPLIES consequences durably (chronicle write is the floor)
+  const events = [];
+  const outcomeId = q.outcomes[0].id;
+  const res = resolveStructuredQuest(char, q.id, outcomeId, { worldDay: 13, nowISO: "2026-07-13T00:00:00Z", recordEvent: e => events.push(e) });
+  check("SNG-065: resolving applies the outcome + writes a FINDABLE chronicle record (the floor)", res.ok && char.quests[0].status === "resolved" && char.chronicle.some(c => c.kind === "quest_resolved" && c.outcome === q.outcomes[0].name));
+  check("SNG-065: a WORLD-EVENT consequence propagates (dated on the shared clock) via the sink", char.quests[0].outcomes[0].consequences.some(c => /world[-\s]?event/i.test(c)) ? (events.length >= 1 && events[0].worldDay === 13) : true);
+  check("SNG-065: resolution awards xp and a resolved quest can't be re-resolved", char.xp > 0 && !resolveStructuredQuest(char, q.id, outcomeId, {}).ok);
+
+  // availability gating: region match offers it, already-held excludes it
+  const fresh = { quests: [] };
+  const avail = availableStructuredQuests(fresh, defs, { region: ledger.region });
+  check("SNG-065: a quest is offered where its region matches, and not once it's in the log", avail.some(d => d.id === ledger.id) && !availableStructuredQuests(char, defs, { region: ledger.region }).some(d => d.id === ledger.id));
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -7,7 +7,7 @@ import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
-import { applyQuestUpdates, questsForGM } from "./engine/quests.js";
+import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "./engine/quests.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile } from "./engine/sync.js";
@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.23";
+const APP_VERSION = "1.8.24";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1786,6 +1786,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
     questsDetail: questsForGM(character),
+    structuredQuestsDetail: structuredQuestsForGM(character),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
@@ -2301,6 +2302,7 @@ async function onAsk(text) {
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
     questsDetail: questsForGM(character),
+    structuredQuestsDetail: structuredQuestsForGM(character),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
@@ -2726,6 +2728,7 @@ function renderInventoryScreen(openName = null) {
 function renderQuestDetail(questId, guidance = null, loading = false) {
   const q = (character.quests || []).find(x => x.id === questId);
   if (!q) { renderPlay(character.activeScene?.lastTurn || null, {}); return; }
+  if (q.structured) { renderStructuredQuestDetail(q); return; }
   chrome(`<div class="screen" style="max-width:680px">
     <div class="codex-kind">${esc(q.status)}</div>
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
@@ -2762,6 +2765,7 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
       region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
       recentTurns: sceneTurns.slice(-4), timeLabel: time.label,
       questsDetail: questsForGM(character),
+      structuredQuestsDetail: structuredQuestsForGM(character),
       npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: [] }),
       codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: [q.title] })
     }, `Give me practical guidance on my quest "${q.title}": what are 2-3 sensible next steps from where I am, who might help or know more, and roughly how difficult does this look? Spoiler-safe only.`);
@@ -2769,21 +2773,86 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
   };
 }
 
-/** SNG-BATCH-7 Phase 3: the full quest log — active / completed / failed, with progress. */
+/** SNG-065: a structured quest — stakes, engine-testable stages, the routes this character's
+ *  domains open, and branched outcomes that APPLY consequences on resolution. */
+function renderStructuredQuestDetail(q) {
+  const resolved = q.status !== "active";
+  const routes = routesForCharacter(q, character);
+  const stageRow = (s, i) => { const done = (q.completedStages || []).includes(s.id); const current = !done && i === (q.stageIndex || 0);
+    return `<div class="quest-stage ${done ? "done" : current ? "current" : ""}">
+      <div class="quest-stage-obj">${done ? "✓ " : current ? "▶ " : "○ "}${esc(s.objective)}</div>
+      <div class="hint">${esc(s.condition)}</div>
+      ${done && s.change ? `<div class="codex-fact" style="margin-top:4px">${esc(s.change)}</div>` : ""}
+      ${current && !resolved ? `<button class="btn secondary" data-stagedone="${esc(s.id)}" style="margin-top:6px">Mark this stage met</button>` : ""}
+    </div>`; };
+  chrome(`<div class="screen" style="max-width:720px">
+    <div class="codex-kind">${esc(q.status)}${q.tier ? " · " + esc(q.tier) : ""}${q.axis ? " · " + esc(String(q.axis).replace(/_/g, " ↔ ")) : ""}</div>
+    <h2 style="margin-top:4px">${esc(q.title)}</h2>
+    <p class="map-details-desc">${esc(q.premise)}</p>
+    <div class="quest-stakes"><span class="quest-stakes-label">What's at stake</span> ${esc(q.stakes)}</div>
+    ${resolved ? `<div class="quest-outcome-banner"><strong>Outcome:</strong> ${esc(q.outcomeName || "resolved")}</div>` : ""}
+    <h3 class="codex-title" style="font-size:15px;margin-top:16px">Stages</h3>
+    ${q.stages.map(stageRow).join("")}
+    <h3 class="codex-title" style="font-size:15px;margin-top:16px">How you might go through it <span class="hint" style="text-transform:none">(your domains open the lit routes)</span></h3>
+    ${routes.map(r => `<div class="quest-route ${r.open ? "open" : ""}"><span class="quest-route-trad">${esc(traditionLabel(r.trad))}${r.open ? " ✦" : ""}</span> ${esc(r.text)}</div>`).join("")}
+    ${!resolved ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
+      <div class="hint" style="margin-bottom:8px">Every ending is a real ending. What you choose changes the world durably — you'll be able to go back and see it.</div>
+      ${q.outcomes.map(o => `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
+        <strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`).join("")}`
+    : `<h3 class="codex-title" style="font-size:15px;margin-top:16px">What you did</h3>
+      ${(q.outcomes.find(o => o.id === q.outcomeId)?.consequences || []).map(c => `<div class="codex-fact">${esc(c)}</div>`).join("")}`}
+    <button class="btn secondary" id="sq-back" style="margin-top:16px">Back</button>
+  </div>`);
+  document.getElementById("sq-back").onclick = () => renderQuestLog();
+  for (const b of app.querySelectorAll("[data-stagedone]")) b.onclick = () => {
+    const r = completeQuestStage(character, q.id, b.dataset.stagedone);
+    if (r.ok) { saveCharacter(character); renderStructuredQuestDetail(character.quests.find(x => x.id === q.id)); }
+  };
+  for (const b of app.querySelectorAll("[data-outcome]")) b.onclick = () => {
+    const o = q.outcomes.find(x => x.id === b.dataset.outcome);
+    if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
+    const r = resolveStructuredQuest(character, q.id, b.dataset.outcome, { worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(), recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day: readClock(character.clock).day }) });
+    if (r.ok) {
+      saveCharacter(character);
+      const changes = r.applied.length ? "\n\nWhat changed: " + r.applied.map(a => a.type === "world-event" ? "a ripple spreads through the world" : a.type === "disposition" ? `${a.who.replace(/_/g, " ")} feel differently about you` : a.state).join("; ") : "";
+      renderPlay(character.activeScene?.lastTurn || null, { aside: `${q.title} — ${o.name} (+${r.xp} xp).${changes}` });
+    } else alert(r.why || "Couldn't resolve.");
+  };
+}
+
+/** SNG-BATCH-7 Phase 3 + SNG-065: the full quest log — available (startable, structured) /
+ *  active / resolved / completed / failed, with stakes + current stage. */
 function renderQuestLog() {
   const q = character.quests || [];
-  const group = st => q.filter(x => x.status === st);
+  const group = (...sts) => q.filter(x => sts.includes(x.status));
+  const stageLabel = x => { if (!x.structured) return x.progress?.length ? x.progress[x.progress.length - 1] : x.summary;
+    const s = x.stages?.[x.stageIndex] || x.stages?.[x.stages.length - 1]; return x.status === "active" ? (s?.objective || "resolve") : (x.outcomeName || x.summary || ""); };
   const row = x => `<button class="quest quest-click" data-quest="${esc(x.id)}" style="display:block;width:100%;text-align:left;margin:3px 0">
-      <span class="quest-title">${esc(x.title)}</span>${x.giver ? ` <span class="cost">from ${esc(x.giver)}${x.giverEntityId && character.codex?.topics?.[x.giverEntityId] ? " ◈" : ""}</span>` : ""}
-      <div class="quest-note">${esc(x.progress?.length ? x.progress[x.progress.length - 1] : x.summary)}</div></button>`;
+      <span class="quest-title">${esc(x.title)}</span>${x.structured ? ` <span class="cost">structured${x.axis ? " · " + esc(String(x.axis).replace(/_/g, "↔")) : ""}</span>` : x.giver ? ` <span class="cost">from ${esc(x.giver)}${x.giverEntityId && character.codex?.topics?.[x.giverEntityId] ? " ◈" : ""}</span>` : ""}
+      <div class="quest-note">${esc(stageLabel(x))}</div></button>`;
   const section = (title, list) => list.length ? `<div class="codex-group"><div class="codex-group-title">${title} (${list.length})</div>${list.map(row).join("")}</div>` : "";
+  // SNG-065: authored quests startable HERE (giver present / region match).
+  const here = CONTENT.locations?.[character.currentLocationId];
+  const avail = availableStructuredQuests(character, CONTENT.quests || [], { region: here?.regionId || here?.region, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) });
+  const availSection = avail.length ? `<div class="codex-group"><div class="codex-group-title">Available here (${avail.length})</div>${avail.map(def => `
+      <div class="quest" style="margin:3px 0">
+        <span class="quest-title">${esc(def.name)}</span> <span class="cost">${esc(String(def.axis || "").replace(/_/g, "↔"))}</span>
+        <div class="quest-note"><strong>Stakes:</strong> ${esc(String(def.stakes).slice(0, 180))}${def.stakes.length > 180 ? "…" : ""}</div>
+        <button class="btn" data-startquest="${esc(def.id)}" style="margin-top:6px">Take it on</button>
+      </div>`).join("")}</div>` : "";
   chrome(`<div class="screen" style="max-width:680px">
     <h2>Quest Log</h2>
-    ${q.length ? section("Active", group("active")) + section("Completed", group("completed")) + section("Failed", group("failed"))
-      : "<div class='insight'>No undertakings yet — the valley will provide.</div>"}
+    ${availSection}
+    ${q.length ? section("Active", group("active")) + section("Resolved", group("resolved")) + section("Completed", group("completed")) + section("Failed", group("failed"))
+      : (availSection ? "" : "<div class='insight'>No undertakings yet — the valley will provide.</div>")}
     <button class="btn secondary" id="ql-back" style="margin-top:12px">Back to the valley</button>
   </div>`);
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
+  for (const b of app.querySelectorAll("[data-startquest]")) b.onclick = () => {
+    const def = (CONTENT.quests || []).find(d => (d.id || "").replace(/[^a-z0-9]+/gi, "-").replace(/(^-|-$)/g, "") === b.dataset.startquest || d.id === b.dataset.startquest);
+    const r = startStructuredQuest(character, def, { worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() });
+    if (r.ok) { saveCharacter(character); renderQuestDetail(r.quest.id); } else alert(r.why || "Couldn't start that.");
+  };
   document.getElementById("ql-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -3385,11 +3454,12 @@ function renderPlay(turn, opts = {}) {
       })()}
     </section>
     <section><h3>Quests</h3>
-      ${(character.quests || []).filter(q => q.status === "active").map(q => `
-        <button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>
-          <div class="quest-note">${esc(q.progress?.length ? q.progress[q.progress.length - 1] : q.summary)}</div>
-        </button>`).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
-      ${(character.quests || []).length ? `<button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>` : ""}
+      ${(character.quests || []).filter(q => q.status === "active").map(q => { const stage = q.structured ? (q.stages?.[q.stageIndex] || q.stages?.[q.stages.length - 1]) : null;
+        return `<button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>${q.structured ? ` <span class="cost">✦</span>` : ""}
+          <div class="quest-note">${esc(q.structured ? (stage?.objective || "resolve") : (q.progress?.length ? q.progress[q.progress.length - 1] : q.summary))}</div>
+        </button>`; }).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
+      ${(() => { const here = CONTENT.locations?.[character.currentLocationId]; const avail = availableStructuredQuests(character, CONTENT.quests || [], { region: here?.regionId || here?.region, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
+      <button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed" || q.status === "resolved").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>
     </section>
     ${syncEnabled() ? `<section><h3>Party</h3>
       ${sharedScene ? `

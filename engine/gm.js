@@ -130,7 +130,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -168,6 +168,7 @@ export function tierParts(ctx) {
   if (inventoryDetail) scene.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
   if (evolvedItemsDetail) scene.push(`## LIVING GEAR (evolving items the character carries — honor the current stage's character; never advance a stage yourself, the engine gates it)\n${evolvedItemsDetail}`);
   if (questsDetail) scene.push(`## ACTIVE QUESTS\n${questsDetail}`);
+  if (structuredQuestsDetail) scene.push(`## STRUCTURED QUESTS (authored — honor the STAKES and the current stage; weave the routes this character's domains open. NEVER resolve or advance a stage yourself — the engine applies stage completion + branched consequences when the player acts)\n${structuredQuestsDetail}`);
   if (emergenceDetail) scene.push(`## RIPE EMERGENCE (rule 19 — practice has ripened these; you may OFFER them in-fiction via a choice's "emergenceId", exactly these ids, nothing else)\n${emergenceDetail}`);
   if (perilNote) scene.push(`## PRECURSOR DRIFT\n${perilNote}`);
   if (encounterDetail) scene.push(`## ACTIVE ENCOUNTER (rule 18 — narrate this receipt; never advance its state yourself)\n${encounterDetail}`);

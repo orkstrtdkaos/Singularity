@@ -93,6 +93,14 @@ export async function loadContent() {
     const name = path.split("/").pop().replace(".md", "");
     lore[name] = await fetchText(`content/packs/valley/${path}`);
   }
+  // SNG-BATCH-10 Phase 3 / SNG-065: structured quests. The manifest listed provides.quests but the
+  // loader had no branch — the authored quests silently did not load. Now they do. Optional: a miss
+  // leaves quests empty (freeform GM quests still work), never breaks load.
+  let quests = [];
+  for (const path of valley.provides.quests || []) {
+    try { const qf = await fetchJSON(`content/packs/valley/${path}`); quests = quests.concat(qf.quests || (Array.isArray(qf) ? qf : [])); }
+    catch { /* quests optional */ }
+  }
   const region = await fetchJSON("world/regions/valley.json");
 
   // SNG-BATCH-9: the generative substrate grammar + the derived validation schemas that
@@ -121,7 +129,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

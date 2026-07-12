@@ -145,3 +145,144 @@ export function questsForGM(character) {
 export function slugify(s) {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40) || "quest";
 }
+
+// ---------- SNG-BATCH-10 Phase 3 / SNG-065: STRUCTURED quests ----------
+// Authored quests (content/packs/valley/quests.json) carry stakes, engine-testable stages,
+// multiple routes across the great circle, branched outcomes, and a consequences block the
+// engine APPLIES on resolution. They coexist with the freeform GM-driven quests above; a
+// structured quest record carries structured:true + stages/routes/outcomes/stageIndex.
+// The schema's rule: IF YOU CANNOT NAME THE COST OF IGNORING IT, IT IS NOT A QUEST.
+
+/** The schema's real-quest test: stakes named + at least one stage + at least one outcome. */
+export function isRealQuest(def) {
+  return !!(def && def.stakes && Array.isArray(def.stages) && def.stages.length && Array.isArray(def.outcomes) && def.outcomes.length);
+}
+
+/** Normalize an authored quest into a not-yet-started character-quest record. */
+export function structuredQuestRecord(def) {
+  return {
+    id: slugify(def.id), title: def.name || def.id, structured: true, status: "available",
+    premise: def.premise || "", stakes: def.stakes || "", axis: def.axis || null,
+    traditions: def.traditions || [], giver: def.giver || null, legend: def.legend || null,
+    region: def.region || null, tier: def.tier || null,
+    stages: (def.stages || []).map(s => ({ id: s.id, objective: s.objective, condition: s.condition, change: s.change })),
+    routes: def.routes || {},
+    outcomes: (def.outcomes || []).map(o => ({ id: o.id, name: o.name, summary: o.summary, consequences: o.consequences || [] })),
+    stageIndex: 0, completedStages: [], progress: [], aliases: []
+  };
+}
+
+/** Start a structured quest (idempotent — never forks a duplicate). */
+export function startStructuredQuest(character, def, ctx = {}) {
+  character.quests = character.quests || [];
+  const id = slugify(def.id);
+  const existing = character.quests.find(q => q.id === id);
+  if (existing) return { ok: false, why: "already in your log", quest: existing };
+  if (!isRealQuest(def)) return { ok: false, why: "not a structured quest" };
+  const rec = structuredQuestRecord(def);
+  rec.status = "active"; rec.startedAt = ctx.nowISO || null; rec.startedWorldDay = ctx.worldDay ?? null;
+  character.quests.push(rec);
+  return { ok: true, quest: rec };
+}
+
+/** Mark a stage complete (its engine-testable condition met), applying the stage `change`
+ *  as a findable progress note and advancing the stage pointer. */
+export function completeQuestStage(character, questId, stageId) {
+  const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
+  if (!q || q.status !== "active") return { ok: false, why: "no active structured quest" };
+  const si = q.stages.findIndex(s => s.id === stageId);
+  if (si < 0) return { ok: false, why: "unknown stage" };
+  q.completedStages = q.completedStages || [];
+  if (!q.completedStages.includes(stageId)) q.completedStages.push(stageId);
+  q.stageIndex = Math.max(q.stageIndex || 0, Math.min(si + 1, q.stages.length));
+  const change = q.stages[si].change;
+  if (change && !(q.progress || []).includes(change)) q.progress = [...(q.progress || []), change].slice(-12);
+  return { ok: true, change, stage: q.stages[si], nextStage: q.stages[q.stageIndex] || null };
+}
+
+/** Apply an outcome's tagged-prose consequences as durably as the text allows. ALWAYS records a
+ *  findable chronicle entry (the schema's floor); best-effort parses WORLD-EVENT (a propagating
+ *  event dated on the shared clock), disposition shifts, and NPC state. ctx.recordEvent is an
+ *  optional sink so the engine stays decoupled from sync. Returns the list of applied changes. */
+function applyQuestConsequences(character, quest, outcome, ctx = {}) {
+  const applied = [];
+  character.peopleDisposition = character.peopleDisposition || {};
+  character.worldEvents = character.worldEvents || [];
+  for (const raw of outcome.consequences || []) {
+    const c = String(raw);
+    if (/world[-\s]?event/i.test(c)) {
+      const text = c.replace(/^[^:]*world[-\s]?event[^:]*:\s*/i, "").trim() || c;
+      const ev = { kind: "quest_consequence", questId: quest.id, questTitle: quest.title, text: text.slice(0, 240), worldDay: ctx.worldDay ?? null, propagates: true };
+      character.worldEvents.push(ev);
+      if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink optional */ } }
+      applied.push({ type: "world-event", text: ev.text });
+    }
+    const dm = c.match(/([A-Za-z][\w'-]*(?:\s+[A-Za-z][\w'-]*)?)\s+disposition[^.]*?\b(strongly\s+raised|raised|lowered|wary\s+respect)/i);
+    if (dm) {
+      const who = dm[1].trim().toLowerCase().replace(/\s+/g, "_");
+      const word = dm[2].toLowerCase();
+      const delta = /lower/.test(word) ? -1 : /strong/.test(word) ? 2 : 1;
+      character.peopleDisposition[who] = (character.peopleDisposition[who] || 0) + delta;
+      applied.push({ type: "disposition", who, delta });
+    }
+    const nm = c.match(/NPC state:\s*([a-z]+)/i);
+    if (nm) applied.push({ type: "npc-state", state: nm[1].toLowerCase() });
+  }
+  return applied;
+}
+
+/** Resolve a structured quest at a chosen outcome — APPLIES its consequences. The floor: a
+ *  findable chronicle entry so the player can always go back and SEE what they did. */
+export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) {
+  const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
+  if (!q || q.status !== "active") return { ok: false, why: "not an active structured quest" };
+  const outcome = q.outcomes.find(o => o.id === outcomeId);
+  if (!outcome) return { ok: false, why: "unknown outcome" };
+  q.status = "resolved";
+  q.outcomeId = outcome.id; q.outcomeName = outcome.name;
+  q.resolvedAt = ctx.nowISO || null; q.resolvedWorldDay = ctx.worldDay ?? null;
+  const applied = applyQuestConsequences(character, q, outcome, ctx);
+  character.chronicle = character.chronicle || [];
+  character.chronicle.push({
+    kind: "quest_resolved", questId: q.id, title: q.title, outcome: outcome.name,
+    summary: outcome.summary, consequences: outcome.consequences || [],
+    worldDay: ctx.worldDay ?? null, at: ctx.nowISO || null
+  });
+  const xp = Math.max(0, Math.min(60, ctx.xpReward | 0 || 30));
+  character.xp = (character.xp || 0) + xp;
+  return { ok: true, outcome, applied, xp };
+}
+
+/** Which authored quests are STARTABLE for a character here: not already in the log, and either
+ *  their giver is present in the scene or their region matches the character's current region. */
+export function availableStructuredQuests(character, catalog = [], ctx = {}) {
+  const have = new Set((character.quests || []).map(q => q.id));
+  const sceneNames = (ctx.sceneNpcNames || []).map(n => String(n).toLowerCase());
+  return (catalog || []).filter(isRealQuest).filter(def => {
+    if (have.has(slugify(def.id))) return false;
+    if (ctx.region && def.region && def.region === ctx.region) return true;
+    if (def.giver && sceneNames.some(n => namesMatch(n, def.giver))) return true;
+    return !ctx.region && !ctx.sceneNpcNames; // no context → offer all (e.g. a quest board)
+  });
+}
+
+/** The routes a character's domains open through a structured quest — so the player sees how
+ *  WHO THEY ARE changes the approach (spec: routes fan across the great circle). */
+export function routesForCharacter(quest, character) {
+  const domains = [character?.domains?.primary, character?.domains?.secondary, character?.domains?.tertiary].filter(Boolean);
+  const routes = quest.routes || {};
+  const open = [], other = [];
+  for (const [trad, text] of Object.entries(routes)) (domains.includes(trad) ? open : other).push({ trad, text, open: domains.includes(trad) });
+  return [...open, ...other];
+}
+
+/** GM block for structured quests: stakes + current stage + the routes the character's domains open. */
+export function structuredQuestsForGM(character) {
+  const active = (character.quests || []).filter(q => q.structured && q.status === "active");
+  if (!active.length) return null;
+  return active.map(q => {
+    const stage = q.stages[q.stageIndex] || q.stages[q.stages.length - 1];
+    const open = routesForCharacter(q, character).filter(r => r.open).map(r => r.trad);
+    return `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
+  }).join("\n");
+}

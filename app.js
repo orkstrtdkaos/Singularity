@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.38";
+const APP_VERSION = "1.8.39";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2008,7 +2008,11 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // SNG-009: track op loss so the next turn's GM restates missed updates
   if (result.opsLost) { character.opLossPending = true; character.opLossLog = [...(character.opLossLog || []), { at: new Date().toISOString() }].slice(-3); }
   else character.opLossPending = false;
-  applyTurn(result.turn, resolution);
+  // SNG-081: the player's OWN words are kept in scene history — their literal input wins, else the
+  // action label. Without this the GM's "history" is a monologue of its own prose and the player's
+  // half of the scene has no permanence (the deepest continuity bug in the project).
+  const playerWords = exactWords || resolution?.action?.label || (typeof playerInput === "string" && !/^\(/.test(playerInput) ? playerInput : null);
+  applyTurn(result.turn, resolution, playerWords);
   // SNG-BATCH-9: the world grows through play — mint any entities the fiction reached for,
   // persist them durable + in-grain, and surface a light note. A generation failure never
   // halts the turn (the narration already stands).
@@ -2039,7 +2043,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   return result;
 }
 
-function applyTurn(turn, resolution) {
+function applyTurn(turn, resolution, playerWords = null) {
   const location = CONTENT.locations[character.currentLocationId];
   const dayNow = readClock(character.clock).day;
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
@@ -2208,7 +2212,7 @@ function applyTurn(turn, resolution) {
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
   // chronicle + scene persistence
   if (turn.sceneSummary) {
-    sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" });
+    sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half
     if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; }
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };

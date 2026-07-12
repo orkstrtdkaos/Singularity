@@ -11,7 +11,7 @@ import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, i
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "../engine/quests.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister } from "../engine/gm.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
@@ -2507,6 +2507,23 @@ await (async () => {
   check("SNG-080: pressure in a SAFE place is human/small, never a bandit ambush, and tightens a live thread", /frightened neighbour|human and small/.test(safe) && /NEVER a bandit ambush/.test(safe) && /Edge District Ledger/.test(safe) && /antagonist acts on their own clock/.test(safe));
   const deadly = pressureDirective(4, 4, []);
   check("SNG-080: pressure in a DANGEROUS place can have teeth, and tier 4 makes something ARRIVE", /can have teeth/.test(deadly) && /ARRIVES/.test(deadly));
+})();
+
+// --- SNG-081: the player's words are KEPT — scene history is a dialogue, not the GM's monologue ---
+(() => {
+  const flirt = "let's call this hunt a date";
+  const turns = [
+    { player: flirt, summary: "She almost smiles and does not say no.", narration: "n".repeat(1200) },
+    { player: "I promise I'll come back for the ledger", summary: "You said it and meant it.", narration: "m".repeat(1200) },
+  ];
+  const out = renderSceneHistory(turns);
+  check("SNG-081: the player's OWN words appear in history (the GM can finally see what you said)", out.includes(`YOU: "${flirt}"`) && out.includes(`YOU: "I promise I'll come back for the ledger"`));
+  check("SNG-081: the player's words are kept VERBATIM, never truncated", out.includes(flirt) && !out.includes(flirt.slice(0, 8) + "…"));
+  check("SNG-081: only the GM's prose is clamped (700), not the player's", out.includes("n".repeat(700)) && !out.includes("n".repeat(701)));
+  check("SNG-081: each beat reads as a dialogue (YOU then GM)", /YOU: ".*"\nGM: /.test(out));
+  const sys = renderSceneHistory([{ summary: "A system beat with no player line." }]);
+  check("SNG-081: a system/party beat with no player words has no YOU line", !sys.includes("YOU:") && sys.includes("GM: A system beat"));
+  check("SNG-081: legacy string turns pass through unchanged", renderSceneHistory(["an old plain summary"]) === "an old plain summary");
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

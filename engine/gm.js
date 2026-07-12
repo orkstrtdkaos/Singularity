@@ -185,14 +185,7 @@ export function tierParts(ctx) {
   if (factsDetail) state.push(`## ESTABLISHED FACTS (authoritative, persistent — never contradict; these are TRUE regardless of how many scenes have passed)\n${factsDetail}`);
   state.push(`## CHARACTER\n${characterSheetSummary(character)}`);
   if (character.chronicle?.length) state.push(`## CHRONICLE (this character's story so far)\n${character.chronicle.slice(-16).join("\n")}`);
-  if (recentTurns?.length) {
-    // older beats as one-line summaries, the last few in full — continuity needs texture
-    const rendered = recentTurns.map((t, i) => {
-      if (typeof t === "string") return t; // legacy shape
-      return i >= recentTurns.length - 3 && t.narration ? `${t.summary}\nFULL TEXT: ${t.narration.slice(0, 700)}` : t.summary;
-    });
-    state.push(`## THIS SCENE SO FAR (oldest first)\n${rendered.join("\n---\n")}`);
-  }
+  if (recentTurns?.length) state.push(`## THIS SCENE SO FAR (oldest first — YOU is the player's own words, kept verbatim)\n${renderSceneHistory(recentTurns)}`);
 
   // ---- AFTER breakpoint 4 (UNCACHED): this-turn ephemeral inputs ----
   if (opLossNote) player.push(`## PREVIOUS TURN OPS LOST\n${opLossNote}`);
@@ -230,6 +223,19 @@ export function buildTiers(ctx) {
     state: t.state.join("\n\n"),
     player: t.player.join("\n\n")
   };
+}
+
+/** SNG-081: render scene history as an actual DIALOGUE — the player's own words kept VERBATIM (they
+ *  are short and load-bearing: a promise, a name, a flirtation, a threat), only the GM's prose
+ *  clamped. Before this the GM's "history" was a monologue of its own narration and the player's
+ *  half of the scene had no permanence past the current turn. Pure. */
+export function renderSceneHistory(recentTurns = []) {
+  return recentTurns.map((t, i) => {
+    if (typeof t === "string") return t; // legacy shape
+    const you = t.player ? `YOU: "${t.player}"\n` : "";
+    const full = i >= recentTurns.length - 3 && t.narration;
+    return `${you}GM: ${full ? `${t.summary}\nFULL TEXT: ${t.narration.slice(0, 700)}` : t.summary || ""}`;
+  }).join("\n---\n");
 }
 
 /** Flat context (for the ask-GM / intent-parse paths that don't tier-cache). Same

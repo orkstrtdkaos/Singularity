@@ -202,22 +202,27 @@
       {
         "summary": "Order-Sense reads the backlog pile cold — Silas names every fault correctly, including the sprung collar on the froe, and Pell accepts the deal.",
         "narration": "Pell's question hangs in the forge-warm air. You don't answer it directly — not yet.\n\nYour eyes move to the side table, the backlog pile, and you let Order-Sense come up the way you breathe: quiet, no effort wasted. The stack resolves itself in a few seconds of looking. A drawknife with a rolled edge — someone used it on green wood, probably wet wood, and the bevel gave. A billhook that needs the whole face reground. Two skinning blades, both sound but dull, work that takes an hour and a steady hand rather than skill. A hand-axe with a hairline in the eye — that one's tricky, needs the eye dressed before anything touches the edge or you'll chase the fault forever. And at the bottom, half-buried, a froe that's been slightly sprung at the collar, something a wright would spot faster than a smith might.\n\nYou look back at Pell. \"Drawknife with a rolled edge from wet wood. Billhook wants the whole face. Two skinners — dull, nothing wrong underneath. Hand-axe with a fault in the eye that needs dressing before the blade. Froe's sprung at the collar.\" You let a beat pass. \"I know my way around a forge well enough to clear that backlog without supervision. I won't touch anything I'm not sure of.\"\n\nHuginn shifts on the hook-row, a single claw-tap on iron that might be punctuation.\n\nPell turns the file over once in her hand. She looks at the pile, then at you, with the expression of someone who just watched a stranger name their dog's middle name without being told. \"The froe,\" she says, \"most people call it bent.\" A pause, flat and appraising. \"Collar-sprung is the right word for it.\" She sets the file on the vise jaw. \"All right. Backlog first. We talk hunting when it's clear.\""
+      },
+      {
+        "summary": "Silas settles into Pell's backlog — drawknife bevel corrected, trust quietly building.",
+        "narration": "You pull the drawknife from the pile and hold it edge-up in the forge light. The damage is exactly what you saw: a rolled bevel, not cracked, just persuaded wrong by wet wood and impatience. Recoverable in twenty minutes if you don't rush it.\n\nPell has gone back to her own vise-work without ceremony, which is its own kind of trust. You find the sharpening station — a decent flat stone, a slip, a leather strop hanging from a peg — and settle into the rhythm. Grip the handles, feel the bevel angle, let the stone do the thinking. The forge pops once behind you. Huginn shifts on the hook-row, claws ticking iron, and watches the lane with the patient attention of something that has nowhere else to be.\n\nThe work is simple and you are good at it. The rolled edge comes back in stages — first the gross correction, the stone cutting away the folded-over lip, then finer passes until the bevel is clean and consistent from heel to heel. You test the edge against your thumbnail: it bites without skating. Another few passes on the strop and it will be ready to cut wood again. Pell glances over once, notes the angle you're holding, and returns to her file without comment. That's the whole review.\n\nThe billhook is next on the pile. Outside, the lane stones are already drying in the spring air, the squall gone like it was never there."
       }
     ],
     "lastTurn": {
-      "narration": "Pell's question hangs in the forge-warm air. You don't answer it directly — not yet.\n\nYour eyes move to the side table, the backlog pile, and you let Order-Sense come up the way you breathe: quiet, no effort wasted. The stack resolves itself in a few seconds of looking. A drawknife with a rolled edge — someone used it on green wood, probably wet wood, and the bevel gave. A billhook that needs the whole face reground. Two skinning blades, both sound but dull, work that takes an hour and a steady hand rather than skill. A hand-axe with a hairline in the eye — that one's tricky, needs the eye dressed before anything touches the edge or you'll chase the fault forever. And at the bottom, half-buried, a froe that's been slightly sprung at the collar, something a wright would spot faster than a smith might.\n\nYou look back at Pell. \"Drawknife with a rolled edge from wet wood. Billhook wants the whole face. Two skinners — dull, nothing wrong underneath. Hand-axe with a fault in the eye that needs dressing before the blade. Froe's sprung at the collar.\" You let a beat pass. \"I know my way around a forge well enough to clear that backlog without supervision. I won't touch anything I'm not sure of.\"\n\nHuginn shifts on the hook-row, a single claw-tap on iron that might be punctuation.\n\nPell turns the file over once in her hand. She looks at the pile, then at you, with the expression of someone who just watched a stranger name their dog's middle name without being told. \"The froe,\" she says, \"most people call it bent.\" A pause, flat and appraising. \"Collar-sprung is the right word for it.\" She sets the file on the vise jaw. \"All right. Backlog first. We talk hunting when it's clear.\"",
-      "sceneSummary": "Order-Sense reads the backlog pile cold — Silas names every fault correctly, including the sprung collar on the froe, and Pell accepts the deal.",
+      "narration": "You pull the drawknife from the pile and hold it edge-up in the forge light. The damage is exactly what you saw: a rolled bevel, not cracked, just persuaded wrong by wet wood and impatience. Recoverable in twenty minutes if you don't rush it.\n\nPell has gone back to her own vise-work without ceremony, which is its own kind of trust. You find the sharpening station — a decent flat stone, a slip, a leather strop hanging from a peg — and settle into the rhythm. Grip the handles, feel the bevel angle, let the stone do the thinking. The forge pops once behind you. Huginn shifts on the hook-row, claws ticking iron, and watches the lane with the patient attention of something that has nowhere else to be.\n\nThe work is simple and you are good at it. The rolled edge comes back in stages — first the gross correction, the stone cutting away the folded-over lip, then finer passes until the bevel is clean and consistent from heel to heel. You test the edge against your thumbnail: it bites without skating. Another few passes on the strop and it will be ready to cut wood again. Pell glances over once, notes the angle you're holding, and returns to her file without comment. That's the whole review.\n\nThe billhook is next on the pile. Outside, the lane stones are already drying in the spring air, the squall gone like it was never there.",
+      "sceneSummary": "Silas settles into Pell's backlog — drawknife bevel corrected, trust quietly building.",
       "choices": [
         {
-          "label": "Accept the terms and start on the drawknife — familiar ground, low-risk, builds trust.",
+          "label": "Work through the full backlog steady and clean — let competence speak without conversation.",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {},
+          "axes": {
+            "spectrumId": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "work",
             "careful",
-            "build-trust"
+            "work"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -226,47 +231,52 @@
           "emergenceId": null
         },
         {
-          "label": "Accept the terms, but negotiate a piece of the hardware trade — some snare stock in exchange for the labor, not just hunting company.",
+          "label": "Work steadily, but ask Pell about the mid-weight spear-tip — who keeps handling it and not buying?",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
+          "axes": {
+            "spectrumId": -0.2
+          },
+          "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "careful",
-            "plan"
+            "work",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "While working, use Order-Sense on the hand-axe with the hairline in the eye — you named it blind, now read it properly before you dress it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "spectrumId": -0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask about the mid-weight spear-tip before you start — someone's been handling it and walking away. Find out who.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
+          "label": "After the drawknife, pause and talk — ask Pell when she last ran the north meadow trails, and what she remembers about the upstream stretch.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Get a clear agreement on paper — what labor, what you get, when she's free to go north. Pin the terms before you pick up a file.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "plan"
+            "plan",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -278,7 +288,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -288,35 +298,37 @@
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now."
+          "note": "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear."
         }
       ],
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Lane stones still dark from the squall, air sharp and cold-clean, forge heat steady inside. Mid-morning light.",
+        "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Lane stones drying in spring air after the squall, forge heat steady inside. Mid-morning light. Drawknife now corrected and set aside; billhook next in the pile.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "File set on the vise jaw — deal accepted, waiting for Silas to start on the backlog."
+            "state": "Back at her own vise-work, filing steadily — one approving glance given and withdrawn."
           },
           {
             "name": "Huginn",
-            "state": "On the iron hook-row, claw-tapped once, watching the lane."
+            "state": "On the iron hook-row, watching the lane with patient attention."
           }
         ],
         "objects": [
+          "Drawknife — corrected, set aside on the sharpening station",
+          "Billhook — next in the backlog pile, needs full face regrind",
+          "Two skinning blades — sound but dull, waiting their turn",
+          "Hand-axe — hairline in the eye, tricky job, still in the pile",
+          "Froe — sprung collar, at the bottom of the pile",
+          "Sharpening station: flat stone, slip, leather strop",
           "Iron hooks in rows along the shop wall",
           "Coils of heavier chain (full)",
-          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stakes",
-          "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-weight (repeatedly handled, undisclosed buyer), light cross-tip",
-          "File set down on the vise jaw",
-          "Workpiece still clamped in vise",
-          "Side table with edge-work backlog: drawknife (rolled edge, wet-wood damage), billhook (needs full face grind), two skinning blades (sound but dull), hand-axe (hairline fault in the eye), froe (sprung at the collar)",
+          "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
+          "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-weight (repeatedly handled), light tip",
           "Forge fire (working heat, coals banked but live)",
-          "Silas's pack set down inside the overhang shade",
-          "Lane stones dark from the brief rain, visible past the overhang edge"
+          "Silas's pack set down inside the overhang shade"
         ],
         "threads": [
-          "Backlog labor agreed — Silas to clear it before hunting terms are finalized",
+          "Backlog labor underway — drawknife done, four pieces remain",
           "Mid-weight spear-tip has been repeatedly handled by an undisclosed buyer who keeps declining",
           "Snare hardware stock is low — restocking needed before north meadow runs are worth anything",
           "Hunting trip north still to be scheduled once the backlog is clear"
@@ -328,82 +340,61 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion when it's clear.",
+          "note": "Returned to her own vise-work without ceremony after Silas began the backlog — one glance at his angle, no comment. Baseline trust registered through silence.",
           "learned": [
-            "Silas knows forge work well enough to read a backlog at a glance — identified fault in the eye of the hand-axe and the sprung collar on the froe without touching them"
+            "Accepts correct technique wordlessly — that one glance was the whole review"
           ],
           "skillsObserved": [
-            "accurate fault-reading",
-            "direct negotiation"
+            "vise work, filing"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her forge on the south lane — deal struck, waiting for Silas to begin the backlog."
+          "statusNote": "At her forge on the south lane — Silas working her backlog beside her, terms active."
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas struck a labor deal with Pell the blacksmith — clearing her edge-work backlog in exchange for hunting company north of the village. Work begins now.",
-          "subjectId": "pell"
-        }
-      ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Labor deal struck at Pell's forge on World-day 12 — Silas to clear the backlog (drawknife, billhook, two skinners, hand-axe, froe) in exchange for hunting company north of the village.",
+          "note": "Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use.",
           "subPlace": {
             "name": "Pell's Forge",
-            "note": "Deal finalized — backlog identified by Order-Sense, Pell accepted terms after Silas named the froe's sprung collar correctly.",
+            "note": "Drawknife corrected and set aside — backlog clearing underway. Four pieces remain.",
             "visited": true
           }
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Accepts competence as currency — naming the froe's sprung collar (not just 'bent') closed the deal. Backlog labor in exchange for hunting company north of the village, terms agreed.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal",
-            "water-crisis-discoloration"
-          ]
-        }
-      ],
+      "codexUpdates": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quick exchange at the forge — Order-Sense read, terms agreed, no time lost."
-      },
-      "sceneEnded": false
+        "why": "A short stretch of focused bench work — drawknife corrected, billhook coming up next."
+      }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Lane stones still dark from the squall, air sharp and cold-clean, forge heat steady inside. Mid-morning light.",
+      "setting": "Pell's forge, south lane of Millbrook — open-front stone building under a wide work overhang. Lane stones drying in spring air after the squall, forge heat steady inside. Mid-morning light. Drawknife now corrected and set aside; billhook next in the pile.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "File set on the vise jaw — deal accepted, waiting for Silas to start on the backlog."
+          "state": "Back at her own vise-work, filing steadily — one approving glance given and withdrawn."
         },
         {
           "name": "Huginn",
-          "state": "On the iron hook-row, claw-tapped once, watching the lane."
+          "state": "On the iron hook-row, watching the lane with patient attention."
         }
       ],
       "objects": [
+        "Drawknife — corrected, set aside on the sharpening station",
+        "Billhook — next in the backlog pile, needs full face regrind",
+        "Two skinning blades — sound but dull, waiting their turn",
+        "Hand-axe — hairline in the eye, tricky job, still in the pile",
+        "Froe — sprung collar, at the bottom of the pile",
+        "Sharpening station: flat stone, slip, leather strop",
         "Iron hooks in rows along the shop wall",
         "Coils of heavier chain (full)",
         "Board with snare plates, toggle-springs (four pairs remaining), and anchor stake",
-        "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-wei",
-        "File set down on the vise jaw",
-        "Workpiece still clamped in vise",
-        "Side table with edge-work backlog: drawknife (rolled edge, wet-wood damage), bil",
-        "Forge fire (working heat, coals banked but live)",
-        "Silas's pack set down inside the overhang shade",
-        "Lane stones dark from the brief rain, visible past the overhang edge"
+        "Three spear-tips on the lower shelf — heavy boar-point (oiled, sitting), mid-wei"
       ],
       "threads": [
-        "Backlog labor agreed — Silas to clear it before hunting terms are finalized",
+        "Backlog labor underway — drawknife done, four pieces remain",
         "Mid-weight spear-tip has been repeatedly handled by an undisclosed buyer who keeps declining",
         "Snare hardware stock is low — restocking needed before north meadow runs are worth anything",
         "Hunting trip north still to be scheduled once the backlog is clear"
@@ -437,7 +428,8 @@
         "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment.",
         "Silas has arrived at Pell's forge — the next step in equipping for sustained hunting north of the village.",
         "Silas has offered forge-labor to Pell in exchange for hunting company north of the village — negotiation ongoing at the forge.",
-        "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now."
+        "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now.",
+        "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -550,28 +542,29 @@
         "[d1] Received Aldric's name from Silas without visible change of expression — confirmation accepted. Now waiting for the ask.",
         "[d1] Silas admired her craft and asked if she hunts — she confirmed a past hunting life, eased her posture, and opened the transaction. Now waiting to hear what he needs.",
         "[d1] Silas offered forge-labor in exchange for hunting company north of the village. Pell absorbed the squall without comment, named her two pressing problems (edge-work backlog, snare ",
-        "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe"
+        "[d1] Silas named every fault in the backlog correctly — including 'collar-sprung' on the froe, which most people miss. She accepted the deal: backlog labor first, hunting discussion whe",
+        "[d1] Returned to her own vise-work without ceremony after Silas began the backlog — one glance at his angle, no comment. Baseline trust registered through silence."
       ],
       "knownFacts": [
-        "Silas came for hunting hardware, not repair work",
         "Used to hunt before the forge had enough work to make it a second job",
         "Responds to accurate reading of her work over flattery",
         "Confirmed Aldric's referral without ceremony",
         "Has a backlog of edge work she needs cleared",
         "Snare hardware needs restocking before north meadow runs are worth anything",
         "Is actively considering the offer — not declined",
-        "Silas knows forge work well enough to read a backlog at a glance — identified fault in the eye of the hand-axe and the sprung collar on the froe without touchin"
+        "Silas knows forge work well enough to read a backlog at a glance — identified fault in the eye of the hand-axe and the sprung collar on the froe without touchin",
+        "Accepts correct technique wordlessly — that one glance was the whole review"
       ],
       "skillsObserved": [
-        "shop organization",
         "quick practical assessment",
         "practical assessment",
         "clean negotiation posture",
         "direct negotiation",
-        "accurate fault-reading"
+        "accurate fault-reading",
+        "vise work, filing"
       ],
       "status": "active",
-      "statusNote": "At her forge on the south lane — deal struck, waiting for Silas to begin the backlog.",
+      "statusNote": "At her forge on the south lane — Silas working her backlog beside her, terms active.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -582,7 +575,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] The discoloration in the upstream bend holds its shape unnaturally from the meadow north of the village — it moves like something channeled, not like runoff diffusing in open water. Observed on World-",
         "[d1] A dead rabbit was raised to life here on World-day 12 — the air smelled of metal for one sharp second, then cleared. The thing happened at the base of the fence-post by the river path.",
         "[d1] Order-Sense revealed a structural seam in the resurrected rabbit — a second pattern woven through its original architecture, stable and of unknown authorship. The animal remains oriented south toward ",
         "[d1] The resurrected rabbit entered Millbrook's south fence line heading into the village — alive, oriented south, seam intact. World-day 12.",
@@ -593,7 +585,8 @@
         "[d1] Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters.",
         "[d1] Pell's forge visited on World-day 12 — stocks snare hardware (plates, toggles, stakes), chain, and three grades of spear-tip. Open-front under a wide overhang, south lane past the elder's post.",
         "[d1] A brief squall passed through on World-day 12 mid-morning — lane stones briefly wet, air sharp and cold after. Cleared fast.",
-        "[d1] Labor deal struck at Pell's forge on World-day 12 — Silas to clear the backlog (drawknife, billhook, two skinners, hand-axe, froe) in exchange for hunting company north of the village."
+        "[d1] Labor deal struck at Pell's forge on World-day 12 — Silas to clear the backlog (drawknife, billhook, two skinners, hand-axe, froe) in exchange for hunting company north of the village.",
+        "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -629,7 +622,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Deal finalized — backlog identified by Order-Sense, Pell accepted terms after Silas named the froe's sprung collar corre"
+          "note": "Drawknife corrected and set aside — backlog clearing underway. Four pieces remain."
         }
       },
       "vectorsKnown": [
@@ -880,18 +873,18 @@
     }
   },
   "tendencies": {
-    "strategic": 11.300517428335276,
-    "cerebral": 6.679254077947976,
-    "social": 11.719562829762857,
-    "generous": 6.649262932218784,
-    "cautious": 3.877879146237363
+    "strategic": 11.2440148411936,
+    "cerebral": 6.645857807558237,
+    "social": 11.660965015614043,
+    "generous": 6.61601661755769,
+    "cautious": 4.858489750506177
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "good_samaritan"
   ],
-  "actionCount": 16,
+  "actionCount": 17,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -913,8 +906,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783896627250,
-  "rev": 34,
+  "updatedAt": 1783896874866,
+  "rev": 35,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

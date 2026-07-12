@@ -16,6 +16,7 @@
 | **SNG-056** | ✔ | Location-header desync |
 | **SNG-074** | ✔ | Dev off-switch — Erik has a clean player view again |
 | **SNG-075** | ✔ | **Encounters now fire in narrative play** (bound to narrative time, not map buttons) |
+| **SNG-076** | v1.8.32 | Authored prose renders in FULL (was cut mid-word); model output clamps on a word boundary. |
 | **SNG-070** | v1.8.30 | **GM corrections — the game self-heals.** A bounded `stateOps` (repair, not wish): fix a wrong field/domain/entity/quest/location, engine-refuses any advance, every change logged. |
 | **SNG-052** | ✔ | Adult-gate checkbox persistence |
 
@@ -23,11 +24,11 @@
 
 ## ⛔ NEXT — BUILD IN THIS ORDER (Erik-directed; supersedes CCode's earlier queue)
 
-### 1. **SNG-076 — authored prose is truncated mid-word.** 🔴 STILL LIVE AT HEAD
+### 1. ✅ SNG-076 SHIPPED v1.8.32 — authored prose renders in full; model output word-boundary-clamped
 `quests.js` still holds `slice(0, 240)` / `slice(0, 200)`. **Quest stakes die at *"…and Ove…"*; the away-digest is cut at *"the district acco ("*.**
 **The conceptual bug:** authored content is being clamped **as if it were untrusted model output**. It isn't. Quest premise/stakes/objectives/outcome-narration come from content packs — deliberate, finite, and meant to be read. **Authored content renders IN FULL; model output is clamped.** And every clamp is a raw `slice()` that cuts mid-word — even where clamping is right, **the cut is wrong** (word-boundary + real ellipsis + expandable, never destroyed). **The prose IS the game.**
 
-### 2. **SNG-070 — GM corrections (`stateOps`).** 🔴 ERIK IS BLOCKED
+### 2. ✅ SNG-070 SHIPPED v1.8.30–31 — GM corrections (stateOps), incl. ability-strip for the Silas case
 **Erik's necromancer, Silas Weir, is stuck** with Blazeborn/Lattice/Numinous abilities and the wrong domains. **P1 (the commit boundary) only fixes creation going FORWARD — it cannot repair a character who already exists.** A GM correction is the *only* mechanism that can, and without it **every mis-created character is scrap** — unacceptable in a game his family is about to play.
 *Scope: correct domains · re-derive abilities against them · fix background · **strip abilities the character should never have had**. Grandfathering an earned ability is the **player's choice**, not an engine default — Erik must be able to say "take the Blazeborn work off him; I am an Ashwarden" and be obeyed.* Bounded by **Law 14: a repair is not an advance** — no XP, no levels, no unearned power. Every correction **logged to the ledger**.
 *(Silas is an Ashwarden — the death pole. His kit is authored and waiting: **Palework · Deathsense · Wither · Death-Ward**, and the braid **The Counted End**.)*

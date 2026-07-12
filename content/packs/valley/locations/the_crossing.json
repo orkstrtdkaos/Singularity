@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_crossing",
+  "name": "The Crossing",
+  "regionId": "the_center",
+  "communityId": "center.crossing",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {},
+  "tags": [
+    "center",
+    "cosmopolitan",
+    "city",
+    "neutral",
+    "home",
+    "sacred"
+  ],
+  "connections": [
+    "the_great_coliseum",
+    "the_hundred_markets",
+    "the_quiet_house",
+    "the_axis_gate"
+  ],
+  "descriptionSeed": "Every axis crosses here at nothing, and the result is not grey — it is CROWDED. The Crossing leans toward no pole, which is precisely why it can hold them all: an Umbral and a Blazeborn drink at the same table because neither has the standing to make the other leave. The poles are lonely places. The center is where the world comes to meet its opposite, and the fact that this is possible at all is the most hopeful thing in existence. Nobody is from here. Everybody is here.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Every people, all at once; a Verist and a Veilwright in the same tavern, aggressively polite; someone from a Reach you have never heard of.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Someone is trying to make the Crossing take a side, and it would be the end of it",
+    "A murder has been done here and there are twelve legal traditions with a claim on the body"
+  ],
+  "map": {
+    "x": 340,
+    "y": 290
+  },
+  "poleIntensity": 0.05,
+  "startingLocation": true
+}

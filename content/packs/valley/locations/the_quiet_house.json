@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_quiet_house",
+  "name": "The Quiet House",
+  "regionId": "the_center",
+  "communityId": "center.quiethouse",
+  "axisVector": [
+    0.0,
+    0.2,
+    0.0,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "violence_peace": 0.5,
+    "falsehood_truth": 0.2
+  },
+  "tags": [
+    "center",
+    "neutral",
+    "diplomacy",
+    "sanctuary",
+    "sacred",
+    "social"
+  ],
+  "connections": [
+    "the_crossing"
+  ],
+  "descriptionSeed": "Where enemies meet. The one roof in the world under which no people may raise a hand, enforced by nothing but the fact that every single Reach needs it to keep existing. Treaties are made here. Wars are ended here. A Marcher and a Stillholder have sat at this table and not killed each other, which anywhere else would be remarkable and here is simply Tuesday. The Quiet House has never been violated. Everyone is aware that it could be.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Envoys who hate each other and are behaving; a mediator whose neutrality is the most valuable commodity in the world; someone who has come to break the peace.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A delegation has come to the Quiet House intending to violate it, and only you can see it",
+    "The neutral mediator is not neutral, and has not been for years"
+  ],
+  "map": {
+    "x": 350,
+    "y": 255
+  },
+  "poleIntensity": 0.1
+}

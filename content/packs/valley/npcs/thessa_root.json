@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "thessa_root",
+  "name": "Thessa Root",
+  "role": "Rootkin of the Slow Orchard — she planted a tree three hundred years ago for a person who has not come",
+  "homeLocation": "the_slow_orchard",
+  "communityId": "rootkin.orchard",
+  "personality": {
+    "warmth": 0.8,
+    "trust": 0.6,
+    "candor": 0.5,
+    "patience": 1.0
+  },
+  "spectrum": {
+    "death_life": 0.8,
+    "space_time": 0.4,
+    "emotional_logical": -0.2
+  },
+  "voiceHints": "Slow, warm, and entirely unhurried. Answers next week and considers that prompt. Speaks of three hundred years the way you would speak of last summer.",
+  "knowledge": [
+    "Everything growing in the Quickwood and what it wants",
+    "The name of the person the tree was planted for",
+    "What she has told herself, for three centuries, about why they have not come"
+  ],
+  "wants": "To be there when it fruits. To be right.",
+  "fears": "That she has been wrong the entire time, and that being told would be a mercy, and that she does not want the mercy.",
+  "reactsToReputation": {
+    "patient": "she opens entirely",
+    "hurried": "she waits, kindly, until you have finished hurrying",
+    "truthful": "she will hear it, and it will end her, and she will thank you"
+  }
+}

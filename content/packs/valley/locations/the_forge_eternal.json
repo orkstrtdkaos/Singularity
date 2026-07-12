@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "the_forge_eternal",
+  "name": "The Forge-Eternal",
+  "regionId": "the_making",
+  "communityId": "wright.forge",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    -0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.7
+  ],
+  "spectrum": {
+    "destruction_creation": 0.7,
+    "chaos_order": -0.3,
+    "mechanical_spiritual": -0.2
+  },
+  "tags": [
+    "wright",
+    "creation",
+    "city",
+    "craft",
+    "home",
+    "unfinished"
+  ],
+  "connections": [
+    "the_half_cathedral",
+    "the_ceaseless"
+  ],
+  "descriptionSeed": "Scaffolds forever, half-built cathedrals, and a people who cannot stop making. Nothing here is finished and that is the point — the Wrights believe a completed thing has stopped being alive. The city is glorious, wasteful, and expanding in nine directions, and none of it is done, and they are so happy.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Wrights who improve your possessions without asking; a cathedral in its two-hundredth year and its fourth design; someone who finished something and is being quietly pitied.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A Wright has finished a thing — completed it, deliberately — and the city does not know how to respond",
+    "The city has grown into something that was standing there, and did not stop"
+  ],
+  "map": {
+    "x": 620,
+    "y": 410
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

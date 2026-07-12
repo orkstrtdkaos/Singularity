@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_last_mask",
+  "name": "The Last Mask",
+  "regionId": "the_veiled_reach",
+  "communityId": "veilwright.lastmask",
+  "axisVector": [
+    0.0,
+    -1.0,
+    0.0,
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    -0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "falsehood_truth": -1.0,
+    "dark_light": -0.3,
+    "concrete_abstract": 0.4
+  },
+  "tags": [
+    "veilwright",
+    "falsehood",
+    "locus",
+    "cult",
+    "dangerous",
+    "sacred"
+  ],
+  "connections": [
+    "the_hall_of_mirrors"
+  ],
+  "descriptionSeed": "The pure pole: falsehood so total it erases the possibility of truth. The ones here have unmade themselves — no original remains under the masks, and they will tell you that cheerfully, and you cannot check. **Halvex Coil's rewriting is this doctrine with better tools.** They regard him as a promising student who took it literally.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Masked ones with nothing behind the mask; a version of someone you know, and it is better, and it is not them; your own face, worn well.",
+  "dangerLevel": 5,
+  "questSeeds": [
+    "Someone has come back from the Last Mask and everybody insists they are the same and you are not sure",
+    "A Veilwright of the Hall has begun quietly agreeing with the Last Mask"
+  ],
+  "map": {
+    "x": 90,
+    "y": 205
+  },
+  "poleIntensity": 0.98
+}

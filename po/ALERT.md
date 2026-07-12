@@ -16,6 +16,7 @@
 | **SNG-056** | ✔ | Location-header desync |
 | **SNG-074** | ✔ | Dev off-switch — Erik has a clean player view again |
 | **SNG-075** | ✔ | **Encounters now fire in narrative play** (bound to narrative time, not map buttons) |
+| **SNG-070** | v1.8.30 | **GM corrections — the game self-heals.** A bounded `stateOps` (repair, not wish): fix a wrong field/domain/entity/quest/location, engine-refuses any advance, every change logged. |
 | **SNG-052** | ✔ | Adult-gate checkbox persistence |
 
 ---

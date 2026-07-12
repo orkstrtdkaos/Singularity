@@ -2453,6 +2453,10 @@ await (async () => {
   // REPAIR: remove an entity never acquired; a non-existent one is refused
   const c4 = base(); const r4 = applyStateOps(c4, [{ op: "removeEntity", kind: "companion", id: "aevi", why: "never met them" }], ctx);
   check("SNG-070: an unmet companion is removed + logged", r4.applied.length === 1 && c4.companions.length === 0 && !c4.companionNames.aevi);
+  // the Silas case: STRIP a wrongly-held ability (repair), never grant
+  const c4b = base(); c4b.abilities = [{ abilityId: "lightsense", level: 1 }, { abilityId: "palework", level: 1 }];
+  const r4b = applyStateOps(c4b, [{ op: "removeEntity", kind: "ability", id: "lightsense", why: "Blazeborn work on an Ashwarden — take it off him" }], ctx);
+  check("SNG-070: a wrongly-held ability can be STRIPPED (the Silas fix) and only that one goes", r4b.applied.length === 1 && c4b.abilities.length === 1 && c4b.abilities[0].abilityId === "palework" && c4b.corrections.some(x => x.entity === "ability"));
   check("SNG-070: removing a non-existent entity is refused, not silently applied", applyStateOps(base(), [{ op: "removeEntity", kind: "companion", id: "ghost" }], ctx).refused.length === 1);
 
   // REPAIR: unstick a quest; re-anchor a location; fix a codex fact

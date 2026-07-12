@@ -61,7 +61,17 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         else if (op.kind === "quest") { const before = (character.quests || []).length; character.quests = (character.quests || []).filter(q => q.id !== id); removed = character.quests.length !== before; }
         else if (op.kind === "codex") { if (character.codex?.topics?.[id]) { delete character.codex.topics[id]; removed = true; } }
         else if (op.kind === "npc") { if (character.npcRegistry?.[id]) { delete character.npcRegistry[id]; removed = true; } }
-        else { refused.push({ op, reason: "removable kinds are companion/quest/codex/npc" }); break; }
+        else if (op.kind === "ability") {
+          // SNG-070: STRIP an ability the character should never have had (the Silas case: Blazeborn
+          // work off an Ashwarden). Removal is a REPAIR — it never grants; grandfathering is the
+          // player's choice, not an engine default. Also drop any fork/aspiration tied to it.
+          const before = (character.abilities || []).length;
+          character.abilities = (character.abilities || []).filter(a => a.abilityId !== id);
+          if (character.forkChoices) delete character.forkChoices[id];
+          if (character.customAbilities) delete character.customAbilities[id];
+          removed = character.abilities.length !== before;
+        }
+        else { refused.push({ op, reason: "removable kinds are ability/companion/quest/codex/npc" }); break; }
         if (removed) { log(character, { kind: "remove", entity: op.kind, id, why }, ctx); applied.push({ removed: op.kind, id }); }
         else refused.push({ op, reason: `no ${op.kind} "${id}" to remove` });
         break;

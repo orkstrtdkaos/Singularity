@@ -58,7 +58,8 @@
         "EXPLORE": 1,
         "FIGHT": 1,
         "DUEL": 1
-      }
+      },
+      "tradition": "enginewright"
     },
     {
       "id": "numenwork",
@@ -116,7 +117,8 @@
         "PUZZLE": 1,
         "EXPLORE": 1,
         "STEALTH": 1
-      }
+      },
+      "tradition": "numinous"
     },
     {
       "id": "mech_sense",
@@ -163,7 +165,8 @@
         "INVESTIGATE": 2,
         "FIGHT": 1,
         "PUZZLE": 1
-      }
+      },
+      "tradition": "enginewright"
     },
     {
       "id": "numen_sense",
@@ -210,7 +213,8 @@
         "INVESTIGATE": 2,
         "FIGHT": 1,
         "PUZZLE": 1
-      }
+      },
+      "tradition": "numinous"
     },
     {
       "id": "mend_device",
@@ -257,7 +261,8 @@
         "PUZZLE": 1,
         "SURVIVE": 1,
         "EXPLORE": 1
-      }
+      },
+      "tradition": "enginewright"
     },
     {
       "id": "steady_soul",
@@ -302,7 +307,8 @@
       ],
       "challengeProfile": {
         "SURVIVE": 3
-      }
+      },
+      "tradition": "numinous"
     },
     {
       "id": "command_engine",
@@ -354,7 +360,8 @@
         "PUZZLE": 1,
         "SURVIVE": 1,
         "EXPLORE": 1
-      }
+      },
+      "tradition": "enginewright"
     },
     {
       "id": "thin_place",
@@ -407,7 +414,8 @@
         "PUZZLE": 1,
         "EXPLORE": 1,
         "STEALTH": 1
-      }
+      },
+      "tradition": "numinous"
     },
     {
       "id": "meaning_engine",
@@ -445,7 +453,8 @@
         "SURVIVE": 1,
         "EXPLORE": 1,
         "FIGHT": 1
-      }
+      },
+      "tradition": "cross_pole_braid"
     },
     {
       "id": "shortfold",
@@ -489,7 +498,8 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "tradition": "enginewright"
     },
     {
       "id": "waygate",
@@ -521,7 +531,8 @@
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
-      "gated": "learned"
+      "gated": "learned",
+      "tradition": "numinous"
     }
   ]
 }

@@ -236,6 +236,23 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .leg-manual { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); margin-left: 6px; font-style: italic; }
 .leg-auto { font-family: var(--font-ui); font-size: 10px; padding: 0 6px; border-radius: 8px; background: #23361f; color: #7fca7f; border: 1px solid #3a5d3a; margin-left: 6px; }
 .leg-cleared { font-family: var(--font-ui); font-size: 12px; padding: 3px 0; color: var(--ink-dim); }
+/* SNG-054 Phase 0: skill-graph pan/zoom viewport */
+.graph-wrap { position: relative; height: 70vh; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--panel2); }
+#skill-svg { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+#skill-svg:active { cursor: grabbing; }
+.graph-zoom-ctl { position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; flex-direction: column; gap: 4px; }
+.graph-zoom-ctl button { width: 30px; height: 30px; font-size: 16px; line-height: 1; border-radius: 6px; border: 1px solid var(--border); background: var(--panel); color: var(--ink); cursor: pointer; }
+.graph-zoom-ctl button:hover { border-color: var(--accent2); color: var(--accent2); }
+/* SNG-053 image lightbox */
+img[data-lightbox] { cursor: zoom-in; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.lightbox-inner { position: relative; max-width: 92vw; max-height: 92vh; display: flex; flex-direction: column; align-items: center; }
+.lightbox-inner img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,.6); }
+.lightbox-cap { font-family: var(--font-ui); font-size: 13px; color: #ddd; margin-top: 8px; text-align: center; }
+.lightbox-close { position: absolute; top: -12px; right: -12px; width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--panel); color: var(--ink); font-size: 16px; cursor: pointer; }
+.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 60px; border: none; background: rgba(0,0,0,.4); color: #fff; font-size: 30px; cursor: pointer; border-radius: 8px; }
+.lightbox-nav.prev { left: -52px; } .lightbox-nav.next { right: -52px; }
+@media (max-width: 640px) { .lightbox-nav.prev { left: 4px; } .lightbox-nav.next { right: 4px; } }
 /* SNG-046 Layer 3: per-location image in the map detail */
 .location-image { width: 100%; max-height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 8px; display: block; }
 /* SNG-043 gambit builder feedback */

@@ -2042,6 +2042,11 @@ await (async () => {
   // prompt assembly
   const seed = characterPromptSeed({ name: "Aria", origin: "valley-native", inventory: [{ name: "belt knife" }], bio: { motivation: "to find her brother" } });
   check("SNG-035: characterPromptSeed weaves name + origin + gear + arc", /Aria/.test(seed) && /valley native/.test(seed) && /belt knife/.test(seed));
+  // SNG-053: the FORM leads the prompt so a non-human character renders non-human
+  const entSeed = characterPromptSeed({ name: "Oakenroot", form: "a towering treefolk of bark and heartwood, moss-bearded", origin: "valley" });
+  check("SNG-053: an explicit form LEADS the character prompt (not 'character portrait')", /^a towering treefolk/.test(entSeed) && entSeed.indexOf("treefolk") < entSeed.indexOf("portrait"));
+  check("SNG-053: appearance/lineage also count as form; default is a stated 'a person'", /^a scaled/.test(characterPromptSeed({ appearance: "a scaled serpent-kin" })) && /^a person/.test(characterPromptSeed({ name: "Jo", origin: "valley" })));
+  check("SNG-053: a generated NPC prompt leads with its form", /^a hulking stone construct/.test(assembleImagePrompt("npc", { name: "Gate", role: "guards the arch", appearance: "a hulking stone construct" })));
   check("SNG-035: assembleImagePrompt(location) uses the descriptionSeed", /old mill/i.test(assembleImagePrompt("location", { name: "Mill", descriptionSeed: "an old mill by the water" })));
   check("SNG-035: imageURLFor builds a keyless Pollinations URL with the encoded prompt", (() => { const u = imageURLFor("npc", "a brave knight", "knight-1"); return u.startsWith("https://image.pollinations.ai/prompt/") && /brave/.test(u) && /nologo=true/.test(u); })());
 

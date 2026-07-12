@@ -36,7 +36,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.16";
+const APP_VERSION = "1.8.17";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -53,6 +53,7 @@ let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene 
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
 let mapShowKG = false;   // SNG-046: knowledge-overlay toggle on the world map
+let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
@@ -68,6 +69,7 @@ let seenBeats = 0;       // remote beats already rendered
 (async function boot() {
   // SNG-051: a one-time `?dev=1` visit opts this browser into the dev preview-legs panel.
   try { if (/[?&]dev=1\b/.test(location.search)) localStorage.setItem("singularity.dev", "1"); } catch { /* ignore */ }
+  wireLightbox(); // SNG-053: click any image → larger view
   try {
     CONTENT = await loadContent();
   } catch (err) {
@@ -163,6 +165,57 @@ function chrome(inner) {
   document.getElementById("nav-settings").onclick = () => renderSettings();
   const devBtn = document.getElementById("nav-dev");
   if (devBtn) devBtn.onclick = () => renderPreviewLegs();
+}
+
+// ---------- SNG-053: image lightbox (click any portrait/scene/moment art → larger view) ----------
+
+/** Open a modal lightbox over a list of images (arrow-through when >1). Esc / click-backdrop /
+ *  ✕ dismiss; ←/→ navigate. Reused by portraits, NPC/location art, moment art, and the gallery. */
+function openLightbox(items, start = 0) {
+  const list = (items || []).filter(it => it && it.url);
+  if (!list.length) return;
+  let i = Math.max(0, Math.min(start, list.length - 1));
+  const el = document.createElement("div");
+  el.className = "lightbox";
+  const close = () => { el.remove(); document.removeEventListener("keydown", onKey); };
+  const onKey = (e) => {
+    if (e.key === "Escape") close();
+    else if (list.length > 1 && e.key === "ArrowLeft") { i = (i - 1 + list.length) % list.length; render(); }
+    else if (list.length > 1 && e.key === "ArrowRight") { i = (i + 1) % list.length; render(); }
+  };
+  const render = () => {
+    const it = list[i];
+    el.innerHTML = `<div class="lightbox-inner">
+      <img src="${esc(it.url)}" alt="${esc(it.caption || "")}">
+      ${it.caption ? `<div class="lightbox-cap">${esc(it.caption)}${list.length > 1 ? ` · ${i + 1}/${list.length}` : ""}</div>` : ""}
+      ${list.length > 1 ? `<button class="lightbox-nav prev" data-lbprev>‹</button><button class="lightbox-nav next" data-lbnext>›</button>` : ""}
+      <button class="lightbox-close" data-lbclose>✕</button>
+    </div>`;
+    el.querySelector("[data-lbclose]").onclick = close;
+    const prev = el.querySelector("[data-lbprev]"); if (prev) prev.onclick = (e) => { e.stopPropagation(); i = (i - 1 + list.length) % list.length; render(); };
+    const next = el.querySelector("[data-lbnext]"); if (next) next.onclick = (e) => { e.stopPropagation(); i = (i + 1) % list.length; render(); };
+  };
+  el.onclick = (e) => { if (e.target === el || e.target.classList.contains("lightbox-inner")) close(); };
+  document.addEventListener("keydown", onKey);
+  render();
+  document.body.appendChild(el);
+}
+
+/** One-time delegated handler: any img[data-lightbox] opens the lightbox; a gallery image opens
+ *  the whole gallery arrow-through from its index. Registered once (survives chrome re-renders).
+ *  `_lightboxWired` is declared at module top (boot calls this before this point is evaluated). */
+function wireLightbox() {
+  if (_lightboxWired) return;
+  _lightboxWired = true;
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest && e.target.closest("img[data-lightbox]");
+    if (!img) return;
+    if (img.dataset.lbgroup === "gallery" && character?.gallery?.length) {
+      openLightbox(character.gallery.map(g => ({ url: g.url, caption: g.caption })), Number(img.dataset.lbindex) || 0);
+    } else {
+      openLightbox([{ url: img.getAttribute("src"), caption: img.getAttribute("alt") }]);
+    }
+  });
 }
 
 // ---------- SNG-051: dev preview-legs panel (dev-only; clears the verification bottleneck) ----------
@@ -1931,7 +1984,7 @@ function renderMap(selectedId = null) {
         ${l.dangerLevel >= 3 ? `<span class="rep-band wary">dangerous</span>` : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
       </div>
-      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
+      ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
       ${visited
         ? `<p class="map-details-desc">${esc(l.descriptionSeed.slice(0, 260))}${l.descriptionSeed.length > 260 ? "…" : ""}</p>
            ${(() => { const vs = vectorSummary(character, l.id, l, CONTENT.spectrums, CONTENT.rules); return vs ? `<div class="place-vectors">${esc(vs)}</div>` : ""; })()}
@@ -1993,7 +2046,7 @@ function renderSkillGraph(selectedId = null) {
     ...classes.map(cls => padY + model.nodes.filter(n => n.cls === cls).length * rowH + 40));
   const recipeName = id => (CONTENT.emergence.recipes || []).find(r => r.id === id)?.name || (CONTENT.emergence.branchTemplates || []).find(t => t.id === id)?.name || id;
 
-  const svg = `<svg viewBox="0 0 ${width} ${height}" class="world-map skill-graph">
+  const svg = `<svg id="skill-svg" viewBox="0 0 ${width} ${height}" class="world-map skill-graph" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
     ${classes.map((cls, ci) => `<text x="${padX + ci * colW}" y="36" text-anchor="middle" class="graph-class-label" fill="${classColor(cls)}">${esc(classLabel(cls))}</text>`).join("")}
     ${virtuals.length ? `<text x="${padX + classes.length * colW + 20}" y="36" text-anchor="middle" class="graph-class-label" fill="${classColor("discovery")}">Emergence</text>` : ""}
     ${model.edges.map(e => { const A = pos[e.from], B = pos[e.virtual]; return A && B ? `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="graph-edge ${e.kind}"/>` : ""; }).join("")}
@@ -2009,7 +2062,7 @@ function renderSkillGraph(selectedId = null) {
     ${virtuals.map(vid => { const p = pos[vid]; return `<g class="graph-node virtual" data-skillnode="${esc(vid)}"><title>${esc(recipeName(vid))}</title>
       <rect x="${p.x - 5}" y="${p.y - 5}" width="10" height="10" transform="rotate(45 ${p.x} ${p.y})" fill="#23262e" stroke="${classColor("discovery")}"/>
       <text x="${p.x + 10}" y="${p.y + 3}" class="graph-node-label">${esc(recipeName(vid))}</text></g>`; }).join("")}
-  </svg>`;
+  </g></svg>`;
 
   const sel = selectedId ? model.nodes.find(n => n.id === selectedId) : null;
   const selAb = sel ? fullCatalog()[sel.id] : null;
@@ -2025,13 +2078,77 @@ function renderSkillGraph(selectedId = null) {
 
   chrome(`<div class="screen" style="max-width:960px">
     <h2>Skill Graph</h2>
-    <p class="hint" style="margin-bottom:8px">Every ability by class (color) and Tier I–V (size). Filled = owned. Gold ring = aspired · teal ring = ripe to claim · 🔒 = gated. Diamonds are emergence techniques; lines link their components.</p>
-    <div style="overflow:auto; max-height:70vh">${svg}</div>
+    <p class="hint" style="margin-bottom:8px">Every ability by class (color) and Tier I–V (size). Filled = owned. Gold ring = aspired · teal ring = ripe to claim · 🔒 = gated. Diamonds are emergence techniques; lines link their components. <strong>Scroll to zoom, drag to pan.</strong></p>
+    <div class="graph-wrap" id="graph-wrap">
+      <div class="graph-zoom-ctl">
+        <button id="gz-in" title="Zoom in">＋</button>
+        <button id="gz-out" title="Zoom out">－</button>
+        <button id="gz-fit" title="Fit to view">⤢</button>
+      </div>
+      ${svg}
+    </div>
     ${details}
     <button class="btn secondary" id="graph-back" style="margin-top:12px">Back</button>
   </div>`);
-  for (const g of app.querySelectorAll("[data-skillnode]")) g.onclick = () => renderSkillGraph(g.dataset.skillnode === selectedId ? null : g.dataset.skillnode);
-  document.getElementById("graph-back").onclick = () => renderCharacterScreen();
+  wireSkillGraphViewport();
+  for (const g of app.querySelectorAll("[data-skillnode]")) g.onclick = (ev) => {
+    if (_graphDidPan) { _graphDidPan = false; return; } // a drag-pan, not a select
+    renderSkillGraph(g.dataset.skillnode === selectedId ? null : g.dataset.skillnode);
+  };
+  document.getElementById("graph-back").onclick = () => { graphView = null; renderCharacterScreen(); };
+}
+
+// SNG-054 Phase 0: pan/zoom for the skill graph (the fixed viewBox overflowed unusably on
+// desktop). Pure viewport work — a transform on the <g class="graph-vp"> group; state persists
+// across node-select re-renders (graphView) so zoom isn't lost on click. Fit/reset = identity.
+let graphView = null;      // { k, tx, ty } — persisted transform, or null = fit
+let _graphDidPan = false;  // suppress a node-select when a drag actually panned
+
+function wireSkillGraphViewport() {
+  const svg = document.getElementById("skill-svg");
+  const vp = svg?.querySelector(".graph-vp");
+  if (!svg || !vp) return;
+  const apply = () => { const v = graphView || { k: 1, tx: 0, ty: 0 }; vp.setAttribute("transform", `translate(${v.tx} ${v.ty}) scale(${v.k})`); };
+  const clampK = k => Math.max(0.3, Math.min(4, k));
+  // convert a client point to the SVG's viewBox coordinate space
+  const toSvg = (clientX, clientY) => {
+    const r = svg.getBoundingClientRect();
+    const vb = svg.viewBox.baseVal;
+    return { x: (clientX - r.left) / r.width * vb.width, y: (clientY - r.top) / r.height * vb.height };
+  };
+  const zoomAt = (clientX, clientY, factor) => {
+    const v = graphView || { k: 1, tx: 0, ty: 0 };
+    const p = toSvg(clientX, clientY);
+    const k2 = clampK(v.k * factor);
+    // keep the point under the cursor fixed: p = (p - t)/k invariant
+    graphView = { k: k2, tx: p.x - (p.x - v.tx) * (k2 / v.k), ty: p.y - (p.y - v.ty) * (k2 / v.k) };
+    apply();
+  };
+  svg.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12); }, { passive: false });
+  // drag to pan (mouse + touch)
+  let dragging = false, last = null, moved = 0;
+  const down = (x, y) => { dragging = true; last = { x, y }; moved = 0; _graphDidPan = false; };
+  const move = (x, y) => {
+    if (!dragging) return;
+    const r = svg.getBoundingClientRect(); const vb = svg.viewBox.baseVal;
+    const dx = (x - last.x) / r.width * vb.width, dy = (y - last.y) / r.height * vb.height;
+    moved += Math.abs(x - last.x) + Math.abs(y - last.y);
+    const v = graphView || { k: 1, tx: 0, ty: 0 };
+    graphView = { k: v.k, tx: v.tx + dx, ty: v.ty + dy };
+    last = { x, y }; if (moved > 6) _graphDidPan = true; apply();
+  };
+  const up = () => { dragging = false; };
+  svg.addEventListener("mousedown", e => down(e.clientX, e.clientY));
+  window.addEventListener("mousemove", e => move(e.clientX, e.clientY));
+  window.addEventListener("mouseup", up);
+  svg.addEventListener("touchstart", e => { if (e.touches[0]) down(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+  svg.addEventListener("touchmove", e => { if (e.touches[0]) { move(e.touches[0].clientX, e.touches[0].clientY); } }, { passive: true });
+  svg.addEventListener("touchend", up);
+  const r = svg.getBoundingClientRect();
+  document.getElementById("gz-in").onclick = () => zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.25);
+  document.getElementById("gz-out").onclick = () => zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1 / 1.25);
+  document.getElementById("gz-fit").onclick = () => { graphView = null; apply(); };
+  apply();
 }
 
 // ---------- character & inventory screens (SNG-007) ----------
@@ -2045,11 +2162,13 @@ function renderCharacterScreen() {
   const galleryCount = (character.gallery || []).length;
   chrome(`<div class="screen" style="max-width:760px">
     <div class="cs-header">
-      ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" onerror="this.style.display='none'">` : ""}
+      ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
       <div class="cs-header-text">
         <h2 style="margin:0">${esc(character.name)}</h2>
         <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+        ${character.form ? `<div class="hint" style="margin-top:4px"><em>Form:</em> ${esc(character.form)}</div>` : ""}
         <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap">
+          <button class="opt" id="cs-form" title="Describe this character's physical form / species so the portrait renders it (e.g. an Ent, a construct)">✎ Appearance</button>
           ${imagesEnabled() && !character.portrait ? `<button class="opt" id="cs-gen-portrait">✦ Generate portrait</button>` : ""}
           ${imagesEnabled() && character.portrait ? `<button class="opt" id="cs-regen-portrait" title="Re-mint the portrait">↻ New portrait</button>` : ""}
           <button class="opt" id="cs-gallery">🖼 Gallery${galleryCount ? ` (${galleryCount})` : ""}</button>
@@ -2139,6 +2258,18 @@ function renderCharacterScreen() {
     renderCharacterScreen();
   };
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillGraph();
+  // SNG-053 form editor: describe the character's physical form so the portrait renders it
+  const formB = document.getElementById("cs-form");
+  if (formB) formB.onclick = () => {
+    const cur = character.form || "";
+    const next = prompt("Describe this character's physical form / species — the portrait leads with this.\n(e.g. \"a towering treefolk of bark and heartwood, moss-bearded, eyes like knots of amber\")", cur);
+    if (next === null) return;
+    character.form = next.trim() || undefined;
+    // a new form means a new portrait — re-mint so the picture matches
+    if (imagesEnabled()) ensureCharacterPortrait(character, { force: true, milestone: "reforged" });
+    saveCharacter(character);
+    renderCharacterScreen();
+  };
   // SNG-035 portrait + gallery controls
   const genP = document.getElementById("cs-gen-portrait");
   if (genP) genP.onclick = () => { ensureCharacterPortrait(character); saveCharacter(character); renderCharacterScreen(); };
@@ -2158,9 +2289,9 @@ function renderGallery() {
     <p class="hint" style="margin-bottom:12px">${imagesEnabled()
       ? "Portraits, people and places you've grown, and the moments worth a picture. New art is added as you play."
       : "Image generation is off. Turn on <strong>Settings → Scene &amp; item art → Generate</strong> to start seeing the world."}</p>
-    ${gallery.length ? `<div class="gallery-grid">${gallery.map(g => `
+    ${gallery.length ? `<div class="gallery-grid">${gallery.map((g, gi) => `
       <figure class="gallery-item">
-        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="this.parentElement.style.display='none'">
         <figcaption>${esc(g.caption || g.kind)}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
       </figure>`).join("")}</div>`
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}
@@ -2815,7 +2946,7 @@ function renderPlay(turn, opts = {}) {
 
   if (turn) {
     main += `<div class="beat">${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
-    if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="a moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035
+    if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     for (const c of turn.choices || []) {

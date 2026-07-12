@@ -142,12 +142,22 @@ const IMG_SIZES = {
   moment:    { width: 1024, height: 512 }
 };
 
-/** The descriptive core of a character portrait: appearance + origin + gear + current arc. */
+/** SNG-053: the physical FORM of a subject — its species/lineage/embodiment, in words. This LEADS
+ *  every character/NPC prompt so a non-human form (an Ent, a construct, a beast-kin) actually
+ *  renders non-human, instead of the literal "character portrait" prefix biasing the model to a
+ *  plain human. Explicit form/lineage/appearance wins; otherwise a neutral human default (human is
+ *  a stated value, never the unspoken assumption). */
+export function formOf(subject = {}) {
+  const explicit = subject.form || subject.lineage || subject.appearance;
+  if (explicit) return String(explicit).slice(0, 220);
+  return "a person";
+}
+
+/** The descriptive core of a character portrait: FORM leads, then origin/culture + gear + arc. */
 export function characterPromptSeed(character = {}) {
-  const bits = ["character portrait"];
-  if (character.appearance) bits.push(String(character.appearance).slice(0, 200));
+  const bits = [`${formOf(character)}, full-body character portrait`];
   if (character.name) bits.push(`named ${character.name}`);
-  if (character.origin) bits.push(`a ${String(character.origin).replace(/[-_]/g, " ")}`);
+  if (character.origin) bits.push(`of the ${String(character.origin).replace(/[-_]/g, " ")}`);
   if (character.background) bits.push(String(character.background).replace(/[-_]/g, " "));
   const gear = (character.inventory || []).map(i => i.name || i.itemId).filter(Boolean).slice(0, 3);
   if (gear.length) bits.push(`carrying ${gear.join(", ")}`);
@@ -159,7 +169,7 @@ export function characterPromptSeed(character = {}) {
 /** Assemble the raw (pre-floors) descriptive prompt for a subject of a given kind. Pure. */
 export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "character") return characterPromptSeed(subject);
-  if (kind === "npc") return `character portrait, ${subject.name || "a figure"}, ${subject.role || ""}. ${subject.appearance || subject.voiceHints || ""}`.trim();
+  if (kind === "npc") return `${formOf(subject)}, character portrait of ${subject.name || "a figure"}, ${subject.role || ""}. ${subject.voiceHints || ""}`.trim();
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   if (kind === "item") return `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
   if (kind === "moment") return String(subject.prompt || subject).slice(0, 300);

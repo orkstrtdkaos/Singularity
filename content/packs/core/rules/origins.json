@@ -5,10 +5,18 @@
   "note": "SNG-063 — ORIGIN is WHICH PEOPLE YOU ARE FROM, not where you start playing. It grants NATIVE access to that people's tradition (SNG-055 access model) and seeds your position on the great circle. STARTING LOCATION is a separate thing and is currently always the Valley (the only playable region — SNG-060). A character can be an Umbral who came to the Valley: native Umbral craft, Valley streets. Authored by Aevi 2026-07-11 to replace the 3 hardcoded origins in app.js.",
   "designNote": "Every origin carries a 'whyYouAreHere' — nobody is in the Valley by accident. The reason you left your people is the first thing the world knows about you, and the GM should use it.",
   "startingLocation": {
-    "note": "Until SNG-060 builds other regions, ALL characters begin in the Valley regardless of origin. Origin sets who your PEOPLE are; the Valley is merely where you currently stand. Do not conflate them.",
-    "current": [
-      "valley"
-    ]
+    "note": "Erik-directed 2026-07-11: the Valley is NOT the only start. Origins whose HOMELAND EXISTS begin there; the rest begin in the Valley as travelers (which their whyYouAreHere already explains).",
+    "playableRegions": [
+      "valley (11 locations)",
+      "umbral_depths (5 — NEW, dark pole)",
+      "the_quickwood (5 — NEW, life pole + the Ashwarden border)",
+      "manifest_domain (5 — the Deepwood / Ent lands)",
+      "unspooling (4 — the Churn)",
+      "riven_marches (3 — Marchers + Stillhold)",
+      "somatic_reaches (3 — Somatics + Cogitants)"
+    ],
+    "rule": "An origin with `startsAtHome: true` begins in its own homeland. An origin with `startsAtHome: false` begins in the Valley — NOT because the Valley is default, but because they LEFT, and the leaving is their story.",
+    "creationUX": "Offer the starting location at creation. If the origin has a homeland, DEFAULT to it but let the player choose the Valley instead (a character who has already left). If it doesn't, say so plainly and honestly — 'the Reaches of your people are not yet mapped; you begin far from home.'"
   },
   "origins": [
     {
@@ -17,7 +25,10 @@
       "nativeTradition": "valley_craft",
       "homeRegion": "valley",
       "description": "Born to the Valley floor — the near-center crossing where order, light, practical craft and making all cross faintly. Your people are generalists because the center holds a little of everything.",
-      "whyYouAreHere": "You never left. This is home, and the world is arriving at your door whether you asked it to or not."
+      "whyYouAreHere": "You never left. This is home, and the world is arriving at your door whether you asked it to or not.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": true
     },
     {
       "id": "harmonic",
@@ -25,7 +36,10 @@
       "nativeTradition": "harmonic",
       "homeRegion": "valley",
       "description": "Raised in the resonance-halls of the Heights — tuned stone, sung joints, sound as a working craft. A Valley folk-tradition, a foothill of the great mechanical and ordered peoples.",
-      "whyYouAreHere": "You came down. Something in the Heights stopped ringing true and you wanted to know why."
+      "whyYouAreHere": "You came down. Something in the Heights stopped ringing true and you wanted to know why.",
+      "startingRegion": "valley",
+      "startingLocation": "harmonic_heights_terrace",
+      "startsAtHome": true
     },
     {
       "id": "radiant_plateau",
@@ -33,7 +47,10 @@
       "nativeTradition": "radiant_folk",
       "homeRegion": "valley",
       "description": "Raised on the Plateau among prisms and worked light — revelation as a craft, not as a burning. Folk-Radiance, the gentle cousin of the Blaze.",
-      "whyYouAreHere": "You came down the Plateau road and did not go back up it."
+      "whyYouAreHere": "You came down the Plateau road and did not go back up it.",
+      "startingRegion": "valley",
+      "startingLocation": "radiant_plateau_edge",
+      "startsAtHome": true
     },
     {
       "id": "umbral",
@@ -41,7 +58,10 @@
       "nativeTradition": "umbral",
       "homeRegion": "umbral_depths",
       "description": "Born in the Underlight, where sight is a thing you do without eyes and the dark is not an absence but a country. Your people harbor what the light would destroy.",
-      "whyYouAreHere": "You came up. You have not said why, and the surface hurts your eyes, and you have not gone back."
+      "whyYouAreHere": "You came up. You have not said why, and the surface hurts your eyes, and you have not gone back.",
+      "startingRegion": "umbral_depths",
+      "startingLocation": "the_underlight",
+      "startsAtHome": true
     },
     {
       "id": "blazeborn",
@@ -49,7 +69,11 @@
       "nativeTradition": "blazeborn",
       "homeRegion": "radiant_wastes",
       "description": "Born in the Blaze, where the light is so total it has burned the land to glass. Revelation is your inheritance and it is not always a kindness.",
-      "whyYouAreHere": "The Blaze is expanding. You walked out ahead of it, and you are the first of your people the Valley has seen."
+      "whyYouAreHere": "The Blaze is expanding. You walked out ahead of it, and you are the first of your people the Valley has seen.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "rootkin",
@@ -57,7 +81,10 @@
       "nativeTradition": "rootkin",
       "homeRegion": "the_quickwood",
       "description": "Born to the grove-cities that grow rather than build. Your people plant for grandchildren and measure a life in centuries.",
-      "whyYouAreHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime."
+      "whyYouAreHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
+      "startingRegion": "the_quickwood",
+      "startingLocation": "the_heartroot",
+      "startsAtHome": true
     },
     {
       "id": "ashwarden",
@@ -65,7 +92,10 @@
       "nativeTradition": "ashwarden",
       "homeRegion": "the_palelands",
       "description": "Born to the Hollow March, where endings are tended the way the Rootkin tend growth. Your people are not morbid; they are simply unhurried and honest about where everything is going.",
-      "whyYouAreHere": "Something in the Valley is ending badly and untended, and your people noticed, and they sent you."
+      "whyYouAreHere": "Something in the Valley is ending badly and untended, and your people noticed, and they sent you.",
+      "startingRegion": "the_quickwood",
+      "startingLocation": "the_hollowing",
+      "startsAtHome": true
     },
     {
       "id": "marcher",
@@ -73,7 +103,10 @@
       "nativeTradition": "marcher",
       "homeRegion": "riven_marches",
       "description": "Born to the Riven Marches, a warrior culture that is honed conflict all the way down. You were taught the line, and how to hold it, and what it costs.",
-      "whyYouAreHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs."
+      "whyYouAreHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
+      "startingRegion": "riven_marches",
+      "startingLocation": "the_marchward",
+      "startsAtHome": true
     },
     {
       "id": "stillhold",
@@ -81,7 +114,10 @@
       "nativeTradition": "stillhold",
       "homeRegion": "the_stillhold",
       "description": "Born inside a peace so absolute it has become a kind of prison. You know how to bind, de-escalate, and make a truce that holds — and you know what perfect quiet costs.",
-      "whyYouAreHere": "You left the walls. You wanted a peace that was chosen rather than enforced, and you have not found it yet."
+      "whyYouAreHere": "You left the walls. You wanted a peace that was chosen rather than enforced, and you have not found it yet.",
+      "startingRegion": "riven_marches",
+      "startingLocation": "the_stillhold",
+      "startsAtHome": true
     },
     {
       "id": "somatic",
@@ -89,7 +125,10 @@
       "nativeTradition": "somatic",
       "homeRegion": "somatic_reaches",
       "description": "Raised in the Flesh-Temples, where the body is the only instrument and movement is a language. You do not talk about what your body can do; you show people, once.",
-      "whyYouAreHere": "You are looking for something the perfected body cannot answer, and you have started to suspect there is one."
+      "whyYouAreHere": "You are looking for something the perfected body cannot answer, and you have started to suspect there is one.",
+      "startingRegion": "somatic_reaches",
+      "startingLocation": "the_flesh_temple",
+      "startsAtHome": true
     },
     {
       "id": "cogitant",
@@ -97,7 +136,10 @@
       "nativeTradition": "cogitant",
       "homeRegion": "the_cogitarium",
       "description": "Raised in the Cogitarium, among people who have nearly left their bodies behind for pure thought and pay for it daily.",
-      "whyYouAreHere": "You noticed the paying. You came out to see whether there was another way to be a mind."
+      "whyYouAreHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
+      "startingRegion": "somatic_reaches",
+      "startingLocation": "the_cogitarium",
+      "startsAtHome": true
     },
     {
       "id": "churnfolk",
@@ -105,7 +147,10 @@
       "nativeTradition": "churnfolk",
       "homeRegion": "the_unspooling",
       "description": "Born in the Churn, where nothing is planned twice and living is improvisation. Your people are joyous, exhausting, and never bored.",
-      "whyYouAreHere": "You wanted to see whether a place where things STAY PUT was as dull as everyone said. The jury is out."
+      "whyYouAreHere": "You wanted to see whether a place where things STAY PUT was as dull as everyone said. The jury is out.",
+      "startingRegion": "unspooling",
+      "startingLocation": "tumbledown_market",
+      "startsAtHome": true
     },
     {
       "id": "lattice",
@@ -113,7 +158,11 @@
       "nativeTradition": "lattice",
       "homeRegion": "the_lattice_cities",
       "description": "Born in the arcologies, where nothing is unplanned and — this is the part nobody says aloud — nothing is free.",
-      "whyYouAreHere": "You did something unplanned. It was very small, and it was enough, and you are not going back."
+      "whyYouAreHere": "You did something unplanned. It was very small, and it was enough, and you are not going back.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "enginewright",
@@ -121,7 +170,11 @@
       "nativeTradition": "enginewright",
       "homeRegion": "the_gearlands",
       "description": "Born in the Gearlands, where the world is mechanism all the way down and every problem is, eventually, a maintenance problem.",
-      "whyYouAreHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you."
+      "whyYouAreHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "numinous",
@@ -129,7 +182,11 @@
       "nativeTradition": "numinous",
       "homeRegion": "the_numinous_reach",
       "description": "Raised where the veil is thin and most of material life has been dissolved into pure practice. You have seen things you cannot make a sentence out of.",
-      "whyYouAreHere": "You came back into the world to find out whether it still holds anything worth staying material for."
+      "whyYouAreHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "threnodist",
@@ -137,7 +194,11 @@
       "nativeTradition": "threnodist",
       "homeRegion": "the_feeling_coast",
       "description": "Raised among the grief-houses and joy-halls, where feeling is held to be the only true knowing and nobody weeps privately.",
-      "whyYouAreHere": "You met someone who did not feel things out loud and you found it horrifying, and then you found it interesting."
+      "whyYouAreHere": "You met someone who did not feel things out loud and you found it horrifying, and then you found it interesting.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "syllogist",
@@ -145,7 +206,11 @@
       "nativeTradition": "syllogist",
       "homeRegion": "the_reasoned_hold",
       "description": "Raised in the Axiom, reasoning from first principles, taught that emotion is noise in the signal.",
-      "whyYouAreHere": "You encountered a true thing that reason could not reach. It is still bothering you. That is why you are here."
+      "whyYouAreHere": "You encountered a true thing that reason could not reach. It is still bothering you. That is why you are here.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "veilwright",
@@ -153,7 +218,11 @@
       "nativeTradition": "veilwright",
       "homeRegion": "the_veiled_reach",
       "description": "Born to the Hall of Mirrors, where every truth is held to be a made thing, and your people simply make better ones.",
-      "whyYouAreHere": "Somebody made a truth about YOU, and you did not care for it, and you have developed a complicated relationship with your own craft."
+      "whyYouAreHere": "Somebody made a truth about YOU, and you did not care for it, and you have developed a complicated relationship with your own craft.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "verist",
@@ -161,7 +230,11 @@
       "nativeTradition": "verist",
       "homeRegion": "the_stark_reach",
       "description": "Raised at the Unblinking Stone, where you say what is so, whatever it costs — and it costs.",
-      "whyYouAreHere": "You told the truth to the wrong person and it went exactly as your people said it would, and they were right, and you left anyway."
+      "whyYouAreHere": "You told the truth to the wrong person and it went exactly as your people said it would, and they were right, and you left anyway.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "abyssal",
@@ -169,7 +242,11 @@
       "nativeTradition": "abyssal",
       "homeRegion": "the_descent",
       "description": "Raised among people who name appetite plainly and strike bargains that are exactly, horribly fair. Your people are honest about want in a way the pious cannot manage.",
-      "whyYouAreHere": "You were owed something and collecting it would have cost more than it was worth, and you walked away from a fair bargain, which your people found shocking."
+      "whyYouAreHere": "You were owed something and collecting it would have cost more than it was worth, and you walked away from a fair bargain, which your people found shocking.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "seraphic",
@@ -177,7 +254,11 @@
       "nativeTradition": "seraphic",
       "homeRegion": "the_ascent",
       "description": "Raised in the Choir-Height, luminous and hierarchical and certain. Your people's mercy is real. So is their judgment.",
-      "whyYouAreHere": "You were wrong about someone, and the judgment bound anyway, and you have been trying to unmake it ever since."
+      "whyYouAreHere": "You were wrong about someone, and the judgment bound anyway, and you have been trying to unmake it ever since.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "mason",
@@ -185,7 +266,11 @@
       "nativeTradition": "mason",
       "homeRegion": "the_given_land",
       "description": "Born to the Bedrock, where only what can be touched is real. Your people build things that outlast the arguments about them.",
-      "whyYouAreHere": "There is a thing you cannot weigh that you are nonetheless certain is real, and you cannot say that at home."
+      "whyYouAreHere": "There is a thing you cannot weigh that you are nonetheless certain is real, and you cannot say that at home.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "figurist",
@@ -193,7 +278,11 @@
       "nativeTradition": "figurist",
       "homeRegion": "the_pattern_reach",
       "description": "Raised in the Cloudform, among buildings that are arguments and a geography that resists being mapped. Matter, to your people, is the coarsest layer of the real.",
-      "whyYouAreHere": "You wanted to touch something. Simply that. It is considered a shameful appetite where you are from."
+      "whyYouAreHere": "You wanted to touch something. Simply that. It is considered a shameful appetite where you are from.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "horizon",
@@ -201,7 +290,11 @@
       "nativeTradition": "horizon",
       "homeRegion": "the_open_reach",
       "description": "Born to the road, to a people for whom everywhere is a place not yet arrived. You have no home region because your people do not have one.",
-      "whyYouAreHere": "You stopped. You do not know why yet, and neither do they, and it may be the most significant thing you have ever done."
+      "whyYouAreHere": "You stopped. You do not know why yet, and neither do they, and it may be the most significant thing you have ever done.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "hourkeeper",
@@ -209,7 +302,11 @@
       "nativeTradition": "hourkeeper",
       "homeRegion": "the_kept_reach",
       "description": "Raised among clock-towers and archives that run forward. Your people remember and pre-remember, and pay for both.",
-      "whyYouAreHere": "You saw an hour that had not happened and it was terrible, and you have come to find out whether it is avoidable."
+      "whyYouAreHere": "You saw an hour that had not happened and it was terrible, and you have come to find out whether it is avoidable.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "unmaker",
@@ -217,7 +314,11 @@
       "nativeTradition": "unmaker",
       "homeRegion": "the_unmade",
       "description": "Born to the Scour, where ending a thing WELL is a craft and the world is held to be choked with what should have ended.",
-      "whyYouAreHere": "Something in the Valley should end and nobody there can bear to do it, and you can, and you have not decided whether you will."
+      "whyYouAreHere": "Something in the Valley should end and nobody there can bear to do it, and you can, and you have not decided whether you will.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     },
     {
       "id": "wright",
@@ -225,7 +326,11 @@
       "nativeTradition": "wright",
       "homeRegion": "the_making",
       "description": "Raised in the Forge-Eternal, where the cities are never finished and that is the entire point. Your people cannot stop making.",
-      "whyYouAreHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong."
+      "whyYouAreHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
+      "startingRegion": "valley",
+      "startingLocation": "millbrook",
+      "startsAtHome": false,
+      "travelerNote": "Your homeland is not yet a place you can walk (SNG-060 in progress) — so you begin in the Valley, as a traveler far from your people. Your `whyYouAreHere` is the reason, and the GM should use it: you are the only one of your kind most Valleyfolk have ever met."
     }
   ]
 }

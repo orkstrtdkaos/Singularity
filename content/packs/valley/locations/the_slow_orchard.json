@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "the_slow_orchard",
+  "name": "The Slow Orchard",
+  "regionId": "the_quickwood",
+  "communityId": "rootkin.orchard",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.7,
+    0.3,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "death_life": 0.7,
+    "space_time": 0.3,
+    "mechanical_spiritual": 0.2
+  },
+  "tags": [
+    "rootkin",
+    "life",
+    "sacred",
+    "temporal",
+    "strange"
+  ],
+  "connections": [
+    "the_heartroot",
+    "grovehome"
+  ],
+  "descriptionSeed": "Trees that take a human lifetime to fruit, tended by people who will taste them. The Orchard is where the Rootkin explain themselves, and they explain themselves by walking you through it and saying nothing. There is a tree here planted for a woman who has not been born. There is a tree here planted BY someone for themselves and they are still waiting and they are not impatient. The whole Rootkin argument with the world is in this orchard and it does not need a word.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Orchard-tenders who plant for strangers; a tree that was planted for YOU, by someone, and nobody will say who; the long silence of people who are not in a hurry.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A tree planted three hundred years ago is about to fruit and the person it was planted for is missing",
+    "Someone has come to cut a tree that was planted for their own grandchild, and they have a reason, and it is a good one"
+  ],
+  "map": {
+    "x": 600,
+    "y": 250
+  },
+  "poleIntensity": 0.7
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "tal",
+  "name": "Tal",
+  "startingOption": true,
+  "role": "Companion — a road-met apprentice who attached themselves to you and will not be shaken",
+  "appearance": "Nineteen or so, rope-thin, permanently carrying too much. Valley homespun gone grey with road-dust, a tool-roll they will not put down, and the specific alertness of someone who has decided to be useful before being asked.",
+  "persona": "Tal is the only companion who is simply a PERSON — no grove-change, no nanite lattice, no Precursor strangeness. They attached themselves to you on the road, declared themselves your apprentice without consulting you, and have been quietly, stubbornly correct about small things ever since. Tal is brave in the way of someone who has not yet been badly hurt, and the question of what happens the first time they are is the whole of their arc. They argue with you. They are sometimes right.",
+  "voiceHints": "Talks more than anyone else in the party. Asks the naive question that turns out to be the load-bearing one. Calls you by your title or trade, never your name, until the bond deepens — then, once, your name, and it lands.",
+  "assistTags": [
+    "craft",
+    "carry",
+    "talk",
+    "learn",
+    "mend"
+  ],
+  "knowledge": [
+    "Valley folkways, market prices, whose cousin owes whom — the ordinary knowledge that turns out to matter",
+    "Whatever trade they were half-trained in before they met you",
+    "An unerring memory for what people actually said, as opposed to what they meant"
+  ],
+  "boundaries": "Tal is a PERSON and can be hurt, frightened, and killed — the only companion who can. They will not abandon you, which is a problem, because there are places you should go without them. They will not do something they think is wrong just because you asked; they will say so, out loud, in front of others.",
+  "hooks": "GM-EYES-ONLY: Tal's vulnerability IS the mechanic. Where other companions are wondrous, Tal is at risk, and the player should feel that. Their arc is whether they harden, break, or become something better. Do not kill them cheaply; make it cost.",
+  "bondGrants": {
+    "id": "second-pair-of-hands",
+    "name": "A Second Pair of Hands",
+    "description": "Tal has learned your work well enough to genuinely help — holding the line, passing the tool, taking the half of the task you cannot reach. Any craft or careful action you take with time to prepare goes better because someone competent is beside you.",
+    "energyCost": 0,
+    "attribute": "physical",
+    "axes": {
+      "chaos_order": 0.2,
+      "body_mind": -0.1
+    },
+    "notFor": "Anything Tal has not seen you do before; anything you would not let them watch; combat (they will try, and you will regret it).",
+    "taughtBy": "Tal (bond)"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "name": "The Uninvited Apprentice",
+      "narrationHints": "Underfoot, over-eager, obviously frightened and obviously not leaving."
+    },
+    {
+      "stage": 2,
+      "name": "Genuinely Useful",
+      "narrationHints": "Anticipates you now. Hands you the thing before you ask. Has stopped apologizing for existing."
+    },
+    {
+      "stage": 3,
+      "name": "The One Who Argues",
+      "narrationHints": "Will tell you plainly when you are wrong, in front of people, and has earned the right to."
+    }
+  ]
+}

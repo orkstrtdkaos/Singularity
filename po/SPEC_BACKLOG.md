@@ -830,3 +830,51 @@ Abilities are **GATED BY DOMAINS** (SNG-055: primary full · adjacent minus caps
 - **Antipodes touch where they must:** the Hollowing (Rootkin/Ashwarden — a working border and an exhausted mutual respect, each sure the other has made a category error about existence).
 **🔧 CCode:** creation offers STARTING LOCATION, defaulting to the origin's homeland; always also offer the Valley and **The Crossing** (the center — where nobody is from and everybody is). Show the circle: the player is choosing a place on it.
 **Still owed (Aevi, lower priority):** NPCs + encounters for the new regions (BATCH-9 `generate()` can populate interiors from the authored spine + grammar); the thin pre-existing regions (riven_marches / somatic_reaches / unspooling at 3–4 want ~6).
+---
+
+## SNG-064 — ⚠️ THE MANIFEST BUG (the biggest bug in the project) + world connectivity
+
+**Aevi-found 2026-07-11 while diagnosing Erik's "I have yet to run into a random encounter."** The encounter system was never broken. **The world was.**
+
+**ROOT CAUSE:** `content/packs/valley/manifest.json` is a **LOAD WHITELIST** — `engine/state.js` does `for (const path of valley.provides.locations)` and loads **only what is listed**. It listed:
+- **6 of 89 locations** → **the live game has been running on SIX LOCATIONS.**
+- 5 of 31 NPCs · 3 of 26 lore files.
+Everything else — 26 pre-existing Valley/Marches/Churn/Deepwood locations, all 48 locations authored for SNG-060, 26 NPCs, 23 lore files — **silently did not exist.** No error. No warning. Just absent.
+
+**Why Erik never saw a random encounter:** the encounter table is fine (15 encounters; onTravel 35%, onEnterLocation 12%, onRest 15%; most `regions:["*"] minDanger:0` = eligible everywhere) and the wiring is fine (`maybeRandomEncounter` fires at app.js 2228/2229/2250). **With six locations there were almost no travel legs to roll on.** Fix the world, and the encounters fire.
+
+**FIXED (Aevi):**
+- Manifest rebuilt: **locations 6→92 · NPCs 5→31 · lore 3→26.**
+- **3 locations authored that were REFERENCED BUT NEVER EXISTED** (dangling connections): `the_quickwood_eaves`, `the_churn_edge`, `the_gearlands_verge`.
+- **The world wired together through THE AXIS GATE** — the Center is the hub (twelve roads leave the Crossing), every region's gateway links to it.
+- **Global reciprocity pass:** connections in data are ONE-WAY; the world had leave-only edges. All 20 repaired.
+- **VERIFIED at HEAD (authenticated API, not the lagging raw CDN): 92 locations · 24 regions · 0 dangling · 0 one-way · 92/92 reachable from the start.**
+
+**🔧 CCode — REQUIRED:**
+1. **Manifest-parity CI check** (this is exactly SNG-040's brief and this bug is the argument for it): fail the build if any content file on disk is not listed in a manifest, or any manifest path does not exist.
+2. **Connection validator:** fail on dangling connections, one-way edges, or unreachable locations.
+3. Consider loading by directory listing rather than whitelist — or keep the whitelist and let CI enforce it. Either way, **content must never silently not-exist again.**
+
+**Erik test:** "Travel a few legs — verify you now get random encounters (35% per leg), and that the world is much bigger than six locations."
+
+---
+
+## SNG-065 — Quests with concrete structure (make them mean something)
+
+**Erik-directed 2026-07-11:** *"I want the quests to be meaningful and have some concrete structure."* 🔧 CCode (engine) + ✍️ Aevi (schema + exemplar quests). Aevi PO.
+
+**Current state:** quests are minted loosely by the GM (`engine/quests.js` — title/progress/complete). They have no stakes, no stages, no consequences, and completing one changes nothing durable. They are a to-do list, not a story.
+
+**THE STRUCTURE (authored schema — `content/packs/core/rules/quest_structure.json`, Aevi to write):**
+1. **PREMISE + STAKES.** Every quest states plainly what is at risk and *who pays if you walk away*. A quest with nothing at stake is an errand. **If you cannot name the cost of ignoring it, it is not a quest.**
+2. **STAGES (2–5), each concrete.** Each stage carries: an OBJECTIVE the player can state in one sentence; a completion CONDITION the engine can actually test (a place reached, a person spoken to, a thing obtained, a truth learned, a roll passed); and a CHANGE it makes to the world when it lands. No vague "investigate further."
+3. **OUTCOMES ARE BRANCHED, NOT BINARY.** Not success/fail — *which* success. Every quest resolves into 2–4 authored outcomes, each with different world-consequences. **The Debt (prologue) is the model: however it ends, someone is ruined; the quest is about WHO.**
+4. **DURABLE CONSEQUENCE — the rule that makes quests mean something.** Every outcome MUST change at least one durable thing: a codex fact, an NPC's life/standing/death, a faction or people's disposition toward you, a location's state, a world-event that propagates via the away-digest (SNG-041 dated, BATCH-9 offscreen). **A quest that changes nothing durable is not allowed to be a quest.**
+5. **TIES TO THE WORLD'S LOGIC.** Each quest names: the AXIS it lives on (a quest is a tension between two poles — that is what makes it a *dilemma* and not a chore), the TRADITION(s) whose crafts open paths through it, the faction/people who care, and — where apt — the LEGEND it touches (SNG-042: Grael's ledger, Halvex's patched).
+6. **MULTIPLE ROUTES.** Force, guile, care, reason, craft, concealment, truth, endurance — a quest that has one solution is a lock, not a story. Route options should fan across the great circle so a player's domains genuinely change how they approach it (like the Prologue's problems).
+
+**🔧 CCode:** extend `engine/quests.js` to the structured schema (stages with testable conditions; branched outcomes; a `consequences` block the engine APPLIES on resolution — codex writes, NPC state, faction standing, world-events). Keep GM-minted ad-hoc quests working, but **structured quests are the authored kind and the GM should prefer them.** The quest log (SNG-007/043) shows stage + objective + stakes, not just a title.
+
+**✍️ AEVI OWES:** the schema + a first set of authored structured quests — starting with the ones the world is already pointing at: **Grael's ledger and the Fendt thread** (live in Erik's game), the Blaze's expansion, the Unlit taking someone from the Underlight, the tree in the Slow Orchard planted for someone missing, and a Halvex "patched" arc.
+
+**Erik test:** "Take a quest — verify it tells you what's at stake and who pays if you walk away, that it has real stages with clear objectives, that there's more than one way through it, and that finishing it CHANGES something you can go back and see."

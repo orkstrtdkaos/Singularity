@@ -623,3 +623,42 @@ Only once the corpus is final: redesign the tree/graph around the civilization s
 **Guardrails.** Content changes are additive/migration-safe — existing characters' learned abilities must MIGRATE to their new tradition grouping (reconcile step; nobody loses a skill). Engine reads groupings from content (don't hardcode civilizations in code). Suites + parse_probe green.
 
 **Sequence: Phase 0 (CCode, now) → Phase 1 (Aevi content, the big one) → Phase 2 (CCode viz).**
+---
+
+## SNG-055 — Domain access model (primary / secondary / tertiary; the opposite is closed)
+
+**Erik-directed 2026-07-11.** 🔧 CCode (engine). **Content is DONE** — `traditions.json` now carries the computed `adjacent` graph, `opposite` pairs, and `domainAccessModel`. Aevi PO.
+
+**The model (from traditions.json → domainAccessModel):**
+- **PRIMARY domain** — chosen at character build. Full access, all tiers, no cost penalty.
+- **ADJACENT to primary** — free access (no penalty) to all tiers **EXCEPT the highest (L4–L5 capstones)**. Being *near* a people is not being *of* them.
+- **SECONDARY domain** — chosen at build. Access up to **tier III**.
+- **TERTIARY domain** — chosen at build, **must be adjacent to the secondary**. Access up to **tier II**.
+- **Adjacent to any chosen domain** — accessible, but with a **skill-point penalty** (reuse the existing cross-class multiplier). All other gates still apply.
+- **OPPOSITE of primary or secondary** — **CLOSED.** You cannot learn the other end of an axis you have chosen an end of.
+- **Exceptions (the only crossings):** COMBINATION abilities — especially the **cross-pole braids** (harbored_flame, meaning_engine, the_turning_word) — and abilities granted by **artifact or extreme circumstance**.
+
+**Why it's coherent:** adjacency is computed from shared disposition leans, which is `world_framing`'s "geography = disposition; adjacency = kinship" made mechanical. What you can learn tracks what you are *near*. And the closed-opposite rule is what gives the braids their weight: holding an axis WHOLE is forbidden by ordinary means and reachable only by braiding. A Blazeborn cannot learn Umbracraft — but a Blazeborn who has genuinely held both can carry The Harbored Flame.
+
+**Build:**
+1. **Character build:** pick primary / secondary / tertiary domains (tertiary constrained to secondary's `adjacent` list). Store on the character.
+2. **Gate `meetsLearnGate` / `effectiveLevelReq`** off this model, reading `traditions.json` (adjacent / opposite / tiers). Do NOT hardcode the graph.
+3. **Group the learn-screen + skill-graph by the ability's `tradition` field** (now stamped on all 137 abilities) — NOT by `powerSystem`/reach. **This is the "why are body_mind skills still connected" fix**: abilities belong to a PEOPLE, not an axis. `powerSystem` is left intact for engine compat; `tradition` is the display+gating key.
+4. **Migrate existing characters:** infer primary/secondary from what they've already learned; nobody loses an ability they hold. Grandfather anything now out-of-domain rather than stripping it.
+5. Existing gates (level, prereq, breadth cap, native/in-region/teacher) still apply ON TOP.
+
+**⚠️ BALANCE FLAG (Aevi, honest):** the computed graph is **lopsided** — "order" is a very common secondary lean, so order-adjacent peoples (blazeborn, ashwarden, lattice, seraphic, hourkeeper, enginewright…) have 5+ adjacents, while **umbral has only 1** (veilwright). A Blazeborn primary opens far more of the world than an Umbral primary. Either (a) Aevi diversifies the secondary leans to even the graph, or (b) it's accepted as flavor (some peoples ARE more connected). **Erik's call — I won't reshape his world's dispositions to fix a graph without asking.**
+
+**Erik test:** "Build a character with a primary domain — verify you can freely take adjacent-domain skills but not their capstones, your secondary caps at tier III, your tertiary at tier II, the far domains cost extra, and the OPPOSITE of your primary simply isn't offered."
+
+---
+
+## SNG-056 — Location header desync (sheet shows a stale place)
+
+**Erik-found in live play 2026-07-11 (v1.8.16):** the scene header read **"HARMONIC HEIGHTS — LOWER TERRACE"** while the character was actually deep in the **Disputed Zone** (northern alcove camp) — hours of travel away. The GM itself identified it: the header is static flavor text that didn't update on movement; `Current Scene State` was correct. 🔧 CCode. Aevi PO.
+
+**Fix:** the location header must render from the AUTHORITATIVE current location (the same source the scene state uses — `character.currentLocationId` / active scene), not a cached or build-time string. Audit for any other place the location is displayed from a stale field (character sheet, map "you are here", codex, away-digest) and point them all at the one source. Add a smoke check: travel → every location surface updates in the same beat.
+
+**Erik test:** "Travel somewhere — verify the header, the sheet, and the map all say where you actually are, immediately."
+
+*Small but corrosive — it makes the player distrust the world state. Worth doing early.*

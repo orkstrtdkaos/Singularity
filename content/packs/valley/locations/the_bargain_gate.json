@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "the_bargain_gate",
+  "name": "The Bargain Gate",
+  "regionId": "the_descent",
+  "communityId": "abyssal.gate",
+  "axisVector": [
+    -0.2,
+    0.3,
+    -0.7,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "demonic_angelic": -0.7,
+    "falsehood_truth": 0.3,
+    "emotional_logical": -0.2
+  },
+  "tags": [
+    "abyssal",
+    "demonic",
+    "city",
+    "trade",
+    "home",
+    "social"
+  ],
+  "connections": [
+    "the_appetite_halls",
+    "the_maw"
+  ],
+  "descriptionSeed": "Horned architecture and scrupulous fairness. The Abyssal Choir names what you want — plainly, in public, without the decency of pretending otherwise — and then offers you exactly that at exactly what it costs. Their bargains are perfectly fair. That is the horror: they will not protect you from the price of your own wanting, and they consider protecting you from it the true cruelty.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Choir-brokers who name your appetite in one look; someone paying, correctly, and it is terrible; a bargain being offered to you that you want very badly.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "A bargain was fair and a child is paying it",
+    "Someone in the Valley has been dealing with the Choir and has not told anyone what they promised"
+  ],
+  "map": {
+    "x": 330,
+    "y": 470
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

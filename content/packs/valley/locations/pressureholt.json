@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "pressureholt",
+  "name": "Pressureholt",
+  "regionId": "the_gearlands",
+  "communityId": "enginewright.pressureholt",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.3,
+    -0.7,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "mechanical_spiritual": -0.7,
+    "chaos_order": 0.3,
+    "concrete_abstract": -0.3
+  },
+  "tags": [
+    "enginewright",
+    "mechanical",
+    "city",
+    "craft",
+    "home"
+  ],
+  "connections": [
+    "the_service_ways",
+    "the_great_engine"
+  ],
+  "descriptionSeed": "A city that is also a machine, and the citizens are also, in a sense, its maintenance. Everything here has a function, a schedule, and a failure mode that somebody has written down. The Enginewrights are warm, actually — the warmest people you will meet — but their warmth expresses as MAINTENANCE: they will fix your boots, your argument, and your marriage, unasked, and be genuinely hurt if you object.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Wrights who repair things you were still using; an apprentice who has taken something apart and cannot rebuild it; a machine that has been running since before the Transition and nobody dares stop it.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "Something in the city's own mechanism is failing and the Wrights cannot find it, which has never happened",
+    "A Wright has begun repairing PEOPLE, in the way Halvex Coil repairs people, and does not see the difference"
+  ],
+  "map": {
+    "x": 480,
+    "y": 120
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

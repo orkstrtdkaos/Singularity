@@ -32,6 +32,23 @@
 
 ---
 
+## 1b. ⚡ BUILD ORDER (Erik-directed 2026-07-12) — REVISED
+
+**P4 and P5 already SHIPPED as SNG-BATCH-10** (v1.8.22–25: domain gates engine-enforced · starting location · structured quests + loader · Content CI). Remaining phases, **re-ordered by what unblocks Erik RIGHT NOW:**
+
+| Order | Phase | Why here |
+|---|---|---|
+| **1** | **SNG-074 — dev mode off-switch** | Erik has **no clean player view** and is about to hand the game to Brooklyn. Small. Do it first. |
+| **2** | **P3 — GM corrections (`stateOps`)** | **⚡ THIS IS THE ONE THAT FIXES SILAS.** *P1 fixes creation going FORWARD; it does nothing for a character that already exists.* Erik's necromancer is stuck with Blazeborn/Lattice/Numinous abilities and the wrong domains, and **the only mechanism that can repair an existing character is a GM correction.** Without it, every mis-created character is scrap. |
+| **3** | **P1 — the commit boundary** | Stops it happening again (SNG-067/068/069 are one defect: creation commits before the player confirms). |
+| **4** | **P2 — feedback (auto-captured context)** | Turns Erik's screenshot-archaeology into one-click reports. |
+| **5** | **P6 — The Skill Wheel (SNG-073)** | The payoff — the skill tree becomes the great circle. |
+| then | SNG-056 · SNG-058 · SNG-052 | queued fast-follows |
+
+**⚡ P3 SCOPE NOTE — the repair Erik needs must include:** correct **domains** (primary/secondary/tertiary) on an existing character · **re-derive or re-grant abilities** against the corrected domains · **correct the background** · and **remove abilities the character should never have had** (prologue-granted, out-of-domain, un-chosen). **Grandfathering an earned ability is a CHOICE the player makes, not a default the engine imposes** — Erik must be able to say *"strip the Blazeborn work; I am an Ashwarden"* and have it obeyed. Still bounded by Law 14: **a repair is not an advance** — no XP, no levels, no power the character did not earn.
+
+*Concretely: Erik's Silas Weir is a NECROMANCER → primary domain **ashwarden** (the death pole). His kit exists and is authored: **Palework · Deathsense · Wither · Death-Ward**, and the within-tradition braid **The Counted End** (see an ending's exact hour and bring it to that hour precisely — the Ashwarden mercy). He should have that, not Lightsense.*
+
 ## 2. Phases
 
 ### P1 — The commit boundary *(fixes SNG-067 + 068 + 069 at the root)*

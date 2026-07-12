@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_lensward",
+  "name": "The Lensward",
+  "regionId": "radiant_wastes",
+  "communityId": "blazeborn.lensward",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.2,
+    -0.2,
+    0.0,
+    0.5,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "spectrum": {
+    "dark_light": 0.5,
+    "mechanical_spiritual": -0.2,
+    "concrete_abstract": -0.2
+  },
+  "tags": [
+    "blazeborn",
+    "light",
+    "craft",
+    "border",
+    "market"
+  ],
+  "connections": [
+    "glasshome"
+  ],
+  "descriptionSeed": "Where the Blazeborn work light instead of merely living in it — lenses, mirrors, the great focusing arrays, and the beam-craft that makes them feared. The Lensward is the border where the Radiant Wastes meet the rest of the world, and it is the only place Blazeborn learn tact, because it is the only place they meet people who can leave.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "the_coordinate_world"
+  ],
+  "encounterFlavor": "Lens-wrights whose work is genuinely beautiful; a beam-array pointed at something; Valley folk-Radiants who came to learn and are being gently patronized.",
+  "dangerLevel": 3,
+  "questSeeds": [
+    "The great array is being aimed, slowly, at a direction nobody will discuss",
+    "A Valley Radiant has been told their whole tradition is a childish shadow of the real thing, and they are not sure it isn't true"
+  ],
+  "map": {
+    "x": 640,
+    "y": 320
+  },
+  "poleIntensity": 0.6
+}

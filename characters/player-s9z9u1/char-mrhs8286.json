@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "craftsman",
   "level": 1,
-  "xp": 65,
+  "xp": 70,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -31,13 +31,13 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.029106249999999993
+    "spectrumId": -0.037650937499999995
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 62,
+  "energy": 57,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -136,41 +136,26 @@
       {
         "summary": "Silas takes the pigeon to the smokehouse and meets the man working there.",
         "narration": "You pick the pigeon back up off the counter. The cookhouse woman's shoulders drop half an inch — relief, not disappointment. The boy in the back watches you tuck the bird under your arm, his broom going still.\n\nThe smokehouse is easy enough to find: follow the lane past the well, turn where the smell of hickory and rendered fat sharpens into something purposeful. It's a squat stone building with a low doorway and a wedge of smoke leaking from the eave-gap, thin and blue in the cold morning air. The door stands open. Inside, two broad racks of fish hang on iron hooks over a banked fire — river perch, by the look of them, a little gray at the gill, which explains the early nets.\n\nA man in his late forties stands at a cutting block near the back wall, working a fillet knife with the economy of someone who has done this every morning of his life. He has the blocky forearms of a man who handles wet wood and heavy loads, and a canvas apron gone dark with use. He glances up when you step through the doorway. His eyes tick to Huginn — wherever the bird has settled — and then to the pigeon in your hand, in that order. The bird gets a longer look than the man does.\n\n\"Cookhouse send you?\" he says. No warmth, no hostility. Just the flat factual register of someone who has a lot of fish to process and wants to know if your business is worth stopping for."
+      },
+      {
+        "summary": "Order-Sense reads the smokehouse as a fragile fixed-account operation absorbing slow damage from the fish shortage — the pigeon has leverage.",
+        "narration": "The smokehouse man is still watching you, fillet knife easy in his hand, waiting for a reason to either talk or get back to his fish.\n\nYou give him a small nod — *a moment* — and let Order-Sense open quietly, the way you'd ease a door rather than push it. No reach, no press. Just attention, going a little deeper than the eyes.\n\nThe structure resolves. The smokehouse is a load-bearing thing in a simple economy: one man, one fire, the village's protein through the shoulder months when the river gives less. The rack capacity says he processes more than he sells fresh — most of it goes preserved, distributed, probably on account. The wear on the cutting block is centered and even, which is the mark of someone who has done the same motion for years without variation. This is not a tradesman who experiments. He serves a list of regular customers, and the list is probably older than his apron.\n\nThe weight, though — the weight falls on the fish. Two racks of perch, gray-gilled, not bad enough to pull but not what a morning's work should look like. The fire is banked lower than the space needs, which means he's stretching the wood. Catches are down, quality is sliding, and a man who runs on accounts and regulars cannot easily absorb that kind of slow erosion.\n\nThe pigeon under your arm is suddenly more interesting than it was a minute ago.\n\n\"Cookhouse didn't send me,\" you say. \"Came on my own. Two rabbits in the pack, this pigeon, all fresh this morning. Thought you might have more use for variety than your rack does right now.\""
       }
     ],
     "lastTurn": {
-      "narration": "You pick the pigeon back up off the counter. The cookhouse woman's shoulders drop half an inch — relief, not disappointment. The boy in the back watches you tuck the bird under your arm, his broom going still.\n\nThe smokehouse is easy enough to find: follow the lane past the well, turn where the smell of hickory and rendered fat sharpens into something purposeful. It's a squat stone building with a low doorway and a wedge of smoke leaking from the eave-gap, thin and blue in the cold morning air. The door stands open. Inside, two broad racks of fish hang on iron hooks over a banked fire — river perch, by the look of them, a little gray at the gill, which explains the early nets.\n\nA man in his late forties stands at a cutting block near the back wall, working a fillet knife with the economy of someone who has done this every morning of his life. He has the blocky forearms of a man who handles wet wood and heavy loads, and a canvas apron gone dark with use. He glances up when you step through the doorway. His eyes tick to Huginn — wherever the bird has settled — and then to the pigeon in your hand, in that order. The bird gets a longer look than the man does.\n\n\"Cookhouse send you?\" he says. No warmth, no hostility. Just the flat factual register of someone who has a lot of fish to process and wants to know if your business is worth stopping for.",
-      "sceneSummary": "Silas takes the pigeon to the smokehouse and meets the man working there.",
+      "narration": "The smokehouse man is still watching you, fillet knife easy in his hand, waiting for a reason to either talk or get back to his fish.\n\nYou give him a small nod — *a moment* — and let Order-Sense open quietly, the way you'd ease a door rather than push it. No reach, no press. Just attention, going a little deeper than the eyes.\n\nThe structure resolves. The smokehouse is a load-bearing thing in a simple economy: one man, one fire, the village's protein through the shoulder months when the river gives less. The rack capacity says he processes more than he sells fresh — most of it goes preserved, distributed, probably on account. The wear on the cutting block is centered and even, which is the mark of someone who has done the same motion for years without variation. This is not a tradesman who experiments. He serves a list of regular customers, and the list is probably older than his apron.\n\nThe weight, though — the weight falls on the fish. Two racks of perch, gray-gilled, not bad enough to pull but not what a morning's work should look like. The fire is banked lower than the space needs, which means he's stretching the wood. Catches are down, quality is sliding, and a man who runs on accounts and regulars cannot easily absorb that kind of slow erosion.\n\nThe pigeon under your arm is suddenly more interesting than it was a minute ago.\n\n\"Cookhouse didn't send me,\" you say. \"Came on my own. Two rabbits in the pack, this pigeon, all fresh this morning. Thought you might have more use for variety than your rack does right now.\"",
+      "sceneSummary": "Order-Sense reads the smokehouse as a fragile fixed-account operation absorbing slow damage from the fish shortage — the pigeon has leverage.",
       "choices": [
         {
-          "label": "Offer the pigeon straight — a fair price, no talk, just a clean trade",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Offer a straight barter — the pigeon and both rabbits for smoked fish, salt, or coin; let him name what's fair.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "spectrumId": 0.3
+            "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
             "trade",
-            "straightforward"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Trade the pigeon for information — ask about the smokehouse's buyers, the fish catches, or the river",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "spectrumId": 0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "trade",
-            "gather-information",
             "careful"
           ],
           "abilityId": null,
@@ -180,7 +165,43 @@
           "emergenceId": null
         },
         {
-          "label": "Use Order-Sense quietly on the smokehouse itself — read the structure of this operation, who it serves, where the weight falls",
+          "label": "Lead with the fish — ask him plainly about the gray gills, the low catches; make the conversation about his problem, not your trade.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": 0
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "listen",
+            "build-trust"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Offer the pigeon for one favor: an introduction — you want to meet whoever in Millbrook deals with the river, the water, the upstream.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "spectrumId": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say nothing more yet; let him name his terms — you've shown the goods, read the room; wait and see what he reaches for first.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -188,136 +209,99 @@
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful",
+            "wait",
             "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask him directly about the gray fish — the early nets, the bad catches — and let that open the conversation",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "gather-information",
-            "direct",
-            "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -3
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Millbrook smokehouse — a squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch hanging on iron hooks.",
+        "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch on iron hooks.",
         "npcsPresent": [
           {
             "name": "Smokehouse Man",
-            "state": "standing at the cutting block with a fillet knife, watching Silas, waiting for an answer to his question"
+            "state": "standing at the cutting block with fillet knife in hand, listening, waiting on Silas's terms"
           }
         ],
         "objects": [
           "Pigeon (fresh, cleaned, under Silas's arm)",
-          "Two racks of river perch on iron hooks",
+          "Two racks of gray-gilled river perch on iron hooks",
           "Fillet knife (in the man's hand)",
-          "Cutting block (dark with use)",
+          "Cutting block (dark with use, wear centered and even)",
           "Canvas apron (worn)",
-          "Banked fire beneath the racks"
+          "Banked fire beneath the racks (lower than the space needs — wood being stretched)"
         ],
         "threads": [
-          "The smokehouse man is waiting to hear if Silas's business is worth his time",
-          "The gray-gilled perch on the racks suggest the fish catch is already compromised",
-          "Huginn's presence has been noted — the man clocked the bird before the pigeon"
+          "Smokehouse man is weighing the trade offer — waiting for terms",
+          "Gray-gilled perch on the racks signal the fish shortage is already hurting this operation",
+          "Huginn's presence still noted; the man clocked the bird before the pigeon"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "smokehouse-man",
           "name": "Smokehouse Man",
           "role": "Smokehouse operator, Millbrook",
-          "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone with a full morning's work ahead. Noticed Huginn before he noticed the pigeon.",
-          "note": "Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage",
+          "note": "Order-Sense read the operation around him — fixed accounts, regular customers, the weight falling on fish quality; he's absorbing slow loss from the catch decline. Silas named himself as independent, showed the morning's take.",
           "learned": [
-            "Works the smokehouse mornings; has a full rack of gray-gilled perch — catches are down and the quality is suffering"
+            "Runs a fixed-account operation serving regular customers — not a speculative trader",
+            "Banked fire lower than needed — stretching wood supply alongside fish supply",
+            "Gray-gilled perch suggest quality has been sliding for some time, not just today"
           ],
-          "skillsObserved": [
-            "fillet work"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the smokehouse off the main lane, working a morning fillet session, waiting on Silas's answer"
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "The smokehouse is a squat stone building just off the main lane past the well — hickory smoke, iron racks, banked fire. Operated by a blocky man in his forties. The morning rack holds gray-gilled river perch, consistent with compromised catches.",
-          "subPlace": {
-            "name": "Smokehouse",
-            "note": "Stone building off the main lane — hickory smoke, iron racks, fillet work every morning. Operator noted Huginn before the pigeon.",
-            "visited": true
-          }
+          "statusNote": "At the smokehouse cutting block, listening to Silas's opening offer, knife in hand."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "millbrook",
-          "label": "Millbrook",
+          "topic": "millbrook-smokehouse-economy",
+          "label": "Millbrook Smokehouse — Structure",
           "kind": "place",
           "entityId": "millbrook",
-          "fact": "The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even before the nets are pulled early.",
+          "fact": "The smokehouse operates on fixed accounts — preserved fish distributed to regular customers on a list older than the operator's apron. One man, one fire, no experimentation. The fish shortage is already visible in gray-gilled perch and a banked fire stretching limited wood. The operation is load-bearing for village protein and is quietly under strain.",
           "links": [
+            "millbrook",
             "water-crisis-discoloration"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk from the cookhouse to the smokehouse — just a few minutes down the lane"
+        "why": "a short exchange in the smokehouse doorway"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Millbrook smokehouse — a squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch hanging on iron hooks.",
+      "setting": "Millbrook smokehouse — squat stone building just off the main lane, low doorway, blue hickory smoke leaking from the eave. Early spring, mid-morning, clear. Fire banked inside, two racks of river perch on iron hooks.",
       "npcsPresent": [
         {
           "name": "Smokehouse Man",
-          "state": "standing at the cutting block with a fillet knife, watching Silas, waiting for an answer to his question"
+          "state": "standing at the cutting block with fillet knife in hand, listening, waiting on Silas's terms"
         }
       ],
       "objects": [
         "Pigeon (fresh, cleaned, under Silas's arm)",
-        "Two racks of river perch on iron hooks",
+        "Two racks of gray-gilled river perch on iron hooks",
         "Fillet knife (in the man's hand)",
-        "Cutting block (dark with use)",
+        "Cutting block (dark with use, wear centered and even)",
         "Canvas apron (worn)",
-        "Banked fire beneath the racks"
+        "Banked fire beneath the racks (lower than the space needs — wood being stretched"
       ],
       "threads": [
-        "The smokehouse man is waiting to hear if Silas's business is worth his time",
-        "The gray-gilled perch on the racks suggest the fish catch is already compromised",
-        "Huginn's presence has been noted — the man clocked the bird before the pigeon"
+        "Smokehouse man is weighing the trade offer — waiting for terms",
+        "Gray-gilled perch on the racks signal the fish shortage is already hurting this operation",
+        "Huginn's presence still noted; the man clocked the bird before the pigeon"
       ]
     }
   },
@@ -395,16 +379,20 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage"
+        "[d1] Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage",
+        "[d1] Order-Sense read the operation around him — fixed accounts, regular customers, the weight falling on fish quality; he's absorbing slow loss from the catch decline. Silas named hims"
       ],
       "knownFacts": [
-        "Works the smokehouse mornings; has a full rack of gray-gilled perch — catches are down and the quality is suffering"
+        "Works the smokehouse mornings; has a full rack of gray-gilled perch — catches are down and the quality is suffering",
+        "Runs a fixed-account operation serving regular customers — not a speculative trader",
+        "Banked fire lower than needed — stretching wood supply alongside fish supply",
+        "Gray-gilled perch suggest quality has been sliding for some time, not just today"
       ],
       "skillsObserved": [
         "fillet work"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse off the main lane, working a morning fillet session, waiting on Silas's answer",
+      "statusNote": "At the smokehouse cutting block, listening to Silas's opening offer, knife in hand.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -571,14 +559,16 @@
         "facts": [
           "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. A figure named Usnea prop",
           "[d1] The cookhouse woman's wariness at a stranger with uncanny company suggests Millbrook's openness to outsiders is thinner than the village's unaligned reputation implies — at least at ground level, on t",
-          "[d1] The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even befo"
+          "[d1] The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even befo",
+          "[d1] The smokehouse operates on fixed accounts — preserved fish distributed to regular customers on a list older than the operator's apron. One man, one fire, no experimentation. The fish shortage is alrea"
         ],
         "links": [
           "disputed-zone",
           "water-crisis-discoloration"
         ],
         "aliases": [
-          "Millbrook's Elder Declaration"
+          "Millbrook's Elder Declaration",
+          "Millbrook Smokehouse — Structure"
         ],
         "createdDay": 1,
         "entityId": "millbrook",
@@ -637,16 +627,16 @@
     }
   },
   "tendencies": {
-    "strategic": 8.851145508743748,
-    "cerebral": 3.9304487512499997,
-    "social": 0.9801495006250001,
-    "generous": 3.940448501875,
-    "cautious": 0.985074875
+    "strategic": 9.806889781200029,
+    "cerebral": 4.91079650749375,
+    "social": 0.9752487531218751,
+    "generous": 3.9207462593656253,
+    "cautious": 1.980149500625
   },
   "aptitudes": [
     "strategist"
   ],
-  "actionCount": 6,
+  "actionCount": 7,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -668,8 +658,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783877199730,
-  "rev": 17,
+  "updatedAt": 1783878093551,
+  "rev": 18,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -696,7 +686,7 @@
     "uses": {
       "numen_sense": 2,
       "lightsense": 2,
-      "order_sense": 2
+      "order_sense": 3
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -712,7 +702,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 1
+    "marrow": 1.25
   },
   "customAbilities": {},
   "precursorAccess": [],

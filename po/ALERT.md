@@ -57,6 +57,16 @@ CCode's ROUND 2 caught Aevi in four places. **All accepted; `SYSTEM_SPEC.md` is 
 
 ---
 
+## 🔴 SNG-080 — **THE WORLD MUST PUSH** (Erik: *"I haven't gotten into ANY fights... I wanted more things to start happening"*)
+**Diagnosed: Erik has never left the safest place in the world.** Millbrook is a farming village and **ZERO fight-capable encounters are eligible there** (the 8 that can fire: 3 beneficial · 2 benign · 2 beautiful · 1 theft). That is CORRECT for a village. **The defect is that the world is REACTIVE — it waits for him.** *(Also `millbrook.json` has NO `dangerLevel` field → floored to the gentlest tier. CI should require it.)*
+**Fix — three pressures, all using systems that already exist:** (1) **THE VILLAIN ACTS ON A CLOCK.** Grael's thread is LIVE in Erik's world (Fendt, the ledger, the water crisis) and **nothing is firing it.** If Erik ignores it, Grael should WIN — another name on the board, the water worsens, and **it arrives at him.** *(The quest's own "you walked away" outcome already specifies this.)* (2) **THE WORLD REACHES HIM** — `worldtick` already has `impactsLocal`; a propagating consequence must sometimes surface as a **SCENE**, not a line in a digest. **Riffraff arrive. A messenger finds him. A body turns up.** (3) **QUEST HOOKS COME TO HIM** — `questSeeds` woven "when the scene needs drive" is too passive.
+**THE PACING RULE (the actually-missing thing): track QUIET TURNS; after a threshold, THE WORLD ACTS** — rumor → someone with a problem → a hook that won't wait → something arriving. **The player must never have to ask the world to be interesting.** Pressure respects the place: *in Millbrook that's a frightened neighbour, not a bandit ambush.* **And make danger FINDABLE** — colour `dangerLevel` on the map; the Disputed Zone is on his doorstep and nothing has invited him in.
+
+## ⭐ SNG-079 — **AXIAL MISALIGNMENT IS THE DIFFICULTY GATE** (Erik-designed)
+*"Some regions are not really able to be explored until you are powerful enough to overcome the disadvantages due to axial misalignment."* **Half of this already exists** — spectral fit is ±25 and every location carries `poleIntensity` (0.05 at The Crossing → **0.98 at the Blaze / Unlit Deep / Grand Lattice**). **It just doesn't BITE**, because base chance is so inflated (SNG-078) that −25 barely dents it.
+**The model:** misfit penalty scales with **`poleIntensity` × ring-distance from that place's pole** → **your ANTIPODE region is the hardest place in the world FOR YOU, and it's a different place for every character. The map becomes a PERSONAL difficulty map.** Widen the spectral band so it can gate · lower base chance + widen difficulty (SNG-078) or no gate can hold · **and when something is beyond you, SAY SO** — *"this place is against you in every way you are"* — a refusal that explains itself is a signpost; a silent 5% is a mystery.
+**Why it's right:** *you don't unlock a region — you become able to survive it.* And you become able by growing, by **changing what you are** (the §9 drift question), or by **BRAIDING** — which makes the cross-pole braid the literal key to the far side of the world.
+
 ## 🚨 SNG-078 — **THE GAME CEILINGS OUT AT LEVEL 5** (Aevi, analytic from `resolution.json` @ HEAD)
 | Difficulty | hits the 95% clamp at |
 |---|---|

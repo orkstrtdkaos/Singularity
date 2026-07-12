@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "bedrock",
+  "name": "Bedrock",
+  "regionId": "the_given_land",
+  "communityId": "mason.bedrock",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.7,
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    -0.3,
+    0.0
+  ],
+  "spectrum": {
+    "concrete_abstract": -0.7,
+    "body_mind": -0.3,
+    "chaos_order": 0.2
+  },
+  "tags": [
+    "mason",
+    "concrete",
+    "city",
+    "stone",
+    "craft",
+    "home"
+  ],
+  "connections": [
+    "the_weighing_yard",
+    "the_leaden_deep"
+  ],
+  "descriptionSeed": "Stone, weight, ledgers, and a deep suspicion of anything that cannot be weighed. The Masons build things that outlast the arguments about them, and they are the most reliable people in the world and the hardest to have a conversation with, because roughly half of what you want to say to them is, to them, not real.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions"
+  ],
+  "encounterFlavor": "Masons who assess you by touch and are usually right; a building that will still be here in six hundred years; a Figurist envoy being politely disbelieved out of existence.",
+  "dangerLevel": 2,
+  "questSeeds": [
+    "A structure is failing and the fault is not physical, and the Masons cannot admit that category exists",
+    "Something invisible is real and killing people and Bedrock will not act until it can be weighed"
+  ],
+  "map": {
+    "x": 140,
+    "y": 300
+  },
+  "poleIntensity": 0.7,
+  "startingLocation": true
+}

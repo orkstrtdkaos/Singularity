@@ -24,10 +24,11 @@
 | **SNG-066** | v1.8.35 | In-game ⚑ Feedback — one tap; version/screen/character/location/last-turn/errors auto-attach; append-only to `po/feedback/`, queued if sync off. |
 | **SNG-080** | v1.8.36 | The world must PUSH — quiet-turn pacing (escalating, register/danger-aware, tightens a live quest thread); danger graduated + findable on the map. |
 | **SNG-073** | v1.8.38 | **The Skill Wheel** — the skill tree IS the great circle: tiers radiate inward, folk at centre, precursor outside, cross-pole braids as diameters, antipode struck through. |
+| **SNG-081** | v1.8.39 | **The GM keeps the player's words.** Scene history is a dialogue now, not the GM's monologue — the deepest continuity bug, fixed. |
 
 ---
 
-## 🚨🚨 SNG-081 — **THE GM IS HAVING A CONVERSATION WITH ITSELF.** BUILD THIS FIRST. (Erik live 2026-07-12)
+## ✅ SNG-081 SHIPPED v1.8.39 — the GM keeps the player's words (scene history is a dialogue now)
 ```js
 // app.js:2211 — the ONLY thing pushed to turn history
 sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" });

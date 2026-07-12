@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "id": "backgrounds",
+  "kind": "creation",
+  "note": "SNG-063 — BACKGROUND is WHAT YOU DID, orthogonal to WHO YOUR PEOPLE ARE (origin). A Cogitant can be a soldier; a Marcher can be a healer — and both are more interesting than the obvious pairing. Expanded from the 5 hardcoded in app.js. Authored by Aevi 2026-07-11.",
+  "backgrounds": [
+    {
+      "id": "former-professional",
+      "name": "Former Professional",
+      "description": "Pre-Transition career skills, and the connections that came with them — some of which still answer.",
+      "gmHint": "Knows procedure, paperwork, and who to call. Uneasy with how little of it still works."
+    },
+    {
+      "id": "community-organizer",
+      "name": "Community Organizer",
+      "description": "You held a group of people together through something. It worked, mostly.",
+      "gmHint": "Reads a room's factions instantly. Cannot stop trying to fix them."
+    },
+    {
+      "id": "craftsman",
+      "name": "Craftsman / Artisan",
+      "description": "Making, mending, material sense. Your hands know things your mouth cannot explain.",
+      "gmHint": "Assesses everything by how it was made. Physically pained by shoddy work."
+    },
+    {
+      "id": "survivalist",
+      "name": "Survivalist",
+      "description": "You have been cold, hungry, and alone, and you came back, and you know exactly what that took.",
+      "gmHint": "Always knows the exits, the water, and how many days of food. Finds comfort suspicious."
+    },
+    {
+      "id": "medical",
+      "name": "Medical Practitioner",
+      "description": "You have had your hands inside someone who was dying. Sometimes it worked.",
+      "gmHint": "Triages automatically, including people who did not ask. Does not flinch, and that unsettles people."
+    },
+    {
+      "id": "soldier",
+      "name": "Soldier / Guard",
+      "description": "You carried a weapon for someone else's reasons and you were good at it.",
+      "gmHint": "Reads violence before it arrives. Sleeps badly. Does not talk about the one that went wrong."
+    },
+    {
+      "id": "scholar",
+      "name": "Scholar / Archivist",
+      "description": "You spent years with the records, and you know how much of what everyone believes is simply not in them.",
+      "gmHint": "Cites sources unprompted. Genuinely delighted by a primary document. Distrusts a story with no paper."
+    },
+    {
+      "id": "trader",
+      "name": "Trader / Merchant",
+      "description": "Roads, prices, and the exact moment a deal turns. You have been cheated and you learned from it.",
+      "gmHint": "Prices everything reflexively, including favors. Knows what a thing is worth to THIS person, which is different."
+    },
+    {
+      "id": "smuggler",
+      "name": "Smuggler / Thief",
+      "description": "You moved what was not supposed to move. You were caught once, and only once.",
+      "gmHint": "Notices the locks, the sightlines, the guard's habits. Cannot walk into a room without casing it."
+    },
+    {
+      "id": "storyteller",
+      "name": "Storyteller / Performer",
+      "description": "You have held a room. You know that the true thing and the thing they will listen to are not always the same, and you have made your peace with that.",
+      "gmHint": "Instinctively shapes events into narrative. Sometimes the shaping is the lie."
+    },
+    {
+      "id": "farmer",
+      "name": "Farmer / Herder",
+      "description": "Seasons, soil, animals, and the specific patience of people who cannot hurry the thing they depend on.",
+      "gmHint": "Unhurried in a way that infuriates cities. Right about the weather. Right about the animal."
+    },
+    {
+      "id": "river-runner",
+      "name": "River-Runner",
+      "description": "The Valley's waterways, the crossings, the currents. You have pulled people out and you have failed to.",
+      "gmHint": "Reads water the way others read faces. Uncomfortable far from it."
+    },
+    {
+      "id": "orphan",
+      "name": "Street-Raised",
+      "description": "Nobody raised you and you raised yourself, and you are not going to make a speech about it.",
+      "gmHint": "Trusts slowly and completely. Very hard to shock. Hoards small things."
+    },
+    {
+      "id": "devotee",
+      "name": "Devotee",
+      "description": "You gave years to a practice, an order, or a certainty — and you either kept it or you did not, and either way it shaped you.",
+      "gmHint": "Has a discipline. Keeps it, or misses it. Reacts strongly to other people's faith."
+    },
+    {
+      "id": "ruin-picker",
+      "name": "Ruin-Picker",
+      "description": "You went into the Precursor places and came out with things, and you are still here, which puts you in a small category.",
+      "gmHint": "Fearless about old tech in a way that alarms sensible people. Has an unexplained scar and a rule about doors."
+    }
+  ]
+}

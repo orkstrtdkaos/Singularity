@@ -9,6 +9,7 @@
 
 import { slugify } from "./quests.js";
 import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression } from "./skilltree.js";
+import { domainAccess } from "./traditions.js";
 
 export const SUB_OF = {
   strength: "physical", agility: "physical",
@@ -144,7 +145,16 @@ export function effectiveLevelReq(ab, character, rules) {
   return null; // harmonic <-> radiant: closed
 }
 
-/** Learn a new ability (1 skill point), gated by effectiveLevelReq. */
+/** SNG-BATCH-10 Phase 1: the domain gate — enforced in the ENGINE, not just the picker.
+ *  Reads the great-circle geometry via domainAccess (traditions.json). Only applies once a
+ *  character has crystallized/picked domains; legacy (no domains) stays open. Braid combinations
+ *  and artifact grants never route through learnAbility, so those crossings are unaffected. */
+export function domainGateFor(ab, character, traditionIndex) {
+  if (!traditionIndex || !character?.domains?.primary) return { allowed: true, penalty: 1, band: "open" };
+  return domainAccess(ab, ab?.levelReq || 1, character.domains, traditionIndex);
+}
+
+/** Learn a new ability (1 skill point), gated by effectiveLevelReq + the SNG-055 domain gate. */
 export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
   const ab = catalog[abilityId];
@@ -152,6 +162,9 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   const req = effectiveLevelReq(ab, character, rules);
   if (req === null) return { ok: false, why: "wrong tradition" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
+  // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.
+  const verdict = domainGateFor(ab, character, opts.traditionIndex);
+  if (!verdict.allowed) return { ok: false, why: verdict.reason || "outside your domains" };
   if (opts.attributeGates) {
     const g = meetsLearnGate(character, abilityId, opts.attributeGates);
     if (!g.ok) return { ok: false, why: g.why };
@@ -159,12 +172,15 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (opts.skillCapacity && atCapacity(character, opts.skillCapacity)) {
     return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one" };
   }
-  // SNG-BATCH-5: affordability last — cross-class abilities cost 2x skill points
-  const cost = opts.free ? 0 : skillPointCost(ab, character, opts.skillCapacity);
-  if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (cross-class)` : "no points" };
+  // Affordability last. When domains are set, the ring-distance penalty is the cost multiplier
+  // (supersedes the legacy home-class 2x); otherwise fall back to the legacy cross-class cost.
+  const cost = opts.free ? 0
+    : (opts.traditionIndex && character?.domains?.primary) ? (verdict.penalty || 1)
+    : skillPointCost(ab, character, opts.skillCapacity);
+  if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (${verdict.band === "far" ? "distant domain" : "cross-class"})` : "no points" };
   character.abilities.push({ abilityId, level: 1 });
   if (!opts.free) character.skillPoints -= cost;
-  return { ok: true, free: !!opts.free, cost };
+  return { ok: true, free: !!opts.free, cost, band: verdict.band };
 }
 
 // ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------

@@ -37,7 +37,7 @@ import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer } from "./engine/random_encounters.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.21";
+const APP_VERSION = "1.8.22";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2568,7 +2568,7 @@ function renderCharacterScreen() {
       ${(character.practice?.aspirations || []).length < (rules.practice?.maxAspirations ?? 2) ? `
         <select id="asp-pick" style="margin-top:6px; max-width:280px">
           <option value="">Aspire toward…</option>
-          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && effectiveLevelReq(ab, character, rules) !== null && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${ab.powerSystem}, lv ${effectiveLevelReq(ab, character, rules)})</option>`).join("")}
+          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && effectiveLevelReq(ab, character, rules) !== null && domainVerdict(ab).allowed && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${ab.powerSystem}, lv ${effectiveLevelReq(ab, character, rules)})</option>`).join("")}
         </select>` : ""}
     </div>
     ${(() => {
@@ -2604,7 +2604,7 @@ function renderCharacterScreen() {
   for (const btn of app.querySelectorAll("[data-aspdrop]")) btn.onclick = () => { dropAspiration(character, btn.dataset.aspdrop); saveCharacter(character); renderCharacterScreen(); };
   for (const btn of app.querySelectorAll("[data-asplearn]")) btn.onclick = () => {
     const id = btn.dataset.asplearn;
-    const r = learnAbility(character, id, fullCatalog(), rules, { free: true, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity });
+    const r = learnAbility(character, id, fullCatalog(), rules, { free: true, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
     if (r.ok) { dropAspiration(character, id); saveCharacter(character); renderCharacterScreen(); } else alert(r.why);
   };
   for (const btn of app.querySelectorAll("[data-claimcombo]")) btn.onclick = () => {
@@ -3322,7 +3322,9 @@ function renderPlay(turn, opts = {}) {
             const capBlock = cap && ab.powerSystem !== "learned";
             const ripe = aspirationRipe(character, ab.id, CONTENT.rules);
             const dv = domainVerdict(ab); // SNG-055 band + skill-point penalty
-            const learnCost = Math.max(skillPointCost(ab, character, CONTENT.skillCapacity), dv.penalty);
+            // SNG-BATCH-10: once domains are set the ring-distance penalty is authoritative (matches
+            // the engine in learnAbility); pre-domain/legacy characters keep the old cross-class cost.
+            const learnCost = character.domains?.primary ? (dv.penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity);
             const tooExpensive = !ripe && character.skillPoints < learnCost;
             const blocked = !gate.ok || capBlock || tooExpensive;
             const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";
@@ -3696,7 +3698,7 @@ function renderPlay(turn, opts = {}) {
   };
   for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
     const free = aspirationRipe(character, b.dataset.learn, CONTENT.rules);
-    const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity });
+    const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
     if (r.ok) {
       if (free) dropAspiration(character, b.dataset.learn);
       saveCharacter(character);

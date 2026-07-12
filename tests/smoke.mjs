@@ -2321,6 +2321,32 @@ await (async () => {
   const primaryOffered = domainAccess({ id: "y", tradition: "umbral", levelReq: 1 }, 1, domainsUV, idx).allowed;
   const folkOffered = domainAccess({ id: "z", tradition: "radiant_folk", levelReq: 1 }, 1, domainsUV, idx).allowed;
   check("SNG-063: a domain-filtered starting list excludes the antipode, keeps primary + folk", antipodeOffered === false && primaryOffered === true && folkOffered === true);
+
+  // SNG-BATCH-10 Phase 1: the domain gate is now ENGINE-ENFORCED in learnAbility (not just the
+  // picker) — the "learn any capstone" hole is closed even on non-picker learn paths. Origin=valley
+  // so the legacy effectiveLevelReq passes and the domain gate is what's exercised.
+  const b10tert = neighborsOf("veilwright", idx).find(n => n !== "umbral");
+  const b10dom = { primary: "umbral", secondary: "veilwright", tertiary: b10tert };
+  const b10far = ringOrder(idx).find(t => t !== "umbral" && t !== "blazeborn" && ringDistance(t, "umbral", idx) >= 3 && t !== "veilwright" && t !== b10tert && ringDistance(t, "umbral", idx) !== 1);
+  const b10cat = {
+    dark_touch: { id: "dark_touch", name: "Dark Touch", tradition: "umbral", powerSystem: "harmonic", levelReq: 1 },
+    bright_burn: { id: "bright_burn", name: "Bright Burn", tradition: "blazeborn", powerSystem: "harmonic", levelReq: 1 },
+    veil_deep: { id: "veil_deep", name: "Veil Deep", tradition: "veilwright", powerSystem: "harmonic", levelReq: 4 },
+    far_reach: { id: "far_reach", name: "Far Reach", tradition: b10far, powerSystem: "harmonic", levelReq: 1 },
+  };
+  const b10char = () => ({ level: 5, skillPoints: 9, origin: "valley", abilities: [], domains: { ...b10dom } });
+  const b10a = b10char(); const b10ar = learnAbility(b10a, "dark_touch", b10cat, rules, { traditionIndex: idx });
+  check("SNG-BATCH-10: a primary-domain ability learns and spends 1 point", b10ar.ok && b10a.skillPoints === 8 && b10ar.band === "primary");
+  const b10b = b10char(); const b10br = learnAbility(b10b, "bright_burn", b10cat, rules, { traditionIndex: idx });
+  check("SNG-BATCH-10: the antipode is ENGINE-blocked in learnAbility (the capstone hole is closed)", !b10br.ok && b10b.abilities.length === 0);
+  const b10c = b10char(); const b10cr = learnAbility(b10c, "veil_deep", b10cat, rules, { traditionIndex: idx });
+  check("SNG-BATCH-10: a secondary ability above tier III is engine-blocked", !b10cr.ok && b10c.abilities.length === 0);
+  const b10d = b10char(); const b10before = b10d.skillPoints; const b10dr = learnAbility(b10d, "far_reach", b10cat, rules, { traditionIndex: idx });
+  check("SNG-BATCH-10: a far-domain ability learns but costs the ring-distance penalty (>1 pt)", b10dr.ok && (b10before - b10d.skillPoints) >= 2);
+  const b10leg = { level: 5, skillPoints: 9, origin: "valley", abilities: [], domains: {} };
+  check("SNG-BATCH-10: no domains (legacy) → the gate is a no-op, learning stays open", learnAbility(b10leg, "bright_burn", b10cat, rules, { traditionIndex: idx }).ok);
+  const b10noidx = b10char();
+  check("SNG-BATCH-10: no traditionIndex passed → gate is a no-op (backward-safe callers)", learnAbility(b10noidx, "bright_burn", b10cat, rules, {}).ok);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

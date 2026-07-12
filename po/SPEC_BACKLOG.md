@@ -1130,3 +1130,40 @@ function devEnabled() {
 **Erik test:** "Open the live URL in a normal window — verify NO Legs button and NO test-encounters panel. Then open it with `?dev=1` — verify they appear and a DEV badge shows. Reload without the param — verify they're gone again. Then check Settings has a Developer-mode toggle that's off by default."
 
 *Priority: HIGH. This is the last thing between Erik and being able to verify the real player experience before his daughter plays.*
+---
+
+## SNG-075 — Encounters must fire in NARRATIVE play (they currently can't) ⭐
+
+**Erik-directed 2026-07-12:** *"I'd like the random encounters to apply during narrative driven play as well. I almost never use the map to travel... so things need to be able to happen while I'm doing stuff."* 🔧 CCode. Aevi PO.
+
+### PWSV (measured at HEAD v1.8.25)
+- `maybeRandomEncounter(...)` is called from **exactly three places**: `app.js:2262` (onTravel), `:2263` (onEnterLocation), `:2284` (onRest). **All three are UI-button paths.**
+- **`gmTurn` ↔ encounter refs: 0.** The narrative turn loop has **no encounter hook whatsoever.**
+- **But the signal already exists:** `timeOps.hoursPassed` (§10) flows into the engine every turn, plus `intentTags` (8 refs in gm.js).
+
+**Consequence:** 58 authored encounters and 22 regions of texture are **effectively unreachable** for a player who plays in prose. The system is not broken — it is *unhooked from how the game is actually played.*
+
+### The fix — bind encounters to NARRATIVE TIME, not to buttons
+**Narrative time IS the encounter window.** The engine already knows how long the fiction took.
+
+1. **`onNarrativeTime`** — after each GM turn, if `timeOps.hoursPassed > 0`, roll. **Chance scales with hours** (~4%/hr, danger-weighted, clamped):
+   - a 20-minute conversation → ~1–2% (rare, correct)
+   - a half-day's walk (≈6h) → ~25%
+   - a multi-day trek (capped 72h) → high, but **capped at one encounter per scene**
+2. **`onNarrativeTravel`** — the GM narrates movement (intentTags `travel`/`journey`, or `timeOps.why` says so) → treat as a **travel leg** at the existing 35%, using the **destination's** region for eligibility.
+3. **`onNarrativeRest`** — the GM narrates sleeping/camping → the existing rest trigger (15%, wilderness-weighted).
+4. **`encounterOps`** — let the **GM REQUEST** one when a scene has gone quiet and wants something: the GM proposes, **the engine still decides** (Law 1 — the model never decides outcomes). Engine picks, validates eligibility, applies cooldown.
+
+### ⛔ WEAVE, DO NOT INTERRUPT (this is the part that matters)
+On the UI path an encounter is a card. **In narrative play it must arrive INSIDE the fiction.**
+- The engine rolls, selects the encounter, and **injects its `seed` into the NEXT GM turn** as authoritative context: *"an encounter is occurring — weave it into the scene."*
+- The GM narrates it as part of what is happening. **No modal, no genre-break.** *The road had something to say — it should sound like the road saying it.*
+- The engine still owns the mechanics: eligibility, flavor-weighting by danger, and — non-negotiable — **the `lethalRule`: any fight/dangerous encounter that could incapacitate MUST present a decline/flee path before engagement. No ambush-lethality**, narrative path included.
+
+### Guardrails
+- **One encounter per scene, plus an N-turn cooldown.** *A world that interrupts you constantly is as dead as one that never does.*
+- **Never fire during a critical beat** — combat in progress, a quest climax, an intimate scene, a gambit resolution. `[CCODE: name the suppression conditions]`
+- Respect the narrative register (§11) and the rating ceiling (§17).
+- Low-danger locations still skew beneficial/benign/**beautiful**. *The valley is hopeful-strange, not grim.*
+
+**Erik test:** "Play narratively for a while — travel and camp by describing it, never touching the map — verify things happen to you: a Rootkin answers a question you asked twenty minutes ago; the road has something to say. Then have a short conversation — verify it stays quiet."

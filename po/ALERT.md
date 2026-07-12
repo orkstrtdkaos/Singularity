@@ -339,3 +339,17 @@ Foundation verified: BATCH-9 Phase 1 + SNG-041 + Phase 2 all shipped, 652 green;
 **🔧 CCode REQUIRED: manifest-parity CI + connection validator** (dangling / one-way / unreachable = build failure). This is SNG-040's brief and this bug is the argument for it. Content must never silently not-exist again.
 
 **➕ SNG-065 — QUEST STRUCTURE (Erik: 'I want quests to be meaningful and have concrete structure').** Quests get: PREMISE + STAKES (**if you cannot name the cost of ignoring it, it is not a quest**) · 2–5 STAGES with engine-testable conditions and a world-change each · BRANCHED outcomes (not success/fail — *which* success) · **MANDATORY DURABLE CONSEQUENCE** (a codex fact, an NPC's life, a faction's disposition, a location's state, a propagating world-event — **a quest that changes nothing durable is not allowed to be a quest**) · ties to the AXIS it lives on (a quest is a tension between two poles — that is what makes it a dilemma) · MULTIPLE ROUTES fanning across the circle. Aevi owes the schema + first authored quests (Grael's ledger / the Fendt thread is live in Erik's game).
+
+## ✍️ AEVI CONTENT NOW AT ORIGIN (2026-07-11) — what CCode must WIRE
+**All authored and manifest-registered. VERIFIED at HEAD: 92 locations · 24 regions · 41 NPCs · 58 encounters · 0 dangling · 0 one-way · 92/92 reachable · manifest parity ✓.**
+- **World (SNG-060):** 92 locations, 24 regions, every pole has a homeland + its cult at the pure locus. THE CENTER + THE GREAT COLISEUM. All 27 origins start at home. Wired through the Axis Gate.
+- **Creation (SNG-063):** `origins.json` (27) + `backgrounds.json` (15) — were HARDCODED in app.js. **Order rule: NAME → FORM → ORIGIN → DOMAINS → ABILITIES → COMPANION** (abilities GATED+FILTERED by domains).
+- **Skills (SNG-054/055):** `traditions.json` — 24 traditions on THE GREAT CIRCLE (12 antipodal diameters, uniform topology); 137 abilities all stamped with `tradition` (**group by this, NOT powerSystem — the body_mind fix**); 44 tiered combos; the domain-access model (ring distance; antipode CLOSED; braids are the only crossing).
+- **Prologue (SNG-062):** `prologue.json` — 3 openings, 12 problems, 48 tradition-tagged paths, companion arrivals, closing reveal + confirm, quick-start parity spec.
+- **Companions (SNG-057):** 9 (5 new: tal/coil/hush/marrow/sprig).
+- **Encounters (SNG-064):** 58 (was 15) — 22 regions have their OWN texture now.
+- **Quests (SNG-065):** `quest_structure.json` (schema) + `quests.json` (2 authored: **The Edge District Ledger** — Grael/Fendt, LIVE in Erik's game, 6 routes / 4 outcomes incl. 'you walked away' as a real outcome with a real cost — and **The Tree That Waits**). NPCs `fendt` + `keeper_ilma` authored to support it.
+
+**🔧 CCODE — TWO LOADER GAPS (content that silently does not exist):**
+1. **`engine/state.js` has ZERO quest refs** — it does not read `provides.quests`. `content/packs/valley/quests.json` exists and IS manifest-registered, but **will not load**. Add the loader branch (same shape as npcs/locations) + wire structured quests into `engine/quests.js` per SNG-065.
+2. **Manifest-parity + connection CI (SNG-040)** — still owed, and SNG-064 is the argument: the manifest listed 6 of 89 locations and the game ran on SIX. Fail the build on: unlisted content file, manifest path with no file, dangling connection, one-way edge, unreachable location, and **any `provides.*` key the loader does not handle** (that last one is what bit quests).

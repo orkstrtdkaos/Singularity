@@ -1046,3 +1046,51 @@ SNG-056 (location-header desync) → SNG-058 (party leader) → SNG-052 (adult-g
 - `po/ALERT.md` is the same append-only problem. It should carry **current status only**; history lives in results files and the graph.
 
 **First application: SNG-BATCH-10 gets a ROUND 2 before any more of it is built.** Given that its premise ("domain gates don't exist") was already stale when I wrote it, that is not a formality.
+---
+
+## SNG-072 — Origin labels: the pole helper-word + the "of the the" bug ✅ CONTENT DONE
+
+**Erik-found live 2026-07-11:** the origin dropdown reads **"The Rootkin — of the the quickwood"** (doubled article), and *"the starting civilizations need the helper words (Life, Death, etc.) next to the peoples names."*
+
+**Root cause:** region ids already begin with `the_` (`the_quickwood`), and the renderer was concatenating `"of the " + regionId.replace("_"," ")`.
+
+**Fixed in content (Aevi):** every origin now carries
+- **`pole`** — the helper word Erik asked for: *The Rootkin — **Life***, *The Ashwardens — **Death***, *The Umbrals — **Dark***, *The Wrights of the New — **Creation***.
+- **`homeRegionName`** — the proper display name (*the Quickwood*, not *the_quickwood*).
+- **`displayLabel`** — the authoritative, pre-built string.
+
+**🔧 CCode: render `origin.displayLabel` VERBATIM. Never rebuild the label by concatenation.** → *"The Rootkin — Life · of the Quickwood"*
+
+---
+
+## SNG-073 — THE SKILL WHEEL: the skill tree IS the great circle ⭐ (supersedes SNG-054 Phase 2)
+
+**Erik-directed 2026-07-11:** *"the skill selection screen sucks. it's messy and limited. Now that we have the great circle we need to lay the skills out toward the center. The highest tiers at their circle nodes, the lowest near the center. The unaligned skills around the center, the precursor skills outside the ring. the braided skills (if known) between the axes."* 🔧 CCode (viz). Content is DONE (`traditions.json` carries the ring, positions, antipodes, distances; all 137 abilities carry `tradition` + `levelReq`).
+
+**Why this is the right design and not just a prettier one:** it makes the skill screen a MAP OF THE WORLD'S DISPOSITIONAL SPACE. The player does not read their options — they SEE where they stand, who their kin are, and what is closed to them. Access, lore, and geometry become one picture. The great circle stops being a gate and becomes the interface.
+
+### The layout (polar, radius = tier)
+- **24 tradition NODES on the ring** at their `ring.position` (15° apart), read from `traditions.json` — **never hardcode**.
+- **Each tradition's abilities radiate INWARD along its own radius, ordered by tier: rank/tier V at the node (outermost), I nearest the center.** Depth = mastery. Walking *out* along a spoke is walking *deeper into a people's craft*.
+- **THE CENTER (innermost zone): the unaligned / FOLK traditions** — valley_craft, harmonic, radiant_folk. **This is exactly the lore**: the Valley is the near-center crossing, its crafts are folk-shadows of the great poles, and they are OPEN to everyone. *The center of the wheel holds a little of everything — because the center of the world does.*
+- **OUTSIDE the ring: PRECURSOR.** It is not an axis-people; it is the substrate the whole world sits on. Beyond the poles, encircling everything. Fiction-gated, and it should LOOK it.
+- **THE BRAIDS (combination abilities) — drawn as connections, not nodes:**
+  - **cross-pole braids** (harbored_flame, meaning_engine, the_turning_word) → **drawn as the DIAMETER, straight through the center**, joining a tradition to its antipode. *This is the picture of holding an axis whole — the one thing the access model forbids by any ordinary means. It should be the most striking line on the screen, and it should only appear once known.*
+  - **kin-civilization combos** → a short arc between the two adjacent nodes on the ring.
+  - **cross-axis combos** → a chord across the circle.
+  - **within-tradition braids** → a small link between two abilities on the same spoke.
+  - Erik: *"if known, which a few should be known"* — **known braids render bright; undiscovered ones do not render at all** (they are discoveries, not a menu).
+
+### State, read straight off the ring
+- **Primary domain** — its spoke lit fully.
+- **Adjacent (1 step)** — lit, but the outermost node (capstone) visibly barred.
+- **Secondary (III cap) / tertiary (II cap)** — lit only to their permitted depth; the outer rings greyed.
+- **Penalized ring (2+ steps)** — dimmed, with the cost shown.
+- **ANTIPODE (12 steps)** — **dark. Struck through. Closed.** Directly across the wheel from you. *You should be able to see, at a glance, what you can never be.*
+
+### Fixes the "messy and limited" complaint at the root
+Erik saw 1–2 choices per group because the flat list showed only what his provisional domains allowed. The wheel shows **the whole world at once** — everything he can take, everything he could take at a cost, and the one thing he cannot — and *why*, spatially. Limited becomes legible.
+
+**Interaction:** hover/tap an ability → name, tier, energy, functions, and its gate status ("free — kin of your primary" / "+2 pts — three steps out" / "closed — your antipode"). Zoom + pan (SNG-054 Phase 0 already shipped). Center-out is also the natural read order for a new player.
+
+**Erik test:** "Open the skill wheel — verify your primary's spoke runs out to its capstone, your kin are beside you, the folk crafts sit at the center, precursor rings the outside, your antipode is dark across the wheel, and any braid you know draws a line through the middle."

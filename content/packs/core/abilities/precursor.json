@@ -158,8 +158,9 @@
         }
       ],
       "functions": [
-        "strike",
-        "break"
+        "command",
+        "open",
+        "summon"
       ],
       "challengeTypes": [
         "PUZZLE",
@@ -273,6 +274,7 @@
         }
       ],
       "functions": [
+        "open",
         "break"
       ],
       "challengeTypes": [
@@ -328,8 +330,9 @@
         }
       ],
       "functions": [
+        "open",
         "ward",
-        "shield"
+        "bind"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -346,5 +349,6 @@
       },
       "tradition": "precursor"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

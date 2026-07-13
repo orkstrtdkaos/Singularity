@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.52";
+const APP_VERSION = "1.8.53";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2962,7 +2962,7 @@ function renderMap(selectedId = null) {
     details = `<div class="map-details">
       <div class="map-details-head">
         <h3>${esc(visited ? l.name : "An unknown place")}</h3>
-        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(4, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(4, l.dangerLevel | 0)))}</span>` : `<span class="rep-band trusted">safe</span>`}
+        ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(4, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(4, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
       </div>
       ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
@@ -3434,7 +3434,7 @@ function renderCharacterScreen() {
       ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
       <div class="cs-header-text">
         <h2 style="margin:0">${esc(character.name)}</h2>
-        <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+        <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp ${infoDot("growth.level")}${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
         ${character.form ? `<div class="hint" style="margin-top:4px"><em>Form:</em> ${esc(character.form)}</div>` : ""}
         <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap">
           <button class="opt" id="cs-form" title="Describe this character's physical form / species so the portrait renders it (e.g. an Ent, a construct)">✎ Appearance</button>
@@ -3447,14 +3447,14 @@ function renderCharacterScreen() {
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
       ${b.story ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""}</div>` : ""}
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Attributes <span class="hint" style="text-transform:none">(knee at ${soft}: full value to there, +5/point beyond, cap ${cap})</span></h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Attributes ${infoDot("growth.attributes")} <span class="hint" style="text-transform:none">(knee at ${soft}: full value to there, +5/point beyond, cap ${cap})</span></h3>
       ${SUBS.map(sub => { const v = character.subAttributes?.[sub] ?? 0; return `
         <div class="cs-attr"><span class="cs-attr-name" title="${esc(SUB_DESC[sub])}">${sub}</span>
           <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, v / cap * 100)}%"></div><div class="cs-knee" style="left:${soft / cap * 100}%"></div></div>
           <span class="cs-val">${v}</span>
           ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
         </div>`; }).join("")}</div>
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities ${infoDot("ability.tiers")} <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
         const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity); // SNG-047+: cross-class doubles
@@ -3489,9 +3489,9 @@ function renderCharacterScreen() {
     })()}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Play-style (${esc(character.name)}'s own)</h3>
       <div class="insight">${esc(profileInsight(character, rules.playerAptitudes))}</div></div>
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests</h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests ${infoDot("quest.routes")}</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions ${infoDot("companion.bond")}</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
     <button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
@@ -4176,7 +4176,7 @@ function renderGambitBuilder(status = "") {
   const totalEnergy = stepEnergy ? stepEnergy.reduce((a, b) => a + b, 0) : null;
   const overBudget = totalEnergy != null && totalEnergy > (character.energy ?? 0);
   chrome(`<div class="screen" style="max-width:720px">
-    <h2>Plan a Gambit</h2>
+    <h2>Plan a Gambit ${infoDot("gambit.what")} ${infoDot("gambit.fewer_is_harder")}</h2>
     <p class="hint" style="margin-bottom:12px">Declare a sequence of moves. Assess it to read your odds (as far as your experience allows), then run it. A failed step forces a decision: fallback, adapt, press on, or abandon. Adaptation points available: <strong>${adaptationPointsFor(profile, CONTENT.rules)}</strong>.</p>
     <div class="field"><label>Goal</label><input id="g-goal" value="${esc(g.goal)}" placeholder="e.g. get the falsified purity logs out of the array office" style="width:100%; box-sizing:border-box"></div>
     ${g.steps.map((s, i) => `
@@ -4561,7 +4561,7 @@ function renderPlay(turn, opts = {}) {
         }).join("");
       })()}
     </section>
-    <section><h3>Quests</h3>
+    <section><h3>Quests ${infoDot("quest.routes")}</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => { const stage = q.structured ? (q.stages?.[q.stageIndex] || q.stages?.[q.stages.length - 1]) : null;
         return `<button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>${q.structured ? ` <span class="cost">✦</span>` : ""}
           <div class="quest-note">${esc(q.structured ? (stage?.objective || "resolve") : (q.progress?.length ? q.progress[q.progress.length - 1] : q.summary))}</div>
@@ -4648,10 +4648,12 @@ function renderPlay(turn, opts = {}) {
     if (opts.playerBeat.resolution) {
       const r = opts.playerBeat.resolution;
       const helpers = r.equipHelpers?.length ? ` · aided by ${r.equipHelpers.map(esc).join(", ")}` : "";
-      const locBits = r.locationAffinity?.length ? `<div class="roll-affinity">${r.locationAffinity.map(esc).join(" · ")}</div>` : "";
+      const locBits = r.locationAffinity?.length ? `<div class="roll-affinity">${r.locationAffinity.map(esc).join(" · ")} ${infoDot("roll.spectral_fit")}</div>` : "";
       const intBit = r.intensity && r.intensity !== "standard" ? ` · <span class="intensity-${esc(r.intensity)}">${esc(r.intensity)}</span>${r.energySpent != null ? ` (${r.energySpent} energy)` : ""}` : "";
       const blBit = r.surgeBacklash ? `<div class="roll-backlash">⚡ surge backlash: ${r.backlash.health} health, ${r.backlash.energy} energy</div>` : "";
-      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span>${helpers}${intBit}</div>${locBits}${blBit}`;
+      // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
+      const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
+      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${blBit}`;
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");

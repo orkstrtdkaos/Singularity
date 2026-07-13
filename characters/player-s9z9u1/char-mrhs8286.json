@@ -473,83 +473,108 @@
         "player": "Ask Pella directly - does she want you to sleep in the yard, or...",
         "summary": "Silas asks Pell about sleeping arrangements; she invites him inside without ceremony.",
         "narration": "The coals have dropped to a steady red, barely enough to read the yard by. Huginn has not moved — still tilted north, that slight hold in the neck that means he's working on something. You set the spear down against the stone ring carefully, blade pointing away from both of you, and look across at Pell.\n\n\"Does it make more sense for me to sleep in the yard, or—\" You leave it there. Not pressing. She knows the rest of the question.\n\nPell picks up her mug, finds it empty, sets it back down. She's quiet for a count of three — not hesitating, just giving it the weight it deserves. \"Forge floor's dry and out of the wind,\" she says finally. \"There's a folded canvas behind the bellows. Cleaner than the yard.\" A beat. \"I didn't say you were sleeping alone on it.\"\n\nShe pushes off the wall, takes both mugs inside. The forge door stays open behind her."
+      },
+      {
+        "player": "Follow her in — take what the night is offering",
+        "summary": "Silas follows Pell into the forge for the night — spear against the wall, canvas down, Huginn still oriented north in the yard.",
+        "narration": "You pick up the spear and follow her in.\n\nThe forge is warm in the way a room is warm when the day's heat has been banked rather than lost — the big stone hearth still radiating through the far wall, the smell of coal-dust and iron-scale and something underneath that is just old wood. Pell sets the two mugs on the workbench without looking at you and moves to the far corner where a folded canvas sits behind the bellows housing, thick and a little stiff, the kind of thing that has served as a bed before. She drops it at the near side of the hearth without ceremony, unfolds it partway with her foot, and turns back to her bench. Not pointed. Just done.\n\nYou lean the spear against the wall beside the door — close, blade up, within arm's reach of where you'll sleep. The rope and the pack come off your back. Through the open door the yard is a dark rectangle, and Huginn is a slightly darker shape at its edge, still tilted north, still holding. You watch him a moment. He doesn't turn. Whatever he's listening to, it hasn't resolved itself yet.\n\nPell sits on the edge of her own bedroll in the back corner — a proper one, wool-faced, clearly years old — and pulls one boot off. She glances at you, just once, the way someone does when they want to confirm the room is still in order. It is. She sets the boot down beside the other one, lies back, and closes her eyes. The forge settles around you both: a low tick of cooling iron, the slow breath of the banked coals through the grate, the darkness outside the door that smells of early spring and the faint iron of the river."
       }
     ],
     "lastTurn": {
-      "narration": "The coals have dropped to a steady red, barely enough to read the yard by. Huginn has not moved — still tilted north, that slight hold in the neck that means he's working on something. You set the spear down against the stone ring carefully, blade pointing away from both of you, and look across at Pell.\n\n\"Does it make more sense for me to sleep in the yard, or—\" You leave it there. Not pressing. She knows the rest of the question.\n\nPell picks up her mug, finds it empty, sets it back down. She's quiet for a count of three — not hesitating, just giving it the weight it deserves. \"Forge floor's dry and out of the wind,\" she says finally. \"There's a folded canvas behind the bellows. Cleaner than the yard.\" A beat. \"I didn't say you were sleeping alone on it.\"\n\nShe pushes off the wall, takes both mugs inside. The forge door stays open behind her.",
-      "sceneSummary": "Silas asks Pell about sleeping arrangements; she invites him inside without ceremony.",
+      "narration": "You pick up the spear and follow her in.\n\nThe forge is warm in the way a room is warm when the day's heat has been banked rather than lost — the big stone hearth still radiating through the far wall, the smell of coal-dust and iron-scale and something underneath that is just old wood. Pell sets the two mugs on the workbench without looking at you and moves to the far corner where a folded canvas sits behind the bellows housing, thick and a little stiff, the kind of thing that has served as a bed before. She drops it at the near side of the hearth without ceremony, unfolds it partway with her foot, and turns back to her bench. Not pointed. Just done.\n\nYou lean the spear against the wall beside the door — close, blade up, within arm's reach of where you'll sleep. The rope and the pack come off your back. Through the open door the yard is a dark rectangle, and Huginn is a slightly darker shape at its edge, still tilted north, still holding. You watch him a moment. He doesn't turn. Whatever he's listening to, it hasn't resolved itself yet.\n\nPell sits on the edge of her own bedroll in the back corner — a proper one, wool-faced, clearly years old — and pulls one boot off. She glances at you, just once, the way someone does when they want to confirm the room is still in order. It is. She sets the boot down beside the other one, lies back, and closes her eyes. The forge settles around you both: a low tick of cooling iron, the slow breath of the banked coals through the grate, the darkness outside the door that smells of early spring and the faint iron of the river.",
+      "sceneSummary": "Silas follows Pell into the forge for the night — spear against the wall, canvas down, Huginn still oriented north in the yard.",
       "choices": [
         {
-          "label": "Follow her in — take what the night is offering",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Settle onto the canvas and sleep — let the hunt come at first light",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "approach",
-            "connect"
+            "rest"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Bring the spear inside and spend a moment settling Huginn before you close the door",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "tend"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check on Huginn first — ask him quietly what's north before you let the night close",
+          "label": "Before sleep, step to the door and watch Huginn a moment — try to read what he's attending to in the north",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Lie down — but don't sleep immediately. Let Order-Sense run light over the forge itself, just to know what kind of place you're sleeping in",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "attend"
+            "careful"
           ],
-          "abilityId": null,
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Sleep in the yard as offered — keep the spear close and let the night run its full course under open sky",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Say something quiet to Pell in the dark — not pressing, just a word before sleep",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "wait"
+            "connect"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, dark yard, early spring night, stars overhead. The forge door is open, warm dark inside.",
+        "setting": "Inside Pell's forge, Millbrook — hearth radiating residual warmth, forge door open onto the dark south yard, early spring night. Canvas unfolded near the hearth; Pell's bedroll in the back corner.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "stepped inside through the open forge door, mugs in hand, door left open — waiting"
+            "state": "Lying on her bedroll in the back corner, boots set aside, eyes closed — settled for the night"
           },
           {
             "name": "Huginn",
-            "state": "still perched beyond the pit's warmth, head tilted north and holding, both eyes open"
+            "state": "Still perched in the yard beyond the open door, tilted north, both eyes open — hasn't moved"
           }
         ],
         "objects": [
-          "Stone-ringed fire-pit — banked to slow red coals, ash-covered",
-          "Assembled Mid-Weight Spear — leaned against the stone ring, blade angled away",
-          "Split wood stacked against the south wall — mostly spent",
-          "Rune-Craft Kit — wax and pitch-ink fully spent, leather strip used",
-          "Open forge door — warm dark beyond"
+          "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blade up",
+          "Canvas bedroll — unfolded near the hearth, Silas's side",
+          "Workbench with two empty mugs",
+          "Banked forge hearth — low warmth through the far wall",
+          "Traveler's Pack — set down beside the canvas",
+          "Open forge door — dark yard beyond, Huginn visible at the edge"
         ],
         "threads": [
-          "Pell has invited Silas inside without ceremony — door left open",
-          "Huginn is still oriented north, holding that tilt — hasn't settled",
-          "Deathsense read something north: more than one presence, not tonight, signal blurred by yard saturation",
+          "Huginn still oriented north and holding — whatever he's attending to has not resolved",
           "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-          "Pell's after-hunt mentorship arrangement is standing"
+          "Pell's after-hunt mentorship arrangement is standing",
+          "Deathsense read more than one presence north — not tonight, signal blurred"
         ]
       },
       "npcUpdates": [
@@ -557,42 +582,53 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Invited Silas into the forge for the night without ceremony — named the canvas behind the bellows and said plainly she didn't mean alone.",
-          "relationshipDelta": 1,
+          "note": "Offered the forge floor without ceremony — canvas behind the bellows, dry and out of the wind. Settled to her own bedroll without lingering on it.",
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Inside the forge, door open, waiting — the night between them now named."
+          "statusNote": "Inside the forge, bedded down for the night before the hunt — Silas sleeping across the room"
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Silas slept inside the forge on World-day 13 night — canvas behind the bellows, by invitation. The forge is now a place of both craft and something harder to name.",
+          "subPlace": {
+            "name": "Pell's Forge — Interior",
+            "note": "Warm, iron-smell, hearth through the far wall — Silas slept here the night before the hunt.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange, fire low — barely a quarter hour since the reading closed"
+        "why": "settling in for the night — a few quiet minutes, then sleep coming"
       }
     },
     "sceneState": {
-      "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, dark yard, early spring night, stars overhead. The forge door is open, warm dark inside.",
+      "setting": "Inside Pell's forge, Millbrook — hearth radiating residual warmth, forge door open onto the dark south yard, early spring night. Canvas unfolded near the hearth; Pell's bedroll in the back corner.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "stepped inside through the open forge door, mugs in hand, door left open — waiting"
+          "state": "Lying on her bedroll in the back corner, boots set aside, eyes closed — settled for the night"
         },
         {
           "name": "Huginn",
-          "state": "still perched beyond the pit's warmth, head tilted north and holding, both eyes open"
+          "state": "Still perched in the yard beyond the open door, tilted north, both eyes open — hasn't moved"
         }
       ],
       "objects": [
-        "Stone-ringed fire-pit — banked to slow red coals, ash-covered",
-        "Assembled Mid-Weight Spear — leaned against the stone ring, blade angled away",
-        "Split wood stacked against the south wall — mostly spent",
-        "Rune-Craft Kit — wax and pitch-ink fully spent, leather strip used",
-        "Open forge door — warm dark beyond"
+        "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blad",
+        "Canvas bedroll — unfolded near the hearth, Silas's side",
+        "Workbench with two empty mugs",
+        "Banked forge hearth — low warmth through the far wall",
+        "Traveler's Pack — set down beside the canvas",
+        "Open forge door — dark yard beyond, Huginn visible at the edge"
       ],
       "threads": [
-        "Pell has invited Silas inside without ceremony — door left open",
-        "Huginn is still oriented north, holding that tilt — hasn't settled",
-        "Deathsense read something north: more than one presence, not tonight, signal blurred by yard saturation",
+        "Huginn still oriented north and holding — whatever he's attending to has not resolved",
         "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-        "Pell's after-hunt mentorship arrangement is standing"
+        "Pell's after-hunt mentorship arrangement is standing",
+        "Deathsense read more than one presence north — not tonight, signal blurred"
       ]
     }
   },
@@ -734,7 +770,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Attended the rune-working as promised — brought two mugs, sat on the south wall, watched without commentary. Witnessed the ceremony attempt and its quiet failure.",
         "[d1] Crossed the yard without being asked and pressed her maker's mark into the blade when the inscription stalled — the iron opened to her hand. Has not spoken since. Still crouching a",
         "[d1] Silas told her plainly that her maker's mark is load-bearing in the death-binding — that the iron answers to her now. She absorbed it without flinching, said she's not sure she doe",
         "[d1] Received the honest answer — the spear is a beginning, its nature answered by use. Filed it accurately. Confirmed north gate plan without ceremony.",
@@ -743,7 +778,8 @@
         "[d1] Confirmed north gate plan with two words, set her mug down, and let the night close without crowding it — neither warmer nor cooler than the offer asked for",
         "[d1] Watched the tightening of the Huginn-thread without intervention — logged it accurately, said 'Right. Morning, then.' and let the night close.",
         "[d1] Noticed Silas using Deathsense through the spear in the dark yard and named it plainly — 'you're doing something else'",
-        "[d1] Invited Silas into the forge for the night without ceremony — named the canvas behind the bellows and said plainly she didn't mean alone."
+        "[d1] Invited Silas into the forge for the night without ceremony — named the canvas behind the bellows and said plainly she didn't mean alone.",
+        "[d1] Offered the forge floor without ceremony — canvas behind the bellows, dry and out of the wind. Settled to her own bedroll without lingering on it."
       ],
       "knownFacts": [
         "The spear is a beginning, not a finished artifact — its nature is not yet settled",
@@ -764,7 +800,7 @@
         "attentive observation — caught an unseen working"
       ],
       "status": "active",
-      "statusNote": "Inside the forge, door open, waiting — the night between them now named.",
+      "statusNote": "Inside the forge, bedded down for the night before the hunt — Silas sleeping across the room",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -863,7 +899,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Hand-axe heat-collar seated and finished on World-day 12 morning — backlog completely cleared. All five tools on the rack. Forge ready for normal work.",
         "[d1] Mid-weight spear-tip sold to Silas Weir on World-day 12 morning; light point modified with stop-lug for Corvin and delivered to Silas for hand-off. Labor credit from backlog deducted — accounts closed",
         "[d1] Two ash shafts purchased from Mara Wells on World-day 13 morning — one on smokehouse account, one paid. Rune-craft materials (wax, pitch-ink, leather) and a fine river whetstone for Pell also acquired",
         "[d1] Fine river whetstone gifted to Pell — now on her bench. The date between Silas and Pell is now a standing arrangement named between them at the forge.",
@@ -874,7 +909,8 @@
         "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work.",
         "[d1] Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name.",
         "[d1] Fire banked to slow red coals for the night after the death-binding ceremony — the pit has been used and closed. The night of the ceremony is now complete.",
-        "[d1] Rune-Craft Kit fully spent at the forge south pit on World-day 13 night — wax and pitch-ink used in the tightening of the Huginn-thread. Pit remains banked."
+        "[d1] Rune-Craft Kit fully spent at the forge south pit on World-day 13 night — wax and pitch-ink used in the tightening of the Huginn-thread. Pit remains banked.",
+        "[d1] Silas slept inside the forge on World-day 13 night — canvas behind the bellows, by invitation. The forge is now a place of both craft and something harder to name."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -934,6 +970,12 @@
           "day": 1,
           "visited": true,
           "note": "Binding tightened — Huginn-thread now present and mutual. Kit spent. Fire banked. Hunt departs from here at first light."
+        },
+        "pell-s-forge-interior": {
+          "name": "Pell's Forge — Interior",
+          "day": 1,
+          "visited": true,
+          "note": "Warm, iron-smell, hearth through the far wall — Silas slept here the night before the hunt."
         }
       },
       "vectorsKnown": [
@@ -1294,11 +1336,11 @@
     }
   },
   "tendencies": {
-    "strategic": 30.153614711144627,
-    "cerebral": 13.52511498222095,
-    "social": 41.33335623619031,
-    "generous": 9.567115954545582,
-    "cautious": 14.505214780627194
+    "strategic": 30.002846637588902,
+    "cerebral": 13.457489407309845,
+    "social": 41.12668945500936,
+    "generous": 9.519280374772853,
+    "cautious": 14.432688706724058
   },
   "aptitudes": [
     "strategist",
@@ -1306,7 +1348,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 64,
+  "actionCount": 65,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1352,8 +1394,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783970338105,
-  "rev": 105,
+  "updatedAt": 1783970481493,
+  "rev": 106,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -1057,6 +1057,78 @@
       "cannot": "It requires you to be RIGHT that the thing should end, and to actually build. A Cleared Ground with nothing raised on it is just a ruin with pretensions, and the Unmakers will tell you so.",
       "cultCondemns": "The Scouring (destruction-cult) clear and never build. The Ceaseless (creation-cult) build and never clear. **Every city worth living in was made this way.**",
       "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_harbored_flame_braid",
+      "name": "The Harbored Flame",
+      "parts": [
+        "umbracraft",
+        "radiance"
+      ],
+      "functions": [
+        "conceal",
+        "heal",
+        "reveal"
+      ],
+      "domains": [
+        "umbral",
+        "blazeborn"
+      ],
+      "axis": "dark_light",
+      "combinationTier": "cross-pole",
+      "harmRung": "incapacitating",
+      "effect": "A light you carry HIDDEN — warmth and revelation that the dark cannot put out and the Blaze cannot burn away, because it belongs to neither. **You can show one person one true thing in a place where showing anything would kill you both.**",
+      "cannot": "It is ONE light, for ONE moment. It will not illuminate a room and it will not warm a camp. And carrying it means the Unlit want it out and the Blaze wants it BIGGER, and both will find you.",
+      "cultCondemns": "The Unlit would put it out — it is a light, and lights must go. The Blaze would grow it until it consumed you — a light that is hidden is a light that is ASHAMED. **Neither can conceive of a small, sheltered, sufficient flame.**",
+      "discovery": "use — held together at a moment when neither the dark nor the light alone could have saved it."
+    },
+    {
+      "id": "the_meaning_engine_braid",
+      "name": "The Meaning-Engine",
+      "parts": [
+        "enginecraft",
+        "numenwork"
+      ],
+      "functions": [
+        "mend",
+        "reveal",
+        "bind"
+      ],
+      "domains": [
+        "enginewright",
+        "numinous"
+      ],
+      "axis": "mechanical_spiritual",
+      "combinationTier": "cross-pole",
+      "harmRung": "incapacitating",
+      "effect": "A mechanism that **MEANS**. The Enginewrights build it and it runs; the Numinous make it matter; and the thing that results does work in the world that neither craft could do alone — a machine that is also a prayer, and functions as both.",
+      "cannot": "It must actually MEAN something true. A Meaning-Engine built around a lie runs perfectly and produces nothing, and the failure is silent, and you will not notice for years.",
+      "cultCondemns": "The Great Engine's tenders say meaning is an inefficiency to be optimized out. The Unbodied say a mechanism is a cage for a meaning. **Halvex Coil is what happens when only the first half is believed.**",
+      "discovery": "use — a mechanism commanded and a thin place held open in the same act."
+    },
+    {
+      "id": "the_turning_word_braid",
+      "name": "The Turning Word",
+      "parts": [
+        "pathos",
+        "logos"
+      ],
+      "functions": [
+        "bind",
+        "reveal",
+        "heal"
+      ],
+      "domains": [
+        "threnodist",
+        "syllogist"
+      ],
+      "axis": "emotional_logical",
+      "combinationTier": "cross-pole",
+      "harmRung": "incapacitating",
+      "effect": "The argument that also **heals**. Reason alone cannot turn a heart; feeling alone cannot show it why. Held together, you can say the thing that is both TRUE and BEARABLE — and a person can actually change their mind, which is the rarest event in the world.",
+      "cannot": "It must be both. A Turning Word that is warm and false is manipulation; one that is true and cold is just a Verist being cruel with extra steps. Get either half wrong and you have made an enemy who is also, now, correct about you.",
+      "cultCondemns": "The Raw say reason is a wall built against feeling. The Bloodless say feeling is noise that corrupts a valid proof. **Neither has ever changed anyone's mind about anything.**",
+      "discovery": "use — a true argument made in a moment where the other person could not have borne it plainly."
     }
   ],
   "discoverability": {
@@ -1076,7 +1148,7 @@
   "theTwelveBraids": {
     "principle": "ONE braid per axis. Twelve axes, twelve braids. To carry one is to hold an axis WHOLE rather than choose an end of it — and it is the ONLY sanctioned road to your own antipode, which the domain-access model closes to you forever by every ordinary means.",
     "cultsCondemnAllOfThem": "⛔ THE CULT OF EACH PURE POLE CALLS ITS AXIS'S BRAID AN ABOMINATION — and both cults of an axis condemn the SAME braid, for opposite reasons. The living civilizations quietly permit them. **That disagreement IS the difference between a people and a cult.**",
-    "count": "9 of 12 authored",
+    "count": "12 of 12",
     "authored": [
       "The Named Chaos",
       "The Called-Back",
@@ -1086,7 +1158,10 @@
       "The Unified Act",
       "The Load-Bearing Word",
       "The Kept Appointment",
-      "The Cleared Ground"
+      "The Cleared Ground",
+      "The Harbored Flame",
+      "The Meaning-Engine",
+      "The Turning Word"
     ]
   }
 }

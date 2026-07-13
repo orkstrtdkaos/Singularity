@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "craftsman",
   "level": 2,
-  "xp": 132,
+  "xp": 135,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -33,13 +33,15 @@
   "alignment": {
     "spectrumId": -0.5648311180957301,
     "violence_peace": 0.03,
-    "chaos_order": 0.015
+    "chaos_order": 0.015,
+    "mechanical_spiritual": 0.015,
+    "concrete_abstract": -0.015
   },
   "attunement": 2,
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 76,
+  "energy": 71,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -393,14 +395,19 @@
         "player": "Prepare for the evening rune binding ceremony. I will want to have both Huginn and Pell participate.  I will need a hot fire but open to the sky. And _es I will be prepared to be naked at some point. Should I run  this as a gambit?",
         "summary": "Silas prepares the open-sky fire pit at Pell's forge for tonight's rune-working — space set, materials laid, Pell and Huginn both situated.",
         "narration": "The village lane deposits you back into Millbrook's morning with the day still young and the hunt not until tomorrow — which means the forge is yours tonight, and there is work to do before then.\n\nPell gives you a single nod at the forge yard gate and goes back inside; she has her own afternoon's labor and you have yours. You spend the better part of an hour walking the forge yard with your eye on what's there: the fire-pit is iron-bowled, lidded, with a chimney flap you can pin open — good draw, hot coals, but enclosed. That won't do. Around the south side of the forge building there's a second pit, older, stone-ringed and open to the sky — ash-cold now, but the firebox is sound, and there's split wood stacked against the wall. You clear the pit of leaf-pack and old clinker, set a small starting fire to check the draw, and watch the smoke rise clean and vertical into the pale spring sky. Good. You rebuild it properly: a base of dry hardwood, split fine, with two larger pieces laid to catch once the heart is hot. It will be ready by full dark with one banking in the evening.\n\nYou give Pell a word through the side door: the outdoor pit, not the forge interior — open to the sky. She leans in the doorway, looks at the stone ring, looks at you, and says 'warmer than the field path, at least' without visible irony. You lay out what you'll need from the Rune-Craft Kit — wax, the pitch-ink, the leather strip — and give the spear-shaft a slow pass with your hands, reading grain and joint and the set of the tip in its lashing, learning it before you mark it. The materials are all there. The space is set. The fire will be hot by the time the light goes.\n\nHuginn lands on the stone ring and walks its circumference once, unhurried, the way it moves through places it considers already its. It does not endorse or object. It simply sits facing the unlit wood with the patience of something that has waited out longer fires than this one.\n\nAs for the nakedness: no one has told you no."
+      },
+      {
+        "player": "Use Order-Sense on the spear now — read the shaft's grain and the tip's stress points so you know exactly where the runes must land to be load-bearing, not decorative.",
+        "summary": "Order-Sense reads the spear's grain — flex point located in the shaft, socket geometry clear, tip stress-map partially resolved.",
+        "narration": "You crouch beside the stone ring and lay the assembled spear across your knees, shaft horizontal, tip pointing west into the afternoon light. The pull of Order-Sense comes out of you quietly — not a surge, just an opening, the way you'd uncurl a fist. The forge yard is concrete and still around you, and that stillness lends the reading something clean.\n\nThe shaft comes clear first: straight-grained ash, two winters dry, load running true down its length with one minor deviation about eighteen inches from the socket — a slight figure in the grain where a branch-bud was, healed over but present. Not a weakness. A flex point. The wood knows how to give there, not break. That's where the primary binding mark wants to land — not at the straight part, where force passes through unchanged, but at the give, where the wood's own memory of bending is already written.\n\nThe tip is less legible. You can read the iron's general structure — the socket walls are even, the blade's cross-section tapers without flaw — but the stress map inside the metal is finer than a clean Order-Sense read can fully resolve. You get the geometry, not the grain. The shoulder of the stop-lug is load-bearing where it meets the road lashing, that much is clear, and the weld line is sound. You know enough to place marks with confidence at the throat and the lug-root. You don't know everything, but you know where the work is real.\n\nHuginn shifts on the stone ring, rotating its head to regard the spear with one pale eye. It makes no sound. Its attention has the quality of something that has watched a great many things begin."
       }
     ],
     "lastTurn": {
-      "narration": "The village lane deposits you back into Millbrook's morning with the day still young and the hunt not until tomorrow — which means the forge is yours tonight, and there is work to do before then.\n\nPell gives you a single nod at the forge yard gate and goes back inside; she has her own afternoon's labor and you have yours. You spend the better part of an hour walking the forge yard with your eye on what's there: the fire-pit is iron-bowled, lidded, with a chimney flap you can pin open — good draw, hot coals, but enclosed. That won't do. Around the south side of the forge building there's a second pit, older, stone-ringed and open to the sky — ash-cold now, but the firebox is sound, and there's split wood stacked against the wall. You clear the pit of leaf-pack and old clinker, set a small starting fire to check the draw, and watch the smoke rise clean and vertical into the pale spring sky. Good. You rebuild it properly: a base of dry hardwood, split fine, with two larger pieces laid to catch once the heart is hot. It will be ready by full dark with one banking in the evening.\n\nYou give Pell a word through the side door: the outdoor pit, not the forge interior — open to the sky. She leans in the doorway, looks at the stone ring, looks at you, and says 'warmer than the field path, at least' without visible irony. You lay out what you'll need from the Rune-Craft Kit — wax, the pitch-ink, the leather strip — and give the spear-shaft a slow pass with your hands, reading grain and joint and the set of the tip in its lashing, learning it before you mark it. The materials are all there. The space is set. The fire will be hot by the time the light goes.\n\nHuginn lands on the stone ring and walks its circumference once, unhurried, the way it moves through places it considers already its. It does not endorse or object. It simply sits facing the unlit wood with the patience of something that has waited out longer fires than this one.\n\nAs for the nakedness: no one has told you no.",
-      "sceneSummary": "Silas prepares the open-sky fire pit at Pell's forge for tonight's rune-working — space set, materials laid, Pell and Huginn both situated.",
+      "narration": "You crouch beside the stone ring and lay the assembled spear across your knees, shaft horizontal, tip pointing west into the afternoon light. The pull of Order-Sense comes out of you quietly — not a surge, just an opening, the way you'd uncurl a fist. The forge yard is concrete and still around you, and that stillness lends the reading something clean.\n\nThe shaft comes clear first: straight-grained ash, two winters dry, load running true down its length with one minor deviation about eighteen inches from the socket — a slight figure in the grain where a branch-bud was, healed over but present. Not a weakness. A flex point. The wood knows how to give there, not break. That's where the primary binding mark wants to land — not at the straight part, where force passes through unchanged, but at the give, where the wood's own memory of bending is already written.\n\nThe tip is less legible. You can read the iron's general structure — the socket walls are even, the blade's cross-section tapers without flaw — but the stress map inside the metal is finer than a clean Order-Sense read can fully resolve. You get the geometry, not the grain. The shoulder of the stop-lug is load-bearing where it meets the road lashing, that much is clear, and the weld line is sound. You know enough to place marks with confidence at the throat and the lug-root. You don't know everything, but you know where the work is real.\n\nHuginn shifts on the stone ring, rotating its head to regard the spear with one pale eye. It makes no sound. Its attention has the quality of something that has watched a great many things begin.",
+      "sceneSummary": "Order-Sense reads the spear's grain — flex point located in the shaft, socket geometry clear, tip stress-map partially resolved.",
       "choices": [
         {
-          "label": "Spend the afternoon marking preliminary guide-lines on the spear-shaft in wax before the binding — so the runes go where you intend, not where the firelight takes your hand.",
+          "label": "Set the primary binding mark at the shaft's flex point — press the wax and pitch-ink into the grain exactly where the wood already knows how to give.",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {
@@ -408,7 +415,25 @@
           },
           "difficulty": 0,
           "intentTags": [
+            "craft",
+            "careful",
+            "ritual"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Light the fire first — let the pit warm and the light change before touching ink to wood. Give the working its proper atmosphere before you begin.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "chaos_order": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
             "prepare",
+            "ritual",
             "careful"
           ],
           "abilityId": null,
@@ -416,76 +441,65 @@
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the spear now — read the shaft's grain and the tip's stress points so you know exactly where the runes must land to be load-bearing, not decorative.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Fetch Pell from the forge now — show her the flex point in the ash, explain what the reading found. Let her see the work before it starts.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "mechanical_spiritual": 0.3,
-            "concrete_abstract": -0.3
+            "chaos_order": 0.3
           },
           "difficulty": 0,
           "intentTags": [
+            "connect",
+            "share",
+            "ritual"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense again — push harder on the tip's stress map, try to resolve the iron's full grain where the first read fell short.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
             "study",
-            "prepare"
+            "risky",
+            "push"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
           "trivial": false
-        },
-        {
-          "label": "Find Mara Wells before evening — you told her you'd watch the river north; update her on what Corvin said about the last two bad mornings before the day gets away from you.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "inform"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Rest until evening — eat one of the preserved trail parcels, sit out of the wind, let the body settle before the night's work.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "rest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "energy": -3
       },
       "scene": {
         "setting": "South side of Pell's forge, Millbrook — the open stone fire-pit is cleared and laid with fresh hardwood, unlit but ready. Afternoon light, mild spring air, smoke-smell from the forge interior.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Back inside the forge at her own work — visible through the side door when she passes it."
+            "state": "Back inside the forge at her own afternoon work — visible through the side door when she passes it."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the stone ring of the fire-pit, facing the unlit wood. Still."
+            "state": "Perched on the stone ring of the fire-pit, facing the spear. One pale eye on the shaft. Still."
           }
         ],
         "objects": [
           "Stone-ringed open fire-pit — cleared, laid with dry hardwood, unlit",
           "Split wood stacked against the forge's south wall",
           "Rune-Craft Kit — laid out beside the pit: wax, pitch-ink, leather strip",
-          "Assembled Mid-Weight Spear — leaning against the stone ring"
+          "Assembled Mid-Weight Spear — now across Silas's knees; flex point identified ~18 inches from socket; tip stress-map partially resolved"
         ],
         "threads": [
-          "Rune-working tonight — fire needs banking once by evening; Pell attending, dressed; Huginn already in place",
+          "Rune-working tonight — fire unlit; marks not yet begun; flex point and socket throat identified as primary landing sites",
+          "Tip stress-map only partially resolved — iron grain interior still unclear",
+          "Pell attending the rune-working tonight, dressed",
           "Date with Pell confirmed — after the hunt, at the forge",
           "Hunt departs tomorrow morning — north gate, before the light gets high",
           "River update owed to Mara Wells — Corvin's two-bad-mornings detail not yet delivered"
@@ -494,59 +508,55 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell Marsh",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Received word of the outdoor pit arrangement — 'warmer than the field path' was her only comment. Returned to her own work. Will attend the rune-working tonight.",
-          "statusNote": "Inside the forge at her own work; attending the rune-working tonight at the open pit.",
-          "relationshipDelta": 0
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Shifted on the stone ring to watch the spear during the Order-Sense reading — attention fixed, no sound.",
+          "statusNote": "Perched at the fire-pit's stone ring, watching the spear with one pale eye.",
+          "status": "active"
         }
       ],
-      "placeUpdates": [
+      "codexUpdates": [
         {
-          "note": "Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out.",
-          "subPlace": {
-            "name": "Forge South Pit",
-            "note": "Open stone-ring fire-pit on the south side of Pell's forge — cleared and prepared for Silas's rune-binding ceremony.",
-            "visited": true
-          }
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket throat and stop-lug root are load-bearing at the iron; interior grain still partially unresolved.",
+          "links": [
+            "aldric-provisioning-deal",
+            "pell"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 1,
-        "why": "An hour of clearing, laying the fire, reading the spear, and setting the space."
-      },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning."
-        }
-      ]
+        "hoursPassed": 0.25,
+        "why": "A brief, restrained Order-Sense read — a few minutes of focused attention."
+      }
     },
     "sceneState": {
       "setting": "South side of Pell's forge, Millbrook — the open stone fire-pit is cleared and laid with fresh hardwood, unlit but ready. Afternoon light, mild spring air, smoke-smell from the forge interior.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Back inside the forge at her own work — visible through the side door when she passes it."
+          "state": "Back inside the forge at her own afternoon work — visible through the side door when she passes it."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the stone ring of the fire-pit, facing the unlit wood. Still."
+          "state": "Perched on the stone ring of the fire-pit, facing the spear. One pale eye on the shaft. Still."
         }
       ],
       "objects": [
         "Stone-ringed open fire-pit — cleared, laid with dry hardwood, unlit",
         "Split wood stacked against the forge's south wall",
         "Rune-Craft Kit — laid out beside the pit: wax, pitch-ink, leather strip",
-        "Assembled Mid-Weight Spear — leaning against the stone ring"
+        "Assembled Mid-Weight Spear — now across Silas's knees; flex point identified ~18"
       ],
       "threads": [
-        "Rune-working tonight — fire needs banking once by evening; Pell attending, dressed; Huginn already in place",
+        "Rune-working tonight — fire unlit; marks not yet begun; flex point and socket throat identified as primary landing sites",
+        "Tip stress-map only partially resolved — iron grain interior still unclear",
+        "Pell attending the rune-working tonight, dressed",
         "Date with Pell confirmed — after the hunt, at the forge",
-        "Hunt departs tomorrow morning — north gate, before the light gets high",
-        "River update owed to Mara Wells — Corvin's two-bad-mornings detail not yet delivered"
+        "Hunt departs tomorrow morning — north gate, before the light gets high"
       ]
     }
   },
@@ -997,14 +1007,16 @@
           "[d1] The Echo River runs gray-green on bad mornings in Millbrook — observed firsthand at the dock. A fisherman pulled his nets in early. The discoloration appears to drift in slow wreaths from upstream. Fi",
           "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be ",
           "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor",
-          "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib"
+          "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib",
+          "[d1] The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket t"
         ],
         "links": [
           "disputed-zone",
           "aldric",
           "aldric-provisioning-deal",
           "mara-wells",
-          "corvin"
+          "corvin",
+          "pell"
         ],
         "aliases": [
           "Millbrook's Elder Declaration",
@@ -1196,11 +1208,11 @@
     }
   },
   "tendencies": {
-    "strategic": 24.895712978900516,
-    "cerebral": 8.210311746450541,
-    "social": 34.62530371133632,
-    "generous": 10.160242386116655,
-    "cautious": 12.266021298751808
+    "strategic": 25.771234414006013,
+    "cerebral": 9.169260187718288,
+    "social": 34.452177192779644,
+    "generous": 10.109441174186072,
+    "cautious": 12.204691192258048
   },
   "aptitudes": [
     "strategist",
@@ -1208,7 +1220,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 52,
+  "actionCount": 53,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1230,8 +1242,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783913263516,
-  "rev": 83,
+  "updatedAt": 1783913446620,
+  "rev": 84,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1306,7 +1318,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 7,
+      "order_sense": 8,
       "palework": 1
     },
     "coActivations": {

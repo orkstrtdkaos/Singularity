@@ -46,7 +46,8 @@
       ],
       "functions": [
         "mend",
-        "bind"
+        "make",
+        "command"
       ],
       "challengeTypes": [
         "PUZZLE"
@@ -102,8 +103,9 @@
         }
       ],
       "functions": [
+        "summon",
         "reveal",
-        "ward"
+        "restore"
       ],
       "challengeTypes": [
         "INVESTIGATE",
@@ -226,7 +228,8 @@
         "mechanical_spiritual": -0.3
       },
       "functions": [
-        "mend"
+        "mend",
+        "make"
       ],
       "narrationHints": "Parts find their places and the dead thing hums again.",
       "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
@@ -274,7 +277,9 @@
         "mechanical_spiritual": 0.3
       },
       "functions": [
-        "heal"
+        "empower",
+        "heal",
+        "resist"
       ],
       "narrationHints": "Presence alone, and the breaking person holds.",
       "description": "Steady another's spirit in crisis by attention and presence — folk-Numenwork.",
@@ -321,7 +326,7 @@
         "chaos_order": 0.2
       },
       "functions": [
-        "bind",
+        "command",
         "mend"
       ],
       "narrationHints": "A word to the machine and it does the new thing.",
@@ -374,6 +379,7 @@
         "concrete_abstract": 0.3
       },
       "functions": [
+        "summon",
         "reveal",
         "ward"
       ],
@@ -467,6 +473,7 @@
         "space_time": 0.4
       },
       "functions": [
+        "travel",
         "move"
       ],
       "challengeProfile": {
@@ -512,8 +519,9 @@
         "space_time": 0.6
       },
       "functions": [
-        "move",
-        "bind"
+        "travel",
+        "open",
+        "summon"
       ],
       "challengeProfile": {
         "EXPLORE": 3,
@@ -534,5 +542,6 @@
       "gated": "learned",
       "tradition": "numinous"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

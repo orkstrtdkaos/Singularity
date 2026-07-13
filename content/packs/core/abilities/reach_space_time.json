@@ -16,7 +16,7 @@
         "chaos_order": -0.1
       },
       "functions": [
-        "move",
+        "travel",
         "reveal"
       ],
       "narrationHints": "The distance was there a moment ago. It is somehow no longer the point.",
@@ -65,8 +65,9 @@
         "space_time": -0.3
       },
       "functions": [
-        "reveal",
-        "move"
+        "track",
+        "travel",
+        "reveal"
       ],
       "narrationHints": "He knows which way, and does not know how he knows.",
       "description": "Know where you are, where things lie, and the true way between — the first gift of the Open Reach.",
@@ -114,9 +115,9 @@
         "chaos_order": 0.2
       },
       "functions": [
+        "foresee",
         "bind",
-        "reveal",
-        "ward"
+        "reveal"
       ],
       "narrationHints": "The moment does not pass. It sits there, being looked at.",
       "description": "The time-pole mastery: duration tended, held, and read. The Hourkeepers remember forward and backward, and pay for both.",
@@ -164,6 +165,7 @@
         "space_time": 0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "She knows how long it has been, and how long it has left.",
@@ -199,5 +201,6 @@
       },
       "tradition": "hourkeeper"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

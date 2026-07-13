@@ -124,7 +124,7 @@ index.html ──> app.js  (all UI, screens, creation, play loop, sidebars, whee
 ## 4. Character & Resolution (the numbers)
 
 - **Sub-attributes (8):** strength/agility · reason/insight · presence/rapport · craft/wits. Creation: 12 points across 4 parents (1–4) + 2 specialise points. Cap 20.
-- **Chance** = attr contribution + skill×10 + abilityRank×5 + spectrum fit (alignment×15 + location×10, clamped ±25) + equipment (**best matching item only**, cap 10 — §15) + companion (+5/relevant, cap 10) + aptitude mods − difficulty (0/15/30) − exhaustion (−10 at 0 energy) − **novel surcharge (−15)** *or* **+ discovery bonus (+20)**. **Clamped 5–95.**
+- **Chance** = attr contribution + skill×10 + abilityRank×5 + spectrum fit (alignment×15 + location×10, clamped ±25) + equipment (**best matching item only**, cap 10 — §15) + companion (+5/relevant, cap 10) + aptitude mods − difficulty (0/15/30) − exhaustion (−10 at 0 energy) − **novel surcharge (−15)** *or* **+ discovery bonus (+20)** − **substratePenalty (§9b, ability actions only — 0 if within band or no ability)**. **Clamped 5–95.**
   - **Attr contribution: ×20/point through soft cap 4, +5/point beyond** — mastery buys power against hard rolls without trivialising easy ones.
   - **Novel vs discovery is a REPLACEMENT, not a stack.** The same action that cost −15 to improvise pays **+20** once it is a known discovery: a 35-point swing. *Reaching past what you know is dangerous; surviving it and repeating it makes it yours.*
   - **⚠️ OPEN BALANCE Q (Erik, parked for sensitivity testing):** at +20 a discovered technique ceilings out on most builds. Intended, or tune to +12–15?
@@ -212,6 +212,32 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
   - **⚠️ ROUND-2 FINDING — the design says "sustained action drifts a character's own spectrum" and it does; but it says or implies a place's disposition pulls the character over time, and THAT is not implemented.** Drift comes only from the **action's own axes**, regardless of where you stand. Acting with/against a place changes the *roll* and the *affinity bonus*, never adds location-sourced drift.
   - **Decay:** there is **no decay routine.** The only attenuation is the EWMA's own 5%/turn — and only on turns that re-touch that axis; untouched axes hold their value indefinitely, and precursor drift only ever grows. *If "drift fades when you stop" is intended, it is unbuilt.*
 - **Random encounters:** 58 entries; **22 regions carry their own texture.** Triggers: `onTravel` 35% · `onRest` 15% · `onEnterLocation` 12%. Flavors: beneficial · benign · **beautiful** · dangerous · theft · chase · fight. *A world that only threatens you is not a world.*
+
+## 9b. Substrate — the second difficulty map (SNG-090, unbuilt)
+
+**Physics:** every craft is nanite-mediated (`lore/power_systems.md`). Lattice density varies by region — and peoples differ in how much they need (`content/packs/core/rules/the_substrate.json`).
+
+**The affinity band, not a fuel gauge.** Each tradition has a substrate level it is tuned to (`substrateBand.center`) and a tolerance (`substrateBand.width`). Inside the band: full power. Outside it, output falls off in **both** directions:
+- **Below band — starvation (steep).** A Continuous tradition craft below its affinity floor can reach near-zero. A Seraph in the Quickwood ≈ 13%.
+- **Above band — interference (mild).** A Returned tradition craft above its affinity ceiling is impaired but never switched off (floor ~60–75%). Dense lattice does not empower the Returned — it crowds their signal.
+
+**The fundamental tradeoff:** The Continuous kept the dependency; highest ceiling in the world, helpless where the lattice is gone. The Returned tuned away from it; work anywhere, but the Gearlands is hostile to a Rootkin.
+
+**Carried substrate** raises effective local density — good for anyone below their band, harmful for anyone above it. The Waystaff is a nanite battery. The companion Aevi is a living substrate source. **The Rootkin find the charge trade ridiculous — they are correct.**
+
+**Resolve-chain contract (unbuilt):**
+- `substratePenalty` = an **additive chance penalty** in `successChance`, computed by `engine/substrate.js`. **Ability actions only** (weapon swings are substrate-free per SNG-089 — no tradition is ever helpless).
+- **Hard gate** at the extreme (craft unavailable — says why, never silently fails).
+- Optional: **energy-cost multiplier** (craft strains in thin substrate).
+- **⛔ SEPARATE TERM — never fold into spectral fit (SNG-079).** Dispositional fit and substrate density are orthogonal physical facts: a place can suit you dispositionally and still starve your craft. Both modify `successChance` but are independently clamped and summed.
+- **Tell the player:** receipt line required ("The lattice is thin here — your craft runs at a fraction" / "The lattice is dense and hostile to your green craft — it fights you") + GM context line + map overlay (alongside `dangerLevel`).
+
+**Data:** `the_substrate.json` has `substrateBand` (center + width per tradition) and `substrateDensity` (per region). Each location derives density from its `regionId`; an optional per-location override allows a lattice-vault inside natural ground or a dead cell inside a city. CI: every location must resolve an effective density.
+
+**Build order:** (1) load `the_substrate.json` + CI check → (2) pure `engine/substrate.js` factor, tuned by `tests/balance_sim.mjs` — **never eyeball the curves** → (3) wire into `successChance` + gate + energy mult → (4) receipts + GM line + map overlay → (5) carried-charge logistics (Waystaff charge property).
+
+*⚠️ This is design canon + engine contract. The engine code does not yet exist. Do not build until `tests/balance_sim.mjs` exists and tunes the curves.*
+
 
 ## 10. Time (one world, one clock)
 

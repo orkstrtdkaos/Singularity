@@ -1540,3 +1540,37 @@ And the roster (`listPlayers()` / `listCharacters()`, from `state.js`) reads **l
 **Erik test:** "Open the game on your phone. Enter the sync settings and nothing else. Verify Silas is simply THERE — with the repaired Ashwarden domains — and that playing him on the phone and then reopening on the desktop shows the phone's latest."
 
 *This is the feature Erik asked for in BATCH-7 and believed he had. He is one setup screen away from it, and the last mile was never built.*
+---
+
+## SNG-088 — The gambit builder is broken three ways (and SNG-076 is NOT closed) 🔴
+
+**Erik, 2026-07-12:** *"words are still getting cut off... I tried to have the GM set up a gambit, but it ran it as one big input... now I'm trying to set it up properly, but it thinks I failed the first time already."* 🔧 CCode. Aevi PO. **This is the feature the game is BEST at, and it is unusable.**
+
+### PWSV (HEAD v1.8.45)
+
+**A. ⛔ SNG-076 MISSED THIS SURFACE — and therefore SNG-076 DOES NOT CLOSE.**
+```js
+// app.js:4076
+g.gmAdvice = String(result.text).slice(0, 400);
+```
+The GM's **advice about the player's plan** — the single most useful text in the builder — is hard-cut at 400 chars, **mid-word, no ellipsis** (*"which means you'll nee"*).
+*(SNG-076 DID fix the prose elsewhere: the surviving slices in `quests.js` are legitimate short-field clamps — an 80-char title, a 60-char giver. **This one is prose and it is still being butchered.**)*
+**Fix:** word-boundary + real ellipsis + **expandable**, and raise the bound — **400 chars cannot hold a sequencing note about a multi-step plan.**
+**→ Per §21 (CLOSE ON THE SYMPTOM, NOT THE SHIP): SNG-076 stays open until Erik confirms text is no longer cut anywhere.**
+
+**B. ⛔ THE GM CANNOT OPEN A GAMBIT.** `gambitOps`/`openGambit` → **0 refs in gm.js.**
+Erik asked the GM to set up a gambit. **It had no mechanism**, so it did the only thing it could: **ran the whole plan as ONE action.**
+And the GM is **never told about plan-level declaration** (0 refs to `plan-level`) — so **the rule Erik flagged TWICE, recovered into `gambit_design.json`, was never implemented:**
+> **HOLD THE PLAN-LEVEL VIEW AGAINST THE PUZZLE'S STEPWISE PULL.** *A gambit is declared as a whole and resolved as a whole; the maneuvers live INSIDE it.*
+**Fix:** add a **`gambitOps`** op — the GM may OPEN the builder with a proposed goal and seeded steps when the player says *"I want to plan this."* **The GM proposes the plan; the PLAYER edits and commits it; the ENGINE runs it.** (Law 1 holds throughout.) And put the plan-level rule in the GM contract, sourced from `gambit_design.json`.
+
+**C. ⛔ NO ABANDON / RESET — a failed run POISONS the next one.** `abandonGambit`/`resetGambit`/`clearGambit` → **0 refs.**
+Erik's botched attempt left its state behind: *"Adaptation points available: 2"* is carried over, and the builder *"thinks I failed the first time already."* **A gambit must be abandonable, and abandoning must leave NOTHING.**
+**Fix:** `abandonGambit()` clears goal · steps · assessment · advice · receipts · adaptation points · the run index. A **Start over** control in the builder. **Abandoning costs nothing and pays nothing** — per canon, only a *completed* gambit pays the bonus.
+
+**D. The input fields are too narrow to read.** *"I want to perform the first…"* / *"Use ordersense to unders…"* — the text is there; the boxes are not. Full-width inputs; the goal and each step are prose, not labels.
+
+### Why this one matters more than its size
+**The gambit is the mechanic this game is BEST at** — Erik's own definition, live-validated, three proven shapes. It is the reason the game is not just a chat. **And right now it cannot be started by the GM, cannot be read, and cannot be restarted.**
+
+**Erik test:** "Tell the GM you want to plan something — verify it OPENS the builder with a proposed goal and steps rather than running it. Read the GM's advice — verify it isn't cut mid-word. Abandon it and start over — verify the new gambit is genuinely new."

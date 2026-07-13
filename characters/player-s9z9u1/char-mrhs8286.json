@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "craftsman",
   "level": 2,
-  "xp": 109,
+  "xp": 114,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -37,7 +37,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 100,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -339,76 +339,77 @@
         "player": "Will you walk with me to Corvin's?  I also need to work this spear tonight... I would love for you to join me for that as well.",
         "summary": "Silas asks Pell to walk with him to Corvin's and stay for the evening's spear work — she accepts without a word, just the canvas coat off the peg.",
         "narration": "You turn to Pell with the assembled spear still in hand — the shaft warm from the lashing work, the road-wrap tight at the socket throat. 'Will you walk with me to Corvin's?' you ask. 'And I need to work this spear tonight. I'd love for you to join me for that as well.'\n\nPell sets the whetstone down on the bench with a quiet click. She looks at the spear, then at you, with the same unhurried read she gave your work this morning. Then she reaches behind the bench and pulls a worn canvas coat off a peg — heavy-shouldered, salt-stiff at the collar — and shrugs into it without ceremony. That's her answer.\n\nHuginn drops from the doorframe as you step out, landing on your pack-strap for a single beat before launching into the lane ahead, already angling east. The south lane is still damp underfoot from this morning's squall, lane stones darker where the water collected in the ruts. Pell walks beside you at the unhurried pace of someone who has covered this ground a hundred times and has no interest in pretending otherwise. The forge stays open behind you — she doesn't lock it, you notice; that's not how this village works.\n\n'Corvin will be doing something half-wrong when we get there,' she says, after a block of comfortable quiet. It's not exactly a warning. More like reading aloud from a reliable text."
+      },
+      {
+        "player": "Tell Huginn to scout ahead - walk easy and let Pell talk... Guess at her last name - Pell Grant? lol",
+        "summary": "Silas sends Huginn to scout ahead; Pell reveals her surname is Marsh, catches the teasing guess, and keeps walking.",
+        "narration": "You lift a hand toward Huginn and tip your chin east — the gesture you've settled into, less command than suggestion. The big corvid reads it clean, peels off the fence-post with a single wingbeat, and angles ahead down the lane, disappearing past the second fence-line into the pale morning light. Scout duty, or whatever Huginn calls it. Probably 'getting there first.'\n\nThe lane opens a little without the bird's weight on the air, and you let your pace settle — unhurried, the assembled spear easy in your grip, burlap bundle over your shoulder. The damp stones have mostly dried in the half-hour since the squall cleared. You glance sideways at Pell, walking in her canvas coat, eyes forward, collar still salt-stiff at the shoulder.\n\n'Pell Grant?' you try, keeping it light — the question carrying the tease more than any tone.\n\nShe doesn't look at you. A beat. Two. Then the corner of her mouth moves — that same small, catalogued tell — and she says, flat as always: 'Marsh.' Another step. 'My grandmother's name was Grant.' She lets that sit for exactly one more stride before she glances across. 'You're not as subtle as you think.'\n\nThe lane curves east past a row of garden stakes, the echo of the village behind you and Corvin's furlong somewhere ahead. Huginn is already out of sight."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Pell with the assembled spear still in hand — the shaft warm from the lashing work, the road-wrap tight at the socket throat. 'Will you walk with me to Corvin's?' you ask. 'And I need to work this spear tonight. I'd love for you to join me for that as well.'\n\nPell sets the whetstone down on the bench with a quiet click. She looks at the spear, then at you, with the same unhurried read she gave your work this morning. Then she reaches behind the bench and pulls a worn canvas coat off a peg — heavy-shouldered, salt-stiff at the collar — and shrugs into it without ceremony. That's her answer.\n\nHuginn drops from the doorframe as you step out, landing on your pack-strap for a single beat before launching into the lane ahead, already angling east. The south lane is still damp underfoot from this morning's squall, lane stones darker where the water collected in the ruts. Pell walks beside you at the unhurried pace of someone who has covered this ground a hundred times and has no interest in pretending otherwise. The forge stays open behind you — she doesn't lock it, you notice; that's not how this village works.\n\n'Corvin will be doing something half-wrong when we get there,' she says, after a block of comfortable quiet. It's not exactly a warning. More like reading aloud from a reliable text.",
-      "sceneSummary": "Silas asks Pell to walk with him to Corvin's and stay for the evening's spear work — she accepts without a word, just the canvas coat off the peg.",
+      "narration": "You lift a hand toward Huginn and tip your chin east — the gesture you've settled into, less command than suggestion. The big corvid reads it clean, peels off the fence-post with a single wingbeat, and angles ahead down the lane, disappearing past the second fence-line into the pale morning light. Scout duty, or whatever Huginn calls it. Probably 'getting there first.'\n\nThe lane opens a little without the bird's weight on the air, and you let your pace settle — unhurried, the assembled spear easy in your grip, burlap bundle over your shoulder. The damp stones have mostly dried in the half-hour since the squall cleared. You glance sideways at Pell, walking in her canvas coat, eyes forward, collar still salt-stiff at the shoulder.\n\n'Pell Grant?' you try, keeping it light — the question carrying the tease more than any tone.\n\nShe doesn't look at you. A beat. Two. Then the corner of her mouth moves — that same small, catalogued tell — and she says, flat as always: 'Marsh.' Another step. 'My grandmother's name was Grant.' She lets that sit for exactly one more stride before she glances across. 'You're not as subtle as you think.'\n\nThe lane curves east past a row of garden stakes, the echo of the village behind you and Corvin's furlong somewhere ahead. Huginn is already out of sight.",
+      "sceneSummary": "Silas sends Huginn to scout ahead; Pell reveals her surname is Marsh, catches the teasing guess, and keeps walking.",
       "choices": [
         {
-          "label": "Walk easy and let Pell talk — she's been watching this village longer than you've been here; let whatever she knows surface on its own.",
+          "label": "Walk easy — match her pace and let the silence go comfortable, see if she says more on her own.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "violence_peace": 0.7,
-            "concrete_abstract": -0.3
+            "violence_peace": 0.7
           },
           "difficulty": 0,
           "intentTags": [
+            "wait",
             "listen",
-            "build-relationship"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask her directly about Corvin — what she actually worries he'll do wrong on a boar, beyond the obvious.",
+          "label": "Grandmother's name was Grant — follow that thread. Ask about her family.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "axes": {
-            "violence_peace": 0.5,
-            "concrete_abstract": -0.2
+            "violence_peace": 0.7
           },
           "difficulty": 0,
           "intentTags": [
             "ask",
-            "plan",
-            "scout-intel"
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense as you walk — the east furlong, the fence-lines, the lay of the land toward the north wood. Read the terrain before you're in it.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "'Pell Marsh.' Say it once, like you're setting it somewhere you won't lose it.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": 0.1
+            "violence_peace": 0.65
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "scout",
-            "careful"
+            "connect",
+            "signal"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Watch Huginn — he's already ahead of you both. See where he lands, what he's looking at.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Let the lane do the work — keep walking, watch for the second fence-line and Huginn's position ahead.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "mechanical_spiritual": -0.3,
-            "concrete_abstract": -0.1
+            "violence_peace": 0.6
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "watch",
+            "scout",
+            "observe",
             "careful"
           ],
           "abilityId": null,
@@ -422,34 +423,28 @@
         "energy": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "The south lane, mid-morning, moving east — damp lane stones, the forge open behind them, light steady and gray-bright after the cleared squall.",
+        "setting": "The east lane out of Millbrook, mid-morning — damp stones mostly dried, garden stakes along the verge, the forge left behind. Moving east toward Corvin's furlong.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Walking beside Silas in her canvas coat, steady pace, not in a hurry."
+            "state": "Walking beside Silas in her canvas coat, eyes forward, surname just revealed — a dry half-smile already gone back to neutral."
           },
           {
             "name": "Huginn",
-            "state": "A lane ahead, airborne, angling east along the fence-line."
+            "state": "Out of sight ahead, scouting east along the fence-line."
           }
         ],
         "objects": [
           "Assembled mid-weight spear — in Silas's hand",
-          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Silas's back or shoulder",
+          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Silas's shoulder",
           "Rune-Craft Kit — in the pack"
         ],
         "threads": [
           "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
           "Modified Light Spear-Tip (Corvin's) still to be handed off",
-          "Evening spear work invited — Pell has accepted"
+          "Evening spear work — Pell has accepted"
         ]
       },
       "npcUpdates": [
@@ -457,30 +452,57 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
+          "role": "Village blacksmith, Millbrook — south lane forge",
+          "note": "Revealed her surname — Marsh — after Silas guessed Grant. Noted her grandmother's name was Grant. Caught the tease and named it plainly.",
           "learned": [
-            "Does not lock the forge when she steps out — village operates on trust"
+            "Full name is Pell Marsh",
+            "Her grandmother's name was Grant"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking east with Silas toward Corvin's east furlong, mid-morning."
+          "statusNote": "Walking east with Silas toward Corvin's east furlong, mid-morning — surname now known."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion corvid",
+          "note": "Sent ahead to scout east on a gesture — peeled off without ceremony and disappeared past the second fence-line.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Scouting east ahead of the group along the fence-line toward Corvin's furlong."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell Marsh",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary.",
+          "links": [
+            "millbrook",
+            "aldric-provisioning-deal",
+            "corvin",
+            "mara-wells"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk from the forge east along the lane — a few minutes of movement."
+        "why": "A short walk east along the lane — a few minutes of easy travel."
       }
     },
     "sceneState": {
-      "setting": "The south lane, mid-morning, moving east — damp lane stones, the forge open behind them, light steady and gray-bright after the cleared squall.",
+      "setting": "The east lane out of Millbrook, mid-morning — damp stones mostly dried, garden stakes along the verge, the forge left behind. Moving east toward Corvin's furlong.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Walking beside Silas in her canvas coat, steady pace, not in a hurry."
+          "state": "Walking beside Silas in her canvas coat, eyes forward, surname just revealed — a dry half-smile already gone back to neu"
         },
         {
           "name": "Huginn",
-          "state": "A lane ahead, airborne, angling east along the fence-line."
+          "state": "Out of sight ahead, scouting east along the fence-line."
         }
       ],
       "objects": [
@@ -491,7 +513,7 @@
       "threads": [
         "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
         "Modified Light Spear-Tip (Corvin's) still to be handed off",
-        "Evening spear work invited — Pell has accepted"
+        "Evening spear work — Pell has accepted"
       ]
     }
   },
@@ -633,7 +655,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c",
         "[d1] Inspected the finished hand-axe herself — confirmed the collar with her thumb, rehung it in its spot. Turned to face Silas directly and named the next step: find Corvin, then go no",
         "[d1] Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact.",
         "[d1] Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
@@ -642,17 +663,18 @@
         "[d1] Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on ",
         "[d1] Allowed the kiss on the cheek without stepping back — confirmed the date in her register with 'you can tell.' Sent Silas east with the same flat economy as always.",
         "[d1] Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone.",
-        "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes."
+        "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
+        "[d1] Revealed her surname — Marsh — after Silas guessed Grant. Noted her grandmother's name was Grant. Caught the tease and named it plainly."
       ],
       "knownFacts": [
-        "Backlog fully cleared to her satisfaction — all five pieces done, hand-axe included",
-        "Sold the mid-weight tip to Silas; modified the light tip with a stop-lug for Corvin; credited backlog labor against the purchase.",
         "Knows Corvin's address and has directed others there before",
         "Not unsettled by Silas returning when he could have gone straight to the east furlong",
         "Corvin is at the east furlong — past second fence-line, left fork at the willow; will be mending or building something half-considered",
         "Silas asked Mara about her specifically — enough to know what she'd want",
         "Shows genuine warmth in small, precise tells — the mouth-shift, the allowed closeness, the click of the whetstone set down with decision",
-        "Does not lock the forge when she steps out — village operates on trust"
+        "Does not lock the forge when she steps out — village operates on trust",
+        "Full name is Pell Marsh",
+        "Her grandmother's name was Grant"
       ],
       "skillsObserved": [
         "field tactics",
@@ -663,7 +685,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "Walking east with Silas toward Corvin's east furlong, mid-morning.",
+      "statusNote": "Walking east with Silas toward Corvin's east furlong, mid-morning — surname now known.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1020,7 +1042,8 @@
           "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
           "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
           "[d1] Sold the mid-weight spear-tip to Silas and modified the light point for Corvin with a stop-lug — labor credit from the backlog deducted clean. Transaction done in the same flat register as everything ",
-          "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them."
+          "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
+          "[d1] Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary."
         ],
         "links": [
           "millbrook",
@@ -1030,7 +1053,9 @@
           "corvin",
           "mara-wells"
         ],
-        "aliases": [],
+        "aliases": [
+          "Pell Marsh"
+        ],
         "createdDay": 1,
         "entityId": "pell",
         "updatedDay": 1
@@ -1129,8 +1154,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783903568766,
-  "rev": 66,
+  "updatedAt": 1783903845199,
+  "rev": 67,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

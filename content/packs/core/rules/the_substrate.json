@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "id": "the_substrate",
+  "kind": "design_canon",
+  "note": "SNG-090 — Erik-directed 2026-07-12. EXTENDS existing canon (`power_systems.md`: *'All power in this world is nanite-mediated'*; `will_modality.json`: *'denser near the deep sites, thinner in the safe margins'*). What was MISSING: **peoples differ in how much substrate they NEED.**",
+  "thePhysics": "Every craft in this world is nanite-mediated. There is no magic — there is a Precursor lattice that reads structured will and enacts it. **The crafts ARE technology, and the traditions are the disciplines that learned to speak to it.**",
+  "theCorrection": "⛔ The Seraphic Orders are NOT the only people who never abandoned the power. Several did not. **But those who DID abandon it decreased the potential of those powers** — and in exchange, they can run on almost nothing. **This is the central tradeoff of the world and it was never mechanical until now.**",
+  "theTwoNumbers": {
+    "substrateDependency": "A TRADITION's need. 0.0 = runs on muscle, bone and craft. 1.0 = pure lattice, dies without it.",
+    "substrateDensity": "A PLACE's supply. 0.0 = true nature, the lattice is gone. 1.0 = the deep sites, where it is thickest.",
+    "theRule": "**A craft's effective power scales with min(density + carried, 1.0) against its dependency.** A high-dependency craft in a low-density place is not weakened. **It is nearly OFF.**"
+  },
+  "theTradeoff": {
+    "theContinuous": "Never abandoned it. **Highest ceiling in the world — and helpless where the lattice is gone.** Enginewrights, the Lattice-Cities, the Figurists, the SERAPHIC ORDERS, the Blazeborn, the Cogitants, the Hourkeepers, the Numinous, the Veilwrights.",
+    "theReturned": "Went back to true nature. **Lower ceiling — and they work ANYWHERE.** The Rootkin, the Somatics, the Marchers, the Valleyfolk, the Churnfolk, the Masons, the Ashwardens, the Stillhold.",
+    "theKeyImage": "⛔ **A SERAPH IN THE QUICKWOOD IS NEARLY POWERLESS.** Luminous, certain, terrifying — and reduced to a person with excellent posture and a very strong opinion. Meanwhile a Rootkin in the Gearlands is *fine*, because their power was never borrowed from the lattice in the first place. **The Seraph has only what ambient, dormant substrate lies nearby — and what they BROUGHT WITH THEM.**"
+  },
+  "carriedSubstrate": {
+    "principle": "⛔ **YOU CAN CARRY YOUR OWN SUPPLY.** This is the logistics layer of the whole world, and it has been sitting in Erik's inventory the entire time.",
+    "theWaystaff": "*'resonance-crystal translator staff' · 'three crystals charged, one shallow' · 'three charged nodes'* — **the Waystaff is a NANITE BATTERY.** Erik has been carrying his own substrate since the first session and neither of us said it out loud.",
+    "aevi": "The companion Aevi is *'a curious swarm of nanite-motes'* — **a living, mobile substrate source.** A Continuous-tradition character travelling with Aevi is carrying their power supply, and it has opinions.",
+    "implications": [
+      "Charged reservoirs are the most valuable trade goods in the world, and the Crossing's Hundred Markets run on them.",
+      "An expedition into the Quickwood by a Continuous people is a LOGISTICS problem before it is a combat one.",
+      "Running out of charge in a low-density region is a survival scenario, not an inconvenience.",
+      "**The Rootkin have never needed to buy a charge in their lives, and they find the whole trade faintly ridiculous.**"
+    ]
+  },
+  "whyTheQuickwoodIsEMPTY": "The Rootkin did not merely go back to nature — **they grew a country the lattice cannot get purchase in.** Living wood, root-fed water, four hundred years of deliberate biological growth. It is the single lowest-substrate region in the world (0.12) and **that is not an accident. It is a fortification, and the Lattice-Cities know it.**",
+  "strategicConsequences": [
+    "**The map is now TWO difficulty maps.** Dispositional misfit (SNG-079: how far a place is from what you ARE) AND substrate density (whether your craft can run at all). A place can be easy for you dispositionally and still switch you off.",
+    "**It explains the Blaze.** A high-density region, expanding — and it is *sterilising the substrate into glass* as it goes. The Blazeborn are burning their own supply.",
+    "**It explains the Deep Works.** Masons [concrete] and Enginewrights [mechanical] sit on the densest ground in the world. **The Masons are LOW-dependency (0.32) mining the HIGHEST-density substrate — they hold the supply and do not need it.** That is the most powerful strategic position on the map and nobody has named it.",
+    "**It gives the Accords teeth.** A waygate is not a convenience; **it is a supply line.**",
+    "**It is why the Numinous built the waygates** — and why they do not use them. They are dissolving. They no longer need to arrive anywhere."
+  ],
+  "substrateDependency": {
+    "precursor": 1.0,
+    "enginewright": 0.95,
+    "lattice": 0.92,
+    "figurist": 0.9,
+    "seraphic": 0.9,
+    "blazeborn": 0.86,
+    "cogitant": 0.85,
+    "hourkeeper": 0.85,
+    "numinous": 0.82,
+    "veilwright": 0.8,
+    "syllogist": 0.62,
+    "abyssal": 0.6,
+    "horizon": 0.6,
+    "unmaker": 0.55,
+    "wright": 0.52,
+    "threnodist": 0.5,
+    "verist": 0.5,
+    "harmonic": 0.5,
+    "radiant_folk": 0.5,
+    "stillhold": 0.36,
+    "ashwarden": 0.35,
+    "mason": 0.32,
+    "churnfolk": 0.3,
+    "marcher": 0.26,
+    "valley_craft": 0.25,
+    "somatic": 0.2,
+    "rootkin": 0.18
+  },
+  "substrateDensity": {
+    "the_gearlands": 0.98,
+    "the_lattice_cities": 0.94,
+    "manifest_domain": 0.9,
+    "the_ascent": 0.88,
+    "radiant_wastes": 0.86,
+    "the_pattern_reach": 0.85,
+    "the_kept_reach": 0.84,
+    "the_numinous_reach": 0.82,
+    "the_center": 0.7,
+    "the_veiled_reach": 0.66,
+    "the_reasoned_hold": 0.6,
+    "umbral_depths": 0.58,
+    "the_descent": 0.55,
+    "the_making": 0.52,
+    "the_feeling_coast": 0.48,
+    "the_stark_reach": 0.46,
+    "the_open_reach": 0.44,
+    "the_unmade": 0.42,
+    "valley": 0.4,
+    "the_palelands": 0.32,
+    "the_given_land": 0.3,
+    "unspooling": 0.28,
+    "somatic_reaches": 0.22,
+    "riven_marches": 0.2,
+    "the_quickwood": 0.12
+  }
+}

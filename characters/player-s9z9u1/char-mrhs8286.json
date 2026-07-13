@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 204,
+  "xp": 207,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -19,7 +19,7 @@
   "abilities": [
     {
       "abilityId": "order_sense",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "deathsense",
@@ -35,13 +35,14 @@
     "violence_peace": 0.03,
     "chaos_order": 0.029249999999999998,
     "mechanical_spiritual": 0.07991062500000001,
-    "concrete_abstract": -0.0522875
+    "concrete_abstract": -0.0522875,
+    "death_life": -0.025
   },
   "attunement": 3,
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 110,
+  "energy": 104,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -462,99 +463,114 @@
         "player": "Spend a few minutes with the Rune-Craft Kit tightening the nascent thread to Huginn before the night fully closes — while the reading is fresh.",
         "summary": "Silas deepens the Huginn-thread in the spear's death-binding — a critical tightening that takes the connection from nascent to present.",
         "narration": "You don't put the spear down. The reading is still fresh in your hands — the thread to Huginn oriented but thin, a single filament where you want a cable. You pick up the Rune-Craft Kit from beside the stone ring: the wax stub, the last of the pitch-ink, the folded leather strip. Pell watches without comment. She's tired, but she's the kind of tired that keeps one eye open.\n\nYou press the wax along the base of the binding just above the socket throat — not a new mark, an extension of the existing one, a follow-through stroke that deepens the groove the inscription already found. The pitch-ink goes in after it, thin and black, worked into the grain with the leather strip. You're not writing anything new. You're listening to what's already there and saying it more clearly.\n\nWhat happens next is quiet and entirely real. The thread pulls taut. Not toward you — toward the dark beyond the pit, where Huginn sits folded and still. Its one open eye sharpens. It lifts its head, a short precise movement, and for a moment the coals throw a line of orange across the blade that has no business landing that way, at that angle, with the fire this low. The thread in the binding goes from nascent to present — not a tether, not a leash, but something like a name spoken between two people who already knew each other's faces. A mutual registration.\n\nHuginn settles again. One slow blink. It does not croak. But the silence after has a different texture than the silence before, and you can feel the difference in the shaft under your hands — the spear knows what it is adjacent to now. The binding is still rough, still a beginning. But the beginning has teeth. Pell exhales through her nose. 'Right,' she says, with the flat affect of a woman updating a mental ledger. 'Morning, then.'\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
+      },
+      {
+        "player": "Use Deathsense on the spear — now that the thread is taut, read whether the binding has an orientation toward anything already dying in the north wood.",
+        "summary": "Deathsense reads north through the spear but the forge yard's saturation blurs the signal — something is out there, not tonight, not specific enough to name.",
+        "narration": "The night is very still. You set the spear across your knees again — the pitch-ink barely dry, the wax still faintly warm at the socket throat — and let Deathsense open, not wide but directed, running the thread out along the binding the way you'd follow a rope into dark water.\n\nThe forge yard resists you. Not hostility — more like the place has too much iron in it, too many things that were shaped by ending and are now simply objects. The smokehouse smell carries on the light wind from the north. Dead fish, cured meat, the specific flatness of things already processed past the point where Deathsense finds purchase. The place has been a site of finished deaths for decades and they all blur together into a low, undifferentiated hum that the binding can't sort through cleanly.\n\nYou get something. North — that much is real, the thread does pull that direction, and there's a texture to it: more than one, not immediate, not tonight. The sounder you already know about, probably. But whether that's all of it, whether one of those animals is already tipped toward dying in the way Deathsense reads clearly — you can't say. The interference is too thick here, the yard too saturated with old endings. You'd need to be closer, or somewhere the air hasn't been marinating in cured flesh for twenty years.\n\nHuginn shifts on his perch beyond the pit, both eyes open, watching the direction your attention just went. He doesn't croak. He tilts his head a few degrees north and holds it.\n\nPell's voice comes from the south wall, low and unimpressed. 'You're doing something else.'"
       }
     ],
     "lastTurn": {
-      "narration": "You don't put the spear down. The reading is still fresh in your hands — the thread to Huginn oriented but thin, a single filament where you want a cable. You pick up the Rune-Craft Kit from beside the stone ring: the wax stub, the last of the pitch-ink, the folded leather strip. Pell watches without comment. She's tired, but she's the kind of tired that keeps one eye open.\n\nYou press the wax along the base of the binding just above the socket throat — not a new mark, an extension of the existing one, a follow-through stroke that deepens the groove the inscription already found. The pitch-ink goes in after it, thin and black, worked into the grain with the leather strip. You're not writing anything new. You're listening to what's already there and saying it more clearly.\n\nWhat happens next is quiet and entirely real. The thread pulls taut. Not toward you — toward the dark beyond the pit, where Huginn sits folded and still. Its one open eye sharpens. It lifts its head, a short precise movement, and for a moment the coals throw a line of orange across the blade that has no business landing that way, at that angle, with the fire this low. The thread in the binding goes from nascent to present — not a tether, not a leash, but something like a name spoken between two people who already knew each other's faces. A mutual registration.\n\nHuginn settles again. One slow blink. It does not croak. But the silence after has a different texture than the silence before, and you can feel the difference in the shaft under your hands — the spear knows what it is adjacent to now. The binding is still rough, still a beginning. But the beginning has teeth. Pell exhales through her nose. 'Right,' she says, with the flat affect of a woman updating a mental ledger. 'Morning, then.'\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
-      "sceneSummary": "Silas deepens the Huginn-thread in the spear's death-binding — a critical tightening that takes the connection from nascent to present.",
+      "narration": "The night is very still. You set the spear across your knees again — the pitch-ink barely dry, the wax still faintly warm at the socket throat — and let Deathsense open, not wide but directed, running the thread out along the binding the way you'd follow a rope into dark water.\n\nThe forge yard resists you. Not hostility — more like the place has too much iron in it, too many things that were shaped by ending and are now simply objects. The smokehouse smell carries on the light wind from the north. Dead fish, cured meat, the specific flatness of things already processed past the point where Deathsense finds purchase. The place has been a site of finished deaths for decades and they all blur together into a low, undifferentiated hum that the binding can't sort through cleanly.\n\nYou get something. North — that much is real, the thread does pull that direction, and there's a texture to it: more than one, not immediate, not tonight. The sounder you already know about, probably. But whether that's all of it, whether one of those animals is already tipped toward dying in the way Deathsense reads clearly — you can't say. The interference is too thick here, the yard too saturated with old endings. You'd need to be closer, or somewhere the air hasn't been marinating in cured flesh for twenty years.\n\nHuginn shifts on his perch beyond the pit, both eyes open, watching the direction your attention just went. He doesn't croak. He tilts his head a few degrees north and holds it.\n\nPell's voice comes from the south wall, low and unimpressed. 'You're doing something else.'",
+      "sceneSummary": "Deathsense reads north through the spear but the forge yard's saturation blurs the signal — something is out there, not tonight, not specific enough to name.",
       "choices": [
         {
-          "label": "Sleep — lay the spear against the wall, let the night have its hours, and be ready before first light.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "rest",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Before sleep, spend a quiet moment with Huginn — sit beside it, let it read you the way it reads everything, and see what it says about tomorrow.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Deathsense on the spear — now that the thread is taut, read whether the binding has an orientation toward anything already dying in the north wood.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Ask Pell one last practical question before she goes — what she knows about the north wood's layout, where a sounder might water or shelter.",
+          "label": "Tell Pell what you just tried — partial read, north pull, too much interference here to be specific",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "careful"
+            "explain",
+            "honest"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn directly — he tilted north and held it; put it to him plainly: is one of them already dying?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Acknowledge what Pell noticed, let it go — the yard isn't the place; you'll read again in the wood",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "deflect"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step out past the south wall — away from iron and smokehouse — and try the read again from cleaner ground",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "careful",
+            "study",
+            "risky"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": -3,
+        "xp": 0
       },
       "scene": {
-        "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night. The binding work is finished.",
+        "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night. The binding work is finished and the Rune-Craft Kit is spent.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Leaned against the south wall, mug empty, watching — tired but her eyes still tracking. Said 'Right. Morning, then.' and means it."
+            "state": "leaned against the south wall, mug empty, watching — said 'you're doing something else' from the dark"
           },
           {
             "name": "Huginn",
-            "state": "Settled beyond the pit's warmth, folded, both eyes now fully open — the thread registered, mutual and present."
+            "state": "perched beyond the pit's warmth, both eyes open, head tilted a few degrees north and holding it"
           }
         ],
         "objects": [
           "Stone-ringed fire-pit — banked to slow red coals, ash-covered",
-          "Assembled Mid-Weight Spear — leaned against the south wall, binding tightened, Huginn-thread present",
+          "Assembled Mid-Weight Spear — across Silas's knees, binding tightened, Huginn-thread now present and mutual",
           "Split wood stacked against the south wall — mostly spent",
           "Two mugs — Pell's on the south wall, Silas's on the stone ring",
           "Rune-Craft Kit — wax and pitch-ink fully spent, leather strip used"
         ],
         "threads": [
+          "Deathsense read north — something out there, more than one, not tonight, but the yard's saturation prevented specificity",
+          "Huginn tilted north and held it — he knows something",
+          "Pell noticed Silas was doing something else and named it",
           "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-          "The thread between the spear and Huginn is now present and mutual — oriented toward the north",
           "Pell's after-hunt mentorship arrangement is standing"
         ]
       },
@@ -563,94 +579,63 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Watched the tightening of the Huginn-thread without intervention — logged it accurately, said 'Right. Morning, then.' and let the night close.",
+          "note": "Noticed Silas using Deathsense through the spear in the dark yard and named it plainly — 'you're doing something else'",
           "learned": [
-            "The spear's thread to Huginn is now present and mutual — she saw the coals catch the blade at the wrong angle and filed it."
+            "Silas uses abilities that she can observe even when he doesn't announce them"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "attentive observation — caught an unseen working"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge south pit — night before the hunt, ready to depart at first light."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "The thread tightened — Huginn lifted its head, the coals threw a line across the blade, and the mutual registration settled. Both eyes now open.",
-          "learned": [
-            "The death-binding's thread to Huginn is now present and mutual — a name spoken between two people who already knew each other's faces."
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Settled at the forge south pit — thread registered, watching, ready."
+          "statusNote": "At the forge south pit, mug empty, watching Silas from the south wall before sleep"
         }
       ],
       "codexUpdates": [
         {
           "topic": "millbrook",
           "label": "Millbrook",
-          "kind": "event",
+          "kind": "place",
           "entityId": "millbrook",
-          "fact": "The death-binding's thread to Huginn tightened to present and mutual on World-day 13 night — a critical deepening at the forge south pit before the hunt. The spear now knows what it is adjacent to.",
+          "fact": "Deathsense through the bound spear reads north with a genuine pull — more than one presence, not imminent, but present. The forge yard's saturation (iron, decades of cured meat) blurs any finer resolution. Huginn tilted north and held the direction unprompted.",
           "links": [
+            "aldric-provisioning-deal",
+            "pell",
+            "corvin",
             "death-bound-spear",
-            "huginn",
-            "pell",
-            "aldric-provisioning-deal"
-          ]
-        },
-        {
-          "topic": "death-bound-spear",
-          "label": "The Death-Bound Spear",
-          "kind": "lore",
-          "fact": "The Huginn-thread is now present and mutual — not a tether but a mutual registration, like a name between two who already knew each other's faces. The binding is still rough, but oriented. The spear knows north.",
-          "links": [
-            "huginn",
-            "pell",
-            "millbrook",
-            "aldric-provisioning-deal"
+            "huginn"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "Rune-Craft Kit fully spent at the forge south pit on World-day 13 night — wax and pitch-ink used in the tightening of the Huginn-thread. Pit remains banked.",
-          "subPlace": {
-            "name": "Forge South Pit",
-            "note": "Binding tightened — Huginn-thread now present and mutual. Kit spent. Fire banked. Hunt departs from here at first light.",
-            "visited": true
-          }
-        }
-      ],
-      "inventoryRemove": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A few minutes of focused rune-work at the fire's edge before sleep."
+        "why": "A brief working after the ceremony — spear read, Deathsense opened and closed, Pell speaks"
       }
     },
     "sceneState": {
-      "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night. The binding work is finished.",
+      "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night. The binding work is finished and the Rune-Craft Kit is spent.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Leaned against the south wall, mug empty, watching — tired but her eyes still tracking. Said 'Right. Morning, then.' and"
+          "state": "leaned against the south wall, mug empty, watching — said 'you're doing something else' from the dark"
         },
         {
           "name": "Huginn",
-          "state": "Settled beyond the pit's warmth, folded, both eyes now fully open — the thread registered, mutual and present."
+          "state": "perched beyond the pit's warmth, both eyes open, head tilted a few degrees north and holding it"
         }
       ],
       "objects": [
         "Stone-ringed fire-pit — banked to slow red coals, ash-covered",
-        "Assembled Mid-Weight Spear — leaned against the south wall, binding tightened, H",
+        "Assembled Mid-Weight Spear — across Silas's knees, binding tightened, Huginn-thr",
         "Split wood stacked against the south wall — mostly spent",
         "Two mugs — Pell's on the south wall, Silas's on the stone ring",
         "Rune-Craft Kit — wax and pitch-ink fully spent, leather strip used"
       ],
       "threads": [
+        "Deathsense read north — something out there, more than one, not tonight, but the yard's saturation prevented specificity",
+        "Huginn tilted north and held it — he knows something",
+        "Pell noticed Silas was doing something else and named it",
         "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-        "The thread between the spear and Huginn is now present and mutual — oriented toward the north",
         "Pell's after-hunt mentorship arrangement is standing"
       ]
     }
@@ -793,7 +778,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Silas laughed the line off cleanly — she closed the subject on good terms, door still open.",
         "[d1] Received word of the outdoor pit arrangement — 'warmer than the field path' was her only comment. Returned to her own work. Will attend the rune-working tonight.",
         "[d1] Attended the rune-working as promised — brought two mugs, sat on the south wall, watched without commentary. Witnessed the ceremony attempt and its quiet failure.",
         "[d1] Crossed the yard without being asked and pressed her maker's mark into the blade when the inscription stalled — the iron opened to her hand. Has not spoken since. Still crouching a",
@@ -802,28 +786,29 @@
         "[d1] Gave her honest read of the ceremony — the iron waiting for her hand was real and she has no frame for it, but she filed it accurately and stood by it.",
         "[d1] Received Silas's offer of mentorship — held it at arm's length first, then agreed: after the hunt, at the forge. Willing to see whether what the iron felt in her is real in dayligh",
         "[d1] Confirmed north gate plan with two words, set her mug down, and let the night close without crowding it — neither warmer nor cooler than the offer asked for",
-        "[d1] Watched the tightening of the Huginn-thread without intervention — logged it accurately, said 'Right. Morning, then.' and let the night close."
+        "[d1] Watched the tightening of the Huginn-thread without intervention — logged it accurately, said 'Right. Morning, then.' and let the night close.",
+        "[d1] Noticed Silas using Deathsense through the spear in the dark yard and named it plainly — 'you're doing something else'"
       ],
       "knownFacts": [
-        "Her maker's mark has a functional stake in the spear's death-binding — not metaphor, structural fact as Silas reads it",
         "The spear is a beginning, not a finished artifact — its nature is not yet settled",
         "The spear's binding is rough and its nature is genuinely unknown until used — Silas said so plainly",
         "Pressing her maker's mark into the blade felt like the iron was already waiting for her hand — not something she has experienced before",
         "Her own phrase for what happened: 'Iron waits for heat. It doesn't wait for a hand.'",
         "Silas sees something in her response to the iron that he calls a gift — and intends to show her what it might be",
         "She is open to being taught, but on her terms: evidence first, daylight second, fire-side third",
-        "The spear's thread to Huginn is now present and mutual — she saw the coals catch the blade at the wrong angle and filed it."
+        "The spear's thread to Huginn is now present and mutual — she saw the coals catch the blade at the wrong angle and filed it.",
+        "Silas uses abilities that she can observe even when he doesn't announce them"
       ],
       "skillsObserved": [
-        "presence without intervention",
         "instinctive reading of when to step in",
         "steady hands under uncanny circumstance",
         "patient measurement before speaking",
         "practical skepticism without dismissal",
-        "honest self-report under unusual circumstance"
+        "honest self-report under unusual circumstance",
+        "attentive observation — caught an unseen working"
       ],
       "status": "active",
-      "statusNote": "At the forge south pit — night before the hunt, ready to depart at first light.",
+      "statusNote": "At the forge south pit, mug empty, watching Silas from the south wall before sleep",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1063,13 +1048,13 @@
     "strength": 3,
     "agility": 3,
     "reason": 4,
-    "insight": 3,
+    "insight": 4,
     "presence": 3,
     "rapport": 4,
     "craft": 3,
     "wits": 4
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [],
   "codex": {
@@ -1107,7 +1092,8 @@
           "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib",
           "[d1] The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket t",
           "[d1] Order-Sense reads the death-binding at rest: settled cleanly into wood and iron, Pell's maker's marks structural at the socket throat and the branch-bud flex point. The thread to Huginn is nascent — o",
-          "[d1] The death-binding's thread to Huginn tightened to present and mutual on World-day 13 night — a critical deepening at the forge south pit before the hunt. The spear now knows what it is adjacent to."
+          "[d1] The death-binding's thread to Huginn tightened to present and mutual on World-day 13 night — a critical deepening at the forge south pit before the hunt. The spear now knows what it is adjacent to.",
+          "[d1] Deathsense through the bound spear reads north with a genuine pull — more than one presence, not imminent, but present. The forge yard's saturation (iron, decades of cured meat) blurs any finer resolu"
         ],
         "links": [
           "disputed-zone",
@@ -1352,11 +1338,11 @@
     }
   },
   "tendencies": {
-    "strategic": 29.452402425337368,
-    "cerebral": 12.656362195117246,
-    "social": 40.73973509375047,
-    "generous": 9.663509461423278,
-    "cautious": 14.651362117751768
+    "strategic": 30.30514041321068,
+    "cerebral": 13.59308038414166,
+    "social": 40.53603641828172,
+    "generous": 9.615191914116162,
+    "cautious": 14.578105307163009
   },
   "aptitudes": [
     "strategist",
@@ -1364,7 +1350,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 62,
+  "actionCount": 63,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1410,8 +1396,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783963803286,
-  "rev": 101,
+  "updatedAt": 1783968684606,
+  "rev": 104,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1506,7 +1492,7 @@
       "lightsense": 2,
       "order_sense": 12,
       "palework": 4,
-      "deathsense": 3
+      "deathsense": 4
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -1525,7 +1511,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 2.5
+    "marrow": 2.75
   },
   "customAbilities": {},
   "precursorAccess": [],

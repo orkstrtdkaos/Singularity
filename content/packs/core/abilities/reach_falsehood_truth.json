@@ -16,9 +16,8 @@
         "dark_light": -0.1
       },
       "functions": [
-        "conceal",
-        "reveal",
-        "bind"
+        "deceive",
+        "conceal"
       ],
       "narrationHints": "The made-untrue — an illusion that holds, a false face that fits, a story so well-built it stands on its own; the craft that knows exactly how a truth is faked, and so can catch it too.",
       "description": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
@@ -71,8 +70,7 @@
       },
       "functions": [
         "reveal",
-        "strike",
-        "break"
+        "restore"
       ],
       "narrationHints": "The unmasking — a lie shown its own shape, a true word that cannot be false, a clarity that strips pretense whether or not the world is ready.",
       "description": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road.",
@@ -124,6 +122,7 @@
       },
       "functions": [
         "reveal",
+        "restore",
         "break"
       ],
       "challengeProfile": {
@@ -146,5 +145,6 @@
       "gated": "learned",
       "tradition": "verist"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 2,
-  "xp": 180,
+  "xp": 185,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -41,7 +41,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 25,
+  "energy": 20,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -442,66 +442,71 @@
         "player": "Thank both Pell and Huginn for their participation - and find your britches to put on.  Ask Pell what she thought of the ritual.",
         "summary": "Silas thanks Pell and Huginn after the ceremony; Pell says pressing her mark felt like the iron was already waiting for her hand.",
         "narration": "You find your clothes where you left them — folded on the south wall, away from the fire's heat — and dress without ceremony. The night air is still cold enough that the linen feels good once it's on. You take your mug back up.\n\n\"Thank you,\" you say, to both of them. You mean it without performance. Huginn receives it with one slow blink and shifts to face away from the fire, apparently satisfied. Pell lifts her mug a fraction — acknowledgment, not toast.\n\nThen you ask her what she thought of it.\n\nShe's quiet for a moment, turning the mug in her hands. The coals give just enough light to read her face: not troubled, not closed. Working through something. \"Stranger than I expected,\" she says finally. \"And I expected strange.\" She glances toward the blade, where the last of the pitch-ink has dried into the grain. \"When I pressed the mark in — felt like the iron was already waiting for it. That hasn't happened before. Iron waits for heat. It doesn't wait for a hand.\" She takes a drink. \"Don't know what to call that. But it happened, so.\" Her shoulders settle. \"Good bones in it. Like you said.\""
+      },
+      {
+        "player": "It was waiting for a different part of you - I see that part too... it's beautiful.  You have a gift... I could teach you some of what I know if you'd like to spend more time with me. :)",
+        "summary": "Silas offers intimate mentorship to Pell; she receives it with guarded interest and says yes — after the hunt, at the forge.",
+        "narration": "You say it quietly, without preamble. \"It was waiting for a different part of you. I see that part too.\" You pause, let that sit. The coals give just enough light that her face is readable — the way it stills when something lands that she wasn't braced for. \"It's beautiful, honestly. The way the iron answered you.\" \n\nPell turns her mug once in her hands. She doesn't deflect and she doesn't lean in — she holds the compliment at arm's length first, the way she holds anything new, turning it to find the weight of it. Then she looks up at you with a directness that is entirely hers. \"I've been working iron since I was eleven,\" she says. \"It's never waited for me before. It gets hot and it moves. That's different from waiting.\"\n\n\"I know,\" you say. \"That's what I mean.\"\n\nAnother beat. Huginn is facing the dark yard, not watching, which is somehow more attentive than watching. Pell glances at the spear where it rests along the stone ring — the runes faint in the low light, her mark invisible inside the blade but present. When she looks back, something in her expression has shifted: not softened, exactly, but opened a fraction, the way a door opens when the latch gives.\n\n\"You're offering to teach me something,\" she says. It is not quite a question. She is not quite agreeing. But there is no refusal in it either — just Pell doing what Pell does, which is measure before committing. \"After the hunt. At the forge. You can show me what you were doing with the grain.\" A pause. \"And whatever the other part is — the part I apparently have — we can see whether it's real in daylight or only real at the fire.\""
       }
     ],
     "lastTurn": {
-      "narration": "You find your clothes where you left them — folded on the south wall, away from the fire's heat — and dress without ceremony. The night air is still cold enough that the linen feels good once it's on. You take your mug back up.\n\n\"Thank you,\" you say, to both of them. You mean it without performance. Huginn receives it with one slow blink and shifts to face away from the fire, apparently satisfied. Pell lifts her mug a fraction — acknowledgment, not toast.\n\nThen you ask her what she thought of it.\n\nShe's quiet for a moment, turning the mug in her hands. The coals give just enough light to read her face: not troubled, not closed. Working through something. \"Stranger than I expected,\" she says finally. \"And I expected strange.\" She glances toward the blade, where the last of the pitch-ink has dried into the grain. \"When I pressed the mark in — felt like the iron was already waiting for it. That hasn't happened before. Iron waits for heat. It doesn't wait for a hand.\" She takes a drink. \"Don't know what to call that. But it happened, so.\" Her shoulders settle. \"Good bones in it. Like you said.\"",
-      "sceneSummary": "Silas thanks Pell and Huginn after the ceremony; Pell says pressing her mark felt like the iron was already waiting for her hand.",
+      "narration": "You say it quietly, without preamble. \"It was waiting for a different part of you. I see that part too.\" You pause, let that sit. The coals give just enough light that her face is readable — the way it stills when something lands that she wasn't braced for. \"It's beautiful, honestly. The way the iron answered you.\" \n\nPell turns her mug once in her hands. She doesn't deflect and she doesn't lean in — she holds the compliment at arm's length first, the way she holds anything new, turning it to find the weight of it. Then she looks up at you with a directness that is entirely hers. \"I've been working iron since I was eleven,\" she says. \"It's never waited for me before. It gets hot and it moves. That's different from waiting.\"\n\n\"I know,\" you say. \"That's what I mean.\"\n\nAnother beat. Huginn is facing the dark yard, not watching, which is somehow more attentive than watching. Pell glances at the spear where it rests along the stone ring — the runes faint in the low light, her mark invisible inside the blade but present. When she looks back, something in her expression has shifted: not softened, exactly, but opened a fraction, the way a door opens when the latch gives.\n\n\"You're offering to teach me something,\" she says. It is not quite a question. She is not quite agreeing. But there is no refusal in it either — just Pell doing what Pell does, which is measure before committing. \"After the hunt. At the forge. You can show me what you were doing with the grain.\" A pause. \"And whatever the other part is — the part I apparently have — we can see whether it's real in daylight or only real at the fire.\"",
+      "sceneSummary": "Silas offers intimate mentorship to Pell; she receives it with guarded interest and says yes — after the hunt, at the forge.",
       "choices": [
         {
-          "label": "Ask Pell if she's worked metal that 'waited' before — or if she's heard of other smiths who have.",
+          "label": "Tell her what you actually teach — what reading grain and reading endings have in common — and let her decide if that's a door she wants to open.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "concrete_abstract": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "probe",
-            "lore"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Let the silence sit — bank the coals, pack the rune-craft kit, and turn in early so you're sharp for the north gate.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "rest",
-            "prepare"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Tell Pell what you felt on your end — the two readings fighting each other, the moment her mark opened the iron where yours could not.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "share",
             "honest",
-            "deepen"
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Huginn directly: now that it's in the blade — does the spear read as an ending-thing to it?",
+          "label": "Leave it there — the offer stands, she's heard it, and there's a hunt in the morning. Bank the fire and let the night close.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "rest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask her what she thinks the iron felt, from her side — not what it did, what it felt like to be the hand it chose.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "connect"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Say goodnight and sleep at the forge — you want to be rested before dawn, and the south pit coals will hold.",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "probe",
-            "companion"
+            "rest"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -511,33 +516,36 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "South side of Pell's forge, Millbrook — open stone fire-pit settled to low coals, orange warmth more than light, dark yard, stars overhead, early spring night. Silas dressed again, mug in hand.",
+        "setting": "South side of Pell's forge, Millbrook — open stone fire-pit settled to low coals, orange warmth more than light, dark yard, stars overhead, early spring night. Both in hand with mugs; the spear rests along the stone ring.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "On the south wall edge, mug in both hands, looking toward the spear blade — just finished speaking her honest read of the ceremony."
+            "state": "Mug in both hands, looking at Silas — offer received, not yet accepted fully, but a fraction more open than before. Has said 'after the hunt, at the forge.'"
           },
           {
             "name": "Huginn",
-            "state": "On the stone ring, turned away from the fire now, one slow blink given and done with it."
+            "state": "Turned to face the dark yard, unhurried, apparently satisfied."
           }
         ],
         "objects": [
           "Stone-ringed open fire-pit — settled to low coals, warm orange, no flame",
+          "Assembled Mid-Weight Spear — runes in shaft and socket, Pell's mark in the blade, resting along the stone ring",
           "Split wood stacked against the south wall — mostly spent",
-          "Assembled Mid-Weight Spear — runes in shaft and socket, Pell's mark in the blade, pitch-ink dried into grain",
           "Rune-Craft Kit — wax and pitch-ink used, leather strip still folded",
           "Two mugs — both in hand"
         ],
         "threads": [
-          "The spear's nature is open — to be answered by use in the field",
-          "Hunt departs tomorrow morning, north gate, before the light gets high",
-          "Pell's observation that the iron 'waited' for her hand — an unexplained fact neither has named fully yet"
+          "Pell has agreed to meet after the hunt at the forge — to be shown what Silas was doing with the grain, and to find out whether what the iron felt in her is real in daylight",
+          "The spear's nature remains open — to be answered by use tomorrow",
+          "Hunt departs north gate at first light"
         ]
       },
       "npcUpdates": [
@@ -546,73 +554,75 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Gave her honest read of the ceremony — the iron waiting for her hand was real and she has no frame for it, but she filed it accurately and stood by it.",
+          "note": "Received Silas's offer of mentorship — held it at arm's length first, then agreed: after the hunt, at the forge. Willing to see whether what the iron felt in her is real in daylight.",
           "learned": [
-            "Pressing her maker's mark into the blade felt like the iron was already waiting for her hand — not something she has experienced before",
-            "Her own phrase for what happened: 'Iron waits for heat. It doesn't wait for a hand.'"
-          ],
-          "skillsObserved": [
-            "honest self-report under unusual circumstance"
+            "Silas sees something in her response to the iron that he calls a gift — and intends to show her what it might be",
+            "She is open to being taught, but on her terms: evidence first, daylight second, fire-side third"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the forge south pit, mug in hand, conversation open — hunt confirmed for tomorrow morning."
-        },
+          "statusNote": "At the forge south pit — offer of mentorship received and provisionally accepted; will meet Silas after the hunt."
+        }
+      ],
+      "factUpdates": [
         {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion — carrion bird",
-          "note": "Received thanks with one slow blink, then turned away from the fire. Settled.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "On the stone ring at the forge pit, turned from the fire — quiet and satisfied."
+          "op": "add",
+          "text": "Pell Marsh has agreed to meet Silas at the forge after the hunt to be shown what he was doing with grain-reading and to investigate the gift the iron showed in her — a provisional, interest-driven agreement, not a commitment of faith.",
+          "subjectId": "pell"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name.",
+          "subPlace": {
+            "name": "Forge South Pit",
+            "note": "Site of the death-binding ceremony and the mentorship offer — coals low, the offer standing, both parties changed slightly by the night.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "death-bound-spear",
-          "label": "The Death-Bound Spear",
-          "kind": "mystery",
-          "fact": "Pell reports the iron 'waited' for her hand when she pressed the maker's mark — a sensation she has never felt before. The spear is behaving like something with a preference.",
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Has agreed to meet Silas after the hunt to explore what the iron's response to her hand might mean — open to being taught, on her own terms: evidence first, daylight before fire.",
           "links": [
-            "pell",
             "millbrook",
-            "the-unnamed-gift",
+            "death-bound-spear",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange of words by the coals — less than half an hour."
+        "why": "A brief exchange at the dying fire — minutes only."
       }
     },
     "sceneState": {
-      "setting": "South side of Pell's forge, Millbrook — open stone fire-pit settled to low coals, orange warmth more than light, dark yard, stars overhead, early spring night. Silas dressed again, mug in hand.",
+      "setting": "South side of Pell's forge, Millbrook — open stone fire-pit settled to low coals, orange warmth more than light, dark yard, stars overhead, early spring night. Both in hand with mugs; the spear rests along the stone ring.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "On the south wall edge, mug in both hands, looking toward the spear blade — just finished speaking her honest read of th"
+          "state": "Mug in both hands, looking at Silas — offer received, not yet accepted fully, but a fraction more open than before. Has "
         },
         {
           "name": "Huginn",
-          "state": "On the stone ring, turned away from the fire now, one slow blink given and done with it."
+          "state": "Turned to face the dark yard, unhurried, apparently satisfied."
         }
       ],
       "objects": [
         "Stone-ringed open fire-pit — settled to low coals, warm orange, no flame",
-        "Split wood stacked against the south wall — mostly spent",
         "Assembled Mid-Weight Spear — runes in shaft and socket, Pell's mark in the blade",
+        "Split wood stacked against the south wall — mostly spent",
         "Rune-Craft Kit — wax and pitch-ink used, leather strip still folded",
         "Two mugs — both in hand"
       ],
       "threads": [
-        "The spear's nature is open — to be answered by use in the field",
-        "Hunt departs tomorrow morning, north gate, before the light gets high",
-        "Pell's observation that the iron 'waited' for her hand — an unexplained fact neither has named fully yet"
+        "Pell has agreed to meet after the hunt at the forge — to be shown what Silas was doing with the grain, and to find out whether what the iron felt in her is real",
+        "The spear's nature remains open — to be answered by use tomorrow",
+        "Hunt departs north gate at first light"
       ]
     }
   },
@@ -754,7 +764,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Set her terms clearly: clean forge, no unpriced promises.",
         "[d1] Accepted invitation to watch the rune-working tonight at the forge — received Huginn's inclusion with dry equanimity rather than alarm.",
         "[d1] Clocked the ritual-nudity claim immediately — named it with dry amusement and closed it without offense. Confirmed she'll attend the rune-working tonight, dressed. Door remains ope",
         "[d1] Silas laughed the line off cleanly — she closed the subject on good terms, door still open.",
@@ -763,17 +772,18 @@
         "[d1] Crossed the yard without being asked and pressed her maker's mark into the blade when the inscription stalled — the iron opened to her hand. Has not spoken since. Still crouching a",
         "[d1] Silas told her plainly that her maker's mark is load-bearing in the death-binding — that the iron answers to her now. She absorbed it without flinching, said she's not sure she doe",
         "[d1] Received the honest answer — the spear is a beginning, its nature answered by use. Filed it accurately. Confirmed north gate plan without ceremony.",
-        "[d1] Gave her honest read of the ceremony — the iron waiting for her hand was real and she has no frame for it, but she filed it accurately and stood by it."
+        "[d1] Gave her honest read of the ceremony — the iron waiting for her hand was real and she has no frame for it, but she filed it accurately and stood by it.",
+        "[d1] Received Silas's offer of mentorship — held it at arm's length first, then agreed: after the hunt, at the forge. Willing to see whether what the iron felt in her is real in dayligh"
       ],
       "knownFacts": [
-        "Sees through a line quickly and prefers not to make an event of it",
-        "Silas's rune-working is real craft, not theater — she watched it reach for something and not find it",
         "Her maker's mark is load-bearing in the death-binding — the iron accepted her hand in a way it did not accept Silas's alone",
         "Her maker's mark has a functional stake in the spear's death-binding — not metaphor, structural fact as Silas reads it",
         "The spear is a beginning, not a finished artifact — its nature is not yet settled",
         "The spear's binding is rough and its nature is genuinely unknown until used — Silas said so plainly",
         "Pressing her maker's mark into the blade felt like the iron was already waiting for her hand — not something she has experienced before",
-        "Her own phrase for what happened: 'Iron waits for heat. It doesn't wait for a hand.'"
+        "Her own phrase for what happened: 'Iron waits for heat. It doesn't wait for a hand.'",
+        "Silas sees something in her response to the iron that he calls a gift — and intends to show her what it might be",
+        "She is open to being taught, but on her terms: evidence first, daylight second, fire-side third"
       ],
       "skillsObserved": [
         "presence without intervention",
@@ -784,7 +794,7 @@
         "honest self-report under unusual circumstance"
       ],
       "status": "active",
-      "statusNote": "At the forge south pit, mug in hand, conversation open — hunt confirmed for tomorrow morning.",
+      "statusNote": "At the forge south pit — offer of mentorship received and provisionally accepted; will meet Silas after the hunt.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -883,7 +893,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited.",
         "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
         "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e",
         "[d1] Hand-axe heat-collar seated and finished on World-day 12 morning — backlog completely cleared. All five tools on the rack. Forge ready for normal work.",
@@ -894,7 +903,8 @@
         "[d1] Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
         "[d1] Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt.",
         "[d1] Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out.",
-        "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work."
+        "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work.",
+        "[d1] Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -953,7 +963,7 @@
           "name": "Forge South Pit",
           "day": 1,
           "visited": true,
-          "note": "Open stone-ring fire-pit — used for Silas's death-binding ceremony on World-day 13 night. Fire settling to coals. Pell's"
+          "note": "Site of the death-binding ceremony and the mentorship offer — coals low, the offer standing, both parties changed slight"
         }
       },
       "vectorsKnown": [
@@ -1189,7 +1199,8 @@
           "[d1] Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary.",
           "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Her terms: clean forge, no unpriced promises.",
           "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after",
-          "[d1] Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the de"
+          "[d1] Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the de",
+          "[d1] Has agreed to meet Silas after the hunt to explore what the iron's response to her hand might mean — open to being taught, on her own terms: evidence first, daylight before fire."
         ],
         "links": [
           "millbrook",
@@ -1307,11 +1318,11 @@
     }
   },
   "tendencies": {
-    "strategic": 30.04888785492092,
-    "cerebral": 11.89753419012231,
-    "social": 38.549742100217244,
-    "generous": 9.859219899883911,
-    "cautious": 11.902609867487191
+    "strategic": 29.898643415646315,
+    "cerebral": 11.838046519171698,
+    "social": 41.35699338971616,
+    "generous": 9.80992380038449,
+    "cautious": 11.843096818149755
   },
   "aptitudes": [
     "strategist",
@@ -1319,7 +1330,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 58,
+  "actionCount": 59,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1357,8 +1368,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13698&nologo=true",
-  "updatedAt": 1783963047160,
-  "rev": 97,
+  "updatedAt": 1783963171332,
+  "rev": 98,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1436,6 +1447,12 @@
     {
       "id": "pell",
       "text": "Pell Marsh has been told plainly that her maker's mark is load-bearing in the spear's death-binding — she has accepted this as possibly true and asked what 'grows into' means practically. She now know",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell Marsh has agreed to meet Silas at the forge after the hunt to be shown what he was doing with grain-reading and to investigate the gift the iron showed in her — a provisional, interest-driven agr",
       "day": 1,
       "subjectId": "pell"
     }

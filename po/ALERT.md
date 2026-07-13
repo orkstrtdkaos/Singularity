@@ -33,8 +33,9 @@
 | **SNG-088** | v1.8.46 | Gambit builder: 4 fixes + reorder + auto-fill from conversation |
 | **SNG-089 Ph1** | v1.8.48 | notFor LAW (CI) + harm rungs → GM + Accords engine ungate |
 | **SNG-091** | v1.8.47 | Player's plan request is unconditional — gambitOps ≠ gambitApt |
-| **SNG-092** | `911ecb7` | Manifest unification — resolution by name, not position; +4 reach_* files (20 abilities) |
-| **SNG-093** | `7c34067` | GM can never hang the gambit builder — `withTimeout` + `try/catch/finally` |
+| **SNG-092** | v1.8.49 | Manifest unification — resolution by name, not position (fixed a LIVE break); +4 reach_* files (20 abilities, 6/7 Accords); Content CI now checks core |
+| **SNG-093** | v1.8.50 | GM can never hang the gambit builder — `withTimeout` + `try/catch/finally` |
+| **SNG-084 Ph1** | v1.8.51 | In-context helper text — ⓘ at the walls (capacity cap · energy · great circle) pulls the authored line |
 
 ---
 

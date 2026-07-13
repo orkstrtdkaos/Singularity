@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "regions",
+  "kind": "world_structure",
+  "note": "SNG-082 — TERRAIN data so the world map can render actual terrestrial features instead of nodes on a dark panel (Erik 2026-07-12: 'especially if the background was an actual map with terrestrial features'). Data-driven, NOT an authored image: a region's terrain, elevation, palette, features and water are DERIVED from its dispositional identity, so a BATCH-9-generated location automatically inherits the right terrain. Authored by Aevi.",
+  "renderGuidance": {
+    "regionShape": "Compute a hull/voronoi from each region's locations' map.x/y and fill it with the region's palette. Region boundaries need not be crisp — dispositional space has soft edges.",
+    "water": "Draw each region's water features. The Echo River (valley) and THE SEA (the_feeling_coast) are the map's two great water landmarks.",
+    "roads": "Location `connections` ARE the roads. The Axis Gate's twelve roads are the map's spine — draw them heaviest.",
+    "elevation": "Use it for hatching/relief. The Ascent is the highest point; the Umbral Depths are BELOW the map.",
+    "honestFailures": "Three regions must LOOK wrong, deliberately: the_pattern_reach (resists mapping), the_veiled_reach (the map is lying), the_numinous_reach (the cartography loses confidence). Do not clean these up — the failure is the content.",
+    "growth": "The Blaze, the Churn Edge, the Scouring and the Ceaseless are all EXPANDING. If cheap, show it."
+  },
+  "regions": [
+    {
+      "regionId": "valley",
+      "name": "The Valley of Echoes",
+      "terrain": "river-valley, farmland, terraced foothills",
+      "elevation": "lowland, rising to foothills N and E",
+      "palette": {
+        "base": "#3d4a3a",
+        "accent": "#6b7f5c",
+        "edge": "#2a3328"
+      },
+      "features": [
+        "terraced fields",
+        "stone walls",
+        "waystations",
+        "the resonance-terraces of the Heights",
+        "the prism-works of the Plateau"
+      ],
+      "water": [
+        "Echo River (runs W→E through the basin)",
+        "tributary streams",
+        "the river crossings"
+      ],
+      "visualIdentity": "Green, worked, human. The only place on the map that looks LIVED IN rather than believed in. The centre of the map's warmth."
+    },
+    {
+      "regionId": "the_center",
+      "name": "The Crossing",
+      "terrain": "a great crossroads plain, ringed by the twelve roads",
+      "elevation": "flat, deliberately",
+      "palette": {
+        "base": "#4a4438",
+        "accent": "#c9a227",
+        "edge": "#332f26"
+      },
+      "features": [
+        "THE GREAT COLISEUM (the largest structure on the map)",
+        "the Hundred Markets",
+        "the Quiet House",
+        "the AXIS GATE — twelve roads radiating outward, one per axis"
+      ],
+      "water": [
+        "cisterns and canals — the water comes from everywhere"
+      ],
+      "visualIdentity": "The hub. Every road on the map ends here. Draw the twelve roads as the map's spine — the Axis Gate is the visual centre of the world."
+    },
+    {
+      "regionId": "umbral_depths",
+      "name": "The Umbral Depths",
+      "terrain": "subterranean — a vast cave-city system beneath the northern reaches",
+      "elevation": "BELOW sea level; render as a cutaway or a shaded under-region",
+      "palette": {
+        "base": "#1a1a24",
+        "accent": "#3d3d52",
+        "edge": "#0d0d14"
+      },
+      "features": [
+        "the Slow Stair (the only surface entrance — draw it)",
+        "terraced cave-city",
+        "lightless deeps"
+      ],
+      "water": [
+        "black subterranean lakes"
+      ],
+      "visualIdentity": "Ink-dark. It should read as UNDER the map, not on it — a hole in the world with one stair leading down."
+    },
+    {
+      "regionId": "radiant_wastes",
+      "name": "The Radiant Wastes",
+      "terrain": "glass plain — land fused to glass by the Blaze",
+      "elevation": "flat, glaring",
+      "palette": {
+        "base": "#d9cfa8",
+        "accent": "#f2e6b8",
+        "edge": "#a89968"
+      },
+      "features": [
+        "the glass plain (reflective, blinding)",
+        "Glasshome's open architecture",
+        "the great focusing arrays of the Lensward",
+        "THE BLAZE — an expanding white scar, and it should look like it is GROWING"
+      ],
+      "water": [
+        "none — boiled away"
+      ],
+      "visualIdentity": "Blinding pale. The only bright region on the map. Its edge should be visibly EATING the land around it."
+    },
+    {
+      "regionId": "the_quickwood",
+      "name": "The Quickwood",
+      "terrain": "old-growth forest, grown cities",
+      "elevation": "rolling, deep-rooted",
+      "palette": {
+        "base": "#2d4a2f",
+        "accent": "#4f7a45",
+        "edge": "#1c2e1d"
+      },
+      "features": [
+        "grown halls (buildings that are TREES)",
+        "the Slow Orchard",
+        "the Greenward (a living wall — draw it thorned)"
+      ],
+      "water": [
+        "slow green rivers",
+        "root-fed springs"
+      ],
+      "visualIdentity": "The deepest green on the map. Its cities are indistinguishable from its forest — that IS the point."
+    },
+    {
+      "regionId": "the_palelands",
+      "name": "The Palelands / The Hollow March",
+      "terrain": "ash-fields, grey heath",
+      "elevation": "flat, low, quiet",
+      "palette": {
+        "base": "#5a5a55",
+        "accent": "#8a8a80",
+        "edge": "#3a3a36"
+      },
+      "features": [
+        "ash-fields",
+        "the Hollowing (the border with the Quickwood — the sharpest visual seam on the map)",
+        "cairn-lines"
+      ],
+      "water": [
+        "still grey water"
+      ],
+      "visualIdentity": "Grey and TENDED — not a wasteland; a garden of endings. Its border with the Quickwood is life meeting death, and should look it."
+    },
+    {
+      "regionId": "riven_marches",
+      "name": "The Riven Marches",
+      "terrain": "broken uplands, scarred plains",
+      "elevation": "high, broken",
+      "palette": {
+        "base": "#4a3535",
+        "accent": "#8a4a3a",
+        "edge": "#2e2020"
+      },
+      "features": [
+        "the Redline (a scar across the land)",
+        "the Marchward",
+        "THE STILLHOLD — white walls, and they should look like a lid on something"
+      ],
+      "water": [
+        "red-silted rivers"
+      ],
+      "visualIdentity": "Iron and old blood. The Stillhold's white walls sit inside it like a held breath."
+    },
+    {
+      "regionId": "somatic_reaches",
+      "name": "The Somatic Reaches",
+      "terrain": "high plateaus and deep halls",
+      "elevation": "high",
+      "palette": {
+        "base": "#4a4038",
+        "accent": "#8a7355",
+        "edge": "#2e2721"
+      },
+      "features": [
+        "the Flesh-Temples (open-air, terraced)",
+        "THE COGITARIUM (a single vast enclosed structure — the antipodal contrast)",
+        "the Middle Way between them"
+      ],
+      "water": [
+        "thermal springs"
+      ],
+      "visualIdentity": "Body and mind as ARCHITECTURE: the Temples are open to the sky, the Cogitarium is sealed. Draw the contrast."
+    },
+    {
+      "regionId": "unspooling",
+      "name": "The Unspooling / The Churn",
+      "terrain": "unstable terrain — it is not the same twice",
+      "elevation": "incoherent",
+      "palette": {
+        "base": "#4a3a4f",
+        "accent": "#8a5fa0",
+        "edge": "#2e2432"
+      },
+      "features": [
+        "roads that end",
+        "Tumbledown Market",
+        "the Wend",
+        "the Churn Edge (a creeping, ragged border)"
+      ],
+      "water": [
+        "rivers that change course"
+      ],
+      "visualIdentity": "The only region that should look UNCERTAIN — soft edges, doubled lines, a border that is visibly creeping outward."
+    },
+    {
+      "regionId": "manifest_domain",
+      "name": "The Deepwood",
+      "terrain": "primeval forest, precursor ruin beneath",
+      "elevation": "deep, dark, ancient",
+      "palette": {
+        "base": "#243828",
+        "accent": "#3f5c3a",
+        "edge": "#141f16"
+      },
+      "features": [
+        "the Blocklands (precursor geometry breaking the surface)",
+        "the Burnscar",
+        "the Moot",
+        "the Thinedge"
+      ],
+      "water": [
+        "black forest pools"
+      ],
+      "visualIdentity": "Older than everything. Precursor geometry showing through the trees like bone through skin."
+    },
+    {
+      "regionId": "the_lattice_cities",
+      "name": "The Lattice-Cities",
+      "terrain": "arcologies — a built landscape",
+      "elevation": "vertical",
+      "palette": {
+        "base": "#2f3a4a",
+        "accent": "#5c7a9e",
+        "edge": "#1c232e"
+      },
+      "features": [
+        "stacked arcologies (draw them as a GRID — perfect, and slightly horrible)",
+        "tier levels",
+        "the Grand Lattice at the centre, brightest and most regular"
+      ],
+      "water": [
+        "engineered canals, perfectly straight"
+      ],
+      "visualIdentity": "The most REGULAR thing on the map. Every line straight. It should be beautiful and make you uneasy."
+    },
+    {
+      "regionId": "the_gearlands",
+      "name": "The Gearlands",
+      "terrain": "industrial basin, precursor service-ways beneath",
+      "elevation": "low, worked",
+      "palette": {
+        "base": "#4a4038",
+        "accent": "#a67c3a",
+        "edge": "#2e2721"
+      },
+      "features": [
+        "Pressureholt",
+        "the Service Ways (dashed lines UNDER everything — they run beneath other regions)",
+        "THE GREAT ENGINE — mountain-sized, and it should dominate its horizon"
+      ],
+      "water": [
+        "steam, coolant channels"
+      ],
+      "visualIdentity": "Brass and pressure. The Service Ways should be drawn running under the whole map — the Gearlands touch everywhere from below."
+    },
+    {
+      "regionId": "the_numinous_reach",
+      "name": "The Numinous Reach",
+      "terrain": "thin country — mountains and mist",
+      "elevation": "high, indistinct",
+      "palette": {
+        "base": "#3a3a4f",
+        "accent": "#7a7ab0",
+        "edge": "#242430"
+      },
+      "features": [
+        "the Thinning",
+        "the Lampless Hermitage",
+        "the Numen (draw it FADING — the map itself should lose confidence here)"
+      ],
+      "water": [
+        "mist, not water"
+      ],
+      "visualIdentity": "The one region whose EDGES SHOULD BE UNCERTAIN on the map. The cartography fails here, and that is honest."
+    },
+    {
+      "regionId": "the_feeling_coast",
+      "name": "The Feeling Coast",
+      "terrain": "tidal coast, sea-cliffs",
+      "elevation": "sea level",
+      "palette": {
+        "base": "#2f4a52",
+        "accent": "#5c9aa8",
+        "edge": "#1c2e33"
+      },
+      "features": [
+        "Wellspring (built for sound to carry)",
+        "the Grief-House",
+        "tidal flats"
+      ],
+      "water": [
+        "THE SEA — the map's only ocean. It should be big."
+      ],
+      "visualIdentity": "Tidal. The only coastline in the world. Everything here is shaped by something arriving and leaving."
+    },
+    {
+      "regionId": "the_reasoned_hold",
+      "name": "The Reasoned Hold",
+      "terrain": "clean upland, geometric",
+      "elevation": "high, ordered",
+      "palette": {
+        "base": "#3a4247",
+        "accent": "#8a99a3",
+        "edge": "#232a2e"
+      },
+      "features": [
+        "the Axiom (a city built like an argument — draw it as derivation)",
+        "the Proof-Halls",
+        "the Bloodless Hold"
+      ],
+      "water": [
+        "none. They found it unnecessary."
+      ],
+      "visualIdentity": "Cold, clear, and rational. Its geometry is DERIVED, not imposed — subtly different from the Lattice."
+    },
+    {
+      "regionId": "the_veiled_reach",
+      "name": "The Veiled Reach",
+      "terrain": "mirrored terrain — it does not survey correctly",
+      "elevation": "untrustworthy",
+      "palette": {
+        "base": "#3f3547",
+        "accent": "#9a7ab0",
+        "edge": "#261f2b"
+      },
+      "features": [
+        "the Hall of Mirrors",
+        "the Kindly Court",
+        "the Last Mask"
+      ],
+      "water": [
+        "reflecting pools"
+      ],
+      "visualIdentity": "The map is LYING here and should look like it — doubled features, an outline that doesn't quite close."
+    },
+    {
+      "regionId": "the_stark_reach",
+      "name": "The Stark Reach",
+      "terrain": "bare stone, no ornament",
+      "elevation": "exposed",
+      "palette": {
+        "base": "#4a4a45",
+        "accent": "#9a9a90",
+        "edge": "#2e2e2b"
+      },
+      "features": [
+        "the Unblinking Stone",
+        "THE TOLD GROUND — a field of standing stones, each one a sentence"
+      ],
+      "water": [
+        "none, and they will tell you so"
+      ],
+      "visualIdentity": "Utterly bare. No decoration anywhere. The Told Ground's stones are the only marks, and there are thousands."
+    },
+    {
+      "regionId": "the_descent",
+      "name": "The Descent",
+      "terrain": "descending terraces, horned architecture",
+      "elevation": "descending",
+      "palette": {
+        "base": "#3f2a2a",
+        "accent": "#a0503a",
+        "edge": "#26191a"
+      },
+      "features": [
+        "the Bargain Gate",
+        "the Appetite-Halls",
+        "THE MAW — a hole, and it should be the darkest point on the map"
+      ],
+      "water": [
+        "hot springs, sulphurous"
+      ],
+      "visualIdentity": "Warm, red, and going DOWN. Handsome, welcoming architecture — that is the trap of it."
+    },
+    {
+      "regionId": "the_ascent",
+      "name": "The Ascent",
+      "terrain": "tiered spires, mountain heights",
+      "elevation": "the highest place on the map",
+      "palette": {
+        "base": "#3a4252",
+        "accent": "#d4c48a",
+        "edge": "#232a35"
+      },
+      "features": [
+        "Choir-Height (tiers ascending)",
+        "the Mercy-House",
+        "THE UNFALLEN — burning white at the summit"
+      ],
+      "water": [
+        "ice-melt"
+      ],
+      "visualIdentity": "The highest point. Luminous, tiered, and bearing DOWN on everything below it."
+    },
+    {
+      "regionId": "the_given_land",
+      "name": "The Given Land",
+      "terrain": "bedrock, quarries, honest stone",
+      "elevation": "solid, low",
+      "palette": {
+        "base": "#4f4438",
+        "accent": "#9a8464",
+        "edge": "#2f2922"
+      },
+      "features": [
+        "Bedrock (a city that will outlast the argument about it)",
+        "the Weighing Yard",
+        "quarries"
+      ],
+      "water": [
+        "deep wells"
+      ],
+      "visualIdentity": "The most SOLID region on the map. Everything drawn heavy. Nothing decorative."
+    },
+    {
+      "regionId": "the_pattern_reach",
+      "name": "The Pattern Reach",
+      "terrain": "impossible geometry — resists mapping",
+      "elevation": "non-Euclidean",
+      "palette": {
+        "base": "#35354f",
+        "accent": "#8a8ad4",
+        "edge": "#20202e"
+      },
+      "features": [
+        "Cloudform (buildings that are ARGUMENTS)",
+        "the Figure-Works",
+        "the Untethered"
+      ],
+      "water": [
+        "none that stay put"
+      ],
+      "visualIdentity": "The cartographer gave up. Draw it as a region that will not hold its own shape — the honest failure of a map."
+    },
+    {
+      "regionId": "the_open_reach",
+      "name": "The Open Reach",
+      "terrain": "open plain, endless roads",
+      "elevation": "featureless by choice",
+      "palette": {
+        "base": "#4a4738",
+        "accent": "#a09a6a",
+        "edge": "#2e2c22"
+      },
+      "features": [
+        "the Long Span (a MOVING settlement — mark it as provisional)",
+        "the Wayhouse (the only fixed thing, and they are embarrassed by it)",
+        "roads going everywhere"
+      ],
+      "water": [
+        "seasonal rivers"
+      ],
+      "visualIdentity": "Roads and horizon. The settlement should be marked as MOVING — it will not be there next season."
+    },
+    {
+      "regionId": "the_kept_reach",
+      "name": "The Kept Reach",
+      "terrain": "clock-country — towers and archives",
+      "elevation": "measured",
+      "palette": {
+        "base": "#3f3a35",
+        "accent": "#b09a6a",
+        "edge": "#262320"
+      },
+      "features": [
+        "the Slow Hour (clock-towers)",
+        "the Forward Archive",
+        "THE STOPPED — draw it as a place where the map's own time has halted"
+      ],
+      "water": [
+        "a river that runs slow"
+      ],
+      "visualIdentity": "Every structure is a clock. The Stopped should look like a still frame inside a moving picture."
+    },
+    {
+      "regionId": "the_unmade",
+      "name": "The Unmade",
+      "terrain": "controlled ruin — beautiful demolition",
+      "elevation": "levelled",
+      "palette": {
+        "base": "#42383a",
+        "accent": "#8a6a6a",
+        "edge": "#282224"
+      },
+      "features": [
+        "the Scour",
+        "the Clearing Ground",
+        "THE SCOURING — bare ground, spreading"
+      ],
+      "water": [
+        "none left"
+      ],
+      "visualIdentity": "Ruins that were ENDED WELL — clean lines, nothing rotting. The Scouring's edge is bare and moving."
+    },
+    {
+      "regionId": "the_making",
+      "name": "The Making",
+      "terrain": "permanent construction site",
+      "elevation": "rising, always",
+      "palette": {
+        "base": "#3a4238",
+        "accent": "#9ab06a",
+        "edge": "#232a22"
+      },
+      "features": [
+        "the Forge-Eternal (scaffolds forever)",
+        "THE HALF-CATHEDRAL (unfinished, glorious, and the map should show the scaffolding)",
+        "the Ceaseless"
+      ],
+      "water": [
+        "diverted rivers, for the works"
+      ],
+      "visualIdentity": "Nothing finished. Scaffolding everywhere. It should look JOYOUS and slightly out of control."
+    }
+  ]
+}

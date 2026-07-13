@@ -146,7 +146,8 @@
         }
       ],
       "functions": [
-        "shield"
+        "shield",
+        "resist"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -198,7 +199,8 @@
         }
       ],
       "functions": [
-        "bind"
+        "empower",
+        "command"
       ],
       "challengeTypes": [
         "SOCIAL",
@@ -251,7 +253,8 @@
       ],
       "functions": [
         "bind",
-        "shield"
+        "resist",
+        "ward"
       ],
       "challengeTypes": [
         "STEALTH",
@@ -356,7 +359,8 @@
       ],
       "functions": [
         "heal",
-        "mend"
+        "mend",
+        "restore"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -410,7 +414,8 @@
         }
       ],
       "functions": [
-        "bind"
+        "empower",
+        "command"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -518,7 +523,8 @@
         }
       ],
       "functions": [
-        "move"
+        "move",
+        "empower"
       ],
       "challengeTypes": [
         "CHASE",
@@ -623,7 +629,8 @@
         }
       ],
       "functions": [
-        "reveal"
+        "reveal",
+        "track"
       ],
       "challengeTypes": [
         "INVESTIGATE"
@@ -635,5 +642,6 @@
       },
       "tradition": "harmonic"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

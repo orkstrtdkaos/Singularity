@@ -40,8 +40,12 @@
 
 ---
 
-## 🔧 SNG-090 — SUBSTRATE AS A SECOND DIFFICULTY MAP (AMENDMENT PROMOTED — ready for CCode build)
+## 🔧 SNG-090 — SUBSTRATE (SECOND DIFFICULTY MAP) — PHASE A SHIPPED v1.8.54 · Phase B next
 
+**Phase A shipped (`923a474`, results `po/results/20260713_SNG-090-phaseA.md`):** the foundation — pure `engine/substrate.js` (two-sided band factor: starve below / interfere above / carried rescues-or-worsens), the **balance harness `tests/balance_sim.mjs`** (owed since SNG-078; now in `npm test`, validates the anchors as a gate + reports the SNG-078 ceiling), `CONTENT.substrateModel` load, and a `content_ci` gate that every location resolves a density (all 92 do). Anchors hold: Seraph@Quickwood **13%**, Rootkin@Gearlands **69%**, Rootkin@Quickwood/Seraph@Lattice/Mason@home **100%**, carried charge rescues the starved & worsens the crowded. **No gameplay change yet.**
+**Phase B (next):** wire `substratePenalty` into `successChance` (ability actions only) + hard gate + energy mult, SEPARATE from SNG-079's spectral term; receipts + GM line + map overlay; carried-charge logistics. Changes live resolution → needs in-play verification + a re-tune against fuller characters.
+
+<details><summary>original amendment note</summary>
 **Amendment 1 promoted 2026-07-13.** Data file `the_substrate.json` amended at `1e3403e6`. Spec §9b inserted + §4 formula updated at `34fccefe`. **CCode may now build.**
 
 **The two-sided affinity band (design canon — do not collapse):**
@@ -62,6 +66,7 @@
 **Build order:** (1) load `the_substrate.json` + CI check → (2) pure `engine/substrate.js`, tuned by `tests/balance_sim.mjs` — **never eyeball the curves** → (3) wire into `successChance` + gate + energy mult → (4) receipts + GM line + map overlay → (5) carried-charge logistics.
 
 *⚠️ Engine code does not yet exist. Build blocked until `tests/balance_sim.mjs` exists and tunes the curves.*
+</details>
 
 ---
 

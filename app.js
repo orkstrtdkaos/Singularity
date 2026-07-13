@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.42";
+const APP_VERSION = "1.8.43";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -3113,6 +3113,7 @@ function renderCharacterScreen() {
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
+    <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
@@ -3146,6 +3147,7 @@ function renderCharacterScreen() {
     renderCharacterScreen();
   };
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillWheel();
+  const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();
   // SNG-053 form editor: describe the character's physical form so the portrait renders it
   const formB = document.getElementById("cs-form");
   if (formB) formB.onclick = () => {
@@ -3186,6 +3188,124 @@ function renderGallery() {
     <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>
   </div>`);
   document.getElementById("gal-back").onclick = () => renderCharacterScreen();
+}
+
+/** SNG-085: the Repair panel — expose engine/corrections.js DIRECTLY to the player. A bug the game
+ *  gave you (a domain it guessed, an ability off the wrong pole, a background you never chose) must be
+ *  fixable WITHOUT negotiating with a language model. Same engine, same guardrails, same ledger as the
+ *  GM's in-fiction repair (`applyStateOps`) — it just can't argue. REPAIR, NOT WISH: the engine refuses
+ *  anything that ADVANCES (xp/levels/abilities-out-of-domain); power still comes from play. */
+function repairLogLine(e) {
+  const day = e.worldDay != null ? ` <span class="hint">· world-day ${e.worldDay}</span>` : "";
+  let txt;
+  switch (e.kind) {
+    case "field": txt = `${esc(e.field)}: <s class="hint">${esc(e.from || "—")}</s> → <strong>${esc(e.to || "—")}</strong>`; break;
+    case "domain": txt = `${esc(e.field)} domain: <s class="hint">${esc(e.from ? traditionLabel(e.from) : "—")}</s> → <strong>${esc(e.to ? traditionLabel(e.to) : "—")}</strong>`; break;
+    case "remove": txt = `removed ${esc(e.entity)} <strong>${esc(e.id)}</strong>`; break;
+    case "quest": txt = `quest ${esc(e.id)} → <strong>${esc(e.to?.status || "?")}</strong>`; break;
+    case "location": txt = `re-anchored → <strong>${esc(e.to)}</strong>`; break;
+    case "codexFact": txt = `codex fact ${esc(e.id)} corrected`; break;
+    default: txt = "corrected";
+  }
+  return `<div class="codex-fact">${txt}${day}${e.why ? `<div class="hint">${esc(e.why)}</div>` : ""}</div>`;
+}
+
+function renderRepairScreen(note = "") {
+  const idx = CONTENT.traditionIndex;
+  const origins = CONTENT.origins?.length ? CONTENT.origins : originsFallback();
+  const dom = character.domains || { primary: null, secondary: null, tertiary: null };
+  const cap = breadthCap(character, CONTENT.skillCapacity);
+  const used = breadthUsed(character);
+  // every real tradition, ring order, for the three domain slots (+ "leave empty")
+  const tradOptions = (sel) => `<option value="">— none —</option>` +
+    (idx ? ringOrder(idx).map(t => `<option value="${esc(t)}" ${sel === t ? "selected" : ""}>${esc(traditionLabel(t))}</option>`).join("") : "");
+  const log = (character.corrections || []).slice().reverse();
+  chrome(`<div class="screen" style="max-width:720px">
+    <h2>🔧 Repair ${esc(character.name)}</h2>
+    <p class="hint" style="margin-bottom:6px">Fix what the game got wrong when this character was made — no arguing with the GM. Every change is validated, logged, and reversible.</p>
+    <p class="hint" style="margin-bottom:14px"><strong>Repair, not wish:</strong> you can correct data that is <em>wrong</em>, but nothing here grants power — xp, levels, and abilities still come from play. Stripping an ability you never chose is a repair, not a loss; it frees your breadth so you can re-pick with your own skill points.</p>
+    ${note ? `<div class="cs-block" style="border-left:3px solid var(--accent)"><div style="white-space:pre-wrap">${esc(note)}</div></div>` : ""}
+
+    <div class="field"><label>Why this repair (optional — recorded in the log)</label>
+      <input id="rp-why" placeholder="e.g. I was meant to be an Ashwarden, not a Wright"></div>
+
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your people &amp; craft</h3>
+      <div class="field"><label>Origin (your people)</label>
+        <select id="rp-origin">${origins.map(o => `<option value="${esc(o.id)}" ${character.origin === o.id ? "selected" : ""}>${esc(o.name)}</option>`).join("")}</select></div>
+      <div class="field"><label>Background</label>
+        <select id="rp-bg">${backgroundOptionsHTML(character.background)}</select></div>
+      <div class="field"><label>Form (physical description — leads the portrait)</label>
+        <input id="rp-form" value="${esc(character.form || "")}" placeholder="e.g. a lean woman with ash-grey braids and a mourner's shawl"></div>
+    </div>
+
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Domains <span class="hint" style="text-transform:none">— the poles you draw from</span></h3>
+      <p class="hint" style="margin-bottom:8px">Changing a domain re-sets which crafts you can <em>learn next</em>. Abilities you already hold are kept (grandfathered) — use the strip list below to remove ones you should never have had.</p>
+      ${["primary", "secondary", "tertiary"].map(slot => `
+        <div class="field"><label style="text-transform:capitalize">${slot} domain</label>
+          <select id="rp-dom-${slot}">${tradOptions(dom[slot])}</select></div>`).join("")}
+    </div>
+
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Strip an ability you never chose <span class="cap-line" style="text-transform:none">${used} of ${cap} breadth used</span></h3>
+      <p class="hint" style="margin-bottom:8px">Tick any ability the game gave you that belongs to the wrong pole. Stripping it frees breadth so you can pick your own — you do <em>not</em> lose earned power, and your skill points are untouched.</p>
+      ${character.abilities.length ? character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; return `
+        <label class="rating-check"><input type="checkbox" data-strip="${esc(a.abilityId)}"> Strip <strong>${esc(ab?.name || a.abilityId)}</strong> <span class="hint">${ab ? `(${esc(abilityTradition(ab) ? traditionLabel(abilityTradition(ab)) : ab.powerSystem)}, rank ${a.level})` : ""}</span></label>`; }).join("") : "<div class='insight'>no abilities to strip</div>"}
+    </div>
+
+    ${activeCompanions(character, CONTENT.companions).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Remove a companion you never met</h3>
+      ${activeCompanions(character, CONTENT.companions).map(c => `
+        <label class="rating-check"><input type="checkbox" data-rmcomp="${esc(c.id)}"> Remove <strong>${esc(c.name)}</strong></label>`).join("")}
+    </div>` : ""}
+
+    ${(character.quests || []).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Unstick a quest</h3>
+      <p class="hint" style="margin-bottom:8px">Force a stuck thread to a sane status. Leave "no change" for quests that are fine.</p>
+      ${(character.quests || []).map(q => `
+        <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1" title="${esc(q.summary || "")}">${esc(q.title || q.id)} <span class="hint">(${esc(q.status || "?")})</span></span>
+          <select data-quest="${esc(q.id)}" style="max-width:160px">
+            <option value="">no change</option>
+            ${["active", "available", "resolved", "failed"].map(s => `<option value="${s}" ${q.status === s ? "disabled" : ""}>${s}</option>`).join("")}
+          </select></div>`).join("")}
+    </div>` : ""}
+
+    <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap">
+      <button class="btn" id="rp-apply">Apply repairs</button>
+      <button class="btn secondary" id="rp-back">Back</button>
+    </div>
+
+    ${log.length ? `<div class="cs-block" style="margin-top:16px"><h3 class="codex-title" style="font-size:15px">Repair log <span class="hint" style="text-transform:none">(a repair is a fact about your character, not a secret)</span></h3>
+      ${log.map(repairLogLine).join("")}</div>` : ""}
+  </div>`);
+
+  document.getElementById("rp-back").onclick = () => renderCharacterScreen();
+  document.getElementById("rp-apply").onclick = () => {
+    const why = (document.getElementById("rp-why").value || "").trim() || "repaired via the Repair panel";
+    const ops = [];
+    const originVal = document.getElementById("rp-origin").value;
+    if (originVal && originVal !== character.origin) ops.push({ op: "correctField", field: "origin", to: originVal, why });
+    const bgVal = document.getElementById("rp-bg").value;
+    if (bgVal && bgVal !== character.background) ops.push({ op: "correctField", field: "background", to: bgVal, why });
+    const formVal = document.getElementById("rp-form").value.trim();
+    if (formVal !== (character.form || "")) ops.push({ op: "correctField", field: "form", to: formVal, why });
+    for (const slot of ["primary", "secondary", "tertiary"]) {
+      const v = document.getElementById("rp-dom-" + slot).value || null;
+      if (v !== (dom[slot] || null)) ops.push({ op: "correctDomain", slot, to: v, why });
+    }
+    for (const cb of app.querySelectorAll("[data-strip]:checked")) ops.push({ op: "removeEntity", kind: "ability", id: cb.dataset.strip, why });
+    for (const cb of app.querySelectorAll("[data-rmcomp]:checked")) ops.push({ op: "removeEntity", kind: "companion", id: cb.dataset.rmcomp, why });
+    for (const sel of app.querySelectorAll("[data-quest]")) { if (sel.value) ops.push({ op: "unstickQuest", questId: sel.dataset.quest, toStatus: sel.value, why }); }
+    if (!ops.length) { renderRepairScreen("Nothing changed — adjust a field, then Apply."); return; }
+    // applyStateOps caps at 6 ops per call by design — chunk so a big repair applies fully.
+    const ctx = { backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations, resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() };
+    const applied = [], refused = [];
+    for (let i = 0; i < ops.length; i += 6) { const r = applyStateOps(character, ops.slice(i, i + 6), ctx); applied.push(...r.applied); refused.push(...r.refused); }
+    // a new form means a new portrait — re-mint so the picture matches (mirrors the sheet's form editor)
+    if (applied.some(a => a.field === "form") && imagesEnabled()) ensureCharacterPortrait(character, { force: true, milestone: "repaired" });
+    saveCharacter(character);
+    const stripped = applied.filter(a => a.removed === "ability").length;
+    let out = applied.length ? "✓ " + applied.map(describeCorrection).join("; ") + "." : "No changes applied.";
+    if (stripped) out += ` Your breadth is freed${character.skillPoints > 0 ? ` — spend your ${character.skillPoints} skill point${character.skillPoints === 1 ? "" : "s"} on your own people's crafts in the Character screen` : ""}.`;
+    if (refused.length) out += `\n\nRefused: ${refused.map(r => r.reason).join("; ")}.`;
+    renderRepairScreen(out);
+  };
 }
 
 function renderInventoryScreen(openName = null) {

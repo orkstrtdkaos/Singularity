@@ -119,7 +119,7 @@ export function applyStateOps(character, ops = [], ctx = {}) {
 export function describeCorrection(a) {
   if (a.field) return `${a.field} corrected → ${a.to}`;
   if (a.domain) return `${a.domain} domain corrected → ${a.to || "—"}`;
-  if (a.removed) return `removed a ${a.removed} you never acquired`;
+  if (a.removed) return `removed ${a.removed === "ability" ? "an ability" : "a " + a.removed} you never acquired`;
   if (a.quest) return `quest "${a.quest}" unstuck`;
   if (a.location) return `re-anchored to where you actually are`;
   if (a.codexFact) return `a codex record was corrected`;

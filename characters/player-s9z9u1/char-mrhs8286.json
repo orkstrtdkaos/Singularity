@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.5178184134024709,
+    "spectrumId": -0.5419274927323474,
     "violence_peace": 0.03,
     "chaos_order": 0.015
   },
@@ -373,21 +373,26 @@
         "player": "Talk to Pell properly before the work begins — the date is a named thing now; you could let it be more than that.",
         "summary": "Pell names the date plainly on the field path — after the hunt, at the forge, to see what the thing is.",
         "narration": "The field path narrows where it meets the old drainage ditch, and the three of you fall into single file for a dozen steps — Corvin ahead, Huginn holding still on the pack, Pell stepping up alongside you when the path widens again on the other side.\n\nShe doesn't wait for you to start. \"The whetstone,\" she says. Not a question and not quite a thank-you — something between the two, the way a person names a thing they've been turning over. \"Mara held it three weeks. You asked after me specifically.\" A pause. She looks forward at Corvin's back. \"That's a particular kind of attention.\"\n\nYou tell her the date is a named thing, if she wants it to be more than that. You don't dress it up. She hears it plain.\n\nPell is quiet for a few steps. The village smoke is ahead, the cookhouse chimney reading gray-white against the pale morning sky. When she speaks her voice is level and dry and warmer than it sounds. \"I keep the forge clean and I don't make promises I can't price out. Fair warning.\" She glances at you sideways — a brief, considering look. \"But yes. After the hunt, when the accounts aren't all blood and mud. Come to the forge in the evening and we'll see what the thing is.\"\n\nCorvin doesn't turn around. But his pace slows just enough that he's walking with you again, not ahead, and the slight angle of his shoulders says he heard every word and is very carefully not acknowledging it."
+      },
+      {
+        "player": "A second date it is then! I'll be there... but tonight. I'll be working my people's runes into the spear. Will you watch? Huginn will be helping too.",
+        "summary": "Pell accepts the invitation to watch the rune-working tonight at the forge — Huginn's inclusion noted without alarm.",
+        "narration": "The field path meets the village lane where the cookhouse smoke thickens the air, and Pell slows half a step. You speak before the moment closes.\n\n\"Tonight,\" you tell her. \"Before the hunt. I'll be working my people's runes into the spear — will you watch?\"\n\nShe considers it for exactly one breath. \"At the forge,\" she says. Not a question. The word carries the answer inside it.\n\nYou add that Huginn will be helping. Corvin, three paces ahead, finds something interesting to look at on the far side of the lane. Pell glances at the bird on your pack — at the eye that has seen too many endings to bother pretending it hasn't — and her mouth makes the small contained shape you're starting to recognize as the closest she comes to a smile. \"Then I'll keep the bellows low,\" she says, \"and leave room for the ceremony.\"\n\nHuginn doesn't comment. It has watched more final rites than rune-workings, but a weapon being marked for use is a kind of declaring, and it understands those. It shifts its weight on the pack straps once, settles, and returns its gaze south toward the gray-green thread of river smell threading up the lane.\n\nThe morning is still young. The forge is ten minutes ahead. Tonight will be what it is."
       }
     ],
     "lastTurn": {
-      "narration": "The field path narrows where it meets the old drainage ditch, and the three of you fall into single file for a dozen steps — Corvin ahead, Huginn holding still on the pack, Pell stepping up alongside you when the path widens again on the other side.\n\nShe doesn't wait for you to start. \"The whetstone,\" she says. Not a question and not quite a thank-you — something between the two, the way a person names a thing they've been turning over. \"Mara held it three weeks. You asked after me specifically.\" A pause. She looks forward at Corvin's back. \"That's a particular kind of attention.\"\n\nYou tell her the date is a named thing, if she wants it to be more than that. You don't dress it up. She hears it plain.\n\nPell is quiet for a few steps. The village smoke is ahead, the cookhouse chimney reading gray-white against the pale morning sky. When she speaks her voice is level and dry and warmer than it sounds. \"I keep the forge clean and I don't make promises I can't price out. Fair warning.\" She glances at you sideways — a brief, considering look. \"But yes. After the hunt, when the accounts aren't all blood and mud. Come to the forge in the evening and we'll see what the thing is.\"\n\nCorvin doesn't turn around. But his pace slows just enough that he's walking with you again, not ahead, and the slight angle of his shoulders says he heard every word and is very carefully not acknowledging it.",
-      "sceneSummary": "Pell names the date plainly on the field path — after the hunt, at the forge, to see what the thing is.",
+      "narration": "The field path meets the village lane where the cookhouse smoke thickens the air, and Pell slows half a step. You speak before the moment closes.\n\n\"Tonight,\" you tell her. \"Before the hunt. I'll be working my people's runes into the spear — will you watch?\"\n\nShe considers it for exactly one breath. \"At the forge,\" she says. Not a question. The word carries the answer inside it.\n\nYou add that Huginn will be helping. Corvin, three paces ahead, finds something interesting to look at on the far side of the lane. Pell glances at the bird on your pack — at the eye that has seen too many endings to bother pretending it hasn't — and her mouth makes the small contained shape you're starting to recognize as the closest she comes to a smile. \"Then I'll keep the bellows low,\" she says, \"and leave room for the ceremony.\"\n\nHuginn doesn't comment. It has watched more final rites than rune-workings, but a weapon being marked for use is a kind of declaring, and it understands those. It shifts its weight on the pack straps once, settles, and returns its gaze south toward the gray-green thread of river smell threading up the lane.\n\nThe morning is still young. The forge is ten minutes ahead. Tonight will be what it is.",
+      "sceneSummary": "Pell accepts the invitation to watch the rune-working tonight at the forge — Huginn's inclusion noted without alarm.",
       "choices": [
         {
-          "label": "Head to the smokehouse — report to Aldric that the hunt is locked in and ask what he knows about the north wood's game trails.",
+          "label": "Head to the forge now, set up the spear, and wait for the light to fall right before beginning the rune work.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "report",
-            "plan"
+            "prepare",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -396,31 +401,14 @@
           "emergenceId": null
         },
         {
-          "label": "Find the child at the docks who's been hearing 'a second river under the river' — a child's ear might point somewhere neither Mara nor Aldric would look.",
+          "label": "Walk to the river's edge before anything else — Huginn's been watching that smell for an hour.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "investigate",
-            "listen",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Take a circuit north along the river bank before settling in — see the upstream bend yourself in daylight before tomorrow's hunt.",
-          "attribute": "practical",
-          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "careful"
+            "observe"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -429,13 +417,30 @@
           "emergenceId": null
         },
         {
-          "label": "Say what you do.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Find Aldric at the smokehouse and report what Corvin said about the two bad mornings.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "freeform"
+            "help",
+            "inform"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Corvin, right now, to tell you more about what he's seen at the river.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "ask",
+            "gather-information"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -444,44 +449,34 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The field path west of Corvin's east furlong, approaching Millbrook — cookhouse smoke visible thirty seconds ahead, flat morning light, Huginn settled on the pack watching south toward the river.",
+        "setting": "The field path joining the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat morning light, the forge roof visible further down the south lane.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Walking alongside Silas, the date now named between them — settled, dry, warm at the edges."
+            "state": "Walking alongside Silas, the rune-working invitation accepted — settled, a little warmer at the edges."
           },
           {
             "name": "Corvin",
-            "state": "Walking a pace ahead, very carefully not acknowledging what he just heard."
+            "state": "Three paces ahead, very carefully finding the far side of the lane interesting."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the pack, watching south toward the village and the river-smell."
+            "state": "On the pack, watching south toward the village and the river smell."
           }
         ],
         "objects": [
           "Assembled Mid-Weight Spear — carried",
           "Burlap bundle — second ash shaft, stowed",
           "Rune-Craft Kit — in the pack",
-          "Oilcloth-wrapped light tip — now in Corvin's possession"
+          "Oilcloth-wrapped light tip — in Corvin's possession"
         ],
         "threads": [
-          "Date with Pell named — after the hunt, at the forge, evening",
+          "Rune-working tonight at the forge — Pell will watch; Huginn invited",
+          "Date with Pell confirmed — after the hunt, at the forge",
           "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
           "Hunt departs tomorrow morning — north gate, before the light gets high",
-          "Huginn's attention on the river-smell is unresolved",
-          "Evening spear work at the forge — agreed, not yet begun"
+          "Huginn's attention on the river smell unresolved"
         ]
       },
       "npcUpdates": [
@@ -490,83 +485,62 @@
           "npcId": "pell",
           "name": "Pell Marsh",
           "role": "Village blacksmith, Millbrook",
-          "note": "Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Set her terms clearly: clean forge, no unpriced promises.",
+          "note": "Accepted invitation to watch the rune-working tonight at the forge — received Huginn's inclusion with dry equanimity rather than alarm.",
           "learned": [
-            "After the hunt she will meet Silas at the forge in the evening — the date is now a confirmed arrangement, not just a possibility"
+            "Silas's people have a rune tradition; he works marks into weapons before use",
+            "Huginn is considered part of the ritual"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Walking back to Millbrook with Silas and Corvin — date confirmed for after the hunt."
+          "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working arranged for tonight at the forge."
         },
         {
           "op": "update",
           "npcId": "corvin",
           "name": "Corvin",
           "role": "Farmer, east furlong — confirmed hunt companion",
-          "note": "Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again.",
-          "learned": [
-            "Aware of the arrangement between Silas and Pell; choosing not to acknowledge it"
-          ],
+          "note": "Walking ahead with careful disregard for the exchange between Silas and Pell.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
           "statusNote": "Walking back to Millbrook with Silas and Pell — hunt confirmed for tomorrow morning, north gate."
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Pell agreed to meet Silas at the forge after the hunt — the date is now a confirmed arrangement between them, named plainly on the field path on World-day 13.",
-          "subjectId": "pell"
-        }
-      ],
-      "placeUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell Marsh",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Her terms: clean forge, no unpriced promises.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal",
-            "corvin"
-          ]
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk back along the field path — a few minutes of conversation."
+        "why": "Short walk from the furlong to the village lane edge — a few minutes only."
       }
     },
     "sceneState": {
-      "setting": "The field path west of Corvin's east furlong, approaching Millbrook — cookhouse smoke visible thirty seconds ahead, flat morning light, Huginn settled on the pack watching south toward the river.",
+      "setting": "The field path joining the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat morning light, the forge roof visible further down the south lane.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Walking alongside Silas, the date now named between them — settled, dry, warm at the edges."
+          "state": "Walking alongside Silas, the rune-working invitation accepted — settled, a little warmer at the edges."
         },
         {
           "name": "Corvin",
-          "state": "Walking a pace ahead, very carefully not acknowledging what he just heard."
+          "state": "Three paces ahead, very carefully finding the far side of the lane interesting."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the pack, watching south toward the village and the river-smell."
+          "state": "On the pack, watching south toward the village and the river smell."
         }
       ],
       "objects": [
         "Assembled Mid-Weight Spear — carried",
         "Burlap bundle — second ash shaft, stowed",
         "Rune-Craft Kit — in the pack",
-        "Oilcloth-wrapped light tip — now in Corvin's possession"
+        "Oilcloth-wrapped light tip — in Corvin's possession"
       ],
       "threads": [
-        "Date with Pell named — after the hunt, at the forge, evening",
+        "Rune-working tonight at the forge — Pell will watch; Huginn invited",
+        "Date with Pell confirmed — after the hunt, at the forge",
         "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
         "Hunt departs tomorrow morning — north gate, before the light gets high",
-        "Huginn's attention on the river-smell is unresolved",
-        "Evening spear work at the forge — agreed, not yet begun"
+        "Huginn's attention on the river smell unresolved"
       ]
     }
   },
@@ -706,9 +680,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 7,
+      "relationship": 8,
       "history": [
-        "[d1] Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone.",
         "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
         "[d1] Revealed her surname — Marsh — after Silas guessed Grant. Noted her grandmother's name was Grant. Caught the tease and named it plainly.",
         "[d1] Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh.",
@@ -717,17 +690,18 @@
         "[d1] Standing back, not helping close the arrangement with Corvin — her relationship with him predates Silas and she's letting Silas work it out.",
         "[d1] Watched Corvin accept — stopped pretending she wasn't listening. Hunt party is now complete.",
         "[d1] Walked back to the village with Silas and Corvin — quiet and settled, the morning's accounting come out even.",
-        "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Set her terms clearly: clean forge, no unpriced promises."
+        "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Set her terms clearly: clean forge, no unpriced promises.",
+        "[d1] Accepted invitation to watch the rune-working tonight at the forge — received Huginn's inclusion with dry equanimity rather than alarm."
       ],
       "knownFacts": [
-        "Silas asked Mara about her specifically — enough to know what she'd want",
-        "Shows genuine warmth in small, precise tells — the mouth-shift, the allowed closeness, the click of the whetstone set down with decision",
         "Does not lock the forge when she steps out — village operates on trust",
         "Full name is Pell Marsh",
         "Her grandmother's name was Grant",
         "Silas committed her full name, Pell Marsh, to memory with deliberate quiet — she noticed",
         "Corvin already helps her occasionally — she apparently mentioned it to Silas without Corvin knowing",
-        "After the hunt she will meet Silas at the forge in the evening — the date is now a confirmed arrangement, not just a possibility"
+        "After the hunt she will meet Silas at the forge in the evening — the date is now a confirmed arrangement, not just a possibility",
+        "Silas's people have a rune tradition; he works marks into weapons before use",
+        "Huginn is considered part of the ritual"
       ],
       "skillsObserved": [
         "field tactics",
@@ -738,7 +712,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "Walking back to Millbrook with Silas and Corvin — date confirmed for after the hunt.",
+      "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working arranged for tonight at the forge.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -803,7 +777,8 @@
         "[d1] Received the modified light spear-tip; agreed in principle to help Pell occasionally but hesitated — worried the tip converts freely-given help into a debt. Arrangement not yet sea",
         "[d1] Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly.",
         "[d1] Latched the gate and walked back with the group — two words about drainage, then quiet. Hunt locked in.",
-        "[d1] Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again."
+        "[d1] Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again.",
+        "[d1] Walking ahead with careful disregard for the exchange between Silas and Pell."
       ],
       "knownFacts": [
         "Works the east furlong alone",
@@ -1228,11 +1203,11 @@
     }
   },
   "tendencies": {
-    "strategic": 23.359408910886437,
-    "cerebral": 8.376591266143759,
-    "social": 31.296352180739877,
-    "generous": 10.366012919088258,
-    "cautious": 12.514439165586765
+    "strategic": 23.242611866332005,
+    "cerebral": 8.33470830981304,
+    "social": 33.13987041983618,
+    "generous": 10.314182854492817,
+    "cautious": 12.45186696975883
   },
   "aptitudes": [
     "strategist",
@@ -1240,7 +1215,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 48,
+  "actionCount": 49,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1262,8 +1237,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783905673698,
-  "rev": 74,
+  "updatedAt": 1783906138496,
+  "rev": 75,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

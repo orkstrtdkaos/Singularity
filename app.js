@@ -15,7 +15,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "./engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.39";
+const APP_VERSION = "1.8.40";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2611,11 +2611,28 @@ function renderMap(selectedId = null) {
   // placed deterministically), a tag-derived icon, and a disposition terrain tint.
   const pos = autoMapPositions(locs);
   const kg = mapShowKG ? kgOverlayEntities(character, pos, CONTENT.npcs) : [];
-  const svg = `<svg viewBox="0 0 800 440" class="world-map">
+  // SNG-082: real terrain — each region drawn as a palette-filled hull of its locations. Data-driven
+  // (regions.json), so a generated place inherits the right ground. Three regions LOOK WRONG on purpose.
+  const WRONG = { the_pattern_reach: "wrong-noneuclid", the_veiled_reach: "wrong-lying", the_numinous_reach: "wrong-uncertain" };
+  const EXPANDING = new Set(["radiant_wastes", "unspooling", "the_scour", "the_ceaseless", "scour", "ceaseless"]);
+  const regionOf = {};
+  for (const l of locs) if (l.regionId) (regionOf[l.regionId] = regionOf[l.regionId] || []).push(pos[l.id]);
+  const terrain = (CONTENT.regions || []).map(rg => {
+    const pts = regionOf[rg.regionId]; if (!pts || !pts.length) return "";
+    const pal = rg.palette || {}; const shape = pts.length >= 3 ? regionShape(pts, 34) : null;
+    const cx = pts.reduce((s, p) => s + p.x, 0) / pts.length, cy = pts.reduce((s, p) => s + p.y, 0) / pts.length;
+    const cls = `map-region ${WRONG[rg.regionId] || ""} ${EXPANDING.has(rg.regionId) ? "expanding" : ""}`;
+    const body = shape
+      ? `<polygon points="${shape.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ")}" class="${cls}" fill="${esc(pal.base || "#2a2f28")}" stroke="${esc(pal.edge || pal.base || "#333")}"><title>${esc(rg.name + " — " + (rg.terrain || ""))}</title></polygon>`
+      : `<circle cx="${cx}" cy="${cy}" r="46" class="${cls}" fill="${esc(pal.base || "#2a2f28")}" stroke="${esc(pal.edge || "#333")}"><title>${esc(rg.name)}</title></circle>`;
+    return `${body}<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle" class="map-region-label" fill="${esc(pal.accent || "#8a8")}">${esc(rg.name)}</text>`;
+  }).join("");
+  const svg = `<svg id="skill-svg" viewBox="0 0 800 440" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
+    <g class="map-terrain">${terrain}</g>
     <text x="20" y="30" class="map-title">THE VALLEY OF ECHOES</text>
-    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}${mapShowKG ? " · showing known people" : ""}</text>
-    ${edges.map(([a, b]) => { const A = pos[a], B = pos[b];
-      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""}"/>`; }).join("")}
+    <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}${mapShowKG ? " · showing what you know" : ""}</text>
+    ${edges.map(([a, b]) => { const A = pos[a], B = pos[b]; const spine = a === "the_axis_gate" || b === "the_axis_gate" || a === "the_crossing" || b === "the_crossing";
+      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""} ${spine ? "spine" : ""}"/>`; }).join("")}
     ${locs.map(l => {
       const P = pos[l.id];
       const visited = isVisited(l.id);
@@ -2645,7 +2662,7 @@ function renderMap(selectedId = null) {
         <circle cx="${e.x}" cy="${e.y}" r="6"/>
         <text x="${e.x}" y="${e.y - 9}" text-anchor="middle" class="map-kg-label">${esc(e.label.slice(0, 16))}</text>
       </g>`).join("")}
-  </svg>`;
+  </g></svg>`;
   // details panel for the selected node — travel is an explicit button, never a stray click
   let details = "";
   if (selectedId && CONTENT.locations[selectedId]) {
@@ -2672,14 +2689,26 @@ function renderMap(selectedId = null) {
         : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")} — travel via a connected place.</div>`) : ""}
     </div>`;
   }
-  chrome(`<div class="screen" style="max-width:860px">
+  chrome(`<div class="screen" style="max-width:900px">
     <h2>World Map</h2>
-    <p class="hint" style="margin-bottom:8px">Gold ring: you are here. Hover a place for a quick read; click it for details and travel. Icons hint at what a place is.</p>
+    <p class="hint" style="margin-bottom:8px">92 places across 24 regions, each ground coloured by its disposition. Gold ring: you are here. The Axis Gate's twelve roads are the spine. <strong>Scroll to zoom, drag to pan.</strong></p>
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle">${mapShowKG ? "✓ " : ""}Show known people</button></div>
-    ${svg}
+    <div class="graph-wrap" id="graph-wrap">
+      <div class="graph-zoom-ctl">
+        <button id="gz-in" title="Zoom in">＋</button>
+        <button id="gz-out" title="Zoom out">－</button>
+        <button id="gz-fit" title="Fit to view">⤢</button>
+        <button id="gz-me" title="Centre on me">◎</button>
+      </div>
+      ${svg}
+    </div>
     ${details}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
+  wireSkillGraphViewport();
+  const meBtn = document.getElementById("gz-me");
+  if (meBtn) meBtn.onclick = () => { const p = pos[here]; if (!p) return; const k = 2.2; graphView = { k, tx: 400 - p.x * k, ty: 220 - p.y * k };
+    const vp = document.querySelector("#skill-svg .graph-vp"); if (vp) vp.setAttribute("transform", `translate(${graphView.tx} ${graphView.ty}) scale(${k})`); };
   document.getElementById("map-kg-toggle").onclick = () => { mapShowKG = !mapShowKG; renderMap(selectedId); };
   for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
@@ -2693,7 +2722,7 @@ function renderMap(selectedId = null) {
     renderPlay(character.activeScene?.lastTurn || null, {});
     onFreeform(`Head to the ${sp.name}`);
   };
-  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  document.getElementById("map-back").onclick = () => { graphView = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
 }
 
 // ---------- skill KG graph (SNG-011 Phase 3a — rendered like the world map) ----------

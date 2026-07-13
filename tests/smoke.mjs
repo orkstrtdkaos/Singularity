@@ -36,7 +36,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, re
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities } from "../engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
 import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "../engine/traditions.js";
 
@@ -2524,6 +2524,16 @@ await (async () => {
   const sys = renderSceneHistory([{ summary: "A system beat with no player line." }]);
   check("SNG-081: a system/party beat with no player words has no YOU line", !sys.includes("YOU:") && sys.includes("GM: A system beat"));
   check("SNG-081: legacy string turns pass through unchanged", renderSceneHistory(["an old plain summary"]) === "an old plain summary");
+})();
+
+// --- SNG-082: region terrain hull geometry ---
+(() => {
+  const box = [{ x: 0, y: 0 }, { x: 10, y: 0 }, { x: 10, y: 10 }, { x: 0, y: 10 }, { x: 5, y: 5 }]; // square + interior point
+  const hull = convexHull(box);
+  check("SNG-082: the convex hull drops interior points (a region wraps only its outline)", hull.length === 4 && !hull.some(p => p.x === 5 && p.y === 5));
+  const shape = regionShape(box, 10);
+  check("SNG-082: regionShape pads the hull OUTWARD so terrain wraps the nodes with a margin", shape.length === 4 && shape.every(p => p.x < -1 || p.x > 11 || p.y < -1 || p.y > 11));
+  check("SNG-082: a 1-2 point region has no polygon (a blob is drawn instead)", regionShape([{ x: 1, y: 1 }]) === null && regionShape([{ x: 1, y: 1 }, { x: 2, y: 2 }]) === null);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

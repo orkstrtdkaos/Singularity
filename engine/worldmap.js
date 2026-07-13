@@ -81,6 +81,30 @@ export function iconForTags(tags = []) {
   return "◈";
 }
 
+/** SNG-082: convex hull (Andrew's monotone chain) of a set of {x,y} points, CCW. Pure. */
+export function convexHull(points = []) {
+  const pts = points.filter(p => p && Number.isFinite(p.x) && Number.isFinite(p.y))
+    .map(p => ({ x: p.x, y: p.y })).sort((a, b) => a.x - b.x || a.y - b.y);
+  if (pts.length <= 2) return pts;
+  const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+  const lower = [];
+  for (const p of pts) { while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop(); lower.push(p); }
+  const upper = [];
+  for (let i = pts.length - 1; i >= 0; i--) { const p = pts[i]; while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop(); upper.push(p); }
+  return lower.slice(0, -1).concat(upper.slice(0, -1));
+}
+
+/** A region's terrain SHAPE for the map: the hull of its locations, each vertex pushed OUTWARD from
+ *  the centroid by `pad` so the fill wraps the nodes with a soft margin. Returns an array of {x,y}
+ *  (a polygon); a 1–2 point region returns null (draw a blob at the point instead). Pure. */
+export function regionShape(points = [], pad = 30) {
+  const hull = convexHull(points);
+  if (hull.length < 3) return null;
+  const cx = hull.reduce((s, p) => s + p.x, 0) / hull.length;
+  const cy = hull.reduce((s, p) => s + p.y, 0) / hull.length;
+  return hull.map(p => { const dx = p.x - cx, dy = p.y - cy, d = Math.hypot(dx, dy) || 1; return { x: p.x + dx / d * pad, y: p.y + dy / d * pad }; });
+}
+
 /** A disposition tint class from a place's dominant pole — the terrain fill hint. Pure. */
 export function terrainClass(location = {}) {
   const pi = location.poleIntensity || {};

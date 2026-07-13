@@ -862,6 +862,27 @@
       "cannot": "An animal read is not an animal tamed. Knowing exactly why it is about to bite you is not the same as it not biting you.",
       "discovery": "use — body-read a creature you are befriending",
       "combinationTier": "kin-civilization"
+    },
+    {
+      "id": "the_called_back",
+      "name": "The Called-Back",
+      "parts": [
+        "palework",
+        "quickening"
+      ],
+      "functions": [
+        "heal",
+        "reveal",
+        "bind"
+      ],
+      "domains": [
+        "ashwarden",
+        "rootkin"
+      ],
+      "combinationTier": "cross-pole",
+      "effect": "You call a thing back across the line it had already crossed. Not healing — RETURNING. The Ashwardens tend endings and the Rootkin tend growth, and they are antipodes with a working border and an exhausted mutual respect; to hold BOTH is to say *this ending was wrong, and I will carry the cost of unmaking it.* What comes back is alive. Whether it is the same is a question you will be answering for the rest of your life.",
+      "cannot": "It does not come back UNCHANGED — it comes back as something that has been dead, and it will always have been dead. And it is YOURS now, permanently, in the way a promise is yours. The Rootkin consider this the near edge of their own taboo; the Ashwardens consider it a theft from the only honest thing there is. Neither people will teach it. **You cannot learn this. You can only DO it — and then discover what you did.**",
+      "discovery": "use — palework and quickening held in the same act, at a moment when an ending is genuinely WRONG and you refuse it anyway. There is no teacher. There is no tome. **This is the cross-pole braid on the death↔life axis: the ONLY sanctioned road to your own antipode, and the hardest thing in the world to hold.**"
     }
   ],
   "discoverability": {
@@ -876,5 +897,6 @@
     "kin-civilization": "Two peoples who share a secondary disposition lean and therefore a border (world_framing: adjacency = kinship). Learnable where their lands meet.",
     "cross-axis": "Two peoples from entirely different axes. Rare, powerful, strange — usually discovered by USE, in a moment where someone needed both at once. Few are taught anywhere.",
     "cross-pole": "The two poles of a SINGLE axis — the braids that belong to neither people and require standing in both (harbored_flame, meaning_engine, the_turning_word). The hardest and the most meaningful: to hold an axis whole rather than choose an end of it."
-  }
+  },
+  "crossPoleNote": "The cross-pole braids are the ONLY sanctioned road to your own antipode — the one thing the domain-access model forbids by every ordinary means. Four now exist, one per built axis pair: the_harbored_flame (dark↔light) · the_meaning_engine (mechanical↔spiritual) · the_turning_word (emotional↔logical) · **the_called_back (death↔life — added 2026-07-12 because Erik's necromancer RAISED A RAVEN and the braid he had already played did not exist).** To carry a braid is to hold an axis WHOLE rather than choose an end of it. It is the rarest and most meaningful thing a character can do, and no people will teach it."
 }

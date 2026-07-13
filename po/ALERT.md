@@ -69,6 +69,11 @@ sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" })
 **Terrain content is AUTHORED and at origin:** `content/packs/core/rules/regions.json` — 25 regions with `terrain · elevation · palette · features · water · visualIdentity`. **Data-driven, NOT an authored image** — terrain derives from dispositional identity, so BATCH-9-generated locations inherit the right ground (an authored map picture would freeze a world that grows). Region hulls from `map.x/y` · **roads = `connections`, with the Axis Gate's twelve as the map's spine** · the Echo River and THE SEA as the great water landmarks · the Umbral Depths render BELOW the map.
 **⚠️ Three regions must LOOK WRONG on purpose — do not clean them up, the failure IS the content:** the Pattern Reach *resists mapping* · the Veiled Reach's map *lies* · the Numinous Reach *loses confidence*. **And four borders are EXPANDING:** the Blaze, the Churn Edge, the Scouring, the Ceaseless.
 
+### 6b. **SNG-083 — "Show known people" shows nothing, and draws only HALF the overlay.** *(Erik: "I can't tell any difference.")*
+It toggles an overlay sourced from **`npcRegistry`** — people **MET** — and **Silas has met nobody**, so it renders zero markers and **never says why**. Two defects: **(A) no empty state** (a toggle with no visible change is indistinguishable from a broken button). **(B) THE REAL BUG — it implements only half of SNG-046 Ph1**, which specced **discovered (solid) AND heard-of (dimmed)**. **Erik HAS heard of things** — his away-digest has been feeding him **Fendt**, **Grael's Edge District**, the **water crisis**, **Usnea's expedition**. **Those should already be sitting dimmed on his map.**
+**Fix:** source the overlay from the **CODEX**, not `npcRegistry` · place heard-of entities at their resolvable location (the digest already tags *"(near millbrook)"*) · add the empty state · **cheap + high value: faint relationship edges** (Fendt → the Edge District → Grael — *the conspiracy he hasn't chased yet, made visible*) · rename to **"Show what you know"** — it's people *and* rumours.
+*This turns the map from a travel tool into an intelligence board: the away-digest stops being flavour text and becomes something you can SEE.*
+
 ### 7. **SNG-058 — party leader.**
 
 ---

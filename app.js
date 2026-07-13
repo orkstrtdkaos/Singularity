@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.46";
+const APP_VERSION = "1.8.47";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2430,7 +2430,10 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // SNG-088B: the GM may OPEN the gambit builder with a proposed plan instead of running it as one
   // action. Validate + stash; renderPlay opens the builder pre-filled (the player edits + commits).
-  if (turn.gambitOps && !gambitDraft) {
+  // SNG-091: the player's REQUEST is unconditional — never gate on aptness, and never silently drop
+  // it when a stale draft lingers (a dropped request looks exactly like the GM ignoring you). We stash
+  // the proposal regardless; renderPlay replaces any leftover draft with the freshly-asked-for plan.
+  if (turn.gambitOps) {
     const go = turn.gambitOps;
     const maxSteps = CONTENT.rules.gambit?.maxSteps ?? 5;
     const steps = (Array.isArray(go.steps) ? go.steps : [])
@@ -4286,12 +4289,15 @@ function useItem(name) {
 // ---------- play rendering ----------
 
 function renderPlay(turn, opts = {}) {
-  // SNG-088B: the GM sketched a plan this turn — open the builder pre-filled instead of the scene, so
-  // the plan goes INTO the builder (editable, not executed). The player edits, assesses, then runs it.
-  if (pendingGambitProposal && !gambitDraft) {
+  // SNG-088B / SNG-091: the GM sketched a plan this turn — open the builder pre-filled instead of the
+  // scene, so the plan goes INTO the builder (editable, not executed). The request is UNCONDITIONAL:
+  // it fires even if a stale draft lingers (a dropped request looks exactly like the GM ignoring you),
+  // replacing that leftover with the plan the player just asked for.
+  if (pendingGambitProposal) {
     const p = pendingGambitProposal; pendingGambitProposal = null;
+    const hadDraft = !!(gambitDraft && (gambitDraft.goal?.trim() || (gambitDraft.steps || []).some(s => s.text?.trim())));
     gambitDraft = { goal: p.goal, steps: p.steps.length ? p.steps : [{ text: "", fallback: "" }], assessed: null };
-    renderGambitBuilder("✦ The GM sketched this plan for you — edit any of it, Assess to read your odds, then Run it. Nothing has happened yet.");
+    renderGambitBuilder(`✦ The GM sketched this plan for you — edit any of it, Assess to read your odds, then Run it. Nothing has happened yet.${hadDraft ? " (Your previous unsaved draft was replaced — ↺ Start over for a blank plan.)" : ""}`);
     return;
   }
   // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.

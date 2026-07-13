@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 220,
+  "xp": 225,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -33,7 +33,7 @@
   "alignment": {
     "spectrumId": -0.6268970798773266,
     "violence_peace": 0.03,
-    "chaos_order": 0.029249999999999998,
+    "chaos_order": 0.04278749999999999,
     "mechanical_spiritual": 0.07991062500000001,
     "concrete_abstract": -0.0522875,
     "death_life": -0.025
@@ -42,7 +42,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 91,
+  "energy": 86,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -498,34 +498,39 @@
         "player": "I want to use the runic bound spear (the one in my inventory needs a new description reflecting this) to connect with Huginn outside to make sure nothing is moving around in the yard.",
         "summary": "Silas attempts to use the death-bound spear as a runic relay for Huginn — the working finds the edge of what palework can do and stops there.",
         "narration": "You lie still and reach for the spear — not with your hand, not yet. You let your attention travel the binding, the thread you pressed into wax and pitch-ink last night at the south pit, the one that runs from shaft to blade to Huginn's particular awareness of endings. A quiet working, barely a working at all: just a listening.\n\nThe thread is there. You can feel it — or feel its absence properly, which is close enough. But the conduit doesn't open. Palework knows the dying and the dead; it reads endings already underway. What you're asking it to do now is different — use the binding as a wire, route the sensing outward through iron and binding-cord into the yard, check what moves there. The power obliges as far as it can and then stops, cleanly, the way a line goes taut before it parts. The spear is a bound object, not a relay. Huginn is a witness, not an ear you can borrow.\n\nYou get nothing useful about the yard. What you get instead is the shape of the working you tried — a clean sense of where palework ends and something else would have to begin. The thread to Huginn is present and mutual; it simply doesn't run in that direction. The forge is warm. The coals pulse. Outside, Huginn has not moved."
+      },
+      {
+        "player": "Use Order-Sense instead — read whether Huginn's stillness has a shape, a pattern to it",
+        "summary": "Order-Sense reads Huginn's vigil as patterned and calm — something north cycles at a steady interval, present but not approaching.",
+        "narration": "You let Palework go and come at it differently. Order-Sense costs less and asks less — it doesn't need a wire between you and Huginn, only the ability to read what's already there.\n\nYou open it quietly. CONSERVE: a small expenditure, a shallow read. What you find is this: Huginn's stillness has grain. It is not the random stillness of a bird roosting or a bird sleeping. There is a regularity to it — the angle of the head, the periodic slow blink at a fixed interval, the way his weight is distributed forward rather than settled. He is watching something. Not reacting, not alarmed, not readying to move. He is tracking a pattern that repeats at intervals and has not yet changed. Whatever is north, it is not coming closer. It is present and it is cycling — doing the same thing, at roughly the same tempo, over and over again.\n\nPattern without urgency. Vigil, not alarm.\n\nYou let the sense close. The forge is warm. Pell's breathing is slow and even behind you. The coals give their low red pulse. You've learned what you needed: Huginn is a watchman on a quiet wall, and the night is not going to move before morning."
       }
     ],
     "lastTurn": {
-      "narration": "You lie still and reach for the spear — not with your hand, not yet. You let your attention travel the binding, the thread you pressed into wax and pitch-ink last night at the south pit, the one that runs from shaft to blade to Huginn's particular awareness of endings. A quiet working, barely a working at all: just a listening.\n\nThe thread is there. You can feel it — or feel its absence properly, which is close enough. But the conduit doesn't open. Palework knows the dying and the dead; it reads endings already underway. What you're asking it to do now is different — use the binding as a wire, route the sensing outward through iron and binding-cord into the yard, check what moves there. The power obliges as far as it can and then stops, cleanly, the way a line goes taut before it parts. The spear is a bound object, not a relay. Huginn is a witness, not an ear you can borrow.\n\nYou get nothing useful about the yard. What you get instead is the shape of the working you tried — a clean sense of where palework ends and something else would have to begin. The thread to Huginn is present and mutual; it simply doesn't run in that direction. The forge is warm. The coals pulse. Outside, Huginn has not moved.",
-      "sceneSummary": "Silas attempts to use the death-bound spear as a runic relay for Huginn — the working finds the edge of what palework can do and stops there.",
+      "narration": "You let Palework go and come at it differently. Order-Sense costs less and asks less — it doesn't need a wire between you and Huginn, only the ability to read what's already there.\n\nYou open it quietly. CONSERVE: a small expenditure, a shallow read. What you find is this: Huginn's stillness has grain. It is not the random stillness of a bird roosting or a bird sleeping. There is a regularity to it — the angle of the head, the periodic slow blink at a fixed interval, the way his weight is distributed forward rather than settled. He is watching something. Not reacting, not alarmed, not readying to move. He is tracking a pattern that repeats at intervals and has not yet changed. Whatever is north, it is not coming closer. It is present and it is cycling — doing the same thing, at roughly the same tempo, over and over again.\n\nPattern without urgency. Vigil, not alarm.\n\nYou let the sense close. The forge is warm. Pell's breathing is slow and even behind you. The coals give their low red pulse. You've learned what you needed: Huginn is a watchman on a quiet wall, and the night is not going to move before morning.",
+      "sceneSummary": "Order-Sense reads Huginn's vigil as patterned and calm — something north cycles at a steady interval, present but not approaching.",
       "choices": [
         {
-          "label": "Get up quietly and check the yard yourself — boots off, slow, just look",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Sleep. The vigil is Huginn's; you've confirmed it's holding. Close your eyes.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "rest",
+            "trust"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense instead — read whether Huginn's stillness has a shape, a pattern to it",
+          "label": "Lie still and let the sense linger — try to feel whether the cycling pattern north has a shape you recognize (a patrol, an animal's circuit, something else).",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "axes": {
-            "chaos_order": 0.3
+            "chaos_order": 0.4
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
@@ -535,9 +540,25 @@
           "trivial": false
         },
         {
-          "label": "Let it go — Huginn would have moved if something were wrong. Close your eyes and sleep.",
+          "label": "Put your hand on the bound spear shaft — not a working, just contact. See if the death-binding carries any flavor of what's north.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Let it go entirely. You have what you need. Sleep — hunt is at first light.",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -546,44 +567,22 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Use Deathsense directly — no spear, no relay, just you reading what's in the yard",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -6,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -3
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
         "setting": "Inside Pell's forge, Millbrook — hearth banked to slow red coals, warm and dim. Silas lies on the canvas near the hearth; Pell has turned back onto her side on her bedroll in the far corner.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Turned onto her side, settled — face toward the wall, quiet breathing"
+            "state": "Turned onto her side, settled — slow even breathing, face toward the wall"
           },
           {
             "name": "Huginn",
-            "state": "Still in the yard beyond the open door, oriented north, both eyes open — has not moved"
+            "state": "Oriented north in the yard beyond the door — head angled, periodic slow blink at a fixed interval, weight forward: a watchman's posture, not a roosting one"
           }
         ],
         "objects": [
@@ -595,45 +594,28 @@
           "Open forge door — dark yard beyond, Huginn visible at the edge"
         ],
         "threads": [
-          "Huginn still oriented north and holding — whatever he attends has not resolved",
+          "Something north cycles at a steady interval — present, not approaching; Huginn holds his watch",
           "Hunt departs north gate before the light gets high — Pell, Corvin, Silas",
-          "Deathsense read more than one presence north — signal blurred; a cleaner read may be possible once the forge yard's saturation settles in deep night",
-          "Palework's limit as a relay is now felt — something else would have to begin where it ends"
+          "Deathsense read more than one presence north — a cleaner read may be possible in the field"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Sleeping — undisturbed by Silas's quiet working attempt",
-          "statusNote": "On her bedroll in the forge, settled for the night, hunt-ready for morning"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Remained still and north-facing through the attempt — did not respond to the runic contact, or gave no sign of it",
-          "statusNote": "In the forge yard, oriented north, both eyes open"
-        }
-      ],
       "codexUpdates": [
         {
-          "topic": "palework-relay-limit",
-          "label": "Palework's Relay Limit",
-          "kind": "lore",
-          "fact": "Palework reads endings already underway — it cannot be routed outward through a bound object as a sensing relay. The death-binding's thread to Huginn is present and mutual but does not run in that direction. The edge of what palework can do is now felt cleanly.",
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm.",
           "links": [
-            "millbrook",
-            "death-bound-spear",
             "huginn",
+            "death-bound-spear",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief quiet working attempt in the night — barely a beat"
+        "why": "a quiet working in the dark — barely a beat"
       }
     },
     "sceneState": {
@@ -641,11 +623,11 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Turned onto her side, settled — face toward the wall, quiet breathing"
+          "state": "Turned onto her side, settled — slow even breathing, face toward the wall"
         },
         {
           "name": "Huginn",
-          "state": "Still in the yard beyond the open door, oriented north, both eyes open — has not moved"
+          "state": "Oriented north in the yard beyond the door — head angled, periodic slow blink at a fixed interval, weight forward: a wat"
         }
       ],
       "objects": [
@@ -657,10 +639,9 @@
         "Open forge door — dark yard beyond, Huginn visible at the edge"
       ],
       "threads": [
-        "Huginn still oriented north and holding — whatever he attends has not resolved",
+        "Something north cycles at a steady interval — present, not approaching; Huginn holds his watch",
         "Hunt departs north gate before the light gets high — Pell, Corvin, Silas",
-        "Deathsense read more than one presence north — signal blurred; a cleaner read may be possible once the forge yard's saturation settles in deep night",
-        "Palework's limit as a relay is now felt — something else would have to begin where it ends"
+        "Deathsense read more than one presence north — a cleaner read may be possible in the field"
       ]
     }
   },
@@ -1123,7 +1104,8 @@
           "[d1] The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket t",
           "[d1] Order-Sense reads the death-binding at rest: settled cleanly into wood and iron, Pell's maker's marks structural at the socket throat and the branch-bud flex point. The thread to Huginn is nascent — o",
           "[d1] The death-binding's thread to Huginn tightened to present and mutual on World-day 13 night — a critical deepening at the forge south pit before the hunt. The spear now knows what it is adjacent to.",
-          "[d1] Deathsense through the bound spear reads north with a genuine pull — more than one presence, not imminent, but present. The forge yard's saturation (iron, decades of cured meat) blurs any finer resolu"
+          "[d1] Deathsense through the bound spear reads north with a genuine pull — more than one presence, not imminent, but present. The forge yard's saturation (iron, decades of cured meat) blurs any finer resolu",
+          "[d1] Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm."
         ],
         "links": [
           "disputed-zone",
@@ -1388,11 +1370,11 @@
     }
   },
   "tendencies": {
-    "strategic": 31.407275149161222,
-    "cerebral": 14.190351522240974,
-    "social": 42.28045388168688,
-    "generous": 9.330317905642975,
-    "cautious": 14.146192628571661
+    "strategic": 31.250238773415415,
+    "cerebral": 15.119399764629769,
+    "social": 42.06905161227845,
+    "generous": 9.28366631611476,
+    "cautious": 15.075461665428803
   },
   "aptitudes": [
     "strategist",
@@ -1400,7 +1382,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 69,
+  "actionCount": 70,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1446,8 +1428,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783971504572,
-  "rev": 110,
+  "updatedAt": 1783971787577,
+  "rev": 111,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1540,7 +1522,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 13,
+      "order_sense": 14,
       "palework": 5,
       "deathsense": 4
     },

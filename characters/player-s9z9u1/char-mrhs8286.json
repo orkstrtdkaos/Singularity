@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.2748865810575915
+    "spectrumId": -0.3111422520047119
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -266,129 +266,71 @@
       {
         "summary": "Pell modifies Corvin's light spear-tip and sells Silas the mid-weight; both tips packed, heading to Mara Wells's store.",
         "narration": "You settle accounts with Pell directly — the mid-weight spear-tip for yourself, and the modified light point for Corvin. Pell pulls the mid-weight from its board peg and sets it on the bench between you: a hand-forged head with a wide-cut blade and a solid cross-guard shoulder, the kind of geometry that stops a charge rather than just meeting it. She takes the light point next and goes to work without ceremony, filing the socket taper to accept a heavier crosspiece — a simple stop-lug, nothing fancy, but enough to keep the shaft from riding up a boar's neck on a bad strike. The rasp of iron on iron fills the overhang for a few minutes. Huginn watches from the hook-row with the patience of something that has seen considerably more consequential work than this.\n\nWhen she's done she holds the modified tip up to the overhang light, turns it once, and sets it beside yours. 'Corvin's point is good to go. Yours needs a haft — you've got the socket, pick your wood when you find it.' She names a fair price for both, acknowledges the labor credit from the backlog without being asked, and deducts it clean. The transaction is done in the same register as everything else she does: flat, exact, no ceremony.\n\nYou pack both tips carefully — Corvin's wrapped in a strip of oilcloth from Pell's bench rag — and step out from under the overhang into the spring morning. The lane stones are dry now after the earlier squall, the air still carrying that cold edge. Huginn drops from the hook-row and lands on your pack frame without discussion, settling its weight like it has always been there. Mara Wells's store is east of the well — red door, smokehouse referral in hand — and the well square is maybe three minutes' walk up the south lane. You are, you realize, going to a general store with a large corvid on your back and two spear-tips in your pack. You straighten up anyway."
+      },
+      {
+        "player": "As I head to the store I call back to Pell, with a big grin, remember to wear something nice for our hunting date! ",
+        "summary": "Silas trades a parting grin with Pell — she answers in kind, in her register — and heads north up the lane.",
+        "narration": "The lane stones are dry again under your boots, the squall's memory only in the cold that came after it. You're three paces from the forge's shadow when you call it back over your shoulder — remember to wear something nice for our hunting date — and you can hear the grin in it yourself.\n\nA beat of silence from the overhang. Then, flat and unhurried: \"I'll wear my good apron.\"\n\nHuginn makes a sound in its throat — not quite a croak, more the noise a person makes when they decline to comment — and resettles on your pack frame.\n\nThe lane runs north toward the well square, the sound of the forge already shrinking behind you. East of the well is the red door. Mara Wells, stocks rope and hardware and the occasional traded-in trap, and Aldric's referral gets you past her finder's fee. Corvin is somewhere in the east furlong after that — a farmer's son with ambition and a spear-tip he hasn't yet held."
       }
     ],
     "lastTurn": {
-      "narration": "You settle accounts with Pell directly — the mid-weight spear-tip for yourself, and the modified light point for Corvin. Pell pulls the mid-weight from its board peg and sets it on the bench between you: a hand-forged head with a wide-cut blade and a solid cross-guard shoulder, the kind of geometry that stops a charge rather than just meeting it. She takes the light point next and goes to work without ceremony, filing the socket taper to accept a heavier crosspiece — a simple stop-lug, nothing fancy, but enough to keep the shaft from riding up a boar's neck on a bad strike. The rasp of iron on iron fills the overhang for a few minutes. Huginn watches from the hook-row with the patience of something that has seen considerably more consequential work than this.\n\nWhen she's done she holds the modified tip up to the overhang light, turns it once, and sets it beside yours. 'Corvin's point is good to go. Yours needs a haft — you've got the socket, pick your wood when you find it.' She names a fair price for both, acknowledges the labor credit from the backlog without being asked, and deducts it clean. The transaction is done in the same register as everything else she does: flat, exact, no ceremony.\n\nYou pack both tips carefully — Corvin's wrapped in a strip of oilcloth from Pell's bench rag — and step out from under the overhang into the spring morning. The lane stones are dry now after the earlier squall, the air still carrying that cold edge. Huginn drops from the hook-row and lands on your pack frame without discussion, settling its weight like it has always been there. Mara Wells's store is east of the well — red door, smokehouse referral in hand — and the well square is maybe three minutes' walk up the south lane. You are, you realize, going to a general store with a large corvid on your back and two spear-tips in your pack. You straighten up anyway.",
-      "sceneSummary": "Pell modifies Corvin's light spear-tip and sells Silas the mid-weight; both tips packed, heading to Mara Wells's store.",
+      "narration": "The lane stones are dry again under your boots, the squall's memory only in the cold that came after it. You're three paces from the forge's shadow when you call it back over your shoulder — remember to wear something nice for our hunting date — and you can hear the grin in it yourself.\n\nA beat of silence from the overhang. Then, flat and unhurried: \"I'll wear my good apron.\"\n\nHuginn makes a sound in its throat — not quite a croak, more the noise a person makes when they decline to comment — and resettles on your pack frame.\n\nThe lane runs north toward the well square, the sound of the forge already shrinking behind you. East of the well is the red door. Mara Wells, stocks rope and hardware and the occasional traded-in trap, and Aldric's referral gets you past her finder's fee. Corvin is somewhere in the east furlong after that — a farmer's son with ambition and a spear-tip he hasn't yet held.",
+      "sceneSummary": "Silas trades a parting grin with Pell — she answers in kind, in her register — and heads north up the lane.",
       "choices": [
         {
-          "label": "Go straight to Mara Wells's red-door store — invoke the smokehouse referral and browse what she stocks.",
+          "label": "Head straight to Mara Wells's store — red door, east of the well",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "approach",
-            "trade"
+            "visit",
+            "shop"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
+          "trivial": true
         },
         {
-          "label": "Stop at the well first — take the pulse of the square before going to Mara's. See who's around and what's being said.",
+          "label": "Swing by the well first — see who's moving through the village center",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
             "scout",
-            "social"
+            "observe"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
+          "trivial": true
         },
         {
-          "label": "Use Lightsense before entering Mara's shop — read who's watching, whether the storefront is being observed, and where the blind spots are.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "trivial": false,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "lightsense",
-          "energyCost": 3,
-          "axes": {
-            "violence_peace": 0.3,
-            "chaos_order": -0.2
-          }
-        },
-        {
-          "label": "Head to Corvin's place on the east furlong on the way — hand him his modified tip and rope him into the hunt before the shopping.",
+          "label": "Go find Corvin first — east furlong, hand him his spear-tip and take his measure",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "approach",
-            "help"
+            "meet",
+            "deliver"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [
-          {
-            "name": "Mid-Weight Spear-Tip",
-            "kind": "weapon",
-            "description": "A hand-forged iron head with a wide-cut blade and cross-guard shoulder — geometry that stops a charge. Needs a haft; socket is ready.",
-            "consumable": false,
-            "effects": {}
-          },
-          {
-            "name": "Modified Light Spear-Tip (Corvin's)",
-            "kind": "quest",
-            "description": "Pell's light point with a filed socket taper and a simple stop-lug crosspiece — enough to keep a shaft from riding up a boar's neck. Wrapped in oilcloth. For Corvin.",
-            "consumable": false,
-            "effects": {}
-          }
-        ],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "npcUpdates": [
+          "trivial": true
+        },
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact.",
-          "learned": [
-            "Sold the mid-weight tip to Silas; modified the light tip with a stop-lug for Corvin; credited backlog labor against the purchase."
+          "label": "Something else entirely",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "freeform"
           ],
-          "skillsObserved": [
-            "socket modification under time, no ceremony"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the forge on the south lane — accounts settled, waiting on news of the hunt's departure once Corvin is confirmed."
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north."
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "South lane of Millbrook, just outside Pell's forge — open overhang behind, dry lane stones ahead, well square three minutes north. Spring mid-morning light, cold air after the squall.",
+        "setting": "South lane of Millbrook, three paces north of Pell's forge overhang — lane running north toward the well square, spring mid-morning light, cold and clear after the squall.",
         "npcsPresent": [
           {
-            "name": "Pell",
-            "state": "Back inside the forge, returning to normal shop work — transaction closed."
+            "name": "Huginn",
+            "state": "Settled on Silas's pack frame, having declined to comment on the exchange."
           },
           {
-            "name": "Huginn",
-            "state": "Settled on Silas's pack frame, watching the lane with its usual unhurried attention."
+            "name": "Pell",
+            "state": "Back inside the forge, resuming shop work — her answer delivered and done."
           }
         ],
         "objects": [
@@ -399,48 +341,35 @@
         "threads": [
           "Mara Wells's supply store not yet visited — east of the well, red door; smokehouse referral standing",
           "Corvin still to be found — east furlong; hunt cannot depart without him",
-          "Hunt to the north wood still forming — all three pieces in motion but not yet assembled"
+          "Hunt to the north wood still forming — Pell confirmed, Corvin still needed"
         ]
       },
-      "placeUpdates": [
+      "npcUpdates": [
         {
-          "note": "Mid-weight spear-tip sold to Silas Weir on World-day 12 morning; light point modified with stop-lug for Corvin and delivered to Silas for hand-off. Labor credit from backlog deducted — accounts closed.",
-          "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Backlog cleared, both spear transactions complete — forge back to normal work. Mid-weight peg now empty.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Sold the mid-weight spear-tip to Silas and modified the light point for Corvin with a stop-lug — labor credit from the backlog deducted clean. Transaction done in the same flat register as everything else she does.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal",
-            "corvin"
-          ]
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the forge on the south lane, back to normal shop work after the backlog and both spear transactions."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief transaction — modification and payment while Huginn watched."
+        "why": "A brief parting exchange and a few steps up the lane — less than a quarter hour."
       }
     },
     "sceneState": {
-      "setting": "South lane of Millbrook, just outside Pell's forge — open overhang behind, dry lane stones ahead, well square three minutes north. Spring mid-morning light, cold air after the squall.",
+      "setting": "South lane of Millbrook, three paces north of Pell's forge overhang — lane running north toward the well square, spring mid-morning light, cold and clear after the squall.",
       "npcsPresent": [
         {
-          "name": "Pell",
-          "state": "Back inside the forge, returning to normal shop work — transaction closed."
+          "name": "Huginn",
+          "state": "Settled on Silas's pack frame, having declined to comment on the exchange."
         },
         {
-          "name": "Huginn",
-          "state": "Settled on Silas's pack frame, watching the lane with its usual unhurried attention."
+          "name": "Pell",
+          "state": "Back inside the forge, resuming shop work — her answer delivered and done."
         }
       ],
       "objects": [
@@ -451,7 +380,7 @@
       "threads": [
         "Mara Wells's supply store not yet visited — east of the well, red door; smokehouse referral standing",
         "Corvin still to be found — east furlong; hunt cannot depart without him",
-        "Hunt to the north wood still forming — all three pieces in motion but not yet assembled"
+        "Hunt to the north wood still forming — Pell confirmed, Corvin still needed"
       ]
     }
   },
@@ -593,7 +522,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Named Corvin unprompted — a farmer's son from the east furlong who keeps picking up the mid-weight spear-tip and putting it down. Offered the information without ceremony, filed th",
         "[d1] Answered Corvin's situation plainly — the boy wants boar, the light point won't serve, the modification is within her skill but coin is the obstacle. Gave Silas a quarter-turn look",
         "[d1] Agreed to the three-way hunt arrangement — modification on the light point at cost, no margin, on the condition a capable person is beside Corvin in the north wood. Committed to wa",
         "[d1] Working her own vise in comfortable parallel — the arrangement settled, no need to manage it.",
@@ -602,7 +530,8 @@
         "[d1] Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open.",
         "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c",
         "[d1] Inspected the finished hand-axe herself — confirmed the collar with her thumb, rehung it in its spot. Turned to face Silas directly and named the next step: find Corvin, then go no",
-        "[d1] Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact."
+        "[d1] Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact.",
+        "[d1] Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register."
       ],
       "knownFacts": [
         "A granite shelf sits about a quarter-mile north of the fence line; game trails run east-west along it, not north-south",
@@ -623,7 +552,7 @@
         "socket modification under time, no ceremony"
       ],
       "status": "active",
-      "statusNote": "At the forge on the south lane — accounts settled, waiting on news of the hunt's departure once Corvin is confirmed.",
+      "statusNote": "At the forge on the south lane, back to normal shop work after the backlog and both spear transactions.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -737,9 +666,9 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-12T23:20:32.713Z",
-    "lastTickWorldDay": 12,
-    "lastCanonWorldDay": 12
+    "lastSharedReadAt": "2026-07-13T00:01:58.164Z",
+    "lastTickWorldDay": 13,
+    "lastCanonWorldDay": 13
   },
   "domains": {
     "primary": "wright",
@@ -995,11 +924,11 @@
     }
   },
   "tendencies": {
-    "strategic": 17.429290670592206,
-    "cerebral": 8.244736226718539,
-    "social": 16.789983116603718,
-    "generous": 7.231470135503831,
-    "cautious": 8.548103401993192
+    "strategic": 17.342144217239245,
+    "cerebral": 8.203512545584946,
+    "social": 18.7060332010207,
+    "generous": 7.195312784826312,
+    "cautious": 8.505362884983226
   },
   "aptitudes": [
     "strategist",
@@ -1007,7 +936,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 28,
+  "actionCount": 29,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1029,8 +958,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783899317411,
-  "rev": 48,
+  "updatedAt": 1783901062896,
+  "rev": 53,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

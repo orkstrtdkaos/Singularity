@@ -383,20 +383,26 @@
         "player": "Whisper to Pell.... my people's rune rituals work best without clothing blocking the spiritual energy... ",
         "summary": "Silas tries the ritual-nudity line on Pell; she sees through it immediately, calls it with dry amusement, and closes it without closing the door.",
         "narration": "Pell doesn't answer right away.\n\nThe village lane is quiet — cookhouse smoke drifting south, Corvin three paces ahead with his attention fixed on the middle distance. You drop your voice and lean slightly toward her, the conspiratorial register of a man sharing something important, something old. Your people's rune rituals, you tell her — they work best without clothing. The material blocks the spiritual current. It's how it's always been done.\n\nHuginn makes a sound in its throat. Not a croak. A very small, very deliberate sound, the kind a person makes when they have decided not to say what they are thinking.\n\nPell walks two more steps. Then she stops — and when she turns to look at you, what's on her face is not offense. It is something flatter and more dangerous: the expression of a woman who keeps accounts and has just found a discrepancy she recognized immediately. She holds it for a moment. Then the corner of her mouth moves. \"Well,\" she says quietly. \"I suppose a good try is a good try.\" She starts walking again, unhurried. \"Clean forge tonight. You can work in whatever state you like — *your* state. I'll be dressed.\"\n\nShe says it without heat, without closing any door. The date is still a named thing. The invitation still stands. She is simply not confused about what just happened, and she has decided not to make an event of it. Corvin has found something extremely interesting about the drainage ditch ahead."
+      },
+      {
+        "player": "Let it land clean — laugh at yourself, say nothing more. The moment doesn't need rescue.",
+        "summary": "Silas laughs the line off cleanly — the moment closes on good terms and the village lane opens ahead.",
+        "narration": "The laugh comes out of you before you can dress it up — genuine, short, the sound of a man who got caught fair and knows it. You spread one hand in a small conceding gesture and say nothing else. The line is done. It was a good try.\n\nPell's mouth does the contained thing again, and then she looks forward and walks, and the subject is closed on terms that leave everything intact.\n\nCorvin glances back once. Whatever he reads in the two of you, he files it under not my business and lengthens his stride by half a step. Huginn settles its feathers with the faint ratcheting sound of a bird that has made its statement and considers the matter complete.\n\nThe village lane opens ahead — cookhouse smoke, the forge roof on the south side, the well at the center with a few morning figures moving around it. The day is young enough that the light is still coming in low and amber across the terraced gardens. Tonight there is rune-work. Tomorrow there is a hunt. Between now and then: an afternoon that can be filled however a man with a new spear and an old bird sees fit."
       }
     ],
     "lastTurn": {
-      "narration": "Pell doesn't answer right away.\n\nThe village lane is quiet — cookhouse smoke drifting south, Corvin three paces ahead with his attention fixed on the middle distance. You drop your voice and lean slightly toward her, the conspiratorial register of a man sharing something important, something old. Your people's rune rituals, you tell her — they work best without clothing. The material blocks the spiritual current. It's how it's always been done.\n\nHuginn makes a sound in its throat. Not a croak. A very small, very deliberate sound, the kind a person makes when they have decided not to say what they are thinking.\n\nPell walks two more steps. Then she stops — and when she turns to look at you, what's on her face is not offense. It is something flatter and more dangerous: the expression of a woman who keeps accounts and has just found a discrepancy she recognized immediately. She holds it for a moment. Then the corner of her mouth moves. \"Well,\" she says quietly. \"I suppose a good try is a good try.\" She starts walking again, unhurried. \"Clean forge tonight. You can work in whatever state you like — *your* state. I'll be dressed.\"\n\nShe says it without heat, without closing any door. The date is still a named thing. The invitation still stands. She is simply not confused about what just happened, and she has decided not to make an event of it. Corvin has found something extremely interesting about the drainage ditch ahead.",
-      "sceneSummary": "Silas tries the ritual-nudity line on Pell; she sees through it immediately, calls it with dry amusement, and closes it without closing the door.",
+      "narration": "The laugh comes out of you before you can dress it up — genuine, short, the sound of a man who got caught fair and knows it. You spread one hand in a small conceding gesture and say nothing else. The line is done. It was a good try.\n\nPell's mouth does the contained thing again, and then she looks forward and walks, and the subject is closed on terms that leave everything intact.\n\nCorvin glances back once. Whatever he reads in the two of you, he files it under not my business and lengthens his stride by half a step. Huginn settles its feathers with the faint ratcheting sound of a bird that has made its statement and considers the matter complete.\n\nThe village lane opens ahead — cookhouse smoke, the forge roof on the south side, the well at the center with a few morning figures moving around it. The day is young enough that the light is still coming in low and amber across the terraced gardens. Tonight there is rune-work. Tomorrow there is a hunt. Between now and then: an afternoon that can be filled however a man with a new spear and an old bird sees fit.",
+      "sceneSummary": "Silas laughs the line off cleanly — the moment closes on good terms and the village lane opens ahead.",
       "choices": [
         {
-          "label": "Let it land clean — laugh at yourself, say nothing more. The moment doesn't need rescue.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Reconnoiter the north gate and the edge of the wood — walk the terrain before the hunt, note the game trails, look at the river from the upper path.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "graceful-retreat"
+            "scout",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -405,14 +411,14 @@
           "emergenceId": null
         },
         {
-          "label": "Come clean on the walk — tell her you wanted her there and didn't know how to say it plainly. Honest repair while you still have the lane to yourselves.",
+          "label": "Find Aldric at the smokehouse — report on the hunt arrangement and listen for fresh news about the river or the valley.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "honest",
-            "repair"
+            "help",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -421,31 +427,30 @@
           "emergenceId": null
         },
         {
-          "label": "Ask what she'd actually want the evening to be — after the rune-work, when the spear is done. Let her set the terms she'd choose.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "curious",
-            "open"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Say nothing. Let it rest and focus on tonight's work. Some things land better when you stop touching them.",
+          "label": "Sit somewhere quiet near the well and read the village with Order-Sense — see what the system of this place is carrying today.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "chaos_order": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "patient",
-            "restrained"
+            "study",
+            "careful"
           ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Something else entirely.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
@@ -453,30 +458,20 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The field path meeting the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat morning light, the forge roof visible further down the south lane.",
+        "setting": "The field path meeting the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat amber morning light, the forge roof visible on the south lane, figures moving at the well.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Walking alongside Silas — unhurried, the attempt clocked and filed, door still open."
+            "state": "Walking alongside Silas, composed, the moment filed and closed."
           },
           {
             "name": "Corvin",
-            "state": "Three paces ahead, finding the drainage ditch very interesting."
+            "state": "Three paces ahead, stride slightly lengthened, attention on the lane."
           },
           {
             "name": "Huginn",
-            "state": "On the pack, having made its opinion known in the smallest possible way."
+            "state": "Settled on the pack, feathers ratcheted flat, editorial complete."
           }
         ],
         "objects": [
@@ -486,11 +481,10 @@
           "Oilcloth-wrapped light tip — in Corvin's possession"
         ],
         "threads": [
-          "Rune-working tonight at the forge — Pell will watch, dressed",
+          "Rune-working tonight at the forge — Pell attending, dressed",
           "Date with Pell confirmed — after the hunt, at the forge",
           "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
-          "Hunt departs tomorrow morning — north gate, before the light gets high",
-          "Huginn's quiet editorial on the ritual-nudity claim unresolved"
+          "Hunt departs tomorrow morning — north gate, before the light gets high"
         ]
       },
       "npcUpdates": [
@@ -498,54 +492,40 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell Marsh",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Clocked the ritual-nudity claim immediately — named it with dry amusement and closed it without offense. Confirmed she'll attend the rune-working tonight, dressed. Door remains open.",
-          "learned": [
-            "Sees through a line quickly and prefers not to make an event of it"
-          ],
-          "skillsObserved": [
-            "dry account-keeping composure",
-            "graceful deflection without closing terms"
-          ],
+          "note": "Silas laughed the line off cleanly — she closed the subject on good terms, door still open.",
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working tonight at the forge, date after the hunt still standing."
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [
+          "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working tonight at the forge confirmed, date after the hunt standing."
+        },
         {
-          "topic": "pell",
-          "label": "Pell Marsh",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after the hunt remains.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal"
-          ]
+          "op": "update",
+          "npcId": "corvin",
+          "name": "Corvin",
+          "note": "Glanced back once, filed it as not his business, lengthened his stride.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Walking back to Millbrook with Silas and Pell — hunt confirmed for tomorrow morning, north gate."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange on the lane — barely a quarter hour."
+        "why": "A short walk back along the field path to the village lane — a few minutes of easy conversation."
       }
     },
     "sceneState": {
-      "setting": "The field path meeting the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat morning light, the forge roof visible further down the south lane.",
+      "setting": "The field path meeting the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat amber morning light, the forge roof visible on the south lane, figures moving at the well.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Walking alongside Silas — unhurried, the attempt clocked and filed, door still open."
+          "state": "Walking alongside Silas, composed, the moment filed and closed."
         },
         {
           "name": "Corvin",
-          "state": "Three paces ahead, finding the drainage ditch very interesting."
+          "state": "Three paces ahead, stride slightly lengthened, attention on the lane."
         },
         {
           "name": "Huginn",
-          "state": "On the pack, having made its opinion known in the smallest possible way."
+          "state": "Settled on the pack, feathers ratcheted flat, editorial complete."
         }
       ],
       "objects": [
@@ -555,11 +535,10 @@
         "Oilcloth-wrapped light tip — in Corvin's possession"
       ],
       "threads": [
-        "Rune-working tonight at the forge — Pell will watch, dressed",
+        "Rune-working tonight at the forge — Pell attending, dressed",
         "Date with Pell confirmed — after the hunt, at the forge",
         "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
-        "Hunt departs tomorrow morning — north gate, before the light gets high",
-        "Huginn's quiet editorial on the ritual-nudity claim unresolved"
+        "Hunt departs tomorrow morning — north gate, before the light gets high"
       ]
     }
   },
@@ -701,7 +680,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d1] Revealed her surname — Marsh — after Silas guessed Grant. Noted her grandmother's name was Grant. Caught the tease and named it plainly.",
         "[d1] Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh.",
         "[d1] Walked east with Silas; stopped back to watch Corvin's reaction to the introduction.",
         "[d1] Holding back, watching Corvin's first read of Silas.",
@@ -710,7 +688,8 @@
         "[d1] Walked back to the village with Silas and Corvin — quiet and settled, the morning's accounting come out even.",
         "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Set her terms clearly: clean forge, no unpriced promises.",
         "[d1] Accepted invitation to watch the rune-working tonight at the forge — received Huginn's inclusion with dry equanimity rather than alarm.",
-        "[d1] Clocked the ritual-nudity claim immediately — named it with dry amusement and closed it without offense. Confirmed she'll attend the rune-working tonight, dressed. Door remains ope"
+        "[d1] Clocked the ritual-nudity claim immediately — named it with dry amusement and closed it without offense. Confirmed she'll attend the rune-working tonight, dressed. Door remains ope",
+        "[d1] Silas laughed the line off cleanly — she closed the subject on good terms, door still open."
       ],
       "knownFacts": [
         "Full name is Pell Marsh",
@@ -731,7 +710,7 @@
         "graceful deflection without closing terms"
       ],
       "status": "active",
-      "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working tonight at the forge, date after the hunt still standing.",
+      "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working tonight at the forge confirmed, date after the hunt standing.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -797,7 +776,8 @@
         "[d1] Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly.",
         "[d1] Latched the gate and walked back with the group — two words about drainage, then quiet. Hunt locked in.",
         "[d1] Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again.",
-        "[d1] Walking ahead with careful disregard for the exchange between Silas and Pell."
+        "[d1] Walking ahead with careful disregard for the exchange between Silas and Pell.",
+        "[d1] Glanced back once, filed it as not his business, lengthened his stride."
       ],
       "knownFacts": [
         "Works the east furlong alone",
@@ -1202,11 +1182,11 @@
     }
   },
   "tendencies": {
-    "strategic": 23.126398807000346,
-    "cerebral": 8.293034768263976,
-    "social": 34.974171067737,
-    "generous": 10.262611940220353,
-    "cautious": 12.389607634910035
+    "strategic": 23.010766812965343,
+    "cerebral": 8.251569594422655,
+    "social": 34.799300212398315,
+    "generous": 10.211298880519251,
+    "cautious": 12.327659596735485
   },
   "aptitudes": [
     "strategist",
@@ -1214,7 +1194,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 50,
+  "actionCount": 51,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1236,8 +1216,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783906366087,
-  "rev": 78,
+  "updatedAt": 1783906501949,
+  "rev": 79,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

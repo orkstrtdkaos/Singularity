@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "the_unfinished_spear",
+      "name": "The Unfinished Spear",
+      "kind": "weapon",
+      "tier": "growing",
+      "madeBy": "Silas Weir",
+      "madeWith": [
+        "Pell Marsh (maker's mark, valley-craft)",
+        "Huginn (attunement)"
+      ],
+      "madeAt": "Millbrook forge-yard, world-day 13, under open sky",
+      "description": "Ash haft, iron head, and runes that are **load-bearing rather than decorative** — pressed into the places where the spear already had an opinion about what it was. Pell's maker's mark sits on the flat of the blade below the socket, one clean stroke, and the rune beside it settled instead of skating **because the iron recognised the hand that shaped it**.",
+      "deathRegister": {
+        "open": true,
+        "note": "⛔ **The blade KNOWS when it ends something, and that knowing ACCUMULATES.** This is not flavour. It is the item's growth mechanic."
+      },
+      "bond": {
+        "to": "huginn",
+        "strength": "nascent",
+        "note": "A thread, not a cord — woven through the pale eye's long attention and the bird's motionless hour at the stone ring. **It thickens with what they end together.**"
+      },
+      "growth": {
+        "principle": "⛔ **AN ARTIFACT IS NOT FORGED. IT IS EARNED.** This spear grows by the same law that governs the whole living world (BATCH-9): **weight = birth-power + accumulated attention.** It becomes real by being USED, in moments that MATTER.",
+        "accrues": [
+          "an ending it was present for — the death-register deepens",
+          "a moment that mattered — a quest resolution, a legend witnessed, a life saved or taken that cost something",
+          "Huginn's participation — the bond thickens",
+          "Pell's continued involvement — her mark is a living claim, not a signature"
+        ],
+        "tiers": [
+          "**unfinished** — where it is now. The runes hold. The register is open. It has begun.",
+          "**named** — enough endings that it has a name people use. It stops being 'his spear.'",
+          "**known** — it precedes him into rooms. NPCs react to it.",
+          "**artifact** — canon. It appears in the world's chronicle. **It can be inherited, feared, or stolen — and losing it would be a real loss.**"
+        ],
+        "theHeresy": "⛔ **Silas Weir is a WRIGHT — one of the people who cannot stop making — who was nearly EXILED FOR FINISHING SOMETHING. And he deliberately left this unfinished.** The spear is his entire heresy, forged into steel. **Do not let the game finish it for him.**"
+      },
+      "functions": [
+        "strike",
+        "hinder",
+        "foresee"
+      ],
+      "bonusTags": [
+        "death",
+        "ritual",
+        "binding",
+        "hunt"
+      ],
+      "notFor": "It is not yet an artifact and must not be narrated as one. **It is a good spear with an open register and a beginning.** Everything else it has to earn."
+    }
+  ]
+}

@@ -64,7 +64,12 @@ sceneTurns.push({ summary: turn.sceneSummary, narration: turn.narration || "" })
 
 ### 5. ✅ SNG-073 SHIPPED v1.8.38 — The Skill Wheel (supersedes SNG-054 Ph2). The skill tree **becomes** the great circle: tiers radiate inward · folk crafts at the centre · precursor outside the ring · **cross-pole braids drawn as diameters through the centre** · **antipode dark and struck through.**
 
-### 6. **SNG-058 — party leader.**
+### 6. **SNG-082 — world map: pan/zoom + real terrain.** *(Erik: "this is really awesome... but I can't move the map around or zoom in.")*
+**Pan/zoom = 0 refs at HEAD** — the skill graph got it, the map didn't, and the map now holds **92 locations across 24 regions**. Wheel/pinch zoom · drag-pan · fit · reset · centre-on-me.
+**Terrain content is AUTHORED and at origin:** `content/packs/core/rules/regions.json` — 25 regions with `terrain · elevation · palette · features · water · visualIdentity`. **Data-driven, NOT an authored image** — terrain derives from dispositional identity, so BATCH-9-generated locations inherit the right ground (an authored map picture would freeze a world that grows). Region hulls from `map.x/y` · **roads = `connections`, with the Axis Gate's twelve as the map's spine** · the Echo River and THE SEA as the great water landmarks · the Umbral Depths render BELOW the map.
+**⚠️ Three regions must LOOK WRONG on purpose — do not clean them up, the failure IS the content:** the Pattern Reach *resists mapping* · the Veiled Reach's map *lies* · the Numinous Reach *loses confidence*. **And four borders are EXPANDING:** the Blaze, the Churn Edge, the Scouring, the Ceaseless.
+
+### 7. **SNG-058 — party leader.**
 
 ---
 

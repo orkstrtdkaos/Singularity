@@ -99,6 +99,7 @@
       ],
       "functions": [
         "bind",
+        "resist",
         "shield"
       ],
       "challengeTypes": [
@@ -124,6 +125,7 @@
         "violence_peace": -0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "The shape of the coming violence, seen a beat early.",
@@ -222,7 +224,7 @@
         "body_mind": -0.1
       },
       "functions": [
-        "strike",
+        "hinder",
         "break"
       ],
       "narrationHints": "The blade leaves the hand before the hand knows it.",
@@ -321,7 +323,9 @@
         "body_mind": -0.2
       },
       "functions": [
-        "shield"
+        "shield",
+        "resist",
+        "ward"
       ],
       "narrationHints": "You do not move, and so the line holds.",
       "description": "Hold a position or protect another under assault — the guardian's discipline.",
@@ -418,6 +422,7 @@
         "violence_peace": 0.0
       },
       "functions": [
+        "resist",
         "bind",
         "shield"
       ],
@@ -480,5 +485,6 @@
       "gated": "learned",
       "tradition": "marcher"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

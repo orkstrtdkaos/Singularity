@@ -1379,3 +1379,29 @@ The skill graph got zoom (SNG-054 P0). **The world map has none** — and it now
 **Four borders are EXPANDING** and should show it if cheap: **the Blaze** (eating the land, visibly), **the Churn Edge** (creeping), **the Scouring**, **the Ceaseless**.
 
 **Erik test:** "Open the map — zoom, pan, and fit. Verify the Valley is green and worked, the Radiant Wastes are a blinding glass scar that looks like it's growing, the Quickwood's cities are indistinguishable from its forest, and the twelve roads of the Axis Gate are the spine of the world."
+---
+
+## SNG-083 — "Show known people" shows nothing (and only draws HALF of what it should)
+
+**Erik, 2026-07-12:** *"what does the known people button do? I can't tell any difference."* 🔧 CCode. Aevi PO.
+
+### PWSV (HEAD v1.8.37)
+The toggle sets `mapShowKG` and draws from **`character.npcRegistry`** — *people the character has MET*. **Silas has met nobody** (his sidebar reads *"PEOPLE YOU KNOW — no one yet"*). So the overlay renders **zero markers**, the button appears inert, and **nothing tells the player why.**
+
+### Two defects
+**A. No empty state.** A toggle that produces no visible change and offers no explanation is indistinguishable from a broken button. **If there is nothing to show, SAY SO** — disable it with a tooltip, or render *"You haven't met anyone yet — the world is still a rumour."*
+
+**B. ⛔ It draws only half the overlay. This is the real bug.**
+SNG-046 Phase 1 specced **discovered (solid) AND heard-of (dimmed)** — the same visual grammar the map already uses for *places* (visited vs heard-of), extended to *entities*. **The overlay only implements the MET half.**
+**And Erik HAS heard of things.** His away-digest has been telling him about **Fendt**, **Overseer Grael's Edge District**, the **water crisis**, **Usnea's expedition**. Those are in his codex/news as heard-of-not-met. **They should already be sitting dimmed on his map, showing him where the world's live threads are.**
+
+### Fix
+1. **Source the overlay from the CODEX, not just `npcRegistry`.** Solid = met/visited firsthand · **dimmed/dashed = heard-of only** (from facts, news, the away-digest). Same grammar as sub-places.
+2. **Place a heard-of entity at its resolvable location** (an NPC's `homeLocation`; a fact's or news item's location — the digest already carries *"(near millbrook)"*, *"(near radiant plateau edge)"*).
+3. **Empty state** — never a silent no-op.
+4. **Optional, cheap, high value:** faint relationship edges where the codex knows a link (**Fendt → the Edge District → Grael**). *That is the Fendt thread becoming VISIBLE — the player can literally see the shape of the conspiracy he hasn't chased yet.*
+5. Rename to fit what it shows: **"Show what you know"** — it is people *and* rumours, not only people.
+
+**Erik test:** "Toggle it with a character who has met no one — verify it tells you so, AND that the things you've only HEARD of (Fendt, the Edge District, the water crisis) appear dimmed where they live. Then meet someone and verify they go solid."
+
+*This turns the map from a travel tool into an intelligence board — the away-digest stops being flavour text and becomes something you can SEE.*

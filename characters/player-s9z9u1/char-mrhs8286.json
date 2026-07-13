@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 207,
+  "xp": 210,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,7 +42,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 104,
+  "energy": 99,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -488,76 +488,75 @@
         "player": "Tell her what you actually know — that the short way you took brought you here, and 'here' keeps turning out to be somewhere that matters. That's as close to a plan as you've got.",
         "summary": "Silas tells Pell about the short way and the vanished path — she listens, then turns the question back on him.",
         "narration": "The coals are down to a slow red pulse. You can hear the river from here — faint, the way water sounds when the night has gone still around it.\n\n\"The short way,\" you say, looking up at the ceiling beams. \"I took it. Didn't know it was the short way at the time — I thought I was cutting across something that didn't need to be walked all the way through.\" A breath. \"The path behind me was gone when I turned around. Not overgrown. Gone.\"\n\nPell doesn't say anything. The silence means she's listening.\n\n\"Since then I've been finding that the places I end up — they tend to be places that needed someone there. Not me specifically. Just someone who can see a certain kind of thing.\" You turn your head toward her corner. She's on her side now, facing the wall or facing away, you can't quite tell in the low light. \"I don't have a destination. I have a direction. North, lately. The spear reads north.\" You pause. \"And here turned out to matter. So.\"\n\n\"That's not nothing,\" Pell says after a moment. Not consoling — just observational, the way she'd note that a blade had good temper. She shifts on her bedroll, and then she says it quietly: \"You?\"\n\nThe question sits in the warm dark. She's already given her own version. This is her asking what yours looks like when you say it plain."
+      },
+      {
+        "player": "Don't answer in words — reach across the dark and let that be the answer.",
+        "summary": "Silas reaches across the dark; Pell's hand meets his briefly before she turns back to sleep.",
+        "narration": "Your hand moves before the words do. You reach across the dark — not far, just past the edge of your canvas, palm up, offered — and let it lie there between you.\n\nPell is quiet for a moment. Then her hand finds yours. Not a grip, not a press — just the weight of it, fingers settling, the way you'd rest your palm on a workbench to feel if the iron has cooled. Her hand is calloused at the base of every finger and warm from the bedroll, and she doesn't pull you toward her or move herself toward you. She just stays.\n\nA log shifts somewhere deep in the banked hearth. Huginn makes no sound from the yard.\n\nShe lets go after a while — unhurried, the way she does most things — and turns back onto her side. \"Before the light gets high,\" she says quietly. Not cold. Just true. The hunt is tomorrow and she intends to be ready for it, and this is how she holds both things at once without choosing between them.\n\nYou lie on your back in the dark, the forge still warm, the spear a shape against the wall. Sleep comes in pieces."
       }
     ],
     "lastTurn": {
-      "narration": "The coals are down to a slow red pulse. You can hear the river from here — faint, the way water sounds when the night has gone still around it.\n\n\"The short way,\" you say, looking up at the ceiling beams. \"I took it. Didn't know it was the short way at the time — I thought I was cutting across something that didn't need to be walked all the way through.\" A breath. \"The path behind me was gone when I turned around. Not overgrown. Gone.\"\n\nPell doesn't say anything. The silence means she's listening.\n\n\"Since then I've been finding that the places I end up — they tend to be places that needed someone there. Not me specifically. Just someone who can see a certain kind of thing.\" You turn your head toward her corner. She's on her side now, facing the wall or facing away, you can't quite tell in the low light. \"I don't have a destination. I have a direction. North, lately. The spear reads north.\" You pause. \"And here turned out to matter. So.\"\n\n\"That's not nothing,\" Pell says after a moment. Not consoling — just observational, the way she'd note that a blade had good temper. She shifts on her bedroll, and then she says it quietly: \"You?\"\n\nThe question sits in the warm dark. She's already given her own version. This is her asking what yours looks like when you say it plain.",
-      "sceneSummary": "Silas tells Pell about the short way and the vanished path — she listens, then turns the question back on him.",
+      "narration": "Your hand moves before the words do. You reach across the dark — not far, just past the edge of your canvas, palm up, offered — and let it lie there between you.\n\nPell is quiet for a moment. Then her hand finds yours. Not a grip, not a press — just the weight of it, fingers settling, the way you'd rest your palm on a workbench to feel if the iron has cooled. Her hand is calloused at the base of every finger and warm from the bedroll, and she doesn't pull you toward her or move herself toward you. She just stays.\n\nA log shifts somewhere deep in the banked hearth. Huginn makes no sound from the yard.\n\nShe lets go after a while — unhurried, the way she does most things — and turns back onto her side. \"Before the light gets high,\" she says quietly. Not cold. Just true. The hunt is tomorrow and she intends to be ready for it, and this is how she holds both things at once without choosing between them.\n\nYou lie on your back in the dark, the forge still warm, the spear a shape against the wall. Sleep comes in pieces.",
+      "sceneSummary": "Silas reaches across the dark; Pell's hand meets his briefly before she turns back to sleep.",
       "choices": [
         {
-          "label": "Answer plain — north matters, the work in between matters, and right now this room matters. No larger plan than that.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Sleep — let the night close, be ready before the light gets high",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "talk",
-            "honest"
+            "rest"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Answer with a question back — ask what she thinks a future looks like when the iron knows your hand.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
+          "label": "Lie awake a little longer — run Deathsense lightly through the spear one more time before you sleep, in case the saturation has settled and the north reads cleaner",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "talk",
-            "deflect",
-            "curious"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Say less than you know — still working it out, and leave it there.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Lie awake — use Order-Sense quietly on the forge itself, the room, let the pattern of the place settle into you before tomorrow",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "talk",
-            "guarded"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Don't answer in words — reach across the dark and let that be the answer.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Something is moving in the yard — Huginn shifts, a sound outside. Sit up and listen before you commit to sleep.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "intimate",
-            "nonverbal"
+            "scout",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         }
       ],
       "deeds": [],
@@ -568,32 +567,30 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Inside Pell's forge, Millbrook — hearth radiating residual warmth through the far wall, forge door open onto the dark south yard. Silas lies on the unfolded canvas near the hearth, boots and outer clothes off; Pell is on her bedroll in the back corner, boots aside, shifted onto her side.",
+        "setting": "Inside Pell's forge, Millbrook — hearth banked to slow red coals, warm and dim. Silas lies on the canvas near the hearth; Pell has turned back onto her side on her bedroll in the far corner.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "On her bedroll in the back corner, boots off, shifted onto her side — has just asked Silas 'you?' in return, waiting for his answer"
+            "state": "Turned onto her side, settled — hand withdrawn, face toward the wall, quiet"
           },
           {
             "name": "Huginn",
-            "state": "Still in the yard beyond the open door, oriented north, both eyes open — holding whatever he's attending to"
+            "state": "Still in the yard beyond the open door, oriented north, both eyes open — has not moved"
           }
         ],
         "objects": [
-          "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blade pointing away",
-          "Canvas bedroll — unfolded near the hearth, Silas lying on it",
-          "Silas's boots and folded clothes — set beside the pack",
+          "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blade catching a faint gleam from the coals",
+          "Canvas bedroll — Silas lying on it, boots and folded clothes set beside the pack",
           "Traveler's Pack — beside the canvas",
           "Workbench with two empty mugs",
-          "Banked forge hearth — low steady warmth through the far wall",
+          "Banked forge hearth — slow red pulse through the far wall",
           "Open forge door — dark yard beyond, Huginn visible at the edge"
         ],
         "threads": [
-          "Pell has asked Silas 'you?' — what does the future look like for him; the question is open",
-          "Huginn still oriented north and holding — whatever he's attending to has not resolved",
-          "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-          "Deathsense read more than one presence north — not tonight, signal blurred",
-          "Pell's remark about thinking about iron more than usual — no language yet for what she's reaching toward"
+          "Huginn still oriented north and holding — whatever he attends has not resolved",
+          "Hunt departs north gate before the light gets high — Pell, Corvin, Silas",
+          "Deathsense read more than one presence north — signal blurred; a cleaner read may be possible once the forge yard's saturation settles in deep night",
+          "Pell's hand met Silas's briefly before she turned away — something is there, held at arm's length for now"
         ]
       },
       "npcUpdates": [
@@ -601,53 +598,60 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Listened to Silas's account of the short way and the vanished path without interruption — offered 'that's not nothing' as plain assessment, then turned the question back on him",
+          "note": "Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once without choosing between them.",
           "learned": [
-            "Silas took a short way that erased the path behind him — he arrived in the valley through something he didn't fully understand",
-            "Silas has no destination, only a direction — north, lately; the spear reads that way",
-            "Silas frames his presence in places as: someone who can see a certain kind of thing, not a chosen one"
+            "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On her bedroll in the forge, boots off, waiting for Silas's answer to 'you?'"
+          "statusNote": "On her bedroll in the forge, settled for the night, hunt-ready for morning"
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness.",
+          "links": [
+            "millbrook",
+            "death-bound-spear"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet exchange in the dark before sleep — a few minutes only"
+        "why": "A quiet exchange in the dark — brief, unhurried, the night still mostly ahead"
       }
     },
     "sceneState": {
-      "setting": "Inside Pell's forge, Millbrook — hearth radiating residual warmth through the far wall, forge door open onto the dark south yard. Silas lies on the unfolded canvas near the hearth, boots and outer clothes off; Pell is on her bedroll in the back corner, boots aside, shifted onto her side.",
+      "setting": "Inside Pell's forge, Millbrook — hearth banked to slow red coals, warm and dim. Silas lies on the canvas near the hearth; Pell has turned back onto her side on her bedroll in the far corner.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "On her bedroll in the back corner, boots off, shifted onto her side — has just asked Silas 'you?' in return, waiting for"
+          "state": "Turned onto her side, settled — hand withdrawn, face toward the wall, quiet"
         },
         {
           "name": "Huginn",
-          "state": "Still in the yard beyond the open door, oriented north, both eyes open — holding whatever he's attending to"
+          "state": "Still in the yard beyond the open door, oriented north, both eyes open — has not moved"
         }
       ],
       "objects": [
         "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blad",
-        "Canvas bedroll — unfolded near the hearth, Silas lying on it",
-        "Silas's boots and folded clothes — set beside the pack",
+        "Canvas bedroll — Silas lying on it, boots and folded clothes set beside the pack",
         "Traveler's Pack — beside the canvas",
         "Workbench with two empty mugs",
-        "Banked forge hearth — low steady warmth through the far wall",
+        "Banked forge hearth — slow red pulse through the far wall",
         "Open forge door — dark yard beyond, Huginn visible at the edge"
       ],
       "threads": [
-        "Pell has asked Silas 'you?' — what does the future look like for him; the question is open",
-        "Huginn still oriented north and holding — whatever he's attending to has not resolved",
-        "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-        "Deathsense read more than one presence north — not tonight, signal blurred",
-        "Pell's remark about thinking about iron more than usual — no language yet for what she's reaching toward"
+        "Huginn still oriented north and holding — whatever he attends has not resolved",
+        "Hunt departs north gate before the light gets high — Pell, Corvin, Silas",
+        "Deathsense read more than one presence north — signal blurred; a cleaner read may be possible once the forge yard's saturation settles in deep night",
+        "Pell's hand met Silas's briefly before she turned away — something is there, held at arm's length for now"
       ]
     }
   },
@@ -789,7 +793,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Received the honest answer — the spear is a beginning, its nature answered by use. Filed it accurately. Confirmed north gate plan without ceremony.",
         "[d1] Gave her honest read of the ceremony — the iron waiting for her hand was real and she has no frame for it, but she filed it accurately and stood by it.",
         "[d1] Received Silas's offer of mentorship — held it at arm's length first, then agreed: after the hunt, at the forge. Willing to see whether what the iron felt in her is real in dayligh",
         "[d1] Confirmed north gate plan with two words, set her mug down, and let the night close without crowding it — neither warmer nor cooler than the offer asked for",
@@ -798,17 +801,18 @@
         "[d1] Invited Silas into the forge for the night without ceremony — named the canvas behind the bellows and said plainly she didn't mean alone.",
         "[d1] Offered the forge floor without ceremony — canvas behind the bellows, dry and out of the wind. Settled to her own bedroll without lingering on it.",
         "[d1] Settled quietly into the night; gave a plain and certain answer about keeping the forge, then something quieter about the iron — no language yet for what she means. Turned the ques",
-        "[d1] Listened to Silas's account of the short way and the vanished path without interruption — offered 'that's not nothing' as plain assessment, then turned the question back on him"
+        "[d1] Listened to Silas's account of the short way and the vanished path without interruption — offered 'that's not nothing' as plain assessment, then turned the question back on him",
+        "[d1] Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once w"
       ],
       "knownFacts": [
-        "Silas sees something in her response to the iron that he calls a gift — and intends to show her what it might be",
         "She is open to being taught, but on her terms: evidence first, daylight second, fire-side third",
         "The spear's thread to Huginn is now present and mutual — she saw the coals catch the blade at the wrong angle and filed it.",
         "Silas uses abilities that she can observe even when he doesn't announce them",
         "Intends to keep the forge; also reaching toward something alongside it, connected to how the iron responded to her hand — no name for it yet",
         "Silas took a short way that erased the path behind him — he arrived in the valley through something he didn't fully understand",
         "Silas has no destination, only a direction — north, lately; the spear reads that way",
-        "Silas frames his presence in places as: someone who can see a certain kind of thing, not a chosen one"
+        "Silas frames his presence in places as: someone who can see a certain kind of thing, not a chosen one",
+        "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs"
       ],
       "skillsObserved": [
         "instinctive reading of when to step in",
@@ -819,7 +823,7 @@
         "attentive observation — caught an unseen working"
       ],
       "status": "active",
-      "statusNote": "On her bedroll in the forge, boots off, waiting for Silas's answer to 'you?'",
+      "statusNote": "On her bedroll in the forge, settled for the night, hunt-ready for morning",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1237,7 +1241,8 @@
           "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after",
           "[d1] Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the de",
           "[d1] Has agreed to meet Silas after the hunt to explore what the iron's response to her hand might mean — open to being taught, on her own terms: evidence first, daylight before fire.",
-          "[d1] Pell intends to keep the forge long-term; she is also reaching toward something else connected to the iron's response to her hand — no language for it yet, but the thought is present and deliberate."
+          "[d1] Pell intends to keep the forge long-term; she is also reaching toward something else connected to the iron's response to her hand — no language for it yet, but the thought is present and deliberate.",
+          "[d1] Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness."
         ],
         "links": [
           "millbrook",
@@ -1357,11 +1362,11 @@
     }
   },
   "tendencies": {
-    "strategic": 29.703568242378953,
-    "cerebral": 13.32325095047193,
-    "social": 42.706450727695646,
-    "generous": 9.424325553034494,
-    "cautious": 14.288722636874486
+    "strategic": 29.55505040116706,
+    "cerebral": 13.25663469571957,
+    "social": 42.49291847405717,
+    "generous": 9.377203925269322,
+    "cautious": 14.217279023690113
   },
   "aptitudes": [
     "strategist",
@@ -1369,7 +1374,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 67,
+  "actionCount": 68,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1415,8 +1420,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783970916405,
-  "rev": 108,
+  "updatedAt": 1783971071074,
+  "rev": 109,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

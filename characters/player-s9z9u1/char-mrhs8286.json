@@ -18,15 +18,15 @@
   "skills": {},
   "abilities": [
     {
-      "abilityId": "numen_sense",
-      "level": 1
-    },
-    {
-      "abilityId": "lightsense",
-      "level": 1
-    },
-    {
       "abilityId": "order_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "deathsense",
+      "level": 1
+    },
+    {
+      "abilityId": "palework",
       "level": 1
     }
   ],
@@ -929,7 +929,7 @@
     "lastCanonWorldDay": 13
   },
   "domains": {
-    "primary": "wright",
+    "primary": "ashwarden",
     "secondary": "cogitant",
     "tertiary": "figurist"
   },
@@ -1216,8 +1216,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783906501949,
-  "rev": 79,
+  "updatedAt": 1783907289215,
+  "rev": 80,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1313,5 +1313,35 @@
   "customAbilities": {},
   "precursorAccess": [],
   "forkChoices": {},
-  "backfillVersion": 1
+  "backfillVersion": 1,
+  "corrections": [
+    {
+      "at": 1783907289215,
+      "by": "aevi-manual",
+      "worldDay": null,
+      "kind": "repair",
+      "why": "SNG-068/085 — creation committed before confirm: the prologue derived his domains and abilities from paths he played, not from the character he chose. He is a NECROMANCER; the game made him a wright-domain character with Blazeborn/Lattice/Numinous abilities, and his breadth cap (3 at level 2) was fully spent on them, locking him out of his own people's crafts entirely.",
+      "changes": [
+        {
+          "field": "domains.primary",
+          "from": "wright",
+          "to": "ashwarden",
+          "note": "the death pole. ORIGIN stays 'wright' — he is a Wright who FINISHED something and was nearly exiled for it, and now practices the craft of ending. That contradiction is the best thing about him and it is not a bug."
+        },
+        {
+          "field": "abilities",
+          "removed": [
+            "lightsense (blazeborn)",
+            "numen_sense (numinous)"
+          ],
+          "added": [
+            "deathsense (ashwarden, L1)",
+            "palework (ashwarden, L2)"
+          ],
+          "note": "NET ZERO — 3 before, 3 after. A repair, not an advance. order_sense KEPT at Erik's request; it is 4 steps from his secondary (penalized, legal) and it buys THE MEASURED RUIN (wither + order_sense): 'decay applied with a designer's precision — this beam and not that one'. That is a smart necromancer."
+        }
+      ],
+      "notGranted": "No xp, no levels, no skill points, no items. His 1 skill point is untouched — he spends it himself."
+    }
+  ]
 }

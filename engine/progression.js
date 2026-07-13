@@ -150,6 +150,9 @@ export function effectiveLevelReq(ab, character, rules) {
  *  character has crystallized/picked domains; legacy (no domains) stays open. Braid combinations
  *  and artifact grants never route through learnAbility, so those crossings are unaffected. */
 export function domainGateFor(ab, character, traditionIndex) {
+  // SNG-089: an Accord craft is FREELY ACCESSED — ungated by origin/domain/ring-distance. It still
+  // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
+  if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
   if (!traditionIndex || !character?.domains?.primary) return { allowed: true, penalty: 1, band: "open" };
   return domainAccess(ab, ab?.levelReq || 1, character.domains, traditionIndex);
 }
@@ -159,7 +162,8 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
   const ab = catalog[abilityId];
   if (!ab) return { ok: false, why: "unknown ability" };
-  const req = effectiveLevelReq(ab, character, rules);
+  // SNG-089: an Accord craft bypasses the tradition gate entirely — anyone may learn it (still 1 point).
+  const req = ab.accord ? (ab.levelReq || 1) : effectiveLevelReq(ab, character, rules);
   if (req === null) return { ok: false, why: "wrong tradition" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
   // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.
@@ -267,6 +271,19 @@ export function applyBacklash(character, rules) {
 
 /** Ability detail block for the GM: exactly what each rank grants, what it cannot
  *  do, what it's not for — plus earned techniques. This is the GM's law for powers. */
+/** SNG-089: how a craft harms, in words the GM can narrate to. "Can fight" ≠ "can harm" — an
+ *  incapacitating craft STOPS a threat without wounding it; a `none` craft (Stillhold peace-working)
+ *  wounds nothing at all. Feeding this stops the GM inventing a wound a craft cannot cause. */
+export function harmRungGloss(rung) {
+  switch (rung) {
+    case "lethal": return "this craft CAN end a life — in its own idiom (never a generic wound); narrate a real death when the fiction earns it";
+    case "damaging": return "this craft WOUNDS but does not slay — a weakened thing is still a thing; it hurts, it does not kill";
+    case "incapacitating": return "this craft STOPS a threat; it does not wound it — bind, hold, turn aside, unmake the footing; never a cut or a break";
+    case "none": return "this craft HARMS NOTHING — it works through peace, making, or reading; NEVER invent a wound from it. If the foe cannot be turned this way, they run, borrow, or take up a weapon like anyone else";
+    default: return String(rung);
+  }
+}
+
 export function abilitiesForGM(character, catalog, branchForks = null) {
   const lines = [];
   for (const owned of character.abilities || []) {
@@ -276,7 +293,8 @@ export function abilitiesForGM(character, catalog, branchForks = null) {
     const rank = (branchForks && rankExpression(character, ab, owned.level, branchForks)) || ab.tree?.find(t => t.rank === owned.level);
     lines.push(`### ${ab.name} — rank ${owned.level}${rank ? ` "${rank.name}"${rank.forked ? " (specialized fork)" : ""}` : ""} (${ab.energyCost} energy)` +
       (rank ? `\nCAN: ${rank.grants}\nCANNOT (at this rank): ${rank.cannot}` : `\n${ab.description}`) +
-      (ab.notFor ? `\nNOT FOR: ${ab.notFor}` : ""));
+      (ab.notFor ? `\nNOT FOR: ${ab.notFor}` : "") +
+      (ab.harmRung ? `\nHARM: ${harmRungGloss(ab.harmRung)}` : ""));
   }
   for (const d of character.discoveries || []) {
     lines.push(`### ✦ Discovered technique: ${d.name}\n${d.description} (combines: ${d.abilities.join(" + ")}; earned through play — no novelty penalty, +bonus)`);

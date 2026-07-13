@@ -69,6 +69,43 @@ for (const pack of PACKS) {
   }
 }
 
+// (3b) SNG-089 — THE notFor LAW + harm-rung validity. A `notFor` may constrain HOW an ability serves
+// a need; it may NEVER forbid the need itself. An ability tagged FIGHT whose notFor forbids harm/
+// fighting outright is the palework-boar bug (the GM reads the prose, so the prose wins). Patterns are
+// CONSERVATIVE — clear need-negations only, never degree-caps ("does not slay/smite" = a legal cap) —
+// so a legitimate cap can never false-fail the build. And a harmRung, when set, must be a real rung.
+{
+  const HARM_RUNGS = new Set(["lethal", "damaging", "incapacitating", "none"]);
+  // "forbid the need" phrasings that are ILLEGAL on a FIGHT-tagged craft (not degree-caps):
+  const forbidsHarm = nf => {
+    const s = String(nf || "").toLowerCase();
+    return /\bcannot\s+(be\s+used\s+to\s+)?(fight|harm|hurt|injure|damage)\b/.test(s)
+      || /\b(cannot|will\s+not|does\s+not)\s+(be\s+used\s+)?(on|against)\s+(the\s+)?living\b/.test(s)
+      || /\bforce\s+(the\s+living|.{0,15}?)\bto\s+die\b/.test(s)
+      || /\b(cannot|does\s+not)\s+help\s+you\s+(escape|flee|get\s+away)\b/.test(s);
+  };
+  const abFiles = (rj("content/packs/core/manifest.json").provides?.abilities) || [];
+  let total = 0;
+  for (const rel of abFiles) {
+    let doc; try { doc = rj(`content/packs/core/${rel}`); } catch { continue; }
+    const abs = Array.isArray(doc) ? doc : Array.isArray(doc.abilities) ? doc.abilities : [doc];
+    for (const a of abs) {
+      if (!a || !a.id) continue;
+      total++;
+      const cts = (a.challengeTypes || []).map(String);
+      if (cts.includes("FIGHT")) {
+        check(`ability "${a.id}" FIGHT + notFor obeys the notFor LAW`, !forbidsHarm(a.notFor),
+          `notFor forbids the NEED, not just the HOW: "${String(a.notFor || "").slice(0, 80)}" — a FIGHT craft may cap HOW it harms, never forbid harm itself (SNG-089)`);
+      }
+      if (a.harmRung != null) {
+        check(`ability "${a.id}" harmRung "${a.harmRung}" is a real rung`, HARM_RUNGS.has(a.harmRung),
+          "must be lethal | damaging | incapacitating | none");
+      }
+    }
+  }
+  ok(`the notFor LAW checked ${total} abilities across ${abFiles.length} files`);
+}
+
 // (4) location connectivity: dangling connections, one-way edges, unreachable locations
 {
   const locDir = "content/packs/valley/locations";

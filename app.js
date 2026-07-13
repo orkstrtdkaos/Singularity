@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.47";
+const APP_VERSION = "1.8.48";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1005,6 +1005,8 @@ function domainCircleSVG(idx, { primary = null, secondary = null, tertiary = nul
 
 /** SNG-055 domain verdict for an ability given THIS character's chosen domains. */
 function domainVerdict(ability) {
+  // SNG-089: Accord crafts are ungated by origin/domain — offered (and learnable) to anyone at base cost.
+  if (ability?.accord) return { allowed: true, penalty: 1, band: "accord" };
   return domainAccess(ability, ability?.levelReq || 1, character?.domains, CONTENT.traditionIndex);
 }
 

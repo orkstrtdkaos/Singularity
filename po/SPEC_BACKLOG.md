@@ -1352,3 +1352,30 @@ return i >= recentTurns.length - 3 && t.narration
 **Erik test:** "Say something distinctive — flirt, make a promise, name someone — then, three turns later, ask the GM about it. Verify it KNOWS what you said, in your words, and can quote it back."
 
 *Aevi's note: this is the single most consequential bug in the project. The world remembers everything — facts, codex, places, chronicle, the shared canon across characters — and forgets the player. It has been listening to itself the entire time.*
+---
+
+## SNG-082 — The world map: pan/zoom + real terrain ⭐
+
+**Erik, 2026-07-12:** *"this is really awesome, especially if the background was an actual map with terrestrial features... but I can't move the map around or zoom in."* 🔧 CCode. **Terrain content: DONE (Aevi).**
+
+### A. Pan / zoom 🔴 (PWSV: world-map zoom/pan refs = **0**)
+The skill graph got zoom (SNG-054 P0). **The world map has none** — and it now holds **92 locations across 24 regions**, so it is unusable without it. Wheel/pinch zoom · drag to pan · fit-to-view · reset · centre-on-me. **Small; do it with the terrain.**
+
+### B. Real terrain — **`content/packs/core/rules/regions.json` is AUTHORED and at origin**
+25 regions, each with **`terrain` · `elevation` · `palette{base,accent,edge}` · `features[]` · `water[]` · `visualIdentity`**.
+**Deliberately data-driven, NOT an authored base image** — terrain is *derived from dispositional identity*, so a BATCH-9-generated location automatically inherits the right ground. An authored map picture would freeze the world; this one grows with it.
+
+**Render guidance (in the file):**
+- **Region shape:** hull/voronoi from each region's locations' `map.x/y`, filled with its palette. **Edges may be soft — dispositional space has soft edges.**
+- **Water:** the **Echo River** (valley) and **THE SEA** (the Feeling Coast — the world's only ocean) are the two great water landmarks.
+- **Roads = `connections`.** The **Axis Gate's twelve roads are the map's spine** — draw them heaviest. Every road on the map ends at the Crossing.
+- **Elevation → relief/hatching.** The Ascent is the highest point on the map; **the Umbral Depths are BELOW it** — render as a cutaway or an under-region with the Slow Stair as the only way down.
+
+**⚠️ Three regions must LOOK WRONG, deliberately — do not clean them up, the failure IS the content:**
+- **the_pattern_reach** — resists mapping (non-Euclidean; the cartographer gave up).
+- **the_veiled_reach** — the map is *lying* (doubled features, an outline that doesn't quite close).
+- **the_numinous_reach** — the cartography *loses confidence* (uncertain edges).
+
+**Four borders are EXPANDING** and should show it if cheap: **the Blaze** (eating the land, visibly), **the Churn Edge** (creeping), **the Scouring**, **the Ceaseless**.
+
+**Erik test:** "Open the map — zoom, pan, and fit. Verify the Valley is green and worked, the Radiant Wastes are a blinding glass scar that looks like it's growing, the Quickwood's cities are indistinguishable from its forest, and the twelve roads of the Axis Gate are the spine of the world."

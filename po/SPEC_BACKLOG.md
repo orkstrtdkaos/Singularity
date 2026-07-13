@@ -1508,3 +1508,35 @@ Erik wrote: *"necromancer mage type... slight of frame... very smart... likes Or
 **Erik test:** "Type 'a girl who talks to animals and cannot lie' — verify the game answers with a people, a reason, a cost, and a closed door, and lets you change all of it."
 
 *Note: the answer that inspired this was written by Aevi in chat. **The game should be able to give it.** That is the point.*
+---
+
+## SNG-087 — Cross-device DISCOVERY: a new device cannot find your characters 🔴
+
+**Erik, 2026-07-12:** *"will I be able to play Silas on my phone? without importing?"* **Today: NO.** 🔧 CCode. Aevi PO. **This is the headline promise of BATCH-7 P2 and it is half-built.**
+
+### PWSV (HEAD v1.8.42)
+**Sync CAN pull** — `sync.js` exports `ghList` · `fetchRemoteCharacter` · `resolveSaveConflict` · `pushCharacterGuarded`; `app.js` has `syncPullCharacter`.
+**But it only REFRESHES a character the device ALREADY HAS:**
+```js
+// app.js:804 — the ONLY call site
+const pull = await syncPullCharacter(loadCharacter(btn.dataset.play));
+```
+And the roster (`listPlayers()` / `listCharacters()`, from `state.js`) reads **localStorage**, not the repo.
+
+**→ On a fresh phone: localStorage is empty → the roster is empty → Silas does not appear at all. The device does not know he exists.**
+**Cross-device works for a device that already knows the character. It does not work for a NEW device — which is the entire point of cross-device.**
+
+### Compounding: the duplicate-Erik profiles are STILL LIVE
+`players/player-54seyk` (2 characters) and `players/player-s9z9u1` (5, incl. Silas) — **both named "Erik."** Even with discovery, a new device could not tell which Erik it is. **SNG-045 has dedup code but the origin profiles were never merged.** *(Reconcile them — union the characters, keep one canonical key, redirect the other.)*
+
+### Fix — every piece already exists; wire the flow
+1. **On a device with sync configured and no local data: DISCOVER.**
+   `ghList("players/")` → show the real people. Player picks (or is auto-resolved by `findProfileByName`). Then `ghList("characters/{playerKey}/")` → **show their characters, from the repo.**
+2. **Adopt on demand.** `adoptRemoteCharacter()` already exists — pull the chosen character to local and play. **No export/import. No file shuffling.**
+3. **Refresh on every open**, not just on first adopt — with the **stale-local-overwrite guard** (`resolveSaveConflict`) intact in BOTH directions. *(Non-negotiable: never let an older save clobber a fresher one.)*
+4. **Merge the duplicate Eriks at origin** (SNG-045 Part A) so identity is unambiguous.
+5. **Sync config on a new device is the only setup.** Owner/repo/PAT in Settings → **everything else must follow automatically.** *If a player has to export and import a file, cross-device is not a feature; it is a chore with extra steps.*
+
+**Erik test:** "Open the game on your phone. Enter the sync settings and nothing else. Verify Silas is simply THERE — with the repaired Ashwarden domains — and that playing him on the phone and then reopening on the desktop shows the phone's latest."
+
+*This is the feature Erik asked for in BATCH-7 and believed he had. He is one setup screen away from it, and the last mile was never built.*

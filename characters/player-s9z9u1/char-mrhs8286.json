@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 225,
+  "xp": 230,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -36,13 +36,13 @@
     "chaos_order": 0.04278749999999999,
     "mechanical_spiritual": 0.07991062500000001,
     "concrete_abstract": -0.0522875,
-    "death_life": -0.025
+    "death_life": -0.03875
   },
   "attunement": 3,
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 110,
+  "energy": 108,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -508,50 +508,39 @@
         "player": "Sleep. The vigil is Huginn's; you've confirmed it's holding. Close your eyes.",
         "summary": "Silas sleeps through the last of the night; Pell and Corvin are already moving in the pre-dawn yard.",
         "narration": "You close your eyes.\n\nThe hearth pulses slow and red through your eyelids. The forge smells of iron and char and the faint lanolin-ghost of the oiled leather binding still curing on the spear shaft. Huginn makes no sound from the yard — just the occasional soft weight-shift, the click of a talon on stone at his fixed interval. You let that be enough. The pattern holds. Nothing comes.\n\nSleep arrives without ceremony, the way it does when the body has earned it: a long day of knife-work and rune-pressing and walking east and walking back, and now the canvas and the warm dark and the even sound of Pell's breathing from across the room. You don't dream, or if you do, nothing of it stays. Just the slow red pulse and the smell of the fire going down.\n\nWhen you surface it is still dark, but a different dark — thinner, the kind that has light somewhere behind it. Huginn has moved: he's on the door-lintel now, looking in, and the yard beyond him is the color of cold ash. Pell's bedroll is empty. The assembled spear leans where you left it. Somewhere outside, faint and close, boots on hard ground — two sets, then three. A voice, low: Corvin, asking something about the north path. Pell answering in two syllables. The hunt is ready."
+      },
+      {
+        "player": "Pause at the door-lintel — check in with Huginn before stepping out. See if his read of north has sharpened overnight.",
+        "summary": "Silas checks in with Huginn at the forge door — north holds two or three presences, patterned and still. Hunt departs.",
+        "narration": "You sit up from the canvas, the forge interior grey and still around you. The hearth has gone to ash-white coals, barely warm. You pull on your shirt, lace your boots, and cross the few steps to the door-lintel where Huginn sits, close enough to touch.\n\nYou open Order-Sense — a shallow cast, just enough to read what he's holding. The forge works against you slightly: decades of iron-work, the banked char, the particular density of a space that has processed so much metal and heat, all of it layering a low static over anything finer. You push gently past it.\n\nHuginn's vigil has the same grain as last night — patterned, intervals intact, nothing urgent. But you're closer now, and the pattern yields one thing more: whatever cycles north is not a single presence. Two sources, maybe three, each with its own cadence, loosely synchronized the way animals sharing territory will adjust to each other without meaning to. Alive. Not approaching. Not retreating. Holding ground.\n\nHuginn turns his head and regards you with the calm eye. He does not croak. His stillness is a plain answer: *still there, still fine, your call.*\n\nIn the yard behind you, Pell says something low to Corvin. A boot scrapes gravel. The light is the color of river-water, thin and honest, and it is time to go."
       }
     ],
     "lastTurn": {
-      "narration": "You close your eyes.\n\nThe hearth pulses slow and red through your eyelids. The forge smells of iron and char and the faint lanolin-ghost of the oiled leather binding still curing on the spear shaft. Huginn makes no sound from the yard — just the occasional soft weight-shift, the click of a talon on stone at his fixed interval. You let that be enough. The pattern holds. Nothing comes.\n\nSleep arrives without ceremony, the way it does when the body has earned it: a long day of knife-work and rune-pressing and walking east and walking back, and now the canvas and the warm dark and the even sound of Pell's breathing from across the room. You don't dream, or if you do, nothing of it stays. Just the slow red pulse and the smell of the fire going down.\n\nWhen you surface it is still dark, but a different dark — thinner, the kind that has light somewhere behind it. Huginn has moved: he's on the door-lintel now, looking in, and the yard beyond him is the color of cold ash. Pell's bedroll is empty. The assembled spear leans where you left it. Somewhere outside, faint and close, boots on hard ground — two sets, then three. A voice, low: Corvin, asking something about the north path. Pell answering in two syllables. The hunt is ready.",
-      "sceneSummary": "Silas sleeps through the last of the night; Pell and Corvin are already moving in the pre-dawn yard.",
+      "narration": "You sit up from the canvas, the forge interior grey and still around you. The hearth has gone to ash-white coals, barely warm. You pull on your shirt, lace your boots, and cross the few steps to the door-lintel where Huginn sits, close enough to touch.\n\nYou open Order-Sense — a shallow cast, just enough to read what he's holding. The forge works against you slightly: decades of iron-work, the banked char, the particular density of a space that has processed so much metal and heat, all of it layering a low static over anything finer. You push gently past it.\n\nHuginn's vigil has the same grain as last night — patterned, intervals intact, nothing urgent. But you're closer now, and the pattern yields one thing more: whatever cycles north is not a single presence. Two sources, maybe three, each with its own cadence, loosely synchronized the way animals sharing territory will adjust to each other without meaning to. Alive. Not approaching. Not retreating. Holding ground.\n\nHuginn turns his head and regards you with the calm eye. He does not croak. His stillness is a plain answer: *still there, still fine, your call.*\n\nIn the yard behind you, Pell says something low to Corvin. A boot scrapes gravel. The light is the color of river-water, thin and honest, and it is time to go.",
+      "sceneSummary": "Silas checks in with Huginn at the forge door — north holds two or three presences, patterned and still. Hunt departs.",
       "choices": [
         {
-          "label": "Rise and dress quickly — join Pell and Corvin in the yard, spear in hand, ready to go",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Step into the yard — tell Pell and Corvin what you read, plainly: two or three presences north, patterned, holding ground.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "ready",
-            "join"
+            "inform",
+            "coordinate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Pause at the door-lintel — check in with Huginn before stepping out. See if his read of north has sharpened overnight.",
+          "label": "Step into the yard and say nothing yet — keep the read to yourself, see what the field shows you once you're outside the forge's saturation.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Take a moment to eat something from the Preserved Trail Parcel before the hunt — a cold mouthful, water from the waterskin, the body fed before it's asked to work",
-          "attribute": "practical",
-          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "prepare",
+            "scout",
             "careful"
           ],
           "abilityId": null,
@@ -559,14 +548,27 @@
           "trivial": true
         },
         {
-          "label": "Step out and say a plain good morning to both of them — read the yard, the light, the mood of the party before you set off",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Take one moment to eat a mouthful from the Preserved Trail Parcel before you move — you've been burning since yesterday morning.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "connect"
+            "prepare"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Shoulder the Assembled Mid-Weight Spear, whistle Huginn off the lintel, and lead out — let the pace set itself once you clear the north gate.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "move",
+            "lead"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -575,102 +577,132 @@
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": 3,
-        "energy": 40
+        "health": 0,
+        "energy": 0,
+        "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Hunt party assembled at the forge, pre-dawn — Silas has confirmed two or three presences north, patterned and holding. Departing at first light."
+        }
+      ],
       "scene": {
-        "setting": "Inside Pell's forge, Millbrook — pre-dawn, hearth coaled to near-dark, thin early light beginning in the yard beyond the open door. Huginn sits on the door-lintel looking in.",
+        "setting": "Pell's forge doorway, Millbrook — pre-dawn, the interior behind Silas coaled nearly to ash-white, thin early light filling the yard beyond. Huginn sits on the lintel at eye level.",
         "npcsPresent": [
           {
+            "name": "Huginn",
+            "state": "On the door-lintel, eye-level with Silas, calm — vigil held, turning his head toward the yard"
+          },
+          {
             "name": "Pell",
-            "state": "In the yard — bedroll vacated, boots on, answering Corvin in two words about the north path"
+            "state": "In the yard, speaking low to Corvin, boots on, ready to move"
           },
           {
             "name": "Corvin",
-            "state": "In the yard — asking about the north path, voice low, ready to move"
-          },
-          {
-            "name": "Huginn",
-            "state": "On the door-lintel, oriented inward, watching Silas surface from sleep"
+            "state": "In the yard, boot scraping gravel, answering Pell in one word — ready"
           }
         ],
         "objects": [
-          "Assembled Mid-Weight Spear — leaned against the wall beside the forge door",
-          "Canvas bedroll — Silas's, still laid out near the hearth",
-          "Traveler's Pack — beside the canvas",
-          "Pell's empty bedroll — vacated, folded back",
+          "Assembled Mid-Weight Spear — leaned against the wall beside the door",
+          "Traveler's Pack — beside the vacated canvas",
+          "Canvas bedroll — Silas's, still laid out near the dead hearth",
+          "Pell's empty bedroll — folded back",
           "Workbench with two empty mugs",
-          "Banked forge hearth — nearly coaled out, faint warmth"
+          "Banked forge hearth — coaled to ash-white, barely warm"
         ],
         "threads": [
-          "Hunt departs north gate before the light gets high — party assembled in the yard",
-          "Something north cycles at a steady interval — a cleaner read may be possible in the field",
-          "Deathsense read more than one presence north — finer resolution available once outside the forge yard's saturation"
+          "Two or three presences north — patterned, holding ground, not approaching; a cleaner read likely once outside the forge's saturation",
+          "Hunt departs north gate before the light gets high — party assembled",
+          "Pell and Silas have a named arrangement at the forge after the hunt"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Order-Sense at the lintel confirmed the vigil held overnight — north now reads as two or three presences, each with its own cadence, loosely synchronized. Alive, holding ground. Huginn's stillness answered plainly.",
+          "learned": [
+            "North holds two or three distinct presences — patterned, alive, not approaching or retreating, loosely synchronized like animals sharing territory"
+          ],
+          "skillsObserved": [
+            "maintained vigil through the night without alarm"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the forge door-lintel, pre-dawn — vigil complete, hunt about to depart"
+        },
+        {
+          "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Bedroll vacated before Silas woke — already in the yard, boots on, talking to Corvin about the north path. Ready.",
-          "statusNote": "In the forge yard, pre-dawn — hunt-ready, waiting on Silas.",
-          "status": "active"
+          "note": "Vacated the forge before Silas woke — already in the yard with Corvin, speaking low about the north path. Ready to move.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the forge yard, pre-dawn — hunt-ready, waiting on Silas to step out"
         },
         {
           "op": "update",
           "npcId": "corvin",
           "name": "Corvin",
-          "note": "Arrived in the yard before first light — asking Pell about the north path. Kept his word.",
-          "statusNote": "In the forge yard, pre-dawn — at the north gate ask, ready to move.",
-          "status": "active"
+          "note": "Present in the yard before first light as promised — answering Pell, ready to move north.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the forge yard, pre-dawn — kept his word, ready for the hunt"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "Order-Sense at the forge lintel (World-day 14 pre-dawn): north now reads as two or three distinct presences — each with its own cadence, loosely synchronized, alive, holding ground. Not approaching. The forge's iron-saturation still blurs fine resolution; a cleaner read expected in open field.",
+          "links": [
+            "disputed-zone",
+            "huginn",
+            "aldric-provisioning-deal",
+            "corvin",
+            "pell"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 7,
-        "why": "Silas slept through the remainder of the night — from deep night after the death-binding to pre-dawn, roughly seven hours."
-      },
-      "placeUpdates": [
-        {
-          "note": "Silas slept a full night in the forge interior — canvas near the hearth, undisturbed. The hearth has coaled nearly to dark by pre-dawn.",
-          "subPlace": {
-            "name": "Pell's Forge — Interior",
-            "note": "Pre-dawn: hearth nearly out, bedrolls vacated, hunt party assembling in the yard.",
-            "visited": true
-          }
-        }
-      ]
+        "hoursPassed": 0.25,
+        "why": "a quick check-in at the lintel before stepping into the yard — barely a beat"
+      }
     },
     "sceneState": {
-      "setting": "Inside Pell's forge, Millbrook — pre-dawn, hearth coaled to near-dark, thin early light beginning in the yard beyond the open door. Huginn sits on the door-lintel looking in.",
+      "setting": "Pell's forge doorway, Millbrook — pre-dawn, the interior behind Silas coaled nearly to ash-white, thin early light filling the yard beyond. Huginn sits on the lintel at eye level.",
       "npcsPresent": [
         {
+          "name": "Huginn",
+          "state": "On the door-lintel, eye-level with Silas, calm — vigil held, turning his head toward the yard"
+        },
+        {
           "name": "Pell",
-          "state": "In the yard — bedroll vacated, boots on, answering Corvin in two words about the north path"
+          "state": "In the yard, speaking low to Corvin, boots on, ready to move"
         },
         {
           "name": "Corvin",
-          "state": "In the yard — asking about the north path, voice low, ready to move"
-        },
-        {
-          "name": "Huginn",
-          "state": "On the door-lintel, oriented inward, watching Silas surface from sleep"
+          "state": "In the yard, boot scraping gravel, answering Pell in one word — ready"
         }
       ],
       "objects": [
-        "Assembled Mid-Weight Spear — leaned against the wall beside the forge door",
-        "Canvas bedroll — Silas's, still laid out near the hearth",
-        "Traveler's Pack — beside the canvas",
-        "Pell's empty bedroll — vacated, folded back",
+        "Assembled Mid-Weight Spear — leaned against the wall beside the door",
+        "Traveler's Pack — beside the vacated canvas",
+        "Canvas bedroll — Silas's, still laid out near the dead hearth",
+        "Pell's empty bedroll — folded back",
         "Workbench with two empty mugs",
-        "Banked forge hearth — nearly coaled out, faint warmth"
+        "Banked forge hearth — coaled to ash-white, barely warm"
       ],
       "threads": [
-        "Hunt departs north gate before the light gets high — party assembled in the yard",
-        "Something north cycles at a steady interval — a cleaner read may be possible in the field",
-        "Deathsense read more than one presence north — finer resolution available once outside the forge yard's saturation"
+        "Two or three presences north — patterned, holding ground, not approaching; a cleaner read likely once outside the forge's saturation",
+        "Hunt departs north gate before the light gets high — party assembled",
+        "Pell and Silas have a named arrangement at the forge after the hunt"
       ]
     }
   },
@@ -697,14 +729,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north.",
         "Two ash shafts acquired from Mara Wells — one on smokehouse account, one paid. Rune-craft materials in hand. Whetstone for Pell sourced. Next step: find Corvin in the east furlong.",
         "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong.",
         "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling.",
         "Modified light spear-tip offered to Corvin — hunt party one conversation from being formally assembled. Arrangement with Corvin not yet sealed.",
         "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin.",
         "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning.",
-        "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light."
+        "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light.",
+        "Hunt party assembled at the forge, pre-dawn — Silas has confirmed two or three presences north, patterned and holding. Departing at first light."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -812,7 +844,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Confirmed north gate plan with two words, set her mug down, and let the night close without crowding it — neither warmer nor cooler than the offer asked for",
         "[d1] Watched the tightening of the Huginn-thread without intervention — logged it accurately, said 'Right. Morning, then.' and let the night close.",
         "[d1] Noticed Silas using Deathsense through the spear in the dark yard and named it plainly — 'you're doing something else'",
         "[d1] Invited Silas into the forge for the night without ceremony — named the canvas behind the bellows and said plainly she didn't mean alone.",
@@ -821,7 +852,8 @@
         "[d1] Listened to Silas's account of the short way and the vanished path without interruption — offered 'that's not nothing' as plain assessment, then turned the question back on him",
         "[d1] Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once w",
         "[d1] Sleeping — undisturbed by Silas's quiet working attempt",
-        "[d1] Bedroll vacated before Silas woke — already in the yard, boots on, talking to Corvin about the north path. Ready."
+        "[d1] Bedroll vacated before Silas woke — already in the yard, boots on, talking to Corvin about the north path. Ready.",
+        "[d1] Vacated the forge before Silas woke — already in the yard with Corvin, speaking low about the north path. Ready to move."
       ],
       "knownFacts": [
         "She is open to being taught, but on her terms: evidence first, daylight second, fire-side third",
@@ -842,7 +874,7 @@
         "attentive observation — caught an unseen working"
       ],
       "status": "active",
-      "statusNote": "In the forge yard, pre-dawn — hunt-ready, waiting on Silas.",
+      "statusNote": "In the forge yard, pre-dawn — hunt-ready, waiting on Silas to step out",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -910,7 +942,8 @@
         "[d1] Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again.",
         "[d1] Walking ahead with careful disregard for the exchange between Silas and Pell.",
         "[d1] Glanced back once, filed it as not his business, lengthened his stride.",
-        "[d1] Arrived in the yard before first light — asking Pell about the north path. Kept his word."
+        "[d1] Arrived in the yard before first light — asking Pell about the north path. Kept his word.",
+        "[d1] Present in the yard before first light as promised — answering Pell, ready to move north."
       ],
       "knownFacts": [
         "Works the east furlong alone",
@@ -931,7 +964,7 @@
         "practical acceptance"
       ],
       "status": "active",
-      "statusNote": "In the forge yard, pre-dawn — at the north gate ask, ready to move.",
+      "statusNote": "In the forge yard, pre-dawn — kept his word, ready for the hunt",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1135,7 +1168,8 @@
           "[d1] Order-Sense reads the death-binding at rest: settled cleanly into wood and iron, Pell's maker's marks structural at the socket throat and the branch-bud flex point. The thread to Huginn is nascent — o",
           "[d1] The death-binding's thread to Huginn tightened to present and mutual on World-day 13 night — a critical deepening at the forge south pit before the hunt. The spear now knows what it is adjacent to.",
           "[d1] Deathsense through the bound spear reads north with a genuine pull — more than one presence, not imminent, but present. The forge yard's saturation (iron, decades of cured meat) blurs any finer resolu",
-          "[d1] Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm."
+          "[d1] Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm.",
+          "[d1] Order-Sense at the forge lintel (World-day 14 pre-dawn): north now reads as two or three distinct presences — each with its own cadence, loosely synchronized, alive, holding ground. Not approaching. T"
         ],
         "links": [
           "disputed-zone",
@@ -1400,11 +1434,11 @@
     }
   },
   "tendencies": {
-    "strategic": 31.093987579548337,
-    "cerebral": 15.04380276580662,
-    "social": 41.858706354217055,
-    "generous": 9.237247984534186,
-    "cautious": 15.000084357101658
+    "strategic": 31.938517641650595,
+    "cerebral": 15.968583751977587,
+    "social": 41.64941282244597,
+    "generous": 9.191061744611515,
+    "cautious": 14.925083935316149
   },
   "aptitudes": [
     "strategist",
@@ -1412,7 +1446,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 71,
+  "actionCount": 72,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1458,8 +1492,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783972055444,
-  "rev": 112,
+  "updatedAt": 1783972198564,
+  "rev": 113,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1554,7 +1588,7 @@
       "lightsense": 2,
       "order_sense": 14,
       "palework": 5,
-      "deathsense": 4
+      "deathsense": 5
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -1573,7 +1607,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 3
+    "marrow": 3.25
   },
   "customAbilities": {},
   "precursorAccess": [],

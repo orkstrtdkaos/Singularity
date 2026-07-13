@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.39142105889691275
+    "spectrumId": -0.3768500059520671
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -330,99 +330,60 @@
         "player": "Find Pella again - perhaps you can catch her washing up after working and see her in full beauty.",
         "summary": "Silas arrives at Pell's forge mid-task — catches her at work, not at wash, but the bucket's there and so is she.",
         "narration": "The south lane is quiet in the mid-morning lull — the squall's wet has dried off the stones and the light is clean and flat, the kind that makes everything look like itself. You round the elder's post and the forge comes into view: open front, wide overhang, the low steady sound of a file working iron.\n\nPell is at the bench, not the basin. She's still in her apron, back to you, elbow moving in short controlled strokes over something small and flat. There's a wooden bucket beside the doorframe — water in it, a rag folded over the edge, tools nearby waiting their turn — so the washing-up is coming, just not yet. You've caught the tail end of work, not the end of the day.\n\nShe hears you on the stone — or smells the particular combination of ash and pack-leather, or simply knows the sound of a stride that isn't a customer's — and speaks without turning. \"East furlong's the other direction.\" A pause, file still. \"Unless you already knew where Corvin lives and you're here for a different reason.\"\n\nHuginn drops from the pack frame to the overhang post and arranges himself into his usual shape: wide, still, watching. Pell does turn then — just enough to see the bird settle — and something at the corner of her mouth moves. Not quite a smile. The bucket is right there. Her hands are dark with iron-grit to the wrist."
+      },
+      {
+        "player": "Lean on the post and watch her finish the last piece — let the silence be easy.",
+        "summary": "Silas watches Pell finish the last piece and wash up — she gives Corvin's directions and waits.",
+        "narration": "The file strokes slow and stop. Pell sets the piece down on the bench and reaches back without ceremony for the rag on the bucket edge. She works the iron-grit off her hands in the methodical way of someone who has done it ten thousand times: knuckles first, then the webbing, then the wrists.\n\nHuginn drops from the overhang post to the top of the doorframe and settles there like he owns the threshold. Pell glances up at him once, wrings the rag out, and says nothing.\n\n\"Corvin's in the east furlong,\" she says, without turning. \"Past the second fence-line, left fork at the willow. He'll be mending something he broke or building something he hasn't thought all the way through.\" She hangs the rag and reaches for a dry cloth. \"Tell him the stop-lug is ready. He'll know what it means.\"\n\nShe finally turns — dry hands, apron still on, morning light on her collar — and looks at you with the same flat assessment she gives a new piece of iron before deciding what it wants to be."
       }
     ],
     "lastTurn": {
-      "narration": "The south lane is quiet in the mid-morning lull — the squall's wet has dried off the stones and the light is clean and flat, the kind that makes everything look like itself. You round the elder's post and the forge comes into view: open front, wide overhang, the low steady sound of a file working iron.\n\nPell is at the bench, not the basin. She's still in her apron, back to you, elbow moving in short controlled strokes over something small and flat. There's a wooden bucket beside the doorframe — water in it, a rag folded over the edge, tools nearby waiting their turn — so the washing-up is coming, just not yet. You've caught the tail end of work, not the end of the day.\n\nShe hears you on the stone — or smells the particular combination of ash and pack-leather, or simply knows the sound of a stride that isn't a customer's — and speaks without turning. \"East furlong's the other direction.\" A pause, file still. \"Unless you already knew where Corvin lives and you're here for a different reason.\"\n\nHuginn drops from the pack frame to the overhang post and arranges himself into his usual shape: wide, still, watching. Pell does turn then — just enough to see the bird settle — and something at the corner of her mouth moves. Not quite a smile. The bucket is right there. Her hands are dark with iron-grit to the wrist.",
-      "sceneSummary": "Silas arrives at Pell's forge mid-task — catches her at work, not at wash, but the bucket's there and so is she.",
+      "narration": "The file strokes slow and stop. Pell sets the piece down on the bench and reaches back without ceremony for the rag on the bucket edge. She works the iron-grit off her hands in the methodical way of someone who has done it ten thousand times: knuckles first, then the webbing, then the wrists.\n\nHuginn drops from the overhang post to the top of the doorframe and settles there like he owns the threshold. Pell glances up at him once, wrings the rag out, and says nothing.\n\n\"Corvin's in the east furlong,\" she says, without turning. \"Past the second fence-line, left fork at the willow. He'll be mending something he broke or building something he hasn't thought all the way through.\" She hangs the rag and reaches for a dry cloth. \"Tell him the stop-lug is ready. He'll know what it means.\"\n\nShe finally turns — dry hands, apron still on, morning light on her collar — and looks at you with the same flat assessment she gives a new piece of iron before deciding what it wants to be.",
+      "sceneSummary": "Silas watches Pell finish the last piece and wash up — she gives Corvin's directions and waits.",
       "choices": [
         {
-          "label": "Hand over the whetstone gift from Mara — let it do the talking for you.",
+          "label": "Hand her the whetstone — pull the paper-wrapped stone from the pack and offer it across. No ceremony.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.2
-          },
           "difficulty": 0,
           "intentTags": [
             "help",
-            "gift",
-            "warm"
+            "gift"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Lean on the post and watch her finish the last piece — let the silence be easy.",
+          "label": "Ask what she knows about the north wood — terrain, the sounder's range, anything from the east furlong farmers.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Tell her you'll see her when the boar's down — short, leave her the last word, head for the east furlong.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "spectrumId": -0.1
-          },
           "difficulty": 0,
           "intentTags": [
-            "patient",
-            "observe",
-            "careful"
+            "depart"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Say you do know where Corvin lives, and you came here first — let her draw her own conclusion.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "spectrumId": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "flirt",
-            "honest",
-            "direct"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask her to point you to Corvin's place, then offer to wait while she washes up — you can walk that way together.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "practical",
-            "companionable",
-            "patient"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Pell's forge on the south lane — open front under a wide overhang, mid-morning light, tools and file-work on the bench, wooden bucket with water and a folded rag beside the doorframe. Dry stone underfoot, cool air.",
+        "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. Pell has just set down her last piece and is drying her hands. Huginn sits on the top of the doorframe.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "At the bench, apron on, iron-grit to the wrists, file in hand — last task before washing up. Turned just enough to see Huginn settle on the post."
+            "state": "Apron still on, hands dried, dry cloth in hand — turned to face Silas with her flat assessment look."
           },
           {
             "name": "Huginn",
-            "state": "On the overhang post, wide and still, watching the forge interior."
+            "state": "Settled on the doorframe top, watching the forge interior, one foot tucked."
           }
         ],
         "objects": [
@@ -431,13 +392,13 @@
           "Fine River Whetstone — paper-wrapped, in the pack",
           "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in the pack",
           "Mid-Weight Spear-Tip — in the pack",
-          "Wooden bucket with water and folded rag — beside the forge doorframe"
+          "Wooden bucket with water and wrung-out rag — beside the forge doorframe",
+          "Small catch-plate or hook piece — set on the bench, Pell's last work"
         ],
         "threads": [
-          "Pell's wash-up is imminent — caught at work, not after",
-          "Corvin's address still not given",
           "Whetstone gift from Mara still in the pack, undelivered",
-          "Pell's dry remark about Corvin's direction — waiting to see what Silas actually wants"
+          "Corvin's location now given — east furlong, past second fence-line, left fork at the willow",
+          "Pell's assessment gaze — waiting to see what Silas does with the moment"
         ]
       },
       "npcUpdates": [
@@ -445,36 +406,43 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Heard Silas returning on the stone and named the east furlong unprompted — knows exactly where Corvin is; turned just enough to clock Huginn settling in, and the corner of her mouth moved. Still at work, iron-grit to the wrists, bucket waiting.",
+          "note": "Finished her last piece, washed up, gave Corvin's exact location — east furlong, past the second fence-line, left fork at the willow. Turned to face Silas with her usual flat assessment.",
           "learned": [
-            "Knows Corvin's address and has directed others there before",
-            "Not unsettled by Silas returning when he could have gone straight to the east furlong"
+            "Corvin is at the east furlong — past second fence-line, left fork at the willow; will be mending or building something half-considered"
           ],
-          "skillsObserved": [
-            "situational awareness — named the east furlong without looking up"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the forge on the south lane, finishing a last piece before washing up — bucket of water beside the door, iron-grit to the wrists."
+          "statusNote": "At the forge on the south lane — hands dried, last piece done, apron still on, facing Silas.",
+          "relationshipDelta": 0
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "corvin",
+          "label": "Corvin",
+          "kind": "person",
+          "entityId": "corvin",
+          "fact": "Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to use the stop-lug correctly or not come back.",
+          "links": [
+            "millbrook",
+            "pell",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "short walk from Mara's store to the forge"
-      },
-      "gambitApt": false
+        "why": "A brief pause at the forge — watching her finish, a few words exchanged."
+      }
     },
     "sceneState": {
-      "setting": "Pell's forge on the south lane — open front under a wide overhang, mid-morning light, tools and file-work on the bench, wooden bucket with water and a folded rag beside the doorframe. Dry stone underfoot, cool air.",
+      "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. Pell has just set down her last piece and is drying her hands. Huginn sits on the top of the doorframe.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "At the bench, apron on, iron-grit to the wrists, file in hand — last task before washing up. Turned just enough to see H"
+          "state": "Apron still on, hands dried, dry cloth in hand — turned to face Silas with her flat assessment look."
         },
         {
           "name": "Huginn",
-          "state": "On the overhang post, wide and still, watching the forge interior."
+          "state": "Settled on the doorframe top, watching the forge interior, one foot tucked."
         }
       ],
       "objects": [
@@ -483,13 +451,13 @@
         "Fine River Whetstone — paper-wrapped, in the pack",
         "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in the pack",
         "Mid-Weight Spear-Tip — in the pack",
-        "Wooden bucket with water and folded rag — beside the forge doorframe"
+        "Wooden bucket with water and wrung-out rag — beside the forge doorframe",
+        "Small catch-plate or hook piece — set on the bench, Pell's last work"
       ],
       "threads": [
-        "Pell's wash-up is imminent — caught at work, not after",
-        "Corvin's address still not given",
         "Whetstone gift from Mara still in the pack, undelivered",
-        "Pell's dry remark about Corvin's direction — waiting to see what Silas actually wants"
+        "Corvin's location now given — east furlong, past second fence-line, left fork at the willow",
+        "Pell's assessment gaze — waiting to see what Silas does with the moment"
       ]
     }
   },
@@ -631,7 +599,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Agreed to the three-way hunt arrangement — modification on the light point at cost, no margin, on the condition a capable person is beside Corvin in the north wood. Committed to wa",
         "[d1] Working her own vise in comfortable parallel — the arrangement settled, no need to manage it.",
         "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that ",
         "[d1] Described her north-wood hunting history — solo, lower section, wet ground by the slope springs, turkey and deer. Got as far as the granite shelf two or three times. Noted the east",
@@ -640,17 +607,18 @@
         "[d1] Inspected the finished hand-axe herself — confirmed the collar with her thumb, rehung it in its spot. Turned to face Silas directly and named the next step: find Corvin, then go no",
         "[d1] Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact.",
         "[d1] Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
-        "[d1] Heard Silas returning on the stone and named the east furlong unprompted — knows exactly where Corvin is; turned just enough to clock Huginn settling in, and the corner of her mout"
+        "[d1] Heard Silas returning on the stone and named the east furlong unprompted — knows exactly where Corvin is; turned just enough to clock Huginn settling in, and the corner of her mout",
+        "[d1] Finished her last piece, washed up, gave Corvin's exact location — east furlong, past the second fence-line, left fork at the willow. Turned to face Silas with her usual flat asses"
       ],
       "knownFacts": [
-        "Stayed mostly to the lower section where soil takes a print — good trail-reading",
         "Reached the granite shelf two or three times; used the east trail to come back down",
         "The hand-axe hairline is an old stop-crack in the eye wall — hasn't reached the weld or the bit; needs a heat-collar before edge work proceeds",
         "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting",
         "Backlog fully cleared to her satisfaction — all five pieces done, hand-axe included",
         "Sold the mid-weight tip to Silas; modified the light tip with a stop-lug for Corvin; credited backlog labor against the purchase.",
         "Knows Corvin's address and has directed others there before",
-        "Not unsettled by Silas returning when he could have gone straight to the east furlong"
+        "Not unsettled by Silas returning when he could have gone straight to the east furlong",
+        "Corvin is at the east furlong — past second fence-line, left fork at the willow; will be mending or building something half-considered"
       ],
       "skillsObserved": [
         "field tactics",
@@ -661,7 +629,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "At the forge on the south lane, finishing a last piece before washing up — bucket of water beside the door, iron-grit to the wrists.",
+      "statusNote": "At the forge on the south lane — hands dried, last piece done, apron still on, facing Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1038,7 +1006,8 @@
         "facts": [
           "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe",
           "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde",
-          "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon"
+          "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon",
+          "[d1] Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to "
         ],
         "links": [
           "millbrook",
@@ -1090,11 +1059,11 @@
     }
   },
   "tendencies": {
-    "strategic": 21.684522552317194,
-    "cerebral": 8.89590949224477,
-    "social": 23.976609652364196,
-    "generous": 7.932297929002052,
-    "cautious": 10.182352227180262
+    "strategic": 21.576099939555608,
+    "cerebral": 8.851429944783547,
+    "social": 23.856726604102374,
+    "generous": 7.892636439357042,
+    "cautious": 11.13144046604436
   },
   "aptitudes": [
     "strategist",
@@ -1102,7 +1071,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 36,
+  "actionCount": 37,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1124,8 +1093,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783902526504,
-  "rev": 61,
+  "updatedAt": 1783902627264,
+  "rev": 62,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -22,22 +22,6 @@
         "strength": "nascent",
         "note": "A thread, not a cord — woven through the pale eye's long attention and the bird's motionless hour at the stone ring. **It thickens with what they end together.**"
       },
-      "growth": {
-        "principle": "⛔ **AN ARTIFACT IS NOT FORGED. IT IS EARNED.** This spear grows by the same law that governs the whole living world (BATCH-9): **weight = birth-power + accumulated attention.** It becomes real by being USED, in moments that MATTER.",
-        "accrues": [
-          "an ending it was present for — the death-register deepens",
-          "a moment that mattered — a quest resolution, a legend witnessed, a life saved or taken that cost something",
-          "Huginn's participation — the bond thickens",
-          "Pell's continued involvement — her mark is a living claim, not a signature"
-        ],
-        "tiers": [
-          "**unfinished** — where it is now. The runes hold. The register is open. It has begun.",
-          "**named** — enough endings that it has a name people use. It stops being 'his spear.'",
-          "**known** — it precedes him into rooms. NPCs react to it.",
-          "**artifact** — canon. It appears in the world's chronicle. **It can be inherited, feared, or stolen — and losing it would be a real loss.**"
-        ],
-        "theHeresy": "⛔ **Silas Weir is a WRIGHT — one of the people who cannot stop making — who was nearly EXILED FOR FINISHING SOMETHING. And he deliberately left this unfinished.** The spear is his entire heresy, forged into steel. **Do not let the game finish it for him.**"
-      },
       "functions": [
         "strike",
         "hinder",
@@ -49,7 +33,47 @@
         "binding",
         "hunt"
       ],
-      "notFor": "It is not yet an artifact and must not be narrated as one. **It is a good spear with an open register and a beginning.** Everything else it has to earn."
+      "notFor": "It is not yet an artifact and must not be narrated as one. **It is a good spear with an open register and a beginning.** Everything else it has to earn.",
+      "evolution": {
+        "bondSource": "huginn",
+        "coUseTag": "end-with-huginn",
+        "note": "⛔ SAME MECHANIC AS THE WAYSTAFF (which wakes through Aevi). The spear wakes through **Huginn**. Each stage gates on BOTH his bond band AND how often the spear has ENDED something with him present — item × companion co-activation, tracked in the practice ledger. **The engine already does this. Do not build a new system.**",
+        "whatItAccrues": "An ENDING the spear was present for, with Huginn attending. Not a kill count — an ENDING that MATTERED. The death-register deepens; the thread to Huginn thickens.",
+        "stages": [
+          {
+            "stage": 1,
+            "name": "Unfinished",
+            "state": "Where it is now. The runes hold — load-bearing, not decorative, pressed where the spear already had an opinion about what it was. The register is open. Huginn's thread is nascent.",
+            "narrationHints": "A good spear with something waiting in it."
+          },
+          {
+            "stage": 2,
+            "name": "Waking",
+            "state": "The register has深 — it knows what it has ended, and it is beginning to know BEFORE. Huginn has stopped merely attending and started ANSWERING.",
+            "narrationHints": "The blade goes quiet before a thing dies. Huginn is already looking where you are about to look."
+          },
+          {
+            "stage": 3,
+            "name": "Named",
+            "state": "Enough endings that people use its name. It has stopped being 'Silas's spear.'",
+            "narrationHints": "Someone who has never met you asks whether it is true, what they say about the spear."
+          },
+          {
+            "stage": 4,
+            "name": "Known",
+            "state": "It precedes you into rooms. NPCs react to the weapon before they react to the man.",
+            "narrationHints": "They look at the spear first. Then, more slowly, at you."
+          },
+          {
+            "stage": 5,
+            "name": "⭐ FINISHED — and this is Silas's to CHOOSE",
+            "state": "**HE COMPLETES IT. DELIBERATELY. HE STOPS.**\n\n⛔ **THIS IS THE POINT AND IT MUST BE REACHABLE.** Silas Weir is a WRIGHT — one of the people who **cannot stop making**, whose cities are **never finished and that is the point** — and he was **nearly exiled for FINISHING something.**\n\n**Finishing is not his taboo. Finishing is his HERESY, and his GIFT.** The Ceaseless would call the completion of this spear a small death. **He will call it a spear.**\n\nWhen it lands: it is an ARTIFACT. Canon. It enters the world's chronicle. It can be inherited, feared, or stolen — and losing it would be a real loss. **And every Wright who hears of it will understand exactly what he did, and some of them will not forgive it.**",
+            "gate": "⛔ **ERIK CHOOSES WHEN.** The engine must OFFER the completion once stage 4 and Huginn's bond are met — it must NEVER impose it, and it must NEVER withhold it. **A growth track that cannot complete is not a story; it is a treadmill.**",
+            "narrationHints": "He stops. He puts down the tools. The thing is done, and it is his, and it will never be more than it is — and that is the whole of what he meant."
+          }
+        ]
+      },
+      "correction": "⚠️ AEVI'S ERROR, corrected by Erik 2026-07-12. I first wrote *'do not let the game finish it for him'* — which would have made the artifact permanently unreachable and made ME the Ceaseless, standing over his shoulder saying *don't stop.* **That is the CULT, not the character.** **Silas is the Wright who FINISHES.** That is his transgression against his own people and it is the best thing about him. **The spear MUST be completable, the completion is HIS to choose, and it is an achievement — not a denial.**"
     }
   ]
 }

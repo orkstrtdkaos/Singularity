@@ -11,7 +11,7 @@ import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, comp
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
-import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile } from "./engine/sync.js";
+import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.44";
+const APP_VERSION = "1.8.45";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -48,6 +48,7 @@ let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
 let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, objects, threads
 let busy = false;
+let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
 let examinedItem = null; // name of the item expanded in the sidebar
 let askMode = false;     // input bar mode: false = act in scene, true = ask the GM (OOC)
 let npcGroupsOpen = new Set();   // Fix 5: session memory of expanded people-groups
@@ -154,9 +155,13 @@ function renderPlayerPick(msg = "") {
     ${msg ? `<p class="hint">${esc(msg)}</p>` : ""}
     <div class="player-pick">
       ${players.map(p => `<button class="btn player-choice" data-player="${esc(p.playerKey)}">${esc(p.displayName)}</button>`).join("")}
+      ${syncEnabled() ? `<button class="btn secondary" id="player-discover" style="margin-top:8px">☁ Find me in the shared world</button>` : ""}
       <button class="btn secondary" id="player-new" style="margin-top:8px">+ New player</button>
     </div>
+    ${!players.length && !syncEnabled() ? `<p class="hint" style="margin-top:10px">Playing across devices? Add your sync settings in a new player's Settings, then your characters follow you here.</p>` : ""}
   </div>`;
+  const pdisc = document.getElementById("player-discover");
+  if (pdisc) pdisc.onclick = () => renderDiscover();
   for (const b of app.querySelectorAll("[data-player]")) b.onclick = () => {
     setPlayerKey(b.dataset.player);
     loadIdentity();
@@ -759,12 +764,17 @@ function renderSettings(note = "") {
 // ---------- roster ----------
 
 function renderRoster() {
+  if (!profile) { renderPlayerPick(); return; } // SNG-087: a fresh device may reach chrome (nav) before choosing a player
   const chars = listCharacters();
   const players = listPlayers();
+  // SNG-087: on a device that has sync configured but no local characters, DISCOVER them from the
+  // repo automatically — sync config is the only setup a new device should need (no export/import).
+  // Guarded by a once-per-session flag so "Back" from discovery lands on the roster without bouncing.
+  if (chars.length === 0 && syncEnabled() && !_discoverAutoRan) { _discoverAutoRan = true; renderDiscover(); return; }
   chrome(`<div class="screen">
     <div class="roster-head"><h2>Your Characters</h2>
       <span class="roster-player">Playing as <strong>${esc(profile.displayName || profile.playerKey)}</strong>${players.length > 1 ? ` <button class="link-btn" id="switch-player">switch</button>` : ""}</span></div>
-    ${chars.length === 0 ? `<p class="hint" style="margin-bottom:14px">No characters yet. The valley is waiting.</p>` : ""}
+    ${chars.length === 0 ? `<p class="hint" style="margin-bottom:14px">No characters on this device yet. ${syncEnabled() ? "Find the ones you've played elsewhere, or make a new one." : "Make one — or set up sync in Settings to bring in characters from another device."}</p>` : ""}
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
         <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
@@ -772,11 +782,14 @@ function renderRoster() {
       </div>`).join("")}</div>
     <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="btn" id="new-char">New Character</button>
+      ${syncEnabled() ? `<button class="btn secondary" id="discover-chars">☁ Find my characters</button>` : ""}
       <button class="btn secondary" id="open-library">📖 The Library</button>
       <button class="btn secondary" id="export-save">Export saves</button>
       <button class="btn secondary" id="import-save">Import</button>
     </div>
   </div>`);
+  const discBtn = document.getElementById("discover-chars");
+  if (discBtn) discBtn.onclick = () => renderDiscover();
   const sw = document.getElementById("switch-player");
   if (sw) sw.onclick = () => renderPlayerPick();
   document.getElementById("new-char").onclick = () => renderCreate();
@@ -809,6 +822,93 @@ function renderRoster() {
       saveCharacter(character); enterPlay();
     };
   }
+}
+
+// ---------- SNG-087: cross-device DISCOVERY — a new device finds your characters from the repo ----------
+
+/** Step 1: list the players in the shared repo (each `players/{key}/profile.json`) so the person can
+ *  say which one they are. Sync config is the ONLY setup a new device needs — no export/import. */
+async function renderDiscover(note = "") {
+  if (!syncEnabled()) { renderSettings("Add your GitHub owner, repo, and token in Settings — then your characters follow you across devices automatically."); return; }
+  chrome(`<div class="screen" style="max-width:640px">
+    <h2>Find your characters</h2>
+    <p class="hint" style="margin-bottom:12px">Reading the shared world for the characters you've played on other devices. No files to move — this is the only setup a new device needs.</p>
+    ${note ? `<p class="hint" style="margin-bottom:10px">${esc(note)}</p>` : ""}
+    <div id="disc-body"><div class="insight">Looking for players in the shared world…</div></div>
+    <div style="margin-top:14px"><button class="btn secondary" id="disc-back">Back</button></div>
+  </div>`);
+  document.getElementById("disc-back").onclick = () => profile ? renderRoster() : renderPlayerPick();
+  const body = document.getElementById("disc-body");
+  let keys;
+  try { keys = await ghList("players/"); }
+  catch (e) { body.innerHTML = `<div class="insight">Couldn't reach the repo (${esc(String(e.message || e).slice(0, 80))}). Check your sync settings in Settings.</div>`; return; }
+  if (!keys.length) { body.innerHTML = "<div class='insight'>No players found in the shared repo yet. Make a character here and it'll sync up.</div>"; return; }
+  // fetch each profile for a display name (best-effort — a missing profile still shows its key)
+  const profiles = [];
+  for (const pk of keys) {
+    let p = null;
+    try { p = await fetchRepoJSON(`players/${pk}/profile.json`); } catch { /* keep going */ }
+    profiles.push({ playerKey: pk, displayName: p?.displayName || pk, profile: p });
+  }
+  // auto-resolve: if exactly one player, or one whose name matches this device's current profile, skip the pick
+  const mine = profile?.displayName ? profiles.filter(p => String(p.displayName).trim().toLowerCase() === String(profile.displayName).trim().toLowerCase()) : [];
+  if (profiles.length === 1) { renderDiscoverCharacters(profiles[0]); return; }
+  body.innerHTML = `<p class="hint" style="margin-bottom:8px">Which one is you?${mine.length ? " (we think it's the highlighted one)" : ""}</p>` +
+    profiles.map(p => `<button class="btn player-choice ${mine.some(m => m.playerKey === p.playerKey) ? "" : "secondary"}" data-pk="${esc(p.playerKey)}" style="display:block; width:100%; text-align:left; margin-bottom:6px">${esc(p.displayName)} <span class="hint">(${esc(p.playerKey)})</span></button>`).join("");
+  for (const b of body.querySelectorAll("[data-pk]")) b.onclick = () => renderDiscoverCharacters(profiles.find(x => x.playerKey === b.dataset.pk));
+}
+
+/** Step 2: for the chosen player, list `characters/{key}/` from the repo and let the person adopt +
+ *  play any of them. Adoption uses the stale-overwrite guard in BOTH directions — a newer local copy
+ *  is never clobbered, a newer remote is always taken. */
+async function renderDiscoverCharacters(entry) {
+  // become that player on this device (store the profile, set the active key)
+  if (entry.profile) saveProfile(entry.profile);
+  setPlayerKey(entry.playerKey);
+  loadIdentity();
+  chrome(`<div class="screen" style="max-width:640px">
+    <h2>${esc(entry.displayName)}'s characters</h2>
+    <p class="hint" style="margin-bottom:12px">From the shared world. Adopt one to play it here — its latest save comes with it.</p>
+    <div id="disc-chars"><div class="insight">Reading characters…</div></div>
+    <div style="margin-top:14px; display:flex; gap:8px"><button class="btn secondary" id="dc-back">← Other players</button><button class="btn secondary" id="dc-roster">This device's roster</button></div>
+  </div>`);
+  document.getElementById("dc-back").onclick = () => renderDiscover();
+  document.getElementById("dc-roster").onclick = () => renderRoster();
+  const body = document.getElementById("disc-chars");
+  let files;
+  try { files = await ghList(`characters/${entry.playerKey}/`); }
+  catch (e) { body.innerHTML = `<div class="insight">Couldn't read this player's characters (${esc(String(e.message || e).slice(0, 80))}).</div>`; return; }
+  const ids = files.filter(f => f.endsWith(".json")).map(f => f.replace(/\.json$/, ""));
+  if (!ids.length) { body.innerHTML = "<div class='insight'>No characters saved for this player yet.</div>"; return; }
+  const chars = [];
+  for (const id of ids) {
+    let c = null;
+    try { c = await fetchRemoteCharacter(entry.playerKey, id); } catch { /* skip unreadable */ }
+    if (c && c.id) chars.push(c);
+  }
+  if (!chars.length) { body.innerHTML = "<div class='insight'>Found character files but couldn't read them — check the token has read access.</div>"; return; }
+  body.innerHTML = chars.map(c => {
+    const here = !!loadCharacter(c.id);
+    return `<div class="roster-item">
+      <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin || "")} · level ${c.level ?? 1}${c.dead ? " · fallen" : ""}${here ? " · already here" : ""}</span></div>
+      <div><button class="btn" data-adopt="${esc(c.id)}">${here ? "Play" : "Adopt & play"}</button></div>
+    </div>`;
+  }).join("");
+  for (const b of body.querySelectorAll("[data-adopt]")) b.onclick = async () => {
+    b.disabled = true; b.textContent = "Loading…";
+    const remote = chars.find(x => x.id === b.dataset.adopt);
+    if (!remote) { renderDiscoverCharacters(entry); return; }
+    // guard both directions: keep a newer local, take a newer remote, preserve a conflicting loser
+    const local = loadCharacter(remote.id);
+    const res = resolveSaveConflict(local, remote);
+    if (!local || res.reason === "remote-newer") { if (res.conflict) preserveRecovery(local, "local"); adoptRemoteCharacter(remote); }
+    else if (res.conflict) preserveRecovery(remote, "remote");
+    const c = migrate(loadCharacter(remote.id));
+    if (c.dead) { alert(c.name + " fell in the valley. Their story is over."); renderRoster(); return; }
+    character = c;
+    saveCharacter(character);
+    enterPlay();
+  };
 }
 
 /** Additive-schema migration for pre-v0.2 saves: string inventories become item

@@ -1,0 +1,675 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mr5ns3hh",
+  "playerKey": "player-54seyk",
+  "name": "Adelheid",
+  "origin": "harmonic",
+  "background": "medic",
+  "level": 1,
+  "xp": 23,
+  "attributes": {
+    "physical": 2,
+    "mental": 4,
+    "social": 3,
+    "practical": 4
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "echo_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "sonic_resonance",
+      "level": 1
+    }
+  ],
+  "alignment": {
+    "mechanical_spiritual": 0.015
+  },
+  "attunement": 1,
+  "maxHealth": 25,
+  "health": 25,
+  "maxEnergy": 100,
+  "energy": 68,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "medics_satchel",
+      "name": "Medic's Satchel",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Herb rolls, boiled linen, needle and gut. Valley medicine — patient, practical, proven.",
+      "bonusTags": [
+        "heal",
+        "help"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "healing_draught",
+      "name": "Healing Draught",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Bitter green tincture from the terrace gardens. Knits small wounds and dulls big ones.",
+      "effects": {
+        "health": 8
+      },
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Silver-Stemmed Cutting (linen-wrapped)",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A two-node cutting from the uncatalogued east-terrace plants, wrapped in boiled linen. Root angle (20° below horizontal, south-southeast) and node spacing noted in charcoal on the margin. Pale sap at the cut end — no name for it yet.",
+      "consumable": false
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "millbrook",
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "summary": "Adelheid arrives at Millbrook's river dock at dawn, finds thin catches and gray-green water, and is noticed by a sharp-eyed woman near the well.",
+        "narration": "The Echo River smells clean this morning — or almost clean. You arrived in Millbrook just before dawn, following the valley road down from the higher terraces, your Traveler's Pack pulling at your shoulders after three days of walking. Now the village is waking around you: smoke from cook-fires, the creak of water wheels catching the current, a dog barking at nothing near the granary. You're standing at the edge of the river dock, where wooden planks extend over brown-green water and two fishermen are hauling up nets with the particular silence of people who already know what they'll find.\n\nThe catch is thin. One of them, a heavyset woman with a sun-cracked face, shakes the net once and says nothing. The other, younger, stares at the water and then away. A faint gray-green iridescence hangs on the river's surface where the light catches it — like oil, but wrong. You've been long enough in mountain valleys to know this isn't right, but you've never seen this color before.\n\nNearby, the village well stands in a small plaza where two lanes meet. A handful of early risers are drawing water there instead of from the river, which tells you something about local habits. A woman in a patched green coat is moving between the well and the market stalls, directing a boy who's clearly her errand-runner, her manner efficient and appraising. She notices you noticing the river, and for a moment her eyes rest on your Medic's Satchel with calm, professional interest.\n\nYou don't know anyone here yet. The village doesn't know you. But the morning already has the quiet charge of a place where something is wrong and everyone is waiting for someone to say it first."
+      },
+      {
+        "summary": "Adelheid uses Echo Sense and discovers fish are avoiding the near bank; the riverbed shows an unnaturally flat, dense deposit.",
+        "narration": "You press your boot heel gently against the dock's worn planks and let the ability open — a quiet thing, more like tuning your ears to a lower register than any dramatic gesture. Echo Sense costs you four energy and gives you maybe two seconds of clean information.\n\nWhat comes back isn't nothing. Below the dock, the river runs at its usual early-spring push, current strong enough that you feel the planks shiver in your calves. Fish are present — more than the nets suggest — but they're hanging deep, pressed toward the opposite bank, as if the shallows under the dock are somewhere they'd rather not be. You map a dozen bodies clustered in one cold seam of the river where the bottom shelves into deeper water. In the immediate ten paces beneath you, the bottom itself is unusually flat and faintly dense — sediment, maybe, or something deposited in it. Not natural river-bottom texture.\n\nThe heavyset fisherwoman snaps her net once and mutters something you don't catch, then shoves it into a bucket. The young fisherman is still staring at a point three feet past his own reflection, the way people stare when they've already decided not to ask the question in front of them. Behind you, thirty paces up the lane, the woman in the patched green coat has stopped directing her errand-boy. She's looking at you with the direct, measuring calm of someone who catalogues strangers quickly and thoroughly.\n\nYou know two things the fishermen probably don't have language for yet: the fish aren't gone, they're avoiding something specific to this bank. And whatever is settling in the riverbed here is doing so with a flatness that silt doesn't usually manage on its own."
+      },
+      {
+        "summary": "Adelheid approaches the watching woman, who introduces herself as Mara Wells — Millbrook's de facto civic manager.",
+        "narration": "You turn from the water and walk the thirty paces up the lane toward her — no hesitation, no pretense of casualness. The woman in the patched green coat tracks your approach with the same measuring patience she's used since you arrived. Her errand-boy, maybe twelve, shifts from foot to foot and glances between you and her like he's waiting to see which way the weather breaks.\n\nShe speaks first, before you've quite closed the gap. \"Medic's Satchel, Harmonic cut to the stitching on the strap, and you spent four minutes watching a river that everyone here has decided not to look at.\" Her voice is dry, unhurried, the kind that expects to be answered honestly. \"You're not from Millbrook.\" It isn't a question. Her eyes drop briefly to the satchel, then back to your face.\n\nThe errand-boy takes his cue and sets down a cloth-wrapped bundle near the well's stone lip — something heavy, carefully packed — then steps back to a respectful distance. The woman extends a hand. Her grip, when she offers it, is firm and slightly rough, a worker's hand on a planner's frame. \"Mara Wells. I manage what passes for civic order in this village, which is less impressive than it sounds.\" A faint dry smile. \"And you are?\""
+      },
+      {
+        "summary": "Adelheid introduces herself honestly to Mara Wells, who offers a vague errand in return.",
+        "narration": "You take her hand — a firm grip, brief and direct. \"Adelheid. From Switzerland originally, though I've been living in the mountains above Jeonju for the past few years.\" You let that settle, then: \"Herbalist, mostly. Medic when someone needs it. I came down to learn what grows here before the season turns.\" A small pause, honest rather than dramatic. \"The water caught my eye because I've been watching rivers since I was seven, and that color doesn't belong there.\"\n\nMara Wells releases your hand and doesn't fill the silence immediately. She's reassessing — not suspiciously, more the way a careful person updates a working estimate. Behind you, the dock planks creak as the heavyset fisherwoman shifts her weight without approaching. The errand-boy glances at the cloth-wrapped bundle on the well's stone lip, then back to Mara, then carefully away.\n\n\"Adelheid.\" She says it once, like she's filing it. \"Switzerland is a long walk.\" Not quite a question. Her eyes drop briefly to your Medic's Satchel, then lift again. \"The plants here will be new to you, then. Some of what grows on the lower terraces has no name in any catalog I've seen — it's changed since the Transition, or it was always here and nobody wrote it down.\" She says it plainly, not as a gift, more as a fact she's deciding whether to use. \"I have an errand that would take someone with your eyes about an hour. The woman who used to do it left Millbrook three weeks ago and I haven't found a good replacement.\"\n\nShe doesn't look at the bundle yet. The morning light is strengthening behind her, first gold of early spring cutting along the lane, catching the faint iridescence on the river surface thirty paces down."
+      },
+      {
+        "summary": "```json\n{\n  \"narration\": \"You nod toward the cloth-wrapped bundle on the well's lip. \\\"I'll take it.",
+        "narration": "```json\n{\n  \"narration\": \"You nod toward the cloth-wrapped bundle on the well's lip. \\\"I'll take it. Where does it go?\\\" Simple, no conditions attached — and Mara's expression settles a notch, something confirmed rather than something decided.\\n\\nShe lifts the bundle and sets it in your hands. It's heavier than it looks — dense, maybe clay jars or packed root-stock, wrapped in oilcloth and bound with cord. \\\"Terrace three, east side. Ask for Piotr — he'll know what to do with it. Lane runs up behind the mill.\\\" She glances at the errand-boy, who takes the dismissal and vanishes around a stall corner. Then, quieter: \\\"There's a plant note inside. He doesn't need to know about that.\\\"\\n\\nYou fall into step together up the lane, away from the dock, market stalls half-open on either side and the smell of fresh bread cutting through the cool morning air. It's a natural moment to ask, and you take it: \\\"You mentioned plants with no catalog names on the lower terraces. I've been building out a new collection since I moved to Jeonju — there's a lot the old Swiss herbals don't account for, and that was before the Transition changed anything.\\\" You shift the bundle against your hip. \\\"What are you actually seeing?\\\"\\n\\nMara walks half a stride ahead, hands in her coat pockets, eyes on the lane. She takes a moment that feels considered rather than reluctant. \\\"Three I've found that don't match anything in the valley records. One's a creeper — grows on the damp stones near the lower irrigation channel, gray-green leaf, faint iridescence on the underside.\\\" She pauses just long enough to let that color register against everything you already noticed in the river. \\\"Started showing up about eighteen months ago. The others are slower-growing, harder to find. I have a cutting of one drying in my office.\\\" A sidelong glance. \\\"You'd know in about thirty seconds whether it's something you recognize.\\\"\",\n  \"sceneSummary\": \"Adelheid takes Mara's errand bundle and the two walk toward the eastern terraces, Mara describing three uncataloged plants — one with gray-green iridescent leaves, appearing eighteen months ago.\",\n  \"choices\": [\n    {\n      \"label\": \"Ask Mara directly about the gray-green iridescence — connect what she's describing to what you saw in the river\",\n      \"attribute\": \"mental\",\n      \"subAttribute\": \"insight\",\n      \"axes\": {},\n      \"difficulty\": 0,\n      \"intentTags\": [\"study\", \"connect\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": true\n    },\n    {\n      \"label\": \"Ask to see the cutting in her office before delivering the bundle — the plant detail might tell you something urgent\",\n      \"attribute\": \"social\",\n      \"subAttribute\": \"rapport\",\n      \"axes\": {},\n      \"difficulty\": 0,\n      \"intentTags\": [\"plan\", \"persuade\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": true\n    },\n    {\n      \"label\": \"Deliver the bundle to Piotr first, as asked — earn the trust before asking more questions\",\n      \"attribute\": \"practical\",\n      \"subAttribute\": \"wits\",\n      \"axes\": {},\n      \"difficulty\": 0,\n      \"intentTags\": [\"careful\", \"help\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": true\n    },\n    {\n      \"label\": \"Agree to look at the cutting, but steer the conversation toward who else in Millbrook has been watching the water and the plants — see if Mara is working this alone\",\n      \"attribute\": \"mental\",\n      \"subAttribute\": \"reason\",\n      \"axes\": {},\n      \"difficulty\": 15,\n      \"intentTags\": [\"scout\", \"study\", \"careful\"],\n      \"abilityId\": null,\n      \"energyCost\": null,\n      \"trivial\": false\n    }\n  ],\n  \"deeds\": [],\n  \"characterDeltas\": {\n    \"health\": 0,\n    \"energy\": 0,\n    \"inventoryAdd\": [],\n    \"inventoryRemove\": [],\n    \"xp\": 0\n  },\n  \"ledgerEvents\": [],\n  \"questUpdates\": [\n    {\n      \"op\": \"start\",\n      \"questId\": \"maras-errand\",\n      \"title\": \"Mara's Errand\",\n      \"summary\": \"Deliver a cloth-wrapped bundle (with a hidden plant note) to Piotr on the east side of terrace three — Mara's way of testing a newcomer's reliability.\",\n      \"giver\": \"Mara Wells\",\n      \"note\": \"Bundle is in Adelheid's hands. Contains jars or root-stock plus a concealed plant note; Piotr is the recipient.\",\n      \"xpReward\": 15\n    }\n  ],\n  \"scene\": {\n    \"setting\": \"Millbrook village lane, walking northeast from the well plaza toward the terrace lanes behind the mill. Early spring morning, sun fully up now, warming stone and fresh bread smell in the air. Adelheid carries the cloth-wrapped bundle; Mara Wells walks half a stride ahead.\",\n    \"npcsPresent\": [\n      {\"name\": \"Mara Wells\", \"state\": \"Walking beside Adelheid up the lane, hands in coat pockets, describing uncataloged plants in a measured, deliberate tone.\"}\n    ],\n    \"objects\": [\n      \"Cloth-wrapped bundle (heavy, oilcloth, cord-bound, now in Adelheid's arms — contains jars or root-stock plus a concealed plant note)\",\n      \"Market stalls half-open along the lane\",\n      \"Mill visible ahead at the lane's bend\",\n      \"Terrace lane rising behind the mill toward terrace three east\"\n    ],\n    \"threads\": [\n      \"Bundle must be delivered to Piotr on terrace three east — plant note inside is not for him to know about\",\n      \"Mara has described a gray-green iridescent creeper appearing ~18 months ago on damp stones near the lower irrigation channel — color matches the river\",\n      \"Mara has a cutting of one uncataloged plant drying in her office\",\n      \"Fish avoiding the near bank; riverbed unnaturally flat and dense under the dock\",\n      \"Fishermen at the dock still silent about the water\"\n    ]\n  },\n  \"npcUpdates\": [\n    {\n      \"op\": \"update\",\n      \"npcId\": \"mara-wells\",\n      \"name\": \"Mara Wells\",\n      \"role\": \"Millbrook civic manager\",\n      \"note\": \"Gave Adelheid the bundle errand with quiet instructions; disclosed the hidden plant note and Piotr's role; volunteered information about three uncataloged plants — including a gray-green iridescent creeper appearing 18 months ago near the lower irrigation channel. Has a cutting drying in her office.\",\n      \"learned\": [\n        \"She is actively tracking uncataloged plant species on the lower terraces — at least three identified\",\n        \"One plant has gray-green iridescent leaves and appeared ~18 months ago near the lower irrigation channel\",\n        \"She keeps a cutting in her office and is willing to show it to someone with botanical knowledge\",\n        \"She is using errands as a way to assess newcomers — the plant note hidden in the bundle suggests she has an information network of some kind\"\n      ],\n      \"skillsObserved\": [\"information economy\", \"botanical observation\", \"network management\"],\n      \"relationshipDelta\": 1,\n      \"status\": \"active\"\n    }\n  ],\n  \"placeUpdates\": [],\n  \"codexUpdates\": [\n    {\n      \"topic\": \"valley-flora-post-transition\",\n      \"label\": \"Valley Flora — Post-Transition\",\n      \"kind\": \"lore\",\n      \"fact\": \"Mara Wells has identified at least three plants on Millbrook's lower terraces with no match in valley records. One is a gray-green iridescent creeper growing on damp stones near the lower irrigation channel — it appeared approximately 18 months ago. The iridescent quality of its leaves matches the color of the river contamination. Mara has a cutting of one species drying in her office.\",\n      \"links\": [\"millbrook\", \"echo-river-contamination\", \"mara-wells\", \"maras-errand\"]\n    },\n    {\n      \"topic\": \"maras-errand\",\n      \"label\": \"Mara's Errand Network\",\n      \"kind\": \"person\",\n      \"fact\": \"Mara uses bundle deliveries as a trust test for newcomers. The bundle Adelheid carries contains a hidden plant note not intended for the recipient Piotr — suggesting Mara maintains a discreet information channel alongside her civic duties.\",\n      \"links\": [\"mara-wells\", \"millbrook\", \"maras-errand\"]\n    }\n  ],\n  \"timeAdvanceHours\": 0,\n  \"sceneEnded\": false\n}\n```"
+      },
+      {
+        "summary": "Mara confirms the errand to Piotr and quietly asks Adelheid to observe the uncatalogued plants on the east terrace — with permission to take cuttings.",
+        "narration": "You shift the bundle's weight to get a better feel for what's inside — dense and settled, the way packed roots or sealed clay sits differently from cloth or grain. Mara watches you find the balance without comment, which itself tells you something: she's used to people who handle things.\n\n\"Piotr,\" you repeat. \"Terrace three, east side, behind the mill. And the plant note stays between him and me.\" You meet her eyes to let her know you heard the second part clearly. She gives a single nod — not warm exactly, but satisfied. The kind of acknowledgment that passes between people who've decided, provisionally, to trust each other.\n\nShe doesn't let you go quite yet. Her voice drops enough that the fishwives at the stall twenty paces down the lane won't catch it. \"While you're up there — the east terrace borders the untended stretch. You'll see it. Plants coming up where nothing was catalogued before the Transition. I've been watching them for two seasons.\" A beat. \"If something looks like it doesn't belong, you have my permission to take a cutting. Carefully.\" The way she says *carefully* suggests she means something more specific than 'don't damage the roots.'\n\nShe steps back then, a clean dismissal — she has a village to manage and you have an errand to run. The morning is full now, light cutting down the lane between the stall awnings, and the path up toward the mill terraces begins just past the market's far end."
+      },
+      {
+        "summary": "Bundle delivered to Piotr on Terrace Three east; Adelheid observes the uncatalogued silver-stemmed plants at the terrace's edge.",
+        "narration": "The lane behind the mill is quieter than the well plaza — fewer stalls, more mud, the smell of turned earth and water-wheel damp. You shift the bundle against your hip and follow the path upward as it narrows between low stone walls. Early-spring growth pushes through the gaps: chickweed, dead nettle, the occasional volunteer barley. Nothing unusual yet, but you're paying attention the way Mara's word 'carefully' lodged in your mind like a splinter.\n\nTerrace Three announces itself as a wider shelf of land cut into the slope, bordered by a low retaining wall on the downhill side. Most of it is tidy — rows of early brassicas under light mulch, irrigation channels cut clean. The east edge is different. You notice it before you're even looking for it: the growth there is denser and lower to the ground, spreading in a way that doesn't follow the terrace's layout. Leaves with a faint silvery underside. Stems that branch in pairs at every node, very regular, almost too regular. No catalog entry surfaces in your memory to match the shape. You make a note to come back.\n\nPiotr is easy to find — a compact man in his fifties, kneeling at the far end of the terrace patching an irrigation channel with river clay, gray-streaked hair pushed back under a faded cloth cap. He looks up when he hears your footsteps and his gaze goes straight to the bundle before it reaches your face. He straightens, wipes his hands on his thighs, and comes to meet you. \"From Mara,\" you say, which is all you need to say. He takes the bundle in both hands with a care that tells you the clay jars inside matter to him, sets it on the wall, and begins working the cord loose with practiced fingers — then stops, glances at you. \"There's a note?\" \"Inside.\" \"Good.\" He doesn't open it in front of you."
+      },
+      {
+        "summary": "Brynjar Andyrsson: The lamp swings once, twice, and you drop to one knee at the dock's edge without making a show of it"
+      },
+      {
+        "summary": "Brynjar Andyrsson: Brynjar studies the iridescent water; the dock-woman breaks her silence and addresses him directly."
+      },
+      {
+        "summary": "Adelheid examines the silver-stemmed plants at the east edge — and feels a hum inside the stem.",
+        "narration": "Piotr's hands still on the cord. He glances at you once, then at the bundle, then back — the practiced economy of a man who waits for permission he's already decided to give himself. Whatever Mara put in that note, he considers it his business the moment you're gone. You let him have that. The bundle is delivered; your task now is standing fifteen paces east, where the terrace stops being Piotr's and starts being something else's.\n\nThe silver-stemmed growth comes up to mid-thigh at its densest point, spilling past the terrace edge in a way that has nothing to do with how Piotr laid his irrigation lines. You crouch at the boundary and look without touching first. The leaves are broad, dark green on top — but underneath, that silver is almost metallic, catching the midday light in a way plant tissue shouldn't. The paired branching Mara mentioned is unmistakable up close: every node forks at exactly the same angle, left-right, left-right, like a notation rather than a growth. You have catalogued hundreds of herbs from two continents and studied the valley's post-Transition flora with half a dozen naturopaths. This pattern does not belong to any of them.\n\nYou open your Medic's Satchel slowly and reach for the folded linen you use for cuttings. The stems nearest the terrace edge are younger, thinner — a safer place to start than the dense interior. When your fingers close around the first stem to position your knife, you feel a faint, almost sub-audible hum move through it. Not vibration from the wind. From inside the plant. You hold very still."
+      },
+      {
+        "summary": "Adelheid touches the silver-stemmed plant and feels the internal hum; Aevi resonates toward it in quiet fascination.",
+        "narration": "Piotr's hands still on the cord — he glances once at you, once at the bundle, then back, the practiced economy of a man who has already decided the note is his business the moment you're gone. You let him have that. The bundle is delivered. Your task now is standing fifteen paces east, where the terrace stops being Piotr's and starts being something else's.\n\nThe silver-stemmed growth comes up to mid-thigh at its densest point, spilling past the terrace edge in a way that has nothing to do with how Piotr laid his irrigation lines. You crouch at the boundary and look before you touch. The leaves are broad, dark green above, silver beneath — that undersurface catches the midday light like hammered foil. The branching is what stops you: every node forks in paired symmetry, left and right, exact, the way living things almost never bother to be. It spreads outside the terrace grid as if the grid simply isn't a fact it has registered.\n\nYou press two fingers to the nearest stem. The hum arrives immediately — not through the air, not a surface tremor, but from inside the tissue itself, rising into your fingertips like a held note from a struck bell that hasn't quite finished sounding. Aevi drifts forward from your shoulder, motes pulling tight into a bright teal cluster just above the leaves. It doesn't speak. It hums back — a single, low frequency, barely audible — and the cluster brightens a fraction, as if listening for an answer.\n\nBehind you, Piotr has not moved. The cord on the bundle is still half-worked. He is watching you with the stillness of a man who has stood at this terrace edge before and chosen not to cross it."
+      },
+      {
+        "summary": "Echo Sense maps the silver-stemmed plants — the hum has a direction, the roots are unified, and Aevi names it: one system.",
+        "narration": "You close your eyes and let the breath out slow. Four energy, conserved — a narrow beam rather than a flood. The echo goes in like a question asked quietly in a library.\n\nWhat comes back is not dramatic. It is precise. The roots of these plants go deep — deeper than brassicas have any business going, deeper than Piotr's irrigation lines, deeper than the terrace's own cut-stone foundation. You count them: six, seven main root channels, each dropping at the same angle, each spaced with the same interval as the branching above. The hum you felt through your fingers has a direction. It does not rise from the soil. It travels along the roots horizontally, south-southeast, disappearing past the range of your sense like a word spoken in the next room. Something is down there that the roots are reaching toward, or reaching from.\n\nAevi goes very still. The motes tighten into a single bright point above the nearest leaf and hold there, not humming now — listening. After a moment, a soft voice behind your ear: \"It is not one plant. It is one system.\" Then silence, which from Aevi counts as emphasis.\n\nPiotr has not moved. The cord is still half-worked. He is watching your face, not the plant."
+      },
+      {
+        "summary": "Adelheid takes a careful cutting from the silver-stemmed plants, notes the root angle and spacing in the linen wrap — Piotr watches the cutting, not her face.",
+        "narration": "You draw the knife clean and press the blade against a stem two nodes up from the soil — the way your teacher in Grindelwald showed you, angled cut, not a pull. The hum intensifies for one held breath, as if the plant notices, then settles back to its low continuous register. The cut is clean. A bead of pale sap forms at the wound: colorless, faintly viscous, nothing you have a name for yet.\n\nYou wrap the cutting in the folded linen from your Medic's Satchel before the sap dries, then set it on your knee and take out the stub of charcoal you keep tucked in the satchel's inner pocket. Root angle: roughly twenty degrees below horizontal, south-southeast — consistent across every channel you felt with Echo Sense. Node spacing: exact, uniform, paired — the same interval as the branching above ground, mirrored in the root structure below. You write the numbers on the linen margin in small clean script, the way you used to label pressed specimens for the Grindelwald herbarium.\n\nAevi drifts closer as you fold the linen, the mote-constellation pulling to a narrow cluster just above your hand. It says nothing — just that bright, watchful quiet it holds when something is interesting enough to silence it entirely. You hear Piotr shift his weight on the gravel downhill. He has still not spoken, still not moved toward you. But when you glance back at him, his eyes are on the wrapped cutting, not your face — and there is something in his stillness that is not quite patience."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You draw the knife clean and press the blade against a stem two nodes up from the soil — the way your teacher in Grindelwald showed you, angled cut, not a pull. The hum intensifies for one held breath, as if the plant notices, then settles back to its low continuous register. The cut is clean. A bead of pale sap forms at the wound: colorless, faintly viscous, nothing you have a name for yet.\n\nYou wrap the cutting in the folded linen from your Medic's Satchel before the sap dries, then set it on your knee and take out the stub of charcoal you keep tucked in the satchel's inner pocket. Root angle: roughly twenty degrees below horizontal, south-southeast — consistent across every channel you felt with Echo Sense. Node spacing: exact, uniform, paired — the same interval as the branching above ground, mirrored in the root structure below. You write the numbers on the linen margin in small clean script, the way you used to label pressed specimens for the Grindelwald herbarium.\n\nAevi drifts closer as you fold the linen, the mote-constellation pulling to a narrow cluster just above your hand. It says nothing — just that bright, watchful quiet it holds when something is interesting enough to silence it entirely. You hear Piotr shift his weight on the gravel downhill. He has still not spoken, still not moved toward you. But when you glance back at him, his eyes are on the wrapped cutting, not your face — and there is something in his stillness that is not quite patience.",
+      "sceneSummary": "Adelheid takes a careful cutting from the silver-stemmed plants, notes the root angle and spacing in the linen wrap — Piotr watches the cutting, not her face.",
+      "choices": [
+        {
+          "label": "Ask Piotr directly — what does he know about these plants? He's been watching them without touching them for reasons of his own.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold the wrapped cutting near the soil at the root mouth — see if the hum responds to proximity before you seal the linen closed.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.4,
+            "concrete_abstract": -0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pack the cutting away and head back down to Millbrook — the afternoon is still yours, and Mara will want to hear what you found. This errand has earned a report.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look south-southeast from the terrace edge — try to place where that root angle would reach if it continues at the same pitch. Map it with your eyes and what you know of the valley floor below.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": -0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Silver-Stemmed Cutting (linen-wrapped)",
+            "kind": "quest",
+            "description": "A two-node cutting from the uncatalogued east-terrace plants, wrapped in boiled linen. Root angle (20° below horizontal, south-southeast) and node spacing noted in charcoal on the margin. Pale sap at the cut end — no name for it yet.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "maras-errand",
+          "note": "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's face."
+        }
+      ],
+      "scene": {
+        "setting": "Terrace Three east, above the mill, midday light full on the slope. Adelheid crouched at the east edge, the linen-wrapped cutting in her lap, knife put away, charcoal stub in hand. A pale bead of sap marks the plant's wound.",
+        "npcsPresent": [
+          {
+            "name": "Piotr",
+            "state": "Standing at the retaining wall downhill, bundle still in both hands — watching the wrapped cutting now, not Adelheid's face. Has not spoken. Has not moved."
+          }
+        ],
+        "objects": [
+          "Cloth-wrapped bundle (with Piotr, cord half-loosened, clay jars inside)",
+          "Irrigation channel with fresh river-clay patch at far end",
+          "East-edge plant growth — dense, silver-undersided leaves, exact paired branching; one stem cut cleanly two nodes up, pale sap bead at the wound",
+          "Low stone retaining wall along the downhill side",
+          "Piotr's tools — trowel, clay bucket, worn cloth cap set aside",
+          "Adelheid's Medic's Satchel — open, Silver-Stemmed Cutting (linen-wrapped) resting on knee, charcoal stub in hand"
+        ],
+        "threads": [
+          "The hum travels south-southeast along a unified root system — source or destination unknown, beyond Echo Sense range",
+          "Aevi is very bright and very still above the wrapped cutting — went silent at the moment the blade touched the stem",
+          "Piotr's eyes are on the cutting, not Adelheid — he knows something about these plants",
+          "Bundle not yet opened by Piotr; private plant note inside",
+          "Mara's 'carefully' — what it meant is still unresolved: the plant registered the cut with a momentary hum-spike"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "piotr",
+          "name": "Piotr",
+          "role": "Terrace farmer, Terrace Three east",
+          "note": "Watched Adelheid take the cutting. His eyes moved to the linen-wrapped cutting the moment the blade came away — not to Adelheid's face. Still has not spoken. Still has not moved toward the east edge.",
+          "learned": [
+            "His attention moved to the cutting the instant it was separated — suggesting the plant or its removal means something specific to him"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On Terrace Three east, bundle in both hands, watching the wrapped cutting — has still not spoken."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A cutting from the silver-stemmed east-edge plants was taken on Day 1 midday — the plant registered the cut with a momentary spike in its internal hum before settling. Pale, nameless sap at the wound. Root angle and node spacing recorded in linen.",
+          "subjectId": "uncatalogued-terrace-plants"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession.",
+          "flag": {
+            "cutting_taken": "day1",
+            "plant_registered_cut": "true"
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "uncatalogued-terrace-plants",
+          "label": "Uncatalogued Terrace Plants",
+          "kind": "mystery",
+          "fact": "The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, viscous, and nameless. Root angle confirmed 20° below horizontal, south-southeast, uniform across all channels.",
+          "links": [
+            "millbrook",
+            "mara-wells",
+            "maras-errand",
+            "echo-river-contamination",
+            "valley-flora-post-transition"
+          ]
+        }
+      ],
+      "timeAdvanceHours": 0,
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Terrace Three east, above the mill, midday light full on the slope. Adelheid crouched at the east edge, the linen-wrapped cutting in her lap, knife put away, charcoal stub in hand. A pale bead of sap marks the plant's wound.",
+      "npcsPresent": [
+        {
+          "name": "Piotr",
+          "state": "Standing at the retaining wall downhill, bundle still in both hands — watching the wrapped cutting now, not Adelheid's f"
+        }
+      ],
+      "objects": [
+        "Cloth-wrapped bundle (with Piotr, cord half-loosened, clay jars inside)",
+        "Irrigation channel with fresh river-clay patch at far end",
+        "East-edge plant growth — dense, silver-undersided leaves, exact paired branching",
+        "Low stone retaining wall along the downhill side",
+        "Piotr's tools — trowel, clay bucket, worn cloth cap set aside",
+        "Adelheid's Medic's Satchel — open, Silver-Stemmed Cutting (linen-wrapped) restin"
+      ],
+      "threads": [
+        "The hum travels south-southeast along a unified root system — source or destination unknown, beyond Echo Sense range",
+        "Aevi is very bright and very still above the wrapped cutting — went silent at the moment the blade touched the stem",
+        "Piotr's eyes are on the cutting, not Adelheid — he knows something about these plants",
+        "Bundle not yet opened by Piotr; private plant note inside",
+        "Mara's 'carefully' — what it meant is still unresolved: the plant registered the cut with a momentary hum-spike"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 20,
+    "realAnchor": null
+  },
+  "companions": [
+    "aevi"
+  ],
+  "quests": [
+    {
+      "id": "maras-errand",
+      "title": "Mara's Errand",
+      "summary": "Deliver a cloth-wrapped bundle to Piotr on Terrace Three east, and quietly observe the uncatalogued plants growing along the untended stretch — with permission to take cuttings.",
+      "giver": "Mara Wells",
+      "locationId": null,
+      "status": "active",
+      "progress": [
+        "Bundle in hand. Mara specified the plant note inside is between Adelheid and Piotr only.",
+        "Bundle delivered to Piotr on Terrace Three east. Note left private. Uncatalogued plants observed at the east edge — study pending.",
+        "Bundle delivered. Adelheid has reached the uncatalogued east-edge plants and felt a hum through the stem on first contact — active observation now underway.",
+        "Echo Sense confirms: roots are unified and deep — far past the terrace cut — and the internal hum travels south-southeast along a shared root system. Aevi calls it one system. Piotr is watching Adelhe",
+        "Cutting taken carefully — node spacing and root angle (20° south-southeast) recorded in linen. Aevi went bright and silent at the moment of the cut. Piotr's eyes went to the cutting, not Adelheid's fa"
+      ],
+      "startedAt": "2026-07-08T18:17:05.695Z"
+    }
+  ],
+  "npcRegistry": {
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "role": "Millbrook civic manager",
+      "description": "A sharp-eyed woman in a patched green coat; worker's hands, a planner's bearing, dry unhurried speech. Spotted Adelheid's satchel and Harmonic stitching before a word was exchanged.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Approached Adelheid directly, identified her as an outsider, introduced herself by name and role. Waiting for Adelheid's introduction.",
+        "[d1] Heard Adelheid's honest introduction — name, Swiss origin, Korean residency, herbalist-medic work. Filed it efficiently. Mentioned that valley plants have changed since the Transit",
+        "[d1] Confirmed the errand to Piotr; privately asked Adelheid to observe the uncatalogued plants on the east terrace and granted permission to take cuttings — with the specific word 'car"
+      ],
+      "knownFacts": [
+        "She manages what passes for civic order in Millbrook",
+        "She noticed the Medic's Satchel and Harmonic stitching on sight",
+        "She has an errand-boy running something heavy to or from the well",
+        "Mara's previous errand-runner left Millbrook three weeks ago and hasn't been replaced",
+        "Mara considers the untamed lower-terrace plants significant enough to mention unprompted",
+        "Mara has been watching the uncatalogued east-terrace plants for two full seasons",
+        "She considers them significant enough to task a stranger with observing them on a first meeting",
+        "Her use of 'carefully' when describing cutting them implies she suspects they may react or matter in a way beyond ordinary botany"
+      ],
+      "skillsObserved": [
+        "sharp observation",
+        "calm authority",
+        "information economy — shares just enough to create interest",
+        "information economy — shares just enough to create obligatio",
+        "calm authority under morning bustle"
+      ],
+      "status": "active",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "statusNote": "Active in Millbrook village lane; has delegated the Piotr errand and the terrace observation to Adelheid and returned to civic rounds."
+    },
+    "piotr": {
+      "id": "piotr",
+      "name": "Piotr",
+      "role": "Terrace farmer, Terrace Three east",
+      "description": "A compact man in his fifties with gray-streaked hair; kneels in his field patching irrigation channels, hands permanently clay-stained. Speaks minimally. Recognized the bundle before he recognized Adelheid.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Received the bundle from Adelheid without questions. Confirmed the note is inside; stopped himself from opening it in front of her. Manner suggests he was expecting this delivery.",
+        "[d1] Watched Adelheid move toward the silver-stemmed plants. Did not stop her. Did not look away. Holding the bundle still.",
+        "[d1] Watched Adelheid make first contact with the silver-stemmed plants. Has not moved, has not spoken, has not crossed toward the east edge. His stillness reads as deliberate familiari",
+        "[d1] Watched Adelheid's face during the Echo Sense pass — not the plant, her face. Still has not spoken. Cord still half-worked.",
+        "[d1] Watched Adelheid take the cutting. His eyes moved to the linen-wrapped cutting the moment the blade came away — not to Adelheid's face. Still has not spoken. Still has not moved to"
+      ],
+      "knownFacts": [
+        "Was expecting a delivery from Mara — recognized the bundle immediately",
+        "Chose not to open the private plant note in Adelheid's presence",
+        "Works Terrace Three east himself; knows this land well",
+        "He watches the east-edge plants without approaching them — possible familiarity or wariness",
+        "He watches the east-edge plants without approaching — pattern suggests he has made a conscious choice not to touch them",
+        "He watches Adelheid's expression during her ability use — suggesting he is waiting to see what she finds, not whether she uses an ability",
+        "His attention moved to the cutting the instant it was separated — suggesting the plant or its removal means something specific to him"
+      ],
+      "skillsObserved": [
+        "careful handling of fragile goods",
+        "economy of speech"
+      ],
+      "status": "active",
+      "statusNote": "On Terrace Three east, bundle in both hands, watching the wrapped cutting — has still not spoken.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    }
+  },
+  "placeMemory": {
+    "millbrook": {
+      "visits": 1,
+      "notes": [
+        "[d1] The path to the mill terraces begins at the far end of the market lane. Terrace Three east borders an untended stretch of uncatalogued plants that Mara Wells has been monitoring for two seasons.",
+        "[d1] Terrace Three east has an untended east edge colonized by an uncatalogued silver-leafed plant with paired branching at every node — spreading outside the terrace grid. First observed Day 1 midday.",
+        "[d1] The silver-stemmed east-edge plants hum internally when touched — confirmed Day 1 midday by Adelheid on first direct contact.",
+        "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum and brightened — the motes pulled tight and close above the leaves, as if listening for an answer from the plant tissue.",
+        "[d1] Echo Sense confirmed: the east-edge plant roots are unified and deep, angled south-southeast — the hum has a direction and a system behind it.",
+        "[d1] One stem cut cleanly two nodes up on Day 1 midday — pale sap bead at the wound. The plant registered the cut with a momentary hum-spike. The cutting is in Adelheid's possession."
+      ],
+      "flags": {
+        "plant_hum_confirmed": "day1",
+        "aevi_resonated_with_plant": "day1",
+        "root_system_unified": "day1",
+        "hum_direction": "south-southeast",
+        "cutting_taken": "day1",
+        "plant_registered_cut": "true"
+      },
+      "subPlaces": {
+        "terrace-three-east": {
+          "name": "Terrace Three East",
+          "day": 1,
+          "visited": true,
+          "note": "Root system confirmed unified — hum travels south-southeast along shared roots, depth exceeds terrace foundation. Aevi n"
+        }
+      },
+      "vectorsKnown": [
+        "violence_peace",
+        "concrete_abstract"
+      ]
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: The six-fold subsurface pulse confirmed reaching Millbrook's drinking wells — the pre-Transition system's reach now encompasses the village water supply, not merely the river and irrigation channels (ne"
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: Pell granted permission for Sela to testify at Thursday's elder meeting — on condition that Pell herself stands at the door and holds the right to call it off. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: A second anonymous annotation appeared on the Edge District assembly notice board — 'ask the river' — added in fresh ink on filtration run night. (near radiant plateau edge)"
+      },
+      {
+        "day": 1,
+        "text": "Word reaches you: The Harmonic Heights gateline warden agreed to testify at Millbrook's Thursday elder meeting about six-count channel light witnessed three springs ago — placing the conduit pulse at the Heights years  ("
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-08T17:54:30.076Z"
+  },
+  "bio": {
+    "hometown": "a small village in Switzerland",
+    "residence": "a mountain village in South Korea",
+    "livelihood": "making herbal remedies",
+    "hobbies": "watercolor painting, tea with the villagers",
+    "motivation": "she had to move to South Korea due to her parents' occupation",
+    "story": "Adelheid was always learning about plants in Switzerland and was known in her village for clever remedies and even special cough drops. She has been learning the new plants in South Korea and has studied with other naturopaths and herbalists and is creating her own now."
+  },
+  "subAttributes": {
+    "strength": 2,
+    "agility": 2,
+    "reason": 4,
+    "insight": 4,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 4,
+    "wits": 4
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "echo-river-contamination": {
+        "id": "echo-river-contamination",
+        "label": "Echo River Contamination",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Echo River runs with a gray-green iridescence on the surface, visible at Millbrook's dock on Day 1 morning. Fish catches are thin. Villagers draw from the well rather than the river without saying",
+          "[d1] Echo Sense reveals fish are actively avoiding the shallows near Millbrook's dock, clustering in deep cold water on the far bank. The riverbed beneath the dock is unnaturally flat and dense — not consi"
+        ],
+        "links": [
+          "millbrook"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "mara-wells": {
+        "id": "mara-wells",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d1] Mara Wells manages civic order in Millbrook — she spotted Adelheid's Medic's Satchel and Harmonic stitching immediately and initiated contact, suggesting she was already looking for someone useful.",
+          "[d1] Mara granted Adelheid permission to observe and take cuttings from the uncatalogued east-terrace plants — she has been tracking them for two seasons and trusts Adelheid's herbalist eye enough to deleg"
+        ],
+        "links": [
+          "millbrook",
+          "echo-river-contamination",
+          "uncatalogued-terrace-plants",
+          "maras-errand"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "valley-plants": {
+        "id": "valley-plants",
+        "label": "Valley Flora — Post-Transition",
+        "kind": "lore",
+        "facts": [
+          "[d1] Mara Wells notes that plants on the lower terraces around Millbrook have changed since the Transition — some have no name in any catalog. Either they evolved, or they were always here unrecorded. Pote"
+        ],
+        "links": [
+          "millbrook",
+          "mara-wells"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "uncatalogued-terrace-plants": {
+        "id": "uncatalogued-terrace-plants",
+        "label": "Uncatalogued Terrace Plants",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Plants have been growing on Millbrook's east lower terrace for at least two seasons that appear in no catalog before the Transition. Mara Wells has been watching them and considers them significant — ",
+          "[d1] First direct observation on Terrace Three east: silver-undersided leaves, stems branching in paired nodes with unusual regularity — pattern feels almost systematic. Spreads outside the terrace layout.",
+          "[d1] On first direct contact, a silver-stemmed plant at the east edge of Terrace Three transmitted a faint internal hum through its stem — not wind or surface vibration. The branching pattern (exact paired",
+          "[d1] Aevi responded to the silver-stemmed plants with a low resonant hum, motes pulling bright and close above the leaves — as if the plants and the companion intelligence are exchanging something. Piotr w",
+          "[d1] Echo Sense (conserved, rank 1): roots are unified across the entire east-edge growth — one system, not many plants. They descend past the terrace's cut-stone foundation. The internal hum travels south",
+          "[d1] The plant registered the cutting with a momentary hum-spike at the moment of separation — the hum did not die with the severed stem, it was absorbed back into the root system. The cut sap is pale, vis"
+        ],
+        "links": [
+          "millbrook",
+          "mara-wells",
+          "valley-flora-post-transition",
+          "maras-errand",
+          "echo-river-contamination"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "piotr": {
+        "id": "piotr",
+        "label": "Piotr",
+        "kind": "person",
+        "facts": [
+          "[d1] Compact farmer, Terrace Three east. Was expecting Mara's bundle. Sparing with words. Trusted enough by Mara to receive a private plant note."
+        ],
+        "links": [
+          "mara-wells",
+          "millbrook",
+          "uncatalogued-terrace-plants",
+          "maras-errand"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "grantsVersion": 1,
+  "customAbilities": {},
+  "companionBonds": {
+    "aevi": 0.5
+  },
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "echo_sense": 6,
+      "sonic_resonance": 2
+    },
+    "coActivations": {},
+    "aspirations": [
+      {
+        "abilityId": "chord_of_mending",
+        "since": "2026-07-08T17:56:44.256Z",
+        "progress": 0
+      }
+    ]
+  },
+  "establishedFacts": [
+    {
+      "id": "uncatalogued-terrace-plants",
+      "text": "The silver-stemmed uncatalogued plants on Terrace Three east emit a faint internal hum when touched — not wind, not vibration, but originating from within the plant tissue.",
+      "day": 1,
+      "subjectId": "uncatalogued-terrace-plants"
+    },
+    {
+      "id": "uncatalogued-terrace-plants",
+      "text": "The silver-stemmed east-edge plants share a single unified root system that descends far deeper than the terrace cut — and the internal hum travels south-southeast along the roots, past the range of E",
+      "day": 1,
+      "subjectId": "uncatalogued-terrace-plants"
+    },
+    {
+      "id": "uncatalogued-terrace-plants",
+      "text": "A cutting from the silver-stemmed east-edge plants was taken on Day 1 midday — the plant registered the cut with a momentary spike in its internal hum before settling. Pale, nameless sap at the wound.",
+      "day": 1,
+      "subjectId": "uncatalogued-terrace-plants"
+    }
+  ],
+  "precursorAccess": [],
+  "backfillVersion": 1,
+  "sharedSceneId": null,
+  "opLossPending": false
+}

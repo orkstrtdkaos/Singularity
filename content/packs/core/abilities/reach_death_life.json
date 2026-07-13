@@ -44,7 +44,9 @@
         }
       ],
       "functions": [
-        "heal"
+        "heal",
+        "sustain",
+        "make"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -95,8 +97,9 @@
         }
       ],
       "functions": [
-        "break",
-        "heal"
+        "strike",
+        "hinder",
+        "foresee"
       ],
       "challengeTypes": [
         "INVESTIGATE",
@@ -125,6 +128,7 @@
         "death_life": -0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
@@ -220,7 +224,8 @@
         "death_life": 0.3
       },
       "functions": [
-        "heal"
+        "heal",
+        "sustain"
       ],
       "narrationHints": "A hand pressed and a word, and the bleeding slows to a stop.",
       "description": "Field-stop bleeding and stabilize the badly hurt — the first, portable mercy of Vivimancy.",
@@ -265,8 +270,9 @@
         "death_life": -0.4
       },
       "functions": [
-        "strike",
-        "break"
+        "hinder",
+        "break",
+        "strike"
       ],
       "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
       "description": "Hasten decay in a thing — rot wood, wilt growth, weaken the living by drawing the quick out. Palework's edge turned outward.",
@@ -317,7 +323,7 @@
       },
       "functions": [
         "heal",
-        "mend"
+        "transform"
       ],
       "narrationHints": "What was lost is coaxed to grow back — not the same, but living.",
       "description": "Regrow lost tissue, mend a maiming, coax a broken living thing back toward whole. Mid-tier Vivimancy.",
@@ -365,7 +371,7 @@
       },
       "functions": [
         "ward",
-        "shield"
+        "resist"
       ],
       "narrationHints": "A sign laid down that the dying may not be disturbed — and the restless dead may not pass.",
       "description": "Inscribe a ward against death's disturbances — keep the restless-dead out, or keep a passing peaceful and unbroken. Palework as protection.",
@@ -417,6 +423,7 @@
       },
       "functions": [
         "heal",
+        "restore",
         "reveal"
       ],
       "narrationHints": "At the very edge, the dying are given one clear hour — lucid, painless, theirs.",
@@ -457,8 +464,8 @@
         "body_mind": -0.2
       },
       "functions": [
-        "strike",
-        "break"
+        "hinder",
+        "strike"
       ],
       "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
       "description": "Enfeeblement. You take the vigour out of a living thing by touch or by near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago.",
@@ -508,6 +515,7 @@
         "body_mind": -0.1
       },
       "functions": [
+        "hinder",
         "strike",
         "heal"
       ],
@@ -557,8 +565,9 @@
         "emotional_logical": -0.3
       },
       "functions": [
+        "hinder",
         "bind",
-        "reveal"
+        "foresee"
       ],
       "narrationHints": "He feels his own ending arrive early — not as a thought, as a temperature.",
       "description": "You let a living thing feel, for a moment, the ending it is walking toward. It is not an illusion and it is not a lie. It is simply EARLY. Most things run. Some things freeze. A few things come straight at you, and those are the ones to watch.",
@@ -608,7 +617,8 @@
         "falsehood_truth": 0.3
       },
       "functions": [
-        "reveal"
+        "reveal",
+        "summon"
       ],
       "narrationHints": "It answers. It is not glad to. It tells you the small thing it knew and nothing more.",
       "description": "The recently dead will answer you — poorly, briefly, and only about what they actually knew in life. They are not oracles. They are a person, tired, being asked one more question.",
@@ -658,8 +668,7 @@
         "violence_peace": -0.3
       },
       "functions": [
-        "strike",
-        "break"
+        "strike"
       ],
       "narrationHints": "There is no wound. There is no sound. The thread was there and then it was cut, and everyone in the room understands exactly what they have just watched.",
       "description": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
@@ -681,5 +690,6 @@
       },
       "harmRung": "lethal"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

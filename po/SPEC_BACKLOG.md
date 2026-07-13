@@ -1692,3 +1692,31 @@ Content: **`content/packs/core/rules/the_substrate.json`** — authored, at orig
 
 ### ✅ What DID work (Erik's leg)
 **Auto-fill from conversation is excellent and verified live.** He talked a plan through with the GM, hit ⚙ Plan, and got a goal plus three ordered steps pulled verbatim from the conversation — *"confirm the taper on Pell's shaft meets the exact tolerances," "bring the shaft to the forge while the metal is still hot," "seat the socket so the resonance line runs clean through the join."* **That is the feature working exactly as intended.** Reorder, Start-over and full-width inputs all confirmed.
+
+---
+
+## SNG-093 — The GM hangs forever on 'Assess plan' / 'GM, look at this' 🔴
+
+**Erik live 2026-07-12 (v1.8.46):** *"the GM doesn't seem to be able to provide feedback. gets stuck."* 🔧 CCode. Aevi PO.
+
+### PWSV (app.js ~4090–4113)
+```js
+if (advise) advise.onclick = async () => {
+  read();
+  renderGambitBuilder("The GM studies your plan…");
+  const result = await gmAsk({...});   // ← if this THROWS, nothing catches it
+  if (result.ok) { ... } else { ... }  // handles a RETURNED failure only
+  renderGambitBuilder();               // ← NEVER REACHED on a throw
+};
+```
+**The handler is `async` and NOT wrapped in try/catch.** There is a graceful path for a *returned* failure (`result.ok === false`) but **none for a thrown exception.** On a timeout, network error, or parse throw, the promise rejects unhandled, the final `renderGambitBuilder()` never runs, and **the UI sits on *"The GM studies your plan…"* forever.** The player has no error, no retry, and no way out but Back.
+
+*(Note: the neighbouring `read()` handler IS wrapped — `catch (err) { renderGambitBuilder("Couldn't read the plan…") }`. So the pattern is known; it just wasn't applied here.)*
+
+### Fix
+1. **Wrap BOTH GM-call handlers** (`Assess plan` and `GM, look at this`) in `try/catch/finally`. **`finally` MUST call `renderGambitBuilder()`** so the UI can never be left in a loading state.
+2. **A timeout** (~30s) with a retry affordance. **An in-flight AI call must never be able to strand the UI.**
+3. **Audit every other `async` onclick in app.js** for the same shape. `[CCODE: this is a class of bug, not one instance — grep for `onclick = async` without try/catch.]`
+4. **Design Law 5 says so already:** *"Graceful degradation everywhere. Any AI failure yields a playable partial… A hiccup never blocks play."* **This violates a law we already wrote.**
+
+**Erik test:** "Hit Assess plan. Verify you always get EITHER advice or a clear error with a retry — never a permanent 'studying'."

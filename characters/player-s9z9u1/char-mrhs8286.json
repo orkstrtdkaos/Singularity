@@ -354,206 +354,168 @@
         "player": "It has a quite, yet capable beauty to it... as do you.  Then walk up and introduce yourself to Corvin and see what he's up to.",
         "summary": "Silas introduces himself to Corvin at the east furlong — the hunt is one conversation away.",
         "narration": "The left fork past the willow opens into a long narrow furlong — winter-pale grass, a low drystone wall along the south edge, and Corvin. He's crouched over a fence-section laid flat on the ground, wrestling a cross-rail back into its mortise with the patient irritation of a man who has done this before and expects to do it again. He doesn't look up immediately. The repair is half-done and losing the argument.\n\nYou take in the furlong for a moment — the morning light flat and even across the stubble, a crow picking at something near the far wall, the river's gray-green bend just visible past the tree-line to the north. There's a quiet capability to the whole stretch: worked earth, tended walls, the particular order of a place someone maintains without being told. *As do you,* you think, clocking Corvin before he's clocked you — broad in the shoulder, younger than Aldric, moving with the compact economy of someone who works outside in all weathers. Then you step forward.\n\n\"Silas Weir,\" you say, and let the assembled spear rest easy at your side so it reads as a carried thing rather than a pointed one. \"Pell thought I should find you before I went north. She was right.\" You tip your chin at the fence-section on the ground. \"You want a hand with that first, or shall we talk while you're losing to it?\"\n\nPell has stopped a few paces back, thumbs hooked in her coat pockets, watching Corvin with the particular attention she gives to fires she's not sure are out. Huginn is somewhere in the tree-line ahead — you can feel the pull of its attention, northward, toward the river bend."
+      },
+      {
+        "player": "Lend a hand on the fence-rail — work first, talk after",
+        "summary": "Silas helps Corvin seat the fence-rail; Corvin names the river — worse two mornings running, fish gone quiet.",
+        "narration": "Corvin hears the footsteps and looks up from the mortise. You set the burlap bundle down against the drystone wall without ceremony, plant the spear beside it, and crouch on the other side of the fence-section. The cross-rail is binding in the mortise throat on a bad angle — you can see it immediately, the way the grain is fighting the socket. You get both hands under the near end, lift and tip, and Corvin adjusts without a word. The rail drops home with a solid knock that neither of you needed to discuss.\n\nHe sits back on his heels and looks at you properly for the first time. Broad face, weathered at the edges, the kind of quiet that isn't unfriendly — more like a man who doesn't spend words until he knows what they're worth. His eyes go to the spear against the wall, then to Pell a few paces back, then to the tree-line where Huginn's dark shape is angled toward the river bend with an attention that is distinctly not a bird's.\n\n'That's Pell's work,' he says, meaning the spear, and it isn't a question.\n\nFrom somewhere north of the furlong, up past the tree-line where the river bends, comes a low croak — Huginn, once, unmistakable. Not alarm. Attention. The gray-green tinge on the water is visible even from here, a slow coherent thread keeping its shape inside the bend when it should have diffused into the cold current by now.\n\nCorvin watches the tree-line for a beat, then looks back at you. 'It's been worse the last two mornings,' he says, quieter. 'Fish didn't jump the shallows at first light today. Didn't jump them yesterday either.'"
       }
     ],
     "lastTurn": {
-      "narration": "The left fork past the willow opens into a long narrow furlong — winter-pale grass, a low drystone wall along the south edge, and Corvin. He's crouched over a fence-section laid flat on the ground, wrestling a cross-rail back into its mortise with the patient irritation of a man who has done this before and expects to do it again. He doesn't look up immediately. The repair is half-done and losing the argument.\n\nYou take in the furlong for a moment — the morning light flat and even across the stubble, a crow picking at something near the far wall, the river's gray-green bend just visible past the tree-line to the north. There's a quiet capability to the whole stretch: worked earth, tended walls, the particular order of a place someone maintains without being told. *As do you,* you think, clocking Corvin before he's clocked you — broad in the shoulder, younger than Aldric, moving with the compact economy of someone who works outside in all weathers. Then you step forward.\n\n\"Silas Weir,\" you say, and let the assembled spear rest easy at your side so it reads as a carried thing rather than a pointed one. \"Pell thought I should find you before I went north. She was right.\" You tip your chin at the fence-section on the ground. \"You want a hand with that first, or shall we talk while you're losing to it?\"\n\nPell has stopped a few paces back, thumbs hooked in her coat pockets, watching Corvin with the particular attention she gives to fires she's not sure are out. Huginn is somewhere in the tree-line ahead — you can feel the pull of its attention, northward, toward the river bend.",
-      "sceneSummary": "Silas introduces himself to Corvin at the east furlong — the hunt is one conversation away.",
+      "narration": "Corvin hears the footsteps and looks up from the mortise. You set the burlap bundle down against the drystone wall without ceremony, plant the spear beside it, and crouch on the other side of the fence-section. The cross-rail is binding in the mortise throat on a bad angle — you can see it immediately, the way the grain is fighting the socket. You get both hands under the near end, lift and tip, and Corvin adjusts without a word. The rail drops home with a solid knock that neither of you needed to discuss.\n\nHe sits back on his heels and looks at you properly for the first time. Broad face, weathered at the edges, the kind of quiet that isn't unfriendly — more like a man who doesn't spend words until he knows what they're worth. His eyes go to the spear against the wall, then to Pell a few paces back, then to the tree-line where Huginn's dark shape is angled toward the river bend with an attention that is distinctly not a bird's.\n\n'That's Pell's work,' he says, meaning the spear, and it isn't a question.\n\nFrom somewhere north of the furlong, up past the tree-line where the river bends, comes a low croak — Huginn, once, unmistakable. Not alarm. Attention. The gray-green tinge on the water is visible even from here, a slow coherent thread keeping its shape inside the bend when it should have diffused into the cold current by now.\n\nCorvin watches the tree-line for a beat, then looks back at you. 'It's been worse the last two mornings,' he says, quieter. 'Fish didn't jump the shallows at first light today. Didn't jump them yesterday either.'",
+      "sceneSummary": "Silas helps Corvin seat the fence-rail; Corvin names the river — worse two mornings running, fish gone quiet.",
       "choices": [
         {
-          "label": "Lend a hand on the fence-rail — work first, talk after",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
+          "label": "Introduce the hunt — tell him why you're here: the boar sounder in the north wood, the arrangement with Aldric, the spear tip you've brought for him.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "help",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Lay out the hunt plainly — boar sounder north of the wood, Pell along, you have what he needs",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
             "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Watch him a moment — get a read on his temperament from how he handles the fence and the introduction",
+          "label": "Ask about the river first — two mornings worse, fish gone quiet: what else has he noticed from this furlong, close to the bend?",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Hand off the Modified Light Spear-Tip (Corvin's) now — let the hardware open the conversation",
+          "label": "Bring out the Modified Light Spear-Tip (Corvin's) — unwrap it and put it in his hands before any words about the hunt; let the iron speak.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "plan"
+            "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense on the river bend — from here you can just see it; read the structure of what's moving in that water.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Corvin's east furlong — a long narrow strip of winter-pale grass with a low drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is crouched over a downed fence-section mid-repair.",
+        "setting": "Corvin's east furlong — long narrow winter-pale strip, drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is now sitting back on his heels, cross-rail seated, looking at Silas.",
         "npcsPresent": [
           {
             "name": "Corvin",
-            "state": "Crouched over a fence-section on the ground, wrestling a cross-rail back into its mortise — half-done, not yet looking up."
+            "state": "Sitting back on his heels after the fence-rail seated — looking at Silas directly for the first time, weathered and measuring."
           },
           {
             "name": "Pell Marsh",
-            "state": "Stopped a few paces back, thumbs in coat pockets, watching Corvin with quiet attention."
+            "state": "A few paces back, thumbs in coat pockets, watching."
           },
           {
             "name": "Huginn",
-            "state": "In the northern tree-line, attention angled toward the river bend."
+            "state": "In the northern tree-line, attention fixed on the river bend — croaked once."
           }
         ],
         "objects": [
-          "Assembled mid-weight spear — in Silas's hand",
-          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Silas's back",
+          "Assembled Mid-Weight Spear — leaning against the drystone wall",
+          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), against the wall",
           "Rune-Craft Kit — in the pack",
-          "Downed fence-section with a cross-rail half-seated in its mortise",
+          "Seated fence-section — cross-rail now properly mortised",
           "Low drystone wall along the south edge of the furlong"
         ],
         "threads": [
-          "Corvin has not yet responded to the introduction",
           "Modified Light Spear-Tip (Corvin's) still to be handed off",
           "Hunt invitation still to be made formally",
+          "Corvin has noted the river is worse — two mornings running, fish not jumping",
+          "Huginn's attention on the river bend is unresolved",
           "Evening spear work — Pell has accepted"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "corvin",
           "name": "Corvin",
-          "role": "Farmer, east furlong — prospective hunt companion",
-          "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
-          "note": "Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded.",
+          "note": "Helped seat the fence cross-rail without being asked — made eye contact for the first time. Named the river without prompting: worse two mornings running, fish not jumping the shallows.",
           "learned": [
-            "Works the east furlong alone",
-            "Was expected by Pell to be found mending or building something half-considered — confirmed"
+            "River has been visibly worse for two consecutive mornings as of World-day 13",
+            "Fish not jumping the shallows at first light — yesterday and today"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "practical fence repair",
+            "quiet observation"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At his east furlong, mid-repair on a downed fence-section."
+          "statusNote": "At his east furlong, cross-rail seated, now in direct conversation with Silas."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell Marsh",
-          "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Walked east with Silas; stopped back to watch Corvin's reaction to the introduction.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "note": "Holding back, watching Corvin's first read of Silas.",
           "status": "active",
-          "statusNote": "Standing a few paces behind Silas at Corvin's east furlong, coat on, watching."
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
-          "subPlace": {
-            "name": "Corvin's East Furlong",
-            "note": "Narrow farmed strip with drystone south wall — Corvin's work-ground. River bend visible to the north through the tree-line.",
-            "visited": true
-          }
+          "statusNote": "Standing a few paces behind Silas at Corvin's east furlong, watching."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "corvin",
-          "label": "Corvin",
-          "kind": "person",
-          "entityId": "corvin",
-          "fact": "Found at his east furlong on World-day 13 morning, mid-repair on a downed fence-section — broad-shouldered, compact, weathered. Maintains his ground without ceremony. Has not yet spoken.",
+          "topic": "water-crisis-discoloration",
+          "label": "The River's Discoloration",
+          "kind": "event",
+          "fact": "Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visible from the east furlong.",
           "links": [
             "millbrook",
-            "pell",
-            "aldric-provisioning-deal"
+            "corvin",
+            "aldric",
+            "disputed-zone"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk from Pell's forge to Corvin's furlong"
-      },
-      "gambitApt": false,
-      "sceneEnded": false
+        "why": "A quick exchange and one fence-rail seated — barely a quarter hour."
+      }
     },
     "sceneState": {
-      "setting": "Corvin's east furlong — a long narrow strip of winter-pale grass with a low drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is crouched over a downed fence-section mid-repair.",
+      "setting": "Corvin's east furlong — long narrow winter-pale strip, drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is now sitting back on his heels, cross-rail seated, looking at Silas.",
       "npcsPresent": [
         {
           "name": "Corvin",
-          "state": "Crouched over a fence-section on the ground, wrestling a cross-rail back into its mortise — half-done, not yet looking u"
+          "state": "Sitting back on his heels after the fence-rail seated — looking at Silas directly for the first time, weathered and meas"
         },
         {
           "name": "Pell Marsh",
-          "state": "Stopped a few paces back, thumbs in coat pockets, watching Corvin with quiet attention."
+          "state": "A few paces back, thumbs in coat pockets, watching."
         },
         {
           "name": "Huginn",
-          "state": "In the northern tree-line, attention angled toward the river bend."
+          "state": "In the northern tree-line, attention fixed on the river bend — croaked once."
         }
       ],
       "objects": [
-        "Assembled mid-weight spear — in Silas's hand",
-        "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Sil",
+        "Assembled Mid-Weight Spear — leaning against the drystone wall",
+        "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), agains",
         "Rune-Craft Kit — in the pack",
-        "Downed fence-section with a cross-rail half-seated in its mortise",
+        "Seated fence-section — cross-rail now properly mortised",
         "Low drystone wall along the south edge of the furlong"
       ],
       "threads": [
-        "Corvin has not yet responded to the introduction",
         "Modified Light Spear-Tip (Corvin's) still to be handed off",
         "Hunt invitation still to be made formally",
+        "Corvin has noted the river is worse — two mornings running, fish not jumping",
+        "Huginn's attention on the river bend is unresolved",
         "Evening spear work — Pell has accepted"
       ]
     }
@@ -696,7 +658,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
         "[d1] Heard Silas returning on the stone and named the east furlong unprompted — knows exactly where Corvin is; turned just enough to clock Huginn settling in, and the corner of her mout",
         "[d1] Finished her last piece, washed up, gave Corvin's exact location — east furlong, past the second fence-line, left fork at the willow. Turned to face Silas with her usual flat asses",
         "[d1] Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on ",
@@ -705,7 +666,8 @@
         "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
         "[d1] Revealed her surname — Marsh — after Silas guessed Grant. Noted her grandmother's name was Grant. Caught the tease and named it plainly.",
         "[d1] Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh.",
-        "[d1] Walked east with Silas; stopped back to watch Corvin's reaction to the introduction."
+        "[d1] Walked east with Silas; stopped back to watch Corvin's reaction to the introduction.",
+        "[d1] Holding back, watching Corvin's first read of Silas."
       ],
       "knownFacts": [
         "Not unsettled by Silas returning when he could have gone straight to the east furlong",
@@ -726,7 +688,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "Standing a few paces behind Silas at Corvin's east furlong, coat on, watching.",
+      "statusNote": "Standing a few paces behind Silas at Corvin's east furlong, watching.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -784,17 +746,23 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d1] Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded."
+        "[d1] Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded.",
+        "[d1] Helped seat the fence cross-rail without being asked — made eye contact for the first time. Named the river without prompting: worse two mornings running, fish not jumping the shal"
       ],
       "knownFacts": [
         "Works the east furlong alone",
-        "Was expected by Pell to be found mending or building something half-considered — confirmed"
+        "Was expected by Pell to be found mending or building something half-considered — confirmed",
+        "River has been visibly worse for two consecutive mornings as of World-day 13",
+        "Fish not jumping the shallows at first light — yesterday and today"
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "practical fence repair",
+        "quiet observation"
+      ],
       "status": "active",
-      "statusNote": "At his east furlong, mid-repair on a downed fence-section.",
+      "statusNote": "At his east furlong, cross-rail seated, now in direct conversation with Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -957,12 +925,14 @@
         "facts": [
           "[d1] The Echo River runs gray-green on bad mornings in Millbrook — observed firsthand at the dock. A fisherman pulled his nets in early. The discoloration appears to drift in slow wreaths from upstream. Fi",
           "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be ",
-          "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor"
+          "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor",
+          "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib"
         ],
         "links": [
           "millbrook",
           "disputed-zone",
-          "aldric"
+          "aldric",
+          "corvin"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1193,11 +1163,11 @@
     }
   },
   "tendencies": {
-    "strategic": 21.921929115468146,
-    "cerebral": 8.5891842869108,
-    "social": 30.070484414221074,
-    "generous": 9.624071180217468,
-    "cautious": 10.801643817785342
+    "strategic": 21.812319469890806,
+    "cerebral": 8.546238365476245,
+    "social": 29.92013199214997,
+    "generous": 10.575950824316381,
+    "cautious": 11.747635598696416
   },
   "aptitudes": [
     "strategist",
@@ -1205,7 +1175,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 43,
+  "actionCount": 44,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1227,8 +1197,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783904197797,
-  "rev": 69,
+  "updatedAt": 1783904499506,
+  "rev": 70,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

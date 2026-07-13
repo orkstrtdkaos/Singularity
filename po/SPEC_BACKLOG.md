@@ -1405,3 +1405,41 @@ SNG-046 Phase 1 specced **discovered (solid) AND heard-of (dimmed)** — the sam
 **Erik test:** "Toggle it with a character who has met no one — verify it tells you so, AND that the things you've only HEARD of (Fendt, the Edge District, the water crisis) appear dimmed where they live. Then meet someone and verify they go solid."
 
 *This turns the map from a travel tool into an intelligence board — the away-digest stops being flavour text and becomes something you can SEE.*
+---
+
+## SNG-084 — The game explains nothing (in-context mechanics helper text) ⭐
+
+**Erik, 2026-07-12:** *"I can't pick a new skill with my skillpoint... is this as designed? We need to add helper text that explains all the game mechanics and make the text show up in the right places."* 🔧 CCode (surfaces) + ✍️ Aevi (the copy). Aevi PO.
+
+### The finding is worse than the bug
+**It IS as designed** — `skilltree.js → breadthCap`: a **broad-vs-deep capacity**. You may know only N *distinct* abilities at your level; further points must **deepen** what you own. Real, deliberate, data-driven.
+**And Erik — who DESIGNED this game — could not tell a rule from a bug.** That is the finding. **Brooklyn has no chance.**
+
+*(Compounding: Erik's 3 capacity slots are spent on **Lightsense · Order-Sense · Numen-Sense** — Blazeborn, Lattice, Numinous. **Not one is a wright ability.** The SNG-068 creation bug did not merely give him the wrong skills; it **spent his entire breadth budget on them**, so he cannot take a single ability of his own people. **This makes SNG-070 (GM corrections) urgent, not optional.**)*
+
+### The principle
+**Every mechanic must explain itself AT THE POINT IT BITES.** Not in a manual. Not in the Library. **Right where the player runs into it, in one sentence, in the game's voice.**
+> *A rule the player cannot distinguish from a bug is, functionally, a bug.*
+
+### Where helper text is owed (each: one sentence, in-voice, on an `ⓘ`)
+| Surface | The player's question | What it must say |
+|---|---|---|
+| **"3 of 3 — at capacity"** | *"Is this broken?"* | **"You can carry only so many crafts at once. Further points DEEPEN what you know rather than add to it. Breadth or depth — that is the trade, and it is meant to cost you."** |
+| **A locked ability** | *"Why can't I take this?"* | Say WHICH gate: *"closed — this is your antipode"* · *"free, but not their capstone — you are kin, not one of them"* · *"+2 points — three steps around the ring"* · *"you must be native, in their region, or taught by one of them."* |
+| **The great circle** | *"What am I looking at?"* | It is the world's dispositional geography AND your access map. Your antipode is what you can never be. |
+| **Energy hitting 0** | *"Why am I stuck?"* | **There is no passive regen.** You recover by eating, resting, sleeping, meditating — actively. Exhaustion is −10, not a wall. |
+| **A novel action (−15)** | *"Why was that so hard?"* | You reached past what you know. It is *supposed* to be dangerous. |
+| **A discovery (+20)** | *"Why is this suddenly easy?"* | You did it, survived it, and repeated it until it was yours. **The same act that cost you −15 now pays +20.** |
+| **Spectral fit** | *"Why did that go well/badly?"* | The place favoured you / was against you. **Geography is disposition.** |
+| **Ranks vs breadth** | | Rank deepens ONE craft; breadth adds another. Rank III forks — and the unchosen path closes forever. |
+| **Tiers I–V** | | Depth of mastery within a people's craft. Capstones must be *taught*, not bought. |
+| **Gambits** | | Connected challenges, each solvable several ways, **planned across** — and **fewer steps are HARDER** (`gambit_design.json`). |
+| **XP / levels** | | Where growth comes from, and what a level actually gives you. |
+
+### Build
+1. **`ⓘ` affordance on every mechanic surface**, opening a short in-voice explanation. **Progressive** — do not dump the system on a new player.
+2. **Every REFUSAL explains itself.** *A silent "no" is the worst thing in the game.* (Ties SNG-079: *"this place is against you in every way you are"* — a refusal that explains itself is a signpost.)
+3. **Link out to the Library** (SNG-061) for the deep read; the inline text is the one-sentence version.
+4. **✍️ Aevi owes the copy** — every line above, in the game's voice, authored as content (`content/packs/core/rules/helper_text.json`) so it is versioned, loaded, and not hardcoded in `app.js`. **(Design Law 15.)**
+
+**Erik test:** "Hit any wall in the game — a capacity cap, a locked skill, an empty energy bar — and verify the game tells you WHY, in one sentence, without you having to ask anyone."

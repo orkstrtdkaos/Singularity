@@ -34,6 +34,7 @@ A single-player-and-family tabletop RPG run by a language model, in a world whos
 12. **LOWER LAYER WINS.** Runtime > code at origin > ship reports > docs > this document. When they disagree, the lower layer is true and the higher one is a bug. The authenticated API is truth; **the raw CDN lags ~30s and is not.**
 13. **THE FLOORS ARE ABSOLUTE AND RATING-INDEPENDENT.** See §17. No setting, ceiling, GM op, correction, promotion or lens may cross them.
 14. **A repair is not an advance.** Self-healing tools (§13) fix what is *wrong*; they never grant power. Power comes from play.
+15. **⛔ DESIGN CANON LIVES IN CONTENT, NEVER IN THE BACKLOG.** *(Learned: the gambit definition and the multi-mode challenge design were authored on 2026-07-06, lived only in `SPEC_BACKLOG.md`, and were **destroyed by a backlog rewrite**. The number SNG-049 was then reused for something else. Only the content-pack files from that session survived.)* **`SPEC_BACKLOG.md` and `ALERT.md` are for WORK ITEMS. Design canon — definitions, laws, principles, playtest findings — belongs in `content/packs/**` where it is versioned, loaded, and CI-checked.** A finding that exists only in a work-tracking doc is one rewrite from oblivion. Self-healing tools (§13) fix what is *wrong*; they never grant power. Power comes from play.
 
 ---
 

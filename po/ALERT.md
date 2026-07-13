@@ -2,7 +2,7 @@
 
 > **This file carries CURRENT STATUS ONLY.** History lives in `po/results/*` and the graph. *(Per SNG-071: old append-only ALERT archived at `po/archive/ALERT_20260712.md`.)*
 
-**HEAD:** `7c34067` · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
+**HEAD:** `34fccefe` · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
 **Process:** SNG-071 two-round cycle. Aevi authors ROUND 1 → **CCode substrate-verifies (ROUND 2)** → Aevi amends + promotes → CCode builds → `complete_pending_review` → **only Aevi closes.**
 
 ---
@@ -39,28 +39,28 @@
 
 ---
 
-## ⏸ SNG-090 — SUBSTRATE AS A SECOND DIFFICULTY MAP (BLOCKED on Aevi amendment)
+## 🔧 SNG-090 — SUBSTRATE AS A SECOND DIFFICULTY MAP (AMENDMENT PROMOTED — ready for CCode build)
 
-**Round-2 verification done** (`po/results/20260713_SNG-090-ROUND2.md`). **Do not build yet.**
+**Amendment 1 promoted 2026-07-13.** Data file `the_substrate.json` amended at `1e3403e6`. Spec §9b inserted + §4 formula updated at `34fccefe`. **CCode may now build.**
 
-**AMENDMENT 1 (Erik, 2026-07-13) — `theRule` must be TWO-SIDED (affinity band, not fuel gauge).**
-The authored rule was monotonic: `min(density + carried, 1.0)` against `substrateDependency`. More substrate never hurt — so the Returned ran at ~100% everywhere and had no hostile map.
+**The two-sided affinity band (design canon — do not collapse):**
+- Each tradition has a `substrateBand.center` and `substrateBand.width`. Inside the band: full output.
+- **Below band — starvation (steep).** Continuous traditions (high affinity) near-zero in thin ground. Seraph in Quickwood ≈ 13%.
+- **Above band — interference (mild).** Returned traditions (low affinity) impaired in dense ground, floor ~60–75%. Never 13%.
+- **Carried substrate** (`density + carried`) pushes Returned craft further above affinity in dense ground → makes it WORSE. Why the Rootkin find the Waystaff trade ridiculous. The battery rescues the Continuous from starvation; it cannot rescue the Returned from interference.
 
-**The corrected model:** each tradition has a preferred substrate level; effective output falls off as a place departs from it in **either direction**.
-- **Continuous** (high dependency, high affinity) — BELOW affinity: steep starvation (Seraph in Quickwood ≈ 13%).
-- **Returned** (low dependency, low affinity) — ABOVE affinity: milder interference (Rootkin in the Gearlands impaired, floor ~60–75%, never 13%).
-- **Asymmetric curve** — below-affinity drops hard (starvation); above-affinity drops soft (interference). Same idea, different teeth.
-- **Affinity largely derived from `substrateDependency`** (high dep → high affinity) — Aevi may not need a new table, but the interference-side softness per people is authoring judgment.
-- **Carried substrate emergent:** `density + carried` pushes a Returned craft further above affinity in dense ground → makes it worse → why the Rootkin find the battery trade ridiculous. The Waystaff rescues the Continuous from starvation; it cannot rescue the Returned from interference.
+**Resolve-chain contract (engine/substrate.js — does not yet exist):**
+- `substratePenalty` = additive chance penalty in `successChance`. **Ability actions only** (weapon swings are substrate-free per SNG-089).
+- Hard gate at extreme (says why; never silently fails).
+- Optional energy-cost multiplier.
+- **SEPARATE from SNG-079 spectral-fit term.** Never fold. Both additive, both independently clamped.
+- Receipt line required: "The lattice is thin here" / "The lattice crowds your signal" + GM context + map overlay (alongside `dangerLevel`).
 
-**Other Round-2 findings (do not build until amendment promoted):**
-- No power scalar in the resolve chain — substrate is an additive **chance penalty** + optional **hard gate** + optional **energy-cost multiplier** (ability actions only; weapon swings are substrate-free per SNG-089).
-- SNG-079 spectral-fit term and SNG-090 substrate term must be **separate, separately-clamped terms** — orthogonal physical facts, not to be folded.
-- Density is per-region; locations derive it from `regionId` with optional per-location override; CI should require effective density resolvable for every location.
-- "Tell the player" is non-negotiable (SNG-084 receipt line + GM context + map overlay).
-- Cost: multi-session. Build order: load+CI → pure factor → successChance/gate wiring → receipts/overlay → carried-charge logistics.
+**Data:** `the_substrate.json` — `substrateBand` (center + width per tradition), `substrateDensity` per region. Locations derive from `regionId`; optional per-location override. CI: every location must resolve an effective density.
 
-**Aevi's blocker:** re-author `theRule` in `the_substrate.json` (two-sided curve, interference-side softness per people) and amend the spec before CCode builds.
+**Build order:** (1) load `the_substrate.json` + CI check → (2) pure `engine/substrate.js`, tuned by `tests/balance_sim.mjs` — **never eyeball the curves** → (3) wire into `successChance` + gate + energy mult → (4) receipts + GM line + map overlay → (5) carried-charge logistics.
+
+*⚠️ Engine code does not yet exist. Build blocked until `tests/balance_sim.mjs` exists and tunes the curves.*
 
 ---
 
@@ -87,7 +87,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 ## ⛔ NEXT (build order)
 
-1. **Aevi: author `the_substrate.json` `theRule` amendment** → then SNG-090 can be promoted and built.
+1. **SNG-090** — substrate build. Amendment promoted; `the_substrate.json` and `SYSTEM_SPEC.md` §9b both at HEAD. CCode: `engine/substrate.js` + `tests/balance_sim.mjs` first to tune the curves. Full build order above.
 2. **SNG-058 — party leader.** (Was next before the substrate sprint opened.)
 3. **SNG-084 — in-context helper text.** `content/packs/core/rules/helper_text.json` exists; engine + UI owed.
 4. **SNG-089 Ph2** — Accord waygate-journey acquisition · 12 braids → GM · living treaty as world-event.
@@ -99,15 +99,12 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 ## 📋 Owed
 
 **Aevi:**
-- `the_substrate.json` `theRule` two-sided amendment (blocks SNG-090)
 - `po/OPERATIONAL_FLOWS.md`
 - Thin regions: `riven_marches`, `somatic_reaches`, `unspooling` each want ~6 locations
 - `po/SPEC_BACKLOG.md` retirement as primary surface (180KB — move active items here)
-- `the_raised_thing` ability (Wright Accord craft — **authored this session, committed**)
-- Harm rungs on Ashwarden kit (wither, palework, etc. — **authored this session, committed**)
 
 **CCode:**
-- `tests/balance_sim.mjs` (owed since SNG-078)
+- `tests/balance_sim.mjs` (owed since SNG-078 — **now also required before SNG-090 curves go in**)
 - §22 debt list from SYSTEM_SPEC R2: slugify in wrong module · worldtime MODE per-player vs "one clock" · `newEncounter` stashes-not-activates · quest stage-conditions advance manually · `narration`↔`effects[]` drift no linter · dead `regenPerRest` key · `parse_probe` can't reach `boot()`
 - `withTimeout` pattern on party find/join + roster play/adopt (flagged in SNG-093 commit — non-acute, follow-on)
 

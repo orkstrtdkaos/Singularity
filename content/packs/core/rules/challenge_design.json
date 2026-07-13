@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "challenge_design",
+  "kind": "design_canon",
+  "note": "RECOVERED from po/SESSION_FINDINGS_20260707.md (2026-07-12) — the spec authored as SNG-049 was LOST and its number reused. Erik flagged this as a CORRECTION TO A REAL BIAS. It is canon.",
+  "theCorrection": "⛔ The recurring gambit keystones (reframe-the-tool, find-the-seam, question-the-clock) are ERIK'S COGNITIVE STYLE — **NOT universal rules.** Encoding them as 'how challenges are solved' would hardcode ONE play style into the engine and silently punish players who think differently. Brooklyn, Courtney, and Clara do not think like Erik, and the game must not require them to.",
+  "thePrinciple": "Phrase the system POSITIVELY and GENERATIVELY: the engine's job is to PROVIDE OPTIONS and to always leave an OPEN SLOT that rewards novelty. *Positive structure maintains itself; negative guards erode.*",
+  "theModes": {
+    "note": "The engine/GM PROVIDES options across these. They are SEEDS, NOT WALLS.",
+    "direct": "Head-on power or skill wins outright.",
+    "subtle": "Stealth, misdirection.",
+    "social": "Persuade, ally, intimidate, mediate.",
+    "ruleBending": "Reframe, find the seam, question the premise — ONE OPTION AMONG MANY.",
+    "attrition": "Outlast, grind it down.",
+    "preparation": "Win by having set up well.",
+    "knowledge": "Win by knowing the right thing."
+  },
+  "theOpenGenerativeSlot": {
+    "note": "⛔ THE IMPORTANT PART.",
+    "rule": "EVERY challenge keeps an OPEN GENERATIVE STRUCTURE — a path for approaches nobody enumerated. A novel approach is evaluated ON ITS MERITS, allowed to succeed if the fiction supports it, and REWARDED (novelBonus / discovery).",
+    "why": "Novelty must be STRUCTURAL, not a bonus tacked on afterward."
+  },
+  "implications": {
+    "authoring": "A challenge authors ≥3 distinct MODE-paths + the open slot. **A challenge solvable ONLY by reframe is UNDER-BUILT** — CI could flag it.",
+    "difficultyParity": "Modes carry different COSTS at comparable viability: force = resources · reframe = setup · social = standing · attrition = time. Not the same cost; the same *viability*.",
+    "gmDrift": "⛔ OBSERVED LIVE: **the AI GM DRIFTS TOWARD THE CURRENT PLAYER'S COGNITIVE STYLE.** It will mirror them and quietly narrow their options over time. **THE GM PROMPT MUST ACTIVELY OFFER THE MODES THE PLAYER IS NOT USING.** This is not a nicety — without it the game teaches every player that there is only one way to think, and it will be *their own*."
+  }
+}

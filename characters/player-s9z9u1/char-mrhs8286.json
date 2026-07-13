@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.37830588243425245
+    "spectrumId": -0.3593905883125398
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -320,106 +320,93 @@
         "player": "Thank her for everything... then mention that you'll also be keeping an eye out for anything strange happening along the river to the north.",
         "summary": "Silas thanks Mara, commits to watching the river north — she confirms the water has been wrong three weeks and says she'd hear anything he finds.",
         "narration": "You gather the two ash shafts under one arm, tuck the rune-craft kit and the paper-wrapped whetstone into the top of your pack, and nod at Mara across the counter. \"Good doing business,\" you say, and you mean it clean — no flourish. \"The shafts are exactly what I needed. The whetstone's a good call for Pell.\" Huginn shifts on the pack frame, done with the whetstone now that it's no longer accessible, and settles into his usual watchful stillness.\n\nThen, because Aldric asked and because it's the honest thing to say, you add it: \"I'll be heading north of the fence line in the next day or so — boar country, up along the river. I'll keep my eyes open. If there's anything strange along the water, the color of it, the smell, anything moving the wrong way — I'll bring it back.\" You say it without drama, the way a person names a chore they've already agreed to. It's not a promise of heroics; it's just what you intend to do.\n\nMara holds your look for a moment. Then: \"The river's been wrong for three weeks.\" She says it the same way she'd note a rope peg going empty — matter-of-fact, no alarm in it, but no dismissal either. \"Whatever you see upstream, I'd hear it. Aldric would too.\" She reaches over and straightens the ledger on the counter, a small, closing gesture. The conversation is done, the accounts are square, and the door is open behind you. Morning light cuts a bright stripe across the threshold and the stone lane beyond it."
+      },
+      {
+        "player": "Huginn, say goodbye to Mara - Head out to find Pell again.",
+        "summary": "Silas departs Mara's store — Huginn bids farewell in his fashion — and heads out to find Corvin in the east furlong.",
+        "narration": "You shoulder the pack, ash shafts balanced under your arm, and glance back at Huginn. He's already looking at Mara — or rather, at the space just around her, the way he sometimes does with people, like he's taking inventory of something you can't read. Then he blinks once, slow and deliberate, and looks away. You've learned to accept that as a farewell on his behalf.\n\nMara catches it. She doesn't flinch — she's already demonstrated she has no particular fear of strange birds — but something in her expression shifts, a small recalibration. \"Unusual company,\" she says, not unkindly. It's the most she's offered on the subject.\n\n\"He grows on you,\" you say, and pull the red door open into the lane.\n\nThe morning has settled since the squall — lane stones dry now, air bright and cool, the well square quiet in the mid-morning lull between the breakfast crowd and the midday trades. You know where Pell's forge is: south lane, past the elder's post. But Corvin comes first — east furlong, Pell said, farmer's son — and the modified tip wrapped in oilcloth in your pack is his. Find him, hand it off, extend the invitation. Then back to Pell, and north."
       }
     ],
     "lastTurn": {
-      "narration": "You gather the two ash shafts under one arm, tuck the rune-craft kit and the paper-wrapped whetstone into the top of your pack, and nod at Mara across the counter. \"Good doing business,\" you say, and you mean it clean — no flourish. \"The shafts are exactly what I needed. The whetstone's a good call for Pell.\" Huginn shifts on the pack frame, done with the whetstone now that it's no longer accessible, and settles into his usual watchful stillness.\n\nThen, because Aldric asked and because it's the honest thing to say, you add it: \"I'll be heading north of the fence line in the next day or so — boar country, up along the river. I'll keep my eyes open. If there's anything strange along the water, the color of it, the smell, anything moving the wrong way — I'll bring it back.\" You say it without drama, the way a person names a chore they've already agreed to. It's not a promise of heroics; it's just what you intend to do.\n\nMara holds your look for a moment. Then: \"The river's been wrong for three weeks.\" She says it the same way she'd note a rope peg going empty — matter-of-fact, no alarm in it, but no dismissal either. \"Whatever you see upstream, I'd hear it. Aldric would too.\" She reaches over and straightens the ledger on the counter, a small, closing gesture. The conversation is done, the accounts are square, and the door is open behind you. Morning light cuts a bright stripe across the threshold and the stone lane beyond it.",
-      "sceneSummary": "Silas thanks Mara, commits to watching the river north — she confirms the water has been wrong three weeks and says she'd hear anything he finds.",
+      "narration": "You shoulder the pack, ash shafts balanced under your arm, and glance back at Huginn. He's already looking at Mara — or rather, at the space just around her, the way he sometimes does with people, like he's taking inventory of something you can't read. Then he blinks once, slow and deliberate, and looks away. You've learned to accept that as a farewell on his behalf.\n\nMara catches it. She doesn't flinch — she's already demonstrated she has no particular fear of strange birds — but something in her expression shifts, a small recalibration. \"Unusual company,\" she says, not unkindly. It's the most she's offered on the subject.\n\n\"He grows on you,\" you say, and pull the red door open into the lane.\n\nThe morning has settled since the squall — lane stones dry now, air bright and cool, the well square quiet in the mid-morning lull between the breakfast crowd and the midday trades. You know where Pell's forge is: south lane, past the elder's post. But Corvin comes first — east furlong, Pell said, farmer's son — and the modified tip wrapped in oilcloth in your pack is his. Find him, hand it off, extend the invitation. Then back to Pell, and north.",
+      "sceneSummary": "Silas departs Mara's store — Huginn bids farewell in his fashion — and heads out to find Corvin in the east furlong.",
       "choices": [
         {
-          "label": "Head to the east furlong — find Corvin, deliver his modified tip, and extend the hunt invitation.",
+          "label": "Head directly to the east furlong — ask the first person you meet where to find a farmer's son named Corvin.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "violence_peace": 0.7,
-            "chaos_order": 0.4
+            "spectrumId": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "deliver",
-            "invite"
+            "direct",
+            "locate"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Stop at the river dock first — look at the water before the hunt, see if Lightsense or Order-Sense reads anything new in the current.",
+          "label": "Take a moment at the well square — listen to who's talking and get the lay of the village before you go looking.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.4,
-            "concrete_abstract": -0.3
+            "spectrumId": -0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
+            "scout",
+            "observe"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Walk the east lane slowly — use Lightsense to read who is where and pick the fastest route to the furlong without asking.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
             "scout",
             "careful"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "lightsense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Sit on the well-curb and rune-work one of the ash shafts now, while the morning is still quiet — mark it before it gets hafted.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Swing by the dock first — take a look at the river before heading east. You said you'd watch it; watch it now.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "mechanical_spiritual": 0.3,
-            "concrete_abstract": -0.2
+            "spectrumId": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "craft",
-            "prepare"
+            "scout",
+            "investigate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Swing by the cookhouse on the way to the east furlong — drop a piece of the preserved trail parcel as a peace gesture for the woman who turned you away yesterday.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.8,
-            "chaos_order": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "careful",
-            "reputation"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Mara Wells's supply store — red door, east of the well square. Interior: rope on wall pegs, sorted hardware boxes, back shelf with traded-in tools. Morning light cuts a bright stripe across the open threshold onto the stone lane outside. Linseed oil and dry cedar.",
+        "setting": "The lane outside Mara Wells's store — stone lane, red door behind you, the open well square ahead in mid-morning light. Dry after the earlier squall, cool and bright.",
         "npcsPresent": [
           {
-            "name": "Mara Wells",
-            "state": "Ledger straightened, pen down, watching Silas with the door open behind him — the conversation concluded, accounts square."
-          },
-          {
             "name": "Huginn",
-            "state": "Settled on Silas's pack frame, alert and still, watching the threshold."
+            "state": "Settled on Silas's pack frame, watching the lane ahead with his usual unhurried attention."
           }
         ],
         "objects": [
-          "Two seasoned ash shafts — wrapped in loose burlap, under Silas's arm",
-          "Rune-Craft Kit — packed into Silas's pack",
+          "Two seasoned ash shafts — under Silas's arm, burlap-wrapped",
+          "Rune-Craft Kit — packed",
           "Fine River Whetstone — paper-wrapped, packed",
-          "Rope on wall pegs (three weights — mid-weight gap still present)",
-          "Sorted hardware boxes, ledger closed on the counter"
+          "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in the pack"
         ],
         "threads": [
           "Corvin still to be found in the east furlong — modified tip needs delivery, hunt invitation pending",
-          "Mara confirmed the river has been wrong for three weeks — wants to hear anything found upstream",
+          "Mara wants upstream river intelligence — committed to reporting back",
           "Rune-work on the shaft — materials in hand, work not yet done"
         ]
       },
@@ -428,65 +415,35 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
-          "learned": [
-            "The river has been visibly wrong for three weeks — Mara is tracking it without public alarm",
-            "She wants upstream information and would receive it directly, same as Aldric"
-          ],
-          "relationshipDelta": 1,
+          "role": "Village supply store operator, Millbrook — east of the well, red door",
+          "note": "Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms.",
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the supply store, ledger closed, conversation ended on good terms — has asked to hear any upstream findings."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "water-crisis-discoloration",
-          "label": "The River's Discoloration",
-          "kind": "event",
-          "entityId": "millbrook",
-          "fact": "Mara Wells confirmed the river has been visibly wrong for three full weeks — she tracks it without alarm, same as Aldric, and wants upstream information.",
-          "links": [
-            "millbrook",
-            "aldric",
-            "mara-wells",
-            "aldric-provisioning-deal"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong."
+          "statusNote": "At the supply store, ledger updated and closed — accounts squared, conversation ended on good terms."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief closing exchange — a minute or two at the counter, then packing up."
+        "why": "A short departure and a few words — one quick exchange on the way out."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's supply store — red door, east of the well square. Interior: rope on wall pegs, sorted hardware boxes, back shelf with traded-in tools. Morning light cuts a bright stripe across the open threshold onto the stone lane outside. Linseed oil and dry cedar.",
+      "setting": "The lane outside Mara Wells's store — stone lane, red door behind you, the open well square ahead in mid-morning light. Dry after the earlier squall, cool and bright.",
       "npcsPresent": [
         {
-          "name": "Mara Wells",
-          "state": "Ledger straightened, pen down, watching Silas with the door open behind him — the conversation concluded, accounts squar"
-        },
-        {
           "name": "Huginn",
-          "state": "Settled on Silas's pack frame, alert and still, watching the threshold."
+          "state": "Settled on Silas's pack frame, watching the lane ahead with his usual unhurried attention."
         }
       ],
       "objects": [
-        "Two seasoned ash shafts — wrapped in loose burlap, under Silas's arm",
-        "Rune-Craft Kit — packed into Silas's pack",
+        "Two seasoned ash shafts — under Silas's arm, burlap-wrapped",
+        "Rune-Craft Kit — packed",
         "Fine River Whetstone — paper-wrapped, packed",
-        "Rope on wall pegs (three weights — mid-weight gap still present)",
-        "Sorted hardware boxes, ledger closed on the counter"
+        "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in the pack"
       ],
       "threads": [
         "Corvin still to be found in the east furlong — modified tip needs delivery, hunt invitation pending",
-        "Mara confirmed the river has been wrong for three weeks — wants to hear anything found upstream",
+        "Mara wants upstream river intelligence — committed to reporting back",
         "Rune-work on the shaft — materials in hand, work not yet done"
       ]
     }
@@ -680,7 +637,8 @@
         "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
         "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,",
         "[d1] Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-bla",
-        "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream."
+        "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
+        "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms."
       ],
       "knownFacts": [
         "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked",
@@ -701,7 +659,7 @@
         "reading a customer's intent without needing it explained"
       ],
       "status": "active",
-      "statusNote": "At the supply store, ledger closed, conversation ended on good terms — has asked to hear any upstream findings.",
+      "statusNote": "At the supply store, ledger updated and closed — accounts squared, conversation ended on good terms.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1087,11 +1045,11 @@
     }
   },
   "tendencies": {
-    "strategic": 20.89292952432231,
-    "cerebral": 8.985540256301377,
-    "social": 23.208110555151833,
-    "generous": 8.012219821723747,
-    "cautious": 9.279919423428966
+    "strategic": 20.788464876700697,
+    "cerebral": 8.94061255501987,
+    "social": 23.092070002376076,
+    "generous": 7.972158722615128,
+    "cautious": 10.233519826311822
   },
   "aptitudes": [
     "strategist",
@@ -1099,7 +1057,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 34,
+  "actionCount": 35,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1121,8 +1079,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783902099469,
-  "rev": 59,
+  "updatedAt": 1783902257605,
+  "rev": 60,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

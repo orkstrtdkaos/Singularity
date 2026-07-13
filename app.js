@@ -15,7 +15,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape } from "./engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.40";
+const APP_VERSION = "1.8.41";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -2610,7 +2610,7 @@ function renderMap(selectedId = null) {
   // SNG-046 Layer 1: every location gets stable coords (authored kept; coordless + generated
   // placed deterministically), a tag-derived icon, and a disposition terrain tint.
   const pos = autoMapPositions(locs);
-  const kg = mapShowKG ? kgOverlayEntities(character, pos, CONTENT.npcs) : [];
+  const kg = mapShowKG ? knownOverlay(character, pos, CONTENT) : []; // SNG-083: people AND rumours
   // SNG-082: real terrain — each region drawn as a palette-filled hull of its locations. Data-driven
   // (regions.json), so a generated place inherits the right ground. Three regions LOOK WRONG on purpose.
   const WRONG = { the_pattern_reach: "wrong-noneuclid", the_veiled_reach: "wrong-lying", the_numinous_reach: "wrong-uncertain" };
@@ -2657,10 +2657,12 @@ function renderMap(selectedId = null) {
         <text x="${P.x}" y="${P.y + (P.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
         ${visited && pm?.visits > 1 ? `<text x="${P.x}" y="${P.y + (P.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
       </g>`; }).join("")}
-    ${kg.map(e => `<g class="map-kg ${e.discovered ? "met" : "heard"}" data-kgtopic="${esc(e.topicId)}">
-        <title>${esc(e.label)}${e.discovered ? " — you've met them" : " — you've only heard of them"}</title>
-        <circle cx="${e.x}" cy="${e.y}" r="6"/>
-        <text x="${e.x}" y="${e.y - 9}" text-anchor="middle" class="map-kg-label">${esc(e.label.slice(0, 16))}</text>
+    ${kg.map(e => `<g class="map-kg ${e.kind} ${e.discovered ? "met" : "heard"}" ${e.topicId ? `data-kgtopic="${esc(e.topicId)}"` : ""}>
+        <title>${esc(e.label)}${e.kind === "rumour" ? " — a thread you've only heard of" + (e.note ? ": " + esc(e.note) : "") : e.discovered ? " — you've met them" : " — you've only heard of them"}</title>
+        ${e.kind === "rumour"
+          ? `<rect x="${e.x - 5}" y="${e.y - 5}" width="10" height="10" transform="rotate(45 ${e.x} ${e.y})"/>`
+          : `<circle cx="${e.x}" cy="${e.y}" r="6"/>`}
+        <text x="${e.x}" y="${e.y - 9}" text-anchor="middle" class="map-kg-label">${esc(e.label.slice(0, 18))}</text>
       </g>`).join("")}
   </g></svg>`;
   // details panel for the selected node — travel is an explicit button, never a stray click
@@ -2692,7 +2694,8 @@ function renderMap(selectedId = null) {
   chrome(`<div class="screen" style="max-width:900px">
     <h2>World Map</h2>
     <p class="hint" style="margin-bottom:8px">92 places across 24 regions, each ground coloured by its disposition. Gold ring: you are here. The Axis Gate's twelve roads are the spine. <strong>Scroll to zoom, drag to pan.</strong></p>
-    <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle">${mapShowKG ? "✓ " : ""}Show known people</button></div>
+    <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
+      ${mapShowKG && !kg.length ? `<span class="hint" style="margin-left:8px">You haven't met anyone or heard a rumour yet — the world is still a rumour. Play on.</span>` : mapShowKG ? `<span class="hint" style="margin-left:8px">◆ dimmed = heard of · ● solid = met</span>` : ""}</div>
     <div class="graph-wrap" id="graph-wrap">
       <div class="graph-zoom-ctl">
         <button id="gz-in" title="Zoom in">＋</button>

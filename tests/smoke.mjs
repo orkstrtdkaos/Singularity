@@ -36,7 +36,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, re
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape } from "../engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
 import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "../engine/traditions.js";
 
@@ -2534,6 +2534,27 @@ await (async () => {
   const shape = regionShape(box, 10);
   check("SNG-082: regionShape pads the hull OUTWARD so terrain wraps the nodes with a margin", shape.length === 4 && shape.every(p => p.x < -1 || p.x > 11 || p.y < -1 || p.y > 11));
   check("SNG-082: a 1-2 point region has no polygon (a blob is drawn instead)", regionShape([{ x: 1, y: 1 }]) === null && regionShape([{ x: 1, y: 1 }, { x: 2, y: 2 }]) === null);
+})();
+
+// --- SNG-083: "show what you know" — people AND rumours (heard-of things appear, dimmed) ---
+(() => {
+  const positions = { millbrook: { x: 100, y: 100 }, the_underlight: { x: 300, y: 200 } };
+  const content = {
+    locations: { millbrook: { id: "millbrook", name: "Millbrook", regionId: "valley" }, the_underlight: { id: "the_underlight", name: "The Underlight", regionId: "umbral_depths" } },
+    npcs: { fendt: { name: "Fendt", homeLocation: "millbrook" }, keeper_ilma: { name: "Keeper Ilma", homeLocation: "millbrook" } },
+  };
+  // Silas has MET no one, but has an active quest whose giver is Fendt, and news naming a place.
+  const silas = { npcRegistry: {}, codex: { topics: {} }, quests: [{ id: "ledger", status: "active", giver: "fendt", title: "The Edge District Ledger", stakes: "Fendt is ruined" }],
+    worldState: { news: [{ text: "The water crisis worsens near Millbrook." }] }, establishedFacts: [] };
+  const ov = knownOverlay(silas, positions, content);
+  check("SNG-083: a character who has met NO ONE still sees heard-of threads (Fendt's quest, the news)", ov.length >= 1 && ov.some(e => e.kind === "rumour"));
+  check("SNG-083: heard-of things are DIMMED (discovered=false), placed where they live", ov.every(e => e.kind !== "rumour" || e.discovered === false) && ov.some(e => e.locationId === "millbrook"));
+  check("SNG-083: the quest giver surfaces as a live thread", ov.some(e => /Fendt/i.test(e.label) && /Edge District/i.test(e.label)));
+  // once Fendt is MET (in the registry + a codex person topic), he goes SOLID
+  const met = { npcRegistry: { fendt: { name: "Fendt" } }, codex: { topics: { fendt: { kind: "person", entityId: "fendt", label: "Fendt", id: "fendt" } } }, quests: [], worldState: { news: [] }, establishedFacts: [] };
+  const ov2 = knownOverlay(met, positions, content);
+  check("SNG-083: a met person renders SOLID (discovered=true)", ov2.some(e => e.kind === "person" && e.label === "Fendt" && e.discovered === true));
+  check("SNG-083: nothing to show → an empty list (the UI shows the empty state, never a silent no-op)", knownOverlay({ npcRegistry: {}, codex: { topics: {} }, quests: [] }, positions, content).length === 0);
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

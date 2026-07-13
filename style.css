@@ -134,6 +134,10 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .map-kg.heard circle { fill: transparent; stroke: var(--accent2); stroke-dasharray: 2 2; }
 .map-kg-label { font-family: var(--font-ui); font-size: 9px; fill: var(--accent2); pointer-events: none; }
 .map-kg.heard .map-kg-label { opacity: .6; }
+/* SNG-083 rumours — heard-of threads (a dimmed diamond where they live) */
+.map-kg rect { fill: var(--accent2); stroke: #14110c; stroke-width: 1; }
+.map-kg.rumour rect { fill: transparent; stroke: #c9a24a; stroke-dasharray: 2 2; }
+.map-kg.rumour .map-kg-label { fill: #c9a24a; opacity: .7; }
 /* SNG-047 skill sidebar grouping */
 .skill-group { margin-bottom: 4px; }
 .skill-group > summary { cursor: pointer; font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); padding: 3px 0; }

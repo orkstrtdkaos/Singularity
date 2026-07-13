@@ -144,3 +144,46 @@ export function kgOverlayEntities(character, positions, npcs = {}) {
   }
   return out;
 }
+
+/** SNG-083: "show what you know" — people AND rumours on the map, in the same grammar the map uses
+ *  for places: SOLID = met/known firsthand, DIMMED = heard-of only (from the codex, active quest
+ *  threads, news, and the away-digest). Turns the map from a travel tool into an intelligence board.
+ *  Returns a flat list of { kind:'person'|'rumour', label, x, y, discovered, locationId, topicId?, note? }. */
+export function knownOverlay(character, positions, content = {}) {
+  const npcs = content.npcs || {}, locations = content.locations || {};
+  const registry = character?.npcRegistry || {};
+  const topics = character?.codex?.topics || {};
+  const out = [];
+  const countAt = {};
+  const fan = (locId) => { const n = countAt[locId] = (countAt[locId] || 0) + 1; const ang = (n * 55 + (hashN(locId) % 40)) * Math.PI / 180; const p = positions[locId]; return { x: p.x + Math.cos(ang) * 26, y: p.y + Math.sin(ang) * 26 }; };
+  const seen = new Set();
+  // 1. people the codex knows — met (in the registry) SOLID, heard-of DIMMED
+  for (const t of Object.values(topics)) {
+    if (t.kind !== "person" || !t.entityId) continue;
+    const npc = npcs[t.entityId] || registry[t.entityId];
+    const homeId = npc?.homeLocation;
+    if (!homeId || !positions[homeId] || seen.has(t.entityId)) continue;
+    seen.add(t.entityId);
+    out.push({ kind: "person", label: t.label || t.entityId, topicId: t.id || t.entityId, ...fan(homeId), discovered: !!registry[t.entityId], locationId: homeId });
+  }
+  // 2. LIVE THREADS — active-quest givers, at their home (or their quest's region). Heard-of.
+  for (const q of (character.quests || [])) {
+    if (q.status && !["active", "available"].includes(q.status)) continue;
+    const giver = q.giver; if (!giver || seen.has(giver)) continue;
+    const npc = npcs[giver];
+    const homeId = npc?.homeLocation || (q.region && Object.values(locations).find(l => (l.regionId || l.region) === q.region)?.id);
+    if (!homeId || !positions[homeId]) continue;
+    seen.add(giver);
+    out.push({ kind: "rumour", label: (npc?.name || giver) + (q.title ? ` · ${q.title}` : ""), ...fan(homeId), discovered: !!registry[giver], locationId: homeId, note: q.stakes || q.premise || null });
+  }
+  // 3. NEWS / FACTS / away-digest that NAME a known place → a dimmed rumour sitting where it lives
+  const locByName = Object.values(locations).map(l => ({ id: l.id, n: (l.name || "").toLowerCase() })).filter(x => x.n.length > 3);
+  const scan = text => { const lc = String(text || "").toLowerCase(); const hit = locByName.find(x => lc.includes(x.n)); return hit?.id || null; };
+  const items = [...(character.worldState?.news || []).map(x => x?.text || x), ...(character.establishedFacts || []).map(f => f?.text)].filter(Boolean);
+  for (const text of items.slice(-14)) {
+    const locId = scan(text);
+    if (!locId || !positions[locId] || (countAt[locId] || 0) >= 4) continue;
+    out.push({ kind: "rumour", label: String(text).slice(0, 38) + (text.length > 38 ? "…" : ""), ...fan(locId), discovered: false, locationId: locId, note: String(text).slice(0, 160) });
+  }
+  return out;
+}

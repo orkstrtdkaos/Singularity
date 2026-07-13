@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3768500059520671
+    "spectrumId": -0.4080075056544637
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -332,96 +332,96 @@
         "player": "I got you a gift for our date - hand her the whetstone.",
         "summary": "Silas gives Pell the whetstone — she receives it with quiet pleasure and sends him east.",
         "narration": "You reach into the pack and bring out the paper-wrapped stone — Mara's package, flat and dense in your palm. 'I got you a gift,' you say, 'for our date.'\n\nPell takes it. Unwraps the paper with two fingers, unhurried, the way she handles most things. The dark-gray face of the whetstone catches the flat morning light — fine grit, smooth, the faint blue in it that only shows at a particular angle. She turns it once, runs her thumb across the face, and her expression does something small and undemonstrative that you have come to recognize as the equivalent, in her register, of being genuinely pleased.\n\n'River stone,' she says. 'Fine face.' She turns it again. 'Mara's been sitting on this for Pell-the-blacksmith for three weeks.' She says it in the third person, flat, like she's reading a ledger entry — but the corner of her mouth is doing its thing. 'You asked her about me.'\n\nHuginn shifts on the doorframe, one foot to the other, and says absolutely nothing.\n\nPell sets the whetstone on the bench beside her last piece — not tucked away, just set there like it belongs — and looks at you with the same flat assessment she gives iron before she decides what it needs. 'East furlong,' she says. 'Don't let Corvin get ahead of himself.'"
+      },
+      {
+        "player": "I think you liked the gift... but i'm not sure i can tell (teasing - perhaps leaning in for a kiss on the cheek).",
+        "summary": "Silas kisses Pell on the cheek; she allows it and sends him east with a look that lands clean.",
+        "narration": "You take the half-step that closes the gap — unhurried, the same easy weight you used leaning on the post — and your voice drops into something quieter than conversation. 'I think you liked it,' you say. 'But I'm not entirely sure I can tell.' The tease is in the timing more than the words: you're close enough that she could step back if she wanted to, and she doesn't.\n\nPell looks up from the whetstone. Her eyes move over your face with the same methodical read she gives a blade — checking for true. Then something in the line of her mouth shifts, the small private tell you've already catalogued twice this morning, and she turns her chin just enough to give you the angle.\n\nYou lean in and press a brief, easy kiss to her cheek — the skin there warm from the forge and faintly salt-edged. She doesn't move into it or away from it. She simply allows it, which, in her register, is the same as an answer.\n\n'You can tell,' she says, and sets the whetstone down on the bench with a decisive click. She reaches up and brushes a smear of iron-grit off her own collarbone with the back of one hand, completely unhurried. 'East furlong. Before he builds something structural.' Huginn, from the doorframe, produces a single low sound in his chest that is not quite a croak — more the noise a door makes when someone finally pushes it open."
       }
     ],
     "lastTurn": {
-      "narration": "You reach into the pack and bring out the paper-wrapped stone — Mara's package, flat and dense in your palm. 'I got you a gift,' you say, 'for our date.'\n\nPell takes it. Unwraps the paper with two fingers, unhurried, the way she handles most things. The dark-gray face of the whetstone catches the flat morning light — fine grit, smooth, the faint blue in it that only shows at a particular angle. She turns it once, runs her thumb across the face, and her expression does something small and undemonstrative that you have come to recognize as the equivalent, in her register, of being genuinely pleased.\n\n'River stone,' she says. 'Fine face.' She turns it again. 'Mara's been sitting on this for Pell-the-blacksmith for three weeks.' She says it in the third person, flat, like she's reading a ledger entry — but the corner of her mouth is doing its thing. 'You asked her about me.'\n\nHuginn shifts on the doorframe, one foot to the other, and says absolutely nothing.\n\nPell sets the whetstone on the bench beside her last piece — not tucked away, just set there like it belongs — and looks at you with the same flat assessment she gives iron before she decides what it needs. 'East furlong,' she says. 'Don't let Corvin get ahead of himself.'",
-      "sceneSummary": "Silas gives Pell the whetstone — she receives it with quiet pleasure and sends him east.",
+      "narration": "You take the half-step that closes the gap — unhurried, the same easy weight you used leaning on the post — and your voice drops into something quieter than conversation. 'I think you liked it,' you say. 'But I'm not entirely sure I can tell.' The tease is in the timing more than the words: you're close enough that she could step back if she wanted to, and she doesn't.\n\nPell looks up from the whetstone. Her eyes move over your face with the same methodical read she gives a blade — checking for true. Then something in the line of her mouth shifts, the small private tell you've already catalogued twice this morning, and she turns her chin just enough to give you the angle.\n\nYou lean in and press a brief, easy kiss to her cheek — the skin there warm from the forge and faintly salt-edged. She doesn't move into it or away from it. She simply allows it, which, in her register, is the same as an answer.\n\n'You can tell,' she says, and sets the whetstone down on the bench with a decisive click. She reaches up and brushes a smear of iron-grit off her own collarbone with the back of one hand, completely unhurried. 'East furlong. Before he builds something structural.' Huginn, from the doorframe, produces a single low sound in his chest that is not quite a croak — more the noise a door makes when someone finally pushes it open.",
+      "sceneSummary": "Silas kisses Pell on the cheek; she allows it and sends him east with a look that lands clean.",
       "choices": [
         {
-          "label": "Head for the east furlong now — past the second fence-line, left fork at the willow",
+          "label": "Head straight east — past the second fence-line, left fork at the willow. Find Corvin before he finishes whatever half-thought project he's started.",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "move",
+            "find"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Linger a moment — say something before you go",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Before leaving, take a minute to seat the mid-weight spear-tip on one of the ash shafts — even a rough lashing here in the forge yard, so you're not carrying loose iron into the field.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "careful"
+            "craft",
+            "prepare"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask what she actually knows about Corvin's judgment before you walk into a boar hunt with him",
+          "label": "Use Order-Sense on the east furlong path before you commit to it — read the land's structure, see where the fence-lines actually sit and where the willow fork would be from here.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "scout",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "axes": {
+            "spectrumId": 0.2
+          }
         },
         {
-          "label": "Or do something else entirely",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
+          "label": "Walk east at a deliberate pace — no hurry. Watch the lane and the fields as you go, see what the morning is actually doing before you land on Corvin.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "open"
+            "careful",
+            "observe"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryRemove": [
-          "Fine River Whetstone"
-        ]
+        "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Allowed the kiss on the cheek without stepping back — confirmed the date in her register with 'you can tell.' Sent Silas east with the same flat economy as always.",
+          "learned": [
+            "Shows genuine warmth in small, precise tells — the mouth-shift, the allowed closeness, the click of the whetstone set down with decision"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the forge on the south lane — whetstone on her bench, watching Silas go east toward Corvin."
+        }
+      ],
       "scene": {
-        "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. The whetstone now sits on the bench beside Pell's last finished piece.",
+        "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. Whetstone now on the bench, the last finished piece beside it, bucket and rag squared away.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the bench, apron still on, whetstone set beside her work — watching Silas with her flat assessment look, corner of her mouth doing its thing."
+            "state": "Standing at the bench, whetstone set down with a decisive click, watching Silas with the flat look that just confirmed something."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the top of the doorframe, having shifted one foot to the other and said nothing."
+            "state": "On the top of the doorframe — produced one low chest-sound and is now watching the lane east with interest."
           }
         ],
         "objects": [
@@ -429,77 +429,31 @@
           "Rune-Craft Kit — in the pack",
           "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in the pack",
           "Mid-Weight Spear-Tip — in the pack",
-          "Fine River Whetstone — now on Pell's bench beside her last piece",
+          "Fine River Whetstone — on Pell's bench, unwrapped",
           "Wooden bucket with water and wrung-out rag — beside the forge doorframe",
           "Small catch-plate or hook piece — Pell's last finished work, on the bench"
         ],
         "threads": [
-          "Whetstone delivered — Pell received it; the date is now a standing thing between them",
+          "Date between Silas and Pell now a standing named arrangement — confirmed again just now",
           "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
-          "Pell's parting word: don't let Corvin get ahead of himself"
+          "Spear assembly still pending — tips and shafts in hand but not yet joined"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on the bench. Sent Silas east with a final word about Corvin.",
-          "learned": [
-            "Silas asked Mara about her specifically — enough to know what she'd want"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At the forge on the south lane — whetstone on her bench, watching Silas go."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas gave Pell the fine river whetstone as a gift for their planned date — she received it with genuine quiet pleasure and set it on her bench.",
-          "subjectId": "pell"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Fine river whetstone gifted to Pell — now on her bench. The date between Silas and Pell is now a standing arrangement named between them at the forge.",
-          "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Whetstone delivered; date arrangement confirmed. Pell sent Silas east to find Corvin.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
-          "links": [
-            "millbrook",
-            "mara-wells",
-            "aldric-provisioning-deal",
-            "corvin"
-          ]
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the forge — gift given, word exchanged, sent on his way."
+        "why": "A brief exchange at the forge — a moment's closeness, a parting word."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. The whetstone now sits on the bench beside Pell's last finished piece.",
+      "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. Whetstone now on the bench, the last finished piece beside it, bucket and rag squared away.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the bench, apron still on, whetstone set beside her work — watching Silas with her flat assessment look, cor"
+          "state": "Standing at the bench, whetstone set down with a decisive click, watching Silas with the flat look that just confirmed s"
         },
         {
           "name": "Huginn",
-          "state": "Settled on the top of the doorframe, having shifted one foot to the other and said nothing."
+          "state": "On the top of the doorframe — produced one low chest-sound and is now watching the lane east with interest."
         }
       ],
       "objects": [
@@ -507,14 +461,14 @@
         "Rune-Craft Kit — in the pack",
         "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in the pack",
         "Mid-Weight Spear-Tip — in the pack",
-        "Fine River Whetstone — now on Pell's bench beside her last piece",
+        "Fine River Whetstone — on Pell's bench, unwrapped",
         "Wooden bucket with water and wrung-out rag — beside the forge doorframe",
         "Small catch-plate or hook piece — Pell's last finished work, on the bench"
       ],
       "threads": [
-        "Whetstone delivered — Pell received it; the date is now a standing thing between them",
+        "Date between Silas and Pell now a standing named arrangement — confirmed again just now",
         "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
-        "Pell's parting word: don't let Corvin get ahead of himself"
+        "Spear assembly still pending — tips and shafts in hand but not yet joined"
       ]
     }
   },
@@ -654,9 +608,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 5,
+      "relationship": 6,
       "history": [
-        "[d1] Described the north wood from memory — wet ground in the lower section, a granite shelf a quarter-mile north of the fence line where game trails run east-west. Warned plainly that ",
         "[d1] Described her north-wood hunting history — solo, lower section, wet ground by the slope springs, turkey and deer. Got as far as the granite shelf two or three times. Noted the east",
         "[d1] Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open.",
         "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c",
@@ -665,17 +618,18 @@
         "[d1] Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
         "[d1] Heard Silas returning on the stone and named the east furlong unprompted — knows exactly where Corvin is; turned just enough to clock Huginn settling in, and the corner of her mout",
         "[d1] Finished her last piece, washed up, gave Corvin's exact location — east furlong, past the second fence-line, left fork at the willow. Turned to face Silas with her usual flat asses",
-        "[d1] Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on "
+        "[d1] Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on ",
+        "[d1] Allowed the kiss on the cheek without stepping back — confirmed the date in her register with 'you can tell.' Sent Silas east with the same flat economy as always."
       ],
       "knownFacts": [
-        "The hand-axe hairline is an old stop-crack in the eye wall — hasn't reached the weld or the bit; needs a heat-collar before edge work proceeds",
         "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting",
         "Backlog fully cleared to her satisfaction — all five pieces done, hand-axe included",
         "Sold the mid-weight tip to Silas; modified the light tip with a stop-lug for Corvin; credited backlog labor against the purchase.",
         "Knows Corvin's address and has directed others there before",
         "Not unsettled by Silas returning when he could have gone straight to the east furlong",
         "Corvin is at the east furlong — past second fence-line, left fork at the willow; will be mending or building something half-considered",
-        "Silas asked Mara about her specifically — enough to know what she'd want"
+        "Silas asked Mara about her specifically — enough to know what she'd want",
+        "Shows genuine warmth in small, precise tells — the mouth-shift, the allowed closeness, the click of the whetstone set down with decision"
       ],
       "skillsObserved": [
         "field tactics",
@@ -686,7 +640,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "At the forge on the south lane — whetstone on her bench, watching Silas go.",
+      "statusNote": "At the forge on the south lane — whetstone on her bench, watching Silas go east toward Corvin.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1118,11 +1072,11 @@
     }
   },
   "tendencies": {
-    "strategic": 21.46821943985783,
-    "cerebral": 8.807172795059628,
-    "social": 24.73744297108186,
-    "generous": 8.853173257160257,
-    "cautious": 11.075783263714138
+    "strategic": 21.36087834265854,
+    "cerebral": 8.76313693108433,
+    "social": 26.613755756226453,
+    "generous": 8.808907390874456,
+    "cautious": 11.020404347395568
   },
   "aptitudes": [
     "strategist",
@@ -1130,7 +1084,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 38,
+  "actionCount": 39,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1152,8 +1106,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783902800634,
-  "rev": 63,
+  "updatedAt": 1783902951761,
+  "rev": 64,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

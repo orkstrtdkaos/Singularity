@@ -199,6 +199,57 @@
         "INVESTIGATE": 3
       },
       "tradition": "wright"
+    },
+    {
+      "id": "the_raised_thing",
+      "name": "The Raised Thing",
+      "levelReq": 1,
+      "energyCost": 4,
+      "powerSystem": "reach_destruction_creation",
+      "attribute": "physical",
+      "axes": {
+        "destruction_creation": 0.25
+      },
+      "accord": true,
+      "harmRung": "none",
+      "functions": [
+        "make",
+        "mend"
+      ],
+      "narrationHints": "It was not there. Now it is, and it will hold.",
+      "description": "The Wright's first gift, opened to anyone who makes the journey: raise something real, quickly, from what is to hand. A bridge. A shelter. A tool. A barricade. The Wrights teach this one freely — more making in the world is the world they want, and this is the door.",
+      "notFor": "Making things that will not want to keep growing; finishing (the craft carries the Wright's restlessness — what you raise will want tending, and you will want to move on).",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Raised Thing",
+          "grants": "Make something real and functional, quickly — a bridge, a shelter, a tool, a wall — from what is here. It will hold long enough to matter.",
+          "cannot": "Quick is not sound. Raised things want tending, and the Wright in you is already somewhere else."
+        },
+        {
+          "rank": 2,
+          "name": "Sound Work",
+          "grants": "What you make holds under pressure — weather, weight, time, a fight. Others would not have to repair it.",
+          "cannot": "Sound is not finished. The restlessness is not a flaw the Wrights want trained out of you."
+        },
+        {
+          "rank": 3,
+          "name": "The Thing That Outlasts",
+          "grants": "Make something that will be here long after you. It will be found and used by people who do not know your name, and that will be enough.",
+          "cannot": "You will not see what becomes of it. The Wrights have made peace with this."
+        }
+      ],
+      "gated": "accord",
+      "challengeTypes": [
+        "EXPLORE",
+        "INVESTIGATE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "FIGHT": 1
+      },
+      "tradition": "wright"
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

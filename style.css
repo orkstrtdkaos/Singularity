@@ -564,3 +564,12 @@ img[data-lightbox] { cursor: zoom-in; }
 .codex-nominations { margin:6px 0 12px; padding:8px 10px; border-radius:8px; background:rgba(255,216,115,0.07); }
 .codex-nom { display:inline-block; margin:3px 4px 0 0; }
 .codex-nom .cost { opacity:0.6; font-size:0.82em; }
+
+/* SNG-084: in-context helper text — the ⓘ dot + its explanation overlay */
+.info-dot { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; margin-left:4px; padding:0; border:1px solid var(--border); border-radius:50%; background:var(--panel2); color:var(--ink-dim); font-size:11px; line-height:1; cursor:pointer; vertical-align:middle; font-family:var(--font-ui); }
+.info-dot:hover { color:var(--accent); border-color:var(--accent); }
+.help-overlay { position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.5); padding:16px; }
+.help-card { max-width:440px; width:100%; background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:0 8px 30px rgba(0,0,0,0.4); }
+.help-card .help-short { font-size:15px; color:var(--ink); line-height:1.5; }
+.help-card .help-more { margin-top:8px; color:var(--ink-dim); font-size:13.5px; line-height:1.55; }
+.help-card .help-foot { display:flex; gap:8px; justify-content:space-between; align-items:center; margin-top:14px; }

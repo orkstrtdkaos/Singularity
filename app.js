@@ -39,8 +39,40 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.50";
+const APP_VERSION = "1.8.51";
 const app = document.getElementById("app");
+// SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
+// replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
+app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]"); if (b) { e.preventDefault(); showHelp(b.dataset.help); } });
+
+/** SNG-084: the authored one-sentence explanation for a mechanic, by id (helper_text.json). */
+function helpEntry(id) { return CONTENT?.helpText?.[id] || null; }
+/** An ⓘ affordance for a mechanic surface — renders nothing if there's no authored copy (no dangling dot). */
+function infoDot(id) { return helpEntry(id) ? `<button class="info-dot" data-help="${esc(id)}" title="What's this?" aria-label="Explain this">ⓘ</button>` : ""; }
+/** Light markdown: **bold** only (the copy uses it), everything else escaped. */
+function mdLite(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"); }
+/** Show the explanation for a mechanic: the one-sentence `short`, `more` behind a toggle (progressive),
+ *  and a link out to the Library for the deep read. A dismissible overlay — never blocks the screen. */
+function showHelp(id) {
+  const e = helpEntry(id);
+  if (!e) return;
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop";
+  pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Explanation">
+    <div class="help-short">${mdLite(e.short || "")}</div>
+    ${e.more ? `<div class="help-more" id="help-more" hidden>${mdLite(e.more)}</div><button class="link-btn" id="help-more-toggle">more…</button>` : ""}
+    <div class="help-foot"><button class="link-btn" id="help-lib">📖 The Library</button><button class="btn" id="help-close">Got it</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  const mt = document.getElementById("help-more-toggle");
+  if (mt) mt.onclick = () => { const m = document.getElementById("help-more"); m.hidden = !m.hidden; mt.textContent = m.hidden ? "more…" : "less"; };
+  document.getElementById("help-lib").onclick = () => { close(); renderLibrary(); };
+}
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
 let character = null;    // active character
@@ -3124,7 +3156,7 @@ function renderSkillWheel(selectedId = null) {
   </div>` : "";
 
   chrome(`<div class="screen" style="max-width:980px">
-    <h2>The Skill Wheel</h2>
+    <h2>The Skill Wheel ${infoDot("circle.what")}</h2>
     <p class="hint" style="margin-bottom:8px">The great circle IS your skill tree. Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; the <strong>folk crafts</strong> sit at the centre (open to all); <strong>precursor</strong> rings the outside; a <strong>braid you know</strong> draws a line through the middle; and your <strong>antipode is dark, struck through</strong>, across the wheel. Depth = mastery. <strong>Scroll to zoom, drag to pan.</strong></p>
     <div class="graph-wrap" id="graph-wrap">
       <div class="graph-zoom-ctl">
@@ -3315,7 +3347,7 @@ function renderCharacterScreen() {
           <span class="cs-val">${v}</span>
           ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
         </div>`; }).join("")}</div>
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span></h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
         const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
         const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity); // SNG-047+: cross-class doubles
@@ -4336,7 +4368,7 @@ function renderPlay(turn, opts = {}) {
       <button class="opt" id="open-inventory" style="flex:1">Inventory</button>
     </div>
     Health <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
-    Energy <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
+    Energy ${infoDot("energy.no_regen")}<div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
     <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>
@@ -4378,7 +4410,7 @@ function renderPlay(turn, opts = {}) {
           // over-tier picks (secondary>III, tertiary>II, kin-capstones) simply aren't shown.
           return domainVerdict(ab).allowed;
         });
-        const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points now deepen owned skills" : ""}</div>`;
+        const capLine = `<div class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${cap ? " — at capacity; points now deepen owned skills" : ""}${cap ? " " + infoDot("lock.capacity") : ""}</div>`;
         if (!learnable.length) return capLine;
         // SNG-059: group the learn list by TRADITION (the people)
         const byClass = {};

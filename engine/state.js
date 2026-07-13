@@ -142,6 +142,11 @@ export async function loadContent() {
   // signatory ability with `accord` so the learn-gate lets anyone take it.
   const accords = await loadRule("the_accords", null);
   if (accords) for (const sig of (accords.signatories || [])) { const ab = abilities[sig.opens]; if (ab) ab.accord = sig.tradition || true; }
+  // SNG-084: in-context helper text — every mechanic explains itself where it bites. Authored copy
+  // (id → {short, more}); indexed by id for O(1) lookup at the surface. Optional (a miss = no ⓘ).
+  const helpDoc = await loadRule("helper_text", { entries: [] });
+  const helpText = {};
+  for (const e of (helpDoc.entries || [])) if (e.id) helpText[e.id] = e;
   // SNG-062: the Prologue — character creation as a played opening. Fetched directly. Optional
   // (absence falls back to the quick-start form; never breaks load).
   let prologue = null;
@@ -152,7 +157,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

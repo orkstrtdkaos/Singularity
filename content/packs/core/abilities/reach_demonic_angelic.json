@@ -17,9 +17,9 @@
         "emotional_logical": -0.2
       },
       "functions": [
+        "command",
         "bind",
-        "reveal",
-        "strike"
+        "reveal"
       ],
       "narrationHints": "Something in the room admits what it wants, and the admitting has teeth.",
       "description": "The demonic-pole mastery: appetite named, bargains struck, the refusal to pretend that want is not the engine. Not evil — the honest hunger.",
@@ -114,6 +114,7 @@
         "falsehood_truth": 0.2
       },
       "functions": [
+        "command",
         "bind",
         "reveal"
       ],
@@ -163,9 +164,10 @@
         "dark_light": 0.2
       },
       "functions": [
-        "heal",
+        "restore",
         "ward",
-        "bind"
+        "command",
+        "reveal"
       ],
       "narrationHints": "The light here does not warm. It measures.",
       "description": "The angelic-pole mastery: mercy given, judgment pronounced, the luminous certainty that both heals and terrifies. Not good in the flat sense — certainty is a danger.",
@@ -261,7 +263,8 @@
       },
       "functions": [
         "shield",
-        "ward"
+        "ward",
+        "resist"
       ],
       "narrationHints": "A word is spoken and the blow simply does not arrive.",
       "description": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
@@ -297,5 +300,6 @@
       },
       "tradition": "seraphic"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

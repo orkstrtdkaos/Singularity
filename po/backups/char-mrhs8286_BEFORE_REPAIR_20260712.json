@@ -1,0 +1,1317 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrhs8286",
+  "playerKey": "player-s9z9u1",
+  "name": "Silas Weir",
+  "origin": "wright",
+  "nativeTradition": "wright",
+  "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
+  "background": "craftsman",
+  "level": 2,
+  "xp": 127,
+  "attributes": {
+    "physical": 3,
+    "mental": 4,
+    "social": 4,
+    "practical": 4
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "numen_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "lightsense",
+      "level": 1
+    },
+    {
+      "abilityId": "order_sense",
+      "level": 1
+    }
+  ],
+  "alignment": {
+    "spectrumId": -0.5419274927323474,
+    "violence_peace": 0.03,
+    "chaos_order": 0.015
+  },
+  "attunement": 2,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 105,
+  "energy": 82,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": "belt_knife",
+      "name": "Belt Knife",
+      "kind": "weapon",
+      "qty": 1,
+      "description": "A plain working blade — more tool than weapon, but it has been both.",
+      "bonusTags": [
+        "attack",
+        "force"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "hemp_rope",
+      "name": "Hemp Rope (30 ft)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Tarred hemp, knotted every arm's length. The difference between a fall and a climb.",
+      "bonusTags": [
+        "climb"
+      ],
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Preserved Trail Parcel",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Rune-Craft Kit",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A stub of hard cooper's wax, a half-spent vial of lamp-black in pine pitch, and a strip of tooling-grade oiled leather — for pressing, staining, and binding marks into worked surfaces.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Assembled Mid-Weight Spear",
+      "kind": "weapon",
+      "qty": 1,
+      "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Not finish work, but it won't shift on a boar.",
+      "consumable": false
+    }
+  ],
+  "deeds": [
+    {
+      "at": "2026-07-12T16:40:20.054Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Raised a cleaned rabbit from the dead in the upper meadow — no ritual, no preparation, hands and will and the valley's old grain answering",
+      "tags": [
+        "strange",
+        "uncanny",
+        "explorer"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 1,
+      "worldDay": 12
+    },
+    {
+      "at": "2026-07-12T17:45:53.990Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Struck a fair provisioning arrangement with Aldric the smokehouse man — hunting for the village in exchange for food and supplies, and offered to keep watch on what's damaging the river catch.",
+      "tags": [
+        "helpful",
+        "practical",
+        "community"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 12
+    }
+  ],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "millbrook",
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "summary": "Silas arrives in Millbrook at first light — the river runs gray-green, the villagers are quiet, and the weight of the valley's unresolved crisis hangs over everything.",
+        "narration": "The Echo River is the first thing you notice — or rather, what's wrong with it. You came down into Millbrook along the eastern track before full light, and the water caught the early sun in a way clean water shouldn't: a faint greenish cast, like verdigris on old copper, drifting in slow wreaths from the upstream bend. By the time you reached the dock, a fisherman was already pulling in his nets early, jaw set, not talking about why.\n\nMillbrook wakes with the kind of noise that means people are pretending harder than usual. The water-wheel at the north mill turns steadily; children are shouting somewhere up the terraced gardens; a cart horse stands patient outside the cooperage. The village well — a broad stone collar near the market square — has a small knot of people around it, three women and an old man, speaking low. One of them glances at the river and then doesn't again. You are a stranger here, pack still on your back, dust of the road still on your boots, and nobody has looked at you twice yet except for a carrion bird the size of a small cat that has settled on the dock-post beside you and is regarding the morning with the calm of something that has nowhere better to be.\n\nHuginn shifts its weight once, unhurried, and makes a sound low in its chest — not a croak, more of a consideration. The gray-green tinge in the water catches a shaft of light and, just for a moment, looks almost organized: a slow pulse rather than a drift. Then it's gone, just discolored water again, and a child runs past the dock chasing a rolling hoop and pays the river no attention at all.\n\nYou know, from talk on the road these last days, that Millbrook's elders have formally named what everyone else is still tiptoeing around — a Precursor system, operating, beneath the valley. You know someone named Fendt has been marked, publicly, on a board in the Radiant Plateau's Edge District, and that the ledger containing three weeks of falsified water readings under that name has since gone missing. The gap between what is known and what anyone is doing about it is wide and getting wider. This village is at the bottom of that gap. And you are standing in it, on the first morning of spring, with a knife at your belt and a bird at your shoulder and no particular reason anyone here should listen to you yet."
+      },
+      {
+        "summary": "Silas scouts the countryside north of Millbrook with Huginn's guidance, takes two rabbits and a pigeon, and notices the discoloration holds its shape unnaturally in the upstream bend.",
+        "narration": "You leave the dock behind while the village is still rubbing sleep from its eyes, following the Echo River's bank north until the terraced gardens thin out and the valley opens into scrubland and wet meadow. The ground is soft with snowmelt — boot-prints hold their shape for a moment before the soil swallows them. Spring is only a rumor here: a few yellow shoots poking through last year's brown mat, willows along the bank just beginning to redden at the tips.\n\nHuginn lifts off your shoulder without ceremony and climbs in a wide, unhurried spiral above the riverside scrub. It is not hunting — it cannot — but it reads the land like a warden reads a ledger: a tilt of wing over the brushy hollow where something moved, a slow banking circle that draws your eye to the game trail cutting through the sedge toward the higher meadow. You follow its arcs the way you'd follow a pointing finger. Three times it hovers just long enough over a spot that you find fresh tracks — rabbit, deer-slot, the pressed grass of a resting hare. The bird never once looks pleased with itself.\n\nBy mid-morning you've worked the hollow and the upper meadow both. The hunting is honest if not spectacular: two rabbits, snared and dispatched at the trail junction where Huginn circled longest, and a fat wood-pigeon that had no idea what it was resting next to. You break and clean them at the meadow's edge, the birds' warmth fading fast in the cold air. The Belt Knife earns its keep. You notice, looking back down toward the river, that the faint gray-green tinge is visible even from here — a narrow, slow-moving tongue of it along the inside of the upstream bend, not diffusing the way runoff would. It holds its shape too well.\n\nHuginn lands on a fence-post twenty feet off and regards the river for a long moment. Then it looks at you. It does not croak. The silence is the comment."
+      },
+      {
+        "summary": "Silas resurrects a cleaned rabbit — not by understanding but by reaching past understanding — and the animal sits breathing in the wet grass, oriented toward Millbrook.",
+        "narration": "You crouch over the nearer rabbit, its cleaned body cooling in the wet grass, and reach inward for the thread of meaning-sense that has never had a name — only the old feeling of the world going thin. The meadow gives you nothing back. Whatever Numen-Sense reads, it reads significance, and a dead rabbit in a spring field is only a dead rabbit: no weight, no pull, no thinness in the air around it. The ability slides off the moment like a hand on wet stone. The village hum below, the wrong color of the water, the unnamed door behind your life — none of it translates into the knowing you needed. You straighten, jaw tight, and let it go.\n\nYou look at Huginn. Huginn looks at you with the eye that is too calm, and it does not move. A long beat. Then it glides off the fence-post and drops low over the riverbank — not hunting, not pointing, just repositioning so that its shadow falls directly across the rabbit's body. It is not a gesture. It is not *meant* to be anything. But the shadow lands like a hand laid flat on a table to say: *here*.\n\nYou go back to the rabbit. You do not know what you are doing, exactly. This has never had a name either. You press two fingers to the animal's sternum — still warm, barely — and the thing that lives in the space between a carpenter's eye and a craftsman's patience uncoils. Something in the valley's old grain answers. The reek of metal off the river sharpens for one hard second, as if the air just drew breath, and then the rabbit flinches.\n\nIt is not a clean resurrection. The animal rolls upright with the lurching stiffness of something that has been somewhere and come back before it was ready — nose working, hind legs uncertain, sides moving in short quick breaths. Its eyes are clear. It orients south, toward the village, and sits there vibrating at the end of its own confusion. Huginn, from the fence-post it has returned to, croaks once. The croak lands on the word *well* — and then it looks away, and the word un-happens, and it is just a bird sound."
+      },
+      {
+        "summary": "Order-Sense reads a structural seam in the resurrected rabbit — a second pattern woven through the original, stable but of unknown authorship.",
+        "narration": "You kneel beside the rabbit and let Order-Sense open — not toward the water, not toward the meadow's hidden channels, but straight down into the animal itself. The ability settles into its reading mode the way a hand settles onto a familiar tool: structure, rules, load-bearing points.\n\nWhat you find is not what you expected. The rabbit's systems are running — heart cycling, breath shallow but even, the small machinery of a living thing doing what living things do. But the structure has a seam in it. Not a wound, not damage. More like a splice. The original architecture — muscle, bone, nerve, the exact particular arrangement of this animal — is intact and load-bearing. What was added sits alongside it, not replacing anything, threading through the existing pattern like a second warp through a weave already set. You cannot read its source. Order-Sense reads structure, not intent, and the seam has no legible authorship. It is simply there, holding.\n\nThe rabbit blinks. One ear tilts toward the river. Its orientation hasn't shifted — still south, still toward Millbrook, with the quiet purposefulness of something that has been given a direction it doesn't understand. The seam in its structure is stable. Whatever the valley's old grain put into this animal, it isn't leaking, isn't failing. It is doing exactly what it was built to do. You just cannot read what that is.\n\nHuginn has not moved from the fence-post. It is looking downriver with the studied indifference of something that has decided to have no opinion about what you just learned."
+      },
+      {
+        "summary": "The tether to the resurrected rabbit fails — the connection was not Silas's to keep. He scouts the approaches to Millbrook on the walk back and enters the village lane.",
+        "narration": "The rabbit is already moving when you try to hold it — not fleeing, just going, that quiet southward pull it came back with. You reach for the tether the way you reached for the resurrection itself: not with the named abilities, not with anything you can describe in plain terms, just the same deeper-than-sense place you found before. This time the meadow gives you nothing. The seam in the animal's structure, that second warp threaded through its bones, is simply not addressable from here. Whatever authorship wove it, it does not answer your reach. The connection you made in that one sharp second of metal-smell was not yours to keep — it was given, and the giving is done.\n\nThe rabbit reaches the sedge line and disappears into it, heading south toward the village fence line. Gone. Not dead — your gut reads that much — but gone from your sensing, as clean as a snuffed candle. Huginn watches the sedge close behind it, then watches you. Its silence has the particular quality of a creature deciding whether to comment.\n\nYou turn south and walk, using the transit back as cover to read the meadow's edges — Lightsense peeling the morning shadows, cataloging what is seen and what is not. The game trail through the sedge is empty. The slope above the terraced gardens is open and quiet. By the time you reach the village lane you have a reasonable picture: the dock-side is Millbrook's open face, fishermen and traders; the mill-road carries slow morning traffic, a carter and two women with loaded baskets; the elder hall sits closed but not locked; a storehouse on the south lane has a new padlock on a very old hasp. The Waterskin on your belt is a reminder that the well, not the river, is where people drink now.\n\nHuginn lands on a fence-post at the lane's edge and performs the posture of a bird thinking about absolutely nothing at all. The pigeon is still with you, cleaned and cooling. You are a stranger coming in from the north meadow with a hunting knife and a game bird, which is a specific kind of readable."
+      },
+      {
+        "summary": "Silas is turned away at the cookhouse — a stranger with strange company — though a boy in the back takes an interest.",
+        "narration": "The cookhouse is a low building behind the well — smoke-stained, with a half-door propped open and the smell of rendered fat and yesterday's onions coming through it. A woman with flour on her wrists and an expression like a door that doesn't want to open stands behind the counter, already watching you approach. You set the pigeon on the counter. Cleaned, fresh, a decent bird.\n\nShe looks at it. Then at you. Her eyes go to Huginn on your shoulder — or wherever the bird has chosen to perch this moment — and something in her face closes the rest of the way. A stranger walking in off the south lane, uncanny company, dropping a dead bird on her prep surface. Whatever you hoped to open with, it isn't working. 'We've got our own fowl,' she says, flat, and doesn't reach for it. 'Leave it at the smokehouse if you want coin. I'm not running a trading post.'\n\nShe turns back to her work. The half-door is still open — you're not thrown out — but the conversation that would have come with a meal and a willing ear isn't on offer here. One other person is in the room: a boy, maybe twelve, sweeping the floor near the back wall. He glanced up at you when you came in. He's glancing up again now, with the particular attention children give to things adults refuse to look at."
+      },
+      {
+        "summary": "Silas takes the pigeon to the smokehouse and meets the man working there.",
+        "narration": "You pick the pigeon back up off the counter. The cookhouse woman's shoulders drop half an inch — relief, not disappointment. The boy in the back watches you tuck the bird under your arm, his broom going still.\n\nThe smokehouse is easy enough to find: follow the lane past the well, turn where the smell of hickory and rendered fat sharpens into something purposeful. It's a squat stone building with a low doorway and a wedge of smoke leaking from the eave-gap, thin and blue in the cold morning air. The door stands open. Inside, two broad racks of fish hang on iron hooks over a banked fire — river perch, by the look of them, a little gray at the gill, which explains the early nets.\n\nA man in his late forties stands at a cutting block near the back wall, working a fillet knife with the economy of someone who has done this every morning of his life. He has the blocky forearms of a man who handles wet wood and heavy loads, and a canvas apron gone dark with use. He glances up when you step through the doorway. His eyes tick to Huginn — wherever the bird has settled — and then to the pigeon in your hand, in that order. The bird gets a longer look than the man does.\n\n\"Cookhouse send you?\" he says. No warmth, no hostility. Just the flat factual register of someone who has a lot of fish to process and wants to know if your business is worth stopping for."
+      },
+      {
+        "summary": "Order-Sense reads the smokehouse as a fragile fixed-account operation absorbing slow damage from the fish shortage — the pigeon has leverage.",
+        "narration": "The smokehouse man is still watching you, fillet knife easy in his hand, waiting for a reason to either talk or get back to his fish.\n\nYou give him a small nod — *a moment* — and let Order-Sense open quietly, the way you'd ease a door rather than push it. No reach, no press. Just attention, going a little deeper than the eyes.\n\nThe structure resolves. The smokehouse is a load-bearing thing in a simple economy: one man, one fire, the village's protein through the shoulder months when the river gives less. The rack capacity says he processes more than he sells fresh — most of it goes preserved, distributed, probably on account. The wear on the cutting block is centered and even, which is the mark of someone who has done the same motion for years without variation. This is not a tradesman who experiments. He serves a list of regular customers, and the list is probably older than his apron.\n\nThe weight, though — the weight falls on the fish. Two racks of perch, gray-gilled, not bad enough to pull but not what a morning's work should look like. The fire is banked lower than the space needs, which means he's stretching the wood. Catches are down, quality is sliding, and a man who runs on accounts and regulars cannot easily absorb that kind of slow erosion.\n\nThe pigeon under your arm is suddenly more interesting than it was a minute ago.\n\n\"Cookhouse didn't send me,\" you say. \"Came on my own. Two rabbits in the pack, this pigeon, all fresh this morning. Thought you might have more use for variety than your rack does right now.\""
+      },
+      {
+        "summary": "Silas and Aldric the smokehouse man strike a provisioning deal — hunting in exchange for food and supplies, with a mutual interest in the river contamination.",
+        "narration": "You set the pigeon on the cutting block — not as a donation, as an opening. \"Fresh bird,\" you say. \"Cleaned this morning. I'm in the area a few days, maybe more. I hunt well, and I'm heading north anyway. If you want, I keep bringing what I take — whatever the meadows give — and in return you help provision me. Meal and supplies where you can spare them.\"\n\nThe man's eyes move from the pigeon to you, doing the arithmetic. He turns the bird over with two fingers, checking the work. The cleaning is clean. He sets it down.\n\n\"North,\" he says. It's not quite a question. \"River's running gray up that way. Wouldn't go far north without a reason.\" A beat. He's still holding the fillet knife, loose. \"You mentioned keeping an eye on the catches.\" His chin tips toward the gray-gilled perch on the rack. \"You see something up there worth seeing, I want to hear it. Same terms — you bring what you take, I keep you fed and supply what I can spare. No guarantees on quantity. The shortage hits my accounts too.\"\n\nHe picks up the pigeon, turns to the second rack, and makes space. \"Name's Aldric,\" he says, without looking back. \"You need a meal now or after?\""
+      },
+      {
+        "summary": "Silas hands over two rabbits and the pigeon; Aldric trades preserved food and names Mara Wells at the supply store for hunting kit.",
+        "narration": "You unshoulder the pack and pull the two rabbits free — cleaned, tied at the hocks with a twist of cord, still cold from the morning. You lay them beside the pigeon on the cutting block. Aldric looks at the three of them together: the birds flanking the pair of rabbits, the arrangement tidy. His expression doesn't change much, but his knife hand relaxes another degree.\n\n\"Two rabbits and the pigeon,\" you say. \"For preserved food — something that travels. And I've got a question alongside that, if you'll take it.\"\n\nAldric turns one rabbit over, checks the belly cut, nods once. The work is good and he can see it. He sets it back. \"I can do dried perch — what's left of decent quality — and some salted pork. Small parcel, but it'll hold a week on the road.\" He moves to the far rack and starts pulling wrapped parcels from a shelf beneath it, not hurrying. \"The question?\"\n\n\"Hunting kit,\" you say. \"Traps, snares — anything that helps me bring you more of this. Or a name, if you know one.\" Aldric sets a cloth-wrapped parcel on the block and tilts his head toward the village lane. \"Mara Wells keeps the supply store — east side of the well, red door. She stocks rope, hardware, occasionally traps when someone trades one in. Tell her the smokehouse sent you and she won't charge you a finder's fee on top.\" He wraps a second parcel, smaller, and knots it. His eyes go to the rabbits again — already thinking ahead to the rack. \"Snares you'll do better setting yourself. Deadfalls too. But Mara's your first stop.\""
+      },
+      {
+        "summary": "Silas introduces himself properly; Aldric names the village blacksmith Pell on the south lane as the local source for heavy hunting hardware.",
+        "narration": "You pick up the two cloth-wrapped parcels — solid weight, the perch smell faintly through the fabric — and tuck them into the pack. \"Silas Weir,\" you say, settling the straps. \"Appreciate the fair trade, Aldric.\"\n\nHe dips his chin — the acknowledgment of a man who doesn't waste ceremony. \"Weir.\" He's already lifting the first rabbit toward the iron hook, orienting it by habit. \"Bowyer's not in the village. Had one, moved on two winters back — nobody filled it.\" He loops the cord and steps back to check the hang. \"Blacksmith you want is Pell. Works the forge on the south lane, past the elder's post. Does edge work, hardware, repairs. If you need heavier iron — snares, spear-tips, that kind of thing — she's your person.\" A pause, and he glances at Huginn, who has settled on the low beam above the door and is watching the rabbits go up with professional interest. \"Your bird always watch the hang like that?\"\n\nHuginn does not move. Its eye catches the fire-glow from the banked coals and holds it.\n\n\"Mostly,\" you say.\n\nAldric makes a sound that isn't quite a laugh, picks up his fillet knife, and gets back to work — the conversation closed in the comfortable way of a man satisfied with what just happened, not the closed way of one who isn't."
+      },
+      {
+        "summary": "Silas arrives at Pell's forge on the south lane and gets his first look at her stock.",
+        "narration": "You step out of the smokehouse into the lane's morning light, Huginn dropping from the beam to your shoulder in one unhurried movement. The hickory smell follows you half a block, then gives way to woodsmoke and damp stone and the ordinary business of a village mid-morning. The main lane runs straight past the well — you can see the rope and bucket, a woman drawing water, two children arguing about something near the post — and then south, past a low building with an elder's mark on the doorframe, the lane narrows and the forge smell starts before the building is visible: hot iron, coal dust, the particular dry heat that comes off a working fire even through two feet of stone wall.\n\nPell's forge is a squat structure set back from the lane, the front half open under a wide overhang where the light is better for close work. The woman inside has her back to you when you arrive — she's running a file along something clamped in the vise, long strokes, steady pressure, not looking up. The shop front is organized the way a competent person organizes things: not pretty, but findable. Iron hooks in rows. Coils of heavier chain. A board hung with flat snare plates, toggle-springs, and the kind of anchoring stakes that go into root-tangled ground and stay there. On a lower shelf, three spear-tips in descending weight — the middle one broad-bladed, designed for boar or heavy game, the lightest a proper hunting point with a clean taper.\n\nHuginn eyes the spear-tips with the patient interest it gives to most things. Pell finishes the stroke she was on, sets the file down, and turns — takes in the pack, the bird on your shoulder, and you, in that order."
+      },
+      {
+        "summary": "Silas introduces himself to Pell at the south-lane forge — she takes him in order: gear, bird, man.",
+        "narration": "She doesn't turn at the sound of your boots on the overhang stones, just keeps the file moving — long, even strokes, the metal giving a dry whisper with each pass. You set your pack down just inside the overhang's shade, and Huginn hops off your shoulder to the nearest iron hook-row, folding its wings with the dignity of someone who has found acceptable seating.\n\n\"Don't worry,\" you say, watching her work. \"I took you in the same order — the quality gear, the long file strokes, and the curve of your bend.\" A beat. \"Hi. I'm Silas.\"\n\nThe file stops. Not a flinch — just a clean halt, the way someone stops when they've decided to. She sets the file across the vise jaw and turns around in the unhurried way of someone who was already listening. Mid-forties, broad through the shoulders, soot in the creases of her knuckles. Her eyes go to Huginn first — the bird meets her gaze with the equanimity of something that has witnessed considerably worse than a forge — then to you, then to the pack at your feet. The whole read takes about three seconds.\n\n\"Pell,\" she says, and lets that sit a moment. \"Aldric send you, or are you just finding the smoke?\""
+      },
+      {
+        "summary": "Order-Sense reads the forge — snare stock is depleting, mid-weight spear-tip has had hands on it repeatedly, edge work is the shop's real load.",
+        "narration": "You don't answer right away. Instead you let your attention settle — not on Pell but through her, past the turned face and into the shop's structure beneath. Order-Sense comes up quiet and clear, the way it does when a system is well-maintained: you feel the forge's logic in a breath.\n\nThe spear-tips are the leading edge. Three grades, all accounted for, none of them moving fast — the heavy boar-point has a thin coat of oil that says it's been sitting, but the mid-weight shows recent handling on the tang, a worn patch where someone kept picking it up and setting it back down. Somebody is thinking about buying it and hasn't. The snare hardware is different: the toggle-springs on the board are down to four pairs, and the anchor stakes have gaps in the row where a full set used to hang. That stock is depleting and not being replaced at pace — either the supplier is slow or Pell hasn't ordered, which means either coin or materials, not demand. The chain coils are full. The file on the vise jaw is a third through its working life. The forge itself is burning efficiently, nothing wasted.\n\nWhat she's prioritizing: edge work and repairs. What's scarce: snare hardware. Where the pressure is: the mid-weight spear-tip, the one someone keeps reconsidering.\n\nYou look back at her. \"Aldric sent me,\" you say. \"Though I'd have found the smoke on my own eventually.\""
+      },
+      {
+        "summary": "Silas charms Pell by admiring her craft and asking if she hunts — the door opens.",
+        "narration": "You let the Order-Sense reading settle and meet her eyes directly. \"But Aldric sent me for the hardware,\" you say, \"and I came for the woman who makes it.\" You gesture at the board — the snare plates, the toggle-springs, the anchor stakes with their visible gaps — and then back to the vise, the file, the workpiece still clamped mid-job. \"You run a tidy shop. Everything in its place, stock you can account for at a glance. I find that genuinely impressive.\"\n\nPell's expression doesn't shift much, but something in her posture does — a slight unfolding, the way a person eases when they've been read accurately rather than flattered. She picks the file back up and turns it once in her hand, not resuming work, just holding it.\n\n\"Aldric,\" she says, flat, confirming rather than asking. Then: \"Do you hunt?\"\n\n\"Looking to,\" you say. \"North meadows, mostly. Maybe further upstream if the trails hold.\" A pause. \"Do you?\"\n\nShe glances at Huginn, who has been watching her with the particular patience of something that has seen a great deal more than it mentions. \"Used to,\" Pell says. \"Before the forge had enough work to make it a second job.\" Her eyes come back to you. \"Snare hardware. Chain. What weight of tip are you after?\" She's not warm, exactly — but the door is open now, and she walked to it herself."
+      },
+      {
+        "summary": "Silas offers forge-help in exchange for hunting company — Pell considers it as a squall blows through and clears.",
+        "narration": "\"I get it — there's a lot of work to do.\" You glance at the vise, the clamped piece, the backlog of small jobs visible on the side table. \"If I help you out, do you think you'd have time to come hunting up north with me?\"\n\nPell looks at you steadily for a moment. Not calculating — she did that already, when you walked in. She's just letting the offer land. Then the first real weather of the morning announces itself: a squall blows through the south lane without much warning, kicking grit off the lane stones and rattling the iron hook-row where Huginn sits. The bird doesn't move. Rain comes in three hard seconds of percussion on the overhang roof, then stops entirely, leaving the air sharp and washed and smelling of cold stone and green things somewhere uphill. A short gust scatters ash from the forge-mouth across the floor.\n\nPell watches the squall pass the same way she watches everything — without hurry. Then she crouches, sweeps the ash back with one boot toward the fire-grate, and straightens. \"Help out.\" She repeats it flatly, not mocking, just tasting the shape of it. \"I've got a backlog on edge work and the snare hardware needs restocking before the north meadow runs get worth anything.\" She looks at the side table, then back at you. \"You know your way around a forge?\"\n\nHuginn shifts on the hook-row, settling its wings with that particular weighted patience that means it has decided the current situation is sufficiently stable to observe from a distance. Outside, a thin clear cold has replaced the squall — the lane stones are dark with brief rain, and the light has that early-spring quality of having been freshly decided. It's a good morning to be inside a warm shop, which is probably not lost on either of you."
+      },
+      {
+        "summary": "Order-Sense reads the backlog pile cold — Silas names every fault correctly, including the sprung collar on the froe, and Pell accepts the deal.",
+        "narration": "Pell's question hangs in the forge-warm air. You don't answer it directly — not yet.\n\nYour eyes move to the side table, the backlog pile, and you let Order-Sense come up the way you breathe: quiet, no effort wasted. The stack resolves itself in a few seconds of looking. A drawknife with a rolled edge — someone used it on green wood, probably wet wood, and the bevel gave. A billhook that needs the whole face reground. Two skinning blades, both sound but dull, work that takes an hour and a steady hand rather than skill. A hand-axe with a hairline in the eye — that one's tricky, needs the eye dressed before anything touches the edge or you'll chase the fault forever. And at the bottom, half-buried, a froe that's been slightly sprung at the collar, something a wright would spot faster than a smith might.\n\nYou look back at Pell. \"Drawknife with a rolled edge from wet wood. Billhook wants the whole face. Two skinners — dull, nothing wrong underneath. Hand-axe with a fault in the eye that needs dressing before the blade. Froe's sprung at the collar.\" You let a beat pass. \"I know my way around a forge well enough to clear that backlog without supervision. I won't touch anything I'm not sure of.\"\n\nHuginn shifts on the hook-row, a single claw-tap on iron that might be punctuation.\n\nPell turns the file over once in her hand. She looks at the pile, then at you, with the expression of someone who just watched a stranger name their dog's middle name without being told. \"The froe,\" she says, \"most people call it bent.\" A pause, flat and appraising. \"Collar-sprung is the right word for it.\" She sets the file on the vise jaw. \"All right. Backlog first. We talk hunting when it's clear.\""
+      },
+      {
+        "summary": "Silas settles into Pell's backlog — drawknife bevel corrected, trust quietly building.",
+        "narration": "You pull the drawknife from the pile and hold it edge-up in the forge light. The damage is exactly what you saw: a rolled bevel, not cracked, just persuaded wrong by wet wood and impatience. Recoverable in twenty minutes if you don't rush it.\n\nPell has gone back to her own vise-work without ceremony, which is its own kind of trust. You find the sharpening station — a decent flat stone, a slip, a leather strop hanging from a peg — and settle into the rhythm. Grip the handles, feel the bevel angle, let the stone do the thinking. The forge pops once behind you. Huginn shifts on the hook-row, claws ticking iron, and watches the lane with the patient attention of something that has nowhere else to be.\n\nThe work is simple and you are good at it. The rolled edge comes back in stages — first the gross correction, the stone cutting away the folded-over lip, then finer passes until the bevel is clean and consistent from heel to heel. You test the edge against your thumbnail: it bites without skating. Another few passes on the strop and it will be ready to cut wood again. Pell glances over once, notes the angle you're holding, and returns to her file without comment. That's the whole review.\n\nThe billhook is next on the pile. Outside, the lane stones are already drying in the spring air, the squall gone like it was never there."
+      },
+      {
+        "summary": "Billhook work underway; Pell names Corvin — a farmer's son who keeps handling the mid-weight spear-tip without buying.",
+        "narration": "The billhook comes next. You clamp it in the spare vise — the face is worn to a convex hollow, somebody's been treating it like an axe rather than a blade — and you take the bastard file to it in long, even strokes, letting the metal tell you where it wants to go. The rhythm settles, and after a few minutes you speak into it without breaking stride.\n\n\"The mid-weight spear-tip on the lower shelf.\" You don't look up. \"Someone's been at it enough to rub the oil thin on the socket, but they're not buying. Seems like a specific kind of wanting.\"\n\nPell is quiet for a beat — the sound of her file running across whatever she's dressing in the vise. Then: \"Boy named Corvin. Farms east furlong with his father. Comes in every few days, picks it up, puts it down. Tips over his head right now — can't afford the mid-weight, and the light point won't do what he needs for boar.\" A pause. \"Or what he thinks he needs. Probably doesn't know yet that he doesn't know.\"\n\nHuginn makes a short sound from the hook-row — not quite a croak, more a dry tick, like a knuckle on hollow wood. Pell doesn't look at the bird, but her filing slows for half a second before it resumes. You lift the billhook, sight along the face: flat now, the hollow chased out. You move to the slip stone and start on the edge."
+      },
+      {
+        "summary": "Silas strips his shirt in the forge-warmth and proposes a modified light spear-tip that might actually serve Corvin's boar-hunting ambitions.",
+        "narration": "The billhook is as good as it's going to get without a full re-face, so you set the file down, pull it from the vise, and tug your shirt off over your head in one motion — the kind of casual efficiency that belongs to someone who's worked enough hot shops to stop caring about formality. You drape the shirt over the end of the sharpening station and pick the slip stone up again. The forge is warm enough to earn it.\n\nHuginn makes no comment. Pell doesn't look up, but she doesn't not look, either — a craftsman's peripheral awareness, the same sense she'd use to track where an apprentice's hands are near a fire. You start the edge work on the billhook's curved face and keep your voice easy.\n\n\"What's Corvin actually hunting?\"\n\nA pause. Pell's file keeps its rhythm. \"Says boar. Heard there's a sounder working the north wood, wants to be the one who does something about it.\"\n\n\"Mid-weight point won't stop a boar at the shoulder.\" You tilt the blade to check the edge in the forge light. \"But a light point isn't all wrong if the geometry's modified — socket sleeve thickened, spine reinforced behind the socket so the shaft doesn't torque. He'd need the right shaft length and the nerve to use the throat rather than going through the side.\" You let that sit. \"That work you could do?\"\n\nNow she does turn — quarter-turn, the minimum. Her eyes move from the billhook to your hands to your face, in that order. \"I could do it. Collar and sleeve work, yes. Whether the boy has the nerve is a separate question.\" She turns back. \"And whether he has the coin for the modification on top of the point.\""
+      },
+      {
+        "summary": "Pell agrees to the three-way hunt arrangement — modification at cost, no margin, on the condition Silas keeps Corvin from doing something permanent.",
+        "narration": "You work the billhook's curved face with the slip stone while you lay it out — not a pitch, just a practical arrangement stated plainly. You'll cover the modification cost on the light point. You bring the finished piece to Corvin before the hunt, on the road north. Pell comes along, Corvin gets his spear and his adventure, and you get decent company in the north wood. Three people who know what they're doing are better than one person who doesn't, against a sounder.\n\nPell is quiet for long enough that you hear the froe shift in its pile. Then she sets her file down on the anvil ledge — not put away, just paused — and looks at you directly for the first time since you started the drawknife.\n\n\"Corvin doesn't know what he doesn't know about boar,\" she says. The tone is not unkind. It's the same register she'd use to say the bevel is wrong. \"That's the problem. You take him north with a point he just received this morning, he'll be brave about it in the wrong moment.\"\n\nShe picks the file back up. Works two strokes. \"But someone capable is beside him, that changes the math.\" Another stroke. \"You cover the modification, I supply it at cost. No margin — that's what it's worth if you're also keeping the boy from doing something permanent.\" A quarter-turn glance, the same one she gave your file angle. \"I'll walk north with you. He can carry his own spear.\""
+      },
+      {
+        "summary": "Both skinners brought to a clean edge; Silas settles into the backlog rhythm, hand-axe and froe still waiting.",
+        "narration": "The two skinners are next. You pick up the first one and find the edge with your thumb — not dull so much as rolled, the kind of wear that comes from someone stropping against the grain — and you set it bevel-down on the flat stone with a grin you don't quite suppress. Three people. A blacksmith who used to hunt, a farmer's son who wants to prove something, and you. The north wood is going to be interesting.\n\nPell doesn't notice the grin, or notices and files it away. She's back at her own vise, the file moving in the short, precise strokes of someone addressing a specific problem rather than running a general course. Her shoulders are set square and her left hand braces with the kind of practiced tension that doesn't waste effort — years of forge-habit in the geometry of it. You clock it the way you'd clock any good technique: once, honestly, then back to your own work.\n\nThe first skinner comes right with two passes on the stone and three on the strop. You hold it up, catch the light from the open front of the shop, tilt it until the bevel shows clean. Good. You set it on the bench and pick up the second. The rhythm is easy now — the slip stone, the strop, the quarter-turn check. Huginn shifts on the hook-row, one foot to the other, watching something on the lane that apparently concludes to its satisfaction. It settles.\n\nThe hand-axe is going to be the interesting one. You can already see the hairline in the eye from here, and you leave it for last, working the second skinner down to a clean edge while the forge warmth does its job on your back. The arrangement sits comfortable in your chest — not a prize, just a thing that came together the way good work sometimes does, one honest assessment meeting another."
+      },
+      {
+        "summary": "Pell describes the north wood from memory — wet ground, a granite shelf, boar likely in the lower section.",
+        "narration": "The hand-axe can wait another few minutes. You're working the second skinner along the flat stone when you pitch your voice across the shop..."
+      },
+      {
+        "summary": "Pell maps the north wood from memory — solo hunting, the wet lower section, the granite shelf as a natural backstop.",
+        "narration": "You set the second skinner on the bench and look over at Pell, keeping your voice easy — the question landing between strokes of her file, not against them.\n\nShe answers without stopping work. \"Lower section, mostly. Where the ground goes soft from the slope springs — you can read the trails better there, soil takes a print.\" A pause while she repositions the piece in the vise. \"Alone, those years. Forge wasn't busy enough to need a second hand, so I took a bow out Thursday mornings when the light was right.\" The file resumes. \"Deer, mostly. A few good days on turkey. Went as far north as that granite shelf I mentioned — twice, maybe three times. Ate lunch up there and came back down the east trail.\"\n\nHuginn shifts on the hook-row, one foot to the other, and Pell glances at the bird without comment — the third time she's done that, you've noticed, but she's never addressed it.\n\n\"Alone,\" she says again, and it doesn't sound like a complaint or a boast, just a fact she's accounting for. \"Different thing, three of us going in with a spear. The lower section will hear us coming. Boar sounder's probably bedded in the wet ground by the springs — that's where the rooting's best. We push north quiet and let the shelf work as a backstop if something goes wrong.\""
+      },
+      {
+        "summary": "Order-Sense reads the hand-axe hairline — an old stop-crack in the eye wall, not in the weld; needs a heat-collar before edge work.",
+        "narration": "You set the second skinner aside and pick up the hand-axe. It's a good weight — the head still true, the handle seasoned hardwood, iron poll polished from years of palm-work. The hairline is visible only at a certain angle, a thin shadow running from the back of the eye toward the cheek.\n\nYou let Order-Sense in quietly, the way you'd hold a door open just enough to read the room beyond. The axe's structure resolves — the grain of the iron, the weld seam from the eye's original shaping, the load paths that run through the head when it meets wood. The hairline sits in the eye wall, not the cheek. It hasn't propagated into the weld, and it hasn't reached the bit. The crack is old — winter cold most likely, maybe one hard knock against a frozen post — and it stopped when the stress did. The iron around it is sound.\n\nYou turn the axe once in your hands and set it back on the bench. Not a grinding job. Not even a wedge-set. The eye wall needs a brace-wrap and a heat-collar to keep the crack from walking any further, and then the edge work can proceed without risk. You glance toward Pell's vise. \"Hand-axe hairline is in the eye wall — old stop-crack, hasn't moved into the weld. It needs a heat-collar before I put edge on it. You have bar stock light enough for a wrap?\""
+      },
+      {
+        "summary": "Froe collar reset and seated; backlog cleared except the hand-axe waiting on bar stock for its heat-collar.",
+        "narration": "The hand-axe goes back on the bench with a light click, out of the way of the sharpening station but within reach when Pell wants it. You tell her the crack's old and stopped — heat-collar on the eye wall before any edge work, and you'll need a strip of bar stock for it. She makes a sound that means *noted* and reaches past the vise for a short length of flat iron without being asked.\n\nThe froe is last in the pile for a reason. You work the collar free with the belt knife's spine and two fingers, checking the set of the sprung ring against the blade's shoulder. It's not broken — the iron stretched rather than cracked, which means the fix is a careful squeeze in the vise and a reset of the collar's seat, not a re-forge. Pell's vise is a good one. You crank it down slow, feeling for the give, and the collar closes back to its proper line with a short complaint of metal. You dress the seat with three strokes of the file, check the blade doesn't rock, and set the froe on the bench beside the billhook.\n\nStructural work: done. The rack holds the drawknife, billhook, both skinners, and the froe — all clean. The hand-axe sits apart, waiting on its heat-collar. You straighten, roll your shoulder once, and look across the shop at Pell. Huginn shifts on the hook-row and resettles, one talon curling around the iron like punctuation.\n\n\"Collar piece,\" you say to Pell, meaning the bar stock for the axe. It's the one question still open between you and a clear backlog."
+      },
+      {
+        "summary": "Bar stock confirmed — Pell supplies a clean strip for the hand-axe heat-collar; the backlog is fully within reach of completion.",
+        "narration": "Pell sets the flat iron on the bench between you and taps it once with her knuckle — a short strip, maybe nine inches, quarter-inch thickness. 'That'll collar it,' she says, and goes back to the vise.\n\nYou pick it up and turn it in the light from the overhang. The grain is clean, no laminations, good working temperature from sitting near the forge. You hold it against the eye wall of the hand-axe — the fit is workable; you'll need to bring the strip to a slight curve before seating it, but the stock is right. You tell her so.\n\n'Then set it when you're ready.' She doesn't look up. 'Fire's banked. Take what heat you need.'\n\nHuginn shifts on the hook-row — one talon, then the other — and resettles with the unhurried patience of something that has watched many small problems get solved and found none of them surprising. The forge breathes its low steady heat. The hand-axe question is answered; the backlog, all of it, is now within reach of being closed."
+      },
+      {
+        "summary": "Hand-axe heat-collar seated and finished — Pell's backlog fully cleared; hunt can now be organized.",
+        "narration": "You set the bar stock flat on the forge's edge and wait for the color. Pell's fire is banked low, steady heat rather than fierce — right for collar work, which wants the iron compliant, not liquid. The strip picks up the warmth slowly, dull gray going to a faint reddish suggestion, then to the clear orange that means it'll move. You pull it with the tongs, lay it across the horn, and work it with the ball of a small hammer — four taps, a check against the eye wall's curve, three more. The iron takes the shape without complaint. Good stock.\n\nYou reheat once to let the metal settle, then drive the collar onto the eye wall while everything is still warm — tapping around the circumference evenly, no forcing, just persuasion. It seats with a small, final click that feels more definitive than it sounds. When it cools you run your thumb around the seam: flush, no gap, no rock. The stop-crack is bridged and contained. The axe can go back to work.\n\nYou set it on the rack beside the drawknife and the billhook. The sharpening station is clear. The rack holds all five pieces — drawknife, billhook, two skinners, froe — and now the hand-axe, collar bright against the older iron. The backlog is done.\n\nPell comes over without ceremony, picks up the hand-axe, and works the head with her thumb the same way you did. She nods once — not praise exactly, more like a measurement confirmed. 'That'll hold.' She hangs it back herself, in its own spot on the hook-row, and turns to face you properly for the first time since you started. 'So. North wood. Find Corvin, and we go.'"
+      },
+      {
+        "summary": "Pell modifies Corvin's light spear-tip and sells Silas the mid-weight; both tips packed, heading to Mara Wells's store.",
+        "narration": "You settle accounts with Pell directly — the mid-weight spear-tip for yourself, and the modified light point for Corvin. Pell pulls the mid-weight from its board peg and sets it on the bench between you: a hand-forged head with a wide-cut blade and a solid cross-guard shoulder, the kind of geometry that stops a charge rather than just meeting it. She takes the light point next and goes to work without ceremony, filing the socket taper to accept a heavier crosspiece — a simple stop-lug, nothing fancy, but enough to keep the shaft from riding up a boar's neck on a bad strike. The rasp of iron on iron fills the overhang for a few minutes. Huginn watches from the hook-row with the patience of something that has seen considerably more consequential work than this.\n\nWhen she's done she holds the modified tip up to the overhang light, turns it once, and sets it beside yours. 'Corvin's point is good to go. Yours needs a haft — you've got the socket, pick your wood when you find it.' She names a fair price for both, acknowledges the labor credit from the backlog without being asked, and deducts it clean. The transaction is done in the same register as everything else she does: flat, exact, no ceremony.\n\nYou pack both tips carefully — Corvin's wrapped in a strip of oilcloth from Pell's bench rag — and step out from under the overhang into the spring morning. The lane stones are dry now after the earlier squall, the air still carrying that cold edge. Huginn drops from the hook-row and lands on your pack frame without discussion, settling its weight like it has always been there. Mara Wells's store is east of the well — red door, smokehouse referral in hand — and the well square is maybe three minutes' walk up the south lane. You are, you realize, going to a general store with a large corvid on your back and two spear-tips in your pack. You straighten up anyway."
+      },
+      {
+        "player": "As I head to the store I call back to Pell, with a big grin, remember to wear something nice for our hunting date! ",
+        "summary": "Silas trades a parting grin with Pell — she answers in kind, in her register — and heads north up the lane.",
+        "narration": "The lane stones are dry again under your boots, the squall's memory only in the cold that came after it. You're three paces from the forge's shadow when you call it back over your shoulder — remember to wear something nice for our hunting date — and you can hear the grin in it yourself.\n\nA beat of silence from the overhang. Then, flat and unhurried: \"I'll wear my good apron.\"\n\nHuginn makes a sound in its throat — not quite a croak, more the noise a person makes when they decline to comment — and resettles on your pack frame.\n\nThe lane runs north toward the well square, the sound of the forge already shrinking behind you. East of the well is the red door. Mara Wells, stocks rope and hardware and the occasional traded-in trap, and Aldric's referral gets you past her finder's fee. Corvin is somewhere in the east furlong after that — a farmer's son with ambition and a spear-tip he hasn't yet held."
+      },
+      {
+        "player": "Head straight to Mara Wells's store — red door, east of the well",
+        "summary": "Silas arrives at Mara Wells's store — red door, east of the well — and meets the woman behind the counter.",
+        "narration": "The well square opens up ahead of you — a worn stone lip, a rope-and-bucket that's been replaced a dozen times but always in the same spot, and the low murmur of morning business: a woman filling two clay jugs, a pair of men arguing in the patient way that means they've been arguing since before breakfast. The east side of the square holds a row of low buildings, and the red door is exactly where Aldric said it would be, paint a little chipped at the corner but still unmistakably red against the weathered wood.\n\nYou push it open. The store is small and organized — rope coiled on wall pegs in three weights, hardware sorted into open-topped wooden boxes along the left wall, a smell of linseed oil and dry cedar. A shelf near the back holds what looks like traded-in tools: a mended drawknife, a short-handled mattock, two wire snare frames. Behind the counter, a woman is writing in a ledger with the focused attention of someone who does not look up until she's finished the line. She finishes the line.\n\n\"Help you?\" The voice is even, neither warm nor cold — the register of someone who's run a store long enough to let customers show her what they need before deciding how to treat them. She glances at Huginn without remark, which is either remarkable composure or she's already heard something. Given this town, probably both.\n\nYou have the smokehouse referral in your back pocket — the smokehouse sent you — which Aldric said waives her finder's fee. The shelves are visible from here: rope, hardware, the traded-in tools. Worth a look if you need anything specific before heading north."
+      },
+      {
+        "player": "Use Order-Sense on the store itself — get a feel for how it's organized and what it's actually stocked with versus what's visible on the shelves.",
+        "summary": "Order-Sense surges through Mara's store — Silas reads the full inventory logic and the load-bearing point of her operation before a word is spent.",
+        "narration": "The moment you let Order-Sense unfold, it comes in fast and full — a surge, not a quiet read. The store's structure hits you like a building-plan laid flat on a table, every load-bearing point lit.\n\nMara's system is good. Better than it looks. The visible shelves are the working face — rope, hardware, the traded-in tools at the back — but the actual inventory lives in a logic you can feel now as clearly as you can see the boxes: weight-sorted from left to right along the floor wall, frequency-of-pull determining height, a seasonal rotation evident in the faint dust-lines where heavier items were recently moved forward. The snare frames on the back shelf are recent trades, not permanent stock. The two wire frames are the same gauge as the tangle of wire in the second hardware box from the right, which means she has more where those came from and hasn't displayed it yet. There's a gap on the middle peg where a coil of the mid-weight rope was recently pulled — sold or lent, not replaced. The ledger on the counter is the spine of the whole thing; the store runs on that book, not on what's visible.\n\nThe surge doesn't stop at inventory. The load-bearing point of Mara Wells's operation lands on you plainly: she knows what she has before anyone asks. That's her edge, and it's deliberate. She watched you come through the door, pen down before you'd taken two steps, already adjusting the encounter. Huginn shifts on your pack frame — a small, pointed movement — and Mara's gaze tracks it with the mild attention of someone filing a note.\n\n\"Smokehouse sent me,\" you say, because Aldric's referral waives the fee and she'll know what that means. She nods once, unhurried. \"Then let's see what you need.\""
+      },
+      {
+        "player": "Ask what's in the back that she's sitting on, as well as if she has a couple good shafts for boar spears - give her the gist of the plan for the hunt.  And mention that Pell agreed to the date with you after seeing you work with your shirt off.",
+        "summary": "Mara produces two seasoned ash shafts from the back — the hunt is nearly fully equipped.",
+        "narration": "You lean one elbow on the counter — easy, unhurried — and let it land like you're sharing something she'll want to hear. \"I know you've got wire stock behind the second box,\" you say, nodding toward the right wall, \"and I'm guessing the mid-weight rope gap means someone already beat me to a coil this morning. So — what else are you sitting on back there? Specifically, I'm after a pair of good shafts. Boar spears. Something that won't split when a two-hundred-pound animal decides to disagree with it.\"\n\nMara's pen is still down. She looks at you — a real look, the kind that prices inventory — and then something loosens around her eyes. Not warmth exactly, but the expression of a person who has heard a hundred fumbling pitches and recognizes one that knows what it's asking for. \"The shafts are in the back,\" she says. \"Ash. Seasoned two winters. I had three; the foresters took one last week.\" She's already moving around the counter. \"Two left. I don't display them — wrong clientele for impulse buys.\"\n\nShe comes back with two poles, six feet of pale ash each, laid across the counter with the kind of care that is also inspection. You run a thumb down the grain. Clean, tight, no wander. Socket-end trued flat. She's watching your hands the same way Pell did.\n\n\"Pell's already in,\" you add, and you say it with just enough weight. \"She saw me work. Said yes after.\" A beat — enough to let her fill in 'after what.' \"We're going at the sounder in the north wood. Three of us, proper iron on ash, and we know where the game trails run along the granite shelf. Aldric at the smokehouse gets the meat.\" You meet her eyes. \"Those two shafts would be going to exactly the right hands.\"\n\nMara is quiet for a moment. Then she picks up one of the poles, sights down it, sets it back. \"Sixty cord each, or I'll credit you one against a full parcel trade with the smokehouse — Aldric and I run an account.\" She glances at Huginn, who is being very still on your pack frame with the energy of something that has decided to be polite. \"Your bird stays off my stock shelves.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "I plan to craft my spear with the ways of my people, mystic runes and mystery... is there anything she has around that could help with that?  And yes, I'll take the credit offer for one but pay out of pocket for the other.. plus, I'm hoping to give Pella a gift.. .any suggestions?",
+        "summary": "Silas buys two ash shafts, acquires rune-craft materials, and picks up a whetstone gift for Pell — all at Mara's counter.",
+        "narration": "You settle the terms first — one shaft credited against Aldric's smokehouse account, sixty cord coin-weight out of pocket for the second. Mara lifts the ledger, makes two clean entries, and slides one shaft toward you with the air of someone closing a door that's been left open. The other she wraps in a length of loose burlap and sets beside it. Done.\n\nThen you ask about the runes — materials that would hold a mark, take an impression, something your people's way of working demands. You don't explain all of it, but you give her enough: that the spear needs more than iron and ash, that the working matters as much as the geometry. Mara's expression doesn't change, but she moves — back through the curtain behind the counter, returns with three things laid in her palm. First: a thumb-length stub of dark wax, the kind coopers use to seal grain-barrel seams, dense enough to press into carved grooves and cure hard. Second: a small glass vial of lamp-black mixed in pine pitch — the sort of ink a ledger-keeper uses when the entry must not wash out. Third, almost as an afterthought: a single strip of tanned leather, tooling-grade, already oiled. \"Staining, pressing, or binding,\" she says, setting them on the counter one at a time. \"Take what's useful.\" She names no price on the vial — it's half-spent — but the leather strip and the wax she adds to the ledger entry without ceremony.\n\nFor Pell, you ask with the same easy lean you've been carrying all morning. Mara looks at you for a moment — just long enough to weigh the question — and then nods once toward the back shelf. \"She came in three weeks ago looking for a small whetstone, fine grit. I was out. Still am.\" She reaches under the counter and sets a paper-wrapped parcel about the size of your fist on the wood — a flat river-stone, smooth, dark gray, with a faint blue cast to the face. \"I was going to send it up with the next hardware run. You're earlier.\" She adds it to the ledger — one sharp look to make sure you understand it's going on the bill — and that's that. A practical woman's version of romance, transacted clean."
+      },
+      {
+        "player": "Thank her for everything... then mention that you'll also be keeping an eye out for anything strange happening along the river to the north.",
+        "summary": "Silas thanks Mara, commits to watching the river north — she confirms the water has been wrong three weeks and says she'd hear anything he finds.",
+        "narration": "You gather the two ash shafts under one arm, tuck the rune-craft kit and the paper-wrapped whetstone into the top of your pack, and nod at Mara across the counter. \"Good doing business,\" you say, and you mean it clean — no flourish. \"The shafts are exactly what I needed. The whetstone's a good call for Pell.\" Huginn shifts on the pack frame, done with the whetstone now that it's no longer accessible, and settles into his usual watchful stillness.\n\nThen, because Aldric asked and because it's the honest thing to say, you add it: \"I'll be heading north of the fence line in the next day or so — boar country, up along the river. I'll keep my eyes open. If there's anything strange along the water, the color of it, the smell, anything moving the wrong way — I'll bring it back.\" You say it without drama, the way a person names a chore they've already agreed to. It's not a promise of heroics; it's just what you intend to do.\n\nMara holds your look for a moment. Then: \"The river's been wrong for three weeks.\" She says it the same way she'd note a rope peg going empty — matter-of-fact, no alarm in it, but no dismissal either. \"Whatever you see upstream, I'd hear it. Aldric would too.\" She reaches over and straightens the ledger on the counter, a small, closing gesture. The conversation is done, the accounts are square, and the door is open behind you. Morning light cuts a bright stripe across the threshold and the stone lane beyond it."
+      },
+      {
+        "player": "Huginn, say goodbye to Mara - Head out to find Pell again.",
+        "summary": "Silas departs Mara's store — Huginn bids farewell in his fashion — and heads out to find Corvin in the east furlong.",
+        "narration": "You shoulder the pack, ash shafts balanced under your arm, and glance back at Huginn. He's already looking at Mara — or rather, at the space just around her, the way he sometimes does with people, like he's taking inventory of something you can't read. Then he blinks once, slow and deliberate, and looks away. You've learned to accept that as a farewell on his behalf.\n\nMara catches it. She doesn't flinch — she's already demonstrated she has no particular fear of strange birds — but something in her expression shifts, a small recalibration. \"Unusual company,\" she says, not unkindly. It's the most she's offered on the subject.\n\n\"He grows on you,\" you say, and pull the red door open into the lane.\n\nThe morning has settled since the squall — lane stones dry now, air bright and cool, the well square quiet in the mid-morning lull between the breakfast crowd and the midday trades. You know where Pell's forge is: south lane, past the elder's post. But Corvin comes first — east furlong, Pell said, farmer's son — and the modified tip wrapped in oilcloth in your pack is his. Find him, hand it off, extend the invitation. Then back to Pell, and north."
+      },
+      {
+        "player": "Find Pella again - perhaps you can catch her washing up after working and see her in full beauty.",
+        "summary": "Silas arrives at Pell's forge mid-task — catches her at work, not at wash, but the bucket's there and so is she.",
+        "narration": "The south lane is quiet in the mid-morning lull — the squall's wet has dried off the stones and the light is clean and flat, the kind that makes everything look like itself. You round the elder's post and the forge comes into view: open front, wide overhang, the low steady sound of a file working iron.\n\nPell is at the bench, not the basin. She's still in her apron, back to you, elbow moving in short controlled strokes over something small and flat. There's a wooden bucket beside the doorframe — water in it, a rag folded over the edge, tools nearby waiting their turn — so the washing-up is coming, just not yet. You've caught the tail end of work, not the end of the day.\n\nShe hears you on the stone — or smells the particular combination of ash and pack-leather, or simply knows the sound of a stride that isn't a customer's — and speaks without turning. \"East furlong's the other direction.\" A pause, file still. \"Unless you already knew where Corvin lives and you're here for a different reason.\"\n\nHuginn drops from the pack frame to the overhang post and arranges himself into his usual shape: wide, still, watching. Pell does turn then — just enough to see the bird settle — and something at the corner of her mouth moves. Not quite a smile. The bucket is right there. Her hands are dark with iron-grit to the wrist."
+      },
+      {
+        "player": "Lean on the post and watch her finish the last piece — let the silence be easy.",
+        "summary": "Silas watches Pell finish the last piece and wash up — she gives Corvin's directions and waits.",
+        "narration": "The file strokes slow and stop. Pell sets the piece down on the bench and reaches back without ceremony for the rag on the bucket edge. She works the iron-grit off her hands in the methodical way of someone who has done it ten thousand times: knuckles first, then the webbing, then the wrists.\n\nHuginn drops from the overhang post to the top of the doorframe and settles there like he owns the threshold. Pell glances up at him once, wrings the rag out, and says nothing.\n\n\"Corvin's in the east furlong,\" she says, without turning. \"Past the second fence-line, left fork at the willow. He'll be mending something he broke or building something he hasn't thought all the way through.\" She hangs the rag and reaches for a dry cloth. \"Tell him the stop-lug is ready. He'll know what it means.\"\n\nShe finally turns — dry hands, apron still on, morning light on her collar — and looks at you with the same flat assessment she gives a new piece of iron before deciding what it wants to be."
+      },
+      {
+        "player": "I got you a gift for our date - hand her the whetstone.",
+        "summary": "Silas gives Pell the whetstone — she receives it with quiet pleasure and sends him east.",
+        "narration": "You reach into the pack and bring out the paper-wrapped stone — Mara's package, flat and dense in your palm. 'I got you a gift,' you say, 'for our date.'\n\nPell takes it. Unwraps the paper with two fingers, unhurried, the way she handles most things. The dark-gray face of the whetstone catches the flat morning light — fine grit, smooth, the faint blue in it that only shows at a particular angle. She turns it once, runs her thumb across the face, and her expression does something small and undemonstrative that you have come to recognize as the equivalent, in her register, of being genuinely pleased.\n\n'River stone,' she says. 'Fine face.' She turns it again. 'Mara's been sitting on this for Pell-the-blacksmith for three weeks.' She says it in the third person, flat, like she's reading a ledger entry — but the corner of her mouth is doing its thing. 'You asked her about me.'\n\nHuginn shifts on the doorframe, one foot to the other, and says absolutely nothing.\n\nPell sets the whetstone on the bench beside her last piece — not tucked away, just set there like it belongs — and looks at you with the same flat assessment she gives iron before she decides what it needs. 'East furlong,' she says. 'Don't let Corvin get ahead of himself.'"
+      },
+      {
+        "player": "I think you liked the gift... but i'm not sure i can tell (teasing - perhaps leaning in for a kiss on the cheek).",
+        "summary": "Silas kisses Pell on the cheek; she allows it and sends him east with a look that lands clean.",
+        "narration": "You take the half-step that closes the gap — unhurried, the same easy weight you used leaning on the post — and your voice drops into something quieter than conversation. 'I think you liked it,' you say. 'But I'm not entirely sure I can tell.' The tease is in the timing more than the words: you're close enough that she could step back if she wanted to, and she doesn't.\n\nPell looks up from the whetstone. Her eyes move over your face with the same methodical read she gives a blade — checking for true. Then something in the line of her mouth shifts, the small private tell you've already catalogued twice this morning, and she turns her chin just enough to give you the angle.\n\nYou lean in and press a brief, easy kiss to her cheek — the skin there warm from the forge and faintly salt-edged. She doesn't move into it or away from it. She simply allows it, which, in her register, is the same as an answer.\n\n'You can tell,' she says, and sets the whetstone down on the bench with a decisive click. She reaches up and brushes a smear of iron-grit off her own collarbone with the back of one hand, completely unhurried. 'East furlong. Before he builds something structural.' Huginn, from the doorframe, produces a single low sound in his chest that is not quite a croak — more the noise a door makes when someone finally pushes it open."
+      },
+      {
+        "player": "Before leaving, take a minute to seat the mid-weight spear-tip on one of the ash shafts — even a rough lashing here in the forge yard, so you're not carrying loose iron into the field.",
+        "summary": "Silas seats the mid-weight spear-tip on one ash shaft with a road lashing — field-ready in two minutes; Pell approves in her fashion.",
+        "narration": "You set the burlap-wrapped shafts against the doorframe and pull one free — the pale ash smooth and cool under your hand, socket end up. The mid-weight tip comes out of the pack next, oilcloth peeled back, iron catching the flat morning light. Pell watches from the bench without comment, the whetstone still in her hand.\n\nThe socket seats over the shaft end with a quarter-turn and a satisfying snug resistance — Pell's work is true, the fit close enough that it stays without lashing. But close enough isn't field-ready, so you reach for the Rune-Craft Kit and cut a length of the oiled leather binding strip, work it wet around the socket throat in a tight cross-wrap, and seat the knot where your thumb won't find it mid-carry. It takes less than two minutes. Not finished work — a road lashing, temporary — but the tip won't shift on a boar's shoulder and the balance is already better with weight forward.\n\nPell sets the whetstone on the bench with a small precise click. 'Tidy,' she says, which from her is the equivalent of a longer sentence. Huginn tilts his head on the doorframe, considers the assembled spear, and makes no comment. You re-wrap the second shaft and the remaining tip in the burlap and stow them, then lift the spear and feel the hang of it — yes. That's a thing you can walk with."
+      },
+      {
+        "player": "Will you walk with me to Corvin's?  I also need to work this spear tonight... I would love for you to join me for that as well.",
+        "summary": "Silas asks Pell to walk with him to Corvin's and stay for the evening's spear work — she accepts without a word, just the canvas coat off the peg.",
+        "narration": "You turn to Pell with the assembled spear still in hand — the shaft warm from the lashing work, the road-wrap tight at the socket throat. 'Will you walk with me to Corvin's?' you ask. 'And I need to work this spear tonight. I'd love for you to join me for that as well.'\n\nPell sets the whetstone down on the bench with a quiet click. She looks at the spear, then at you, with the same unhurried read she gave your work this morning. Then she reaches behind the bench and pulls a worn canvas coat off a peg — heavy-shouldered, salt-stiff at the collar — and shrugs into it without ceremony. That's her answer.\n\nHuginn drops from the doorframe as you step out, landing on your pack-strap for a single beat before launching into the lane ahead, already angling east. The south lane is still damp underfoot from this morning's squall, lane stones darker where the water collected in the ruts. Pell walks beside you at the unhurried pace of someone who has covered this ground a hundred times and has no interest in pretending otherwise. The forge stays open behind you — she doesn't lock it, you notice; that's not how this village works.\n\n'Corvin will be doing something half-wrong when we get there,' she says, after a block of comfortable quiet. It's not exactly a warning. More like reading aloud from a reliable text."
+      },
+      {
+        "player": "Tell Huginn to scout ahead - walk easy and let Pell talk... Guess at her last name - Pell Grant? lol",
+        "summary": "Silas sends Huginn to scout ahead; Pell reveals her surname is Marsh, catches the teasing guess, and keeps walking.",
+        "narration": "You lift a hand toward Huginn and tip your chin east — the gesture you've settled into, less command than suggestion. The big corvid reads it clean, peels off the fence-post with a single wingbeat, and angles ahead down the lane, disappearing past the second fence-line into the pale morning light. Scout duty, or whatever Huginn calls it. Probably 'getting there first.'\n\nThe lane opens a little without the bird's weight on the air, and you let your pace settle — unhurried, the assembled spear easy in your grip, burlap bundle over your shoulder. The damp stones have mostly dried in the half-hour since the squall cleared. You glance sideways at Pell, walking in her canvas coat, eyes forward, collar still salt-stiff at the shoulder.\n\n'Pell Grant?' you try, keeping it light — the question carrying the tease more than any tone.\n\nShe doesn't look at you. A beat. Two. Then the corner of her mouth moves — that same small, catalogued tell — and she says, flat as always: 'Marsh.' Another step. 'My grandmother's name was Grant.' She lets that sit for exactly one more stride before she glances across. 'You're not as subtle as you think.'\n\nThe lane curves east past a row of garden stakes, the echo of the village behind you and Corvin's furlong somewhere ahead. Huginn is already out of sight."
+      },
+      {
+        "player": "Laugh at the joke for real... then 'Pell Marsh' say it once, like you're setting it somewhere you won't lose it.",
+        "summary": "Silas commits Pell's full name to memory on the lane east; the willow and Corvin's furlong come into view.",
+        "narration": "The laugh comes out before you can shape it — genuine, a little surprised at itself, the kind that puts a small hitch in your stride. Pell catches it from the corner of her eye and the corner of her mouth moves, just barely, which is probably her version of laughing.\n\nYou walk another few paces and let the quiet settle back in. The lane verge runs with early clover, a fence-post listing into it where the ground went soft over winter. Somewhere ahead, past the second line of posts, Huginn has already vanished into the pale light. Good bird. Probably at the willow already.\n\n'Pell Marsh,' you say, once — not to her, not to the lane, just setting it somewhere it won't slide off. Like a tool placed on the right hook rather than left on a bench. She glances sideways. Says nothing. But she hears the care in it, because she hears everything in that flat, unhurried way she has, and she doesn't correct you or deflect it. She just keeps walking.\n\nThe east furlong is close now — you can see the second fence-line, and past it, the smudge of a willow going yellow-green at the tips with early spring. Left fork. Corvin will be there, mending something he half-broke or building something half-thought-through. Modified Light Spear-Tip wrapped in your pack, the assembled mid-weight in hand, Pell Marsh on your left. The morning is good."
+      },
+      {
+        "player": "It has a quite, yet capable beauty to it... as do you.  Then walk up and introduce yourself to Corvin and see what he's up to.",
+        "summary": "Silas introduces himself to Corvin at the east furlong — the hunt is one conversation away.",
+        "narration": "The left fork past the willow opens into a long narrow furlong — winter-pale grass, a low drystone wall along the south edge, and Corvin. He's crouched over a fence-section laid flat on the ground, wrestling a cross-rail back into its mortise with the patient irritation of a man who has done this before and expects to do it again. He doesn't look up immediately. The repair is half-done and losing the argument.\n\nYou take in the furlong for a moment — the morning light flat and even across the stubble, a crow picking at something near the far wall, the river's gray-green bend just visible past the tree-line to the north. There's a quiet capability to the whole stretch: worked earth, tended walls, the particular order of a place someone maintains without being told. *As do you,* you think, clocking Corvin before he's clocked you — broad in the shoulder, younger than Aldric, moving with the compact economy of someone who works outside in all weathers. Then you step forward.\n\n\"Silas Weir,\" you say, and let the assembled spear rest easy at your side so it reads as a carried thing rather than a pointed one. \"Pell thought I should find you before I went north. She was right.\" You tip your chin at the fence-section on the ground. \"You want a hand with that first, or shall we talk while you're losing to it?\"\n\nPell has stopped a few paces back, thumbs hooked in her coat pockets, watching Corvin with the particular attention she gives to fires she's not sure are out. Huginn is somewhere in the tree-line ahead — you can feel the pull of its attention, northward, toward the river bend."
+      },
+      {
+        "player": "Lend a hand on the fence-rail — work first, talk after",
+        "summary": "Silas helps Corvin seat the fence-rail; Corvin names the river — worse two mornings running, fish gone quiet.",
+        "narration": "Corvin hears the footsteps and looks up from the mortise. You set the burlap bundle down against the drystone wall without ceremony, plant the spear beside it, and crouch on the other side of the fence-section. The cross-rail is binding in the mortise throat on a bad angle — you can see it immediately, the way the grain is fighting the socket. You get both hands under the near end, lift and tip, and Corvin adjusts without a word. The rail drops home with a solid knock that neither of you needed to discuss.\n\nHe sits back on his heels and looks at you properly for the first time. Broad face, weathered at the edges, the kind of quiet that isn't unfriendly — more like a man who doesn't spend words until he knows what they're worth. His eyes go to the spear against the wall, then to Pell a few paces back, then to the tree-line where Huginn's dark shape is angled toward the river bend with an attention that is distinctly not a bird's.\n\n'That's Pell's work,' he says, meaning the spear, and it isn't a question.\n\nFrom somewhere north of the furlong, up past the tree-line where the river bends, comes a low croak — Huginn, once, unmistakable. Not alarm. Attention. The gray-green tinge on the water is visible even from here, a slow coherent thread keeping its shape inside the bend when it should have diffused into the cold current by now.\n\nCorvin watches the tree-line for a beat, then looks back at you. 'It's been worse the last two mornings,' he says, quieter. 'Fish didn't jump the shallows at first light today. Didn't jump them yesterday either.'"
+      },
+      {
+        "player": "You will want to hear about the river later, but first... we have a boar hunt to prepare for... show him the light speartip and ask if he'd be willing to help Pell out occasionally if you give it to him.",
+        "summary": "Silas offers Corvin the modified light spear-tip in exchange for occasional help at Pell's forge — Corvin agrees in principle but balks slightly at the framing.",
+        "narration": "Corvin takes the tip in both hands and turns it — thumb on the lug, a beat of honest appraisal. He glances at Pell; something predating you passes between them. He agrees in principle but hesitates: if he takes the tip, does the help he already gives freely become a debt?"
+      },
+      {
+        "player": "Think of it less as an arrangement — we're all going north together tomorrow. The tip is for that.",
+        "summary": "Corvin accepts the tip and commits to the hunt — north gate, tomorrow morning, before the light gets high.",
+        "narration": "Corvin turns the tip over once more in his hands — not reconsidering, just finishing the thought at his own pace. Then something in his shoulders settles.\n\n\"North together,\" he says, like he's checking the weight of it. Not a question. He looks at the stop-lug again, runs his thumb across the filed taper, and nods — once, the way a man nods when the thing actually makes sense. He wraps his fingers around the socket and sets it down on his knee with a kind of ownership that wasn't there a moment ago.\n\nBehind you, Pell makes no sound, but you can feel her stop pretending she's not paying attention.\n\n\"Tomorrow,\" Corvin says. He looks north, toward the tree-line where Huginn is a dark patience in the branches. The river bend is a gray-green thread from here, just visible between the trunks. He looks back at you. \"I'll be at the north gate before the light gets high.\"\n\nThe hunt party is assembled. The tip is in his hands, the river visible to the north, a morning agreed on. Corvin tucks the oilcloth back over the point with the efficiency of someone already planning how to carry it, and stands. He's taller than he looks crouched. He doesn't offer his hand again — you've already done that work together, mortise and all."
+      },
+      {
+        "player": "Walk back toward the village together — the day is young and the evening's spear work waits.",
+        "summary": "Hunt party walks back to the village together — quiet, settled, the day still young.",
+        "narration": "The three of you leave the furlong without ceremony. Corvin latches the gate — a single lift-and-drop that says he's done it ten thousand times — and you fall into a loose line heading west along the field path, the drystone wall shedding morning shadow to your right.\n\nPell comes up alongside you once the furlong is behind her. She doesn't say much. She doesn't need to. The whetstone has been on her bench since this morning and she moves like a woman who finished a small accounting in her head and found it came out even.\n\nHuginn drops from the tree-line and lands on your pack without asking, settling its weight with one adjustment of the wings. It looks south, toward the village and the river-smell that comes off the low ground. Not watching you. Watching the direction things tend to go wrong.\n\nBy the time the cookhouse smoke comes into view — low and white against the pale sky — Corvin has said exactly two more words, both about the soil drainage on the east slope. Pell has responded with four, which for her is expansive. The village sounds reach you in pieces: a cart wheel, a child, the dull ring of something metal in the distance that is probably not your forge. The forge is ahead. The shafts are there. The spear-work is still only half a job."
+      },
+      {
+        "player": "Talk to Pell properly before the work begins — the date is a named thing now; you could let it be more than that.",
+        "summary": "Pell names the date plainly on the field path — after the hunt, at the forge, to see what the thing is.",
+        "narration": "The field path narrows where it meets the old drainage ditch, and the three of you fall into single file for a dozen steps — Corvin ahead, Huginn holding still on the pack, Pell stepping up alongside you when the path widens again on the other side.\n\nShe doesn't wait for you to start. \"The whetstone,\" she says. Not a question and not quite a thank-you — something between the two, the way a person names a thing they've been turning over. \"Mara held it three weeks. You asked after me specifically.\" A pause. She looks forward at Corvin's back. \"That's a particular kind of attention.\"\n\nYou tell her the date is a named thing, if she wants it to be more than that. You don't dress it up. She hears it plain.\n\nPell is quiet for a few steps. The village smoke is ahead, the cookhouse chimney reading gray-white against the pale morning sky. When she speaks her voice is level and dry and warmer than it sounds. \"I keep the forge clean and I don't make promises I can't price out. Fair warning.\" She glances at you sideways — a brief, considering look. \"But yes. After the hunt, when the accounts aren't all blood and mud. Come to the forge in the evening and we'll see what the thing is.\"\n\nCorvin doesn't turn around. But his pace slows just enough that he's walking with you again, not ahead, and the slight angle of his shoulders says he heard every word and is very carefully not acknowledging it."
+      },
+      {
+        "player": "A second date it is then! I'll be there... but tonight. I'll be working my people's runes into the spear. Will you watch? Huginn will be helping too.",
+        "summary": "Pell accepts the invitation to watch the rune-working tonight at the forge — Huginn's inclusion noted without alarm.",
+        "narration": "The field path meets the village lane where the cookhouse smoke thickens the air, and Pell slows half a step. You speak before the moment closes.\n\n\"Tonight,\" you tell her. \"Before the hunt. I'll be working my people's runes into the spear — will you watch?\"\n\nShe considers it for exactly one breath. \"At the forge,\" she says. Not a question. The word carries the answer inside it.\n\nYou add that Huginn will be helping. Corvin, three paces ahead, finds something interesting to look at on the far side of the lane. Pell glances at the bird on your pack — at the eye that has seen too many endings to bother pretending it hasn't — and her mouth makes the small contained shape you're starting to recognize as the closest she comes to a smile. \"Then I'll keep the bellows low,\" she says, \"and leave room for the ceremony.\"\n\nHuginn doesn't comment. It has watched more final rites than rune-workings, but a weapon being marked for use is a kind of declaring, and it understands those. It shifts its weight on the pack straps once, settles, and returns its gaze south toward the gray-green thread of river smell threading up the lane.\n\nThe morning is still young. The forge is ten minutes ahead. Tonight will be what it is."
+      },
+      {
+        "player": "Whisper to Pell.... my people's rune rituals work best without clothing blocking the spiritual energy... ",
+        "summary": "Silas tries the ritual-nudity line on Pell; she sees through it immediately, calls it with dry amusement, and closes it without closing the door.",
+        "narration": "Pell doesn't answer right away.\n\nThe village lane is quiet — cookhouse smoke drifting south, Corvin three paces ahead with his attention fixed on the middle distance. You drop your voice and lean slightly toward her, the conspiratorial register of a man sharing something important, something old. Your people's rune rituals, you tell her — they work best without clothing. The material blocks the spiritual current. It's how it's always been done.\n\nHuginn makes a sound in its throat. Not a croak. A very small, very deliberate sound, the kind a person makes when they have decided not to say what they are thinking.\n\nPell walks two more steps. Then she stops — and when she turns to look at you, what's on her face is not offense. It is something flatter and more dangerous: the expression of a woman who keeps accounts and has just found a discrepancy she recognized immediately. She holds it for a moment. Then the corner of her mouth moves. \"Well,\" she says quietly. \"I suppose a good try is a good try.\" She starts walking again, unhurried. \"Clean forge tonight. You can work in whatever state you like — *your* state. I'll be dressed.\"\n\nShe says it without heat, without closing any door. The date is still a named thing. The invitation still stands. She is simply not confused about what just happened, and she has decided not to make an event of it. Corvin has found something extremely interesting about the drainage ditch ahead."
+      },
+      {
+        "player": "Let it land clean — laugh at yourself, say nothing more. The moment doesn't need rescue.",
+        "summary": "Silas laughs the line off cleanly — the moment closes on good terms and the village lane opens ahead.",
+        "narration": "The laugh comes out of you before you can dress it up — genuine, short, the sound of a man who got caught fair and knows it. You spread one hand in a small conceding gesture and say nothing else. The line is done. It was a good try.\n\nPell's mouth does the contained thing again, and then she looks forward and walks, and the subject is closed on terms that leave everything intact.\n\nCorvin glances back once. Whatever he reads in the two of you, he files it under not my business and lengthens his stride by half a step. Huginn settles its feathers with the faint ratcheting sound of a bird that has made its statement and considers the matter complete.\n\nThe village lane opens ahead — cookhouse smoke, the forge roof on the south side, the well at the center with a few morning figures moving around it. The day is young enough that the light is still coming in low and amber across the terraced gardens. Tonight there is rune-work. Tomorrow there is a hunt. Between now and then: an afternoon that can be filled however a man with a new spear and an old bird sees fit."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The laugh comes out of you before you can dress it up — genuine, short, the sound of a man who got caught fair and knows it. You spread one hand in a small conceding gesture and say nothing else. The line is done. It was a good try.\n\nPell's mouth does the contained thing again, and then she looks forward and walks, and the subject is closed on terms that leave everything intact.\n\nCorvin glances back once. Whatever he reads in the two of you, he files it under not my business and lengthens his stride by half a step. Huginn settles its feathers with the faint ratcheting sound of a bird that has made its statement and considers the matter complete.\n\nThe village lane opens ahead — cookhouse smoke, the forge roof on the south side, the well at the center with a few morning figures moving around it. The day is young enough that the light is still coming in low and amber across the terraced gardens. Tonight there is rune-work. Tomorrow there is a hunt. Between now and then: an afternoon that can be filled however a man with a new spear and an old bird sees fit.",
+      "sceneSummary": "Silas laughs the line off cleanly — the moment closes on good terms and the village lane opens ahead.",
+      "choices": [
+        {
+          "label": "Reconnoiter the north gate and the edge of the wood — walk the terrain before the hunt, note the game trails, look at the river from the upper path.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find Aldric at the smokehouse — report on the hunt arrangement and listen for fresh news about the river or the valley.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sit somewhere quiet near the well and read the village with Order-Sense — see what the system of this place is carrying today.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Something else entirely.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "scene": {
+        "setting": "The field path meeting the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat amber morning light, the forge roof visible on the south lane, figures moving at the well.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "Walking alongside Silas, composed, the moment filed and closed."
+          },
+          {
+            "name": "Corvin",
+            "state": "Three paces ahead, stride slightly lengthened, attention on the lane."
+          },
+          {
+            "name": "Huginn",
+            "state": "Settled on the pack, feathers ratcheted flat, editorial complete."
+          }
+        ],
+        "objects": [
+          "Assembled Mid-Weight Spear — carried",
+          "Burlap bundle — second ash shaft, stowed",
+          "Rune-Craft Kit — in the pack",
+          "Oilcloth-wrapped light tip — in Corvin's possession"
+        ],
+        "threads": [
+          "Rune-working tonight at the forge — Pell attending, dressed",
+          "Date with Pell confirmed — after the hunt, at the forge",
+          "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
+          "Hunt departs tomorrow morning — north gate, before the light gets high"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell Marsh",
+          "note": "Silas laughed the line off cleanly — she closed the subject on good terms, door still open.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working tonight at the forge confirmed, date after the hunt standing."
+        },
+        {
+          "op": "update",
+          "npcId": "corvin",
+          "name": "Corvin",
+          "note": "Glanced back once, filed it as not his business, lengthened his stride.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Walking back to Millbrook with Silas and Pell — hunt confirmed for tomorrow morning, north gate."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk back along the field path to the village lane — a few minutes of easy conversation."
+      }
+    },
+    "sceneState": {
+      "setting": "The field path meeting the village lane at the western edge of Millbrook — cookhouse smoke ahead, flat amber morning light, the forge roof visible on the south lane, figures moving at the well.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "Walking alongside Silas, composed, the moment filed and closed."
+        },
+        {
+          "name": "Corvin",
+          "state": "Three paces ahead, stride slightly lengthened, attention on the lane."
+        },
+        {
+          "name": "Huginn",
+          "state": "Settled on the pack, feathers ratcheted flat, editorial complete."
+        }
+      ],
+      "objects": [
+        "Assembled Mid-Weight Spear — carried",
+        "Burlap bundle — second ash shaft, stowed",
+        "Rune-Craft Kit — in the pack",
+        "Oilcloth-wrapped light tip — in Corvin's possession"
+      ],
+      "threads": [
+        "Rune-working tonight at the forge — Pell attending, dressed",
+        "Date with Pell confirmed — after the hunt, at the forge",
+        "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
+        "Hunt departs tomorrow morning — north gate, before the light gets high"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 10,
+    "realAnchor": null
+  },
+  "companions": [
+    "marrow"
+  ],
+  "companionNames": {
+    "marrow": "Huginn"
+  },
+  "quests": [
+    {
+      "id": "aldric-provisioning-deal",
+      "title": "Meat for the Smokehouse",
+      "summary": "Hunt the meadows north of Millbrook and bring Aldric what you take — he feeds you and supplies what he can spare. He wants to know anything you find that explains the declining catches.",
+      "giver": "Aldric (smokehouse man)",
+      "giverEntityId": "smokehouse-man",
+      "locationId": null,
+      "locationEntityId": null,
+      "status": "active",
+      "progress": [
+        "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set.",
+        "Forge backlog fully cleared — hand-axe heat-collar seated. Pell confirmed ready to walk north once Corvin is found. Hunt party of three one step from departure.",
+        "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north.",
+        "Two ash shafts acquired from Mara Wells — one on smokehouse account, one paid. Rune-craft materials in hand. Whetstone for Pell sourced. Next step: find Corvin in the east furlong.",
+        "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong.",
+        "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling.",
+        "Modified light spear-tip offered to Corvin — hunt party one conversation from being formally assembled. Arrangement with Corvin not yet sealed.",
+        "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin."
+      ],
+      "aliases": [],
+      "startedAt": "2026-07-12T17:45:53.994Z"
+    }
+  ],
+  "npcRegistry": {
+    "cookhouse-woman": {
+      "id": "cookhouse-woman",
+      "name": "Cookhouse Woman",
+      "role": "Cookhouse operator, Millbrook",
+      "description": "Flour-wrists, flat affect, door-that-doesn't-want-to-open energy — runs the cookhouse behind the well and doesn't trust strangers with strange birds.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": -1,
+      "history": [
+        "[d1] Refused the pigeon and the implied trade. Turned back to her work. Not hostile, just closed."
+      ],
+      "knownFacts": [
+        "Wary of Silas specifically — the uncanny company (Huginn) registered visibly",
+        "Directed him to the smokehouse for game trades"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "At the cookhouse behind the well, working prep, conversation closed.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "cookhouse-boy": {
+      "id": "cookhouse-boy",
+      "name": "Boy (name unknown)",
+      "role": "Sweeping the cookhouse, possibly cookhouse-woman's son or apprentice",
+      "description": "Maybe twelve, broom in hand — giving Silas the kind of attention children give to things adults refuse to look at.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Said nothing yet. Watching openly."
+      ],
+      "knownFacts": [
+        "Noticed Silas and Huginn where the woman would not engage"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "In the back of the cookhouse, sweeping, watching Silas.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "aldric": {
+      "id": "aldric",
+      "name": "Aldric",
+      "role": "Smokehouse operator, Millbrook",
+      "description": "A blocky man in his late forties — fillet knife, dark apron, the flat practical register of someone who has worked the same fire for twenty years. Runs the village's preserved-fish distribution on fixed accounts; absorbed the catch decline ",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage",
+        "[d1] Order-Sense read the operation around him — fixed accounts, regular customers, the weight falling on fish quality; he's absorbing slow loss from the catch decline. Silas named hims",
+        "[d1] You know this person's name now: Aldric (was \"Smokehouse Man\")",
+        "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
+        "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t",
+        "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s",
+        "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean."
+      ],
+      "knownFacts": [
+        "Gray-gilled perch suggest quality has been sliding for some time, not just today",
+        "His name is Aldric",
+        "He's aware the gray-green water comes from upstream and has been watching it",
+        "He runs fixed accounts — the catch decline is already hitting his regular customers",
+        "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
+        "Telling Mara 'the smokehouse sent you' waives her finder's fee",
+        "No bowyer currently in Millbrook — position unfilled since two winters ago",
+        "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit"
+      ],
+      "skillsObserved": [
+        "fillet work",
+        "supply accounting",
+        "practical negotiation"
+      ],
+      "status": "active",
+      "statusNote": "At the smokehouse, back to filleting after the delivery.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "pell": {
+      "id": "pell",
+      "name": "Pell",
+      "role": "Village blacksmith, Millbrook",
+      "description": "A working blacksmith running a tidy, unsentimental shop — file in hand, back to the door until the work is done. Practical organizer; reacts to competence over charm.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 8,
+      "history": [
+        "[d1] Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh.",
+        "[d1] Walked east with Silas; stopped back to watch Corvin's reaction to the introduction.",
+        "[d1] Holding back, watching Corvin's first read of Silas.",
+        "[d1] Standing back, not helping close the arrangement with Corvin — her relationship with him predates Silas and she's letting Silas work it out.",
+        "[d1] Watched Corvin accept — stopped pretending she wasn't listening. Hunt party is now complete.",
+        "[d1] Walked back to the village with Silas and Corvin — quiet and settled, the morning's accounting come out even.",
+        "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Set her terms clearly: clean forge, no unpriced promises.",
+        "[d1] Accepted invitation to watch the rune-working tonight at the forge — received Huginn's inclusion with dry equanimity rather than alarm.",
+        "[d1] Clocked the ritual-nudity claim immediately — named it with dry amusement and closed it without offense. Confirmed she'll attend the rune-working tonight, dressed. Door remains ope",
+        "[d1] Silas laughed the line off cleanly — she closed the subject on good terms, door still open."
+      ],
+      "knownFacts": [
+        "Full name is Pell Marsh",
+        "Her grandmother's name was Grant",
+        "Silas committed her full name, Pell Marsh, to memory with deliberate quiet — she noticed",
+        "Corvin already helps her occasionally — she apparently mentioned it to Silas without Corvin knowing",
+        "After the hunt she will meet Silas at the forge in the evening — the date is now a confirmed arrangement, not just a possibility",
+        "Silas's people have a rune tradition; he works marks into weapons before use",
+        "Huginn is considered part of the ritual",
+        "Sees through a line quickly and prefers not to make an event of it"
+      ],
+      "skillsObserved": [
+        "honest self-assessment",
+        "quality assessment — thumb-check on collar work, no words ne",
+        "socket modification under time, no ceremony",
+        "situational awareness — named the east furlong without looki",
+        "dry account-keeping composure",
+        "graceful deflection without closing terms"
+      ],
+      "status": "active",
+      "statusNote": "Walking back to Millbrook with Silas and Corvin — rune-working tonight at the forge confirmed, date after the hunt standing.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "role": "Village supply store operator, Millbrook — east of the well, red door",
+      "description": "A woman of practical bearing — keeps a close ledger, reacts to what customers need rather than how they present. Unruffled by Huginn's presence.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 3,
+      "history": [
+        "[d1] First contact — Silas entered the store, she looked up from her ledger. Has not yet been given reason to be warm or cold.",
+        "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
+        "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,",
+        "[d1] Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-bla",
+        "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
+        "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms."
+      ],
+      "knownFacts": [
+        "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked",
+        "Runs a trade account with Aldric at the smokehouse — can credit goods against it",
+        "Has two seasoned ash shafts in the back — six feet, two winters dry, not on display",
+        "The foresters took one shaft last week — aware of what's moving through the valley",
+        "Had a fine-grit whetstone held back for Pell — three weeks, no delivery run yet; handed it to Silas instead",
+        "Treats gift logistics the same as inventory: practical, clean, on the ledger",
+        "The river has been visibly wrong for three weeks — Mara is tracking it without public alarm",
+        "She wants upstream information and would receive it directly, same as Aldric"
+      ],
+      "skillsObserved": [
+        "reading a customer's competence through their hands",
+        "back-stock management",
+        "practical trade negotiation",
+        "stock sourcing from reserve",
+        "discreet ledger management",
+        "reading a customer's intent without needing it explained"
+      ],
+      "status": "active",
+      "statusNote": "At the supply store, ledger updated and closed — accounts squared, conversation ended on good terms.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "corvin": {
+      "id": "corvin",
+      "name": "Corvin",
+      "role": "Farmer, east furlong — confirmed hunt companion",
+      "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded.",
+        "[d1] Helped seat the fence cross-rail without being asked — made eye contact for the first time. Named the river without prompting: worse two mornings running, fish not jumping the shal",
+        "[d1] Received the modified light spear-tip; agreed in principle to help Pell occasionally but hesitated — worried the tip converts freely-given help into a debt. Arrangement not yet sea",
+        "[d1] Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly.",
+        "[d1] Latched the gate and walked back with the group — two words about drainage, then quiet. Hunt locked in.",
+        "[d1] Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again.",
+        "[d1] Walking ahead with careful disregard for the exchange between Silas and Pell.",
+        "[d1] Glanced back once, filed it as not his business, lengthened his stride."
+      ],
+      "knownFacts": [
+        "Works the east furlong alone",
+        "Was expected by Pell to be found mending or building something half-considered — confirmed",
+        "River has been visibly worse for two consecutive mornings as of World-day 13",
+        "Fish not jumping the shallows at first light — yesterday and today",
+        "Already helps Pell occasionally — didn't know she'd told anyone; sensitive to whether help stays his own thing or becomes an obligation",
+        "Will be at the north gate before the light gets high on World-day 14",
+        "The tip is now his — he wrapped it himself",
+        "Aware of the arrangement between Silas and Pell; choosing not to acknowledge it"
+      ],
+      "skillsObserved": [
+        "practical fence repair",
+        "quiet observation",
+        "honest appraisal of ironwork",
+        "quiet deliberation",
+        "honest deliberation",
+        "practical acceptance"
+      ],
+      "status": "active",
+      "statusNote": "Walking back to Millbrook with Silas and Pell — hunt confirmed for tomorrow morning, north gate.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    }
+  },
+  "placeMemory": {
+    "millbrook": {
+      "visits": 1,
+      "notes": [
+        "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use.",
+        "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
+        "[d1] Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited.",
+        "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
+        "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e",
+        "[d1] Hand-axe heat-collar seated and finished on World-day 12 morning — backlog completely cleared. All five tools on the rack. Forge ready for normal work.",
+        "[d1] Mid-weight spear-tip sold to Silas Weir on World-day 12 morning; light point modified with stop-lug for Corvin and delivered to Silas for hand-off. Labor credit from backlog deducted — accounts closed",
+        "[d1] Two ash shafts purchased from Mara Wells on World-day 13 morning — one on smokehouse account, one paid. Rune-craft materials (wax, pitch-ink, leather) and a fine river whetstone for Pell also acquired",
+        "[d1] Fine river whetstone gifted to Pell — now on her bench. The date between Silas and Pell is now a standing arrangement named between them at the forge.",
+        "[d1] Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed.",
+        "[d1] Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
+        "[d1] Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt."
+      ],
+      "flags": {
+        "resurrection_occurred": true,
+        "rabbit_seam_found": true,
+        "rabbit_entered_village": true,
+        "boar_sounder_north_wood": true,
+        "backlog_cleared": "true",
+        "hand_axe_collar_done": "true"
+      },
+      "subPlaces": {
+        "upper-meadow-north-of-millbrook-": {
+          "name": "Upper Meadow (north of Millbrook)",
+          "day": 1,
+          "visited": true,
+          "note": "Scrubland and wet meadow north of the terraced gardens — game trails, willows, fence-posts. Overlooks the upstream bend "
+        },
+        "upper-meadow": {
+          "name": "Upper Meadow",
+          "day": 1,
+          "visited": true,
+          "note": "Site of the resurrection and subsequent Order-Sense reading — the seam in the rabbit's structure is now an established f"
+        },
+        "cookhouse": {
+          "name": "Cookhouse",
+          "day": 1,
+          "visited": true,
+          "note": "Low smoke-stained building behind the well — flour, rendered fat, half-door. Operator is closed to strangers; a boy swee"
+        },
+        "smokehouse": {
+          "name": "Smokehouse",
+          "day": 1,
+          "visited": true,
+          "note": "First delivery made — rabbits and pigeon on the rack; Aldric named Mara Wells (red door, east of the well) as the source"
+        },
+        "pell-s-forge": {
+          "name": "Pell's Forge",
+          "day": 1,
+          "visited": true,
+          "note": "Spear assembled here; Pell approved. Whetstone on bench. Silas ready to go east."
+        },
+        "mara-wells-s-store": {
+          "name": "Mara Wells's Store",
+          "day": 1,
+          "visited": true,
+          "note": "Ash shafts sold, rune-craft materials sourced, whetstone for Pell handed off. Accounts closed for this visit."
+        },
+        "corvin-s-east-furlong": {
+          "name": "Corvin's East Furlong",
+          "day": 1,
+          "visited": true,
+          "note": "Hunt party assembled here — Corvin committed, tip delivered, fence repaired."
+        }
+      },
+      "vectorsKnown": [
+        "violence_peace",
+        "concrete_abstract"
+      ]
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 12,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Millbrook's elder panel formally accepted the evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 9,
+        "text": "Word reaches you: Usnea proposed leading a multi-settlement expedition into the Disputed Zone before Millbrook's assembled elder panel — the room could not follow; the gap between evidence and action named openly. (near "
+      },
+      {
+        "day": 1,
+        "worldDay": 10,
+        "text": "Word reaches you: Word of Millbrook's elder decision — and Fendt's public naming — reached the Radiant Plateau Edge District by Day 11 night via the eastern path. Fendt's name appeared in red chalk on the district acco ("
+      },
+      {
+        "day": 1,
+        "worldDay": 10,
+        "text": "Word reaches you: A filtration array supervisor marked their own subordinate — Fendt — on the Edge District accountability board and filed no accompanying record. A keeper of thirty years has never seen this before. (nea"
+      },
+      {
+        "day": 1,
+        "worldDay": 11,
+        "text": "This reaches your area — The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District. (near radiant plateau edge)",
+        "impactsLocal": true
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-13T01:31:00.882Z",
+    "lastTickWorldDay": 13,
+    "lastCanonWorldDay": 13
+  },
+  "domains": {
+    "primary": "wright",
+    "secondary": "cogitant",
+    "tertiary": "figurist"
+  },
+  "form": "Pale slight framed Necromancer - handsome intensity in the eyes and the hold of the clutching hand - green/blue power emanating from him with his undead Raven on his shoulder.",
+  "bio": {
+    "motivation": "You took the short way, and the short way was wrong. The air here tastes of metal and the light falls at an angle the sun cannot account for. There is a door in the hillside that was not on any map, and behind you the path you walked in on is no longer there.",
+    "story": "Their first day in the world was the thin place — it is a symbol before it is a door. read what it means; ask him what it is like. You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 4,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 4,
+    "craft": 3,
+    "wits": 4
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 1,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "fendt-falsified-ledger": {
+        "id": "fendt-falsified-ledger",
+        "label": "Fendt and the Falsified Ledger",
+        "kind": "event",
+        "facts": [
+          "[d1] Someone named Fendt had their name marked in red chalk on the Radiant Plateau Edge District accountability board by their own supervisor. Three weeks of falsified water-purity readings under Fendt's i"
+        ],
+        "links": [
+          "millbrook",
+          "radiant-plateau-edge"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "millbrook": {
+        "id": "millbrook",
+        "label": "Millbrook",
+        "kind": "event",
+        "facts": [
+          "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. A figure named Usnea prop",
+          "[d1] The cookhouse woman's wariness at a stranger with uncanny company suggests Millbrook's openness to outsiders is thinner than the village's unaligned reputation implies — at least at ground level, on t",
+          "[d1] The smokehouse operates off the main lane past the well — morning fillet work, hickory smoke. The morning rack already holds gray-gilled river perch, confirming the fish catch is compromised even befo",
+          "[d1] The smokehouse operates on fixed accounts — preserved fish distributed to regular customers on a list older than the operator's apron. One man, one fire, no experimentation. The fish shortage is alrea",
+          "[d1] No bowyer in the village — the last one left two winters back, position unfilled. The blacksmith is Pell, south lane past the elder's post: edge work, hardware, snare iron, spear-tips.",
+          "[d1] Mara Wells confirmed the river has been visibly wrong for three full weeks — she tracks it without alarm, same as Aldric, and wants upstream information.",
+          "[d1] The Echo River runs gray-green on bad mornings in Millbrook — observed firsthand at the dock. A fisherman pulled his nets in early. The discoloration appears to drift in slow wreaths from upstream. Fi",
+          "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be ",
+          "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor",
+          "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib"
+        ],
+        "links": [
+          "disputed-zone",
+          "aldric",
+          "aldric-provisioning-deal",
+          "mara-wells",
+          "corvin"
+        ],
+        "aliases": [
+          "Millbrook's Elder Declaration",
+          "Millbrook Smokehouse — Structure",
+          "The River's Discoloration"
+        ],
+        "createdDay": 1,
+        "entityId": "millbrook",
+        "updatedDay": 1
+      },
+      "silas-background-gift": {
+        "id": "silas-background-gift",
+        "label": "The Unnamed Gift",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Silas resurrected a cleaned rabbit in the upper meadow — not through any known ability, but through something prior to understanding. The valley's old grain answered. The mechanism is unknown even to ",
+          "[d1] An attempt to maintain a tether to the resurrected rabbit after release failed cleanly — the seam in the animal is not addressable from outside. Whatever authored the second pattern does not answer Si"
+        ],
+        "links": [
+          "millbrook",
+          "huginn",
+          "the-seam-in-the-returned-animal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "huginn": {
+        "id": "huginn",
+        "label": "Huginn",
+        "kind": "person",
+        "facts": [
+          "[d1] Positioned its shadow over the dead rabbit at the moment Silas reached for the gift — not deliberate, perhaps, but load-bearing. Croaked one word ('well') and retracted it immediately."
+        ],
+        "links": [
+          "silas-background-gift"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "huginn",
+        "updatedDay": 1
+      },
+      "rabbit-structural-seam": {
+        "id": "rabbit-structural-seam",
+        "label": "The Seam in the Returned Animal",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Order-Sense reveals the resurrected rabbit has two woven structures: its original intact architecture, and a second pattern threaded through it like a second warp. The seam is stable and load-bearing."
+        ],
+        "links": [
+          "the-unnamed-gift",
+          "millbrook",
+          "huginn"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "aldric": {
+        "id": "aldric",
+        "label": "Aldric",
+        "kind": "person",
+        "facts": [
+          "[d1] Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas o"
+        ],
+        "links": [
+          "millbrook",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "aldric",
+        "updatedDay": 1
+      },
+      "water-keeper": {
+        "id": "water-keeper",
+        "label": "Mara Wells",
+        "kind": "person",
+        "facts": [
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs",
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope (three weights), sorted hardware, and occasional traded-in tools. Keeps a close ledger. Reacted to Huginn's presence without alar",
+          "[d1] Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh",
+          "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
+          "[d1] Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Al"
+        ],
+        "links": [
+          "millbrook",
+          "aldric",
+          "aldric-provisioning-deal",
+          "pell"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "water-keeper",
+        "updatedDay": 1
+      },
+      "pell": {
+        "id": "pell",
+        "label": "Pell",
+        "kind": "person",
+        "facts": [
+          "[d1] Village blacksmith at the south-lane forge — stocks snare hardware, chain, and hunting spear-tips in three weights. Practical and organized; named by Aldric as the source for heavier hunting iron.",
+          "[d1] Responds to a self-deprecating opener with dry patience — gave her name without ceremony once she decided to engage. Clocked Huginn without fuss. Asked directly whether Aldric sent Silas.",
+          "[d1] Order-Sense reads her shop: snare hardware is the scarce stock — toggle-springs down to four pairs, anchor stakes with visible gaps. Edge work and repairs are her real load. The mid-weight spear-tip h",
+          "[d1] Used to hunt the north meadows until the forge had enough work to make it a second job — there's a former hunter's knowledge still in her.",
+          "[d1] Has an edge-work backlog and needs snare hardware restocked before north meadow runs are worth attempting — offered a labor-for-hunting-company deal in response to Silas's proposal.",
+          "[d1] Accepts competence as currency — naming the froe's sprung collar (not just 'bent') closed the deal. Backlog labor in exchange for hunting company north of the village, terms agreed.",
+          "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
+          "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
+          "[d1] Sold the mid-weight spear-tip to Silas and modified the light point for Corvin with a stop-lug — labor credit from the backlog deducted clean. Transaction done in the same flat register as everything ",
+          "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
+          "[d1] Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary.",
+          "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Her terms: clean forge, no unpriced promises.",
+          "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after"
+        ],
+        "links": [
+          "millbrook",
+          "aldric",
+          "aldric-provisioning-deal",
+          "corvin",
+          "mara-wells"
+        ],
+        "aliases": [
+          "Pell Marsh"
+        ],
+        "createdDay": 1,
+        "entityId": "pell",
+        "updatedDay": 1
+      },
+      "corvin": {
+        "id": "corvin",
+        "label": "Corvin",
+        "kind": "person",
+        "facts": [
+          "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe",
+          "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde",
+          "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon",
+          "[d1] Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to ",
+          "[d1] Found at his east furlong on World-day 13 morning, mid-repair on a downed fence-section — broad-shouldered, compact, weathered. Maintains his ground without ceremony. Has not yet spoken.",
+          "[d1] Committed to the hunt on World-day 14 morning — north gate, before the light gets high. The reframe from 'arrangement' to 'going north together' resolved his hesitation. Modified light spear-tip now i"
+        ],
+        "links": [
+          "millbrook",
+          "pell",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1,
+        "entityId": "corvin"
+      },
+      "millbrook-north-wood-boar": {
+        "id": "millbrook-north-wood-boar",
+        "label": "Boar Sounder — North Wood",
+        "kind": "event",
+        "facts": [
+          "[d1] A sounder of boar has been spotted working the north wood above Millbrook. Corvin from the east furlong has heard of it and wants to act on it. Relevant to any hunting trip north of the village."
+        ],
+        "links": [
+          "corvin",
+          "pell",
+          "millbrook",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "north-wood": {
+        "id": "north-wood",
+        "label": "The North Wood",
+        "kind": "place",
+        "facts": [
+          "[d1] Pell's memory: dense in the middle, wet lower ground fed by slope springs (prime boar territory), a granite shelf a quarter-mile north of the fence line where game trails run east-west. The granite sh",
+          "[d1] Pell hunted the lower north wood solo for several years — wet ground from slope springs, best trail-reading in the valley floor section. A granite shelf sits roughly a quarter-mile north of the fence "
+        ],
+        "links": [
+          "millbrook",
+          "aldric-provisioning-deal",
+          "pell",
+          "corvin"
+        ],
+        "aliases": [
+          "North Wood — Terrain & Access"
+        ],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "strategic": 23.010766812965343,
+    "cerebral": 8.251569594422655,
+    "social": 34.799300212398315,
+    "generous": 10.211298880519251,
+    "cautious": 12.327659596735485
+  },
+  "aptitudes": [
+    "strategist",
+    "silver_tongue",
+    "scholar",
+    "good_samaritan"
+  ],
+  "actionCount": 51,
+  "grantsVersion": 1,
+  "reconcileVersion": 5,
+  "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A lean man kneeling in cold wet meadow grass, two fingers pressed to the chest of a dead rabbit. A large grey-black bird watches from a fence-post, its shadow falling precisely across the animal. The ",
+      "url": "https://image.pollinations.ai/prompt/A%20lean%20man%20kneeling%20in%20cold%20wet%20meadow%20grass%2C%20two%20fingers%20pressed%20to%20the%20chest%20of%20a%20dead%20rabbit.%20A%20large%20grey-black%20bird%20watches%20from%20a%20fence-post%2C%20its%20shadow%20falling%20precisely%20across%20the%20animal.%20The%20Echo%20River%20below%20runs%20faintly%20green.%20The%20rabbit's%20eye%20is%20open.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=16937&nologo=true",
+      "caption": "Silas resurrects a cleaned rabbit — not by understanding but by reaching past understandin",
+      "worldDay": 12,
+      "at": "2026-07-12T16:40:20.057Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Silas Weir",
+      "url": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
+      "caption": "Silas Weir — wright",
+      "worldDay": 12,
+      "at": "2026-07-12T12:41:03.559Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
+  "updatedAt": 1783906501949,
+  "rev": 79,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "opLossPending": false,
+  "establishedFacts": [
+    {
+      "id": "f1",
+      "text": "Silas arrived in Millbrook on World-day 12 as a complete stranger — no reputation, no contacts, pack still on his back.",
+      "day": 1,
+      "subjectId": null
+    },
+    {
+      "id": "f2",
+      "text": "Silas Weir raised a cleaned, dead rabbit back to life in Millbrook's upper meadow on World-day 12 — no ritual, no understood mechanism; the valley's old grain answered something in him. The animal is ",
+      "day": 1,
+      "subjectId": null
+    },
+    {
+      "id": "aldric",
+      "text": "Silas struck a provisioning deal with Aldric the smokehouse man on World-day 12 — hunting in exchange for food and supplies, with Aldric asking for any information Silas finds about the upstream conta",
+      "day": 1,
+      "subjectId": "aldric"
+    },
+    {
+      "id": "aldric",
+      "text": "Silas made his first hunting delivery to Aldric on World-day 12 — two rabbits and the pigeon. Aldric provided preserved trail food in return. The provisioning arrangement is now active.",
+      "day": 1,
+      "subjectId": "aldric"
+    },
+    {
+      "id": "pell",
+      "text": "Silas struck a labor deal with Pell the blacksmith — clearing her edge-work backlog in exchange for hunting company north of the village. Work begins now.",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell agreed to join a three-way boar hunt in the north wood — modification on the light spear-tip at cost (covered by Silas), Corvin to be invited. Hunt departs once the forge backlog is clear.",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell's forge backlog fully cleared on World-day 12 morning — all five pieces done including the hand-axe heat-collar. Pell confirmed ready to walk north once Corvin is found.",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Silas gave Pell the fine river whetstone as a gift for their planned date — she received it with genuine quiet pleasure and set it on her bench.",
+      "day": 1,
+      "subjectId": "pell"
+    },
+    {
+      "id": "corvin",
+      "text": "Corvin committed to the hunt — north gate, tomorrow morning before the light gets high. Hunt party fully assembled: Silas Weir, Pell Marsh, Corvin.",
+      "day": 1,
+      "subjectId": "corvin"
+    },
+    {
+      "id": "pell",
+      "text": "Pell agreed to meet Silas at the forge after the hunt — the date is now a confirmed arrangement between them, named plainly on the field path on World-day 13.",
+      "day": 1,
+      "subjectId": "pell"
+    }
+  ],
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "numen_sense": 3,
+      "lightsense": 2,
+      "order_sense": 7
+    },
+    "coActivations": {
+      "lightsense+numen_sense": 1,
+      "numen_sense+order_sense": 1,
+      "lightsense+order_sense": 1
+    },
+    "aspirations": [
+      {
+        "abilityId": "hunters_strike",
+        "since": "2026-07-12T16:27:52.479Z",
+        "progress": 0
+      }
+    ]
+  },
+  "companionBonds": {
+    "marrow": 2
+  },
+  "customAbilities": {},
+  "precursorAccess": [],
+  "forkChoices": {},
+  "backfillVersion": 1
+}

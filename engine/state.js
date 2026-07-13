@@ -147,6 +147,9 @@ export async function loadContent() {
   const helpDoc = await loadRule("helper_text", { entries: [] });
   const helpText = {};
   for (const e of (helpDoc.entries || [])) if (e.id) helpText[e.id] = e;
+  // SNG-090: the substrate model (the second difficulty map) — per-tradition bands + per-region density.
+  // Loaded now; the resolve-chain factor is wired in Phase B. Optional (a miss = substrate-neutral).
+  const substrateModel = await loadRule("the_substrate", null);
   // SNG-062: the Prologue — character creation as a played opening. Fetched directly. Optional
   // (absence falls back to the quick-start form; never breaks load).
   let prologue = null;
@@ -157,7 +160,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

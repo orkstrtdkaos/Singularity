@@ -108,6 +108,24 @@ for (const pack of PACKS) {
   ok(`the notFor LAW checked ${total} abilities across ${abFiles.length} files`);
 }
 
+// (3c) SNG-090 — every location must resolve an effective substrate density (per-location override or
+// its region's density in the_substrate.json). A place with no density can't compute the substrate
+// factor — a silent hole in the second difficulty map.
+{
+  const sub = rj("content/packs/core/rules/the_substrate.json");
+  const D = sub.substrateDensity || {};
+  const locDir = "content/packs/valley/locations";
+  const files = readdirSync(join(root, locDir)).filter(f => f.endsWith(".json"));
+  const noDensity = [];
+  for (const f of files) {
+    const l = rj(`${locDir}/${f}`);
+    const region = l.regionId || l.region;
+    if (typeof l.substrateDensity !== "number" && !(region in D)) noDensity.push(l.id || f);
+  }
+  check("every location resolves a substrate density", noDensity.length === 0,
+    `${noDensity.length} with no density (region not in the_substrate.json): ${noDensity.slice(0, 8).join(", ")}`);
+}
+
 // (4) location connectivity: dangling connections, one-way edges, unreachable locations
 {
   const locDir = "content/packs/valley/locations";

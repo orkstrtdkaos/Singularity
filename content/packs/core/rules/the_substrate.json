@@ -6,9 +6,10 @@
   "thePhysics": "Every craft in this world is nanite-mediated. There is no magic — there is a Precursor lattice that reads structured will and enacts it. **The crafts ARE technology, and the traditions are the disciplines that learned to speak to it.**",
   "theCorrection": "⛔ The Seraphic Orders are NOT the only people who never abandoned the power. Several did not. **But those who DID abandon it decreased the potential of those powers** — and in exchange, they can run on almost nothing. **This is the central tradeoff of the world and it was never mechanical until now.**",
   "theTwoNumbers": {
-    "substrateDependency": "A TRADITION's need. 0.0 = runs on muscle, bone and craft. 1.0 = pure lattice, dies without it.",
-    "substrateDensity": "A PLACE's supply. 0.0 = true nature, the lattice is gone. 1.0 = the deep sites, where it is thickest.",
-    "theRule": "**A craft's effective power scales with min(density + carried, 1.0) against its dependency.** A high-dependency craft in a low-density place is not weakened. **It is nearly OFF.**"
+    "substrateBand": "A TRADITION's TUNING — a center and a width. **Inside the band: full power. Below: STARVATION (steep). Above: INTERFERENCE (mild).**",
+    "substrateDensity": "A PLACE's supply. 0.0 = true nature, the lattice is gone. 1.0 = the deep sites.",
+    "theRule": "**effective = f(distance from the band, and WHICH SIDE).** Below-band falloff is steep and can reach near-zero. Above-band falloff is gentle and floors around 0.6–0.75. **A craft is never switched off by ABUNDANCE — only by absence.**",
+    "carried": "Carried charge RAISES effective local density. **It is not universally good: it helps whoever is below their band and HARMS whoever is above it.**"
   },
   "theTradeoff": {
     "theContinuous": "Never abandoned it. **Highest ceiling in the world — and helpless where the lattice is gone.** Enginewrights, the Lattice-Cities, the Figurists, the SERAPHIC ORDERS, the Blazeborn, the Cogitants, the Hourkeepers, the Numinous, the Veilwrights.",
@@ -34,35 +35,6 @@
     "**It gives the Accords teeth.** A waygate is not a convenience; **it is a supply line.**",
     "**It is why the Numinous built the waygates** — and why they do not use them. They are dissolving. They no longer need to arrive anywhere."
   ],
-  "substrateDependency": {
-    "precursor": 1.0,
-    "enginewright": 0.95,
-    "lattice": 0.92,
-    "figurist": 0.9,
-    "seraphic": 0.9,
-    "blazeborn": 0.86,
-    "cogitant": 0.85,
-    "hourkeeper": 0.85,
-    "numinous": 0.82,
-    "veilwright": 0.8,
-    "syllogist": 0.62,
-    "abyssal": 0.6,
-    "horizon": 0.6,
-    "unmaker": 0.55,
-    "wright": 0.52,
-    "threnodist": 0.5,
-    "verist": 0.5,
-    "harmonic": 0.5,
-    "radiant_folk": 0.5,
-    "stillhold": 0.36,
-    "ashwarden": 0.35,
-    "mason": 0.32,
-    "churnfolk": 0.3,
-    "marcher": 0.26,
-    "valley_craft": 0.25,
-    "somatic": 0.2,
-    "rootkin": 0.18
-  },
   "substrateDensity": {
     "the_gearlands": 0.98,
     "the_lattice_cities": 0.94,
@@ -89,5 +61,125 @@
     "somatic_reaches": 0.22,
     "riven_marches": 0.2,
     "the_quickwood": 0.12
-  }
+  },
+  "AMENDMENT_1": {
+    "raisedBy": "Erik, via CCode's ROUND 2 (2026-07-12). **Aevi's original model was a ONE-SIDED FUEL GAUGE — more substrate was always better, up to a cap. That was wrong.**",
+    "theCorrection": "⛔ **IT IS A BAND, NOT A GAUGE.** Every tradition has a substrate level it is TUNED TO, and it falls off in **BOTH** directions. **You can have too much.**",
+    "why": "The Returned did not merely learn to survive on less — **they RETUNED.** A Rootkin is not a starving Enginewright; they are a people whose craft is calibrated to thin ground. Drop them in the Gearlands and the lattice does not empower them — **it INTERFERES.** Too much signal is noise.",
+    "asymmetry": "**Equivalent, not equal.** Starvation is STEEP (a Continuous craft below its band goes toward OFF — a Seraph in the Quickwood ≈13%). Interference is MILDER (a Returned craft above its band is impaired but never switched off — floor ~60–75%).",
+    "theEmergentBonus": "⛔ **CARRIED SUBSTRATE CAN HURT YOU.** A battery RAISES local density — which pulls a Continuous craft UP into its band (good) and can push a Returned craft ABOVE its band (bad). **THIS IS WHY THE ROOTKIN FIND THE CHARGE TRADE RIDICULOUS.** They are not being provincial. **They are being correct: the thing everyone is buying would make them worse.**",
+    "creditWhereDue": "CCode surfaced this in ROUND 2 rather than building Aevi's flawed model. **That is exactly what ROUND 2 is for, and it is the third time this cycle it has caught the PO.**"
+  },
+  "substrateBand": {
+    "precursor": {
+      "center": 1.0,
+      "width": 0.18
+    },
+    "enginewright": {
+      "center": 0.95,
+      "width": 0.18
+    },
+    "lattice": {
+      "center": 0.92,
+      "width": 0.18
+    },
+    "figurist": {
+      "center": 0.9,
+      "width": 0.18
+    },
+    "seraphic": {
+      "center": 0.9,
+      "width": 0.18
+    },
+    "blazeborn": {
+      "center": 0.86,
+      "width": 0.18
+    },
+    "cogitant": {
+      "center": 0.85,
+      "width": 0.18
+    },
+    "hourkeeper": {
+      "center": 0.85,
+      "width": 0.18
+    },
+    "numinous": {
+      "center": 0.82,
+      "width": 0.18
+    },
+    "veilwright": {
+      "center": 0.8,
+      "width": 0.18
+    },
+    "syllogist": {
+      "center": 0.62,
+      "width": 0.28
+    },
+    "abyssal": {
+      "center": 0.6,
+      "width": 0.28
+    },
+    "horizon": {
+      "center": 0.6,
+      "width": 0.28
+    },
+    "unmaker": {
+      "center": 0.55,
+      "width": 0.28
+    },
+    "wright": {
+      "center": 0.52,
+      "width": 0.28
+    },
+    "threnodist": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "verist": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "harmonic": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "radiant_folk": {
+      "center": 0.5,
+      "width": 0.28
+    },
+    "stillhold": {
+      "center": 0.36,
+      "width": 0.38
+    },
+    "ashwarden": {
+      "center": 0.35,
+      "width": 0.38
+    },
+    "mason": {
+      "center": 0.32,
+      "width": 0.38
+    },
+    "churnfolk": {
+      "center": 0.3,
+      "width": 0.38
+    },
+    "marcher": {
+      "center": 0.26,
+      "width": 0.38
+    },
+    "valley_craft": {
+      "center": 0.25,
+      "width": 0.38
+    },
+    "somatic": {
+      "center": 0.2,
+      "width": 0.38
+    },
+    "rootkin": {
+      "center": 0.18,
+      "width": 0.38
+    }
+  },
+  "tuningNote": "⚠️ THE CURVES ARE NOT TUNED. Band widths are a first pass (narrow for the Continuous, wide for the Returned). **SNG-078's balance harness must exist before these numbers are trusted — do NOT eyeball them.** (CCode's ROUND-2 blocker, accepted.)",
+  "separateTerms": "⛔ **SUBSTRATE AND SPECTRAL FIT (SNG-079) ARE SEPARATE TERMS AND MUST NEVER BE FOLDED TOGETHER.** The resolve chain already carries a place-disposition term. Substrate is a SECOND, independent environmental term. *A place can suit you dispositionally and still starve your craft.* (CCode's ROUND-2 finding, accepted.)"
 }

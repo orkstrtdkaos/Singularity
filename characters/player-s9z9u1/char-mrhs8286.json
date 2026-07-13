@@ -363,14 +363,51 @@
         "player": "Think of it less as an arrangement — we're all going north together tomorrow. The tip is for that.",
         "summary": "Corvin accepts the tip and commits to the hunt — north gate, tomorrow morning, before the light gets high.",
         "narration": "Corvin turns the tip over once more in his hands — not reconsidering, just finishing the thought at his own pace. Then something in his shoulders settles.\n\n\"North together,\" he says, like he's checking the weight of it. Not a question. He looks at the stop-lug again, runs his thumb across the filed taper, and nods — once, the way a man nods when the thing actually makes sense. He wraps his fingers around the socket and sets it down on his knee with a kind of ownership that wasn't there a moment ago.\n\nBehind you, Pell makes no sound, but you can feel her stop pretending she's not paying attention.\n\n\"Tomorrow,\" Corvin says. He looks north, toward the tree-line where Huginn is a dark patience in the branches. The river bend is a gray-green thread from here, just visible between the trunks. He looks back at you. \"I'll be at the north gate before the light gets high.\"\n\nThe hunt party is assembled. The tip is in his hands, the river visible to the north, a morning agreed on. Corvin tucks the oilcloth back over the point with the efficiency of someone already planning how to carry it, and stands. He's taller than he looks crouched. He doesn't offer his hand again — you've already done that work together, mortise and all."
+      },
+      {
+        "player": "Walk back toward the village together — the day is young and the evening's spear work waits.",
+        "summary": "Hunt party walks back to the village together — quiet, settled, the day still young.",
+        "narration": "The three of you leave the furlong without ceremony. Corvin latches the gate — a single lift-and-drop that says he's done it ten thousand times — and you fall into a loose line heading west along the field path, the drystone wall shedding morning shadow to your right.\n\nPell comes up alongside you once the furlong is behind her. She doesn't say much. She doesn't need to. The whetstone has been on her bench since this morning and she moves like a woman who finished a small accounting in her head and found it came out even.\n\nHuginn drops from the tree-line and lands on your pack without asking, settling its weight with one adjustment of the wings. It looks south, toward the village and the river-smell that comes off the low ground. Not watching you. Watching the direction things tend to go wrong.\n\nBy the time the cookhouse smoke comes into view — low and white against the pale sky — Corvin has said exactly two more words, both about the soil drainage on the east slope. Pell has responded with four, which for her is expansive. The village sounds reach you in pieces: a cart wheel, a child, the dull ring of something metal in the distance that is probably not your forge. The forge is ahead. The shafts are there. The spear-work is still only half a job."
       }
     ],
     "lastTurn": {
-      "narration": "Corvin turns the tip over once more in his hands — not reconsidering, just finishing the thought at his own pace. Then something in his shoulders settles.\n\n\"North together,\" he says, like he's checking the weight of it. Not a question. He looks at the stop-lug again, runs his thumb across the filed taper, and nods — once, the way a man nods when the thing actually makes sense. He wraps his fingers around the socket and sets it down on his knee with a kind of ownership that wasn't there a moment ago.\n\nBehind you, Pell makes no sound, but you can feel her stop pretending she's not paying attention.\n\n\"Tomorrow,\" Corvin says. He looks north, toward the tree-line where Huginn is a dark patience in the branches. The river bend is a gray-green thread from here, just visible between the trunks. He looks back at you. \"I'll be at the north gate before the light gets high.\"\n\nThe hunt party is assembled. The tip is in his hands, the river visible to the north, a morning agreed on. Corvin tucks the oilcloth back over the point with the efficiency of someone already planning how to carry it, and stands. He's taller than he looks crouched. He doesn't offer his hand again — you've already done that work together, mortise and all.",
-      "sceneSummary": "Corvin accepts the tip and commits to the hunt — north gate, tomorrow morning, before the light gets high.",
+      "narration": "The three of you leave the furlong without ceremony. Corvin latches the gate — a single lift-and-drop that says he's done it ten thousand times — and you fall into a loose line heading west along the field path, the drystone wall shedding morning shadow to your right.\n\nPell comes up alongside you once the furlong is behind her. She doesn't say much. She doesn't need to. The whetstone has been on her bench since this morning and she moves like a woman who finished a small accounting in her head and found it came out even.\n\nHuginn drops from the tree-line and lands on your pack without asking, settling its weight with one adjustment of the wings. It looks south, toward the village and the river-smell that comes off the low ground. Not watching you. Watching the direction things tend to go wrong.\n\nBy the time the cookhouse smoke comes into view — low and white against the pale sky — Corvin has said exactly two more words, both about the soil drainage on the east slope. Pell has responded with four, which for her is expansive. The village sounds reach you in pieces: a cart wheel, a child, the dull ring of something metal in the distance that is probably not your forge. The forge is ahead. The shafts are there. The spear-work is still only half a job.",
+      "sceneSummary": "Hunt party walks back to the village together — quiet, settled, the day still young.",
       "choices": [
         {
-          "label": "\"The river — tell me what you've seen exactly.\" Ask Corvin to describe the discoloration in detail.",
+          "label": "Work the second shaft at the forge — fit the light tip, finish the lashing, run the rune-mark if you want it.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "craft",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Talk to Pell properly before the work begins — the date is a named thing now; you could let it be more than that.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Get Corvin's river detail before you part — two bad mornings; you want to know exactly what he saw.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
@@ -386,46 +423,13 @@
           "emergenceId": null
         },
         {
-          "label": "Walk back toward the village together — the day is young and the evening's spear work waits.",
-          "attribute": "practical",
+          "label": "Something else entirely — the village is awake and the day is young.",
+          "attribute": "mental",
           "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the river bend from here — the contamination's coherence is still an unanswered thing.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "violence_peace": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Say something to Pell about tonight — you named her date, she put the whetstone on her bench, tomorrow is a hunt.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help"
+            "explore"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -439,147 +443,99 @@
         "health": 0,
         "energy": 0,
         "inventoryAdd": [],
-        "inventoryRemove": [
-          "Modified Light Spear-Tip (Corvin's)"
-        ],
+        "inventoryRemove": [],
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "title": "Meat for the Smokehouse",
-          "note": "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Corvin's east furlong — winter-pale strip, drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is standing now, the modified light spear-tip wrapped in oilcloth and in his possession.",
+        "setting": "The field path west of Corvin's east furlong, approaching Millbrook — cookhouse smoke visible ahead, flat morning light, Huginn settled on the pack.",
         "npcsPresent": [
           {
-            "name": "Corvin",
-            "state": "Standing, oilcloth-wrapped tip in hand — committed. Looking north toward the tree-line and the river bend."
+            "name": "Pell Marsh",
+            "state": "Walking alongside Silas, quiet and settled, whetstone on her bench since morning."
           },
           {
-            "name": "Pell Marsh",
-            "state": "A few paces back, thumbs in coat pockets, no longer pretending she wasn't listening."
+            "name": "Corvin",
+            "state": "Walking a pace behind, two words about drainage offered and done — gate latched behind him."
           },
           {
             "name": "Huginn",
-            "state": "Dark and still in the northern tree-line, attention on the river bend."
+            "state": "Perched on the pack, watching south toward the village and the river-smell."
           }
         ],
         "objects": [
-          "Assembled Mid-Weight Spear — leaning against the drystone wall",
-          "Burlap bundle — second ash shaft, oilcloth peeled back",
+          "Assembled Mid-Weight Spear — carried",
+          "Burlap bundle — second ash shaft, stowed",
           "Rune-Craft Kit — in the pack",
-          "Seated fence-section — cross-rail properly mortised",
-          "Low drystone wall along the south edge of the furlong"
+          "Oilcloth-wrapped light tip — now in Corvin's possession"
         ],
         "threads": [
-          "River detail — Corvin has seen two bad mornings; not yet asked for specifics",
-          "Huginn's attention on the river bend is unresolved",
-          "Evening spear work with Pell — agreed, not yet begun",
-          "Hunt departs tomorrow morning — north gate, before the light gets high"
+          "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
+          "Evening spear work at the forge — agreed, not yet begun",
+          "Hunt departs tomorrow morning — north gate, before the light gets high",
+          "Huginn's attention on the river-smell is unresolved"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "corvin",
-          "name": "Corvin",
-          "role": "Farmer, east furlong — now confirmed hunt companion",
-          "note": "Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly.",
-          "learned": [
-            "Will be at the north gate before the light gets high on World-day 14",
-            "The tip is now his — he wrapped it himself"
-          ],
-          "skillsObserved": [
-            "honest deliberation",
-            "practical acceptance"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At his east furlong, hunt confirmed for tomorrow morning — north gate before the light gets high."
+          "npcId": "pell",
+          "name": "Pell Marsh",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Walked back to the village with Silas and Corvin — quiet and settled, the morning's accounting come out even.",
+          "statusNote": "Walking back toward the forge with Silas and Corvin — hunt confirmed for tomorrow.",
+          "status": "active"
         },
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell Marsh",
-          "role": "Village blacksmith, Millbrook — hunt companion, evening spear work planned",
-          "note": "Watched Corvin accept — stopped pretending she wasn't listening. Hunt party is now complete.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At Corvin's east furlong — hunt confirmed for tomorrow. Evening spear work with Silas still ahead."
+          "npcId": "corvin",
+          "name": "Corvin",
+          "role": "Farmer, east furlong — confirmed hunt companion",
+          "note": "Latched the gate and walked back with the group — two words about drainage, then quiet. Hunt locked in.",
+          "statusNote": "Walking back toward the village with Silas and Pell — hunt confirmed for tomorrow morning, north gate.",
+          "status": "active"
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Corvin committed to the hunt — north gate, tomorrow morning before the light gets high. Hunt party fully assembled: Silas Weir, Pell Marsh, Corvin.",
-          "subjectId": "corvin"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt.",
-          "subPlace": {
-            "name": "Corvin's East Furlong",
-            "note": "Hunt party assembled here — Corvin committed, tip delivered, fence repaired.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "corvin",
-          "label": "Corvin",
-          "kind": "person",
-          "entityId": "corvin",
-          "fact": "Committed to the hunt on World-day 14 morning — north gate, before the light gets high. The reframe from 'arrangement' to 'going north together' resolved his hesitation. Modified light spear-tip now in his possession.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal",
-            "pell",
-            "water-crisis-discoloration"
-          ]
-        }
-      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the furlong — the arrangement sealed in a few words."
+        "why": "A short walk back along the field path — a quarter hour at most."
+      },
+      "moveTo": {
+        "location": "millbrook",
+        "why": "Walking back along the field path from Corvin's east furlong into the village."
       }
     },
     "sceneState": {
-      "setting": "Corvin's east furlong — winter-pale strip, drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is standing now, the modified light spear-tip wrapped in oilcloth and in his possession.",
+      "setting": "The field path west of Corvin's east furlong, approaching Millbrook — cookhouse smoke visible ahead, flat morning light, Huginn settled on the pack.",
       "npcsPresent": [
         {
-          "name": "Corvin",
-          "state": "Standing, oilcloth-wrapped tip in hand — committed. Looking north toward the tree-line and the river bend."
+          "name": "Pell Marsh",
+          "state": "Walking alongside Silas, quiet and settled, whetstone on her bench since morning."
         },
         {
-          "name": "Pell Marsh",
-          "state": "A few paces back, thumbs in coat pockets, no longer pretending she wasn't listening."
+          "name": "Corvin",
+          "state": "Walking a pace behind, two words about drainage offered and done — gate latched behind him."
         },
         {
           "name": "Huginn",
-          "state": "Dark and still in the northern tree-line, attention on the river bend."
+          "state": "Perched on the pack, watching south toward the village and the river-smell."
         }
       ],
       "objects": [
-        "Assembled Mid-Weight Spear — leaning against the drystone wall",
-        "Burlap bundle — second ash shaft, oilcloth peeled back",
+        "Assembled Mid-Weight Spear — carried",
+        "Burlap bundle — second ash shaft, stowed",
         "Rune-Craft Kit — in the pack",
-        "Seated fence-section — cross-rail properly mortised",
-        "Low drystone wall along the south edge of the furlong"
+        "Oilcloth-wrapped light tip — now in Corvin's possession"
       ],
       "threads": [
-        "River detail — Corvin has seen two bad mornings; not yet asked for specifics",
-        "Huginn's attention on the river bend is unresolved",
-        "Evening spear work with Pell — agreed, not yet begun",
-        "Hunt departs tomorrow morning — north gate, before the light gets high"
+        "River detail — Corvin mentioned two bad mornings; specifics not yet drawn out",
+        "Evening spear work at the forge — agreed, not yet begun",
+        "Hunt departs tomorrow morning — north gate, before the light gets high",
+        "Huginn's attention on the river-smell is unresolved"
       ]
     }
   },
@@ -713,7 +669,7 @@
     "pell": {
       "id": "pell",
       "name": "Pell",
-      "role": "Village blacksmith, Millbrook — hunt companion, evening spear work planned",
+      "role": "Village blacksmith, Millbrook",
       "description": "A working blacksmith running a tidy, unsentimental shop — file in hand, back to the door until the work is done. Practical organizer; reacts to competence over charm.",
       "firstMet": {
         "locationId": "millbrook",
@@ -721,7 +677,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on ",
         "[d1] Allowed the kiss on the cheek without stepping back — confirmed the date in her register with 'you can tell.' Sent Silas east with the same flat economy as always.",
         "[d1] Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone.",
         "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
@@ -730,7 +685,8 @@
         "[d1] Walked east with Silas; stopped back to watch Corvin's reaction to the introduction.",
         "[d1] Holding back, watching Corvin's first read of Silas.",
         "[d1] Standing back, not helping close the arrangement with Corvin — her relationship with him predates Silas and she's letting Silas work it out.",
-        "[d1] Watched Corvin accept — stopped pretending she wasn't listening. Hunt party is now complete."
+        "[d1] Watched Corvin accept — stopped pretending she wasn't listening. Hunt party is now complete.",
+        "[d1] Walked back to the village with Silas and Corvin — quiet and settled, the morning's accounting come out even."
       ],
       "knownFacts": [
         "Corvin is at the east furlong — past second fence-line, left fork at the willow; will be mending or building something half-considered",
@@ -751,7 +707,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "At Corvin's east furlong — hunt confirmed for tomorrow. Evening spear work with Silas still ahead.",
+      "statusNote": "Walking back toward the forge with Silas and Corvin — hunt confirmed for tomorrow.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -803,7 +759,7 @@
     "corvin": {
       "id": "corvin",
       "name": "Corvin",
-      "role": "Farmer, east furlong — now confirmed hunt companion",
+      "role": "Farmer, east furlong — confirmed hunt companion",
       "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
       "firstMet": {
         "locationId": "millbrook",
@@ -814,7 +770,8 @@
         "[d1] Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded.",
         "[d1] Helped seat the fence cross-rail without being asked — made eye contact for the first time. Named the river without prompting: worse two mornings running, fish not jumping the shal",
         "[d1] Received the modified light spear-tip; agreed in principle to help Pell occasionally but hesitated — worried the tip converts freely-given help into a debt. Arrangement not yet sea",
-        "[d1] Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly."
+        "[d1] Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly.",
+        "[d1] Latched the gate and walked back with the group — two words about drainage, then quiet. Hunt locked in."
       ],
       "knownFacts": [
         "Works the east furlong alone",
@@ -834,7 +791,7 @@
         "practical acceptance"
       ],
       "status": "active",
-      "statusNote": "At his east furlong, hunt confirmed for tomorrow morning — north gate before the light gets high.",
+      "statusNote": "Walking back toward the village with Silas and Pell — hunt confirmed for tomorrow morning, north gate.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1237,11 +1194,11 @@
     }
   },
   "tendencies": {
-    "strategic": 22.589741583178643,
-    "cerebral": 8.46098963778062,
-    "social": 31.61167867552827,
-    "generous": 10.470455714843824,
-    "cautious": 11.63045293359942
+    "strategic": 23.47679287526275,
+    "cerebral": 8.418684689591718,
+    "social": 31.45362028215063,
+    "generous": 10.418103436269606,
+    "cautious": 11.572300668931423
   },
   "aptitudes": [
     "strategist",
@@ -1249,7 +1206,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 46,
+  "actionCount": 47,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1271,8 +1228,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783904928353,
-  "rev": 72,
+  "updatedAt": 1783905088451,
+  "rev": 73,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

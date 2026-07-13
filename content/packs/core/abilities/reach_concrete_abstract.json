@@ -17,7 +17,7 @@
         "body_mind": -0.2
       },
       "functions": [
-        "mend",
+        "make",
         "shield",
         "break"
       ],
@@ -67,7 +67,8 @@
         "concrete_abstract": -0.3
       },
       "functions": [
-        "reveal"
+        "reveal",
+        "track"
       ],
       "narrationHints": "The material gives up its history under his palm.",
       "description": "Read a material's truth by touch — the first gift of the Given.",
@@ -165,9 +166,9 @@
         "mechanical_spiritual": 0.2
       },
       "functions": [
+        "make",
         "bind",
-        "reveal",
-        "conceal"
+        "deceive"
       ],
       "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
       "description": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
@@ -262,9 +263,9 @@
         "chaos_order": 0.1
       },
       "functions": [
+        "summon",
         "bind",
-        "strike",
-        "conceal"
+        "strike"
       ],
       "narrationHints": "The mark she drew stands up off the wall and goes to do the thing it means.",
       "description": "Send a made figure to act at a distance — a symbol given errand and enough form to run it.",
@@ -301,5 +302,6 @@
       },
       "tradition": "figurist"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

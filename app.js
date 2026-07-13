@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.51";
+const APP_VERSION = "1.8.52";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1040,6 +1040,18 @@ function domainVerdict(ability) {
   // SNG-089: Accord crafts are ungated by origin/domain — offered (and learnable) to anyone at base cost.
   if (ability?.accord) return { allowed: true, penalty: 1, band: "accord" };
   return domainAccess(ability, ability?.levelReq || 1, character?.domains, CONTENT.traditionIndex);
+}
+
+/** SNG-094: the effective LEVEL requirement to learn an ability, mirroring learnAbility. For a character
+ *  with domains, access is the domain gate's job (SNG-055) and the level bar is the ability's own —
+ *  NOT the legacy effectiveLevelReq, which null-filters every 24-tradition craft (powerSystem is an
+ *  axis-file name, not the origin) and so hid a native's OWN people's abilities from the learn list.
+ *  Returns null when the ability is not accessible. Precursor keeps its per-ability fiction gate. */
+function learnLevelReq(ability) {
+  if (ability?.accord) return ability.levelReq || 1;
+  if (ability?.powerSystem === "precursor") return effectiveLevelReq(ability, character, CONTENT.rules);
+  if (character?.domains?.primary && CONTENT.traditionIndex) return domainVerdict(ability).allowed ? (ability.levelReq || 1) : null;
+  return effectiveLevelReq(ability, character, CONTENT.rules);
 }
 
 /** A stable color for a tradition/class id — known power-systems keep their authored color; a
@@ -3315,6 +3327,101 @@ function wireSkillGraphViewport() {
 
 // ---------- character & inventory screens (SNG-007) ----------
 
+/** SNG-094: the Level-Up window — one place to spend skill points. DEEPEN a craft you know (rank up)
+ *  or LEARN a new one (domain-gated, explained), with the SNG-084 helper text woven in. Stays open so
+ *  a player with several points spends them in a row. Replaces hunting the sidebar's scattered ▲ + the
+ *  collapsed "Learn" groups. */
+function renderLevelUp(status = "") {
+  const rules = CONTENT.rules;
+  const sp = character.skillPoints || 0;
+  const cap = atCapacity(character, CONTENT.skillCapacity);
+  const maxRank = rules.leveling?.maxAbilityRank ?? 3;
+
+  // DEEPEN: owned abilities, showing what a rank costs / grants / why it's blocked
+  const rankRows = character.abilities.map(a => ({ a, ab: fullCatalog()[a.abilityId] })).filter(x => x.ab).map(({ a, ab }) => {
+    const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
+    const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
+    const atMax = a.level >= maxRank;
+    const levelOk = character.level >= (nextReq ?? 1);
+    const practiced = practiceRankReady(character, a.abilityId, rules) && !atMax && levelOk;
+    const canRank = !atMax && levelOk && (sp >= rankCost || practiced);
+    const now = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab.tree?.find(t => t.rank === a.level);
+    const next = ab.tree?.find(t => t.rank === a.level + 1);
+    return { a, ab, rankCost, atMax, levelOk, practiced, canRank, now, next };
+  });
+
+  // LEARN: everything the domain gate opens that you don't yet know (SNG-094 gate)
+  const learnable = Object.values(CONTENT.abilities).filter(ab => {
+    if (character.abilities.some(a => a.abilityId === ab.id)) return false;
+    const req = learnLevelReq(ab);
+    if (req === null || character.level < req) return false;
+    return domainVerdict(ab).allowed;
+  });
+  const byTrad = {};
+  for (const ab of learnable) { const k = abilityTradition(ab) || ab.powerSystem || "folk"; (byTrad[k] = byTrad[k] || []).push(ab); }
+
+  const learnRow = ab => {
+    const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
+    const dv = domainVerdict(ab);
+    const ripe = aspirationRipe(character, ab.id, rules);
+    const cost = character.domains?.primary ? (dv.penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity);
+    const tooPoor = !ripe && sp < cost;
+    const capBlock = cap && ab.powerSystem !== "learned";
+    const blocked = !gate.ok || capBlock || tooPoor;
+    const r1 = ab.tree?.find(t => t.rank === 1);
+    const band = dv.band === "far" ? " · far" : dv.band === "adjacent" ? " · kin" : dv.band === "accord" ? " · open" : "";
+    return `<div class="cs-ability ${blocked ? "locked" : ""}">
+      <div><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">L${ab.levelReq || 1}${band}${cost > 1 ? ` · ${cost} pts` : ""}${ripe ? " · practiced (free)" : ""}</span></div>
+      <div class="hint">${esc((r1 ? r1.grants : ab.description) || "").slice(0, 130)}</div>
+      ${blocked
+        ? `<span class="hint">🔒 ${!gate.ok ? esc(gate.why) : capBlock ? "at capacity — deepen instead" : "need " + cost + " point" + (cost > 1 ? "s" : "")}</span>`
+        : `<button class="btn" data-lvllearn="${esc(ab.id)}">Learn${ripe ? " (free)" : ` (${cost} pt${cost > 1 ? "s" : ""})`}</button>`}
+    </div>`;
+  };
+
+  chrome(`<div class="screen" style="max-width:720px">
+    <h2>⬆ Level Up ${infoDot("ability.ranks")}</h2>
+    <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong>. Deepen a craft you know, or learn a new one — your domains decide what's open. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
+    ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent)">${esc(status)}</div>` : ""}
+
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Deepen a craft ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— rank up what you know</span></h3>
+      ${rankRows.map(r => `<div class="cs-ability">
+        <div><strong>${esc(r.ab.name)}</strong> <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= r.a.level ? "cs-rank-on" : "cs-rank-off"}">${n <= r.a.level ? "●" : "○"}</span>`).join("")}</span> <span class="hint">${r.now ? esc(r.now.name) : ""}</span></div>
+        ${r.next ? `<div class="hint">→ ${esc(r.next.name)}: ${esc(r.next.grants || "")}</div>` : ""}
+        ${r.canRank
+          ? `<button class="btn" data-lvlrank="${esc(r.a.abilityId)}">▲ ${r.practiced && sp < r.rankCost ? "Rank up — practiced, free" : `Rank up (${r.rankCost} pt${r.rankCost > 1 ? "s" : ""})`}</button>`
+          : `<span class="hint">${r.atMax ? "mastered — highest rank" : !r.levelOk ? "needs level " + (rules.leveling?.rankLevelReq?.[String(r.a.level + 1)]) : "needs " + r.rankCost + " point" + (r.rankCost > 1 ? "s" : "")}</span>`}
+      </div>`).join("") || "<div class='insight'>nothing to deepen yet</div>"}
+    </div>
+
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Learn a new craft ${infoDot("circle.domains")} <span class="hint" style="text-transform:none">— broaden into your domains</span></h3>
+      ${cap ? `<div class="hint" style="margin-bottom:6px">You're at capacity — new points now deepen what you know. ${infoDot("lock.capacity")}</div>` : ""}
+      ${Object.keys(byTrad).length
+        ? Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group" ${byTrad[k].some(ab => abilityTradition(ab) === character.domains?.primary) ? "open" : ""}><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")
+        : "<div class='insight'>nothing new to learn at this level — deepen a craft, or play on to reach the next tier</div>"}
+    </div>
+
+    <button class="btn secondary" id="lvl-back">Done</button>
+  </div>`);
+
+  for (const b of app.querySelectorAll("[data-lvlrank]")) b.onclick = () => {
+    const id = b.dataset.lvlrank;
+    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1;
+    const owned = character.abilities.find(a => a.abilityId === id);
+    const doRank = () => { const r = rankUpAbility(character, id, rules, rankOptsFor()); if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); saveCharacter(character); renderLevelUp(`Deepened ${fullCatalog()[id]?.name} to rank ${character.abilities.find(a => a.abilityId === id)?.level}.`); } else renderLevelUp(r.why); };
+    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); doRank(); });
+    else doRank();
+  };
+  for (const b of app.querySelectorAll("[data-lvllearn]")) b.onclick = () => {
+    const id = b.dataset.lvllearn;
+    const free = aspirationRipe(character, id, rules);
+    const r = learnAbility(character, id, fullCatalog(), rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
+    if (r.ok) { if (free) dropAspiration(character, id); saveCharacter(character); renderLevelUp(`Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.`); }
+    else renderLevelUp(r.why);
+  };
+  document.getElementById("lvl-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
 function renderCharacterScreen() {
   const rules = CONTENT.rules;
   const cap = rules.leveling?.subAttributeCap ?? 20;
@@ -3362,13 +3469,13 @@ function renderCharacterScreen() {
         return `<div class="cs-attr"><span class="cs-attr-name" style="width:140px">${esc(ab?.name || a.abilityId)}</span>
           <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, (a.progress || 0) / need * 100)}%"></div></div>
           <span class="cs-val">${Math.min(a.progress || 0, need)}/${need}</span>
-          ${ripe && character.level >= (effectiveLevelReq(ab, character, rules) ?? 99) ? `<button class="grow-btn practiced" data-asplearn="${esc(a.abilityId)}" title="Fully practiced — learn free">✓</button>` : ""}
+          ${ripe && character.level >= (learnLevelReq(ab) ?? 99) ? `<button class="grow-btn practiced" data-asplearn="${esc(a.abilityId)}" title="Fully practiced — learn free">✓</button>` : ""}
           <button class="grow-btn" data-aspdrop="${esc(a.abilityId)}" title="Drop aspiration" style="background:var(--panel2); color:var(--ink-dim)">×</button>
         </div>`; }).join("") || "<div class='insight'>none declared</div>"}
       ${(character.practice?.aspirations || []).length < (rules.practice?.maxAspirations ?? 2) ? `
         <select id="asp-pick" style="margin-top:6px; max-width:280px">
           <option value="">Aspire toward…</option>
-          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && effectiveLevelReq(ab, character, rules) !== null && domainVerdict(ab).allowed && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${ab.powerSystem}, lv ${effectiveLevelReq(ab, character, rules)})</option>`).join("")}
+          ${Object.values(fullCatalog()).filter(ab => !character.abilities.some(a => a.abilityId === ab.id) && learnLevelReq(ab) !== null && domainVerdict(ab).allowed && !(character.practice?.aspirations || []).some(a => a.abilityId === ab.id)).map(ab => `<option value="${esc(ab.id)}">${esc(ab.name)} (${esc(traditionLabel(abilityTradition(ab) || ab.powerSystem))}, lv ${learnLevelReq(ab)})</option>`).join("")}
         </select>` : ""}
     </div>
     ${(() => {
@@ -3386,6 +3493,7 @@ function renderCharacterScreen() {
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
+    <button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
@@ -3420,6 +3528,7 @@ function renderCharacterScreen() {
     if (tpl) { acceptBranch(character, tpl); saveCharacter(character); }
     renderCharacterScreen();
   };
+  const luBtn2 = document.getElementById("cs-levelup"); if (luBtn2) luBtn2.onclick = () => renderLevelUp();
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillWheel();
   const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();
   // SNG-053 form editor: describe the character's physical form so the portrait renders it
@@ -4372,7 +4481,7 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>
-    <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</h3>
+    <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}${character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules)) ? ` <button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-left:4px">⬆ Level Up</button>` : ""}</h3>
       ${(() => {
         // SNG-047: group owned abilities by type/tradition (same taxonomy as the skill graph),
         // show each ability's FUNCTIONS as chips (what it DOES at a glance).
@@ -4404,7 +4513,7 @@ function renderPlay(turn, opts = {}) {
         const learnable = Object.values(CONTENT.abilities).filter(ab => {
           if (character.abilities.some(a => a.abilityId === ab.id)) return false;
           if (character.skillPoints <= 0 && !aspirationRipe(character, ab.id, CONTENT.rules)) return false;
-          const req = effectiveLevelReq(ab, character, CONTENT.rules);
+          const req = learnLevelReq(ab); // SNG-094: domain gate, not the legacy powerSystem==origin filter
           if (req === null || character.level < req) return false;
           // SNG-055: the domain gate decides what's OFFERED — the antipode of a chosen pole and
           // over-tier picks (secondary>III, tertiary>II, kin-capstones) simply aren't shown.
@@ -4733,6 +4842,7 @@ function renderPlay(turn, opts = {}) {
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();
   const libBtn = document.getElementById("open-library"); if (libBtn) libBtn.onclick = () => renderLibrary();
   const charBtn = document.getElementById("open-character"); if (charBtn) charBtn.onclick = () => renderCharacterScreen();
+  const luBtn = document.getElementById("sidebar-levelup"); if (luBtn) luBtn.onclick = () => renderLevelUp();
   const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");

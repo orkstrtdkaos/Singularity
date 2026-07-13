@@ -162,9 +162,17 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
   const ab = catalog[abilityId];
   if (!ab) return { ok: false, why: "unknown ability" };
-  // SNG-089: an Accord craft bypasses the tradition gate entirely — anyone may learn it (still 1 point).
-  const req = ab.accord ? (ab.levelReq || 1) : effectiveLevelReq(ab, character, rules);
-  if (req === null) return { ok: false, why: "wrong tradition" };
+  // SNG-094: the DOMAIN gate (SNG-055) is authoritative for a character with domains — the legacy
+  // effectiveLevelReq gates by `powerSystem === origin`, which returns null for every 24-tradition
+  // ability whose powerSystem is an axis-file name (e.g. "reach_death_life"), so a native Ashwarden
+  // could not learn their OWN people's craft at level-up. Here the domain gate decides access and the
+  // ability's own levelReq is the level bar. Precursor keeps its per-ability fiction gate; accord open.
+  const idx = opts.traditionIndex;
+  const req = ab.accord ? (ab.levelReq || 1)
+    : ab.powerSystem === "precursor" ? effectiveLevelReq(ab, character, rules)
+    : (character?.domains?.primary && idx) ? (domainGateFor(ab, character, idx).allowed ? (ab.levelReq || 1) : null)
+    : effectiveLevelReq(ab, character, rules);
+  if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition" };
   if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
   // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.
   const verdict = domainGateFor(ab, character, opts.traditionIndex);

@@ -44,8 +44,9 @@
         }
       ],
       "functions": [
+        "transform",
         "break",
-        "move"
+        "make"
       ],
       "challengeTypes": [
         "CHASE",
@@ -102,7 +103,8 @@
       ],
       "functions": [
         "bind",
-        "shield"
+        "command",
+        "make"
       ],
       "challengeTypes": [
         "PUZZLE",
@@ -127,6 +129,7 @@
         "chaos_order": -0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "A feel for where a situation is about to come apart.",
@@ -223,6 +226,7 @@
         "chaos_order": -0.4
       },
       "functions": [
+        "hinder",
         "break",
         "move"
       ],
@@ -274,6 +278,7 @@
         "chaos_order": 0.4
       },
       "functions": [
+        "command",
         "bind"
       ],
       "narrationHints": "A word, and the chaos falls into rank.",
@@ -324,8 +329,8 @@
         "space_time": 0.1
       },
       "functions": [
-        "move",
-        "strike"
+        "foresee",
+        "empower"
       ],
       "narrationHints": "The dice of the moment lean your way, just once, just enough.",
       "description": "Nudge chance in a chaotic moment — the lucky slip, the fumbled guard, the door that happens to be open.",
@@ -426,6 +431,7 @@
         "chaos_order": 0.0
       },
       "functions": [
+        "command",
         "break",
         "bind"
       ],
@@ -466,8 +472,8 @@
         "space_time": 0.2
       },
       "functions": [
-        "move",
-        "break"
+        "foresee",
+        "empower"
       ],
       "challengeProfile": {
         "CHASE": 3,
@@ -489,5 +495,6 @@
       "gated": "learned",
       "tradition": "churnfolk"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

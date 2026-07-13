@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 276,
+  "xp": 281,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -37,7 +37,7 @@
   "alignment": {
     "spectrumId": -0.6632746145892873,
     "violence_peace": 0.0335,
-    "chaos_order": 0.08920993281249999,
+    "chaos_order": 0.11474943617187498,
     "mechanical_spiritual": 0.08591509375,
     "concrete_abstract": -0.0522875,
     "death_life": -0.0418125
@@ -46,7 +46,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 66,
+  "energy": 61,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -599,23 +599,49 @@
         "player": "Ask Pell if she's enjoying our date so far, and tell her she looks amazing with the dew soaking her boots in the early morning sun.",
         "summary": "Silas compliments Pell in the birch corridor; she receives it straight, shoulder-to-shoulder, and the hunt continues north.",
         "narration": "You fall into step beside Pell as the birch corridor opens ahead — Huginn still on your arm, its grip easing now that the question has been asked and the only answer given. The light is shifting, slowly, grey thinning toward something warmer as the ridge to the east catches the first real edge of sunrise. The dew is everywhere: on the sedge, on the bark, pooling in the boot-print the bull left in the soft ground ahead. Including, visibly, on Pell's boots — dark leather gone dark-black at the toe, a bright bead of it caught in the lacing.\n\nYou glance at her sideways and say it easy, unhurried: \"You enjoying our date so far?\"\n\nShe takes a beat. Then the corner of her mouth moves — not quite a smile, something drier, more contained. She looks down at her boots, then back up at the corridor ahead. \"Covered in mud, up before light, listening to a bird tell us where to walk.\" A pause. \"Yeah. I am.\"\n\n\"You look amazing,\" you tell her — and you mean it without making a production of it. The dew in the lacing, the set of her jaw in the thin morning light, the way she carries herself like someone who knows what her hands are for. \"Dew and all.\"\n\nShe breathes out through her nose — something between a laugh and a scoff, well short of embarrassed. Her eyes don't leave the bull's track. But her shoulder brushes yours as the corridor narrows, and she doesn't step away. The contact is brief and deliberate and unbothered, which is precisely the language she uses for things she means.\n\nHuginn shifts on your arm, head still turned north. The track is fresh. The bull is not far."
+      },
+      {
+        "player": "Follow the bull's track north, reading the pattern of its movement with Order-Sense — find where it's going, not just where it's been.",
+        "summary": "Order-Sense reads the bull's track — heading confirmed northwest toward the scrub oak ridge, a quarter-mile north.",
+        "narration": "You shift your weight forward and let Order-Sense settle in — not a push, just an opening, the way you'd let your eyes adjust to dark. The bull's track is already there in the mud: three hooves clear, one dragging slightly on the left rear, the stride length telling you unhurried, heavy, a body that knows where it is going.\n\nThe pattern comes through clean. Overnight the bull moved northwest in a long unhurried arc, skirting the wet sedge where the river smell rises, favoring the drier scrub where the ground hardens between birch roots. Not fleeing — relocating. The track bends once, a deliberate angle correction, and you read it as a specific destination: higher ground, drier, with a good sightline back south. There's a low ridge a quarter-mile north where the birch thins and the scrub oak starts. He's almost certainly bedded there, or feeding along its southern edge in the early light.\n\nPell catches your stillness and slows beside you without asking. When you straighten and name the ridge, she looks north, reads the treeline, and nods once — the same nod she gives the anvil when she's decided where the next strike lands. Huginn shifts on your forearm, head angling northwest, the bead of its eye catching the first real edge of sunrise over the ridge. It says nothing. It doesn't need to."
       }
     ],
     "lastTurn": {
-      "narration": "You fall into step beside Pell as the birch corridor opens ahead — Huginn still on your arm, its grip easing now that the question has been asked and the only answer given. The light is shifting, slowly, grey thinning toward something warmer as the ridge to the east catches the first real edge of sunrise. The dew is everywhere: on the sedge, on the bark, pooling in the boot-print the bull left in the soft ground ahead. Including, visibly, on Pell's boots — dark leather gone dark-black at the toe, a bright bead of it caught in the lacing.\n\nYou glance at her sideways and say it easy, unhurried: \"You enjoying our date so far?\"\n\nShe takes a beat. Then the corner of her mouth moves — not quite a smile, something drier, more contained. She looks down at her boots, then back up at the corridor ahead. \"Covered in mud, up before light, listening to a bird tell us where to walk.\" A pause. \"Yeah. I am.\"\n\n\"You look amazing,\" you tell her — and you mean it without making a production of it. The dew in the lacing, the set of her jaw in the thin morning light, the way she carries herself like someone who knows what her hands are for. \"Dew and all.\"\n\nShe breathes out through her nose — something between a laugh and a scoff, well short of embarrassed. Her eyes don't leave the bull's track. But her shoulder brushes yours as the corridor narrows, and she doesn't step away. The contact is brief and deliberate and unbothered, which is precisely the language she uses for things she means.\n\nHuginn shifts on your arm, head still turned north. The track is fresh. The bull is not far.",
-      "sceneSummary": "Silas compliments Pell in the birch corridor; she receives it straight, shoulder-to-shoulder, and the hunt continues north.",
+      "narration": "You shift your weight forward and let Order-Sense settle in — not a push, just an opening, the way you'd let your eyes adjust to dark. The bull's track is already there in the mud: three hooves clear, one dragging slightly on the left rear, the stride length telling you unhurried, heavy, a body that knows where it is going.\n\nThe pattern comes through clean. Overnight the bull moved northwest in a long unhurried arc, skirting the wet sedge where the river smell rises, favoring the drier scrub where the ground hardens between birch roots. Not fleeing — relocating. The track bends once, a deliberate angle correction, and you read it as a specific destination: higher ground, drier, with a good sightline back south. There's a low ridge a quarter-mile north where the birch thins and the scrub oak starts. He's almost certainly bedded there, or feeding along its southern edge in the early light.\n\nPell catches your stillness and slows beside you without asking. When you straighten and name the ridge, she looks north, reads the treeline, and nods once — the same nod she gives the anvil when she's decided where the next strike lands. Huginn shifts on your forearm, head angling northwest, the bead of its eye catching the first real edge of sunrise over the ridge. It says nothing. It doesn't need to.",
+      "sceneSummary": "Order-Sense reads the bull's track — heading confirmed northwest toward the scrub oak ridge, a quarter-mile north.",
       "choices": [
         {
-          "label": "Follow the bull's track north, reading the pattern of its movement with Order-Sense — find where it's going, not just where it's been.",
+          "label": "Press north carefully — slow, quiet approach to the scrub oak ridge to locate the bull before it knows you're coming",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": 0.6
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful",
+            "hunt"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold here and read the ridge from a distance — use Order-Sense to find the pattern of what else is on that high ground before you walk into it",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.6
+            "concrete_abstract": -0.3,
+            "chaos_order": 0.2
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
+            "study",
+            "careful",
+            "plan"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
@@ -624,34 +650,16 @@
           "emergenceId": null
         },
         {
-          "label": "Move quietly and carefully up the corridor — let Huginn lead, watch the ground, and close the distance on the bull before it knows you're there.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell what she makes of Huginn's heading — whether the iron has ever pulled her north the way it's been pulling the bird.",
+          "label": "Ask Pell what she reads from the ridge — she's worked this ground longer than you have",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "mechanical_spiritual": -0.3
+            "violence_peace": 0.7
           },
           "difficulty": 0,
           "intentTags": [
-            "talk",
-            "study"
+            "help",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -660,30 +668,46 @@
           "emergenceId": null
         },
         {
-          "label": "Use Deathsense — feel for what is ending up the corridor before you walk toward it.",
+          "label": "Let Huginn go ahead — send it to the ridge first and watch where it lands",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.5
+            "death_life": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "scout",
             "careful"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear."
+        }
+      ],
       "scene": {
-        "setting": "North wood birch corridor, Millbrook — narrow close-set birches opening northward, dew heavy on sedge and bark, grey light shifting toward the first real edge of sunrise over the eastern ridge. Bull track in soft mud ahead.",
+        "setting": "North wood birch corridor, Millbrook — narrow birches opening toward a low scrub oak ridge a quarter-mile north, dew heavy on sedge and bark, grey light thinning toward the first real edge of sunrise over the eastern ridge. Bull track confirmed northwest in fresh mud.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Walking the corridor beside Silas, shoulder briefly brushed against his, eyes on the bull's track ahead — dry and present."
+            "state": "Standing beside Silas, reading the treeline north after his direction — weight settled, nod given, ready to move."
           },
           {
             "name": "Corvin",
@@ -691,17 +715,17 @@
           },
           {
             "name": "Huginn",
-            "state": "On Silas's forearm, grip deliberate, head turned north along the track."
+            "state": "On Silas's forearm, head angled northwest, eye catching the first light — silent."
           }
         ],
         "objects": [
           "Deathbound Runic Spear — in Silas's off-hand",
-          "Bull's track — fresh mud and crushed sedge leading north into the corridor",
+          "Bull's track — confirmed northwest toward scrub oak ridge, quarter-mile north",
           "Sow — being dressed thirty yards south by Corvin"
         ],
         "threads": [
-          "Huginn pointed north and said nothing more — what is ending up the corridor is still unknown",
-          "Bull track, scattered piglets, and Huginn's northward heading all unresolved",
+          "Bull located on scrub oak ridge — approach still to be made",
+          "Huginn's northward threading and what is ending up the corridor remains unnamed",
           "Corvin's smokehouse delivery still his task to complete"
         ]
       },
@@ -710,28 +734,55 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step away.",
+          "note": "Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil.",
           "learned": [
-            "Receives directness the same way she receives ironwork — present, unbothered, no performance"
+            "Bull is on the scrub oak ridge a quarter-mile north — Order-Sense confirmed"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 1,
+          "skillsObserved": [
+            "reading a partner's focus without prompting"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the north wood birch corridor beside Silas, heading north after the bull."
+          "statusNote": "In the north wood birch corridor beside Silas, heading toward the scrub oak ridge."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
+          "subPlace": {
+            "name": "Scrub Oak Ridge",
+            "note": "Low ridge a quarter-mile north of the sedge strip where the birch thins and scrub oak starts — bull's confirmed destination, early-spring morning.",
+            "visited": false
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "event",
+          "entityId": "millbrook",
+          "fact": "Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three independent signals (bull, piglets, Huginn) still converging on the same corridor.",
+          "links": [
+            "disputed-zone",
+            "huginn",
+            "pell",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange in the corridor as the hunt continues — the light has shifted slightly toward sunrise."
+        "why": "short pause to read the track before pressing north"
       }
     },
     "sceneState": {
-      "setting": "North wood birch corridor, Millbrook — narrow close-set birches opening northward, dew heavy on sedge and bark, grey light shifting toward the first real edge of sunrise over the eastern ridge. Bull track in soft mud ahead.",
+      "setting": "North wood birch corridor, Millbrook — narrow birches opening toward a low scrub oak ridge a quarter-mile north, dew heavy on sedge and bark, grey light thinning toward the first real edge of sunrise over the eastern ridge. Bull track confirmed northwest in fresh mud.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Walking the corridor beside Silas, shoulder briefly brushed against his, eyes on the bull's track ahead — dry and presen"
+          "state": "Standing beside Silas, reading the treeline north after his direction — weight settled, nod given, ready to move."
         },
         {
           "name": "Corvin",
@@ -739,17 +790,17 @@
         },
         {
           "name": "Huginn",
-          "state": "On Silas's forearm, grip deliberate, head turned north along the track."
+          "state": "On Silas's forearm, head angled northwest, eye catching the first light — silent."
         }
       ],
       "objects": [
         "Deathbound Runic Spear — in Silas's off-hand",
-        "Bull's track — fresh mud and crushed sedge leading north into the corridor",
+        "Bull's track — confirmed northwest toward scrub oak ridge, quarter-mile north",
         "Sow — being dressed thirty yards south by Corvin"
       ],
       "threads": [
-        "Huginn pointed north and said nothing more — what is ending up the corridor is still unknown",
-        "Bull track, scattered piglets, and Huginn's northward heading all unresolved",
+        "Bull located on scrub oak ridge — approach still to be made",
+        "Huginn's northward threading and what is ending up the corridor remains unnamed",
         "Corvin's smokehouse delivery still his task to complete"
       ]
     }
@@ -777,14 +828,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Modified light spear-tip offered to Corvin — hunt party one conversation from being formally assembled. Arrangement with Corvin not yet sealed.",
         "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin.",
         "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning.",
         "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light.",
         "Hunt party assembled at the forge, pre-dawn — Silas has confirmed two or three presences north, patterned and holding. Departing at first light.",
         "Hunt party cleared the north gate at pre-dawn — moving into the meadow, Huginn holding north, two or three presences still ahead.",
         "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line.",
-        "Sow taken in the north wood — clean kill, Corvin's strike. Meat for delivery to the smokehouse. Huginn still threading north toward unaccounted presences."
+        "Sow taken in the north wood — clean kill, Corvin's strike. Meat for delivery to the smokehouse. Huginn still threading north toward unaccounted presences.",
+        "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -892,7 +943,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Noted Corvin's direction observation quietly — 'Same direction we're heading.' Not alarmed, just present.",
         "[d1] Collar up against the squall-wet, eyes on the trail and tree-line.",
         "[d1] Holding position, eyes on the tree-line — letting Silas take the lead on the ground-read.",
         "[d1] Took the east flank into the birches cleanly — unscented, position intact. Holding.",
@@ -901,28 +951,29 @@
         "[d1] Named the northward convergence aloud once the kill was confirmed — bull, piglets, Huginn all the same direction. Said it as observation, not alarm.",
         "[d1] Read the northward invitation without words — weight shifted forward, ready to move.",
         "[d1] Went still when Huginn croaked — listening hard, no comment yet.",
-        "[d1] Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step aw"
+        "[d1] Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step aw",
+        "[d1] Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil."
       ],
       "knownFacts": [
-        "Silas took a short way that erased the path behind him — he arrived in the valley through something he didn't fully understand",
         "Silas has no destination, only a direction — north, lately; the spear reads that way",
         "Silas frames his presence in places as: someone who can see a certain kind of thing, not a chosen one",
         "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs",
         "Aware that the boar's displaced ground and the direction of the presences Huginn is tracking are the same vector",
         "Held the bolt corridor through the gambit's full run — her position was the decisive constraint",
         "Bull's direction, the piglets' scatter, and Huginn's orientation all converge north",
-        "Receives directness the same way she receives ironwork — present, unbothered, no performance"
+        "Receives directness the same way she receives ironwork — present, unbothered, no performance",
+        "Bull is on the scrub oak ridge a quarter-mile north — Order-Sense confirmed"
       ],
       "skillsObserved": [
-        "reading a signal under pressure",
         "controlled field positioning",
         "sustained flank-hold under pressure",
         "clean withdrawal once the threat resolved",
         "pattern-reading under field conditions",
-        "naming a signal without dramatizing it"
+        "naming a signal without dramatizing it",
+        "reading a partner's focus without prompting"
       ],
       "status": "active",
-      "statusNote": "In the north wood birch corridor beside Silas, heading north after the bull.",
+      "statusNote": "In the north wood birch corridor beside Silas, heading toward the scrub oak ridge.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1023,7 +1074,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Fine river whetstone gifted to Pell — now on her bench. The date between Silas and Pell is now a standing arrangement named between them at the forge.",
         "[d1] Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed.",
         "[d1] Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
         "[d1] Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt.",
@@ -1034,7 +1084,8 @@
         "[d1] Rune-Craft Kit fully spent at the forge south pit on World-day 13 night — wax and pitch-ink used in the tightening of the Huginn-thread. Pit remains banked.",
         "[d1] Silas slept inside the forge on World-day 13 night — canvas behind the bellows, by invitation. The forge is now a place of both craft and something harder to name.",
         "[d1] Silas slept a full night in the forge interior — canvas near the hearth, undisturbed. The hearth has coaled nearly to dark by pre-dawn.",
-        "[d1] Sow killed in the sedge strip on World-day 14 pre-dawn — ground disturbed, piglets scattered north. The strip now reads as hunted."
+        "[d1] Sow killed in the sedge strip on World-day 14 pre-dawn — ground disturbed, piglets scattered north. The strip now reads as hunted.",
+        "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1112,6 +1163,12 @@
           "day": 1,
           "visited": true,
           "note": "Site of the boar kill — sow down, piglets north, fence-post marked by Huginn's attendance."
+        },
+        "scrub-oak-ridge": {
+          "name": "Scrub Oak Ridge",
+          "day": 1,
+          "visited": false,
+          "note": "Low ridge a quarter-mile north of the sedge strip where the birch thins and scrub oak starts — bull's confirmed destinat"
         }
       },
       "vectorsKnown": [
@@ -1234,7 +1291,8 @@
           "[d1] Order-Sense at the mud-strip (World-day 14 pre-dawn): sow and young in the sedge strip ahead — twenty minutes out. Something heavier passed through last night and did not stay. Bull present at this ra",
           "[d1] Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn",
           "[d1] Sow taken in the north wood sedge strip on World-day 14 pre-dawn — clean kill, Corvin's strike. Huginn attended without prompting. Piglets and bull both northwest, direction of the unaccounted pattern",
-          "[d1] Post-kill: bull track, scattered piglets, and Huginn's northward orientation all converge on the same corridor in the north wood — three independent signals pointing the same direction."
+          "[d1] Post-kill: bull track, scattered piglets, and Huginn's northward orientation all converge on the same corridor in the north wood — three independent signals pointing the same direction.",
+          "[d1] Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three in"
         ],
         "links": [
           "disputed-zone",
@@ -1503,13 +1561,13 @@
     }
   },
   "tendencies": {
-    "strategic": 36.760355747085576,
-    "cerebral": 19.803945469245367,
-    "social": 43.001996823166124,
-    "generous": 8.611240791692012,
-    "cautious": 19.748026629386427,
-    "physical": 0.9801495006250001,
-    "risky": 0.995
+    "strategic": 37.57655396835015,
+    "cerebral": 20.70492574189914,
+    "social": 42.78698683905029,
+    "generous": 8.568184587733551,
+    "cautious": 19.649286496239494,
+    "physical": 0.9752487531218751,
+    "risky": 0.990025
   },
   "aptitudes": [
     "strategist",
@@ -1517,7 +1575,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 85,
+  "actionCount": 86,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1571,8 +1629,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783977642392,
-  "rev": 132,
+  "updatedAt": 1783977783015,
+  "rev": 133,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1671,7 +1729,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 18,
+      "order_sense": 19,
       "palework": 5,
       "deathsense": 5,
       "shadowstep": 1
@@ -1693,7 +1751,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 3.75
+    "marrow": 4
   },
   "customAbilities": {},
   "precursorAccess": [],

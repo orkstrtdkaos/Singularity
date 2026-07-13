@@ -17,6 +17,7 @@
       },
       "functions": [
         "break",
+        "open",
         "reveal"
       ],
       "narrationHints": "It comes down the way he said it would, exactly where he said, and nothing else is touched.",
@@ -65,6 +66,7 @@
         "destruction_creation": -0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "He looks at the thing and sees where it is already halfway to failing.",
@@ -112,8 +114,8 @@
         "chaos_order": -0.1
       },
       "functions": [
+        "make",
         "mend",
-        "bind",
         "shield"
       ],
       "narrationHints": "It was not there this morning. It is there now, and it is not finished, and it is beautiful.",
@@ -162,7 +164,8 @@
         "destruction_creation": 0.3
       },
       "functions": [
-        "reveal"
+        "reveal",
+        "make"
       ],
       "narrationHints": "She looks at the pile of junk and sees the thing it is about to be.",
       "description": "See what a thing could become — the first gift of the Making.",
@@ -197,5 +200,6 @@
       },
       "tradition": "wright"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

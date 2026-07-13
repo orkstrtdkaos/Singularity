@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 235,
+  "xp": 238,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,7 +42,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 103,
+  "energy": 98,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -529,43 +529,67 @@
         "player": "Read the mud ahead — crouch at the trail's edge and use Order-Sense to find the pattern beneath the ground sign: how many animals, which direction, how recently",
         "summary": "Order-Sense reads the mud — sow and young twenty minutes ahead, something heavy passed through last night and moved on.",
         "narration": "The squall comes from nowhere — a cold gust off the heights that turns the pre-dawn blue to something grayer, drives a thin spatter of rain sideways across the meadow for thirty seconds, and then stops. Not a storm; just the valley changing its mind. The wet grass shivers once and goes still. Corvin glances up, reads it, goes back to walking. Pell turns her collar up.\n\nYou crouch at the trail's edge where the ground softens — a yard of bare mud between the game trace and the first sedge tussocks, boot-chewed by animals coming and going. You let Order-Sense settle rather than push it: a light touch, palms near the surface, reading what's already there.\n\nThe pattern comes up clearly enough. Three distinct disturbance signatures — spaced the way a sounder spreads when it's feeding, not fleeing. The near one is the freshest: a sow's broad front trotter, the dew-edge still sharp, twenty minutes at most. The other two trail her by an hour or more, made last night in softer ground that has since firmed up slightly. One of those older prints has the weight behind it of something heavier — the bull, or something close to a bull's mass. He came through, but he didn't stay. The sow is still in the sedge strip ahead; the young haven't broken from her yet.\n\nYou stand and look at Corvin. \"Sow's close. Twenty minutes, maybe less. Came through here leading — the young are still with her. Something heavier came last night and didn't stay.\" You keep your voice level, the way you'd note a fence-post that needs attention."
+      },
+      {
+        "player": "Read the heavier track more closely with Order-Sense — the bull came through and didn't stay; find out where it went",
+        "summary": "Order-Sense reads the bull's track — northwest, unhurried, destination unclear. Sow and young still ahead.",
+        "narration": "You keep the crouch, palms still near the mud, and let Order-Sense narrow onto the heavier prints — the two with bull-weight, dew-edge softer than the sow's, made somewhere between midnight and first light. The pattern is there but it doesn't resolve cleanly at this range. You get direction: northwest, angling away from the sedge strip, toward the drier scrub on the far side of the fence-line. You get weight — heavy, deliberate, unhurried. What you don't get is a terminus. The trail bends into the canopy and the pattern thins out before it gives you a destination. He moved on. Where he stopped, you can't say.\n\nYou stand and wipe your hands on your thigh. Huginn is still threading north between bare trunks, interval unchanged — whatever he's orienting on is ahead and separate from the bull's line, which means at least for now the two aren't the same problem.\n\nCorvin is already reading your posture. He doesn't ask — he just shifts his grip on the light spear and tilts his head a fraction west, offering the question without words. Pell holds where she is, eyes on the tree-line, letting you speak when you're ready."
       }
     ],
     "lastTurn": {
-      "narration": "The squall comes from nowhere — a cold gust off the heights that turns the pre-dawn blue to something grayer, drives a thin spatter of rain sideways across the meadow for thirty seconds, and then stops. Not a storm; just the valley changing its mind. The wet grass shivers once and goes still. Corvin glances up, reads it, goes back to walking. Pell turns her collar up.\n\nYou crouch at the trail's edge where the ground softens — a yard of bare mud between the game trace and the first sedge tussocks, boot-chewed by animals coming and going. You let Order-Sense settle rather than push it: a light touch, palms near the surface, reading what's already there.\n\nThe pattern comes up clearly enough. Three distinct disturbance signatures — spaced the way a sounder spreads when it's feeding, not fleeing. The near one is the freshest: a sow's broad front trotter, the dew-edge still sharp, twenty minutes at most. The other two trail her by an hour or more, made last night in softer ground that has since firmed up slightly. One of those older prints has the weight behind it of something heavier — the bull, or something close to a bull's mass. He came through, but he didn't stay. The sow is still in the sedge strip ahead; the young haven't broken from her yet.\n\nYou stand and look at Corvin. \"Sow's close. Twenty minutes, maybe less. Came through here leading — the young are still with her. Something heavier came last night and didn't stay.\" You keep your voice level, the way you'd note a fence-post that needs attention.",
-      "sceneSummary": "Order-Sense reads the mud — sow and young twenty minutes ahead, something heavy passed through last night and moved on.",
+      "narration": "You keep the crouch, palms still near the mud, and let Order-Sense narrow onto the heavier prints — the two with bull-weight, dew-edge softer than the sow's, made somewhere between midnight and first light. The pattern is there but it doesn't resolve cleanly at this range. You get direction: northwest, angling away from the sedge strip, toward the drier scrub on the far side of the fence-line. You get weight — heavy, deliberate, unhurried. What you don't get is a terminus. The trail bends into the canopy and the pattern thins out before it gives you a destination. He moved on. Where he stopped, you can't say.\n\nYou stand and wipe your hands on your thigh. Huginn is still threading north between bare trunks, interval unchanged — whatever he's orienting on is ahead and separate from the bull's line, which means at least for now the two aren't the same problem.\n\nCorvin is already reading your posture. He doesn't ask — he just shifts his grip on the light spear and tilts his head a fraction west, offering the question without words. Pell holds where she is, eyes on the tree-line, letting you speak when you're ready.",
+      "sceneSummary": "Order-Sense reads the bull's track — northwest, unhurried, destination unclear. Sow and young still ahead.",
       "choices": [
         {
-          "label": "Press forward slow — close the remaining distance on the sounder before they break back under the canopy at midday",
+          "label": "Move in on the sow and young — northwest puts the bull crosswind; angle into the sedge strip now before they move deeper under the canopy",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {
+            "violence_peace": -0.2
+          },
           "difficulty": 15,
           "intentTags": [
-            "careful",
             "hunt",
-            "stalk"
+            "careful",
+            "approach"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Read the heavier track more closely with Order-Sense — the bull came through and didn't stay; find out where it went",
+          "label": "Tell Corvin and Pell what you read — bull went northwest, sow is twenty minutes ahead — and let the three of you agree on a spread before you enter the tree-line",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "coordinate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Push Order-Sense a little harder on the bull's track — try to find where the pattern resumes past the bend, before committing to the sedge strip",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "scout"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Check in with Huginn — he's already past the tree-line; ask the bird whether the presences north have changed since pre-dawn",
+          "label": "Check Huginn's heading against the bull's northwest line — whistle him back to your shoulder and read whether they match or diverge",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
@@ -574,55 +598,52 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Lay out the read to Pell and Corvin plainly and let them decide the approach — Corvin knows this ground; Pell knows how a hunt should close",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": -3
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line."
+        }
+      ],
       "scene": {
-        "setting": "North meadow game trail, Millbrook — pre-dawn blue-grey after a brief squall, sixty yards from the tree-line, wet willows to the northwest, dew on the grass. Silas crouched at the mud-strip on the trail edge, now rising.",
+        "setting": "North meadow game trail, Millbrook — pre-dawn blue-grey after a brief squall, sixty yards from the tree-line, wet willows to the northwest, dew on the grass. Silas rising from the mud-strip, bull track partially read.",
         "npcsPresent": [
           {
             "name": "Corvin",
-            "state": "Stopped just ahead on the trail, watching Silas read the ground — waiting for the report."
+            "state": "Shifted his grip on the light spear, tilted his head west — asking without speaking, waiting for the report."
           },
           {
             "name": "Pell",
-            "state": "Collar turned up against the squall-wet, standing still, eyes moving between Silas and the tree-line."
+            "state": "Holding still, eyes on the tree-line, collar up, letting Silas speak."
           },
           {
             "name": "Huginn",
-            "state": "Past the tree-line, threading north between bare trunks — interval unchanged."
+            "state": "Still threading north between bare trunks past the tree-line — interval unchanged, heading distinct from the bull's northwest line."
           }
         ],
         "objects": [
           "Deathbound Runic Spear — shouldered, tip forward",
           "Traveler's Pack — on Silas's back",
-          "Game trail — worn trace bending northwest, mud-strip at its edge",
+          "Game trail — worn trace bending northwest",
+          "Mud-strip at the trail edge",
           "Fresh sow-print in the mud — dew-edge sharp, twenty minutes old",
-          "Two older prints behind — one with bull-weight, made last night",
+          "Two older bull-weight prints — midnight to first-light, heading northwest toward drier scrub",
           "Tree-line — sixty yards ahead, canopy bare enough to show grey sky panels",
           "Dew-wet meadow grass"
         ],
         "threads": [
-          "Sow and young are in the sedge strip ahead — twenty minutes, still feeding",
-          "Something heavy came through last night and moved on — direction unknown",
-          "Two or three presences north — patterned, holding ground; Huginn's interval unchanged",
-          "Boar sounder pushes higher due to river smell on low air"
+          "Sow and young in the sedge strip ahead — twenty minutes, still feeding",
+          "Bull went northwest toward drier scrub — destination unread past the canopy bend",
+          "Two or three presences north, patterned, holding ground — Huginn still orienting on them",
+          "Bull's line and Huginn's heading diverge — may be two separate situations"
         ]
       },
       "npcUpdates": [
@@ -630,15 +651,17 @@
           "op": "update",
           "npcId": "corvin",
           "name": "Corvin",
-          "note": "Received Silas's ground-read without comment — waiting for the party to settle on an approach.",
-          "statusNote": "On point at the mud-strip, stopped, watching Silas — waiting for the report before moving."
+          "note": "Read Silas's posture without asking — shifted grip and offered the question silently. Waiting for the report.",
+          "statusNote": "On the game trail, sixty yards from the tree-line, holding and watching Silas for the read on the bull track.",
+          "status": "active"
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Collar up against the squall-wet, eyes on the trail and tree-line.",
-          "statusNote": "Standing still on the game trail sixty yards from the tree-line, kit on her back, alert."
+          "note": "Holding position, eyes on the tree-line — letting Silas take the lead on the ground-read.",
+          "statusNote": "On the game trail at the mud-strip, collar up, watching the tree-line.",
+          "status": "active"
         }
       ],
       "codexUpdates": [
@@ -647,49 +670,51 @@
           "label": "Millbrook",
           "kind": "event",
           "entityId": "millbrook",
-          "fact": "Order-Sense at the mud-strip (World-day 14 pre-dawn): sow and young in the sedge strip ahead — twenty minutes out. Something heavier passed through last night and did not stay. Bull present at this range but not fixed to the sounder.",
+          "fact": "Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn's north heading diverge — two separate vectors.",
           "links": [
-            "corvin",
             "aldric-provisioning-deal",
+            "corvin",
+            "pell",
             "huginn"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief crouching read of the trail — a few minutes, no more."
+        "why": "A brief crouch at the mud-strip — time to read the ground, no more."
       }
     },
     "sceneState": {
-      "setting": "North meadow game trail, Millbrook — pre-dawn blue-grey after a brief squall, sixty yards from the tree-line, wet willows to the northwest, dew on the grass. Silas crouched at the mud-strip on the trail edge, now rising.",
+      "setting": "North meadow game trail, Millbrook — pre-dawn blue-grey after a brief squall, sixty yards from the tree-line, wet willows to the northwest, dew on the grass. Silas rising from the mud-strip, bull track partially read.",
       "npcsPresent": [
         {
           "name": "Corvin",
-          "state": "Stopped just ahead on the trail, watching Silas read the ground — waiting for the report."
+          "state": "Shifted his grip on the light spear, tilted his head west — asking without speaking, waiting for the report."
         },
         {
           "name": "Pell",
-          "state": "Collar turned up against the squall-wet, standing still, eyes moving between Silas and the tree-line."
+          "state": "Holding still, eyes on the tree-line, collar up, letting Silas speak."
         },
         {
           "name": "Huginn",
-          "state": "Past the tree-line, threading north between bare trunks — interval unchanged."
+          "state": "Still threading north between bare trunks past the tree-line — interval unchanged, heading distinct from the bull's nort"
         }
       ],
       "objects": [
         "Deathbound Runic Spear — shouldered, tip forward",
         "Traveler's Pack — on Silas's back",
-        "Game trail — worn trace bending northwest, mud-strip at its edge",
+        "Game trail — worn trace bending northwest",
+        "Mud-strip at the trail edge",
         "Fresh sow-print in the mud — dew-edge sharp, twenty minutes old",
-        "Two older prints behind — one with bull-weight, made last night",
+        "Two older bull-weight prints — midnight to first-light, heading northwest toward",
         "Tree-line — sixty yards ahead, canopy bare enough to show grey sky panels",
         "Dew-wet meadow grass"
       ],
       "threads": [
-        "Sow and young are in the sedge strip ahead — twenty minutes, still feeding",
-        "Something heavy came through last night and moved on — direction unknown",
-        "Two or three presences north — patterned, holding ground; Huginn's interval unchanged",
-        "Boar sounder pushes higher due to river smell on low air"
+        "Sow and young in the sedge strip ahead — twenty minutes, still feeding",
+        "Bull went northwest toward drier scrub — destination unread past the canopy bend",
+        "Two or three presences north, patterned, holding ground — Huginn still orienting on them",
+        "Bull's line and Huginn's heading diverge — may be two separate situations"
       ]
     }
   },
@@ -716,14 +741,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong.",
         "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling.",
         "Modified light spear-tip offered to Corvin — hunt party one conversation from being formally assembled. Arrangement with Corvin not yet sealed.",
         "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin.",
         "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning.",
         "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light.",
         "Hunt party assembled at the forge, pre-dawn — Silas has confirmed two or three presences north, patterned and holding. Departing at first light.",
-        "Hunt party cleared the north gate at pre-dawn — moving into the meadow, Huginn holding north, two or three presences still ahead."
+        "Hunt party cleared the north gate at pre-dawn — moving into the meadow, Huginn holding north, two or three presences still ahead.",
+        "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -831,7 +856,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Offered the forge floor without ceremony — canvas behind the bellows, dry and out of the wind. Settled to her own bedroll without lingering on it.",
         "[d1] Settled quietly into the night; gave a plain and certain answer about keeping the forge, then something quieter about the iron — no language yet for what she means. Turned the ques",
         "[d1] Listened to Silas's account of the short way and the vanished path without interruption — offered 'that's not nothing' as plain assessment, then turned the question back on him",
         "[d1] Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once w",
@@ -840,7 +864,8 @@
         "[d1] Vacated the forge before Silas woke — already in the yard with Corvin, speaking low about the north path. Ready to move.",
         "[d1] Shouldered her kit and moved out without a word when Huginn dropped from the lintel — reading the bird's orientation as cleanly as Silas did.",
         "[d1] Noted Corvin's direction observation quietly — 'Same direction we're heading.' Not alarmed, just present.",
-        "[d1] Collar up against the squall-wet, eyes on the trail and tree-line."
+        "[d1] Collar up against the squall-wet, eyes on the trail and tree-line.",
+        "[d1] Holding position, eyes on the tree-line — letting Silas take the lead on the ground-read."
       ],
       "knownFacts": [
         "The spear's thread to Huginn is now present and mutual — she saw the coals catch the blade at the wrong angle and filed it.",
@@ -861,7 +886,7 @@
         "attentive observation — caught an unseen working"
       ],
       "status": "active",
-      "statusNote": "Standing still on the game trail sixty yards from the tree-line, kit on her back, alert.",
+      "statusNote": "On the game trail at the mud-strip, collar up, watching the tree-line.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -921,7 +946,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Accepted the modified light spear-tip and committed to the hunt on Silas's framing — north together tomorrow, not a formal arrangement. The reframe resolved his hesitation cleanly.",
         "[d1] Latched the gate and walked back with the group — two words about drainage, then quiet. Hunt locked in.",
         "[d1] Heard the exchange between Silas and Pell without turning around — slowed his pace just enough to walk with them again.",
         "[d1] Walking ahead with careful disregard for the exchange between Silas and Pell.",
@@ -930,7 +954,8 @@
         "[d1] Present in the yard before first light as promised — answering Pell, ready to move north.",
         "[d1] Took point naturally on the north track — knows the fence-lines, pace easy and deliberate.",
         "[d1] Briefed the party on boar ground — wet strip along the fence-line, mornings, quarter mile in. Noted sounder pushing higher ground due to river smell on low air. Said it flat, like ",
-        "[d1] Received Silas's ground-read without comment — waiting for the party to settle on an approach."
+        "[d1] Received Silas's ground-read without comment — waiting for the party to settle on an approach.",
+        "[d1] Read Silas's posture without asking — shifted grip and offered the question silently. Waiting for the report."
       ],
       "knownFacts": [
         "Fish not jumping the shallows at first light — yesterday and today",
@@ -951,7 +976,7 @@
         "practical acceptance"
       ],
       "status": "active",
-      "statusNote": "On point at the mud-strip, stopped, watching Silas — waiting for the report before moving.",
+      "statusNote": "On the game trail, sixty yards from the tree-line, holding and watching Silas for the read on the bull track.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1164,7 +1189,8 @@
           "[d1] Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm.",
           "[d1] Order-Sense at the forge lintel (World-day 14 pre-dawn): north now reads as two or three distinct presences — each with its own cadence, loosely synchronized, alive, holding ground. Not approaching. T",
           "[d1] Boar sounder in the north wood has been pushing rooting ground higher — away from streamside sedge toward drier scrub — because the river smell is carrying north on the low air. Corvin has been tracki",
-          "[d1] Order-Sense at the mud-strip (World-day 14 pre-dawn): sow and young in the sedge strip ahead — twenty minutes out. Something heavier passed through last night and did not stay. Bull present at this ra"
+          "[d1] Order-Sense at the mud-strip (World-day 14 pre-dawn): sow and young in the sedge strip ahead — twenty minutes out. Something heavier passed through last night and did not stay. Bull present at this ra",
+          "[d1] Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn"
         ],
         "links": [
           "disputed-zone",
@@ -1430,11 +1456,11 @@
     }
   },
   "tendencies": {
-    "strategic": 31.461831273534255,
-    "cerebral": 16.73025064340635,
-    "social": 41.027790129894356,
-    "generous": 9.05388399919047,
-    "cautious": 16.697325191946064
+    "strategic": 31.304522117166584,
+    "cerebral": 17.64659939018932,
+    "social": 40.822651179244886,
+    "generous": 9.008614579194518,
+    "cautious": 17.613838565986335
   },
   "aptitudes": [
     "strategist",
@@ -1442,7 +1468,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 75,
+  "actionCount": 76,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1488,8 +1514,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783972790471,
-  "rev": 117,
+  "updatedAt": 1783972933555,
+  "rev": 118,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1582,7 +1608,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 15,
+      "order_sense": 16,
       "palework": 5,
       "deathsense": 5
     },

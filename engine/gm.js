@@ -408,6 +408,31 @@ export async function gmAsk(ctx, question) {
   }
 }
 
+/** SNG-086 — the THIRD creation door. A free-text description → a placement on the great circle,
+ *  with REASONS and COSTS NAMED. The MODEL proposes poles + prose; the ENGINE (app.js) validates
+ *  every id against the ring and computes antipodes/neighbours itself (Design Law 1 — the model never
+ *  owns ring geometry). `ring`/`folk`/`backgrounds`/`companions` are compact catalogs built from
+ *  loaded content so the model can only choose real ids. Returns raw JSON (caller sanitizes). */
+export async function suggestBuild({ description, ring, folk, backgrounds, companions }) {
+  const sys = `You are a character-creation guide for SINGULARITY, a world whose magic is a RING of 24 peoples — "the great circle." Each people is a craft-tradition at a pole; directly across the ring sits its ANTITHESIS, which is CLOSED forever to anyone who takes that pole (only rare cross-pole braids cross it). A character has three domains: PRIMARY (who they are — all they can master), SECONDARY (reaches tier III), TERTIARY (reaches tier II, and MUST be a ring-neighbour of the secondary).
+A player has described who they want to be. Map their words onto the ring. For EACH domain give the PEOPLE and WHY — and NAME THE COST: what taking it CLOSES, honestly, and why that cost fits (or doesn't fit) them. ⛔ A suggestion without its cost is a sales pitch, not advice. Suggest, never impose.
+Be honest about what does NOT need a domain: some things are FOLK crafts (open to all, free — e.g. a hunter, a healer of the ordinary kind) and some are not domains at all (a temperament like "romantic" is HOW you play, not a pole). Do not sell a slot the player does not need.
+ORIGIN is which people they were BORN to — it MAY differ from the primary (a valleyfolk can learn death-craft). Pick the origin that best fits their words; default to a valley origin if they read as ordinary-born.
+Reply with ONLY JSON:
+{"primary":{"traditionId":"id","why":"one sentence","cost":"what it closes + why the cost fits them, one sentence"},
+ "secondary":{"traditionId":"id","why":"...","cost":"..."},
+ "tertiary":{"traditionId":"id","why":"...","cost":"..."},
+ "origin":{"id":"id","why":"which people they are FROM"},
+ "background":{"id":"id","why":"one sentence"},
+ "form":"a short physical-form description for the portrait drawn from their words, or empty string",
+ "companion":{"id":"id","why":"one sentence"} or null,
+ "folk":[{"name":"folk craft name","why":"free — a folk craft, open to all"}],
+ "notDomains":[{"label":"the trait they named","why":"why it needs no domain"}]}
+Use ONLY ids from the lists below. The tertiary MUST be a ring-neighbour of your secondary (the ring lists each people's neighbours). Never suggest a people that is the antipode of one you already chose.`;
+  const content = `THE RING — id · people · pole (axis) · craft · antipode · neighbours:\n${ring}\n\nFOLK CRAFTS (free, open to all — never a domain):\n${folk}\n\nBACKGROUNDS — id · name:\n${backgrounds}\n\nSTARTING COMPANIONS — id · name · role:\n${companions}\n\nPLAYER'S DESCRIPTION:\n"${description}"`;
+  return callClaudeJSON([{ role: "user", content }], { task: "describe-build", system: sys, maxTokens: 1500 });
+}
+
 /** Generate a bio draft from the creation choices (player edits before accepting). */
 export async function generateBio({ name, origin, background, attributes }) {
   const sys = `You write short character bios for an RPG set in the Valley of Echoes — a post-de-technologizing world (15 years after humanity voluntarily stepped back from its own technology) with two local civilizations: the sonic Harmonic Heights and the photonic Radiant Plateau, plus unaligned valley-floor farming communities. Grounded, specific, warm; no cliches, no chosen-one tropes. Reply with ONLY JSON:

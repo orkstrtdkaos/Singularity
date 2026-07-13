@@ -6,7 +6,7 @@ import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "./engine/quests.js";
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.43";
+const APP_VERSION = "1.8.44";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -1718,11 +1718,15 @@ function renderCreate() {
     if (!PRO()?.openings?.length) { draw(); return; } // no prologue content → straight to the form
     chrome(`<div class="screen" style="max-width:620px">
       <h2>Begin</h2>
-      <p class="hint" style="margin-bottom:16px">Two ways to make a character. Play the opening and the world tells you who you turned out to be. Or build one yourself, if you already know.</p>
+      <p class="hint" style="margin-bottom:16px">Three ways to make a character. Say who you want to be and the game shows you where that lands. Play an opening and the world tells you who you turned out to be. Or build one yourself, if you already know.</p>
       <div class="create-door">
+        <button class="door-card" id="door-describe">
+          <strong>✎ Describe yourself</strong>
+          <span>Say who you want to be, in your own words — "a girl who talks to animals and cannot lie." The game shows you where that lands on the great circle, why, and what it costs. Adjust anything. The gentlest door.</span>
+        </button>
         <button class="door-card" id="door-play">
           <strong>▶ Play the opening</strong>
-          <span>Recommended — pick a name and a look, then live a short scene. Your skills, your companion, and your place on the great circle come from what you actually do. You'll learn the game by playing it.</span>
+          <span>Pick a name and a look, then live a short scene. Your skills, your companion, and your place on the great circle come from what you actually do. You'll learn the game by playing it.</span>
         </button>
         <button class="door-card" id="door-form">
           <strong>⚡ Quick start</strong>
@@ -1730,8 +1734,129 @@ function renderCreate() {
         </button>
       </div>
     </div>`);
+    document.getElementById("door-describe").onclick = () => renderDescribeDoor();
     document.getElementById("door-play").onclick = () => renderPrologueIntro();
     document.getElementById("door-form").onclick = () => draw();
+  }
+
+  // ---------- SNG-086: THE THIRD DOOR — "describe yourself" → a placement on the great circle ----------
+
+  /** The model proposes poles + prose; here the ENGINE validates every id against the ring and
+   *  enforces the geometry (secondary ≠ primary/antipode; tertiary a ring-neighbour of secondary,
+   *  never a closed pole). Design Law 1 — the model never owns ring geometry. */
+  function sanitizeSuggestedDomains(sug, idx) {
+    const ok = id => id && idx.byId?.[id] && !isFolkTradition(id, idx);
+    let primary = ok(sug?.primary?.traditionId) ? sug.primary.traditionId : null;
+    let secondary = ok(sug?.secondary?.traditionId) ? sug.secondary.traditionId : null;
+    let tertiary = ok(sug?.tertiary?.traditionId) ? sug.tertiary.traditionId : null;
+    const antiP = primary ? antipodeOf(primary, idx) : null;
+    if (secondary && (secondary === primary || secondary === antiP)) secondary = null;
+    const antiS = secondary ? antipodeOf(secondary, idx) : null;
+    const terNbrs = secondary ? new Set(neighborsOf(secondary, idx)) : new Set();
+    if (tertiary && (tertiary === primary || tertiary === secondary || tertiary === antiP || tertiary === antiS || !terNbrs.has(tertiary))) tertiary = null;
+    return { primary, secondary, tertiary };
+  }
+
+  function renderDescribeDoor(err = "") {
+    const idx = CONTENT.traditionIndex;
+    if (!idx) { draw(); return; } // no ring content → fall back to the quick-start form
+    chrome(`<div class="screen" style="max-width:620px">
+      <h2>Describe yourself</h2>
+      <p class="hint" style="margin-bottom:12px">Say who you want to be — species or look, temperament, what you're good at, what you care about. Whole sentences or a scatter of words, either works. The game reads it and shows you where you land on the great circle, and what it costs. You can change everything after.</p>
+      ${err ? `<p class="hint" style="color:var(--warn,#c88); margin-bottom:10px">${esc(err)}</p>` : ""}
+      <div class="field"><label>Name</label><input id="d-name" value="${esc(state.name)}" placeholder="their name"></div>
+      <div class="field"><label>Who are you?</label>
+        <textarea id="d-desc" rows="5" style="width:100%" placeholder="e.g. a girl who talks to animals and cannot lie&#10;or: a necromancer, slight of frame, very smart, likes order, a romantic and a hunter">${esc(state._describeText || "")}</textarea></div>
+      <div style="display:flex; gap:8px; margin-top:10px">
+        <button class="btn secondary" id="d-back">Back</button>
+        <button class="btn" id="d-go">✦ Show me where I land</button>
+      </div>
+      <div class="hint" id="d-status" style="margin-top:10px"></div>
+    </div>`);
+    document.getElementById("d-name").oninput = e => { state.name = e.target.value; };
+    document.getElementById("d-desc").oninput = e => { state._describeText = e.target.value; };
+    document.getElementById("d-back").onclick = () => renderCreateDoor();
+    document.getElementById("d-go").onclick = async () => {
+      state.name = document.getElementById("d-name").value.trim();
+      state._describeText = document.getElementById("d-desc").value.trim();
+      if (!state._describeText) { renderDescribeDoor("Tell me a little about who you want to be first."); return; }
+      const status = document.getElementById("d-status");
+      const btn = document.getElementById("d-go"); btn.disabled = true;
+      status.textContent = "Reading the circle for who you are…";
+      // build compact catalogs so the model can only choose real ids (Design Law 1)
+      const nm = t => traditionLabel(t);
+      const ring = ringOrder(idx).map(t => { const tr = idx.byId[t];
+        return `${t} · ${tr.name} · ${tr.pole || "?"} (${tr.axis || "?"}) · ${tr.craft || "?"} · antipode:${antipodeOf(t, idx) || "?"} · neighbours:${neighborsOf(t, idx).join(",")}`; }).join("\n");
+      const folk = (CONTENT.traditions?.folkTraditions || []).map(f => `${f.name || f.traditionId} — ${f.aesthetic || "a valley folk-craft, open to all"}`).join("\n") || "(none)";
+      const bgs = (CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback()).map(b => `${b.id} · ${b.name}`).join("\n");
+      const comps = Object.values(CONTENT.companions || {}).filter(c => c.startingOption).map(c => `${c.id} · ${c.name} · ${(c.role || "").slice(0, 60)}`).join("\n") || "(none)";
+      try {
+        const sug = await suggestBuild({ description: state._describeText, ring, folk, backgrounds: bgs, companions: comps });
+        state._suggestion = sug;
+        renderDescribeReveal();
+      } catch (e) {
+        btn.disabled = false;
+        status.textContent = "The reading slipped (" + String(e.message || e).slice(0, 70) + "). Try again, or use Quick start / Play the opening.";
+      }
+    };
+  }
+
+  function renderDescribeReveal() {
+    const idx = CONTENT.traditionIndex;
+    const sug = state._suggestion || {};
+    const d = sanitizeSuggestedDomains(sug, idx);
+    state.domains = d;
+    // carry the model's non-domain suggestions onto the build (validated where they gate anything)
+    const bgs = CONTENT.backgrounds?.length ? CONTENT.backgrounds : backgroundsFallback();
+    if (sug.background?.id && bgs.some(b => b.id === sug.background.id)) state.background = sug.background.id;
+    const origins = ORIGINS();
+    if (sug.origin?.id && origins.some(o => o.id === sug.origin.id)) { state.origin = sug.origin.id; state.startingLocation = defaultStart(state.origin); }
+    if (typeof sug.form === "string" && sug.form.trim()) state.form = sug.form.trim();
+    const roster = Object.values(CONTENT.companions || {}).filter(c => c.startingOption);
+    if (sug.companion?.id && roster.some(c => c.id === sug.companion.id)) state.companionId = sug.companion.id;
+
+    const antiP = d.primary ? antipodeOf(d.primary, idx) : null;
+    const closed = new Set([antiP, d.secondary && antipodeOf(d.secondary, idx)].filter(Boolean));
+    const circle = domainCircleSVG(idx, { primary: d.primary, secondary: d.secondary, tertiary: d.tertiary, closed,
+      selectable: () => false, centerTop: "where you land", centerSub: d.primary ? traditionLabel(d.primary) : "" });
+    // one slot card: people · why · what it CLOSES (engine-computed antipode) · the model's cost prose
+    const slotCard = (label, slot, modelSlot) => {
+      if (!slot) return "";
+      const anti = antipodeOf(slot, idx);
+      return `<div class="cs-block" style="margin:6px 0">
+        <div><span class="dom-slot-label">${label}</span> — <strong>${esc(traditionLabel(slot))}</strong></div>
+        ${modelSlot?.why ? `<div class="hint" style="margin-top:4px">${esc(modelSlot.why)}</div>` : ""}
+        <div class="hint" style="margin-top:4px">Closes <strong>${esc(traditionLabel(anti))}</strong>${modelSlot?.cost ? ` — ${esc(modelSlot.cost)}` : "."}</div>
+      </div>`;
+    };
+    const folk = Array.isArray(sug.folk) ? sug.folk.filter(f => f?.name) : [];
+    const notDom = Array.isArray(sug.notDomains) ? sug.notDomains.filter(n => n?.label) : [];
+    const comp = state.companionId ? roster.find(c => c.id === state.companionId) : null;
+    chrome(`<div class="screen" style="max-width:660px">
+      <h2>Where you land on the Great Circle</h2>
+      <p class="hint" style="margin-bottom:8px">This is a suggestion, not a sentence — read the reasons and the costs, then keep it or adjust anything.</p>
+      ${circle}
+      ${d.primary ? slotCard("Primary", d.primary, sug.primary) : `<div class="cs-block"><div class="hint">The reading couldn't place a primary from that — try more detail, or pick on the circle.</div></div>`}
+      ${slotCard("Secondary", d.secondary, sug.secondary)}
+      ${slotCard("Tertiary", d.tertiary, sug.tertiary)}
+      ${antiP ? `<div class="hint" style="margin:8px 0"><strong>⛔ ${esc(traditionLabel(antiP))} is closed to you forever</strong> — the far pole of what you are. Only a cross-pole braid, taught by no one, ever crosses it.</div>` : ""}
+      <div class="cs-block" style="margin:6px 0">
+        ${sug.origin?.why ? `<div><span class="dom-slot-label">Born</span> — <strong>${esc((origins.find(o => o.id === state.origin) || {}).name || state.origin)}</strong> <span class="hint">${esc(sug.origin.why)}</span></div>` : ""}
+        ${sug.background?.why ? `<div style="margin-top:4px"><span class="dom-slot-label">Background</span> — <strong>${esc(backgroundById(state.background)?.name || state.background)}</strong> <span class="hint">${esc(sug.background.why)}</span></div>` : ""}
+        ${state.form ? `<div style="margin-top:4px"><span class="dom-slot-label">Form</span> <span class="hint">${esc(state.form)}</span></div>` : ""}
+        ${comp ? `<div style="margin-top:4px"><span class="dom-slot-label">Companion</span> — <strong>${esc(comp.name)}</strong> ${sug.companion?.why ? `<span class="hint">${esc(sug.companion.why)}</span>` : ""}</div>` : ""}
+      </div>
+      ${folk.length ? `<div class="hint" style="margin:6px 0">${folk.map(f => `<div>✓ <strong>${esc(f.name)}</strong> — ${esc(f.why || "free; a folk craft, open to all")}</div>`).join("")}</div>` : ""}
+      ${notDom.length ? `<div class="hint" style="margin:6px 0">${notDom.map(n => `<div>· <strong>${esc(n.label)}</strong> isn't a domain — ${esc(n.why || "it's how you play, not a pole")}</div>`).join("")}</div>` : ""}
+      <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap">
+        <button class="btn secondary" id="dr-rewrite">← Rewrite</button>
+        <button class="btn secondary" id="dr-adjust">Adjust on the circle</button>
+        <button class="btn" id="dr-confirm" ${d.primary ? "" : "disabled"}>Yes — this is who I am</button>
+      </div>
+    </div>`);
+    document.getElementById("dr-rewrite").onclick = () => renderDescribeDoor();
+    document.getElementById("dr-adjust").onclick = () => { state.domainReturn = null; renderDomainStep(); };
+    document.getElementById("dr-confirm").onclick = () => renderAbilityStep();
   }
 
   /** Prologue step 1 (SNG-063 order): name → form → origin (light seed — your people). Domains and

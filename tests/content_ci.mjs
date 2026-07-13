@@ -30,10 +30,12 @@ const PACKS = [
   { key: "valley", dir: "content/packs/valley", manifest: "content/packs/valley/manifest.json" },
 ];
 
-// Valley subdirs that are PURELY manifest-driven (every .json must be listed). Excludes dirs with
-// files the loader fetches directly (core/rules holds traditions/origins/backgrounds/quest_structure;
-// valley root holds prologue.json) — those are not manifest whitelists.
-const STRICT_DIRS = { valley: ["locations", "npcs", "events", "companions", "encounters", "items", "lore"] };
+// Subdirs that are PURELY manifest-driven (every .json must be listed). SNG-092: core/rules and
+// core/abilities are now whitelists too — every rules + abilities file is in provides.* and the loader
+// reads ONLY through the manifest (no hardcoded paths, no positional rules[0]). This is the check that
+// was missing: it used to cover the VALLEY manifest only, so an unlisted core rules or ability file
+// (attribute_gates jumping to rules[0]; 4 reach_* files never loading) sailed straight through.
+const STRICT_DIRS = { core: ["rules", "abilities"], valley: ["locations", "npcs", "events", "companions", "encounters", "items", "lore"] };
 
 for (const pack of PACKS) {
   const m = rj(pack.manifest);

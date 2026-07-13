@@ -36,32 +36,28 @@ export async function loadContent() {
   const valley = await fetchJSON("content/packs/valley/manifest.json");
 
   const spectrums = await fetchJSON(`content/packs/core/${index.provides.spectrums}`);
-  const rules = await fetchJSON(`content/packs/core/${index.provides.rules[0]}`);
-  let emergence = { recipes: [], branchTemplates: [] };
-  const emergencePath = (index.provides.rules || []).find(r => r.includes("emergence"));
-  if (emergencePath) { try { emergence = await fetchJSON(`content/packs/core/${emergencePath}`); } catch { /* optional */ } }
-  let attributeGates = { gates: {} }, skillCapacity = { skillsKnownByLevel: {} };
-  const gatesPath = (index.provides.rules || []).find(r => r.includes("attribute_gates"));
-  if (gatesPath) { try { attributeGates = await fetchJSON(`content/packs/core/${gatesPath}`); } catch { /* optional */ } }
-  const capPath = (index.provides.rules || []).find(r => r.includes("skill_capacity"));
-  if (capPath) { try { skillCapacity = await fetchJSON(`content/packs/core/${capPath}`); } catch { /* optional */ } }
-  let locationAffinities = { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} };
-  const affPath = (index.provides.rules || []).find(r => r.includes("location_affinities"));
-  if (affPath) { try { locationAffinities = await fetchJSON(`content/packs/core/${affPath}`); } catch { /* optional */ } }
-  let intensity = { steps: {} };
-  const intPath = (index.provides.rules || []).find(r => r.includes("intensity_scaling"));
-  if (intPath) { try { intensity = await fetchJSON(`content/packs/core/${intPath}`); } catch { /* optional */ } }
-  let branchForks = { forks: {} };
-  const forkPath = (index.provides.rules || []).find(r => r.includes("branch_forks"));
-  if (forkPath) { try { branchForks = await fetchJSON(`content/packs/core/${forkPath}`); } catch { /* optional */ } }
-  // SNG-055/059: the great-circle traditions map (domain-access model). Fetched directly (not yet
-  // in the manifest). Optional — absence leaves the domain gates ungoverned (open), never breaks load.
-  let traditions = null, traditionIndex = null;
-  try {
-    const tradPath = (index.provides.rules || []).find(r => r.includes("traditions"));
-    traditions = await fetchJSON(tradPath ? `content/packs/core/${tradPath}` : "content/packs/core/rules/traditions.json");
-    traditionIndex = buildTraditionIndex(traditions);
-  } catch { /* domains ungoverned */ }
+  // SNG-092: ONE loading mechanism. Every core rules file resolves through the manifest's
+  // provides.rules by NAME — never by array position (rules[0] silently became attribute_gates.json
+  // when the manifest was re-registered, which nulls baseChance/d100/energy) and never by a hardcoded
+  // path (origins/backgrounds/regions/accords used to bypass the manifest entirely). rulePath finds the
+  // entry by the file's distinctive stem; the array's ORDER never matters again.
+  const rulePath = name => { const p = (index.provides.rules || []).find(r => r.includes(name)); return p ? `content/packs/core/${p}` : null; };
+  const resPath = rulePath("resolution");
+  if (!resPath) throw new Error("manifest: core provides.rules is missing resolution.json (the base rules)");
+  const rules = await fetchJSON(resPath);
+  // Every optional core rule loads the same way: found by name in the manifest, fetched, fallback on
+  // a miss. No inline .find(), no hardcoded path, no positional index.
+  const loadRule = async (name, fallback) => { const p = rulePath(name); if (!p) return fallback; try { return await fetchJSON(p); } catch { return fallback; } };
+  const emergence = await loadRule("emergence", { recipes: [], branchTemplates: [] });
+  const attributeGates = await loadRule("attribute_gates", { gates: {} });
+  const skillCapacity = await loadRule("skill_capacity", { skillsKnownByLevel: {} });
+  const locationAffinities = await loadRule("location_affinities", { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} });
+  const intensity = await loadRule("intensity_scaling", { steps: {} });
+  const branchForks = await loadRule("branch_forks", { forks: {} });
+  // SNG-055/059: the great-circle traditions map (domain-access model). Optional — absence leaves the
+  // domain gates ungoverned (open), never breaks load.
+  let traditions = await loadRule("traditions", null), traditionIndex = null;
+  if (traditions) { try { traditionIndex = buildTraditionIndex(traditions); } catch { traditions = null; } }
 
   const abilities = {};
   for (const path of index.provides.abilities) {
@@ -135,27 +131,17 @@ export async function loadContent() {
   for (const t of ["npc", "location", "arc"]) {
     try { genSchemas[t] = await fetchJSON(`schemas/${t}.schema.json`); } catch { /* type ungeneratable */ }
   }
-  // SNG-063: origins (27 peoples) + backgrounds (15) — authored content (were hardcoded). Fetched
-  // directly; optional (creation falls back to a minimal set if absent).
-  let origins = [], backgrounds = [];
-  try { origins = (await fetchJSON("content/packs/core/rules/origins.json")).origins || []; } catch { /* fallback in-app */ }
-  try { backgrounds = (await fetchJSON("content/packs/core/rules/backgrounds.json")).backgrounds || []; } catch { /* fallback in-app */ }
-  // SNG-082: authored terrain — 25 regions with palette/terrain/elevation/features. Data-driven so a
+  // SNG-063: origins (27 peoples) + backgrounds (15). SNG-092: via the manifest, not a hardcoded path.
+  const origins = (await loadRule("origins", {})).origins || [];
+  const backgrounds = (await loadRule("backgrounds", {})).backgrounds || [];
+  // SNG-082: authored terrain — regions with palette/terrain/elevation/features. Data-driven so a
   // generated location inherits the right ground. Optional (a miss = the map renders without terrain).
-  let regions = [];
-  try { regions = (await fetchJSON("content/packs/core/rules/regions.json")).regions || []; } catch { /* no terrain */ }
+  const regions = (await loadRule("regions", {})).regions || [];
   // SNG-089: the Accords — 7 crafts FREELY ACCESSED (not free to learn: you still spend the point;
   // simply ungated by origin/domain/ring-penalty; the tuition is the JOURNEY to a waygate). Tag each
-  // signatory ability with `accord` so the learn-gate lets anyone take it. Optional (a miss = the
-  // crafts stay gated like any other).
-  let accords = null;
-  try {
-    accords = await fetchJSON("content/packs/core/rules/the_accords.json");
-    for (const sig of (accords.signatories || [])) {
-      const ab = abilities[sig.opens];
-      if (ab) ab.accord = sig.tradition || true;
-    }
-  } catch { /* no accords → crafts stay gated */ }
+  // signatory ability with `accord` so the learn-gate lets anyone take it.
+  const accords = await loadRule("the_accords", null);
+  if (accords) for (const sig of (accords.signatories || [])) { const ab = abilities[sig.opens]; if (ab) ab.accord = sig.tradition || true; }
   // SNG-062: the Prologue — character creation as a played opening. Fetched directly. Optional
   // (absence falls back to the quick-start form; never breaks load).
   let prologue = null;

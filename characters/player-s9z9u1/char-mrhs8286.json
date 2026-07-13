@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.4657267738531534
+    "spectrumId": -0.49244043516049574
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -349,42 +349,25 @@
         "player": "Laugh at the joke for real... then 'Pell Marsh' say it once, like you're setting it somewhere you won't lose it.",
         "summary": "Silas commits Pell's full name to memory on the lane east; the willow and Corvin's furlong come into view.",
         "narration": "The laugh comes out before you can shape it — genuine, a little surprised at itself, the kind that puts a small hitch in your stride. Pell catches it from the corner of her eye and the corner of her mouth moves, just barely, which is probably her version of laughing.\n\nYou walk another few paces and let the quiet settle back in. The lane verge runs with early clover, a fence-post listing into it where the ground went soft over winter. Somewhere ahead, past the second line of posts, Huginn has already vanished into the pale light. Good bird. Probably at the willow already.\n\n'Pell Marsh,' you say, once — not to her, not to the lane, just setting it somewhere it won't slide off. Like a tool placed on the right hook rather than left on a bench. She glances sideways. Says nothing. But she hears the care in it, because she hears everything in that flat, unhurried way she has, and she doesn't correct you or deflect it. She just keeps walking.\n\nThe east furlong is close now — you can see the second fence-line, and past it, the smudge of a willow going yellow-green at the tips with early spring. Left fork. Corvin will be there, mending something he half-broke or building something half-thought-through. Modified Light Spear-Tip wrapped in your pack, the assembled mid-weight in hand, Pell Marsh on your left. The morning is good."
+      },
+      {
+        "player": "It has a quite, yet capable beauty to it... as do you.  Then walk up and introduce yourself to Corvin and see what he's up to.",
+        "summary": "Silas introduces himself to Corvin at the east furlong — the hunt is one conversation away.",
+        "narration": "The left fork past the willow opens into a long narrow furlong — winter-pale grass, a low drystone wall along the south edge, and Corvin. He's crouched over a fence-section laid flat on the ground, wrestling a cross-rail back into its mortise with the patient irritation of a man who has done this before and expects to do it again. He doesn't look up immediately. The repair is half-done and losing the argument.\n\nYou take in the furlong for a moment — the morning light flat and even across the stubble, a crow picking at something near the far wall, the river's gray-green bend just visible past the tree-line to the north. There's a quiet capability to the whole stretch: worked earth, tended walls, the particular order of a place someone maintains without being told. *As do you,* you think, clocking Corvin before he's clocked you — broad in the shoulder, younger than Aldric, moving with the compact economy of someone who works outside in all weathers. Then you step forward.\n\n\"Silas Weir,\" you say, and let the assembled spear rest easy at your side so it reads as a carried thing rather than a pointed one. \"Pell thought I should find you before I went north. She was right.\" You tip your chin at the fence-section on the ground. \"You want a hand with that first, or shall we talk while you're losing to it?\"\n\nPell has stopped a few paces back, thumbs hooked in her coat pockets, watching Corvin with the particular attention she gives to fires she's not sure are out. Huginn is somewhere in the tree-line ahead — you can feel the pull of its attention, northward, toward the river bend."
       }
     ],
     "lastTurn": {
-      "narration": "The laugh comes out before you can shape it — genuine, a little surprised at itself, the kind that puts a small hitch in your stride. Pell catches it from the corner of her eye and the corner of her mouth moves, just barely, which is probably her version of laughing.\n\nYou walk another few paces and let the quiet settle back in. The lane verge runs with early clover, a fence-post listing into it where the ground went soft over winter. Somewhere ahead, past the second line of posts, Huginn has already vanished into the pale light. Good bird. Probably at the willow already.\n\n'Pell Marsh,' you say, once — not to her, not to the lane, just setting it somewhere it won't slide off. Like a tool placed on the right hook rather than left on a bench. She glances sideways. Says nothing. But she hears the care in it, because she hears everything in that flat, unhurried way she has, and she doesn't correct you or deflect it. She just keeps walking.\n\nThe east furlong is close now — you can see the second fence-line, and past it, the smudge of a willow going yellow-green at the tips with early spring. Left fork. Corvin will be there, mending something he half-broke or building something half-thought-through. Modified Light Spear-Tip wrapped in your pack, the assembled mid-weight in hand, Pell Marsh on your left. The morning is good.",
-      "sceneSummary": "Silas commits Pell's full name to memory on the lane east; the willow and Corvin's furlong come into view.",
+      "narration": "The left fork past the willow opens into a long narrow furlong — winter-pale grass, a low drystone wall along the south edge, and Corvin. He's crouched over a fence-section laid flat on the ground, wrestling a cross-rail back into its mortise with the patient irritation of a man who has done this before and expects to do it again. He doesn't look up immediately. The repair is half-done and losing the argument.\n\nYou take in the furlong for a moment — the morning light flat and even across the stubble, a crow picking at something near the far wall, the river's gray-green bend just visible past the tree-line to the north. There's a quiet capability to the whole stretch: worked earth, tended walls, the particular order of a place someone maintains without being told. *As do you,* you think, clocking Corvin before he's clocked you — broad in the shoulder, younger than Aldric, moving with the compact economy of someone who works outside in all weathers. Then you step forward.\n\n\"Silas Weir,\" you say, and let the assembled spear rest easy at your side so it reads as a carried thing rather than a pointed one. \"Pell thought I should find you before I went north. She was right.\" You tip your chin at the fence-section on the ground. \"You want a hand with that first, or shall we talk while you're losing to it?\"\n\nPell has stopped a few paces back, thumbs hooked in her coat pockets, watching Corvin with the particular attention she gives to fires she's not sure are out. Huginn is somewhere in the tree-line ahead — you can feel the pull of its attention, northward, toward the river bend.",
+      "sceneSummary": "Silas introduces himself to Corvin at the east furlong — the hunt is one conversation away.",
       "choices": [
         {
-          "label": "Walk up to Corvin directly — introduce Pell, hand off the modified light tip, and read how he takes it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.2
-          },
+          "label": "Lend a hand on the fence-rail — work first, talk after",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "approach",
-            "introduce",
-            "deliver"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Hang back at the fence and watch Corvin work a moment before announcing yourself — read what he's doing and how he moves",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "observe",
+            "help",
             "careful"
           ],
           "abilityId": null,
@@ -394,35 +377,46 @@
           "emergenceId": null
         },
         {
-          "label": "Use Order-Sense on the furlong as you approach — get a quick read on what Corvin's working with, what's sound and what isn't",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.1
-          },
+          "label": "Lay out the hunt plainly — boar sounder north of the wood, Pell along, you have what he needs",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "assess"
+            "persuade",
+            "plan"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Let Huginn lead the introduction — see how Corvin reacts to the bird before you say a word",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "spectrumId": 0.1
-          },
+          "label": "Watch him a moment — get a read on his temperament from how he handles the fence and the introduction",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "observe",
-            "unconventional",
-            "test"
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hand off the Modified Light Spear-Tip (Corvin's) now — let the hardware open the conversation",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -431,71 +425,135 @@
           "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The east lane, approaching the second fence-line — damp lane stones dried, garden verge with early clover, the yellow-green smudge of a willow visible past the fence. Left fork ahead leads to Corvin's east furlong.",
+        "setting": "Corvin's east furlong — a long narrow strip of winter-pale grass with a low drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is crouched over a downed fence-section mid-repair.",
         "npcsPresent": [
           {
+            "name": "Corvin",
+            "state": "Crouched over a fence-section on the ground, wrestling a cross-rail back into its mortise — half-done, not yet looking up."
+          },
+          {
             "name": "Pell Marsh",
-            "state": "Walking on Silas's left in her canvas coat, eyes forward, quiet after the laugh — the corner of her mouth has settled back to neutral."
+            "state": "Stopped a few paces back, thumbs in coat pockets, watching Corvin with quiet attention."
           },
           {
             "name": "Huginn",
-            "state": "Already past the second fence-line, likely at the willow or beyond — out of sight, scouting."
+            "state": "In the northern tree-line, attention angled toward the river bend."
           }
         ],
         "objects": [
           "Assembled mid-weight spear — in Silas's hand",
-          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Silas's shoulder",
+          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Silas's back",
           "Rune-Craft Kit — in the pack",
-          "Listing fence-post at the verge, gone soft in the winter ground"
+          "Downed fence-section with a cross-rail half-seated in its mortise",
+          "Low drystone wall along the south edge of the furlong"
         ],
         "threads": [
-          "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
+          "Corvin has not yet responded to the introduction",
           "Modified Light Spear-Tip (Corvin's) still to be handed off",
+          "Hunt invitation still to be made formally",
           "Evening spear work — Pell has accepted"
         ]
       },
       "npcUpdates": [
         {
+          "op": "meet",
+          "npcId": "corvin",
+          "name": "Corvin",
+          "role": "Farmer, east furlong — prospective hunt companion",
+          "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
+          "note": "Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded.",
+          "learned": [
+            "Works the east furlong alone",
+            "Was expected by Pell to be found mending or building something half-considered — confirmed"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At his east furlong, mid-repair on a downed fence-section."
+        },
+        {
           "op": "update",
           "npcId": "pell",
           "name": "Pell Marsh",
           "role": "Village blacksmith, Millbrook — south lane forge",
-          "note": "Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh.",
-          "learned": [
-            "Silas committed her full name, Pell Marsh, to memory with deliberate quiet — she noticed"
-          ],
+          "note": "Walked east with Silas; stopped back to watch Corvin's reaction to the introduction.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking east with Silas toward Corvin's furlong, mid-morning — surname now named and received."
+          "statusNote": "Standing a few paces behind Silas at Corvin's east furlong, coat on, watching."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
+          "subPlace": {
+            "name": "Corvin's East Furlong",
+            "note": "Narrow farmed strip with drystone south wall — Corvin's work-ground. River bend visible to the north through the tree-line.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "corvin",
+          "label": "Corvin",
+          "kind": "person",
+          "entityId": "corvin",
+          "fact": "Found at his east furlong on World-day 13 morning, mid-repair on a downed fence-section — broad-shouldered, compact, weathered. Maintains his ground without ceremony. Has not yet spoken.",
+          "links": [
+            "millbrook",
+            "pell",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "A short walk on the lane, barely a quarter-hour from the forge yard."
-      }
+        "hoursPassed": 0.25,
+        "why": "Short walk from Pell's forge to Corvin's furlong"
+      },
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The east lane, approaching the second fence-line — damp lane stones dried, garden verge with early clover, the yellow-green smudge of a willow visible past the fence. Left fork ahead leads to Corvin's east furlong.",
+      "setting": "Corvin's east furlong — a long narrow strip of winter-pale grass with a low drystone wall along the south edge, morning light flat and even. The river's gray-green bend is visible past the northern tree-line. Corvin is crouched over a downed fence-section mid-repair.",
       "npcsPresent": [
         {
+          "name": "Corvin",
+          "state": "Crouched over a fence-section on the ground, wrestling a cross-rail back into its mortise — half-done, not yet looking u"
+        },
+        {
           "name": "Pell Marsh",
-          "state": "Walking on Silas's left in her canvas coat, eyes forward, quiet after the laugh — the corner of her mouth has settled ba"
+          "state": "Stopped a few paces back, thumbs in coat pockets, watching Corvin with quiet attention."
         },
         {
           "name": "Huginn",
-          "state": "Already past the second fence-line, likely at the willow or beyond — out of sight, scouting."
+          "state": "In the northern tree-line, attention angled toward the river bend."
         }
       ],
       "objects": [
         "Assembled mid-weight spear — in Silas's hand",
         "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Sil",
         "Rune-Craft Kit — in the pack",
-        "Listing fence-post at the verge, gone soft in the winter ground"
+        "Downed fence-section with a cross-rail half-seated in its mortise",
+        "Low drystone wall along the south edge of the furlong"
       ],
       "threads": [
-        "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
+        "Corvin has not yet responded to the introduction",
         "Modified Light Spear-Tip (Corvin's) still to be handed off",
+        "Hunt invitation still to be made formally",
         "Evening spear work — Pell has accepted"
       ]
     }
@@ -638,7 +696,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact.",
         "[d1] Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
         "[d1] Heard Silas returning on the stone and named the east furlong unprompted — knows exactly where Corvin is; turned just enough to clock Huginn settling in, and the corner of her mout",
         "[d1] Finished her last piece, washed up, gave Corvin's exact location — east furlong, past the second fence-line, left fork at the willow. Turned to face Silas with her usual flat asses",
@@ -647,7 +704,8 @@
         "[d1] Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone.",
         "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
         "[d1] Revealed her surname — Marsh — after Silas guessed Grant. Noted her grandmother's name was Grant. Caught the tease and named it plainly.",
-        "[d1] Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh."
+        "[d1] Heard Silas say her full name once, with care — received it without deflecting. Kept walking. The corner of her mouth moved at the laugh.",
+        "[d1] Walked east with Silas; stopped back to watch Corvin's reaction to the introduction."
       ],
       "knownFacts": [
         "Not unsettled by Silas returning when he could have gone straight to the east furlong",
@@ -668,7 +726,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "Walking east with Silas toward Corvin's furlong, mid-morning — surname now named and received.",
+      "statusNote": "Standing a few paces behind Silas at Corvin's east furlong, coat on, watching.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -716,13 +774,37 @@
         "locationId": "millbrook",
         "day": 1
       }
+    },
+    "corvin": {
+      "id": "corvin",
+      "name": "Corvin",
+      "role": "Farmer, east furlong — prospective hunt companion",
+      "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Silas introduced himself by name and offered a hand with the fence before talk of the hunt. Corvin has not yet responded."
+      ],
+      "knownFacts": [
+        "Works the east furlong alone",
+        "Was expected by Pell to be found mending or building something half-considered — confirmed"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "At his east furlong, mid-repair on a downed fence-section.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] A brief squall passed through on World-day 12 mid-morning — lane stones briefly wet, air sharp and cold after. Cleared fast.",
         "[d1] Labor deal struck at Pell's forge on World-day 12 — Silas to clear the backlog (drawknife, billhook, two skinners, hand-axe, froe) in exchange for hunting company north of the village.",
         "[d1] Backlog work begun on World-day 12 mid-morning — drawknife corrected first, billhook next. Sharpening station in use.",
         "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
@@ -733,7 +815,8 @@
         "[d1] Mid-weight spear-tip sold to Silas Weir on World-day 12 morning; light point modified with stop-lug for Corvin and delivered to Silas for hand-off. Labor credit from backlog deducted — accounts closed",
         "[d1] Two ash shafts purchased from Mara Wells on World-day 13 morning — one on smokehouse account, one paid. Rune-craft materials (wax, pitch-ink, leather) and a fine river whetstone for Pell also acquired",
         "[d1] Fine river whetstone gifted to Pell — now on her bench. The date between Silas and Pell is now a standing arrangement named between them at the forge.",
-        "[d1] Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed."
+        "[d1] Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed.",
+        "[d1] Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -779,6 +862,12 @@
           "day": 1,
           "visited": true,
           "note": "Ash shafts sold, rune-craft materials sourced, whetstone for Pell handed off. Accounts closed for this visit."
+        },
+        "corvin-s-east-furlong": {
+          "name": "Corvin's East Furlong",
+          "day": 1,
+          "visited": true,
+          "note": "Narrow farmed strip with drystone south wall — Corvin's work-ground. River bend visible to the north through the tree-li"
         }
       },
       "vectorsKnown": [
@@ -1051,7 +1140,8 @@
           "[d1] A farmer's son from Millbrook's east furlong — visits Pell's forge repeatedly to handle the mid-weight spear-tip without buying. Can't afford it; light point won't serve what he has in mind (boar). Pe",
           "[d1] Corvin wants to take a boar from a sounder reportedly working the north wood — his repeated handling of the mid-weight spear-tip confirms the ambition. The light point won't stop a boar at the shoulde",
           "[d1] Pell named a specific concern: Corvin will be brave in the wrong moment. She agreed to supply the spear modification at cost only because a capable person will be beside him. His location: east furlon",
-          "[d1] Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to "
+          "[d1] Pell gave exact directions — east furlong, past the second fence-line, left fork at the willow. He'll be mending something he broke or building something not fully thought through. She expects him to ",
+          "[d1] Found at his east furlong on World-day 13 morning, mid-repair on a downed fence-section — broad-shouldered, compact, weathered. Maintains his ground without ceremony. Has not yet spoken."
         ],
         "links": [
           "millbrook",
@@ -1103,11 +1193,11 @@
     }
   },
   "tendencies": {
-    "strategic": 22.03208956328457,
-    "cerebral": 8.632346016995779,
-    "social": 28.2115421248453,
-    "generous": 9.67243334695223,
-    "cautious": 10.855923434960143
+    "strategic": 21.921929115468146,
+    "cerebral": 8.5891842869108,
+    "social": 30.070484414221074,
+    "generous": 9.624071180217468,
+    "cautious": 10.801643817785342
   },
   "aptitudes": [
     "strategist",
@@ -1115,7 +1205,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 42,
+  "actionCount": 43,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1137,8 +1227,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783904035892,
-  "rev": 68,
+  "updatedAt": 1783904197797,
+  "rev": 69,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

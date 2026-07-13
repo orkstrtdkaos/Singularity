@@ -35,7 +35,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6632746145892873,
+    "spectrumId": -0.6801108838598229,
     "violence_peace": 0.0335,
     "chaos_order": 0.11474943617187498,
     "mechanical_spiritual": 0.08591509375,
@@ -604,40 +604,41 @@
         "player": "Follow the bull's track north, reading the pattern of its movement with Order-Sense — find where it's going, not just where it's been.",
         "summary": "Order-Sense reads the bull's track — heading confirmed northwest toward the scrub oak ridge, a quarter-mile north.",
         "narration": "You shift your weight forward and let Order-Sense settle in — not a push, just an opening, the way you'd let your eyes adjust to dark. The bull's track is already there in the mud: three hooves clear, one dragging slightly on the left rear, the stride length telling you unhurried, heavy, a body that knows where it is going.\n\nThe pattern comes through clean. Overnight the bull moved northwest in a long unhurried arc, skirting the wet sedge where the river smell rises, favoring the drier scrub where the ground hardens between birch roots. Not fleeing — relocating. The track bends once, a deliberate angle correction, and you read it as a specific destination: higher ground, drier, with a good sightline back south. There's a low ridge a quarter-mile north where the birch thins and the scrub oak starts. He's almost certainly bedded there, or feeding along its southern edge in the early light.\n\nPell catches your stillness and slows beside you without asking. When you straighten and name the ridge, she looks north, reads the treeline, and nods once — the same nod she gives the anvil when she's decided where the next strike lands. Huginn shifts on your forearm, head angling northwest, the bead of its eye catching the first real edge of sunrise over the ridge. It says nothing. It doesn't need to."
+      },
+      {
+        "player": "Ask Pell what she would recommend our approach be.  Also offer to let her use the spear - I can act as bait and shadowstep away at the last moment.",
+        "summary": "Pell takes the spear and sets the approach — Silas as bait from the east, she sets below the first oak, shadowstep is the exit plan.",
+        "narration": "You slow as the birch corridor opens toward the scrub oak ridge — the trees thinning, the ground hardening under your boots, and somewhere ahead in that tangle of low oak and dry brush, a bull boar bedded or browsing in the early light. You turn to Pell.\n\n\"What do you recommend?\" you say, and you lift the Deathbound Runic Spear toward her — a plain offer. \"You can take it. I can draw him out. If he commits to me, I step clear at the last moment.\" You don't explain how. She knows enough to know you have your ways.\n\nPell takes the spear without ceremony — both hands, weight tested, grip found. She turns it once, reads the balance, reads the bind at the throat. Her thumb finds the socket lashing and presses it once, checking the seat. Satisfied. She holds it loose at her side and looks at the ridge for a long moment, reading the oak scrub the way she reads iron — finding what's load-bearing.\n\n\"Wind's out of the northwest,\" she says, flat and practical. \"He's upslope. We go in from the east, stay low under the ridge-break. You go wide left — give him a clear line on you, open ground, nothing at your back. He charges downslope. That's fast.\" She looks at you directly. \"You'll need to be fast too.\" Not a warning — the exact information you need, and she is trusting you to already have the answer to it. \"I'll be right of center, below the first oak. When he commits, I set the butt. You get clear.\" One shoulder lifts. \"If your way of getting clear is what it sounded like last night by the fire, now would be the time to use it.\""
       }
     ],
     "lastTurn": {
-      "narration": "You shift your weight forward and let Order-Sense settle in — not a push, just an opening, the way you'd let your eyes adjust to dark. The bull's track is already there in the mud: three hooves clear, one dragging slightly on the left rear, the stride length telling you unhurried, heavy, a body that knows where it is going.\n\nThe pattern comes through clean. Overnight the bull moved northwest in a long unhurried arc, skirting the wet sedge where the river smell rises, favoring the drier scrub where the ground hardens between birch roots. Not fleeing — relocating. The track bends once, a deliberate angle correction, and you read it as a specific destination: higher ground, drier, with a good sightline back south. There's a low ridge a quarter-mile north where the birch thins and the scrub oak starts. He's almost certainly bedded there, or feeding along its southern edge in the early light.\n\nPell catches your stillness and slows beside you without asking. When you straighten and name the ridge, she looks north, reads the treeline, and nods once — the same nod she gives the anvil when she's decided where the next strike lands. Huginn shifts on your forearm, head angling northwest, the bead of its eye catching the first real edge of sunrise over the ridge. It says nothing. It doesn't need to.",
-      "sceneSummary": "Order-Sense reads the bull's track — heading confirmed northwest toward the scrub oak ridge, a quarter-mile north.",
+      "narration": "You slow as the birch corridor opens toward the scrub oak ridge — the trees thinning, the ground hardening under your boots, and somewhere ahead in that tangle of low oak and dry brush, a bull boar bedded or browsing in the early light. You turn to Pell.\n\n\"What do you recommend?\" you say, and you lift the Deathbound Runic Spear toward her — a plain offer. \"You can take it. I can draw him out. If he commits to me, I step clear at the last moment.\" You don't explain how. She knows enough to know you have your ways.\n\nPell takes the spear without ceremony — both hands, weight tested, grip found. She turns it once, reads the balance, reads the bind at the throat. Her thumb finds the socket lashing and presses it once, checking the seat. Satisfied. She holds it loose at her side and looks at the ridge for a long moment, reading the oak scrub the way she reads iron — finding what's load-bearing.\n\n\"Wind's out of the northwest,\" she says, flat and practical. \"He's upslope. We go in from the east, stay low under the ridge-break. You go wide left — give him a clear line on you, open ground, nothing at your back. He charges downslope. That's fast.\" She looks at you directly. \"You'll need to be fast too.\" Not a warning — the exact information you need, and she is trusting you to already have the answer to it. \"I'll be right of center, below the first oak. When he commits, I set the butt. You get clear.\" One shoulder lifts. \"If your way of getting clear is what it sounded like last night by the fire, now would be the time to use it.\"",
+      "sceneSummary": "Pell takes the spear and sets the approach — Silas as bait from the east, she sets below the first oak, shadowstep is the exit plan.",
       "choices": [
         {
-          "label": "Press north carefully — slow, quiet approach to the scrub oak ridge to locate the bull before it knows you're coming",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.6
-          },
-          "difficulty": 15,
+          "label": "Agree and move — go east to give Pell time to find her set position under the oak before you draw the bull out",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "scout",
             "careful",
-            "hunt"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Hold here and read the ridge from a distance — use Order-Sense to find the pattern of what else is on that high ground before you walk into it",
+          "label": "Before moving — use Order-Sense from here to pin the bull's exact position in the scrub so Pell can refine her set",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.3,
             "chaos_order": 0.2
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study",
             "careful",
@@ -650,16 +651,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Pell what she reads from the ridge — she's worked this ground longer than you have",
+          "label": "Ask Pell where she wants Huginn — the bird knows what's ending up the ridge; position it ahead as a signal relay",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "violence_peace": 0.7
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "careful"
+            "plan",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -668,20 +667,20 @@
           "emergenceId": null
         },
         {
-          "label": "Let Huginn go ahead — send it to the ridge first and watch where it lands",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Press in now — Pell sets her own position while you find your bait shadow before the light climbs higher and the bull moves",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "death_life": -0.2
+            "violence_peace": 0.3
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "careful"
+            "risky",
+            "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "shadowstep",
+          "energyCost": 7,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -689,44 +688,42 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear."
+          "note": "Approach plan set — Pell holds the spear and the set position below the first oak; Silas draws the bull as bait and exits via shadowstep."
         }
       ],
       "scene": {
-        "setting": "North wood birch corridor, Millbrook — narrow birches opening toward a low scrub oak ridge a quarter-mile north, dew heavy on sedge and bark, grey light thinning toward the first real edge of sunrise over the eastern ridge. Bull track confirmed northwest in fresh mud.",
+        "setting": "Edge of the birch corridor, north wood — scrub oak ridge visible thirty yards ahead, low and dry, dew lighter here where the ground rises. Grey light almost gold on the eastern ridge now. Wind out of the northwest.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing beside Silas, reading the treeline north after his direction — weight settled, nod given, ready to move."
+            "state": "Holding the Deathbound Runic Spear in a loose carry, reading the scrub oak ridge — plan given, waiting for Silas to move."
           },
           {
             "name": "Corvin",
-            "state": "Thirty yards south in the sedge strip, dressing the sow — working steadily, out of earshot."
+            "state": "Thirty yards south in the sedge strip, dressing the sow — out of earshot, working steadily."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's forearm, head angled northwest, eye catching the first light — silent."
+            "state": "On Silas's forearm, head angled northwest toward the ridge — still, watching."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear — in Silas's off-hand",
-          "Bull's track — confirmed northwest toward scrub oak ridge, quarter-mile north",
-          "Sow — being dressed thirty yards south by Corvin"
+          "Deathbound Runic Spear — now in Pell's hands",
+          "Bull's track — confirmed northwest toward scrub oak ridge",
+          "Sow — being dressed thirty yards south by Corvin",
+          "Scrub oak ridge — thirty yards ahead, wind out of the northwest, bull somewhere within"
         ],
         "threads": [
-          "Bull located on scrub oak ridge — approach still to be made",
-          "Huginn's northward threading and what is ending up the corridor remains unnamed",
-          "Corvin's smokehouse delivery still his task to complete"
+          "Bull located on scrub oak ridge — approach plan set but not yet executed",
+          "Huginn's northward orientation and what is ending up the corridor remains unnamed",
+          "Corvin's smokehouse delivery still his task once the dressing is done"
         ]
       },
       "npcUpdates": [
@@ -734,74 +731,68 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Took the spear without ceremony, tested the balance and the socket lashing, read the wind and the ridge, and laid out a clean tactical approach — Silas bait east, she sets below the first oak, trusting him to have his own exit.",
           "learned": [
-            "Bull is on the scrub oak ridge a quarter-mile north — Order-Sense confirmed"
+            "Silas's hint about shadowstep by the fire last night was enough — she has factored it into the plan without needing it explained"
           ],
           "skillsObserved": [
-            "reading a partner's focus without prompting"
+            "reading terrain and wind for tactical positioning",
+            "receiving an unfamiliar weapon and assessing it quickly",
+            "tactical planning under field conditions"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the north wood birch corridor beside Silas, heading toward the scrub oak ridge."
+          "statusNote": "At the edge of the birch corridor, holding the Deathbound Runic Spear — ready to move to her set position below the first scrub oak on the ridge."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
-          "subPlace": {
-            "name": "Scrub Oak Ridge",
-            "note": "Low ridge a quarter-mile north of the sedge strip where the birch thins and scrub oak starts — bull's confirmed destination, early-spring morning.",
-            "visited": false
-          }
-        }
-      ],
+      "placeUpdates": [],
       "codexUpdates": [
         {
-          "topic": "millbrook",
-          "label": "Millbrook",
-          "kind": "event",
-          "entityId": "millbrook",
-          "fact": "Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three independent signals (bull, piglets, Huginn) still converging on the same corridor.",
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Reads terrain and wind cleanly under field conditions — laid out the bull approach without hesitation once given the spear. Trusted Silas's shadowstep hint from the night before without needing it named again.",
           "links": [
-            "disputed-zone",
-            "huginn",
-            "pell",
-            "aldric-provisioning-deal"
+            "millbrook",
+            "aldric-provisioning-deal",
+            "death-bound-spear"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "short pause to read the track before pressing north"
+        "why": "A brief exchange at the edge of the birch corridor — a minute or two at most."
       }
     },
     "sceneState": {
-      "setting": "North wood birch corridor, Millbrook — narrow birches opening toward a low scrub oak ridge a quarter-mile north, dew heavy on sedge and bark, grey light thinning toward the first real edge of sunrise over the eastern ridge. Bull track confirmed northwest in fresh mud.",
+      "setting": "Edge of the birch corridor, north wood — scrub oak ridge visible thirty yards ahead, low and dry, dew lighter here where the ground rises. Grey light almost gold on the eastern ridge now. Wind out of the northwest.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing beside Silas, reading the treeline north after his direction — weight settled, nod given, ready to move."
+          "state": "Holding the Deathbound Runic Spear in a loose carry, reading the scrub oak ridge — plan given, waiting for Silas to move"
         },
         {
           "name": "Corvin",
-          "state": "Thirty yards south in the sedge strip, dressing the sow — working steadily, out of earshot."
+          "state": "Thirty yards south in the sedge strip, dressing the sow — out of earshot, working steadily."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's forearm, head angled northwest, eye catching the first light — silent."
+          "state": "On Silas's forearm, head angled northwest toward the ridge — still, watching."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear — in Silas's off-hand",
-        "Bull's track — confirmed northwest toward scrub oak ridge, quarter-mile north",
-        "Sow — being dressed thirty yards south by Corvin"
+        "Deathbound Runic Spear — now in Pell's hands",
+        "Bull's track — confirmed northwest toward scrub oak ridge",
+        "Sow — being dressed thirty yards south by Corvin",
+        "Scrub oak ridge — thirty yards ahead, wind out of the northwest, bull somewhere "
       ],
       "threads": [
-        "Bull located on scrub oak ridge — approach still to be made",
-        "Huginn's northward threading and what is ending up the corridor remains unnamed",
-        "Corvin's smokehouse delivery still his task to complete"
+        "Bull located on scrub oak ridge — approach plan set but not yet executed",
+        "Huginn's northward orientation and what is ending up the corridor remains unnamed",
+        "Corvin's smokehouse delivery still his task once the dressing is done"
       ]
     }
   },
@@ -828,14 +819,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin.",
         "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning.",
         "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light.",
         "Hunt party assembled at the forge, pre-dawn — Silas has confirmed two or three presences north, patterned and holding. Departing at first light.",
         "Hunt party cleared the north gate at pre-dawn — moving into the meadow, Huginn holding north, two or three presences still ahead.",
         "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line.",
         "Sow taken in the north wood — clean kill, Corvin's strike. Meat for delivery to the smokehouse. Huginn still threading north toward unaccounted presences.",
-        "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear."
+        "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear.",
+        "Approach plan set — Pell holds the spear and the set position below the first oak; Silas draws the bull as bait and exits via shadowstep."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -943,7 +934,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Collar up against the squall-wet, eyes on the trail and tree-line.",
         "[d1] Holding position, eyes on the tree-line — letting Silas take the lead on the ground-read.",
         "[d1] Took the east flank into the birches cleanly — unscented, position intact. Holding.",
         "[d1] Read Silas's two-one click and stepped out of the birches on cue — unhurried, arms wide, closed the sow's northwest bolt line cleanly.",
@@ -952,28 +942,29 @@
         "[d1] Read the northward invitation without words — weight shifted forward, ready to move.",
         "[d1] Went still when Huginn croaked — listening hard, no comment yet.",
         "[d1] Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step aw",
-        "[d1] Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil."
+        "[d1] Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil.",
+        "[d1] Took the spear without ceremony, tested the balance and the socket lashing, read the wind and the ridge, and laid out a clean tactical approach — Silas bait east, she sets below th"
       ],
       "knownFacts": [
-        "Silas has no destination, only a direction — north, lately; the spear reads that way",
         "Silas frames his presence in places as: someone who can see a certain kind of thing, not a chosen one",
         "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs",
         "Aware that the boar's displaced ground and the direction of the presences Huginn is tracking are the same vector",
         "Held the bolt corridor through the gambit's full run — her position was the decisive constraint",
         "Bull's direction, the piglets' scatter, and Huginn's orientation all converge north",
         "Receives directness the same way she receives ironwork — present, unbothered, no performance",
-        "Bull is on the scrub oak ridge a quarter-mile north — Order-Sense confirmed"
+        "Bull is on the scrub oak ridge a quarter-mile north — Order-Sense confirmed",
+        "Silas's hint about shadowstep by the fire last night was enough — she has factored it into the plan without needing it explained"
       ],
       "skillsObserved": [
-        "controlled field positioning",
-        "sustained flank-hold under pressure",
-        "clean withdrawal once the threat resolved",
         "pattern-reading under field conditions",
         "naming a signal without dramatizing it",
-        "reading a partner's focus without prompting"
+        "reading a partner's focus without prompting",
+        "reading terrain and wind for tactical positioning",
+        "receiving an unfamiliar weapon and assessing it quickly",
+        "tactical planning under field conditions"
       ],
       "status": "active",
-      "statusNote": "In the north wood birch corridor beside Silas, heading toward the scrub oak ridge.",
+      "statusNote": "At the edge of the birch corridor, holding the Deathbound Runic Spear — ready to move to her set position below the first scrub oak on the ridge.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1423,7 +1414,8 @@
           "[d1] Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the de",
           "[d1] Has agreed to meet Silas after the hunt to explore what the iron's response to her hand might mean — open to being taught, on her own terms: evidence first, daylight before fire.",
           "[d1] Pell intends to keep the forge long-term; she is also reaching toward something else connected to the iron's response to her hand — no language for it yet, but the thought is present and deliberate.",
-          "[d1] Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness."
+          "[d1] Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness.",
+          "[d1] Reads terrain and wind cleanly under field conditions — laid out the bull approach without hesitation once given the spear. Trusted Silas's shadowstep hint from the night before without needing it nam"
         ],
         "links": [
           "millbrook",
@@ -1561,13 +1553,13 @@
     }
   },
   "tendencies": {
-    "strategic": 37.57655396835015,
-    "cerebral": 20.70492574189914,
-    "social": 42.78698683905029,
-    "generous": 8.568184587733551,
-    "cautious": 19.649286496239494,
-    "physical": 0.9752487531218751,
-    "risky": 0.990025
+    "strategic": 38.3886711985084,
+    "cerebral": 20.60140111318964,
+    "social": 44.57305190485504,
+    "generous": 8.525343664794883,
+    "cautious": 19.551040063758297,
+    "physical": 0.9703725093562657,
+    "risky": 0.985074875
   },
   "aptitudes": [
     "strategist",
@@ -1575,7 +1567,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 86,
+  "actionCount": 87,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1629,8 +1621,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783977783015,
-  "rev": 133,
+  "updatedAt": 1783978003231,
+  "rev": 134,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

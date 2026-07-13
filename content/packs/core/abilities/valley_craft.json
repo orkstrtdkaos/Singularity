@@ -42,7 +42,8 @@
         }
       ],
       "functions": [
-        "move",
+        "track",
+        "travel",
         "reveal"
       ],
       "challengeTypes": [
@@ -96,6 +97,7 @@
       ],
       "functions": [
         "heal",
+        "sustain",
         "mend"
       ],
       "challengeTypes": [
@@ -198,7 +200,8 @@
         }
       ],
       "functions": [
-        "mend"
+        "mend",
+        "make"
       ],
       "challengeTypes": [
         "PUZZLE",
@@ -250,6 +253,7 @@
         }
       ],
       "functions": [
+        "command",
         "bind"
       ],
       "challengeTypes": [
@@ -356,6 +360,8 @@
         }
       ],
       "functions": [
+        "travel",
+        "sustain",
         "move"
       ],
       "challengeTypes": [
@@ -462,6 +468,7 @@
       ],
       "functions": [
         "reveal",
+        "track",
         "bind"
       ],
       "challengeTypes": [
@@ -514,6 +521,7 @@
         }
       ],
       "functions": [
+        "sustain",
         "bind",
         "heal"
       ],
@@ -619,7 +627,8 @@
         }
       ],
       "functions": [
-        "move",
+        "track",
+        "travel",
         "reveal"
       ],
       "challengeTypes": [
@@ -646,7 +655,8 @@
         "chaos_order": -0.1
       },
       "functions": [
-        "conceal"
+        "conceal",
+        "deceive"
       ],
       "narrationHints": "You become the least memorable person in the room.",
       "description": "Pass unnoticed in a crowd or settlement — look like you belong, be forgotten.",
@@ -780,5 +790,6 @@
       },
       "tradition": "valley_craft"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

@@ -271,116 +271,182 @@
         "player": "As I head to the store I call back to Pell, with a big grin, remember to wear something nice for our hunting date! ",
         "summary": "Silas trades a parting grin with Pell — she answers in kind, in her register — and heads north up the lane.",
         "narration": "The lane stones are dry again under your boots, the squall's memory only in the cold that came after it. You're three paces from the forge's shadow when you call it back over your shoulder — remember to wear something nice for our hunting date — and you can hear the grin in it yourself.\n\nA beat of silence from the overhang. Then, flat and unhurried: \"I'll wear my good apron.\"\n\nHuginn makes a sound in its throat — not quite a croak, more the noise a person makes when they decline to comment — and resettles on your pack frame.\n\nThe lane runs north toward the well square, the sound of the forge already shrinking behind you. East of the well is the red door. Mara Wells, stocks rope and hardware and the occasional traded-in trap, and Aldric's referral gets you past her finder's fee. Corvin is somewhere in the east furlong after that — a farmer's son with ambition and a spear-tip he hasn't yet held."
+      },
+      {
+        "player": "Head straight to Mara Wells's store — red door, east of the well",
+        "summary": "Silas arrives at Mara Wells's store — red door, east of the well — and meets the woman behind the counter.",
+        "narration": "The well square opens up ahead of you — a worn stone lip, a rope-and-bucket that's been replaced a dozen times but always in the same spot, and the low murmur of morning business: a woman filling two clay jugs, a pair of men arguing in the patient way that means they've been arguing since before breakfast. The east side of the square holds a row of low buildings, and the red door is exactly where Aldric said it would be, paint a little chipped at the corner but still unmistakably red against the weathered wood.\n\nYou push it open. The store is small and organized — rope coiled on wall pegs in three weights, hardware sorted into open-topped wooden boxes along the left wall, a smell of linseed oil and dry cedar. A shelf near the back holds what looks like traded-in tools: a mended drawknife, a short-handled mattock, two wire snare frames. Behind the counter, a woman is writing in a ledger with the focused attention of someone who does not look up until she's finished the line. She finishes the line.\n\n\"Help you?\" The voice is even, neither warm nor cold — the register of someone who's run a store long enough to let customers show her what they need before deciding how to treat them. She glances at Huginn without remark, which is either remarkable composure or she's already heard something. Given this town, probably both.\n\nYou have the smokehouse referral in your back pocket — the smokehouse sent you — which Aldric said waives her finder's fee. The shelves are visible from here: rope, hardware, the traded-in tools. Worth a look if you need anything specific before heading north."
       }
     ],
     "lastTurn": {
-      "narration": "The lane stones are dry again under your boots, the squall's memory only in the cold that came after it. You're three paces from the forge's shadow when you call it back over your shoulder — remember to wear something nice for our hunting date — and you can hear the grin in it yourself.\n\nA beat of silence from the overhang. Then, flat and unhurried: \"I'll wear my good apron.\"\n\nHuginn makes a sound in its throat — not quite a croak, more the noise a person makes when they decline to comment — and resettles on your pack frame.\n\nThe lane runs north toward the well square, the sound of the forge already shrinking behind you. East of the well is the red door. Mara Wells, stocks rope and hardware and the occasional traded-in trap, and Aldric's referral gets you past her finder's fee. Corvin is somewhere in the east furlong after that — a farmer's son with ambition and a spear-tip he hasn't yet held.",
-      "sceneSummary": "Silas trades a parting grin with Pell — she answers in kind, in her register — and heads north up the lane.",
+      "narration": "The well square opens up ahead of you — a worn stone lip, a rope-and-bucket that's been replaced a dozen times but always in the same spot, and the low murmur of morning business: a woman filling two clay jugs, a pair of men arguing in the patient way that means they've been arguing since before breakfast. The east side of the square holds a row of low buildings, and the red door is exactly where Aldric said it would be, paint a little chipped at the corner but still unmistakably red against the weathered wood.\n\nYou push it open. The store is small and organized — rope coiled on wall pegs in three weights, hardware sorted into open-topped wooden boxes along the left wall, a smell of linseed oil and dry cedar. A shelf near the back holds what looks like traded-in tools: a mended drawknife, a short-handled mattock, two wire snare frames. Behind the counter, a woman is writing in a ledger with the focused attention of someone who does not look up until she's finished the line. She finishes the line.\n\n\"Help you?\" The voice is even, neither warm nor cold — the register of someone who's run a store long enough to let customers show her what they need before deciding how to treat them. She glances at Huginn without remark, which is either remarkable composure or she's already heard something. Given this town, probably both.\n\nYou have the smokehouse referral in your back pocket — the smokehouse sent you — which Aldric said waives her finder's fee. The shelves are visible from here: rope, hardware, the traded-in tools. Worth a look if you need anything specific before heading north.",
+      "sceneSummary": "Silas arrives at Mara Wells's store — red door, east of the well — and meets the woman behind the counter.",
       "choices": [
         {
-          "label": "Head straight to Mara Wells's store — red door, east of the well",
+          "label": "Mention the smokehouse referral and ask what she has for snare hardware and rope in the heavier weights — practical, direct.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "visit",
-            "shop"
+            "practical",
+            "direct"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Swing by the well first — see who's moving through the village center",
+          "label": "Introduce yourself first, get a read on her, then mention the referral — see how she reacts to a stranger before leaning on Aldric's name.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the store itself — get a feel for how it's organized and what it's actually stocked with versus what's visible on the shelves.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look over the traded-in tools on the back shelf before saying anything — see if there's anything worth asking about.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "observe"
+            "study"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Go find Corvin first — east furlong, hand him his spear-tip and take his measure",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "meet",
-            "deliver"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Something else entirely",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "freeform"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "scene": {
-        "setting": "South lane of Millbrook, three paces north of Pell's forge overhang — lane running north toward the well square, spring mid-morning light, cold and clear after the squall.",
+        "setting": "Mara Wells's supply store — east of the well square, red door, interior: rope wall-pegs, hardware boxes, traded-in tool shelf at the back. Morning light through the open door.",
         "npcsPresent": [
           {
-            "name": "Huginn",
-            "state": "Settled on Silas's pack frame, having declined to comment on the exchange."
+            "name": "Mara Wells",
+            "state": "behind the counter, ledger open, pen down — watching Silas, waiting."
           },
           {
-            "name": "Pell",
-            "state": "Back inside the forge, resuming shop work — her answer delivered and done."
+            "name": "Huginn",
+            "state": "on Silas's pack frame, settled, watching the room."
           }
         ],
         "objects": [
-          "Mid-Weight Spear-Tip — in Silas's pack",
-          "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in Silas's pack",
-          "South lane stretching north toward the well square"
+          "Rope in three weights on wall pegs",
+          "Open-topped wooden boxes of sorted hardware along the left wall",
+          "Back shelf: mended drawknife, short-handled mattock, two wire snare frames",
+          "Ledger open on the counter",
+          "Smell of linseed oil and dry cedar"
         ],
         "threads": [
-          "Mara Wells's supply store not yet visited — east of the well, red door; smokehouse referral standing",
-          "Corvin still to be found — east furlong; hunt cannot depart without him",
-          "Hunt to the north wood still forming — Pell confirmed, Corvin still needed"
+          "Mara Wells waiting for Silas to state his business",
+          "Smokehouse referral from Aldric — waives her finder's fee",
+          "Corvin still to be found — east furlong — before hunt departs",
+          "Modified Light Spear-Tip (Corvin's) in pack, needs to be handed off"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Answered Silas's parting flirtation with dry economy — 'I'll wear my good apron.' Transaction and humor both handled in the same register.",
+          "op": "meet",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Village supply store operator, Millbrook — east of the well, red door",
+          "description": "A woman of practical bearing — keeps a close ledger, reacts to what customers need rather than how they present. Unruffled by Huginn's presence.",
+          "note": "First contact — Silas entered the store, she looked up from her ledger. Has not yet been given reason to be warm or cold.",
+          "learned": [
+            "Runs the store with a ledger and organized stock",
+            "Did not react to Huginn with alarm"
+          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge on the south lane, back to normal shop work after the backlog and both spear transactions."
+          "statusNote": "Behind the counter at the supply store, pen down, waiting on Silas."
         }
       ],
+      "codexUpdates": [
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "entityId": "mara-wells",
+          "fact": "Runs the village supply store east of the well — red door. Stocks rope (three weights), sorted hardware, and occasional traded-in tools. Keeps a close ledger. Reacted to Huginn's presence without alarm.",
+          "links": [
+            "millbrook",
+            "aldric",
+            "aldric-provisioning-deal"
+          ]
+        }
+      ],
+      "moveTo": {
+        "location": "millbrook",
+        "why": "walked north up the south lane to the well square and entered Mara Wells's store on the east side"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief parting exchange and a few steps up the lane — less than a quarter hour."
-      }
+        "why": "short walk from the forge to the well square and into the store"
+      },
+      "gambitApt": false,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "South lane of Millbrook, three paces north of Pell's forge overhang — lane running north toward the well square, spring mid-morning light, cold and clear after the squall.",
+      "setting": "Mara Wells's supply store — east of the well square, red door, interior: rope wall-pegs, hardware boxes, traded-in tool shelf at the back. Morning light through the open door.",
       "npcsPresent": [
         {
-          "name": "Huginn",
-          "state": "Settled on Silas's pack frame, having declined to comment on the exchange."
+          "name": "Mara Wells",
+          "state": "behind the counter, ledger open, pen down — watching Silas, waiting."
         },
         {
-          "name": "Pell",
-          "state": "Back inside the forge, resuming shop work — her answer delivered and done."
+          "name": "Huginn",
+          "state": "on Silas's pack frame, settled, watching the room."
         }
       ],
       "objects": [
-        "Mid-Weight Spear-Tip — in Silas's pack",
-        "Modified Light Spear-Tip (Corvin's) — oilcloth-wrapped, in Silas's pack",
-        "South lane stretching north toward the well square"
+        "Rope in three weights on wall pegs",
+        "Open-topped wooden boxes of sorted hardware along the left wall",
+        "Back shelf: mended drawknife, short-handled mattock, two wire snare frames",
+        "Ledger open on the counter",
+        "Smell of linseed oil and dry cedar"
       ],
       "threads": [
-        "Mara Wells's supply store not yet visited — east of the well, red door; smokehouse referral standing",
-        "Corvin still to be found — east furlong; hunt cannot depart without him",
-        "Hunt to the north wood still forming — Pell confirmed, Corvin still needed"
+        "Mara Wells waiting for Silas to state his business",
+        "Smokehouse referral from Aldric — waives her finder's fee",
+        "Corvin still to be found — east furlong — before hunt departs",
+        "Modified Light Spear-Tip (Corvin's) in pack, needs to be handed off"
       ]
     }
   },
@@ -553,6 +619,31 @@
       ],
       "status": "active",
       "statusNote": "At the forge on the south lane, back to normal shop work after the backlog and both spear transactions.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 1
+      }
+    },
+    "mara-wells": {
+      "id": "mara-wells",
+      "name": "Mara Wells",
+      "role": "Village supply store operator, Millbrook — east of the well, red door",
+      "description": "A woman of practical bearing — keeps a close ledger, reacts to what customers need rather than how they present. Unruffled by Huginn's presence.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] First contact — Silas entered the store, she looked up from her ledger. Has not yet been given reason to be warm or cold."
+      ],
+      "knownFacts": [
+        "Runs the store with a ledger and organized stock",
+        "Did not react to Huginn with alarm"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "Behind the counter at the supply store, pen down, waiting on Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -826,7 +917,8 @@
         "label": "Mara Wells",
         "kind": "person",
         "facts": [
-          "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs"
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs",
+          "[d1] Runs the village supply store east of the well — red door. Stocks rope (three weights), sorted hardware, and occasional traded-in tools. Keeps a close ledger. Reacted to Huginn's presence without alar"
         ],
         "links": [
           "millbrook",
@@ -924,11 +1016,11 @@
     }
   },
   "tendencies": {
-    "strategic": 17.342144217239245,
-    "cerebral": 8.203512545584946,
-    "social": 18.7060332010207,
-    "generous": 7.195312784826312,
-    "cautious": 8.505362884983226
+    "strategic": 17.25543349615305,
+    "cerebral": 8.162494982857021,
+    "social": 18.612503035015596,
+    "generous": 7.159336220902181,
+    "cautious": 8.46283607055831
   },
   "aptitudes": [
     "strategist",
@@ -936,7 +1028,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 29,
+  "actionCount": 30,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -958,8 +1050,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783901062896,
-  "rev": 53,
+  "updatedAt": 1783901152614,
+  "rev": 54,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

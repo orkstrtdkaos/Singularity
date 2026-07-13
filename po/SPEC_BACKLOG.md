@@ -1659,3 +1659,36 @@ Content: **`content/packs/core/rules/the_substrate.json`** — authored, at orig
 **⚠️ ROUND 2:** does the resolve chain have a clean place for a multiplicative environmental factor? Does it collide with spectral fit (SNG-079)? **They must COMPOSE, not double-count.** Cost estimate.
 
 **Erik test:** "Walk a Continuous character into the Quickwood — verify the game TELLS you your craft is failing, that the Waystaff's charge holds you up, and that it runs out."
+---
+
+## SNG-091 — The GM won't open a gambit because two instructions strangle each other
+
+**Erik-verified 2026-07-12 (v1.8.46 leg):** *"I put the text in but it didn't start the gambit screen automatically... when I clicked the plan button it DID autopopulate."* 🔧 CCode. Aevi PO.
+**SNG-088's wiring is CORRECT and COMPLETE. The PROMPT is the bug — and it is Aevi's.**
+
+### PWSV (HEAD v1.8.46) — everything is wired; the instructions fight
+- `gm.js:58` — `gambitOps` schema: **present** ✓
+- `gm.js:63` — the instruction: **present, detailed, carries the plan-level rule** ✓
+- `app.js:2433` — the handler: **present** ✓
+- `salvageOps` includes `gambitOps` ✓
+**The GM simply did not emit it. Here is why:**
+
+> **`gm.js:63`:** *"emit `gambitOps` when the player says they want to PLAN a multi-step approach **to a gambit-apt objective**"*
+> **`gm.js:62`:** *"`gambitApt`: **OMIT IT ALMOST ALWAYS** … if you are unsure, leave it out … **Most turns: no gambitApt.**"*
+
+**The GM checked whether the scene was gambit-apt, concluded — as instructed — that it almost never is, and declined to open the board. It obeyed both rules perfectly and did the wrong thing.**
+
+### The error (Aevi's): I chained the player's REQUEST to a heuristic built to suppress the game's SUGGESTION
+> **`gambitApt` is the HINT — the game offering, unprompted. It must be RARE.**
+> **`gambitOps` is the PLAYER ASKING. It must be UNCONDITIONAL.**
+> **⛔ When the player says "I want to plan this," THAT IS THE TRIGGER. Aptness is irrelevant. The player has already decided.**
+
+### Fix
+1. **DECOUPLE `gambitOps` from `gambitApt`.** Rewrite `gm.js:63`: *"When the player asks to PLAN or SET UP a multi-step approach — **in any scene, apt or not** — emit `gambitOps`. **Do NOT judge whether the scene deserves a gambit; the player has already judged.** Never resolve a stated plan as a single action."* **Delete every reference to "gambit-apt objective" from the `gambitOps` instruction.**
+2. **`app.js:2433` — `if (turn.gambitOps && !gambitDraft)` silently DROPS the request when a stale draft exists.** *(Erik's failed run left one.)* **A dropped request is invisible and looks exactly like the GM ignoring you.** Fix: if a draft already exists, **either merge the new seed into it or ask** — never silently discard.
+3. **`gambitApt` stays exactly as it is** — rare, suppressed, unprompted-only. **That heuristic is correct. It was only wrong as a GATE on the player's own request.**
+
+**Erik test:** "In an ordinary conversation with no obstacles at all, say 'I want to plan this out' — verify the builder opens anyway. The game does not get to decide that your plan isn't worth planning."
+
+### ✅ What DID work (Erik's leg)
+**Auto-fill from conversation is excellent and verified live.** He talked a plan through with the GM, hit ⚙ Plan, and got a goal plus three ordered steps pulled verbatim from the conversation — *"confirm the taper on Pell's shaft meets the exact tolerances," "bring the shaft to the forge while the metal is still hot," "seat the socket so the resonance line runs clean through the join."* **That is the feature working exactly as intended.** Reorder, Start-over and full-width inputs all confirmed.

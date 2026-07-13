@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "id": "helper_text",
+  "kind": "ui_copy",
+  "note": "SNG-084 — every mechanic explains itself AT THE POINT IT BITES. Authored by Aevi 2026-07-12 (Design Law 15: copy is CONTENT, never hardcoded in app.js). `short` is the one-liner shown inline or on the ⓘ. `more` is the expandable why. **The REFUSALS matter most: a rule the player cannot distinguish from a bug IS a bug, and a silent 'no' is the worst thing in the game.**",
+  "voice": "The game's voice: direct, a little dry, concrete. Explain the WHY, never just the what. Name the cost. Never apologise for a rule that is doing its job.",
+  "rules": {
+    "progressive": "Do not dump the system on a new player. Show `short` where the mechanic bites; `more` only on request.",
+    "everyRefusalExplains": "⛔ NO LOCK MAY BE SILENT. Every barred thing says WHICH gate stopped it and why that gate exists.",
+    "noJargonWithoutAGloss": "If the copy says 'antipode' or 'ring distance', the ⓘ must define it right there."
+  },
+  "entries": [
+    {
+      "id": "lock.antipode",
+      "surface": "a barred ability whose tradition is the player's antipode",
+      "short": "Closed — this is your antipode.",
+      "more": "You stand at one end of an axis; this craft belongs to the other. You chose an end, and choosing an end is what makes it mean something. **No amount of study opens this.** The only road to your own opposite is a BRAID — an ability that holds both poles at once — and nobody teaches those. You find them by doing something that should not have worked.",
+      "libraryLink": "the-great-circle"
+    },
+    {
+      "id": "lock.adjacent_capstone",
+      "surface": "a capstone (tier IV–V) in an adjacent tradition",
+      "short": "Free to learn — but not their capstone. You are kin, not one of them.",
+      "more": "Your neighbours on the circle share your leanings, so their crafts come easily. But a people's deepest work is theirs. **Greatness is taught, not bought** — and they teach it to their own.",
+      "libraryLink": "domains-and-access"
+    },
+    {
+      "id": "lock.distance_penalty",
+      "surface": "an ability several steps around the ring",
+      "short": "Costs extra — this craft is {steps} steps from anything you are.",
+      "more": "The further a craft sits from your dispositions, the more it costs you to hold. Not forbidden. Just expensive, and honestly so.",
+      "libraryLink": "domains-and-access"
+    },
+    {
+      "id": "lock.tier_cap",
+      "surface": "an ability above the secondary/tertiary tier cap",
+      "short": "Your secondary goes to tier III; your tertiary to tier II. This is deeper than that.",
+      "more": "You may dabble broadly or go deep narrowly. Depth in a craft you did not centre your life on is not on offer.",
+      "libraryLink": "domains-and-access"
+    },
+    {
+      "id": "lock.tradition_gate",
+      "surface": "an ability of a people the player has no standing with",
+      "short": "You must be native to them, standing in their land, or taught by one of them.",
+      "more": "A people's craft is not a book you can read. You are born to it, you go to where it lives, or someone who holds it decides you are worth teaching. **Folk crafts are the exception** — the Valley's traditions are open to anyone, because the centre holds a little of everything.",
+      "libraryLink": "domains-and-access"
+    },
+    {
+      "id": "lock.level",
+      "surface": "an ability above the player's level",
+      "short": "You are not ready for this yet.",
+      "more": "Tiers are depth of mastery, not a shopping list. This one is further in than you have gone."
+    },
+    {
+      "id": "lock.capacity",
+      "surface": "the breadth cap — 'N of N skills, at capacity'",
+      "short": "You can carry only so many crafts at once. Further points now DEEPEN what you know rather than add to it.",
+      "more": "**Breadth or depth. That is the trade, and it is meant to cost you.** A person who knows a little of everything is not the same as a person who knows one thing to its root — and the game will not let you pretend otherwise. If you want a different craft, you must give one up, or grow.",
+      "libraryLink": "abilities-and-ranks"
+    },
+    {
+      "id": "circle.what",
+      "surface": "the great circle, wherever it is shown",
+      "short": "Twenty-four peoples on a ring. Twelve axes. Each people stands opposite the one it is the answer to.",
+      "more": "The world's physics is DISPOSITION. Every axis is a tension between two peoples — dark and light, death and life, order and chaos — and each people bears one end of it. **Your neighbours on the ring are your kin; the station directly across is your antipode, and it is closed to you.** This is not only a skill tree. It is the geography of the world, the map of who you can become, and the shape of what you gave up.",
+      "libraryLink": "the-great-circle"
+    },
+    {
+      "id": "circle.domains",
+      "surface": "primary / secondary / tertiary",
+      "short": "Primary: everything. Adjacent: free, but not their capstones. Secondary: to tier III. Tertiary: to tier II.",
+      "more": "Where you stand determines what you can reach. **And what you choose closes something forever** — the far side of your own axis. That closure is the price of being someone in particular.",
+      "libraryLink": "domains-and-access"
+    },
+    {
+      "id": "circle.braid",
+      "surface": "a cross-pole braid (known or rumoured)",
+      "short": "A braid holds an axis WHOLE — both poles at once. It is the only road to your own opposite.",
+      "more": "No people teaches these. You cannot buy one, and you cannot be trained in one. **You do something that should not have worked, and afterward you discover what you did.** To carry a braid is the rarest thing a character can do: to have refused to choose an end.",
+      "libraryLink": "combinations"
+    },
+    {
+      "id": "roll.novel",
+      "surface": "an action flagged NOVEL (−15)",
+      "short": "You are reaching past what you know. That is supposed to be dangerous.",
+      "more": "A novel act carries a −15 surcharge, a wider chance of a bad botch, and backlash if it fails. **The game does not punish you for improvising — it charges you for it, and it pays you back if you survive.**"
+    },
+    {
+      "id": "roll.discovery",
+      "surface": "a known discovery (+20)",
+      "short": "You did this, you survived it, and you repeated it until it was yours. The same act that cost you −15 now pays +20.",
+      "more": "That is a thirty-five point swing, and it is the heart of how this game grows you. **Power is not bought. It is earned by reaching past yourself and living.**"
+    },
+    {
+      "id": "roll.spectral_fit",
+      "surface": "after a roll where the place helped or hindered",
+      "short": "The place favoured this. / The place was against you.",
+      "more": "**Geography is disposition.** A place leans one way; when you act with its grain it lifts you, and when you act against it, it drags. Some places lean so hard that a stranger can barely function there — and your own antipode's country is the hardest ground in the world for you specifically."
+    },
+    {
+      "id": "roll.difficulty",
+      "surface": "the difficulty read on an action",
+      "short": "Routine · Hard · Very hard. The GM sets it from the fiction, not from your sheet.",
+      "more": "The world does not scale itself to you. Some things are simply beyond you right now, and the game will say so rather than quietly making them easy."
+    },
+    {
+      "id": "roll.exhaustion",
+      "surface": "acting at 0 energy",
+      "short": "Empty. Everything is −10 until you rest — but you can still act.",
+      "more": "Exhaustion is a cost, not a wall. You may always try. You will simply be worse at it, and you will know why."
+    },
+    {
+      "id": "energy.no_regen",
+      "surface": "the energy bar, and the first time it runs low",
+      "short": "Energy does not come back on its own. You recover by eating, resting, sleeping, or sitting still on purpose.",
+      "more": "**There is no passive regeneration.** A breather buys you a little; a night's sleep buys you most of it; meditation scales with what you have cultivated. **Rest is an ACT in this game, and forgetting to make time for it is a real mistake with real consequences.**"
+    },
+    {
+      "id": "ability.ranks",
+      "surface": "the rank pips on an ability",
+      "short": "Rank deepens ONE craft. Breadth adds another. You cannot do both at once.",
+      "more": "Ranks I–III take an ability from a thing you can do to a thing you ARE. At rank III some abilities FORK — and **the path you do not take closes forever.**"
+    },
+    {
+      "id": "ability.tiers",
+      "surface": "tier I–V on an ability",
+      "short": "Depth of mastery within a people's craft. I–III you can be taught. IV–V is a capstone — those are given, not sold.",
+      "more": "A capstone is one profound thing, not a longer version of a small thing. It is why you must have standing with a people to hold theirs."
+    },
+    {
+      "id": "ability.notFor",
+      "surface": "the `notFor` line on any ability",
+      "short": "Every craft has a thing it cannot do. This is that thing.",
+      "more": "**Nothing in this world is a universal tool.** The limits are not balance patches — they are what the craft IS. A ward that could also cut would not be a ward."
+    },
+    {
+      "id": "ability.functions",
+      "surface": "the function chips (heal · shield · strike · reveal · conceal · bind · move · break · ward)",
+      "short": "What this craft actually DOES, regardless of what it is called.",
+      "more": "Two peoples on opposite sides of the world may both `reveal` — one by burning the dark away, one by learning to see in it. **The function is the same. What it costs you is not.**"
+    },
+    {
+      "id": "combo.discovery",
+      "surface": "the moment a combination is minted",
+      "short": "You did two things together, enough times, and they became one thing. It has a name now.",
+      "more": "The engine noticed. It always was noticing. **You did not buy this and nobody taught it to you** — you found it by doing it, and it is yours in a way a purchased thing never is."
+    },
+    {
+      "id": "combo.tiers",
+      "surface": "the combination list",
+      "short": "Within-tradition · kin-civilization · cross-axis · cross-pole. In that order of difficulty.",
+      "more": "What you can braid tracks what you are NEAR. Your own people's crafts braid easily; your neighbours' with effort; the far side of the world only by accident and grace. **And the braid across your own axis — cross-pole — is the hardest thing there is.**",
+      "libraryLink": "combinations"
+    },
+    {
+      "id": "gambit.what",
+      "surface": "the Plan a Gambit affordance",
+      "short": "Connected challenges, each solvable several ways, planned ACROSS before you run them.",
+      "more": "A gambit is not a longer turn. It is a different KIND of turn: you see the whole shape, and you commit to it. **The elements make a gambit — not the number of steps.**",
+      "libraryLink": "gambits"
+    },
+    {
+      "id": "gambit.fewer_is_harder",
+      "surface": "the step count while building a gambit",
+      "short": "Fewer steps is HARDER. You have less slack.",
+      "more": "**Counter-intuitive and load-bearing:** every step is somewhere the plan can absorb a failure. A tight plan is elegant and brittle. A generous one survives a bad roll — because **invoking a fallback ADDS a step, and the gambit GROWS as it goes wrong.** A single-path plan dies on one bad number. A gambit does not.",
+      "libraryLink": "gambits"
+    },
+    {
+      "id": "gambit.energy",
+      "surface": "the running energy total in the gambit builder",
+      "short": "Each step costs. The total is what you are actually spending.",
+      "more": "You can plan something you cannot afford. The builder will let you. It will also tell you."
+    },
+    {
+      "id": "growth.xp",
+      "surface": "the xp bar",
+      "short": "You earn xp by DOING — every rolled action pays, and failure pays too.",
+      "more": "Crit 8 · success 5 · partial 3 · **failure 2** · a botch still pays 2. **Reaching and missing is worth more than not reaching.** Novel acts pay a bonus on top. The game rewards the attempt."
+    },
+    {
+      "id": "growth.level",
+      "surface": "levelling up",
+      "short": "A level buys: +1 attunement · +5 reserves · a sub-attribute point · a skill point · one more craft you may carry.",
+      "more": "Levels widen what you can hold. They do not, by themselves, make you good at anything — that is what you spend them on."
+    },
+    {
+      "id": "growth.attributes",
+      "surface": "the attribute dots + the soft cap at 4",
+      "short": "The first four points in an attribute are worth far more than the fifth.",
+      "more": "Competence is cheap; mastery is expensive. Going from hopeless to solid is the easy part of any life."
+    },
+    {
+      "id": "growth.aptitudes",
+      "surface": "when an aptitude is earned",
+      "short": "The game has been watching HOW you play, not just what you picked.",
+      "more": "Play things carefully and you become a strategist. Talk your way through and you become silver-tongued. **These accrue to the CHARACTER, not to you** — Cellaceron can be a strategist while Usnea is not, even though you play both."
+    },
+    {
+      "id": "world.danger",
+      "surface": "the danger marker on a location",
+      "short": "How dangerous this place is to ANYONE. How dangerous it is to YOU also depends on how far it sits from what you are.",
+      "more": "A pure pole — the Blaze, the Unlit Deep, the Grand Lattice — is brutal to everyone, and lethal to someone from its opposite. **You do not unlock a region. You become able to survive it.**"
+    },
+    {
+      "id": "world.folk_open",
+      "surface": "a folk tradition (Valley Craft · Harmonic · Radiant)",
+      "short": "Open to anyone. No standing required.",
+      "more": "These are the crafts of the near-centre, where all the axes cross faintly. **The centre can hold a little of everything — which is exactly why anyone may learn from it.**"
+    },
+    {
+      "id": "world.precursor",
+      "surface": "a precursor ability",
+      "short": "Not a people's craft. The substrate the world is built on.",
+      "more": "You do not learn this by studying. Something in the old lattice has to touch you first — and it does not ask."
+    },
+    {
+      "id": "world.heard_of",
+      "surface": "a dimmed entity on the map or in the codex",
+      "short": "You have heard of this. You have not seen it.",
+      "more": "Rumour is real information and the game treats it as such — but it is not knowledge, and it is drawn faintly to remind you of the difference."
+    },
+    {
+      "id": "quest.stakes",
+      "surface": "the STAKES line on any quest",
+      "short": "This is what happens if you walk away.",
+      "more": "**Every quest names the cost of ignoring it, because walking away is a real choice with a real price — not a failure state.** The world will proceed without you, and it will find you later."
+    },
+    {
+      "id": "quest.routes",
+      "surface": "the route list on a quest",
+      "short": "There is more than one way through this. Your domains change which ways are open.",
+      "more": "**A challenge with a single solution is a lock, not a story.** Force, guile, care, reason, craft, concealment, truth, endurance — the game does not have a preferred answer, and it will not punish you for solving things your own way."
+    },
+    {
+      "id": "companion.bond",
+      "surface": "the bond number on a companion",
+      "short": "They are deciding about you, the same way you are deciding about them.",
+      "more": "Bond grows by what you do near them, not by what you say. At depth, they teach you something no tradition will."
+    },
+    {
+      "id": "rating.ceiling",
+      "surface": "the content-rating setting",
+      "short": "This sets how intense the narration and the generated world get, for THIS person.",
+      "more": "G through R+. **Two floors are always on regardless of the ceiling:** never any prohibited content, and a minor is never portrayed in romantic or sexual terms. Those do not move, for anyone, ever. **In a shared world each player sees it through their own ceiling — so a family can play one world at different intensities without anyone bleeding into anyone else's.**"
+    }
+  ]
+}

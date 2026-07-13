@@ -35,7 +35,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6455522258834603,
+    "spectrumId": -0.6632746145892873,
     "violence_peace": 0.0335,
     "chaos_order": 0.08920993281249999,
     "mechanical_spiritual": 0.08591509375,
@@ -594,36 +594,77 @@
         "player": "Ask Huginn directly — hold your arm out and let it land, see if it will tell you what it has been threading toward.",
         "summary": "Huginn lands on Silas's arm and gives one low croak — direction north, no further answer.",
         "narration": "You hold your arm out, level with your shoulder, and wait.\n\nHuginn comes down out of the birches in three wingbeats and lands hard on your forearm — heavier than it looks, always heavier than it looks, the grip of its feet deliberate and grounding. It settles. Turns its head and looks at you with the eye that is too calm. The wood is quiet behind it, just the wet sedge dripping and Corvin's knife working steadily back at the kill.\n\nYou ask it plainly what it's been threading toward.\n\nThe bird tilts its head south — no, northwest. Holds the angle for a breath. Then it opens its beak and gives you one low croak that sits in the chest rather than the ear, the kind of sound a stone makes when it shifts in cold water. Pell goes still beside you.\n\nThat is all. It doesn't deny anything, doesn't elaborate. It hops once on your arm, resets its grip, and looks north again. The direction is clear enough. What is up there — whether it is one thing or many, whether it is dying or already dead, whether it is the bull at all — it does not say. The croak felt like *soon*, or maybe *already*, and the difference between those two things is the question it has left entirely in your hands."
+      },
+      {
+        "player": "Ask Pell if she's enjoying our date so far, and tell her she looks amazing with the dew soaking her boots in the early morning sun.",
+        "summary": "Silas compliments Pell in the birch corridor; she receives it straight, shoulder-to-shoulder, and the hunt continues north.",
+        "narration": "You fall into step beside Pell as the birch corridor opens ahead — Huginn still on your arm, its grip easing now that the question has been asked and the only answer given. The light is shifting, slowly, grey thinning toward something warmer as the ridge to the east catches the first real edge of sunrise. The dew is everywhere: on the sedge, on the bark, pooling in the boot-print the bull left in the soft ground ahead. Including, visibly, on Pell's boots — dark leather gone dark-black at the toe, a bright bead of it caught in the lacing.\n\nYou glance at her sideways and say it easy, unhurried: \"You enjoying our date so far?\"\n\nShe takes a beat. Then the corner of her mouth moves — not quite a smile, something drier, more contained. She looks down at her boots, then back up at the corridor ahead. \"Covered in mud, up before light, listening to a bird tell us where to walk.\" A pause. \"Yeah. I am.\"\n\n\"You look amazing,\" you tell her — and you mean it without making a production of it. The dew in the lacing, the set of her jaw in the thin morning light, the way she carries herself like someone who knows what her hands are for. \"Dew and all.\"\n\nShe breathes out through her nose — something between a laugh and a scoff, well short of embarrassed. Her eyes don't leave the bull's track. But her shoulder brushes yours as the corridor narrows, and she doesn't step away. The contact is brief and deliberate and unbothered, which is precisely the language she uses for things she means.\n\nHuginn shifts on your arm, head still turned north. The track is fresh. The bull is not far."
       }
     ],
     "lastTurn": {
-      "narration": "You hold your arm out, level with your shoulder, and wait.\n\nHuginn comes down out of the birches in three wingbeats and lands hard on your forearm — heavier than it looks, always heavier than it looks, the grip of its feet deliberate and grounding. It settles. Turns its head and looks at you with the eye that is too calm. The wood is quiet behind it, just the wet sedge dripping and Corvin's knife working steadily back at the kill.\n\nYou ask it plainly what it's been threading toward.\n\nThe bird tilts its head south — no, northwest. Holds the angle for a breath. Then it opens its beak and gives you one low croak that sits in the chest rather than the ear, the kind of sound a stone makes when it shifts in cold water. Pell goes still beside you.\n\nThat is all. It doesn't deny anything, doesn't elaborate. It hops once on your arm, resets its grip, and looks north again. The direction is clear enough. What is up there — whether it is one thing or many, whether it is dying or already dead, whether it is the bull at all — it does not say. The croak felt like *soon*, or maybe *already*, and the difference between those two things is the question it has left entirely in your hands.",
-      "sceneSummary": "Huginn lands on Silas's arm and gives one low croak — direction north, no further answer.",
+      "narration": "You fall into step beside Pell as the birch corridor opens ahead — Huginn still on your arm, its grip easing now that the question has been asked and the only answer given. The light is shifting, slowly, grey thinning toward something warmer as the ridge to the east catches the first real edge of sunrise. The dew is everywhere: on the sedge, on the bark, pooling in the boot-print the bull left in the soft ground ahead. Including, visibly, on Pell's boots — dark leather gone dark-black at the toe, a bright bead of it caught in the lacing.\n\nYou glance at her sideways and say it easy, unhurried: \"You enjoying our date so far?\"\n\nShe takes a beat. Then the corner of her mouth moves — not quite a smile, something drier, more contained. She looks down at her boots, then back up at the corridor ahead. \"Covered in mud, up before light, listening to a bird tell us where to walk.\" A pause. \"Yeah. I am.\"\n\n\"You look amazing,\" you tell her — and you mean it without making a production of it. The dew in the lacing, the set of her jaw in the thin morning light, the way she carries herself like someone who knows what her hands are for. \"Dew and all.\"\n\nShe breathes out through her nose — something between a laugh and a scoff, well short of embarrassed. Her eyes don't leave the bull's track. But her shoulder brushes yours as the corridor narrows, and she doesn't step away. The contact is brief and deliberate and unbothered, which is precisely the language she uses for things she means.\n\nHuginn shifts on your arm, head still turned north. The track is fresh. The bull is not far.",
+      "sceneSummary": "Silas compliments Pell in the birch corridor; she receives it straight, shoulder-to-shoulder, and the hunt continues north.",
       "choices": [
         {
-          "label": "Move north with Pell — follow Huginn's heading at a tracking pace, reading the ground as you go",
+          "label": "Follow the bull's track north, reading the pattern of its movement with Order-Sense — find where it's going, not just where it's been.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "violence_peace": 0.6,
-            "chaos_order": 0.3
+            "chaos_order": 0.6
           },
           "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move quietly and carefully up the corridor — let Huginn lead, watch the ground, and close the distance on the bull before it knows you're there.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": 0.3
+          },
+          "difficulty": 15,
           "intentTags": [
             "scout",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Deathsense before moving — hold still and read the north wood for anything ending or near its end up there",
+          "label": "Ask Pell what she makes of Huginn's heading — whether the iron has ever pulled her north the way it's been pulling the bird.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "mechanical_spiritual": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "talk",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Deathsense — feel for what is ending up the corridor before you walk toward it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.6,
-            "concrete_abstract": -0.3
+            "death_life": -0.5
           },
           "difficulty": 0,
           "intentTags": [
@@ -632,73 +673,34 @@
           ],
           "abilityId": "deathsense",
           "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Ask Pell what she heard in that croak — two sets of ears on the same signal",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.2,
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Let Huginn ride and walk north quickly — close the distance before the question answers itself without you",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.4,
-            "chaos_order": -0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "North wood interior, Millbrook — birch corridor and sedge strip, early grey pre-dawn light, ground damp underfoot. Corvin dressing the sow thirty yards south. The corridor opens northward between close-set birches.",
+        "setting": "North wood birch corridor, Millbrook — narrow close-set birches opening northward, dew heavy on sedge and bark, grey light shifting toward the first real edge of sunrise over the eastern ridge. Bull track in soft mud ahead.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Gone still beside Silas, watching Huginn on his arm — listening."
+            "state": "Walking the corridor beside Silas, shoulder briefly brushed against his, eyes on the bull's track ahead — dry and present."
           },
           {
             "name": "Corvin",
-            "state": "Thirty yards back in the sedge, dressing the sow — working steadily, not watching."
+            "state": "Thirty yards south in the sedge strip, dressing the sow — working steadily, out of earshot."
           },
           {
             "name": "Huginn",
-            "state": "Landed on Silas's forearm, grip firm, head turned north — waiting."
+            "state": "On Silas's forearm, grip deliberate, head turned north along the track."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear — in Silas's off-hand, butt clean",
-          "Bull's track — mud and crushed sedge leading north into the birch corridor",
-          "Sow — being dressed thirty yards south"
+          "Deathbound Runic Spear — in Silas's off-hand",
+          "Bull's track — fresh mud and crushed sedge leading north into the corridor",
+          "Sow — being dressed thirty yards south by Corvin"
         ],
         "threads": [
-          "Huginn pointed north and said nothing more — what is ending up there is still unknown",
+          "Huginn pointed north and said nothing more — what is ending up the corridor is still unknown",
           "Bull track, scattered piglets, and Huginn's northward heading all unresolved",
           "Corvin's smokehouse delivery still his task to complete"
         ]
@@ -708,52 +710,45 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Went still when Huginn croaked — listening hard, no comment yet.",
-          "statusNote": "In the north wood, beside Silas, about to move north toward the bull corridor.",
-          "relationshipDelta": 0
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "huginn",
-          "label": "Huginn",
-          "kind": "person",
-          "entityId": "huginn",
-          "fact": "Asked directly, Huginn landed and gave one croak — directional (northwest), felt like 'soon' or 'already'. Will not specify what is ending up there, only that the heading is north and the matter is present-tense.",
-          "links": [
-            "millbrook",
-            "the-unnamed-gift"
-          ]
+          "role": "Village blacksmith, Millbrook",
+          "note": "Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step away.",
+          "learned": [
+            "Receives directness the same way she receives ironwork — present, unbothered, no performance"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In the north wood birch corridor beside Silas, heading north after the bull."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — landing, asking, the croak, the silence."
+        "why": "A brief exchange in the corridor as the hunt continues — the light has shifted slightly toward sunrise."
       }
     },
     "sceneState": {
-      "setting": "North wood interior, Millbrook — birch corridor and sedge strip, early grey pre-dawn light, ground damp underfoot. Corvin dressing the sow thirty yards south. The corridor opens northward between close-set birches.",
+      "setting": "North wood birch corridor, Millbrook — narrow close-set birches opening northward, dew heavy on sedge and bark, grey light shifting toward the first real edge of sunrise over the eastern ridge. Bull track in soft mud ahead.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Gone still beside Silas, watching Huginn on his arm — listening."
+          "state": "Walking the corridor beside Silas, shoulder briefly brushed against his, eyes on the bull's track ahead — dry and presen"
         },
         {
           "name": "Corvin",
-          "state": "Thirty yards back in the sedge, dressing the sow — working steadily, not watching."
+          "state": "Thirty yards south in the sedge strip, dressing the sow — working steadily, out of earshot."
         },
         {
           "name": "Huginn",
-          "state": "Landed on Silas's forearm, grip firm, head turned north — waiting."
+          "state": "On Silas's forearm, grip deliberate, head turned north along the track."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear — in Silas's off-hand, butt clean",
-        "Bull's track — mud and crushed sedge leading north into the birch corridor",
-        "Sow — being dressed thirty yards south"
+        "Deathbound Runic Spear — in Silas's off-hand",
+        "Bull's track — fresh mud and crushed sedge leading north into the corridor",
+        "Sow — being dressed thirty yards south by Corvin"
       ],
       "threads": [
-        "Huginn pointed north and said nothing more — what is ending up there is still unknown",
+        "Huginn pointed north and said nothing more — what is ending up the corridor is still unknown",
         "Bull track, scattered piglets, and Huginn's northward heading all unresolved",
         "Corvin's smokehouse delivery still his task to complete"
       ]
@@ -897,7 +892,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Shouldered her kit and moved out without a word when Huginn dropped from the lintel — reading the bird's orientation as cleanly as Silas did.",
         "[d1] Noted Corvin's direction observation quietly — 'Same direction we're heading.' Not alarmed, just present.",
         "[d1] Collar up against the squall-wet, eyes on the trail and tree-line.",
         "[d1] Holding position, eyes on the tree-line — letting Silas take the lead on the ground-read.",
@@ -906,17 +900,18 @@
         "[d1] Held her east flank through the kill and came in clean afterward — watching Huginn on the fence-post now.",
         "[d1] Named the northward convergence aloud once the kill was confirmed — bull, piglets, Huginn all the same direction. Said it as observation, not alarm.",
         "[d1] Read the northward invitation without words — weight shifted forward, ready to move.",
-        "[d1] Went still when Huginn croaked — listening hard, no comment yet."
+        "[d1] Went still when Huginn croaked — listening hard, no comment yet.",
+        "[d1] Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step aw"
       ],
       "knownFacts": [
-        "Intends to keep the forge; also reaching toward something alongside it, connected to how the iron responded to her hand — no name for it yet",
         "Silas took a short way that erased the path behind him — he arrived in the valley through something he didn't fully understand",
         "Silas has no destination, only a direction — north, lately; the spear reads that way",
         "Silas frames his presence in places as: someone who can see a certain kind of thing, not a chosen one",
         "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs",
         "Aware that the boar's displaced ground and the direction of the presences Huginn is tracking are the same vector",
         "Held the bolt corridor through the gambit's full run — her position was the decisive constraint",
-        "Bull's direction, the piglets' scatter, and Huginn's orientation all converge north"
+        "Bull's direction, the piglets' scatter, and Huginn's orientation all converge north",
+        "Receives directness the same way she receives ironwork — present, unbothered, no performance"
       ],
       "skillsObserved": [
         "reading a signal under pressure",
@@ -927,7 +922,7 @@
         "naming a signal without dramatizing it"
       ],
       "status": "active",
-      "statusNote": "In the north wood, beside Silas, about to move north toward the bull corridor.",
+      "statusNote": "In the north wood birch corridor beside Silas, heading north after the bull.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1508,13 +1503,13 @@
     }
   },
   "tendencies": {
-    "strategic": 36.94508115284982,
-    "cerebral": 19.903462783161174,
-    "social": 41.20803700820716,
-    "generous": 8.654513358484435,
-    "cautious": 19.847262944106962,
-    "physical": 0.985074875,
-    "risky": 1
+    "strategic": 36.760355747085576,
+    "cerebral": 19.803945469245367,
+    "social": 43.001996823166124,
+    "generous": 8.611240791692012,
+    "cautious": 19.748026629386427,
+    "physical": 0.9801495006250001,
+    "risky": 0.995
   },
   "aptitudes": [
     "strategist",
@@ -1522,7 +1517,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 84,
+  "actionCount": 85,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1576,8 +1571,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783977501538,
-  "rev": 131,
+  "updatedAt": 1783977642392,
+  "rev": 132,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

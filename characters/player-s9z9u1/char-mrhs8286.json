@@ -12,7 +12,7 @@
   "attributes": {
     "physical": 3,
     "mental": 4,
-    "social": 3,
+    "social": 4,
     "practical": 4
   },
   "skills": {},
@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3111422520047119
+    "spectrumId": -0.34558513940447627
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -110,6 +110,30 @@
       "kind": "quest",
       "qty": 1,
       "description": "Pell's light point with a filed socket taper and a simple stop-lug crosspiece — enough to keep a shaft from riding up a boar's neck. Wrapped in oilcloth. For Corvin.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Seasoned Ash Shaft (x2)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Six feet of two-winter-dry ash, pale grain, socket-end ready. Won't split under a boar's weight.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Rune-Craft Kit",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A stub of hard cooper's wax, a half-spent vial of lamp-black in pine pitch, and a strip of tooling-grade oiled leather — for pressing, staining, and binding marks into worked surfaces.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Fine River Whetstone",
+      "kind": "misc",
+      "qty": 1,
+      "description": "A flat dark-gray river stone with a faint blue face — fine grit, smooth-faced. Mara had it set aside for Pell. A practical gift.",
       "consumable": false
     }
   ],
@@ -286,104 +310,110 @@
         "player": "Ask what's in the back that she's sitting on, as well as if she has a couple good shafts for boar spears - give her the gist of the plan for the hunt.  And mention that Pell agreed to the date with you after seeing you work with your shirt off.",
         "summary": "Mara produces two seasoned ash shafts from the back — the hunt is nearly fully equipped.",
         "narration": "You lean one elbow on the counter — easy, unhurried — and let it land like you're sharing something she'll want to hear. \"I know you've got wire stock behind the second box,\" you say, nodding toward the right wall, \"and I'm guessing the mid-weight rope gap means someone already beat me to a coil this morning. So — what else are you sitting on back there? Specifically, I'm after a pair of good shafts. Boar spears. Something that won't split when a two-hundred-pound animal decides to disagree with it.\"\n\nMara's pen is still down. She looks at you — a real look, the kind that prices inventory — and then something loosens around her eyes. Not warmth exactly, but the expression of a person who has heard a hundred fumbling pitches and recognizes one that knows what it's asking for. \"The shafts are in the back,\" she says. \"Ash. Seasoned two winters. I had three; the foresters took one last week.\" She's already moving around the counter. \"Two left. I don't display them — wrong clientele for impulse buys.\"\n\nShe comes back with two poles, six feet of pale ash each, laid across the counter with the kind of care that is also inspection. You run a thumb down the grain. Clean, tight, no wander. Socket-end trued flat. She's watching your hands the same way Pell did.\n\n\"Pell's already in,\" you add, and you say it with just enough weight. \"She saw me work. Said yes after.\" A beat — enough to let her fill in 'after what.' \"We're going at the sounder in the north wood. Three of us, proper iron on ash, and we know where the game trails run along the granite shelf. Aldric at the smokehouse gets the meat.\" You meet her eyes. \"Those two shafts would be going to exactly the right hands.\"\n\nMara is quiet for a moment. Then she picks up one of the poles, sights down it, sets it back. \"Sixty cord each, or I'll credit you one against a full parcel trade with the smokehouse — Aldric and I run an account.\" She glances at Huginn, who is being very still on your pack frame with the energy of something that has decided to be polite. \"Your bird stays off my stock shelves.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "I plan to craft my spear with the ways of my people, mystic runes and mystery... is there anything she has around that could help with that?  And yes, I'll take the credit offer for one but pay out of pocket for the other.. plus, I'm hoping to give Pella a gift.. .any suggestions?",
+        "summary": "Silas buys two ash shafts, acquires rune-craft materials, and picks up a whetstone gift for Pell — all at Mara's counter.",
+        "narration": "You settle the terms first — one shaft credited against Aldric's smokehouse account, sixty cord coin-weight out of pocket for the second. Mara lifts the ledger, makes two clean entries, and slides one shaft toward you with the air of someone closing a door that's been left open. The other she wraps in a length of loose burlap and sets beside it. Done.\n\nThen you ask about the runes — materials that would hold a mark, take an impression, something your people's way of working demands. You don't explain all of it, but you give her enough: that the spear needs more than iron and ash, that the working matters as much as the geometry. Mara's expression doesn't change, but she moves — back through the curtain behind the counter, returns with three things laid in her palm. First: a thumb-length stub of dark wax, the kind coopers use to seal grain-barrel seams, dense enough to press into carved grooves and cure hard. Second: a small glass vial of lamp-black mixed in pine pitch — the sort of ink a ledger-keeper uses when the entry must not wash out. Third, almost as an afterthought: a single strip of tanned leather, tooling-grade, already oiled. \"Staining, pressing, or binding,\" she says, setting them on the counter one at a time. \"Take what's useful.\" She names no price on the vial — it's half-spent — but the leather strip and the wax she adds to the ledger entry without ceremony.\n\nFor Pell, you ask with the same easy lean you've been carrying all morning. Mara looks at you for a moment — just long enough to weigh the question — and then nods once toward the back shelf. \"She came in three weeks ago looking for a small whetstone, fine grit. I was out. Still am.\" She reaches under the counter and sets a paper-wrapped parcel about the size of your fist on the wood — a flat river-stone, smooth, dark gray, with a faint blue cast to the face. \"I was going to send it up with the next hardware run. You're earlier.\" She adds it to the ledger — one sharp look to make sure you understand it's going on the bill — and that's that. A practical woman's version of romance, transacted clean."
       }
     ],
     "lastTurn": {
-      "narration": "You lean one elbow on the counter — easy, unhurried — and let it land like you're sharing something she'll want to hear. \"I know you've got wire stock behind the second box,\" you say, nodding toward the right wall, \"and I'm guessing the mid-weight rope gap means someone already beat me to a coil this morning. So — what else are you sitting on back there? Specifically, I'm after a pair of good shafts. Boar spears. Something that won't split when a two-hundred-pound animal decides to disagree with it.\"\n\nMara's pen is still down. She looks at you — a real look, the kind that prices inventory — and then something loosens around her eyes. Not warmth exactly, but the expression of a person who has heard a hundred fumbling pitches and recognizes one that knows what it's asking for. \"The shafts are in the back,\" she says. \"Ash. Seasoned two winters. I had three; the foresters took one last week.\" She's already moving around the counter. \"Two left. I don't display them — wrong clientele for impulse buys.\"\n\nShe comes back with two poles, six feet of pale ash each, laid across the counter with the kind of care that is also inspection. You run a thumb down the grain. Clean, tight, no wander. Socket-end trued flat. She's watching your hands the same way Pell did.\n\n\"Pell's already in,\" you add, and you say it with just enough weight. \"She saw me work. Said yes after.\" A beat — enough to let her fill in 'after what.' \"We're going at the sounder in the north wood. Three of us, proper iron on ash, and we know where the game trails run along the granite shelf. Aldric at the smokehouse gets the meat.\" You meet her eyes. \"Those two shafts would be going to exactly the right hands.\"\n\nMara is quiet for a moment. Then she picks up one of the poles, sights down it, sets it back. \"Sixty cord each, or I'll credit you one against a full parcel trade with the smokehouse — Aldric and I run an account.\" She glances at Huginn, who is being very still on your pack frame with the energy of something that has decided to be polite. \"Your bird stays off my stock shelves.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Mara produces two seasoned ash shafts from the back — the hunt is nearly fully equipped.",
+      "narration": "You settle the terms first — one shaft credited against Aldric's smokehouse account, sixty cord coin-weight out of pocket for the second. Mara lifts the ledger, makes two clean entries, and slides one shaft toward you with the air of someone closing a door that's been left open. The other she wraps in a length of loose burlap and sets beside it. Done.\n\nThen you ask about the runes — materials that would hold a mark, take an impression, something your people's way of working demands. You don't explain all of it, but you give her enough: that the spear needs more than iron and ash, that the working matters as much as the geometry. Mara's expression doesn't change, but she moves — back through the curtain behind the counter, returns with three things laid in her palm. First: a thumb-length stub of dark wax, the kind coopers use to seal grain-barrel seams, dense enough to press into carved grooves and cure hard. Second: a small glass vial of lamp-black mixed in pine pitch — the sort of ink a ledger-keeper uses when the entry must not wash out. Third, almost as an afterthought: a single strip of tanned leather, tooling-grade, already oiled. \"Staining, pressing, or binding,\" she says, setting them on the counter one at a time. \"Take what's useful.\" She names no price on the vial — it's half-spent — but the leather strip and the wax she adds to the ledger entry without ceremony.\n\nFor Pell, you ask with the same easy lean you've been carrying all morning. Mara looks at you for a moment — just long enough to weigh the question — and then nods once toward the back shelf. \"She came in three weeks ago looking for a small whetstone, fine grit. I was out. Still am.\" She reaches under the counter and sets a paper-wrapped parcel about the size of your fist on the wood — a flat river-stone, smooth, dark gray, with a faint blue cast to the face. \"I was going to send it up with the next hardware run. You're earlier.\" She adds it to the ledger — one sharp look to make sure you understand it's going on the bill — and that's that. A practical woman's version of romance, transacted clean.",
+      "sceneSummary": "Silas buys two ash shafts, acquires rune-craft materials, and picks up a whetstone gift for Pell — all at Mara's counter.",
       "choices": [
         {
-          "label": "Take both shafts on the smokehouse credit account — let Aldric and Mara settle it.",
+          "label": "Pack up and head east toward the furlong to find Corvin — deliver his modified tip and invite him on the hunt.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "deal",
-            "practical"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask about the wire stock and snare frames too — the hunt isn't the only thing you're outfitting for.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "practical"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Pay the sixty cord each and ask if she knows anything about the upstream water — she runs a ledger; she notices things.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "investigate",
-            "persuade"
-          ],
-          "trivial": false,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Thank her, take the shafts on credit, and head straight for the east furlong to find Corvin — the hunt is the priority.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "move",
+            "help",
             "plan"
           ],
-          "trivial": true,
           "abilityId": null,
           "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Before leaving, ask Mara if she knows anything about the gray-green water — what people in the store are saying, who's worried, who isn't.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "spectrumId": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Stop at the well square before leaving — get a sense of the morning's social weather, who's talking, what's moving through the village today.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "spectrumId": -0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Sit down on the counter edge and work the rune-marks into the ash shaft right here — use the wax and lamp-black while the grain is warm from handling, and see what the marking wants to say.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "spectrumId": -0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "craft",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         }
       ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "xp": 3
-      },
-      "scene": {
-        "setting": "Mara Wells's supply store — east of the well square, red door. Interior: rope on wall-pegs (three weights, mid-weight peg gap visible), hardware boxes sorted left to right, back shelf with traded-in tools. Two seasoned ash shafts lying across the counter. Morning light through the open door. Linseed oil and dry cedar.",
-        "npcsPresent": [
+        "inventoryAdd": [
           {
-            "name": "Mara Wells",
-            "state": "Standing at the counter, two ash shafts laid out, watching Silas — terms named, waiting for his answer."
+            "name": "Seasoned Ash Shaft (x2)",
+            "kind": "tool",
+            "description": "Six feet of two-winter-dry ash, pale grain, socket-end ready. Won't split under a boar's weight.",
+            "consumable": false,
+            "effects": {}
           },
           {
-            "name": "Huginn",
-            "state": "On Silas's pack frame, very still, being deliberate about not touching the stock shelves."
+            "name": "Rune-Craft Kit",
+            "kind": "tool",
+            "description": "A stub of hard cooper's wax, a half-spent vial of lamp-black in pine pitch, and a strip of tooling-grade oiled leather — for pressing, staining, and binding marks into worked surfaces.",
+            "consumable": false,
+            "effects": {}
+          },
+          {
+            "name": "Fine River Whetstone",
+            "kind": "misc",
+            "description": "A flat dark-gray river stone with a faint blue face — fine grit, smooth-faced. Mara had it set aside for Pell. A practical gift.",
+            "consumable": false,
+            "effects": {}
           }
         ],
-        "objects": [
-          "Two seasoned ash spear-shafts on the counter — six feet, pale grain, socket-end trued flat",
-          "Rope in three weights on wall pegs — mid-weight peg has a fresh gap",
-          "Open-topped wooden boxes of sorted hardware, weight-ordered left to right",
-          "Back shelf: mended drawknife, short-handled mattock, two wire snare frames",
-          "Second hardware box from right — wire coil inside, same gauge as the snare frame",
-          "Ledger open on the counter"
-        ],
-        "threads": [
-          "Mara's terms on the table — sixty cord each, or one shaft credited against Aldric's smokehouse account",
-          "Wire stock and snare frames — undisplayed, but Silas knows they're there",
-          "Corvin still to be found in the east furlong",
-          "Modified Light Spear-Tip (Corvin's) in pack, waiting to be delivered"
-        ]
+        "inventoryRemove": [],
+        "xp": 0
       },
       "npcUpdates": [
         {
@@ -391,67 +421,106 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Village supply store operator, Millbrook — east of the well, red door",
-          "note": "Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each, or one credited against her smokehouse account with Aldric. Set one ground rule: the bird stays off her stock shelves.",
+          "note": "Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-black pitch-ink, leather strip. Handed over a fine river whetstone she'd been holding for Pell; added it to the bill without sentiment.",
           "learned": [
-            "Runs a trade account with Aldric at the smokehouse — can credit goods against it",
-            "Has two seasoned ash shafts in the back — six feet, two winters dry, not on display",
-            "The foresters took one shaft last week — aware of what's moving through the valley",
-            "Responds to a pitch that shows knowledge of what's being asked for"
+            "Had a fine-grit whetstone held back for Pell — three weeks, no delivery run yet; handed it to Silas instead",
+            "Treats gift logistics the same as inventory: practical, clean, on the ledger"
           ],
           "skillsObserved": [
-            "reading a customer's competence through their hands",
-            "back-stock management",
-            "practical trade negotiation"
+            "stock sourcing from reserve",
+            "discreet ledger management",
+            "reading a customer's intent without needing it explained"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Behind the counter at the supply store, terms named, waiting for Silas to decide on the ash shafts."
+          "statusNote": "Behind her counter at the supply store, accounts settled, watching the door."
         }
       ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Two ash shafts acquired from Mara Wells — one on smokehouse account, one paid. Rune-craft materials in hand. Whetstone for Pell sourced. Next step: find Corvin in the east furlong."
+        }
+      ],
+      "scene": {
+        "setting": "Mara Wells's supply store — red door, east of the well square. Interior: rope on wall pegs, sorted hardware boxes, back shelf with traded-in tools. Morning light through the open door. Linseed oil and dry cedar. Two ash shafts now wrapped in loose burlap on the counter, ledger entries closed.",
+        "npcsPresent": [
+          {
+            "name": "Mara Wells",
+            "state": "Ledger closed, pen set down — watching Silas pack up, expression settled and neutral."
+          },
+          {
+            "name": "Huginn",
+            "state": "On Silas's pack frame, studying the river-whetstone with the focused attention of something that finds smooth stones professionally interesting."
+          }
+        ],
+        "objects": [
+          "Two seasoned ash shafts — wrapped in burlap, ready to carry",
+          "Rune-Craft Kit on the counter — wax stub, pitch-ink vial, leather strip",
+          "Fine River Whetstone — paper-wrapped, sitting beside the kit",
+          "Rope on wall pegs (three weights — mid-weight gap still present)",
+          "Sorted hardware boxes, ledger closed on the counter"
+        ],
+        "threads": [
+          "Corvin still to be found in the east furlong — modified tip needs delivery, hunt invitation pending",
+          "Gray-green water question — Mara not yet asked about it",
+          "Rune-work on the shaft — materials in hand, work not yet done"
+        ]
+      },
       "codexUpdates": [
         {
           "topic": "mara-wells",
           "label": "Mara Wells",
           "kind": "person",
           "entityId": "mara-wells",
-          "fact": "Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
+          "fact": "Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Aldric's smokehouse account, one at sixty cord.",
           "links": [
             "millbrook",
             "aldric",
-            "aldric-provisioning-deal"
+            "aldric-provisioning-deal",
+            "pell"
           ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Two ash shafts purchased from Mara Wells on World-day 13 morning — one on smokehouse account, one paid. Rune-craft materials (wax, pitch-ink, leather) and a fine river whetstone for Pell also acquired. Ledger updated.",
+          "subPlace": {
+            "name": "Mara Wells's Store",
+            "note": "Ash shafts sold, rune-craft materials sourced, whetstone for Pell handed off. Accounts closed for this visit.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quick exchange at the counter — terms named, shafts on the table."
+        "why": "A brief transaction — terms settled, goods packed, no lingering."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's supply store — east of the well square, red door. Interior: rope on wall-pegs (three weights, mid-weight peg gap visible), hardware boxes sorted left to right, back shelf with traded-in tools. Two seasoned ash shafts lying across the counter. Morning light through the open door. Linseed oil and dry cedar.",
+      "setting": "Mara Wells's supply store — red door, east of the well square. Interior: rope on wall pegs, sorted hardware boxes, back shelf with traded-in tools. Morning light through the open door. Linseed oil and dry cedar. Two ash shafts now wrapped in loose burlap on the counter, ledger entries closed.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at the counter, two ash shafts laid out, watching Silas — terms named, waiting for his answer."
+          "state": "Ledger closed, pen set down — watching Silas pack up, expression settled and neutral."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's pack frame, very still, being deliberate about not touching the stock shelves."
+          "state": "On Silas's pack frame, studying the river-whetstone with the focused attention of something that finds smooth stones pro"
         }
       ],
       "objects": [
-        "Two seasoned ash spear-shafts on the counter — six feet, pale grain, socket-end ",
-        "Rope in three weights on wall pegs — mid-weight peg has a fresh gap",
-        "Open-topped wooden boxes of sorted hardware, weight-ordered left to right",
-        "Back shelf: mended drawknife, short-handled mattock, two wire snare frames",
-        "Second hardware box from right — wire coil inside, same gauge as the snare frame",
-        "Ledger open on the counter"
+        "Two seasoned ash shafts — wrapped in burlap, ready to carry",
+        "Rune-Craft Kit on the counter — wax stub, pitch-ink vial, leather strip",
+        "Fine River Whetstone — paper-wrapped, sitting beside the kit",
+        "Rope on wall pegs (three weights — mid-weight gap still present)",
+        "Sorted hardware boxes, ledger closed on the counter"
       ],
       "threads": [
-        "Mara's terms on the table — sixty cord each, or one shaft credited against Aldric's smokehouse account",
-        "Wire stock and snare frames — undisplayed, but Silas knows they're there",
-        "Corvin still to be found in the east furlong",
-        "Modified Light Spear-Tip (Corvin's) in pack, waiting to be delivered"
+        "Corvin still to be found in the east furlong — modified tip needs delivery, hunt invitation pending",
+        "Gray-green water question — Mara not yet asked about it",
+        "Rune-work on the shaft — materials in hand, work not yet done"
       ]
     }
   },
@@ -478,14 +547,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Silas delivered two rabbits and the pigeon — first hunting delivery made. Aldric provided preserved trail food in return and directed Silas to Mara Wells for hunting equipment.",
         "Silas has arrived at Pell's forge — the next step in equipping for sustained hunting north of the village.",
         "Silas has offered forge-labor to Pell in exchange for hunting company north of the village — negotiation ongoing at the forge.",
         "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now.",
         "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear.",
         "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set.",
         "Forge backlog fully cleared — hand-axe heat-collar seated. Pell confirmed ready to walk north once Corvin is found. Hunt party of three one step from departure.",
-        "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north."
+        "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north.",
+        "Two ash shafts acquired from Mara Wells — one on smokehouse account, one paid. Rune-craft materials in hand. Whetstone for Pell sourced. Next step: find Corvin in the east furlong."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -638,32 +707,33 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] First contact — Silas entered the store, she looked up from her ledger. Has not yet been given reason to be warm or cold.",
         "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
-        "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,"
+        "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,",
+        "[d1] Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-bla"
       ],
       "knownFacts": [
-        "Runs the store with a ledger and organized stock",
-        "Did not react to Huginn with alarm",
         "Her store's organization is a deliberate system — weight-sorted, frequency-ordered, seasonal rotation; the ledger is the actual spine",
         "She has more wire stock than displayed — same gauge as the snare frames on the back shelf",
         "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked",
         "Runs a trade account with Aldric at the smokehouse — can credit goods against it",
         "Has two seasoned ash shafts in the back — six feet, two winters dry, not on display",
-        "The foresters took one shaft last week — aware of what's moving through the valley"
+        "The foresters took one shaft last week — aware of what's moving through the valley",
+        "Had a fine-grit whetstone held back for Pell — three weeks, no delivery run yet; handed it to Silas instead",
+        "Treats gift logistics the same as inventory: practical, clean, on the ledger"
       ],
       "skillsObserved": [
-        "inventory management",
-        "customer-reading",
-        "composed attention",
         "reading a customer's competence through their hands",
         "back-stock management",
-        "practical trade negotiation"
+        "practical trade negotiation",
+        "stock sourcing from reserve",
+        "discreet ledger management",
+        "reading a customer's intent without needing it explained"
       ],
       "status": "active",
-      "statusNote": "Behind the counter at the supply store, terms named, waiting for Silas to decide on the ash shafts.",
+      "statusNote": "Behind her counter at the supply store, accounts settled, watching the door.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -674,7 +744,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Two rabbits and a pigeon delivered to Aldric's cutting block on World-day 12 — first payment under the provisioning deal. Aldric provided two cloth-wrapped parcels of preserved food in return.",
         "[d1] Pell the blacksmith operates a forge on the south lane, past the elder's post — does edge work, hardware, repairs, and heavier iron for hunting. The village has had no bowyer for two winters.",
         "[d1] Pell's forge visited on World-day 12 — stocks snare hardware (plates, toggles, stakes), chain, and three grades of spear-tip. Open-front under a wide overhang, south lane past the elder's post.",
         "[d1] A brief squall passed through on World-day 12 mid-morning — lane stones briefly wet, air sharp and cold after. Cleared fast.",
@@ -685,7 +754,8 @@
         "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
         "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e",
         "[d1] Hand-axe heat-collar seated and finished on World-day 12 morning — backlog completely cleared. All five tools on the rack. Forge ready for normal work.",
-        "[d1] Mid-weight spear-tip sold to Silas Weir on World-day 12 morning; light point modified with stop-lug for Corvin and delivered to Silas for hand-off. Labor credit from backlog deducted — accounts closed"
+        "[d1] Mid-weight spear-tip sold to Silas Weir on World-day 12 morning; light point modified with stop-lug for Corvin and delivered to Silas for hand-off. Labor credit from backlog deducted — accounts closed",
+        "[d1] Two ash shafts purchased from Mara Wells on World-day 13 morning — one on smokehouse account, one paid. Rune-craft materials (wax, pitch-ink, leather) and a fine river whetstone for Pell also acquired"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -725,6 +795,12 @@
           "day": 1,
           "visited": true,
           "note": "Backlog cleared, both spear transactions complete — forge back to normal work. Mid-weight peg now empty."
+        },
+        "mara-wells-s-store": {
+          "name": "Mara Wells's Store",
+          "day": 1,
+          "visited": true,
+          "note": "Ash shafts sold, rune-craft materials sourced, whetstone for Pell handed off. Accounts closed for this visit."
         }
       },
       "vectorsKnown": [
@@ -797,11 +873,11 @@
     "reason": 4,
     "insight": 3,
     "presence": 3,
-    "rapport": 3,
+    "rapport": 4,
     "craft": 3,
     "wits": 4
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [],
   "codex": {
@@ -940,12 +1016,14 @@
           "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs",
           "[d1] Runs the village supply store east of the well — red door. Stocks rope (three weights), sorted hardware, and occasional traded-in tools. Keeps a close ledger. Reacted to Huginn's presence without alar",
           "[d1] Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh",
-          "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain."
+          "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
+          "[d1] Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Al"
         ],
         "links": [
           "millbrook",
           "aldric",
-          "aldric-provisioning-deal"
+          "aldric-provisioning-deal",
+          "pell"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1038,11 +1116,11 @@
     }
   },
   "tendencies": {
-    "strategic": 18.083310547028923,
-    "cerebral": 9.076074095403023,
-    "social": 21.426843317241318,
-    "generous": 7.087921842098681,
-    "cautious": 9.373419280754492
+    "strategic": 19.992893994293777,
+    "cerebral": 9.030693724926007,
+    "social": 22.31970910065511,
+    "generous": 8.052482232888188,
+    "cautious": 9.326552184350719
   },
   "aptitudes": [
     "strategist",
@@ -1050,7 +1128,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 32,
+  "actionCount": 33,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1072,8 +1150,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783901564572,
-  "rev": 56,
+  "updatedAt": 1783901916340,
+  "rev": 58,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

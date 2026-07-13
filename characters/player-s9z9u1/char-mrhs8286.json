@@ -534,187 +534,137 @@
         "player": "Read the heavier track more closely with Order-Sense — the bull came through and didn't stay; find out where it went",
         "summary": "Order-Sense reads the bull's track — northwest, unhurried, destination unclear. Sow and young still ahead.",
         "narration": "You keep the crouch, palms still near the mud, and let Order-Sense narrow onto the heavier prints — the two with bull-weight, dew-edge softer than the sow's, made somewhere between midnight and first light. The pattern is there but it doesn't resolve cleanly at this range. You get direction: northwest, angling away from the sedge strip, toward the drier scrub on the far side of the fence-line. You get weight — heavy, deliberate, unhurried. What you don't get is a terminus. The trail bends into the canopy and the pattern thins out before it gives you a destination. He moved on. Where he stopped, you can't say.\n\nYou stand and wipe your hands on your thigh. Huginn is still threading north between bare trunks, interval unchanged — whatever he's orienting on is ahead and separate from the bull's line, which means at least for now the two aren't the same problem.\n\nCorvin is already reading your posture. He doesn't ask — he just shifts his grip on the light spear and tilts his head a fraction west, offering the question without words. Pell holds where she is, eyes on the tree-line, letting you speak when you're ready."
+      },
+      {
+        "player": "Tell Corvin and Pell what you read — bull went northwest, sow is twenty minutes ahead — and let the three of you agree on a spread before you enter the tree-line",
+        "summary": "Hunt party agrees on a spread and enters the tree-line — sow and young in the sedge strip ahead.",
+        "narration": "You stand and give them the short version. \"Bull went northwest, maybe midnight. Unhurried — not spooked, just moving to higher ground. Sow and young are still in the sedge strip ahead. Twenty minutes, maybe less now.\" You nod toward the tree-line where Huginn's grey shape is threading between bare trunks, heading a few degrees east of the bull's line. \"Huginn's still orienting on something separate. Two or three presences, patterned. North, not northwest.\"\n\nCorvin chews on that for a moment, then looks at the canopy gap. \"If we take the bull we take him alone, in drier scrub — better footing, less noise. Sow's more predictable. Young with her means she won't break early, but it means she won't yield easy either.\" He's not advocating. He's handing Silas the variables.\n\nPell turns from the tree-line to look at you both. \"Sow's the safer kill. Bull's the cleaner one.\" A pause, flat and practical. \"Spread: you and the spear on the inside, cut her line to the sedge. I take the east flank and keep the young moving forward. Corvin closes the west and we pin her against the fence-line.\" Her eyes go to Corvin. He gives a short nod — he's walked that fence-line a hundred times; he knows exactly where it bends.\n\nThe three of you slip into the tree-line without ceremony, footfalls going quiet on the wet leaf-mat. Huginn drops out of sight somewhere ahead, unhurried. The sedge strip is a dark line between bare trunks, maybe a hundred yards in, and from here you can already catch the low earthy smell of rooted mud."
       }
     ],
     "lastTurn": {
-      "narration": "You keep the crouch, palms still near the mud, and let Order-Sense narrow onto the heavier prints — the two with bull-weight, dew-edge softer than the sow's, made somewhere between midnight and first light. The pattern is there but it doesn't resolve cleanly at this range. You get direction: northwest, angling away from the sedge strip, toward the drier scrub on the far side of the fence-line. You get weight — heavy, deliberate, unhurried. What you don't get is a terminus. The trail bends into the canopy and the pattern thins out before it gives you a destination. He moved on. Where he stopped, you can't say.\n\nYou stand and wipe your hands on your thigh. Huginn is still threading north between bare trunks, interval unchanged — whatever he's orienting on is ahead and separate from the bull's line, which means at least for now the two aren't the same problem.\n\nCorvin is already reading your posture. He doesn't ask — he just shifts his grip on the light spear and tilts his head a fraction west, offering the question without words. Pell holds where she is, eyes on the tree-line, letting you speak when you're ready.",
-      "sceneSummary": "Order-Sense reads the bull's track — northwest, unhurried, destination unclear. Sow and young still ahead.",
+      "narration": "You stand and give them the short version. \"Bull went northwest, maybe midnight. Unhurried — not spooked, just moving to higher ground. Sow and young are still in the sedge strip ahead. Twenty minutes, maybe less now.\" You nod toward the tree-line where Huginn's grey shape is threading between bare trunks, heading a few degrees east of the bull's line. \"Huginn's still orienting on something separate. Two or three presences, patterned. North, not northwest.\"\n\nCorvin chews on that for a moment, then looks at the canopy gap. \"If we take the bull we take him alone, in drier scrub — better footing, less noise. Sow's more predictable. Young with her means she won't break early, but it means she won't yield easy either.\" He's not advocating. He's handing Silas the variables.\n\nPell turns from the tree-line to look at you both. \"Sow's the safer kill. Bull's the cleaner one.\" A pause, flat and practical. \"Spread: you and the spear on the inside, cut her line to the sedge. I take the east flank and keep the young moving forward. Corvin closes the west and we pin her against the fence-line.\" Her eyes go to Corvin. He gives a short nod — he's walked that fence-line a hundred times; he knows exactly where it bends.\n\nThe three of you slip into the tree-line without ceremony, footfalls going quiet on the wet leaf-mat. Huginn drops out of sight somewhere ahead, unhurried. The sedge strip is a dark line between bare trunks, maybe a hundred yards in, and from here you can already catch the low earthy smell of rooted mud.",
+      "sceneSummary": "Hunt party agrees on a spread and enters the tree-line — sow and young in the sedge strip ahead.",
       "choices": [
         {
-          "label": "Move in on the sow and young — northwest puts the bull crosswind; angle into the sedge strip now before they move deeper under the canopy",
+          "label": "Press the approach — move into position and close the last hundred yards quietly, trusting the spread you've set",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": -0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "hunt",
             "careful",
-            "approach"
+            "hunt",
+            "stalk"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Tell Corvin and Pell what you read — bull went northwest, sow is twenty minutes ahead — and let the three of you agree on a spread before you enter the tree-line",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "coordinate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Push Order-Sense a little harder on the bull's track — try to find where the pattern resumes past the bend, before committing to the sedge strip",
+          "label": "Use Order-Sense on the sedge strip at close range — read where the sow is standing before you commit to the spread",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
+            "scout",
             "study",
-            "scout"
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Check Huginn's heading against the bull's northwest line — whistle him back to your shoulder and read whether they match or diverge",
+          "label": "Pause and read Huginn's heading first — whatever is patterned to the north, it's not the sounder; know what it is before you're committed",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "scout",
+            "study",
             "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Change the plan — the bull went northwest alone, that's a cleaner kill with better footing; redirect the party",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "lead",
+            "hunt"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line."
-        }
-      ],
       "scene": {
-        "setting": "North meadow game trail, Millbrook — pre-dawn blue-grey after a brief squall, sixty yards from the tree-line, wet willows to the northwest, dew on the grass. Silas rising from the mud-strip, bull track partially read.",
+        "setting": "North wood interior, Millbrook — just inside the tree-line, pre-dawn grey light through bare canopy, wet leaf-mat underfoot. Sedge strip visible as a dark band roughly a hundred yards ahead between trunks.",
         "npcsPresent": [
           {
             "name": "Corvin",
-            "state": "Shifted his grip on the light spear, tilted his head west — asking without speaking, waiting for the report."
+            "state": "Moving in on the west flank, quiet and deliberate — knows this fence-line by heart."
           },
           {
             "name": "Pell",
-            "state": "Holding still, eyes on the tree-line, collar up, letting Silas speak."
+            "state": "Taking the east flank, collar still up, eyes forward."
           },
           {
             "name": "Huginn",
-            "state": "Still threading north between bare trunks past the tree-line — interval unchanged, heading distinct from the bull's northwest line."
+            "state": "Out of visible sight ahead — threading north, somewhere past the sedge strip."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear — shouldered, tip forward",
+          "Deathbound Runic Spear — in hand, tip forward",
           "Traveler's Pack — on Silas's back",
-          "Game trail — worn trace bending northwest",
-          "Mud-strip at the trail edge",
-          "Fresh sow-print in the mud — dew-edge sharp, twenty minutes old",
-          "Two older bull-weight prints — midnight to first-light, heading northwest toward drier scrub",
-          "Tree-line — sixty yards ahead, canopy bare enough to show grey sky panels",
-          "Dew-wet meadow grass"
+          "Wet leaf-mat underfoot",
+          "Bare canopy — grey sky panels overhead",
+          "Sedge strip — dark, low, a hundred yards ahead",
+          "Fence-line — west edge of the wood, just visible through trunks"
         ],
         "threads": [
-          "Sow and young in the sedge strip ahead — twenty minutes, still feeding",
-          "Bull went northwest toward drier scrub — destination unread past the canopy bend",
-          "Two or three presences north, patterned, holding ground — Huginn still orienting on them",
-          "Bull's line and Huginn's heading diverge — may be two separate situations"
+          "Sow and young in the sedge strip — twenty minutes from the mud-strip, now less",
+          "Bull went northwest, alone, unhurried — destination unknown past the canopy bend",
+          "Huginn orienting on two or three patterned presences to the north — separate from the sounder"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "corvin",
-          "name": "Corvin",
-          "note": "Read Silas's posture without asking — shifted grip and offered the question silently. Waiting for the report.",
-          "statusNote": "On the game trail, sixty yards from the tree-line, holding and watching Silas for the read on the bull track.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Holding position, eyes on the tree-line — letting Silas take the lead on the ground-read.",
-          "statusNote": "On the game trail at the mud-strip, collar up, watching the tree-line.",
-          "status": "active"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "millbrook",
-          "label": "Millbrook",
-          "kind": "event",
-          "entityId": "millbrook",
-          "fact": "Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn's north heading diverge — two separate vectors.",
-          "links": [
-            "aldric-provisioning-deal",
-            "corvin",
-            "pell",
-            "huginn"
-          ]
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief crouch at the mud-strip — time to read the ground, no more."
+        "why": "A short briefing and entry into the tree-line — a few minutes at most"
       }
     },
     "sceneState": {
-      "setting": "North meadow game trail, Millbrook — pre-dawn blue-grey after a brief squall, sixty yards from the tree-line, wet willows to the northwest, dew on the grass. Silas rising from the mud-strip, bull track partially read.",
+      "setting": "North wood interior, Millbrook — just inside the tree-line, pre-dawn grey light through bare canopy, wet leaf-mat underfoot. Sedge strip visible as a dark band roughly a hundred yards ahead between trunks.",
       "npcsPresent": [
         {
           "name": "Corvin",
-          "state": "Shifted his grip on the light spear, tilted his head west — asking without speaking, waiting for the report."
+          "state": "Moving in on the west flank, quiet and deliberate — knows this fence-line by heart."
         },
         {
           "name": "Pell",
-          "state": "Holding still, eyes on the tree-line, collar up, letting Silas speak."
+          "state": "Taking the east flank, collar still up, eyes forward."
         },
         {
           "name": "Huginn",
-          "state": "Still threading north between bare trunks past the tree-line — interval unchanged, heading distinct from the bull's nort"
+          "state": "Out of visible sight ahead — threading north, somewhere past the sedge strip."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear — shouldered, tip forward",
+        "Deathbound Runic Spear — in hand, tip forward",
         "Traveler's Pack — on Silas's back",
-        "Game trail — worn trace bending northwest",
-        "Mud-strip at the trail edge",
-        "Fresh sow-print in the mud — dew-edge sharp, twenty minutes old",
-        "Two older bull-weight prints — midnight to first-light, heading northwest toward",
-        "Tree-line — sixty yards ahead, canopy bare enough to show grey sky panels",
-        "Dew-wet meadow grass"
+        "Wet leaf-mat underfoot",
+        "Bare canopy — grey sky panels overhead",
+        "Sedge strip — dark, low, a hundred yards ahead",
+        "Fence-line — west edge of the wood, just visible through trunks"
       ],
       "threads": [
-        "Sow and young in the sedge strip ahead — twenty minutes, still feeding",
-        "Bull went northwest toward drier scrub — destination unread past the canopy bend",
-        "Two or three presences north, patterned, holding ground — Huginn still orienting on them",
-        "Bull's line and Huginn's heading diverge — may be two separate situations"
+        "Sow and young in the sedge strip — twenty minutes from the mud-strip, now less",
+        "Bull went northwest, alone, unhurried — destination unknown past the canopy bend",
+        "Huginn orienting on two or three patterned presences to the north — separate from the sounder"
       ]
     }
   },
@@ -1456,11 +1406,11 @@
     }
   },
   "tendencies": {
-    "strategic": 31.304522117166584,
-    "cerebral": 17.64659939018932,
-    "social": 40.822651179244886,
-    "generous": 9.008614579194518,
-    "cautious": 17.613838565986335
+    "strategic": 32.14799950658075,
+    "cerebral": 17.558366393238373,
+    "social": 40.61853792334866,
+    "generous": 8.963571506298544,
+    "cautious": 17.525769373156404
   },
   "aptitudes": [
     "strategist",
@@ -1468,7 +1418,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 76,
+  "actionCount": 77,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1514,8 +1464,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783972933555,
-  "rev": 118,
+  "updatedAt": 1783973037409,
+  "rev": 119,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

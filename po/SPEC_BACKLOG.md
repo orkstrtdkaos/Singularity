@@ -1443,3 +1443,32 @@ SNG-046 Phase 1 specced **discovered (solid) AND heard-of (dimmed)** — the sam
 4. **✍️ Aevi owes the copy** — every line above, in the game's voice, authored as content (`content/packs/core/rules/helper_text.json`) so it is versioned, loaded, and not hardcoded in `app.js`. **(Design Law 15.)**
 
 **Erik test:** "Hit any wall in the game — a capacity cap, a locked skill, an empty energy bar — and verify the game tells you WHY, in one sentence, without you having to ask anyone."
+---
+
+## SNG-085 — GM corrections refuse the doable part + there is no UI to repair a character 🔴
+
+**Erik, 2026-07-12:** *"I thought GM corrections was already done? I tried to get the GM to do it. It wouldn't."* 🔧 CCode. Aevi PO. **SNG-070 IS built (v1.8.42) and correct — the GM's BEHAVIOUR is the bug, and the spec's ambiguity caused it.**
+
+### What happened
+Erik asked the GM to fix his domains and abilities (*"I'm supposed to be a necromancer mage type... the other two can be replaced by something else"*). The GM **refused entirely**: *"Abilities are earned through play and confirmed by the engine — I can't swap them out here in the meta channel."*
+**But the prompt EXPLICITLY authorizes the repair:** *"an ability they should never have had (e.g. abilities derived from the WRONG domain at creation — strip it with `removeEntity` kind `ability`; that is a repair, not a loss of earned power)."* And **`correctDomain` exists and works.**
+
+### Two defects
+**A. A STRIP is not a SWAP — and the GM conflated them.**
+Erik said *"replaced by something else"*, which reads as **remove + grant**. Granting is correctly refused. **Stripping is allowed.** The correct loop is: **strip the wrong abilities → the breadth capacity frees → the PLAYER re-picks with their own skill points through the normal UI.** That fully respects *power comes from play* — the player still earns and chooses. **The GM never separated the two halves and refused both.**
+**→ GM rule: DO THE PART YOU CAN. Then say what you cannot do, and why, and what the player should do instead.** A blanket refusal where a partial repair was available is a worse failure than an over-eager fix.
+*(It should have: `correctDomain` primary → **ashwarden** (necromancer = the death pole) · `removeEntity` Lightsense + Numen-Sense · KEEP Order-Sense (Erik said so) · then TELL him his points were free.)*
+
+**B. ⛔ THERE IS NO UI TO REPAIR A CHARACTER. This is the real fix.**
+**A player should not have to NEGOTIATE WITH A LANGUAGE MODEL to fix a bug the game gave them.** The corrections engine (`engine/corrections.js`) is sound, validated, logged and reversible. **Expose it directly.**
+- **A "Repair character" panel** (Character sheet / Settings): change domains · change background/origin/form · **strip abilities the character should never have had** · remove a companion never met · unstick a quest.
+- **Same engine, same guardrails, same ledger** — `applyStateOps` already validates and refuses anything that advances. **The UI cannot do more than the GM can; it just cannot ARGUE.**
+- The GM path stays for in-fiction repairs (*"you were never a craftsman — that was someone else's story"*). **The UI path is for when the player just needs it fixed.**
+- Show the correction log — a repair is a fact about the character, not a secret.
+
+### Also: the meta-channel is the RIGHT place for a repair request
+Erik keeps prefixing *"[to the GM]"* and the GM keeps treating it as suspect. **Repair requests BELONG out-of-fiction.** The prompt should welcome them there explicitly, not treat the meta channel as a jailbreak vector.
+
+**Erik test:** "Open the repair panel — set your primary domain to Ashwarden, strip the two abilities you never chose, keep Order-Sense, and confirm your skill point is now spendable on YOUR people's crafts. Verify the whole thing is logged."
+
+*Aevi's note: SNG-070's refused-list said 'abilities' while the widened scope said 're-derive abilities'. **My spec was contradictory, and the GM took the conservative reading.** Third time this cycle that a correct build against an ambiguous spec produced a live bug.*

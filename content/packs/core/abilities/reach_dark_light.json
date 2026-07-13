@@ -225,6 +225,7 @@
         "dark_light": -0.3
       },
       "functions": [
+        "hinder",
         "conceal"
       ],
       "narrationHints": "The light gutters where you wish it, and you're gone into the gap.",
@@ -373,7 +374,8 @@
       },
       "functions": [
         "reveal",
-        "break"
+        "break",
+        "hinder"
       ],
       "narrationHints": "Every concealment in the place falls away at once.",
       "description": "Strip a place or person of all concealment and illusion in a burst of revealing light — mid-tier Radiance.",
@@ -460,7 +462,7 @@
       },
       "functions": [
         "conceal",
-        "ward"
+        "deceive"
       ],
       "narrationHints": "A lasting cloak of shadow laid over a place or path.",
       "description": "Lay a persistent concealment over an area — a hidden camp, a covered retreat, a path that resists being seen.",
@@ -509,8 +511,8 @@
         "falsehood_truth": -0.2
       },
       "functions": [
-        "conceal",
-        "move"
+        "deceive",
+        "conceal"
       ],
       "narrationHints": "You leave the wrong story written in the dust behind you.",
       "description": "Lay a misleading trail — tracks, signs, and traces that send pursuers the wrong way.",
@@ -559,7 +561,7 @@
       },
       "functions": [
         "conceal",
-        "move"
+        "deceive"
       ],
       "challengeProfile": {
         "STEALTH": 3,
@@ -592,6 +594,7 @@
       },
       "functions": [
         "move",
+        "travel",
         "conceal"
       ],
       "challengeProfile": {
@@ -626,5 +629,6 @@
       "gated": "learned",
       "tradition": "umbral"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

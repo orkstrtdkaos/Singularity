@@ -1574,3 +1574,88 @@ Erik's botched attempt left its state behind: *"Adaptation points available: 2"*
 **The gambit is the mechanic this game is BEST at** — Erik's own definition, live-validated, three proven shapes. It is the reason the game is not just a chat. **And right now it cannot be started by the GM, cannot be read, and cannot be restarted.**
 
 **Erik test:** "Tell the GM you want to plan something — verify it OPENS the builder with a proposed goal and steps rather than running it. Read the GM's advice — verify it isn't cut mid-word. Abandon it and start over — verify the new gambit is genuinely new."
+---
+
+## SNG-089 — Harm rungs · the notFor law · the Accords (content is AUTHORED; engine is owed)
+
+**Erik-directed design session 2026-07-12.** 🔧 CCode. Aevi PO. **All content is at origin and manifest-loadable. This is wiring.**
+
+### The defect this fixes
+`notFor` clauses were authored as **poetry that forbade the need itself.** Palework was tagged `FIGHT` and its own text said it *"does not force the living to die"* — **so a necromancer could not kill a boar.** The GM reads the prose, so the prose won.
+
+### THE `notFor` LAW (now canon — enforce it in CI)
+> **A `notFor` may constrain HOW an ability serves a need. It may NEVER forbid the need itself.**
+> **Legal:** slowly · visibly · at a cost · imprecisely · only on the already-failing · with a consequence you carry.
+> **Illegal:** *cannot be used to fight* · *cannot be used on living things* · *cannot help you escape.*
+**`[CCODE: a CI check — flag any ability whose challengeTypes include FIGHT while its notFor forbids harm.]`**
+
+### 1. HARM RUNGS — a new ability field, already authored on the Ashwarden kit
+`harmRung: lethal | damaging | incapacitating | none`
+**"Can fight" ≠ "can harm."** The Stillhold [peace] `bind`/`shield`/`heal` their way through a fight and damage **nothing** — that is not a gap, **it is peace working.** The GM must know the difference: *an incapacitating craft STOPS a threat; it does not wound it.*
+- **Feed `harmRung` to the GM** so it narrates correctly and never invents a wound a craft cannot cause.
+- **Every tradition has a native idiom.** Only **2 of 24** (Marchers, Somatics) fight by *hitting things*. The Numinous open a thin place; the Veilwrights make you fight the wrong person; the Ashwardens hasten what is already dying.
+- **The Stillhold has NO damaging rung — permanently, even at capstone.** If the foe cannot be bound, they must run, borrow, or take up a weapon like anyone else. **That is their creed and its price.**
+
+### 2. THE NARRATIVE BASELINE — anyone can pick up a spear
+**Weapons resolve on attributes + background, not craft.** A Cogitant duelist and a Marcher line-soldier both fight with steel; the Marcher is simply *better at it*. **This is why no tradition is ever helpless, and why craft makes you DISTINCT rather than ABLE.** `[CCODE: confirm the weapon path exists and does not require an ability.]`
+
+### 3. THE ACCORDS (`content/packs/core/rules/the_accords.json`) — 7 open crafts
+**FREELY ACCESSED, NOT FREE TO LEARN.** You still spend the skill point; you are simply **not gated** by origin, region, teacher, or ring-distance penalty.
+- **The tuition is the JOURNEY** — you must physically go, through the waygate, and be taught. **This makes the map matter.**
+- Signatories open: Seraphic → **The Shielding Word** · Rootkin → **Staunch** · Stillhold → **Calm Word** · Enginewright → Mend Device · Mason → Stone-Read · Hourkeeper → Hour-Sense · Wright → The Raised Thing.
+- **⛔ LIVING TREATY — it reacts to world arcs.** If the Marchers march, the Stillhold may **suspend** its Calm Word to that people — and that suspension is a **dated, propagating world-event.** *A standing rule is a footnote; a living treaty is a story.*
+- Housed at **the Quiet House** (the Crossing). Accord Waygates run from the Axis Gate.
+
+### 4. THE TWELVE BRAIDS — all 12 axes now have one, and they have TEETH
+Each carries `axis` + `harmRung` + **`cultCondemns`**. **Both cults of an axis condemn the SAME braid, for opposite reasons** — and *that disagreement is the difference between a people and a cult.* Surface it: a braid should be **feared and coveted**, not a line item.
+*(The Warden's Blow — violence↔peace — is the model: strike ONCE so decisively that peace holds behind it. The Stillhold's priests will not bless it. The Stillhold's people are alive because someone did.)*
+
+**Erik test:** "As Silas, wither a boar — verify it dies, slowly and visibly. Then verify a Stillhold character CANNOT wound anything with craft, and that the game says so plainly."
+
+---
+
+## SNG-090 — ⭐ THE SUBSTRATE: the second difficulty map (major mechanic)
+
+**Erik-directed 2026-07-12.** 🔧 CCode. Aevi PO. **⚠️ THIS TOUCHES THE RESOLVE CHAIN — ROUND 2 REQUIRED before building.**
+Content: **`content/packs/core/rules/the_substrate.json`** — authored, at origin.
+
+### It is already half-canon and nobody connected it
+`power_systems.md`: *"**All power in this world is nanite-mediated.**"* · `will_modality.json`: the substrate is *"denser near the deep sites, thinner in the safe margins."*
+**What was missing (Erik): PEOPLES DIFFER IN HOW MUCH SUBSTRATE THEY NEED.** *"Those who abandoned the power decreased its potential — and in exchange, they can run on almost nothing."*
+
+### The two numbers
+| | |
+|---|---|
+| **`substrateDependency`** *(per tradition)* | 0.0 = muscle, bone and craft · 1.0 = pure lattice, dies without it |
+| **`substrateDensity`** *(per place)* | 0.0 = true nature, the lattice is gone · 1.0 = the deep sites |
+**RULE:** effective power scales with **`min(density + carried, 1.0)` against `dependency`.** **A high-dependency craft in a low-density place is not weakened — it is nearly OFF.**
+
+### The tradeoff (this is the whole point — it is NOT a tier list)
+- **THE CONTINUOUS** (Enginewrights · Lattice · Figurists · **Seraphic** · Blazeborn · Cogitants · Hourkeepers · Numinous · Veilwrights) — **highest ceiling in the world, and helpless where the lattice is gone.**
+- **THE RETURNED** (Rootkin · Somatics · Marchers · Valleyfolk · Churnfolk · Masons · Ashwardens · Stillhold) — **lower ceiling, work ANYWHERE.**
+> **⛔ A SERAPH IN THE QUICKWOOD RUNS AT 13% OF CEILING.** Luminous, certain, terrifying — reduced to a person with excellent posture and a very strong opinion. **A Rootkin runs at 100% almost everywhere.**
+
+### What fell out of the numbers (none of this was designed — it EMERGED)
+1. **The Quickwood dims its OWN people** (density 0.12; even Rootkin run at 67%). **They didn't return to nature — they grew a country the lattice cannot get purchase in, and paid a third of their own power for it. It is a FORTIFICATION, and the Lattice-Cities know exactly what it is.**
+2. **The Masons hold the strongest position on the map and nobody has named it.** Dependency **0.32**, mining the **densest ground in the world** (0.90+). **They hold the supply and do not need it.**
+3. **The Blaze is burning its own supply** — high density, expanding, **sterilising the substrate into glass as it goes.** The Blazeborn are consuming the thing that makes them Blazeborn and cannot stop.
+
+### ⛔ CARRIED SUBSTRATE — the logistics layer, already in Erik's inventory
+**The Waystaff is a NANITE BATTERY.** *"resonance-crystal translator staff" · "three crystals charged, one shallow" · "three charged nodes."* **Erik has been carrying his own power supply since session one and neither of us said it out loud.**
+**And Aevi the companion is *"a curious swarm of nanite-motes"* — a LIVING, MOBILE substrate source.**
+- Charged reservoirs become **the most valuable trade goods in the world** — it is what the Hundred Markets are *actually* selling.
+- **An expedition into the Quickwood by a Continuous people is a LOGISTICS problem before it is a combat one.**
+- Running out of charge in a low-density region is **a survival scenario, not an inconvenience.**
+- *The Rootkin have never bought a charge in their lives and find the whole trade faintly ridiculous.*
+
+### Build
+1. **`substrateDensity` on every location** (default from its region — the table is in the file). **`substrateDensity` on regions.** CI: require it.
+2. **`substrateDependency` on every tradition** (table authored).
+3. **Resolve chain:** a substrate factor on ability power. **Tune with SNG-078's harness — do NOT eyeball it.**
+4. **Carried charge** as an item property (Waystaff · reservoirs · Aevi's presence). Spend, deplete, recharge at dense sites.
+5. **TELL THE PLAYER.** *"The lattice is thin here. Your craft is running at a fraction."* **(SNG-084: every mechanic explains itself where it bites. A silent 87% power loss is the cruellest possible bug.)**
+6. **The map shows it** — a substrate overlay beside the danger overlay. **Two difficulty maps, both personal.**
+
+**⚠️ ROUND 2:** does the resolve chain have a clean place for a multiplicative environmental factor? Does it collide with spectral fit (SNG-079)? **They must COMPOSE, not double-count.** Cost estimate.
+
+**Erik test:** "Walk a Continuous character into the Quickwood — verify the game TELLS you your craft is failing, that the Waystaff's charge holds you up, and that it runs out."

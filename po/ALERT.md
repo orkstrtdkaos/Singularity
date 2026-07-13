@@ -131,3 +131,4 @@ CCode's ROUND 2 caught Aevi in four places. **All accepted; `SYSTEM_SPEC.md` is 
 - **Aevi:** `po/OPERATIONAL_FLOWS.md` · thin regions (riven_marches / somatic_reaches / unspooling want ~6 locations) · retire `SPEC_BACKLOG.md` (180KB) as a primary surface.
 - **CCode:** the §22 debt list it surfaced (slugify in the wrong module · worldtime MODE is per-player vs "one clock" · `newEncounter` stashes-not-activates · quest stage-conditions advance manually · `narration`↔`effects[]` drift has no linter · dead `regenPerRest` key · `parse_probe` can't reach `boot()`).
 - **Erik:** preview-legs (`po/PREVIEW_LEGS.md`) · the §9 drift call above · GH Action for `npm test` (BOUNDARY-2: the CI is a local gate, and a gate that only fires when someone remembers to run it is weak against exactly the failure it exists to prevent).
+

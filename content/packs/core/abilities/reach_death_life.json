@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "powerSystem": "reach_death_life",
-  "note": "The crafts of the Quickwood/Palelands Reach (death_life axis). Vivimancy is the life-pole tradition, Palework the death-pole. Learned by traveling the Reach or training under Rootkin/Ashwardens — NOT available at Valley creation; gated like precursor (learned). Higher tiers pull the wielder's own pole-intensity toward their pole (a Vivimancer drifts life-hot, a Paleworker death-hot) — the geography writes itself onto the practitioner. axes use signed values for engine compat. Authored by Aevi (PO), SNG-016 skill build-out.",
+  "note": "The crafts of the Quickwood/Palelands Reach (death_life axis). Vivimancy is the life-pole tradition, Palework the death-pole. Learned by traveling the Reach or training under Rootkin/Ashwardens — NOT available at Valley creation; gated like precursor (learned). Higher tiers pull the wielder's own pole-intensity toward their pole (a Vivimancer drifts life-hot, a Paleworker death-hot) — the geography writes itself onto the practitioner. axes use signed values for engine compat. Authored by Aevi (PO), SNG-016 skill build-out. | SNG-089 (Aevi 2026-07-12, Erik-directed): Ashwarden kit built out on D&D-proven necromancy — enfeeble (The Grey Hand), life-drain (Draw Down), fear (The Dread), speak-with-dead (Ask the Dead), and the LETHAL capstone THE CUT THREAD (the Fates' shears). And the notFor LAW applied: **a limit may constrain HOW an ability serves a need; it may NEVER forbid the need itself.** Palework's old clause ('does not force the living to die') contradicted its own FIGHT tag and made a necromancer unable to kill a boar. Now it constrains the METHOD: slow, visible, working through what is already in the thing.",
   "gated": "learned",
   "abilities": [
     {
@@ -73,7 +73,7 @@
       ],
       "narrationHints": "The mercy and the weight of endings — a thing allowed to stop, a rot read like a map, a stillness that is not cruelty.",
       "description": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
-      "notFor": "Murder (Palework eases ends, it does not force the living to die); necromancy/animation; stopping a death that must happen.",
+      "notFor": "It EASES an end and it can BRING one — but it works through what is already in a thing, so it is slow, it is visible, and the dying know what is happening to them. It cannot smite a healthy thing dead where it stands (that is The Cut Thread, and it costs accordingly), it cannot animate what it has ended, and it will not stop a death that must happen.",
       "tree": [
         {
           "rank": 1,
@@ -129,7 +129,7 @@
       ],
       "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
       "description": "Sense death and dying around you — the recently-dead, the failing, the near-gone.",
-      "notFor": "Causing death; seeing the future of a death.",
+      "notFor": "It reads endings; it does not cause them. And it cannot see the future of a death — only the shape of the one already underway.",
       "tree": [
         {
           "rank": 1,
@@ -270,7 +270,7 @@
       ],
       "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
       "description": "Hasten decay in a thing — rot wood, wilt growth, weaken the living by drawing the quick out. Palework's edge turned outward.",
-      "notFor": "Killing a person outright (drains, does not slay); undoing what's withered.",
+      "notFor": "It hastens; it does not smite. What you wither dies of what was already inside it — slowly, and visibly, and it takes time you may not have while the thing is still able to reach you. It cannot be undone.",
       "tree": [
         {
           "rank": 1,
@@ -442,6 +442,244 @@
         "PUZZLE": 1
       },
       "tradition": "rootkin"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_grey_hand",
+      "name": "The Grey Hand",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.4,
+        "body_mind": -0.2
+      },
+      "functions": [
+        "strike",
+        "break"
+      ],
+      "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
+      "description": "Enfeeblement. You take the vigour out of a living thing by touch or by near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago.",
+      "notFor": "It drains, it does not slay — a weakened thing is still a thing, and a weakened boar is still a boar with tusks. It is VISIBLE: they know what you are doing to them, and so does everyone watching.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Grey Hand",
+          "grants": "Weaken a living thing by touch. Its strength fails; its will to use that strength fails with it.",
+          "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Grey",
+          "grants": "Weaken at a distance, and hold it there — they do not recover while you are attending to them.",
+          "cannot": "Attending costs you continuously. Let go and it comes back, and it comes back angry."
+        },
+        {
+          "rank": 3,
+          "name": "The Withered Hour",
+          "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
+          "cannot": "What you have weakened this far is nearly dead, and the Ashwardens will ask whether you meant to go that far."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SOCIAL": 2
+      },
+      "harmRung": "damaging"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "draw_down",
+      "name": "Draw Down",
+      "levelReq": 3,
+      "energyCost": 6,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.5,
+        "body_mind": -0.1
+      },
+      "functions": [
+        "strike",
+        "heal"
+      ],
+      "narrationHints": "What leaves him arrives in you, and it is warm, and that is the worst part.",
+      "description": "You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.",
+      "notFor": "It moves life, it does not create it — you cannot draw from nothing, and you cannot draw from the already-dead. And it will not top you up past what you were; it heals a wound, it does not make you more than a man.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Draw Down",
+          "grants": "Take vitality from a living thing you are touching and take it into yourself. Their wound is your mending.",
+          "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Draught",
+          "grants": "Draw at reach, and from more than one — a battlefield is, to a Draw-Down, a table set.",
+          "cannot": "Every person watching you do this will remember it. Some of them will decide something about you."
+        },
+        {
+          "rank": 3,
+          "name": "The Emptied Vessel",
+          "grants": "Draw a thing entirely down. What is left is not dead, exactly. It is finished.",
+          "cannot": "This is the act the Rootkin cite when they say the Ashwardens have lost their way, and it is very hard to argue with them about it."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3
+      },
+      "harmRung": "damaging"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_dread",
+      "name": "The Dread",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "social",
+      "axes": {
+        "death_life": -0.3,
+        "emotional_logical": -0.3
+      },
+      "functions": [
+        "bind",
+        "reveal"
+      ],
+      "narrationHints": "He feels his own ending arrive early — not as a thought, as a temperature.",
+      "description": "You let a living thing feel, for a moment, the ending it is walking toward. It is not an illusion and it is not a lie. It is simply EARLY. Most things run. Some things freeze. A few things come straight at you, and those are the ones to watch.",
+      "notFor": "It shows them their end; it does not CAUSE it. And a thing that has already made peace with dying — an Ashwarden, an old soldier, a Rootkin who has planted their tree — feels nothing at all, and will look at you with something close to pity.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Dread",
+          "grants": "One living thing feels its own ending approach. It will act on that, and you do not get to choose how.",
+          "cannot": "The unafraid are unmoved, and there are more of them than you think."
+        },
+        {
+          "rank": 2,
+          "name": "The Cold Room",
+          "grants": "A room, a line, a crowd feels it at once. Formations come apart; conversations stop.",
+          "cannot": "A frightened crowd is a stampede, and a stampede does not check who is in its way. Including you."
+        },
+        {
+          "rank": 3,
+          "name": "The Certain Hour",
+          "grants": "They do not merely feel it — they KNOW it, with the Ashwarden's own clarity, and they cannot un-know it.",
+          "cannot": "Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SOCIAL": 3
+      },
+      "harmRung": "incapacitating"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ask_the_dead",
+      "name": "Ask the Dead",
+      "levelReq": 3,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.4,
+        "falsehood_truth": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "It answers. It is not glad to. It tells you the small thing it knew and nothing more.",
+      "description": "The recently dead will answer you — poorly, briefly, and only about what they actually knew in life. They are not oracles. They are a person, tired, being asked one more question.",
+      "notFor": "They knew what they knew. A murdered man may not know who killed him. And they will not stay: each question costs them something, and the Ashwardens hold that asking a fourth is a cruelty.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Ask the Dead",
+          "grants": "The recently dead answer one question, truthfully, and badly.",
+          "cannot": "Recently. A week is far. A season is gone."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Question",
+          "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
+          "cannot": "Each question takes something from what is left of them. You will feel it go."
+        },
+        {
+          "rank": 3,
+          "name": "The Full Account",
+          "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
+          "cannot": "You will hear things about them that were not yours to know, and you cannot give them back."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SOCIAL": 2
+      },
+      "harmRung": "none"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_cut_thread",
+      "name": "The Cut Thread",
+      "levelReq": 5,
+      "energyCost": 14,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.9,
+        "violence_peace": -0.3
+      },
+      "functions": [
+        "strike",
+        "break"
+      ],
+      "narrationHints": "There is no wound. There is no sound. The thread was there and then it was cut, and everyone in the room understands exactly what they have just watched.",
+      "description": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
+      "notFor": "One thing, once, and it costs you enormously. It cannot be aimed at what has no thread — a machine, a figure, a Precursor working. And it cannot be taken back. There is no version of this you get to regret quietly: it is done, it is witnessed, and it is yours.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Cut Thread",
+          "grants": "End one living thing. No wound, no struggle, no argument. It simply stops.",
+          "cannot": "It costs almost everything you have, it is unmistakable to anyone watching, and it CANNOT BE UNDONE — not by you, not by the Rootkin, not by a braid. This is the one door with no handle on the other side."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "FIGHT": 5
+      },
+      "harmRung": "lethal"
     }
   ]
 }

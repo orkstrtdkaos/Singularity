@@ -6,14 +6,32 @@
   "provides": {
     "spectrums": "spectrums.json",
     "rules": [
-      "rules/resolution.json",
-      "rules/emergence_recipes.json",
       "rules/attribute_gates.json",
-      "rules/skill_capacity.json",
-      "rules/location_affinities.json",
-      "rules/intensity_scaling.json",
+      "rules/backgrounds.json",
       "rules/branch_forks.json",
-      "rules/combination_recipes.json"
+      "rules/challenge_design.json",
+      "rules/class_archetypes.json",
+      "rules/combination_recipes.json",
+      "rules/cross_axis_modifiers.json",
+      "rules/emergence_recipes.json",
+      "rules/function_vocabulary.json",
+      "rules/gambit_design.json",
+      "rules/helper_text.json",
+      "rules/intensity_scaling.json",
+      "rules/location_affinities.json",
+      "rules/martial_paths.json",
+      "rules/origins.json",
+      "rules/peoples_of_kind.json",
+      "rules/pole_signatures.json",
+      "rules/quest_structure.json",
+      "rules/regions.json",
+      "rules/resolution.json",
+      "rules/skill_battle_system.json",
+      "rules/skill_capacity.json",
+      "rules/skill_utility_audit.json",
+      "rules/the_accords.json",
+      "rules/the_substrate.json",
+      "rules/traditions.json"
     ],
     "abilities": [
       "abilities/harmonic.json",
@@ -32,5 +50,6 @@
     "items": [
       "items/basic.json"
     ]
-  }
+  },
+  "note": "SNG-064 LAW 10 — the manifest is a LOAD WHITELIST. A file not listed here DOES NOT EXIST. Fixed 2026-07-12: 18 of 26 rules files were unlisted, including helper_text.json (SNG-084) and gambit_design.json (the recovered gambit definition). ⚠️ state.js ALSO fetches several of these by HARDCODED PATH (traditions/origins/backgrounds/regions/the_accords), bypassing the manifest entirely — TWO loading mechanisms, and the manifest is not the source of truth. [CCODE: unify — read rules from provides.rules; delete the hardcoded fetches.] And the Content CI did NOT catch this because it checks the VALLEY manifest, not CORE."
 }

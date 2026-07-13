@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "the_accords",
+  "kind": "world_structure",
+  "note": "SNG-089 (Erik-directed): some traditions OPEN a craft to anyone, because a world with more of that craft in it is the world they want. Housed at the Quiet House in the Crossing. Living treaty — it reacts to world arcs.",
+  "principle": "An Accord craft is FREELY ACCESSED, never free to learn. **You still spend the skill point.** You are simply not gated by origin, region, teacher, or ring-distance penalty. **The tuition is the JOURNEY** — you must go, through the waygate, and be taught.",
+  "housedAt": "the_quiet_house (The Crossing) — the one roof under which no people may raise a hand. It has never been violated. **The price of an accord may be your people's word that they never will.**",
+  "waygates": {
+    "note": "Accord Waygates run from the AXIS GATE to each signatory's homeland, so an open craft is REACHABLE and not merely permitted.",
+    "builtBy": "the Numinous (nobody else could have; they will not say why and do not use them)",
+    "administeredBy": "the Lattice-Cities [order] (of course)"
+  },
+  "living": "⛔ THE ACCORDS REACT TO WORLD ARCS. A signatory may SUSPEND its accord against a people that has wronged it. If the Marchers [violence] march, the Stillhold [peace] may close its Calm Word to them — and that closure is a world-event, dated, propagating, and felt. A standing rule is a footnote; **a living treaty is a story.**",
+  "signatories": [
+    {
+      "tradition": "seraphic",
+      "pole": "angelic",
+      "opens": "the_shielding_word",
+      "why": "They want more people able to stand between harm and the innocent. That IS the goal. **Hoarding it would be the betrayal.**"
+    },
+    {
+      "tradition": "rootkin",
+      "pole": "life",
+      "opens": "staunch",
+      "why": "Fewer deaths. Life should propagate — including through hands that are not theirs."
+    },
+    {
+      "tradition": "stillhold",
+      "pole": "peace",
+      "opens": "calm_word",
+      "why": "Every war not started is their doctrine proved."
+    },
+    {
+      "tradition": "enginewright",
+      "pole": "mechanical",
+      "opens": "mend_device",
+      "why": "They repair compulsively. Teaching it means more things get fixed, and that is simply better."
+    },
+    {
+      "tradition": "mason",
+      "pole": "concrete",
+      "opens": "stone_read",
+      "why": "Fewer beams fall on fewer people."
+    },
+    {
+      "tradition": "hourkeeper",
+      "pole": "time",
+      "opens": "hour_sense",
+      "why": "They cannot bear watching people waste what they have."
+    },
+    {
+      "tradition": "wright",
+      "pole": "creation",
+      "opens": "the_raised_thing",
+      "why": "More making in the world. Obviously."
+    }
+  ],
+  "refusals": [
+    {
+      "tradition": "ashwarden",
+      "pole": "death",
+      "because": "An ending must be TENDED, not handed out. A careless death-craft is an atrocity. **They refuse on ethical grounds and they are right.**"
+    },
+    {
+      "tradition": "umbral",
+      "pole": "dark",
+      "because": "The Harborward's entire point is that nobody knows. **A taught secret is a spent secret.**"
+    },
+    {
+      "tradition": "veilwright",
+      "pole": "falsehood",
+      "because": "A taught lie is a dead lie."
+    },
+    {
+      "tradition": "marcher",
+      "pole": "violence",
+      "because": "'We teach our own. Violence given away is violence multiplied.'"
+    },
+    {
+      "tradition": "abyssal",
+      "pole": "demonic",
+      "because": "Every bargain is personal. **A taught bargain is no bargain.**"
+    },
+    {
+      "tradition": "cogitant",
+      "pole": "mind",
+      "because": "Reading a mind unbidden is a violence. They know it. They do it anyway. **They will not arm you to.**"
+    },
+    {
+      "tradition": "somatic",
+      "pole": "body",
+      "because": "It takes a life to learn. It cannot be given."
+    }
+  ]
+}

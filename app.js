@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.49";
+const APP_VERSION = "1.8.50";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -4016,6 +4016,16 @@ function gambitStepEnergy(action) {
   return flat;
 }
 
+/** SNG-093 (Design Law 5): an in-flight AI/network call must never be able to strand the UI in a
+ *  loading state. Rejects after `ms` so a hang or timeout is caught like any other failure — the
+ *  caller's catch/finally then restores a playable screen. */
+function withTimeout(promise, ms = 30000, label = "the GM") {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(`${label} didn't answer in time`)), ms)),
+  ]);
+}
+
 function renderGambitBuilder(status = "") {
   if (!gambitDraft) gambitDraft = { goal: "", steps: [{ text: "", fallback: "" }], assessed: null };
   const g = gambitDraft;
@@ -4078,14 +4088,16 @@ function renderGambitBuilder(status = "") {
     if (!texts.length || !g.goal.trim()) { renderGambitBuilder("Give the plan a goal and at least one step."); return; }
     g.steps = g.steps.filter(s => s.text.trim());
     renderGambitBuilder("Reading the plan…");
+    // SNG-093: try/catch/finally + timeout — a hang or a throw can never strand "Reading the plan…".
     try {
-      const actions = await parseGambitSteps(g.steps.map(s => s.text), character, hereNow());
+      const actions = await withTimeout(parseGambitSteps(g.steps.map(s => s.text), character, hereNow()), 30000, "the plan reader");
       g.actions = actions;
       g.assessed = assessGambit(actions, gambitCtx());
-      renderGambitBuilder();
     } catch (err) {
-      renderGambitBuilder("Couldn't read the plan (" + err.message.slice(0, 60) + ") — try again.");
+      renderGambitBuilder("Couldn't read the plan (" + String(err?.message || err).slice(0, 60) + ") — try again.");
+      return;
     }
+    renderGambitBuilder();
   };
   const advise = document.getElementById("g-advise");
   if (advise) advise.onclick = async () => {
@@ -4097,20 +4109,27 @@ function renderGambitBuilder(status = "") {
     const time = readClock(character.clock);
     // SNG-043 Part B: GM-collaborative building — one concrete suggestion or warning on the DRAFT
     const q = `[Gambit builder] Look at this DRAFT plan I'm assembling and give me ONE concrete, specific suggestion or warning about its sequencing or risk — a single sentence of advice (not a narration of any outcome; nothing is attempted yet). Goal: "${g.goal}". Steps so far: ${texts.map((t, i) => `${i + 1}) ${t}`).join("; ")}.`;
-    const result = await gmAsk({
-      character, location, rules: CONTENT.rules,
-      lore: loreForLocation(location, CONTENT.lore),
-      region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
-      recentTurns: sceneTurns.slice(-6), timeLabel: time.label,
-      inventoryDetail: inventoryForGM(character), sceneState,
-      npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-      abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks)
-    }, q);
-    // SNG-088A (SNG-076 miss): the GM's plan-advice is PROSE — clamp on a word boundary with a real
-    // ellipsis (not a mid-word cut at 400), raise the bound, and keep the full text for an expander.
-    if (result.ok) { g.gmAdviceFull = String(result.text).trim(); g.gmAdvice = smartClamp(g.gmAdviceFull, 600); g.gmAdviceExpanded = false; }
-    else { g.gmAdvice = g.gmAdviceFull = "The GM couldn't weigh in (" + String(result.error).slice(0, 50) + ") — plan on."; }
-    renderGambitBuilder();
+    // SNG-093 (Design Law 5): the GM call is wrapped in try/catch with a TIMEOUT, and `finally`
+    // ALWAYS re-renders — an AI throw/hang can never leave the UI stuck on "The GM studies your plan…".
+    try {
+      const result = await withTimeout(gmAsk({
+        character, location, rules: CONTENT.rules,
+        lore: loreForLocation(location, CONTENT.lore),
+        region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
+        recentTurns: sceneTurns.slice(-6), timeLabel: time.label,
+        inventoryDetail: inventoryForGM(character), sceneState,
+        npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
+        abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks)
+      }, q), 30000, "the GM");
+      // SNG-088A (SNG-076 miss): the GM's plan-advice is PROSE — clamp on a word boundary with a real
+      // ellipsis (not a mid-word cut at 400), raise the bound, and keep the full text for an expander.
+      if (result.ok) { g.gmAdviceFull = String(result.text).trim(); g.gmAdvice = smartClamp(g.gmAdviceFull, 600); g.gmAdviceExpanded = false; }
+      else { g.gmAdvice = g.gmAdviceFull = "The GM couldn't weigh in (" + String(result.error).slice(0, 50) + ") — plan on."; }
+    } catch (err) {
+      g.gmAdvice = g.gmAdviceFull = "The GM didn't answer (" + String(err?.message || err).slice(0, 50) + ") — try again.";
+    } finally {
+      renderGambitBuilder();
+    }
   };
   document.getElementById("g-run").onclick = () => { read(); runGambit(); };
 }

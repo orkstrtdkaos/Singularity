@@ -6,9 +6,9 @@
   "origin": "wright",
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
-  "background": "craftsman",
+  "background": "lineage_taught",
   "level": 2,
-  "xp": 145,
+  "xp": 175,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -41,7 +41,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 59,
+  "energy": 30,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -147,6 +147,23 @@
       "spread": [],
       "day": 1,
       "worldDay": 12
+    },
+    {
+      "at": "2026-07-13T17:01:54.173Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring.",
+      "tags": [
+        "rune-craft",
+        "ceremony",
+        "death-work",
+        "uncanny"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 1,
+      "worldDay": 13
     }
   ],
   "relationships": {},
@@ -405,108 +422,160 @@
         "player": "I want to run the rune binding as a gambit. I want a death bound spear tuned to Huginn, forged by a newly forged relationship with Pella (who forged the spear point with valleycraft), and put into crafted order by me (b8nding undeath into it as well). I want the runes to create this as an artifact and the ceremony to be wonderful and theatrical, but authentic.",
         "summary": "Rune-binding ceremony attempted but fails to cohere — the two abilities have no shared language yet.",
         "narration": "You light the fire as the last afternoon color bleeds out of the sky — one strike, catch, the dry hardwood taking cleanly. By the time the flames are chest-high and honest, the forge yard is dark around them and the stone ring holds its own small sun.\n\nPell comes out when the fire is settled, a mug in each hand. She does not wear ceremony. She sits on the south wall's edge, sets one mug beside her for you, and watches the pit with the same quality of attention she gives ironwork — not reverent, just complete. Huginn drops from somewhere above and lands on the stone ring nearest the tip, three inches from the iron, and goes utterly still. The pale eye finds the blade.\n\nYou begin. The pitch-ink goes on first — a line down the shaft's spine to the flex point, exactly where the grain told you. The wax follows, pressed into the socket throat. The marks come out of you from memory and from something older than memory, and they feel right as you make them, and then — somewhere between the third and fourth pass, between drawing Huginn into the working and reaching for the deathsense thread to bind it into the iron — the two things refuse each other.\n\nIt is not violent. It is more like two well-made tools whose tolerances are simply not the same: Order-Sense reads structure and load, what is and how it holds; Deathsense reads ending, what is thinning and how long. Threading one through the other to fix death-knowledge into a worked object requires a bridge that you do not yet have the words for. The ink is on the shaft. The wax is at the socket. Huginn has not moved. The fire is good and the night is good and Pell is watching without comment — but the ceremony reaches its crux and finds no anchor. The marks are craft, not binding. The spear is a fine spear. It is not an artifact."
+      },
+      {
+        "player": "GAMBIT — \"Bind the spear to death and to Huginn — a true death-bound weapon, made to grow.\"",
+        "summary": "Rune-binding ceremony completed rough — death-register opened in the blade, Pell's maker's mark seated, Huginn's thread present but nascent. The spear has begun.",
+        "narration": "The fire is honest now — hardwood, chest-high, no roof above it but cold stars. You begin with both abilities open at once, Deathsense and Order-Sense running together for the first time, and the first thing you feel is the friction. The two readings do not want to share a channel. Order-Sense pulls toward the spear's structure — grain, flex, load — while Deathsense reaches past that into something older, the particular quiet of iron that has been shaped by heat and struck and cooled, the faint record of every edge that ever passed through something living. For a moment they fight, and you get noise: the shaft's grain scrambles, the death-reading fragments. You let out a slow breath and stop trying to hold them apart. You stop trying to hold them together either. You just let both things be present. It does not resolve cleanly. What you get is a map with two layers, slightly out of register — the load-bearing seam of the wood and the death-register of the iron speaking in different languages. Rough. But readable.\n\nThen the preparation hits, and it hits like a door opening. You have worked ceremonies before — not this one, not this specific thing, but the shape of it — and something in tonight's conditions is exactly right. The open sky. The hardwood smell. Pell seated without ceremony, mug in both hands, watching with the same quality she gives ironwork. Huginn on the stone ring three inches from the blade, not moving. You are not performing. You press the cooper's wax into the socket throat with your thumb and you do not think about the watching — you think about the flex point eighteen inches down, where the grain gives without breaking, and you mark it first, a long smeared stroke of pitch-ink along the spine, following the grain's own logic. The wood takes it like it was waiting. You feel the two-layered reading underneath your hands and you stop fighting the double vision and let it guide you: where the death-register thickens, you press the mark deeper; where the structure is load-bearing, you follow the wood's own line. The runes are not decorative. They land where the spear already has opinion about what it is.\n\nThe blade resists you at first — iron older than the ash, a different grain entirely, its death-register dry and dense and not interested in being addressed. You stop. Look at Pell. She has been watching this whole time without a word, but when your eye finds her she does not wait: she sets the mug down on the wall, stands, crosses the yard in three steps, and crouches beside you at the stone ring. She does not ask what you need. She takes the pitch-ink from your hand and turns the spear-tip in her fingers the way she would examine her own work — checking the socket seam, the shoulder, the edge grind — and then she presses her own mark into the flat of the blade below the socket, one clean stroke, the kind a smith leaves when the work is finished and accounted for. Her maker's mark. The iron accepts it. The death-register in the blade opens a fraction, not wide, but enough — something in the iron recognizes the hand that shaped it, and the rune you press in beside her mark settles instead of skating. Huginn shifts on the stone ring. Not much. One foot, repositioning. The pale eye moves to the blade and stays there.\n\nYou finish the binding with both readings still running, still slightly out of register, and what you get at the end is not what you aimed for exactly. It is not a perfectly tuned artifact. The runes hold — they are in the wood and the iron and they are load-bearing, not decorative, pressed into the places where the spear already knows what it is. The death-register is open in the blade: it will know when it ends something, and that knowing will accumulate. The bond to Huginn is present but nascent — a thread, not a cord, woven through the pale eye's long attention and the bird's motionless hour at the stone ring. The spear is not finished becoming what it will be. But it has begun. The fire burns down a little, settling into coals, and the yard is quiet and warm and smells of pitch and hardwood, and Pell is still crouching beside you with her hands resting on her knees, looking at the blade."
       }
     ],
     "lastTurn": {
-      "narration": "You light the fire as the last afternoon color bleeds out of the sky — one strike, catch, the dry hardwood taking cleanly. By the time the flames are chest-high and honest, the forge yard is dark around them and the stone ring holds its own small sun.\n\nPell comes out when the fire is settled, a mug in each hand. She does not wear ceremony. She sits on the south wall's edge, sets one mug beside her for you, and watches the pit with the same quality of attention she gives ironwork — not reverent, just complete. Huginn drops from somewhere above and lands on the stone ring nearest the tip, three inches from the iron, and goes utterly still. The pale eye finds the blade.\n\nYou begin. The pitch-ink goes on first — a line down the shaft's spine to the flex point, exactly where the grain told you. The wax follows, pressed into the socket throat. The marks come out of you from memory and from something older than memory, and they feel right as you make them, and then — somewhere between the third and fourth pass, between drawing Huginn into the working and reaching for the deathsense thread to bind it into the iron — the two things refuse each other.\n\nIt is not violent. It is more like two well-made tools whose tolerances are simply not the same: Order-Sense reads structure and load, what is and how it holds; Deathsense reads ending, what is thinning and how long. Threading one through the other to fix death-knowledge into a worked object requires a bridge that you do not yet have the words for. The ink is on the shaft. The wax is at the socket. Huginn has not moved. The fire is good and the night is good and Pell is watching without comment — but the ceremony reaches its crux and finds no anchor. The marks are craft, not binding. The spear is a fine spear. It is not an artifact.",
-      "sceneSummary": "Rune-binding ceremony attempted but fails to cohere — the two abilities have no shared language yet.",
+      "narration": "The fire is honest now — hardwood, chest-high, no roof above it but cold stars. You begin with both abilities open at once, Deathsense and Order-Sense running together for the first time, and the first thing you feel is the friction. The two readings do not want to share a channel. Order-Sense pulls toward the spear's structure — grain, flex, load — while Deathsense reaches past that into something older, the particular quiet of iron that has been shaped by heat and struck and cooled, the faint record of every edge that ever passed through something living. For a moment they fight, and you get noise: the shaft's grain scrambles, the death-reading fragments. You let out a slow breath and stop trying to hold them apart. You stop trying to hold them together either. You just let both things be present. It does not resolve cleanly. What you get is a map with two layers, slightly out of register — the load-bearing seam of the wood and the death-register of the iron speaking in different languages. Rough. But readable.\n\nThen the preparation hits, and it hits like a door opening. You have worked ceremonies before — not this one, not this specific thing, but the shape of it — and something in tonight's conditions is exactly right. The open sky. The hardwood smell. Pell seated without ceremony, mug in both hands, watching with the same quality she gives ironwork. Huginn on the stone ring three inches from the blade, not moving. You are not performing. You press the cooper's wax into the socket throat with your thumb and you do not think about the watching — you think about the flex point eighteen inches down, where the grain gives without breaking, and you mark it first, a long smeared stroke of pitch-ink along the spine, following the grain's own logic. The wood takes it like it was waiting. You feel the two-layered reading underneath your hands and you stop fighting the double vision and let it guide you: where the death-register thickens, you press the mark deeper; where the structure is load-bearing, you follow the wood's own line. The runes are not decorative. They land where the spear already has opinion about what it is.\n\nThe blade resists you at first — iron older than the ash, a different grain entirely, its death-register dry and dense and not interested in being addressed. You stop. Look at Pell. She has been watching this whole time without a word, but when your eye finds her she does not wait: she sets the mug down on the wall, stands, crosses the yard in three steps, and crouches beside you at the stone ring. She does not ask what you need. She takes the pitch-ink from your hand and turns the spear-tip in her fingers the way she would examine her own work — checking the socket seam, the shoulder, the edge grind — and then she presses her own mark into the flat of the blade below the socket, one clean stroke, the kind a smith leaves when the work is finished and accounted for. Her maker's mark. The iron accepts it. The death-register in the blade opens a fraction, not wide, but enough — something in the iron recognizes the hand that shaped it, and the rune you press in beside her mark settles instead of skating. Huginn shifts on the stone ring. Not much. One foot, repositioning. The pale eye moves to the blade and stays there.\n\nYou finish the binding with both readings still running, still slightly out of register, and what you get at the end is not what you aimed for exactly. It is not a perfectly tuned artifact. The runes hold — they are in the wood and the iron and they are load-bearing, not decorative, pressed into the places where the spear already knows what it is. The death-register is open in the blade: it will know when it ends something, and that knowing will accumulate. The bond to Huginn is present but nascent — a thread, not a cord, woven through the pale eye's long attention and the bird's motionless hour at the stone ring. The spear is not finished becoming what it will be. But it has begun. The fire burns down a little, settling into coals, and the yard is quiet and warm and smells of pitch and hardwood, and Pell is still crouching beside you with her hands resting on her knees, looking at the blade.",
+      "sceneSummary": "Rune-binding ceremony completed rough — death-register opened in the blade, Pell's maker's mark seated, Huginn's thread present but nascent. The spear has begun.",
       "choices": [
         {
-          "label": "Sit with the failure. Read what the two abilities showed you and ask Huginn plainly — is there a way across?",
+          "label": "Hold the spear across your knees and run Order-Sense over the finished work — read what actually took, and what the binding still lacks.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
+            "chaos_order": 0.6,
             "mechanical_spiritual": 0.4
           },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "commune",
             "careful"
           ],
-          "abilityId": "deathsense",
+          "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell Pell what you were trying to do — not the cover story, the real thing. She forged the tip; her hands are in this.",
+          "label": "Say nothing about the result — hand Pell her mug back, sit beside her on the south wall, and let the fire finish burning down. Let her speak if she wants to.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "confide",
-            "help",
-            "honest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Let the ceremony become what it actually is — a rune-marking, not a binding. Work the marks properly as craft, finish the spear as it deserves, and accept that the artifact is not yet possible.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
+            "violence_peace": 0.7,
             "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "accept",
-            "craft"
+            "connect",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Push through once more — the fire is still good and the night is still yours. Try the binding again, this time letting Deathsense lead and Order-Sense follow.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell Pell plainly what the ceremony was for — that the spear is meant to grow into something, and that her mark is load-bearing in ways that go beyond ironwork. See how she takes that.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "mechanical_spiritual": 0.5
+            "concrete_abstract": -0.5,
+            "mechanical_spiritual": 0.4
           },
           "difficulty": 15,
           "intentTags": [
-            "risky",
-            "push",
-            "study"
+            "reveal",
+            "connect"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look at Huginn directly and ask — aloud, in the firelight — whether the thread is enough. Whether it knows what it's been tied to.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.7,
+            "concrete_abstract": -0.6
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "risky"
           ],
           "abilityId": "deathsense",
-          "energyCost": 6,
-          "trivial": false
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [
+        {
+          "description": "Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring.",
+          "tags": [
+            "rune-craft",
+            "ceremony",
+            "death-work",
+            "uncanny"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
         }
       ],
       "characterDeltas": {
-        "energy": -6
+        "health": 0,
+        "energy": -9,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 10
       },
+      "ledgerEvents": [
+        {
+          "what": "A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open death-register. Witnessed by Pell Marsh.",
+          "tags": [
+            "rune-craft",
+            "death-work",
+            "uncanny",
+            "millbrook"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "mechanical_spiritual": 0.1
+          },
+          "impactsLocal": false
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light."
+        }
+      ],
       "scene": {
-        "setting": "South side of Pell's forge, Millbrook — open stone fire-pit now burning, hardwood flame chest-high, warm orange light in a dark yard. Night, early spring, stars overhead.",
+        "setting": "South side of Pell's forge, Millbrook — open stone fire-pit now settling into coals, orange light lower and steady, warm dark yard, stars overhead, early spring night.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Seated on the south wall's edge, mug in hand, watching the pit. Has said nothing since sitting down."
+            "state": "Crouching beside Silas at the stone ring, hands on her knees, looking at the blade. Has not spoken since making her mark."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the stone ring nearest the spear tip — motionless, pale eye on the iron."
+            "state": "Still on the stone ring nearest the spear tip — pale eye on the blade, one foot repositioned during the binding, otherwise motionless."
           }
         ],
         "objects": [
-          "Stone-ringed open fire-pit — burning, hardwood, open to the sky",
-          "Split wood stacked against the forge's south wall",
-          "Rune-Craft Kit — pitch-ink applied to shaft spine, wax pressed at socket throat, leather strip unused",
-          "Assembled Mid-Weight Spear — across Silas's knees, marks present but inert; craft, not binding",
-          "Two mugs — one Pell's, one set beside the stone ring for Silas"
+          "Stone-ringed open fire-pit — settling into coals, still warm and orange",
+          "Split wood stacked against the south wall — mostly spent",
+          "Assembled Mid-Weight Spear — runes pressed into shaft spine and socket, Pell's maker's mark on the blade flat; binding incomplete but load-bearing",
+          "Rune-Craft Kit — wax and pitch-ink used, leather strip still folded",
+          "Two mugs — Pell's set down on the wall; Silas's beside the stone ring"
         ],
         "threads": [
-          "Ceremony failed to cohere — marks are on the shaft but hold no death-binding",
-          "Huginn has not moved or responded — whether it witnessed something or simply waited is unclear",
-          "Pell is watching without comment — she saw the attempt and its end",
-          "Hunt departs tomorrow morning — north gate, before the light gets high"
+          "The binding is rough — a thread to Huginn, not a cord; what it will become is unresolved",
+          "Pell has not spoken since making her mark — her read on what she just participated in is unknown",
+          "Hunt departs tomorrow morning, north gate, before the light gets high"
         ]
       },
       "npcUpdates": [
@@ -515,69 +584,121 @@
           "npcId": "pell",
           "name": "Pell Marsh",
           "role": "Village blacksmith, Millbrook",
-          "note": "Attended the rune-working as promised — brought two mugs, sat on the south wall, watched without commentary. Witnessed the ceremony attempt and its quiet failure.",
+          "note": "Crossed the yard without being asked and pressed her maker's mark into the blade when the inscription stalled — the iron opened to her hand. Has not spoken since. Still crouching at the stone ring.",
           "learned": [
-            "Silas's rune-working is real craft, not theater — she watched it reach for something and not find it"
+            "Her maker's mark is load-bearing in the death-binding — the iron accepted her hand in a way it did not accept Silas's alone"
           ],
           "skillsObserved": [
-            "patient observation",
-            "presence without intervention"
+            "instinctive reading of when to step in",
+            "steady hands under uncanny circumstance"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the forge yard, south wall, watching the fire after the ceremony's end — still present, saying nothing."
+          "statusNote": "At the forge south pit, crouching beside the stone ring, watching the blade in silence after the binding."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "note": "Held motionless on the stone ring for the full ceremony — one repositioning of the foot near the end, when Pell's mark was pressed. Pale eye moved to the blade and stayed there.",
+          "learned": [
+            "A nascent binding thread now runs through its long attention and the ceremony's completion — the spear knows it"
+          ],
+          "skillsObserved": [
+            "patient witnessing under uncanny conditions"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Perched at the stone ring, eye on the blade, thread present but nascent."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The assembled mid-weight spear now carries a rough death-binding — runes load-bearing in shaft and blade, Pell Marsh's maker's mark seated in the iron, a nascent thread to Huginn. The death-register is open; the spear will know when it ends something. The binding is incomplete but real.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work.",
+          "flag": {
+            "death_binding_performed": true,
+            "spear_bound": true
+          },
+          "subPlace": {
+            "name": "Forge South Pit",
+            "note": "Open stone-ring fire-pit — used for Silas's death-binding ceremony on World-day 13 night. Fire settling to coals. Pell's mark now part of the binding.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "death-order-bridge",
-          "label": "The Missing Bridge",
-          "kind": "mystery",
-          "fact": "Combining Deathsense and Order-Sense to fix death-knowledge into a worked object is not currently possible — the two abilities have no shared grammar. Order-Sense reads what holds; Deathsense reads what thins. Threading one through the other requires a conceptual bridge Silas does not yet have words for. The ceremony was genuine craft. The binding did not take.",
+          "topic": "death-bound-spear",
+          "label": "The Death-Bound Spear",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "The assembled mid-weight spear carries a rough but real death-binding — runes pressed where the wood and iron already had opinion about their nature. Pell Marsh's maker's mark is load-bearing in the binding; the iron accepted her hand. A nascent thread runs to Huginn. The death-register is open: the spear will accumulate knowing each time it ends something. It is not finished. It has begun.",
           "links": [
-            "the-unnamed-gift",
-            "the-seam-in-the-returned-animal",
+            "pell",
+            "huginn",
             "millbrook",
-            "aldric-provisioning-deal"
+            "aldric-provisioning-deal",
+            "the-unnamed-gift"
+          ]
+        },
+        {
+          "topic": "pell",
+          "label": "Pell Marsh",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the death-binding.",
+          "links": [
+            "death-bound-spear",
+            "millbrook",
+            "huginn"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 2,
-        "why": "Afternoon preparation and the ceremony itself — fire lit at dusk, working into early evening."
-      }
+        "why": "The ceremony ran from last light through the fire's settling — roughly two hours from lighting to coals."
+      },
+      "imagePrompt": "An open stone fire-pit settling into coals in a dark forge yard, stars overhead. A man crouches over a long ash-shafted spear laid across his knees, pitch-ink marks running the length of the shaft. A woman in a smith's apron crouches beside him, one hand pressed flat to the spear-blade. On the stone ring, a large grey-black bird sits motionless, pale eye fixed on the iron. Warm orange coal-light, cold spring night.",
+      "momentArt": "https://image.pollinations.ai/prompt/An%20open%20stone%20fire-pit%20settling%20into%20coals%20in%20a%20dark%20forge%20yard%2C%20stars%20overhead.%20A%20man%20crouches%20over%20a%20long%20ash-shafted%20spear%20laid%20across%20his%20knees%2C%20pitch-ink%20marks%20running%20the%20length%20of%20the%20shaft.%20A%20woman%20in%20a%20smith's%20apron%20crouches%20beside%20him%2C%20one%20hand%20pressed%20flat%20to%20the%20spear-blade.%20On%20the%20stone%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=63896&nologo=true"
     },
     "sceneState": {
-      "setting": "South side of Pell's forge, Millbrook — open stone fire-pit now burning, hardwood flame chest-high, warm orange light in a dark yard. Night, early spring, stars overhead.",
+      "setting": "South side of Pell's forge, Millbrook — open stone fire-pit now settling into coals, orange light lower and steady, warm dark yard, stars overhead, early spring night.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Seated on the south wall's edge, mug in hand, watching the pit. Has said nothing since sitting down."
+          "state": "Crouching beside Silas at the stone ring, hands on her knees, looking at the blade. Has not spoken since making her mark"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the stone ring nearest the spear tip — motionless, pale eye on the iron."
+          "state": "Still on the stone ring nearest the spear tip — pale eye on the blade, one foot repositioned during the binding, otherwi"
         }
       ],
       "objects": [
-        "Stone-ringed open fire-pit — burning, hardwood, open to the sky",
-        "Split wood stacked against the forge's south wall",
-        "Rune-Craft Kit — pitch-ink applied to shaft spine, wax pressed at socket throat,",
-        "Assembled Mid-Weight Spear — across Silas's knees, marks present but inert; craf",
-        "Two mugs — one Pell's, one set beside the stone ring for Silas"
+        "Stone-ringed open fire-pit — settling into coals, still warm and orange",
+        "Split wood stacked against the south wall — mostly spent",
+        "Assembled Mid-Weight Spear — runes pressed into shaft spine and socket, Pell's m",
+        "Rune-Craft Kit — wax and pitch-ink used, leather strip still folded",
+        "Two mugs — Pell's set down on the wall; Silas's beside the stone ring"
       ],
       "threads": [
-        "Ceremony failed to cohere — marks are on the shaft but hold no death-binding",
-        "Huginn has not moved or responded — whether it witnessed something or simply waited is unclear",
-        "Pell is watching without comment — she saw the attempt and its end",
-        "Hunt departs tomorrow morning — north gate, before the light gets high"
+        "The binding is rough — a thread to Huginn, not a cord; what it will become is unresolved",
+        "Pell has not spoken since making her mark — her read on what she just participated in is unknown",
+        "Hunt departs tomorrow morning, north gate, before the light gets high"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 13,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -597,14 +718,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Forge backlog fully cleared — hand-axe heat-collar seated. Pell confirmed ready to walk north once Corvin is found. Hunt party of three one step from departure.",
         "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north.",
         "Two ash shafts acquired from Mara Wells — one on smokehouse account, one paid. Rune-craft materials in hand. Whetstone for Pell sourced. Next step: find Corvin in the east furlong.",
         "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong.",
         "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling.",
         "Modified light spear-tip offered to Corvin — hunt party one conversation from being formally assembled. Arrangement with Corvin not yet sealed.",
         "Corvin accepted the modified light spear-tip and committed to the hunt — north gate, tomorrow morning. Hunt party fully assembled: Silas, Pell, Corvin.",
-        "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning."
+        "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning.",
+        "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -710,9 +831,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 9,
+      "relationship": 10,
       "history": [
-        "[d1] Holding back, watching Corvin's first read of Silas.",
         "[d1] Standing back, not helping close the arrangement with Corvin — her relationship with him predates Silas and she's letting Silas work it out.",
         "[d1] Watched Corvin accept — stopped pretending she wasn't listening. Hunt party is now complete.",
         "[d1] Walked back to the village with Silas and Corvin — quiet and settled, the morning's accounting come out even.",
@@ -721,28 +841,29 @@
         "[d1] Clocked the ritual-nudity claim immediately — named it with dry amusement and closed it without offense. Confirmed she'll attend the rune-working tonight, dressed. Door remains ope",
         "[d1] Silas laughed the line off cleanly — she closed the subject on good terms, door still open.",
         "[d1] Received word of the outdoor pit arrangement — 'warmer than the field path' was her only comment. Returned to her own work. Will attend the rune-working tonight.",
-        "[d1] Attended the rune-working as promised — brought two mugs, sat on the south wall, watched without commentary. Witnessed the ceremony attempt and its quiet failure."
+        "[d1] Attended the rune-working as promised — brought two mugs, sat on the south wall, watched without commentary. Witnessed the ceremony attempt and its quiet failure.",
+        "[d1] Crossed the yard without being asked and pressed her maker's mark into the blade when the inscription stalled — the iron opened to her hand. Has not spoken since. Still crouching a"
       ],
       "knownFacts": [
-        "Her grandmother's name was Grant",
         "Silas committed her full name, Pell Marsh, to memory with deliberate quiet — she noticed",
         "Corvin already helps her occasionally — she apparently mentioned it to Silas without Corvin knowing",
         "After the hunt she will meet Silas at the forge in the evening — the date is now a confirmed arrangement, not just a possibility",
         "Silas's people have a rune tradition; he works marks into weapons before use",
         "Huginn is considered part of the ritual",
         "Sees through a line quickly and prefers not to make an event of it",
-        "Silas's rune-working is real craft, not theater — she watched it reach for something and not find it"
+        "Silas's rune-working is real craft, not theater — she watched it reach for something and not find it",
+        "Her maker's mark is load-bearing in the death-binding — the iron accepted her hand in a way it did not accept Silas's alone"
       ],
       "skillsObserved": [
-        "socket modification under time, no ceremony",
-        "situational awareness — named the east furlong without looki",
         "dry account-keeping composure",
         "graceful deflection without closing terms",
         "patient observation",
-        "presence without intervention"
+        "presence without intervention",
+        "instinctive reading of when to step in",
+        "steady hands under uncanny circumstance"
       ],
       "status": "active",
-      "statusNote": "At the forge yard, south wall, watching the fire after the ceremony's end — still present, saying nothing.",
+      "statusNote": "At the forge south pit, crouching beside the stone ring, watching the blade in silence after the binding.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -841,7 +962,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] A boar sounder has been reported working the north wood — relevant to hunting plans and the provisioning deal with Aldric.",
         "[d1] Hunt arrangement formalized at the forge — Pell committed to walking north at cost once backlog is done; Corvin still to be found and invited.",
         "[d1] Hand-axe diagnosed via Order-Sense — old stop-crack in eye wall, not in weld; requires heat-collar before edge work. Bar stock question open with Pell.",
         "[d1] Backlog structural work completed on World-day 12 mid-morning — drawknife, billhook, two skinners, and froe all cleared. Hand-axe set aside pending heat-collar; bar stock needed from Pell or sourced e",
@@ -852,7 +972,8 @@
         "[d1] Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed.",
         "[d1] Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
         "[d1] Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt.",
-        "[d1] Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out."
+        "[d1] Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out.",
+        "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -860,7 +981,9 @@
         "rabbit_entered_village": true,
         "boar_sounder_north_wood": true,
         "backlog_cleared": "true",
-        "hand_axe_collar_done": "true"
+        "hand_axe_collar_done": "true",
+        "death_binding_performed": true,
+        "spear_bound": true
       },
       "subPlaces": {
         "upper-meadow-north-of-millbrook-": {
@@ -909,7 +1032,7 @@
           "name": "Forge South Pit",
           "day": 1,
           "visited": true,
-          "note": "Open stone-ring fire-pit on the south side of Pell's forge — cleared and prepared for Silas's rune-binding ceremony."
+          "note": "Open stone-ring fire-pit — used for Silas's death-binding ceremony on World-day 13 night. Fire settling to coals. Pell's"
         }
       },
       "vectorsKnown": [
@@ -962,7 +1085,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-13T03:22:37.233Z",
+    "lastSharedReadAt": "2026-07-13T15:58:18.447Z",
     "lastTickWorldDay": 13,
     "lastCanonWorldDay": 13
   },
@@ -971,7 +1094,7 @@
     "secondary": "cogitant",
     "tertiary": "figurist"
   },
-  "form": "Pale slight framed Necromancer - handsome intensity in the eyes and the hold of the clutching hand - green/blue power emanating from him with his undead Raven on his shoulder.",
+  "form": "Pale skinned, dark hair, slight framed Necromancer - handsome intensity in the eyes and the hold of the clutching hand - green/blue power emanating from him with his undead Raven on his shoulder.",
   "bio": {
     "motivation": "You took the short way, and the short way was wrong. The air here tastes of metal and the light falls at an angle the sun cannot account for. There is a door in the hillside that was not on any map, and behind you the path you walked in on is no longer there.",
     "story": "Their first day in the world was the thin place — it is a symbol before it is a door. read what it means; ask him what it is like. You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong."
@@ -1144,14 +1267,17 @@
           "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
           "[d1] Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary.",
           "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Her terms: clean forge, no unpriced promises.",
-          "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after"
+          "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after",
+          "[d1] Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the de"
         ],
         "links": [
           "millbrook",
           "aldric",
           "aldric-provisioning-deal",
           "corvin",
-          "mara-wells"
+          "mara-wells",
+          "death-bound-spear",
+          "huginn"
         ],
         "aliases": [
           "Pell Marsh"
@@ -1235,15 +1361,32 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "death-bound-spear": {
+        "id": "death-bound-spear",
+        "label": "The Death-Bound Spear",
+        "kind": "lore",
+        "facts": [
+          "[d1] The assembled mid-weight spear carries a rough but real death-binding — runes pressed where the wood and iron already had opinion about their nature. Pell Marsh's maker's mark is load-bearing in the b"
+        ],
+        "links": [
+          "pell",
+          "huginn",
+          "millbrook",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 27.642378241935983,
-    "cerebral": 9.123413886779696,
-    "social": 35.27991630681574,
-    "generous": 10.058893968315141,
-    "cautious": 12.143667736296758
+    "strategic": 30.504166350726305,
+    "cerebral": 12.077796817345797,
+    "social": 37.103516725281665,
+    "generous": 10.008599498473565,
+    "cautious": 12.082949397615273
   },
   "aptitudes": [
     "strategist",
@@ -1251,10 +1394,26 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 54,
+  "actionCount": 55,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "An open stone fire-pit settling into coals in a dark forge yard, stars overhead. A man crouches over a long ash-shafted spear laid across his knees, pitch-ink marks running the length of the shaft. A ",
+      "url": "https://image.pollinations.ai/prompt/An%20open%20stone%20fire-pit%20settling%20into%20coals%20in%20a%20dark%20forge%20yard%2C%20stars%20overhead.%20A%20man%20crouches%20over%20a%20long%20ash-shafted%20spear%20laid%20across%20his%20knees%2C%20pitch-ink%20marks%20running%20the%20length%20of%20the%20shaft.%20A%20woman%20in%20a%20smith's%20apron%20crouches%20beside%20him%2C%20one%20hand%20pressed%20flat%20to%20the%20spear-blade.%20On%20the%20stone%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=63896&nologo=true",
+      "caption": "Rune-binding ceremony completed rough — death-register opened in the blade, Pell's maker's",
+      "worldDay": 13,
+      "at": "2026-07-13T17:01:54.177Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Silas Weir",
+      "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13698&nologo=true",
+      "caption": "Silas Weir — repaired",
+      "worldDay": 13,
+      "at": "2026-07-13T12:11:17.803Z"
+    },
     {
       "kind": "moment",
       "prompt": "A lean man kneeling in cold wet meadow grass, two fingers pressed to the chest of a dead rabbit. A large grey-black bird watches from a fence-post, its shadow falling precisely across the animal. The ",
@@ -1272,9 +1431,9 @@
       "at": "2026-07-12T12:41:03.559Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783913983087,
-  "rev": 85,
+  "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13698&nologo=true",
+  "updatedAt": 1783962114177,
+  "rev": 94,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1342,6 +1501,12 @@
       "text": "Pell agreed to meet Silas at the forge after the hunt — the date is now a confirmed arrangement between them, named plainly on the field path on World-day 13.",
       "day": 1,
       "subjectId": "pell"
+    },
+    {
+      "id": "f11",
+      "text": "The assembled mid-weight spear now carries a rough death-binding — runes load-bearing in shaft and blade, Pell Marsh's maker's mark seated in the iron, a nascent thread to Huginn. The death-register i",
+      "day": 1,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -1349,17 +1514,17 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 9,
-      "palework": 2,
-      "deathsense": 1
+      "order_sense": 11,
+      "palework": 3,
+      "deathsense": 3
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
       "numen_sense+order_sense": 1,
       "lightsense+order_sense": 1,
-      "deathsense+palework": 1,
+      "deathsense+palework": 2,
       "order_sense+palework": 1,
-      "deathsense+order_sense": 1
+      "deathsense+order_sense": 2
     },
     "aspirations": [
       {
@@ -1370,7 +1535,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 2
+    "marrow": 2.5
   },
   "customAbilities": {},
   "precursorAccess": [],
@@ -1404,7 +1569,25 @@
         }
       ],
       "notGranted": "No xp, no levels, no skill points, no items. His 1 skill point is untouched — he spends it himself."
+    },
+    {
+      "kind": "field",
+      "field": "background",
+      "from": "craftsman",
+      "to": "lineage_taught",
+      "why": "Tweaks",
+      "worldDay": 13,
+      "at": "2026-07-13T12:11:17.802Z"
+    },
+    {
+      "kind": "field",
+      "field": "form",
+      "from": "Pale slight framed Necromancer - handsome intensity in the eyes and the hold of the clutching hand - green/blue power emanating from him with his undead Raven on his shoulder.",
+      "to": "Pale skinned, dark hair, slight framed Necromancer - handsome intensity in the eyes and the hold of the clutching hand - green/blue power emanating from him with his undead Raven on his shoulder.",
+      "why": "Tweaks",
+      "worldDay": 13,
+      "at": "2026-07-13T12:11:17.802Z"
     }
   ],
-  "syncedAt": 1783907289215
+  "syncedAt": 1783913983087
 }

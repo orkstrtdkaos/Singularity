@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "id": "gambit_design",
+  "kind": "design_canon",
+  "note": "RECOVERED from po/SESSION_FINDINGS_20260707.md (2026-07-12). This definition was LOST when it lived only in SPEC_BACKLOG.md. It is Erik's, given explicitly, validated in live play, and it is CANON. Design canon lives in content packs — never only in the backlog.",
+  "theDefinition": {
+    "whatAGambitIs": "A set of CONNECTED CHALLENGES FORMING A WHOLE, each solvable MULTIPLE WAYS, PLANNED ACROSS BEFORE RUNNING — not resolved turn-by-turn.",
+    "theElementsDefineIt": "⛔ THE NECESSARY ELEMENTS DEFINE A GAMBIT — NOT THE STEP COUNT. A three-step plan is not 'less of a gambit' than a six-step one.",
+    "fewerStepsAreHARDER": "⛔ COUNTER-INTUITIVE AND LOAD-BEARING: fewer steps are HARDER, because there is less SLACK. Difficulty ≈ the INVERSE of step-count slack.",
+    "theGambitGROWS": "⛔ INVOKING A FALLBACK ADDS STEPS. The gambit GROWS mid-run as fallbacks fire. A single-path plan dies on one bad roll; a gambit ABSORBS it.",
+    "validatedLive": "Commission House: the primary line for a step FAILED (rolled 51) and the gambit survived on a stacked, character-fit fallback (rolled 79). That is the whole mechanic, demonstrated."
+  },
+  "gambitApt": {
+    "note": "⚠️ THIS SUPERSEDES the heuristics in SNG-043 and refines SNG-077. Aevi twice guessed at this instead of using Erik's definition, which already existed.",
+    "condition": "A scene is GAMBIT-APT when it presents CONNECTED CHALLENGES — plural, related, forming a whole — EACH admitting MULTIPLE SOLUTION PATHS, such that PLANNING ACROSS THEM beats reacting to them one at a time.",
+    "notGambitApt": [
+      "A rich conversation.",
+      "A careful or planned approach to a SINGLE obstacle.",
+      "A scene with several open conversational threads (that is texture, not structure).",
+      "Anything where sequencing does not change the outcome."
+    ]
+  },
+  "threeProvenShapes": [
+    {
+      "name": "Social / political — The Unwinnable Duel at the Redline",
+      "won": true,
+      "patterns": [
+        "COMBAT HELD ENTIRELY IN RESERVE.",
+        "HONEST MISDIRECTION — every layer TRUE; the power came from what the opponent MISUNDERSTOOD, not from what the player faked.",
+        "OWN-MECHANIC REVERSAL — the villain destroyed by the honor-forms he had weaponized.",
+        "CHARACTER-NATIVE VICTORY — the Ent won as an organizer and grove-being, not as a generic warrior."
+      ]
+    },
+    {
+      "name": "Party puzzle — The Silent Door",
+      "won": true,
+      "patterns": [
+        "Solved by UNDERSTANDING, not force. The antagonist was a thousand-year MISUNDERSTANDING, not an enemy.",
+        "QUESTION THE CLOCK — the player asked why a countdown mattered if the thing was locked in a vault. The pressure was genuinely benign, and rewarding that INVERTED the scene.",
+        "COST-AS-RESPONSIBILITY — the winning toll was an ongoing caretaking promise, not a one-time payment."
+      ],
+      "requires": "⛔ TRUE SIMULTANEOUS PARTY TURNS (SNG-038). The GM twice collapsed a called-for simultaneous 3-channel read into round-robin. THE PUZZLE CANNOT BE EXPRESSED ROUND-ROBIN. This makes SNG-038 a REQUIREMENT for co-op puzzles, not a nice-to-have."
+    },
+    {
+      "name": "Logistics vs a system — The Commission House",
+      "won": true,
+      "patterns": [
+        "NO VILLAIN. The antagonist was a ward + a sweep + questioning + a clock.",
+        "Won on MANEUVER and REFRAME-THE-TOOL: stop folding OUT through the ward; fold SMALL AND SIDEWAYS into an already-cleared room. Repositioning, not escape."
+      ]
+    }
+  ],
+  "gmRules": {
+    "holdThePlanLevel": "⛔ RECURRING GM FAILURE MODE (Erik flagged it directly, TWICE): puzzles FEEL stepwise, so the GM collapses 'declare plan → resolve with maneuvers inside' into turn-by-turn 'now what?' prompting. **GM RULE: HOLD THE PLAN-LEVEL VIEW AGAINST THE PUZZLE'S STEPWISE PULL.** A gambit is declared as a whole and resolved as a whole; the maneuvers live INSIDE it.",
+    "engineOwed": "`gambit.completionBonusXp` (=10) is in resolution.json and the engine must READ it, not hardcode a literal."
+  }
+}

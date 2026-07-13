@@ -31,7 +31,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.4080075056544637
+    "spectrumId": -0.4376071303717405
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -334,156 +334,164 @@
         "player": "Before leaving, take a minute to seat the mid-weight spear-tip on one of the ash shafts — even a rough lashing here in the forge yard, so you're not carrying loose iron into the field.",
         "summary": "Silas seats the mid-weight spear-tip on one ash shaft with a road lashing — field-ready in two minutes; Pell approves in her fashion.",
         "narration": "You set the burlap-wrapped shafts against the doorframe and pull one free — the pale ash smooth and cool under your hand, socket end up. The mid-weight tip comes out of the pack next, oilcloth peeled back, iron catching the flat morning light. Pell watches from the bench without comment, the whetstone still in her hand.\n\nThe socket seats over the shaft end with a quarter-turn and a satisfying snug resistance — Pell's work is true, the fit close enough that it stays without lashing. But close enough isn't field-ready, so you reach for the Rune-Craft Kit and cut a length of the oiled leather binding strip, work it wet around the socket throat in a tight cross-wrap, and seat the knot where your thumb won't find it mid-carry. It takes less than two minutes. Not finished work — a road lashing, temporary — but the tip won't shift on a boar's shoulder and the balance is already better with weight forward.\n\nPell sets the whetstone on the bench with a small precise click. 'Tidy,' she says, which from her is the equivalent of a longer sentence. Huginn tilts his head on the doorframe, considers the assembled spear, and makes no comment. You re-wrap the second shaft and the remaining tip in the burlap and stow them, then lift the spear and feel the hang of it — yes. That's a thing you can walk with."
+      },
+      {
+        "player": "Will you walk with me to Corvin's?  I also need to work this spear tonight... I would love for you to join me for that as well.",
+        "summary": "Silas asks Pell to walk with him to Corvin's and stay for the evening's spear work — she accepts without a word, just the canvas coat off the peg.",
+        "narration": "You turn to Pell with the assembled spear still in hand — the shaft warm from the lashing work, the road-wrap tight at the socket throat. 'Will you walk with me to Corvin's?' you ask. 'And I need to work this spear tonight. I'd love for you to join me for that as well.'\n\nPell sets the whetstone down on the bench with a quiet click. She looks at the spear, then at you, with the same unhurried read she gave your work this morning. Then she reaches behind the bench and pulls a worn canvas coat off a peg — heavy-shouldered, salt-stiff at the collar — and shrugs into it without ceremony. That's her answer.\n\nHuginn drops from the doorframe as you step out, landing on your pack-strap for a single beat before launching into the lane ahead, already angling east. The south lane is still damp underfoot from this morning's squall, lane stones darker where the water collected in the ruts. Pell walks beside you at the unhurried pace of someone who has covered this ground a hundred times and has no interest in pretending otherwise. The forge stays open behind you — she doesn't lock it, you notice; that's not how this village works.\n\n'Corvin will be doing something half-wrong when we get there,' she says, after a block of comfortable quiet. It's not exactly a warning. More like reading aloud from a reliable text."
       }
     ],
     "lastTurn": {
-      "narration": "You set the burlap-wrapped shafts against the doorframe and pull one free — the pale ash smooth and cool under your hand, socket end up. The mid-weight tip comes out of the pack next, oilcloth peeled back, iron catching the flat morning light. Pell watches from the bench without comment, the whetstone still in her hand.\n\nThe socket seats over the shaft end with a quarter-turn and a satisfying snug resistance — Pell's work is true, the fit close enough that it stays without lashing. But close enough isn't field-ready, so you reach for the Rune-Craft Kit and cut a length of the oiled leather binding strip, work it wet around the socket throat in a tight cross-wrap, and seat the knot where your thumb won't find it mid-carry. It takes less than two minutes. Not finished work — a road lashing, temporary — but the tip won't shift on a boar's shoulder and the balance is already better with weight forward.\n\nPell sets the whetstone on the bench with a small precise click. 'Tidy,' she says, which from her is the equivalent of a longer sentence. Huginn tilts his head on the doorframe, considers the assembled spear, and makes no comment. You re-wrap the second shaft and the remaining tip in the burlap and stow them, then lift the spear and feel the hang of it — yes. That's a thing you can walk with.",
-      "sceneSummary": "Silas seats the mid-weight spear-tip on one ash shaft with a road lashing — field-ready in two minutes; Pell approves in her fashion.",
+      "narration": "You turn to Pell with the assembled spear still in hand — the shaft warm from the lashing work, the road-wrap tight at the socket throat. 'Will you walk with me to Corvin's?' you ask. 'And I need to work this spear tonight. I'd love for you to join me for that as well.'\n\nPell sets the whetstone down on the bench with a quiet click. She looks at the spear, then at you, with the same unhurried read she gave your work this morning. Then she reaches behind the bench and pulls a worn canvas coat off a peg — heavy-shouldered, salt-stiff at the collar — and shrugs into it without ceremony. That's her answer.\n\nHuginn drops from the doorframe as you step out, landing on your pack-strap for a single beat before launching into the lane ahead, already angling east. The south lane is still damp underfoot from this morning's squall, lane stones darker where the water collected in the ruts. Pell walks beside you at the unhurried pace of someone who has covered this ground a hundred times and has no interest in pretending otherwise. The forge stays open behind you — she doesn't lock it, you notice; that's not how this village works.\n\n'Corvin will be doing something half-wrong when we get there,' she says, after a block of comfortable quiet. It's not exactly a warning. More like reading aloud from a reliable text.",
+      "sceneSummary": "Silas asks Pell to walk with him to Corvin's and stay for the evening's spear work — she accepts without a word, just the canvas coat off the peg.",
       "choices": [
         {
-          "label": "Head east now — straight to the east furlong to find Corvin, spear over your shoulder.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "move",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Before you go — ask Pell plainly whether there's anything she wants you to know about Corvin that she didn't say in front of an audience.",
+          "label": "Walk easy and let Pell talk — she's been watching this village longer than you've been here; let whatever she knows surface on its own.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Take a minute to etch a simple binding mark into the lashing leather with the Rune-Craft Kit — something to hold the wrap and give it a name.",
-          "attribute": "practical",
-          "subAttribute": "craft",
           "axes": {
-            "spectrumId": -0.3
+            "violence_peace": 0.7,
+            "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "craft",
-            "careful"
+            "listen",
+            "build-relationship"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the assembled spear before you leave — read how the components sit together, where the stress will land on a real strike.",
-          "attribute": "mental",
+          "label": "Ask her directly about Corvin — what she actually worries he'll do wrong on a boar, beyond the obvious.",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {
-            "spectrumId": -0.2
+            "violence_peace": 0.5,
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "ask",
+            "plan",
+            "scout-intel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense as you walk — the east furlong, the fence-lines, the lay of the land toward the north wood. Read the terrain before you're in it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": 0.1
           },
           "difficulty": 0,
           "intentTags": [
             "study",
+            "scout",
             "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
           "trivial": false
+        },
+        {
+          "label": "Watch Huginn — he's already ahead of you both. See where he lands, what he's looking at.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": -0.3,
+            "concrete_abstract": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "watch",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling."
         }
       ],
       "scene": {
-        "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. Whetstone on the bench, assembled spear now in Silas's hand, burlap bundle with second shaft and remaining tip stowed.",
+        "setting": "The south lane, mid-morning, moving east — damp lane stones, the forge open behind them, light steady and gray-bright after the cleared squall.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the bench, whetstone set down, watching Silas with flat approval."
+            "state": "Walking beside Silas in her canvas coat, steady pace, not in a hurry."
           },
           {
             "name": "Huginn",
-            "state": "On the top of the doorframe — head tilted at the assembled spear, still watching the lane east."
+            "state": "A lane ahead, airborne, angling east along the fence-line."
           }
         ],
         "objects": [
-          "Assembled mid-weight spear (road-lashed, field-ready) — in Silas's hand",
-          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), stowed in pack",
-          "Rune-Craft Kit — in the pack",
-          "Fine River Whetstone — on Pell's bench, unwrapped",
-          "Wooden bucket with water and wrung-out rag — beside the forge doorframe",
-          "Small catch-plate or hook piece — Pell's last finished work, on the bench"
+          "Assembled mid-weight spear — in Silas's hand",
+          "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Silas's back or shoulder",
+          "Rune-Craft Kit — in the pack"
         ],
         "threads": [
-          "Date between Silas and Pell now a standing named arrangement",
           "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
-          "Modified Light Spear-Tip (Corvin's) still to be handed off"
+          "Modified Light Spear-Tip (Corvin's) still to be handed off",
+          "Evening spear work invited — Pell has accepted"
         ]
-      },
-      "characterDeltas": {
-        "inventoryAdd": [
-          {
-            "name": "Assembled Mid-Weight Spear",
-            "kind": "weapon",
-            "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Not finish work, but it won't shift on a boar.",
-            "consumable": false
-          }
-        ],
-        "inventoryRemove": [
-          "Mid-Weight Spear-Tip",
-          "Seasoned Ash Shaft (x2)"
-        ],
-        "inventoryAdd2note": "One ash shaft consumed in assembly; one remains — represented below.",
-        "xp": 0
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone.",
-          "statusNote": "At the forge on the south lane — whetstone on her bench, watching Silas go east.",
-          "relationshipDelta": 0
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed.",
-          "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Spear assembled here; Pell approved. Whetstone on bench. Silas ready to go east.",
-            "visited": true
-          }
+          "note": "Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes.",
+          "learned": [
+            "Does not lock the forge when she steps out — village operates on trust"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Walking east with Silas toward Corvin's east furlong, mid-morning."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "Two minutes of lashing work at the forge — barely a beat."
+        "hoursPassed": 0.25,
+        "why": "A short walk from the forge east along the lane — a few minutes of movement."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge on the south lane — open front under the wide overhang, mid-morning light. Whetstone on the bench, assembled spear now in Silas's hand, burlap bundle with second shaft and remaining tip stowed.",
+      "setting": "The south lane, mid-morning, moving east — damp lane stones, the forge open behind them, light steady and gray-bright after the cleared squall.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the bench, whetstone set down, watching Silas with flat approval."
+          "state": "Walking beside Silas in her canvas coat, steady pace, not in a hurry."
         },
         {
           "name": "Huginn",
-          "state": "On the top of the doorframe — head tilted at the assembled spear, still watching the lane east."
+          "state": "A lane ahead, airborne, angling east along the fence-line."
         }
       ],
       "objects": [
-        "Assembled mid-weight spear (road-lashed, field-ready) — in Silas's hand",
-        "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), stowed",
-        "Rune-Craft Kit — in the pack",
-        "Fine River Whetstone — on Pell's bench, unwrapped",
-        "Wooden bucket with water and wrung-out rag — beside the forge doorframe",
-        "Small catch-plate or hook piece — Pell's last finished work, on the bench"
+        "Assembled mid-weight spear — in Silas's hand",
+        "Burlap bundle — second ash shaft and Modified Light Spear-Tip (Corvin's), on Sil",
+        "Rune-Craft Kit — in the pack"
       ],
       "threads": [
-        "Date between Silas and Pell now a standing named arrangement",
         "Corvin still to be found — east furlong, past second fence-line, left fork at the willow",
-        "Modified Light Spear-Tip (Corvin's) still to be handed off"
+        "Modified Light Spear-Tip (Corvin's) still to be handed off",
+        "Evening spear work invited — Pell has accepted"
       ]
     }
   },
@@ -510,14 +518,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Silas has offered forge-labor to Pell in exchange for hunting company north of the village — negotiation ongoing at the forge.",
         "Pell accepted the deal — backlog labor in exchange for hunting company north of the village. Terms agreed verbally; work starts now.",
         "Backlog work begun at Pell's forge — drawknife bevel corrected, trust accumulating. Hunting company north will be available once the pile is clear.",
         "Pell agreed to join the north-wood hunt at cost — modification on the light point covered by Silas, Corvin invited as a third. Hunt party of three forming; terms set.",
         "Forge backlog fully cleared — hand-axe heat-collar seated. Pell confirmed ready to walk north once Corvin is found. Hunt party of three one step from departure.",
         "Both spear-tips acquired — mid-weight for Silas, modified light point for Corvin. Next: Mara Wells's store, then find Corvin, then depart north.",
         "Two ash shafts acquired from Mara Wells — one on smokehouse account, one paid. Rune-craft materials in hand. Whetstone for Pell sourced. Next step: find Corvin in the east furlong.",
-        "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong."
+        "Mara independently confirmed the river has been wrong three weeks and asked for upstream intelligence — a second party in Millbrook now wants the same information Aldric asked for. Next step: find Corvin in the east furlong.",
+        "Pell is walking east with Silas toward Corvin's — the three-way hunt party is assembling."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -625,7 +633,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d1] Silas diagnosed the hand-axe hairline via Order-Sense and called the fix correctly — heat-collar on the eye wall. Question of bar stock now open.",
         "[d1] Silas set the hand-axe aside with a clear diagnosis and note on the bar stock needed; structural backlog otherwise cleared. She reached for flat iron without being asked when the c",
         "[d1] Inspected the finished hand-axe herself — confirmed the collar with her thumb, rehung it in its spot. Turned to face Silas directly and named the next step: find Corvin, then go no",
         "[d1] Sold Silas the mid-weight spear-tip and modified the light point for Corvin — deducted the labor credit from the backlog without being asked. Transaction closed flat and exact.",
@@ -634,17 +641,18 @@
         "[d1] Finished her last piece, washed up, gave Corvin's exact location — east furlong, past the second fence-line, left fork at the willow. Turned to face Silas with her usual flat asses",
         "[d1] Received the whetstone gift — identified it as the one Mara had held for her three weeks, clocked that Silas asked about her, showed quiet pleasure in her flat register. Set it on ",
         "[d1] Allowed the kiss on the cheek without stepping back — confirmed the date in her register with 'you can tell.' Sent Silas east with the same flat economy as always.",
-        "[d1] Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone."
+        "[d1] Watched Silas seat and lash the spear tip in the forge yard — approved with a single word. Still on the bench with the whetstone.",
+        "[d1] Accepted Silas's invitation to walk to Corvin's and stay for evening spear work — took the canvas coat off the peg without a word; that was her yes."
       ],
       "knownFacts": [
-        "Froe collar was stretched not cracked — reset in the vise, not re-forged; Silas handled it without prompting",
         "Backlog fully cleared to her satisfaction — all five pieces done, hand-axe included",
         "Sold the mid-weight tip to Silas; modified the light tip with a stop-lug for Corvin; credited backlog labor against the purchase.",
         "Knows Corvin's address and has directed others there before",
         "Not unsettled by Silas returning when he could have gone straight to the east furlong",
         "Corvin is at the east furlong — past second fence-line, left fork at the willow; will be mending or building something half-considered",
         "Silas asked Mara about her specifically — enough to know what she'd want",
-        "Shows genuine warmth in small, precise tells — the mouth-shift, the allowed closeness, the click of the whetstone set down with decision"
+        "Shows genuine warmth in small, precise tells — the mouth-shift, the allowed closeness, the click of the whetstone set down with decision",
+        "Does not lock the forge when she steps out — village operates on trust"
       ],
       "skillsObserved": [
         "field tactics",
@@ -655,7 +663,7 @@
         "situational awareness — named the east furlong without looki"
       ],
       "status": "active",
-      "statusNote": "At the forge on the south lane — whetstone on her bench, watching Silas go east.",
+      "statusNote": "Walking east with Silas toward Corvin's east furlong, mid-morning.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1087,11 +1095,11 @@
     }
   },
   "tendencies": {
-    "strategic": 22.254073950945248,
-    "cerebral": 8.719321246428908,
-    "social": 26.48068697744532,
-    "generous": 8.764862853920084,
-    "cautious": 10.96530232565859
+    "strategic": 22.14280358119052,
+    "cerebral": 8.675724640196764,
+    "social": 27.348283542558093,
+    "generous": 9.721038539650483,
+    "cautious": 10.910475814030296
   },
   "aptitudes": [
     "strategist",
@@ -1099,7 +1107,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 40,
+  "actionCount": 41,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1121,8 +1129,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783903113109,
-  "rev": 65,
+  "updatedAt": 1783903568766,
+  "rev": 66,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

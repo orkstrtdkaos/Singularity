@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 210,
+  "xp": 220,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,7 +42,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 99,
+  "energy": 91,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -493,16 +493,51 @@
         "player": "Don't answer in words — reach across the dark and let that be the answer.",
         "summary": "Silas reaches across the dark; Pell's hand meets his briefly before she turns back to sleep.",
         "narration": "Your hand moves before the words do. You reach across the dark — not far, just past the edge of your canvas, palm up, offered — and let it lie there between you.\n\nPell is quiet for a moment. Then her hand finds yours. Not a grip, not a press — just the weight of it, fingers settling, the way you'd rest your palm on a workbench to feel if the iron has cooled. Her hand is calloused at the base of every finger and warm from the bedroll, and she doesn't pull you toward her or move herself toward you. She just stays.\n\nA log shifts somewhere deep in the banked hearth. Huginn makes no sound from the yard.\n\nShe lets go after a while — unhurried, the way she does most things — and turns back onto her side. \"Before the light gets high,\" she says quietly. Not cold. Just true. The hunt is tomorrow and she intends to be ready for it, and this is how she holds both things at once without choosing between them.\n\nYou lie on your back in the dark, the forge still warm, the spear a shape against the wall. Sleep comes in pieces."
+      },
+      {
+        "player": "I want to use the runic bound spear (the one in my inventory needs a new description reflecting this) to connect with Huginn outside to make sure nothing is moving around in the yard.",
+        "summary": "Silas attempts to use the death-bound spear as a runic relay for Huginn — the working finds the edge of what palework can do and stops there.",
+        "narration": "You lie still and reach for the spear — not with your hand, not yet. You let your attention travel the binding, the thread you pressed into wax and pitch-ink last night at the south pit, the one that runs from shaft to blade to Huginn's particular awareness of endings. A quiet working, barely a working at all: just a listening.\n\nThe thread is there. You can feel it — or feel its absence properly, which is close enough. But the conduit doesn't open. Palework knows the dying and the dead; it reads endings already underway. What you're asking it to do now is different — use the binding as a wire, route the sensing outward through iron and binding-cord into the yard, check what moves there. The power obliges as far as it can and then stops, cleanly, the way a line goes taut before it parts. The spear is a bound object, not a relay. Huginn is a witness, not an ear you can borrow.\n\nYou get nothing useful about the yard. What you get instead is the shape of the working you tried — a clean sense of where palework ends and something else would have to begin. The thread to Huginn is present and mutual; it simply doesn't run in that direction. The forge is warm. The coals pulse. Outside, Huginn has not moved."
       }
     ],
     "lastTurn": {
-      "narration": "Your hand moves before the words do. You reach across the dark — not far, just past the edge of your canvas, palm up, offered — and let it lie there between you.\n\nPell is quiet for a moment. Then her hand finds yours. Not a grip, not a press — just the weight of it, fingers settling, the way you'd rest your palm on a workbench to feel if the iron has cooled. Her hand is calloused at the base of every finger and warm from the bedroll, and she doesn't pull you toward her or move herself toward you. She just stays.\n\nA log shifts somewhere deep in the banked hearth. Huginn makes no sound from the yard.\n\nShe lets go after a while — unhurried, the way she does most things — and turns back onto her side. \"Before the light gets high,\" she says quietly. Not cold. Just true. The hunt is tomorrow and she intends to be ready for it, and this is how she holds both things at once without choosing between them.\n\nYou lie on your back in the dark, the forge still warm, the spear a shape against the wall. Sleep comes in pieces.",
-      "sceneSummary": "Silas reaches across the dark; Pell's hand meets his briefly before she turns back to sleep.",
+      "narration": "You lie still and reach for the spear — not with your hand, not yet. You let your attention travel the binding, the thread you pressed into wax and pitch-ink last night at the south pit, the one that runs from shaft to blade to Huginn's particular awareness of endings. A quiet working, barely a working at all: just a listening.\n\nThe thread is there. You can feel it — or feel its absence properly, which is close enough. But the conduit doesn't open. Palework knows the dying and the dead; it reads endings already underway. What you're asking it to do now is different — use the binding as a wire, route the sensing outward through iron and binding-cord into the yard, check what moves there. The power obliges as far as it can and then stops, cleanly, the way a line goes taut before it parts. The spear is a bound object, not a relay. Huginn is a witness, not an ear you can borrow.\n\nYou get nothing useful about the yard. What you get instead is the shape of the working you tried — a clean sense of where palework ends and something else would have to begin. The thread to Huginn is present and mutual; it simply doesn't run in that direction. The forge is warm. The coals pulse. Outside, Huginn has not moved.",
+      "sceneSummary": "Silas attempts to use the death-bound spear as a runic relay for Huginn — the working finds the edge of what palework can do and stops there.",
       "choices": [
         {
-          "label": "Sleep — let the night close, be ready before the light gets high",
+          "label": "Get up quietly and check the yard yourself — boots off, slow, just look",
           "attribute": "physical",
-          "subAttribute": "strength",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense instead — read whether Huginn's stillness has a shape, a pattern to it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Let it go — Huginn would have moved if something were wrong. Close your eyes and sleep.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -513,7 +548,7 @@
           "trivial": true
         },
         {
-          "label": "Lie awake a little longer — run Deathsense lightly through the spear one more time before you sleep, in case the saturation has settled and the north reads cleaner",
+          "label": "Use Deathsense directly — no spear, no relay, just you reading what's in the yard",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -527,42 +562,15 @@
           "abilityId": "deathsense",
           "energyCost": 3,
           "trivial": false
-        },
-        {
-          "label": "Lie awake — use Order-Sense quietly on the forge itself, the room, let the pattern of the place settle into you before tomorrow",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Something is moving in the yard — Huginn shifts, a sound outside. Sit up and listen before you commit to sleep.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -6,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -571,7 +579,7 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Turned onto her side, settled — hand withdrawn, face toward the wall, quiet"
+            "state": "Turned onto her side, settled — face toward the wall, quiet breathing"
           },
           {
             "name": "Huginn",
@@ -579,7 +587,7 @@
           }
         ],
         "objects": [
-          "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blade catching a faint gleam from the coals",
+          "Assembled Mid-Weight Spear — leaned against the wall beside the forge door",
           "Canvas bedroll — Silas lying on it, boots and folded clothes set beside the pack",
           "Traveler's Pack — beside the canvas",
           "Workbench with two empty mugs",
@@ -590,7 +598,7 @@
           "Huginn still oriented north and holding — whatever he attends has not resolved",
           "Hunt departs north gate before the light gets high — Pell, Corvin, Silas",
           "Deathsense read more than one presence north — signal blurred; a cleaner read may be possible once the forge yard's saturation settles in deep night",
-          "Pell's hand met Silas's briefly before she turned away — something is there, held at arm's length for now"
+          "Palework's limit as a relay is now felt — something else would have to begin where it ends"
         ]
       },
       "npcUpdates": [
@@ -598,33 +606,34 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once without choosing between them.",
-          "learned": [
-            "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
+          "note": "Sleeping — undisturbed by Silas's quiet working attempt",
           "statusNote": "On her bedroll in the forge, settled for the night, hunt-ready for morning"
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Remained still and north-facing through the attempt — did not respond to the runic contact, or gave no sign of it",
+          "statusNote": "In the forge yard, oriented north, both eyes open"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness.",
+          "topic": "palework-relay-limit",
+          "label": "Palework's Relay Limit",
+          "kind": "lore",
+          "fact": "Palework reads endings already underway — it cannot be routed outward through a bound object as a sensing relay. The death-binding's thread to Huginn is present and mutual but does not run in that direction. The edge of what palework can do is now felt cleanly.",
           "links": [
             "millbrook",
-            "death-bound-spear"
+            "death-bound-spear",
+            "huginn",
+            "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet exchange in the dark — brief, unhurried, the night still mostly ahead"
+        "why": "A brief quiet working attempt in the night — barely a beat"
       }
     },
     "sceneState": {
@@ -632,7 +641,7 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Turned onto her side, settled — hand withdrawn, face toward the wall, quiet"
+          "state": "Turned onto her side, settled — face toward the wall, quiet breathing"
         },
         {
           "name": "Huginn",
@@ -640,7 +649,7 @@
         }
       ],
       "objects": [
-        "Assembled Mid-Weight Spear — leaned against the wall beside the forge door, blad",
+        "Assembled Mid-Weight Spear — leaned against the wall beside the forge door",
         "Canvas bedroll — Silas lying on it, boots and folded clothes set beside the pack",
         "Traveler's Pack — beside the canvas",
         "Workbench with two empty mugs",
@@ -651,7 +660,7 @@
         "Huginn still oriented north and holding — whatever he attends has not resolved",
         "Hunt departs north gate before the light gets high — Pell, Corvin, Silas",
         "Deathsense read more than one presence north — signal blurred; a cleaner read may be possible once the forge yard's saturation settles in deep night",
-        "Pell's hand met Silas's briefly before she turned away — something is there, held at arm's length for now"
+        "Palework's limit as a relay is now felt — something else would have to begin where it ends"
       ]
     }
   },
@@ -793,7 +802,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Gave her honest read of the ceremony — the iron waiting for her hand was real and she has no frame for it, but she filed it accurately and stood by it.",
         "[d1] Received Silas's offer of mentorship — held it at arm's length first, then agreed: after the hunt, at the forge. Willing to see whether what the iron felt in her is real in dayligh",
         "[d1] Confirmed north gate plan with two words, set her mug down, and let the night close without crowding it — neither warmer nor cooler than the offer asked for",
         "[d1] Watched the tightening of the Huginn-thread without intervention — logged it accurately, said 'Right. Morning, then.' and let the night close.",
@@ -802,7 +810,8 @@
         "[d1] Offered the forge floor without ceremony — canvas behind the bellows, dry and out of the wind. Settled to her own bedroll without lingering on it.",
         "[d1] Settled quietly into the night; gave a plain and certain answer about keeping the forge, then something quieter about the iron — no language yet for what she means. Turned the ques",
         "[d1] Listened to Silas's account of the short way and the vanished path without interruption — offered 'that's not nothing' as plain assessment, then turned the question back on him",
-        "[d1] Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once w"
+        "[d1] Silas reached across the dark; Pell's hand met his — unhurried, no grip, just weight. She let go after a while and said 'before the light gets high' — holding both things at once w",
+        "[d1] Sleeping — undisturbed by Silas's quiet working attempt"
       ],
       "knownFacts": [
         "She is open to being taught, but on her terms: evidence first, daylight second, fire-side third",
@@ -1358,15 +1367,32 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "palework-relay-limit": {
+        "id": "palework-relay-limit",
+        "label": "Palework's Relay Limit",
+        "kind": "lore",
+        "facts": [
+          "[d1] Palework reads endings already underway — it cannot be routed outward through a bound object as a sensing relay. The death-binding's thread to Huginn is present and mutual but does not run in that dir"
+        ],
+        "links": [
+          "millbrook",
+          "death-bound-spear",
+          "huginn",
+          "aldric-provisioning-deal"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 29.55505040116706,
-    "cerebral": 13.25663469571957,
-    "social": 42.49291847405717,
-    "generous": 9.377203925269322,
-    "cautious": 14.217279023690113
+    "strategic": 31.407275149161222,
+    "cerebral": 14.190351522240974,
+    "social": 42.28045388168688,
+    "generous": 9.330317905642975,
+    "cautious": 14.146192628571661
   },
   "aptitudes": [
     "strategist",
@@ -1374,7 +1400,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 68,
+  "actionCount": 69,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1420,8 +1446,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783971071074,
-  "rev": 109,
+  "updatedAt": 1783971504572,
+  "rev": 110,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1514,8 +1540,8 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 12,
-      "palework": 4,
+      "order_sense": 13,
+      "palework": 5,
       "deathsense": 4
     },
     "coActivations": {
@@ -1523,7 +1549,7 @@
       "numen_sense+order_sense": 1,
       "lightsense+order_sense": 1,
       "deathsense+palework": 2,
-      "order_sense+palework": 1,
+      "order_sense+palework": 2,
       "deathsense+order_sense": 2
     },
     "aspirations": [
@@ -1535,7 +1561,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 2.75
+    "marrow": 3
   },
   "customAbilities": {},
   "precursorAccess": [],

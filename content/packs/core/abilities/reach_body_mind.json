@@ -45,8 +45,10 @@
         }
       ],
       "functions": [
+        "sustain",
+        "strike",
         "move",
-        "shield"
+        "resist"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -225,8 +227,9 @@
         "body_mind": -0.3
       },
       "functions": [
-        "heal",
-        "move"
+        "empower",
+        "sustain",
+        "heal"
       ],
       "narrationHints": "Past the wall, and the body finds more.",
       "description": "Push the body past exhaustion, pain, or shock for a burst — folk-Soma.",
@@ -275,7 +278,7 @@
         "body_mind": 0.3
       },
       "functions": [
-        "shield",
+        "resist",
         "reveal"
       ],
       "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
@@ -326,7 +329,8 @@
       },
       "functions": [
         "move",
-        "shield"
+        "shield",
+        "resist"
       ],
       "narrationHints": "The body does exactly and only what's needed, flawlessly.",
       "description": "Execute a physical feat with impossible precision and economy — mid-tier Soma.",
@@ -379,7 +383,7 @@
       },
       "functions": [
         "reveal",
-        "bind"
+        "restore"
       ],
       "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
       "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
@@ -469,8 +473,9 @@
         "space_time": 0.2
       },
       "functions": [
-        "move",
-        "shield"
+        "travel",
+        "sustain",
+        "resist"
       ],
       "challengeProfile": {
         "EXPLORE": 3,
@@ -503,7 +508,8 @@
         "space_time": 0.2
       },
       "functions": [
-        "move"
+        "move",
+        "travel"
       ],
       "challengeProfile": {
         "EXPLORE": 3,
@@ -525,5 +531,6 @@
       "gated": "learned",
       "tradition": "somatic"
     }
-  ]
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

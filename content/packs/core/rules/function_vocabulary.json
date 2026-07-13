@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "id": "function_vocabulary",
+  "kind": "design_canon",
+  "note": "SNG-092 — Erik-directed 2026-07-12. The old vocabulary had TEN verbs and `reveal` was 26% of every function-tag in the game — because `reveal` was doing the work of sense, track, appraise, read-a-mind AND foresee all at once. Twenty-four verbs in eight families. Compared against D&D 5e's schools, Blades in the Dark's actions, Fate and PbtA; the gaps below are the ones those systems all have and we did not.",
+  "theEmbarrassment": "⛔ We had a **Wrights [creation]** tradition and an **Unmakers [destruction]** tradition facing each other across an axis — **and no function tag for MAKING ANYTHING.** The creation people could not create. That is what a missing verb costs.",
+  "noDamageTypes": "Erik ruled: **no separate damage-type system.** We do not need one — **the AXIS already is the damage type and SPECTRAL FIT already is the resistance.** A Blazeborn's harm is light-flavoured because its `axes` say so; an Umbral standing in it is already penalised by spectral misfit. **The system exists. It must simply reach the NARRATION and the receipt** — *'the light finds you where you are thinnest'* — rather than being a silent number.",
+  "families": {
+    "HARM": [
+      {
+        "verb": "strike",
+        "definition": "Harm a LIVING thing, directly.",
+        "notTheSameAs": "`break` (that is for things). `hinder` (that weakens without wounding).",
+        "example": "The Edge. Hunter's Strike. Kindle's flare."
+      },
+      {
+        "verb": "break",
+        "definition": "Harm or destroy a THING — an object, a structure, a working, a formation.",
+        "notTheSameAs": "`strike` (living). `open` (a way through WITHOUT destroying).",
+        "example": "Scatter. Unshadow. The Clean Break."
+      },
+      {
+        "verb": "hinder",
+        "definition": "WEAKEN, drain, impair, or slow — without wounding. The debuff space.",
+        "notTheSameAs": "`strike` (which wounds). `bind` (which stops).",
+        "example": "The Grey Hand. Wither. The Dread."
+      }
+    ],
+    "RESTORE": [
+      {
+        "verb": "heal",
+        "definition": "Mend a LIVING thing's wounds.",
+        "notTheSameAs": "`mend` (things). `restore` (a condition, not a wound).",
+        "example": "Staunch. Chord of Mending."
+      },
+      {
+        "verb": "mend",
+        "definition": "Repair a THING.",
+        "notTheSameAs": "`heal` (living). `make` (something that was not there).",
+        "example": "Mend Device. Tinker's Hand."
+      },
+      {
+        "verb": "restore",
+        "definition": "Undo a CONDITION — cleanse, cure, un-curse, un-rewrite. Not a wound; a STATE.",
+        "notTheSameAs": "`heal` (a wound). ⛔ **Halvex Coil's rewritten victims have no cure because this verb did not exist.**",
+        "example": "The Mercy. (Owed: a Rootkin and a Verist answer.)"
+      },
+      {
+        "verb": "empower",
+        "definition": "Make an ally BETTER — stronger, faster, braver, clearer. The buff space.",
+        "notTheSameAs": "`heal` (which only returns them to whole).",
+        "example": "Steady Soul. Voice of the Flock. ⛔ **This space was EMPTY.**"
+      }
+    ],
+    "PROTECT": [
+      {
+        "verb": "shield",
+        "definition": "Block an immediate BLOW.",
+        "notTheSameAs": "`ward` (persistent, over a place or person). `resist` (an effect, not a blow).",
+        "example": "The Stand. Resonant Shield."
+      },
+      {
+        "verb": "ward",
+        "definition": "PERSISTENT protection over a place, a thing, or a person. It stands when you are not looking.",
+        "notTheSameAs": "`shield` (one blow, now).",
+        "example": "Prism Ward. Boundary-Stone. The Shielding Word."
+      },
+      {
+        "verb": "resist",
+        "definition": "Withstand an EFFECT — fear, a compulsion, a working, a rewriting.",
+        "notTheSameAs": "`shield` (a physical blow).",
+        "example": "Stillcraft. The Held Breath. Total Focus."
+      }
+    ],
+    "KNOW": [
+      {
+        "verb": "reveal",
+        "definition": "Perceive what IS. The present, here.",
+        "notTheSameAs": "`foresee` (what WILL be). `track` (where a thing HAS BEEN).",
+        "example": "Lightsense. Order-Sense. Body-Read."
+      },
+      {
+        "verb": "foresee",
+        "definition": "Perceive what WILL be, or what is COMING.",
+        "notTheSameAs": "`reveal` (the present). ⛔ **The Hourkeepers can PRE-REMEMBER and there was no verb for it.**",
+        "example": "Hour-Sense. The Pre-Remembered. Chaos-Sense (the break before it breaks)."
+      },
+      {
+        "verb": "track",
+        "definition": "Follow a TRAIL — where a thing has been, where it is going.",
+        "notTheSameAs": "`reveal` (what is here now).",
+        "example": "Wayfinding. Old Roads. The Long Grain."
+      }
+    ],
+    "SHAPE": [
+      {
+        "verb": "make",
+        "definition": "CREATE something that was not there.",
+        "notTheSameAs": "`mend` (repairing what was). `transform` (changing what is).",
+        "example": "⛔ **THE MISSING VERB.** Makecraft. The Raised Thing. Tinker's Hand."
+      },
+      {
+        "verb": "transform",
+        "definition": "Change a thing's NATURE into another.",
+        "notTheSameAs": "`make` (from nothing). `mend` (back to what it was).",
+        "example": "Graftlife. Rootwork. The Called-Back."
+      },
+      {
+        "verb": "summon",
+        "definition": "CALL something to you, or open a way for it to come.",
+        "notTheSameAs": "`make` (creating it). `travel` (going to it).",
+        "example": "Thin Place. The Walking Figure."
+      }
+    ],
+    "INFLUENCE": [
+      {
+        "verb": "bind",
+        "definition": "STOP or HOLD. Prevent action.",
+        "notTheSameAs": "`command` (which compels action). `hinder` (which weakens it).",
+        "example": "Stillcraft. The Fixed Point. Truename."
+      },
+      {
+        "verb": "command",
+        "definition": "COMPEL action. Make it obey.",
+        "notTheSameAs": "`bind` (which only stops it).",
+        "example": "Command Engine. Beastfriend. ⛔ **`bind` was doing this job badly.**"
+      },
+      {
+        "verb": "deceive",
+        "definition": "Show what is FALSE. Make them believe a thing that is not.",
+        "notTheSameAs": "`conceal` (which hides what IS true). ⛔ **The Veilwrights' entire craft had no verb.**",
+        "example": "Falsecraft. False Trail. The Kind Lie."
+      },
+      {
+        "verb": "conceal",
+        "definition": "HIDE what is true.",
+        "notTheSameAs": "`deceive` (which shows a falsehood).",
+        "example": "Shroud. Dim. Blend In. Quiet Step."
+      }
+    ],
+    "MOVE": [
+      {
+        "verb": "move",
+        "definition": "TACTICAL positioning — a step, a dodge, a leap, a shadow-step across a room.",
+        "notTheSameAs": "`travel` (leagues). `open` (a way through).",
+        "example": "Perfect Motion. Shadowstep. Drumline Stride."
+      },
+      {
+        "verb": "travel",
+        "definition": "LONG-DISTANCE movement. Leagues, not paces.",
+        "notTheSameAs": "`move` (tactical). ⛔ **The Horizon-Walkers SPAN and it was tagged the same as a dodge.**",
+        "example": "Spanwork. The Long Stride. Shortfold. Waygate."
+      },
+      {
+        "verb": "open",
+        "definition": "Make a WAY THROUGH — a lock, a door, a seal, a ward. **Without destroying it.**",
+        "notTheSameAs": "`break` (which destroys). ⛔ **The Umbrals OPEN what they do not break, and there was no verb.**",
+        "example": "Unmake Seal. Hold the Aperture. The Old Procedure."
+      }
+    ],
+    "SUSTAIN": [
+      {
+        "verb": "sustain",
+        "definition": "Food, water, warmth, shelter, endurance. **Staying alive when nothing is attacking you.**",
+        "notTheSameAs": "`heal` (which mends a wound). ⛔ **NOBODY IN THIS WORLD COULD FEED THEMSELVES WITH A CRAFT.**",
+        "example": "Greenlore. Hearthbinding. Rivercraft. Second Wind."
+      }
+    ]
+  },
+  "comparedTo": {
+    "dnd5e": "Abjuration→ward/shield/resist · Conjuration→summon/make/travel · Divination→reveal/foresee/track · Enchantment→command/bind · Evocation→strike/break/heal · Illusion→deceive/conceal · Necromancy→(our AXIS, not a school) · Transmutation→transform",
+    "bladesInTheDark": "Hunt→track · Study→reveal · Survey→reveal · Tinker→mend/make · Finesse→move · Prowl→conceal · Skirmish→strike · Wreck→break · Attune→foresee/summon · Command→command · Consort/Sway→(social, our attribute layer)",
+    "whatTheyAllHaveThatWeDidNot": "**make · summon · transform · command · foresee · deceive · empower · hinder · resist · sustain.** Every system in the field has these. We had none of them."
+  },
+  "theRevealGlut": "`reveal` was 26% of all function-tags — 62 of 142 abilities. **That is not because the world is observant. It is because `reveal` was the only verb available for sensing, tracking, appraising, mind-reading and foreseeing.** Splitting the verb self-corrects the count without changing a single ability's flavour."
+}

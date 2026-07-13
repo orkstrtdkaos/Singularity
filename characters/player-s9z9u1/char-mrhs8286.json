@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 3,
-  "xp": 286,
+  "level": 4,
+  "xp": 314,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,11 +42,11 @@
     "concrete_abstract": -0.0522875,
     "death_life": -0.0418125
   },
-  "attunement": 3,
-  "maxHealth": 40,
-  "health": 40,
-  "maxEnergy": 110,
-  "energy": 56,
+  "attunement": 4,
+  "maxHealth": 45,
+  "health": 45,
+  "maxEnergy": 115,
+  "energy": 115,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -180,6 +180,22 @@
         "hunt",
         "cooperation",
         "rune-craft"
+      ],
+      "weight": 1,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 1,
+      "worldDay": 13
+    },
+    {
+      "at": "2026-07-13T21:49:37.001Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Brought down the bull boar on the scrub oak ridge with Pell — a clean hunt despite a misfire in the rune-work.",
+      "tags": [
+        "hunt",
+        "craft",
+        "cooperation"
       ],
       "weight": 1,
       "spread": [],
@@ -614,121 +630,116 @@
         "player": "Does my strangeness turn you off, or on?  You know that once a woman uses a man's spear in this way, they're basically married right? (wink)",
         "summary": "Silas makes a spear-marriage joke in the birch corridor; Pell absorbs it, returns a dry counterpunch, and takes her position.",
         "narration": "You let the birch corridor do half the work — the two of you close together where the trees narrow, the ridge thirty yards ahead, Huginn gone quiet on your arm. The moment has a particular texture: dew-soaked boots, grey light going gold, a large animal somewhere in the scrub ahead, and Pell with your spear in both hands looking like she knows exactly how to use it.\n\nYou say it with a straight face, mostly: \"Does my strangeness turn you off, or on?\" A beat. Then you let the wink land. \"You know — once a woman uses a man's spear in this way, they're basically married.\"\n\nPell is quiet for exactly two seconds. Then she blows a short breath through her nose — not quite a laugh, but the shape of one, the kind that costs something to suppress. She doesn't look at you. She is watching the ridge, but her shoulders are up a fraction from where they were.\n\n\"Strangeness turns me on,\" she says, flat as ironwork, eyes still forward. A pause. \"The married part I'll need in writing.\" She shifts her grip on the shaft — a small adjustment, entirely practical — and moves into her set position below the first scrub oak without another word, the ghost of something at the edge of her mouth that she doesn't bother hiding."
+      },
+      {
+        "player": "GAMBIT — Hunt the bull boar together with Pell on their date",
+        "summary": "Gambit completed rough — bull down on the scrub oak ridge, Pell's strike clean, rune-channel backlash hit Silas hard at the kill moment.",
+        "narration": "You ease east along the ridge's edge, reading shadows — birch root-wells, the undercut bank of a dried streambed, a dark notch where two scrub oaks lean together. Three good anchor points. You fix them in your mind and move to position, Huginn lifting silently from your arm to a branch above the first anchor shadow. Pell slips below the nearest oak without a sound, spear low, watching the brush. Everything in order.\n\nThen you try to provoke the bull.\n\nYour plan was clean: find the pain-line in the sounder's old territory, push it, give him a reason to charge east where the ground is open and the spear is waiting. What you get instead is a boar that has been on this ridge since before dawn and is in no mood to be managed. He does not charge. He surges — no warning, no grunt, no territorial display — just two hundred pounds of iron shoulder and bad intent launching from behind a stand of gorse you hadn't clocked, coming in at a flat angle from the north rather than east, tusks low and cutting. Not at you. Sideways, pushing, trying to get uphill between you and Pell's position. He is trying to split the line.\n\nYou shed your coat mid-stride — no thought, the motion just happens, the canvas thrown wide to your left where it catches his eye-line and flares on a branch. He breaks toward it for one stride. One is enough. You roll right over the dry streambed bank and come up in the shadow of the undercut — the step is instant, clean, you are simply somewhere else — and you surface five yards north with the streambed between you and where the bull was. He hits the coat, takes it on one tusk, shakes it free, and swings back to find you gone. Three seconds of pure confusion. Pell does not waste it.\n\nShe comes off the oak line at a dead run, ground-low, spear level. The bull hears her, starts his turn — and the binding in the blade sings through your thumb-bone even from here, the death-register reading the proximity of the kill. She drives the spear home behind the shoulder, full weight behind the socket, and the shaft holds — holds — and then something goes wrong in the rune-work. The channel you threaded into the blade last night at the forge-pit seizes, not releases. The Palework you were meant to push through it at the moment of the strike finds no path — the runes close like a fist around the energy instead of passing it, and what comes back up the thread is a hard concussive jolt, a sound like a bell struck inside your chest, and then your knees are in the dirt at the streambed's edge and your vision is white at the corners.\n\nThe bull is down. Pell's strike was clean enough without the craft behind it — the spear's iron did its work even if the binding failed its half of the bargain. The animal thrashes once, twice, goes still in the dry grass twenty feet from the tree line. Pell is standing over it with one hand on the shaft, breathing hard, looking across the ridge at you with an expression that is somewhere between sharp focus and a question she hasn't decided how to ask. The Deathbound Runic Spear is still in the bull. Huginn has already descended to a branch above the body. The gold is full in the eastern sky now. Your sternum aches like you caught a kick from a horse.\n\n*You feel it settle into you — a new steadiness. (Level 4: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You let the birch corridor do half the work — the two of you close together where the trees narrow, the ridge thirty yards ahead, Huginn gone quiet on your arm. The moment has a particular texture: dew-soaked boots, grey light going gold, a large animal somewhere in the scrub ahead, and Pell with your spear in both hands looking like she knows exactly how to use it.\n\nYou say it with a straight face, mostly: \"Does my strangeness turn you off, or on?\" A beat. Then you let the wink land. \"You know — once a woman uses a man's spear in this way, they're basically married.\"\n\nPell is quiet for exactly two seconds. Then she blows a short breath through her nose — not quite a laugh, but the shape of one, the kind that costs something to suppress. She doesn't look at you. She is watching the ridge, but her shoulders are up a fraction from where they were.\n\n\"Strangeness turns me on,\" she says, flat as ironwork, eyes still forward. A pause. \"The married part I'll need in writing.\" She shifts her grip on the shaft — a small adjustment, entirely practical — and moves into her set position below the first scrub oak without another word, the ghost of something at the edge of her mouth that she doesn't bother hiding.",
-      "sceneSummary": "Silas makes a spear-marriage joke in the birch corridor; Pell absorbs it, returns a dry counterpunch, and takes her position.",
+      "narration": "You ease east along the ridge's edge, reading shadows — birch root-wells, the undercut bank of a dried streambed, a dark notch where two scrub oaks lean together. Three good anchor points. You fix them in your mind and move to position, Huginn lifting silently from your arm to a branch above the first anchor shadow. Pell slips below the nearest oak without a sound, spear low, watching the brush. Everything in order.\n\nThen you try to provoke the bull.\n\nYour plan was clean: find the pain-line in the sounder's old territory, push it, give him a reason to charge east where the ground is open and the spear is waiting. What you get instead is a boar that has been on this ridge since before dawn and is in no mood to be managed. He does not charge. He surges — no warning, no grunt, no territorial display — just two hundred pounds of iron shoulder and bad intent launching from behind a stand of gorse you hadn't clocked, coming in at a flat angle from the north rather than east, tusks low and cutting. Not at you. Sideways, pushing, trying to get uphill between you and Pell's position. He is trying to split the line.\n\nYou shed your coat mid-stride — no thought, the motion just happens, the canvas thrown wide to your left where it catches his eye-line and flares on a branch. He breaks toward it for one stride. One is enough. You roll right over the dry streambed bank and come up in the shadow of the undercut — the step is instant, clean, you are simply somewhere else — and you surface five yards north with the streambed between you and where the bull was. He hits the coat, takes it on one tusk, shakes it free, and swings back to find you gone. Three seconds of pure confusion. Pell does not waste it.\n\nShe comes off the oak line at a dead run, ground-low, spear level. The bull hears her, starts his turn — and the binding in the blade sings through your thumb-bone even from here, the death-register reading the proximity of the kill. She drives the spear home behind the shoulder, full weight behind the socket, and the shaft holds — holds — and then something goes wrong in the rune-work. The channel you threaded into the blade last night at the forge-pit seizes, not releases. The Palework you were meant to push through it at the moment of the strike finds no path — the runes close like a fist around the energy instead of passing it, and what comes back up the thread is a hard concussive jolt, a sound like a bell struck inside your chest, and then your knees are in the dirt at the streambed's edge and your vision is white at the corners.\n\nThe bull is down. Pell's strike was clean enough without the craft behind it — the spear's iron did its work even if the binding failed its half of the bargain. The animal thrashes once, twice, goes still in the dry grass twenty feet from the tree line. Pell is standing over it with one hand on the shaft, breathing hard, looking across the ridge at you with an expression that is somewhere between sharp focus and a question she hasn't decided how to ask. The Deathbound Runic Spear is still in the bull. Huginn has already descended to a branch above the body. The gold is full in the eastern sky now. Your sternum aches like you caught a kick from a horse.\n\n*You feel it settle into you — a new steadiness. (Level 4: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Gambit completed rough — bull down on the scrub oak ridge, Pell's strike clean, rune-channel backlash hit Silas hard at the kill moment.",
       "choices": [
         {
-          "label": "Move east to draw the bull — circle wide, show yourself, and let him come to you while Pell sets.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.3
-          },
-          "difficulty": 20,
+          "label": "Get to your feet and go to Pell — check on her first, let her see you're upright before you explain what happened to you.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "bait",
             "careful",
-            "risky"
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Before moving, use Deathsense — feel whether the bull is healthy and where its vitality sits, so Pell knows where to strike.",
+          "label": "Stay kneeling and try to read the spear's binding — what closed, and why. Run your hand along the runes while the channel is still warm from the failed discharge.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.3
+            "chaos_order": 0.2,
+            "mechanical_spiritual": 0.3
           },
-          "difficulty": 10,
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Signal Pell you're moving — hold eye contact a second longer than needed — then go east and bring the bull.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "bait",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the ridge before committing — read the bull's pattern and find the exact angle that gives Pell the cleanest shot.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.3
-          },
-          "difficulty": 10,
-          "intentTags": [
-            "scout",
-            "plan",
+            "study",
             "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
+        },
+        {
+          "label": "Let Huginn come to you — hold out your arm and let it do what it does with what just died. The bull is still warm and the death-register in the blade felt something you didn't.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "observe",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Pull the spear free and hand it back to Pell — let the hunt finish clean. Then tell her plainly: the binding misfired, it knocked you down, you want to understand why but not right now.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "chaos_order": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "honest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "health": -5,
+        "energy": -7,
+        "xp": 8
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Edge of the birch corridor, north wood — scrub oak ridge thirty yards ahead, low and dry, dew lighter where the ground rises. Grey light now going gold on the eastern ridge. Wind out of the northwest. Pell has moved to her set position below the first scrub oak.",
+        "setting": "Scrub oak ridge, north wood — bull down in dry grass twenty feet from the tree line, eastern sky fully gold now, wind still from the northwest. Silas is on his knees at the dry streambed edge, white at the corners of his vision from the backlash. Pell is standing over the bull with one hand on the spear shaft.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Set below the first scrub oak on the ridge — Deathbound Runic Spear in both hands, watching the scrub, the ghost of a suppressed something still at the edge of her mouth."
-          },
-          {
-            "name": "Corvin",
-            "state": "Thirty yards south in the sedge strip, dressing the sow — out of earshot, working steadily."
+            "state": "Standing over the downed bull, one hand on the spear shaft, breathing hard — watching Silas with a focused, unasked question on her face."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's forearm, head angled northwest toward the ridge — still, watching."
+            "state": "Perched on a branch above the bull's body — already descended, watching the stillness below with its characteristic unhurried attention."
+          },
+          {
+            "name": "Corvin",
+            "state": "Thirty yards south in the sedge strip, dressing the sow — out of earshot."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear — in Pell's hands at her set position",
-          "Bull's track — confirmed northwest toward scrub oak ridge",
-          "Sow — being dressed thirty yards south by Corvin",
-          "Scrub oak ridge — thirty yards ahead, wind out of the northwest, bull somewhere in the scrub"
+          "Deathbound Runic Spear — still in the bull, shaft upright",
+          "Bull boar — down in dry grass, twenty feet from the tree line, still warm",
+          "Silas's coat — on a gorse branch fifteen yards west, one tusk-tear in the canvas",
+          "Dry streambed — the shadow-anchor Silas used for the step",
+          "Sow — being dressed thirty yards south by Corvin"
         ],
         "threads": [
-          "Bull located on scrub oak ridge — Pell set, waiting for Silas to move east and draw him out",
-          "Huginn's northward orientation and what is ending up the corridor remains unnamed",
-          "Pell's dry counterpunch — 'the married part I'll need in writing' — sits unresolved between them",
-          "Corvin's smokehouse delivery still his task once the dressing is done"
+          "Rune-channel backlash — the binding closed rather than passed the Palework; cause unknown",
+          "Pell has an unasked question about what just happened to Silas",
+          "Huginn is attending the bull's death — northward orientation unresolved",
+          "Pell's dry counterpunch ('the married part I'll need in writing') still unresolved between them",
+          "Corvin's smokehouse delivery still his task once dressing is done"
         ]
       },
       "npcUpdates": [
@@ -737,73 +748,148 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Received the spear-marriage joke, suppressed a genuine laugh, returned a dry counterpunch ('the married part I'll need in writing'), and moved to her set position without further comment.",
+          "note": "Drove the killing strike on the bull without the Palework channel — her own arm carried the weight the runes failed to add. Watching Silas from the kill with a question she hasn't spoken.",
           "learned": [
-            "Responds to Silas's humor with dry wit rather than deflection — the warmth is there, kept flat"
+            "The rune-channel in the spear misfired at the kill moment — Silas went down to his knees from the backlash; the strike was hers alone"
           ],
           "skillsObserved": [
-            "dry conversational economy under pressure"
+            "closing on a large animal at speed from the flank",
+            "full-weight spear drive behind the shoulder socket",
+            "holding position after a kill while assessing a downed partner"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Set below the first scrub oak on the ridge, Deathbound Runic Spear in hand, waiting for Silas to draw the bull."
+          "statusNote": "Standing over the bull on the scrub oak ridge, spear in hand, watching Silas recover from the backlash."
+        },
+        {
+          "op": "update",
+          "npcId": "corvin",
+          "name": "Corvin",
+          "role": "Farmer, east furlong — hunt companion",
+          "note": "Dressing the sow in the sedge strip — out of earshot of the ridge work.",
+          "status": "active",
+          "statusNote": "In the north wood sedge strip, dressing the sow, working alone."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Bull boar taken on the scrub oak ridge on World-day 14 morning — Pell's strike, spear held. Silas's Palework channel through the runes misfired at the kill moment: the binding closed rather than passed the energy, and the backlash knocked Silas to his knees. The bull is down; the rune failure is unresolved.",
+          "subjectId": "pell"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep.",
+          "subPlace": {
+            "name": "Scrub Oak Ridge",
+            "note": "Site of the bull kill — body down in dry grass, Deathbound Runic Spear in the animal, Huginn attending.",
+            "visited": true
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Bull taken on the scrub oak ridge — sow already dressed by Corvin in the sedge strip. Two animals to deliver. Rune-channel backlash unresolved."
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Responds to Silas's humor with dry wit — suppressed a laugh at the spear-marriage joke and returned 'the married part I'll need in writing.' The warmth is real but kept under ironwork.",
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "Bull boar taken on the scrub oak ridge, World-day 14 morning. Palework channel through the Deathbound Runic Spear's runes seized at the kill moment — energy reflected back rather than passing through. Backlash: concussive, physical, brief loss of function. The cause is unknown — whether the rune-work was wrong, the channel was too young, or the death-register refused the push.",
+          "links": [
+            "pell",
+            "death-bound-spear",
+            "aldric-provisioning-deal"
+          ]
+        },
+        {
+          "topic": "death-bound-spear",
+          "label": "Deathbound Runic Spear",
+          "kind": "lore",
+          "fact": "The rough death-binding on the spear closed rather than passed a Palework channel at the kill moment — the runes acted as a fist, not a gate. Whether this is a flaw in the binding's youth, an incompatibility between Palework and this particular register, or something the death-register itself refused, is not yet known.",
           "links": [
             "millbrook",
-            "death-bound-spear"
+            "pell",
+            "aldric-provisioning-deal",
+            "the-unnamed-gift"
           ]
         }
       ],
+      "ledgerEvents": [
+        {
+          "what": "Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down.",
+          "tags": [
+            "hunt",
+            "millbrook",
+            "provision"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "death_life": -0.05
+          },
+          "impactsLocal": false
+        }
+      ],
+      "deeds": [
+        {
+          "description": "Brought down the bull boar on the scrub oak ridge with Pell — a clean hunt despite a misfire in the rune-work.",
+          "tags": [
+            "hunt",
+            "craft",
+            "cooperation"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
+      "imagePrompt": "A pale dawn on a scrub oak ridge — a bull boar down in dry grass, a spear upright in its flank, a dark corvid watching from a branch above. A woman stands over the kill breathing hard, one hand still on the shaft. Twenty feet away a man is on his knees at a streambed edge, head up, vision clearing, the ghost of a bell-strike still in his chest.",
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "a quick exchange in the corridor before the approach"
-      },
-      "gambitApt": true
+        "hoursPassed": 1,
+        "why": "Pre-dawn to full gold morning — the gambit's run and its aftermath"
+      }
     },
     "sceneState": {
-      "setting": "Edge of the birch corridor, north wood — scrub oak ridge thirty yards ahead, low and dry, dew lighter where the ground rises. Grey light now going gold on the eastern ridge. Wind out of the northwest. Pell has moved to her set position below the first scrub oak.",
+      "setting": "Scrub oak ridge, north wood — bull down in dry grass twenty feet from the tree line, eastern sky fully gold now, wind still from the northwest. Silas is on his knees at the dry streambed edge, white at the corners of his vision from the backlash. Pell is standing over the bull with one hand on the spear shaft.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Set below the first scrub oak on the ridge — Deathbound Runic Spear in both hands, watching the scrub, the ghost of a su"
-        },
-        {
-          "name": "Corvin",
-          "state": "Thirty yards south in the sedge strip, dressing the sow — out of earshot, working steadily."
+          "state": "Standing over the downed bull, one hand on the spear shaft, breathing hard — watching Silas with a focused, unasked ques"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's forearm, head angled northwest toward the ridge — still, watching."
+          "state": "Perched on a branch above the bull's body — already descended, watching the stillness below with its characteristic unhu"
+        },
+        {
+          "name": "Corvin",
+          "state": "Thirty yards south in the sedge strip, dressing the sow — out of earshot."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear — in Pell's hands at her set position",
-        "Bull's track — confirmed northwest toward scrub oak ridge",
-        "Sow — being dressed thirty yards south by Corvin",
-        "Scrub oak ridge — thirty yards ahead, wind out of the northwest, bull somewhere "
+        "Deathbound Runic Spear — still in the bull, shaft upright",
+        "Bull boar — down in dry grass, twenty feet from the tree line, still warm",
+        "Silas's coat — on a gorse branch fifteen yards west, one tusk-tear in the canvas",
+        "Dry streambed — the shadow-anchor Silas used for the step",
+        "Sow — being dressed thirty yards south by Corvin"
       ],
       "threads": [
-        "Bull located on scrub oak ridge — Pell set, waiting for Silas to move east and draw him out",
-        "Huginn's northward orientation and what is ending up the corridor remains unnamed",
-        "Pell's dry counterpunch — 'the married part I'll need in writing' — sits unresolved between them",
-        "Corvin's smokehouse delivery still his task once the dressing is done"
+        "Rune-channel backlash — the binding closed rather than passed the Palework; cause unknown",
+        "Pell has an unasked question about what just happened to Silas",
+        "Huginn is attending the bull's death — northward orientation unresolved",
+        "Pell's dry counterpunch ('the married part I'll need in writing') still unresolved between them",
+        "Corvin's smokehouse delivery still his task once dressing is done"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -823,14 +909,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Ritual space prepared at the forge south pit — rune-working set for tonight before the hunt departs tomorrow morning.",
         "Rune-binding completed at the forge south pit — spear is prepared for tomorrow's hunt. Hunt departs north gate at first light.",
         "Hunt party assembled at the forge, pre-dawn — Silas has confirmed two or three presences north, patterned and holding. Departing at first light.",
         "Hunt party cleared the north gate at pre-dawn — moving into the meadow, Huginn holding north, two or three presences still ahead.",
         "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line.",
         "Sow taken in the north wood — clean kill, Corvin's strike. Meat for delivery to the smokehouse. Huginn still threading north toward unaccounted presences.",
         "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear.",
-        "Approach plan set — Pell holds the spear and the set position below the first oak; Silas draws the bull as bait and exits via shadowstep."
+        "Approach plan set — Pell holds the spear and the set position below the first oak; Silas draws the bull as bait and exits via shadowstep.",
+        "Bull taken on the scrub oak ridge — sow already dressed by Corvin in the sedge strip. Two animals to deliver. Rune-channel backlash unresolved."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -938,7 +1024,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Took the east flank into the birches cleanly — unscented, position intact. Holding.",
         "[d1] Read Silas's two-one click and stepped out of the birches on cue — unhurried, arms wide, closed the sow's northwest bolt line cleanly.",
         "[d1] Held her east flank through the kill and came in clean afterward — watching Huginn on the fence-post now.",
         "[d1] Named the northward convergence aloud once the kill was confirmed — bull, piglets, Huginn all the same direction. Said it as observation, not alarm.",
@@ -947,28 +1032,29 @@
         "[d1] Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step aw",
         "[d1] Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil.",
         "[d1] Took the spear without ceremony, tested the balance and the socket lashing, read the wind and the ridge, and laid out a clean tactical approach — Silas bait east, she sets below th",
-        "[d1] Received the spear-marriage joke, suppressed a genuine laugh, returned a dry counterpunch ('the married part I'll need in writing'), and moved to her set position without further c"
+        "[d1] Received the spear-marriage joke, suppressed a genuine laugh, returned a dry counterpunch ('the married part I'll need in writing'), and moved to her set position without further c",
+        "[d1] Drove the killing strike on the bull without the Palework channel — her own arm carried the weight the runes failed to add. Watching Silas from the kill with a question she hasn't "
       ],
       "knownFacts": [
-        "Holds intimacy the way she holds ironwork — present and unhurried, but bounded by what the next day needs",
         "Aware that the boar's displaced ground and the direction of the presences Huginn is tracking are the same vector",
         "Held the bolt corridor through the gambit's full run — her position was the decisive constraint",
         "Bull's direction, the piglets' scatter, and Huginn's orientation all converge north",
         "Receives directness the same way she receives ironwork — present, unbothered, no performance",
         "Bull is on the scrub oak ridge a quarter-mile north — Order-Sense confirmed",
         "Silas's hint about shadowstep by the fire last night was enough — she has factored it into the plan without needing it explained",
-        "Responds to Silas's humor with dry wit rather than deflection — the warmth is there, kept flat"
+        "Responds to Silas's humor with dry wit rather than deflection — the warmth is there, kept flat",
+        "The rune-channel in the spear misfired at the kill moment — Silas went down to his knees from the backlash; the strike was hers alone"
       ],
       "skillsObserved": [
-        "naming a signal without dramatizing it",
-        "reading a partner's focus without prompting",
-        "reading terrain and wind for tactical positioning",
         "receiving an unfamiliar weapon and assessing it quickly",
         "tactical planning under field conditions",
-        "dry conversational economy under pressure"
+        "dry conversational economy under pressure",
+        "closing on a large animal at speed from the flank",
+        "full-weight spear drive behind the shoulder socket",
+        "holding position after a kill while assessing a downed partn"
       ],
       "status": "active",
-      "statusNote": "Set below the first scrub oak on the ridge, Deathbound Runic Spear in hand, waiting for Silas to draw the bull.",
+      "statusNote": "Standing over the bull on the scrub oak ridge, spear in hand, watching Silas recover from the backlash.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1020,7 +1106,7 @@
     "corvin": {
       "id": "corvin",
       "name": "Corvin",
-      "role": "Farmer, east furlong — confirmed hunt companion",
+      "role": "Farmer, east furlong — hunt companion",
       "description": "Broad-shouldered, younger than Aldric, compact and weathered — the kind of man who maintains a place without being asked. Currently losing an argument with a fence-section.",
       "firstMet": {
         "locationId": "millbrook",
@@ -1028,7 +1114,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d1] Present in the yard before first light as promised — answering Pell, ready to move north.",
         "[d1] Took point naturally on the north track — knows the fence-lines, pace easy and deliberate.",
         "[d1] Briefed the party on boar ground — wet strip along the fence-line, mornings, quarter mile in. Noted sounder pushing higher ground due to river smell on low air. Said it flat, like ",
         "[d1] Received Silas's ground-read without comment — waiting for the party to settle on an approach.",
@@ -1037,7 +1122,8 @@
         "[d1] Holding the west fence-line with the corridor closed — watching for Silas's next signal.",
         "[d1] Landed the killing strike on the sow — clean, short-range, no wasted motion. Kneeling in the sedge now, settling before the dressing work.",
         "[d1] Received the acknowledgment with a nod and a palm-flat on the sow's flank — then drew his knife and began dressing without ceremony.",
-        "[d1] Received the handoff cleanly — no argument, back to the dressing work."
+        "[d1] Received the handoff cleanly — no argument, back to the dressing work.",
+        "[d1] Dressing the sow in the sedge strip — out of earshot of the ridge work."
       ],
       "knownFacts": [
         "Will be at the north gate before the light gets high on World-day 14",
@@ -1058,7 +1144,7 @@
         "immediate transition to post-kill work without ceremony"
       ],
       "status": "active",
-      "statusNote": "In the north wood sedge strip, dressing the sow — working alone while Silas and Pell head north.",
+      "statusNote": "In the north wood sedge strip, dressing the sow, working alone.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1069,7 +1155,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Mid-weight spear assembled with road lashing in the forge yard on World-day 13 morning — tip seated on one ash shaft; second shaft and light tip remain stowed.",
         "[d1] Corvin's east furlong visited on World-day 13 morning — drystone-walled strip north of the second fence-line, left of the willow fork. Corvin found mid-repair on a downed fence-section.",
         "[d1] Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt.",
         "[d1] Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out.",
@@ -1080,7 +1165,8 @@
         "[d1] Silas slept inside the forge on World-day 13 night — canvas behind the bellows, by invitation. The forge is now a place of both craft and something harder to name.",
         "[d1] Silas slept a full night in the forge interior — canvas near the hearth, undisturbed. The hearth has coaled nearly to dark by pre-dawn.",
         "[d1] Sow killed in the sedge strip on World-day 14 pre-dawn — ground disturbed, piglets scattered north. The strip now reads as hunted.",
-        "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light."
+        "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
+        "[d1] Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1162,8 +1248,8 @@
         "scrub-oak-ridge": {
           "name": "Scrub Oak Ridge",
           "day": 1,
-          "visited": false,
-          "note": "Low ridge a quarter-mile north of the sedge strip where the birch thins and scrub oak starts — bull's confirmed destinat"
+          "visited": true,
+          "note": "Site of the bull kill — body down in dry grass, Deathbound Runic Spear in the animal, Huginn attending."
         }
       },
       "vectorsKnown": [
@@ -1240,8 +1326,8 @@
     "craft": 3,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1287,7 +1373,8 @@
           "[d1] Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn",
           "[d1] Sow taken in the north wood sedge strip on World-day 14 pre-dawn — clean kill, Corvin's strike. Huginn attended without prompting. Piglets and bull both northwest, direction of the unaccounted pattern",
           "[d1] Post-kill: bull track, scattered piglets, and Huginn's northward orientation all converge on the same corridor in the north wood — three independent signals pointing the same direction.",
-          "[d1] Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three in"
+          "[d1] Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three in",
+          "[d1] Bull boar taken on the scrub oak ridge, World-day 14 morning. Palework channel through the Deathbound Runic Spear's runes seized at the kill moment — energy reflected back rather than passing through."
         ],
         "links": [
           "disputed-zone",
@@ -1525,7 +1612,8 @@
           "[d1] Pell Marsh now knows her maker's mark is load-bearing in the death-binding — not metaphor, structural. She is waiting to understand what 'grows into' means practically. The spear's nature is unresolve",
           "[d1] Silas confirmed to Pell plainly: the spear is a beginning, not a finished artifact. Its nature — what the binding, Pell's mark, and Huginn's thread become together — will only be revealed through use ",
           "[d1] Pell reports the iron 'waited' for her hand when she pressed the maker's mark — a sensation she has never felt before. The spear is behaving like something with a preference.",
-          "[d1] The Huginn-thread is now present and mutual — not a tether but a mutual registration, like a name between two who already knew each other's faces. The binding is still rough, but oriented. The spear k"
+          "[d1] The Huginn-thread is now present and mutual — not a tether but a mutual registration, like a name between two who already knew each other's faces. The binding is still rough, but oriented. The spear k",
+          "[d1] The rough death-binding on the spear closed rather than passed a Palework channel at the kill moment — the runes acted as a fist, not a gate. Whether this is a flaw in the binding's youth, an incompat"
         ],
         "links": [
           "pell",
@@ -1534,7 +1622,9 @@
           "aldric-provisioning-deal",
           "the-unnamed-gift"
         ],
-        "aliases": [],
+        "aliases": [
+          "Deathbound Runic Spear"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       },
@@ -1558,13 +1648,14 @@
     }
   },
   "tendencies": {
-    "strategic": 38.196727842515855,
-    "cerebral": 20.498394107623692,
-    "social": 46.350186645330766,
-    "generous": 8.482716946470909,
-    "cautious": 19.453284863439507,
-    "physical": 0.9655206468094844,
-    "risky": 0.9801495006250001
+    "strategic": 43.00574420330327,
+    "cerebral": 20.395902137085574,
+    "social": 46.11843571210411,
+    "generous": 8.440303361738554,
+    "cautious": 20.35601843912231,
+    "physical": 1.960693043575437,
+    "risky": 0.9752487531218751,
+    "ruthless": 1
   },
   "aptitudes": [
     "strategist",
@@ -1572,7 +1663,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 88,
+  "actionCount": 89,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1626,8 +1717,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783978277123,
-  "rev": 135,
+  "updatedAt": 1783979377003,
+  "rev": 137,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1719,6 +1810,12 @@
       "text": "Sow taken cleanly in the north wood on World-day 14 pre-dawn — Corvin's strike, Silas's hold. Piglets scattered north. Bull's track and Huginn's northward orientation remain unresolved.",
       "day": 1,
       "subjectId": "corvin"
+    },
+    {
+      "id": "pell",
+      "text": "Bull boar taken on the scrub oak ridge on World-day 14 morning — Pell's strike, spear held. Silas's Palework channel through the runes misfired at the kill moment: the binding closed rather than passe",
+      "day": 1,
+      "subjectId": "pell"
     }
   ],
   "practice": {
@@ -1726,10 +1823,10 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 19,
-      "palework": 5,
+      "order_sense": 20,
+      "palework": 7,
       "deathsense": 5,
-      "shadowstep": 1
+      "shadowstep": 2
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -1748,7 +1845,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 4
+    "marrow": 4.5
   },
   "customAbilities": {},
   "precursorAccess": [],

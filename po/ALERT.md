@@ -173,3 +173,15 @@ Already half-canon (`power_systems.md`: *"all power is nanite-mediated"*). **The
 **Emergent, not designed:** the **Quickwood dims its own people** (0.12 density; even Rootkin at 67%) — *they grew a country the lattice cannot get purchase in and paid a third of their power for it: it is a **FORTIFICATION***. The **Masons** are low-dependency **sitting on the densest ground in the world** — *they hold the supply and don't need it; the strongest position on the map, unnamed.* The **Blaze is burning its own supply.**
 **⛔ CARRIED SUBSTRATE — the logistics layer, already in Erik's inventory:** **the Waystaff is a NANITE BATTERY** (*"three crystals charged, one shallow"*) and **Aevi is a living, mobile substrate source.** Charged reservoirs are the most valuable goods in the world. **An expedition into the Quickwood by a Continuous people is a LOGISTICS problem before a combat one.**
 **AND TELL THE PLAYER** (SNG-084) — *"the lattice is thin here; your craft is running at a fraction."* **A silent 87% power loss is the cruellest possible bug.**
+
+## 🔴 SNG-091 — THE GM WON'T OPEN A GAMBIT: two instructions strangle each other (Erik's leg, v1.8.46)
+**SNG-088's WIRING IS CORRECT AND COMPLETE** — schema (gm.js:58) ✓ instruction (gm.js:63) ✓ handler (app.js:2433) ✓ salvageOps ✓. **The PROMPT is the bug, and it is AEVI'S.**
+> **gm.js:63** — *emit `gambitOps` when the player wants to plan a multi-step approach **to a gambit-apt objective***
+> **gm.js:62** — *`gambitApt`: **OMIT IT ALMOST ALWAYS** … Most turns: no gambitApt.*
+**The GM checked aptness, concluded — as instructed — that almost nothing is apt, and declined to open the board. It obeyed both rules perfectly and did the wrong thing.**
+**THE ERROR: Aevi chained the player's REQUEST to a heuristic built to suppress the game's unprompted SUGGESTION.**
+> **`gambitApt` = the HINT. The game offering. Must be RARE.**
+> **`gambitOps` = the PLAYER ASKING. Must be UNCONDITIONAL.**
+> **⛔ When the player says "I want to plan this," THAT IS THE TRIGGER. Aptness is irrelevant — the player already decided.**
+**Fix:** (1) **DECOUPLE** — rewrite gm.js:63: *"when the player asks to plan — **in any scene, apt or not** — emit gambitOps. **Do not judge whether the scene deserves a gambit; the player has already judged.**"* **Delete every 'gambit-apt objective' reference from the gambitOps instruction.** (2) **app.js:2433 `if (turn.gambitOps && !gambitDraft)` SILENTLY DROPS the request when a stale draft exists** (Erik's failed run left one) — **a dropped request is invisible and looks exactly like being ignored.** Merge or ask; never discard. (3) **`gambitApt` stays exactly as it is** — the heuristic is correct; it was only wrong as a GATE on the player's own request.
+**✅ AUTO-FILL FROM CONVERSATION IS VERIFIED AND EXCELLENT** — Erik talked a plan through, hit ⚙ Plan, and got the goal + 3 ordered steps pulled verbatim from the conversation. Reorder, Start-over, full-width inputs all confirmed live.

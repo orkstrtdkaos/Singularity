@@ -782,7 +782,11 @@
       "effect": "Name the order inside a chaos — not imposing structure but FINDING the one that was already there, and setting the thing into it.",
       "cannot": "There is not always one there. The Lattice's oldest error is naming an order onto a chaos that had none, and the chaos always eventually says so.",
       "discovery": "use — sense a chaos, then name its order in the same beat; the one craft both peoples claim to have invented",
-      "combinationTier": "cross-axis"
+      "combinationTier": "cross-pole",
+      "axis": "chaos_order",
+      "harmRung": "incapacitating",
+      "cultCondemns": "The Grand Lattice's inner ring calls it a defect tolerated. Those who ride the Churn until nothing holds call it a cage with a nice view. **It is the only order anyone has ever been able to live inside.**",
+      "note": "RECLASSIFIED 2026-07-12: Lattice [order] and Churnfolk [chaos] are ANTIPODES on the ring. This was mislabelled cross-axis. It is a BRAID — order that BREATHES."
     },
     {
       "id": "the_long_memory",
@@ -882,7 +886,177 @@
       "combinationTier": "cross-pole",
       "effect": "You call a thing back across the line it had already crossed. Not healing — RETURNING. The Ashwardens tend endings and the Rootkin tend growth, and they are antipodes with a working border and an exhausted mutual respect; to hold BOTH is to say *this ending was wrong, and I will carry the cost of unmaking it.* What comes back is alive. Whether it is the same is a question you will be answering for the rest of your life.",
       "cannot": "It does not come back UNCHANGED — it comes back as something that has been dead, and it will always have been dead. And it is YOURS now, permanently, in the way a promise is yours. The Rootkin consider this the near edge of their own taboo; the Ashwardens consider it a theft from the only honest thing there is. Neither people will teach it. **You cannot learn this. You can only DO it — and then discover what you did.**",
-      "discovery": "use — palework and quickening held in the same act, at a moment when an ending is genuinely WRONG and you refuse it anyway. There is no teacher. There is no tome. **This is the cross-pole braid on the death↔life axis: the ONLY sanctioned road to your own antipode, and the hardest thing in the world to hold.**"
+      "discovery": "use — palework and quickening held in the same act, at a moment when an ending is genuinely WRONG and you refuse it anyway. There is no teacher. There is no tome. **This is the cross-pole braid on the death↔life axis: the ONLY sanctioned road to your own antipode, and the hardest thing in the world to hold.**",
+      "axis": "death_life",
+      "harmRung": "none"
+    },
+    {
+      "id": "the_wardens_blow",
+      "name": "The Warden's Blow",
+      "parts": [
+        "the_edge",
+        "stillcraft"
+      ],
+      "functions": [
+        "strike",
+        "bind",
+        "ward"
+      ],
+      "domains": [
+        "marcher",
+        "stillhold"
+      ],
+      "axis": "violence_peace",
+      "combinationTier": "cross-pole",
+      "harmRung": "lethal",
+      "effect": "You strike ONCE — decisively, completely, and in a way that makes every further strike unnecessary. The fight does not continue. It does not resume tomorrow. **The violence is spent, entire, in a single act, so that peace can hold behind it.** It is the most terrible mercy in the world.",
+      "cannot": "You must actually END it. A Warden's Blow that leaves the thing standing is simply a murder attempt, and everyone will treat it as one. And you carry it — the Stillhold's priests will not bless it, will not absolve it, and will not pretend they do not know why you did it.",
+      "cultCondemns": "The Silent (peace-cult) call this the greatest possible betrayal: peace bought with blood is not peace. The Redline's deepest cut calls it cowardice — a single blow to avoid the honest work of war. **They are both wrong, and the Stillhold's people are alive because someone did it.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_truer_story",
+      "name": "The Truer Story",
+      "parts": [
+        "falsecraft",
+        "verity"
+      ],
+      "functions": [
+        "conceal",
+        "reveal",
+        "heal"
+      ],
+      "domains": [
+        "veilwright",
+        "verist"
+      ],
+      "axis": "falsehood_truth",
+      "combinationTier": "cross-pole",
+      "harmRung": "none",
+      "effect": "A story that is **false in every fact and true in the only way that matters** — and it lands as truth, because it IS one. Not a lie that comforts. A shape that holds what the facts could not carry.",
+      "cannot": "It must be TRUE in the way it claims to be. A Truer Story that is merely a kind lie collapses the moment it is tested, and takes the teller's credibility with it forever. And a Verist who knows what you did will say so, out loud, at the worst possible moment.",
+      "cultCondemns": "The Flensing (truth-cult) call it the most dangerous thing in the world. The Last Mask (falsehood-cult) call it a failure of nerve — why stop at true? **It has saved more people than the truth has.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_fallen_grace",
+      "name": "The Fallen Grace",
+      "parts": [
+        "descent",
+        "ascent"
+      ],
+      "functions": [
+        "heal",
+        "bind",
+        "reveal"
+      ],
+      "domains": [
+        "abyssal",
+        "seraphic"
+      ],
+      "axis": "demonic_angelic",
+      "combinationTier": "cross-pole",
+      "harmRung": "incapacitating",
+      "effect": "Mercy that has **felt the hunger** — and forgives anyway. Judgment that knows exactly what it is condemning, because it wanted the same thing. **It binds where clean judgment only breaks**, because the one being judged can feel that you understand.",
+      "cannot": "You must actually have wanted it. A Fallen Grace offered by someone who never felt the pull is condescension, and it is heard as condescension, and it does nothing.",
+      "cultCondemns": "The Unfallen (angelic-cult) call it corruption at the root. The Devouring (demonic-cult) call it weakness dressed as virtue. **It is the only judgment anyone has ever accepted.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_unified_act",
+      "name": "The Unified Act",
+      "parts": [
+        "soma",
+        "noesis"
+      ],
+      "functions": [
+        "move",
+        "strike",
+        "reveal"
+      ],
+      "domains": [
+        "somatic",
+        "cogitant"
+      ],
+      "axis": "body_mind",
+      "combinationTier": "cross-pole",
+      "harmRung": "damaging",
+      "effect": "Knowing and doing collapse into one motion. **There is no gap between the thought and the hand** — no tell, no wind-up, no moment where a reader could see it coming, because there is no 'coming'. It simply has happened.",
+      "cannot": "It is one act. You cannot think your way through a second one while performing the first; the union is total and it is brief. And a body that has done this cannot immediately do it again.",
+      "cultCondemns": "The Sculpted (body-cult) say the mind contaminates the body. The Discarnate (mind-cult) say the body contaminates the mind. **Both peoples' finest are, quietly, doing this.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_load_bearing_word",
+      "name": "The Load-Bearing Word",
+      "parts": [
+        "thingcraft",
+        "formcraft"
+      ],
+      "functions": [
+        "shield",
+        "bind",
+        "mend"
+      ],
+      "domains": [
+        "mason",
+        "figurist"
+      ],
+      "axis": "concrete_abstract",
+      "combinationTier": "cross-pole",
+      "harmRung": "incapacitating",
+      "effect": "A symbol you can **stand on**. Meaning made structural — a promise that holds weight, a name that stops a wall falling, an argument you can shelter under in the rain. **The abstract, made to bear load.**",
+      "cannot": "It must be a meaning that is TRUE and a structure that is SOUND. Either half failing brings the whole thing down, and it brings it down on whoever was sheltering under it.",
+      "cultCondemns": "The Leaden (concrete-cult) deny it can exist. The Untethered (abstract-cult) find it a vulgar waste of a good idea. **The Quiet House at the Crossing is built on one.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_kept_appointment",
+      "name": "The Kept Appointment",
+      "parts": [
+        "spanwork",
+        "hourcraft"
+      ],
+      "functions": [
+        "move",
+        "ward",
+        "reveal"
+      ],
+      "domains": [
+        "horizon",
+        "hourkeeper"
+      ],
+      "axis": "space_time",
+      "combinationTier": "cross-pole",
+      "harmRung": "incapacitating",
+      "effect": "To be in the **right place at the right moment** — which is a far harder thing than being able to do either. You arrive exactly when arriving matters, and not one breath before or after.",
+      "cannot": "You must know WHICH moment. The braid gets you there; it does not tell you where 'there' is. Arrive perfectly at the wrong appointment and you have wasted the rarest thing in the world.",
+      "cultCondemns": "The Unlanded (space-cult) never arrive at all. The Stopped (time-cult) never leave. **Neither has ever kept an appointment.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
+    },
+    {
+      "id": "the_cleared_ground",
+      "name": "The Cleared Ground",
+      "parts": [
+        "ruinwork",
+        "makecraft"
+      ],
+      "functions": [
+        "break",
+        "mend",
+        "bind"
+      ],
+      "domains": [
+        "unmaker",
+        "wright"
+      ],
+      "axis": "destruction_creation",
+      "combinationTier": "cross-pole",
+      "harmRung": "damaging",
+      "effect": "The ending that **is** a founding. You unmake a thing so completely and so well that the ground it stood on is *ready* — and what you build there afterward stands on the ending as a foundation, not a scar.",
+      "cannot": "It requires you to be RIGHT that the thing should end, and to actually build. A Cleared Ground with nothing raised on it is just a ruin with pretensions, and the Unmakers will tell you so.",
+      "cultCondemns": "The Scouring (destruction-cult) clear and never build. The Ceaseless (creation-cult) build and never clear. **Every city worth living in was made this way.**",
+      "discovery": "use — held together in a moment where holding only one end would have failed. No people teaches this; both peoples of the axis consider it, at best, a necessary shame."
     }
   ],
   "discoverability": {
@@ -898,5 +1072,21 @@
     "cross-axis": "Two peoples from entirely different axes. Rare, powerful, strange — usually discovered by USE, in a moment where someone needed both at once. Few are taught anywhere.",
     "cross-pole": "The two poles of a SINGLE axis — the braids that belong to neither people and require standing in both (harbored_flame, meaning_engine, the_turning_word). The hardest and the most meaningful: to hold an axis whole rather than choose an end of it."
   },
-  "crossPoleNote": "The cross-pole braids are the ONLY sanctioned road to your own antipode — the one thing the domain-access model forbids by every ordinary means. Four now exist, one per built axis pair: the_harbored_flame (dark↔light) · the_meaning_engine (mechanical↔spiritual) · the_turning_word (emotional↔logical) · **the_called_back (death↔life — added 2026-07-12 because Erik's necromancer RAISED A RAVEN and the braid he had already played did not exist).** To carry a braid is to hold an axis WHOLE rather than choose an end of it. It is the rarest and most meaningful thing a character can do, and no people will teach it."
+  "crossPoleNote": "The cross-pole braids are the ONLY sanctioned road to your own antipode — the one thing the domain-access model forbids by every ordinary means. Four now exist, one per built axis pair: the_harbored_flame (dark↔light) · the_meaning_engine (mechanical↔spiritual) · the_turning_word (emotional↔logical) · **the_called_back (death↔life — added 2026-07-12 because Erik's necromancer RAISED A RAVEN and the braid he had already played did not exist).** To carry a braid is to hold an axis WHOLE rather than choose an end of it. It is the rarest and most meaningful thing a character can do, and no people will teach it.",
+  "theTwelveBraids": {
+    "principle": "ONE braid per axis. Twelve axes, twelve braids. To carry one is to hold an axis WHOLE rather than choose an end of it — and it is the ONLY sanctioned road to your own antipode, which the domain-access model closes to you forever by every ordinary means.",
+    "cultsCondemnAllOfThem": "⛔ THE CULT OF EACH PURE POLE CALLS ITS AXIS'S BRAID AN ABOMINATION — and both cults of an axis condemn the SAME braid, for opposite reasons. The living civilizations quietly permit them. **That disagreement IS the difference between a people and a cult.**",
+    "count": "9 of 12 authored",
+    "authored": [
+      "The Named Chaos",
+      "The Called-Back",
+      "The Warden's Blow",
+      "The Truer Story",
+      "The Fallen Grace",
+      "The Unified Act",
+      "The Load-Bearing Word",
+      "The Kept Appointment",
+      "The Cleared Ground"
+    ]
+  }
 }

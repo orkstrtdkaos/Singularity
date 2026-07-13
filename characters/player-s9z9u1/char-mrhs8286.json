@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 3,
-  "xp": 241,
+  "xp": 246,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -37,16 +37,16 @@
   "alignment": {
     "spectrumId": -0.6268970798773266,
     "violence_peace": 0.03,
-    "chaos_order": 0.050648124999999995,
+    "chaos_order": 0.07811571875,
     "mechanical_spiritual": 0.07991062500000001,
     "concrete_abstract": -0.0522875,
-    "death_life": -0.03875
+    "death_life": -0.0418125
   },
   "attunement": 3,
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 93,
+  "energy": 88,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -548,25 +548,30 @@
         "player": "Press the approach — move into position and close the last hundred yards quietly, trusting the spread you've set",
         "summary": "Hunt party closes to forty yards before the sow catches wind — she's rooted and alert, facing Silas, thirty seconds to commitment.",
         "narration": "You move first, spear low, weight shifting heel-to-toe on the wet leaf-mat. Pell peels east without a word — you catch the pale line of her collar disappearing between two birches. Corvin takes the west fence-line, staying inside the shadow of the trunks where the ground is drier. For a hundred yards nobody breathes louder than they have to.\n\nYou close to forty yards before the sedge strip gives you up. Not a sound — just the wind's direction going sideways for a moment, carrying your scent ahead of you on a cold eddy off the heights. The sow catches it. You hear her grunt once, low and fast, and the rustle of piglets bunching. She doesn't bolt. She turns to face your direction and goes still, dark mass in the grey sedge, and you can see the pale glint of one eye.\n\nYou stop. The party stops. The sow holds her ground — this is her strip, she knows it, and she's not certain enough of you yet to commit to a direction. But she's rooted now, alert, ribs tightening with each breath. You have maybe thirty seconds before she decides. To your east, somewhere in the birches, Pell's position is good — she hasn't been scented. To the west, Corvin has the fence-line at his back. The spread is solid. But you're the one she's looking at, and the initiative is yours to spend or hold.\n\nHuginn is silent ahead. No croak, no wing-beat. Whatever the bird is tracking north of the strip, it isn't reacting to this. That's its own kind of note."
+      },
+      {
+        "player": "Use Order-Sense — a light read on the sow's pattern right now, the way her weight is loaded, which direction her feet are set. Find the pivot before she takes it.",
+        "summary": "Order-Sense reads the sow's weight — she's loaded to bolt northwest through the fence-gap, not charge.",
+        "narration": "You let Order-Sense in small — a conserved read, barely a flicker, just enough to feel the weight distribution under the sow's stillness. The north wood resists it, though; the birch roots and the wet mat are too tangled, too many separate living systems overlapping, and for a half-second you get noise before you get signal. Then the pattern resolves.\n\nShe's loaded on her front legs. Weight forward, snout down a fraction, feet set wide and slightly canted to her right — your left. That's the bolt direction. A charge would have her coiled the other way, hindquarters low, and she isn't coiling. She's wound to break for the fence-gap, northwest, same corridor the bull used. She's going to try to take the young with her through that gap, and she's about ten seconds from deciding you're close enough to force the issue.\n\nYou have the pivot. Now you need to use it."
       }
     ],
     "lastTurn": {
-      "narration": "You move first, spear low, weight shifting heel-to-toe on the wet leaf-mat. Pell peels east without a word — you catch the pale line of her collar disappearing between two birches. Corvin takes the west fence-line, staying inside the shadow of the trunks where the ground is drier. For a hundred yards nobody breathes louder than they have to.\n\nYou close to forty yards before the sedge strip gives you up. Not a sound — just the wind's direction going sideways for a moment, carrying your scent ahead of you on a cold eddy off the heights. The sow catches it. You hear her grunt once, low and fast, and the rustle of piglets bunching. She doesn't bolt. She turns to face your direction and goes still, dark mass in the grey sedge, and you can see the pale glint of one eye.\n\nYou stop. The party stops. The sow holds her ground — this is her strip, she knows it, and she's not certain enough of you yet to commit to a direction. But she's rooted now, alert, ribs tightening with each breath. You have maybe thirty seconds before she decides. To your east, somewhere in the birches, Pell's position is good — she hasn't been scented. To the west, Corvin has the fence-line at his back. The spread is solid. But you're the one she's looking at, and the initiative is yours to spend or hold.\n\nHuginn is silent ahead. No croak, no wing-beat. Whatever the bird is tracking north of the strip, it isn't reacting to this. That's its own kind of note.",
-      "sceneSummary": "Hunt party closes to forty yards before the sow catches wind — she's rooted and alert, facing Silas, thirty seconds to commitment.",
+      "narration": "You let Order-Sense in small — a conserved read, barely a flicker, just enough to feel the weight distribution under the sow's stillness. The north wood resists it, though; the birch roots and the wet mat are too tangled, too many separate living systems overlapping, and for a half-second you get noise before you get signal. Then the pattern resolves.\n\nShe's loaded on her front legs. Weight forward, snout down a fraction, feet set wide and slightly canted to her right — your left. That's the bolt direction. A charge would have her coiled the other way, hindquarters low, and she isn't coiling. She's wound to break for the fence-gap, northwest, same corridor the bull used. She's going to try to take the young with her through that gap, and she's about ten seconds from deciding you're close enough to force the issue.\n\nYou have the pivot. Now you need to use it.",
+      "sceneSummary": "Order-Sense reads the sow's weight — she's loaded to bolt northwest through the fence-gap, not charge.",
       "choices": [
         {
-          "label": "Hold your ground and let the sow look at you — no movement, no sound. Make her choose first; the spread is good, and a committed charge is cleaner than a bolt through the birches.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Step left to cut the bolt line — plant yourself between her and the fence-gap and let Corvin's position on the west fence-line close the corridor. Force her to commit to a charge or break back into the sedge.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "violence_peace": 0.5,
-            "chaos_order": 0.7
+            "violence_peace": -0.3,
+            "chaos_order": 0.2
           },
           "difficulty": 15,
           "intentTags": [
+            "intercept",
             "careful",
-            "wait",
-            "read"
+            "press"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -575,14 +580,34 @@
           "emergenceId": null
         },
         {
-          "label": "Commit now — close the last forty yards fast before she makes up her mind. You're already the target; use that. Drive straight at her and trust Pell and Corvin to move on the flanks.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Signal Pell with a low click — two fast, one slow — and let her east position drive the sow back toward the centre of the strip. You hold ground and let the spread do the work.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "violence_peace": -0.2,
-            "chaos_order": -0.3
+            "violence_peace": 0.1,
+            "chaos_order": 0.3
           },
-          "difficulty": 20,
+          "difficulty": 15,
+          "intentTags": [
+            "coordinate",
+            "careful",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Throw the spear now — she's stationary, loaded forward, front-heavy. The angle is there. Don't wait for her to move.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {
+            "violence_peace": -0.5,
+            "chaos_order": 0
+          },
+          "difficulty": 15,
           "intentTags": [
             "attack",
             "press",
@@ -595,38 +620,18 @@
           "emergenceId": null
         },
         {
-          "label": "Use Order-Sense — a light read on the sow's pattern right now, the way her weight is loaded, which direction her feet are set. Find the pivot before she takes it.",
+          "label": "Hold completely still — no signal, no movement, no sound. Let her decide you're not a threat and watch which way she breaks. Pell and Corvin are in position; you only need to react when she commits.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.6,
-            "death_life": -0.1
+            "violence_peace": 0.3,
+            "chaos_order": 0.1
           },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "read",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Signal Pell to press her east flank now — the sow doesn't know Pell is there. A flank pressure from the birches will collapse her options and channel her toward the open ground where you have the spear-angle.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.5,
-            "violence_peace": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "plan",
-            "coordinate",
-            "careful"
+            "wait",
+            "careful",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -635,91 +640,77 @@
           "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3
+      },
       "scene": {
-        "setting": "North wood interior, Millbrook — forty yards from the sedge strip, pre-dawn grey light through bare canopy. Sow visible in the sedge ahead, turned to face Silas, alert and rooted. Wet leaf-mat underfoot, birches east, fence-line west.",
+        "setting": "North wood interior, Millbrook — forty yards from the sedge strip, pre-dawn grey light through bare canopy. Sow visible in the sedge ahead, weight loaded forward and canted to bolt northwest through the fence-gap. Wet leaf-mat underfoot, birches east, fence-line west.",
         "npcsPresent": [
           {
             "name": "Corvin",
-            "state": "Held at the west fence-line, still in shadow, watching Silas for the signal."
+            "state": "Held at the west fence-line, still in shadow — in position to close the northwest corridor if signaled."
           },
           {
             "name": "Pell",
-            "state": "Positioned in the birches to the east — unscented, out of the sow's line of sight."
+            "state": "Positioned in the birches to the east, uncompromised, watching for Silas's signal."
           },
           {
             "name": "Huginn",
-            "state": "Silent north of the strip — threading somewhere past the sedge, not reacting to the sow."
+            "state": "Threading north of the strip, silent, still orienting on the patterned presences beyond the sow."
           }
         ],
         "objects": [
           "Deathbound Runic Spear — in hand, tip forward",
           "Traveler's Pack — on Silas's back",
-          "Sow — dark mass in the grey sedge, forty yards, facing Silas",
-          "Sedge strip — low and rustling, piglets bunched near the sow",
-          "Fence-line — west edge of the wood, Corvin's back",
+          "Sow — forty yards, weight forward, canted to bolt northwest",
+          "Piglets — bunched near the sow in the sedge",
+          "Fence-gap — northwest, the bolt corridor",
+          "Sedge strip — low and rustling",
           "Birches — east, Pell's position concealed within"
         ],
         "threads": [
-          "Sow is rooted and alert — roughly thirty seconds before she commits to bolt or charge",
+          "Sow is loaded to bolt northwest through the fence-gap — roughly ten seconds before she commits",
           "Pell's east position is uncompromised — available for a flank signal",
-          "Corvin holds the west fence-line",
-          "Huginn silent north of the strip — two or three patterned presences unaccounted for"
+          "Corvin holds the west fence-line — in position to close the corridor",
+          "Huginn still threading north — two or three patterned presences unaccounted for"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "corvin",
-          "name": "Corvin",
-          "role": "Farmer, east furlong — confirmed hunt companion",
-          "note": "Held the west fence-line cleanly on approach — stayed in shadow, no sound. Watching Silas for the signal.",
-          "statusNote": "On the west fence-line in the north wood, held and waiting for Silas's read on the sow.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Took the east flank into the birches cleanly — unscented, position intact. Holding.",
-          "statusNote": "In the birches east of the sedge strip — undetected, waiting for a signal.",
-          "status": "active"
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "short stalk from the tree-line to forty yards from the sow"
+        "why": "a brief read under pressure — pre-dawn, seconds passing in the hunt"
       }
     },
     "sceneState": {
-      "setting": "North wood interior, Millbrook — forty yards from the sedge strip, pre-dawn grey light through bare canopy. Sow visible in the sedge ahead, turned to face Silas, alert and rooted. Wet leaf-mat underfoot, birches east, fence-line west.",
+      "setting": "North wood interior, Millbrook — forty yards from the sedge strip, pre-dawn grey light through bare canopy. Sow visible in the sedge ahead, weight loaded forward and canted to bolt northwest through the fence-gap. Wet leaf-mat underfoot, birches east, fence-line west.",
       "npcsPresent": [
         {
           "name": "Corvin",
-          "state": "Held at the west fence-line, still in shadow, watching Silas for the signal."
+          "state": "Held at the west fence-line, still in shadow — in position to close the northwest corridor if signaled."
         },
         {
           "name": "Pell",
-          "state": "Positioned in the birches to the east — unscented, out of the sow's line of sight."
+          "state": "Positioned in the birches to the east, uncompromised, watching for Silas's signal."
         },
         {
           "name": "Huginn",
-          "state": "Silent north of the strip — threading somewhere past the sedge, not reacting to the sow."
+          "state": "Threading north of the strip, silent, still orienting on the patterned presences beyond the sow."
         }
       ],
       "objects": [
         "Deathbound Runic Spear — in hand, tip forward",
         "Traveler's Pack — on Silas's back",
-        "Sow — dark mass in the grey sedge, forty yards, facing Silas",
-        "Sedge strip — low and rustling, piglets bunched near the sow",
-        "Fence-line — west edge of the wood, Corvin's back",
+        "Sow — forty yards, weight forward, canted to bolt northwest",
+        "Piglets — bunched near the sow in the sedge",
+        "Fence-gap — northwest, the bolt corridor",
+        "Sedge strip — low and rustling",
         "Birches — east, Pell's position concealed within"
       ],
       "threads": [
-        "Sow is rooted and alert — roughly thirty seconds before she commits to bolt or charge",
+        "Sow is loaded to bolt northwest through the fence-gap — roughly ten seconds before she commits",
         "Pell's east position is uncompromised — available for a flank signal",
-        "Corvin holds the west fence-line",
-        "Huginn silent north of the strip — two or three patterned presences unaccounted for"
+        "Corvin holds the west fence-line — in position to close the corridor",
+        "Huginn still threading north — two or three patterned presences unaccounted for"
       ]
     }
   },
@@ -1461,11 +1452,11 @@
     }
   },
   "tendencies": {
-    "strategic": 31.98725950904785,
-    "cerebral": 17.47057456127218,
-    "social": 40.415445233731916,
-    "generous": 8.918753648767051,
-    "cautious": 18.43814052629062
+    "strategic": 31.82732321150261,
+    "cerebral": 19.38322168846582,
+    "social": 40.213368007563254,
+    "generous": 8.874159880523216,
+    "cautious": 19.34594982365917
   },
   "aptitudes": [
     "strategist",
@@ -1473,7 +1464,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 78,
+  "actionCount": 79,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1519,8 +1510,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783974443888,
-  "rev": 123,
+  "updatedAt": 1783974696076,
+  "rev": 124,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1613,7 +1604,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 16,
+      "order_sense": 17,
       "palework": 5,
       "deathsense": 5
     },

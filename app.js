@@ -6,7 +6,7 @@ import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.
 import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "./engine/quests.js";
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
@@ -39,7 +39,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.45";
+const APP_VERSION = "1.8.46";
 const app = document.getElementById("app");
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -68,6 +68,7 @@ let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune s
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
+let pendingGambitProposal = null; // SNG-088B: a plan the GM sketched this turn, to open the builder pre-filled
 let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
 let sharedScene = null;  // SNG-001: the shared scene object (party play), null when solo
 let partyPoll = null;    // poll timer while a shared scene is active
@@ -2427,6 +2428,17 @@ function applyTurn(turn, resolution, playerWords = null) {
     });
     if (r.applied.length) character._correctionAside = "Set right: " + r.applied.map(describeCorrection).join("; ") + ".";
   }
+  // SNG-088B: the GM may OPEN the gambit builder with a proposed plan instead of running it as one
+  // action. Validate + stash; renderPlay opens the builder pre-filled (the player edits + commits).
+  if (turn.gambitOps && !gambitDraft) {
+    const go = turn.gambitOps;
+    const maxSteps = CONTENT.rules.gambit?.maxSteps ?? 5;
+    const steps = (Array.isArray(go.steps) ? go.steps : [])
+      .map(s => ({ text: String(s?.text ?? s ?? "").slice(0, 300), fallback: String(s?.fallback ?? "").slice(0, 300) }))
+      .filter(s => s.text).slice(0, maxSteps);
+    const goal = String(go.goal ?? "").slice(0, 300);
+    if (goal && steps.length) pendingGambitProposal = { goal, steps };
+  }
   // scene anchor: the GM's updated scene state, clamped — or keep the previous one
   sceneState = sanitizeScene(turn.scene) || sceneState;
   // SNG-075: the valley is alive in narrative play too — maybe turn something up (woven next turn)
@@ -4010,21 +4022,27 @@ function renderGambitBuilder(status = "") {
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Plan a Gambit</h2>
     <p class="hint" style="margin-bottom:12px">Declare a sequence of moves. Assess it to read your odds (as far as your experience allows), then run it. A failed step forces a decision: fallback, adapt, press on, or abandon. Adaptation points available: <strong>${adaptationPointsFor(profile, CONTENT.rules)}</strong>.</p>
-    <div class="field"><label>Goal</label><input id="g-goal" value="${esc(g.goal)}" placeholder="e.g. get the falsified purity logs out of the array office"></div>
+    <div class="field"><label>Goal</label><input id="g-goal" value="${esc(g.goal)}" placeholder="e.g. get the falsified purity logs out of the array office" style="width:100%; box-sizing:border-box"></div>
     ${g.steps.map((s, i) => `
       <div class="field gambit-step">
         <label>Step ${i + 1}${g.assessed?.steps[i] ? ` — <span class="g-chance">${g.assessed.steps[i].sense.text ? esc(g.assessed.steps[i].sense.text) : "no read"}</span>${g.assessed.weakIndex === i ? ` <span class="g-weak">⚠ weakest link</span>` : ""}` : ""}${stepEnergy ? ` <span class="g-energy">· ${stepEnergy[i]} energy</span>` : ""}</label>
-        <input class="g-step" data-i="${i}" value="${esc(s.text)}" placeholder="what you'll do">
-        <input class="g-fallback" data-i="${i}" value="${esc(s.fallback)}" placeholder="fallback if it goes wrong (optional)" style="margin-top:4px; opacity:.8">
-        ${g.steps.length > 1 ? `<button class="opt g-remove" data-i="${i}" style="margin-top:4px">remove</button>` : ""}
+        <input class="g-step" data-i="${i}" value="${esc(s.text)}" placeholder="what you'll do" style="width:100%; box-sizing:border-box">
+        <input class="g-fallback" data-i="${i}" value="${esc(s.fallback)}" placeholder="fallback if it goes wrong (optional)" style="width:100%; box-sizing:border-box; margin-top:4px; opacity:.8">
+        <div style="margin-top:4px; display:flex; gap:6px; flex-wrap:wrap">
+          ${i > 0 ? `<button class="opt g-up" data-i="${i}" title="Move this step earlier">▲ up</button>` : ""}
+          ${i < g.steps.length - 1 ? `<button class="opt g-down" data-i="${i}" title="Move this step later">▼ down</button>` : ""}
+          ${g.steps.length > 1 ? `<button class="opt g-remove" data-i="${i}">remove</button>` : ""}
+        </div>
       </div>`).join("")}
     ${totalEnergy != null ? `<div class="gambit-total ${overBudget ? "over" : ""}">Total plan cost: <strong>${totalEnergy} energy</strong> of ${character.energy ?? 0} available${overBudget ? " — ⚠ this plan costs more energy than you have; expect to fall short partway" : ""}</div>` : ""}
-    ${g.gmAdvice ? `<div class="gambit-advice">✦ GM: ${esc(g.gmAdvice)}</div>` : ""}
+    ${g.gmAdvice ? `<div class="gambit-advice">✦ GM: ${esc(g.gmAdviceExpanded ? (g.gmAdviceFull || g.gmAdvice) : g.gmAdvice)}${(g.gmAdviceFull && g.gmAdviceFull.length > g.gmAdvice.length) ? ` <button class="link-btn" id="g-advice-more">${g.gmAdviceExpanded ? "less" : "more"}</button>` : ""}</div>` : ""}
     <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
       ${g.steps.length < max ? `<button class="btn secondary" id="g-add">+ step</button>` : ""}
+      ${hasPlanDiscussion() ? `<button class="btn secondary" id="g-fill" title="Pull the goal and steps from what you just worked out with the GM">✦ Fill from our conversation</button>` : ""}
       <button class="btn secondary" id="g-assess">Assess plan</button>
       <button class="btn secondary" id="g-advise">✦ GM, look at this</button>
       <button class="btn" id="g-run" ${g.assessed ? "" : "disabled"}>Run it</button>
+      <button class="btn secondary" id="g-startover" title="Clear this plan and start fresh — costs nothing, keeps nothing">↺ Start over</button>
       <button class="btn secondary" id="g-cancel">Back</button>
     </div>
     ${status ? `<div class="hint">${esc(status)}</div>` : ""}
@@ -4034,10 +4052,20 @@ function renderGambitBuilder(status = "") {
     for (const el of app.querySelectorAll(".g-step")) g.steps[+el.dataset.i].text = el.value;
     for (const el of app.querySelectorAll(".g-fallback")) g.steps[+el.dataset.i].fallback = el.value;
   };
-  for (const el of app.querySelectorAll(".g-step, .g-fallback, #g-goal")) el.oninput = () => { g.assessed = null; g.actions = null; g.gmAdvice = null; };
-  for (const b of app.querySelectorAll(".g-remove")) b.onclick = () => { read(); g.steps.splice(+b.dataset.i, 1); g.assessed = null; renderGambitBuilder(); };
+  for (const el of app.querySelectorAll(".g-step, .g-fallback, #g-goal")) el.oninput = () => { g.assessed = null; g.actions = null; g.gmAdvice = null; g.gmAdviceFull = null; g.gmAdviceExpanded = false; };
+  for (const b of app.querySelectorAll(".g-remove")) b.onclick = () => { read(); g.steps.splice(+b.dataset.i, 1); g.assessed = null; g.actions = null; renderGambitBuilder(); };
+  // reorder: ordering is meaningful (fewer steps = less slack; sequencing changes the outcome), so a
+  // move invalidates the assessment. read() first so in-progress edits aren't lost on the swap.
+  for (const b of app.querySelectorAll(".g-up")) b.onclick = () => { read(); const i = +b.dataset.i; [g.steps[i - 1], g.steps[i]] = [g.steps[i], g.steps[i - 1]]; g.assessed = null; g.actions = null; renderGambitBuilder(); };
+  for (const b of app.querySelectorAll(".g-down")) b.onclick = () => { read(); const i = +b.dataset.i; [g.steps[i], g.steps[i + 1]] = [g.steps[i + 1], g.steps[i]]; g.assessed = null; g.actions = null; renderGambitBuilder(); };
   const add = document.getElementById("g-add");
   if (add) add.onclick = () => { read(); g.steps.push({ text: "", fallback: "" }); g.assessed = null; renderGambitBuilder(); };
+  const fill = document.getElementById("g-fill");
+  if (fill) fill.onclick = () => { read(); renderGambitBuilder("Reading your conversation for the plan…"); autofillGambitFromConversation(false); };
+  const moreBtn = document.getElementById("g-advice-more");
+  if (moreBtn) moreBtn.onclick = () => { read(); g.gmAdviceExpanded = !g.gmAdviceExpanded; renderGambitBuilder(); };
+  // SNG-088C: a gambit must be abandonable and leave NOTHING behind — a fresh, blank draft.
+  document.getElementById("g-startover").onclick = () => { abandonGambit(); renderGambitBuilder("Fresh plan — nothing carried over."); };
   document.getElementById("g-cancel").onclick = () => { gambitDraft = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
   document.getElementById("g-assess").onclick = async () => {
     read();
@@ -4073,10 +4101,61 @@ function renderGambitBuilder(status = "") {
       npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
       abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks)
     }, q);
-    g.gmAdvice = result.ok ? String(result.text).slice(0, 400) : "The GM couldn't weigh in (" + String(result.error).slice(0, 50) + ") — plan on.";
+    // SNG-088A (SNG-076 miss): the GM's plan-advice is PROSE — clamp on a word boundary with a real
+    // ellipsis (not a mid-word cut at 400), raise the bound, and keep the full text for an expander.
+    if (result.ok) { g.gmAdviceFull = String(result.text).trim(); g.gmAdvice = smartClamp(g.gmAdviceFull, 600); g.gmAdviceExpanded = false; }
+    else { g.gmAdvice = g.gmAdviceFull = "The GM couldn't weigh in (" + String(result.error).slice(0, 50) + ") — plan on."; }
     renderGambitBuilder();
   };
   document.getElementById("g-run").onclick = () => { read(); runGambit(); };
+}
+
+/** SNG-088C: abandon/reset — a gambit must leave NOTHING behind. A fresh, blank draft; no carried
+ *  goal, steps, assessment, advice, actions, or run state. Abandoning costs nothing and pays nothing;
+ *  per canon only a COMPLETED gambit pays the bonus. */
+function abandonGambit() {
+  gambitDraft = { goal: "", steps: [{ text: "", fallback: "" }], assessed: null, actions: null, gmAdvice: null, gmAdviceFull: null, gmAdviceExpanded: false };
+}
+
+/** SNG-088 follow-on: was there a long-form plan discussion with the GM just now? (enough recent
+ *  dialogue that auto-pulling a plan from it is worth offering). */
+function hasPlanDiscussion() {
+  const turns = (sceneTurns || []).slice(-6);
+  if (turns.length < 2) return false;
+  const len = turns.reduce((n, t) => n + String(t.player || "").length + String(t.narration || t.summary || "").length, 0);
+  return len >= 300;
+}
+
+/** SNG-088 follow-on: pull goal + ordered steps out of the recent conversation and populate the draft,
+ *  so a player who talked the plan through with the GM doesn't have to retype it. Overwrites only what
+ *  the extraction actually found (a typed goal survives an empty extraction). */
+async function autofillGambitFromConversation(announce = true) {
+  const g = gambitDraft;
+  if (!g) return;
+  try {
+    const ex = await extractGambit({ recentTurns: (sceneTurns || []).slice(-6), maxSteps: CONTENT.rules.gambit?.maxSteps ?? 5 });
+    const steps = (Array.isArray(ex?.steps) ? ex.steps : [])
+      .map(s => ({ text: String(s?.text || "").slice(0, 300), fallback: String(s?.fallback || "").slice(0, 300) }))
+      .filter(s => s.text);
+    const goal = String(ex?.goal || "").trim().slice(0, 300);
+    if (!steps.length && !goal) { renderGambitBuilder(announce ? "Nothing to pull from the conversation yet — write the plan here." : ""); return; }
+    if (goal) g.goal = goal;
+    if (steps.length) g.steps = steps;
+    g.assessed = null; g.actions = null;
+    renderGambitBuilder("✦ Pulled from your conversation — edit anything, reorder as you like, then Assess and Run.");
+  } catch (e) {
+    renderGambitBuilder(announce ? "Couldn't read the conversation (" + String(e.message || e).slice(0, 50) + ") — write the plan here." : "");
+  }
+}
+
+/** The entry point for opening the builder. If the player has been TALKING THROUGH a plan and there is
+ *  no draft yet, auto-fill from the conversation (Design Law 1: extracted, then editable). Otherwise
+ *  open blank / resume the existing draft. */
+function openGambitBuilder() {
+  if (gambitDraft || !hasPlanDiscussion()) { renderGambitBuilder(); return; }
+  gambitDraft = { goal: "", steps: [{ text: "", fallback: "" }], assessed: null };
+  renderGambitBuilder("Reading your conversation for the plan…");
+  autofillGambitFromConversation(false);
 }
 
 async function runGambit() {
@@ -4207,6 +4286,14 @@ function useItem(name) {
 // ---------- play rendering ----------
 
 function renderPlay(turn, opts = {}) {
+  // SNG-088B: the GM sketched a plan this turn — open the builder pre-filled instead of the scene, so
+  // the plan goes INTO the builder (editable, not executed). The player edits, assesses, then runs it.
+  if (pendingGambitProposal && !gambitDraft) {
+    const p = pendingGambitProposal; pendingGambitProposal = null;
+    gambitDraft = { goal: p.goal, steps: p.steps.length ? p.steps : [{ text: "", fallback: "" }], assessed: null };
+    renderGambitBuilder("✦ The GM sketched this plan for you — edit any of it, Assess to read your odds, then Run it. Nothing has happened yet.");
+    return;
+  }
   // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.
   if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
   const location = hereNow();
@@ -4676,9 +4763,9 @@ function renderPlay(turn, opts = {}) {
     if (goBtn && !askMode) goBtn.disabled = true;
   }
   const gambitBtn = document.getElementById("gambit-open");
-  if (gambitBtn) gambitBtn.onclick = () => renderGambitBuilder();
+  if (gambitBtn) gambitBtn.onclick = () => openGambitBuilder();
   const ghGo = document.getElementById("gambit-hint-go");
-  if (ghGo) ghGo.onclick = () => renderGambitBuilder();
+  if (ghGo) ghGo.onclick = () => openGambitBuilder();
   const ghX = document.getElementById("gambit-hint-x");
   if (ghX) ghX.onclick = () => { gambitHintDismissed = true; gambitHintCooldown = 4; renderPlay(turn, opts); }; // SNG-077: dismissal sticks + a cooldown
   const retry = document.getElementById("retry");

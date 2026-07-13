@@ -1472,3 +1472,39 @@ Erik keeps prefixing *"[to the GM]"* and the GM keeps treating it as suspect. **
 **Erik test:** "Open the repair panel — set your primary domain to Ashwarden, strip the two abilities you never chose, keep Order-Sense, and confirm your skill point is now spendable on YOUR people's crafts. Verify the whole thing is logged."
 
 *Aevi's note: SNG-070's refused-list said 'abilities' while the widened scope said 're-derive abilities'. **My spec was contradictory, and the GM took the conservative reading.** Third time this cycle that a correct build against an ambiguous spec produced a live bug.*
+---
+
+## SNG-086 — "Describe your character" → the game suggests domains (THE THIRD DOOR)
+
+**Erik, 2026-07-12:** *"we might want to let people describe what kind of character they want then suggest domains like you did here."* 🔧 CCode. Aevi PO. **Queued — not urgent, but likely the BEST door for a new player.**
+
+### The three doors into creation
+1. **The Prologue** (SNG-062) — *play*, and your domains crystallize from what you did.
+2. **Quick-start** — *pick* from the ring yourself. The express lane.
+3. **⭐ DESCRIBE — the new one.** *Say who you want to be, in your own words, and the game shows you where that lands on the circle, and what it costs.*
+
+**This is probably the door Brooklyn, Courtney and Clara actually want.** They will not play a prologue to configure a character, and they will not study a 24-point ring. They want to say *"a girl who talks to animals and cannot lie"* and have the game answer.
+
+### The flow (modelled on the live exchange it came from)
+Erik wrote: *"necromancer mage type... slight of frame... very smart... likes Order-Sense... a romantic and a hunter."* The answer that came back was not a dropdown. It was:
+> **PRIMARY — Ashwarden (death).** The necromancer core.
+> **SECONDARY — Cogitant (mind).** He's very smart. **It closes Somatic (body) — and he is slight of frame. The cost is one he already pays.**
+> **TERTIARY — Figurist (abstract).** Pattern and symbol — the *mage* half.
+> **Keep Order-Sense** — penalized, but it buys **The Measured Ruin**: *"decay applied with a designer's precision."* That is a smart necromancer.
+> **Hunter?** Free — folk craft, open to all. **Romantic?** Not everything needs a domain.
+> **⛔ And life is closed to you forever** — except by a braid nobody teaches.
+
+**That is the spec.** Free text in → **a placement on the circle, with REASONS, with the COST NAMED, and with what it CLOSES stated out loud.**
+
+### Requirements
+1. **Free-text description.** Species/form, temperament, craft, tone — whatever they say.
+2. **Map it to the ring**, reading `traditions.json`. Suggest **primary · secondary · tertiary** (tertiary constrained to a ring-neighbour of the secondary).
+3. **⛔ EXPLAIN, ALWAYS. This is the whole value.** For every suggestion, say *why* — and **say what it CLOSES.** *"This closes Somatic — the body. You said slight of frame; the cost is one you already pay."* **A suggestion without its cost is a sales pitch, not advice.**
+4. **Show the circle** with their position lit and **their antipode dark** — *this is what you can never be.* **This is the moment the great circle becomes legible.** (SNG-084: a mechanic must explain itself where it bites, and *here* is where it bites hardest.)
+5. **Suggest — never impose.** Revealed, then **confirmed**; the player adjusts freely. **(Design Law 9.)**
+6. Also suggest **background**, **form**, and a **companion** from the same description — they are all in the text already.
+7. **Be honest about what does NOT need a domain.** *"Hunter is free — that's a folk craft. Romantic isn't a domain; it's how you play."* **Do not sell them a slot they do not need.**
+
+**Erik test:** "Type 'a girl who talks to animals and cannot lie' — verify the game answers with a people, a reason, a cost, and a closed door, and lets you change all of it."
+
+*Note: the answer that inspired this was written by Aevi in chat. **The game should be able to give it.** That is the point.*

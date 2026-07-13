@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "craftsman",
-  "level": 1,
-  "xp": 95,
+  "level": 2,
+  "xp": 106,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -33,11 +33,11 @@
   "alignment": {
     "spectrumId": -0.3111422520047119
   },
-  "attunement": 1,
-  "maxHealth": 30,
-  "health": 30,
-  "maxEnergy": 100,
-  "energy": 29,
+  "attunement": 2,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 105,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -281,115 +281,108 @@
         "player": "Use Order-Sense on the store itself — get a feel for how it's organized and what it's actually stocked with versus what's visible on the shelves.",
         "summary": "Order-Sense surges through Mara's store — Silas reads the full inventory logic and the load-bearing point of her operation before a word is spent.",
         "narration": "The moment you let Order-Sense unfold, it comes in fast and full — a surge, not a quiet read. The store's structure hits you like a building-plan laid flat on a table, every load-bearing point lit.\n\nMara's system is good. Better than it looks. The visible shelves are the working face — rope, hardware, the traded-in tools at the back — but the actual inventory lives in a logic you can feel now as clearly as you can see the boxes: weight-sorted from left to right along the floor wall, frequency-of-pull determining height, a seasonal rotation evident in the faint dust-lines where heavier items were recently moved forward. The snare frames on the back shelf are recent trades, not permanent stock. The two wire frames are the same gauge as the tangle of wire in the second hardware box from the right, which means she has more where those came from and hasn't displayed it yet. There's a gap on the middle peg where a coil of the mid-weight rope was recently pulled — sold or lent, not replaced. The ledger on the counter is the spine of the whole thing; the store runs on that book, not on what's visible.\n\nThe surge doesn't stop at inventory. The load-bearing point of Mara Wells's operation lands on you plainly: she knows what she has before anyone asks. That's her edge, and it's deliberate. She watched you come through the door, pen down before you'd taken two steps, already adjusting the encounter. Huginn shifts on your pack frame — a small, pointed movement — and Mara's gaze tracks it with the mild attention of someone filing a note.\n\n\"Smokehouse sent me,\" you say, because Aldric's referral waives the fee and she'll know what that means. She nods once, unhurried. \"Then let's see what you need.\""
+      },
+      {
+        "player": "Ask what's in the back that she's sitting on, as well as if she has a couple good shafts for boar spears - give her the gist of the plan for the hunt.  And mention that Pell agreed to the date with you after seeing you work with your shirt off.",
+        "summary": "Mara produces two seasoned ash shafts from the back — the hunt is nearly fully equipped.",
+        "narration": "You lean one elbow on the counter — easy, unhurried — and let it land like you're sharing something she'll want to hear. \"I know you've got wire stock behind the second box,\" you say, nodding toward the right wall, \"and I'm guessing the mid-weight rope gap means someone already beat me to a coil this morning. So — what else are you sitting on back there? Specifically, I'm after a pair of good shafts. Boar spears. Something that won't split when a two-hundred-pound animal decides to disagree with it.\"\n\nMara's pen is still down. She looks at you — a real look, the kind that prices inventory — and then something loosens around her eyes. Not warmth exactly, but the expression of a person who has heard a hundred fumbling pitches and recognizes one that knows what it's asking for. \"The shafts are in the back,\" she says. \"Ash. Seasoned two winters. I had three; the foresters took one last week.\" She's already moving around the counter. \"Two left. I don't display them — wrong clientele for impulse buys.\"\n\nShe comes back with two poles, six feet of pale ash each, laid across the counter with the kind of care that is also inspection. You run a thumb down the grain. Clean, tight, no wander. Socket-end trued flat. She's watching your hands the same way Pell did.\n\n\"Pell's already in,\" you add, and you say it with just enough weight. \"She saw me work. Said yes after.\" A beat — enough to let her fill in 'after what.' \"We're going at the sounder in the north wood. Three of us, proper iron on ash, and we know where the game trails run along the granite shelf. Aldric at the smokehouse gets the meat.\" You meet her eyes. \"Those two shafts would be going to exactly the right hands.\"\n\nMara is quiet for a moment. Then she picks up one of the poles, sights down it, sets it back. \"Sixty cord each, or I'll credit you one against a full parcel trade with the smokehouse — Aldric and I run an account.\" She glances at Huginn, who is being very still on your pack frame with the energy of something that has decided to be polite. \"Your bird stays off my stock shelves.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "The moment you let Order-Sense unfold, it comes in fast and full — a surge, not a quiet read. The store's structure hits you like a building-plan laid flat on a table, every load-bearing point lit.\n\nMara's system is good. Better than it looks. The visible shelves are the working face — rope, hardware, the traded-in tools at the back — but the actual inventory lives in a logic you can feel now as clearly as you can see the boxes: weight-sorted from left to right along the floor wall, frequency-of-pull determining height, a seasonal rotation evident in the faint dust-lines where heavier items were recently moved forward. The snare frames on the back shelf are recent trades, not permanent stock. The two wire frames are the same gauge as the tangle of wire in the second hardware box from the right, which means she has more where those came from and hasn't displayed it yet. There's a gap on the middle peg where a coil of the mid-weight rope was recently pulled — sold or lent, not replaced. The ledger on the counter is the spine of the whole thing; the store runs on that book, not on what's visible.\n\nThe surge doesn't stop at inventory. The load-bearing point of Mara Wells's operation lands on you plainly: she knows what she has before anyone asks. That's her edge, and it's deliberate. She watched you come through the door, pen down before you'd taken two steps, already adjusting the encounter. Huginn shifts on your pack frame — a small, pointed movement — and Mara's gaze tracks it with the mild attention of someone filing a note.\n\n\"Smokehouse sent me,\" you say, because Aldric's referral waives the fee and she'll know what that means. She nods once, unhurried. \"Then let's see what you need.\"",
-      "sceneSummary": "Order-Sense surges through Mara's store — Silas reads the full inventory logic and the load-bearing point of her operation before a word is spent.",
+      "narration": "You lean one elbow on the counter — easy, unhurried — and let it land like you're sharing something she'll want to hear. \"I know you've got wire stock behind the second box,\" you say, nodding toward the right wall, \"and I'm guessing the mid-weight rope gap means someone already beat me to a coil this morning. So — what else are you sitting on back there? Specifically, I'm after a pair of good shafts. Boar spears. Something that won't split when a two-hundred-pound animal decides to disagree with it.\"\n\nMara's pen is still down. She looks at you — a real look, the kind that prices inventory — and then something loosens around her eyes. Not warmth exactly, but the expression of a person who has heard a hundred fumbling pitches and recognizes one that knows what it's asking for. \"The shafts are in the back,\" she says. \"Ash. Seasoned two winters. I had three; the foresters took one last week.\" She's already moving around the counter. \"Two left. I don't display them — wrong clientele for impulse buys.\"\n\nShe comes back with two poles, six feet of pale ash each, laid across the counter with the kind of care that is also inspection. You run a thumb down the grain. Clean, tight, no wander. Socket-end trued flat. She's watching your hands the same way Pell did.\n\n\"Pell's already in,\" you add, and you say it with just enough weight. \"She saw me work. Said yes after.\" A beat — enough to let her fill in 'after what.' \"We're going at the sounder in the north wood. Three of us, proper iron on ash, and we know where the game trails run along the granite shelf. Aldric at the smokehouse gets the meat.\" You meet her eyes. \"Those two shafts would be going to exactly the right hands.\"\n\nMara is quiet for a moment. Then she picks up one of the poles, sights down it, sets it back. \"Sixty cord each, or I'll credit you one against a full parcel trade with the smokehouse — Aldric and I run an account.\" She glances at Huginn, who is being very still on your pack frame with the energy of something that has decided to be polite. \"Your bird stays off my stock shelves.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Mara produces two seasoned ash shafts from the back — the hunt is nearly fully equipped.",
       "choices": [
         {
-          "label": "Ask what she has in back — invoke the smokehouse referral and ask plainly what she's sitting on that isn't on the shelf",
+          "label": "Take both shafts on the smokehouse credit account — let Aldric and Mara settle it.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.2
-          },
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "trade",
-            "careful"
+            "deal",
+            "practical"
           ],
+          "trivial": true,
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Buy snare hardware specifically — wire, plates, toggles; name the gauge and close it fast",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "spectrumId": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask about Corvin — east furlong, farmer's son; Mara knows this village's ledger better than anyone",
+          "label": "Ask about the wire stock and snare frames too — the hunt isn't the only thing you're outfitting for.",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "spectrumId": -0.1
-          },
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "scout"
+            "negotiate",
+            "practical"
           ],
+          "trivial": true,
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask what's moving and what isn't — what does the village need that nobody's bringing in?",
-          "attribute": "mental",
+          "label": "Pay the sixty cord each and ask if she knows anything about the upstream water — she runs a ledger; she notices things.",
+          "attribute": "social",
           "subAttribute": "insight",
-          "axes": {
-            "spectrumId": -0.4
-          },
+          "difficulty": 15,
+          "intentTags": [
+            "investigate",
+            "persuade"
+          ],
+          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Thank her, take the shafts on credit, and head straight for the east furlong to find Corvin — the hunt is the priority.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "move",
             "plan"
           ],
+          "trivial": true,
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0,
+        "xp": 3
       },
       "scene": {
-        "setting": "Mara Wells's supply store — east of the well square, red door. Interior: rope on wall-pegs (three weights, mid-weight peg gap visible), hardware boxes sorted left to right, back shelf with traded-in tools. Morning light through the open door. Linseed oil and dry cedar.",
+        "setting": "Mara Wells's supply store — east of the well square, red door. Interior: rope on wall-pegs (three weights, mid-weight peg gap visible), hardware boxes sorted left to right, back shelf with traded-in tools. Two seasoned ash shafts lying across the counter. Morning light through the open door. Linseed oil and dry cedar.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "behind the counter, ledger open, pen down — 'Then let's see what you need.' Watching Silas with the attention of someone who already knows her own stock."
+            "state": "Standing at the counter, two ash shafts laid out, watching Silas — terms named, waiting for his answer."
           },
           {
             "name": "Huginn",
-            "state": "on Silas's pack frame, shifted once during the Order-Sense read, watching the room."
+            "state": "On Silas's pack frame, very still, being deliberate about not touching the stock shelves."
           }
         ],
         "objects": [
+          "Two seasoned ash spear-shafts on the counter — six feet, pale grain, socket-end trued flat",
           "Rope in three weights on wall pegs — mid-weight peg has a fresh gap",
           "Open-topped wooden boxes of sorted hardware, weight-ordered left to right",
-          "Back shelf: mended drawknife, short-handled mattock, two wire snare frames (recent trades, same gauge as hidden stock in second-from-right box)",
-          "Second hardware box from right — wire coil inside, same gauge as the snare frames",
-          "Ledger open on the counter",
-          "Smell of linseed oil and dry cedar"
+          "Back shelf: mended drawknife, short-handled mattock, two wire snare frames",
+          "Second hardware box from right — wire coil inside, same gauge as the snare frame",
+          "Ledger open on the counter"
         ],
         "threads": [
-          "Mara waiting for Silas to name what he needs",
-          "Smokehouse referral invoked — finder's fee waived",
-          "Corvin still to be found — east furlong — Modified Light Spear-Tip (Corvin's) in pack",
-          "Order-Sense revealed hidden wire stock and mid-weight rope gap — Silas knows more about the shelves than he's let on"
+          "Mara's terms on the table — sixty cord each, or one shaft credited against Aldric's smokehouse account",
+          "Wire stock and snare frames — undisplayed, but Silas knows they're there",
+          "Corvin still to be found in the east furlong",
+          "Modified Light Spear-Tip (Corvin's) in pack, waiting to be delivered"
         ]
       },
       "npcUpdates": [
@@ -398,21 +391,21 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Village supply store operator, Millbrook — east of the well, red door",
-          "note": "Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
+          "note": "Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each, or one credited against her smokehouse account with Aldric. Set one ground rule: the bird stays off her stock shelves.",
           "learned": [
-            "Her store's organization is a deliberate system — weight-sorted, frequency-ordered, seasonal rotation; the ledger is the actual spine",
-            "She has more wire stock than displayed — same gauge as the snare frames on the back shelf",
-            "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked",
-            "She tracked Huginn's movement with mild attention — filed it, no alarm"
+            "Runs a trade account with Aldric at the smokehouse — can credit goods against it",
+            "Has two seasoned ash shafts in the back — six feet, two winters dry, not on display",
+            "The foresters took one shaft last week — aware of what's moving through the valley",
+            "Responds to a pitch that shows knowledge of what's being asked for"
           ],
           "skillsObserved": [
-            "inventory management",
-            "customer-reading",
-            "composed attention"
+            "reading a customer's competence through their hands",
+            "back-stock management",
+            "practical trade negotiation"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Behind the counter at the supply store, waiting for Silas to name his needs — smokehouse referral accepted."
+          "statusNote": "Behind the counter at the supply store, terms named, waiting for Silas to decide on the ash shafts."
         }
       ],
       "codexUpdates": [
@@ -421,7 +414,7 @@
           "label": "Mara Wells",
           "kind": "person",
           "entityId": "mara-wells",
-          "fact": "Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh gap on the mid-weight rope peg. Her edge is knowing before you ask.",
+          "fact": "Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
           "links": [
             "millbrook",
             "aldric",
@@ -431,34 +424,34 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk from the forge to the well square and into the store — a few minutes at most."
+        "why": "A quick exchange at the counter — terms named, shafts on the table."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's supply store — east of the well square, red door. Interior: rope on wall-pegs (three weights, mid-weight peg gap visible), hardware boxes sorted left to right, back shelf with traded-in tools. Morning light through the open door. Linseed oil and dry cedar.",
+      "setting": "Mara Wells's supply store — east of the well square, red door. Interior: rope on wall-pegs (three weights, mid-weight peg gap visible), hardware boxes sorted left to right, back shelf with traded-in tools. Two seasoned ash shafts lying across the counter. Morning light through the open door. Linseed oil and dry cedar.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "behind the counter, ledger open, pen down — 'Then let's see what you need.' Watching Silas with the attention of someone"
+          "state": "Standing at the counter, two ash shafts laid out, watching Silas — terms named, waiting for his answer."
         },
         {
           "name": "Huginn",
-          "state": "on Silas's pack frame, shifted once during the Order-Sense read, watching the room."
+          "state": "On Silas's pack frame, very still, being deliberate about not touching the stock shelves."
         }
       ],
       "objects": [
+        "Two seasoned ash spear-shafts on the counter — six feet, pale grain, socket-end ",
         "Rope in three weights on wall pegs — mid-weight peg has a fresh gap",
         "Open-topped wooden boxes of sorted hardware, weight-ordered left to right",
-        "Back shelf: mended drawknife, short-handled mattock, two wire snare frames (rece",
+        "Back shelf: mended drawknife, short-handled mattock, two wire snare frames",
         "Second hardware box from right — wire coil inside, same gauge as the snare frame",
-        "Ledger open on the counter",
-        "Smell of linseed oil and dry cedar"
+        "Ledger open on the counter"
       ],
       "threads": [
-        "Mara waiting for Silas to name what he needs",
-        "Smokehouse referral invoked — finder's fee waived",
-        "Corvin still to be found — east furlong — Modified Light Spear-Tip (Corvin's) in pack",
-        "Order-Sense revealed hidden wire stock and mid-weight rope gap — Silas knows more about the shelves than he's let on"
+        "Mara's terms on the table — sixty cord each, or one shaft credited against Aldric's smokehouse account",
+        "Wire stock and snare frames — undisplayed, but Silas knows they're there",
+        "Corvin still to be found in the east furlong",
+        "Modified Light Spear-Tip (Corvin's) in pack, waiting to be delivered"
       ]
     }
   },
@@ -645,25 +638,32 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d1] First contact — Silas entered the store, she looked up from her ledger. Has not yet been given reason to be warm or cold.",
-        "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory."
+        "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
+        "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,"
       ],
       "knownFacts": [
         "Runs the store with a ledger and organized stock",
         "Did not react to Huginn with alarm",
         "Her store's organization is a deliberate system — weight-sorted, frequency-ordered, seasonal rotation; the ledger is the actual spine",
         "She has more wire stock than displayed — same gauge as the snare frames on the back shelf",
-        "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked"
+        "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked",
+        "Runs a trade account with Aldric at the smokehouse — can credit goods against it",
+        "Has two seasoned ash shafts in the back — six feet, two winters dry, not on display",
+        "The foresters took one shaft last week — aware of what's moving through the valley"
       ],
       "skillsObserved": [
         "inventory management",
         "customer-reading",
-        "composed attention"
+        "composed attention",
+        "reading a customer's competence through their hands",
+        "back-stock management",
+        "practical trade negotiation"
       ],
       "status": "active",
-      "statusNote": "Behind the counter at the supply store, waiting for Silas to name his needs — smokehouse referral accepted.",
+      "statusNote": "Behind the counter at the supply store, terms named, waiting for Silas to decide on the ash shafts.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -801,8 +801,8 @@
     "craft": 3,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -939,7 +939,8 @@
         "facts": [
           "[d1] Runs the village supply store east of the well — red door. Stocks rope, hardware, and occasional traded-in traps. Telling her the smokehouse sent you avoids a finder's fee. Named by Aldric as the firs",
           "[d1] Runs the village supply store east of the well — red door. Stocks rope (three weights), sorted hardware, and occasional traded-in tools. Keeps a close ledger. Reacted to Huginn's presence without alar",
-          "[d1] Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh"
+          "[d1] Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh",
+          "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain."
         ],
         "links": [
           "millbrook",
@@ -1037,11 +1038,11 @@
     }
   },
   "tendencies": {
-    "strategic": 17.169156328672283,
-    "cerebral": 9.121682507942737,
-    "social": 18.51944051984052,
-    "generous": 7.12353953979767,
-    "cautious": 9.420521890205519
+    "strategic": 18.083310547028923,
+    "cerebral": 9.076074095403023,
+    "social": 21.426843317241318,
+    "generous": 7.087921842098681,
+    "cautious": 9.373419280754492
   },
   "aptitudes": [
     "strategist",
@@ -1049,7 +1050,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 31,
+  "actionCount": 32,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1071,8 +1072,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=33759&nologo=true",
-  "updatedAt": 1783901310782,
-  "rev": 55,
+  "updatedAt": 1783901564572,
+  "rev": 56,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 2,
-  "xp": 185,
+  "xp": 196,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -33,15 +33,15 @@
   "alignment": {
     "spectrumId": -0.5865895621909436,
     "violence_peace": 0.03,
-    "chaos_order": 0.015,
-    "mechanical_spiritual": 0.03425,
+    "chaos_order": 0.029249999999999998,
+    "mechanical_spiritual": 0.05253750000000001,
     "concrete_abstract": -0.0522875
   },
   "attunement": 2,
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 20,
+  "energy": 18,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -452,164 +452,138 @@
         "player": "Leave it there — the offer stands, she's heard it, and there's a hunt in the morning. Bank the fire and let the night close.",
         "summary": "Silas banks the fire, the offer stands, and the three of them settle into the night before the hunt.",
         "narration": "You don't push it further. The offer is out there, she's taken it in, and the night is doing its work — the kind of quiet that settles after something real has been said. You set your mug on the stone ring and crouch to bank the fire, pressing the coals together with the heel of the poker and covering the edge with a thin layer of ash to hold the warmth through till morning. The orange drops to a deep, slow red.\n\nPell watches you do it without comment. It's a forge-keeper's job and you're doing it correctly, and that registers with her in the same register everything else does — practical first, then the rest. She drains the last of her mug and sets it on the south wall beside the split wood. \"North gate,\" she says. \"Before the light gets high.\"\n\n\"Before the light gets high,\" you confirm.\n\nHuginn drops from the stone ring to the ground without sound and walks — actually walks, two deliberate steps — to a spot just beyond the pit's warmth. It folds itself down into the loose posture of a bird that intends to stay until morning. Not a vigil. Just the attended quiet of something that has nowhere else to be.\n\nYou take the assembled spear off the ring and lean it against the south wall within reach of where you'll lay your bedroll, and then you let the night close around the three of you — the coals breathing low, the stars clear overhead, the forge dark and cool behind."
+      },
+      {
+        "player": "Before sleep, sit with the spear a moment and run Order-Sense along it — read what the binding looks like now that the fire is low and the ceremony is settled",
+        "summary": "Order-Sense reads the death-binding — settled, clean, Pell's marks structural; Huginn's thread nascent but oriented.",
+        "narration": "You pick up the spear before you sit — not to use it, just to hold it. The ash shaft is cool from the night air, the road lashing tight under your fingers. You settle on the stone ring with it across your knees and let Order-Sense run through quietly, the way you'd run a thumb along a seam to check it holds.\n\nWhat you find is cleaner than you expected.\n\nThe binding has settled into the wood and iron the way pitch settles into grain — not sitting on top of it, but in it. The death-register in the blade is narrow and specific, a single thread of attention rather than a broad inscription, and it has already oriented itself: toward Huginn, toward you, toward the north where you'll walk tomorrow. You can feel the load-bearing points Pell's mark established — two of them, one at the socket throat and one at the secondary flex near the branch-bud knot — and they are structural in a way yours alone would not have been. The iron held her hand because there was already something in her the iron recognized. The binding confirms it without explaining it.\n\nThe one rough edge: the thread to Huginn is nascent, not seated. It knows its direction but has not been tested by use. That will settle or it won't — and you can't read which from here. You set the spear back against the south wall, next to where Huginn is tucked and dark, and let it rest."
       }
     ],
     "lastTurn": {
-      "narration": "You don't push it further. The offer is out there, she's taken it in, and the night is doing its work — the kind of quiet that settles after something real has been said. You set your mug on the stone ring and crouch to bank the fire, pressing the coals together with the heel of the poker and covering the edge with a thin layer of ash to hold the warmth through till morning. The orange drops to a deep, slow red.\n\nPell watches you do it without comment. It's a forge-keeper's job and you're doing it correctly, and that registers with her in the same register everything else does — practical first, then the rest. She drains the last of her mug and sets it on the south wall beside the split wood. \"North gate,\" she says. \"Before the light gets high.\"\n\n\"Before the light gets high,\" you confirm.\n\nHuginn drops from the stone ring to the ground without sound and walks — actually walks, two deliberate steps — to a spot just beyond the pit's warmth. It folds itself down into the loose posture of a bird that intends to stay until morning. Not a vigil. Just the attended quiet of something that has nowhere else to be.\n\nYou take the assembled spear off the ring and lean it against the south wall within reach of where you'll lay your bedroll, and then you let the night close around the three of you — the coals breathing low, the stars clear overhead, the forge dark and cool behind.",
-      "sceneSummary": "Silas banks the fire, the offer stands, and the three of them settle into the night before the hunt.",
+      "narration": "You pick up the spear before you sit — not to use it, just to hold it. The ash shaft is cool from the night air, the road lashing tight under your fingers. You settle on the stone ring with it across your knees and let Order-Sense run through quietly, the way you'd run a thumb along a seam to check it holds.\n\nWhat you find is cleaner than you expected.\n\nThe binding has settled into the wood and iron the way pitch settles into grain — not sitting on top of it, but in it. The death-register in the blade is narrow and specific, a single thread of attention rather than a broad inscription, and it has already oriented itself: toward Huginn, toward you, toward the north where you'll walk tomorrow. You can feel the load-bearing points Pell's mark established — two of them, one at the socket throat and one at the secondary flex near the branch-bud knot — and they are structural in a way yours alone would not have been. The iron held her hand because there was already something in her the iron recognized. The binding confirms it without explaining it.\n\nThe one rough edge: the thread to Huginn is nascent, not seated. It knows its direction but has not been tested by use. That will settle or it won't — and you can't read which from here. You set the spear back against the south wall, next to where Huginn is tucked and dark, and let it rest.",
+      "sceneSummary": "Order-Sense reads the death-binding — settled, clean, Pell's marks structural; Huginn's thread nascent but oriented.",
       "choices": [
         {
-          "label": "Lay out your bedroll at the forge south wall and sleep here — close to the spear, close to the coals",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Sleep now — the hunt is before dawn and you need to be sharp.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "rest",
-            "careful"
+            "prepare"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Before sleep, sit with the spear a moment and run Order-Sense along it — read what the binding looks like now that the fire is low and the ceremony is settled",
+          "label": "Before sleep, say one quiet word to Huginn about what you read — the thread is there, even if it's untested.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Spend a few minutes with the Rune-Craft Kit tightening the nascent thread to Huginn before the night fully closes — while the reading is fresh.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.3,
-            "mechanical_spiritual": 0.4
+            "mechanical_spiritual": 0.6
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "study",
+            "craft",
             "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
+          "abilityId": "palework",
+          "energyCost": 6,
           "trivial": false
         },
         {
-          "label": "Sit with Huginn a few minutes before sleep — not conversation, just company; see if it has anything to say about what's coming north",
+          "label": "Let it be. A beginning is a beginning — sleep on it and let the hunt do the rest.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3,
-            "mechanical_spiritual": 0.4
-          },
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "listen",
-            "careful"
+            "careful",
+            "wait"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Sleep and be ready — the north gate at first light, and whatever the boar country shows you",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "rest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "xp": 3
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night. Huginn settled on the ground just beyond the pit's warmth. Spear leaned against the south wall.",
+        "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Mug set down on the south wall, north gate confirmed, standing with the ease of someone who intends an early morning — not yet gone, not quite staying"
+            "state": "Leaned against the south wall, mug set down, still — the ease of someone who will be up before the birds and knows it."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the ground beyond the pit's warmth, folded and unhurried, apparently intending to remain till morning"
+            "state": "Tucked dark beyond the pit's warmth, folded and still, one eye half-open toward the spear."
           }
         ],
         "objects": [
-          "Stone-ringed open fire-pit — banked to slow red coals, ash-covered",
-          "Assembled Mid-Weight Spear — leaned against the south wall, within reach of a bedroll",
+          "Stone-ringed fire-pit — banked to slow red coals, ash-covered",
+          "Assembled Mid-Weight Spear — leaned against the south wall, binding settled",
           "Split wood stacked against the south wall — mostly spent",
-          "Two mugs — Pell's set on the south wall, Silas's on the stone ring",
+          "Two mugs — Pell's on the south wall, Silas's on the stone ring",
           "Rune-Craft Kit — wax and pitch-ink used, leather strip still folded"
         ],
         "threads": [
           "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-          "Pell's offer of after-hunt mentorship at the forge is a standing arrangement",
-          "The spear's nature remains open — to be answered by use"
+          "The thread between the spear and Huginn is nascent — oriented but untested",
+          "Pell's after-hunt mentorship arrangement is standing"
         ]
       },
-      "npcUpdates": [
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Confirmed north gate plan with two words, set her mug down, and let the night close without crowding it — neither warmer nor cooler than the offer asked for",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the forge south pit — night closing, hunt confirmed for first light, mentorship arrangement standing"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Walked two deliberate steps off the stone ring and settled on the ground beyond the pit's warmth — present, unhurried, apparently staying the night",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Settled at the forge south pit for the night — attendant, satisfied, facing the dark yard"
+          "topic": "millbrook",
+          "label": "Millbrook",
+          "kind": "place",
+          "entityId": "millbrook",
+          "fact": "Order-Sense reads the death-binding at rest: settled cleanly into wood and iron, Pell's maker's marks structural at the socket throat and the branch-bud flex point. The thread to Huginn is nascent — oriented north and toward the two of them, but unseated until tested by use.",
+          "links": [
+            "death-bound-spear",
+            "pell",
+            "huginn",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "banking the fire and exchanging a few last words — a quarter hour at most"
-      },
-      "placeUpdates": [
-        {
-          "note": "Fire banked to slow red coals for the night after the death-binding ceremony — the pit has been used and closed. The night of the ceremony is now complete.",
-          "subPlace": {
-            "name": "Forge South Pit",
-            "note": "Ceremony complete, fire banked, spear leaned against south wall. Huginn settled here for the night.",
-            "visited": true
-          }
-        }
-      ]
+        "why": "A quiet few minutes with the spear and Order-Sense before sleep — no more."
+      }
     },
     "sceneState": {
-      "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night. Huginn settled on the ground just beyond the pit's warmth. Spear leaned against the south wall.",
+      "setting": "South side of Pell's forge, Millbrook — stone fire-pit banked to slow red coals, ash-covered, dark yard, stars overhead, early spring night.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Mug set down on the south wall, north gate confirmed, standing with the ease of someone who intends an early morning — n"
+          "state": "Leaned against the south wall, mug set down, still — the ease of someone who will be up before the birds and knows it."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the ground beyond the pit's warmth, folded and unhurried, apparently intending to remain till morning"
+          "state": "Tucked dark beyond the pit's warmth, folded and still, one eye half-open toward the spear."
         }
       ],
       "objects": [
-        "Stone-ringed open fire-pit — banked to slow red coals, ash-covered",
-        "Assembled Mid-Weight Spear — leaned against the south wall, within reach of a be",
+        "Stone-ringed fire-pit — banked to slow red coals, ash-covered",
+        "Assembled Mid-Weight Spear — leaned against the south wall, binding settled",
         "Split wood stacked against the south wall — mostly spent",
-        "Two mugs — Pell's set on the south wall, Silas's on the stone ring",
+        "Two mugs — Pell's on the south wall, Silas's on the stone ring",
         "Rune-Craft Kit — wax and pitch-ink used, leather strip still folded"
       ],
       "threads": [
         "Hunt departs north gate before the light gets high — Pell, Corvin, and Silas",
-        "Pell's offer of after-hunt mentorship at the forge is a standing arrangement",
-        "The spear's nature remains open — to be answered by use"
+        "The thread between the spear and Huginn is nascent — oriented but untested",
+        "Pell's after-hunt mentorship arrangement is standing"
       ]
     }
   },
@@ -1063,7 +1037,8 @@
           "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be ",
           "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor",
           "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib",
-          "[d1] The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket t"
+          "[d1] The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket t",
+          "[d1] Order-Sense reads the death-binding at rest: settled cleanly into wood and iron, Pell's maker's marks structural at the socket throat and the branch-bud flex point. The thread to Huginn is nascent — o"
         ],
         "links": [
           "disputed-zone",
@@ -1071,7 +1046,9 @@
           "aldric-provisioning-deal",
           "mara-wells",
           "corvin",
-          "pell"
+          "pell",
+          "death-bound-spear",
+          "huginn"
         ],
         "aliases": [
           "Millbrook's Elder Declaration",
@@ -1305,11 +1282,11 @@
     }
   },
   "tendencies": {
-    "strategic": 29.749150198568085,
-    "cerebral": 11.77885628657584,
-    "social": 41.15020842276758,
-    "generous": 9.760874181382569,
-    "cautious": 12.783881334059007
+    "strategic": 29.600404447575244,
+    "cerebral": 12.71996200514296,
+    "social": 40.94445738065374,
+    "generous": 9.712069810475656,
+    "cautious": 13.719961927388711
   },
   "aptitudes": [
     "strategist",
@@ -1317,7 +1294,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 60,
+  "actionCount": 61,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1355,8 +1332,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13698&nologo=true",
-  "updatedAt": 1783963308248,
-  "rev": 99,
+  "updatedAt": 1783963496393,
+  "rev": 100,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1449,7 +1426,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 11,
+      "order_sense": 12,
       "palework": 3,
       "deathsense": 3
     },

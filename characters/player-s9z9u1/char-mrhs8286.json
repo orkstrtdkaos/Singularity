@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.692550639149951,
+    "spectrumId": -0.7079231071924534,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.14231136614511714,
     "mechanical_spiritual": 0.15258154807291163,
@@ -1021,19 +1021,24 @@
         "player": "Follow Huginn north — press further upstream and see what's behind the next section of bank",
         "summary": "Huginn leads thirty paces further north — dressed rubble stones in the sedge, a buried coursed structure visible as a settling-seam in the hillside above.",
         "narration": "Huginn doesn't wait. He takes three deliberate hops north along the cut-bank rim, then lifts — a short flat glide over the channel — and lands on a root-spur jutting from the east bank, fifteen paces further upstream. His head turns back once, confirming you're following, then swings north again.\n\nYou move along the west bank with Memory in hand, Pell a step behind you. The iron-mat thickens as you go, not gradually but in a step — like crossing a threshold on the riverbed. The copper-green tint in the water deepens here too, pulling toward something more amber at the edges where the current slows against the bank. Thirty paces past the column stain, the exposed bedrock shelf ends and gives way to packed earth and old stone rubble — not natural scree, but the kind of fall that happens when something built stops being maintained. Dressed stones, maybe a hand's width each, sitting in the sedge at the base of the bank like they rolled there and stopped. They are not river-rounded.\n\nPell crouches at the nearest one without being asked. She turns it over, looks at the face, sets it down. \"Coursed,\" she says. \"Someone laid this.\" She straightens and looks at the bank above. The hillside here runs steeper than it should, and about ten feet up, the earth has a long seam in it — not a crack, not exposed stone, but a line where the soil settles differently, where the grass grows in two slightly different shades of green. A buried edge. The shape of something beneath.\n\nHuginn is on the root-spur above the rubble stones, not moving. His eye is on the seam in the hillside, not on you."
+      },
+      {
+        "player": "Before I use order-sense... i turn to Pell with a big grin - Date #2 is going swimmingly!  I'm glad we're here together!",
+        "summary": "Silas grins at Pell over the buried ruins — she gives him the corner of her mouth and tells him to keep his eyes on the seam.",
+        "narration": "You turn from the rubble stones with Memory still in hand and catch Pell's eye — the grin comes out before you can think better of it. \"Date two,\" you say, \"and we've found buried ruins. Swimmingly.\"\n\nShe looks at you for a moment. Then the corner of her mouth moves — not a full smile, the kind she'd deny if asked, but real enough. She glances down at the dressed stones half-sunk in the sedge, then back at you. \"Most people walk upriver for the view,\" she says. \"You find infrastructure.\"\n\nHuginn, on his root-spur, does not look at either of you. He is attending the settling-seam with the focused patience of something that has attended a great many things and knows which ones matter. His silence has the shape of a comment.\n\nPell steps past you and crouches at the nearest rubble stone, turning it to check the far face. The motion is the same one she uses on a piece of iron — not dismissive, just first things first. \"Keep grinning,\" she says, without looking up. \"But I want to know what's behind that seam.\""
       }
     ],
     "lastTurn": {
-      "narration": "Huginn doesn't wait. He takes three deliberate hops north along the cut-bank rim, then lifts — a short flat glide over the channel — and lands on a root-spur jutting from the east bank, fifteen paces further upstream. His head turns back once, confirming you're following, then swings north again.\n\nYou move along the west bank with Memory in hand, Pell a step behind you. The iron-mat thickens as you go, not gradually but in a step — like crossing a threshold on the riverbed. The copper-green tint in the water deepens here too, pulling toward something more amber at the edges where the current slows against the bank. Thirty paces past the column stain, the exposed bedrock shelf ends and gives way to packed earth and old stone rubble — not natural scree, but the kind of fall that happens when something built stops being maintained. Dressed stones, maybe a hand's width each, sitting in the sedge at the base of the bank like they rolled there and stopped. They are not river-rounded.\n\nPell crouches at the nearest one without being asked. She turns it over, looks at the face, sets it down. \"Coursed,\" she says. \"Someone laid this.\" She straightens and looks at the bank above. The hillside here runs steeper than it should, and about ten feet up, the earth has a long seam in it — not a crack, not exposed stone, but a line where the soil settles differently, where the grass grows in two slightly different shades of green. A buried edge. The shape of something beneath.\n\nHuginn is on the root-spur above the rubble stones, not moving. His eye is on the seam in the hillside, not on you.",
-      "sceneSummary": "Huginn leads thirty paces further north — dressed rubble stones in the sedge, a buried coursed structure visible as a settling-seam in the hillside above.",
+      "narration": "You turn from the rubble stones with Memory still in hand and catch Pell's eye — the grin comes out before you can think better of it. \"Date two,\" you say, \"and we've found buried ruins. Swimmingly.\"\n\nShe looks at you for a moment. Then the corner of her mouth moves — not a full smile, the kind she'd deny if asked, but real enough. She glances down at the dressed stones half-sunk in the sedge, then back at you. \"Most people walk upriver for the view,\" she says. \"You find infrastructure.\"\n\nHuginn, on his root-spur, does not look at either of you. He is attending the settling-seam with the focused patience of something that has attended a great many things and knows which ones matter. His silence has the shape of a comment.\n\nPell steps past you and crouches at the nearest rubble stone, turning it to check the far face. The motion is the same one she uses on a piece of iron — not dismissive, just first things first. \"Keep grinning,\" she says, without looking up. \"But I want to know what's behind that seam.\"",
+      "sceneSummary": "Silas grins at Pell over the buried ruins — she gives him the corner of her mouth and tells him to keep his eyes on the seam.",
       "choices": [
         {
-          "label": "Use Order-Sense on the buried structure — read what it was part of, its full design, what's still intact beneath the hill",
+          "label": "Use Order-Sense on the buried structure — read the whole design, including the parts not yet exposed",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.2,
-            "concrete_abstract": 0.4
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": 0.2
           },
           "difficulty": 15,
           "intentTags": [
@@ -1047,35 +1052,34 @@
           "emergenceId": null
         },
         {
-          "label": "Use Palework on the dressed rubble stones — read what ended in them, how old, and whether they connect to the column stain",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Climb the bank to the settling-seam — get hands on the soil and see what the buried edge reveals at the surface",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "death_life": -0.3,
-            "concrete_abstract": 0.2
+            "concrete_abstract": -0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "study",
+            "scout",
             "careful"
           ],
-          "abilityId": "palework",
-          "energyCost": 6,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell Pell what you're seeing — name the settling-seam, ask if a smith's read on the coursework tells her anything about scale or construction period",
+          "label": "Ask Pell to read the rubble stones themselves — their cut, their coursing, their age in smith's terms",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "chaos_order": 0.2
+            "concrete_abstract": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "consult",
-            "careful"
+            "help",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1084,15 +1088,15 @@
           "emergenceId": null
         },
         {
-          "label": "Mark the rubble position and the settling-seam carefully, then pull back — this is Dara Holt's territory and you are standing over something significant; brief her before going further",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Take the Valve Failure Timeline note from your breast pocket and compare what you've found here to Mara's dates — work out whether the buried structure's drainage predates, matches, or post-dates the first confirmed failure",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "chaos_order": 0.4
+            "concrete_abstract": -0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
+            "study",
             "plan"
           ],
           "abilityId": null,
@@ -1102,36 +1106,23 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Thirty paces north of the column stain: dressed rubble stones at the bank base, a buried coursed structure visible as a settling-seam ten feet up the hillside. Huginn attending. Something was built here."
-        }
-      ],
       "scene": {
-        "setting": "Thirty paces north of the column stain — west bank narrows to packed earth and old stone rubble at the base of a steeper hillside. Dressed stones sit half-buried in the sedge. Ten feet up the bank, a long settling-seam in the soil marks a buried edge. Copper-amber water, morning light through alder canopy.",
+        "setting": "Thirty paces north of the column stain — west bank narrows to packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones sit half-buried in the sedge. Ten feet up the bank, a long settling-seam in the soil marks a buried edge. Copper-amber water, morning light through alder canopy.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Crouched over a dressed rubble stone — turned it, checked the face, set it down. Now standing, looking at the settling-seam in the hillside above."
+            "state": "Crouched at the nearest rubble stone, turning it to check the far face. Corner-of-mouth smile just fading back to work."
           },
           {
             "name": "Huginn",
-            "state": "On a root-spur above the rubble stones, eye fixed on the settling-seam in the hillside. Not moving."
+            "state": "On the root-spur above the rubble stones, eye fixed on the settling-seam in the hillside. Not moving."
           }
         ],
         "objects": [
           "Memory (spear, at Silas's side)",
-          "Dressed rubble stones — coursed, hand-width, not river-rounded; sitting in the sedge at the bank base",
-          "Settling-seam in the hillside — ten feet up, a line where soil settles differently and grass grows in two shades; a buried edge",
-          "Continuous iron-mat crust — thicker here than anywhere downstream, step-change at the channel threshold",
+          "Dressed rubble stones — coursed, hand-width, not river-rounded; sitting in the sedge",
+          "Settling-seam in the hillside — ten feet up, a line where soil settles different",
+          "Continuous iron-mat crust — thicker here than anywhere downstream, step-change at the threshold",
           "Valve Failure Timeline note (breast pocket)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
@@ -1149,65 +1140,28 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Identified the rubble stones as coursed — laid by hand, not river-tumbled. Standing now, reading the settling-seam in the hillside.",
-          "learned": [
-            "Rubble stones at the bank base are dressed and coursed — deliberate construction, not natural scree"
-          ],
-          "skillsObserved": [
-            "reading dressed stonework from a field examination"
-          ],
+          "role": "Village blacksmith, Millbrook",
+          "note": "Gave Silas the corner of her mouth over 'date two' — denied nothing, redirected to the work. Back to reading the rubble stones.",
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the rubble site thirty paces north of the column stain — identified coursed stonework, looking at the settling-seam above."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Thirty paces north of the column stain: dressed rubble stones sit in the sedge at the bank base, and a settling-seam ten feet up the hillside marks a buried coursed structure — something was deliberately built here, older than the current contamination.",
-          "subjectId": "the-water-crisis"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Thirty paces north of the column stain — dressed rubble stones in the sedge and a buried-structure settling-seam ten feet up the hillside. Iron-mat steps up sharply at this threshold. Huginn attended the settling-seam directly.",
-          "subPlace": {
-            "name": "Rubble Site — North Reach",
-            "note": "Dressed coursed stones at the bank base; buried structure settling-seam visible ten feet up the hillside; iron-mat thickest here; Huginn attended.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "Thirty paces north of the column stain: dressed rubble stones at the bank base, not river-rounded — coursed, laid by hand. A settling-seam ten feet up the hillside marks a buried structure. The iron-mat steps up sharply here. Huginn is attending the seam directly.",
-          "links": [
-            "millbrook",
-            "pell",
-            "aldric-provisioning-deal",
-            "dara-holt"
-          ]
+          "statusNote": "At the rubble site with Silas, crouched over a dressed stone, morning work ongoing."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short press further upstream along the cut-bank — minutes of walking and a first look at the rubble site."
+        "why": "a brief exchange between two people with work in front of them"
       }
     },
     "sceneState": {
-      "setting": "Thirty paces north of the column stain — west bank narrows to packed earth and old stone rubble at the base of a steeper hillside. Dressed stones sit half-buried in the sedge. Ten feet up the bank, a long settling-seam in the soil marks a buried edge. Copper-amber water, morning light through alder canopy.",
+      "setting": "Thirty paces north of the column stain — west bank narrows to packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones sit half-buried in the sedge. Ten feet up the bank, a long settling-seam in the soil marks a buried edge. Copper-amber water, morning light through alder canopy.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Crouched over a dressed rubble stone — turned it, checked the face, set it down. Now standing, looking at the settling-s"
+          "state": "Crouched at the nearest rubble stone, turning it to check the far face. Corner-of-mouth smile just fading back to work."
         },
         {
           "name": "Huginn",
-          "state": "On a root-spur above the rubble stones, eye fixed on the settling-seam in the hillside. Not moving."
+          "state": "On the root-spur above the rubble stones, eye fixed on the settling-seam in the hillside. Not moving."
         }
       ],
       "objects": [
@@ -1372,7 +1326,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Read the failed Order-Sense cast without asking — no comment, waiting.",
         "[d2] Arrived at Silas's shoulder at the willow bend — read the copper-green water and continuous deposit without comment; waiting for his call.",
         "[d2] Crossed the willow bend with Silas without hesitation — reading the continuous-mat coping in silence, watching the ground.",
         "[d2] Stopped moving when Silas knelt — reading the posture without asking. Waiting.",
@@ -1381,7 +1334,8 @@
         "[d2] Named the column stain as older than Mara's ledger — read it as pre-existing evidence of something below this bank before the current crisis.",
         "[d2] Read the material boundary between the column stain and the newer iron-mat without being prompted — named the stain's direction as downward through stone, not upward through water.",
         "[d2] Named the column stain's material direction as source-above-behind — a buried structure draining down through the hillside, not the river. Diagnosed the crack and the gray-green wa",
-        "[d2] Identified the rubble stones as coursed — laid by hand, not river-tumbled. Standing now, reading the settling-seam in the hillside."
+        "[d2] Identified the rubble stones as coursed — laid by hand, not river-tumbled. Standing now, reading the settling-seam in the hillside.",
+        "[d2] Gave Silas the corner of her mouth over 'date two' — denied nothing, redirected to the work. Back to reading the rubble stones."
       ],
       "knownFacts": [
         "Iron coping is receiving iron carried in the water, not leaching it from the stone",
@@ -1402,7 +1356,7 @@
         "reading dressed stonework from a field examination"
       ],
       "status": "active",
-      "statusNote": "At the rubble site thirty paces north of the column stain — identified coursed stonework, looking at the settling-seam above.",
+      "statusNote": "At the rubble site with Silas, crouched over a dressed stone, morning work ongoing.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2105,14 +2059,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.88310290701287,
-    "cerebral": 38.58502032362203,
-    "social": 55.543586144294295,
-    "generous": 13.109217646329997,
-    "cautious": 32.23440935435749,
-    "physical": 1.4660483424018784,
-    "risky": 2.563786112725205,
-    "ruthless": 0.7477194593032545
+    "strategic": 53.61368739247781,
+    "cerebral": 38.392095222003924,
+    "social": 57.26586821357282,
+    "generous": 13.043671558098346,
+    "cautious": 32.0732373075857,
+    "physical": 1.458718100689869,
+    "risky": 2.550967182161579,
+    "ruthless": 0.7439808620067382
   },
   "aptitudes": [
     "strategist",
@@ -2120,7 +2074,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 147,
+  "actionCount": 148,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2206,8 +2160,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784049810851,
-  "rev": 214,
+  "updatedAt": 1784050132924,
+  "rev": 215,
   "generated": {
     "schemaVersion": 1,
     "npc": {

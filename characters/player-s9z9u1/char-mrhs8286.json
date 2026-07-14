@@ -976,54 +976,41 @@
         "player": "Use Order-Sense on the channel itself — see the whole design this water is part of, and where the deposit pattern points.",
         "summary": "Order-Sense fails in the thin substrate — the channel reads as stone and water, not design. Huginn holds position at the willow edge.",
         "narration": "You set your hand against the coping stone and reach for Order-Sense — a restrained reach, conserved, the way you'd test weight before committing to a lift. The lattice here is thin, the substrate barely a suggestion under the cut-bank clay, and you feel the ability find almost nothing to anchor to. Concrete ground, concrete water, concrete iron: the channel does not want to be a design. It wants to be a ditch.\n\nYou get fragments. A shape that might be a network — east channel branching from something above, something feeding something else — but the connections dissolve before you can trace them. The deposit pattern you've read with your eyes stays more legible than anything Order-Sense can give you here. The channel wall. The iron banding. The way the crust thickens as the water runs from south to north. That much you have from walking, not from craft.\n\nPell is watching you from two steps back. She reads the result without asking. 'Nothing useful?'\n\n'The lattice is thin here,' you say. 'The channel doesn't read as a system. Just stone and water.' You straighten and look north toward Huginn, still perched on the coping at the willow-shade edge, ten yards ahead, angled upstream. He has not moved. Whatever the Order-Sense could not give you, he is already looking at it."
+      },
+      {
+        "player": "Walk to where Huginn is sitting — the willow bend, the edge of Dara's upper reach — and see what he's looking at upstream",
+        "summary": "Silas reaches the willow bend with Huginn — the copper-green water and continuous iron deposit confirm the source lies upstream, past Dara's boundary.",
+        "narration": "The willow bend is ten yards. You cover it in a dozen steps, Memory's butt-end tracking the coping as you go, and crouch beside Huginn on the stone.\n\nHe does not move. He is looking north.\n\nThe channel here bends left and the willows lean over it from the far bank, trailing last year's dead fingers in the current. Past the bend the water is visible for thirty yards before another curve takes it out of sight — and the color is wrong. Not the dilute gray-green you have been reading since Fen's intake. Deeper. A definite copper-green, the color of old bronze left in rain, sitting in the current like something dissolved rather than suspended. The iron banding-strips on this section of coping are barely visible beneath the deposit: not four layers but a continuous mat, gray-green at the waterline and rust-brown above it where the water has retreated in dry spells and left a tidemark.\n\nHuginn turns one eye toward you, then back north. He makes no sound. The timing of it is a comment.\n\nPell arrives at your shoulder a moment later, boots quiet on the stone. She looks at the water, then at the deposit on the coping, then at you — a short measured look that says she sees what you see and is waiting to hear what you make of it. Somewhere upstream, past that second curve, the source is doing whatever it is doing. The willow branches move. The water does not smell of iron here — it smells of something older, something the tongue does not have a word for. Not rot. Not clean."
       }
     ],
     "lastTurn": {
-      "narration": "You set your hand against the coping stone and reach for Order-Sense — a restrained reach, conserved, the way you'd test weight before committing to a lift. The lattice here is thin, the substrate barely a suggestion under the cut-bank clay, and you feel the ability find almost nothing to anchor to. Concrete ground, concrete water, concrete iron: the channel does not want to be a design. It wants to be a ditch.\n\nYou get fragments. A shape that might be a network — east channel branching from something above, something feeding something else — but the connections dissolve before you can trace them. The deposit pattern you've read with your eyes stays more legible than anything Order-Sense can give you here. The channel wall. The iron banding. The way the crust thickens as the water runs from south to north. That much you have from walking, not from craft.\n\nPell is watching you from two steps back. She reads the result without asking. 'Nothing useful?'\n\n'The lattice is thin here,' you say. 'The channel doesn't read as a system. Just stone and water.' You straighten and look north toward Huginn, still perched on the coping at the willow-shade edge, ten yards ahead, angled upstream. He has not moved. Whatever the Order-Sense could not give you, he is already looking at it.",
-      "sceneSummary": "Order-Sense fails in the thin substrate — the channel reads as stone and water, not design. Huginn holds position at the willow edge.",
+      "narration": "The willow bend is ten yards. You cover it in a dozen steps, Memory's butt-end tracking the coping as you go, and crouch beside Huginn on the stone.\n\nHe does not move. He is looking north.\n\nThe channel here bends left and the willows lean over it from the far bank, trailing last year's dead fingers in the current. Past the bend the water is visible for thirty yards before another curve takes it out of sight — and the color is wrong. Not the dilute gray-green you have been reading since Fen's intake. Deeper. A definite copper-green, the color of old bronze left in rain, sitting in the current like something dissolved rather than suspended. The iron banding-strips on this section of coping are barely visible beneath the deposit: not four layers but a continuous mat, gray-green at the waterline and rust-brown above it where the water has retreated in dry spells and left a tidemark.\n\nHuginn turns one eye toward you, then back north. He makes no sound. The timing of it is a comment.\n\nPell arrives at your shoulder a moment later, boots quiet on the stone. She looks at the water, then at the deposit on the coping, then at you — a short measured look that says she sees what you see and is waiting to hear what you make of it. Somewhere upstream, past that second curve, the source is doing whatever it is doing. The willow branches move. The water does not smell of iron here — it smells of something older, something the tongue does not have a word for. Not rot. Not clean.",
+      "sceneSummary": "Silas reaches the willow bend with Huginn — the copper-green water and continuous iron deposit confirm the source lies upstream, past Dara's boundary.",
       "choices": [
         {
-          "label": "Walk to where Huginn is sitting — the willow bend, the edge of Dara's upper reach — and see what he's looking at upstream",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Cross the willow bend and follow the deposit upstream — see how far the source is and what it looks like at closer range. Dara's territory, uninvited, but the evidence is thickening.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "careful"
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Deathsense on the water itself — not the housing, the water — and see if the channel is ending or something in it is",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Turn back to Pell and ask what she makes of the deposit following iron and not stone — she knows materials; get her interpretation before you go further",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Hold here and send Huginn ahead — let him range north along the channel while you and Pell wait; he will come back with something.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "consult",
+            "observe",
             "careful"
           ],
           "abilityId": null,
@@ -1033,16 +1020,30 @@
           "emergenceId": null
         },
         {
-          "label": "Cross into Dara Holt's upper-reach jurisdiction — go past the willow bend and follow the deposit pattern north as far as it leads before circling back to brief her",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "chaos_order": 0.2
-          },
+          "label": "Turn back south and go get Dara Holt now — you have seen enough to brief her, and she should walk this herself. The evidence will not move.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "risky"
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pell what she thinks — she has been on this ground for years and her read of whether to cross or wait matters.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1054,41 +1055,45 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Order-Sense failed in the thin substrate — the channel won't read as a system this close to the valley floor. Physical evidence still points north. Huginn is watching the willow bend."
+          "title": "Meat for the Smokehouse",
+          "note": "Reached the willow bend — copper-green water and continuous iron-mat deposit confirm the source is upstream, past Dara Holt's boundary. Physical trace now unambiguous."
         }
       ],
       "scene": {
-        "setting": "East channel bank, roughly 150 yards north of Fen's intake — cut-stone coping, four-layer iron deposit visible on the banding-strip, water deepening toward copper-tinged. Willow-bank curve ahead marks the upper-reach boundary. Morning light, pale and indirect.",
+        "setting": "East channel bank at the willow bend — the upper-reach boundary, coping stone continuous-mat iron deposit visible, water copper-green past the curve. Morning light filtering through willow fronds. Pell at Silas's shoulder; Huginn on the coping stone looking north.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Two steps back, watching Silas, having read the failed cast without comment."
+            "state": "Standing at Silas's shoulder, reading the water and deposit, waiting for his call."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the coping stone at the willow-shade edge ten yards ahead, angled upstream. Has not moved."
+            "state": "Perched on the coping stone at the willow bend, eye turned north, utterly still."
           }
         ],
         "objects": [
           "Memory (spear, in Silas's left hand)",
-          "Iron banding-strip in the channel wall — four-layer deposit, thicker than Fen's",
+          "Iron banding-strip on this section — continuous mat deposit, not four layers",
           "Valve Failure Timeline note (breast pocket)",
-          "Belt Knife (wiped clean, at hip)",
-          "Knife-scraped section at Fen's intake — 150 yards south, preserved"
+          "Belt Knife (at hip, wiped clean)",
+          "Copper-green water visible thirty yards upstream before the next curve"
         ],
         "threads": [
           "Order-Sense found no purchase — the channel reads as matter, not design; the source is still unknown",
-          "Crust thickens upstream — source is north of this point, past the willow bend",
-          "Huginn is sitting exactly at the upper-reach boundary, looking north — his stillness is timed",
-          "Pell has named the willow bend as the edge of Dara's jurisdiction — going further is her territory",
-          "Dara Holt still to be briefed — Mara advised seeing the site first, which is done"
+          "Continuous iron-mat deposit and copper-green water confirm source is north of this point, past the willow bend",
+          "Huginn is sitting at the boundary, looking north — his stillness is timed",
+          "Dara Holt still to be briefed — site evidence now clear enough to show her",
+          "Pell is present and watching, waiting for Silas's decision"
         ]
       },
       "npcUpdates": [
@@ -1096,9 +1101,29 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Read the failed Order-Sense cast without asking — no comment, waiting.",
-          "statusNote": "On the east channel bank north of Fen's intake, two steps back from Silas — watching, waiting for the next move.",
-          "relationshipDelta": 0
+          "role": "Village blacksmith, Millbrook",
+          "note": "Arrived at Silas's shoulder at the willow bend — read the copper-green water and continuous deposit without comment; waiting for his call.",
+          "learned": [
+            "Copper-green water and continuous iron-mat deposit visible past the willow bend — source is upstream of Dara's boundary"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the willow bend with Silas — watching the upstream water, waiting for his decision on whether to cross or fetch Dara."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Willow bend at the upper-reach boundary — continuous iron-mat deposit on coping, copper-green water visible upstream. Physical trace of the source confirmed here on World-day 14 morning.",
+          "flag": {
+            "willow_bend_reached": true
+          },
+          "subPlace": {
+            "name": "Willow Bend — Upper Reach Boundary",
+            "note": "Where the iron deposit becomes continuous and the water turns copper-green — the edge of Dara Holt's jurisdiction and the last point before the source channel.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
@@ -1106,46 +1131,46 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": null,
-          "fact": "Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains the only reliable evidence.",
+          "fact": "At the willow bend the deposit shifts from four discrete layers to a continuous iron mat — waterline gray-green, above-tide rust-brown. Water color deepens to copper-green. The smell changes: older than iron, no word for it. The source is upstream of this point.",
           "links": [
             "millbrook",
-            "pell",
             "aldric-provisioning-deal",
-            "dara-holt"
+            "pell",
+            "dara-holt",
+            "aldric"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief attempt and its failure — a minute at the coping stone, no more."
+        "why": "short walk from the 150-yard mark to the willow bend"
       }
     },
     "sceneState": {
-      "setting": "East channel bank, roughly 150 yards north of Fen's intake — cut-stone coping, four-layer iron deposit visible on the banding-strip, water deepening toward copper-tinged. Willow-bank curve ahead marks the upper-reach boundary. Morning light, pale and indirect.",
+      "setting": "East channel bank at the willow bend — the upper-reach boundary, coping stone continuous-mat iron deposit visible, water copper-green past the curve. Morning light filtering through willow fronds. Pell at Silas's shoulder; Huginn on the coping stone looking north.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Two steps back, watching Silas, having read the failed cast without comment."
+          "state": "Standing at Silas's shoulder, reading the water and deposit, waiting for his call."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the coping stone at the willow-shade edge ten yards ahead, angled upstream. Has not moved."
+          "state": "Perched on the coping stone at the willow bend, eye turned north, utterly still."
         }
       ],
       "objects": [
         "Memory (spear, in Silas's left hand)",
-        "Iron banding-strip in the channel wall — four-layer deposit, thicker than Fen's",
+        "Iron banding-strip on this section — continuous mat deposit, not four layers",
         "Valve Failure Timeline note (breast pocket)",
-        "Belt Knife (wiped clean, at hip)",
-        "Knife-scraped section at Fen's intake — 150 yards south, preserved"
+        "Belt Knife (at hip, wiped clean)",
+        "Copper-green water visible thirty yards upstream before the next curve"
       ],
       "threads": [
         "Order-Sense found no purchase — the channel reads as matter, not design; the source is still unknown",
-        "Crust thickens upstream — source is north of this point, past the willow bend",
-        "Huginn is sitting exactly at the upper-reach boundary, looking north — his stillness is timed",
-        "Pell has named the willow bend as the edge of Dara's jurisdiction — going further is her territory",
-        "Dara Holt still to be briefed — Mara advised seeing the site first, which is done"
+        "Continuous iron-mat deposit and copper-green water confirm source is north of this point, past the willow bend",
+        "Huginn is sitting at the boundary, looking north — his stillness is timed",
+        "Dara Holt still to be briefed — site evidence now clear enough to show her",
+        "Pell is present and watching, waiting for Silas's decision"
       ]
     }
   },
@@ -1172,14 +1197,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Pell agrees to walk north to the east-channel valve sites after the farmer's sleeve job — she knows both failure locations and names Fen's intake as the first inspection point. Mara's ledger identified as a potential date-anchor for when the iron failures began.",
         "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent.",
         "Mara's ledger confirms the iron failure timeline — four valve failures in three weeks beginning World-day minus-eighteen. Note in hand; Fen's intake next.",
         "Left Millbrook on the north track with Pell — Dara Holt's house passed, Fen's intake twenty minutes ahead.",
         "Palework read Fen's failed intake — iron dissolution three layers deep, process predates the ledger by thirty days minimum, active front at the collar throat; stone unaffected.",
         "Knife-scraped section of housing preserved — three layers documented, iron-specific targeting confirmed, stone unaffected. Physical evidence ready for Dara Holt.",
         "Upstream trace confirms crust thickens with distance north — color deepens at the willow bend. The source is further upstream, into Dara's upper-reach jurisdiction.",
-        "Order-Sense failed in the thin substrate — the channel won't read as a system this close to the valley floor. Physical evidence still points north. Huginn is watching the willow bend."
+        "Order-Sense failed in the thin substrate — the channel won't read as a system this close to the valley floor. Physical evidence still points north. Huginn is watching the willow bend.",
+        "Reached the willow bend — copper-green water and continuous iron-mat deposit confirm the source is upstream, past Dara Holt's boundary. Physical trace now unambiguous."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1293,7 +1318,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Moved to iron rack and picked up calipers without hesitation — managing the farmer's job cleanly while Silas reads the tubing from across the room.",
         "[d2] Heard Silas's report on the iron contamination without stopping her work — 'Fen's was the second' was not new information to her. Confirms she has been tracking the valve failures.",
         "[d2] Agreed to walk north after the farmer's sleeve job — knows both failed valve sites, named Fen's east-channel intake as the first inspection point. Suggested Mara's ledger as a date",
         "[d2] Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north.",
@@ -1302,17 +1326,18 @@
         "[d2] Crouched at the valve housing and told Silas to read it — waiting for the full report now.",
         "[d2] Heard the full Palework report — iron-specific targeting, stone unaffected, thirty-day head start. Named the anomaly plainly: stone should go first in acid water. Told Silas not to",
         "[d2] Named the willow bend as the last turn before the high-meadow feed — past it is Dara's jurisdiction. Told Silas Dara needs to see this section too, not just the intake.",
-        "[d2] Read the failed Order-Sense cast without asking — no comment, waiting."
+        "[d2] Read the failed Order-Sense cast without asking — no comment, waiting.",
+        "[d2] Arrived at Silas's shoulder at the willow bend — read the copper-green water and continuous deposit without comment; waiting for his call."
       ],
       "knownFacts": [
-        "Placed Memory in Silas's hands before departure — treating it as a working tool, not a keepsake",
         "Knows the path north well enough to name landmarks without looking back",
         "The valve housing crust is thick at every iron-to-water contact point",
         "Iron dissolution working inward from the water-facing surface",
         "Iron-specific rot is not a natural acid-water pattern — stone should degrade first",
         "The rot predates Mara's ledger by thirty days minimum",
         "The willow bend marks the edge of Dara Holt's upper-reach jurisdiction",
-        "The deposit follows iron consistently — stone and mortar clean beside each banding-strip"
+        "The deposit follows iron consistently — stone and mortar clean beside each banding-strip",
+        "Copper-green water and continuous iron-mat deposit visible past the willow bend — source is upstream of Dara's boundary"
       ],
       "skillsObserved": [
         "practical knowledge of east-channel valve locations",
@@ -1323,7 +1348,7 @@
         "upstream-pattern reading"
       ],
       "status": "active",
-      "statusNote": "On the east channel bank north of Fen's intake, two steps back from Silas — watching, waiting for the next move.",
+      "statusNote": "At the willow bend with Silas — watching the upstream water, waiting for his decision on whether to cross or fetch Dara.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1428,7 +1453,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Spear repair planning begun at the forge bench on World-day 14 deep night — Pell and Silas both assessing the transverse fault; Huginn attending.",
         "[d2] Spear repair completed at the forge bench on World-day 14 deep night — rune-wax cord and pitch-ink spent in the capacitor install, transverse channel deepened in the iron. Bench carries the marks of t",
         "[d2] Spear repair fully completed at dawn — north quarter capacitor pressed flush. Bench carries pitch-smear and the marks of the night's work.",
         "[d2] Memory named at the forge bench at dawn — wine opened, starfruit shared, the night's work concluded with a name.",
@@ -1439,7 +1463,8 @@
         "[d2] North track departed — Dara Holt's blue gate-post house passed without stopping, morning smoke from chimney.",
         "[d2] Fen's intake valve housing shows three distinct crust layers — outermost two gray-green, innermost older and darker. Iron dissolution process began ~30 days before the World-day minus-18 failure. Acti",
         "[d2] Knife-scraped strip on the valve housing above the waterline — three crust layers now exposed and readable. Do not cover. Physical evidence for Dara Holt.",
-        "[d2] East channel bank section 100-150 yards north of Fen's intake shows four-layer deposit on iron banding-strips — water color deepens to copper-tinged in the cut section here. Iron-specific pattern hold"
+        "[d2] East channel bank section 100-150 yards north of Fen's intake shows four-layer deposit on iron banding-strips — water color deepens to copper-tinged in the cut section here. Iron-specific pattern hold",
+        "[d2] Willow bend at the upper-reach boundary — continuous iron-mat deposit on coping, copper-green water visible upstream. Physical trace of the source confirmed here on World-day 14 morning."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1960,7 +1985,8 @@
           "[d2] Palework on Fen's intake: iron dissolution working inward from the water-facing surface, three crust layers — process predates the World-day minus-18 failure by thirty days minimum. Active rot front a",
           "[d2] The rot at Fen's intake targets iron specifically — stone collar unaffected. Pell named this as non-natural: acid water degrades stone first. Iron-specific targeting implies the water chemistry is doi",
           "[d2] Upstream trace confirms the deposit thickens with distance north — iron banding-strips show four layers by 150 yards above Fen's intake. Water color shifts from dilute gray-green to a deeper copper-ti",
-          "[d2] Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains th"
+          "[d2] Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains th",
+          "[d2] At the willow bend the deposit shifts from four discrete layers to a continuous iron mat — waterline gray-green, above-tide rust-brown. Water color deepens to copper-green. The smell changes: older th"
         ],
         "links": [
           "millbrook",
@@ -2000,14 +2026,14 @@
     }
   },
   "tendencies": {
-    "strategic": 52.27781061018693,
-    "cerebral": 35.253917203559304,
-    "social": 58.106697051484836,
-    "generous": 12.688775377743477,
-    "cautious": 29.64055230833958,
-    "physical": 1.5337005189667305,
-    "risky": 1.6720189257235263,
-    "ruthless": 0.7822236754458713
+    "strategic": 53.016421557136,
+    "cerebral": 35.07764761754151,
+    "social": 57.81616356622741,
+    "generous": 12.62533150085476,
+    "cautious": 30.492349546797882,
+    "physical": 1.5260320163718968,
+    "risky": 1.6636588310949088,
+    "ruthless": 0.778312557068642
   },
   "aptitudes": [
     "strategist",
@@ -2015,7 +2041,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 138,
+  "actionCount": 139,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2101,8 +2127,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784047299158,
-  "rev": 205,
+  "updatedAt": 1784047520484,
+  "rev": 206,
   "generated": {
     "schemaVersion": 1,
     "npc": {

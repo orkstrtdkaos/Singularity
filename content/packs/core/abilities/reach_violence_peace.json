@@ -55,7 +55,8 @@
         "FIGHT": 3,
         "DUEL": 3
       },
-      "tradition": "marcher"
+      "tradition": "marcher",
+      "harmRung": "lethal"
     },
     {
       "id": "stillcraft",
@@ -113,7 +114,8 @@
         "DUEL": 2,
         "SURVIVE": 1
       },
-      "tradition": "stillhold"
+      "tradition": "stillhold",
+      "harmRung": "none"
     },
     {
       "id": "read_the_fight",
@@ -163,7 +165,8 @@
         "FIGHT": 1,
         "PUZZLE": 1
       },
-      "tradition": "marcher"
+      "tradition": "marcher",
+      "harmRung": "none"
     },
     {
       "id": "read_the_room",
@@ -211,7 +214,8 @@
         "FIGHT": 1,
         "PUZZLE": 1
       },
-      "tradition": "stillhold"
+      "tradition": "stillhold",
+      "harmRung": "none"
     },
     {
       "id": "disarm",
@@ -261,7 +265,8 @@
         "DUEL": 2,
         "PUZZLE": 2
       },
-      "tradition": "marcher"
+      "tradition": "marcher",
+      "harmRung": "incapacitating"
     },
     {
       "id": "calm_word",
@@ -310,7 +315,8 @@
         "SOCIAL": 2,
         "FIGHT": 1
       },
-      "tradition": "stillhold"
+      "tradition": "stillhold",
+      "harmRung": "none"
     },
     {
       "id": "the_stand",
@@ -361,7 +367,8 @@
         "DUEL": 2,
         "SURVIVE": 1
       },
-      "tradition": "marcher"
+      "tradition": "marcher",
+      "harmRung": "none"
     },
     {
       "id": "broker_truce",
@@ -410,7 +417,8 @@
         "FIGHT": 1,
         "DUEL": 1
       },
-      "tradition": "stillhold"
+      "tradition": "stillhold",
+      "harmRung": "none"
     },
     {
       "id": "the_held_breath",
@@ -450,7 +458,8 @@
         "FIGHT": 2,
         "SURVIVE": 1
       },
-      "tradition": "stillhold"
+      "tradition": "stillhold",
+      "harmRung": "none"
     },
     {
       "id": "last_form",
@@ -483,7 +492,286 @@
       ],
       "powerSystem": "reach_violence_peace",
       "gated": "learned",
-      "tradition": "marcher"
+      "tradition": "marcher",
+      "harmRung": "damaging"
+    },
+    {
+      "id": "soldiers_hand",
+      "name": "Soldier's Hand",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "practical",
+      "axes": {
+        "violence_peace": -0.3,
+        "body_mind": -0.2
+      },
+      "effectTags": [
+        "heal",
+        "empower",
+        "fieldcraft"
+      ],
+      "narrationHints": "Not kind. The wound is closed. You're still in this. The marcher's care is functional — bind it tight, make the call, keep them moving.",
+      "description": "Field triage and battlefield restoration: the marcher heals because they understand wounds, and strengthens because they know what a body can still do.",
+      "notFor": "Tenderness — this is not comfort medicine. Someone given the Soldier's Hand gets the minimum to stay in the fight, not the most to recover. Rest is still required.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Bind and Stand",
+          "grants": "Close a wound fast enough to stay in the fight; shore up a companion who is starting to falter; read a body's capacity correctly and tell it the truth.",
+          "cannot": "Haste costs. A wound bound in a fight is bound wrong — it holds, but not well. Real healing comes later."
+        },
+        {
+          "rank": 2,
+          "name": "The Counted Cost",
+          "grants": "Keep two people functional through a sustained engagement; read a companion's condition in a glance and act correctly; turn a fight by putting someone back in it who should be down.",
+          "cannot": "You cannot heal what was never whole. The Soldier's Hand works on wounds, not on illness, curse, or damage from inside."
+        },
+        {
+          "rank": 3,
+          "name": "No One Falls While I Stand",
+          "grants": "Keep a group fighting past what they should survive; bring a companion back from the edge and put them where they need to be; make your own body perform past what it has agreed to.",
+          "cannot": "The body remembers. Every time you push past the limit, the limit moves — and not in your favour. This is borrowed time, not extended life."
+        }
+      ],
+      "functions": [
+        "heal",
+        "empower"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "SURVIVE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SURVIVE": 3,
+        "DUEL": 1
+      },
+      "tradition": "marcher",
+      "harmRung": "none"
+    },
+    {
+      "id": "whats_at_hand",
+      "name": "What's At Hand",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "practical",
+      "axes": {
+        "violence_peace": -0.3,
+        "concrete_abstract": -0.3
+      },
+      "effectTags": [
+        "make",
+        "improvise",
+        "weapon"
+      ],
+      "narrationHints": "It will hold. One fight. Maybe two. That's enough. The marcher sees every room as an armory — a staff from a post, a blade from a shard, a shield from a door.",
+      "description": "Improvise tools of violence from the environment. The discipline of force includes making the instruments of it — the marcher does not need a blade, they need physics.",
+      "notFor": "Fine craft — what the marcher makes is fit for purpose, not beauty. It will not outlast its use. This is not the Wright's art.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Armed",
+          "grants": "Improvise a usable weapon or basic shield from whatever is at hand; recognize the tools in any room; make a hostile space into a site of advantage.",
+          "cannot": "One tool at a time. What you make is crude and temporary — it holds for the fight it was made for."
+        },
+        {
+          "rank": 2,
+          "name": "Ready in Any Room",
+          "grants": "Improvise multiple tools at once; make something that will last the whole engagement, not just the opening blow; see what someone else needs and have it ready for them.",
+          "cannot": "Your tools still bear the mark of improvisation. Anyone who sees them knows what they are and what they're not."
+        },
+        {
+          "rank": 3,
+          "name": "The Marcher's Forge",
+          "grants": "Turn a whole environment into an armory; improvise something with lasting utility — a barricade that holds, a sealed door, a weapon that outlives the fight it was made for. Arm a group from nothing.",
+          "cannot": "The marcher makes weapons, not wonders. What comes from this is always recognizable as having been something else first."
+        }
+      ],
+      "functions": [
+        "make"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "SURVIVE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SURVIVE": 3,
+        "EXPLORE": 2,
+        "PUZZLE": 1
+      },
+      "tradition": "marcher",
+      "harmRung": "damaging"
+    },
+    {
+      "id": "the_weight",
+      "name": "The Weight",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "social",
+      "axes": {
+        "violence_peace": -0.3,
+        "emotional_logical": -0.2
+      },
+      "effectTags": [
+        "command",
+        "bind",
+        "presence"
+      ],
+      "narrationHints": "Nobody moved. Not because they couldn't. Because they looked at her and did the math. The threat doesn't need to be spoken when everyone in the room already knows what it costs.",
+      "description": "Influence through credible threat and demonstrated capacity. The marcher commands not through charisma but through the understood fact of what they are capable of.",
+      "notFor": "Warmth — the Weight builds compliance, not trust; a room obeying out of fear is not a room that loves you. This forecloses on relationships the marcher never bothered to build.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Stand Down",
+          "grants": "Stop a fight before it starts; make your presence read correctly in a room; a word, a posture, a look that tells everyone present this is not a fight they survive.",
+          "cannot": "Works on people who have a stake in living. The truly beyond-reason or the already-committed pass through it."
+        },
+        {
+          "rank": 2,
+          "name": "The Agreement",
+          "grants": "Extract compliance from someone who would rather not give it; stop a building conflict with a single intervention; make a threat so credible that following through is unnecessary.",
+          "cannot": "Compliance is not consent. The agreement lasts as long as the marcher's presence does, or until the person finds a way out."
+        },
+        {
+          "rank": 3,
+          "name": "This Ends Here",
+          "grants": "Stop violence at scale — a riot, a mob, a war about to tip — not by peace-craft but by being the more credible force; make a whole room understand that you are the ceiling. Even those who hate you stop.",
+          "cannot": "The wielder drifts violence-hot. Stopping things with weight alone teaches the world that weight is what matters — and someone with more weight will come."
+        }
+      ],
+      "functions": [
+        "command",
+        "bind"
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT",
+        "DUEL"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 4,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "CHASE": 1
+      },
+      "tradition": "marcher",
+      "harmRung": "none"
+    },
+    {
+      "id": "the_advance",
+      "name": "The Advance",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": -0.3,
+        "body_mind": -0.3
+      },
+      "effectTags": [
+        "move",
+        "position",
+        "control"
+      ],
+      "narrationHints": "She didn't run. She advanced. The fight arranged itself around where she chose to be. Marcher movement is not speed — it is geometry.",
+      "description": "Tactical positioning as a violence-discipline: close distance, deny ground, control the space between you and threat. The marcher moves with intent, not haste.",
+      "notFor": "Distance — this is a fight's worth of movement; the Advance does not span leagues. The marcher does not outrun horses.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Ground Control",
+          "grants": "Close distance under fire; deny a retreat; move through contested space without giving an opponent the moment they need; arrive at the right position.",
+          "cannot": "You can place yourself where you need to be, but the terrain and numbers still matter."
+        },
+        {
+          "rank": 2,
+          "name": "Pressure",
+          "grants": "Push a combat's whole shape — force opponents where you want them; move yourself and a companion through a fight without losing either; cut off a retreat before it opens.",
+          "cannot": "Controlling two people's movement divides the attention. Moving more than one companion is the edge of what this craft can hold."
+        },
+        {
+          "rank": 3,
+          "name": "The Geometry",
+          "grants": "Control a full field — move so that opponents find themselves in positions they did not choose, while you stand where you need to be; move a small group through an ambush without taking the loss.",
+          "cannot": "The wielder drifts violence-hot. The Advance assumes a fight is always coming — and eventually it is right."
+        }
+      ],
+      "functions": [
+        "move"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL",
+        "CHASE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "DUEL": 3,
+        "CHASE": 2,
+        "STEALTH": 1
+      },
+      "tradition": "marcher",
+      "harmRung": "none"
+    },
+    {
+      "id": "long_road",
+      "name": "Long Road",
+      "levelReq": 2,
+      "energyCost": 3,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": -0.2,
+        "body_mind": -0.2
+      },
+      "effectTags": [
+        "sustain",
+        "endure",
+        "campaign"
+      ],
+      "narrationHints": "They had been moving for three days. She was still making decisions. The marcher sustains not through comfort but through conditioning — the long patience of surviving.",
+      "description": "Endurance as a violence-discipline: the marcher sustains through hardship because hardship is the other face of the craft. They march when others sit; fight when others sleep; eat what others won't.",
+      "notFor": "Comfort — this is not rest, not recovery, not warmth. The marcher on a Long Road is functional, not comfortable. The body is spending something real.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Hard Ground",
+          "grants": "Sustain yourself through conditions that would halt an untrained person: poor rations, bad weather, wounds walked on, short sleep. The marcher is built for the long campaign.",
+          "cannot": "Still spending. The marcher on Hard Ground is borrowing from the future — they will need to stop eventually, and when they do, it lands."
+        },
+        {
+          "rank": 2,
+          "name": "Keep Pace",
+          "grants": "Sustain a companion through difficult conditions; set a march-pace a group can follow and maintain; recognize when something has gone past endurance into damage and stop it before it kills.",
+          "cannot": "You cannot sustain everyone indefinitely. The march-pace is yours; companions who cannot match it are a real constraint."
+        },
+        {
+          "rank": 3,
+          "name": "The Long Campaign",
+          "grants": "Sustain a full group through extended hardship; plan resource management across days; outlast an opponent not by being stronger but by still being there when they are not.",
+          "cannot": "Outlasting requires that something is over eventually. The Long Campaign is not a life — it is a duration. Even the marcher has a limit; this only extends it."
+        }
+      ],
+      "functions": [
+        "sustain"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 4,
+        "EXPLORE": 3,
+        "CHASE": 2
+      },
+      "tradition": "marcher",
+      "harmRung": "none"
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

@@ -35,7 +35,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.7257350690493156,
+    "spectrumId": -0.7394483155968499,
     "violence_peace": 0.0335,
     "chaos_order": 0.11474943617187498,
     "mechanical_spiritual": 0.0916193390625,
@@ -98,7 +98,7 @@
       "id": null,
       "name": "Preserved Trail Parcel",
       "kind": "consumable",
-      "qty": 1,
+      "qty": 2,
       "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
       "effects": {
         "energy": 10
@@ -210,6 +210,22 @@
       "_bonusApplied": 0.25,
       "day": 1,
       "worldDay": 13
+    },
+    {
+      "at": "2026-07-14T02:11:10.755Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters.",
+      "tags": [
+        "hunt",
+        "provision",
+        "community"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 1,
+      "worldDay": 14
     }
   ],
   "relationships": {},
@@ -668,73 +684,84 @@
         "player": " Well, we can talk about that when we're back. Let's get to work on this bull then tag up with Corvin and haul all this back to Aldric... (secretly, I'll take the bulls tusks to make something out of them later).  Ask Pell while we work if she thinks I should take a quick scout to the river and maybe a little north to where Huginn sensed things.",
         "summary": "Bull dressed on the scrub oak ridge — tusks taken, party coordinates for carry to Aldric; Silas floats a river scout and Pell gives it quiet endorsement.",
         "narration": "You drive the butt of the spear into the earth to free your hands and crouch beside the bull. The animal is a good three hundred pounds of cooling muscle and thick hide — you start at the belly, knife out, working the incision clean and steady while Pell moves to the haunches without being asked. She knows the work. Her hands are a blacksmith's hands but the economy of motion is the same — no wasted cuts, no hesitation at the joints.\n\nYou work the skull last. The tusks come free with the belt knife and a quarter-turn of the wrist, ivory-yellow and curved, dense at the base where the jaw muscle attached. You tuck them into the traveler's pack without comment. They are useful and they are yours and that is the end of it.\n\n\"Huginn had a direction before the hunt,\" you say, not stopping. \"Northwest. Felt like soon, or already — wouldn't name what was ending up there.\" You free the near shoulder and Pell takes the weight, setting it aside on clean grass. \"I'm thinking: we haul this to Aldric, I drop the load, and then I walk north along the river a half-mile and see what the water says before the light changes. You think that's worth the legs?\"\n\nPell straightens, wipes her forearm across her jaw, and looks northwest the way you might check a ridge for weather. \"The river's been wrong three weeks,\" she says. \"Another day won't change that. But if Huginn put a direction on it—\" She lets the sentence sit there, which is as close as she gets to *yes, go*. Huginn, for its part, drops from the branch, lands two feet from the bull's skull, and studies the open cavity with the calm professional interest of a thing that has seen a great many of these."
+      },
+      {
+        "player": "After we field dress the boar and join up with Corvin we haul the meat back to Aldric. I'll ask Pell about the rest of the date day after that.",
+        "summary": "Hunt haul delivered to Aldric at the smokehouse — both animals credited, arrangement confirmed, afternoon still open.",
+        "narration": "The carry down takes the better part of an hour. You haul the bull's haunches in relay — you and Pell trading the heaviest cuts between you while Huginn glides ahead in short hops, landing on fence-posts and fallen timber, not in a hurry. The morning stays clear and warm. By the time you reach the sedge strip, Corvin has the sow wrapped in the hide and a carrying pole cut from the hedgerow. He looks at the bulk of the bull quarters and raises his eyebrows once — not complaint, just arithmetic. The three of you redistribute without much discussion and start south.\n\nMillbrook comes back into view across the lower terraces, smoke from the cookhouse visible above the tree-line. The north gate gap is dry-stone and low, and you ease the bulk through it one piece at a time. A few villagers note the size of the haul — a woman pulling water from the well pauses, and two children trail you to the smokehouse door with undisguised interest. Huginn drops into a slouch on the smokehouse eave and tucks one foot up.\n\nAldric is at the block when you push through. He looks at the two animals — sow and bull, both dressed clean — and sets his fillet knife down with the flat deliberate motion of a man revising his inventory in his head. He doesn't say much. He says 'good work' and means it, and he calls the boy over to start hanging. You give him the short version: sow in the sedge strip before dawn, bull on the scrub oak ridge by mid-morning. He listens to the ridge detail — northwest slope, scrub oak, dry grass — and when you mention the high ground and the distance from the streambed he nods once, slow.\n\n'Boar pushing uphill,' he says, more to himself than to you. 'Three weeks ago they were working the riverside reed-beds every morning.' He squares the account without being asked — two animals, good condition, clean dressing — and adds a second parcel to your pack alongside what you already carry. Pell has drifted to lean against the doorframe, watching Aldric's arithmetic with the same attention she'd give a piece of ironwork. Once the handoff is done she looks at you, and the unfinished thread — the forge, the afternoon, the thing she agreed to see — is simply still there between you, waiting on your word."
       }
     ],
     "lastTurn": {
-      "narration": "You drive the butt of the spear into the earth to free your hands and crouch beside the bull. The animal is a good three hundred pounds of cooling muscle and thick hide — you start at the belly, knife out, working the incision clean and steady while Pell moves to the haunches without being asked. She knows the work. Her hands are a blacksmith's hands but the economy of motion is the same — no wasted cuts, no hesitation at the joints.\n\nYou work the skull last. The tusks come free with the belt knife and a quarter-turn of the wrist, ivory-yellow and curved, dense at the base where the jaw muscle attached. You tuck them into the traveler's pack without comment. They are useful and they are yours and that is the end of it.\n\n\"Huginn had a direction before the hunt,\" you say, not stopping. \"Northwest. Felt like soon, or already — wouldn't name what was ending up there.\" You free the near shoulder and Pell takes the weight, setting it aside on clean grass. \"I'm thinking: we haul this to Aldric, I drop the load, and then I walk north along the river a half-mile and see what the water says before the light changes. You think that's worth the legs?\"\n\nPell straightens, wipes her forearm across her jaw, and looks northwest the way you might check a ridge for weather. \"The river's been wrong three weeks,\" she says. \"Another day won't change that. But if Huginn put a direction on it—\" She lets the sentence sit there, which is as close as she gets to *yes, go*. Huginn, for its part, drops from the branch, lands two feet from the bull's skull, and studies the open cavity with the calm professional interest of a thing that has seen a great many of these.",
-      "sceneSummary": "Bull dressed on the scrub oak ridge — tusks taken, party coordinates for carry to Aldric; Silas floats a river scout and Pell gives it quiet endorsement.",
+      "narration": "The carry down takes the better part of an hour. You haul the bull's haunches in relay — you and Pell trading the heaviest cuts between you while Huginn glides ahead in short hops, landing on fence-posts and fallen timber, not in a hurry. The morning stays clear and warm. By the time you reach the sedge strip, Corvin has the sow wrapped in the hide and a carrying pole cut from the hedgerow. He looks at the bulk of the bull quarters and raises his eyebrows once — not complaint, just arithmetic. The three of you redistribute without much discussion and start south.\n\nMillbrook comes back into view across the lower terraces, smoke from the cookhouse visible above the tree-line. The north gate gap is dry-stone and low, and you ease the bulk through it one piece at a time. A few villagers note the size of the haul — a woman pulling water from the well pauses, and two children trail you to the smokehouse door with undisguised interest. Huginn drops into a slouch on the smokehouse eave and tucks one foot up.\n\nAldric is at the block when you push through. He looks at the two animals — sow and bull, both dressed clean — and sets his fillet knife down with the flat deliberate motion of a man revising his inventory in his head. He doesn't say much. He says 'good work' and means it, and he calls the boy over to start hanging. You give him the short version: sow in the sedge strip before dawn, bull on the scrub oak ridge by mid-morning. He listens to the ridge detail — northwest slope, scrub oak, dry grass — and when you mention the high ground and the distance from the streambed he nods once, slow.\n\n'Boar pushing uphill,' he says, more to himself than to you. 'Three weeks ago they were working the riverside reed-beds every morning.' He squares the account without being asked — two animals, good condition, clean dressing — and adds a second parcel to your pack alongside what you already carry. Pell has drifted to lean against the doorframe, watching Aldric's arithmetic with the same attention she'd give a piece of ironwork. Once the handoff is done she looks at you, and the unfinished thread — the forge, the afternoon, the thing she agreed to see — is simply still there between you, waiting on your word.",
+      "sceneSummary": "Hunt haul delivered to Aldric at the smokehouse — both animals credited, arrangement confirmed, afternoon still open.",
       "choices": [
         {
-          "label": "Haul the bull to the smokehouse first, then head north along the river for the scout",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Tag up with Corvin first — three pairs of hands make the carry faster, and he may have noticed something from the sedge strip",
+          "label": "Tell Pell now is good — walk to the forge together and begin what you promised to show her.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "coordinate"
+            "connect",
+            "follow-through"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Pell directly: does she want to walk the river with you, or head back to the forge — the date was for after the hunt, and this could be the start of it",
+          "label": "Before the forge — ask Aldric directly about the boar pattern shift. He just named it himself; press for what he's actually been tracking.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "gather-information"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Settle the river scout question first. Tell Pell you want to go now — upstream, northwest, before the afternoon light changes — and ask if she'll come or wait.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.6,
-            "chaos_order": 0.3
-          },
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Walk Corvin out before the others leave — give him a quiet word, and see if he has anything to add about the ridge or the direction the animals have been moving.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "connect",
-            "plan"
+            "gather-information"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
-        },
+        }
+      ],
+      "deeds": [
         {
-          "label": "Follow Huginn's eye — it's sitting next to the bull's skull looking northwest; let it lead before the moment closes",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
+          "description": "Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters.",
+          "tags": [
+            "hunt",
+            "provision",
+            "community"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "weight": 2,
+          "communityId": "valley.millbrook"
         }
       ],
       "characterDeltas": {
@@ -742,160 +769,166 @@
         "energy": 0,
         "inventoryAdd": [
           {
-            "name": "Boar Tusks (pair)",
-            "kind": "misc",
-            "description": "Ivory-yellow and dense at the base — a matched pair from the scrub oak ridge bull. Raw material for something, not yet decided.",
-            "consumable": false,
-            "effects": {}
+            "name": "Preserved Trail Parcel",
+            "kind": "consumable",
+            "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road.",
+            "consumable": true,
+            "effects": {
+              "health": 0,
+              "energy": 10
+            }
           }
         ],
         "inventoryRemove": [],
         "xp": 0
       },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Both animals delivered — sow and bull, clean and dressed. Aldric confirmed the account and noted the boar have shifted uphill from the streambed over the past three weeks. River scout still outstanding."
+        }
+      ],
       "scene": {
-        "setting": "Scrub oak ridge, north wood — full early-spring morning light, sun clear and warm, shadows short. Bull dressed and quartered in dry grass, ready for carry. Sow in the sedge strip thirty yards south with Corvin.",
+        "setting": "Aldric's smokehouse, Millbrook — morning, full spring light, interior smells of salt and smoke. Animals now hanging. Aldric at the block; Corvin just inside the door; Pell leaning against the doorframe.",
         "npcsPresent": [
           {
-            "name": "Pell",
-            "state": "Standing over the dressed haunches, wiping her hands on the grass — looking northwest where you named the direction."
+            "name": "Aldric",
+            "state": "Squaring the account at the block — animals hung, tallying what he owes."
           },
           {
-            "name": "Huginn",
-            "state": "Two feet from the bull's open skull, studying the cavity with unhurried professional interest."
+            "name": "Pell",
+            "state": "Leaning against the doorframe, watching Aldric's arithmetic. The afternoon thread still open between her and Silas."
           },
           {
             "name": "Corvin",
-            "state": "Thirty yards south in the sedge strip, dressing the sow, working alone."
+            "state": "Just inside the door — pole leaned against the wall, waiting to see if anything more is needed before he heads back."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the smokehouse eave outside, one foot tucked up, not in a hurry."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear — butt driven into the earth upright, blade skyward",
-          "Bull boar — dressed and quartered in dry grass, ready for carry",
-          "Boar Tusks (pair) — now in Silas's traveler's pack",
-          "Silas's coat — on a gorse branch fifteen yards west, tusk-tear in the canvas",
-          "Dry streambed — shadow-anchors washed out, useless for Shadowstep in this light"
+          "Bull haunches — hung on the smokehouse rack",
+          "Sow — hide-wrapped, now handed off",
+          "Carrying pole — Corvin's, leaned against the wall",
+          "Aldric's fillet knife — set flat on the block",
+          "Preserved Trail Parcel (x2) — now in Silas's pack"
         ],
         "threads": [
-          "Huginn's northwest direction — named before the hunt, still unresolved",
-          "Palework channel sealed in the blade — not spent, not broken, waiting",
-          "The date at the forge — Pell's agreement stands; how this afternoon unfolds is unresolved",
-          "'Until I'm not' — Pell's phrase about the maker's mark still open",
-          "River discoloration — Mara and Aldric both want upstream information"
+          "Pell's afternoon — the forge date still open, waiting on Silas's word",
+          "Aldric's observation about the boar pushing uphill from the streambed — offered but not pressed",
+          "River scout — floated, endorsed, still unscheduled",
+          "Huginn's northwest direction — unresolved"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Worked the bull dressing without being asked — same economy as the forge. Gave quiet endorsement of the river scout when Huginn's direction was named.",
+          "npcId": "aldric",
+          "name": "Aldric",
+          "note": "Received both animals without ceremony — named the boar's upstream shift as a three-week observation. Account squared; second trail parcel added.",
           "learned": [
-            "The river has been wrong three weeks — she's been tracking it too; Huginn's northwest direction registers as meaningful to her"
+            "Boar were working riverside reed-beds every morning three weeks ago — now pushing uphill and away from the water"
           ],
           "skillsObserved": [
-            "field dressing a large animal, efficient and clean"
+            "inventory accounting under field conditions",
+            "reading animal behavior changes against the water situation"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the scrub oak ridge, dressed the bull alongside Silas — endorsing a river scout before returning to the forge."
+          "statusNote": "At the smokehouse block, animals hung and tallied — account current with Silas."
         },
         {
           "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Dropped from the branch at the end of the dressing work — studying the bull's skull cavity, positioned northwest of Silas.",
-          "learned": [
-            "Attends the opened animal with the same unhurried interest it attends any ending"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Carried her share of the bull down without comment. Now at the smokehouse doorframe — watching, waiting. The forge date is still live.",
           "status": "active",
-          "statusNote": "On the ridge, examining the dressed bull — two feet from the skull, oriented northwest."
+          "statusNote": "At the smokehouse doorframe — hunt complete, afternoon open, forge date pending Silas's word."
         },
         {
           "op": "update",
           "npcId": "corvin",
           "name": "Corvin",
-          "note": "Still dressing the sow thirty yards south — out of earshot of the ridge conversation.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "note": "Cut the carrying pole, coordinated the haul down without fuss. Now inside the smokehouse, waiting to see if he's needed.",
           "status": "active",
-          "statusNote": "In the north wood sedge strip, dressing the sow, working alone."
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
-          "flag": {
-            "bull_dressed": true,
-            "tusks_taken": true
-          }
+          "statusNote": "Inside the smokehouse door — haul complete, ready to head back to his own work."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "millbrook",
-          "label": "Millbrook",
-          "kind": "place",
-          "entityId": "millbrook",
-          "fact": "Boar tusks taken from the scrub oak ridge bull on World-day 14 — raw material, purpose undecided. Huginn positioned northwest of the kill site, attending the open animal.",
+          "topic": "aldric",
+          "label": "Aldric",
+          "kind": "person",
+          "entityId": "aldric",
+          "fact": "Aldric noted boar were working the riverside reed-beds every morning three weeks ago and have since pushed uphill away from the water — correlates exactly with the start of the gray-green discoloration.",
           "links": [
+            "millbrook",
             "aldric-provisioning-deal",
-            "pell",
-            "huginn",
-            "the-unnamed-gift"
+            "the-water-crisis"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Bull dressed and quartered on the ridge — thirty to forty minutes of field work."
+        "hoursPassed": 1.5,
+        "why": "Field dressing the bull, joining Corvin, and carrying both animals down from the north wood to the smokehouse."
       },
-      "questUpdates": [
+      "moveTo": {
+        "location": "Millbrook",
+        "why": "Carried the hunt haul down from the scrub oak ridge and sedge strip back to Aldric's smokehouse in the village."
+      },
+      "placeUpdates": [
         {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Bull dressed and ready for carry — both animals down. Party needs to tag up with Corvin and haul to the smokehouse. River scout floated and tentatively endorsed by Pell."
+          "note": "Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current.",
+          "subPlace": {
+            "name": "Smokehouse",
+            "note": "Second delivery made — bull and sow from the north wood hunt. Aldric noted boar have pushed uphill from the streambed over the past three weeks.",
+            "visited": true
+          }
         }
       ]
     },
     "sceneState": {
-      "setting": "Scrub oak ridge, north wood — full early-spring morning light, sun clear and warm, shadows short. Bull dressed and quartered in dry grass, ready for carry. Sow in the sedge strip thirty yards south with Corvin.",
+      "setting": "Aldric's smokehouse, Millbrook — morning, full spring light, interior smells of salt and smoke. Animals now hanging. Aldric at the block; Corvin just inside the door; Pell leaning against the doorframe.",
       "npcsPresent": [
         {
-          "name": "Pell",
-          "state": "Standing over the dressed haunches, wiping her hands on the grass — looking northwest where you named the direction."
+          "name": "Aldric",
+          "state": "Squaring the account at the block — animals hung, tallying what he owes."
         },
         {
-          "name": "Huginn",
-          "state": "Two feet from the bull's open skull, studying the cavity with unhurried professional interest."
+          "name": "Pell",
+          "state": "Leaning against the doorframe, watching Aldric's arithmetic. The afternoon thread still open between her and Silas."
         },
         {
           "name": "Corvin",
-          "state": "Thirty yards south in the sedge strip, dressing the sow, working alone."
+          "state": "Just inside the door — pole leaned against the wall, waiting to see if anything more is needed before he heads back."
+        },
+        {
+          "name": "Huginn",
+          "state": "On the smokehouse eave outside, one foot tucked up, not in a hurry."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear — butt driven into the earth upright, blade skyward",
-        "Bull boar — dressed and quartered in dry grass, ready for carry",
-        "Boar Tusks (pair) — now in Silas's traveler's pack",
-        "Silas's coat — on a gorse branch fifteen yards west, tusk-tear in the canvas",
-        "Dry streambed — shadow-anchors washed out, useless for Shadowstep in this light"
+        "Bull haunches — hung on the smokehouse rack",
+        "Sow — hide-wrapped, now handed off",
+        "Carrying pole — Corvin's, leaned against the wall",
+        "Aldric's fillet knife — set flat on the block",
+        "Preserved Trail Parcel (x2) — now in Silas's pack"
       ],
       "threads": [
-        "Huginn's northwest direction — named before the hunt, still unresolved",
-        "Palework channel sealed in the blade — not spent, not broken, waiting",
-        "The date at the forge — Pell's agreement stands; how this afternoon unfolds is unresolved",
-        "'Until I'm not' — Pell's phrase about the maker's mark still open",
-        "River discoloration — Mara and Aldric both want upstream information"
+        "Pell's afternoon — the forge date still open, waiting on Silas's word",
+        "Aldric's observation about the boar pushing uphill from the streambed — offered but not pressed",
+        "River scout — floated, endorsed, still unscheduled",
+        "Huginn's northwest direction — unresolved"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 1,
-    "hour": 23,
+    "day": 2,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -915,14 +948,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Hunt party cleared the north gate at pre-dawn — moving into the meadow, Huginn holding north, two or three presences still ahead.",
         "Bull track reads northwest toward drier scrub — destination unclear. Sow and young twenty minutes ahead in the sedge strip. Hunt party holding at the tree-line.",
         "Sow taken in the north wood — clean kill, Corvin's strike. Meat for delivery to the smokehouse. Huginn still threading north toward unaccounted presences.",
         "Order-Sense confirms the bull is on the scrub oak ridge a quarter-mile north — still huntable, heading clear.",
         "Approach plan set — Pell holds the spear and the set position below the first oak; Silas draws the bull as bait and exits via shadowstep.",
         "Bull taken on the scrub oak ridge — sow already dressed by Corvin in the sedge strip. Two animals to deliver. Rune-channel backlash unresolved.",
         "Bull taken and spear recovered. Both animals down — sow with Corvin in the sedge strip, bull on the scrub oak ridge. Ready for carry to the smokehouse once dressed. Rune-channel refusal unresolved; to be examined at the forge.",
-        "Bull dressed and ready for carry — both animals down. Party needs to tag up with Corvin and haul to the smokehouse. River scout floated and tentatively endorsed by Pell."
+        "Bull dressed and ready for carry — both animals down. Party needs to tag up with Corvin and haul to the smokehouse. River scout floated and tentatively endorsed by Pell.",
+        "Both animals delivered — sow and bull, clean and dressed. Aldric confirmed the account and noted the boar have shifted uphill from the streambed over the past three weeks. River scout still outstanding."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -987,7 +1020,7 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d1] Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage",
         "[d1] Order-Sense read the operation around him — fixed accounts, regular customers, the weight falling on fish quality; he's absorbing slow loss from the catch decline. Silas named hims",
@@ -995,25 +1028,28 @@
         "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
         "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t",
         "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s",
-        "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean."
+        "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean.",
+        "[d1] Received both animals without ceremony — named the boar's upstream shift as a three-week observation. Account squared; second trail parcel added."
       ],
       "knownFacts": [
-        "Gray-gilled perch suggest quality has been sliding for some time, not just today",
         "His name is Aldric",
         "He's aware the gray-green water comes from upstream and has been watching it",
         "He runs fixed accounts — the catch decline is already hitting his regular customers",
         "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
         "Telling Mara 'the smokehouse sent you' waives her finder's fee",
         "No bowyer currently in Millbrook — position unfilled since two winters ago",
-        "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit"
+        "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit",
+        "Boar were working riverside reed-beds every morning three weeks ago — now pushing uphill and away from the water"
       ],
       "skillsObserved": [
         "fillet work",
         "supply accounting",
-        "practical negotiation"
+        "practical negotiation",
+        "inventory accounting under field conditions",
+        "reading animal behavior changes against the water situation"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse, back to filleting after the delivery.",
+      "statusNote": "At the smokehouse block, animals hung and tallied — account current with Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1030,7 +1066,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Received the compliment and the date-question dry and without deflection — confirmed she is enjoying it, let her shoulder brush Silas's in the narrowing corridor and didn't step aw",
         "[d1] Read Silas's stillness and slowed without being asked — nodded once when he named the ridge, the same way she reads the anvil.",
         "[d1] Took the spear without ceremony, tested the balance and the socket lashing, read the wind and the ridge, and laid out a clean tactical approach — Silas bait east, she sets below th",
         "[d1] Received the spear-marriage joke, suppressed a genuine laugh, returned a dry counterpunch ('the married part I'll need in writing'), and moved to her set position without further c",
@@ -1039,7 +1074,8 @@
         "[d1] Named what she saw — 'You went down. The rune fired backward.' — watching Silas's hands on the shaft, reading the material the same way she reads ironwork. Waiting.",
         "[d1] Placed her thumb on the maker's mark at Silas's ask — assisted the Order-Sense diagnostic. Just heard that her mark reads as 'still becoming' and that it sealed the binding at the ",
         "[d1] Received the 'still becoming' diagnosis plainly — absorbed it as a measurement, not a burden. Named her own place in the binding: 'half mine until I'm not.' Returned Silas's dry hu",
-        "[d1] Worked the bull dressing without being asked — same economy as the forge. Gave quiet endorsement of the river scout when Huginn's direction was named."
+        "[d1] Worked the bull dressing without being asked — same economy as the forge. Gave quiet endorsement of the river scout when Huginn's direction was named.",
+        "[d1] Carried her share of the bull down without comment. Now at the smokehouse doorframe — watching, waiting. The forge date is still live."
       ],
       "knownFacts": [
         "The rune-channel in the spear misfired at the kill moment — Silas went down to his knees from the backlash; the strike was hers alone",
@@ -1060,7 +1096,7 @@
         "field dressing a large animal, efficient and clean"
       ],
       "status": "active",
-      "statusNote": "On the scrub oak ridge, dressed the bull alongside Silas — endorsing a river scout before returning to the forge.",
+      "statusNote": "At the smokehouse doorframe — hunt complete, afternoon open, forge date pending Silas's word.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1120,7 +1156,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d1] Briefed the party on boar ground — wet strip along the fence-line, mornings, quarter mile in. Noted sounder pushing higher ground due to river smell on low air. Said it flat, like ",
         "[d1] Received Silas's ground-read without comment — waiting for the party to settle on an approach.",
         "[d1] Read Silas's posture without asking — shifted grip and offered the question silently. Waiting for the report.",
         "[d1] Held the west fence-line cleanly on approach — stayed in shadow, no sound. Watching Silas for the signal.",
@@ -1129,7 +1164,8 @@
         "[d1] Received the acknowledgment with a nod and a palm-flat on the sow's flank — then drew his knife and began dressing without ceremony.",
         "[d1] Received the handoff cleanly — no argument, back to the dressing work.",
         "[d1] Dressing the sow in the sedge strip — out of earshot of the ridge work.",
-        "[d1] Still dressing the sow thirty yards south — out of earshot of the ridge conversation."
+        "[d1] Still dressing the sow thirty yards south — out of earshot of the ridge conversation.",
+        "[d1] Cut the carrying pole, coordinated the haul down without fuss. Now inside the smokehouse, waiting to see if he's needed."
       ],
       "knownFacts": [
         "Will be at the north gate before the light gets high on World-day 14",
@@ -1150,7 +1186,7 @@
         "immediate transition to post-kill work without ceremony"
       ],
       "status": "active",
-      "statusNote": "In the north wood sedge strip, dressing the sow, working alone.",
+      "statusNote": "Inside the smokehouse door — haul complete, ready to head back to his own work.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
@@ -1161,7 +1197,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Hunt party assembled at the east furlong on World-day 13 morning — Corvin accepted the modified light spear-tip and confirmed for tomorrow's hunt.",
         "[d1] Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out.",
         "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work.",
         "[d1] Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name.",
@@ -1172,7 +1207,8 @@
         "[d1] Sow killed in the sedge strip on World-day 14 pre-dawn — ground disturbed, piglets scattered north. The strip now reads as hunted.",
         "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
         "[d1] Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep.",
-        "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry."
+        "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
+        "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1209,7 +1245,7 @@
           "name": "Smokehouse",
           "day": 1,
           "visited": true,
-          "note": "First delivery made — rabbits and pigeon on the rack; Aldric named Mara Wells (red door, east of the well) as the source"
+          "note": "Second delivery made — bull and sow from the north wood hunt. Aldric noted boar have pushed uphill from the streambed ov"
         },
         "pell-s-forge": {
           "name": "Pell's Forge",
@@ -1460,11 +1496,13 @@
         "label": "Aldric",
         "kind": "person",
         "facts": [
-          "[d1] Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas o"
+          "[d1] Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas o",
+          "[d1] Aldric noted boar were working the riverside reed-beds every morning three weeks ago and have since pushed uphill away from the water — correlates exactly with the start of the gray-green discoloratio"
         ],
         "links": [
           "millbrook",
-          "aldric-provisioning-deal"
+          "aldric-provisioning-deal",
+          "the-water-crisis"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1660,14 +1698,14 @@
     }
   },
   "tendencies": {
-    "strategic": 44.94129841134982,
-    "cerebral": 23.84622800298849,
-    "social": 44.976946924160885,
-    "generous": 8.231395329505894,
-    "cautious": 21.81740597690493,
-    "physical": 1.9121634460016794,
-    "risky": 0.9511101304657719,
-    "ruthless": 0.9752487531218751
+    "strategic": 45.71659191929307,
+    "cerebral": 23.726996862973547,
+    "social": 44.75206218954008,
+    "generous": 9.190238352858364,
+    "cautious": 21.708318947020405,
+    "physical": 1.902602628771671,
+    "risky": 0.946354579813443,
+    "ruthless": 0.9703725093562657
   },
   "aptitudes": [
     "strategist",
@@ -1675,7 +1713,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 94,
+  "actionCount": 95,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1729,8 +1767,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783994561377,
-  "rev": 148,
+  "updatedAt": 1783995070757,
+  "rev": 149,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1857,7 +1895,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 4.5
+    "marrow": 5
   },
   "customAbilities": {},
   "precursorAccess": [],

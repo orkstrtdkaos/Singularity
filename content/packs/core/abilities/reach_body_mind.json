@@ -755,6 +755,117 @@
           "cannot": null
         }
       ]
+    },
+    {
+      "id": "the_shaped_body",
+      "name": "The Shaped Body",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.4
+      },
+      "effectTags": [
+        "transform",
+        "adapt",
+        "discipline"
+      ],
+      "narrationHints": "Train the body past what the body thinks it can be. A new configuration, held.",
+      "description": "Reshape a physical capacity through extreme, focused training \u2014 not temporary effort, but permanent change in what the body is capable of.",
+      "notFor": [],
+      "tradition": "somatic",
+      "harmRung": "none",
+      "functions": [
+        "transform",
+        "sustain"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "craft",
+        "physical"
+      ],
+      "challengeProfile": {
+        "cognitive": 0.1,
+        "physical": 0.8,
+        "social": 0.1
+      },
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Focused Adaptation",
+          "grants": "Through extreme, focused training, significantly alter one specific physical capacity \u2014 grip strength, pain threshold, cold tolerance, sprinting burst \u2014 in ways ordinary training doesn't reach.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "New Configuration",
+          "grants": "Reshape something structural about how you move across weeks of sustained effort \u2014 a different gait, a changed shoulder set, a fundamental adaptation that the body now holds.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Body Is Clay",
+          "grants": "You have worked your body long enough to know it as material. Any physical capacity you turn full, sustained attention to becomes, in time, what you need it to be.",
+          "cannot": null
+        }
+      ]
+    },
+    {
+      "id": "the_weight_of_presence",
+      "name": "The Weight of Presence",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3,
+        "violence_peace": 0.1
+      },
+      "effectTags": [
+        "authority",
+        "gravity",
+        "presence"
+      ],
+      "narrationHints": "Full inhabitation of a body has a gravity. Other bodies feel it before the mind does.",
+      "description": "Your physical presence is difficult to ignore or act against \u2014 not threat, but the authority of someone completely at home in their body.",
+      "notFor": [],
+      "tradition": "somatic",
+      "harmRung": "none",
+      "functions": [
+        "command",
+        "bind"
+      ],
+      "challengeTypes": [
+        "social",
+        "tactical",
+        "intimidation"
+      ],
+      "challengeProfile": {
+        "cognitive": 0.1,
+        "physical": 0.5,
+        "social": 0.4
+      },
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Present Weight",
+          "grants": "Your physical presence in a space is difficult to ignore \u2014 people make room, the uneasy grow more so, those considering action against you reconsider.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Organizing Fact",
+          "grants": "Command a space through presence alone \u2014 enter a room and it restructures; stand still and the situation organizes itself relative to where you are.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Immovable Ground",
+          "grants": "Your presence is the fixed fact in a room. Anyone who would act against you must first account for what your body represents \u2014 and most find they cannot.",
+          "cannot": null
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 \u2014 24 verbs, 8 families)"

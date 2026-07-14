@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 4,
-  "xp": 396,
+  "level": 5,
+  "xp": 401,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -39,14 +39,14 @@
     "violence_peace": 0.0335,
     "chaos_order": 0.13401196436328122,
     "mechanical_spiritual": 0.107038372109375,
-    "concrete_abstract": -0.01985499531249999,
-    "death_life": -0.099217167578125
+    "concrete_abstract": -0.02886224554687499,
+    "death_life": -0.10925630919921875
   },
-  "attunement": 4,
-  "maxHealth": 45,
-  "health": 45,
-  "maxEnergy": 115,
-  "energy": 50,
+  "attunement": 5,
+  "maxHealth": 50,
+  "health": 50,
+  "maxEnergy": 120,
+  "energy": 120,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -837,117 +837,94 @@
         "player": "Use Order-Sense on Pell herself — lightly, with her awareness and consent — to read the structure of what her craft has become. Show her what the pattern looks like from outside it.",
         "summary": "Order-Sense reached the edges of Pell's craft but not the heart — the moment the iron spoke lives between hand and metal, not in any readable structure.",
         "narration": "You settle into the familiar reach of Order-Sense — the light touch, the listening posture, the way the pattern beneath a thing surfaces when you stop pressing for it. You have her consent; she's watching you with that same careful attention she gave the spear all night.\n\nBut the lattice here is thin, and what's thinner still is the substrate of craft itself — the structure you're reaching for isn't a crowd's schedule or a ritual's hidden rule. It's a person's eleven years of accumulated knowing, and that is not the same kind of pattern. You find the edges of it: the economy of her movements, the way she holds a tool slightly differently when she's working iron she trusts. But the deeper grammar — the grain of what happened when her hand and the metal became one conversation — slides away from you. The ability is not failing; it's meeting the right kind of resistance. A person's learned body-knowledge doesn't answer the Lattice the way a system does. It is not made of rules. It is made of repetition, and repetition is not structure — not this kind.\n\nYou surface cleanly. No lurch, no cost beyond the energy already spent. You meet her eyes and tell her the truth: you could read the edges — the economy, the sureness — but the heart of it, the moment the iron spoke, that's not a pattern Order-Sense can reach. It lives somewhere between your hand and the metal, and it doesn't have a form outside of doing it. \"I think,\" you say, \"the only way to understand it is to be at a bench with a piece in front of you.\""
+      },
+      {
+        "player": "Ask her to walk you through the double-stamp on a piece of scrap iron — her hands, not her words — and use Deathsense quietly to feel whether Memory's register shifts while she's doing it.",
+        "summary": "Pell demonstrated the double-stamp on scrap iron; Deathsense caught a faint sympathetic resonance between her hands and Memory while she worked.",
+        "narration": "You set your cup down on the bench and gesture toward the scrap pile in the corner — a few offcuts and a collar-blank Pell hasn't sorted yet. \"Not your words,\" you say. \"Your hands.\"\n\nShe looks at you a moment, then sets her own cup down and picks up the collar-blank. The movement is immediate, unhurried. She turns the piece once in her left hand — reading it, though she wouldn't call it that — and then takes up the double-stamp punch from the rack without looking for it. Her body knows where it lives. She positions the blank on the near horn of the anvil, seats the punch, and strikes. Once, clean. Then she feels the iron settle — you can see it in how she waits, the breath between strikes — and brings the punch down a second time exactly over the first. The mark lands true.\n\nYou hold Deathsense lightly while she works, conserving it — not reaching, just attending. It costs you almost nothing to listen. Memory's register is steady on the bench beside you, its clean end-to-end hum unchanged. But while Pell's hands are on the collar-blank, working that familiar sequence she has done a thousand times, you catch something at the edge: a faint sympathetic resonance between her and the spear. Not signal, not call. More like two instruments tuned to the same room. The moment she lifts the punch it fades back to nothing, and Memory's register settles again to its own clean tone.\n\nPell sets the blank down. \"That's the double-stamp,\" she says. Then she looks at you, reading your face the way she reads iron. \"Something moved.\"\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
       }
     ],
     "lastTurn": {
-      "narration": "You settle into the familiar reach of Order-Sense — the light touch, the listening posture, the way the pattern beneath a thing surfaces when you stop pressing for it. You have her consent; she's watching you with that same careful attention she gave the spear all night.\n\nBut the lattice here is thin, and what's thinner still is the substrate of craft itself — the structure you're reaching for isn't a crowd's schedule or a ritual's hidden rule. It's a person's eleven years of accumulated knowing, and that is not the same kind of pattern. You find the edges of it: the economy of her movements, the way she holds a tool slightly differently when she's working iron she trusts. But the deeper grammar — the grain of what happened when her hand and the metal became one conversation — slides away from you. The ability is not failing; it's meeting the right kind of resistance. A person's learned body-knowledge doesn't answer the Lattice the way a system does. It is not made of rules. It is made of repetition, and repetition is not structure — not this kind.\n\nYou surface cleanly. No lurch, no cost beyond the energy already spent. You meet her eyes and tell her the truth: you could read the edges — the economy, the sureness — but the heart of it, the moment the iron spoke, that's not a pattern Order-Sense can reach. It lives somewhere between your hand and the metal, and it doesn't have a form outside of doing it. \"I think,\" you say, \"the only way to understand it is to be at a bench with a piece in front of you.\"",
-      "sceneSummary": "Order-Sense reached the edges of Pell's craft but not the heart — the moment the iron spoke lives between hand and metal, not in any readable structure.",
+      "narration": "You set your cup down on the bench and gesture toward the scrap pile in the corner — a few offcuts and a collar-blank Pell hasn't sorted yet. \"Not your words,\" you say. \"Your hands.\"\n\nShe looks at you a moment, then sets her own cup down and picks up the collar-blank. The movement is immediate, unhurried. She turns the piece once in her left hand — reading it, though she wouldn't call it that — and then takes up the double-stamp punch from the rack without looking for it. Her body knows where it lives. She positions the blank on the near horn of the anvil, seats the punch, and strikes. Once, clean. Then she feels the iron settle — you can see it in how she waits, the breath between strikes — and brings the punch down a second time exactly over the first. The mark lands true.\n\nYou hold Deathsense lightly while she works, conserving it — not reaching, just attending. It costs you almost nothing to listen. Memory's register is steady on the bench beside you, its clean end-to-end hum unchanged. But while Pell's hands are on the collar-blank, working that familiar sequence she has done a thousand times, you catch something at the edge: a faint sympathetic resonance between her and the spear. Not signal, not call. More like two instruments tuned to the same room. The moment she lifts the punch it fades back to nothing, and Memory's register settles again to its own clean tone.\n\nPell sets the blank down. \"That's the double-stamp,\" she says. Then she looks at you, reading your face the way she reads iron. \"Something moved.\"\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
+      "sceneSummary": "Pell demonstrated the double-stamp on scrap iron; Deathsense caught a faint sympathetic resonance between her hands and Memory while she worked.",
       "choices": [
         {
-          "label": "Offer to stay while she works — let her make something simple at the bench, and watch what her hands do when she forgets to explain herself.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "watch",
-            "careful",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask her to walk you through the double-stamp on a piece of scrap iron — her hands, not her words — and use Deathsense quietly to feel whether Memory's register shifts while she's doing it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3,
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful",
-            "ability"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Acknowledge the limit plainly and shift the conversation — neither of you has slept. Suggest she rest, and that the understanding can be built over time, not in one dawn.",
+          "label": "Name what you felt — the resonance between her and Memory while her hands were working — and ask if she's ever felt something like it on another piece.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.2
-          },
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "share",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Present her with the river whetstone — the one still sitting on the bench, ungiven. Let the gift close the night without forcing the question of what happened in her hand.",
+          "label": "Hand her Memory and ask her to do the double-stamp again — this time with the spear in her hands instead of scrap.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "experiment",
+            "risky"
+          ],
+          "abilityId": "deathsense"
+        },
+        {
+          "label": "Tell her what you felt and then present the river whetstone — the night is done, the work is done, and this belongs on her bench.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.1,
-            "death_life": 0.1
-          },
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "gift"
+            "gift",
+            "close"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "The morning is arriving and neither of you has slept. Suggest she keep the scrap piece — the mark is true, and she made it while something was listening — and step outside for air before the village wakes.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "rest",
+            "transition"
+          ],
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups in hand.",
+        "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups set down on the bench.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Watching Silas with careful attention — having heard the honest limit, cup in both hands, waiting."
+            "state": "Standing at the anvil, collar-blank and punch just set down, watching Silas's face — she knows something moved."
           },
           {
             "name": "Huginn",
-            "state": "Still on its perch, wings flat, attending."
+            "state": "On its perch, wings flat, attending."
           }
         ],
         "objects": [
           "Deathbound Runic Spear 'Memory' (fully repaired, named, on the bench)",
-          "Resin Mountain Wine (open, bottle on bench, two cups poured)",
+          "Resin Mountain Wine (open, bottle on bench, two cups set down)",
           "Dried Starfruit sealed packet (open, cloth folded back)",
-          "River whetstone (on bench — not yet formally presented)",
+          "River whetstone (on bench — not yet formally given)",
           "Spent rune-wax stub (on bench)",
           "Rune-Craft Kit (spent further, on bench)",
           "South pit fire (coaled to low orange)",
-          "Drawing salve tin (shelf above bench)"
+          "Drawing salve tin (shelf above bench)",
+          "Collar-blank scrap (on anvil horn — double-stamp mark freshly pressed, true)"
         ],
         "threads": [
-          "River whetstone still on the bench — not yet formally given",
-          "Pell has heard the honest limit of Order-Sense; the question of understanding what happened in her hand remains open",
-          "Neither of them has slept — the morning is arriving"
+          "Pell saw something in Silas's face — she knows the Deathsense caught something and is waiting to hear what",
+          "River whetstone still on the bench — not yet formally presented",
+          "Neither of them has slept — the morning is fully arriving"
         ]
       },
       "npcUpdates": [
@@ -955,68 +932,66 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives between hand and metal, not in any readable structure outside the doing of it.",
+          "note": "Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'",
           "learned": [
-            "Order-Sense could read the edges of her craft — the economy, the sureness — but not the heart of the moment the iron spoke",
-            "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it"
+            "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something happened in Silas's face"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "double-stamp execution from body-memory, no hesitation",
+            "reading a person's reaction at craft-level precision"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge bench at dawn, cup in hand, having heard the honest limit — the question of what happened in her hand remains open between them."
+          "statusNote": "At the forge anvil at dawn, collar-blank just set down, waiting to hear what Silas's Deathsense found."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "pell",
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice the way a system does. The understanding of what happened in her hand lives between hand and metal, only accessible in the doing.",
+          "fact": "While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two instruments tuned to the same room.",
           "links": [
             "death-bound-spear",
+            "deathsense",
             "millbrook",
-            "order-sense",
-            "palework"
+            "the-unnamed-gift"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the forge bench"
-      },
-      "generateRequest": [],
-      "encounterOps": []
+        "why": "a brief practical demonstration at the anvil"
+      }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups in hand.",
+      "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups set down on the bench.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Watching Silas with careful attention — having heard the honest limit, cup in both hands, waiting."
+          "state": "Standing at the anvil, collar-blank and punch just set down, watching Silas's face — she knows something moved."
         },
         {
           "name": "Huginn",
-          "state": "Still on its perch, wings flat, attending."
+          "state": "On its perch, wings flat, attending."
         }
       ],
       "objects": [
         "Deathbound Runic Spear 'Memory' (fully repaired, named, on the bench)",
-        "Resin Mountain Wine (open, bottle on bench, two cups poured)",
+        "Resin Mountain Wine (open, bottle on bench, two cups set down)",
         "Dried Starfruit sealed packet (open, cloth folded back)",
-        "River whetstone (on bench — not yet formally presented)",
+        "River whetstone (on bench — not yet formally given)",
         "Spent rune-wax stub (on bench)",
         "Rune-Craft Kit (spent further, on bench)",
         "South pit fire (coaled to low orange)",
-        "Drawing salve tin (shelf above bench)"
+        "Drawing salve tin (shelf above bench)",
+        "Collar-blank scrap (on anvil horn — double-stamp mark freshly pressed, true)"
       ],
       "threads": [
-        "River whetstone still on the bench — not yet formally given",
-        "Pell has heard the honest limit of Order-Sense; the question of understanding what happened in her hand remains open",
-        "Neither of them has slept — the morning is arriving"
+        "Pell saw something in Silas's face — she knows the Deathsense caught something and is waiting to hear what",
+        "River whetstone still on the bench — not yet formally presented",
+        "Neither of them has slept — the morning is fully arriving"
       ]
     }
   },
@@ -1164,7 +1139,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named her maker's mark — a double-stamp pressed at the moment a piece is finished — and described feeling the kill close through her hand rather than the spear, like pressing a sta",
         "[d2] Watched Silas demonstrate Palework on the spent rune-wax — observed the ability directly for the first time. Now looking at the transverse fault he indicated in the blade.",
         "[d2] Agreed plainly to plan the repair together — 'Yes', no ceremony. Now holding the transverse fault and asking the right structural question: does it need deepening, rewriting, or re",
         "[d2] Re-seated her maker's mark under guidance — slightly off-true, accepted the variance without complaint. Deepened the transverse channel cleanly on a single pass. Wiped the chisel a",
@@ -1173,28 +1147,29 @@
         "[d2] Received starfruit and wine at dawn — went somewhere briefly when she tasted the starfruit, came back without explaining. Heard Memory named. Drinking quietly.",
         "[d2] Explained the oblique stamp — the iron told her hand where to go; she's never had a piece do that before. Named it plainly, without distress.",
         "[d2] Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what hap",
-        "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw"
+        "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw",
+        "[d2] Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'"
       ],
       "knownFacts": [
-        "Silas frames the oblique axis as room made — for something found, or someone",
         "She has used the double-stamp for eleven years — it always lands true on pieces she knows well",
         "With Memory, she pressed where the iron said to go — and the iron told her; that has never happened before",
         "She frames it as the piece needing more room than she usually leaves, and the piece knowing it",
         "What happened in her hand when the mark landed oblique was her craft deep enough that piece and hand are the same conversation — Silas's framing, accepted.",
         "She wants to understand the moment of the oblique stamp more fully — the grain-reading, the register, what happened in her palm.",
         "Order-Sense could read the edges of her craft — the economy, the sureness — but not the heart of the moment the iron spoke",
-        "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it"
+        "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it",
+        "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something ha"
       ],
       "skillsObserved": [
-        "reading a repair problem at the structural level without bei",
-        "chasing chisel work at precision depth — single clean pass o",
         "accepting a known variance and naming it rather than reworki",
         "staying present through a six-hour repair without flagging",
         "precise pressure work on a cooling joint without instruction",
-        "articulating a craft first without dramatizing it"
+        "articulating a craft first without dramatizing it",
+        "double-stamp execution from body-memory, no hesitation",
+        "reading a person's reaction at craft-level precision"
       ],
       "status": "active",
-      "statusNote": "At the forge bench at dawn, cup in hand, having heard the honest limit — the question of what happened in her hand remains open between them.",
+      "statusNote": "At the forge anvil at dawn, collar-blank just set down, waiting to hear what Silas's Deathsense found.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1472,8 +1447,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1643,7 +1618,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Accepts competence as currency — naming the froe's sprung collar (not just 'bent') closed the deal. Backlog labor in exchange for hunting company north of the village, terms agreed.",
           "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
           "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
           "[d1] Sold the mid-weight spear-tip to Silas and modified the light point for Corvin with a stop-lug — labor credit from the backlog deducted clean. Transaction done in the same flat register as everything ",
@@ -1666,7 +1640,8 @@
           "[d2] Recognized old pass-circuit starfruit by taste at dawn — went somewhere briefly, came back without saying where. Received the naming of Memory without ceremony.",
           "[d2] The oblique stamp on Memory was not a slip — the iron told her hand where to go. She has made the double-stamp for eleven years and it has never done that before. She frames it as the piece needing mo",
           "[d2] Accepted the framing that the oblique stamp was her craft deep enough to become the same conversation as the iron — not the piece overriding her hand. Has asked explicitly to understand the moment mor",
-          "[d2] Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice t"
+          "[d2] Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice t",
+          "[d2] While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two i"
         ],
         "links": [
           "mara-wells",
@@ -1817,14 +1792,14 @@
     }
   },
   "tendencies": {
-    "strategic": 49.45508755338413,
-    "cerebral": 33.79991357101321,
-    "social": 54.26587578319448,
-    "generous": 13.008320652565933,
-    "cautious": 23.309859955765962,
-    "physical": 1.7039461628639874,
-    "risky": 0.8475428503023453,
-    "ruthless": 0.8690529955452602
+    "strategic": 49.20781211561721,
+    "cerebral": 34.63091400315814,
+    "social": 53.99454640427851,
+    "generous": 12.943279049303104,
+    "cautious": 24.193310655987133,
+    "physical": 1.6954264320496675,
+    "risky": 0.8433051360508336,
+    "ruthless": 0.8647077305675338
   },
   "aptitudes": [
     "strategist",
@@ -1832,10 +1807,18 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 117,
+  "actionCount": 118,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Silas Weir",
+      "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
+      "caption": "Silas Weir — level 5",
+      "worldDay": 14,
+      "at": "2026-07-14T13:56:30.843Z"
+    },
     {
       "kind": "moment",
       "prompt": "A forge bench in orange coal-light, deep night. A long iron-tipped spear laid flat between two people — a lean scarred man and a broad-shouldered woman with a chisel in her hand, both leaning over the",
@@ -1893,9 +1876,9 @@
       "at": "2026-07-12T12:41:03.559Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1784037308415,
-  "rev": 178,
+  "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
+  "updatedAt": 1784037390843,
+  "rev": 179,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2038,7 +2021,7 @@
       "lightsense": 2,
       "order_sense": 27,
       "palework": 10,
-      "deathsense": 8,
+      "deathsense": 9,
       "shadowstep": 2
     },
     "coActivations": {

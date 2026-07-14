@@ -746,128 +746,174 @@
         "player": "Ask one follow-up: does Pell have anyone — or has she, recently? Better to know before you walk in.",
         "summary": "Mara tells Silas that Pell is unattached — a tinker from the heights, three years back, ended quietly. Warns him not to over-engineer the approach.",
         "narration": "Mara's expression doesn't shift much — a small compression at one corner of her mouth, the kind that precedes honesty rather than deflection.\n\n\"Not currently,\" she says, in the same tone she'd use to report stock levels. \"There was someone, maybe three years back — a tinker from the heights who came through twice a year. It ran quiet and steady for a while. Then it didn't. He stopped coming through.\" She straightens a jar on the shelf behind her with one knuckle, a purely habitual gesture. \"I don't know if it ended clean or not. Pell didn't say and I didn't ask. She's not the kind you ask twice.\"\n\nShe turns back to you, and there's a slight narrowing to her attention — not unfriendly, but precise. \"What I'll tell you, for free: she doesn't hold a torch. She just moves at her own pace and doesn't apologize for it. If you go in there trying to read the room before you say a thing, she'll know you're doing it.\" A short pause. \"Wine and starfruit is good. Showing up with your hands busy and your mouth quiet is better. Let the afternoon be what it is.\"\n\nHuginn makes a sound from the doorstep outside — not a word, just a low, settled croak, the kind it makes when it has been waiting long enough and finds the wait unremarkable. The forge is across the village. The fire will be ready by early afternoon, if Pell runs true."
+      },
+      {
+        "player": "Head to the forge now — clean up from the hunt, arrive early, let the afternoon settle on its own terms.",
+        "summary": "Silas cleans up from the hunt at the forge, gifts set by the door, fire building in the south pit.",
+        "narration": "You thank Mara, tuck the wine and the starfruit packet under one arm, and step out into the morning. Huginn is on the eave-peg above the door, watching a dog cross the lane with the focused indifference of something that has outlasted every dog it has ever seen. It drops onto your shoulder without ceremony as you turn south.\n\nThe forge is a ten-minute walk — past the well, down the south lane, past the elder's post with its hand-chalked notice board. The air is cool still, spring light slant and clean through the upper gardens, and the smell of fresh-turned earth follows you most of the way before the coal smoke from Pell's fire takes over. She said she'd have it ready. She was not wrong: a thin column of gray-white rises from behind the forge wall as you come through the gate, and the metallic warmth of a young fire reaches you at the door.\n\nPell is at the near bench with her back to you, one boot off, doing something with the lacing. She doesn't look up. 'Water's in the bucket,' she says. 'Soap's on the ledge. Apron's on the hook if you need it.' The instructions land like she wrote them before you arrived — practical, unhurried, no ceremony. The south pit has a small neat fire, not yet working heat but building toward it. The whetstone you gave her is on the bench where you last saw it, the surface newly wiped.\n\nYou set the wine and the starfruit near the door where they won't catch smoke, strip down to the useful layers, and make use of the bucket. The hunt smell comes off in stages — river mud, green bark, the specific copper note of a kill — and by the time you're done the water is opaque and Huginn has relocated to the ridge-beam above the pit, watching the fire the way it watches most things: as if it knows what comes next and is content to let it happen."
       }
     ],
     "lastTurn": {
-      "narration": "Mara's expression doesn't shift much — a small compression at one corner of her mouth, the kind that precedes honesty rather than deflection.\n\n\"Not currently,\" she says, in the same tone she'd use to report stock levels. \"There was someone, maybe three years back — a tinker from the heights who came through twice a year. It ran quiet and steady for a while. Then it didn't. He stopped coming through.\" She straightens a jar on the shelf behind her with one knuckle, a purely habitual gesture. \"I don't know if it ended clean or not. Pell didn't say and I didn't ask. She's not the kind you ask twice.\"\n\nShe turns back to you, and there's a slight narrowing to her attention — not unfriendly, but precise. \"What I'll tell you, for free: she doesn't hold a torch. She just moves at her own pace and doesn't apologize for it. If you go in there trying to read the room before you say a thing, she'll know you're doing it.\" A short pause. \"Wine and starfruit is good. Showing up with your hands busy and your mouth quiet is better. Let the afternoon be what it is.\"\n\nHuginn makes a sound from the doorstep outside — not a word, just a low, settled croak, the kind it makes when it has been waiting long enough and finds the wait unremarkable. The forge is across the village. The fire will be ready by early afternoon, if Pell runs true.",
-      "sceneSummary": "Mara tells Silas that Pell is unattached — a tinker from the heights, three years back, ended quietly. Warns him not to over-engineer the approach.",
+      "narration": "You thank Mara, tuck the wine and the starfruit packet under one arm, and step out into the morning. Huginn is on the eave-peg above the door, watching a dog cross the lane with the focused indifference of something that has outlasted every dog it has ever seen. It drops onto your shoulder without ceremony as you turn south.\n\nThe forge is a ten-minute walk — past the well, down the south lane, past the elder's post with its hand-chalked notice board. The air is cool still, spring light slant and clean through the upper gardens, and the smell of fresh-turned earth follows you most of the way before the coal smoke from Pell's fire takes over. She said she'd have it ready. She was not wrong: a thin column of gray-white rises from behind the forge wall as you come through the gate, and the metallic warmth of a young fire reaches you at the door.\n\nPell is at the near bench with her back to you, one boot off, doing something with the lacing. She doesn't look up. 'Water's in the bucket,' she says. 'Soap's on the ledge. Apron's on the hook if you need it.' The instructions land like she wrote them before you arrived — practical, unhurried, no ceremony. The south pit has a small neat fire, not yet working heat but building toward it. The whetstone you gave her is on the bench where you last saw it, the surface newly wiped.\n\nYou set the wine and the starfruit near the door where they won't catch smoke, strip down to the useful layers, and make use of the bucket. The hunt smell comes off in stages — river mud, green bark, the specific copper note of a kill — and by the time you're done the water is opaque and Huginn has relocated to the ridge-beam above the pit, watching the fire the way it watches most things: as if it knows what comes next and is content to let it happen.",
+      "sceneSummary": "Silas cleans up from the hunt at the forge, gifts set by the door, fire building in the south pit.",
       "choices": [
         {
-          "label": "Head to the forge now — clean up from the hunt, arrive early, let the afternoon settle on its own terms.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Set the wine and starfruit on the bench now — let Pell see them without comment and watch where it goes.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "spectrumId": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "subtle",
+            "offer",
+            "watch"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Take a short rest first — find somewhere to sit and eat something before the afternoon; you've been moving since before dawn and it would show.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk the village before you go — pass by the well, look at the river. The water question is still open, and the morning is still here.",
+          "label": "Ask Pell about the spear — the misfire at the kill, the binding closing instead of passing. Better to name it now while the forge is quiet.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "spectrumId": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "study",
+            "name",
+            "direct"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Offer to help bring the fire up — work beside her quietly for a bit, let the afternoon find its own pace.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "spectrumId": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "companionable",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Sit on the bench near the pit with the wine and starfruit in plain view and just wait — let Pell speak first when she's ready.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "spectrumId": -0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "patient",
+            "open",
+            "watch"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door open. Interior close and well-ordered, rope-tar and beeswax. Transaction complete; ledger closed.",
+        "setting": "Pell's forge, south lane, Millbrook — morning shading toward midday, coal-smoke and metalwork smell, south pit fire building. Interior: near bench, water bucket, whetstone on the bench, small working fire.",
         "npcsPresent": [
           {
-            "name": "Mara Wells",
-            "state": "Pen capped and set in its groove, ledger closed — watching Silas with the mild patience of someone who has said everything she intends to say."
+            "name": "Pell",
+            "state": "At the near bench, boot off, relacing — back to Silas, giving instructions without looking up."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the ridge-beam above the south pit, watching the fire build."
           }
         ],
         "objects": [
-          "Store counter with closed ledger",
-          "Rope stock (mid-weight peg — gap still present)",
-          "Shelved hardware and tools"
+          "Resin Mountain Wine (near the door, out of smoke)",
+          "Dried Starfruit sealed packet (near the door, out of smoke)",
+          "Water bucket (used — opaque now)",
+          "River whetstone (on the bench, surface newly wiped)",
+          "South pit fire (building toward working heat)",
+          "Apron on hook"
         ],
         "threads": [
-          "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
-          "River scout — floated, endorsed, still unscheduled",
-          "Huginn's northwest direction — unresolved, Huginn near the door outside"
+          "Wine and starfruit not yet seen or acknowledged by Pell",
+          "Spear misfire at the kill — unnamed between them so far",
+          "Forge afternoon: no agenda set yet, fire still building",
+          "Huginn's northwest direction — unresolved"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Village supply store operator, Millbrook",
-          "note": "Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Had the fire up as promised — gave Silas water, soap, and apron without preamble. Back to boot-lacing, entirely practical.",
           "learned": [
-            "Pell had a quiet relationship with a tinker from the heights that ended about three years ago — he stopped coming through; she didn't discuss it",
-            "Pell moves at her own pace and reads people who are performing before they speak"
+            "Had the forge ready by the time Silas arrived — fire building in the south pit, water and soap set out"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her store counter, work done, watching Silas finish up his questions."
+          "statusNote": "At the forge, fire building in the south pit — afternoon session underway"
         }
       ],
-      "codexUpdates": [
+      "placeUpdates": [
         {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Had a quiet relationship with a tinker from the heights, roughly three years ago — ran steady for a while, ended when he stopped coming through. Mara doesn't know if it ended clean. Pell didn't speak of it.",
-          "links": [
-            "millbrook",
-            "mara-wells"
-          ]
+          "note": "Hunt smell washed off in the forge bucket — south pit fire lit and building toward working heat. Wine and starfruit set near the door.",
+          "subPlace": {
+            "name": "Pell's Forge",
+            "note": "Afternoon session underway — fire in the south pit, Pell at the bench, gifts near the door.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief follow-up question and answer at the store counter."
+        "hoursPassed": 0.5,
+        "why": "Short walk from Mara's store to the forge, cleanup at the bucket"
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door open. Interior close and well-ordered, rope-tar and beeswax. Transaction complete; ledger closed.",
+      "setting": "Pell's forge, south lane, Millbrook — morning shading toward midday, coal-smoke and metalwork smell, south pit fire building. Interior: near bench, water bucket, whetstone on the bench, small working fire.",
       "npcsPresent": [
         {
-          "name": "Mara Wells",
-          "state": "Pen capped and set in its groove, ledger closed — watching Silas with the mild patience of someone who has said everythi"
+          "name": "Pell",
+          "state": "At the near bench, boot off, relacing — back to Silas, giving instructions without looking up."
+        },
+        {
+          "name": "Huginn",
+          "state": "On the ridge-beam above the south pit, watching the fire build."
         }
       ],
       "objects": [
-        "Store counter with closed ledger",
-        "Rope stock (mid-weight peg — gap still present)",
-        "Shelved hardware and tools"
+        "Resin Mountain Wine (near the door, out of smoke)",
+        "Dried Starfruit sealed packet (near the door, out of smoke)",
+        "Water bucket (used — opaque now)",
+        "River whetstone (on the bench, surface newly wiped)",
+        "South pit fire (building toward working heat)",
+        "Apron on hook"
       ],
       "threads": [
-        "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
-        "River scout — floated, endorsed, still unscheduled",
-        "Huginn's northwest direction — unresolved, Huginn near the door outside"
+        "Wine and starfruit not yet seen or acknowledged by Pell",
+        "Spear misfire at the kill — unnamed between them so far",
+        "Forge afternoon: no agenda set yet, fire still building",
+        "Huginn's northwest direction — unresolved"
       ]
     }
   },
@@ -1015,7 +1061,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Drove the killing strike on the bull without the Palework channel — her own arm carried the weight the runes failed to add. Watching Silas from the kill with a question she hasn't ",
         "[d1] Watching Silas from beside the bull — held her question, set the spear upright, waiting for him to get back on his feet.",
         "[d1] Named what she saw — 'You went down. The rune fired backward.' — watching Silas's hands on the shaft, reading the material the same way she reads ironwork. Waiting.",
         "[d1] Placed her thumb on the maker's mark at Silas's ask — assisted the Order-Sense diagnostic. Just heard that her mark reads as 'still becoming' and that it sealed the binding at the ",
@@ -1024,17 +1069,18 @@
         "[d1] Carried her share of the bull down without comment. Now at the smokehouse doorframe — watching, waiting. The forge date is still live.",
         "[d2] Still at the doorframe — the forge afternoon thread remains open, waiting on Silas's word.",
         "[d2] Received forty cord-weight — read it before it was offered, kept the ironwork face, said 'I'll have the fire up.' Pocketed it and straightened off the doorframe.",
-        "[d2] Told Silas 'fire'll be ready' — forge afternoon confirmed, she's heading there now."
+        "[d2] Told Silas 'fire'll be ready' — forge afternoon confirmed, she's heading there now.",
+        "[d2] Had the fire up as promised — gave Silas water, soap, and apron without preamble. Back to boot-lacing, entirely practical."
       ],
       "knownFacts": [
-        "Knows Silas reached for something after the backlash and it didn't answer",
         "The rune-channel fired backward at the kill moment — she watched it happen and named it plainly",
         "Her maker's mark in the blade is read by the runes as unfinished — something in the intention behind it was still forming at the time of the kill; the binding s",
         "Her maker's mark reads as 'still becoming' — the binding is provisional but load-bearing and real",
         "'Still becoming' means the spear is partially hers until the mark finishes forming — she is not a bystander to the weapon",
         "The Palework channel sealed at the kill moment because the binding read her mark as unfinished and closed rather than passed the energy",
         "The river has been wrong three weeks — she's been tracking it too; Huginn's northwest direction registers as meaningful to her",
-        "Silas framed the forty as materials for the forge afternoon — a clean way to give without making it a gift"
+        "Silas framed the forty as materials for the forge afternoon — a clean way to give without making it a gift",
+        "Had the forge ready by the time Silas arrived — fire building in the south pit, water and soap set out"
       ],
       "skillsObserved": [
         "closing on a large animal at speed from the flank",
@@ -1045,7 +1091,7 @@
         "field dressing a large animal, efficient and clean"
       ],
       "status": "active",
-      "statusNote": "Walking to the forge to light the fire — expects Silas by early afternoon.",
+      "statusNote": "At the forge, fire building in the south pit — afternoon session underway",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1150,7 +1196,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work.",
         "[d1] Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name.",
         "[d1] Fire banked to slow red coals for the night after the death-binding ceremony — the pit has been used and closed. The night of the ceremony is now complete.",
         "[d1] Rune-Craft Kit fully spent at the forge south pit on World-day 13 night — wax and pitch-ink used in the tightening of the Huginn-thread. Pit remains banked.",
@@ -1161,7 +1206,8 @@
         "[d1] Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep.",
         "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
         "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current.",
-        "[d2] Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle."
+        "[d2] Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle.",
+        "[d2] Hunt smell washed off in the forge bucket — south pit fire lit and building toward working heat. Wine and starfruit set near the door."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1204,7 +1250,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Spear assembled here; Pell approved. Whetstone on bench. Silas ready to go east."
+          "note": "Afternoon session underway — fire in the south pit, Pell at the bench, gifts near the door."
         },
         "mara-wells-s-store": {
           "name": "Mara Wells's Store",
@@ -1659,14 +1705,14 @@
     }
   },
   "tendencies": {
-    "strategic": 47.066084162944236,
-    "cerebral": 24.903905357984822,
-    "social": 48.13956229065927,
-    "generous": 9.848613631907012,
-    "cautious": 20.959830150873728,
-    "physical": 1.837002120753049,
-    "risky": 0.9137248860125932,
-    "ruthless": 0.9369146928798039
+    "strategic": 46.83075374212952,
+    "cerebral": 24.779385831194897,
+    "social": 47.898864479205976,
+    "generous": 9.799370563747477,
+    "cautious": 21.85503100011936,
+    "physical": 1.8278171101492837,
+    "risky": 0.9091562615825302,
+    "ruthless": 0.9322301194154049
   },
   "aptitudes": [
     "strategist",
@@ -1674,7 +1720,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 102,
+  "actionCount": 103,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1728,8 +1774,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783996582143,
-  "rev": 156,
+  "updatedAt": 1783996708232,
+  "rev": 157,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

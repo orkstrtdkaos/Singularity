@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 453,
+  "xp": 458,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -43,8 +43,8 @@
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.1669360079459682,
     "mechanical_spiritual": 0.15995247066926604,
-    "concrete_abstract": -0.04023433629658844,
-    "death_life": -0.11844862809968017,
+    "concrete_abstract": -0.033222619481759016,
+    "death_life": -0.12752619669469617,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 53,
+  "energy": 48,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1066,21 +1066,39 @@
         "player": "Shift the seating-piece and see what's inside",
         "summary": "Seating-piece shifted — the sealed chamber opens. Two rooms, dry stone, three iron ring-hooks, empty recesses, and a second aperture leading deeper.",
         "narration": "You get your hands on the seating-piece — both palms flat against the dressed face, fingers finding the channel edges Pell already identified. The stone is dry and cool, no hydrostatic resistance, no give-and-take with trapped water. You push laterally, the way the channel wants it, and the piece moves. Not easily — there's a century of mineral adhesion along the base-seam — but it moves without fighting you, grinding inward another four inches along its own track before the resistance drops and it simply stops, seated at the channel's inner lip like it was always meant to sit there.\n\nThe gap opens to shoulder-width. The smell comes first: mineral, dry, with something underneath it like old iron and sealed clay — not rot, not water, not anything alive. Cool air pushes outward against your face, the kind of still-cool that means a space untouched by seasons. Then the light makes sense of what's inside.\n\nTwo rooms, as Order-Sense read. The near one is a single chamber, maybe eight feet deep and six wide — dressed ashlar all the way round, the courses as tight as the frame outside. The floor is dry stone flags. Along the far wall, three iron ring-hooks are set into the courses at chest height, evenly spaced, and below each one a shallow rectangular recess, palm-width and palm-deep, cut directly into the stone. The recesses are empty. On the left wall, a second aperture — narrower, barely shoulder-width — leads into the second room, and whatever's beyond it is dark and still. No water sound. No drip. The column stain you read from outside runs up the right-hand wall and across the ceiling in a dark stripe, and it is old: the mineral crust on it is thick and even, decades at minimum. This room has been holding that stain without complaint for a very long time.\n\nHuginn drops from the root-spur and lands on the cleared threshold stone, weight forward, head tilted. One eye on the ring-hooks. One eye on the second aperture. The bird is unhurried, which is its version of permission."
+      },
+      {
+        "player": "Step into the near room and read the second aperture with Deathsense — what's ending in the deeper chamber, if anything",
+        "summary": "Silas reads the second aperture with Deathsense — the deeper chamber holds nothing ending, only something long concluded.",
+        "narration": "You step across the threshold stone — Huginn shifts his weight but stays where he is, one eye tracking you — and into the near chamber. The floor is cold under your boots, dry flags, no give. The smell is old mineral and something else underneath: not rot, not moisture, just the particular stillness of a space that has been sealed long enough to forget air moves.\n\nYou face the second aperture. It's narrower than the one you came through, roughly dressed at the edges where the first is precise, as if cut in a hurry or cut by different hands. You set Memory's butt on the stone beside you and open Deathsense — not wide, not urgent. Conserve. You're asking a question, not forcing an answer. The ability comes up the way a slow breath does: deliberate, steady, without waste.\n\nThe read comes back plain. Nothing in the deeper chamber is ending. Nothing living, nothing active, nothing in the late stage of any kind of conclusion. The space beyond that aperture has already finished whatever it was going to finish — years ago, or decades, or longer. It is not dying. It is not dying toward anything. It is simply on the far side of an ending that already occurred. The Deathsense finds no trajectory to read, no cause underway, no pivot point where intervention would matter. It is a room that is done.\n\nPell is at the jamb behind you, not crowding. You can hear her breathing settle when you don't immediately say anything alarming. Huginn makes a single low sound from the threshold — not a warning, just acknowledgment, the way he marks a thing he already knew."
       }
     ],
     "lastTurn": {
-      "narration": "You get your hands on the seating-piece — both palms flat against the dressed face, fingers finding the channel edges Pell already identified. The stone is dry and cool, no hydrostatic resistance, no give-and-take with trapped water. You push laterally, the way the channel wants it, and the piece moves. Not easily — there's a century of mineral adhesion along the base-seam — but it moves without fighting you, grinding inward another four inches along its own track before the resistance drops and it simply stops, seated at the channel's inner lip like it was always meant to sit there.\n\nThe gap opens to shoulder-width. The smell comes first: mineral, dry, with something underneath it like old iron and sealed clay — not rot, not water, not anything alive. Cool air pushes outward against your face, the kind of still-cool that means a space untouched by seasons. Then the light makes sense of what's inside.\n\nTwo rooms, as Order-Sense read. The near one is a single chamber, maybe eight feet deep and six wide — dressed ashlar all the way round, the courses as tight as the frame outside. The floor is dry stone flags. Along the far wall, three iron ring-hooks are set into the courses at chest height, evenly spaced, and below each one a shallow rectangular recess, palm-width and palm-deep, cut directly into the stone. The recesses are empty. On the left wall, a second aperture — narrower, barely shoulder-width — leads into the second room, and whatever's beyond it is dark and still. No water sound. No drip. The column stain you read from outside runs up the right-hand wall and across the ceiling in a dark stripe, and it is old: the mineral crust on it is thick and even, decades at minimum. This room has been holding that stain without complaint for a very long time.\n\nHuginn drops from the root-spur and lands on the cleared threshold stone, weight forward, head tilted. One eye on the ring-hooks. One eye on the second aperture. The bird is unhurried, which is its version of permission.",
-      "sceneSummary": "Seating-piece shifted — the sealed chamber opens. Two rooms, dry stone, three iron ring-hooks, empty recesses, and a second aperture leading deeper.",
+      "narration": "You step across the threshold stone — Huginn shifts his weight but stays where he is, one eye tracking you — and into the near chamber. The floor is cold under your boots, dry flags, no give. The smell is old mineral and something else underneath: not rot, not moisture, just the particular stillness of a space that has been sealed long enough to forget air moves.\n\nYou face the second aperture. It's narrower than the one you came through, roughly dressed at the edges where the first is precise, as if cut in a hurry or cut by different hands. You set Memory's butt on the stone beside you and open Deathsense — not wide, not urgent. Conserve. You're asking a question, not forcing an answer. The ability comes up the way a slow breath does: deliberate, steady, without waste.\n\nThe read comes back plain. Nothing in the deeper chamber is ending. Nothing living, nothing active, nothing in the late stage of any kind of conclusion. The space beyond that aperture has already finished whatever it was going to finish — years ago, or decades, or longer. It is not dying. It is not dying toward anything. It is simply on the far side of an ending that already occurred. The Deathsense finds no trajectory to read, no cause underway, no pivot point where intervention would matter. It is a room that is done.\n\nPell is at the jamb behind you, not crowding. You can hear her breathing settle when you don't immediately say anything alarming. Huginn makes a single low sound from the threshold — not a warning, just acknowledgment, the way he marks a thing he already knew.",
+      "sceneSummary": "Silas reads the second aperture with Deathsense — the deeper chamber holds nothing ending, only something long concluded.",
       "choices": [
         {
-          "label": "Use Order-Sense on the ring-hooks and recesses — read what they were part of, what was held here and why",
+          "label": "Step through to the second chamber — Deathsense says nothing is ending; go see what's in it",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "explore",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the near chamber first — read the whole design these ring-hooks and recesses belong to before going deeper",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.2,
-            "mechanical_spiritual": 0.3
-          },
-          "difficulty": 0,
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
@@ -1092,36 +1110,14 @@
           "emergenceId": null
         },
         {
-          "label": "Step into the near room and read the second aperture with Deathsense — what's ending in the deeper chamber, if anything",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3,
-            "concrete_abstract": 0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step back — this is Dara Holt's channel, and she should see this first. Seal the gap as best you can and go fetch her now",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.4,
-            "violence_peace": 0.5
-          },
+          "label": "Tell Pell what Deathsense found — nothing ending in there — and ask what she makes of the recesses before going further",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "help"
+            "consult",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1130,20 +1126,19 @@
           "emergenceId": null
         },
         {
-          "label": "Step through the second aperture — go deeper, see what the second room holds",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Read the empty recesses with Palework — what ended here, and what was held in these cuts",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "chaos_order": -0.2,
-            "concrete_abstract": 0.1
+            "death_life": -0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "risky"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "palework",
+          "energyCost": 6,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -1151,38 +1146,36 @@
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3
       },
       "scene": {
-        "setting": "West bank hillside — lower aperture fully open. Seating-piece seated at inner lip of its channel, shoulder-width gap exposed. Near chamber visible: dry ashlar, stone flags, three iron ring-hooks, three empty recesses, second aperture leading deeper. Morning alder light from behind.",
+        "setting": "West bank hillside — inside the near chamber. Dry ashlar, stone flags, shoulder-width gap behind to daylight. Second aperture ahead in the left wall — narrower, roughly dressed, dark beyond.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the right jamb, watching the open gap — taking in the ring-hooks and the column stain without comment, waiting."
+            "state": "Standing at the outer jamb, not yet crossed the threshold — listening, reading Silas's posture for what Deathsense found"
           },
           {
             "name": "Huginn",
-            "state": "Landed on the threshold stone, weight forward — one eye on the ring-hooks, one on the second aperture. Unhurried."
+            "state": "On the threshold stone behind — weight forward, one eye on Silas, one on the second aperture. Has made one low sound. Waiting."
           }
         ],
         "objects": [
-          "Memory (spear, at Silas's side)",
-          "Seating-piece — shifted to inner channel lip, gap now shoulder-width",
-          "Three iron ring-hooks on far wall of near chamber — evenly spaced, chest height",
-          "Three shallow rectangular recesses below the ring-hooks — empty, palm-width, cut into stone",
-          "Second aperture in left wall of near chamber — narrower, shoulder-width, leading to second room (dark, still)",
-          "Column stain — right wall and ceiling of near chamber, thick mineral crust, old",
-          "Stone flag floor — dry",
+          "Memory (spear, butt set on stone flags beside Silas)",
+          "Three iron ring-hooks on far wall — evenly spaced, chest height, empty",
+          "Three shallow rectangular recesses below the hooks — palm-width, cut clean, empty",
+          "Column stain — right wall and ceiling, thick mineral crust, old",
+          "Second aperture — left wall, narrower than the entrance, roughly dressed edges, dark and still beyond",
+          "Seating-piece — seated at inner channel lip, gap open behind",
           "Valve Failure Timeline note (breast pocket)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)"
         ],
         "threads": [
-          "Near chamber is open and readable — ring-hooks, empty recesses, column stain",
-          "Second aperture leads to an unseen second room — dark, still, no water sound",
-          "Huginn is attending the threshold — reading something",
+          "Second aperture leads to a space that is done — finished long ago; what it holds is unknown",
+          "Ring-hooks and recesses are empty — whatever they held is gone; their design purpose unread",
           "Dara Holt not yet contacted — this is her channel infrastructure",
-          "Order-Sense and Deathsense not yet used on the inner space"
+          "Order-Sense and Palework not yet used on the inner space"
         ]
       },
       "npcUpdates": [
@@ -1190,23 +1183,17 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Watched the seating-piece shift without moving to help — let Silas work it. Now reading the ring-hooks and stain from the threshold without entering.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Held the jamb while Silas read the second aperture — listening for the result, not pressing for it",
           "learned": [
-            "Near chamber is dry ashlar, stone flags, three iron ring-hooks with empty recesses below — something was held or stored here"
+            "Deathsense found nothing ending in the deeper chamber — the space concluded long before the aperture was sealed"
+          ],
+          "skillsObserved": [
+            "patience under uncertainty — not crowding Silas's read"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing at the aperture threshold — taking in the chamber, waiting on Silas's next move."
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Lower aperture fully open — seating-piece seated at inner channel lip. Near chamber confirmed: dry ashlar, stone flags, three iron ring-hooks, three empty recesses (palm-width, cut into stone), column stain on right wall/ceiling (old, thick mineral crust). Second aperture in left wall leads to unexamined second room. World-day 14 morning.",
-          "subPlace": {
-            "name": "Channel-House Near Chamber",
-            "note": "Dry sealed chamber behind the lower aperture — ring-hooks, empty recesses, old column stain, second aperture leading deeper. First opened World-day 14.",
-            "visited": true
-          }
+          "statusNote": "Standing at the outer jamb of the near chamber, waiting on Silas's read before entering"
         }
       ],
       "codexUpdates": [
@@ -1214,28 +1201,12 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Near chamber confirmed: dry ashlar, three iron ring-hooks at chest height, three empty recesses below them. Whatever was held here is gone — the recesses are empty. Column stain on right wall predates everything. Second aperture leads deeper.",
+          "fact": "Deathsense confirms: the deeper chamber holds nothing ending — whatever concluded there did so long ago. The space is on the far side of an ending with no active trajectory, no cause underway, no pivot. Whatever this structure held has already finished.",
           "links": [
             "millbrook",
-            "pell",
-            "dara-holt",
             "aldric-provisioning-deal",
-            "palework",
-            "order-sense"
-          ]
-        },
-        {
-          "topic": "channel-house-near-chamber",
-          "label": "The Channel-House — Near Chamber",
-          "kind": "place",
-          "fact": "Three iron ring-hooks, three empty rectangular recesses below them, cut into the ashlar — deliberate storage or mounting positions. Whatever was housed here is absent. The column stain on the right wall has decades of mineral crust. A second aperture leads to a second, still-dark room.",
-          "links": [
-            "the-water-crisis",
-            "millbrook",
             "pell",
-            "dara-holt",
-            "order-sense",
-            "deathsense"
+            "dara-holt"
           ]
         }
       ],
@@ -1243,44 +1214,42 @@
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Sealed chamber opened — near room dry, two rooms confirmed, three empty iron ring-hooks and recesses. Second aperture leads deeper. Physical evidence accumulating for Aldric and Dara Holt."
+          "note": "Deathsense reads the deeper chamber as concluded — no active ending, nothing dying toward anything. The structure's purpose has already run its course. Physical investigation continues."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A few minutes of careful work shifting the seating-piece and reading the revealed chamber."
+        "why": "A brief, careful Deathsense read — a single breath of power, not a long working"
       }
     },
     "sceneState": {
-      "setting": "West bank hillside — lower aperture fully open. Seating-piece seated at inner lip of its channel, shoulder-width gap exposed. Near chamber visible: dry ashlar, stone flags, three iron ring-hooks, three empty recesses, second aperture leading deeper. Morning alder light from behind.",
+      "setting": "West bank hillside — inside the near chamber. Dry ashlar, stone flags, shoulder-width gap behind to daylight. Second aperture ahead in the left wall — narrower, roughly dressed, dark beyond.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the right jamb, watching the open gap — taking in the ring-hooks and the column stain without comment, waiti"
+          "state": "Standing at the outer jamb, not yet crossed the threshold — listening, reading Silas's posture for what Deathsense found"
         },
         {
           "name": "Huginn",
-          "state": "Landed on the threshold stone, weight forward — one eye on the ring-hooks, one on the second aperture. Unhurried."
+          "state": "On the threshold stone behind — weight forward, one eye on Silas, one on the second aperture. Has made one low sound. Wa"
         }
       ],
       "objects": [
-        "Memory (spear, at Silas's side)",
-        "Seating-piece — shifted to inner channel lip, gap now shoulder-width",
-        "Three iron ring-hooks on far wall of near chamber — evenly spaced, chest height",
-        "Three shallow rectangular recesses below the ring-hooks — empty, palm-width, cut",
-        "Second aperture in left wall of near chamber — narrower, shoulder-width, leading",
-        "Column stain — right wall and ceiling of near chamber, thick mineral crust, old",
-        "Stone flag floor — dry",
+        "Memory (spear, butt set on stone flags beside Silas)",
+        "Three iron ring-hooks on far wall — evenly spaced, chest height, empty",
+        "Three shallow rectangular recesses below the hooks — palm-width, cut clean, empt",
+        "Column stain — right wall and ceiling, thick mineral crust, old",
+        "Second aperture — left wall, narrower than the entrance, roughly dressed edges, ",
+        "Seating-piece — seated at inner channel lip, gap open behind",
         "Valve Failure Timeline note (breast pocket)",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)"
       ],
       "threads": [
-        "Near chamber is open and readable — ring-hooks, empty recesses, column stain",
-        "Second aperture leads to an unseen second room — dark, still, no water sound",
-        "Huginn is attending the threshold — reading something",
+        "Second aperture leads to a space that is done — finished long ago; what it holds is unknown",
+        "Ring-hooks and recesses are empty — whatever they held is gone; their design purpose unread",
         "Dara Holt not yet contacted — this is her channel infrastructure",
-        "Order-Sense and Deathsense not yet used on the inner space"
+        "Order-Sense and Palework not yet used on the inner space"
       ]
     }
   },
@@ -1307,14 +1276,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Column stain Palework read — predates contamination by years or decades; a prior concluded event drained through this bank long before the gray-green water began. Material came down through stone, not up through water: a different origin from the current contamination. Two distinct events, two distinct timelines.",
         "Pell names the column stain's source direction — above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination. The gray-green water is a downstream symptom; the source is higher and behind stone.",
         "Thirty paces north of the column stain: dressed rubble stones at the bank base, a buried coursed structure visible as a settling-seam ten feet up the hillside. Huginn attending. Something was built here.",
         "Order-Sense identifies a pre-Transition channel-house buried in the hillside — two sealed rooms, lower aperture breached from within. Source structure located; interior contents and purpose still unread.",
         "Order-Sense confirms a pre-Transition channel-house buried in the hillside — lower aperture breached from within by design or conditional mechanism, not by accident or collapse. Pell reads it as a valve. Two sealed interior rooms remain unread.",
         "Huginn reads the cleared aperture as old and concluded — no active danger from within. The inner space is dry, cool, and mineral-smelling. The next step is Silas's call: read further, open it, or bring Dara Holt before touching anything.",
         "Pell reads the frame as sound and dry — the structure has already made its move. Inner space is accessible. Decision point: enter now or bring Dara Holt first.",
-        "Sealed chamber opened — near room dry, two rooms confirmed, three empty iron ring-hooks and recesses. Second aperture leads deeper. Physical evidence accumulating for Aldric and Dara Holt."
+        "Sealed chamber opened — near room dry, two rooms confirmed, three empty iron ring-hooks and recesses. Second aperture leads deeper. Physical evidence accumulating for Aldric and Dara Holt.",
+        "Deathsense reads the deeper chamber as concluded — no active ending, nothing dying toward anything. The structure's purpose has already run its course. Physical investigation continues."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1428,7 +1397,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named the column stain's material direction as source-above-behind — a buried structure draining down through the hillside, not the river. Diagnosed the crack and the gray-green wa",
         "[d2] Identified the rubble stones as coursed — laid by hand, not river-tumbled. Standing now, reading the settling-seam in the hillside.",
         "[d2] Gave Silas the corner of her mouth over 'date two' — denied nothing, redirected to the work. Back to reading the rubble stones.",
         "[d2] Watching Silas's face come out of the Order-Sense read — hasn't spoken yet, giving him room.",
@@ -1437,28 +1405,29 @@
         "[d2] Named the conditions for reading the aperture plainly — clear the face first, then ask Huginn, then decide whether opening it is yours to do. Said 'what Huginn thinks' without infl",
         "[d2] Named Huginn's attendance as the clearest permission she knows — deferred the call on the seating-piece to Silas without pressure.",
         "[d2] Gave her full frame assessment — sound joints, dry stone, clean channel, no hydrostatic load. Named both paths plainly: shift the seating-piece now, or fetch Dara Holt first. Expli",
-        "[d2] Watched the seating-piece shift without moving to help — let Silas work it. Now reading the ring-hooks and stain from the threshold without entering."
+        "[d2] Watched the seating-piece shift without moving to help — let Silas work it. Now reading the ring-hooks and stain from the threshold without entering.",
+        "[d2] Held the jamb while Silas read the second aperture — listening for the result, not pressing for it"
       ],
       "knownFacts": [
-        "Takes a direct compliment and converts it immediately to a single word and continued work — but the physical tell is real",
         "Refers to Huginn's read as a practical precondition — not superstition, craft process",
         "Distinguishes 'finished its job' from 'mid-process' as two different reads on the breach condition",
         "Treats Huginn's read as craft-process evidence, not superstition — 'not warning us off' is a go-condition for her",
         "Frame is structurally sound — joints tight except at the seating-piece channel; breach was not stone failure",
         "Channel is clean inside — no debris, no calcium bridging; the piece moved on its own",
         "Stone is dry — no hydrostatic load, the sealed rooms are not full of water",
-        "Near chamber is dry ashlar, stone flags, three iron ring-hooks with empty recesses below — something was held or stored here"
+        "Near chamber is dry ashlar, stone flags, three iron ring-hooks with empty recesses below — something was held or stored here",
+        "Deathsense found nothing ending in the deeper chamber — the space concluded long before the aperture was sealed"
       ],
       "skillsObserved": [
-        "sequencing a site investigation methodically",
         "reading a companion's assessment as field data",
         "deferring a decision cleanly without crowding it",
         "full structural frame assessment by touch and grain-reading",
         "reading channel condition from dressed stone face",
-        "hydrostatic load assessment by palm-contact"
+        "hydrostatic load assessment by palm-contact",
+        "patience under uncertainty — not crowding Silas's read"
       ],
       "status": "active",
-      "statusNote": "Standing at the aperture threshold — taking in the chamber, waiting on Silas's next move.",
+      "statusNote": "Standing at the outer jamb of the near chamber, waiting on Silas's read before entering",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2086,7 +2055,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Order-Sense reading of cracked east-channel irrigation tubing confirms: the gray-green mineral deposit concentrates at every iron contact point, working inward from the water-facing surface. The reed ",
           "[d2] Pell already knew about both east-channel valve failures — 'Fen's was the second' required no explanation. The iron contamination pattern is known locally but not yet being spoken about openly.",
           "[d2] Pell knows both failed east-channel valve sites. Fen's intake is twenty minutes north of the upper meadow at an east-channel bend — the housing will show how long the deposit has been building. The el",
           "[d2] Four iron sleeve blank failures in three weeks — double the normal seasonal rate. Fen's intake failed first at World-day minus-18; east furlong farmer second at minus-9. Two further failures unaccount",
@@ -2109,7 +2077,8 @@
           "[d2] Pell's read: the lower aperture must be face-cleared before its condition can be diagnosed — breach may be finished or mid-process, and those read differently. She named Huginn's assessment as a requi",
           "[d2] Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the cra",
           "[d2] Pell's full frame assessment: sound joints, clean channel, dry stone, no hydrostatic load. The sealed rooms are not water-filled. The seating-piece moved on its own — either pushed from within or a tr",
-          "[d2] Near chamber confirmed: dry ashlar, three iron ring-hooks at chest height, three empty recesses below them. Whatever was held here is gone — the recesses are empty. Column stain on right wall predates"
+          "[d2] Near chamber confirmed: dry ashlar, three iron ring-hooks at chest height, three empty recesses below them. Whatever was held here is gone — the recesses are empty. Column stain on right wall predates",
+          "[d2] Deathsense confirms: the deeper chamber holds nothing ending — whatever concluded there did so long ago. The space is on the far side of an ending with no active trajectory, no cause underway, no pivo"
         ],
         "links": [
           "millbrook",
@@ -2183,14 +2152,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.476471019006546,
-    "cerebral": 38.84353945487442,
-    "social": 55.99016998020901,
-    "generous": 13.51111402917286,
-    "cautious": 35.748156488151245,
-    "physical": 1.4013803318703306,
-    "risky": 3.450696426291864,
-    "ruthless": 0.7147372386831305
+    "strategic": 54.209088663911515,
+    "cerebral": 38.64932175760004,
+    "social": 55.71021913030796,
+    "generous": 13.443558459026995,
+    "cautious": 36.56941570571049,
+    "physical": 1.394373430210979,
+    "risky": 3.4334429441604044,
+    "ruthless": 0.7111635524897149
   },
   "aptitudes": [
     "strategist",
@@ -2198,7 +2167,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 156,
+  "actionCount": 157,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2284,8 +2253,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784062380162,
-  "rev": 225,
+  "updatedAt": 1784064964095,
+  "rev": 226,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2555,7 +2524,7 @@
       "lightsense": 2,
       "order_sense": 30,
       "palework": 13,
-      "deathsense": 11,
+      "deathsense": 12,
       "shadowstep": 2
     },
     "coActivations": {
@@ -2580,7 +2549,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 6.25
+    "marrow": 6.5
   },
   "customAbilities": {
     "the-attended-end": {

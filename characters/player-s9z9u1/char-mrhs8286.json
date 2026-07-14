@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 430,
+  "xp": 435,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,9 +42,9 @@
     "spectrumId": -0.692550639149951,
     "violence_peace": 0.076825,
     "chaos_order": 0.13401196436328122,
-    "mechanical_spiritual": 0.1395595242872754,
+    "mechanical_spiritual": 0.15258154807291163,
     "concrete_abstract": 0.00008902061303565564,
-    "death_life": -0.11379349373925782,
+    "death_life": -0.09310381905229492,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 88,
+  "energy": 78,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -986,117 +986,115 @@
         "player": "Cross the willow bend and follow the deposit upstream — see how far the source is and what it looks like at closer range. Dara's territory, uninvited, but the evidence is thickening.",
         "summary": "Silas crosses into Dara's upper reach — iron-mat thickens continuously, and a buried amber light briefly wakes in the bedrock shelf before going still.",
         "narration": "You step across the willow bend without ceremony — one foot on the coping, one on the far bank, Memory braced across your body. Pell follows without a word. Huginn lifts from the stone and banks left, dropping ahead along the water line, and you take that as permission enough.\n\nThe deposit north of the bend is continuous iron-mat, not the discrete banding you've been reading since Fen's intake. Every coping block carries it at the waterline — rust-brown above the tideline, gray-green where the water still touches, and the smell is older here: metal and something underneath the metal, the way a tool left in a cave smells different from a tool left in rain. You walk slowly, Memory's butt-end tapping coping stones, and count the distance in paces. Thirty. Fifty. The copper-green deepens with every bend.\n\nAt seventy paces north of the willow, where the channel narrows and the cut-bank rises to shoulder height, the current runs across a flat shelf of exposed stone — and there, just below the waterline, something is moving. Not water-movement. Not current-ripple. A thin line of light, the color of old amber, threading along a crack in the bedrock shelf like a buried lamp seen through thick glass. It pulses once — or seems to — and then is still. The water flowing over it carries no trace. The shelf itself is unremarkable stone; the coping above it is rusted the same as everywhere else. Only that line, that one quiet amber thread, briefly present.\n\nHuginn lands on the cut-bank rim above the shelf and stares down at it. He does not croak. His head tilts — the tilting he does when he is attending something — and after a moment he looks away north, as if that settles it.\n\nThe iron-mat thickens again twenty paces further on. Whatever is upstream is not far."
+      },
+      {
+        "player": "Stop here and use Palework on the bedrock shelf where that amber light ran — read what the stone is part of, what ended or is ending in it.",
+        "summary": "Palework reads the bedrock shelf — the amber light is an ancient ended thing breathing out through a recent crack; the crack itself is new.",
+        "narration": "You kneel on the bedrock shelf and press your palm flat against the stone beside the hairline crack — not Memory's tip, just your hand, the old reading posture. The cast is conserved, a narrow thread rather than a sweep: Palework has something to anchor to here where Order-Sense found nothing. Bedrock holds endings differently than cut-bank clay. It's been doing it for longer.\n\nWhat you find is not rot in the stone. The stone is fine. What you find is that something *beneath* the stone has already ended — a long time ago, at a depth you can't precisely name — and the crack is where that ending is still breathing out. Not actively dying. Finished. But the finished thing is large enough that its finishing is ongoing: an exhalation across years, not minutes. The amber light you saw was exactly that — the pressure of something concluded, venting through the only gap the bedrock offers it. The iron in the water is downstream of this. Not the same process, but not unrelated — the stone's finished thing and the channel's active rot share a direction, if not a cause.\n\nThere's one detail that sits wrong. The ending below the shelf is very old, but the crack is not. The crack is recent — a season, maybe less. Whatever broke the stone open to let the old thing breathe, that happened close to now.\n\nPell has come up beside you. She reads the posture, the flat palm, the pause. She says nothing, but she's stopped moving."
       }
     ],
     "lastTurn": {
-      "narration": "You step across the willow bend without ceremony — one foot on the coping, one on the far bank, Memory braced across your body. Pell follows without a word. Huginn lifts from the stone and banks left, dropping ahead along the water line, and you take that as permission enough.\n\nThe deposit north of the bend is continuous iron-mat, not the discrete banding you've been reading since Fen's intake. Every coping block carries it at the waterline — rust-brown above the tideline, gray-green where the water still touches, and the smell is older here: metal and something underneath the metal, the way a tool left in a cave smells different from a tool left in rain. You walk slowly, Memory's butt-end tapping coping stones, and count the distance in paces. Thirty. Fifty. The copper-green deepens with every bend.\n\nAt seventy paces north of the willow, where the channel narrows and the cut-bank rises to shoulder height, the current runs across a flat shelf of exposed stone — and there, just below the waterline, something is moving. Not water-movement. Not current-ripple. A thin line of light, the color of old amber, threading along a crack in the bedrock shelf like a buried lamp seen through thick glass. It pulses once — or seems to — and then is still. The water flowing over it carries no trace. The shelf itself is unremarkable stone; the coping above it is rusted the same as everywhere else. Only that line, that one quiet amber thread, briefly present.\n\nHuginn lands on the cut-bank rim above the shelf and stares down at it. He does not croak. His head tilts — the tilting he does when he is attending something — and after a moment he looks away north, as if that settles it.\n\nThe iron-mat thickens again twenty paces further on. Whatever is upstream is not far.",
-      "sceneSummary": "Silas crosses into Dara's upper reach — iron-mat thickens continuously, and a buried amber light briefly wakes in the bedrock shelf before going still.",
+      "narration": "You kneel on the bedrock shelf and press your palm flat against the stone beside the hairline crack — not Memory's tip, just your hand, the old reading posture. The cast is conserved, a narrow thread rather than a sweep: Palework has something to anchor to here where Order-Sense found nothing. Bedrock holds endings differently than cut-bank clay. It's been doing it for longer.\n\nWhat you find is not rot in the stone. The stone is fine. What you find is that something *beneath* the stone has already ended — a long time ago, at a depth you can't precisely name — and the crack is where that ending is still breathing out. Not actively dying. Finished. But the finished thing is large enough that its finishing is ongoing: an exhalation across years, not minutes. The amber light you saw was exactly that — the pressure of something concluded, venting through the only gap the bedrock offers it. The iron in the water is downstream of this. Not the same process, but not unrelated — the stone's finished thing and the channel's active rot share a direction, if not a cause.\n\nThere's one detail that sits wrong. The ending below the shelf is very old, but the crack is not. The crack is recent — a season, maybe less. Whatever broke the stone open to let the old thing breathe, that happened close to now.\n\nPell has come up beside you. She reads the posture, the flat palm, the pause. She says nothing, but she's stopped moving.",
+      "sceneSummary": "Palework reads the bedrock shelf — the amber light is an ancient ended thing breathing out through a recent crack; the crack itself is new.",
       "choices": [
         {
-          "label": "Press on upstream — follow the thickening deposit until you reach its source, or until the ground tells you to stop.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "violence_peace": 0.7,
-            "chaos_order": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful",
-            "investigate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stop here and use Palework on the bedrock shelf where that amber light ran — read what the stone is part of, what ended or is ending in it.",
+          "label": "Use Deathsense on the crack itself — read what made it, how long it has, and whether it's still widening.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.4,
-            "death_life": 0.3
+            "death_life": -0.6
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful",
-            "investigate"
+            "careful"
           ],
-          "abilityId": "palework",
-          "energyCost": 6,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Turn back now — you have enough physical evidence. Go find Dara Holt, show her the scraped section and the continuous-mat coping, and bring her here to see it herself.",
+          "label": "Tell Pell what Palework showed — the old ended thing below, the new crack, and the direction the two things share.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.2,
-            "violence_peace": 0.8
-          },
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "share",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Mark the crack's width and direction with the Rune-Craft Kit — a physical record Dara Holt can date against her channel logs.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "prepare",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Go and get Dara Holt now — the site evidence is substantial enough. She needs to see this shelf, the crack, and the continuous mat together.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "help",
-            "careful",
             "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
+          "trivial": true
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -6
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
         {
-          "label": "Ask Pell what she makes of the amber light — she's the one who works the iron here, and her read on what the bedrock is doing matters.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable."
         }
       ],
       "scene": {
-        "setting": "East channel bank, seventy paces north of the willow bend — upper reach, inside Dara Holt's territory. Cut-bank rises to shoulder height on the east side; exposed bedrock shelf at the waterline; copper-green water, continuous iron-mat coping, morning light filtered by overhanging scrub. Huginn perched on the cut-bank rim above the bedrock shelf.",
+        "setting": "East channel bank, seventy paces north of the willow bend — bedrock shelf at the waterline, Silas kneeling with palm pressed to the stone beside the hairline crack. Copper-green water, continuous iron-mat coping, morning light through overhanging scrub.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing behind Silas's left shoulder, reading the continuous coping deposit, saying nothing yet."
+            "state": "Standing at Silas's shoulder, still, reading the posture — waiting without asking."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the cut-bank rim directly above the bedrock shelf — head tilted down once, now turned north."
+            "state": "Perched on the cut-bank rim above the shelf, head angled down."
           }
         ],
         "objects": [
-          "Memory (spear, in Silas's left hand)",
-          "Bedrock shelf at the waterline — flat exposed stone, hairline crack where amber light briefly moved",
-          "Continuous iron-mat coping — rust-brown above tideline, gray-green at waterline, thickening with each northward pace",
+          "Memory (spear, at Silas's side)",
+          "Bedrock shelf — hairline crack, no wider than a thumbnail; crack is recent, stone is old",
+          "Continuous iron-mat coping — rust-brown above tideline, gray-green at waterline",
           "Copper-green water in the channel cut",
           "Valve Failure Timeline note (breast pocket)",
-          "Belt Knife (at hip, wiped clean)"
+          "Belt Knife (at hip, wiped clean)",
+          "Rune-Craft Kit (pack)"
         ],
         "threads": [
-          "Amber light moved in the bedrock crack and went still — Huginn attended it, then looked north; meaning unresolved",
-          "Iron-mat deposit continues thickening upstream — source is closer but not yet visible",
-          "Inside Dara Holt's upper-reach territory uninvited — her jurisdiction, her ground",
-          "Dara Holt still to be briefed — site evidence now significant enough to demand her presence",
-          "Order-Sense found no design purchase at valley-floor substrate — whether it would read differently here, on bedrock, is untested"
+          "What made the crack — a season old or less; Deathsense might name it",
+          "The ancient ended thing below the shelf and the active rot in the channel share a direction — connection unresolved",
+          "Inside Dara Holt's upper-reach territory uninvited — she still needs to see this",
+          "Order-Sense found no design purchase at valley-floor substrate — bedrock may read differently"
         ]
       },
       "npcUpdates": [
@@ -1104,32 +1102,25 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Crossed the willow bend with Silas without hesitation — reading the continuous-mat coping in silence, watching the ground.",
-          "learned": [
-            "Iron-mat deposit runs continuous and unbroken north of the willow bend — thicker here than at any prior sample point"
-          ],
-          "skillsObserved": [
-            "silent field assessment",
-            "following without needing to lead"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Seventy paces north of the willow bend with Silas, inside Dara Holt's upper reach — reading the coping deposit."
-        },
+          "note": "Stopped moving when Silas knelt — reading the posture without asking. Waiting.",
+          "statusNote": "Seventy paces north of the willow bend with Silas, on the bedrock shelf, watching the cast."
+        }
+      ],
+      "factUpdates": [
         {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Flew ahead to the bedrock shelf, attended the amber light briefly, then looked north — reading something Silas has not named yet.",
-          "learned": [
-            "Something in the bedrock shelf drew Huginn's attending posture — he tilted, then looked away north, as if the matter was concluded"
-          ],
-          "skillsObserved": [
-            "attending an ending or something older"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Perched on the cut-bank rim above the bedrock shelf, looking north."
+          "op": "add",
+          "text": "Palework on the bedrock shelf confirms: the amber light is a very old ended thing venting through a crack that opened no more than a season ago. The iron in the channel and the old ending below share a direction but not an identical cause. The crack is the new variable.",
+          "subjectId": "the-water-crisis"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Bedrock shelf 70 paces north of the willow bend — Palework confirms the crack is recent (a season or less); the amber light is an ancient concluded thing breathing out through the new gap. Old ending below, new breach above.",
+          "subPlace": {
+            "name": "Bedrock Shelf — Upper Reach",
+            "note": "Hairline crack opened within the last season; ancient ended thing below venting through it; iron in channel shares a direction with the old ending.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
@@ -1137,68 +1128,47 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": null,
-          "fact": "North of the willow bend the deposit becomes continuous iron-mat with no discrete layers — the smell changes to metal-under-metal, cave-tool old. At 70 paces north, a hairline crack in an exposed bedrock shelf briefly showed an amber thread of light below the waterline, pulsed once, and went still. Huginn attended it, then looked north. The source is close.",
+          "entityId": "the-water-crisis",
+          "fact": "Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancient ending below share a direction. The crack is new; whatever opened it, it was recent.",
           "links": [
             "millbrook",
             "pell",
-            "dara-holt",
-            "aldric-provisioning-deal"
+            "aldric-provisioning-deal",
+            "dara-holt"
           ]
-        },
-        {
-          "topic": "precursor-signs",
-          "label": "Precursor Signs in the Valley",
-          "kind": "mystery",
-          "fact": "A buried amber light moved in a bedrock crack 70 paces north of the willow bend — thin, the color of old amber, threading along the stone like a lamp seen through thick glass. It pulsed once and went still. No surface trace in the water. Huginn attended it without alarm.",
-          "links": [
-            "the-water-crisis",
-            "millbrook",
-            "huginn"
-          ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Bedrock shelf 70 paces north of the willow bend — hairline crack showed an amber thread of light below the waterline on World-day 14 morning. Pulsed once and went still. Huginn attended it. Physical site of possible Precursor activity beneath the channel.",
-          "subPlace": {
-            "name": "Bedrock Shelf — Upper Channel",
-            "note": "Exposed stone shelf at the waterline, 70 paces north of the willow bend — amber light briefly visible in hairline crack; continuous iron-mat coping above.",
-            "visited": true
-          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "short walk upstream along the channel bank — seventy paces and a pause"
+        "why": "A careful conserved Palework cast on the bedrock shelf — a few minutes of close reading."
       }
     },
     "sceneState": {
-      "setting": "East channel bank, seventy paces north of the willow bend — upper reach, inside Dara Holt's territory. Cut-bank rises to shoulder height on the east side; exposed bedrock shelf at the waterline; copper-green water, continuous iron-mat coping, morning light filtered by overhanging scrub. Huginn perched on the cut-bank rim above the bedrock shelf.",
+      "setting": "East channel bank, seventy paces north of the willow bend — bedrock shelf at the waterline, Silas kneeling with palm pressed to the stone beside the hairline crack. Copper-green water, continuous iron-mat coping, morning light through overhanging scrub.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing behind Silas's left shoulder, reading the continuous coping deposit, saying nothing yet."
+          "state": "Standing at Silas's shoulder, still, reading the posture — waiting without asking."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the cut-bank rim directly above the bedrock shelf — head tilted down once, now turned north."
+          "state": "Perched on the cut-bank rim above the shelf, head angled down."
         }
       ],
       "objects": [
-        "Memory (spear, in Silas's left hand)",
-        "Bedrock shelf at the waterline — flat exposed stone, hairline crack where amber ",
-        "Continuous iron-mat coping — rust-brown above tideline, gray-green at waterline,",
+        "Memory (spear, at Silas's side)",
+        "Bedrock shelf — hairline crack, no wider than a thumbnail; crack is recent, ston",
+        "Continuous iron-mat coping — rust-brown above tideline, gray-green at waterline",
         "Copper-green water in the channel cut",
         "Valve Failure Timeline note (breast pocket)",
-        "Belt Knife (at hip, wiped clean)"
+        "Belt Knife (at hip, wiped clean)",
+        "Rune-Craft Kit (pack)"
       ],
       "threads": [
-        "Amber light moved in the bedrock crack and went still — Huginn attended it, then looked north; meaning unresolved",
-        "Iron-mat deposit continues thickening upstream — source is closer but not yet visible",
-        "Inside Dara Holt's upper-reach territory uninvited — her jurisdiction, her ground",
-        "Dara Holt still to be briefed — site evidence now significant enough to demand her presence",
-        "Order-Sense found no design purchase at valley-floor substrate — whether it would read differently here, on bedrock, is untested"
+        "What made the crack — a season old or less; Deathsense might name it",
+        "The ancient ended thing below the shelf and the active rot in the channel share a direction — connection unresolved",
+        "Inside Dara Holt's upper-reach territory uninvited — she still needs to see this",
+        "Order-Sense found no design purchase at valley-floor substrate — bedrock may read differently"
       ]
     }
   },
@@ -1225,14 +1195,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent.",
         "Mara's ledger confirms the iron failure timeline — four valve failures in three weeks beginning World-day minus-eighteen. Note in hand; Fen's intake next.",
         "Left Millbrook on the north track with Pell — Dara Holt's house passed, Fen's intake twenty minutes ahead.",
         "Palework read Fen's failed intake — iron dissolution three layers deep, process predates the ledger by thirty days minimum, active front at the collar throat; stone unaffected.",
         "Knife-scraped section of housing preserved — three layers documented, iron-specific targeting confirmed, stone unaffected. Physical evidence ready for Dara Holt.",
         "Upstream trace confirms crust thickens with distance north — color deepens at the willow bend. The source is further upstream, into Dara's upper-reach jurisdiction.",
         "Order-Sense failed in the thin substrate — the channel won't read as a system this close to the valley floor. Physical evidence still points north. Huginn is watching the willow bend.",
-        "Reached the willow bend — copper-green water and continuous iron-mat deposit confirm the source is upstream, past Dara Holt's boundary. Physical trace now unambiguous."
+        "Reached the willow bend — copper-green water and continuous iron-mat deposit confirm the source is upstream, past Dara Holt's boundary. Physical trace now unambiguous.",
+        "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1346,7 +1316,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Agreed to walk north after the farmer's sleeve job — knows both failed valve sites, named Fen's east-channel intake as the first inspection point. Suggested Mara's ledger as a date",
         "[d2] Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north.",
         "[d2] Stayed at the doorway, let Silas handle the ledger inquiry — heard everything. Ready to walk.",
         "[d2] Took the lead without comment — single-word confirmation of Mara's advice ('After') and pointed out Dara's gate-post without slowing.",
@@ -1355,7 +1324,8 @@
         "[d2] Named the willow bend as the last turn before the high-meadow feed — past it is Dara's jurisdiction. Told Silas Dara needs to see this section too, not just the intake.",
         "[d2] Read the failed Order-Sense cast without asking — no comment, waiting.",
         "[d2] Arrived at Silas's shoulder at the willow bend — read the copper-green water and continuous deposit without comment; waiting for his call.",
-        "[d2] Crossed the willow bend with Silas without hesitation — reading the continuous-mat coping in silence, watching the ground."
+        "[d2] Crossed the willow bend with Silas without hesitation — reading the continuous-mat coping in silence, watching the ground.",
+        "[d2] Stopped moving when Silas knelt — reading the posture without asking. Waiting."
       ],
       "knownFacts": [
         "The valve housing crust is thick at every iron-to-water contact point",
@@ -1376,7 +1346,7 @@
         "following without needing to lead"
       ],
       "status": "active",
-      "statusNote": "Seventy paces north of the willow bend with Silas, inside Dara Holt's upper reach — reading the coping deposit.",
+      "statusNote": "Seventy paces north of the willow bend with Silas, on the bedrock shelf, watching the cast.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1481,7 +1451,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Spear repair fully completed at dawn — north quarter capacitor pressed flush. Bench carries pitch-smear and the marks of the night's work.",
         "[d2] Memory named at the forge bench at dawn — wine opened, starfruit shared, the night's work concluded with a name.",
         "[d2] Dawn conversation at the forge bench — the relationship between Silas and Pell moved from craft partnership to something named and mutual. The bench, the wine, and Memory all present.",
         "[d2] Pell has agreed to walk north with Silas to the east-channel valve sites — Fen's failed intake named as first destination, a bend in the east channel twenty minutes north of the upper meadow.",
@@ -1492,7 +1461,8 @@
         "[d2] Knife-scraped strip on the valve housing above the waterline — three crust layers now exposed and readable. Do not cover. Physical evidence for Dara Holt.",
         "[d2] East channel bank section 100-150 yards north of Fen's intake shows four-layer deposit on iron banding-strips — water color deepens to copper-tinged in the cut section here. Iron-specific pattern hold",
         "[d2] Willow bend at the upper-reach boundary — continuous iron-mat deposit on coping, copper-green water visible upstream. Physical trace of the source confirmed here on World-day 14 morning.",
-        "[d2] Bedrock shelf 70 paces north of the willow bend — hairline crack showed an amber thread of light below the waterline on World-day 14 morning. Pulsed once and went still. Huginn attended it. Physical s"
+        "[d2] Bedrock shelf 70 paces north of the willow bend — hairline crack showed an amber thread of light below the waterline on World-day 14 morning. Pulsed once and went still. Huginn attended it. Physical s",
+        "[d2] Bedrock shelf 70 paces north of the willow bend — Palework confirms the crack is recent (a season or less); the amber light is an ancient concluded thing breathing out through the new gap. Old ending "
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2015,7 +1985,8 @@
           "[d2] Upstream trace confirms the deposit thickens with distance north — iron banding-strips show four layers by 150 yards above Fen's intake. Water color shifts from dilute gray-green to a deeper copper-ti",
           "[d2] Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains th",
           "[d2] At the willow bend the deposit shifts from four discrete layers to a continuous iron mat — waterline gray-green, above-tide rust-brown. Water color deepens to copper-green. The smell changes: older th",
-          "[d2] North of the willow bend the deposit becomes continuous iron-mat with no discrete layers — the smell changes to metal-under-metal, cave-tool old. At 70 paces north, a hairline crack in an exposed bedr"
+          "[d2] North of the willow bend the deposit becomes continuous iron-mat with no discrete layers — the smell changes to metal-under-metal, cave-tool old. At 70 paces north, a hairline crack in an exposed bedr",
+          "[d2] Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancien"
         ],
         "links": [
           "millbrook",
@@ -2028,7 +1999,8 @@
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "entityId": "the-water-crisis"
       },
       "dara-holt-the-ditch-mother": {
         "id": "dara-holt-the-ditch-mother",
@@ -2071,14 +2043,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.75133944935032,
-    "cerebral": 34.9022593794538,
-    "social": 57.527082748396275,
-    "generous": 12.562204843350486,
-    "cautious": 30.33988779906389,
-    "physical": 1.5184018562900372,
-    "risky": 2.655340536939434,
-    "ruthless": 0.7744209942832988
+    "strategic": 53.48258275210357,
+    "cerebral": 36.72774808255653,
+    "social": 57.239447334654294,
+    "generous": 12.499393819133733,
+    "cautious": 31.188188360068573,
+    "physical": 1.5108098470085871,
+    "risky": 2.6420638342547367,
+    "ruthless": 0.7705488893118823
   },
   "aptitudes": [
     "strategist",
@@ -2086,7 +2058,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 140,
+  "actionCount": 141,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2172,8 +2144,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784047937174,
-  "rev": 207,
+  "updatedAt": 1784048282041,
+  "rev": 208,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2404,6 +2376,12 @@
       "text": "Mara's ledger confirms four iron sleeve blank failures in three weeks — Fen's intake (World-day minus-18) and east furlong farmer (World-day minus-9) confirmed; two additional failures unidentified. T",
       "day": 2,
       "subjectId": "mara-wells"
+    },
+    {
+      "id": "the-water-crisis",
+      "text": "Palework on the bedrock shelf confirms: the amber light is a very old ended thing venting through a crack that opened no more than a season ago. The iron in the channel and the old ending below share ",
+      "day": 2,
+      "subjectId": "the-water-crisis"
     }
   ],
   "practice": {
@@ -2412,7 +2390,7 @@
       "numen_sense": 3,
       "lightsense": 2,
       "order_sense": 29,
-      "palework": 11,
+      "palework": 12,
       "deathsense": 10,
       "shadowstep": 2
     },

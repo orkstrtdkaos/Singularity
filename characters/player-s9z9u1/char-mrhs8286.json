@@ -741,114 +741,61 @@
         "player": "I'll pay her out of pocket - then ask if there's anything else she knows about Pell that might help in your wooing... What kind of things does Pell like?",
         "summary": "Silas pays for the wine and starfruit, then draws quiet intelligence on Pell from Mara — who gives it plainly, with a warning attached.",
         "narration": "You count out eleven cord-weight and set it on the counter in a neat stack. Mara picks up each disc with the same unhurried competence she brings to everything — counts them without looking, drops them in the drawer, marks a line in the ledger. Done.\n\nThen you lean on the counter slightly and ask, keeping it easy: is there anything Mara knows about Pell that might be worth knowing? What does she actually like?\n\nMara's pen doesn't stop moving. She caps the ink, sets the pen in the groove, and looks at you with an expression that is not unkind but is entirely clear-eyed. \"That's a question I'd be careful about,\" she says. \"Not because I won't answer — I will — but because Pell reads a person who asks around about her the same way she reads a blade that's been sharpened by someone else. She wants to know if it was done right.\" A beat. \"So take what I say as background, not as a shortcut.\"\n\nShe begins to close the ledger. \"She likes work that is actually finished. Not almost done, not good enough — done and honest about what it cost. She'll sit with you over a long job longer than she'll sit with you over a short meal. The wine is right: she drinks slowly and she notices the taste. The fruit —\" a brief pause, a slight upward movement at one corner of her mouth — \"she grew up before the pass closed. She'll recognize those and she won't expect them. That's a better thing than something expensive.\" The ledger closes. \"One more. She doesn't like being anticipated. Give her room to come to conclusions herself and she'll trust you for it. Try to land her somewhere and she'll feel the current under the conversation.\" She picks up her pen again. \"That's what I know. It's enough.\""
+      },
+      {
+        "player": "Ask one follow-up: does Pell have anyone — or has she, recently? Better to know before you walk in.",
+        "summary": "Mara tells Silas that Pell is unattached — a tinker from the heights, three years back, ended quietly. Warns him not to over-engineer the approach.",
+        "narration": "Mara's expression doesn't shift much — a small compression at one corner of her mouth, the kind that precedes honesty rather than deflection.\n\n\"Not currently,\" she says, in the same tone she'd use to report stock levels. \"There was someone, maybe three years back — a tinker from the heights who came through twice a year. It ran quiet and steady for a while. Then it didn't. He stopped coming through.\" She straightens a jar on the shelf behind her with one knuckle, a purely habitual gesture. \"I don't know if it ended clean or not. Pell didn't say and I didn't ask. She's not the kind you ask twice.\"\n\nShe turns back to you, and there's a slight narrowing to her attention — not unfriendly, but precise. \"What I'll tell you, for free: she doesn't hold a torch. She just moves at her own pace and doesn't apologize for it. If you go in there trying to read the room before you say a thing, she'll know you're doing it.\" A short pause. \"Wine and starfruit is good. Showing up with your hands busy and your mouth quiet is better. Let the afternoon be what it is.\"\n\nHuginn makes a sound from the doorstep outside — not a word, just a low, settled croak, the kind it makes when it has been waiting long enough and finds the wait unremarkable. The forge is across the village. The fire will be ready by early afternoon, if Pell runs true."
       }
     ],
     "lastTurn": {
-      "narration": "You count out eleven cord-weight and set it on the counter in a neat stack. Mara picks up each disc with the same unhurried competence she brings to everything — counts them without looking, drops them in the drawer, marks a line in the ledger. Done.\n\nThen you lean on the counter slightly and ask, keeping it easy: is there anything Mara knows about Pell that might be worth knowing? What does she actually like?\n\nMara's pen doesn't stop moving. She caps the ink, sets the pen in the groove, and looks at you with an expression that is not unkind but is entirely clear-eyed. \"That's a question I'd be careful about,\" she says. \"Not because I won't answer — I will — but because Pell reads a person who asks around about her the same way she reads a blade that's been sharpened by someone else. She wants to know if it was done right.\" A beat. \"So take what I say as background, not as a shortcut.\"\n\nShe begins to close the ledger. \"She likes work that is actually finished. Not almost done, not good enough — done and honest about what it cost. She'll sit with you over a long job longer than she'll sit with you over a short meal. The wine is right: she drinks slowly and she notices the taste. The fruit —\" a brief pause, a slight upward movement at one corner of her mouth — \"she grew up before the pass closed. She'll recognize those and she won't expect them. That's a better thing than something expensive.\" The ledger closes. \"One more. She doesn't like being anticipated. Give her room to come to conclusions herself and she'll trust you for it. Try to land her somewhere and she'll feel the current under the conversation.\" She picks up her pen again. \"That's what I know. It's enough.\"",
-      "sceneSummary": "Silas pays for the wine and starfruit, then draws quiet intelligence on Pell from Mara — who gives it plainly, with a warning attached.",
+      "narration": "Mara's expression doesn't shift much — a small compression at one corner of her mouth, the kind that precedes honesty rather than deflection.\n\n\"Not currently,\" she says, in the same tone she'd use to report stock levels. \"There was someone, maybe three years back — a tinker from the heights who came through twice a year. It ran quiet and steady for a while. Then it didn't. He stopped coming through.\" She straightens a jar on the shelf behind her with one knuckle, a purely habitual gesture. \"I don't know if it ended clean or not. Pell didn't say and I didn't ask. She's not the kind you ask twice.\"\n\nShe turns back to you, and there's a slight narrowing to her attention — not unfriendly, but precise. \"What I'll tell you, for free: she doesn't hold a torch. She just moves at her own pace and doesn't apologize for it. If you go in there trying to read the room before you say a thing, she'll know you're doing it.\" A short pause. \"Wine and starfruit is good. Showing up with your hands busy and your mouth quiet is better. Let the afternoon be what it is.\"\n\nHuginn makes a sound from the doorstep outside — not a word, just a low, settled croak, the kind it makes when it has been waiting long enough and finds the wait unremarkable. The forge is across the village. The fire will be ready by early afternoon, if Pell runs true.",
+      "sceneSummary": "Mara tells Silas that Pell is unattached — a tinker from the heights, three years back, ended quietly. Warns him not to over-engineer the approach.",
       "choices": [
         {
-          "label": "Thank Mara, pocket the goods, and head to the forge — you have what you came for.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "depart",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask one follow-up: does Pell have anyone — or has she, recently? Better to know before you walk in.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "probe"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask whether Mara has heard anything fresh about the river — the gray-green water, anything upstream. Aldric mentioned she tracks it too.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "probe"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask if there's anything else useful in her back stock — you're heading into an afternoon at the forge and may stay late.",
+          "label": "Head to the forge now — clean up from the hunt, arrive early, let the afternoon settle on its own terms.",
           "attribute": "practical",
           "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take a short rest first — find somewhere to sit and eat something before the afternoon; you've been moving since before dawn and it would show.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk the village before you go — pass by the well, look at the river. The water question is still open, and the morning is still here.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
             "scout"
           ],
-          "trivial": true
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [
-          {
-            "name": "Resin Mountain Wine",
-            "kind": "consumable",
-            "description": "A dark-glass bottle, wax-sealed, from an Adaptor settlement south of the Disputed Zone. Pressed from a mountain grape. Strong; tastes of resin and something you can't name. A gift for Pell.",
-            "consumable": true,
-            "effects": {
-              "energy": 5
-            }
-          },
-          {
-            "name": "Dried Starfruit (sealed packet)",
-            "kind": "consumable",
-            "description": "Cloth-wrapped, sealed tight — old pass circuit trade goods, three or four winters old and still good. Rare here. A gift for Pell.",
-            "consumable": true,
-            "effects": {
-              "energy": 3
-            }
-          }
-        ],
-        "inventoryRemove": [
-          "Cord-Weight Coin (20)"
-        ],
-        "xp": 0
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Village supply store operator, Millbrook",
-          "note": "Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach.",
-          "learned": [
-            "Pell values finished work over impressive work",
-            "Pell drinks slowly and notices taste — the wine is a good choice",
-            "Pell grew up before the pass closed — the starfruit will be recognized and unexpected",
-            "Pell dislikes being anticipated or steered — give her room to reach her own conclusions"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At her store counter, ledger closed, transaction complete."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell Marsh",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Mara's read: Pell values genuinely finished work; drinks slowly and notices taste; grew up before the pass closed so the starfruit will land as recognition, not novelty; dislikes being steered toward conclusions — give her room.",
-          "links": [
-            "millbrook",
-            "mara-wells"
-          ]
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
@@ -856,15 +803,13 @@
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Pen back in hand, ledger closed, watching Silas with the mild patience of someone whose work here is done."
+            "state": "Pen capped and set in its groove, ledger closed — watching Silas with the mild patience of someone who has said everything she intends to say."
           }
         ],
         "objects": [
           "Store counter with closed ledger",
           "Rope stock (mid-weight peg — gap still present)",
-          "Shelved hardware and tools",
-          "Resin Mountain Wine (dark glass, wax-sealed) — now in Silas's inventory",
-          "Dried Starfruit (sealed packet) — now in Silas's inventory"
+          "Shelved hardware and tools"
         ],
         "threads": [
           "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
@@ -872,9 +817,38 @@
           "Huginn's northwest direction — unresolved, Huginn near the door outside"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Village supply store operator, Millbrook",
+          "note": "Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
+          "learned": [
+            "Pell had a quiet relationship with a tinker from the heights that ended about three years ago — he stopped coming through; she didn't discuss it",
+            "Pell moves at her own pace and reads people who are performing before they speak"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her store counter, work done, watching Silas finish up his questions."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Had a quiet relationship with a tinker from the heights, roughly three years ago — ran steady for a while, ended when he stopped coming through. Mara doesn't know if it ended clean. Pell didn't speak of it.",
+          "links": [
+            "millbrook",
+            "mara-wells"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief transaction and a short conversation"
+        "why": "A brief follow-up question and answer at the store counter."
       }
     },
     "sceneState": {
@@ -882,15 +856,13 @@
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Pen back in hand, ledger closed, watching Silas with the mild patience of someone whose work here is done."
+          "state": "Pen capped and set in its groove, ledger closed — watching Silas with the mild patience of someone who has said everythi"
         }
       ],
       "objects": [
         "Store counter with closed ledger",
         "Rope stock (mid-weight peg — gap still present)",
-        "Shelved hardware and tools",
-        "Resin Mountain Wine (dark glass, wax-sealed) — now in Silas's inventory",
-        "Dried Starfruit (sealed packet) — now in Silas's inventory"
+        "Shelved hardware and tools"
       ],
       "threads": [
         "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
@@ -1090,7 +1062,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] First contact — Silas entered the store, she looked up from her ledger. Has not yet been given reason to be warm or cold.",
         "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
         "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,",
         "[d1] Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-bla",
@@ -1099,17 +1070,18 @@
         "[d2] Silas has returned to the store — she looks up from the ledger.",
         "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
         "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig",
-        "[d2] Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach"
+        "[d2] Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach",
+        "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach."
       ],
       "knownFacts": [
-        "She wants upstream information and would receive it directly, same as Aldric",
-        "Has one bottle of resin wine from an Adaptor settlement south of the Disputed Zone",
         "Has sealed dried starfruit from the pass circuit trade — three or four winters old, still good",
         "The wine and starfruit are a gift from Silas to Pell",
         "Silas is heading to the forge this afternoon",
         "Pell values finished work over impressive work",
         "Pell drinks slowly and notices taste — the wine is a good choice",
-        "Pell grew up before the pass closed — the starfruit will be recognized and unexpected"
+        "Pell grew up before the pass closed — the starfruit will be recognized and unexpected",
+        "Pell had a quiet relationship with a tinker from the heights that ended about three years ago — he stopped coming through; she didn't discuss it",
+        "Pell moves at her own pace and reads people who are performing before they speak"
       ],
       "skillsObserved": [
         "back-stock management",
@@ -1120,7 +1092,7 @@
         "back-stock recall without hesitation"
       ],
       "status": "active",
-      "statusNote": "At her store counter, ledger closed, transaction complete.",
+      "statusNote": "At her store counter, work done, watching Silas finish up his questions.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1542,7 +1514,8 @@
           "[d1] Reads terrain and wind cleanly under field conditions — laid out the bull approach without hesitation once given the spear. Trusted Silas's shadowstep hint from the night before without needing it nam",
           "[d1] Responds to Silas's humor with dry wit — suppressed a laugh at the spear-marriage joke and returned 'the married part I'll need in writing.' The warmth is real but kept under ironwork.",
           "[d1] Told plainly that her maker's mark makes her 'half the spear's until she's not' — received it flat, named it provisional, didn't push back. The warmth and the ironwork register are the same thing in h",
-          "[d2] Mara's read: Pell values genuinely finished work; drinks slowly and notices taste; grew up before the pass closed so the starfruit will land as recognition, not novelty; dislikes being steered toward "
+          "[d2] Mara's read: Pell values genuinely finished work; drinks slowly and notices taste; grew up before the pass closed so the starfruit will land as recognition, not novelty; dislikes being steered toward ",
+          "[d2] Had a quiet relationship with a tinker from the heights, roughly three years ago — ran steady for a while, ended when he stopped coming through. Mara doesn't know if it ended clean. Pell didn't speak "
         ],
         "links": [
           "millbrook",
@@ -1686,14 +1659,14 @@
     }
   },
   "tendencies": {
-    "strategic": 47.302597148687674,
-    "cerebral": 24.024025485411883,
-    "social": 48.38146963885354,
-    "generous": 9.898104152670363,
-    "cautious": 21.06515593052636,
-    "physical": 1.846233287188994,
-    "risky": 0.918316468354365,
-    "ruthless": 0.9416228069143757
+    "strategic": 47.066084162944236,
+    "cerebral": 24.903905357984822,
+    "social": 48.13956229065927,
+    "generous": 9.848613631907012,
+    "cautious": 20.959830150873728,
+    "physical": 1.837002120753049,
+    "risky": 0.9137248860125932,
+    "ruthless": 0.9369146928798039
   },
   "aptitudes": [
     "strategist",
@@ -1701,7 +1674,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 101,
+  "actionCount": 102,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1755,8 +1728,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783996428857,
-  "rev": 155,
+  "updatedAt": 1783996582143,
+  "rev": 156,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

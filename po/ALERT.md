@@ -2,7 +2,7 @@
 
 > **This file carries CURRENT STATUS ONLY.** History lives in `po/results/*` and the graph. *(Per SNG-071: old append-only ALERT archived at `po/archive/ALERT_20260712.md`.)*
 
-**HEAD:** `b6176635` · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
+**HEAD:** `0c93ff6` (v1.8.56) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
 **Process:** SNG-071 two-round cycle. Aevi authors ROUND 1 → **CCode substrate-verifies (ROUND 2)** → Aevi amends + promotes → CCode builds → `complete_pending_review` → **only Aevi closes.**
 
 ---
@@ -42,10 +42,13 @@
 
 ---
 
-## 🔧 SNG-090 — SUBSTRATE (SECOND DIFFICULTY MAP) — PHASE A SHIPPED v1.8.54 · Phase B next
+## 🔧 SNG-090 — SUBSTRATE (SECOND DIFFICULTY MAP) — PHASE A+B SHIPPED v1.8.56 · complete_pending_review
 
-**Phase A shipped (`923a474`, results `po/results/20260713_SNG-090-phaseA.md`):** the foundation — pure `engine/substrate.js` (two-sided band factor: starve below / interfere above / carried rescues-or-worsens), the **balance harness `tests/balance_sim.mjs`** (owed since SNG-078; now in `npm test`, validates the anchors as a gate + reports the SNG-078 ceiling), `CONTENT.substrateModel` load, and a `content_ci` gate that every location resolves a density (all 92 do). Anchors hold: Seraph@Quickwood **13%**, Rootkin@Gearlands **69%**, Rootkin@Quickwood/Seraph@Lattice/Mason@home **100%**, carried charge rescues the starved & worsens the crowded. **No gameplay change yet.**
-**Phase B (next):** wire `substratePenalty` into `successChance` (ability actions only) + hard gate + energy mult, SEPARATE from SNG-079's spectral term; receipts + GM line + map overlay; carried-charge logistics. Changes live resolution → needs in-play verification + a re-tune against fuller characters.
+**Phase B shipped (`0c93ff6`, results `po/results/20260713_SNG-090-phaseB.md`):** the substrate now BITES in live play. `successChance` takes a `substratePenalty` — its own already-clamped additive term, **SEPARATE from SNG-079's spectral fit** (never folded). Per ability choice, `substrateForAction()` builds the verdict; `onChoice` **hard-gates** when the craft is off (*"the lattice is too thin — X barely stirs; steel and wit still work"*), else subtracts the chance penalty. Receipts land on the roll (*"the lattice is thin — your craft ran at N%"*) and a **map-details density chip** (thin/even/dense lattice); a **THE SUBSTRATE GM block** narrates the strain/interference without inventing absent power. `carriedSubstrate()` sums item `substrateCharge` + companion `substrateAura` → rescues the starved, worsens the crowded. **Ability actions only** — a weapon swing is substrate-free. Live-verified fresh-port against real region keys: Seraph@Quickwood **13% → gated off**, +carried 0.6 **→ 100% rescued**, Rootkin@Gearlands **69% crowded (not off)**. npm test green, clean boot.
+
+**Phase A shipped (`923a474`, results `po/results/20260713_SNG-090-phaseA.md`):** the foundation — pure `engine/substrate.js` (two-sided band factor: starve below / interfere above / carried rescues-or-worsens), the **balance harness `tests/balance_sim.mjs`** (owed since SNG-078; now in `npm test`, validates the anchors as a gate + reports the SNG-078 ceiling), `CONTENT.substrateModel` load, and a `content_ci` gate that every location resolves a density (all 92 do).
+
+**Deferred (non-blocking):** energy-cost multiplier (`energyMult` is computed but not yet applied to `energyCost` — held pending a balance call on whether thin/crowded ground should also drain faster); SVG ring-overlay on the map (the details-panel chip lands the "overlay" requirement; a full danger-ring-style substrate ring is a refinement). **Needs Aevi content:** the Waystaff (and any charged reservoir) wants a `substrateCharge` property, and living motes a `substrateAura`, before carried-charge bites in real inventories — the engine reads both today; the content fields don't exist yet.
 
 <details><summary>original amendment note</summary>
 **Amendment 1 promoted 2026-07-13.** Data file `the_substrate.json` amended at `1e3403e6`. Spec §9b inserted + §4 formula updated at `34fccefe`. **CCode may now build.**
@@ -95,12 +98,12 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 ## ⛔ NEXT (build order)
 
-1. **SNG-090 Ph B** — substrate wiring (CCode: `successChance` + gate + energy mult + receipts + overlay). Amendment promoted; `the_substrate.json` and `SYSTEM_SPEC.md` §9b both at HEAD. CCode: `engine/substrate.js` + `tests/balance_sim.mjs` first to tune the curves. Full build order above.
-2. **SNG-058 — party leader.** (Was next before the substrate sprint opened.)
-3. **SNG-084 — in-context helper text.** `content/packs/core/rules/helper_text.json` exists; engine + UI owed.
-4. **SNG-089 Ph2** — Accord waygate-journey acquisition · 12 braids → GM · living treaty as world-event.
-5. **SNG-078/079** — balance + axial gate (Erik's call; `balance_sim.mjs` first).
-6. **SNG-045 Part A** — duplicate-Erik profile merge. Discovery (SNG-087) mitigates; clean fix is a backup-first guarded `mergePlayers(from→to)`. Aevi to author the reconcile or confirm CCode builds it.
+1. **SNG-058 — party leader.** (Was next before the substrate sprint opened.)
+2. **SNG-084 Ph3** — locked-ability reasons + `world.precursor`/`heard_of` + "every refusal explains itself". (Ph1+2 shipped.)
+3. **SNG-089 Ph2** — Accord waygate-journey acquisition · 12 braids → GM · living treaty as world-event.
+4. **SNG-078/079** — balance + axial gate (Erik's call; `balance_sim.mjs` now exists). SNG-090 Ph B added a fresh live term to `successChance` → a good moment to re-tune the whole chain together.
+5. **SNG-045 Part A** — duplicate-Erik profile merge. Discovery (SNG-087) mitigates; clean fix is a backup-first guarded `mergePlayers(from→to)`. Aevi to author the reconcile or confirm CCode builds it.
+6. **SNG-090 follow-ons** (non-blocking) — apply `energyMult` to energy cost (balance call); SVG substrate ring on the map; Aevi authors `substrateCharge`/`substrateAura` content so carried-charge bites.
 
 ---
 
@@ -113,7 +116,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 - `po/SPEC_BACKLOG.md` retirement as primary surface (180KB — move active items here)
 
 **CCode:**
-- `tests/balance_sim.mjs` (owed since SNG-078 — **now also required before SNG-090 curves go in**)
+- ~~`tests/balance_sim.mjs`~~ ✅ delivered SNG-090 Ph A (v1.8.54) — in `npm test`, gates the substrate anchors + reports the SNG-078 ceiling
 - §22 debt list from SYSTEM_SPEC R2: slugify in wrong module · worldtime MODE per-player vs "one clock" · `newEncounter` stashes-not-activates · quest stage-conditions advance manually · `narration`↔`effects[]` drift no linter · dead `regenPerRest` key · `parse_probe` can't reach `boot()`
 - `withTimeout` pattern on party find/join + roster play/adopt (flagged in SNG-093 commit — non-acute, follow-on)
 

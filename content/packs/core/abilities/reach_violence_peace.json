@@ -178,7 +178,8 @@
         "violence_peace": 0.3
       },
       "functions": [
-        "reveal"
+        "reveal",
+        "foresee"
       ],
       "narrationHints": "Every unspoken tension in a room, felt at once.",
       "description": "Sense a room's tensions, alliances, and the true temperature under the words.",
@@ -381,7 +382,8 @@
         "falsehood_truth": 0.2
       },
       "functions": [
-        "bind"
+        "bind",
+        "restore"
       ],
       "narrationHints": "Two enemies, one held agreement, weighted by your word.",
       "description": "Broker a real truce between hostile parties, weighted by your standing — mid-tier Stillcraft.",
@@ -771,6 +773,232 @@
         "CHASE": 2
       },
       "tradition": "marcher",
+      "harmRung": "none"
+    },
+    {
+      "id": "the_price_shown",
+      "name": "The Price Shown",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.4,
+        "falsehood_truth": 0.3
+      },
+      "effectTags": [
+        "hinder",
+        "reveal",
+        "truth"
+      ],
+      "narrationHints": "Not a blow. What the peace-worker does to violence is show it to itself. The fighter who truly sees what they are about to do sometimes cannot do it.",
+      "description": "Show someone the real cost of the violence they are about to commit — not a threat, an honest reckoning. The truth is the only weapon the Stillhold uses.",
+      "notFor": "Violence already underway — this works before the act, not during it. Those who already know the cost and are choosing it anyway are not stopped by this. The Weight stops them; the Price is for those who haven't looked yet.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Reckoning",
+          "grants": "Show one person exactly what this violence will cost — the relationship, the person they become, the future they close. Reveal what is true and let it hinder them. Some people cannot go past it.",
+          "cannot": "One person. Those who have made peace with the cost are unmoved."
+        },
+        {
+          "rank": 2,
+          "name": "The Room That Sees",
+          "grants": "Extend to a whole situation — a crowd, a formation, everyone about to participate in something terrible. The truth lands in multiple people at once. The room sees what it was about to do.",
+          "cannot": "A frightened crowd acts on the seeing. You do not control how they process it."
+        },
+        {
+          "rank": 3,
+          "name": "The Unseen Thing",
+          "grants": "Make the reckoning complete and lasting. The person carries it — not a feeling, a settled knowledge they can't unthink. The violence becomes practically impossible for them because they cannot make it smaller than it is.",
+          "cannot": "You have shown them something true. What they do with it is theirs. Some people accept the cost and proceed — and then it is only their choice, clearly made."
+        }
+      ],
+      "functions": [
+        "hinder",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT",
+        "INVESTIGATE"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 4,
+        "FIGHT": 2,
+        "INVESTIGATE": 2
+      },
+      "tradition": "stillhold",
+      "harmRung": "none"
+    },
+    {
+      "id": "the_laid_ground",
+      "name": "The Laid Ground",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.5,
+        "chaos_order": 0.2
+      },
+      "effectTags": [
+        "make",
+        "ward",
+        "sanctuary"
+      ],
+      "narrationHints": "A place can hold peace the way a bowl holds water — by being shaped right. The Stillhold does not merely call for peace; they build the container for it.",
+      "description": "Designate a place as peace-ground: not an illusion, not a feeling — a ward that makes violence practically harder in this space. The peace-worker makes the conditions, and conditions shape acts.",
+      "notFor": "Peace by force — the ground does not compel, it creates cost. The desperate or the certain can still cross it. This is not a prison.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Marked Place",
+          "grants": "Designate a space as peace-ground while you are present: violence becomes harder here, not impossible. A neutral meeting room, a truce-fire camp, a single room carved out of a war.",
+          "cannot": "The ward requires your presence and attention. It lapses when you leave."
+        },
+        {
+          "rank": 2,
+          "name": "The Held Ground",
+          "grants": "Inscribe the peace so it holds without you. Ward a space against the drift toward violence — it persists after you leave, anchored to the place itself. Make a treaty object that carries the ward with it.",
+          "cannot": "It holds as long as no one actively breaks it. A determined party can, it simply costs them noticeably."
+        },
+        {
+          "rank": 3,
+          "name": "The Lasting Ground",
+          "grants": "Create a sanctuary that time-holds: peace woven into a place so deeply that it resists even sustained pressure. A neutral ground that survives wars around it. Others recognise it and come to it.",
+          "cannot": "Making the ground does not make the peace. People have to want to keep coming. When they stop, it goes."
+        }
+      ],
+      "functions": [
+        "make",
+        "ward"
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "EXPLORE",
+        "SURVIVE"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 4,
+        "SURVIVE": 3,
+        "EXPLORE": 2
+      },
+      "tradition": "stillhold",
+      "harmRung": "none"
+    },
+    {
+      "id": "step_between",
+      "name": "Step Between",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "physical",
+      "axes": {
+        "violence_peace": 0.4,
+        "body_mind": 0.1
+      },
+      "effectTags": [
+        "move",
+        "shield",
+        "interpose"
+      ],
+      "narrationHints": "The Stillhold practitioner moves toward violence, not away from it. The movement IS the protection — your body, your presence, the simple fact that they must go through you.",
+      "description": "Move to interpose yourself between people about to harm each other. The act of placement is the act of protection — not a barrier, a choice.",
+      "notFor": "Protecting yourself — this moves you toward violence. A Stillhold practitioner who Steps Between for their own safety has inverted the craft.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Step Between",
+          "grants": "Place yourself between two parties at the moment before harm. Your presence and position shield the threatened; the attacker must now choose to go through a non-combatant making a deliberate stand.",
+          "cannot": "You are not armored. Some people go through anyway."
+        },
+        {
+          "rank": 2,
+          "name": "The Living Line",
+          "grants": "Draw a line with your body between two sides — not just one person but a confrontation. Bring a companion into the interposition. The two of you become the cost the violence has to accept.",
+          "cannot": "Two people are not a wall. This is still presence and choice, not force."
+        },
+        {
+          "rank": 3,
+          "name": "Already There",
+          "grants": "Read where the harm is going and be there before it arrives. You sense the moment forming and place yourself at the right position before anyone else has moved. The fight that never started because you were already in the way.",
+          "cannot": "Being in the way is not the same as stopping something. The Stillhold who steps between takes the consequences of being between."
+        }
+      ],
+      "functions": [
+        "move",
+        "shield",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "FIGHT",
+        "SURVIVE"
+      ],
+      "challengeProfile": {
+        "SOCIAL": 3,
+        "FIGHT": 3,
+        "SURVIVE": 2,
+        "CHASE": 1
+      },
+      "tradition": "stillhold",
+      "harmRung": "none"
+    },
+    {
+      "id": "safe_ground",
+      "name": "Safe Ground",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_violence_peace",
+      "attribute": "social",
+      "axes": {
+        "violence_peace": 0.4,
+        "destruction_creation": 0.2
+      },
+      "effectTags": [
+        "sustain",
+        "heal",
+        "sanctuary"
+      ],
+      "narrationHints": "People who are genuinely safe eat better. They sleep. The wounds they couldn't feel before, they feel — and then they start to close.",
+      "description": "Turn a place into genuine sanctuary: where people can eat, rest, and recover. Peace as the condition for sustenance. Not a miracle — just a space that is actually safe enough for the body to do its work.",
+      "notFor": "Keeping people safe from attack (use The Laid Ground or Step Between). Safe Ground is about sustained survival — it sustains, it does not protect. You still need to make the space defensible by other means.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Clear Camp",
+          "grants": "Establish temporary sanctuary: a camp, a room, a space that is genuinely safe and comfortable enough for rest and basic recovery. People can eat, sleep, heal naturally. It lasts while the conditions hold.",
+          "cannot": "Temporary, and only as safe as you can make the surrounding situation."
+        },
+        {
+          "rank": 2,
+          "name": "The Known House",
+          "grants": "Create lasting sanctuary: a place that holds its quality without constant tending. A larger group can shelter here. Rest here heals because it is genuinely restful — the body trusts the space.",
+          "cannot": "The sanctuary's quality depends on it remaining genuinely safe. If the peace breaks, the healing stops."
+        },
+        {
+          "rank": 3,
+          "name": "The Open Table",
+          "grants": "The ground itself sustains: a sanctuary so established that people know to seek it, that survivors find their way to it, that healing comes faster here because this place has a history of safety. A small institution of care.",
+          "cannot": "Institutions require tending. What the Stillhold builds, others must maintain — or it becomes a ruin with a good reputation."
+        }
+      ],
+      "functions": [
+        "sustain",
+        "heal"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "SOCIAL",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 4,
+        "SOCIAL": 3,
+        "EXPLORE": 1
+      },
+      "tradition": "stillhold",
       "harmRung": "none"
     }
   ],

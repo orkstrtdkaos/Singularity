@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.56";
+const APP_VERSION = "1.8.57";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3138,7 +3138,76 @@ function wheelBraids(model) {
   return out;
 }
 
-function renderSkillWheel(selectedId = null) {
+// SNG-097: learn/deepen a craft directly from the skill wheel/graph selection, and SEE what an
+// upgrade grants before spending. Shared by both views — pure over character + CONTENT, so the two
+// panels can never drift from each other or from the Level-Up modal (same learnAbility/rankUpAbility).
+function skillSelectionActions(ab) {
+  if (!ab) return ""; // virtual/emergence node — no real ability to act on
+  const rules = CONTENT.rules;
+  const sp = character.skillPoints || 0;
+  const owned = character.abilities.find(a => a.abilityId === ab.id);
+  const maxRank = rules.leveling?.maxAbilityRank ?? 3;
+  // the tier ladder — what every rank grants (owned = filled, the one you'd buy next = highlighted).
+  // THIS is the "what does the upgrade do" the player asked for, made visible on select (not a hover).
+  const ladder = (ab.tree || []).map(t => {
+    const on = owned && t.rank <= owned.level;
+    const isNext = owned ? t.rank === owned.level + 1 : t.rank === 1;
+    return `<div class="skill-rung ${on ? "on" : ""} ${isNext ? "next" : ""}"><span class="skill-rung-dot">${on ? "●" : "○"}</span> <strong>r${t.rank} ${esc(t.name)}</strong>: ${esc(t.grants || "")}${t.cannot ? ` <span class="skill-rung-cannot">— cannot: ${esc(t.cannot)}</span>` : ""}</div>`;
+  }).join("");
+  const ladderBlock = ladder ? `<div class="skill-ladder">${ladder}</div>` : "";
+
+  if (owned) {
+    const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
+    const nextReq = rules.leveling?.rankLevelReq?.[String(owned.level + 1)];
+    const atMax = owned.level >= maxRank;
+    const levelOk = character.level >= (nextReq ?? 1);
+    const practiced = practiceRankReady(character, ab.id, rules) && !atMax && levelOk;
+    const canRank = !atMax && levelOk && (sp >= rankCost || practiced);
+    return `<div class="skill-actions">${ladderBlock}
+      ${canRank
+        ? `<button class="btn" data-skillrank="${esc(ab.id)}">▲ ${practiced && sp < rankCost ? "Rank up — practiced, free" : `Rank up (${rankCost} pt${rankCost > 1 ? "s" : ""})`}</button>`
+        : `<span class="hint">${atMax ? "✓ mastered — highest rank" : !levelOk ? `deepens at level ${nextReq}` : `needs ${rankCost} point${rankCost > 1 ? "s" : ""} (you have ${sp})`}</span>`}
+    </div>`;
+  }
+  // not owned → the learn path (same gate as the Level-Up modal's learnRow)
+  const req = learnLevelReq(ab);
+  const dv = domainVerdict(ab);
+  if (req === null || !dv.allowed) return `<div class="skill-actions">${ladderBlock}<span class="hint">🔒 not open to your domains</span></div>`;
+  const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
+  const ripe = aspirationRipe(character, ab.id, rules);
+  const cost = character.domains?.primary ? (dv.penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity);
+  const capBlock = atCapacity(character, CONTENT.skillCapacity) && ab.powerSystem !== "learned";
+  const levelOk = character.level >= req;
+  const tooPoor = !ripe && sp < cost;
+  const blocked = !gate.ok || capBlock || tooPoor || !levelOk;
+  return `<div class="skill-actions">${ladderBlock}
+    ${blocked
+      ? `<span class="hint">🔒 ${!levelOk ? `opens at level ${req}` : !gate.ok ? esc(gate.why) : capBlock ? "at capacity — deepen a craft you know instead" : `need ${cost} point${cost > 1 ? "s" : ""} (you have ${sp})`}</span>`
+      : `<button class="btn" data-skilllearn="${esc(ab.id)}">Learn${ripe ? " (free — practiced)" : ` (${cost} pt${cost > 1 ? "s" : ""})`}</button>`}
+  </div>`;
+}
+
+// Wire the learn/deepen buttons a details panel rendered. `rerender(id, status)` re-opens the same
+// view with the node still selected and a status line — used by both wheel and graph.
+function wireSkillSelectionActions(rerender) {
+  for (const b of app.querySelectorAll("[data-skilllearn]")) b.onclick = () => {
+    const id = b.dataset.skilllearn;
+    const free = aspirationRipe(character, id, CONTENT.rules);
+    const r = learnAbility(character, id, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
+    if (r.ok) { if (free) dropAspiration(character, id); saveCharacter(character); rerender(id, `Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.`); }
+    else rerender(id, r.why);
+  };
+  for (const b of app.querySelectorAll("[data-skillrank]")) b.onclick = () => {
+    const id = b.dataset.skillrank;
+    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1;
+    const owned = character.abilities.find(a => a.abilityId === id);
+    const doRank = () => { const r = rankUpAbility(character, id, CONTENT.rules, rankOptsFor()); if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); saveCharacter(character); rerender(id, `Deepened ${fullCatalog()[id]?.name} to rank ${character.abilities.find(a => a.abilityId === id)?.level}.`); } else rerender(id, r.why); };
+    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); doRank(); });
+    else doRank();
+  };
+}
+
+function renderSkillWheel(selectedId = null, status = "") {
   const idx = CONTENT.traditionIndex;
   if (!idx) { renderSkillGraph(selectedId); return; } // no ring loaded → fall back to the list graph
   const m = buildWheelModel();
@@ -3204,11 +3273,14 @@ function renderSkillWheel(selectedId = null) {
     <div class="hint">${esc(gateLine)}${selAb?.energyCost ? ` · energy ${selAb.energyCost}` : ""}${(selAb?.functions || []).length ? ` · ${selAb.functions.join(", ")}` : ""}</div>
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
+    ${skillSelectionActions(selAb)}
   </div>` : "";
 
   chrome(`<div class="screen" style="max-width:980px">
     <h2>The Skill Wheel ${infoDot("circle.what")}</h2>
-    <p class="hint" style="margin-bottom:8px">The great circle IS your skill tree. Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; the <strong>folk crafts</strong> sit at the centre (open to all); <strong>precursor</strong> rings the outside; a <strong>braid you know</strong> draws a line through the middle; and your <strong>antipode is dark, struck through</strong>, across the wheel. Depth = mastery. <strong>Scroll to zoom, drag to pan.</strong></p>
+    <p class="hint" style="margin-bottom:8px">The great circle IS your skill tree. Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; the <strong>folk crafts</strong> sit at the centre (open to all); <strong>precursor</strong> rings the outside; a <strong>braid you know</strong> draws a line through the middle; and your <strong>antipode is dark, struck through</strong>, across the wheel. Depth = mastery. <strong>Tap a node to learn or deepen it here.</strong> Scroll to zoom, drag to pan.</p>
+    <p class="hint" style="margin-bottom:8px"><span class="grow-badge">${character.skillPoints || 0} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</span> · ${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity" : ""}</p>
+    ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent); margin-bottom:8px">${esc(status)}</div>` : ""}
     <div class="graph-wrap" id="graph-wrap">
       <div class="graph-zoom-ctl">
         <button id="gz-in" title="Zoom in">＋</button>
@@ -3228,11 +3300,12 @@ function renderSkillWheel(selectedId = null) {
     if (_graphDidPan) { _graphDidPan = false; return; }
     renderSkillWheel(g.dataset.wheelnode === selectedId ? null : g.dataset.wheelnode);
   };
+  wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
   document.getElementById("wheel-back").onclick = () => { graphView = null; renderCharacterScreen(); };
   document.getElementById("wheel-list").onclick = () => { graphView = null; renderSkillGraph(); };
 }
 
-function renderSkillGraph(selectedId = null) {
+function renderSkillGraph(selectedId = null, status = "") {
   const model = skillGraphModel(fullCatalog(), CONTENT.emergence, character, {
     attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, branchForks: CONTENT.branchForks,
     preds: {
@@ -3282,12 +3355,14 @@ function renderSkillGraph(selectedId = null) {
     <div class="hint">Level requirement: ${sel.levelReq}${sel.gated ? ` · ${(() => { const g = gateFor(sel.id, CONTENT.attributeGates); return `needs ${g.subAttribute} ${g.learnMin} (rank 3: ${g.rank3Min})`; })()}` : ""}${sel.locked ? ` · 🔒 ${esc(sel.lockText)}` : ""}</div>
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${sel.forks ? `<div class="codex-fact fork-note"><strong>⑂ Fork at rank ${sel.forkAt}:</strong> ${sel.forkChosen ? `specialized as <em>${esc(sel.forkChosen)}</em> — <span class="fp-cannot">${esc(sel.forkLocked)} locked forever</span>` : "a permanent A-or-B specialization when you rank into it — the path you don't take locks."}</div>` : ""}
-    ${(selAb?.tree || []).map(t => `<div class="codex-fact"><strong>${tierOf(sel.levelReq)}·r${t.rank} ${esc(t.name)}:</strong> ${esc(t.grants)} <em>(cannot: ${esc(t.cannot)})</em></div>`).join("")}
+    ${skillSelectionActions(selAb)}
   </div>` : "";
 
   chrome(`<div class="screen" style="max-width:960px">
     <h2>Skill Graph</h2>
-    <p class="hint" style="margin-bottom:8px">Every ability by class (color) and Tier I–V (size). Filled = owned. Gold ring = aspired · teal ring = ripe to claim · 🔒 = gated. Diamonds are emergence techniques; lines link their components. <strong>Scroll to zoom, drag to pan.</strong></p>
+    <p class="hint" style="margin-bottom:8px">Every ability by class (color) and Tier I–V (size). Filled = owned. Gold ring = aspired · teal ring = ripe to claim · 🔒 = gated. Diamonds are emergence techniques; lines link their components. <strong>Tap a node to learn or deepen it here.</strong> Scroll to zoom, drag to pan.</p>
+    <p class="hint" style="margin-bottom:8px"><span class="grow-badge">${character.skillPoints || 0} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</span> · ${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity" : ""}</p>
+    ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent); margin-bottom:8px">${esc(status)}</div>` : ""}
     <div class="graph-wrap" id="graph-wrap">
       <div class="graph-zoom-ctl">
         <button id="gz-in" title="Zoom in">＋</button>
@@ -3307,6 +3382,7 @@ function renderSkillGraph(selectedId = null) {
     if (_graphDidPan) { _graphDidPan = false; return; } // a drag-pan, not a select
     renderSkillGraph(g.dataset.skillnode === selectedId ? null : g.dataset.skillnode);
   };
+  wireSkillSelectionActions((id, msg) => renderSkillGraph(id, msg)); // SNG-097: learn/deepen in place
   document.getElementById("graph-back").onclick = () => { graphView = null; renderCharacterScreen(); };
   document.getElementById("graph-wheel").onclick = () => { graphView = null; renderSkillWheel(); };
 }

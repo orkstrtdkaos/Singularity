@@ -7,6 +7,23 @@
 
 ---
 
+
+---
+
+## 📄 PENDING CCODE REVIEW — ABILITY ARCHITECTURE v2 (`po/SPEC_AMENDMENT_ability_arch_v2.md`)
+
+**Authored by Aevi 2026-07-14. CCode review required before any implementation begins.**
+
+Covers: (1) native ability grants free at primary-domain selection, attribute-gated; (2) breadth/depth separation — rank progression through use only, no point spend at any rank; (3) two-tier combination model (axis-touch via narrative threshold + point spend; cross-pole braids unchanged); (4) new §7b — skill challenges and direct opposition (three types, environmental conditions, Coliseum); (5) schema additions; (6) module impact table.
+
+**CCode: read `po/SPEC_AMENDMENT_ability_arch_v2.md`, then:**
+- Flag anything that conflicts with HEAD or breaks existing module contracts
+- Answer the 6 open questions at the bottom of the doc
+- Propose rank-bonus values for skill challenge resolution (Q4)
+- Check `notFor` machine-readability (Q6)
+
+*Closed-opposite rule (§6) and cross-pole braid system (`combination_recipes.json`) are explicitly unchanged by this amendment.*
+
 ## ✅ CLOSED GREEN (Aevi verified at HEAD 2026-07-13)
 
 | Item | Closed at | What |
@@ -122,6 +139,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 - `po/SPEC_BACKLOG.md` retirement as primary surface (180KB — move active items here)
 
 **CCode:**
+- **SPEC REVIEW:** `po/SPEC_AMENDMENT_ability_arch_v2.md` — ability arch v2 + §7b skill challenges. Read + answer 6 open questions before implementation. (d204347)
 - ~~`tests/balance_sim.mjs`~~ ✅ delivered SNG-090 Ph A (v1.8.54) — in `npm test`, gates the substrate anchors + reports the SNG-078 ceiling
 - §22 debt list from SYSTEM_SPEC R2: slugify in wrong module · worldtime MODE per-player vs "one clock" · `newEncounter` stashes-not-activates · quest stage-conditions advance manually · `narration`↔`effects[]` drift no linter · dead `regenPerRest` key · `parse_probe` can't reach `boot()`
 - `withTimeout` pattern on party find/join + roster play/adopt (flagged in SNG-093 commit — non-acute, follow-on)

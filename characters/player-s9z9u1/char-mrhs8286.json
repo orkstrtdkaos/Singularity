@@ -32,6 +32,10 @@
     {
       "abilityId": "shadowstep",
       "level": 1
+    },
+    {
+      "abilityId": "the-attended-end",
+      "level": 1
     }
   ],
   "alignment": {
@@ -261,6 +265,22 @@
         "rune-craft",
         "community",
         "uncanny"
+      ],
+      "weight": 1,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 2,
+      "worldDay": 14
+    },
+    {
+      "at": "2026-07-14T14:12:15.737Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Kissed Pell Marsh at the forge bench at dawn — after a full night repairing Memory together and naming it over old wine.",
+      "tags": [
+        "personal",
+        "connection",
+        "craft"
       ],
       "weight": 1,
       "spread": [],
@@ -860,99 +880,105 @@
         "player": "Tell her you're glad you didn't fall for the first woman you met in this villiage (the cookhouse woman), but you're pretty sure you've fallen hard for the strong - capable - gorgeous creature before you.  Move toward her and make physical contact - telling her plainly what you want.",
         "summary": "Silas told Pell plainly he'd fallen for her; she heard him, and held his wrist.",
         "narration": "You set your cup on the bench and close the distance — not fast, not tentative, just the honest movement of a man who knows what he wants and has decided to say so out loud.\n\n\"When I walked into this village,\" you tell her, \"the first woman I met looked at Huginn and all but shut a door in my face.\" A corner of your mouth lifts. \"I'm glad that's how it went. Because I'd have missed this.\" You reach out and take her hand where it rests on the anvil horn — both of yours around one of hers, the same way she holds a piece to read it. Her palm is warm and calloused and absolutely sure of itself. \"You're strong and capable and gorgeous, and somewhere between the pre-dawn cold and the last of this wine I fell fairly hard for you. I'm not being clever about it. I'm telling you plainly, because that's the only way I know how to mean it.\"\n\nPell looks at where your hands are, then at your face. The forge-light is low and gold, and she doesn't move away. What she does instead is turn her hand in yours — the same economy she brings to every piece she handles — and close her fingers around your wrist. A grip, not a hold. Reading.\n\n\"Cookhouse woman,\" she says, like she's filing that away. Then, quieter: \"I heard you.\" She doesn't move toward you or away — she stays exactly where she is, hand around your wrist, and looks at you steadily in the low light. \"You should sleep before you're back on a road. But — not yet.\"\n\nHuginn makes a single sound from its perch: not a croak, not quite a word, but something that lands in the room like punctuation. Pell glances at it once, then back at you. The river whetstone is still on the bench where it's been all night, unclaimed."
+      },
+      {
+        "player": "Stay — the morning can wait. Lean in and kiss her.",
+        "summary": "Silas kissed Pell at the forge bench at dawn — she stayed, said 'alright', and the morning opened around them.",
+        "narration": "You close the last of the distance.\n\nHer hand tightens around your wrist a half-second before your mouth finds hers — not stopping you, just marking that she felt it coming and chose to stay still. The kiss is unhurried, the way she does everything: no performance in it, just the plain fact of it, her free hand coming up to the front of your shirt and not pulling you closer, not pushing, just resting there like a hand on a piece she's reading. She tastes of resin wine and old starfruit. The forge fire ticks low behind you. Huginn makes no sound at all, which is its own kind of comment.\n\nWhen you pull back she doesn't move away. Her eyes open — that direct, unhurried look she gives iron before she decides what it needs. \"Alright,\" she says, quietly, and there is something that might be a smile at one corner of her mouth. Not a conclusion. More like a first reading.\n\nMemory rests on the anvil horn between you, the collar flush, the double-stamp clean in the brass. The river whetstone is still on the bench, unofficially hers. The morning is pressing gold under the door now, full and unhurried, and Millbrook is waking up around the forge — wheels on stone, someone calling across the lane, the ordinary machinery of a day beginning. You have a provisioning debt to Aldric, one outstanding thread on the river scout, and a spear that finally knows its own name. The night's work is finished. What the morning holds is yours to choose.\n\n*✦ Your bond with Huginn deepens into something new: **The Attended End**.*"
       }
     ],
     "lastTurn": {
-      "narration": "You set your cup on the bench and close the distance — not fast, not tentative, just the honest movement of a man who knows what he wants and has decided to say so out loud.\n\n\"When I walked into this village,\" you tell her, \"the first woman I met looked at Huginn and all but shut a door in my face.\" A corner of your mouth lifts. \"I'm glad that's how it went. Because I'd have missed this.\" You reach out and take her hand where it rests on the anvil horn — both of yours around one of hers, the same way she holds a piece to read it. Her palm is warm and calloused and absolutely sure of itself. \"You're strong and capable and gorgeous, and somewhere between the pre-dawn cold and the last of this wine I fell fairly hard for you. I'm not being clever about it. I'm telling you plainly, because that's the only way I know how to mean it.\"\n\nPell looks at where your hands are, then at your face. The forge-light is low and gold, and she doesn't move away. What she does instead is turn her hand in yours — the same economy she brings to every piece she handles — and close her fingers around your wrist. A grip, not a hold. Reading.\n\n\"Cookhouse woman,\" she says, like she's filing that away. Then, quieter: \"I heard you.\" She doesn't move toward you or away — she stays exactly where she is, hand around your wrist, and looks at you steadily in the low light. \"You should sleep before you're back on a road. But — not yet.\"\n\nHuginn makes a single sound from its perch: not a croak, not quite a word, but something that lands in the room like punctuation. Pell glances at it once, then back at you. The river whetstone is still on the bench where it's been all night, unclaimed.",
-      "sceneSummary": "Silas told Pell plainly he'd fallen for her; she heard him, and held his wrist.",
+      "narration": "You close the last of the distance.\n\nHer hand tightens around your wrist a half-second before your mouth finds hers — not stopping you, just marking that she felt it coming and chose to stay still. The kiss is unhurried, the way she does everything: no performance in it, just the plain fact of it, her free hand coming up to the front of your shirt and not pulling you closer, not pushing, just resting there like a hand on a piece she's reading. She tastes of resin wine and old starfruit. The forge fire ticks low behind you. Huginn makes no sound at all, which is its own kind of comment.\n\nWhen you pull back she doesn't move away. Her eyes open — that direct, unhurried look she gives iron before she decides what it needs. \"Alright,\" she says, quietly, and there is something that might be a smile at one corner of her mouth. Not a conclusion. More like a first reading.\n\nMemory rests on the anvil horn between you, the collar flush, the double-stamp clean in the brass. The river whetstone is still on the bench, unofficially hers. The morning is pressing gold under the door now, full and unhurried, and Millbrook is waking up around the forge — wheels on stone, someone calling across the lane, the ordinary machinery of a day beginning. You have a provisioning debt to Aldric, one outstanding thread on the river scout, and a spear that finally knows its own name. The night's work is finished. What the morning holds is yours to choose.\n\n*✦ Your bond with Huginn deepens into something new: **The Attended End**.*",
+      "sceneSummary": "Silas kissed Pell at the forge bench at dawn — she stayed, said 'alright', and the morning opened around them.",
       "choices": [
         {
-          "label": "Stay — the morning can wait. Lean in and kiss her.",
+          "label": "Stay a little longer — ask her what she wants the day to look like, for herself",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "intimate",
-            "bold"
+            "connect",
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Give her the river whetstone properly — name it as a gift, no subtext, just the thing itself in her hands.",
+          "label": "Leave her to the morning's work — clean farewell, Memory on your back, and head upstream to scout the river for Aldric",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Pell if she's heard anything about the gray-green mornings on the river — she works the south lane, she sees what passes",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "investigate",
+            "ask"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Pick up the river whetstone and put it in her hand formally — the gift was never finished",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "intimate",
-            "deliberate"
+            "gift",
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask her to walk you to wherever you're sleeping — let the morning carry you there together.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "intimate",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Before anything else — pick up Memory from the anvil horn, set it across your back where it belongs, and be the person who showed up in Millbrook with nothing. Let her see that too.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "deliberate",
-            "honest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Kissed Pell Marsh at the forge bench at dawn — after a full night repairing Memory together and naming it over old wine.",
+          "tags": [
+            "personal",
+            "connection",
+            "craft"
+          ],
+          "weight": 1,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — full dawn light pale gold under the door, south pit fire coaled to low orange, Memory on the anvil horn.",
+        "setting": "Pell's forge, south lane, Millbrook — full dawn light gold under the door, south pit fire coaled to low orange, Memory on the anvil horn. The lane outside is waking: wheels on stone, a voice across the way.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Hand closed around Silas's wrist, holding his gaze — steady, unhurried, not pulling away."
+            "state": "Still at the anvil horn, hand resting on Silas's shirt, unhurried. A quiet half-smile. Not moving away."
           },
           {
             "name": "Huginn",
-            "state": "On its perch, having just made its punctuation sound. Watching."
+            "state": "On its perch, entirely silent. Watching."
           }
         ],
         "objects": [
           "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
-          "Resin Mountain Wine (open bottle, two cups — mostly drunk)",
+          "Resin Mountain Wine (open bottle, nearly empty)",
           "Dried Starfruit sealed packet (open, mostly eaten)",
           "River whetstone (on bench — not yet formally given)",
           "Spent rune-wax stub (on bench)",
@@ -962,8 +988,9 @@
         ],
         "threads": [
           "River whetstone still on the bench — not yet formally given",
-          "Pell's hand around Silas's wrist — the moment is held, not concluded",
-          "She said 'not yet' — morning deferred, not refused"
+          "The kiss landed and she said 'alright' — what that opens is not yet named",
+          "River scout for Aldric still the one outstanding quest thread",
+          "The gray-green water question remains unasked of Pell"
         ]
       },
       "npcUpdates": [
@@ -972,20 +999,19 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Heard Silas name the cookhouse deflection and his fall for her — closed her hand around his wrist and said 'not yet', holding the moment without ending it.",
+          "note": "Silas kissed her at dawn at the anvil horn — she tightened her hand on his wrist, stayed, said 'alright' quietly. A first reading, not a conclusion.",
           "learned": [
-            "Silas told her plainly he'd fallen for her — she heard it and did not move away",
-            "She said 'not yet' — the morning can wait a little longer"
+            "Responded to Silas's kiss by staying still and saying 'alright' — no performance, no deflection, the same directness she gives iron"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the forge bench, hand around Silas's wrist, the morning outside and the moment still open."
+          "statusNote": "At her forge bench at dawn, the night's work done, the kiss received. Morning work about to begin."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Silas told Pell plainly he'd fallen for her — she held his wrist and said 'not yet', neither pulling away nor deflecting. The relationship has moved past mutual interest into something with weight.",
+          "text": "Silas kissed Pell at the forge bench at dawn on World-day 14 — she held his wrist, stayed, and said 'alright'. The relationship has moved past named mutual interest into something with physical weight.",
           "subjectId": "pell"
         }
       ],
@@ -995,34 +1021,36 @@
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "At dawn in her own forge, Pell held Silas's wrist and said 'not yet' — heard his declaration plainly and stayed.",
+          "fact": "At dawn in her own forge, Silas kissed her — she tightened her hand on his wrist, stayed, and said 'alright' in the quiet way she gives a first assessment. Not a conclusion. A beginning.",
           "links": [
-            "millbrook",
             "death-bound-spear",
+            "millbrook",
+            "the-unnamed-gift",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief intimate exchange at the forge bench — the morning still barely begun outside."
-      }
+        "why": "A quiet moment at the bench — the morning pressing in, a brief beat between the kiss and what comes next."
+      },
+      "imagePrompt": "Dawn gold pressing under a forge door — a man and a woman at an anvil horn, foreheads almost touching, a named spear between them, a corvid watching from its perch in perfect silence. Iron and old wine and the smell of pitch."
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — full dawn light pale gold under the door, south pit fire coaled to low orange, Memory on the anvil horn.",
+      "setting": "Pell's forge, south lane, Millbrook — full dawn light gold under the door, south pit fire coaled to low orange, Memory on the anvil horn. The lane outside is waking: wheels on stone, a voice across the way.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Hand closed around Silas's wrist, holding his gaze — steady, unhurried, not pulling away."
+          "state": "Still at the anvil horn, hand resting on Silas's shirt, unhurried. A quiet half-smile. Not moving away."
         },
         {
           "name": "Huginn",
-          "state": "On its perch, having just made its punctuation sound. Watching."
+          "state": "On its perch, entirely silent. Watching."
         }
       ],
       "objects": [
         "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
-        "Resin Mountain Wine (open bottle, two cups — mostly drunk)",
+        "Resin Mountain Wine (open bottle, nearly empty)",
         "Dried Starfruit sealed packet (open, mostly eaten)",
         "River whetstone (on bench — not yet formally given)",
         "Spent rune-wax stub (on bench)",
@@ -1032,8 +1060,9 @@
       ],
       "threads": [
         "River whetstone still on the bench — not yet formally given",
-        "Pell's hand around Silas's wrist — the moment is held, not concluded",
-        "She said 'not yet' — morning deferred, not refused"
+        "The kiss landed and she said 'alright' — what that opens is not yet named",
+        "River scout for Aldric still the one outstanding quest thread",
+        "The gray-green water question remains unasked of Pell"
       ]
     }
   },
@@ -1181,7 +1210,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Pressed the collar's north quarter flush with her thumb on Silas's word — patient, even, no ceremony. Work reads as done.",
         "[d2] Watched Silas use Deathsense on the finished spear — heard the confirmation that the register runs clean and that her oblique axis reads as her signature, not a flaw.",
         "[d2] Received starfruit and wine at dawn — went somewhere briefly when she tasted the starfruit, came back without explaining. Heard Memory named. Drinking quietly.",
         "[d2] Explained the oblique stamp — the iron told her hand where to go; she's never had a piece do that before. Named it plainly, without distress.",
@@ -1190,17 +1218,18 @@
         "[d2] Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'",
         "[d2] Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hand",
         "[d2] Answered Silas's plain question plainly — said she'd like to keep finding out what he is. Took Huginn's croak as confirmation of something.",
-        "[d2] Heard Silas name the cookhouse deflection and his fall for her — closed her hand around his wrist and said 'not yet', holding the moment without ending it."
+        "[d2] Heard Silas name the cookhouse deflection and his fall for her — closed her hand around his wrist and said 'not yet', holding the moment without ending it.",
+        "[d2] Silas kissed her at dawn at the anvil horn — she tightened her hand on his wrist, stayed, said 'alright' quietly. A first reading, not a conclusion."
       ],
       "knownFacts": [
-        "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it",
         "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something ha",
         "When she struck the double-stamp on Memory — not scrap but the spear she marked — the resonance was stronger and the spear's register steadied under her, as if ",
         "Registers that Silas brought starfruit from a closed pass and stayed up all night repairing something that isn't his — reads both as meaningful signals",
         "Acknowledged that 'weird enough' undersells what Silas is, without it being a problem",
         "Said plainly she wants to keep finding out who he is — this is now an explicit, named intention",
         "Silas told her plainly he'd fallen for her — she heard it and did not move away",
-        "She said 'not yet' — the morning can wait a little longer"
+        "She said 'not yet' — the morning can wait a little longer",
+        "Responded to Silas's kiss by staying still and saying 'alright' — no performance, no deflection, the same directness she gives iron"
       ],
       "skillsObserved": [
         "staying present through a six-hour repair without flagging",
@@ -1211,7 +1240,7 @@
         "double-stamp on a named weapon without ceremony or hesitatio"
       ],
       "status": "active",
-      "statusNote": "At the forge bench, hand around Silas's wrist, the morning outside and the moment still open.",
+      "statusNote": "At her forge bench at dawn, the night's work done, the kiss received. Morning work about to begin.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1660,7 +1689,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
           "[d1] Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary.",
           "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Her terms: clean forge, no unpriced promises.",
           "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after",
@@ -1683,7 +1711,8 @@
           "[d2] While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two i",
           "[d2] When Pell struck the double-stamp on Memory directly, the sympathetic resonance between her hands and the spear was stronger than on scrap iron — and Memory's death-register steadied rather than shift",
           "[d2] At dawn over the last of the wine, Pell said plainly she doesn't know what Silas is or where he's going — and that she'd like to keep finding out. The interest is named and mutual.",
-          "[d2] At dawn in her own forge, Pell held Silas's wrist and said 'not yet' — heard his declaration plainly and stayed."
+          "[d2] At dawn in her own forge, Pell held Silas's wrist and said 'not yet' — heard his declaration plainly and stayed.",
+          "[d2] At dawn in her own forge, Silas kissed her — she tightened her hand on his wrist, stayed, and said 'alright' in the quiet way she gives a first assessment. Not a conclusion. A beginning."
         ],
         "links": [
           "death-bound-spear",
@@ -1834,14 +1863,14 @@
     }
   },
   "tendencies": {
-    "strategic": 48.47337936881511,
-    "cerebral": 34.11404328279675,
-    "social": 58.173671049876354,
-    "generous": 12.750098991582375,
-    "cautious": 23.832222470282694,
-    "physical": 1.670121980623022,
-    "risky": 1.8207437014821328,
-    "ruthless": 0.851801859600347
+    "strategic": 48.231012471971034,
+    "cerebral": 33.943473066382765,
+    "social": 57.882802694626974,
+    "generous": 12.686348496624463,
+    "cautious": 23.71306135793128,
+    "physical": 1.6617713707199069,
+    "risky": 1.811639982974722,
+    "ruthless": 0.8475428503023453
   },
   "aptitudes": [
     "strategist",
@@ -1849,7 +1878,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 121,
+  "actionCount": 122,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1919,8 +1948,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784038197946,
-  "rev": 184,
+  "updatedAt": 1784038335738,
+  "rev": 185,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2066,6 +2095,12 @@
       "text": "Silas told Pell plainly he'd fallen for her — she held his wrist and said 'not yet', neither pulling away nor deflecting. The relationship has moved past mutual interest into something with weight.",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Silas kissed Pell at the forge bench at dawn on World-day 14 — she held his wrist, stayed, and said 'alright'. The relationship has moved past named mutual interest into something with physical weight",
+      "day": 2,
+      "subjectId": "pell"
     }
   ],
   "practice": {
@@ -2100,9 +2135,27 @@
     ]
   },
   "companionBonds": {
-    "marrow": 5.5
+    "marrow": 6
   },
-  "customAbilities": {},
+  "customAbilities": {
+    "the-attended-end": {
+      "id": "the-attended-end",
+      "name": "The Attended End",
+      "description": "Marrow tells you plainly what is ending here and how long it has — a person, a truce, a building, a road. It is never wrong and it never softens it.",
+      "energyCost": 4,
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.5,
+        "falsehood_truth": 0.3
+      },
+      "notFor": "Preventing the ending; being asked to be gentle about it; anything that is not, in fact, ending.",
+      "narrationHints": "Marrow tells you plainly what is ending here and how long it has — a person, a truce, a building, a road. It is never wrong and it never softens it.",
+      "levelReq": 1,
+      "powerSystem": "learned",
+      "taughtBy": "Marrow (bond)",
+      "effectTags": []
+    }
+  },
   "precursorAccess": [],
   "forkChoices": {},
   "backfillVersion": 1,

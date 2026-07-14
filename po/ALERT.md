@@ -36,6 +36,7 @@
 | **SNG-092** | v1.8.49 | Manifest unification — resolution by name, not position (fixed a LIVE break); +4 reach_* files (20 abilities, 6/7 Accords); Content CI now checks core |
 | **SNG-093** | v1.8.50 | GM can never hang the gambit builder — `withTimeout` + `try/catch/finally` |
 | **SNG-095** | v1.8.55 | Fix "smartClamp is not defined" — app.js never imported it (broke gambit advice + ⚑ Feedback submission) |
+| **SNG-096 (partial)** | 83beb4ed / 78a55b63 | Ashwarden complete (MOVE+SUSTAIN), Marcher complete (5 gaps+harmRung all 10) — Option B breadth pass |
 | **SNG-084 Ph1+2** | v1.8.51 / v1.8.53 | In-context helper text — ⓘ at the walls (capacity · energy · circle) + Ph2 (roll receipt · level/xp · attributes · tiers · quests · companion bond · gambit · map danger). Ph3: locked-ability reasons + precursor/heard-of |
 | **SNG-094** | v1.8.52 | Skill learning fixed (a native could learn ONLY Valley Craft — legacy gate null-filtered their own people's craft; domain gate is authoritative now) + a ⬆ Level-Up window (deepen/learn in one place) |
 
@@ -94,7 +95,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 ## ⛔ NEXT (build order)
 
-1. **SNG-090** — substrate build. Amendment promoted; `the_substrate.json` and `SYSTEM_SPEC.md` §9b both at HEAD. CCode: `engine/substrate.js` + `tests/balance_sim.mjs` first to tune the curves. Full build order above.
+1. **SNG-090 Ph B** — substrate wiring (CCode: `successChance` + gate + energy mult + receipts + overlay). Amendment promoted; `the_substrate.json` and `SYSTEM_SPEC.md` §9b both at HEAD. CCode: `engine/substrate.js` + `tests/balance_sim.mjs` first to tune the curves. Full build order above.
 2. **SNG-058 — party leader.** (Was next before the substrate sprint opened.)
 3. **SNG-084 — in-context helper text.** `content/packs/core/rules/helper_text.json` exists; engine + UI owed.
 4. **SNG-089 Ph2** — Accord waygate-journey acquisition · 12 braids → GM · living treaty as world-event.
@@ -106,6 +107,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 ## 📋 Owed
 
 **Aevi:**
+- Option B ability authoring (breadth pass): **Ashwarden ✅ Marcher ✅** → next: Stillhold · Rootkin · Cogitant · Lattice, then rest by reach-distance from Valley
 - `po/OPERATIONAL_FLOWS.md`
 - Thin regions: `riven_marches`, `somatic_reaches`, `unspooling` each want ~6 locations
 - `po/SPEC_BACKLOG.md` retirement as primary surface (180KB — move active items here)

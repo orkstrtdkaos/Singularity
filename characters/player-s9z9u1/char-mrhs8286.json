@@ -707,204 +707,170 @@
         "player": "Leave 30 in credit with Aldric, ask for the 60 and give Corvin 20 of it, 40 to Pell.",
         "summary": "Silas settles the accounts — thirty in credit with Aldric, twenty to Corvin, forty to Pell — and the hunt party disperses.",
         "narration": "You tell Aldric to keep thirty against future trade, and hold out your hand for the remainder. He counts sixty cord-weight from the till behind the block — small stamped discs, worn smooth, the valley's working currency — and sets them in two stacks on the ledger without ceremony. He initials the margin and pushes the book closed.\n\nCorvin is still near the door, pole leaned against the wall, ready to be gone. You cross to him and press twenty cord-weight into his hand before he can object. He looks down at the discs, then up at you — not surprise exactly, more the brief recalibration of a man who didn't expect the accounting to include him. He wraps his fingers around them, gives a short nod. \"North gate before the light's high,\" he says, which is the closest he gets to thanks. Then he shoulders past the door and out into the morning, pole over one arm.\n\nThat leaves forty. You turn to Pell at the doorframe. She sees you coming and reads it before you reach her — her chin comes up a fraction, the ironwork look she uses when something lands that she doesn't want to show affects her. You put the forty in her palm. \"Materials on the forge afternoon,\" you say, which is one way to frame it. She closes her hand around the weight, looks at it once, then back at you. \"I'll have the fire up,\" she says. That's it. She tucks the coin into her apron pocket and straightens off the frame, ready to walk.\n\nThe smokehouse settles into its ordinary morning. The bull and sow hang silent on the rack above you. Aldric is already back to his work, knife in hand. Outside, Huginn drops one wing off the eave and resettles — the posture of a bird that has decided the interesting part is somewhere else."
+      },
+      {
+        "player": "Say goodbye to Corvin for now, then let Pell know that you'll be by shortly to clean up from the hunt and get ready for the afternoon.  Then head to the general store.",
+        "summary": "Corvin departs, Pell heads to the forge, Silas walks to Mara's store.",
+        "narration": "Corvin is already angling for the door when you catch his eye. You give him a nod — the kind that means 'good hunt, good company, we're square' — and he returns it in exactly the same currency. He lifts the pole off the wall, tucks it under one arm, and steps out into the morning without looking back. The door swings behind him and Aldric goes back to his knife.\n\nPell is still in the doorframe. You cross toward her and tell her plainly: you'll stop by the store, get yourself cleaned up from the hunt, and be at the forge by early afternoon. She reads that without any drama, gives a single short nod. \"Fire'll be ready,\" she says, and turns out the door ahead of you.\n\nThe walk from the smokehouse to Mara's store takes maybe five minutes — south past the elder's post, east around the well, and there's the red door. The village is fully awake now: a woman carrying a yoke of water-jars, two men arguing about ditch-work at the corner of the terraced lane, a cart horse standing in the shade looking philosophical. The morning light is flat and bright and clean. You push the red door open and step in."
       }
     ],
     "lastTurn": {
-      "narration": "You tell Aldric to keep thirty against future trade, and hold out your hand for the remainder. He counts sixty cord-weight from the till behind the block — small stamped discs, worn smooth, the valley's working currency — and sets them in two stacks on the ledger without ceremony. He initials the margin and pushes the book closed.\n\nCorvin is still near the door, pole leaned against the wall, ready to be gone. You cross to him and press twenty cord-weight into his hand before he can object. He looks down at the discs, then up at you — not surprise exactly, more the brief recalibration of a man who didn't expect the accounting to include him. He wraps his fingers around them, gives a short nod. \"North gate before the light's high,\" he says, which is the closest he gets to thanks. Then he shoulders past the door and out into the morning, pole over one arm.\n\nThat leaves forty. You turn to Pell at the doorframe. She sees you coming and reads it before you reach her — her chin comes up a fraction, the ironwork look she uses when something lands that she doesn't want to show affects her. You put the forty in her palm. \"Materials on the forge afternoon,\" you say, which is one way to frame it. She closes her hand around the weight, looks at it once, then back at you. \"I'll have the fire up,\" she says. That's it. She tucks the coin into her apron pocket and straightens off the frame, ready to walk.\n\nThe smokehouse settles into its ordinary morning. The bull and sow hang silent on the rack above you. Aldric is already back to his work, knife in hand. Outside, Huginn drops one wing off the eave and resettles — the posture of a bird that has decided the interesting part is somewhere else.",
-      "sceneSummary": "Silas settles the accounts — thirty in credit with Aldric, twenty to Corvin, forty to Pell — and the hunt party disperses.",
+      "narration": "Corvin is already angling for the door when you catch his eye. You give him a nod — the kind that means 'good hunt, good company, we're square' — and he returns it in exactly the same currency. He lifts the pole off the wall, tucks it under one arm, and steps out into the morning without looking back. The door swings behind him and Aldric goes back to his knife.\n\nPell is still in the doorframe. You cross toward her and tell her plainly: you'll stop by the store, get yourself cleaned up from the hunt, and be at the forge by early afternoon. She reads that without any drama, gives a single short nod. \"Fire'll be ready,\" she says, and turns out the door ahead of you.\n\nThe walk from the smokehouse to Mara's store takes maybe five minutes — south past the elder's post, east around the well, and there's the red door. The village is fully awake now: a woman carrying a yoke of water-jars, two men arguing about ditch-work at the corner of the terraced lane, a cart horse standing in the shade looking philosophical. The morning light is flat and bright and clean. You push the red door open and step in.",
+      "sceneSummary": "Corvin departs, Pell heads to the forge, Silas walks to Mara's store.",
       "choices": [
         {
-          "label": "Walk out with Pell now — the forge afternoon is today, and you'd rather start it while the morning's still good.",
+          "label": "Ask Mara if she's heard anything new about the river — upstream sources, anyone coming down from the north with information.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "plan"
+            "ask",
+            "gather-information"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Before you leave the smokehouse, ask Aldric directly what he knows about anyone working upstream — foresters, surveyors, anyone who might have disturbed the riverbed.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Browse the store for anything useful before the forge afternoon — check what she has in the way of tools, materials, or oddments.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "browse",
             "scout"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Head north on your own now — scout the river upstream while the morning holds, and see what Huginn's northwest direction actually points at.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
+          "label": "Ask Mara directly whether she knows of anyone who could work the boar tusks — a carver, a bone-worker, someone who does that kind of thing in Millbrook or passing through.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "ask",
+            "plan"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Slip out of the smokehouse quietly and find a private minute to read Huginn directly — land it, ask plainly what it sensed northwest, press for more than one croak.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Keep it short — pick up anything you need and head back toward the forge to clean up and rest before the afternoon.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "efficient",
+            "prepare"
           ],
-          "abilityId": "order_sense",
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door just pushed open. Interior: close, well-ordered, smells of rope-tar and beeswax.",
+        "npcsPresent": [
           {
-            "name": "Cord-Weight Coin (20)",
-            "kind": "misc",
-            "description": "Twenty stamped cord-weight discs — the valley's working currency, worn smooth at the edges.",
-            "consumable": false
+            "name": "Mara Wells",
+            "state": "Behind her counter, ledger open, looking up at the sound of the door."
           }
         ],
-        "xp": 0
+        "objects": [
+          "Store counter with open ledger",
+          "Rope stock (mid-weight peg — gap still present)",
+          "Shelved hardware and tools",
+          "Preserved Trail Parcel x2 — in Silas's pack",
+          "Boar Tusks (pair) — in Silas's pack",
+          "Cord-Weight Coin (20) — on Silas's person"
+        ],
+        "threads": [
+          "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
+          "River scout — floated, endorsed, still unscheduled",
+          "Huginn's northwest direction — unresolved, Huginn somewhere off-scene"
+        ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aldric",
-          "name": "Aldric",
-          "note": "Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the smokehouse block, knife back in hand, morning work resumed."
-        },
-        {
-          "op": "update",
           "npcId": "corvin",
           "name": "Corvin",
-          "note": "Received twenty cord-weight without objection — brief recalibration, short nod, then out the door with his pole.",
-          "learned": [
-            "Silas paid him a share of the hunt without being asked"
-          ],
-          "relationshipDelta": 1,
+          "note": "Received farewell nod, departed with his pole — clean parting.",
           "status": "active",
-          "statusNote": "Departed the smokehouse — heading back to his east furlong."
+          "statusNote": "Departed the smokehouse for his east furlong — hunt fully concluded on his end."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received forty cord-weight — read it before it was offered, kept the ironwork face, said 'I'll have the fire up.' Pocketed it and straightened off the doorframe.",
-          "learned": [
-            "Silas framed the forty as materials for the forge afternoon — a clean way to give without making it a gift"
-          ],
-          "relationshipDelta": 1,
+          "note": "Told Silas 'fire'll be ready' — forge afternoon confirmed, she's heading there now.",
           "status": "active",
-          "statusNote": "Leaving the smokehouse — forge afternoon open, fire to be lit."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas paid Corvin twenty cord-weight from the hunt proceeds — unprompted, before Corvin could leave. Corvin received it without ceremony and departed for his furlong.",
-          "subjectId": "corvin"
+          "statusNote": "Walking to the forge to light the fire — expects Silas by early afternoon."
         },
         {
-          "op": "add",
-          "text": "Silas paid Pell forty cord-weight, framed as forge-afternoon materials. She accepted it, said she'd have the fire up, and left the smokehouse.",
-          "subjectId": "pell"
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Silas has returned to the store — she looks up from the ledger.",
+          "status": "active",
+          "statusNote": "At her store behind the counter, ledger open, morning business underway."
         }
       ],
-      "questUpdates": [
+      "factUpdates": [],
+      "placeUpdates": [
         {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "All financial threads closed — thirty cord-weight in standing credit with Aldric, Corvin paid, Pell paid. River scout remains the one outstanding thread."
+          "note": "Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle.",
+          "subPlace": {
+            "name": "Mara Wells's Store",
+            "note": "Second visit — Silas returned post-hunt, morning of World-day 14. Mara behind the counter, ledger open.",
+            "visited": true
+          }
         }
       ],
-      "scene": {
-        "setting": "Aldric's smokehouse, Millbrook — morning, full spring light. Bull and sow hang on the rack. Corvin has just left; Pell is in the doorframe, ready to walk. Aldric is back at his block.",
-        "npcsPresent": [
-          {
-            "name": "Aldric",
-            "state": "Knife back in hand, ledger closed and set aside — resuming morning work."
-          },
-          {
-            "name": "Pell",
-            "state": "Standing in the doorframe, hand around forty cord-weight in her apron pocket — waiting to see which way Silas turns."
-          }
-        ],
-        "objects": [
-          "Bull haunches — hung on the rack",
-          "Sow — hide-wrapped, tallied",
-          "Aldric's fillet knife — in his hand",
-          "Aldric's tally ledger — closed and initialed on the block",
-          "Preserved Trail Parcel x2 — in Silas's pack",
-          "Corvin's carrying pole — leaned against the wall (Corvin gone)"
-        ],
-        "threads": [
-          "Forge afternoon — Pell said 'I'll have the fire up'; the arrangement is live and today",
-          "River scout — floated and endorsed, still unscheduled",
-          "Huginn's northwest direction — unresolved, Huginn now off the eave"
-        ]
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief accounting exchange — a few minutes in the smokehouse doorway."
+        "why": "Short walk from smokehouse to the store — a few minutes at most."
       },
-      "codexUpdates": [
-        {
-          "topic": "aldric",
-          "label": "Aldric",
-          "kind": "person",
-          "entityId": "aldric",
-          "fact": "Accepted thirty cord-weight in standing credit — the provisioning relationship now has a live balance in Silas's favor.",
-          "links": [
-            "aldric-provisioning-deal",
-            "millbrook"
-          ]
-        },
-        {
-          "topic": "corvin",
-          "label": "Corvin",
-          "kind": "person",
-          "entityId": "corvin",
-          "fact": "Received twenty cord-weight from the hunt proceeds — a small thing, but the first time Silas paid him directly. Departed for his furlong without ceremony.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal"
-          ]
-        }
-      ]
+      "moveTo": {
+        "location": "millbrook",
+        "why": "Walked from the smokehouse to Mara Wells's store — still within Millbrook."
+      },
+      "codexUpdates": []
     },
     "sceneState": {
-      "setting": "Aldric's smokehouse, Millbrook — morning, full spring light. Bull and sow hang on the rack. Corvin has just left; Pell is in the doorframe, ready to walk. Aldric is back at his block.",
+      "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door just pushed open. Interior: close, well-ordered, smells of rope-tar and beeswax.",
       "npcsPresent": [
         {
-          "name": "Aldric",
-          "state": "Knife back in hand, ledger closed and set aside — resuming morning work."
-        },
-        {
-          "name": "Pell",
-          "state": "Standing in the doorframe, hand around forty cord-weight in her apron pocket — waiting to see which way Silas turns."
+          "name": "Mara Wells",
+          "state": "Behind her counter, ledger open, looking up at the sound of the door."
         }
       ],
       "objects": [
-        "Bull haunches — hung on the rack",
-        "Sow — hide-wrapped, tallied",
-        "Aldric's fillet knife — in his hand",
-        "Aldric's tally ledger — closed and initialed on the block",
+        "Store counter with open ledger",
+        "Rope stock (mid-weight peg — gap still present)",
+        "Shelved hardware and tools",
         "Preserved Trail Parcel x2 — in Silas's pack",
-        "Corvin's carrying pole — leaned against the wall (Corvin gone)"
+        "Boar Tusks (pair) — in Silas's pack",
+        "Cord-Weight Coin (20) — on Silas's person"
       ],
       "threads": [
-        "Forge afternoon — Pell said 'I'll have the fire up'; the arrangement is live and today",
-        "River scout — floated and endorsed, still unscheduled",
-        "Huginn's northwest direction — unresolved, Huginn now off the eave"
+        "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
+        "River scout — floated, endorsed, still unscheduled",
+        "Huginn's northwest direction — unresolved, Huginn somewhere off-scene"
       ]
     }
   },
@@ -1052,7 +1018,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Received the spear-marriage joke, suppressed a genuine laugh, returned a dry counterpunch ('the married part I'll need in writing'), and moved to her set position without further c",
         "[d1] Drove the killing strike on the bull without the Palework channel — her own arm carried the weight the runes failed to add. Watching Silas from the kill with a question she hasn't ",
         "[d1] Watching Silas from beside the bull — held her question, set the spear upright, waiting for him to get back on his feet.",
         "[d1] Named what she saw — 'You went down. The rune fired backward.' — watching Silas's hands on the shaft, reading the material the same way she reads ironwork. Waiting.",
@@ -1061,7 +1026,8 @@
         "[d1] Worked the bull dressing without being asked — same economy as the forge. Gave quiet endorsement of the river scout when Huginn's direction was named.",
         "[d1] Carried her share of the bull down without comment. Now at the smokehouse doorframe — watching, waiting. The forge date is still live.",
         "[d2] Still at the doorframe — the forge afternoon thread remains open, waiting on Silas's word.",
-        "[d2] Received forty cord-weight — read it before it was offered, kept the ironwork face, said 'I'll have the fire up.' Pocketed it and straightened off the doorframe."
+        "[d2] Received forty cord-weight — read it before it was offered, kept the ironwork face, said 'I'll have the fire up.' Pocketed it and straightened off the doorframe.",
+        "[d2] Told Silas 'fire'll be ready' — forge afternoon confirmed, she's heading there now."
       ],
       "knownFacts": [
         "Knows Silas reached for something after the backlash and it didn't answer",
@@ -1082,7 +1048,7 @@
         "field dressing a large animal, efficient and clean"
       ],
       "status": "active",
-      "statusNote": "Leaving the smokehouse — forge afternoon open, fire to be lit.",
+      "statusNote": "Walking to the forge to light the fire — expects Silas by early afternoon.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1104,7 +1070,8 @@
         "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,",
         "[d1] Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-bla",
         "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
-        "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms."
+        "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms.",
+        "[d2] Silas has returned to the store — she looks up from the ledger."
       ],
       "knownFacts": [
         "Mid-weight rope peg has a fresh gap — recently sold or lent, not restocked",
@@ -1125,10 +1092,10 @@
         "reading a customer's intent without needing it explained"
       ],
       "status": "active",
-      "statusNote": "At the supply store, ledger updated and closed — accounts squared, conversation ended on good terms.",
+      "statusNote": "At her store behind the counter, ledger open, morning business underway.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 1
+        "day": 2
       }
     },
     "corvin": {
@@ -1142,7 +1109,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Held the west fence-line cleanly on approach — stayed in shadow, no sound. Watching Silas for the signal.",
         "[d1] Holding the west fence-line with the corridor closed — watching for Silas's next signal.",
         "[d1] Landed the killing strike on the sow — clean, short-range, no wasted motion. Kneeling in the sedge now, settling before the dressing work.",
         "[d1] Received the acknowledgment with a nod and a palm-flat on the sow's flank — then drew his knife and began dressing without ceremony.",
@@ -1151,7 +1117,8 @@
         "[d1] Still dressing the sow thirty yards south — out of earshot of the ridge conversation.",
         "[d1] Cut the carrying pole, coordinated the haul down without fuss. Now inside the smokehouse, waiting to see if he's needed.",
         "[d2] Pole leaned against the wall — his part of the work is done. Ready to head back to his furlong.",
-        "[d2] Received twenty cord-weight without objection — brief recalibration, short nod, then out the door with his pole."
+        "[d2] Received twenty cord-weight without objection — brief recalibration, short nod, then out the door with his pole.",
+        "[d2] Received farewell nod, departed with his pole — clean parting."
       ],
       "knownFacts": [
         "The tip is now his — he wrapped it himself",
@@ -1172,7 +1139,7 @@
         "immediate transition to post-kill work without ceremony"
       ],
       "status": "active",
-      "statusNote": "Departed the smokehouse — heading back to his east furlong.",
+      "statusNote": "Departed the smokehouse for his east furlong — hunt fully concluded on his end.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1183,7 +1150,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Open-sky stone fire-pit on the south side of the forge cleared, laid, and designated for tonight's rune-working — dry wood stacked, materials laid out.",
         "[d1] Death-binding ceremony completed at the forge south pit — rough binding, Pell's mark in the blade, Huginn witness. Fire now coaling. The pit has been used for rune-work.",
         "[d1] Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name.",
         "[d1] Fire banked to slow red coals for the night after the death-binding ceremony — the pit has been used and closed. The night of the ceremony is now complete.",
@@ -1194,7 +1160,8 @@
         "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
         "[d1] Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep.",
         "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
-        "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current."
+        "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current.",
+        "[d2] Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1243,7 +1210,7 @@
           "name": "Mara Wells's Store",
           "day": 1,
           "visited": true,
-          "note": "Ash shafts sold, rune-craft materials sourced, whetstone for Pell handed off. Accounts closed for this visit."
+          "note": "Second visit — Silas returned post-hunt, morning of World-day 14. Mara behind the counter, ledger open."
         },
         "corvin-s-east-furlong": {
           "name": "Corvin's East Furlong",
@@ -1688,14 +1655,14 @@
     }
   },
   "tendencies": {
-    "strategic": 47.25556891489813,
-    "cerebral": 23.490320069265387,
-    "social": 45.30066036919941,
-    "generous": 10.098565725288601,
-    "cautious": 21.49177846552388,
-    "physical": 1.8836241675496737,
-    "risky": 0.9369146928798039,
-    "ruthless": 0.960693043575437
+    "strategic": 48.01929107032364,
+    "cerebral": 23.37286846891906,
+    "social": 45.07415706735342,
+    "generous": 10.048072896662159,
+    "cautious": 21.384319573196258,
+    "physical": 1.8742060467119253,
+    "risky": 0.9322301194154049,
+    "ruthless": 0.9558895783575597
   },
   "aptitudes": [
     "strategist",
@@ -1703,7 +1670,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 97,
+  "actionCount": 98,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1757,8 +1724,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783995602260,
-  "rev": 151,
+  "updatedAt": 1783995824648,
+  "rev": 152,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

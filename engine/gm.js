@@ -499,7 +499,16 @@ export function sanitizeIntent(raw, character, playerText = "") {
     subAttribute: SUBS8.includes(raw?.subAttribute) ? raw.subAttribute : null,
     axes,
     difficulty: [0, 15, 30].includes(diff) ? diff : Number.isFinite(diff) ? Math.max(0, Math.min(30, Math.round(diff))) : 0,
-    intentTags: (Array.isArray(raw?.intentTags) ? raw.intentTags : []).slice(0, 6).map(String),
+    // SNG-100: romantic/flirt are LOAD-BEARING — they gate the romance_guidance doc (app.js buildTurnContext),
+    // and they sit LAST in the 31-tag prompt vocabulary. A 6-tag cap applied in emission order can silently
+    // drop them off a rich beat ("persuade, charm, comfort, rapport, finesse, risky, romantic" → sliced),
+    // and the failure is invisible: no error, the GM just narrates the scene without the craft guidance.
+    // Hoist before truncating. If a tag ever gates a document, it must survive the cap.
+    intentTags: (() => {
+      const t = (Array.isArray(raw?.intentTags) ? raw.intentTags : []).map(String);
+      const isRom = x => /^(romantic|flirt)$/i.test(x);
+      return [...t.filter(isRom), ...t.filter(x => !isRom(x))].slice(0, 6);
+    })(),
     abilityId: owned(raw?.abilityId) ? raw.abilityId : null,
     comboAbilities: (Array.isArray(raw?.comboAbilities) ? raw.comboAbilities : []).filter(owned).slice(0, 3),
     novelUse: !!raw?.novelUse,

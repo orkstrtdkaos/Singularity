@@ -2,7 +2,7 @@
 
 > **This file carries CURRENT STATUS ONLY.** History lives in `po/results/*` and the graph. *(Per SNG-071: old append-only ALERT archived at `po/archive/ALERT_20260712.md`.)*
 
-**HEAD:** `a8ccc988` (v1.8.56) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
+**HEAD:** `0c39754` (v1.8.57) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
 **Process:** SNG-071 two-round cycle. Aevi authors ROUND 1 → **CCode substrate-verifies (ROUND 2)** → Aevi amends + promotes → CCode builds → `complete_pending_review` → **only Aevi closes.**
 
 ---
@@ -39,6 +39,12 @@
 | **SNG-096** | a8ccc988 | Option B breadth pass — **ALL 24 traditions, 8/8 families.** 5 stub reach files authored this session (mechanical_spiritual · dark_light · demonic_angelic · emotional_logical · falsehood_truth). Histogram: 24/24 ✓ |
 | **SNG-084 Ph1+2** | v1.8.51 / v1.8.53 | In-context helper text — ⓘ at the walls (capacity · energy · circle) + Ph2 (roll receipt · level/xp · attributes · tiers · quests · companion bond · gambit · map danger). Ph3: locked-ability reasons + precursor/heard-of |
 | **SNG-094** | v1.8.52 | Skill learning fixed (a native could learn ONLY Valley Craft — legacy gate null-filtered their own people's craft; domain gate is authoritative now) + a ⬆ Level-Up window (deepen/learn in one place) |
+
+---
+
+## 🔧 SNG-097 — LEARN/DEEPEN FROM THE SKILL WHEEL + UPGRADE LADDER — SHIPPED v1.8.57 · complete_pending_review
+
+Erik-direct request (no Aevi ticket yet — provisional number, Aevi to confirm/renumber/close). The skill **wheel** and **graph** were read-only; now tapping a node lets you **spend skill points right there** and shows an **upgrade ladder** (what each rank grants + cannot, next-to-buy highlighted) so you see what an upgrade does before spending. One shared pure `skillSelectionActions(ab)` + `wireSkillSelectionActions()` reuse the same `learnAbility`/`rankUpAbility` engine paths as the Level-Up modal (no new balance surface, gates can't drift). Live-verified: Learn Staunch 3→2 pts, Deepen 2→1 (rank 2), ladder fills, both wheel+list views, clean console. Results `po/results/20260713_SNG-097-skill-wheel-learn.md`.
 
 ---
 

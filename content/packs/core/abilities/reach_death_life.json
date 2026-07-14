@@ -698,6 +698,117 @@
         "FIGHT": 5
       },
       "harmRung": "lethal"
+    },
+    {
+      "id": "the_grey_road",
+      "name": "The Grey Road",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3,
+        "chaos_order": -0.1
+      },
+      "effectTags": [
+        "passage",
+        "move",
+        "open"
+      ],
+      "narrationHints": "Not faster. Through different. The places between that are only open from the death-side — plague grounds, aftermath fields, grief-thick dark. The ashwarden moves through while the living wait for the space to be safe.",
+      "description": "Move through places lethal or forbidden to others. The ashwarden walks where others cannot stay: not by force, but by fitting the space that the dead have already shaped.",
+      "notFor": "Speed — this is about access, not pace; the Grey Road does not outrun anything. The living cannot be pulled through freely.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Through Here",
+          "grants": "Move through places lethal or restricted to others — a plague ward, a collapsed site, a grief-sealed room, a battlefield's aftermath — without the danger touching you. Stand where others cannot stay.",
+          "cannot": "You go alone. The Road does not widen for company without further craft."
+        },
+        {
+          "rank": 2,
+          "name": "The Passage",
+          "grants": "Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.",
+          "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before."
+        },
+        {
+          "rank": 3,
+          "name": "The Long Walk",
+          "grants": "Navigate anywhere that has ever held death — which is everywhere, eventually — the way others navigate roads. Bring a small group through. Move through siege-lines, quarantines, and collapsed structures as if they were open ground.",
+          "cannot": "You arrive where the dead have been, not where you choose. The Road has its own geography."
+        }
+      ],
+      "functions": [
+        "move",
+        "open"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "SURVIVE",
+        "STEALTH"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "SURVIVE": 3,
+        "STEALTH": 2,
+        "CHASE": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "none"
+    },
+    {
+      "id": "the_kept_breath",
+      "name": "The Kept Breath",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3,
+        "body_mind": -0.2
+      },
+      "effectTags": [
+        "sustain",
+        "endure",
+        "threshold"
+      ],
+      "narrationHints": "Enough. Not well — enough. The ashwarden knows the exact line between alive and not. They hold someone there. The body does what it must; not a thing more.",
+      "description": "Sustain a body at minimum — not comfort, not healing, not restoration. The precise knowledge of how much life a person strictly needs, held steady by craft.",
+      "notFor": "Healing — the Kept Breath holds the threshold but does not move it upward; a held breath is not a mended lung. This does not cure; it endures.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Minimum",
+          "grants": "Sustain yourself on less than should be enough: half rations, cold, blood loss, a wound that should have slowed you. The body does what it must. The ashwarden knows the exact line and walks it.",
+          "cannot": "This holds the threshold — it does not move it. You remain in the condition you were in, only continuing."
+        },
+        {
+          "rank": 2,
+          "name": "Held Other",
+          "grants": "Hold another person at minimum: keep a companion alive through conditions that would otherwise kill them, or extend a dying person's window long enough for something to matter. Cannot heal them — only hold the line.",
+          "cannot": "One person at a time. The craft requires full attention while the other is held."
+        },
+        {
+          "rank": 3,
+          "name": "Patience of the Palelands",
+          "grants": "Sustain a small group through conditions nothing else could survive. Bring someone back from the absolute threshold and hold them there for days. Become the reason a thing is still alive — not by healing but by holding.",
+          "cannot": "The Kept Breath is not a cure and never becomes one. Everyone held at minimum is still at minimum — functional, not well."
+        }
+      ],
+      "functions": [
+        "sustain"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 4,
+        "EXPLORE": 2,
+        "INVESTIGATE": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "none"
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

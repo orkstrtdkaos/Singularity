@@ -2093,8 +2093,13 @@ await (async () => {
   check("SNG-048: a truth-charged place tints the register stark/clear", /stark|clear/i.test(truthy.cue));
   // rating as DIRECTION
   check("SNG-048: G rating directs a chaste register", /chaste|gentle/i.test(ratingRegister("G")));
-  check("SNG-048: R+ directs the FULL mature register — evocative, not explicit", /full mature register/i.test(ratingRegister("R+")) && /not (graphic|explicit)/i.test(ratingRegister("R+")));
-  check("SNG-048: an unknown preset falls back to a safe mid register", /tension|feeling/i.test(ratingRegister("???")));
+  // romance v2 (Erik-ratified): R+ is PERMISSION to the line, not a prohibition — the full charged
+  // register is expected, stopping short is the error, and the AUP line still holds without exception.
+  check("romance v2: R+ directs permission-to-the-line (full register, stopping short is the error)",
+    /permission to the line/i.test(ratingRegister("R+")) && /stopping short of the line is the error/i.test(ratingRegister("R+")));
+  check("romance v2: R+ still holds the line (no graphic mechanical depiction)",
+    /not graphic mechanical depiction/i.test(ratingRegister("R+")));
+  check("romance v2: an unknown preset falls back to a safe mid register", /short of the explicit/i.test(ratingRegister("???")));
 })();
 
 // --- SNG-045: player identity dedup (one person, one profile) ---

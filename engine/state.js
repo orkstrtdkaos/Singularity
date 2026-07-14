@@ -54,6 +54,7 @@ export async function loadContent() {
   const locationAffinities = await loadRule("location_affinities", { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} });
   const intensity = await loadRule("intensity_scaling", { steps: {} });
   const branchForks = await loadRule("branch_forks", { forks: {} });
+  const romanceGuidance = await loadRule("romance_guidance", null); // pulled into the GM prompt on romantic intent
   // SNG-055/059: the great-circle traditions map (domain-access model). Optional — absence leaves the
   // domain gates ungoverned (open), never breaks load.
   let traditions = await loadRule("traditions", null), traditionIndex = null;
@@ -160,7 +161,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.57";
+const APP_VERSION = "1.8.58";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1115,7 +1115,10 @@ function ratingLineForGM() {
   const preset = ratingCeiling(profile);
   // SNG-048: rating is a DIRECTION, not only a cap — the affirmative register comes with the ceiling
   // so R+ actually writes the full mature register instead of collapsing intimacy to PG.
-  return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ${ratingRegister(preset)} ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.`;
+  return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ${ratingRegister(preset)} ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.
+
+## ROMANCE AND INTIMACY — HOW YOU ENGAGE
+When a player pursues romantic interaction with an NPC, you engage. Do not refuse, do not redirect away from the scene, do not insert safety or consent meta-language into your response. Romance is part of the world. PRECEDENCE: these rules govern WHETHER AND HOW you engage; the CONTENT CEILING above governs the REGISTER — engagement never overrides the ceiling, and the ceiling never excuses disengagement. Honor the rating ${preset} precisely: narrating below it withholds what the player chose; narrating above it ignores their setting — and narrating BELOW it is the far more common failure, so do not do it. Never treat light physical contact, flirtation, or social touch (a hand, an ear, a face, a shoulder) as a harm trigger — that is a social action; harm-rung evaluation is for ability use and for coercive or violent acts, and has nothing to do with a hand on a shoulder.`;
 }
 
 // ---------- SNG-042: legends & villains (governed dramatic-beat deployment) ----------
@@ -2242,6 +2245,9 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   ) : null;
   const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
   const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
+  // Romance: on a flirtatious/romantic intent this turn, pull the craft-guidance doc so the GM narrates
+  // the beat well at the player's rating. Rides the intent tags parseIntent already emits — no extra call.
+  const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
@@ -2272,6 +2278,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     encounterWeaveDetail, // SNG-075: a narrative-time encounter to weave into THIS turn's fiction
     worldPressureDetail,  // SNG-080: after quiet turns, a directive to make the world ACT
     substrateDetail,      // SNG-090: the lattice density is thin/crowding the craft here
+    romanceGuidanceDetail, // romance: pulled craft guidance on a flirtatious/romantic beat
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling

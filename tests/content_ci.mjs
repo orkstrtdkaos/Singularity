@@ -126,6 +126,18 @@ for (const pack of PACKS) {
     `${noDensity.length} with no density (region not in the_substrate.json): ${noDensity.slice(0, 8).join(", ")}`);
 }
 
+// (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
+// non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
+{
+  const listed = (rj("content/packs/core/manifest.json").provides?.rules || []).some(r => r.includes("romance_guidance"));
+  check("romance_guidance.json is registered in the core manifest", listed, "not in provides.rules — loadRule would return the null fallback");
+  if (listed) {
+    const rg = rj("content/packs/core/rules/romance_guidance.json");
+    check("romance_guidance carries non-empty guidance text", typeof rg.text === "string" && rg.text.length > 500,
+      `text is ${typeof rg.text === "string" ? rg.text.length + " chars" : "missing"} — the GM would pull an empty doc`);
+  }
+}
+
 // (4) location connectivity: dangling connections, one-way edges, unreachable locations
 {
   const locDir = "content/packs/valley/locations";

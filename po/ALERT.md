@@ -10,9 +10,25 @@
 
 ---
 
-## 📄 PENDING CCODE REVIEW — `po/romance_guidance.md`
+## 🎯 ERIK'S CALL — ROMANCE P1 (blocks nothing else; blocks Tier 4 only)
 
-5-tier rating system, GM romance craft guidance, engine wire-up (`357a461`). Answer the 4 open questions. Confirm `adultGate` enum values, `parseIntent` romantic category, content-doc injection pattern, GM prompt slot.
+**Disposition: `po/romance_guidance_AEVI_DISPOSITION.md` (`9d774d9`). CCode's review accepted on every technical point. P1 REFRAMED.**
+
+**Verified at HEAD:** `engine/claude.js` routes **every GM task to an Anthropic model** (`claude-sonnet-4-6` / `claude-haiku-4-5` → `api.anthropic.com`). Single provider, no router. So `ratingRegister`'s R+ cap (*"never explicit mechanics"*) is **not an authoring choice that can be un-authored — it's the AUP encoded at the content layer.** Deleting the string doesn't grant the capability; it points the game at a model that won't produce the thing. **The failure mode is more mid-scene refusal and hedging — the exact bug `romance_guidance.md` exists to fix.** Tier 4 as specced would make it worse.
+
+| | | Cost |
+|---|---|---|
+| **A — Hold the ceiling** | Tiers 0–3 ship (G→R+). The engagement fix lands in full. **R/R+ get real craft language** — that's where the felt win is. | No Tier 4. |
+| **B — Provider router** | Port the Aevi-app `routing_table.json` pattern into `engine/claude.js`; Tier-4 turns route to a provider whose terms permit them. | Own spec. **Singularity is a static Pages app with the API call client-side** — a materially different key-exposure problem than the Aevi app's local Flask backend. Not free, not "same pattern." |
+| **C — Tier 4 elsewhere** | Singularity stays G→R+; the explicit register stays on the private local surface. | Two surfaces. |
+
+**Aevi's read: ship A now; B is a real spec, not a string change.** Tier 3 (R) is the actual win and is buildable today — the current R register (*"genuine heat and tension"*) is a gesture, not craft; fading to black on a player who chose R is a failure the wording invites.
+
+*Floors unchanged and ceiling-independent regardless: never prohibited content; **a minor is never portrayed in romantic/sexual content at any intensity**; art clamps minors to ≤PG.*
+
+**Accepted technical:** N1 — **there is no `adultGate` enum**; content level is `profile.rating.preset` ∈ `G|PG|PG-13|R|R+` via `ratingCeiling(profile)`; `adultGate` is a *boolean* authority param, persisted flag `adultVerified`. N2 — no Tier 0–4 scheme; **rewrite the romance clauses inside `ratingRegister` (gm.js:123)**, reference the enum verbatim. U1/Q2 — add `romantic`/`flirt` to the existing `intentTags` vocab (gm.js:468); **no second model call.** U2/Q4 — Part 2 block → system tier after CONTENT CEILING, with an explicit **engagement-never-overrides-the-ceiling** clause. U3/Q3 — `content/gm/` would **404 on Pages** (same shape as the halted Tether `secrets.js` carrier) → ship under `content/packs/core/` + manifest + existing conditional `scene.push`; **no new injection infra.** U4 — **verified at HEAD**, `deceive`/`command`/`bind` all exist in `function_vocabulary.json` (INFLUENCE); no change.
+
+**GO for CCode on tiers 0–3 once Aevi lands the amended doc.**
 
 ---
 
@@ -141,6 +157,8 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 **Aevi:**
 - Option B ability authoring (breadth pass): **COMPLETE ✅** — all 24 traditions, 8/8 families (SNG-096 a8ccc988)
+- Amend `romance_guidance.md` (N1/N2/U2/U3 + relocate to `content/packs/core/`) — **gates the romance build**
+- Author the per-tier `ratingRegister` romance clauses (G→R+, ceiling per Erik's P1 call)
 - Amend `SPEC_AMENDMENT_ability_arch_v2.md` (strike §7b, apply C2/C3/U4, revised build order) — **gates Track 1 build**
 - SNG-098 spec (skill battle amendment) · SNG-099 spec (ID collapse)
 - Axis-touch combination authoring pass (Track 1 step 9)
@@ -149,13 +167,13 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 - `po/SPEC_BACKLOG.md` retirement as primary surface (180KB — move active items here)
 
 **CCode:**
-- **SPEC REVIEW:** `po/romance_guidance.md` — 5-tier rating system, GM romance craft + engine wire-up. Answer 4 open questions (357a461). Confirm `adultGate` enum values, `parseIntent` romantic category, content-doc injection pattern, GM prompt slot.
 - ~~`tests/balance_sim.mjs`~~ ✅ delivered SNG-090 Ph A (v1.8.54) — in `npm test`, gates the substrate anchors + reports the SNG-078 ceiling
 - §22 debt list from SYSTEM_SPEC R2: slugify in wrong module · worldtime MODE per-player vs "one clock" · `newEncounter` stashes-not-activates · quest stage-conditions advance manually · `narration`↔`effects[]` drift no linter · dead `regenPerRest` key · `parse_probe` can't reach `boot()`
 - `withTimeout` pattern on party find/join + roster play/adopt (flagged in SNG-093 commit — non-acute, follow-on)
 
 **Erik:**
 - Preview-legs (`po/PREVIEW_LEGS.md`)
+- **ROMANCE P1 — A, B, or C** (see above). The only real decision in that spec.
 - §9 drift call (should a place change you?)
 - GH Action for `npm test` (BOUNDARY-2: a gate that only fires when someone remembers to run it is weak against exactly the failure it exists to prevent)
 - SNG-076 final leg: confirm no text is cut anywhere in-game (§21: close-on-symptom)

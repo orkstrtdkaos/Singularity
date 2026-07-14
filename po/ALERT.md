@@ -16,7 +16,12 @@
 
 Covers: (1) native ability grants free at primary-domain selection, attribute-gated; (2) breadth/depth separation — rank progression through use only, no point spend at any rank; (3) two-tier combination model (axis-touch via narrative threshold + point spend; cross-pole braids unchanged); (4) new §7b — skill challenges and direct opposition (three types, environmental conditions, Coliseum); (5) schema additions; (6) module impact table.
 
-**CCode: read `po/SPEC_AMENDMENT_ability_arch_v2.md`, then:**
+**CCode: read both docs below, then:**
+
+**1. `po/SPEC_AMENDMENT_ability_arch_v2.md`** — ability architecture v2 + §7b skill challenges
+**2. `po/romance_guidance.md`** — 5-tier rating system, GM romance craft guidance, engine wire-up
+
+For `po/SPEC_AMENDMENT_ability_arch_v2.md`:
 - Flag anything that conflicts with HEAD or breaks existing module contracts
 - Answer the 6 open questions at the bottom of the doc
 - Propose rank-bonus values for skill challenge resolution (Q4)
@@ -140,6 +145,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 **CCode:**
 - **SPEC REVIEW:** `po/SPEC_AMENDMENT_ability_arch_v2.md` — ability arch v2 + §7b skill challenges. Read + answer 6 open questions before implementation. (d204347)
+- **SPEC REVIEW:** `po/romance_guidance.md` — 5-tier rating system, GM romance craft + engine wire-up. Answer 4 open questions (357a461). Confirm `adultGate` enum values, `parseIntent` romantic category, content-doc injection pattern, GM prompt slot.
 - ~~`tests/balance_sim.mjs`~~ ✅ delivered SNG-090 Ph A (v1.8.54) — in `npm test`, gates the substrate anchors + reports the SNG-078 ceiling
 - §22 debt list from SYSTEM_SPEC R2: slugify in wrong module · worldtime MODE per-player vs "one clock" · `newEncounter` stashes-not-activates · quest stage-conditions advance manually · `narration`↔`effects[]` drift no linter · dead `regenPerRest` key · `parse_probe` can't reach `boot()`
 - `withTimeout` pattern on party find/join + roster play/adopt (flagged in SNG-093 commit — non-acute, follow-on)

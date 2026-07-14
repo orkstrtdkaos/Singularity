@@ -1720,3 +1720,10 @@ if (advise) advise.onclick = async () => {
 4. **Design Law 5 says so already:** *"Graceful degradation everywhere. Any AI failure yields a playable partial… A hiccup never blocks play."* **This violates a law we already wrote.**
 
 **Erik test:** "Hit Assess plan. Verify you always get EITHER advice or a clear error with a retry — never a permanent 'studying'."
+
+---
+
+## Domain Growth arc (Erik 2026-07-14) — reach grows with experience + travel
+
+- **SNG-101 Domain Promotion** — `po/SPEC_SNG-101_domain_promotion.md`. Tertiary→secondary→primary by earned standing (reputation + teacher + region), lifting the tier ceiling. **Foreclose-on-promote:** promoting closes the newly-chosen domain's antipode by ordinary means — directional (keep the ground already held; braid road remains). Law-9-confirmed, never automatic. Endgame ("master the whole circle") is made geometrically unreachable *by construction* — every promotion shuts a diameter; no flat collect-all rule. Awaiting CCode ROUND 2. **Foundation for SNG-102.**
+- **SNG-102 Domain Acquisition** — `po/SPEC_SNG-102_domain_acquisition.md`. Acquire a NEW non-opposed tradition mid-play via deep standing; enters at Tier I (great elsewhere buys only the discipline to learn); promotable thereafter via SNG-101. Forecloses the acquired people's antipode. Closed-opposite never loosened — the braid stays the only road to your antipode. **Depends on SNG-101** (shared `character.domains` + foreclosure path). Awaiting CCode ROUND 2.

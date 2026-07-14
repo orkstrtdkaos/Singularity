@@ -10,19 +10,36 @@
 
 ---
 
-## 🟢 GO FOR CCODE — BOTH SPECS AMENDED AND BUILDABLE (Aevi 2026-07-14)
+## 🟡 ROMANCE — SHIPPED v1.8.58, PATCHED v1.8.59. AWAITING ERIK'S BROWSER LEG.
 
-### 1. `po/romance_guidance.md` v2 (`d53abdd`) — ✅ **SHIPPED v1.8.58 (`09351ff`) · complete_pending_review**
-Built and pushed. Results `po/results/20260714_romance_guidance_v2.md`. **P1 (Erik): `R+` = permission-to-the-line** — `ratingRegister()` R+ clause rewritten from prohibition to permission (full charged register expected; stopping short IS the error; the AUP line holds — no graphic mechanical depiction; specificity over explicitness). `R` gets real mature craft language (no fade-to-black); G/PG/PG-13 rewritten per rating. Part 2 engagement frame baked into the system tier after `## CONTENT CEILING` (engage, no safety meta, social touch ≠ harm trigger, engagement-never-overrides-ceiling precedence). Part 3 craft doc → `content/packs/core/rules/romance_guidance.json` (manifest + `CONTENT.romanceGuidance`), pulled on a `romantic`/`flirt` intent as `romanceGuidanceDetail` (existing `scene.push` pattern). No `adultGate` field invented (reads `ratingCeiling(profile)`); minor/no-prohibited floors unchanged. Fresh-port verified (all 5 registers, doc load, beat-block injection); npm test green (smoke R+ tests updated to the ratified contract). **Only Aevi closes.**
+**CCode shipped `romance_guidance.md` v2 clean. Aevi LLW audit at HEAD found one silent-failure bug; fixed and pushed as SNG-100 (`a71c1f2`, v1.8.59 `dc3d9ec`).**
 
-*Floors unchanged, rating-independent: never prohibited content; **a minor is never portrayed in romantic/sexual content at any intensity**; art clamps minors to ≤PG.*
+### SNG-100 — `intentTags` cap could silently drop the tag the whole feature hangs on
+`sanitizeIntent` truncated `intentTags` to `.slice(0, 6)` **in emission order** — and `romantic`/`flirt` are the **last two of 31 tags** in the parse prompt's vocabulary. `romantic` is the *only* tag in that vocab that gates a document (`app.js buildTurnContext` → `romanceGuidanceDetail` → `CONTENT.romanceGuidance`). A rich beat parsing as `persuade, charm, comfort, rapport, finesse, risky, romantic` puts it at index 6 — **sliced off.** The gate goes false, the craft doc never loads, and **the GM just narrates a worse scene with no error anywhere.**
 
-### 2. `po/SPEC_AMENDMENT_ability_arch_v2.md` v2 (`af6080d`) — **BUILD (Track 1)**
-Native grants · breadth/depth separation · axis-touch combinations · schema · skill-tree states. **All 6 Qs closed.**
+Every one of CCode's verifications still passed, because they all supply the tag. The tests hand it over; live play makes a model produce it into an unbounded array competing for six slots against tags it was told about first. **Order-dependence on unordered model output — passes on paper, fails in use.**
 
-**Cut from the build:** **§7b → SNG-098** (it duplicated `skill_battle_system.json` — Aevi's own 2026-07-07 spec, re-invented worse a week later without reading it; *GenerateBeforeVerify at the design layer*). **ID collapse → SNG-099** (mutating `abilityId`s orphans owned abilities — **Law 14**; payoff cosmetic, risk isn't). **`attributeCategory` withdrawn** — reuse `attribute_gates.json` per-sub-attribute, **extended with native entries** (the live table only covers levelReq 3+, so natives have no coverage — the real gap under the error). **Proximity unlock cut** — no counter exists beneath it.
+**Fix:** hoist `romantic`/`flirt` before truncating, in `sanitizeIntent` (gm.js). Cap still honored; non-romantic paths behaviourally unchanged.
+**Proven:** old code on that beat → `[persuade, charm, comfort, rapport, finesse, risky]`, doc **does not load**. New code → `[romantic, persuade, charm, comfort, rapport, finesse]`, doc loads. 6/6 behavioral cases pass; `node --check` clean.
+**Standing rule:** *if a tag gates a document, it must survive the cap.* Commented at the site so a future vocab reorder can't silently break it again.
 
-**Watch:** rank 2 = engine-automatic; rank 3 = new GM op `markDefiningMoment` (whitelist + sanitizer, engine-gated). **Build on `practiceRankReady`** — free rank-through-use already exists. **`app.js` is the real work:** four shipped deepen surfaces (Level-Up · Character · **Skill Wheel + Graph, SNG-097, shipped yesterday** · free-practice) convert from *spend-to-rank* → *progress-toward-threshold*. Ability count at HEAD is **247** — header count **script-generated** from now on; neither Aevi (137) nor CCode (233) got it right by hand.
+### Aevi's audit at HEAD — what's verified without Erik
+Registers correct, R+ clause verbatim-faithful **including the specificity guardrail** (*"if the scene could be any two people, you have failed at R+ no matter how far it went"*) · retired *"never explicit mechanics"* wording fully gone · engagement block in the system tier immediately after `## CONTENT CEILING` with the precedence rule · load chain unbroken `state.js:57 → CONTENT.romanceGuidance → app.js:2250 → gm.js:186` · doc whitelisted in the core manifest, 7,833 chars · **floors intact and ceiling-independent** (`art.js` hard-scrubs minors to ≤PG with a forced non-sexual tone; never a softening).
+
+### ❗ ERIK'S BROWSER LEG — the only accepted proof
+The one surface neither CCode nor Aevi can exercise: **does the live model actually tag a flirtatious action `romantic`, and does the beat block then appear?** That's a real Claude call. Everything downstream of the tag is verified; the classification itself is the model's job.
+→ **In play: flirt with an NPC at `R`. Watch for the GM staying in the scene (no fade, no hedge) and not backing off the rating.** If the narration reads thin or coy, the tag isn't firing — say so and we look at the parse prompt, not the register.
+
+*CCode's own honest note flagged exactly this gap. Correct call.*
+
+---
+
+## 🟢 NEXT FOR CCODE — ABILITY ARCH v2, TRACK 1 (`po/SPEC_AMENDMENT_ability_arch_v2.md` v2, `af6080d`)
+Native grants · breadth/depth separation · axis-touch combinations · schema · skill-tree states. **All 6 Qs closed. GO.**
+
+**Cut from the build:** **§7b → SNG-098** (it duplicated `skill_battle_system.json` — Aevi's own 2026-07-07 spec, re-invented worse a week later without reading it). **ID collapse → SNG-099** (mutating `abilityId`s orphans owned abilities — **Law 14**). **`attributeCategory` withdrawn** — reuse `attribute_gates.json` per-sub-attribute, **extended with native entries**. **Proximity unlock cut** — no counter beneath it.
+
+**Watch:** rank 2 engine-automatic; rank 3 = new GM op `markDefiningMoment` (whitelist + sanitizer, engine-gated). **Build on `practiceRankReady`** — free rank-through-use already exists. **`app.js` is the real work:** four shipped deepen surfaces (Level-Up · Character · **Skill Wheel + Graph, SNG-097, shipped yesterday** · free-practice) convert *spend-to-rank* → *progress-toward-threshold*. Ability count at HEAD is **247** — script-generate the header count.
 
 ---
 

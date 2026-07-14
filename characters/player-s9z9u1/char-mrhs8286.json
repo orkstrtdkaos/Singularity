@@ -36,11 +36,14 @@
   ],
   "alignment": {
     "spectrumId": -0.7494394391601703,
-    "violence_peace": 0.0335,
+    "violence_peace": 0.076825,
     "chaos_order": 0.13401196436328122,
-    "mechanical_spiritual": 0.107038372109375,
-    "concrete_abstract": -0.02886224554687499,
-    "death_life": -0.10925630919921875
+    "mechanical_spiritual": 0.11668645350390625,
+    "concrete_abstract": -0.0074191332695312355,
+    "death_life": -0.10925630919921875,
+    "emotional_logical": 0.034999999999999996,
+    "falsehood_truth": 0.04000000000000001,
+    "demonic_angelic": 0.03
   },
   "attunement": 5,
   "maxHealth": 50,
@@ -847,78 +850,80 @@
         "player": "Hand her Memory and ask her to do the double-stamp again — this time with the spear in her hands instead of scrap.",
         "summary": "Pell struck the double-stamp on Memory itself — the resonance between her hands and the spear ran truer than scrap iron ever gave.",
         "narration": "You lift Memory from the bench and hold it out to her, grip first. No explanation — the gesture says it plainly enough.\n\nPell takes the spear with both hands, and you watch the adjustment happen: she's held tools her whole life, but a spear is not a tool, and this one has a night's worth of work in it that she put there herself. She turns it once, finding the balance point without searching for it — the way she turned the collar-blank, same economy — and then she moves to the anvil horn and positions the collar's north quarter under the double-stamp punch. The punch goes to the brass ring she installed last night, and she seats it. Waits one breath.\n\nThe strike lands true. Then the second, the breath between them just as measured as before.\n\nYou hold Deathsense very lightly — CONSERVE, the barest aperture, no press — and what comes back is not quiet. The sympathetic resonance you caught on the scrap iron is here again, but stronger: her hands, the spear, and something in the iron that is already listening. Memory's death-register does not shift or falter. It steadies. As if the piece knows whose mark is in it and recognizes the weight of the hand that put it there. The resonance runs between them for the length of her working and no longer, and then it is gone the moment she lifts the punch. Clean.\n\nShe sets Memory down on the anvil with deliberate care and looks at her own hands for a moment. Then at you. Outside, the first birds of actual morning are starting up."
+      },
+      {
+        "player": "Talk through the whole thing with her, and also talk about how much you've enjoyed today... and want to keep enjoying days like this as you discover these kinds of things together... what does she think of you?  Are you weird enough for her? ",
+        "summary": "Silas and Pell talked plainly at dawn — she said she'd like to keep finding out who he is.",
+        "narration": "You pick up your cup and settle back against the bench — not going anywhere, the morning outside just beginning to assert itself under the door. The forge fire has coaled down to something comfortable, and the smell of pitch and wine and old starfruit is what the room is made of right now.\n\n\"Today was good,\" you say, and you mean all of it: the cold pre-dawn, Corvin's clean strike, Huginn attending the open animal in the sedge. The night at the bench with the spear between you. The wine. This. \"I want more days like it. That's — I'm saying that plainly, because I'd rather be plain than clever.\"\n\nPell is quiet for a moment. She turns her cup in both hands — the same reading movement she gave the collar-blank, the spear, everything she's deciding about. Then: \"You brought me starfruit from a pass that's been closed since before I had a forge.\" A beat. \"And you stayed up all night fixing something that isn't even yours, because you wanted to understand it.\" She sets the cup down on the bench and looks at you directly. \"You read iron like a person and you have a bird that knows when things are ending. 'Weird enough' is — \" She makes a short sound that is almost a laugh. \"That's a generous way to put what you are.\"\n\nHuginn, from its perch, produces a single flat croak. Pell glances at it. \"Right,\" she says, as though it confirmed something. She looks back at you. \"I don't know what you are or where you're going. But I'd like to keep finding out. That answer your question?\""
       }
     ],
     "lastTurn": {
-      "narration": "You lift Memory from the bench and hold it out to her, grip first. No explanation — the gesture says it plainly enough.\n\nPell takes the spear with both hands, and you watch the adjustment happen: she's held tools her whole life, but a spear is not a tool, and this one has a night's worth of work in it that she put there herself. She turns it once, finding the balance point without searching for it — the way she turned the collar-blank, same economy — and then she moves to the anvil horn and positions the collar's north quarter under the double-stamp punch. The punch goes to the brass ring she installed last night, and she seats it. Waits one breath.\n\nThe strike lands true. Then the second, the breath between them just as measured as before.\n\nYou hold Deathsense very lightly — CONSERVE, the barest aperture, no press — and what comes back is not quiet. The sympathetic resonance you caught on the scrap iron is here again, but stronger: her hands, the spear, and something in the iron that is already listening. Memory's death-register does not shift or falter. It steadies. As if the piece knows whose mark is in it and recognizes the weight of the hand that put it there. The resonance runs between them for the length of her working and no longer, and then it is gone the moment she lifts the punch. Clean.\n\nShe sets Memory down on the anvil with deliberate care and looks at her own hands for a moment. Then at you. Outside, the first birds of actual morning are starting up.",
-      "sceneSummary": "Pell struck the double-stamp on Memory itself — the resonance between her hands and the spear ran truer than scrap iron ever gave.",
+      "narration": "You pick up your cup and settle back against the bench — not going anywhere, the morning outside just beginning to assert itself under the door. The forge fire has coaled down to something comfortable, and the smell of pitch and wine and old starfruit is what the room is made of right now.\n\n\"Today was good,\" you say, and you mean all of it: the cold pre-dawn, Corvin's clean strike, Huginn attending the open animal in the sedge. The night at the bench with the spear between you. The wine. This. \"I want more days like it. That's — I'm saying that plainly, because I'd rather be plain than clever.\"\n\nPell is quiet for a moment. She turns her cup in both hands — the same reading movement she gave the collar-blank, the spear, everything she's deciding about. Then: \"You brought me starfruit from a pass that's been closed since before I had a forge.\" A beat. \"And you stayed up all night fixing something that isn't even yours, because you wanted to understand it.\" She sets the cup down on the bench and looks at you directly. \"You read iron like a person and you have a bird that knows when things are ending. 'Weird enough' is — \" She makes a short sound that is almost a laugh. \"That's a generous way to put what you are.\"\n\nHuginn, from its perch, produces a single flat croak. Pell glances at it. \"Right,\" she says, as though it confirmed something. She looks back at you. \"I don't know what you are or where you're going. But I'd like to keep finding out. That answer your question?\"",
+      "sceneSummary": "Silas and Pell talked plainly at dawn — she said she'd like to keep finding out who he is.",
       "choices": [
         {
-          "label": "Tell her what Deathsense felt — that Memory knows whose mark is in it, and steadied under her hands. Show her the whetstone now.",
+          "label": "Give her the river whetstone now — set it in her hands without ceremony and let that be the close of the night.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
             "violence_peace": 0.7,
-            "mechanical_spiritual": 0.6
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "gift",
+            "close"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Tell her about the river — the contamination, what Aldric said about the boar pushing uphill, what you think it means. See what she knows.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "chaos_order": 0.4,
+            "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
             "share",
-            "gift",
-            "honest"
+            "inform",
+            "probe"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask if she felt anything in her hands — not what she saw, what she felt — while the punch was seated.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask if she'll sleep — you both need it. Offer to start again in the afternoon, when you plan the river scout.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "mechanical_spiritual": 0.6,
-            "concrete_abstract": 0.4
+            "chaos_order": 0.5
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "ask",
-            "careful"
+            "rest",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Say nothing yet — let the moment sit. Pick up Memory yourself and hold it, feeling whether the register has changed at all from the contact.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Tell her what you are — or start to. The short way in that was wrong, the door in the hillside, why you're here at all. If she wants to keep finding out, give her something real to start with.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "death_life": -0.3,
+            "concrete_abstract": -0.5,
             "mechanical_spiritual": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful",
-            "quiet"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Name what this is: the spear has a maker's relationship now, not just a mark. Ask if she wants that to mean something going forward — in plain terms.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.6,
-            "chaos_order": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "honest",
-            "direct",
+            "reveal",
+            "vulnerable",
             "personal"
           ],
           "abilityId": null,
@@ -926,37 +931,43 @@
           "trivial": true
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — dawn light now definite and pale gold under the door, south pit fire coaled to low orange, Memory resting on the anvil horn after Pell's double-stamp.",
+        "setting": "Pell's forge, south lane, Millbrook — full dawn light now pale gold under the door, south pit fire coaled to low orange, Memory resting on the anvil horn.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the anvil, looking at her own hands, then at Silas — waiting."
+            "state": "Leaning against the bench, cup set down, looking at Silas — she's answered; she's waiting to see what he does with it."
           },
           {
             "name": "Huginn",
-            "state": "On its perch, wings flat, attending."
+            "state": "On its perch, wings flat, apparently satisfied."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear 'Memory' (on the anvil horn — just struck, double-stamp landed true)",
-          "Resin Mountain Wine (open bottle, two cups set down on bench)",
-          "Dried Starfruit sealed packet (open, cloth folded back)",
+          "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
+          "Resin Mountain Wine (open bottle, two cups on bench — mostly drunk)",
+          "Dried Starfruit sealed packet (open, mostly eaten)",
           "River whetstone (on bench — not yet formally given)",
           "Spent rune-wax stub (on bench)",
           "Rune-Craft Kit (spent, on bench)",
           "South pit fire (coaled to low orange)",
-          "Drawing salve tin (shelf above bench)",
           "Collar-blank scrap (on anvil — double-stamp freshly pressed)"
         ],
         "threads": [
-          "Pell is looking at her hands and at Silas — she felt something and is waiting to hear what he found",
           "River whetstone still on the bench — not yet formally presented",
-          "Neither of them has slept — full morning is now arriving outside"
+          "Pell has answered plainly: she wants to keep finding out who Silas is",
+          "Neither of them has slept — full morning is now definite outside",
+          "River scout still the outstanding thread on the provisioning deal"
         ]
       },
       "npcUpdates": [
@@ -965,16 +976,33 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hands.",
+          "note": "Answered Silas's plain question plainly — said she'd like to keep finding out what he is. Took Huginn's croak as confirmation of something.",
           "learned": [
-            "When she struck the double-stamp on Memory — not scrap but the spear she marked — the resonance was stronger and the spear's register steadied under her, as if it recognized her."
+            "Registers that Silas brought starfruit from a closed pass and stayed up all night repairing something that isn't his — reads both as meaningful signals",
+            "Acknowledged that 'weird enough' undersells what Silas is, without it being a problem",
+            "Said plainly she wants to keep finding out who he is — this is now an explicit, named intention"
           ],
-          "skillsObserved": [
-            "double-stamp on a named weapon without ceremony or hesitation"
-          ],
-          "relationshipDelta": 0,
+          "skillsObserved": [],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the forge anvil at dawn, Memory in her hands just set down, watching Silas."
+          "statusNote": "At the forge at dawn — answered Silas's question about her interest; the relationship now has explicit forward motion."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Pell told Silas plainly at dawn that she does not know what he is or where he's going, but she'd like to keep finding out — an explicit, named interest on her part.",
+          "subjectId": "pell"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Dawn conversation at the forge bench — the relationship between Silas and Pell moved from craft partnership to something named and mutual. The bench, the wine, and Memory all present.",
+          "subPlace": {
+            "name": "Pell's Forge — Interior",
+            "note": "Dawn: relationship named plainly over the last of the wine. River whetstone still on the bench, unformally given.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
@@ -983,47 +1011,47 @@
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "When Pell struck the double-stamp on Memory directly, the sympathetic resonance between her hands and the spear was stronger than on scrap iron — and Memory's death-register steadied rather than shifted, as if the piece recognized whose mark was in it.",
+          "fact": "At dawn over the last of the wine, Pell said plainly she doesn't know what Silas is or where he's going — and that she'd like to keep finding out. The interest is named and mutual.",
           "links": [
-            "death-bound-spear",
-            "deathsense",
             "millbrook",
-            "the-unnamed-gift"
+            "death-bound-spear",
+            "the-unnamed-gift",
+            "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a single quiet demonstration — a breath of time"
+        "hoursPassed": 0,
+        "why": "A short exchange — moments only, same dawn beat"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — dawn light now definite and pale gold under the door, south pit fire coaled to low orange, Memory resting on the anvil horn after Pell's double-stamp.",
+      "setting": "Pell's forge, south lane, Millbrook — full dawn light now pale gold under the door, south pit fire coaled to low orange, Memory resting on the anvil horn.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the anvil, looking at her own hands, then at Silas — waiting."
+          "state": "Leaning against the bench, cup set down, looking at Silas — she's answered; she's waiting to see what he does with it."
         },
         {
           "name": "Huginn",
-          "state": "On its perch, wings flat, attending."
+          "state": "On its perch, wings flat, apparently satisfied."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear 'Memory' (on the anvil horn — just struck, double-stamp l",
-        "Resin Mountain Wine (open bottle, two cups set down on bench)",
-        "Dried Starfruit sealed packet (open, cloth folded back)",
+        "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
+        "Resin Mountain Wine (open bottle, two cups on bench — mostly drunk)",
+        "Dried Starfruit sealed packet (open, mostly eaten)",
         "River whetstone (on bench — not yet formally given)",
         "Spent rune-wax stub (on bench)",
         "Rune-Craft Kit (spent, on bench)",
         "South pit fire (coaled to low orange)",
-        "Drawing salve tin (shelf above bench)",
         "Collar-blank scrap (on anvil — double-stamp freshly pressed)"
       ],
       "threads": [
-        "Pell is looking at her hands and at Silas — she felt something and is waiting to hear what he found",
         "River whetstone still on the bench — not yet formally presented",
-        "Neither of them has slept — full morning is now arriving outside"
+        "Pell has answered plainly: she wants to keep finding out who Silas is",
+        "Neither of them has slept — full morning is now definite outside",
+        "River scout still the outstanding thread on the provisioning deal"
       ]
     }
   },
@@ -1171,7 +1199,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Agreed plainly to plan the repair together — 'Yes', no ceremony. Now holding the transverse fault and asking the right structural question: does it need deepening, rewriting, or re",
         "[d2] Re-seated her maker's mark under guidance — slightly off-true, accepted the variance without complaint. Deepened the transverse channel cleanly on a single pass. Wiped the chisel a",
         "[d2] Pressed the collar's north quarter flush with her thumb on Silas's word — patient, even, no ceremony. Work reads as done.",
         "[d2] Watched Silas use Deathsense on the finished spear — heard the confirmation that the register runs clean and that her oblique axis reads as her signature, not a flaw.",
@@ -1180,17 +1207,18 @@
         "[d2] Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what hap",
         "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw",
         "[d2] Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'",
-        "[d2] Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hand"
+        "[d2] Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hand",
+        "[d2] Answered Silas's plain question plainly — said she'd like to keep finding out what he is. Took Huginn's croak as confirmation of something."
       ],
       "knownFacts": [
-        "With Memory, she pressed where the iron said to go — and the iron told her; that has never happened before",
-        "She frames it as the piece needing more room than she usually leaves, and the piece knowing it",
-        "What happened in her hand when the mark landed oblique was her craft deep enough that piece and hand are the same conversation — Silas's framing, accepted.",
         "She wants to understand the moment of the oblique stamp more fully — the grain-reading, the register, what happened in her palm.",
         "Order-Sense could read the edges of her craft — the economy, the sureness — but not the heart of the moment the iron spoke",
         "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it",
         "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something ha",
-        "When she struck the double-stamp on Memory — not scrap but the spear she marked — the resonance was stronger and the spear's register steadied under her, as if "
+        "When she struck the double-stamp on Memory — not scrap but the spear she marked — the resonance was stronger and the spear's register steadied under her, as if ",
+        "Registers that Silas brought starfruit from a closed pass and stayed up all night repairing something that isn't his — reads both as meaningful signals",
+        "Acknowledged that 'weird enough' undersells what Silas is, without it being a problem",
+        "Said plainly she wants to keep finding out who he is — this is now an explicit, named intention"
       ],
       "skillsObserved": [
         "staying present through a six-hour repair without flagging",
@@ -1201,7 +1229,7 @@
         "double-stamp on a named weapon without ceremony or hesitatio"
       ],
       "status": "active",
-      "statusNote": "At the forge anvil at dawn, Memory in her hands just set down, watching Silas.",
+      "statusNote": "At the forge at dawn — answered Silas's question about her interest; the relationship now has explicit forward motion.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1306,7 +1334,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Sow killed in the sedge strip on World-day 14 pre-dawn — ground disturbed, piglets scattered north. The strip now reads as hunted.",
         "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
         "[d1] Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep.",
         "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
@@ -1317,7 +1344,8 @@
         "[d2] Spear repair planning begun at the forge bench on World-day 14 deep night — Pell and Silas both assessing the transverse fault; Huginn attending.",
         "[d2] Spear repair completed at the forge bench on World-day 14 deep night — rune-wax cord and pitch-ink spent in the capacitor install, transverse channel deepened in the iron. Bench carries the marks of t",
         "[d2] Spear repair fully completed at dawn — north quarter capacitor pressed flush. Bench carries pitch-smear and the marks of the night's work.",
-        "[d2] Memory named at the forge bench at dawn — wine opened, starfruit shared, the night's work concluded with a name."
+        "[d2] Memory named at the forge bench at dawn — wine opened, starfruit shared, the night's work concluded with a name.",
+        "[d2] Dawn conversation at the forge bench — the relationship between Silas and Pell moved from craft partnership to something named and mutual. The bench, the wine, and Memory all present."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1384,7 +1412,7 @@
           "name": "Pell's Forge — Interior",
           "day": 1,
           "visited": true,
-          "note": "Dawn: Memory named, wine and starfruit shared, the bench still carrying the marks of the night."
+          "note": "Dawn: relationship named plainly over the last of the wine. River whetstone still on the bench, unformally given."
         },
         "north-gate": {
           "name": "North Gate",
@@ -1650,7 +1678,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
           "[d1] Sold the mid-weight spear-tip to Silas and modified the light point for Corvin with a stop-lug — labor credit from the backlog deducted clean. Transaction done in the same flat register as everything ",
           "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
           "[d1] Full name is Pell Marsh — her grandmother's name was Grant. She caught Silas's teasing guess without a word more than necessary.",
@@ -1673,17 +1700,18 @@
           "[d2] Accepted the framing that the oblique stamp was her craft deep enough to become the same conversation as the iron — not the piece overriding her hand. Has asked explicitly to understand the moment mor",
           "[d2] Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice t",
           "[d2] While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two i",
-          "[d2] When Pell struck the double-stamp on Memory directly, the sympathetic resonance between her hands and the spear was stronger than on scrap iron — and Memory's death-register steadied rather than shift"
+          "[d2] When Pell struck the double-stamp on Memory directly, the sympathetic resonance between her hands and the spear was stronger than on scrap iron — and Memory's death-register steadied rather than shift",
+          "[d2] At dawn over the last of the wine, Pell said plainly she doesn't know what Silas is or where he's going — and that she'd like to keep finding out. The interest is named and mutual."
         ],
         "links": [
-          "mara-wells",
           "death-bound-spear",
           "huginn",
           "the-unnamed-gift",
           "palework",
           "millbrook",
           "order-sense",
-          "deathsense"
+          "deathsense",
+          "aldric-provisioning-deal"
         ],
         "aliases": [
           "Pell Marsh"
@@ -1824,14 +1852,14 @@
     }
   },
   "tendencies": {
-    "strategic": 48.961773055039124,
-    "cerebral": 34.45775943314235,
-    "social": 53.724573672257115,
-    "generous": 12.878562654056589,
-    "cautious": 24.0723441027072,
-    "physical": 1.686949299889419,
-    "risky": 1.8390886103705792,
-    "ruthless": 0.8603841919146962
+    "strategic": 48.71696418976393,
+    "cerebral": 34.28547063597664,
+    "social": 56.45595080389583,
+    "generous": 12.814169840786306,
+    "cautious": 23.951982382193663,
+    "physical": 1.678514553389972,
+    "risky": 1.8298931673187264,
+    "ruthless": 0.8560822709551227
   },
   "aptitudes": [
     "strategist",
@@ -1839,7 +1867,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 119,
+  "actionCount": 120,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1909,8 +1937,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784037612525,
-  "rev": 182,
+  "updatedAt": 1784037925984,
+  "rev": 183,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2042,6 +2070,12 @@
     {
       "id": "pell",
       "text": "The Deathbound Runic Spear has been named Memory — the name given by Silas at dawn in Pell's forge, in the presence of Pell and Huginn, over wine and old starfruit.",
+      "day": 2,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell told Silas plainly at dawn that she does not know what he is or where he's going, but she'd like to keep finding out — an explicit, named interest on her part.",
       "day": 2,
       "subjectId": "pell"
     }

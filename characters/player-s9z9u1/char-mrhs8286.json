@@ -130,7 +130,7 @@
       "qty": 1,
       "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Not finish work, but it won't shift on a boar.",
       "consumable": false,
-      "customName": "Deathbound Runic Spear"
+      "customName": "Memory"
     },
     {
       "id": null,
@@ -161,6 +161,14 @@
         "energy": 3
       },
       "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Valve Failure Timeline (note)",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A small torn page in Mara's hand — four sleeve blank sales, four failure dates, two customer names. World-day minus-eighteen: Fen's intake. World-day minus-nine: east furlong farmer.",
+      "consumable": false
     }
   ],
   "deeds": [
@@ -933,21 +941,26 @@
         "player": "Stay quiet and watch Pell work the sleeve — you've been up all night with her and there's something in just letting the craft be the craft for half an hour.",
         "summary": "Pell finishes the sleeve job in quiet craft. She places Memory in Silas's hands and they prepare to walk north.",
         "narration": "The sleeve blank takes shape under Pell's hands in the unhurried way that competence makes look like ease. She works the punch with the heel of her palm, not the hammer — two measured taps, a quarter-turn, two more — and the iron opens along the line she scribed without complaint. Huginn watches from the anvil horn, one foot tucked, head angled. Memory catches the fire's light along the capacitor collar.\n\nYou sit on the low stool and let it be. The south pit fire breathes. A rooster sounds off somewhere past the well and is not answered. Pell holds the blank up, checks the mouth against the caliper face, sets it back to the fire. She does not look over at you. She does not need to. The shared quiet after a full night of close work has a different texture than ordinary silence — not empty, just used.\n\nThe bell tower rings the second quarter while the sleeve is still on the fire. Pell counts two beats after the last note, pulls it, and sets it to cool on the stone ledge. The whole job has taken twenty-six minutes. She peels her gloves off, tucks them under her arm, and moves the blank to the door-step for the farmer to collect.\n\n'Ready when you are,' she says, not turning around — already moving toward the peg where her coat hangs. The river whetstone is still on the shelf above the bellows. Memory is still on the anvil horn. She lifts it, weighs it once in her palm, and sets it into your hands without ceremony. 'Bring this. If there's iron to read, you'll want it close.'"
+      },
+      {
+        "player": "Stop at Mara's store on the way north — the ledger may name the date the first iron valve failed, and a five-minute detour is worth a confirmed timeline.",
+        "summary": "Mara's ledger confirms the timeline: four sleeve failures in three weeks, starting World-day minus-eighteen at Fen's intake.",
+        "narration": "The south lane is quiet at this hour — dew still on the stones, the cookhouse smoke just starting to thicken. You and Pell walk in step, Memory easy in your grip, Huginn riding your left shoulder with the companionable weight of something that has nowhere else to be. Mara's store is three minutes from the forge, red door shut but not latched; the lamp inside is already lit.\n\nMara looks up from her ledger when you push the door open — registers the two of you, the spear, the hour — and nods once. No preamble. 'Early start,' she says, which is not a question.\n\nPell stays in the doorway while you ask about the east-channel valve dates. Mara turns two pages without hesitation, runs a finger down a column of small, dense script, and stops. 'Fen's intake.' She turns the ledger to face you without lifting it from the counter. The entry is brief: a materials note for a replacement sleeve blank, a date, and Fen's name initialed in the margin. World-day minus-eighteen — roughly three weeks before today. 'I sold Fen the blank. She came back four days later to say it hadn't seated and she'd had to cap the line.' Mara closes the ledger. 'The second?'\n\n'The farmer's — east furlong,' you say.\n\nMara opens a different log. A beat. 'World-day minus-nine. Also a sleeve blank. Also came back.' She looks up. 'I've sold four sleeve blanks in three weeks. Normal is two a season.' She says it the way she says everything — flat, precise, without alarm — but she holds your gaze a half-second longer than inventory warrants. 'You're going to see someone about this.'\n\n'We are,' Pell says from the doorway.\n\nMara nods and lifts the ledger closed. She tears a small page from a loose notepad on the counter — two dates, two names, four blanks total — and sets it at the edge for you to take. No charge named. No explanation offered."
       }
     ],
     "lastTurn": {
-      "narration": "The sleeve blank takes shape under Pell's hands in the unhurried way that competence makes look like ease. She works the punch with the heel of her palm, not the hammer — two measured taps, a quarter-turn, two more — and the iron opens along the line she scribed without complaint. Huginn watches from the anvil horn, one foot tucked, head angled. Memory catches the fire's light along the capacitor collar.\n\nYou sit on the low stool and let it be. The south pit fire breathes. A rooster sounds off somewhere past the well and is not answered. Pell holds the blank up, checks the mouth against the caliper face, sets it back to the fire. She does not look over at you. She does not need to. The shared quiet after a full night of close work has a different texture than ordinary silence — not empty, just used.\n\nThe bell tower rings the second quarter while the sleeve is still on the fire. Pell counts two beats after the last note, pulls it, and sets it to cool on the stone ledge. The whole job has taken twenty-six minutes. She peels her gloves off, tucks them under her arm, and moves the blank to the door-step for the farmer to collect.\n\n'Ready when you are,' she says, not turning around — already moving toward the peg where her coat hangs. The river whetstone is still on the shelf above the bellows. Memory is still on the anvil horn. She lifts it, weighs it once in her palm, and sets it into your hands without ceremony. 'Bring this. If there's iron to read, you'll want it close.'",
-      "sceneSummary": "Pell finishes the sleeve job in quiet craft. She places Memory in Silas's hands and they prepare to walk north.",
+      "narration": "The south lane is quiet at this hour — dew still on the stones, the cookhouse smoke just starting to thicken. You and Pell walk in step, Memory easy in your grip, Huginn riding your left shoulder with the companionable weight of something that has nowhere else to be. Mara's store is three minutes from the forge, red door shut but not latched; the lamp inside is already lit.\n\nMara looks up from her ledger when you push the door open — registers the two of you, the spear, the hour — and nods once. No preamble. 'Early start,' she says, which is not a question.\n\nPell stays in the doorway while you ask about the east-channel valve dates. Mara turns two pages without hesitation, runs a finger down a column of small, dense script, and stops. 'Fen's intake.' She turns the ledger to face you without lifting it from the counter. The entry is brief: a materials note for a replacement sleeve blank, a date, and Fen's name initialed in the margin. World-day minus-eighteen — roughly three weeks before today. 'I sold Fen the blank. She came back four days later to say it hadn't seated and she'd had to cap the line.' Mara closes the ledger. 'The second?'\n\n'The farmer's — east furlong,' you say.\n\nMara opens a different log. A beat. 'World-day minus-nine. Also a sleeve blank. Also came back.' She looks up. 'I've sold four sleeve blanks in three weeks. Normal is two a season.' She says it the way she says everything — flat, precise, without alarm — but she holds your gaze a half-second longer than inventory warrants. 'You're going to see someone about this.'\n\n'We are,' Pell says from the doorway.\n\nMara nods and lifts the ledger closed. She tears a small page from a loose notepad on the counter — two dates, two names, four blanks total — and sets it at the edge for you to take. No charge named. No explanation offered.",
+      "sceneSummary": "Mara's ledger confirms the timeline: four sleeve failures in three weeks, starting World-day minus-eighteen at Fen's intake.",
       "choices": [
         {
-          "label": "Take Memory, pull on your pack, and head north with Pell — straight to Fen's failed intake on the east channel.",
+          "label": "Take the note and head straight north — the ledger dates are enough; the sooner you're at Fen's intake the better.",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "move",
-            "careful"
+            "careful",
+            "move"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -956,14 +969,14 @@
           "emergenceId": null
         },
         {
-          "label": "Before you leave, ask Pell if she knows who sits on the elder panel — you want a name to bring findings to, not just a room.",
+          "label": "Ask Mara if she knows who Dara Holt is — the senior east-channel irrigator — and whether Mara thinks she should know about this before or after you've seen the site.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "plan",
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -972,14 +985,14 @@
           "emergenceId": null
         },
         {
-          "label": "Stop at Mara's store on the way north — the ledger may name the date the first iron valve failed, and a five-minute detour is worth a confirmed timeline.",
+          "label": "Ask Mara if any of the four customers mentioned the same detail — deposit color, smell, anything — or whether they all just called it a failed seat.",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "plan"
+            "study",
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -988,14 +1001,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Pell what she expects to find at Fen's intake — you want to know what she's already figured out before you use any craft on it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Thank Mara — then step outside and ask Pell if the four-blank count changes anything about what she expects to find at Fen's housing.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "plan",
+            "consult"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1007,84 +1020,132 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Valve Failure Timeline (note)",
+            "kind": "quest",
+            "description": "A small torn page in Mara's hand — four sleeve blank sales, four failure dates, two customer names. World-day minus-eighteen: Fen's intake. World-day minus-nine: east furlong farmer.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent."
+          "note": "Mara's ledger confirms the iron failure timeline — four valve failures in three weeks beginning World-day minus-eighteen. Note in hand; Fen's intake next."
         }
       ],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — door open to pale-gold early morning light; sleeve blank cooling on the stone door-step, south pit fire banked low. The farmer's job is done.",
+        "setting": "Mara Wells's store, east side of the well, Millbrook — red door open, lamp lit, pale early morning light coming in behind Pell where she stands in the doorway.",
         "npcsPresent": [
           {
+            "name": "Mara Wells",
+            "state": "Behind the counter, ledger just closed, watching Silas and Pell with quiet attention."
+          },
+          {
             "name": "Pell",
-            "state": "Pulling on her coat from the peg by the door — gloves tucked under one arm, ready to walk north."
+            "state": "Standing in the doorway, coat on, gloves tucked under one arm — ready to walk north."
           },
           {
             "name": "Huginn",
-            "state": "Still on the anvil horn, watching Silas receive Memory."
+            "state": "On Silas's left shoulder, still and calm."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear 'Memory' (now in Silas's hands)",
-          "Sleeve blank (cooling on the door-step for the farmer)",
-          "River whetstone (on shelf above bellows)",
-          "Spent rune-wax stub (on bench)",
-          "Rune-Craft Kit (spent, on bench)",
-          "South pit fire (banked low)",
-          "Resin Mountain Wine (open bottle, nearly empty)",
-          "Dried Starfruit sealed packet (open, mostly eaten)",
-          "Preserved Trail Parcel x1 (remaining)"
+          "Memory (mid-weight spear, in Silas's grip)",
+          "Valve Failure Timeline note (on counter edge, ready to take)",
+          "Mara's ledger (closed on the counter)",
+          "Preserved Trail Parcel x1 (in pack — one remaining)",
+          "Waterskin",
+          "Belt Knife",
+          "Rune-Craft Kit (spent, in pack)",
+          "Boar Tusks (pair, in pack)"
         ],
         "threads": [
-          "Fen's failed east-channel intake — twenty minutes north of the upper meadow",
-          "Mara's ledger may hold the date the first iron valve failure began",
-          "Elder panel composition still unknown — no name yet to bring findings to",
-          "Huginn attentive as Memory changes hands"
+          "Four sleeve blank failures in three weeks — broader than the two valve sites already known",
+          "Fen's intake is still twenty minutes north, waiting to be inspected",
+          "Dara Holt, the Ditch-Mother — senior east-channel irrigator, not yet contacted",
+          "Elder panel composition still unknown — no name to bring findings to"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Village supply store operator, Millbrook",
+          "note": "Produced valve failure dates from two separate ledgers without hesitation — four sleeve blank sales in three weeks, both failures confirmed returned. Tore a note page unprompted and said nothing about payment.",
+          "learned": [
+            "Four sleeve blank failures in three weeks — double the normal seasonal rate",
+            "Fen's intake: World-day minus-eighteen, first failure confirmed",
+            "East furlong farmer: World-day minus-nine, second confirmed failure",
+            "Two other blank sales not yet identified — could be additional failures Silas doesn't know about yet"
+          ],
+          "skillsObserved": [
+            "precise ledger recall across multiple logs",
+            "reading the weight of a situation without needing it spelled out"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At her store counter, ledger closed, watching Silas and Pell depart north."
+        },
+        {
+          "op": "update",
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north.",
-          "learned": [
-            "Placed Memory in Silas's hands before departure — treating it as a working tool, not a keepsake"
-          ],
-          "skillsObserved": [
-            "Sleeve fitting by caliper and eye — job completed under time without ceremony"
-          ],
+          "note": "Stayed at the doorway, let Silas handle the ledger inquiry — heard everything. Ready to walk.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge door, coat on, ready to walk north to the east-channel valve sites with Silas."
+          "statusNote": "At Mara's store doorway, coat on, ready to walk north to Fen's failed intake with Silas."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Mara's ledger confirms four iron sleeve blank failures in three weeks — Fen's intake (World-day minus-18) and east furlong farmer (World-day minus-9) confirmed; two additional failures unidentified. Timeline note now in Silas's inventory.",
+          "subjectId": "mara-wells"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Sleeve blank left cooling on the forge door-step for the farmer — Pell's job complete, forge banked, both Silas and Pell ready to depart north.",
+          "note": "Mara provided valve failure dates from her ledger unprompted — four sleeve blank returns in three weeks documented. A note page torn and given to Silas.",
           "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Sleeve job concluded; Memory handed to Silas; Pell coated and ready to walk north. Fire banked.",
+            "name": "Mara Wells's Store",
+            "note": "Third visit — dawn of World-day 14. Valve failure timeline confirmed from ledger; note given to Silas at no charge.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Placed Memory in Silas's hands before departure — treating the spear as a working instrument for the valve inspection, not ceremony. Finished the farmer's sleeve in twenty-six minutes.",
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Four iron sleeve blank failures in three weeks — double the normal seasonal rate. Fen's intake failed first at World-day minus-18; east furlong farmer second at minus-9. Two further failures unaccounted for. Mara's ledger provides a confirmed timeline.",
           "links": [
-            "death-bound-spear",
+            "millbrook",
+            "pell",
+            "aldric-provisioning-deal",
+            "mara-wells",
+            "fendt-and-the-falsified-ledger"
+          ]
+        },
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "entityId": "mara-wells",
+          "fact": "Keeps cross-referenced sales logs precise enough to reconstruct a failure timeline three weeks back without prompting. Tore a note page for Silas without naming a price — treating civic information differently from trade.",
+          "links": [
             "the-water-crisis",
             "millbrook",
             "aldric-provisioning-deal"
@@ -1092,38 +1153,41 @@
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Thirty minutes of Pell working the sleeve job while Silas rested on the stool — a half-hour of quiet craft before departure."
+        "hoursPassed": 0.25,
+        "why": "A brief five-minute stop at Mara's store on the way north."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — door open to pale-gold early morning light; sleeve blank cooling on the stone door-step, south pit fire banked low. The farmer's job is done.",
+      "setting": "Mara Wells's store, east side of the well, Millbrook — red door open, lamp lit, pale early morning light coming in behind Pell where she stands in the doorway.",
       "npcsPresent": [
         {
+          "name": "Mara Wells",
+          "state": "Behind the counter, ledger just closed, watching Silas and Pell with quiet attention."
+        },
+        {
           "name": "Pell",
-          "state": "Pulling on her coat from the peg by the door — gloves tucked under one arm, ready to walk north."
+          "state": "Standing in the doorway, coat on, gloves tucked under one arm — ready to walk north."
         },
         {
           "name": "Huginn",
-          "state": "Still on the anvil horn, watching Silas receive Memory."
+          "state": "On Silas's left shoulder, still and calm."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear 'Memory' (now in Silas's hands)",
-        "Sleeve blank (cooling on the door-step for the farmer)",
-        "River whetstone (on shelf above bellows)",
-        "Spent rune-wax stub (on bench)",
-        "Rune-Craft Kit (spent, on bench)",
-        "South pit fire (banked low)",
-        "Resin Mountain Wine (open bottle, nearly empty)",
-        "Dried Starfruit sealed packet (open, mostly eaten)",
-        "Preserved Trail Parcel x1 (remaining)"
+        "Memory (mid-weight spear, in Silas's grip)",
+        "Valve Failure Timeline note (on counter edge, ready to take)",
+        "Mara's ledger (closed on the counter)",
+        "Preserved Trail Parcel x1 (in pack — one remaining)",
+        "Waterskin",
+        "Belt Knife",
+        "Rune-Craft Kit (spent, in pack)",
+        "Boar Tusks (pair, in pack)"
       ],
       "threads": [
-        "Fen's failed east-channel intake — twenty minutes north of the upper meadow",
-        "Mara's ledger may hold the date the first iron valve failure began",
-        "Elder panel composition still unknown — no name yet to bring findings to",
-        "Huginn attentive as Memory changes hands"
+        "Four sleeve blank failures in three weeks — broader than the two valve sites already known",
+        "Fen's intake is still twenty minutes north, waiting to be inspected",
+        "Dara Holt, the Ditch-Mother — senior east-channel irrigator, not yet contacted",
+        "Elder panel composition still unknown — no name to bring findings to"
       ]
     }
   },
@@ -1150,14 +1214,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "All financial threads closed — thirty cord-weight in standing credit with Aldric, Corvin paid, Pell paid. River scout remains the one outstanding thread.",
         "River scout still the one outstanding thread — the spear repair now occupies the night; the scout will need to be planned separately.",
         "Spear repair occupies the night — river scout still the one outstanding thread; to be planned in the morning.",
         "A farmer arrives at the forge with cracked irrigation fittings — iron going brittle at the threading since the river changed. First direct in-village evidence of infrastructure damage from the contamination.",
         "Order-Sense confirms the water contamination is causing selective iron corrosion at every water-contact fitting — at least two east-channel intake valves failed overnight. The damage is patterned and spreading.",
         "Silas confirms the contamination pattern to Pell: gray-green mineral deposit targets iron contact points specifically, working inward from the water-facing surface. Two east-channel intake valves failed since the water changed. Pattern is spreading.",
         "Pell agrees to walk north to the east-channel valve sites after the farmer's sleeve job — she knows both failure locations and names Fen's intake as the first inspection point. Mara's ledger identified as a potential date-anchor for when the iron failures began.",
-        "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent."
+        "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent.",
+        "Mara's ledger confirms the iron failure timeline — four valve failures in three weeks beginning World-day minus-eighteen. Note in hand; Fen's intake next."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1271,7 +1335,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Heard Silas name the cookhouse deflection and his fall for her — closed her hand around his wrist and said 'not yet', holding the moment without ending it.",
         "[d2] Silas kissed her at dawn at the anvil horn — she tightened her hand on his wrist, stayed, said 'alright' quietly. A first reading, not a conclusion.",
         "[d2] Received the forge-and-transformation question — answered with craft-logic: forging changes what a thing is, and the smith doesn't always know the outcome. Held Silas's wrist. Said",
         "[d2] Received Silas's declaration of certainty — believed it, but named the difference between his readiness and hers. Released his shirt; grip on his wrist softened to contact. Has not",
@@ -1280,7 +1343,8 @@
         "[d2] Moved to iron rack and picked up calipers without hesitation — managing the farmer's job cleanly while Silas reads the tubing from across the room.",
         "[d2] Heard Silas's report on the iron contamination without stopping her work — 'Fen's was the second' was not new information to her. Confirms she has been tracking the valve failures.",
         "[d2] Agreed to walk north after the farmer's sleeve job — knows both failed valve sites, named Fen's east-channel intake as the first inspection point. Suggested Mara's ledger as a date",
-        "[d2] Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north."
+        "[d2] Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north.",
+        "[d2] Stayed at the doorway, let Silas handle the ledger inquiry — heard everything. Ready to walk."
       ],
       "knownFacts": [
         "Moves on her own ground without self-consciousness — the forge is hers and she doesn't perform it",
@@ -1301,7 +1365,7 @@
         "Sleeve fitting by caliper and eye — job completed under time"
       ],
       "status": "active",
-      "statusNote": "At the forge door, coat on, ready to walk north to the east-channel valve sites with Silas.",
+      "statusNote": "At Mara's store doorway, coat on, ready to walk north to Fen's failed intake with Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1316,9 +1380,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d1] Smokehouse referral invoked; she accepted it without ceremony. Pen down before Silas finished two steps — reads customers as inventory.",
         "[d1] Silas pitched the boar hunt directly — named Pell's involvement and the smokehouse connection. Mara produced two seasoned ash shafts from the back and named terms: sixty cord each,",
         "[d1] Sold Silas one ash shaft on account (Aldric's smokehouse credit), one at sixty cord coin-weight. Produced rune-craft materials unprompted once the purpose was named — wax, lamp-bla",
         "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
@@ -1327,28 +1390,29 @@
         "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
         "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig",
         "[d2] Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach",
-        "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach."
+        "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
+        "[d2] Produced valve failure dates from two separate ledgers without hesitation — four sleeve blank sales in three weeks, both failures confirmed returned. Tore a note page unprompted an"
       ],
       "knownFacts": [
-        "Has sealed dried starfruit from the pass circuit trade — three or four winters old, still good",
-        "The wine and starfruit are a gift from Silas to Pell",
-        "Silas is heading to the forge this afternoon",
         "Pell values finished work over impressive work",
         "Pell drinks slowly and notices taste — the wine is a good choice",
         "Pell grew up before the pass closed — the starfruit will be recognized and unexpected",
         "Pell had a quiet relationship with a tinker from the heights that ended about three years ago — he stopped coming through; she didn't discuss it",
-        "Pell moves at her own pace and reads people who are performing before they speak"
+        "Pell moves at her own pace and reads people who are performing before they speak",
+        "Four sleeve blank failures in three weeks — double the normal seasonal rate",
+        "Fen's intake: World-day minus-eighteen, first failure confirmed",
+        "East furlong farmer: World-day minus-nine, second confirmed failure"
       ],
       "skillsObserved": [
-        "back-stock management",
-        "practical trade negotiation",
         "stock sourcing from reserve",
         "discreet ledger management",
         "reading a customer's intent without needing it explained",
-        "back-stock recall without hesitation"
+        "back-stock recall without hesitation",
+        "precise ledger recall across multiple logs",
+        "reading the weight of a situation without needing it spelled"
       ],
       "status": "active",
-      "statusNote": "At her store counter, work done, watching Silas finish up his questions.",
+      "statusNote": "At her store counter, ledger closed, watching Silas and Pell depart north.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1406,7 +1470,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
         "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current.",
         "[d2] Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle.",
         "[d2] Hunt smell washed off in the forge bucket — south pit fire lit and building toward working heat. Wine and starfruit set near the door.",
@@ -1417,7 +1480,8 @@
         "[d2] Memory named at the forge bench at dawn — wine opened, starfruit shared, the night's work concluded with a name.",
         "[d2] Dawn conversation at the forge bench — the relationship between Silas and Pell moved from craft partnership to something named and mutual. The bench, the wine, and Memory all present.",
         "[d2] Pell has agreed to walk north with Silas to the east-channel valve sites — Fen's failed intake named as first destination, a bend in the east channel twenty minutes north of the upper meadow.",
-        "[d2] Sleeve blank left cooling on the forge door-step for the farmer — Pell's job complete, forge banked, both Silas and Pell ready to depart north."
+        "[d2] Sleeve blank left cooling on the forge door-step for the farmer — Pell's job complete, forge banked, both Silas and Pell ready to depart north.",
+        "[d2] Mara provided valve failure dates from her ledger unprompted — four sleeve blank returns in three weeks documented. A note page torn and given to Silas."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1466,7 +1530,7 @@
           "name": "Mara Wells's Store",
           "day": 1,
           "visited": true,
-          "note": "Second visit — Silas returned post-hunt, morning of World-day 14. Mara behind the counter, ledger open."
+          "note": "Third visit — dawn of World-day 14. Valve failure timeline confirmed from ledger; note given to Silas at no charge."
         },
         "corvin-s-east-furlong": {
           "name": "Corvin's East Furlong",
@@ -1732,13 +1796,15 @@
           "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
           "[d1] Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Al",
           "[d2] Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve.",
-          "[d2] Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transac"
+          "[d2] Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transac",
+          "[d2] Keeps cross-referenced sales logs precise enough to reconstruct a failure timeline three weeks back without prompting. Tore a note page for Silas without naming a price — treating civic information di"
         ],
         "links": [
           "millbrook",
           "aldric",
           "aldric-provisioning-deal",
-          "pell"
+          "pell",
+          "the-water-crisis"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1929,14 +1995,16 @@
           "[d2] Iron is going brittle at the threading in irrigation valves since the water changed — a farmer lost a lower field intake valve overnight, a second field the same. Huginn reacted when this was named al",
           "[d2] Order-Sense reading of cracked east-channel irrigation tubing confirms: the gray-green mineral deposit concentrates at every iron contact point, working inward from the water-facing surface. The reed ",
           "[d2] Pell already knew about both east-channel valve failures — 'Fen's was the second' required no explanation. The iron contamination pattern is known locally but not yet being spoken about openly.",
-          "[d2] Pell knows both failed east-channel valve sites. Fen's intake is twenty minutes north of the upper meadow at an east-channel bend — the housing will show how long the deposit has been building. The el"
+          "[d2] Pell knows both failed east-channel valve sites. Fen's intake is twenty minutes north of the upper meadow at an east-channel bend — the housing will show how long the deposit has been building. The el",
+          "[d2] Four iron sleeve blank failures in three weeks — double the normal seasonal rate. Fen's intake failed first at World-day minus-18; east furlong farmer second at minus-9. Two further failures unaccount"
         ],
         "links": [
           "millbrook",
           "aldric-provisioning-deal",
           "aldric",
           "fendt-and-the-falsified-ledger",
-          "pell"
+          "pell",
+          "mara-wells"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -1958,14 +2026,14 @@
     }
   },
   "tendencies": {
-    "strategic": 49.06864705059059,
-    "cerebral": 33.426361658040804,
-    "social": 60.1817239677842,
-    "generous": 12.12674831533542,
-    "cautious": 26.602541351746755,
-    "physical": 1.5884699348841156,
-    "risky": 1.7317277794614037,
-    "ruthless": 0.810157377815473
+    "strategic": 50.82330381533764,
+    "cerebral": 33.2592298497506,
+    "social": 59.88081534794528,
+    "generous": 12.066114573758743,
+    "cautious": 26.46952864498802,
+    "physical": 1.580527585209695,
+    "risky": 1.7230691405640965,
+    "ruthless": 0.8061065909263957
   },
   "aptitudes": [
     "strategist",
@@ -1973,7 +2041,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 131,
+  "actionCount": 132,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2051,8 +2119,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784040155417,
-  "rev": 196,
+  "updatedAt": 1784040306339,
+  "rev": 198,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2277,6 +2345,12 @@
       "text": "Pell agreed to walk north with Silas after the farmer's sleeve job to inspect the failed east-channel valve sites — Fen's intake is the first destination, twenty minutes north of the upper meadow.",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "mara-wells",
+      "text": "Mara's ledger confirms four iron sleeve blank failures in three weeks — Fen's intake (World-day minus-18) and east furlong farmer (World-day minus-9) confirmed; two additional failures unidentified. T",
+      "day": 2,
+      "subjectId": "mara-wells"
     }
   ],
   "practice": {

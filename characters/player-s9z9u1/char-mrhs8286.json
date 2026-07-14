@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 435,
+  "xp": 440,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -44,7 +44,7 @@
     "chaos_order": 0.13401196436328122,
     "mechanical_spiritual": 0.15258154807291163,
     "concrete_abstract": 0.00008902061303565564,
-    "death_life": -0.09310381905229492,
+    "death_life": -0.11844862809968017,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 78,
+  "energy": 73,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -991,64 +991,77 @@
         "player": "Stop here and use Palework on the bedrock shelf where that amber light ran — read what the stone is part of, what ended or is ending in it.",
         "summary": "Palework reads the bedrock shelf — the amber light is an ancient ended thing breathing out through a recent crack; the crack itself is new.",
         "narration": "You kneel on the bedrock shelf and press your palm flat against the stone beside the hairline crack — not Memory's tip, just your hand, the old reading posture. The cast is conserved, a narrow thread rather than a sweep: Palework has something to anchor to here where Order-Sense found nothing. Bedrock holds endings differently than cut-bank clay. It's been doing it for longer.\n\nWhat you find is not rot in the stone. The stone is fine. What you find is that something *beneath* the stone has already ended — a long time ago, at a depth you can't precisely name — and the crack is where that ending is still breathing out. Not actively dying. Finished. But the finished thing is large enough that its finishing is ongoing: an exhalation across years, not minutes. The amber light you saw was exactly that — the pressure of something concluded, venting through the only gap the bedrock offers it. The iron in the water is downstream of this. Not the same process, but not unrelated — the stone's finished thing and the channel's active rot share a direction, if not a cause.\n\nThere's one detail that sits wrong. The ending below the shelf is very old, but the crack is not. The crack is recent — a season, maybe less. Whatever broke the stone open to let the old thing breathe, that happened close to now.\n\nPell has come up beside you. She reads the posture, the flat palm, the pause. She says nothing, but she's stopped moving."
+      },
+      {
+        "player": "Use Deathsense on the crack itself — read what made it, how long it has, and whether it's still widening.",
+        "summary": "Deathsense confirms the crack is stable — not widening, pressure equalized — but the cause of the initial shift remains unread.",
+        "narration": "You keep your palm on the stone and shift the cast — same contact point, different question. Palework read what was below; now you ask Deathsense what the crack itself is doing.\n\nThe place resists it. Not hostility — more like stone that has held one story for a very long time and does not easily admit a second reading. You work with it rather than against it, keeping the cast narrow, economical: a thread instead of a sweep. What comes back is thin but clean.\n\nThe crack is not dying. It is a pressure-release — a seam that opened when something below shifted, and it opened recently, within the last season as Palework already told you. Deathsense adds one thing Palework could not: the crack is stable. It is not widening. Whatever pressure opened it has equalized, at least for now. The ending below breathes out through it at a fixed rate, like a bellows that has found its resting position. Nothing in the crack's own structure is accelerating toward failure. This is not a fissure about to open further.\n\nWhat Deathsense cannot confirm — and the stone refuses to yield — is what made it shift in the first place. The cause is upstream of what the crack can tell you. Something moved below, or was moved, and the stone responded. That question points deeper and further north, past what you can read from here with your hand on one shelf.\n\nHuginn turns his head above you, once, toward the north bend. Pell has not moved."
       }
     ],
     "lastTurn": {
-      "narration": "You kneel on the bedrock shelf and press your palm flat against the stone beside the hairline crack — not Memory's tip, just your hand, the old reading posture. The cast is conserved, a narrow thread rather than a sweep: Palework has something to anchor to here where Order-Sense found nothing. Bedrock holds endings differently than cut-bank clay. It's been doing it for longer.\n\nWhat you find is not rot in the stone. The stone is fine. What you find is that something *beneath* the stone has already ended — a long time ago, at a depth you can't precisely name — and the crack is where that ending is still breathing out. Not actively dying. Finished. But the finished thing is large enough that its finishing is ongoing: an exhalation across years, not minutes. The amber light you saw was exactly that — the pressure of something concluded, venting through the only gap the bedrock offers it. The iron in the water is downstream of this. Not the same process, but not unrelated — the stone's finished thing and the channel's active rot share a direction, if not a cause.\n\nThere's one detail that sits wrong. The ending below the shelf is very old, but the crack is not. The crack is recent — a season, maybe less. Whatever broke the stone open to let the old thing breathe, that happened close to now.\n\nPell has come up beside you. She reads the posture, the flat palm, the pause. She says nothing, but she's stopped moving.",
-      "sceneSummary": "Palework reads the bedrock shelf — the amber light is an ancient ended thing breathing out through a recent crack; the crack itself is new.",
+      "narration": "You keep your palm on the stone and shift the cast — same contact point, different question. Palework read what was below; now you ask Deathsense what the crack itself is doing.\n\nThe place resists it. Not hostility — more like stone that has held one story for a very long time and does not easily admit a second reading. You work with it rather than against it, keeping the cast narrow, economical: a thread instead of a sweep. What comes back is thin but clean.\n\nThe crack is not dying. It is a pressure-release — a seam that opened when something below shifted, and it opened recently, within the last season as Palework already told you. Deathsense adds one thing Palework could not: the crack is stable. It is not widening. Whatever pressure opened it has equalized, at least for now. The ending below breathes out through it at a fixed rate, like a bellows that has found its resting position. Nothing in the crack's own structure is accelerating toward failure. This is not a fissure about to open further.\n\nWhat Deathsense cannot confirm — and the stone refuses to yield — is what made it shift in the first place. The cause is upstream of what the crack can tell you. Something moved below, or was moved, and the stone responded. That question points deeper and further north, past what you can read from here with your hand on one shelf.\n\nHuginn turns his head above you, once, toward the north bend. Pell has not moved.",
+      "sceneSummary": "Deathsense confirms the crack is stable — not widening, pressure equalized — but the cause of the initial shift remains unread.",
       "choices": [
         {
-          "label": "Use Deathsense on the crack itself — read what made it, how long it has, and whether it's still widening.",
+          "label": "Use Order-Sense on the bedrock shelf itself — bedrock may hold design-purchase where the channel substrate did not; see what this stone is part of and what direction the cause lies.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.6
+            "concrete_abstract": 0.3,
+            "mechanical_spiritual": 0.2
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "deathsense",
+          "abilityId": "order_sense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Tell Pell what Palework showed — the old ended thing below, the new crack, and the direction the two things share.",
+          "label": "Mark this spot — a notch in the coping with the Belt Knife — then turn north and follow Huginn's attention. The cause is upstream; keep moving.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.2,
+            "violence_peace": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Tell Pell what Deathsense found — stable crack, pressure equalized, cause upstream — and ask what she makes of it from a smith's read on the iron.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "share",
-            "careful"
+            "study",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Mark the crack's width and direction with the Rune-Craft Kit — a physical record Dara Holt can date against her channel logs.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "prepare",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Go and get Dara Holt now — the site evidence is substantial enough. She needs to see this shelf, the crack, and the continuous mat together.",
+          "label": "This is the edge of what two readings can tell you from one shelf. Turn back — take everything to Dara Holt now, while the evidence is fresh and the timeline note is still in your pocket.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
+          "axes": {
+            "chaos_order": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "careful",
             "plan"
           ],
           "abilityId": null,
@@ -1059,14 +1072,14 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -6
+        "energy": -3
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable."
+          "note": "Deathsense confirms the crack is stable and not widening — pressure equalized after the initial shift. The cause of the shift is upstream, past this shelf. The source of the iron contamination points further north."
         }
       ],
       "scene": {
@@ -1074,16 +1087,16 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at Silas's shoulder, still, reading the posture — waiting without asking."
+            "state": "Standing at Silas's shoulder, still — has not moved since he shifted to Deathsense."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the cut-bank rim above the shelf, head angled down."
+            "state": "Perched on the cut-bank rim above the shelf, head turned toward the north bend."
           }
         ],
         "objects": [
           "Memory (spear, at Silas's side)",
-          "Bedrock shelf — hairline crack, no wider than a thumbnail; crack is recent, stone is old",
+          "Bedrock shelf — hairline crack, stable, pressure-equalized; stone otherwise sound",
           "Continuous iron-mat coping — rust-brown above tideline, gray-green at waterline",
           "Copper-green water in the channel cut",
           "Valve Failure Timeline note (breast pocket)",
@@ -1091,10 +1104,10 @@
           "Rune-Craft Kit (pack)"
         ],
         "threads": [
-          "What made the crack — a season old or less; Deathsense might name it",
-          "The ancient ended thing below the shelf and the active rot in the channel share a direction — connection unresolved",
-          "Inside Dara Holt's upper-reach territory uninvited — she still needs to see this",
-          "Order-Sense found no design purchase at valley-floor substrate — bedrock may read differently"
+          "Crack is stable but cause of initial shift is upstream — unread",
+          "Huginn orienting north — possible further evidence in that direction",
+          "Dara Holt still needs to see this site; entering her territory uninvited",
+          "Order-Sense failed on channel substrate — bedrock may respond differently"
         ]
       },
       "npcUpdates": [
@@ -1102,25 +1115,8 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Stopped moving when Silas knelt — reading the posture without asking. Waiting.",
-          "statusNote": "Seventy paces north of the willow bend with Silas, on the bedrock shelf, watching the cast."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Palework on the bedrock shelf confirms: the amber light is a very old ended thing venting through a crack that opened no more than a season ago. The iron in the channel and the old ending below share a direction but not an identical cause. The crack is the new variable.",
-          "subjectId": "the-water-crisis"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Bedrock shelf 70 paces north of the willow bend — Palework confirms the crack is recent (a season or less); the amber light is an ancient concluded thing breathing out through the new gap. Old ending below, new breach above.",
-          "subPlace": {
-            "name": "Bedrock Shelf — Upper Reach",
-            "note": "Hairline crack opened within the last season; ancient ended thing below venting through it; iron in channel shares a direction with the old ending.",
-            "visited": true
-          }
+          "note": "Has not moved while Silas ran both Palework and Deathsense casts — reading the posture, waiting without asking.",
+          "statusNote": "Seventy paces north of the willow bend on the bedrock shelf with Silas, watching the cast."
         }
       ],
       "codexUpdates": [
@@ -1128,19 +1124,20 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": "the-water-crisis",
-          "fact": "Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancient ending below share a direction. The crack is new; whatever opened it, it was recent.",
+          "fact": "Deathsense on the crack: the fissure is stable and not widening — pressure below equalized after the initial shift. The crack is a fixed pressure-release, not a growing failure. The cause of the original shift is upstream of this shelf and cannot be read from here.",
           "links": [
             "millbrook",
             "pell",
             "aldric-provisioning-deal",
-            "dara-holt"
+            "dara-holt",
+            "palework",
+            "deathsense"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A careful conserved Palework cast on the bedrock shelf — a few minutes of close reading."
+        "why": "A narrow, economical Deathsense cast — a few minutes of focused work on the shelf."
       }
     },
     "sceneState": {
@@ -1148,16 +1145,16 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at Silas's shoulder, still, reading the posture — waiting without asking."
+          "state": "Standing at Silas's shoulder, still — has not moved since he shifted to Deathsense."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the cut-bank rim above the shelf, head angled down."
+          "state": "Perched on the cut-bank rim above the shelf, head turned toward the north bend."
         }
       ],
       "objects": [
         "Memory (spear, at Silas's side)",
-        "Bedrock shelf — hairline crack, no wider than a thumbnail; crack is recent, ston",
+        "Bedrock shelf — hairline crack, stable, pressure-equalized; stone otherwise soun",
         "Continuous iron-mat coping — rust-brown above tideline, gray-green at waterline",
         "Copper-green water in the channel cut",
         "Valve Failure Timeline note (breast pocket)",
@@ -1165,10 +1162,10 @@
         "Rune-Craft Kit (pack)"
       ],
       "threads": [
-        "What made the crack — a season old or less; Deathsense might name it",
-        "The ancient ended thing below the shelf and the active rot in the channel share a direction — connection unresolved",
-        "Inside Dara Holt's upper-reach territory uninvited — she still needs to see this",
-        "Order-Sense found no design purchase at valley-floor substrate — bedrock may read differently"
+        "Crack is stable but cause of initial shift is upstream — unread",
+        "Huginn orienting north — possible further evidence in that direction",
+        "Dara Holt still needs to see this site; entering her territory uninvited",
+        "Order-Sense failed on channel substrate — bedrock may respond differently"
       ]
     }
   },
@@ -1195,14 +1192,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Mara's ledger confirms the iron failure timeline — four valve failures in three weeks beginning World-day minus-eighteen. Note in hand; Fen's intake next.",
         "Left Millbrook on the north track with Pell — Dara Holt's house passed, Fen's intake twenty minutes ahead.",
         "Palework read Fen's failed intake — iron dissolution three layers deep, process predates the ledger by thirty days minimum, active front at the collar throat; stone unaffected.",
         "Knife-scraped section of housing preserved — three layers documented, iron-specific targeting confirmed, stone unaffected. Physical evidence ready for Dara Holt.",
         "Upstream trace confirms crust thickens with distance north — color deepens at the willow bend. The source is further upstream, into Dara's upper-reach jurisdiction.",
         "Order-Sense failed in the thin substrate — the channel won't read as a system this close to the valley floor. Physical evidence still points north. Huginn is watching the willow bend.",
         "Reached the willow bend — copper-green water and continuous iron-mat deposit confirm the source is upstream, past Dara Holt's boundary. Physical trace now unambiguous.",
-        "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable."
+        "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable.",
+        "Deathsense confirms the crack is stable and not widening — pressure equalized after the initial shift. The cause of the shift is upstream, past this shelf. The source of the iron contamination points further north."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1316,7 +1313,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north.",
         "[d2] Stayed at the doorway, let Silas handle the ledger inquiry — heard everything. Ready to walk.",
         "[d2] Took the lead without comment — single-word confirmation of Mara's advice ('After') and pointed out Dara's gate-post without slowing.",
         "[d2] Crouched at the valve housing and told Silas to read it — waiting for the full report now.",
@@ -1325,7 +1321,8 @@
         "[d2] Read the failed Order-Sense cast without asking — no comment, waiting.",
         "[d2] Arrived at Silas's shoulder at the willow bend — read the copper-green water and continuous deposit without comment; waiting for his call.",
         "[d2] Crossed the willow bend with Silas without hesitation — reading the continuous-mat coping in silence, watching the ground.",
-        "[d2] Stopped moving when Silas knelt — reading the posture without asking. Waiting."
+        "[d2] Stopped moving when Silas knelt — reading the posture without asking. Waiting.",
+        "[d2] Has not moved while Silas ran both Palework and Deathsense casts — reading the posture, waiting without asking."
       ],
       "knownFacts": [
         "The valve housing crust is thick at every iron-to-water contact point",
@@ -1346,7 +1343,7 @@
         "following without needing to lead"
       ],
       "status": "active",
-      "statusNote": "Seventy paces north of the willow bend with Silas, on the bedrock shelf, watching the cast.",
+      "statusNote": "Seventy paces north of the willow bend on the bedrock shelf with Silas, watching the cast.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1986,7 +1983,8 @@
           "[d2] Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains th",
           "[d2] At the willow bend the deposit shifts from four discrete layers to a continuous iron mat — waterline gray-green, above-tide rust-brown. Water color deepens to copper-green. The smell changes: older th",
           "[d2] North of the willow bend the deposit becomes continuous iron-mat with no discrete layers — the smell changes to metal-under-metal, cave-tool old. At 70 paces north, a hairline crack in an exposed bedr",
-          "[d2] Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancien"
+          "[d2] Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancien",
+          "[d2] Deathsense on the crack: the fissure is stable and not widening — pressure below equalized after the initial shift. The crack is a fixed pressure-release, not a growing failure. The cause of the origi"
         ],
         "links": [
           "millbrook",
@@ -2043,14 +2041,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.48258275210357,
-    "cerebral": 36.72774808255653,
-    "social": 57.239447334654294,
-    "generous": 12.499393819133733,
-    "cautious": 31.188188360068573,
-    "physical": 1.5108098470085871,
-    "risky": 2.6420638342547367,
-    "ruthless": 0.7705488893118823
+    "strategic": 53.21516983834305,
+    "cerebral": 37.54410934214375,
+    "social": 56.95325009798102,
+    "generous": 12.436896850038064,
+    "cautious": 32.03224741826823,
+    "physical": 1.5032557977735441,
+    "risky": 2.628853515083463,
+    "ruthless": 0.7666961448653229
   },
   "aptitudes": [
     "strategist",
@@ -2058,7 +2056,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 141,
+  "actionCount": 142,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2144,8 +2142,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784048282041,
-  "rev": 208,
+  "updatedAt": 1784048525687,
+  "rev": 209,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2391,7 +2389,7 @@
       "lightsense": 2,
       "order_sense": 29,
       "palework": 12,
-      "deathsense": 10,
+      "deathsense": 11,
       "shadowstep": 2
     },
     "coActivations": {

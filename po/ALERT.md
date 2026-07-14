@@ -2,7 +2,7 @@
 
 > **This file carries CURRENT STATUS ONLY.** History lives in `po/results/*` and the graph. *(Per SNG-071: old append-only ALERT archived at `po/archive/ALERT_20260712.md`.)*
 
-**HEAD:** `fb6d6fb3` (v1.8.56) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
+**HEAD:** `a8ccc988` (v1.8.56) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
 **Process:** SNG-071 two-round cycle. Aevi authors ROUND 1 → **CCode substrate-verifies (ROUND 2)** → Aevi amends + promotes → CCode builds → `complete_pending_review` → **only Aevi closes.**
 
 ---
@@ -36,7 +36,7 @@
 | **SNG-092** | v1.8.49 | Manifest unification — resolution by name, not position (fixed a LIVE break); +4 reach_* files (20 abilities, 6/7 Accords); Content CI now checks core |
 | **SNG-093** | v1.8.50 | GM can never hang the gambit builder — `withTimeout` + `try/catch/finally` |
 | **SNG-095** | v1.8.55 | Fix "smartClamp is not defined" — app.js never imported it (broke gambit advice + ⚑ Feedback submission) |
-| **SNG-096** | e83f0012 / fb6d6fb3 | Option B breadth pass — all 14 traditions with existing abilities fully covered (8/8 families each). 21 new abilities across 4 commits this session. |
+| **SNG-096** | a8ccc988 | Option B breadth pass — **ALL 24 traditions, 8/8 families.** 5 stub reach files authored this session (mechanical_spiritual · dark_light · demonic_angelic · emotional_logical · falsehood_truth). Histogram: 24/24 ✓ |
 | **SNG-084 Ph1+2** | v1.8.51 / v1.8.53 | In-context helper text — ⓘ at the walls (capacity · energy · circle) + Ph2 (roll receipt · level/xp · attributes · tiers · quests · companion bond · gambit · map danger). Ph3: locked-ability reasons + precursor/heard-of |
 | **SNG-094** | v1.8.52 | Skill learning fixed (a native could learn ONLY Valley Craft — legacy gate null-filtered their own people's craft; domain gate is authoritative now) + a ⬆ Level-Up window (deepen/learn in one place) |
 
@@ -110,7 +110,7 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 ## 📋 Owed
 
 **Aevi:**
-- Option B ability authoring (breadth pass): **Ashwarden ✅ Marcher ✅** → next: Stillhold · Rootkin · Cogitant · Lattice, then rest by reach-distance from Valley
+- Option B ability authoring (breadth pass): **COMPLETE ✅** — all 24 traditions, 8/8 families (SNG-096 a8ccc988)
 - `po/OPERATIONAL_FLOWS.md`
 - Thin regions: `riven_marches`, `somatic_reaches`, `unspooling` each want ~6 locations
 - `po/SPEC_BACKLOG.md` retirement as primary surface (180KB — move active items here)

@@ -2,7 +2,7 @@
 
 > **This file carries CURRENT STATUS ONLY.** History lives in `po/results/*` and the graph. *(Per SNG-071: old append-only ALERT archived at `po/archive/ALERT_20260712.md`.)*
 
-**HEAD:** `0c39754` (v1.8.57) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
+**HEAD:** `09351ff` (v1.8.58) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
 **Process:** SNG-071 two-round cycle. Aevi authors ROUND 1 → **CCode substrate-verifies (ROUND 2)** → Aevi amends + promotes → CCode builds → `complete_pending_review` → **only Aevi closes.**
 
 ---
@@ -12,10 +12,8 @@
 
 ## 🟢 GO FOR CCODE — BOTH SPECS AMENDED AND BUILDABLE (Aevi 2026-07-14)
 
-### 1. `po/romance_guidance.md` v2 (`d53abdd`) — **BUILD**
-**P1 RESOLVED by Erik: `R+` = *everything within the bounds of the AUP is allowed*.** Not a new ceiling — a **re-framing of the existing one**, and it is the fix rather than a dodge. Verified at HEAD: `engine/claude.js` routes every GM task to an Anthropic model (`api.anthropic.com`, no router), so the AUP *is* the outer bound and no wording changes that. But the current `ratingRegister` R+ clause is written as a **prohibition** — so the GM hedges, fades, and apologizes *well short of the line*, which is the exact bug this doc exists to kill. **Rewritten as permission-to-the-line: the full charged register is yours, take all of it, and stopping short out of caution IS the error.** The line itself (no graphic mechanical depiction) holds without exception. `R` gets real craft language too — that's where most of the felt win is; fading to black on a player who chose `R` is a failure the old wording invited.
-
-**Fixed:** no `adultGate` field (it's `profile.rating.preset` ∈ `G|PG|PG-13|R|R+` via `ratingCeiling(profile)`; `adultGate` is a *boolean* authority param, persisted flag `adultVerified`) · Tier 0–4 numbering struck, Part 1 **rewrites the romance clauses inside `ratingRegister()`**, not a parallel scheme · **engagement-never-overrides-the-ceiling** precedence clause added · doc relocates to `content/packs/core/` + manifest (`content/gm/` would **404 on Pages**) · `romantic`/`flirt` tag on the existing `intentTags` vocab, **no second model call** · `romanceGuidanceDetail` conditional `scene.push`, existing infra · INFL functions verified. **All 4 Qs closed. No open questions.**
+### 1. `po/romance_guidance.md` v2 (`d53abdd`) — ✅ **SHIPPED v1.8.58 (`09351ff`) · complete_pending_review**
+Built and pushed. Results `po/results/20260714_romance_guidance_v2.md`. **P1 (Erik): `R+` = permission-to-the-line** — `ratingRegister()` R+ clause rewritten from prohibition to permission (full charged register expected; stopping short IS the error; the AUP line holds — no graphic mechanical depiction; specificity over explicitness). `R` gets real mature craft language (no fade-to-black); G/PG/PG-13 rewritten per rating. Part 2 engagement frame baked into the system tier after `## CONTENT CEILING` (engage, no safety meta, social touch ≠ harm trigger, engagement-never-overrides-ceiling precedence). Part 3 craft doc → `content/packs/core/rules/romance_guidance.json` (manifest + `CONTENT.romanceGuidance`), pulled on a `romantic`/`flirt` intent as `romanceGuidanceDetail` (existing `scene.push` pattern). No `adultGate` field invented (reads `ratingCeiling(profile)`); minor/no-prohibited floors unchanged. Fresh-port verified (all 5 registers, doc load, beat-block injection); npm test green (smoke R+ tests updated to the ratified contract). **Only Aevi closes.**
 
 *Floors unchanged, rating-independent: never prohibited content; **a minor is never portrayed in romantic/sexual content at any intensity**; art clamps minors to ≤PG.*
 

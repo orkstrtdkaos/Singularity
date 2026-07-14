@@ -13,7 +13,7 @@
     "physical": 3,
     "mental": 4,
     "social": 4,
-    "practical": 4
+    "practical": 5
   },
   "skills": {},
   "abilities": [
@@ -928,139 +928,202 @@
         "player": "Agree — and while Pell works the sleeve, pull a Preserved Trail Parcel from the pack and eat something before the walk. You've been up all night.",
         "summary": "Silas eats a trail parcel while Pell works the farmer's sleeve — the last quiet before they walk north.",
         "narration": "You agree, and while the forge settles into the clean rhythm of Pell's work — scriber, caliper, the first ring of hammer on iron — you pull one of Aldric's trail parcels from your pack and sit on the low stool near the door.\n\nThe parcel is cloth-wrapped and knotted the way Aldric does everything: practically, without waste. You work the knot loose and peel it back. Dried river perch and salted pork, dense and a little sharp with the cold. You eat slowly, watching the morning come through the open door — pale gold on the south lane stones, a dog moving somewhere two properties over, the bell tower still quiet. Huginn drops from the rafter to the anvil horn and stands over Memory for a moment, then moves to the bench edge nearest you and watches you chew with the expression it always has, which is patience.\n\nPell doesn't look up from the sleeve work, but she speaks into the iron. 'You should have eaten hours ago.' It isn't a reprimand. It's the same register she uses when she notices something that ought to be corrected — factual, without heat. She drives a half-punch into the blank's edge to seat the cut line and sets it over the south pit to warm. 'Bell rings the second quarter, we go.' The sleeve isn't done yet, but the shape of the next half-hour is fixed and she's already moving inside it.\n\nThe parcel is about half gone when you feel the edge come back — not much, just the difference between a body running on nothing and a body running on something. Outside, the lane is brightening. Memory sits on the anvil horn, capacitor flush at the collar, and Huginn has not moved from the bench edge, and the east channel is twenty minutes north of the upper meadow, and the bell hasn't rung yet."
+      },
+      {
+        "player": "Stay quiet and watch Pell work the sleeve — you've been up all night with her and there's something in just letting the craft be the craft for half an hour.",
+        "summary": "Pell finishes the sleeve job in quiet craft. She places Memory in Silas's hands and they prepare to walk north.",
+        "narration": "The sleeve blank takes shape under Pell's hands in the unhurried way that competence makes look like ease. She works the punch with the heel of her palm, not the hammer — two measured taps, a quarter-turn, two more — and the iron opens along the line she scribed without complaint. Huginn watches from the anvil horn, one foot tucked, head angled. Memory catches the fire's light along the capacitor collar.\n\nYou sit on the low stool and let it be. The south pit fire breathes. A rooster sounds off somewhere past the well and is not answered. Pell holds the blank up, checks the mouth against the caliper face, sets it back to the fire. She does not look over at you. She does not need to. The shared quiet after a full night of close work has a different texture than ordinary silence — not empty, just used.\n\nThe bell tower rings the second quarter while the sleeve is still on the fire. Pell counts two beats after the last note, pulls it, and sets it to cool on the stone ledge. The whole job has taken twenty-six minutes. She peels her gloves off, tucks them under her arm, and moves the blank to the door-step for the farmer to collect.\n\n'Ready when you are,' she says, not turning around — already moving toward the peg where her coat hangs. The river whetstone is still on the shelf above the bellows. Memory is still on the anvil horn. She lifts it, weighs it once in her palm, and sets it into your hands without ceremony. 'Bring this. If there's iron to read, you'll want it close.'"
       }
     ],
     "lastTurn": {
-      "narration": "You agree, and while the forge settles into the clean rhythm of Pell's work — scriber, caliper, the first ring of hammer on iron — you pull one of Aldric's trail parcels from your pack and sit on the low stool near the door.\n\nThe parcel is cloth-wrapped and knotted the way Aldric does everything: practically, without waste. You work the knot loose and peel it back. Dried river perch and salted pork, dense and a little sharp with the cold. You eat slowly, watching the morning come through the open door — pale gold on the south lane stones, a dog moving somewhere two properties over, the bell tower still quiet. Huginn drops from the rafter to the anvil horn and stands over Memory for a moment, then moves to the bench edge nearest you and watches you chew with the expression it always has, which is patience.\n\nPell doesn't look up from the sleeve work, but she speaks into the iron. 'You should have eaten hours ago.' It isn't a reprimand. It's the same register she uses when she notices something that ought to be corrected — factual, without heat. She drives a half-punch into the blank's edge to seat the cut line and sets it over the south pit to warm. 'Bell rings the second quarter, we go.' The sleeve isn't done yet, but the shape of the next half-hour is fixed and she's already moving inside it.\n\nThe parcel is about half gone when you feel the edge come back — not much, just the difference between a body running on nothing and a body running on something. Outside, the lane is brightening. Memory sits on the anvil horn, capacitor flush at the collar, and Huginn has not moved from the bench edge, and the east channel is twenty minutes north of the upper meadow, and the bell hasn't rung yet.",
-      "sceneSummary": "Silas eats a trail parcel while Pell works the farmer's sleeve — the last quiet before they walk north.",
+      "narration": "The sleeve blank takes shape under Pell's hands in the unhurried way that competence makes look like ease. She works the punch with the heel of her palm, not the hammer — two measured taps, a quarter-turn, two more — and the iron opens along the line she scribed without complaint. Huginn watches from the anvil horn, one foot tucked, head angled. Memory catches the fire's light along the capacitor collar.\n\nYou sit on the low stool and let it be. The south pit fire breathes. A rooster sounds off somewhere past the well and is not answered. Pell holds the blank up, checks the mouth against the caliper face, sets it back to the fire. She does not look over at you. She does not need to. The shared quiet after a full night of close work has a different texture than ordinary silence — not empty, just used.\n\nThe bell tower rings the second quarter while the sleeve is still on the fire. Pell counts two beats after the last note, pulls it, and sets it to cool on the stone ledge. The whole job has taken twenty-six minutes. She peels her gloves off, tucks them under her arm, and moves the blank to the door-step for the farmer to collect.\n\n'Ready when you are,' she says, not turning around — already moving toward the peg where her coat hangs. The river whetstone is still on the shelf above the bellows. Memory is still on the anvil horn. She lifts it, weighs it once in her palm, and sets it into your hands without ceremony. 'Bring this. If there's iron to read, you'll want it close.'",
+      "sceneSummary": "Pell finishes the sleeve job in quiet craft. She places Memory in Silas's hands and they prepare to walk north.",
       "choices": [
         {
-          "label": "While you wait, talk through what you're actually hoping to learn at the valve site — give Pell the shape of your thinking before you get there.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Take Memory, pull on your pack, and head north with Pell — straight to Fen's failed intake on the east channel.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "connect"
+            "move",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Stay quiet and watch Pell work the sleeve — you've been up all night with her and there's something in just letting the craft be the craft for half an hour.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "observe",
-            "rest"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Pell if she knows who to approach on the elder panel with iron-specific contamination data — get a name before you leave.",
+          "label": "Before you leave, ask Pell if she knows who sits on the elder panel — you want a name to bring findings to, not just a room.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study",
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step outside the forge door for five minutes while Pell works — stretch your legs, let the morning air clear the all-night haze, check in with Huginn.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "rest",
             "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stop at Mara's store on the way north — the ledger may name the date the first iron valve failed, and a five-minute detour is worth a confirmed timeline.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pell what she expects to find at Fen's intake — you want to know what she's already figured out before you use any craft on it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "energy": 10,
-        "inventoryRemove": [
-          "Preserved Trail Parcel x2"
-        ],
-        "inventoryAdd": [
-          {
-            "name": "Preserved Trail Parcel x1",
-            "kind": "consumable",
-            "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. One parcel remaining.",
-            "consumable": true,
-            "effects": {
-              "energy": 10
-            }
-          }
-        ]
+        "health": 0,
+        "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent."
+        }
+      ],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — door open to full pale-gold early-morning light, south pit fire warming the sleeve blank, Memory on the anvil horn. Sleeve job in progress; bell not yet rung.",
+        "setting": "Pell's forge, south lane, Millbrook — door open to pale-gold early morning light; sleeve blank cooling on the stone door-step, south pit fire banked low. The farmer's job is done.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Working the sleeve blank over the south pit — half-punch seated, warming the iron, half an hour to the second-quarter bell."
+            "state": "Pulling on her coat from the peg by the door — gloves tucked under one arm, ready to walk north."
           },
           {
             "name": "Huginn",
-            "state": "Moved from rafter to bench edge nearest Silas — watching him eat with unhurried attention."
+            "state": "Still on the anvil horn, watching Silas receive Memory."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
-          "Sleeve blank (warming over south pit fire)",
+          "Deathbound Runic Spear 'Memory' (now in Silas's hands)",
+          "Sleeve blank (cooling on the door-step for the farmer)",
           "River whetstone (on shelf above bellows)",
           "Spent rune-wax stub (on bench)",
           "Rune-Craft Kit (spent, on bench)",
-          "South pit fire (warming to working heat for the sleeve job)",
+          "South pit fire (banked low)",
           "Resin Mountain Wine (open bottle, nearly empty)",
           "Dried Starfruit sealed packet (open, mostly eaten)",
-          "Preserved Trail Parcel x1 (half of the pair — one consumed this beat)"
+          "Preserved Trail Parcel x1 (remaining)"
         ],
         "threads": [
-          "Pell's sleeve job in progress — she walks north when the bell rings the second quarter",
-          "Fen's failed intake valve is twenty minutes north of the upper meadow — the east-channel bend site",
-          "Mara's ledger may hold the date the iron valve failures began",
-          "Elder panel composition unknown — worth getting a name before departing",
-          "Huginn has moved to bench-edge nearest Silas — attentive"
+          "Fen's failed east-channel intake — twenty minutes north of the upper meadow",
+          "Mara's ledger may hold the date the first iron valve failure began",
+          "Elder panel composition still unknown — no name yet to bring findings to",
+          "Huginn attentive as Memory changes hands"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north.",
+          "learned": [
+            "Placed Memory in Silas's hands before departure — treating it as a working tool, not a keepsake"
+          ],
+          "skillsObserved": [
+            "Sleeve fitting by caliper and eye — job completed under time without ceremony"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the forge door, coat on, ready to walk north to the east-channel valve sites with Silas."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Sleeve blank left cooling on the forge door-step for the farmer — Pell's job complete, forge banked, both Silas and Pell ready to depart north.",
+          "subPlace": {
+            "name": "Pell's Forge",
+            "note": "Sleeve job concluded; Memory handed to Silas; Pell coated and ready to walk north. Fire banked.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Placed Memory in Silas's hands before departure — treating the spear as a working instrument for the valve inspection, not ceremony. Finished the farmer's sleeve in twenty-six minutes.",
+          "links": [
+            "death-bound-spear",
+            "the-water-crisis",
+            "millbrook",
+            "aldric-provisioning-deal"
+          ]
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short quiet interval — eating while Pell works, maybe ten minutes of the sleeve job's half-hour elapsed"
+        "hoursPassed": 0.5,
+        "why": "Thirty minutes of Pell working the sleeve job while Silas rested on the stool — a half-hour of quiet craft before departure."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — door open to full pale-gold early-morning light, south pit fire warming the sleeve blank, Memory on the anvil horn. Sleeve job in progress; bell not yet rung.",
+      "setting": "Pell's forge, south lane, Millbrook — door open to pale-gold early morning light; sleeve blank cooling on the stone door-step, south pit fire banked low. The farmer's job is done.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Working the sleeve blank over the south pit — half-punch seated, warming the iron, half an hour to the second-quarter be"
+          "state": "Pulling on her coat from the peg by the door — gloves tucked under one arm, ready to walk north."
         },
         {
           "name": "Huginn",
-          "state": "Moved from rafter to bench edge nearest Silas — watching him eat with unhurried attention."
+          "state": "Still on the anvil horn, watching Silas receive Memory."
         }
       ],
       "objects": [
-        "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
-        "Sleeve blank (warming over south pit fire)",
+        "Deathbound Runic Spear 'Memory' (now in Silas's hands)",
+        "Sleeve blank (cooling on the door-step for the farmer)",
         "River whetstone (on shelf above bellows)",
         "Spent rune-wax stub (on bench)",
         "Rune-Craft Kit (spent, on bench)",
-        "South pit fire (warming to working heat for the sleeve job)",
+        "South pit fire (banked low)",
         "Resin Mountain Wine (open bottle, nearly empty)",
         "Dried Starfruit sealed packet (open, mostly eaten)",
-        "Preserved Trail Parcel x1 (half of the pair — one consumed this beat)"
+        "Preserved Trail Parcel x1 (remaining)"
       ],
       "threads": [
-        "Pell's sleeve job in progress — she walks north when the bell rings the second quarter",
-        "Fen's failed intake valve is twenty minutes north of the upper meadow — the east-channel bend site",
-        "Mara's ledger may hold the date the iron valve failures began",
-        "Elder panel composition unknown — worth getting a name before departing",
-        "Huginn has moved to bench-edge nearest Silas — attentive"
+        "Fen's failed east-channel intake — twenty minutes north of the upper meadow",
+        "Mara's ledger may hold the date the first iron valve failure began",
+        "Elder panel composition still unknown — no name yet to bring findings to",
+        "Huginn attentive as Memory changes hands"
       ]
     }
   },
@@ -1087,14 +1150,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Account settled — Mara's ledger offset at sixty cord-weight, ninety cord-weight balance in Silas's favor. River scout still outstanding.",
         "All financial threads closed — thirty cord-weight in standing credit with Aldric, Corvin paid, Pell paid. River scout remains the one outstanding thread.",
         "River scout still the one outstanding thread — the spear repair now occupies the night; the scout will need to be planned separately.",
         "Spear repair occupies the night — river scout still the one outstanding thread; to be planned in the morning.",
         "A farmer arrives at the forge with cracked irrigation fittings — iron going brittle at the threading since the river changed. First direct in-village evidence of infrastructure damage from the contamination.",
         "Order-Sense confirms the water contamination is causing selective iron corrosion at every water-contact fitting — at least two east-channel intake valves failed overnight. The damage is patterned and spreading.",
         "Silas confirms the contamination pattern to Pell: gray-green mineral deposit targets iron contact points specifically, working inward from the water-facing surface. Two east-channel intake valves failed since the water changed. Pattern is spreading.",
-        "Pell agrees to walk north to the east-channel valve sites after the farmer's sleeve job — she knows both failure locations and names Fen's intake as the first inspection point. Mara's ledger identified as a potential date-anchor for when the iron failures began."
+        "Pell agrees to walk north to the east-channel valve sites after the farmer's sleeve job — she knows both failure locations and names Fen's intake as the first inspection point. Mara's ledger identified as a potential date-anchor for when the iron failures began.",
+        "Pell has placed Memory in Silas's hands and declared readiness to walk north — the inspection of Fen's failed east-channel intake is imminent."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1208,7 +1271,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Answered Silas's plain question plainly — said she'd like to keep finding out what he is. Took Huginn's croak as confirmation of something.",
         "[d2] Heard Silas name the cookhouse deflection and his fall for her — closed her hand around his wrist and said 'not yet', holding the moment without ending it.",
         "[d2] Silas kissed her at dawn at the anvil horn — she tightened her hand on his wrist, stayed, said 'alright' quietly. A first reading, not a conclusion.",
         "[d2] Received the forge-and-transformation question — answered with craft-logic: forging changes what a thing is, and the smith doesn't always know the outcome. Held Silas's wrist. Said",
@@ -1217,28 +1279,29 @@
         "[d2] Handled the door transition cleanly — moved the whetstone off the bench before answering, committed to a half-hour sleeve job without disruption.",
         "[d2] Moved to iron rack and picked up calipers without hesitation — managing the farmer's job cleanly while Silas reads the tubing from across the room.",
         "[d2] Heard Silas's report on the iron contamination without stopping her work — 'Fen's was the second' was not new information to her. Confirms she has been tracking the valve failures.",
-        "[d2] Agreed to walk north after the farmer's sleeve job — knows both failed valve sites, named Fen's east-channel intake as the first inspection point. Suggested Mara's ledger as a date"
+        "[d2] Agreed to walk north after the farmer's sleeve job — knows both failed valve sites, named Fen's east-channel intake as the first inspection point. Suggested Mara's ledger as a date",
+        "[d2] Finished the farmer's sleeve job cleanly in twenty-six minutes. Placed Memory in Silas's hands unprompted and declared readiness to walk north."
       ],
       "knownFacts": [
-        "Silas is willing to be in the fire with her, not ahead of it — she registered the difference",
         "Moves on her own ground without self-consciousness — the forge is hers and she doesn't perform it",
         "Two east-channel iron intake valves have failed since the water changed — the farmer's and Fen's",
         "Silas confirmed the gray-green deposit is targeting iron contact points specifically, not the reed — working inward from the water-facing surface",
         "Two east-channel intake valves failed since the water changed — she already knew both",
         "Fen's failed intake is approximately twenty minutes north of the upper meadow, where the east channel bends and the intake sits low",
         "The valve housing at a failure site will show how long the deposit has been building — she's thinking forensically",
-        "The elder panel needs iron-specific information, not just 'water is bad'"
+        "The elder panel needs iron-specific information, not just 'water is bad'",
+        "Placed Memory in Silas's hands before departure — treating it as a working tool, not a keepsake"
       ],
       "skillsObserved": [
-        "double-stamp on a named weapon without ceremony or hesitatio",
         "reading a work situation and committing to a timeline withou",
         "immediate transition from personal moment to craft work with",
         "accurate sleeve-blank selection by eye",
         "forensic reasoning about contamination pattern",
-        "practical knowledge of east-channel valve locations"
+        "practical knowledge of east-channel valve locations",
+        "Sleeve fitting by caliper and eye — job completed under time"
       ],
       "status": "active",
-      "statusNote": "At the forge bench finishing the farmer's sleeve job — will walk north with Silas to the east-channel valve sites once done.",
+      "statusNote": "At the forge door, coat on, ready to walk north to the east-channel valve sites with Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1343,7 +1406,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Bull taken on the scrub oak ridge, World-day 14 morning — ground disturbed at kill site, coat hung on gorse branch west of the streambed. Dry streambed used as a shadow-anchor for Shadowstep.",
         "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
         "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current.",
         "[d2] Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle.",
@@ -1354,7 +1416,8 @@
         "[d2] Spear repair fully completed at dawn — north quarter capacitor pressed flush. Bench carries pitch-smear and the marks of the night's work.",
         "[d2] Memory named at the forge bench at dawn — wine opened, starfruit shared, the night's work concluded with a name.",
         "[d2] Dawn conversation at the forge bench — the relationship between Silas and Pell moved from craft partnership to something named and mutual. The bench, the wine, and Memory all present.",
-        "[d2] Pell has agreed to walk north with Silas to the east-channel valve sites — Fen's failed intake named as first destination, a bend in the east channel twenty minutes north of the upper meadow."
+        "[d2] Pell has agreed to walk north with Silas to the east-channel valve sites — Fen's failed intake named as first destination, a bend in the east channel twenty minutes north of the upper meadow.",
+        "[d2] Sleeve blank left cooling on the forge door-step for the farmer — Pell's job complete, forge banked, both Silas and Pell ready to depart north."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1397,7 +1460,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Full repair concluded at dawn — collar flush, spear complete. Bench marked by a full night's craft."
+          "note": "Sleeve job concluded; Memory handed to Silas; Pell coated and ready to walk north. Fire banked."
         },
         "mara-wells-s-store": {
           "name": "Mara Wells's Store",
@@ -1514,9 +1577,9 @@
     "presence": 3,
     "rapport": 4,
     "craft": 4,
-    "wits": 4
+    "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 0,
   "discoveries": [],
   "codex": {
@@ -1687,7 +1750,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Has agreed to meet Silas after the hunt to explore what the iron's response to her hand might mean — open to being taught, on her own terms: evidence first, daylight before fire.",
           "[d1] Pell intends to keep the forge long-term; she is also reaching toward something else connected to the iron's response to her hand — no language for it yet, but the thought is present and deliberate.",
           "[d1] Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness.",
           "[d1] Reads terrain and wind cleanly under field conditions — laid out the bull approach without hesitation once given the spear. Trusted Silas's shadowstep hint from the night before without needing it nam",
@@ -1710,17 +1772,18 @@
           "[d2] When offered the forge-and-transformation question, Pell answered with craft-logic: forging changes what a thing is, not always into something better, and the smith doesn't always know what she's maki",
           "[d2] When Silas declared his certainty plainly, Pell believed him — and said it doesn't matter. She cares what the fire does over time, not how sure he is at the start.",
           "[d2] When Silas corrected from 'I've decided' to 'I'm willing to be in it with you', Pell said 'that's better' — quietly, without ceremony. She distinguishes between someone who has decided and someone who",
-          "[d2] Pell is thinking forensically about the contamination — she located both failure sites before being asked and named the valve housing as evidence of duration. She told Silas to bring Memory north."
+          "[d2] Pell is thinking forensically about the contamination — she located both failure sites before being asked and named the valve housing as evidence of duration. She told Silas to bring Memory north.",
+          "[d2] Placed Memory in Silas's hands before departure — treating the spear as a working instrument for the valve inspection, not ceremony. Finished the farmer's sleeve in twenty-six minutes."
         ],
         "links": [
-          "huginn",
           "the-unnamed-gift",
           "palework",
           "millbrook",
           "order-sense",
           "deathsense",
           "aldric-provisioning-deal",
-          "the-water-crisis"
+          "the-water-crisis",
+          "death-bound-spear"
         ],
         "aliases": [
           "Pell Marsh"
@@ -1895,14 +1958,14 @@
     }
   },
   "tendencies": {
-    "strategic": 49.315223166422705,
-    "cerebral": 33.59433332466413,
-    "social": 60.4841446912404,
-    "generous": 12.187686749080823,
-    "cautious": 26.73622246406709,
-    "physical": 1.5964521958634328,
-    "risky": 1.7404299291069383,
-    "ruthless": 0.8142285204175609
+    "strategic": 49.06864705059059,
+    "cerebral": 33.426361658040804,
+    "social": 60.1817239677842,
+    "generous": 12.12674831533542,
+    "cautious": 26.602541351746755,
+    "physical": 1.5884699348841156,
+    "risky": 1.7317277794614037,
+    "ruthless": 0.810157377815473
   },
   "aptitudes": [
     "strategist",
@@ -1910,7 +1973,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 130,
+  "actionCount": 131,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1988,8 +2051,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784039995746,
-  "rev": 194,
+  "updatedAt": 1784040155417,
+  "rev": 196,
   "generated": {
     "schemaVersion": 1,
     "npc": {

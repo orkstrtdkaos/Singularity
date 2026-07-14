@@ -1041,20 +1041,44 @@
         "player": "So... you're strong, capable, beautiful, AND intelligent... quite a combo there Ms Marsh.",
         "summary": "Silas flatters Pell at the ruins — she deflects with a word, but her ears say otherwise.",
         "narration": "You say it with the grin still on your face — \"So. You're strong, capable, beautiful, and intelligent. Quite a combo, Ms. Marsh.\"\n\nPell doesn't look up from the rubble stone. Her thumb is still working the dressed face of it, reading the grain. A beat passes — the kind she chooses. Then: \"Weir.\" Flat, final, as if that is the entire verdict.\n\nBut her ears have gone red. You can see it plainly in the early-spring light through the alders.\n\nHuginn shifts his weight on the root-spur. One claw, then the other. He does not look at you. He does not look at Pell. He is attending the settling-seam with total, pointed dedication, and if his silence has a quality right now it is the quality of a very old thing that has decided this particular development is not its business, and means to hold that position."
+      },
+      {
+        "player": "Ask Pell what she'd need to safely probe the lower aperture — her read, her call on risk.",
+        "summary": "Pell names the conditions for reading the aperture — clear the face first, then ask Huginn what he sees.",
+        "narration": "The question lands easy. Pell finally looks up from the rubble stone, thumb still resting on the dressed face of it, and turns to read the settling-seam again — the full length of it, top to bottom, the widest point marking where the lower aperture gave.\n\n\"Probe is the wrong word for it,\" she says. \"You don't probe a valve. You read the condition it's in, first. Then you decide whether opening it is yours to do.\" She stands, brushing grit from her knee. \"What I'd need: a way to clear the sedge and loose fill from the face without shifting the coursework above it. A hand-length of exposed stone on either side of the breach. Light — not direct sun, it'll wash the grain. And time. You don't rush dressed stone.\"\n\nShe glances at Memory, then at your belt knife. \"The kit you've got can clear the face. Takes maybe half an hour, careful work. What I can't tell you until the face is clear is whether the breach already finished its job or whether it's mid-process. Those read differently.\" A pause. \"And I'd want to know what Huginn thinks before we touch anything.\"\n\nShe says it without inflection — what Huginn thinks — the way she'd say what the flue draft tells you before you open a sealed chimney. Three days ago she wouldn't have said it at all.\n\nHuginn has not moved from the root-spur. His eye is on the settling-seam. His stillness has a texture to it — not waiting, exactly. Attending."
       }
     ],
     "lastTurn": {
-      "narration": "You say it with the grin still on your face — \"So. You're strong, capable, beautiful, and intelligent. Quite a combo, Ms. Marsh.\"\n\nPell doesn't look up from the rubble stone. Her thumb is still working the dressed face of it, reading the grain. A beat passes — the kind she chooses. Then: \"Weir.\" Flat, final, as if that is the entire verdict.\n\nBut her ears have gone red. You can see it plainly in the early-spring light through the alders.\n\nHuginn shifts his weight on the root-spur. One claw, then the other. He does not look at you. He does not look at Pell. He is attending the settling-seam with total, pointed dedication, and if his silence has a quality right now it is the quality of a very old thing that has decided this particular development is not its business, and means to hold that position.",
-      "sceneSummary": "Silas flatters Pell at the ruins — she deflects with a word, but her ears say otherwise.",
+      "narration": "The question lands easy. Pell finally looks up from the rubble stone, thumb still resting on the dressed face of it, and turns to read the settling-seam again — the full length of it, top to bottom, the widest point marking where the lower aperture gave.\n\n\"Probe is the wrong word for it,\" she says. \"You don't probe a valve. You read the condition it's in, first. Then you decide whether opening it is yours to do.\" She stands, brushing grit from her knee. \"What I'd need: a way to clear the sedge and loose fill from the face without shifting the coursework above it. A hand-length of exposed stone on either side of the breach. Light — not direct sun, it'll wash the grain. And time. You don't rush dressed stone.\"\n\nShe glances at Memory, then at your belt knife. \"The kit you've got can clear the face. Takes maybe half an hour, careful work. What I can't tell you until the face is clear is whether the breach already finished its job or whether it's mid-process. Those read differently.\" A pause. \"And I'd want to know what Huginn thinks before we touch anything.\"\n\nShe says it without inflection — what Huginn thinks — the way she'd say what the flue draft tells you before you open a sealed chimney. Three days ago she wouldn't have said it at all.\n\nHuginn has not moved from the root-spur. His eye is on the settling-seam. His stillness has a texture to it — not waiting, exactly. Attending.",
+      "sceneSummary": "Pell names the conditions for reading the aperture — clear the face first, then ask Huginn what he sees.",
       "choices": [
         {
-          "label": "Get back to the work — ask if there's a way to approach the sealed rooms from above the settling-seam without risking the hillside.",
+          "label": "Start clearing the face — belt knife and careful hands, sedge and loose fill only, nothing that shifts the coursework",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {},
+          "axes": {
+            "chaos_order": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
-            "plan",
+            "careful",
+            "work"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn directly before touching anything — crouch to his level and give him room to answer",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.7,
+            "death_life": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
             "careful"
           ],
           "abilityId": null,
@@ -1062,68 +1086,49 @@
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the settling-seam itself — read whether the breach is widening and at what rate.",
+          "label": "Use Deathsense on the settling-seam before clearing anything — read whether what's behind it is ending, ended, or mid-process",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.3,
-            "concrete_abstract": -0.3
+            "death_life": -0.5,
+            "mechanical_spiritual": 0.4
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "deathsense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Ask Pell what she'd need to safely probe the lower aperture — her read, her call on risk.",
+          "label": "Ask Pell whether, if the breach is mid-process, that changes whether opening it is yours to do — or anyone's",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "study",
             "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Note the site's exact state — the rubble line, the settling-seam, the breach direction — and suggest heading to Dara Holt with what you have. She's the one who can say what changes in these channels mean for the valley.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy.",
+        "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy. Pell standing now, grit brushed from her knee.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Crouched beside the nearest rubble stone, thumb on the dressed face, ears red, not looking up."
+            "state": "Standing beside the rubble, reading the settling-seam top to bottom — waiting on Silas's next move."
           },
           {
             "name": "Huginn",
-            "state": "On the root-spur above the rubble stones, attending the settling-seam with total dedication — not looking at either of them."
+            "state": "On the root-spur, eye on the settling-seam — entirely still, attending."
           }
         ],
         "objects": [
@@ -1137,9 +1142,9 @@
           "Column stain (thirty paces south — palm-print visible)"
         ],
         "threads": [
-          "Buried channel-house: two sealed rooms, lower aperture breached from within — Pell names it a valve; interior contents and purpose unread",
-          "Huginn attending the settling-seam — has not moved or looked away",
-          "What the sealed rooms were built around — Order-Sense gave the skeleton, not the purpose",
+          "Lower aperture face buried under sedge and loose fill — needs clearing before Pell can read breach condition",
+          "Huginn attending the settling-seam — has not moved or spoken; Pell explicitly wants his read before anyone touches the stone",
+          "Breach condition unknown: finished-job or mid-process reads differently, per Pell",
           "Dara Holt not yet contacted — senior irrigator for this channel, her territory"
         ]
       },
@@ -1149,31 +1154,49 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Deflected the compliment with a flat 'Weir' — but her ears went red in the morning light. She is crouched at the rubble, working.",
+          "note": "Named the conditions for reading the aperture plainly — clear the face first, then ask Huginn, then decide whether opening it is yours to do. Said 'what Huginn thinks' without inflection, as a working variable.",
           "learned": [
-            "Takes a direct compliment and converts it immediately to a single word and continued work — but the physical tell is real"
+            "Refers to Huginn's read as a practical precondition — not superstition, craft process",
+            "Distinguishes 'finished its job' from 'mid-process' as two different reads on the breach condition"
+          ],
+          "skillsObserved": [
+            "reading valve condition from structural evidence",
+            "sequencing a site investigation methodically"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the rubble site with Silas, crouched at the northwest corner, reading the dressed stonework."
+          "statusNote": "Standing at the rubble site with Silas — waiting on the next move before touching the aperture face."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Pell's read: the lower aperture must be face-cleared before its condition can be diagnosed — breach may be finished or mid-process, and those read differently. She named Huginn's assessment as a required precondition before touching the stone.",
+          "links": [
+            "millbrook",
+            "pell",
+            "aldric-provisioning-deal",
+            "dara-holt"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "a quick exchange — a sentence, a beat, a held silence"
-      },
-      "factUpdates": []
+        "hoursPassed": 0.25,
+        "why": "a short exchange at the rubble site"
+      }
     },
     "sceneState": {
-      "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy.",
+      "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy. Pell standing now, grit brushed from her knee.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Crouched beside the nearest rubble stone, thumb on the dressed face, ears red, not looking up."
+          "state": "Standing beside the rubble, reading the settling-seam top to bottom — waiting on Silas's next move."
         },
         {
           "name": "Huginn",
-          "state": "On the root-spur above the rubble stones, attending the settling-seam with total dedication — not looking at either of t"
+          "state": "On the root-spur, eye on the settling-seam — entirely still, attending."
         }
       ],
       "objects": [
@@ -1187,9 +1210,9 @@
         "Column stain (thirty paces south — palm-print visible)"
       ],
       "threads": [
-        "Buried channel-house: two sealed rooms, lower aperture breached from within — Pell names it a valve; interior contents and purpose unread",
-        "Huginn attending the settling-seam — has not moved or looked away",
-        "What the sealed rooms were built around — Order-Sense gave the skeleton, not the purpose",
+        "Lower aperture face buried under sedge and loose fill — needs clearing before Pell can read breach condition",
+        "Huginn attending the settling-seam — has not moved or spoken; Pell explicitly wants his read before anyone touches the stone",
+        "Breach condition unknown: finished-job or mid-process reads differently, per Pell",
         "Dara Holt not yet contacted — senior irrigator for this channel, her territory"
       ]
     }
@@ -1338,7 +1361,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Has not moved while Silas ran both Palework and Deathsense casts — reading the posture, waiting without asking.",
         "[d2] Read the coping iron by touch — named it received rather than leaching, and called the crack's origin a decision rather than age.",
         "[d2] Named the column stain as older than Mara's ledger — read it as pre-existing evidence of something below this bank before the current crisis.",
         "[d2] Read the material boundary between the column stain and the newer iron-mat without being prompted — named the stain's direction as downward through stone, not upward through water.",
@@ -1347,28 +1369,29 @@
         "[d2] Gave Silas the corner of her mouth over 'date two' — denied nothing, redirected to the work. Back to reading the rubble stones.",
         "[d2] Watching Silas's face come out of the Order-Sense read — hasn't spoken yet, giving him room.",
         "[d2] Listened to the Order-Sense read without interrupting; named the breach-from-within as a valve — deliberate design or conditional mechanism, not accident. Named the sealed rooms as",
-        "[d2] Deflected the compliment with a flat 'Weir' — but her ears went red in the morning light. She is crouched at the rubble, working."
+        "[d2] Deflected the compliment with a flat 'Weir' — but her ears went red in the morning light. She is crouched at the rubble, working.",
+        "[d2] Named the conditions for reading the aperture plainly — clear the face first, then ask Huginn, then decide whether opening it is yours to do. Said 'what Huginn thinks' without infl"
       ],
       "knownFacts": [
-        "The column stain's material direction is distinct from the iron-mat contamination — it came down through the stone, not up from the water",
-        "Stone holds direction — she can read whether a deposit ran down-in versus up-out by the grain it leaves",
         "The source is above and behind the bank, not from the channel — a buried structure settling and widening its drainage path",
         "The crack in the shelf and the gray-green water are symptoms; the source is higher up and behind stone",
         "Rubble stones at the bank base are dressed and coursed — deliberate construction, not natural scree",
         "A breach from within a designed seal reads as a valve to a smith — either something left inside with a key, or a condition the design was always waiting for",
         "The sealed rooms in a channel-house are either storage or protection chambers — something the builders kept away from the water, or kept the water away from",
-        "Takes a direct compliment and converts it immediately to a single word and continued work — but the physical tell is real"
+        "Takes a direct compliment and converts it immediately to a single word and continued work — but the physical tell is real",
+        "Refers to Huginn's read as a practical precondition — not superstition, craft process",
+        "Distinguishes 'finished its job' from 'mid-process' as two different reads on the breach condition"
       ],
       "skillsObserved": [
-        "reading material direction and boundary interfaces by visual",
-        "reading material direction and source-position from deposit ",
         "structural diagnosis by analogy from smithcraft",
         "reading dressed stonework from a field examination",
         "reading structural intent from breach direction",
-        "forensic diagnosis of pre-Transition construction by analogy"
+        "forensic diagnosis of pre-Transition construction by analogy",
+        "reading valve condition from structural evidence",
+        "sequencing a site investigation methodically"
       ],
       "status": "active",
-      "statusNote": "At the rubble site with Silas, crouched at the northwest corner, reading the dressed stonework.",
+      "statusNote": "Standing at the rubble site with Silas — waiting on the next move before touching the aperture face.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2016,7 +2039,8 @@
           "[d2] Pell's read of the column stain's direction: source is above and behind the bank, not from the river. A buried structure settled and widened its drainage path — the crack in the shelf and the gray-gre",
           "[d2] Thirty paces north of the column stain: dressed rubble stones at the bank base, not river-rounded — coursed, laid by hand. A settling-seam ten feet up the hillside marks a buried structure. The iron-m",
           "[d2] Order-Sense on the rubble site reveals a buried channel-house: low, rectangular, pre-Transition. Northwest corner is the exposed rubble. Main run goes into the hillside at an angle. Two apertures, bot",
-          "[d2] Pell reads the lower aperture's breach-from-within as a valve: deliberate design or a conditional trigger. The sealed rooms are likely protection chambers — something the builders kept isolated from t"
+          "[d2] Pell reads the lower aperture's breach-from-within as a valve: deliberate design or a conditional trigger. The sealed rooms are likely protection chambers — something the builders kept isolated from t",
+          "[d2] Pell's read: the lower aperture must be face-cleared before its condition can be diagnosed — breach may be finished or mid-process, and those read differently. She named Huginn's assessment as a requi"
         ],
         "links": [
           "millbrook",
@@ -2073,14 +2097,14 @@
     }
   },
   "tendencies": {
-    "strategic": 52.813496406434155,
-    "cerebral": 38.809113401803614,
-    "social": 57.41116797225172,
-    "generous": 12.848993129634783,
-    "cautious": 32.58456523161532,
-    "physical": 1.4369465506973103,
-    "risky": 2.51289367809692,
-    "ruthless": 0.7328768546436799
+    "strategic": 53.54942892440199,
+    "cerebral": 38.615067834794594,
+    "social": 57.12411213239046,
+    "generous": 13.78474816398661,
+    "cautious": 32.42164240545725,
+    "physical": 1.4297618179438236,
+    "risky": 2.5003292097064356,
+    "ruthless": 0.7292124703704616
   },
   "aptitudes": [
     "strategist",
@@ -2088,7 +2112,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 151,
+  "actionCount": 152,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2174,8 +2198,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784050671954,
-  "rev": 218,
+  "updatedAt": 1784053515264,
+  "rev": 219,
   "generated": {
     "schemaVersion": 1,
     "npc": {

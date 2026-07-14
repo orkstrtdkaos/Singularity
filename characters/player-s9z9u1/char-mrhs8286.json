@@ -717,71 +717,78 @@
         "player": "Ask Mara if she has a nice bottle of wine, and any imported fruits.  The stranger the better.",
         "summary": "Silas asks Mara for wine and exotic fruit — she produces a resin-dark mountain wine and sealed dried starfruit from before the pass closed.",
         "narration": "Mara looks up from the ledger with the same unhurried attention she gives everything that comes through her red door. You ask about wine — a good bottle — and whatever imported fruit she might have squirreled away. The stranger the better.\n\nShe doesn't answer immediately. She closes the ledger on one finger to hold her place, turns, and surveys the back shelves with the same methodical sweep she'd give any inventory question. \"Wine, yes. One bottle — came up on the last trader's cart from the lower valley, Adaptor settlement south of the Disputed Zone. They press from a dark mountain grape. Strong. Tastes like resin and something you can't quite name.\" She reaches under the counter and sets it on the wood: dark glass, sealed with wax gone slightly tacky in the spring warmth, no label.\n\nFor fruit, she tilts her head. \"Not fresh. Mid-winter I had candied persimmons from the Heights — traded out fast.\" She disappears behind the shelving partition for a moment, and when she comes back she's carrying a small cloth packet, folded and tied. \"Dried starfruit. Came through the pass circuit before it closed — three winters back, maybe four. Still good. I kept them sealed.\" She sets the packet beside the bottle. \"The resin wine and fruit that's older than most of what I stock. Strange enough for you?\"\n\nHuginn, somewhere just outside the door, makes no comment. Mara glances toward the sound and then back to you with that same practical expression."
+      },
+      {
+        "player": "Before you buy anything, mention that you're heading to the forge this afternoon — the wine and fruit are for Pell. Watch how Mara reads that.",
+        "summary": "Silas tells Mara the wine and fruit are a gift for Pell — Mara takes it in without a word out of place and names the price.",
+        "narration": "You set your hands on the counter and tell Mara plainly: the wine and the fruit are for Pell. You're heading to the forge this afternoon, and you'd rather arrive with something in hand than not.\n\nMara doesn't move for a moment. Her finger stays in the ledger. She looks at the bottle, then at you, and then — not quite a smile, but a small, decisive settling of her expression, the way a number comes out right. \"Pell,\" she repeats, as if logging it. \"She's had that whetstone three weeks and never came to collect it. I gave it to you instead.\" A brief pause. \"I think she'll appreciate this more than the stone anyway.\"\n\nShe sets the bottle and the starfruit packet a little closer to your side of the counter — a clear declaration of ownership. Then she opens the ledger properly. \"Eight cord-weight for the wine. Three for the fruit. I'll take it off your Aldric balance if that's easier, or coin now — your choice.\" Her pen is already at the margin, ready either way."
       }
     ],
     "lastTurn": {
-      "narration": "Mara looks up from the ledger with the same unhurried attention she gives everything that comes through her red door. You ask about wine — a good bottle — and whatever imported fruit she might have squirreled away. The stranger the better.\n\nShe doesn't answer immediately. She closes the ledger on one finger to hold her place, turns, and surveys the back shelves with the same methodical sweep she'd give any inventory question. \"Wine, yes. One bottle — came up on the last trader's cart from the lower valley, Adaptor settlement south of the Disputed Zone. They press from a dark mountain grape. Strong. Tastes like resin and something you can't quite name.\" She reaches under the counter and sets it on the wood: dark glass, sealed with wax gone slightly tacky in the spring warmth, no label.\n\nFor fruit, she tilts her head. \"Not fresh. Mid-winter I had candied persimmons from the Heights — traded out fast.\" She disappears behind the shelving partition for a moment, and when she comes back she's carrying a small cloth packet, folded and tied. \"Dried starfruit. Came through the pass circuit before it closed — three winters back, maybe four. Still good. I kept them sealed.\" She sets the packet beside the bottle. \"The resin wine and fruit that's older than most of what I stock. Strange enough for you?\"\n\nHuginn, somewhere just outside the door, makes no comment. Mara glances toward the sound and then back to you with that same practical expression.",
-      "sceneSummary": "Silas asks Mara for wine and exotic fruit — she produces a resin-dark mountain wine and sealed dried starfruit from before the pass closed.",
+      "narration": "You set your hands on the counter and tell Mara plainly: the wine and the fruit are for Pell. You're heading to the forge this afternoon, and you'd rather arrive with something in hand than not.\n\nMara doesn't move for a moment. Her finger stays in the ledger. She looks at the bottle, then at you, and then — not quite a smile, but a small, decisive settling of her expression, the way a number comes out right. \"Pell,\" she repeats, as if logging it. \"She's had that whetstone three weeks and never came to collect it. I gave it to you instead.\" A brief pause. \"I think she'll appreciate this more than the stone anyway.\"\n\nShe sets the bottle and the starfruit packet a little closer to your side of the counter — a clear declaration of ownership. Then she opens the ledger properly. \"Eight cord-weight for the wine. Three for the fruit. I'll take it off your Aldric balance if that's easier, or coin now — your choice.\" Her pen is already at the margin, ready either way.",
+      "sceneSummary": "Silas tells Mara the wine and fruit are a gift for Pell — Mara takes it in without a word out of place and names the price.",
       "choices": [
         {
-          "label": "Buy both — the wine and the dried starfruit. Ask what she wants for them.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Pay eleven cord-weight from coin now and be on your way — clean and uncomplicated.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "trade",
-            "buy"
+            "pay",
+            "clean"
           ],
           "trivial": true
         },
         {
-          "label": "Take only the wine. Dried fruit that old might not suit the occasion you have in mind — ask if she has anything else preserved, even if it's odd.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Have her pull it from the Aldric balance — keep the coin in your pocket for the forge afternoon.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
             "trade",
-            "negotiate"
+            "ledger"
           ],
           "trivial": true
         },
         {
-          "label": "Take both and ask Mara directly — she tracks what moves through this valley; what does she know about where that starfruit came from, and whether anything new has come through the pass since?",
+          "label": "Before you settle up, ask Mara if she knows anything about Huginn's northwest direction — she tracks what moves through the valley.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "buy",
-            "gather-info"
+            "ask",
+            "probe",
+            "river-scout"
           ],
           "trivial": true
         },
         {
-          "label": "Before you buy anything, mention that you're heading to the forge this afternoon — the wine and fruit are for Pell. Watch how Mara reads that.",
+          "label": "Settle up however is easiest, then ask if she wants you to bring back anything specific from a river scout north — she mentioned she'd hear what you find upstream.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "social",
-            "observe"
+            "help",
+            "information",
+            "quest"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door open. Interior close and well-ordered, rope-tar and beeswax. A bottle of dark-glass resin wine and a folded cloth packet of dried starfruit now sit on the counter.",
+        "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door open. Interior close and well-ordered, rope-tar and beeswax. The resin wine bottle and starfruit packet have been moved to Silas's side of the counter.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing at the counter, ledger held open on one finger, watching Silas with her usual practical attention."
+            "state": "Ledger open on the counter, pen at the margin, watching Silas with practical attention — waiting on his payment choice."
           }
         ],
         "objects": [
           "Store counter with open ledger",
           "Rope stock (mid-weight peg — gap still present)",
           "Shelved hardware and tools",
-          "Resin wine bottle (dark glass, wax-sealed, no label) — on counter",
-          "Dried starfruit packet (cloth-wrapped, sealed) — on counter",
+          "Resin wine bottle (dark glass, wax-sealed) — Silas's side of the counter",
+          "Dried starfruit packet (cloth-wrapped, sealed) — Silas's side of the counter",
           "Preserved Trail Parcel x2 — in Silas's pack",
           "Boar Tusks (pair) — in Silas's pack",
           "Cord-Weight Coin (20) — on Silas's person"
@@ -790,7 +797,7 @@
           "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
           "River scout — floated, endorsed, still unscheduled",
           "Huginn's northwest direction — unresolved, Huginn near the door outside",
-          "Wine and dried starfruit — price not yet settled"
+          "Wine and starfruit — price named (11 cord-weight), payment not yet made"
         ]
       },
       "npcUpdates": [
@@ -798,17 +805,15 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
+          "role": "Village supply store operator, Millbrook — east of the well, red door",
+          "note": "Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eight for the wine, three for the fruit.",
           "learned": [
-            "Has one bottle of resin wine from an Adaptor settlement south of the Disputed Zone",
-            "Has sealed dried starfruit from the pass circuit trade — three or four winters old, still good"
-          ],
-          "skillsObserved": [
-            "back-stock recall without hesitation"
+            "The wine and starfruit are a gift from Silas to Pell",
+            "Silas is heading to the forge this afternoon"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her store counter, ledger in hand, wine and starfruit on the wood — waiting on Silas's decision."
+          "statusNote": "At her store counter, ledger open, pen ready — waiting on Silas's payment choice."
         }
       ],
       "codexUpdates": [
@@ -817,32 +822,33 @@
           "label": "Mara Wells",
           "kind": "person",
           "entityId": "mara-wells",
-          "fact": "Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve.",
+          "fact": "Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transaction.",
           "links": [
             "millbrook",
+            "pell",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the store counter — a few minutes, no more."
+        "why": "A brief exchange across the counter — a minute or two at most."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door open. Interior close and well-ordered, rope-tar and beeswax. A bottle of dark-glass resin wine and a folded cloth packet of dried starfruit now sit on the counter.",
+      "setting": "Mara Wells's supply store, Millbrook — morning, full spring light, red door open. Interior close and well-ordered, rope-tar and beeswax. The resin wine bottle and starfruit packet have been moved to Silas's side of the counter.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at the counter, ledger held open on one finger, watching Silas with her usual practical attention."
+          "state": "Ledger open on the counter, pen at the margin, watching Silas with practical attention — waiting on his payment choice."
         }
       ],
       "objects": [
         "Store counter with open ledger",
         "Rope stock (mid-weight peg — gap still present)",
         "Shelved hardware and tools",
-        "Resin wine bottle (dark glass, wax-sealed, no label) — on counter",
-        "Dried starfruit packet (cloth-wrapped, sealed) — on counter",
+        "Resin wine bottle (dark glass, wax-sealed) — Silas's side of the counter",
+        "Dried starfruit packet (cloth-wrapped, sealed) — Silas's side of the counter",
         "Preserved Trail Parcel x2 — in Silas's pack",
         "Boar Tusks (pair) — in Silas's pack",
         "Cord-Weight Coin (20) — on Silas's person"
@@ -851,7 +857,7 @@
         "Forge afternoon — Pell said fire will be ready; Silas committed to arriving by early afternoon",
         "River scout — floated, endorsed, still unscheduled",
         "Huginn's northwest direction — unresolved, Huginn near the door outside",
-        "Wine and dried starfruit — price not yet settled"
+        "Wine and starfruit — price named (11 cord-weight), payment not yet made"
       ]
     }
   },
@@ -1053,17 +1059,18 @@
         "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
         "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms.",
         "[d2] Silas has returned to the store — she looks up from the ledger.",
-        "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named."
+        "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
+        "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig"
       ],
       "knownFacts": [
-        "Has two seasoned ash shafts in the back — six feet, two winters dry, not on display",
-        "The foresters took one shaft last week — aware of what's moving through the valley",
         "Had a fine-grit whetstone held back for Pell — three weeks, no delivery run yet; handed it to Silas instead",
         "Treats gift logistics the same as inventory: practical, clean, on the ledger",
         "The river has been visibly wrong for three weeks — Mara is tracking it without public alarm",
         "She wants upstream information and would receive it directly, same as Aldric",
         "Has one bottle of resin wine from an Adaptor settlement south of the Disputed Zone",
-        "Has sealed dried starfruit from the pass circuit trade — three or four winters old, still good"
+        "Has sealed dried starfruit from the pass circuit trade — three or four winters old, still good",
+        "The wine and starfruit are a gift from Silas to Pell",
+        "Silas is heading to the forge this afternoon"
       ],
       "skillsObserved": [
         "back-stock management",
@@ -1074,7 +1081,7 @@
         "back-stock recall without hesitation"
       ],
       "status": "active",
-      "statusNote": "At her store counter, ledger in hand, wine and starfruit on the wood — waiting on Silas's decision.",
+      "statusNote": "At her store counter, ledger open, pen ready — waiting on Silas's payment choice.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1457,7 +1464,8 @@
           "[d1] Order-Sense surge revealed her store runs on a deliberate inventory logic — weight-sorted, frequency-ordered, ledger-spined. She has undisplayed wire stock (same gauge as the snare frames) and a fresh",
           "[d1] Runs a standing trade account with Aldric's smokehouse — can credit goods against it. Keeps seasoned ash shafts in the back (not displayed); had three, foresters took one last week, two remain.",
           "[d1] Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Al",
-          "[d2] Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve."
+          "[d2] Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve.",
+          "[d2] Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transac"
         ],
         "links": [
           "millbrook",
@@ -1638,14 +1646,14 @@
     }
   },
   "tendencies": {
-    "strategic": 47.77919461497202,
-    "cerebral": 23.256004126574464,
-    "social": 46.848786282016654,
-    "generous": 9.997832532178847,
-    "cautious": 21.277397975330278,
-    "physical": 1.8648350164783656,
-    "risky": 0.9275689688183278,
-    "ruthless": 0.9511101304657719
+    "strategic": 47.54029864189716,
+    "cerebral": 23.139724105941593,
+    "social": 46.61454235060657,
+    "generous": 9.947843369517953,
+    "cautious": 21.171010985453627,
+    "physical": 1.8555108413959738,
+    "risky": 0.9229311239742362,
+    "ruthless": 0.946354579813443
   },
   "aptitudes": [
     "strategist",
@@ -1653,7 +1661,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 99,
+  "actionCount": 100,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1707,8 +1715,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783995998172,
-  "rev": 153,
+  "updatedAt": 1783996264366,
+  "rev": 154,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

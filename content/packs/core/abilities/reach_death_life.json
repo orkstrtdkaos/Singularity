@@ -87,8 +87,8 @@
         {
           "rank": 2,
           "name": "Reading the Rot",
-          "grants": "Read decay like text — what killed a thing, what a ruin died of, what a blight will do next; halt a spreading rot by giving it a clean end.",
-          "cannot": "Reading is not undoing; some rots refuse a clean end."
+          "grants": "Read the physical evidence of death — what killed a ruin, what a plague did and will do next, what ended a thing and when. Halt a spreading rot by giving its front a clean end. This is forensics, not sensing: you read what is already finished.",
+          "cannot": "Reading is not undoing; some rots refuse a clean end. And this reads the already-dead — for the dying, use Deathsense."
         },
         {
           "rank": 3,
@@ -134,26 +134,26 @@
         "reveal"
       ],
       "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
-      "description": "Sense death and dying around you — the recently-dead, the failing, the near-gone.",
+      "description": "Sense death and dying around you — the living whose thread is fraying, the near-gone, the actively failing. Deathsense reads what is HAPPENING NOW. For what has already finished, Palework reads the evidence.",
       "notFor": "It reads endings; it does not cause them. And it cannot see the future of a death — only the shape of the one already underway.",
       "tree": [
         {
           "rank": 1,
           "name": "Deathsense",
-          "grants": "Feel where a thing has died or is dying nearby; judge how long ago; sense a life near its end.",
-          "cannot": "Reads presence, not cause; the healthy hide nothing to find."
+          "grants": "Feel where a living thing is dying or near death. Judge how far along they are. Sense the failing in a person or creature before it shows on the outside.",
+          "cannot": "Reads the living and the dying, not the already-dead. A corpse has nothing left to sense."
         },
         {
           "rank": 2,
           "name": "The Long Count",
-          "grants": "Sense not only that a thing is dying but HOW, and roughly how long it has — the shape of the ending, not just its fact.",
+          "grants": "Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.",
           "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it."
         },
         {
           "rank": 3,
           "name": "The Hour Known",
-          "grants": "The ending stands plain: its cause, its hour, and what would turn it aside — if anything would.",
-          "cannot": "Some endings have no turning-aside, and the Ashwardens hold that seeing that clearly is the whole of the craft."
+          "grants": "The dying stands plain: its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning.",
+          "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible."
         }
       ],
       "challengeTypes": [
@@ -280,26 +280,26 @@
         "strike"
       ],
       "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
-      "description": "Hasten decay in a thing — rot wood, wilt growth, weaken the living by drawing the quick out. Palework's edge turned outward.",
-      "notFor": "It hastens; it does not smite. What you wither dies of what was already inside it — slowly, and visibly, and it takes time you may not have while the thing is still able to reach you. It cannot be undone.",
+      "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the material world. The Grey Hand handles people; Wither handles everything else.",
+      "notFor": "Weakening living people — that is The Grey Hand. Wither ages and rots THINGS: structures, barricades, terrain, growth. It does not wound; it hastens what was already in a thing.",
       "tree": [
         {
           "rank": 1,
           "name": "Wither",
-          "grants": "Rot or wilt a plant, a wooden thing, a small living obstacle; weaken a living foe's grip or vigor by a touch.",
-          "cannot": "Slow against a strong will; the Ashwardens frown on it turned toward people."
+          "grants": "Rot or wilt a plant, a wooden object, a rope, a door — anything living or once-living. Age a material thing faster than it should go.",
+          "cannot": "Only things, not people. Cannot undo."
         },
         {
           "rank": 2,
           "name": "The Grey Touch",
-          "grants": "Age and fail a thing by touch — a rope, a door, a wound made suddenly older than it was.",
-          "cannot": "Withering is not killing; it is hastening. It cannot hasten what was not already going that way."
+          "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments. Halt a spreading blight by giving the growth-front a clean, sudden end.",
+          "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant."
         },
         {
           "rank": 3,
           "name": "The Withering",
-          "grants": "Wither at range and at scale — a field, a barricade, a charge of enemies who suddenly feel their years.",
-          "cannot": "The Ashwardens permit this only against what should end. Used otherwise it marks you, visibly and permanently."
+          "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields. The terrain itself becomes unreliable.",
+          "cannot": "The Ashwardens permit this only against what should end. Used as a weapon it marks the wielder, and the marking is visible to everyone who has ever seen Palework."
         }
       ],
       "challengeTypes": [
@@ -381,8 +381,8 @@
         "resist"
       ],
       "narrationHints": "A sign laid down that the dying may not be disturbed — and the restless dead may not pass.",
-      "description": "Inscribe a ward against death's disturbances — keep the restless-dead out, or keep a passing peaceful and unbroken. Palework as protection.",
-      "notFor": "Preventing a natural death; harming the living.",
+      "description": "Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.",
+      "notFor": "Natural deaths — starvation, wounds, cold, exposure (use The Kept Breath). Death-Ward stands against unnatural endings: a death-curse, a necromantic working, a wraith's touch, a plague that is not merely a plague. It cannot hold indefinitely; it can only refuse a specific unnatural threshold.",
       "tree": [
         {
           "rank": 1,
@@ -393,14 +393,14 @@
         {
           "rank": 2,
           "name": "The Turned Hour",
-          "grants": "Turn a death aside — not heal the wound, but refuse the hour, and make it come later.",
-          "cannot": "Later is not never; the hour you turned is still owed, and it remembers the way."
+          "grants": "Turn aside an unnatural death — a curse taking hold, a wraith's grip, a working that was about to close. Not heal the wound, not hold the dying: refuse this specific end, and push it back.",
+          "cannot": "Unnatural only. A person dying of their wounds in the cold needs The Kept Breath, not this. And 'later' is still owed."
         },
         {
           "rank": 3,
           "name": "Not Today",
-          "grants": "Stand between a person and their ending and simply refuse it, wholly, for as long as you can hold.",
-          "cannot": "You are holding it with your own weight. The Ashwardens say the ward that never breaks has not yet met its hour."
+          "grants": "Stand between a person and a supernatural ending and refuse it wholly, for as long as you can hold — the death-curse does not find them, the wraith cannot reach them, the working slides away. You are the fact that this does not happen today.",
+          "cannot": "You are holding it with your own weight. And it is still there when you are not."
         }
       ],
       "challengeTypes": [
@@ -734,8 +734,8 @@
         {
           "rank": 3,
           "name": "The Long Walk",
-          "grants": "Navigate anywhere that has ever held death — which is everywhere, eventually — the way others navigate roads. Bring a small group through. Move through siege-lines, quarantines, and collapsed structures as if they were open ground.",
-          "cannot": "You arrive where the dead have been, not where you choose. The Road has its own geography."
+          "grants": "Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.",
+          "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other."
         }
       ],
       "functions": [
@@ -773,8 +773,8 @@
         "threshold"
       ],
       "narrationHints": "Enough. Not well — enough. The ashwarden knows the exact line between alive and not. They hold someone there. The body does what it must; not a thing more.",
-      "description": "Sustain a body at minimum — not comfort, not healing, not restoration. The precise knowledge of how much life a person strictly needs, held steady by craft.",
-      "notFor": "Healing — the Kept Breath holds the threshold but does not move it upward; a held breath is not a mended lung. This does not cure; it endures.",
+      "description": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
+      "notFor": "Metaphysical or unnatural death threats — curses, wraith-touch, necromantic workings (use Death-Ward). The Kept Breath handles the body's physical ledger: rations, warmth, blood, sleep. It holds the threshold; it does not move it.",
       "tree": [
         {
           "rank": 1,

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 4,
-  "xp": 384,
+  "xp": 389,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -37,7 +37,7 @@
   "alignment": {
     "spectrumId": -0.7362520412212319,
     "violence_peace": 0.0335,
-    "chaos_order": 0.11474943617187498,
+    "chaos_order": 0.13401196436328122,
     "mechanical_spiritual": 0.0916193390625,
     "concrete_abstract": -0.059673125,
     "death_life": -0.08338649218750001
@@ -46,7 +46,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 65,
+  "energy": 60,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -791,70 +791,69 @@
         "player": "GAMBIT — Upgrade the Deathbound Runic Spear",
         "summary": "The Deathbound Runic Spear upgraded through a full night's work — circuit deepened, maker's mark re-seated, memory-capacitor installed rough at the collar.",
         "narration": "The repair takes most of the night.\n\nYou start at the south end of the bench with the spear full-length between you and Pell, Huginn at the far end keeping the whole picture. The first hour is the honest part: you read the rune-structure as it is — Order-Sense tracing the branching channels from socket to cross-guard, Pell's thumb tracing the physical iron beneath — and you find it together. The transverse is shallow, but more than that: it was pressed at the wrong moment. The wax went in while the pitch was cooling, not while it was still fluid. The groove took the marks but not the depth. The channel is legible; it is not load-bearing. That much resolves cleanly. You can see where the runes need to go, and why.\n\nThe hard part is Pell. You ask her to re-seat her maker's mark — not re-stamp the iron, but reclaim the intention that belongs in it. 'Still becoming' was what the binding read, which means she was inside the piece when she pressed it. That is not wrong; it is just unfinished. She stands over the spear for a long quiet stretch with her punch in hand, and when she drives it down it is not quite centered. Close. The mark lands, the binding receives it — you feel the circuit tighten fractionally through the runes — but the re-seat is slightly off-true, and Order-Sense confirms it when you verify: the mark is present, it is hers, and there is a hair of variance in the axis that will make the Palework channel run just slightly oblique. Not broken. Not clean. You name it to her without softening it; she nods once and says, 'I can live with oblique.' Then she picks up the chasing chisel and deepens the transverse herself, reading from your tracing on the blade, and this part goes better than it should — a rerolled moment where the chisel finds the right angle on the first pass and the groove opens to three times its old depth in a single clean cut. The channel closes when you test it with the spent rune-wax against the iron: the wax reads, the transverse holds, the circuit is whole.\n\nThe memory-capacitor is the last piece and the messiest. The augment goes into the socket collar — a length of wax cord you press into the collar-groove with pitch-ink, a second binding intended to let the spear hold the shape of what it has struck rather than releasing it at the moment of the kill. It would make the death-register legible later, outside the kill-moment's narrow window. It seats, the pitch takes, the collar-groove closes around it — but when you name the attunement through Order-Sense, working the rune-lines into a ritual inventory of the spear's own structure, the capacitor threads slightly loose at the north quarter of the collar. It will hold under ordinary use. Under the shock of a kill, particularly a hard-body strike, the thread may slip. The spear is upgraded; the upgrade is rough. The death-register is now available before and after the kill moment, not only during — but the collar wants finishing work, and you both know it.\n\nBy the time you set the blade down Huginn has gone still. The fire in the south pit has coaled to a steady orange low. Outside the lane is dark and absolutely quiet. Pell wipes the chisel and sets it on the rack and looks at the spear for a long moment without speaking. Then: 'What does oblique cost you, in practice?'"
+      },
+      {
+        "player": "Use Order-Sense to check whether the capacitor's loose north quarter can be pressed tighter while the pitch is still slightly warm — a small correction window, if it exists.",
+        "summary": "Order-Sense found the warm pitch — the collar's north quarter pressed flush before it set.",
+        "narration": "You lay two fingers on the collar without pressing — just touching the iron near the north quarter seam, where the capacitor sits slightly canted in its bed. Order-Sense comes in quiet and narrow, the way it reads small things: not the whole spear, just this joint, just the pitch in the gap.\n\nThe pitch is still warm. Barely. There's a window — maybe a quarter-hour before it stiffens past the point of correction. The Order-Sense reads the gap's geometry cleanly: the north quarter is canted about two degrees off its seat, and the pitch hasn't fully bridged the void on the inside edge. If you press now, slow and even, it will close. If you wait until morning it will set crooked and stay that way.\n\nYou say it plain: \"Still workable. North edge, light even pressure — don't rush it.\" Pell is already moving, her thumb finding the edge of the collar without being shown where. She presses with the heel of her thumb — not a push, just weight, steady and patient — and you watch the faint gleam of pitch squeeze to the surface at the gap's mouth. Huginn leans forward an inch, eye on the seam. Nobody says anything. Thirty seconds, then Pell lifts her thumb and wipes it on her apron.\n\nThe north quarter sits flush."
       }
     ],
     "lastTurn": {
-      "narration": "The repair takes most of the night.\n\nYou start at the south end of the bench with the spear full-length between you and Pell, Huginn at the far end keeping the whole picture. The first hour is the honest part: you read the rune-structure as it is — Order-Sense tracing the branching channels from socket to cross-guard, Pell's thumb tracing the physical iron beneath — and you find it together. The transverse is shallow, but more than that: it was pressed at the wrong moment. The wax went in while the pitch was cooling, not while it was still fluid. The groove took the marks but not the depth. The channel is legible; it is not load-bearing. That much resolves cleanly. You can see where the runes need to go, and why.\n\nThe hard part is Pell. You ask her to re-seat her maker's mark — not re-stamp the iron, but reclaim the intention that belongs in it. 'Still becoming' was what the binding read, which means she was inside the piece when she pressed it. That is not wrong; it is just unfinished. She stands over the spear for a long quiet stretch with her punch in hand, and when she drives it down it is not quite centered. Close. The mark lands, the binding receives it — you feel the circuit tighten fractionally through the runes — but the re-seat is slightly off-true, and Order-Sense confirms it when you verify: the mark is present, it is hers, and there is a hair of variance in the axis that will make the Palework channel run just slightly oblique. Not broken. Not clean. You name it to her without softening it; she nods once and says, 'I can live with oblique.' Then she picks up the chasing chisel and deepens the transverse herself, reading from your tracing on the blade, and this part goes better than it should — a rerolled moment where the chisel finds the right angle on the first pass and the groove opens to three times its old depth in a single clean cut. The channel closes when you test it with the spent rune-wax against the iron: the wax reads, the transverse holds, the circuit is whole.\n\nThe memory-capacitor is the last piece and the messiest. The augment goes into the socket collar — a length of wax cord you press into the collar-groove with pitch-ink, a second binding intended to let the spear hold the shape of what it has struck rather than releasing it at the moment of the kill. It would make the death-register legible later, outside the kill-moment's narrow window. It seats, the pitch takes, the collar-groove closes around it — but when you name the attunement through Order-Sense, working the rune-lines into a ritual inventory of the spear's own structure, the capacitor threads slightly loose at the north quarter of the collar. It will hold under ordinary use. Under the shock of a kill, particularly a hard-body strike, the thread may slip. The spear is upgraded; the upgrade is rough. The death-register is now available before and after the kill moment, not only during — but the collar wants finishing work, and you both know it.\n\nBy the time you set the blade down Huginn has gone still. The fire in the south pit has coaled to a steady orange low. Outside the lane is dark and absolutely quiet. Pell wipes the chisel and sets it on the rack and looks at the spear for a long moment without speaking. Then: 'What does oblique cost you, in practice?'",
-      "sceneSummary": "The Deathbound Runic Spear upgraded through a full night's work — circuit deepened, maker's mark re-seated, memory-capacitor installed rough at the collar.",
+      "narration": "You lay two fingers on the collar without pressing — just touching the iron near the north quarter seam, where the capacitor sits slightly canted in its bed. Order-Sense comes in quiet and narrow, the way it reads small things: not the whole spear, just this joint, just the pitch in the gap.\n\nThe pitch is still warm. Barely. There's a window — maybe a quarter-hour before it stiffens past the point of correction. The Order-Sense reads the gap's geometry cleanly: the north quarter is canted about two degrees off its seat, and the pitch hasn't fully bridged the void on the inside edge. If you press now, slow and even, it will close. If you wait until morning it will set crooked and stay that way.\n\nYou say it plain: \"Still workable. North edge, light even pressure — don't rush it.\" Pell is already moving, her thumb finding the edge of the collar without being shown where. She presses with the heel of her thumb — not a push, just weight, steady and patient — and you watch the faint gleam of pitch squeeze to the surface at the gap's mouth. Huginn leans forward an inch, eye on the seam. Nobody says anything. Thirty seconds, then Pell lifts her thumb and wipes it on her apron.\n\nThe north quarter sits flush.",
+      "sceneSummary": "Order-Sense found the warm pitch — the collar's north quarter pressed flush before it set.",
       "choices": [
         {
-          "label": "Answer her honestly — the oblique axis means the channel will run slightly wide of center on a direct strike; it reads, but less precisely. Ask if she wants to correct it now or leave it as a known variable.",
+          "label": "Open the wine and give Pell the starfruit — the work is done, let the night end well.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "honest",
-            "teach",
-            "plan"
+            "gift",
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense to check whether the capacitor's loose north quarter can be pressed tighter while the pitch is still slightly warm — a small correction window, if it exists.",
+          "label": "Use Deathsense on the finished spear — feel whether the death-register now reads cleanly end to end.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.5
+            "death_life": -0.4
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "careful",
-            "repair",
-            "study"
+            "study",
+            "check"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "deathsense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Open the resin mountain wine now — the work is done, the fire is low, and you have things to say to each other that aren't about iron.",
+          "label": "Tell Pell plainly what the oblique axis costs — what using the spear through a maker's mark that isn't yours actually feels like in practice.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "rest"
+            "explain",
+            "honest"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Tell her what the memory-capacitor is actually for — that you want the spear to hold the register of a death long enough to read it back, and name what you're hoping to learn from the next kill.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
+          "label": "Get some sleep — the fire is low, the work is done, and the river scout is tomorrow.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "honest",
-            "reveal",
-            "teach"
+            "rest"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -863,35 +862,34 @@
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -9
+        "energy": -3
       },
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — deep night trending toward pre-dawn, south pit fire coaled to steady orange low, bench-top lit by that flat persistent glow. Both Silas and Pell standing over the finished spear.",
+        "setting": "Pell's forge, south lane, Millbrook — dawn light beginning to pale the gap under the door; south pit fire coaled to low orange, bench lit by that flat persistent glow.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Chisel wiped and racked, looking at the finished spear — just asked what the oblique axis costs in practice."
+            "state": "Wiping pitch from her thumb on her apron, looking at the now-flush collar with the expression of finished work."
           },
           {
             "name": "Huginn",
-            "state": "Still at the bench-end, head low, attending the finished work."
+            "state": "Leaning back from the seam, settled — attending the completed spear."
           }
         ],
         "objects": [
-          "Deathbound Runic Spear (upgraded — transverse deepened, maker's mark re-seated, memory-capacitor installed rough at collar north quarter)",
-          "Spent rune-wax stub (used in testing — on bench)",
-          "Resin Mountain Wine (unopened — on bench)",
+          "Deathbound Runic Spear (upgraded — transverse deepened, maker's mark re-seated, memory-capacitor now flush-set at collar)",
+          "Spent rune-wax stub (on bench)",
+          "Resin Mountain Wine (unopened, on bench)",
           "Dried Starfruit sealed packet (beside the wine)",
           "River whetstone (on bench)",
-          "Rune-Craft Kit (spent further — wax cord and pitch-ink used in the capacitor install)",
+          "Rune-Craft Kit (spent further)",
           "South pit fire (coaled to low orange)",
           "Drawing salve tin (shelf above bench)"
         ],
         "threads": [
-          "Pell's question live — what does the oblique axis cost in practice?",
-          "Collar north quarter: loose thread in the memory-capacitor — may slip under hard-body strike shock",
-          "Wine and starfruit still waiting",
-          "River scout — outstanding thread of the provisioning deal, deferred to tomorrow"
+          "Wine and starfruit still waiting — the gifts haven't been opened",
+          "Pell's question about the oblique axis still unanswered",
+          "River scout — outstanding thread of the provisioning deal, deferred to today"
         ]
       },
       "npcUpdates": [
@@ -899,58 +897,16 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Re-seated her maker's mark under guidance — slightly off-true, accepted the variance without complaint. Deepened the transverse channel cleanly on a single pass. Wiped the chisel and asked what the oblique axis costs in practice.",
+          "note": "Pressed the collar's north quarter flush with her thumb on Silas's word — patient, even, no ceremony. Work reads as done.",
           "learned": [
-            "Her maker's mark re-seated into the binding — present and received, but with a hair of axial variance she has named and accepted",
-            "The transverse channel deepened by her own hand — three times its original depth, circuit now load-bearing",
-            "Memory-capacitor installed at the collar socket — she witnessed the full process and knows the north quarter runs slightly loose",
-            "Understands that the spear can now hold a death-register before and after the kill moment, not only during"
+            "The capacitor's north quarter is now flush — pressed while the pitch was still warm, sealed properly"
           ],
           "skillsObserved": [
-            "chasing chisel work at precision depth — single clean pass on the transverse",
-            "accepting a known variance and naming it rather than reworking unnecessarily",
-            "staying present through a six-hour repair without flagging"
+            "precise pressure work on a cooling joint without instruction"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge bench with Silas, deep night — repair complete, asking the first practical question about the oblique axis."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "note": "Attended the full repair without intervention — went still when the work concluded. Still at bench-end.",
-          "learned": [
-            "Memory-capacitor installed in the spear's collar — witnessed the rough seat at the north quarter"
-          ],
-          "status": "active",
-          "statusNote": "Perched at bench-end, still, attending the finished spear."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Deathbound Runic Spear has been upgraded — transverse channel deepened, maker's mark re-seated (slightly oblique), memory-capacitor installed rough at the collar north quarter. Death-register now accessible before and after the kill moment. Collar wants finishing work.",
-          "subjectId": "pell"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Spear repair completed at the forge bench on World-day 14 deep night — rune-wax cord and pitch-ink spent in the capacitor install, transverse channel deepened in the iron. Bench carries the marks of the work: pitch stain, chisel filings, spent wax.",
-          "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Spear repair completed — bench marked by the work. South pit at low coal. Pre-dawn quiet.",
-            "visited": true
-          }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Spear repair occupies the night — river scout still the one outstanding thread; to be planned in the morning."
+          "statusNote": "At the forge bench with Silas, dawn — the spear repair fully complete."
         }
       ],
       "codexUpdates": [
@@ -958,62 +914,64 @@
           "topic": "death-bound-spear",
           "label": "The Death-Bound Spear",
           "kind": "lore",
-          "fact": "Upgrade completed rough: transverse deepened, maker's mark re-seated with slight axial variance, memory-capacitor installed at collar (north quarter loose). Death-register now readable before and after kill, not only during. Collar needs finishing work before full reliability under hard-body shock.",
+          "fact": "Memory-capacitor at the collar north quarter pressed flush before the pitch set — Order-Sense found the correction window. The spear is now fully seated: transverse deepened, maker's mark re-seated oblique, capacitor flush. No remaining known faults.",
           "links": [
             "pell",
             "millbrook",
             "palework",
-            "order_sense",
-            "huginn"
-          ]
-        },
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Re-seated her maker's mark in the binding under guidance — slightly off-true, accepted without complaint ('I can live with oblique'). Cut the transverse clean on a single pass. Stayed present through the full repair. Now asking what the oblique axis costs in practice.",
-          "links": [
-            "death-bound-spear",
-            "millbrook",
-            "palework"
+            "deathsense",
+            "order-sense"
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "Spear repair fully completed at dawn — north quarter capacitor pressed flush. Bench carries pitch-smear and the marks of the night's work.",
+          "subPlace": {
+            "name": "Pell's Forge",
+            "note": "Full repair concluded at dawn — collar flush, spear complete. Bench marked by a full night's craft.",
+            "visited": true
+          }
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Deathbound Runic Spear is fully repaired and seated — all known faults addressed, memory-capacitor flush at the collar. No remaining structural issues as of World-day 14 dawn.",
+          "subjectId": "pell"
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 5,
-        "why": "Full gambit repair — inspection, mark re-seating, transverse deepening, capacitor install — ran most of the deep night"
-      },
-      "imagePrompt": "A forge bench in orange coal-light, deep night. A long iron-tipped spear laid flat between two people — a lean scarred man and a broad-shouldered woman with a chisel in her hand, both leaning over the blade. A large grey-black corvid perches at the bench-end, utterly still, head angled down toward the iron. The pitch stains and wax scraps of a night's work are scattered across the wood.",
-      "momentArt": "https://image.pollinations.ai/prompt/A%20forge%20bench%20in%20orange%20coal-light%2C%20deep%20night.%20A%20long%20iron-tipped%20spear%20laid%20flat%20between%20two%20people%20%E2%80%94%20a%20lean%20scarred%20man%20and%20a%20broad-shouldered%20woman%20with%20a%20chisel%20in%20her%20hand%2C%20both%20leaning%20over%20the%20blade.%20A%20large%20grey-black%20corvid%20perches%20at%20the%20bench-end%2C%20utterly%20still%2C%20head%20angled%20down%20toward%20t%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=86034&nologo=true"
+        "hoursPassed": 0.25,
+        "why": "A quick correction — thirty seconds of pressure and a moment of reading; barely a quarter-hour."
+      }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — deep night trending toward pre-dawn, south pit fire coaled to steady orange low, bench-top lit by that flat persistent glow. Both Silas and Pell standing over the finished spear.",
+      "setting": "Pell's forge, south lane, Millbrook — dawn light beginning to pale the gap under the door; south pit fire coaled to low orange, bench lit by that flat persistent glow.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Chisel wiped and racked, looking at the finished spear — just asked what the oblique axis costs in practice."
+          "state": "Wiping pitch from her thumb on her apron, looking at the now-flush collar with the expression of finished work."
         },
         {
           "name": "Huginn",
-          "state": "Still at the bench-end, head low, attending the finished work."
+          "state": "Leaning back from the seam, settled — attending the completed spear."
         }
       ],
       "objects": [
         "Deathbound Runic Spear (upgraded — transverse deepened, maker's mark re-seated, ",
-        "Spent rune-wax stub (used in testing — on bench)",
-        "Resin Mountain Wine (unopened — on bench)",
+        "Spent rune-wax stub (on bench)",
+        "Resin Mountain Wine (unopened, on bench)",
         "Dried Starfruit sealed packet (beside the wine)",
         "River whetstone (on bench)",
-        "Rune-Craft Kit (spent further — wax cord and pitch-ink used in the capacitor ins",
+        "Rune-Craft Kit (spent further)",
         "South pit fire (coaled to low orange)",
         "Drawing salve tin (shelf above bench)"
       ],
       "threads": [
-        "Pell's question live — what does the oblique axis cost in practice?",
-        "Collar north quarter: loose thread in the memory-capacitor — may slip under hard-body strike shock",
-        "Wine and starfruit still waiting",
-        "River scout — outstanding thread of the provisioning deal, deferred to tomorrow"
+        "Wine and starfruit still waiting — the gifts haven't been opened",
+        "Pell's question about the oblique axis still unanswered",
+        "River scout — outstanding thread of the provisioning deal, deferred to today"
       ]
     }
   },
@@ -1161,7 +1119,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Told Silas 'fire'll be ready' — forge afternoon confirmed, she's heading there now.",
         "[d2] Had the fire up as promised — gave Silas water, soap, and apron without preamble. Back to boot-lacing, entirely practical.",
         "[d2] Clocked the mountain wine and the old pass-circuit knot on the starfruit packet — named them both without prompting, then set her boot down and looked at Silas. Waiting, not reachi",
         "[d2] Received Silas's honest deflection — named the starfruit's age by the cord, acknowledged the weird, set the bull down plainly. Moved both gifts to the bench as things that stay. Op",
@@ -1170,28 +1127,29 @@
         "[d2] Named her maker's mark — a double-stamp pressed at the moment a piece is finished — and described feeling the kill close through her hand rather than the spear, like pressing a sta",
         "[d2] Watched Silas demonstrate Palework on the spent rune-wax — observed the ability directly for the first time. Now looking at the transverse fault he indicated in the blade.",
         "[d2] Agreed plainly to plan the repair together — 'Yes', no ceremony. Now holding the transverse fault and asking the right structural question: does it need deepening, rewriting, or re",
-        "[d2] Re-seated her maker's mark under guidance — slightly off-true, accepted the variance without complaint. Deepened the transverse channel cleanly on a single pass. Wiped the chisel a"
+        "[d2] Re-seated her maker's mark under guidance — slightly off-true, accepted the variance without complaint. Deepened the transverse channel cleanly on a single pass. Wiped the chisel a",
+        "[d2] Pressed the collar's north quarter flush with her thumb on Silas's word — patient, even, no ceremony. Work reads as done."
       ],
       "knownFacts": [
-        "The binding read her mark as 'still becoming' — unfinished intention — and held rather than passed the channel",
         "Palework reads endings-that-are-also-completions differently from endings-that-are-just-stops",
         "The transverse rune-line being too shallow is the structural reason the channel found nowhere to land at kill-speed",
         "Has placed her maker's mark as being 'in' the binding rather than just 'on' it — the distinction now live in her thinking",
         "Is asking whether the repair begins with ironwork (deepening the channel) or with her intention re-seated in the mark",
         "Her maker's mark re-seated into the binding — present and received, but with a hair of axial variance she has named and accepted",
         "The transverse channel deepened by her own hand — three times its original depth, circuit now load-bearing",
-        "Memory-capacitor installed at the collar socket — she witnessed the full process and knows the north quarter runs slightly loose"
+        "Memory-capacitor installed at the collar socket — she witnessed the full process and knows the north quarter runs slightly loose",
+        "The capacitor's north quarter is now flush — pressed while the pitch was still warm, sealed properly"
       ],
       "skillsObserved": [
-        "reading ironwork and rune-marks without instruction",
         "reading ironwork at the forensic level — tracked the binding",
         "reading a repair problem at the structural level without bei",
         "chasing chisel work at precision depth — single clean pass o",
         "accepting a known variance and naming it rather than reworki",
-        "staying present through a six-hour repair without flagging"
+        "staying present through a six-hour repair without flagging",
+        "precise pressure work on a cooling joint without instruction"
       ],
       "status": "active",
-      "statusNote": "At the forge bench with Silas, deep night — repair complete, asking the first practical question about the oblique axis.",
+      "statusNote": "At the forge bench with Silas, dawn — the spear repair fully complete.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1296,7 +1254,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Silas slept inside the forge on World-day 13 night — canvas behind the bellows, by invitation. The forge is now a place of both craft and something harder to name.",
         "[d1] Silas slept a full night in the forge interior — canvas near the hearth, undisturbed. The hearth has coaled nearly to dark by pre-dawn.",
         "[d1] Sow killed in the sedge strip on World-day 14 pre-dawn — ground disturbed, piglets scattered north. The strip now reads as hunted.",
         "[d1] Bull's track confirmed northwest toward scrub oak ridge — Order-Sense read: unhurried relocation, bedded or feeding along the ridge's southern edge in early light.",
@@ -1307,7 +1264,8 @@
         "[d2] Hunt smell washed off in the forge bucket — south pit fire lit and building toward working heat. Wine and starfruit set near the door.",
         "[d2] Deathbound Runic Spear laid on the bench for examination — the misfired binding now openly named between Silas and Pell. Deep night, fire at working heat.",
         "[d2] Spear repair planning begun at the forge bench on World-day 14 deep night — Pell and Silas both assessing the transverse fault; Huginn attending.",
-        "[d2] Spear repair completed at the forge bench on World-day 14 deep night — rune-wax cord and pitch-ink spent in the capacitor install, transverse channel deepened in the iron. Bench carries the marks of t"
+        "[d2] Spear repair completed at the forge bench on World-day 14 deep night — rune-wax cord and pitch-ink spent in the capacitor install, transverse channel deepened in the iron. Bench carries the marks of t",
+        "[d2] Spear repair fully completed at dawn — north quarter capacitor pressed flush. Bench carries pitch-smear and the marks of the night's work."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1350,7 +1308,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Spear repair completed — bench marked by the work. South pit at low coal. Pre-dawn quiet."
+          "note": "Full repair concluded at dawn — collar flush, spear complete. Bench marked by a full night's craft."
         },
         "mara-wells-s-store": {
           "name": "Mara Wells's Store",
@@ -1765,7 +1723,6 @@
         "label": "The Death-Bound Spear",
         "kind": "lore",
         "facts": [
-          "[d1] Pell Marsh now knows her maker's mark is load-bearing in the death-binding — not metaphor, structural. She is waiting to understand what 'grows into' means practically. The spear's nature is unresolve",
           "[d1] Silas confirmed to Pell plainly: the spear is a beginning, not a finished artifact. Its nature — what the binding, Pell's mark, and Huginn's thread become together — will only be revealed through use ",
           "[d1] Pell reports the iron 'waited' for her hand when she pressed the maker's mark — a sensation she has never felt before. The spear is behaving like something with a preference.",
           "[d1] The Huginn-thread is now present and mutual — not a tether but a mutual registration, like a name between two who already knew each other's faces. The binding is still rough, but oriented. The spear k",
@@ -1776,7 +1733,8 @@
           "[d2] The binding fault is structural: the transverse rune-line is too shallow to close the circuit at kill-speed. The maker's mark was not the problem — it was the thing the binding protected. Repair requi",
           "[d2] Palework demonstrated on the spent rune-wax made the ability's intent legible to Pell — she now understands what the channel was supposed to carry and where the transverse fault prevented it from land",
           "[d2] Pell has agreed to plan the repair as a shared undertaking. The repair question is now three-way: deepen the transverse channel, rewrite the rune into deeper iron, and determine whether Pell's maker's",
-          "[d2] Upgrade completed rough: transverse deepened, maker's mark re-seated with slight axial variance, memory-capacitor installed at collar (north quarter loose). Death-register now readable before and afte"
+          "[d2] Upgrade completed rough: transverse deepened, maker's mark re-seated with slight axial variance, memory-capacitor installed at collar (north quarter loose). Death-register now readable before and afte",
+          "[d2] Memory-capacitor at the collar north quarter pressed flush before the pitch set — Order-Sense found the correction window. The spear is now fully seated: transverse deepened, maker's mark re-seated ob"
         ],
         "links": [
           "pell",
@@ -1814,14 +1772,14 @@
     }
   },
   "tendencies": {
-    "strategic": 50.96505422045818,
-    "cerebral": 29.745757468350686,
-    "social": 53.89242330029205,
-    "generous": 11.359808394488248,
-    "cautious": 21.98600124894019,
-    "physical": 1.755971182648575,
-    "risky": 0.8734200960253871,
-    "ruthless": 0.8955869907338783
+    "strategic": 50.71022894935589,
+    "cerebral": 30.597028681008933,
+    "social": 53.62296118379059,
+    "generous": 11.303009352515806,
+    "cautious": 22.87607124269549,
+    "physical": 1.7471913267353323,
+    "risky": 0.8690529955452602,
+    "ruthless": 0.8911090557802088
   },
   "aptitudes": [
     "strategist",
@@ -1829,7 +1787,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 111,
+  "actionCount": 112,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1891,8 +1849,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1784035772224,
-  "rev": 171,
+  "updatedAt": 1784036135242,
+  "rev": 172,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2014,6 +1972,12 @@
       "text": "The Deathbound Runic Spear has been upgraded — transverse channel deepened, maker's mark re-seated (slightly oblique), memory-capacitor installed rough at the collar north quarter. Death-register now ",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "The Deathbound Runic Spear is fully repaired and seated — all known faults addressed, memory-capacitor flush at the collar. No remaining structural issues as of World-day 14 dawn.",
+      "day": 2,
+      "subjectId": "pell"
     }
   ],
   "practice": {
@@ -2021,7 +1985,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 25,
+      "order_sense": 26,
       "palework": 10,
       "deathsense": 7,
       "shadowstep": 2

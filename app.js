@@ -25,7 +25,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.59";
+const APP_VERSION = "1.8.60";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -118,6 +118,7 @@ let quietTurns = 0;             // consecutive uneventful GM turns
 let pressureStreak = 0;         // pressures applied in the current idle streak (escalation level)
 let pendingPressure = null;     // a world-pressure directive to weave into the next GM turn
 let pendingSubstrateNote = null; // SNG-090: a "the lattice is thin/crowded here" note for the next GM turn
+let pendingRankAdvances = []; // ability-arch v2: abilities that auto-advanced to rank 2 through use, to toast
 
 // ---------- boot ----------
 
@@ -2234,6 +2235,49 @@ async function startScene(prompt = "(Scene opening — set the scene where the c
   if (result) renderPlay(result.turn, { degraded: result.degraded, newsFlash: news, aside });
 }
 
+/** ability-arch v2: the deepen affordance is GONE — depth is earned, not bought. This returns the
+ *  progress line shown wherever a rank-up button used to be. Rank 1 → shows uses toward rank 2 (which
+ *  lands automatically); rank 2 → mastery awaits a defining moment (GM); rank 3 → mastered. */
+function rankProgress(character, abId) {
+  const rules = CONTENT.rules;
+  const owned = (character.abilities || []).find(a => a.abilityId === abId);
+  const maxRank = rules.leveling?.maxAbilityRank ?? 3;
+  if (!owned) return { text: "", ripe: false };
+  if (owned.level >= maxRank) return { text: "✓ mastered — rank 3", ripe: false };
+  const uses = character.practice?.uses?.[abId] || 0;
+  if (owned.level === 1) {
+    const need = rules.practice?.useRankThreshold?.["2"] ?? 8;
+    return { text: `rank 1 · practiced ${Math.min(uses, need)}/${need} → rank 2 lands through use`, ripe: false, uses, need };
+  }
+  // rank 2 → mastery is a defining moment (GM), gated on practice + rank3Min
+  const need = rules.practice?.useRankThreshold?.["3"] ?? 16;
+  const practiced = uses >= need;
+  const gateOk = meetsRank3Gate(character, abId, CONTENT.attributeGates).ok;
+  const ripe = practiced && gateOk;
+  const text = ripe ? "rank 2 · ripe for a defining moment (the GM marks mastery when a beat earns it)"
+    : !practiced ? `rank 2 · practiced ${Math.min(uses, need)}/${need} toward mastery`
+    : `rank 2 · needs ${gateFor(abId, CONTENT.attributeGates)?.subAttribute || "attribute"} ${gateFor(abId, CONTENT.attributeGates)?.rank3Min || ""} for mastery`;
+  return { text, ripe, uses, need };
+}
+
+/** ability-arch v2: owned rank-2 crafts that are practiced enough AND past their rank-3 attribute gate
+ *  and the level bar — i.e. a GM `markDefiningMoment` would land. Named for the GM's RIPE FOR MASTERY
+ *  block so it only narrates a breakthrough the engine will honor. Null when nothing is ripe. */
+function masteryReadyForGM() {
+  const rules = CONTENT.rules;
+  const req3 = rules.leveling?.rankLevelReq?.["3"] ?? 1;
+  const names = [];
+  for (const owned of character.abilities || []) {
+    if (owned.level !== 2) continue;
+    if (!practiceRankReady(character, owned.abilityId, rules)) continue;      // uses ≥ rank-3 threshold
+    if ((character.level || 1) < req3) continue;
+    if (!meetsRank3Gate(character, owned.abilityId, CONTENT.attributeGates).ok) continue;
+    const ab = fullCatalog()[owned.abilityId];
+    if (ab) names.push(`${ab.name} (${owned.abilityId})`);
+  }
+  return names.length ? names.join("; ") : null;
+}
+
 async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   busy = true;
   // SNG-075: an encounter the narrative-time roll turned up last beat is WOVEN into this turn.
@@ -2248,6 +2292,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // Romance: on a flirtatious/romantic intent this turn, pull the craft-guidance doc so the GM narrates
   // the beat well at the player's rating. Rides the intent tags parseIntent already emits — no extra call.
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
+  const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
@@ -2279,6 +2324,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     worldPressureDetail,  // SNG-080: after quiet turns, a directive to make the world ACT
     substrateDetail,      // SNG-090: the lattice density is thin/crowding the craft here
     romanceGuidanceDetail, // romance: pulled craft guidance on a flirtatious/romantic beat
+    masteryDetail,        // ability-arch v2: rank-2 crafts ripe for a GM-marked defining moment
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
@@ -2298,6 +2344,13 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // half of the scene has no permanence (the deepest continuity bug in the project).
   const playerWords = exactWords || resolution?.action?.label || (typeof playerInput === "string" && !/^\(/.test(playerInput) ? playerInput : null);
   applyTurn(result.turn, resolution, playerWords);
+  // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became
+  // fluent this turn (deduped). Rank 3 is never here; it comes as a GM-marked defining moment.
+  if (pendingRankAdvances.length) {
+    const names = [...new Set(pendingRankAdvances)].map(id => fullCatalog()[id]?.name).filter(Boolean);
+    pendingRankAdvances = [];
+    if (names.length) result.turn.narration = (result.turn.narration || "") + "\n\n" + names.map(n => `*▲ Practiced — **${n}** is fluent now (rank 2), earned through use.*`).join("\n");
+  }
   // SNG-BATCH-9: the world grows through play — mint any entities the fiction reached for,
   // persist them durable + in-grain, and surface a light note. A generation failure never
   // halts the turn (the narration already stands).
@@ -2432,6 +2485,17 @@ function applyTurn(turn, resolution, playerWords = null) {
       character.precursorAccess = [...(character.precursorAccess || []), pid];
       turn.narration += `\n\n*✦ A door opens that was never on any list: **${ab.name}** may now be learned (${String(turn.unlockPrecursor.via).slice(0, 80)}).*`;
     }
+  }
+  // ability-arch v2: the GM marks a defining moment → rank 3 (mastery). The engine confirms the earn
+  // (rank 2, practiced, gates met) so mastery can never be handed to an unpracticed craft. A craft that
+  // forks at rank 3 needs the player to choose its permanent path first (Law 9) — flag it for the
+  // Character screen rather than auto-choosing.
+  if (turn.markDefiningMoment?.abilityId) {
+    const mid = turn.markDefiningMoment.abilityId;
+    const ab = fullCatalog()[mid];
+    const r = markDefiningMoment(character, mid, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks });
+    if (r.ok) turn.narration += `\n\n*✦ A defining moment — **${ab?.name}** is mastered now (rank 3).*`;
+    else if (r.forkPending) { character.pendingMasteryFork = mid; turn.narration += `\n\n*⑂ A defining moment for **${ab?.name}** — but it stands at a fork. Choose its path on your Character screen to master it.*`; }
   }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {
@@ -2686,7 +2750,7 @@ async function onChoice(choice) {
   // SNG-010: practice ledger — the single counting site
   {
     const usedIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
-    if (usedIds.length) recordUse(character, usedIds);
+    if (usedIds.length) { recordUse(character, usedIds); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks })); }
     // SNG-010C: a cast channeled with a bond-source companion present wakes evolving gear
     itemsAdvanced = noteCoUseAndRefresh(character, { usedAbilityIds: usedIds, activeCompanionIds: activeCompanions(character, CONTENT.companions).map(c => c.id), catalog: CONTENT.items });
     if (usedIds.length) notePerception(character, character.currentLocationId, hereNow(), { visited: true, usedAbilityIds: usedIds }, CONTENT.rules);
@@ -3164,17 +3228,9 @@ function skillSelectionActions(ab) {
   const ladderBlock = ladder ? `<div class="skill-ladder">${ladder}</div>` : "";
 
   if (owned) {
-    const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
-    const nextReq = rules.leveling?.rankLevelReq?.[String(owned.level + 1)];
-    const atMax = owned.level >= maxRank;
-    const levelOk = character.level >= (nextReq ?? 1);
-    const practiced = practiceRankReady(character, ab.id, rules) && !atMax && levelOk;
-    const canRank = !atMax && levelOk && (sp >= rankCost || practiced);
-    return `<div class="skill-actions">${ladderBlock}
-      ${canRank
-        ? `<button class="btn" data-skillrank="${esc(ab.id)}">▲ ${practiced && sp < rankCost ? "Rank up — practiced, free" : `Rank up (${rankCost} pt${rankCost > 1 ? "s" : ""})`}</button>`
-        : `<span class="hint">${atMax ? "✓ mastered — highest rank" : !levelOk ? `deepens at level ${nextReq}` : `needs ${rankCost} point${rankCost > 1 ? "s" : ""} (you have ${sp})`}</span>`}
-    </div>`;
+    // ability-arch v2: depth is earned through use, never bought — show progress, not a buy button.
+    const p = rankProgress(character, ab.id);
+    return `<div class="skill-actions">${ladderBlock}<span class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</span></div>`;
   }
   // not owned → the learn path (same gate as the Level-Up modal's learnRow)
   const req = learnLevelReq(ab);
@@ -3204,14 +3260,8 @@ function wireSkillSelectionActions(rerender) {
     if (r.ok) { if (free) dropAspiration(character, id); saveCharacter(character); rerender(id, `Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.`); }
     else rerender(id, r.why);
   };
-  for (const b of app.querySelectorAll("[data-skillrank]")) b.onclick = () => {
-    const id = b.dataset.skillrank;
-    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1;
-    const owned = character.abilities.find(a => a.abilityId === id);
-    const doRank = () => { const r = rankUpAbility(character, id, CONTENT.rules, rankOptsFor()); if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); saveCharacter(character); rerender(id, `Deepened ${fullCatalog()[id]?.name} to rank ${character.abilities.find(a => a.abilityId === id)?.level}.`); } else rerender(id, r.why); };
-    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); doRank(); });
-    else doRank();
-  };
+  // ability-arch v2: no data-skillrank handler — ranks are no longer bought here; depth is earned
+  // through use (rank 2 auto) and a GM-marked defining moment (rank 3).
 }
 
 function renderSkillWheel(selectedId = null, status = "") {
@@ -3503,17 +3553,15 @@ function renderLevelUp(status = "") {
 
   chrome(`<div class="screen" style="max-width:720px">
     <h2>⬆ Level Up ${infoDot("ability.ranks")}</h2>
-    <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong>. Deepen a craft you know, or learn a new one — your domains decide what's open. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
+    <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong> — points <strong>learn new crafts</strong> (breadth). <strong>Depth is earned through use</strong>, not bought. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent)">${esc(status)}</div>` : ""}
 
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Deepen a craft ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— rank up what you know</span></h3>
-      ${rankRows.map(r => `<div class="cs-ability">
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your crafts ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— depth is earned through use, not points</span></h3>
+      ${rankRows.map(r => { const p = rankProgress(character, r.a.abilityId); return `<div class="cs-ability">
         <div><strong>${esc(r.ab.name)}</strong> <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= r.a.level ? "cs-rank-on" : "cs-rank-off"}">${n <= r.a.level ? "●" : "○"}</span>`).join("")}</span> <span class="hint">${r.now ? esc(r.now.name) : ""}</span></div>
         ${r.next ? `<div class="hint">→ ${esc(r.next.name)}: ${esc(r.next.grants || "")}</div>` : ""}
-        ${r.canRank
-          ? `<button class="btn" data-lvlrank="${esc(r.a.abilityId)}">▲ ${r.practiced && sp < r.rankCost ? "Rank up — practiced, free" : `Rank up (${r.rankCost} pt${r.rankCost > 1 ? "s" : ""})`}</button>`
-          : `<span class="hint">${r.atMax ? "mastered — highest rank" : !r.levelOk ? "needs level " + (rules.leveling?.rankLevelReq?.[String(r.a.level + 1)]) : "needs " + r.rankCost + " point" + (r.rankCost > 1 ? "s" : "")}</span>`}
-      </div>`).join("") || "<div class='insight'>nothing to deepen yet</div>"}
+        <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>
+      </div>`; }).join("") || "<div class='insight'>no crafts yet — learn one below</div>"}
     </div>
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Learn a new craft ${infoDot("circle.domains")} <span class="hint" style="text-transform:none">— broaden into your domains</span></h3>
@@ -3526,14 +3574,7 @@ function renderLevelUp(status = "") {
     <button class="btn secondary" id="lvl-back">Done</button>
   </div>`);
 
-  for (const b of app.querySelectorAll("[data-lvlrank]")) b.onclick = () => {
-    const id = b.dataset.lvlrank;
-    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1;
-    const owned = character.abilities.find(a => a.abilityId === id);
-    const doRank = () => { const r = rankUpAbility(character, id, rules, rankOptsFor()); if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); saveCharacter(character); renderLevelUp(`Deepened ${fullCatalog()[id]?.name} to rank ${character.abilities.find(a => a.abilityId === id)?.level}.`); } else renderLevelUp(r.why); };
-    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); doRank(); });
-    else doRank();
-  };
+  // ability-arch v2: no data-lvlrank handler — depth is earned through use, not bought.
   for (const b of app.querySelectorAll("[data-lvllearn]")) b.onclick = () => {
     const id = b.dataset.lvllearn;
     const free = aspirationRipe(character, id, rules);
@@ -3576,15 +3617,14 @@ function renderCharacterScreen() {
           <span class="cs-val">${v}</span>
           ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
         </div>`; }).join("")}</div>
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities ${infoDot("ability.tiers")} <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; points deepen owned skills" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities ${infoDot("ability.tiers")} <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; new points learn other crafts" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
+      ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
-        const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
-        const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity); // SNG-047+: cross-class doubles
-        const canRank = character.skillPoints >= rankCost && a.level < (rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
-        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}${rankCost > 1 ? ", cross-class" : ""}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
+        const p = rankProgress(character, a.abilityId);
+        return `<div class="cs-ability"><span class="tier-badge">${tierOf(ab.levelReq)}</span> <strong>${esc(ab.name)}</strong> <span class="hint">(${ab.powerSystem === "learned" ? "learned" : ab.powerSystem}) · ${cost} energy${cost < ab.energyCost ? ` (was ${ab.energyCost})` : ""}</span>
           <span class="cs-ranks">${[1, 2, 3].map(r => `<span class="${r <= a.level ? "cs-rank-on" : "cs-rank-off"}" title="${esc(ab.tree?.[r - 1]?.name || "")}">${r <= a.level ? "●" : "○"}</span>`).join("")}</span>
-          ${canRank ? `<button class="grow-btn" data-rank2="${esc(a.abilityId)}" title="Spend ${rankCost} skill point${rankCost > 1 ? "s (cross-class)" : ""}">▲${rankCost > 1 ? "×" + rankCost : ""}</button>` : ""}
-          ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}</div>`; }).join("")}
+          ${ab.tree?.[a.level - 1] ? `<div class="hint">${esc(ab.tree[a.level - 1].name)}: ${esc(ab.tree[a.level - 1].grants)}</div>` : ""}
+          <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`; }).join("")}
       ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aspirations <span class="hint" style="text-transform:none">(declare what you're working toward — practice makes it free)</span></h3>
       ${(character.practice?.aspirations || []).map(a => { const ab = fullCatalog()[a.abilityId]; const ripe = aspirationRipe(character, a.abilityId, rules); const need = rules.practice?.aspirationRipe ?? 10;
@@ -3621,14 +3661,17 @@ function renderCharacterScreen() {
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const btn of app.querySelectorAll("[data-grow2]")) btn.onclick = () => { if (spendSubPoint(character, btn.dataset.grow2, rules)) { saveCharacter(character); renderCharacterScreen(); } };
-  for (const btn of app.querySelectorAll("[data-rank2]")) btn.onclick = () => {
-    const id = btn.dataset.rank2;
-    const owned = character.abilities.find(a => a.abilityId === id);
-    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1; // SNG-051: cross-class = 2 pts
-    const doRank = () => { const r = rankUpAbility(character, id, rules, rankOptsFor()); if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); saveCharacter(character); renderCharacterScreen(); } else alert(r.why); };
-    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) {
-      renderForkModal(id, (key) => { setFork(character, id, key, CONTENT.branchForks); autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); doRank(); });
-    } else doRank();
+  // ability-arch v2: mastery of a craft that forks at rank 3 — the GM marked the defining moment; the
+  // player chooses the permanent path (Law 9), then the engine lands rank 3.
+  for (const btn of app.querySelectorAll("[data-masteryfork]")) btn.onclick = () => {
+    const id = btn.dataset.masteryfork;
+    renderForkModal(id, (key) => {
+      setFork(character, id, key, CONTENT.branchForks);
+      autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks");
+      const r = markDefiningMoment(character, id, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks });
+      if (r.ok) character.pendingMasteryFork = null;
+      saveCharacter(character); renderCharacterScreen();
+    });
   };
   const aspPick = document.getElementById("asp-pick");
   if (aspPick) aspPick.onchange = () => { if (aspPick.value) { const r = declareAspiration(character, aspPick.value, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); } };
@@ -4517,7 +4560,7 @@ async function finishGambit(run) {
   for (const r of run.receipts) {
     const a = g.actions[r.index];
     const ids = [a?.abilityId, ...(a?.comboAbilities || [])].filter(Boolean);
-    if (ids.length) recordUse(character, ids);
+    if (ids.length) { recordUse(character, ids); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks })); }
   }
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
@@ -4615,15 +4658,12 @@ function renderPlay(turn, opts = {}) {
         const order = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b)));
         const row = ({ a, ab }) => {
           const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
-          const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
-          const nextReq = CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)];
-          const canRank = character.skillPoints >= rankCost && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (nextReq ?? 1);
+          const p = rankProgress(character, a.abilityId); // ability-arch v2: earned, not bought
           return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
             <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
-            ${canRank ? `<button class="grow-btn" data-rankup="${esc(a.abilityId)}" title="Spend ${rankCost} skill point${rankCost > 1 ? "s (cross-class)" : ""}">▲${rankCost > 1 ? "×" + rankCost : ""}</button>` : ""}
-            ${practiceRankReady(character, a.abilityId, CONTENT.rules) && a.level < (CONTENT.rules.leveling?.maxAbilityRank ?? 3) && character.level >= (CONTENT.rules.leveling?.rankLevelReq?.[String(a.level + 1)] ?? 1) ? `<button class="grow-btn practiced" data-rankpractice="${esc(a.abilityId)}" title="Practiced enough — rank up free">▲free</button>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
-            ${functionChips(ab)}</div>`;
+            ${functionChips(ab)}
+            <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`;
         };
         return order.map(cls => `<details class="skill-group" open><summary>${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
@@ -4993,44 +5033,8 @@ function renderPlay(turn, opts = {}) {
   for (const b of app.querySelectorAll("[data-grow]")) b.onclick = () => {
     if (spendSubPoint(character, b.dataset.grow, CONTENT.rules)) { saveCharacter(character); renderPlay(turn || character.activeScene?.lastTurn || null, {}); }
   };
-  const afterRank = (abilityId, r) => {
-    if (abilityId === "old_roads" && r.newRank === 3 && !(character.precursorAccess || []).includes("address_sense")) {
-      character.precursorAccess = [...(character.precursorAccess || []), "address_sense"];
-    }
-    saveCharacter(character);
-    // rank-up highlight: show exactly what the new rank grants (fork-aware) and its new limit
-    const ab = fullCatalog()[abilityId];
-    const gained = rankExpression(character, ab, r.newRank, CONTENT.branchForks);
-    const spent = r.viaPractice ? " — earned by practice, no point spent" : (r.cost > 1 ? ` — ${r.cost} skill points (cross-class)` : "");
-    let aside = `${ab?.name} advances to rank ${r.newRank}${spent}.`;
-    if (gained) aside += `\n✦ Now: ${gained.name}${gained.forked ? " (specialized)" : ""} — ${gained.grants}\n△ New limit: ${gained.cannot}`;
-    if (abilityId === "old_roads" && r.newRank === 3) aside += "\nThe old roads remember you now: Address-Sense may be learned.";
-    renderPlay(turn || character.activeScene?.lastTurn || null, { aside });
-  };
-  // SNG-BATCH-5 Phase 2: fork chooser — the player picks A xor B; the other locks permanently.
-  const offerFork = (abilityId, viaPractice) => renderForkModal(abilityId, (key) => {
-    setFork(character, abilityId, key, CONTENT.branchForks);
-    autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks"); // SNG-051 auto-verify
-    const r = rankUpAbility(character, abilityId, CONTENT.rules, viaPractice ? { viaPractice: true, ...rankOpts() } : rankOpts());
-    if (r.ok) afterRank(abilityId, r); else alert(r.why);
-  });
-  const rankOpts = () => ({ attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, catalog: fullCatalog() });
-  for (const b of app.querySelectorAll("[data-rankup]")) b.onclick = () => {
-    const id = b.dataset.rankup;
-    // SNG-BATCH-5 Phase 2: a fork blocks the linear rank — the player must choose a path first
-    const owned = character.abilities.find(a => a.abilityId === id);
-    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) { offerFork(id, false); return; }
-    const cross = skillPointCost(fullCatalog()[id], character, CONTENT.skillCapacity) > 1; // SNG-051: cross-class = 2 pts
-    const r = rankUpAbility(character, id, CONTENT.rules, rankOpts());
-    if (r.ok) { if (cross) autoVerifyLeg("b5-crossclass", "ranked a cross-class ability (2 pts)"); afterRank(id, r); } else alert(r.why);
-  };
-  for (const b of app.querySelectorAll("[data-rankpractice]")) b.onclick = () => {
-    const id = b.dataset.rankpractice;
-    const owned = character.abilities.find(a => a.abilityId === id);
-    if (owned && forkPending(character, id, owned.level + 1, CONTENT.branchForks)) { offerFork(id, true); return; }
-    const r = rankUpAbility(character, id, CONTENT.rules, { viaPractice: true, ...rankOpts() });
-    if (r.ok) afterRank(id, r); else alert(r.why);
-  };
+  // ability-arch v2: no rank-up handlers in the play ability panel — depth is earned through use
+  // (rank 2 auto) and a GM-marked defining moment (rank 3), not bought here.
   for (const b of app.querySelectorAll("[data-learn]")) b.onclick = () => {
     const free = aspirationRipe(character, b.dataset.learn, CONTENT.rules);
     const r = learnAbility(character, b.dataset.learn, fullCatalog(), CONTENT.rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });

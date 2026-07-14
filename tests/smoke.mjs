@@ -16,7 +16,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment } from "../engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
@@ -2100,6 +2100,42 @@ await (async () => {
   check("romance v2: R+ still holds the line (no graphic mechanical depiction)",
     /not graphic mechanical depiction/i.test(ratingRegister("R+")));
   check("romance v2: an unknown preset falls back to a safe mid register", /short of the explicit/i.test(ratingRegister("???")));
+})();
+
+// --- ability-arch v2: depth is EARNED, not bought ---
+(() => {
+  const rules = { leveling: { maxAbilityRank: 3, rankLevelReq: { "2": 1, "3": 1 } }, practice: { useRankThreshold: { "2": 8, "3": 16 } } };
+  const gates = { gates: { deep_craft: { subAttribute: "insight", learnMin: 1, rank3Min: 5 } } };
+  const mk = (uses = 0) => ({ level: 5, attributes: {}, subAttributes: { insight: 6 }, abilities: [{ abilityId: "deep_craft", level: 1 }], practice: { uses: { deep_craft: uses }, coActivations: {}, aspirations: [] } });
+
+  // rank 1 → 2 does NOT auto-advance before the use threshold
+  let c = mk(7);
+  let adv = autoAdvancePracticedRanks(c, rules);
+  check("rank 2 does not land before the use threshold (7 < 8)", c.abilities[0].level === 1 && adv.length === 0);
+
+  // at the use threshold it auto-advances to rank 2 — no point spent
+  c.practice.uses.deep_craft = 8;
+  adv = autoAdvancePracticedRanks(c, rules);
+  check("rank 2 lands automatically at the use threshold, free", c.abilities[0].level === 2 && adv.includes("deep_craft"));
+
+  // rank 3 is NEVER automatic — auto-advance only ever touches rank 1 → 2
+  c.practice.uses.deep_craft = 20;
+  adv = autoAdvancePracticedRanks(c, rules);
+  check("rank 3 never auto-advances (only 1→2 is automatic)", c.abilities[0].level === 2 && adv.length === 0);
+
+  // markDefiningMoment lands rank 3 once practiced + past the rank3Min gate
+  let r = markDefiningMoment(c, "deep_craft", rules, { attributeGates: gates });
+  check("markDefiningMoment masters a practiced, gated craft to rank 3", r.ok && c.abilities[0].level === 3);
+
+  // the gate holds: an under-invested craft cannot be handed mastery
+  let c2 = mk(16); c2.subAttributes.insight = 2; c2.abilities[0].level = 2;
+  let r2 = markDefiningMoment(c2, "deep_craft", rules, { attributeGates: gates });
+  check("markDefiningMoment refuses rank 3 below the rank3Min gate", !r2.ok && c2.abilities[0].level === 2);
+
+  // and it refuses an unpracticed craft even at rank 2
+  let c3 = mk(0); c3.abilities[0].level = 2;
+  let r3 = markDefiningMoment(c3, "deep_craft", rules, { attributeGates: gates });
+  check("markDefiningMoment refuses an unpracticed craft", !r3.ok && c3.abilities[0].level === 2);
 })();
 
 // --- SNG-045: player identity dedup (one person, one profile) ---

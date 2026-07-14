@@ -8,8 +8,16 @@
 //     critical success mints a permanent named technique with a standing bonus.
 
 import { slugify } from "./quests.js";
-import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression } from "./skilltree.js";
+import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression, forkPending } from "./skilltree.js";
 import { domainAccess } from "./traditions.js";
+
+// Practiced enough for `targetRank`? Inlined (not imported from practice.js) to avoid a circular
+// import — practice.js already imports discoveryKey from here. Mirrors practice.js practiceRankReady.
+function practicedForRank(character, abilityId, targetRank, rules) {
+  const need = rules.leveling?.useRankThreshold?.[String(targetRank)] ?? rules.practice?.useRankThreshold?.[String(targetRank)];
+  if (!need) return false;
+  return (character.practice?.uses?.[abilityId] || 0) >= need;
+}
 
 export const SUB_OF = {
   strength: "physical", agility: "physical",
@@ -122,6 +130,51 @@ export function rankUpAbility(character, abilityId, rules, opts = {}) {
   owned.level++;
   if (!opts.viaPractice) character.skillPoints -= cost;
   return { ok: true, newRank: owned.level, viaPractice: !!opts.viaPractice, cost };
+}
+
+// ---------- ability-arch v2: depth is EARNED, not bought ----------
+
+/** Rank 2 (Practiced) lands AUTOMATICALLY the moment an ability has been used enough (and the level
+ *  bar is met) — no skill point, no player click. Call after recordUse(). Returns the abilityIds that
+ *  advanced this call, so the caller can toast them. Rank 3 is never automatic (see markDefiningMoment):
+ *  it is a defining moment the GM marks. A pending branch fork blocks the auto-advance — a fork is a
+ *  permanent A-xor-B choice (Law 9), so the player must pick it; the fork chooser then advances. */
+export function autoAdvancePracticedRanks(character, rules, opts = {}) {
+  const advanced = [];
+  for (const owned of character.abilities || []) {
+    if (owned.level !== 1) continue;                       // only rank 1 → 2 is automatic
+    if (!practicedForRank(character, owned.abilityId, 2, rules)) continue;
+    const req = rules.leveling?.rankLevelReq?.["2"] ?? 1;
+    if ((character.level || 1) < req) continue;            // the level bar still holds
+    if (opts.branchForks && forkPending(character, owned.abilityId, 2, opts.branchForks)) continue;
+    owned.level = 2;
+    advanced.push(owned.abilityId);
+  }
+  return advanced;
+}
+
+/** Rank 3 (Mastered) — the defining moment. GM-driven only (the markDefiningMoment op), never
+ *  automatic. The engine guards it so mastery can never be handed to an unpracticed craft: the
+ *  ability must be at rank 2, practiced to the rank-3 use threshold, past its rank3Min attribute gate,
+ *  and past the level bar. The GM narrates the breakthrough; the engine decides whether it lands. */
+export function markDefiningMoment(character, abilityId, rules, opts = {}) {
+  const owned = (character.abilities || []).find(a => a.abilityId === abilityId);
+  if (!owned) return { ok: false, why: "not known" };
+  const max = rules.leveling?.maxAbilityRank ?? 3;
+  if (owned.level >= max) return { ok: false, why: "already mastered" };
+  if (owned.level < 2) return { ok: false, why: "not yet practiced — rank 2 comes first" };
+  if (!practicedForRank(character, abilityId, owned.level + 1, rules)) return { ok: false, why: "not practiced enough for mastery yet" };
+  const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
+  if ((character.level || 1) < req) return { ok: false, why: `requires level ${req}` };
+  if (opts.attributeGates) {
+    const g = meetsRank3Gate(character, abilityId, opts.attributeGates);
+    if (!g.ok) return { ok: false, why: g.why };
+  }
+  if (opts.branchForks && forkPending(character, abilityId, owned.level + 1, opts.branchForks)) {
+    return { ok: false, why: "fork", forkPending: true }; // caller resolves the fork, then re-calls
+  }
+  owned.level++;
+  return { ok: true, newRank: owned.level };
 }
 
 /** SNG-003 access rule: own tradition at face value; valley folk take any system

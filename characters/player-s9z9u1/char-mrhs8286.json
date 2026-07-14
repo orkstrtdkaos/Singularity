@@ -766,82 +766,118 @@
         "player": "The wine and starfruit can wait for a bit more... til after we word the forge and learn things... but for the next hour - I could help you wash up a bit more, and you could check my chest for any wounds and put ointment on them.",
         "summary": "Silas and Pell tend each other's hunt-scrapes at the forge — clean and practical, the afternoon now genuinely open.",
         "narration": "The fire in the south pit has found its rhythm — orange-sided heat that makes the wall tools gleam and the far corners soft. Huginn has settled deep into the ridge-beam, a dark shape with one eye half-open, entirely unbothered.\n\nYou set the wine and starfruit to the side of the bench, out of the way but not gone. There's time for those. You tell Pell plainly: you've got some scrub-oak country on you from the hunt, probably a scratch or two on your chest from the gorse, and she's been up since pre-dawn on rough ground. Easier to start clean before the iron gets interesting.\n\nShe doesn't make it a thing. She nods, pulls the water bucket closer, and you work through it practically — she takes the cloth and does your back and shoulders while you work the rest, and you find the two places the gorse got you across the lower ribs, shallow and already-dried, nothing urgent. When you turn she looks them over without fuss, presses the edge of one with a thumb to check it, and finds the small tin of drawing salve on the shelf above the bench without asking whether you want it. Her hands are a craftsperson's hands, direct and economical. She says *two days and they'll be nothing* and means it, the way she'd assess a dull edge.\n\nYou do hers in turn — a bruised forearm from the gorse, a red patch on one knee from the ridge ground. She holds still for the salve the same way she holds still for everything: with the absolute patience of someone who has been through harder things and isn't going to perform the minor ones.\n\nBy the time you're both back in clean shirts and the water bucket is set aside, the fire has climbed another degree toward working heat, and the afternoon is genuinely open. The wine and starfruit are still on the bench. The whetstone is beside them. Huginn has closed the second eye."
+      },
+      {
+        "player": "Lay the Deathbound Runic Spear on the bench — look at the misfired binding together",
+        "summary": "The Deathbound Runic Spear laid on the bench — Pell reads the marks and names the misfire plainly.",
+        "narration": "You lift the Deathbound Runic Spear from where it leans and lay it flat across the bench — shaft overhanging one end, the wide iron blade pointing toward the far wall. The south pit fire does the rest: orange light runs clean along the rune-channels in the iron, and the same light catches the etched marks in the shaft, the Huginn-thread where the wax and pitch-ink dried into the grain.\n\nPell leans in without being invited. She doesn't touch it yet. She reads it the way she'd read any piece of ironwork — starting at the socket throat where shaft meets steel, tracking the binding at the collar, then following the rune-channels up the blade's center to the cutting edge. Her expression stays flat and attentive, the same face she gives a piece she hasn't decided about yet.\n\n\"This is mine,\" she says, fingertip settling on the maker's mark pressed into the iron just above the collar. She says it without pride or alarm — just identification. \"You put it here on purpose.\" Not quite a question. She glances up at you briefly, then back to the blade. \"And it closed. At the kill moment, it just — closed.\" She lifts her hand away and straightens. \"Show me what it was supposed to do.\""
       }
     ],
     "lastTurn": {
-      "narration": "The fire in the south pit has found its rhythm — orange-sided heat that makes the wall tools gleam and the far corners soft. Huginn has settled deep into the ridge-beam, a dark shape with one eye half-open, entirely unbothered.\n\nYou set the wine and starfruit to the side of the bench, out of the way but not gone. There's time for those. You tell Pell plainly: you've got some scrub-oak country on you from the hunt, probably a scratch or two on your chest from the gorse, and she's been up since pre-dawn on rough ground. Easier to start clean before the iron gets interesting.\n\nShe doesn't make it a thing. She nods, pulls the water bucket closer, and you work through it practically — she takes the cloth and does your back and shoulders while you work the rest, and you find the two places the gorse got you across the lower ribs, shallow and already-dried, nothing urgent. When you turn she looks them over without fuss, presses the edge of one with a thumb to check it, and finds the small tin of drawing salve on the shelf above the bench without asking whether you want it. Her hands are a craftsperson's hands, direct and economical. She says *two days and they'll be nothing* and means it, the way she'd assess a dull edge.\n\nYou do hers in turn — a bruised forearm from the gorse, a red patch on one knee from the ridge ground. She holds still for the salve the same way she holds still for everything: with the absolute patience of someone who has been through harder things and isn't going to perform the minor ones.\n\nBy the time you're both back in clean shirts and the water bucket is set aside, the fire has climbed another degree toward working heat, and the afternoon is genuinely open. The wine and starfruit are still on the bench. The whetstone is beside them. Huginn has closed the second eye.",
-      "sceneSummary": "Silas and Pell tend each other's hunt-scrapes at the forge — clean and practical, the afternoon now genuinely open.",
+      "narration": "You lift the Deathbound Runic Spear from where it leans and lay it flat across the bench — shaft overhanging one end, the wide iron blade pointing toward the far wall. The south pit fire does the rest: orange light runs clean along the rune-channels in the iron, and the same light catches the etched marks in the shaft, the Huginn-thread where the wax and pitch-ink dried into the grain.\n\nPell leans in without being invited. She doesn't touch it yet. She reads it the way she'd read any piece of ironwork — starting at the socket throat where shaft meets steel, tracking the binding at the collar, then following the rune-channels up the blade's center to the cutting edge. Her expression stays flat and attentive, the same face she gives a piece she hasn't decided about yet.\n\n\"This is mine,\" she says, fingertip settling on the maker's mark pressed into the iron just above the collar. She says it without pride or alarm — just identification. \"You put it here on purpose.\" Not quite a question. She glances up at you briefly, then back to the blade. \"And it closed. At the kill moment, it just — closed.\" She lifts her hand away and straightens. \"Show me what it was supposed to do.\"",
+      "sceneSummary": "The Deathbound Runic Spear laid on the bench — Pell reads the marks and names the misfire plainly.",
       "choices": [
         {
-          "label": "Open the grain-reading conversation — show her something at the anvil with the fire at your back",
+          "label": "Explain what the death-register is — what you were trying to pass through the blade at the moment of the kill, and what the binding closed against",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "explain",
             "teach",
-            "connect"
+            "honest"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Take the wine first — open the bottle, pour two cups, let the afternoon slow before it quickens",
+          "label": "Ask her what she felt — if anything — at the kill moment, from her end of the mark",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "ease"
+            "ask",
+            "listen",
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask about the river — she tracked three weeks of wrong water; find out what she actually observed",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "question"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Lay the Deathbound Runic Spear on the bench — look at the misfired binding together",
+          "label": "Try the death-register now, with the spear here on the bench, in firelight — see if the channel opens in still conditions",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {
+            "death_life": -0.4,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 15,
           "intentTags": [
             "study",
-            "investigate"
+            "careful",
+            "risky"
           ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Name the Huginn-thread first — point to where it sits in the binding and tell her what Huginn is, before explaining the rest",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "mechanical_spiritual": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "honest",
+            "explain",
+            "reveal"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — late morning shading toward midday, south pit fire at real working heat, orange-sided gleam on wall tools. Both clean, in fresh shirts, sitting or standing near the bench.",
+        "setting": "Pell's forge, south lane, Millbrook — deep night, south pit fire at working heat, orange light running along the bench and the wall tools. The Deathbound Runic Spear laid flat across the bench between them.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Settled after the tending — both feet flat, no armor, watching Silas with open, patient attention."
+            "state": "Leaning over the spear — has read the marks, found her maker's mark, named the misfire. Upright now, waiting for Silas to show her what it was supposed to do."
           },
           {
             "name": "Huginn",
-            "state": "On the ridge-beam above the south pit, both eyes now closed, settled deep."
+            "state": "On the ridge-beam above the south pit, both eyes half-open now — the spear on the bench has its attention."
           }
         ],
         "objects": [
+          "Deathbound Runic Spear (flat on the bench, rune-channels lit by the south pit fire)",
           "Resin Mountain Wine (on the bench, set aside for later)",
           "Dried Starfruit sealed packet (on the bench beside the wine)",
           "River whetstone (on the bench)",
           "South pit fire (at working heat)",
           "Drawing salve tin (on the shelf above the bench, used)",
-          "Water bucket (used and set aside)",
-          "Deathbound Runic Spear (nearby — the binding misfire unexamined)"
+          "Water bucket (used and set aside)"
         ],
         "threads": [
           "Grain-reading explanation — Pell asked what 'grows into' means practically",
-          "Spear binding misfire at the kill — unnamed between them",
+          "Spear binding misfire — Pell has named it and asked to be shown what it was supposed to do",
           "Huginn's northwest direction — unresolved",
           "The river — she's been tracking it three weeks"
         ]
@@ -851,48 +887,86 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Tended Silas's gorse-cuts without ceremony, found the salve without being asked, held still for her own tending with the same practical patience. The afternoon is now open between them.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Read the spear's marks on the bench — found her maker's mark, named the misfire at the kill, asked to be shown what the binding was supposed to do.",
           "learned": [
-            "Silas has two shallow gorse-cuts on his lower ribs — assessed and salved, two days and nothing"
+            "The maker's mark in the iron is load-bearing in the death-binding",
+            "The channel closed at the kill moment rather than passing through"
           ],
           "skillsObserved": [
-            "field wound assessment",
-            "practical care without ceremony"
+            "reading ironwork and rune-marks without instruction"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her forge bench, clean, afternoon open — watching Silas with patient attention."
+          "statusNote": "At the forge bench with Silas, the spear between them — deep night, fire at working heat, waiting for the explanation."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — carrion bird",
+          "note": "Opened both eyes when the spear came to the bench. The binding it helped anchor is now under examination.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the ridge-beam above the south pit — attending the spear's examination from above."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Deathbound Runic Spear laid on the bench for examination — the misfired binding now openly named between Silas and Pell. Deep night, fire at working heat.",
+          "subPlace": {
+            "name": "Pell's Forge",
+            "note": "Spear-examination underway — the binding misfire laid out between them in firelight.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "death-bound-spear",
+          "label": "Deathbound Runic Spear",
+          "kind": "mystery",
+          "fact": "Pell identified her maker's mark in the blade on sight, confirmed the binding closed rather than passed at the kill moment, and asked to be shown what it was supposed to do. The examination is now open.",
+          "links": [
+            "pell",
+            "millbrook",
+            "deathsense",
+            "palework"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A half-hour of practical wound-tending and cleanup at the forge."
+        "hoursPassed": 0.25,
+        "why": "A short exchange — laying out the spear and reading it together"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — late morning shading toward midday, south pit fire at real working heat, orange-sided gleam on wall tools. Both clean, in fresh shirts, sitting or standing near the bench.",
+      "setting": "Pell's forge, south lane, Millbrook — deep night, south pit fire at working heat, orange light running along the bench and the wall tools. The Deathbound Runic Spear laid flat across the bench between them.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Settled after the tending — both feet flat, no armor, watching Silas with open, patient attention."
+          "state": "Leaning over the spear — has read the marks, found her maker's mark, named the misfire. Upright now, waiting for Silas t"
         },
         {
           "name": "Huginn",
-          "state": "On the ridge-beam above the south pit, both eyes now closed, settled deep."
+          "state": "On the ridge-beam above the south pit, both eyes half-open now — the spear on the bench has its attention."
         }
       ],
       "objects": [
+        "Deathbound Runic Spear (flat on the bench, rune-channels lit by the south pit fi",
         "Resin Mountain Wine (on the bench, set aside for later)",
         "Dried Starfruit sealed packet (on the bench beside the wine)",
         "River whetstone (on the bench)",
         "South pit fire (at working heat)",
         "Drawing salve tin (on the shelf above the bench, used)",
-        "Water bucket (used and set aside)",
-        "Deathbound Runic Spear (nearby — the binding misfire unexamined)"
+        "Water bucket (used and set aside)"
       ],
       "threads": [
         "Grain-reading explanation — Pell asked what 'grows into' means practically",
-        "Spear binding misfire at the kill — unnamed between them",
+        "Spear binding misfire — Pell has named it and asked to be shown what it was supposed to do",
         "Huginn's northwest direction — unresolved",
         "The river — she's been tracking it three weeks"
       ]
@@ -1042,7 +1116,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Received the 'still becoming' diagnosis plainly — absorbed it as a measurement, not a burden. Named her own place in the binding: 'half mine until I'm not.' Returned Silas's dry hu",
         "[d1] Worked the bull dressing without being asked — same economy as the forge. Gave quiet endorsement of the river scout when Huginn's direction was named.",
         "[d1] Carried her share of the bull down without comment. Now at the smokehouse doorframe — watching, waiting. The forge date is still live.",
         "[d2] Still at the doorframe — the forge afternoon thread remains open, waiting on Silas's word.",
@@ -1051,28 +1124,29 @@
         "[d2] Had the fire up as promised — gave Silas water, soap, and apron without preamble. Back to boot-lacing, entirely practical.",
         "[d2] Clocked the mountain wine and the old pass-circuit knot on the starfruit packet — named them both without prompting, then set her boot down and looked at Silas. Waiting, not reachi",
         "[d2] Received Silas's honest deflection — named the starfruit's age by the cord, acknowledged the weird, set the bull down plainly. Moved both gifts to the bench as things that stay. Op",
-        "[d2] Tended Silas's gorse-cuts without ceremony, found the salve without being asked, held still for her own tending with the same practical patience. The afternoon is now open between "
+        "[d2] Tended Silas's gorse-cuts without ceremony, found the salve without being asked, held still for her own tending with the same practical patience. The afternoon is now open between ",
+        "[d2] Read the spear's marks on the bench — found her maker's mark, named the misfire at the kill, asked to be shown what the binding was supposed to do."
       ],
       "knownFacts": [
-        "The Palework channel sealed at the kill moment because the binding read her mark as unfinished and closed rather than passed the energy",
-        "The river has been wrong three weeks — she's been tracking it too; Huginn's northwest direction registers as meaningful to her",
         "Silas framed the forty as materials for the forge afternoon — a clean way to give without making it a gift",
         "Had the forge ready by the time Silas arrived — fire building in the south pit, water and soap set out",
         "Recognized the pass-circuit knotting on the starfruit packet immediately — hasn't seen it in a while, but knows it",
         "Silas specifically asked for the strangest thing Mara had, based on something Pell said about liking weird",
         "The gifts were chosen to shift her image of him from the hunt back to something else",
-        "Silas has two shallow gorse-cuts on his lower ribs — assessed and salved, two days and nothing"
+        "Silas has two shallow gorse-cuts on his lower ribs — assessed and salved, two days and nothing",
+        "The maker's mark in the iron is load-bearing in the death-binding",
+        "The channel closed at the kill moment rather than passing through"
       ],
       "skillsObserved": [
-        "holding position after a kill while assessing a downed partn",
         "reading a field situation and naming it without flinching",
         "held position and assisted a diagnostic without needing it e",
         "field dressing a large animal, efficient and clean",
         "field wound assessment",
-        "practical care without ceremony"
+        "practical care without ceremony",
+        "reading ironwork and rune-marks without instruction"
       ],
       "status": "active",
-      "statusNote": "At her forge bench, clean, afternoon open — watching Silas with patient attention.",
+      "statusNote": "At the forge bench with Silas, the spear between them — deep night, fire at working heat, waiting for the explanation.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1177,7 +1251,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d1] Pell agreed to mentorship sessions at the forge — to begin after the World-day 14 hunt. The forge is now a site of both craft and something harder to name.",
         "[d1] Fire banked to slow red coals for the night after the death-binding ceremony — the pit has been used and closed. The night of the ceremony is now complete.",
         "[d1] Rune-Craft Kit fully spent at the forge south pit on World-day 13 night — wax and pitch-ink used in the tightening of the Huginn-thread. Pit remains banked.",
         "[d1] Silas slept inside the forge on World-day 13 night — canvas behind the bellows, by invitation. The forge is now a place of both craft and something harder to name.",
@@ -1188,7 +1261,8 @@
         "[d1] Bull fully dressed and quartered on the scrub oak ridge on World-day 14 morning — tusks removed and taken by Silas. Site now ready for carry.",
         "[d1] Bull and sow delivered to Aldric's smokehouse on World-day 14 morning — both animals hung and tallied. Account current.",
         "[d2] Silas returned to Mara's store mid-morning on World-day 14, after the hunt and the smokehouse settle.",
-        "[d2] Hunt smell washed off in the forge bucket — south pit fire lit and building toward working heat. Wine and starfruit set near the door."
+        "[d2] Hunt smell washed off in the forge bucket — south pit fire lit and building toward working heat. Wine and starfruit set near the door.",
+        "[d2] Deathbound Runic Spear laid on the bench for examination — the misfired binding now openly named between Silas and Pell. Deep night, fire at working heat."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1231,7 +1305,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Afternoon session underway — fire in the south pit, Pell at the bench, gifts near the door."
+          "note": "Spear-examination underway — the binding misfire laid out between them in firelight."
         },
         "mara-wells-s-store": {
           "name": "Mara Wells's Store",
@@ -1284,7 +1358,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 1,
+    "lastTickDay": 2,
     "eventStages": {
       "water_crisis": {
         "stage": 1,
@@ -1326,9 +1400,9 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-13T21:54:46.218Z",
-    "lastTickWorldDay": 13,
-    "lastCanonWorldDay": 13
+    "lastSharedReadAt": "2026-07-14T11:58:08.354Z",
+    "lastTickWorldDay": 14,
+    "lastCanonWorldDay": 14
   },
   "domains": {
     "primary": "ashwarden",
@@ -1652,20 +1726,23 @@
           "[d1] The Huginn-thread is now present and mutual — not a tether but a mutual registration, like a name between two who already knew each other's faces. The binding is still rough, but oriented. The spear k",
           "[d1] The rough death-binding on the spear closed rather than passed a Palework channel at the kill moment — the runes acted as a fist, not a gate. Whether this is a flaw in the binding's youth, an incompat",
           "[d1] The rune-channel did not misfire — it sealed. At the kill moment the death-register read Pell's maker's mark as 'still becoming' (unfinished intention in the ironwork) and held the Palework channel ra",
-          "[d1] Pell's maker's mark is a live, unfinished anchor in the binding — the spear sealed at the kill to protect it. The Palework channel remains inside, unspent. The binding may need the mark to finish beco"
+          "[d1] Pell's maker's mark is a live, unfinished anchor in the binding — the spear sealed at the kill to protect it. The Palework channel remains inside, unspent. The binding may need the mark to finish beco",
+          "[d2] Pell identified her maker's mark in the blade on sight, confirmed the binding closed rather than passed at the kill moment, and asked to be shown what it was supposed to do. The examination is now ope"
         ],
         "links": [
           "pell",
           "huginn",
           "millbrook",
           "aldric-provisioning-deal",
-          "the-unnamed-gift"
+          "the-unnamed-gift",
+          "deathsense",
+          "palework"
         ],
         "aliases": [
           "Deathbound Runic Spear"
         ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "palework-relay-limit": {
         "id": "palework-relay-limit",
@@ -1687,14 +1764,14 @@
     }
   },
   "tendencies": {
-    "strategic": 46.13179888868401,
-    "cerebral": 24.409550400241084,
-    "social": 51.17396793949577,
-    "generous": 11.648113733162225,
-    "cautious": 21.528841930563704,
-    "physical": 1.800536711303167,
-    "risky": 0.8955869907338783,
-    "ruthless": 0.918316468354365
+    "strategic": 45.901139894240586,
+    "cerebral": 26.28750264823988,
+    "social": 50.918098099798286,
+    "generous": 11.589873164496414,
+    "cautious": 21.421197720910886,
+    "physical": 1.7915340277466512,
+    "risky": 0.8911090557802088,
+    "ruthless": 0.9137248860125932
   },
   "aptitudes": [
     "strategist",
@@ -1702,7 +1779,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 106,
+  "actionCount": 107,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1756,8 +1833,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1783997291303,
-  "rev": 160,
+  "updatedAt": 1784030436622,
+  "rev": 163,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

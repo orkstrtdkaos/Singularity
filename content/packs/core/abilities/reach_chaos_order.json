@@ -662,6 +662,173 @@
           "cannot": null
         }
       ]
+    },
+    {
+      "id": "the_wrong_target",
+      "name": "The Wrong Target",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "chaos_order": -0.4
+      },
+      "effectTags": [
+        "evasion",
+        "unpredictability",
+        "protection"
+      ],
+      "narrationHints": "Can't hit what isn't where it was.",
+      "description": "Move so unpredictably that aimed force misses \u2014 not by blocking but by not being there.",
+      "notFor": [],
+      "tradition": "churnfolk",
+      "harmRung": "none",
+      "functions": [
+        "shield",
+        "resist",
+        "move"
+      ],
+      "challengeTypes": [
+        "combat",
+        "evasion",
+        "tactical"
+      ],
+      "challengeProfile": {
+        "cognitive": 0.2,
+        "physical": 0.7,
+        "social": 0.1
+      },
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Unpredictable",
+          "grants": "Move so erratically that aimed attacks lose you \u2014 not blocking, not armoring, just not being where they land.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Moving Gap",
+          "grants": "Make yourself so hard to anticipate that organized attempts to harm you dissolve \u2014 they are always aiming at where you were a moment ago.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Chaos Armor",
+          "grants": "The disorder around you actively deflects organized harm \u2014 not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place.",
+          "cannot": null
+        }
+      ]
+    },
+    {
+      "id": "the_misdirect",
+      "name": "The Misdirect",
+      "levelReq": 1,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": -0.3
+      },
+      "effectTags": [
+        "deception",
+        "distraction",
+        "misdirection"
+      ],
+      "narrationHints": "Make them look left. Go right. Simple as that.",
+      "description": "Create a false signal convincing enough to buy a move \u2014 for you or for someone else.",
+      "notFor": [],
+      "tradition": "churnfolk",
+      "harmRung": "none",
+      "functions": [
+        "deceive",
+        "hinder",
+        "move"
+      ],
+      "challengeTypes": [
+        "stealth",
+        "social",
+        "combat"
+      ],
+      "challengeProfile": {
+        "cognitive": 0.3,
+        "physical": 0.4,
+        "social": 0.3
+      },
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The False Signal",
+          "grants": "Create a distraction or misdirection convincing enough to buy one clean move \u2014 for you, or for a friend.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Wrong Trail",
+          "grants": "Plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Wrong Threat",
+          "grants": "Introduce a misdirection so fundamental \u2014 the wrong door, the wrong figure, the wrong danger \u2014 that the opposition organizes around something that isn't there and can't recover before it's over.",
+          "cannot": null
+        }
+      ]
+    },
+    {
+      "id": "catch_as_catch_can",
+      "name": "Catch as Catch Can",
+      "levelReq": 1,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "practical",
+      "axes": {
+        "chaos_order": -0.3
+      },
+      "effectTags": [
+        "scavenging",
+        "resilience",
+        "sustain"
+      ],
+      "narrationHints": "The churnfolk doesn't run out. They just need whatever's here.",
+      "description": "Sustain yourself in chaotic, resource-scarce conditions by needing whatever's available rather than what you planned to have.",
+      "notFor": [],
+      "tradition": "churnfolk",
+      "harmRung": "none",
+      "functions": [
+        "sustain",
+        "restore"
+      ],
+      "challengeTypes": [
+        "survival",
+        "endurance",
+        "logistics"
+      ],
+      "challengeProfile": {
+        "cognitive": 0.2,
+        "physical": 0.5,
+        "social": 0.3
+      },
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Flexible Need",
+          "grants": "Sustain yourself in chaotic, resource-scarce conditions \u2014 find food, shelter, tools, and rest in circumstances where others have run dry.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Group Scrounging",
+          "grants": "Sustain a group in chaotic conditions through constant creative improvisation \u2014 never enough of anything, always just enough.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Chaos Supply",
+          "grants": "The disorder that strips others bare is your supply line. In total disorder, you and yours have what you need \u2014 because you have learned to need what the chaos has.",
+          "cannot": null
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 \u2014 24 verbs, 8 families)"

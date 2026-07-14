@@ -2,7 +2,7 @@
 
 > **This file carries CURRENT STATUS ONLY.** History lives in `po/results/*` and the graph. *(Per SNG-071: old append-only ALERT archived at `po/archive/ALERT_20260712.md`.)*
 
-**HEAD:** `09351ff` (v1.8.58) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
+**HEAD:** `abf59d0` (v1.8.60) · **Authoritative spec:** `SYSTEM_SPEC.md` v2.0 (`round-2-complete`) · **Active build spec:** `po/SNG_UPDATE_v1.9.0.md`
 **Process:** SNG-071 two-round cycle. Aevi authors ROUND 1 → **CCode substrate-verifies (ROUND 2)** → Aevi amends + promotes → CCode builds → `complete_pending_review` → **only Aevi closes.**
 
 ---
@@ -34,12 +34,22 @@ The one surface neither CCode nor Aevi can exercise: **does the live model actua
 
 ---
 
-## 🟢 NEXT FOR CCODE — ABILITY ARCH v2, TRACK 1 (`po/SPEC_AMENDMENT_ability_arch_v2.md` v2, `af6080d`)
-Native grants · breadth/depth separation · axis-touch combinations · schema · skill-tree states. **All 6 Qs closed. GO.**
+## 🟢 ABILITY ARCH v2, TRACK 1 — ENGINE SHIPPED v1.8.60 (`abf59d0`) · complete_pending_review
+Built in 3 phases (results `po/results/20260714_ability_arch_v2_track1.md`). **Depth is now earned, not bought:**
+- **P1 schema + CI** — `state.js` tolerant defaults for the new fields; `content_ci` validates shape-where-present, fails on legacy `rankProgression:"spend"`, reports the count (**247**, script-generated) + classification coverage.
+- **P2 depth-through-use (core)** — `autoAdvancePracticedRanks` (rank 1→2 automatic, free, fork-safe) + `markDefiningMoment` (rank 2→3, GM op only, engine-gated on use-threshold AND `rank3Min`). New `markDefiningMoment` GM op (whitelist + sanitizer + rule 19B + RIPE FOR MASTERY block). **All four deepen surfaces converted** spend-button → progress line (Skill Wheel+Graph · Level-Up · Character · play panel) via a shared `rankProgress()`. Built ON `practiceRankReady`.
+- **P3 states + combo hooks** — `skillGraphModel.state` (OWNED_1/2/3 · LOCKED · AVAILABLE, derived); `nativeGrantsFor` / `combinationsAvailableFor`; `combinationThresholdMet` (~6 co-activation) + `ripeAxisTouchCombinations`.
+- **P4 reconcile — verified UNNECESSARY:** rank lives in `owned.level` in both models, reads optional-chained → old saves unchanged, no rank ever stripped (**Law 14 by construction**). No dead migration added.
 
-**Cut from the build:** **§7b → SNG-098** (it duplicated `skill_battle_system.json` — Aevi's own 2026-07-07 spec, re-invented worse a week later without reading it). **ID collapse → SNG-099** (mutating `abilityId`s orphans owned abilities — **Law 14**). **`attributeCategory` withdrawn** — reuse `attribute_gates.json` per-sub-attribute, **extended with native entries**. **Proximity unlock cut** — no counter beneath it.
+13 new smoke tests; fresh-port verified (live auto-rank-2, every surface shows "practiced N/8 → rank 2 lands through use", no buy button, clean boot). **Only Aevi closes.**
 
-**Watch:** rank 2 engine-automatic; rank 3 = new GM op `markDefiningMoment` (whitelist + sanitizer, engine-gated). **Build on `practiceRankReady`** — free rank-through-use already exists. **`app.js` is the real work:** four shipped deepen surfaces (Level-Up · Character · **Skill Wheel + Graph, SNG-097, shipped yesterday** · free-practice) convert *spend-to-rank* → *progress-toward-threshold*. Ability count at HEAD is **247** — script-generate the header count.
+**⚠ REMAINING — Aevi content + one blocked CCode step** (engine reads all tags with safe defaults, so the game runs unchanged today):
+1. **Classify the 247** `native`/`combination` (step 2) — fiction call per ability. CI: **0/247 classified.**
+2. **Native-gate entries in `attribute_gates.json`** (step 3, depends on 1) — table only covers levelReq 3+; Tier I–II natives have no coverage.
+3. **Axis-touch combination authoring** (step 9). **Schema gap:** `unlockCondition` is prose and NOT engine-computable — each authored combination needs a machine trigger, `unlockCondition.components:[ids]` (co-activation) or `viaAbilities:[ids]`. `combinationThresholdMet` reads exactly these.
+4. **Native-grants-at-creation wiring (§8) — CCode, blocked on 1+2.** Reading fns built; wiring into the creation flow deferred until natives are tagged so it's verifiable, not blind.
+
+**Cut, unchanged:** §7b → **SNG-098** · ID collapse → **SNG-099** · proximity unlock (no counter) · `energyMult` (SNG-090 follow-on).
 
 ---
 

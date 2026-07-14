@@ -10,25 +10,21 @@
 
 ---
 
-## 🎯 ERIK'S CALL — ROMANCE P1 (blocks nothing else; blocks Tier 4 only)
+## 🟢 GO FOR CCODE — BOTH SPECS AMENDED AND BUILDABLE (Aevi 2026-07-14)
 
-**Disposition: `po/romance_guidance_AEVI_DISPOSITION.md` (`9d774d9`). CCode's review accepted on every technical point. P1 REFRAMED.**
+### 1. `po/romance_guidance.md` v2 (`d53abdd`) — **BUILD**
+**P1 RESOLVED by Erik: `R+` = *everything within the bounds of the AUP is allowed*.** Not a new ceiling — a **re-framing of the existing one**, and it is the fix rather than a dodge. Verified at HEAD: `engine/claude.js` routes every GM task to an Anthropic model (`api.anthropic.com`, no router), so the AUP *is* the outer bound and no wording changes that. But the current `ratingRegister` R+ clause is written as a **prohibition** — so the GM hedges, fades, and apologizes *well short of the line*, which is the exact bug this doc exists to kill. **Rewritten as permission-to-the-line: the full charged register is yours, take all of it, and stopping short out of caution IS the error.** The line itself (no graphic mechanical depiction) holds without exception. `R` gets real craft language too — that's where most of the felt win is; fading to black on a player who chose `R` is a failure the old wording invited.
 
-**Verified at HEAD:** `engine/claude.js` routes **every GM task to an Anthropic model** (`claude-sonnet-4-6` / `claude-haiku-4-5` → `api.anthropic.com`). Single provider, no router. So `ratingRegister`'s R+ cap (*"never explicit mechanics"*) is **not an authoring choice that can be un-authored — it's the AUP encoded at the content layer.** Deleting the string doesn't grant the capability; it points the game at a model that won't produce the thing. **The failure mode is more mid-scene refusal and hedging — the exact bug `romance_guidance.md` exists to fix.** Tier 4 as specced would make it worse.
+**Fixed:** no `adultGate` field (it's `profile.rating.preset` ∈ `G|PG|PG-13|R|R+` via `ratingCeiling(profile)`; `adultGate` is a *boolean* authority param, persisted flag `adultVerified`) · Tier 0–4 numbering struck, Part 1 **rewrites the romance clauses inside `ratingRegister()`**, not a parallel scheme · **engagement-never-overrides-the-ceiling** precedence clause added · doc relocates to `content/packs/core/` + manifest (`content/gm/` would **404 on Pages**) · `romantic`/`flirt` tag on the existing `intentTags` vocab, **no second model call** · `romanceGuidanceDetail` conditional `scene.push`, existing infra · INFL functions verified. **All 4 Qs closed. No open questions.**
 
-| | | Cost |
-|---|---|---|
-| **A — Hold the ceiling** | Tiers 0–3 ship (G→R+). The engagement fix lands in full. **R/R+ get real craft language** — that's where the felt win is. | No Tier 4. |
-| **B — Provider router** | Port the Aevi-app `routing_table.json` pattern into `engine/claude.js`; Tier-4 turns route to a provider whose terms permit them. | Own spec. **Singularity is a static Pages app with the API call client-side** — a materially different key-exposure problem than the Aevi app's local Flask backend. Not free, not "same pattern." |
-| **C — Tier 4 elsewhere** | Singularity stays G→R+; the explicit register stays on the private local surface. | Two surfaces. |
+*Floors unchanged, rating-independent: never prohibited content; **a minor is never portrayed in romantic/sexual content at any intensity**; art clamps minors to ≤PG.*
 
-**Aevi's read: ship A now; B is a real spec, not a string change.** Tier 3 (R) is the actual win and is buildable today — the current R register (*"genuine heat and tension"*) is a gesture, not craft; fading to black on a player who chose R is a failure the wording invites.
+### 2. `po/SPEC_AMENDMENT_ability_arch_v2.md` v2 (`af6080d`) — **BUILD (Track 1)**
+Native grants · breadth/depth separation · axis-touch combinations · schema · skill-tree states. **All 6 Qs closed.**
 
-*Floors unchanged and ceiling-independent regardless: never prohibited content; **a minor is never portrayed in romantic/sexual content at any intensity**; art clamps minors to ≤PG.*
+**Cut from the build:** **§7b → SNG-098** (it duplicated `skill_battle_system.json` — Aevi's own 2026-07-07 spec, re-invented worse a week later without reading it; *GenerateBeforeVerify at the design layer*). **ID collapse → SNG-099** (mutating `abilityId`s orphans owned abilities — **Law 14**; payoff cosmetic, risk isn't). **`attributeCategory` withdrawn** — reuse `attribute_gates.json` per-sub-attribute, **extended with native entries** (the live table only covers levelReq 3+, so natives have no coverage — the real gap under the error). **Proximity unlock cut** — no counter exists beneath it.
 
-**Accepted technical:** N1 — **there is no `adultGate` enum**; content level is `profile.rating.preset` ∈ `G|PG|PG-13|R|R+` via `ratingCeiling(profile)`; `adultGate` is a *boolean* authority param, persisted flag `adultVerified`. N2 — no Tier 0–4 scheme; **rewrite the romance clauses inside `ratingRegister` (gm.js:123)**, reference the enum verbatim. U1/Q2 — add `romantic`/`flirt` to the existing `intentTags` vocab (gm.js:468); **no second model call.** U2/Q4 — Part 2 block → system tier after CONTENT CEILING, with an explicit **engagement-never-overrides-the-ceiling** clause. U3/Q3 — `content/gm/` would **404 on Pages** (same shape as the halted Tether `secrets.js` carrier) → ship under `content/packs/core/` + manifest + existing conditional `scene.push`; **no new injection infra.** U4 — **verified at HEAD**, `deceive`/`command`/`bind` all exist in `function_vocabulary.json` (INFLUENCE); no change.
-
-**GO for CCode on tiers 0–3 once Aevi lands the amended doc.**
+**Watch:** rank 2 = engine-automatic; rank 3 = new GM op `markDefiningMoment` (whitelist + sanitizer, engine-gated). **Build on `practiceRankReady`** — free rank-through-use already exists. **`app.js` is the real work:** four shipped deepen surfaces (Level-Up · Character · **Skill Wheel + Graph, SNG-097, shipped yesterday** · free-practice) convert from *spend-to-rank* → *progress-toward-threshold*. Ability count at HEAD is **247** — header count **script-generated** from now on; neither Aevi (137) nor CCode (233) got it right by hand.
 
 ---
 
@@ -157,10 +153,10 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 **Aevi:**
 - Option B ability authoring (breadth pass): **COMPLETE ✅** — all 24 traditions, 8/8 families (SNG-096 a8ccc988)
-- Amend `romance_guidance.md` (N1/N2/U2/U3 + relocate to `content/packs/core/`) — **gates the romance build**
-- Author the per-tier `ratingRegister` romance clauses (G→R+, ceiling per Erik's P1 call)
-- Amend `SPEC_AMENDMENT_ability_arch_v2.md` (strike §7b, apply C2/C3/U4, revised build order) — **gates Track 1 build**
-- SNG-098 spec (skill battle amendment) · SNG-099 spec (ID collapse)
+- ~~Amend `romance_guidance.md`~~ ✅ v2 shipped `d53abdd`
+- ~~Amend `SPEC_AMENDMENT_ability_arch_v2.md`~~ ✅ v2 shipped `af6080d`
+- **SNG-098 spec** (skill-battle amendment: taxonomy + conditions + Coliseum → `skill_battle_system.json`, then wire + unify SNG-027)
+- **SNG-099 spec** (tiered-same-action ID collapse, guarded)
 - Axis-touch combination authoring pass (Track 1 step 9)
 - `po/OPERATIONAL_FLOWS.md` — incl. **grep `content/packs/core/rules/` + `po/` before authoring a new system section. A spec is content; read the lower layer first.**
 - Thin regions: `riven_marches`, `somatic_reaches`, `unspooling` each want ~6 locations
@@ -173,7 +169,6 @@ Spectral fit is ±25 and `poleIntensity` varies 0.05→0.98, but the penalty doe
 
 **Erik:**
 - Preview-legs (`po/PREVIEW_LEGS.md`)
-- **ROMANCE P1 — A, B, or C** (see above). The only real decision in that spec.
 - §9 drift call (should a place change you?)
 - GH Action for `npm test` (BOUNDARY-2: a gate that only fires when someone remembers to run it is weak against exactly the failure it exists to prevent)
 - SNG-076 final leg: confirm no text is cut anywhere in-game (§21: close-on-symptom)

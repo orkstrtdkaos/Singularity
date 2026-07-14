@@ -84,16 +84,21 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     const fork = forkFor(ab.id, branchForks);
     const chosen = fork ? chosenFork(character, ab.id, branchForks) : null;
     const lockedPath = fork && chosen ? forkPaths(ab.id, branchForks).find(p => p.key !== chosen.key) : null;
+    const isOwned = owned.has(ab.id), rank = owned.get(ab.id) || 0;
+    const locked = !isOwned && (!learnGate.ok || (cap && ab.powerSystem !== "learned"));
     return {
       id: ab.id, name: ab.name, cls: ab.tradition || ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
-      owned: owned.has(ab.id), rank: owned.get(ab.id) || 0,
+      owned: isOwned, rank,
       ripe: preds.isRipe ? !!preds.isRipe(ab.id) : false,
       aspired: preds.isAspired ? !!preds.isAspired(ab.id) : false,
       gated: !!gate,
       forks: !!fork, forkAt: fork?.atRank || null,
       forkChosen: chosen?.name || null, forkLocked: lockedPath?.name || null,
-      locked: !owned.has(ab.id) && (!learnGate.ok || (cap && ab.powerSystem !== "learned")),
-      lockText: !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — deepen owned skills" : "")
+      locked,
+      lockText: !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — deepen owned skills" : ""),
+      // ability-arch v2: the five display states, DERIVED from the flags above (no new computation).
+      // OWNED_1/2/3 mirror the rank now that depth is earned through use; LOCKED/AVAILABLE gate breadth.
+      state: isOwned ? `OWNED_${Math.min(3, rank || 1)}` : locked ? "LOCKED" : "AVAILABLE"
     };
   });
   const ids = new Set(nodes.map(n => n.id));
@@ -105,6 +110,27 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     if (ids.has(t.growsAbility)) edges.push({ from: t.growsAbility, to: t.id, kind: "branch", virtual: t.id });
   }
   return { nodes, edges };
+}
+
+// ---------- ability-arch v2: native grants & axis-touch combinations ----------
+
+/** The native abilities of a tradition — what being of this people simply IS. Granted at rank 1, free,
+ *  at primary-domain selection (attribute-gated per attribute_gates.json). Reads `nativeOrCombination`;
+ *  returns [] for a tradition whose abilities aren't classified yet (the engine never guesses). */
+export function nativeGrantsFor(tradition, catalog = {}) {
+  return Object.values(catalog).filter(ab =>
+    ab && ab.nativeOrCombination === "native" && (ab.tradition || ab.powerSystem) === tradition);
+}
+
+/** The axis-touch combinations a tradition can currently claim: `nativeOrCombination === "combination"`,
+ *  of this tradition, not already owned, and whose narrative threshold is met. `thresholdMet(ab)` is
+ *  injected (from practice.js) so skilltree.js takes no practice dependency. At character creation pass
+ *  `() => true` — background justifies the exposure (§7.4). Empty until combinations are authored. */
+export function combinationsAvailableFor(tradition, character, catalog = {}, thresholdMet = () => false) {
+  const owned = new Set((character?.abilities || []).map(a => a.abilityId));
+  return Object.values(catalog).filter(ab =>
+    ab && ab.nativeOrCombination === "combination" && (ab.tradition || ab.powerSystem) === tradition
+    && !owned.has(ab.id) && thresholdMet(ab));
 }
 
 // ---------- SNG-BATCH-5 Phase 1: soft class cost (cross-class = 2x points) ----------

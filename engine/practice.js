@@ -106,6 +106,40 @@ export function ripeBranches(character, recipesFile) {
   return out;
 }
 
+// ---------- ability-arch v2: axis-touch combination unlock (action-pattern) ----------
+
+/** Has the narrative threshold for an axis-touch combination been met? Reuses the live co-activation
+ *  model (~6, like a combo recipe's ripenAt). The combination's `unlockCondition` carries the machine
+ *  trigger: `components` (ability ids whose co-activation counts) or `viaAbilities` (ids whose combined
+ *  uses count). A prose-only `unlockCondition` (schema default) is NOT engine-computable — returns false
+ *  so the GM or character-creation surfaces it instead. Proximity is intentionally absent (no counter). */
+export function combinationThresholdMet(character, abilityDef, rules) {
+  const uc = abilityDef?.unlockCondition;
+  if (!uc) return false;
+  const need = uc.ripenAt ?? rules?.practice?.combinationRipenAt ?? 6;
+  if (Array.isArray(uc.components) && uc.components.length >= 2) {
+    return (character.practice?.coActivations?.[discoveryKey(uc.components)] || 0) >= need;
+  }
+  if (Array.isArray(uc.viaAbilities) && uc.viaAbilities.length) {
+    const total = uc.viaAbilities.reduce((s, id) => s + (character.practice?.uses?.[id] || 0), 0);
+    return total >= need;
+  }
+  return false;
+}
+
+/** Pre-authored axis-touch combinations whose action-pattern threshold is now met and which the
+ *  character doesn't yet own — the GM may surface these as available to claim (a point spend walks the
+ *  door the narrative opened). Empty until combinations are authored + tagged. */
+export function ripeAxisTouchCombinations(character, catalog, rules) {
+  const owned = new Set((character.abilities || []).map(a => a.abilityId));
+  const out = [];
+  for (const ab of Object.values(catalog || {})) {
+    if (!ab || ab.nativeOrCombination !== "combination" || owned.has(ab.id)) continue;
+    if (combinationThresholdMet(character, ab, rules)) out.push(ab);
+  }
+  return out;
+}
+
 /** One-line RIPE notice for the GM — it may OFFER these in-fiction and nothing else. */
 export function emergenceNoticeForGM(character, recipesFile, rules) {
   const combos = ripeCombos(character, recipesFile, rules).map(r => `- RIPE combo "${r.id}": ${r.name} (${r.components.join(" + ")}) — ${r.discoveredBlurb || r.description.slice(0, 100)}`);

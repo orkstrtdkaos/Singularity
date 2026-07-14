@@ -25,7 +25,8 @@ import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
-import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths } from "../engine/skilltree.js";
+import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
+import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
@@ -2136,6 +2137,34 @@ await (async () => {
   let c3 = mk(0); c3.abilities[0].level = 2;
   let r3 = markDefiningMoment(c3, "deep_craft", rules, { attributeGates: gates });
   check("markDefiningMoment refuses an unpracticed craft", !r3.ok && c3.abilities[0].level === 2);
+})();
+
+// --- ability-arch v2: skill-tree states + axis-touch combination unlock ---
+(() => {
+  // skillGraphModel node.state derives from owned/rank/locked — OWNED_1/2/3, LOCKED, AVAILABLE
+  const catalog = {
+    known: { id: "known", name: "Known", tradition: "umbral", levelReq: 1, powerSystem: "reach_dark_light" },
+    open: { id: "open", name: "Open", tradition: "umbral", levelReq: 1, powerSystem: "reach_dark_light" }
+  };
+  const char = { abilities: [{ abilityId: "known", level: 2 }], practice: { uses: {}, coActivations: {} } };
+  const model = skillGraphModel(catalog, { recipes: [], branchTemplates: [] }, char, { attributeGates: { gates: {} }, skillCapacity: { skillsKnownByLevel: {} } });
+  const known = model.nodes.find(n => n.id === "known"), open = model.nodes.find(n => n.id === "open");
+  check("skill-tree state: an owned rank-2 craft is OWNED_2", known.state === "OWNED_2");
+  check("skill-tree state: an unowned, ungated craft is AVAILABLE", open.state === "AVAILABLE");
+
+  // combinationThresholdMet: prose-only unlockCondition is NOT engine-computable (false); a component
+  // co-activation trigger fires at the ~6 threshold
+  const proseCombo = { id: "sc", nativeOrCombination: "combination", unlockCondition: { type: "action_pattern", description: "hunt in the dark" } };
+  check("combination with a prose-only unlockCondition is not auto-available", combinationThresholdMet(char, proseCombo, {}) === false);
+  const machineCombo = { id: "sc2", nativeOrCombination: "combination", tradition: "umbral", unlockCondition: { components: ["p", "q"], ripenAt: 6 } };
+  const hunter = { abilities: [], practice: { uses: {}, coActivations: { "p+q": 6 } } };
+  check("combination with a co-activation trigger fires at the threshold", combinationThresholdMet(hunter, machineCombo, {}) === true);
+  check("ripeAxisTouchCombinations surfaces the ripe, unowned, tagged combination", ripeAxisTouchCombinations(hunter, { sc2: machineCombo }, {}).some(a => a.id === "sc2"));
+
+  // nativeGrantsFor / combinationsAvailableFor read the tags; empty when nothing is classified
+  check("nativeGrantsFor returns [] when no ability is tagged native", nativeGrantsFor("umbral", catalog).length === 0);
+  const withNative = { ...catalog, born: { id: "born", name: "Born", tradition: "umbral", nativeOrCombination: "native", levelReq: 1 } };
+  check("nativeGrantsFor returns a tagged native of the tradition", nativeGrantsFor("umbral", withNative).some(a => a.id === "born"));
 })();
 
 // --- SNG-045: player identity dedup (one person, one profile) ---

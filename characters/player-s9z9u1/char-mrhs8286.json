@@ -43,7 +43,7 @@
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.14231136614511714,
     "mechanical_spiritual": 0.15995247066926604,
-    "concrete_abstract": -0.01771117595189855,
+    "concrete_abstract": -0.03182561715430362,
     "death_life": -0.11844862809968017,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -1031,30 +1031,35 @@
         "player": "Use Order-Sense on the buried structure — read the whole design, including the parts not yet exposed",
         "summary": "Order-Sense reads the buried structure — a sealed channel-house, pre-Transition, two closed rooms, one aperture breached from within.",
         "narration": "You close your hand around Memory's shaft and let the craft run quiet — not a push, just a lean. The substrate is thin here; you feel it immediately, the lattice grudging, but the design has enough mass behind it that it surfaces anyway, the way a buried wall will show itself in a drought when the grass dies back in a line.\n\nThe buried structure comes through in outline, not in detail: a channel-house. Low, rectangular, older than anything in living memory — three rooms, or three functions, it's hard to say which. The courses you can see in the sedge are the northwest corner. The main run of the building goes into the hillside at an angle, following the slope, ending somewhere behind and above the settling-seam. Two apertures, sealed. One of them — the lower one, roughly where the seam is widest — has been breached. Not broken open from outside. Settled open from within, the way a body relaxes after it is finished.\n\nWhat you cannot read is what it was for. The design tells you the shape and the intent of the shape — water management, yes, but older than the valley's current channels, older than the sleeve-blank fittings, older than Mara's ledger and Dara's twenty-two years combined. The closed rooms hold something the structure was built around. Order-Sense gives you the skeleton; it won't give you the marrow.\n\nPell is watching your face. Huginn has not moved from the root-spur."
+      },
+      {
+        "player": "Tell Pell what Order-Sense found — channel-house, two sealed rooms, the lower aperture breached from within, not from outside. Ask what a smith reads in that.",
+        "summary": "Silas tells Pell what Order-Sense found; she reads the breach-from-within as a valve — deliberate design, not failure.",
+        "narration": "Pell listens without interrupting.\n\nYou lay it out plainly: the channel-house below the hillside, three rooms or functions, the northwest corner exposed here in the sedge. Main run going in at an angle, following the slope. Two apertures — both sealed, sealed deliberately, the kind of closure that is meant to hold. And the lower one, the one closest to the river-level, breached from within. Not forced from outside, not collapsed by settling or water pressure. Opened from the inside, against the seal.\n\nShe's quiet for a moment after you finish. Then she crouches beside the nearest rubble stone and runs her thumb along the dressed face of it — the flat diagnostic touch you've seen her use on worked iron when she's reading something she doesn't want to rush. \"From within,\" she repeats, not a question. She looks up at the settling-seam ten feet up the hillside, then back down at the coursed stones. \"A smith reads that as a valve. You design a seal to hold — you put it in from the outside so there's no mechanism to fail on the inside. If it opens from within, either something was left in there with a key, or the design always intended it to open when a condition was met.\" She stands, brushing sediment from her thumb. \"Neither of those is an accident.\" Her eyes track north along the buried structure's line. \"The two sealed rooms — if this is a channel-house, they're either storage or they're chambers around something the builders didn't want the water touching directly.\" She pauses. \"Or something they didn't want touching the water.\"\n\nHuginn shifts once on his root-spur — a small adjustment, wings held close. He is still attending the settling-seam. He has not looked away from it since you arrived."
       }
     ],
     "lastTurn": {
-      "narration": "You close your hand around Memory's shaft and let the craft run quiet — not a push, just a lean. The substrate is thin here; you feel it immediately, the lattice grudging, but the design has enough mass behind it that it surfaces anyway, the way a buried wall will show itself in a drought when the grass dies back in a line.\n\nThe buried structure comes through in outline, not in detail: a channel-house. Low, rectangular, older than anything in living memory — three rooms, or three functions, it's hard to say which. The courses you can see in the sedge are the northwest corner. The main run of the building goes into the hillside at an angle, following the slope, ending somewhere behind and above the settling-seam. Two apertures, sealed. One of them — the lower one, roughly where the seam is widest — has been breached. Not broken open from outside. Settled open from within, the way a body relaxes after it is finished.\n\nWhat you cannot read is what it was for. The design tells you the shape and the intent of the shape — water management, yes, but older than the valley's current channels, older than the sleeve-blank fittings, older than Mara's ledger and Dara's twenty-two years combined. The closed rooms hold something the structure was built around. Order-Sense gives you the skeleton; it won't give you the marrow.\n\nPell is watching your face. Huginn has not moved from the root-spur.",
-      "sceneSummary": "Order-Sense reads the buried structure — a sealed channel-house, pre-Transition, two closed rooms, one aperture breached from within.",
+      "narration": "Pell listens without interrupting.\n\nYou lay it out plainly: the channel-house below the hillside, three rooms or functions, the northwest corner exposed here in the sedge. Main run going in at an angle, following the slope. Two apertures — both sealed, sealed deliberately, the kind of closure that is meant to hold. And the lower one, the one closest to the river-level, breached from within. Not forced from outside, not collapsed by settling or water pressure. Opened from the inside, against the seal.\n\nShe's quiet for a moment after you finish. Then she crouches beside the nearest rubble stone and runs her thumb along the dressed face of it — the flat diagnostic touch you've seen her use on worked iron when she's reading something she doesn't want to rush. \"From within,\" she repeats, not a question. She looks up at the settling-seam ten feet up the hillside, then back down at the coursed stones. \"A smith reads that as a valve. You design a seal to hold — you put it in from the outside so there's no mechanism to fail on the inside. If it opens from within, either something was left in there with a key, or the design always intended it to open when a condition was met.\" She stands, brushing sediment from her thumb. \"Neither of those is an accident.\" Her eyes track north along the buried structure's line. \"The two sealed rooms — if this is a channel-house, they're either storage or they're chambers around something the builders didn't want the water touching directly.\" She pauses. \"Or something they didn't want touching the water.\"\n\nHuginn shifts once on his root-spur — a small adjustment, wings held close. He is still attending the settling-seam. He has not looked away from it since you arrived.",
+      "sceneSummary": "Silas tells Pell what Order-Sense found; she reads the breach-from-within as a valve — deliberate design, not failure.",
       "choices": [
         {
-          "label": "Tell Pell what Order-Sense found — channel-house, two sealed rooms, the lower aperture breached from within, not from outside. Ask what a smith reads in that.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
+          "label": "Push north along the hillside — follow the settling-seam's line toward where the main run ends; see what the slope shows above the buried structure",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "share",
-            "consult"
+            "scout",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Deathsense on the settled-open aperture — if something concluded inside, read the shape and trajectory of that ending.",
+          "label": "Use Deathsense on the breached aperture — the breach opened from within; read whether something in there is ending, ended, or still going",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -1067,60 +1072,72 @@
           ],
           "abilityId": "deathsense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk to the settling-seam directly — put your hands on the hillside at the widest point of the breach and see what the surface tells you before going further.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "concrete_abstract": -0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "This is a Dara Holt problem as much as yours — the structure is on her channel territory, and she's been east-channel senior for twenty-two years. Turn back now and brief her before going further.",
+          "label": "Put the question to Huginn directly — he's been attending that seam since before the cast; ask him plainly what he's reading there",
           "attribute": "social",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.4
-          },
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
+            "study",
             "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Mark the site and pull back — note the physical evidence and decide how to bring Dara Holt here before going any further",
+          "attribute": "practical",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0,
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Order-Sense confirms a pre-Transition channel-house buried in the hillside — lower aperture breached from within by design or conditional mechanism, not by accident or collapse. Pell reads it as a valve. Two sealed interior rooms remain unread."
+        }
+      ],
       "scene": {
-        "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in the sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy.",
+        "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing a half-step back, watching Silas's face come out of the Order-Sense read. Tools at her belt, no comment yet."
+            "state": "Standing, thumb wiped clean of sediment, eyes tracking north along the buried structure's line — has just named the breach-from-within as a valve, deliberate or conditional"
           },
           {
             "name": "Huginn",
-            "state": "On the root-spur above the rubble stones, eye fixed on the settling-seam. Has not moved."
+            "state": "On the root-spur above the rubble stones, attending the settling-seam without interruption. Has not moved."
           }
         ],
         "objects": [
           "Memory (spear, at Silas's side)",
-          "Dressed rubble stones — northwest corner of a buried channel-house, coursed, hand-width",
+          "Dressed rubble stones — northwest corner of a buried channel-house, coursed, hand-laid",
           "Settling-seam in the hillside — ten feet up, widest point marks the breached lower aperture",
           "Continuous iron-mat crust — step-change thicker here than anywhere downstream",
           "Valve Failure Timeline note (breast pocket)",
@@ -1129,10 +1146,10 @@
           "Column stain (thirty paces south — palm-print visible)"
         ],
         "threads": [
-          "Buried channel-house: three rooms or functions, two sealed apertures, one breached from within — interior contents unread",
-          "Huginn attending the settling-seam — something is concluding or concluded in what's buried here",
-          "Dara Holt's territory — no contact made; she is the senior irrigator for this channel",
-          "What the sealed rooms were built around — Order-Sense gave the skeleton, not the purpose"
+          "Buried channel-house: two sealed rooms, lower aperture breached from within — Pell names it a valve; interior contents and purpose unread",
+          "Huginn attending the settling-seam — has not moved or looked away",
+          "What the sealed rooms were built around — Order-Sense gave the skeleton, not the purpose",
+          "Dara Holt not yet contacted — senior irrigator for this channel, her territory"
         ]
       },
       "npcUpdates": [
@@ -1140,15 +1157,26 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Watching Silas's face come out of the Order-Sense read — hasn't spoken yet, giving him room.",
-          "statusNote": "At the rubble site with Silas, standing back, waiting for the read to land."
-        },
+          "role": "Village blacksmith, Millbrook",
+          "note": "Listened to the Order-Sense read without interrupting; named the breach-from-within as a valve — deliberate design or conditional mechanism, not accident. Named the sealed rooms as chambers around something the builders didn't want touching the water, or vice versa.",
+          "learned": [
+            "A breach from within a designed seal reads as a valve to a smith — either something left inside with a key, or a condition the design was always waiting for",
+            "The sealed rooms in a channel-house are either storage or protection chambers — something the builders kept away from the water, or kept the water away from"
+          ],
+          "skillsObserved": [
+            "reading structural intent from breach direction",
+            "forensic diagnosis of pre-Transition construction by analogy from smithcraft"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the rubble site with Silas, standing, reading the buried structure's line north — has named the breach as a valve and is thinking through the implications"
+        }
+      ],
+      "factUpdates": [
         {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Has not moved from the root-spur since Silas began the cast — still attending the settling-seam.",
-          "statusNote": "On the root-spur above the rubble stones, attending the breached aperture in the hillside."
+          "op": "add",
+          "text": "Pell has named the breach-from-within as a valve — deliberate design or a conditional mechanism the structure was always built to trigger. Neither interpretation is accidental. The sealed rooms may be protection chambers around something kept from the water, or keeping something from it.",
+          "subjectId": "pell"
         }
       ],
       "codexUpdates": [
@@ -1156,39 +1184,36 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Order-Sense on the rubble site reveals a buried channel-house: low, rectangular, pre-Transition. Northwest corner is the exposed rubble. Main run goes into the hillside at an angle. Two apertures, both sealed — the lower one breached from within, settled open rather than forced. Three rooms or functions; what they were built around is unread.",
+          "fact": "Pell reads the lower aperture's breach-from-within as a valve: deliberate design or a conditional trigger. The sealed rooms are likely protection chambers — something the builders kept isolated from the water, or kept the water away from. Neither interpretation is an accident.",
           "links": [
             "millbrook",
             "pell",
             "aldric-provisioning-deal",
-            "dara-holt",
-            "palework",
-            "order-sense"
+            "dara-holt"
           ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Order-Sense identifies a pre-Transition channel-house buried in the hillside — two sealed rooms, lower aperture breached from within. Source structure located; interior contents and purpose still unread."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, economical Order-Sense cast — conserved draw, seconds of working time."
-      }
+        "why": "A short exchange — laying out the Order-Sense findings and hearing Pell's read"
+      },
+      "stateOps": [],
+      "placeUpdates": [
+        {
+          "note": "Pell named the breach-from-within as a valve — deliberate design or conditional trigger. The sealed rooms interpreted as protection chambers. This reading now part of the site's physical record."
+        }
+      ]
     },
     "sceneState": {
-      "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in the sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy.",
+      "setting": "West bank, thirty paces north of the column stain — packed earth and old stone rubble at the base of a steeper hillside. Dressed coursed stones half-buried in sedge mark the northwest corner of a buried channel-house. Settling-seam ten feet up the hillside marks the breached lower aperture. Copper-amber water, morning light through alder canopy.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing a half-step back, watching Silas's face come out of the Order-Sense read. Tools at her belt, no comment yet."
+          "state": "Standing, thumb wiped clean of sediment, eyes tracking north along the buried structure's line — has just named the brea"
         },
         {
           "name": "Huginn",
-          "state": "On the root-spur above the rubble stones, eye fixed on the settling-seam. Has not moved."
+          "state": "On the root-spur above the rubble stones, attending the settling-seam without interruption. Has not moved."
         }
       ],
       "objects": [
@@ -1202,10 +1227,10 @@
         "Column stain (thirty paces south — palm-print visible)"
       ],
       "threads": [
-        "Buried channel-house: three rooms or functions, two sealed apertures, one breached from within — interior contents unread",
-        "Huginn attending the settling-seam — something is concluding or concluded in what's buried here",
-        "Dara Holt's territory — no contact made; she is the senior irrigator for this channel",
-        "What the sealed rooms were built around — Order-Sense gave the skeleton, not the purpose"
+        "Buried channel-house: two sealed rooms, lower aperture breached from within — Pell names it a valve; interior contents and purpose unread",
+        "Huginn attending the settling-seam — has not moved or looked away",
+        "What the sealed rooms were built around — Order-Sense gave the skeleton, not the purpose",
+        "Dara Holt not yet contacted — senior irrigator for this channel, her territory"
       ]
     }
   },
@@ -1232,14 +1257,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable.",
         "Deathsense confirms the crack is stable and not widening — pressure equalized after the initial shift. The cause of the shift is upstream, past this shelf. The source of the iron contamination points further north.",
         "Pell reads the coping iron as received, not leached — names the crack's origin a decision, not age. Cause remains upstream.",
         "North of the willow bend — old column stain behind separated stone facing predates the contamination event. Something was bleeding through this bank before the current crisis began.",
         "Column stain Palework read — predates contamination by years or decades; a prior concluded event drained through this bank long before the gray-green water began. Material came down through stone, not up through water: a different origin from the current contamination. Two distinct events, two distinct timelines.",
         "Pell names the column stain's source direction — above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination. The gray-green water is a downstream symptom; the source is higher and behind stone.",
         "Thirty paces north of the column stain: dressed rubble stones at the bank base, a buried coursed structure visible as a settling-seam ten feet up the hillside. Huginn attending. Something was built here.",
-        "Order-Sense identifies a pre-Transition channel-house buried in the hillside — two sealed rooms, lower aperture breached from within. Source structure located; interior contents and purpose still unread."
+        "Order-Sense identifies a pre-Transition channel-house buried in the hillside — two sealed rooms, lower aperture breached from within. Source structure located; interior contents and purpose still unread.",
+        "Order-Sense confirms a pre-Transition channel-house buried in the hillside — lower aperture breached from within by design or conditional mechanism, not by accident or collapse. Pell reads it as a valve. Two sealed interior rooms remain unread."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1353,7 +1378,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Crossed the willow bend with Silas without hesitation — reading the continuous-mat coping in silence, watching the ground.",
         "[d2] Stopped moving when Silas knelt — reading the posture without asking. Waiting.",
         "[d2] Has not moved while Silas ran both Palework and Deathsense casts — reading the posture, waiting without asking.",
         "[d2] Read the coping iron by touch — named it received rather than leaching, and called the crack's origin a decision rather than age.",
@@ -1362,28 +1386,29 @@
         "[d2] Named the column stain's material direction as source-above-behind — a buried structure draining down through the hillside, not the river. Diagnosed the crack and the gray-green wa",
         "[d2] Identified the rubble stones as coursed — laid by hand, not river-tumbled. Standing now, reading the settling-seam in the hillside.",
         "[d2] Gave Silas the corner of her mouth over 'date two' — denied nothing, redirected to the work. Back to reading the rubble stones.",
-        "[d2] Watching Silas's face come out of the Order-Sense read — hasn't spoken yet, giving him room."
+        "[d2] Watching Silas's face come out of the Order-Sense read — hasn't spoken yet, giving him room.",
+        "[d2] Listened to the Order-Sense read without interrupting; named the breach-from-within as a valve — deliberate design or conditional mechanism, not accident. Named the sealed rooms as"
       ],
       "knownFacts": [
-        "Iron coping is receiving iron carried in the water, not leaching it from the stone",
-        "The crack opened due to a change below — not gradual age-stress; Pell reads it as a decision-shape in the material",
         "The column stain behind the separated facing is older than the valve failures and the gray-green water — something was bleeding through this bank before the con",
         "The column stain's material direction is distinct from the iron-mat contamination — it came down through the stone, not up from the water",
         "Stone holds direction — she can read whether a deposit ran down-in versus up-out by the grain it leaves",
         "The source is above and behind the bank, not from the channel — a buried structure settling and widening its drainage path",
         "The crack in the shelf and the gray-green water are symptoms; the source is higher up and behind stone",
-        "Rubble stones at the bank base are dressed and coursed — deliberate construction, not natural scree"
+        "Rubble stones at the bank base are dressed and coursed — deliberate construction, not natural scree",
+        "A breach from within a designed seal reads as a valve to a smith — either something left inside with a key, or a condition the design was always waiting for",
+        "The sealed rooms in a channel-house are either storage or protection chambers — something the builders kept away from the water, or kept the water away from"
       ],
       "skillsObserved": [
-        "distinguishing forced-change from age-change in worked stone",
-        "reading layered stone and iron stain for temporal sequence",
         "reading material direction and boundary interfaces by visual",
         "reading material direction and source-position from deposit ",
         "structural diagnosis by analogy from smithcraft",
-        "reading dressed stonework from a field examination"
+        "reading dressed stonework from a field examination",
+        "reading structural intent from breach direction",
+        "forensic diagnosis of pre-Transition construction by analogy"
       ],
       "status": "active",
-      "statusNote": "At the rubble site with Silas, standing back, waiting for the read to land.",
+      "statusNote": "At the rubble site with Silas, standing, reading the buried structure's line north — has named the breach as a valve and is thinking through the implications",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1488,7 +1513,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Mara provided valve failure dates from her ledger unprompted — four sleeve blank returns in three weeks documented. A note page torn and given to Silas.",
         "[d2] North track departed — Dara Holt's blue gate-post house passed without stopping, morning smoke from chimney.",
         "[d2] Fen's intake valve housing shows three distinct crust layers — outermost two gray-green, innermost older and darker. Iron dissolution process began ~30 days before the World-day minus-18 failure. Acti",
         "[d2] Knife-scraped strip on the valve housing above the waterline — three crust layers now exposed and readable. Do not cover. Physical evidence for Dara Holt.",
@@ -1499,7 +1523,8 @@
         "[d2] Wide reach north of the bedrock shelf — separated stone facing exposes a pre-existing dark column stain, older than Mara's ledger, older than the contamination event. Iron-mat here is the thickest sam",
         "[d2] Column stain Palework-read on World-day 14 morning — older than contamination by years/decades, slow-release residue of a vast concluded event, material came down through stone not up through water. P",
         "[d2] Pell named the column stain's source as above-and-behind the bank — a buried structure drainage, not river-origin. Source is higher up and behind stone, predating the current contamination event.",
-        "[d2] Thirty paces north of the column stain — dressed rubble stones in the sedge and a buried-structure settling-seam ten feet up the hillside. Iron-mat steps up sharply at this threshold. Huginn attended "
+        "[d2] Thirty paces north of the column stain — dressed rubble stones in the sedge and a buried-structure settling-seam ten feet up the hillside. Iron-mat steps up sharply at this threshold. Huginn attended ",
+        "[d2] Pell named the breach-from-within as a valve — deliberate design or conditional trigger. The sealed rooms interpreted as protection chambers. This reading now part of the site's physical record."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2030,7 +2055,8 @@
           "[d2] The column stain predates the contamination by years, possibly decades — not iron-dissolution but a slow release over years, residue of something vast and absolutely concluded. It came down through th",
           "[d2] Pell's read of the column stain's direction: source is above and behind the bank, not from the river. A buried structure settled and widened its drainage path — the crack in the shelf and the gray-gre",
           "[d2] Thirty paces north of the column stain: dressed rubble stones at the bank base, not river-rounded — coursed, laid by hand. A settling-seam ten feet up the hillside marks a buried structure. The iron-m",
-          "[d2] Order-Sense on the rubble site reveals a buried channel-house: low, rectangular, pre-Transition. Northwest corner is the exposed rubble. Main run goes into the hillside at an angle. Two apertures, bot"
+          "[d2] Order-Sense on the rubble site reveals a buried channel-house: low, rectangular, pre-Transition. Northwest corner is the exposed rubble. Main run goes into the hillside at an angle. Two apertures, bot",
+          "[d2] Pell reads the lower aperture's breach-from-within as a valve: deliberate design or a conditional trigger. The sealed rooms are likely protection chambers — something the builders kept isolated from t"
         ],
         "links": [
           "millbrook",
@@ -2087,14 +2113,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.34561895551542,
-    "cerebral": 39.200134745893905,
-    "social": 56.97953887250496,
-    "generous": 12.978453200307854,
-    "cautious": 32.91287112104777,
-    "physical": 1.4514245101864198,
-    "risky": 2.5382123462507713,
-    "ruthless": 0.7402609576967045
+    "strategic": 53.07889086073784,
+    "cerebral": 39.00413407216443,
+    "social": 56.69464117814243,
+    "generous": 12.913560934306314,
+    "cautious": 32.748306765442535,
+    "physical": 1.4441673876354877,
+    "risky": 2.5255212845195176,
+    "ruthless": 0.736559652908221
   },
   "aptitudes": [
     "strategist",
@@ -2102,7 +2128,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 149,
+  "actionCount": 150,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2188,8 +2214,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784050243843,
-  "rev": 216,
+  "updatedAt": 1784050435133,
+  "rev": 217,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2444,6 +2470,12 @@
       "text": "Thirty paces north of the column stain: dressed rubble stones sit in the sedge at the bank base, and a settling-seam ten feet up the hillside marks a buried coursed structure — something was deliberat",
       "day": 2,
       "subjectId": "the-water-crisis"
+    },
+    {
+      "id": "pell",
+      "text": "Pell has named the breach-from-within as a valve — deliberate design or a conditional mechanism the structure was always built to trigger. Neither interpretation is accidental. The sealed rooms may be",
+      "day": 2,
+      "subjectId": "pell"
     }
   ],
   "practice": {

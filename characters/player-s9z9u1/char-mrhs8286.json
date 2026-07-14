@@ -1091,14 +1091,57 @@
         "player": "Read the deeper chamber with Order-Sense — the grid of marks, the cradle-recess, the low ring-hook — what design does this room belong to?",
         "summary": "Order-Sense reads the deeper chamber — a fixed-purpose room, not a staging space; the object in the cradle-recess did not leave; the grid is a calibration surface, unfinished.",
         "narration": "The three energy leaves you quiet and precise — a conserved read, no wider than the room demands.\n\nThe design comes back in a single coherent shape, and it is not what the near chamber suggested. That room was a staging space, functional and repeated — objects in, objects out, the logic of a tool-chest. This room is something else. The worn parallel lines in the flags are not transit marks; they are stand-here marks, two positions, fixed and deliberate, where the same two people stood the same way for a very long time. The low ring-hook with its wide cradle-recess was not a rest-position between uses — it was the use. Whatever sat in that cradle sat there and worked from it, or was worked upon, and the design makes no provision for moving it elsewhere. The object this room was built around did not leave.\n\nThe grid of pressed marks reads last, and it takes a moment to resolve. Not a record, not a map — a calibration surface. The filled and empty squares are a binary register: some state tracked in increments, each mark pressed when a condition was met or changed. The design assumes whoever read it would know the key. You don't. But the architecture of the grid is clear enough — it runs left to right, oldest to newest, and the rightmost column is about two-thirds filled. Whatever it was tracking, it was not finished when this room was last used.\n\nHuginn has not moved. He is three feet from the cradle-recess and he is attending it the way he attended the bedrock crack this morning — patient, unhurried, and entirely certain."
+      },
+      {
+        "player": "Call Pell through — she should see the stand-marks and the grid before you touch anything",
+        "summary": "Pell enters the deeper chamber and reads the stand-marks as a two-person fixed operation — asks what the grid calibrated against.",
+        "narration": "Pell's name carries easily through the aperture — the ashlar catches it and gives it back once, clean.\n\nShe comes through without hesitation, angling her shoulders the same way you did, and straightens in the larger chamber. Her eyes do what a practical person's eyes always do in an unfamiliar space: ceiling first, floor second, walls after. Then she finds the worn stand-marks in the flags, and she stops.\n\n'There.' She crosses to the nearer of the two positions and puts her boot toe to the worn stone — not testing it, just occupying it, the way she'd stand at a forge station to read the angles. Her gaze tracks forward to the low ring-hook, then left to the grid. 'Two-person operation. Same stance, same facing, every time.' She looks back at you over her shoulder. 'You'd have to be consistent about it. Exact. Same spot, or the read comes out different.' She hasn't touched the grid, but she's studied it the way she studies a joint before she cuts — taking in the geometry of it. 'What was it calibrating against? There's no instrument here. No table. Nothing to put beside it and compare.'\n\nHuginn has not moved from his position facing the cradle-recess. He is attending it the way he attended the bedrock crack and the open bull — that quality of patience that is not waiting for something to happen but recognizing that something already did.\n\nPell glances at the bird, then at you. She doesn't say anything about him. She's learned that silence around Huginn is the more honest response."
       }
     ],
     "lastTurn": {
-      "narration": "The three energy leaves you quiet and precise — a conserved read, no wider than the room demands.\n\nThe design comes back in a single coherent shape, and it is not what the near chamber suggested. That room was a staging space, functional and repeated — objects in, objects out, the logic of a tool-chest. This room is something else. The worn parallel lines in the flags are not transit marks; they are stand-here marks, two positions, fixed and deliberate, where the same two people stood the same way for a very long time. The low ring-hook with its wide cradle-recess was not a rest-position between uses — it was the use. Whatever sat in that cradle sat there and worked from it, or was worked upon, and the design makes no provision for moving it elsewhere. The object this room was built around did not leave.\n\nThe grid of pressed marks reads last, and it takes a moment to resolve. Not a record, not a map — a calibration surface. The filled and empty squares are a binary register: some state tracked in increments, each mark pressed when a condition was met or changed. The design assumes whoever read it would know the key. You don't. But the architecture of the grid is clear enough — it runs left to right, oldest to newest, and the rightmost column is about two-thirds filled. Whatever it was tracking, it was not finished when this room was last used.\n\nHuginn has not moved. He is three feet from the cradle-recess and he is attending it the way he attended the bedrock crack this morning — patient, unhurried, and entirely certain.",
-      "sceneSummary": "Order-Sense reads the deeper chamber — a fixed-purpose room, not a staging space; the object in the cradle-recess did not leave; the grid is a calibration surface, unfinished.",
+      "narration": "Pell's name carries easily through the aperture — the ashlar catches it and gives it back once, clean.\n\nShe comes through without hesitation, angling her shoulders the same way you did, and straightens in the larger chamber. Her eyes do what a practical person's eyes always do in an unfamiliar space: ceiling first, floor second, walls after. Then she finds the worn stand-marks in the flags, and she stops.\n\n'There.' She crosses to the nearer of the two positions and puts her boot toe to the worn stone — not testing it, just occupying it, the way she'd stand at a forge station to read the angles. Her gaze tracks forward to the low ring-hook, then left to the grid. 'Two-person operation. Same stance, same facing, every time.' She looks back at you over her shoulder. 'You'd have to be consistent about it. Exact. Same spot, or the read comes out different.' She hasn't touched the grid, but she's studied it the way she studies a joint before she cuts — taking in the geometry of it. 'What was it calibrating against? There's no instrument here. No table. Nothing to put beside it and compare.'\n\nHuginn has not moved from his position facing the cradle-recess. He is attending it the way he attended the bedrock crack and the open bull — that quality of patience that is not waiting for something to happen but recognizing that something already did.\n\nPell glances at the bird, then at you. She doesn't say anything about him. She's learned that silence around Huginn is the more honest response.",
+      "sceneSummary": "Pell enters the deeper chamber and reads the stand-marks as a two-person fixed operation — asks what the grid calibrated against.",
       "choices": [
         {
-          "label": "Run Palework on the cradle-recess itself — read what material sat here, how long, and whether it concluded or was removed",
+          "label": "Read the grid of marks with Order-Sense — what design does this surface belong to, and what was it calibrated against?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.2,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step into one stand-position while Pell takes the other — occupy the two fixed points together and see what that tells you about the room's orientation",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.1,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the cradle-recess with Palework — it held something; what does the stone remember of it?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -1117,50 +1160,16 @@
           "emergenceId": null
         },
         {
-          "label": "Call Pell through — she should see the stand-marks and the grid before you touch anything",
+          "label": "Answer Pell's question plainly — tell her what Order-Sense found: no instrument because the room itself was the instrument, and the object in the cradle was the variable",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Examine the grid of marks directly — trace the filled/empty pattern with your fingers and try to find the logic of the key",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "axes": {
-            "concrete_abstract": -0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Huginn plainly — what is ending here, or what ended here that he is still attending?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2
+            "concrete_abstract": 0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "scout"
+            "explain",
+            "collaborate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1169,11 +1178,6 @@
           "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3,
-        "xp": 0
-      },
       "scene": {
         "setting": "West bank hillside — inside the deeper chamber, accessed through the second aperture. Dry ashlar, stone flags worn in two parallel stand-positions running to the far wall. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
         "npcsPresent": [
@@ -1183,14 +1187,14 @@
           },
           {
             "name": "Pell",
-            "state": "Still in the near chamber — has not come through the second aperture"
+            "state": "Standing at the nearer of the two worn stand-positions, boot toe to the stone, studying the grid without touching it"
           }
         ],
         "objects": [
           "Memory (spear, in hand)",
           "Low ring-hook — centered on the far wall, hip height, single",
-          "Cradle-recess — below the low ring-hook, wider and deeper than near-chamber recesses; the object built for this room did not leave",
-          "Grid of pressed marks — left of the ring-hook, shoulder height; binary filled/empty pattern, runs left-to-right oldest-to-newest, rightmost column ~two-thirds filled; a calibration surface, key unknown",
+          "Cradle-recess — below the low ring-hook, wider and deeper than near-chamber recesses",
+          "Grid of pressed marks — left of the ring-hook, shoulder height; binary filled/empty pattern, rightmost column unfinished",
           "Worn parallel stand-positions in flags — two fixed points, not transit marks",
           "Column stain — ceiling and upper far wall, darkest at top",
           "Belt Knife (at hip)",
@@ -1198,62 +1202,56 @@
           "Valve Failure Timeline note (breast pocket)"
         ],
         "threads": [
-          "Grid calibration key — the filled/empty logic is unreadable without knowing what was tracked; rightmost column unfinished",
+          "Grid calibration key — Pell has named the question plainly: what was it calibrated against? No instrument, no table visible",
           "Cradle-recess — the object this room was built around did not leave; Huginn is attending it",
-          "The two stand-positions suggest this was always a two-person operation",
-          "Pell has not yet come through — the near chamber is unobserved",
+          "The two stand-positions are now physically occupied by Pell (nearer) — the farther one is empty",
           "Huginn is attending the cradle-recess with the same quality of attention he gave the bedrock crack"
         ]
       },
-      "codexUpdates": [
+      "npcUpdates": [
         {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave, and a calibration grid (binary filled/empty squares, left-to-right oldest-to-newest) tracking an unfinished process. The room's object is still here, or was here until very recently.",
-          "links": [
-            "millbrook",
-            "aldric-provisioning-deal",
-            "pell",
-            "dara-holt",
-            "order-sense"
-          ]
-        },
-        {
-          "topic": "the-deeper-chamber",
-          "label": "The Deeper Chamber",
-          "kind": "place",
-          "fact": "Fixed-purpose room: two worn stand-positions, a hip-height ring-hook with wide cradle-recess (the object sat here and worked from here or was worked upon — it did not leave), and a calibration surface of pressed binary marks running left-to-right oldest-to-newest, rightmost column ~two-thirds filled and unfinished when last used.",
-          "links": [
-            "the-water-crisis",
-            "millbrook",
-            "aldric-provisioning-deal",
-            "pell",
-            "order-sense",
-            "palework"
-          ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Deeper chamber Order-Sense read (World-day 14): fixed-purpose room confirmed — two worn stand-positions in flags, low ring-hook cradle-recess built for one specific object that did not leave, calibration grid (binary, left-to-right, rightmost column ~two-thirds filled and unfinished). This room was a permanent installation, not a transit space.",
-          "subPlace": {
-            "name": "Deeper Chamber — West Bank Buried Structure",
-            "note": "Fixed-purpose installation chamber — stand-positions, cradle-recess, unfinished calibration grid. Object built for this room may still be present.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Entered the deeper chamber, occupied the nearer stand-position by instinct, read the two-person fixed-operation geometry without prompting, and asked the right question about the grid's calibration reference",
+          "learned": [
+            "The deeper chamber requires two people in fixed positions — consistent stance, same facing, or the read comes out different",
+            "The grid has no visible calibration reference — no instrument, no table, nothing to compare against"
+          ],
+          "skillsObserved": [
+            "reading fixed-operation geometry from floor wear",
+            "identifying two-person craft stations by stance analysis"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the deeper chamber, standing at the nearer worn stand-position, studying the grid"
         }
       ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Deeper chamber Order-Sense read complete — fixed-purpose room, calibration grid unfinished, object in cradle-recess did not leave. Huginn attending the far wall. Investigation deepening."
+          "note": "Pell now in the deeper chamber — two-person fixed-operation confirmed by her read of the stand-marks. The calibration question is open: what did the grid measure against?"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Pell read the deeper chamber's stand-marks as a two-person fixed operation requiring exact positioning — the grid calibrated against something not present in the room, which means either the instrument left with the object in the cradle, or the reference was never physical",
+          "links": [
+            "millbrook",
+            "pell",
+            "aldric-provisioning-deal",
+            "dara-holt"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a careful Order-Sense read of the deeper chamber"
+        "why": "A brief exchange and Pell crossing the threshold — no more than a few minutes"
       }
     },
     "sceneState": {
@@ -1265,7 +1263,7 @@
         },
         {
           "name": "Pell",
-          "state": "Still in the near chamber — has not come through the second aperture"
+          "state": "Standing at the nearer of the two worn stand-positions, boot toe to the stone, studying the grid without touching it"
         }
       ],
       "objects": [
@@ -1280,10 +1278,9 @@
         "Valve Failure Timeline note (breast pocket)"
       ],
       "threads": [
-        "Grid calibration key — the filled/empty logic is unreadable without knowing what was tracked; rightmost column unfinished",
+        "Grid calibration key — Pell has named the question plainly: what was it calibrated against? No instrument, no table visible",
         "Cradle-recess — the object this room was built around did not leave; Huginn is attending it",
-        "The two stand-positions suggest this was always a two-person operation",
-        "Pell has not yet come through — the near chamber is unobserved",
+        "The two stand-positions are now physically occupied by Pell (nearer) — the farther one is empty",
         "Huginn is attending the cradle-recess with the same quality of attention he gave the bedrock crack"
       ]
     }
@@ -1311,14 +1308,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Order-Sense confirms a pre-Transition channel-house buried in the hillside — lower aperture breached from within by design or conditional mechanism, not by accident or collapse. Pell reads it as a valve. Two sealed interior rooms remain unread.",
         "Huginn reads the cleared aperture as old and concluded — no active danger from within. The inner space is dry, cool, and mineral-smelling. The next step is Silas's call: read further, open it, or bring Dara Holt before touching anything.",
         "Pell reads the frame as sound and dry — the structure has already made its move. Inner space is accessible. Decision point: enter now or bring Dara Holt first.",
         "Sealed chamber opened — near room dry, two rooms confirmed, three empty iron ring-hooks and recesses. Second aperture leads deeper. Physical evidence accumulating for Aldric and Dara Holt.",
         "Deathsense reads the deeper chamber as concluded — no active ending, nothing dying toward anything. The structure's purpose has already run its course. Physical investigation continues.",
         "Near chamber fully read — staging space confirmed, older than the channel infrastructure, emptied deliberately. Pell recalls a similar site deeper in the valley. Huginn is facing the second aperture.",
         "Second aperture crossed — deeper chamber confirmed: worn foot-path, low ring-hook with cradle-recess, grid of pressed marks in ashlar, column stain heaviest at ceiling. Huginn is attending the far wall.",
-        "Deeper chamber Order-Sense read complete — fixed-purpose room, calibration grid unfinished, object in cradle-recess did not leave. Huginn attending the far wall. Investigation deepening."
+        "Deeper chamber Order-Sense read complete — fixed-purpose room, calibration grid unfinished, object in cradle-recess did not leave. Huginn attending the far wall. Investigation deepening.",
+        "Pell now in the deeper chamber — two-person fixed-operation confirmed by her read of the stand-marks. The calibration question is open: what did the grid measure against?"
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1432,7 +1429,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Listened to the Order-Sense read without interrupting; named the breach-from-within as a valve — deliberate design or conditional mechanism, not accident. Named the sealed rooms as",
         "[d2] Deflected the compliment with a flat 'Weir' — but her ears went red in the morning light. She is crouched at the rubble, working.",
         "[d2] Named the conditions for reading the aperture plainly — clear the face first, then ask Huginn, then decide whether opening it is yours to do. Said 'what Huginn thinks' without infl",
         "[d2] Named Huginn's attendance as the clearest permission she knows — deferred the call on the seating-piece to Silas without pressure.",
@@ -1441,28 +1437,29 @@
         "[d2] Held the jamb while Silas read the second aperture — listening for the result, not pressing for it",
         "[d2] Held the jamb while Silas ran Order-Sense — read his stillness correctly, asked one word: 'Something?' Awaiting his answer.",
         "[d2] Crossed the threshold after Silas's report — named matched-pair carrying from the hook-spacing and clean cut-work from the recess edges. Recalled a similar flagged cellar site deep",
-        "[d2] Has not yet crossed into the deeper chamber — last known position is the near chamber near the threshold"
+        "[d2] Has not yet crossed into the deeper chamber — last known position is the near chamber near the threshold",
+        "[d2] Entered the deeper chamber, occupied the nearer stand-position by instinct, read the two-person fixed-operation geometry without prompting, and asked the right question about the g"
       ],
       "knownFacts": [
-        "Treats Huginn's read as craft-process evidence, not superstition — 'not warning us off' is a go-condition for her",
-        "Frame is structurally sound — joints tight except at the seating-piece channel; breach was not stone failure",
         "Channel is clean inside — no debris, no calcium bridging; the piece moved on its own",
         "Stone is dry — no hydrostatic load, the sealed rooms are not full of water",
         "Near chamber is dry ashlar, stone flags, three iron ring-hooks with empty recesses below — something was held or stored here",
         "Deathsense found nothing ending in the deeper chamber — the space concluded long before the aperture was sealed",
         "Matched-pair carrying inferred from ring-hook spacing — whatever they carried, they carried two at a time",
-        "Recalls a similar site: flagged cellar under a field barn, deeper valley, pre-Transition — ring-hooks, flagged floor, nothing else. Locals called it 'the wash-r"
+        "Recalls a similar site: flagged cellar under a field barn, deeper valley, pre-Transition — ring-hooks, flagged floor, nothing else. Locals called it 'the wash-r",
+        "The deeper chamber requires two people in fixed positions — consistent stance, same facing, or the read comes out different",
+        "The grid has no visible calibration reference — no instrument, no table, nothing to compare against"
       ],
       "skillsObserved": [
-        "reading channel condition from dressed stone face",
-        "hydrostatic load assessment by palm-contact",
         "patience under uncertainty — not crowding Silas's read",
         "reading a companion's stillness as data",
         "site-comparison across buried structures",
-        "inferring load and carry-method from mounting geometry"
+        "inferring load and carry-method from mounting geometry",
+        "reading fixed-operation geometry from floor wear",
+        "identifying two-person craft stations by stance analysis"
       ],
       "status": "active",
-      "statusNote": "In the near chamber, near the second aperture threshold — Silas is now through; she has not yet followed",
+      "statusNote": "In the deeper chamber, standing at the nearer worn stand-position, studying the grid",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2090,7 +2087,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Palework on Fen's intake: iron dissolution working inward from the water-facing surface, three crust layers — process predates the World-day minus-18 failure by thirty days minimum. Active rot front a",
           "[d2] The rot at Fen's intake targets iron specifically — stone collar unaffected. Pell named this as non-natural: acid water degrades stone first. Iron-specific targeting implies the water chemistry is doi",
           "[d2] Upstream trace confirms the deposit thickens with distance north — iron banding-strips show four layers by 150 yards above Fen's intake. Water color shifts from dilute gray-green to a deeper copper-ti",
           "[d2] Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains th",
@@ -2113,7 +2109,8 @@
           "[d2] Order-Sense confirms the near chamber was a staging space, not storage — ring-hooks held long heavy objects carried through the second aperture and used beyond it. Design predates the east channel inf",
           "[d2] Pell recalls a similar flagged-cellar site deeper in the valley — ring-hooks, flagged floor, locals called it 'the wash-room'. Nothing was washed in it. Two sites with identical architecture suggests ",
           "[d2] The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting ",
-          "[d2] Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave"
+          "[d2] Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave",
+          "[d2] Pell read the deeper chamber's stand-marks as a two-person fixed operation requiring exact positioning — the grid calibrated against something not present in the room, which means either the instrumen"
         ],
         "links": [
           "millbrook",
@@ -2204,14 +2201,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.13301118326922,
-    "cerebral": 39.86718829520663,
-    "social": 54.604343460280674,
-    "generous": 13.176697110238303,
-    "cautious": 38.823569417100174,
-    "physical": 1.3666944213060594,
-    "risky": 3.36528738714325,
-    "ruthless": 0.697046600835495
+    "strategic": 52.867346127352874,
+    "cerebral": 39.667852353730595,
+    "social": 54.33132174297927,
+    "generous": 14.110813624687111,
+    "cautious": 39.62945157001467,
+    "physical": 1.359860949199529,
+    "risky": 3.3484609502075338,
+    "ruthless": 0.6935613678313175
   },
   "aptitudes": [
     "strategist",
@@ -2219,7 +2216,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 161,
+  "actionCount": 162,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2305,8 +2302,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784066629878,
-  "rev": 230,
+  "updatedAt": 1784066804100,
+  "rev": 231,
   "generated": {
     "schemaVersion": 1,
     "npc": {

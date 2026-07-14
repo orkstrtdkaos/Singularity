@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 463,
+  "xp": 468,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,8 +42,8 @@
     "spectrumId": -0.7225269518328308,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.1669360079459682,
-    "mechanical_spiritual": 0.15995247066926604,
-    "concrete_abstract": -0.033222619481759016,
+    "mechanical_spiritual": 0.15695484713580274,
+    "concrete_abstract": -0.041561488507671066,
     "death_life": -0.12752619669469617,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 43,
+  "energy": 38,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1086,71 +1086,38 @@
         "player": "Go through the second aperture — Memory in hand, Huginn already looking that way.",
         "summary": "Silas steps through the second aperture into a larger chamber — worn foot-path, low ring-hook with a cradle-recess, a grid of pressed marks in the ashlar, and Huginn attending the far wall.",
         "narration": "You take Memory from the flags and step through.\n\nThe second aperture is tighter than the first — you angle the spear shaft to clear the rough-dressed edges, and your shoulder brushes stone on the left side. Then you're through, and the chamber opens around you.\n\nIt's larger than the near room. Not vast — maybe eight paces across, ten deep — but the ceiling lifts a full arm's length higher, and the air is different: drier, if anything, with a faint mineral edge that sits at the back of the throat. The flags continue underfoot, the same cut and spacing, but they have been worn slightly in two parallel lines that run from the aperture you just stepped through to the far wall. Foot traffic, repeated, over a long time. People came here and knew exactly where they were going.\n\nThe far wall holds something you did not expect: a third ring-hook, centered, lower than the three in the near chamber — set at hip height rather than chest height — and below it a recess wider and deeper than any of the ones behind you. Not a rest-position. A seat, or a cradle. To the left of the hook, at roughly shoulder height, a series of shallow marks have been pressed or struck into the ashlar: not runes, not script, but a regular grid of small squares, some filled, some empty, in a pattern you cannot immediately read. To the right: nothing. Just clean dressed stone and the column stain bleeding down from the ceiling, thicker here than in the near chamber, darkest at the top.\n\nHuginn comes through behind you without a sound and walks directly to the center of the worn path. He stops at the far end of it — three feet from the cradle-recess — and stands very still, looking at the low ring-hook the way he looked at the bedrock crack this morning. Not a warning. Attending."
+      },
+      {
+        "player": "Read the deeper chamber with Order-Sense — the grid of marks, the cradle-recess, the low ring-hook — what design does this room belong to?",
+        "summary": "Order-Sense reads the deeper chamber — a fixed-purpose room, not a staging space; the object in the cradle-recess did not leave; the grid is a calibration surface, unfinished.",
+        "narration": "The three energy leaves you quiet and precise — a conserved read, no wider than the room demands.\n\nThe design comes back in a single coherent shape, and it is not what the near chamber suggested. That room was a staging space, functional and repeated — objects in, objects out, the logic of a tool-chest. This room is something else. The worn parallel lines in the flags are not transit marks; they are stand-here marks, two positions, fixed and deliberate, where the same two people stood the same way for a very long time. The low ring-hook with its wide cradle-recess was not a rest-position between uses — it was the use. Whatever sat in that cradle sat there and worked from it, or was worked upon, and the design makes no provision for moving it elsewhere. The object this room was built around did not leave.\n\nThe grid of pressed marks reads last, and it takes a moment to resolve. Not a record, not a map — a calibration surface. The filled and empty squares are a binary register: some state tracked in increments, each mark pressed when a condition was met or changed. The design assumes whoever read it would know the key. You don't. But the architecture of the grid is clear enough — it runs left to right, oldest to newest, and the rightmost column is about two-thirds filled. Whatever it was tracking, it was not finished when this room was last used.\n\nHuginn has not moved. He is three feet from the cradle-recess and he is attending it the way he attended the bedrock crack this morning — patient, unhurried, and entirely certain."
       }
     ],
     "lastTurn": {
-      "narration": "You take Memory from the flags and step through.\n\nThe second aperture is tighter than the first — you angle the spear shaft to clear the rough-dressed edges, and your shoulder brushes stone on the left side. Then you're through, and the chamber opens around you.\n\nIt's larger than the near room. Not vast — maybe eight paces across, ten deep — but the ceiling lifts a full arm's length higher, and the air is different: drier, if anything, with a faint mineral edge that sits at the back of the throat. The flags continue underfoot, the same cut and spacing, but they have been worn slightly in two parallel lines that run from the aperture you just stepped through to the far wall. Foot traffic, repeated, over a long time. People came here and knew exactly where they were going.\n\nThe far wall holds something you did not expect: a third ring-hook, centered, lower than the three in the near chamber — set at hip height rather than chest height — and below it a recess wider and deeper than any of the ones behind you. Not a rest-position. A seat, or a cradle. To the left of the hook, at roughly shoulder height, a series of shallow marks have been pressed or struck into the ashlar: not runes, not script, but a regular grid of small squares, some filled, some empty, in a pattern you cannot immediately read. To the right: nothing. Just clean dressed stone and the column stain bleeding down from the ceiling, thicker here than in the near chamber, darkest at the top.\n\nHuginn comes through behind you without a sound and walks directly to the center of the worn path. He stops at the far end of it — three feet from the cradle-recess — and stands very still, looking at the low ring-hook the way he looked at the bedrock crack this morning. Not a warning. Attending.",
-      "sceneSummary": "Silas steps through the second aperture into a larger chamber — worn foot-path, low ring-hook with a cradle-recess, a grid of pressed marks in the ashlar, and Huginn attending the far wall.",
+      "narration": "The three energy leaves you quiet and precise — a conserved read, no wider than the room demands.\n\nThe design comes back in a single coherent shape, and it is not what the near chamber suggested. That room was a staging space, functional and repeated — objects in, objects out, the logic of a tool-chest. This room is something else. The worn parallel lines in the flags are not transit marks; they are stand-here marks, two positions, fixed and deliberate, where the same two people stood the same way for a very long time. The low ring-hook with its wide cradle-recess was not a rest-position between uses — it was the use. Whatever sat in that cradle sat there and worked from it, or was worked upon, and the design makes no provision for moving it elsewhere. The object this room was built around did not leave.\n\nThe grid of pressed marks reads last, and it takes a moment to resolve. Not a record, not a map — a calibration surface. The filled and empty squares are a binary register: some state tracked in increments, each mark pressed when a condition was met or changed. The design assumes whoever read it would know the key. You don't. But the architecture of the grid is clear enough — it runs left to right, oldest to newest, and the rightmost column is about two-thirds filled. Whatever it was tracking, it was not finished when this room was last used.\n\nHuginn has not moved. He is three feet from the cradle-recess and he is attending it the way he attended the bedrock crack this morning — patient, unhurried, and entirely certain.",
+      "sceneSummary": "Order-Sense reads the deeper chamber — a fixed-purpose room, not a staging space; the object in the cradle-recess did not leave; the grid is a calibration surface, unfinished.",
       "choices": [
         {
-          "label": "Read the deeper chamber with Order-Sense — the grid of marks, the cradle-recess, the low ring-hook — what design does this room belong to?",
+          "label": "Run Palework on the cradle-recess itself — read what material sat here, how long, and whether it concluded or was removed",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.2,
-            "mechanical_spiritual": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Crouch at the cradle-recess and read it close — run your hands along the edges, feel what the stone remembers holding",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "concrete_abstract": -0.4,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the grid of marks — study the pattern of filled and empty squares, try to find the logic in it",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "concrete_abstract": -0.3,
-            "chaos_order": 0.2
+            "death_life": -0.3,
+            "concrete_abstract": -0.2
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "palework",
+          "energyCost": 6,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell Pell what you see — call back through the aperture so she can decide whether to come through or hold the near chamber",
+          "label": "Call Pell through — she should see the stand-marks and the grid before you touch anything",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -1164,132 +1131,160 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Examine the grid of marks directly — trace the filled/empty pattern with your fingers and try to find the logic of the key",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": -0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn plainly — what is ending here, or what ended here that he is still attending?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3,
+        "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Second aperture crossed — deeper chamber confirmed: worn foot-path, low ring-hook with cradle-recess, grid of pressed marks in ashlar, column stain heaviest at ceiling. Huginn is attending the far wall."
-        }
-      ],
       "scene": {
-        "setting": "West bank hillside — inside the deeper chamber, accessed through the second aperture. Dry ashlar, stone flags worn in two parallel lines, ceiling higher than the near chamber. Faint mineral smell. The near chamber and daylight gap are visible back through the rough-dressed aperture behind.",
+        "setting": "West bank hillside — inside the deeper chamber, accessed through the second aperture. Dry ashlar, stone flags worn in two parallel stand-positions running to the far wall. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
         "npcsPresent": [
           {
             "name": "Huginn",
-            "state": "Standing at the far end of the worn path, three feet from the cradle-recess, very still — attending the low ring-hook"
+            "state": "Standing three feet from the cradle-recess, facing the low ring-hook — attending it, unmoving"
           },
           {
             "name": "Pell",
-            "state": "Presumably still in the near chamber — has not yet come through the second aperture"
+            "state": "Still in the near chamber — has not come through the second aperture"
           }
         ],
         "objects": [
           "Memory (spear, in hand)",
           "Low ring-hook — centered on the far wall, hip height, single",
-          "Cradle-recess — below the low ring-hook, wider and deeper than the near-chamber recesses",
-          "Grid of pressed marks — left of the ring-hook, shoulder height, small squares filled and empty in a regular pattern",
-          "Column stain — ceiling and upper far wall, darkest at top, thicker than in the near chamber",
-          "Worn parallel lines in the stone flags — running from the aperture to the far wall",
+          "Cradle-recess — below the low ring-hook, wider and deeper than near-chamber recesses; the object built for this room did not leave",
+          "Grid of pressed marks — left of the ring-hook, shoulder height; binary filled/empty pattern, runs left-to-right oldest-to-newest, rightmost column ~two-thirds filled; a calibration surface, key unknown",
+          "Worn parallel stand-positions in flags — two fixed points, not transit marks",
+          "Column stain — ceiling and upper far wall, darkest at top",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)"
         ],
         "threads": [
-          "Grid of pressed marks — filled/empty square pattern, no immediately legible logic",
-          "Cradle-recess is larger and differently shaped than the near-chamber rest-positions — something specific was set here",
-          "Low ring-hook at hip height differs from chest-height hooks in the near chamber — different use, different object",
-          "Huginn is attending the cradle-recess the same way he attended the bedrock crack this morning",
+          "Grid calibration key — the filled/empty logic is unreadable without knowing what was tracked; rightmost column unfinished",
+          "Cradle-recess — the object this room was built around did not leave; Huginn is attending it",
+          "The two stand-positions suggest this was always a two-person operation",
           "Pell has not yet come through — the near chamber is unobserved",
-          "Column stain is heaviest at the ceiling here — source is above and behind, consistent with Pell's read outside"
+          "Huginn is attending the cradle-recess with the same quality of attention he gave the bedrock crack"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Has not yet crossed into the deeper chamber — last known position is the near chamber near the threshold",
-          "statusNote": "In the near chamber, near the second aperture threshold — Silas is now through; she has not yet followed",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Followed Silas through the second aperture silently and walked directly to the far end of the worn path — attending the low ring-hook and cradle-recess",
-          "learned": [
-            "The deeper chamber holds something worth attending at the far wall — Huginn went directly to it"
-          ],
-          "statusNote": "In the deeper chamber, attending the cradle-recess at the far wall",
-          "status": "active"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Deeper chamber confirmed beyond the second aperture — larger than the near chamber, worn parallel foot-path in flags, single low ring-hook (hip height) with wide cradle-recess, grid of pressed marks (filled/empty squares) in ashlar left of hook, column stain heaviest at ceiling. Huginn attended the far wall immediately on entry.",
-          "subPlace": {
-            "name": "Deeper Chamber — West Bank Hillside Structure",
-            "note": "The inner room beyond the second aperture — larger, drier, with a worn foot-path, cradle-recess, grid marks, and the thickest concentration of column stain at the ceiling.",
-            "visited": true
-          }
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting a specific and singular object was set here. A grid of filled/empty square marks is pressed into the ashlar to the left. The column stain is heaviest at the ceiling here. The flags show wear in two parallel lines from aperture to far wall — repeated, purposeful foot traffic over a long period.",
+          "fact": "Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave, and a calibration grid (binary filled/empty squares, left-to-right oldest-to-newest) tracking an unfinished process. The room's object is still here, or was here until very recently.",
           "links": [
             "millbrook",
             "aldric-provisioning-deal",
             "pell",
-            "dara-holt"
+            "dara-holt",
+            "order-sense"
+          ]
+        },
+        {
+          "topic": "the-deeper-chamber",
+          "label": "The Deeper Chamber",
+          "kind": "place",
+          "fact": "Fixed-purpose room: two worn stand-positions, a hip-height ring-hook with wide cradle-recess (the object sat here and worked from here or was worked upon — it did not leave), and a calibration surface of pressed binary marks running left-to-right oldest-to-newest, rightmost column ~two-thirds filled and unfinished when last used.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "aldric-provisioning-deal",
+            "pell",
+            "order-sense",
+            "palework"
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "Deeper chamber Order-Sense read (World-day 14): fixed-purpose room confirmed — two worn stand-positions in flags, low ring-hook cradle-recess built for one specific object that did not leave, calibration grid (binary, left-to-right, rightmost column ~two-thirds filled and unfinished). This room was a permanent installation, not a transit space.",
+          "subPlace": {
+            "name": "Deeper Chamber — West Bank Buried Structure",
+            "note": "Fixed-purpose installation chamber — stand-positions, cradle-recess, unfinished calibration grid. Object built for this room may still be present.",
+            "visited": true
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Deeper chamber Order-Sense read complete — fixed-purpose room, calibration grid unfinished, object in cradle-recess did not leave. Huginn attending the far wall. Investigation deepening."
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "A few moments to step through the aperture and take in the deeper chamber"
+        "hoursPassed": 0.25,
+        "why": "a careful Order-Sense read of the deeper chamber"
       }
     },
     "sceneState": {
-      "setting": "West bank hillside — inside the deeper chamber, accessed through the second aperture. Dry ashlar, stone flags worn in two parallel lines, ceiling higher than the near chamber. Faint mineral smell. The near chamber and daylight gap are visible back through the rough-dressed aperture behind.",
+      "setting": "West bank hillside — inside the deeper chamber, accessed through the second aperture. Dry ashlar, stone flags worn in two parallel stand-positions running to the far wall. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
       "npcsPresent": [
         {
           "name": "Huginn",
-          "state": "Standing at the far end of the worn path, three feet from the cradle-recess, very still — attending the low ring-hook"
+          "state": "Standing three feet from the cradle-recess, facing the low ring-hook — attending it, unmoving"
         },
         {
           "name": "Pell",
-          "state": "Presumably still in the near chamber — has not yet come through the second aperture"
+          "state": "Still in the near chamber — has not come through the second aperture"
         }
       ],
       "objects": [
         "Memory (spear, in hand)",
         "Low ring-hook — centered on the far wall, hip height, single",
-        "Cradle-recess — below the low ring-hook, wider and deeper than the near-chamber ",
-        "Grid of pressed marks — left of the ring-hook, shoulder height, small squares fi",
-        "Column stain — ceiling and upper far wall, darkest at top, thicker than in the n",
-        "Worn parallel lines in the stone flags — running from the aperture to the far wa",
+        "Cradle-recess — below the low ring-hook, wider and deeper than near-chamber rece",
+        "Grid of pressed marks — left of the ring-hook, shoulder height; binary filled/em",
+        "Worn parallel stand-positions in flags — two fixed points, not transit marks",
+        "Column stain — ceiling and upper far wall, darkest at top",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
         "Valve Failure Timeline note (breast pocket)"
       ],
       "threads": [
-        "Grid of pressed marks — filled/empty square pattern, no immediately legible logic",
-        "Cradle-recess is larger and differently shaped than the near-chamber rest-positions — something specific was set here",
-        "Low ring-hook at hip height differs from chest-height hooks in the near chamber — different use, different object",
-        "Huginn is attending the cradle-recess the same way he attended the bedrock crack this morning",
-        "Pell has not yet come through — the near chamber is unobserved"
+        "Grid calibration key — the filled/empty logic is unreadable without knowing what was tracked; rightmost column unfinished",
+        "Cradle-recess — the object this room was built around did not leave; Huginn is attending it",
+        "The two stand-positions suggest this was always a two-person operation",
+        "Pell has not yet come through — the near chamber is unobserved",
+        "Huginn is attending the cradle-recess with the same quality of attention he gave the bedrock crack"
       ]
     }
   },
@@ -1316,14 +1311,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Order-Sense identifies a pre-Transition channel-house buried in the hillside — two sealed rooms, lower aperture breached from within. Source structure located; interior contents and purpose still unread.",
         "Order-Sense confirms a pre-Transition channel-house buried in the hillside — lower aperture breached from within by design or conditional mechanism, not by accident or collapse. Pell reads it as a valve. Two sealed interior rooms remain unread.",
         "Huginn reads the cleared aperture as old and concluded — no active danger from within. The inner space is dry, cool, and mineral-smelling. The next step is Silas's call: read further, open it, or bring Dara Holt before touching anything.",
         "Pell reads the frame as sound and dry — the structure has already made its move. Inner space is accessible. Decision point: enter now or bring Dara Holt first.",
         "Sealed chamber opened — near room dry, two rooms confirmed, three empty iron ring-hooks and recesses. Second aperture leads deeper. Physical evidence accumulating for Aldric and Dara Holt.",
         "Deathsense reads the deeper chamber as concluded — no active ending, nothing dying toward anything. The structure's purpose has already run its course. Physical investigation continues.",
         "Near chamber fully read — staging space confirmed, older than the channel infrastructure, emptied deliberately. Pell recalls a similar site deeper in the valley. Huginn is facing the second aperture.",
-        "Second aperture crossed — deeper chamber confirmed: worn foot-path, low ring-hook with cradle-recess, grid of pressed marks in ashlar, column stain heaviest at ceiling. Huginn is attending the far wall."
+        "Second aperture crossed — deeper chamber confirmed: worn foot-path, low ring-hook with cradle-recess, grid of pressed marks in ashlar, column stain heaviest at ceiling. Huginn is attending the far wall.",
+        "Deeper chamber Order-Sense read complete — fixed-purpose room, calibration grid unfinished, object in cradle-recess did not leave. Huginn attending the far wall. Investigation deepening."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1572,7 +1567,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Bedrock shelf 70 paces north of the willow bend — hairline crack showed an amber thread of light below the waterline on World-day 14 morning. Pulsed once and went still. Huginn attended it. Physical s",
         "[d2] Bedrock shelf 70 paces north of the willow bend — Palework confirms the crack is recent (a season or less); the amber light is an ancient concluded thing breathing out through the new gap. Old ending ",
         "[d2] Wide reach north of the bedrock shelf — separated stone facing exposes a pre-existing dark column stain, older than Mara's ledger, older than the contamination event. Iron-mat here is the thickest sam",
         "[d2] Column stain Palework-read on World-day 14 morning — older than contamination by years/decades, slow-release residue of a vast concluded event, material came down through stone not up through water. P",
@@ -1583,7 +1577,8 @@
         "[d2] Pell's full frame assessment recorded at the lower aperture: frame sound, both jambs dry, channel clean inside, no hydrostatic load. Seating-piece can be shifted without collapsing the reveal. World-d",
         "[d2] Lower aperture fully open — seating-piece seated at inner channel lip. Near chamber confirmed: dry ashlar, stone flags, three iron ring-hooks, three empty recesses (palm-width, cut into stone), column",
         "[d2] Near chamber Order-Sense read (World-day 14): staging space confirmed — ring-hooks held long heavy tools or instruments carried through the second aperture for use beyond. Design older than the east c",
-        "[d2] Deeper chamber confirmed beyond the second aperture — larger than the near chamber, worn parallel foot-path in flags, single low ring-hook (hip height) with wide cradle-recess, grid of pressed marks ("
+        "[d2] Deeper chamber confirmed beyond the second aperture — larger than the near chamber, worn parallel foot-path in flags, single low ring-hook (hip height) with wide cradle-recess, grid of pressed marks (",
+        "[d2] Deeper chamber Order-Sense read (World-day 14): fixed-purpose room confirmed — two worn stand-positions in flags, low ring-hook cradle-recess built for one specific object that did not leave, calibrat"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2095,7 +2090,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] A faint metallic undertone on the morning air north of the village — noticed walking the north track toward Fen's intake, before reaching the site.",
           "[d2] Palework on Fen's intake: iron dissolution working inward from the water-facing surface, three crust layers — process predates the World-day minus-18 failure by thirty days minimum. Active rot front a",
           "[d2] The rot at Fen's intake targets iron specifically — stone collar unaffected. Pell named this as non-natural: acid water degrades stone first. Iron-specific targeting implies the water chemistry is doi",
           "[d2] Upstream trace confirms the deposit thickens with distance north — iron banding-strips show four layers by 150 yards above Fen's intake. Water color shifts from dilute gray-green to a deeper copper-ti",
@@ -2118,7 +2112,8 @@
           "[d2] Deathsense confirms: the deeper chamber holds nothing ending — whatever concluded there did so long ago. The space is on the far side of an ending with no active trajectory, no cause underway, no pivo",
           "[d2] Order-Sense confirms the near chamber was a staging space, not storage — ring-hooks held long heavy objects carried through the second aperture and used beyond it. Design predates the east channel inf",
           "[d2] Pell recalls a similar flagged-cellar site deeper in the valley — ring-hooks, flagged floor, locals called it 'the wash-room'. Nothing was washed in it. Two sites with identical architecture suggests ",
-          "[d2] The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting "
+          "[d2] The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting ",
+          "[d2] Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave"
         ],
         "links": [
           "millbrook",
@@ -2188,18 +2183,35 @@
         "aliases": [],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "the-deeper-chamber": {
+        "id": "the-deeper-chamber",
+        "label": "The Deeper Chamber",
+        "kind": "place",
+        "facts": [
+          "[d2] Fixed-purpose room: two worn stand-positions, a hip-height ring-hook with wide cradle-recess (the object sat here and worked from here or was worked upon — it did not leave), and a calibration surface"
+        ],
+        "links": [
+          "the-water-crisis",
+          "millbrook",
+          "aldric-provisioning-deal",
+          "pell"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 53.40001123946655,
-    "cerebral": 39.062500799202645,
-    "social": 54.87873714601073,
-    "generous": 13.24291166858121,
-    "cautious": 38.0136376051258,
-    "physical": 1.3735622324684014,
-    "risky": 3.3821983790384422,
-    "ruthless": 0.7005493475733617
+    "strategic": 53.13301118326922,
+    "cerebral": 39.86718829520663,
+    "social": 54.604343460280674,
+    "generous": 13.176697110238303,
+    "cautious": 38.823569417100174,
+    "physical": 1.3666944213060594,
+    "risky": 3.36528738714325,
+    "ruthless": 0.697046600835495
   },
   "aptitudes": [
     "strategist",
@@ -2207,7 +2219,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 160,
+  "actionCount": 161,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2293,8 +2305,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784066465423,
-  "rev": 229,
+  "updatedAt": 1784066629878,
+  "rev": 230,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2562,7 +2574,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 31,
+      "order_sense": 32,
       "palework": 13,
       "deathsense": 12,
       "shadowstep": 2

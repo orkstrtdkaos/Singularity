@@ -43,7 +43,7 @@
     "violence_peace": 0.076825,
     "chaos_order": 0.13401196436328122,
     "mechanical_spiritual": 0.15258154807291163,
-    "concrete_abstract": -0.014915430417616126,
+    "concrete_abstract": -0.02916965889673532,
     "death_life": -0.11844862809968017,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -1011,19 +1011,43 @@
         "player": "Use Palework on the column stain — this is older material than the crack; press the reading there and see what ended in it, and when.",
         "summary": "Palework on the column stain — old, concluded, enormous: a slow release over years, predating the contamination. Something vast drained through this bank long before the valley's water ran gray.",
         "narration": "You press your palm flat against the column stain and send Palework in shallow — a conserve cast, narrow thread, asking only what ended here and when.\n\nThe stain answers, but not completely. What comes through is old: older than the gray-green water, older than the valve failures, older than anything Mara's ledger could touch. The material you're reading is not iron-dissolution. It is something that seeped, slowly, over a long time — not a catastrophic end but a slow release, like a held breath let out over years rather than minutes. The ending underneath it is enormous and absolutely concluded. Whatever it was, it is not dying now. It finished a long time ago and this stain is the residue of that finishing, the dark watermark left on stone when something vast drained away.\n\nWhat you cannot reach is the shape of it — what it was, what form it held, what caused it to end. Palework gives you the fact of the conclusion without the story behind it. The stain predates the contamination by years, possibly decades. The column is not a cause. It is evidence of a prior tenant.\n\nPell watches you from two paces back, not crowding the read. When you lift your hand she speaks without preamble: \"That's not the same material as the waterline crust.\" She's been looking at where the stain edges meet the newer iron-mat. \"Different direction. That came down through the stone, not up through the water.\""
+      },
+      {
+        "player": "Ask Pell what she makes of 'came down through the stone' — she's reading the material direction; let her run with it",
+        "summary": "Pell reads the column stain's direction — source is above and behind the bank, not from the river; a buried structure draining down through the hillside, older than the contamination.",
+        "narration": "You turn from the stain and look at Pell. \"Came down through the stone,\" you say. \"Not up from the water. What does that mean to you?\"\n\nShe doesn't answer immediately. She's still crouched at the boundary where the column stain's edge meets the newer iron-mat crust — one finger tracing the line without touching it, the way she distinguishes a weld seam from a crack without committing to either. Then she rocks back on her heels and tilts her head at the facing stone lying on the bank beside you. \"Stone holds direction,\" she says. \"Water pushes up and out — you can read the grain of what it leaves behind. This one ran down and in, through the body of the bank, not through the channel face. That means the source was above and behind it.\" She taps the exposed cut. \"Not the river. Something in the hillside. Or under it.\"\n\nHuginn shifts on the cut-bank rim above — one step, then still again, head still north.\n\nPell straightens and wipes her hand on her apron, a habitual motion. \"Old site drainage, maybe. A seep from a buried structure — the kind that runs clean for years until the structure settles and the path widens.\" She says it matter-of-factly, the way she'd diagnose a flue leak. \"The stain predates the gray-green water. So whatever is up there moved first — and the river situation followed after.\" She looks at you directly. \"Which means the crack in the shelf isn't the source. It's a symptom. The source is higher up, and it's behind stone.\"\n\nHuginn takes two more steps north along the rim, deliberate as a finger pointing."
       }
     ],
     "lastTurn": {
-      "narration": "You press your palm flat against the column stain and send Palework in shallow — a conserve cast, narrow thread, asking only what ended here and when.\n\nThe stain answers, but not completely. What comes through is old: older than the gray-green water, older than the valve failures, older than anything Mara's ledger could touch. The material you're reading is not iron-dissolution. It is something that seeped, slowly, over a long time — not a catastrophic end but a slow release, like a held breath let out over years rather than minutes. The ending underneath it is enormous and absolutely concluded. Whatever it was, it is not dying now. It finished a long time ago and this stain is the residue of that finishing, the dark watermark left on stone when something vast drained away.\n\nWhat you cannot reach is the shape of it — what it was, what form it held, what caused it to end. Palework gives you the fact of the conclusion without the story behind it. The stain predates the contamination by years, possibly decades. The column is not a cause. It is evidence of a prior tenant.\n\nPell watches you from two paces back, not crowding the read. When you lift your hand she speaks without preamble: \"That's not the same material as the waterline crust.\" She's been looking at where the stain edges meet the newer iron-mat. \"Different direction. That came down through the stone, not up through the water.\"",
-      "sceneSummary": "Palework on the column stain — old, concluded, enormous: a slow release over years, predating the contamination. Something vast drained through this bank long before the valley's water ran gray.",
+      "narration": "You turn from the stain and look at Pell. \"Came down through the stone,\" you say. \"Not up from the water. What does that mean to you?\"\n\nShe doesn't answer immediately. She's still crouched at the boundary where the column stain's edge meets the newer iron-mat crust — one finger tracing the line without touching it, the way she distinguishes a weld seam from a crack without committing to either. Then she rocks back on her heels and tilts her head at the facing stone lying on the bank beside you. \"Stone holds direction,\" she says. \"Water pushes up and out — you can read the grain of what it leaves behind. This one ran down and in, through the body of the bank, not through the channel face. That means the source was above and behind it.\" She taps the exposed cut. \"Not the river. Something in the hillside. Or under it.\"\n\nHuginn shifts on the cut-bank rim above — one step, then still again, head still north.\n\nPell straightens and wipes her hand on her apron, a habitual motion. \"Old site drainage, maybe. A seep from a buried structure — the kind that runs clean for years until the structure settles and the path widens.\" She says it matter-of-factly, the way she'd diagnose a flue leak. \"The stain predates the gray-green water. So whatever is up there moved first — and the river situation followed after.\" She looks at you directly. \"Which means the crack in the shelf isn't the source. It's a symptom. The source is higher up, and it's behind stone.\"\n\nHuginn takes two more steps north along the rim, deliberate as a finger pointing.",
+      "sceneSummary": "Pell reads the column stain's direction — source is above and behind the bank, not from the river; a buried structure draining down through the hillside, older than the contamination.",
       "choices": [
         {
-          "label": "Use Order-Sense on the separated stone facing itself — read what structure this piece was part of, what design it served",
+          "label": "Follow Huginn north — press further upstream and see what's behind the next section of bank",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "violence_peace": 0.5,
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "follow"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the bank itself — read what structure the hillside is part of and whether there's something buried behind it",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "mechanical_spiritual": 0.3,
-            "concrete_abstract": 0.5
+            "concrete_abstract": 0.2
           },
           "difficulty": 15,
           "intentTags": [
@@ -1032,88 +1056,91 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Pell what she makes of 'came down through the stone' — she's reading the material direction; let her run with it",
+          "label": "Name what you have and turn back — Dara Holt needs to hear this before you go further into her jurisdiction uninvited",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.3
+            "chaos_order": 0.6,
+            "falsehood_truth": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "collaborate",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Check where Huginn is attending now — he brought you this far; see if he's moved further north or is fixed on this facing",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {
-            "death_life": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Mark this site physically — knife-notch on the alder root above the stain — then push further upstream to see how far the deposit runs before it thins",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "concrete_abstract": -0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
+            "careful",
             "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look north for any sign of a structure — a foundation line, dressed stone, old earthwork — something that would tell you what kind of buried thing you're dealing with before committing to it",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "chaos_order": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -6
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Pell names the column stain's source direction — above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination. The gray-green water is a downstream symptom; the source is higher and behind stone."
+        }
+      ],
       "scene": {
-        "setting": "Wide reach north of the bedrock shelf — exposed stone shelf on the west bank, alder-root east bank, continuous iron-mat crust at the tideline. Separated stone facing pulled from the bank at the shelf's far end; dark column stain exposed behind it, palm-marked where Silas just read it. Copper-green water, morning light through alder canopy.",
+        "setting": "Wide reach north of the bedrock shelf — exposed stone shelf on the west bank, alder-root east bank, continuous iron-mat crust at the tideline. Separated stone facing pulled from the bank at the shelf's far end; dark column stain exposed behind it, palm-marked where Silas read it. Copper-green water, morning light through alder canopy.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Two paces back, eyes on where the stain edges meet the newer iron-mat crust — reading the material direction, not waiting for Silas."
+            "state": "Standing, apron-hand wiped clean, facing north — has named the source direction and is watching Huginn's movement along the rim."
           },
           {
             "name": "Huginn",
-            "state": "On the cut-bank rim above, head still turned north — not yet moved."
+            "state": "Two steps further north along the cut-bank rim, head still turned north — deliberate, not restless."
           }
         ],
         "objects": [
           "Memory (spear, at Silas's side)",
           "Separated stone facing — pulled from the bank, not collapsed",
-          "Column stain — palm-print visible where Silas read it; material distinct from the iron-mat crust, came down through stone not up through water",
+          "Column stain — palm-print visible where Silas read it; material distinct from the iron-mat, direction confirmed as downward through stone",
           "Continuous iron-mat crust — rust-brown above tideline, gray-green at waterline",
           "Valve Failure Timeline note (breast pocket)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)"
         ],
         "threads": [
-          "Column stain is a slow-release residue of something vast that concluded long ago — shape and cause still unread",
-          "Pell observes the stain came down through stone, not up through water — a different origin direction than the iron-mat contamination",
-          "Huginn still attending north — something further upstream",
-          "Dara Holt's territory, uninvited — no contact made",
-          "Cause of the initial bedrock shift still unread"
+          "Source is above and behind the bank — a buried structure draining down through the hillside, older than the contamination",
+          "Huginn is stepping north — attending something further upstream",
+          "Dara Holt's territory, uninvited — no contact made; briefing overdue if they go further",
+          "Cause of the initial bedrock shift still unread — Pell's read suggests it's behind stone, higher up"
         ]
       },
       "npcUpdates": [
@@ -1121,16 +1148,32 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Read the material boundary between the column stain and the newer iron-mat without being prompted — named the stain's direction as downward through stone, not upward through water.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Named the column stain's material direction as source-above-behind — a buried structure draining down through the hillside, not the river. Diagnosed the crack and the gray-green water as downstream symptoms of something older and higher. Reading the situation the way she reads a flue leak.",
           "learned": [
-            "The column stain's material direction is distinct from the iron-mat contamination — it came down through the stone, not up from the water"
+            "Stone holds direction — she can read whether a deposit ran down-in versus up-out by the grain it leaves",
+            "The source is above and behind the bank, not from the channel — a buried structure settling and widening its drainage path",
+            "The crack in the shelf and the gray-green water are symptoms; the source is higher up and behind stone"
           ],
           "skillsObserved": [
-            "reading material direction and boundary interfaces by visual inspection"
+            "reading material direction and source-position from deposit grain",
+            "structural diagnosis by analogy from smithcraft"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the wide reach north of the bedrock shelf, reading the column stain boundary — walking north with Silas."
+          "statusNote": "At the wide reach north of the bedrock shelf, standing ready — has named the source direction, watching Huginn move north along the rim."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Pell has named the column stain's source direction: above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination — the crack and the gray-green water are downstream symptoms.",
+          "subjectId": "pell"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Pell named the column stain's source as above-and-behind the bank — a buried structure drainage, not river-origin. Source is higher up and behind stone, predating the current contamination event."
         }
       ],
       "codexUpdates": [
@@ -1138,49 +1181,42 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": null,
-          "fact": "The column stain predates the contamination by years, possibly decades — not iron-dissolution but a slow release over years, residue of something vast and absolutely concluded. It came down through the stone, not up through the water: a different process and origin direction than the current gray-green iron-mat. The prior tenant ended long before the valley's water ran gray.",
+          "fact": "Pell's read of the column stain's direction: source is above and behind the bank, not from the river. A buried structure settled and widened its drainage path — the crack in the shelf and the gray-green water are downstream symptoms of something older and higher, behind stone.",
           "links": [
             "millbrook",
-            "aldric-provisioning-deal",
             "pell",
-            "dara-holt",
-            "palework"
+            "aldric-provisioning-deal",
+            "dara-holt"
           ]
-        }
-      ],
-      "placeUpdates": [
+        },
         {
-          "note": "Column stain Palework-read on World-day 14 morning — older than contamination by years/decades, slow-release residue of a vast concluded event, material came down through stone not up through water. Palm-print visible on the stain face.",
-          "subPlace": {
-            "name": "Wide Reach Column Stain",
-            "note": "Pre-existing dark column stain behind separated stone facing — Palework confirms old, concluded, vast; stain direction is downward through stone. Distinct from iron-mat contamination.",
-            "visited": true
-          }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Column stain Palework read — predates contamination by years or decades; a prior concluded event drained through this bank long before the gray-green water began. Material came down through stone, not up through water: a different origin from the current contamination. Two distinct events, two distinct timelines."
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Reads material direction from deposit grain — named the column stain's source as above-and-behind the bank. Diagnoses large-scale contamination problems the way she diagnoses a flue leak: by what the evidence tells her about direction and duration.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A conserve Palework cast and brief exchange — a few minutes of work at the stain."
+        "why": "a brief exchange while reading the stain boundary"
       }
     },
     "sceneState": {
-      "setting": "Wide reach north of the bedrock shelf — exposed stone shelf on the west bank, alder-root east bank, continuous iron-mat crust at the tideline. Separated stone facing pulled from the bank at the shelf's far end; dark column stain exposed behind it, palm-marked where Silas just read it. Copper-green water, morning light through alder canopy.",
+      "setting": "Wide reach north of the bedrock shelf — exposed stone shelf on the west bank, alder-root east bank, continuous iron-mat crust at the tideline. Separated stone facing pulled from the bank at the shelf's far end; dark column stain exposed behind it, palm-marked where Silas read it. Copper-green water, morning light through alder canopy.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Two paces back, eyes on where the stain edges meet the newer iron-mat crust — reading the material direction, not waitin"
+          "state": "Standing, apron-hand wiped clean, facing north — has named the source direction and is watching Huginn's movement along "
         },
         {
           "name": "Huginn",
-          "state": "On the cut-bank rim above, head still turned north — not yet moved."
+          "state": "Two steps further north along the cut-bank rim, head still turned north — deliberate, not restless."
         }
       ],
       "objects": [
@@ -1193,11 +1229,10 @@
         "Rune-Craft Kit (pack)"
       ],
       "threads": [
-        "Column stain is a slow-release residue of something vast that concluded long ago — shape and cause still unread",
-        "Pell observes the stain came down through stone, not up through water — a different origin direction than the iron-mat contamination",
-        "Huginn still attending north — something further upstream",
-        "Dara Holt's territory, uninvited — no contact made",
-        "Cause of the initial bedrock shift still unread"
+        "Source is above and behind the bank — a buried structure draining down through the hillside, older than the contamination",
+        "Huginn is stepping north — attending something further upstream",
+        "Dara Holt's territory, uninvited — no contact made; briefing overdue if they go further",
+        "Cause of the initial bedrock shift still unread — Pell's read suggests it's behind stone, higher up"
       ]
     }
   },
@@ -1224,14 +1259,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Upstream trace confirms crust thickens with distance north — color deepens at the willow bend. The source is further upstream, into Dara's upper-reach jurisdiction.",
         "Order-Sense failed in the thin substrate — the channel won't read as a system this close to the valley floor. Physical evidence still points north. Huginn is watching the willow bend.",
         "Reached the willow bend — copper-green water and continuous iron-mat deposit confirm the source is upstream, past Dara Holt's boundary. Physical trace now unambiguous.",
         "Palework on the bedrock shelf: the amber light is an ancient ended thing venting through a recently-opened crack — the crack itself is no older than a season. The iron in the water shares a direction with the old ending below, but not the same cause. The crack is the new variable.",
         "Deathsense confirms the crack is stable and not widening — pressure equalized after the initial shift. The cause of the shift is upstream, past this shelf. The source of the iron contamination points further north.",
         "Pell reads the coping iron as received, not leached — names the crack's origin a decision, not age. Cause remains upstream.",
         "North of the willow bend — old column stain behind separated stone facing predates the contamination event. Something was bleeding through this bank before the current crisis began.",
-        "Column stain Palework read — predates contamination by years or decades; a prior concluded event drained through this bank long before the gray-green water began. Material came down through stone, not up through water: a different origin from the current contamination. Two distinct events, two distinct timelines."
+        "Column stain Palework read — predates contamination by years or decades; a prior concluded event drained through this bank long before the gray-green water began. Material came down through stone, not up through water: a different origin from the current contamination. Two distinct events, two distinct timelines.",
+        "Pell names the column stain's source direction — above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination. The gray-green water is a downstream symptom; the source is higher and behind stone."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1345,7 +1380,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Heard the full Palework report — iron-specific targeting, stone unaffected, thirty-day head start. Named the anomaly plainly: stone should go first in acid water. Told Silas not to",
         "[d2] Named the willow bend as the last turn before the high-meadow feed — past it is Dara's jurisdiction. Told Silas Dara needs to see this section too, not just the intake.",
         "[d2] Read the failed Order-Sense cast without asking — no comment, waiting.",
         "[d2] Arrived at Silas's shoulder at the willow bend — read the copper-green water and continuous deposit without comment; waiting for his call.",
@@ -1354,28 +1388,29 @@
         "[d2] Has not moved while Silas ran both Palework and Deathsense casts — reading the posture, waiting without asking.",
         "[d2] Read the coping iron by touch — named it received rather than leaching, and called the crack's origin a decision rather than age.",
         "[d2] Named the column stain as older than Mara's ledger — read it as pre-existing evidence of something below this bank before the current crisis.",
-        "[d2] Read the material boundary between the column stain and the newer iron-mat without being prompted — named the stain's direction as downward through stone, not upward through water."
+        "[d2] Read the material boundary between the column stain and the newer iron-mat without being prompted — named the stain's direction as downward through stone, not upward through water.",
+        "[d2] Named the column stain's material direction as source-above-behind — a buried structure draining down through the hillside, not the river. Diagnosed the crack and the gray-green wa"
       ],
       "knownFacts": [
-        "The willow bend marks the edge of Dara Holt's upper-reach jurisdiction",
-        "The deposit follows iron consistently — stone and mortar clean beside each banding-strip",
-        "Copper-green water and continuous iron-mat deposit visible past the willow bend — source is upstream of Dara's boundary",
         "Iron-mat deposit runs continuous and unbroken north of the willow bend — thicker here than at any prior sample point",
         "Iron coping is receiving iron carried in the water, not leaching it from the stone",
         "The crack opened due to a change below — not gradual age-stress; Pell reads it as a decision-shape in the material",
         "The column stain behind the separated facing is older than the valve failures and the gray-green water — something was bleeding through this bank before the con",
-        "The column stain's material direction is distinct from the iron-mat contamination — it came down through the stone, not up from the water"
+        "The column stain's material direction is distinct from the iron-mat contamination — it came down through the stone, not up from the water",
+        "Stone holds direction — she can read whether a deposit ran down-in versus up-out by the grain it leaves",
+        "The source is above and behind the bank, not from the channel — a buried structure settling and widening its drainage path",
+        "The crack in the shelf and the gray-green water are symptoms; the source is higher up and behind stone"
       ],
       "skillsObserved": [
-        "silent field assessment",
-        "following without needing to lead",
         "forensic iron-reading by touch",
         "distinguishing forced-change from age-change in worked stone",
         "reading layered stone and iron stain for temporal sequence",
-        "reading material direction and boundary interfaces by visual"
+        "reading material direction and boundary interfaces by visual",
+        "reading material direction and source-position from deposit ",
+        "structural diagnosis by analogy from smithcraft"
       ],
       "status": "active",
-      "statusNote": "At the wide reach north of the bedrock shelf, reading the column stain boundary — walking north with Silas.",
+      "statusNote": "At the wide reach north of the bedrock shelf, standing ready — has named the source direction, watching Huginn move north along the rim.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1480,7 +1515,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Pell has agreed to walk north with Silas to the east-channel valve sites — Fen's failed intake named as first destination, a bend in the east channel twenty minutes north of the upper meadow.",
         "[d2] Sleeve blank left cooling on the forge door-step for the farmer — Pell's job complete, forge banked, both Silas and Pell ready to depart north.",
         "[d2] Mara provided valve failure dates from her ledger unprompted — four sleeve blank returns in three weeks documented. A note page torn and given to Silas.",
         "[d2] North track departed — Dara Holt's blue gate-post house passed without stopping, morning smoke from chimney.",
@@ -1491,7 +1525,8 @@
         "[d2] Bedrock shelf 70 paces north of the willow bend — hairline crack showed an amber thread of light below the waterline on World-day 14 morning. Pulsed once and went still. Huginn attended it. Physical s",
         "[d2] Bedrock shelf 70 paces north of the willow bend — Palework confirms the crack is recent (a season or less); the amber light is an ancient concluded thing breathing out through the new gap. Old ending ",
         "[d2] Wide reach north of the bedrock shelf — separated stone facing exposes a pre-existing dark column stain, older than Mara's ledger, older than the contamination event. Iron-mat here is the thickest sam",
-        "[d2] Column stain Palework-read on World-day 14 morning — older than contamination by years/decades, slow-release residue of a vast concluded event, material came down through stone not up through water. P"
+        "[d2] Column stain Palework-read on World-day 14 morning — older than contamination by years/decades, slow-release residue of a vast concluded event, material came down through stone not up through water. P",
+        "[d2] Pell named the column stain's source as above-and-behind the bank — a buried structure drainage, not river-origin. Source is higher up and behind stone, predating the current contamination event."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1827,7 +1862,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Pell intends to keep the forge long-term; she is also reaching toward something else connected to the iron's response to her hand — no language for it yet, but the thought is present and deliberate.",
           "[d1] Holds closeness the way she holds ironwork — present and real, but bounded by what the next day demands. Hand met Silas's across the dark on World-day 13 night, then withdrew without coldness.",
           "[d1] Reads terrain and wind cleanly under field conditions — laid out the bull approach without hesitation once given the spear. Trusted Silas's shadowstep hint from the night before without needing it nam",
           "[d1] Responds to Silas's humor with dry wit — suppressed a laugh at the spear-marriage joke and returned 'the married part I'll need in writing.' The warmth is real but kept under ironwork.",
@@ -1850,7 +1884,8 @@
           "[d2] When Silas declared his certainty plainly, Pell believed him — and said it doesn't matter. She cares what the fire does over time, not how sure he is at the start.",
           "[d2] When Silas corrected from 'I've decided' to 'I'm willing to be in it with you', Pell said 'that's better' — quietly, without ceremony. She distinguishes between someone who has decided and someone who",
           "[d2] Pell is thinking forensically about the contamination — she located both failure sites before being asked and named the valve housing as evidence of duration. She told Silas to bring Memory north.",
-          "[d2] Placed Memory in Silas's hands before departure — treating the spear as a working instrument for the valve inspection, not ceremony. Finished the farmer's sleeve in twenty-six minutes."
+          "[d2] Placed Memory in Silas's hands before departure — treating the spear as a working instrument for the valve inspection, not ceremony. Finished the farmer's sleeve in twenty-six minutes.",
+          "[d2] Reads material direction from deposit grain — named the column stain's source as above-and-behind the bank. Diagnoses large-scale contamination problems the way she diagnoses a flue leak: by what the "
         ],
         "links": [
           "the-unnamed-gift",
@@ -2019,7 +2054,8 @@
           "[d2] Deathsense on the crack: the fissure is stable and not widening — pressure below equalized after the initial shift. The crack is a fixed pressure-release, not a growing failure. The cause of the origi",
           "[d2] Pell's iron-read: the coping stone is receiving iron already carried in the water, not leaching it. The crack opened from a change below, not age — Pell names it a decision-shape in the material. The ",
           "[d2] North of the bedrock shelf, a section of old stone facing has separated from the bank — behind it, a dark column stain predates Mara's ledger and the current gray-green contamination. Something was bl",
-          "[d2] The column stain predates the contamination by years, possibly decades — not iron-dissolution but a slow release over years, residue of something vast and absolutely concluded. It came down through th"
+          "[d2] The column stain predates the contamination by years, possibly decades — not iron-dissolution but a slow release over years, residue of something vast and absolutely concluded. It came down through th",
+          "[d2] Pell's read of the column stain's direction: source is above and behind the bank, not from the river. A buried structure settled and widened its drainage path — the crack in the shelf and the gray-gre"
         ],
         "links": [
           "millbrook",
@@ -2076,14 +2112,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.41592677660955,
-    "cerebral": 38.97378381719859,
-    "social": 56.10321572111239,
-    "generous": 13.241299609939139,
-    "cautious": 31.554162121519646,
-    "physical": 1.4808195170847993,
-    "risky": 2.5896175477641528,
-    "ruthless": 0.7552531090661897
+    "strategic": 53.1488471427265,
+    "cerebral": 38.778914898112596,
+    "social": 55.82269964250683,
+    "generous": 13.175093111889444,
+    "cautious": 32.39639131091205,
+    "physical": 1.4734154194993754,
+    "risky": 2.576669460025332,
+    "ruthless": 0.7514768435208588
   },
   "aptitudes": [
     "strategist",
@@ -2091,7 +2127,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 145,
+  "actionCount": 146,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2177,8 +2213,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784049225936,
-  "rev": 212,
+  "updatedAt": 1784049634076,
+  "rev": 213,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2421,6 +2457,12 @@
       "text": "A section of old stone facing north of the bedrock shelf has separated from the bank, exposing a dark column stain that predates the current contamination event — something was bleeding through this b",
       "day": 2,
       "subjectId": "the-water-crisis"
+    },
+    {
+      "id": "pell",
+      "text": "Pell has named the column stain's source direction: above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination — the crack and th",
+      "day": 2,
+      "subjectId": "pell"
     }
   ],
   "practice": {

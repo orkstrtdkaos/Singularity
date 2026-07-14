@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 413,
+  "xp": 418,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,8 +42,8 @@
     "spectrumId": -0.6763690938420537,
     "violence_peace": 0.076825,
     "chaos_order": 0.13401196436328122,
-    "mechanical_spiritual": 0.11668645350390625,
-    "concrete_abstract": -0.0074191332695312355,
+    "mechanical_spiritual": 0.12585213082871094,
+    "concrete_abstract": -0.02704817660605468,
     "death_life": -0.10925630919921875,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 105,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -905,60 +905,39 @@
         "player": "Let Pell handle the door — watch how she moves on her own ground",
         "summary": "A farmer arrives at dawn needing an iron sleeve for a cracked irrigation valve — brittle threading since the water changed.",
         "narration": "You step back — not far, just enough to give her room — and watch.\n\nPell moves the way she moves at the bench: no wasted motion, no self-consciousness. She wipes her right hand on her apron once, a habit that has nothing to do with the door and everything to do with transitioning between states of work. She picks up the river whetstone from the bench and sets it on the shelf above the bellows — not tucking it away, just getting it off the work surface — and then she crosses to the door and draws the latch.\n\nMorning light spills in, full and pale-gold, and standing in it is a woman maybe ten years older than Pell, broad-shouldered, with dirt at her knees and a coil of split-reed tubing under one arm. She takes in the forge interior with the economy of someone who has been here before, her gaze touching the coaled fire, the bench marks, the spent rune-wax stub, and then you — and Huginn on the rafter, who gets a beat of flat attention before she looks back to Pell.\n\n\"I know it's early,\" the woman says, not apologetically. \"The lower field intake valve cracked overnight. The reed's holding it for now.\" She lifts the coil slightly — showing Pell, not explaining to her. \"I need a sleeve. Iron, or bronze if you have off-cuts.\"\n\nPell glances at the coil, then at her fire. \"Give me half an hour,\" she says. \"The pit's coaled low — I'll have to bring it back up.\"\n\nThe woman nods, her eyes moving back to you once more — not hostile, just noting what she's noting. \"Valve failure in two fields since the water went strange,\" she says, to Pell but audible to anyone in the room. \"Iron's going brittle at the threading. Maren says it's the river, but Maren says everything's the river.\"\n\nHuginn shifts on the rafter. One quiet, deliberate readjustment of weight, the way he does when something has just become relevant."
+      },
+      {
+        "player": "Stay back — let Pell manage her work, watch and listen. You can use Order-Sense quietly on the cracked tubing she brought in to read what the water has been doing to it.",
+        "summary": "Order-Sense reads the cracked irrigation tubing — the gray-green deposit is targeting iron contact points, not the reed itself.",
+        "narration": "You stay back and let Pell work. The farmer — name unknown, dirt at her knees, the coil of split-reed tubing still under her arm — gives her estimate and nods at the half-hour. She's already describing the valve: iron threaded sleeve, east-channel intake, second field from the road. 'Iron went brittle overnight,' she says. 'Just crumbled at the threading. We lost the lower intake yesterday. Fen's is the same this morning.' Pell asks one question — wall thickness on the original — and moves to her iron rack without ceremony.\n\nYou let your eye rest on the cracked reed tubing. Quietly, economically, you let Order-Sense open — not wide, just enough to read the design the tube is part of. The substrate here is thin and you feel it immediately, the power requiring more intent for less reach, like trying to see through river-ice. But the tubing is concrete, physical, already broken, and the place is used to practical reading. What you get is clear enough: the inside surface of the reed carries a faint mineral crust, gray-green at the joints — the same color the river runs on bad mornings. It's not uniform. The crust is thicker at the threading interfaces, where iron meets reed, and the reed itself has stayed sound. The damage isn't in the plant material. It's at every iron contact point, working inward from the water-facing surface. Whatever is in the river is selecting for iron.\n\nHuginn shifts on the rafter above you. Not agitated — just repositioning to see the tube better. The farmer notices, tracks the bird for a moment, then looks back at Pell like she's chosen not to have an opinion about it. Pell sets a blank sleeve-length on the bench and picks up her calipers without looking up."
       }
     ],
     "lastTurn": {
-      "narration": "You step back — not far, just enough to give her room — and watch.\n\nPell moves the way she moves at the bench: no wasted motion, no self-consciousness. She wipes her right hand on her apron once, a habit that has nothing to do with the door and everything to do with transitioning between states of work. She picks up the river whetstone from the bench and sets it on the shelf above the bellows — not tucking it away, just getting it off the work surface — and then she crosses to the door and draws the latch.\n\nMorning light spills in, full and pale-gold, and standing in it is a woman maybe ten years older than Pell, broad-shouldered, with dirt at her knees and a coil of split-reed tubing under one arm. She takes in the forge interior with the economy of someone who has been here before, her gaze touching the coaled fire, the bench marks, the spent rune-wax stub, and then you — and Huginn on the rafter, who gets a beat of flat attention before she looks back to Pell.\n\n\"I know it's early,\" the woman says, not apologetically. \"The lower field intake valve cracked overnight. The reed's holding it for now.\" She lifts the coil slightly — showing Pell, not explaining to her. \"I need a sleeve. Iron, or bronze if you have off-cuts.\"\n\nPell glances at the coil, then at her fire. \"Give me half an hour,\" she says. \"The pit's coaled low — I'll have to bring it back up.\"\n\nThe woman nods, her eyes moving back to you once more — not hostile, just noting what she's noting. \"Valve failure in two fields since the water went strange,\" she says, to Pell but audible to anyone in the room. \"Iron's going brittle at the threading. Maren says it's the river, but Maren says everything's the river.\"\n\nHuginn shifts on the rafter. One quiet, deliberate readjustment of weight, the way he does when something has just become relevant.",
-      "sceneSummary": "A farmer arrives at dawn needing an iron sleeve for a cracked irrigation valve — brittle threading since the water changed.",
+      "narration": "You stay back and let Pell work. The farmer — name unknown, dirt at her knees, the coil of split-reed tubing still under her arm — gives her estimate and nods at the half-hour. She's already describing the valve: iron threaded sleeve, east-channel intake, second field from the road. 'Iron went brittle overnight,' she says. 'Just crumbled at the threading. We lost the lower intake yesterday. Fen's is the same this morning.' Pell asks one question — wall thickness on the original — and moves to her iron rack without ceremony.\n\nYou let your eye rest on the cracked reed tubing. Quietly, economically, you let Order-Sense open — not wide, just enough to read the design the tube is part of. The substrate here is thin and you feel it immediately, the power requiring more intent for less reach, like trying to see through river-ice. But the tubing is concrete, physical, already broken, and the place is used to practical reading. What you get is clear enough: the inside surface of the reed carries a faint mineral crust, gray-green at the joints — the same color the river runs on bad mornings. It's not uniform. The crust is thicker at the threading interfaces, where iron meets reed, and the reed itself has stayed sound. The damage isn't in the plant material. It's at every iron contact point, working inward from the water-facing surface. Whatever is in the river is selecting for iron.\n\nHuginn shifts on the rafter above you. Not agitated — just repositioning to see the tube better. The farmer notices, tracks the bird for a moment, then looks back at Pell like she's chosen not to have an opinion about it. Pell sets a blank sleeve-length on the bench and picks up her calipers without looking up.",
+      "sceneSummary": "Order-Sense reads the cracked irrigation tubing — the gray-green deposit is targeting iron contact points, not the reed itself.",
       "choices": [
         {
-          "label": "Step forward, introduce yourself, and ask her to describe where the valve sits — you want to understand what the water's doing to the iron before it cracks something worse upstream.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "violence_peace": 0.7,
-            "chaos_order": 0.5
-          },
+          "label": "Tell Pell and the farmer plainly what you read in the tubing — the mineral deposit is at every iron contact point. The damage is selective.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "investigate",
-            "engage"
+            "inform",
+            "help",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Stay back — let Pell manage her work, watch and listen. You can use Order-Sense quietly on the cracked tubing she brought in to read what the water has been doing to it.",
+          "label": "Say nothing to the farmer yet — wait until she's gone, then tell Pell what you found. This is information that could alarm people if it spreads wrong.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.3,
-            "concrete_abstract": -0.4
-          },
           "difficulty": 0,
           "intentTags": [
-            "study",
             "careful",
-            "ability-use"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Mention Aldric — you're the one he sent to look at what the river's doing upstream. Ask her where her field intake sits relative to the upper bend.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "chaos_order": 0.4,
-            "violence_peace": 0.6
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "engage",
-            "investigate",
+            "observe",
             "plan"
           ],
           "abilityId": null,
@@ -966,15 +945,26 @@
           "trivial": true
         },
         {
-          "label": "Quietly help Pell bring the fire up while she talks — it shows you know your way around a forge, and it moves her morning along.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "chaos_order": 0.3
-          },
+          "label": "Ask the farmer directly — how many iron fittings have failed in the east channel this week, and is anyone tracking it?",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "scout",
+            "inform",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Keep quiet for now and watch — let Pell work, let the farmer talk. See what else surfaces before you say anything.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "observe",
             "careful"
           ],
           "abilityId": null,
@@ -982,37 +972,42 @@
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3
+      },
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — door open to full pale-gold dawn light, south pit fire coaled to low orange, Memory on the anvil horn, a farmer in the doorway with split-reed irrigation tubing.",
+        "setting": "Pell's forge, south lane, Millbrook — door open to full pale-gold dawn light, south pit fire coaled to low orange, Memory on the anvil horn.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the open door, apron wiped clean, giving the farmer a clear half-hour estimate — settled, on her own ground."
+            "state": "At the iron rack, pulling a blank sleeve-length, calipers in hand — working the farmer's job without ceremony."
           },
           {
             "name": "Farmer (unknown)",
-            "state": "In the doorway, coil of cracked split-reed tubing under one arm, noting everyone in the room including Huginn."
+            "state": "Standing just inside the doorway, split-reed tubing still under her arm, watching Pell work — gave the valve specs, waiting."
           },
           {
             "name": "Huginn",
-            "state": "On the rafter — shifted weight deliberately when the farmer mentioned the river and the brittle iron. Watching."
+            "state": "Shifted on the rafter to see the split-reed tubing better. Still. Watching the mineral crust on the tube's interior joints."
           }
         ],
         "objects": [
           "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
           "Resin Mountain Wine (open bottle, nearly empty)",
           "Dried Starfruit sealed packet (open, mostly eaten)",
-          "River whetstone (on shelf above bellows — moved there by Pell just now)",
+          "River whetstone (on shelf above bellows)",
           "Spent rune-wax stub (on bench)",
           "Rune-Craft Kit (spent, on bench)",
           "South pit fire (coaled to low orange — needs bringing up)",
           "Collar-blank scrap (on anvil — double-stamp freshly pressed)",
-          "Split-reed irrigation tubing (cracked, under farmer's arm — the reason for the visit)"
+          "Split-reed irrigation tubing (cracked, under farmer's arm — gray-green mineral crust visible at threading joints and iron contact points)"
         ],
         "threads": [
-          "Farmer needs an iron sleeve for a cracked irrigation valve — Pell has committed to half an hour",
-          "Farmer mentioned iron going brittle at the threading since the water changed — Huginn reacted",
-          "River whetstone on the shelf — not yet formally given to Pell",
+          "Order-Sense confirmed: mineral deposit in the river water is targeting iron contact points specifically — selective corrosion, not general decay",
+          "Farmer mentioned at least two fields have lost iron intake valves since the water changed — and named 'Fen's' as a second failure this morning",
+          "Pell is working the farmer's half-hour job now — conversation window is short",
+          "River whetstone on the shelf — not yet formally given",
           "Gray-green water question and its upstream source still unasked of Pell directly",
           "River scout for Aldric still the outstanding quest thread"
         ]
@@ -1022,24 +1017,17 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Handled the door transition cleanly — moved the whetstone off the bench before answering, committed to a half-hour sleeve job without disruption.",
+          "note": "Moved to iron rack and picked up calipers without hesitation — managing the farmer's job cleanly while Silas reads the tubing from across the room.",
           "learned": [
-            "Moves on her own ground without self-consciousness — the forge is hers and she doesn't perform it"
+            "Two east-channel iron intake valves have failed since the water changed — the farmer's and Fen's"
           ],
           "skillsObserved": [
-            "reading a work situation and committing to a timeline without fuss"
+            "immediate transition from personal moment to craft work without disruption",
+            "accurate sleeve-blank selection by eye"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge door, managing an early morning job request — the dawn conversation set down but present."
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "A broad-shouldered farmer, older than Pell, with cracked irrigation tubing and a practical manner — has been watching the river go strange and is losing iron fittings to it",
-          "why": "She arrived at the forge door with a named problem (brittle threading, cracked valve) and direct knowledge of what the river is doing to the valley's irrigation infrastructure — she needs a stable identity to recur"
+          "statusNote": "At her forge, working a farmer's irrigation repair — the dawn conversation present but set aside for the job."
         }
       ],
       "codexUpdates": [
@@ -1047,11 +1035,12 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Iron is going brittle at the threading in irrigation valves since the water changed — a farmer lost a lower field intake valve overnight, a second field the same. Huginn reacted when this was named aloud.",
+          "fact": "Order-Sense reading of cracked east-channel irrigation tubing confirms: the gray-green mineral deposit concentrates at every iron contact point, working inward from the water-facing surface. The reed itself is undamaged. Whatever is in the river is selecting for iron specifically — a pattern, not random corrosion.",
           "links": [
             "millbrook",
+            "aldric",
             "aldric-provisioning-deal",
-            "aldric"
+            "fendt-and-the-falsified-ledger"
           ]
         }
       ],
@@ -1059,47 +1048,47 @@
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "A farmer arrives at the forge with cracked irrigation fittings — iron going brittle at the threading since the river changed. First direct in-village evidence of infrastructure damage from the contamination."
+          "note": "Order-Sense confirms the water contamination is causing selective iron corrosion at every water-contact fitting — at least two east-channel intake valves failed overnight. The damage is patterned and spreading."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the forge door — the morning just beginning to move"
+        "why": "A short observational beat — the farmer arrived, Pell took the job, Silas read the tubing. A few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — door open to full pale-gold dawn light, south pit fire coaled to low orange, Memory on the anvil horn, a farmer in the doorway with split-reed irrigation tubing.",
+      "setting": "Pell's forge, south lane, Millbrook — door open to full pale-gold dawn light, south pit fire coaled to low orange, Memory on the anvil horn.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the open door, apron wiped clean, giving the farmer a clear half-hour estimate — settled, on her own ground."
+          "state": "At the iron rack, pulling a blank sleeve-length, calipers in hand — working the farmer's job without ceremony."
         },
         {
           "name": "Farmer (unknown)",
-          "state": "In the doorway, coil of cracked split-reed tubing under one arm, noting everyone in the room including Huginn."
+          "state": "Standing just inside the doorway, split-reed tubing still under her arm, watching Pell work — gave the valve specs, wait"
         },
         {
           "name": "Huginn",
-          "state": "On the rafter — shifted weight deliberately when the farmer mentioned the river and the brittle iron. Watching."
+          "state": "Shifted on the rafter to see the split-reed tubing better. Still. Watching the mineral crust on the tube's interior join"
         }
       ],
       "objects": [
         "Deathbound Runic Spear 'Memory' (on the anvil horn — complete)",
         "Resin Mountain Wine (open bottle, nearly empty)",
         "Dried Starfruit sealed packet (open, mostly eaten)",
-        "River whetstone (on shelf above bellows — moved there by Pell just now)",
+        "River whetstone (on shelf above bellows)",
         "Spent rune-wax stub (on bench)",
         "Rune-Craft Kit (spent, on bench)",
         "South pit fire (coaled to low orange — needs bringing up)",
         "Collar-blank scrap (on anvil — double-stamp freshly pressed)",
-        "Split-reed irrigation tubing (cracked, under farmer's arm — the reason for the v"
+        "Split-reed irrigation tubing (cracked, under farmer's arm — gray-green mineral c"
       ],
       "threads": [
-        "Farmer needs an iron sleeve for a cracked irrigation valve — Pell has committed to half an hour",
-        "Farmer mentioned iron going brittle at the threading since the water changed — Huginn reacted",
-        "River whetstone on the shelf — not yet formally given to Pell",
-        "Gray-green water question and its upstream source still unasked of Pell directly",
-        "River scout for Aldric still the outstanding quest thread"
+        "Order-Sense confirmed: mineral deposit in the river water is targeting iron contact points specifically — selective corrosion, not general decay",
+        "Farmer mentioned at least two fields have lost iron intake valves since the water changed — and named 'Fen's' as a second failure this morning",
+        "Pell is working the farmer's half-hour job now — conversation window is short",
+        "River whetstone on the shelf — not yet formally given",
+        "Gray-green water question and its upstream source still unasked of Pell directly"
       ]
     }
   },
@@ -1126,14 +1115,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Bull taken and spear recovered. Both animals down — sow with Corvin in the sedge strip, bull on the scrub oak ridge. Ready for carry to the smokehouse once dressed. Rune-channel refusal unresolved; to be examined at the forge.",
         "Bull dressed and ready for carry — both animals down. Party needs to tag up with Corvin and haul to the smokehouse. River scout floated and tentatively endorsed by Pell.",
         "Both animals delivered — sow and bull, clean and dressed. Aldric confirmed the account and noted the boar have shifted uphill from the streambed over the past three weeks. River scout still outstanding.",
         "Account settled — Mara's ledger offset at sixty cord-weight, ninety cord-weight balance in Silas's favor. River scout still outstanding.",
         "All financial threads closed — thirty cord-weight in standing credit with Aldric, Corvin paid, Pell paid. River scout remains the one outstanding thread.",
         "River scout still the one outstanding thread — the spear repair now occupies the night; the scout will need to be planned separately.",
         "Spear repair occupies the night — river scout still the one outstanding thread; to be planned in the morning.",
-        "A farmer arrives at the forge with cracked irrigation fittings — iron going brittle at the threading since the river changed. First direct in-village evidence of infrastructure damage from the contamination."
+        "A farmer arrives at the forge with cracked irrigation fittings — iron going brittle at the threading since the river changed. First direct in-village evidence of infrastructure damage from the contamination.",
+        "Order-Sense confirms the water contamination is causing selective iron corrosion at every water-contact fitting — at least two east-channel intake valves failed overnight. The damage is patterned and spreading."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1247,7 +1236,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw",
         "[d2] Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'",
         "[d2] Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hand",
         "[d2] Answered Silas's plain question plainly — said she'd like to keep finding out what he is. Took Huginn's croak as confirmation of something.",
@@ -1256,28 +1244,29 @@
         "[d2] Received the forge-and-transformation question — answered with craft-logic: forging changes what a thing is, and the smith doesn't always know the outcome. Held Silas's wrist. Said",
         "[d2] Received Silas's declaration of certainty — believed it, but named the difference between his readiness and hers. Released his shirt; grip on his wrist softened to contact. Has not",
         "[d2] Heard the correction — 'willing to be in it, with you' — and said 'that's better' quietly. Released Silas's wrist as something to be picked up again, not put down. Turned attention",
-        "[d2] Handled the door transition cleanly — moved the whetstone off the bench before answering, committed to a half-hour sleeve job without disruption."
+        "[d2] Handled the door transition cleanly — moved the whetstone off the bench before answering, committed to a half-hour sleeve job without disruption.",
+        "[d2] Moved to iron rack and picked up calipers without hesitation — managing the farmer's job cleanly while Silas reads the tubing from across the room."
       ],
       "knownFacts": [
-        "Silas told her plainly he'd fallen for her — she heard it and did not move away",
         "She said 'not yet' — the morning can wait a little longer",
         "Responded to Silas's kiss by staying still and saying 'alright' — no performance, no deflection, the same directness she gives iron",
         "Silas offered himself to be forged — she heard it as a real question, not flattery, and answered it seriously",
         "She knows forging is irreversible and said so plainly — her way of asking if he understands what he's offering",
         "Silas's certainty about her is real — and she is not moved by certainty alone; she cares what the fire does over time",
         "Silas is willing to be in the fire with her, not ahead of it — she registered the difference",
-        "Moves on her own ground without self-consciousness — the forge is hers and she doesn't perform it"
+        "Moves on her own ground without self-consciousness — the forge is hers and she doesn't perform it",
+        "Two east-channel iron intake valves have failed since the water changed — the farmer's and Fen's"
       ],
       "skillsObserved": [
-        "precise pressure work on a cooling joint without instruction",
-        "articulating a craft first without dramatizing it",
         "double-stamp execution from body-memory, no hesitation",
         "reading a person's reaction at craft-level precision",
         "double-stamp on a named weapon without ceremony or hesitatio",
-        "reading a work situation and committing to a timeline withou"
+        "reading a work situation and committing to a timeline withou",
+        "immediate transition from personal moment to craft work with",
+        "accurate sleeve-blank selection by eye"
       ],
       "status": "active",
-      "statusNote": "At the forge door, managing an early morning job request — the dawn conversation set down but present.",
+      "statusNote": "At her forge, working a farmer's irrigation repair — the dawn conversation present but set aside for the job.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1902,28 +1891,43 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Iron is going brittle at the threading in irrigation valves since the water changed — a farmer lost a lower field intake valve overnight, a second field the same. Huginn reacted when this was named al"
+          "[d2] Iron is going brittle at the threading in irrigation valves since the water changed — a farmer lost a lower field intake valve overnight, a second field the same. Huginn reacted when this was named al",
+          "[d2] Order-Sense reading of cracked east-channel irrigation tubing confirms: the gray-green mineral deposit concentrates at every iron contact point, working inward from the water-facing surface. The reed "
         ],
         "links": [
           "millbrook",
           "aldric-provisioning-deal",
-          "aldric"
+          "aldric",
+          "fendt-and-the-falsified-ledger"
         ],
         "aliases": [],
         "createdDay": 2,
+        "updatedDay": 2
+      },
+      "dara-holt-the-ditch-mother": {
+        "id": "dara-holt-the-ditch-mother",
+        "label": "Dara Holt, the Ditch-Mother",
+        "kind": "person",
+        "facts": [
+          "[d2] Senior irrigator responsible for the valley's eastern channel network"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "dara-holt-the-ditch-mother",
         "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 47.27360278904055,
-    "cerebral": 33.269678175493205,
-    "social": 60.69394990591403,
-    "generous": 12.434518143721188,
-    "cautious": 24.242345248266332,
-    "physical": 1.6287843791640384,
-    "risky": 1.7756780246249573,
-    "ruthless": 0.8307187014821328
+    "strategic": 47.03723477509535,
+    "cerebral": 34.10332978461574,
+    "social": 60.39048015638446,
+    "generous": 12.372345553002582,
+    "cautious": 25.121133522025,
+    "physical": 1.6206404572682183,
+    "risky": 1.7667996345018324,
+    "ruthless": 0.8265651079747222
   },
   "aptitudes": [
     "strategist",
@@ -1931,10 +1935,18 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 126,
+  "actionCount": 127,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Dara Holt, the Ditch-Mother",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Dara%20Holt%2C%20the%20Ditch-Mother%2C%20Senior%20irrigator%20responsible%20for%20the%20valley's%20eastern%20channel%20network.%20Broad-shouldered%2C%20mid-fifties%2C%20hands%20that%20look%20like%20they%20were%20carved%20from%20the%20same%20hardwood%20as%20a%20shovel%20handle.%20Speaks%20in%20measurements%20and%20seasons%20%E2%80%94%20'that%20valve's%20been%20weeping%20since%20last%20thaw%2C'%20not%20'something's%20wrong.'%20Never%20dramatizes.%20Brings%20a%20cracked%20fitting%20to%20prove%20the%20point%20before%20she%20finishes%20the%20sentence.%20Calls%20a%20problem%20by%20its%20part%20name%2C%20not%20by%20its%20consequence.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=24501&nologo=true",
+      "caption": "Dara Holt, the Ditch-Mother",
+      "worldDay": 14,
+      "at": "2026-07-14T14:21:21.469Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Silas Weir",
@@ -2001,11 +2013,78 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784038863553,
-  "rev": 189,
+  "updatedAt": 1784039044558,
+  "rev": 191,
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "dara-holt-the-ditch-mother": {
+        "schemaVersion": 1,
+        "id": "dara-holt-the-ditch-mother",
+        "name": "Dara Holt, the Ditch-Mother",
+        "role": "Senior irrigator responsible for the valley's eastern channel network",
+        "homeLocation": "millbrook",
+        "communityId": "valley.millbrook",
+        "personality": {
+          "warmth": 0.6,
+          "trust": 0.55,
+          "candor": 0.85,
+          "patience": 0.7
+        },
+        "spectrum": {
+          "chaos_order": 0.65,
+          "death_life": 0.7,
+          "concrete_abstract": -0.75,
+          "falsehood_truth": 0.6
+        },
+        "voiceHints": "Broad-shouldered, mid-fifties, hands that look like they were carved from the same hardwood as a shovel handle. Speaks in measurements and seasons — 'that valve's been weeping since last thaw,' not 'something's wrong.' Never dramatizes. Brings a cracked fitting to prove the point before she finishes the sentence. Calls a problem by its part name, not by its consequence.",
+        "knowledge": [
+          "Forty years of the eastern channels — every slope, silting pattern, and freeze-line in the network",
+          "The river's mineral load has shifted since late autumn: fittings that lasted a decade are threading out or snapping in under two seasons, and the corrosion pattern runs inward from the joint, not outward the way sediment wear does",
+          "Three other irrigators on the eastern bench are seeing the same losses but haven't connected them yet — she has",
+          "The stretch of river above Holt's intake smells faintly wrong in still mornings, a faint bitterness she can't name but recognizes as new",
+          "She keeps a tin of failed fittings sorted by failure date and location — a physical record no one asked her to keep"
+        ],
+        "wants": "Replacement valve stock she can trust, a forge-backed answer for why her iron is failing, and confirmation that the river is the cause — not her installation work. She is not here to be reassured; she is here for a diagnosis.",
+        "fears": "That the river is doing something the valley has never budgeted for and that this spring's planting window will close before anyone in authority admits it.",
+        "functions": [
+          "reveal",
+          "bind"
+        ],
+        "kit": {
+          "reveal": "Brings physical evidence — dated, sorted, labeled — that makes the river's pattern undeniable to anyone willing to look at the parts",
+          "bind": "Connects isolated reports from neighboring irrigators into a coherent problem, naming the network's shared vulnerability before it fragments into blame"
+        },
+        "reactsToReputation": {
+          "competent-and-direct": "opens her tin of failed fittings immediately, shares dates and locations without being asked",
+          "dismissive-or-theoretical": "polite, brief, and gone — she'll find someone who works with their hands",
+          "curious-and-honest": "stays longer than she planned, starts drawing channel maps on whatever surface is available"
+        },
+        "_gen": {
+          "entityId": "dara-holt-the-ditch-mother",
+          "type": "npc",
+          "birthWeight": 5,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "millbrook",
+            "day": 2,
+            "worldDay": null,
+            "hint": "A broad-shouldered farmer, older than Pell, with cracked irrigation tubing and a practical manner — has been watching th",
+            "why": "She arrived at the forge door with a named problem (brittle threading, cracked valve) and direct knowledge of what the r"
+          },
+          "attentionHistory": [],
+          "createdDay": 2,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Dara%20Holt%2C%20the%20Ditch-Mother%2C%20Senior%20irrigator%20responsible%20for%20the%20valley's%20eastern%20channel%20network.%20Broad-shouldered%2C%20mid-fifties%2C%20hands%20that%20look%20like%20they%20were%20carved%20from%20the%20same%20hardwood%20as%20a%20shovel%20handle.%20Speaks%20in%20measurements%20and%20seasons%20%E2%80%94%20'that%20valve's%20been%20weeping%20since%20last%20thaw%2C'%20not%20'something's%20wrong.'%20Never%20dramatizes.%20Brings%20a%20cracked%20fitting%20to%20prove%20the%20point%20before%20she%20finishes%20the%20sentence.%20Calls%20a%20problem%20by%20its%20part%20name%2C%20not%20by%20its%20consequence.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=24501&nologo=true"
+      }
+    },
     "location": {},
     "arc": {}
   },
@@ -2161,7 +2240,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 27,
+      "order_sense": 28,
       "palework": 10,
       "deathsense": 10,
       "shadowstep": 2

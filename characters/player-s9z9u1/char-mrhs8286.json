@@ -1136,20 +1136,25 @@
         "player": "Pause at the aperture threshold and look back at the chamber — note down the interval question in plain terms on the Valve Failure Timeline note before the detail fades",
         "summary": "Silas notes the interval question on the timeline note before leaving the deeper chamber.",
         "narration": "You pause at the second aperture and turn back once more, letting your eyes settle on the chamber as a whole — the worn flags, the four-clustered grid, the empty cradle-recess, the column stain ascending to the ceiling corner. The detail is fresh but the kind of fresh that fades once you're moving on uneven ground.\n\nYou pull the Valve Failure Timeline note from your breast pocket — Mara's torn page, her clean hand — and press it against the door jamb. There's enough morning light threading through the near chamber from the outer gap. You write small in the margin, using the belt knife's butt to anchor the paper flat:\n\n*Four episodes. Gaps between clusters — uneven. Who came back, and how often? Device removed at completion — where did it go?*\n\nThat's the question the room won't answer. The grid records what the object did; it records nothing about the hand that set it or the hand that lifted it out. Someone was returning on a schedule, and then they stopped. Whether they stopped because the work was finished or because they couldn't come back is the thing you cannot read from marks in stone.\n\nYou fold the note back into your breast pocket. Huginn is already through the aperture, a dark shape on the near-chamber flags, head angled toward the outer light. Pell stands a step behind you, boot off the nearer stand-position at last, waiting without impatience.\n\n\"Written,\" you say. She nods once — not at you, at the fact of it — and moves toward the light."
+      },
+      {
+        "player": "Ask Pell the interval question as you walk out — she read the stain from deposit grain; she may have an instinct about the return schedule",
+        "summary": "Pell reads the stain bands as seasonal return cycles — the device was checked when conditions demanded it, not by calendar; the party moves north toward Fen's intake.",
+        "narration": "The near chamber light is thin but real after the deeper room's dark — your eyes adjust as you step through behind Huginn, who is already posted on the flagstone nearest the outer gap, head canted toward the morning.\n\nPell is a half-step ahead of you, moving without hurry. You ask it plainly, as you walk: the gaps between the four clusters were uneven — does she have a feel for what kind of schedule would produce that? Someone returning to confirm a device's state, but not on a fixed calendar. The deposit grain, the stain's layers — she reads accumulation the way you read a grid.\n\nShe doesn't stop walking, but she does slow. \"Seasonal,\" she says, after a moment. \"Not weekly, not monthly-fixed. The deposit grain on that stain reads three distinct bands above the old bleed-line — two winters, maybe three. If someone was coming back to run those episodes, they weren't running them on a count. They were coming when the conditions told them to.\" Her boot finds the outer threshold and she steps through into the pale morning without looking down. \"Which means whatever the device was measuring, it had a natural cycle. You check it when the cycle is due, not when the calendar says.\"\n\nHuginn drops off the flags and glides through the outer gap ahead of you both, angling north without being told. The hillside smells of wet sedge and cold stone. Fen's intake is twenty minutes up the path, and the light is still low enough that the dew hasn't lifted from the grass yet. You step out into the open air, Memory at your shoulder, the annotated timeline note back in your breast pocket. The interval question has a shape now: seasonal return, condition-triggered — and then the returns stopped."
       }
     ],
     "lastTurn": {
-      "narration": "You pause at the second aperture and turn back once more, letting your eyes settle on the chamber as a whole — the worn flags, the four-clustered grid, the empty cradle-recess, the column stain ascending to the ceiling corner. The detail is fresh but the kind of fresh that fades once you're moving on uneven ground.\n\nYou pull the Valve Failure Timeline note from your breast pocket — Mara's torn page, her clean hand — and press it against the door jamb. There's enough morning light threading through the near chamber from the outer gap. You write small in the margin, using the belt knife's butt to anchor the paper flat:\n\n*Four episodes. Gaps between clusters — uneven. Who came back, and how often? Device removed at completion — where did it go?*\n\nThat's the question the room won't answer. The grid records what the object did; it records nothing about the hand that set it or the hand that lifted it out. Someone was returning on a schedule, and then they stopped. Whether they stopped because the work was finished or because they couldn't come back is the thing you cannot read from marks in stone.\n\nYou fold the note back into your breast pocket. Huginn is already through the aperture, a dark shape on the near-chamber flags, head angled toward the outer light. Pell stands a step behind you, boot off the nearer stand-position at last, waiting without impatience.\n\n\"Written,\" you say. She nods once — not at you, at the fact of it — and moves toward the light.",
-      "sceneSummary": "Silas notes the interval question on the timeline note before leaving the deeper chamber.",
+      "narration": "The near chamber light is thin but real after the deeper room's dark — your eyes adjust as you step through behind Huginn, who is already posted on the flagstone nearest the outer gap, head canted toward the morning.\n\nPell is a half-step ahead of you, moving without hurry. You ask it plainly, as you walk: the gaps between the four clusters were uneven — does she have a feel for what kind of schedule would produce that? Someone returning to confirm a device's state, but not on a fixed calendar. The deposit grain, the stain's layers — she reads accumulation the way you read a grid.\n\nShe doesn't stop walking, but she does slow. \"Seasonal,\" she says, after a moment. \"Not weekly, not monthly-fixed. The deposit grain on that stain reads three distinct bands above the old bleed-line — two winters, maybe three. If someone was coming back to run those episodes, they weren't running them on a count. They were coming when the conditions told them to.\" Her boot finds the outer threshold and she steps through into the pale morning without looking down. \"Which means whatever the device was measuring, it had a natural cycle. You check it when the cycle is due, not when the calendar says.\"\n\nHuginn drops off the flags and glides through the outer gap ahead of you both, angling north without being told. The hillside smells of wet sedge and cold stone. Fen's intake is twenty minutes up the path, and the light is still low enough that the dew hasn't lifted from the grass yet. You step out into the open air, Memory at your shoulder, the annotated timeline note back in your breast pocket. The interval question has a shape now: seasonal return, condition-triggered — and then the returns stopped.",
+      "sceneSummary": "Pell reads the stain bands as seasonal return cycles — the device was checked when conditions demanded it, not by calendar; the party moves north toward Fen's intake.",
       "choices": [
         {
-          "label": "Walk north — straight to Fen's intake, valve site first",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Ask the follow-up — if the return was condition-triggered and seasonal, what season would demand a check? Try to narrow the last visit's probable timing from the stain bands.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "move",
+            "study",
             "careful"
           ],
           "abilityId": null,
@@ -1159,34 +1164,14 @@
           "emergenceId": null
         },
         {
-          "label": "Pause at the outer gap and read the hillside with Order-Sense — see what the buried structure is part of before losing the angle",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful",
-            "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell the interval question as you walk out — she read the stain from deposit grain; she may have an instinct about the return schedule",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Let it rest and move to Fen's intake — you have enough framing; the valve site will add evidence, not the walk. Save your attention for what the channel shows you.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "help"
+            "careful",
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1195,12 +1180,29 @@
           "emergenceId": null
         },
         {
-          "label": "Take a breath at the outer gap — check what you have left after back-to-back ability use before the valve walk",
+          "label": "Pull out the Valve Failure Timeline note and read it against Pell's seasonal reading — the four sleeve blank failures have dates; if the returns were seasonal, one of those failure dates might mark when the next check should have happened and didn't.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Watch Huginn — the bird is already moving north and its pace has changed. It knows when something is concluding; if it's moving with purpose rather than drift, something up the path is already in its attention.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "scout",
             "careful"
           ],
           "abilityId": null,
@@ -1210,37 +1212,39 @@
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "West bank hillside — at the second aperture threshold, facing out into the near chamber. Morning light is visible through the outer gap. The deeper chamber is behind; Huginn is already on the near-chamber flags ahead.",
+        "setting": "West bank hillside, just outside the lower aperture — standing in open air on the path north, morning light low and pale, dew still on the sedge. The buried-structure hillside is behind; the path north toward the upper meadow and Fen's intake ahead.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Boot off the nearer stand-position, moving toward the light, waiting without impatience."
+            "state": "A half-step ahead on the path, moving north at a steady walk, boot already past the outer threshold."
           },
           {
             "name": "Huginn",
-            "state": "Through the aperture, on the near-chamber flags, head angled toward the outer daylight gap."
+            "state": "Airborne, angling north ahead of both of them, moving with quiet purpose."
           }
         ],
         "objects": [
           "Memory (spear, at shoulder)",
-          "Low ring-hook — centered on far wall, hip height",
-          "Cradle-recess — below the ring-hook, empty",
-          "Grid of pressed marks — four clusters, thirty-one filled marks total",
-          "Worn parallel stand-positions in flags",
-          "Column stain — ceiling and upper far wall",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
-          "Valve Failure Timeline note (breast pocket — interval question now added in margin)"
+          "Valve Failure Timeline note (breast pocket — interval question annotated in margin)",
+          "Boar Tusks (pair) (pack)"
         ],
         "threads": [
-          "What was the interval between the four managed episodes — and who was coming back to run them?",
-          "The device was removed cleanly and satisfied — where did it go, and who took it?",
-          "Valve sites waiting: Fen's intake is twenty minutes north of the upper meadow; Dara Holt needs the full framing before she decides anything about the east channel"
+          "Seasonal return cycle identified — the device was checked when conditions demanded it, not by calendar; the last return stopped and the question of when and why remains open",
+          "Fen's intake: twenty minutes north — first valve site",
+          "Dara Holt: needs the full framing before she decides anything about the east channel"
         ]
       },
       "npcUpdates": [
@@ -1249,28 +1253,22 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Nodded at the written note — not at Silas, at the fact of it — and moved toward the light. Ready to walk north.",
-          "statusNote": "Moving through the near chamber toward the outer gap — walking north to the valve sites with Silas.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion",
-          "note": "Already through the aperture, attending the outer light. Leading the exit.",
-          "statusNote": "On the near-chamber flags, head toward daylight — moving out ahead of the party.",
-          "status": "active"
+          "note": "Read the deposit grain stain bands as evidence of seasonal, condition-triggered return visits — not a fixed calendar schedule. Moving north on the path.",
+          "learned": [
+            "The stain bands read as three distinct layers above the old bleed-line — two to three winters; return visits were seasonal and condition-triggered, not calendar-fixed"
+          ],
+          "skillsObserved": [
+            "reading deposit grain accumulation layers for temporal sequence"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Walking north with Silas toward Fen's intake — valve inspection underway."
         }
       ],
+      "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Valve Failure Timeline note now carries a marginal annotation — interval question and device-removal question written in Silas's hand before departure from the deeper chamber on World-day 14 dawn.",
-          "subPlace": {
-            "name": "Deeper Chamber",
-            "note": "Interval question and device-removal question noted and recorded before the party's exit on World-day 14 dawn. Chamber left undisturbed.",
-            "visited": true
-          }
+          "note": "Pell read the column stain bands as seasonal return cycles — three distinct layers above the old bleed-line, two to three winters of accumulation. The managed visits were condition-triggered, not calendar-fixed. Recorded on World-day 14 morning as the party exited the lower aperture."
         }
       ],
       "codexUpdates": [
@@ -1278,49 +1276,46 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "The interval between the four managed verification episodes is uneven — someone was returning on a schedule that cannot be read from the marks alone. The return stopped: whether at completion or because the manager could not come back is unknown. The device's destination after clean removal is unrecorded.",
+          "fact": "Pell's reading of the deposit grain stain bands: three distinct accumulation layers above the old bleed-line — the managed return visits to the deeper chamber were seasonal and condition-triggered, not calendar-fixed. Someone was checking the device when the natural cycle demanded it. The returns stopped, and no one came for the last cycle.",
           "links": [
-            "millbrook",
             "pell",
+            "millbrook",
             "dara-holt",
-            "aldric-provisioning-deal",
             "order-sense",
-            "palework"
+            "palework",
+            "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief pause at the aperture threshold — note written, party regrouping to move."
-      }
+        "why": "Short walk out of the chamber and a few words on the path — a brief exchange"
+      },
+      "scene_ended": false
     },
     "sceneState": {
-      "setting": "West bank hillside — at the second aperture threshold, facing out into the near chamber. Morning light is visible through the outer gap. The deeper chamber is behind; Huginn is already on the near-chamber flags ahead.",
+      "setting": "West bank hillside, just outside the lower aperture — standing in open air on the path north, morning light low and pale, dew still on the sedge. The buried-structure hillside is behind; the path north toward the upper meadow and Fen's intake ahead.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Boot off the nearer stand-position, moving toward the light, waiting without impatience."
+          "state": "A half-step ahead on the path, moving north at a steady walk, boot already past the outer threshold."
         },
         {
           "name": "Huginn",
-          "state": "Through the aperture, on the near-chamber flags, head angled toward the outer daylight gap."
+          "state": "Airborne, angling north ahead of both of them, moving with quiet purpose."
         }
       ],
       "objects": [
         "Memory (spear, at shoulder)",
-        "Low ring-hook — centered on far wall, hip height",
-        "Cradle-recess — below the ring-hook, empty",
-        "Grid of pressed marks — four clusters, thirty-one filled marks total",
-        "Worn parallel stand-positions in flags",
-        "Column stain — ceiling and upper far wall",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
-        "Valve Failure Timeline note (breast pocket — interval question now added in marg"
+        "Valve Failure Timeline note (breast pocket — interval question annotated in marg",
+        "Boar Tusks (pair) (pack)"
       ],
       "threads": [
-        "What was the interval between the four managed episodes — and who was coming back to run them?",
-        "The device was removed cleanly and satisfied — where did it go, and who took it?",
-        "Valve sites waiting: Fen's intake is twenty minutes north of the upper meadow; Dara Holt needs the full framing before she decides anything about the east chann"
+        "Seasonal return cycle identified — the device was checked when conditions demanded it, not by calendar; the last return stopped and the question of when and why",
+        "Fen's intake: twenty minutes north — first valve site",
+        "Dara Holt: needs the full framing before she decides anything about the east channel"
       ]
     }
   },
@@ -1468,7 +1463,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Has not yet crossed into the deeper chamber — last known position is the near chamber near the threshold",
         "[d2] Entered the deeper chamber, occupied the nearer stand-position by instinct, read the two-person fixed-operation geometry without prompting, and asked the right question about the g",
         "[d2] Held the nearer stand-position throughout the Palework read — watching without crowding. Asked 'Anything?' when the read concluded. Still waiting on the report.",
         "[d2] Held the nearer stand-position throughout the Order-Sense read — watching Silas at the farther position without moving. Still waiting on the report.",
@@ -1477,28 +1471,29 @@
         "[d2] Watched Silas work the grid marks — waiting on the report. Boot still on the nearer stone.",
         "[d2] Listening to the four-episode summary — waiting on Silas's full read before moving to the valve sites.",
         "[d2] Received the full grid summary — four episodes, three-beat grammar, clean removal at completion. Confirmed the post-removal failure sequence without prompting. Boot off the stone, ",
-        "[d2] Nodded at the written note — not at Silas, at the fact of it — and moved toward the light. Ready to walk north."
+        "[d2] Nodded at the written note — not at Silas, at the fact of it — and moved toward the light. Ready to walk north.",
+        "[d2] Read the deposit grain stain bands as evidence of seasonal, condition-triggered return visits — not a fixed calendar schedule. Moving north on the path."
       ],
       "knownFacts": [
-        "The cradle-recess held something field-active and dense — Palework confirms purpose-driven removal, not abandonment",
         "The two stand-positions are operator and confirmer — a built-in error-check",
         "The chamber had two fixed roles: one reads the grid and calls the state, one confirms it — error-check designed into the geometry",
         "The ring-hook's function concluded generations ago — not destroyed, concluded; the room has been waiting since",
         "The grid marks hold a last-recorded state, not a measurement — three consecutive stable reads followed by deliberate removal",
         "The grid records four verification cycles, each with the same three-beat structure — condition present, held, checked. The fourth cycle ended with clean removal",
         "The chamber records scheduled managed operation — someone was returning at intervals to verify the device's state",
-        "The device was confirmed functional and removed cleanly — sleeve blank failures came after, not before or during operation"
+        "The device was confirmed functional and removed cleanly — sleeve blank failures came after, not before or during operation",
+        "The stain bands read as three distinct layers above the old bleed-line — two to three winters; return visits were seasonal and condition-triggered, not calendar"
       ],
       "skillsObserved": [
-        "identifying two-person craft stations by stance analysis",
         "patience under read-work — held position and waited rather t",
         "patience under read-work — held position without prompting o",
         "reading functional room design from floor geometry",
         "connecting buried structure findings to surface infrastructu",
-        "rapid synthesis of structural evidence into operational conc"
+        "rapid synthesis of structural evidence into operational conc",
+        "reading deposit grain accumulation layers for temporal seque"
       ],
       "status": "active",
-      "statusNote": "Moving through the near chamber toward the outer gap — walking north to the valve sites with Silas.",
+      "statusNote": "Walking north with Silas toward Fen's intake — valve inspection underway.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1603,7 +1598,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Thirty paces north of the column stain — dressed rubble stones in the sedge and a buried-structure settling-seam ten feet up the hillside. Iron-mat steps up sharply at this threshold. Huginn attended ",
         "[d2] Pell named the breach-from-within as a valve — deliberate design or conditional trigger. The sealed rooms interpreted as protection chambers. This reading now part of the site's physical record.",
         "[d2] Lower aperture face cleared on World-day 14 morning — dressed ashlar frame exposed, seating-piece moved inward (not broken), inner space dry. Physical confirmation of breach-from-within. Do not re-cov",
         "[d2] Pell's full frame assessment recorded at the lower aperture: frame sound, both jambs dry, channel clean inside, no hydrostatic load. Seating-piece can be shifted without collapsing the reveal. World-d",
@@ -1614,7 +1608,8 @@
         "[d2] Deeper chamber cradle-recess Palework-read on World-day 14 dawn: object was dense, field-active (non-biological), leached iron from stone beneath over years/decades of use. Removal was final and purpo",
         "[d2] Order-Sense from the farther stand-position confirms paired operator/confirmer design — the chamber had an error-checking function. Grid filled marks are grouped, recording object states (not measurem",
         "[d2] Grid filled marks read via The Attended End on World-day 14 dawn — three consecutive stable-state confirmations in a close cluster; the object was performing correctly and was removed deliberately at ",
-        "[d2] Valve Failure Timeline note now carries a marginal annotation — interval question and device-removal question written in Silas's hand before departure from the deeper chamber on World-day 14 dawn."
+        "[d2] Valve Failure Timeline note now carries a marginal annotation — interval question and device-removal question written in Silas's hand before departure from the deeper chamber on World-day 14 dawn.",
+        "[d2] Pell read the column stain bands as seasonal return cycles — three distinct layers above the old bleed-line, two to three winters of accumulation. The managed visits were condition-triggered, not cale"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2126,7 +2121,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancien",
           "[d2] Deathsense on the crack: the fissure is stable and not widening — pressure below equalized after the initial shift. The crack is a fixed pressure-release, not a growing failure. The cause of the origi",
           "[d2] Pell's iron-read: the coping stone is receiving iron already carried in the water, not leaching it. The crack opened from a change below, not age — Pell names it a decision-shape in the material. The ",
           "[d2] North of the bedrock shelf, a section of old stone facing has separated from the bank — behind it, a dark column stain predates Mara's ledger and the current gray-green contamination. Something was bl",
@@ -2149,7 +2143,8 @@
           "[d2] The device removed from the deeper chamber was confirmed stable at removal — the contamination and sleeve blank failures came after the removal, not before or during operation. Something that was work",
           "[d2] The deeper chamber's four verification cycles suggest managed, scheduled operation rather than passive function. If the manager stopped coming and the last action was removal of the active object, the",
           "[d2] The device in the deeper chamber was removed cleanly, at completion — sleeve blank failures and contamination came after the removal, not during operation. Something functional was taken out, and the ",
-          "[d2] The interval between the four managed verification episodes is uneven — someone was returning on a schedule that cannot be read from the marks alone. The return stopped: whether at completion or becau"
+          "[d2] The interval between the four managed verification episodes is uneven — someone was returning on a schedule that cannot be read from the marks alone. The return stopped: whether at completion or becau",
+          "[d2] Pell's reading of the deposit grain stain bands: three distinct accumulation layers above the old bleed-line — the managed return visits to the deeper chamber were seasonal and condition-triggered, no"
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2241,14 +2236,14 @@
     }
   },
   "tendencies": {
-    "strategic": 53.774316656842714,
-    "cerebral": 42.99977234159726,
-    "social": 52.19572284673906,
-    "generous": 13.556160488426402,
-    "cautious": 42.98770647518852,
-    "physical": 1.3064089541258783,
-    "risky": 3.2168431415483747,
-    "ruthless": 0.6662995813682115
+    "strategic": 53.5054450735585,
+    "cerebral": 43.78477347988927,
+    "social": 51.934744232505366,
+    "generous": 14.48837968598427,
+    "cautious": 42.77276794281257,
+    "physical": 1.299876909355249,
+    "risky": 3.2007589258406326,
+    "ruthless": 0.6629680834613705
   },
   "aptitudes": [
     "strategist",
@@ -2256,7 +2251,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 170,
+  "actionCount": 171,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2342,8 +2337,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784069141658,
-  "rev": 241,
+  "updatedAt": 1784069268045,
+  "rev": 242,
   "generated": {
     "schemaVersion": 1,
     "npc": {

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 411,
+  "xp": 413,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 110,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -890,71 +890,80 @@
         "player": "You forge iron with confidence - do you want to be forged by me?",
         "summary": "Pell received the forge-and-fire question honestly — answered it with craft-logic and held on.",
         "narration": "The question lands in the forge-quiet the way a well-struck tool lands — no excess, no rebound. Just the clean fact of contact.\n\nPell doesn't answer immediately. She's still holding your wrist, the front of your shirt still in her other hand, and she looks at you the way she looked at Memory after the double-stamp: measuring the register, not the surface. Her thumb moves once against the inside of your wrist — not a stroke, just a press, reading pulse the way she reads tension in cooling iron.\n\n\"That's a dangerous thing to offer,\" she says at last. Her voice is low, entirely unhurried. \"Forging changes what a thing is. Not always into something better. Sometimes just into something different that can't go back.\" She doesn't let go of your wrist. \"And the smith doesn't always know what she's making until it's done.\"\n\nHuginn shifts on its perch. One small weight-transfer, entirely silent. Pell glances at it — just once, the way you check a fire — then back to you. The half-smile is still there, but something behind it has gone more serious, the way heat goes deeper when you hold the piece longer. \"Ask me again,\" she says quietly, \"when you've decided you're alright with not knowing what comes out of the fire.\""
+      },
+      {
+        "player": "Tell her you've already decided — you've stood in worse fires, and you walked toward this one on purpose.",
+        "summary": "Silas's declaration of certainty lands wrong — Pell names the difference between his readiness and hers, and footsteps approach the forge door.",
+        "narration": "The words come out right. That's the problem.\n\nYou say it plainly — that you've already decided, that you've stood in worse fires and walked toward this one on purpose, and every word of it is true. You feel it as you say it: the certainty, the clean line of having chosen. It should land.\n\nPell's thumb stops moving against your wrist. The half-smile that was there a moment ago has gone somewhere she hasn't brought back yet. She looks at you for a long beat — that same unhurried measurement, the kind she gives iron that surprises her — and then something in her face does a quiet thing, not closing exactly, but settling back into itself.\n\n\"You've decided,\" she repeats. Not mocking. Turning it over. She releases the front of your shirt, lets her hand rest flat against your chest for one moment before dropping to her side. Her other hand still has your wrist, but the grip has changed — less a hold, more a contact. \"I believe you. I even think it's true.\" A beat. \"But I'm not iron, Silas. I don't care that you're sure. I care what the fire does over time.\"\n\nHuginn shifts its weight on the perch — a small adjustment, unhurried, perfectly timed. Pell glances at it once, then back at you. She hasn't stepped away. The morning is fully outside the door now, gold light pressing the gap under the threshold, and somewhere beyond it someone is moving — a heavy step on the south lane gravel, quick and purposeful, heading toward the forge."
       }
     ],
     "lastTurn": {
-      "narration": "The question lands in the forge-quiet the way a well-struck tool lands — no excess, no rebound. Just the clean fact of contact.\n\nPell doesn't answer immediately. She's still holding your wrist, the front of your shirt still in her other hand, and she looks at you the way she looked at Memory after the double-stamp: measuring the register, not the surface. Her thumb moves once against the inside of your wrist — not a stroke, just a press, reading pulse the way she reads tension in cooling iron.\n\n\"That's a dangerous thing to offer,\" she says at last. Her voice is low, entirely unhurried. \"Forging changes what a thing is. Not always into something better. Sometimes just into something different that can't go back.\" She doesn't let go of your wrist. \"And the smith doesn't always know what she's making until it's done.\"\n\nHuginn shifts on its perch. One small weight-transfer, entirely silent. Pell glances at it — just once, the way you check a fire — then back to you. The half-smile is still there, but something behind it has gone more serious, the way heat goes deeper when you hold the piece longer. \"Ask me again,\" she says quietly, \"when you've decided you're alright with not knowing what comes out of the fire.\"",
-      "sceneSummary": "Pell received the forge-and-fire question honestly — answered it with craft-logic and held on.",
+      "narration": "The words come out right. That's the problem.\n\nYou say it plainly — that you've already decided, that you've stood in worse fires and walked toward this one on purpose, and every word of it is true. You feel it as you say it: the certainty, the clean line of having chosen. It should land.\n\nPell's thumb stops moving against your wrist. The half-smile that was there a moment ago has gone somewhere she hasn't brought back yet. She looks at you for a long beat — that same unhurried measurement, the kind she gives iron that surprises her — and then something in her face does a quiet thing, not closing exactly, but settling back into itself.\n\n\"You've decided,\" she repeats. Not mocking. Turning it over. She releases the front of your shirt, lets her hand rest flat against your chest for one moment before dropping to her side. Her other hand still has your wrist, but the grip has changed — less a hold, more a contact. \"I believe you. I even think it's true.\" A beat. \"But I'm not iron, Silas. I don't care that you're sure. I care what the fire does over time.\"\n\nHuginn shifts its weight on the perch — a small adjustment, unhurried, perfectly timed. Pell glances at it once, then back at you. She hasn't stepped away. The morning is fully outside the door now, gold light pressing the gap under the threshold, and somewhere beyond it someone is moving — a heavy step on the south lane gravel, quick and purposeful, heading toward the forge.",
+      "sceneSummary": "Silas's declaration of certainty lands wrong — Pell names the difference between his readiness and hers, and footsteps approach the forge door.",
       "choices": [
         {
-          "label": "Tell her you've already decided — you've stood in worse fires, and you walked toward this one on purpose.",
+          "label": "Hold the silence — don't try to fix it. Let her words stand and see who comes to the door.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "patient",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say simply: 'You're right. I didn't mean to skip the fire — I meant I'm willing to be in it.' Then step back and open the door.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "honest",
+            "repair"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go to the door yourself — whoever it is, answer it and deal with what the morning has brought.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "bold",
-            "honest",
-            "intimate"
+            "practical",
+            "deflect"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Admit you don't know what you'd be after — but neither does she, and that's the interesting part.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "honest",
-            "curious",
-            "intimate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Give her the river whetstone — no ceremony, just set it in her hand and say nothing. Let the gift be the answer.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "quiet",
-            "generous",
-            "intimate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Let the moment breathe — say you'll think about it, and mean it. Then ask her what the gray-green water means to her.",
+          "label": "Use Order-Sense on the sound of the approaching steps — read who or what this is before the door opens.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "pivot",
-            "curious"
+            "scout",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
@@ -965,15 +974,15 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — full dawn light gold under the door, south pit fire coaled to low orange, Memory on the anvil horn.",
+        "setting": "Pell's forge, south lane, Millbrook — full dawn light gold under the door, south pit fire coaled to low orange, Memory on the anvil horn. Footsteps on the gravel outside, approaching.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Still holding Silas's wrist, front of his shirt in her other hand — more serious now, the half-smile gone deeper. Not moved away."
+            "state": "Still has Silas's wrist — grip changed from hold to contact. Hand dropped from his shirt. Looking at him levelly, settled back into herself. Has not stepped away."
           },
           {
             "name": "Huginn",
-            "state": "On its perch. Made one small weight-transfer. Watching."
+            "state": "Adjusted weight on perch after Pell spoke. Watching the door."
           }
         ],
         "objects": [
@@ -987,7 +996,8 @@
           "Collar-blank scrap (on anvil — double-stamp freshly pressed)"
         ],
         "threads": [
-          "Pell's answer — ask again when you've decided you're alright with not knowing what comes out of the fire",
+          "Pell named the difference between Silas's certainty and what the fire over time requires — unresolved",
+          "Heavy footsteps on the south lane gravel, heading toward the forge door",
           "River whetstone still on the bench — not yet formally given",
           "The gray-green water question still unasked of Pell",
           "River scout for Aldric still the one outstanding quest thread"
@@ -998,48 +1008,43 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received the forge-and-transformation question — answered with craft-logic: forging changes what a thing is, and the smith doesn't always know the outcome. Held Silas's wrist. Said ask again when he's decided he's alright with not knowing.",
+          "note": "Received Silas's declaration of certainty — believed it, but named the difference between his readiness and hers. Released his shirt; grip on his wrist softened to contact. Has not stepped away.",
           "learned": [
-            "Silas offered himself to be forged — she heard it as a real question, not flattery, and answered it seriously",
-            "She knows forging is irreversible and said so plainly — her way of asking if he understands what he's offering"
+            "Silas's certainty about her is real — and she is not moved by certainty alone; she cares what the fire does over time"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge bench at dawn — still holding Silas's wrist, answered the forge-question seriously, waiting for his response."
+          "statusNote": "At the forge bench at dawn — grip softened, looking at Silas levelly. Someone approaching the door."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "pell",
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "When offered the forge-and-transformation question, Pell answered with craft-logic: forging changes what a thing is, not always into something better, and the smith doesn't always know what she's making. She said ask again when you've decided you're alright with not knowing what comes out of the fire.",
+          "fact": "When Silas declared his certainty plainly, Pell believed him — and said it doesn't matter. She cares what the fire does over time, not how sure he is at the start.",
           "links": [
             "millbrook",
-            "death-bound-spear",
-            "aldric-provisioning-deal"
+            "death-bound-spear"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the forge bench — a question asked, an answer given"
+        "why": "a short exchange at dawn, the morning now fully arrived"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — full dawn light gold under the door, south pit fire coaled to low orange, Memory on the anvil horn.",
+      "setting": "Pell's forge, south lane, Millbrook — full dawn light gold under the door, south pit fire coaled to low orange, Memory on the anvil horn. Footsteps on the gravel outside, approaching.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Still holding Silas's wrist, front of his shirt in her other hand — more serious now, the half-smile gone deeper. Not mo"
+          "state": "Still has Silas's wrist — grip changed from hold to contact. Hand dropped from his shirt. Looking at him levelly, settle"
         },
         {
           "name": "Huginn",
-          "state": "On its perch. Made one small weight-transfer. Watching."
+          "state": "Adjusted weight on perch after Pell spoke. Watching the door."
         }
       ],
       "objects": [
@@ -1053,7 +1058,8 @@
         "Collar-blank scrap (on anvil — double-stamp freshly pressed)"
       ],
       "threads": [
-        "Pell's answer — ask again when you've decided you're alright with not knowing what comes out of the fire",
+        "Pell named the difference between Silas's certainty and what the fire over time requires — unresolved",
+        "Heavy footsteps on the south lane gravel, heading toward the forge door",
         "River whetstone still on the bench — not yet formally given",
         "The gray-green water question still unasked of Pell",
         "River scout for Aldric still the one outstanding quest thread"
@@ -1204,7 +1210,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received starfruit and wine at dawn — went somewhere briefly when she tasted the starfruit, came back without explaining. Heard Memory named. Drinking quietly.",
         "[d2] Explained the oblique stamp — the iron told her hand where to go; she's never had a piece do that before. Named it plainly, without distress.",
         "[d2] Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what hap",
         "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw",
@@ -1213,17 +1218,18 @@
         "[d2] Answered Silas's plain question plainly — said she'd like to keep finding out what he is. Took Huginn's croak as confirmation of something.",
         "[d2] Heard Silas name the cookhouse deflection and his fall for her — closed her hand around his wrist and said 'not yet', holding the moment without ending it.",
         "[d2] Silas kissed her at dawn at the anvil horn — she tightened her hand on his wrist, stayed, said 'alright' quietly. A first reading, not a conclusion.",
-        "[d2] Received the forge-and-transformation question — answered with craft-logic: forging changes what a thing is, and the smith doesn't always know the outcome. Held Silas's wrist. Said"
+        "[d2] Received the forge-and-transformation question — answered with craft-logic: forging changes what a thing is, and the smith doesn't always know the outcome. Held Silas's wrist. Said",
+        "[d2] Received Silas's declaration of certainty — believed it, but named the difference between his readiness and hers. Released his shirt; grip on his wrist softened to contact. Has not"
       ],
       "knownFacts": [
-        "Registers that Silas brought starfruit from a closed pass and stayed up all night repairing something that isn't his — reads both as meaningful signals",
         "Acknowledged that 'weird enough' undersells what Silas is, without it being a problem",
         "Said plainly she wants to keep finding out who he is — this is now an explicit, named intention",
         "Silas told her plainly he'd fallen for her — she heard it and did not move away",
         "She said 'not yet' — the morning can wait a little longer",
         "Responded to Silas's kiss by staying still and saying 'alright' — no performance, no deflection, the same directness she gives iron",
         "Silas offered himself to be forged — she heard it as a real question, not flattery, and answered it seriously",
-        "She knows forging is irreversible and said so plainly — her way of asking if he understands what he's offering"
+        "She knows forging is irreversible and said so plainly — her way of asking if he understands what he's offering",
+        "Silas's certainty about her is real — and she is not moved by certainty alone; she cares what the fire does over time"
       ],
       "skillsObserved": [
         "staying present through a six-hour repair without flagging",
@@ -1234,7 +1240,7 @@
         "double-stamp on a named weapon without ceremony or hesitatio"
       ],
       "status": "active",
-      "statusNote": "At the forge bench at dawn — still holding Silas's wrist, answered the forge-question seriously, waiting for his response.",
+      "statusNote": "At the forge bench at dawn — grip softened, looking at Silas levelly. Someone approaching the door.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1683,7 +1689,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Named the date plainly on the field path — after the hunt, at the forge, to see what the thing is. Her terms: clean forge, no unpriced promises.",
           "[d1] Clocked Silas's ritual-nudity claim immediately and called it with flat amusement — 'a good try is a good try.' Not offended, not deceived. Will attend the rune-working tonight dressed. The date after",
           "[d1] Pressed her maker's mark into the spear-blade without being asked, when the inscription stalled — the iron accepted her hand in a way it did not accept Silas's alone. She is now load-bearing in the de",
           "[d1] Has agreed to meet Silas after the hunt to explore what the iron's response to her hand might mean — open to being taught, on her own terms: evidence first, daylight before fire.",
@@ -1706,7 +1711,8 @@
           "[d2] At dawn over the last of the wine, Pell said plainly she doesn't know what Silas is or where he's going — and that she'd like to keep finding out. The interest is named and mutual.",
           "[d2] At dawn in her own forge, Pell held Silas's wrist and said 'not yet' — heard his declaration plainly and stayed.",
           "[d2] At dawn in her own forge, Silas kissed her — she tightened her hand on his wrist, stayed, and said 'alright' in the quiet way she gives a first assessment. Not a conclusion. A beginning.",
-          "[d2] When offered the forge-and-transformation question, Pell answered with craft-logic: forging changes what a thing is, not always into something better, and the smith doesn't always know what she's maki"
+          "[d2] When offered the forge-and-transformation question, Pell answered with craft-logic: forging changes what a thing is, not always into something better, and the smith doesn't always know what she's maki",
+          "[d2] When Silas declared his certainty plainly, Pell believed him — and said it doesn't matter. She cares what the fire does over time, not how sure he is at the start."
         ],
         "links": [
           "death-bound-spear",
@@ -1857,14 +1863,14 @@
     }
   },
   "tendencies": {
-    "strategic": 47.989857409611176,
-    "cerebral": 33.77375570105085,
-    "social": 59.59338868115384,
-    "generous": 12.622916754141341,
-    "cautious": 23.594496051141626,
-    "physical": 1.6534625138663073,
-    "risky": 1.8025817830598485,
-    "ruthless": 0.8433051360508336
+    "strategic": 47.74990812256312,
+    "cerebral": 33.604886922545596,
+    "social": 59.29542173774807,
+    "generous": 12.559802170370634,
+    "cautious": 23.476523570885917,
+    "physical": 1.6451952012969757,
+    "risky": 1.7935688741445492,
+    "ruthless": 0.8390886103705794
   },
   "aptitudes": [
     "strategist",
@@ -1872,7 +1878,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 123,
+  "actionCount": 124,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1942,8 +1948,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784038494741,
-  "rev": 186,
+  "updatedAt": 1784038586983,
+  "rev": 187,
   "generated": {
     "schemaVersion": 1,
     "npc": {},

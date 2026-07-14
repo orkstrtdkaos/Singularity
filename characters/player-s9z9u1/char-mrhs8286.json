@@ -1056,31 +1056,43 @@
         "player": "Ask Huginn what he sees — let him attend the aperture and read what it holds before anyone touches the seating-piece.",
         "summary": "Huginn attends the cleared aperture and reads what's inside as old and finished — not dangerous, but present. Pell defers the next move to Silas.",
         "narration": "Huginn reads the aperture — old, concluded, not ending. Pell names his attendance as the clearest permission she knows."
+      },
+      {
+        "player": "Ask Pell to read the frame condition now — her full assessment before the seating-piece moves an inch.",
+        "summary": "Pell reads the aperture frame: sound joints, dry stone, clean channel — the structure has already made its move. Go in, or fetch Dara Holt first.",
+        "narration": "You step back half a pace and let Pell have the frame. She moves into the space you've cleared with the particular economy of someone who learned a long time ago that the thing you're reading doesn't need you crowding it. Both hands go to the stone — not the seating-piece, the ashlar itself — thumbs pressing the lower corners of the frame where the iron-mat staining is thickest.\n\nShe works in silence for a minute. Reading the grain, running a thumbnail along the dressed face, checking the reveal depth on both jambs. When she speaks she doesn't look up.\n\n\"Frame's sound. Whoever built this knew their courses — the breach didn't come from stone failure, the joints are still tight except at the seating-piece channel.\" Her thumb traces the channel itself, the inch-wide slot the seating-piece rides in. \"Channel's clean inside. No debris forcing it, no calcium bridging. The piece moved on its own — either something pushed from within or the trigger condition released it. Either way, the structure above is not in danger from what's in there. It has already made its move.\"\n\nShe straightens and steps to the right jamb, pressing her palm flat against the face. \"Stone is dry. No hydrostatic load. Whatever those sealed rooms hold, they are not full of water.\" She glances at Huginn once — brief, factual — and then back to you. \"Old, concluded, not ending. That's your read, that's my read. The seating-piece is still seated — skewed, but seated. You can shift it without collapsing the reveal, if you want what's inside. Or you leave it and you go fetch Dara Holt and you show her all of this before anyone puts a hand on it.\" A pause. \"Both are legitimate. I am not choosing for you.\""
       }
     ],
     "lastTurn": {
-      "narration": "Huginn reads the aperture — old, concluded, not ending. Pell names his attendance as the clearest permission she knows.",
-      "sceneSummary": "Huginn attends the cleared aperture and reads what's inside as old and finished — not dangerous, but present. Pell defers the next move to Silas.",
+      "narration": "You step back half a pace and let Pell have the frame. She moves into the space you've cleared with the particular economy of someone who learned a long time ago that the thing you're reading doesn't need you crowding it. Both hands go to the stone — not the seating-piece, the ashlar itself — thumbs pressing the lower corners of the frame where the iron-mat staining is thickest.\n\nShe works in silence for a minute. Reading the grain, running a thumbnail along the dressed face, checking the reveal depth on both jambs. When she speaks she doesn't look up.\n\n\"Frame's sound. Whoever built this knew their courses — the breach didn't come from stone failure, the joints are still tight except at the seating-piece channel.\" Her thumb traces the channel itself, the inch-wide slot the seating-piece rides in. \"Channel's clean inside. No debris forcing it, no calcium bridging. The piece moved on its own — either something pushed from within or the trigger condition released it. Either way, the structure above is not in danger from what's in there. It has already made its move.\"\n\nShe straightens and steps to the right jamb, pressing her palm flat against the face. \"Stone is dry. No hydrostatic load. Whatever those sealed rooms hold, they are not full of water.\" She glances at Huginn once — brief, factual — and then back to you. \"Old, concluded, not ending. That's your read, that's my read. The seating-piece is still seated — skewed, but seated. You can shift it without collapsing the reveal, if you want what's inside. Or you leave it and you go fetch Dara Holt and you show her all of this before anyone puts a hand on it.\" A pause. \"Both are legitimate. I am not choosing for you.\"",
+      "sceneSummary": "Pell reads the aperture frame: sound joints, dry stone, clean channel — the structure has already made its move. Go in, or fetch Dara Holt first.",
       "choices": [
         {
-          "label": "Ask Pell to read the frame condition now — her full assessment before the seating-piece moves an inch.",
+          "label": "Shift the seating-piece and see what's inside",
           "attribute": "practical",
           "subAttribute": "craft",
-          "difficulty": 0,
+          "axes": {
+            "chaos_order": 0.2,
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 15,
           "intentTags": [
+            "explore",
             "careful",
-            "study"
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Order-Sense on the aperture itself — read what design the interior is part of before anything shifts.",
+          "label": "Use Order-Sense on the sealed rooms before touching anything — read what the full design says lies inside",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.3,
+            "concrete_abstract": -0.4,
             "mechanical_spiritual": 0.2
           },
           "difficulty": 0,
@@ -1090,36 +1102,47 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Move the seating-piece and open the aperture — careful work on the stone mechanism.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Leave the aperture as-is and go find Dara Holt — bring her to the site before anyone opens anything.",
+          "label": "Leave the seating-piece where it is and go fetch Dara Holt now — show her the site before anyone touches it",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "chaos_order": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "help"
+            "help",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Deathsense on the sealed rooms — read whether anything inside is ending or has an ending still underway",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
@@ -1132,15 +1155,15 @@
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "Huginn reads the cleared aperture as old and concluded — no active danger from within. The inner space is dry, cool, and mineral-smelling. The next step is Silas's call: read further, open it, or bring Dara Holt before touching anything."
+          "note": "Pell reads the frame as sound and dry — the structure has already made its move. Inner space is accessible. Decision point: enter now or bring Dara Holt first."
         }
       ],
       "scene": {
-        "setting": "West bank hillside — lower aperture cleared and exposed. Dressed ashlar frame, seating-piece moved inward in its channel. Morning alder light. Inner darkness dry, cool, mineral-smelling.",
+        "setting": "West bank hillside — lower aperture cleared and exposed. Dressed ashlar frame, seating-piece skewed but seated in its clean channel, both jambs dry and sound. Morning alder light.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing to Silas's left, reading his face — waiting on his call."
+            "state": "Standing at the right jamb, palm still on the stone — has given her full read, waiting on Silas's call."
           },
           {
             "name": "Huginn",
@@ -1149,9 +1172,9 @@
         ],
         "objects": [
           "Memory (spear, at Silas's side)",
-          "Dressed ashlar aperture frame — rectangular, shoulder-width, chest-height",
-          "Seating-piece — moved inward, skewed in its channel, not broken",
-          "Iron-mat staining on aperture frame — thickest at lower corners, copper-green going black in the dressed channel",
+          "Dressed ashlar aperture frame — rectangular, shoulder-width, chest-height, both jambs sound and dry",
+          "Seating-piece — skewed in its channel, not broken, still seated — channel clean inside",
+          "Iron-mat staining on aperture frame — thickest at lower corners",
           "Inner darkness beyond the gap — dry, cool, mineral-smelling, no water sound",
           "Cleared sedge and loose fill — piled to one side",
           "Valve Failure Timeline note (breast pocket)",
@@ -1160,10 +1183,10 @@
           "Column stain (thirty paces south — palm-print visible)"
         ],
         "threads": [
-          "Huginn attended and read: old, concluded, not ending — not a warning off",
-          "Pell defers the call on the seating-piece to Silas",
-          "Dara Holt not yet contacted — senior irrigator for this channel",
-          "Inner space unread beyond Huginn's attendance — what it holds structurally still unknown"
+          "Pell has given her full read — frame sound, stone dry, structure already made its move; seating-piece can be shifted without collapsing the reveal",
+          "Decision: enter the sealed rooms now, or fetch Dara Holt first",
+          "Order-Sense and Deathsense not yet used on the inner space",
+          "Dara Holt not yet contacted — senior irrigator for this channel"
         ]
       },
       "npcUpdates": [
@@ -1171,17 +1194,22 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Named Huginn's attendance as the clearest permission she knows — deferred the call on the seating-piece to Silas without pressure.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Gave her full frame assessment — sound joints, dry stone, clean channel, no hydrostatic load. Named both paths plainly: shift the seating-piece now, or fetch Dara Holt first. Explicitly not choosing.",
           "learned": [
-            "Treats Huginn's read as craft-process evidence, not superstition — 'not warning us off' is a go-condition for her"
+            "Frame is structurally sound — joints tight except at the seating-piece channel; breach was not stone failure",
+            "Channel is clean inside — no debris, no calcium bridging; the piece moved on its own",
+            "Stone is dry — no hydrostatic load, the sealed rooms are not full of water",
+            "Seating-piece can be shifted without collapsing the reveal"
           ],
           "skillsObserved": [
-            "reading a companion's assessment as field data",
-            "deferring a decision cleanly without crowding it"
+            "full structural frame assessment by touch and grain-reading",
+            "reading channel condition from dressed stone face",
+            "hydrostatic load assessment by palm-contact"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing at the cleared aperture with Silas — waiting on his call before touching the seating-piece."
+          "statusNote": "Standing at the right jamb of the lower aperture — has given her full read, waiting on Silas's call."
         }
       ],
       "codexUpdates": [
@@ -1189,26 +1217,37 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the crack opened downstream. The contamination source is not the structure actively failing — it is something the structure was built around, now venting through a new gap.",
+          "entityId": null,
+          "fact": "Pell's full frame assessment: sound joints, clean channel, dry stone, no hydrostatic load. The sealed rooms are not water-filled. The seating-piece moved on its own — either pushed from within or a trigger condition released it. The structure has already made its move.",
           "links": [
             "millbrook",
-            "aldric-provisioning-deal",
             "pell",
+            "aldric-provisioning-deal",
             "dara-holt"
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "Pell's full frame assessment recorded at the lower aperture: frame sound, both jambs dry, channel clean inside, no hydrostatic load. Seating-piece can be shifted without collapsing the reveal. World-day 14 morning.",
+          "subPlace": {
+            "name": "Lower Aperture — East Channel Bank",
+            "note": "Dressed ashlar frame fully assessed by Pell — sound, dry, clean channel. Seating-piece skewed but seated. Inner space: dry, cool, mineral, old and concluded.",
+            "visited": true
+          }
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange — Huginn's attendance and Pell's read of it."
+        "why": "a careful frame assessment — a few minutes of close reading"
       }
     },
     "sceneState": {
-      "setting": "West bank hillside — lower aperture cleared and exposed. Dressed ashlar frame, seating-piece moved inward in its channel. Morning alder light. Inner darkness dry, cool, mineral-smelling.",
+      "setting": "West bank hillside — lower aperture cleared and exposed. Dressed ashlar frame, seating-piece skewed but seated in its clean channel, both jambs dry and sound. Morning alder light.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing to Silas's left, reading his face — waiting on his call."
+          "state": "Standing at the right jamb, palm still on the stone — has given her full read, waiting on Silas's call."
         },
         {
           "name": "Huginn",
@@ -1217,9 +1256,9 @@
       ],
       "objects": [
         "Memory (spear, at Silas's side)",
-        "Dressed ashlar aperture frame — rectangular, shoulder-width, chest-height",
-        "Seating-piece — moved inward, skewed in its channel, not broken",
-        "Iron-mat staining on aperture frame — thickest at lower corners, copper-green go",
+        "Dressed ashlar aperture frame — rectangular, shoulder-width, chest-height, both ",
+        "Seating-piece — skewed in its channel, not broken, still seated — channel clean ",
+        "Iron-mat staining on aperture frame — thickest at lower corners",
         "Inner darkness beyond the gap — dry, cool, mineral-smelling, no water sound",
         "Cleared sedge and loose fill — piled to one side",
         "Valve Failure Timeline note (breast pocket)",
@@ -1228,10 +1267,10 @@
         "Column stain (thirty paces south — palm-print visible)"
       ],
       "threads": [
-        "Huginn attended and read: old, concluded, not ending — not a warning off",
-        "Pell defers the call on the seating-piece to Silas",
-        "Dara Holt not yet contacted — senior irrigator for this channel",
-        "Inner space unread beyond Huginn's attendance — what it holds structurally still unknown"
+        "Pell has given her full read — frame sound, stone dry, structure already made its move; seating-piece can be shifted without collapsing the reveal",
+        "Decision: enter the sealed rooms now, or fetch Dara Holt first",
+        "Order-Sense and Deathsense not yet used on the inner space",
+        "Dara Holt not yet contacted — senior irrigator for this channel"
       ]
     }
   },
@@ -1258,14 +1297,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Pell reads the coping iron as received, not leached — names the crack's origin a decision, not age. Cause remains upstream.",
         "North of the willow bend — old column stain behind separated stone facing predates the contamination event. Something was bleeding through this bank before the current crisis began.",
         "Column stain Palework read — predates contamination by years or decades; a prior concluded event drained through this bank long before the gray-green water began. Material came down through stone, not up through water: a different origin from the current contamination. Two distinct events, two distinct timelines.",
         "Pell names the column stain's source direction — above and behind the bank, not from the river. A buried structure draining down through the hillside, predating the contamination. The gray-green water is a downstream symptom; the source is higher and behind stone.",
         "Thirty paces north of the column stain: dressed rubble stones at the bank base, a buried coursed structure visible as a settling-seam ten feet up the hillside. Huginn attending. Something was built here.",
         "Order-Sense identifies a pre-Transition channel-house buried in the hillside — two sealed rooms, lower aperture breached from within. Source structure located; interior contents and purpose still unread.",
         "Order-Sense confirms a pre-Transition channel-house buried in the hillside — lower aperture breached from within by design or conditional mechanism, not by accident or collapse. Pell reads it as a valve. Two sealed interior rooms remain unread.",
-        "Huginn reads the cleared aperture as old and concluded — no active danger from within. The inner space is dry, cool, and mineral-smelling. The next step is Silas's call: read further, open it, or bring Dara Holt before touching anything."
+        "Huginn reads the cleared aperture as old and concluded — no active danger from within. The inner space is dry, cool, and mineral-smelling. The next step is Silas's call: read further, open it, or bring Dara Holt before touching anything.",
+        "Pell reads the frame as sound and dry — the structure has already made its move. Inner space is accessible. Decision point: enter now or bring Dara Holt first."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1379,7 +1418,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named the column stain as older than Mara's ledger — read it as pre-existing evidence of something below this bank before the current crisis.",
         "[d2] Read the material boundary between the column stain and the newer iron-mat without being prompted — named the stain's direction as downward through stone, not upward through water.",
         "[d2] Named the column stain's material direction as source-above-behind — a buried structure draining down through the hillside, not the river. Diagnosed the crack and the gray-green wa",
         "[d2] Identified the rubble stones as coursed — laid by hand, not river-tumbled. Standing now, reading the settling-seam in the hillside.",
@@ -1388,28 +1426,29 @@
         "[d2] Listened to the Order-Sense read without interrupting; named the breach-from-within as a valve — deliberate design or conditional mechanism, not accident. Named the sealed rooms as",
         "[d2] Deflected the compliment with a flat 'Weir' — but her ears went red in the morning light. She is crouched at the rubble, working.",
         "[d2] Named the conditions for reading the aperture plainly — clear the face first, then ask Huginn, then decide whether opening it is yours to do. Said 'what Huginn thinks' without infl",
-        "[d2] Named Huginn's attendance as the clearest permission she knows — deferred the call on the seating-piece to Silas without pressure."
+        "[d2] Named Huginn's attendance as the clearest permission she knows — deferred the call on the seating-piece to Silas without pressure.",
+        "[d2] Gave her full frame assessment — sound joints, dry stone, clean channel, no hydrostatic load. Named both paths plainly: shift the seating-piece now, or fetch Dara Holt first. Expli"
       ],
       "knownFacts": [
-        "The crack in the shelf and the gray-green water are symptoms; the source is higher up and behind stone",
-        "Rubble stones at the bank base are dressed and coursed — deliberate construction, not natural scree",
-        "A breach from within a designed seal reads as a valve to a smith — either something left inside with a key, or a condition the design was always waiting for",
         "The sealed rooms in a channel-house are either storage or protection chambers — something the builders kept away from the water, or kept the water away from",
         "Takes a direct compliment and converts it immediately to a single word and continued work — but the physical tell is real",
         "Refers to Huginn's read as a practical precondition — not superstition, craft process",
         "Distinguishes 'finished its job' from 'mid-process' as two different reads on the breach condition",
-        "Treats Huginn's read as craft-process evidence, not superstition — 'not warning us off' is a go-condition for her"
+        "Treats Huginn's read as craft-process evidence, not superstition — 'not warning us off' is a go-condition for her",
+        "Frame is structurally sound — joints tight except at the seating-piece channel; breach was not stone failure",
+        "Channel is clean inside — no debris, no calcium bridging; the piece moved on its own",
+        "Stone is dry — no hydrostatic load, the sealed rooms are not full of water"
       ],
       "skillsObserved": [
-        "reading structural intent from breach direction",
-        "forensic diagnosis of pre-Transition construction by analogy",
-        "reading valve condition from structural evidence",
         "sequencing a site investigation methodically",
         "reading a companion's assessment as field data",
-        "deferring a decision cleanly without crowding it"
+        "deferring a decision cleanly without crowding it",
+        "full structural frame assessment by touch and grain-reading",
+        "reading channel condition from dressed stone face",
+        "hydrostatic load assessment by palm-contact"
       ],
       "status": "active",
-      "statusNote": "Standing at the cleared aperture with Silas — waiting on his call before touching the seating-piece.",
+      "statusNote": "Standing at the right jamb of the lower aperture — has given her full read, waiting on Silas's call.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1514,7 +1553,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Fen's intake valve housing shows three distinct crust layers — outermost two gray-green, innermost older and darker. Iron dissolution process began ~30 days before the World-day minus-18 failure. Acti",
         "[d2] Knife-scraped strip on the valve housing above the waterline — three crust layers now exposed and readable. Do not cover. Physical evidence for Dara Holt.",
         "[d2] East channel bank section 100-150 yards north of Fen's intake shows four-layer deposit on iron banding-strips — water color deepens to copper-tinged in the cut section here. Iron-specific pattern hold",
         "[d2] Willow bend at the upper-reach boundary — continuous iron-mat deposit on coping, copper-green water visible upstream. Physical trace of the source confirmed here on World-day 14 morning.",
@@ -1525,7 +1563,8 @@
         "[d2] Pell named the column stain's source as above-and-behind the bank — a buried structure drainage, not river-origin. Source is higher up and behind stone, predating the current contamination event.",
         "[d2] Thirty paces north of the column stain — dressed rubble stones in the sedge and a buried-structure settling-seam ten feet up the hillside. Iron-mat steps up sharply at this threshold. Huginn attended ",
         "[d2] Pell named the breach-from-within as a valve — deliberate design or conditional trigger. The sealed rooms interpreted as protection chambers. This reading now part of the site's physical record.",
-        "[d2] Lower aperture face cleared on World-day 14 morning — dressed ashlar frame exposed, seating-piece moved inward (not broken), inner space dry. Physical confirmation of breach-from-within. Do not re-cov"
+        "[d2] Lower aperture face cleared on World-day 14 morning — dressed ashlar frame exposed, seating-piece moved inward (not broken), inner space dry. Physical confirmation of breach-from-within. Do not re-cov",
+        "[d2] Pell's full frame assessment recorded at the lower aperture: frame sound, both jambs dry, channel clean inside, no hydrostatic load. Seating-piece can be shifted without collapsing the reveal. World-d"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2059,7 +2098,8 @@
           "[d2] Order-Sense on the rubble site reveals a buried channel-house: low, rectangular, pre-Transition. Northwest corner is the exposed rubble. Main run goes into the hillside at an angle. Two apertures, bot",
           "[d2] Pell reads the lower aperture's breach-from-within as a valve: deliberate design or a conditional trigger. The sealed rooms are likely protection chambers — something the builders kept isolated from t",
           "[d2] Pell's read: the lower aperture must be face-cleared before its condition can be diagnosed — breach may be finished or mid-process, and those read differently. She named Huginn's assessment as a requi",
-          "[d2] Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the cra"
+          "[d2] Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the cra",
+          "[d2] Pell's full frame assessment: sound joints, clean channel, dry stone, no hydrostatic load. The sealed rooms are not water-filled. The seating-piece moved on its own — either pushed from within or a tr"
         ],
         "links": [
           "millbrook",
@@ -2116,14 +2156,14 @@
     }
   },
   "tendencies": {
-    "strategic": 54.01527337088108,
-    "cerebral": 38.229882533142515,
-    "social": 56.55429911386986,
-    "generous": 13.647245301050843,
-    "cautious": 34.09323652246282,
-    "physical": 1.415499943809834,
-    "risky": 2.475388425839614,
-    "ruthless": 0.7219385759785162
+    "strategic": 53.74519700402668,
+    "cerebral": 39.0387331204768,
+    "social": 56.27152761830051,
+    "generous": 13.579009074545588,
+    "cautious": 34.9227703398505,
+    "physical": 1.4084224440907847,
+    "risky": 2.463011483710416,
+    "ruthless": 0.7183288830986236
   },
   "aptitudes": [
     "strategist",
@@ -2131,7 +2171,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 154,
+  "actionCount": 155,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2217,8 +2257,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784057376908,
-  "rev": 221,
+  "updatedAt": 1784057705436,
+  "rev": 222,
   "generated": {
     "schemaVersion": 1,
     "npc": {

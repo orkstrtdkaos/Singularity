@@ -17,7 +17,7 @@ export function spectrumAlignment(a = {}, b = {}) {
 /** Compute true success chance for an action. Everything is data-driven from rules JSON.
  *  action: { attribute, skillId?, axes?, abilityLevel?, difficulty (0-100 penalty), planned? }
  *  aptitudeMods: flat map merged from the player's aptitudes (see playerprofile.js). */
-export function successChance({ character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0 }) {
+export function successChance({ character, action, location, rules, aptitudeMods = {}, equipmentBonus = 0, substratePenalty = 0 }) {
   const bc = rules.baseChance;
   // Sub-attributes (strength/agility, reason/insight, presence/rapport, craft/wits)
   // are the real target when present; the parent attribute is the fallback.
@@ -59,6 +59,12 @@ export function successChance({ character, action, location, rules, aptitudeMods
   // character already DISCOVERED, in which case it's earned skill with a bonus.
   if (action.discoveryBonus) chance += action.discoveryBonus;
   else if (action.novel) chance -= rules.novel?.difficultySurcharge ?? 15;
+
+  // SNG-090: the substrate penalty — can your craft RUN here (is the lattice the right density for it).
+  // A SEPARATE, already-clamped environmental term from the location.spectrum disposition above
+  // (SNG-079): a place can suit you dispositionally and still starve your craft. Ability actions only;
+  // computed by the caller via engine/substrate.js. Never folded into the spectral term.
+  if (substratePenalty) chance -= substratePenalty;
 
   // Exhaustion: at zero energy everything is harder — body and field both spent
   if ((character.energy ?? 1) <= 0) chance -= rules.energy?.exhaustedPenalty ?? 10;

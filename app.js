@@ -15,6 +15,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
+import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -40,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.55";
+const APP_VERSION = "1.8.56";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -116,6 +117,7 @@ const NARRATIVE_ENCOUNTER_COOLDOWN = 3;
 let quietTurns = 0;             // consecutive uneventful GM turns
 let pressureStreak = 0;         // pressures applied in the current idle streak (escalation level)
 let pendingPressure = null;     // a world-pressure directive to weave into the next GM turn
+let pendingSubstrateNote = null; // SNG-090: a "the lattice is thin/crowded here" note for the next GM turn
 
 // ---------- boot ----------
 
@@ -2239,6 +2241,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     (weave.loreTier === "precursor-glimpse" ? ` This touches the Precursor — glimpsed, never explained.` : ``)
   ) : null;
   const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
+  const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
   const location = hereNow();
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
@@ -2268,6 +2271,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
     encounterWeaveDetail, // SNG-075: a narrative-time encounter to weave into THIS turn's fiction
     worldPressureDetail,  // SNG-080: after quiet turns, a directive to make the world ACT
+    substrateDetail,      // SNG-090: the lattice density is thin/crowding the craft here
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
@@ -2526,6 +2530,22 @@ function affinityFor(action, location = hereNow()) {
   return locationAffinity(location, action, CONTENT.locationAffinities, { vectorsKnown });
 }
 
+/** SNG-090: the substrate verdict for an ABILITY action at a place. null for weapon/attribute actions
+ *  (substrate-free, SNG-089) or when the model/density isn't loaded. Uses the primary ability's
+ *  tradition, the location's density, and what the character carries. */
+function substrateForAction(choice, location) {
+  if (!CONTENT.substrateModel) return null;
+  const abId = choice.abilityId || (choice.comboAbilities || [])[0];
+  if (!abId) return null;
+  const ab = fullCatalog()[abId];
+  const tradition = ab ? (abilityTradition(ab) || ab.powerSystem) : null;
+  if (!tradition) return null;
+  const density = locationDensity(location, CONTENT.substrateModel);
+  if (density == null) return null;
+  const carried = carriedSubstrate(character, CONTENT.items, activeCompanions(character, CONTENT.companions));
+  return substrateVerdict({ tradition, density, carried, data: CONTENT.substrateModel });
+}
+
 async function onChoice(choice) {
   if (busy) return;
   lastPlayerAction = choice?.label || choice?.exactWords || null; // SNG-066: for feedback forensics
@@ -2563,6 +2583,15 @@ async function onChoice(choice) {
     if (energyCost != null) energyCost = scaledEnergy(energyCost, intensity, CONTENT.intensity);
   }
   if (energyCost && character.energy < energyCost) { alert("Not enough energy — rest first."); return; }
+  // SNG-090: the substrate — can this CRAFT run here? A weapon/attribute action is unaffected. At the
+  // extreme (the lattice is nearly gone for a high-dependency craft), the ability won't answer at all —
+  // a hard, explained gate (steel and wit still work; carry charge or find denser ground).
+  const substrate = usesAbility ? substrateForAction(choice, location) : null;
+  if (substrate?.off) {
+    const abName = fullCatalog()[choice.abilityId || (choice.comboAbilities || [])[0]]?.name || "your craft";
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `The lattice is too thin here — ${abName} barely stirs (${substrate.percent}% of its strength) and won't answer. Carry charge, or reach denser ground; steel and wit still work.` });
+    return;
+  }
   const action = {
     label: choice.label, attribute: choice.attribute || "practical",
     subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null,
@@ -2618,10 +2647,18 @@ async function onChoice(choice) {
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules, character);
   const aff = affinityFor(action, location);
   const iMod = usesAbility ? effectMod(intensity, CONTENT.intensity) : 0;
-  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus + iMod });
+  const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus + iMod, substratePenalty: substrate?.chancePenalty || 0 });
   if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
   if (aff.bonus !== 0) resolution.locationAffinity = affinityReceipt(aff);
   if (usesAbility) { resolution.intensity = intensity; resolution.energySpent = energyCost; }
+  // SNG-090: surface the substrate when it bit (starved/crowded) — a receipt line + a note the GM
+  // narrates so the fiction matches ("the lattice is thin here; your craft runs at a fraction").
+  if (substrate && substrate.side !== "full" && substrate.side !== "neutral") {
+    resolution.substrate = { percent: substrate.percent, side: substrate.side };
+    pendingSubstrateNote = substrate.side === "starved"
+      ? `The lattice is THIN here — the character's craft is running at ~${substrate.percent}% (starved of substrate). Let the effort show the strain; a weapon or mundane means is unaffected.`
+      : `The lattice is DENSE and CROWDS the character's craft here — it runs at ~${substrate.percent}% (too much signal is noise). Let it read as interference, not weakness.`;
+  }
   if (disc) resolution.usedDiscovery = disc.name;
   // novel use: breakthrough or backlash — the engine decides, the GM narrates
   if (action.novel) {
@@ -2964,6 +3001,7 @@ function renderMap(selectedId = null) {
       <div class="map-details-head">
         <h3>${esc(visited ? l.name : "An unknown place")}</h3>
         ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(4, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(4, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
+        ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
       </div>
       ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
@@ -4652,9 +4690,11 @@ function renderPlay(turn, opts = {}) {
       const locBits = r.locationAffinity?.length ? `<div class="roll-affinity">${r.locationAffinity.map(esc).join(" · ")} ${infoDot("roll.spectral_fit")}</div>` : "";
       const intBit = r.intensity && r.intensity !== "standard" ? ` · <span class="intensity-${esc(r.intensity)}">${esc(r.intensity)}</span>${r.energySpent != null ? ` (${r.energySpent} energy)` : ""}` : "";
       const blBit = r.surgeBacklash ? `<div class="roll-backlash">⚡ surge backlash: ${r.backlash.health} health, ${r.backlash.energy} energy</div>` : "";
+      // SNG-090: the substrate receipt — the lattice thin (starved) or crowding (interference) here.
+      const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}% ${infoDot("roll.spectral_fit")}</div>` : "";
       // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
       const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
-      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${blBit}`;
+      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");

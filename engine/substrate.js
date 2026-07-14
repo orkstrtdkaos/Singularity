@@ -70,6 +70,24 @@ export function substrateVerdict({ tradition, density, carried = 0, data, tuning
   };
 }
 
+/** SNG-090: the charge a character CARRIES — summed from inventory items with a `substrateCharge`
+ *  (the Waystaff, charged reservoirs) plus any companion `substrateAura` (Aevi, a living mote-swarm).
+ *  Adds to local density: rescues the starved, worsens the crowded. 0 until such content is authored.
+ *  `itemCatalog` maps id→def for items stored as ids; inline item objects carry the field directly. */
+export function carriedSubstrate(character, itemCatalog = {}, companions = []) {
+  let carried = 0;
+  for (const entry of (character?.inventory || [])) {
+    const def = (entry && typeof entry === "object") ? entry : (itemCatalog[entry] || null);
+    const c = Number(def?.substrateCharge);
+    if (Number.isFinite(c) && c > 0) carried += c;
+  }
+  for (const comp of (companions || [])) {
+    const a = Number(comp?.substrateAura);
+    if (Number.isFinite(a) && a > 0) carried += a;
+  }
+  return Math.max(0, Math.min(1, carried));
+}
+
 /** The effective substrate density at a location: a per-location override, else its region's density.
  *  Returns null when neither resolves (the CI flags that). Pure over the loaded content. */
 export function locationDensity(location, data) {

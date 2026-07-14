@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 401,
+  "xp": 406,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -19,11 +19,11 @@
   "abilities": [
     {
       "abilityId": "order_sense",
-      "level": 2
+      "level": 3
     },
     {
       "abilityId": "deathsense",
-      "level": 2
+      "level": 3
     },
     {
       "abilityId": "palework",
@@ -46,7 +46,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 120,
+  "energy": 115,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -842,68 +842,100 @@
         "player": "Ask her to walk you through the double-stamp on a piece of scrap iron — her hands, not her words — and use Deathsense quietly to feel whether Memory's register shifts while she's doing it.",
         "summary": "Pell demonstrated the double-stamp on scrap iron; Deathsense caught a faint sympathetic resonance between her hands and Memory while she worked.",
         "narration": "You set your cup down on the bench and gesture toward the scrap pile in the corner — a few offcuts and a collar-blank Pell hasn't sorted yet. \"Not your words,\" you say. \"Your hands.\"\n\nShe looks at you a moment, then sets her own cup down and picks up the collar-blank. The movement is immediate, unhurried. She turns the piece once in her left hand — reading it, though she wouldn't call it that — and then takes up the double-stamp punch from the rack without looking for it. Her body knows where it lives. She positions the blank on the near horn of the anvil, seats the punch, and strikes. Once, clean. Then she feels the iron settle — you can see it in how she waits, the breath between strikes — and brings the punch down a second time exactly over the first. The mark lands true.\n\nYou hold Deathsense lightly while she works, conserving it — not reaching, just attending. It costs you almost nothing to listen. Memory's register is steady on the bench beside you, its clean end-to-end hum unchanged. But while Pell's hands are on the collar-blank, working that familiar sequence she has done a thousand times, you catch something at the edge: a faint sympathetic resonance between her and the spear. Not signal, not call. More like two instruments tuned to the same room. The moment she lifts the punch it fades back to nothing, and Memory's register settles again to its own clean tone.\n\nPell sets the blank down. \"That's the double-stamp,\" she says. Then she looks at you, reading your face the way she reads iron. \"Something moved.\"\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
+      },
+      {
+        "player": "Hand her Memory and ask her to do the double-stamp again — this time with the spear in her hands instead of scrap.",
+        "summary": "Pell struck the double-stamp on Memory itself — the resonance between her hands and the spear ran truer than scrap iron ever gave.",
+        "narration": "You lift Memory from the bench and hold it out to her, grip first. No explanation — the gesture says it plainly enough.\n\nPell takes the spear with both hands, and you watch the adjustment happen: she's held tools her whole life, but a spear is not a tool, and this one has a night's worth of work in it that she put there herself. She turns it once, finding the balance point without searching for it — the way she turned the collar-blank, same economy — and then she moves to the anvil horn and positions the collar's north quarter under the double-stamp punch. The punch goes to the brass ring she installed last night, and she seats it. Waits one breath.\n\nThe strike lands true. Then the second, the breath between them just as measured as before.\n\nYou hold Deathsense very lightly — CONSERVE, the barest aperture, no press — and what comes back is not quiet. The sympathetic resonance you caught on the scrap iron is here again, but stronger: her hands, the spear, and something in the iron that is already listening. Memory's death-register does not shift or falter. It steadies. As if the piece knows whose mark is in it and recognizes the weight of the hand that put it there. The resonance runs between them for the length of her working and no longer, and then it is gone the moment she lifts the punch. Clean.\n\nShe sets Memory down on the anvil with deliberate care and looks at her own hands for a moment. Then at you. Outside, the first birds of actual morning are starting up."
       }
     ],
     "lastTurn": {
-      "narration": "You set your cup down on the bench and gesture toward the scrap pile in the corner — a few offcuts and a collar-blank Pell hasn't sorted yet. \"Not your words,\" you say. \"Your hands.\"\n\nShe looks at you a moment, then sets her own cup down and picks up the collar-blank. The movement is immediate, unhurried. She turns the piece once in her left hand — reading it, though she wouldn't call it that — and then takes up the double-stamp punch from the rack without looking for it. Her body knows where it lives. She positions the blank on the near horn of the anvil, seats the punch, and strikes. Once, clean. Then she feels the iron settle — you can see it in how she waits, the breath between strikes — and brings the punch down a second time exactly over the first. The mark lands true.\n\nYou hold Deathsense lightly while she works, conserving it — not reaching, just attending. It costs you almost nothing to listen. Memory's register is steady on the bench beside you, its clean end-to-end hum unchanged. But while Pell's hands are on the collar-blank, working that familiar sequence she has done a thousand times, you catch something at the edge: a faint sympathetic resonance between her and the spear. Not signal, not call. More like two instruments tuned to the same room. The moment she lifts the punch it fades back to nothing, and Memory's register settles again to its own clean tone.\n\nPell sets the blank down. \"That's the double-stamp,\" she says. Then she looks at you, reading your face the way she reads iron. \"Something moved.\"\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
-      "sceneSummary": "Pell demonstrated the double-stamp on scrap iron; Deathsense caught a faint sympathetic resonance between her hands and Memory while she worked.",
+      "narration": "You lift Memory from the bench and hold it out to her, grip first. No explanation — the gesture says it plainly enough.\n\nPell takes the spear with both hands, and you watch the adjustment happen: she's held tools her whole life, but a spear is not a tool, and this one has a night's worth of work in it that she put there herself. She turns it once, finding the balance point without searching for it — the way she turned the collar-blank, same economy — and then she moves to the anvil horn and positions the collar's north quarter under the double-stamp punch. The punch goes to the brass ring she installed last night, and she seats it. Waits one breath.\n\nThe strike lands true. Then the second, the breath between them just as measured as before.\n\nYou hold Deathsense very lightly — CONSERVE, the barest aperture, no press — and what comes back is not quiet. The sympathetic resonance you caught on the scrap iron is here again, but stronger: her hands, the spear, and something in the iron that is already listening. Memory's death-register does not shift or falter. It steadies. As if the piece knows whose mark is in it and recognizes the weight of the hand that put it there. The resonance runs between them for the length of her working and no longer, and then it is gone the moment she lifts the punch. Clean.\n\nShe sets Memory down on the anvil with deliberate care and looks at her own hands for a moment. Then at you. Outside, the first birds of actual morning are starting up.",
+      "sceneSummary": "Pell struck the double-stamp on Memory itself — the resonance between her hands and the spear ran truer than scrap iron ever gave.",
       "choices": [
         {
-          "label": "Name what you felt — the resonance between her and Memory while her hands were working — and ask if she's ever felt something like it on another piece.",
+          "label": "Tell her what Deathsense felt — that Memory knows whose mark is in it, and steadied under her hands. Show her the whetstone now.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "violence_peace": 0.7,
+            "mechanical_spiritual": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
             "share",
+            "gift",
+            "honest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask if she felt anything in her hands — not what she saw, what she felt — while the punch was seated.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.6,
+            "concrete_abstract": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "ask",
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Hand her Memory and ask her to do the double-stamp again — this time with the spear in her hands instead of scrap.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
+          "label": "Say nothing yet — let the moment sit. Pick up Memory yourself and hold it, feeling whether the register has changed at all from the contact.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3,
+            "mechanical_spiritual": 0.4
+          },
+          "difficulty": 0,
           "intentTags": [
-            "experiment",
-            "risky"
+            "study",
+            "careful",
+            "quiet"
           ],
-          "abilityId": "deathsense"
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Tell her what you felt and then present the river whetstone — the night is done, the work is done, and this belongs on her bench.",
+          "label": "Name what this is: the spear has a maker's relationship now, not just a mark. Ask if she wants that to mean something going forward — in plain terms.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "violence_peace": 0.6,
+            "chaos_order": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "gift",
-            "close"
+            "honest",
+            "direct",
+            "personal"
           ],
-          "trivial": true
-        },
-        {
-          "label": "The morning is arriving and neither of you has slept. Suggest she keep the scrap piece — the mark is true, and she made it while something was listening — and step outside for air before the village wakes.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "rest",
-            "transition"
-          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "xp": 0
+        "energy": -3
       },
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups set down on the bench.",
+        "setting": "Pell's forge, south lane, Millbrook — dawn light now definite and pale gold under the door, south pit fire coaled to low orange, Memory resting on the anvil horn after Pell's double-stamp.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the anvil, collar-blank and punch just set down, watching Silas's face — she knows something moved."
+            "state": "Standing at the anvil, looking at her own hands, then at Silas — waiting."
           },
           {
             "name": "Huginn",
@@ -911,20 +943,20 @@
           }
         ],
         "objects": [
-          "Deathbound Runic Spear 'Memory' (fully repaired, named, on the bench)",
-          "Resin Mountain Wine (open, bottle on bench, two cups set down)",
+          "Deathbound Runic Spear 'Memory' (on the anvil horn — just struck, double-stamp landed true)",
+          "Resin Mountain Wine (open bottle, two cups set down on bench)",
           "Dried Starfruit sealed packet (open, cloth folded back)",
           "River whetstone (on bench — not yet formally given)",
           "Spent rune-wax stub (on bench)",
-          "Rune-Craft Kit (spent further, on bench)",
+          "Rune-Craft Kit (spent, on bench)",
           "South pit fire (coaled to low orange)",
           "Drawing salve tin (shelf above bench)",
-          "Collar-blank scrap (on anvil horn — double-stamp mark freshly pressed, true)"
+          "Collar-blank scrap (on anvil — double-stamp freshly pressed)"
         ],
         "threads": [
-          "Pell saw something in Silas's face — she knows the Deathsense caught something and is waiting to hear what",
+          "Pell is looking at her hands and at Silas — she felt something and is waiting to hear what he found",
           "River whetstone still on the bench — not yet formally presented",
-          "Neither of them has slept — the morning is fully arriving"
+          "Neither of them has slept — full morning is now arriving outside"
         ]
       },
       "npcUpdates": [
@@ -932,17 +964,17 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hands.",
           "learned": [
-            "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something happened in Silas's face"
+            "When she struck the double-stamp on Memory — not scrap but the spear she marked — the resonance was stronger and the spear's register steadied under her, as if it recognized her."
           ],
           "skillsObserved": [
-            "double-stamp execution from body-memory, no hesitation",
-            "reading a person's reaction at craft-level precision"
+            "double-stamp on a named weapon without ceremony or hesitation"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge anvil at dawn, collar-blank just set down, waiting to hear what Silas's Deathsense found."
+          "statusNote": "At the forge anvil at dawn, Memory in her hands just set down, watching Silas."
         }
       ],
       "codexUpdates": [
@@ -951,7 +983,7 @@
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two instruments tuned to the same room.",
+          "fact": "When Pell struck the double-stamp on Memory directly, the sympathetic resonance between her hands and the spear was stronger than on scrap iron — and Memory's death-register steadied rather than shifted, as if the piece recognized whose mark was in it.",
           "links": [
             "death-bound-spear",
             "deathsense",
@@ -962,15 +994,15 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief practical demonstration at the anvil"
+        "why": "a single quiet demonstration — a breath of time"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups set down on the bench.",
+      "setting": "Pell's forge, south lane, Millbrook — dawn light now definite and pale gold under the door, south pit fire coaled to low orange, Memory resting on the anvil horn after Pell's double-stamp.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the anvil, collar-blank and punch just set down, watching Silas's face — she knows something moved."
+          "state": "Standing at the anvil, looking at her own hands, then at Silas — waiting."
         },
         {
           "name": "Huginn",
@@ -978,20 +1010,20 @@
         }
       ],
       "objects": [
-        "Deathbound Runic Spear 'Memory' (fully repaired, named, on the bench)",
-        "Resin Mountain Wine (open, bottle on bench, two cups set down)",
+        "Deathbound Runic Spear 'Memory' (on the anvil horn — just struck, double-stamp l",
+        "Resin Mountain Wine (open bottle, two cups set down on bench)",
         "Dried Starfruit sealed packet (open, cloth folded back)",
         "River whetstone (on bench — not yet formally given)",
         "Spent rune-wax stub (on bench)",
-        "Rune-Craft Kit (spent further, on bench)",
+        "Rune-Craft Kit (spent, on bench)",
         "South pit fire (coaled to low orange)",
         "Drawing salve tin (shelf above bench)",
-        "Collar-blank scrap (on anvil horn — double-stamp mark freshly pressed, true)"
+        "Collar-blank scrap (on anvil — double-stamp freshly pressed)"
       ],
       "threads": [
-        "Pell saw something in Silas's face — she knows the Deathsense caught something and is waiting to hear what",
+        "Pell is looking at her hands and at Silas — she felt something and is waiting to hear what he found",
         "River whetstone still on the bench — not yet formally presented",
-        "Neither of them has slept — the morning is fully arriving"
+        "Neither of them has slept — full morning is now arriving outside"
       ]
     }
   },
@@ -1139,7 +1171,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Watched Silas demonstrate Palework on the spent rune-wax — observed the ability directly for the first time. Now looking at the transverse fault he indicated in the blade.",
         "[d2] Agreed plainly to plan the repair together — 'Yes', no ceremony. Now holding the transverse fault and asking the right structural question: does it need deepening, rewriting, or re",
         "[d2] Re-seated her maker's mark under guidance — slightly off-true, accepted the variance without complaint. Deepened the transverse channel cleanly on a single pass. Wiped the chisel a",
         "[d2] Pressed the collar's north quarter flush with her thumb on Silas's word — patient, even, no ceremony. Work reads as done.",
@@ -1148,28 +1179,29 @@
         "[d2] Explained the oblique stamp — the iron told her hand where to go; she's never had a piece do that before. Named it plainly, without distress.",
         "[d2] Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what hap",
         "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw",
-        "[d2] Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'"
+        "[d2] Demonstrated the double-stamp on a collar-blank without hesitation — body-knowledge immediate and precise. Caught Silas's reaction and named it plainly: 'Something moved.'",
+        "[d2] Struck the double-stamp on Memory itself — both hands, same economy as on scrap. The resonance between her and the spear ran truer than scrap iron gave. Now looking at her own hand"
       ],
       "knownFacts": [
-        "She has used the double-stamp for eleven years — it always lands true on pieces she knows well",
         "With Memory, she pressed where the iron said to go — and the iron told her; that has never happened before",
         "She frames it as the piece needing more room than she usually leaves, and the piece knowing it",
         "What happened in her hand when the mark landed oblique was her craft deep enough that piece and hand are the same conversation — Silas's framing, accepted.",
         "She wants to understand the moment of the oblique stamp more fully — the grain-reading, the register, what happened in her palm.",
         "Order-Sense could read the edges of her craft — the economy, the sureness — but not the heart of the moment the iron spoke",
         "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it",
-        "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something ha"
+        "A faint sympathetic resonance runs between her hands and Memory while she works the double-stamp — she doesn't know its name yet, but she read that something ha",
+        "When she struck the double-stamp on Memory — not scrap but the spear she marked — the resonance was stronger and the spear's register steadied under her, as if "
       ],
       "skillsObserved": [
-        "accepting a known variance and naming it rather than reworki",
         "staying present through a six-hour repair without flagging",
         "precise pressure work on a cooling joint without instruction",
         "articulating a craft first without dramatizing it",
         "double-stamp execution from body-memory, no hesitation",
-        "reading a person's reaction at craft-level precision"
+        "reading a person's reaction at craft-level precision",
+        "double-stamp on a named weapon without ceremony or hesitatio"
       ],
       "status": "active",
-      "statusNote": "At the forge anvil at dawn, collar-blank just set down, waiting to hear what Silas's Deathsense found.",
+      "statusNote": "At the forge anvil at dawn, Memory in her hands just set down, watching Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1448,7 +1480,7 @@
     "wits": 4
   },
   "pendingSubPoints": 1,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1618,7 +1650,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
           "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
           "[d1] Sold the mid-weight spear-tip to Silas and modified the light point for Corvin with a stop-lug — labor credit from the backlog deducted clean. Transaction done in the same flat register as everything ",
           "[d1] Received the whetstone Mara had held three weeks — identified it immediately and recognized Silas had asked about her. Showed quiet pleasure. The date is now a named thing between them.",
@@ -1641,7 +1672,8 @@
           "[d2] The oblique stamp on Memory was not a slip — the iron told her hand where to go. She has made the double-stamp for eleven years and it has never done that before. She frames it as the piece needing mo",
           "[d2] Accepted the framing that the oblique stamp was her craft deep enough to become the same conversation as the iron — not the piece overriding her hand. Has asked explicitly to understand the moment mor",
           "[d2] Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice t",
-          "[d2] While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two i"
+          "[d2] While Pell's hands worked the double-stamp on scrap iron, Deathsense caught a faint sympathetic resonance between her and Memory — present while she worked, gone the moment she lifted the punch. Two i",
+          "[d2] When Pell struck the double-stamp on Memory directly, the sympathetic resonance between her hands and the spear was stronger than on scrap iron — and Memory's death-register steadied rather than shift"
         ],
         "links": [
           "mara-wells",
@@ -1792,14 +1824,14 @@
     }
   },
   "tendencies": {
-    "strategic": 49.20781211561721,
-    "cerebral": 34.63091400315814,
-    "social": 53.99454640427851,
-    "generous": 12.943279049303104,
-    "cautious": 24.193310655987133,
-    "physical": 1.6954264320496675,
-    "risky": 0.8433051360508336,
-    "ruthless": 0.8647077305675338
+    "strategic": 48.961773055039124,
+    "cerebral": 34.45775943314235,
+    "social": 53.724573672257115,
+    "generous": 12.878562654056589,
+    "cautious": 24.0723441027072,
+    "physical": 1.686949299889419,
+    "risky": 1.8390886103705792,
+    "ruthless": 0.8603841919146962
   },
   "aptitudes": [
     "strategist",
@@ -1807,7 +1839,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 118,
+  "actionCount": 119,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1877,8 +1909,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784037390843,
-  "rev": 179,
+  "updatedAt": 1784037612525,
+  "rev": 182,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2021,7 +2053,7 @@
       "lightsense": 2,
       "order_sense": 27,
       "palework": 10,
-      "deathsense": 9,
+      "deathsense": 10,
       "shadowstep": 2
     },
     "coActivations": {

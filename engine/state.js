@@ -63,7 +63,16 @@ export async function loadContent() {
   const abilities = {};
   for (const path of index.provides.abilities) {
     const pack = await fetchJSON(`content/packs/core/${path}`);
-    for (const a of pack.abilities) abilities[a.id] = { ...a, powerSystem: pack.powerSystem };
+    // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
+    // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
+    // bought); nativeOrCombination stays null until authored (consumers treat null as unclassified).
+    for (const a of pack.abilities) abilities[a.id] = {
+      ...a, powerSystem: pack.powerSystem,
+      rankProgression: a.rankProgression || "use",
+      nativeOrCombination: a.nativeOrCombination || null,
+      combinationAxis: a.combinationAxis ?? null,
+      rankThresholds: a.rankThresholds || { rank1: "given", rank2: "practiced_use", rank3: "defining_moment" }
+    };
   }
 
   const items = {};

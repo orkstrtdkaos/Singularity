@@ -108,6 +108,39 @@ for (const pack of PACKS) {
   ok(`the notFor LAW checked ${total} abilities across ${abFiles.length} files`);
 }
 
+// (3e) ability-arch v2 — schema shape for the new fields. Validates WHERE PRESENT (the classification
+// pass tags content incrementally), warns on the legacy spend path, and REPORTS the ability count so
+// the §7 header is script-generated, never hand-set (both Aevi's 137 and CCode's 233 were wrong; 247).
+{
+  const warn = msg => console.log("warn  " + msg);
+  const abFiles = (rj("content/packs/core/manifest.json").provides?.abilities) || [];
+  let count = 0, tagged = 0, native = 0, combination = 0, spendCount = 0;
+  for (const rel of abFiles) {
+    let doc; try { doc = rj(`content/packs/core/${rel}`); } catch { continue; }
+    const abs = Array.isArray(doc) ? doc : Array.isArray(doc.abilities) ? doc.abilities : [doc];
+    for (const a of abs) {
+      if (!a || !a.id) continue;
+      count++;
+      if (a.nativeOrCombination != null) {
+        tagged++;
+        check(`ability "${a.id}" nativeOrCombination is native|combination`,
+          a.nativeOrCombination === "native" || a.nativeOrCombination === "combination",
+          `got "${a.nativeOrCombination}"`);
+        if (a.nativeOrCombination === "combination") {
+          combination++;
+          check(`combination "${a.id}" names a combinationAxis`, typeof a.combinationAxis === "string" && a.combinationAxis.length > 0,
+            "a combination must name the axis it touches (schema)");
+          check(`combination "${a.id}" carries an unlockCondition object`, a.unlockCondition && typeof a.unlockCondition === "object",
+            "post-creation unlock needs {type, description}");
+        } else native++;
+      }
+      if (a.rankProgression === "spend") { spendCount++; warn(`ability "${a.id}" uses rankProgression:"spend" — legacy; depth is through use now`); }
+    }
+  }
+  check("no ability carries the legacy rankProgression:\"spend\"", spendCount === 0, `${spendCount} still on the spend path`);
+  ok(`ability-arch v2: ${count} ability entries (§7 header count) — ${tagged} classified (${native} native / ${combination} combination), ${count - tagged} awaiting the classification pass`);
+}
+
 // (3c) SNG-090 — every location must resolve an effective substrate density (per-location override or
 // its region's density in the_substrate.json). A place with no density can't compute the substrate
 // factor — a silent hole in the second difficulty map.

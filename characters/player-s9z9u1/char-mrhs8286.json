@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 4,
-  "xp": 394,
+  "xp": 396,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -38,15 +38,15 @@
     "spectrumId": -0.7494394391601703,
     "violence_peace": 0.0335,
     "chaos_order": 0.13401196436328122,
-    "mechanical_spiritual": 0.0916193390625,
-    "concrete_abstract": -0.036689468749999996,
+    "mechanical_spiritual": 0.107038372109375,
+    "concrete_abstract": -0.01985499531249999,
     "death_life": -0.099217167578125
   },
   "attunement": 4,
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 55,
+  "energy": 50,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -832,92 +832,106 @@
         "player": "Tell her that's not the piece overriding her — that's her craft deep enough that the piece and the hand are the same conversation. Ask if she wants to understand what happened there more fully.",
         "summary": "Silas named what happened in Pell's hand — craft deep enough that piece and hand speak the same language. Pell accepted the framing and said plainly she wants to understand it.",
         "narration": "\"That's not the piece overriding your hand,\" you say, and you mean it plainly, the way you'd name a true thing at a forge bench at dawn — no ceremony, just the fact of it. \"That's your craft deep enough that the piece and the hand are the same conversation. The iron didn't tell you something foreign. It told you something you already knew, in a language you've been building for eleven years.\"\n\nPell is quiet for a moment. The low orange of the south pit fire moves in the cup she's holding. Huginn shifts on its perch — one slow, deliberate resettlement of weight, wings flat — and then goes still again. Outside, the light under the door has gone from pale gray to something thinner and more definite, the particular quality of early-spring morning just before the valley warms.\n\n\"Understand it more fully,\" she repeats. Not a question exactly — more like she's checking the shape of the offer. Her eyes come up from the cup and find yours, and there's something careful in them, the look of a person who does very precise work and knows what it costs when precision is asked for in the wrong direction. \"You mean the way you read the spear. What you were doing with grain and register and the death-sense of it.\" A beat. \"Yes. I want to understand it. Not what you did to the iron — what happened in my hand when I pressed the mark.\"\n\nThe whetstone is still on the bench between you, next to the spent rune-wax stub and the open wine. The morning is young and neither of you has slept, but the question is awake."
+      },
+      {
+        "player": "Use Order-Sense on Pell herself — lightly, with her awareness and consent — to read the structure of what her craft has become. Show her what the pattern looks like from outside it.",
+        "summary": "Order-Sense reached the edges of Pell's craft but not the heart — the moment the iron spoke lives between hand and metal, not in any readable structure.",
+        "narration": "You settle into the familiar reach of Order-Sense — the light touch, the listening posture, the way the pattern beneath a thing surfaces when you stop pressing for it. You have her consent; she's watching you with that same careful attention she gave the spear all night.\n\nBut the lattice here is thin, and what's thinner still is the substrate of craft itself — the structure you're reaching for isn't a crowd's schedule or a ritual's hidden rule. It's a person's eleven years of accumulated knowing, and that is not the same kind of pattern. You find the edges of it: the economy of her movements, the way she holds a tool slightly differently when she's working iron she trusts. But the deeper grammar — the grain of what happened when her hand and the metal became one conversation — slides away from you. The ability is not failing; it's meeting the right kind of resistance. A person's learned body-knowledge doesn't answer the Lattice the way a system does. It is not made of rules. It is made of repetition, and repetition is not structure — not this kind.\n\nYou surface cleanly. No lurch, no cost beyond the energy already spent. You meet her eyes and tell her the truth: you could read the edges — the economy, the sureness — but the heart of it, the moment the iron spoke, that's not a pattern Order-Sense can reach. It lives somewhere between your hand and the metal, and it doesn't have a form outside of doing it. \"I think,\" you say, \"the only way to understand it is to be at a bench with a piece in front of you.\""
       }
     ],
     "lastTurn": {
-      "narration": "\"That's not the piece overriding your hand,\" you say, and you mean it plainly, the way you'd name a true thing at a forge bench at dawn — no ceremony, just the fact of it. \"That's your craft deep enough that the piece and the hand are the same conversation. The iron didn't tell you something foreign. It told you something you already knew, in a language you've been building for eleven years.\"\n\nPell is quiet for a moment. The low orange of the south pit fire moves in the cup she's holding. Huginn shifts on its perch — one slow, deliberate resettlement of weight, wings flat — and then goes still again. Outside, the light under the door has gone from pale gray to something thinner and more definite, the particular quality of early-spring morning just before the valley warms.\n\n\"Understand it more fully,\" she repeats. Not a question exactly — more like she's checking the shape of the offer. Her eyes come up from the cup and find yours, and there's something careful in them, the look of a person who does very precise work and knows what it costs when precision is asked for in the wrong direction. \"You mean the way you read the spear. What you were doing with grain and register and the death-sense of it.\" A beat. \"Yes. I want to understand it. Not what you did to the iron — what happened in my hand when I pressed the mark.\"\n\nThe whetstone is still on the bench between you, next to the spent rune-wax stub and the open wine. The morning is young and neither of you has slept, but the question is awake.",
-      "sceneSummary": "Silas named what happened in Pell's hand — craft deep enough that piece and hand speak the same language. Pell accepted the framing and said plainly she wants to understand it.",
+      "narration": "You settle into the familiar reach of Order-Sense — the light touch, the listening posture, the way the pattern beneath a thing surfaces when you stop pressing for it. You have her consent; she's watching you with that same careful attention she gave the spear all night.\n\nBut the lattice here is thin, and what's thinner still is the substrate of craft itself — the structure you're reaching for isn't a crowd's schedule or a ritual's hidden rule. It's a person's eleven years of accumulated knowing, and that is not the same kind of pattern. You find the edges of it: the economy of her movements, the way she holds a tool slightly differently when she's working iron she trusts. But the deeper grammar — the grain of what happened when her hand and the metal became one conversation — slides away from you. The ability is not failing; it's meeting the right kind of resistance. A person's learned body-knowledge doesn't answer the Lattice the way a system does. It is not made of rules. It is made of repetition, and repetition is not structure — not this kind.\n\nYou surface cleanly. No lurch, no cost beyond the energy already spent. You meet her eyes and tell her the truth: you could read the edges — the economy, the sureness — but the heart of it, the moment the iron spoke, that's not a pattern Order-Sense can reach. It lives somewhere between your hand and the metal, and it doesn't have a form outside of doing it. \"I think,\" you say, \"the only way to understand it is to be at a bench with a piece in front of you.\"",
+      "sceneSummary": "Order-Sense reached the edges of Pell's craft but not the heart — the moment the iron spoke lives between hand and metal, not in any readable structure.",
       "choices": [
         {
-          "label": "Use Order-Sense on Pell herself — lightly, with her awareness and consent — to read the structure of what her craft has become. Show her what the pattern looks like from outside it.",
+          "label": "Offer to stay while she works — let her make something simple at the bench, and watch what her hands do when she forgets to explain herself.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.3,
-            "mechanical_spiritual": 0.4
+            "concrete_abstract": -0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "help",
-            "careful"
+            "watch",
+            "careful",
+            "help"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Use Deathsense — not on the spear this time, but on the moment itself: what ended in Pell when the iron told her hand where to go? Something closed so something else could open.",
+          "label": "Ask her to walk you through the double-stamp on a piece of scrap iron — her hands, not her words — and use Deathsense quietly to feel whether Memory's register shifts while she's doing it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "death_life": -0.3,
-            "mechanical_spiritual": 0.5
+            "concrete_abstract": -0.2
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "careful",
+            "ability"
           ],
           "abilityId": "deathsense",
           "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Describe it in plain words first — what grain-reading actually is, how it works, what you felt in the spear. Give her the framework before you show her the practice. Then ask what she felt in her palm when the mark landed.",
+          "label": "Acknowledge the limit plainly and shift the conversation — neither of you has slept. Suggest she rest, and that the understanding can be built over time, not in one dawn.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.2
+            "chaos_order": 0.2
           },
           "difficulty": 0,
           "intentTags": [
             "help",
-            "careful",
-            "plan"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Give her the whetstone now — formally, before any of this goes further. Ground the moment in something physical and present, and let the deeper conversation follow from that.",
+          "label": "Present her with the river whetstone — the one still sitting on the bench, ungiven. Let the gift close the night without forcing the question of what happened in her hand.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
+          "axes": {
+            "chaos_order": 0.1,
+            "death_life": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "help",
+            "gift"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Pell's forge, south lane, Millbrook — early-spring dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups poured and in hand, the bench carrying the marks of the night's work.",
+        "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups in hand.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Cup in both hands, eyes up from it now — watching Silas, careful and present, having said plainly she wants to understand what happened in her hand."
+            "state": "Watching Silas with careful attention — having heard the honest limit, cup in both hands, waiting."
           },
           {
             "name": "Huginn",
-            "state": "Resettled on its perch, wings flat, attending."
+            "state": "Still on its perch, wings flat, attending."
           }
         ],
         "objects": [
@@ -932,7 +946,7 @@
         ],
         "threads": [
           "River whetstone still on the bench — not yet formally given",
-          "Pell has asked to understand what happened in her hand when the mark landed oblique — the offer is open",
+          "Pell has heard the honest limit of Order-Sense; the question of understanding what happened in her hand remains open",
           "Neither of them has slept — the morning is arriving"
         ]
       },
@@ -942,46 +956,51 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what happened in her hand — not the rune-work, but the moment of the mark.",
+          "note": "Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives between hand and metal, not in any readable structure outside the doing of it.",
           "learned": [
-            "What happened in her hand when the mark landed oblique was her craft deep enough that piece and hand are the same conversation — Silas's framing, accepted.",
-            "She wants to understand the moment of the oblique stamp more fully — the grain-reading, the register, what happened in her palm."
+            "Order-Sense could read the edges of her craft — the economy, the sureness — but not the heart of the moment the iron spoke",
+            "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the forge bench at dawn, cup in hand, having asked Silas to help her understand what happened in her hand when Memory's maker's mark landed oblique."
+          "statusNote": "At the forge bench at dawn, cup in hand, having heard the honest limit — the question of what happened in her hand remains open between them."
         }
       ],
+      "factUpdates": [],
+      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "pell",
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "Accepted the framing that the oblique stamp was her craft deep enough to become the same conversation as the iron — not the piece overriding her hand. Has asked explicitly to understand the moment more fully: not the rune-work, but what happened in her palm when the mark landed.",
+          "fact": "Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice the way a system does. The understanding of what happened in her hand lives between hand and metal, only accessible in the doing.",
           "links": [
             "death-bound-spear",
             "millbrook",
             "order-sense",
-            "deathsense"
+            "palework"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the forge bench — a few sentences, a question answered, the morning arriving."
-      }
+        "why": "a brief exchange at the forge bench"
+      },
+      "generateRequest": [],
+      "encounterOps": []
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane, Millbrook — early-spring dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups poured and in hand, the bench carrying the marks of the night's work.",
+      "setting": "Pell's forge, south lane, Millbrook — dawn light now thin and definite under the door, south pit fire coaled to low orange, both cups in hand.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Cup in both hands, eyes up from it now — watching Silas, careful and present, having said plainly she wants to understan"
+          "state": "Watching Silas with careful attention — having heard the honest limit, cup in both hands, waiting."
         },
         {
           "name": "Huginn",
-          "state": "Resettled on its perch, wings flat, attending."
+          "state": "Still on its perch, wings flat, attending."
         }
       ],
       "objects": [
@@ -996,7 +1015,7 @@
       ],
       "threads": [
         "River whetstone still on the bench — not yet formally given",
-        "Pell has asked to understand what happened in her hand when the mark landed oblique — the offer is open",
+        "Pell has heard the honest limit of Order-Sense; the question of understanding what happened in her hand remains open",
         "Neither of them has slept — the morning is arriving"
       ]
     }
@@ -1145,7 +1164,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Read the spear's marks on the bench — found her maker's mark, named the misfire at the kill, asked to be shown what the binding was supposed to do.",
         "[d2] Named her maker's mark — a double-stamp pressed at the moment a piece is finished — and described feeling the kill close through her hand rather than the spear, like pressing a sta",
         "[d2] Watched Silas demonstrate Palework on the spent rune-wax — observed the ability directly for the first time. Now looking at the transverse fault he indicated in the blade.",
         "[d2] Agreed plainly to plan the repair together — 'Yes', no ceremony. Now holding the transverse fault and asking the right structural question: does it need deepening, rewriting, or re",
@@ -1154,17 +1172,18 @@
         "[d2] Watched Silas use Deathsense on the finished spear — heard the confirmation that the register runs clean and that her oblique axis reads as her signature, not a flaw.",
         "[d2] Received starfruit and wine at dawn — went somewhere briefly when she tasted the starfruit, came back without explaining. Heard Memory named. Drinking quietly.",
         "[d2] Explained the oblique stamp — the iron told her hand where to go; she's never had a piece do that before. Named it plainly, without distress.",
-        "[d2] Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what hap"
+        "[d2] Accepted Silas's framing that the oblique stamp was not the piece overriding her but her craft speaking the same language as the iron. Said plainly she wants to understand what hap",
+        "[d2] Heard Silas name the honest limit of Order-Sense — the pattern of her craft doesn't answer the Lattice the way a system does. Received the framing that the understanding lives betw"
       ],
       "knownFacts": [
-        "The spear they repaired together is now named Memory",
-        "Starfruit from the old pass circuit — she recognized it; the pass closed before it became rare here",
         "Silas frames the oblique axis as room made — for something found, or someone",
         "She has used the double-stamp for eleven years — it always lands true on pieces she knows well",
         "With Memory, she pressed where the iron said to go — and the iron told her; that has never happened before",
         "She frames it as the piece needing more room than she usually leaves, and the piece knowing it",
         "What happened in her hand when the mark landed oblique was her craft deep enough that piece and hand are the same conversation — Silas's framing, accepted.",
-        "She wants to understand the moment of the oblique stamp more fully — the grain-reading, the register, what happened in her palm."
+        "She wants to understand the moment of the oblique stamp more fully — the grain-reading, the register, what happened in her palm.",
+        "Order-Sense could read the edges of her craft — the economy, the sureness — but not the heart of the moment the iron spoke",
+        "Her body-knowledge is not made of rules but of repetition — it has no form outside of doing it"
       ],
       "skillsObserved": [
         "reading a repair problem at the structural level without bei",
@@ -1175,7 +1194,7 @@
         "articulating a craft first without dramatizing it"
       ],
       "status": "active",
-      "statusNote": "At the forge bench at dawn, cup in hand, having asked Silas to help her understand what happened in her hand when Memory's maker's mark landed oblique.",
+      "statusNote": "At the forge bench at dawn, cup in hand, having heard the honest limit — the question of what happened in her hand remains open between them.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1624,7 +1643,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Has an edge-work backlog and needs snare hardware restocked before north meadow runs are worth attempting — offered a labor-for-hunting-company deal in response to Silas's proposal.",
           "[d1] Accepts competence as currency — naming the froe's sprung collar (not just 'bent') closed the deal. Backlog labor in exchange for hunting company north of the village, terms agreed.",
           "[d1] Order-Sense used on the hand-axe in Pell's forge — hairline is a stop-crack in the eye wall, not the weld; requires a heat-collar before edge work. Pell paused her own work to hear the read.",
           "[d1] Pell's forge backlog cleared in full — she confirmed the hand-axe collar with her own hands and named the next step without ceremony: find Corvin, then go north.",
@@ -1647,7 +1665,8 @@
           "[d2] Re-seated her maker's mark in the binding under guidance — slightly off-true, accepted without complaint ('I can live with oblique'). Cut the transverse clean on a single pass. Stayed present through ",
           "[d2] Recognized old pass-circuit starfruit by taste at dawn — went somewhere briefly, came back without saying where. Received the naming of Memory without ceremony.",
           "[d2] The oblique stamp on Memory was not a slip — the iron told her hand where to go. She has made the double-stamp for eleven years and it has never done that before. She frames it as the piece needing mo",
-          "[d2] Accepted the framing that the oblique stamp was her craft deep enough to become the same conversation as the iron — not the piece overriding her hand. Has asked explicitly to understand the moment mor"
+          "[d2] Accepted the framing that the oblique stamp was her craft deep enough to become the same conversation as the iron — not the piece overriding her hand. Has asked explicitly to understand the moment mor",
+          "[d2] Order-Sense cannot read the structure of Pell's craft at its heart — her eleven years of accumulated body-knowledge is not made of rules but of repetition, and repetition does not answer the Lattice t"
         ],
         "links": [
           "mara-wells",
@@ -1798,14 +1817,14 @@
     }
   },
   "tendencies": {
-    "strategic": 49.70360558129059,
-    "cerebral": 32.9647372572997,
-    "social": 54.53856862632611,
-    "generous": 12.068663972428073,
-    "cautious": 22.42196980478991,
-    "physical": 1.7125087063959672,
-    "risky": 0.851801859600347,
-    "ruthless": 0.8734200960253871
+    "strategic": 49.45508755338413,
+    "cerebral": 33.79991357101321,
+    "social": 54.26587578319448,
+    "generous": 13.008320652565933,
+    "cautious": 23.309859955765962,
+    "physical": 1.7039461628639874,
+    "risky": 0.8475428503023453,
+    "ruthless": 0.8690529955452602
   },
   "aptitudes": [
     "strategist",
@@ -1813,7 +1832,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 116,
+  "actionCount": 117,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1875,8 +1894,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-  "updatedAt": 1784037186675,
-  "rev": 177,
+  "updatedAt": 1784037308415,
+  "rev": 178,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2017,7 +2036,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 26,
+      "order_sense": 27,
       "palework": 10,
       "deathsense": 8,
       "shadowstep": 2

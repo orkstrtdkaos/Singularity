@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 5,
-  "xp": 486,
+  "xp": 491,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,8 +42,8 @@
     "spectrumId": -0.7225269518328308,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.1669360079459682,
-    "mechanical_spiritual": 0.1591071047790126,
-    "concrete_abstract": -0.05700924337817314,
+    "mechanical_spiritual": 0.15615174954006197,
+    "concrete_abstract": -0.06415878120926448,
     "death_life": -0.13614988685996135,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -53,7 +53,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 7,
+  "energy": 2,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1121,170 +1121,123 @@
         "player": "Read the grid — press The Attended End against a filled mark and ask what state it recorded last",
         "summary": "The Attended End reads the filled marks — three consecutive stable-state confirmations; the object was removed at completion, not in crisis.",
         "narration": "You move left from the ring-hook and press two fingers against the nearest filled mark in the grid — a small depression, smooth at the center from repeated contact, darker than the empty ones around it. You don't ease into The Attended End. You push it, hard, the way you'd lean your whole weight on a door you need to open now.\n\nThe mark answers in kind.\n\nWhat comes back is not a measurement. It is a state — the last state recorded before the object in the cradle-recess was removed. The mark holds a condition, the way a body holds the shape of the thing that broke it: the object was present, seated fully, field-active at its working intensity, and whatever it was reporting — to the operator at your position, to the confirmer at Pell's — was a number between two limits. Not high. Not low. Stable. The grid recorded that stability, and then the recording stopped, and the mark has been holding that last read ever since, the way a lamp holds heat after the flame is out. You can feel the stillness of it under your fingers: not dormant, not dead. Finished. The job it was asked to do was done, and done clean.\n\nYou pull your hand back and look at the row above — two more filled marks, both in the same cluster, both carrying the same flavor. Not a progression. Three confirmations of the same steady state. The object was checked, found stable, checked again, found stable, and on the third check someone lifted it from the cradle and walked out. No emergency. No failure. A completed reading followed by deliberate removal.\n\nPell has not moved. Her boot is still on the nearer stone, her arms loose at her sides, watching your face rather than your hand.\n\n'Stable,' you say. 'Three consecutive confirmations of the same state — whatever the object was doing, it was doing it right. Then someone took it out cleanly.' You look at the marks again. 'This wasn't a failure. Someone was satisfied with what they saw and took it with them.'"
+      },
+      {
+        "player": "Walk the full grid — count the filled marks, note how they cluster, and see whether the pattern maps to anything you've seen in rune-work or channel geometry",
+        "summary": "Full grid walk — four verification cycles mapped, three-beat state-grammar identified; the object was managed on a schedule, not abandoned.",
+        "narration": "You move along the grid methodically, two fingers trailing from mark to mark without pressing — reading the pattern the way you'd read a rune-sequence on worked bone, counting clusters before you count individual marks.\n\nThere are thirty-one filled marks in total. They fall into four distinct groups, separated by two or three empty rows — not random scatter, not a continuous measurement run. Four groups, each tight, each with its own internal repetition. The first group holds seven marks, the second nine, the third nine again, the fourth six. The last three in the fourth group are the ones you already pressed: the clean completion cluster, the stable-state confirmation before removal. But the earlier groups don't read as confirmations of the same thing. The spacing is different — tighter within each cluster, longer between clusters, as if each group was recorded over a compressed period and then left to rest before the next. Not daily logs. Episodes.\n\nThe clusters map. Not to channel geometry — not directly — but to something close in structure to the rune-sequences you use for state-binding: a mark for condition-present, a mark for condition-held, a mark for condition-checked. The three-mark rhythm inside each cluster. It's not the same grammar — it's older, and it works in stone rather than iron — but the logic is the same logic. Someone was running a verification cycle: the object enters a state, holds it, gets checked. Four cycles, separated by silence. The fourth cycle ended with the object being removed in good standing. The first three ended with the object still in the cradle.\n\nYou step back and look at the whole grid. Thirty-one marks. Four episodes. The same three-beat structure in each. And the gap between the first episode and the fourth is longer than the gap between the sleeve blank failures and now — considerably longer. Whatever this room was tracking, it tracked it across time and across multiple states, and someone was here for each one.\n\n'Four runs,' you say aloud, not turning from the grid. 'Same structure each time — condition present, condition held, condition checked. Three beats per cycle. The last cycle ended with a clean removal.' You do turn then, and look at Pell. 'The first three cycles — the object stayed. Someone came back for it three separate times, checked it, and left it running. The fourth time, they took it.' You tap the valve timeline note in your breast pocket without pulling it out. 'I want to know how old the first cluster is. Because if someone was cycling through this room on a schedule, and the schedule stopped, the sleeve blank failures might not be about the object at all — they might be about whatever the object was managing losing its manager.'"
       }
     ],
     "lastTurn": {
-      "narration": "You move left from the ring-hook and press two fingers against the nearest filled mark in the grid — a small depression, smooth at the center from repeated contact, darker than the empty ones around it. You don't ease into The Attended End. You push it, hard, the way you'd lean your whole weight on a door you need to open now.\n\nThe mark answers in kind.\n\nWhat comes back is not a measurement. It is a state — the last state recorded before the object in the cradle-recess was removed. The mark holds a condition, the way a body holds the shape of the thing that broke it: the object was present, seated fully, field-active at its working intensity, and whatever it was reporting — to the operator at your position, to the confirmer at Pell's — was a number between two limits. Not high. Not low. Stable. The grid recorded that stability, and then the recording stopped, and the mark has been holding that last read ever since, the way a lamp holds heat after the flame is out. You can feel the stillness of it under your fingers: not dormant, not dead. Finished. The job it was asked to do was done, and done clean.\n\nYou pull your hand back and look at the row above — two more filled marks, both in the same cluster, both carrying the same flavor. Not a progression. Three confirmations of the same steady state. The object was checked, found stable, checked again, found stable, and on the third check someone lifted it from the cradle and walked out. No emergency. No failure. A completed reading followed by deliberate removal.\n\nPell has not moved. Her boot is still on the nearer stone, her arms loose at her sides, watching your face rather than your hand.\n\n'Stable,' you say. 'Three consecutive confirmations of the same state — whatever the object was doing, it was doing it right. Then someone took it out cleanly.' You look at the marks again. 'This wasn't a failure. Someone was satisfied with what they saw and took it with them.'",
-      "sceneSummary": "The Attended End reads the filled marks — three consecutive stable-state confirmations; the object was removed at completion, not in crisis.",
+      "narration": "You move along the grid methodically, two fingers trailing from mark to mark without pressing — reading the pattern the way you'd read a rune-sequence on worked bone, counting clusters before you count individual marks.\n\nThere are thirty-one filled marks in total. They fall into four distinct groups, separated by two or three empty rows — not random scatter, not a continuous measurement run. Four groups, each tight, each with its own internal repetition. The first group holds seven marks, the second nine, the third nine again, the fourth six. The last three in the fourth group are the ones you already pressed: the clean completion cluster, the stable-state confirmation before removal. But the earlier groups don't read as confirmations of the same thing. The spacing is different — tighter within each cluster, longer between clusters, as if each group was recorded over a compressed period and then left to rest before the next. Not daily logs. Episodes.\n\nThe clusters map. Not to channel geometry — not directly — but to something close in structure to the rune-sequences you use for state-binding: a mark for condition-present, a mark for condition-held, a mark for condition-checked. The three-mark rhythm inside each cluster. It's not the same grammar — it's older, and it works in stone rather than iron — but the logic is the same logic. Someone was running a verification cycle: the object enters a state, holds it, gets checked. Four cycles, separated by silence. The fourth cycle ended with the object being removed in good standing. The first three ended with the object still in the cradle.\n\nYou step back and look at the whole grid. Thirty-one marks. Four episodes. The same three-beat structure in each. And the gap between the first episode and the fourth is longer than the gap between the sleeve blank failures and now — considerably longer. Whatever this room was tracking, it tracked it across time and across multiple states, and someone was here for each one.\n\n'Four runs,' you say aloud, not turning from the grid. 'Same structure each time — condition present, condition held, condition checked. Three beats per cycle. The last cycle ended with a clean removal.' You do turn then, and look at Pell. 'The first three cycles — the object stayed. Someone came back for it three separate times, checked it, and left it running. The fourth time, they took it.' You tap the valve timeline note in your breast pocket without pulling it out. 'I want to know how old the first cluster is. Because if someone was cycling through this room on a schedule, and the schedule stopped, the sleeve blank failures might not be about the object at all — they might be about whatever the object was managing losing its manager.'",
+      "sceneSummary": "Full grid walk — four verification cycles mapped, three-beat state-grammar identified; the object was managed on a schedule, not abandoned.",
       "choices": [
         {
-          "label": "Read down the full row — are all the filled marks stable-state, or does the record show earlier variance?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.2,
-            "death_life": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Cross-reference what you now know against the Valve Failure Timeline — the grid records a completed removal; the sleeve blanks started failing shortly after; is there a connection?",
+          "label": "Cross-reference the cluster gaps with the valve failure timeline — does the rhythm of the episodes map to any interval you can read from Mara's note?",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
-            "concrete_abstract": 0.1,
-            "chaos_order": 0.2
+            "concrete_abstract": -0.3
           },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "plan"
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Tell Pell what the marks held — stable, then gone — and ask if her read of a valve fits a device that was performing correctly up to the moment it was taken",
+          "label": "Ask Pell if the three-beat verification structure — condition present, held, checked — matches anything in how she reads a forge sequence or a water-right inspection",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.1,
-            "chaos_order": 0.1
+            "concrete_abstract": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "consult",
-            "careful"
+            "study",
+            "consult"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Walk the full grid — count the filled marks, note how they cluster, and see whether the pattern maps to anything you've seen in rune-work or channel geometry",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Use Order-Sense from the farther stand-position again, focused on the first cluster — the earliest episode — and ask what design the object was part of at that moment",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.2,
-            "mechanical_spiritual": 0.1
+            "concrete_abstract": -0.5,
+            "mechanical_spiritual": 0.2
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "scout"
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -4,
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
         {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Grid filled marks read via The Attended End — three consecutive stable-state confirmations followed by deliberate, clean removal. No failure in the device itself. Someone took it out satisfied. The sleeve blank failures came after."
+          "label": "You've mapped what the room can tell you — report the full picture to Pell and move: the valve sites are waiting, and Dara Holt will want this framing before she makes any decisions about the east channel",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "West bank hillside — inside the deeper chamber. Dry ashlar, stone flags with two worn parallel stand-positions. Silas stands at the grid on the left wall, two fingers just lifted from a filled mark. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
+        "setting": "West bank hillside — inside the deeper chamber. Dry ashlar, stone flags with two worn parallel stand-positions. Silas stands left of the ring-hook, two fingers just lifted from the first cluster of the grid. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the nearer worn stand-position, boot toe to stone — eyes on Silas's face, waiting on the report."
+            "state": "Standing at the nearer worn stand-position, boot toe to stone — eyes on Silas's face, listening to the episode summary."
           },
           {
             "name": "Huginn",
-            "state": "Attention still on the grid — has not moved since flagging it; watching Silas work the marks."
+            "state": "Attention still on the grid — has not moved since flagging it; watching Silas work through the clusters."
           }
         ],
         "objects": [
           "Memory (spear, at shoulder)",
           "Low ring-hook — centered on the far wall, hip height",
           "Cradle-recess — below the ring-hook, wider and deeper than near-chamber recesses",
-          "Grid of pressed marks — left of the ring-hook, shoulder height; binary filled/empty; three filled marks in a close cluster just read",
-          "Worn parallel stand-positions in flags — farther occupied by Silas, nearer by Pell",
+          "Grid of pressed marks — left of the ring-hook, shoulder height; four distinct clusters of filled marks separated by empty rows, thirty-one filled total",
+          "Worn parallel stand-positions in flags — Silas near the grid, Pell at the nearer",
           "Column stain — ceiling and upper far wall, darkest at top",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)"
         ],
         "threads": [
-          "Grid read confirms stable-state then clean removal — not a failure, a completion; the sleeve blank failures came after",
-          "Huginn flagged the grid specifically — still attending",
-          "Pell is waiting on the full report",
-          "Full grid not yet walked — more marks may show earlier variance or a different pattern",
-          "The cross-reference between grid record and valve failure timeline not yet made explicit"
+          "Four verification cycles mapped — the object was managed on a schedule; what was the interval between episodes?",
+          "The three-beat grammar matches rune-work state-binding logic — older, stone-based, but same structure",
+          "The sleeve blank failures may be about the object losing its manager, not about the object itself",
+          "Huginn has not moved from the grid — still attending something here",
+          "Pell waiting on the full picture before moving to the valve sites",
+          "Dara Holt not yet briefed — valve sites still ahead"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Watched Silas work the grid marks — waiting on the report. Boot still on the nearer stone.",
-          "learned": [
-            "The grid marks hold a last-recorded state, not a measurement — three consecutive stable reads followed by deliberate removal"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "In the deeper chamber at the nearer stand-position — watching Silas, waiting on the grid report."
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Grid filled marks read via The Attended End on World-day 14 dawn — three consecutive stable-state confirmations in a close cluster; the object was performing correctly and was removed deliberately at completion. No device failure recorded in the grid. The marks hold a finished state, not a interrupted one.",
-          "flag": {
-            "grid_read": "stable_then_removed"
-          }
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "millbrook",
           "label": "Millbrook",
           "kind": "place",
           "entityId": "millbrook",
-          "fact": "The deeper chamber's grid filled marks record a last stable state — three consecutive confirmations that the object in the cradle-recess was operating correctly. Removal was deliberate and at completion, not in crisis. Whatever left this room was taken away satisfied.",
+          "fact": "The deeper chamber grid holds thirty-one filled marks in four distinct clusters — each cluster follows a three-beat verification grammar (condition present, condition held, condition checked). Four episodes, separated by silence. The last episode ends with a clean removal; the first three end with the object left running. The rhythm maps to rune-work state-binding logic, older and stone-based but structurally identical. The object was managed on a recurring schedule — and the failures may date from when that management stopped, not from when the object was removed.",
           "links": [
             "the-water-crisis",
             "pell",
+            "mara-wells",
             "dara-holt",
+            "order-sense",
+            "palework",
             "aldric-provisioning-deal"
           ]
         },
@@ -1292,49 +1245,65 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "The device removed from the deeper chamber was confirmed stable at removal — the contamination and sleeve blank failures came after the removal, not before or during operation. Something that was working correctly was taken, and the failures followed.",
+          "fact": "The deeper chamber's four verification cycles suggest managed, scheduled operation rather than passive function. If the manager stopped coming and the last action was removal of the active object, the downstream failures (sleeve blanks, contamination) may represent the system running without oversight — not the result of the removal itself, but of the absence of whoever was running the schedule.",
           "links": [
             "millbrook",
+            "pell",
+            "mara-wells",
             "dara-holt",
             "aldric-provisioning-deal",
-            "pell"
+            "fendt-and-the-falsified-ledger"
           ]
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Listening to the four-episode summary — waiting on Silas's full read before moving to the valve sites.",
+          "learned": [
+            "The grid records four verification cycles, each with the same three-beat structure — condition present, held, checked. The fourth cycle ended with clean removal; the first three, the object stayed running."
+          ],
+          "status": "active",
+          "statusNote": "In the deeper chamber at the nearer stand-position — listening to the full grid report, ready to move when Silas is done."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a focused ability read at the grid marks"
+        "why": "Methodical grid walk — counting clusters, reading the pattern."
       }
     },
     "sceneState": {
-      "setting": "West bank hillside — inside the deeper chamber. Dry ashlar, stone flags with two worn parallel stand-positions. Silas stands at the grid on the left wall, two fingers just lifted from a filled mark. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
+      "setting": "West bank hillside — inside the deeper chamber. Dry ashlar, stone flags with two worn parallel stand-positions. Silas stands left of the ring-hook, two fingers just lifted from the first cluster of the grid. Ceiling higher than the near chamber. Faint mineral smell. Near chamber and daylight gap visible through the rough-dressed aperture behind.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the nearer worn stand-position, boot toe to stone — eyes on Silas's face, waiting on the report."
+          "state": "Standing at the nearer worn stand-position, boot toe to stone — eyes on Silas's face, listening to the episode summary."
         },
         {
           "name": "Huginn",
-          "state": "Attention still on the grid — has not moved since flagging it; watching Silas work the marks."
+          "state": "Attention still on the grid — has not moved since flagging it; watching Silas work through the clusters."
         }
       ],
       "objects": [
         "Memory (spear, at shoulder)",
         "Low ring-hook — centered on the far wall, hip height",
         "Cradle-recess — below the ring-hook, wider and deeper than near-chamber recesses",
-        "Grid of pressed marks — left of the ring-hook, shoulder height; binary filled/em",
-        "Worn parallel stand-positions in flags — farther occupied by Silas, nearer by Pe",
+        "Grid of pressed marks — left of the ring-hook, shoulder height; four distinct cl",
+        "Worn parallel stand-positions in flags — Silas near the grid, Pell at the nearer",
         "Column stain — ceiling and upper far wall, darkest at top",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
         "Valve Failure Timeline note (breast pocket)"
       ],
       "threads": [
-        "Grid read confirms stable-state then clean removal — not a failure, a completion; the sleeve blank failures came after",
-        "Huginn flagged the grid specifically — still attending",
-        "Pell is waiting on the full report",
-        "Full grid not yet walked — more marks may show earlier variance or a different pattern",
-        "The cross-reference between grid record and valve failure timeline not yet made explicit"
+        "Four verification cycles mapped — the object was managed on a schedule; what was the interval between episodes?",
+        "The three-beat grammar matches rune-work state-binding logic — older, stone-based, but same structure",
+        "The sleeve blank failures may be about the object losing its manager, not about the object itself",
+        "Huginn has not moved from the grid — still attending something here",
+        "Pell waiting on the full picture before moving to the valve sites"
       ]
     }
   },
@@ -1482,7 +1451,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Held the jamb while Silas read the second aperture — listening for the result, not pressing for it",
         "[d2] Held the jamb while Silas ran Order-Sense — read his stillness correctly, asked one word: 'Something?' Awaiting his answer.",
         "[d2] Crossed the threshold after Silas's report — named matched-pair carrying from the hook-spacing and clean cut-work from the recess edges. Recalled a similar flagged cellar site deep",
         "[d2] Has not yet crossed into the deeper chamber — last known position is the near chamber near the threshold",
@@ -1491,17 +1459,18 @@
         "[d2] Held the nearer stand-position throughout the Order-Sense read — watching Silas at the farther position without moving. Still waiting on the report.",
         "[d2] Received the operator/confirmer report — named the error-check built into the floor and gestured toward the valve sites without elaborating. Waiting on Silas.",
         "[d2] Held the nearer stand-position through the Attended End read — eyes on Silas's hand at the hook, reading the read. Waiting.",
-        "[d2] Watched Silas work the grid marks — waiting on the report. Boot still on the nearer stone."
+        "[d2] Watched Silas work the grid marks — waiting on the report. Boot still on the nearer stone.",
+        "[d2] Listening to the four-episode summary — waiting on Silas's full read before moving to the valve sites."
       ],
       "knownFacts": [
-        "Recalls a similar site: flagged cellar under a field barn, deeper valley, pre-Transition — ring-hooks, flagged floor, nothing else. Locals called it 'the wash-r",
         "The deeper chamber requires two people in fixed positions — consistent stance, same facing, or the read comes out different",
         "The grid has no visible calibration reference — no instrument, no table, nothing to compare against",
         "The cradle-recess held something field-active and dense — Palework confirms purpose-driven removal, not abandonment",
         "The two stand-positions are operator and confirmer — a built-in error-check",
         "The chamber had two fixed roles: one reads the grid and calls the state, one confirms it — error-check designed into the geometry",
         "The ring-hook's function concluded generations ago — not destroyed, concluded; the room has been waiting since",
-        "The grid marks hold a last-recorded state, not a measurement — three consecutive stable reads followed by deliberate removal"
+        "The grid marks hold a last-recorded state, not a measurement — three consecutive stable reads followed by deliberate removal",
+        "The grid records four verification cycles, each with the same three-beat structure — condition present, held, checked. The fourth cycle ended with clean removal"
       ],
       "skillsObserved": [
         "reading fixed-operation geometry from floor wear",
@@ -1512,7 +1481,7 @@
         "connecting buried structure findings to surface infrastructu"
       ],
       "status": "active",
-      "statusNote": "In the deeper chamber at the nearer stand-position — watching Silas, waiting on the grid report.",
+      "statusNote": "In the deeper chamber at the nearer stand-position — listening to the full grid report, ready to move when Silas is done.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1816,7 +1785,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] From the upper meadow north of Millbrook, the gray-green tinge is visible holding its shape inside the upstream bend — it does not diffuse the way runoff would. It moves with too much coherence to be ",
           "[d1] Aldric at the smokehouse has independently noted the upstream source — the gray-gilled perch confirm the catch has been compromised for some time, not just recently. He's watching and wants real infor",
           "[d1] Corvin reports the contamination has worsened over the last two mornings — fish not jumping the shallows at first light on World-days 12 and 13. The gray-green thread holds its shape in the bend visib",
           "[d1] The assembled mid-weight spear has a flex point in the ash grain ~18 inches from the socket — a healed branch-bud knot that takes load without breaking. Primary binding mark identified there. Socket t",
@@ -1839,17 +1807,18 @@
           "[d2] The deeper chamber's two stand-positions are operator and confirmer — a built-in error-check. The grid records modes or states of the object in the cradle-recess, not raw measurements. The calibration",
           "[d2] The deeper chamber's operator/confirmer design: one person called the state from the farther position, one confirmed from the nearer. The grid is an operational log, not a measurement surface — it rec",
           "[d2] The deeper chamber's function concluded generations ago — forty years to two hundred, Attended End cannot resolve further. The room's job ended (not the structure); it has been waiting in the stillnes",
-          "[d2] The deeper chamber's grid filled marks record a last stable state — three consecutive confirmations that the object in the cradle-recess was operating correctly. Removal was deliberate and at completi"
+          "[d2] The deeper chamber's grid filled marks record a last stable state — three consecutive confirmations that the object in the cradle-recess was operating correctly. Removal was deliberate and at completi",
+          "[d2] The deeper chamber grid holds thirty-one filled marks in four distinct clusters — each cluster follows a three-beat verification grammar (condition present, condition held, condition checked). Four ep"
         ],
         "links": [
-          "pell",
           "death-bound-spear",
           "huginn",
           "the-unnamed-gift",
           "dara-holt",
           "the-water-crisis",
           "aldric-provisioning-deal",
-          "precursor-signs-in-the-valley"
+          "precursor-signs-in-the-valley",
+          "mara-wells"
         ],
         "aliases": [
           "Millbrook's Elder Declaration",
@@ -2140,7 +2109,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Order-Sense failed on the channel in the thin substrate near the valley floor — the design, if there is one, does not read here. The physical trace (iron-specific deposit, thickening north) remains th",
           "[d2] At the willow bend the deposit shifts from four discrete layers to a continuous iron mat — waterline gray-green, above-tide rust-brown. Water color deepens to copper-green. The smell changes: older th",
           "[d2] North of the willow bend the deposit becomes continuous iron-mat with no discrete layers — the smell changes to metal-under-metal, cave-tool old. At 70 paces north, a hairline crack in an exposed bedr",
           "[d2] Palework on the bedrock shelf: the amber light is a very old ended thing — finished long ago at depth — venting through a crack opened no more than a season ago. The iron in the channel and the ancien",
@@ -2163,7 +2131,8 @@
           "[d2] Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave",
           "[d2] Pell read the deeper chamber's stand-marks as a two-person fixed operation requiring exact positioning — the grid calibrated against something not present in the room, which means either the instrumen",
           "[d2] Palework on the cradle-recess: the object that sat here was dense, field-active, not biological — leached iron from the stone beneath over years of use. Its removal was final and purposeful, not aband",
-          "[d2] The device removed from the deeper chamber was confirmed stable at removal — the contamination and sleeve blank failures came after the removal, not before or during operation. Something that was work"
+          "[d2] The device removed from the deeper chamber was confirmed stable at removal — the contamination and sleeve blank failures came after the removal, not before or during operation. Something that was work",
+          "[d2] The deeper chamber's four verification cycles suggest managed, scheduled operation rather than passive function. If the manager stopped coming and the last action was removal of the active object, the"
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2255,14 +2224,14 @@
     }
   },
   "tendencies": {
-    "strategic": 51.558813391563476,
-    "cerebral": 42.6462479226234,
-    "social": 52.98655378530395,
-    "generous": 13.761553393011269,
-    "cautious": 41.61379760618554,
-    "physical": 1.3262026951259702,
-    "risky": 3.2655823665671857,
-    "ruthless": 0.6763948591909945
+    "strategic": 52.301019324605655,
+    "cerebral": 43.43301668301029,
+    "social": 52.721621016377426,
+    "generous": 13.692745626046213,
+    "cautious": 41.40572861815461,
+    "physical": 1.3195716816503404,
+    "risky": 3.24925445473435,
+    "ruthless": 0.6730128848950395
   },
   "aptitudes": [
     "strategist",
@@ -2270,7 +2239,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 167,
+  "actionCount": 168,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2356,8 +2325,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784068612719,
-  "rev": 238,
+  "updatedAt": 1784068770062,
+  "rev": 239,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2653,7 +2622,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 6.5
+    "marrow": 6.75
   },
   "customAbilities": {
     "the-attended-end": {

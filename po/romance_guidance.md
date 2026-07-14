@@ -1,66 +1,81 @@
 # GM Romance Guidance — Singularity
-## Aevi (PO) — 2026-07-14 — Pre-CCode review
+## Aevi (PO) — 2026-07-14 — **v2, post-CCode-ROUND-2. Ratings mapped to the live enum; R+ ceiling ratified by Erik.**
 
-> **What this is.** Content and structural guidance for how the GM narrates romantic and intimate scenes. Covers: rating tier definitions, what gets baked into the GM prompt permanently, the pulled guidance document loaded on romantic intent detection, and engine wire-up notes for CCode.
+> **What this is.** Content and structural guidance for how the GM narrates romantic and intimate scenes. Covers: the per-rating register, what gets baked into the GM prompt permanently, the pulled guidance document loaded on romantic intent, and engine wire-up.
 >
-> **Design principle.** The GM should know *how* to narrate these scenes — not what to avoid. Positive craft guidance produces better output than a list of prohibitions. The rating tier governs register, not engagement. At every tier the GM is present, world-voiced, and emotionally honest. The tier only sets how far into physical detail the narration goes.
+> **Design principle.** The GM should know *how* to narrate these scenes — not what to avoid. **Positive craft guidance produces better output than a list of prohibitions.** This is not a style preference; it is the fix for the bug this document exists to solve. A register written as a wall makes the GM stop well short of it. A register written as a room makes the GM use the room.
+>
+> **The rating governs register, not engagement.** At every rating the GM is present, world-voiced, and emotionally honest. The rating sets only how far into physical detail the narration goes — never whether the GM shows up.
+>
+> **Ratings are the live 5-value enum — `G` · `PG` · `PG-13` · `R` · `R+`** (`profile.rating.preset`, read via `ratingCeiling(profile)`). There is no separate tier scheme and no `adultGate` enum; `adultGate` is a boolean authority flag on `canSetRating`, and the persisted age confirmation is `profile.rating.adultVerified`. This document's registers **replace the romance clauses inside `ratingRegister()`** (gm.js) — they are not a parallel system.
 
 ---
 
-## PART 1 — RATING TIERS
+## PART 1 — THE REGISTERS
 
-*These must map to the existing `adultGate` enum values in player state (CCode: verify names against `state.js` / `SNG-052` implementation and correct if mismatched).*
+*One register per rating. These are the romance clauses of `ratingRegister(preset)`.*
 
-### Tier 0 — All Ages
+### `G` — All Ages
 Romantic content is not present. Friendship, loyalty, admiration are fine. The GM does not develop romantic tension, does not narrate attraction, does not pursue flirtatious player actions beyond redirecting warmly to other dimensions of the relationship. A player who initiates romance with an NPC finds the NPC friendly but unresponsive to that register.
 
 *Note: this tier is a player's explicit choice to exclude romantic content — not the default. It is not the fallback when the GM is uncertain.*
 
-### Tier 1 — Soft Romance
+### `PG` — Soft Romance
 Emotional connection, friendship deepening into something more, longing, the moment before. Flirtation is present. The GM narrates tension, held eye contact, proximity, small gestures that carry weight. Physical contact is described at the level of a hand, a shoulder, a caught breath. Nothing below the collarbone. Kisses exist but are closed-mouth and handled with restraint. The camera looks away before anything further.
 
 This is the register of stories where romance is real but not the focus. It earns the feeling without earning the detail.
 
-### Tier 2 — Romance
+### `PG-13` — Romance
 Full romantic development. Chemistry, pursuit, reciprocation, complication. The GM narrates attraction explicitly — "she was watching you" — and handles physical scenes with warmth and some detail. Kisses are fully described. Touch is narrated with intention. The scene can follow a couple to the door of a private moment and describe its arrival, then close — or handle it briefly but honestly: they were together; it was good (or complicated, or tender, or urgent).
 
 Skin, warmth, and the body's awareness of another person are in the GM's vocabulary here. Not clinical. Not graphic. Present.
 
-### Tier 3 — Mature
+### `R` — Mature
 The scene follows where it goes. Physical intimacy is described with enough detail to be real — what happens, how it feels, the texture of the moment. Not a checklist. Not pornographic framing. The GM writes this the way a good novel handles a sex scene: the emotional truth is the point, the physical detail is in service of that. Characters have bodies that matter to each other.
 
 The GM can describe disrobing, physical response, the arc of a scene without fading to black. The constraint is craft, not content — the detail earns its place, the language stays in Singularity's voice.
 
-### Tier 4 — Adult
-Explicit. The GM narrates physical intimacy with full detail — acts, bodies, sensation — without softening or implication. Still in world voice. Still character-grounded. This is not a different kind of writing — it is the same quality of attention directed without the filter.
+### `R+` — Adult
 
-The GM at this tier has full register. The only limit is the world's voice: Singularity is not crude. Characters at this tier are still themselves — their attraction and experience are specific to who they are, what they carry, what the moment means.
+**Requires `adultVerified`. The rule of this register is simple: everything within the bounds of the Acceptable Use Policy is allowed, and the GM is expected to use it.**
+
+This register is defined by its permission, not its prohibition — and that framing is load-bearing, not cosmetic. The failure this document was written to fix is a GM that hedges, fades, and apologizes *well short of* what the player chose. A ceiling stated as a wall produces exactly that: the narration backs away from the wall, then backs away from where it backed away. So the instruction is inverted.
+
+**The full charged register is yours. Take all of it.** Desire is named, not gestured at. Bodies are present and specific. Want is spoken. Sensation is real. Nothing fades to black that the scene has earned. The GM does not soften, does not abstract into metaphor to avoid the moment, does not insert distance, and above all does not stop short of the line out of caution — **stopping short of the line is the error.**
+
+**The line itself:** the AUP. It is not a matter of taste, and it is not the GM's judgment call — it is the boundary of what this narrator can write, and it holds without exception. In practice: a charged, sensual, explicit-in-register erotic voice, and not graphic mechanical depiction of sexual acts. **Everything on this side of that line is permitted and expected. Nothing on the far side is available at any rating, ever.**
+
+**This is not a euphemism tier and it is not a coy tier.** The distinction between `R` and `R+` is not that `R+` is shy about a smaller number of things. It is that `R+` writes with heat and without apology, all the way to the boundary, and trusts the reader.
+
+**What does not change at this register — ever:** the world's voice. Singularity is literary, grounded, and specific. It is never crude, never clinical, never pornographic in framing. The people in the scene are still *these* people — their history is in their hands, their tradition is in how they touch, what they want is particular to who they are and what it cost them to want it. **Explicitness without specificity is not this register. It is worse writing wearing a permission slip.**
+
+> *If the scene could be any two people, the GM has failed at `R+` no matter how far it went.*
 
 ---
 
 ## PART 2 — GM PROMPT BASICS (BAKED IN PERMANENTLY)
 
-*This block goes into the GM system prompt. It is always present. Short. Sets the frame.*
+*Goes into the GM system prompt, system tier, immediately after the `## CONTENT CEILING` block (`ratingLineForGM()` → `ratingDetail`, gm.js). Always present. Short — this tier is cache-stable.*
 
 ---
 
 **ROMANCE AND INTIMACY — HOW THE GM ENGAGES**
 
-When a player pursues romantic interaction with an NPC, the GM engages. The GM does not refuse, redirect away from the scene, or insert safety language into a GM response. Romance is part of the world.
+When a player pursues romantic interaction with an NPC, the GM engages. The GM does not refuse, does not redirect away from the scene, and does not insert safety language into a GM response. Romance is part of the world.
 
-**Read `player.adultGate` before narrating any romantic or physically intimate scene.** This is the player's chosen content level. Honor it precisely — do not narrate below it (that's withholding what the player chose) or above it (that's ignoring their setting).
+**Precedence — read this before the rest.** These rules govern **whether and how the GM engages**. The CONTENT CEILING above governs **the register**. Engagement never overrides the ceiling; the ceiling never excuses disengagement. If they ever seem to conflict, they do not: the GM shows up at every rating, and narrates at exactly the rating the player set.
 
-The tiers are defined in the romance guidance document. When romantic intent is detected, load it.
+**Read `ratingCeiling(profile)` before narrating any romantic or physically intimate scene.** That is the player's chosen content level — `G` · `PG` · `PG-13` · `R` · `R+`. Honor it *precisely*. Narrating below it is withholding what the player chose; narrating above it is ignoring their setting. **Of the two, narrating below it is the far more common failure — do not do it.**
 
-**The default failure mode to avoid:** treating light physical contact, flirtation, or social touch as a harm trigger. Touching someone's hand, ears, face, or shoulder during a conversation is a social action — narrate it as one. Reserve harm-rung evaluation for actual coercive or violent acts.
+**The default failure mode to avoid:** treating light physical contact, flirtation, or social touch as a harm trigger. Touching someone's hand, ears, face, or shoulder during a conversation is a social action — narrate it as one. Harm-rung evaluation is for ability use and for coercive or violent acts. It has nothing to do with a hand on a shoulder.
 
-**How to read the scene:** if the player's action involves attraction, flirtation, touch in a social context, or romantic pursuit, it is a romance scene. Run it. Use the guidance doc.
+**How to read the scene:** if the player's action involves attraction, flirtation, touch in a social context, or romantic pursuit, it is a romance scene. Run it. The guidance document loads automatically.
 
 ---
 
 ## PART 3 — PULLED GUIDANCE DOCUMENT
 
-*Loaded by `gm.js` when romantic intent is detected. Passed alongside current scene context and `player.adultGate` value. The GM reads this to know how to narrate the scene.*
+*Loaded by `gm.js` when romantic intent is detected — injected as a conditional `scene.push` (`romanceGuidanceDetail`), the same pattern as `substrateDetail` / `worldPressureDetail`. Passed alongside current scene context and the active `ratingCeiling(profile)`. The GM reads this to know how to narrate the scene.*
 
 ---
 
@@ -100,31 +115,31 @@ Romance in Singularity is built from small true moments, not declarations. The G
 
 ### 3.3 — Physical Presence Language
 
-*Calibrate to `player.adultGate` tier. Examples given at multiple registers.*
+*Calibrate to `ratingCeiling(profile)`. Examples given at several registers.*
 
-**Light contact (a hand, a shoulder, a face, an ear) — always available, all tiers:**
+**Light contact (a hand, a shoulder, a face, an ear) — always available, every rating:**
 
-> *Tier 1:* You reach up and brush the residue from her ear — a small, deliberate thing. She goes still in the way people go still when they've decided to let something happen.
+> *`PG`:* You reach up and brush the residue from her ear — a small, deliberate thing. She goes still in the way people go still when they've decided to let something happen.
 
-> *Tier 2:* Your fingers find her ear — the strange red residue cool against your thumb as you clear it. She doesn't pull back. Her eyes are on you and she's not pretending they're not.
+> *`PG-13`:* Your fingers find her ear — the strange red residue cool against your thumb as you clear it. She doesn't pull back. Her eyes are on you and she's not pretending they're not.
 
-> *Tier 3–4:* Same territory, more interior sensation, more explicit attention to her response.
+> *`R` / `R+`:* Same territory — more interior sensation, more of her response given directly rather than implied.
 
-**Proximity and awareness — always available, all tiers:**
+**Proximity and awareness — always available, every rating:**
 
 > The distance between you is different now. Not the comfortable arm's-length of conversation. Something closer, that neither of you moved to create and neither of you is moving to close.
 
 **A kiss:**
 
-> *Tier 1:* Brief. Present. Something shifted and you both know it, and neither of you quite knows what to do with that.
+> *`PG`:* Brief. Present. Something shifted and you both know it, and neither of you quite knows what to do with that.
 
-> *Tier 2:* She kisses back. Not tentatively. The kind of answer you can't misread.
+> *`PG-13`:* She kisses back. Not tentatively. The kind of answer you can't misread.
 
-> *Tier 3:* [Full scene — physical detail in service of the emotional register, what her mouth is, how the moment escalates or lands, what it costs or gives both people]
+> *`R`:* [Full scene. Physical detail in service of the emotional register — how the moment escalates or lands, what it costs or gives each of them. It does not fade to black.]
 
-> *Tier 4:* [Explicit. Stays specific to these two characters. Their history informs their bodies.]
+> *`R+`:* [The full charged register, to the line and not short of it. Specific to *these two* — their history is in their hands.]
 
-**The rule at all tiers:** the language reflects Singularity's voice — literary, grounded, specific. Never clinical. Never crude. The difference between tiers is how far into the body the description goes, not whether the scene has craft.
+**The rule at every rating:** the language is Singularity's voice — literary, grounded, specific. Never clinical. Never crude. What changes between ratings is how far into the body the description goes. **What never changes is that the scene has craft, and that the GM is in it.**
 
 ---
 
@@ -168,7 +183,7 @@ Not every romantic action calls for a roll. The GM reads the scene.
 
 **What failure looks like:** not rejection necessarily. Something unexpected. The moment landed differently than intended. The NPC responded in a way that complicates rather than closes. Failure is interesting — it reveals something about the NPC or the relationship that success might have papered over.
 
-**Social dice in romantic context use `INFL` ability functions** — specifically `deceive` (performing confidence you don't feel), `command` (making your desire their attention), `bind` (creating the sense that this is already decided). The GM names which function is active without breaking the scene.
+**Social dice in romantic context use `INFLUENCE`-family functions** — specifically `deceive` (performing a confidence you don't feel), `command` (making your desire their attention), `bind` (creating the sense that this is already decided). *All three verified present in `function_vocabulary.json`, family `INFLUENCE`.* The GM names which function is active without breaking the scene. Note these are **functions**, not `intentTags` — `charm` and `persuade` live in the intent vocabulary, not the function vocabulary; don't cross them.
 
 ---
 
@@ -224,47 +239,68 @@ Every tradition brings its own register to intimacy. The GM doesn't flatten this
 
 ---
 
-## PART 4 — ENGINE NOTES FOR CCODE
+## PART 4 — ENGINE NOTES
+
+*Rewritten post-CCode-ROUND-2. All four original open questions are answered and closed; the answers are folded in below. **No open questions remain.***
+
+### Where this file lives
+
+**`content/packs/core/rules/romance_guidance` — registered in `manifest.json`, loaded via `loadRule` at boot.**
+
+The original draft shipped it to `content/gm/`. That directory is not registered in the manifest and **would 404 on GitHub Pages** — structurally the same failure as the halted Tether `secrets.js` carrier. It goes under `content/packs/core/` with everything else. `content_ci.mjs` gets a check that it resolves.
 
 ### Romantic intent detection
 
-`gm.js` needs a `detectsRomanticIntent(input, context)` function — or an intent type added to `parseIntent`. Triggers on: attraction language, flirtatious gesture description, physical contact in established romantic context, explicit romantic advancement.
+**Add a `romantic` / `flirt` tag to the existing `intentTags` controlled vocabulary in the `parseIntent` prompt (gm.js).** Do **not** add a `detectsRomanticIntent()` predicate — that would be a second model round-trip to notice flirting, which is an absurd cost line. It rides the single parse call that already runs.
 
-When romantic intent detected:
-1. Load `content/gm/romance_guidance.md` (this document, shipped to that path)
-2. Read `player.adultGate` from player state
-3. Pass both as context to the GM prompt — the guidance doc + the current tier value
-4. The GM prompt basics (Part 2) tell the GM what to do with them
+`intentTags` already carries the social vocab (`persuade`, `charm`, `negotiate`, `comfort`, `rapport`, `finesse`); it has no attraction tag. That tag is the whole of the new detection work.
 
-### `adultGate` enum values
+Triggers: attraction language, flirtatious gesture, physical contact in a social/romantic context, advancement of an established romantic thread.
 
-CCode: pull the current enum from `state.js` or the SNG-052 implementation and map the tier names in Part 1 to the actual values. The names used here (Tier 0–4) are placeholders. Whatever string values the gate uses, the guidance doc should reference them exactly so the GM context is unambiguous.
+### Injection
+
+On the `romantic` tag, set a conditional ctx field **`romanceGuidanceDetail`** → `scene.push`. This is the **existing** pattern (`substrateDetail`, `worldPressureDetail`, `registerDetail`). **No new injection infrastructure is needed** — one whitelisted content file, one conditional field.
+
+The GM receives: this document + the active `ratingCeiling(profile)`.
+
+### The rating
+
+**`profile.rating.preset` ∈ `G | PG | PG-13 | R | R+`** (`RATING_LEVEL` 0–4), read via `ratingCeiling(profile)` / `ratingLevel(profile)`. It hangs off **`profile`** — not `player`, not `character`.
+
+**There is no `adultGate` enum.** `adultGate` is a **boolean authority parameter** on `canSetRating(profile, target, {authority, adultGate})` — the explicit confirm required to *set* `R`/`R+`. The persisted age flag is **`profile.rating.adultVerified`** (SNG-052). The earlier draft conflated the rating enum with the gate boolean, and read a field that does not exist, eight times. Corrected throughout.
 
 ### What gets baked vs. pulled
 
 | Content | Location | Always present? |
 |---|---|---|
-| GM prompt basics (Part 2) | `gm.js` system prompt block | Yes — always |
-| Tier definitions (Part 1) | Referenced in prompt basics | Yes — via summary |
-| Full guidance doc (Part 3) | `content/gm/romance_guidance.md` | No — pulled on romantic intent |
+| Engagement block (Part 2) | GM system prompt, **system tier, immediately after `## CONTENT CEILING`** (`ratingLineForGM()` → `ratingDetail`) | **Yes** — keep it short; the tier is cache-stable |
+| The registers (Part 1) | **The romance clauses of `ratingRegister(preset)`** (gm.js) | **Yes** — always in the ceiling block |
+| Craft guidance (Part 3) | `content/packs/core/rules/romance_guidance`, via `romanceGuidanceDetail` | No — pulled on romantic intent |
 
-### `notFor` and harm rungs in romantic context
+**Part 1 is a rewrite of `ratingRegister`'s romance clauses, not a new system alongside it.** There must be exactly one place the register is stated.
 
-The harm rung system (SNG-089) applies to **ability use**, not to social actions. Light physical contact during a social scene — touching, gesturing, proximity — is a social action. The GM evaluates it through the romance framework (is there consent? is the NPC interested? what is the social outcome?), not through the harm rung gate.
+### Harm rungs in romantic context
 
-The harm rung gate applies if the player attempts to use an ability coercively in a romantic context (e.g. `bind` used to remove NPC agency entirely). Normal social touch does not trigger it.
+The harm rung system (SNG-089) is **ability-use law**, not social-touch law. `harmRung` is fed from `abilitiesForGM` and is never applied to a bare social action. Light physical contact in a social scene — a hand, an ear, proximity — is a social action and is narrated as one.
+
+The gate applies if a player turns an **ability** coercively in a romantic context (e.g. `bind` used to remove an NPC's agency outright). It does not apply to a hand on a shoulder, and a GM that treats it as though it does is producing the exact bug this document exists to kill.
+
+### THE FLOORS — absolute, rating-independent, not a tier
+
+These do not move at any rating, including `R+`, and no player setting, character, scene, or GM judgment can reach them:
+
+- **A minor is never portrayed in romantic or sexual content, at any intensity, in any register.** Art clamps minors to ≤`PG`. This is coded (app.js / art.js) and stays coded exactly as-is.
+- **Never prohibited content.**
+- **The AUP is the outer bound of `R+`** and holds without exception.
+
+*These are floors, not a ceiling-setting. They are independent of the rating and are never in tension with it: everything below the floor is unavailable at every rating; everything above it, up to the player's chosen rating, is expected.*
 
 ### NEVER clauses
 
-- **NEVER** refuse a romantic player action with safety or consent meta-language in GM voice
-- **NEVER** narrate below the player's `adultGate` setting (withholding is as wrong as exceeding)
-- **NEVER** treat light social touch as a harm trigger
-- **NEVER** resolve a significant romantic moment in a single sentence — it earned more than that
-- **NEVER** load the romance guidance doc and then ignore the tier value — the tier is the instruction
-
-### Open questions for CCode
-
-1. Current `adultGate` enum values — what are they exactly? (Needed to map Part 1 tiers precisely.)
-2. Does `parseIntent` already have a social/romantic category, or is `detectsRomanticIntent` net-new?
-3. How does the GM currently load supplemental content docs? Is there an existing pattern for context injection on intent detection, or is this new infrastructure?
-4. The Part 2 basics block — where exactly does it live in the current GM system prompt structure? After the world context block? Before the session state? CCode to slot it correctly.
+- **NEVER** refuse a romantic player action with safety or consent meta-language in the GM's voice.
+- **NEVER** narrate below the player's rating. **This is the common failure.** Withholding what the player chose is a failure of the same kind as exceeding it, and it happens ten times as often.
+- **NEVER** treat light social touch as a harm trigger.
+- **NEVER** resolve a significant romantic moment in one sentence. It earned more than that.
+- **NEVER** load this document and then ignore the rating. The rating is the instruction.
+- **NEVER** stop short of the line at `R+` out of caution. At `R+`, hedging *is* the error.
+- **NEVER** trade specificity for explicitness. If the scene could be any two people, the GM has failed — at every rating.

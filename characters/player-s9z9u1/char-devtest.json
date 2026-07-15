@@ -40,7 +40,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 85,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -163,62 +163,26 @@
         "player": "I want to plan this out — I need to get the runebound spear finished before the forge cools, and Pell's craft has to meet the socket cleanly.",
         "summary": "Mapped the forge plan in the service corridor — the spear's socket needs Pell's taper confirmed before the cooling window closes.",
         "narration": "The ledger is under your arm and the corridor is quiet, but your mind has already moved on — to Pell, to the forge, to an unfinished spear whose socket won't wait for you to solve every problem in the Edge District first.\n\nYou trace it out in the narrow blue-white light: the socket needs a clean fit, which means Pell's shaft has to taper to exact tolerances before the forge-metal sets. A runebound spear isn't like ordinary work — the binding runs through the join, and a loose socket doesn't just wobble, it breaks the resonance line entirely. The sequence matters. First, you confirm the taper on Pell's side — that's the variable you don't control. Then you seat the head in stages: partial set, check the line, full press. If the fit is off by more than a hair's width at partial, you pull and recut before the metal hardens. The forge's cooling window gives you maybe forty minutes once the head comes off the heat. Enough time if you move without hesitation.\n\nThe plan is clean. What it requires is actually being at the forge — which means leaving this corridor, this district, and the unanswered question of Fendt's red-chalk name on a public board. The ledger in your hands already makes that question loud. The spear makes it louder still: you can't carry every thread at once, and the forge doesn't care about contamination reports.\n\nPell is somewhere in the valley with an unfinished shaft. Keeper Aldris Vael is somewhere in this district, beginning their morning. Both of them are waiting, in different ways, on what you do next."
+      },
+      {
+        "player": null,
+        "summary": "Lira, an Edge District apprentice, waits in the service corridor — a warm, unhurried nearness neither of you has moved to close.",
+        "narration": "The corridor has emptied. The apprentices' voices fade around the far corner of the lane, swallowed by the crystal towers and the soft, diffuse morning light beginning to pool between them — that particular Radiant Plateau light that seems to arrive from everywhere at once, sourceless and warm.\n\nShe is already there when you turn: leaning against the corridor wall with one shoulder, arms loosely crossed, the way someone leans when they've been waiting but won't admit it. Apprentice-rank sash, undone at the ends — the mark of someone who stopped caring about the formality of it some time ago. Her name is Lira. You've spoken twice before, both times over the paving work, and both times she stayed longer than she needed to. Her eyes are the color of the light-guide strip at full noon, a pale amber-grey that the Plateau's optics-weavers would call 'neutral spectrum,' as if naming it neutrally could make it less interesting to look at. She notices you noticing. Doesn't look away.\n\n\"You were in there a while,\" she says. Not an accusation — more a door left open. Her gaze drops once to the ledger tucked under your arm, then back up, and she makes no remark about it. Whatever she suspects, she's choosing not to name it. The corridor narrows the space between you to something that requires a small, deliberate effort to maintain. Neither of you has made it.\n\nThe morning light reaches the corridor's far mouth in a single long bar, turns the baseboard strip a warmer blue, and somewhere past the towers a filtration chime rings once and goes quiet. The moment holds."
       }
     ],
     "lastTurn": {
-      "narration": "The ledger is under your arm and the corridor is quiet, but your mind has already moved on — to Pell, to the forge, to an unfinished spear whose socket won't wait for you to solve every problem in the Edge District first.\n\nYou trace it out in the narrow blue-white light: the socket needs a clean fit, which means Pell's shaft has to taper to exact tolerances before the forge-metal sets. A runebound spear isn't like ordinary work — the binding runs through the join, and a loose socket doesn't just wobble, it breaks the resonance line entirely. The sequence matters. First, you confirm the taper on Pell's side — that's the variable you don't control. Then you seat the head in stages: partial set, check the line, full press. If the fit is off by more than a hair's width at partial, you pull and recut before the metal hardens. The forge's cooling window gives you maybe forty minutes once the head comes off the heat. Enough time if you move without hesitation.\n\nThe plan is clean. What it requires is actually being at the forge — which means leaving this corridor, this district, and the unanswered question of Fendt's red-chalk name on a public board. The ledger in your hands already makes that question loud. The spear makes it louder still: you can't carry every thread at once, and the forge doesn't care about contamination reports.\n\nPell is somewhere in the valley with an unfinished shaft. Keeper Aldris Vael is somewhere in this district, beginning their morning. Both of them are waiting, in different ways, on what you do next.",
-      "sceneSummary": "Mapped the forge plan in the service corridor — the spear's socket needs Pell's taper confirmed before the cooling window closes.",
+      "narration": "The corridor has emptied. The apprentices' voices fade around the far corner of the lane, swallowed by the crystal towers and the soft, diffuse morning light beginning to pool between them — that particular Radiant Plateau light that seems to arrive from everywhere at once, sourceless and warm.\n\nShe is already there when you turn: leaning against the corridor wall with one shoulder, arms loosely crossed, the way someone leans when they've been waiting but won't admit it. Apprentice-rank sash, undone at the ends — the mark of someone who stopped caring about the formality of it some time ago. Her name is Lira. You've spoken twice before, both times over the paving work, and both times she stayed longer than she needed to. Her eyes are the color of the light-guide strip at full noon, a pale amber-grey that the Plateau's optics-weavers would call 'neutral spectrum,' as if naming it neutrally could make it less interesting to look at. She notices you noticing. Doesn't look away.\n\n\"You were in there a while,\" she says. Not an accusation — more a door left open. Her gaze drops once to the ledger tucked under your arm, then back up, and she makes no remark about it. Whatever she suspects, she's choosing not to name it. The corridor narrows the space between you to something that requires a small, deliberate effort to maintain. Neither of you has made it.\n\nThe morning light reaches the corridor's far mouth in a single long bar, turns the baseboard strip a warmer blue, and somewhere past the towers a filtration chime rings once and goes quiet. The moment holds.",
+      "sceneSummary": "Lira, an Edge District apprentice, waits in the service corridor — a warm, unhurried nearness neither of you has moved to close.",
       "choices": [
         {
-          "label": "Find Keeper Aldris Vael now — hand over the ledger before leaving the district. The forge can wait an hour if the evidence lands in the right hands first.",
+          "label": "Hold her gaze and close the distance between you — say nothing yet.",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.8
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "deliver",
-            "careful",
-            "trust"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Leave a coded note on the accountability board — near Fendt's name, pointed enough that Vael reads it, opaque enough that no one else does — then go find Pell.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {
-            "falsehood_truth": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "plan",
-            "careful",
-            "indirect"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Go straight to Pell and the forge — the spear's window is real and the ledger is already safe in your hands. Vael can be found afterward.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "focus",
-            "careful",
-            "prioritize"
+            "flirt",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -227,21 +191,52 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight on the accountability board before leaving — read the light-history around Fendt's name and see who wrote it, and when.",
+          "label": "Tell her she stayed. Ask why.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "flirt",
+            "connect"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight — let her light-history tell you something about how she's been waiting.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.7
+            "dark_light": 0.6
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study",
-            "careful",
-            "investigate"
+            "flirt"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
-          "trivial": false,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Lean against the wall beside her — same posture, same unhurried ease — and let the moment breathe.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -252,65 +247,94 @@
         "energy": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-clean-numbers",
-          "note": "Ledger in hand; plan mapped — deliver to Aldris Vael or carry it to the forge first. The cooling window and the evidence window are in direct tension."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Edge District, Radiant Plateau — morning. Standing in the service corridor behind the Common Hall, one step from the lane, the array-office door closed behind you. The light-guide strip along the baseboard runs cold blue-white. Early spring light begins to warm the crystal towers visible through the corridor's far mouth.",
+        "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white now warming at the corridor's far mouth where early spring light enters. The lane outside is quieter; apprentices have moved off around the far corner.",
         "npcsPresent": [
           {
-            "name": "Apprentices (several)",
-            "state": "still visible between the towers on the lane outside, absorbed in beam-checks"
+            "name": "Lira",
+            "state": "leaning against the corridor wall, arms loosely crossed, sash undone at the ends — watching the character with calm, unhurried attention; the distance between them is small and deliberate"
           }
         ],
         "objects": [
-          "Lower Filtration Ledger — in your hands, tucked under your arm",
-          "Array-office door — closed, re-latched behind you",
-          "Light-guide strip — cold blue-white, running the baseboard of the service corridor",
-          "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record, visible on the exterior face",
-          "Light-guide street paving — gap now notably wider with three stones removed"
+          "Lower Filtration Ledger — tucked under the character's arm",
+          "Array-office door — closed, re-latched behind",
+          "Light-guide strip — cold blue-white, warming toward the corridor mouth",
+          "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record",
+          "Light-guide street paving — gap noticeably wider with three stones removed"
         ],
         "threads": [
+          "Lira has noticed the ledger and chosen not to name it — her silence on that is deliberate",
           "Fendt's red chalk marking sits unanswered on the board",
           "Keeper Aldris Vael is somewhere in the district, beginning their morning",
-          "The ledger in your hands is evidence — its value depends entirely on whose hands receive it next",
-          "The array-office will be noticed as entered if anyone checks the door carefully",
+          "The ledger's value depends entirely on whose hands receive it next",
           "The runebound spear's forge window: Pell's socket-fit needs to happen before the metal cools"
         ]
       },
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "lira",
+          "name": "Lira",
+          "role": "Apprentice optics-weaver, Edge District, Radiant Plateau",
+          "description": "Apprentice-rank sash worn loose, amber-grey eyes, at ease in ways that suggest she stopped caring about district formality some time ago. She's spoken with the character twice over the paving work and has lingered both times.",
+          "note": "Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open.",
+          "learned": [
+            "She was waiting for the character in the corridor",
+            "She is comfortable with silence and with noticing things she doesn't name"
+          ],
+          "skillsObserved": [
+            "discretion",
+            "patience"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Present in the service corridor behind the Common Hall, waiting near the character in an unhurried nearness"
+        }
+      ],
       "factUpdates": [],
       "placeUpdates": [],
-      "codexUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "lira",
+          "label": "Lira — Edge District Apprentice",
+          "kind": "person",
+          "entityId": "lira",
+          "fact": "An apprentice optics-weaver in the Edge District who has sought the character's company twice over the paving work; met in the service corridor, she noticed the ledger and chose silence on it — deliberate discretion, not ignorance.",
+          "links": [
+            "radiant-plateau",
+            "the-clean-numbers"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short pause to map the plan in the corridor — a few minutes only"
-      }
+        "why": "a quiet moment in the corridor — barely a quarter-hour"
+      },
+      "generateRequest": [],
+      "encounterOps": [],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Edge District, Radiant Plateau — morning. Standing in the service corridor behind the Common Hall, one step from the lane, the array-office door closed behind you. The light-guide strip along the baseboard runs cold blue-white. Early spring light begins to warm the crystal towers visible through the corridor's far mouth.",
+      "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white now warming at the corridor's far mouth where early spring light enters. The lane outside is quieter; apprentices have moved off around the far corner.",
       "npcsPresent": [
         {
-          "name": "Apprentices (several)",
-          "state": "still visible between the towers on the lane outside, absorbed in beam-checks"
+          "name": "Lira",
+          "state": "leaning against the corridor wall, arms loosely crossed, sash undone at the ends — watching the character with calm, unh"
         }
       ],
       "objects": [
-        "Lower Filtration Ledger — in your hands, tucked under your arm",
-        "Array-office door — closed, re-latched behind you",
-        "Light-guide strip — cold blue-white, running the baseboard of the service corrid",
+        "Lower Filtration Ledger — tucked under the character's arm",
+        "Array-office door — closed, re-latched behind",
+        "Light-guide strip — cold blue-white, warming toward the corridor mouth",
         "District Common Hall accountability board — Fendt's name in red chalk, no accomp",
-        "Light-guide street paving — gap now notably wider with three stones removed"
+        "Light-guide street paving — gap noticeably wider with three stones removed"
       ],
       "threads": [
+        "Lira has noticed the ledger and chosen not to name it — her silence on that is deliberate",
         "Fendt's red chalk marking sits unanswered on the board",
         "Keeper Aldris Vael is somewhere in the district, beginning their morning",
-        "The ledger in your hands is evidence — its value depends entirely on whose hands receive it next",
-        "The array-office will be noticed as entered if anyone checks the door carefully",
+        "The ledger's value depends entirely on whose hands receive it next",
         "The runebound spear's forge window: Pell's socket-fit needs to happen before the metal cools"
       ]
     }
@@ -351,7 +375,36 @@
       "startedAt": "2026-07-11T22:11:38.224Z"
     }
   ],
-  "npcRegistry": {},
+  "npcRegistry": {
+    "lira": {
+      "id": "lira",
+      "name": "Lira",
+      "role": "Apprentice optics-weaver, Edge District, Radiant Plateau",
+      "description": "Apprentice-rank sash worn loose, amber-grey eyes, at ease in ways that suggest she stopped caring about district formality some time ago. She's spoken with the character twice over the paving work and has lingered both times.",
+      "firstMet": {
+        "locationId": "radiant_plateau_edge",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open."
+      ],
+      "knownFacts": [
+        "She was waiting for the character in the corridor",
+        "She is comfortable with silence and with noticing things she doesn't name"
+      ],
+      "skillsObserved": [
+        "discretion",
+        "patience"
+      ],
+      "status": "active",
+      "statusNote": "Present in the service corridor behind the Common Hall, waiting near the character in an unhurried nearness",
+      "lastSeen": {
+        "locationId": "radiant_plateau_edge",
+        "day": 1
+      }
+    }
+  },
   "placeMemory": {
     "radiant_plateau_edge": {
       "visits": 1,
@@ -433,12 +486,27 @@
         "day": 1,
         "worldDay": 12,
         "text": "Word reaches you: A dead animal was brought back to life in Millbrook's upper meadow — no known ability in the valley's three civilizations accounts for it cleanly (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-13T14:25:39.402Z",
-    "lastCanonWorldDay": 13,
-    "lastTickWorldDay": 13
+    "lastSharedReadAt": "2026-07-15T16:55:19.895Z",
+    "lastCanonWorldDay": 15,
+    "lastTickWorldDay": 15
   },
   "bio": null,
   "subAttributes": {
@@ -565,6 +633,22 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "lira": {
+        "id": "lira",
+        "label": "Lira — Edge District Apprentice",
+        "kind": "person",
+        "facts": [
+          "[d1] An apprentice optics-weaver in the Edge District who has sought the character's company twice over the paving work; met in the service corridor, she noticed the ledger and chose silence on it — delibe"
+        ],
+        "links": [
+          "radiant-plateau",
+          "the-clean-numbers"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "lira",
+        "updatedDay": 1
       }
     }
   },
@@ -580,8 +664,8 @@
   "actionCount": 5,
   "grantsVersion": 1,
   "reconcileVersion": 5,
-  "updatedAt": 1783952796030,
-  "rev": 32,
+  "updatedAt": 1784134603222,
+  "rev": 39,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -730,11 +814,16 @@
     },
     "aspirations": []
   },
-  "syncedAt": 1783807898225,
+  "syncedAt": 1783952796030,
   "customAbilities": {},
   "companionBonds": {},
   "precursorAccess": [],
   "forkChoices": {},
   "backfillVersion": 1,
-  "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true"
+  "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
+  "teachers": {},
+  "regionsKnown": {
+    "valley": 1
+  },
+  "foreclosed": []
 }

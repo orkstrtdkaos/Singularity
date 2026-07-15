@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.5681414325150368,
+    "spectrumId": -0.589734360889285,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
@@ -208,6 +208,14 @@
         "health": 2
       },
       "consumable": true
+    },
+    {
+      "id": null,
+      "name": "River Whetstone (Pell's)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A smooth river-flat whetstone — Pell's own, returned to the bench twice and given away once. Now in her pocket, not yours.",
+      "consumable": false
     }
   ],
   "deeds": [
@@ -1625,111 +1633,72 @@
         "player": "We should move, yes... thank you for telling me - kiss her on the cheek.  What haven't you asked for?",
         "summary": "Silas kisses Pell on the cheek and asks what she hasn't asked for — she names the habit plainly, picks up her pack, and the road calls.",
         "narration": "You lean in and press your lips to her cheek — not the jaw, not the mouth, the cheek, which is its own thing entirely: the kind of touch that doesn't reach for anything, just lands and means it. She goes still for half a second the way she does, that full-attention arrival, and then she breathes out and the forge-face comes back up, softer than usual at the edges.\n\n'What haven't I asked for.' She says it flat, not quite a question — she's repeating the shape of it back to herself, holding it up to the forge-light to see what it's made of. The river whetstone goes into her coat pocket, which is not where it lives, and she notices and puts it back on the bench with a small precise gesture that has nothing to do with the whetstone. 'I haven't asked for any of it.' A beat. 'That's the habit.'\n\nShe picks up her pack — the real pack, both hands, settled onto her shoulder with the ease of something done a thousand times — and there is something in the motion that is also an answer. Not deflection. Resolution. She has been waiting for the road because the road is the thing she knows how to ask for. The other wanting, the particular wanting she named at the forge morning's close with your hand on her jaw and her cheek pressed into your palm — that one she's been carrying without a word for it for longer than two winters, you suspect, and she is not about to start making requests now. She'll manage it badly and be content that she is, and she'll let you watch her do it, and that is, from Pell, an enormous amount.\n\nHuginn drops from the roofline and lands once, hard, on the doorpost. One sound — low, deliberate, timed — and it tilts its head toward the south lane and the road north. It is not gentle about it. The forge fire has gone to ash. The morning is moving without you."
+      },
+      {
+        "player": "Before you go - tell her that asking is a skill, and she cna practice it on you... hand her the whetstone and head out the door.",
+        "summary": "Silas gives Pell the whetstone and the simplest possible lesson — asking is a skill, practice it on me — and both of them walk out into the morning.",
+        "narration": "You pick up the river whetstone from the bench — the exact spot she returned it to, twice — and hold it out to her on your open palm. Not a gesture, not a ceremony. Just the stone, offered.\n\n'Asking is a skill,' you say. 'You can practice it on you.'\n\nShe looks at your hand for a moment. Then she takes the whetstone and turns it once between her fingers — reading it the way she reads everything, grain and weight and what it's for — and tucks it into her coat pocket. This time she leaves it there.\n\nHuginn drops from the doorpost to your shoulder in one unhurried movement, settles, and says nothing. The forge behind you has gone fully cold. The south-lane door is open and the mid-morning light is coming through it flat and pale, early-spring without any warmth in it yet, and the lane is quiet enough that you can hear the river two blocks over running its faint gray-green sound.\n\nPell shoulders her pack, adjusts the strap once with a smith's economy of motion, and steps through the door ahead of you. She does not look back at the forge. The road north is what she knows how to want openly, and she is already wanting it."
       }
     ],
     "lastTurn": {
-      "narration": "You lean in and press your lips to her cheek — not the jaw, not the mouth, the cheek, which is its own thing entirely: the kind of touch that doesn't reach for anything, just lands and means it. She goes still for half a second the way she does, that full-attention arrival, and then she breathes out and the forge-face comes back up, softer than usual at the edges.\n\n'What haven't I asked for.' She says it flat, not quite a question — she's repeating the shape of it back to herself, holding it up to the forge-light to see what it's made of. The river whetstone goes into her coat pocket, which is not where it lives, and she notices and puts it back on the bench with a small precise gesture that has nothing to do with the whetstone. 'I haven't asked for any of it.' A beat. 'That's the habit.'\n\nShe picks up her pack — the real pack, both hands, settled onto her shoulder with the ease of something done a thousand times — and there is something in the motion that is also an answer. Not deflection. Resolution. She has been waiting for the road because the road is the thing she knows how to ask for. The other wanting, the particular wanting she named at the forge morning's close with your hand on her jaw and her cheek pressed into your palm — that one she's been carrying without a word for it for longer than two winters, you suspect, and she is not about to start making requests now. She'll manage it badly and be content that she is, and she'll let you watch her do it, and that is, from Pell, an enormous amount.\n\nHuginn drops from the roofline and lands once, hard, on the doorpost. One sound — low, deliberate, timed — and it tilts its head toward the south lane and the road north. It is not gentle about it. The forge fire has gone to ash. The morning is moving without you.",
-      "sceneSummary": "Silas kisses Pell on the cheek and asks what she hasn't asked for — she names the habit plainly, picks up her pack, and the road calls.",
+      "narration": "You pick up the river whetstone from the bench — the exact spot she returned it to, twice — and hold it out to her on your open palm. Not a gesture, not a ceremony. Just the stone, offered.\n\n'Asking is a skill,' you say. 'You can practice it on you.'\n\nShe looks at your hand for a moment. Then she takes the whetstone and turns it once between her fingers — reading it the way she reads everything, grain and weight and what it's for — and tucks it into her coat pocket. This time she leaves it there.\n\nHuginn drops from the doorpost to your shoulder in one unhurried movement, settles, and says nothing. The forge behind you has gone fully cold. The south-lane door is open and the mid-morning light is coming through it flat and pale, early-spring without any warmth in it yet, and the lane is quiet enough that you can hear the river two blocks over running its faint gray-green sound.\n\nPell shoulders her pack, adjusts the strap once with a smith's economy of motion, and steps through the door ahead of you. She does not look back at the forge. The road north is what she knows how to want openly, and she is already wanting it.",
+      "sceneSummary": "Silas gives Pell the whetstone and the simplest possible lesson — asking is a skill, practice it on me — and both of them walk out into the morning.",
       "choices": [
         {
-          "label": "Take the lead out the door — Memory across your shoulder, Huginn ahead, Pell at your side. No more ceremony.",
+          "label": "Head straight north through the village and out the gate — no more stops, the road has been waiting long enough",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "move",
-            "lead"
+            "depart"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Before you go — tell her that asking is a skill, and she can practice it on you. Then take the door.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "bond",
-            "name"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Bank the forge fire properly before you leave — her forge, her work; it deserves a clean ending.",
+          "label": "Make one last pass by the well — fill the third waterskin from the village supply before you leave clean water behind",
           "attribute": "practical",
           "subAttribute": "craft",
-          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "prepare",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pause at the south lane — check whether the child who came to the door this morning is still around. Unfinished business has a way of following.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "investigate",
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Walk out with Pell and let the road settle around you both before saying anything — let the village fall behind in silence",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "tend"
+            "connect"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Watch her shoulder the pack and see if there's something she's leaving behind that she doesn't mean to — the whetstone, a tool, something. Hand it back without comment.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "observe",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "scene": {
-        "setting": "Pell's forge interior, south lane of Millbrook — fire gone to ash, mid-morning light under the south-lane door. Both dressed, packs shouldered or nearly so.",
-        "npcsPresent": [
+        "inventoryAdd": [
           {
-            "name": "Pell",
-            "state": "Pack on her shoulder, whetstone returned to the bench — forge-face up but softer; standing near the door, ready but not yet moving."
-          },
-          {
-            "name": "Huginn",
-            "state": "On the doorpost. One sound made. Head tilted toward the south lane. Waiting."
+            "name": "River Whetstone (Pell's)",
+            "kind": "tool",
+            "description": "A smooth river-flat whetstone — Pell's own, returned to the bench twice and given away once. Now in her pocket, not yours.",
+            "consumable": false
           }
         ],
-        "objects": [
-          "Memory (spear, across both packs)",
-          "Expedition kit — inventoried and packed",
-          "Pell's kit — blankets, hatchet, braided line, leather tool-case, food bundle",
-          "Cured Bladder Waterskin",
-          "Forge fire — gone to ash",
-          "River whetstone (Pell's — returned to its exact spot on the bench)",
-          "Contact Names Scrap (Sorel, Leth) — in the pack",
-          "Valve Failure Timeline note — in the pack"
-        ],
-        "threads": [
-          "The habit Pell named — she doesn't ask; whether that changes on the road is open",
-          "The child's errand — retreated from the door, unresolved",
-          "Huginn is pushing the departure; the road north is waiting"
-        ]
+        "inventoryRemove": []
       },
       "npcUpdates": [
         {
@@ -1737,78 +1706,90 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered. Ready for the road.",
+          "note": "Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how to want openly.",
           "learned": [
-            "Her not-asking is a habit, named without apology — she carries wants without words for them and has done so a long time"
+            "Silas named asking as a learnable skill and offered himself as practice — she received it plainly"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the forge door, pack on shoulder, ready to walk north with Silas — the road is what she knows how to ask for."
+          "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — the forge is behind her and she did not look back."
         },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "note": "Dropped from the roofline to the doorpost and made one timed sound toward the south lane. Not gentle about it.",
-          "learned": [],
+          "role": "Companion",
+          "note": "Dropped from the doorpost to Silas's shoulder without ceremony. Waiting. The forge is done.",
           "status": "active",
-          "statusNote": "On the doorpost, pushing departure north."
+          "statusNote": "On Silas's shoulder, facing north."
         }
       ],
-      "factUpdates": [
+      "scene": {
+        "setting": "South lane of Millbrook, just outside Pell's forge — mid-morning pale light, early spring, no warmth yet. The forge door is open behind them; the lane ahead runs north toward the village well and the north gate.",
+        "npcsPresent": [
+          {
+            "name": "Pell",
+            "state": "Pack shouldered, whetstone in coat pocket — walking north through the lane, ahead of Silas, not looking back."
+          },
+          {
+            "name": "Huginn",
+            "state": "On Silas's shoulder. Oriented north. Quiet."
+          }
+        ],
+        "objects": [
+          "Memory (spear, across both packs)",
+          "Expedition kit — inventoried and packed",
+          "Cured Bladder Waterskin",
+          "Contact Names Scrap (Sorel, Leth) — in the pack",
+          "Valve Failure Timeline note — in the pack",
+          "Forge door — open behind them, forge fire cold"
+        ],
+        "threads": [
+          "The child who came to the south-lane door — retreated unanswered; may still be on the lane",
+          "The third waterskin — village well is on the way north",
+          "The road north is open: Fen's intake is the first destination, twenty minutes past the upper meadow"
+        ]
+      },
+      "placeUpdates": [
         {
-          "op": "add",
-          "text": "Pell named her habit plainly at the forge door on World-day 15: she hasn't asked for any of it — that's the habit. The want is present and managed without requests.",
-          "subjectId": "pell"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "She names her own not-asking as a habit — long-standing, unsentimental about it. The road is what she knows how to want openly. The other wanting she carries without words for it, and does not intend to start making requests.",
-          "links": [
-            "the-death-bound-spear",
-            "millbrook",
-            "mountain-pass"
-          ]
+          "note": "Silas gave Pell the river whetstone at the forge threshold on World-day 15 mid-morning — the last thing said before departure: asking is a skill, practice it on me. The forge now stands cold and empty.",
+          "subPlace": {
+            "name": "Pell's Forge",
+            "note": "Cold and empty as of World-day 15 mid-morning — both makers departed north, forge fire ash.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the forge door before departure — the morning advancing, Huginn marking it."
+        "why": "A brief exchange at the forge threshold before stepping out"
       },
-      "scene_ended": false
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Pell's forge interior, south lane of Millbrook — fire gone to ash, mid-morning light under the south-lane door. Both dressed, packs shouldered or nearly so.",
+      "setting": "South lane of Millbrook, just outside Pell's forge — mid-morning pale light, early spring, no warmth yet. The forge door is open behind them; the lane ahead runs north toward the village well and the north gate.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Pack on her shoulder, whetstone returned to the bench — forge-face up but softer; standing near the door, ready but not "
+          "state": "Pack shouldered, whetstone in coat pocket — walking north through the lane, ahead of Silas, not looking back."
         },
         {
           "name": "Huginn",
-          "state": "On the doorpost. One sound made. Head tilted toward the south lane. Waiting."
+          "state": "On Silas's shoulder. Oriented north. Quiet."
         }
       ],
       "objects": [
         "Memory (spear, across both packs)",
         "Expedition kit — inventoried and packed",
-        "Pell's kit — blankets, hatchet, braided line, leather tool-case, food bundle",
         "Cured Bladder Waterskin",
-        "Forge fire — gone to ash",
-        "River whetstone (Pell's — returned to its exact spot on the bench)",
         "Contact Names Scrap (Sorel, Leth) — in the pack",
-        "Valve Failure Timeline note — in the pack"
+        "Valve Failure Timeline note — in the pack",
+        "Forge door — open behind them, forge fire cold"
       ],
       "threads": [
-        "The habit Pell named — she doesn't ask; whether that changes on the road is open",
-        "The child's errand — retreated from the door, unresolved",
-        "Huginn is pushing the departure; the road north is waiting"
+        "The child who came to the south-lane door — retreated unanswered; may still be on the lane",
+        "The third waterskin — village well is on the way north",
+        "The road north is open: Fen's intake is the first destination, twenty minutes past the upper meadow"
       ]
     }
   },
@@ -1957,7 +1938,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Moved her hand to Memory without being guided — grain-reading instinct found the maker's mark and held it. Felt the spear take something from both of them. Named it flatly as a tec",
         "[d2] Received Silas's plain naming of the binding — turned her hand, closed her fingers around his, answered with 'you're going to make that hard to argue with. Good.' Both things meant",
         "[d2] Chose the door over another round — dressed efficiently, released Silas's hand without ceremony, composure reassembling as she moves. One dry remark: 'Forging. But the door first.'",
         "[d2] Turned the carter away efficiently, set the whetstone deliberately apart from the tool-clutter, asked 'Ready?' with the forge-face not quite fully back on.",
@@ -1966,17 +1946,18 @@
         "[d2] Received Silas's plain declaration of bond and desire — pressed her cheek into his palm once, then laid her hand flat on his sternum and admitted she's managing wanting him badly. ",
         "[d2] Held Memory with Silas — felt the collar at range, admitted it unprompted. Received the 'managing it badly' observation without deflecting. The tinker/farmhand question is landing.",
         "[d2] Named no prior claims plainly — one man, two winters back, sonic work from the Heights; it ran longer than it should, he stopped coming, she didn't go looking. Set the whetstone ba",
-        "[d2] Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered."
+        "[d2] Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered.",
+        "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t"
       ],
       "knownFacts": [
-        "When Silas sets the tempo deliberately, she meets it without argument — the recalibration is visible and quick",
         "Silas named the bond between them explicitly — practical, physical, and warden-deep",
         "She acknowledged Huginn's thread in the spear as evidence of her current reasoning failing",
         "She is managing the wanting badly, by her own account, and content to be",
         "Memory's collar rune is present to her even when she's not looking at it — she felt it through her thread",
         "Silas has named their bond's product explicitly as a first child and finds her admitted want intoxicating",
         "No current prior claims on her attention — the sonic-man from the Heights ended two winters ago, by his absence not her pursuit",
-        "Her not-asking is a habit, named without apology — she carries wants without words for them and has done so a long time"
+        "Her not-asking is a habit, named without apology — she carries wants without words for them and has done so a long time",
+        "Silas named asking as a learnable skill and offered himself as practice — she received it plainly"
       ],
       "skillsObserved": [
         "reading heat and evenness through the hand on the chest — th",
@@ -1987,7 +1968,7 @@
         "naming a technical and personal observation in the same regi"
       ],
       "status": "active",
-      "statusNote": "At the forge door, pack on shoulder, ready to walk north with Silas — the road is what she knows how to ask for.",
+      "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — the forge is behind her and she did not look back.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2139,7 +2120,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Valve Failure Timeline note annotated with CCW torque at both valve sites and wash-room as third column — three-room structural record now in hand at the housing.",
         "[d2] Wash-room site reached and entered — flagged floor, saddle hooks, and cradle-recess now accessible for examination.",
         "[d2] First kiss at the wash-room entrance on World-day 15 dawn — the site now carries that weight alongside its structural history.",
         "[d2] Cradle-recess identified as a load-bearing mount for something tall — iron-contact stain at base consistent with long-term object presence. Saddle-hooks read by Pell as a steadying rig, not a hanging ",
@@ -2150,7 +2130,8 @@
         "[d2] The forge interior was the site of the full early-morning between Silas and Pell on World-day 15 — the relationship carries that weight now alongside the spear-work and the repair.",
         "[d2] The forge morning between Silas and Pell concluded here on World-day 15 — Pell's unguarded finish and her open-faced aftermath are part of what this place now holds.",
         "[d2] The forge morning's close: Silas and Pell touched Memory together — the spear took a shared imprint. The rune at the collar north quarter rang once, audible, then settled. This place now holds that as",
-        "[d2] The child's errand at the south-lane door — retreated unanswered; may recur on the lane before Pell departs."
+        "[d2] The child's errand at the south-lane door — retreated unanswered; may recur on the lane before Pell departs.",
+        "[d2] Silas gave Pell the river whetstone at the forge threshold on World-day 15 mid-morning — the last thing said before departure: asking is a skill, practice it on me. The forge now stands cold and empty"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2193,7 +2174,7 @@
           "name": "Pell's Forge",
           "day": 1,
           "visited": true,
-          "note": "Sleeve job concluded; Memory handed to Silas; Pell coated and ready to walk north. Fire banked."
+          "note": "Cold and empty as of World-day 15 mid-morning — both makers departed north, forge fire ash."
         },
         "mara-wells-s-store": {
           "name": "Mara Wells's Store",
@@ -2883,15 +2864,15 @@
     }
   },
   "tendencies": {
-    "strategic": 61.673037278460455,
-    "cerebral": 39.68339056163238,
-    "social": 58.69244385036992,
-    "generous": 16.78220907913539,
-    "cautious": 48.019885660727084,
-    "physical": 0.8574680188142841,
-    "risky": 2.8516519633297115,
-    "ruthless": 2.1357265477431655,
-    "carousing": 1.4768206106049253
+    "strategic": 61.364672092068155,
+    "cerebral": 39.48497360882422,
+    "social": 60.39898163111807,
+    "generous": 17.698298033739714,
+    "cautious": 47.77978623242345,
+    "physical": 0.8531806787202127,
+    "risky": 2.837393703513063,
+    "ruthless": 2.1250479150044495,
+    "carousing": 1.4694365075519007
   },
   "aptitudes": [
     "strategist",
@@ -2899,7 +2880,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 254,
+  "actionCount": 255,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3017,8 +2998,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784155904067,
-  "rev": 348,
+  "updatedAt": 1784156239394,
+  "rev": 349,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3514,7 +3495,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 55
+    "valley": 56
   },
   "foreclosed": [
     "rootkin",

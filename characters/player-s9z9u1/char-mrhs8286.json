@@ -1226,21 +1226,30 @@
         "player": "Say plainly that Pells shoulder is getting a lot of action - and you like the way it feels.  Then challenge her to a race to the washroom... 1.5 miles against a slightish build... winner gets to pick date 3?",
         "summary": "Silas names what Pell's shoulder has been doing all morning; she accepts the race wager and turns north, already moving.",
         "narration": "You tuck the Valve Failure Timeline note back into your breast pocket and look at her — specifically at the point where her shoulder has been against yours for the last ten minutes, through the crouch at the housing, through the torque comparison, through the annotation. You let the silence sit for one beat.\n\n'Your shoulder is getting a lot of action this morning,' you say. 'I want you to know I'm not complaining.'\n\nPell goes still for exactly half a second — the kind of still that means she heard it, processed it, and is deciding what to do with it. Then she stands up from her haunches and brushes the rust-orange dust from her knees, unhurried. She looks at you sideways, one brow fractionally raised, mouth at the corner of something.\n\n'Noted,' she says. Flat, but not cold. The exact register of someone who found that funnier than they intend to let on.\n\nYou stand up beside her and Memory comes off the ground into your hand. The northeast line stretches away — soil-rise flattening into the furlong, then into scrub, then into the long slope north. A mile and a half of it, uphill the whole way.\n\n'Race you,' you say. 'Wash-room to first. Winner picks date three.'\n\nShe looks at you. Then she looks at the slope. Then back at you, and now the mouth-corner is open — a proper expression, quick and warm, there and gone. She picks up her kit.\n\n'You're carrying a spear,' she says.\n\n'You're a blacksmith.'\n\nA pause. 'Fair.' She turns north, already moving, and there's a looseness in her stride she hasn't had all morning — something that is not quite a jog but is faster than she needs to go. Over her shoulder, without looking back: 'First to the flagged floor.'\n\nHuginn drops from the fence-post and beats northeast without ceremony, already ahead of you both."
+      },
+      {
+        "player": "Call something at her back as you run — keep her laughing, close the distance in a different way",
+        "summary": "Race north begun — Pell leads, gap closed by a well-placed line, Huginn already out front.",
+        "narration": "The path north is firm clay and last year's dead grass, and Pell has twenty feet on you before you've fully straightened from the crouch. She moves fast for someone who spent the pre-dawn hours bent over forge work — a compact, ground-eating stride that doesn't look like speed until you're watching it eat the distance.\n\nYou start after her at a lope and call out: 'I should tell you, I have a significant advantage here — I have absolutely no idea where I'm going.'\n\nHuginn banks overhead, already ahead of both of you, unbothered by the whole contest.\n\nPell doesn't look back, but her stride breaks — a half-beat of something that isn't quite a stumble, and then her shoulders are moving wrong for running, which means she's laughing. She recovers fast, but the gap has closed six feet while she was doing it. 'Northeast,' she says, without turning. 'Follow the bird.'\n\nThe soil-rise runs alongside the path and then under it, the subtle swell of the buried ceiling pressing up through the clay. The morning is all cold air and the smell of turned earth and the creak of Memory's road-lashing against your palm. The wash-room is a mile and a half away. Huginn is already a dark shape against the hillside, tilting east.\n\nYou have ground to make up."
       }
     ],
     "lastTurn": {
-      "narration": "You tuck the Valve Failure Timeline note back into your breast pocket and look at her — specifically at the point where her shoulder has been against yours for the last ten minutes, through the crouch at the housing, through the torque comparison, through the annotation. You let the silence sit for one beat.\n\n'Your shoulder is getting a lot of action this morning,' you say. 'I want you to know I'm not complaining.'\n\nPell goes still for exactly half a second — the kind of still that means she heard it, processed it, and is deciding what to do with it. Then she stands up from her haunches and brushes the rust-orange dust from her knees, unhurried. She looks at you sideways, one brow fractionally raised, mouth at the corner of something.\n\n'Noted,' she says. Flat, but not cold. The exact register of someone who found that funnier than they intend to let on.\n\nYou stand up beside her and Memory comes off the ground into your hand. The northeast line stretches away — soil-rise flattening into the furlong, then into scrub, then into the long slope north. A mile and a half of it, uphill the whole way.\n\n'Race you,' you say. 'Wash-room to first. Winner picks date three.'\n\nShe looks at you. Then she looks at the slope. Then back at you, and now the mouth-corner is open — a proper expression, quick and warm, there and gone. She picks up her kit.\n\n'You're carrying a spear,' she says.\n\n'You're a blacksmith.'\n\nA pause. 'Fair.' She turns north, already moving, and there's a looseness in her stride she hasn't had all morning — something that is not quite a jog but is faster than she needs to go. Over her shoulder, without looking back: 'First to the flagged floor.'\n\nHuginn drops from the fence-post and beats northeast without ceremony, already ahead of you both.",
-      "sceneSummary": "Silas names what Pell's shoulder has been doing all morning; she accepts the race wager and turns north, already moving.",
+      "narration": "The path north is firm clay and last year's dead grass, and Pell has twenty feet on you before you've fully straightened from the crouch. She moves fast for someone who spent the pre-dawn hours bent over forge work — a compact, ground-eating stride that doesn't look like speed until you're watching it eat the distance.\n\nYou start after her at a lope and call out: 'I should tell you, I have a significant advantage here — I have absolutely no idea where I'm going.'\n\nHuginn banks overhead, already ahead of both of you, unbothered by the whole contest.\n\nPell doesn't look back, but her stride breaks — a half-beat of something that isn't quite a stumble, and then her shoulders are moving wrong for running, which means she's laughing. She recovers fast, but the gap has closed six feet while she was doing it. 'Northeast,' she says, without turning. 'Follow the bird.'\n\nThe soil-rise runs alongside the path and then under it, the subtle swell of the buried ceiling pressing up through the clay. The morning is all cold air and the smell of turned earth and the creak of Memory's road-lashing against your palm. The wash-room is a mile and a half away. Huginn is already a dark shape against the hillside, tilting east.\n\nYou have ground to make up.",
+      "sceneSummary": "Race north begun — Pell leads, gap closed by a well-placed line, Huginn already out front.",
       "choices": [
         {
-          "label": "Push pace immediately — close the gap before she gets her stride",
+          "label": "Push hard and close the gap — this is a footrace, run it like one",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {},
+          "axes": {
+            "violence_peace": 0.1,
+            "chaos_order": 0.1
+          },
           "difficulty": 15,
           "intentTags": [
             "risky",
-            "gamble"
+            "physical",
+            "compete"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1249,29 +1258,58 @@
           "emergenceId": null
         },
         {
-          "label": "Let her lead and conserve ground — the uphill is the race, not the first fifty feet",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call something at her back as you run — keep her laughing, close the distance in a different way",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Let her lead and watch how she navigates the slope — learn the ground, pick a moment",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.2,
+            "concrete_abstract": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "careful",
+            "scout",
+            "observe"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call something else at her back — one more line before breath runs short",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "violence_peace": 0.3,
+            "emotional_logical": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "play",
+            "connect",
+            "banter"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Slow to a walk and follow Huginn's line directly — arrive second, read the structure the whole way",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": 0.1,
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "study",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1288,28 +1326,27 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "East furlong path at the valve housing bend — cover plate tilted, rust-orange stain at the base. Morning sun fully up. Pell has turned north and is already moving, kit in hand. The soil-rise flattens into the furlong ahead, climbing toward scrub and the long northeast slope.",
+        "setting": "East furlong path running northeast — clay and dead grass, the soil-rise of the buried structure pressing up through the ground alongside. Morning sun up and cold. Pell is twenty feet ahead and moving fast; Huginn is a dark shape banking northeast, already well out front.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Moving north along the soil-rise line, faster than she needs to — a looseness in her stride, not looking back yet."
+            "state": "Running north, leading by twenty feet — shoulders still moving wrong for pure speed, which means the laugh hasn't fully cleared."
           },
           {
             "name": "Huginn",
-            "state": "Airborne, beating northeast, already ahead of both of them."
+            "state": "Airborne, banking northeast along the buried ceiling line, well ahead of both runners."
           }
         ],
         "objects": [
           "Memory (spear, in Silas's hand)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
-          "Valve Failure Timeline note (breast pocket — annotated: CCW torque at both valve sites, wash-room as third column)",
-          "East furlong valve housing — cover plate tilted, rust-orange stain at base"
+          "Valve Failure Timeline note (breast pocket — annotated: CCW torque at both valve sites, wash-room as third column)"
         ],
         "threads": [
-          "Race to the wash-room — winner picks date three",
-          "Dara Holt unbriefed — blue gate-post, bend before upper meadow",
+          "Race to the wash-room — Pell leading, gap partially closed",
           "Wash-room site unexamined — saddle hooks, stand-positions, unknown object in the cradle-recess",
+          "Dara Holt unbriefed — blue gate-post, bend before upper meadow",
           "When did the mechanism turn, and for whom"
         ]
       },
@@ -1319,51 +1356,45 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Received the shoulder remark with a half-second of stillness and then flat acknowledgment — funnier than she let on. Accepted the race wager without argument, invoked the spear weight, accepted the blacksmith counter, turned north moving.",
+          "note": "Led the race north from the valve housing — broke stride once at Silas's opening line, recovered fast, directed him to follow the bird.",
           "learned": [
-            "Silas named the physical ease between them directly and she did not deflect it",
-            "Agreed the race winner picks date three"
+            "Laughs physically — stride breaks before the sound comes"
           ],
-          "relationshipDelta": 1,
+          "skillsObserved": [
+            "fast ground-covering stride on uneven clay path"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Moving north along the east furlong path toward the wash-room site — a mile and a half, uphill, leading the race."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Pell and Silas have a standing wager — first to the flagged floor of the wash-room site picks the terms of date three.",
-          "subjectId": "pell"
+          "statusNote": "Running north along the east furlong path toward the wash-room site — leading the race by twenty feet."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the valve housing before the run north begins."
+        "why": "Short exchange and race launch from the valve housing — a few minutes on the path"
       }
     },
     "sceneState": {
-      "setting": "East furlong path at the valve housing bend — cover plate tilted, rust-orange stain at the base. Morning sun fully up. Pell has turned north and is already moving, kit in hand. The soil-rise flattens into the furlong ahead, climbing toward scrub and the long northeast slope.",
+      "setting": "East furlong path running northeast — clay and dead grass, the soil-rise of the buried structure pressing up through the ground alongside. Morning sun up and cold. Pell is twenty feet ahead and moving fast; Huginn is a dark shape banking northeast, already well out front.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Moving north along the soil-rise line, faster than she needs to — a looseness in her stride, not looking back yet."
+          "state": "Running north, leading by twenty feet — shoulders still moving wrong for pure speed, which means the laugh hasn't fully "
         },
         {
           "name": "Huginn",
-          "state": "Airborne, beating northeast, already ahead of both of them."
+          "state": "Airborne, banking northeast along the buried ceiling line, well ahead of both runners."
         }
       ],
       "objects": [
         "Memory (spear, in Silas's hand)",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
-        "Valve Failure Timeline note (breast pocket — annotated: CCW torque at both valve",
-        "East furlong valve housing — cover plate tilted, rust-orange stain at base"
+        "Valve Failure Timeline note (breast pocket — annotated: CCW torque at both valve"
       ],
       "threads": [
-        "Race to the wash-room — winner picks date three",
-        "Dara Holt unbriefed — blue gate-post, bend before upper meadow",
+        "Race to the wash-room — Pell leading, gap partially closed",
         "Wash-room site unexamined — saddle hooks, stand-positions, unknown object in the cradle-recess",
+        "Dara Holt unbriefed — blue gate-post, bend before upper meadow",
         "When did the mechanism turn, and for whom"
       ]
     }
@@ -1512,7 +1543,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Sat down beside Silas on the wall without being asked — shoulder to shoulder, unhurried, looking southeast. Said 'twenty minutes' once and nothing else.",
         "[d2] Called Silas thorough and methodical to his face — meant as assessment, not deflection. Pressed her shoulder against his. Said 'ask me again after the valve' — open verdict, not cl",
         "[d2] Received the third-date line without flinching — exhaled once, recalculated, said 'three dates' into the middle distance and filed it. Fell into step beside Silas without being ask",
         "[d2] Described the pre-Transition wash-room site unprompted details: dressed slate floor, close-fitted mortar, two hip-height saddle-mount ring-hooks, worn stand-positions, pressed wall",
@@ -1521,28 +1551,29 @@
         "[d2] Confirmed the northeast line runs toward the wash-room site — a mile and a half as the crow goes, deeper in and higher. Named the valve housing plainly as the working end: whatever",
         "[d2] Confirmed east furlong valve torque direction — counterclockwise, same axis as Fen's intake. Named the failure signature plainly: one mechanism doing two things in sequence. Stated",
         "[d2] Suggested the wash-room be added as a third column on the note — named it as an operator station with no mechanical failure, distinct from the valve rooms.",
-        "[d2] Received the shoulder remark with a half-second of stillness and then flat acknowledgment — funnier than she let on. Accepted the race wager without argument, invoked the spear wei"
+        "[d2] Received the shoulder remark with a half-second of stillness and then flat acknowledgment — funnier than she let on. Accepted the race wager without argument, invoked the spear wei",
+        "[d2] Led the race north from the valve housing — broke stride once at Silas's opening line, recovered fast, directed him to follow the bird."
       ],
       "knownFacts": [
-        "The soil-rise above the valve housing is a settling stone ceiling — the structure runs northeast from the housing for about forty feet",
         "The northeast line from the valve housing runs toward her pre-Transition wash-room site — the valve housing is the near/working end, the wash-room is the far/in",
         "The full structure spans roughly a mile and a half northeast into the hillside",
         "Both sleeve failures share identical counterclockwise torque — same failure mode, same stain pattern",
         "The torque originated inside the structure — something turned",
         "Named the wash-room as a third data point in the record — stand-positions and saddle hooks as operator-station markers, not working end",
         "Silas named the physical ease between them directly and she did not deflect it",
-        "Agreed the race winner picks date three"
+        "Agreed the race winner picks date three",
+        "Laughs physically — stride breaks before the sound comes"
       ],
       "skillsObserved": [
-        "reading animal behavior against a known baseline",
         "structural memory recall under field conditions",
         "connecting sensory evidence across years",
         "structural synthesis across separate sites from physical evi",
         "reading failure-mode direction from physical evidence under ",
-        "synthesizing two-site failure signature into a single mechan"
+        "synthesizing two-site failure signature into a single mechan",
+        "fast ground-covering stride on uneven clay path"
       ],
       "status": "active",
-      "statusNote": "Moving north along the east furlong path toward the wash-room site — a mile and a half, uphill, leading the race.",
+      "statusNote": "Running north along the east furlong path toward the wash-room site — leading the race by twenty feet.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2310,14 +2341,14 @@
     }
   },
   "tendencies": {
-    "strategic": 55.83783979046092,
-    "cerebral": 45.00867137658308,
-    "social": 52.52096485979799,
-    "generous": 15.222222659825603,
-    "cautious": 47.87070887690278,
-    "physical": 1.1936983726944992,
-    "risky": 2.9393096328316806,
-    "ruthless": 0.6088145090359074
+    "strategic": 55.558650591508616,
+    "cerebral": 44.78362801970017,
+    "social": 53.258360035499,
+    "generous": 15.146111546526475,
+    "cautious": 47.63135533251827,
+    "physical": 1.1877298808310266,
+    "risky": 2.9246130846675222,
+    "ruthless": 0.6057704364907278
   },
   "aptitudes": [
     "strategist",
@@ -2325,7 +2356,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 188,
+  "actionCount": 189,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2411,8 +2442,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784084757396,
-  "rev": 261,
+  "updatedAt": 1784085523942,
+  "rev": 262,
   "generated": {
     "schemaVersion": 1,
     "npc": {

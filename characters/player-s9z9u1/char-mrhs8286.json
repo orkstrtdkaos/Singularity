@@ -1381,118 +1381,86 @@
         "player": "Pell - Huginn is pretty reliable - are you ok with following his lead for a bit when we start out, after bringing Mara and Aldric up to speed?  Of course, I do Expect Huginn's lead to take us past that clear lake you mentioned...",
         "summary": "Silas proposes following Huginn northwest after the morning briefings; Pell accepts; Dara sends them off with plain advice.",
         "narration": "You turn to Pell and nod toward Huginn, who is still facing northwest on the packed earth — unmoving, with the patient certainty of something that has already decided.\n\n\"Huginn's reliable,\" you say. \"When we leave — after Mara and Aldric — I'd like to follow his lead for a bit. See where he points us.\" A pause, and then the rest of it, because it's worth naming: \"I do expect his lead takes us past that snowmelt pool you mentioned.\"\n\nPell looks at Huginn. Huginn does not look back. He is, as far as anyone can tell, simply looking northwest, with the calm of a creature that finds human deliberation mildly unnecessary. \"I can follow a bird,\" Pell says. It's almost dry enough to be deflection, but not quite — there's something quieter under it, the acceptance of someone who has spent enough time around you to know that Huginn's northwestward attention is probably a data point, not theater. Her eyes stay on the corvid a moment longer than casual. \"Three hours north of the interference ridge, you said.\" She says it to the bird as much as to you.\n\nDara has been watching from her doorstep without comment. She takes a last pull from her mug. \"Go brief Mara first,\" she says, quietly enough that it's advice, not an order. \"She'll have already counted the blanks. Tell her what it means and she won't need much else. Aldric — tell him there's something wrong with the water he already suspects is wrong.\" She tilts her chin toward the village, where the first chimney smoke is thickening uphill. \"Then go.\""
+      },
+      {
+        "player": "Say a proper goodbye to Dara before leaving her doorstep — she gave you her network and her deadline",
+        "summary": "Proper farewell to Dara — she sends them off with one instruction: someone who can get their hands dirty, before week five.",
+        "narration": "The goodbye is short, the way the right goodbyes are. You turn back to Dara where she stands at her doorstep with the mug in both hands, the frost still lifting off the herb bed to her left, and you meet her eyes — not the eyes she shows the channel crew, the other ones, the ones that are doing arithmetic about how much can still be held.\n\n\"Thank you,\" you say. \"For the network. For the deadline. For not asking us to be certain when we aren't.\"\n\nDara looks at you for a moment. Then she tips her mug toward you — not quite a salute, not quite a toast — and says, \"Week five. Before it.\" She glances once at Pell, then at Huginn's broad back still oriented northwest. \"Don't bring me a scholar. Bring me someone who can get their hands dirty.\"\n\nShe steps back through her door without ceremony. It closes on the sound of clay pipe-sections shifting against the wall — she is already moving to the first task of the day.\n\nPell exhales through her nose beside you. \"Right,\" she says. \"Mara first, then Aldric. You take them through it — I'll fill what you miss.\" Huginn has not moved. He stands on the packed earth three steps northwest, patient as a question that has already decided its own answer, and the dawn light sits flat and cold across his shoulders.\n\nThe village is waking. Chimney smoke thickens uphill. The well and the red door of Mara's store are ten minutes south down the lane, and the smokehouse a few minutes beyond."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Pell and nod toward Huginn, who is still facing northwest on the packed earth — unmoving, with the patient certainty of something that has already decided.\n\n\"Huginn's reliable,\" you say. \"When we leave — after Mara and Aldric — I'd like to follow his lead for a bit. See where he points us.\" A pause, and then the rest of it, because it's worth naming: \"I do expect his lead takes us past that snowmelt pool you mentioned.\"\n\nPell looks at Huginn. Huginn does not look back. He is, as far as anyone can tell, simply looking northwest, with the calm of a creature that finds human deliberation mildly unnecessary. \"I can follow a bird,\" Pell says. It's almost dry enough to be deflection, but not quite — there's something quieter under it, the acceptance of someone who has spent enough time around you to know that Huginn's northwestward attention is probably a data point, not theater. Her eyes stay on the corvid a moment longer than casual. \"Three hours north of the interference ridge, you said.\" She says it to the bird as much as to you.\n\nDara has been watching from her doorstep without comment. She takes a last pull from her mug. \"Go brief Mara first,\" she says, quietly enough that it's advice, not an order. \"She'll have already counted the blanks. Tell her what it means and she won't need much else. Aldric — tell him there's something wrong with the water he already suspects is wrong.\" She tilts her chin toward the village, where the first chimney smoke is thickening uphill. \"Then go.\"",
-      "sceneSummary": "Silas proposes following Huginn northwest after the morning briefings; Pell accepts; Dara sends them off with plain advice.",
+      "narration": "The goodbye is short, the way the right goodbyes are. You turn back to Dara where she stands at her doorstep with the mug in both hands, the frost still lifting off the herb bed to her left, and you meet her eyes — not the eyes she shows the channel crew, the other ones, the ones that are doing arithmetic about how much can still be held.\n\n\"Thank you,\" you say. \"For the network. For the deadline. For not asking us to be certain when we aren't.\"\n\nDara looks at you for a moment. Then she tips her mug toward you — not quite a salute, not quite a toast — and says, \"Week five. Before it.\" She glances once at Pell, then at Huginn's broad back still oriented northwest. \"Don't bring me a scholar. Bring me someone who can get their hands dirty.\"\n\nShe steps back through her door without ceremony. It closes on the sound of clay pipe-sections shifting against the wall — she is already moving to the first task of the day.\n\nPell exhales through her nose beside you. \"Right,\" she says. \"Mara first, then Aldric. You take them through it — I'll fill what you miss.\" Huginn has not moved. He stands on the packed earth three steps northwest, patient as a question that has already decided its own answer, and the dawn light sits flat and cold across his shoulders.\n\nThe village is waking. Chimney smoke thickens uphill. The well and the red door of Mara's store are ten minutes south down the lane, and the smokehouse a few minutes beyond.",
+      "sceneSummary": "Proper farewell to Dara — she sends them off with one instruction: someone who can get their hands dirty, before week five.",
       "choices": [
         {
-          "label": "Head to Mara's store now — brief her first, as Dara advised",
+          "label": "Head to Mara's store first — red door, east side of the well. Brief her on the surge scope; she already knows the sleeve blank count, she just needs to know what it means.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "inform",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Brief Aldric first — he's closer, and the supply logic lands harder before Mara hears it",
+          "label": "Head to Aldric's smokehouse directly — he suspects the water already; this confirms it and connects it to his accounts.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "inform",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Say a proper goodbye to Dara before leaving her doorstep — she gave you her network and her deadline",
+          "label": "Brief them together — find a quiet moment to bring both Mara and Aldric to the same place before the morning trade picks up.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Crouch to Huginn's level and ask him plainly: northwest — what's there?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "study",
+            "plan",
+            "persuade",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Follow Huginn now — Dara is briefed, and Huginn's patience has a limit you don't fully understand. Mara and Aldric can hear it from Dara.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "gamble",
             "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "title": "Meat for the Smokehouse",
-          "note": "Plan set: follow Huginn northwest after briefing Mara and Aldric on the surge scope this morning."
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Dara Holt's front doorstep — packed-earth path, herb bed dormant with frost lifting, clay pipe-sections staged against the house wall. Cold flat dawn light, chimney smoke thickening uphill. Village waking.",
+        "setting": "Packed-earth path outside Dara Holt's house — blue gate-post, herb bed with frost lifting, clay pipe-sections against the wall. Dara's door just closed. Cold flat dawn light, chimney smoke thickening uphill. Village waking.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing loose on the path, watching Huginn — has accepted the plan to follow his lead."
+            "state": "Standing loose on the path beside Silas, watching Huginn — ready to move south toward the village."
           },
           {
             "name": "Huginn",
-            "state": "Three steps northwest on the packed earth, oriented away from the Plateau direction — unmoving."
+            "state": "Three steps northwest on the packed earth, unmoving — oriented away from the Plateau direction."
           },
           {
             "name": "Dara Holt",
-            "state": "Mug in both hands at her doorstep — briefing fully concluded, watching Silas for his first move toward the village."
+            "state": "Gone inside — door closed, already moving to first task."
           }
         ],
         "objects": [
           "Memory (spear, across shoulders)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
-          "Clay pipe-sections stacked in staged repair order against the house wall",
-          "Dormant herb bed (left of path, frost lifting)",
-          "Blue gate-post",
-          "Mug (in Dara's hands)",
-          "Valve Failure Timeline (in Dara's apron)"
+          "Clay pipe-sections staged in repair order against the house wall",
+          "Dormant herb bed (frost lifting)",
+          "Blue gate-post"
         ],
         "threads": [
           "Mara and Aldric have not yet been briefed on the surge scope",
@@ -1504,71 +1472,52 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Accepted the plan to follow Huginn northwest after morning briefings — said 'I can follow a bird' with quiet acceptance.",
-          "learned": [
-            "Has accepted Huginn as a reliable directional guide for the search",
-            "Acknowledged the snowmelt pool as the likely destination without deflecting"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At Dara's doorstep, plan accepted — ready to brief Mara and Aldric then depart northwest with Silas."
-        },
-        {
-          "op": "update",
           "npcId": "dara-holt",
           "name": "Dara Holt",
-          "role": "Senior east-channel irrigator, Millbrook",
-          "note": "Advised Silas to brief Mara first, then Aldric — sent them off with plain tactical guidance.",
+          "note": "Received a proper farewell — tipped her mug, named her one requirement (someone who can get their hands dirty), and closed her door. Already moving to first task.",
           "learned": [
-            "Mara will have already counted the sleeve blanks — tell her what it means",
-            "Aldric already suspects the water — confirm it and he'll connect it to his accounts"
+            "Silas and Pell depart after briefing Mara and Aldric; Dara holds the east-channel network alone until the expert arrives"
           ],
-          "skillsObserved": [
-            "tactical advice under time pressure — sequencing the morning briefings by impact"
-          ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At her doorstep, briefing concluded — beginning east-channel mitigation planning independently."
+          "statusNote": "At her house, beginning east-channel mitigation planning — east-bend junctions are her first target, crew briefing by week two."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at Dara's doorstep — plan named, advice given, departure imminent."
+        "why": "A brief doorstep farewell — a few minutes at most."
       },
-      "sceneEnded": false
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Dara briefed and deployed — Mara and Aldric remain; Huginn oriented northwest, ready to guide after morning briefings conclude."
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Dara Holt's front doorstep — packed-earth path, herb bed dormant with frost lifting, clay pipe-sections staged against the house wall. Cold flat dawn light, chimney smoke thickening uphill. Village waking.",
+      "setting": "Packed-earth path outside Dara Holt's house — blue gate-post, herb bed with frost lifting, clay pipe-sections against the wall. Dara's door just closed. Cold flat dawn light, chimney smoke thickening uphill. Village waking.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing loose on the path, watching Huginn — has accepted the plan to follow his lead."
+          "state": "Standing loose on the path beside Silas, watching Huginn — ready to move south toward the village."
         },
         {
           "name": "Huginn",
-          "state": "Three steps northwest on the packed earth, oriented away from the Plateau direction — unmoving."
+          "state": "Three steps northwest on the packed earth, unmoving — oriented away from the Plateau direction."
         },
         {
           "name": "Dara Holt",
-          "state": "Mug in both hands at her doorstep — briefing fully concluded, watching Silas for his first move toward the village."
+          "state": "Gone inside — door closed, already moving to first task."
         }
       ],
       "objects": [
         "Memory (spear, across shoulders)",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
-        "Clay pipe-sections stacked in staged repair order against the house wall",
-        "Dormant herb bed (left of path, frost lifting)",
-        "Blue gate-post",
-        "Mug (in Dara's hands)",
-        "Valve Failure Timeline (in Dara's apron)"
+        "Clay pipe-sections staged in repair order against the house wall",
+        "Dormant herb bed (frost lifting)",
+        "Blue gate-post"
       ],
       "threads": [
         "Mara and Aldric have not yet been briefed on the surge scope",
@@ -1601,14 +1550,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Order-Sense confirms the wash-room as the operator's station and head of the full buried channel system — the structure's purpose is operational infrastructure, not ruin. The instrument that controlled it is missing.",
         "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information.",
         "Pell reads the hydraulic consequence: six-week failure window, redirected surge, blown east-channel network. Dara Holt identified as the necessary recipient of the full briefing.",
         "Failure section footprint mapped and marked on the hillside. Next step: brief Dara Holt before the east-channel network is hit.",
         "Dara's pipe-section stack reveals she has already been staging a repair schedule in silence — she knows the individual valve seats but not the surge scope. Timeline and vault footprint remain to be disclosed.",
         "Briefing complete — Dara has the surge scope and is staging mitigation. Next: brief Mara and Aldric, then identify and seek the pre-Transition expert.",
         "Dara has set a hard deadline: expert must arrive before week five. Next immediate steps: brief Mara and Aldric this morning, then begin the search for a pre-Transition systems expert.",
-        "Plan set: follow Huginn northwest after briefing Mara and Aldric on the surge scope this morning."
+        "Plan set: follow Huginn northwest after briefing Mara and Aldric on the surge scope this morning.",
+        "Dara briefed and deployed — Mara and Aldric remain; Huginn oriented northwest, ready to guide after morning briefings conclude."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1861,9 +1810,8 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d2] First meeting — door already open when Pell arrived. Took in Pell, Silas, and Huginn in sequence without flinching. Said Pell's name like the start of a sentence she hadn't finishe",
         "[d2] Named World-day minus-nine herself before Pell could show her anything — she's been sitting on a theory for at least a week and filed nothing because she couldn't prove the mechani",
         "[d2] Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the ",
         "[d2] Heard the northeast axis and the CCW torque mechanism — absorbed it cleanly. Named that she ordered pipe sections six days ago, without knowing what she was preparing for. Asked ho",
@@ -1872,17 +1820,18 @@
         "[d2] Accepted the division of labor — she leads mitigation from this end while Silas and Pell seek a pre-Transition expert. Asked directly who they're going to find. Set a fifth-week de",
         "[d2] Filed 'beyond the valley' as acceptable — set a hard pre-week-five deadline and instructed Silas to brief Mara and Aldric before the village is fully up.",
         "[d2] Watching the exchange between Silas, Pell, and Huginn without comment — waiting for Silas's first move.",
-        "[d2] Advised Silas to brief Mara first, then Aldric — sent them off with plain tactical guidance."
+        "[d2] Advised Silas to brief Mara first, then Aldric — sent them off with plain tactical guidance.",
+        "[d2] Received a proper farewell — tipped her mug, named her one requirement (someone who can get their hands dirty), and closed her door. Already moving to first task."
       ],
       "knownFacts": [
-        "Every seated sleeve blank on her network is at risk in the surge sequence",
         "Silas and Pell will seek a pre-Transition expert and bring them to Millbrook",
         "She is to brief Mara and Aldric or receive them once Silas does",
         "The east-bend junctions are her first mitigation target",
         "The pre-Transition expert search may require leaving the valley entirely",
         "She needs the expert back before week five to have anything to work with",
         "Mara will have already counted the sleeve blanks — tell her what it means",
-        "Aldric already suspects the water — confirm it and he'll connect it to his accounts"
+        "Aldric already suspects the water — confirm it and he'll connect it to his accounts",
+        "Silas and Pell depart after briefing Mara and Aldric; Dara holds the east-channel network alone until the expert arrives"
       ],
       "skillsObserved": [
         "rapid operational response — immediately asking timeline rat",
@@ -1893,7 +1842,7 @@
         "tactical advice under time pressure — sequencing the morning"
       ],
       "status": "active",
-      "statusNote": "At her doorstep, briefing concluded — beginning east-channel mitigation planning independently.",
+      "statusNote": "At her house, beginning east-channel mitigation planning — east-bend junctions are her first target, crew briefing by week two.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2597,15 +2546,15 @@
     }
   },
   "tendencies": {
-    "strategic": 64.0850605088861,
-    "cerebral": 45.13909336338967,
-    "social": 52.26788768830806,
-    "generous": 15.856556297698292,
-    "cautious": 54.00009091444699,
-    "physical": 1.0219040137317408,
-    "risky": 3.398511108463614,
-    "ruthless": 1.394615403511275,
-    "carousing": 1.7600293846828583
+    "strategic": 63.76463520634167,
+    "cerebral": 44.91339789657272,
+    "social": 52.00654824986652,
+    "generous": 16.777273516209803,
+    "cautious": 53.73009045987476,
+    "physical": 1.0167944936630822,
+    "risky": 3.381518552921296,
+    "ruthless": 1.3876423264937185,
+    "carousing": 1.751229237759444
   },
   "aptitudes": [
     "strategist",
@@ -2613,7 +2562,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 219,
+  "actionCount": 220,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2699,8 +2648,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784141633905,
-  "rev": 304,
+  "updatedAt": 1784141777576,
+  "rev": 305,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3125,7 +3074,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 14
+    "valley": 15
   },
   "foreclosed": [
     "rootkin",

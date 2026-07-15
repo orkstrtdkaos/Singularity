@@ -25,7 +25,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.61";
+const APP_VERSION = "1.8.62";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -975,6 +975,17 @@ function migrate(c) {
   // per people; regionsKnown: turns spent among a people's region.
   if (!c.teachers) c.teachers = {};
   if (!c.regionsKnown) c.regionsKnown = {};
+  // SNG-101: make the build-time closed-opposite set EXPLICIT (additive; the primary+secondary antipodes
+  // that domainAccess already computes). Promotion appends promoted-domain antipodes to it. domainCeilings
+  // / domainsAcquired stay unset → absent ⇒ station-derived ceilings, exactly as before.
+  if (!c.foreclosed) {
+    c.foreclosed = [];
+    const tidx = CONTENT.traditionIndex;
+    if (tidx && c.domains?.primary) for (const k of ["primary", "secondary"]) {
+      const a = c.domains[k] ? antipodeOf(c.domains[k], tidx) : null;
+      if (a && !c.foreclosed.includes(a)) c.foreclosed.push(a);
+    }
+  }
   if (!c.forkChoices) c.forkChoices = {}; // SNG-BATCH-5 Phase 2: permanent branch-fork picks
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
@@ -2501,7 +2512,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (turn.markDefiningMoment?.abilityId) {
     const mid = turn.markDefiningMoment.abilityId;
     const ab = fullCatalog()[mid];
-    const r = markDefiningMoment(character, mid, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks });
+    const r = markDefiningMoment(character, mid, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
     if (r.ok) turn.narration += `\n\n*✦ A defining moment — **${ab?.name}** is mastered now (rank 3).*`;
     else if (r.forkPending) { character.pendingMasteryFork = mid; turn.narration += `\n\n*⑂ A defining moment for **${ab?.name}** — but it stands at a fork. Choose its path on your Character screen to master it.*`; }
   }
@@ -2513,6 +2524,13 @@ function applyTurn(turn, resolution, playerWords = null) {
     character.teachers = character.teachers || {};
     character.teachers[tid] = { met: true, willing: turn.markTeacher.willing !== false, npcId: String(turn.markTeacher.npcId || "").slice(0, 60) || null };
     if (first && character.teachers[tid].willing) turn.narration += `\n\n*✦ You have a teacher among the ${traditionLabel(tid)} now — their deepest craft opens to you as you earn their people's trust.*`;
+  }
+  // SNG-101: the GM surfaces a promotion the character has EARNED — the engine flags it for the player to
+  // commit (Law 9), and only if promotionEligible is genuinely met. The GM can offer; it can never foreclose.
+  if (turn.offerPromotion?.domainKey === "secondary" || turn.offerPromotion?.domainKey === "tertiary") {
+    const dk = turn.offerPromotion.domainKey;
+    const e = promotionEligible(character, dk, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
+    if (e.eligible) { character.pendingPromotion = dk; turn.narration += `\n\n*✦ You are being recognized — you may be raised into **${traditionLabel(e.trad)}** as your ${e.to}. Choose on your Character screen; it will close the far pole of that axis to you.*`; }
   }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {
@@ -2767,7 +2785,7 @@ async function onChoice(choice) {
   // SNG-010: practice ledger — the single counting site
   {
     const usedIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
-    if (usedIds.length) { recordUse(character, usedIds); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks })); }
+    if (usedIds.length) { recordUse(character, usedIds); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
     // SNG-010C: a cast channeled with a bond-source companion present wakes evolving gear
     itemsAdvanced = noteCoUseAndRefresh(character, { usedAbilityIds: usedIds, activeCompanionIds: activeCompanions(character, CONTENT.companions).map(c => c.id), catalog: CONTENT.items });
     if (usedIds.length) notePerception(character, character.currentLocationId, hereNow(), { visited: true, usedAbilityIds: usedIds }, CONTENT.rules);
@@ -3634,6 +3652,22 @@ function renderCharacterScreen() {
           <span class="cs-val">${v}</span>
           ${character.pendingSubPoints > 0 && v < cap ? `<button class="grow-btn" data-grow2="${sub}">+</button>` : ""}
         </div>`; }).join("")}</div>
+    ${character.domains?.primary ? (() => {
+      // SNG-101/102: the great-circle domains you hold — station, ceiling, promotions, foreclosures.
+      const ROM = ["", "I", "II", "III", "IV", "V"];
+      const ceilOf = (t, def) => character.domainCeilings?.[t] ?? def;
+      const rows = [["primary", 5], ["secondary", 3], ["tertiary", 2]].filter(([k]) => character.domains?.[k]).map(([k, def]) => {
+        const t = character.domains[k]; const c = ceilOf(t, def); const promoted = character.domainCeilings?.[t] != null && c > def;
+        return `<div class="codex-fact"><strong>${esc(traditionLabel(t))}</strong> — ${k}${promoted ? " · <em>promoted</em>" : ""}, to Tier ${ROM[c]}</div>`;
+      }).join("");
+      const acq = (character.domainsAcquired || []).map(t => `<div class="codex-fact"><strong>${esc(traditionLabel(t))}</strong> — acquired, to Tier ${ROM[ceilOf(t, 1)]}</div>`).join("");
+      const fore = (character.foreclosed || []).length ? `<div class="hint">Foreclosed — reachable only as a braid: ${character.foreclosed.map(traditionLabel).join(", ")}</div>` : "";
+      const promos = ["tertiary", "secondary"].map(k => {
+        if (!character.domains?.[k]) return ""; const e = promotionEligible(character, k, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
+        if (!e.eligible) return ""; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>✦ You may rise:</strong> become ${esc(traditionLabel(e.trad))} as your ${e.to} <button class="grow-btn practiced" data-promote="${k}">Promote…</button></div>`;
+      }).join("");
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Domains ${infoDot("circle.domains")}</h3>${rows}${acq}${fore}${promos}</div>`;
+    })() : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities ${infoDot("ability.tiers")} <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; new points learn other crafts" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
       ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
       ${character.abilities.map(a => { const ab = fullCatalog()[a.abilityId]; if (!ab) return ""; const cost = effectiveEnergyCost(ab, character, rules);
@@ -3685,11 +3719,13 @@ function renderCharacterScreen() {
     renderForkModal(id, (key) => {
       setFork(character, id, key, CONTENT.branchForks);
       autoVerifyLeg("b5-fork", "chose a branch fork — the other path locks");
-      const r = markDefiningMoment(character, id, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks });
+      const r = markDefiningMoment(character, id, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
       if (r.ok) character.pendingMasteryFork = null;
       saveCharacter(character); renderCharacterScreen();
     });
   };
+  // SNG-101: promotion — the player commits (Law 9), the modal names the foreclosure cost.
+  for (const btn of app.querySelectorAll("[data-promote]")) btn.onclick = () => renderPromotionModal(btn.dataset.promote);
   const aspPick = document.getElementById("asp-pick");
   if (aspPick) aspPick.onchange = () => { if (aspPick.value) { const r = declareAspiration(character, aspPick.value, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); } };
   for (const btn of app.querySelectorAll("[data-aspdrop]")) btn.onclick = () => { dropAspiration(character, btn.dataset.aspdrop); saveCharacter(character); renderCharacterScreen(); };
@@ -4577,7 +4613,7 @@ async function finishGambit(run) {
   for (const r of run.receipts) {
     const a = g.actions[r.index];
     const ids = [a?.abilityId, ...(a?.comboAbilities || [])].filter(Boolean);
-    if (ids.length) { recordUse(character, ids); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks })); }
+    if (ids.length) { recordUse(character, ids); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
   }
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
@@ -5115,6 +5151,33 @@ function renderForkModal(abilityId, onPick) {
     onPick(key);
   };
   document.getElementById("fork-cancel").onclick = () => el.remove();
+}
+
+/** SNG-101: the promotion commit modal — the ONE place a promotion is applied. Names the foreclosure
+ *  cost (Law 9), keeps-the-ground explicit, and only ever calls promote() on an eligible domain. */
+function renderPromotionModal(domainKey) {
+  const e = promotionEligible(character, domainKey, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
+  if (!e.eligible) { renderCharacterScreen(); return; }
+  const ROM = ["", "I", "II", "III", "IV", "V"];
+  const newCeiling = e.to === "primary" ? 5 : 3;
+  const anti = antipodeOf(e.trad, CONTENT.traditionIndex);
+  const closesNew = domainKey === "tertiary" && anti && !(character.foreclosed || []).includes(anti); // secondary→primary antipode is already closed
+  document.getElementById("promote-modal")?.remove();
+  const el = document.createElement("div");
+  el.id = "promote-modal"; el.className = "fork-modal";
+  el.innerHTML = `<div class="fork-card"><div class="fork-title">Become ${esc(traditionLabel(e.trad))} as your ${e.to}?</div>` +
+    `<div class="fork-prompt">This raises your ceiling in ${esc(traditionLabel(e.trad))} to <strong>Tier ${ROM[newCeiling]}</strong>.` +
+    (closesNew ? ` It also <strong>closes ${esc(traditionLabel(anti))}</strong> to you by ordinary means — anything you've already learned of it you keep, and the braid road remains. This is a choice about who you're becoming.` : ` The far pole of that axis was already closed to you.`) + `</div>` +
+    `<div class="fork-paths"><button class="fork-path" id="promote-commit"><div class="fp-name">Commit</div><div class="fp-grants">Rise into your ${e.to}.</div></button></div>` +
+    `<button class="fork-cancel" id="promote-cancel">Not yet</button></div>`;
+  document.body.appendChild(el);
+  document.getElementById("promote-commit").onclick = () => {
+    const r = promote(character, domainKey, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
+    el.remove();
+    if (r.ok) { if (character.pendingPromotion === domainKey) character.pendingPromotion = null; saveCharacter(character); }
+    renderCharacterScreen();
+  };
+  document.getElementById("promote-cancel").onclick = () => el.remove();
 }
 
 function rankOptsFor() { return { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, catalog: fullCatalog() }; }

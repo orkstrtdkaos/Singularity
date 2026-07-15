@@ -117,6 +117,10 @@
     "capstoneThreshold": 10,
     "requiresTeacher": true
   },
+  "promotion": {
+    "tertiaryToSecondary": { "minReputation": 8, "requiresTeacher": true, "minInDomainRanks": 3 },
+    "secondaryToPrimary": { "minReputation": 12, "requiresTeacher": true, "minInDomainRanks": 6, "requiresRegionStanding": true, "minRegionTurns": 12, "requiresCeilingExhausted": true }
+  },
   "subAttributes": {
     "physical": [
       "strength",

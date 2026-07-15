@@ -9,7 +9,7 @@
 
 import { slugify } from "./quests.js";
 import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression, forkPending } from "./skilltree.js";
-import { domainAccess, traditionOf, isFolkTradition } from "./traditions.js";
+import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
 
 // Practiced enough for `targetRank`? Inlined (not imported from practice.js) to avoid a circular
@@ -147,6 +147,7 @@ export function autoAdvancePracticedRanks(character, rules, opts = {}) {
     if (!practicedForRank(character, owned.abilityId, 2, rules)) continue;
     const req = rules.leveling?.rankLevelReq?.["2"] ?? 1;
     if ((character.level || 1) < req) continue;            // the level bar still holds
+    if (isForeclosedNative(character, owned.abilityId, opts.catalog, opts.traditionIndex)) continue; // SNG-101: a foreclosed native does not deepen by ordinary means
     if (opts.branchForks && forkPending(character, owned.abilityId, 2, opts.branchForks)) continue;
     owned.level = 2;
     advanced.push(owned.abilityId);
@@ -164,6 +165,7 @@ export function markDefiningMoment(character, abilityId, rules, opts = {}) {
   const max = rules.leveling?.maxAbilityRank ?? 3;
   if (owned.level >= max) return { ok: false, why: "already mastered" };
   if (owned.level < 2) return { ok: false, why: "not yet practiced — rank 2 comes first" };
+  if (isForeclosedNative(character, abilityId, opts.catalog, opts.traditionIndex)) return { ok: false, why: "foreclosed — you chose the other end of this axis; only a braid crosses it now" }; // SNG-101
   if (!practicedForRank(character, abilityId, owned.level + 1, rules)) return { ok: false, why: "not practiced enough for mastery yet" };
   const req = rules.leveling?.rankLevelReq?.[String(owned.level + 1)] ?? 1;
   if ((character.level || 1) < req) return { ok: false, why: `requires level ${req}` };
@@ -208,7 +210,75 @@ export function domainGateFor(ab, character, traditionIndex) {
   // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
   if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
   if (!traditionIndex || !character?.domains?.primary) return { allowed: true, penalty: 1, band: "open" };
-  return domainAccess(ab, ab?.levelReq || 1, character.domains, traditionIndex);
+  return domainAccess(ab, ab?.levelReq || 1, character.domains, traditionIndex, domainOpts(character));
+}
+
+// ---------- SNG-101: domain promotion (raise a domain's ceiling; foreclose its antipode) ----------
+
+/** Ranks earned in a people (sum of owned ability levels of that tradition). */
+function inDomainRanks(character, traditionId, catalog, index) {
+  let n = 0;
+  for (const o of character.abilities || []) { const ab = catalog?.[o.abilityId]; if (ab && traditionOf(ab, index) === traditionId) n += o.level || 0; }
+  return n;
+}
+
+/** SNG-101: is a chosen domain eligible for promotion up one station? domainKey ∈ {tertiary, secondary}.
+ *  Reads the SNG-100b standing bar + the `promotion` thresholds. Returns {eligible, to, trad, missing[]}.
+ *  Never mutates. `opts.catalog` + `opts.traditionIndex` needed for the in-domain-rank / ceiling checks. */
+export function promotionEligible(character, domainKey, rules, opts = {}) {
+  const trad = character?.domains?.[domainKey];
+  const to = domainKey === "tertiary" ? "secondary" : domainKey === "secondary" ? "primary" : null;
+  if (!trad || !to) return { eligible: false, to: null, trad: null, missing: ["not a promotable domain"] };
+  const p = (rules?.promotion || {})[domainKey === "tertiary" ? "tertiaryToSecondary" : "secondaryToPrimary"] || {};
+  const missing = [];
+  const { score } = standingWithPeople(character, trad, rules);
+  if (score < (p.minReputation ?? 8)) missing.push(`deeper standing with this people (${score}/${p.minReputation ?? 8})`);
+  if ((p.requiresTeacher ?? true)) { const t = character?.teachers?.[trad]; if (!(t && t.met && t.willing)) missing.push("a willing teacher of this people"); }
+  if (p.minInDomainRanks && inDomainRanks(character, trad, opts.catalog, opts.traditionIndex) < p.minInDomainRanks)
+    missing.push(`more of their craft practiced (${inDomainRanks(character, trad, opts.catalog, opts.traditionIndex)}/${p.minInDomainRanks} ranks)`);
+  if (p.requiresRegionStanding) { const total = Object.values(character?.regionsKnown || {}).reduce((a, b) => a + b, 0); if (total < (p.minRegionTurns ?? 12)) missing.push("more time spent among their people (region presence)"); }
+  if (p.requiresCeilingExhausted && opts.catalog && opts.traditionIndex) {
+    const owned = (character.abilities || []).filter(o => { const ab = opts.catalog[o.abilityId]; return ab && traditionOf(ab, opts.traditionIndex) === trad && (ab.levelReq || 1) >= 3; });
+    if (!owned.length || owned.some(o => o.level < 2)) missing.push("their Tier-III craft mastered to rank 2 (you've not yet exhausted what secondary allows)");
+  }
+  return { eligible: missing.length === 0, to, trad, missing };
+}
+
+/** SNG-101: apply a promotion. Raises the domain's ceiling and forecloses its antipode. Additive only —
+ *  never lowers a ceiling, never strips an ability (Law 14; throws if it would). Callers must have
+ *  confirmed via the UI (Law 9) and checked promotionEligible; `opts.force` skips the eligibility re-check
+ *  for tests. `opts.traditionIndex` is required to resolve the antipode. */
+export function promote(character, domainKey, rules, opts = {}) {
+  const trad = character?.domains?.[domainKey];
+  const to = domainKey === "tertiary" ? "secondary" : domainKey === "secondary" ? "primary" : null;
+  if (!trad || !to) return { ok: false, why: "not a promotable domain" };
+  if (!opts.force) { const e = promotionEligible(character, domainKey, rules, opts); if (!e.eligible) return { ok: false, why: e.missing.join("; ") }; }
+  const newCeiling = to === "primary" ? 5 : 3;
+  character.domainCeilings = character.domainCeilings || {};
+  const cur = character.domainCeilings[trad] ?? (domainKey === "tertiary" ? 2 : 3);
+  if (newCeiling < cur) throw new Error("SNG-101 Law 14: promotion must never lower a ceiling");
+  character.domainCeilings[trad] = Math.max(cur, newCeiling);
+  // foreclose the antipode (directional — closes new native learning/ranking; owned ground & braids stay)
+  const anti = opts.traditionIndex ? antipodeOf(trad, opts.traditionIndex) : null;
+  let foreclosedAntipode = null;
+  if (anti) { character.foreclosed = character.foreclosed || []; if (!character.foreclosed.includes(anti)) { character.foreclosed.push(anti); foreclosedAntipode = anti; } }
+  return { ok: true, trad, to, newCeiling, foreclosedAntipode };
+}
+
+/** SNG-101: the additive per-character access state domainAccess consults (all absent-tolerant). */
+export function domainOpts(character) {
+  return { foreclosed: character?.foreclosed, domainCeilings: character?.domainCeilings, domainsAcquired: character?.domainsAcquired };
+}
+
+/** SNG-101: is this OWNED ability a NATIVE of a foreclosed antipode (so it must not rank up by ordinary
+ *  means)? Braids (nativeOrCombination === "combination") are exempt — the road across the axis. */
+function isForeclosedNative(character, abilityId, catalog, index) {
+  const set = character?.foreclosed;
+  if (!set || !set.length || !catalog || !index) return false;
+  const ab = catalog[abilityId];
+  if (!ab || ab.nativeOrCombination === "combination") return false;
+  const trad = traditionOf(ab, index);
+  return !!(trad && set.includes(trad));
 }
 
 /** SNG-100b: the capstone standing bar the accessGates fiction (SNG-049/050) always described but no

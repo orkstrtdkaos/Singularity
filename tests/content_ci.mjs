@@ -189,6 +189,12 @@ for (const pack of PACKS) {
   const cs = r.capstoneStanding;
   check("capstoneStanding names capstoneTier + capstoneThreshold", cs && typeof cs.capstoneTier === "number" && typeof cs.capstoneThreshold === "number",
     "meetsStandingBar reads these — without them the capstone bar never bites (SNG-049/050 stays unwired)");
+  // SNG-101: the promotion thresholds block. promotionEligible reads both sub-blocks.
+  const pr = r.promotion;
+  check("promotion names tertiaryToSecondary + secondaryToPrimary", pr && pr.tertiaryToSecondary && pr.secondaryToPrimary,
+    "promotionEligible reads rules.promotion[...] — absent ⇒ promotion never surfaces");
+  if (pr) check("promotion thresholds carry a minReputation", typeof pr.tertiaryToSecondary?.minReputation === "number" && typeof pr.secondaryToPrimary?.minReputation === "number",
+    "the standing threshold must be a number in peopleDisposition units");
 }
 
 // (4) location connectivity: dangling connections, one-way edges, unreachable locations

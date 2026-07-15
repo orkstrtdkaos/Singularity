@@ -78,25 +78,42 @@ const CAPSTONE_TIER = 4; // tier IV–V are the single-mastery capstones
 
 /** The access verdict for an ability of numeric tier T (1–5) given the character's chosen domains.
  *  Returns { allowed, penalty (skill-point multiplier), band, reason }. Pure. */
-export function domainAccess(ability, tier, domains, index) {
+/** SNG-101: `opts` (all optional, absent-tolerant — absent ⇒ exactly today's behaviour):
+ *   foreclosed: [traditionId]      — antipodes closed by promotion/acquisition (NATIVES only; braids cross)
+ *   domainCeilings: {[trad]: tier} — per-domain ceiling override (promotion raises it); else station default
+ *   domainsAcquired: [traditionId] — SNG-102 domains beyond the built three, entering at Tier I */
+export function domainAccess(ability, tier, domains, index, opts = {}) {
   const trad = traditionOf(ability, index);
   const T = Math.max(1, Math.min(5, Number(tier) || 1));
   if (!trad || !index) return { allowed: true, penalty: 1, band: "open", reason: "ungoverned" };
   if (isFolkTradition(trad, index)) return { allowed: true, penalty: 1, band: "folk", reason: "folk tradition — open in the Valley" };
   const primary = domains?.primary, secondary = domains?.secondary, tertiary = domains?.tertiary;
   if (!primary) return { allowed: true, penalty: 1, band: "open", reason: "no domain chosen yet" }; // pre-domain / legacy
+  const acquired = opts.domainsAcquired || [];
+  const cap = def => opts.domainCeilings?.[trad] ?? def; // promotion raises the station's default ceiling
 
-  // CLOSED — the antipode of a pole you've chosen an end of
+  // SNG-101 FORECLOSED — a pole you committed against by promoting its opposite. NATIVES only; a braid
+  // (nativeOrCombination === "combination") is the sanctioned road across the axis and is NEVER foreclosed.
+  if ((opts.foreclosed || []).includes(trad) && ability?.nativeOrCombination !== "combination")
+    return { allowed: false, penalty: 1, band: "foreclosed", reason: "foreclosed — you chose the other end of this axis; only a braid crosses it now" };
+
+  // CLOSED — the antipode of a pole you've chosen an end of (build-time; overlaps foreclosed for primary/secondary)
   if (trad === antipodeOf(primary, index)) return { allowed: false, penalty: 1, band: "closed", reason: "closed — the far pole of your primary axis" };
   if (secondary && trad === antipodeOf(secondary, index)) return { allowed: false, penalty: 1, band: "closed", reason: "closed — the far pole of your secondary axis" };
 
-  if (trad === primary) return { allowed: true, penalty: 1, band: "primary", reason: "your primary domain — all tiers" };
-  if (trad === secondary) return T <= 3
-    ? { allowed: true, penalty: 1, band: "secondary", reason: "secondary domain — to tier III" }
-    : { allowed: false, penalty: 1, band: "secondary", reason: "your secondary tops out at tier III" };
-  if (trad === tertiary) return T <= 2
-    ? { allowed: true, penalty: 1, band: "tertiary", reason: "tertiary domain — to tier II" }
-    : { allowed: false, penalty: 1, band: "tertiary", reason: "your tertiary tops out at tier II" };
+  if (trad === primary) return T <= cap(5)
+    ? { allowed: true, penalty: 1, band: "primary", reason: "your primary domain — all tiers" }
+    : { allowed: false, penalty: 1, band: "primary", reason: "beyond this domain's ceiling" };
+  if (trad === secondary) return T <= cap(3)
+    ? { allowed: true, penalty: 1, band: "secondary", reason: `secondary domain — to tier ${cap(3)}` }
+    : { allowed: false, penalty: 1, band: "secondary", reason: `your secondary tops out at tier ${cap(3)}` };
+  if (trad === tertiary) return T <= cap(2)
+    ? { allowed: true, penalty: 1, band: "tertiary", reason: `tertiary domain — to tier ${cap(2)}` }
+    : { allowed: false, penalty: 1, band: "tertiary", reason: `your tertiary tops out at tier ${cap(2)}` };
+  // SNG-102: an acquired domain — a people you joined mid-play, entering at Tier I, promotable like any other
+  if (acquired.includes(trad)) return T <= cap(1)
+    ? { allowed: true, penalty: 1, band: "acquired", reason: `an acquired people — to tier ${cap(1)}` }
+    : { allowed: false, penalty: 1, band: "acquired", reason: `you are still a novice of this acquired people (tier ${cap(1)})` };
 
   // adjacent to primary (kin): free, but not the capstones
   if (ringDistance(trad, primary, index) === 1) return T < CAPSTONE_TIER
@@ -104,7 +121,7 @@ export function domainAccess(ability, tier, domains, index) {
     : { allowed: false, penalty: 1, band: "adjacent", reason: "near a people is not being of them — no capstones" };
 
   // anything else reachable costs more (the existing cross-class penalty), scaling a little with distance
-  const chosen = [primary, secondary, tertiary].filter(Boolean);
+  const chosen = [primary, secondary, tertiary, ...acquired].filter(Boolean);
   const steps = Math.min(...chosen.map(d => { const s = ringDistance(trad, d, index); return s == null ? 99 : s; }));
   const penalty = steps <= 1 ? 2 : steps <= 4 ? 2 : 3;
   return { allowed: true, penalty, band: "far", reason: `${Number.isFinite(steps) ? steps : "many"} steps from your nearest domain — costs more` };

@@ -86,6 +86,9 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
     const lockedPath = fork && chosen ? forkPaths(ab.id, branchForks).find(p => p.key !== chosen.key) : null;
     const isOwned = owned.has(ab.id), rank = owned.get(ab.id) || 0;
     const locked = !isOwned && (!learnGate.ok || (cap && ab.powerSystem !== "learned"));
+    // SNG-101: a foreclosed antipode's NATIVE nodes read FORECLOSED ("you chose otherwise" — distinct from
+    // LOCKED's "not yet"). Owned ground is kept (foreclosure is directional), and braids are never foreclosed.
+    const foreclosed = !isOwned && ab.nativeOrCombination !== "combination" && (character?.foreclosed || []).includes(ab.tradition);
     return {
       id: ab.id, name: ab.name, cls: ab.tradition || ab.powerSystem, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1,
       owned: isOwned, rank,
@@ -94,11 +97,10 @@ export function skillGraphModel(catalog, emergence, character, { attributeGates,
       gated: !!gate,
       forks: !!fork, forkAt: fork?.atRank || null,
       forkChosen: chosen?.name || null, forkLocked: lockedPath?.name || null,
-      locked,
-      lockText: !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — deepen owned skills" : ""),
-      // ability-arch v2: the five display states, DERIVED from the flags above (no new computation).
-      // OWNED_1/2/3 mirror the rank now that depth is earned through use; LOCKED/AVAILABLE gate breadth.
-      state: isOwned ? `OWNED_${Math.min(3, rank || 1)}` : locked ? "LOCKED" : "AVAILABLE"
+      locked: locked || foreclosed, foreclosed,
+      lockText: foreclosed ? "foreclosed — you chose the other end of this axis; only a braid crosses" : !learnGate.ok ? learnGate.why : (cap ? "at skill capacity — deepen owned skills" : ""),
+      // ability-arch v2 + SNG-101: the display states, DERIVED from the flags above (no new computation).
+      state: isOwned ? `OWNED_${Math.min(3, rank || 1)}` : foreclosed ? "FORECLOSED" : locked ? "LOCKED" : "AVAILABLE"
     };
   });
   const ids = new Set(nodes.map(n => n.id));

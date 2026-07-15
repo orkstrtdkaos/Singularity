@@ -16,7 +16,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote } from "../engine/progression.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
@@ -2192,6 +2192,40 @@ await (async () => {
   // an unwilling teacher does not count
   const unwilling = { peopleDisposition: { umbral: 12 }, teachers: { umbral: { met: true, willing: false } } };
   check("an unwilling teacher does not clear the capstone bar", meetsStandingBar(unwilling, "umbral", 4, rules).ok === false);
+})();
+
+// --- SNG-101: domain promotion (raise a ceiling, foreclose the antipode; keep the ground) ---
+(() => {
+  const rules = {
+    peopleStandingBands: [{ min: 20, band: "kin" }, { min: 10, band: "trusted" }, { min: 4, band: "known" }, { min: 0, band: "neutral" }, { min: -999, band: "estranged" }],
+    promotion: { tertiaryToSecondary: { minReputation: 8, requiresTeacher: true, minInDomainRanks: 3 }, secondaryToPrimary: { minReputation: 12, requiresTeacher: true, minInDomainRanks: 6, requiresRegionStanding: true, minRegionTurns: 12, requiresCeilingExhausted: true } }
+  };
+  const idx = { byId: { rootkin: { opposite: "enginewright" }, enginewright: { opposite: "rootkin" }, seraphic: { opposite: "abyssal" }, abyssal: { opposite: "seraphic" } }, folkIds: new Set(), abilityToTradition: {} };
+  const catalog = { s1: { id: "s1", tradition: "seraphic", levelReq: 1, nativeOrCombination: "native" }, ab1: { id: "ab1", tradition: "abyssal", levelReq: 1, nativeOrCombination: "native" }, braid1: { id: "braid1", tradition: "abyssal", levelReq: 1, nativeOrCombination: "combination" } };
+  const opts = { catalog, traditionIndex: idx };
+
+  const c = { domains: { primary: "rootkin", secondary: "enginewright", tertiary: "seraphic" }, peopleDisposition: { seraphic: 2 }, teachers: {}, abilities: [{ abilityId: "s1", level: 2 }] };
+  check("promotion is not eligible without standing + teacher", promotionEligible(c, "tertiary", rules, opts).eligible === false);
+
+  c.peopleDisposition.seraphic = 8; c.teachers.seraphic = { met: true, willing: true }; c.abilities = [{ abilityId: "s1", level: 3 }];
+  const e = promotionEligible(c, "tertiary", rules, opts);
+  check("promotion eligible once standing + teacher + in-domain ranks are met", e.eligible === true && e.to === "secondary" && e.trad === "seraphic");
+
+  const r = promote(c, "tertiary", rules, opts);
+  check("promote raises the tertiary ceiling to III", r.ok && c.domainCeilings.seraphic === 3);
+  check("promote forecloses the promoted domain's antipode", (c.foreclosed || []).includes("abyssal"));
+  check("promote is idempotent-safe — never lowers the ceiling", promote(c, "tertiary", rules, { force: true, ...opts }).ok && c.domainCeilings.seraphic === 3);
+
+  // foreclosure gates NATIVES only — a braid across the axis is never foreclosed (keep-the-ground)
+  check("domainAccess forecloses a native antipode ability", domainAccess(catalog.ab1, 1, c.domains, idx, { foreclosed: c.foreclosed }).allowed === false);
+  check("domainAccess NEVER forecloses a braid across the axis", domainAccess(catalog.braid1, 1, c.domains, idx, { foreclosed: c.foreclosed }).allowed === true);
+  // the raised ceiling lets the promoted domain reach its new tier
+  check("the promoted ceiling lets the domain reach Tier III", domainAccess({ id: "s3", tradition: "seraphic", levelReq: 3, nativeOrCombination: "native" }, 3, c.domains, idx, { domainCeilings: c.domainCeilings }).allowed === true);
+
+  // an owned foreclosed native is not stripped (keep-the-ground): auto-advance skips it
+  const held = { domains: c.domains, foreclosed: ["abyssal"], abilities: [{ abilityId: "ab1", level: 1 }], practice: { uses: { ab1: 20 } } };
+  const adv = autoAdvancePracticedRanks(held, { leveling: { rankLevelReq: { "2": 1 } }, practice: { useRankThreshold: { "2": 8 } } }, opts);
+  check("a foreclosed native does not auto-rank (but is not stripped)", adv.length === 0 && held.abilities[0].level === 1);
 })();
 
 // --- SNG-045: player identity dedup (one person, one profile) ---

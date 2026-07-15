@@ -1643,19 +1643,41 @@
         "player": "Walk out with Pell and let the road settle around you both before saying anything — let the village fall behind in silence",
         "summary": "Silas and Pell walk north out of the village in silence — a child runner catches them just short of the north gate with a cloth-wrapped message from Mara.",
         "narration": "The south lane is narrow enough that your shoulders almost brush walking side by side. Huginn rides your left shoulder, oriented north, head moving once to clock a cat on a windowsill and then settling. Pell's pack sits square on her back, the way she carries everything — no adjustment, no shifting. Memory lies across both packs, ash shaft pale in the early light, collar rune hidden against her oilcloth roll.\n\nThe lane opens past the well, and then you are past the well, and the village begins to thin at the edges the way villages do — one more house, a fence, a garden plot with last year's bean-stakes still standing, and then the track north with the upper meadow ahead and the river sound on your left. The cold is real but not biting. The light is the thin honest kind that comes before the day commits to anything.\n\nHuginn shifts his weight once on your shoulder. Pell walks.\n\nThen — behind you, quick feet on packed earth — a child's voice: 'Warden.' Not a question. Not the retreating child from the south-lane door, but the same age, maybe, or close. A girl, seven or eight, in a worn blue wool coat two sizes large, catching up at a run. She stops four feet back when you turn, breathing hard, and holds out a folded scrap of cloth as if she's been told to deliver it and not lose it. 'Mara said to catch you before the north gate. Said you'd know what it was.'\n\nPell glances at the cloth, then at you. Huginn's head turns. The upper meadow is fifty yards ahead; the north gate, not much more."
+      },
+      {
+        "player": "Take the cloth and read it now",
+        "summary": "Mara's note names Sorel — a key Edge District contact — spotted at the smokehouse. Decision point before the north road.",
+        "narration": "The cloth scrap is small — torn from a piece Mara keeps behind the counter, the kind she uses for wrapping cord-weight parcels. You take it from the child's hand and open it with your thumb.\n\nFour words in Mara's neat utility script, no preamble:\n\n*Pip saw Sorel. Smokehouse.*\n\nHuginn turns his head to read it over your shoulder. Or seems to. He does not comment.\n\nYou fold it back along its crease and look up. The child — Pip Cotter herself, you realize, which means Mara sent the message by the subject of the message, which is exactly the kind of practical efficiency that makes her store run — is still breathing a little hard from the run, watching your face for whether she's done her job or not.\n\nPell hasn't moved from where she stopped. She's read your expression already and is waiting, Memory balanced across the top of her pack, nothing impatient in her stance. The north gate stands open thirty yards ahead, the track beyond it pale with morning frost going soft in the sun.\n\nThe smokehouse is back south. Sorel is one of the two names Mara gave you for Edge District contacts — the spice-broker who wintered there two years running, not heard from in a season. If Pip saw him, he is in Millbrook now, or was recently enough for the sighting to matter."
       }
     ],
     "lastTurn": {
-      "narration": "The south lane is narrow enough that your shoulders almost brush walking side by side. Huginn rides your left shoulder, oriented north, head moving once to clock a cat on a windowsill and then settling. Pell's pack sits square on her back, the way she carries everything — no adjustment, no shifting. Memory lies across both packs, ash shaft pale in the early light, collar rune hidden against her oilcloth roll.\n\nThe lane opens past the well, and then you are past the well, and the village begins to thin at the edges the way villages do — one more house, a fence, a garden plot with last year's bean-stakes still standing, and then the track north with the upper meadow ahead and the river sound on your left. The cold is real but not biting. The light is the thin honest kind that comes before the day commits to anything.\n\nHuginn shifts his weight once on your shoulder. Pell walks.\n\nThen — behind you, quick feet on packed earth — a child's voice: 'Warden.' Not a question. Not the retreating child from the south-lane door, but the same age, maybe, or close. A girl, seven or eight, in a worn blue wool coat two sizes large, catching up at a run. She stops four feet back when you turn, breathing hard, and holds out a folded scrap of cloth as if she's been told to deliver it and not lose it. 'Mara said to catch you before the north gate. Said you'd know what it was.'\n\nPell glances at the cloth, then at you. Huginn's head turns. The upper meadow is fifty yards ahead; the north gate, not much more.",
-      "sceneSummary": "Silas and Pell walk north out of the village in silence — a child runner catches them just short of the north gate with a cloth-wrapped message from Mara.",
+      "narration": "The cloth scrap is small — torn from a piece Mara keeps behind the counter, the kind she uses for wrapping cord-weight parcels. You take it from the child's hand and open it with your thumb.\n\nFour words in Mara's neat utility script, no preamble:\n\n*Pip saw Sorel. Smokehouse.*\n\nHuginn turns his head to read it over your shoulder. Or seems to. He does not comment.\n\nYou fold it back along its crease and look up. The child — Pip Cotter herself, you realize, which means Mara sent the message by the subject of the message, which is exactly the kind of practical efficiency that makes her store run — is still breathing a little hard from the run, watching your face for whether she's done her job or not.\n\nPell hasn't moved from where she stopped. She's read your expression already and is waiting, Memory balanced across the top of her pack, nothing impatient in her stance. The north gate stands open thirty yards ahead, the track beyond it pale with morning frost going soft in the sun.\n\nThe smokehouse is back south. Sorel is one of the two names Mara gave you for Edge District contacts — the spice-broker who wintered there two years running, not heard from in a season. If Pip saw him, he is in Millbrook now, or was recently enough for the sighting to matter.",
+      "sceneSummary": "Mara's note names Sorel — a key Edge District contact — spotted at the smokehouse. Decision point before the north road.",
       "choices": [
         {
-          "label": "Take the cloth and read it now",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Turn back to the smokehouse immediately — Sorel is exactly the kind of contact who disappears; get there before he does. Tell Pell on the walk back.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pip what she saw, exactly — before you commit direction, find out whether 'saw' means 'spoke to at length' or 'glimpsed heading south'.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
             "study"
           ],
           "abilityId": null,
@@ -1665,12 +1687,13 @@
           "emergenceId": null
         },
         {
-          "label": "Take it, pocket it, and keep walking — read it on the road past the gate",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Send Pip back with a word for Mara — ask her to have Aldric hold Sorel if he appears, then continue north to Fen's intake as planned. Sorel can wait an hour.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "plan",
             "careful"
           ],
           "abilityId": null,
@@ -1680,29 +1703,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask the child what Mara said when she handed it over",
+          "label": "Show Pell the note and decide together — she has standing in this search; she should see it.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Something else entirely",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
+            "help",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1722,92 +1730,106 @@
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "North end of Millbrook's south lane, just short of the well — the village thinning behind, the track north opening ahead, upper meadow visible fifty yards out. Mid-morning pale light, early spring. North gate thirty yards ahead.",
+        "setting": "North end of Millbrook's south lane, thirty yards short of the north gate — village thinning behind, track north opening ahead, upper meadow visible in early-spring mid-morning light. Frost softening on the pale track.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Pack square on her back, Memory across both packs — stopped, watching the child runner, waiting on Silas."
+            "state": "Stopped, pack square, Memory across both packs — watching Silas read the note, waiting without impatience."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, head turned toward the child and the cloth."
+            "state": "On Silas's shoulder, head angled toward the cloth scrap, silent."
           },
           {
-            "name": "Child messenger",
-            "state": "Stopped four feet back, breathing hard from running, holding a folded cloth scrap toward Silas — waiting."
+            "name": "Pip Cotter",
+            "state": "Four feet back, still breathing from the run, watching Silas's face to confirm the job is done."
           }
         ],
         "objects": [
+          "Cloth scrap (Mara's note: 'Pip saw Sorel. Smokehouse.') — read, folded back along its crease, in Silas's hand",
           "Memory (spear, across both packs)",
-          "Folded cloth scrap — held by child runner, from Mara",
-          "North gate — thirty yards ahead, dry-stone gap in the village wall",
-          "Track north — visible beyond the gate, leading to upper meadow and Fen's intake"
+          "North gate — thirty yards ahead, open, frost-pale track beyond"
         ],
         "threads": [
-          "Child runner holding a message from Mara — content unknown, delivery urgent enough to send a runner",
-          "The north gate and the road to Fen's intake remain the primary destination",
-          "The retreating child from the south-lane door — not this one; may still be about"
+          "Sorel spotted at the smokehouse — Edge District spice-broker contact, not heard from in a season, present now",
+          "Fen's intake inspection remains the planned first stop north",
+          "Pip waiting for any return message or dismissal"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting.",
-          "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — stopped just short of the north gate by a child runner.",
-          "status": "active"
+          "npcId": "pip-cotter",
+          "name": "Pip Cotter",
+          "role": "Mara's errand-runner",
+          "note": "Delivered Mara's cloth-scrap message at a run, just short of the north gate — identified as the subject of her own message.",
+          "learned": [
+            "Pip spotted Sorel at or near the smokehouse — recent enough for Mara to send an urgent runner"
+          ],
+          "skillsObserved": [
+            "reliable and fast delivery under urgency"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Present at the north lane just short of the gate — waiting for acknowledgment or a return message."
         },
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Village supply store operator, Millbrook",
-          "note": "Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting.",
-          "statusNote": "At her store — but sent a runner north after Silas with new information.",
-          "status": "active"
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Stopped and waiting without impatience — reading Silas's expression off the note.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing just short of the north gate with pack and Memory, waiting on Silas's call."
         }
       ],
-      "generateRequest": [
+      "factUpdates": [],
+      "codexUpdates": [
         {
-          "type": "npc",
-          "hint": "a girl of seven or eight in an oversized blue wool coat — Mara's errand-runner, practical and out of breath",
-          "why": "The child messenger has just arrived in-scene with a cloth from Mara and needs a stable identity for future encounters"
+          "topic": "sorel",
+          "label": "Sorel",
+          "kind": "person",
+          "fact": "Spotted at Millbrook's smokehouse on World-day 15 — present in the village after a season of silence. Mara's message urgent enough to send Pip running.",
+          "links": [
+            "mara-wells",
+            "millbrook",
+            "the-water-crisis",
+            "mountain-pass"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk from the forge to just short of the north gate — a few minutes at most"
+        "why": "brief stop to receive and read the runner's message"
       },
-      "sceneEnded": false
+      "placeUpdates": []
     },
     "sceneState": {
-      "setting": "North end of Millbrook's south lane, just short of the well — the village thinning behind, the track north opening ahead, upper meadow visible fifty yards out. Mid-morning pale light, early spring. North gate thirty yards ahead.",
+      "setting": "North end of Millbrook's south lane, thirty yards short of the north gate — village thinning behind, track north opening ahead, upper meadow visible in early-spring mid-morning light. Frost softening on the pale track.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Pack square on her back, Memory across both packs — stopped, watching the child runner, waiting on Silas."
+          "state": "Stopped, pack square, Memory across both packs — watching Silas read the note, waiting without impatience."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, head turned toward the child and the cloth."
+          "state": "On Silas's shoulder, head angled toward the cloth scrap, silent."
         },
         {
-          "name": "Child messenger",
-          "state": "Stopped four feet back, breathing hard from running, holding a folded cloth scrap toward Silas — waiting."
+          "name": "Pip Cotter",
+          "state": "Four feet back, still breathing from the run, watching Silas's face to confirm the job is done."
         }
       ],
       "objects": [
+        "Cloth scrap (Mara's note: 'Pip saw Sorel. Smokehouse.') — read, folded back alon",
         "Memory (spear, across both packs)",
-        "Folded cloth scrap — held by child runner, from Mara",
-        "North gate — thirty yards ahead, dry-stone gap in the village wall",
-        "Track north — visible beyond the gate, leading to upper meadow and Fen's intake"
+        "North gate — thirty yards ahead, open, frost-pale track beyond"
       ],
       "threads": [
-        "Child runner holding a message from Mara — content unknown, delivery urgent enough to send a runner",
-        "The north gate and the road to Fen's intake remain the primary destination",
-        "The retreating child from the south-lane door — not this one; may still be about"
+        "Sorel spotted at the smokehouse — Edge District spice-broker contact, not heard from in a season, present now",
+        "Fen's intake inspection remains the planned first stop north",
+        "Pip waiting for any return message or dismissal"
       ]
     }
   },
@@ -1956,7 +1978,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Chose the door over another round — dressed efficiently, released Silas's hand without ceremony, composure reassembling as she moves. One dry remark: 'Forging. But the door first.'",
         "[d2] Turned the carter away efficiently, set the whetstone deliberately apart from the tool-clutter, asked 'Ready?' with the forge-face not quite fully back on.",
         "[d2] Watched Silas undress from across the forge-floor, forge-face coming apart as she watched — then crossed to him without hesitation, hands finding his belt with the same methodical ",
         "[d2] Silas set the tempo this time — she met it, unguarded throughout, verdict afterward: 'Thorough. Again.'",
@@ -1965,7 +1986,8 @@
         "[d2] Named no prior claims plainly — one man, two winters back, sonic work from the Heights; it ran longer than it should, he stopped coming, she didn't go looking. Set the whetstone ba",
         "[d2] Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered.",
         "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t",
-        "[d2] Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting."
+        "[d2] Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting.",
+        "[d2] Stopped and waiting without impatience — reading Silas's expression off the note."
       ],
       "knownFacts": [
         "Silas named the bond between them explicitly — practical, physical, and warden-deep",
@@ -1986,7 +2008,7 @@
         "naming a technical and personal observation in the same regi"
       ],
       "status": "active",
-      "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — stopped just short of the north gate by a child runner.",
+      "statusNote": "Standing just short of the north gate with pack and Memory, waiting on Silas's call.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2878,19 +2900,49 @@
         "createdDay": 2,
         "entityId": "bette-harrow-the-seed-ledger",
         "updatedDay": 2
+      },
+      "pip-cotter-mara-s-errand-runner": {
+        "id": "pip-cotter-mara-s-errand-runner",
+        "label": "Pip Cotter, Mara's Errand-Runner",
+        "kind": "person",
+        "facts": [
+          "[d2] Child courier and small-task helper for Mara Wells"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "pip-cotter-mara-s-errand-runner",
+        "updatedDay": 2
+      },
+      "sorel": {
+        "id": "sorel",
+        "label": "Sorel",
+        "kind": "person",
+        "facts": [
+          "[d2] Spotted at Millbrook's smokehouse on World-day 15 — present in the village after a season of silence. Mara's message urgent enough to send Pip running."
+        ],
+        "links": [
+          "mara-wells",
+          "millbrook",
+          "the-water-crisis",
+          "mountain-pass"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 61.05784873160781,
-    "cerebral": 39.287548740780096,
-    "social": 60.09698672296248,
-    "generous": 17.609806543571015,
-    "cautious": 48.54088730126133,
-    "physical": 0.8489147753266116,
-    "risky": 2.8232067349954977,
-    "ruthless": 2.1144226754294273,
-    "carousing": 1.4620893250141411
+    "strategic": 60.752559487949775,
+    "cerebral": 40.09111099707619,
+    "social": 59.796501789347666,
+    "generous": 17.52175751085316,
+    "cautious": 48.29818286475502,
+    "physical": 0.8446702014499786,
+    "risky": 2.80909070132052,
+    "ruthless": 2.1038505620522803,
+    "carousing": 1.4547788783890705
   },
   "aptitudes": [
     "strategist",
@@ -2898,10 +2950,18 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 256,
+  "actionCount": 257,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Pip Cotter, Mara's Errand-Runner",
+      "url": "https://image.pollinations.ai/prompt/Seven%20years%20old%2C%20possibly%20eight%20%E2%80%94%20she%20is%20unsure%20and%20will%20tell%20you%20both%20ages%20depending%20on%20which%20she%20remembers.%20Wears%20an%20oversized%20blue%20wool%20coat%20that%20was%20someone%20else's%20first%2C%20the%20cuffs%20rolled%20four%20times%20and%20still%20draggin%2C%20character%20portrait%20of%20Pip%20Cotter%2C%20Mara's%20Errand-Runner%2C%20Child%20courier%20and%20small-task%20helper%20for%20Mara%20Wells.%20Breathless%20sentences%2C%20pauses%20to%20swallow%20air%20mid-thought.%20Repeats%20Mara's%20instructions%20almost%20verbatim%20before%20adding%20her%20own%20opinions%20uninvited.%20Calls%20adults%20by%20full%20name%20because%20that%20is%20what%20she%20has%20heard%20done.%20Takes%20promises%20seriously%20and%20remembers%20them%20exactly.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=14341&nologo=true",
+      "caption": "Pip Cotter, Mara's Errand-Runner",
+      "worldDay": 15,
+      "at": "2026-07-15T23:11:50.755Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Silas Weir",
@@ -3016,8 +3076,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784157090656,
-  "rev": 350,
+  "updatedAt": 1784159297158,
+  "rev": 352,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3155,6 +3215,72 @@
           "romanceEligible": true
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Bette%20Harrow%2C%20the%20Seed%20Ledger%2C%20Contract%20seed-agent%20for%20the%20upvalley%20growers'%20cooperative%2C%20collecting%20outstanding%20grain-debts%20before%20the%20expedition%20locks%20up%20the%20forge%20accounts.%20Mid-forties%2C%20weathered%20apron%2C%20ink-stained%20fingers.%20Speaks%20in%20numbered%20points%20without%20meaning%20to%20%E2%80%94%20'First.%20Second.%20Done.'%20Knock%20was%20three%20times%2C%20flat%20and%20evenly%20spaced%2C%20the%20knock%20of%20someone%20who%20has%20knocked%20on%20a%20hundred%20doors%20this%20season%20and%20will%20knock%20on%20a%20hundred%20more.%20Carries%20a%20wax-sealed%20ledger%20book%20under%20one%20arm%20and%20smells%20faintly%20of%20thaw-mud%20and%20linseed.%20Does%20not%20waste%20warmth%2C%20but%20is%20not%20cold%20%E2%80%94%20simply%20occupied.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=77560&nologo=true"
+      },
+      "pip-cotter-mara-s-errand-runner": {
+        "schemaVersion": 1,
+        "id": "pip-cotter-mara-s-errand-runner",
+        "name": "Pip Cotter, Mara's Errand-Runner",
+        "role": "Child courier and small-task helper for Mara Wells",
+        "homeLocation": "millbrook",
+        "communityId": "valley.millbrook",
+        "personality": {
+          "warmth": 0.8,
+          "trust": 0.75,
+          "candor": 0.9,
+          "patience": 0.3
+        },
+        "spectrum": {
+          "chaos_order": 0.6,
+          "death_life": 0.7,
+          "concrete_abstract": -0.8,
+          "emotional_logical": -0.3
+        },
+        "appearance": "Seven years old, possibly eight — she is unsure and will tell you both ages depending on which she remembers. Wears an oversized blue wool coat that was someone else's first, the cuffs rolled four times and still dragging. Cheeks red from the cold and the running. Clutches whatever she's carrying in both hands like it is the most important object in the world, because Mara said so.",
+        "voiceHints": "Breathless sentences, pauses to swallow air mid-thought. Repeats Mara's instructions almost verbatim before adding her own opinions uninvited. Calls adults by full name because that is what she has heard done. Takes promises seriously and remembers them exactly.",
+        "functions": [
+          "move",
+          "reveal"
+        ],
+        "kit": {
+          "move": "Knows every shortcut between Millbrook's lanes and garden gates — the gap in the Cotter fence, the stepping-stones behind the mill, the path along the east ditch that stays dry into spring.",
+          "reveal": "Absorbs overheard details without meaning to and repeats them with complete accuracy when she trusts the listener, or when she forgets to be careful."
+        },
+        "knowledge": [
+          "The contents of the cloth Mara sent — she memorized Mara's words about it before she left, in case the cloth got wet",
+          "Every house in Millbrook that keeps a dog and which ones bite",
+          "That Mara has been up before dawn three mornings running — Pip noticed because she was also up, feeding the goat",
+          "Which neighbor children are sick this season and which are not — valley gossip absorbed from doorstep conversations while waiting to be let in"
+        ],
+        "wants": "To complete the errand correctly, catch her breath, and be given a small task on the return trip so the journey feels useful twice.",
+        "fears": "Losing or ruining something she was trusted to carry. Being told she arrived too late.",
+        "reactsToReputation": {
+          "trusted-by-mara": "opens up immediately, will answer two questions for every one asked",
+          "unkind-to-children": "goes quiet, delivers the message in the fewest possible words, leaves fast"
+        },
+        "notes": "Not yet aware that she is a reliable source of low-level local intelligence. Mara is aware. Pip is loyal to Mara first and will report any strange treatment back to her without being asked.",
+        "_gen": {
+          "entityId": "pip-cotter-mara-s-errand-runner",
+          "type": "npc",
+          "birthWeight": 7,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "millbrook",
+            "day": 2,
+            "worldDay": null,
+            "hint": "a girl of seven or eight in an oversized blue wool coat — Mara's errand-runner, practical and out of breath",
+            "why": "The child messenger has just arrived in-scene with a cloth from Mara and needs a stable identity for future encounters"
+          },
+          "attentionHistory": [],
+          "createdDay": 2,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "image": "https://image.pollinations.ai/prompt/Seven%20years%20old%2C%20possibly%20eight%20%E2%80%94%20she%20is%20unsure%20and%20will%20tell%20you%20both%20ages%20depending%20on%20which%20she%20remembers.%20Wears%20an%20oversized%20blue%20wool%20coat%20that%20was%20someone%20else's%20first%2C%20the%20cuffs%20rolled%20four%20times%20and%20still%20draggin%2C%20character%20portrait%20of%20Pip%20Cotter%2C%20Mara's%20Errand-Runner%2C%20Child%20courier%20and%20small-task%20helper%20for%20Mara%20Wells.%20Breathless%20sentences%2C%20pauses%20to%20swallow%20air%20mid-thought.%20Repeats%20Mara's%20instructions%20almost%20verbatim%20before%20adding%20her%20own%20opinions%20uninvited.%20Calls%20adults%20by%20full%20name%20because%20that%20is%20what%20she%20has%20heard%20done.%20Takes%20promises%20seriously%20and%20remembers%20them%20exactly.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=14341&nologo=true"
       }
     },
     "location": {},
@@ -3513,7 +3639,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 57
+    "valley": 58
   },
   "foreclosed": [
     "rootkin",

@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 69,
+  "xp": 74,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -41,7 +41,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 89,
+  "energy": 84,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -199,59 +199,88 @@
         "player": "Stay with this — let the terrace do the rest. The afternoon count won't come for a while yet.",
         "summary": "The terrace holds — a second kiss, slower, and Lira names what she's known since the corridor.",
         "narration": "The terrace holds you both in its midday stillness. You don't push anything forward — you let the moment find its own pace, and it does.\n\nHer hand moves past your collar to the front of your shirt, fingers spreading against the cloth, not pulling, just resting there with purpose. You kiss her again, slower this time, and she makes a small sound against your mouth that is less surprise than confirmation. The crystal towers scatter light across the stone in slow, idle patterns, and the valley lies quiet in the west, and the bench with the ledger on it is three paces away and might as well be in another district.\n\nShe pulls back just enough to look at you — the amber-grey steady, the half-smile back, a little different now, warmer and less studied. Her thumb traces a line along the lapel of your shirt. 'You're not a paving contractor,' she says. Not an accusation. Just the thing she's been sitting with, named plainly now that there's no more pretense of professional distance.\n\nShe doesn't move away when she says it. Her hand stays where it is. The afternoon count is still a comfortable hour distant, the terrace is empty, and she is watching you with the clear-eyed patience of someone who has asked a question and is genuinely curious what you'll do with it."
+      },
+      {
+        "player": "Deflect gently — give her enough to satisfy without the full picture. 'Does it matter right now?'",
+        "summary": "Deflected her question about his identity — enough truth to hold, not enough to expose; she accepted it and named that she'll want the rest.",
+        "narration": "You let the question hang for one breath, then answer it the way a man answers something he's not ready to give all of — with enough truth to be honest and not quite enough to be exposed.\n\n'Does it matter right now?' Your voice is easy, unhurried, the same register you've been using since you closed the distance. Your hand hasn't moved from her shirt. The answer isn't evasion exactly — it's a postponement, offered with enough warmth that it doesn't read as a door closing.\n\nShe reads it. You can see that — the amber-grey takes it in, weighs it, and doesn't throw it back at you. Her fingers stay where they are against your shirt. The half-smile doesn't quite leave, but it shifts: something behind it that is less satisfied than before, more patient in the particular way of a person who knows they'll have the answer eventually and has decided the waiting is its own kind of answer. 'Maybe not right now,' she says, quiet. A beat. 'But I'll want it.' Not a threat. A statement of what is true.\n\nThe valley lies still in the west. The ledger is on the bench. She is looking at you the way she looked at the corridor — noticing, measuring, choosing to stay anyway."
       }
     ],
     "lastTurn": {
-      "narration": "The terrace holds you both in its midday stillness. You don't push anything forward — you let the moment find its own pace, and it does.\n\nHer hand moves past your collar to the front of your shirt, fingers spreading against the cloth, not pulling, just resting there with purpose. You kiss her again, slower this time, and she makes a small sound against your mouth that is less surprise than confirmation. The crystal towers scatter light across the stone in slow, idle patterns, and the valley lies quiet in the west, and the bench with the ledger on it is three paces away and might as well be in another district.\n\nShe pulls back just enough to look at you — the amber-grey steady, the half-smile back, a little different now, warmer and less studied. Her thumb traces a line along the lapel of your shirt. 'You're not a paving contractor,' she says. Not an accusation. Just the thing she's been sitting with, named plainly now that there's no more pretense of professional distance.\n\nShe doesn't move away when she says it. Her hand stays where it is. The afternoon count is still a comfortable hour distant, the terrace is empty, and she is watching you with the clear-eyed patience of someone who has asked a question and is genuinely curious what you'll do with it.",
-      "sceneSummary": "The terrace holds — a second kiss, slower, and Lira names what she's known since the corridor.",
+      "narration": "You let the question hang for one breath, then answer it the way a man answers something he's not ready to give all of — with enough truth to be honest and not quite enough to be exposed.\n\n'Does it matter right now?' Your voice is easy, unhurried, the same register you've been using since you closed the distance. Your hand hasn't moved from her shirt. The answer isn't evasion exactly — it's a postponement, offered with enough warmth that it doesn't read as a door closing.\n\nShe reads it. You can see that — the amber-grey takes it in, weighs it, and doesn't throw it back at you. Her fingers stay where they are against your shirt. The half-smile doesn't quite leave, but it shifts: something behind it that is less satisfied than before, more patient in the particular way of a person who knows they'll have the answer eventually and has decided the waiting is its own kind of answer. 'Maybe not right now,' she says, quiet. A beat. 'But I'll want it.' Not a threat. A statement of what is true.\n\nThe valley lies still in the west. The ledger is on the bench. She is looking at you the way she looked at the corridor — noticing, measuring, choosing to stay anyway.",
+      "sceneSummary": "Deflected her question about his identity — enough truth to hold, not enough to expose; she accepted it and named that she'll want the rest.",
       "choices": [
         {
-          "label": "Tell her the truth — what you actually are, what the ledger means, and why it matters.",
+          "label": "Give her a little more — not the full picture, but something real. A name. A reason. Enough to feel like trust.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
-            "honest",
             "confide",
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Deflect gently — give her enough to satisfy without the full picture. 'Does it matter right now?'",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "deflect",
-            "charm",
             "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Answer her question with your hands — close the small distance she opened and let action speak first.",
+          "label": "Don't explain — close the distance again instead. Let your hands answer the question she's actually asking.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "physical",
             "deflect",
-            "bold"
+            "intimate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask what she wants to do with the answer — put the next move in her court.",
+          "label": "Tell her about the ledger — what it means, what you intend to do with it. That much is real, and she's already chosen silence once.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.7
+          },
           "difficulty": 0,
           "intentTags": [
-            "curious",
-            "careful",
-            "social"
+            "confide",
+            "plan"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Acknowledge what she said — 'I know you will' — and let that be enough for now. Keep the moment, don't crowd it.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "hold",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
@@ -259,7 +288,7 @@
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "One hand spread against the character's shirt, pulled back a half-breath, watching him with the half-smile warmed and less studied — she's just named what she knows and is waiting for his answer."
+            "state": "Hand still spread against his shirt, half-smile settled into patience — she has accepted the deflection and named that she'll want the full answer eventually."
           }
         ],
         "objects": [
@@ -270,7 +299,7 @@
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
-          "Lira has named her suspicion plainly — 'You're not a paving contractor' — and is waiting for his response",
+          "Lira has accepted the deflection but named plainly that she'll want the full answer — the question is postponed, not closed",
           "The ledger sits three paces away; delivery to Keeper Aldris Vael remains a quiet pressure",
           "The afternoon count is roughly an hour distant — the terrace remains private until then"
         ]
@@ -280,23 +309,24 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watching.",
+          "role": "Apprentice optics-weaver, Edge District",
+          "note": "Accepted the deflection — weighed it, didn't throw it back. Named that she'll want the answer eventually. Hand still on his shirt. Patience with an edge of certainty.",
           "learned": [
-            "She has known since the service corridor that he is not what he presented as",
-            "She chose to stay and pursue the question rather than report or retreat"
+            "She reads a deflection as clearly as she reads a corridor — she knew it for what it was and chose to accept it anyway",
+            "She states what she wants as simple fact, not demand: 'But I'll want it.'"
           ],
           "skillsObserved": [
-            "perceptiveness — she reads people with quiet precision",
-            "composure — she names difficult things without making them into confrontations"
+            "patience with an edge of certainty",
+            "reads people with quiet precision"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the roof terrace with the character — the moment is intimate and open; she has just asked who he really is, hand still on his shirt, waiting for an honest answer."
+          "statusNote": "On the roof terrace — accepted the deflection, holding the moment, waiting for what comes next"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet quarter-hour on the terrace — unhurried, no count yet."
+        "why": "a slow exchange on the terrace — no action, just presence and a short honest answer"
       }
     },
     "sceneState": {
@@ -304,7 +334,7 @@
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "One hand spread against the character's shirt, pulled back a half-breath, watching him with the half-smile warmed and le"
+          "state": "Hand still spread against his shirt, half-smile settled into patience — she has accepted the deflection and named that s"
         }
       ],
       "objects": [
@@ -315,7 +345,7 @@
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
-        "Lira has named her suspicion plainly — 'You're not a paving contractor' — and is waiting for his response",
+        "Lira has accepted the deflection but named plainly that she'll want the full answer — the question is postponed, not closed",
         "The ledger sits three paces away; delivery to Keeper Aldris Vael remains a quiet pressure",
         "The afternoon count is roughly an hour distant — the terrace remains private until then"
       ]
@@ -375,28 +405,29 @@
         "[d1] Named what she noticed and what she wants — the ledger and the person. Closed the distance deliberately. Half-smile complete. Waiting.",
         "[d1] Accepted the character's advance on the roof terrace — touched his collar, said 'all right', set the ledger aside. The interest she'd been holding is now plainly in the room.",
         "[d1] Accepted the kiss without hesitation — met it, held his sleeve, breathed out. Eyes closed a half-beat too long afterward. Now her hand has moved past the collar.",
-        "[d1] Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watc"
+        "[d1] Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watc",
+        "[d1] Accepted the deflection — weighed it, didn't throw it back. Named that she'll want the answer eventually. Hand still on his shirt. Patience with an edge of certainty."
       ],
       "knownFacts": [
-        "She noticed the ledger in the service corridor and chose silence — a deliberate, considered choice",
-        "She wants to know what the character will do with the ledger AND who they are outside the paving work",
         "She is comfortable making her interest plain without rushing it",
         "She meets directness with directness — she didn't deflect or laugh it off; she tested the word and accepted it",
         "She set the ledger on the bench herself — a deliberate act, unburdening the moment without being asked",
         "She stays present in physical moments the same way she stays present in a corridor — fully, without performance",
         "She has known since the service corridor that he is not what he presented as",
-        "She chose to stay and pursue the question rather than report or retreat"
+        "She chose to stay and pursue the question rather than report or retreat",
+        "She reads a deflection as clearly as she reads a corridor — she knew it for what it was and chose to accept it anyway",
+        "She states what she wants as simple fact, not demand: 'But I'll want it.'"
       ],
       "skillsObserved": [
-        "directness",
-        "quiet observation",
         "deliberate physical presence",
         "composure under advance",
         "perceptiveness — she reads people with quiet precision",
-        "composure — she names difficult things without making them i"
+        "composure — she names difficult things without making them i",
+        "patience with an edge of certainty",
+        "reads people with quiet precision"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace with the character — the moment is intimate and open; she has just asked who he really is, hand still on his shirt, waiting for an honest an",
+      "statusNote": "On the roof terrace — accepted the deflection, holding the moment, waiting for what comes next",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -666,19 +697,19 @@
     }
   },
   "tendencies": {
-    "social": 4.896384506090772,
-    "strategic": 7.719410227883465,
-    "cautious": 2.926041293618969,
-    "cerebral": 1.9407693999313596,
-    "physical": 0.9655206468094844,
-    "ruthless": 0.9655206468094844
+    "social": 5.871902583560319,
+    "strategic": 7.6808131767440475,
+    "cautious": 3.911411087150874,
+    "cerebral": 1.9310655529317027,
+    "physical": 0.960693043575437,
+    "ruthless": 0.960693043575437
   },
   "aptitudes": [],
-  "actionCount": 11,
+  "actionCount": 12,
   "grantsVersion": 1,
   "reconcileVersion": 5,
-  "updatedAt": 1784140006074,
-  "rev": 49,
+  "updatedAt": 1784140099157,
+  "rev": 50,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -836,7 +867,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 7
+    "valley": 8
   },
   "foreclosed": []
 }

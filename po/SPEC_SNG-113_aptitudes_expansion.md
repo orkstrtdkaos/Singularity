@@ -40,6 +40,23 @@ Fill the existing tendencies and extend the vocabulary. Every one is a **bonus A
 - recklessness (2nd tier of risky) → **berserk** (+damage / −defense)
 Target **~18–24 total** so no single campaign trips them all, and each is a real identity choice. Requires extending `TAG_TO_TENDENCY` for new tendencies (stealth, deception, patience, craft, leadership, devotion, cruelty) with the intent tags that feed them.
 
+### 4a. Romantic aptitudes (Erik) — the `amorous` tendency
+**Verified gap:** the `romantic`/`flirt` intent tags (added SNG-100) currently route to **NO tendency** — they parse but never accrue anything. So romantic play has a clean, unused home. Add an **`amorous`** tendency fed by `romantic`/`flirt` (and `woo`/`seduce` if added), plus romantic aptitudes:
+- **charmer** (+flirtation/rapport in social-romantic scenes / −gravitas in formal ones) — the light end: woo, banter, ease.
+- **devoted_lover** (bonus to actions *in service of* a committed partner — SNG-108 partner bond; e.g. protecting/aiding them / small penalty when acting against that bond's interest) — the deep end: love as sustained attention, mechanized.
+- **ardent** (+intensity/presence in intimate scenes, within the profile's rating ceiling / −composure under pressure elsewhere) — passion as a trait with a cost.
+**Content-ceiling + minor-safety are absolute here:** an `amorous` aptitude's *bonus* only expresses within the profile's rating ceiling (an R-capped game gets the social/rapport bonus, not explicit-scene effects), and **NONE of these can involve or apply to a minor character in any way** — same floors as the romance/art systems, non-negotiable. The aptitude is a social/relational modifier, not a content unlock; it never changes what content is permitted, only how well romantic/relational *actions* resolve.
+
+### 4b. Innocence / naivety (Erik) — INVERSE aptitudes (start-with, lose-through-play)
+These are the system's first **inverse** aptitudes: you don't *earn* them by acting — you **start** with them (background/youth) and **lose** them as experience accrues. That's a genuine new axis and it's a lovely fit for the decay engine run backwards.
+- **innocent** — a starting trait: bonus to being *trusted/underestimated* (NPCs open up, lower their guard, extend benefit of the doubt / penalty to deception, intimidation, worldly-cunning actions). **Eroded by experience:** accrual of `ruthless`/`deception`/`carousing`/high-`amorous` tendency *reduces* it; it fades as the character is marked by the world. Once gone, not easily regained (a one-way door, mostly — innocence lost is lost).
+- **naive** (a lighter/rougher form) — bonus to sincerity-read (people believe you because you believe it) / penalty to detecting deception and to cynical/strategic reads.
+- **untouched / sheltered** — a background-only variant for a character who hasn't seen violence or intimacy; confers a small "clean slate" bonus but a real penalty in charged situations until worn off.
+
+**The mechanism (elegant, reuses everything):** innocence aptitudes have an **inverted threshold** — held while a "worldliness" score (sum of ruthless/deception/amorous/carousing tendencies) is BELOW a ceiling, lost when it crosses. So they decay *up* out of existence as you live. No new engine — it's the existing threshold logic with a `<` instead of `>=` and a composite tendency. Background grants them; play removes them; the removal is the character's coming-of-age, mechanized. **This is the attention-makes-real thesis in reverse: what you turn your attention toward, you become — and cannot un-become.**
+
+**Minor-safety note on innocence:** these are temperament traits about worldly experience, NOT about age, and carry no romantic/sexual content whatsoever. A `sheltered` adult and an `innocent` adult are ordinary character builds. The floors that forbid minor romantic/sexual content are entirely separate and unchanged.
+
 ## ENGINE SURFACES
 | Module | Change |
 |---|---|
@@ -47,7 +64,9 @@ Target **~18–24 total** so no single campaign trips them all, and each is a re
 | `engine/playerprofile.js` | Read decay/keepMargin from rules (not the JS constant); hysteresis in `deriveAptitudes` (earn at threshold, keep until threshold−margin — needs to track *currently held* to apply the gap); "fading" flag when near keep-floor. |
 | `content/packs/core/rules/backgrounds.json` / `origins.json` | `grantsAptitudes: [id,…]` per background; seed at creation above threshold. |
 | `engine/*` (creation) | Apply `grantsAptitudes` at character creation. |
-| `engine/gm.js` | Extend intent-tag vocabulary for new tendencies (stealth/deceive/patience/craft/lead/devotion/cruelty) so they actually accrue. |
+| `engine/gm.js` | Extend intent-tag vocabulary for new tendencies (stealth/deceive/patience/craft/lead/devotion/cruelty). **Route the existing `romantic`/`flirt` tags to a new `amorous` tendency (they currently map to nothing).** Optionally add `woo`/`seduce` tags. |
+| `engine/playerprofile.js` (inverse) | Support **inverse aptitudes**: held while a composite "worldliness" score is BELOW a ceiling, lost when crossed (the `>=` threshold logic with `<` + a summed tendency). Powers innocence/naivety. |
+| `content/.../resolution.json` (amorous + inverse) | Add `amorous` aptitudes (charmer/devoted_lover/ardent) with rating-ceiling-bounded mods; add inverse aptitudes (innocent/naive/sheltered) with a `worldlinessCeiling` + component tendencies. |
 | `app.js` | Style panel shows held aptitudes + a "fading" indicator near keep-floor; background-granted ones marked as lineage. |
 | `tests/*` | Background grant seeds above threshold; decay at new rate drops an unfed tendency in a realistic horizon; hysteresis prevents flicker but allows genuine loss; a varied-but-not-exhaustive campaign does NOT collect all; each aptitude's cost applies. |
 
@@ -57,6 +76,8 @@ Target **~18–24 total** so no single campaign trips them all, and each is a re
 - **Every aptitude keeps a cost** — the bonus-AND-cost law holds for all new ones; no free-lunch aptitudes.
 - **Background grants are a start, not a shackle** — lineage aptitudes can still be lost by playing against them (kept above threshold at creation, but subject to the same decay).
 - Balance: the new decay + thresholds run through `balance_sim.mjs` — a normal campaign should hold **2–4** aptitudes at a time, not all of them.
+- **Romantic aptitudes are rating-ceiling-bounded and minor-absolute.** An `amorous` aptitude's bonus expresses only within the profile's rating ceiling; it is a social/relational resolution modifier, never a content unlock. **No romantic/amorous aptitude involves or applies to a minor character in any way** — the romance/art minor-safety floors are unchanged and override everything here.
+- **Innocence aptitudes are about worldly experience, not age** — temperament traits, no romantic/sexual content, entirely separate from minor-safety floors. Inverse-earned (start-with / lose-through-play); loss is legible ("your innocence is fading") and largely one-way.
 
 ## OPEN QUESTIONS — CCODE ROUND 2
 1. Does `deriveAptitudes` currently track *held* state, or recompute fresh each turn? Hysteresis needs to know what's currently held to apply the keep-margin — confirm whether that's a state change.

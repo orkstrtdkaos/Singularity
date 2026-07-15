@@ -331,6 +331,18 @@ check("learning own tradition works", learnAbility(hero2, "echo_sense", abilityC
 const law = abilitiesForGM(hero2, abilityCatalog);
 check("ability law carries rank grants and limits", law.includes("Standing Wave") && law.includes("CANNOT") && law.includes("NOT FOR"));
 
+// --- SNG-103: the GM is fed the EFFECTIVE energy cost, not the raw base (was false-flagging correct sheets) ---
+{
+  const eRules = { leveling: { energyEfficiencyPerTwoLevels: 1, rankEnergyDiscount: 1, minEnergyCostFraction: 0.5 }, energy: { defaultActionCost: 5 } };
+  const ab = { id: "palework", name: "Palework", energyCost: 6, tree: [{ rank: 1, name: "R1", grants: "g", cannot: "c" }, { rank: 2, name: "Reading the Rot", grants: "g", cannot: "c" }] };
+  const leveled = { abilities: [{ abilityId: "palework", level: 2 }], attributes: {}, level: 5, discoveries: [] };
+  const gmLeveled = abilitiesForGM(leveled, { palework: ab }, null, eRules);
+  check("SNG-103: GM sees the effective (discounted) energy, not base", /Palework.*3 energy/s.test(gmLeveled) && /base 6, discounted/.test(gmLeveled));
+  const fresh = { abilities: [{ abilityId: "palework", level: 1 }], attributes: {}, level: 1, discoveries: [] };
+  const gmFresh = abilitiesForGM(fresh, { palework: ab }, null, eRules);
+  check("SNG-103: an undiscounted ability still reads base (no phantom discount line)", /Palework.*6 energy\)/s.test(gmFresh) && !/discounted/.test(gmFresh));
+}
+
 // --- novel use & discoveries ---
 const novelAction = { attribute: "practical", subAttribute: "craft", axes: {}, difficulty: 0, novel: true };
 const plainChance = successChance({ character: hero2, action: { ...novelAction, novel: false }, location: { spectrum: {} }, rules });

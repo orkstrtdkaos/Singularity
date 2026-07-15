@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.64";
+const APP_VERSION = "1.8.65";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2345,7 +2345,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks),
+    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks, CONTENT.rules),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
     factsDetail: factsForGM(character),
     evolvedItemsDetail: evolvedItemsForGM(character, CONTENT.items),
@@ -3037,7 +3037,7 @@ async function onAsk(text) {
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
     newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks),
+    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks, CONTENT.rules),
     codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
   }, text);
   busy = false;
@@ -4509,7 +4509,7 @@ function renderGambitBuilder(status = "") {
         recentTurns: sceneTurns.slice(-6), timeLabel: time.label,
         inventoryDetail: inventoryForGM(character), sceneState,
         npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-        abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks)
+        abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks, CONTENT.rules)
       }, q), 30000, "the GM");
       // SNG-088A (SNG-076 miss): the GM's plan-advice is PROSE — clamp on a word boundary with a real
       // ellipsis (not a mid-word cut at 400), raise the bound, and keep the full text for an expander.

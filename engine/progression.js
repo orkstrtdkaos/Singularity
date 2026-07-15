@@ -486,14 +486,19 @@ export function harmRungGloss(rung) {
   }
 }
 
-export function abilitiesForGM(character, catalog, branchForks = null) {
+export function abilitiesForGM(character, catalog, branchForks = null, rules = {}) {
   const lines = [];
   for (const owned of character.abilities || []) {
     const ab = catalog[owned.abilityId];
     if (!ab) continue;
     // SNG-BATCH-5: a chosen fork path REPLACES the linear rank expression for the GM too
     const rank = (branchForks && rankExpression(character, ab, owned.level, branchForks)) || ab.tree?.find(t => t.rank === owned.level);
-    lines.push(`### ${ab.name} — rank ${owned.level}${rank ? ` "${rank.name}"${rank.forked ? " (specialized fork)" : ""}` : ""} (${ab.energyCost} energy)` +
+    // SNG-103: show the character's EFFECTIVE energy cost (level+rank discount), not the raw base — the GM
+    // was fed the base and repeatedly "corrected" the correct discounted sheet. Show the base too when it
+    // differs so the GM understands the lower number is by design and never re-flags it.
+    const eff = effectiveEnergyCost(ab, character, rules);
+    const energyStr = eff < ab.energyCost ? `${eff} energy — base ${ab.energyCost}, discounted by level+rank` : `${ab.energyCost} energy`;
+    lines.push(`### ${ab.name} — rank ${owned.level}${rank ? ` "${rank.name}"${rank.forked ? " (specialized fork)" : ""}` : ""} (${energyStr})` +
       (rank ? `\nCAN: ${rank.grants}\nCANNOT (at this rank): ${rank.cannot}` : `\n${ab.description}`) +
       (ab.notFor ? `\nNOT FOR: ${ab.notFor}` : "") +
       (ab.harmRung ? `\nHARM: ${harmRungGloss(ab.harmRung)}` : ""));

@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6448970557500779,
+    "spectrumId": -0.6626522029625741,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
@@ -1595,66 +1595,103 @@
         "player": "Stand, dress quietly, and see what the morning brought — this is her forge and her door",
         "summary": "The carter is turned away, the forge-face reassembles, Pell sets the whetstone apart and asks if Silas is ready.",
         "narration": "The knock was a carter — a sleeve-blank order, wrong day, sent away with Pell's instructions and a look that closed the subject. The south-lane door swings back to the amber interior and she latches it behind her, one hand flat against the wood as though checking it's truly shut.\n\nYou've been dressing quietly while she handled it. Shirt, belt, boots — the familiar reassembly. Memory is already across both packs, the forge-tick the only sound now that the carter's wheels have moved off. The banked fire has gone from amber to cherry-low; another hour and it'll be out. Huginn shifts on the roofline above — you can hear the small adjusting weight — and resettles without comment.\n\nPell turns from the door. She looks at you the way she looks at a finished piece: straight, without apology, checking for something she's not going to name. Whatever she finds, it settles her. She crosses to the bench and picks up the whetstone — your whetstone, the fine river-stone you gave her — and sets it deliberately to one side, apart from the tool-clutter. A small act. She doesn't explain it.\n\n\"Ready?\" The forge-face is on, but not all the way — there's a seam in it, visible now that you know where to look. She reaches for her pack."
+      },
+      {
+        "player": "Start taking your clothes back off - She said she wanted another forging... and you are ready to give her one.",
+        "summary": "Silas undresses again; Pell crosses the floor and comes back to him without hesitation.",
+        "narration": "The whetstone is still apart from the clutter. That was deliberate — you noticed it when she set it there, the small ceremony of a thing placed rather than put down.\n\nYou reach for your shirt hem and pull it back over your head in one motion, folding it across the pack with the same unhurried quiet you used to dress. Boots next, unlaced and set aside. By the time you straighten she has turned from the door and is watching you from across the forge-floor, one hand still flat against the latch. The forge-face is half-assembled. You watch it come apart again.\n\n\"You said you wanted another round,\" you say, not a question, and there is nothing in your voice but plain intent and the particular warmth you've learned she responds to — not performance, not theater, just the thing itself offered directly. You watch her eyes. The flat certainty she brings to ironwork is there, but it's aimed differently now, and when she crosses the space between you her stride has the same quality as her hammer stroke — decided before she moves, no wasted motion. She does not stop when she reaches you. She stops just past the point where stopping would still be neutral, close enough that the warmth between you is already present before either of you lifts a hand.\n\nHuginn shifts on the roofline. One small sound — not a comment, just attendance. You are aware of it the way you are always aware of him at moments that matter: present, patient, entirely unrushed. The banked fire has gone cherry-low and the south-lane light has softened at the door. There is no knock. The morning has given you this, and Pell's hands, when they find the edge of your belt, move with the same methodical attention she brought to the spear's collar — knowing what she's doing, taking the time to do it right."
       }
     ],
     "lastTurn": {
-      "narration": "The knock was a carter — a sleeve-blank order, wrong day, sent away with Pell's instructions and a look that closed the subject. The south-lane door swings back to the amber interior and she latches it behind her, one hand flat against the wood as though checking it's truly shut.\n\nYou've been dressing quietly while she handled it. Shirt, belt, boots — the familiar reassembly. Memory is already across both packs, the forge-tick the only sound now that the carter's wheels have moved off. The banked fire has gone from amber to cherry-low; another hour and it'll be out. Huginn shifts on the roofline above — you can hear the small adjusting weight — and resettles without comment.\n\nPell turns from the door. She looks at you the way she looks at a finished piece: straight, without apology, checking for something she's not going to name. Whatever she finds, it settles her. She crosses to the bench and picks up the whetstone — your whetstone, the fine river-stone you gave her — and sets it deliberately to one side, apart from the tool-clutter. A small act. She doesn't explain it.\n\n\"Ready?\" The forge-face is on, but not all the way — there's a seam in it, visible now that you know where to look. She reaches for her pack.",
-      "sceneSummary": "The carter is turned away, the forge-face reassembles, Pell sets the whetstone apart and asks if Silas is ready.",
+      "narration": "The whetstone is still apart from the clutter. That was deliberate — you noticed it when she set it there, the small ceremony of a thing placed rather than put down.\n\nYou reach for your shirt hem and pull it back over your head in one motion, folding it across the pack with the same unhurried quiet you used to dress. Boots next, unlaced and set aside. By the time you straighten she has turned from the door and is watching you from across the forge-floor, one hand still flat against the latch. The forge-face is half-assembled. You watch it come apart again.\n\n\"You said you wanted another round,\" you say, not a question, and there is nothing in your voice but plain intent and the particular warmth you've learned she responds to — not performance, not theater, just the thing itself offered directly. You watch her eyes. The flat certainty she brings to ironwork is there, but it's aimed differently now, and when she crosses the space between you her stride has the same quality as her hammer stroke — decided before she moves, no wasted motion. She does not stop when she reaches you. She stops just past the point where stopping would still be neutral, close enough that the warmth between you is already present before either of you lifts a hand.\n\nHuginn shifts on the roofline. One small sound — not a comment, just attendance. You are aware of it the way you are always aware of him at moments that matter: present, patient, entirely unrushed. The banked fire has gone cherry-low and the south-lane light has softened at the door. There is no knock. The morning has given you this, and Pell's hands, when they find the edge of your belt, move with the same methodical attention she brought to the spear's collar — knowing what she's doing, taking the time to do it right.",
+      "sceneSummary": "Silas undresses again; Pell crosses the floor and comes back to him without hesitation.",
       "choices": [
         {
-          "label": "Walk out together — south lane to the north gate, the expedition begins.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "move",
-            "depart"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "One last word before the threshold — something the morning earned.",
+          "label": "Follow her lead — match her tempo exactly as before, read every signal, give her the pace she establishes until she has what she wants from it",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "name"
+            "follow",
+            "careful",
+            "intimate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Check the kit — Memory, parcels, waterskin, supplies — a practical once-over.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Take the opening she's given — set the tempo yourself this time, give her something to meet",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "prepare",
-            "careful"
+            "lead",
+            "intimate",
+            "direct"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Something else entirely.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Slow it down deliberately — hands, warmth, proximity — let the want build before either of you moves past where you are now",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "freeform"
+            "careful",
+            "intimate",
+            "slow"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say something before touching her — name what this is, what she is, what you've been thinking since the spear rang — not ceremony, just the thing that's been true since dawn",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "direct",
+            "intimate",
+            "honest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "scene": {
-        "setting": "Pell's forge interior, south lane of Millbrook — fire now cherry-low and fading, early-spring morning light at the latched south-lane door. Lane outside busy with carts and voices.",
+        "setting": "Pell's forge interior, south lane of Millbrook — fire cherry-low and fading, early-spring morning light at the latched south-lane door. Both half-undressed; Pell has crossed the floor to Silas.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing by the bench, pack in hand, forge-face mostly on — the whetstone set deliberately apart from the tool-clutter. Watching Silas."
+            "state": "Crossed the floor to Silas, hands at his belt — forge-face gone, watching him directly."
           },
           {
             "name": "Huginn",
-            "state": "On the roofline, weight resettled after a small shift — patient, attending."
+            "state": "On the roofline, attending without comment."
           }
         ],
         "objects": [
@@ -1665,7 +1702,8 @@
           "Banked forge fire (cherry-low, fading)",
           "River whetstone (Pell's — set deliberately apart on the bench)",
           "Contact Names Scrap (Sorel, Leth) — in the pack",
-          "Valve Failure Timeline note — in the pack"
+          "Valve Failure Timeline note — in the pack",
+          "Silas's shirt and boots — folded aside"
         ],
         "threads": [
           "The round scar at Pell's inner hipbone — found twice, never asked about",
@@ -1680,30 +1718,30 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Turned the carter away efficiently, set the whetstone deliberately apart from the tool-clutter, asked 'Ready?' with the forge-face not quite fully back on.",
+          "note": "Watched Silas undress from across the forge-floor, forge-face coming apart as she watched — then crossed to him without hesitation, hands finding his belt with the same methodical attention she brings to ironwork.",
           "learned": [
-            "Sets the whetstone apart from the tool-clutter — a deliberate small act without explanation"
+            "When Silas undresses again, she comes back across the floor — decided, no wasted motion"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the forge, pack in hand, ready to depart north with Silas — the forge-face partially restored, a seam visible in it now."
+          "statusNote": "In the forge with Silas, returned to him — expedition waits."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange — carter turned away, both dressed and assembled."
+        "hoursPassed": 0,
+        "why": "A moment between breaths — no time has passed yet."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge interior, south lane of Millbrook — fire now cherry-low and fading, early-spring morning light at the latched south-lane door. Lane outside busy with carts and voices.",
+      "setting": "Pell's forge interior, south lane of Millbrook — fire cherry-low and fading, early-spring morning light at the latched south-lane door. Both half-undressed; Pell has crossed the floor to Silas.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing by the bench, pack in hand, forge-face mostly on — the whetstone set deliberately apart from the tool-clutter. "
+          "state": "Crossed the floor to Silas, hands at his belt — forge-face gone, watching him directly."
         },
         {
           "name": "Huginn",
-          "state": "On the roofline, weight resettled after a small shift — patient, attending."
+          "state": "On the roofline, attending without comment."
         }
       ],
       "objects": [
@@ -1714,7 +1752,8 @@
         "Banked forge fire (cherry-low, fading)",
         "River whetstone (Pell's — set deliberately apart on the bench)",
         "Contact Names Scrap (Sorel, Leth) — in the pack",
-        "Valve Failure Timeline note — in the pack"
+        "Valve Failure Timeline note — in the pack",
+        "Silas's shirt and boots — folded aside"
       ],
       "threads": [
         "The round scar at Pell's inner hipbone — found twice, never asked about",
@@ -1869,7 +1908,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Working Silas the way she works metal — methodical, unhurried, without asking permission. Paused now in a full-measure look.",
         "[d2] Received the same quality of attention she gave — let Silas work at his pace, held the redirections without protest. Afterward: quiet, a single word verdict ('Thorough'), weight ea",
         "[d2] Received Silas entering her slowly — back arched, breath released, watching him without looking away. Not composed and aware of it.",
         "[d2] Admitted plainly she is already behind — named it without flinching. Eyes stayed on Silas through the full depth. Hand moved to the back of his neck. Answered in the register she's",
@@ -1878,17 +1916,18 @@
         "[d2] Moved her hand to Memory without being guided — grain-reading instinct found the maker's mark and held it. Felt the spear take something from both of them. Named it flatly as a tec",
         "[d2] Received Silas's plain naming of the binding — turned her hand, closed her fingers around his, answered with 'you're going to make that hard to argue with. Good.' Both things meant",
         "[d2] Chose the door over another round — dressed efficiently, released Silas's hand without ceremony, composure reassembling as she moves. One dry remark: 'Forging. But the door first.'",
-        "[d2] Turned the carter away efficiently, set the whetstone deliberately apart from the tool-clutter, asked 'Ready?' with the forge-face not quite fully back on."
+        "[d2] Turned the carter away efficiently, set the whetstone deliberately apart from the tool-clutter, asked 'Ready?' with the forge-face not quite fully back on.",
+        "[d2] Watched Silas undress from across the forge-floor, forge-face coming apart as she watched — then crossed to him without hesitation, hands finding his belt with the same methodical "
       ],
       "knownFacts": [
-        "When the terms change and she's receiving rather than directing, she finds the tempo and holds it — the same methodical quality she brings to iron",
         "A sound slipped past her control once this morning — she noted it, didn't flinch, found the rhythm again",
         "When the composure finally spends itself, her eyes go last — she holds eye contact longer than anything else",
         "Her finish verdict is the same register as ironwork diagnosis: flat, certain, accurate",
         "When the maker's mark is held at the oblique the spear set, something in the binding responds — she felt it as a weld that has just caught",
         "The spear now holds an imprint neither of them put there alone",
         "Silas named the binding between them plainly and without ceremony — she received it without deflecting",
-        "Sets the whetstone apart from the tool-clutter — a deliberate small act without explanation"
+        "Sets the whetstone apart from the tool-clutter — a deliberate small act without explanation",
+        "When Silas undresses again, she comes back across the floor — decided, no wasted motion"
       ],
       "skillsObserved": [
         "reading heat and evenness through the hand on the chest — th",
@@ -1899,7 +1938,7 @@
         "naming a technical and personal observation in the same regi"
       ],
       "status": "active",
-      "statusNote": "In the forge, pack in hand, ready to depart north with Silas — the forge-face partially restored, a seam visible in it now.",
+      "statusNote": "In the forge with Silas, returned to him — expedition waits.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2794,15 +2833,15 @@
     }
   },
   "tendencies": {
-    "strategic": 63.556043358414655,
-    "cerebral": 40.895006998866755,
-    "social": 56.387978274105066,
-    "generous": 17.2946048216767,
-    "cautious": 49.4860326294517,
-    "physical": 0.8836483005718277,
-    "risky": 2.9387188279081253,
-    "ruthless": 2.2009347205847605,
-    "carousing": 1.5219110149612876
+    "strategic": 63.23826314162258,
+    "cerebral": 40.690531963872424,
+    "social": 56.10603838273454,
+    "generous": 17.208131797568317,
+    "cautious": 49.23860246630444,
+    "physical": 0.8792300590689686,
+    "risky": 2.924025233768585,
+    "ruthless": 2.1899300469818366,
+    "carousing": 1.514301459886481
   },
   "aptitudes": [
     "strategist",
@@ -2810,7 +2849,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 248,
+  "actionCount": 249,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2928,8 +2967,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784154400515,
-  "rev": 342,
+  "updatedAt": 1784154521550,
+  "rev": 343,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3425,7 +3464,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 49
+    "valley": 50
   },
   "foreclosed": [
     "rootkin",

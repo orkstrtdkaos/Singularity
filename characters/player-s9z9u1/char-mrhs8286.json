@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 6,
-  "xp": 527,
+  "xp": 534,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -44,7 +44,7 @@
     "chaos_order": 0.17735604682204079,
     "mechanical_spiritual": 0.16517695395990592,
     "concrete_abstract": -0.054039279372962046,
-    "death_life": -0.1443423925169633,
+    "death_life": -0.1571252728911151,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03
@@ -53,7 +53,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 74,
+  "energy": 68,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1296,72 +1296,73 @@
         "player": "Look toward the entrance — check what Huginn is attending to before the moment moves",
         "summary": "Huginn's attention fixes northeast — something is ending in the hillside; Pell reads the bird and names it.",
         "narration": "The read hangs in you still — the shape of the absent instrument, the operator's station, the design of something that was tended and then deliberately taken. You turn from the cradle-recess toward the entrance.\n\nHuginn is standing at the ring-hook with his head angled low and forward, the way he holds himself when something is in the process of ending nearby. Not emergency — he is not bristled, not loud. But the attention is fixed: out through the entrance gap, northeast, toward where the hillside rises and the buried structure continues deeper into the bank. His eye, when it catches yours, does not move back to the entrance. He holds your gaze for a moment and then looks away again, deliberately, back to the northeast.\n\nSomething out there is ending. Probably not fast.\n\nPell has watched this exchange without comment. She knows Huginn well enough by now to read the posture, and her hand has come off the recess rim. \"The bird's found something,\" she says, not a question. The flat register, but her attention is full on the entrance now too.\n\nThe morning is early and the light is still low and flat through the hillside gap. You have the read from the cradle-recess. You have the Valve Failure Timeline note in your breast pocket. Dara Holt is twenty minutes north on the path, chimney already smoking, unbriefed. And whatever Huginn is attending is somewhere in the hillside behind you, moving at its own pace toward its end."
+      },
+      {
+        "player": "Use The Attended End — open it yourself and read what is ending here and how long it has.",
+        "summary": "The Attended End reads the ending in the hillside — six weeks before a structural section fails; Pell names it before Silas speaks.",
+        "narration": "You open The Attended End quietly, without ceremony — a small internal unlocking, the way you'd lift a latch rather than push a door. Marrow's work, not yours; you are borrowing the clarity it already carries.\n\nIt comes back clean and plain: something is ending in the hillside northeast of you, maybe forty feet out and deeper in the bank. Not a person. Not an animal. The structure itself — a section of it, the part that has been holding a last breath since whatever instrument was removed from this cradle. Forty years of strain taken up by old mortar and dressed stone and the patience of buried things. The countdown is not dramatic. You read perhaps six weeks left before the section fails — a slow settling into itself, the way a held weight eventually wins. Not a collapse. A surrender.\n\nPell watches your face. She has learned, in the last hour, what your expressions during a reading look like. 'The building,' she says. Not a question.\n\nHuginn crooks once, low, and does not look back."
       }
     ],
     "lastTurn": {
-      "narration": "The read hangs in you still — the shape of the absent instrument, the operator's station, the design of something that was tended and then deliberately taken. You turn from the cradle-recess toward the entrance.\n\nHuginn is standing at the ring-hook with his head angled low and forward, the way he holds himself when something is in the process of ending nearby. Not emergency — he is not bristled, not loud. But the attention is fixed: out through the entrance gap, northeast, toward where the hillside rises and the buried structure continues deeper into the bank. His eye, when it catches yours, does not move back to the entrance. He holds your gaze for a moment and then looks away again, deliberately, back to the northeast.\n\nSomething out there is ending. Probably not fast.\n\nPell has watched this exchange without comment. She knows Huginn well enough by now to read the posture, and her hand has come off the recess rim. \"The bird's found something,\" she says, not a question. The flat register, but her attention is full on the entrance now too.\n\nThe morning is early and the light is still low and flat through the hillside gap. You have the read from the cradle-recess. You have the Valve Failure Timeline note in your breast pocket. Dara Holt is twenty minutes north on the path, chimney already smoking, unbriefed. And whatever Huginn is attending is somewhere in the hillside behind you, moving at its own pace toward its end.",
-      "sceneSummary": "Huginn's attention fixes northeast — something is ending in the hillside; Pell reads the bird and names it.",
+      "narration": "You open The Attended End quietly, without ceremony — a small internal unlocking, the way you'd lift a latch rather than push a door. Marrow's work, not yours; you are borrowing the clarity it already carries.\n\nIt comes back clean and plain: something is ending in the hillside northeast of you, maybe forty feet out and deeper in the bank. Not a person. Not an animal. The structure itself — a section of it, the part that has been holding a last breath since whatever instrument was removed from this cradle. Forty years of strain taken up by old mortar and dressed stone and the patience of buried things. The countdown is not dramatic. You read perhaps six weeks left before the section fails — a slow settling into itself, the way a held weight eventually wins. Not a collapse. A surrender.\n\nPell watches your face. She has learned, in the last hour, what your expressions during a reading look like. 'The building,' she says. Not a question.\n\nHuginn crooks once, low, and does not look back.",
+      "sceneSummary": "The Attended End reads the ending in the hillside — six weeks before a structural section fails; Pell names it before Silas speaks.",
       "choices": [
         {
-          "label": "Step outside and let Huginn lead — follow his attention northeast along the hillside and see what's ending up there before you move on.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Step northeast into the hillside — follow the buried structure's line and find the failing section before it shows itself",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "scout",
-            "follow"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Huginn directly — crouch to his level, look him in the eye, and ask plainly what's ending and how long it has.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use The Attended End — open it yourself and read what is ending here and how long it has.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Leave it for now — head for Dara Holt. The structure read is complete; whatever is ending in the hillside will still be ending when you return.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Use Order-Sense on the northeast line — read the failing section's place in the full design before going in",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell Pell what you read — six weeks, the structure section, slow — and ask if she knows what that kind of failure does to an active channel system",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Leave the wash-room — take what you have, brief Dara Holt now, and let the site wait while the person with twenty-two years on the east channel hears the full picture",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
             "careful"
           ],
           "abilityId": null,
@@ -1371,26 +1372,21 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -4,
+        "xp": 2
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The cradle-recess has been fully read; Huginn's attention is fixed northeast through the entrance.",
+        "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The Attended End has been opened and read; Huginn's attention remains fixed northeast.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Hand off the recess rim, attention on the entrance — she's read Huginn's posture and named it."
+            "state": "Standing near the recess, watching Silas's face — she named the building before he spoke; waiting for the detail."
           },
           {
             "name": "Huginn",
-            "state": "Standing at the ring-hook, head angled low and forward, fixed northeast — attending something ending in the hillside."
+            "state": "At the ring-hook, head low and forward, fixed northeast — one low croak, attention unbroken."
           }
         ],
         "objects": [
@@ -1398,11 +1394,11 @@
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)",
-          "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compression-polish on inner ledge — operator's station, instrument absent",
+          "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compression-polish on inner ledge",
           "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn"
         ],
         "threads": [
-          "Something northeast in the hillside is ending — Huginn is attending it, pace unknown",
+          "A structural section northeast in the hillside is failing — six weeks, slow surrender; location unvisited",
           "Dara Holt unbriefed — twenty minutes north, chimney already smoking",
           "Date three confirmed: last light, Disputed Zone interference ridge, food with fat"
         ]
@@ -1413,66 +1409,76 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Read Huginn's posture without prompting — named it plainly before Silas spoke.",
+          "note": "Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning.",
           "learned": [
-            "Huginn's low-and-forward posture signals an ending nearby — she can read it now"
+            "A section of the buried structure northeast of the wash-room is failing — slow, six weeks, a structural surrender rather than a collapse"
           ],
           "skillsObserved": [
-            "reading animal attention without being told what it means"
+            "reading a practitioner's expression across a reading without being told the content"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the wash-room site with Silas — date four terms agreed, cradle-recess read complete, now watching the entrance with Huginn."
+          "statusNote": "At the wash-room site with Silas — armor down, watching the read."
         },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "note": "Fixed northeast through the entrance gap — attending something ending in the hillside at its own pace. Met Silas's eyes and looked deliberately back.",
+          "role": "Companion",
+          "note": "One low croak after the reading landed — does not look back from the northeast. The read confirmed what Huginn already knew.",
           "learned": [
-            "Something northeast of the wash-room site is ending — pace unhurried"
-          ],
-          "skillsObserved": [
-            "attending an ending in progress, directional attention"
+            "The structural section's ending confirmed by The Attended End — Huginn's attendance was accurate"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the ring-hook in the wash-room site — attention fixed northeast on something ending in the hillside."
+          "statusNote": "At the ring-hook, attending the ending northeast — the read has caught up to where the bird already was."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Huginn is attending something ending northeast of the wash-room operator's station — in the hillside above the buried structure's main course. Pace: unhurried. Nature: unknown.",
+          "entityId": null,
+          "fact": "A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely. The removal of the operator's instrument left the structure holding a load it was not designed to hold alone.",
           "links": [
-            "millbrook",
             "pell",
-            "aldric-provisioning-deal",
+            "millbrook",
             "dara-holt",
-            "precursor-signs-in-the-valley"
+            "order-sense",
+            "the-unnamed-gift"
           ]
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Attended End confirms a structural section northeast of the wash-room is failing — slow, six weeks, a load-surrender caused by removal of the operator's instrument. Not a collapse; a surrender.",
+          "subjectId": null
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "brief exchange at the cradle-recess — a few minutes of observation and conversation"
+        "why": "A short internal read — The Attended End opened and closed in less than a minute"
       }
     },
     "sceneState": {
-      "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The cradle-recess has been fully read; Huginn's attention is fixed northeast through the entrance.",
+      "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The Attended End has been opened and read; Huginn's attention remains fixed northeast.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Hand off the recess rim, attention on the entrance — she's read Huginn's posture and named it."
+          "state": "Standing near the recess, watching Silas's face — she named the building before he spoke; waiting for the detail."
         },
         {
           "name": "Huginn",
-          "state": "Standing at the ring-hook, head angled low and forward, fixed northeast — attending something ending in the hillside."
+          "state": "At the ring-hook, head low and forward, fixed northeast — one low croak, attention unbroken."
         }
       ],
       "objects": [
@@ -1484,7 +1490,7 @@
         "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn"
       ],
       "threads": [
-        "Something northeast in the hillside is ending — Huginn is attending it, pace unknown",
+        "A structural section northeast in the hillside is failing — six weeks, slow surrender; location unvisited",
         "Dara Holt unbriefed — twenty minutes north, chimney already smoking",
         "Date three confirmed: last light, Disputed Zone interference ridge, food with fat"
       ]
@@ -1513,14 +1519,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Removal-to-onset chain resolved with Pell — two-winter slip model established. Fen's intake reached; valve cover visibly off true.",
         "Fen's intake physical inspection begun — Pell identifies twisted sleeve and torqued cover as the failure mode. East furlong site next.",
         "Pell confirms: wash-room site and east-channel valve failures are the same structure — different rooms, same design intent, built to act on the water.",
         "Order-Sense confirms: the east furlong valve housing is the working end of a forty-foot coursed-stone structure running northeast under the soil. The soil-rise is the roof settling. The structure is largely intact.",
         "East furlong valve twist direction confirmed — counterclockwise, identical to Fen's intake. Both sleeves failed on the same axis. Pell's read: the torque originated inside the structure. Something turned.",
         "Valve Failure Timeline annotated — both sites share identical CCW torque from an inside source; wash-room added as third room, NE terminus. The structure's mechanical signature is now recorded.",
         "Palework on the cradle-recess confirms a stationed working piece removed cleanly — the structure's fourth room understood; age bracket narrows no further. Huginn's attention has shifted to the entrance.",
-        "Order-Sense confirms the wash-room as the operator's station and head of the full buried channel system — the structure's purpose is operational infrastructure, not ruin. The instrument that controlled it is missing."
+        "Order-Sense confirms the wash-room as the operator's station and head of the full buried channel system — the structure's purpose is operational infrastructure, not ruin. The instrument that controlled it is missing.",
+        "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1634,7 +1640,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it.",
         "[d2] Lost the race by three strides — caught Silas's shadowstep emerging from the bank shadow, pressed anyway on unfamiliar ground, arrived second. Breathing hard; processing defeat wit",
         "[d2] Received Silas's paradoxical concession — hand to his jaw, invited him to name the date plainly. The quiet in her face was warmer than the usual register.",
         "[d2] Pulled into a deep kiss at the wash-room entrance — leaned in rather than away, let it land, said 'alright' again afterward with the same complete weight as at the forge. File stil",
@@ -1643,28 +1648,29 @@
         "[d2] Date four terms accepted without ceremony — turned back to the work, crouching at the cradle-recess, reading the contact stain with two fingers.",
         "[d2] Watched Palework on the cradle-recess — read Silas's hand coming up, said 'Old' before being told. Huginn's attention shift registered on her face.",
         "[d2] Hand gone still on the recess rim — watching Silas's face, asked directly what Order-Sense found. Waiting.",
-        "[d2] Read Huginn's posture without prompting — named it plainly before Silas spoke."
+        "[d2] Read Huginn's posture without prompting — named it plainly before Silas spoke.",
+        "[d2] Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning."
       ],
       "knownFacts": [
-        "Date three: last light at the Disputed Zone interference ridge",
         "Knows the ridge — has been there before",
         "Read the saddle-hooks as a stabilizing mount, not a hanging rig",
         "Knows a snowmelt-fed pool three hours north of the interference ridge — clean water, not river-sourced; visits in early summer but considers the ice out by now",
         "Contact stain at the cradle-recess base is not seasonal — it is built-in, long-term presence of something cradled here.",
         "Palework confirmed the object was stationed, not fixed — old enough to stain stone to iron-brown; age bracket 40–200 years",
         "The cradle-recess read produced a different expression on Silas's face — she noticed before he spoke",
-        "Huginn's low-and-forward posture signals an ending nearby — she can read it now"
+        "Huginn's low-and-forward posture signals an ending nearby — she can read it now",
+        "A section of the buried structure northeast of the wash-room is failing — slow, six weeks, a structural surrender rather than a collapse"
       ],
       "skillsObserved": [
-        "accepting a fair loss without excess",
         "structural read on load-bearing geometry",
         "immediate transition from personal to practical without cere",
         "material reading under field conditions",
         "reading a practitioner's result from body language alone",
-        "reading animal attention without being told what it means"
+        "reading animal attention without being told what it means",
+        "reading a practitioner's expression across a reading without"
       ],
       "status": "active",
-      "statusNote": "At the wash-room site with Silas — date four terms agreed, cradle-recess read complete, now watching the entrance with Huginn.",
+      "statusNote": "At the wash-room site with Silas — armor down, watching the read.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2294,7 +2300,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Pell recalls a similar flagged-cellar site deeper in the valley — ring-hooks, flagged floor, locals called it 'the wash-room'. Nothing was washed in it. Two sites with identical architecture suggests ",
           "[d2] The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting ",
           "[d2] Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave",
           "[d2] Pell read the deeper chamber's stand-marks as a two-person fixed operation requiring exact positioning — the grid calibrated against something not present in the room, which means either the instrumen",
@@ -2317,7 +2322,8 @@
           "[d2] Wash-room cradle-recess holds iron-contact stain consistent with a tall, load-bearing object — saddle-hooks read by Pell as a steadying rig. Something occupied this station and has been removed.",
           "[d2] Cradle-recess contact stain confirmed as long-term built-in presence — not seasonal. Compression-polish on north/south inner ledge indicates the object was cradled, not merely placed, and was load-bea",
           "[d2] Order-Sense confirms the wash-room is an operator's station — the head of the buried structure. The cradle-recess held a cylindrical iron-sheathed instrument (~5 ft, weighted base, working head) that ",
-          "[d2] Huginn is attending something ending northeast of the wash-room operator's station — in the hillside above the buried structure's main course. Pace: unhurried. Nature: unknown."
+          "[d2] Huginn is attending something ending northeast of the wash-room operator's station — in the hillside above the buried structure's main course. Pace: unhurried. Nature: unknown.",
+          "[d2] A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely"
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2436,15 +2442,15 @@
     }
   },
   "tendencies": {
-    "strategic": 54.91694219560933,
-    "cerebral": 43.94346409212077,
-    "social": 52.8000997617336,
-    "generous": 14.190614447937103,
-    "cautious": 50.48459391454298,
-    "physical": 1.1128015765229673,
-    "risky": 3.7008060135889647,
-    "ruthless": 1.518665352926147,
-    "carousing": 1.9165826219329964
+    "strategic": 54.64235748463128,
+    "cerebral": 44.72374677166017,
+    "social": 52.53609926292493,
+    "generous": 14.119661375697417,
+    "cautious": 51.232170944970264,
+    "physical": 1.1072375686403524,
+    "risky": 3.68230198352102,
+    "ruthless": 1.5110720261615163,
+    "carousing": 1.9069997088233315
   },
   "aptitudes": [
     "strategist",
@@ -2452,7 +2458,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 202,
+  "actionCount": 203,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2538,8 +2544,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784087891260,
-  "rev": 276,
+  "updatedAt": 1784088042434,
+  "rev": 277,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2615,12 +2621,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "f1",
-      "text": "Silas arrived in Millbrook on World-day 12 as a complete stranger — no reputation, no contacts, pack still on his back.",
-      "day": 1,
-      "subjectId": null
-    },
     {
       "id": "f2",
       "text": "Silas Weir raised a cleaned, dead rabbit back to life in Millbrook's upper meadow on World-day 12 — no ritual, no understood mechanism; the valley's old grain answered something in him. The animal is ",
@@ -2854,6 +2854,12 @@
       "text": "Pell named date four on World-day 15 dawn: a snowmelt pool three hours north of the Disputed Zone interference ridge, night, no spear — her terms, given plainly.",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "f41",
+      "text": "The Attended End confirms a structural section northeast of the wash-room is failing — slow, six weeks, a load-surrender caused by removal of the operator's instrument. Not a collapse; a surrender.",
+      "day": 2,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -2865,7 +2871,7 @@
       "palework": 15,
       "deathsense": 12,
       "shadowstep": 4,
-      "the-attended-end": 2
+      "the-attended-end": 3
     },
     "coActivations": {
       "lightsense+numen_sense": 1,

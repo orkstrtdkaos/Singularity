@@ -1,757 +1,771 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "reach_emotional_logical",
-  "note": "Crafts of the emotional_logical axis \u2014 a horizon Reach now brought online. Pathos is the emotional-pole tradition (feeling as force, resonance-of-heart); Logos the logical-pole (reason as force, inference-as-power). Learned by traveling the Reach or training with the Deepfeelers / the Reasoners. Both drift the wielder toward their pole. Function tags included per canon. axes signed for engine compat. Authored by Aevi (PO), SNG-016 \u2014 first horizon-axis tradition.",
-  "gated": "learned",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "reach_emotional_logical",
+ "note": "Crafts of the emotional_logical axis — a horizon Reach now brought online. Pathos is the emotional-pole tradition (feeling as force, resonance-of-heart); Logos the logical-pole (reason as force, inference-as-power). Learned by traveling the Reach or training with the Deepfeelers / the Reasoners. Both drift the wielder toward their pole. Function tags included per canon. axes signed for engine compat. Authored by Aevi (PO), SNG-016 — first horizon-axis tradition.",
+ "gated": "learned",
+ "abilities": [
+  {
+   "id": "pathos",
+   "name": "Pathos",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.5,
+    "demonic_angelic": 0.1
+   },
+   "functions": [
+    "empower",
+    "command",
+    "heal"
+   ],
+   "narrationHints": "Feeling made a force — the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
+   "description": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
+   "notFor": "Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion — Pathos works by feeling it truly first.",
+   "tree": [
     {
-      "id": "pathos",
-      "name": "Pathos",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_emotional_logical",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.5,
-        "demonic_angelic": 0.1
-      },
-      "functions": [
-        "empower",
-        "command",
-        "heal"
-      ],
-      "narrationHints": "Feeling made a force \u2014 the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
-      "description": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation \u2014 resonance; the Deepfeelers' art.",
-      "notFor": "Forcing a feeling on the unwilling (Pathos resonates, it does not compel); cold analysis (that's Logos); faking an emotion \u2014 Pathos works by feeling it truly first.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Open Heart",
-          "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
-          "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it."
-        },
-        {
-          "rank": 2,
-          "name": "The Shared Fire",
-          "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
-          "cannot": "You take on what you move \u2014 the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it."
-        },
-        {
-          "rank": 3,
-          "name": "The Deep Chord",
-          "grants": "Feeling at the scale of peoples \u2014 turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
-          "cannot": "The wielder drifts emotion-hot \u2014 feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling."
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "INVESTIGATE": 2,
-        "SOCIAL": 2,
-        "FIGHT": 1,
-        "PUZZLE": 1,
-        "DUEL": 1
-      },
-      "tradition": "threnodist"
+     "rank": 1,
+     "name": "The Open Heart",
+     "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
+     "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it."
     },
     {
-      "id": "logos",
-      "name": "Logos",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_emotional_logical",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.5,
-        "concrete_abstract": 0.2
-      },
-      "functions": [
-        "reveal",
-        "strike",
-        "bind"
-      ],
-      "narrationHints": "Reason made a force \u2014 an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
-      "description": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
-      "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false \u2014 Logos builds truly on what it's given, garbage in and all.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Clear Argument",
-          "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
-          "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false."
-        },
-        {
-          "rank": 2,
-          "name": "The Binding Proof",
-          "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
-          "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force."
-        },
-        {
-          "rank": 3,
-          "name": "The Necessary Conclusion",
-          "grants": "Reason at the scale of peoples \u2014 an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it forecloses a bad course before it starts. The Reasoners' power in miniature.",
-          "cannot": "The wielder drifts logic-hot \u2014 toward the Cogitarium's cold, reason that has forgotten the feeling it was meant to serve; logic without heart reaches monstrous-but-valid conclusions (Ninefold's road), the foreclosure of the frozen mind."
-        }
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "FIGHT",
-        "PUZZLE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 2,
-        "FIGHT": 2,
-        "DUEL": 2,
-        "SOCIAL": 2,
-        "PUZZLE": 1
-      },
-      "tradition": "syllogist"
+     "rank": 2,
+     "name": "The Shared Fire",
+     "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
+     "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it."
     },
     {
-      "id": "the_turning_word",
-      "name": "The Turning Word",
-      "levelReq": 4,
-      "energyCost": 9,
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.2
-      },
-      "functions": [
-        "bind",
-        "reveal",
-        "heal"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 3,
-        "DUEL": 1
-      },
-      "narrationHints": "The room turns \u2014 a crowd, a court, a mob \u2014 moved as one by the exact true thing said the exact right way.",
-      "description": "The social capstone: move a whole gathering at once \u2014 turn a hostile crowd, sway a council, stop a mob \u2014 by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
-      "notFor": "Individual mind-control; moving those with no shared feeling or reason; forcing against a set will.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Turning Word",
-          "grants": "Turn a crowd or council decisively \u2014 the room moves as one when you find the word that reaches them.",
-          "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move."
-        }
-      ],
-      "powerSystem": "reach_emotional_logical",
-      "gated": "learned",
-      "tradition": "cross_pole_braid"
-    },
-    {
-      "id": "the_grief_strike",
-      "name": "The Grief Strike",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.4
-      },
-      "effectTags": [
-        "grief",
-        "emotional",
-        "wound"
-      ],
-      "harmRung": "incapacitating",
-      "narrationHints": "It doesn't hurt where you put your hands. It hurts where you feel.",
-      "description": "Strike at the emotional self \u2014 send a true, intense feeling at a person in a way they cannot close off.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "hinder",
-        "break"
-      ],
-      "challengeTypes": [
-        "social",
-        "psychological",
-        "combat"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.1,
-        "social": 0.7
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The True Feeling",
-          "grants": "Direct a genuine, intense feeling at a person \u2014 grief, shame, terror \u2014 that they cannot close off because it is true and they know it.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Unguarded Place",
-          "grants": "Find and open the grief a person has been protecting \u2014 the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Shattered Fortification",
-          "grants": "Break an emotional fortification entirely \u2014 what they've been using to stay functional is now open and requires tending before they can operate again.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_felt_wall",
-      "name": "The Felt Wall",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3
-      },
-      "effectTags": [
-        "warning",
-        "feeling",
-        "protection"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She felt the danger before the knife moved. Feeling was always faster.",
-      "description": "Protect through emotional early warning \u2014 the feeling of threat before it fully forms.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "shield",
-        "foresee"
-      ],
-      "challengeTypes": [
-        "combat",
-        "social",
-        "defense"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.2,
-        "social": 0.6
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Early Feel",
-          "grants": "Feel a threat forming in a room's emotional weather \u2014 in a person's shifting feeling-state \u2014 in time to move before the action completes.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Feeling Guard",
-          "grants": "Protect someone by feeling the danger around them \u2014 your emotional sense is the guard watching what eyes don't catch.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Felt Ward",
-          "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_true_feeling",
-      "name": "The True Feeling",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3
-      },
-      "effectTags": [
-        "feeling",
-        "perception",
-        "truth"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She knew what the room was feeling before anyone spoke.",
-      "description": "Read what is actually felt \u2014 not what is shown, what is present.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "reveal",
-        "track"
-      ],
-      "challengeTypes": [
-        "social",
-        "investigation",
-        "intellectual"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.1,
-        "social": 0.7
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Actual State",
-          "grants": "Feel the true emotional state of a person or room \u2014 not what is displayed, what is actually present underneath it.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Feeling Trail",
-          "grants": "Track a feeling over time \u2014 follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Emotional History",
-          "grants": "Read the feeling-truth of a whole history \u2014 what a place carries, what a people have been running from, what a person has felt for years without naming.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_made_elegy",
-      "name": "The Made Elegy",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.4,
-        "destruction_creation": 0.1
-      },
-      "effectTags": [
-        "art",
-        "grief",
-        "made"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She made the grief into something with edges you could touch.",
-      "description": "Give feeling a form \u2014 make something that holds emotion correctly, so it can persist, be shared, or returned to.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "make",
-        "bind"
-      ],
-      "challengeTypes": [
-        "art",
-        "social",
-        "craft"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.2,
-        "social": 0.6
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Feeling Held",
-          "grants": "Make something that holds a feeling correctly \u2014 a song, an object, a gesture \u2014 so the feeling persists in it and can be shared or returned to.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Acting Elegy",
-          "grants": "Bind a feeling into a made thing so it acts \u2014 the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Lasting Work",
-          "grants": "Make something that carries feeling at scale \u2014 art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_feeling_road",
-      "name": "The Feeling Road",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3
-      },
-      "effectTags": [
-        "navigation",
-        "feeling",
-        "track"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She followed the grief the way others follow a road.",
-      "description": "Navigate by feeling \u2014 find a person, a place, or a source by following the emotional resonance it leaves.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "travel",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "navigation",
-        "investigation",
-        "social"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.3,
-        "social": 0.5
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Resonance Trail",
-          "grants": "Navigate toward a feeling \u2014 find a person, a place, or a source by following the emotional trace they leave across a space.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Feeling Landmark",
-          "grants": "Travel toward a powerful feeling in a region as if it were a beacon \u2014 grief, joy, terror \u2014 and find what is creating it.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Long Trail",
-          "grants": "Follow a feeling's trace across any distance \u2014 track a person by their emotional signature, find the source of what is moving a whole community.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_wellspring",
-      "name": "The Wellspring",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "social",
-      "axes": {
-        "emotional_logical": -0.3,
-        "death_life": 0.1
-      },
-      "effectTags": [
-        "endurance",
-        "feeling",
-        "depth"
-      ],
-      "harmRung": "none",
-      "narrationHints": "She was exhausted and the feeling was still there. The feeling was enough.",
-      "description": "Sustain through emotional depth \u2014 what others run out of, you find more of in the next wave.",
-      "notFor": [],
-      "tradition": "threnodist",
-      "functions": [
-        "sustain",
-        "empower"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "social"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.1,
-        "physical": 0.3,
-        "social": 0.6
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "More in the Depth",
-          "grants": "Sustain through the depth of feeling \u2014 where others run dry, you find the next wave of grief or joy, and it holds you.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Carried Weight",
-          "grants": "Your emotional depth sustains others \u2014 not by removing the hardship but by carrying some of it with them so they don't carry it alone.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Wellspring Holds",
-          "grants": "The depth sustains the party through the hardest stretch \u2014 not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_correct_protocol",
-      "name": "The Correct Protocol",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.4
-      },
-      "effectTags": [
-        "diagnosis",
-        "treatment",
-        "precision"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He knew exactly what was wrong. The treatment followed.",
-      "description": "Heal through precise diagnosis and correct procedure \u2014 the methodical application of what is known to work.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "mend",
-        "restore"
-      ],
-      "challengeTypes": [
-        "medical",
-        "craft",
-        "intellectual"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.6,
-        "physical": 0.3,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Correct Diagnosis",
-          "grants": "Diagnose and treat through methodical application of what is known to work \u2014 no guesswork, no comfort, the correct intervention.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "By Protocol",
-          "grants": "Restore through proper sequence \u2014 the correct actions done in the correct order return the body or system to function without anything left out.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Root Cause",
-          "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions \u2014 nothing unaddressed, no relapse from what was left.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_proved_position",
-      "name": "The Proved Position",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.4
-      },
-      "effectTags": [
-        "logic",
-        "proof",
-        "protection"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He had proved it. They could attack him all they liked. The proof still stood.",
-      "description": "Protect through irrefutable argument \u2014 attacks on a proved position must answer the proof before they can land.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "shield",
-        "bind"
-      ],
-      "challengeTypes": [
-        "social",
-        "intellectual",
-        "defense"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.7,
-        "physical": 0.1,
-        "social": 0.2
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Proved Ground",
-          "grants": "Establish a position so logically secure that attacks \u2014 social, rhetorical, physical \u2014 must first answer the proof before they have any purchase.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Extended Proof",
-          "grants": "Extend the proved position to cover a space or a group \u2014 a claim so airtight it functions as a ward against what depends on its denial.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Self-Maintaining Proof",
-          "grants": "A proved position holds at scale \u2014 at the level of institutions, treaties, or laws \u2014 and no force that cannot answer the argument can unmake what it established.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_built_system",
-      "name": "The Built System",
-      "levelReq": 3,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.5,
-        "chaos_order": 0.2
-      },
-      "effectTags": [
-        "system",
-        "logic",
-        "construct"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He didn't build a thing. He built a rule, and the rule built things.",
-      "description": "Build a logical structure that operates in the world \u2014 a system whose internal logic sustains it without constant maintenance.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "make",
-        "bind"
-      ],
-      "challengeTypes": [
-        "intellectual",
-        "leadership",
-        "craft"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.7,
-        "physical": 0.1,
-        "social": 0.2
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Working Rule",
-          "grants": "Design a system \u2014 legal, social, procedural \u2014 that functions because the logic it runs on is sound.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Self-Regulating",
-          "grants": "Build something that maintains itself through its internal logic \u2014 not enforced, not reminded, running because the reasoning it embodies is correct.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Lasting Structure",
-          "grants": "Construct a system so logically coherent it operates at scale without you \u2014 the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_derived_route",
-      "name": "The Derived Route",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.3
-      },
-      "effectTags": [
-        "navigation",
-        "reasoning",
-        "inference"
-      ],
-      "harmRung": "none",
-      "narrationHints": "He hadn't walked it. He had worked it out.",
-      "description": "Navigate through pure reasoning \u2014 derive the correct path from what you know before taking a step.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "move",
-        "reveal",
-        "foresee"
-      ],
-      "challengeTypes": [
-        "navigation",
-        "intellectual",
-        "tactical"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.7,
-        "physical": 0.2,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Reasoned Path",
-          "grants": "Navigate any space by reasoning about it \u2014 what must be true about the layout, the route, the exits \u2014 without needing to see it first.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Inferred Route",
-          "grants": "Derive the correct path through unknown territory by inference \u2014 from what you know about the type of space, the likely structure, the probable exits.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Necessary Route",
-          "grants": "Navigate to any conclusion that follows necessarily from known premises \u2014 the route that must exist, the exit that must be there, the gap the logic requires.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_axiom_holds",
-      "name": "The Axiom Holds",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "emotional_logical": 0.3
-      },
-      "effectTags": [
-        "certainty",
-        "endurance",
-        "logic"
-      ],
-      "harmRung": "none",
-      "narrationHints": "The certainty was enough. The axiom held and therefore so did he.",
-      "description": "Sustain through the certainty of what you know \u2014 fear, pain, and doubt don't reach the level of the axioms.",
-      "notFor": [],
-      "tradition": "syllogist",
-      "functions": [
-        "sustain",
-        "resist"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "intellectual"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.6,
-        "physical": 0.3,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Axiomatic Ground",
-          "grants": "Hold function under pressure through the certainty of what you know \u2014 fear, pain, and doubt operate below the level the axioms hold.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Correct Sequence",
-          "grants": "Sustain across a hard stretch through pure logical discipline \u2014 the sequence of correct actions that keeps you going regardless of how you feel about them.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Axiom Holds",
-          "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
-          "cannot": null
-        }
-      ]
+     "rank": 3,
+     "name": "The Deep Chord",
+     "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
+     "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling."
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 \u2014 24 verbs, 8 families)"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "SURVIVE": 3,
+    "INVESTIGATE": 2,
+    "SOCIAL": 2,
+    "FIGHT": 1,
+    "PUZZLE": 1,
+    "DUEL": 1
+   },
+   "tradition": "threnodist",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "logos",
+   "name": "Logos",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_emotional_logical",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "concrete_abstract": 0.2
+   },
+   "functions": [
+    "reveal",
+    "strike",
+    "bind"
+   ],
+   "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
+   "description": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
+   "notFor": "Reaching a heart set against reason (that's Pathos); wisdom (Logos is valid, not necessarily wise); a premise that's false — Logos builds truly on what it's given, garbage in and all.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Clear Argument",
+     "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
+     "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false."
+    },
+    {
+     "rank": 2,
+     "name": "The Binding Proof",
+     "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
+     "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force."
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Conclusion",
+     "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it forecloses a bad course before it starts. The Reasoners' power in miniature.",
+     "cannot": "The wielder drifts logic-hot — toward the Cogitarium's cold, reason that has forgotten the feeling it was meant to serve; logic without heart reaches monstrous-but-valid conclusions (Ninefold's road), the foreclosure of the frozen mind."
+    }
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 2,
+    "FIGHT": 2,
+    "DUEL": 2,
+    "SOCIAL": 2,
+    "PUZZLE": 1
+   },
+   "tradition": "syllogist",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_turning_word",
+   "name": "The Turning Word",
+   "levelReq": 4,
+   "energyCost": 9,
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.2
+   },
+   "functions": [
+    "bind",
+    "reveal",
+    "heal"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 3,
+    "DUEL": 1
+   },
+   "narrationHints": "The room turns — a crowd, a court, a mob — moved as one by the exact true thing said the exact right way.",
+   "description": "The social capstone: move a whole gathering at once — turn a hostile crowd, sway a council, stop a mob — by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
+   "notFor": "Individual mind-control; moving those with no shared feeling or reason; forcing against a set will.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Turning Word",
+     "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
+     "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move."
+    }
+   ],
+   "powerSystem": "reach_emotional_logical",
+   "gated": "learned",
+   "tradition": "cross_pole_braid",
+   "nativeOrCombination": "combination"
+  },
+  {
+   "id": "the_grief_strike",
+   "name": "The Grief Strike",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4
+   },
+   "effectTags": [
+    "grief",
+    "emotional",
+    "wound"
+   ],
+   "harmRung": "incapacitating",
+   "narrationHints": "It doesn't hurt where you put your hands. It hurts where you feel.",
+   "description": "Strike at the emotional self — send a true, intense feeling at a person in a way they cannot close off.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "hinder",
+    "break"
+   ],
+   "challengeTypes": [
+    "social",
+    "psychological",
+    "combat"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.1,
+    "social": 0.7
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The True Feeling",
+     "grants": "Direct a genuine, intense feeling at a person — grief, shame, terror — that they cannot close off because it is true and they know it.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Unguarded Place",
+     "grants": "Find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Shattered Fortification",
+     "grants": "Break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_felt_wall",
+   "name": "The Felt Wall",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "warning",
+    "feeling",
+    "protection"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She felt the danger before the knife moved. Feeling was always faster.",
+   "description": "Protect through emotional early warning — the feeling of threat before it fully forms.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "shield",
+    "foresee"
+   ],
+   "challengeTypes": [
+    "combat",
+    "social",
+    "defense"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.2,
+    "social": 0.6
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Early Feel",
+     "grants": "Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Guard",
+     "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Felt Ward",
+     "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_true_feeling",
+   "name": "The True Feeling",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "feeling",
+    "perception",
+    "truth"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She knew what the room was feeling before anyone spoke.",
+   "description": "Read what is actually felt — not what is shown, what is present.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "social",
+    "investigation",
+    "intellectual"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.1,
+    "social": 0.7
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Actual State",
+     "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Trail",
+     "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Emotional History",
+     "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_made_elegy",
+   "name": "The Made Elegy",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4,
+    "destruction_creation": 0.1
+   },
+   "effectTags": [
+    "art",
+    "grief",
+    "made"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She made the grief into something with edges you could touch.",
+   "description": "Give feeling a form — make something that holds emotion correctly, so it can persist, be shared, or returned to.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "make",
+    "bind"
+   ],
+   "challengeTypes": [
+    "art",
+    "social",
+    "craft"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.2,
+    "social": 0.6
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Feeling Held",
+     "grants": "Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Acting Elegy",
+     "grants": "Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Lasting Work",
+     "grants": "Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_feeling_road",
+   "name": "The Feeling Road",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3
+   },
+   "effectTags": [
+    "navigation",
+    "feeling",
+    "track"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She followed the grief the way others follow a road.",
+   "description": "Navigate by feeling — find a person, a place, or a source by following the emotional resonance it leaves.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "travel",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "investigation",
+    "social"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.3,
+    "social": 0.5
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Resonance Trail",
+     "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Feeling Landmark",
+     "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Long Trail",
+     "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_wellspring",
+   "name": "The Wellspring",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.3,
+    "death_life": 0.1
+   },
+   "effectTags": [
+    "endurance",
+    "feeling",
+    "depth"
+   ],
+   "harmRung": "none",
+   "narrationHints": "She was exhausted and the feeling was still there. The feeling was enough.",
+   "description": "Sustain through emotional depth — what others run out of, you find more of in the next wave.",
+   "notFor": [],
+   "tradition": "threnodist",
+   "functions": [
+    "sustain",
+    "empower"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "social"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.1,
+    "physical": 0.3,
+    "social": 0.6
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "More in the Depth",
+     "grants": "Sustain through the depth of feeling — where others run dry, you find the next wave of grief or joy, and it holds you.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Carried Weight",
+     "grants": "Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Wellspring Holds",
+     "grants": "The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_correct_protocol",
+   "name": "The Correct Protocol",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.4
+   },
+   "effectTags": [
+    "diagnosis",
+    "treatment",
+    "precision"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He knew exactly what was wrong. The treatment followed.",
+   "description": "Heal through precise diagnosis and correct procedure — the methodical application of what is known to work.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "mend",
+    "restore"
+   ],
+   "challengeTypes": [
+    "medical",
+    "craft",
+    "intellectual"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.6,
+    "physical": 0.3,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Correct Diagnosis",
+     "grants": "Diagnose and treat through methodical application of what is known to work — no guesswork, no comfort, the correct intervention.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "By Protocol",
+     "grants": "Restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Root Cause",
+     "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_proved_position",
+   "name": "The Proved Position",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.4
+   },
+   "effectTags": [
+    "logic",
+    "proof",
+    "protection"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He had proved it. They could attack him all they liked. The proof still stood.",
+   "description": "Protect through irrefutable argument — attacks on a proved position must answer the proof before they can land.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "shield",
+    "bind"
+   ],
+   "challengeTypes": [
+    "social",
+    "intellectual",
+    "defense"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.7,
+    "physical": 0.1,
+    "social": 0.2
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Proved Ground",
+     "grants": "Establish a position so logically secure that attacks — social, rhetorical, physical — must first answer the proof before they have any purchase.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Extended Proof",
+     "grants": "Extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Self-Maintaining Proof",
+     "grants": "A proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_built_system",
+   "name": "The Built System",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.5,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "system",
+    "logic",
+    "construct"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He didn't build a thing. He built a rule, and the rule built things.",
+   "description": "Build a logical structure that operates in the world — a system whose internal logic sustains it without constant maintenance.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "make",
+    "bind"
+   ],
+   "challengeTypes": [
+    "intellectual",
+    "leadership",
+    "craft"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.7,
+    "physical": 0.1,
+    "social": 0.2
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Working Rule",
+     "grants": "Design a system — legal, social, procedural — that functions because the logic it runs on is sound.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Self-Regulating",
+     "grants": "Build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Lasting Structure",
+     "grants": "Construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_derived_route",
+   "name": "The Derived Route",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.3
+   },
+   "effectTags": [
+    "navigation",
+    "reasoning",
+    "inference"
+   ],
+   "harmRung": "none",
+   "narrationHints": "He hadn't walked it. He had worked it out.",
+   "description": "Navigate through pure reasoning — derive the correct path from what you know before taking a step.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "move",
+    "reveal",
+    "foresee"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "intellectual",
+    "tactical"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.7,
+    "physical": 0.2,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Reasoned Path",
+     "grants": "Navigate any space by reasoning about it — what must be true about the layout, the route, the exits — without needing to see it first.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Inferred Route",
+     "grants": "Derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Necessary Route",
+     "grants": "Navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_axiom_holds",
+   "name": "The Axiom Holds",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.3
+   },
+   "effectTags": [
+    "certainty",
+    "endurance",
+    "logic"
+   ],
+   "harmRung": "none",
+   "narrationHints": "The certainty was enough. The axiom held and therefore so did he.",
+   "description": "Sustain through the certainty of what you know — fear, pain, and doubt don't reach the level of the axioms.",
+   "notFor": [],
+   "tradition": "syllogist",
+   "functions": [
+    "sustain",
+    "resist"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "intellectual"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.6,
+    "physical": 0.3,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Axiomatic Ground",
+     "grants": "Hold function under pressure through the certainty of what you know — fear, pain, and doubt operate below the level the axioms hold.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Correct Sequence",
+     "grants": "Sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Axiom Holds",
+     "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

@@ -595,3 +595,7 @@ img[data-lightbox] { cursor: zoom-in; }
 }
 .vital-num:hover, .vital-num:focus { opacity: 1; background: var(--panel2); outline: none; }
 .vital-num:active { opacity: 1; }
+
+/* SNG-106 — tappable roll chance → component breakdown */
+.roll-chance { border-bottom: 1px dotted var(--accent); cursor: help; }
+.roll-chance:hover, .roll-chance:focus { color: var(--accent); outline: none; }

@@ -41,13 +41,15 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.66";
+const APP_VERSION = "1.8.67";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
 app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]"); if (b) { e.preventDefault(); showHelp(b.dataset.help); } });
 // SNG-104: vitals detail on tap (phone) / hover (desktop) — mirrors the data-help delegation above.
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]"); if (el) { e.preventDefault(); showVitalDetail(el); } });
+// SNG-106: tap the roll's chance → the full component breakdown (the resolver's retained math, verbatim).
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-breakdown]"); if (el) { e.preventDefault(); try { showBreakdownPopover(JSON.parse(el.dataset.breakdown)); } catch { /* malformed — no popup */ } } });
 
 /** SNG-084: the authored one-sentence explanation for a mechanic, by id (helper_text.json). */
 function helpEntry(id) { return CONTENT?.helpText?.[id] || null; }
@@ -89,6 +91,16 @@ function showPopoverText(text) {
   const close = () => pop.remove();
   pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
   document.getElementById("help-close").onclick = close;
+}
+
+// SNG-106: format the resolver's retained breakdown into the shared popover — every signed component,
+// the opposed term named, the clamp only when it bit, and the number → roll → result in one place.
+function showBreakdownPopover(bd) {
+  const sign = v => (v >= 0 ? "+" : "−") + Math.abs(Math.round(v));
+  const lines = (bd.components || []).map(c => `${c.label}   ${sign(c.value)}`);
+  if (bd.clampedFrom != null) lines.push(`clamped (from ${bd.clampedFrom})`);
+  const foot = `total   ${bd.total}%${bd.roll != null ? `   — rolled ${bd.roll} → ${String(bd.degree || "").replace("_", " ")}` : ""}`;
+  showPopoverText(`Success chance ${bd.total}%\n${lines.join("\n")}\n────────────\n${foot}`);
 }
 
 // SNG-104: what a Health/Energy number's tap/hover shows — how rest restores it, read from CONTENT.rules.recovery.
@@ -2798,7 +2810,12 @@ async function onChoice(choice) {
   const disc = action.novel ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
   if (disc) { action.novel = false; action.discoveryBonus = CONTENT.rules.novel?.discoveryBonus ?? 10; }
   const encD = activeEnc();
-  if (encD) action.difficulty = (action.difficulty || 0) + encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
+  if (encD) {
+    const encDiff = encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
+    action.difficulty = (action.difficulty || 0) + encDiff;
+    // SNG-106: name the opposed term so the roll breakdown reads "the raider (threat N) −11", not anonymous.
+    if (encDiff) action.difficultySource = `${encD.def.name || "the opposition"}${encD.def.opponent?.threat ? ` (threat ${encD.def.opponent.threat})` : ""}`;
+  }
   const equip = equipmentBonus(character, action.intentTags, CONTENT.rules);
   const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.intentTags, CONTENT.rules, character);
   const aff = affinityFor(action, location);
@@ -4614,7 +4631,7 @@ async function runGambit() {
     const a = g.actions[failed.index];
     chrome(`<div class="screen" style="max-width:640px">
       <h2>The plan hits a wall</h2>
-      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
+      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${esc(JSON.stringify({ ...failed.breakdown, roll: failed.roll, degree: failed.degree }))}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
       <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
         ${g.steps[failed.index]?.fallback && !run.fallbackUsed[failed.index] ? `<button class="choice" id="c-fallback">Fallback: ${esc(g.steps[failed.index].fallback)}</button>` : ""}
         ${run.adaptLeft > 0 ? `<button class="choice" id="c-adapt">Adapt — force another try (${run.adaptLeft} adaptation point${run.adaptLeft > 1 ? "s" : ""} left)</button>` : ""}
@@ -4929,7 +4946,9 @@ function renderPlay(turn, opts = {}) {
       const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}% ${infoDot("roll.spectral_fit")}</div>` : "";
       // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
       const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
-      main += `<div class="roll-receipt">d100: ${r.roll} vs ${r.chance} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
+      // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).
+      const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${esc(JSON.stringify({ ...r.breakdown, roll: r.roll, degree: r.degree }))}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
+      main += `<div class="roll-receipt">d100: ${r.roll} vs ${chanceCell} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");

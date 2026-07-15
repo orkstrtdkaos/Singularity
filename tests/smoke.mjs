@@ -352,6 +352,27 @@ const rNovel = resolveAction({ character: hero2, action: novelAction, location: 
 check("novel crit-fail band widens (94 crit-fails)", rNovel.degree === "crit_failure");
 const rPlain = resolveAction({ character: hero2, action: { ...novelAction, novel: false, difficulty: -50 }, location: { spectrum: {} }, rules }, () => 0.93);
 check("same roll is not a crit-fail when routine", rPlain.degree !== "crit_failure");
+
+// --- SNG-106: successChance retains a component breakdown that SUMS (clamped) to the returned total ---
+{
+  const cases = [
+    { character: hero2, action: { attribute: "practical", subAttribute: "craft", axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules },
+    { character: hero2, action: { attribute: "practical", subAttribute: "craft", axes: {}, difficulty: 20, difficultySource: "the raider (threat 35)", novel: true }, location: { spectrum: {} }, rules },
+    { character: hero2, action: { attribute: "physical", axes: {}, difficulty: 0, abilityLevel: 2 }, location: { spectrum: {} }, rules, substratePenalty: 15 },
+  ];
+  let allSum = true, named = false, componentsSeen = 0;
+  for (const ctx of cases) {
+    const total = successChance(ctx);
+    const bd = ctx._breakdown;
+    componentsSeen += bd.components.length;
+    const sum = bd.components.reduce((a, c) => a + c.value, 0);
+    const clamped = Math.max(rules.d100.floorChance, Math.min(rules.d100.ceilingChance, Math.round(sum)));
+    if (clamped !== total) allSum = false;
+    if (bd.components.some(c => /raider/.test(c.label))) named = true;
+  }
+  check("SNG-106: the breakdown sums (clamped) to the returned chance — the popup shows real math", allSum && componentsSeen > 0);
+  check("SNG-106: the opposed difficulty term is NAMED in the breakdown (not anonymous)", named);
+}
 const before = { h: hero2.health, e: hero2.energy };
 const bl = applyBacklash(hero2, rules);
 check("backlash costs health and energy", hero2.health === before.h + bl.health && hero2.energy === before.e + bl.energy);

@@ -1216,42 +1216,26 @@
         "player": "Check the twist direction on this valve alongside Pell — compare against Fen's intake failure",
         "summary": "Valve twist direction confirmed — same counterclockwise torque as Fen's intake, same failure mode. Pell names it plainly: the torque is coming from inside the structure. Something turned.",
         "narration": "You crouch at the housing and get both hands on the tilted cover lip — one palm braced against the undamaged side, fingers reading the distortion at the northwest quadrant where the sleeve failed. Pell drops to her haunches beside you without being asked, close enough that her shoulder is warm against yours. She sets two fingers on the fractured lip and traces the break-line west to east.\n\n'Same direction,' she says. Not a question. 'Torqued counterclockwise — same axis as Fen's intake.' She lifts her hand and presses her thumb against the rust-orange stain beneath the housing base, testing the color, the grit of it. 'Same failure mode, same torque, same stain pattern at the base.' She sits back on her heels and wipes her thumb on her thigh. 'This isn't two sleeves failing. This is one mechanism doing two things in sequence.'\n\nHuginn shifts on the fence-post to your right, lifting one foot and setting it down again — not alarm, just the small adjustment of something that has been watching northeast for a while and is recalibrating its patience. The morning light is full now, throwing a clean shadow from the soil-rise across the path.\n\nPell looks northeast along that shadow-line — the same direction the coursed stone ceiling runs, the same direction her wash-room site lies a mile and a half in. 'If both ends of the structure failed their sleeves in the same way,' she says quietly, 'then the torque is coming from inside.' She meets your eye. 'Something in there turned.'"
+      },
+      {
+        "player": "Add the torque direction and 'something turned' to the Valve Failure Timeline note — annotate both valve sites with the shared failure signature before moving on",
+        "summary": "Valve Failure Timeline annotated with shared torque direction and wash-room as third data point — the structure's shape now recorded in hand.",
+        "narration": "You pull the Valve Failure Timeline note from your breast pocket and unfold it against your thigh. Mara's clean hand is on the top half — four dates, two names, two sleeve sizes. You uncap the stub of lamp-black from the Rune-Craft Kit and write in the margin below Fen's entry: *CCW torque — inside source*. Then below the east furlong line, the same three words. A short horizontal stroke connects them — not a guess, a confirmed pattern.\n\nPell watches without comment. When you cap the stub she says, 'You're going to want a third column. Wash-room. Same structure, different room — no sleeve, no failure, just the stand-positions and the hooks.' She taps the margin with one finger, not quite touching the ink. 'Might matter later which room was doing what.'\n\nYou write it. *Wash-room — NE terminus, ~1.5 mi. No mechanical failure. Saddle hooks, stand-positions — operator station.* The note is getting crowded, but the shape of it is clearer: three rooms, one structure, one mechanism that turned. The question sitting under all of it — the one you haven't written yet because you don't have an answer — is *when*.\n\nYou fold the note and pocket it. Memory's haft is still warm in your hand from the hillside read. Huginn shifts on the fence-post to your left, gaze still fixed northeast along the soil-rise line, patient in the way that means it has already decided something."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the housing and get both hands on the tilted cover lip — one palm braced against the undamaged side, fingers reading the distortion at the northwest quadrant where the sleeve failed. Pell drops to her haunches beside you without being asked, close enough that her shoulder is warm against yours. She sets two fingers on the fractured lip and traces the break-line west to east.\n\n'Same direction,' she says. Not a question. 'Torqued counterclockwise — same axis as Fen's intake.' She lifts her hand and presses her thumb against the rust-orange stain beneath the housing base, testing the color, the grit of it. 'Same failure mode, same torque, same stain pattern at the base.' She sits back on her heels and wipes her thumb on her thigh. 'This isn't two sleeves failing. This is one mechanism doing two things in sequence.'\n\nHuginn shifts on the fence-post to your right, lifting one foot and setting it down again — not alarm, just the small adjustment of something that has been watching northeast for a while and is recalibrating its patience. The morning light is full now, throwing a clean shadow from the soil-rise across the path.\n\nPell looks northeast along that shadow-line — the same direction the coursed stone ceiling runs, the same direction her wash-room site lies a mile and a half in. 'If both ends of the structure failed their sleeves in the same way,' she says quietly, 'then the torque is coming from inside.' She meets your eye. 'Something in there turned.'",
-      "sceneSummary": "Valve twist direction confirmed — same counterclockwise torque as Fen's intake, same failure mode. Pell names it plainly: the torque is coming from inside the structure. Something turned.",
+      "narration": "You pull the Valve Failure Timeline note from your breast pocket and unfold it against your thigh. Mara's clean hand is on the top half — four dates, two names, two sleeve sizes. You uncap the stub of lamp-black from the Rune-Craft Kit and write in the margin below Fen's entry: *CCW torque — inside source*. Then below the east furlong line, the same three words. A short horizontal stroke connects them — not a guess, a confirmed pattern.\n\nPell watches without comment. When you cap the stub she says, 'You're going to want a third column. Wash-room. Same structure, different room — no sleeve, no failure, just the stand-positions and the hooks.' She taps the margin with one finger, not quite touching the ink. 'Might matter later which room was doing what.'\n\nYou write it. *Wash-room — NE terminus, ~1.5 mi. No mechanical failure. Saddle hooks, stand-positions — operator station.* The note is getting crowded, but the shape of it is clearer: three rooms, one structure, one mechanism that turned. The question sitting under all of it — the one you haven't written yet because you don't have an answer — is *when*.\n\nYou fold the note and pocket it. Memory's haft is still warm in your hand from the hillside read. Huginn shifts on the fence-post to your left, gaze still fixed northeast along the soil-rise line, patient in the way that means it has already decided something.",
+      "sceneSummary": "Valve Failure Timeline annotated with shared torque direction and wash-room as third data point — the structure's shape now recorded in hand.",
       "choices": [
         {
-          "label": "Use Order-Sense on the valve housing itself — read what mechanism the housing is part of and whether it registered the torque",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell: if the torque came from inside, what could produce it — and is there anything in the wash-room that could have turned",
+          "label": "Head north to brief Dara Holt — she's unbriefed and she's been managing these channels for twenty-two years",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "collaborate"
+            "inform",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1260,9 +1244,44 @@
           "emergenceId": null
         },
         {
-          "label": "Add the torque direction and 'something turned' to the Valve Failure Timeline note — annotate both valve sites with the shared failure signature before moving on",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask Pell what the saddle hooks were sized for — wide mounts, she said; what fits a mount like that?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the note itself — the annotated timeline is now a record of three rooms; read what design they are part of together",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.2,
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "risky"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Add the unanswered question in plain writing at the bottom of the note — 'When did it turn?' — then move out",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -1274,37 +1293,22 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Start north toward Dara Holt's house — she's been working this channel for twenty-two years; she needs to hear what you've found",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "East furlong valve twist direction confirmed — counterclockwise, identical to Fen's intake. Both sleeves failed on the same axis. Pell's read: the torque originated inside the structure. Something turned."
+          "note": "Valve Failure Timeline annotated — both sites share identical CCW torque from an inside source; wash-room added as third room, NE terminus. The structure's mechanical signature is now recorded."
         }
       ],
       "scene": {
@@ -1312,26 +1316,26 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Sitting back on her heels beside the housing, thumb wiped clean, looking northeast along the shadow-line."
+            "state": "Sitting back on her heels beside the housing, watching Silas finish the annotation — suggested the wash-room as a third column."
           },
           {
             "name": "Huginn",
-            "state": "Shifted on the fence-post, recalibrating its patience, gaze still fixed northeast."
+            "state": "On the fence-post to the left, gaze fixed northeast along the soil-rise line — unhurried, already decided."
           }
         ],
         "objects": [
           "Memory (spear, at ground beside Silas)",
           "Belt Knife (at hip)",
-          "Rune-Craft Kit (pack)",
-          "Valve Failure Timeline note (breast pocket — annotated)",
-          "East furlong valve housing — cover plate tilted, rust-orange stain at base, counterclockwise torque confirmed at northwest quadrant",
+          "Rune-Craft Kit (pack — lamp-black stub recapped)",
+          "Valve Failure Timeline note (breast pocket — now annotated: both valve sites marked CCW torque / inside source; wash-room added as NE terminus with operator-station notes)",
+          "East furlong valve housing — cover plate tilted, rust-orange stain at base",
           "Faint soil-rise above housing — confirmed as settling stone ceiling, ~40 ft running northeast"
         ],
         "threads": [
-          "Both valve failures share identical counterclockwise torque — source is inside the structure",
-          "Pell's read: something turned inside the structure",
-          "Northeast line points toward Pell's wash-room site ~1.5 miles in — the valve housing is the near/working end",
-          "Dara Holt unbriefed — knows the channel better than anyone"
+          "Three rooms, one structure, one mechanism — when did it turn?",
+          "Saddle hooks: wide mounts, sized for something specific — unknown what",
+          "Dara Holt unbriefed — senior east-channel irrigator, blue gate-post, bend before upper meadow",
+          "Northeast line runs ~1.5 miles to the wash-room site — structure's full extent unwalked"
         ]
       },
       "npcUpdates": [
@@ -1340,35 +1344,28 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Confirmed east furlong valve torque direction — counterclockwise, same axis as Fen's intake. Named the failure signature plainly: one mechanism doing two things in sequence. Stated plainly that the torque came from inside the structure.",
+          "note": "Suggested the wash-room be added as a third column on the note — named it as an operator station with no mechanical failure, distinct from the valve rooms.",
           "learned": [
-            "Both sleeve failures share identical counterclockwise torque — same failure mode, same stain pattern",
-            "The torque originated inside the structure — something turned"
+            "Named the wash-room as a third data point in the record — stand-positions and saddle hooks as operator-station markers, not working end"
           ],
           "skillsObserved": [
-            "reading failure-mode direction from physical evidence under field conditions",
-            "synthesizing two-site failure signature into a single mechanism read"
+            "structural synthesis across separate sites from physical evidence"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the east furlong valve housing with Silas — sitting back on her heels, looking northeast, having named the internal torque source."
+          "statusNote": "At the east furlong valve housing with Silas — collaborative, watching the northeast line."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "East furlong valve sleeve failure shows identical counterclockwise torque to Fen's intake — same failure mode, same axis, same stain pattern. Pell's diagnosis: one mechanism operating in sequence across both sites, torque sourced from inside the structure. Something inside the structure turned.",
-          "subjectId": "the-water-crisis"
+          "text": "Valve Failure Timeline note now annotated with shared CCW torque signature at both valve sites and the wash-room recorded as a third room / NE terminus operator station — the structure's three-room shape is now in Silas's hand.",
+          "subjectId": null
         }
       ],
       "placeUpdates": [
         {
-          "note": "East furlong valve twist direction confirmed counterclockwise — identical to Fen's intake failure. Both valve failures now understood as one mechanism in sequence. Torque sourced from inside the structure per Pell's field read on World-day 15 morning.",
-          "subPlace": {
-            "name": "East Furlong Valve Housing",
-            "note": "Torque direction confirmed counterclockwise — matches Fen's intake exactly. One mechanism, two sites, source inside the structure.",
-            "visited": true
-          }
+          "note": "Valve Failure Timeline note annotated with CCW torque at both valve sites and wash-room as third column — three-room structural record now in hand at the housing."
         }
       ],
       "codexUpdates": [
@@ -1376,9 +1373,11 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing two things in sequence. The torque came from inside. Something turned.",
+          "entityId": null,
+          "fact": "Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle hooks, stand-positions, no mechanical failure). Shape of the mechanism recorded. Question outstanding: when did it turn?",
           "links": [
             "pell",
+            "mara-wells",
             "dara-holt",
             "millbrook",
             "aldric-provisioning-deal",
@@ -1389,7 +1388,7 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief crouch-inspection at the valve housing — minutes, not a meaningful stretch"
+        "why": "Brief annotation at the valve housing — a few minutes of work"
       }
     },
     "sceneState": {
@@ -1397,26 +1396,26 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Sitting back on her heels beside the housing, thumb wiped clean, looking northeast along the shadow-line."
+          "state": "Sitting back on her heels beside the housing, watching Silas finish the annotation — suggested the wash-room as a third "
         },
         {
           "name": "Huginn",
-          "state": "Shifted on the fence-post, recalibrating its patience, gaze still fixed northeast."
+          "state": "On the fence-post to the left, gaze fixed northeast along the soil-rise line — unhurried, already decided."
         }
       ],
       "objects": [
         "Memory (spear, at ground beside Silas)",
         "Belt Knife (at hip)",
-        "Rune-Craft Kit (pack)",
-        "Valve Failure Timeline note (breast pocket — annotated)",
-        "East furlong valve housing — cover plate tilted, rust-orange stain at base, coun",
+        "Rune-Craft Kit (pack — lamp-black stub recapped)",
+        "Valve Failure Timeline note (breast pocket — now annotated: both valve sites mar",
+        "East furlong valve housing — cover plate tilted, rust-orange stain at base",
         "Faint soil-rise above housing — confirmed as settling stone ceiling, ~40 ft runn"
       ],
       "threads": [
-        "Both valve failures share identical counterclockwise torque — source is inside the structure",
-        "Pell's read: something turned inside the structure",
-        "Northeast line points toward Pell's wash-room site ~1.5 miles in — the valve housing is the near/working end",
-        "Dara Holt unbriefed — knows the channel better than anyone"
+        "Three rooms, one structure, one mechanism — when did it turn?",
+        "Saddle hooks: wide mounts, sized for something specific — unknown what",
+        "Dara Holt unbriefed — senior east-channel irrigator, blue gate-post, bend before upper meadow",
+        "Northeast line runs ~1.5 miles to the wash-room site — structure's full extent unwalked"
       ]
     }
   },
@@ -1443,14 +1442,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Grid filled marks read via The Attended End — three consecutive stable-state confirmations followed by deliberate, clean removal. No failure in the device itself. Someone took it out satisfied. The sleeve blank failures came after.",
         "Full chamber picture assembled and reported to Pell — four verification cycles, scheduled management, clean removal, post-removal failures. Moving to the valve sites now.",
         "Seasonal return-visit pattern and contamination delay interval established — the removal preceded onset by a long gap, meaning a secondary trigger caused the crisis. Moving to Fen's intake for physical valve inspection.",
         "Removal-to-onset chain resolved with Pell — two-winter slip model established. Fen's intake reached; valve cover visibly off true.",
         "Fen's intake physical inspection begun — Pell identifies twisted sleeve and torqued cover as the failure mode. East furlong site next.",
         "Pell confirms: wash-room site and east-channel valve failures are the same structure — different rooms, same design intent, built to act on the water.",
         "Order-Sense confirms: the east furlong valve housing is the working end of a forty-foot coursed-stone structure running northeast under the soil. The soil-rise is the roof settling. The structure is largely intact.",
-        "East furlong valve twist direction confirmed — counterclockwise, identical to Fen's intake. Both sleeves failed on the same axis. Pell's read: the torque originated inside the structure. Something turned."
+        "East furlong valve twist direction confirmed — counterclockwise, identical to Fen's intake. Both sleeves failed on the same axis. Pell's read: the torque originated inside the structure. Something turned.",
+        "Valve Failure Timeline annotated — both sites share identical CCW torque from an inside source; wash-room added as third room, NE terminus. The structure's mechanical signature is now recorded."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1564,7 +1563,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Confirmed done with the valve housing — oriented toward east furlong. Named the east furlong as the comparison site, half a mile southeast.",
         "[d2] Took starfruit without ceremony, leaned on the wall, caught Silas watching her and held the look — no deflection, no performance. Ready to move.",
         "[d2] Sat down beside Silas on the wall without being asked — shoulder to shoulder, unhurried, looking southeast. Said 'twenty minutes' once and nothing else.",
         "[d2] Called Silas thorough and methodical to his face — meant as assessment, not deflection. Pressed her shoulder against his. Said 'ask me again after the valve' — open verdict, not cl",
@@ -1573,17 +1571,18 @@
         "[d2] Confirmed without hesitation: wash-room and valve sites are the same structure — different rooms, same finished margins, same intent. Named the hillside swell above the housing as ",
         "[d2] Watched Silas read the hillside without asking — waiting for the result.",
         "[d2] Confirmed the northeast line runs toward the wash-room site — a mile and a half as the crow goes, deeper in and higher. Named the valve housing plainly as the working end: whatever",
-        "[d2] Confirmed east furlong valve torque direction — counterclockwise, same axis as Fen's intake. Named the failure signature plainly: one mechanism doing two things in sequence. Stated"
+        "[d2] Confirmed east furlong valve torque direction — counterclockwise, same axis as Fen's intake. Named the failure signature plainly: one mechanism doing two things in sequence. Stated",
+        "[d2] Suggested the wash-room be added as a third column on the note — named it as an operator station with no mechanical failure, distinct from the valve rooms."
       ],
       "knownFacts": [
-        "Wash-room and east-channel valve failures share identical construction: same depth, same dressed stone, same finished margins — different rooms, same builder",
         "The wash-room is further in, higher and further back; the valve sites are the working end, facing the channel",
         "Pell's read: whatever the structure was built to do, it was built to do it to the water",
         "The soil-rise above the valve housing is a settling stone ceiling — the structure runs northeast from the housing for about forty feet",
         "The northeast line from the valve housing runs toward her pre-Transition wash-room site — the valve housing is the near/working end, the wash-room is the far/in",
         "The full structure spans roughly a mile and a half northeast into the hillside",
         "Both sleeve failures share identical counterclockwise torque — same failure mode, same stain pattern",
-        "The torque originated inside the structure — something turned"
+        "The torque originated inside the structure — something turned",
+        "Named the wash-room as a third data point in the record — stand-positions and saddle hooks as operator-station markers, not working end"
       ],
       "skillsObserved": [
         "reading animal behavior against a known baseline",
@@ -1594,7 +1593,7 @@
         "synthesizing two-site failure signature into a single mechan"
       ],
       "status": "active",
-      "statusNote": "At the east furlong valve housing with Silas — sitting back on her heels, looking northeast, having named the internal torque source.",
+      "statusNote": "At the east furlong valve housing with Silas — collaborative, watching the northeast line.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1699,7 +1698,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Order-Sense from the farther stand-position confirms paired operator/confirmer design — the chamber had an error-checking function. Grid filled marks are grouped, recording object states (not measurem",
         "[d2] Grid filled marks read via The Attended End on World-day 14 dawn — three consecutive stable-state confirmations in a close cluster; the object was performing correctly and was removed deliberately at ",
         "[d2] Valve Failure Timeline note now carries a marginal annotation — interval question and device-removal question written in Silas's hand before departure from the deeper chamber on World-day 14 dawn.",
         "[d2] Pell read the column stain bands as seasonal return cycles — three distinct layers above the old bleed-line, two to three winters of accumulation. The managed visits were condition-triggered, not cale",
@@ -1710,7 +1708,8 @@
         "[d2] Pell identified a faint soil-rise above the east furlong valve housing as a probable subsurface course — the buried structure extends under this furlong, not only beneath the north-cut hillside.",
         "[d2] Order-Sense confirms a coursed stone ceiling running northeast from the east furlong valve housing for approximately forty feet — the soil-rise above the housing is the roof settling; the structure is",
         "[d2] Northeast line from east furlong valve housing confirmed running toward Pell's wash-room site — full structure now understood to span ~1.5 miles northeast into the hillside. Valve housing is the worki",
-        "[d2] East furlong valve twist direction confirmed counterclockwise — identical to Fen's intake failure. Both valve failures now understood as one mechanism in sequence. Torque sourced from inside the struc"
+        "[d2] East furlong valve twist direction confirmed counterclockwise — identical to Fen's intake failure. Both valve failures now understood as one mechanism in sequence. Torque sourced from inside the struc",
+        "[d2] Valve Failure Timeline note annotated with CCW torque at both valve sites and wash-room as third column — three-room structural record now in hand at the housing."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1848,9 +1847,9 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-14T22:35:40.840Z",
-    "lastTickWorldDay": 14,
-    "lastCanonWorldDay": 14
+    "lastSharedReadAt": "2026-07-15T03:00:04.579Z",
+    "lastTickWorldDay": 15,
+    "lastCanonWorldDay": 15
   },
   "domains": {
     "primary": "ashwarden",
@@ -2222,7 +2221,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Pell's read: the lower aperture must be face-cleared before its condition can be diagnosed — breach may be finished or mid-process, and those read differently. She named Huginn's assessment as a requi",
           "[d2] Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the cra",
           "[d2] Pell's full frame assessment: sound joints, clean channel, dry stone, no hydrostatic load. The sealed rooms are not water-filled. The seating-piece moved on its own — either pushed from within or a tr",
           "[d2] Near chamber confirmed: dry ashlar, three iron ring-hooks at chest height, three empty recesses below them. Whatever was held here is gone — the recesses are empty. Column stain on right wall predates",
@@ -2245,7 +2243,8 @@
           "[d2] Pell confirms the wash-room site and east-channel valve failures share identical construction — same depth, same dressed stone, same finished margins. The structure was built to act on the water. The ",
           "[d2] Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structur",
           "[d2] The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the ",
-          "[d2] East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing t"
+          "[d2] East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing t",
+          "[d2] Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle"
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2362,14 +2361,14 @@
     }
   },
   "tendencies": {
-    "strategic": 55.395408995187914,
-    "cerebral": 45.46215638653881,
-    "social": 52.04006450321759,
-    "generous": 15.375594212091213,
-    "cautious": 47.34800522906268,
-    "physical": 1.2057254844014031,
-    "risky": 2.968924656278054,
-    "ruthless": 0.6149486215357263
+    "strategic": 56.11843195021198,
+    "cerebral": 45.234845604606114,
+    "social": 51.7798641807015,
+    "generous": 15.298716241030757,
+    "cautious": 48.111265202917366,
+    "physical": 1.1996968569793962,
+    "risky": 2.954080032996664,
+    "ruthless": 0.6118738784280476
   },
   "aptitudes": [
     "strategist",
@@ -2377,7 +2376,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 186,
+  "actionCount": 187,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2463,8 +2462,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784084204676,
-  "rev": 257,
+  "updatedAt": 1784084465449,
+  "rev": 260,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2743,6 +2742,12 @@
       "text": "East furlong valve sleeve failure shows identical counterclockwise torque to Fen's intake — same failure mode, same axis, same stain pattern. Pell's diagnosis: one mechanism operating in sequence acro",
       "day": 2,
       "subjectId": "the-water-crisis"
+    },
+    {
+      "id": "f35",
+      "text": "Valve Failure Timeline note now annotated with shared CCW torque signature at both valve sites and the wash-room recorded as a third room / NE terminus operator station — the structure's three-room sh",
+      "day": 2,
+      "subjectId": null
     }
   ],
   "practice": {

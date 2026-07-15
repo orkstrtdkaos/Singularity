@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6891055433178872,
+    "spectrumId": -0.7046502661519929,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.17735604682204079,
     "mechanical_spiritual": 0.16517695395990592,
@@ -71,7 +71,7 @@
       "id": "waterskin",
       "name": "Waterskin",
       "kind": "consumable",
-      "qty": 2,
+      "qty": 3,
       "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
       "effects": {
         "energy": 10
@@ -1454,97 +1454,85 @@
         "player": "Ask Aldric if he has a cured bladder waterskin going spare — Mara mentioned he sometimes carries them, and a second water vessel is worth asking about before the road.",
         "summary": "Aldric produces a cured bladder waterskin — two cord-weight or off the standing credit. The village stirs; the road waits.",
         "narration": "The question costs nothing to ask. You catch Aldric between perch — knife lifted, fish set aside — and put it plainly: Mara said he sometimes has a cured bladder going spare.\n\nHe doesn't answer immediately. He wipes the knife on his apron, sets it on the block, and disappears through the low door at the back of the smokehouse. You hear the scrape of a crate on stone. He comes back with something in his hand: a pig's bladder, cured and dried, sealed at the neck with a cord-wrapped wooden plug — not pretty, but tight, and it will hold water as well as anything Mara stocks. He turns it over once in his hands, checking the seam, and sets it on the block in front of you.\n\n\"Two cord-weight,\" he says. \"Or I pull it from the standing credit.\" He picks up his knife and returns to the perch row without waiting for an answer, the transaction already decided as far as he's concerned. Outside, Huginn shifts on the eave — a small adjustment, wings tucked back down, gaze still fixed northwest. Pell stands just past the doorframe, pack on, not hurrying you, but the posture says the road is ready when you are.\n\nThe village is stirring behind you — a door somewhere, a dog, the first real light warming the lane stones from gray to pale gold. The smokehouse smells of woodsmoke and salt and the particular cold of a morning that hasn't decided to be warm yet. Everything that needed doing in Millbrook is done."
+      },
+      {
+        "player": "Pull the bladder waterskin from standing credit and head out with Pell... we will want to stop by the forge first... we need to equip ourselves and rest and plan before the journey.",
+        "summary": "Aldric offset settled; cured bladder waterskin added to the pack; Silas and Pell head for the forge to rest and plan before departure.",
+        "narration": "You tell Aldric to take it off the standing credit — simpler than coin at this hour — and he nods, already pulling his ledger from under the block. A mark goes down, the plug is checked once more by calloused thumb, and the bladder waterskin joins the pack without ceremony. Aldric's knife is back in the perch row before you've finished tightening the strap.\n\n\"Safe road,\" he says to the block, not to you. It's the closest thing to a farewell he has.\n\nPell is waiting at the doorframe when you turn, pack settled, Memory across your shoulders. She falls in beside you without a word — her own kit is light and organized, the way a smith packs when she's been watching other people pack badly for years. Huginn drops from the eave and banks northwest once, low over the lane, then rises to a rooftop ahead: directional, unhurried, the way it always means *this way*.\n\nThe forge is four minutes south down the lane — you make it before the village is properly awake, smoke rising thin from the banked fire. Inside, the smell of iron and coal and the faint resin note of the wine you left behind. The forge holds warmth like a promise. You have time: gear to check, the road ahead to name aloud, and a fire to sit beside before the day opens in full."
       }
     ],
     "lastTurn": {
-      "narration": "The question costs nothing to ask. You catch Aldric between perch — knife lifted, fish set aside — and put it plainly: Mara said he sometimes has a cured bladder going spare.\n\nHe doesn't answer immediately. He wipes the knife on his apron, sets it on the block, and disappears through the low door at the back of the smokehouse. You hear the scrape of a crate on stone. He comes back with something in his hand: a pig's bladder, cured and dried, sealed at the neck with a cord-wrapped wooden plug — not pretty, but tight, and it will hold water as well as anything Mara stocks. He turns it over once in his hands, checking the seam, and sets it on the block in front of you.\n\n\"Two cord-weight,\" he says. \"Or I pull it from the standing credit.\" He picks up his knife and returns to the perch row without waiting for an answer, the transaction already decided as far as he's concerned. Outside, Huginn shifts on the eave — a small adjustment, wings tucked back down, gaze still fixed northwest. Pell stands just past the doorframe, pack on, not hurrying you, but the posture says the road is ready when you are.\n\nThe village is stirring behind you — a door somewhere, a dog, the first real light warming the lane stones from gray to pale gold. The smokehouse smells of woodsmoke and salt and the particular cold of a morning that hasn't decided to be warm yet. Everything that needed doing in Millbrook is done.",
-      "sceneSummary": "Aldric produces a cured bladder waterskin — two cord-weight or off the standing credit. The village stirs; the road waits.",
+      "narration": "You tell Aldric to take it off the standing credit — simpler than coin at this hour — and he nods, already pulling his ledger from under the block. A mark goes down, the plug is checked once more by calloused thumb, and the bladder waterskin joins the pack without ceremony. Aldric's knife is back in the perch row before you've finished tightening the strap.\n\n\"Safe road,\" he says to the block, not to you. It's the closest thing to a farewell he has.\n\nPell is waiting at the doorframe when you turn, pack settled, Memory across your shoulders. She falls in beside you without a word — her own kit is light and organized, the way a smith packs when she's been watching other people pack badly for years. Huginn drops from the eave and banks northwest once, low over the lane, then rises to a rooftop ahead: directional, unhurried, the way it always means *this way*.\n\nThe forge is four minutes south down the lane — you make it before the village is properly awake, smoke rising thin from the banked fire. Inside, the smell of iron and coal and the faint resin note of the wine you left behind. The forge holds warmth like a promise. You have time: gear to check, the road ahead to name aloud, and a fire to sit beside before the day opens in full.",
+      "sceneSummary": "Aldric offset settled; cured bladder waterskin added to the pack; Silas and Pell head for the forge to rest and plan before departure.",
       "choices": [
         {
-          "label": "Pull the bladder waterskin from standing credit and go — two cord-weight off the balance, clean and fast. Step out to Pell and let Huginn lead northwest.",
+          "label": "Spread the gear on the forge bench and go through it piece by piece — check Memory, both waterskins, trail parcels, and the expedition kit before deciding anything is ready.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "depart"
+            "plan"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Pay the two cord-weight in hand — keep the standing credit intact for the return.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Sit at the forge and talk through the road itself with Pell — the Edge District, Sorel and Leth, what you know and what you're walking into blind.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Bank the forge properly, make a small meal from a trail parcel, and take a deliberate hour off your feet before you walk out of Millbrook — you're low on energy and the road is long.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Pause at the smokehouse door before you go — take in the lane, the light, the smell of the place. You won't see this for a while. (Recovers a little energy from the held breath.)",
+          "label": "Use Order-Sense on the Contact Names Scrap — two names on a piece of chalk-written paper; read what design they're part of before you go looking for them.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {
+            "mechanical_spiritual": 0.2,
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "careful",
-            "rest"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Aldric one last thing before the road — something you haven't said yet. (Name it in your action.)",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
+            "study",
             "plan"
           ],
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0,
         "inventoryAdd": [
           {
             "name": "Cured Bladder Waterskin",
             "kind": "consumable",
-            "description": "A pig's bladder, cured and dried, sealed at the neck with a cord-wrapped wooden plug. Holds water as well as anything on the road — not pretty, but tight.",
-            "consumable": false
+            "description": "A pig's bladder, cured and dried, cord-wrapped wooden plug at the neck — not pretty but holds water as well as anything. Road-worthy.",
+            "consumable": false,
+            "effects": {}
           }
-        ],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "scene": {
-        "setting": "Aldric's smokehouse, south lane of Millbrook — woodsmoke and cured fish, perch row on the block, pale-gold dawn light now warming the open front. Huginn on the eave, oriented northwest. Pell just outside the doorframe, pack on, ready.",
-        "npcsPresent": [
-          {
-            "name": "Aldric",
-            "state": "Knife back in hand, working the perch row — cured bladder waterskin set on the block in front of Silas, transaction named and waiting."
-          },
-          {
-            "name": "Pell",
-            "state": "Just outside the doorframe, pack on, not hurrying — posture says the road is ready."
-          },
-          {
-            "name": "Huginn",
-            "state": "On the smokehouse eave, wings settled, gaze fixed northwest."
-          }
-        ],
-        "objects": [
-          "Aldric's block and fillet knife",
-          "Row of river perch, morning's work",
-          "Cured Bladder Waterskin (on the block, awaiting payment decision)",
-          "Memory (spear, across Silas's shoulders)",
-          "Traveler's Pack with Hard Tallow Block, Oilcloth Fold, Pine-Tar Salve Tin"
-        ],
-        "threads": [
-          "Payment decision: standing credit or two cord-weight in hand",
-          "Huginn oriented northwest — departure point reached",
-          "Sorel and Leth as Edge District leads — whereabouts uncertain",
-          "Date three (interference ridge, last light) and date four (snowmelt pool, three hours north) both standing with Pell"
         ]
       },
       "npcUpdates": [
@@ -1552,51 +1540,86 @@
           "op": "update",
           "npcId": "aldric",
           "name": "Aldric",
-          "note": "Produced a cured bladder waterskin from back storage — named two cord-weight or standing credit as the price without ceremony. Returned to the perch row.",
-          "learned": [
-            "Keeps cured bladder waterskins in back storage as Mara indicated — practical trail goods, available on request"
-          ],
-          "skillsObserved": [
-            "practical stock management"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At his smokehouse block, knife in hand, committed to watching the downstream customer end of the east-channel while Silas is gone."
+          "role": "Smokehouse operator, Millbrook",
+          "note": "Took the standing credit deduction without ceremony — ledger marked, waterskin handed over, knife back in the perch row. Sent Silas off with 'safe road' to the block.",
+          "statusNote": "At his smokehouse block, working the morning perch row — watching the downstream end while Silas is gone.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Fell in beside Silas at the smokehouse doorframe without prompting — kit light and organized. Walking with him to the forge to rest and plan.",
+          "statusNote": "Walking south with Silas toward the forge — kit packed, ready for the road once gear is checked and plans are named.",
+          "relationshipDelta": 0
         }
       ],
+      "scene": {
+        "setting": "Pell's forge, south lane of Millbrook — iron and coal smell, the faint resin ghost of last night's wine, banked fire still holding warmth. Pale early-spring dawn light at the doorway. Huginn on the roofline outside, oriented northwest.",
+        "npcsPresent": [
+          {
+            "name": "Pell",
+            "state": "Setting her pack down near the bench — quiet, organized, waiting to see how Silas wants to use this hour."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the roofline outside, wings settled, gaze fixed northwest — patient."
+          }
+        ],
+        "objects": [
+          "Memory (spear, across Silas's shoulders)",
+          "Traveler's Pack with full expedition kit",
+          "Cured Bladder Waterskin (newly added)",
+          "Forge bench (clear surface, tools racked)",
+          "Banked forge fire (warm, low)",
+          "River whetstone (Pell's, on the bench where she left it)",
+          "Contact Names Scrap (Sorel, Leth) — in the pack",
+          "Valve Failure Timeline note — in the pack"
+        ],
+        "threads": [
+          "Gear check and road planning before departure",
+          "Sorel and Leth — Edge District contacts, whereabouts uncertain",
+          "Date three (interference ridge, last light) and date four (snowmelt pool) both standing with Pell",
+          "Huginn oriented northwest — departure direction established"
+        ]
+      },
+      "moveTo": {
+        "location": "Pell's Forge — Interior",
+        "why": "walked south from the smokehouse with Pell after settling the waterskin purchase"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the smokehouse block — a question, a trip to the back, a price named."
+        "why": "short walk from smokehouse to forge, village barely stirring"
       }
     },
     "sceneState": {
-      "setting": "Aldric's smokehouse, south lane of Millbrook — woodsmoke and cured fish, perch row on the block, pale-gold dawn light now warming the open front. Huginn on the eave, oriented northwest. Pell just outside the doorframe, pack on, ready.",
+      "setting": "Pell's forge, south lane of Millbrook — iron and coal smell, the faint resin ghost of last night's wine, banked fire still holding warmth. Pale early-spring dawn light at the doorway. Huginn on the roofline outside, oriented northwest.",
       "npcsPresent": [
         {
-          "name": "Aldric",
-          "state": "Knife back in hand, working the perch row — cured bladder waterskin set on the block in front of Silas, transaction name"
-        },
-        {
           "name": "Pell",
-          "state": "Just outside the doorframe, pack on, not hurrying — posture says the road is ready."
+          "state": "Setting her pack down near the bench — quiet, organized, waiting to see how Silas wants to use this hour."
         },
         {
           "name": "Huginn",
-          "state": "On the smokehouse eave, wings settled, gaze fixed northwest."
+          "state": "On the roofline outside, wings settled, gaze fixed northwest — patient."
         }
       ],
       "objects": [
-        "Aldric's block and fillet knife",
-        "Row of river perch, morning's work",
-        "Cured Bladder Waterskin (on the block, awaiting payment decision)",
         "Memory (spear, across Silas's shoulders)",
-        "Traveler's Pack with Hard Tallow Block, Oilcloth Fold, Pine-Tar Salve Tin"
+        "Traveler's Pack with full expedition kit",
+        "Cured Bladder Waterskin (newly added)",
+        "Forge bench (clear surface, tools racked)",
+        "Banked forge fire (warm, low)",
+        "River whetstone (Pell's, on the bench where she left it)",
+        "Contact Names Scrap (Sorel, Leth) — in the pack",
+        "Valve Failure Timeline note — in the pack"
       ],
       "threads": [
-        "Payment decision: standing credit or two cord-weight in hand",
-        "Huginn oriented northwest — departure point reached",
-        "Sorel and Leth as Edge District leads — whereabouts uncertain",
-        "Date three (interference ridge, last light) and date four (snowmelt pool, three hours north) both standing with Pell"
+        "Gear check and road planning before departure",
+        "Sorel and Leth — Edge District contacts, whereabouts uncertain",
+        "Date three (interference ridge, last light) and date four (snowmelt pool) both standing with Pell",
+        "Huginn oriented northwest — departure direction established"
       ]
     }
   },
@@ -1698,7 +1721,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d1] You know this person's name now: Aldric (was \"Smokehouse Man\")",
         "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
         "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t",
         "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s",
@@ -1707,7 +1729,8 @@
         "[d2] Squared the full account without argument — named the cord-weights cleanly, accepted the Mara offset without pushback. Ledger closed and initialed.",
         "[d2] Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work.",
         "[d2] Received Mara's offset note and initialed his counterpart ledger entry. Briefed on the vault-failure timeline and east-channel surge scope — connected the fish-count decline to the",
-        "[d2] Produced a cured bladder waterskin from back storage — named two cord-weight or standing credit as the price without ceremony. Returned to the perch row."
+        "[d2] Produced a cured bladder waterskin from back storage — named two cord-weight or standing credit as the price without ceremony. Returned to the perch row.",
+        "[d2] Took the standing credit deduction without ceremony — ledger marked, waterskin handed over, knife back in the perch row. Sent Silas off with 'safe road' to the block."
       ],
       "knownFacts": [
         "No bowyer currently in Millbrook — position unfilled since two winters ago",
@@ -1728,7 +1751,7 @@
         "practical stock management"
       ],
       "status": "active",
-      "statusNote": "At his smokehouse block, knife in hand, committed to watching the downstream customer end of the east-channel while Silas is gone.",
+      "statusNote": "At his smokehouse block, working the morning perch row — watching the downstream end while Silas is gone.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1745,7 +1768,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Delivered her opening line cleanly — chin came up when Dara named the date herself; glanced back at Silas.",
         "[d2] Named World-day minus-eighteen plainly — watching Dara take it in.",
         "[d2] Named the northeast axis cleanly — handed the floor to Silas for the mechanism disclosure as agreed.",
         "[d2] Named the northeast axis and CCW torque mechanism plainly — handed the floor to Silas for the timeline disclosure as agreed.",
@@ -1754,7 +1776,8 @@
         "[d2] Named the Radiant Plateau Edge District as the most likely source of pre-Transition structural knowledge — someone who knows the older layer beneath the optical arrays.",
         "[d2] Accepted the plan to follow Huginn northwest after morning briefings — said 'I can follow a bird' with quiet acceptance.",
         "[d2] Accompanied Silas to Mara's store — held the doorframe and let him run the briefing without comment.",
-        "[d2] Pushed off the doorframe — ready to move; letting Silas run the final briefings."
+        "[d2] Pushed off the doorframe — ready to move; letting Silas run the final briefings.",
+        "[d2] Fell in beside Silas at the smokehouse doorframe without prompting — kit light and organized. Walking with him to the forge to rest and plan."
       ],
       "knownFacts": [
         "Is open — conditionally — to leaving if the work demands it",
@@ -1775,7 +1798,7 @@
         "rapid triage of expert-source candidates by infrastructure t"
       ],
       "status": "active",
-      "statusNote": "At Mara's store doorframe, ready to move to Aldric's smokehouse.",
+      "statusNote": "Walking south with Silas toward the forge — kit packed, ready for the road once gear is checked and plans are named.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2640,15 +2663,15 @@
     }
   },
   "tendencies": {
-    "strategic": 65.83567344898964,
-    "cerebral": 44.56287612123869,
-    "social": 52.43094910380568,
-    "generous": 18.275205002080927,
-    "cautious": 53.11345146060968,
-    "physical": 0.9866694243154785,
-    "risky": 3.281332643633006,
-    "ruthless": 1.3465299664486763,
-    "carousing": 1.6993447099026922
+    "strategic": 67.50649508174469,
+    "cerebral": 44.34006174063249,
+    "social": 52.168794358286654,
+    "generous": 18.183828977070522,
+    "cautious": 52.847884203306634,
+    "physical": 0.9817360771939011,
+    "risky": 3.2649259804148407,
+    "ruthless": 1.339797316616433,
+    "carousing": 1.6908479863531787
   },
   "aptitudes": [
     "strategist",
@@ -2656,7 +2679,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 226,
+  "actionCount": 227,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2742,8 +2765,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784143142459,
-  "rev": 311,
+  "updatedAt": 1784143493152,
+  "rev": 312,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3168,7 +3191,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 21
+    "valley": 22
   },
   "foreclosed": [
     "rootkin",

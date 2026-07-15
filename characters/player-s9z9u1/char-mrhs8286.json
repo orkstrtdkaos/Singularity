@@ -1191,75 +1191,102 @@
         "player": "I LIKE that you aren't quite sure... I LIKE that you think I'm methodical - but if you want to see how thorough I can be... that will have to wait for a third date... (and with that head toward the next valve)",
         "summary": "Silas delivers the third-date line and the party moves southeast — Pell files it in the correct ledger and falls into step.",
         "narration": "You say it with the half-smile already on your face — *I like that you aren't quite sure* — and let the pause do what it will before the rest comes: *I like that you think I'm methodical. But if you want to see how thorough I can be, that'll have to wait for a third date.* You're already pushing off the wall as you finish it, pack settling onto your shoulders, Memory shifting at the balance point.\n\nPell doesn't laugh. What she does is almost better — a single exhale through her nose, barely a sound, and when you glance back at her she's looking at you with the expression of someone recalculating. Not flustered. Just — accounting for new information. She stands in one motion, apron-strings straight, and falls into step beside you without a word. Her shoulder brushes yours once at the first bend and she doesn't move away.\n\nHuginn lifts from the fence-post behind you and arcs southeast without being asked, a lazy quartering path above the scrub, already reading the ground ahead. Pell watches it go. \"Three dates,\" she says finally — not quite to you, not quite to herself — and the tone is the tone of someone putting a fact in the correct ledger. She doesn't say anything else. The path curves through low gorse toward the east furlong, the morning dew burning off fast now, and the first of the furlong fence-posts comes into view around the bend."
+      },
+      {
+        "player": "Ask Pell what she remembers of the pre-Transition wash-room site she mentioned — the flagged floor, the hooks — before you reach the valve",
+        "summary": "Pell describes the pre-Transition wash-room site — flagged slate, empty saddle-mount hooks, worn stand-positions, pressed wall-marks — and names the air there as tasting like the river now does.",
+        "narration": "The east furlong fence-posts are just coming into view when you ask it — keeping your voice easy, walking pace, Memory settled at your shoulder. You tell her you've been turning over what she said at Fen's intake: the flagged floor, the ring-hooks, the emptied state. Ask her what she remembers of the place she crossed into.\n\nPell walks another twenty paces before she answers, which you've learned means she's deciding how much detail to give, not whether to give any. \"Came on it through the north cut,\" she says. \"Maybe four years back, maybe five. Following a crack in the hillside that I thought was a fault-line — wanted to know if it would undercut the grain-store foundations.\" She adjusts the strap on her tool-roll, eyes on the path. \"Floor was dressed slate, close-fitted — not dry-laid. Mortar between the flags was old, but it hadn't gone to dust. Two ring-hooks, hip height, set into the same wall. Wide saddle-mounts — the kind you hang something in, not something from. I didn't stay long.\" A beat. \"The air in there tasted the way the river smells some mornings now.\"\n\nHuginn drops from his arc and lands on a fence-post to the left, watching you both. You don't say anything yet. Pell glances at the bird, then at you. \"The hooks were empty. The floor had worn paths — two positions, facing the same direction. And the far wall had marks pressed into the plaster.\" She pauses. \"I didn't know what they were then. I do now.\"\n\nThe valve housing comes into view around the bend — the east furlong cover plate, tilted at the same shallow angle as Fen's. Pell stops talking and looks at it. You've got maybe thirty feet before the work begins."
       }
     ],
     "lastTurn": {
-      "narration": "You say it with the half-smile already on your face — *I like that you aren't quite sure* — and let the pause do what it will before the rest comes: *I like that you think I'm methodical. But if you want to see how thorough I can be, that'll have to wait for a third date.* You're already pushing off the wall as you finish it, pack settling onto your shoulders, Memory shifting at the balance point.\n\nPell doesn't laugh. What she does is almost better — a single exhale through her nose, barely a sound, and when you glance back at her she's looking at you with the expression of someone recalculating. Not flustered. Just — accounting for new information. She stands in one motion, apron-strings straight, and falls into step beside you without a word. Her shoulder brushes yours once at the first bend and she doesn't move away.\n\nHuginn lifts from the fence-post behind you and arcs southeast without being asked, a lazy quartering path above the scrub, already reading the ground ahead. Pell watches it go. \"Three dates,\" she says finally — not quite to you, not quite to herself — and the tone is the tone of someone putting a fact in the correct ledger. She doesn't say anything else. The path curves through low gorse toward the east furlong, the morning dew burning off fast now, and the first of the furlong fence-posts comes into view around the bend.",
-      "sceneSummary": "Silas delivers the third-date line and the party moves southeast — Pell files it in the correct ledger and falls into step.",
+      "narration": "The east furlong fence-posts are just coming into view when you ask it — keeping your voice easy, walking pace, Memory settled at your shoulder. You tell her you've been turning over what she said at Fen's intake: the flagged floor, the ring-hooks, the emptied state. Ask her what she remembers of the place she crossed into.\n\nPell walks another twenty paces before she answers, which you've learned means she's deciding how much detail to give, not whether to give any. \"Came on it through the north cut,\" she says. \"Maybe four years back, maybe five. Following a crack in the hillside that I thought was a fault-line — wanted to know if it would undercut the grain-store foundations.\" She adjusts the strap on her tool-roll, eyes on the path. \"Floor was dressed slate, close-fitted — not dry-laid. Mortar between the flags was old, but it hadn't gone to dust. Two ring-hooks, hip height, set into the same wall. Wide saddle-mounts — the kind you hang something in, not something from. I didn't stay long.\" A beat. \"The air in there tasted the way the river smells some mornings now.\"\n\nHuginn drops from his arc and lands on a fence-post to the left, watching you both. You don't say anything yet. Pell glances at the bird, then at you. \"The hooks were empty. The floor had worn paths — two positions, facing the same direction. And the far wall had marks pressed into the plaster.\" She pauses. \"I didn't know what they were then. I do now.\"\n\nThe valve housing comes into view around the bend — the east furlong cover plate, tilted at the same shallow angle as Fen's. Pell stops talking and looks at it. You've got maybe thirty feet before the work begins.",
+      "sceneSummary": "Pell describes the pre-Transition wash-room site — flagged slate, empty saddle-mount hooks, worn stand-positions, pressed wall-marks — and names the air there as tasting like the river now does.",
       "choices": [
         {
-          "label": "Approach the east furlong valve housing — read the cover geometry for the same axial torque Pell found at Fen's intake",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask what the marks looked like — and whether she can lead you back to that site",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "ask",
+            "investigate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold the question — move to the east furlong valve first and see if the twist direction matches",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "investigate",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Order-Sense on the valve housing — look for the full design it belongs to, not just the failure",
+          "label": "Use Order-Sense on the valve housing before touching it — read what system it belongs to",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.2,
+            "concrete_abstract": -0.3
+          },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "investigate"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Pell what she remembers of the pre-Transition wash-room site she mentioned — the flagged floor, the hooks — before you reach the valve",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Pell directly: does she think the wash-room site and the failed valves are part of the same structure",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "plan"
+            "ask",
+            "synthesize"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Walk the fence-line first — look for the same kind of ground disturbance Pell identified at the intake before touching the valve",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "East furlong path southeast of the dry-stone wall — low gorse scrub, dew burning off, first furlong fence-posts coming into view around the bend. Morning sun now a hand's width above the ridge.",
+        "setting": "East furlong path, thirty feet from the valve housing — the cover plate is visible around the bend, tilted at a shallow angle. Low gorse scrub, dew mostly burned off, fence-posts to left and right. Morning sun a hand's width above the ridge.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Walking beside Silas, a half-step back, filing the third-date remark somewhere in her ledger — quiet, unhurried, watching the path ahead."
+            "state": "Stopped talking, looking at the valve housing — tool-roll strap adjusted, ready to work."
           },
           {
             "name": "Huginn",
-            "state": "Quartering the ground ahead to the southeast in a lazy arc, already reading what's below."
+            "state": "Perched on the left fence-post, watching Silas and Pell both."
           }
         ],
         "objects": [
@@ -1269,14 +1296,15 @@
           "Valve Failure Timeline note (breast pocket — annotated with dog interval)",
           "Boar Tusks (pair) (pack)",
           "Waterskin (nearly empty)",
-          "Dried Starfruit (sealed packet) — finished",
-          "Preserved Trail Parcel x3 (pack)"
+          "Preserved Trail Parcel x3 (pack)",
+          "East furlong valve housing — cover plate visible, tilted at shallow angle, thirty feet ahead"
         ],
         "threads": [
           "East furlong valve site not yet reached — twist direction comparison pending",
           "Pell's open verdict: 'ask me again after the valve' — condition still live",
-          "Third-date remark landed and filed — Pell said 'three dates' once; what she means by it is unresolved",
+          "Third-date remark filed — what Pell means by it is unresolved",
           "Unknown dog: interval recorded, upper meadow path, three-week onset",
+          "Pell's wash-room site: flagged slate, empty saddle-mount hooks, worn stand-positions, pressed wall-marks — air tasted like the river does now; she says she knows what the marks are now",
           "Dara Holt still needs full framing before she acts on the east channel"
         ]
       },
@@ -1286,30 +1314,68 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Received the third-date line without flinching — exhaled once, recalculated, said 'three dates' into the middle distance and filed it. Fell into step beside Silas without being asked.",
+          "note": "Described the pre-Transition wash-room site unprompted details: dressed slate floor, close-fitted mortar, two hip-height saddle-mount ring-hooks, worn stand-positions, pressed wall-marks — air tasted like the river now does. Said she knows what the marks are now.",
           "learned": [
-            "Silas has explicitly named a third date as the condition for seeing how thorough he can be"
+            "Wash-room site: dressed slate floor, close-fitted old mortar, two saddle-mount ring-hooks at hip height on the same wall",
+            "Two worn stand-positions facing the same direction",
+            "Pressed marks in the plaster on the far wall — she didn't know what they were then; she does now",
+            "Air inside tasted the way the river smells on bad mornings",
+            "Found the site four or five years ago, following a crack in the hillside near the grain-store foundations",
+            "The hooks were empty; the object they held was gone"
           ],
-          "relationshipDelta": 1,
+          "skillsObserved": [
+            "structural memory recall under field conditions",
+            "connecting sensory evidence across years"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking the east furlong path with Silas — heading for the second valve site, verdict on the relationship still open and now explicitly conditional on the third date."
+          "statusNote": "Walking the east furlong path with Silas — thirty feet from the valve site, ready to work, wash-room details just shared."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Pell found a pre-Transition wash-room site four or five years ago through the north cut — dressed slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks (wide mounts, for something resting in them, not hanging), two worn stand-positions facing the same wall, pressed marks in the plaster. Air inside tasted like the river does on gray-green mornings. She says she knows what the pressed marks are now.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "precursor-signs-in-the-valley",
+            "order-sense"
+          ]
+        },
+        {
+          "topic": "precursor-signs-in-the-valley",
+          "label": "Precursor Signs in the Valley",
+          "kind": "mystery",
+          "fact": "A second pre-Transition site exists within reach of Millbrook — flagged slate floor, saddle-mount hooks, worn stand-positions, pressed wall-marks. Pell found it through the north cut following a hillside crack. The air inside tasted like the river does now on contaminated mornings. The hooks were empty; whatever they held is gone. Pell recognizes the wall-marks.",
+          "links": [
+            "pell",
+            "the-water-crisis",
+            "millbrook",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk from the dry-stone wall to the east furlong fence-line — less than a quarter hour."
+        "why": "A short walk and a conversation on the path — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "East furlong path southeast of the dry-stone wall — low gorse scrub, dew burning off, first furlong fence-posts coming into view around the bend. Morning sun now a hand's width above the ridge.",
+      "setting": "East furlong path, thirty feet from the valve housing — the cover plate is visible around the bend, tilted at a shallow angle. Low gorse scrub, dew mostly burned off, fence-posts to left and right. Morning sun a hand's width above the ridge.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Walking beside Silas, a half-step back, filing the third-date remark somewhere in her ledger — quiet, unhurried, watchin"
+          "state": "Stopped talking, looking at the valve housing — tool-roll strap adjusted, ready to work."
         },
         {
           "name": "Huginn",
-          "state": "Quartering the ground ahead to the southeast in a lazy arc, already reading what's below."
+          "state": "Perched on the left fence-post, watching Silas and Pell both."
         }
       ],
       "objects": [
@@ -1319,15 +1385,15 @@
         "Valve Failure Timeline note (breast pocket — annotated with dog interval)",
         "Boar Tusks (pair) (pack)",
         "Waterskin (nearly empty)",
-        "Dried Starfruit (sealed packet) — finished",
-        "Preserved Trail Parcel x3 (pack)"
+        "Preserved Trail Parcel x3 (pack)",
+        "East furlong valve housing — cover plate visible, tilted at shallow angle, thirt"
       ],
       "threads": [
         "East furlong valve site not yet reached — twist direction comparison pending",
         "Pell's open verdict: 'ask me again after the valve' — condition still live",
-        "Third-date remark landed and filed — Pell said 'three dates' once; what she means by it is unresolved",
+        "Third-date remark filed — what Pell means by it is unresolved",
         "Unknown dog: interval recorded, upper meadow path, three-week onset",
-        "Dara Holt still needs full framing before she acts on the east channel"
+        "Pell's wash-room site: flagged slate, empty saddle-mount hooks, worn stand-positions, pressed wall-marks — air tasted like the river does now; she says she know"
       ]
     }
   },
@@ -1475,7 +1541,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Narrowed the last return visit to a seasonal condition-triggered check — melt or first freeze — and placed it one to two winters back. Did not finish the alternative clause (couldn",
         "[d2] Named the two-winter slip model unprompted — first unmanaged melt starts the slip, second winter carries it to the channel. Now reading the valve cover from a distance.",
         "[d2] Read the valve housing immediately on arrival — identified twisted sleeve and torqued cover as the failure mode without prompting. Named the east furlong comparison as the next dia",
         "[d2] Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know.",
@@ -1484,28 +1549,29 @@
         "[d2] Took starfruit without ceremony, leaned on the wall, caught Silas watching her and held the look — no deflection, no performance. Ready to move.",
         "[d2] Sat down beside Silas on the wall without being asked — shoulder to shoulder, unhurried, looking southeast. Said 'twenty minutes' once and nothing else.",
         "[d2] Called Silas thorough and methodical to his face — meant as assessment, not deflection. Pressed her shoulder against his. Said 'ask me again after the valve' — open verdict, not cl",
-        "[d2] Received the third-date line without flinching — exhaled once, recalculated, said 'three dates' into the middle distance and filed it. Fell into step beside Silas without being ask"
+        "[d2] Received the third-date line without flinching — exhaled once, recalculated, said 'three dates' into the middle distance and filed it. Fell into step beside Silas without being ask",
+        "[d2] Described the pre-Transition wash-room site unprompted details: dressed slate floor, close-fitted mortar, two hip-height saddle-mount ring-hooks, worn stand-positions, pressed wall"
       ],
       "knownFacts": [
-        "The unknown dog first appeared approximately three weeks ago — same span as the first sleeve blank failure",
-        "The dog always arrives from the upper meadow path with Fen's niece and always turns back at the village edge",
-        "Pell has assessed it as not a farm dog by behavior and presence",
         "East furlong valve uses same sleeve blank stock as Fen's intake — twist direction comparison pending",
         "Silas kept the second starfruit packet for the road and split it anyway",
         "Comfortable with silence and proximity in equal measure",
         "Describes Silas as methodical — has been watching the pattern since he arrived; hasn't decided yet if it's reassuring",
-        "Silas has explicitly named a third date as the condition for seeing how thorough he can be"
+        "Silas has explicitly named a third date as the condition for seeing how thorough he can be",
+        "Wash-room site: dressed slate floor, close-fitted old mortar, two saddle-mount ring-hooks at hip height on the same wall",
+        "Two worn stand-positions facing the same direction",
+        "Pressed marks in the plaster on the far wall — she didn't know what they were then; she does now"
       ],
       "skillsObserved": [
-        "rapid synthesis of structural evidence into operational conc",
-        "reading deposit grain accumulation layers for temporal seque",
         "reading temporal evidence from deposit grain accumulation ag",
         "synthesis of temporal evidence into a physical mechanism mod",
         "rapid physical diagnosis of iron sleeve failure mode from co",
-        "reading animal behavior against a known baseline"
+        "reading animal behavior against a known baseline",
+        "structural memory recall under field conditions",
+        "connecting sensory evidence across years"
       ],
       "status": "active",
-      "statusNote": "Walking the east furlong path with Silas — heading for the second valve site, verdict on the relationship still open and now explicitly conditional on the third",
+      "statusNote": "Walking the east furlong path with Silas — thirty feet from the valve site, ready to work, wash-room details just shared.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1957,7 +2023,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Responds to Silas's humor with dry wit — suppressed a laugh at the spear-marriage joke and returned 'the married part I'll need in writing.' The warmth is real but kept under ironwork.",
           "[d1] Told plainly that her maker's mark makes her 'half the spear's until she's not' — received it flat, named it provisional, didn't push back. The warmth and the ironwork register are the same thing in h",
           "[d2] Mara's read: Pell values genuinely finished work; drinks slowly and notices taste; grew up before the pass closed so the starfruit will land as recognition, not novelty; dislikes being steered toward ",
           "[d2] Had a quiet relationship with a tinker from the heights, roughly three years ago — ran steady for a while, ended when he stopped coming through. Mara doesn't know if it ended clean. Pell didn't speak ",
@@ -1980,17 +2045,18 @@
           "[d2] Placed Memory in Silas's hands before departure — treating the spear as a working instrument for the valve inspection, not ceremony. Finished the farmer's sleeve in twenty-six minutes.",
           "[d2] Reads material direction from deposit grain — named the column stain's source as above-and-behind the bank. Diagnoses large-scale contamination problems the way she diagnoses a flue leak: by what the ",
           "[d2] Named matched-pair carrying from ring-hook spacing. Recalls a pre-Transition 'wash-room' site deeper in the valley — same flagged floor, same hooks, same emptied state. She crossed the threshold to re",
-          "[d2] Caught Silas watching her in the morning light at the wall and held it — no performance, no deflection. Comfortable in her own proportions. Entirely at ease in the field."
+          "[d2] Caught Silas watching her in the morning light at the wall and held it — no performance, no deflection. Comfortable in her own proportions. Entirely at ease in the field.",
+          "[d2] Pell found a pre-Transition wash-room site four or five years ago through the north cut — dressed slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks (wide mounts, for somethi"
         ],
         "links": [
-          "palework",
           "millbrook",
           "order-sense",
           "deathsense",
           "aldric-provisioning-deal",
           "the-water-crisis",
           "death-bound-spear",
-          "dara-holt"
+          "dara-holt",
+          "precursor-signs-in-the-valley"
         ],
         "aliases": [
           "Pell Marsh"
@@ -2200,12 +2266,15 @@
         "label": "Precursor Signs in the Valley",
         "kind": "mystery",
         "facts": [
-          "[d2] A buried amber light moved in a bedrock crack 70 paces north of the willow bend — thin, the color of old amber, threading along the stone like a lamp seen through thick glass. It pulsed once and went "
+          "[d2] A buried amber light moved in a bedrock crack 70 paces north of the willow bend — thin, the color of old amber, threading along the stone like a lamp seen through thick glass. It pulsed once and went ",
+          "[d2] A second pre-Transition site exists within reach of Millbrook — flagged slate floor, saddle-mount hooks, worn stand-positions, pressed wall-marks. Pell found it through the north cut following a hills"
         ],
         "links": [
           "the-water-crisis",
           "millbrook",
-          "huginn"
+          "huginn",
+          "pell",
+          "aldric-provisioning-deal"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -2268,14 +2337,14 @@
     }
   },
   "tendencies": {
-    "strategic": 54.776034651219994,
-    "cerebral": 43.57040370458558,
-    "social": 53.36081111268466,
-    "generous": 14.74556534018362,
-    "cautious": 46.50913942096,
-    "physical": 1.236326096846315,
-    "risky": 3.044274239545768,
-    "ruthless": 0.6305556603555866
+    "strategic": 55.50215447796389,
+    "cerebral": 44.352551686062654,
+    "social": 53.09400705712123,
+    "generous": 14.671837513482703,
+    "cautious": 46.2765937238552,
+    "physical": 1.2301444663620835,
+    "risky": 3.029052868348039,
+    "ruthless": 0.6274028820538087
   },
   "aptitudes": [
     "strategist",
@@ -2283,7 +2352,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 181,
+  "actionCount": 182,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2369,8 +2438,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784082588696,
-  "rev": 252,
+  "updatedAt": 1784082733303,
+  "rev": 253,
   "generated": {
     "schemaVersion": 1,
     "npc": {

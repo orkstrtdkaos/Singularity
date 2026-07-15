@@ -10,6 +10,11 @@ CCode built all three top-down; **Aevi confirmed at authenticated origin** (not 
 ## 🖥 SNG-104 — Vitals x/y readout + tap/hover detail (specced + STAGED DIFF, awaiting CCode)
 `po/SPEC_SNG-104_vitals_readout.md` + `..._STAGED_DIFF.md` (byte-precise drop-in). The Health/Energy bars show **no number** — that's why Erik couldn't tell if energy was depleting faster or he had less. Adds always-visible `current / max` (zero-tap phone answer) + a tap/hover popover reusing the info-dot delegation (phone parity built in). Verified anchors at HEAD.
 
+## ⚔️ SNG-098 — Skill Battles: two-sided, fog-gated by insight (specced, awaiting CCode)
+`po/SPEC_SNG-098_skill_battles.md`. **Erik's insight elevated this from a wiring job to the real combat model:** a duel is a turn-based exchange where BOTH sides roll and DECIDE, and you see the opponent's intent/roll/breakdown only as far as your insight+reveal (`senseTier`) earns — fog of war as mechanic (tier 0 blind → tier 3 sees their full math). At HEAD the opponent doesn't roll at all (it's a threat→difficulty stat block), so this is a MODEL change, not display. Composes the 2026-07-07 skill_battle seed + sense.js (fog primitive, now aimed at the enemy) + SNG-106 (each side's roll). **PvP falls out** (symmetric agents). Folds in the withdrawn §7b salvage. Depends on SNG-106.
+
+---
+
 ## 🎲 SNG-106 — Roll-breakdown popup (specced, awaiting CCode)
 `po/SPEC_SNG-106_roll_breakdown_popup.md`. Tappable "why this number" on the roll receipt — every component of the chance, with the opposed contribution NAMED (encounters already fold opponent threat into difficulty). **Spine: `successChance` throws its components away at return — must retain them as `{total, components}` so the popup shows the real math, never a re-derivation (behavior-preserving, sum-equals test).** Reuses info-dot popover for phone parity. Companion to SNG-104.
 

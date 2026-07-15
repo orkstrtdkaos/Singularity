@@ -1,7 +1,13 @@
 # SPEC — SNG-101: Domain Promotion
-## Aevi (PO) · 2026-07-14 · authored to spec · **awaiting CCode ROUND 2**
+## Aevi (PO) · 2026-07-14 · **v2, post-CCode-ROUND-2 · GO after dependencies**
 
-> **One line.** A character's chosen domains can be *promoted* — tertiary→secondary, secondary→primary — by earned standing, lifting the tier ceiling on that domain. Promotion **forecloses the newly-chosen domain's antipode by ordinary means.** It is a confirmed decision, never automatic. It never removes anything already learned.
+> **DEPENDENCIES (both confirmed at HEAD `bb36b5a`):**
+> 1. **SNG-100b — Standing Bar** must build first. The teacher+reputation-per-people bar this spec gates on is **not wired** — `domainAccess` enforces station/ceiling/closed-opposite and nothing else; per-people standing doesn't exist as a score (`reputation.js standingWith` is per-settlement; `peopleDisposition` is display-only). SNG-100b builds the primitive and closes SNG-049/050's own unwired gap.
+> 2. **Ability-arch classification pass** must complete first. Foreclosure must never touch braids (`nativeOrCombination === "combination"`), but that tag is **0/247 classified** — without it, foreclosure can't tell a native antipode ability from a braid and would wrongly foreclose braid nodes (the P0 §8 warns of).
+>
+> Build order: **classification → SNG-100b → SNG-101 → SNG-102.**
+
+> **One line.** A character's chosen domains can be *promoted* — tertiary→secondary, secondary→primary — by earned standing (the **SNG-100b** bar), lifting the tier ceiling. Promotion **forecloses the newly-chosen domain's antipode by ordinary means** — directionally: the road forward shuts, the ground already held stays. Confirmed decision, never automatic.
 
 > **Verified against HEAD `v1.8.60`.** Domain layout is currently **static-at-build**: `domainAccessModel` in `traditions.json` assigns primary/secondary/tertiary at creation, and `progression.js` has **no** promotion, acquisition, or elevation surface. This spec adds the missing dynamic verb. It changes *access ceilings*, not the access *model* — every gate in `accessGates` and the closed-opposite rule stay exactly as they are.
 
@@ -30,26 +36,29 @@ A domain a character already holds moves up one station:
 
 **Promotion raises a ceiling; it does not mint a second station.** A character can end up with two domains at primary-tier *access* (the built primary, plus a secondary promoted to primary-tier ceiling) — but "primary" as a **geometric station** (the thing that forecloses an antipode at build) is not duplicated. What promotion grants is the higher station's **access ceiling** and its **foreclosure**, while leaving the domain's ring geometry (its `opposite`/`adjacent`) untouched. §2 makes station-vs-ceiling precise so CCode doesn't have to infer it.
 
-## 2. STATION vs CEILING — the precise model
+## 2. STATION vs CEILING — the additive model (rewritten post-review)
 
-The current model conflates two things that this spec must separate:
+*The original §2 proposed turning each `domains.{primary,secondary,tertiary}` from a string into a `{traditionId, tierCeiling, station}` object. **That is a breaking type change, not the additive migration it claimed** — those fields are bare traditionId strings compared by identity (`trad === primary`, `antipodeOf(primary, index)`) in `domainAccess` (traditions.js) and ~11 call sites. The object-swap breaks every one. Withdrawn. The version below delivers every design goal with **zero type change** — CCode's recommended path.*
 
-- **Station** = the geometric role chosen at build. It determines *foreclosure* (primary's antipode closed, secondary's antipode closed) and the *tertiary-adjacency constraint*. Stations are fixed by the build-time choice **and by promotion** (see foreclosure below).
-- **Ceiling** = the max tier learnable in a domain. Today ceiling is a pure function of station. This spec **decouples** them: a domain carries its own `tierCeiling`, initialized from its station, and **raised by promotion**.
+Two things the current model conflates and this spec separates:
+- **Station** = the geometric role chosen at build (`primary`/`secondary`/`tertiary`). Determines foreclosure and the tertiary-adjacency rule. Stays a **string**, exactly as today.
+- **Ceiling** = the max tier learnable in a domain. Today it's derived from station. This spec lets it be **overridden per-domain** by promotion.
 
-So the character record gains, per chosen domain, an explicit ceiling that promotion edits — rather than re-deriving ceiling from station every read.
-
+**Keep the strings. Add three parallel, optional, absent-tolerant structures:**
 ```
-character.domains = {
-  primary:   { traditionId, tierCeiling: 5, station: "primary" },
-  secondary: { traditionId, tierCeiling: 3, station: "secondary" },
-  tertiary:  { traditionId, tierCeiling: 2, station: "tertiary" }
-}
+character.domains = { primary: "reach_death_life", secondary: "...", tertiary: "..." }   // UNCHANGED — strings
+
+character.foreclosed      : [traditionId, …]           // antipodes closed by promotion/acquisition
+character.domainCeilings  : { [traditionId]: tier }    // per-domain ceiling override; ABSENT ⇒ derive from station (today's behavior)
+character.domainsAcquired : [traditionId, …]           // SNG-102; domains beyond the built three
 ```
 
-**Promotion edits `tierCeiling` and the character's `foreclosed` set — never a domain's ring geometry.** A promoted tertiary reads as `tierCeiling: 3` and its antipode joins `foreclosed`. It is, in every access sense, now a secondary. The `station` label is updated to match for UI clarity, but **access is read from `tierCeiling` + `foreclosed`, which is the single source of truth** — never re-derived from the label.
+**How each design goal lands, additively:**
+- **Ceiling decoupling** — `domainAccess` reads `domainCeilings[trad]` when present, else the current station-derived cap. A character with no `domainCeilings` behaves **exactly as today**. Promotion writes a raised ceiling into that map.
+- **Keep-the-ground foreclosure** — `foreclosed` gates only *new* learning and *new* ranking. Nothing reads `foreclosed` to revoke an owned ability, so owned ground is preserved by construction (Law 14 holds because there is no removal path).
+- **N-domain support** — `domainAccess` generalizes to iterate `[primary, secondary, tertiary, ...domainsAcquired]` as a membership test. Still string-identity. No type change. (This is the hook SNG-102 lands on.)
 
-*Rationale: reading access from an explicit per-domain ceiling is the only model where "keep the ground" is expressible. If ceiling were re-derived from station on every read, there'd be nowhere to record "this domain is promoted but that far ability you already learned survives.")*
+**Single source of truth for access:** `domainAccess(ability, tier, character, index)` reads `domains` (strings) + `domainCeilings` + `foreclosed`. Every existing read that passed `character.domains` keeps working; the new structures are consulted when present and ignored when absent. **The migration only ever ADDS these three fields to a save — it never rewrites `domains`.** That is what "additive" actually means, and this version earns the word.
 
 ## 3. FORECLOSURE — the bifurcation (Erik's ruling, exact)
 
@@ -58,14 +67,19 @@ character.domains = {
 - A **tertiary** promoted to secondary: its antipode was previously *penalized-reachable* (steps=12 from a tertiary is not auto-closed under the current model — only primary/secondary antipodes close at build). Promotion **newly closes it.** This is the decision with teeth: before, you could dabble at both ends of that axis via the penalized ring; after, you have chosen your end.
 - A **secondary** promoted to primary: its antipode was already closed at build. No new foreclosure; promotion here is purely a ceiling lift.
 
-**Foreclosure is directional (Erik's ruling — KEEP THE GROUND):**
+**Foreclosure is directional (Erik's ruling — KEEP THE GROUND). Named against the LIVE rank system (post-review):**
 ```
-foreclose(antipodeId) means:
-  • BLOCK: learning any NEW ability in antipodeId by ordinary means
-  • BLOCK: ranking UP any already-owned antipodeId ability by ordinary means
+foreclose(antipodeId) means, for NATIVE (nativeOrCombination !== "combination") abilities of antipodeId:
+  • BLOCK: learnAbility                 — no NEW native ability in antipodeId by ordinary means
+  • BLOCK: autoAdvancePracticedRanks    — skip; a foreclosed native does not auto-rank-2 through use
+  • BLOCK: markDefiningMoment           — engine refuses rank 3 on a foreclosed native
   • PRESERVE: every already-owned antipodeId ability, at its current rank, fully usable
-  • PRESERVE: the braid road — a cross-pole braid spanning this axis remains the sanctioned exception
+  • PRESERVE (BRAID EXEMPTION): a combination/braid ability spanning this axis is NEVER foreclosed —
+                                it learns, ranks, and masters normally. foreclosed gates NATIVES ONLY.
 ```
+*Rank blocking is new to this version: ranking became through-use this session (`autoAdvancePracticedRanks` + `markDefiningMoment`), so "block ranking" now means those two functions must skip `traditionOf(ability) ∈ foreclosed` — but only for natives. The braid exemption applies to all three paths (learn, auto-rank, defining-moment): a foreclosed braid is still fully advanceable, because the braid is the sanctioned road across the very axis foreclosure closes.*
+
+**⚠ Braid exemption requires the classification pass.** `nativeOrCombination` is 0/247 classified at HEAD. Until an ability is tagged, foreclosure cannot safely tell a native from a braid. This is why SNG-101 depends on the classification pass — see header.
 
 You do not un-become what you'd started to be. You commit against *deepening* it. The road forward shuts; the ground under your feet stays yours.
 
@@ -73,7 +87,7 @@ You do not un-become what you'd started to be. You commit against *deepening* it
 
 ## 4. THE STANDING BAR — what earns a promotion
 
-Reuses the `accessGates.capstones` bar verbatim — **greatness is taught, not bought:**
+**Built by SNG-100b, not reused.** *(Corrected: the `accessGates` capstone bar is content-only at HEAD — `domainAccess` enforces no standing whatsoever, and per-people standing doesn't exist as a score. SNG-100b builds the primitive.)* On that primitive, the bar is — **greatness is taught, not bought:**
 
 | Promotion | Requires |
 |---|---|
@@ -82,7 +96,7 @@ Reuses the `accessGates.capstones` bar verbatim — **greatness is taught, not b
 
 **No skill-point cost.** Promotion is not bought; it is *recognized*, exactly like `markDefiningMoment` recognizes rank 3. The standing is the price.
 
-Thresholds live in a new `traditions.json` → `promotion` block (tunable, not hardcoded):
+Thresholds live in a new `traditions.json` → `promotion` block (tunable, not hardcoded), read against SNG-100b's per-people standing score, teacher flag, and region-presence record:
 ```json
 "promotion": {
   "tertiaryToSecondary": { "minReputation": <t>, "requiresTeacher": true, "minInDomainRanks": <n> },
@@ -108,8 +122,9 @@ New GM op **`offerPromotion`** (GM may surface the opportunity narratively when 
 | Module | Change |
 |---|---|
 | `traditions.json` | Add `promotion` thresholds block. |
-| `state.js` | Migrate legacy characters: derive `character.domains` (with `tierCeiling` from station) + `character.foreclosed` (primary+secondary antipodes) on load if absent. Idempotent, `reconcileVersion`-gated. **This is the one real migration** — and it only *adds* derived structure, never removes. Old saves gain explicit ceilings equal to what they already had. |
-| `progression.js` | `promotionEligible(character, domainKey, rules) → {eligible, missing[]}`; `promote(character, domainKey)` — edits `tierCeiling`, adds antipode to `foreclosed`, updates `station` label. Access reads (`canLearn`, `canRankUp`) read `tierCeiling` + `foreclosed` instead of re-deriving from station. **`foreclosed` gates native/single-tradition only — never braids.** |
+| `state.js` | On load, if absent, seed `character.foreclosed` with the primary+secondary antipodes (today's implicit closed set, now made explicit) and leave `domainCeilings`/`domainsAcquired` unset (absent ⇒ station-derived, unchanged behavior). Idempotent, `reconcileVersion`-gated. **Additive only — `domains` strings are never rewritten.** |
+| `traditions.js` | `domainAccess` generalizes: read ceiling from `domainCeilings[trad]` if present else station-derived; iterate `[primary, secondary, tertiary, ...domainsAcquired]` for membership; treat `trad ∈ foreclosed` as closed **for natives only**. Signature gains `character` (or the extra maps) — all ~11 call sites pass the character already or trivially can. |
+| `progression.js` | `promotionEligible(character, domainKey, rules) → {eligible, missing[]}` (reads SNG-100b standing); `promote(character, domainKey)` — writes raised ceiling into `domainCeilings`, adds antipode to `foreclosed`, updates the `station` string. **`learnAbility` + `autoAdvancePracticedRanks` + `markDefiningMoment` all skip `traditionOf(ability) ∈ foreclosed` for natives; braids exempt on all three.** |
 | `gm.js` | `offerPromotion` op (narrative surface only) + whitelist + sanitizer clamped to `{domainKey}`. Engine ignores it unless `promotionEligible` is already true — the GM can't hand a promotion any more than it can hand mastery. |
 | `app.js` | Promotion offer card (claimable, like a ripe combo); the **commit modal** naming the foreclosure cost; domain panel shows ceiling + any foreclosed axes. |
 | `skilltree.js` | A foreclosed antipode renders `FORECLOSED` (visually distinct from `LOCKED` — locked is "not yet", foreclosed is "you chose otherwise"), except braid nodes on that axis, which stay reachable. |
@@ -122,13 +137,16 @@ There is **no** "you may not master everything" rule, because the geometry alrea
 Mastery is therefore *definitionally* someone standing at a pole with a maximal braid-set spanning their own foreclosures — the completed pilgrimage, not the dissolved self. The philosophy is the mechanic. (Erik + Aevi, this session — the reframe is ratified; do not add a flat "collect-all" endgame.)
 
 ## 8. NON-GOALS / GUARDS
-- **No new road to the antipode.** Foreclosure never loosens; the braid remains the only exception. If any code path lets a foreclosed native ability be learned/ranked by ordinary means, that is a P0 bug — it dissolves the braids.
+- **No new road to the antipode.** Foreclosure never loosens; the braid remains the only exception. If any code path lets a foreclosed **native** ability be learned or ranked (via learn, auto-rank, OR defining-moment) by ordinary means, that is a P0 bug — it dissolves the braids.
+- **Braid exemption is unconditional and requires classification.** A foreclosed **braid** must always learn/rank/master normally. This cannot be implemented safely until `nativeOrCombination` is classified (0/247 at HEAD) — hence the hard dependency. Shipping foreclosure before classification would foreclose braid nodes: the P0 above, guaranteed.
 - **No confiscation.** If a `promote` call would ever lower a `tierCeiling` or strip an owned ability, it must throw. Law 14 is a hard invariant here.
 - **No auto-promote.** `promote` is only ever called from the commit UI action. `offerPromotion` sets no state.
 - **Acquisition is out of scope** — that's SNG-102. This spec only moves *existing* chosen domains up the chain.
 
-## OPEN QUESTIONS FOR CCODE ROUND 2
-1. Does a `character.domains` structure already exist under another name, or is `primary/secondary/tertiary` currently stored flat on the character? (I read `domainAccessModel` as the *rules*, but need the *save-shape* confirmed — where is a character's chosen primary actually persisted today?)
-2. Is there an existing `foreclosed`/closed-axis set on the character, or is closed-opposite currently computed on-the-fly from station + `opposite`? (Determines whether §6 `state.js` migration adds a field or formalizes an existing one.)
-3. Reputation: confirm the live counter and scale (`reputation.js`) so §4 thresholds are expressed in real units, not invented ones.
-4. Does `skilltree.js` have a state enum I extend for `FORECLOSED`, or does it derive node status differently?
+## OPEN QUESTIONS — RESOLVED (CCode ROUND 2, verified at HEAD)
+1. **Save-shape:** `character.domains.{primary,secondary,tertiary}` are **bare traditionId strings**, compared by identity across `domainAccess` + ~11 sites. → drove the additive §2 rewrite.
+2. **Closed set:** closed-opposite is **computed on-the-fly** (`antipodeOf(primary)`, `antipodeOf(secondary)` in `domainAccess`); there is no persisted `foreclosed`. → §6 `state.js` makes it explicit, additively.
+3. **Reputation:** `standingWith` is **per-settlement** (deeds-based); per-people standing **does not exist as a score** — `peopleDisposition` is display-only. → drove **SNG-100b** (build the per-people primitive).
+4. **skilltree:** the Phase-3 `state` field **extends cleanly to `FORECLOSED`.** Confirmed by CCode. ✓
+
+*Full review: `po/SPEC_SNG-101_102_CCODE_REVIEW.md`. Disposition: `po/SPEC_SNG-101_102_AEVI_DISPOSITION.md`.*

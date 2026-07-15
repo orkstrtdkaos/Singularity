@@ -1,751 +1,765 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "reach_concrete_abstract",
-  "gated": "learned",
-  "note": "Crafts of The Given Land/The Pattern Reach (concrete_abstract axis). THINGCRAFT is the concrete-pole craft of the Masons of the Given \u2014 only what can be touched is real; the world's great builders and its great skeptics. FORMCRAFT is the abstract-pole craft of the Figurists \u2014 pattern, symbol and idea, who hold matter to be the coarsest layer of the real. This is the axis the GM's own narrative REGISTER rides on (SNG-048): concrete places speak plainly, abstract places earn their poetry. Authored by Aevi, SNG-054.",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "reach_concrete_abstract",
+ "gated": "learned",
+ "note": "Crafts of The Given Land/The Pattern Reach (concrete_abstract axis). THINGCRAFT is the concrete-pole craft of the Masons of the Given — only what can be touched is real; the world's great builders and its great skeptics. FORMCRAFT is the abstract-pole craft of the Figurists — pattern, symbol and idea, who hold matter to be the coarsest layer of the real. This is the axis the GM's own narrative REGISTER rides on (SNG-048): concrete places speak plainly, abstract places earn their poetry. Authored by Aevi, SNG-054.",
+ "abilities": [
+  {
+   "id": "thingcraft",
+   "name": "Thingcraft",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.5,
+    "mechanical_spiritual": -0.2,
+    "body_mind": -0.2
+   },
+   "functions": [
+    "make",
+    "shield",
+    "break"
+   ],
+   "narrationHints": "He puts his hand on the stone and the stone tells him the truth, because stone does not do anything else.",
+   "description": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
+   "notFor": "Symbol, glamour, and argument (Formcraft's country); anything that requires believing in what cannot be weighed.",
+   "tree": [
     {
-      "id": "thingcraft",
-      "name": "Thingcraft",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_concrete_abstract",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.5,
-        "mechanical_spiritual": -0.2,
-        "body_mind": -0.2
-      },
-      "functions": [
-        "make",
-        "shield",
-        "break"
-      ],
-      "narrationHints": "He puts his hand on the stone and the stone tells him the truth, because stone does not do anything else.",
-      "description": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
-      "notFor": "Symbol, glamour, and argument (Formcraft's country); anything that requires believing in what cannot be weighed.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Weighed Thing",
-          "grants": "Know a thing's true weight, material, soundness and worth by touch \u2014 no lie of appearance survives your hand.",
-          "cannot": "It tells you what a thing IS, never what it means or what it is for."
-        },
-        {
-          "rank": 2,
-          "name": "The Set Stone",
-          "grants": "Set a thing so it STAYS \u2014 a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
-          "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it."
-        },
-        {
-          "rank": 3,
-          "name": "The Denial",
-          "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
-          "cannot": "It denies the abstract INDISCRIMINATELY \u2014 including meanings you needed, including a Figurist ally's working, including hope."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "EXPLORE",
-        "FIGHT",
-        "INVESTIGATE"
-      ],
-      "challengeProfile": {
-        "EXPLORE": 3,
-        "INVESTIGATE": 2
-      },
-      "tradition": "mason"
+     "rank": 1,
+     "name": "The Weighed Thing",
+     "grants": "Know a thing's true weight, material, soundness and worth by touch — no lie of appearance survives your hand.",
+     "cannot": "It tells you what a thing IS, never what it means or what it is for."
     },
     {
-      "id": "stone_read",
-      "name": "Stone-Read",
-      "levelReq": 1,
-      "energyCost": 3,
-      "powerSystem": "reach_concrete_abstract",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.3
-      },
-      "functions": [
-        "reveal",
-        "track"
-      ],
-      "narrationHints": "The material gives up its history under his palm.",
-      "description": "Read a material's truth by touch \u2014 the first gift of the Given.",
-      "notFor": "Reading meaning or intent; anything not physically present.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Stone-Read",
-          "grants": "Know what a material truly is, and whether it is sound.",
-          "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly."
-        },
-        {
-          "rank": 2,
-          "name": "The Long Grain",
-          "grants": "Read a thing's history in its material \u2014 the stresses it took, the repairs, the day it nearly broke.",
-          "cannot": "History, not future. It reports what happened, not what happens next."
-        },
-        {
-          "rank": 3,
-          "name": "The Given Word",
-          "grants": "The material of a whole structure is legible at once \u2014 every fault, every honest joint, every lie the builder told.",
-          "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3,
-        "EXPLORE": 2
-      },
-      "tradition": "mason"
+     "rank": 2,
+     "name": "The Set Stone",
+     "grants": "Set a thing so it STAYS — a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
+     "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it."
     },
     {
-      "id": "the_plain_fact",
-      "name": "The Plain Fact",
-      "levelReq": 3,
-      "energyCost": 5,
-      "powerSystem": "reach_concrete_abstract",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.4,
-        "falsehood_truth": 0.2
-      },
-      "functions": [
-        "break",
-        "reveal"
-      ],
-      "narrationHints": "He says the flat thing and the beautiful argument in the room dies of it.",
-      "description": "Reduce a soaring abstraction to the plain touchable fact under it \u2014 and everyone present sees the fact.",
-      "notFor": "Anything that is genuinely NOT reducible to a touchable fact. Some things aren't, and the Masons' great blindness is not believing that.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Plain Fact",
-          "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
-          "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails."
-        },
-        {
-          "rank": 2,
-          "name": "The Bedrock",
-          "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis \u2014 and if it has none, that becomes visible to all.",
-          "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation."
-        },
-        {
-          "rank": 3,
-          "name": "The Only Real",
-          "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase \u2014 no symbol acts, no figure walks.",
-          "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "SOCIAL",
-        "INVESTIGATE",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 3,
-        "INVESTIGATE": 2
-      },
-      "tradition": "mason"
-    },
-    {
-      "id": "formcraft",
-      "name": "Formcraft",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_concrete_abstract",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.5,
-        "mechanical_spiritual": 0.2
-      },
-      "functions": [
-        "make",
-        "bind",
-        "deceive"
-      ],
-      "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
-      "description": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
-      "notFor": "Anything that requires the touchable to be primary; the Masons' Denial defeats it outright.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Pattern Eye",
-          "grants": "See the pattern, symbol, or structure a thing is an instance OF \u2014 the form behind the fact.",
-          "cannot": "Seeing a form does not give you power over its instance. Not yet."
-        },
-        {
-          "rank": 2,
-          "name": "The Figure",
-          "grants": "Make a symbol that ACTS \u2014 a mark, a shape, a figure that does in the world what it means.",
-          "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised."
-        },
-        {
-          "rank": 3,
-          "name": "The Argument Made Real",
-          "grants": "Build an idea into the world so completely that it becomes a fact others must move around \u2014 a rule, a boundary, a truth-in-effect.",
-          "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "SOCIAL",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3,
-        "SOCIAL": 2
-      },
-      "tradition": "figurist"
-    },
-    {
-      "id": "pattern_sense",
-      "name": "Pattern-Sense",
-      "levelReq": 1,
-      "energyCost": 3,
-      "powerSystem": "reach_concrete_abstract",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.3
-      },
-      "functions": [
-        "reveal"
-      ],
-      "narrationHints": "The repetition surfaces \u2014 this has a shape, and the shape has a name.",
-      "description": "See the pattern beneath particulars \u2014 the first gift of the Pattern Reach.",
-      "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Pattern-Sense",
-          "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
-          "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly."
-        },
-        {
-          "rank": 2,
-          "name": "The Named Form",
-          "grants": "Name the form exactly \u2014 and once named, its other instances become visible to you everywhere.",
-          "cannot": "Once you can see it everywhere, you will see it where it is not."
-        },
-        {
-          "rank": 3,
-          "name": "The Formal Reach",
-          "grants": "Read the form of an event, a life, or a history \u2014 the shape it is completing.",
-          "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3
-      },
-      "tradition": "figurist"
-    },
-    {
-      "id": "the_walking_figure",
-      "name": "The Walking Figure",
-      "levelReq": 3,
-      "energyCost": 7,
-      "powerSystem": "reach_concrete_abstract",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.4,
-        "chaos_order": 0.1
-      },
-      "functions": [
-        "summon",
-        "bind",
-        "strike"
-      ],
-      "narrationHints": "The mark she drew stands up off the wall and goes to do the thing it means.",
-      "description": "Send a made figure to act at a distance \u2014 a symbol given errand and enough form to run it.",
-      "notFor": "Making a figure that means what you did not mean; the figure will do the second thing, not the first.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Walking Figure",
-          "grants": "Send a figure to carry a meaning somewhere \u2014 a warning, a ward, a binding \u2014 and it arrives and acts.",
-          "cannot": "It acts once and it is spent. And it acts on what it MEANS."
-        },
-        {
-          "rank": 2,
-          "name": "The Standing Figure",
-          "grants": "The figure persists \u2014 it keeps meaning, keeps acting, keeps the ward or the rule in force after you have gone.",
-          "cannot": "A standing figure is a rule nobody is supervising. It will apply itself to cases you never imagined."
-        },
-        {
-          "rank": 3,
-          "name": "The Figure That Learns",
-          "grants": "The figure adapts its meaning to circumstance \u2014 it keeps doing what you MEANT even where you did not foresee.",
-          "cannot": "Now it is deciding what you meant. The Figurists' oldest disasters all begin with a figure that was quite sure it understood."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "FIGHT",
-        "SOCIAL",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "FIGHT": 2,
-        "SOCIAL": 3
-      },
-      "tradition": "figurist"
-    },
-    {
-      "id": "sound_repair",
-      "name": "Sound Repair",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.4
-      },
-      "effectTags": [
-        "repair",
-        "mend",
-        "material"
-      ],
-      "narrationHints": "Not better. Sound. The thing as it was, correctly made, correctly set.",
-      "description": "Fix what is broken by understanding its material nature \u2014 what it is, what it was, and what it takes to make it sound again.",
-      "notFor": [],
-      "tradition": "mason",
-      "harmRung": "none",
-      "functions": [
-        "mend",
-        "restore"
-      ],
-      "challengeTypes": [
-        "repair",
-        "medical",
-        "craft"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.3,
-        "physical": 0.6,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Correct Fix",
-          "grants": "Repair what is broken by understanding what it truly is \u2014 the right material intervention, no more and no less, that makes the thing sound again.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Sound Again",
-          "grants": "Restore not just function but structural integrity \u2014 the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "As It Was",
-          "grants": "Return a thing fully to its proper material state \u2014 the building, the body, the system \u2014 so that it is indistinguishable from one that was never broken.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_set_word",
-      "name": "The Set Word",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.4,
-        "falsehood_truth": 0.2
-      },
-      "effectTags": [
-        "authority",
-        "agreement",
-        "plain-dealing"
-      ],
-      "narrationHints": "A mason's word is set the way a stone is set. It does not shift.",
-      "description": "What the mason says stands. Not persuasion \u2014 the plain authority of someone whose word is as solid as their work.",
-      "notFor": [],
-      "tradition": "mason",
-      "harmRung": "none",
-      "functions": [
-        "bind",
-        "command"
-      ],
-      "challengeTypes": [
-        "social",
-        "negotiation",
-        "leadership"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.2,
-        "social": 0.6
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Plain Statement",
-          "grants": "Say the plain thing and have it land with authority \u2014 not eloquence, just solidity. The practical fact that settles an argument by being undeniable.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Word That Holds",
-          "grants": "Make an agreement or declaration that sticks \u2014 not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Set",
-          "grants": "Name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_near_way",
-      "name": "The Near Way",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.3
-      },
-      "effectTags": [
-        "passage",
-        "structure",
-        "navigation"
-      ],
-      "narrationHints": "The seam is already there. He just finds it.",
-      "description": "Navigate through built or material spaces by understanding how they're made \u2014 the door that's in every wall, the gap that's in every structure.",
-      "notFor": [],
-      "tradition": "mason",
-      "harmRung": "none",
-      "functions": [
-        "move",
-        "open"
-      ],
-      "challengeTypes": [
-        "navigation",
-        "infiltration",
-        "craft"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.4,
-        "physical": 0.5,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Seam",
-          "grants": "Find the gap, the loose stone, the door that's always in the structure \u2014 the mason knows how things are built and knows where they open.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Material Passage",
-          "grants": "Move through a built environment at the speed its construction allows \u2014 the route that doesn't backtrack, the way that's already there in the material.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Way In",
-          "grants": "In any built structure, find or make the passage. Not by brute force \u2014 by knowing exactly where the material wants to open.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_long_haul",
-      "name": "The Long Haul",
-      "levelReq": 1,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "concrete_abstract": -0.3
-      },
-      "effectTags": [
-        "endurance",
-        "steadiness",
-        "persistence"
-      ],
-      "narrationHints": "Lay the next stone. Then the one after that. The wall goes up.",
-      "description": "Endure through material steadiness \u2014 not inspiration, not second winds, just the next thing done correctly until the work is complete.",
-      "notFor": [],
-      "tradition": "mason",
-      "harmRung": "none",
-      "functions": [
-        "sustain",
-        "resist"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "craft",
-        "hardship"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.1,
-        "physical": 0.8,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Just Keep Going",
-          "grants": "Work past fatigue, cold, hunger, or pain by not stopping \u2014 the mason's endurance is the next correct action taken, not inspiration.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Steady Pace",
-          "grants": "Sustain useful work across a long haul without the degradation that hits others \u2014 the quality doesn't fall, the pace doesn't drop, the hand stays true.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Until It's Done",
-          "grants": "Continue until the work is finished, regardless of what the body says. The task completes. This is simply what you do.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_restored_form",
-      "name": "The Restored Form",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.4
-      },
-      "effectTags": [
-        "restoration",
-        "pattern",
-        "correction"
-      ],
-      "narrationHints": "Correct the form and the thing follows. The pattern is what was broken.",
-      "description": "Restore by identifying the correct form and reinstating it \u2014 not by nursing the wound but by re-establishing the pattern that was disrupted.",
-      "notFor": [],
-      "tradition": "figurist",
-      "harmRung": "none",
-      "functions": [
-        "restore",
-        "mend"
-      ],
-      "challengeTypes": [
-        "medical",
-        "repair",
-        "intellectual"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.6,
-        "physical": 0.2,
-        "social": 0.2
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Correct Pattern",
-          "grants": "Identify the form a broken thing is a disruption of, and name the intervention that restores the pattern \u2014 not approximate, but correct.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Form Before Function",
-          "grants": "Restore the underlying structure \u2014 the form a person, plan, or object is supposed to have \u2014 and function follows without separate work.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Full Re-Instantiation",
-          "grants": "Return a thing entirely to its proper form \u2014 the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again \u2014 by working at the level of pattern rather than symptom.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_warding_mark",
-      "name": "The Warding Mark",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.4,
-        "chaos_order": 0.1
-      },
-      "effectTags": [
-        "ward",
-        "protection",
-        "symbol"
-      ],
-      "narrationHints": "She drew a mark that means NOT HERE. The thing reads it correctly.",
-      "description": "A figure drawn against something keeps it back. The mark is a statement about what belongs and what doesn't.",
-      "notFor": [],
-      "tradition": "figurist",
-      "harmRung": "none",
-      "functions": [
-        "ward",
-        "shield"
-      ],
-      "challengeTypes": [
-        "defense",
-        "magical",
-        "social"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.6,
-        "physical": 0.1,
-        "social": 0.3
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Mark Against",
-          "grants": "Draw or declare a figure that keeps a specific category of thing \u2014 an intent, a person, a working \u2014 from entering or acting in a space.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Persistent Ward",
-          "grants": "Set a warding figure that holds without your continued attention \u2014 it knows what it's keeping back and it keeps it back until the mark is broken.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Absolute Exclusion",
-          "grants": "Name what does not belong here with such formal clarity that it cannot be here \u2014 the working fails, the intent dissolves, the thing that should not be cannot maintain form in the space you've marked.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_patterned_way",
-      "name": "The Patterned Way",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.3,
-        "space_time": 0.1
-      },
-      "effectTags": [
-        "navigation",
-        "pattern",
-        "movement"
-      ],
-      "narrationHints": "A landscape has a shape. Move along its lines.",
-      "description": "Navigate by reading the pattern a space is \u2014 not terrain but form; not where the road goes but what the space is an instance of.",
-      "notFor": [],
-      "tradition": "figurist",
-      "harmRung": "none",
-      "functions": [
-        "travel",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "navigation",
-        "intellectual",
-        "exploration"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.6,
-        "physical": 0.3,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Shape of a Place",
-          "grants": "Read a landscape or structure as a pattern \u2014 see where it opens, where it funnels, where it repeats \u2014 and move along its lines rather than across them.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Pattern Navigation",
-          "grants": "Navigate any environment you can read the form of without needing roads, signs, or memory \u2014 the pattern tells you where you are and where leads where.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "This Place Is an Instance",
-          "grants": "Recognize that a place is an instance of a form you know \u2014 and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_held_form",
-      "name": "The Held Form",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "concrete_abstract": 0.4,
-        "chaos_order": 0.2
-      },
-      "effectTags": [
-        "sustain",
-        "pattern",
-        "continuity"
-      ],
-      "narrationHints": "Keep the form alive and what it represents persists.",
-      "description": "Sustain something by maintaining its correct form in your mind \u2014 the pattern held is the thing held.",
-      "notFor": [],
-      "tradition": "figurist",
-      "harmRung": "none",
-      "functions": [
-        "sustain",
-        "bind"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "intellectual",
-        "logistics"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.7,
-        "physical": 0.1,
-        "social": 0.2
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Form Maintenance",
-          "grants": "Hold a pattern clearly in mind and the thing it represents persists longer than it otherwise would \u2014 an agreement, a working, a person's coherence under pressure.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Sustained Pattern",
-          "grants": "Keep the form of something alive across time and distance \u2014 a relationship, a plan, a person's sense of themselves \u2014 by maintaining its correct representation.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "As Long as the Form Holds",
-          "grants": "While you hold the form of something perfectly in your mind, it does not cease \u2014 the pattern is the sustaining principle, and you are the one sustaining it.",
-          "cannot": null
-        }
-      ]
+     "rank": 3,
+     "name": "The Denial",
+     "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
+     "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope."
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 \u2014 24 verbs, 8 families)"
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "EXPLORE",
+    "FIGHT",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "EXPLORE": 3,
+    "INVESTIGATE": 2
+   },
+   "tradition": "mason",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "stone_read",
+   "name": "Stone-Read",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.3
+   },
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "narrationHints": "The material gives up its history under his palm.",
+   "description": "Read a material's truth by touch — the first gift of the Given.",
+   "notFor": "Reading meaning or intent; anything not physically present.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Stone-Read",
+     "grants": "Know what a material truly is, and whether it is sound.",
+     "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly."
+    },
+    {
+     "rank": 2,
+     "name": "The Long Grain",
+     "grants": "Read a thing's history in its material — the stresses it took, the repairs, the day it nearly broke.",
+     "cannot": "History, not future. It reports what happened, not what happens next."
+    },
+    {
+     "rank": 3,
+     "name": "The Given Word",
+     "grants": "The material of a whole structure is legible at once — every fault, every honest joint, every lie the builder told.",
+     "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3,
+    "EXPLORE": 2
+   },
+   "tradition": "mason",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_plain_fact",
+   "name": "The Plain Fact",
+   "levelReq": 3,
+   "energyCost": 5,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.4,
+    "falsehood_truth": 0.2
+   },
+   "functions": [
+    "break",
+    "reveal"
+   ],
+   "narrationHints": "He says the flat thing and the beautiful argument in the room dies of it.",
+   "description": "Reduce a soaring abstraction to the plain touchable fact under it — and everyone present sees the fact.",
+   "notFor": "Anything that is genuinely NOT reducible to a touchable fact. Some things aren't, and the Masons' great blindness is not believing that.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Plain Fact",
+     "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
+     "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails."
+    },
+    {
+     "rank": 2,
+     "name": "The Bedrock",
+     "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis — and if it has none, that becomes visible to all.",
+     "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation."
+    },
+    {
+     "rank": 3,
+     "name": "The Only Real",
+     "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase — no symbol acts, no figure walks.",
+     "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 3,
+    "INVESTIGATE": 2
+   },
+   "tradition": "mason",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "formcraft",
+   "name": "Formcraft",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.5,
+    "mechanical_spiritual": 0.2
+   },
+   "functions": [
+    "make",
+    "bind",
+    "deceive"
+   ],
+   "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
+   "description": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
+   "notFor": "Anything that requires the touchable to be primary; the Masons' Denial defeats it outright.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Pattern Eye",
+     "grants": "See the pattern, symbol, or structure a thing is an instance OF — the form behind the fact.",
+     "cannot": "Seeing a form does not give you power over its instance. Not yet."
+    },
+    {
+     "rank": 2,
+     "name": "The Figure",
+     "grants": "Make a symbol that ACTS — a mark, a shape, a figure that does in the world what it means.",
+     "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised."
+    },
+    {
+     "rank": 3,
+     "name": "The Argument Made Real",
+     "grants": "Build an idea into the world so completely that it becomes a fact others must move around — a rule, a boundary, a truth-in-effect.",
+     "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3,
+    "SOCIAL": 2
+   },
+   "tradition": "figurist",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "pattern_sense",
+   "name": "Pattern-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.3
+   },
+   "functions": [
+    "reveal"
+   ],
+   "narrationHints": "The repetition surfaces — this has a shape, and the shape has a name.",
+   "description": "See the pattern beneath particulars — the first gift of the Pattern Reach.",
+   "notFor": "Reading material (Stone-Read); reading order-as-structure (Order-Sense). This reads FORM.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Pattern-Sense",
+     "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
+     "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly."
+    },
+    {
+     "rank": 2,
+     "name": "The Named Form",
+     "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
+     "cannot": "Once you can see it everywhere, you will see it where it is not."
+    },
+    {
+     "rank": 3,
+     "name": "The Formal Reach",
+     "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
+     "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3
+   },
+   "tradition": "figurist",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_walking_figure",
+   "name": "The Walking Figure",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "reach_concrete_abstract",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "chaos_order": 0.1
+   },
+   "functions": [
+    "summon",
+    "bind",
+    "strike"
+   ],
+   "narrationHints": "The mark she drew stands up off the wall and goes to do the thing it means.",
+   "description": "Send a made figure to act at a distance — a symbol given errand and enough form to run it.",
+   "notFor": "Making a figure that means what you did not mean; the figure will do the second thing, not the first.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Walking Figure",
+     "grants": "Send a figure to carry a meaning somewhere — a warning, a ward, a binding — and it arrives and acts.",
+     "cannot": "It acts once and it is spent. And it acts on what it MEANS."
+    },
+    {
+     "rank": 2,
+     "name": "The Standing Figure",
+     "grants": "The figure persists — it keeps meaning, keeps acting, keeps the ward or the rule in force after you have gone.",
+     "cannot": "A standing figure is a rule nobody is supervising. It will apply itself to cases you never imagined."
+    },
+    {
+     "rank": 3,
+     "name": "The Figure That Learns",
+     "grants": "The figure adapts its meaning to circumstance — it keeps doing what you MEANT even where you did not foresee.",
+     "cannot": "Now it is deciding what you meant. The Figurists' oldest disasters all begin with a figure that was quite sure it understood."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "SOCIAL",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "FIGHT": 2,
+    "SOCIAL": 3
+   },
+   "tradition": "figurist",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "sound_repair",
+   "name": "Sound Repair",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.4
+   },
+   "effectTags": [
+    "repair",
+    "mend",
+    "material"
+   ],
+   "narrationHints": "Not better. Sound. The thing as it was, correctly made, correctly set.",
+   "description": "Fix what is broken by understanding its material nature — what it is, what it was, and what it takes to make it sound again.",
+   "notFor": [],
+   "tradition": "mason",
+   "harmRung": "none",
+   "functions": [
+    "mend",
+    "restore"
+   ],
+   "challengeTypes": [
+    "repair",
+    "medical",
+    "craft"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.3,
+    "physical": 0.6,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Correct Fix",
+     "grants": "Repair what is broken by understanding what it truly is — the right material intervention, no more and no less, that makes the thing sound again.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Sound Again",
+     "grants": "Restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "As It Was",
+     "grants": "Return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_set_word",
+   "name": "The Set Word",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.4,
+    "falsehood_truth": 0.2
+   },
+   "effectTags": [
+    "authority",
+    "agreement",
+    "plain-dealing"
+   ],
+   "narrationHints": "A mason's word is set the way a stone is set. It does not shift.",
+   "description": "What the mason says stands. Not persuasion — the plain authority of someone whose word is as solid as their work.",
+   "notFor": [],
+   "tradition": "mason",
+   "harmRung": "none",
+   "functions": [
+    "bind",
+    "command"
+   ],
+   "challengeTypes": [
+    "social",
+    "negotiation",
+    "leadership"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.2,
+    "social": 0.6
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Plain Statement",
+     "grants": "Say the plain thing and have it land with authority — not eloquence, just solidity. The practical fact that settles an argument by being undeniable.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Word That Holds",
+     "grants": "Make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Set",
+     "grants": "Name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_near_way",
+   "name": "The Near Way",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.3
+   },
+   "effectTags": [
+    "passage",
+    "structure",
+    "navigation"
+   ],
+   "narrationHints": "The seam is already there. He just finds it.",
+   "description": "Navigate through built or material spaces by understanding how they're made — the door that's in every wall, the gap that's in every structure.",
+   "notFor": [],
+   "tradition": "mason",
+   "harmRung": "none",
+   "functions": [
+    "move",
+    "open"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "infiltration",
+    "craft"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.4,
+    "physical": 0.5,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Seam",
+     "grants": "Find the gap, the loose stone, the door that's always in the structure — the mason knows how things are built and knows where they open.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Material Passage",
+     "grants": "Move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Way In",
+     "grants": "In any built structure, find or make the passage. Not by brute force — by knowing exactly where the material wants to open.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_long_haul",
+   "name": "The Long Haul",
+   "levelReq": 1,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.3
+   },
+   "effectTags": [
+    "endurance",
+    "steadiness",
+    "persistence"
+   ],
+   "narrationHints": "Lay the next stone. Then the one after that. The wall goes up.",
+   "description": "Endure through material steadiness — not inspiration, not second winds, just the next thing done correctly until the work is complete.",
+   "notFor": [],
+   "tradition": "mason",
+   "harmRung": "none",
+   "functions": [
+    "sustain",
+    "resist"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "craft",
+    "hardship"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.1,
+    "physical": 0.8,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Just Keep Going",
+     "grants": "Work past fatigue, cold, hunger, or pain by not stopping — the mason's endurance is the next correct action taken, not inspiration.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Steady Pace",
+     "grants": "Sustain useful work across a long haul without the degradation that hits others — the quality doesn't fall, the pace doesn't drop, the hand stays true.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Until It's Done",
+     "grants": "Continue until the work is finished, regardless of what the body says. The task completes. This is simply what you do.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_restored_form",
+   "name": "The Restored Form",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4
+   },
+   "effectTags": [
+    "restoration",
+    "pattern",
+    "correction"
+   ],
+   "narrationHints": "Correct the form and the thing follows. The pattern is what was broken.",
+   "description": "Restore by identifying the correct form and reinstating it — not by nursing the wound but by re-establishing the pattern that was disrupted.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "restore",
+    "mend"
+   ],
+   "challengeTypes": [
+    "medical",
+    "repair",
+    "intellectual"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.6,
+    "physical": 0.2,
+    "social": 0.2
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Correct Pattern",
+     "grants": "Identify the form a broken thing is a disruption of, and name the intervention that restores the pattern — not approximate, but correct.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Form Before Function",
+     "grants": "Restore the underlying structure — the form a person, plan, or object is supposed to have — and function follows without separate work.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Full Re-Instantiation",
+     "grants": "Return a thing entirely to its proper form — the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again — by working at the level of pattern rather than symptom.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_warding_mark",
+   "name": "The Warding Mark",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "chaos_order": 0.1
+   },
+   "effectTags": [
+    "ward",
+    "protection",
+    "symbol"
+   ],
+   "narrationHints": "She drew a mark that means NOT HERE. The thing reads it correctly.",
+   "description": "A figure drawn against something keeps it back. The mark is a statement about what belongs and what doesn't.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "ward",
+    "shield"
+   ],
+   "challengeTypes": [
+    "defense",
+    "magical",
+    "social"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.6,
+    "physical": 0.1,
+    "social": 0.3
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Mark Against",
+     "grants": "Draw or declare a figure that keeps a specific category of thing — an intent, a person, a working — from entering or acting in a space.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Persistent Ward",
+     "grants": "Set a warding figure that holds without your continued attention — it knows what it's keeping back and it keeps it back until the mark is broken.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Absolute Exclusion",
+     "grants": "Name what does not belong here with such formal clarity that it cannot be here — the working fails, the intent dissolves, the thing that should not be cannot maintain form in the space you've marked.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_patterned_way",
+   "name": "The Patterned Way",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.3,
+    "space_time": 0.1
+   },
+   "effectTags": [
+    "navigation",
+    "pattern",
+    "movement"
+   ],
+   "narrationHints": "A landscape has a shape. Move along its lines.",
+   "description": "Navigate by reading the pattern a space is — not terrain but form; not where the road goes but what the space is an instance of.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "travel",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "navigation",
+    "intellectual",
+    "exploration"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.6,
+    "physical": 0.3,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shape of a Place",
+     "grants": "Read a landscape or structure as a pattern — see where it opens, where it funnels, where it repeats — and move along its lines rather than across them.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Pattern Navigation",
+     "grants": "Navigate any environment you can read the form of without needing roads, signs, or memory — the pattern tells you where you are and where leads where.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "This Place Is an Instance",
+     "grants": "Recognize that a place is an instance of a form you know — and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_held_form",
+   "name": "The Held Form",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.4,
+    "chaos_order": 0.2
+   },
+   "effectTags": [
+    "sustain",
+    "pattern",
+    "continuity"
+   ],
+   "narrationHints": "Keep the form alive and what it represents persists.",
+   "description": "Sustain something by maintaining its correct form in your mind — the pattern held is the thing held.",
+   "notFor": [],
+   "tradition": "figurist",
+   "harmRung": "none",
+   "functions": [
+    "sustain",
+    "bind"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "intellectual",
+    "logistics"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.7,
+    "physical": 0.1,
+    "social": 0.2
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Form Maintenance",
+     "grants": "Hold a pattern clearly in mind and the thing it represents persists longer than it otherwise would — an agreement, a working, a person's coherence under pressure.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Sustained Pattern",
+     "grants": "Keep the form of something alive across time and distance — a relationship, a plan, a person's sense of themselves — by maintaining its correct representation.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "As Long as the Form Holds",
+     "grants": "While you hold the form of something perfectly in your mind, it does not cease — the pattern is the sustaining principle, and you are the one sustaining it.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

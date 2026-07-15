@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6764006042411892,
+    "spectrumId": -0.6425805740291297,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.1735892075486698,
     "mechanical_spiritual": 0.15615174954006197,
@@ -1156,35 +1156,21 @@
         "player": "Have Pell take the first read — she diagnosed the column stain faster than you did; let her look at the physical housing before you add your own perception on top of hers.",
         "summary": "Pell reads the valve housing — twisted sleeve, torqued cover, first failure confirmed physical. A girl with a hoop passes without alarm.",
         "narration": "The cover lip is off by perhaps three fingers at the northwest quadrant — not a dramatic failure, not something you'd catch walking past in poor light, but Pell sees it immediately. She crouches without preamble, one hand braced on the ashlar surround, and runs a thumb along the edge where iron meets stone.\n\n\"Housing's sound,\" she says. \"The lip's riding up because the sleeve inside has twisted — see here, and here.\" She doesn't look at you when she says it, just taps two points on the iron with a knuckle, the way she'd indicate a flue joint. \"The blank failed and the sleeve torqued on its axis when it went. The cover followed.\" She stands, wipes her thumb on her apron, and finally looks at Fen's field gate — the pole-and-crossbar arrangement thirty paces east where the actual channel enters the furrow system. \"That's the first failure. World-day minus-eighteen, Mara's ledger said.\"\n\nHuginn drops off the fence-post. It doesn't fly — just walks, three deliberate hops, to the edge of the ashlar surround, and stands there looking down at the housing the way it looks at things it has already finished assessing.\n\nOn the road behind you, unhurried, a girl of maybe ten is rolling a hoop along the verge with a stick, a grey dog loping at her heels. She slows when she sees the three of you — the man with the spear, the blacksmith crouching in the mud, the large grey-black bird standing on the stonework — and gives it a moment's frank consideration before deciding this is fine and carrying on past, hoop clattering over a rut, dog ignoring everything.\n\nPell watches her go. \"East furlong failure is nine days later,\" she says, returning to it. \"Two sites, same blank type. If the sleeve geometry is the same there, we can check whether the torque direction matches — same source stress, or two separate failures.\""
+      },
+      {
+        "player": "Do you know the girl and the dog?  Or are they out of place?",
+        "summary": "Pell identifies the girl as Fen's niece; the dog is unknown, follows her in from the upper meadow path.",
+        "narration": "You glance toward the path where the girl and her hoop disappeared — down the slope toward the village edge, the dog already a grey blur forty paces behind her. Neither in a hurry, neither looking back.\n\nPell tracks your gaze. \"Don't know the dog,\" she says, flat and easy, the way she'd say she doesn't know a tool's maker. \"Girl's Fen's niece — stays some mornings when Fen's working the channel early. She runs that hoop from the north gate to the well and back until someone feeds her.\" She pauses, hands on her apron. \"Dog turns up with her sometimes. Not hers. Follows her in from the upper meadow path.\"\n\nHuginn makes a short sound from the ashlar edge. Not a croak — something drier. It is watching the direction the dog went, not the girl.\n\nPell glances at the bird, then at you. \"It's not a local dog,\" she adds, as if she'd just worked that out herself. \"I'd have shod it by now if it were.\""
       }
     ],
     "lastTurn": {
-      "narration": "The cover lip is off by perhaps three fingers at the northwest quadrant — not a dramatic failure, not something you'd catch walking past in poor light, but Pell sees it immediately. She crouches without preamble, one hand braced on the ashlar surround, and runs a thumb along the edge where iron meets stone.\n\n\"Housing's sound,\" she says. \"The lip's riding up because the sleeve inside has twisted — see here, and here.\" She doesn't look at you when she says it, just taps two points on the iron with a knuckle, the way she'd indicate a flue joint. \"The blank failed and the sleeve torqued on its axis when it went. The cover followed.\" She stands, wipes her thumb on her apron, and finally looks at Fen's field gate — the pole-and-crossbar arrangement thirty paces east where the actual channel enters the furrow system. \"That's the first failure. World-day minus-eighteen, Mara's ledger said.\"\n\nHuginn drops off the fence-post. It doesn't fly — just walks, three deliberate hops, to the edge of the ashlar surround, and stands there looking down at the housing the way it looks at things it has already finished assessing.\n\nOn the road behind you, unhurried, a girl of maybe ten is rolling a hoop along the verge with a stick, a grey dog loping at her heels. She slows when she sees the three of you — the man with the spear, the blacksmith crouching in the mud, the large grey-black bird standing on the stonework — and gives it a moment's frank consideration before deciding this is fine and carrying on past, hoop clattering over a rut, dog ignoring everything.\n\nPell watches her go. \"East furlong failure is nine days later,\" she says, returning to it. \"Two sites, same blank type. If the sleeve geometry is the same there, we can check whether the torque direction matches — same source stress, or two separate failures.\"",
-      "sceneSummary": "Pell reads the valve housing — twisted sleeve, torqued cover, first failure confirmed physical. A girl with a hoop passes without alarm.",
+      "narration": "You glance toward the path where the girl and her hoop disappeared — down the slope toward the village edge, the dog already a grey blur forty paces behind her. Neither in a hurry, neither looking back.\n\nPell tracks your gaze. \"Don't know the dog,\" she says, flat and easy, the way she'd say she doesn't know a tool's maker. \"Girl's Fen's niece — stays some mornings when Fen's working the channel early. She runs that hoop from the north gate to the well and back until someone feeds her.\" She pauses, hands on her apron. \"Dog turns up with her sometimes. Not hers. Follows her in from the upper meadow path.\"\n\nHuginn makes a short sound from the ashlar edge. Not a croak — something drier. It is watching the direction the dog went, not the girl.\n\nPell glances at the bird, then at you. \"It's not a local dog,\" she adds, as if she'd just worked that out herself. \"I'd have shod it by now if it were.\"",
+      "sceneSummary": "Pell identifies the girl as Fen's niece; the dog is unknown, follows her in from the upper meadow path.",
       "choices": [
         {
-          "label": "Read the housing yourself — Order-Sense the valve housing: see the whole design it belongs to, trace what stress reached this sleeve and from which direction.",
+          "label": "Leave the dog for now — the east furlong valve site is the next stop. Ask Pell if both sleeve failures point at the same upstream source stress, or if one could be independent.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.4,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell the torque question directly — she's already ahead of you on the physical read; ask her what torque direction would tell her about source stress before you add your own perception on top.",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -1198,9 +1184,9 @@
           "emergenceId": null
         },
         {
-          "label": "Step east to the channel intake — look at sediment and waterline where the sleeve failed; the channel may show where the load came from.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "The dog coming in from the upper meadow path catches. Ask Pell if she's seen it before — and when it started appearing.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -1214,9 +1200,27 @@
           "emergenceId": null
         },
         {
-          "label": "Move directly to the east furlong site — see both housings before interpreting either; that's the cleanest read of whether this is one problem or two.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Use The Attended End quietly on the valve housing before moving on — confirm whether this intake is still ending or whether the failure has run its course.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Head east to the furlong site now. The timeline note has two failure dates — walk Pell through the interval gap between them and see if she reads the same source stress in both.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -1239,23 +1243,17 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Fen's intake physical inspection begun — Pell identifies twisted sleeve and torqued cover as the failure mode. East furlong site next."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew on the grass. The iron-sleeve valve housing sits in ashlar surrounds; cover lip visibly off true at northwest quadrant. Pell has crouched, read, and stood. Huginn has moved from fence-post to the ashlar surround edge.",
+        "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew burning off. The iron-sleeve valve housing sits in ashlar surrounds; cover lip off true at northwest quadrant. The girl with the hoop has gone down the slope toward the village. The dog has followed her, now out of sight.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the ashlar surround, apron-thumb wiped, reading east toward Fen's field gate."
+            "state": "Standing at the ashlar surround, apron-thumb wiped, eyes still tracking where the dog went."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the ashlar surround edge, looking down at the housing."
+            "state": "Perched on the ashlar surround edge, watching the direction the dog went."
           }
         ],
         "objects": [
@@ -1264,13 +1262,14 @@
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)",
           "Boar Tusks (pair) (pack)",
-          "Fen's intake valve housing — iron sleeve, ashlar surrounds, cover lip off true at northwest quadrant, sleeve torqued on axis inside",
-          "Fen's field gate — pole-and-crossbar, thirty paces east, where channel enters furrow system"
+          "Fen's intake valve housing — iron sleeve, ashlar surrounds, cover lip off true at northwest quadrant",
+          "Fen's field gate — pole-and-crossbar, thirty paces east"
         ],
         "threads": [
           "Sleeve torque direction not yet established — same source stress as east furlong, or two separate failures?",
           "East furlong valve site not yet visited",
-          "Dara Holt still needs full framing before she acts on the east channel"
+          "Dara Holt still needs full framing before she acts on the east channel",
+          "The dog from the upper meadow path — not a local animal; Huginn watched it go"
         ]
       },
       "npcUpdates": [
@@ -1278,60 +1277,57 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Read the valve housing immediately on arrival — identified twisted sleeve and torqued cover as the failure mode without prompting. Named the east furlong comparison as the next diagnostic step.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know.",
           "learned": [
-            "Sleeve blank failure causes axial torque in the iron sleeve, which rides the cover lip up — identifiable by lip angle and knuckle-tap on the housing"
+            "The girl is Fen's niece — stays some mornings when Fen works the channel early",
+            "The dog is not local — turns up with the girl from the upper meadow path; Pell has never shod it"
           ],
-          "skillsObserved": [
-            "rapid physical diagnosis of iron sleeve failure mode from cover geometry"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At Fen's intake valve site with Silas, reading the failed housing."
+          "statusNote": "At Fen's intake valve site with Silas, having read the housing failure — now standing, watching where the dog went."
         }
       ],
       "factUpdates": [],
       "placeUpdates": [
         {
-          "note": "Fen's intake valve housing: cover lip off true at northwest quadrant — sleeve torqued on axis at blank failure. Physical failure mode confirmed by Pell on World-day 15 morning.",
+          "note": "An unknown dog follows Fen's niece in from the upper meadow path on some mornings — not a local animal; Huginn watched it go on World-day 15 morning.",
           "subPlace": {
             "name": "Fen's Intake Valve Site",
-            "note": "Iron-sleeve valve in ashlar surrounds north of upper meadow — cover lip displaced, sleeve torqued. First confirmed failure site, World-day minus-18.",
+            "note": "Iron-sleeve valve housing in ashlar surrounds — cover lip off true at northwest quadrant, sleeve blank failure confirmed by Pell on World-day 15 morning.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
+          "topic": "the-unknown-dog",
+          "label": "The Dog from the Upper Meadow",
           "kind": "mystery",
-          "fact": "Fen's intake physical inspection: sleeve blank failure caused axial torque in the iron sleeve, riding the cover lip up. Pell identified the failure mode immediately from cover geometry. East furlong comparison needed to determine whether torque direction matches — same source stress or two independent failures.",
+          "fact": "An unknown dog follows Fen's niece in from the upper meadow path on some mornings. Not a local animal — Pell has no record of it. Huginn watched it leave with notable attention.",
           "links": [
-            "pell",
-            "mara-wells",
-            "dara-holt",
             "millbrook",
-            "aldric-provisioning-deal"
+            "the-water-crisis",
+            "huginn"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk and first read at the intake site — a few minutes of examination"
-      },
-      "sceneEnded": false
+        "why": "A brief exchange at the valve site — a few minutes at most."
+      }
     },
     "sceneState": {
-      "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew on the grass. The iron-sleeve valve housing sits in ashlar surrounds; cover lip visibly off true at northwest quadrant. Pell has crouched, read, and stood. Huginn has moved from fence-post to the ashlar surround edge.",
+      "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew burning off. The iron-sleeve valve housing sits in ashlar surrounds; cover lip off true at northwest quadrant. The girl with the hoop has gone down the slope toward the village. The dog has followed her, now out of sight.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the ashlar surround, apron-thumb wiped, reading east toward Fen's field gate."
+          "state": "Standing at the ashlar surround, apron-thumb wiped, eyes still tracking where the dog went."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the ashlar surround edge, looking down at the housing."
+          "state": "Perched on the ashlar surround edge, watching the direction the dog went."
         }
       ],
       "objects": [
@@ -1341,12 +1337,13 @@
         "Valve Failure Timeline note (breast pocket)",
         "Boar Tusks (pair) (pack)",
         "Fen's intake valve housing — iron sleeve, ashlar surrounds, cover lip off true a",
-        "Fen's field gate — pole-and-crossbar, thirty paces east, where channel enters fu"
+        "Fen's field gate — pole-and-crossbar, thirty paces east"
       ],
       "threads": [
         "Sleeve torque direction not yet established — same source stress as east furlong, or two separate failures?",
         "East furlong valve site not yet visited",
-        "Dara Holt still needs full framing before she acts on the east channel"
+        "Dara Holt still needs full framing before she acts on the east channel",
+        "The dog from the upper meadow path — not a local animal; Huginn watched it go"
       ]
     }
   },
@@ -1494,7 +1491,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received the operator/confirmer report — named the error-check built into the floor and gestured toward the valve sites without elaborating. Waiting on Silas.",
         "[d2] Held the nearer stand-position through the Attended End read — eyes on Silas's hand at the hook, reading the read. Waiting.",
         "[d2] Watched Silas work the grid marks — waiting on the report. Boot still on the nearer stone.",
         "[d2] Listening to the four-episode summary — waiting on Silas's full read before moving to the valve sites.",
@@ -1503,17 +1499,18 @@
         "[d2] Read the deposit grain stain bands as evidence of seasonal, condition-triggered return visits — not a fixed calendar schedule. Moving north on the path.",
         "[d2] Narrowed the last return visit to a seasonal condition-triggered check — melt or first freeze — and placed it one to two winters back. Did not finish the alternative clause (couldn",
         "[d2] Named the two-winter slip model unprompted — first unmanaged melt starts the slip, second winter carries it to the channel. Now reading the valve cover from a distance.",
-        "[d2] Read the valve housing immediately on arrival — identified twisted sleeve and torqued cover as the failure mode without prompting. Named the east furlong comparison as the next dia"
+        "[d2] Read the valve housing immediately on arrival — identified twisted sleeve and torqued cover as the failure mode without prompting. Named the east furlong comparison as the next dia",
+        "[d2] Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know."
       ],
       "knownFacts": [
-        "The chamber records scheduled managed operation — someone was returning at intervals to verify the device's state",
-        "The device was confirmed functional and removed cleanly — sleeve blank failures came after, not before or during operation",
         "The stain bands read as three distinct layers above the old bleed-line — two to three winters; return visits were seasonal and condition-triggered, not calendar",
         "Seasonal condition-triggered maintenance would demand a check at melt or first freeze — pressure, drainage, and temperature all shift at the turn",
         "The topmost stain band is consistent with a final visit at autumn freeze one to two winters ago",
         "The contamination came long after the removal — the watershed did not respond immediately",
         "First unmanaged melt after device removal would begin structural slip; second winter needed to reach the channel",
-        "Sleeve blank failure causes axial torque in the iron sleeve, which rides the cover lip up — identifiable by lip angle and knuckle-tap on the housing"
+        "Sleeve blank failure causes axial torque in the iron sleeve, which rides the cover lip up — identifiable by lip angle and knuckle-tap on the housing",
+        "The girl is Fen's niece — stays some mornings when Fen works the channel early",
+        "The dog is not local — turns up with the girl from the upper meadow path; Pell has never shod it"
       ],
       "skillsObserved": [
         "connecting buried structure findings to surface infrastructu",
@@ -1524,7 +1521,7 @@
         "rapid physical diagnosis of iron sleeve failure mode from co"
       ],
       "status": "active",
-      "statusNote": "At Fen's intake valve site with Silas, reading the failed housing.",
+      "statusNote": "At Fen's intake valve site with Silas, having read the housing failure — now standing, watching where the dog went.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1629,7 +1626,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Pell's full frame assessment recorded at the lower aperture: frame sound, both jambs dry, channel clean inside, no hydrostatic load. Seating-piece can be shifted without collapsing the reveal. World-d",
         "[d2] Lower aperture fully open — seating-piece seated at inner channel lip. Near chamber confirmed: dry ashlar, stone flags, three iron ring-hooks, three empty recesses (palm-width, cut into stone), column",
         "[d2] Near chamber Order-Sense read (World-day 14): staging space confirmed — ring-hooks held long heavy tools or instruments carried through the second aperture for use beyond. Design older than the east c",
         "[d2] Deeper chamber confirmed beyond the second aperture — larger than the near chamber, worn parallel foot-path in flags, single low ring-hook (hip height) with wide cradle-recess, grid of pressed marks (",
@@ -1640,7 +1636,8 @@
         "[d2] Valve Failure Timeline note now carries a marginal annotation — interval question and device-removal question written in Silas's hand before departure from the deeper chamber on World-day 14 dawn.",
         "[d2] Pell read the column stain bands as seasonal return cycles — three distinct layers above the old bleed-line, two to three winters of accumulation. The managed visits were condition-triggered, not cale",
         "[d2] Last managed return visit to the deeper chamber narrowed to seasonal condition-triggered check — melt or first freeze, one to two winters ago. Contamination onset postdates removal by a significant in",
-        "[d2] Fen's intake valve housing: cover lip off true at northwest quadrant — sleeve torqued on axis at blank failure. Physical failure mode confirmed by Pell on World-day 15 morning."
+        "[d2] Fen's intake valve housing: cover lip off true at northwest quadrant — sleeve torqued on axis at blank failure. Physical failure mode confirmed by Pell on World-day 15 morning.",
+        "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings — not a local animal; Huginn watched it go on World-day 15 morning."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2263,18 +2260,34 @@
         "aliases": [],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "the-unknown-dog": {
+        "id": "the-unknown-dog",
+        "label": "The Dog from the Upper Meadow",
+        "kind": "mystery",
+        "facts": [
+          "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings. Not a local animal — Pell has no record of it. Huginn watched it leave with notable attention."
+        ],
+        "links": [
+          "millbrook",
+          "the-water-crisis",
+          "huginn"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 53.70186961765501,
-    "cerebral": 44.12130526260524,
-    "social": 51.15961168299219,
-    "generous": 15.272138808123493,
-    "cautious": 45.1194040346701,
-    "physical": 1.280476083998508,
-    "risky": 3.1529871987775953,
-    "ruthless": 0.653073201944699
+    "strategic": 54.433360269566734,
+    "cerebral": 44.90069873629221,
+    "social": 50.90381362457723,
+    "generous": 15.195778114082875,
+    "cautious": 44.893807014496744,
+    "physical": 1.2740737035785155,
+    "risky": 3.137222262783707,
+    "ruthless": 0.6498078359349755
   },
   "aptitudes": [
     "strategist",
@@ -2282,7 +2295,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 174,
+  "actionCount": 175,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2368,8 +2381,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784081198161,
-  "rev": 245,
+  "updatedAt": 1784081382226,
+  "rev": 246,
   "generated": {
     "schemaVersion": 1,
     "npc": {

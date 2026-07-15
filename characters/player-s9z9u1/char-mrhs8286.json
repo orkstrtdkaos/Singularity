@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6555186075544456,
+    "spectrumId": -0.6727426771767233,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.17735604682204079,
     "mechanical_spiritual": 0.16517695395990592,
@@ -168,6 +168,14 @@
       "kind": "quest",
       "qty": 1,
       "description": "A small torn page in Mara's hand — four sleeve blank sales, four failure dates, two customer names. World-day minus-eighteen: Fen's intake. World-day minus-nine: east furlong farmer.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Contact Names Scrap (Sorel, Leth)",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A chalk-written scrap from Mara — two names from the old pass circuit with Edge District ties. Sorel: spice-broker, wintered in the Edge District two years. Leth: archivist type, likely still there.",
       "consumable": false
     }
   ],
@@ -1391,71 +1399,90 @@
         "player": "Head to Mara's store first — red door, east side of the well. Brief her on the surge scope; she already knows the sleeve blank count, she just needs to know what it means.",
         "summary": "Silas briefs Mara on the surge scope — she files it, ties off her ledger, and sends him to Aldric.",
         "narration": "The path from Dara's gate back into the village takes maybe five minutes at a walk — past the terraced gardens with their frost-damp soil, past a farmer moving early with a yoke across his shoulders who clocks Huginn and gives the three of you a wide berth without breaking stride. The well is the center of things, and at this hour it's just starting to gather its first traffic: a girl drawing water, an old man on the bench with his hands in his lap. Pell falls into step half a pace behind and says nothing, which is its own kind of company.\n\nMara's store is where it always is — red door, east side of the well, the faint oil-and-rope smell that leaks from the frame even before you knock. You don't knock. The door is open; she is already behind the counter with her ledger, and she looks up when Huginn's shadow crosses the sill ahead of you.\n\n\"Sleeve blanks,\" you say, because that's where she is. \"Four failures in three weeks — you know the count. Here's what it means.\" You lay it out plain and brief: the buried vault section northeast of the wash-room, its surface footprint marked on the hillside, six weeks before load-surrender. Not a slow leak when it goes — a redirected surge, straight into the east-channel main feeder run. Dara Holt is already staging pipe-sections by sequence. You and Pell are leaving the valley to find someone who knows the older layer, pre-Transition structural work. Deadline before week five.\n\nMara listens the way she keeps her ledger — without interrupting, filing each piece as it lands. When you finish, she closes the book in front of her with two fingers, neatly. \"East furlong farmer,\" she says. \"Came back for a second blank last week. Said his first one just went.\" She pulls a cord from under the counter and ties it around the spine of the ledger — her own signal to herself that this volume doesn't leave the shelf until this is resolved. Then she looks at you directly: \"Aldric will want to hear this from you, not from me. He's been watching the catch numbers. He'll have things to say.\" A pause that is not quite a question. \"Are you going to him next?\"\n\nPell is at the doorframe, arms folded, letting you run this. Huginn is on the step behind her, watching the well."
+      },
+      {
+        "player": "Ask Mara about anyone she knows from the Edge District... and also ask her to hold the Valve Failure Timeline note as a second copy.",
+        "summary": "Mara names two Edge District contacts — Sorel and Leth — and takes the timeline note as a second copy without ceremony.",
+        "narration": "Mara listens to the question about Edge District contacts the same way she listens to everything — head slightly tilted, one hand resting on the tied-off ledger, no visible reaction until she's ready to give one.\n\n\"I don't run accounts with the Plateau directly,\" she says, \"but the old pass circuit did. Three, maybe four traders who worked the edge before the new route closed.\" She pulls a stub of chalk from her apron and writes two names on a scrap without being asked: Sorel and the Archivist woman, Leth — the first a spice-broker who wintered in the Edge District two years running, the second someone Mara describes only as \"kept very careful records and did not like being surprised.\" She slides the scrap across the counter. \"Sorel I haven't heard from in a season. Leth I expect is still there — she had the look of someone who'd found a place to stay.\"\n\nYou set the Valve Failure Timeline note on the counter beside the scrap. \"Second copy,\" you say. \"Hold it.\"\n\nMara looks at it. Looks at you. Picks it up and folds it once, precisely, and slides it under the tied-off ledger without a word — as if it were a receipt she'd already accounted for. The ledger goes on top. She taps it once with two fingers, which is apparently that settled.\n\nHuginn shifts on the step outside. Through the open door the well's first traffic is thickening — a second yoke, a woman with a basket — and the smokehouse chimney east of the water wheel is already trailing its morning thread of gray. Aldric will be in. One stop left."
       }
     ],
     "lastTurn": {
-      "narration": "The path from Dara's gate back into the village takes maybe five minutes at a walk — past the terraced gardens with their frost-damp soil, past a farmer moving early with a yoke across his shoulders who clocks Huginn and gives the three of you a wide berth without breaking stride. The well is the center of things, and at this hour it's just starting to gather its first traffic: a girl drawing water, an old man on the bench with his hands in his lap. Pell falls into step half a pace behind and says nothing, which is its own kind of company.\n\nMara's store is where it always is — red door, east side of the well, the faint oil-and-rope smell that leaks from the frame even before you knock. You don't knock. The door is open; she is already behind the counter with her ledger, and she looks up when Huginn's shadow crosses the sill ahead of you.\n\n\"Sleeve blanks,\" you say, because that's where she is. \"Four failures in three weeks — you know the count. Here's what it means.\" You lay it out plain and brief: the buried vault section northeast of the wash-room, its surface footprint marked on the hillside, six weeks before load-surrender. Not a slow leak when it goes — a redirected surge, straight into the east-channel main feeder run. Dara Holt is already staging pipe-sections by sequence. You and Pell are leaving the valley to find someone who knows the older layer, pre-Transition structural work. Deadline before week five.\n\nMara listens the way she keeps her ledger — without interrupting, filing each piece as it lands. When you finish, she closes the book in front of her with two fingers, neatly. \"East furlong farmer,\" she says. \"Came back for a second blank last week. Said his first one just went.\" She pulls a cord from under the counter and ties it around the spine of the ledger — her own signal to herself that this volume doesn't leave the shelf until this is resolved. Then she looks at you directly: \"Aldric will want to hear this from you, not from me. He's been watching the catch numbers. He'll have things to say.\" A pause that is not quite a question. \"Are you going to him next?\"\n\nPell is at the doorframe, arms folded, letting you run this. Huginn is on the step behind her, watching the well.",
-      "sceneSummary": "Silas briefs Mara on the surge scope — she files it, ties off her ledger, and sends him to Aldric.",
+      "narration": "Mara listens to the question about Edge District contacts the same way she listens to everything — head slightly tilted, one hand resting on the tied-off ledger, no visible reaction until she's ready to give one.\n\n\"I don't run accounts with the Plateau directly,\" she says, \"but the old pass circuit did. Three, maybe four traders who worked the edge before the new route closed.\" She pulls a stub of chalk from her apron and writes two names on a scrap without being asked: Sorel and the Archivist woman, Leth — the first a spice-broker who wintered in the Edge District two years running, the second someone Mara describes only as \"kept very careful records and did not like being surprised.\" She slides the scrap across the counter. \"Sorel I haven't heard from in a season. Leth I expect is still there — she had the look of someone who'd found a place to stay.\"\n\nYou set the Valve Failure Timeline note on the counter beside the scrap. \"Second copy,\" you say. \"Hold it.\"\n\nMara looks at it. Looks at you. Picks it up and folds it once, precisely, and slides it under the tied-off ledger without a word — as if it were a receipt she'd already accounted for. The ledger goes on top. She taps it once with two fingers, which is apparently that settled.\n\nHuginn shifts on the step outside. Through the open door the well's first traffic is thickening — a second yoke, a woman with a basket — and the smokehouse chimney east of the water wheel is already trailing its morning thread of gray. Aldric will be in. One stop left.",
+      "sceneSummary": "Mara names two Edge District contacts — Sorel and Leth — and takes the timeline note as a second copy without ceremony.",
       "choices": [
         {
-          "label": "Confirm for Mara, then walk straight to the smokehouse — Aldric is next; keep the briefings tight.",
-          "trivial": true,
-          "intentTags": [
-            "plan",
-            "careful"
-          ]
-        },
-        {
-          "label": "Ask Mara if she knows anyone from the Edge District or coming through from that direction — she stocks unusual goods; she has unusual suppliers.",
+          "label": "Head to the smokehouse and brief Aldric — confirm the water connection he already suspects and close the morning",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "scout",
-            "study"
-          ]
+            "inform",
+            "close"
+          ],
+          "trivial": true
         },
         {
-          "label": "Ask Mara to hold the Valve Failure Timeline note as a second copy — if something goes wrong on the road, the record stays in the village.",
-          "trivial": true,
+          "label": "Leave Mara a standing instruction — if Sorel or Leth makes contact before you return, hold them here",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "intentTags": [
-            "careful",
-            "plan"
-          ]
+            "plan",
+            "instruct"
+          ],
+          "trivial": true
         },
         {
-          "label": "Or say what you actually do."
+          "label": "Ask Mara one more thing before you go — she runs the closest ledger to ground truth in this village",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "ask"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Do something else entirely",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "improvise"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Mara Wells's store — red door east of the well, interior counter and open ledger now tied off, oil-and-rope smell, door open to the early dawn village.",
+        "setting": "Mara Wells's store — red door east of the well, interior counter and open ledger now tied off with the timeline note folded beneath it, oil-and-rope smell, door open to the brightening dawn village.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Behind the counter, ledger tied off with cord, watching Silas — waiting for him to confirm next steps."
+            "state": "Behind the counter, ledger and note both filed, watching Silas with her hand resting on the stack — waiting to see if there is more."
           },
           {
             "name": "Pell",
-            "state": "Standing at the doorframe, arms folded, letting Silas run the briefing."
+            "state": "At the doorframe, arms folded, letting Silas run the briefing."
           },
           {
             "name": "Huginn",
-            "state": "On the step behind Pell, watching the well."
+            "state": "On the step behind Pell, shifted slightly, still oriented northwest."
           }
         ],
         "objects": [
-          "Mara's tied-off ledger",
+          "Mara's tied-off ledger with timeline note folded beneath",
+          "Contact names scrap (Sorel, Leth)",
           "Counter stock (rope, hardware)",
           "Memory (spear, across shoulders)",
           "Belt Knife",
-          "Rune-Craft Kit",
-          "Valve Failure Timeline (note)"
+          "Rune-Craft Kit"
         ],
         "threads": [
-          "Mara has sent Silas to Aldric — smokehouse is next",
-          "Huginn still oriented northwest — departure pending after briefings",
-          "The pre-Transition expert's identity and location remain open"
+          "Aldric briefing still pending — smokehouse is next",
+          "Huginn oriented northwest — departure pending after Aldric",
+          "Sorel and Leth as Edge District leads — whereabouts uncertain",
+          "The pre-Transition expert's identity remains open"
         ]
       },
       "npcUpdates": [
@@ -1464,59 +1491,90 @@
           "npcId": "mara-wells",
           "name": "Mara Wells",
           "role": "Village supply store operator, Millbrook",
-          "note": "Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed Silas to Aldric.",
+          "note": "Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve Failure Timeline note as a second copy and filed it under her ledger without ceremony.",
           "learned": [
-            "Buried vault section will fail in six weeks — redirected surge into east-channel main feeder run",
-            "Dara Holt is already staging pipe-sections",
-            "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
-            "Deadline: before week five"
+            "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
+            "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District"
           ],
-          "statusNote": "At her store, ledger tied off as a hold-flag — briefed and waiting on Aldric's parallel confirmation.",
-          "relationshipDelta": 0
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Accompanied Silas to Mara's store — held the doorframe and let him run the briefing without comment.",
-          "statusNote": "At Mara's store doorframe, ready to move to Aldric's smokehouse.",
-          "relationshipDelta": 0
+          "skillsObserved": [
+            "producing Edge District contact names from memory without prompting",
+            "filing civic information without naming a price"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her store, timeline note filed under ledger — briefed and holding."
         }
       ],
+      "codexUpdates": [
+        {
+          "topic": "edge-district-contacts",
+          "label": "Edge District Contacts",
+          "kind": "person",
+          "fact": "Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept careful records and likely remains resident. Both are potential leads toward pre-Transition structural knowledge.",
+          "links": [
+            "mara-wells",
+            "the-water-crisis",
+            "radiant-plateau-edge",
+            "pell"
+          ]
+        }
+      ],
+      "inventoryAdd": [
+        {
+          "name": "Contact Names Scrap (Sorel, Leth)",
+          "kind": "quest",
+          "description": "A chalk-written scrap from Mara — two names from the old pass circuit with Edge District ties. Sorel: spice-broker, wintered in the Edge District two years. Leth: archivist type, likely still there.",
+          "consumable": false
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Contact Names Scrap (Sorel, Leth)",
+            "kind": "quest",
+            "description": "A chalk-written scrap from Mara — two names from the old pass circuit with Edge District ties. Sorel: spice-broker, wintered in the Edge District two years. Leth: archivist type, likely still there.",
+            "consumable": false
+          }
+        ],
+        "inventoryRemove": [],
+        "xp": 0
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "short walk from Dara's gate to Mara's store and a brief briefing"
+        "why": "A brief exchange at the store counter — contact names pulled, note filed, a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's store — red door east of the well, interior counter and open ledger now tied off, oil-and-rope smell, door open to the early dawn village.",
+      "setting": "Mara Wells's store — red door east of the well, interior counter and open ledger now tied off with the timeline note folded beneath it, oil-and-rope smell, door open to the brightening dawn village.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Behind the counter, ledger tied off with cord, watching Silas — waiting for him to confirm next steps."
+          "state": "Behind the counter, ledger and note both filed, watching Silas with her hand resting on the stack — waiting to see if th"
         },
         {
           "name": "Pell",
-          "state": "Standing at the doorframe, arms folded, letting Silas run the briefing."
+          "state": "At the doorframe, arms folded, letting Silas run the briefing."
         },
         {
           "name": "Huginn",
-          "state": "On the step behind Pell, watching the well."
+          "state": "On the step behind Pell, shifted slightly, still oriented northwest."
         }
       ],
       "objects": [
-        "Mara's tied-off ledger",
+        "Mara's tied-off ledger with timeline note folded beneath",
+        "Contact names scrap (Sorel, Leth)",
         "Counter stock (rope, hardware)",
         "Memory (spear, across shoulders)",
         "Belt Knife",
-        "Rune-Craft Kit",
-        "Valve Failure Timeline (note)"
+        "Rune-Craft Kit"
       ],
       "threads": [
-        "Mara has sent Silas to Aldric — smokehouse is next",
-        "Huginn still oriented northwest — departure pending after briefings",
-        "The pre-Transition expert's identity and location remain open"
+        "Aldric briefing still pending — smokehouse is next",
+        "Huginn oriented northwest — departure pending after Aldric",
+        "Sorel and Leth as Edge District leads — whereabouts uncertain",
+        "The pre-Transition expert's identity remains open"
       ]
     }
   },
@@ -1711,7 +1769,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d1] Silas committed to watching the river north; Mara confirmed the discoloration has been wrong three weeks and said she'd hear anything he finds upstream.",
         "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms.",
         "[d2] Silas has returned to the store — she looks up from the ledger.",
         "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
@@ -1720,28 +1777,29 @@
         "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
         "[d2] Produced valve failure dates from two separate ledgers without hesitation — four sleeve blank sales in three weeks, both failures confirmed returned. Tore a note page unprompted an",
         "[d2] Named Dara Holt unprompted — gave her location (blue gate-post, bend before upper meadow), her seniority (22 years, east channel), and advised Silas to see the site before briefing",
-        "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S"
+        "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S",
+        "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F"
       ],
       "knownFacts": [
-        "Fen's intake: World-day minus-eighteen, first failure confirmed",
-        "East furlong farmer: World-day minus-nine, second confirmed failure",
         "Dara Holt lives at the bend before the upper meadow — house with blue gate-post",
         "Dara Holt has been east-channel senior irrigator for twenty-two years",
         "Dara and Fen share a water-right on the east bend — Dara may already have suspicions about the first failure",
         "Buried vault section will fail in six weeks — redirected surge into east-channel main feeder run",
         "Dara Holt is already staging pipe-sections",
-        "Silas and Pell are leaving the valley to find a pre-Transition structural expert"
+        "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
+        "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
+        "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District"
       ],
       "skillsObserved": [
-        "discreet ledger management",
-        "reading a customer's intent without needing it explained",
         "back-stock recall without hesitation",
         "precise ledger recall across multiple logs",
         "reading the weight of a situation without needing it spelled",
-        "accurate recall of local relationships and property arrangem"
+        "accurate recall of local relationships and property arrangem",
+        "producing Edge District contact names from memory without pr",
+        "filing civic information without naming a price"
       ],
       "status": "active",
-      "statusNote": "At her store, ledger tied off as a hold-flag — briefed and waiting on Aldric's parallel confirmation.",
+      "statusNote": "At her store, timeline note filed under ledger — briefed and holding.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2535,19 +2593,36 @@
         "aliases": [],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "edge-district-contacts": {
+        "id": "edge-district-contacts",
+        "label": "Edge District Contacts",
+        "kind": "person",
+        "facts": [
+          "[d2] Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept care"
+        ],
+        "links": [
+          "mara-wells",
+          "the-water-crisis",
+          "radiant-plateau-edge",
+          "pell"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 63.445812030309966,
-    "cerebral": 44.68883090708985,
-    "social": 51.746515508617186,
-    "generous": 16.693387148628755,
-    "cautious": 54.46144000757538,
-    "physical": 1.0117105211947668,
-    "risky": 3.3646109601566896,
-    "ruthless": 1.38070411486125,
-    "carousing": 1.7424730915706468
+    "strategic": 64.12858297015842,
+    "cerebral": 45.4653867525544,
+    "social": 52.4877829310741,
+    "generous": 16.609920212885612,
+    "cautious": 54.189132807537504,
+    "physical": 1.006651968588793,
+    "risky": 3.347787905355906,
+    "ruthless": 1.3738005942869438,
+    "carousing": 1.7337607261127936
   },
   "aptitudes": [
     "strategist",
@@ -2555,7 +2630,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 221,
+  "actionCount": 222,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2641,8 +2716,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784142051687,
-  "rev": 306,
+  "updatedAt": 1784142430003,
+  "rev": 307,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3067,7 +3142,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 16
+    "valley": 17
   },
   "foreclosed": [
     "rootkin",

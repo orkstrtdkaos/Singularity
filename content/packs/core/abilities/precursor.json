@@ -1,354 +1,360 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "precursor",
-  "civilization": "precursor",
-  "gated": "learned",
-  "note": "NOT available at character creation. Precursor abilities are learned only through deep engagement — Old Roads mastery, quest unlocks, or discovery at a live remnant. Rarer, harder, costlier than any tradition. They touch the foreclosing layer: the lattice tends toward contraction, and every use tugs the wielder that way. Powerful and perilous by design. GM guards what the sealed things are.",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "precursor",
+ "civilization": "precursor",
+ "gated": "learned",
+ "note": "NOT available at character creation. Precursor abilities are learned only through deep engagement — Old Roads mastery, quest unlocks, or discovery at a live remnant. Rarer, harder, costlier than any tradition. They touch the foreclosing layer: the lattice tends toward contraction, and every use tugs the wielder that way. Powerful and perilous by design. GM guards what the sealed things are.",
+ "abilities": [
+  {
+   "id": "address_sense",
+   "name": "Address-Sense",
+   "levelReq": 3,
+   "energyCost": 8,
+   "axes": {
+    "concrete_abstract": 0.5,
+    "space_time": 0.3
+   },
+   "attribute": "mental",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "perceive",
+    "vector"
+   ],
+   "peril": "Reading the coordinate layer too long unmoors the reader — repeated use risks a drift toward abstract, away from the concrete present.",
+   "narrationHints": "The world briefly shows its addressing — every thing sitting at a coordinate it cannot not-occupy. Places and people as fixed points in a field that hums.",
+   "description": "Perceive the cosmic-address layer directly: read the deep spectrum-vector of a place, person, or object — where it sits, which axes it runs strong.",
+   "notFor": "Changing what you read (this is perception only); reading intent or future (only the standing vector); the gray water, which addresses to nowhere.",
+   "tree": [
     {
-      "id": "address_sense",
-      "name": "Address-Sense",
-      "levelReq": 3,
-      "energyCost": 8,
-      "axes": {
-        "concrete_abstract": 0.5,
-        "space_time": 0.3
-      },
-      "attribute": "mental",
-      "powerSystem": "precursor",
-      "effectTags": [
-        "precursor",
-        "perceive",
-        "vector"
-      ],
-      "peril": "Reading the coordinate layer too long unmoors the reader — repeated use risks a drift toward abstract, away from the concrete present.",
-      "narrationHints": "The world briefly shows its addressing — every thing sitting at a coordinate it cannot not-occupy. Places and people as fixed points in a field that hums.",
-      "description": "Perceive the cosmic-address layer directly: read the deep spectrum-vector of a place, person, or object — where it sits, which axes it runs strong.",
-      "notFor": "Changing what you read (this is perception only); reading intent or future (only the standing vector); the gray water, which addresses to nowhere.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Standing Vector",
-          "grants": "Read a location's or object's strong spectrum axes on sight — which way it leans and how hard. Reveals location vectors fully without approximation.",
-          "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing."
-        },
-        {
-          "rank": 2,
-          "name": "Coordinate Read",
-          "grants": "Read a person's deep vector — their standing alignment, not their mood; sense when a place's vector has recently SHIFTED and roughly toward what.",
-          "cannot": "Not mind-reading — vector is disposition, not thought; shift-sense gives direction, not cause."
-        },
-        {
-          "rank": 3,
-          "name": "The Address Itself",
-          "grants": "Perceive the unrepeatable coordinate of a thing — its cosmic address, the point it alone occupies; find your way to a place or person by their vector alone across any distance.",
-          "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field."
-        }
-      ],
-      "functions": [
-        "reveal"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3,
-        "FIGHT": 1,
-        "PUZZLE": 1
-      },
-      "tradition": "precursor"
+     "rank": 1,
+     "name": "The Standing Vector",
+     "grants": "Read a location's or object's strong spectrum axes on sight — which way it leans and how hard. Reveals location vectors fully without approximation.",
+     "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing."
     },
     {
-      "id": "latticespeak",
-      "name": "Latticespeak",
-      "levelReq": 3,
-      "energyCost": 9,
-      "axes": {
-        "mechanical_spiritual": -0.4,
-        "concrete_abstract": 0.3
-      },
-      "attribute": "practical",
-      "powerSystem": "precursor",
-      "effectTags": [
-        "precursor",
-        "interface",
-        "wake"
-      ],
-      "peril": "The lattice answers in its own grammar; a botched exchange can leave a mechanism half-woken and wrong.",
-      "narrationHints": "Not commands — a handshake in a language older than speech. The mechanism considers you, then decides how much to say.",
-      "description": "Interface with dormant Precursor mechanisms — query them, coax a response, learn a device's function without triggering it.",
-      "notFor": "Live/cycling remnants without a check (only dormant ones answer safely); commanding — you request, it decides; understanding PURPOSE (only function).",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Handshake",
-          "grants": "Rouse a dormant mechanism to answer simple queries — what it is, whether it's safe, roughly what it does.",
-          "cannot": "Dormant only; live systems ignore or lash out; answers are functional, never why."
-        },
-        {
-          "rank": 2,
-          "name": "Deeper Grammar",
-          "grants": "Ask a mechanism to perform its function once, on its terms; read a lattice node's state (dormant/cycling/waking) with certainty; safely interface at the edge of live systems.",
-          "cannot": "It performs its OWN function, not yours; one ask before it closes; waking systems still refuse."
-        },
-        {
-          "rank": 3,
-          "name": "Fluent in the Old Tongue",
-          "grants": "Hold sustained exchange with any Precursor system, live included; negotiate a live remnant toward dormancy; understand what a mechanism was FOR (function's shadow of purpose).",
-          "cannot": "Purpose glimpsed is not purpose grasped — the GM holds the truth; negotiating a live system risks waking it further; fluency deepens the drift most of all."
-        }
-      ],
-      "functions": [
-        "bind",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "PUZZLE",
-        "INVESTIGATE"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 3,
-        "INVESTIGATE": 2,
-        "FIGHT": 1,
-        "DUEL": 1,
-        "PUZZLE": 1
-      },
-      "tradition": "precursor"
+     "rank": 2,
+     "name": "Coordinate Read",
+     "grants": "Read a person's deep vector — their standing alignment, not their mood; sense when a place's vector has recently SHIFTED and roughly toward what.",
+     "cannot": "Not mind-reading — vector is disposition, not thought; shift-sense gives direction, not cause."
     },
     {
-      "id": "wake_the_line",
-      "name": "Wake the Line",
-      "levelReq": 4,
-      "energyCost": 12,
-      "axes": {
-        "chaos_order": 0.2,
-        "death_life": 0.2,
-        "mechanical_spiritual": -0.3
-      },
-      "attribute": "practical",
-      "powerSystem": "precursor",
-      "effectTags": [
-        "precursor",
-        "wake",
-        "area"
-      ],
-      "peril": "You rouse more than you aimed at; what wakes does not go back to sleep on your schedule.",
-      "narrationHints": "A buried alignment shivers to life underfoot, running to the horizon. Light that was never lamplight. The line remembers being a road.",
-      "description": "Rouse a stretch of the dormant lattice — reactivating an old road, conduit, or working across an area. Powerful, imprecise, hard to recall.",
-      "notFor": "Precision (this is area, not a switch); recalling what you wake at will; anything already live (that's not waking, that's provoking).",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Stir the Buried",
-          "grants": "Wake a short buried alignment to partial function — a conduit carries again, a marker lights, a door remembers opening.",
-          "cannot": "Partial and brief; you can't choose exactly what function returns; it sleeps again on its own timing, not yours."
-        },
-        {
-          "rank": 2,
-          "name": "The Line Runs",
-          "grants": "Wake a full stretch to sustained function; direct crude what the waking does (carry water THIS way, light THAT path); sense everything else your waking stirred nearby.",
-          "cannot": "Direction is crude; waking one line tugs adjacent ones; the GM names what else stirred."
-        },
-        {
-          "rank": 3,
-          "name": "The Road Remembers",
-          "grants": "Rouse a whole lattice district toward its old purpose; the woken network partly obeys sustained intent; once woken by you, a line answers you faster forever after.",
-          "cannot": "A district woken is a district AWAKE — consequences ripple beyond the scene and persist; some lines, once run, cannot be stopped by you at all; deepest drift-cost in the tree."
-        }
-      ],
-      "functions": [
-        "command",
-        "open",
-        "summon"
-      ],
-      "challengeTypes": [
-        "PUZZLE",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "DUEL": 2,
-        "PUZZLE": 2,
-        "CHASE": 1
-      },
-      "tradition": "precursor"
-    },
-    {
-      "id": "foreclose",
-      "name": "Foreclose",
-      "levelReq": 4,
-      "energyCost": 13,
-      "axes": {
-        "destruction_creation": -0.5,
-        "chaos_order": 0.3,
-        "death_life": -0.2
-      },
-      "attribute": "mental",
-      "powerSystem": "precursor",
-      "effectTags": [
-        "precursor",
-        "collapse",
-        "deny"
-      ],
-      "peril": "This is the contraction-tool used as intended. Every use pulls the wielder hard toward the foreclosing axes — the danger isn't backlash, it's becoming what the tool is for.",
-      "narrationHints": "You close a door that was every door. A possibility simply stops being possible. The air goes certain and smaller.",
-      "description": "Collapse a possibility: seal a path, deny an outcome, foreclose a thing from happening. Immensely powerful, and the most perilous ability in the game to the wielder's own vector.",
-      "notFor": "Creating or opening (it only closes); un-foreclosing what you've foreclosed; use without cost — there is always a cost, and it lands on you.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Close the Door",
-          "grants": "Foreclose a single immediate possibility — an attack cannot land, a path cannot be taken, a thing cannot ignite. Absolute for the moment.",
-          "cannot": "One narrow possibility; the moment only; each use nudges your vector toward dark/destruction/death — the engine tracks it and the GM will name where it takes you."
-        },
-        {
-          "rank": 2,
-          "name": "Standing Denial",
-          "grants": "Foreclose a possibility for a scene — a room stays sealed, a working stays dead, a person cannot do a named thing while you hold it. ",
-          "cannot": "Holding it costs continuously; the drift accelerates the longer you hold; break your concentration and it snaps open, sometimes worse."
-        },
-        {
-          "rank": 3,
-          "name": "It Will Not Be",
-          "grants": "Foreclose something lasting — a threat unmade, an outcome permanently denied, a door closed for good. The tool at full strength.",
-          "cannot": "The vector-cost is severe and lasting — sustained use walks a wielder toward the contraction the framework names as the enemy; the GM may rule a character too-foreclosed has changed. Never used without weighing what it makes of you."
-        }
-      ],
-      "functions": [
-        "break",
-        "bind"
-      ],
-      "challengeTypes": [
-        "FIGHT",
-        "DUEL"
-      ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "PUZZLE": 2,
-        "SOCIAL": 2,
-        "DUEL": 2,
-        "CHASE": 1
-      },
-      "tradition": "precursor"
-    },
-    {
-      "id": "unmake_seal",
-      "name": "Unmake Seal",
-      "levelReq": 5,
-      "energyCost": 12,
-      "axes": {
-        "chaos_order": -0.3,
-        "concrete_abstract": 0.2,
-        "falsehood_truth": 0.2
-      },
-      "attribute": "mental",
-      "powerSystem": "precursor",
-      "effectTags": [
-        "precursor",
-        "open",
-        "reveal"
-      ],
-      "peril": "The Precursors sealed things for reasons. Some seals are prisons, some are dams, some are mercies. You do not always learn which before it's open.",
-      "narrationHints": "The seal doesn't break — it agrees to have never been. What was held now isn't held. The quiet after is the loudest part.",
-      "description": "Open what the Precursors sealed — doors, vaults, bindings, containments. The counterpart to Foreclose: it opens rather than closes, and its danger is what comes through.",
-      "notFor": "Choosing what's behind a seal (the GM holds that); re-sealing what you open; seals that are load-bearing on reality itself without grave risk.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Lesser Seals",
-          "grants": "Open minor Precursor bindings — a sealed cache, a locked mechanism, a bound remnant. Read a seal's rough weight (minor/major/grave) before you try.",
-          "cannot": "Minor seals only; weight-read is rough; what's inside is the GM's to reveal — sometimes gift, sometimes not."
-        },
-        {
-          "rank": 2,
-          "name": "The Deep Doors",
-          "grants": "Open major seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-shadow (prison? dam? mercy?) before opening.",
-          "cannot": "Purpose-shadow is a hint, not certainty; some doors notice being opened and remember you; grave seals still refuse."
-        },
-        {
-          "rank": 3,
-          "name": "Nothing Stays Shut",
-          "grants": "Open grave seals — the ones holding back the worst the Precursors feared; open a thing at distance by its address (with Address-Sense); the valley's deepest containments become reachable.",
-          "cannot": "What grave seals hold is grave for a reason — the GM's absolute domain; opening some things cannot be undone by any ability; this is the edge of the map."
-        }
-      ],
-      "functions": [
-        "open",
-        "break"
-      ],
-      "challengeTypes": [
-        "PUZZLE"
-      ],
-      "challengeProfile": {
-        "PUZZLE": 3,
-        "FIGHT": 2,
-        "CHASE": 1,
-        "EXPLORE": 1
-      },
-      "tradition": "precursor"
-    },
-    {
-      "id": "hold_the_aperture",
-      "name": "Hold the Aperture",
-      "levelReq": 5,
-      "energyCost": 11,
-      "axes": {
-        "destruction_creation": 0.5,
-        "death_life": 0.3,
-        "dark_light": 0.3
-      },
-      "attribute": "social",
-      "powerSystem": "precursor",
-      "effectTags": [
-        "precursor",
-        "sustain",
-        "open"
-      ],
-      "peril": "You hold a thing open against a will that wants it shut — the lattice's own foreclosing tendency pushes back the whole time, and it does not tire.",
-      "narrationHints": "Everything in the old machinery wants to close, to narrow, to end. You stand in the gap with your hands on both jambs and refuse. This is the hardest thing the old tools do — because it's the thing they were not made for.",
-      "description": "The rare counter-move to the whole Precursor tendency: keep something OPEN that wants to foreclose — a possibility, a passage, a life at the edge, a future about to be denied. The anti-contraction ability. Costly, and the only Precursor tool that pulls the wielder toward creation and life rather than away.",
-      "notFor": "Opening what's already shut (that's Unmake Seal); holding forever (you are not infinite); forcing an outcome — you hold the door, others must walk it.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Held Gap",
-          "grants": "Keep one foreclosing possibility open through a scene — a collapsing path stays passable, a dying ember stays lit, a closing chance stays open a while longer.",
-          "cannot": "One thing, one scene; costs continuously; when you let go it closes as it always meant to."
-        },
-        {
-          "rank": 2,
-          "name": "Against the Tendency",
-          "grants": "Hold open something larger — a way that wants to seal, an outcome the lattice is foreclosing, a person the machinery is writing out; others can act through the gap you hold. Using this REVERSES drift — it pulls your vector toward life/creation/light.",
-          "cannot": "The push-back is relentless and real; hold too much too long and it costs health, not just energy; you cannot hold and act freely at once."
-        },
-        {
-          "rank": 3,
-          "name": "The Standing Refusal",
-          "grants": "Hold a great aperture open against the lattice's full will — a district's foreclosure halted, a grave outcome refused entry, a door the old world sealed kept open by your standing there. The framework's answer to its own antagonist, made an act.",
-          "cannot": "This is the hardest thing in the game and the GM prices it as such — sustained holding can cost gravely; you hold, you do not win; what walks through the gap is not yours to command; but nothing you hold open forecloses while you stand."
-        }
-      ],
-      "functions": [
-        "open",
-        "ward",
-        "bind"
-      ],
-      "challengeTypes": [
-        "SURVIVE",
-        "PUZZLE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "FIGHT": 2,
-        "DUEL": 2,
-        "PUZZLE": 2,
-        "EXPLORE": 1,
-        "STEALTH": 1
-      },
-      "tradition": "precursor"
+     "rank": 3,
+     "name": "The Address Itself",
+     "grants": "Perceive the unrepeatable coordinate of a thing — its cosmic address, the point it alone occupies; find your way to a place or person by their vector alone across any distance.",
+     "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field."
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3,
+    "FIGHT": 1,
+    "PUZZLE": 1
+   },
+   "tradition": "precursor",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "latticespeak",
+   "name": "Latticespeak",
+   "levelReq": 3,
+   "energyCost": 9,
+   "axes": {
+    "mechanical_spiritual": -0.4,
+    "concrete_abstract": 0.3
+   },
+   "attribute": "practical",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "interface",
+    "wake"
+   ],
+   "peril": "The lattice answers in its own grammar; a botched exchange can leave a mechanism half-woken and wrong.",
+   "narrationHints": "Not commands — a handshake in a language older than speech. The mechanism considers you, then decides how much to say.",
+   "description": "Interface with dormant Precursor mechanisms — query them, coax a response, learn a device's function without triggering it.",
+   "notFor": "Live/cycling remnants without a check (only dormant ones answer safely); commanding — you request, it decides; understanding PURPOSE (only function).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Handshake",
+     "grants": "Rouse a dormant mechanism to answer simple queries — what it is, whether it's safe, roughly what it does.",
+     "cannot": "Dormant only; live systems ignore or lash out; answers are functional, never why."
+    },
+    {
+     "rank": 2,
+     "name": "Deeper Grammar",
+     "grants": "Ask a mechanism to perform its function once, on its terms; read a lattice node's state (dormant/cycling/waking) with certainty; safely interface at the edge of live systems.",
+     "cannot": "It performs its OWN function, not yours; one ask before it closes; waking systems still refuse."
+    },
+    {
+     "rank": 3,
+     "name": "Fluent in the Old Tongue",
+     "grants": "Hold sustained exchange with any Precursor system, live included; negotiate a live remnant toward dormancy; understand what a mechanism was FOR (function's shadow of purpose).",
+     "cannot": "Purpose glimpsed is not purpose grasped — the GM holds the truth; negotiating a live system risks waking it further; fluency deepens the drift most of all."
+    }
+   ],
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 3,
+    "INVESTIGATE": 2,
+    "FIGHT": 1,
+    "DUEL": 1,
+    "PUZZLE": 1
+   },
+   "tradition": "precursor",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "wake_the_line",
+   "name": "Wake the Line",
+   "levelReq": 4,
+   "energyCost": 12,
+   "axes": {
+    "chaos_order": 0.2,
+    "death_life": 0.2,
+    "mechanical_spiritual": -0.3
+   },
+   "attribute": "practical",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "wake",
+    "area"
+   ],
+   "peril": "You rouse more than you aimed at; what wakes does not go back to sleep on your schedule.",
+   "narrationHints": "A buried alignment shivers to life underfoot, running to the horizon. Light that was never lamplight. The line remembers being a road.",
+   "description": "Rouse a stretch of the dormant lattice — reactivating an old road, conduit, or working across an area. Powerful, imprecise, hard to recall.",
+   "notFor": "Precision (this is area, not a switch); recalling what you wake at will; anything already live (that's not waking, that's provoking).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Stir the Buried",
+     "grants": "Wake a short buried alignment to partial function — a conduit carries again, a marker lights, a door remembers opening.",
+     "cannot": "Partial and brief; you can't choose exactly what function returns; it sleeps again on its own timing, not yours."
+    },
+    {
+     "rank": 2,
+     "name": "The Line Runs",
+     "grants": "Wake a full stretch to sustained function; direct crude what the waking does (carry water THIS way, light THAT path); sense everything else your waking stirred nearby.",
+     "cannot": "Direction is crude; waking one line tugs adjacent ones; the GM names what else stirred."
+    },
+    {
+     "rank": 3,
+     "name": "The Road Remembers",
+     "grants": "Rouse a whole lattice district toward its old purpose; the woken network partly obeys sustained intent; once woken by you, a line answers you faster forever after.",
+     "cannot": "A district woken is a district AWAKE — consequences ripple beyond the scene and persist; some lines, once run, cannot be stopped by you at all; deepest drift-cost in the tree."
+    }
+   ],
+   "functions": [
+    "command",
+    "open",
+    "summon"
+   ],
+   "challengeTypes": [
+    "PUZZLE",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "FIGHT": 3,
+    "DUEL": 2,
+    "PUZZLE": 2,
+    "CHASE": 1
+   },
+   "tradition": "precursor",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "foreclose",
+   "name": "Foreclose",
+   "levelReq": 4,
+   "energyCost": 13,
+   "axes": {
+    "destruction_creation": -0.5,
+    "chaos_order": 0.3,
+    "death_life": -0.2
+   },
+   "attribute": "mental",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "collapse",
+    "deny"
+   ],
+   "peril": "This is the contraction-tool used as intended. Every use pulls the wielder hard toward the foreclosing axes — the danger isn't backlash, it's becoming what the tool is for.",
+   "narrationHints": "You close a door that was every door. A possibility simply stops being possible. The air goes certain and smaller.",
+   "description": "Collapse a possibility: seal a path, deny an outcome, foreclose a thing from happening. Immensely powerful, and the most perilous ability in the game to the wielder's own vector.",
+   "notFor": "Creating or opening (it only closes); un-foreclosing what you've foreclosed; use without cost — there is always a cost, and it lands on you.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Close the Door",
+     "grants": "Foreclose a single immediate possibility — an attack cannot land, a path cannot be taken, a thing cannot ignite. Absolute for the moment.",
+     "cannot": "One narrow possibility; the moment only; each use nudges your vector toward dark/destruction/death — the engine tracks it and the GM will name where it takes you."
+    },
+    {
+     "rank": 2,
+     "name": "Standing Denial",
+     "grants": "Foreclose a possibility for a scene — a room stays sealed, a working stays dead, a person cannot do a named thing while you hold it. ",
+     "cannot": "Holding it costs continuously; the drift accelerates the longer you hold; break your concentration and it snaps open, sometimes worse."
+    },
+    {
+     "rank": 3,
+     "name": "It Will Not Be",
+     "grants": "Foreclose something lasting — a threat unmade, an outcome permanently denied, a door closed for good. The tool at full strength.",
+     "cannot": "The vector-cost is severe and lasting — sustained use walks a wielder toward the contraction the framework names as the enemy; the GM may rule a character too-foreclosed has changed. Never used without weighing what it makes of you."
+    }
+   ],
+   "functions": [
+    "break",
+    "bind"
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "challengeProfile": {
+    "FIGHT": 3,
+    "PUZZLE": 2,
+    "SOCIAL": 2,
+    "DUEL": 2,
+    "CHASE": 1
+   },
+   "tradition": "precursor",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "unmake_seal",
+   "name": "Unmake Seal",
+   "levelReq": 5,
+   "energyCost": 12,
+   "axes": {
+    "chaos_order": -0.3,
+    "concrete_abstract": 0.2,
+    "falsehood_truth": 0.2
+   },
+   "attribute": "mental",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "open",
+    "reveal"
+   ],
+   "peril": "The Precursors sealed things for reasons. Some seals are prisons, some are dams, some are mercies. You do not always learn which before it's open.",
+   "narrationHints": "The seal doesn't break — it agrees to have never been. What was held now isn't held. The quiet after is the loudest part.",
+   "description": "Open what the Precursors sealed — doors, vaults, bindings, containments. The counterpart to Foreclose: it opens rather than closes, and its danger is what comes through.",
+   "notFor": "Choosing what's behind a seal (the GM holds that); re-sealing what you open; seals that are load-bearing on reality itself without grave risk.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Lesser Seals",
+     "grants": "Open minor Precursor bindings — a sealed cache, a locked mechanism, a bound remnant. Read a seal's rough weight (minor/major/grave) before you try.",
+     "cannot": "Minor seals only; weight-read is rough; what's inside is the GM's to reveal — sometimes gift, sometimes not."
+    },
+    {
+     "rank": 2,
+     "name": "The Deep Doors",
+     "grants": "Open major seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-shadow (prison? dam? mercy?) before opening.",
+     "cannot": "Purpose-shadow is a hint, not certainty; some doors notice being opened and remember you; grave seals still refuse."
+    },
+    {
+     "rank": 3,
+     "name": "Nothing Stays Shut",
+     "grants": "Open grave seals — the ones holding back the worst the Precursors feared; open a thing at distance by its address (with Address-Sense); the valley's deepest containments become reachable.",
+     "cannot": "What grave seals hold is grave for a reason — the GM's absolute domain; opening some things cannot be undone by any ability; this is the edge of the map."
+    }
+   ],
+   "functions": [
+    "open",
+    "break"
+   ],
+   "challengeTypes": [
+    "PUZZLE"
+   ],
+   "challengeProfile": {
+    "PUZZLE": 3,
+    "FIGHT": 2,
+    "CHASE": 1,
+    "EXPLORE": 1
+   },
+   "tradition": "precursor",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "hold_the_aperture",
+   "name": "Hold the Aperture",
+   "levelReq": 5,
+   "energyCost": 11,
+   "axes": {
+    "destruction_creation": 0.5,
+    "death_life": 0.3,
+    "dark_light": 0.3
+   },
+   "attribute": "social",
+   "powerSystem": "precursor",
+   "effectTags": [
+    "precursor",
+    "sustain",
+    "open"
+   ],
+   "peril": "You hold a thing open against a will that wants it shut — the lattice's own foreclosing tendency pushes back the whole time, and it does not tire.",
+   "narrationHints": "Everything in the old machinery wants to close, to narrow, to end. You stand in the gap with your hands on both jambs and refuse. This is the hardest thing the old tools do — because it's the thing they were not made for.",
+   "description": "The rare counter-move to the whole Precursor tendency: keep something OPEN that wants to foreclose — a possibility, a passage, a life at the edge, a future about to be denied. The anti-contraction ability. Costly, and the only Precursor tool that pulls the wielder toward creation and life rather than away.",
+   "notFor": "Opening what's already shut (that's Unmake Seal); holding forever (you are not infinite); forcing an outcome — you hold the door, others must walk it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Held Gap",
+     "grants": "Keep one foreclosing possibility open through a scene — a collapsing path stays passable, a dying ember stays lit, a closing chance stays open a while longer.",
+     "cannot": "One thing, one scene; costs continuously; when you let go it closes as it always meant to."
+    },
+    {
+     "rank": 2,
+     "name": "Against the Tendency",
+     "grants": "Hold open something larger — a way that wants to seal, an outcome the lattice is foreclosing, a person the machinery is writing out; others can act through the gap you hold. Using this REVERSES drift — it pulls your vector toward life/creation/light.",
+     "cannot": "The push-back is relentless and real; hold too much too long and it costs health, not just energy; you cannot hold and act freely at once."
+    },
+    {
+     "rank": 3,
+     "name": "The Standing Refusal",
+     "grants": "Hold a great aperture open against the lattice's full will — a district's foreclosure halted, a grave outcome refused entry, a door the old world sealed kept open by your standing there. The framework's answer to its own antagonist, made an act.",
+     "cannot": "This is the hardest thing in the game and the GM prices it as such — sustained holding can cost gravely; you hold, you do not win; what walks through the gap is not yours to command; but nothing you hold open forecloses while you stand."
+    }
+   ],
+   "functions": [
+    "open",
+    "ward",
+    "bind"
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "PUZZLE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "SURVIVE": 3,
+    "FIGHT": 2,
+    "DUEL": 2,
+    "PUZZLE": 2,
+    "EXPLORE": 1,
+    "STEALTH": 1
+   },
+   "tradition": "precursor",
+   "nativeOrCombination": "native"
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

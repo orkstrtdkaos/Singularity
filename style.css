@@ -585,3 +585,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .help-card .help-short { font-size:15px; color:var(--ink); line-height:1.5; }
 .help-card .help-more { margin-top:8px; color:var(--ink-dim); font-size:13.5px; line-height:1.55; }
 .help-card .help-foot { display:flex; gap:8px; justify-content:space-between; align-items:center; margin-top:14px; }
+
+/* SNG-104 — vitals x/y readout + tap/hover detail */
+.vital-row { display:flex; align-items:center; gap:6px; }
+.vital-num {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px; opacity: .85; margin-left: auto;
+  cursor: help; user-select: none; padding: 1px 4px; border-radius: 4px;
+}
+.vital-num:hover, .vital-num:focus { opacity: 1; background: var(--panel2); outline: none; }
+.vital-num:active { opacity: 1; }

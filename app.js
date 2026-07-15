@@ -41,11 +41,13 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.65";
+const APP_VERSION = "1.8.66";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
 app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]"); if (b) { e.preventDefault(); showHelp(b.dataset.help); } });
+// SNG-104: vitals detail on tap (phone) / hover (desktop) — mirrors the data-help delegation above.
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]"); if (el) { e.preventDefault(); showVitalDetail(el); } });
 
 /** SNG-084: the authored one-sentence explanation for a mechanic, by id (helper_text.json). */
 function helpEntry(id) { return CONTENT?.helpText?.[id] || null; }
@@ -74,6 +76,30 @@ function showHelp(id) {
   const mt = document.getElementById("help-more-toggle");
   if (mt) mt.onclick = () => { const m = document.getElementById("help-more"); m.hidden = !m.hidden; mt.textContent = m.hidden ? "more…" : "less"; };
   document.getElementById("help-lib").onclick = () => { close(); renderLibrary(); };
+}
+
+// SNG-104: the same dismissable popover the info-dot uses, but from RAW TEXT (showHelp needs a help-id).
+// Reuses the .help-overlay/.help-card surface so the phone tap-away + Got-it dismiss is identical.
+function showPopoverText(text) {
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Detail"><div class="help-short">${esc(text).replace(/\n/g, "<br>")}</div><div class="help-foot"><button class="btn" id="help-close">Got it</button></div></div>`;
+  document.body.appendChild(pop);
+  const close = () => pop.remove();
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+}
+
+// SNG-104: what a Health/Energy number's tap/hover shows — how rest restores it, read from CONTENT.rules.recovery.
+function showVitalDetail(el) {
+  const kind = el.dataset.vital;
+  const rec = (CONTENT?.rules && CONTENT.rules.recovery) || {};
+  const sleep = rec.sleep || {}, breather = rec.breather || {};
+  const body = kind === "energy"
+    ? `Rest restores — breather +${breather.energy ?? 10} (${breather.hours ?? 1}h) · meal +${rec.meal ?? 10} · sleep +${sleep.energy ?? 40} (${sleep.hours ?? 8}h)`
+    : `Rest restores — breather +${breather.health ?? 1} · sleep +${sleep.health ?? 3} (${sleep.hours ?? 8}h)`;
+  showPopoverText(`${el.textContent.trim()} ${kind}\n${body}`);
 }
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
@@ -4725,8 +4751,10 @@ function renderPlay(turn, opts = {}) {
       <button class="opt" id="open-character" style="flex:1">Character</button>
       <button class="opt" id="open-inventory" style="flex:1">Inventory</button>
     </div>
-    Health <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
-    Energy ${infoDot("energy.no_regen")}<div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
+    <div class="vital-row">Health <span class="vital-num" data-vital="health" tabindex="0" role="button" aria-label="Health ${character.health} of ${character.maxHealth}. Tap for detail.">${character.health} / ${character.maxHealth}</span></div>
+    <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
+    <div class="vital-row">Energy ${infoDot("energy.no_regen")}<span class="vital-num" data-vital="energy" tabindex="0" role="button" aria-label="Energy ${character.energy} of ${character.maxEnergy}. Tap for detail.">${character.energy} / ${character.maxEnergy}</span></div>
+    <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
     <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></section>

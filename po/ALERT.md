@@ -1,4 +1,24 @@
-# PIPELINE ALERT — Singularity## ✅ THREE TRANSPARENCY BUILDS — CLOSED GREEN (Aevi HEAD audit, v1.8.67)
+# PIPELINE ALERT — Singularity## 📚 THE CHARACTER CHRONICLE ARC + 3 bugs (Aevi authored 2026-07-14, awaiting CCode ROUND 2)
+
+Erik play-session findings — the through-line is the session thesis: **the game computes the accreted self (deeds, bonds, standing, grown items) but shows the player almost none of it.** These surface and weave it.
+
+**Bugs (found live):**
+- **SNG-111 — Progressive NPC naming.** `po/SPEC_SNG-111_progressive_npc_naming.md`. Learning a surname must EXTEND the name ("Pell" → "Pell Marsh"), not alias-shunt it. At HEAD `revealName` only replaces-or-aliases; no append path. Pell's "Marsh" never composed.
+- **SNG-112 — Quest offers gated by proximity/thread, not region.** `po/SPEC_SNG-112_quest_offer_gating.md`. `availableStructuredQuests` offers on bare `region===region` — too coarse; Cellaceron's Fendt quest surfaced to Silas off-thread and far from its location. Gate on location-proximity OR giver-present OR thread-touched. **+ parallel player-specific quests on a shared arc** (Silas's own Fendt quest, not Cellaceron's canonical one).
+- **SNG-105 — Recovery scales with pool.** `po/SPEC_SNG-105_recovery_scales.md`. Erik ruled recovery should scale: maxEnergy grows +5/level, recovery was flat → grind. Fraction-of-max with flat floor (low levels unchanged).
+
+**The Chronicle set (surfaces + weaves existing data):**
+- **SNG-108 — Relationship arcs.** `po/SPEC_SNG-108_relationship_arcs.md`. Bonds already tracked (score+band, fed to GM) but never SHOWN, and flat. Surface them + add `bondType`/`bondStage`: **Pell is a `romantic`/committed partner, not a "devoted" tag** — a distinct KIND with a growth path (courting→together→committed→partner), score-floor-gated, minor-safe, partner→party-adjacent. *"She's Silas' woman"* — the model should say so.
+- **SNG-109 — The Chronicle page.** `po/SPEC_SNG-109_chronicle_page.md`. The background page: cached story-so-far paragraph, major deeds, relationships (SNG-108 bonds), standing, arc. Assembles existing data; reads the attended self back to the player.
+- **SNG-110 — Portrait as earned record.** `po/SPEC_SNG-110_portrait_earned_record.md`. Player-authored appearance (primary) + game-context provenance (the **forged spear shown as *yours***, not a bare name), companion/partner in-frame opt-in, per-generation override, and **image DELETE** (Erik's ask; only add exists today). FLOORS run after all additions (minor ≤PG, AUP).
+
+**Design forks still Erik's to call (flagged in specs, not pre-decided):** SNG-107 reputation-with-teeth (what should revered actually COST — a rival faction souring, challengers drawn — reputation that only helps isn't a system) is NOT yet specced, pending Erik's design conversation. SNG-108's romantic stages and SNG-110's companion-in-frame are built but Erik tunes the specifics.
+
+Sequencing note: 108 (bonds) feeds 109 (chronicle) and 110 (portrait companion). 111/112/105 are independent bugs, buildable anytime. All await CCode ROUND 2.
+
+---
+
+## ✅ THREE TRANSPARENCY BUILDS — CLOSED GREEN (Aevi HEAD audit, v1.8.67)
 
 CCode shipped all three; **Aevi verified at authenticated origin, not on report.** All syntax-clean.
 - **SNG-103** (GM effective energy cost, v1.8.65): `abilitiesForGM` now shows effective cost with base when discounted (`3 energy — base 6, discounted by level+rank`); raw `${ab.energyCost}` primary is gone; `CONTENT.rules` threaded at all 3 call sites. No sibling raw-cost builder. **Closed.**

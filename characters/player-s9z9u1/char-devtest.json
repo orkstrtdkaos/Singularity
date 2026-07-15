@@ -6,11 +6,11 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 62,
+  "xp": 64,
   "attributes": {
     "physical": 6,
     "mental": 7,
-    "social": 6,
+    "social": 7,
     "practical": 6
   },
   "skills": {},
@@ -34,13 +34,14 @@
   ],
   "alignment": {
     "falsehood_truth": 0.025,
-    "spectrumId": -0.0975
+    "spectrumId": -0.0975,
+    "dark_light": 0.03
   },
   "attunement": 3,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 94,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -168,103 +169,95 @@
         "player": null,
         "summary": "Lira, an Edge District apprentice, waits in the service corridor — a warm, unhurried nearness neither of you has moved to close.",
         "narration": "The corridor has emptied. The apprentices' voices fade around the far corner of the lane, swallowed by the crystal towers and the soft, diffuse morning light beginning to pool between them — that particular Radiant Plateau light that seems to arrive from everywhere at once, sourceless and warm.\n\nShe is already there when you turn: leaning against the corridor wall with one shoulder, arms loosely crossed, the way someone leans when they've been waiting but won't admit it. Apprentice-rank sash, undone at the ends — the mark of someone who stopped caring about the formality of it some time ago. Her name is Lira. You've spoken twice before, both times over the paving work, and both times she stayed longer than she needed to. Her eyes are the color of the light-guide strip at full noon, a pale amber-grey that the Plateau's optics-weavers would call 'neutral spectrum,' as if naming it neutrally could make it less interesting to look at. She notices you noticing. Doesn't look away.\n\n\"You were in there a while,\" she says. Not an accusation — more a door left open. Her gaze drops once to the ledger tucked under your arm, then back up, and she makes no remark about it. Whatever she suspects, she's choosing not to name it. The corridor narrows the space between you to something that requires a small, deliberate effort to maintain. Neither of you has made it.\n\nThe morning light reaches the corridor's far mouth in a single long bar, turns the baseboard strip a warmer blue, and somewhere past the towers a filtration chime rings once and goes quiet. The moment holds."
+      },
+      {
+        "player": "Use Prism Sight — let her light-history tell you something about how she's been waiting.",
+        "summary": "Prism Sight overwhelmed by the corridor's saturated light-field; Lira waits, noticing without naming it.",
+        "narration": "The thought arrives before you can stop it — *let the light tell you* — and you let the ability unspool, quiet and restrained, the way you'd barely breathe to hear something faint.\n\nIt doesn't give you anything clean.\n\nThe photonic field here is saturated — the corridor's own light-guide strip, the spillage of morning coming in at the far end, the crystal lattice in the walls all refracting and re-refracting — and when you try to read the layered history of the light that's touched her face, you get all of it at once, every moment of this morning compressed into one smeared instant. She has been here a long time. She was here before the apprentices, before you. There is something in the angle of her shoulder, the way her weight has settled, that suggests she has not moved since she arrived, and that she knew she wouldn't need to.\n\nThat much, you get. The rest collapses. The light-guide strip's cold blue-white wrote itself over everything — you can't separate her waiting from the corridor's own long record, and you come back to yourself without the thread you reached for. A small ache behind the eyes. Not quite a failure, not quite a reading: a glare where you wanted depth.\n\nLira notices. Not what you did, probably — but something. The faintest tilt of her head, watching you come back to the present. She doesn't comment. She just looks at you the way people look at things they've decided to keep looking at."
       }
     ],
     "lastTurn": {
-      "narration": "The corridor has emptied. The apprentices' voices fade around the far corner of the lane, swallowed by the crystal towers and the soft, diffuse morning light beginning to pool between them — that particular Radiant Plateau light that seems to arrive from everywhere at once, sourceless and warm.\n\nShe is already there when you turn: leaning against the corridor wall with one shoulder, arms loosely crossed, the way someone leans when they've been waiting but won't admit it. Apprentice-rank sash, undone at the ends — the mark of someone who stopped caring about the formality of it some time ago. Her name is Lira. You've spoken twice before, both times over the paving work, and both times she stayed longer than she needed to. Her eyes are the color of the light-guide strip at full noon, a pale amber-grey that the Plateau's optics-weavers would call 'neutral spectrum,' as if naming it neutrally could make it less interesting to look at. She notices you noticing. Doesn't look away.\n\n\"You were in there a while,\" she says. Not an accusation — more a door left open. Her gaze drops once to the ledger tucked under your arm, then back up, and she makes no remark about it. Whatever she suspects, she's choosing not to name it. The corridor narrows the space between you to something that requires a small, deliberate effort to maintain. Neither of you has made it.\n\nThe morning light reaches the corridor's far mouth in a single long bar, turns the baseboard strip a warmer blue, and somewhere past the towers a filtration chime rings once and goes quiet. The moment holds.",
-      "sceneSummary": "Lira, an Edge District apprentice, waits in the service corridor — a warm, unhurried nearness neither of you has moved to close.",
+      "narration": "The thought arrives before you can stop it — *let the light tell you* — and you let the ability unspool, quiet and restrained, the way you'd barely breathe to hear something faint.\n\nIt doesn't give you anything clean.\n\nThe photonic field here is saturated — the corridor's own light-guide strip, the spillage of morning coming in at the far end, the crystal lattice in the walls all refracting and re-refracting — and when you try to read the layered history of the light that's touched her face, you get all of it at once, every moment of this morning compressed into one smeared instant. She has been here a long time. She was here before the apprentices, before you. There is something in the angle of her shoulder, the way her weight has settled, that suggests she has not moved since she arrived, and that she knew she wouldn't need to.\n\nThat much, you get. The rest collapses. The light-guide strip's cold blue-white wrote itself over everything — you can't separate her waiting from the corridor's own long record, and you come back to yourself without the thread you reached for. A small ache behind the eyes. Not quite a failure, not quite a reading: a glare where you wanted depth.\n\nLira notices. Not what you did, probably — but something. The faintest tilt of her head, watching you come back to the present. She doesn't comment. She just looks at you the way people look at things they've decided to keep looking at.",
+      "sceneSummary": "Prism Sight overwhelmed by the corridor's saturated light-field; Lira waits, noticing without naming it.",
       "choices": [
         {
-          "label": "Hold her gaze and close the distance between you — say nothing yet.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "flirt",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell her she stayed. Ask why.",
+          "label": "Close the distance — step toward her, let the nearness do what words can't yet.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "flirt",
-            "connect"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight — let her light-history tell you something about how she's been waiting.",
-          "attribute": "mental",
-          "subAttribute": "insight",
           "axes": {
-            "dark_light": 0.6
+            "dark_light": 0.5
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "flirt"
+            "connect",
+            "approach"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Lean against the wall beside her — same posture, same unhurried ease — and let the moment breathe.",
+          "label": "Say something direct — 'You've been waiting a while. I'd like to know why.'",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "direct",
+            "ask"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Name the ledger — show her you know she saw it, and you're not pretending otherwise.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "reveal",
+            "trust"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Say nothing — hold her look, and let the quiet be the question.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "dark_light": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "careful"
+            "wait",
+            "observe"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -4
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white now warming at the corridor's far mouth where early spring light enters. The lane outside is quieter; apprentices have moved off around the far corner.",
+        "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white, warming toward the far mouth where early spring light enters. The lane outside is quiet; apprentices have moved off.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "leaning against the corridor wall, arms loosely crossed, sash undone at the ends — watching the character with calm, unhurried attention; the distance between them is small and deliberate"
+            "state": "leaning against the corridor wall, arms loosely crossed, head tilted slightly — watching the character with calm, unhurried attention after noticing something shift in them."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — tucked under the character's arm",
           "Array-office door — closed, re-latched behind",
-          "Light-guide strip — cold blue-white, warming toward the corridor mouth",
+          "Light-guide strip — cold blue-white, warming toward corridor mouth",
           "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record",
           "Light-guide street paving — gap noticeably wider with three stones removed"
         ],
         "threads": [
-          "Lira has noticed the ledger and chosen not to name it — her silence on that is deliberate",
+          "Lira has noticed the ledger and chosen not to name it — and just now noticed something else in the character she isn't naming either",
           "Fendt's red chalk marking sits unanswered on the board",
           "Keeper Aldris Vael is somewhere in the district, beginning their morning",
           "The ledger's value depends entirely on whose hands receive it next",
@@ -273,65 +266,33 @@
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "role": "Apprentice optics-weaver, Edge District, Radiant Plateau",
-          "description": "Apprentice-rank sash worn loose, amber-grey eyes, at ease in ways that suggest she stopped caring about district formality some time ago. She's spoken with the character twice over the paving work and has lingered both times.",
-          "note": "Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open.",
-          "learned": [
-            "She was waiting for the character in the corridor",
-            "She is comfortable with silence and with noticing things she doesn't name"
-          ],
-          "skillsObserved": [
-            "discretion",
-            "patience"
-          ],
-          "relationshipDelta": 1,
+          "note": "Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting.",
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present in the service corridor behind the Common Hall, waiting near the character in an unhurried nearness"
+          "statusNote": "Present in the service corridor behind the Common Hall; watching the character with quiet, unhurried attention."
         }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "lira",
-          "label": "Lira — Edge District Apprentice",
-          "kind": "person",
-          "entityId": "lira",
-          "fact": "An apprentice optics-weaver in the Edge District who has sought the character's company twice over the paving work; met in the service corridor, she noticed the ledger and chose silence on it — deliberate discretion, not ignorance.",
-          "links": [
-            "radiant-plateau",
-            "the-clean-numbers"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a quiet moment in the corridor — barely a quarter-hour"
-      },
-      "generateRequest": [],
-      "encounterOps": [],
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white now warming at the corridor's far mouth where early spring light enters. The lane outside is quieter; apprentices have moved off around the far corner.",
+      "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white, warming toward the far mouth where early spring light enters. The lane outside is quiet; apprentices have moved off.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "leaning against the corridor wall, arms loosely crossed, sash undone at the ends — watching the character with calm, unh"
+          "state": "leaning against the corridor wall, arms loosely crossed, head tilted slightly — watching the character with calm, unhurr"
         }
       ],
       "objects": [
         "Lower Filtration Ledger — tucked under the character's arm",
         "Array-office door — closed, re-latched behind",
-        "Light-guide strip — cold blue-white, warming toward the corridor mouth",
+        "Light-guide strip — cold blue-white, warming toward corridor mouth",
         "District Common Hall accountability board — Fendt's name in red chalk, no accomp",
         "Light-guide street paving — gap noticeably wider with three stones removed"
       ],
       "threads": [
-        "Lira has noticed the ledger and chosen not to name it — her silence on that is deliberate",
+        "Lira has noticed the ledger and chosen not to name it — and just now noticed something else in the character she isn't naming either",
         "Fendt's red chalk marking sits unanswered on the board",
         "Keeper Aldris Vael is somewhere in the district, beginning their morning",
         "The ledger's value depends entirely on whose hands receive it next",
@@ -342,7 +303,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [],
@@ -387,7 +348,8 @@
       },
       "relationship": 1,
       "history": [
-        "[d1] Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open."
+        "[d1] Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open.",
+        "[d1] Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting."
       ],
       "knownFacts": [
         "She was waiting for the character in the corridor",
@@ -398,7 +360,7 @@
         "patience"
       ],
       "status": "active",
-      "statusNote": "Present in the service corridor behind the Common Hall, waiting near the character in an unhurried nearness",
+      "statusNote": "Present in the service corridor behind the Common Hall; watching the character with quiet, unhurried attention.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -423,7 +385,11 @@
       },
       "lastVisit": 1,
       "vectorsKnown": [
-        "dark_light"
+        "dark_light",
+        "falsehood_truth",
+        "concrete_abstract",
+        "mechanical_spiritual",
+        "violence_peace"
       ],
       "subPlaces": {
         "district-common-hall": {
@@ -515,11 +481,11 @@
     "reason": 6,
     "insight": 8,
     "presence": 6,
-    "rapport": 6,
+    "rapport": 8,
     "craft": 6,
     "wits": 6
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
@@ -653,19 +619,19 @@
     }
   },
   "tendencies": {
-    "social": 0.9801495006250001,
-    "strategic": 7.955099875,
-    "cautious": 1.99,
-    "cerebral": 0.995,
-    "physical": 0.995,
-    "ruthless": 0.995
+    "social": 0.9752487531218751,
+    "strategic": 7.9153243756250005,
+    "cautious": 1.98005,
+    "cerebral": 1.9900250000000002,
+    "physical": 0.990025,
+    "ruthless": 0.990025
   },
   "aptitudes": [],
-  "actionCount": 5,
+  "actionCount": 6,
   "grantsVersion": 1,
   "reconcileVersion": 5,
-  "updatedAt": 1784134603222,
-  "rev": 39,
+  "updatedAt": 1784134702777,
+  "rev": 42,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -806,7 +772,7 @@
     "uses": {
       "boundary_stone": 4,
       "echo_memory": 4,
-      "prism_sight": 8,
+      "prism_sight": 9,
       "sonic_resonance": 4
     },
     "coActivations": {
@@ -823,7 +789,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 1
+    "valley": 2
   },
   "foreclosed": []
 }

@@ -38,14 +38,15 @@ CCode reviewed SNG-101/102 as the dependent pair. **Aevi verified all structural
 
 **Affirmed by CCode (survived the rework):** station-vs-ceiling decoupling · directional keep-the-ground foreclosure · endgame-falls-out-of-geometry · Law-9 offer-vs-commit (the `markDefiningMoment` pattern) · skilltree `state` → `FORECLOSED` extends cleanly.
 
-### 🔢 RE-SEQUENCED BUILD ORDER (Aevi authored → CCode builds top-down)
+### 🔢 BUILD ORDER — ✅ ALL SHIPPED v1.8.61–63 · complete_pending_review (results `po/results/20260714_domain_growth_arc.md`)
 ```
-1. ✅ Ability-arch classification pass  (247 → 241 native / 6 combination; DONE, verified at origin — braid exemption now buildable)
-2. SNG-100b — Standing Bar            (per-people standing + teacher + region; closes SNG-049/050 gap)
-3. SNG-101 — Domain Promotion         (additive; foreclosure gates learn + both rank paths; braid-exempt)
-4. SNG-102 — Domain Acquisition       (lands on the above, almost no new surface)
+1. ✅ Ability-arch classification pass  (247 → 241 native / 6 combination)
+2. ✅ SNG-100b — Standing Bar   v1.8.61 — standingWithPeople (source b: peopleDisposition + peopleStandingBands) · meetsStandingBar WIRED into learnAbility (closes SNG-049/050) · durable teachers{} + regionsKnown{} + markTeacher op. Also fixed the Phase-1 CI braid conflation (6 braids are combination, no combinationAxis).
+3. ✅ SNG-101 — Domain Promotion v1.8.62 — additive §2 (strings + foreclosed[] / domainCeilings{} / domainsAcquired[]; zero type change) · domainAccess generalized (ceiling override, acquired iteration, foreclosed-natives-only) · promotionEligible/promote (Law-14 throw-on-lower) · foreclosure gates learn + BOTH rank paths, braids exempt · offerPromotion op · Domains panel + commit modal · skilltree FORECLOSED state.
+4. ✅ SNG-102 — Domain Acquisition v1.8.63 — acquirable/acquireDomain (Tier-I entry, forecloses joined antipode; closed-opposite never loosened) · offerAcquisition op · "join a people" cards + modal. No new schema.
 ```
-**All four awaiting Aevi content / CCode build — only Aevi promotes to build.**
+**25 new smoke tests; fresh-port verified against real content at each version; npm test green; clean boot. Only Aevi closes.**
+**Design latitude taken (spec-delegated):** standing = peopleDisposition (b); thresholds in resolution.json not traditions.json (the `rules` bag every gate gets); region gate loose (no people→region content map — flagged); acquisition candidates teacher-bounded.
 
 ---
 

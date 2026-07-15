@@ -1161,66 +1161,39 @@
         "player": "Do you know the girl and the dog?  Or are they out of place?",
         "summary": "Pell identifies the girl as Fen's niece; the dog is unknown, follows her in from the upper meadow path.",
         "narration": "You glance toward the path where the girl and her hoop disappeared — down the slope toward the village edge, the dog already a grey blur forty paces behind her. Neither in a hurry, neither looking back.\n\nPell tracks your gaze. \"Don't know the dog,\" she says, flat and easy, the way she'd say she doesn't know a tool's maker. \"Girl's Fen's niece — stays some mornings when Fen's working the channel early. She runs that hoop from the north gate to the well and back until someone feeds her.\" She pauses, hands on her apron. \"Dog turns up with her sometimes. Not hers. Follows her in from the upper meadow path.\"\n\nHuginn makes a short sound from the ashlar edge. Not a croak — something drier. It is watching the direction the dog went, not the girl.\n\nPell glances at the bird, then at you. \"It's not a local dog,\" she adds, as if she'd just worked that out herself. \"I'd have shod it by now if it were.\""
+      },
+      {
+        "player": "The dog coming in from the upper meadow path catches. Ask Pell if she's seen it before — and when it started appearing.",
+        "summary": "Pell places the unknown dog's first appearance at three weeks back — same span as the sleeve failures and the boar displacement.",
+        "narration": "The dog is already gone — just the trampled grass where it cut back toward the upper meadow path, and Huginn still watching that direction with the particular quality of attention it reserves for things it has already filed away.\n\n\"Started showing up maybe three weeks back,\" Pell says. She's not looking at the path anymore; she's back on the valve housing, tracing the lip angle with one finger. \"Give or take. Always with the girl, always in from the north. Never comes down into the village proper — turns back at the edge.\" She taps the iron once, a flat sound. \"First time I saw it I thought it was a farm dog that had wandered. But it's the same animal every time, same route, same behavior. And it's not a farm dog.\"\n\nShe doesn't elaborate on how she knows that. You have watched her read material evidence for two days and you understand she means it the way she'd mean a joint is forge-welded rather than riveted — not a feeling, a fact, the kind that comes from knowing what farm dogs look like under working conditions.\n\nHuginn drops from the ashlar surround and lands in the damp grass a few paces toward the upper meadow path. It stands there, not moving in that direction, just marking the bearing. Then it looks at you.\n\nThree weeks. The same span as the boar pushing off the riverside sedge. The same span as Mara's first sleeve blank sale."
       }
     ],
     "lastTurn": {
-      "narration": "You glance toward the path where the girl and her hoop disappeared — down the slope toward the village edge, the dog already a grey blur forty paces behind her. Neither in a hurry, neither looking back.\n\nPell tracks your gaze. \"Don't know the dog,\" she says, flat and easy, the way she'd say she doesn't know a tool's maker. \"Girl's Fen's niece — stays some mornings when Fen's working the channel early. She runs that hoop from the north gate to the well and back until someone feeds her.\" She pauses, hands on her apron. \"Dog turns up with her sometimes. Not hers. Follows her in from the upper meadow path.\"\n\nHuginn makes a short sound from the ashlar edge. Not a croak — something drier. It is watching the direction the dog went, not the girl.\n\nPell glances at the bird, then at you. \"It's not a local dog,\" she adds, as if she'd just worked that out herself. \"I'd have shod it by now if it were.\"",
-      "sceneSummary": "Pell identifies the girl as Fen's niece; the dog is unknown, follows her in from the upper meadow path.",
+      "narration": "The dog is already gone — just the trampled grass where it cut back toward the upper meadow path, and Huginn still watching that direction with the particular quality of attention it reserves for things it has already filed away.\n\n\"Started showing up maybe three weeks back,\" Pell says. She's not looking at the path anymore; she's back on the valve housing, tracing the lip angle with one finger. \"Give or take. Always with the girl, always in from the north. Never comes down into the village proper — turns back at the edge.\" She taps the iron once, a flat sound. \"First time I saw it I thought it was a farm dog that had wandered. But it's the same animal every time, same route, same behavior. And it's not a farm dog.\"\n\nShe doesn't elaborate on how she knows that. You have watched her read material evidence for two days and you understand she means it the way she'd mean a joint is forge-welded rather than riveted — not a feeling, a fact, the kind that comes from knowing what farm dogs look like under working conditions.\n\nHuginn drops from the ashlar surround and lands in the damp grass a few paces toward the upper meadow path. It stands there, not moving in that direction, just marking the bearing. Then it looks at you.\n\nThree weeks. The same span as the boar pushing off the riverside sedge. The same span as Mara's first sleeve blank sale.",
+      "sceneSummary": "Pell places the unknown dog's first appearance at three weeks back — same span as the sleeve failures and the boar displacement.",
       "choices": [
         {
-          "label": "Leave the dog for now — the east furlong valve site is the next stop. Ask Pell if both sleeve failures point at the same upstream source stress, or if one could be independent.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "The dog coming in from the upper meadow path catches. Ask Pell if she's seen it before — and when it started appearing.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use The Attended End quietly on the valve housing before moving on — confirm whether this intake is still ending or whether the failure has run its course.",
+          "label": "Apply Order-Sense to the valve housing — read the whole design this fitting is part of, including the east furlong connection, and see whether the two failures share a root structure or diverged at the sleeve.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.4
+            "chaos_order": 0.3
           },
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 4,
+          "abilityId": "order_sense",
+          "energyCost": 3,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Head east to the furlong site now. The timeline note has two failure dates — walk Pell through the interval gap between them and see if she reads the same source stress in both.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Note the dog timeline on the Valve Failure Timeline — three weeks, upper meadow path, same span as the first sleeve failure. Keep the record tight before walking to the east furlong.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -1232,28 +1205,55 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Ask Pell what she'd want to check next — the east furlong site, or something about the intake itself she hasn't named aloud yet.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk the upper meadow path a short distance — just enough to see what's at the north end of the dog's route — before heading east.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew burning off. The iron-sleeve valve housing sits in ashlar surrounds; cover lip off true at northwest quadrant. The girl with the hoop has gone down the slope toward the village. The dog has followed her, now out of sight.",
+        "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew burning off. The iron-sleeve valve housing sits in ashlar surrounds; cover lip off true at northwest quadrant. Huginn has landed in the damp grass a few paces toward the upper meadow path, marking the bearing northward.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the ashlar surround, apron-thumb wiped, eyes still tracking where the dog went."
+            "state": "Crouching back at the valve housing, tracing the cover lip angle with one finger."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the ashlar surround edge, watching the direction the dog went."
+            "state": "Standing in the damp grass a few paces toward the upper meadow path, looking at Silas."
           }
         ],
         "objects": [
@@ -1269,7 +1269,7 @@
           "Sleeve torque direction not yet established — same source stress as east furlong, or two separate failures?",
           "East furlong valve site not yet visited",
           "Dara Holt still needs full framing before she acts on the east channel",
-          "The dog from the upper meadow path — not a local animal; Huginn watched it go"
+          "The unknown dog: first appeared three weeks back, upper meadow path, same span as sleeve failures and boar displacement — Huginn has marked the bearing"
         ]
       },
       "npcUpdates": [
@@ -1278,56 +1278,62 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know.",
+          "note": "Named the unknown dog's first appearance as three weeks back — always with Fen's niece, always from the north, never entering the village proper. Identified it as not a farm dog without elaborating.",
           "learned": [
-            "The girl is Fen's niece — stays some mornings when Fen works the channel early",
-            "The dog is not local — turns up with the girl from the upper meadow path; Pell has never shod it"
+            "The unknown dog first appeared approximately three weeks ago — same span as the first sleeve blank failure",
+            "The dog always arrives from the upper meadow path with Fen's niece and always turns back at the village edge",
+            "Pell has assessed it as not a farm dog by behavior and presence"
           ],
-          "skillsObserved": [],
+          "skillsObserved": [
+            "reading animal behavior against a known baseline"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At Fen's intake valve site with Silas, having read the housing failure — now standing, watching where the dog went."
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [
+          "statusNote": "At Fen's intake valve site with Silas, back examining the valve housing after naming the dog."
+        },
         {
-          "note": "An unknown dog follows Fen's niece in from the upper meadow path on some mornings — not a local animal; Huginn watched it go on World-day 15 morning.",
-          "subPlace": {
-            "name": "Fen's Intake Valve Site",
-            "note": "Iron-sleeve valve housing in ashlar surrounds — cover lip off true at northwest quadrant, sleeve blank failure confirmed by Pell on World-day 15 morning.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion",
+          "note": "Dropped from the ashlar surround and landed in the grass marking the northward bearing of the dog's route. Made its significance plain without a sound.",
+          "learned": [
+            "Marked the upper meadow path bearing after Pell named the dog's three-week appearance"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing in the damp grass at Fen's intake, marking the upper meadow path bearing, watching Silas."
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-unknown-dog",
-          "label": "The Dog from the Upper Meadow",
+          "label": "The Unknown Dog",
           "kind": "mystery",
-          "fact": "An unknown dog follows Fen's niece in from the upper meadow path on some mornings. Not a local animal — Pell has no record of it. Huginn watched it leave with notable attention.",
+          "fact": "First appeared approximately three weeks ago — same span as Mara's first sleeve blank sale and the boar displacement from the riverside sedge. Arrives from the upper meadow path with Fen's niece; never enters the village proper; turns back at the edge. Pell assessed it as not a farm dog. Huginn marked the bearing.",
           "links": [
-            "millbrook",
             "the-water-crisis",
-            "huginn"
+            "millbrook",
+            "dara-holt"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the valve site — a few minutes at most."
-      }
+        "why": "a brief exchange at the valve site"
+      },
+      "scene_ended": false
     },
     "sceneState": {
-      "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew burning off. The iron-sleeve valve housing sits in ashlar surrounds; cover lip off true at northwest quadrant. The girl with the hoop has gone down the slope toward the village. The dog has followed her, now out of sight.",
+      "setting": "At Fen's intake valve site, open scrubland path, morning — low pale light, dew burning off. The iron-sleeve valve housing sits in ashlar surrounds; cover lip off true at northwest quadrant. Huginn has landed in the damp grass a few paces toward the upper meadow path, marking the bearing northward.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the ashlar surround, apron-thumb wiped, eyes still tracking where the dog went."
+          "state": "Crouching back at the valve housing, tracing the cover lip angle with one finger."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the ashlar surround edge, watching the direction the dog went."
+          "state": "Standing in the damp grass a few paces toward the upper meadow path, looking at Silas."
         }
       ],
       "objects": [
@@ -1343,7 +1349,7 @@
         "Sleeve torque direction not yet established — same source stress as east furlong, or two separate failures?",
         "East furlong valve site not yet visited",
         "Dara Holt still needs full framing before she acts on the east channel",
-        "The dog from the upper meadow path — not a local animal; Huginn watched it go"
+        "The unknown dog: first appeared three weeks back, upper meadow path, same span as sleeve failures and boar displacement — Huginn has marked the bearing"
       ]
     }
   },
@@ -1491,7 +1497,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Held the nearer stand-position through the Attended End read — eyes on Silas's hand at the hook, reading the read. Waiting.",
         "[d2] Watched Silas work the grid marks — waiting on the report. Boot still on the nearer stone.",
         "[d2] Listening to the four-episode summary — waiting on Silas's full read before moving to the valve sites.",
         "[d2] Received the full grid summary — four episodes, three-beat grammar, clean removal at completion. Confirmed the post-removal failure sequence without prompting. Boot off the stone, ",
@@ -1500,28 +1505,29 @@
         "[d2] Narrowed the last return visit to a seasonal condition-triggered check — melt or first freeze — and placed it one to two winters back. Did not finish the alternative clause (couldn",
         "[d2] Named the two-winter slip model unprompted — first unmanaged melt starts the slip, second winter carries it to the channel. Now reading the valve cover from a distance.",
         "[d2] Read the valve housing immediately on arrival — identified twisted sleeve and torqued cover as the failure mode without prompting. Named the east furlong comparison as the next dia",
-        "[d2] Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know."
+        "[d2] Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know.",
+        "[d2] Named the unknown dog's first appearance as three weeks back — always with Fen's niece, always from the north, never entering the village proper. Identified it as not a farm dog wi"
       ],
       "knownFacts": [
-        "The stain bands read as three distinct layers above the old bleed-line — two to three winters; return visits were seasonal and condition-triggered, not calendar",
-        "Seasonal condition-triggered maintenance would demand a check at melt or first freeze — pressure, drainage, and temperature all shift at the turn",
-        "The topmost stain band is consistent with a final visit at autumn freeze one to two winters ago",
         "The contamination came long after the removal — the watershed did not respond immediately",
         "First unmanaged melt after device removal would begin structural slip; second winter needed to reach the channel",
         "Sleeve blank failure causes axial torque in the iron sleeve, which rides the cover lip up — identifiable by lip angle and knuckle-tap on the housing",
         "The girl is Fen's niece — stays some mornings when Fen works the channel early",
-        "The dog is not local — turns up with the girl from the upper meadow path; Pell has never shod it"
+        "The dog is not local — turns up with the girl from the upper meadow path; Pell has never shod it",
+        "The unknown dog first appeared approximately three weeks ago — same span as the first sleeve blank failure",
+        "The dog always arrives from the upper meadow path with Fen's niece and always turns back at the village edge",
+        "Pell has assessed it as not a farm dog by behavior and presence"
       ],
       "skillsObserved": [
-        "connecting buried structure findings to surface infrastructu",
         "rapid synthesis of structural evidence into operational conc",
         "reading deposit grain accumulation layers for temporal seque",
         "reading temporal evidence from deposit grain accumulation ag",
         "synthesis of temporal evidence into a physical mechanism mod",
-        "rapid physical diagnosis of iron sleeve failure mode from co"
+        "rapid physical diagnosis of iron sleeve failure mode from co",
+        "reading animal behavior against a known baseline"
       ],
       "status": "active",
-      "statusNote": "At Fen's intake valve site with Silas, having read the housing failure — now standing, watching where the dog went.",
+      "statusNote": "At Fen's intake valve site with Silas, back examining the valve housing after naming the dog.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2266,28 +2272,32 @@
         "label": "The Dog from the Upper Meadow",
         "kind": "mystery",
         "facts": [
-          "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings. Not a local animal — Pell has no record of it. Huginn watched it leave with notable attention."
+          "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings. Not a local animal — Pell has no record of it. Huginn watched it leave with notable attention.",
+          "[d2] First appeared approximately three weeks ago — same span as Mara's first sleeve blank sale and the boar displacement from the riverside sedge. Arrives from the upper meadow path with Fen's niece; neve"
         ],
         "links": [
           "millbrook",
           "the-water-crisis",
-          "huginn"
+          "huginn",
+          "dara-holt"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Unknown Dog"
+        ],
         "createdDay": 2,
         "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 54.433360269566734,
-    "cerebral": 44.90069873629221,
-    "social": 50.90381362457723,
-    "generous": 15.195778114082875,
-    "cautious": 44.893807014496744,
-    "physical": 1.2740737035785155,
-    "risky": 3.137222262783707,
-    "ruthless": 0.6498078359349755
+    "strategic": 55.1611934682189,
+    "cerebral": 44.67619524261075,
+    "social": 50.64929455645434,
+    "generous": 15.11979922351246,
+    "cautious": 45.66933797942426,
+    "physical": 1.2677033350606228,
+    "risky": 3.1215361514697886,
+    "ruthless": 0.6465587967553006
   },
   "aptitudes": [
     "strategist",
@@ -2295,7 +2305,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 175,
+  "actionCount": 176,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2381,8 +2391,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784081382226,
-  "rev": 246,
+  "updatedAt": 1784081567424,
+  "rev": 247,
   "generated": {
     "schemaVersion": 1,
     "npc": {

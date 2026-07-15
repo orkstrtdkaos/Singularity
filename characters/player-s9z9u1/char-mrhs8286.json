@@ -41,9 +41,9 @@
   "alignment": {
     "spectrumId": -0.578310661491548,
     "violence_peace": 0.09798375000000001,
-    "chaos_order": 0.1761642598126745,
+    "chaos_order": 0.17735604682204079,
     "mechanical_spiritual": 0.16334416206305885,
-    "concrete_abstract": -0.0724033000413612,
+    "concrete_abstract": -0.053783135039293134,
     "death_life": -0.13614988685996135,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -1246,107 +1246,86 @@
         "player": "Tell her her lungs are like a bellows and her ears are the forge fire!",
         "summary": "Silas calls Pell's lungs a bellows and her ears the forge fire — her involuntary file-gesture breaks her stride twice over.",
         "narration": "The north cut opens slightly as the soil-rise levels out, and you have about enough breath to be a problem.\n\n\"Your lungs,\" you call, pulling to within two strides of her shoulder, \"are a bellows. Efficient. Relentless. Genuinely impressive capacity.\" You pause for exactly one step. \"Your ears are the forge fire — they hear everything and give back heat.\"\n\nPell runs for three full seconds without responding.\n\nThen her left hand comes up and makes a gesture — short, precise, the kind of thing you do when you're holding a file and want someone to stop talking without actually stopping the work. It is completely involuntary and she knows it the moment she does it, because the stride breaks again, that same half-beat of shoulders-wrong-for-running that is, you're learning, the thing her body does when something is funnier than she wants to admit.\n\n\"Keep going,\" she says. Flat. The flatness itself is the tell.\n\nHuginn drops through a gap in the canopy forty feet ahead, lands on a fence-post stub that has absolutely no business being this far into the north cut, and watches you both pass with the particular quality of attention it reserves for things that are not dying but are perhaps making poor decisions."
+      },
+      {
+        "player": "Ask Huginn, loudly, which one of you it thinks is going to win",
+        "summary": "Huginn consulted on the race; he flew north without answering, which was an answer.",
+        "narration": "The fence-post stub is forty feet ahead, and Huginn is on it — big and ragged and entirely unhurried, watching both of you arrive at him like a magistrate watching two late petitioners.\n\nYou have just enough wind to be dangerous.\n\n\"Huginn,\" you call out, loud enough to carry, loud enough that Pell can't pretend she didn't hear. \"Objectively. Fairly. Who wins this?\"\n\nHuginn turns his head. The calm eye finds you. Then it finds Pell. Then it finds the path between you and the wash-room — still a quarter mile of it, at least.\n\nHe makes a sound. One syllable, low and percussive, somewhere between a knock and a croak, and then he lifts off the post without apparent urgency and beats north. Not circling. Not waiting. North, at a pace that is not a race.\n\nPell makes a sound that is absolutely not a laugh and is definitely a laugh. \"That's not an answer,\" she says, without slowing.\n\n\"He's gone ahead to declare a winner in advance,\" you say. \"Very efficient.\"\n\n\"He picked the site.\" Her breathing is controlled but not effortless — she's working for it now. Half a stride ahead of you. \"I'm choosing to take that as a sign.\"\n\nShe does not say in whose favor."
       }
     ],
     "lastTurn": {
-      "narration": "The north cut opens slightly as the soil-rise levels out, and you have about enough breath to be a problem.\n\n\"Your lungs,\" you call, pulling to within two strides of her shoulder, \"are a bellows. Efficient. Relentless. Genuinely impressive capacity.\" You pause for exactly one step. \"Your ears are the forge fire — they hear everything and give back heat.\"\n\nPell runs for three full seconds without responding.\n\nThen her left hand comes up and makes a gesture — short, precise, the kind of thing you do when you're holding a file and want someone to stop talking without actually stopping the work. It is completely involuntary and she knows it the moment she does it, because the stride breaks again, that same half-beat of shoulders-wrong-for-running that is, you're learning, the thing her body does when something is funnier than she wants to admit.\n\n\"Keep going,\" she says. Flat. The flatness itself is the tell.\n\nHuginn drops through a gap in the canopy forty feet ahead, lands on a fence-post stub that has absolutely no business being this far into the north cut, and watches you both pass with the particular quality of attention it reserves for things that are not dying but are perhaps making poor decisions.",
-      "sceneSummary": "Silas calls Pell's lungs a bellows and her ears the forge fire — her involuntary file-gesture breaks her stride twice over.",
+      "narration": "The fence-post stub is forty feet ahead, and Huginn is on it — big and ragged and entirely unhurried, watching both of you arrive at him like a magistrate watching two late petitioners.\n\nYou have just enough wind to be dangerous.\n\n\"Huginn,\" you call out, loud enough to carry, loud enough that Pell can't pretend she didn't hear. \"Objectively. Fairly. Who wins this?\"\n\nHuginn turns his head. The calm eye finds you. Then it finds Pell. Then it finds the path between you and the wash-room — still a quarter mile of it, at least.\n\nHe makes a sound. One syllable, low and percussive, somewhere between a knock and a croak, and then he lifts off the post without apparent urgency and beats north. Not circling. Not waiting. North, at a pace that is not a race.\n\nPell makes a sound that is absolutely not a laugh and is definitely a laugh. \"That's not an answer,\" she says, without slowing.\n\n\"He's gone ahead to declare a winner in advance,\" you say. \"Very efficient.\"\n\n\"He picked the site.\" Her breathing is controlled but not effortless — she's working for it now. Half a stride ahead of you. \"I'm choosing to take that as a sign.\"\n\nShe does not say in whose favor.",
+      "sceneSummary": "Huginn consulted on the race; he flew north without answering, which was an answer.",
       "choices": [
         {
-          "label": "Press the advantage — keep the commentary coming while closing the last two strides",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "violence_peace": 0.7,
-            "chaos_order": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "gamble",
-            "press",
-            "charm"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Stop talking entirely — just run hard and see if silence unnerves her more than the jokes",
+          "label": "Push hard — spend what you have left and try to take the lead before the last rise",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.5,
-            "chaos_order": 0.5
-          },
           "difficulty": 15,
           "intentTags": [
-            "careful",
-            "press",
-            "scout"
+            "push",
+            "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Huginn, loudly, which one of you it thinks is going to win",
+          "label": "Hold even and read the last stretch — let the ground tell you where the decisive moment is",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Say something about Huginn having a preferred outcome — needle her one more time while you still can breathe",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.2,
-            "concrete_abstract": 0.3
-          },
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "gamble",
-            "charm"
+            "banter"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Let her lead — save the breath for the last hundred feet when it will actually count",
+          "label": "Use Shadowstep one more time — find a shadow ahead of her and step to the finish",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.6,
-            "chaos_order": 0.4
-          },
           "difficulty": 15,
           "intentTags": [
-            "careful",
-            "scout",
-            "plan"
+            "risky",
+            "gamble"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "shadowstep",
+          "energyCost": 7,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "North cut, past the pinch-point — the buried ridge has opened out, morning sun low and cold on the left slope, a fence-post stub in the path ahead where Huginn has landed.",
+        "setting": "North cut, past the fence-post stub — open slope, path running northeast toward the wash-room site a quarter mile ahead, morning sun low on the left. Both runners in motion.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Running north, one and a half strides ahead, left hand just completing an involuntary file-gesture, stride recovering"
+            "state": "Running north, half a stride ahead, breathing controlled but working"
           },
           {
             "name": "Huginn",
-            "state": "Perched on a fence-post stub forty feet ahead, watching both runners with unhurried attention"
+            "state": "Flying north ahead of both runners at a deliberate, unhurried pace"
           }
         ],
         "objects": [
           "Memory (spear, in hand)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
-          "Valve Failure Timeline note (breast pocket — annotated: CCW torque at both valve sites, wash-room as third room)"
+          "Valve Failure Timeline note (breast pocket)"
         ],
         "threads": [
-          "Race to the wash-room — Pell one and a half strides ahead, stride just broken twice",
-          "Huginn has taken a position ahead of both runners on a stub that shouldn't be here",
+          "Race to the wash-room — Pell half a stride ahead, quarter mile remaining",
+          "Huginn flew north without declaring a winner — his destination is the site",
           "Wash-room site unexamined — saddle hooks, stand-positions, unknown object in the cradle-recess",
-          "Dara Holt unbriefed — blue gate-post, bend before upper meadow",
+          "Dara Holt unbriefed",
           "When did the mechanism turn, and for whom"
         ]
       },
@@ -1356,47 +1335,50 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Involuntary file-gesture at the forge-tool insults — stride broke again; said 'keep going' in a flat register that is the tell",
-          "learned": [
-            "Her involuntary physical response to genuine amusement is a file-gesture — the body gives what the face won't"
-          ],
-          "skillsObserved": [
-            "composure recovery mid-stride",
-            "deadpan register as deflection"
-          ],
+          "note": "Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it.",
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Running north through the north cut, one and a half strides ahead — just given away more than she intended"
+          "statusNote": "Running north with Silas, half a stride ahead on the wash-room race, quarter mile to go"
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion",
+          "note": "Asked directly who would win — gave one percussive syllable and flew north to the site. Declined to answer. Was an answer.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Flying north ahead of both runners toward the wash-room site"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.1,
-        "why": "a brief exchange mid-run — less than a turn of the path"
+        "why": "a brief exchange at a run — barely a minute of banter at pace"
       }
     },
     "sceneState": {
-      "setting": "North cut, past the pinch-point — the buried ridge has opened out, morning sun low and cold on the left slope, a fence-post stub in the path ahead where Huginn has landed.",
+      "setting": "North cut, past the fence-post stub — open slope, path running northeast toward the wash-room site a quarter mile ahead, morning sun low on the left. Both runners in motion.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Running north, one and a half strides ahead, left hand just completing an involuntary file-gesture, stride recovering"
+          "state": "Running north, half a stride ahead, breathing controlled but working"
         },
         {
           "name": "Huginn",
-          "state": "Perched on a fence-post stub forty feet ahead, watching both runners with unhurried attention"
+          "state": "Flying north ahead of both runners at a deliberate, unhurried pace"
         }
       ],
       "objects": [
         "Memory (spear, in hand)",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
-        "Valve Failure Timeline note (breast pocket — annotated: CCW torque at both valve"
+        "Valve Failure Timeline note (breast pocket)"
       ],
       "threads": [
-        "Race to the wash-room — Pell one and a half strides ahead, stride just broken twice",
-        "Huginn has taken a position ahead of both runners on a stub that shouldn't be here",
+        "Race to the wash-room — Pell half a stride ahead, quarter mile remaining",
+        "Huginn flew north without declaring a winner — his destination is the site",
         "Wash-room site unexamined — saddle hooks, stand-positions, unknown object in the cradle-recess",
-        "Dara Holt unbriefed — blue gate-post, bend before upper meadow",
+        "Dara Holt unbriefed",
         "When did the mechanism turn, and for whom"
       ]
     }
@@ -1545,7 +1527,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Confirmed without hesitation: wash-room and valve sites are the same structure — different rooms, same finished margins, same intent. Named the hillside swell above the housing as ",
         "[d2] Watched Silas read the hillside without asking — waiting for the result.",
         "[d2] Confirmed the northeast line runs toward the wash-room site — a mile and a half as the crow goes, deeper in and higher. Named the valve housing plainly as the working end: whatever",
         "[d2] Confirmed east furlong valve torque direction — counterclockwise, same axis as Fen's intake. Named the failure signature plainly: one mechanism doing two things in sequence. Stated",
@@ -1554,7 +1535,8 @@
         "[d2] Led the race north from the valve housing — broke stride once at Silas's opening line, recovered fast, directed him to follow the bird.",
         "[d2] Silas read her footwork and identified the pinch-point as the decisive moment — she is still leading but her ground-knowledge has been mapped.",
         "[d2] Caught Silas's shadowstep in her periphery — gave nothing, ran harder. Gained back a step and a half at the pinch-point exit on home-ground advantage.",
-        "[d2] Involuntary file-gesture at the forge-tool insults — stride broke again; said 'keep going' in a flat register that is the tell"
+        "[d2] Involuntary file-gesture at the forge-tool insults — stride broke again; said 'keep going' in a flat register that is the tell",
+        "[d2] Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it."
       ],
       "knownFacts": [
         "The torque originated inside the structure — something turned",
@@ -1575,7 +1557,7 @@
         "deadpan register as deflection"
       ],
       "status": "active",
-      "statusNote": "Running north through the north cut, one and a half strides ahead — just given away more than she intended",
+      "statusNote": "Running north with Silas, half a stride ahead on the wash-room race, quarter mile to go",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2345,14 +2327,15 @@
     }
   },
   "tendencies": {
-    "strategic": 56.714455786599025,
-    "cerebral": 44.11522677355264,
-    "social": 52.46347235467417,
-    "generous": 14.920053938430623,
-    "cautious": 48.905476400261016,
-    "physical": 1.1700028638933884,
-    "risky": 2.8809628688022237,
-    "ruthless": 1.5967292370047992
+    "strategic": 56.43088350766603,
+    "cerebral": 43.894650639684876,
+    "social": 53.2011549929008,
+    "generous": 14.84545366873847,
+    "cautious": 48.66094901825971,
+    "physical": 1.1641528495739215,
+    "risky": 2.8665580544582125,
+    "ruthless": 1.5887455908197752,
+    "carousing": 1
   },
   "aptitudes": [
     "strategist",
@@ -2360,7 +2343,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 192,
+  "actionCount": 193,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2446,8 +2429,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784086207682,
-  "rev": 265,
+  "updatedAt": 1784086334112,
+  "rev": 266,
   "generated": {
     "schemaVersion": 1,
     "npc": {

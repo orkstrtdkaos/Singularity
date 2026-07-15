@@ -34,7 +34,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.025,
-    "spectrumId": -0.0975,
+    "spectrumId": -0.142625,
     "dark_light": 0.03
   },
   "attunement": 3,
@@ -174,94 +174,106 @@
         "player": "Use Prism Sight — let her light-history tell you something about how she's been waiting.",
         "summary": "Prism Sight overwhelmed by the corridor's saturated light-field; Lira waits, noticing without naming it.",
         "narration": "The thought arrives before you can stop it — *let the light tell you* — and you let the ability unspool, quiet and restrained, the way you'd barely breathe to hear something faint.\n\nIt doesn't give you anything clean.\n\nThe photonic field here is saturated — the corridor's own light-guide strip, the spillage of morning coming in at the far end, the crystal lattice in the walls all refracting and re-refracting — and when you try to read the layered history of the light that's touched her face, you get all of it at once, every moment of this morning compressed into one smeared instant. She has been here a long time. She was here before the apprentices, before you. There is something in the angle of her shoulder, the way her weight has settled, that suggests she has not moved since she arrived, and that she knew she wouldn't need to.\n\nThat much, you get. The rest collapses. The light-guide strip's cold blue-white wrote itself over everything — you can't separate her waiting from the corridor's own long record, and you come back to yourself without the thread you reached for. A small ache behind the eyes. Not quite a failure, not quite a reading: a glare where you wanted depth.\n\nLira notices. Not what you did, probably — but something. The faintest tilt of her head, watching you come back to the present. She doesn't comment. She just looks at you the way people look at things they've decided to keep looking at."
+      },
+      {
+        "player": "Is there a quieter place we can go... talk?",
+        "summary": "Lira leads the character to a quiet roof terrace above the Common Hall — the ledger and the red chalk marking unseen below, the valley visible to the west.",
+        "narration": "The words come out low, unhurried — *is there a quieter place we can go... talk?* — and Lira's answer is a half-breath, something that isn't quite a smile but holds the shape of one. She straightens off the wall in a single unhurried motion, sash-ends swinging, and turns toward the far mouth of the corridor where the morning light is thickest.\n\n\"There's a roof terrace above the wick-room,\" she says, already moving. \"Nobody goes up before the afternoon count. The light's good.\"\n\nYou follow her out of the blue-white strip and into the open lane, then along a narrow cut between two crystal-lattice buildings whose walls are already warm on the south face, and up a flight of exterior stairs that cling to the rear of the Common Hall like an afterthought — iron steps, each one ringing faintly underfoot. At the top: a flat terrace, a low coping wall, a single bench left for workers who never use it. The accountability board's chalk marking is invisible from here. The photonic-crystal towers catch the midday sun above you and braid it into soft, scattered brilliance, but the terrace itself sits in modest open air, the valley floor visible to the west as a long green-grey stripe below the plateau's edge.\n\nLira leans against the coping wall and looks at you — at the ledger tucked under your arm, then at your face — and waits. She's been doing that since the corridor: waiting, watching, giving you the room to say the thing you actually mean. The morning is warm enough that neither of you needs to rush."
       }
     ],
     "lastTurn": {
-      "narration": "The thought arrives before you can stop it — *let the light tell you* — and you let the ability unspool, quiet and restrained, the way you'd barely breathe to hear something faint.\n\nIt doesn't give you anything clean.\n\nThe photonic field here is saturated — the corridor's own light-guide strip, the spillage of morning coming in at the far end, the crystal lattice in the walls all refracting and re-refracting — and when you try to read the layered history of the light that's touched her face, you get all of it at once, every moment of this morning compressed into one smeared instant. She has been here a long time. She was here before the apprentices, before you. There is something in the angle of her shoulder, the way her weight has settled, that suggests she has not moved since she arrived, and that she knew she wouldn't need to.\n\nThat much, you get. The rest collapses. The light-guide strip's cold blue-white wrote itself over everything — you can't separate her waiting from the corridor's own long record, and you come back to yourself without the thread you reached for. A small ache behind the eyes. Not quite a failure, not quite a reading: a glare where you wanted depth.\n\nLira notices. Not what you did, probably — but something. The faintest tilt of her head, watching you come back to the present. She doesn't comment. She just looks at you the way people look at things they've decided to keep looking at.",
-      "sceneSummary": "Prism Sight overwhelmed by the corridor's saturated light-field; Lira waits, noticing without naming it.",
+      "narration": "The words come out low, unhurried — *is there a quieter place we can go... talk?* — and Lira's answer is a half-breath, something that isn't quite a smile but holds the shape of one. She straightens off the wall in a single unhurried motion, sash-ends swinging, and turns toward the far mouth of the corridor where the morning light is thickest.\n\n\"There's a roof terrace above the wick-room,\" she says, already moving. \"Nobody goes up before the afternoon count. The light's good.\"\n\nYou follow her out of the blue-white strip and into the open lane, then along a narrow cut between two crystal-lattice buildings whose walls are already warm on the south face, and up a flight of exterior stairs that cling to the rear of the Common Hall like an afterthought — iron steps, each one ringing faintly underfoot. At the top: a flat terrace, a low coping wall, a single bench left for workers who never use it. The accountability board's chalk marking is invisible from here. The photonic-crystal towers catch the midday sun above you and braid it into soft, scattered brilliance, but the terrace itself sits in modest open air, the valley floor visible to the west as a long green-grey stripe below the plateau's edge.\n\nLira leans against the coping wall and looks at you — at the ledger tucked under your arm, then at your face — and waits. She's been doing that since the corridor: waiting, watching, giving you the room to say the thing you actually mean. The morning is warm enough that neither of you needs to rush.",
+      "sceneSummary": "Lira leads the character to a quiet roof terrace above the Common Hall — the ledger and the red chalk marking unseen below, the valley visible to the west.",
       "choices": [
         {
-          "label": "Close the distance — step toward her, let the nearness do what words can't yet.",
+          "label": "Show her the ledger — lay it open and let her see the numbers for herself",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "dark_light": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "connect",
-            "approach"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say something direct — 'You've been waiting a while. I'd like to know why.'",
-          "attribute": "social",
-          "subAttribute": "presence",
           "axes": {
             "falsehood_truth": 0.7
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "direct",
-            "ask"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Name the ledger — show her you know she saw it, and you're not pretending otherwise.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.8
-          },
-          "difficulty": 15,
-          "intentTags": [
+            "confide",
             "reveal",
             "trust"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask what she already knows — about Fendt, the board marking, the filtration arrays",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "probe",
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Say nothing — hold her look, and let the quiet be the question.",
+          "label": "Ask who she trusts in the district — who would know what to do with evidence like this",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "dark_light": 0.4
+            "falsehood_truth": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "wait",
-            "observe"
+            "seek-ally",
+            "plan",
+            "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Tell her about the spear, the forge, the cooling window — lay the competing pressures out honestly",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "confide",
+            "honest",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -4
-      },
       "scene": {
-        "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white, warming toward the far mouth where early spring light enters. The lane outside is quiet; apprentices have moved off.",
+        "setting": "Roof terrace above the Common Hall's wick-room, Edge District, Radiant Plateau — midday, early spring. Flat terrace with a low coping wall and one unused worker's bench; the photonic-crystal towers braid direct sunlight into scattered brilliance overhead, but the terrace itself sits in open, modest air. Valley floor visible as a long green-grey stripe to the west below the plateau's edge.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "leaning against the corridor wall, arms loosely crossed, head tilted slightly — watching the character with calm, unhurried attention after noticing something shift in them."
+            "state": "leaning against the coping wall, watching the character — eyes moving once to the ledger, then back to their face, waiting with unhurried patience"
           }
         ],
         "objects": [
           "Lower Filtration Ledger — tucked under the character's arm",
-          "Array-office door — closed, re-latched behind",
-          "Light-guide strip — cold blue-white, warming toward corridor mouth",
-          "District Common Hall accountability board — Fendt's name in red chalk, no accompanying record",
-          "Light-guide street paving — gap noticeably wider with three stones removed"
+          "Low coping wall — along the terrace edge, warm stone in the midday sun",
+          "Single worker's bench — left unused",
+          "Iron exterior staircase — the only access, visible at the terrace corner",
+          "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
-          "Lira has noticed the ledger and chosen not to name it — and just now noticed something else in the character she isn't naming either",
-          "Fendt's red chalk marking sits unanswered on the board",
+          "Lira has seen the ledger and made a choice to wait — the silence between them is an open question",
+          "Fendt's red chalk marking sits on the board directly below, unseen from here but not forgotten",
           "Keeper Aldris Vael is somewhere in the district, beginning their morning",
-          "The ledger's value depends entirely on whose hands receive it next",
-          "The runebound spear's forge window: Pell's socket-fit needs to happen before the metal cools"
+          "The runebound spear's cooling window is a competing pressure — Millbrook, Pell's forge"
         ]
       },
       "npcUpdates": [
@@ -269,34 +281,60 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting.",
-          "relationshipDelta": 0,
+          "role": "Apprentice optics-weaver, Edge District",
+          "note": "Led the character from the service corridor to the roof terrace above the wick-room — a private space she knew and chose deliberately. Watching, waiting, giving room.",
+          "learned": [
+            "She knows the district's rhythms well enough to know when and where it goes unobserved",
+            "She chose this spot specifically — not the first place she thought of, the right place"
+          ],
+          "skillsObserved": [
+            "spatial knowledge of the district",
+            "deliberate discretion"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Present in the service corridor behind the Common Hall; watching the character with quiet, unhurried attention."
+          "statusNote": "On the roof terrace above the Common Hall with the character — waiting for them to speak first"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk through the lane and up the exterior stairs — a few minutes at most"
+      },
+      "moveTo": {
+        "location": "radiant-plateau-edge-district",
+        "why": "Moved from the service corridor to the roof terrace above the Common Hall's wick-room — same district, different vantage"
+      },
+      "placeUpdates": [
+        {
+          "note": "Roof terrace above the Common Hall wick-room — a flat terrace with coping wall and one bench, accessed by exterior iron stairs; quiet during morning and midday counts, known to Lira as reliably unobserved",
+          "subPlace": {
+            "name": "Roof Terrace (Common Hall)",
+            "note": "Flat terrace above the wick-room — quiet before the afternoon count, valley floor visible to the west. Lira brought the character here for a private conversation.",
+            "visited": true
+          }
         }
       ]
     },
     "sceneState": {
-      "setting": "Service corridor behind the Common Hall, Edge District, Radiant Plateau — morning. Narrow passage, baseboard light-guide strip running cold blue-white, warming toward the far mouth where early spring light enters. The lane outside is quiet; apprentices have moved off.",
+      "setting": "Roof terrace above the Common Hall's wick-room, Edge District, Radiant Plateau — midday, early spring. Flat terrace with a low coping wall and one unused worker's bench; the photonic-crystal towers braid direct sunlight into scattered brilliance overhead, but the terrace itself sits in open, modest air. Valley floor visible as a long green-grey stripe to the west below the plateau's edge.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "leaning against the corridor wall, arms loosely crossed, head tilted slightly — watching the character with calm, unhurr"
+          "state": "leaning against the coping wall, watching the character — eyes moving once to the ledger, then back to their face, waiti"
         }
       ],
       "objects": [
         "Lower Filtration Ledger — tucked under the character's arm",
-        "Array-office door — closed, re-latched behind",
-        "Light-guide strip — cold blue-white, warming toward corridor mouth",
-        "District Common Hall accountability board — Fendt's name in red chalk, no accomp",
-        "Light-guide street paving — gap noticeably wider with three stones removed"
+        "Low coping wall — along the terrace edge, warm stone in the midday sun",
+        "Single worker's bench — left unused",
+        "Iron exterior staircase — the only access, visible at the terrace corner",
+        "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
-        "Lira has noticed the ledger and chosen not to name it — and just now noticed something else in the character she isn't naming either",
-        "Fendt's red chalk marking sits unanswered on the board",
+        "Lira has seen the ledger and made a choice to wait — the silence between them is an open question",
+        "Fendt's red chalk marking sits on the board directly below, unseen from here but not forgotten",
         "Keeper Aldris Vael is somewhere in the district, beginning their morning",
-        "The ledger's value depends entirely on whose hands receive it next",
-        "The runebound spear's forge window: Pell's socket-fit needs to happen before the metal cools"
+        "The runebound spear's cooling window is a competing pressure — Millbrook, Pell's forge"
       ]
     }
   },
@@ -340,27 +378,32 @@
     "lira": {
       "id": "lira",
       "name": "Lira",
-      "role": "Apprentice optics-weaver, Edge District, Radiant Plateau",
+      "role": "Apprentice optics-weaver, Edge District",
       "description": "Apprentice-rank sash worn loose, amber-grey eyes, at ease in ways that suggest she stopped caring about district formality some time ago. She's spoken with the character twice over the paving work and has lingered both times.",
       "firstMet": {
         "locationId": "radiant_plateau_edge",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open.",
-        "[d1] Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting."
+        "[d1] Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting.",
+        "[d1] Led the character from the service corridor to the roof terrace above the wick-room — a private space she knew and chose deliberately. Watching, waiting, giving room."
       ],
       "knownFacts": [
         "She was waiting for the character in the corridor",
-        "She is comfortable with silence and with noticing things she doesn't name"
+        "She is comfortable with silence and with noticing things she doesn't name",
+        "She knows the district's rhythms well enough to know when and where it goes unobserved",
+        "She chose this spot specifically — not the first place she thought of, the right place"
       ],
       "skillsObserved": [
         "discretion",
-        "patience"
+        "patience",
+        "spatial knowledge of the district",
+        "deliberate discretion"
       ],
       "status": "active",
-      "statusNote": "Present in the service corridor behind the Common Hall; watching the character with quiet, unhurried attention.",
+      "statusNote": "On the roof terrace above the Common Hall with the character — waiting for them to speak first",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -374,7 +417,8 @@
         "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
         "[d1] One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach.",
         "[d1] Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider.",
-        "[d1] The lower filtration ledger is no longer in the array-office — removed this morning. The door was re-latched but shows signs of forced entry on close inspection."
+        "[d1] The lower filtration ledger is no longer in the array-office — removed this morning. The door was re-latched but shows signs of forced entry on close inspection.",
+        "[d1] Roof terrace above the Common Hall wick-room — a flat terrace with coping wall and one bench, accessed by exterior iron stairs; quiet during morning and midday counts, known to Lira as reliably unobse"
       ],
       "flags": {
         "fendt_board_marking": "red_chalk_no_record",
@@ -403,6 +447,12 @@
           "day": 1,
           "visited": true,
           "note": "Sealed service office for lower filtration array records — ledger now missing, latch slightly marked."
+        },
+        "roof-terrace-common-hall-": {
+          "name": "Roof Terrace (Common Hall)",
+          "day": 1,
+          "visited": true,
+          "note": "Flat terrace above the wick-room — quiet before the afternoon count, valley floor visible to the west. Lira brought the "
         }
       }
     }
@@ -619,19 +669,19 @@
     }
   },
   "tendencies": {
-    "social": 0.9752487531218751,
-    "strategic": 7.9153243756250005,
-    "cautious": 1.98005,
-    "cerebral": 1.9900250000000002,
-    "physical": 0.990025,
-    "ruthless": 0.990025
+    "social": 1.9703725093562658,
+    "strategic": 7.875747753746875,
+    "cautious": 1.97014975,
+    "cerebral": 1.9800748750000001,
+    "physical": 0.985074875,
+    "ruthless": 0.985074875
   },
   "aptitudes": [],
-  "actionCount": 6,
+  "actionCount": 7,
   "grantsVersion": 1,
   "reconcileVersion": 5,
-  "updatedAt": 1784134702777,
-  "rev": 42,
+  "updatedAt": 1784134803258,
+  "rev": 43,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -789,7 +839,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 2
+    "valley": 3
   },
   "foreclosed": []
 }

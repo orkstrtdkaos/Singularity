@@ -177,6 +177,41 @@
       "qty": 1,
       "description": "A chalk-written scrap from Mara — two names from the old pass circuit with Edge District ties. Sorel: spice-broker, wintered in the Edge District two years. Leth: archivist type, likely still there.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Hard Tallow Block",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Rendered and pressed flat — good for leather, boots, rope-ends, and a dozen trail needs.",
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Oilcloth Fold",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Heavy enough to shed a night of rain, light enough to pack small.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Pine-Tar Salve Tin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Dara's recipe — for cracked skin, rope-burn, and anything the cold gets into.",
+      "effects": {
+        "health": 2
+      },
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Mara's Offset Note",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A torn strip in Mara's hand — her initials and a figure. Adjusts Aldric's standing credit for the expedition goods.",
+      "consumable": false
     }
   ],
   "deeds": [
@@ -1409,45 +1444,58 @@
         "player": "Ask Mara if she has anything that would be useful for an expedition that will likely be needed... Pell can provide weapons and armor, but perhaps she has other useful things.",
         "summary": "Mara equips Silas with expedition basics — tallow, oilcloth, pine-tar salve — and suggests Aldric may have a second waterskin.",
         "narration": "The question lands easy — Mara is already thinking in expedition terms, you can see it in the way she turns to face the back shelves before you finish speaking. She's been running the math since you told her about the surge scope.\n\n\"Rope you have,\" she says, more to herself than to you, scanning the shelves with the same economy she applies to her ledger. She comes back with three things set on the counter in a row: a wrapped block of hard tallow — rendered and pressed flat, good for leather, boots, rope-ends, and a dozen other trail needs; a fold of oilcloth, heavy enough to shed a night of rain, light enough to pack small; and a small tin of pine-tar salve, the kind that goes on cracked skin and keeps infection out of shallow cuts. She lines them up and looks at them, then looks at you.\n\n\"Edge District in early spring means cold nights and wet passes,\" she says. \"The tallow doubles as fire-starter if the wood's damp. Salve is Dara's recipe — she'd agree you need it.\" A pause. \"I'd add a second waterskin if you have the weight for it, but I'm out of good ones. Try Aldric — he sometimes has cured bladder from the winter butchering.\"\n\nPell, at the doorframe, doesn't move, but there's a faint tilt of her chin that reads as *she's right about the oilcloth.* Mara states the price plainly — eight cord-weight for all three, or she'll hold it against the Aldric offset if you'd rather keep the ready cord for the road."
+      },
+      {
+        "player": "Take all three and run it through the Aldric offset — cleaner for the road; reduces your standing credit there.",
+        "summary": "Aldric offset settled; expedition kit packed; Mara advises briefing Aldric on the east-channel situation directly.",
+        "narration": "The decision lands cleanly. \"The Aldric offset,\" you say, and Mara nods once — already writing. She lifts the tied-off ledger, adds a line, and folds it back closed with the same quiet efficiency she brings to everything. The three items come across the counter: tallow block into the pack's side pocket where it won't bleed through, oilcloth folded flat against the bedroll, pine-tar tin tucked where you can reach it without unpacking everything. Thirty seconds of work. She doesn't watch you do it — she's already tallying something else in her head.\n\n\"Aldric's standing credit adjusted,\" she says, handing you the offset note — a single torn strip with her initials and a figure. \"Give that to him when you go. He'll know what it means.\" She pauses, then adds: \"He should also know the east furlong situation directly, if Dara hasn't already sent word. He's been watching the catch numbers and not saying anything out loud. He'll want to connect the pieces.\"\n\nPell pushes off the doorframe with a small shift of her shoulders — the posture of someone ready to move. From the step behind her, Huginn rotates his head northwest and holds it there, patient as stone.\n\nOutside, the village is waking up in earnest. A pair of farmers arguing in low, tight voices pass the well without stopping — the word *share* audible, then *upstream*, then nothing. A child chasing a dog cuts between them and almost catches it. Normal morning, except for the faint gray-green tinge where water has pooled in the ruts near the pump-base — a thin, wrong color that nobody walking past looks directly at."
       }
     ],
     "lastTurn": {
-      "narration": "The question lands easy — Mara is already thinking in expedition terms, you can see it in the way she turns to face the back shelves before you finish speaking. She's been running the math since you told her about the surge scope.\n\n\"Rope you have,\" she says, more to herself than to you, scanning the shelves with the same economy she applies to her ledger. She comes back with three things set on the counter in a row: a wrapped block of hard tallow — rendered and pressed flat, good for leather, boots, rope-ends, and a dozen other trail needs; a fold of oilcloth, heavy enough to shed a night of rain, light enough to pack small; and a small tin of pine-tar salve, the kind that goes on cracked skin and keeps infection out of shallow cuts. She lines them up and looks at them, then looks at you.\n\n\"Edge District in early spring means cold nights and wet passes,\" she says. \"The tallow doubles as fire-starter if the wood's damp. Salve is Dara's recipe — she'd agree you need it.\" A pause. \"I'd add a second waterskin if you have the weight for it, but I'm out of good ones. Try Aldric — he sometimes has cured bladder from the winter butchering.\"\n\nPell, at the doorframe, doesn't move, but there's a faint tilt of her chin that reads as *she's right about the oilcloth.* Mara states the price plainly — eight cord-weight for all three, or she'll hold it against the Aldric offset if you'd rather keep the ready cord for the road.",
-      "sceneSummary": "Mara equips Silas with expedition basics — tallow, oilcloth, pine-tar salve — and suggests Aldric may have a second waterskin.",
+      "narration": "The decision lands cleanly. \"The Aldric offset,\" you say, and Mara nods once — already writing. She lifts the tied-off ledger, adds a line, and folds it back closed with the same quiet efficiency she brings to everything. The three items come across the counter: tallow block into the pack's side pocket where it won't bleed through, oilcloth folded flat against the bedroll, pine-tar tin tucked where you can reach it without unpacking everything. Thirty seconds of work. She doesn't watch you do it — she's already tallying something else in her head.\n\n\"Aldric's standing credit adjusted,\" she says, handing you the offset note — a single torn strip with her initials and a figure. \"Give that to him when you go. He'll know what it means.\" She pauses, then adds: \"He should also know the east furlong situation directly, if Dara hasn't already sent word. He's been watching the catch numbers and not saying anything out loud. He'll want to connect the pieces.\"\n\nPell pushes off the doorframe with a small shift of her shoulders — the posture of someone ready to move. From the step behind her, Huginn rotates his head northwest and holds it there, patient as stone.\n\nOutside, the village is waking up in earnest. A pair of farmers arguing in low, tight voices pass the well without stopping — the word *share* audible, then *upstream*, then nothing. A child chasing a dog cuts between them and almost catches it. Normal morning, except for the faint gray-green tinge where water has pooled in the ruts near the pump-base — a thin, wrong color that nobody walking past looks directly at.",
+      "sceneSummary": "Aldric offset settled; expedition kit packed; Mara advises briefing Aldric on the east-channel situation directly.",
       "choices": [
         {
-          "label": "Take all three, pay the eight cord-weight now — clean transaction, credit preserved.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "trade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Take all three and run it through the Aldric offset — cleaner for the road; reduces your standing credit there.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "trade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Mara what she'd carry, if she were going — she knows the old pass circuit traders; she may know the terrain.",
+          "label": "Head straight to Aldric's smokehouse — hand him the offset note, brief him on the east-channel situation, and close out the provisioning account so you can leave.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "help",
             "plan"
           ],
           "trivial": true
         },
         {
-          "label": "Head to Aldric's smokehouse — last briefing before the road, and ask him about the cured bladder waterskin.",
+          "label": "Pause at the well first — look at the water pooled in the ruts. Use Order-Sense on it if the tinge catches your attention as something worth reading.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Ask Mara about Aldric's cured bladder waterskin before you go — two waterskins is better than one on a long road.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Or say what you do.",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
@@ -1457,38 +1505,36 @@
           "trivial": true
         }
       ],
-      "scene": {
-        "setting": "Mara Wells's store — red door east of the well, oil-and-rope smell, counter now bearing three expedition goods: tallow block, folded oilcloth, and a tin of pine-tar salve.",
-        "npcsPresent": [
+      "characterDeltas": {
+        "inventoryAdd": [
           {
-            "name": "Mara Wells",
-            "state": "Behind the counter, three items laid out, waiting for Silas's answer on payment."
+            "name": "Hard Tallow Block",
+            "kind": "consumable",
+            "description": "Rendered and pressed flat — good for leather, boots, rope-ends, and a dozen trail needs.",
+            "consumable": true,
+            "effects": {}
           },
           {
-            "name": "Pell",
-            "state": "At the doorframe, arms folded, approving the oilcloth with a chin-tilt."
+            "name": "Oilcloth Fold",
+            "kind": "tool",
+            "description": "Heavy enough to shed a night of rain, light enough to pack small.",
+            "consumable": false
           },
           {
-            "name": "Huginn",
-            "state": "On the step behind Pell, oriented northwest."
+            "name": "Pine-Tar Salve Tin",
+            "kind": "consumable",
+            "description": "Dara's recipe — for cracked skin, rope-burn, and anything the cold gets into.",
+            "consumable": true,
+            "effects": {
+              "health": 2
+            }
+          },
+          {
+            "name": "Mara's Offset Note",
+            "kind": "quest",
+            "description": "A torn strip in Mara's hand — her initials and a figure. Adjusts Aldric's standing credit for the expedition goods.",
+            "consumable": false
           }
-        ],
-        "objects": [
-          "Hard tallow block (wrapped, flat-pressed)",
-          "Oilcloth fold (heavy, packable)",
-          "Pine-tar salve tin (Dara's recipe)",
-          "Mara's tied-off ledger with timeline note folded beneath",
-          "Contact Names Scrap (Sorel, Leth)",
-          "Counter stock (rope, hardware)",
-          "Memory (spear, across shoulders)",
-          "Belt Knife",
-          "Rune-Craft Kit"
-        ],
-        "threads": [
-          "Three expedition goods on the counter — payment method undecided",
-          "Aldric briefing still pending — smokehouse is next; possible cured bladder waterskin",
-          "Huginn oriented northwest — departure pending after Aldric",
-          "Sorel and Leth as Edge District leads — whereabouts uncertain"
         ]
       },
       "npcUpdates": [
@@ -1496,71 +1542,101 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a cured-bladder waterskin.",
+          "role": "Village supply store operator, Millbrook",
+          "note": "Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situation.",
           "learned": [
-            "Mara keeps expedition logic running in the background once she knows a search is happening",
-            "Aldric sometimes has cured winter-butchering bladder that works as a waterskin"
-          ],
-          "skillsObserved": [
-            "rapid trail-kit assembly from known inventory",
-            "proactive trail advice without being asked"
+            "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her store counter, three goods laid out, waiting on payment decision."
+          "statusNote": "At her store, ledger re-tied, morning stock work resuming."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Pushed off the doorframe — ready to move; letting Silas run the final briefings.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At Mara's store doorframe, ready to move to Aldric's smokehouse."
         }
       ],
-      "codexUpdates": [
+      "scene": {
+        "setting": "Just outside Mara Wells's store — red door east of the well, early spring dawn, village waking. Ruts near the pump-base hold a thin gray-green tinge of standing water.",
+        "npcsPresent": [
+          {
+            "name": "Mara Wells",
+            "state": "Behind her counter, ledger re-tied, returning to morning stock work."
+          },
+          {
+            "name": "Pell",
+            "state": "At the doorframe, shoulders set, ready to move toward the smokehouse."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the step, oriented northwest, patient and still."
+          }
+        ],
+        "objects": [
+          "Mara's Offset Note (in hand — for Aldric)",
+          "Hard Tallow Block (in pack)",
+          "Oilcloth Fold (in pack)",
+          "Pine-Tar Salve Tin (in pack)",
+          "Contact Names Scrap (Sorel, Leth)",
+          "Memory (spear, across shoulders)",
+          "Gray-green water pooled in the ruts near the well pump-base"
+        ],
+        "threads": [
+          "Aldric briefing still pending — smokehouse is next",
+          "Mara's offset note to be handed to Aldric",
+          "Huginn oriented northwest — departure pending after Aldric",
+          "Gray-green water in the ruts — nobody walking past looks directly at it",
+          "Sorel and Leth as Edge District leads — whereabouts uncertain"
+        ]
+      },
+      "questUpdates": [
         {
-          "topic": "mara-wells",
-          "label": "Mara Wells",
-          "kind": "person",
-          "entityId": "mara-wells",
-          "fact": "Assembled expedition kit (tallow, oilcloth, pine-tar salve) without being prompted for a list — priced at eight cord-weight or Aldric offset. Flagged Aldric as a source for cured bladder waterskins from winter butchering.",
-          "links": [
-            "millbrook",
-            "aldric",
-            "aldric-provisioning-deal",
-            "the-water-crisis"
-          ]
+          "op": "progress",
+          "questId": "aldric-provisioning-deal",
+          "note": "Expedition kit settled via Aldric offset — offset note in hand. Aldric briefing on east-channel situation is the final step before departure."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at Mara's counter — goods laid out and priced, answer still pending."
+        "why": "Quick transaction at Mara's store — goods packed, offset note written, brief exchange at the doorframe."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's store — red door east of the well, oil-and-rope smell, counter now bearing three expedition goods: tallow block, folded oilcloth, and a tin of pine-tar salve.",
+      "setting": "Just outside Mara Wells's store — red door east of the well, early spring dawn, village waking. Ruts near the pump-base hold a thin gray-green tinge of standing water.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Behind the counter, three items laid out, waiting for Silas's answer on payment."
+          "state": "Behind her counter, ledger re-tied, returning to morning stock work."
         },
         {
           "name": "Pell",
-          "state": "At the doorframe, arms folded, approving the oilcloth with a chin-tilt."
+          "state": "At the doorframe, shoulders set, ready to move toward the smokehouse."
         },
         {
           "name": "Huginn",
-          "state": "On the step behind Pell, oriented northwest."
+          "state": "On the step, oriented northwest, patient and still."
         }
       ],
       "objects": [
-        "Hard tallow block (wrapped, flat-pressed)",
-        "Oilcloth fold (heavy, packable)",
-        "Pine-tar salve tin (Dara's recipe)",
-        "Mara's tied-off ledger with timeline note folded beneath",
+        "Mara's Offset Note (in hand — for Aldric)",
+        "Hard Tallow Block (in pack)",
+        "Oilcloth Fold (in pack)",
+        "Pine-Tar Salve Tin (in pack)",
         "Contact Names Scrap (Sorel, Leth)",
-        "Counter stock (rope, hardware)",
         "Memory (spear, across shoulders)",
-        "Belt Knife",
-        "Rune-Craft Kit"
+        "Gray-green water pooled in the ruts near the well pump-base"
       ],
       "threads": [
-        "Three expedition goods on the counter — payment method undecided",
-        "Aldric briefing still pending — smokehouse is next; possible cured bladder waterskin",
+        "Aldric briefing still pending — smokehouse is next",
+        "Mara's offset note to be handed to Aldric",
         "Huginn oriented northwest — departure pending after Aldric",
+        "Gray-green water in the ruts — nobody walking past looks directly at it",
         "Sorel and Leth as Edge District leads — whereabouts uncertain"
       ]
     }
@@ -1588,14 +1664,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information.",
         "Pell reads the hydraulic consequence: six-week failure window, redirected surge, blown east-channel network. Dara Holt identified as the necessary recipient of the full briefing.",
         "Failure section footprint mapped and marked on the hillside. Next step: brief Dara Holt before the east-channel network is hit.",
         "Dara's pipe-section stack reveals she has already been staging a repair schedule in silence — she knows the individual valve seats but not the surge scope. Timeline and vault footprint remain to be disclosed.",
         "Briefing complete — Dara has the surge scope and is staging mitigation. Next: brief Mara and Aldric, then identify and seek the pre-Transition expert.",
         "Dara has set a hard deadline: expert must arrive before week five. Next immediate steps: brief Mara and Aldric this morning, then begin the search for a pre-Transition systems expert.",
         "Plan set: follow Huginn northwest after briefing Mara and Aldric on the surge scope this morning.",
-        "Dara briefed and deployed — Mara and Aldric remain; Huginn oriented northwest, ready to guide after morning briefings conclude."
+        "Dara briefed and deployed — Mara and Aldric remain; Huginn oriented northwest, ready to guide after morning briefings conclude.",
+        "Expedition kit settled via Aldric offset — offset note in hand. Aldric briefing on east-channel situation is the final step before departure."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1709,7 +1785,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Went through the gate first, reached the door first, opened clean — 'We've been walking the east channel. I need to show you a date.' Exactly as she set the terms.",
         "[d2] Delivered her opening line cleanly — chin came up when Dara named the date herself; glanced back at Silas.",
         "[d2] Named World-day minus-eighteen plainly — watching Dara take it in.",
         "[d2] Named the northeast axis cleanly — handed the floor to Silas for the mechanism disclosure as agreed.",
@@ -1718,7 +1793,8 @@
         "[d2] Registered the open search direction — the expert could be from the Heights, the Plateau, the old pass circuit, or beyond the new pass. No answer named yet.",
         "[d2] Named the Radiant Plateau Edge District as the most likely source of pre-Transition structural knowledge — someone who knows the older layer beneath the optical arrays.",
         "[d2] Accepted the plan to follow Huginn northwest after morning briefings — said 'I can follow a bird' with quiet acceptance.",
-        "[d2] Accompanied Silas to Mara's store — held the doorframe and let him run the briefing without comment."
+        "[d2] Accompanied Silas to Mara's store — held the doorframe and let him run the briefing without comment.",
+        "[d2] Pushed off the doorframe — ready to move; letting Silas run the final briefings."
       ],
       "knownFacts": [
         "Is open — conditionally — to leaving if the work demands it",
@@ -1756,7 +1832,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d2] Silas has returned to the store — she looks up from the ledger.",
         "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
         "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig",
         "[d2] Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach",
@@ -1765,17 +1840,18 @@
         "[d2] Named Dara Holt unprompted — gave her location (blue gate-post, bend before upper meadow), her seniority (22 years, east channel), and advised Silas to see the site before briefing",
         "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S",
         "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F",
-        "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a "
+        "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a ",
+        "[d2] Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situatio"
       ],
       "knownFacts": [
-        "Dara and Fen share a water-right on the east bend — Dara may already have suspicions about the first failure",
         "Buried vault section will fail in six weeks — redirected surge into east-channel main feeder run",
         "Dara Holt is already staging pipe-sections",
         "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
         "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
         "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District",
         "Mara keeps expedition logic running in the background once she knows a search is happening",
-        "Aldric sometimes has cured winter-butchering bladder that works as a waterskin"
+        "Aldric sometimes has cured winter-butchering bladder that works as a waterskin",
+        "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong"
       ],
       "skillsObserved": [
         "reading the weight of a situation without needing it spelled",
@@ -1786,7 +1862,7 @@
         "proactive trail advice without being asked"
       ],
       "status": "active",
-      "statusNote": "At her store counter, three goods laid out, waiting on payment decision.",
+      "statusNote": "At her store, ledger re-tied, morning stock work resuming.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2602,15 +2678,15 @@
     }
   },
   "tendencies": {
-    "strategic": 64.80794005530763,
-    "cerebral": 45.238059818791626,
-    "social": 53.22534401641873,
-    "generous": 16.526870611821185,
-    "cautious": 53.918187143499814,
-    "physical": 1.001618708745849,
-    "risky": 3.3310489658291265,
-    "ruthless": 1.3669315913155091,
-    "carousing": 1.7250919224822296
+    "strategic": 64.48390035503108,
+    "cerebral": 45.01186951969767,
+    "social": 52.95921729633664,
+    "generous": 16.44423625876208,
+    "cautious": 53.64859620778231,
+    "physical": 0.9966106152021198,
+    "risky": 3.314393720999981,
+    "ruthless": 1.3600969333589317,
+    "carousing": 1.7164664628698185
   },
   "aptitudes": [
     "strategist",
@@ -2618,7 +2694,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 223,
+  "actionCount": 224,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2704,8 +2780,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784142664701,
-  "rev": 308,
+  "updatedAt": 1784142780534,
+  "rev": 309,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3130,7 +3206,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 18
+    "valley": 19
   },
   "foreclosed": [
     "rootkin",

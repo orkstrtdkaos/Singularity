@@ -1266,103 +1266,101 @@
         "player": "Pull her in and give her a deep and passionate kiss.  Let her breath soon though, as she's out of breath.  The watch how her face reacts.  And take her in fully - look her up and down in detail.",
         "summary": "Silas pulls Pell into a deep kiss at the wash-room entrance — she leans in, breathes, and says 'alright' again with the armor still down.",
         "narration": "You close the last distance between you — one hand at the back of her jaw where her neck meets her skull, the other finding the front of her coat — and you pull her in. The kiss is not tentative. It lands with the full weight of the morning behind it: the race, the spear's name, the wine still faint on both of you, the dawn you have not slept through so much as lived through. She is breathing hard from the run and you can feel that — the quick rise of her chest against yours, the slight catch when she leans into it rather than away. She tastes of exertion and something underneath it, something that has nothing to do with the wine. You hold it long enough to mean it, long enough that Huginn shifts his weight on the ring-hook above you with a pointed sort of patience, and then you ease back and give her the air she earned.\n\nShe takes it. One breath, two, her eyes opening slowly — the hazel darker in the low morning light, pupils wide, the focus coming back in stages like a lamp turned up by degrees. The hand she had at your jaw doesn't move. It's still there, warm, and she does not seem to have noticed that she hasn't lowered it.\n\nSo you look. Properly. She is still breathing through the run — color in her face, a flush at the throat above her collar where the skin is thinner, damp at her hairline from the effort. Her coat is open, the wool rough-woven and practical, and under it a plain linen shirt that is doing its job through a full morning of forge work and a half-mile run. She is not a slight woman — the arms that swing a forming hammer eight hours a day have shaped everything above the waist, and the set of her shoulders even now, even catching her breath, has that particular quality of someone who does not take up less space than they occupy. The boots are heavy-soled, well-kept. The file is still in her hand. She brought it all the way here without noticing.\n\nHer face, when you meet it again: the usual register is gone — the deadpan, the deliberate pause before a read lands. What's there instead is simpler. She is looking at you the way someone looks at a thing they have decided to keep but haven't worked out where to put yet. The file-hand lifts, just barely, as if it considered a gesture and thought better of it. \"Alright,\" she says, which is what she said this morning at the forge, and has the same weight now — a yes that isn't flustered, isn't swept up, but is completely meant."
+      },
+      {
+        "player": "Name date three: tell her what you want — a night, a place, something specific to the two of you",
+        "summary": "Date three named: the interference ridge at last light. Pell accepts. The cradle-recess still holds its question.",
+        "narration": "Date three named — last light, the Disputed Zone ridge, food with fat in it. Pell receives it clean. The site waits."
       }
     ],
     "lastTurn": {
-      "narration": "You close the last distance between you — one hand at the back of her jaw where her neck meets her skull, the other finding the front of her coat — and you pull her in. The kiss is not tentative. It lands with the full weight of the morning behind it: the race, the spear's name, the wine still faint on both of you, the dawn you have not slept through so much as lived through. She is breathing hard from the run and you can feel that — the quick rise of her chest against yours, the slight catch when she leans into it rather than away. She tastes of exertion and something underneath it, something that has nothing to do with the wine. You hold it long enough to mean it, long enough that Huginn shifts his weight on the ring-hook above you with a pointed sort of patience, and then you ease back and give her the air she earned.\n\nShe takes it. One breath, two, her eyes opening slowly — the hazel darker in the low morning light, pupils wide, the focus coming back in stages like a lamp turned up by degrees. The hand she had at your jaw doesn't move. It's still there, warm, and she does not seem to have noticed that she hasn't lowered it.\n\nSo you look. Properly. She is still breathing through the run — color in her face, a flush at the throat above her collar where the skin is thinner, damp at her hairline from the effort. Her coat is open, the wool rough-woven and practical, and under it a plain linen shirt that is doing its job through a full morning of forge work and a half-mile run. She is not a slight woman — the arms that swing a forming hammer eight hours a day have shaped everything above the waist, and the set of her shoulders even now, even catching her breath, has that particular quality of someone who does not take up less space than they occupy. The boots are heavy-soled, well-kept. The file is still in her hand. She brought it all the way here without noticing.\n\nHer face, when you meet it again: the usual register is gone — the deadpan, the deliberate pause before a read lands. What's there instead is simpler. She is looking at you the way someone looks at a thing they have decided to keep but haven't worked out where to put yet. The file-hand lifts, just barely, as if it considered a gesture and thought better of it. \"Alright,\" she says, which is what she said this morning at the forge, and has the same weight now — a yes that isn't flustered, isn't swept up, but is completely meant.",
-      "sceneSummary": "Silas pulls Pell into a deep kiss at the wash-room entrance — she leans in, breathes, and says 'alright' again with the armor still down.",
+      "narration": "Date three named — last light, the Disputed Zone ridge, food with fat in it. Pell receives it clean. The site waits.",
+      "sceneSummary": "Date three named: the interference ridge at last light. Pell accepts. The cradle-recess still holds its question.",
       "choices": [
         {
-          "label": "Name date three: tell her what you want — a night, a place, something specific to the two of you",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "connect",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn to the cradle-recess — read it with Order-Sense while Pell catches her breath; you're here and the site is open",
+          "label": "Read the cradle-recess with Order-Sense — see what it was part of, what it held, what the whole design looked like when it was occupied",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.6,
-            "concrete_abstract": 0.4
+            "mechanical_spiritual": 0.2,
+            "concrete_abstract": -0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask Pell what this room was — she's been here before; let her read it before you use your own sight on it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "ask",
-            "connect"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use The Attended End on the cradle-recess — let Marrow tell you plainly what is ending here, if anything is",
+          "label": "Let Deathsense read the room — not the object that's gone, but the room itself: is anything here ending, or has this place already finished what it was for?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.5,
-            "concrete_abstract": 0.3
+            "death_life": -0.3,
+            "mechanical_spiritual": 0.15
           },
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "deathsense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Ask Pell what she thinks the saddle-hooks steadied — compare her read against yours before using any ability",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Leave the site for now — you have what you need on paper; get to Dara Holt before the morning is half gone",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "The wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Two hip-height saddle-mount ring-hooks on the far wall. Cradle-recess in the floor.",
+        "setting": "The wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Cradle-recess in the floor; two hip-height saddle-mount ring-hooks on the far wall.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the entrance, breath not fully back, hand still at Silas's jaw — the file in her other hand, file-gesture arrested mid-thought. Looking at him with the armor down, saying 'alright'."
+            "state": "Standing at the cradle-recess edge, file in hand, reading the stain pattern and the saddle-hook geometry — working through it aloud, half to herself."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the high ring-hook above the doorway, shifting weight with pointed patience, watching."
+            "state": "On the high ring-hook above the doorway, watching the cradle-recess with focused professional attention."
           }
         ],
         "objects": [
@@ -1370,16 +1368,14 @@
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)",
-          "Two saddle-mount ring-hooks at hip height on the far wall",
-          "Cradle-recess in the floor",
-          "Close-fitted old mortar walls",
-          "Dressed slate floor"
+          "Two saddle-mount ring-hooks at hip height on the far wall — iron-contact stain, long use",
+          "Cradle-recess in the floor — 3 ft across, 1 ft deep, base darker than walls, iron-contact stain"
         ],
         "threads": [
-          "Date three — Silas won the race and holds the naming; Pell is waiting",
-          "Cradle-recess and saddle-hooks unexamined",
-          "Dara Holt still unbriefed on the full structural picture",
-          "When did the mechanism turn, and for whom"
+          "Date three named and accepted — last light, Disputed Zone ridge",
+          "Cradle-recess and saddle-hooks: what sat here, what it was part of",
+          "Dara Holt still unbriefed — path north, under an hour",
+          "The mechanism's clock: still running upstream, independent of the players"
         ]
       },
       "npcUpdates": [
@@ -1387,65 +1383,91 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Pulled into a deep kiss at the wash-room entrance — leaned in rather than away, let it land, said 'alright' again afterward with the same complete weight as at the forge. File still in hand; hand still at his jaw; armor fully down.",
+          "note": "Accepted date three — last light, Disputed Zone interference ridge. Specified: bring food with fat. Moved immediately to read the cradle-recess and saddle-hooks, named them as a steadying rig for something tall and load-bearing.",
           "learned": [
-            "The kiss landed with full weight and she chose to stay in it — not swept up, but completely meant",
-            "Her face after: looking at Silas the way someone looks at something they've decided to keep",
-            "Said 'alright' a second time — same word, same unflurried certainty as the first"
+            "Date three: last light at the Disputed Zone interference ridge",
+            "Knows the ridge — has been there before",
+            "Read the saddle-hooks as a stabilizing mount, not a hanging rig"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 1,
+          "skillsObserved": [
+            "structural read on load-bearing geometry",
+            "immediate transition from personal to practical without ceremony"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the wash-room site entrance, breath returning, hand at Silas's jaw, armor down — the relationship is past weight now and into something ongoing."
+          "statusNote": "At the wash-room site, reading the cradle-recess — date three accepted, armor down, file in hand."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Issued one editorial croak at the date-naming, then redirected full attention to the cradle-recess.",
+          "learned": [
+            "The cradle-recess holds Huginn's attention in a way that suggests something ended here — or something is ending"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the ring-hook above the doorway, watching the cradle-recess with focused professional attention."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Silas kissed Pell a second time at the wash-room site on World-day 15 dawn — she leaned in, held the hand at his jaw, and said 'alright' again when it broke. The relationship has moved from named mutual interest into something ongoing and physically established.",
+          "text": "Date three named by Silas on World-day 15 dawn: last light at the Disputed Zone interference ridge, food with fat, wherever the night goes. Pell accepted.",
           "subjectId": "pell"
         }
       ],
       "placeUpdates": [
         {
-          "note": "First kiss at the wash-room entrance on World-day 15 dawn — the site now carries that weight alongside its structural history.",
+          "note": "Cradle-recess identified as a load-bearing mount for something tall — iron-contact stain at base consistent with long-term object presence. Saddle-hooks read by Pell as a steadying rig, not a hanging mount.",
           "subPlace": {
             "name": "Wash-Room Site",
-            "note": "Flagged floor, saddle-mount hooks, cradle-recess — NE terminus of the buried structure, ~1.5 miles from the east furlong valve housing. Site of the race finish and of the second kiss.",
+            "note": "Flagged floor, saddle-mount hooks, cradle-recess — pre-Transition operator station, NE terminus of the buried structure. Date three named here at dawn.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Wash-room cradle-recess holds iron-contact stain consistent with a tall, load-bearing object — saddle-hooks read by Pell as a steadying rig. Something occupied this station and has been removed.",
+          "links": [
+            "millbrook",
+            "pell",
+            "dara-holt",
+            "palework",
+            "order-sense"
+          ]
+        },
+        {
           "topic": "pell",
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "Kissed a second time at the wash-room site — leaned in rather than away, held her hand at his jaw, said 'alright' with the same unflurried certainty as the first time. The armor was fully down.",
+          "fact": "Accepted date three: last light, Disputed Zone interference ridge, food with fat. Knows the ridge. Moved immediately to read the site without ceremony.",
           "links": [
             "millbrook",
-            "the-water-crisis",
-            "death-bound-spear"
+            "the-water-crisis"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief charged exchange at the wash-room entrance — a kiss, a breath, a look."
+        "why": "a brief exchange — date named, site noted, morning still early"
       }
     },
     "sceneState": {
-      "setting": "The wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Two hip-height saddle-mount ring-hooks on the far wall. Cradle-recess in the floor.",
+      "setting": "The wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Cradle-recess in the floor; two hip-height saddle-mount ring-hooks on the far wall.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the entrance, breath not fully back, hand still at Silas's jaw — the file in her other hand, file-gesture ar"
+          "state": "Standing at the cradle-recess edge, file in hand, reading the stain pattern and the saddle-hook geometry — working throu"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the high ring-hook above the doorway, shifting weight with pointed patience, watching."
+          "state": "On the high ring-hook above the doorway, watching the cradle-recess with focused professional attention."
         }
       ],
       "objects": [
@@ -1453,16 +1475,14 @@
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
         "Valve Failure Timeline note (breast pocket)",
-        "Two saddle-mount ring-hooks at hip height on the far wall",
-        "Cradle-recess in the floor",
-        "Close-fitted old mortar walls",
-        "Dressed slate floor"
+        "Two saddle-mount ring-hooks at hip height on the far wall — iron-contact stain, ",
+        "Cradle-recess in the floor — 3 ft across, 1 ft deep, base darker than walls, iro"
       ],
       "threads": [
-        "Date three — Silas won the race and holds the naming; Pell is waiting",
-        "Cradle-recess and saddle-hooks unexamined",
-        "Dara Holt still unbriefed on the full structural picture",
-        "When did the mechanism turn, and for whom"
+        "Date three named and accepted — last light, Disputed Zone ridge",
+        "Cradle-recess and saddle-hooks: what sat here, what it was part of",
+        "Dara Holt still unbriefed — path north, under an hour",
+        "The mechanism's clock: still running upstream, independent of the players"
       ]
     }
   },
@@ -1610,7 +1630,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Suggested the wash-room be added as a third column on the note — named it as an operator station with no mechanical failure, distinct from the valve rooms.",
         "[d2] Received the shoulder remark with a half-second of stillness and then flat acknowledgment — funnier than she let on. Accepted the race wager without argument, invoked the spear wei",
         "[d2] Led the race north from the valve housing — broke stride once at Silas's opening line, recovered fast, directed him to follow the bird.",
         "[d2] Silas read her footwork and identified the pinch-point as the decisive moment — she is still leading but her ground-knowledge has been mapped.",
@@ -1619,28 +1638,29 @@
         "[d2] Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it.",
         "[d2] Lost the race by three strides — caught Silas's shadowstep emerging from the bank shadow, pressed anyway on unfamiliar ground, arrived second. Breathing hard; processing defeat wit",
         "[d2] Received Silas's paradoxical concession — hand to his jaw, invited him to name the date plainly. The quiet in her face was warmer than the usual register.",
-        "[d2] Pulled into a deep kiss at the wash-room entrance — leaned in rather than away, let it land, said 'alright' again afterward with the same complete weight as at the forge. File stil"
+        "[d2] Pulled into a deep kiss at the wash-room entrance — leaned in rather than away, let it land, said 'alright' again afterward with the same complete weight as at the forge. File stil",
+        "[d2] Accepted date three — last light, Disputed Zone interference ridge. Specified: bring food with fat. Moved immediately to read the cradle-recess and saddle-hooks, named them as a st"
       ],
       "knownFacts": [
-        "Knows the northeast path and the buried ceiling line well enough to follow it without looking — has covered this ground before",
-        "Silas can move between shadows without crossing the distance between them — she has now seen it used in a footrace, which is the most absurd possible context",
-        "Her involuntary physical response to genuine amusement is a file-gesture — the body gives what the face won't",
         "Silas used shadowstep a second time — to the finishing shadow, not beside her; the technique has more range than she'd clocked",
         "Silas's most elaborate surrender was also his most honest approach — she read it and accepted it without armor",
         "The kiss landed with full weight and she chose to stay in it — not swept up, but completely meant",
         "Her face after: looking at Silas the way someone looks at something they've decided to keep",
-        "Said 'alright' a second time — same word, same unflurried certainty as the first"
+        "Said 'alright' a second time — same word, same unflurried certainty as the first",
+        "Date three: last light at the Disputed Zone interference ridge",
+        "Knows the ridge — has been there before",
+        "Read the saddle-hooks as a stabilizing mount, not a hanging rig"
       ],
       "skillsObserved": [
-        "ground-economy on a sustained run",
-        "path-exit reading at speed",
         "composure under a surprise",
         "composure recovery mid-stride",
         "deadpan register as deflection",
-        "accepting a fair loss without excess"
+        "accepting a fair loss without excess",
+        "structural read on load-bearing geometry",
+        "immediate transition from personal to practical without cere"
       ],
       "status": "active",
-      "statusNote": "At the wash-room site entrance, breath returning, hand at Silas's jaw, armor down — the relationship is past weight now and into something ongoing.",
+      "statusNote": "At the wash-room site, reading the cradle-recess — date three accepted, armor down, file in hand.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1745,7 +1765,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Pell read the column stain bands as seasonal return cycles — three distinct layers above the old bleed-line, two to three winters of accumulation. The managed visits were condition-triggered, not cale",
         "[d2] Last managed return visit to the deeper chamber narrowed to seasonal condition-triggered check — melt or first freeze, one to two winters ago. Contamination onset postdates removal by a significant in",
         "[d2] Fen's intake valve housing: cover lip off true at northwest quadrant — sleeve torqued on axis at blank failure. Physical failure mode confirmed by Pell on World-day 15 morning.",
         "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings — not a local animal; Huginn watched it go on World-day 15 morning.",
@@ -1756,7 +1775,8 @@
         "[d2] East furlong valve twist direction confirmed counterclockwise — identical to Fen's intake failure. Both valve failures now understood as one mechanism in sequence. Torque sourced from inside the struc",
         "[d2] Valve Failure Timeline note annotated with CCW torque at both valve sites and wash-room as third column — three-room structural record now in hand at the housing.",
         "[d2] Wash-room site reached and entered — flagged floor, saddle hooks, and cradle-recess now accessible for examination.",
-        "[d2] First kiss at the wash-room entrance on World-day 15 dawn — the site now carries that weight alongside its structural history."
+        "[d2] First kiss at the wash-room entrance on World-day 15 dawn — the site now carries that weight alongside its structural history.",
+        "[d2] Cradle-recess identified as a load-bearing mount for something tall — iron-contact stain at base consistent with long-term object presence. Saddle-hooks read by Pell as a steadying rig, not a hanging "
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2094,7 +2114,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Her maker's mark is a double-stamp pressed when a piece finishes becoming what it is. At the bull's kill she felt the binding close through her hand — like pressing a stamp and having the metal push b",
           "[d2] Re-seated her maker's mark in the binding under guidance — slightly off-true, accepted without complaint ('I can live with oblique'). Cut the transverse clean on a single pass. Stayed present through ",
           "[d2] Recognized old pass-circuit starfruit by taste at dawn — went somewhere briefly, came back without saying where. Received the naming of Memory without ceremony.",
           "[d2] The oblique stamp on Memory was not a slip — the iron told her hand where to go. She has made the double-stamp for eleven years and it has never done that before. She frames it as the piece needing mo",
@@ -2117,7 +2136,8 @@
           "[d2] Confirmed the northeast line runs toward her wash-room site — a mile and a half as the crow goes. Named the valve housing as the working end without hesitation.",
           "[d2] Lost the race to the wash-room site by three strides — Silas used a second shadowstep to the finishing shadow. Arrived second, breathing hard, processing it cleanly.",
           "[d2] When she has no fast deflection ready, her face goes quiet — and the quiet is warmer than the usual register. She closes distance deliberately, on her own terms, when she's decided.",
-          "[d2] Kissed a second time at the wash-room site — leaned in rather than away, held her hand at his jaw, said 'alright' with the same unflurried certainty as the first time. The armor was fully down."
+          "[d2] Kissed a second time at the wash-room site — leaned in rather than away, held her hand at his jaw, said 'alright' with the same unflurried certainty as the first time. The armor was fully down.",
+          "[d2] Accepted date three: last light, Disputed Zone interference ridge, food with fat. Knows the ridge. Moved immediately to read the site without ceremony."
         ],
         "links": [
           "millbrook",
@@ -2270,7 +2290,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Pell's full frame assessment: sound joints, clean channel, dry stone, no hydrostatic load. The sealed rooms are not water-filled. The seating-piece moved on its own — either pushed from within or a tr",
           "[d2] Near chamber confirmed: dry ashlar, three iron ring-hooks at chest height, three empty recesses below them. Whatever was held here is gone — the recesses are empty. Column stain on right wall predates",
           "[d2] Deathsense confirms: the deeper chamber holds nothing ending — whatever concluded there did so long ago. The space is on the far side of an ending with no active trajectory, no cause underway, no pivo",
           "[d2] Order-Sense confirms the near chamber was a staging space, not storage — ring-hooks held long heavy objects carried through the second aperture and used beyond it. Design predates the east channel inf",
@@ -2293,7 +2312,8 @@
           "[d2] The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the ",
           "[d2] East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing t",
           "[d2] Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle",
-          "[d2] Wash-room site reached — flagged floor, saddle-mount hooks, and cradle-recess now accessible for direct examination. This is the northeast terminus of the buried structure."
+          "[d2] Wash-room site reached — flagged floor, saddle-mount hooks, and cradle-recess now accessible for direct examination. This is the northeast terminus of the buried structure.",
+          "[d2] Wash-room cradle-recess holds iron-contact stain consistent with a tall, load-bearing object — saddle-hooks read by Pell as a steadying rig. Something occupied this station and has been removed."
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2410,15 +2430,15 @@
     }
   },
   "tendencies": {
-    "strategic": 55.58864551745368,
-    "cerebral": 43.23951749205625,
-    "social": 53.40212110448738,
-    "generous": 14.623883417050838,
-    "cautious": 47.934678271543554,
-    "physical": 1.1467777227749245,
-    "risky": 3.813799317175667,
-    "ruthless": 1.5650333642835912,
-    "carousing": 1.975099875
+    "strategic": 56.31070228986641,
+    "cerebral": 43.02331990459597,
+    "social": 53.13511049896494,
+    "generous": 14.550763999965584,
+    "cautious": 47.695004880185834,
+    "physical": 1.1410438341610498,
+    "risky": 3.7947303205897884,
+    "ruthless": 1.5572081974621732,
+    "carousing": 1.9652243756249999
   },
   "aptitudes": [
     "strategist",
@@ -2426,7 +2446,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 196,
+  "actionCount": 197,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2512,8 +2532,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784086897484,
-  "rev": 269,
+  "updatedAt": 1784087076080,
+  "rev": 270,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2814,6 +2834,12 @@
     {
       "id": "pell",
       "text": "Silas kissed Pell a second time at the wash-room site on World-day 15 dawn — she leaned in, held the hand at his jaw, and said 'alright' again when it broke. The relationship has moved from named mutu",
+      "day": 2,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Date three named by Silas on World-day 15 dawn: last light at the Disputed Zone interference ridge, food with fat, wherever the night goes. Pell accepted.",
       "day": 2,
       "subjectId": "pell"
     }

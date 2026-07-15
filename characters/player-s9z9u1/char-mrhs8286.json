@@ -1638,67 +1638,116 @@
         "player": "Before you go - tell her that asking is a skill, and she cna practice it on you... hand her the whetstone and head out the door.",
         "summary": "Silas gives Pell the whetstone and the simplest possible lesson — asking is a skill, practice it on me — and both of them walk out into the morning.",
         "narration": "You pick up the river whetstone from the bench — the exact spot she returned it to, twice — and hold it out to her on your open palm. Not a gesture, not a ceremony. Just the stone, offered.\n\n'Asking is a skill,' you say. 'You can practice it on you.'\n\nShe looks at your hand for a moment. Then she takes the whetstone and turns it once between her fingers — reading it the way she reads everything, grain and weight and what it's for — and tucks it into her coat pocket. This time she leaves it there.\n\nHuginn drops from the doorpost to your shoulder in one unhurried movement, settles, and says nothing. The forge behind you has gone fully cold. The south-lane door is open and the mid-morning light is coming through it flat and pale, early-spring without any warmth in it yet, and the lane is quiet enough that you can hear the river two blocks over running its faint gray-green sound.\n\nPell shoulders her pack, adjusts the strap once with a smith's economy of motion, and steps through the door ahead of you. She does not look back at the forge. The road north is what she knows how to want openly, and she is already wanting it."
+      },
+      {
+        "player": "Walk out with Pell and let the road settle around you both before saying anything — let the village fall behind in silence",
+        "summary": "Silas and Pell walk north out of the village in silence — a child runner catches them just short of the north gate with a cloth-wrapped message from Mara.",
+        "narration": "The south lane is narrow enough that your shoulders almost brush walking side by side. Huginn rides your left shoulder, oriented north, head moving once to clock a cat on a windowsill and then settling. Pell's pack sits square on her back, the way she carries everything — no adjustment, no shifting. Memory lies across both packs, ash shaft pale in the early light, collar rune hidden against her oilcloth roll.\n\nThe lane opens past the well, and then you are past the well, and the village begins to thin at the edges the way villages do — one more house, a fence, a garden plot with last year's bean-stakes still standing, and then the track north with the upper meadow ahead and the river sound on your left. The cold is real but not biting. The light is the thin honest kind that comes before the day commits to anything.\n\nHuginn shifts his weight once on your shoulder. Pell walks.\n\nThen — behind you, quick feet on packed earth — a child's voice: 'Warden.' Not a question. Not the retreating child from the south-lane door, but the same age, maybe, or close. A girl, seven or eight, in a worn blue wool coat two sizes large, catching up at a run. She stops four feet back when you turn, breathing hard, and holds out a folded scrap of cloth as if she's been told to deliver it and not lose it. 'Mara said to catch you before the north gate. Said you'd know what it was.'\n\nPell glances at the cloth, then at you. Huginn's head turns. The upper meadow is fifty yards ahead; the north gate, not much more."
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the river whetstone from the bench — the exact spot she returned it to, twice — and hold it out to her on your open palm. Not a gesture, not a ceremony. Just the stone, offered.\n\n'Asking is a skill,' you say. 'You can practice it on you.'\n\nShe looks at your hand for a moment. Then she takes the whetstone and turns it once between her fingers — reading it the way she reads everything, grain and weight and what it's for — and tucks it into her coat pocket. This time she leaves it there.\n\nHuginn drops from the doorpost to your shoulder in one unhurried movement, settles, and says nothing. The forge behind you has gone fully cold. The south-lane door is open and the mid-morning light is coming through it flat and pale, early-spring without any warmth in it yet, and the lane is quiet enough that you can hear the river two blocks over running its faint gray-green sound.\n\nPell shoulders her pack, adjusts the strap once with a smith's economy of motion, and steps through the door ahead of you. She does not look back at the forge. The road north is what she knows how to want openly, and she is already wanting it.",
-      "sceneSummary": "Silas gives Pell the whetstone and the simplest possible lesson — asking is a skill, practice it on me — and both of them walk out into the morning.",
+      "narration": "The south lane is narrow enough that your shoulders almost brush walking side by side. Huginn rides your left shoulder, oriented north, head moving once to clock a cat on a windowsill and then settling. Pell's pack sits square on her back, the way she carries everything — no adjustment, no shifting. Memory lies across both packs, ash shaft pale in the early light, collar rune hidden against her oilcloth roll.\n\nThe lane opens past the well, and then you are past the well, and the village begins to thin at the edges the way villages do — one more house, a fence, a garden plot with last year's bean-stakes still standing, and then the track north with the upper meadow ahead and the river sound on your left. The cold is real but not biting. The light is the thin honest kind that comes before the day commits to anything.\n\nHuginn shifts his weight once on your shoulder. Pell walks.\n\nThen — behind you, quick feet on packed earth — a child's voice: 'Warden.' Not a question. Not the retreating child from the south-lane door, but the same age, maybe, or close. A girl, seven or eight, in a worn blue wool coat two sizes large, catching up at a run. She stops four feet back when you turn, breathing hard, and holds out a folded scrap of cloth as if she's been told to deliver it and not lose it. 'Mara said to catch you before the north gate. Said you'd know what it was.'\n\nPell glances at the cloth, then at you. Huginn's head turns. The upper meadow is fifty yards ahead; the north gate, not much more.",
+      "sceneSummary": "Silas and Pell walk north out of the village in silence — a child runner catches them just short of the north gate with a cloth-wrapped message from Mara.",
       "choices": [
         {
-          "label": "Head straight north through the village and out the gate — no more stops, the road has been waiting long enough",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Take the cloth and read it now",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "move",
-            "depart"
+            "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Make one last pass by the well — fill the third waterskin from the village supply before you leave clean water behind",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Take it, pocket it, and keep walking — read it on the road past the gate",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "prepare",
             "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Pause at the south lane — check whether the child who came to the door this morning is still around. Unfinished business has a way of following.",
+          "label": "Ask the child what Mara said when she handed it over",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "investigate",
-            "help"
+            "study",
+            "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk out with Pell and let the road settle around you both before saying anything — let the village fall behind in silence",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Something else entirely",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "connect"
+            "plan"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "inventoryAdd": [
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "North end of Millbrook's south lane, just short of the well — the village thinning behind, the track north opening ahead, upper meadow visible fifty yards out. Mid-morning pale light, early spring. North gate thirty yards ahead.",
+        "npcsPresent": [
           {
-            "name": "River Whetstone (Pell's)",
-            "kind": "tool",
-            "description": "A smooth river-flat whetstone — Pell's own, returned to the bench twice and given away once. Now in her pocket, not yours.",
-            "consumable": false
+            "name": "Pell",
+            "state": "Pack square on her back, Memory across both packs — stopped, watching the child runner, waiting on Silas."
+          },
+          {
+            "name": "Huginn",
+            "state": "On Silas's shoulder, head turned toward the child and the cloth."
+          },
+          {
+            "name": "Child messenger",
+            "state": "Stopped four feet back, breathing hard from running, holding a folded cloth scrap toward Silas — waiting."
           }
         ],
-        "inventoryRemove": []
+        "objects": [
+          "Memory (spear, across both packs)",
+          "Folded cloth scrap — held by child runner, from Mara",
+          "North gate — thirty yards ahead, dry-stone gap in the village wall",
+          "Track north — visible beyond the gate, leading to upper meadow and Fen's intake"
+        ],
+        "threads": [
+          "Child runner holding a message from Mara — content unknown, delivery urgent enough to send a runner",
+          "The north gate and the road to Fen's intake remain the primary destination",
+          "The retreating child from the south-lane door — not this one; may still be about"
+        ]
       },
       "npcUpdates": [
         {
@@ -1706,90 +1755,59 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how to want openly.",
-          "learned": [
-            "Silas named asking as a learnable skill and offered himself as practice — she received it plainly"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — the forge is behind her and she did not look back."
+          "note": "Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting.",
+          "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — stopped just short of the north gate by a child runner.",
+          "status": "active"
         },
         {
           "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion",
-          "note": "Dropped from the doorpost to Silas's shoulder without ceremony. Waiting. The forge is done.",
-          "status": "active",
-          "statusNote": "On Silas's shoulder, facing north."
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Village supply store operator, Millbrook",
+          "note": "Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting.",
+          "statusNote": "At her store — but sent a runner north after Silas with new information.",
+          "status": "active"
         }
       ],
-      "scene": {
-        "setting": "South lane of Millbrook, just outside Pell's forge — mid-morning pale light, early spring, no warmth yet. The forge door is open behind them; the lane ahead runs north toward the village well and the north gate.",
-        "npcsPresent": [
-          {
-            "name": "Pell",
-            "state": "Pack shouldered, whetstone in coat pocket — walking north through the lane, ahead of Silas, not looking back."
-          },
-          {
-            "name": "Huginn",
-            "state": "On Silas's shoulder. Oriented north. Quiet."
-          }
-        ],
-        "objects": [
-          "Memory (spear, across both packs)",
-          "Expedition kit — inventoried and packed",
-          "Cured Bladder Waterskin",
-          "Contact Names Scrap (Sorel, Leth) — in the pack",
-          "Valve Failure Timeline note — in the pack",
-          "Forge door — open behind them, forge fire cold"
-        ],
-        "threads": [
-          "The child who came to the south-lane door — retreated unanswered; may still be on the lane",
-          "The third waterskin — village well is on the way north",
-          "The road north is open: Fen's intake is the first destination, twenty minutes past the upper meadow"
-        ]
-      },
-      "placeUpdates": [
+      "generateRequest": [
         {
-          "note": "Silas gave Pell the river whetstone at the forge threshold on World-day 15 mid-morning — the last thing said before departure: asking is a skill, practice it on me. The forge now stands cold and empty.",
-          "subPlace": {
-            "name": "Pell's Forge",
-            "note": "Cold and empty as of World-day 15 mid-morning — both makers departed north, forge fire ash.",
-            "visited": true
-          }
+          "type": "npc",
+          "hint": "a girl of seven or eight in an oversized blue wool coat — Mara's errand-runner, practical and out of breath",
+          "why": "The child messenger has just arrived in-scene with a cloth from Mara and needs a stable identity for future encounters"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the forge threshold before stepping out"
+        "why": "A short walk from the forge to just short of the north gate — a few minutes at most"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "South lane of Millbrook, just outside Pell's forge — mid-morning pale light, early spring, no warmth yet. The forge door is open behind them; the lane ahead runs north toward the village well and the north gate.",
+      "setting": "North end of Millbrook's south lane, just short of the well — the village thinning behind, the track north opening ahead, upper meadow visible fifty yards out. Mid-morning pale light, early spring. North gate thirty yards ahead.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Pack shouldered, whetstone in coat pocket — walking north through the lane, ahead of Silas, not looking back."
+          "state": "Pack square on her back, Memory across both packs — stopped, watching the child runner, waiting on Silas."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder. Oriented north. Quiet."
+          "state": "On Silas's shoulder, head turned toward the child and the cloth."
+        },
+        {
+          "name": "Child messenger",
+          "state": "Stopped four feet back, breathing hard from running, holding a folded cloth scrap toward Silas — waiting."
         }
       ],
       "objects": [
         "Memory (spear, across both packs)",
-        "Expedition kit — inventoried and packed",
-        "Cured Bladder Waterskin",
-        "Contact Names Scrap (Sorel, Leth) — in the pack",
-        "Valve Failure Timeline note — in the pack",
-        "Forge door — open behind them, forge fire cold"
+        "Folded cloth scrap — held by child runner, from Mara",
+        "North gate — thirty yards ahead, dry-stone gap in the village wall",
+        "Track north — visible beyond the gate, leading to upper meadow and Fen's intake"
       ],
       "threads": [
-        "The child who came to the south-lane door — retreated unanswered; may still be on the lane",
-        "The third waterskin — village well is on the way north",
-        "The road north is open: Fen's intake is the first destination, twenty minutes past the upper meadow"
+        "Child runner holding a message from Mara — content unknown, delivery urgent enough to send a runner",
+        "The north gate and the road to Fen's intake remain the primary destination",
+        "The retreating child from the south-lane door — not this one; may still be about"
       ]
     }
   },
@@ -1938,7 +1956,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received Silas's plain naming of the binding — turned her hand, closed her fingers around his, answered with 'you're going to make that hard to argue with. Good.' Both things meant",
         "[d2] Chose the door over another round — dressed efficiently, released Silas's hand without ceremony, composure reassembling as she moves. One dry remark: 'Forging. But the door first.'",
         "[d2] Turned the carter away efficiently, set the whetstone deliberately apart from the tool-clutter, asked 'Ready?' with the forge-face not quite fully back on.",
         "[d2] Watched Silas undress from across the forge-floor, forge-face coming apart as she watched — then crossed to him without hesitation, hands finding his belt with the same methodical ",
@@ -1947,7 +1964,8 @@
         "[d2] Held Memory with Silas — felt the collar at range, admitted it unprompted. Received the 'managing it badly' observation without deflecting. The tinker/farmhand question is landing.",
         "[d2] Named no prior claims plainly — one man, two winters back, sonic work from the Heights; it ran longer than it should, he stopped coming, she didn't go looking. Set the whetstone ba",
         "[d2] Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered.",
-        "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t"
+        "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t",
+        "[d2] Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting."
       ],
       "knownFacts": [
         "Silas named the bond between them explicitly — practical, physical, and warden-deep",
@@ -1968,7 +1986,7 @@
         "naming a technical and personal observation in the same regi"
       ],
       "status": "active",
-      "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — the forge is behind her and she did not look back.",
+      "statusNote": "Pack on shoulder, whetstone in pocket, walking north with Silas — stopped just short of the north gate by a child runner.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1985,7 +2003,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
         "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig",
         "[d2] Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach",
         "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
@@ -1994,7 +2011,8 @@
         "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S",
         "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F",
         "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a ",
-        "[d2] Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situatio"
+        "[d2] Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situatio",
+        "[d2] Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting."
       ],
       "knownFacts": [
         "Buried vault section will fail in six weeks — redirected surge into east-channel main feeder run",
@@ -2015,7 +2033,7 @@
         "proactive trail advice without being asked"
       ],
       "status": "active",
-      "statusNote": "At her store, ledger re-tied, morning stock work resuming.",
+      "statusNote": "At her store — but sent a runner north after Silas with new information.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2864,15 +2882,15 @@
     }
   },
   "tendencies": {
-    "strategic": 61.364672092068155,
-    "cerebral": 39.48497360882422,
-    "social": 60.39898163111807,
-    "generous": 17.698298033739714,
-    "cautious": 47.77978623242345,
-    "physical": 0.8531806787202127,
-    "risky": 2.837393703513063,
-    "ruthless": 2.1250479150044495,
-    "carousing": 1.4694365075519007
+    "strategic": 61.05784873160781,
+    "cerebral": 39.287548740780096,
+    "social": 60.09698672296248,
+    "generous": 17.609806543571015,
+    "cautious": 48.54088730126133,
+    "physical": 0.8489147753266116,
+    "risky": 2.8232067349954977,
+    "ruthless": 2.1144226754294273,
+    "carousing": 1.4620893250141411
   },
   "aptitudes": [
     "strategist",
@@ -2880,7 +2898,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 255,
+  "actionCount": 256,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2998,8 +3016,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784156239394,
-  "rev": 349,
+  "updatedAt": 1784157090656,
+  "rev": 350,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3495,7 +3513,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 56
+    "valley": 57
   },
   "foreclosed": [
     "rootkin",

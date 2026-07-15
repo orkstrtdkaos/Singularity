@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 7,
-  "xp": 634,
+  "xp": 639,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -53,7 +53,7 @@
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 130,
-  "energy": 105,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1519,71 +1519,69 @@
         "player": "Guide her hands to the one scar she's least likely to find on her own — offer it as something earned.",
         "summary": "Silas guides Pell's hands to the old burn-scar at his ribs — she finds it, names it, and answers in kind with her mouth.",
         "narration": "The scar she's least likely to find on her own is the one at the left side of your ribs, low — not a craft-mark, not a blade-slip. A burn, old enough to be silver-pale now, maybe four inches long and slightly irregular at the edges, the shape of something that caught and held before it was pulled away. It runs along the lower rib's curve in the same quiet way her tong-scar runs along her hip, and in the forge light it's nearly invisible unless you know to look.\n\nYou take her right hand from your chest and move it — not guiding exactly, more offering a direction, the way you'd hand someone a tool and let them find the grip. Her fingers read the texture before her eyes do. She dips her head, following what her hand found, and you feel her go still the way she went still when you first traced her forearm, the thinking-stillness, the one that isn't absence but attention.\n\n\"That's not a forge mark,\" she says. It isn't a question. Her thumb moves along the edge of it, careful, the same forensic patience she brought to the collar work last night. She doesn't ask what it was. What she does instead is lower her head and press her mouth to the center of it — deliberate, unhurried, the same thing you did to the hip scar, the rivet-head, the compression line at her floating rib. Equal weight. Her hands stay open on your sides, warm and still, while she takes her time with the question she's decided to ask through touch instead of words.\n\nOutside, the lane is fully awake now — a cart moving somewhere south, a voice calling between houses, the particular light of a morning that has been going on without you. Neither of you has moved toward the packs."
+      },
+      {
+        "player": "Encourage her to keep exploring (remove your pants)... tell her that there's something else you want her to find... on last piece of kit.",
+        "summary": "Silas invites Pell to find the last scar — she reads him the same way he read her, and stays.",
+        "narration": "You reach down and work the laces of your trousers, unhurried, the same economy of motion you'd use to set down a tool you're done with for the moment. No ceremony — just a plain invitation, the pants folded over the bench lip beside her shirt. Her eyes follow the movement with the same direct attention she gives a new piece of iron: interest, not performance.\n\n\"There's one more piece of kit,\" you say, plain as anything. \"Something I'd rather you find than point to.\"\n\nShe tilts her head — the small, specific angle she makes when something has her full attention — and then her hands move. She reads you the way you read her: without hurry, without asking permission at each step, tracking by texture and shape rather than sight in the low amber light. Her fingers work inward from the hip, methodical. When she finds the scar she finds it the way she found the burn at your ribs — by touch before by sight, a pause while she takes its measure.\n\nHer thumb traces it once, deliberate. Then she looks up at you — not asking, not announcing, just confirming the read — and stays there for a moment with her hand still, the forge warm behind her and the lane outside bright and moving and nowhere near this."
       }
     ],
     "lastTurn": {
-      "narration": "The scar she's least likely to find on her own is the one at the left side of your ribs, low — not a craft-mark, not a blade-slip. A burn, old enough to be silver-pale now, maybe four inches long and slightly irregular at the edges, the shape of something that caught and held before it was pulled away. It runs along the lower rib's curve in the same quiet way her tong-scar runs along her hip, and in the forge light it's nearly invisible unless you know to look.\n\nYou take her right hand from your chest and move it — not guiding exactly, more offering a direction, the way you'd hand someone a tool and let them find the grip. Her fingers read the texture before her eyes do. She dips her head, following what her hand found, and you feel her go still the way she went still when you first traced her forearm, the thinking-stillness, the one that isn't absence but attention.\n\n\"That's not a forge mark,\" she says. It isn't a question. Her thumb moves along the edge of it, careful, the same forensic patience she brought to the collar work last night. She doesn't ask what it was. What she does instead is lower her head and press her mouth to the center of it — deliberate, unhurried, the same thing you did to the hip scar, the rivet-head, the compression line at her floating rib. Equal weight. Her hands stay open on your sides, warm and still, while she takes her time with the question she's decided to ask through touch instead of words.\n\nOutside, the lane is fully awake now — a cart moving somewhere south, a voice calling between houses, the particular light of a morning that has been going on without you. Neither of you has moved toward the packs.",
-      "sceneSummary": "Silas guides Pell's hands to the old burn-scar at his ribs — she finds it, names it, and answers in kind with her mouth.",
+      "narration": "You reach down and work the laces of your trousers, unhurried, the same economy of motion you'd use to set down a tool you're done with for the moment. No ceremony — just a plain invitation, the pants folded over the bench lip beside her shirt. Her eyes follow the movement with the same direct attention she gives a new piece of iron: interest, not performance.\n\n\"There's one more piece of kit,\" you say, plain as anything. \"Something I'd rather you find than point to.\"\n\nShe tilts her head — the small, specific angle she makes when something has her full attention — and then her hands move. She reads you the way you read her: without hurry, without asking permission at each step, tracking by texture and shape rather than sight in the low amber light. Her fingers work inward from the hip, methodical. When she finds the scar she finds it the way she found the burn at your ribs — by touch before by sight, a pause while she takes its measure.\n\nHer thumb traces it once, deliberate. Then she looks up at you — not asking, not announcing, just confirming the read — and stays there for a moment with her hand still, the forge warm behind her and the lane outside bright and moving and nowhere near this.",
+      "sceneSummary": "Silas invites Pell to find the last scar — she reads him the same way he read her, and stays.",
       "choices": [
         {
-          "label": "Tell her what the burn was from — plain and straight, the way she'd want it.",
+          "label": "Tell her the story behind the scar — what it is and how it happened",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "confide",
-            "honest"
+            "intimate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Let her keep exploring without interrupting — she's asking something through touch; let her finish.",
+          "label": "Say nothing — let her keep her read, whatever she makes of it",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "patient",
-            "present"
+            "intimate",
+            "quiet"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Pull her back up and start getting ready for the road — the morning won't hold indefinitely.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Ask her — one scar she hasn't explained either. The round one at the hipbone. Make it an exchange.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "transition",
-            "practical"
+            "confide",
+            "intimate",
+            "exchange"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Pull her up to you — answer her read with your hands and close the last distance",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "intimate",
+            "direct"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Pell's forge interior, south lane of Millbrook — banked fire amber and low, the lane outside now fully awake with cart-noise and voices; early-spring morning light established at the doorway.",
+        "setting": "Pell's forge interior, south lane of Millbrook — banked fire amber and low, early-spring morning light at the doorway; the lane outside fully awake with cart-noise and voices.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Head lowered to Silas's ribs, mouth at the old burn-scar, hands open and still at his sides — exploring with the same forensic patience she brought to the collar work."
+            "state": "Kneeling or leaning close, thumb on the last scar found, looking up at Silas — hand still, full attention, no armor remaining."
           },
           {
             "name": "Huginn",
@@ -1600,11 +1598,12 @@
           "Contact Names Scrap (Sorel, Leth) — in the pack",
           "Valve Failure Timeline note — in the pack",
           "Silas's shirt — set aside",
+          "Silas's trousers — folded over the bench lip",
           "Pell's shirt — folded over the bench lip"
         ],
         "threads": [
-          "The old burn-scar at Silas's ribs — found and named by Pell; its origin unspoken",
-          "The rivet-head scar at Pell's inner hipbone — found twice, never asked about",
+          "The last scar found and held — its origin still unspoken; Pell's thumb on it, looking up",
+          "The round scar at Pell's inner hipbone — found twice, never asked about",
           "The round scar on Pell's right ribcage — found, never asked about",
           "The road north and what comes next — both of them here, the expedition waiting",
           "Date three (interference ridge, last light) and date four (snowmelt pool) both standing"
@@ -1616,44 +1615,30 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Found the old burn-scar at Silas's left ribs — named it not a forge mark, then answered with her mouth rather than a question. Hands open and attending.",
+          "note": "Found the last scar — read it by touch before sight, traced it once, then looked up with her hand still. Holding the moment without asking and without announcing.",
           "learned": [
-            "The burn-scar at Silas's lower-left ribs is old, irregular-edged, not a craft-mark — she named it before asking anything"
+            "Reads Silas by texture and shape the same way she reads iron — methodical, unhurried, no self-consciousness",
+            "When she finds something that matters, she pauses before she names it — takes its full measure first"
           ],
           "skillsObserved": [
-            "reading a scar's origin by texture and shape",
-            "answering a confidence in kind without words"
+            "reading a body's history by touch without prompting"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the forge with Silas — mouth at his ribs, morning ongoing, packs untouched."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Found the old burn-scar at Silas's lower-left ribs — named it not a forge mark by texture alone, then answered it with her mouth and open hands rather than asking its origin aloud.",
-          "links": [
-            "millbrook",
-            "the-death-bound-spear",
-            "aldric-provisioning-deal"
-          ]
+          "statusNote": "In the forge with Silas — the last scar found, her hand still on it, looking up. Packs untouched. Morning ongoing."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief intimate beat — a moment of guidance, her finding it, her answer; the lane outside marks the morning ongoing."
+        "why": "a short intimate beat in the forge, the morning still unspent"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge interior, south lane of Millbrook — banked fire amber and low, the lane outside now fully awake with cart-noise and voices; early-spring morning light established at the doorway.",
+      "setting": "Pell's forge interior, south lane of Millbrook — banked fire amber and low, early-spring morning light at the doorway; the lane outside fully awake with cart-noise and voices.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Head lowered to Silas's ribs, mouth at the old burn-scar, hands open and still at his sides — exploring with the same fo"
+          "state": "Kneeling or leaning close, thumb on the last scar found, looking up at Silas — hand still, full attention, no armor rema"
         },
         {
           "name": "Huginn",
@@ -1670,11 +1655,11 @@
         "Contact Names Scrap (Sorel, Leth) — in the pack",
         "Valve Failure Timeline note — in the pack",
         "Silas's shirt — set aside",
-        "Pell's shirt — folded over the bench lip"
+        "Silas's trousers — folded over the bench lip"
       ],
       "threads": [
-        "The old burn-scar at Silas's ribs — found and named by Pell; its origin unspoken",
-        "The rivet-head scar at Pell's inner hipbone — found twice, never asked about",
+        "The last scar found and held — its origin still unspoken; Pell's thumb on it, looking up",
+        "The round scar at Pell's inner hipbone — found twice, never asked about",
         "The round scar on Pell's right ribcage — found, never asked about",
         "The road north and what comes next — both of them here, the expedition waiting",
         "Date three (interference ridge, last light) and date four (snowmelt pool) both standing"
@@ -1826,7 +1811,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Traced Silas's rib scar with flat-handed attention — a smith's touch, reading depth and surface both. Her hand is still there. Asked 'how far down?' in a level voice that is only j",
         "[d2] Stepped in fully — hand at the small of Silas's back, then at his hip. First time her voice has been uneven. Asked to see the rest of him.",
         "[d2] Read the rib scar with two fingers, named it 'craft' without being told, and pressed her lips to its midpoint — deliberate, unhurried. Asked 'how many?' in her low, uneven register",
         "[d2] Shirt off — two more scars found and mapped by Silas's hands and mouth. Her hand resting in his hair: not directing, staying. Body honest under the reading.",
@@ -1835,28 +1819,29 @@
         "[d2] Helped ease out of her trousers without hesitation — the same plain permission as before. Two more scars found and learned: curved tong-slip on the outer left hip, rivet-head at th",
         "[d2] Spent the full early morning with Silas in the forge — honest and unhurried throughout; thumb at his cheekbone at the end, accounting for something, no armor remaining.",
         "[d2] Described fully in the forge light — shoulders, arms, stomach, all of it plain and unperformed. Invited to find Silas's scars in return; came forward off the bench without hesitati",
-        "[d2] Found the old burn-scar at Silas's left ribs — named it not a forge mark, then answered with her mouth rather than a question. Hands open and attending."
+        "[d2] Found the old burn-scar at Silas's left ribs — named it not a forge mark, then answered with her mouth rather than a question. Hands open and attending.",
+        "[d2] Found the last scar — read it by touch before sight, traced it once, then looked up with her hand still. Holding the moment without asking and without announcing."
       ],
       "knownFacts": [
-        "A curved scar on the outer left hip — old, silver-faded, from a slipped tong",
-        "A small round scar at the inner hipbone crest — flat, precise, shape of a rivet head or set screw; origin unstated",
         "Her response to sustained, thorough attention is stillness and honesty — no performance, no deflection, no pulling back",
         "When the attention is right, her hand stays in his hair; when it is very right, she grips the bench edge instead",
         "Her body is built from use, not care — shoulders broad from iron-work, forearms dominant, obliques visible when she shifts weight",
         "She watches Silas with direct, open attention when her armor is down — no self-consciousness in how she moves or adjusts",
         "When handed a task she didn't expect, her expression shifts the way someone picks up a tool — interest, not performance",
-        "The burn-scar at Silas's lower-left ribs is old, irregular-edged, not a craft-mark — she named it before asking anything"
+        "The burn-scar at Silas's lower-left ribs is old, irregular-edged, not a craft-mark — she named it before asking anything",
+        "Reads Silas by texture and shape the same way she reads iron — methodical, unhurried, no self-consciousness",
+        "When she finds something that matters, she pauses before she names it — takes its full measure first"
       ],
       "skillsObserved": [
-        "full honesty under sustained attention",
         "plain permission given without ceremony, twice",
         "receiving sustained physical attention without deflecting or",
         "transitioning from passive to active with the same plain dec",
         "reading a scar's origin by texture and shape",
-        "answering a confidence in kind without words"
+        "answering a confidence in kind without words",
+        "reading a body's history by touch without prompting"
       ],
       "status": "active",
-      "statusNote": "In the forge with Silas — mouth at his ribs, morning ongoing, packs untouched.",
+      "statusNote": "In the forge with Silas — the last scar found, her hand still on it, looking up. Packs untouched. Morning ongoing.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2847,8 +2832,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784151106795,
-  "rev": 324,
+  "updatedAt": 1784151268754,
+  "rev": 325,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3273,7 +3258,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 34
+    "valley": 35
   },
   "foreclosed": [
     "rootkin",

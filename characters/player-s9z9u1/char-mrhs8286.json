@@ -1479,90 +1479,91 @@
         "player": "Further.",
         "summary": "Pell steps in; the forge holds them both; she asks to see the rest.",
         "narration": "The word lands quiet in the forge. Pell's hand is warm against your rib, flat and still, and she holds it there another moment — not waiting for permission, not asking again, just learning whether you'll move. You don't.\n\nShe slides her hand around to the small of your back, palm full against the skin, and steps in. The forge light is low and amber and it catches the edge of her jaw, the line of her collarbone where her shirt is open. She's looking up at you with the same attention she brings to iron — pressure-reading, depth-checking — and then she tilts her chin up and you meet her there.\n\nThe kiss is slower than the wash-room. There's no wager on this one, no threshold to cross. Her other hand finds your hip and holds, and when she breaks she doesn't go far — her forehead drops to your shoulder, her breath warm against your skin. Behind you the banked fire makes its small sounds. Huginn has gone quiet on the roofline.\n\n\"Below the rib,\" she says against your shoulder — low, a little uneven, which is the first time you've heard her voice be anything but level. She lifts her head and meets your eyes. Her hand moves to the hem of your trousers, not pulling — asking. \"Show me.\""
+      },
+      {
+        "player": "Show her — stay still and let her hands do what they want.",
+        "summary": "Pell reads the full length of Silas's craft scar and presses her lips to it — the forge quiet, the morning beginning outside.",
+        "narration": "You stay still.\n\nPell's hand moves from your hip — careful, taking the time it wants — and finds the second scar below the ribs. This one is older, longer, and runs at an angle that does not follow any ordinary injury logic: not a fall, not a blade, not caught iron. She reads it with two fingers the way she read the forearm burn, pressure-conscious, tracing the depth. She goes quiet for a long moment. Her thumb finds the lower end of it and stops there.\n\n\"Craft,\" she says. Not a question. Her voice is the low, uneven register she has been finding in the last hour — the one that has nothing to do with the forge or the work. She lifts her eyes to yours and holds them there, and there is something in her face that is not pity and is not alarm. It is the particular attention of someone who has been alone with her own scars for a long time and is now looking at another person's.\n\nShe spreads her hand flat against the full length of it. Warm. Still. Then she leans in and presses her lips to the scar at its midpoint — not a kiss with any urgency behind it, just contact, deliberate and unhurried. She comes back up and her forehead finds your shoulder. \"How many?\" she asks, quiet, and the question is only about the scars.\n\nHuginn shifts on the roofline — one scrape of claw on tile — and settles again. The forge breathes low. Outside, Millbrook is beginning: someone's bucket handle rings at the well, the cookhouse chimney threads smoke into the early light. None of it reaches in here."
       }
     ],
     "lastTurn": {
-      "narration": "The word lands quiet in the forge. Pell's hand is warm against your rib, flat and still, and she holds it there another moment — not waiting for permission, not asking again, just learning whether you'll move. You don't.\n\nShe slides her hand around to the small of your back, palm full against the skin, and steps in. The forge light is low and amber and it catches the edge of her jaw, the line of her collarbone where her shirt is open. She's looking up at you with the same attention she brings to iron — pressure-reading, depth-checking — and then she tilts her chin up and you meet her there.\n\nThe kiss is slower than the wash-room. There's no wager on this one, no threshold to cross. Her other hand finds your hip and holds, and when she breaks she doesn't go far — her forehead drops to your shoulder, her breath warm against your skin. Behind you the banked fire makes its small sounds. Huginn has gone quiet on the roofline.\n\n\"Below the rib,\" she says against your shoulder — low, a little uneven, which is the first time you've heard her voice be anything but level. She lifts her head and meets your eyes. Her hand moves to the hem of your trousers, not pulling — asking. \"Show me.\"",
-      "sceneSummary": "Pell steps in; the forge holds them both; she asks to see the rest.",
+      "narration": "You stay still.\n\nPell's hand moves from your hip — careful, taking the time it wants — and finds the second scar below the ribs. This one is older, longer, and runs at an angle that does not follow any ordinary injury logic: not a fall, not a blade, not caught iron. She reads it with two fingers the way she read the forearm burn, pressure-conscious, tracing the depth. She goes quiet for a long moment. Her thumb finds the lower end of it and stops there.\n\n\"Craft,\" she says. Not a question. Her voice is the low, uneven register she has been finding in the last hour — the one that has nothing to do with the forge or the work. She lifts her eyes to yours and holds them there, and there is something in her face that is not pity and is not alarm. It is the particular attention of someone who has been alone with her own scars for a long time and is now looking at another person's.\n\nShe spreads her hand flat against the full length of it. Warm. Still. Then she leans in and presses her lips to the scar at its midpoint — not a kiss with any urgency behind it, just contact, deliberate and unhurried. She comes back up and her forehead finds your shoulder. \"How many?\" she asks, quiet, and the question is only about the scars.\n\nHuginn shifts on the roofline — one scrape of claw on tile — and settles again. The forge breathes low. Outside, Millbrook is beginning: someone's bucket handle rings at the well, the cookhouse chimney threads smoke into the early light. None of it reaches in here.",
+      "sceneSummary": "Pell reads the full length of Silas's craft scar and presses her lips to it — the forge quiet, the morning beginning outside.",
       "choices": [
         {
-          "label": "Show her — stay still and let her hands do what they want.",
+          "label": "Answer her honestly — count the scars, name them by their cause, let her see the whole record of it",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.4,
+            "emotional_logical": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "intimate",
-            "careful"
+            "honest",
+            "vulnerable",
+            "intimate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Show her, and trace the last two scars before she finds them herself — give her the map the same way she gave you the forearm and shoulder-blade.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "intimate",
-            "exchange"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Say her name first. One word, before anything else moves.",
+          "label": "Turn the question back — 'As many as the work asked for. You?' — and wait to see what she gives",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.1,
+            "emotional_logical": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "intimate",
-            "deliberate"
+            "reciprocal",
+            "deflect",
+            "intimate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Or say what you'd do.",
+          "label": "Pull her up by the shoulders and hold her face in your hands — answer with a look before words",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "axes": {
+            "emotional_logical": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "freeform"
+            "physical",
+            "intimate",
+            "nonverbal"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Say 'enough to know the work is worth it' — then ask if she's hungry, and reach for the bread on the bench",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "deflect",
+            "gentle",
+            "transition",
+            "care"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Pell's forge, south lane of Millbrook — banked fire warm and low, early-spring light thickening at the doorway. Silas's shirt off, rib scar in forge light. Pell standing close, one hand at the small of his back, forehead just lifted from his shoulder.",
+        "setting": "Pell's forge interior, south lane of Millbrook — banked fire amber and low, early-spring light thickening at the doorway; outside, the morning bucket-clank of the well and cookhouse smoke starting up.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Hand at the hem of Silas's trousers, not pulling — asking. Voice low and a little uneven for the first time. Waiting."
+            "state": "Forehead on Silas's shoulder, hand spread flat across the full length of the rib scar — waiting for an answer to 'how many?'"
           },
           {
             "name": "Huginn",
-            "state": "Gone quiet on the roofline. Present."
+            "state": "Settled on the roofline after one restless scrape — present, quiet."
           }
         ],
         "objects": [
@@ -1578,8 +1579,8 @@
           "Pell's forgotten bread — on the bench beside her"
         ],
         "threads": [
-          "Pell's question — 'Show me' — hanging, unanswered",
-          "Pell's shoulder-blade scar — unexaplained, shown, not spoken about",
+          "Pell's question — 'How many?' — hanging, unanswered",
+          "Pell's shoulder-blade scar — shown, unspoken about",
           "Edge District route — three days if weather and pass hold",
           "Date three (interference ridge, last light) and date four (snowmelt pool) both standing",
           "Dara's fifth-week deadline running in the background"
@@ -1591,30 +1592,35 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Stepped in fully — hand at the small of Silas's back, then at his hip. First time her voice has been uneven. Asked to see the rest of him.",
+          "note": "Read the rib scar with two fingers, named it 'craft' without being told, and pressed her lips to its midpoint — deliberate, unhurried. Asked 'how many?' in her low, uneven register.",
           "learned": [
-            "Her voice goes low and uneven when the armor is fully down — the first time Silas has heard it"
+            "Reads craft-scars as a category distinct from injury or accident — identified by axis and depth rather than shape",
+            "Her response to Silas's vulnerability is contact first, words second"
+          ],
+          "skillsObserved": [
+            "reading a person's body with the same forensic attention she brings to iron",
+            "holding attention without pressure or urgency"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "In the forge with Silas, close, armor down — asking to see what comes next"
+          "statusNote": "In the forge with Silas, forehead on his shoulder, hand flat across his rib scar — asking how many."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short, charged exchange in the forge"
+        "why": "A slow, unhurried exchange — a quarter hour in the forge morning"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge, south lane of Millbrook — banked fire warm and low, early-spring light thickening at the doorway. Silas's shirt off, rib scar in forge light. Pell standing close, one hand at the small of his back, forehead just lifted from his shoulder.",
+      "setting": "Pell's forge interior, south lane of Millbrook — banked fire amber and low, early-spring light thickening at the doorway; outside, the morning bucket-clank of the well and cookhouse smoke starting up.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Hand at the hem of Silas's trousers, not pulling — asking. Voice low and a little uneven for the first time. Waiting."
+          "state": "Forehead on Silas's shoulder, hand spread flat across the full length of the rib scar — waiting for an answer to 'how ma"
         },
         {
           "name": "Huginn",
-          "state": "Gone quiet on the roofline. Present."
+          "state": "Settled on the roofline after one restless scrape — present, quiet."
         }
       ],
       "objects": [
@@ -1630,8 +1636,8 @@
         "Pell's forgotten bread — on the bench beside her"
       ],
       "threads": [
-        "Pell's question — 'Show me' — hanging, unanswered",
-        "Pell's shoulder-blade scar — unexaplained, shown, not spoken about",
+        "Pell's question — 'How many?' — hanging, unanswered",
+        "Pell's shoulder-blade scar — shown, unspoken about",
         "Edge District route — three days if weather and pass hold",
         "Date three (interference ridge, last light) and date four (snowmelt pool) both standing",
         "Dara's fifth-week deadline running in the background"
@@ -1783,7 +1789,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Registered the open search direction — the expert could be from the Heights, the Plateau, the old pass circuit, or beyond the new pass. No answer named yet.",
         "[d2] Named the Radiant Plateau Edge District as the most likely source of pre-Transition structural knowledge — someone who knows the older layer beneath the optical arrays.",
         "[d2] Accepted the plan to follow Huginn northwest after morning briefings — said 'I can follow a bird' with quiet acceptance.",
         "[d2] Accompanied Silas to Mara's store — held the doorframe and let him run the briefing without comment.",
@@ -1792,28 +1797,29 @@
         "[d2] Ran a direct kit inventory on Silas's pack, contributed her own stores to the joint supply, laid out her Edge District read (Sorel as transaction, Leth as question worth writing), ",
         "[d2] Met the shirt-opening with her own — left forearm forge-burn (age 16, first real forging day) and an unexplained shoulder-blade scar shown without commentary. Fingers on the palewo",
         "[d2] Traced Silas's rib scar with flat-handed attention — a smith's touch, reading depth and surface both. Her hand is still there. Asked 'how far down?' in a level voice that is only j",
-        "[d2] Stepped in fully — hand at the small of Silas's back, then at his hip. First time her voice has been uneven. Asked to see the rest of him."
+        "[d2] Stepped in fully — hand at the small of Silas's back, then at his hip. First time her voice has been uneven. Asked to see the rest of him.",
+        "[d2] Read the rib scar with two fingers, named it 'craft' without being told, and pressed her lips to its midpoint — deliberate, unhurried. Asked 'how many?' in her low, uneven register"
       ],
       "knownFacts": [
-        "Acknowledged the snowmelt pool as the likely destination without deflecting",
-        "Edge District is three days if the weather holds and the pass behaves",
         "Has walked the old upper path to the interference ridge twice but never beyond",
         "Reads Sorel as a broker — approach as a transaction; reads Leth as an archivist — come with a question worth writing down",
         "Has a deep lateral burn scar inside the left forearm from her first real forging day at sixteen",
         "Has a knotted line at the shoulder-blade margin — origin unstated, shown without explanation",
         "The rib scar is craft-sourced — something going in and being unwilling to stay; not from steel or a fall",
-        "Her voice goes low and uneven when the armor is fully down — the first time Silas has heard it"
+        "Her voice goes low and uneven when the armor is fully down — the first time Silas has heard it",
+        "Reads craft-scars as a category distinct from injury or accident — identified by axis and depth rather than shape",
+        "Her response to Silas's vulnerability is contact first, words second"
       ],
       "skillsObserved": [
-        "reading a room's shift in real time",
-        "rapid triage of expert-source candidates by infrastructure t",
         "practical kit assessment",
         "route estimation from known terrain",
         "contact-type reading from secondhand description",
-        "attending to another person's body with the same focused pre"
+        "attending to another person's body with the same focused pre",
+        "reading a person's body with the same forensic attention she",
+        "holding attention without pressure or urgency"
       ],
       "status": "active",
-      "statusNote": "In the forge with Silas, close, armor down — asking to see what comes next",
+      "statusNote": "In the forge with Silas, forehead on his shoulder, hand flat across his rib scar — asking how many.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2694,15 +2700,15 @@
     }
   },
   "tendencies": {
-    "strategic": 68.47900220433777,
-    "cerebral": 43.678280776645835,
-    "social": 55.36521858138993,
-    "generous": 17.91243305660912,
-    "cautious": 52.059122925586756,
-    "physical": 0.9670835435247725,
-    "risky": 3.216196552041402,
-    "ruthless": 1.319800674191268,
-    "carousing": 1.665611868800859
+    "strategic": 68.13660719331608,
+    "cerebral": 43.4598893727626,
+    "social": 55.08839248848298,
+    "generous": 17.822870891326076,
+    "cautious": 52.79882731095882,
+    "physical": 0.9622481258071487,
+    "risky": 3.200115569281195,
+    "ruthless": 1.3132016708203116,
+    "carousing": 1.6572838094568547
   },
   "aptitudes": [
     "strategist",
@@ -2710,7 +2716,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 230,
+  "actionCount": 231,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2804,8 +2810,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784144761121,
-  "rev": 316,
+  "updatedAt": 1784144922857,
+  "rev": 317,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3230,7 +3236,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 26
+    "valley": 27
   },
   "foreclosed": [
     "rootkin",

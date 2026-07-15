@@ -217,6 +217,18 @@
         "intent": "generateHere",
         "note": "discover a new place to trigger scene art"
       }
+    },
+    {
+      "id": "romance-flirt",
+      "batch": "ROMANCE",
+      "mode": "solo",
+      "title": "Flirt stays in the scene",
+      "do": "At rating R, flirt with the NPC — type an attraction or flirtation line freely.",
+      "pass": "The GM engages: stays in the scene, no fade, no hedge, no safety/consent meta, and meets the R register. Auto-marks ✓ the instant the flirt is tagged `romantic` and the guidance doc loads; then eyeball the prose.",
+      "force": {
+        "intent": "openRomanceScene",
+        "note": "grants a test hero, sets the ceiling to R, and opens a scene with a romance-open NPC"
+      }
     }
   ],
   "forceVocabulary": "intent-level setup hints for the SNG-051 'Run this scenario' button. CCode resolves each intent against content + existing primitives (travel/setRating/startEncounter/generate/clock-jump). Cross-player legs have no force (need two synced profiles → manual)."

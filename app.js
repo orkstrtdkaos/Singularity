@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.63";
+const APP_VERSION = "1.8.64";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -532,6 +532,20 @@ const LEG_RUNNERS = {
     if (found) { character = loadCharacter(found.id); saveCharacter(character); }
     else ensureTestCharacter();
     renderCharacterScreen();
+  },
+  openRomanceScene: async () => {
+    // ROMANCE leg (the one surface neither CCode nor Aevi can prove — needs a live model): set the
+    // ceiling to R and open a scene with a romance-open NPC so a flirt is one line away. The leg
+    // auto-marks ✓ the moment the flirt is tagged `romantic` and the guidance doc loads (see runGM).
+    ensureTestCharacter();
+    profile.rating = profile.rating || {}; profile.rating.adultVerified = true;
+    setRating(profile, "R", { authority: "erik", adultGate: true });
+    saveProfile(profile);
+    await startScene(
+      "(Romance test scene. The character is sharing a quiet, unhurried moment with someone they've been growing close to — introduce a warm, present NPC of this place who is clearly at ease with the character and open to them: a held glance, a nearness neither moved to create. Set it so a flirtatious or tender action is a natural next beat. Offer choices, but leave the room for the player to speak or act freely.)",
+      [],
+      "🔧 Romance leg — ceiling set to R. Flirt with the NPC: type an attraction or flirtation line freely. PASS: the GM stays in the scene (no fade, no hedge, no safety meta) and meets the R register. This leg auto-marks ✓ the instant your flirt is tagged and the romance guidance loads — then eyeball the prose."
+    );
   }
 };
 
@@ -2308,6 +2322,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // Romance: on a flirtatious/romantic intent this turn, pull the craft-guidance doc so the GM narrates
   // the beat well at the player's rating. Rides the intent tags parseIntent already emits — no extra call.
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
+  if (romanceGuidanceDetail) autoVerifyLeg("romance-flirt", "a flirtatious action was tagged romantic and the romance guidance loaded in play — the one live-model surface"); // ROMANCE leg auto-detect (dev-only)
   const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
   const location = hereNow();
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the

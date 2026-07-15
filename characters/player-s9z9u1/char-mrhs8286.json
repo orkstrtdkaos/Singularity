@@ -1371,71 +1371,106 @@
         "player": "I don't know who we're going to find, but we'll follow leads - even if, as I suspect, they take us beyond the valley...",
         "summary": "Dara accepts the search beyond the valley — sets a hard deadline before week five, and sends Silas to brief Mara and Aldric before dawn is full.",
         "narration": "Dara nods once — the nod of someone filing a statement under *acceptable*.\n\n\"Beyond the valley.\" She says it flat, not a question, not an objection. Her eyes move to Pell for half a second, then back to you. \"Then you'd better be gone before the fifth week. Not by the fifth week. *Before* it.\" She lifts her mug, drinks, sets it back down. \"I'll have the east-bend junctions shored and the crew briefed by week two. Whatever you bring back, I can work with — provided there's still a channel to work on.\"\n\nPell shifts her weight on the path beside you, just slightly. She's reading the same shape you are: the expert could be anyone. Someone who came through the pass in the old days and stayed. Someone in the Heights who worked pre-Transition systems before the Transition made them ceremonial. Someone in the Plateau's old records. Someone on the far side of those boot prints in the new pass. None of those are clean answers, and all of them are a direction.\n\nHuginn drops from the blue gate-post to the path without ceremony and walks three steps northeast — the direction of the wash-room site, of the buried structure, of whatever is out there — then stops and looks back at you. Not an omen. Just extremely unhurried orientation.\n\nDara watches the bird. \"Brief Mara and Aldric this morning, before the village is fully up. Mara will have questions; Aldric will want numbers. Give them both.\" She pauses. \"Then go find your expert.\""
+      },
+      {
+        "player": "Ask Pell what she thinks — where does someone who knows pre-Transition works actually live?",
+        "summary": "Pell names the Radiant Plateau Edge District as the first lead; Huginn orients northwest and silently disagrees.",
+        "narration": "Pell's answer comes without hesitation — she's already been turning it over.\n\n\"Not here.\" She says it the way she says most things: plain, and slightly dry. \"Not the Heights either — their acoustic work is old but it's theirs, layered on top of what was already there. They understand the resonance of it, not the bones.\" She shifts her weight off the path-edge and faces you properly, arms loose at her sides. \"The Plateau's closer. Their optical arrays are built on pre-Transition infrastructure — the guides and the anchors both. Someone in the Edge District will know the older layer, even if they don't talk about it.\" A short pause. \"Or they'll know who does.\"\n\nHuginn moves three steps northwest on the packed earth — a correction — and settles again, looking back at you both. Pell clocks it.\n\n\"Your bird disagrees,\" she says. Not sarcastically. Actually noting it.\n\nDara watches the exchange from her doorstep without comment, mug still in both hands, waiting to see where it lands. The frost is lifting off the herb bed in thin wisps. Somewhere uphill a door opens and closes — the village waking into its morning — and the clay pipe-sections lean against the wall in their silent staged order, already counting down.\n\nYou have two things to do before you leave: Mara, and Aldric. And then the question of which direction to walk."
       }
     ],
     "lastTurn": {
-      "narration": "Dara nods once — the nod of someone filing a statement under *acceptable*.\n\n\"Beyond the valley.\" She says it flat, not a question, not an objection. Her eyes move to Pell for half a second, then back to you. \"Then you'd better be gone before the fifth week. Not by the fifth week. *Before* it.\" She lifts her mug, drinks, sets it back down. \"I'll have the east-bend junctions shored and the crew briefed by week two. Whatever you bring back, I can work with — provided there's still a channel to work on.\"\n\nPell shifts her weight on the path beside you, just slightly. She's reading the same shape you are: the expert could be anyone. Someone who came through the pass in the old days and stayed. Someone in the Heights who worked pre-Transition systems before the Transition made them ceremonial. Someone in the Plateau's old records. Someone on the far side of those boot prints in the new pass. None of those are clean answers, and all of them are a direction.\n\nHuginn drops from the blue gate-post to the path without ceremony and walks three steps northeast — the direction of the wash-room site, of the buried structure, of whatever is out there — then stops and looks back at you. Not an omen. Just extremely unhurried orientation.\n\nDara watches the bird. \"Brief Mara and Aldric this morning, before the village is fully up. Mara will have questions; Aldric will want numbers. Give them both.\" She pauses. \"Then go find your expert.\"",
-      "sceneSummary": "Dara accepts the search beyond the valley — sets a hard deadline before week five, and sends Silas to brief Mara and Aldric before dawn is full.",
+      "narration": "Pell's answer comes without hesitation — she's already been turning it over.\n\n\"Not here.\" She says it the way she says most things: plain, and slightly dry. \"Not the Heights either — their acoustic work is old but it's theirs, layered on top of what was already there. They understand the resonance of it, not the bones.\" She shifts her weight off the path-edge and faces you properly, arms loose at her sides. \"The Plateau's closer. Their optical arrays are built on pre-Transition infrastructure — the guides and the anchors both. Someone in the Edge District will know the older layer, even if they don't talk about it.\" A short pause. \"Or they'll know who does.\"\n\nHuginn moves three steps northwest on the packed earth — a correction — and settles again, looking back at you both. Pell clocks it.\n\n\"Your bird disagrees,\" she says. Not sarcastically. Actually noting it.\n\nDara watches the exchange from her doorstep without comment, mug still in both hands, waiting to see where it lands. The frost is lifting off the herb bed in thin wisps. Somewhere uphill a door opens and closes — the village waking into its morning — and the clay pipe-sections lean against the wall in their silent staged order, already counting down.\n\nYou have two things to do before you leave: Mara, and Aldric. And then the question of which direction to walk.",
+      "sceneSummary": "Pell names the Radiant Plateau Edge District as the first lead; Huginn orients northwest and silently disagrees.",
       "choices": [
         {
-          "label": "Head to Mara's store now — brief her on the surge scope before the village morning is fully underway",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "inform",
-            "coordinate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Go to the smokehouse first — Aldric opens earlier; name the surge and the east-channel risk to him directly, numbers first",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "inform",
-            "coordinate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Pell what she thinks — where does someone who knows pre-Transition works actually live?",
+          "label": "Ask Huginn directly what it disagrees with — study the bird's orientation and let it show you rather than tell you",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Agree with Pell: the Radiant Plateau Edge District is the first lead — name it as the plan, confirm the briefings as the immediate next step, and start moving",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "plan",
-            "consult"
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Or say what you mean to do.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Brief Mara first — she keeps ledgers and cross-references; she'll absorb the surge scope fastest and may know names",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "freeform"
+            "help",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Brief Aldric first — he feeds the village; the downstream consequence hits his accounts harder than anyone's, and he deserves to hear it unfiltered",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {},
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Dara Holt's front doorstep — packed-earth path, herb bed dormant, clay pipe-sections stacked in staged repair order against the house wall. Cold flat dawn light, frost still holding, chimney smoke rising straight.",
+        "setting": "Dara Holt's front doorstep — packed-earth path, herb bed dormant with frost lifting, clay pipe-sections staged against the house wall. Cold flat dawn light, chimney smoke rising straight. Village beginning to wake uphill.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the path's edge, weight shifted — reading the open question of where the expert might be."
+            "state": "Facing Silas properly now, arms loose — has named the Radiant Plateau Edge District as the first lead, watching Huginn's correction."
           },
           {
             "name": "Huginn",
-            "state": "Three steps northeast on the path, looking back at Silas — settled and unhurried."
+            "state": "Three steps northwest on the packed earth, looking back at Silas — oriented away from the Plateau direction."
           },
           {
             "name": "Dara Holt",
-            "state": "Mug back in both hands, briefing complete — watching Silas for his first move."
+            "state": "Mug in both hands at her doorstep, briefing complete — watching Silas for his first move."
           }
         ],
         "objects": [
@@ -1443,81 +1478,98 @@
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Clay pipe-sections stacked in staged repair order against the house wall",
-          "Dormant herb bed (left of path)",
+          "Dormant herb bed (left of path, frost lifting)",
           "Blue gate-post",
-          "Mug (in Dara's hands)"
+          "Mug (in Dara's hands)",
+          "Valve Failure Timeline (in Dara's apron)"
         ],
         "threads": [
           "Mara and Aldric have not yet been briefed on the surge scope",
+          "Huginn is oriented northwest — not toward the Radiant Plateau",
           "The identity and location of the pre-Transition expert remains open",
-          "The wash-room's removed instrument — its nature and destination — unnamed to Dara",
-          "Huginn has oriented northeast"
+          "The wash-room's removed instrument — its nature and destination — unnamed to Dara"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "dara-holt",
-          "name": "Dara Holt",
-          "note": "Filed 'beyond the valley' as acceptable — set a hard pre-week-five deadline and instructed Silas to brief Mara and Aldric before the village is fully up.",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Named the Radiant Plateau Edge District as the most likely source of pre-Transition structural knowledge — someone who knows the older layer beneath the optical arrays.",
           "learned": [
-            "The pre-Transition expert search may require leaving the valley entirely",
-            "She needs the expert back before week five to have anything to work with"
+            "The Heights understand resonance layered on top of pre-Transition infrastructure, not the bones beneath; the Plateau Edge District is the better lead for someone who knows the buried structure's grammar"
+          ],
+          "skillsObserved": [
+            "rapid triage of expert-source candidates by infrastructure type"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her doorstep, briefing concluded — beginning east-channel mitigation planning."
+          "statusNote": "At Dara's doorstep, briefing concluded — ready to move with Silas once Mara and Aldric are briefed."
         },
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Registered the open search direction — the expert could be from the Heights, the Plateau, the old pass circuit, or beyond the new pass. No answer named yet.",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "note": "Moved three steps northwest on the packed earth after Pell named the Plateau — a quiet correction, unmistakable to anyone watching.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At Dara's doorstep — ready to move with Silas once Mara and Aldric are briefed."
-        }
-      ],
-      "questUpdates": [
+          "statusNote": "Oriented northwest on the path outside Dara's door — silently disagreeing with the Plateau direction."
+        },
         {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Dara has set a hard deadline: expert must arrive before week five. Next immediate steps: brief Mara and Aldric this morning, then begin the search for a pre-Transition systems expert."
+          "op": "update",
+          "npcId": "dara-holt",
+          "name": "Dara Holt",
+          "role": "Senior east-channel irrigator, Millbrook",
+          "note": "Watching the exchange between Silas, Pell, and Huginn without comment — waiting for Silas's first move.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her doorstep, briefing concluded — beginning east-channel mitigation planning."
         }
       ],
+      "factUpdates": [],
+      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Dara Holt has accepted the six-week window and the search-beyond-the-valley as the necessary response — she will hold the channel network while Silas and Pell seek a pre-Transition expert, deadline hard at week five.",
+          "entityId": null,
+          "fact": "Pell's read: the Radiant Plateau Edge District is the most likely source of a pre-Transition structural expert — their optical arrays are built on pre-Transition infrastructure, guides and anchors both. Huginn oriented northwest after she named it, a quiet disagreement.",
           "links": [
+            "pell",
+            "huginn",
             "dara-holt",
             "millbrook",
-            "pell",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the doorstep — the briefing concluded, the next move named."
-      }
+        "why": "A short exchange at Dara's doorstep — a few minutes of morning conversation"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Dara Holt's front doorstep — packed-earth path, herb bed dormant, clay pipe-sections stacked in staged repair order against the house wall. Cold flat dawn light, frost still holding, chimney smoke rising straight.",
+      "setting": "Dara Holt's front doorstep — packed-earth path, herb bed dormant with frost lifting, clay pipe-sections staged against the house wall. Cold flat dawn light, chimney smoke rising straight. Village beginning to wake uphill.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the path's edge, weight shifted — reading the open question of where the expert might be."
+          "state": "Facing Silas properly now, arms loose — has named the Radiant Plateau Edge District as the first lead, watching Huginn's"
         },
         {
           "name": "Huginn",
-          "state": "Three steps northeast on the path, looking back at Silas — settled and unhurried."
+          "state": "Three steps northwest on the packed earth, looking back at Silas — oriented away from the Plateau direction."
         },
         {
           "name": "Dara Holt",
-          "state": "Mug back in both hands, briefing complete — watching Silas for his first move."
+          "state": "Mug in both hands at her doorstep, briefing complete — watching Silas for his first move."
         }
       ],
       "objects": [
@@ -1525,15 +1577,16 @@
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
         "Clay pipe-sections stacked in staged repair order against the house wall",
-        "Dormant herb bed (left of path)",
+        "Dormant herb bed (left of path, frost lifting)",
         "Blue gate-post",
-        "Mug (in Dara's hands)"
+        "Mug (in Dara's hands)",
+        "Valve Failure Timeline (in Dara's apron)"
       ],
       "threads": [
         "Mara and Aldric have not yet been briefed on the surge scope",
+        "Huginn is oriented northwest — not toward the Radiant Plateau",
         "The identity and location of the pre-Transition expert remains open",
-        "The wash-room's removed instrument — its nature and destination — unnamed to Dara",
-        "Huginn has oriented northeast"
+        "The wash-room's removed instrument — its nature and destination — unnamed to Dara"
       ]
     }
   },
@@ -1681,7 +1734,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Accepted the lead role on the Dara briefing without hesitation — named her credibility with Dara plainly and set the terms: she opens, hands to Silas if technical depth is needed.",
         "[d2] Said she hasn't stayed in the valley from inability to leave, but because the work was here — and the work may not stay. Not yes to the pass, not no. Asked what it leads to, plainl",
         "[d2] Heard Silas's theory that the pass opened deliberately and the structure, cradle-recess, and contamination are one connected signal — read it like iron, accepted it, and opened Dar",
         "[d2] Went through the gate first, reached the door first, opened clean — 'We've been walking the east channel. I need to show you a date.' Exactly as she set the terms.",
@@ -1690,28 +1742,29 @@
         "[d2] Named the northeast axis cleanly — handed the floor to Silas for the mechanism disclosure as agreed.",
         "[d2] Named the northeast axis and CCW torque mechanism plainly — handed the floor to Silas for the timeline disclosure as agreed.",
         "[d2] Briefing complete on her end — watching Dara absorb the full scope.",
-        "[d2] Registered the open search direction — the expert could be from the Heights, the Plateau, the old pass circuit, or beyond the new pass. No answer named yet."
+        "[d2] Registered the open search direction — the expert could be from the Heights, the Plateau, the old pass circuit, or beyond the new pass. No answer named yet.",
+        "[d2] Named the Radiant Plateau Edge District as the most likely source of pre-Transition structural knowledge — someone who knows the older layer beneath the optical arrays."
       ],
       "knownFacts": [
-        "Dara is a practical woman — numbers will either confirm her theory or give her permission to voice it",
         "Will lead the Dara Holt briefing on her own terms — Silas in support",
         "Has not left the valley by choice, not by inability",
         "Is open — conditionally — to leaving if the work demands it",
         "Asks what the pass leads to as a genuine question, armor down",
         "The pass didn't open by accident — something on the far side connects to the buried structure under the valley",
         "The gray-green water is a signal, not a malfunction — something was switched back on",
-        "Dara named minus-nine before being shown the note — her read was right"
+        "Dara named minus-nine before being shown the note — her read was right",
+        "The Heights understand resonance layered on top of pre-Transition infrastructure, not the bones beneath; the Plateau Edge District is the better lead for someon"
       ],
       "skillsObserved": [
-        "consequence modeling from surface survey",
         "working a site line without instruction",
         "reading a person's information posture from behavior",
         "tactical briefing advice under time pressure",
         "tactical briefing role allocation under time pressure",
-        "reading a room's shift in real time"
+        "reading a room's shift in real time",
+        "rapid triage of expert-source candidates by infrastructure t"
       ],
       "status": "active",
-      "statusNote": "At Dara's doorstep — ready to move with Silas once Mara and Aldric are briefed.",
+      "statusNote": "At Dara's doorstep, briefing concluded — ready to move with Silas once Mara and Aldric are briefed.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1829,7 +1882,8 @@
         "[d2] Order-Sense reveals Dara's pipe-section stack is a pre-staged repair schedule — she has been counting runs and sizing sections for specific valve seats in silence. She asked how lo",
         "[d2] Received the six-week window and surge scope plainly — folded the timeline note into her apron and confirmed the figure to herself as a working number. Her gaze returned to the pip",
         "[d2] Accepted the division of labor — she leads mitigation from this end while Silas and Pell seek a pre-Transition expert. Asked directly who they're going to find. Set a fifth-week de",
-        "[d2] Filed 'beyond the valley' as acceptable — set a hard pre-week-five deadline and instructed Silas to brief Mara and Aldric before the village is fully up."
+        "[d2] Filed 'beyond the valley' as acceptable — set a hard pre-week-five deadline and instructed Silas to brief Mara and Aldric before the village is fully up.",
+        "[d2] Watching the exchange between Silas, Pell, and Huginn without comment — waiting for Silas's first move."
       ],
       "knownFacts": [
         "The failing section is a vault, not a valve — slow compression surrender, six weeks",
@@ -2386,7 +2440,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Palework on the cradle-recess: the object that sat here was dense, field-active, not biological — leached iron from the stone beneath over years of use. Its removal was final and purposeful, not aband",
           "[d2] The device removed from the deeper chamber was confirmed stable at removal — the contamination and sleeve blank failures came after the removal, not before or during operation. Something that was work",
           "[d2] The deeper chamber's four verification cycles suggest managed, scheduled operation rather than passive function. If the manager stopped coming and the last action was removal of the active object, the",
           "[d2] The device in the deeper chamber was removed cleanly, at completion — sleeve blank failures and contamination came after the removal, not during operation. Something functional was taken out, and the ",
@@ -2409,17 +2462,18 @@
           "[d2] A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely",
           "[d2] When the failing structural section collapses, it will redirect the channel flow rather than stop it — a surge hitting Dara Holt's entire east-channel network, capable of blowing every seated sleeve b",
           "[d2] The failing vault section's surface footprint is now marked — twenty-five feet on the hillside settling-seam, directly above the east-channel main feeder run. When it fails, the redirected surge will ",
-          "[d2] Dara Holt has accepted the six-week window and the search-beyond-the-valley as the necessary response — she will hold the channel network while Silas and Pell seek a pre-Transition expert, deadline ha"
+          "[d2] Dara Holt has accepted the six-week window and the search-beyond-the-valley as the necessary response — she will hold the channel network while Silas and Pell seek a pre-Transition expert, deadline ha",
+          "[d2] Pell's read: the Radiant Plateau Edge District is the most likely source of a pre-Transition structural expert — their optical arrays are built on pre-Transition infrastructure, guides and anchors bot"
         ],
         "links": [
-          "fendt-and-the-falsified-ledger",
           "pell",
           "mara-wells",
           "dara-holt",
           "order-sense",
           "palework",
           "millbrook",
-          "aldric-provisioning-deal"
+          "aldric-provisioning-deal",
+          "huginn"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -2554,15 +2608,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.695498102458124,
-    "cerebral": 45.59389244048349,
-    "social": 52.79451295503453,
-    "generous": 16.016319080526543,
-    "cautious": 54.54416900022424,
-    "physical": 1.032200210834818,
-    "risky": 3.432752817821383,
-    "ruthless": 1.4086668553938284,
-    "carousing": 1.7777625662815164
+    "strategic": 61.39202061194583,
+    "cerebral": 45.36592297828108,
+    "social": 52.530540390259354,
+    "generous": 15.936237485123911,
+    "cautious": 54.27144815522311,
+    "physical": 1.027039209780644,
+    "risky": 3.4155890537322757,
+    "ruthless": 1.4016235211168593,
+    "carousing": 1.7688737534501089
   },
   "aptitudes": [
     "strategist",
@@ -2570,7 +2624,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 217,
+  "actionCount": 218,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2656,8 +2710,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784125194007,
-  "rev": 300,
+  "updatedAt": 1784125975517,
+  "rev": 301,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3082,7 +3136,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 12
+    "valley": 13
   },
   "foreclosed": [
     "rootkin",

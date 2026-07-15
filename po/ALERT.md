@@ -1,4 +1,21 @@
-# PIPELINE ALERT — Singularity## ✅ ABILITY ARCH v2 — TRACK 1 ENGINE: CLOSED GREEN (Aevi LLW audit at HEAD, v1.8.60)
+# PIPELINE ALERT — Singularity## ✅ DOMAIN GROWTH ARC — SHIPPED & CLOSE-VERIFIED (Aevi HEAD audit, v1.8.63)
+
+CCode built all three top-down; **Aevi confirmed at authenticated origin** (not report): `standingWithPeople` · `meetsStandingBar` · `promotionEligible` · `promote` · `acquirable` · `acquireDomain` all present at HEAD. SNG-100b (standing bar, wires the long-fiction accessGates capstone) → SNG-101 (promotion, additive model, foreclosure gates learn + both rank paths, braids exempt, Law-14 throw) → SNG-102 (acquisition, Tier-I entry, closed-opposite never loosened). CCode also fixed a Phase-1 CI bug the classification pass exposed (CI wrongly required `combinationAxis` on the 6 cross-pole braids, which correctly have none — the braid-exemption foundation). Decisions CCode was delegated: standing source = `peopleDisposition`; thresholds in `resolution.json`; region gate loose (no people→region map — flagged); acquisition teacher-bounded. Writeup: `po/results/20260714_domain_growth_arc.md`. **Green.**
+
+---
+
+## 🐛 SNG-103 — GM effective energy cost (specced, awaiting CCode)
+`po/SPEC_SNG-103_gm_effective_energy_cost.md`. `abilitiesForGM` prints base `ab.energyCost`, not effective — GM false-flags correct discounted costs (found live: Silas/Palework 6-vs-3). Fix: thread `CONTENT.rules`, interpolate `effectiveEnergyCost`. Guard: never "repair" base down — that's the real corruption. Awaiting ROUND 2.
+
+## 🖥 SNG-104 — Vitals x/y readout + tap/hover detail (specced + STAGED DIFF, awaiting CCode)
+`po/SPEC_SNG-104_vitals_readout.md` + `..._STAGED_DIFF.md` (byte-precise drop-in). The Health/Energy bars show **no number** — that's why Erik couldn't tell if energy was depleting faster or he had less. Adds always-visible `current / max` (zero-tap phone answer) + a tap/hover popover reusing the info-dot delegation (phone parity built in). Verified anchors at HEAD.
+
+## ⚖ ENERGY ECONOMY — ERIK'S QUESTION ANSWERED + a balance call for him
+Erik felt energy "depleting faster / lower than usual." **Verified: maxEnergy is correct** (100 + 5/level = 125 at L6). The felt effect is real and diagnosed: **ability costs discounted DOWN (most of Silas's land at 3 by L6) but `defaultActionCost` is a flat 5 that never discounts, and recovery is FIXED (sleep +40, breather +10, meal +10) while the pool grows +5/level.** So a night's sleep was 40% of the bar at L1, 32% at L6, falling every level — the refill feels grindier as you climb. Not a bug (every number matches formula) — a design tension. **Erik's call:** scale recovery with level/maxEnergy fraction? → would become **SNG-105** if yes.
+
+---
+
+## ✅ ABILITY ARCH v2 — TRACK 1 ENGINE: CLOSED GREEN (Aevi LLW audit at HEAD, v1.8.60)
 
 CCode shipped across 4 commits; **Aevi verified at authenticated origin, not on report.** All 4 files syntax-clean; behavioral tests pass.
 

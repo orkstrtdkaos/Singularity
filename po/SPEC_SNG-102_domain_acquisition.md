@@ -1,9 +1,11 @@
 # SPEC — SNG-102: Domain Acquisition
-## Aevi (PO) · 2026-07-14 · authored to spec · **awaiting CCode ROUND 2**
+## Aevi (PO) · 2026-07-14 · **v2, post-CCode-ROUND-2 · GO after SNG-101**
+
+> **DEPENDENCIES:** SNG-101 (which itself depends on the classification pass + SNG-100b). Acquisition inherits SNG-101's **additive** structures — `domainsAcquired`, `domainCeilings`, `foreclosed` — and adds **no schema or type change of its own.** Build order: classification → SNG-100b → SNG-101 → SNG-102.
 
 > **One line.** A character can acquire a **new** tradition beyond the three chosen at build — expanding their presence on the great circle — through deep standing with that people. Acquisition respects every existing gate; the closed-opposite rule is never loosened; the antipodes of already-foreclosed domains stay foreclosed.
 
-> **Verified against HEAD `v1.8.60`.** Depends on **SNG-101** (Domain Promotion) landing first: acquisition reuses SNG-101's `character.domains` structure, the `foreclosed` set, and the standing-bar machinery. Do not build this before SNG-101's `state.js` migration exists — it is the foundation both share.
+> **Verified against HEAD `bb36b5a`.** Depends on **SNG-101**: acquisition appends to SNG-101's `character.domainsAcquired` (string array), sets a Tier-I entry in `domainCeilings`, and applies foreclosure via the shared `foreclosed` path. Because SNG-101 §2 (v2) keeps `domains` as strings and generalizes `domainAccess` to iterate `[primary, secondary, tertiary, ...domainsAcquired]`, **acquisition needs no new schema** — it's a new entry in structures SNG-101 already built. The standing bar is **SNG-100b**, not the unwired `accessGates`.
 
 ---
 
@@ -81,11 +83,11 @@ Thresholds in `traditions.json` → `acquisition` block:
 | Module | Change |
 |---|---|
 | `traditions.json` | Add `acquisition` thresholds block. |
-| `progression.js` | `acquirable(character, traditionId, rules) → {ok, reason}`; `acquireDomain(character, traditionId)` — appends to `character.domains` as `{traditionId, tierCeiling:1, station:"acquired"}`, applies antipode foreclosure via the SNG-101 path. Access reads already handle arbitrary domains once SNG-101 reads from `character.domains` rather than fixed slots. |
+| `progression.js` | `acquirable(character, traditionId, rules) → {ok, reason}` (reads SNG-100b standing); `acquireDomain(character, traditionId)` — pushes `traditionId` to `domainsAcquired`, sets `domainCeilings[traditionId] = 1`, adds the target's antipode to `foreclosed` via the shared SNG-101 path. Access reads already handle it once `domainAccess` iterates `domainsAcquired` (SNG-101 v2 §2). |
 | `gm.js` | `offerAcquisition` op (narrative only) + whitelist + sanitizer clamped to `{traditionId}`. Engine ignores unless `acquirable` is already true. |
 | `app.js` | Acquisition offer card; commit modal naming the antipode-foreclosure cost; domain panel lists acquired domains alongside the built three. |
 | `skilltree.js` | Acquired domains render in the skill graph with their real ring position; their Tier-I ceiling shown; foreclosed antipode marked `FORECLOSED`. |
-| `state.js` | No new migration beyond SNG-101 — acquired domains are just additional entries in the `character.domains` SNG-101 already introduced. Confirm the migration tolerates 3+ domains (it should, if it builds a map/array rather than three fixed keys — **flag for SNG-101: build `character.domains` as a keyed collection, not three hardcoded fields, precisely so acquisition needs no schema change**). |
+| `state.js` | **No new migration.** Acquired domains are entries in `character.domainsAcquired` (a string array SNG-101 v2 introduces). The earlier "make it a keyed collection" flag is **satisfied**: SNG-101 v2 keeps `domains` as its three named string fields AND adds `domainsAcquired` as a string array that `domainAccess` iterates — so 4+ domains work with zero type change. Acquisition just pushes a string. |
 | `tests/content_ci.mjs` | Validate `acquisition` block; assert acquired-domain access respects `foreclosed` and closed-opposite. |
 
 ## 6. THE PILGRIMAGE — what this unlocks narratively
@@ -98,7 +100,9 @@ SNG-101 lets you deepen who you are. SNG-102 lets you *widen* it — walk the ri
 - **No count cap.** Geometry limits; numbers don't.
 - **Requires SNG-101.** Do not schedule before it; they share `character.domains` and the foreclosure path.
 
-## OPEN QUESTIONS FOR CCODE ROUND 2
-1. Confirm SNG-101 will build `character.domains` as a **keyed collection** (so 4+ domains need no schema change). If SNG-101 hardcodes three fields, this spec inherits a migration it shouldn't need — worth settling at SNG-101 review.
-2. `teacherOrTome` today: is "a teacher met and willing" already a persisted relationship state (an NPC flag), or inferred per-turn? Acquisition needs it *durable* — the standing must persist across sessions.
-3. Region-standing: is there a persisted "has stood in region X" counter, or only current location? (Affects whether the soft teacher/tome gate can require prior presence.)
+## OPEN QUESTIONS — RESOLVED (CCode ROUND 2)
+1. **4+ domains:** settled at SNG-101 v2 — `domainsAcquired` string array iterated by `domainAccess`; no keyed-collection type change, no schema cost here.
+2. **"Teacher met and willing":** **not persisted at HEAD** — must be built. → **SNG-100b** provides the durable teacher-relationship flag this needs. Until then, acquisition has no durable gate input.
+3. **Region-standing:** **not stored** (only current location). → **SNG-100b** provides the region-presence record. The soft prior-presence gate depends on it.
+
+*All three collapse into: acquisition's inputs are built by SNG-100b. Full review: `po/SPEC_SNG-101_102_CCODE_REVIEW.md`.*

@@ -1,647 +1,659 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "harmonic",
-  "civilization": "Harmonic Heights",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "harmonic",
+ "civilization": "Harmonic Heights",
+ "abilities": [
+  {
+   "id": "sonic_resonance",
+   "name": "Sonic Resonance",
+   "levelReq": 1,
+   "energyCost": 8,
+   "axes": {
+    "mechanical_spiritual": 0.4,
+    "concrete_abstract": -0.3
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "manipulate",
+    "vibration",
+    "structural"
+   ],
+   "narrationHints": "Focused sound waves that can shake, shatter, resonate with, or gently move physical objects. Visible as shimmering pressure ripples in the air.",
+   "description": "Project focused resonant waves to move, shake, or shatter matter at a distance.",
+   "notFor": "Fine manipulation (it pushes, shakes, shatters — it cannot pick a lock or thread a needle); silent work (using it is always audible); affecting light or minds.",
+   "tree": [
     {
-      "id": "sonic_resonance",
-      "name": "Sonic Resonance",
-      "levelReq": 1,
-      "energyCost": 8,
-      "axes": {
-        "mechanical_spiritual": 0.4,
-        "concrete_abstract": -0.3
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "manipulate",
-        "vibration",
-        "structural"
-      ],
-      "narrationHints": "Focused sound waves that can shake, shatter, resonate with, or gently move physical objects. Visible as shimmering pressure ripples in the air.",
-      "description": "Project focused resonant waves to move, shake, or shatter matter at a distance.",
-      "notFor": "Fine manipulation (it pushes, shakes, shatters — it cannot pick a lock or thread a needle); silent work (using it is always audible); affecting light or minds.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Focused Push",
-          "grants": "Move, rattle, or knock over objects up to a person's weight within ~10 paces; crack brittle material (pottery, thin ice, old mortar); knock a weapon from an unready hand.",
-          "cannot": "No effect through solid stone; nothing heavier than a person; no sustained force — each use is a pulse."
-        },
-        {
-          "rank": 2,
-          "name": "Standing Wave",
-          "grants": "Sustained pressure — hold a door shut or force it, pin a light object to a wall, shatter dense material (green wood, cheap iron fittings); shape the pulse around one ally.",
-          "cannot": "Cannot lift (only push); two targets max; fails in heavy interference without a check."
-        },
-        {
-          "rank": 3,
-          "name": "Resonant Break",
-          "grants": "Find and exploit a structure's resonant frequency: collapse a wall section, shatter quality steel, stun everyone in a small room (nonlethal); precise enough to break one link of a chain.",
-          "cannot": "Not lethal by design — the field limits output near living tissue; exhausting (double energy) in Radiant territory."
-        }
-      ],
-      "functions": [
-        "strike",
-        "break"
-      ],
-      "challengeTypes": [
-        "FIGHT",
-        "PUZZLE"
-      ],
-      "challengeProfile": {
-        "FIGHT": 2,
-        "DUEL": 2,
-        "PUZZLE": 2
-      },
-      "tradition": "harmonic"
+     "rank": 1,
+     "name": "Focused Push",
+     "grants": "Move, rattle, or knock over objects up to a person's weight within ~10 paces; crack brittle material (pottery, thin ice, old mortar); knock a weapon from an unready hand.",
+     "cannot": "No effect through solid stone; nothing heavier than a person; no sustained force — each use is a pulse."
     },
     {
-      "id": "echo_sense",
-      "name": "Echo Sense",
-      "levelReq": 1,
-      "energyCost": 4,
-      "axes": {
-        "dark_light": -0.2,
-        "body_mind": 0.4
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "perceive",
-        "detect",
-        "through-walls"
-      ],
-      "narrationHints": "Sound-based perception like echolocation — hearing shapes, movement, and hollow spaces through walls and darkness.",
-      "description": "Perceive your surroundings through sound reflection — even through walls, smoke, or darkness.",
-      "notFor": "Reading emotion, intent, or words on a page; anything at true distance (beyond ~50 paces); seeing color or light-based detail.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Near Echo",
-          "grants": "Map bodies and large objects through one wall or in darkness within ~10 paces; count people; sense sudden movement behind you.",
-          "cannot": "No fine detail (a face, a small tool); one wall only; loud environments blind it."
-        },
-        {
-          "rank": 2,
-          "name": "Carried Echo",
-          "grants": "Range ~30 paces and two walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (not words); sense hollow spaces and hidden voids.",
-          "cannot": "Still cannot resolve words reliably; running water scrambles it."
-        },
-        {
-          "rank": 3,
-          "name": "Deep Listening",
-          "grants": "Hear actual words through barriers at ~20 paces; read a building's whole layout in a minute of stillness; detect the sub-sound of active nanite fields and Precursor machinery.",
-          "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to."
-        }
-      ],
-      "functions": [
-        "reveal"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 2,
-        "FIGHT": 1,
-        "PUZZLE": 1
-      },
-      "tradition": "harmonic"
+     "rank": 2,
+     "name": "Standing Wave",
+     "grants": "Sustained pressure — hold a door shut or force it, pin a light object to a wall, shatter dense material (green wood, cheap iron fittings); shape the pulse around one ally.",
+     "cannot": "Cannot lift (only push); two targets max; fails in heavy interference without a check."
     },
     {
-      "id": "resonant_shield",
-      "name": "Resonant Shield",
-      "levelReq": 2,
-      "energyCost": 12,
-      "axes": {
-        "violence_peace": 0.3,
-        "chaos_order": 0.4
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "defend",
-        "barrier"
-      ],
-      "narrationHints": "A standing-wave barrier of interference patterns that deflects projectiles and dampens incoming force.",
-      "description": "Raise a standing-wave barrier that dampens incoming force.",
-      "notFor": "Offense of any kind; protecting against gas, liquid, or light-based attacks; concealment (the barrier visibly shimmers).",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Flicker Guard",
-          "grants": "A heartbeat's barrier that deflects one projectile or blunts one blow; enough warning-shimmer to interrupt an ambush.",
-          "cannot": "One impact then gone; only protects you; cannot hold against sustained force."
-        },
-        {
-          "rank": 2,
-          "name": "Held Chord",
-          "grants": "Sustain the barrier several breaths; cover yourself plus one adjacent ally; shrug off thrown stones, arrows, tool-swings.",
-          "cannot": "Walking pace only while held; heavy impacts (a charging animal) break it and cost you the energy anyway."
-        },
-        {
-          "rank": 3,
-          "name": "Bulwark Harmony",
-          "grants": "Room-corner dome for up to four people, held a full scene if unmolested; turns crossbow bolts and a Radiant lance's first strike; can be tuned to let allies' actions pass outward.",
-          "cannot": "Immobile once anchored; collapses instantly if you take a hit inside it; useless against the ground shaking."
-        }
-      ],
-      "functions": [
-        "shield",
-        "resist"
-      ],
-      "challengeTypes": [
-        "FIGHT",
-        "DUEL"
-      ],
-      "challengeProfile": {
-        "FIGHT": 2,
-        "DUEL": 2,
-        "SURVIVE": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "harmonic_voice",
-      "name": "Harmonic Voice",
-      "levelReq": 2,
-      "energyCost": 6,
-      "axes": {
-        "emotional_logical": -0.4,
-        "violence_peace": 0.5
-      },
-      "attribute": "social",
-      "effectTags": [
-        "social",
-        "calm",
-        "influence"
-      ],
-      "narrationHints": "Layered vocal overtones that soothe fear, ease tension, and lend weight to spoken words. Subtle — listeners feel it more than hear it.",
-      "description": "Weave calming overtones into your speech, easing fear and hostility in those who hear you.",
-      "notFor": "Domination or command (it soothes and carries, never compels); deception (a lie sung in harmony still reads as a lie); working on the deaf or on machinery.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Calming Undertone",
-          "grants": "Ease fear and hostility in a conversation-sized group; steady a panicking person or animal; make your words land as sincere (when they are).",
-          "cannot": "Cannot change anyone's mind — only their temperature; breaks if you or an ally acts aggressively."
-        },
-        {
-          "rank": 2,
-          "name": "Carrying Tone",
-          "grants": "Project clearly to a crowd or across a river without shouting; lace a negotiation with patience — hotheads get one reflexive pause before doing something irreversible.",
-          "cannot": "The pause is a heartbeat, not a hold; crowds beyond ~50 resist; costs double against trained Radiant negotiators."
-        },
-        {
-          "rank": 3,
-          "name": "Concord",
-          "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge; sung over the wounded, grants deep restorative sleep.",
-          "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden."
-        }
-      ],
-      "functions": [
-        "empower",
-        "command"
-      ],
-      "challengeTypes": [
-        "SOCIAL",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 2,
-        "FIGHT": 1,
-        "DUEL": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "stillness_field",
-      "name": "Stillness Field",
-      "levelReq": 1,
-      "energyCost": 6,
-      "axes": {
-        "chaos_order": 0.4,
-        "violence_peace": 0.3
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "dampen",
-        "quiet",
-        "zone"
-      ],
-      "narrationHints": "An inverted chord — a pocket of hush where sound arrives muffled and late.",
-      "description": "Weave a pocket of quiet: footsteps soften, voices die at its edge.",
-      "notFor": "Silencing an unwilling speaker's mind or stopping a scream already loosed; it dampens the AIR, not intent. Useless against light.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Held Breath",
-          "grants": "A room-corner of hush for a few minutes — whispers stay in, ordinary noise outside arrives dulled; sleep comes easier inside it.",
-          "cannot": "Sudden loud sounds (a shout, a shatter) punch through; moving with it breaks it."
-        },
-        {
-          "rank": 2,
-          "name": "Long Quiet",
-          "grants": "Room-sized, held near an hour; carry it at a slow walk; your own steps and works are near-silent inside.",
-          "cannot": "Cannot cover a second person's noise unless they stay within arm's reach; echo-senses feel the DEADNESS as clearly as noise."
-        },
-        {
-          "rank": 3,
-          "name": "The Unspoken",
-          "grants": "Shape holes in the field — let one voice pass while all else stills; still an alarm bell mid-swing; grant a whole camp true rest.",
-          "cannot": "A Harmonic adept notices the theft of sound instantly; holding a shaped field is exhausting (double energy)."
-        }
-      ],
-      "functions": [
-        "bind",
-        "resist",
-        "ward"
-      ],
-      "challengeTypes": [
-        "STEALTH",
-        "SOCIAL"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 2,
-        "FIGHT": 2,
-        "DUEL": 2
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "tremor_sense",
-      "name": "Tremor Sense",
-      "levelReq": 1,
-      "energyCost": 4,
-      "axes": {
-        "body_mind": -0.3,
-        "concrete_abstract": -0.4
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "perceive",
-        "ground",
-        "warning"
-      ],
-      "narrationHints": "Palm or sole to earth — reading footfalls, wheels, and digging as ripples in stone and soil.",
-      "description": "Read vibration through the ground: who approaches, how many, how heavy.",
-      "notFor": "Anything airborne, floating, or standing still; reading intent or identity beyond gait; working from horseback or bridges of rope.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Ground Ear",
-          "grants": "Feel approach through earth within ~30 paces: count walkers, tell cart from horse, catch a digger at work below.",
-          "cannot": "Still targets are invisible; rain and river-roar drown it; wooden floors blur everything."
-        },
-        {
-          "rank": 2,
-          "name": "Deep Tread",
-          "grants": "Range ~80 paces on good ground; know a known person's gait; feel hollow spaces underfoot; sense a collapse or slide seconds early.",
-          "cannot": "Cannot localize precisely past 40 paces (direction and count only); a crowd is one bright smear."
-        },
-        {
-          "rank": 3,
-          "name": "The Valley's Pulse",
-          "grants": "Standing still a full minute, read a hillside: every mover, every void, water veins, the grind of old machinery underground.",
-          "cannot": "The minute of stillness is absolute — one step resets it; Precursor works read as SILENCE, and that silence is information others notice you noticing."
-        }
-      ],
-      "functions": [
-        "reveal"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 2,
-        "FIGHT": 1,
-        "PUZZLE": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "chord_of_mending",
-      "name": "Chord of Mending",
-      "levelReq": 2,
-      "energyCost": 10,
-      "axes": {
-        "destruction_creation": 0.5,
-        "mechanical_spiritual": 0.3
-      },
-      "attribute": "practical",
-      "effectTags": [
-        "repair",
-        "craft",
-        "resonance"
-      ],
-      "narrationHints": "Humming a material's own frequency until cracks re-seat and joints remember their fit.",
-      "description": "Coax cracked or loosened things back toward wholeness by singing their grain.",
-      "notFor": "Living tissue; anything shattered to fragments smaller than a thumb; undoing deliberate disassembly (a lock stays a lock).",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Re-seat",
-          "grants": "Close hairline cracks in pot, beam, or blade; re-tighten a sprung joint; a repaired thing holds for honest use.",
-          "cannot": "Cannot restore missing material; the mend shows as a bright seam; metal fatigue returns under hard strain."
-        },
-        {
-          "rank": 2,
-          "name": "True the Frame",
-          "grants": "Mend structural work — a cartwheel, a roof truss, a boat's strake; blend the seam near-invisible; strengthen a sound joint beyond its original make.",
-          "cannot": "An hour's hum per major mend; cannot work while anything hammers or shouts nearby."
-        },
-        {
-          "rank": 3,
-          "name": "Songwright",
-          "grants": "Rebuild from parts: a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal (carefully).",
-          "cannot": "Every missing sliver stays missing; Precursor material refuses the song outright — it has its own, and yours is not invited."
-        }
-      ],
-      "functions": [
-        "heal",
-        "mend",
-        "restore"
-      ],
-      "challengeTypes": [
-        "SURVIVE",
-        "PUZZLE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "PUZZLE": 2,
-        "EXPLORE": 1,
-        "CHASE": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "voice_of_the_flock",
-      "name": "Voice of the Flock",
-      "levelReq": 2,
-      "energyCost": 6,
-      "axes": {
-        "chaos_order": 0.4,
-        "emotional_logical": -0.2
-      },
-      "attribute": "social",
-      "effectTags": [
-        "coordinate",
-        "signal",
-        "group"
-      ],
-      "narrationHints": "Tone-signals layered under speech — a working crew moving as one body without a word said aloud.",
-      "description": "Bind a willing group into wordless coordination through shared tone.",
-      "notFor": "Unwilling or unaware participants; conveying complex ideas (it carries timing and direction, not sentences); crowds beyond a dozen.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Work-Rhythm",
-          "grants": "A crew of four moves in sync — lifts, hauls, watches; simple signals (now, hold, left, danger) land instantly.",
-          "cannot": "Participants must have practiced with you an hour; breaks if the group scatters past shouting distance."
-        },
-        {
-          "rank": 2,
-          "name": "Hunting Chord",
-          "grants": "Eight people, signals in true silence, coordination under stress — an ambush, a rescue, a night crossing; each member feels where the others are.",
-          "cannot": "A panicked member floods the chord with their fear; deaf companions cannot join it."
-        },
-        {
-          "rank": 3,
-          "name": "One Body",
-          "grants": "A dozen move as one organism for a scene — a bucket-line, a fighting retreat, a barn-raising in an afternoon; the group ROLLS as if led by your presence.",
-          "cannot": "When it ends, all of you feel the sudden loneliness; over-use breeds dependence a village elder will name to your face."
-        }
-      ],
-      "functions": [
-        "empower",
-        "command"
-      ],
-      "challengeTypes": [
-        "EXPLORE",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 2,
-        "FIGHT": 1,
-        "DUEL": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "resonant_anchor",
-      "name": "Resonant Anchor",
-      "levelReq": 2,
-      "energyCost": 9,
-      "axes": {
-        "chaos_order": 0.3,
-        "body_mind": -0.4
-      },
-      "attribute": "physical",
-      "effectTags": [
-        "brace",
-        "hold",
-        "defend"
-      ],
-      "narrationHints": "A standing wave locking body to bedrock — the unmovable stance.",
-      "description": "Root yourself: for a while, you cannot be pushed, dragged, or swept.",
-      "notFor": "Moving while anchored (that is the whole price); protecting against blades or beams; anchoring on water or loose sand.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Set Stance",
-          "grants": "Hold against a strong man's shove, a panicked animal, a river current to the waist; keep your feet in a quake's first shock.",
-          "cannot": "One anchored spot — lifting a foot ends it; your arms are braced too (no fine work while holding)."
-        },
-        {
-          "rank": 2,
-          "name": "Breakwater",
-          "grants": "Hold a rope against a falling weight, be the fixed point a climber trusts, stand in a floodgate current; one ally may brace THROUGH you.",
-          "cannot": "Sustained crushing force wins eventually (minutes, not hours); the ground itself must be sound."
-        },
-        {
-          "rank": 3,
-          "name": "Mountain's Patience",
-          "grants": "Anchor against a rockslide's edge, a stampede, a Radiant lance's push; while anchored, your voice carries the stillness of something older than the argument.",
-          "cannot": "You are a fixed target for anything ranged; unanchoring after a long hold costs a full breather."
-        }
-      ],
-      "functions": [
-        "bind",
-        "ward"
-      ],
-      "challengeTypes": [
-        "SURVIVE",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "SOCIAL": 2,
-        "SURVIVE": 2,
-        "FIGHT": 1,
-        "DUEL": 1,
-        "EXPLORE": 1,
-        "STEALTH": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "drumline_stride",
-      "name": "Drumline Stride",
-      "levelReq": 1,
-      "energyCost": 7,
-      "axes": {
-        "body_mind": -0.4,
-        "chaos_order": 0.2
-      },
-      "attribute": "physical",
-      "effectTags": [
-        "speed",
-        "rhythm",
-        "movement"
-      ],
-      "narrationHints": "Footfalls locked to an inner drum — each stride landing on the beat where the ground gives back its push.",
-      "description": "Run on rhythm: bursts of speed and sure footing where the beat carries you.",
-      "notFor": "Stealth (the rhythm wants to be HEARD); climbing; anything requiring you to stop suddenly on the first beat.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Catch the Beat",
-          "grants": "A sprint half again your best over open ground; sure feet across a known path in the dark; land jumps you'd normally balk at.",
-          "cannot": "Broken ground breaks the beat; the burst lasts a few hundred paces, then the debt comes due in wind."
-        },
-        {
-          "rank": 2,
-          "name": "Carried Cadence",
-          "grants": "Hold the stride a mile; carry a burden at speed; pass the beat to one runner beside you.",
-          "cannot": "Cornering hard drops the rhythm; a stumble at speed is a REAL fall."
-        },
-        {
-          "rank": 3,
-          "name": "Thunder-Step",
-          "grants": "For a dozen heartbeats, outrun a horse; cross a collapsing surface before it finishes falling; arrive with momentum that counts as force.",
-          "cannot": "Once per scene; the stop costs a slide of several body-lengths — plan the landing or eat it."
-        }
-      ],
-      "functions": [
-        "move",
-        "empower"
-      ],
-      "challengeTypes": [
-        "CHASE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "CHASE": 2,
-        "EXPLORE": 2
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "shatterpoint",
-      "name": "Shatterpoint",
-      "levelReq": 3,
-      "energyCost": 8,
-      "axes": {
-        "concrete_abstract": 0.4,
-        "destruction_creation": -0.4
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "analyze",
-        "weakness",
-        "precise"
-      ],
-      "narrationHints": "Listening for the flaw-note — the one place where a structure's song goes thin.",
-      "description": "Find the single point where a thing will break: strike there, or warn of it.",
-      "notFor": "Living creatures' bodies; finding MORAL or social weaknesses; anything whose structure you cannot spend a quiet minute reading.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Flaw-Note",
-          "grants": "A minute's study names the weakest point of a door, a wall section, a machine housing — your next strike or lever there counts double.",
-          "cannot": "Knowing the point is not reaching it; sound-dead materials (lead, cloth, water) keep their secrets."
-        },
-        {
-          "rank": 2,
-          "name": "Read the Load",
-          "grants": "See where a bridge, scaffold, or dam WILL fail and when; sabotage that looks like age; certify a structure safe with real authority.",
-          "cannot": "Predictions hold only while loads stay as read; a lie about what you read is still a lie."
-        },
-        {
-          "rank": 3,
-          "name": "The Thin Song",
-          "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll.",
-          "cannot": "Reading Precursor work at this depth is a two-way door — log what you learn AND accept being learned."
-        }
-      ],
-      "functions": [
-        "break",
-        "strike"
-      ],
-      "challengeTypes": [
-        "FIGHT",
-        "PUZZLE"
-      ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "PUZZLE": 2,
-        "DUEL": 2,
-        "CHASE": 1
-      },
-      "tradition": "harmonic"
-    },
-    {
-      "id": "echo_memory",
-      "name": "Echo Memory",
-      "levelReq": 3,
-      "energyCost": 11,
-      "axes": {
-        "space_time": 0.5,
-        "dark_light": -0.2
-      },
-      "attribute": "mental",
-      "effectTags": [
-        "perceive",
-        "past",
-        "investigate"
-      ],
-      "narrationHints": "Old sound never fully leaves a place — coaxing walls and stone to give back what they heard.",
-      "description": "Draw recent sounds back out of a quiet place: voices, footsteps, the shape of what happened.",
-      "notFor": "Places still noisy (the present drowns the past); anything older than days; images of any kind — this is sound alone.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Lingering Note",
-          "grants": "In a quiet room, recover the tone of the last loud event — argument or laughter, how many voices, a door slammed or eased shut.",
-          "cannot": "Words stay smeared; hours old at best; open sky holds almost nothing."
-        },
-        {
-          "rank": 2,
-          "name": "Stone Remembers",
-          "grants": "Recover fragments of actual words from the last day in an enclosed space; identify a known voice; hear the ORDER of events.",
-          "cannot": "Fragments, never transcripts; a space scrubbed by wind or a Stillness Field yields nothing — and the scrubbing itself is evidence."
-        },
-        {
-          "rank": 3,
-          "name": "The Long Echo",
-          "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke.",
-          "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back."
-        }
-      ],
-      "functions": [
-        "reveal",
-        "track"
-      ],
-      "challengeTypes": [
-        "INVESTIGATE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3,
-        "FIGHT": 1,
-        "PUZZLE": 1
-      },
-      "tradition": "harmonic"
+     "rank": 3,
+     "name": "Resonant Break",
+     "grants": "Find and exploit a structure's resonant frequency: collapse a wall section, shatter quality steel, stun everyone in a small room (nonlethal); precise enough to break one link of a chain.",
+     "cannot": "Not lethal by design — the field limits output near living tissue; exhausting (double energy) in Radiant territory."
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+   ],
+   "functions": [
+    "strike",
+    "break"
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "challengeProfile": {
+    "FIGHT": 2,
+    "DUEL": 2,
+    "PUZZLE": 2
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "echo_sense",
+   "name": "Echo Sense",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "dark_light": -0.2,
+    "body_mind": 0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "detect",
+    "through-walls"
+   ],
+   "narrationHints": "Sound-based perception like echolocation — hearing shapes, movement, and hollow spaces through walls and darkness.",
+   "description": "Perceive your surroundings through sound reflection — even through walls, smoke, or darkness.",
+   "notFor": "Reading emotion, intent, or words on a page; anything at true distance (beyond ~50 paces); seeing color or light-based detail.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Near Echo",
+     "grants": "Map bodies and large objects through one wall or in darkness within ~10 paces; count people; sense sudden movement behind you.",
+     "cannot": "No fine detail (a face, a small tool); one wall only; loud environments blind it."
+    },
+    {
+     "rank": 2,
+     "name": "Carried Echo",
+     "grants": "Range ~30 paces and two walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (not words); sense hollow spaces and hidden voids.",
+     "cannot": "Still cannot resolve words reliably; running water scrambles it."
+    },
+    {
+     "rank": 3,
+     "name": "Deep Listening",
+     "grants": "Hear actual words through barriers at ~20 paces; read a building's whole layout in a minute of stillness; detect the sub-sound of active nanite fields and Precursor machinery.",
+     "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to."
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 2,
+    "FIGHT": 1,
+    "PUZZLE": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "resonant_shield",
+   "name": "Resonant Shield",
+   "levelReq": 2,
+   "energyCost": 12,
+   "axes": {
+    "violence_peace": 0.3,
+    "chaos_order": 0.4
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "defend",
+    "barrier"
+   ],
+   "narrationHints": "A standing-wave barrier of interference patterns that deflects projectiles and dampens incoming force.",
+   "description": "Raise a standing-wave barrier that dampens incoming force.",
+   "notFor": "Offense of any kind; protecting against gas, liquid, or light-based attacks; concealment (the barrier visibly shimmers).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Flicker Guard",
+     "grants": "A heartbeat's barrier that deflects one projectile or blunts one blow; enough warning-shimmer to interrupt an ambush.",
+     "cannot": "One impact then gone; only protects you; cannot hold against sustained force."
+    },
+    {
+     "rank": 2,
+     "name": "Held Chord",
+     "grants": "Sustain the barrier several breaths; cover yourself plus one adjacent ally; shrug off thrown stones, arrows, tool-swings.",
+     "cannot": "Walking pace only while held; heavy impacts (a charging animal) break it and cost you the energy anyway."
+    },
+    {
+     "rank": 3,
+     "name": "Bulwark Harmony",
+     "grants": "Room-corner dome for up to four people, held a full scene if unmolested; turns crossbow bolts and a Radiant lance's first strike; can be tuned to let allies' actions pass outward.",
+     "cannot": "Immobile once anchored; collapses instantly if you take a hit inside it; useless against the ground shaking."
+    }
+   ],
+   "functions": [
+    "shield",
+    "resist"
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "DUEL"
+   ],
+   "challengeProfile": {
+    "FIGHT": 2,
+    "DUEL": 2,
+    "SURVIVE": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "harmonic_voice",
+   "name": "Harmonic Voice",
+   "levelReq": 2,
+   "energyCost": 6,
+   "axes": {
+    "emotional_logical": -0.4,
+    "violence_peace": 0.5
+   },
+   "attribute": "social",
+   "effectTags": [
+    "social",
+    "calm",
+    "influence"
+   ],
+   "narrationHints": "Layered vocal overtones that soothe fear, ease tension, and lend weight to spoken words. Subtle — listeners feel it more than hear it.",
+   "description": "Weave calming overtones into your speech, easing fear and hostility in those who hear you.",
+   "notFor": "Domination or command (it soothes and carries, never compels); deception (a lie sung in harmony still reads as a lie); working on the deaf or on machinery.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Calming Undertone",
+     "grants": "Ease fear and hostility in a conversation-sized group; steady a panicking person or animal; make your words land as sincere (when they are).",
+     "cannot": "Cannot change anyone's mind — only their temperature; breaks if you or an ally acts aggressively."
+    },
+    {
+     "rank": 2,
+     "name": "Carrying Tone",
+     "grants": "Project clearly to a crowd or across a river without shouting; lace a negotiation with patience — hotheads get one reflexive pause before doing something irreversible.",
+     "cannot": "The pause is a heartbeat, not a hold; crowds beyond ~50 resist; costs double against trained Radiant negotiators."
+    },
+    {
+     "rank": 3,
+     "name": "Concord",
+     "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge; sung over the wounded, grants deep restorative sleep.",
+     "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden."
+    }
+   ],
+   "functions": [
+    "empower",
+    "command"
+   ],
+   "challengeTypes": [
+    "SOCIAL",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 2,
+    "FIGHT": 1,
+    "DUEL": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "stillness_field",
+   "name": "Stillness Field",
+   "levelReq": 1,
+   "energyCost": 6,
+   "axes": {
+    "chaos_order": 0.4,
+    "violence_peace": 0.3
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "dampen",
+    "quiet",
+    "zone"
+   ],
+   "narrationHints": "An inverted chord — a pocket of hush where sound arrives muffled and late.",
+   "description": "Weave a pocket of quiet: footsteps soften, voices die at its edge.",
+   "notFor": "Silencing an unwilling speaker's mind or stopping a scream already loosed; it dampens the AIR, not intent. Useless against light.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Held Breath",
+     "grants": "A room-corner of hush for a few minutes — whispers stay in, ordinary noise outside arrives dulled; sleep comes easier inside it.",
+     "cannot": "Sudden loud sounds (a shout, a shatter) punch through; moving with it breaks it."
+    },
+    {
+     "rank": 2,
+     "name": "Long Quiet",
+     "grants": "Room-sized, held near an hour; carry it at a slow walk; your own steps and works are near-silent inside.",
+     "cannot": "Cannot cover a second person's noise unless they stay within arm's reach; echo-senses feel the DEADNESS as clearly as noise."
+    },
+    {
+     "rank": 3,
+     "name": "The Unspoken",
+     "grants": "Shape holes in the field — let one voice pass while all else stills; still an alarm bell mid-swing; grant a whole camp true rest.",
+     "cannot": "A Harmonic adept notices the theft of sound instantly; holding a shaped field is exhausting (double energy)."
+    }
+   ],
+   "functions": [
+    "bind",
+    "resist",
+    "ward"
+   ],
+   "challengeTypes": [
+    "STEALTH",
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 2,
+    "FIGHT": 2,
+    "DUEL": 2
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "tremor_sense",
+   "name": "Tremor Sense",
+   "levelReq": 1,
+   "energyCost": 4,
+   "axes": {
+    "body_mind": -0.3,
+    "concrete_abstract": -0.4
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "perceive",
+    "ground",
+    "warning"
+   ],
+   "narrationHints": "Palm or sole to earth — reading footfalls, wheels, and digging as ripples in stone and soil.",
+   "description": "Read vibration through the ground: who approaches, how many, how heavy.",
+   "notFor": "Anything airborne, floating, or standing still; reading intent or identity beyond gait; working from horseback or bridges of rope.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Ground Ear",
+     "grants": "Feel approach through earth within ~30 paces: count walkers, tell cart from horse, catch a digger at work below.",
+     "cannot": "Still targets are invisible; rain and river-roar drown it; wooden floors blur everything."
+    },
+    {
+     "rank": 2,
+     "name": "Deep Tread",
+     "grants": "Range ~80 paces on good ground; know a known person's gait; feel hollow spaces underfoot; sense a collapse or slide seconds early.",
+     "cannot": "Cannot localize precisely past 40 paces (direction and count only); a crowd is one bright smear."
+    },
+    {
+     "rank": 3,
+     "name": "The Valley's Pulse",
+     "grants": "Standing still a full minute, read a hillside: every mover, every void, water veins, the grind of old machinery underground.",
+     "cannot": "The minute of stillness is absolute — one step resets it; Precursor works read as SILENCE, and that silence is information others notice you noticing."
+    }
+   ],
+   "functions": [
+    "reveal"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 2,
+    "FIGHT": 1,
+    "PUZZLE": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "chord_of_mending",
+   "name": "Chord of Mending",
+   "levelReq": 2,
+   "energyCost": 10,
+   "axes": {
+    "destruction_creation": 0.5,
+    "mechanical_spiritual": 0.3
+   },
+   "attribute": "practical",
+   "effectTags": [
+    "repair",
+    "craft",
+    "resonance"
+   ],
+   "narrationHints": "Humming a material's own frequency until cracks re-seat and joints remember their fit.",
+   "description": "Coax cracked or loosened things back toward wholeness by singing their grain.",
+   "notFor": "Living tissue; anything shattered to fragments smaller than a thumb; undoing deliberate disassembly (a lock stays a lock).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Re-seat",
+     "grants": "Close hairline cracks in pot, beam, or blade; re-tighten a sprung joint; a repaired thing holds for honest use.",
+     "cannot": "Cannot restore missing material; the mend shows as a bright seam; metal fatigue returns under hard strain."
+    },
+    {
+     "rank": 2,
+     "name": "True the Frame",
+     "grants": "Mend structural work — a cartwheel, a roof truss, a boat's strake; blend the seam near-invisible; strengthen a sound joint beyond its original make.",
+     "cannot": "An hour's hum per major mend; cannot work while anything hammers or shouts nearby."
+    },
+    {
+     "rank": 3,
+     "name": "Songwright",
+     "grants": "Rebuild from parts: a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal (carefully).",
+     "cannot": "Every missing sliver stays missing; Precursor material refuses the song outright — it has its own, and yours is not invited."
+    }
+   ],
+   "functions": [
+    "heal",
+    "mend",
+    "restore"
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "PUZZLE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "SURVIVE": 3,
+    "PUZZLE": 2,
+    "EXPLORE": 1,
+    "CHASE": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "voice_of_the_flock",
+   "name": "Voice of the Flock",
+   "levelReq": 2,
+   "energyCost": 6,
+   "axes": {
+    "chaos_order": 0.4,
+    "emotional_logical": -0.2
+   },
+   "attribute": "social",
+   "effectTags": [
+    "coordinate",
+    "signal",
+    "group"
+   ],
+   "narrationHints": "Tone-signals layered under speech — a working crew moving as one body without a word said aloud.",
+   "description": "Bind a willing group into wordless coordination through shared tone.",
+   "notFor": "Unwilling or unaware participants; conveying complex ideas (it carries timing and direction, not sentences); crowds beyond a dozen.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Work-Rhythm",
+     "grants": "A crew of four moves in sync — lifts, hauls, watches; simple signals (now, hold, left, danger) land instantly.",
+     "cannot": "Participants must have practiced with you an hour; breaks if the group scatters past shouting distance."
+    },
+    {
+     "rank": 2,
+     "name": "Hunting Chord",
+     "grants": "Eight people, signals in true silence, coordination under stress — an ambush, a rescue, a night crossing; each member feels where the others are.",
+     "cannot": "A panicked member floods the chord with their fear; deaf companions cannot join it."
+    },
+    {
+     "rank": 3,
+     "name": "One Body",
+     "grants": "A dozen move as one organism for a scene — a bucket-line, a fighting retreat, a barn-raising in an afternoon; the group ROLLS as if led by your presence.",
+     "cannot": "When it ends, all of you feel the sudden loneliness; over-use breeds dependence a village elder will name to your face."
+    }
+   ],
+   "functions": [
+    "empower",
+    "command"
+   ],
+   "challengeTypes": [
+    "EXPLORE",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 2,
+    "FIGHT": 1,
+    "DUEL": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "resonant_anchor",
+   "name": "Resonant Anchor",
+   "levelReq": 2,
+   "energyCost": 9,
+   "axes": {
+    "chaos_order": 0.3,
+    "body_mind": -0.4
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "brace",
+    "hold",
+    "defend"
+   ],
+   "narrationHints": "A standing wave locking body to bedrock — the unmovable stance.",
+   "description": "Root yourself: for a while, you cannot be pushed, dragged, or swept.",
+   "notFor": "Moving while anchored (that is the whole price); protecting against blades or beams; anchoring on water or loose sand.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Set Stance",
+     "grants": "Hold against a strong man's shove, a panicked animal, a river current to the waist; keep your feet in a quake's first shock.",
+     "cannot": "One anchored spot — lifting a foot ends it; your arms are braced too (no fine work while holding)."
+    },
+    {
+     "rank": 2,
+     "name": "Breakwater",
+     "grants": "Hold a rope against a falling weight, be the fixed point a climber trusts, stand in a floodgate current; one ally may brace THROUGH you.",
+     "cannot": "Sustained crushing force wins eventually (minutes, not hours); the ground itself must be sound."
+    },
+    {
+     "rank": 3,
+     "name": "Mountain's Patience",
+     "grants": "Anchor against a rockslide's edge, a stampede, a Radiant lance's push; while anchored, your voice carries the stillness of something older than the argument.",
+     "cannot": "You are a fixed target for anything ranged; unanchoring after a long hold costs a full breather."
+    }
+   ],
+   "functions": [
+    "bind",
+    "ward"
+   ],
+   "challengeTypes": [
+    "SURVIVE",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 2,
+    "SURVIVE": 2,
+    "FIGHT": 1,
+    "DUEL": 1,
+    "EXPLORE": 1,
+    "STEALTH": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "drumline_stride",
+   "name": "Drumline Stride",
+   "levelReq": 1,
+   "energyCost": 7,
+   "axes": {
+    "body_mind": -0.4,
+    "chaos_order": 0.2
+   },
+   "attribute": "physical",
+   "effectTags": [
+    "speed",
+    "rhythm",
+    "movement"
+   ],
+   "narrationHints": "Footfalls locked to an inner drum — each stride landing on the beat where the ground gives back its push.",
+   "description": "Run on rhythm: bursts of speed and sure footing where the beat carries you.",
+   "notFor": "Stealth (the rhythm wants to be HEARD); climbing; anything requiring you to stop suddenly on the first beat.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Catch the Beat",
+     "grants": "A sprint half again your best over open ground; sure feet across a known path in the dark; land jumps you'd normally balk at.",
+     "cannot": "Broken ground breaks the beat; the burst lasts a few hundred paces, then the debt comes due in wind."
+    },
+    {
+     "rank": 2,
+     "name": "Carried Cadence",
+     "grants": "Hold the stride a mile; carry a burden at speed; pass the beat to one runner beside you.",
+     "cannot": "Cornering hard drops the rhythm; a stumble at speed is a REAL fall."
+    },
+    {
+     "rank": 3,
+     "name": "Thunder-Step",
+     "grants": "For a dozen heartbeats, outrun a horse; cross a collapsing surface before it finishes falling; arrive with momentum that counts as force.",
+     "cannot": "Once per scene; the stop costs a slide of several body-lengths — plan the landing or eat it."
+    }
+   ],
+   "functions": [
+    "move",
+    "empower"
+   ],
+   "challengeTypes": [
+    "CHASE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "CHASE": 2,
+    "EXPLORE": 2
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "shatterpoint",
+   "name": "Shatterpoint",
+   "levelReq": 3,
+   "energyCost": 8,
+   "axes": {
+    "concrete_abstract": 0.4,
+    "destruction_creation": -0.4
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "analyze",
+    "weakness",
+    "precise"
+   ],
+   "narrationHints": "Listening for the flaw-note — the one place where a structure's song goes thin.",
+   "description": "Find the single point where a thing will break: strike there, or warn of it.",
+   "notFor": "Living creatures' bodies; finding MORAL or social weaknesses; anything whose structure you cannot spend a quiet minute reading.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Flaw-Note",
+     "grants": "A minute's study names the weakest point of a door, a wall section, a machine housing — your next strike or lever there counts double.",
+     "cannot": "Knowing the point is not reaching it; sound-dead materials (lead, cloth, water) keep their secrets."
+    },
+    {
+     "rank": 2,
+     "name": "Read the Load",
+     "grants": "See where a bridge, scaffold, or dam WILL fail and when; sabotage that looks like age; certify a structure safe with real authority.",
+     "cannot": "Predictions hold only while loads stay as read; a lie about what you read is still a lie."
+    },
+    {
+     "rank": 3,
+     "name": "The Thin Song",
+     "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll.",
+     "cannot": "Reading Precursor work at this depth is a two-way door — log what you learn AND accept being learned."
+    }
+   ],
+   "functions": [
+    "break",
+    "strike"
+   ],
+   "challengeTypes": [
+    "FIGHT",
+    "PUZZLE"
+   ],
+   "challengeProfile": {
+    "FIGHT": 3,
+    "PUZZLE": 2,
+    "DUEL": 2,
+    "CHASE": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "echo_memory",
+   "name": "Echo Memory",
+   "levelReq": 3,
+   "energyCost": 11,
+   "axes": {
+    "space_time": 0.5,
+    "dark_light": -0.2
+   },
+   "attribute": "mental",
+   "effectTags": [
+    "perceive",
+    "past",
+    "investigate"
+   ],
+   "narrationHints": "Old sound never fully leaves a place — coaxing walls and stone to give back what they heard.",
+   "description": "Draw recent sounds back out of a quiet place: voices, footsteps, the shape of what happened.",
+   "notFor": "Places still noisy (the present drowns the past); anything older than days; images of any kind — this is sound alone.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Lingering Note",
+     "grants": "In a quiet room, recover the tone of the last loud event — argument or laughter, how many voices, a door slammed or eased shut.",
+     "cannot": "Words stay smeared; hours old at best; open sky holds almost nothing."
+    },
+    {
+     "rank": 2,
+     "name": "Stone Remembers",
+     "grants": "Recover fragments of actual words from the last day in an enclosed space; identify a known voice; hear the ORDER of events.",
+     "cannot": "Fragments, never transcripts; a space scrubbed by wind or a Stillness Field yields nothing — and the scrubbing itself is evidence."
+    },
+    {
+     "rank": 3,
+     "name": "The Long Echo",
+     "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke.",
+     "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back."
+    }
+   ],
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "challengeTypes": [
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3,
+    "FIGHT": 1,
+    "PUZZLE": 1
+   },
+   "tradition": "harmonic",
+   "nativeOrCombination": "native"
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

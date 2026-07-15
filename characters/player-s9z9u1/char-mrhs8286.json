@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 6,
-  "xp": 522,
+  "xp": 527,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -42,8 +42,8 @@
     "spectrumId": -0.6194253719961221,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.17735604682204079,
-    "mechanical_spiritual": 0.16334416206305885,
-    "concrete_abstract": -0.04109397828732847,
+    "mechanical_spiritual": 0.16517695395990592,
+    "concrete_abstract": -0.054039279372962046,
     "death_life": -0.1443423925169633,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -53,7 +53,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 79,
+  "energy": 74,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1286,19 +1286,39 @@
         "player": "Use Palework on the contact stain — read what kind of object left this mark and how old it is",
         "summary": "Palework reads the cradle-recess — a stationed working piece, removed cleanly, age unresolvable beyond forty to two hundred years.",
         "narration": "You crouch at the recess rim and press two fingers into the iron-brown contact ring. Palework opens quietly — no surge, just a careful reading, like running a thumb along a seam to feel where the grain goes.\n\nSomething was here. Long. The stain is not corrosion and not rust — it is the mark of prolonged intimate contact between iron and stone, the kind that takes decades to print itself this deep. You get a shape: tall, load-bearing, regularly attended — the compression-polish tells you it was checked, adjusted, removed and replaced more than once over a long life. The object was not fixed permanently; it was *stationed* here. A working piece.\n\nThen the reading goes quiet on you. The age is there but you cannot quite close your hand around it — old enough that the endings you can read are not of the object but of the stone beneath it, which has its own slow clock. Somewhere between forty years and two hundred; the same window the Attended End found in the chamber. You cannot narrow it further from this cast. Whatever was stationed here, its last removal was deliberate — no fracture, no drag-scarring at the lip. Someone lifted it clean and carried it out.\n\nPell watches your hand come up. 'Old,' she says, not a question. Huginn makes one low sound and looks toward the entrance — not the cradle, the door."
+      },
+      {
+        "player": "Use Order-Sense on the cradle-recess — read what design this station was part of, and what object shape it was built to hold",
+        "summary": "Order-Sense reveals the cradle-recess as an operator's station — the head of the buried structure, built to hold a working instrument that controlled the channel system below.",
+        "narration": "The substrate is thin here — you feel that plainly as Order-Sense opens, the familiar broadening of sight that usually comes fast and full arriving instead like a door pushed against resistance. You let it work at its own pace. You don't push.\n\nWhat comes is not a vision. It is more like the negative space around a missing tooth — the shape of the absence telling you what was there. The cradle-recess was built for a single object: roughly cylindrical, iron-sheathed, approximately five feet tall, with a weighted base and a working head. The saddle-hooks make full sense now — the object could be tilted clear of the recess for use and set back in when stowed. It was not decoration and not storage. It was an instrument. The design around it — the flagged floor, the ring-hooks, the close mortar — is a purpose-built operator's station. Someone stood here and worked with that object, regularly, over a long time.\n\nThe design extends outward from this room, and this is where the thin substrate bites: you get direction but not resolution. The instrument was part of a system that ran the full length of the buried structure — valve housings, channel junctions, the amber-lit crack above the bedrock shelf, all of it downstream of whatever this station controlled. The station is the head of the structure. The operator at this recess was managing something in the water below, adjusting it, reading it, responding to it. Not maintaining a ruin. Operating it.\n\nPell's hand has gone still on the recess rim. She's watching your face rather than the stone. \"Different question on your face,\" she says, flat and direct. \"What did it tell you?\""
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the recess rim and press two fingers into the iron-brown contact ring. Palework opens quietly — no surge, just a careful reading, like running a thumb along a seam to feel where the grain goes.\n\nSomething was here. Long. The stain is not corrosion and not rust — it is the mark of prolonged intimate contact between iron and stone, the kind that takes decades to print itself this deep. You get a shape: tall, load-bearing, regularly attended — the compression-polish tells you it was checked, adjusted, removed and replaced more than once over a long life. The object was not fixed permanently; it was *stationed* here. A working piece.\n\nThen the reading goes quiet on you. The age is there but you cannot quite close your hand around it — old enough that the endings you can read are not of the object but of the stone beneath it, which has its own slow clock. Somewhere between forty years and two hundred; the same window the Attended End found in the chamber. You cannot narrow it further from this cast. Whatever was stationed here, its last removal was deliberate — no fracture, no drag-scarring at the lip. Someone lifted it clean and carried it out.\n\nPell watches your hand come up. 'Old,' she says, not a question. Huginn makes one low sound and looks toward the entrance — not the cradle, the door.",
-      "sceneSummary": "Palework reads the cradle-recess — a stationed working piece, removed cleanly, age unresolvable beyond forty to two hundred years.",
+      "narration": "The substrate is thin here — you feel that plainly as Order-Sense opens, the familiar broadening of sight that usually comes fast and full arriving instead like a door pushed against resistance. You let it work at its own pace. You don't push.\n\nWhat comes is not a vision. It is more like the negative space around a missing tooth — the shape of the absence telling you what was there. The cradle-recess was built for a single object: roughly cylindrical, iron-sheathed, approximately five feet tall, with a weighted base and a working head. The saddle-hooks make full sense now — the object could be tilted clear of the recess for use and set back in when stowed. It was not decoration and not storage. It was an instrument. The design around it — the flagged floor, the ring-hooks, the close mortar — is a purpose-built operator's station. Someone stood here and worked with that object, regularly, over a long time.\n\nThe design extends outward from this room, and this is where the thin substrate bites: you get direction but not resolution. The instrument was part of a system that ran the full length of the buried structure — valve housings, channel junctions, the amber-lit crack above the bedrock shelf, all of it downstream of whatever this station controlled. The station is the head of the structure. The operator at this recess was managing something in the water below, adjusting it, reading it, responding to it. Not maintaining a ruin. Operating it.\n\nPell's hand has gone still on the recess rim. She's watching your face rather than the stone. \"Different question on your face,\" she says, flat and direct. \"What did it tell you?\"",
+      "sceneSummary": "Order-Sense reveals the cradle-recess as an operator's station — the head of the buried structure, built to hold a working instrument that controlled the channel system below.",
       "choices": [
         {
-          "label": "Use Order-Sense on the cradle-recess — read what design this station was part of, and what object shape it was built to hold",
+          "label": "Tell Pell what Order-Sense found — the instrument shape, the operator's station, the head of the whole structure",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "share",
+            "inform"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Before speaking, check the saddle-hooks with Order-Sense while the reading is still open — get the instrument's working posture",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
+            "concrete_abstract": -0.2
           },
           "difficulty": 15,
           "intentTags": [
@@ -1307,70 +1327,58 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Follow Huginn's look — step to the entrance and see what drew the bird's attention outside",
-          "attribute": "physical",
-          "subAttribute": "wits",
-          "axes": {
-            "violence_peace": 0.4
-          },
+          "label": "Look toward the entrance — check what Huginn is attending to before the moment moves",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Pell what she makes of an object stationed here rather than fixed — her structural read on the saddle-hooks and what kind of working piece needs that kind of cradle",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": -0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Record the stain dimensions and shape in the Valve Failure Timeline note — add the cradle as a fourth room in the structural sequence before heading to Dara Holt",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "chaos_order": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
+            "observe",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Mark the operator-station read on the Valve Failure Timeline note — a fourth column before it blurs",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "record",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -6
+        "energy": -3,
+        "xp": 0
       },
       "scene": {
-        "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Huginn has moved his gaze from the cradle-recess to the entrance.",
+        "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. The cradle-recess has been read; its operator-station function now understood.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Crouching at the recess rim, file across her knees, watching Silas's hand come up from the contact stain — waiting."
+            "state": "Hand gone still on the recess rim, watching Silas's face — waiting for what he found."
           },
           {
             "name": "Huginn",
-            "state": "Standing at the recess edge, one low sound given, now looking toward the entrance with steady attention."
+            "state": "Standing at the ring-hook, attention directed toward the entrance, unresolved."
           }
         ],
         "objects": [
@@ -1378,15 +1386,16 @@
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)",
-          "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compression-polish at north/south inner ledge",
-          "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn"
+          "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compression-polish on north/south inner ledge — operator's station for a cylindrical iron-sheathed instrument ~5 ft tall",
+          "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn — now understood as tilting mounts for the instrument"
         ],
         "threads": [
-          "Palework read: stationed working piece, removed cleanly — age unresolvable beyond 40–200 years; identity and function still unknown",
-          "Huginn is looking at the entrance, not the recess — something outside caught its attention",
+          "Operator's station identified — instrument shape known (cylindrical, iron-sheathed, ~5 ft, weighted base, working head), function understood as system controller; instrument itself absent and unidentified",
+          "Pell is waiting for the read — she asked directly",
+          "Huginn's attention is still on the entrance — unresolved",
+          "Dara Holt still unbriefed — path north, under an hour",
           "Date three confirmed: last light, Disputed Zone interference ridge, food with fat",
-          "Date four named by Pell: snowmelt pool, three hours north of the ridge, night, no spear — agreed",
-          "Dara Holt still unbriefed — path north, under an hour"
+          "Date four named by Pell: snowmelt pool, three hours north of the ridge, night, no spear — agreed"
         ]
       },
       "npcUpdates": [
@@ -1394,16 +1403,15 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Watched Palework on the cradle-recess — read Silas's hand coming up, said 'Old' before being told. Huginn's attention shift registered on her face.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Hand gone still on the recess rim — watching Silas's face, asked directly what Order-Sense found. Waiting.",
           "learned": [
-            "Palework confirmed the object was stationed, not fixed — old enough to stain stone to iron-brown; age bracket 40–200 years"
+            "The cradle-recess read produced a different expression on Silas's face — she noticed before he spoke"
           ],
-          "skillsObserved": [
-            "reading a practitioner's result from body language alone"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the wash-room site with Silas, crouching at the cradle-recess rim, watching the entrance."
+          "statusNote": "At the wash-room site with Silas, crouching at the cradle-recess rim, waiting for the Order-Sense read."
         }
       ],
       "codexUpdates": [
@@ -1411,46 +1419,68 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": "millbrook",
-          "fact": "Palework on the cradle-recess confirms: the contact stain is a stationed working piece — tall, load-bearing, regularly attended, removed cleanly with no fracture or drag-scarring. Age bracket 40–200 years, unresolvable further. The object was checked, adjusted, and replaced more than once across its working life. Its removal was deliberate.",
+          "entityId": null,
+          "fact": "Order-Sense confirms the wash-room is an operator's station — the head of the buried structure. The cradle-recess held a cylindrical iron-sheathed instrument (~5 ft, weighted base, working head) that could be tilted clear for use. Someone stood here and operated the channel system below — adjusting, reading, responding. Not maintaining. Operating.",
           "links": [
-            "pell",
             "millbrook",
-            "aldric-provisioning-deal",
+            "pell",
+            "dara-holt",
             "order-sense",
             "palework",
+            "the-unnamed-gift",
+            "precursor-signs-in-the-valley"
+          ]
+        },
+        {
+          "topic": "precursor-signs-in-the-valley",
+          "label": "Precursor Signs in the Valley",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "The wash-room operator's station was the control head of the full buried structure — valve housings, channel junctions, and the amber-lit crack above the bedrock shelf are all downstream of this point. The instrument is gone; the station is intact. The design is operational infrastructure, not ruin.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "order-sense",
             "dara-holt"
           ]
         }
       ],
       "placeUpdates": [
         {
-          "note": "Palework confirms cradle-recess held a stationed working piece — tall, load-bearing, regularly attended, cleanly removed. Age unresolvable beyond 40–200 years. No drag-scarring at lip."
+          "note": "Order-Sense confirms the wash-room cradle-recess was an operator's station — the head of the buried structure's channel system. The instrument held here was cylindrical, iron-sheathed, ~5 ft tall, tilted clear via saddle-hooks for use. Someone operated this station regularly over a long time.",
+          "flag": {
+            "operator_station_confirmed": true,
+            "instrument_shape": "cylindrical_iron_sheathed_5ft"
+          },
+          "subPlace": {
+            "name": "Wash-room Operator's Station",
+            "note": "Cradle-recess confirmed as control head of buried channel structure — instrument absent, station intact, saddle-hooks as tilt-mounts.",
+            "visited": true
+          }
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A careful Palework reading at the cradle-recess — a few minutes of focused contact."
-      },
       "questUpdates": [
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "title": "Meat for the Smokehouse",
-          "note": "Palework on the cradle-recess confirms a stationed working piece removed cleanly — the structure's fourth room understood; age bracket narrows no further. Huginn's attention has shifted to the entrance."
+          "note": "Order-Sense confirms the wash-room as the operator's station and head of the full buried channel system — the structure's purpose is operational infrastructure, not ruin. The instrument that controlled it is missing."
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Order-Sense reading at the cradle-recess — a careful, restrained cast in thinned substrate"
+      }
     },
     "sceneState": {
-      "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Huginn has moved his gaze from the cradle-recess to the entrance.",
+      "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. The cradle-recess has been read; its operator-station function now understood.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Crouching at the recess rim, file across her knees, watching Silas's hand come up from the contact stain — waiting."
+          "state": "Hand gone still on the recess rim, watching Silas's face — waiting for what he found."
         },
         {
           "name": "Huginn",
-          "state": "Standing at the recess edge, one low sound given, now looking toward the entrance with steady attention."
+          "state": "Standing at the ring-hook, attention directed toward the entrance, unresolved."
         }
       ],
       "objects": [
@@ -1459,14 +1489,14 @@
         "Rune-Craft Kit (pack)",
         "Valve Failure Timeline note (breast pocket)",
         "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compres",
-        "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn"
+        "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn — no"
       ],
       "threads": [
-        "Palework read: stationed working piece, removed cleanly — age unresolvable beyond 40–200 years; identity and function still unknown",
-        "Huginn is looking at the entrance, not the recess — something outside caught its attention",
-        "Date three confirmed: last light, Disputed Zone interference ridge, food with fat",
-        "Date four named by Pell: snowmelt pool, three hours north of the ridge, night, no spear — agreed",
-        "Dara Holt still unbriefed — path north, under an hour"
+        "Operator's station identified — instrument shape known (cylindrical, iron-sheathed, ~5 ft, weighted base, working head), function understood as system controlle",
+        "Pell is waiting for the read — she asked directly",
+        "Huginn's attention is still on the entrance — unresolved",
+        "Dara Holt still unbriefed — path north, under an hour",
+        "Date three confirmed: last light, Disputed Zone interference ridge, food with fat"
       ]
     }
   },
@@ -1493,14 +1523,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Seasonal return-visit pattern and contamination delay interval established — the removal preceded onset by a long gap, meaning a secondary trigger caused the crisis. Moving to Fen's intake for physical valve inspection.",
         "Removal-to-onset chain resolved with Pell — two-winter slip model established. Fen's intake reached; valve cover visibly off true.",
         "Fen's intake physical inspection begun — Pell identifies twisted sleeve and torqued cover as the failure mode. East furlong site next.",
         "Pell confirms: wash-room site and east-channel valve failures are the same structure — different rooms, same design intent, built to act on the water.",
         "Order-Sense confirms: the east furlong valve housing is the working end of a forty-foot coursed-stone structure running northeast under the soil. The soil-rise is the roof settling. The structure is largely intact.",
         "East furlong valve twist direction confirmed — counterclockwise, identical to Fen's intake. Both sleeves failed on the same axis. Pell's read: the torque originated inside the structure. Something turned.",
         "Valve Failure Timeline annotated — both sites share identical CCW torque from an inside source; wash-room added as third room, NE terminus. The structure's mechanical signature is now recorded.",
-        "Palework on the cradle-recess confirms a stationed working piece removed cleanly — the structure's fourth room understood; age bracket narrows no further. Huginn's attention has shifted to the entrance."
+        "Palework on the cradle-recess confirms a stationed working piece removed cleanly — the structure's fourth room understood; age bracket narrows no further. Huginn's attention has shifted to the entrance.",
+        "Order-Sense confirms the wash-room as the operator's station and head of the full buried channel system — the structure's purpose is operational infrastructure, not ruin. The instrument that controlled it is missing."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1614,7 +1644,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Caught Silas's shadowstep in her periphery — gave nothing, ran harder. Gained back a step and a half at the pinch-point exit on home-ground advantage.",
         "[d2] Involuntary file-gesture at the forge-tool insults — stride broke again; said 'keep going' in a flat register that is the tell",
         "[d2] Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it.",
         "[d2] Lost the race by three strides — caught Silas's shadowstep emerging from the bank shadow, pressed anyway on unfamiliar ground, arrived second. Breathing hard; processing defeat wit",
@@ -1623,17 +1652,18 @@
         "[d2] Accepted date three — last light, Disputed Zone interference ridge. Specified: bring food with fat. Moved immediately to read the cradle-recess and saddle-hooks, named them as a st",
         "[d2] Named her terms for date four unprompted and without deflection — a snowmelt pool three hours north of the ridge, night, no spear. Said it with the same flat certainty she brings t",
         "[d2] Date four terms accepted without ceremony — turned back to the work, crouching at the cradle-recess, reading the contact stain with two fingers.",
-        "[d2] Watched Palework on the cradle-recess — read Silas's hand coming up, said 'Old' before being told. Huginn's attention shift registered on her face."
+        "[d2] Watched Palework on the cradle-recess — read Silas's hand coming up, said 'Old' before being told. Huginn's attention shift registered on her face.",
+        "[d2] Hand gone still on the recess rim — watching Silas's face, asked directly what Order-Sense found. Waiting."
       ],
       "knownFacts": [
-        "Her face after: looking at Silas the way someone looks at something they've decided to keep",
         "Said 'alright' a second time — same word, same unflurried certainty as the first",
         "Date three: last light at the Disputed Zone interference ridge",
         "Knows the ridge — has been there before",
         "Read the saddle-hooks as a stabilizing mount, not a hanging rig",
         "Knows a snowmelt-fed pool three hours north of the interference ridge — clean water, not river-sourced; visits in early summer but considers the ice out by now",
         "Contact stain at the cradle-recess base is not seasonal — it is built-in, long-term presence of something cradled here.",
-        "Palework confirmed the object was stationed, not fixed — old enough to stain stone to iron-brown; age bracket 40–200 years"
+        "Palework confirmed the object was stationed, not fixed — old enough to stain stone to iron-brown; age bracket 40–200 years",
+        "The cradle-recess read produced a different expression on Silas's face — she noticed before he spoke"
       ],
       "skillsObserved": [
         "deadpan register as deflection",
@@ -1644,7 +1674,7 @@
         "reading a practitioner's result from body language alone"
       ],
       "status": "active",
-      "statusNote": "At the wash-room site with Silas, crouching at the cradle-recess rim, watching the entrance.",
+      "statusNote": "At the wash-room site with Silas, crouching at the cradle-recess rim, waiting for the Order-Sense read.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1749,7 +1779,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings — not a local animal; Huginn watched it go on World-day 15 morning.",
         "[d2] Valve Failure Timeline note now carries a second marginal annotation — unknown dog, upper meadow path, three-week onset; written in Silas's hand at the intake site on World-day 15 morning.",
         "[d2] Pell identified a faint soil-rise above the east furlong valve housing as a probable subsurface course — the buried structure extends under this furlong, not only beneath the north-cut hillside.",
         "[d2] Order-Sense confirms a coursed stone ceiling running northeast from the east furlong valve housing for approximately forty feet — the soil-rise above the housing is the roof settling; the structure is",
@@ -1760,7 +1789,8 @@
         "[d2] First kiss at the wash-room entrance on World-day 15 dawn — the site now carries that weight alongside its structural history.",
         "[d2] Cradle-recess identified as a load-bearing mount for something tall — iron-contact stain at base consistent with long-term object presence. Saddle-hooks read by Pell as a steadying rig, not a hanging ",
         "[d2] Date four agreed at the wash-room site — both terms named plainly and accepted: snowmelt pool, three hours north of the interference ridge, night, no spear.",
-        "[d2] Palework confirms cradle-recess held a stationed working piece — tall, load-bearing, regularly attended, cleanly removed. Age unresolvable beyond 40–200 years. No drag-scarring at lip."
+        "[d2] Palework confirms cradle-recess held a stationed working piece — tall, load-bearing, regularly attended, cleanly removed. Age unresolvable beyond 40–200 years. No drag-scarring at lip.",
+        "[d2] Order-Sense confirms the wash-room cradle-recess was an operator's station — the head of the buried structure's channel system. The instrument held here was cylindrical, iron-sheathed, ~5 ft tall, til"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1919,12 +1949,12 @@
     "agility": 3,
     "reason": 4,
     "insight": 4,
-    "presence": 3,
+    "presence": 4,
     "rapport": 4,
     "craft": 4,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [],
   "codex": {
@@ -2274,7 +2304,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Deathsense confirms: the deeper chamber holds nothing ending — whatever concluded there did so long ago. The space is on the far side of an ending with no active trajectory, no cause underway, no pivo",
           "[d2] Order-Sense confirms the near chamber was a staging space, not storage — ring-hooks held long heavy objects carried through the second aperture and used beyond it. Design predates the east channel inf",
           "[d2] Pell recalls a similar flagged-cellar site deeper in the valley — ring-hooks, flagged floor, locals called it 'the wash-room'. Nothing was washed in it. Two sites with identical architecture suggests ",
           "[d2] The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting ",
@@ -2297,7 +2326,8 @@
           "[d2] Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle",
           "[d2] Wash-room site reached — flagged floor, saddle-mount hooks, and cradle-recess now accessible for direct examination. This is the northeast terminus of the buried structure.",
           "[d2] Wash-room cradle-recess holds iron-contact stain consistent with a tall, load-bearing object — saddle-hooks read by Pell as a steadying rig. Something occupied this station and has been removed.",
-          "[d2] Cradle-recess contact stain confirmed as long-term built-in presence — not seasonal. Compression-polish on north/south inner ledge indicates the object was cradled, not merely placed, and was load-bea"
+          "[d2] Cradle-recess contact stain confirmed as long-term built-in presence — not seasonal. Compression-polish on north/south inner ledge indicates the object was cradled, not merely placed, and was load-bea",
+          "[d2] Order-Sense confirms the wash-room is an operator's station — the head of the buried structure. The cradle-recess held a cylindrical iron-sheathed instrument (~5 ft, weighted base, working head) that "
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2343,7 +2373,8 @@
         "facts": [
           "[d2] A buried amber light moved in a bedrock crack 70 paces north of the willow bend — thin, the color of old amber, threading along the stone like a lamp seen through thick glass. It pulsed once and went ",
           "[d2] A second pre-Transition site exists within reach of Millbrook — flagged slate floor, saddle-mount hooks, worn stand-positions, pressed wall-marks. Pell found it through the north cut following a hills",
-          "[d2] The buried structure beneath the east furlong and north-cut hillside is a single coherent design — different rooms (wash-room, valve seats), same builder, same intent. Huginn's attention moved to the "
+          "[d2] The buried structure beneath the east furlong and north-cut hillside is a single coherent design — different rooms (wash-room, valve seats), same builder, same intent. Huginn's attention moved to the ",
+          "[d2] The wash-room operator's station was the control head of the full buried structure — valve housings, channel junctions, and the amber-lit crack above the bedrock shelf are all downstream of this point"
         ],
         "links": [
           "the-water-crisis",
@@ -2351,7 +2382,8 @@
           "huginn",
           "pell",
           "aldric-provisioning-deal",
-          "order-sense"
+          "order-sense",
+          "dara-holt"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -2414,15 +2446,15 @@
     }
   },
   "tendencies": {
-    "strategic": 55.47025801935237,
-    "cerebral": 43.38119147710489,
-    "social": 53.33208733287907,
-    "generous": 14.333592028420597,
-    "cautious": 48.97815097047345,
-    "physical": 1.1240136123057167,
-    "risky": 3.738093496213696,
-    "ruthless": 1.5339666704640256,
-    "carousing": 1.9358931561657498
+    "strategic": 55.19290672925561,
+    "cerebral": 44.164285519719364,
+    "social": 53.065426896214674,
+    "generous": 14.261924068278494,
+    "cautious": 49.73326021562108,
+    "physical": 1.1183935442441881,
+    "risky": 3.7194030287326276,
+    "ruthless": 1.5262968371117054,
+    "carousing": 1.926213690384921
   },
   "aptitudes": [
     "strategist",
@@ -2430,7 +2462,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 200,
+  "actionCount": 201,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2516,8 +2548,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784087469293,
-  "rev": 273,
+  "updatedAt": 1784087576969,
+  "rev": 275,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2839,7 +2871,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 34,
+      "order_sense": 35,
       "palework": 15,
       "deathsense": 12,
       "shadowstep": 4,

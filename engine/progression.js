@@ -9,7 +9,8 @@
 
 import { slugify } from "./quests.js";
 import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression, forkPending } from "./skilltree.js";
-import { domainAccess } from "./traditions.js";
+import { domainAccess, traditionOf, isFolkTradition } from "./traditions.js";
+import { standingWithPeople } from "./reputation.js";
 
 // Practiced enough for `targetRank`? Inlined (not imported from practice.js) to avoid a circular
 // import — practice.js already imports discoveryKey from here. Mirrors practice.js practiceRankReady.
@@ -210,6 +211,26 @@ export function domainGateFor(ab, character, traditionIndex) {
   return domainAccess(ab, ab?.levelReq || 1, character.domains, traditionIndex);
 }
 
+/** SNG-100b: the capstone standing bar the accessGates fiction (SNG-049/050) always described but no
+ *  code enforced — "rank IV–V of a pole-tradition requires deep standing: a willing teacher + earned
+ *  reputation with that people. Greatness is taught, not bought." Below the capstone tier there is no
+ *  bar. SNG-101 promotion / SNG-102 acquisition reuse this with their own thresholds via opts
+ *  (`force` applies the bar regardless of tier; `threshold`/`requiresTeacher` override the defaults).
+ *  Returns {ok, why}. */
+export function meetsStandingBar(character, traditionId, tier, rules, opts = {}) {
+  const g = rules?.capstoneStanding || {};
+  const T = Number(tier) || 1;
+  if (!opts.force && T < (g.capstoneTier ?? 4)) return { ok: true }; // entry/mid tiers stand open
+  if (!traditionId) return { ok: true };
+  const threshold = opts.threshold ?? g.capstoneThreshold ?? 10;
+  const requiresTeacher = opts.requiresTeacher ?? g.requiresTeacher ?? true;
+  const { score } = standingWithPeople(character, traditionId, rules);
+  if (score < threshold) return { ok: false, why: `deep standing with this people is not yet earned (standing ${score} of ${threshold})` };
+  const t = character?.teachers?.[traditionId];
+  if (requiresTeacher && !(t && t.met && t.willing)) return { ok: false, why: "greatness is taught, not bought — a willing teacher of this people is required for its capstones" };
+  return { ok: true };
+}
+
 /** Learn a new ability (1 skill point), gated by effectiveLevelReq + the SNG-055 domain gate. */
 export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
@@ -233,6 +254,17 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   if (opts.attributeGates) {
     const g = meetsLearnGate(character, abilityId, opts.attributeGates);
     if (!g.ok) return { ok: false, why: g.why };
+  }
+  // SNG-100b: the capstone standing bar — Tier IV–V of a pole-tradition additionally requires deep
+  // standing with that people (willing teacher + earned reputation). This finally ENFORCES the
+  // accessGates capstone rule (SNG-049/050) that shipped as fiction only. Folk/learned/precursor and
+  // sub-capstone tiers pass untouched; the domain gate above still owns antipode/tier/closed-opposite.
+  if (idx && (ab.levelReq || 1) >= (rules?.capstoneStanding?.capstoneTier ?? 4)) {
+    const trad = traditionOf(ab, idx);
+    if (trad && !isFolkTradition(trad, idx)) {
+      const bar = meetsStandingBar(character, trad, ab.levelReq || 1, rules);
+      if (!bar.ok) return { ok: false, why: bar.why };
+    }
   }
   if (opts.skillCapacity && atCapacity(character, opts.skillCapacity)) {
     return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one" };

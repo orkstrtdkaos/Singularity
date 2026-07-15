@@ -104,6 +104,19 @@
       "band": "hated"
     }
   ],
+  "peopleStandingBands": [
+    { "min": 20, "band": "kin" },
+    { "min": 10, "band": "trusted" },
+    { "min": 4, "band": "known" },
+    { "min": 0, "band": "neutral" },
+    { "min": -4, "band": "wary" },
+    { "min": -999, "band": "estranged" }
+  ],
+  "capstoneStanding": {
+    "capstoneTier": 4,
+    "capstoneThreshold": 10,
+    "requiresTeacher": true
+  },
   "subAttributes": {
     "physical": [
       "strength",

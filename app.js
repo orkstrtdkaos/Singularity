@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.60";
+const APP_VERSION = "1.8.61";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -970,6 +970,11 @@ function migrate(c) {
   ensureFacts(c);
   refreshEvolvingItems(c, CONTENT.items); // SNG-010C: stamp current evolution stage on held evolving items
   if (!c.precursorAccess) c.precursorAccess = [];
+  // SNG-100b: the standing-bar primitives — additive, default-empty. A legacy save with none behaves
+  // exactly as today (the bar is simply unmet until earned). teachers: a durable "met + willing" flag
+  // per people; regionsKnown: turns spent among a people's region.
+  if (!c.teachers) c.teachers = {};
+  if (!c.regionsKnown) c.regionsKnown = {};
   if (!c.forkChoices) c.forkChoices = {}; // SNG-BATCH-5 Phase 2: permanent branch-fork picks
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
@@ -2294,6 +2299,9 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
   const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
   const location = hereNow();
+  // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
+  // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
+  if (location?.regionId) { character.regionsKnown = character.regionsKnown || {}; character.regionsKnown[location.regionId] = (character.regionsKnown[location.regionId] || 0) + 1; }
   const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
   const time = readClock(character.clock);
   const result = await gmTurn({
@@ -2496,6 +2504,15 @@ function applyTurn(turn, resolution, playerWords = null) {
     const r = markDefiningMoment(character, mid, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks });
     if (r.ok) turn.narration += `\n\n*✦ A defining moment — **${ab?.name}** is mastered now (rank 3).*`;
     else if (r.forkPending) { character.pendingMasteryFork = mid; turn.narration += `\n\n*⑂ A defining moment for **${ab?.name}** — but it stands at a fork. Choose its path on your Character screen to master it.*`; }
+  }
+  // SNG-100b: the GM records a willing teacher of a people (durable — unlocks that people's capstones,
+  // and later promotion/acquisition). Only for a real tradition; the engine never invents one.
+  if (turn.markTeacher?.traditionId && CONTENT.traditionIndex?.byId?.[turn.markTeacher.traditionId]) {
+    const tid = turn.markTeacher.traditionId;
+    const first = !character.teachers?.[tid]?.willing;
+    character.teachers = character.teachers || {};
+    character.teachers[tid] = { met: true, willing: turn.markTeacher.willing !== false, npcId: String(turn.markTeacher.npcId || "").slice(0, 60) || null };
+    if (first && character.teachers[tid].willing) turn.narration += `\n\n*✦ You have a teacher among the ${traditionLabel(tid)} now — their deepest craft opens to you as you earn their people's trust.*`;
   }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {

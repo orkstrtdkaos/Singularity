@@ -39,6 +39,19 @@ export function standingWith(character, communityId, rules) {
   return { score, band };
 }
 
+/** SNG-100b: standing with a PEOPLE (a tradition/pole), distinct from settlement reputation. Source is
+ *  `character.peopleDisposition[traditionId]` — durable per-tradition integers accrued from quest work
+ *  with that people (quests.js). Banded against `rules.peopleStandingBands` (a smaller scale than the
+ *  settlement `reputationBands` — these deltas are ±1/±2, not ±5/deed). Fixed contract `{score, band}`
+ *  so SNG-101/102 read one shape regardless of the source. 0 / lowest band for an unknown people. */
+export function standingWithPeople(character, traditionId, rules) {
+  const score = Math.round(character?.peopleDisposition?.[traditionId] || 0);
+  const bands = rules?.peopleStandingBands || [{ min: 0, band: "neutral" }];
+  let band = bands[bands.length - 1].band;
+  for (const b of bands) { if (score >= b.min) { band = b.band; break; } }
+  return { score, band };
+}
+
 /** Dominant deed tags a community associates with this character (for NPC reactions). */
 export function knownTags(character, communityId, limit = 4) {
   const counts = {};

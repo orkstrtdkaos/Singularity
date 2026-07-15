@@ -16,7 +16,8 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar } from "../engine/progression.js";
+import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
@@ -2165,6 +2166,32 @@ await (async () => {
   check("nativeGrantsFor returns [] when no ability is tagged native", nativeGrantsFor("umbral", catalog).length === 0);
   const withNative = { ...catalog, born: { id: "born", name: "Born", tradition: "umbral", nativeOrCombination: "native", levelReq: 1 } };
   check("nativeGrantsFor returns a tagged native of the tradition", nativeGrantsFor("umbral", withNative).some(a => a.id === "born"));
+})();
+
+// --- SNG-100b: the standing bar (per-people standing + teacher gate) ---
+(() => {
+  const rules = {
+    peopleStandingBands: [{ min: 20, band: "kin" }, { min: 10, band: "trusted" }, { min: 4, band: "known" }, { min: 0, band: "neutral" }, { min: -999, band: "estranged" }],
+    capstoneStanding: { capstoneTier: 4, capstoneThreshold: 10, requiresTeacher: true }
+  };
+  // standingWithPeople reads peopleDisposition, bands top-down; fixed {score, band} contract
+  const c = { peopleDisposition: { umbral: 12 }, teachers: {} };
+  const s = standingWithPeople(c, "umbral", rules);
+  check("standingWithPeople returns {score, band} from peopleDisposition", s.score === 12 && s.band === "trusted");
+  check("standingWithPeople is neutral/0 for an unknown people", standingWithPeople(c, "blazeborn", rules).score === 0);
+
+  // capstone bar: below capstoneTier there is no bar at all
+  check("meetsStandingBar is open below the capstone tier", meetsStandingBar(c, "umbral", 3, rules).ok === true);
+  // at capstone tier: needs BOTH threshold standing AND a willing teacher
+  check("capstone bar blocks with standing but no teacher", meetsStandingBar(c, "umbral", 4, rules).ok === false);
+  c.teachers.umbral = { met: true, willing: true, npcId: "n1" };
+  check("capstone bar opens with standing + a willing teacher", meetsStandingBar(c, "umbral", 4, rules).ok === true);
+  // standing below threshold blocks even with a teacher
+  const poor = { peopleDisposition: { umbral: 3 }, teachers: { umbral: { met: true, willing: true } } };
+  check("capstone bar blocks below the standing threshold", meetsStandingBar(poor, "umbral", 4, rules).ok === false);
+  // an unwilling teacher does not count
+  const unwilling = { peopleDisposition: { umbral: 12 }, teachers: { umbral: { met: true, willing: false } } };
+  check("an unwilling teacher does not clear the capstone bar", meetsStandingBar(unwilling, "umbral", 4, rules).ok === false);
 })();
 
 // --- SNG-045: player identity dedup (one person, one profile) ---

@@ -128,10 +128,16 @@ for (const pack of PACKS) {
           `got "${a.nativeOrCombination}"`);
         if (a.nativeOrCombination === "combination") {
           combination++;
-          check(`combination "${a.id}" names a combinationAxis`, typeof a.combinationAxis === "string" && a.combinationAxis.length > 0,
-            "a combination must name the axis it touches (schema)");
-          check(`combination "${a.id}" carries an unlockCondition object`, a.unlockCondition && typeof a.unlockCondition === "object",
-            "post-creation unlock needs {type, description}");
+          // Two combination subtypes: AXIS-TOUCH (a primary tradition reaching an adjacent axis — carries
+          // combinationAxis + unlockCondition) and cross-pole BRAID (spans an axis rather than touching one;
+          // axes≈0, no combinationAxis — the braid system owns its unlock). Both are `combination` so SNG-101
+          // foreclosure exempts them. Validate the axis-touch PAIR is consistent; a braid needs neither field.
+          if (a.combinationAxis != null || a.unlockCondition != null) {
+            check(`axis-touch combination "${a.id}" names a combinationAxis`, typeof a.combinationAxis === "string" && a.combinationAxis.length > 0,
+              "a combination that declares an unlockCondition must also name the axis it touches (schema)");
+            check(`axis-touch combination "${a.id}" carries an unlockCondition object`, a.unlockCondition && typeof a.unlockCondition === "object",
+              "post-creation unlock needs {type, description}");
+          }
         } else native++;
       }
       if (a.rankProgression === "spend") { spendCount++; warn(`ability "${a.id}" uses rankProgression:"spend" — legacy; depth is through use now`); }
@@ -169,6 +175,20 @@ for (const pack of PACKS) {
     check("romance_guidance carries non-empty guidance text", typeof rg.text === "string" && rg.text.length > 500,
       `text is ${typeof rg.text === "string" ? rg.text.length + " chars" : "missing"} — the GM would pull an empty doc`);
   }
+}
+
+// (3f) SNG-100b — the standing-bar config. peopleStandingBands (per-people reputation scale) + the
+// capstoneStanding thresholds must exist and be shaped, or meetsStandingBar silently passes/fails.
+{
+  const r = rj("content/packs/core/rules/resolution.json");
+  const bands = r.peopleStandingBands;
+  check("peopleStandingBands is a non-empty {min,band}[] sorted high→low", Array.isArray(bands) && bands.length > 0
+    && bands.every(b => typeof b.min === "number" && typeof b.band === "string")
+    && bands.every((b, i) => i === 0 || bands[i - 1].min >= b.min),
+    "standingWithPeople bands read top-down; a mis-sorted or malformed table mis-bands standing");
+  const cs = r.capstoneStanding;
+  check("capstoneStanding names capstoneTier + capstoneThreshold", cs && typeof cs.capstoneTier === "number" && typeof cs.capstoneThreshold === "number",
+    "meetsStandingBar reads these — without them the capstone bar never bites (SNG-049/050 stays unwired)");
 }
 
 // (4) location connectivity: dangling connections, one-way edges, unreachable locations

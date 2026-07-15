@@ -1301,16 +1301,37 @@
         "player": "Use The Attended End — open it yourself and read what is ending here and how long it has.",
         "summary": "The Attended End reads the ending in the hillside — six weeks before a structural section fails; Pell names it before Silas speaks.",
         "narration": "You open The Attended End quietly, without ceremony — a small internal unlocking, the way you'd lift a latch rather than push a door. Marrow's work, not yours; you are borrowing the clarity it already carries.\n\nIt comes back clean and plain: something is ending in the hillside northeast of you, maybe forty feet out and deeper in the bank. Not a person. Not an animal. The structure itself — a section of it, the part that has been holding a last breath since whatever instrument was removed from this cradle. Forty years of strain taken up by old mortar and dressed stone and the patience of buried things. The countdown is not dramatic. You read perhaps six weeks left before the section fails — a slow settling into itself, the way a held weight eventually wins. Not a collapse. A surrender.\n\nPell watches your face. She has learned, in the last hour, what your expressions during a reading look like. 'The building,' she says. Not a question.\n\nHuginn crooks once, low, and does not look back."
+      },
+      {
+        "player": "Tell Pell what you read — six weeks, the structure section, slow — and ask if she knows what that kind of failure does to an active channel system",
+        "summary": "Silas briefs Pell on the six-week failure window; she reads the irrigation consequence and names Dara Holt as the necessary next step.",
+        "narration": "The words come out plain, the way The Attended End always asks for them — no softening, no preamble. Six weeks. A section of the buried structure northeast of here, slow compression surrender, not a fracture. Whatever that instrument did when it sat in this cradle, part of the structure has been holding its own weight against the void it left, and in six weeks it stops.\n\nPell listens without moving. When you finish she lets a breath out through her nose — not alarm, just the sound of a person absorbing a number they were half-expecting to be worse. She turns back toward the northeast wall, one hand resting on the cradle-recess rim, and you can see her doing the geometry: the buried channel running under the east furlong, the valve housings at both Fen's intake and the east bend, the counterclockwise torque signature pulling at both sites from something inside the structure.\n\n\"If it fails here\" — she taps the rim — \"and the channel is still carrying water, the collapse redirects the flow. Doesn't stop it. Sideways, down, wherever the path of least resistance goes.\" She pauses. \"That's not a slow problem. That's a fast problem that starts six weeks from now and runs in an hour.\" Her finger traces a line northeast, toward the hillside above. \"Dara's east-channel network pulls from the same water-right as Fen's intake. A redirected surge hits the whole east furlong system at once — wrong pressure, wrong direction. You'd blow every sleeve blank still seated in the valley floor between here and the upper meadow.\"\n\nHuginn gives one low croak from the ring-hook. It doesn't look at either of you.\n\nPell straightens and looks at you directly. \"Dara needs the full picture. Not a fragment — the valve torque, the structure, the timing, all of it. She's the only one in this village who can read what it means for the irrigation network.\" A beat. \"And someone should walk the northeast section above ground — find where the settling line surfaces, mark it before it's under snow. Six weeks is six weeks, but early spring here runs fast.\""
       }
     ],
     "lastTurn": {
-      "narration": "You open The Attended End quietly, without ceremony — a small internal unlocking, the way you'd lift a latch rather than push a door. Marrow's work, not yours; you are borrowing the clarity it already carries.\n\nIt comes back clean and plain: something is ending in the hillside northeast of you, maybe forty feet out and deeper in the bank. Not a person. Not an animal. The structure itself — a section of it, the part that has been holding a last breath since whatever instrument was removed from this cradle. Forty years of strain taken up by old mortar and dressed stone and the patience of buried things. The countdown is not dramatic. You read perhaps six weeks left before the section fails — a slow settling into itself, the way a held weight eventually wins. Not a collapse. A surrender.\n\nPell watches your face. She has learned, in the last hour, what your expressions during a reading look like. 'The building,' she says. Not a question.\n\nHuginn crooks once, low, and does not look back.",
-      "sceneSummary": "The Attended End reads the ending in the hillside — six weeks before a structural section fails; Pell names it before Silas speaks.",
+      "narration": "The words come out plain, the way The Attended End always asks for them — no softening, no preamble. Six weeks. A section of the buried structure northeast of here, slow compression surrender, not a fracture. Whatever that instrument did when it sat in this cradle, part of the structure has been holding its own weight against the void it left, and in six weeks it stops.\n\nPell listens without moving. When you finish she lets a breath out through her nose — not alarm, just the sound of a person absorbing a number they were half-expecting to be worse. She turns back toward the northeast wall, one hand resting on the cradle-recess rim, and you can see her doing the geometry: the buried channel running under the east furlong, the valve housings at both Fen's intake and the east bend, the counterclockwise torque signature pulling at both sites from something inside the structure.\n\n\"If it fails here\" — she taps the rim — \"and the channel is still carrying water, the collapse redirects the flow. Doesn't stop it. Sideways, down, wherever the path of least resistance goes.\" She pauses. \"That's not a slow problem. That's a fast problem that starts six weeks from now and runs in an hour.\" Her finger traces a line northeast, toward the hillside above. \"Dara's east-channel network pulls from the same water-right as Fen's intake. A redirected surge hits the whole east furlong system at once — wrong pressure, wrong direction. You'd blow every sleeve blank still seated in the valley floor between here and the upper meadow.\"\n\nHuginn gives one low croak from the ring-hook. It doesn't look at either of you.\n\nPell straightens and looks at you directly. \"Dara needs the full picture. Not a fragment — the valve torque, the structure, the timing, all of it. She's the only one in this village who can read what it means for the irrigation network.\" A beat. \"And someone should walk the northeast section above ground — find where the settling line surfaces, mark it before it's under snow. Six weeks is six weeks, but early spring here runs fast.\"",
+      "sceneSummary": "Silas briefs Pell on the six-week failure window; she reads the irrigation consequence and names Dara Holt as the necessary next step.",
       "choices": [
         {
-          "label": "Step northeast into the hillside — follow the buried structure's line and find the failing section before it shows itself",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Head to Dara Holt's now — twenty minutes north, chimney already smoking; bring the full briefing: the note, the torque, the six weeks.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk the northeast line above ground first — follow the settling-seam as far as it goes, mark the surface footprint of the failure section before going to Dara.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
@@ -1324,7 +1345,7 @@
           "emergenceId": null
         },
         {
-          "label": "Use Order-Sense on the northeast line — read the failing section's place in the full design before going in",
+          "label": "Ask Pell what she thinks Dara will do with the information — read the local politics before you put the full picture in front of the senior irrigator.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
@@ -1333,22 +1354,6 @@
             "study",
             "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell Pell what you read — six weeks, the structure section, slow — and ask if she knows what that kind of failure does to an active channel system",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "plan"
-          ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
@@ -1356,14 +1361,13 @@
           "emergenceId": null
         },
         {
-          "label": "Leave the wash-room — take what you have, brief Dara Holt now, and let the site wait while the person with twenty-two years on the east channel hears the full picture",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Go your own action.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "careful"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1374,19 +1378,18 @@
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -4,
-        "xp": 2
+        "energy": 0
       },
       "scene": {
-        "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The Attended End has been opened and read; Huginn's attention remains fixed northeast.",
+        "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The Attended End reading complete; its clarity still sitting in the chest.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing near the recess, watching Silas's face — she named the building before he spoke; waiting for the detail."
+            "state": "Standing at the cradle-recess rim, one hand still resting on the stone — has just named the irrigation consequence and Dara Holt as the necessary next step."
           },
           {
             "name": "Huginn",
-            "state": "At the ring-hook, head low and forward, fixed northeast — one low croak, attention unbroken."
+            "state": "At the ring-hook, head low and forward, attention fixed northeast. One croak given. Unmoving."
           }
         ],
         "objects": [
@@ -1394,13 +1397,14 @@
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
           "Valve Failure Timeline note (breast pocket)",
-          "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compression-polish on inner ledge",
+          "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base",
           "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn"
         ],
         "threads": [
-          "A structural section northeast in the hillside is failing — six weeks, slow surrender; location unvisited",
+          "Six weeks before northeast structural section fails — location above ground unmarked",
           "Dara Holt unbriefed — twenty minutes north, chimney already smoking",
-          "Date three confirmed: last light, Disputed Zone interference ridge, food with fat"
+          "Date three confirmed: last light, Disputed Zone interference ridge, food with fat",
+          "Date four named: snowmelt pool, three hours north of the ridge, night, no spear"
         ]
       },
       "npcUpdates": [
@@ -1409,29 +1413,18 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning.",
+          "note": "Absorbed the six-week failure timeline without alarm — immediately read the irrigation consequence (redirected surge, blown sleeve blanks across the east furlong) and named Dara Holt as the necessary recipient of the full briefing. Also flagged the need to walk the northeast settling-seam above ground before snow.",
           "learned": [
-            "A section of the buried structure northeast of the wash-room is failing — slow, six weeks, a structural surrender rather than a collapse"
+            "A section of the buried structure northeast of the wash-room will fail in approximately six weeks — slow compression surrender, not fracture",
+            "A redirected surge from that failure would hit Dara's entire east-channel network at once, blowing every seated sleeve blank between here and the upper meadow"
           ],
           "skillsObserved": [
-            "reading a practitioner's expression across a reading without being told the content"
+            "hydraulic consequence modeling from structural read",
+            "immediate prioritization under time pressure"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the wash-room site with Silas — armor down, watching the read."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion",
-          "note": "One low croak after the reading landed — does not look back from the northeast. The read confirmed what Huginn already knew.",
-          "learned": [
-            "The structural section's ending confirmed by The Attended End — Huginn's attendance was accurate"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the ring-hook, attending the ending northeast — the read has caught up to where the bird already was."
+          "statusNote": "At the wash-room site with Silas — has just named the irrigation consequence and Dara Holt as the next step; waiting for Silas's decision on how to proceed."
         }
       ],
       "codexUpdates": [
@@ -1439,14 +1432,12 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": null,
-          "fact": "A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely. The removal of the operator's instrument left the structure holding a load it was not designed to hold alone.",
+          "fact": "When the failing structural section collapses, it will redirect the channel flow rather than stop it — a surge hitting Dara Holt's entire east-channel network, capable of blowing every seated sleeve blank between the wash-room and the upper meadow within an hour. Six weeks is the outer limit.",
           "links": [
             "pell",
-            "millbrook",
             "dara-holt",
-            "order-sense",
-            "the-unnamed-gift"
+            "millbrook",
+            "aldric-provisioning-deal"
           ]
         }
       ],
@@ -1454,31 +1445,24 @@
         {
           "op": "progress",
           "questId": "aldric-provisioning-deal",
-          "note": "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Attended End confirms a structural section northeast of the wash-room is failing — slow, six weeks, a load-surrender caused by removal of the operator's instrument. Not a collapse; a surrender.",
-          "subjectId": null
+          "note": "Pell reads the hydraulic consequence: six-week failure window, redirected surge, blown east-channel network. Dara Holt identified as the necessary recipient of the full briefing."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short internal read — The Attended End opened and closed in less than a minute"
+        "why": "A brief exchange at the cradle-recess — Silas's briefing and Pell's response."
       }
     },
     "sceneState": {
-      "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The Attended End has been opened and read; Huginn's attention remains fixed northeast.",
+      "setting": "Wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat through the entrance gap. The Attended End reading complete; its clarity still sitting in the chest.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing near the recess, watching Silas's face — she named the building before he spoke; waiting for the detail."
+          "state": "Standing at the cradle-recess rim, one hand still resting on the stone — has just named the irrigation consequence and D"
         },
         {
           "name": "Huginn",
-          "state": "At the ring-hook, head low and forward, fixed northeast — one low croak, attention unbroken."
+          "state": "At the ring-hook, head low and forward, attention fixed northeast. One croak given. Unmoving."
         }
       ],
       "objects": [
@@ -1486,13 +1470,14 @@
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
         "Valve Failure Timeline note (breast pocket)",
-        "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base, compres",
+        "Cradle-recess — 3 ft across, 1 ft deep, iron-brown contact ring at base",
         "Two saddle-mount ring-hooks at hip height on the far wall — iron, load-worn"
       ],
       "threads": [
-        "A structural section northeast in the hillside is failing — six weeks, slow surrender; location unvisited",
+        "Six weeks before northeast structural section fails — location above ground unmarked",
         "Dara Holt unbriefed — twenty minutes north, chimney already smoking",
-        "Date three confirmed: last light, Disputed Zone interference ridge, food with fat"
+        "Date three confirmed: last light, Disputed Zone interference ridge, food with fat",
+        "Date four named: snowmelt pool, three hours north of the ridge, night, no spear"
       ]
     }
   },
@@ -1519,14 +1504,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Fen's intake physical inspection begun — Pell identifies twisted sleeve and torqued cover as the failure mode. East furlong site next.",
         "Pell confirms: wash-room site and east-channel valve failures are the same structure — different rooms, same design intent, built to act on the water.",
         "Order-Sense confirms: the east furlong valve housing is the working end of a forty-foot coursed-stone structure running northeast under the soil. The soil-rise is the roof settling. The structure is largely intact.",
         "East furlong valve twist direction confirmed — counterclockwise, identical to Fen's intake. Both sleeves failed on the same axis. Pell's read: the torque originated inside the structure. Something turned.",
         "Valve Failure Timeline annotated — both sites share identical CCW torque from an inside source; wash-room added as third room, NE terminus. The structure's mechanical signature is now recorded.",
         "Palework on the cradle-recess confirms a stationed working piece removed cleanly — the structure's fourth room understood; age bracket narrows no further. Huginn's attention has shifted to the entrance.",
         "Order-Sense confirms the wash-room as the operator's station and head of the full buried channel system — the structure's purpose is operational infrastructure, not ruin. The instrument that controlled it is missing.",
-        "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information."
+        "The Attended End confirms: a structural section of the buried channel system has six weeks before it fails. The structure is load-bearing infrastructure for the eastern channel network. Dara Holt needs this information.",
+        "Pell reads the hydraulic consequence: six-week failure window, redirected surge, blown east-channel network. Dara Holt identified as the necessary recipient of the full briefing."
       ],
       "aliases": [],
       "startedAt": "2026-07-12T17:45:53.994Z"
@@ -1640,7 +1625,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Lost the race by three strides — caught Silas's shadowstep emerging from the bank shadow, pressed anyway on unfamiliar ground, arrived second. Breathing hard; processing defeat wit",
         "[d2] Received Silas's paradoxical concession — hand to his jaw, invited him to name the date plainly. The quiet in her face was warmer than the usual register.",
         "[d2] Pulled into a deep kiss at the wash-room entrance — leaned in rather than away, let it land, said 'alright' again afterward with the same complete weight as at the forge. File stil",
         "[d2] Accepted date three — last light, Disputed Zone interference ridge. Specified: bring food with fat. Moved immediately to read the cradle-recess and saddle-hooks, named them as a st",
@@ -1649,28 +1633,29 @@
         "[d2] Watched Palework on the cradle-recess — read Silas's hand coming up, said 'Old' before being told. Huginn's attention shift registered on her face.",
         "[d2] Hand gone still on the recess rim — watching Silas's face, asked directly what Order-Sense found. Waiting.",
         "[d2] Read Huginn's posture without prompting — named it plainly before Silas spoke.",
-        "[d2] Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning."
+        "[d2] Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning.",
+        "[d2] Absorbed the six-week failure timeline without alarm — immediately read the irrigation consequence (redirected surge, blown sleeve blanks across the east furlong) and named Dara Ho"
       ],
       "knownFacts": [
-        "Knows the ridge — has been there before",
-        "Read the saddle-hooks as a stabilizing mount, not a hanging rig",
         "Knows a snowmelt-fed pool three hours north of the interference ridge — clean water, not river-sourced; visits in early summer but considers the ice out by now",
         "Contact stain at the cradle-recess base is not seasonal — it is built-in, long-term presence of something cradled here.",
         "Palework confirmed the object was stationed, not fixed — old enough to stain stone to iron-brown; age bracket 40–200 years",
         "The cradle-recess read produced a different expression on Silas's face — she noticed before he spoke",
         "Huginn's low-and-forward posture signals an ending nearby — she can read it now",
-        "A section of the buried structure northeast of the wash-room is failing — slow, six weeks, a structural surrender rather than a collapse"
+        "A section of the buried structure northeast of the wash-room is failing — slow, six weeks, a structural surrender rather than a collapse",
+        "A section of the buried structure northeast of the wash-room will fail in approximately six weeks — slow compression surrender, not fracture",
+        "A redirected surge from that failure would hit Dara's entire east-channel network at once, blowing every seated sleeve blank between here and the upper meadow"
       ],
       "skillsObserved": [
-        "structural read on load-bearing geometry",
-        "immediate transition from personal to practical without cere",
         "material reading under field conditions",
         "reading a practitioner's result from body language alone",
         "reading animal attention without being told what it means",
-        "reading a practitioner's expression across a reading without"
+        "reading a practitioner's expression across a reading without",
+        "hydraulic consequence modeling from structural read",
+        "immediate prioritization under time pressure"
       ],
       "status": "active",
-      "statusNote": "At the wash-room site with Silas — armor down, watching the read.",
+      "statusNote": "At the wash-room site with Silas — has just named the irrigation consequence and Dara Holt as the next step; waiting for Silas's decision on how to proceed.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2300,7 +2285,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] The deeper chamber of the west-bank buried structure holds a single low ring-hook (hip height) with a wide cradle-recess below it — differently shaped from the near-chamber rest-positions, suggesting ",
           "[d2] Order-Sense confirms the deeper chamber was a fixed-purpose room, not a staging space — two stand-positions worn into the flags, a cradle-recess designed to hold one specific object that did not leave",
           "[d2] Pell read the deeper chamber's stand-marks as a two-person fixed operation requiring exact positioning — the grid calibrated against something not present in the room, which means either the instrumen",
           "[d2] Palework on the cradle-recess: the object that sat here was dense, field-active, not biological — leached iron from the stone beneath over years of use. Its removal was final and purposeful, not aband",
@@ -2323,7 +2307,8 @@
           "[d2] Cradle-recess contact stain confirmed as long-term built-in presence — not seasonal. Compression-polish on north/south inner ledge indicates the object was cradled, not merely placed, and was load-bea",
           "[d2] Order-Sense confirms the wash-room is an operator's station — the head of the buried structure. The cradle-recess held a cylindrical iron-sheathed instrument (~5 ft, weighted base, working head) that ",
           "[d2] Huginn is attending something ending northeast of the wash-room operator's station — in the hillside above the buried structure's main course. Pace: unhurried. Nature: unknown.",
-          "[d2] A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely"
+          "[d2] A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely",
+          "[d2] When the failing structural section collapses, it will redirect the channel flow rather than stop it — a surge hitting Dara Holt's entire east-channel network, capable of blowing every seated sleeve b"
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2442,15 +2427,15 @@
     }
   },
   "tendencies": {
-    "strategic": 54.64235748463128,
-    "cerebral": 44.72374677166017,
-    "social": 52.53609926292493,
-    "generous": 14.119661375697417,
-    "cautious": 51.232170944970264,
-    "physical": 1.1072375686403524,
-    "risky": 3.68230198352102,
-    "ruthless": 1.5110720261615163,
-    "carousing": 1.9069997088233315
+    "strategic": 55.369145697208126,
+    "cerebral": 44.500128037801865,
+    "social": 52.273418766610305,
+    "generous": 15.04906306881893,
+    "cautious": 50.97601009024541,
+    "physical": 1.1017013807971505,
+    "risky": 3.663890473603415,
+    "ruthless": 1.5035166660307087,
+    "carousing": 1.8974647102792148
   },
   "aptitudes": [
     "strategist",
@@ -2458,7 +2443,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 203,
+  "actionCount": 204,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2544,8 +2529,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784088042434,
-  "rev": 277,
+  "updatedAt": 1784088160518,
+  "rev": 278,
   "generated": {
     "schemaVersion": 1,
     "npc": {

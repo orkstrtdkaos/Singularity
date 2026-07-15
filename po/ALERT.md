@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## 📚 THE CHARACTER CHRONICLE ARC + 3 bugs (Aevi authored 2026-07-14, awaiting CCode ROUND 2)
+# PIPELINE ALERT — Singularity## 🎯 SNG-113 — Aptitudes: background grants + real decay + many more (specced, awaiting CCode)
+`po/SPEC_SNG-113_aptitudes_expansion.md`. Erik: "racked up all the play-styles" = too easy. **Verified: they're REAL modifiers** (feed resolve.js — strategist +5 planned +1 senseTier, silver_tongue +5 social, etc., each bonus AND cost) but only **7**, thresholds 6–8, and **decay is 0.995 (~139 turns to halve = cosmetic)** so once earned they're permanent. The "situational" mechanism EXISTS but is tuned dead. Fix: **background grants 1–2** (lineage-taught; today grants zero); **make decay bite (~0.975) + hysteresis** so aptitudes are maintained-by-play, not trophies (Erik's "situational bonuses"); **raise/curve thresholds**; **expand 7 → ~18–24**, each bonus+cost, filling empty tendencies (`cautious` has none) + new ones (stealth/deception/patience/craft/leadership/devotion/cruelty). Balance target: hold 2–4 at a time, never all. Flag: new tendencies need intent tags — if they push past the intentTags cap, apply SNG-100's load-bearing-hoist discipline.
+
+---
+
+## 📚 THE CHARACTER CHRONICLE ARC + 3 bugs (Aevi authored 2026-07-14, awaiting CCode ROUND 2)
 
 Erik play-session findings — the through-line is the session thesis: **the game computes the accreted self (deeds, bonds, standing, grown items) but shows the player almost none of it.** These surface and weave it.
 

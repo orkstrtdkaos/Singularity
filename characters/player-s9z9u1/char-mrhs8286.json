@@ -1346,16 +1346,22 @@
         "player": "Let Pell continue — watch Dara's face as she hears World-day minus-eighteen for the first time",
         "summary": "Dara hears World-day minus-eighteen and recognizes it — the missing gap in her unvoiced theory.",
         "narration": "The frost has not melted. Pell's voice is level, practical — she names World-day minus-eighteen the way she'd name a measurement, without softening it.\n\nDara's face does not move. That is the tell. A woman who had no theory would frown, or recalculate, or ask what Fen's intake has to do with the east furlong. Dara does none of those things. She takes one slow breath through her nose, and her grip on the mug shifts — not tighter, but more deliberate, the way a hand settles on a tool it has just decided to use. Her eyes go briefly to the clay pipe-sections stacked against the wall, then back to Pell. Then to you.\n\nYou read it: she already had minus-nine. She did not have minus-eighteen. But she is not surprised by it either — she is recognizing it. The way you recognize a word you have seen written in the dark and couldn't place, and then the light comes up and there it is. Not new information. Earlier information. The gap between the two dates is what she has been unable to account for, and now she has it.\n\nHuginn shifts on the gate-post — one small adjustment of his feet. He does not croak. The silence where the croak would have been is timed correctly. Dara lowers the mug. \"Both from the same direction?\" Her voice is careful — not guarded, careful. She is asking you as much as Pell."
+      },
+      {
+        "player": "Let Pell answer the direction question — step in with the mechanism",
+        "summary": "Pell confirms the northeast axis; Silas names the buried mechanism plainly — Dara absorbs it and asks how long.",
+        "narration": "Pell answers the direction question without hesitation. \"Both northeast,\" she says. \"Same axis. About a mile and a half apart.\"\n\nDara's chin lifts — a fraction, but you catch it. Northeast is the hillside. Northeast is the upper furlong drainage. Northeast is the direction nobody's been looking because the river runs southwest and everyone's eyes have been on the water. She sets the mug on the door-frame ledge, both hands free now, and you take that as your cue.\n\n\"The direction's the same because it's the same mechanism.\" You draw out the Valve Failure Timeline note — Mara's handwriting, four lines, the two dates and the two names — and hold it where Dara can read it without taking it. \"Both sleeves failed counterclockwise. Same torque, same stain pattern, same axis. There's a buried structure northeast of here — a pre-Transition system, stone-coursed, three rooms we've identified. The valve seats on the east channel are its working end. The control head is up in the hillside.\" You let that settle. \"It was operated from inside. Something in that structure moved, and the valves followed.\"\n\nDara looks at the note for a long moment. Her eyes track the dates — minus-eighteen, minus-nine — and you watch her sequence them against something she's been carrying quietly for weeks. When she looks up, it is not at you. It is at Pell. \"The pipe sections,\" she says, her voice flat and careful. \"I ordered them six days ago. I thought I was being cautious.\" She wasn't wrong. She just didn't know what she was being cautious about. \"How long do we have before the next one goes?\""
       }
     ],
     "lastTurn": {
-      "narration": "The frost has not melted. Pell's voice is level, practical — she names World-day minus-eighteen the way she'd name a measurement, without softening it.\n\nDara's face does not move. That is the tell. A woman who had no theory would frown, or recalculate, or ask what Fen's intake has to do with the east furlong. Dara does none of those things. She takes one slow breath through her nose, and her grip on the mug shifts — not tighter, but more deliberate, the way a hand settles on a tool it has just decided to use. Her eyes go briefly to the clay pipe-sections stacked against the wall, then back to Pell. Then to you.\n\nYou read it: she already had minus-nine. She did not have minus-eighteen. But she is not surprised by it either — she is recognizing it. The way you recognize a word you have seen written in the dark and couldn't place, and then the light comes up and there it is. Not new information. Earlier information. The gap between the two dates is what she has been unable to account for, and now she has it.\n\nHuginn shifts on the gate-post — one small adjustment of his feet. He does not croak. The silence where the croak would have been is timed correctly. Dara lowers the mug. \"Both from the same direction?\" Her voice is careful — not guarded, careful. She is asking you as much as Pell.",
-      "sceneSummary": "Dara hears World-day minus-eighteen and recognizes it — the missing gap in her unvoiced theory.",
+      "narration": "Pell answers the direction question without hesitation. \"Both northeast,\" she says. \"Same axis. About a mile and a half apart.\"\n\nDara's chin lifts — a fraction, but you catch it. Northeast is the hillside. Northeast is the upper furlong drainage. Northeast is the direction nobody's been looking because the river runs southwest and everyone's eyes have been on the water. She sets the mug on the door-frame ledge, both hands free now, and you take that as your cue.\n\n\"The direction's the same because it's the same mechanism.\" You draw out the Valve Failure Timeline note — Mara's handwriting, four lines, the two dates and the two names — and hold it where Dara can read it without taking it. \"Both sleeves failed counterclockwise. Same torque, same stain pattern, same axis. There's a buried structure northeast of here — a pre-Transition system, stone-coursed, three rooms we've identified. The valve seats on the east channel are its working end. The control head is up in the hillside.\" You let that settle. \"It was operated from inside. Something in that structure moved, and the valves followed.\"\n\nDara looks at the note for a long moment. Her eyes track the dates — minus-eighteen, minus-nine — and you watch her sequence them against something she's been carrying quietly for weeks. When she looks up, it is not at you. It is at Pell. \"The pipe sections,\" she says, her voice flat and careful. \"I ordered them six days ago. I thought I was being cautious.\" She wasn't wrong. She just didn't know what she was being cautious about. \"How long do we have before the next one goes?\"",
+      "sceneSummary": "Pell confirms the northeast axis; Silas names the buried mechanism plainly — Dara absorbs it and asks how long.",
       "choices": [
         {
-          "label": "Confirm direction — show her the annotated Valve Failure Timeline",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Tell her about the failing vault section — six weeks, and name the footprint on the hillside",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "inform",
@@ -1368,13 +1374,14 @@
           "emergenceId": null
         },
         {
-          "label": "Let Pell answer the direction question — step in with the mechanism",
+          "label": "Offer to walk her to the marked footprint on the hillside — let her see the river-pebble markers herself",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "support",
-            "careful"
+            "help",
+            "show"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1383,30 +1390,36 @@
           "emergenceId": null
         },
         {
-          "label": "Answer her question and raise the surface footprint — give her the full picture at once",
-          "attribute": "practical",
-          "subAttribute": "reason",
+          "label": "Ask Dara what the pipe sections were for — find out what she'd already begun preparing",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "inform",
-            "plan"
+            "study",
+            "listen"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Dara what her theory was — hear her read before you give her the mechanism",
-          "attribute": "social",
+          "label": "Let Pell answer — stay quiet and use Order-Sense on the clay pipe-sections stacked against the wall to read what design they're part of",
+          "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -1416,35 +1429,36 @@
         "energy": 0
       },
       "scene": {
-        "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug now lowered.",
+        "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug set on the door-frame ledge, both hands now free.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the doorstep, having just named World-day minus-eighteen — watching Dara."
+            "state": "Standing at the doorstep, having just named the northeast axis — watching Dara take in the mechanism."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the blue gate-post, one small foot-adjustment, silent."
+            "state": "Perched on the blue gate-post, settled and silent."
           },
           {
             "name": "Dara Holt",
-            "state": "In the open doorway, mug lowered, grip deliberate — has just asked 'Both from the same direction?' looking between Pell and Silas."
+            "state": "In the open doorway, mug set aside, both hands free — has just asked how long before the next valve goes."
           }
         ],
         "objects": [
           "Memory (spear, across shoulders)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
-          "Valve Failure Timeline note (breast pocket)",
+          "Valve Failure Timeline note (held out for Dara to read — still in Silas's hand)",
           "Clay pipe-sections stacked against the house wall",
           "Dormant herb bed (left of path)",
-          "Blue gate-post"
+          "Blue gate-post",
+          "Mug (set on door-frame ledge)"
         ],
         "threads": [
-          "Dara has asked whether both failure sites share the same direction — waiting for an answer",
-          "World-day minus-eighteen registered — she is recognizing it, not learning it fresh",
-          "Mechanism (CCW torque, buried structure) not yet disclosed",
-          "Six-week failure window and surface footprint not yet disclosed"
+          "Dara has asked how long before the next failure — the six-week window and vault footprint not yet disclosed",
+          "Dara ordered pipe sections six days ago — she's been preparing without knowing what for",
+          "Mechanism (CCW torque, buried structure, operator's station) now disclosed — Dara absorbing it",
+          "The wash-room site and the cradle-recess removal not yet disclosed"
         ]
       },
       "npcUpdates": [
@@ -1452,26 +1466,30 @@
           "op": "update",
           "npcId": "dara-holt",
           "name": "Dara Holt",
-          "note": "Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the same direction, looking between Pell and Silas.",
+          "role": "Senior east-channel irrigator, Millbrook",
+          "note": "Heard the northeast axis and the CCW torque mechanism — absorbed it cleanly. Named that she ordered pipe sections six days ago, without knowing what she was preparing for. Asked how long before the next failure.",
           "learned": [
-            "World-day minus-eighteen is Fen's intake failure — an earlier confirmed failure she did not have the date for"
+            "Both valve failures share a northeast axis — one buried structure, same mechanism",
+            "CCW torque at both sites — operated from inside the structure",
+            "A buried pre-Transition system with three identified rooms runs northeast under the hillside",
+            "The control head is up in the hillside, not at the river"
           ],
           "skillsObserved": [
-            "suppressing recognition under professional composure",
-            "rapid triage of new temporal data against an existing unvoiced model"
+            "rapid operational response — immediately asking timeline rather than disputing the mechanism"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At her own doorstep at dawn, briefing deepening — has just asked about direction of both failure sites."
+          "statusNote": "At her own doorstep at dawn on World-day 15 — has just heard the buried mechanism explained and is asking how long before the next valve fails."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Named World-day minus-eighteen plainly — watching Dara take it in.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Named the northeast axis cleanly — handed the floor to Silas for the mechanism disclosure as agreed.",
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At Dara's doorstep, leading the briefing — has just named the earlier failure date."
+          "statusNote": "At Dara's doorstep, briefing in progress — watching Dara take in the mechanism Silas has just named."
         }
       ],
       "codexUpdates": [
@@ -1480,51 +1498,51 @@
           "label": "Dara Holt, the Ditch-Mother",
           "kind": "person",
           "entityId": "dara-holt",
-          "fact": "Heard World-day minus-eighteen and recognized it rather than learning it fresh — the gap between the two dates is what her unvoiced theory could not account for. Asked whether both failure sites share the same direction.",
+          "fact": "Ordered clay pipe-sections six days ago as a precautionary measure — she has been preparing for something without knowing what. Asked how long before the next valve failure, accepting the buried mechanism without dispute.",
           "links": [
             "the-water-crisis",
             "millbrook",
             "pell",
-            "mara-wells",
             "aldric-provisioning-deal"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a few minutes of doorstep briefing — frost still unmelted"
+        "why": "A short exchange at Dara's doorstep — the mechanism disclosed, her question asked."
       }
     },
     "sceneState": {
-      "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug now lowered.",
+      "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug set on the door-frame ledge, both hands now free.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the doorstep, having just named World-day minus-eighteen — watching Dara."
+          "state": "Standing at the doorstep, having just named the northeast axis — watching Dara take in the mechanism."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the blue gate-post, one small foot-adjustment, silent."
+          "state": "Perched on the blue gate-post, settled and silent."
         },
         {
           "name": "Dara Holt",
-          "state": "In the open doorway, mug lowered, grip deliberate — has just asked 'Both from the same direction?' looking between Pell "
+          "state": "In the open doorway, mug set aside, both hands free — has just asked how long before the next valve goes."
         }
       ],
       "objects": [
         "Memory (spear, across shoulders)",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
-        "Valve Failure Timeline note (breast pocket)",
+        "Valve Failure Timeline note (held out for Dara to read — still in Silas's hand)",
         "Clay pipe-sections stacked against the house wall",
         "Dormant herb bed (left of path)",
-        "Blue gate-post"
+        "Blue gate-post",
+        "Mug (set on door-frame ledge)"
       ],
       "threads": [
-        "Dara has asked whether both failure sites share the same direction — waiting for an answer",
-        "World-day minus-eighteen registered — she is recognizing it, not learning it fresh",
-        "Mechanism (CCW torque, buried structure) not yet disclosed",
-        "Six-week failure window and surface footprint not yet disclosed"
+        "Dara has asked how long before the next failure — the six-week window and vault footprint not yet disclosed",
+        "Dara ordered pipe sections six days ago — she's been preparing without knowing what for",
+        "Mechanism (CCW torque, buried structure, operator's station) now disclosed — Dara absorbing it",
+        "The wash-room site and the cradle-recess removal not yet disclosed"
       ]
     }
   },
@@ -1672,7 +1690,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning.",
         "[d2] Absorbed the six-week failure timeline without alarm — immediately read the irrigation consequence (redirected surge, blown sleeve blanks across the east furlong) and named Dara Ho",
         "[d2] Walked the northeast line with Silas — placed the far marker stone without prompting, read the consequence against the valley below and named it plainly.",
         "[d2] Read Dara Holt's likely posture without prompting — theory held quiet, waiting for corroborating numbers; advised leading with the valve timeline and letting Dara reach the structu",
@@ -1681,7 +1698,8 @@
         "[d2] Heard Silas's theory that the pass opened deliberately and the structure, cradle-recess, and contamination are one connected signal — read it like iron, accepted it, and opened Dar",
         "[d2] Went through the gate first, reached the door first, opened clean — 'We've been walking the east channel. I need to show you a date.' Exactly as she set the terms.",
         "[d2] Delivered her opening line cleanly — chin came up when Dara named the date herself; glanced back at Silas.",
-        "[d2] Named World-day minus-eighteen plainly — watching Dara take it in."
+        "[d2] Named World-day minus-eighteen plainly — watching Dara take it in.",
+        "[d2] Named the northeast axis cleanly — handed the floor to Silas for the mechanism disclosure as agreed."
       ],
       "knownFacts": [
         "Dara is a practical woman — numbers will either confirm her theory or give her permission to voice it",
@@ -1702,7 +1720,7 @@
         "reading a room's shift in real time"
       ],
       "status": "active",
-      "statusNote": "At Dara's doorstep, leading the briefing — has just named the earlier failure date.",
+      "statusNote": "At Dara's doorstep, briefing in progress — watching Dara take in the mechanism Silas has just named.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1811,28 +1829,33 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d2] First meeting — door already open when Pell arrived. Took in Pell, Silas, and Huginn in sequence without flinching. Said Pell's name like the start of a sentence she hadn't finishe",
         "[d2] Named World-day minus-nine herself before Pell could show her anything — she's been sitting on a theory for at least a week and filed nothing because she couldn't prove the mechani",
-        "[d2] Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the "
+        "[d2] Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the ",
+        "[d2] Heard the northeast axis and the CCW torque mechanism — absorbed it cleanly. Named that she ordered pipe sections six days ago, without knowing what she was preparing for. Asked ho"
       ],
       "knownFacts": [
         "Awake and working before dawn on World-day 15",
         "Took stock of an unfamiliar man and a large corvid without dropping her composure",
         "Has an unvoiced theory about the sleeve failures — held because numbers without mechanism aren't actionable",
         "Filed no report despite three weeks of failures — waiting for confirmation, not ignorant",
-        "World-day minus-eighteen is Fen's intake failure — an earlier confirmed failure she did not have the date for"
+        "World-day minus-eighteen is Fen's intake failure — an earlier confirmed failure she did not have the date for",
+        "Both valve failures share a northeast axis — one buried structure, same mechanism",
+        "CCW torque at both sites — operated from inside the structure",
+        "A buried pre-Transition system with three identified rooms runs northeast under the hillside"
       ],
       "skillsObserved": [
         "fast visual accounting under surprise",
         "rapid information triage under surprise",
         "suppressing relief under professional composure",
         "suppressing recognition under professional composure",
-        "rapid triage of new temporal data against an existing unvoic"
+        "rapid triage of new temporal data against an existing unvoic",
+        "rapid operational response — immediately asking timeline rat"
       ],
       "status": "active",
-      "statusNote": "At her own doorstep at dawn, briefing deepening — has just asked about direction of both failure sites.",
+      "statusNote": "At her own doorstep at dawn on World-day 15 — has just heard the buried mechanism explained and is asking how long before the next valve fails.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2419,7 +2442,8 @@
           "[d2] Pell's read: Dara has filed no report to the elder panel despite three weeks of sleeve blank failures — either she has no working theory or she has one she won't say aloud until someone else confirms ",
           "[d2] First meeting: door already open at dawn on World-day 15. Took in Pell, Silas, and Huginn without flinching. Waiting for Pell's date — briefing in progress.",
           "[d2] Named World-day minus-nine herself before being shown Mara's note — has held an unvoiced theory about the sleeve failures for at least a week; filed nothing because she lacked a mechanism to attach th",
-          "[d2] Heard World-day minus-eighteen and recognized it rather than learning it fresh — the gap between the two dates is what her unvoiced theory could not account for. Asked whether both failure sites share"
+          "[d2] Heard World-day minus-eighteen and recognized it rather than learning it fresh — the gap between the two dates is what her unvoiced theory could not account for. Asked whether both failure sites share",
+          "[d2] Ordered clay pipe-sections six days ago as a precautionary measure — she has been preparing for something without knowing what. Asked how long before the next valve failure, accepting the buried mecha"
         ],
         "links": [
           "the-water-crisis",
@@ -2532,15 +2556,15 @@
     }
   },
   "tendencies": {
-    "strategic": 56.09901876554469,
-    "cerebral": 45.740963444132504,
-    "social": 54.13440702798509,
-    "generous": 16.422803955664236,
-    "cautious": 52.89821643909578,
-    "physical": 1.058396852629276,
-    "risky": 3.519874090413113,
-    "ruthless": 1.4444180019554353,
-    "carousing": 1.8228811475951232
+    "strategic": 55.81852367171697,
+    "cerebral": 45.512258626911844,
+    "social": 53.86373499284517,
+    "generous": 16.340689935885916,
+    "cautious": 53.63372535690031,
+    "physical": 1.0531048683661295,
+    "risky": 3.5022747199610476,
+    "ruthless": 1.437195911945658,
+    "carousing": 1.8137667418571475
   },
   "aptitudes": [
     "strategist",
@@ -2548,7 +2572,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 212,
+  "actionCount": 213,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2634,8 +2658,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784120857633,
-  "rev": 295,
+  "updatedAt": 1784121216213,
+  "rev": 296,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3060,7 +3084,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 7
+    "valley": 8
   },
   "foreclosed": [
     "rootkin",

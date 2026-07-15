@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 6,
-  "xp": 546,
+  "xp": 551,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -43,7 +43,7 @@
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.17735604682204079,
     "mechanical_spiritual": 0.16517695395990592,
-    "concrete_abstract": -0.06633731540431394,
+    "concrete_abstract": -0.07802044963409824,
     "death_life": -0.1571252728911151,
     "emotional_logical": 0.034999999999999996,
     "falsehood_truth": 0.04000000000000001,
@@ -53,7 +53,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 58,
+  "energy": 53,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1341,21 +1341,25 @@
         "player": "Watch Dara's face as Pell speaks — read what she already suspects before she says it aloud",
         "summary": "Dara names World-day minus-nine before Pell can show her — she's had a theory for at least a week.",
         "narration": "Pell says her opening line — and Dara names the date herself, before you've shown her anything. She already knows."
+      },
+      {
+        "player": "Let Pell continue — watch Dara's face as she hears World-day minus-eighteen for the first time",
+        "summary": "Dara hears World-day minus-eighteen and recognizes it — the missing gap in her unvoiced theory.",
+        "narration": "The frost has not melted. Pell's voice is level, practical — she names World-day minus-eighteen the way she'd name a measurement, without softening it.\n\nDara's face does not move. That is the tell. A woman who had no theory would frown, or recalculate, or ask what Fen's intake has to do with the east furlong. Dara does none of those things. She takes one slow breath through her nose, and her grip on the mug shifts — not tighter, but more deliberate, the way a hand settles on a tool it has just decided to use. Her eyes go briefly to the clay pipe-sections stacked against the wall, then back to Pell. Then to you.\n\nYou read it: she already had minus-nine. She did not have minus-eighteen. But she is not surprised by it either — she is recognizing it. The way you recognize a word you have seen written in the dark and couldn't place, and then the light comes up and there it is. Not new information. Earlier information. The gap between the two dates is what she has been unable to account for, and now she has it.\n\nHuginn shifts on the gate-post — one small adjustment of his feet. He does not croak. The silence where the croak would have been is timed correctly. Dara lowers the mug. \"Both from the same direction?\" Her voice is careful — not guarded, careful. She is asking you as much as Pell."
       }
     ],
     "lastTurn": {
-      "narration": "Pell says her opening line — and Dara names the date herself, before you've shown her anything. She already knows.",
-      "sceneSummary": "Dara names World-day minus-nine before Pell can show her — she's had a theory for at least a week.",
+      "narration": "The frost has not melted. Pell's voice is level, practical — she names World-day minus-eighteen the way she'd name a measurement, without softening it.\n\nDara's face does not move. That is the tell. A woman who had no theory would frown, or recalculate, or ask what Fen's intake has to do with the east furlong. Dara does none of those things. She takes one slow breath through her nose, and her grip on the mug shifts — not tighter, but more deliberate, the way a hand settles on a tool it has just decided to use. Her eyes go briefly to the clay pipe-sections stacked against the wall, then back to Pell. Then to you.\n\nYou read it: she already had minus-nine. She did not have minus-eighteen. But she is not surprised by it either — she is recognizing it. The way you recognize a word you have seen written in the dark and couldn't place, and then the light comes up and there it is. Not new information. Earlier information. The gap between the two dates is what she has been unable to account for, and now she has it.\n\nHuginn shifts on the gate-post — one small adjustment of his feet. He does not croak. The silence where the croak would have been is timed correctly. Dara lowers the mug. \"Both from the same direction?\" Her voice is careful — not guarded, careful. She is asking you as much as Pell.",
+      "sceneSummary": "Dara hears World-day minus-eighteen and recognizes it — the missing gap in her unvoiced theory.",
       "choices": [
         {
-          "label": "Hand Dara the Valve Failure Timeline note — let her read the dates herself",
+          "label": "Confirm direction — show her the annotated Valve Failure Timeline",
           "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "help"
+            "inform",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1364,51 +1368,40 @@
           "emergenceId": null
         },
         {
-          "label": "Let Pell continue — watch Dara's face as she hears World-day minus-eighteen for the first time",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": 15,
+          "label": "Let Pell answer the direction question — step in with the mechanism",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
-            "study",
+            "support",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Step forward and name the mechanism — shared CCW torque, buried structure, one connected design",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "chaos_order": 0.3
-          },
-          "difficulty": 15,
+          "label": "Answer her question and raise the surface footprint — give her the full picture at once",
+          "attribute": "practical",
+          "subAttribute": "reason",
+          "difficulty": 0,
           "intentTags": [
-            "plan",
-            "persuade"
+            "inform",
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask her directly: 'What did you think was happening?' — let her name her own theory first",
+          "label": "Ask Dara what her theory was — hear her read before you give her the mechanism",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": 0.1
-          },
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "study",
             "careful"
           ],
           "abilityId": null,
@@ -1423,19 +1416,19 @@
         "energy": 0
       },
       "scene": {
-        "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug in both hands.",
+        "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug now lowered.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the doorstep, chin up a fraction — glancing back at Silas after Dara named the date herself."
+            "state": "Standing at the doorstep, having just named World-day minus-eighteen — watching Dara."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the blue gate-post behind Silas, still."
+            "state": "Perched on the blue gate-post, one small foot-adjustment, silent."
           },
           {
             "name": "Dara Holt",
-            "state": "In the open doorway, mug in both hands, weight back on her heels — has just named World-day minus-nine herself, waiting."
+            "state": "In the open doorway, mug lowered, grip deliberate — has just asked 'Both from the same direction?' looking between Pell and Silas."
           }
         ],
         "objects": [
@@ -1448,9 +1441,9 @@
           "Blue gate-post"
         ],
         "threads": [
-          "Dara has named minus-nine herself — she has a theory she hasn't filed",
-          "World-day minus-eighteen not yet revealed to Dara — an earlier failure she doesn't know about",
-          "Briefing in progress — mechanism (CCW torque, buried structure) not yet disclosed",
+          "Dara has asked whether both failure sites share the same direction — waiting for an answer",
+          "World-day minus-eighteen registered — she is recognizing it, not learning it fresh",
+          "Mechanism (CCW torque, buried structure) not yet disclosed",
           "Six-week failure window and surface footprint not yet disclosed"
         ]
       },
@@ -1459,35 +1452,26 @@
           "op": "update",
           "npcId": "dara-holt",
           "name": "Dara Holt",
-          "role": "Senior east-channel irrigator, Millbrook",
-          "note": "Named World-day minus-nine herself before Pell could show her anything — she's been sitting on a theory for at least a week and filed nothing because she couldn't prove the mechanism.",
+          "note": "Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the same direction, looking between Pell and Silas.",
           "learned": [
-            "Has an unvoiced theory about the sleeve failures — held because numbers without mechanism aren't actionable",
-            "Filed no report despite three weeks of failures — waiting for confirmation, not ignorant"
+            "World-day minus-eighteen is Fen's intake failure — an earlier confirmed failure she did not have the date for"
           ],
           "skillsObserved": [
-            "rapid information triage under surprise",
-            "suppressing relief under professional composure"
+            "suppressing recognition under professional composure",
+            "rapid triage of new temporal data against an existing unvoiced model"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her own doorstep at dawn, briefing in progress — has just named the failure date herself."
+          "statusNote": "At her own doorstep at dawn, briefing deepening — has just asked about direction of both failure sites."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Delivered her opening line cleanly — chin came up when Dara named the date herself; glanced back at Silas.",
-          "learned": [
-            "Dara named minus-nine before being shown the note — her read was right"
-          ],
-          "skillsObserved": [
-            "reading a room's shift in real time"
-          ],
+          "note": "Named World-day minus-eighteen plainly — watching Dara take it in.",
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At Dara Holt's doorstep, leading the briefing — Silas in support."
+          "statusNote": "At Dara's doorstep, leading the briefing — has just named the earlier failure date."
         }
       ],
       "codexUpdates": [
@@ -1496,31 +1480,35 @@
           "label": "Dara Holt, the Ditch-Mother",
           "kind": "person",
           "entityId": "dara-holt",
-          "fact": "Named World-day minus-nine herself before being shown Mara's note — has held an unvoiced theory about the sleeve failures for at least a week; filed nothing because she lacked a mechanism to attach the numbers to.",
+          "fact": "Heard World-day minus-eighteen and recognized it rather than learning it fresh — the gap between the two dates is what her unvoiced theory could not account for. Asked whether both failure sites share the same direction.",
           "links": [
             "the-water-crisis",
             "millbrook",
-            "aldric-provisioning-deal",
+            "pell",
             "mara-wells",
-            "pell"
+            "aldric-provisioning-deal"
           ]
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a few minutes of doorstep briefing — frost still unmelted"
+      }
     },
     "sceneState": {
-      "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug in both hands.",
+      "setting": "Dara Holt's front doorstep — packed-earth path from the blue gate-post, herb bed dormant, clay pipe-sections stacked against the house wall. Cold flat dawn light, frost not yet melted, chimney smoke rising straight above. Dara stands in the open doorway, mug now lowered.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the doorstep, chin up a fraction — glancing back at Silas after Dara named the date herself."
+          "state": "Standing at the doorstep, having just named World-day minus-eighteen — watching Dara."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the blue gate-post behind Silas, still."
+          "state": "Perched on the blue gate-post, one small foot-adjustment, silent."
         },
         {
           "name": "Dara Holt",
-          "state": "In the open doorway, mug in both hands, weight back on her heels — has just named World-day minus-nine herself, waiting."
+          "state": "In the open doorway, mug lowered, grip deliberate — has just asked 'Both from the same direction?' looking between Pell "
         }
       ],
       "objects": [
@@ -1533,9 +1521,9 @@
         "Blue gate-post"
       ],
       "threads": [
-        "Dara has named minus-nine herself — she has a theory she hasn't filed",
-        "World-day minus-eighteen not yet revealed to Dara — an earlier failure she doesn't know about",
-        "Briefing in progress — mechanism (CCW torque, buried structure) not yet disclosed",
+        "Dara has asked whether both failure sites share the same direction — waiting for an answer",
+        "World-day minus-eighteen registered — she is recognizing it, not learning it fresh",
+        "Mechanism (CCW torque, buried structure) not yet disclosed",
         "Six-week failure window and surface footprint not yet disclosed"
       ]
     }
@@ -1684,7 +1672,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Read Huginn's posture without prompting — named it plainly before Silas spoke.",
         "[d2] Named the failing element before Silas spoke — has learned to read his reading-face in the space of this one morning.",
         "[d2] Absorbed the six-week failure timeline without alarm — immediately read the irrigation consequence (redirected surge, blown sleeve blanks across the east furlong) and named Dara Ho",
         "[d2] Walked the northeast line with Silas — placed the far marker stone without prompting, read the consequence against the valley below and named it plainly.",
@@ -1693,7 +1680,8 @@
         "[d2] Said she hasn't stayed in the valley from inability to leave, but because the work was here — and the work may not stay. Not yes to the pass, not no. Asked what it leads to, plainl",
         "[d2] Heard Silas's theory that the pass opened deliberately and the structure, cradle-recess, and contamination are one connected signal — read it like iron, accepted it, and opened Dar",
         "[d2] Went through the gate first, reached the door first, opened clean — 'We've been walking the east channel. I need to show you a date.' Exactly as she set the terms.",
-        "[d2] Delivered her opening line cleanly — chin came up when Dara named the date herself; glanced back at Silas."
+        "[d2] Delivered her opening line cleanly — chin came up when Dara named the date herself; glanced back at Silas.",
+        "[d2] Named World-day minus-eighteen plainly — watching Dara take it in."
       ],
       "knownFacts": [
         "Dara is a practical woman — numbers will either confirm her theory or give her permission to voice it",
@@ -1714,7 +1702,7 @@
         "reading a room's shift in real time"
       ],
       "status": "active",
-      "statusNote": "At Dara Holt's doorstep, leading the briefing — Silas in support.",
+      "statusNote": "At Dara's doorstep, leading the briefing — has just named the earlier failure date.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1826,21 +1814,25 @@
       "relationship": 1,
       "history": [
         "[d2] First meeting — door already open when Pell arrived. Took in Pell, Silas, and Huginn in sequence without flinching. Said Pell's name like the start of a sentence she hadn't finishe",
-        "[d2] Named World-day minus-nine herself before Pell could show her anything — she's been sitting on a theory for at least a week and filed nothing because she couldn't prove the mechani"
+        "[d2] Named World-day minus-nine herself before Pell could show her anything — she's been sitting on a theory for at least a week and filed nothing because she couldn't prove the mechani",
+        "[d2] Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the "
       ],
       "knownFacts": [
         "Awake and working before dawn on World-day 15",
         "Took stock of an unfamiliar man and a large corvid without dropping her composure",
         "Has an unvoiced theory about the sleeve failures — held because numbers without mechanism aren't actionable",
-        "Filed no report despite three weeks of failures — waiting for confirmation, not ignorant"
+        "Filed no report despite three weeks of failures — waiting for confirmation, not ignorant",
+        "World-day minus-eighteen is Fen's intake failure — an earlier confirmed failure she did not have the date for"
       ],
       "skillsObserved": [
         "fast visual accounting under surprise",
         "rapid information triage under surprise",
-        "suppressing relief under professional composure"
+        "suppressing relief under professional composure",
+        "suppressing recognition under professional composure",
+        "rapid triage of new temporal data against an existing unvoic"
       ],
       "status": "active",
-      "statusNote": "At her own doorstep at dawn, briefing in progress — has just named the failure date herself.",
+      "statusNote": "At her own doorstep at dawn, briefing deepening — has just asked about direction of both failure sites.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2002,7 +1994,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-15T08:47:53.618Z",
+    "lastSharedReadAt": "2026-07-15T12:56:40.436Z",
     "lastTickWorldDay": 15,
     "lastCanonWorldDay": 15
   },
@@ -2426,7 +2418,8 @@
           "[d2] Dara's house is at the bend before the upper meadow — blue gate-post, chimney already smoking at dawn on World-day 14. She's awake. Briefing held until after the site visit per Pell and Mara's advice.",
           "[d2] Pell's read: Dara has filed no report to the elder panel despite three weeks of sleeve blank failures — either she has no working theory or she has one she won't say aloud until someone else confirms ",
           "[d2] First meeting: door already open at dawn on World-day 15. Took in Pell, Silas, and Huginn without flinching. Waiting for Pell's date — briefing in progress.",
-          "[d2] Named World-day minus-nine herself before being shown Mara's note — has held an unvoiced theory about the sleeve failures for at least a week; filed nothing because she lacked a mechanism to attach th"
+          "[d2] Named World-day minus-nine herself before being shown Mara's note — has held an unvoiced theory about the sleeve failures for at least a week; filed nothing because she lacked a mechanism to attach th",
+          "[d2] Heard World-day minus-eighteen and recognized it rather than learning it fresh — the gap between the two dates is what her unvoiced theory could not account for. Asked whether both failure sites share"
         ],
         "links": [
           "the-water-crisis",
@@ -2539,15 +2532,15 @@
     }
   },
   "tendencies": {
-    "strategic": 56.38092338245698,
-    "cerebral": 44.965792406163324,
-    "social": 54.40643922410562,
-    "generous": 16.505330608707776,
-    "cautious": 52.15901149657868,
-    "physical": 1.0637154297781668,
-    "risky": 3.5375618999126766,
-    "ruthless": 1.4516763838748095,
-    "carousing": 1.832041354366958
+    "strategic": 56.09901876554469,
+    "cerebral": 45.740963444132504,
+    "social": 54.13440702798509,
+    "generous": 16.422803955664236,
+    "cautious": 52.89821643909578,
+    "physical": 1.058396852629276,
+    "risky": 3.519874090413113,
+    "ruthless": 1.4444180019554353,
+    "carousing": 1.8228811475951232
   },
   "aptitudes": [
     "strategist",
@@ -2555,7 +2548,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 211,
+  "actionCount": 212,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2641,8 +2634,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784105484498,
-  "rev": 291,
+  "updatedAt": 1784120857633,
+  "rev": 295,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3064,10 +3057,10 @@
       "at": "2026-07-13T12:11:17.802Z"
     }
   ],
-  "syncedAt": 1784088335716,
+  "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 6
+    "valley": 7
   },
   "foreclosed": [
     "rootkin",

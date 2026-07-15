@@ -34,7 +34,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.025,
-    "spectrumId": -0.142625,
+    "spectrumId": -0.13549375,
     "dark_light": 0.03
   },
   "attunement": 3,
@@ -179,101 +179,82 @@
         "player": "Is there a quieter place we can go... talk?",
         "summary": "Lira leads the character to a quiet roof terrace above the Common Hall — the ledger and the red chalk marking unseen below, the valley visible to the west.",
         "narration": "The words come out low, unhurried — *is there a quieter place we can go... talk?* — and Lira's answer is a half-breath, something that isn't quite a smile but holds the shape of one. She straightens off the wall in a single unhurried motion, sash-ends swinging, and turns toward the far mouth of the corridor where the morning light is thickest.\n\n\"There's a roof terrace above the wick-room,\" she says, already moving. \"Nobody goes up before the afternoon count. The light's good.\"\n\nYou follow her out of the blue-white strip and into the open lane, then along a narrow cut between two crystal-lattice buildings whose walls are already warm on the south face, and up a flight of exterior stairs that cling to the rear of the Common Hall like an afterthought — iron steps, each one ringing faintly underfoot. At the top: a flat terrace, a low coping wall, a single bench left for workers who never use it. The accountability board's chalk marking is invisible from here. The photonic-crystal towers catch the midday sun above you and braid it into soft, scattered brilliance, but the terrace itself sits in modest open air, the valley floor visible to the west as a long green-grey stripe below the plateau's edge.\n\nLira leans against the coping wall and looks at you — at the ledger tucked under your arm, then at your face — and waits. She's been doing that since the corridor: waiting, watching, giving you the room to say the thing you actually mean. The morning is warm enough that neither of you needs to rush."
+      },
+      {
+        "player": "Lira - a very pretty name... it fits you very well... is there some5hing more you want from me?",
+        "summary": "Lira names her interest on the roof terrace — she noticed the ledger, chose silence, and now wants both answers and proximity.",
+        "narration": "The valley hangs in the west — that long green-grey stripe you could fall into if you let yourself look too long — and the midday light comes down through the crystal towers as a slow, scattered brilliance, more felt than seen. The terrace has the quality of a held breath. Nothing is moving up here except the air.\n\nYou say it quietly, without preamble: *Lira. A very pretty name. It fits you well.* And then, because the ledger is tucked under your arm and the chalk-marked board is directly below your feet and everything in the district is tangled and half-dangerous, you say the honest thing underneath the compliment: *Is there something more you want from me?*\n\nShe doesn't answer immediately. That's her tell — you've noticed it now twice in the service corridor and once in the lane, the way she takes the thing you've said and holds it for a moment, turns it over, decides something. Her eyes track from yours to the valley and back, and then she tips her chin up a fraction and the half-smile she's been carrying all morning finally finishes forming.\n\n\"I noticed the ledger,\" she says, and her voice is level, almost conversational. \"I didn't say anything. That was a choice.\" She lets that sit between you for exactly one breath. \"So yes. I want to know what you're going to do with it — and I want to know who you are, outside of the paving work.\" She has moved, while speaking, just close enough that you'd have to step back deliberately to create more distance. The warm stone of the coping wall is behind her. She is in no hurry to go anywhere."
       }
     ],
     "lastTurn": {
-      "narration": "The words come out low, unhurried — *is there a quieter place we can go... talk?* — and Lira's answer is a half-breath, something that isn't quite a smile but holds the shape of one. She straightens off the wall in a single unhurried motion, sash-ends swinging, and turns toward the far mouth of the corridor where the morning light is thickest.\n\n\"There's a roof terrace above the wick-room,\" she says, already moving. \"Nobody goes up before the afternoon count. The light's good.\"\n\nYou follow her out of the blue-white strip and into the open lane, then along a narrow cut between two crystal-lattice buildings whose walls are already warm on the south face, and up a flight of exterior stairs that cling to the rear of the Common Hall like an afterthought — iron steps, each one ringing faintly underfoot. At the top: a flat terrace, a low coping wall, a single bench left for workers who never use it. The accountability board's chalk marking is invisible from here. The photonic-crystal towers catch the midday sun above you and braid it into soft, scattered brilliance, but the terrace itself sits in modest open air, the valley floor visible to the west as a long green-grey stripe below the plateau's edge.\n\nLira leans against the coping wall and looks at you — at the ledger tucked under your arm, then at your face — and waits. She's been doing that since the corridor: waiting, watching, giving you the room to say the thing you actually mean. The morning is warm enough that neither of you needs to rush.",
-      "sceneSummary": "Lira leads the character to a quiet roof terrace above the Common Hall — the ledger and the red chalk marking unseen below, the valley visible to the west.",
+      "narration": "The valley hangs in the west — that long green-grey stripe you could fall into if you let yourself look too long — and the midday light comes down through the crystal towers as a slow, scattered brilliance, more felt than seen. The terrace has the quality of a held breath. Nothing is moving up here except the air.\n\nYou say it quietly, without preamble: *Lira. A very pretty name. It fits you well.* And then, because the ledger is tucked under your arm and the chalk-marked board is directly below your feet and everything in the district is tangled and half-dangerous, you say the honest thing underneath the compliment: *Is there something more you want from me?*\n\nShe doesn't answer immediately. That's her tell — you've noticed it now twice in the service corridor and once in the lane, the way she takes the thing you've said and holds it for a moment, turns it over, decides something. Her eyes track from yours to the valley and back, and then she tips her chin up a fraction and the half-smile she's been carrying all morning finally finishes forming.\n\n\"I noticed the ledger,\" she says, and her voice is level, almost conversational. \"I didn't say anything. That was a choice.\" She lets that sit between you for exactly one breath. \"So yes. I want to know what you're going to do with it — and I want to know who you are, outside of the paving work.\" She has moved, while speaking, just close enough that you'd have to step back deliberately to create more distance. The warm stone of the coping wall is behind her. She is in no hurry to go anywhere.",
+      "sceneSummary": "Lira names her interest on the roof terrace — she noticed the ledger, chose silence, and now wants both answers and proximity.",
       "choices": [
         {
-          "label": "Show her the ledger — lay it open and let her see the numbers for herself",
+          "label": "Tell her the truth about the ledger — what you found, what it means, why you took it.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.7
-          },
           "difficulty": 0,
           "intentTags": [
             "confide",
-            "reveal",
             "trust"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask what she already knows — about Fendt, the board marking, the filtration arrays",
+          "label": "Deflect the ledger question and answer the personal one instead — tell her something true about who you are.",
           "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.5
-          },
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "deflect",
+            "connect"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Answer both — close the small distance she left and let the conversation go where it's already going.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 15,
           "intentTags": [
-            "probe",
-            "study",
-            "careful"
+            "confide",
+            "flirt",
+            "escalate"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask who she trusts in the district — who would know what to do with evidence like this",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
+          "label": "The ledger is a pressure that won't wait — thank her for her discretion, but say you need to move on it before the morning gets older.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "seek-ally",
-            "plan",
-            "careful"
+            "withdraw",
+            "practical"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Tell her about the spear, the forge, the cooling window — lay the competing pressures out honestly",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.6
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "confide",
-            "honest",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Roof terrace above the Common Hall's wick-room, Edge District, Radiant Plateau — midday, early spring. Flat terrace with a low coping wall and one unused worker's bench; the photonic-crystal towers braid direct sunlight into scattered brilliance overhead, but the terrace itself sits in open, modest air. Valley floor visible as a long green-grey stripe to the west below the plateau's edge.",
+        "setting": "Roof terrace above the Common Hall's wick-room, Edge District, Radiant Plateau — midday, early spring. Open terrace with low coping wall; photonic-crystal towers scatter the overhead light; valley floor visible as a green-grey stripe to the west. No one else present.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "leaning against the coping wall, watching the character — eyes moving once to the ledger, then back to their face, waiting with unhurried patience"
+            "state": "Standing close to the coping wall, half-smile now fully formed, having just named what she wants — watching the character, in no hurry."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — tucked under the character's arm",
-          "Low coping wall — along the terrace edge, warm stone in the midday sun",
+          "Low coping wall — warm stone in the midday sun, Lira leaning near it",
           "Single worker's bench — left unused",
-          "Iron exterior staircase — the only access, visible at the terrace corner",
+          "Iron exterior staircase — the only access, at the terrace corner",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
-          "Lira has seen the ledger and made a choice to wait — the silence between them is an open question",
-          "Fendt's red chalk marking sits on the board directly below, unseen from here but not forgotten",
-          "Keeper Aldris Vael is somewhere in the district, beginning their morning",
-          "The runebound spear's cooling window is a competing pressure — Millbrook, Pell's forge"
+          "Lira has named her dual interest — the ledger and the person carrying it — and closed the distance; the character must answer",
+          "The ledger's delivery window (Keeper Aldris Vael, the accountability board below) is a quiet pressure",
+          "The runebound spear's cooling window at Pell's forge remains a competing pull toward Millbrook"
         ]
       },
       "npcUpdates": [
@@ -282,59 +263,69 @@
           "npcId": "lira",
           "name": "Lira",
           "role": "Apprentice optics-weaver, Edge District",
-          "note": "Led the character from the service corridor to the roof terrace above the wick-room — a private space she knew and chose deliberately. Watching, waiting, giving room.",
+          "note": "Named what she noticed and what she wants — the ledger and the person. Closed the distance deliberately. Half-smile complete. Waiting.",
           "learned": [
-            "She knows the district's rhythms well enough to know when and where it goes unobserved",
-            "She chose this spot specifically — not the first place she thought of, the right place"
+            "She noticed the ledger in the service corridor and chose silence — a deliberate, considered choice",
+            "She wants to know what the character will do with the ledger AND who they are outside the paving work",
+            "She is comfortable making her interest plain without rushing it"
           ],
           "skillsObserved": [
-            "spatial knowledge of the district",
-            "deliberate discretion"
+            "directness",
+            "patience",
+            "quiet observation"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the roof terrace above the Common Hall with the character — waiting for them to speak first"
+          "statusNote": "On the roof terrace with the character — has named her interest and is waiting for an answer, close to the coping wall."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk through the lane and up the exterior stairs — a few minutes at most"
+        "why": "A short exchange on the terrace — a compliment, a question, her answer."
       },
-      "moveTo": {
-        "location": "radiant-plateau-edge-district",
-        "why": "Moved from the service corridor to the roof terrace above the Common Hall's wick-room — same district, different vantage"
-      },
-      "placeUpdates": [
+      "deeds": [],
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [
         {
-          "note": "Roof terrace above the Common Hall wick-room — a flat terrace with coping wall and one bench, accessed by exterior iron stairs; quiet during morning and midday counts, known to Lira as reliably unobserved",
-          "subPlace": {
-            "name": "Roof Terrace (Common Hall)",
-            "note": "Flat terrace above the wick-room — quiet before the afternoon count, valley floor visible to the west. Lira brought the character here for a private conversation.",
-            "visited": true
-          }
+          "topic": "lira",
+          "label": "Lira — Edge District Apprentice",
+          "kind": "person",
+          "entityId": "lira",
+          "fact": "She noticed the ledger in the corridor and chose silence deliberately. On the roof terrace she named both wants plainly: what you'll do with the evidence, and who you are.",
+          "links": [
+            "radiant-plateau",
+            "the-clean-numbers",
+            "fendt-falsified-purity-reports"
+          ]
         }
-      ]
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall's wick-room, Edge District, Radiant Plateau — midday, early spring. Flat terrace with a low coping wall and one unused worker's bench; the photonic-crystal towers braid direct sunlight into scattered brilliance overhead, but the terrace itself sits in open, modest air. Valley floor visible as a long green-grey stripe to the west below the plateau's edge.",
+      "setting": "Roof terrace above the Common Hall's wick-room, Edge District, Radiant Plateau — midday, early spring. Open terrace with low coping wall; photonic-crystal towers scatter the overhead light; valley floor visible as a green-grey stripe to the west. No one else present.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "leaning against the coping wall, watching the character — eyes moving once to the ledger, then back to their face, waiti"
+          "state": "Standing close to the coping wall, half-smile now fully formed, having just named what she wants — watching the characte"
         }
       ],
       "objects": [
         "Lower Filtration Ledger — tucked under the character's arm",
-        "Low coping wall — along the terrace edge, warm stone in the midday sun",
+        "Low coping wall — warm stone in the midday sun, Lira leaning near it",
         "Single worker's bench — left unused",
-        "Iron exterior staircase — the only access, visible at the terrace corner",
+        "Iron exterior staircase — the only access, at the terrace corner",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
-        "Lira has seen the ledger and made a choice to wait — the silence between them is an open question",
-        "Fendt's red chalk marking sits on the board directly below, unseen from here but not forgotten",
-        "Keeper Aldris Vael is somewhere in the district, beginning their morning",
-        "The runebound spear's cooling window is a competing pressure — Millbrook, Pell's forge"
+        "Lira has named her dual interest — the ledger and the person carrying it — and closed the distance; the character must answer",
+        "The ledger's delivery window (Keeper Aldris Vael, the accountability board below) is a quiet pressure",
+        "The runebound spear's cooling window at Pell's forge remains a competing pull toward Millbrook"
       ]
     }
   },
@@ -384,26 +375,32 @@
         "locationId": "radiant_plateau_edge",
         "day": 1
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d1] Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open.",
         "[d1] Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting.",
-        "[d1] Led the character from the service corridor to the roof terrace above the wick-room — a private space she knew and chose deliberately. Watching, waiting, giving room."
+        "[d1] Led the character from the service corridor to the roof terrace above the wick-room — a private space she knew and chose deliberately. Watching, waiting, giving room.",
+        "[d1] Named what she noticed and what she wants — the ledger and the person. Closed the distance deliberately. Half-smile complete. Waiting."
       ],
       "knownFacts": [
         "She was waiting for the character in the corridor",
         "She is comfortable with silence and with noticing things she doesn't name",
         "She knows the district's rhythms well enough to know when and where it goes unobserved",
-        "She chose this spot specifically — not the first place she thought of, the right place"
+        "She chose this spot specifically — not the first place she thought of, the right place",
+        "She noticed the ledger in the service corridor and chose silence — a deliberate, considered choice",
+        "She wants to know what the character will do with the ledger AND who they are outside the paving work",
+        "She is comfortable making her interest plain without rushing it"
       ],
       "skillsObserved": [
         "discretion",
         "patience",
         "spatial knowledge of the district",
-        "deliberate discretion"
+        "deliberate discretion",
+        "directness",
+        "quiet observation"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace above the Common Hall with the character — waiting for them to speak first",
+      "statusNote": "On the roof terrace with the character — has named her interest and is waiting for an answer, close to the coping wall.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -655,11 +652,13 @@
         "label": "Lira — Edge District Apprentice",
         "kind": "person",
         "facts": [
-          "[d1] An apprentice optics-weaver in the Edge District who has sought the character's company twice over the paving work; met in the service corridor, she noticed the ledger and chose silence on it — delibe"
+          "[d1] An apprentice optics-weaver in the Edge District who has sought the character's company twice over the paving work; met in the service corridor, she noticed the ledger and chose silence on it — delibe",
+          "[d1] She noticed the ledger in the corridor and chose silence deliberately. On the roof terrace she named both wants plainly: what you'll do with the evidence, and who you are."
         ],
         "links": [
           "radiant-plateau",
-          "the-clean-numbers"
+          "the-clean-numbers",
+          "fendt-falsified-purity-reports"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -669,19 +668,19 @@
     }
   },
   "tendencies": {
-    "social": 1.9703725093562658,
-    "strategic": 7.875747753746875,
-    "cautious": 1.97014975,
-    "cerebral": 1.9800748750000001,
-    "physical": 0.985074875,
-    "ruthless": 0.985074875
+    "social": 2.9605206468094845,
+    "strategic": 7.836369014978141,
+    "cautious": 1.9602990012500001,
+    "cerebral": 1.9701745006250002,
+    "physical": 0.9801495006250001,
+    "ruthless": 0.9801495006250001
   },
   "aptitudes": [],
-  "actionCount": 7,
+  "actionCount": 8,
   "grantsVersion": 1,
   "reconcileVersion": 5,
-  "updatedAt": 1784134803258,
-  "rev": 43,
+  "updatedAt": 1784134969079,
+  "rev": 44,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -839,7 +838,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 3
+    "valley": 4
   },
   "foreclosed": []
 }

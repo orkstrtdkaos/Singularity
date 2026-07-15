@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 6,
-  "xp": 556,
+  "xp": 596,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -204,14 +204,6 @@
         "health": 2
       },
       "consumable": true
-    },
-    {
-      "id": null,
-      "name": "Mara's Offset Note",
-      "kind": "quest",
-      "qty": 1,
-      "description": "A torn strip in Mara's hand — her initials and a figure. Adjusts Aldric's standing credit for the expedition goods.",
-      "consumable": false
     }
   ],
   "deeds": [
@@ -1449,30 +1441,35 @@
         "player": "Take all three and run it through the Aldric offset — cleaner for the road; reduces your standing credit there.",
         "summary": "Aldric offset settled; expedition kit packed; Mara advises briefing Aldric on the east-channel situation directly.",
         "narration": "The decision lands cleanly. \"The Aldric offset,\" you say, and Mara nods once — already writing. She lifts the tied-off ledger, adds a line, and folds it back closed with the same quiet efficiency she brings to everything. The three items come across the counter: tallow block into the pack's side pocket where it won't bleed through, oilcloth folded flat against the bedroll, pine-tar tin tucked where you can reach it without unpacking everything. Thirty seconds of work. She doesn't watch you do it — she's already tallying something else in her head.\n\n\"Aldric's standing credit adjusted,\" she says, handing you the offset note — a single torn strip with her initials and a figure. \"Give that to him when you go. He'll know what it means.\" She pauses, then adds: \"He should also know the east furlong situation directly, if Dara hasn't already sent word. He's been watching the catch numbers and not saying anything out loud. He'll want to connect the pieces.\"\n\nPell pushes off the doorframe with a small shift of her shoulders — the posture of someone ready to move. From the step behind her, Huginn rotates his head northwest and holds it there, patient as stone.\n\nOutside, the village is waking up in earnest. A pair of farmers arguing in low, tight voices pass the well without stopping — the word *share* audible, then *upstream*, then nothing. A child chasing a dog cuts between them and almost catches it. Normal morning, except for the faint gray-green tinge where water has pooled in the ruts near the pump-base — a thin, wrong color that nobody walking past looks directly at."
+      },
+      {
+        "player": "Head straight to Aldric's smokehouse — hand him the offset note, brief him on the east-channel situation, and close out the provisioning account so you can leave.",
+        "summary": "Aldric briefed on the east-channel situation — offset note handed, account closed, Aldric commits to watching the downstream end.",
+        "narration": "The smokehouse is two minutes from Mara's door — past the well, south along the lane, until the smell of cured fish and woodsmoke tells you you've arrived before the building does. Aldric is already at his block, knife back in hand, working through a row of river perch in the gray morning light. He hears your step and doesn't look up.\n\n\"Offset note,\" you say, and set Mara's strip on the clean end of the block where he can reach it. He picks it up, reads it in one pass, and tucks it into his apron without comment. The ledger adjustment will happen on his end before noon — you know him well enough to trust that.\n\nThe east-channel brief takes a little longer. You lay it out straight: the vault section northeast of the wash-room, six weeks to failure, the redirected surge landing directly on the east-channel main feeder run above his downstream customers. His hands slow on the third perch. He doesn't stop working, but he slows — and that, with Aldric, is the same as sitting down.\n\n\"So the fish count and the water are the same problem,\" he says. Not a question. He sets the knife flat, initials the offset note's counterpart in his own ledger with a short clean mark, and looks at you properly for the first time. \"Dara knows?\" You tell him she does, that she's already staging pipe-sections and counting seat sequences, and that Mara has a second copy of the timeline. He nods once — the slow, thorough kind — and picks the knife back up. \"Then go,\" he says. \"I'll watch the downstream end.\" Huginn, perched on the smokehouse eave, shifts once and reorients northwest. The provisioning account is closed. The smokehouse will hold the thread while you're gone."
       }
     ],
     "lastTurn": {
-      "narration": "The decision lands cleanly. \"The Aldric offset,\" you say, and Mara nods once — already writing. She lifts the tied-off ledger, adds a line, and folds it back closed with the same quiet efficiency she brings to everything. The three items come across the counter: tallow block into the pack's side pocket where it won't bleed through, oilcloth folded flat against the bedroll, pine-tar tin tucked where you can reach it without unpacking everything. Thirty seconds of work. She doesn't watch you do it — she's already tallying something else in her head.\n\n\"Aldric's standing credit adjusted,\" she says, handing you the offset note — a single torn strip with her initials and a figure. \"Give that to him when you go. He'll know what it means.\" She pauses, then adds: \"He should also know the east furlong situation directly, if Dara hasn't already sent word. He's been watching the catch numbers and not saying anything out loud. He'll want to connect the pieces.\"\n\nPell pushes off the doorframe with a small shift of her shoulders — the posture of someone ready to move. From the step behind her, Huginn rotates his head northwest and holds it there, patient as stone.\n\nOutside, the village is waking up in earnest. A pair of farmers arguing in low, tight voices pass the well without stopping — the word *share* audible, then *upstream*, then nothing. A child chasing a dog cuts between them and almost catches it. Normal morning, except for the faint gray-green tinge where water has pooled in the ruts near the pump-base — a thin, wrong color that nobody walking past looks directly at.",
-      "sceneSummary": "Aldric offset settled; expedition kit packed; Mara advises briefing Aldric on the east-channel situation directly.",
+      "narration": "The smokehouse is two minutes from Mara's door — past the well, south along the lane, until the smell of cured fish and woodsmoke tells you you've arrived before the building does. Aldric is already at his block, knife back in hand, working through a row of river perch in the gray morning light. He hears your step and doesn't look up.\n\n\"Offset note,\" you say, and set Mara's strip on the clean end of the block where he can reach it. He picks it up, reads it in one pass, and tucks it into his apron without comment. The ledger adjustment will happen on his end before noon — you know him well enough to trust that.\n\nThe east-channel brief takes a little longer. You lay it out straight: the vault section northeast of the wash-room, six weeks to failure, the redirected surge landing directly on the east-channel main feeder run above his downstream customers. His hands slow on the third perch. He doesn't stop working, but he slows — and that, with Aldric, is the same as sitting down.\n\n\"So the fish count and the water are the same problem,\" he says. Not a question. He sets the knife flat, initials the offset note's counterpart in his own ledger with a short clean mark, and looks at you properly for the first time. \"Dara knows?\" You tell him she does, that she's already staging pipe-sections and counting seat sequences, and that Mara has a second copy of the timeline. He nods once — the slow, thorough kind — and picks the knife back up. \"Then go,\" he says. \"I'll watch the downstream end.\" Huginn, perched on the smokehouse eave, shifts once and reorients northwest. The provisioning account is closed. The smokehouse will hold the thread while you're gone.",
+      "sceneSummary": "Aldric briefed on the east-channel situation — offset note handed, account closed, Aldric commits to watching the downstream end.",
       "choices": [
         {
-          "label": "Head straight to Aldric's smokehouse — hand him the offset note, brief him on the east-channel situation, and close out the provisioning account so you can leave.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Follow Huginn's lead northwest — leave Millbrook now, the village is briefed.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "plan"
+            "depart",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Pause at the well first — look at the water pooled in the ruts. Use Order-Sense on it if the tinge catches your attention as something worth reading.",
+          "label": "Before leaving, take a last look at the gray-green water pooling near the well — use Order-Sense to read what the contamination pattern tells you from here.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": -0.4
           },
           "difficulty": 15,
           "intentTags": [
@@ -1484,160 +1481,146 @@
           "trivial": false
         },
         {
-          "label": "Ask Mara about Aldric's cured bladder waterskin before you go — two waterskins is better than one on a long road.",
+          "label": "Ask Aldric if he has a cured bladder waterskin going spare — Mara mentioned he sometimes carries them, and a second water vessel is worth asking about before the road.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "careful"
+            "help",
+            "plan"
           ],
           "trivial": true
         },
         {
-          "label": "Or say what you do.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Say a short, plain goodbye to the village — the well, the lane, the smell of smoke. No ceremony. Just mark the threshold before you cross it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "careful",
+            "reflect"
           ],
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "inventoryAdd": [
-          {
-            "name": "Hard Tallow Block",
-            "kind": "consumable",
-            "description": "Rendered and pressed flat — good for leather, boots, rope-ends, and a dozen trail needs.",
-            "consumable": true,
-            "effects": {}
-          },
-          {
-            "name": "Oilcloth Fold",
-            "kind": "tool",
-            "description": "Heavy enough to shed a night of rain, light enough to pack small.",
-            "consumable": false
-          },
-          {
-            "name": "Pine-Tar Salve Tin",
-            "kind": "consumable",
-            "description": "Dara's recipe — for cracked skin, rope-burn, and anything the cold gets into.",
-            "consumable": true,
-            "effects": {
-              "health": 2
-            }
-          },
-          {
-            "name": "Mara's Offset Note",
-            "kind": "quest",
-            "description": "A torn strip in Mara's hand — her initials and a figure. Adjusts Aldric's standing credit for the expedition goods.",
-            "consumable": false
-          }
+        "xp": 20,
+        "inventoryRemove": [
+          "Mara's Offset Note"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "role": "Village supply store operator, Millbrook",
-          "note": "Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situation.",
+          "npcId": "aldric",
+          "name": "Aldric",
+          "role": "Smokehouse operator, Millbrook",
+          "note": "Received Mara's offset note and initialed his counterpart ledger entry. Briefed on the vault-failure timeline and east-channel surge scope — connected the fish-count decline to the water crisis without being told to. Committed to watching the downstream end while Silas is gone.",
           "learned": [
-            "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong"
+            "The vault section failure and the declining fish catch are the same problem — one mechanism",
+            "Dara Holt knows and is staging mitigation; Mara holds a second copy of the timeline",
+            "Silas and Pell are leaving the valley to find a pre-Transition structural expert"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At her store, ledger re-tied, morning stock work resuming."
-        },
+          "statusNote": "At his smokehouse block, ledger initialed, committed to monitoring the downstream customer end of the east-channel while Silas is gone."
+        }
+      ],
+      "questUpdates": [
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Pushed off the doorframe — ready to move; letting Silas run the final briefings.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At Mara's store doorframe, ready to move to Aldric's smokehouse."
+          "op": "complete",
+          "questId": "aldric-provisioning-deal",
+          "title": "Meat for the Smokehouse",
+          "note": "Offset note delivered, east-channel situation briefed, account fully closed. Aldric commits to holding the downstream thread.",
+          "xpReward": 20
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Aldric has been briefed on the vault-failure timeline and east-channel surge scope — he now understands the fish-count decline and water contamination as one connected problem, and has committed to watching the downstream customer end while Silas is gone.",
+          "subjectId": "aldric"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "aldric",
+          "label": "Aldric",
+          "kind": "person",
+          "entityId": "aldric",
+          "fact": "Briefed on the vault-failure timeline and east-channel surge — connected fish-count decline to the water crisis immediately. Committed to watching the downstream end while Silas searches beyond the valley. Ledger closed and initialed.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "dara-holt",
+            "mara-wells",
+            "aldric-provisioning-deal"
+          ]
         }
       ],
       "scene": {
-        "setting": "Just outside Mara Wells's store — red door east of the well, early spring dawn, village waking. Ruts near the pump-base hold a thin gray-green tinge of standing water.",
+        "setting": "Aldric's smokehouse, south lane of Millbrook — woodsmoke and cured fish, perch row on the block, gray dawn light through the open front. Huginn on the eave, oriented northwest.",
         "npcsPresent": [
           {
-            "name": "Mara Wells",
-            "state": "Behind her counter, ledger re-tied, returning to morning stock work."
+            "name": "Aldric",
+            "state": "Knife back in hand, ledger initialed, working through the perch row — committed to watching the downstream end."
           },
           {
             "name": "Pell",
-            "state": "At the doorframe, shoulders set, ready to move toward the smokehouse."
+            "state": "Just outside, ready to move — letting Silas finish the last brief."
           },
           {
             "name": "Huginn",
-            "state": "On the step, oriented northwest, patient and still."
+            "state": "On the smokehouse eave, reoriented northwest — patient and ready."
           }
         ],
         "objects": [
-          "Mara's Offset Note (in hand — for Aldric)",
-          "Hard Tallow Block (in pack)",
-          "Oilcloth Fold (in pack)",
-          "Pine-Tar Salve Tin (in pack)",
-          "Contact Names Scrap (Sorel, Leth)",
-          "Memory (spear, across shoulders)",
-          "Gray-green water pooled in the ruts near the well pump-base"
+          "Aldric's block and fillet knife",
+          "Initialed offset note (Aldric's copy, filed in his apron)",
+          "Row of river perch, morning's work",
+          "Memory (spear, across Silas's shoulders)",
+          "Traveler's Pack with Hard Tallow Block, Oilcloth Fold, Pine-Tar Salve Tin"
         ],
         "threads": [
-          "Aldric briefing still pending — smokehouse is next",
-          "Mara's offset note to be handed to Aldric",
-          "Huginn oriented northwest — departure pending after Aldric",
-          "Gray-green water in the ruts — nobody walking past looks directly at it",
-          "Sorel and Leth as Edge District leads — whereabouts uncertain"
+          "All Millbrook briefings complete — Dara, Mara, Aldric all hold the thread",
+          "Huginn oriented northwest — departure point reached",
+          "Sorel and Leth as Edge District leads — whereabouts uncertain",
+          "Date three (interference ridge, last light) and date four (snowmelt pool, three hours north) both standing with Pell"
         ]
       },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Expedition kit settled via Aldric offset — offset note in hand. Aldric briefing on east-channel situation is the final step before departure."
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "Quick transaction at Mara's store — goods packed, offset note written, brief exchange at the doorframe."
+        "hoursPassed": 0.5,
+        "why": "Short walk from Mara's store to the smokehouse, brief at the block — half an hour at most."
       }
     },
     "sceneState": {
-      "setting": "Just outside Mara Wells's store — red door east of the well, early spring dawn, village waking. Ruts near the pump-base hold a thin gray-green tinge of standing water.",
+      "setting": "Aldric's smokehouse, south lane of Millbrook — woodsmoke and cured fish, perch row on the block, gray dawn light through the open front. Huginn on the eave, oriented northwest.",
       "npcsPresent": [
         {
-          "name": "Mara Wells",
-          "state": "Behind her counter, ledger re-tied, returning to morning stock work."
+          "name": "Aldric",
+          "state": "Knife back in hand, ledger initialed, working through the perch row — committed to watching the downstream end."
         },
         {
           "name": "Pell",
-          "state": "At the doorframe, shoulders set, ready to move toward the smokehouse."
+          "state": "Just outside, ready to move — letting Silas finish the last brief."
         },
         {
           "name": "Huginn",
-          "state": "On the step, oriented northwest, patient and still."
+          "state": "On the smokehouse eave, reoriented northwest — patient and ready."
         }
       ],
       "objects": [
-        "Mara's Offset Note (in hand — for Aldric)",
-        "Hard Tallow Block (in pack)",
-        "Oilcloth Fold (in pack)",
-        "Pine-Tar Salve Tin (in pack)",
-        "Contact Names Scrap (Sorel, Leth)",
-        "Memory (spear, across shoulders)",
-        "Gray-green water pooled in the ruts near the well pump-base"
+        "Aldric's block and fillet knife",
+        "Initialed offset note (Aldric's copy, filed in his apron)",
+        "Row of river perch, morning's work",
+        "Memory (spear, across Silas's shoulders)",
+        "Traveler's Pack with Hard Tallow Block, Oilcloth Fold, Pine-Tar Salve Tin"
       ],
       "threads": [
-        "Aldric briefing still pending — smokehouse is next",
-        "Mara's offset note to be handed to Aldric",
-        "Huginn oriented northwest — departure pending after Aldric",
-        "Gray-green water in the ruts — nobody walking past looks directly at it",
-        "Sorel and Leth as Edge District leads — whereabouts uncertain"
+        "All Millbrook briefings complete — Dara, Mara, Aldric all hold the thread",
+        "Huginn oriented northwest — departure point reached",
+        "Sorel and Leth as Edge District leads — whereabouts uncertain",
+        "Date three (interference ridge, last light) and date four (snowmelt pool, three hours north) both standing with Pell"
       ]
     }
   },
@@ -1662,19 +1645,20 @@
       "giverEntityId": "smokehouse-man",
       "locationId": null,
       "locationEntityId": null,
-      "status": "active",
+      "status": "completed",
       "progress": [
-        "Pell reads the hydraulic consequence: six-week failure window, redirected surge, blown east-channel network. Dara Holt identified as the necessary recipient of the full briefing.",
         "Failure section footprint mapped and marked on the hillside. Next step: brief Dara Holt before the east-channel network is hit.",
         "Dara's pipe-section stack reveals she has already been staging a repair schedule in silence — she knows the individual valve seats but not the surge scope. Timeline and vault footprint remain to be disclosed.",
         "Briefing complete — Dara has the surge scope and is staging mitigation. Next: brief Mara and Aldric, then identify and seek the pre-Transition expert.",
         "Dara has set a hard deadline: expert must arrive before week five. Next immediate steps: brief Mara and Aldric this morning, then begin the search for a pre-Transition systems expert.",
         "Plan set: follow Huginn northwest after briefing Mara and Aldric on the surge scope this morning.",
         "Dara briefed and deployed — Mara and Aldric remain; Huginn oriented northwest, ready to guide after morning briefings conclude.",
-        "Expedition kit settled via Aldric offset — offset note in hand. Aldric briefing on east-channel situation is the final step before departure."
+        "Expedition kit settled via Aldric offset — offset note in hand. Aldric briefing on east-channel situation is the final step before departure.",
+        "Offset note delivered, east-channel situation briefed, account fully closed. Aldric commits to holding the downstream thread."
       ],
       "aliases": [],
-      "startedAt": "2026-07-12T17:45:53.994Z"
+      "startedAt": "2026-07-12T17:45:53.994Z",
+      "resolvedAt": "2026-07-15T19:15:24.648Z"
     }
   ],
   "npcRegistry": {
@@ -1736,9 +1720,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d1] Clocked Huginn first, then the pigeon — asked if the cookhouse sent Silas, waiting for a reason to engage",
         "[d1] Order-Sense read the operation around him — fixed accounts, regular customers, the weight falling on fish quality; he's absorbing slow loss from the catch decline. Silas named hims",
         "[d1] You know this person's name now: Aldric (was \"Smokehouse Man\")",
         "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
@@ -1747,17 +1730,18 @@
         "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean.",
         "[d1] Received both animals without ceremony — named the boar's upstream shift as a three-week observation. Account squared; second trail parcel added.",
         "[d2] Squared the full account without argument — named the cord-weights cleanly, accepted the Mara offset without pushback. Ledger closed and initialed.",
-        "[d2] Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work."
+        "[d2] Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work.",
+        "[d2] Received Mara's offset note and initialed his counterpart ledger entry. Briefed on the vault-failure timeline and east-channel surge scope — connected the fish-count decline to the"
       ],
       "knownFacts": [
-        "He's aware the gray-green water comes from upstream and has been watching it",
-        "He runs fixed accounts — the catch decline is already hitting his regular customers",
-        "Mara Wells runs the village supply store — east side of the well, red door — and stocks rope, hardware, and occasional traded-in traps",
         "Telling Mara 'the smokehouse sent you' waives her finder's fee",
         "No bowyer currently in Millbrook — position unfilled since two winters ago",
         "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit",
         "Boar were working riverside reed-beds every morning three weeks ago — now pushing uphill and away from the water",
-        "Accepted Mara's store offset as a clean deduction — treats all accounts in the village as part of the same ledger"
+        "Accepted Mara's store offset as a clean deduction — treats all accounts in the village as part of the same ledger",
+        "The vault section failure and the declining fish catch are the same problem — one mechanism",
+        "Dara Holt knows and is staging mitigation; Mara holds a second copy of the timeline",
+        "Silas and Pell are leaving the valley to find a pre-Transition structural expert"
       ],
       "skillsObserved": [
         "fillet work",
@@ -1768,7 +1752,7 @@
         "clean account reconciliation under field conditions"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse block, knife back in hand, morning work resumed.",
+      "statusNote": "At his smokehouse block, ledger initialed, committed to monitoring the downstream customer end of the east-channel while Silas is gone.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2272,13 +2256,15 @@
           "[d1] Smokehouse operator and village provisioner — runs fixed accounts for preserved fish, has noticed the upstream contamination, wants information about its cause. Struck a provisioning deal with Silas o",
           "[d1] Aldric noted boar were working the riverside reed-beds every morning three weeks ago and have since pushed uphill away from the water — correlates exactly with the start of the gray-green discoloratio",
           "[d2] Settled the full boar account cleanly — sow at 90, bull at 140, trail parcel advance deducted, Mara's store offset accepted without question. Ninety cord-weight balance in Silas's favor.",
-          "[d2] Accepted thirty cord-weight in standing credit — the provisioning relationship now has a live balance in Silas's favor."
+          "[d2] Accepted thirty cord-weight in standing credit — the provisioning relationship now has a live balance in Silas's favor.",
+          "[d2] Briefed on the vault-failure timeline and east-channel surge — connected fish-count decline to the water crisis immediately. Committed to watching the downstream end while Silas searches beyond the va"
         ],
         "links": [
           "millbrook",
           "aldric-provisioning-deal",
           "the-water-crisis",
-          "mara-wells"
+          "mara-wells",
+          "dara-holt"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -2678,15 +2664,15 @@
     }
   },
   "tendencies": {
-    "strategic": 64.48390035503108,
-    "cerebral": 45.01186951969767,
-    "social": 52.95921729633664,
-    "generous": 16.44423625876208,
-    "cautious": 53.64859620778231,
-    "physical": 0.9966106152021198,
-    "risky": 3.314393720999981,
-    "ruthless": 1.3600969333589317,
-    "carousing": 1.7164664628698185
+    "strategic": 65.16148085325592,
+    "cerebral": 44.78681017209918,
+    "social": 52.69442120985496,
+    "generous": 17.362015077468268,
+    "cautious": 53.3803532267434,
+    "physical": 0.9916275621261091,
+    "risky": 3.297821752394981,
+    "ruthless": 1.353296448692137,
+    "carousing": 1.7078841305554695
   },
   "aptitudes": [
     "strategist",
@@ -2694,7 +2680,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 224,
+  "actionCount": 225,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2780,8 +2766,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784142780534,
-  "rev": 309,
+  "updatedAt": 1784142924648,
+  "rev": 310,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2857,12 +2843,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Silas struck a labor deal with Pell the blacksmith — clearing her edge-work backlog in exchange for hunting company north of the village. Work begins now.",
-      "day": 1,
-      "subjectId": "pell"
-    },
     {
       "id": "pell",
       "text": "Pell agreed to join a three-way boar hunt in the north wood — modification on the light spear-tip at cost (covered by Silas), Corvin to be invited. Hunt departs once the forge backlog is clear.",
@@ -3096,6 +3076,12 @@
       "text": "Dara Holt has been given the six-week vault-failure window, the surge scope, and the surface footprint location — she has folded the timeline note into her apron and confirmed the figure as a working ",
       "day": 2,
       "subjectId": "dara-holt"
+    },
+    {
+      "id": "aldric",
+      "text": "Aldric has been briefed on the vault-failure timeline and east-channel surge scope — he now understands the fish-count decline and water contamination as one connected problem, and has committed to wa",
+      "day": 2,
+      "subjectId": "aldric"
     }
   ],
   "practice": {
@@ -3206,7 +3192,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 19
+    "valley": 20
   },
   "foreclosed": [
     "rootkin",

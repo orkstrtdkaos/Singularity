@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6727426771767233,
+    "spectrumId": -0.6891055433178872,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.17735604682204079,
     "mechanical_spiritual": 0.16517695395990592,
@@ -1404,85 +1404,91 @@
         "player": "Ask Mara about anyone she knows from the Edge District... and also ask her to hold the Valve Failure Timeline note as a second copy.",
         "summary": "Mara names two Edge District contacts — Sorel and Leth — and takes the timeline note as a second copy without ceremony.",
         "narration": "Mara listens to the question about Edge District contacts the same way she listens to everything — head slightly tilted, one hand resting on the tied-off ledger, no visible reaction until she's ready to give one.\n\n\"I don't run accounts with the Plateau directly,\" she says, \"but the old pass circuit did. Three, maybe four traders who worked the edge before the new route closed.\" She pulls a stub of chalk from her apron and writes two names on a scrap without being asked: Sorel and the Archivist woman, Leth — the first a spice-broker who wintered in the Edge District two years running, the second someone Mara describes only as \"kept very careful records and did not like being surprised.\" She slides the scrap across the counter. \"Sorel I haven't heard from in a season. Leth I expect is still there — she had the look of someone who'd found a place to stay.\"\n\nYou set the Valve Failure Timeline note on the counter beside the scrap. \"Second copy,\" you say. \"Hold it.\"\n\nMara looks at it. Looks at you. Picks it up and folds it once, precisely, and slides it under the tied-off ledger without a word — as if it were a receipt she'd already accounted for. The ledger goes on top. She taps it once with two fingers, which is apparently that settled.\n\nHuginn shifts on the step outside. Through the open door the well's first traffic is thickening — a second yoke, a woman with a basket — and the smokehouse chimney east of the water wheel is already trailing its morning thread of gray. Aldric will be in. One stop left."
+      },
+      {
+        "player": "Ask Mara if she has anything that would be useful for an expedition that will likely be needed... Pell can provide weapons and armor, but perhaps she has other useful things.",
+        "summary": "Mara equips Silas with expedition basics — tallow, oilcloth, pine-tar salve — and suggests Aldric may have a second waterskin.",
+        "narration": "The question lands easy — Mara is already thinking in expedition terms, you can see it in the way she turns to face the back shelves before you finish speaking. She's been running the math since you told her about the surge scope.\n\n\"Rope you have,\" she says, more to herself than to you, scanning the shelves with the same economy she applies to her ledger. She comes back with three things set on the counter in a row: a wrapped block of hard tallow — rendered and pressed flat, good for leather, boots, rope-ends, and a dozen other trail needs; a fold of oilcloth, heavy enough to shed a night of rain, light enough to pack small; and a small tin of pine-tar salve, the kind that goes on cracked skin and keeps infection out of shallow cuts. She lines them up and looks at them, then looks at you.\n\n\"Edge District in early spring means cold nights and wet passes,\" she says. \"The tallow doubles as fire-starter if the wood's damp. Salve is Dara's recipe — she'd agree you need it.\" A pause. \"I'd add a second waterskin if you have the weight for it, but I'm out of good ones. Try Aldric — he sometimes has cured bladder from the winter butchering.\"\n\nPell, at the doorframe, doesn't move, but there's a faint tilt of her chin that reads as *she's right about the oilcloth.* Mara states the price plainly — eight cord-weight for all three, or she'll hold it against the Aldric offset if you'd rather keep the ready cord for the road."
       }
     ],
     "lastTurn": {
-      "narration": "Mara listens to the question about Edge District contacts the same way she listens to everything — head slightly tilted, one hand resting on the tied-off ledger, no visible reaction until she's ready to give one.\n\n\"I don't run accounts with the Plateau directly,\" she says, \"but the old pass circuit did. Three, maybe four traders who worked the edge before the new route closed.\" She pulls a stub of chalk from her apron and writes two names on a scrap without being asked: Sorel and the Archivist woman, Leth — the first a spice-broker who wintered in the Edge District two years running, the second someone Mara describes only as \"kept very careful records and did not like being surprised.\" She slides the scrap across the counter. \"Sorel I haven't heard from in a season. Leth I expect is still there — she had the look of someone who'd found a place to stay.\"\n\nYou set the Valve Failure Timeline note on the counter beside the scrap. \"Second copy,\" you say. \"Hold it.\"\n\nMara looks at it. Looks at you. Picks it up and folds it once, precisely, and slides it under the tied-off ledger without a word — as if it were a receipt she'd already accounted for. The ledger goes on top. She taps it once with two fingers, which is apparently that settled.\n\nHuginn shifts on the step outside. Through the open door the well's first traffic is thickening — a second yoke, a woman with a basket — and the smokehouse chimney east of the water wheel is already trailing its morning thread of gray. Aldric will be in. One stop left.",
-      "sceneSummary": "Mara names two Edge District contacts — Sorel and Leth — and takes the timeline note as a second copy without ceremony.",
+      "narration": "The question lands easy — Mara is already thinking in expedition terms, you can see it in the way she turns to face the back shelves before you finish speaking. She's been running the math since you told her about the surge scope.\n\n\"Rope you have,\" she says, more to herself than to you, scanning the shelves with the same economy she applies to her ledger. She comes back with three things set on the counter in a row: a wrapped block of hard tallow — rendered and pressed flat, good for leather, boots, rope-ends, and a dozen other trail needs; a fold of oilcloth, heavy enough to shed a night of rain, light enough to pack small; and a small tin of pine-tar salve, the kind that goes on cracked skin and keeps infection out of shallow cuts. She lines them up and looks at them, then looks at you.\n\n\"Edge District in early spring means cold nights and wet passes,\" she says. \"The tallow doubles as fire-starter if the wood's damp. Salve is Dara's recipe — she'd agree you need it.\" A pause. \"I'd add a second waterskin if you have the weight for it, but I'm out of good ones. Try Aldric — he sometimes has cured bladder from the winter butchering.\"\n\nPell, at the doorframe, doesn't move, but there's a faint tilt of her chin that reads as *she's right about the oilcloth.* Mara states the price plainly — eight cord-weight for all three, or she'll hold it against the Aldric offset if you'd rather keep the ready cord for the road.",
+      "sceneSummary": "Mara equips Silas with expedition basics — tallow, oilcloth, pine-tar salve — and suggests Aldric may have a second waterskin.",
       "choices": [
         {
-          "label": "Head to the smokehouse and brief Aldric — confirm the water connection he already suspects and close the morning",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "inform",
-            "close"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Leave Mara a standing instruction — if Sorel or Leth makes contact before you return, hold them here",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "instruct"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Mara one more thing before you go — she runs the closest ledger to ground truth in this village",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "ask"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Do something else entirely",
+          "label": "Take all three, pay the eight cord-weight now — clean transaction, credit preserved.",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "improvise"
+            "trade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Take all three and run it through the Aldric offset — cleaner for the road; reduces your standing credit there.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "trade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Mara what she'd carry, if she were going — she knows the old pass circuit traders; she may know the terrain.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Head to Aldric's smokehouse — last briefing before the road, and ask him about the cured bladder waterskin.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Mara Wells's store — red door east of the well, interior counter and open ledger now tied off with the timeline note folded beneath it, oil-and-rope smell, door open to the brightening dawn village.",
+        "setting": "Mara Wells's store — red door east of the well, oil-and-rope smell, counter now bearing three expedition goods: tallow block, folded oilcloth, and a tin of pine-tar salve.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Behind the counter, ledger and note both filed, watching Silas with her hand resting on the stack — waiting to see if there is more."
+            "state": "Behind the counter, three items laid out, waiting for Silas's answer on payment."
           },
           {
             "name": "Pell",
-            "state": "At the doorframe, arms folded, letting Silas run the briefing."
+            "state": "At the doorframe, arms folded, approving the oilcloth with a chin-tilt."
           },
           {
             "name": "Huginn",
-            "state": "On the step behind Pell, shifted slightly, still oriented northwest."
+            "state": "On the step behind Pell, oriented northwest."
           }
         ],
         "objects": [
+          "Hard tallow block (wrapped, flat-pressed)",
+          "Oilcloth fold (heavy, packable)",
+          "Pine-tar salve tin (Dara's recipe)",
           "Mara's tied-off ledger with timeline note folded beneath",
-          "Contact names scrap (Sorel, Leth)",
+          "Contact Names Scrap (Sorel, Leth)",
           "Counter stock (rope, hardware)",
           "Memory (spear, across shoulders)",
           "Belt Knife",
           "Rune-Craft Kit"
         ],
         "threads": [
-          "Aldric briefing still pending — smokehouse is next",
+          "Three expedition goods on the counter — payment method undecided",
+          "Aldric briefing still pending — smokehouse is next; possible cured bladder waterskin",
           "Huginn oriented northwest — departure pending after Aldric",
-          "Sorel and Leth as Edge District leads — whereabouts uncertain",
-          "The pre-Transition expert's identity remains open"
+          "Sorel and Leth as Edge District leads — whereabouts uncertain"
         ]
       },
       "npcUpdates": [
@@ -1490,91 +1496,72 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "role": "Village supply store operator, Millbrook",
-          "note": "Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve Failure Timeline note as a second copy and filed it under her ledger without ceremony.",
+          "note": "Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a cured-bladder waterskin.",
           "learned": [
-            "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
-            "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District"
+            "Mara keeps expedition logic running in the background once she knows a search is happening",
+            "Aldric sometimes has cured winter-butchering bladder that works as a waterskin"
           ],
           "skillsObserved": [
-            "producing Edge District contact names from memory without prompting",
-            "filing civic information without naming a price"
+            "rapid trail-kit assembly from known inventory",
+            "proactive trail advice without being asked"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her store, timeline note filed under ledger — briefed and holding."
+          "statusNote": "At her store counter, three goods laid out, waiting on payment decision."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "edge-district-contacts",
-          "label": "Edge District Contacts",
+          "topic": "mara-wells",
+          "label": "Mara Wells",
           "kind": "person",
-          "fact": "Mara named two old pass circuit traders with Edge District knowledge: Sorel, a spice-broker who wintered there two years running (not heard from in a season), and Leth, an archivist type who kept careful records and likely remains resident. Both are potential leads toward pre-Transition structural knowledge.",
+          "entityId": "mara-wells",
+          "fact": "Assembled expedition kit (tallow, oilcloth, pine-tar salve) without being prompted for a list — priced at eight cord-weight or Aldric offset. Flagged Aldric as a source for cured bladder waterskins from winter butchering.",
           "links": [
-            "mara-wells",
-            "the-water-crisis",
-            "radiant-plateau-edge",
-            "pell"
+            "millbrook",
+            "aldric",
+            "aldric-provisioning-deal",
+            "the-water-crisis"
           ]
         }
       ],
-      "inventoryAdd": [
-        {
-          "name": "Contact Names Scrap (Sorel, Leth)",
-          "kind": "quest",
-          "description": "A chalk-written scrap from Mara — two names from the old pass circuit with Edge District ties. Sorel: spice-broker, wintered in the Edge District two years. Leth: archivist type, likely still there.",
-          "consumable": false
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [
-          {
-            "name": "Contact Names Scrap (Sorel, Leth)",
-            "kind": "quest",
-            "description": "A chalk-written scrap from Mara — two names from the old pass circuit with Edge District ties. Sorel: spice-broker, wintered in the Edge District two years. Leth: archivist type, likely still there.",
-            "consumable": false
-          }
-        ],
-        "inventoryRemove": [],
-        "xp": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the store counter — contact names pulled, note filed, a few minutes at most."
+        "why": "A brief exchange at Mara's counter — goods laid out and priced, answer still pending."
       }
     },
     "sceneState": {
-      "setting": "Mara Wells's store — red door east of the well, interior counter and open ledger now tied off with the timeline note folded beneath it, oil-and-rope smell, door open to the brightening dawn village.",
+      "setting": "Mara Wells's store — red door east of the well, oil-and-rope smell, counter now bearing three expedition goods: tallow block, folded oilcloth, and a tin of pine-tar salve.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Behind the counter, ledger and note both filed, watching Silas with her hand resting on the stack — waiting to see if th"
+          "state": "Behind the counter, three items laid out, waiting for Silas's answer on payment."
         },
         {
           "name": "Pell",
-          "state": "At the doorframe, arms folded, letting Silas run the briefing."
+          "state": "At the doorframe, arms folded, approving the oilcloth with a chin-tilt."
         },
         {
           "name": "Huginn",
-          "state": "On the step behind Pell, shifted slightly, still oriented northwest."
+          "state": "On the step behind Pell, oriented northwest."
         }
       ],
       "objects": [
+        "Hard tallow block (wrapped, flat-pressed)",
+        "Oilcloth fold (heavy, packable)",
+        "Pine-tar salve tin (Dara's recipe)",
         "Mara's tied-off ledger with timeline note folded beneath",
-        "Contact names scrap (Sorel, Leth)",
+        "Contact Names Scrap (Sorel, Leth)",
         "Counter stock (rope, hardware)",
         "Memory (spear, across shoulders)",
         "Belt Knife",
         "Rune-Craft Kit"
       ],
       "threads": [
-        "Aldric briefing still pending — smokehouse is next",
+        "Three expedition goods on the counter — payment method undecided",
+        "Aldric briefing still pending — smokehouse is next; possible cured bladder waterskin",
         "Huginn oriented northwest — departure pending after Aldric",
-        "Sorel and Leth as Edge District leads — whereabouts uncertain",
-        "The pre-Transition expert's identity remains open"
+        "Sorel and Leth as Edge District leads — whereabouts uncertain"
       ]
     }
   },
@@ -1769,7 +1756,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d1] Received Huginn's slow blink as a farewell — small recalibration, no alarm. Commented 'unusual company' without unkindness. Parted on clean terms.",
         "[d2] Silas has returned to the store — she looks up from the ledger.",
         "[d2] Produced a bottle of resin mountain wine and a sealed packet of dried starfruit from before the pass closed — both now on the counter, price not yet named.",
         "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig",
@@ -1778,28 +1764,29 @@
         "[d2] Produced valve failure dates from two separate ledgers without hesitation — four sleeve blank sales in three weeks, both failures confirmed returned. Tore a note page unprompted an",
         "[d2] Named Dara Holt unprompted — gave her location (blue gate-post, bend before upper meadow), her seniority (22 years, east channel), and advised Silas to see the site before briefing",
         "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S",
-        "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F"
+        "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F",
+        "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a "
       ],
       "knownFacts": [
-        "Dara Holt lives at the bend before the upper meadow — house with blue gate-post",
-        "Dara Holt has been east-channel senior irrigator for twenty-two years",
         "Dara and Fen share a water-right on the east bend — Dara may already have suspicions about the first failure",
         "Buried vault section will fail in six weeks — redirected surge into east-channel main feeder run",
         "Dara Holt is already staging pipe-sections",
         "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
         "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
-        "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District"
+        "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District",
+        "Mara keeps expedition logic running in the background once she knows a search is happening",
+        "Aldric sometimes has cured winter-butchering bladder that works as a waterskin"
       ],
       "skillsObserved": [
-        "back-stock recall without hesitation",
-        "precise ledger recall across multiple logs",
         "reading the weight of a situation without needing it spelled",
         "accurate recall of local relationships and property arrangem",
         "producing Edge District contact names from memory without pr",
-        "filing civic information without naming a price"
+        "filing civic information without naming a price",
+        "rapid trail-kit assembly from known inventory",
+        "proactive trail advice without being asked"
       ],
       "status": "active",
-      "statusNote": "At her store, timeline note filed under ledger — briefed and holding.",
+      "statusNote": "At her store counter, three goods laid out, waiting on payment decision.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2234,7 +2221,8 @@
           "[d1] Keeps reserve stock not on display — including a fine-grit river whetstone she'd held three weeks for Pell, never delivered. Treats gift logistics the same as inventory. Sold two ash shafts: one on Al",
           "[d2] Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve.",
           "[d2] Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transac",
-          "[d2] Keeps cross-referenced sales logs precise enough to reconstruct a failure timeline three weeks back without prompting. Tore a note page for Silas without naming a price — treating civic information di"
+          "[d2] Keeps cross-referenced sales logs precise enough to reconstruct a failure timeline three weeks back without prompting. Tore a note page for Silas without naming a price — treating civic information di",
+          "[d2] Assembled expedition kit (tallow, oilcloth, pine-tar salve) without being prompted for a list — priced at eight cord-weight or Aldric offset. Flagged Aldric as a source for cured bladder waterskins fr"
         ],
         "links": [
           "millbrook",
@@ -2614,15 +2602,15 @@
     }
   },
   "tendencies": {
-    "strategic": 64.12858297015842,
-    "cerebral": 45.4653867525544,
-    "social": 52.4877829310741,
-    "generous": 16.609920212885612,
-    "cautious": 54.189132807537504,
-    "physical": 1.006651968588793,
-    "risky": 3.347787905355906,
-    "ruthless": 1.3738005942869438,
-    "carousing": 1.7337607261127936
+    "strategic": 64.80794005530763,
+    "cerebral": 45.238059818791626,
+    "social": 53.22534401641873,
+    "generous": 16.526870611821185,
+    "cautious": 53.918187143499814,
+    "physical": 1.001618708745849,
+    "risky": 3.3310489658291265,
+    "ruthless": 1.3669315913155091,
+    "carousing": 1.7250919224822296
   },
   "aptitudes": [
     "strategist",
@@ -2630,7 +2618,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 222,
+  "actionCount": 223,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2716,8 +2704,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784142430003,
-  "rev": 307,
+  "updatedAt": 1784142664701,
+  "rev": 308,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3142,7 +3130,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 17
+    "valley": 18
   },
   "foreclosed": [
     "rootkin",

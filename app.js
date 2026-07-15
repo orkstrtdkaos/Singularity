@@ -25,7 +25,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.62";
+const APP_VERSION = "1.8.63";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2532,6 +2532,15 @@ function applyTurn(turn, resolution, playerWords = null) {
     const e = promotionEligible(character, dk, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
     if (e.eligible) { character.pendingPromotion = dk; turn.narration += `\n\n*✦ You are being recognized — you may be raised into **${traditionLabel(e.trad)}** as your ${e.to}. Choose on your Character screen; it will close the far pole of that axis to you.*`; }
   }
+  // SNG-102: the GM offers a NEW people to join — the engine flags it only if genuinely acquirable; the
+  // player commits (Law 9 — joining forecloses the far pole of that people's axis). The GM never forecloses.
+  if (turn.offerAcquisition?.traditionId) {
+    const tid = turn.offerAcquisition.traditionId;
+    if (acquirable(character, tid, CONTENT.rules, { traditionIndex: CONTENT.traditionIndex }).ok) {
+      character.pendingAcquisition = tid;
+      turn.narration += `\n\n*✦ The ${traditionLabel(tid)} would take you as one of their own. You may join them on your Character screen — entering as a novice (Tier I), and closing the far pole of their axis to you.*`;
+    }
+  }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {
     const def = sanitizeNewAbility(turn.newAbility);
@@ -3666,7 +3675,12 @@ function renderCharacterScreen() {
         if (!character.domains?.[k]) return ""; const e = promotionEligible(character, k, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
         if (!e.eligible) return ""; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>✦ You may rise:</strong> become ${esc(traditionLabel(e.trad))} as your ${e.to} <button class="grow-btn practiced" data-promote="${k}">Promote…</button></div>`;
       }).join("");
-      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Domains ${infoDot("circle.domains")}</h3>${rows}${acq}${fore}${promos}</div>`;
+      // SNG-102: a new people you may JOIN — any tradition you have a willing teacher for that's acquirable
+      // (plus a GM-offered one). The teacher is the gate, so the candidate set is bounded.
+      const acqTargets = [...new Set([...(character.pendingAcquisition ? [character.pendingAcquisition] : []), ...Object.keys(character.teachers || {})])];
+      const acqs = acqTargets.filter(t => acquirable(character, t, CONTENT.rules, { traditionIndex: CONTENT.traditionIndex }).ok)
+        .map(t => `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>✦ You may join:</strong> become of the ${esc(traditionLabel(t))} (enters at Tier I) <button class="grow-btn practiced" data-acquire="${esc(t)}">Join…</button></div>`).join("");
+      return `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Domains ${infoDot("circle.domains")}</h3>${rows}${acq}${fore}${promos}${acqs}</div>`;
     })() : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Abilities ${infoDot("ability.tiers")} <span class="cap-line" style="text-transform:none">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} skills${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity; new points learn other crafts" : ""}</span>${atCapacity(character, CONTENT.skillCapacity) ? infoDot("lock.capacity") : ""}</h3>
       ${character.pendingMasteryFork ? (() => { const fb = fullCatalog()[character.pendingMasteryFork]; return `<div class="cs-ability" style="border-left:3px solid var(--accent)"><strong>⑂ A defining moment for ${esc(fb?.name || character.pendingMasteryFork)}</strong> — choose its path to master it. <button class="grow-btn practiced" data-masteryfork="${esc(character.pendingMasteryFork)}">Choose path</button></div>`; })() : ""}
@@ -3726,6 +3740,8 @@ function renderCharacterScreen() {
   };
   // SNG-101: promotion — the player commits (Law 9), the modal names the foreclosure cost.
   for (const btn of app.querySelectorAll("[data-promote]")) btn.onclick = () => renderPromotionModal(btn.dataset.promote);
+  // SNG-102: acquisition — join a new people (Tier I), forecloses their antipode. Player commits.
+  for (const btn of app.querySelectorAll("[data-acquire]")) btn.onclick = () => renderAcquisitionModal(btn.dataset.acquire);
   const aspPick = document.getElementById("asp-pick");
   if (aspPick) aspPick.onchange = () => { if (aspPick.value) { const r = declareAspiration(character, aspPick.value, rules); if (r.ok) { saveCharacter(character); renderCharacterScreen(); } else alert(r.why); } };
   for (const btn of app.querySelectorAll("[data-aspdrop]")) btn.onclick = () => { dropAspiration(character, btn.dataset.aspdrop); saveCharacter(character); renderCharacterScreen(); };
@@ -5178,6 +5194,30 @@ function renderPromotionModal(domainKey) {
     renderCharacterScreen();
   };
   document.getElementById("promote-cancel").onclick = () => el.remove();
+}
+
+/** SNG-102: the acquisition commit modal — the ONE place a domain is acquired. Names the antipode-
+ *  foreclosure cost (Law 9); only ever calls acquireDomain on an acquirable people. */
+function renderAcquisitionModal(traditionId) {
+  const a = acquirable(character, traditionId, CONTENT.rules, { traditionIndex: CONTENT.traditionIndex });
+  if (!a.ok) { renderCharacterScreen(); return; }
+  const anti = antipodeOf(traditionId, CONTENT.traditionIndex);
+  document.getElementById("acquire-modal")?.remove();
+  const el = document.createElement("div");
+  el.id = "acquire-modal"; el.className = "fork-modal";
+  el.innerHTML = `<div class="fork-card"><div class="fork-title">Become of the ${esc(traditionLabel(traditionId))}?</div>` +
+    `<div class="fork-prompt">You join them as a <strong>novice — Tier I</strong>, however great you are elsewhere; their craft grows by the same standing as any other.` +
+    (anti ? ` This <strong>closes ${esc(traditionLabel(anti))}</strong> to you by ordinary means — the far pole of their axis; the braid road remains. Reach is earned one people at a time.` : "") + `</div>` +
+    `<div class="fork-paths"><button class="fork-path" id="acquire-commit"><div class="fp-name">Join</div><div class="fp-grants">Enter the ${esc(traditionLabel(traditionId))} at Tier I.</div></button></div>` +
+    `<button class="fork-cancel" id="acquire-cancel">Not yet</button></div>`;
+  document.body.appendChild(el);
+  document.getElementById("acquire-commit").onclick = () => {
+    const r = acquireDomain(character, traditionId, CONTENT.rules, { traditionIndex: CONTENT.traditionIndex });
+    el.remove();
+    if (r.ok) { if (character.pendingAcquisition === traditionId) character.pendingAcquisition = null; saveCharacter(character); }
+    renderCharacterScreen();
+  };
+  document.getElementById("acquire-cancel").onclick = () => el.remove();
 }
 
 function rankOptsFor() { return { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, catalog: fullCatalog() }; }

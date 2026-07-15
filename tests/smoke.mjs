@@ -16,7 +16,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain } from "../engine/progression.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
@@ -2226,6 +2226,24 @@ await (async () => {
   const held = { domains: c.domains, foreclosed: ["abyssal"], abilities: [{ abilityId: "ab1", level: 1 }], practice: { uses: { ab1: 20 } } };
   const adv = autoAdvancePracticedRanks(held, { leveling: { rankLevelReq: { "2": 1 } }, practice: { useRankThreshold: { "2": 8 } } }, opts);
   check("a foreclosed native does not auto-rank (but is not stripped)", adv.length === 0 && held.abilities[0].level === 1);
+
+  // --- SNG-102: domain acquisition (join a new people at Tier I; forecloses its antipode) ---
+  const acqRules = { ...rules, acquisition: { minReputation: 8, requiresTeacherOrTome: true, startingCeiling: 1 } };
+  // idx here has rootkin/enginewright/seraphic/abyssal; add a far people 'marcher'/'churnfolk' pair
+  const idx2 = { byId: { ...idx.byId, marcher: { opposite: "churnfolk" }, churnfolk: { opposite: "marcher" } }, folkIds: new Set(), abilityToTradition: {} };
+  const o2 = { catalog, traditionIndex: idx2 };
+  const pc = { domains: { primary: "rootkin", secondary: "enginewright", tertiary: "seraphic" }, foreclosed: ["abyssal"], peopleDisposition: {}, teachers: {} };
+  check("cannot acquire without standing + teacher", acquirable(pc, "marcher", acqRules, o2).ok === false);
+  check("cannot acquire a foreclosed people", (() => { pc.peopleDisposition.abyssal = 20; pc.teachers.abyssal = { met: true, willing: true }; return acquirable(pc, "abyssal", acqRules, o2).ok === false; })());
+  check("cannot acquire the antipode of your primary (closed-opposite)", (() => { pc.peopleDisposition.enginewright = 20; pc.teachers.enginewright = { met: true, willing: true }; return acquirable(pc, "enginewright", acqRules, o2).ok === false; })());
+  pc.peopleDisposition.marcher = 10; pc.teachers.marcher = { met: true, willing: true };
+  check("can acquire a valid new people with standing + teacher", acquirable(pc, "marcher", acqRules, o2).ok === true);
+  const ar = acquireDomain(pc, "marcher", acqRules, o2);
+  check("acquireDomain enters at Tier I", ar.ok && pc.domainsAcquired.includes("marcher") && pc.domainCeilings.marcher === 1);
+  check("acquireDomain forecloses the joined people's antipode", (pc.foreclosed || []).includes("churnfolk"));
+  check("an acquired domain's ability is now accessible at Tier I", domainAccess({ id: "m1", tradition: "marcher", levelReq: 1, nativeOrCombination: "native" }, 1, pc.domains, idx2, { domainsAcquired: pc.domainsAcquired, domainCeilings: pc.domainCeilings }).allowed === true);
+  check("but its Tier-II ability is still gated (novice)", domainAccess({ id: "m2", tradition: "marcher", levelReq: 2, nativeOrCombination: "native" }, 2, pc.domains, idx2, { domainsAcquired: pc.domainsAcquired, domainCeilings: pc.domainCeilings }).allowed === false);
+  check("cannot acquire a people already held", acquirable(pc, "marcher", acqRules, o2).ok === false);
 })();
 
 // --- SNG-045: player identity dedup (one person, one profile) ---

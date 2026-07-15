@@ -121,6 +121,11 @@
     "tertiaryToSecondary": { "minReputation": 8, "requiresTeacher": true, "minInDomainRanks": 3 },
     "secondaryToPrimary": { "minReputation": 12, "requiresTeacher": true, "minInDomainRanks": 6, "requiresRegionStanding": true, "minRegionTurns": 12, "requiresCeilingExhausted": true }
   },
+  "acquisition": {
+    "minReputation": 8,
+    "requiresTeacherOrTome": true,
+    "startingCeiling": 1
+  },
   "subAttributes": {
     "physical": [
       "strength",

@@ -265,6 +265,45 @@ export function promote(character, domainKey, rules, opts = {}) {
   return { ok: true, trad, to, newCeiling, foreclosedAntipode };
 }
 
+// ---------- SNG-102: domain acquisition (join a new people mid-play, at Tier I) ----------
+
+/** SNG-102: may the character acquire this new tradition as a domain? Every gate must clear: not
+ *  already held, not foreclosed, not the closed antipode of primary/secondary, and the SNG-100b
+ *  standing bar (willing teacher or tome + reputation ≥ acquisitionThreshold). Pure. {ok, reason}. */
+export function acquirable(character, traditionId, rules, opts = {}) {
+  const idx = opts.traditionIndex;
+  if (!traditionId || !idx?.byId?.[traditionId]) return { ok: false, reason: "not a real people of the circle" };
+  const d = character?.domains || {};
+  if ([d.primary, d.secondary, d.tertiary, ...(character?.domainsAcquired || [])].includes(traditionId)) return { ok: false, reason: "already a domain you hold" };
+  if ((character?.foreclosed || []).includes(traditionId)) return { ok: false, reason: "foreclosed — the far pole of an axis you've chosen; only a braid crosses it" };
+  if (traditionId === antipodeOf(d.primary, idx) || (d.secondary && traditionId === antipodeOf(d.secondary, idx)))
+    return { ok: false, reason: "the far pole of your own axis — closed-opposite holds; the braid is the only road" };
+  const a = rules?.acquisition || {};
+  const { score } = standingWithPeople(character, traditionId, rules);
+  if (score < (a.minReputation ?? 8)) return { ok: false, reason: `deeper standing with this people (${score}/${a.minReputation ?? 8})` };
+  if (a.requiresTeacherOrTome ?? true) {
+    const t = character?.teachers?.[traditionId];
+    const tome = (character?.tomes || []).includes(traditionId);
+    if (!((t && t.met && t.willing) || tome)) return { ok: false, reason: "a willing teacher of this people, or their tome" };
+  }
+  return { ok: true };
+}
+
+/** SNG-102: join a people as a new domain. Enters at Tier I; forecloses the acquired people's antipode
+ *  (the same directional foreclosure as promotion). Additive only — pushes a string, sets a ceiling,
+ *  appends a foreclosure. Never removes. `opts.force` skips the acquirable re-check (tests/committed UI). */
+export function acquireDomain(character, traditionId, rules, opts = {}) {
+  if (!opts.force) { const a = acquirable(character, traditionId, rules, opts); if (!a.ok) return { ok: false, why: a.reason }; }
+  character.domainsAcquired = character.domainsAcquired || [];
+  if (!character.domainsAcquired.includes(traditionId)) character.domainsAcquired.push(traditionId);
+  character.domainCeilings = character.domainCeilings || {};
+  if (character.domainCeilings[traditionId] == null) character.domainCeilings[traditionId] = rules?.acquisition?.startingCeiling ?? 1;
+  const anti = opts.traditionIndex ? antipodeOf(traditionId, opts.traditionIndex) : null;
+  let foreclosedAntipode = null;
+  if (anti) { character.foreclosed = character.foreclosed || []; if (!character.foreclosed.includes(anti)) { character.foreclosed.push(anti); foreclosedAntipode = anti; } }
+  return { ok: true, traditionId, foreclosedAntipode };
+}
+
 /** SNG-101: the additive per-character access state domainAccess consults (all absent-tolerant). */
 export function domainOpts(character) {
   return { foreclosed: character?.foreclosed, domainCeilings: character?.domainCeilings, domainsAcquired: character?.domainsAcquired };

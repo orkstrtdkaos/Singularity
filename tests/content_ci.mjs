@@ -195,6 +195,11 @@ for (const pack of PACKS) {
     "promotionEligible reads rules.promotion[...] — absent ⇒ promotion never surfaces");
   if (pr) check("promotion thresholds carry a minReputation", typeof pr.tertiaryToSecondary?.minReputation === "number" && typeof pr.secondaryToPrimary?.minReputation === "number",
     "the standing threshold must be a number in peopleDisposition units");
+  // SNG-102: the acquisition block. acquirable reads minReputation + startingCeiling.
+  const ac = r.acquisition;
+  check("acquisition names minReputation + startingCeiling", ac && typeof ac.minReputation === "number" && typeof ac.startingCeiling === "number",
+    "acquirable/acquireDomain read these — absent ⇒ acquisition never surfaces or enters at the wrong tier");
+  if (ac) check("acquired domains start at Tier I", ac.startingCeiling === 1, "the pilgrimage is walked, not skipped — a joined people begins at Tier I");
 }
 
 // (4) location connectivity: dangling connections, one-way edges, unreachable locations

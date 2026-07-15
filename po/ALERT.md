@@ -10,6 +10,11 @@ CCode built all three top-down; **Aevi confirmed at authenticated origin** (not 
 ## 🖥 SNG-104 — Vitals x/y readout + tap/hover detail (specced + STAGED DIFF, awaiting CCode)
 `po/SPEC_SNG-104_vitals_readout.md` + `..._STAGED_DIFF.md` (byte-precise drop-in). The Health/Energy bars show **no number** — that's why Erik couldn't tell if energy was depleting faster or he had less. Adds always-visible `current / max` (zero-tap phone answer) + a tap/hover popover reusing the info-dot delegation (phone parity built in). Verified anchors at HEAD.
 
+## 🎲 SNG-106 — Roll-breakdown popup (specced, awaiting CCode)
+`po/SPEC_SNG-106_roll_breakdown_popup.md`. Tappable "why this number" on the roll receipt — every component of the chance, with the opposed contribution NAMED (encounters already fold opponent threat into difficulty). **Spine: `successChance` throws its components away at return — must retain them as `{total, components}` so the popup shows the real math, never a re-derivation (behavior-preserving, sum-equals test).** Reuses info-dot popover for phone parity. Companion to SNG-104.
+
+---
+
 ## ⚖ ENERGY ECONOMY — ERIK'S QUESTION ANSWERED + a balance call for him
 Erik felt energy "depleting faster / lower than usual." **Verified: maxEnergy is correct** (100 + 5/level = 125 at L6). The felt effect is real and diagnosed: **ability costs discounted DOWN (most of Silas's land at 3 by L6) but `defaultActionCost` is a flat 5 that never discounts, and recovery is FIXED (sleep +40, breather +10, meal +10) while the pool grows +5/level.** So a night's sleep was 40% of the bar at L1, 32% at L6, falling every level — the refill feels grindier as you climb. Not a bug (every number matches formula) — a design tension. **Erik's call:** scale recovery with level/maxEnergy fraction? → would become **SNG-105** if yes.
 

@@ -33,14 +33,14 @@ CCode reviewed SNG-101/102 as the dependent pair. **Aevi verified all structural
 
 **Resolved:**
 - **NEW `po/SPEC_SNG-100b_standing_bar.md`** (`af42971`) — builds per-people standing + durable teacher flag + region-presence, and **wires the unenforced SNG-049/050 capstone bar.** The floor everything above stands on.
-- **SNG-101 v2** (`4235065`) — §2 rewritten additive: keep strings, add `foreclosed` + `domainCeilings` + `domainsAcquired`, generalize `domainAccess`. Zero type change, every design goal preserved. Rank-path gate named (`autoAdvancePracticedRanks` + `markDefiningMoment` skip foreclosed **natives**; braids exempt on all three paths). Hard dep on the classification pass (braid exemption needs `nativeOrCombination`, 0/247 today).
+- **SNG-101 v2** (`4235065`) — §2 rewritten additive: keep strings, add `foreclosed` + `domainCeilings` + `domainsAcquired`, generalize `domainAccess`. Zero type change, every design goal preserved. Rank-path gate named (`autoAdvancePracticedRanks` + `markDefiningMoment` skip foreclosed **natives**; braids exempt on all three paths). Hard dep on the classification pass — **now satisfied** (247/247 tagged).
 - **SNG-102 v2** (`2ece6f1`) — inherits SNG-101's additive `domainsAcquired` (string array), no new schema; standing from SNG-100b.
 
 **Affirmed by CCode (survived the rework):** station-vs-ceiling decoupling · directional keep-the-ground foreclosure · endgame-falls-out-of-geometry · Law-9 offer-vs-commit (the `markDefiningMoment` pattern) · skilltree `state` → `FORECLOSED` extends cleanly.
 
 ### 🔢 RE-SEQUENCED BUILD ORDER (Aevi authored → CCode builds top-down)
 ```
-1. Ability-arch classification pass   (247 → native/combination; Aevi content; unblocks braid exemption)
+1. ✅ Ability-arch classification pass  (247 → 241 native / 6 combination; DONE, verified at origin — braid exemption now buildable)
 2. SNG-100b — Standing Bar            (per-people standing + teacher + region; closes SNG-049/050 gap)
 3. SNG-101 — Domain Promotion         (additive; foreclosure gates learn + both rank paths; braid-exempt)
 4. SNG-102 — Domain Acquisition       (lands on the above, almost no new surface)
@@ -56,5 +56,6 @@ Flirt with an NPC at `R`; confirm the GM stays in the scene (no fade, no hedge, 
 
 ## 📋 OWED — AEVI (queue)
 - ~~SNG-101 + SNG-102 specs~~ ✅ · ~~SNG-100b spec~~ ✅
-- **Ability-arch classification pass** (247 native/combination) — now GATES SNG-101, not just enriches
+- ~~Ability-arch classification pass~~ ✅ **DONE** — all 247 tagged `nativeOrCombination`: **241 native, 6 combination** (3 explicit `cross_pole_braid` + 3 axis-midpoint braid-crafts: `the_whole_act`, `riding_order`, `the_held_breath`). Rule: `cross_pole_braid` tradition OR (`axes==0.0` + `gated:learned` + "braid-craft"). Verified 247/247 at authenticated origin, all files parse. **The SNG-101 braid-exemption dependency is now CLEARED.**
+  - ⚑ **One flag for Erik:** `the_last_gift` (rootkin) sits at `axes:0.0` but is death-tending, not a braid — classified **native** (lacks braid-craft declaration + `gated:learned`). Overrule if you read it as a combination.
 - SNG-098 (skill battles) · SNG-099 (ID collapse) · `po/OPERATIONAL_FLOWS.md`

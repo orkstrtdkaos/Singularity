@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 6,
-  "xp": 504,
+  "xp": 509,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -53,7 +53,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 113,
+  "energy": 99,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1251,81 +1251,117 @@
         "player": "Ask Huginn, loudly, which one of you it thinks is going to win",
         "summary": "Huginn consulted on the race; he flew north without answering, which was an answer.",
         "narration": "The fence-post stub is forty feet ahead, and Huginn is on it — big and ragged and entirely unhurried, watching both of you arrive at him like a magistrate watching two late petitioners.\n\nYou have just enough wind to be dangerous.\n\n\"Huginn,\" you call out, loud enough to carry, loud enough that Pell can't pretend she didn't hear. \"Objectively. Fairly. Who wins this?\"\n\nHuginn turns his head. The calm eye finds you. Then it finds Pell. Then it finds the path between you and the wash-room — still a quarter mile of it, at least.\n\nHe makes a sound. One syllable, low and percussive, somewhere between a knock and a croak, and then he lifts off the post without apparent urgency and beats north. Not circling. Not waiting. North, at a pace that is not a race.\n\nPell makes a sound that is absolutely not a laugh and is definitely a laugh. \"That's not an answer,\" she says, without slowing.\n\n\"He's gone ahead to declare a winner in advance,\" you say. \"Very efficient.\"\n\n\"He picked the site.\" Her breathing is controlled but not effortless — she's working for it now. Half a stride ahead of you. \"I'm choosing to take that as a sign.\"\n\nShe does not say in whose favor."
+      },
+      {
+        "player": "Use Shadowstep one more time — find a shadow ahead of her and step to the finish",
+        "summary": "Silas steps to the finishing shadow and wins the race — first foot on the flagged floor, date three is his to name.",
+        "narration": "The wash-room site is close enough now that you can smell it — old stone and wet earth, the particular cold that dressed slate holds through a morning. Huginn is already there, a dark shape on something raised, watching you both close the distance.\n\nYou pick the shadow. There's one good one, forty feet ahead where the hillside bank overhangs the path and the morning sun hasn't reached the ground yet — a deep cool band running the width of the track, the flagged floor of the entrance a dozen paces beyond it. You step into the shadow at your feet and come out of the one under the bank in the same heartbeat, legs already driving, Memory's shaft balanced across your shoulders.\n\nPell is three strides behind when you emerge. You hear the change in her footfall — the slight catch, a half-breath held — and then the deliberate decision to press anyway, because she is exactly the kind of person who presses. But the ground is unfamiliar to her at speed in this light, and you have the angle.\n\nYou hit the flagged floor first. One step, two, and you stop, turning back just as she crosses onto the stone. She's breathing hard — controlled, but honestly hard — and she looks at you with the particular expression of someone who has just been beaten fairly and is deciding how to feel about it.\n\nHuginn is on the high ring-hook above the doorway. He says nothing. The timing of his silence is a comment."
       }
     ],
     "lastTurn": {
-      "narration": "The fence-post stub is forty feet ahead, and Huginn is on it — big and ragged and entirely unhurried, watching both of you arrive at him like a magistrate watching two late petitioners.\n\nYou have just enough wind to be dangerous.\n\n\"Huginn,\" you call out, loud enough to carry, loud enough that Pell can't pretend she didn't hear. \"Objectively. Fairly. Who wins this?\"\n\nHuginn turns his head. The calm eye finds you. Then it finds Pell. Then it finds the path between you and the wash-room — still a quarter mile of it, at least.\n\nHe makes a sound. One syllable, low and percussive, somewhere between a knock and a croak, and then he lifts off the post without apparent urgency and beats north. Not circling. Not waiting. North, at a pace that is not a race.\n\nPell makes a sound that is absolutely not a laugh and is definitely a laugh. \"That's not an answer,\" she says, without slowing.\n\n\"He's gone ahead to declare a winner in advance,\" you say. \"Very efficient.\"\n\n\"He picked the site.\" Her breathing is controlled but not effortless — she's working for it now. Half a stride ahead of you. \"I'm choosing to take that as a sign.\"\n\nShe does not say in whose favor.",
-      "sceneSummary": "Huginn consulted on the race; he flew north without answering, which was an answer.",
+      "narration": "The wash-room site is close enough now that you can smell it — old stone and wet earth, the particular cold that dressed slate holds through a morning. Huginn is already there, a dark shape on something raised, watching you both close the distance.\n\nYou pick the shadow. There's one good one, forty feet ahead where the hillside bank overhangs the path and the morning sun hasn't reached the ground yet — a deep cool band running the width of the track, the flagged floor of the entrance a dozen paces beyond it. You step into the shadow at your feet and come out of the one under the bank in the same heartbeat, legs already driving, Memory's shaft balanced across your shoulders.\n\nPell is three strides behind when you emerge. You hear the change in her footfall — the slight catch, a half-breath held — and then the deliberate decision to press anyway, because she is exactly the kind of person who presses. But the ground is unfamiliar to her at speed in this light, and you have the angle.\n\nYou hit the flagged floor first. One step, two, and you stop, turning back just as she crosses onto the stone. She's breathing hard — controlled, but honestly hard — and she looks at you with the particular expression of someone who has just been beaten fairly and is deciding how to feel about it.\n\nHuginn is on the high ring-hook above the doorway. He says nothing. The timing of his silence is a comment.",
+      "sceneSummary": "Silas steps to the finishing shadow and wins the race — first foot on the flagged floor, date three is his to name.",
       "choices": [
         {
-          "label": "Push hard — spend what you have left and try to take the lead before the last rise",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "push",
-            "risky"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Hold even and read the last stretch — let the ground tell you where the decisive moment is",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Say something about Huginn having a preferred outcome — needle her one more time while you still can breathe",
+          "label": "Call your prize now — name date three while she's still catching her breath",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "violence_peace": 0.6,
+            "chaos_order": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "banter"
+            "claim",
+            "flirt",
+            "playful"
           ],
           "trivial": true
         },
         {
-          "label": "Use Shadowstep one more time — find a shadow ahead of her and step to the finish",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Give her a moment — then turn to the cradle-recess together and use Order-Sense on the whole structure",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": 0.4
+          },
           "difficulty": 15,
           "intentTags": [
-            "risky",
-            "gamble"
+            "study",
+            "careful",
+            "investigate"
           ],
-          "abilityId": "shadowstep",
-          "energyCost": 7,
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Run a hand along the saddle-hook mounts — let Palework read what used to sit in them",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "read",
+            "careful"
+          ],
+          "abilityId": "palework",
+          "energyCost": 6,
+          "trivial": false
+        },
+        {
+          "label": "Kneel at the cradle-recess and use The Attended End — ask what is ending here, or what ended",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.5,
+            "concrete_abstract": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "read",
+            "careful",
+            "investigate"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 4,
           "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -7
+      },
       "scene": {
-        "setting": "North cut, past the fence-post stub — open slope, path running northeast toward the wash-room site a quarter mile ahead, morning sun low on the left. Both runners in motion.",
+        "setting": "The wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Two hip-height saddle-mount ring-hooks on the far wall. Cradle-recess visible in the floor.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Running north, half a stride ahead, breathing controlled but working"
+            "state": "Six feet from Silas, breathing hard but controlled — just beaten, deciding how she feels about it"
           },
           {
             "name": "Huginn",
-            "state": "Flying north ahead of both runners at a deliberate, unhurried pace"
+            "state": "Perched on the high ring-hook above the doorway, silent, timing it"
           }
         ],
         "objects": [
           "Memory (spear, in hand)",
           "Belt Knife (at hip)",
           "Rune-Craft Kit (pack)",
-          "Valve Failure Timeline note (breast pocket)"
+          "Valve Failure Timeline note (breast pocket)",
+          "Two saddle-mount ring-hooks at hip height on the far wall",
+          "Cradle-recess in the floor",
+          "Close-fitted old mortar walls, dressed slate floor"
         ],
         "threads": [
-          "Race to the wash-room — Pell half a stride ahead, quarter mile remaining",
-          "Huginn flew north without declaring a winner — his destination is the site",
-          "Wash-room site unexamined — saddle hooks, stand-positions, unknown object in the cradle-recess",
-          "Dara Holt unbriefed",
+          "Date three prize — Silas won, terms unclaimed",
+          "Cradle-recess and saddle-hooks unexamined",
+          "Dara Holt still unbriefed on the full structural picture",
           "When did the mechanism turn, and for whom"
         ]
       },
@@ -1334,51 +1370,97 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it.",
+          "note": "Lost the race by three strides — caught Silas's shadowstep emerging from the bank shadow, pressed anyway on unfamiliar ground, arrived second. Breathing hard; processing defeat with the expression of someone deciding how to feel about a fair loss.",
+          "learned": [
+            "Silas used shadowstep a second time — to the finishing shadow, not beside her; the technique has more range than she'd clocked"
+          ],
+          "skillsObserved": [
+            "accepting a fair loss without excess"
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Running north with Silas, half a stride ahead on the wash-room race, quarter mile to go"
+          "statusNote": "At the wash-room site, six feet from Silas, catching her breath after losing the race fairly."
         },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "role": "Companion",
-          "note": "Asked directly who would win — gave one percussive syllable and flew north to the site. Declined to answer. Was an answer.",
-          "relationshipDelta": 0,
+          "note": "Perched on the high ring-hook above the doorway before either runner arrived — claimed the site in his own time. Silent at the finish. The timing of the silence is a comment.",
           "status": "active",
-          "statusNote": "Flying north ahead of both runners toward the wash-room site"
+          "statusNote": "Perched on the high ring-hook at the wash-room site entrance."
+        }
+      ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Pre-Transition Wash-Room Site",
+            "note": "Reached on World-day 15 morning — flagged dressed-slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks, cradle-recess in the floor. Huginn took the high ring-hook on arrival. Silas arrived first by three strides.",
+            "visited": true
+          },
+          "note": "Wash-room site reached and entered — flagged floor, saddle hooks, and cradle-recess now accessible for examination."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Lost the race to the wash-room site by three strides — Silas used a second shadowstep to the finishing shadow. Arrived second, breathing hard, processing it cleanly.",
+          "links": [
+            "millbrook",
+            "the-water-crisis",
+            "aldric-provisioning-deal"
+          ]
+        },
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Wash-room site reached — flagged floor, saddle-mount hooks, and cradle-recess now accessible for direct examination. This is the northeast terminus of the buried structure.",
+          "links": [
+            "pell",
+            "millbrook",
+            "dara-holt",
+            "order-sense",
+            "palework"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "a brief exchange at a run — barely a minute of banter at pace"
+        "hoursPassed": 0.25,
+        "why": "Final quarter-mile of the race to the wash-room site"
+      },
+      "moveTo": {
+        "location": "millbrook",
+        "why": "Arrived at the wash-room site — a known sub-place within Millbrook's territory, northeast of the upper meadow"
       }
     },
     "sceneState": {
-      "setting": "North cut, past the fence-post stub — open slope, path running northeast toward the wash-room site a quarter mile ahead, morning sun low on the left. Both runners in motion.",
+      "setting": "The wash-room site — flagged dressed-slate floor, close-fitted old mortar, hillside bank overhanging the entrance, morning light low and flat. Two hip-height saddle-mount ring-hooks on the far wall. Cradle-recess visible in the floor.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Running north, half a stride ahead, breathing controlled but working"
+          "state": "Six feet from Silas, breathing hard but controlled — just beaten, deciding how she feels about it"
         },
         {
           "name": "Huginn",
-          "state": "Flying north ahead of both runners at a deliberate, unhurried pace"
+          "state": "Perched on the high ring-hook above the doorway, silent, timing it"
         }
       ],
       "objects": [
         "Memory (spear, in hand)",
         "Belt Knife (at hip)",
         "Rune-Craft Kit (pack)",
-        "Valve Failure Timeline note (breast pocket)"
+        "Valve Failure Timeline note (breast pocket)",
+        "Two saddle-mount ring-hooks at hip height on the far wall",
+        "Cradle-recess in the floor",
+        "Close-fitted old mortar walls, dressed slate floor"
       ],
       "threads": [
-        "Race to the wash-room — Pell half a stride ahead, quarter mile remaining",
-        "Huginn flew north without declaring a winner — his destination is the site",
-        "Wash-room site unexamined — saddle hooks, stand-positions, unknown object in the cradle-recess",
-        "Dara Holt unbriefed",
+        "Date three prize — Silas won, terms unclaimed",
+        "Cradle-recess and saddle-hooks unexamined",
+        "Dara Holt still unbriefed on the full structural picture",
         "When did the mechanism turn, and for whom"
       ]
     }
@@ -1527,7 +1609,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Watched Silas read the hillside without asking — waiting for the result.",
         "[d2] Confirmed the northeast line runs toward the wash-room site — a mile and a half as the crow goes, deeper in and higher. Named the valve housing plainly as the working end: whatever",
         "[d2] Confirmed east furlong valve torque direction — counterclockwise, same axis as Fen's intake. Named the failure signature plainly: one mechanism doing two things in sequence. Stated",
         "[d2] Suggested the wash-room be added as a third column on the note — named it as an operator station with no mechanical failure, distinct from the valve rooms.",
@@ -1536,28 +1617,29 @@
         "[d2] Silas read her footwork and identified the pinch-point as the decisive moment — she is still leading but her ground-knowledge has been mapped.",
         "[d2] Caught Silas's shadowstep in her periphery — gave nothing, ran harder. Gained back a step and a half at the pinch-point exit on home-ground advantage.",
         "[d2] Involuntary file-gesture at the forge-tool insults — stride broke again; said 'keep going' in a flat register that is the tell",
-        "[d2] Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it."
+        "[d2] Laughed at Huginn's non-answer — took his flight to the site as a sign in her favor. Half a stride ahead, working for it.",
+        "[d2] Lost the race by three strides — caught Silas's shadowstep emerging from the bank shadow, pressed anyway on unfamiliar ground, arrived second. Breathing hard; processing defeat wit"
       ],
       "knownFacts": [
-        "The torque originated inside the structure — something turned",
         "Named the wash-room as a third data point in the record — stand-positions and saddle hooks as operator-station markers, not working end",
         "Silas named the physical ease between them directly and she did not deflect it",
         "Agreed the race winner picks date three",
         "Laughs physically — stride breaks before the sound comes",
         "Knows the northeast path and the buried ceiling line well enough to follow it without looking — has covered this ground before",
         "Silas can move between shadows without crossing the distance between them — she has now seen it used in a footrace, which is the most absurd possible context",
-        "Her involuntary physical response to genuine amusement is a file-gesture — the body gives what the face won't"
+        "Her involuntary physical response to genuine amusement is a file-gesture — the body gives what the face won't",
+        "Silas used shadowstep a second time — to the finishing shadow, not beside her; the technique has more range than she'd clocked"
       ],
       "skillsObserved": [
-        "path-reading on uneven terrain",
         "ground-economy on a sustained run",
         "path-exit reading at speed",
         "composure under a surprise",
         "composure recovery mid-stride",
-        "deadpan register as deflection"
+        "deadpan register as deflection",
+        "accepting a fair loss without excess"
       ],
       "status": "active",
-      "statusNote": "Running north with Silas, half a stride ahead on the wash-room race, quarter mile to go",
+      "statusNote": "At the wash-room site, six feet from Silas, catching her breath after losing the race fairly.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1662,7 +1744,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Grid filled marks read via The Attended End on World-day 14 dawn — three consecutive stable-state confirmations in a close cluster; the object was performing correctly and was removed deliberately at ",
         "[d2] Valve Failure Timeline note now carries a marginal annotation — interval question and device-removal question written in Silas's hand before departure from the deeper chamber on World-day 14 dawn.",
         "[d2] Pell read the column stain bands as seasonal return cycles — three distinct layers above the old bleed-line, two to three winters of accumulation. The managed visits were condition-triggered, not cale",
         "[d2] Last managed return visit to the deeper chamber narrowed to seasonal condition-triggered check — melt or first freeze, one to two winters ago. Contamination onset postdates removal by a significant in",
@@ -1673,7 +1754,8 @@
         "[d2] Order-Sense confirms a coursed stone ceiling running northeast from the east furlong valve housing for approximately forty feet — the soil-rise above the housing is the roof settling; the structure is",
         "[d2] Northeast line from east furlong valve housing confirmed running toward Pell's wash-room site — full structure now understood to span ~1.5 miles northeast into the hillside. Valve housing is the worki",
         "[d2] East furlong valve twist direction confirmed counterclockwise — identical to Fen's intake failure. Both valve failures now understood as one mechanism in sequence. Torque sourced from inside the struc",
-        "[d2] Valve Failure Timeline note annotated with CCW torque at both valve sites and wash-room as third column — three-room structural record now in hand at the housing."
+        "[d2] Valve Failure Timeline note annotated with CCW torque at both valve sites and wash-room as third column — three-room structural record now in hand at the housing.",
+        "[d2] Wash-room site reached and entered — flagged floor, saddle hooks, and cradle-recess now accessible for examination."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2011,7 +2093,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Mara's read: Pell values genuinely finished work; drinks slowly and notices taste; grew up before the pass closed so the starfruit will land as recognition, not novelty; dislikes being steered toward ",
           "[d2] Had a quiet relationship with a tinker from the heights, roughly three years ago — ran steady for a while, ended when he stopped coming through. Mara doesn't know if it ended clean. Pell didn't speak ",
           "[d2] Recognized the old pass-circuit knotting on the starfruit packet immediately — named it without being told. Clocked both gifts, said nothing beyond naming them, and waited. She receives things by look",
           "[d2] Her maker's mark is a double-stamp pressed when a piece finishes becoming what it is. At the bull's kill she felt the binding close through her hand — like pressing a stamp and having the metal push b",
@@ -2034,7 +2115,8 @@
           "[d2] Named matched-pair carrying from ring-hook spacing. Recalls a pre-Transition 'wash-room' site deeper in the valley — same flagged floor, same hooks, same emptied state. She crossed the threshold to re",
           "[d2] Caught Silas watching her in the morning light at the wall and held it — no performance, no deflection. Comfortable in her own proportions. Entirely at ease in the field.",
           "[d2] Pell found a pre-Transition wash-room site four or five years ago through the north cut — dressed slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks (wide mounts, for somethi",
-          "[d2] Confirmed the northeast line runs toward her wash-room site — a mile and a half as the crow goes. Named the valve housing as the working end without hesitation."
+          "[d2] Confirmed the northeast line runs toward her wash-room site — a mile and a half as the crow goes. Named the valve housing as the working end without hesitation.",
+          "[d2] Lost the race to the wash-room site by three strides — Silas used a second shadowstep to the finishing shadow. Arrived second, breathing hard, processing it cleanly."
         ],
         "links": [
           "millbrook",
@@ -2187,7 +2269,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the cra",
           "[d2] Pell's full frame assessment: sound joints, clean channel, dry stone, no hydrostatic load. The sealed rooms are not water-filled. The seating-piece moved on its own — either pushed from within or a tr",
           "[d2] Near chamber confirmed: dry ashlar, three iron ring-hooks at chest height, three empty recesses below them. Whatever was held here is gone — the recesses are empty. Column stain on right wall predates",
           "[d2] Deathsense confirms: the deeper chamber holds nothing ending — whatever concluded there did so long ago. The space is on the far side of an ending with no active trajectory, no cause underway, no pivo",
@@ -2210,7 +2291,8 @@
           "[d2] Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structur",
           "[d2] The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the ",
           "[d2] East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing t",
-          "[d2] Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle"
+          "[d2] Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle",
+          "[d2] Wash-room site reached — flagged floor, saddle-mount hooks, and cradle-recess now accessible for direct examination. This is the northeast terminus of the buried structure."
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2327,15 +2409,15 @@
     }
   },
   "tendencies": {
-    "strategic": 56.43088350766603,
-    "cerebral": 43.894650639684876,
-    "social": 53.2011549929008,
-    "generous": 14.84545366873847,
-    "cautious": 48.66094901825971,
-    "physical": 1.1641528495739215,
-    "risky": 2.8665580544582125,
-    "ruthless": 1.5887455908197752,
-    "carousing": 1
+    "strategic": 56.1487290901277,
+    "cerebral": 43.67517738648645,
+    "social": 52.93514921793629,
+    "generous": 14.771226400394777,
+    "cautious": 48.417644273168406,
+    "physical": 1.158332085326052,
+    "risky": 3.8522252641859214,
+    "ruthless": 1.5808018628656764,
+    "carousing": 1.995
   },
   "aptitudes": [
     "strategist",
@@ -2343,7 +2425,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 193,
+  "actionCount": 194,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2429,8 +2511,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784086334112,
-  "rev": 266,
+  "updatedAt": 1784086457069,
+  "rev": 267,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2731,7 +2813,7 @@
       "order_sense": 34,
       "palework": 14,
       "deathsense": 12,
-      "shadowstep": 3,
+      "shadowstep": 4,
       "the-attended-end": 2
     },
     "coActivations": {

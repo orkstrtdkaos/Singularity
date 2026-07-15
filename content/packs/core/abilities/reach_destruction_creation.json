@@ -1,755 +1,769 @@
 {
-  "schemaVersion": 1,
-  "powerSystem": "reach_destruction_creation",
-  "gated": "learned",
-  "note": "Crafts of The Unmade/The Making (destruction_creation axis). RUINWORK is the destruction-pole craft of the Unmakers \u2014 who hold that ending a thing WELL is a craft, and that the world is choked with what should have ended; MAKECRAFT is the creation-pole craft of the Wrights of the New, who cannot stop making and whose cities are never finished, which is the point. Neither is villainous: an Unmaker's clearing is a mercy and a Wright's ceaselessness is a waste. Authored by Aevi, SNG-054.",
-  "abilities": [
+ "schemaVersion": 1,
+ "powerSystem": "reach_destruction_creation",
+ "gated": "learned",
+ "note": "Crafts of The Unmade/The Making (destruction_creation axis). RUINWORK is the destruction-pole craft of the Unmakers — who hold that ending a thing WELL is a craft, and that the world is choked with what should have ended; MAKECRAFT is the creation-pole craft of the Wrights of the New, who cannot stop making and whose cities are never finished, which is the point. Neither is villainous: an Unmaker's clearing is a mercy and a Wright's ceaselessness is a waste. Authored by Aevi, SNG-054.",
+ "abilities": [
+  {
+   "id": "ruinwork",
+   "name": "Ruinwork",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.5,
+    "chaos_order": -0.2
+   },
+   "functions": [
+    "break",
+    "open",
+    "reveal"
+   ],
+   "narrationHints": "It comes down the way he said it would, exactly where he said, and nothing else is touched.",
+   "description": "The destruction-pole mastery: ending things well. Not violence — DEMOLITION, with an ethic: what should end, ends cleanly, and what should stand is left standing.",
+   "notFor": "Ending what should stand (the Unmakers' whole discipline is that line); making; anything that requires patience with a dead thing.",
+   "tree": [
     {
-      "id": "ruinwork",
-      "name": "Ruinwork",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_destruction_creation",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": -0.5,
-        "chaos_order": -0.2
-      },
-      "functions": [
-        "break",
-        "open",
-        "reveal"
-      ],
-      "narrationHints": "It comes down the way he said it would, exactly where he said, and nothing else is touched.",
-      "description": "The destruction-pole mastery: ending things well. Not violence \u2014 DEMOLITION, with an ethic: what should end, ends cleanly, and what should stand is left standing.",
-      "notFor": "Ending what should stand (the Unmakers' whole discipline is that line); making; anything that requires patience with a dead thing.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Fault Line",
-          "grants": "See exactly where a thing wants to break \u2014 a wall, a plan, an alliance, an argument.",
-          "cannot": "Seeing the fault is not being right that it should be broken."
-        },
-        {
-          "rank": 2,
-          "name": "The Clean Break",
-          "grants": "Break precisely at the fault \u2014 the thing comes apart where you chose and nowhere else.",
-          "cannot": "Precise is not reversible. A clean break is still a break."
-        },
-        {
-          "rank": 3,
-          "name": "The Good Ending",
-          "grants": "End a thing WELL \u2014 a building, an institution, a life's work, a war \u2014 so that what it was is honored and what comes after is not poisoned by how it went.",
-          "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "FIGHT",
-        "EXPLORE",
-        "SOCIAL"
-      ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "EXPLORE": 2
-      },
-      "tradition": "unmaker"
+     "rank": 1,
+     "name": "The Fault Line",
+     "grants": "See exactly where a thing wants to break — a wall, a plan, an alliance, an argument.",
+     "cannot": "Seeing the fault is not being right that it should be broken."
     },
     {
-      "id": "fault_sense",
-      "name": "Fault-Sense",
-      "levelReq": 1,
-      "energyCost": 3,
-      "powerSystem": "reach_destruction_creation",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": -0.3
-      },
-      "functions": [
-        "foresee",
-        "reveal"
-      ],
-      "narrationHints": "He looks at the thing and sees where it is already halfway to failing.",
-      "description": "See where a thing is failing, or wants to \u2014 the first gift of the Unmade.",
-      "notFor": "Seeing what should be built (Maker's-Eye); mending.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Fault-Sense",
-          "grants": "See where a structure, plan, or relationship is under stress and where it will give.",
-          "cannot": "Seeing the fault does not tell you whether to press it."
-        },
-        {
-          "rank": 2,
-          "name": "The Rotten Beam",
-          "grants": "Find the ONE piece whose failure brings the rest \u2014 the keystone of the collapse.",
-          "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is."
-        },
-        {
-          "rank": 3,
-          "name": "The Whole Failing",
-          "grants": "Read the entire arc of a thing's decline \u2014 how it will end, in what order, and how long it has.",
-          "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3
-      },
-      "tradition": "unmaker"
+     "rank": 2,
+     "name": "The Clean Break",
+     "grants": "Break precisely at the fault — the thing comes apart where you chose and nowhere else.",
+     "cannot": "Precise is not reversible. A clean break is still a break."
     },
     {
-      "id": "makecraft",
-      "name": "Makecraft",
-      "levelReq": 2,
-      "energyCost": 6,
-      "powerSystem": "reach_destruction_creation",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.5,
-        "chaos_order": -0.1
-      },
-      "functions": [
-        "make",
-        "mend",
-        "shield"
-      ],
-      "narrationHints": "It was not there this morning. It is there now, and it is not finished, and it is beautiful.",
-      "description": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them.",
-      "notFor": "Finishing (the Wrights are constitutionally bad at it); unmaking; making a thing that will not want to keep growing.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Raised Thing",
-          "grants": "Make something real, quickly \u2014 a bridge, a shelter, a tool, a wall \u2014 out of what is to hand.",
-          "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere."
-        },
-        {
-          "rank": 2,
-          "name": "The Made Better",
-          "grants": "Make a thing better than it was \u2014 improve in the making, so what you raise exceeds what stood.",
-          "cannot": "Better by whose measure? The Wrights improve what nobody asked to have improved, constantly."
-        },
-        {
-          "rank": 3,
-          "name": "The Unfinished",
-          "grants": "Deliberately leave a made thing incomplete \u2014 and it KEEPS MAKING ITSELF, growing on, adapting, never done.",
-          "cannot": "It never stops. The Forge-Eternal is what a whole city of this becomes, and the Wrights are genuinely unsure whether it is a triumph."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "EXPLORE",
-        "FIGHT",
-        "SOCIAL"
-      ],
-      "challengeProfile": {
-        "EXPLORE": 3,
-        "FIGHT": 2
-      },
-      "tradition": "wright"
-    },
-    {
-      "id": "makers_eye",
-      "name": "Maker's-Eye",
-      "levelReq": 1,
-      "energyCost": 3,
-      "powerSystem": "reach_destruction_creation",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.3
-      },
-      "functions": [
-        "reveal",
-        "make"
-      ],
-      "narrationHints": "She looks at the pile of junk and sees the thing it is about to be.",
-      "description": "See what a thing could become \u2014 the first gift of the Making.",
-      "notFor": "Seeing what a thing IS (Stone-Read); seeing where it fails (Fault-Sense). This sees what it COULD be.",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Maker's-Eye",
-          "grants": "See what could be made from what is here \u2014 materials, ruins, a half-broken thing.",
-          "cannot": "Seeing what could be made is not knowing whether it should be."
-        },
-        {
-          "rank": 2,
-          "name": "The Better Shape",
-          "grants": "See the better form a thing is capable of, and the shortest road to it.",
-          "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone."
-        },
-        {
-          "rank": 3,
-          "name": "The Thing It Wants to Be",
-          "grants": "See what a thing, a place, or a person is REACHING toward \u2014 the shape it would take if nothing stopped it.",
-          "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them."
-        }
-      ],
-      "gated": "learned",
-      "challengeTypes": [
-        "INVESTIGATE",
-        "EXPLORE"
-      ],
-      "challengeProfile": {
-        "INVESTIGATE": 3
-      },
-      "tradition": "wright"
-    },
-    {
-      "id": "the_raised_thing",
-      "name": "The Raised Thing",
-      "levelReq": 1,
-      "energyCost": 4,
-      "powerSystem": "reach_destruction_creation",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.25
-      },
-      "accord": true,
-      "harmRung": "none",
-      "functions": [
-        "make",
-        "mend"
-      ],
-      "narrationHints": "It was not there. Now it is, and it will hold.",
-      "description": "The Wright's first gift, opened to anyone who makes the journey: raise something real, quickly, from what is to hand. A bridge. A shelter. A tool. A barricade. The Wrights teach this one freely \u2014 more making in the world is the world they want, and this is the door.",
-      "notFor": "Making things that will not want to keep growing; finishing (the craft carries the Wright's restlessness \u2014 what you raise will want tending, and you will want to move on).",
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Raised Thing",
-          "grants": "Make something real and functional, quickly \u2014 a bridge, a shelter, a tool, a wall \u2014 from what is here. It will hold long enough to matter.",
-          "cannot": "Quick is not sound. Raised things want tending, and the Wright in you is already somewhere else."
-        },
-        {
-          "rank": 2,
-          "name": "Sound Work",
-          "grants": "What you make holds under pressure \u2014 weather, weight, time, a fight. Others would not have to repair it.",
-          "cannot": "Sound is not finished. The restlessness is not a flaw the Wrights want trained out of you."
-        },
-        {
-          "rank": 3,
-          "name": "The Thing That Outlasts",
-          "grants": "Make something that will be here long after you. It will be found and used by people who do not know your name, and that will be enough.",
-          "cannot": "You will not see what becomes of it. The Wrights have made peace with this."
-        }
-      ],
-      "gated": "accord",
-      "challengeTypes": [
-        "EXPLORE",
-        "INVESTIGATE",
-        "FIGHT"
-      ],
-      "challengeProfile": {
-        "EXPLORE": 3,
-        "FIGHT": 1
-      },
-      "tradition": "wright"
-    },
-    {
-      "id": "the_weapon_at_hand",
-      "name": "The Weapon at Hand",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.3,
-        "violence_peace": 0.2
-      },
-      "effectTags": [
-        "improvise",
-        "weapon",
-        "construct"
-      ],
-      "narrationHints": "She looked at what was there and it was already a weapon. It just needed making.",
-      "description": "Build a functional weapon from whatever is to hand \u2014 quickly, correctly, with enough craft that it will do what it needs to.",
-      "notFor": [],
-      "tradition": "wright",
-      "harmRung": "damaging",
-      "functions": [
-        "make",
-        "strike"
-      ],
-      "challengeTypes": [
-        "combat",
-        "craft",
-        "survival"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.3,
-        "physical": 0.6,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Improvised",
-          "grants": "Quickly make a functional weapon from available materials \u2014 one that will not break, will land, and will hurt.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Made to Harm",
-          "grants": "Build a weapon fast enough to matter in a fight and good enough to be dangerous \u2014 not a masterwork, but the right thing for what you're facing right now.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Right Tool",
-          "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_work_speaks",
-      "name": "The Work Speaks",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.3
-      },
-      "effectTags": [
-        "reputation",
-        "demonstration",
-        "authority"
-      ],
-      "narrationHints": "She didn't say anything. She showed them what she'd built. The argument was over.",
-      "description": "Let the made thing speak. The quality of your work commands a kind of authority no argument reaches.",
-      "notFor": [],
-      "tradition": "wright",
-      "harmRung": "none",
-      "functions": [
-        "command",
-        "reveal"
-      ],
-      "challengeTypes": [
-        "social",
-        "craft",
-        "negotiation"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.3,
-        "social": 0.5
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Demonstrated Craft",
-          "grants": "Show what you have made \u2014 or make something now \u2014 and let its quality stand as argument; the person who would have dismissed you reconsiders.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Reputation",
-          "grants": "Your work is known enough that naming yourself \u2014 or showing it \u2014 commands genuine respect and opens doors that stay closed to those who only claim.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Undeniable",
-          "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise \u2014 and they have all seen it.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_built_way",
-      "name": "The Built Way",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.4,
-        "space_time": -0.1
-      },
-      "effectTags": [
-        "path",
-        "bridge",
-        "passage"
-      ],
-      "narrationHints": "There was no crossing. Now there is. She built it.",
-      "description": "Build a path where none existed \u2014 bridge a gap, span a drop, cut a stair into a cliff \u2014 fast enough to matter.",
-      "notFor": [],
-      "tradition": "wright",
-      "harmRung": "none",
-      "functions": [
-        "make",
-        "travel",
-        "open"
-      ],
-      "challengeTypes": [
-        "exploration",
-        "craft",
-        "tactical"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.3,
-        "physical": 0.6,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Crossing",
-          "grants": "Build a passage across an obstacle \u2014 a bridge, a stair, a ramp \u2014 quickly enough that the party can use it before circumstances change.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Made Passage",
-          "grants": "Open a way through or across any natural or built obstacle by constructing what's needed \u2014 not by force, by craft.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Road That Wasn't",
-          "grants": "Build a path where there was truly none \u2014 spanning what shouldn't be spanned, opening what was sealed \u2014 and have it hold the weight it needs to hold.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_ongoing_work",
-      "name": "The Ongoing Work",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": 0.4
-      },
-      "effectTags": [
-        "persistence",
-        "making",
-        "endurance"
-      ],
-      "narrationHints": "Keep the hands moving and the self keeps going.",
-      "description": "Sustain through making \u2014 the wright whose hands are busy doesn't run out; the work is what holds them together.",
-      "notFor": [],
-      "tradition": "wright",
-      "harmRung": "none",
-      "functions": [
-        "sustain",
-        "empower"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "craft",
-        "hardship"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.7,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Hands Moving",
-          "grants": "As long as you are making something, fear, grief, exhaustion, and cold have less purchase \u2014 the work is the anchor that keeps you functional.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Built Through It",
-          "grants": "Sustain yourself and your party through hardship by making useful things \u2014 shelter, tools, warmth, structure \u2014 that make the hardship survivable.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Left in Motion",
-          "grants": "Start something building and leave it \u2014 the structure grows, the mechanism runs, the work continues. What you set in motion sustains beyond your direct attention.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_clean_removal",
-      "name": "The Clean Removal",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": -0.4
-      },
-      "effectTags": [
-        "restore",
-        "subtract",
-        "purify"
-      ],
-      "narrationHints": "Remove what should not be there and what should be there can exist again.",
-      "description": "Restore by precise subtraction \u2014 not by adding what's missing but by ending what's corrupting, blocking, or consuming the thing that needs to heal.",
-      "notFor": [],
-      "tradition": "unmaker",
-      "harmRung": "none",
-      "functions": [
-        "restore",
-        "mend"
-      ],
-      "challengeTypes": [
-        "medical",
-        "repair",
-        "tactical"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.5,
-        "physical": 0.4,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Precise Removal",
-          "grants": "Identify and remove exactly what is interfering with a person or system's recovery \u2014 the splinter, the bad element, the thing that was keeping it from healing on its own.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "What Shouldn't Be There",
-          "grants": "Restore function by ending the specific thing that was consuming it \u2014 corruption, disease, obstruction \u2014 with precision that doesn't damage what should remain.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Clean",
-          "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_ended_threat",
-      "name": "The Ended Threat",
-      "levelReq": 2,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": -0.4,
-        "violence_peace": 0.1
-      },
-      "effectTags": [
-        "prevention",
-        "preemptive",
-        "protection"
-      ],
-      "narrationHints": "He saw where it was going. He ended it before it arrived.",
-      "description": "Protect by ending the threat before it can act \u2014 not blocking but prevention through precise, early intervention.",
-      "notFor": [],
-      "tradition": "unmaker",
-      "harmRung": "incapacitating",
-      "functions": [
-        "shield",
-        "break"
-      ],
-      "challengeTypes": [
-        "combat",
-        "tactical",
-        "defense"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.5,
-        "physical": 0.4,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Early Intervention",
-          "grants": "See a threat forming and end it at the source \u2014 the plan that collapses before it executes, the attack that never completes because you dismantled its condition.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Stopped Thing",
-          "grants": "Protect someone by finding and breaking the specific thing that would harm them \u2014 not deflecting the blow but ending the arm that swings it.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "Before It Arrives",
-          "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_open_material",
-      "name": "The Open Material",
-      "levelReq": 3,
-      "energyCost": 2,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": -0.3
-      },
-      "effectTags": [
-        "transform",
-        "unform",
-        "reshape"
-      ],
-      "narrationHints": "Break it back to what it was before it was this, and it can be something else.",
-      "description": "Unmake the current form of a thing so completely that what remains is raw material \u2014 ready to become something else.",
-      "notFor": [],
-      "tradition": "unmaker",
-      "harmRung": "none",
-      "functions": [
-        "transform",
-        "break"
-      ],
-      "challengeTypes": [
-        "craft",
-        "tactical",
-        "intellectual"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.5,
-        "physical": 0.4,
-        "social": 0.1
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "Back to Parts",
-          "grants": "Disassemble a made thing into its components without destroying the components \u2014 what was one thing becomes usable pieces of something else.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "Unformed",
-          "grants": "Break a thing down to the point where it has no remaining identity as what it was \u2014 it is now material, and material can become anything.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Open Form",
-          "grants": "Return something complex \u2014 a structure, a plan, a fixed belief \u2014 to the state before it became that specific thing, clearing the way for something new to take form.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_demonstrated_end",
-      "name": "The Demonstrated End",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "physical",
-      "axes": {
-        "destruction_creation": -0.3
-      },
-      "effectTags": [
-        "authority",
-        "reputation",
-        "consequence"
-      ],
-      "narrationHints": "They knew what he could end. They took his word seriously.",
-      "description": "The authority of someone who has shown they can end things correctly \u2014 their word carries because everyone knows what they can do.",
-      "notFor": [],
-      "tradition": "unmaker",
-      "harmRung": "none",
-      "functions": [
-        "command",
-        "bind"
-      ],
-      "challengeTypes": [
-        "social",
-        "negotiation",
-        "leadership"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.2,
-        "physical": 0.2,
-        "social": 0.6
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Known Capacity",
-          "grants": "Your reputation for ending things precisely and completely gives weight to what you say \u2014 a warning from you lands differently than from someone without your history.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "The Demonstrated Threat",
-          "grants": "Show what you can dismantle \u2014 or name it plainly \u2014 and command the terms of an agreement; they know what refusal means.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Final Authority",
-          "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands \u2014 not because you outranked anyone, but because everyone knows you can do what you say.",
-          "cannot": null
-        }
-      ]
-    },
-    {
-      "id": "the_ended_burden",
-      "name": "The Ended Burden",
-      "levelReq": 2,
-      "energyCost": 1,
-      "powerSystem": "attribute",
-      "attribute": "mental",
-      "axes": {
-        "destruction_creation": -0.3
-      },
-      "effectTags": [
-        "release",
-        "clarity",
-        "endurance"
-      ],
-      "narrationHints": "End the thing that's consuming you. Then go on.",
-      "description": "Sustain by precisely ending what's wearing you down \u2014 the habit, the wound, the relationship, the weight \u2014 rather than trying to carry it further.",
-      "notFor": [],
-      "tradition": "unmaker",
-      "harmRung": "none",
-      "functions": [
-        "sustain",
-        "break"
-      ],
-      "challengeTypes": [
-        "endurance",
-        "hardship",
-        "psychological"
-      ],
-      "challengeProfile": {
-        "cognitive": 0.5,
-        "physical": 0.3,
-        "social": 0.2
-      },
-      "tree": [
-        {
-          "rank": 1,
-          "name": "The Cut",
-          "grants": "Identify precisely what is consuming your capacity \u2014 exhaustion, fear, a specific obligation \u2014 and end it cleanly so you can continue.",
-          "cannot": null
-        },
-        {
-          "rank": 2,
-          "name": "What You Don't Need",
-          "grants": "Sustain yourself by releasing everything non-essential across a hard stretch \u2014 not forcing through with more, but needing less through precise subtraction.",
-          "cannot": null
-        },
-        {
-          "rank": 3,
-          "name": "The Lighter Load",
-          "grants": "End what is consuming your group \u2014 despair, a failed plan, an unsustainable commitment \u2014 correctly enough that what remains can actually go on.",
-          "cannot": null
-        }
-      ]
+     "rank": 3,
+     "name": "The Good Ending",
+     "grants": "End a thing WELL — a building, an institution, a life's work, a war — so that what it was is honored and what comes after is not poisoned by how it went.",
+     "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made."
     }
-  ],
-  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 \u2014 24 verbs, 8 families)"
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "FIGHT",
+    "EXPLORE",
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "FIGHT": 3,
+    "EXPLORE": 2
+   },
+   "tradition": "unmaker",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "fault_sense",
+   "name": "Fault-Sense",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.3
+   },
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "narrationHints": "He looks at the thing and sees where it is already halfway to failing.",
+   "description": "See where a thing is failing, or wants to — the first gift of the Unmade.",
+   "notFor": "Seeing what should be built (Maker's-Eye); mending.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Fault-Sense",
+     "grants": "See where a structure, plan, or relationship is under stress and where it will give.",
+     "cannot": "Seeing the fault does not tell you whether to press it."
+    },
+    {
+     "rank": 2,
+     "name": "The Rotten Beam",
+     "grants": "Find the ONE piece whose failure brings the rest — the keystone of the collapse.",
+     "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is."
+    },
+    {
+     "rank": 3,
+     "name": "The Whole Failing",
+     "grants": "Read the entire arc of a thing's decline — how it will end, in what order, and how long it has.",
+     "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3
+   },
+   "tradition": "unmaker",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "makecraft",
+   "name": "Makecraft",
+   "levelReq": 2,
+   "energyCost": 6,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.5,
+    "chaos_order": -0.1
+   },
+   "functions": [
+    "make",
+    "mend",
+    "shield"
+   ],
+   "narrationHints": "It was not there this morning. It is there now, and it is not finished, and it is beautiful.",
+   "description": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them.",
+   "notFor": "Finishing (the Wrights are constitutionally bad at it); unmaking; making a thing that will not want to keep growing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Raised Thing",
+     "grants": "Make something real, quickly — a bridge, a shelter, a tool, a wall — out of what is to hand.",
+     "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere."
+    },
+    {
+     "rank": 2,
+     "name": "The Made Better",
+     "grants": "Make a thing better than it was — improve in the making, so what you raise exceeds what stood.",
+     "cannot": "Better by whose measure? The Wrights improve what nobody asked to have improved, constantly."
+    },
+    {
+     "rank": 3,
+     "name": "The Unfinished",
+     "grants": "Deliberately leave a made thing incomplete — and it KEEPS MAKING ITSELF, growing on, adapting, never done.",
+     "cannot": "It never stops. The Forge-Eternal is what a whole city of this becomes, and the Wrights are genuinely unsure whether it is a triumph."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "EXPLORE",
+    "FIGHT",
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "EXPLORE": 3,
+    "FIGHT": 2
+   },
+   "tradition": "wright",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "makers_eye",
+   "name": "Maker's-Eye",
+   "levelReq": 1,
+   "energyCost": 3,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.3
+   },
+   "functions": [
+    "reveal",
+    "make"
+   ],
+   "narrationHints": "She looks at the pile of junk and sees the thing it is about to be.",
+   "description": "See what a thing could become — the first gift of the Making.",
+   "notFor": "Seeing what a thing IS (Stone-Read); seeing where it fails (Fault-Sense). This sees what it COULD be.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Maker's-Eye",
+     "grants": "See what could be made from what is here — materials, ruins, a half-broken thing.",
+     "cannot": "Seeing what could be made is not knowing whether it should be."
+    },
+    {
+     "rank": 2,
+     "name": "The Better Shape",
+     "grants": "See the better form a thing is capable of, and the shortest road to it.",
+     "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone."
+    },
+    {
+     "rank": 3,
+     "name": "The Thing It Wants to Be",
+     "grants": "See what a thing, a place, or a person is REACHING toward — the shape it would take if nothing stopped it.",
+     "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them."
+    }
+   ],
+   "gated": "learned",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "EXPLORE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 3
+   },
+   "tradition": "wright",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_raised_thing",
+   "name": "The Raised Thing",
+   "levelReq": 1,
+   "energyCost": 4,
+   "powerSystem": "reach_destruction_creation",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.25
+   },
+   "accord": true,
+   "harmRung": "none",
+   "functions": [
+    "make",
+    "mend"
+   ],
+   "narrationHints": "It was not there. Now it is, and it will hold.",
+   "description": "The Wright's first gift, opened to anyone who makes the journey: raise something real, quickly, from what is to hand. A bridge. A shelter. A tool. A barricade. The Wrights teach this one freely — more making in the world is the world they want, and this is the door.",
+   "notFor": "Making things that will not want to keep growing; finishing (the craft carries the Wright's restlessness — what you raise will want tending, and you will want to move on).",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Raised Thing",
+     "grants": "Make something real and functional, quickly — a bridge, a shelter, a tool, a wall — from what is here. It will hold long enough to matter.",
+     "cannot": "Quick is not sound. Raised things want tending, and the Wright in you is already somewhere else."
+    },
+    {
+     "rank": 2,
+     "name": "Sound Work",
+     "grants": "What you make holds under pressure — weather, weight, time, a fight. Others would not have to repair it.",
+     "cannot": "Sound is not finished. The restlessness is not a flaw the Wrights want trained out of you."
+    },
+    {
+     "rank": 3,
+     "name": "The Thing That Outlasts",
+     "grants": "Make something that will be here long after you. It will be found and used by people who do not know your name, and that will be enough.",
+     "cannot": "You will not see what becomes of it. The Wrights have made peace with this."
+    }
+   ],
+   "gated": "accord",
+   "challengeTypes": [
+    "EXPLORE",
+    "INVESTIGATE",
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "EXPLORE": 3,
+    "FIGHT": 1
+   },
+   "tradition": "wright",
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_weapon_at_hand",
+   "name": "The Weapon at Hand",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.3,
+    "violence_peace": 0.2
+   },
+   "effectTags": [
+    "improvise",
+    "weapon",
+    "construct"
+   ],
+   "narrationHints": "She looked at what was there and it was already a weapon. It just needed making.",
+   "description": "Build a functional weapon from whatever is to hand — quickly, correctly, with enough craft that it will do what it needs to.",
+   "notFor": [],
+   "tradition": "wright",
+   "harmRung": "damaging",
+   "functions": [
+    "make",
+    "strike"
+   ],
+   "challengeTypes": [
+    "combat",
+    "craft",
+    "survival"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.3,
+    "physical": 0.6,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Improvised",
+     "grants": "Quickly make a functional weapon from available materials — one that will not break, will land, and will hurt.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Made to Harm",
+     "grants": "Build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Right Tool",
+     "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_work_speaks",
+   "name": "The Work Speaks",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.3
+   },
+   "effectTags": [
+    "reputation",
+    "demonstration",
+    "authority"
+   ],
+   "narrationHints": "She didn't say anything. She showed them what she'd built. The argument was over.",
+   "description": "Let the made thing speak. The quality of your work commands a kind of authority no argument reaches.",
+   "notFor": [],
+   "tradition": "wright",
+   "harmRung": "none",
+   "functions": [
+    "command",
+    "reveal"
+   ],
+   "challengeTypes": [
+    "social",
+    "craft",
+    "negotiation"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.3,
+    "social": 0.5
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Demonstrated Craft",
+     "grants": "Show what you have made — or make something now — and let its quality stand as argument; the person who would have dismissed you reconsiders.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Reputation",
+     "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Undeniable",
+     "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise — and they have all seen it.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_built_way",
+   "name": "The Built Way",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.4,
+    "space_time": -0.1
+   },
+   "effectTags": [
+    "path",
+    "bridge",
+    "passage"
+   ],
+   "narrationHints": "There was no crossing. Now there is. She built it.",
+   "description": "Build a path where none existed — bridge a gap, span a drop, cut a stair into a cliff — fast enough to matter.",
+   "notFor": [],
+   "tradition": "wright",
+   "harmRung": "none",
+   "functions": [
+    "make",
+    "travel",
+    "open"
+   ],
+   "challengeTypes": [
+    "exploration",
+    "craft",
+    "tactical"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.3,
+    "physical": 0.6,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Crossing",
+     "grants": "Build a passage across an obstacle — a bridge, a stair, a ramp — quickly enough that the party can use it before circumstances change.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Made Passage",
+     "grants": "Open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Road That Wasn't",
+     "grants": "Build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_ongoing_work",
+   "name": "The Ongoing Work",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.4
+   },
+   "effectTags": [
+    "persistence",
+    "making",
+    "endurance"
+   ],
+   "narrationHints": "Keep the hands moving and the self keeps going.",
+   "description": "Sustain through making — the wright whose hands are busy doesn't run out; the work is what holds them together.",
+   "notFor": [],
+   "tradition": "wright",
+   "harmRung": "none",
+   "functions": [
+    "sustain",
+    "empower"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "craft",
+    "hardship"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.7,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Hands Moving",
+     "grants": "As long as you are making something, fear, grief, exhaustion, and cold have less purchase — the work is the anchor that keeps you functional.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Built Through It",
+     "grants": "Sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Left in Motion",
+     "grants": "Start something building and leave it — the structure grows, the mechanism runs, the work continues. What you set in motion sustains beyond your direct attention.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_clean_removal",
+   "name": "The Clean Removal",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.4
+   },
+   "effectTags": [
+    "restore",
+    "subtract",
+    "purify"
+   ],
+   "narrationHints": "Remove what should not be there and what should be there can exist again.",
+   "description": "Restore by precise subtraction — not by adding what's missing but by ending what's corrupting, blocking, or consuming the thing that needs to heal.",
+   "notFor": [],
+   "tradition": "unmaker",
+   "harmRung": "none",
+   "functions": [
+    "restore",
+    "mend"
+   ],
+   "challengeTypes": [
+    "medical",
+    "repair",
+    "tactical"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.5,
+    "physical": 0.4,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Precise Removal",
+     "grants": "Identify and remove exactly what is interfering with a person or system's recovery — the splinter, the bad element, the thing that was keeping it from healing on its own.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "What Shouldn't Be There",
+     "grants": "Restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Clean",
+     "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_ended_threat",
+   "name": "The Ended Threat",
+   "levelReq": 2,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.4,
+    "violence_peace": 0.1
+   },
+   "effectTags": [
+    "prevention",
+    "preemptive",
+    "protection"
+   ],
+   "narrationHints": "He saw where it was going. He ended it before it arrived.",
+   "description": "Protect by ending the threat before it can act — not blocking but prevention through precise, early intervention.",
+   "notFor": [],
+   "tradition": "unmaker",
+   "harmRung": "incapacitating",
+   "functions": [
+    "shield",
+    "break"
+   ],
+   "challengeTypes": [
+    "combat",
+    "tactical",
+    "defense"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.5,
+    "physical": 0.4,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Early Intervention",
+     "grants": "See a threat forming and end it at the source — the plan that collapses before it executes, the attack that never completes because you dismantled its condition.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Stopped Thing",
+     "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "Before It Arrives",
+     "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_open_material",
+   "name": "The Open Material",
+   "levelReq": 3,
+   "energyCost": 2,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.3
+   },
+   "effectTags": [
+    "transform",
+    "unform",
+    "reshape"
+   ],
+   "narrationHints": "Break it back to what it was before it was this, and it can be something else.",
+   "description": "Unmake the current form of a thing so completely that what remains is raw material — ready to become something else.",
+   "notFor": [],
+   "tradition": "unmaker",
+   "harmRung": "none",
+   "functions": [
+    "transform",
+    "break"
+   ],
+   "challengeTypes": [
+    "craft",
+    "tactical",
+    "intellectual"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.5,
+    "physical": 0.4,
+    "social": 0.1
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "Back to Parts",
+     "grants": "Disassemble a made thing into its components without destroying the components — what was one thing becomes usable pieces of something else.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "Unformed",
+     "grants": "Break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Open Form",
+     "grants": "Return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_demonstrated_end",
+   "name": "The Demonstrated End",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.3
+   },
+   "effectTags": [
+    "authority",
+    "reputation",
+    "consequence"
+   ],
+   "narrationHints": "They knew what he could end. They took his word seriously.",
+   "description": "The authority of someone who has shown they can end things correctly — their word carries because everyone knows what they can do.",
+   "notFor": [],
+   "tradition": "unmaker",
+   "harmRung": "none",
+   "functions": [
+    "command",
+    "bind"
+   ],
+   "challengeTypes": [
+    "social",
+    "negotiation",
+    "leadership"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.2,
+    "physical": 0.2,
+    "social": 0.6
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Known Capacity",
+     "grants": "Your reputation for ending things precisely and completely gives weight to what you say — a warning from you lands differently than from someone without your history.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "The Demonstrated Threat",
+     "grants": "Show what you can dismantle — or name it plainly — and command the terms of an agreement; they know what refusal means.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Final Authority",
+     "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands — not because you outranked anyone, but because everyone knows you can do what you say.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  },
+  {
+   "id": "the_ended_burden",
+   "name": "The Ended Burden",
+   "levelReq": 2,
+   "energyCost": 1,
+   "powerSystem": "attribute",
+   "attribute": "mental",
+   "axes": {
+    "destruction_creation": -0.3
+   },
+   "effectTags": [
+    "release",
+    "clarity",
+    "endurance"
+   ],
+   "narrationHints": "End the thing that's consuming you. Then go on.",
+   "description": "Sustain by precisely ending what's wearing you down — the habit, the wound, the relationship, the weight — rather than trying to carry it further.",
+   "notFor": [],
+   "tradition": "unmaker",
+   "harmRung": "none",
+   "functions": [
+    "sustain",
+    "break"
+   ],
+   "challengeTypes": [
+    "endurance",
+    "hardship",
+    "psychological"
+   ],
+   "challengeProfile": {
+    "cognitive": 0.5,
+    "physical": 0.3,
+    "social": 0.2
+   },
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Cut",
+     "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
+     "cannot": null
+    },
+    {
+     "rank": 2,
+     "name": "What You Don't Need",
+     "grants": "Sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction.",
+     "cannot": null
+    },
+    {
+     "rank": 3,
+     "name": "The Lighter Load",
+     "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
+     "cannot": null
+    }
+   ],
+   "nativeOrCombination": "native"
+  }
+ ],
+ "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

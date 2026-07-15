@@ -1206,30 +1206,19 @@
         "player": "Use Order-Sense on the visible section of hillside above the valve housing — read what design this land is part of",
         "summary": "Order-Sense reads the hillside above the valve housing — a coursed stone ceiling runs northeast from the housing for forty feet, the soil-rise is the roof settling, the structure is largely intact beneath the east furlong.",
         "narration": "You set Memory's butt against the ground and press your palm flat to the hillside — not the housing, but the earth above it, where the soil-rise Pell identified bulges faintly under the spring grass. The substrate here is thin; you feel that immediately, the lattice stretching to reach you like a rope pulled too long. You conserve: you don't push for the full design, just the shape of the room you're standing on top of.\n\nIt comes back in pieces, economical and clear. The faint soil-rise is not a root-heave or a frost-seam. It traces a coursed stone ceiling — a roof, running roughly parallel to the path for about forty feet before it angles away northeast, deeper into the hillside. The valve housing is not an isolated installation. It is the working end of something longer, and the ground you're standing on is the lid.\n\nPell watches your hand on the slope. She doesn't ask. She's learned what the stillness means.\n\n\"There's a room under us,\" you say, pulling your hand back. \"Or close to one — coursed stone ceiling, running northeast from the housing. Maybe forty feet of it visible in what the lattice could reach.\" You tap the soil-rise with one knuckle. \"This is the roof settling. The structure is intact, or close enough to intact that it's holding its shape.\" Huginn shifts on the fence-post without looking at you, which counts as confirmation."
+      },
+      {
+        "player": "Tell Pell what you found and ask if the northeast line runs toward the wash-room site she found four years ago",
+        "summary": "Pell confirms it — the northeast line runs toward her wash-room site. The valve housing is the working end of a structure that was built to act on the water.",
+        "narration": "You pull your hand back from the hillside and turn to face her. 'Coursed stone ceiling,' you say. 'Forty feet, running northeast from the housing. The soil-rise is the roof settling — the structure's still largely intact under the furlong.'\n\nPell doesn't react immediately. She's looking at the soil-rise, reading it with her eyes the way she'd read a grain-seam in iron — tracing the line of it, where it flattens, where it angles. Her jaw shifts once.\n\n'The wash-room site,' you say, '— does the northeast line run toward it?'\n\nShe turns her head and looks at you, and there's something in her face that is not quite surprise and not quite satisfaction. The look of someone whose measurement just came back exactly what they feared it would. 'The north cut runs northeast from here,' she says. 'The site's roughly four years of walking that way.' She pauses, then corrects herself with the precision she can't help: 'Four years of *occasional* walking. Maybe a mile and a half as the crow goes.' A glance at Huginn on the fence-post — dry, not literal. 'The wash-room is further in, higher and further back. Deeper in the hillside. What you're reading here is the near end.' She moves to the valve housing cover and crouches beside it, fingertips resting on the tilted lip without moving it. 'Which means the working end is here. Facing the channel.' She looks up at you. 'Whatever this structure was built to do — it was built to do it to the water.'\n\nHuginn shifts on the fence-post and looks northeast. Nothing dramatic about it. Just: that direction."
       }
     ],
     "lastTurn": {
-      "narration": "You set Memory's butt against the ground and press your palm flat to the hillside — not the housing, but the earth above it, where the soil-rise Pell identified bulges faintly under the spring grass. The substrate here is thin; you feel that immediately, the lattice stretching to reach you like a rope pulled too long. You conserve: you don't push for the full design, just the shape of the room you're standing on top of.\n\nIt comes back in pieces, economical and clear. The faint soil-rise is not a root-heave or a frost-seam. It traces a coursed stone ceiling — a roof, running roughly parallel to the path for about forty feet before it angles away northeast, deeper into the hillside. The valve housing is not an isolated installation. It is the working end of something longer, and the ground you're standing on is the lid.\n\nPell watches your hand on the slope. She doesn't ask. She's learned what the stillness means.\n\n\"There's a room under us,\" you say, pulling your hand back. \"Or close to one — coursed stone ceiling, running northeast from the housing. Maybe forty feet of it visible in what the lattice could reach.\" You tap the soil-rise with one knuckle. \"This is the roof settling. The structure is intact, or close enough to intact that it's holding its shape.\" Huginn shifts on the fence-post without looking at you, which counts as confirmation.",
-      "sceneSummary": "Order-Sense reads the hillside above the valve housing — a coursed stone ceiling runs northeast from the housing for forty feet, the soil-rise is the roof settling, the structure is largely intact beneath the east furlong.",
+      "narration": "You pull your hand back from the hillside and turn to face her. 'Coursed stone ceiling,' you say. 'Forty feet, running northeast from the housing. The soil-rise is the roof settling — the structure's still largely intact under the furlong.'\n\nPell doesn't react immediately. She's looking at the soil-rise, reading it with her eyes the way she'd read a grain-seam in iron — tracing the line of it, where it flattens, where it angles. Her jaw shifts once.\n\n'The wash-room site,' you say, '— does the northeast line run toward it?'\n\nShe turns her head and looks at you, and there's something in her face that is not quite surprise and not quite satisfaction. The look of someone whose measurement just came back exactly what they feared it would. 'The north cut runs northeast from here,' she says. 'The site's roughly four years of walking that way.' She pauses, then corrects herself with the precision she can't help: 'Four years of *occasional* walking. Maybe a mile and a half as the crow goes.' A glance at Huginn on the fence-post — dry, not literal. 'The wash-room is further in, higher and further back. Deeper in the hillside. What you're reading here is the near end.' She moves to the valve housing cover and crouches beside it, fingertips resting on the tilted lip without moving it. 'Which means the working end is here. Facing the channel.' She looks up at you. 'Whatever this structure was built to do — it was built to do it to the water.'\n\nHuginn shifts on the fence-post and looks northeast. Nothing dramatic about it. Just: that direction.",
+      "sceneSummary": "Pell confirms it — the northeast line runs toward her wash-room site. The valve housing is the working end of a structure that was built to act on the water.",
       "choices": [
         {
-          "label": "Use Order-Sense again — push northeast along the line it gave you, tracing where the structure goes",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Check the valve housing itself — see if the cover plate's twist direction matches what Pell described at the wash-room site",
+          "label": "Check the twist direction on this valve alongside Pell — compare against Fen's intake failure",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {},
@@ -1240,24 +1229,12 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell Pell what you found and ask if the northeast line runs toward the wash-room site she found four years ago",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Walk the forty feet of roof-line northeast, reading the soil for signs of stress, settling, or breach",
+          "label": "Walk the northeast line — follow the soil-rise along the furlong and see where it leads",
           "attribute": "practical",
           "subAttribute": "wits",
           "axes": {},
@@ -1268,33 +1245,59 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go to Dara Holt now — twenty-two years on the east channel; she needs to know what's under it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pell what she wants to do with this — she's had the measurement longer than you have",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "xp": 0
+        "energy": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "aldric-provisioning-deal",
-          "note": "Order-Sense confirms: the east furlong valve housing is the working end of a forty-foot coursed-stone structure running northeast under the soil. The soil-rise is the roof settling. The structure is largely intact."
-        }
-      ],
       "scene": {
-        "setting": "East furlong path at the bend — valve housing fully visible, cover plate tilted, rust-orange stain beneath it. Hillside above shows the faint soil-rise now confirmed as a settling stone ceiling running northeast. Morning sun climbing.",
+        "setting": "East furlong path at the valve housing bend — cover plate tilted, rust-orange stain at the base, soil-rise above confirmed as coursed stone ceiling running northeast. Morning sun fully up now.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing where she stopped, watching Silas pull his hand back from the hillside — waiting for what he found."
+            "state": "Crouching at the valve housing cover, fingertips on the tilted lip, looking up at Silas."
           },
           {
             "name": "Huginn",
-            "state": "Shifted on the fence-post without turning, attention northeast."
+            "state": "Shifted on the fence-post to face northeast — attention fixed in that direction."
           }
         ],
         "objects": [
@@ -1306,10 +1309,10 @@
           "Faint soil-rise above housing — confirmed as settling stone ceiling, ~40 ft running northeast"
         ],
         "threads": [
-          "Coursed stone ceiling runs northeast from the housing — where does it go?",
-          "Does the northeast line point toward Pell's wash-room site?",
-          "Twist direction comparison on east furlong valve still pending",
-          "Third-date remark filed — condition still live"
+          "Northeast line points toward Pell's wash-room site ~1.5 miles in — the valve housing is the near/working end",
+          "Twist direction on east furlong valve unconfirmed — comparison against Fen's intake pending",
+          "Third-date remark filed — condition still live",
+          "Dara Holt unbriefed — knows the channel better than anyone"
         ]
       },
       "npcUpdates": [
@@ -1317,23 +1320,46 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Watched Silas read the hillside without asking — waiting for the result.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Confirmed the northeast line runs toward the wash-room site — a mile and a half as the crow goes, deeper in and higher. Named the valve housing plainly as the working end: whatever the structure was built to do, it was built to do it to the water.",
           "learned": [
-            "The soil-rise above the valve housing is a settling stone ceiling — the structure runs northeast from the housing for about forty feet"
+            "The northeast line from the valve housing runs toward her pre-Transition wash-room site — the valve housing is the near/working end, the wash-room is the far/interior end",
+            "The full structure spans roughly a mile and a half northeast into the hillside"
           ],
+          "skillsObserved": [
+            "structural synthesis across separate sites from physical evidence and spatial memory"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the east furlong valve housing with Silas — crouching at the cover plate, having confirmed the structure's full northeast extent."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "note": "Shifted to face northeast on the fence-post without comment. The timing is, as usual, a comment.",
+          "learned": [],
           "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the east furlong bend with Silas — standing still, waiting for what Order-Sense found in the hillside."
+          "statusNote": "On the fence-post at the east furlong valve housing, attention fixed northeast."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately a mile and a half, deeper and higher in the hillside. The valve housing is the working/near end; the wash-room is the interior end. The structure spans the full distance between them.",
+          "subjectId": "pell"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Order-Sense confirms a coursed stone ceiling running northeast from the east furlong valve housing for approximately forty feet — the soil-rise above the housing is the roof settling; the structure is largely intact beneath the furlong.",
-          "flag": {
-            "subsurface_ceiling_confirmed": true,
-            "ceiling_direction": "northeast",
-            "ceiling_length_approx_ft": 40
+          "note": "Northeast line from east furlong valve housing confirmed running toward Pell's wash-room site — full structure now understood to span ~1.5 miles northeast into the hillside. Valve housing is the working end.",
+          "subPlace": {
+            "name": "East Furlong Valve Housing",
+            "note": "Working end of a pre-Transition structure spanning ~1.5 miles northeast toward Pell's wash-room site — coursed stone ceiling runs under the furlong, roof settling above.",
+            "visited": true
           }
         }
       ],
@@ -1342,32 +1368,43 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structure; the soil-rise is the roof settling.",
+          "fact": "The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the working end, the wash-room the interior end. The full pre-Transition structure spans between them.",
           "links": [
             "pell",
-            "mara-wells",
-            "dara-holt",
             "millbrook",
-            "aldric-provisioning-deal",
+            "dara-holt",
+            "order-sense",
             "precursor-signs-in-the-valley"
+          ]
+        },
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Confirmed the northeast line runs toward her wash-room site — a mile and a half as the crow goes. Named the valve housing as the working end without hesitation.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "order-sense"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "A brief read of the hillside — seconds of contact, no meaningful time elapsed."
+        "hoursPassed": 0.25,
+        "why": "A brief exchange at the valve housing — a question asked and answered, no movement."
       }
     },
     "sceneState": {
-      "setting": "East furlong path at the bend — valve housing fully visible, cover plate tilted, rust-orange stain beneath it. Hillside above shows the faint soil-rise now confirmed as a settling stone ceiling running northeast. Morning sun climbing.",
+      "setting": "East furlong path at the valve housing bend — cover plate tilted, rust-orange stain at the base, soil-rise above confirmed as coursed stone ceiling running northeast. Morning sun fully up now.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing where she stopped, watching Silas pull his hand back from the hillside — waiting for what he found."
+          "state": "Crouching at the valve housing cover, fingertips on the tilted lip, looking up at Silas."
         },
         {
           "name": "Huginn",
-          "state": "Shifted on the fence-post without turning, attention northeast."
+          "state": "Shifted on the fence-post to face northeast — attention fixed in that direction."
         }
       ],
       "objects": [
@@ -1379,10 +1416,10 @@
         "Faint soil-rise above housing — confirmed as settling stone ceiling, ~40 ft runn"
       ],
       "threads": [
-        "Coursed stone ceiling runs northeast from the housing — where does it go?",
-        "Does the northeast line point toward Pell's wash-room site?",
-        "Twist direction comparison on east furlong valve still pending",
-        "Third-date remark filed — condition still live"
+        "Northeast line points toward Pell's wash-room site ~1.5 miles in — the valve housing is the near/working end",
+        "Twist direction on east furlong valve unconfirmed — comparison against Fen's intake pending",
+        "Third-date remark filed — condition still live",
+        "Dara Holt unbriefed — knows the channel better than anyone"
       ]
     }
   },
@@ -1530,7 +1567,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Identified the girl as Fen's niece; named the dog as unknown — not local, follows her in from the upper meadow path. Said she'd have shod it by now if it were hers to know.",
         "[d2] Named the unknown dog's first appearance as three weeks back — always with Fen's niece, always from the north, never entering the village proper. Identified it as not a farm dog wi",
         "[d2] Confirmed done with the valve housing — oriented toward east furlong. Named the east furlong as the comparison site, half a mile southeast.",
         "[d2] Took starfruit without ceremony, leaned on the wall, caught Silas watching her and held the look — no deflection, no performance. Ready to move.",
@@ -1539,17 +1575,18 @@
         "[d2] Received the third-date line without flinching — exhaled once, recalculated, said 'three dates' into the middle distance and filed it. Fell into step beside Silas without being ask",
         "[d2] Described the pre-Transition wash-room site unprompted details: dressed slate floor, close-fitted mortar, two hip-height saddle-mount ring-hooks, worn stand-positions, pressed wall",
         "[d2] Confirmed without hesitation: wash-room and valve sites are the same structure — different rooms, same finished margins, same intent. Named the hillside swell above the housing as ",
-        "[d2] Watched Silas read the hillside without asking — waiting for the result."
+        "[d2] Watched Silas read the hillside without asking — waiting for the result.",
+        "[d2] Confirmed the northeast line runs toward the wash-room site — a mile and a half as the crow goes, deeper in and higher. Named the valve housing plainly as the working end: whatever"
       ],
       "knownFacts": [
-        "Silas has explicitly named a third date as the condition for seeing how thorough he can be",
-        "Wash-room site: dressed slate floor, close-fitted old mortar, two saddle-mount ring-hooks at hip height on the same wall",
         "Two worn stand-positions facing the same direction",
         "Pressed marks in the plaster on the far wall — she didn't know what they were then; she does now",
         "Wash-room and east-channel valve failures share identical construction: same depth, same dressed stone, same finished margins — different rooms, same builder",
         "The wash-room is further in, higher and further back; the valve sites are the working end, facing the channel",
         "Pell's read: whatever the structure was built to do, it was built to do it to the water",
-        "The soil-rise above the valve housing is a settling stone ceiling — the structure runs northeast from the housing for about forty feet"
+        "The soil-rise above the valve housing is a settling stone ceiling — the structure runs northeast from the housing for about forty feet",
+        "The northeast line from the valve housing runs toward her pre-Transition wash-room site — the valve housing is the near/working end, the wash-room is the far/in",
+        "The full structure spans roughly a mile and a half northeast into the hillside"
       ],
       "skillsObserved": [
         "synthesis of temporal evidence into a physical mechanism mod",
@@ -1560,7 +1597,7 @@
         "structural synthesis across separate sites from physical evi"
       ],
       "status": "active",
-      "statusNote": "At the east furlong bend with Silas — standing still, waiting for what Order-Sense found in the hillside.",
+      "statusNote": "At the east furlong valve housing with Silas — crouching at the cover plate, having confirmed the structure's full northeast extent.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1665,7 +1702,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Deeper chamber Order-Sense read (World-day 14): fixed-purpose room confirmed — two worn stand-positions in flags, low ring-hook cradle-recess built for one specific object that did not leave, calibrat",
         "[d2] Deeper chamber cradle-recess Palework-read on World-day 14 dawn: object was dense, field-active (non-biological), leached iron from stone beneath over years/decades of use. Removal was final and purpo",
         "[d2] Order-Sense from the farther stand-position confirms paired operator/confirmer design — the chamber had an error-checking function. Grid filled marks are grouped, recording object states (not measurem",
         "[d2] Grid filled marks read via The Attended End on World-day 14 dawn — three consecutive stable-state confirmations in a close cluster; the object was performing correctly and was removed deliberately at ",
@@ -1676,7 +1712,8 @@
         "[d2] An unknown dog follows Fen's niece in from the upper meadow path on some mornings — not a local animal; Huginn watched it go on World-day 15 morning.",
         "[d2] Valve Failure Timeline note now carries a second marginal annotation — unknown dog, upper meadow path, three-week onset; written in Silas's hand at the intake site on World-day 15 morning.",
         "[d2] Pell identified a faint soil-rise above the east furlong valve housing as a probable subsurface course — the buried structure extends under this furlong, not only beneath the north-cut hillside.",
-        "[d2] Order-Sense confirms a coursed stone ceiling running northeast from the east furlong valve housing for approximately forty feet — the soil-rise above the housing is the roof settling; the structure is"
+        "[d2] Order-Sense confirms a coursed stone ceiling running northeast from the east furlong valve housing for approximately forty feet — the soil-rise above the housing is the roof settling; the structure is",
+        "[d2] Northeast line from east furlong valve housing confirmed running toward Pell's wash-room site — full structure now understood to span ~1.5 miles northeast into the hillside. Valve housing is the worki"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2012,7 +2049,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d1] Told plainly that her maker's mark makes her 'half the spear's until she's not' — received it flat, named it provisional, didn't push back. The warmth and the ironwork register are the same thing in h",
           "[d2] Mara's read: Pell values genuinely finished work; drinks slowly and notices taste; grew up before the pass closed so the starfruit will land as recognition, not novelty; dislikes being steered toward ",
           "[d2] Had a quiet relationship with a tinker from the heights, roughly three years ago — ran steady for a while, ended when he stopped coming through. Mara doesn't know if it ended clean. Pell didn't speak ",
           "[d2] Recognized the old pass-circuit knotting on the starfruit packet immediately — named it without being told. Clocked both gifts, said nothing beyond naming them, and waited. She receives things by look",
@@ -2035,7 +2071,8 @@
           "[d2] Reads material direction from deposit grain — named the column stain's source as above-and-behind the bank. Diagnoses large-scale contamination problems the way she diagnoses a flue leak: by what the ",
           "[d2] Named matched-pair carrying from ring-hook spacing. Recalls a pre-Transition 'wash-room' site deeper in the valley — same flagged floor, same hooks, same emptied state. She crossed the threshold to re",
           "[d2] Caught Silas watching her in the morning light at the wall and held it — no performance, no deflection. Comfortable in her own proportions. Entirely at ease in the field.",
-          "[d2] Pell found a pre-Transition wash-room site four or five years ago through the north cut — dressed slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks (wide mounts, for somethi"
+          "[d2] Pell found a pre-Transition wash-room site four or five years ago through the north cut — dressed slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks (wide mounts, for somethi",
+          "[d2] Confirmed the northeast line runs toward her wash-room site — a mile and a half as the crow goes. Named the valve housing as the working end without hesitation."
         ],
         "links": [
           "millbrook",
@@ -2188,7 +2225,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Order-Sense on the rubble site reveals a buried channel-house: low, rectangular, pre-Transition. Northwest corner is the exposed rubble. Main run goes into the hillside at an angle. Two apertures, bot",
           "[d2] Pell reads the lower aperture's breach-from-within as a valve: deliberate design or a conditional trigger. The sealed rooms are likely protection chambers — something the builders kept isolated from t",
           "[d2] Pell's read: the lower aperture must be face-cleared before its condition can be diagnosed — breach may be finished or mid-process, and those read differently. She named Huginn's assessment as a requi",
           "[d2] Huginn reads the cleared aperture as old and concluded — not ending, not dangerous in itself. The inner space is dry, cool, and mineral. Whatever this channel-house holds concluded well before the cra",
@@ -2211,7 +2247,8 @@
           "[d2] Fen's intake physical inspection: sleeve blank failure caused axial torque in the iron sleeve, riding the cover lip up. Pell identified the failure mode immediately from cover geometry. East furlong c",
           "[d2] Timeline annotated: unknown dog first appeared upper meadow path three weeks ago — same interval as Fen's intake sleeve failure and boar displacement north. Three separate observations share a three-w",
           "[d2] Pell confirms the wash-room site and east-channel valve failures share identical construction — same depth, same dressed stone, same finished margins. The structure was built to act on the water. The ",
-          "[d2] Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structur"
+          "[d2] Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structur",
+          "[d2] The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the "
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
@@ -2328,14 +2365,14 @@
     }
   },
   "tendencies": {
-    "strategic": 54.9485204870462,
-    "cerebral": 44.91013498299418,
-    "social": 52.564394336726444,
-    "generous": 14.525485934285713,
-    "cautious": 46.81498470145974,
-    "physical": 1.2178737753101216,
-    "risky": 2.9988380659862672,
-    "ruthless": 0.6211445383053219
+    "strategic": 55.67377788461097,
+    "cerebral": 44.68558430807921,
+    "social": 52.30157236504281,
+    "generous": 15.452858504614285,
+    "cautious": 46.58090977795244,
+    "physical": 1.211784406433571,
+    "risky": 2.9838438756563357,
+    "ruthless": 0.6180388156137953
   },
   "aptitudes": [
     "strategist",
@@ -2343,7 +2380,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 184,
+  "actionCount": 185,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2429,8 +2466,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-  "updatedAt": 1784083533634,
-  "rev": 255,
+  "updatedAt": 1784083967669,
+  "rev": 256,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2695,6 +2732,12 @@
     {
       "id": "pell",
       "text": "Pell has confirmed that the pre-Transition wash-room site (flagged floor, saddle-mount hooks) and the failed east-channel valve sites are the same structure — different rooms, same construction, built",
+      "day": 2,
+      "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately a mile and a half, deeper and higher in the hillside. The valve housing",
       "day": 2,
       "subjectId": "pell"
     }

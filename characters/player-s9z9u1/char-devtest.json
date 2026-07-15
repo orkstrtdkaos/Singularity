@@ -194,80 +194,85 @@
         "player": "Slow down — let your hands do the talking first; take your time with her.",
         "summary": "Unhurried first kiss on the roof terrace — the ledger waiting, the afternoon count still distant.",
         "narration": "The ledger sits on the bench like it has all the time in the world.\n\nYou don't rush. You bring one hand up to her jaw — the light side of a touch, the backs of your fingers first, reading the warmth of her skin before your palm settles — and watch her eyes. She doesn't look away. The amber-grey holds steady, and there's something in it that isn't patience exactly, more like a person who has decided to stay in a room and is curious what happens next. Her chin tilts up a fraction. Permission granted without a word.\n\nYou take your time with her. A thumb along the line of her cheekbone. The other hand finding the loose end of her sash and not doing anything with it yet — just weight, contact, the fact of you in her space. The photonic towers scatter the midday light across the terrace in slow arcs and the stone underfoot is warm from the sun and there is nobody else in the world up here right now. When you finally bring your mouth to hers it's unhurried, the kind of kiss that doesn't need to be anything else yet, and she meets it without hesitation — her hand coming up to your sleeve, not pulling, just holding. She breathes out through her nose. The half-smile you felt earlier you can feel again, pressed against your lips.\n\nWhen you ease back she keeps her eyes closed a half-second longer than necessary, then opens them and looks at you with the same deliberate attention she's had since the service corridor. The ledger is still on the bench. The valley is still to the west. She reaches up and adjusts your collar — the same small gesture she made before — except this time she doesn't stop at the collar."
+      },
+      {
+        "player": "Stay with this — let the terrace do the rest. The afternoon count won't come for a while yet.",
+        "summary": "The terrace holds — a second kiss, slower, and Lira names what she's known since the corridor.",
+        "narration": "The terrace holds you both in its midday stillness. You don't push anything forward — you let the moment find its own pace, and it does.\n\nHer hand moves past your collar to the front of your shirt, fingers spreading against the cloth, not pulling, just resting there with purpose. You kiss her again, slower this time, and she makes a small sound against your mouth that is less surprise than confirmation. The crystal towers scatter light across the stone in slow, idle patterns, and the valley lies quiet in the west, and the bench with the ledger on it is three paces away and might as well be in another district.\n\nShe pulls back just enough to look at you — the amber-grey steady, the half-smile back, a little different now, warmer and less studied. Her thumb traces a line along the lapel of your shirt. 'You're not a paving contractor,' she says. Not an accusation. Just the thing she's been sitting with, named plainly now that there's no more pretense of professional distance.\n\nShe doesn't move away when she says it. Her hand stays where it is. The afternoon count is still a comfortable hour distant, the terrace is empty, and she is watching you with the clear-eyed patience of someone who has asked a question and is genuinely curious what you'll do with it."
       }
     ],
     "lastTurn": {
-      "narration": "The ledger sits on the bench like it has all the time in the world.\n\nYou don't rush. You bring one hand up to her jaw — the light side of a touch, the backs of your fingers first, reading the warmth of her skin before your palm settles — and watch her eyes. She doesn't look away. The amber-grey holds steady, and there's something in it that isn't patience exactly, more like a person who has decided to stay in a room and is curious what happens next. Her chin tilts up a fraction. Permission granted without a word.\n\nYou take your time with her. A thumb along the line of her cheekbone. The other hand finding the loose end of her sash and not doing anything with it yet — just weight, contact, the fact of you in her space. The photonic towers scatter the midday light across the terrace in slow arcs and the stone underfoot is warm from the sun and there is nobody else in the world up here right now. When you finally bring your mouth to hers it's unhurried, the kind of kiss that doesn't need to be anything else yet, and she meets it without hesitation — her hand coming up to your sleeve, not pulling, just holding. She breathes out through her nose. The half-smile you felt earlier you can feel again, pressed against your lips.\n\nWhen you ease back she keeps her eyes closed a half-second longer than necessary, then opens them and looks at you with the same deliberate attention she's had since the service corridor. The ledger is still on the bench. The valley is still to the west. She reaches up and adjusts your collar — the same small gesture she made before — except this time she doesn't stop at the collar.",
-      "sceneSummary": "Unhurried first kiss on the roof terrace — the ledger waiting, the afternoon count still distant.",
+      "narration": "The terrace holds you both in its midday stillness. You don't push anything forward — you let the moment find its own pace, and it does.\n\nHer hand moves past your collar to the front of your shirt, fingers spreading against the cloth, not pulling, just resting there with purpose. You kiss her again, slower this time, and she makes a small sound against your mouth that is less surprise than confirmation. The crystal towers scatter light across the stone in slow, idle patterns, and the valley lies quiet in the west, and the bench with the ledger on it is three paces away and might as well be in another district.\n\nShe pulls back just enough to look at you — the amber-grey steady, the half-smile back, a little different now, warmer and less studied. Her thumb traces a line along the lapel of your shirt. 'You're not a paving contractor,' she says. Not an accusation. Just the thing she's been sitting with, named plainly now that there's no more pretense of professional distance.\n\nShe doesn't move away when she says it. Her hand stays where it is. The afternoon count is still a comfortable hour distant, the terrace is empty, and she is watching you with the clear-eyed patience of someone who has asked a question and is genuinely curious what you'll do with it.",
+      "sceneSummary": "The terrace holds — a second kiss, slower, and Lira names what she's known since the corridor.",
       "choices": [
         {
-          "label": "Stay with this — let the terrace do the rest. The afternoon count won't come for a while yet.",
+          "label": "Tell her the truth — what you actually are, what the ledger means, and why it matters.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "intimate",
-            "patient"
+            "honest",
+            "confide",
+            "persuade"
           ],
           "trivial": true
         },
         {
-          "label": "Talk while you have her close — ask what she knows about Fendt. People say honest things when they're still close.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "gather-information"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Offer her something concrete — ask if she wants to be the one to walk the ledger to Aldris Vael. She chose silence in the corridor. That kind of silence has its own uses.",
+          "label": "Deflect gently — give her enough to satisfy without the full picture. 'Does it matter right now?'",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "recruit",
-            "plan"
+            "deflect",
+            "charm",
+            "careful"
           ],
           "trivial": false
         },
         {
-          "label": "Take her hand, watch the valley together, and let the quiet tell you who she is when she's not performing.",
+          "label": "Answer her question with your hands — close the small distance she opened and let action speak first.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "observe",
-            "patient"
+            "physical",
+            "deflect",
+            "bold"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask what she wants to do with the answer — put the next move in her court.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "curious",
+            "careful",
+            "social"
           ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Open stone terrace with low coping wall; photonic-crystal towers scatter overhead light in slow brightness; the valley floor visible to the west as a green-grey stripe. No one else present.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, scattered crystal light, valley floor visible to the west. No one else present.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Close to the character, eyes just reopened after the kiss, one hand at his collar and moving — watching him with deliberate, unhurried attention."
+            "state": "One hand spread against the character's shirt, pulled back a half-breath, watching him with the half-smile warmed and less studied — she's just named what she knows and is waiting for his answer."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — resting on the worker's bench",
-          "Low coping wall — warm stone in the midday sun",
+          "Low coping wall — warm stone in midday sun",
           "Single worker's bench",
           "Iron exterior staircase — at the terrace corner, the only access",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
-          "Lira's hands are still moving — the moment is open and unresolved",
-          "The ledger sits on the bench — delivery to Keeper Aldris Vael remains a quiet pressure",
-          "The runebound spear's cooling window at Pell's forge is a competing pull toward Millbrook"
+          "Lira has named her suspicion plainly — 'You're not a paving contractor' — and is waiting for his response",
+          "The ledger sits three paces away; delivery to Keeper Aldris Vael remains a quiet pressure",
+          "The afternoon count is roughly an hour distant — the terrace remains private until then"
         ]
       },
       "npcUpdates": [
@@ -275,54 +280,44 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Accepted the kiss without hesitation — met it, held his sleeve, breathed out. Eyes closed a half-beat too long afterward. Now her hand has moved past the collar.",
+          "note": "Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watching.",
           "learned": [
-            "She stays present in physical moments the same way she stays present in a corridor — fully, without performance"
+            "She has known since the service corridor that he is not what he presented as",
+            "She chose to stay and pursue the question rather than report or retreat"
+          ],
+          "skillsObserved": [
+            "perceptiveness — she reads people with quiet precision",
+            "composure — she names difficult things without making them into confrontations"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the roof terrace with the character — the kiss landed, her hand is moving, the afternoon count still distant."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "lira",
-          "label": "Lira — Edge District Apprentice",
-          "kind": "person",
-          "entityId": "lira",
-          "fact": "She meets physical moments the same way she meets everything else — fully present, without performance. The kiss was unhurried and mutual. Her hand moved past the collar.",
-          "links": [
-            "radiant-plateau",
-            "the-clean-numbers",
-            "fendt-falsified-purity-reports"
-          ]
+          "statusNote": "On the roof terrace with the character — the moment is intimate and open; she has just asked who he really is, hand still on his shirt, waiting for an honest answer."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A few unhurried minutes on the terrace"
-      },
-      "sceneEnded": false
+        "why": "A quiet quarter-hour on the terrace — unhurried, no count yet."
+      }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Open stone terrace with low coping wall; photonic-crystal towers scatter overhead light in slow brightness; the valley floor visible to the west as a green-grey stripe. No one else present.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, scattered crystal light, valley floor visible to the west. No one else present.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Close to the character, eyes just reopened after the kiss, one hand at his collar and moving — watching him with deliber"
+          "state": "One hand spread against the character's shirt, pulled back a half-breath, watching him with the half-smile warmed and le"
         }
       ],
       "objects": [
         "Lower Filtration Ledger — resting on the worker's bench",
-        "Low coping wall — warm stone in the midday sun",
+        "Low coping wall — warm stone in midday sun",
         "Single worker's bench",
         "Iron exterior staircase — at the terrace corner, the only access",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
-        "Lira's hands are still moving — the moment is open and unresolved",
-        "The ledger sits on the bench — delivery to Keeper Aldris Vael remains a quiet pressure",
-        "The runebound spear's cooling window at Pell's forge is a competing pull toward Millbrook"
+        "Lira has named her suspicion plainly — 'You're not a paving contractor' — and is waiting for his response",
+        "The ledger sits three paces away; delivery to Keeper Aldris Vael remains a quiet pressure",
+        "The afternoon count is roughly an hour distant — the terrace remains private until then"
       ]
     }
   },
@@ -372,35 +367,36 @@
         "locationId": "radiant_plateau_edge",
         "day": 1
       },
-      "relationship": 5,
+      "relationship": 6,
       "history": [
         "[d1] Waiting in the service corridor when the character emerged from the array-office — noticed the ledger, chose not to remark on it. A door left deliberately open.",
         "[d1] Noticed the character surface briefly from something inward — a Prism Sight read that didn't land cleanly — and chose not to name it. Still watching. Still waiting.",
         "[d1] Led the character from the service corridor to the roof terrace above the wick-room — a private space she knew and chose deliberately. Watching, waiting, giving room.",
         "[d1] Named what she noticed and what she wants — the ledger and the person. Closed the distance deliberately. Half-smile complete. Waiting.",
         "[d1] Accepted the character's advance on the roof terrace — touched his collar, said 'all right', set the ledger aside. The interest she'd been holding is now plainly in the room.",
-        "[d1] Accepted the kiss without hesitation — met it, held his sleeve, breathed out. Eyes closed a half-beat too long afterward. Now her hand has moved past the collar."
+        "[d1] Accepted the kiss without hesitation — met it, held his sleeve, breathed out. Eyes closed a half-beat too long afterward. Now her hand has moved past the collar.",
+        "[d1] Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watc"
       ],
       "knownFacts": [
-        "She knows the district's rhythms well enough to know when and where it goes unobserved",
-        "She chose this spot specifically — not the first place she thought of, the right place",
         "She noticed the ledger in the service corridor and chose silence — a deliberate, considered choice",
         "She wants to know what the character will do with the ledger AND who they are outside the paving work",
         "She is comfortable making her interest plain without rushing it",
         "She meets directness with directness — she didn't deflect or laugh it off; she tested the word and accepted it",
         "She set the ledger on the bench herself — a deliberate act, unburdening the moment without being asked",
-        "She stays present in physical moments the same way she stays present in a corridor — fully, without performance"
+        "She stays present in physical moments the same way she stays present in a corridor — fully, without performance",
+        "She has known since the service corridor that he is not what he presented as",
+        "She chose to stay and pursue the question rather than report or retreat"
       ],
       "skillsObserved": [
-        "spatial knowledge of the district",
-        "deliberate discretion",
         "directness",
         "quiet observation",
         "deliberate physical presence",
-        "composure under advance"
+        "composure under advance",
+        "perceptiveness — she reads people with quiet precision",
+        "composure — she names difficult things without making them i"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace with the character — the kiss landed, her hand is moving, the afternoon count still distant.",
+      "statusNote": "On the roof terrace with the character — the moment is intimate and open; she has just asked who he really is, hand still on his shirt, waiting for an honest an",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -670,19 +666,19 @@
     }
   },
   "tendencies": {
-    "social": 4.92098945335756,
-    "strategic": 7.758201234053733,
-    "cautious": 2.9407450187125317,
-    "cerebral": 1.950522009981266,
-    "physical": 0.9703725093562657,
-    "ruthless": 0.9703725093562657
+    "social": 4.896384506090772,
+    "strategic": 7.719410227883465,
+    "cautious": 2.926041293618969,
+    "cerebral": 1.9407693999313596,
+    "physical": 0.9655206468094844,
+    "ruthless": 0.9655206468094844
   },
   "aptitudes": [],
-  "actionCount": 10,
+  "actionCount": 11,
   "grantsVersion": 1,
   "reconcileVersion": 5,
-  "updatedAt": 1784139910289,
-  "rev": 48,
+  "updatedAt": 1784140006074,
+  "rev": 49,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -840,7 +836,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 6
+    "valley": 7
   },
   "foreclosed": []
 }

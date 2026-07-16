@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## ✅ LOCATION + UI BATCH — CLOSED GREEN (Aevi HEAD audit, v1.8.81)
+# PIPELINE ALERT — Singularity## 🧹 SNG-120 — Collapsible sidebar + combine redundant sections (specced, awaiting CCode)
+`po/SPEC_SNG-120_sidebar_collapsible_combine.md`. The sidebar grew to ~12 stacked sections (4 phone-screens tall). Every `<section>` becomes collapsible with **persisted** open/closed state (reuse the existing `npcGroups` open-set pattern + `<details>` idiom — invents neither). **Key combine, a real redundancy:** "People you know" (L5224) shows the same people as SNG-119's "{place} — standing & who's here" (L5272) — the old bare list was never removed when 119 added the richer scoped one; fold + delete (a test asserts each NPC appears in exactly ONE section). Party+Companions → one "Company" section. Defaults serve play: abilities/who's-here/items open, attributes/play-style/map/codex collapsed; collapsed headers show a summary count. Vitals stay pinned. From Erik's 4 sidebar screenshots.
+
+---
+
+## ✅ LOCATION + UI BATCH — CLOSED GREEN (Aevi HEAD audit, v1.8.81)
 
 CCode shipped all three; **Aevi verified at authenticated origin.** app.js syntax-clean.
 - **SNG-117** (known world navigable): **the Millbrook fix is airtight** — L2680 now `resolveLocationId(moveRef) || mintTransitLocation(moveRef)`, so an unresolvable `moveTo:"the pass"` MINTS a real travelable place instead of no-op'ing; header follows the fiction, never stays stuck (L2677-2688). **Idempotency VERIFIED (Q1):** mint id = `"gen-"+slugify(moveRef)`, and the first line is `if (CONTENT.locations[id]) return id` — "the pass" slugs to the same id every time → minted exactly once, second mention reuses. `isPlaceKnown` gates the map NAME on known (visited/adjacent/en-route/GM-named), `?` reserved for the genuinely unheard-of. **Closed.** *Boundary CCode honestly flagged: a pure-narration exit with NO `moveTo` at all (infer destination from prose) is deferred — the concrete `moveTo` case is fully fixed. Tracked, not a blocker.*

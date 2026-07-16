@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 31,
+  "xp": 33,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 54,
+  "energy": 46,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -187,88 +187,93 @@
         "player": "Lift the fallen Cogitant, settle her weight against your back, and head for the arch — Waymarker, now.",
         "summary": "Saehara lifts the fallen Cogitant onto his back and walks out of the Cogitarium into the morning mist — northeast toward Waymarker.",
         "narration": "You kneel beside her and work your arms under her shoulders. She weighs what Ossian said she would — fifty-one kilograms of someone who forgot to eat — and her head lolls against your neck with a faint, wet exhale, lips still moving. The chalk on her fingers transfers to your sleeve. You shift her weight until it settles across your back, arms hooked under your own, her feet barely grazing the floor. Manageable. Not comfortable, but manageable.\n\nKon is already at the arch. It stood the moment you knelt, and now it waits in the pale mouth of the doorway, coat catching the weak morning light, tail low and steady. Not hurrying you. Just ready.\n\nYou look back once. Ossian hasn't moved — hands folded, eyes open, already calculating something else. Araveth's finger traces the same chalk loop it has traced for eleven days. The drifting Cogitants continue their slow arcs at the hall's edges, orbiting inward, orbiting inward. You don't say goodbye. There's no one here who would register it.\n\nThen you step through the arch into the mist, the Cogitant's weight warm and still against your back, the junction cairn somewhere ahead, the dry-stone wall beyond that, and Waymarker eleven kilometers northeast. The path is not complex. You move with intent."
+      },
+      {
+        "player": "Use Total Focus to push through the weight and the cold and hold a clear head for whatever Waymarker looks like when you arrive",
+        "summary": "Saehara pushes northeast through the mist — the weight tells, focus won't hold, the cairn still ahead.",
+        "narration": "The path is longer in the body than it was in Ossian's arithmetic.\n\nThree hours at pace, he said. You have been walking for what feels like two, and the junction cairn still hasn't come. The fallen Cogitant's weight has settled into your shoulders and lower back the way a stone settles into mud — not sudden, but total. You try to draw your focus down to something clean and tight: the next step, the cairn, Waymarker. Total Focus is a skill you trust. But the lattice here is thin, the morning cold is pressing in at your collar, and fifty-one kilograms does not negotiate with concentration. What you find instead of clarity is the particular dull ache of a mind that has been asked to be sharp while the body is busy complaining. The calculation that felt simple in the entrance hall — three hours, food, Lenten, reopen the line — has started to blur at the edges. You catch yourself thinking about the third terrace. About Ossian's hands, folded and still. About whether the dragging sound was someone alive or something settling.\n\nKon stops on the path ahead. Turns back. Looks at you with those too-aware eyes, and then sits — not in warning, just in witness. It does not rush you. It has been pacing ahead at a measured distance all morning, checking back like something that knows the difference between a person walking and a person grinding themselves down. The mist is thinning but the air is still cold, and the Cogitant's head is heavy against the side of your neck, her lips moving against your jaw in that silent, ceaseless counting.\n\nYou are not broken. You are tired and cold and carrying someone who has forgotten she has a body, and your focus slipped before it could lock. The cairn will come. But it will come at the pace of a man who is working, not a man who has mastered the work."
       }
     ],
     "lastTurn": {
-      "narration": "You kneel beside her and work your arms under her shoulders. She weighs what Ossian said she would — fifty-one kilograms of someone who forgot to eat — and her head lolls against your neck with a faint, wet exhale, lips still moving. The chalk on her fingers transfers to your sleeve. You shift her weight until it settles across your back, arms hooked under your own, her feet barely grazing the floor. Manageable. Not comfortable, but manageable.\n\nKon is already at the arch. It stood the moment you knelt, and now it waits in the pale mouth of the doorway, coat catching the weak morning light, tail low and steady. Not hurrying you. Just ready.\n\nYou look back once. Ossian hasn't moved — hands folded, eyes open, already calculating something else. Araveth's finger traces the same chalk loop it has traced for eleven days. The drifting Cogitants continue their slow arcs at the hall's edges, orbiting inward, orbiting inward. You don't say goodbye. There's no one here who would register it.\n\nThen you step through the arch into the mist, the Cogitant's weight warm and still against your back, the junction cairn somewhere ahead, the dry-stone wall beyond that, and Waymarker eleven kilometers northeast. The path is not complex. You move with intent.",
-      "sceneSummary": "Saehara lifts the fallen Cogitant onto his back and walks out of the Cogitarium into the morning mist — northeast toward Waymarker.",
+      "narration": "The path is longer in the body than it was in Ossian's arithmetic.\n\nThree hours at pace, he said. You have been walking for what feels like two, and the junction cairn still hasn't come. The fallen Cogitant's weight has settled into your shoulders and lower back the way a stone settles into mud — not sudden, but total. You try to draw your focus down to something clean and tight: the next step, the cairn, Waymarker. Total Focus is a skill you trust. But the lattice here is thin, the morning cold is pressing in at your collar, and fifty-one kilograms does not negotiate with concentration. What you find instead of clarity is the particular dull ache of a mind that has been asked to be sharp while the body is busy complaining. The calculation that felt simple in the entrance hall — three hours, food, Lenten, reopen the line — has started to blur at the edges. You catch yourself thinking about the third terrace. About Ossian's hands, folded and still. About whether the dragging sound was someone alive or something settling.\n\nKon stops on the path ahead. Turns back. Looks at you with those too-aware eyes, and then sits — not in warning, just in witness. It does not rush you. It has been pacing ahead at a measured distance all morning, checking back like something that knows the difference between a person walking and a person grinding themselves down. The mist is thinning but the air is still cold, and the Cogitant's head is heavy against the side of your neck, her lips moving against your jaw in that silent, ceaseless counting.\n\nYou are not broken. You are tired and cold and carrying someone who has forgotten she has a body, and your focus slipped before it could lock. The cairn will come. But it will come at the pace of a man who is working, not a man who has mastered the work.",
+      "sceneSummary": "Saehara pushes northeast through the mist — the weight tells, focus won't hold, the cairn still ahead.",
       "choices": [
         {
-          "label": "Set a hard pace — you have three hours and a body on your back; burn the distance while the morning is still cool",
+          "label": "Walk through it — don't stop, don't adjust, just put one foot in front of the other until the cairn comes up",
           "attribute": "physical",
           "subAttribute": "strength",
           "difficulty": 15,
           "intentTags": [
-            "push",
             "endure",
             "careful"
           ],
           "trivial": false
         },
         {
-          "label": "Walk steady and watch the path — three hours is long enough that a wrong turn costs more than rushing saves",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Set her down for five minutes — let your back recover, give her another pull from the Waterskin, and start moving again",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "scout"
+            "help",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Talk to her as you walk — not expecting an answer, but her lips are still moving and you want to know if anything surfaces",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Trust Kon — follow wherever it moves, let it navigate while you keep your head down and your legs moving",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "careful",
             "help"
           ],
           "trivial": true
         },
         {
-          "label": "Use Total Focus to push through the weight and the cold and hold a clear head for whatever Waymarker looks like when you arrive",
+          "label": "Scan the path ahead — use Read the Fight to read the landscape for anything wrong before you reach the cairn: ambush, a fall, anything that could cost you time",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "careful",
-            "plan"
+            "scout",
+            "careful"
           ],
-          "abilityId": "total_focus",
-          "energyCost": 4,
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
           "trivial": false
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -4
       },
       "scene": {
-        "setting": "The footpath northeast of the Cogitarium — pale-stone tower shrinking behind; morning mist low on the ground, early-spring air cold and still. Saehara carries the fallen Cogitant on his back; the junction cairn is somewhere ahead.",
+        "setting": "The footpath northeast of the Cogitarium — mist thinning but air cold and still, open scrubland on both sides, pale-stone tower well behind. Junction cairn not yet visible ahead.",
         "npcsPresent": [
           {
             "name": "Fallen Cogitant",
-            "state": "Slung across Saehara's back — semiconscious, lips moving in silent calculation, head resting against his neck"
+            "state": "Slung across Saehara's back — semiconscious, lips moving soundlessly, weight settled and heavy"
           },
           {
             "name": "Kon",
-            "state": "Pacing ahead on the path, coat warm-red in the mist, tail low and steady — leading without hurrying"
+            "state": "Sitting on the path ahead, turned back to watch Saehara — patient, unhurried, eyes present"
           }
         ],
         "objects": [
           "Traveler's Pack — riding over the fallen Cogitant's weight on Saehara's back",
-          "Waterskin — secured but accessible",
+          "Waterskin — secured, accessible",
           "Katana at Saehara's waist",
-          "Junction cairn — somewhere ahead on the path, not yet visible",
+          "Junction cairn — ahead on the path, not yet in sight",
           "Dry-stone wall — further northeast, the leg to Waymarker"
         ],
         "threads": [
-          "Fallen Cogitant: two days, maybe three — needs food at Waymarker, not only shelter",
-          "Brenn the runner: stopped coming nineteen days ago — reason unknown, may be sick, gone, or the arrangement was poisoned by the evacuation proposal",
-          "Lenten the builder: the name to use at Waymarker if there is doubt",
-          "Third terrace: Cogitant unseen four days, dragging sound heard — unresolved, left behind"
+          "Fallen Cogitant: two days, maybe three — needs food at Waymarker before shelter",
+          "Junction cairn: not yet reached — progress slow under the weight",
+          "Brenn the runner: stopped coming nineteen days ago — reason unknown at Waymarker",
+          "Lenten the builder: the name to use if there is doubt at Waymarker",
+          "Third terrace: Cogitant unseen four days, dragging sound — left behind, unresolved"
         ]
       },
       "npcUpdates": [
@@ -276,82 +281,48 @@
           "op": "update",
           "npcId": "fallen-cogitant",
           "name": "Fallen Cogitant",
-          "note": "Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker",
+          "note": "Weight has settled into Saehara's back — manageable but taxing; lips still moving against his jaw in silent count",
           "status": "injured",
-          "statusNote": "Carried on Saehara's back, northeast path toward Waymarker — semiconscious, lips still moving, severely dehydrated, no food yet"
-        },
-        {
-          "op": "update",
-          "npcId": "ossian",
-          "name": "Ossian",
-          "note": "Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating",
-          "status": "active",
-          "statusNote": "Remaining in the Cogitarium entrance hall — eight to twelve days before irreversible decline"
+          "statusNote": "Carried on Saehara's back, northeast path toward Waymarker — semiconscious, severely dehydrated, two days without food"
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Saehara has taken the fallen Cogitant from the Cogitarium and is carrying her northeast toward Waymarker — she cannot be left behind; her two-to-three day window is now the mission's pace.",
-          "subjectId": "fallen-cogitant"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker.",
-          "flag": {
-            "fallen_cogitant_removed": true,
-            "saehara_departed": true
-          }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "cogitarium-supply-line",
-          "note": "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead."
-        }
-      ],
-      "moveTo": {
-        "location": "waymarker",
-        "why": "Saehara walked out of the Cogitarium's arch and is on the northeast footpath, junction cairn ahead — travel in progress"
-      },
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "First moments of the walk — barely clear of the arch; no meaningful time elapsed yet"
+        "hoursPassed": 1,
+        "why": "An hour of walking northeast under the weight — slower than Ossian's estimate, cairn not yet reached"
       }
     },
     "sceneState": {
-      "setting": "The footpath northeast of the Cogitarium — pale-stone tower shrinking behind; morning mist low on the ground, early-spring air cold and still. Saehara carries the fallen Cogitant on his back; the junction cairn is somewhere ahead.",
+      "setting": "The footpath northeast of the Cogitarium — mist thinning but air cold and still, open scrubland on both sides, pale-stone tower well behind. Junction cairn not yet visible ahead.",
       "npcsPresent": [
         {
           "name": "Fallen Cogitant",
-          "state": "Slung across Saehara's back — semiconscious, lips moving in silent calculation, head resting against his neck"
+          "state": "Slung across Saehara's back — semiconscious, lips moving soundlessly, weight settled and heavy"
         },
         {
           "name": "Kon",
-          "state": "Pacing ahead on the path, coat warm-red in the mist, tail low and steady — leading without hurrying"
+          "state": "Sitting on the path ahead, turned back to watch Saehara — patient, unhurried, eyes present"
         }
       ],
       "objects": [
         "Traveler's Pack — riding over the fallen Cogitant's weight on Saehara's back",
-        "Waterskin — secured but accessible",
+        "Waterskin — secured, accessible",
         "Katana at Saehara's waist",
-        "Junction cairn — somewhere ahead on the path, not yet visible",
+        "Junction cairn — ahead on the path, not yet in sight",
         "Dry-stone wall — further northeast, the leg to Waymarker"
       ],
       "threads": [
-        "Fallen Cogitant: two days, maybe three — needs food at Waymarker, not only shelter",
-        "Brenn the runner: stopped coming nineteen days ago — reason unknown, may be sick, gone, or the arrangement was poisoned by the evacuation proposal",
-        "Lenten the builder: the name to use at Waymarker if there is doubt",
-        "Third terrace: Cogitant unseen four days, dragging sound heard — unresolved, left behind"
+        "Fallen Cogitant: two days, maybe three — needs food at Waymarker before shelter",
+        "Junction cairn: not yet reached — progress slow under the weight",
+        "Brenn the runner: stopped coming nineteen days ago — reason unknown at Waymarker",
+        "Lenten the builder: the name to use if there is doubt at Waymarker",
+        "Third terrace: Cogitant unseen four days, dragging sound — left behind, unresolved"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -490,7 +461,8 @@
         "[d1] Unattended now — waterskin on her chest, lips still moving. Saehara has risen and stands at the stair.",
         "[d1] Unattended. Waterskin on her chest. Lips still moving. No food. No one watching her.",
         "[d1] Kon has moved to sit beside her, warming the air. Ossian confirmed transport is calculably favorable — fifty-one kilograms, thermoregulation compromised, but food at Waymarker chan",
-        "[d1] Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker"
+        "[d1] Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker",
+        "[d1] Weight has settled into Saehara's back — manageable but taxing; lips still moving against his jaw in silent count"
       ],
       "knownFacts": [
         "Chalk ground into both hands — she was working before she fell",
@@ -504,7 +476,7 @@
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "Carried on Saehara's back, northeast path toward Waymarker — semiconscious, lips still moving, severely dehydrated, no food yet",
+      "statusNote": "Carried on Saehara's back, northeast path toward Waymarker — semiconscious, severely dehydrated, two days without food",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -850,19 +822,19 @@
     }
   },
   "tendencies": {
-    "strategic": 18.44098271233016,
-    "social": 7.611502200415668,
-    "cerebral": 8.540778478055692,
-    "generous": 7.655999484901216,
-    "cautious": 7.582582106834215,
-    "risky": 0.9511101304657719
+    "strategic": 19.34877779876851,
+    "social": 7.57344468941359,
+    "cerebral": 8.498074585665414,
+    "generous": 7.61771948747671,
+    "cautious": 8.544669196300044,
+    "risky": 0.946354579813443
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 24,
+  "actionCount": 25,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -875,8 +847,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784173922577,
-  "rev": 49,
+  "updatedAt": 1784173968587,
+  "rev": 50,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -884,7 +856,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 24
+    "somatic_reaches": 25
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -906,7 +878,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "total_focus": 3,
+      "total_focus": 4,
       "read_the_fight": 3
     },
     "coActivations": {

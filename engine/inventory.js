@@ -139,6 +139,26 @@ export function displayName(item) {
   return item.customName ? `${item.customName}` : item.name;
 }
 
+// SNG-114: a non-consumable's "Use in scene" deserves a real verb, not the canned "I use my X here".
+// An item may declare authored `uses: [{label, prompt}]`; otherwise these kind-defaults give common items
+// meaningful options with no hand-authoring. `{item}` is substituted with the display name.
+const ITEM_USE_DEFAULTS = {
+  weapon: [{ label: "Ready it", prompt: "I ready my {item} and make my intent plain" }, { label: "Strike with it", prompt: "I strike with my {item}" }],
+  tool: [{ label: "Put it to work", prompt: "I put my {item} to work on what is in front of me" }, { label: "Show it to someone", prompt: "I show them my {item} and what it is for" }],
+  quest: [{ label: "Present it", prompt: "I present my {item}" }, { label: "Examine it closely", prompt: "I examine my {item} closely for anything I missed" }],
+  tome: [{ label: "Read from it", prompt: "I read from my {item}" }, { label: "Show a passage", prompt: "I show them a passage from my {item}" }],
+  misc: [{ label: "Put it to use", prompt: "I find a use for my {item} here" }]
+};
+
+/** SNG-114: the meaningful "use in scene" options for an item — authored `item.uses[]` wins; else the
+ *  kind-defaults above (Q3). Pure; `{item}` → the display name. Empty array only for a kind with no default. */
+export function itemUses(item = {}, displayNm = null) {
+  const nm = displayNm || item.customName || item.name || "item";
+  const sub = s => String(s || "").replace(/\{item\}/g, nm);
+  if (Array.isArray(item.uses) && item.uses.length) return item.uses.slice(0, 5).map(u => ({ label: String(u.label || "").slice(0, 40), prompt: sub(u.prompt || u.label).slice(0, 160) }));
+  return (ITEM_USE_DEFAULTS[item.kind] || ITEM_USE_DEFAULTS.misc).map(d => ({ label: d.label, prompt: sub(d.prompt) }));
+}
+
 export function removeItem(character, name, qty = 1) {
   const idx = character.inventory.findIndex(m => m.name.toLowerCase() === String(name).toLowerCase() || (m.customName || "").toLowerCase() === String(name).toLowerCase());
   if (idx === -1) return false;

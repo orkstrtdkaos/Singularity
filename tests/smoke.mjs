@@ -7,7 +7,7 @@ import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
-import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
+import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
@@ -2974,6 +2974,21 @@ await (async () => {
   check("SNG-083: a met person renders SOLID (discovered=true)", ov2.some(e => e.kind === "person" && e.label === "Fendt" && e.discovered === true));
   check("SNG-083: nothing to show → an empty list (the UI shows the empty state, never a silent no-op)", knownOverlay({ npcRegistry: {}, codex: { topics: {} }, quests: [] }, positions, content).length === 0);
 })();
+
+// --- SNG-114: "Use in scene" gets meaningful, intentful options (authored uses[] or kind-defaults) ---
+{
+  // authored uses[] win, and {item} is substituted with the display name.
+  const whet = { name: "River Whetstone", kind: "tool", uses: [{ label: "Sharpen a blade", prompt: "I sharpen my blade on the {item}" }, { label: "Read the rune-seam", prompt: "I press the {item} to the rune-seam and listen" }] };
+  const wUses = itemUses(whet);
+  check("SNG-114: authored item.uses[] are offered, with {item} substituted", wUses.length === 2 && wUses[0].label === "Sharpen a blade" && wUses[1].prompt.includes("River Whetstone"));
+  // a custom-named item substitutes its story-name.
+  check("SNG-114: {item} substitutes the player's custom name when set", itemUses({ ...whet, customName: "Old Faithful" })[1].prompt.includes("Old Faithful"));
+  // no authored uses → kind-defaults give a real verb (no hand-authoring needed).
+  const blade = itemUses({ name: "Iron Sword", kind: "weapon" });
+  check("SNG-114: a weapon with no authored uses gets kind-default verbs (ready / strike)", blade.length >= 2 && blade.some(u => /strike/i.test(u.prompt)) && blade[0].prompt.includes("Iron Sword"));
+  // an unknown kind falls to the misc default (never empty → the intent step always has an option).
+  check("SNG-114: an unknown kind falls back to a misc default (the intent step is never empty)", itemUses({ name: "Odd Thing", kind: "whatsit" }).length >= 1);
+}
 
 // --- SNG-116: the difficulty preview must include the substrate penalty (preview == resolve) ---
 {

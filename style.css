@@ -194,10 +194,12 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .companion-name { color: var(--accent2); font-weight: 600; }
 .companion .cost { display: block; color: var(--ink-dim); font-size: 11px; margin: 2px 0 4px; }
 .companion-part { font-size: 11px; padding: 3px 8px; }
-.item { margin-bottom: 4px; }
-.item-name { background: none; border: none; color: var(--ink); font-size: 13px; padding: 2px 0; text-align: left; width: 100%; }
+.item, .item-card { margin-bottom: 4px; } /* SNG-114: .item-card is the one shared card, used in both surfaces */
+.item-name { background: none; border: none; color: var(--ink); font-size: 13px; padding: 2px 0; text-align: left; width: 100%; cursor: pointer; }
 .item-name:hover { color: var(--accent); }
-.item.open .item-name { color: var(--accent); }
+.item.open .item-name, .item-card.open .item-name { color: var(--accent); }
+.use-list { margin: 6px 0; }
+.use-opt { font-size: 13px; }
 .item-detail { background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin: 4px 0 8px; }
 .item-img { width: 100%; border-radius: 4px; margin-bottom: 6px; }
 .item-desc { font-size: 12px; color: var(--ink); font-style: italic; margin-bottom: 4px; }

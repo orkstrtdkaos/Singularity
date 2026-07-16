@@ -13,7 +13,7 @@ import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
-import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
+import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
@@ -42,7 +42,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.77";
+const APP_VERSION = "1.8.78";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4070,24 +4070,11 @@ function renderInventoryScreen(openName = null) {
     ${kinds.filter(k => (character.inventory || []).some(i => i.kind === k)).map(k => `
       <div class="cs-block"><h3 class="codex-title" style="font-size:14px; text-transform:capitalize">${k}s</h3>
       ${(character.inventory || []).filter(i => i.kind === k).map(it => `
-        <div class="inv-row">
-          <button class="item-name" data-inv="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
-          ${openName === it.name ? `<div class="item-detail">
-            <div class="item-desc">${esc(it.description || it.kind)}</div>
-            ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
-            ${it.effects ? `<div class="item-tags">${Object.entries(it.effects).map(([k2, v]) => `${k2} ${v > 0 ? "+" : ""}${v}`).join(", ")}</div>` : ""}
-            <div class="item-actions">
-              <button class="opt" data-invuse="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
-              <button class="opt" data-invname="${esc(it.name)}">Name it</button>
-              <button class="opt" data-invdrop="${esc(it.name)}">Drop</button>
-            </div></div>` : ""}
-        </div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
+        <div class="inv-row">${itemCard(it, { open: openName === it.name, toggleAttr: "data-inv" })}</div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
     <button class="btn secondary" id="inv-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const b of app.querySelectorAll("[data-inv]")) b.onclick = () => renderInventoryScreen(openName === b.dataset.inv ? null : b.dataset.inv);
-  for (const b of app.querySelectorAll("[data-invuse]")) b.onclick = () => { const n = b.dataset.invuse; renderPlay(character.activeScene?.lastTurn || null, {}); useItem(n); };
-  for (const b of app.querySelectorAll("[data-invdrop]")) b.onclick = () => { if (confirm("Drop " + b.dataset.invdrop + "?")) { removeItem(character, b.dataset.invdrop, 999); saveCharacter(character); renderInventoryScreen(); } };
-  for (const b of app.querySelectorAll("[data-invname]")) b.onclick = () => { const nn = prompt("Name this item:"); if (nn !== null && nameItem(character, b.dataset.invname, nn)) { saveCharacter(character); renderInventoryScreen(b.dataset.invname); } };
+  bindItemCardHandlers(name => renderInventoryScreen(name ?? openName)); // SNG-114: the ONE shared use/name/drop binding
   document.getElementById("inv-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
@@ -4887,7 +4874,7 @@ async function finishGambit(run) {
 
 function useItem(name) {
   if (busy) return;
-  const item = character.inventory.find(i => i.name === name);
+  const item = character.inventory.find(i => i.name === name || i.customName === name);
   if (!item) return;
   if (item.consumable) {
     const fx = consumeItem(character, name);
@@ -4897,9 +4884,60 @@ function useItem(name) {
     if (fx?.energy) parts.push(`${fx.energy > 0 ? "+" : ""}${fx.energy} energy`);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `You use the ${name}${parts.length ? ` (${parts.join(", ")})` : ""}.` });
   } else {
-    // non-consumable: using it IS a scene action — route through the normal loop
-    onFreeform(`I use my ${name} here`);
+    openUseIntent(item); // SNG-114: a non-consumable's use is a scene action WITH intent, not a canned sentence
   }
+}
+
+/** SNG-114: THE shared item card — a superset (image when open + effects + bonusTags + use/name/drop),
+ *  rendered by BOTH the inventory popup and the play sidebar so the two can never drift again. The only
+ *  per-surface difference is which attribute toggles it open (each surface owns its own open-state var). */
+function itemCard(it, { open = false, toggleAttr = "data-item-toggle" } = {}) {
+  const img = open && imagesEnabled() ? itemImage(it, { ratingLevel: viewerRatingLevel() }) : null;
+  return `<div class="item-card ${open ? "open" : ""}">
+    <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
+    ${open ? `<div class="item-detail">
+      ${img ? `<img class="item-img" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
+      <div class="item-desc">${esc(it.description || it.kind)}</div>
+      ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
+      ${it.effects ? `<div class="item-tags">${Object.entries(it.effects).map(([k, v]) => `${esc(k)} ${v > 0 ? "+" : ""}${esc(String(v))}`).join(", ")}</div>` : ""}
+      <div class="item-actions">
+        <button class="opt" data-item-use="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
+        <button class="opt" data-item-name="${esc(it.name)}">Name it</button>
+        <button class="opt" data-item-drop="${esc(it.name)}">Drop</button>
+      </div></div>` : ""}
+  </div>`;
+}
+
+/** SNG-114: bind the shared card's use/name/drop ONCE — both surfaces call this, so "Use in scene" does
+ *  exactly one thing regardless of where it was tapped. `afterChange(name?)` re-renders the calling surface. */
+function bindItemCardHandlers(afterChange) {
+  for (const b of app.querySelectorAll("[data-item-use]")) b.onclick = () => useItem(b.dataset.itemUse);
+  for (const b of app.querySelectorAll("[data-item-drop]")) b.onclick = () => { const n = b.dataset.itemDrop; if (confirm("Drop " + n + "?")) { removeItem(character, n, 999); saveCharacter(character); afterChange(); } };
+  for (const b of app.querySelectorAll("[data-item-name]")) b.onclick = () => { const nn = prompt("Name this item:"); if (nn !== null && nameItem(character, b.dataset.itemName, nn)) { saveCharacter(character); afterChange(b.dataset.itemName); } };
+}
+
+/** SNG-114: the intent step for using a non-consumable — offer the item's meaningful uses (authored or
+ *  kind-default) + a free "how?" field. A storied item gets a real verb; the canned prompt is the fallback. */
+function openUseIntent(item) {
+  const nm = displayName(item);
+  const uses = itemUses(item, nm);
+  const submit = promptText => onFreeform(promptText);
+  chrome(`<div class="screen" style="max-width:520px">
+    <h2>Use ${esc(nm)}</h2>
+    ${item.description ? `<p class="hint" style="margin-bottom:10px">${esc(item.description)}</p>` : ""}
+    ${uses.length ? `<div class="use-list">${uses.map((u, i) => `<button class="btn secondary use-opt" data-use-idx="${i}" style="display:block; width:100%; text-align:left; margin:4px 0">${esc(u.label)}</button>`).join("")}</div>` : ""}
+    <div class="field" style="margin-top:10px"><label>…or say how you use it</label>
+      <input id="use-how" type="text" placeholder="e.g. I press the whetstone to the rune-seam and listen" style="width:100%"></div>
+    <div style="display:flex; gap:8px; margin-top:12px">
+      <button class="btn" id="use-go">Use it</button>
+      <button class="btn secondary" id="use-cancel">Back</button>
+    </div>
+  </div>`);
+  for (const b of app.querySelectorAll("[data-use-idx]")) b.onclick = () => submit(uses[Number(b.dataset.useIdx)].prompt);
+  const how = document.getElementById("use-how");
+  how.onkeydown = e => { if (e.key === "Enter") document.getElementById("use-go").click(); };
+  document.getElementById("use-go").onclick = () => { const h = how.value.trim(); submit(h ? `I use my ${nm} — ${h}` : `I use my ${nm} here`); };
+  document.getElementById("use-cancel").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 // ---------- play rendering ----------
@@ -5045,22 +5083,7 @@ function renderPlay(turn, opts = {}) {
       ${!(character.companions || []).length ? "<div class='insight'>you travel alone — someone may yet fall in beside you</div>" : ""}
     </section>
     <section><h3>Items</h3>
-      ${(character.inventory || []).map(it => {
-        const open = examinedItem === it.name;
-        const img = open ? itemImage(it, { ratingLevel: viewerRatingLevel() }) : null;
-        return `<div class="item ${open ? "open" : ""}">
-          <button class="item-name" data-examine="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
-          ${open ? `<div class="item-detail">
-            ${img ? `<img class="item-img" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy">` : ""}
-            <div class="item-desc">${esc(it.description || it.kind)}</div>
-            ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
-            <div class="item-actions">
-              <button class="opt" data-use="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
-              <button class="opt" data-nameit="${esc(it.name)}">Name it</button>
-              <button class="opt" data-drop="${esc(it.name)}">Drop</button>
-            </div></div>` : ""}
-        </div>`;
-      }).join("") || "<div class='insight'>empty-handed</div>"}
+      ${(character.inventory || []).map(it => itemCard(it, { open: examinedItem === it.name, toggleAttr: "data-examine" })).join("") || "<div class='insight'>empty-handed</div>"}
     </section>
     <section><h3>Standing here</h3>
       ${rep ? `<span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span>` : `<span class="insight">no community claims this place</span>`}
@@ -5274,7 +5297,8 @@ function renderPlay(turn, opts = {}) {
     examinedItem = examinedItem === btn.dataset.examine ? null : btn.dataset.examine;
     renderPlay(character.activeScene?.lastTurn || null, {});
   };
-  for (const btn of app.querySelectorAll("[data-use]")) btn.onclick = () => useItem(btn.dataset.use);
+  // SNG-114: the play sidebar's item use/name/drop go through the ONE shared binding (parity with the popup).
+  bindItemCardHandlers(() => renderPlay(character.activeScene?.lastTurn || null, {}));
   for (const b of app.querySelectorAll("[data-setname]")) b.onclick = (e) => {
     e.stopPropagation();
     const nn = prompt("What is their name?");
@@ -5285,17 +5309,7 @@ function renderPlay(turn, opts = {}) {
     if (d.open) { npcGroupsOpen.add(k); npcGroupsClosed.delete(k); }
     else { npcGroupsOpen.delete(k); npcGroupsClosed.add(k); }
   };
-  for (const btn of app.querySelectorAll("[data-nameit]")) btn.onclick = () => {
-    const nn = prompt("Name this item (their story-name; the original stays as subtitle):");
-    if (nn !== null && nameItem(character, btn.dataset.nameit, nn)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
-  };
-  for (const btn of app.querySelectorAll("[data-drop]")) btn.onclick = () => {
-    if (!confirm(`Drop ${btn.dataset.drop}?`)) return;
-    removeItem(character, btn.dataset.drop, 999);
-    examinedItem = null;
-    saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `You leave the ${btn.dataset.drop} behind.` });
-  };
+  // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();

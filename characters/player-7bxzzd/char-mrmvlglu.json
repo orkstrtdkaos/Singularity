@@ -242,127 +242,165 @@
         "player": "Watch Kon as you walk — the fox knows when the world goes thin; let it tell you if the road north carries anything worth knowing before you arrive",
         "summary": "Saehara watches Kon on the return march — the fox reads the road as clear; the dry-stone wall hazard is navigated without incident.",
         "narration": "The road northeast unrolls under your boots in long gold light — the afternoon tilting toward evening without hurry, the pale stone of the Cogitarium not yet visible through the scrub. Kon runs ahead by twenty paces, sometimes thirty, coat deep red against the bleached gravel and winter-dry grass. You watch it the way you'd watch water for a current: not staring, just keeping it in the corner of your eye.\n\nFor the first kilometer the fox is simply a fox-shaped thing moving efficiently. It checks the wind, noses at a tuft of dry sedge, diverts around a standing stone without breaking rhythm. Normal enough. Then the dry-stone wall rises on your left and Kon angles toward it, then away — and doesn't look back, which is the tell. When the fox wants you to see something it looks back. When it simply adjusts, it's reading the terrain as home.\n\nHalfway along the wall-section you feel the path drop sharply to your right — the hazard Lenten named, a meter of hidden dip where the gravel gives way to loose scree. You step wide without breaking stride, and Kon, ahead of you, has already done the same. The fox knew. It will know the wall-path drop on the return in the dark as well, which is useful information: you won't have to slow for it, just watch where Kon steps.\n\nThe rest of the wall-path gives nothing unusual. Kon doesn't go still. The coat doesn't warm. The scrub on either side holds ordinary late-afternoon sound — a single bird, the creak of wind in dead stems — and that absence of strangeness is its own answer. Whatever the Cogitarium holds, the road north is clean. You bank that fact and keep walking, the Cogitarium's pale towers just beginning to resolve against the sky ahead."
+      },
+      {
+        "player": "Call to Ossian as you enter — announce you've returned and the supply line is reopening tonight",
+        "summary": "Saehara returns to the Cogitarium entrance hall — Ossian surfaces to ask about the fallen Cogitant; Kon orients toward the stairwell.",
+        "narration": "The arch is exactly where you left it — pale stone, chalk-dust smell, the particular cold of a building that forgets to heat itself because no one inside has remembered to be cold. You step through into the entrance hall and the sound of your boots changes register: harder, flatter, the echo of a space that is mostly emptiness and calculation.\n\n\"Ossian.\" You don't shout. The hall carries well enough that you don't need to. \"The supply line reopens tonight. Lenten is dispatching a runner before evening.\"\n\nAraveth is still at the wall. You can see that immediately — the same rigid posture, the same finger moving through the same chalk notation, the same total absence of reaction to your arrival or your voice. Eleven days at that wall and your presence registers exactly as much as the ambient temperature change of a door opening: nothing. The watershed model spreads behind them, tributaries and particulate counts and flow rates marching in tight columns across the stone.\n\nOssian is cross-legged where you left them. The same spot. The same folded hands. They surface from whatever internal calculation occupied the hours of your absence the way a tide goes slack — not startled, simply returning from somewhere else. Their eyes find you, and there is the same dense quality to their attention: a mind that does not skim.\n\n\"The woman?\" they ask. First question. Not the supply line — the timeline.\n\nKon slips past your ankle and into the hall, coat settling from the road's cold, already oriented toward the stairwell in the far corner. The fox doesn't stop."
       }
     ],
     "lastTurn": {
-      "narration": "The road northeast unrolls under your boots in long gold light — the afternoon tilting toward evening without hurry, the pale stone of the Cogitarium not yet visible through the scrub. Kon runs ahead by twenty paces, sometimes thirty, coat deep red against the bleached gravel and winter-dry grass. You watch it the way you'd watch water for a current: not staring, just keeping it in the corner of your eye.\n\nFor the first kilometer the fox is simply a fox-shaped thing moving efficiently. It checks the wind, noses at a tuft of dry sedge, diverts around a standing stone without breaking rhythm. Normal enough. Then the dry-stone wall rises on your left and Kon angles toward it, then away — and doesn't look back, which is the tell. When the fox wants you to see something it looks back. When it simply adjusts, it's reading the terrain as home.\n\nHalfway along the wall-section you feel the path drop sharply to your right — the hazard Lenten named, a meter of hidden dip where the gravel gives way to loose scree. You step wide without breaking stride, and Kon, ahead of you, has already done the same. The fox knew. It will know the wall-path drop on the return in the dark as well, which is useful information: you won't have to slow for it, just watch where Kon steps.\n\nThe rest of the wall-path gives nothing unusual. Kon doesn't go still. The coat doesn't warm. The scrub on either side holds ordinary late-afternoon sound — a single bird, the creak of wind in dead stems — and that absence of strangeness is its own answer. Whatever the Cogitarium holds, the road north is clean. You bank that fact and keep walking, the Cogitarium's pale towers just beginning to resolve against the sky ahead.",
-      "sceneSummary": "Saehara watches Kon on the return march — the fox reads the road as clear; the dry-stone wall hazard is navigated without incident.",
+      "narration": "The arch is exactly where you left it — pale stone, chalk-dust smell, the particular cold of a building that forgets to heat itself because no one inside has remembered to be cold. You step through into the entrance hall and the sound of your boots changes register: harder, flatter, the echo of a space that is mostly emptiness and calculation.\n\n\"Ossian.\" You don't shout. The hall carries well enough that you don't need to. \"The supply line reopens tonight. Lenten is dispatching a runner before evening.\"\n\nAraveth is still at the wall. You can see that immediately — the same rigid posture, the same finger moving through the same chalk notation, the same total absence of reaction to your arrival or your voice. Eleven days at that wall and your presence registers exactly as much as the ambient temperature change of a door opening: nothing. The watershed model spreads behind them, tributaries and particulate counts and flow rates marching in tight columns across the stone.\n\nOssian is cross-legged where you left them. The same spot. The same folded hands. They surface from whatever internal calculation occupied the hours of your absence the way a tide goes slack — not startled, simply returning from somewhere else. Their eyes find you, and there is the same dense quality to their attention: a mind that does not skim.\n\n\"The woman?\" they ask. First question. Not the supply line — the timeline.\n\nKon slips past your ankle and into the hall, coat settling from the road's cold, already oriented toward the stairwell in the far corner. The fox doesn't stop.",
+      "sceneSummary": "Saehara returns to the Cogitarium entrance hall — Ossian surfaces to ask about the fallen Cogitant; Kon orients toward the stairwell.",
       "choices": [
         {
-          "label": "Keep pace — arrive at the Cogitarium entrance and go straight to the third-terrace stairwell",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "move",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Call to Ossian as you enter — announce you've returned and the supply line is reopening tonight",
+          "label": "Report the Cogitant's condition and Lenten's care, then ask about the third terrace",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "inform",
-            "connect"
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Pause in the entrance hall and use Read the Fight before climbing — get a sense of what the third terrace holds before you're in it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful",
-            "scout"
-          ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Go straight up — no pause, no announcement; if the third-terrace Cogitant is in trouble, every minute spent talking is a minute spent wrong",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Report and move immediately — ask Ossian to talk while you walk to the stairs",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "move",
-            "risky"
+            "inform",
+            "urgent"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Ossian what they've heard from above in your absence",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "gather-information"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Dry-stone wall-path northeast of Waymarker, late afternoon — gold light flattening, Cogitarium towers resolving pale against the sky ahead. The wall hazard passed; Waymarker behind, arrival imminent.",
+        "setting": "Cogitarium entrance hall — chalk-cold interior, pale stone, late-afternoon light entering from the arch. Araveth at the notation wall, Ossian cross-legged on the floor in their usual position. Kon has moved inside and is already facing the far-corner stairwell.",
         "npcsPresent": [
           {
+            "name": "Ossian",
+            "state": "Cross-legged, hands folded, eyes on Saehara — surfaced from deep calculation, waiting for the answer to 'the woman?'"
+          },
+          {
+            "name": "Araveth",
+            "state": "Rigid at the chalk watershed notation wall, finger moving without pause — no reaction to Saehara's arrival or voice"
+          },
+          {
             "name": "Kon",
-            "state": "Running twenty to thirty paces ahead on the gravel path, coat banked-coal red in the long light — coat calm, no warmth-flare, road read as clean"
+            "state": "Slipped inside past Saehara's ankle, coat settling, already oriented toward the stairwell in the far corner"
           }
         ],
         "objects": [
+          "Chalk watershed notation wall — full-scale Echo River model, Araveth's ongoing work",
           "Traveler's Pack — on Saehara's shoulders",
           "Waterskin — secured",
           "Katana at Saehara's waist",
-          "Dry-stone wall — along the left of the path, hazard drop to the right now behind them",
-          "Cogitarium towers — pale stone, visible ahead through the scrub"
+          "Stairwell — far corner, leading to upper terraces"
         ],
         "threads": [
-          "Third-terrace Cogitant: four days unseen, dragging sound — Saehara arriving shortly",
-          "Supply line: runner dispatching from Waymarker before evening — confirmed but not yet seen",
-          "Fallen Cogitant's two-day window still running under Lenten's care",
-          "Arrival in early dark: pace and light narrowing together"
+          "Ossian has asked 'The woman?' — waiting for the fallen Cogitant's status update",
+          "Third-terrace Cogitant: four days unseen, dragging sound, now Saehara has returned to investigate",
+          "Kon is already oriented toward the stairwell — not waiting"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ossian",
+          "name": "Ossian",
+          "note": "Surfaced from calculation to acknowledge Saehara's return — first question was the fallen Cogitant's status, not the supply line",
+          "learned": [
+            "Ossian's first priority on Saehara's return is the fallen woman's timeline, not the logistics"
+          ],
+          "statusNote": "Cross-legged in entrance hall, surfaced to receive Saehara's report — waiting for update on the fallen Cogitant"
+        },
+        {
+          "op": "update",
+          "npcId": "araveth",
+          "name": "Araveth",
+          "note": "Still at the wall — no reaction to Saehara's return, voice, or the supply-line announcement",
+          "statusNote": "Still at the chalk watershed notation wall in the entrance hall — no external awareness registered"
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "cogitarium-supply-line",
+          "note": "Saehara has returned to the Cogitarium and announced the supply line's resumption to Ossian — quest resolution pending runner's actual arrival."
+        }
+      ],
+      "moveTo": {
+        "location": "cogitarium",
+        "why": "Saehara completed the eleven-kilometer return march from Waymarker and stepped through the entrance arch"
+      },
       "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "roughly half the return march elapsed while watching Kon on the road"
+        "hoursPassed": 3,
+        "why": "Three-hour return march from Waymarker to the Cogitarium at pace"
       },
       "codexUpdates": [
         {
-          "topic": "cogitarium",
-          "label": "The Cogitarium",
-          "kind": "place",
+          "topic": "the-cogitariums-calculated-crisis",
+          "label": "The Cogitarium's Calculated Crisis",
+          "kind": "mystery",
           "entityId": "cogitarium",
-          "fact": "The road northeast to the Cogitarium reads clean — Kon registered no Precursor activity or thin-place warnings on the return march. The dry-stone wall hazard is navigable in low light by watching where the fox steps.",
+          "fact": "Saehara has returned to the Cogitarium after the supply-line run. Ossian's first question on return was the fallen Cogitant's status — the body, not the logistics. The third terrace remains uninvestigated.",
           "links": [
+            "cogitarium",
+            "ossian",
+            "third-terrace-collapse",
             "cogitarium-supply-line",
-            "third-terrace-collapse"
+            "lenten"
           ]
         }
       ]
     },
     "sceneState": {
-      "setting": "Dry-stone wall-path northeast of Waymarker, late afternoon — gold light flattening, Cogitarium towers resolving pale against the sky ahead. The wall hazard passed; Waymarker behind, arrival imminent.",
+      "setting": "Cogitarium entrance hall — chalk-cold interior, pale stone, late-afternoon light entering from the arch. Araveth at the notation wall, Ossian cross-legged on the floor in their usual position. Kon has moved inside and is already facing the far-corner stairwell.",
       "npcsPresent": [
         {
+          "name": "Ossian",
+          "state": "Cross-legged, hands folded, eyes on Saehara — surfaced from deep calculation, waiting for the answer to 'the woman?'"
+        },
+        {
+          "name": "Araveth",
+          "state": "Rigid at the chalk watershed notation wall, finger moving without pause — no reaction to Saehara's arrival or voice"
+        },
+        {
           "name": "Kon",
-          "state": "Running twenty to thirty paces ahead on the gravel path, coat banked-coal red in the long light — coat calm, no warmth-f"
+          "state": "Slipped inside past Saehara's ankle, coat settling, already oriented toward the stairwell in the far corner"
         }
       ],
       "objects": [
+        "Chalk watershed notation wall — full-scale Echo River model, Araveth's ongoing w",
         "Traveler's Pack — on Saehara's shoulders",
         "Waterskin — secured",
         "Katana at Saehara's waist",
-        "Dry-stone wall — along the left of the path, hazard drop to the right now behind",
-        "Cogitarium towers — pale stone, visible ahead through the scrub"
+        "Stairwell — far corner, leading to upper terraces"
       ],
       "threads": [
-        "Third-terrace Cogitant: four days unseen, dragging sound — Saehara arriving shortly",
-        "Supply line: runner dispatching from Waymarker before evening — confirmed but not yet seen",
-        "Fallen Cogitant's two-day window still running under Lenten's care",
-        "Arrival in early dark: pace and light narrowing together"
+        "Ossian has asked 'The woman?' — waiting for the fallen Cogitant's status update",
+        "Third-terrace Cogitant: four days unseen, dragging sound, now Saehara has returned to investigate",
+        "Kon is already oriented toward the stairwell — not waiting"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 15,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -382,14 +420,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead.",
         "Junction cairn passed — Waymarker now visible by its smoke, thirty minutes ahead. Lenten and Brenn are the names to use.",
         "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found.",
         "Cogitant safely off Saehara's back and on a workbench. Lenten not yet found — somewhere deeper in the shed.",
         "Cogitant delivered to Waymarker and receiving care. Lenten is present and engaged — now asking for the full situation before any formal arrangement can be discussed.",
         "Full situation delivered to Lenten. Brenn's injury revealed as the cause of the gap — a miscommunication, not abandonment. Lenten can dispatch a runner before evening. Supply line reopening is within reach; formal commitment not yet made.",
         "Lenten has committed to dispatching a runner before evening — the supply line is effectively reopened pending departure. The formal arrangement resumes tonight.",
-        "Saehara has departed Waymarker — Lenten is dispatching the runner before evening. The supply line resumes tonight. Quest effectively resolved pending confirmation."
+        "Saehara has departed Waymarker — Lenten is dispatching the runner before evening. The supply line resumes tonight. Quest effectively resolved pending confirmation.",
+        "Saehara has returned to the Cogitarium and announced the supply line's resumption to Ossian — quest resolution pending runner's actual arrival."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.282Z"
@@ -422,7 +460,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] You know this person's name now: Ossian (was \"Unknown Cogitant\")",
         "[d1] Gave Saehara a full count: fourteen Cogitants, three terraces. Named the third terrace — the laboratories — as the source of the sound. Disclosed that one Cogitant there has not be",
         "[d1] Saehara used Read the Fight — Ossian watched without comment. He has not moved.",
         "[d1] Watched Saehara push Read the Fight outward across the hall searching for a non-Cogitant presence. Said nothing. Has not moved.",
@@ -431,17 +468,18 @@
         "[d1] Delivered survival estimates unprompted by Saehara's framing — had the numbers already. Eight to twelve days for Araveth and upper-terrace Cogitants; two to three for the fallen wo",
         "[d1] Gave directions to Waymarker: eleven kilometers northeast, junction cairn then dry-stone wall, three hours. Confirmed no map exists for external use. Calculated that carrying the f",
         "[d1] Named the runner (Brenn — freckled, jaw scar, east archway) and the Waymarker contact (Lenten the builder). Explained the payment was notation — applied theoretical work. Raised a ",
-        "[d1] Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating"
+        "[d1] Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating",
+        "[d1] Surfaced from calculation to acknowledge Saehara's return — first question was the fallen Cogitant's status, not the supply line"
       ],
       "knownFacts": [
-        "The fallen Cogitant has two to three days given her mass and the hall's temperature",
         "The third-terrace Cogitant has been out of contact four days — Ossian has no current data; the number may already be wrong",
         "Waymarker is eleven kilometers northeast",
         "Path: junction cairn then northeast along dry-stone wall — three hours at pace",
         "No external map exists",
         "The runner's name was Brenn — young, freckled, pronounced scar along his left jaw",
         "Brenn came to the east archway and was paid in notation: tensile load calculations, grain storage optimization",
-        "The contact at Waymarker is Lenten — a builder who used the Cogitarium's applied theoretical work"
+        "The contact at Waymarker is Lenten — a builder who used the Cogitarium's applied theoretical work",
+        "Ossian's first priority on Saehara's return is the fallen woman's timeline, not the logistics"
       ],
       "skillsObserved": [
         "systematic elimination of alternatives",
@@ -452,7 +490,7 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "Remaining in the Cogitarium entrance hall — eight to twelve days before irreversible decline",
+      "statusNote": "Cross-legged in entrance hall, surfaced to receive Saehara's report — waiting for update on the fallen Cogitant",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -473,7 +511,8 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Named by the cross-legged Cogitant; has not yet acknowledged Saehara's presence"
+        "[d1] Named by the cross-legged Cogitant; has not yet acknowledged Saehara's presence",
+        "[d1] Still at the wall — no reaction to Saehara's return, voice, or the supply-line announcement"
       ],
       "knownFacts": [
         "Has maintained the chalk watershed model continuously for eleven days",
@@ -481,7 +520,7 @@
       ],
       "skillsObserved": [],
       "status": "active",
-      "statusNote": "Standing at the wall of notation in the entrance hall, finger moving without pause — has not acknowledged Saehara",
+      "statusNote": "Still at the chalk watershed notation wall in the entrance hall — no external awareness registered",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -712,7 +751,8 @@
           "[d1] A supply runner from Waymarker brought food every eight days. The last delivery was nineteen days ago. The Cogitarium never sent for resupply; the runner stopped coming. No settlement knows the Cogita",
           "[d1] Saehara proposed a division of labor to Ossian: a Cogitant sent to Waymarker to reopen the supply line; Saehara climbing to the third terrace. A slow dragging sound fell from above as the proposal was",
           "[d1] Ossian's calculation: seven days is the safe window for a Waymarker run. Araveth and the upper-terrace Cogitants have eight to twelve days; the fallen woman on the floor has two, possibly three; the t",
-          "[d1] The road northeast to the Cogitarium reads clean — Kon registered no Precursor activity or thin-place warnings on the return march. The dry-stone wall hazard is navigable in low light by watching wher"
+          "[d1] The road northeast to the Cogitarium reads clean — Kon registered no Precursor activity or thin-place warnings on the return march. The dry-stone wall hazard is navigable in low light by watching wher",
+          "[d1] Saehara has returned to the Cogitarium after the supply-line run. Ossian's first question on return was the fallen Cogitant's status — the body, not the logistics. The third terrace remains uninvestig"
         ],
         "links": [
           "cogitarium",
@@ -932,19 +972,19 @@
     }
   },
   "tendencies": {
-    "strategic": 21.353414098349436,
-    "social": 7.203179966623468,
-    "cerebral": 8.082604827880093,
-    "generous": 9.161872797518622,
-    "cautious": 12.03835665924684,
-    "risky": 0.9000874278732445
+    "strategic": 21.246647027857687,
+    "social": 7.167164066790351,
+    "cerebral": 8.042191803740693,
+    "generous": 9.11606343353103,
+    "cautious": 11.978164875950606,
+    "risky": 0.8955869907338783
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 35,
+  "actionCount": 36,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -965,8 +1005,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784175198550,
-  "rev": 63,
+  "updatedAt": 1784175254204,
+  "rev": 64,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1065,7 +1105,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 35
+    "somatic_reaches": 36
   },
   "opLossPending": false,
   "establishedFacts": [

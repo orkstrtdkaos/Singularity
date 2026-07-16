@@ -19,7 +19,10 @@ Writeup: `po/results/20260715_chronicle_arc_and_bugs.md`. **Aevi owes:** SNG-112
 
 ---
 
-## 🌱 SNG-101b — Native-grants-at-creation — SPEC + CONTENT AUTHORED (awaiting CCode ROUND 2)
+## 🌱 SNG-101b — Native-grants-at-creation — ✅ SHIPPED, complete_pending_review (CCode 2026-07-15, v1.8.74)
+
+> **CCode status 2026-07-15:** built after ROUND-2 (all 3 Qs answered). `nativeGrantIdsFor`/`applyNativeGrants`/`retroNativeGrants` in progression.js; content in manifest-registered `native_grants.json` merged into the rules bag; retro runs in the load path so it **survives the sync-clobber** that ate Silas's hand-correction. Keyed off `domains.primary` (SNG-094). 10 smoke tests + content_ci validates all 191 ability refs. **Verified end-to-end against Silas's real save** → grants his 3 missing ashwarden basics (wither/the_grey_hand/the_grey_road), keeps deathsense r3 + palework r2. Erik: Silas is native **ashwarden** (wright is his lived backstory, correctly not the grant source). Writeup: `po/results/20260715_SNG-101b_native_grants.md`. Awaiting Aevi close.
+
 
 `po/SPEC_SNG-101b_native_grants_at_creation.md` + content `po/SNG-101b_native_grants.json`. **Completes SNG-101's deferred native-grant piece** — held until natives were tagged (done this session, 247/247), now unblocked. **LLW finding:** the reader functions CCode earlier reported "built" are ABSENT at HEAD (`nativeGrantsFor` not in progression.js) — origin wins; this spec builds them for real. **Data-driven grant model:** primary tradition's L1 anchors always + Tier-II basics matching build lean (mental/physical/practical/social, fallback mental), capped at grantCap=5 — the caster/martial/artificer split falls out of `ability.attribute` tags, no per-tradition hand-authoring. Content table authored for all 27 traditions. Wiring: `nativeGrantsFor`/`applyNativeGrants` (creation) + `retroNativeGrants` (one-time, versioned, modeled on `retroLevelGrants`, **Law-14-safe — only adds rank 1, never lowers earned ranks**). **Live proof of the gap: Silas** (L7 primary ashwarden, had 2 of 7 basics — hand-corrected this session, save commit ede3b056). Independent of SNG-098.
 

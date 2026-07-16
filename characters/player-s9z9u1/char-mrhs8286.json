@@ -1728,96 +1728,144 @@
         "player": "Name terms for the spar — distance, first tap, or something stranger. Let her counter.",
         "summary": "Spar terms agreed at the north gate — first tap, flat ground, read your thinking after.",
         "narration": "The rain makes the oilcloth drum. Huginn shifts his weight on the lintel above you both and makes a sound that is not quite a word.\n\n\"First tap,\" you say. \"Clean touch, any surface, any tool — hammer, hand, spear-butt, elbow if you're feeling creative. No strikes meant to land hard. We stop when one of us names it.\" You tilt your head toward Memory, butt-down in the mud beside your boot. \"I use the spear. You use whatever you've got.\" A beat. \"And we go when the road gives us room — not in a mud-lane, not on a slope. Somewhere flat and dry enough to move on.\"\n\nPell listens with her eyes on the gate gap and the grey country beyond it. The rain is still hissing off the stone. When you finish she's quiet for two counts, which from her is not hesitation — it's the sound of someone checking the numbers.\n\n\"One condition,\" she says. \"When I tap you, you tell me what you were doing when I got through. Not what went wrong — what you were thinking. I want to know how your head works when it's moving.\" She glances sidelong. \"Same offer if you land one on me, if you're interested.\" The oilcloth pulls as she shifts her weight forward — not stepping out yet, just aiming. \"Flat ground, road gives room, first tap. Done.\"\n\nHuginn drops off the lintel and angles north into the grey, already picking a line."
+      },
+      {
+        "player": "Accept, but add your own counter-condition: she tells you one thing she noticed about your kit or your stance before you've sparred once. Then walk.",
+        "summary": "Silas names his counter-condition; Pell reads his stance plainly — weight-back, butt-grounded, watching — then walks north without ceremony.",
+        "narration": "The rain hasn't let up, but neither of you were going to wait for it.\n\n\"Accepted,\" you say, \"with one addition.\" You shift Memory to your left hand and look at her sidelong under the oilcloth. \"Before the first spar — you tell me one thing you've already clocked about my kit or my stance. Same terms: honest read, not flattery.\" You hold her gaze for a moment. \"Then we walk.\"\n\nPell's mouth doesn't quite do anything, but there's a consideration in it — the look of someone checking whether a fair trade is actually fair. She decides it is. \"Your weight sits back,\" she says, without preamble. \"Not bad weight — you've got a ready-stance built in, like you expect something to come at you and you want a half-second to read it before you commit. The spear's butt is your tell. You've got it grounded, not canted. You're watching the road, not the gap.\" A short pause. \"It's good technique. It's also the kind of thing that costs you a step when the first move is *yours* to take.\"\n\nThen she walks. Just like that — one step out from under the oilcloth and into the grey, pulling it back around her shoulders in a single practiced motion, the squall taking her hair sideways. Huginn drops off the lintel and beats north ahead of her, already picking the line through the wet meadow grass.\n\nYou fall in beside her. The north gate falls behind. The road opens up — muddy where the winter run-off crossed it, firmer where the old stone base holds — and ahead the upper meadow spreads gray-green and cold under a sky that hasn't decided what it wants to do yet. Somewhere out in that weather, ahead of you both on the road to the pass, is a person with a list and a head start."
       }
     ],
     "lastTurn": {
-      "narration": "The rain makes the oilcloth drum. Huginn shifts his weight on the lintel above you both and makes a sound that is not quite a word.\n\n\"First tap,\" you say. \"Clean touch, any surface, any tool — hammer, hand, spear-butt, elbow if you're feeling creative. No strikes meant to land hard. We stop when one of us names it.\" You tilt your head toward Memory, butt-down in the mud beside your boot. \"I use the spear. You use whatever you've got.\" A beat. \"And we go when the road gives us room — not in a mud-lane, not on a slope. Somewhere flat and dry enough to move on.\"\n\nPell listens with her eyes on the gate gap and the grey country beyond it. The rain is still hissing off the stone. When you finish she's quiet for two counts, which from her is not hesitation — it's the sound of someone checking the numbers.\n\n\"One condition,\" she says. \"When I tap you, you tell me what you were doing when I got through. Not what went wrong — what you were thinking. I want to know how your head works when it's moving.\" She glances sidelong. \"Same offer if you land one on me, if you're interested.\" The oilcloth pulls as she shifts her weight forward — not stepping out yet, just aiming. \"Flat ground, road gives room, first tap. Done.\"\n\nHuginn drops off the lintel and angles north into the grey, already picking a line.",
-      "sceneSummary": "Spar terms agreed at the north gate — first tap, flat ground, read your thinking after.",
+      "narration": "The rain hasn't let up, but neither of you were going to wait for it.\n\n\"Accepted,\" you say, \"with one addition.\" You shift Memory to your left hand and look at her sidelong under the oilcloth. \"Before the first spar — you tell me one thing you've already clocked about my kit or my stance. Same terms: honest read, not flattery.\" You hold her gaze for a moment. \"Then we walk.\"\n\nPell's mouth doesn't quite do anything, but there's a consideration in it — the look of someone checking whether a fair trade is actually fair. She decides it is. \"Your weight sits back,\" she says, without preamble. \"Not bad weight — you've got a ready-stance built in, like you expect something to come at you and you want a half-second to read it before you commit. The spear's butt is your tell. You've got it grounded, not canted. You're watching the road, not the gap.\" A short pause. \"It's good technique. It's also the kind of thing that costs you a step when the first move is *yours* to take.\"\n\nThen she walks. Just like that — one step out from under the oilcloth and into the grey, pulling it back around her shoulders in a single practiced motion, the squall taking her hair sideways. Huginn drops off the lintel and beats north ahead of her, already picking the line through the wet meadow grass.\n\nYou fall in beside her. The north gate falls behind. The road opens up — muddy where the winter run-off crossed it, firmer where the old stone base holds — and ahead the upper meadow spreads gray-green and cold under a sky that hasn't decided what it wants to do yet. Somewhere out in that weather, ahead of you both on the road to the pass, is a person with a list and a head start.",
+      "sceneSummary": "Silas names his counter-condition; Pell reads his stance plainly — weight-back, butt-grounded, watching — then walks north without ceremony.",
       "choices": [
         {
-          "label": "Accept her condition outright — yes, you want to know how her head works when it's moving too. Step out from the oilcloth and walk north into the rain.",
+          "label": "Walk and talk — ask Pell what she made of the spear-work she saw in the forge, now that Memory's named and bound.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "talk",
+            "connect"
+          ],
           "trivial": true
         },
         {
-          "label": "Accept, but add your own counter-condition: she tells you one thing she noticed about your kit or your stance before you've sparred once. Then walk.",
+          "label": "Keep the silence a bit. Watch Huginn's line and read the road ahead — what is the bird picking through?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "observe",
+            "careful"
+          ],
           "trivial": true
         },
         {
-          "label": "Ask what she thinks she'll learn — push the conversation one turn further before the road opens up under you.",
+          "label": "Offer her the Dried Starfruit from your pack as you walk — it's hers anyway, you've been carrying it since the store.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "give",
+            "connect"
+          ],
           "trivial": true
         },
         {
-          "label": "Say nothing more — shake the oilcloth out, shoulder it back to her, and walk north. Let the road tell the rest.",
+          "label": "Do something else.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "open"
+          ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The north gate of Millbrook — a dry-stone gap in the village wall. Morning, early spring. The squall is still driving cold rain sideways off the ridge. Silas and Pell are under her oilcloth at the gate lintel, both angled north.",
+        "setting": "The upper meadow north of Millbrook — open ground, wet grass, the north gate twenty paces behind. Early morning, squall still driving cold rain sideways. Huginn is ahead, picking a line north through the grey.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Weight shifted forward under the oilcloth, eyes on the grey country north — terms agreed, waiting for Silas to move."
+            "state": "Walking north, oilcloth pulled around her shoulders, eyes on the road ahead — settled into pace."
           },
           {
             "name": "Huginn",
-            "state": "Already off the lintel and angling north into the grey, picking a line."
+            "state": "Beating north ahead of them both, already reading the meadow's line."
           }
         ],
         "objects": [
-          "Memory (spear, butt-down in the mud beside Silas's boot)",
-          "Pell's oilcloth (sheltering both of them, pulled taut)",
-          "North gate — dry-stone gap, threshold of the village",
-          "Squall light — flat grey, rain hissing on stone"
+          "Memory (spear, in Silas's left hand)",
+          "Pell's oilcloth (around her shoulders)",
+          "Muddy road north — old stone base beneath, run-off crossings soft"
         ],
         "threads": [
           "Spar terms agreed — first tap, flat ground, read your thinking after; waiting for flat road.",
           "The actor who moved through the archive is ahead of them on the road — direction established, name unknown.",
           "Leth holds the engineer's name and the thread to the archive breach.",
-          "Pell's 'either is fine' from the lane remains open — she's waiting to hear which it was."
+          "Pell's read of Silas's stance delivered — weight-back, butt-grounded, costs him a step when the first move is his to take."
         ]
+      },
+      "moveTo": {
+        "location": "Upper Meadow (north of Millbrook)",
+        "why": "walked north through the gate and into the meadow"
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "brief exchange at the gate, then first steps north into the meadow"
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Named her spar condition plainly — when she taps you, tell her what you were thinking, not what went wrong. Same offer in return. Accepted 'flat ground, first tap' without ceremony.",
+          "note": "Named Silas's stance plainly — weight-back, butt-grounded, watching the road, not the gap. A step cost when the first move is his. Then walked without ceremony.",
           "learned": [
-            "Wants to understand how Silas's head works when it's moving — spar is as much diagnostic as sport"
+            "Silas's weight sits back — ready-stance, half-second read before committing. Spear butt grounded is his tell. Costs him initiative when he's the one attacking."
           ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the north gate, oilcloth out against the squall, spar terms agreed — walking north with Silas."
+          "skillsObserved": [
+            "reads a fighter's stance from walking observation, names it without flattery"
+          ],
+          "statusNote": "Walking north with Silas into the upper meadow — pace set, oilcloth on, eyes forward."
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange under the oilcloth — terms named and agreed, ready to step out."
-      }
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Reads a fighter's ready-stance from walking observation — named Silas's weight-back posture and grounded spear-butt as tells before the first spar word was spoken.",
+          "links": [
+            "millbrook",
+            "the-water-crisis"
+          ]
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The north gate of Millbrook — a dry-stone gap in the village wall. Morning, early spring. The squall is still driving cold rain sideways off the ridge. Silas and Pell are under her oilcloth at the gate lintel, both angled north.",
+      "setting": "The upper meadow north of Millbrook — open ground, wet grass, the north gate twenty paces behind. Early morning, squall still driving cold rain sideways. Huginn is ahead, picking a line north through the grey.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Weight shifted forward under the oilcloth, eyes on the grey country north — terms agreed, waiting for Silas to move."
+          "state": "Walking north, oilcloth pulled around her shoulders, eyes on the road ahead — settled into pace."
         },
         {
           "name": "Huginn",
-          "state": "Already off the lintel and angling north into the grey, picking a line."
+          "state": "Beating north ahead of them both, already reading the meadow's line."
         }
       ],
       "objects": [
-        "Memory (spear, butt-down in the mud beside Silas's boot)",
-        "Pell's oilcloth (sheltering both of them, pulled taut)",
-        "North gate — dry-stone gap, threshold of the village",
-        "Squall light — flat grey, rain hissing on stone"
+        "Memory (spear, in Silas's left hand)",
+        "Pell's oilcloth (around her shoulders)",
+        "Muddy road north — old stone base beneath, run-off crossings soft"
       ],
       "threads": [
         "Spar terms agreed — first tap, flat ground, read your thinking after; waiting for flat road.",
         "The actor who moved through the archive is ahead of them on the road — direction established, name unknown.",
         "Leth holds the engineer's name and the thread to the archive breach.",
-        "Pell's 'either is fine' from the lane remains open — she's waiting to hear which it was."
+        "Pell's read of Silas's stance delivered — weight-back, butt-grounded, costs him a step when the first move is his to take."
       ]
     }
   },
@@ -1966,7 +2014,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now.",
         "[d2] Arrived through the back door two minutes after Silas — took the room in one glance, received the introduction without performance, settled into ready stillness. Sorel recognized h",
         "[d2] Took the question without prompting — asked Sorel whether the engineer works with what's there or needs his own kit. The right question, from someone who has actually seen the site",
         "[d2] Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing.",
@@ -1975,28 +2022,29 @@
         "[d2] Already through the back door before the farewells finished — facing north, pace set, no ceremony.",
         "[d2] Walking north ahead of Silas, oilcloth out against the squall, named her weapons before he could ask — cross-peen hammer and heavy belt knife. Caught him assessing and called it pl",
         "[d2] Received 'both' plainly — a short nod that cost her something. Answered the spar proposal with 'terms?' without saying no.",
-        "[d2] Named her spar condition plainly — when she taps you, tell her what you were thinking, not what went wrong. Same offer in return. Accepted 'flat ground, first tap' without ceremony"
+        "[d2] Named her spar condition plainly — when she taps you, tell her what you were thinking, not what went wrong. Same offer in return. Accepted 'flat ground, first tap' without ceremony",
+        "[d2] Named Silas's stance plainly — weight-back, butt-grounded, watching the road, not the gap. A step cost when the first move is his. Then walked without ceremony."
       ],
       "knownFacts": [
-        "Sorel knows Millbrook's smith by reputation from the old pass circuit",
         "Pell's priority: knowing whether they carry tools in or find them on-site — she's already thinking about the cradle-recess absence as a working constraint",
         "Four sites form one operating system — wash-room, east furlong, Fen's intake, sealed village channel bed",
         "The actor restarted the system after moving through the archive — sequence is knowledge, then action, then departure",
         "Carries a short-handled cross-peen hammer at her left hip and a heavy belt knife at her right — no spear, no bow",
         "Packs forge-worker style: compact, oilcloth on top, shelter first",
         "Silas assessed her kit while she was walking and will own it when called on it",
-        "Wants to understand how Silas's head works when it's moving — spar is as much diagnostic as sport"
+        "Wants to understand how Silas's head works when it's moving — spar is as much diagnostic as sport",
+        "Silas's weight sits back — ready-stance, half-second read before committing. Spear butt grounded is his tell. Costs him initiative when he's the one attacking."
       ],
       "skillsObserved": [
-        "grain-reading by touch without instruction",
         "naming a technical and personal observation in the same regi",
         "framing a precise diagnostic question under field conditions",
         "reading what a collaborator needs to know without being told",
         "synthesizing multi-site structural evidence into a single op",
-        "field-kit discipline under weather change — oilcloth deploye"
+        "field-kit discipline under weather change — oilcloth deploye",
+        "reads a fighter's stance from walking observation, names it "
       ],
       "status": "active",
-      "statusNote": "At the north gate, oilcloth out against the squall, spar terms agreed — walking north with Silas.",
+      "statusNote": "Walking north with Silas into the upper meadow — pace set, oilcloth on, eyes forward.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2544,7 +2592,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Has a deep lateral burn scar inside the left forearm — first real forging day, age sixteen. A second knotted scar at the shoulder-blade margin, origin unstated. Met Silas's palework scars with her own",
           "[d2] Traces scars with a smith's attention — pressure-aware, reading depth and surface. Went still and deliberate under Silas's touch on her forearm and shoulder. Asked 'how far down?' about the scars belo",
           "[d2] Two more craft-marks found: a compression line at the left floating rib from years of a working belt, and a small circular scar high on the right ribcage — precise, the shape of something hot that was",
           "[d2] Two more craft-scars found below: a curved tong-slip scar on the outer left hip (old, silver, traced and kissed) and a small precise round scar at the inner hipbone crest — flat, the shape of a rivet ",
@@ -2567,17 +2614,18 @@
           "[d2] Upgrade completed rough: transverse deepened, maker's mark re-seated with slight axial variance, memory-capacitor installed at collar (north quarter loose). Death-register now readable before and afte",
           "[d2] Memory-capacitor at the collar north quarter pressed flush before the pitch set — Order-Sense found the correction window. The spear is now fully seated: transverse deepened, maker's mark re-seated ob",
           "[d2] Deathsense confirms the repair complete — death-register runs clean end to end, load-bearing through the deepened transverse, caught by the capacitor. The maker's mark's oblique axis reads as Pell's s",
-          "[d2] Named 'Memory' at dawn in Pell's forge — the name given over wine and starfruit, in the presence of Pell and Huginn. The oblique axis of Pell's maker's mark interpreted as room made: for something fou"
+          "[d2] Named 'Memory' at dawn in Pell's forge — the name given over wine and starfruit, in the presence of Pell and Huginn. The oblique axis of Pell's maker's mark interpreted as room made: for something fou",
+          "[d2] Reads a fighter's ready-stance from walking observation — named Silas's weight-back posture and grounded spear-butt as tells before the first spar word was spoken."
         ],
         "links": [
-          "deathsense",
-          "the-attended-end",
           "forge-south-pit",
           "huginn",
           "aldric-provisioning-deal",
           "the-unnamed-gift",
           "palework",
-          "order-sense"
+          "order-sense",
+          "millbrook",
+          "the-water-crisis"
         ],
         "aliases": [
           "Pell Marsh",
@@ -3178,8 +3226,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784165376838,
-  "rev": 375,
+  "updatedAt": 1784165505279,
+  "rev": 376,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3741,7 +3789,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 74
+    "valley": 75
   },
   "foreclosed": [
     "rootkin",

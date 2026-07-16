@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.620627452903249,
+    "spectrumId": -0.6395960802580867,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
@@ -1778,74 +1778,68 @@
         "player": "\"What am I doing, then? Say it plainly.\"",
         "summary": "Pell names plainly what Silas is doing; Pip Cotter arrives on the road north with a package from Mara.",
         "narration": "The road bends east ahead of you, and for a moment there is nothing between you and the valley ridgeline except the pale sky and Huginn's wings angling into the curve.\n\nPell comes even with you. She doesn't look at you right away — she's watching the bend, the way Huginn is dropping toward something on the far side of it. Then: \"You're walking north with a blacksmith you kissed twice and a bird that attends endings, toward a valve site that's part of a buried pre-Transition system someone deliberately restarted.\" A beat. \"Carrying a spear you named, that I can feel from twenty feet away when I'm not looking at it.\" Another beat — shorter. \"And you're going to leave the valley to find a structural expert before the sixth week, because if you don't, the east channel fails and we lose the growing season.\" She glances at you sideways, measuring, the same look she gives a piece of work she's not yet done assessing. \"That's what you're doing.\"\n\nHuginn crests the road-bend and drops out of sight. Somewhere past it, the sound of water moving — Fen's intake, the first valve on the timeline, World-day minus-eighteen.\n\nThen something moves on the road that is not Huginn. A figure coming from the direction of the bend, moving fast — not running, but the walk of someone sent with a purpose and not stopping to admire the morning. Small, compact. Familiar. Pip Cotter, Mara's errand-runner, with a cloth-wrapped package tucked under one arm and both hands swinging free for speed. The child spots you at thirty yards and angles straight at you without slowing."
+      },
+      {
+        "player": "You forgot something on the list of what I'm doing... just before Pip comes into earshot say... \"you\".",
+        "summary": "Silas names Pell on the list — one word, forward-facing, before Pip arrives.",
+        "narration": "Pip is still thirty yards back, boots quick on the wet stone, the cloth-wrapped package tucked under one arm — close enough now that you could shout and be heard.\n\nYou don't shout. You say it quietly, forward-facing, to the road and the pale ridgeline and the bend where Huginn disappeared.\n\n\"You.\"\n\nOne word. The fence-lines don't move. The low cloud doesn't shift. Pell's stride doesn't break — but there is a half-beat where it almost does, a catch in the rhythm that she recovers so cleanly you might have imagined it. She doesn't look at you. Her jaw moves once, not quite language, and then she is watching the bend again, composed and level, the oilcloth on her shoulder.\n\nPip's boots are audible now. Thirty yards has become twenty."
       }
     ],
     "lastTurn": {
-      "narration": "The road bends east ahead of you, and for a moment there is nothing between you and the valley ridgeline except the pale sky and Huginn's wings angling into the curve.\n\nPell comes even with you. She doesn't look at you right away — she's watching the bend, the way Huginn is dropping toward something on the far side of it. Then: \"You're walking north with a blacksmith you kissed twice and a bird that attends endings, toward a valve site that's part of a buried pre-Transition system someone deliberately restarted.\" A beat. \"Carrying a spear you named, that I can feel from twenty feet away when I'm not looking at it.\" Another beat — shorter. \"And you're going to leave the valley to find a structural expert before the sixth week, because if you don't, the east channel fails and we lose the growing season.\" She glances at you sideways, measuring, the same look she gives a piece of work she's not yet done assessing. \"That's what you're doing.\"\n\nHuginn crests the road-bend and drops out of sight. Somewhere past it, the sound of water moving — Fen's intake, the first valve on the timeline, World-day minus-eighteen.\n\nThen something moves on the road that is not Huginn. A figure coming from the direction of the bend, moving fast — not running, but the walk of someone sent with a purpose and not stopping to admire the morning. Small, compact. Familiar. Pip Cotter, Mara's errand-runner, with a cloth-wrapped package tucked under one arm and both hands swinging free for speed. The child spots you at thirty yards and angles straight at you without slowing.",
-      "sceneSummary": "Pell names plainly what Silas is doing; Pip Cotter arrives on the road north with a package from Mara.",
+      "narration": "Pip is still thirty yards back, boots quick on the wet stone, the cloth-wrapped package tucked under one arm — close enough now that you could shout and be heard.\n\nYou don't shout. You say it quietly, forward-facing, to the road and the pale ridgeline and the bend where Huginn disappeared.\n\n\"You.\"\n\nOne word. The fence-lines don't move. The low cloud doesn't shift. Pell's stride doesn't break — but there is a half-beat where it almost does, a catch in the rhythm that she recovers so cleanly you might have imagined it. She doesn't look at you. Her jaw moves once, not quite language, and then she is watching the bend again, composed and level, the oilcloth on her shoulder.\n\nPip's boots are audible now. Thirty yards has become twenty.",
+      "sceneSummary": "Silas names Pell on the list — one word, forward-facing, before Pip arrives.",
       "choices": [
         {
-          "label": "Wait and receive — let Pip come to you, take what Mara sent, hear it out.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "receive"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Read the errand itself with Order-Sense — what is this message part of, and what does the sending mean?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Signal Pell to drop back a step — hear whatever Mara sent before deciding what to share.",
+          "label": "Turn and receive Pip — take the package and see what Mara sent.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "plan"
+            "receive",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Call to Pip now — close the distance yourself, meet them halfway, spare them the last thirty yards.",
+          "label": "Let Pip reach you but keep walking — take the package without stopping, read it on the move.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "efficient",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Pell receive Pip — you watch the bend for Huginn's signal from Fen's intake.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say something else to Pell before Pip closes the distance — the moment is still open.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "connect",
+            "honest"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
         "setting": "Old stone road between thinning fence-lines north of Millbrook — terraced gardens giving way to rough grazing, road rising slightly, eastern road-bend ahead under low cloud. Fen's intake lies just around the bend; water can be heard past it.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Come even with Silas, oilcloth on off-shoulder — just named plainly what he is doing; watching the bend where Huginn dropped from sight."
+            "state": "Come even with Silas, oilcloth on off-shoulder — absorbed the one word without breaking stride; watching the bend, jaw set, composure intact and working."
           },
           {
             "name": "Huginn",
@@ -1853,7 +1847,7 @@
           },
           {
             "name": "Pip Cotter",
-            "state": "Thirty yards south on the road, closing fast with a cloth-wrapped package under one arm — spotted Silas and is angling straight at him."
+            "state": "Twenty yards south on the road, closing fast — cloth-wrapped package under one arm, feet loud on wet stone."
           }
         ],
         "objects": [
@@ -1865,7 +1859,7 @@
         ],
         "threads": [
           "Pip Cotter closing with a package from Mara — contents unknown.",
-          "Pell's read on Sorel — named but not pressed.",
+          "Pell received the one word — reaction unspoken, the moment still open.",
           "Fen's intake: first valve site, around the bend.",
           "The question of pressing Sorel before leaving the valley."
         ]
@@ -1873,24 +1867,17 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pip-cotter",
-          "name": "Pip Cotter",
-          "note": "Caught Silas on the north road with a cloth-wrapped package from Mara — closing fast at thirty yards.",
-          "statusNote": "On the north road, thirty yards from Silas, bearing a package from Mara Wells.",
-          "status": "active"
-        },
-        {
-          "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Named plainly what Silas is doing — the whole shape of it, valve sites to valley departure — and left it as a statement, not a question.",
-          "statusNote": "Walking north with Silas toward Fen's intake, composed and measuring.",
-          "status": "active"
+          "note": "Received 'you' — half-beat catch in her stride, recovered clean. Did not look at Silas. Composure intact and working.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Walking north with Silas toward Fen's intake — absorbed the naming without comment, watching the bend."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short stretch of road north — a few minutes of walking and talk."
+        "hoursPassed": 0.1,
+        "why": "A brief moment on the road — one word, then Pip closing."
       }
     },
     "sceneState": {
@@ -1898,7 +1885,7 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Come even with Silas, oilcloth on off-shoulder — just named plainly what he is doing; watching the bend where Huginn dro"
+          "state": "Come even with Silas, oilcloth on off-shoulder — absorbed the one word without breaking stride; watching the bend, jaw s"
         },
         {
           "name": "Huginn",
@@ -1906,7 +1893,7 @@
         },
         {
           "name": "Pip Cotter",
-          "state": "Thirty yards south on the road, closing fast with a cloth-wrapped package under one arm — spotted Silas and is angling s"
+          "state": "Twenty yards south on the road, closing fast — cloth-wrapped package under one arm, feet loud on wet stone."
         }
       ],
       "objects": [
@@ -1918,7 +1905,7 @@
       ],
       "threads": [
         "Pip Cotter closing with a package from Mara — contents unknown.",
-        "Pell's read on Sorel — named but not pressed.",
+        "Pell received the one word — reaction unspoken, the moment still open.",
         "Fen's intake: first valve site, around the bend.",
         "The question of pressing Sorel before leaving the valley."
       ]
@@ -2069,7 +2056,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named Silas's stance plainly — weight-back, butt-grounded, watching the road, not the gap. A step cost when the first move is his. Then walked without ceremony.",
         "[d2] Read standing weight versus moving weight as two distinct reads — named the oblique maker's mark plainly: a line she hadn't earned, and she'd make the same choice again.",
         "[d2] Named the oblique mark as accuracy not modesty — she'd rather cut wrong and be honest than straight and lying. Named the collar ring as 'being named to something' and did not finis",
         "[d2] Received Silas's completion of her sentence without correction — named the collar ring as a sentence she hadn't started, and walked with it open.",
@@ -2078,7 +2064,8 @@
         "[d2] Accepted the wrestling-next-time terms without deflection — named the reach problem plainly and said yes. Keeping pace north.",
         "[d2] Received the naked-wrestling-in-oil line and a shadowstep retreat — managed her face with visible effort and pointed Silas at the road ahead. Not done.",
         "[d2] Came even with Silas on the road north — acknowledged the wrestling terms plainly and put it on record that she knows what he is doing. Did not look at him.",
-        "[d2] Named plainly what Silas is doing — the whole shape of it, valve sites to valley departure — and left it as a statement, not a question."
+        "[d2] Named plainly what Silas is doing — the whole shape of it, valve sites to valley departure — and left it as a statement, not a question.",
+        "[d2] Received 'you' — half-beat catch in her stride, recovered clean. Did not look at Silas. Composure intact and working."
       ],
       "knownFacts": [
         "Silas's weight sits back — ready-stance, half-second read before committing. Spear butt grounded is his tell. Costs him initiative when he's the one attacking.",
@@ -2099,7 +2086,7 @@
         "naming a speculative read as speculative without withdrawing"
       ],
       "status": "active",
-      "statusNote": "Walking north with Silas toward Fen's intake, composed and measuring.",
+      "statusNote": "Walking north with Silas toward Fen's intake — absorbed the naming without comment, watching the bend.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3284,8 +3271,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784174661063,
-  "rev": 385,
+  "updatedAt": 1784175055798,
+  "rev": 386,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3847,7 +3834,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 84
+    "valley": 85
   },
   "foreclosed": [
     "rootkin",

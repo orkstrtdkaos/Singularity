@@ -1910,22 +1910,26 @@
         "player": "Ask her the thing you've been circling since the forge — not about her father, but about whether she wants this to be what it's starting to feel like",
         "summary": "Silas asks plainly whether Pell wants what this is becoming — she says yes, plainly, and passes the wine back.",
         "narration": "The wine has gone around twice. The fire has settled into its last good hour — red-orange coals under a thin layer of ash, heat radiating into the flat stones at the perimeter, the overhang ceiling amber and close above you both.\n\nYou don't lead with it. You watch the fire a moment longer, and then you look at her — not at the middle distance, not at the wine, at her — and you say it plainly, the way you've been learning is the only way she actually hears a thing: \"I know what this is starting to feel like. I want to know if it feels the same to you. Not the work. Not the road. This.\"\n\nPell is quiet. Her thumbs turn the bottle slowly, one full rotation, the same way she turned the valve housing in her hands at the east furlong — not stalling, just making sure she knows what she's holding before she sets it down. Then she looks at you directly, and the open-faced expression from after the forge morning is back, the one she only seems to find when the armor is already off and she's stopped noticing.\n\n\"Yes,\" she says. No qualification. No filed note or patient recalibration. Just that — her voice flat and certain and a little rueful, like she's answering something that's been obvious to her for longer than she'd prefer. She holds your gaze for a moment, then looks back at the fire. \"I told you I was managing it badly.\" The corner of her mouth lifts, brief. She passes the bottle back across the stones between you."
+      },
+      {
+        "player": "Ask what 'managing it badly' looks like to her — let her say more of it, in her own words, on her own terms",
+        "summary": "Pell names what managing it badly looks like — the ledger that never closes, the note that lasted three seconds.",
+        "narration": "The coals breathe orange and low. Huginn shifts once on the stone lip, settles its wing, goes still again.\n\nYou pass the wine back to her. \"Managing it badly,\" you say — not as a question, more like picking up the thing she set down and handing it back to her, unhurried. \"What does that look like?\"\n\nPell takes the bottle. Her thumb finds the wax seal-ring at the neck the way it always finds something to work at — not fidgeting, just occupying the hands so the rest of her can think. She looks at the fire for a moment. Then: \"It looks like knowing what I want and spending a lot of energy making sure it doesn't show.\" A small exhale through the nose, something between a laugh and an acknowledgment. \"Filing things. Noting things. Treating the whole business like a ledger I can close at the end of the day and it won't have changed while I wasn't looking.\" She turns the bottle once. \"It always changes while I wasn't looking.\"\n\nThe wind cuts above the overhang's lip. Inside the ring the heat stays steady. She tips her chin toward the coals rather than at you. \"At the forge, when you kissed me — I had a note for that. In my head. A reasonable position.\" The corner of her mouth. \"It lasted about three seconds. Then I just held your wrist and said alright.\" She passes the wine back across the gap between you, and this time she doesn't let go of it immediately, so for a breath you're both holding the neck of the bottle in the space between you. \"That's what managing it badly looks like. The note exists. Then you say something and I forget I wrote it.\""
       }
     ],
     "lastTurn": {
-      "narration": "The wine has gone around twice. The fire has settled into its last good hour — red-orange coals under a thin layer of ash, heat radiating into the flat stones at the perimeter, the overhang ceiling amber and close above you both.\n\nYou don't lead with it. You watch the fire a moment longer, and then you look at her — not at the middle distance, not at the wine, at her — and you say it plainly, the way you've been learning is the only way she actually hears a thing: \"I know what this is starting to feel like. I want to know if it feels the same to you. Not the work. Not the road. This.\"\n\nPell is quiet. Her thumbs turn the bottle slowly, one full rotation, the same way she turned the valve housing in her hands at the east furlong — not stalling, just making sure she knows what she's holding before she sets it down. Then she looks at you directly, and the open-faced expression from after the forge morning is back, the one she only seems to find when the armor is already off and she's stopped noticing.\n\n\"Yes,\" she says. No qualification. No filed note or patient recalibration. Just that — her voice flat and certain and a little rueful, like she's answering something that's been obvious to her for longer than she'd prefer. She holds your gaze for a moment, then looks back at the fire. \"I told you I was managing it badly.\" The corner of her mouth lifts, brief. She passes the bottle back across the stones between you.",
-      "sceneSummary": "Silas asks plainly whether Pell wants what this is becoming — she says yes, plainly, and passes the wine back.",
+      "narration": "The coals breathe orange and low. Huginn shifts once on the stone lip, settles its wing, goes still again.\n\nYou pass the wine back to her. \"Managing it badly,\" you say — not as a question, more like picking up the thing she set down and handing it back to her, unhurried. \"What does that look like?\"\n\nPell takes the bottle. Her thumb finds the wax seal-ring at the neck the way it always finds something to work at — not fidgeting, just occupying the hands so the rest of her can think. She looks at the fire for a moment. Then: \"It looks like knowing what I want and spending a lot of energy making sure it doesn't show.\" A small exhale through the nose, something between a laugh and an acknowledgment. \"Filing things. Noting things. Treating the whole business like a ledger I can close at the end of the day and it won't have changed while I wasn't looking.\" She turns the bottle once. \"It always changes while I wasn't looking.\"\n\nThe wind cuts above the overhang's lip. Inside the ring the heat stays steady. She tips her chin toward the coals rather than at you. \"At the forge, when you kissed me — I had a note for that. In my head. A reasonable position.\" The corner of her mouth. \"It lasted about three seconds. Then I just held your wrist and said alright.\" She passes the wine back across the gap between you, and this time she doesn't let go of it immediately, so for a breath you're both holding the neck of the bottle in the space between you. \"That's what managing it badly looks like. The note exists. Then you say something and I forget I wrote it.\"",
+      "sceneSummary": "Pell names what managing it badly looks like — the ledger that never closes, the note that lasted three seconds.",
       "choices": [
         {
-          "label": "Move closer to her — not a word, just close the distance the fire-ring has been keeping between you",
+          "label": "Let the silence speak first — hold the bottle a moment, neither pulling it away nor releasing, and let that breath of contact be its own answer before you say anything.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "physical",
-            "careful"
+            "careful",
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1934,31 +1938,30 @@
           "emergenceId": null
         },
         {
-          "label": "Tell her what you mean to do about it — not a plan, a direction. Something honest about what you want this road to hold.",
+          "label": "Tell her you're glad the note didn't hold.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "connect",
-            "honest",
-            "bold"
+            "honest"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask what 'managing it badly' looks like to her — let her say more of it, in her own words, on her own terms",
+          "label": "Tell her she doesn't have to manage it around you — she can want things out loud and you won't make that strange.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "listen",
             "connect",
+            "honest",
             "careful"
           ],
           "abilityId": null,
@@ -1968,15 +1971,13 @@
           "emergenceId": null
         },
         {
-          "label": "Say nothing — take the bottle, drink, and let the quiet hold it for now. Some things don't need more words tonight.",
+          "label": "Say something else entirely.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "careful",
-            "rest"
+            "connect"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1988,7 +1989,10 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -1997,16 +2001,16 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Knees drawn up, boot heels on the perimeter stones, bottle passed back — watching the fire, open, the corner of her mouth still lifted from the remark."
+            "state": "Holding the wine bottle at the neck across the gap — both hands, not yet released, watching you."
           },
           {
             "name": "Huginn",
-            "state": "Wing settled on the overhang's stone lip, facing the treeline — quiet, attending nothing in particular."
+            "state": "Wing settled on the overhang's stone lip, facing the treeline — still."
           }
         ],
         "objects": [
           "Memory (spear, leaned against the overhang wall)",
-          "Resin Mountain Wine (open, passed back to Silas)",
+          "Resin Mountain Wine (open, held between them at the neck)",
           "Oilcloth Fold (Pell's, propped as windbreak)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
@@ -2017,9 +2021,8 @@
           "Preserved Trail Parcel x3 (remaining in pack)"
         ],
         "threads": [
-          "Pell has said yes — plainly, without qualification. What comes next is Silas's move.",
+          "Pell has named the habit plainly — the note, the ledger, the three seconds. The bottle is between them and neither has let go.",
           "Fire-ring: same hand, twice — whose route is this, and which direction are they traveling?",
-          "The pre-pass knowledge: whoever camped here knew the route before it opened publicly",
           "Edge District bearing — Leth and Sorel as first contacts",
           "The buried vault head: six-week window, expert needed before week five"
         ]
@@ -2030,42 +2033,41 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Said yes plainly to Silas's direct question — no qualification, no filed note. Passed the bottle back. Acknowledged she's been managing it badly and clearly finds that faintly rueful.",
+          "note": "Named what managing it badly looks like — the ledger, the note that lasted three seconds, the bottle held between them.",
           "learned": [
-            "She has wanted this for longer than she'd prefer — her own word is 'managing'",
-            "When asked directly she answers directly — the armor being off changes how she speaks"
+            "Managing it badly means knowing what she wants and spending energy making sure it doesn't show — filing things, treating the want like a ledger she can close"
           ],
-          "relationshipDelta": 1,
+          "skillsObserved": [],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the overhang camp with Silas — fire burning low, the evening open between them, the answer given.",
-          "bondType": "romantic",
-          "bondStage": "together"
+          "statusNote": "At the overhang camp with Silas — fire burning low, wine between them, the note named and the bottle not yet released."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Pell said yes — plainly, without qualification — when Silas asked directly whether she wants what this is starting to feel like. The relationship has moved past mutual acknowledgment into something named and mutual.",
+          "text": "Pell named her habit in full at the overhang camp on World-day 16 evening: managing it badly means filing what she wants so it doesn't show — a ledger she closes, except it always changes while she isn't looking. The forge kiss broke the note in three seconds. She said so plainly.",
           "subjectId": "pell"
         }
       ],
+      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "pell",
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "Said yes plainly at the overhang camp when asked directly — no qualification. Acknowledged she's been managing it badly and clearly has been for longer than she'd prefer.",
+          "fact": "Told Silas at the overhang camp that managing it badly means knowing what she wants and spending energy keeping it from showing — treating want like a ledger that never quite closes. The forge kiss broke her prepared note in three seconds. She named it without apology.",
           "links": [
             "millbrook",
-            "the-water-crisis",
+            "the-unnamed-gift",
             "memory-the-spear"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a direct exchange at the fire — a short beat"
+        "why": "A quiet exchange by the fire — a short beat, a quarter hour at most."
       }
     },
     "sceneState": {
@@ -2073,16 +2075,16 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Knees drawn up, boot heels on the perimeter stones, bottle passed back — watching the fire, open, the corner of her mout"
+          "state": "Holding the wine bottle at the neck across the gap — both hands, not yet released, watching you."
         },
         {
           "name": "Huginn",
-          "state": "Wing settled on the overhang's stone lip, facing the treeline — quiet, attending nothing in particular."
+          "state": "Wing settled on the overhang's stone lip, facing the treeline — still."
         }
       ],
       "objects": [
         "Memory (spear, leaned against the overhang wall)",
-        "Resin Mountain Wine (open, passed back to Silas)",
+        "Resin Mountain Wine (open, held between them at the neck)",
         "Oilcloth Fold (Pell's, propped as windbreak)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
@@ -2093,9 +2095,8 @@
         "Preserved Trail Parcel x3 (remaining in pack)"
       ],
       "threads": [
-        "Pell has said yes — plainly, without qualification. What comes next is Silas's move.",
+        "Pell has named the habit plainly — the note, the ledger, the three seconds. The bottle is between them and neither has let go.",
         "Fire-ring: same hand, twice — whose route is this, and which direction are they traveling?",
-        "The pre-pass knowledge: whoever camped here knew the route before it opened publicly",
         "Edge District bearing — Leth and Sorel as first contacts",
         "The buried vault head: six-week window, expert needed before week five"
       ]
@@ -2246,7 +2247,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope.",
         "[d2] Waiting at the outcrop edge for the Palework read — patient, not restless.",
         "[d2] Descended with Silas without instruction — matched his pace, read the terrain independently. First words at the overhang: 'Recent?' — practical, not alarmed.",
         "[d2] Watching Silas read the fire-ring — patient, waiting on his findings.",
@@ -2255,17 +2255,18 @@
         "[d2] Your bond becomes romantic.",
         "[d2] Your bond deepens — courting.",
         "[d2] Said yes plainly to Silas's direct question — no qualification, no filed note. Passed the bottle back. Acknowledged she's been managing it badly and clearly finds that faintly ruef",
-        "[d2] Your bond deepens — together."
+        "[d2] Your bond deepens — together.",
+        "[d2] Named what managing it badly looks like — the ledger, the note that lasted three seconds, the bottle held between them."
       ],
       "knownFacts": [
-        "The valve system is three staged gates in a linear southwest-to-northeast sequence — south gate here, middle at east furlong, head at the buried vault northeast",
         "Is ready to depart the valley today — no hesitation, no qualification",
         "The fire-ring was made by one person, twice, three weeks apart — a known waypoint on a route that predates the pass opening",
         "Her father taught her the maker's stamp — 'don't put your name on a thing until the thing says yes'",
         "The oblique angle in her maker's mark is her father's — she stopped correcting it the year he died",
         "She was sixteen when the first piece said yes; she cried, and he pretended not to see",
         "She has wanted this for longer than she'd prefer — her own word is 'managing'",
-        "When asked directly she answers directly — the armor being off changes how she speaks"
+        "When asked directly she answers directly — the armor being off changes how she speaks",
+        "Managing it badly means knowing what she wants and spending energy making sure it doesn't show — filing things, treating the want like a ledger she can close"
       ],
       "skillsObserved": [
         "field-kit discipline under weather change — oilcloth deploye",
@@ -2276,7 +2277,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp with Silas — fire burning low, the evening open between them, the answer given.",
+      "statusNote": "At the overhang camp with Silas — fire burning low, wine between them, the note named and the bottle not yet released.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2831,7 +2832,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Named how badly she wants this when asked directly — 'since the whetstone, and I don't think about things I'm not going to do.' Then showed him.",
           "[d2] When handed explicit permission and a plain statement of want, she leads — no announcement, no hesitation, the same quality of attention she gives iron.",
           "[d2] When the register of ironwork diagnosis doesn't fit, she finds plain speech and uses it — 'I am already behind, and I don't know when it happened.' Named plainly, cost paid without flinching.",
           "[d2] When the composure finally goes, her eyes are the last thing she surrenders — and she comes back through deliberate breath, not withdrawal. Verdict afterward: 'Thorough. Genuinely.' The forge-face gon",
@@ -2854,7 +2854,8 @@
           "[d2] Named the collar ring as a sentence she hadn't started — distinct from the satisfaction of finished work. Received Silas's completion without correction and walked with it open.",
           "[d2] Lost the spar on first tap — moving weight versus standing weight, the feint inside her own read. Paid the wager without deflection and named her held read about Sorel.",
           "[d2] Her father gave her the maker's stamp at fourteen and told her not to put her name on a thing until it says yes. The oblique angle in her mark is his — she stopped correcting it the year he died. She ",
-          "[d2] Said yes plainly at the overhang camp when asked directly — no qualification. Acknowledged she's been managing it badly and clearly has been for longer than she'd prefer."
+          "[d2] Said yes plainly at the overhang camp when asked directly — no qualification. Acknowledged she's been managing it badly and clearly has been for longer than she'd prefer.",
+          "[d2] Told Silas at the overhang camp that managing it badly means knowing what she wants and spending energy keeping it from showing — treating want like a ledger that never quite closes. The forge kiss br"
         ],
         "links": [
           "aldric-provisioning-deal",
@@ -3379,15 +3380,15 @@
     }
   },
   "tendencies": {
-    "strategic": 63.22094537915903,
-    "cerebral": 42.10083059393698,
-    "social": 57.621033502378225,
-    "generous": 14.85988878396864,
-    "cautious": 50.506011822210894,
-    "physical": 1.564143255966522,
-    "risky": 6.095722148505364,
-    "ruthless": 3.474189103747124,
-    "carousing": 2.15191818299889
+    "strategic": 62.90484065226324,
+    "cerebral": 41.8903264409673,
+    "social": 57.33292833486633,
+    "generous": 14.785589340048798,
+    "cautious": 51.25348176309984,
+    "physical": 1.5563225396866893,
+    "risky": 6.065243537762837,
+    "ruthless": 3.456818158228389,
+    "carousing": 2.1411585920838956
   },
   "aptitudes": [
     "strategist",
@@ -3395,7 +3396,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 301,
+  "actionCount": 302,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3529,8 +3530,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784179781185,
-  "rev": 413,
+  "updatedAt": 1784179904980,
+  "rev": 414,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3741,12 +3742,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "corvin",
-      "text": "Silas paid Corvin twenty cord-weight from the hunt proceeds — unprompted, before Corvin could leave. Corvin received it without ceremony and departed for his furlong.",
-      "day": 2,
-      "subjectId": "corvin"
-    },
     {
       "id": "pell",
       "text": "Silas paid Pell forty cord-weight, framed as forge-afternoon materials. She accepted it, said she'd have the fire up, and left the smokehouse.",
@@ -3980,6 +3975,12 @@
       "text": "Pell said yes — plainly, without qualification — when Silas asked directly whether she wants what this is starting to feel like. The relationship has moved past mutual acknowledgment into something na",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "pell",
+      "text": "Pell named her habit in full at the overhang camp on World-day 16 evening: managing it badly means filing what she wants so it doesn't show — a ledger she closes, except it always changes while she is",
+      "day": 2,
+      "subjectId": "pell"
     }
   ],
   "practice": {
@@ -4092,7 +4093,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 104
+    "valley": 105
   },
   "foreclosed": [
     "rootkin",

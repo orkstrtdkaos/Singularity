@@ -1,0 +1,545 @@
+{
+ "note": "SNG-113 aptitude roster — authored by Aevi 2026-07-14 against the 11 resolver-honored mod keys (physicalBonus mentalBonus socialBonus rapportBonus plannedActionBonus socialFinessePenalty disciplinePenalty critSuccessBonus critFailPenalty senseTierBonus reputationGainBonus). TIER-A mods use only honored keys (wired today). TIER-B mods need a new consumer — listed in newConsumersRequired; do NOT ship a TIER-B mod until its consumer exists (SNG-103 lesson: a value with no reader is a lie). Thresholds are earn-points; engine applies keepMargin hysteresis. Every entry carries a cost.",
+ "newConsumersRequired": [
+  {
+   "key": "defenseBonus",
+   "where": "resolve.js — defensive/contested-defense actions (or SNG-098 skill-battle defense)",
+   "usedBy": [
+    "stalwart",
+    "berserk(-)"
+   ]
+  },
+  {
+   "key": "stealthBonus",
+   "where": "resolve.js — actions tagged scout/sneak/hide",
+   "usedBy": [
+    "shadow"
+   ]
+  },
+  {
+   "key": "deceiveBonus",
+   "where": "resolve.js — actions using the deceive function / deception intent",
+   "usedBy": [
+    "trickster"
+   ]
+  },
+  {
+   "key": "intimidateBonus",
+   "where": "resolve.js — threaten/coerce actions",
+   "usedBy": [
+    "dread",
+    "peacemaker(-)"
+   ]
+  },
+  {
+   "key": "deEscalationBonus",
+   "where": "resolve.js — comfort/negotiate/calm actions",
+   "usedBy": [
+    "peacemaker"
+   ]
+  },
+  {
+   "key": "sustainedActionBonus",
+   "where": "resolve.js — ritual/multi-turn/patient actions (gambit steps?)",
+   "usedBy": [
+    "long_game"
+   ]
+  },
+  {
+   "key": "burstPenalty",
+   "where": "resolve.js — single-burst actions",
+   "usedBy": [
+    "long_game(-)"
+   ]
+  },
+  {
+   "key": "craftBonus",
+   "where": "resolve.js — making/repair/forge actions",
+   "usedBy": [
+    "artisan"
+   ]
+  },
+  {
+   "key": "improvisationPenalty",
+   "where": "resolve.js — unprepared/novel actions",
+   "usedBy": [
+    "artisan(-)"
+   ]
+  },
+  {
+   "key": "allyActionBonus",
+   "where": "resolve.js — actions aiding/party-supporting (companions present)",
+   "usedBy": [
+    "banner",
+    "devoted_lover"
+   ]
+  },
+  {
+   "key": "soloPenalty",
+   "where": "resolve.js — acting alone",
+   "usedBy": [
+    "banner(-)"
+   ]
+  },
+  {
+   "key": "alignedTraditionBonus",
+   "where": "resolve.js — actions within primary-domain tradition",
+   "usedBy": [
+    "faithful"
+   ]
+  },
+  {
+   "key": "crossPolePenalty",
+   "where": "resolve.js — actions reaching toward a foreclosed/opposed pole",
+   "usedBy": [
+    "faithful(-)"
+   ]
+  },
+  {
+   "key": "flirtationBonus",
+   "where": "resolve.js — romantic/flirt-tagged social actions (rating-ceiling bounded)",
+   "usedBy": [
+    "charmer",
+    "ardent"
+   ]
+  },
+  {
+   "key": "gravitasPenalty",
+   "where": "resolve.js — formal/authority social actions",
+   "usedBy": [
+    "charmer(-)"
+   ]
+  },
+  {
+   "key": "composurePenalty",
+   "where": "resolve.js — actions under pressure/duress",
+   "usedBy": [
+    "ardent(-)"
+   ]
+  },
+  {
+   "key": "trustedBonus",
+   "where": "resolve.js — being-believed/underestimated social reads (NPC opens up)",
+   "usedBy": [
+    "innocent",
+    "naive"
+   ]
+  },
+  {
+   "key": "worldlyCunningPenalty",
+   "where": "resolve.js — deception/intimidation/cynical-read actions",
+   "usedBy": [
+    "innocent(-)",
+    "naive(-)"
+   ]
+  },
+  {
+   "key": "sincerityReadBonus",
+   "where": "resolve.js — sincere/earnest social actions",
+   "usedBy": [
+    "naive"
+   ]
+  },
+  {
+   "key": "chargedSituationPenalty",
+   "where": "resolve.js — violent/intimate/high-stakes scenes",
+   "usedBy": [
+    "sheltered(-)"
+   ]
+  }
+ ],
+ "playerAptitudes": [
+  {
+   "id": "strategist",
+   "tendency": "strategic",
+   "threshold": 11,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "plannedActionBonus": 5,
+    "senseTierBonus": 1
+   },
+   "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens."
+  },
+  {
+   "id": "silver_tongue",
+   "tendency": "social",
+   "threshold": 11,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "socialBonus": 5
+   },
+   "description": "Words come easily. People open up to you."
+  },
+  {
+   "id": "scholar",
+   "tendency": "cerebral",
+   "threshold": 11,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "mentalBonus": 5
+   },
+   "description": "Study and investigation compound into insight."
+  },
+  {
+   "id": "rough_and_ready",
+   "tendency": "physical",
+   "threshold": 11,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "physicalBonus": 5,
+    "socialFinessePenalty": -3
+   },
+   "description": "You grow hard and capable, but subtlety suffers."
+  },
+  {
+   "id": "carouser",
+   "tendency": "carousing",
+   "threshold": 9,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "rapportBonus": 5,
+    "disciplinePenalty": -5
+   },
+   "description": "Everyone likes a good companion at the table — but focus and restraint decay."
+  },
+  {
+   "id": "daredevil",
+   "tendency": "risky",
+   "threshold": 11,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "critSuccessBonus": 2,
+    "critFailPenalty": 2
+   },
+   "description": "Fortune favors you — and punishes you. Wider extremes both ways."
+  },
+  {
+   "id": "good_samaritan",
+   "tendency": "generous",
+   "threshold": 9,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "reputationGainBonus": 0.25
+   },
+   "description": "Your kindnesses are remembered a little longer and travel a little farther."
+  },
+  {
+   "id": "tactician",
+   "tendency": "strategic",
+   "threshold": 18,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "plannedActionBonus": 8,
+    "senseTierBonus": 1,
+    "critSuccessBonus": 1
+   },
+   "description": "Deep planning becomes second nature — you see three moves out and the odds bend to it. (Deeper strategist.)"
+  },
+  {
+   "id": "orator",
+   "tendency": "social",
+   "threshold": 18,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "socialBonus": 8,
+    "reputationGainBonus": 0.15
+   },
+   "description": "A voice that moves rooms. People don't just open up — they follow. (Deeper silver_tongue.)"
+  },
+  {
+   "id": "sage",
+   "tendency": "cerebral",
+   "threshold": 18,
+   "tier": "A",
+   "axis": "earned",
+   "mods": {
+    "mentalBonus": 8,
+    "senseTierBonus": 1
+   },
+   "description": "Knowledge deepens into wisdom; you perceive what others miss entirely. (Deeper scholar.)"
+  },
+  {
+   "id": "stalwart",
+   "tendency": "cautious",
+   "threshold": 11,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "defenseBonus": 5,
+    "plannedActionBonus": -2
+   },
+   "description": "You hold the line. Harder to break, slower to seize the moment.",
+   "needs": [
+    "defenseBonus"
+   ]
+  },
+  {
+   "id": "shadow",
+   "tendency": "stealth",
+   "threshold": 11,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "stealthBonus": 6,
+    "socialBonus": -3
+   },
+   "description": "You move unseen — but a person who lives in shadow is little known in the light.",
+   "needs": [
+    "stealthBonus"
+   ]
+  },
+  {
+   "id": "trickster",
+   "tendency": "deception",
+   "threshold": 11,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "deceiveBonus": 6,
+    "reputationGainBonus": -0.15
+   },
+   "description": "Lies land clean — but a reputation for it precedes you.",
+   "needs": [
+    "deceiveBonus"
+   ]
+  },
+  {
+   "id": "peacemaker",
+   "tendency": "generous",
+   "threshold": 16,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "deEscalationBonus": 6,
+    "intimidateBonus": -4
+   },
+   "description": "You cool a room with a word — but no one fears you, and sometimes they should.",
+   "needs": [
+    "deEscalationBonus",
+    "intimidateBonus"
+   ]
+  },
+  {
+   "id": "dread",
+   "tendency": "ruthless",
+   "threshold": 12,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "intimidateBonus": 6,
+    "rapportBonus": -4
+   },
+   "description": "Your presence chills — obedience comes easy, warmth does not.",
+   "needs": [
+    "intimidateBonus"
+   ]
+  },
+  {
+   "id": "long_game",
+   "tendency": "patient",
+   "threshold": 12,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "sustainedActionBonus": 6,
+    "burstPenalty": -4
+   },
+   "description": "Rituals, sieges, slow work — yours. But you're caught flat in a sudden moment.",
+   "needs": [
+    "sustainedActionBonus",
+    "burstPenalty"
+   ]
+  },
+  {
+   "id": "artisan",
+   "tendency": "craft",
+   "threshold": 12,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "craftBonus": 6,
+    "improvisationPenalty": -4
+   },
+   "description": "What you make, you make well — but away from your tools you're at a loss.",
+   "needs": [
+    "craftBonus",
+    "improvisationPenalty"
+   ]
+  },
+  {
+   "id": "banner",
+   "tendency": "leadership",
+   "threshold": 12,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "allyActionBonus": 6,
+    "soloPenalty": -4
+   },
+   "description": "Others fight harder beside you — but you were never meant to stand alone.",
+   "needs": [
+    "allyActionBonus",
+    "soloPenalty"
+   ]
+  },
+  {
+   "id": "faithful",
+   "tendency": "devotion",
+   "threshold": 12,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "alignedTraditionBonus": 6,
+    "crossPolePenalty": -5
+   },
+   "description": "Deep in your own tradition you are strong; the far pole closes harder against you.",
+   "needs": [
+    "alignedTraditionBonus",
+    "crossPolePenalty"
+   ]
+  },
+  {
+   "id": "berserk",
+   "tendency": "risky",
+   "threshold": 16,
+   "tier": "B",
+   "axis": "earned",
+   "mods": {
+    "physicalBonus": 6,
+    "defenseBonus": -5
+   },
+   "description": "All fury, no guard. You hit like a storm and leave yourself open. (Deeper/rougher daredevil path.)",
+   "needs": [
+    "defenseBonus"
+   ]
+  },
+  {
+   "id": "charmer",
+   "tendency": "amorous",
+   "threshold": 10,
+   "tier": "B",
+   "axis": "amorous",
+   "mods": {
+    "flirtationBonus": 5,
+    "gravitasPenalty": -3
+   },
+   "description": "Woo, banter, ease — you draw people close. But it's hard to be taken gravely.",
+   "needs": [
+    "flirtationBonus",
+    "gravitasPenalty"
+   ],
+   "ratingCeilingBounded": true
+  },
+  {
+   "id": "devoted_lover",
+   "tendency": "amorous",
+   "threshold": 14,
+   "tier": "B",
+   "axis": "amorous",
+   "mods": {
+    "allyActionBonus": 6
+   },
+   "description": "In service of the one you love, you are more than yourself. Love as sustained attention, made real.",
+   "needs": [
+    "allyActionBonus"
+   ],
+   "dependsOn": "SNG-108 partner bond",
+   "shipInertUntilDependency": true
+  },
+  {
+   "id": "ardent",
+   "tendency": "amorous",
+   "threshold": 14,
+   "tier": "B",
+   "axis": "amorous",
+   "mods": {
+    "flirtationBonus": 8,
+    "composurePenalty": -4
+   },
+   "description": "Passion runs hot in you — magnetic in intimacy, but composure frays under pressure elsewhere.",
+   "needs": [
+    "flirtationBonus",
+    "composurePenalty"
+   ],
+   "ratingCeilingBounded": true
+  },
+  {
+   "id": "innocent",
+   "axis": "inverse",
+   "tier": "B",
+   "worldlinessCeiling": 10,
+   "worldlinessComponents": [
+    "ruthless",
+    "deception",
+    "amorous",
+    "carousing"
+   ],
+   "mods": {
+    "trustedBonus": 5,
+    "worldlyCunningPenalty": -5
+   },
+   "description": "The world hasn't marked you yet. People trust you, lower their guard, extend the benefit of the doubt — but cunning, deception, and menace come hard to you.",
+   "needs": [
+    "trustedBonus",
+    "worldlyCunningPenalty"
+   ],
+   "oneWay": true,
+   "backgroundGrantable": true
+  },
+  {
+   "id": "naive",
+   "axis": "inverse",
+   "tier": "B",
+   "worldlinessCeiling": 6,
+   "worldlinessComponents": [
+    "ruthless",
+    "deception",
+    "carousing"
+   ],
+   "mods": {
+    "sincerityReadBonus": 5,
+    "worldlyCunningPenalty": -3
+   },
+   "description": "You believe, so you are believed — but a lie slips past you, and cynical minds run circles.",
+   "needs": [
+    "sincerityReadBonus",
+    "worldlyCunningPenalty"
+   ],
+   "oneWay": true,
+   "backgroundGrantable": true
+  },
+  {
+   "id": "sheltered",
+   "axis": "inverse",
+   "tier": "B",
+   "worldlinessCeiling": 4,
+   "worldlinessComponents": [
+    "ruthless",
+    "deception",
+    "amorous",
+    "carousing",
+    "physical"
+   ],
+   "mods": {
+    "trustedBonus": 3,
+    "chargedSituationPenalty": -5
+   },
+   "description": "You have not yet seen violence or intimacy up close. A clean slate — but charged moments overwhelm you until you've weathered a few.",
+   "needs": [
+    "trustedBonus",
+    "chargedSituationPenalty"
+   ],
+   "oneWay": true,
+   "backgroundOnly": true
+  }
+ ]
+}

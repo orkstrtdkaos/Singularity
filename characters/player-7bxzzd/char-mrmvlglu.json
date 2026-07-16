@@ -197,80 +197,90 @@
         "player": "Trust Kon — follow wherever it moves, let it navigate while you keep your head down and your legs moving",
         "summary": "Saehara follows Kon northeast along the dry-stone wall — junction cairn found, Waymarker's smoke visible ahead.",
         "narration": "The junction cairn appears when Kon stops.\n\nYou hadn't seen the fox slow — it had been moving ahead of you in that particular way it has, not quite leading and not quite following, occupying some middle distance that feels like it belongs to another grammar of travel. Then it simply sits, tail wrapped around its paws, and you look up from the ground in front of your feet and there it is: four flat stones stacked on a fifth, tilted slightly northeast as if the whole thing is pointing. Someone placed it with intention. It has been here a long time.\n\nYou set your teeth and shift the Cogitant's weight on your shoulders. Her lips are still moving — you've stopped trying to hear the words. Whatever she's calculating, she's been at it since the Cogitarium floor. Her hands have found two fistfuls of your collar and they hold with a grip that surprises you each time you think about it: the body knowing what the mind has forgotten. Kon stands, shakes itself once, and moves northeast. The dry-stone wall materializes out of the scrubland a hundred meters on — low and mossy, older than any living memory, running straight into the brightening distance. The mist is thinner here. Somewhere ahead and below there is the smell of woodsmoke, which means people, which means Waymarker is real and not merely a number Ossian gave you.\n\nYou fall in behind the fox and follow the wall. The smoke smell grows. Maybe thirty minutes at this pace. The fallen Cogitant's grip hasn't loosened, but her breathing has shallowed slightly — not alarming, not yet, but a thing to note. Kon moves with purpose, not urgency. Something reads right about what lies ahead."
+      },
+      {
+        "player": "Arrive and go straight to Lenten — ask the first sensible-looking person where to find the builder",
+        "summary": "Saehara arrives at Waymarker and is directed to Lenten's long shed across the work-yard.",
+        "narration": "The woodsmoke smell arrives before Waymarker does.\n\nYou come over a low rise and the settlement opens below you — not large, maybe forty structures clustered around a central work-yard, the kind of place that builds things and knows it. Scaffolding on two buildings at the near edge. Stacked timber. The sound of a draw-plane somewhere inside, a clean sustained scrape that means someone is already at work. Morning light catches the dust on the yard's packed earth. A dog lifts its head from a doorstep, decides you're not interesting, and puts it down again.\n\nThe first person you find is a woman in an apron carrying a bucket of iron fixings toward the scaffolding — you step into her path and ask for Lenten. She looks at you: a stranger with a fox at his heels and a limp woman across his back, arrived from the direction of nowhere in particular. Her eyes move from the Cogitant's grey robes to your face. Whatever she makes of it, she answers without fuss. Lenten's at the long shed. That one. A tilt of her head toward a low building at the yard's far edge, its wide doors open, the draw-plane sound coming from inside.\n\nKon has already angled that way. You follow, the Cogitant's weight familiar now in the way of things you've carried too long — the ache has gone past complaint and settled into something quieter. Her lips are still moving against your jaw. Whatever count she is running, it hasn't stopped. You cross the yard, step through the open doors into the smell of fresh wood and sawdust and the particular cool dark of a working shed, and look for Lenten."
       }
     ],
     "lastTurn": {
-      "narration": "The junction cairn appears when Kon stops.\n\nYou hadn't seen the fox slow — it had been moving ahead of you in that particular way it has, not quite leading and not quite following, occupying some middle distance that feels like it belongs to another grammar of travel. Then it simply sits, tail wrapped around its paws, and you look up from the ground in front of your feet and there it is: four flat stones stacked on a fifth, tilted slightly northeast as if the whole thing is pointing. Someone placed it with intention. It has been here a long time.\n\nYou set your teeth and shift the Cogitant's weight on your shoulders. Her lips are still moving — you've stopped trying to hear the words. Whatever she's calculating, she's been at it since the Cogitarium floor. Her hands have found two fistfuls of your collar and they hold with a grip that surprises you each time you think about it: the body knowing what the mind has forgotten. Kon stands, shakes itself once, and moves northeast. The dry-stone wall materializes out of the scrubland a hundred meters on — low and mossy, older than any living memory, running straight into the brightening distance. The mist is thinner here. Somewhere ahead and below there is the smell of woodsmoke, which means people, which means Waymarker is real and not merely a number Ossian gave you.\n\nYou fall in behind the fox and follow the wall. The smoke smell grows. Maybe thirty minutes at this pace. The fallen Cogitant's grip hasn't loosened, but her breathing has shallowed slightly — not alarming, not yet, but a thing to note. Kon moves with purpose, not urgency. Something reads right about what lies ahead.",
-      "sceneSummary": "Saehara follows Kon northeast along the dry-stone wall — junction cairn found, Waymarker's smoke visible ahead.",
+      "narration": "The woodsmoke smell arrives before Waymarker does.\n\nYou come over a low rise and the settlement opens below you — not large, maybe forty structures clustered around a central work-yard, the kind of place that builds things and knows it. Scaffolding on two buildings at the near edge. Stacked timber. The sound of a draw-plane somewhere inside, a clean sustained scrape that means someone is already at work. Morning light catches the dust on the yard's packed earth. A dog lifts its head from a doorstep, decides you're not interesting, and puts it down again.\n\nThe first person you find is a woman in an apron carrying a bucket of iron fixings toward the scaffolding — you step into her path and ask for Lenten. She looks at you: a stranger with a fox at his heels and a limp woman across his back, arrived from the direction of nowhere in particular. Her eyes move from the Cogitant's grey robes to your face. Whatever she makes of it, she answers without fuss. Lenten's at the long shed. That one. A tilt of her head toward a low building at the yard's far edge, its wide doors open, the draw-plane sound coming from inside.\n\nKon has already angled that way. You follow, the Cogitant's weight familiar now in the way of things you've carried too long — the ache has gone past complaint and settled into something quieter. Her lips are still moving against your jaw. Whatever count she is running, it hasn't stopped. You cross the yard, step through the open doors into the smell of fresh wood and sawdust and the particular cool dark of a working shed, and look for Lenten.",
+      "sceneSummary": "Saehara arrives at Waymarker and is directed to Lenten's long shed across the work-yard.",
       "choices": [
         {
-          "label": "Arrive and go straight to Lenten — ask the first sensible-looking person where to find the builder",
+          "label": "Call out Lenten's name — state plainly what you're carrying and why you've come",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "direct",
-            "help"
+            "help",
+            "direct"
           ],
           "trivial": true
         },
         {
-          "label": "Arrive quietly and read the settlement first — let Kon move ahead while you take in who's at the edges and what mood the place carries",
+          "label": "Watch the shed a moment before speaking — read who leads before committing to the first face",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "subAttribute": "wits",
+          "difficulty": 15,
           "intentTags": [
             "scout",
             "careful"
           ],
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Call a short halt before the settlement comes into view — sit her against the wall, take water from the Waterskin, check her breathing, and decide what you're going to say",
+          "label": "Set the Cogitant down first — find a bench, get her off your back before you say a word",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "plan"
+            "prepare"
           ],
           "trivial": true
         },
         {
-          "label": "Find a sheltered spot just outside Waymarker, leave the Cogitant with Kon, and go in lighter to speak with Lenten first",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Let Kon go in ahead — see how the workers react to it before you open your mouth",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "plan",
+            "scout",
             "careful"
           ],
-          "trivial": true
+          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "The northeast path along the dry-stone wall, open scrubland thinning into settled land ahead — woodsmoke visible on the air, Waymarker perhaps thirty minutes distant, morning light growing.",
+        "setting": "Interior of Lenten's long shed at the edge of Waymarker's central work-yard — wide doors open to morning light, smells of fresh wood and sawdust, the sound of a draw-plane still running somewhere inside.",
         "npcsPresent": [
           {
             "name": "Fallen Cogitant",
-            "state": "Slung across Saehara's back — grip tight on his collar, lips still moving, breathing shallowed but stable"
+            "state": "Slung across Saehara's back — grip on his collar, lips still moving in silent count"
           },
           {
             "name": "Kon",
-            "state": "Moving northeast along the wall ahead — purposeful, unhurried, coat catching the pale morning light"
+            "state": "Moving into the shed ahead, coat catching the dim interior light"
           }
         ],
         "objects": [
-          "Junction cairn — now behind, passed",
-          "Dry-stone wall — running northeast beside the path",
+          "Work benches — long, heavy, sawdust-covered",
+          "Stacked timber along one wall",
+          "Tools on pegs — planes, chisels, draw-knives",
+          "Katana at Saehara's waist",
           "Traveler's Pack — riding over the Cogitant's weight",
-          "Waterskin — secured, accessible",
-          "Katana at Saehara's waist"
+          "Waterskin — secured, accessible"
         ],
         "threads": [
-          "Fallen Cogitant: breathing shallowed — needs food at Waymarker within two days",
-          "Brenn the runner: stopped coming nineteen days ago — reason still unknown",
-          "Lenten the builder: the name to use if there is doubt at Waymarker",
+          "Lenten not yet located inside the shed",
+          "Fallen Cogitant: needs food and rest within two days",
+          "Brenn the runner: stopped coming nineteen days ago — reason unknown",
           "Third terrace: Cogitant unseen four days — left behind, unresolved"
         ]
       },
@@ -279,46 +289,81 @@
           "op": "update",
           "npcId": "fallen-cogitant",
           "name": "Fallen Cogitant",
-          "note": "Carried northeast along the dry-stone wall — grip firm on Saehara's collar, lips still moving, breathing has shallowed slightly",
+          "note": "Carried across the yard into the long shed — lips still moving, weight still on Saehara's back",
           "status": "injured",
-          "statusNote": "On Saehara's back, approaching Waymarker — breathing shallowed, severely dehydrated, needs food within two days"
+          "statusNote": "On Saehara's back inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days"
         }
       ],
-      "timeOps": {
-        "hoursPassed": 1.5,
-        "why": "the final leg of the three-hour walk from the Cogitarium, following Kon and the dry-stone wall northeast to the edge of Waymarker"
-      },
       "questUpdates": [
         {
           "op": "progress",
           "questId": "cogitarium-supply-line",
-          "note": "Junction cairn passed — Waymarker now visible by its smoke, thirty minutes ahead. Lenten and Brenn are the names to use."
+          "note": "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found."
+        }
+      ],
+      "moveTo": {
+        "location": "waymarker",
+        "why": "Three hours northeast along the dry-stone wall — arrived on foot carrying the fallen Cogitant"
+      },
+      "timeOps": {
+        "hoursPassed": 3,
+        "why": "The walk from the Cogitarium to Waymarker — eleven kilometers at pace under load"
+      },
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "Lenten — a builder at Waymarker who arranged the Cogitarium supply line; practical, settled, probably cautious about the evacuation proposal fallout",
+          "why": "Saehara has arrived at Lenten's shed and is about to make contact — Lenten needs a stable, persistent identity"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Saehara arrived carrying a fallen Cogitant — workers in the yard saw the grey robes; the settlement now knows a Cogitant was brought in",
+          "subPlace": {
+            "name": "Lenten's Long Shed",
+            "note": "The builder's working shed at the far edge of the central work-yard — wide doors, draw-plane sound, fresh timber smell",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "waymarker",
+          "label": "Waymarker",
+          "kind": "place",
+          "fact": "A settlement of roughly forty structures around a central work-yard — builders, scaffolding, stacked timber. Practical and functional. Workers noticed the Cogitant's grey robes without fuss.",
+          "links": [
+            "cogitarium-supply-line",
+            "lenten",
+            "the-cogitariums-calculated-crisis"
+          ]
         }
       ]
     },
     "sceneState": {
-      "setting": "The northeast path along the dry-stone wall, open scrubland thinning into settled land ahead — woodsmoke visible on the air, Waymarker perhaps thirty minutes distant, morning light growing.",
+      "setting": "Interior of Lenten's long shed at the edge of Waymarker's central work-yard — wide doors open to morning light, smells of fresh wood and sawdust, the sound of a draw-plane still running somewhere inside.",
       "npcsPresent": [
         {
           "name": "Fallen Cogitant",
-          "state": "Slung across Saehara's back — grip tight on his collar, lips still moving, breathing shallowed but stable"
+          "state": "Slung across Saehara's back — grip on his collar, lips still moving in silent count"
         },
         {
           "name": "Kon",
-          "state": "Moving northeast along the wall ahead — purposeful, unhurried, coat catching the pale morning light"
+          "state": "Moving into the shed ahead, coat catching the dim interior light"
         }
       ],
       "objects": [
-        "Junction cairn — now behind, passed",
-        "Dry-stone wall — running northeast beside the path",
+        "Work benches — long, heavy, sawdust-covered",
+        "Stacked timber along one wall",
+        "Tools on pegs — planes, chisels, draw-knives",
+        "Katana at Saehara's waist",
         "Traveler's Pack — riding over the Cogitant's weight",
-        "Waterskin — secured, accessible",
-        "Katana at Saehara's waist"
+        "Waterskin — secured, accessible"
       ],
       "threads": [
-        "Fallen Cogitant: breathing shallowed — needs food at Waymarker within two days",
-        "Brenn the runner: stopped coming nineteen days ago — reason still unknown",
-        "Lenten the builder: the name to use if there is doubt at Waymarker",
+        "Lenten not yet located inside the shed",
+        "Fallen Cogitant: needs food and rest within two days",
+        "Brenn the runner: stopped coming nineteen days ago — reason unknown",
         "Third terrace: Cogitant unseen four days — left behind, unresolved"
       ]
     }
@@ -326,7 +371,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 11,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [
@@ -350,7 +395,8 @@
         "Ossian has given survival estimates: seven-day safe window. Saehara has volunteered to make the Waymarker run personally. Decision point: leave now, or resolve the third terrace first.",
         "Ossian named the runner (Brenn, freckled, jaw scar) and the Waymarker contact (Lenten the builder). The payment was notation — applied theoretical work. A third possibility raised: the evacuation proposal may have poisoned the arrangement before the runner stopped coming.",
         "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead.",
-        "Junction cairn passed — Waymarker now visible by its smoke, thirty minutes ahead. Lenten and Brenn are the names to use."
+        "Junction cairn passed — Waymarker now visible by its smoke, thirty minutes ahead. Lenten and Brenn are the names to use.",
+        "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.282Z"
@@ -459,7 +505,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular still",
         "[d1] Saehara checked her vitals by hand: pulse forty beats per minute, lips dry, chalk ground into fingertips, body consuming itself — she has been on the floor four hours and twelve mi",
         "[d1] Received water — swallowed twice on reflex, throat still working, lips still moving; body taking the minimum",
         "[d1] Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water.",
@@ -468,7 +513,8 @@
         "[d1] Kon has moved to sit beside her, warming the air. Ossian confirmed transport is calculably favorable — fifty-one kilograms, thermoregulation compromised, but food at Waymarker chan",
         "[d1] Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker",
         "[d1] Weight has settled into Saehara's back — manageable but taxing; lips still moving against his jaw in silent count",
-        "[d1] Carried northeast along the dry-stone wall — grip firm on Saehara's collar, lips still moving, breathing has shallowed slightly"
+        "[d1] Carried northeast along the dry-stone wall — grip firm on Saehara's collar, lips still moving, breathing has shallowed slightly",
+        "[d1] Carried across the yard into the long shed — lips still moving, weight still on Saehara's back"
       ],
       "knownFacts": [
         "Chalk ground into both hands — she was working before she fell",
@@ -482,7 +528,7 @@
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "On Saehara's back, approaching Waymarker — breathing shallowed, severely dehydrated, needs food within two days",
+      "statusNote": "On Saehara's back inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -493,7 +539,8 @@
     "the_cogitarium": {
       "visits": 1,
       "notes": [
-        "[d1] The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker."
+        "[d1] The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker.",
+        "[d1] Saehara arrived carrying a fallen Cogitant — workers in the yard saw the grey robes; the settlement now knows a Cogitant was brought in"
       ],
       "flags": {
         "fallen_cogitant_removed": true,
@@ -502,7 +549,15 @@
       "vectorsKnown": [
         "body_mind",
         "concrete_abstract"
-      ]
+      ],
+      "subPlaces": {
+        "lenten-s-long-shed": {
+          "name": "Lenten's Long Shed",
+          "day": 1,
+          "visited": true,
+          "note": "The builder's working shed at the far edge of the central work-yard — wide doors, draw-plane sound, fresh timber smell"
+        }
+      }
     }
   },
   "worldState": {
@@ -765,12 +820,14 @@
         "label": "Waymarker",
         "kind": "place",
         "facts": [
-          "[d1] Eleven kilometers northeast of the Cogitarium — path via junction cairn then dry-stone wall, approximately three hours at pace. The settlement that supplied the Cogitarium with grain, dried goods, and"
+          "[d1] Eleven kilometers northeast of the Cogitarium — path via junction cairn then dry-stone wall, approximately three hours at pace. The settlement that supplied the Cogitarium with grain, dried goods, and",
+          "[d1] A settlement of roughly forty structures around a central work-yard — builders, scaffolding, stacked timber. Practical and functional. Workers noticed the Cogitant's grey robes without fuss."
         ],
         "links": [
           "cogitarium",
           "cogitarium-supply-line",
-          "the-cogitariums-calculated-crisis"
+          "the-cogitariums-calculated-crisis",
+          "lenten"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -828,19 +885,19 @@
     }
   },
   "tendencies": {
-    "strategic": 19.252033909774667,
-    "social": 7.535577465966521,
-    "cerebral": 8.455584212737087,
-    "generous": 8.579630890039326,
-    "cautious": 9.501945850318544,
-    "risky": 0.9416228069143757
+    "strategic": 19.155773740225793,
+    "social": 7.497899578636689,
+    "cerebral": 8.4133062916734,
+    "generous": 9.53673273558913,
+    "cautious": 9.454436121066951,
+    "risky": 0.9369146928798039
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 26,
+  "actionCount": 27,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -853,8 +910,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784174089725,
-  "rev": 53,
+  "updatedAt": 1784174221068,
+  "rev": 54,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -862,7 +919,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 26
+    "somatic_reaches": 27
   },
   "opLossPending": false,
   "establishedFacts": [

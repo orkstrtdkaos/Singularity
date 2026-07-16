@@ -89,3 +89,10 @@ These are the system's first **inverse** aptitudes: you don't *earn* them by act
 3. Inverse aptitudes read a composite "worldliness" sum — confirm the component tendencies (ruthless/deception/amorous/carousing) all exist post-population so the sum is well-defined at build time.
 
 *(Resolved and moved to DEPENDENCIES above: `deriveAptitudes` is stateless today and must track the held set for hysteresis; `devoted_lover` depends on SNG-108.)*
+
+
+## AEVI ROSTER — AUTHORED (`po/SNG-113_aptitude_roster.json`)
+26 aptitudes authored against the **11 resolver-honored mod keys** (verified at HEAD: physicalBonus, mentalBonus, socialBonus, rapportBonus, plannedActionBonus, socialFinessePenalty, disciplinePenalty, critSuccessBonus, critFailPenalty, senseTierBonus, reputationGainBonus). Split so nothing ships inert (SNG-103 lesson — a mod with no consumer is a lie):
+- **TIER-A (10):** use only honored keys → **buildable the moment the mechanism lands** (retuned strategist/silver_tongue/scholar/etc. to curved thresholds + deeper tiers tactician/orator/sage).
+- **TIER-B (16):** need a new resolver consumer, each listed in `newConsumersRequired` (20 keys: defenseBonus, stealthBonus, deceiveBonus, intimidateBonus, flirtationBonus, trustedBonus, worldlyCunningPenalty, …). **CCode: a TIER-B aptitude ships only once its consumer exists.** These new consumers are the mechanism half's real scope beyond decay/hysteresis/grants.
+- **Axes:** 20 earned, 3 amorous (charmer/devoted_lover/ardent — rating-ceiling-bounded, minor-absolute), 3 inverse (innocent/naive/sheltered — worldliness-ceiling, one-way, background-grantable). `devoted_lover` ships inert until SNG-108. Roster validated self-consistent (every `needs` key ↔ `newConsumersRequired`).

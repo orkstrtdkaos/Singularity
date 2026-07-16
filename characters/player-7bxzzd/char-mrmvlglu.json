@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 0,
+  "xp": 2,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -33,7 +33,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 96,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -85,85 +85,124 @@
         "player": "Ask directly what crisis they've calculated — and what answer they arrived at",
         "summary": "The Cogitant names the crisis: the Echo River's discoloration is a nanite reclamation site in the upper Disputed Zone, and their calculated answer — evacuate seventeen communities — was rejected by every settlement they approached.",
         "narration": "You meet the Cogitant's extraordinary eyes and ask it plainly — what crisis, and what answer did you calculate?\n\nA beat of silence. Not hesitation; the figure is not uncertain. It is simply completing a thought that was already in motion before your question arrived, and fitting your words into it with the precision of a key sliding home.\n\n\"The watershed,\" it says. The voice is thin and exact, like a line ruled on paper. \"The Echo River. You will have observed the discoloration — gray-green at the surface, particulate distribution consistent with nanite suspension rather than biological bloom. We calculated the source within eleven days of first observation. A reclamation site. Upper reaches, past the Disputed Zone boundary.\" A pause — not for breath, for calibration. \"Our answer was evacuation. Controlled withdrawal from the lower river settlements before the concentration reaches critical threshold. Seventeen communities. A managed dispersal.\" The eyes do not flicker. \"We presented this to three separate settlement representatives. None acted. The calculation was correct. The reception was — \" the Cogitant's gaze drifts very slightly, as though scanning interior notation — \"instructive.\"\n\nKon has gone very still against your boot. Not the planted refusal-stillness. Something closer to attention — the posture of a creature that has heard a sound below hearing. The ember-warmth in its coat brightens one slow pulse and fades. The Cogitant's eyes drop to the fox for exactly one second, then return to you. \"The deviation,\" it says again, quieter, and this time it does not feel like a classification. It feels like it is checking something against an older calculation — one it has not shared."
+      },
+      {
+        "player": "Challenge the calculation itself — evacuation abandons the river; ask if there's a solution that fixes the source instead of fleeing it",
+        "summary": "Saehara challenges the evacuation answer; the Cogitant dismantles the alternative with four conditions, and Kon goes cold and still.",
+        "narration": "You step forward half a pace and ask the question directly — the one that has been pressing against the back of your teeth since the Cogitant said *evacuation* with such clean finality. What about fixing it? Not running from the river but going to the source — the reclamation site in the upper Disputed Zone — and shutting it down, or redirecting it, or doing whatever one does with a woken nanite machine that has been told to prepare a watershed and hasn't been told to stop?\n\nThe Cogitant's gaze shifts. Not with surprise — nothing so human as that — but with the particular quality of attention that means a variable has been entered and found insufficient. It does not blink.\n\n\"We calculated that,\" it says. The thin voice carries no apology and no impatience. \"A source-remediation pathway requires: direct interface with the reclamation site's instruction architecture; knowledge of pre-Transition override syntax; a nanite-dense substrate at the site sufficient for active intervention; and the physical capacity to survive the Zone's interference envelope long enough to complete the handshake. The probability of any arriving party meeting all four conditions rounds to zero at three significant figures.\" A breath — barely. \"Evacuation is not abandonment. It is the answer that remains when the others are removed.\" Its eyes hold yours for a moment longer than calculation seems to require. \"You are troubled by it. That is a body-response. The body's discomfort does not alter the arithmetic.\"\n\nKon has gone very still beside your boot. Not the alert stillness of before — something closer to held breath. The ember-warmth you've grown accustomed to does not come. The fox is staring at nothing in particular, or at something no one else in this room can see, and its coat has dimmed half a shade toward ash."
       }
     ],
     "lastTurn": {
-      "narration": "You meet the Cogitant's extraordinary eyes and ask it plainly — what crisis, and what answer did you calculate?\n\nA beat of silence. Not hesitation; the figure is not uncertain. It is simply completing a thought that was already in motion before your question arrived, and fitting your words into it with the precision of a key sliding home.\n\n\"The watershed,\" it says. The voice is thin and exact, like a line ruled on paper. \"The Echo River. You will have observed the discoloration — gray-green at the surface, particulate distribution consistent with nanite suspension rather than biological bloom. We calculated the source within eleven days of first observation. A reclamation site. Upper reaches, past the Disputed Zone boundary.\" A pause — not for breath, for calibration. \"Our answer was evacuation. Controlled withdrawal from the lower river settlements before the concentration reaches critical threshold. Seventeen communities. A managed dispersal.\" The eyes do not flicker. \"We presented this to three separate settlement representatives. None acted. The calculation was correct. The reception was — \" the Cogitant's gaze drifts very slightly, as though scanning interior notation — \"instructive.\"\n\nKon has gone very still against your boot. Not the planted refusal-stillness. Something closer to attention — the posture of a creature that has heard a sound below hearing. The ember-warmth in its coat brightens one slow pulse and fades. The Cogitant's eyes drop to the fox for exactly one second, then return to you. \"The deviation,\" it says again, quieter, and this time it does not feel like a classification. It feels like it is checking something against an older calculation — one it has not shared.",
-      "sceneSummary": "The Cogitant names the crisis: the Echo River's discoloration is a nanite reclamation site in the upper Disputed Zone, and their calculated answer — evacuate seventeen communities — was rejected by every settlement they approached.",
+      "narration": "You step forward half a pace and ask the question directly — the one that has been pressing against the back of your teeth since the Cogitant said *evacuation* with such clean finality. What about fixing it? Not running from the river but going to the source — the reclamation site in the upper Disputed Zone — and shutting it down, or redirecting it, or doing whatever one does with a woken nanite machine that has been told to prepare a watershed and hasn't been told to stop?\n\nThe Cogitant's gaze shifts. Not with surprise — nothing so human as that — but with the particular quality of attention that means a variable has been entered and found insufficient. It does not blink.\n\n\"We calculated that,\" it says. The thin voice carries no apology and no impatience. \"A source-remediation pathway requires: direct interface with the reclamation site's instruction architecture; knowledge of pre-Transition override syntax; a nanite-dense substrate at the site sufficient for active intervention; and the physical capacity to survive the Zone's interference envelope long enough to complete the handshake. The probability of any arriving party meeting all four conditions rounds to zero at three significant figures.\" A breath — barely. \"Evacuation is not abandonment. It is the answer that remains when the others are removed.\" Its eyes hold yours for a moment longer than calculation seems to require. \"You are troubled by it. That is a body-response. The body's discomfort does not alter the arithmetic.\"\n\nKon has gone very still beside your boot. Not the alert stillness of before — something closer to held breath. The ember-warmth you've grown accustomed to does not come. The fox is staring at nothing in particular, or at something no one else in this room can see, and its coat has dimmed half a shade toward ash.",
+      "sceneSummary": "Saehara challenges the evacuation answer; the Cogitant dismantles the alternative with four conditions, and Kon goes cold and still.",
       "choices": [
         {
-          "label": "Press on the rejection: ask which settlements refused, and why — maybe the answer is in what they didn't hear, not what was said",
+          "label": "Press the Cogitant: ask specifically about the 'override syntax' — that sounds like knowledge, not capacity. Knowledge can be carried. Can they teach it?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "body_mind": 0.7,
+            "concrete_abstract": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "study",
+            "press"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Crouch beside Kon — quietly, without drawing attention — and try to read what it sensed just now. Something changed in the hall when the Cogitant finished speaking.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "body_mind": 0.3,
+            "concrete_abstract": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful",
+            "observe"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn toward the wall of notation — the subject you still don't know. Ask the cross-legged Cogitant what it depicts, directly.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "body_mind": 0.6,
+            "concrete_abstract": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "listen"
+            "ask"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Challenge the calculation itself — evacuation abandons the river; ask if there's a solution that fixes the source instead of fleeing it",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "challenge",
-            "plan"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask directly about Kon — the Cogitant's eyes keep returning to the fox; what do they know about it?",
+          "label": "Sit down on the floor — right where you are, cross-legged, matching the Cogitant's posture — and say: 'Walk me through the four conditions, one at a time. I want to understand what you think is missing.'",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 0,
+          "axes": {
+            "body_mind": 0.4,
+            "concrete_abstract": 0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "ask",
-            "observe"
+            "negotiate",
+            "careful",
+            "study"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Ask what they need from you specifically — not to hear the problem again, but to know what role the 'deviation' is meant to play",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "ask",
-            "direct"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust smell and ozone. Morning. Mist still visible through the outer arch behind you.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch.",
         "npcsPresent": [
           {
             "name": "Cross-legged Cogitant",
-            "state": "Eyes fixed on Saehara, having just delivered the crisis summary with thin precision — now watching him and Kon both, something interior recalculating"
+            "state": "Eyes on Saehara, having delivered the four-condition rebuttal — watching him now with the quality of a calculation still running"
           },
           {
             "name": "Notating Cogitant",
-            "state": "Still standing rigid before the wall of notation, finger tracing chalk loops — has not turned"
+            "state": "Still standing rigid before the wall of notation, finger tracing chalk loops — has not turned through any of this"
           },
           {
             "name": "Drifting Cogitants (background)",
-            "state": "Moving slowly through the hall's edges, unfocused"
+            "state": "Moving slowly at the hall's edges, oblivious"
           }
         ],
         "objects": [
-          "Wall of dense looping notation (chalk on stone)",
-          "Shaft of window-light (Kon sitting in it, ember-warmth pulsed once and faded)",
-          "Outer arch behind you (mist visible through it)",
+          "Wall of dense looping notation (chalk on stone — subject still unknown)",
+          "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, very still)",
+          "Outer arch behind you (mist faintly visible)",
           "Katana at waist (confirmed present)"
         ],
         "threads": [
-          "The Cogitant named the crisis: nanite reclamation site in the upper Disputed Zone, discoloring the Echo River — and their evacuation answer was refused by three settlements",
-          "Kon went very still and pulsed warm during the watershed explanation — it sensed something",
-          "The Cogitant looked at Kon a second time and said 'the deviation' in a quieter register — as if checking it against a prior calculation",
+          "The Cogitant laid out four conditions for source-remediation — override syntax, instruction interface, substrate density, physical endurance in the Zone; all assessed as near-zero probability",
+          "Kon went cold and still during the Cogitant's final words — a change from its earlier warmth; what it sensed is unknown",
           "The wall of notation's subject still unknown",
-          "The other Cogitants have not acknowledged the arrival"
+          "The Cogitant's assessment of Saehara as 'the deviation' remains unexplained"
         ]
       },
       "npcUpdates": [
@@ -171,79 +210,69 @@
           "op": "update",
           "npcId": "unknown-cogitant",
           "name": "Unknown Cogitant",
-          "note": "Disclosed the crisis: Echo River discoloration traced to a nanite reclamation site in the upper Disputed Zone; their calculated answer was controlled evacuation of seventeen communities, rejected by all three settlement representatives they approached. Looked at Kon a second time, said 'the deviation' quietly — checking something older.",
+          "role": "Cogitant, cross-legged in the entrance hall",
+          "note": "Rebutted source-remediation cleanly: four conditions, probability rounds to zero, described Saehara's discomfort as 'a body-response that does not alter the arithmetic'",
           "learned": [
-            "Calculated the river crisis source within eleven days of first observation",
-            "Recommended evacuation of seventeen lower-river communities — no settlement acted",
-            "Has looked at Kon twice now with something like recognition or recalculation",
-            "Their tone on 'the deviation' shifted — quieter, as if testing a prior prediction"
+            "Has a pre-calculated source-remediation pathway that includes 'pre-Transition override syntax' as a required condition",
+            "Assessed probability of an arriving party meeting all four conditions as effectively zero",
+            "Explicitly names the body's discomfort as a category error — separates it from valid calculation"
           ],
           "skillsObserved": [
-            "nanite-pattern analysis",
-            "probability modeling",
-            "watershed calculation"
+            "four-condition probability breakdown",
+            "systematic elimination of alternatives"
           ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Seated in the entrance hall, now in direct conversation with Saehara — has disclosed the Cogitarium's crisis calculation and is watching both Saehara and Kon with evident interior attention"
+          "statusNote": "Seated in the entrance hall, has now delivered full crisis summary and rebuffed source-remediation — watching Saehara for next input"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "echo-river-crisis",
-          "label": "The Echo River Crisis",
+          "topic": "source-remediation-conditions",
+          "label": "The Four Conditions (Source Remediation)",
           "kind": "mystery",
-          "fact": "The Cogitarium calculated the source of the river's gray-green discoloration: a nanite reclamation site in the upper Disputed Zone, active and releasing particulate into the watershed. Their answer — evacuate seventeen downstream communities — was refused by every settlement they approached.",
-          "links": [
-            "cogitarium",
-            "cogitants",
-            "the-cogitariums-calculated-crisis"
-          ]
-        },
-        {
-          "topic": "cogitant-evacuation-answer",
-          "label": "The Evacuation Calculation",
-          "kind": "event",
-          "fact": "Three settlement representatives were presented the Cogitarium's evacuation answer and none acted. The Cogitant described their reception as 'instructive' — which may mean they learned something about people, not just about settlements.",
+          "fact": "The Cogitarium calculated source-remediation requires: (1) direct interface with the site's instruction architecture; (2) pre-Transition override syntax; (3) sufficient nanite-dense substrate at the site; (4) physical endurance inside the Zone's interference envelope. They assessed all four together as near-zero probability for any arriving party.",
           "links": [
             "echo-river-crisis",
+            "cogitarium",
             "cogitants",
-            "cogitarium"
+            "the-cogitariums-calculated-crisis",
+            "the-evacuation-calculation"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — the Cogitant's answer was precise and unhurried, but the conversation was short"
+        "why": "A brief exchange — questions and rebuttal, no more than a few minutes"
       }
     },
     "sceneState": {
-      "setting": "The entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust smell and ozone. Morning. Mist still visible through the outer arch behind you.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch.",
       "npcsPresent": [
         {
           "name": "Cross-legged Cogitant",
-          "state": "Eyes fixed on Saehara, having just delivered the crisis summary with thin precision — now watching him and Kon both, som"
+          "state": "Eyes on Saehara, having delivered the four-condition rebuttal — watching him now with the quality of a calculation still"
         },
         {
           "name": "Notating Cogitant",
-          "state": "Still standing rigid before the wall of notation, finger tracing chalk loops — has not turned"
+          "state": "Still standing rigid before the wall of notation, finger tracing chalk loops — has not turned through any of this"
         },
         {
           "name": "Drifting Cogitants (background)",
-          "state": "Moving slowly through the hall's edges, unfocused"
+          "state": "Moving slowly at the hall's edges, oblivious"
         }
       ],
       "objects": [
-        "Wall of dense looping notation (chalk on stone)",
-        "Shaft of window-light (Kon sitting in it, ember-warmth pulsed once and faded)",
-        "Outer arch behind you (mist visible through it)",
+        "Wall of dense looping notation (chalk on stone — subject still unknown)",
+        "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, very still)",
+        "Outer arch behind you (mist faintly visible)",
         "Katana at waist (confirmed present)"
       ],
       "threads": [
-        "The Cogitant named the crisis: nanite reclamation site in the upper Disputed Zone, discoloring the Echo River — and their evacuation answer was refused by three",
-        "Kon went very still and pulsed warm during the watershed explanation — it sensed something",
-        "The Cogitant looked at Kon a second time and said 'the deviation' in a quieter register — as if checking it against a prior calculation",
+        "The Cogitant laid out four conditions for source-remediation — override syntax, instruction interface, substrate density, physical endurance in the Zone; all as",
+        "Kon went cold and still during the Cogitant's final words — a change from its earlier warmth; what it sensed is unknown",
         "The wall of notation's subject still unknown",
-        "The other Cogitants have not acknowledged the arrival"
+        "The Cogitant's assessment of Saehara as 'the deviation' remains unexplained"
       ]
     }
   },
@@ -273,24 +302,29 @@
       "relationship": 0,
       "history": [
         "[d1] Received Saehara's introduction; called him 'the deviation' — they had calculated a 94.7% probability no one would come; glanced at Kon with near-recognition",
-        "[d1] Disclosed the crisis: Echo River discoloration traced to a nanite reclamation site in the upper Disputed Zone; their calculated answer was controlled evacuation of seventeen commun"
+        "[d1] Disclosed the crisis: Echo River discoloration traced to a nanite reclamation site in the upper Disputed Zone; their calculated answer was controlled evacuation of seventeen commun",
+        "[d1] Rebutted source-remediation cleanly: four conditions, probability rounds to zero, described Saehara's discomfort as 'a body-response that does not alter the arithmetic'"
       ],
       "knownFacts": [
         "Had calculated near-certainty that no aid would arrive — implying a crisis they know about",
         "Looked at Kon with something approaching recognition",
         "Calculated the river crisis source within eleven days of first observation",
         "Recommended evacuation of seventeen lower-river communities — no settlement acted",
-        "Has looked at Kon twice now with something like recognition or recalculation"
+        "Has looked at Kon twice now with something like recognition or recalculation",
+        "Has a pre-calculated source-remediation pathway that includes 'pre-Transition override syntax' as a required condition",
+        "Assessed probability of an arriving party meeting all four conditions as effectively zero",
+        "Explicitly names the body's discomfort as a category error — separates it from valid calculation"
       ],
       "skillsObserved": [
-        "probability calculation",
         "deep interior cognition",
         "nanite-pattern analysis",
         "probability modeling",
-        "watershed calculation"
+        "watershed calculation",
+        "four-condition probability breakdown",
+        "systematic elimination of alternatives"
       ],
       "status": "active",
-      "statusNote": "Seated in the entrance hall, now in direct conversation with Saehara — has disclosed the Cogitarium's crisis calculation and is watching both Saehara and Kon wi",
+      "statusNote": "Seated in the entrance hall, has now delivered full crisis summary and rebuffed source-remediation — watching Saehara for next input",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -301,7 +335,11 @@
     "the_cogitarium": {
       "visits": 1,
       "notes": [],
-      "flags": {}
+      "flags": {},
+      "vectorsKnown": [
+        "body_mind",
+        "concrete_abstract"
+      ]
     }
   },
   "worldState": {
@@ -455,16 +493,33 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "source-remediation-conditions": {
+        "id": "source-remediation-conditions",
+        "label": "The Four Conditions (Source Remediation)",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Cogitarium calculated source-remediation requires: (1) direct interface with the site's instruction architecture; (2) pre-Transition override syntax; (3) sufficient nanite-dense substrate at the s"
+        ],
+        "links": [
+          "echo-river-crisis",
+          "cogitarium",
+          "cogitants",
+          "the-cogitariums-calculated-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 0.990025,
-    "social": 1.99,
-    "cerebral": 1
+    "strategic": 1.985074875,
+    "social": 1.98005,
+    "cerebral": 0.995
   },
   "aptitudes": [],
-  "actionCount": 3,
+  "actionCount": 4,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -477,8 +532,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784169929549,
-  "rev": 22,
+  "updatedAt": 1784170142022,
+  "rev": 23,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -486,7 +541,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 4
+    "somatic_reaches": 5
   },
   "opLossPending": false,
   "establishedFacts": [],
@@ -494,7 +549,9 @@
   "companionBonds": {},
   "practice": {
     "schemaVersion": 1,
-    "uses": {},
+    "uses": {
+      "total_focus": 1
+    },
     "coActivations": {},
     "aspirations": [
       {

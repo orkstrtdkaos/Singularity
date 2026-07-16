@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 8,
-  "xp": 714,
+  "xp": 719,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -65,8 +65,8 @@
     "spectrumId": -0.6576162762451824,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
-    "mechanical_spiritual": 0.16517695395990592,
-    "concrete_abstract": -0.09993028300503495,
+    "mechanical_spiritual": 0.17191810626191062,
+    "concrete_abstract": -0.0749337688547832,
     "death_life": -0.1585027808450198,
     "emotional_logical": 0.048249999999999994,
     "falsehood_truth": 0.04000000000000001,
@@ -77,7 +77,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 135,
-  "energy": 120,
+  "energy": 116,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1844,86 +1844,79 @@
         "player": "Confirm Pell's question — same counterclockwise torque axis, same stain pattern as the east furlong. Walk her through what The Attended End found.",
         "summary": "Silas confirms the CCW torque axis at Fen's intake — same as east furlong — and tells Pell what The Attended End found: three to four weeks on the sleeve, the structure not ending.",
         "narration": "You crouch beside her at the housing base and point to the lip — the stain's inner arc, the way it curves left and then under, the same clockwise-read-from-outside that means counterclockwise at the shaft. Same axis. You trace it with one finger without touching it, the way you'd trace a word you already know.\n\n\"Same axis, same orientation,\" you say. \"East furlong runs the same way. The torque isn't from water pressure or sediment — it's from the mechanism. Something turning, consistently, in one direction, over a long time.\" You let her have the image for a moment before you add the rest. \"The Attended End says the sleeve has three to four weeks before it runs open. Not a collapse — more like a tooth going loose. The thread of failure is already started.\"\n\nPell's hand is still near the stone. She doesn't pull it back. \"And the thing behind it?\"\n\n\"Not ending,\" you say. \"It has more work to do.\"\n\nShe absorbs this with the flat steadiness she uses when a measurement lands somewhere she didn't want it to. Then she straightens, wipes her palm on her thigh, and looks at the full face of the housing — valve to lintel, the mineral glaze on the outlet stone, the iron sleeve dark with age. \"So this isn't a symptom that got away from it,\" she says. \"This is it doing what it was made to do.\" A beat. \"We need to know what the whole design looks like from here. If Order-Sense can read a room's intent from a cradle-recess, I want to know what it reads from a valve that's been running on purpose for forty years.\""
+      },
+      {
+        "player": "Run Order-Sense on the intake housing — read the whole design this valve is part of",
+        "summary": "Order-Sense reads Fen's intake as the southernmost of three staged gates in a linear release sequence running toward the buried vault head.",
+        "narration": "You press two fingers against the housing lip — not the stain, just the stone beside it — and let Order-Sense go thin and still. Conserve, not push. The lattice here is starved enough that you don't want to spend what you can't afford.\n\nThe design comes in pieces rather than all at once, the way a map reveals itself room by room when you hold a lamp close. The valve housing is a joint, not a terminus — it belongs to a linear sequence running southwest to northeast, the same axis you already know from the wash-room and the east furlong. Three pressure points distributed along a single run, each one a staged gate in a system that was never meant to hold water out. It was meant to hold it *back* until the right time. The intake sleeve here is the southernmost gate. The east furlong was the middle. Whatever sits northeast of the wash-room — the load-bearing section marked by the settling-seam — is the head.\n\nYou get the shape and you get the sequence, but the substrate thins before you can read the intent behind the sequencing. Why three gates, why this interval, what opens when the last sleeve surrenders — that stays dark. The design is legible. Its purpose remains its own.\n\nYou lift your fingers and straighten. Pell hasn't moved. Huginn is still on the sill, watching the water.\n\n\"Three gates,\" you say. \"This is the southernmost. The east furlong was the middle. The head is northeast — up near the settling-seam we marked.\" You tap the housing once, lightly. \"The structure isn't defending against the river. It's staged release. Something was built to open in sequence, south to north, and it's doing exactly that.\""
       }
     ],
     "lastTurn": {
-      "narration": "You crouch beside her at the housing base and point to the lip — the stain's inner arc, the way it curves left and then under, the same clockwise-read-from-outside that means counterclockwise at the shaft. Same axis. You trace it with one finger without touching it, the way you'd trace a word you already know.\n\n\"Same axis, same orientation,\" you say. \"East furlong runs the same way. The torque isn't from water pressure or sediment — it's from the mechanism. Something turning, consistently, in one direction, over a long time.\" You let her have the image for a moment before you add the rest. \"The Attended End says the sleeve has three to four weeks before it runs open. Not a collapse — more like a tooth going loose. The thread of failure is already started.\"\n\nPell's hand is still near the stone. She doesn't pull it back. \"And the thing behind it?\"\n\n\"Not ending,\" you say. \"It has more work to do.\"\n\nShe absorbs this with the flat steadiness she uses when a measurement lands somewhere she didn't want it to. Then she straightens, wipes her palm on her thigh, and looks at the full face of the housing — valve to lintel, the mineral glaze on the outlet stone, the iron sleeve dark with age. \"So this isn't a symptom that got away from it,\" she says. \"This is it doing what it was made to do.\" A beat. \"We need to know what the whole design looks like from here. If Order-Sense can read a room's intent from a cradle-recess, I want to know what it reads from a valve that's been running on purpose for forty years.\"",
-      "sceneSummary": "Silas confirms the CCW torque axis at Fen's intake — same as east furlong — and tells Pell what The Attended End found: three to four weeks on the sleeve, the structure not ending.",
+      "narration": "You press two fingers against the housing lip — not the stain, just the stone beside it — and let Order-Sense go thin and still. Conserve, not push. The lattice here is starved enough that you don't want to spend what you can't afford.\n\nThe design comes in pieces rather than all at once, the way a map reveals itself room by room when you hold a lamp close. The valve housing is a joint, not a terminus — it belongs to a linear sequence running southwest to northeast, the same axis you already know from the wash-room and the east furlong. Three pressure points distributed along a single run, each one a staged gate in a system that was never meant to hold water out. It was meant to hold it *back* until the right time. The intake sleeve here is the southernmost gate. The east furlong was the middle. Whatever sits northeast of the wash-room — the load-bearing section marked by the settling-seam — is the head.\n\nYou get the shape and you get the sequence, but the substrate thins before you can read the intent behind the sequencing. Why three gates, why this interval, what opens when the last sleeve surrenders — that stays dark. The design is legible. Its purpose remains its own.\n\nYou lift your fingers and straighten. Pell hasn't moved. Huginn is still on the sill, watching the water.\n\n\"Three gates,\" you say. \"This is the southernmost. The east furlong was the middle. The head is northeast — up near the settling-seam we marked.\" You tap the housing once, lightly. \"The structure isn't defending against the river. It's staged release. Something was built to open in sequence, south to north, and it's doing exactly that.\"",
+      "sceneSummary": "Order-Sense reads Fen's intake as the southernmost of three staged gates in a linear release sequence running toward the buried vault head.",
       "choices": [
         {
-          "label": "Run Order-Sense on the intake housing — read the whole design this valve is part of",
+          "label": "Ask Pell what she makes of staged release — does it change her read on whether the mechanism is broken or working as intended?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "connect"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pull out the Valve Failure Timeline note and mark the three-gate sequence — southernmost, middle, head — against the failure dates to see if the opening is progressing on a schedule.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.4,
-            "mechanical_spiritual": 0.3
-          },
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Walk the hillside above the intake — look for the same settling-seam or rubble trace that marked the buried structure at the wash-room site",
+          "label": "Check how much road you burned getting here and what the sky is telling you — then decide whether to push on toward the buried vault head today or turn back for Aldric's waterskin first.",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Collect the waterskin at Aldric's before continuing further north — the intake read is done; resupply now while Millbrook is still close",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "plan",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Pell what she makes of the mechanism's intent — she named the breach-from-within as a valve design. Does she think it's a release, or a delivery?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Run Order-Sense again, harder — push through the substrate resistance to read the *intent* behind the three-gate sequencing. What does the design want to open when the last sleeve runs?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.2
+            "concrete_abstract": -0.3
           },
-          "difficulty": 0,
+          "difficulty": 30,
           "intentTags": [
             "study",
-            "plan"
+            "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 2
         }
       ],
+      "characterDeltas": {
+        "energy": -2
+      },
       "scene": {
         "setting": "Fen's intake — valve housing in dark stone above the waterline, mineral-edged water audible and running. Low cloud, early spring morning. Road-end packed earth, wheel-ruts behind.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing, looking at the full face of the housing — valve to lintel — after Silas confirmed the axis. Waiting on the next move."
+            "state": "Still beside the housing, listening — hasn't moved since Silas began the read."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the intake's stone sill — slow blink, settled."
+            "state": "On the intake's stone sill, watching the water with one slow blink."
           }
         ],
         "objects": [
@@ -1937,9 +1930,10 @@
           "Contact Names Scrap (in pocket)"
         ],
         "threads": [
-          "Order-Sense not yet run on this site — the whole design remains unread.",
+          "Three-gate staged release sequence now mapped — southernmost (here), middle (east furlong), head (northeast vault settling-seam).",
+          "Design intent behind the sequencing — what opens when the last sleeve runs — still unread.",
           "The cured bladder waterskin at Aldric's — not yet collected.",
-          "Pell's question about mechanism intent: release or delivery?"
+          "Decision pending: push toward the vault head today, or route back through Millbrook first."
         ]
       },
       "npcUpdates": [
@@ -1947,34 +1941,39 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received confirmation of the CCW axis and The Attended End findings — named the implication plainly: the mechanism is doing what it was made to do. Asked for Order-Sense to be run on the valve.",
+          "note": "Received the three-gate staged-release reading — southernmost, middle, head. Hasn't spoken yet; processing.",
           "learned": [
-            "Same CCW torque axis at Fen's intake as east furlong — confirmed by Silas",
-            "Intake sleeve has three to four weeks before running open",
-            "The structure behind the valve is not ending — it has more work to do"
+            "The valve system is three staged gates in a linear southwest-to-northeast sequence — south gate here, middle at east furlong, head at the buried vault northeast of the wash-room."
           ],
-          "statusNote": "Walking north with Silas — at Fen's intake, standing at the valve housing face, working the problem.",
-          "relationshipDelta": 0
+          "statusNote": "Walking north with Silas — at Fen's intake, receiving the Order-Sense read on the three-gate sequence."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Watching the water from the stone sill. Unhurried.",
+          "statusNote": "Perched on the intake's stone sill, attending."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
+          "topic": "precursor-signs-in-the-valley",
+          "label": "Precursor Signs in the Valley",
           "kind": "mystery",
-          "fact": "Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as designed.",
+          "fact": "Order-Sense on Fen's intake confirms a three-gate staged release sequence running southwest to northeast: Fen's intake (southernmost), east furlong valve (middle), buried vault head northeast of the wash-room (terminus). The system was designed to open in sequence — staged release, not containment failure. What the full opening releases remains unread.",
           "links": [
             "millbrook",
-            "pell",
             "dara-holt",
+            "the-water-crisis",
+            "pell",
             "order-sense",
-            "the-unnamed-gift"
+            "the-actor-with-a-list"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the valve housing — minutes, not a beat"
+        "why": "A brief Order-Sense read at the intake housing — a few minutes of contact and stillness."
       }
     },
     "sceneState": {
@@ -1982,11 +1981,11 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing, looking at the full face of the housing — valve to lintel — after Silas confirmed the axis. Waiting on the nex"
+          "state": "Still beside the housing, listening — hasn't moved since Silas began the read."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the intake's stone sill — slow blink, settled."
+          "state": "On the intake's stone sill, watching the water with one slow blink."
         }
       ],
       "objects": [
@@ -2000,9 +1999,10 @@
         "Contact Names Scrap (in pocket)"
       ],
       "threads": [
-        "Order-Sense not yet run on this site — the whole design remains unread.",
+        "Three-gate staged release sequence now mapped — southernmost (here), middle (east furlong), head (northeast vault settling-seam).",
+        "Design intent behind the sequencing — what opens when the last sleeve runs — still unread.",
         "The cured bladder waterskin at Aldric's — not yet collected.",
-        "Pell's question about mechanism intent: release or delivery?"
+        "Decision pending: push toward the vault head today, or route back through Millbrook first."
       ]
     }
   },
@@ -2151,7 +2151,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Accepted the wrestling-next-time terms without deflection — named the reach problem plainly and said yes. Keeping pace north.",
         "[d2] Received the naked-wrestling-in-oil line and a shadowstep retreat — managed her face with visible effort and pointed Silas at the road ahead. Not done.",
         "[d2] Came even with Silas on the road north — acknowledged the wrestling terms plainly and put it on record that she knows what he is doing. Did not look at him.",
         "[d2] Named plainly what Silas is doing — the whole shape of it, valve sites to valley departure — and left it as a statement, not a question.",
@@ -2160,17 +2159,18 @@
         "[d2] Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question y",
         "[d2] Received the full Huginn answer — stillness means nothing is concluding for her. Shoulders settled; the held tension released without ceremony. Named the bird's attention as intere",
         "[d2] Crouching at the valve housing base, reading the stain independently — asked about the axis before Silas finished speaking.",
-        "[d2] Received confirmation of the CCW axis and The Attended End findings — named the implication plainly: the mechanism is doing what it was made to do. Asked for Order-Sense to be run "
+        "[d2] Received confirmation of the CCW axis and The Attended End findings — named the implication plainly: the mechanism is doing what it was made to do. Asked for Order-Sense to be run ",
+        "[d2] Received the three-gate staged-release reading — southernmost, middle, head. Hasn't spoken yet; processing."
       ],
       "knownFacts": [
-        "Silas was asking Huginn about her, not explaining to it",
         "The bird looked at her with decided attention after the exchange",
         "Huginn's stillness is a positive answer — nothing ending, not foreclosed",
         "The bird watches her because she is interesting to it, not because something is coming",
         "The Attended End gives Silas a plain read on what is ending and its timeline — three to four weeks on the sleeve, the buried structure not ending.",
         "Same CCW torque axis at Fen's intake as east furlong — confirmed by Silas",
         "Intake sleeve has three to four weeks before running open",
-        "The structure behind the valve is not ending — it has more work to do"
+        "The structure behind the valve is not ending — it has more work to do",
+        "The valve system is three staged gates in a linear southwest-to-northeast sequence — south gate here, middle at east furlong, head at the buried vault northeast"
       ],
       "skillsObserved": [
         "field-kit discipline under weather change — oilcloth deploye",
@@ -2181,7 +2181,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "Walking north with Silas — at Fen's intake, standing at the valve housing face, working the problem.",
+      "statusNote": "Walking north with Silas — at Fen's intake, receiving the Order-Sense read on the three-gate sequence.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2961,17 +2961,18 @@
           "[d2] The buried structure beneath the east furlong and north-cut hillside is a single coherent design — different rooms (wash-room, valve seats), same builder, same intent. Huginn's attention moved to the ",
           "[d2] The wash-room operator's station was the control head of the full buried structure — valve housings, channel junctions, and the amber-lit crack above the bedrock shelf are all downstream of this point",
           "[d2] A sealed section of the original east-channel bed within Millbrook itself carries the same CCW stain signature as the active valve failures — the structure's footprint extends into the village's own o",
-          "[d2] The sealed original east-channel bed within Millbrook carries a CCW stain 30-40 years old — the system's footprint reaches into the village itself. The channel seal was deliberate containment, part of"
+          "[d2] The sealed original east-channel bed within Millbrook carries a CCW stain 30-40 years old — the system's footprint reaches into the village itself. The channel seal was deliberate containment, part of",
+          "[d2] Order-Sense on Fen's intake confirms a three-gate staged release sequence running southwest to northeast: Fen's intake (southernmost), east furlong valve (middle), buried vault head northeast of the w"
         ],
         "links": [
-          "millbrook",
           "huginn",
           "pell",
           "aldric-provisioning-deal",
           "order-sense",
           "dara-holt",
           "aldric",
-          "the-actor-with-a-list"
+          "the-actor-with-a-list",
+          "the-water-crisis"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3229,15 +3230,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.366541093638496,
-    "cerebral": 39.81860408057031,
-    "social": 59.39802649622621,
-    "generous": 15.860450152930845,
-    "cautious": 49.784116386702905,
-    "physical": 1.6694617640788614,
-    "risky": 3.3464355538197625,
-    "ruthless": 3.7081167903008065,
-    "carousing": 1.2454104059488618
+    "strategic": 60.0647083881703,
+    "cerebral": 40.61951106016746,
+    "social": 59.101036363745074,
+    "generous": 15.781147902166191,
+    "cautious": 50.53519580476939,
+    "physical": 1.6611144552584671,
+    "risky": 3.329703376050664,
+    "ruthless": 3.6895762063493023,
+    "carousing": 1.2391833539191175
   },
   "aptitudes": [
     "strategist",
@@ -3245,7 +3246,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 288,
+  "actionCount": 289,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3371,8 +3372,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784177671936,
-  "rev": 399,
+  "updatedAt": 1784177780022,
+  "rev": 400,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3829,7 +3830,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 37,
+      "order_sense": 38,
       "palework": 17,
       "deathsense": 13,
       "shadowstep": 5,
@@ -3934,7 +3935,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 91
+    "valley": 92
   },
   "foreclosed": [
     "rootkin",

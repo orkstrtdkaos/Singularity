@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 21,
+  "xp": 31,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 69,
+  "energy": 54,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -182,230 +182,169 @@
         "player": "Before you lift her, press Ossian once more: is there anything you must say or show the Waymarker settlement to reopen the supply arrangement — a name, a phrase, a sign they'll recognize?",
         "summary": "Ossian names the runner — Brenn — and the contact at Waymarker — Lenten the builder — and raises a third possibility: the evacuation proposal may have poisoned the arrangement.",
         "narration": "Ossian's hands remain folded. He processes the question the way water finds a crack — not with effort, but with the pressure of what he is.\n\n\"The runner's name was Brenn,\" he says. \"A young man, freckled, with a pronounced scar along his left jaw. He knew the Cogitarium by its smell — chalk and cold iron — and he knew to come to the east archway. He was paid in notation.\" A pause so brief it is almost not one. \"The notation was theoretical work — tensile load calculations, grain storage optimization, the kind of applied problem Waymarker's builder uses. We paid in thought. It was a sufficient arrangement.\"\n\nHe lets that land, then adds the thing that actually answers your question: \"If you arrive and they have doubt, you may say the arrangement was settled by Lenten — the builder. Lenten will know the smell of the chalk-work and will know the runner went quiet. We do not know why Brenn stopped coming.\" His eyes move to the arch, then back. \"We have not known for nineteen days. It is possible something happened to him. It is possible Waymarker withdrew the arrangement without notification. The calculation has a third branch\" — the faintest flattening of register — \"which is that the evacuation proposal was received with more hostility than described to us.\"\n\nKon lifts its head from beside the fallen Cogitant and looks at you, unhurried. That is everything Ossian has. The hall holds the chalk-smell, the pale morning light, Araveth's finger moving without pause at the wall, the woman's lips still working their silent arithmetic. The stairwell curves upward into dark. Waymarker is northeast."
+      },
+      {
+        "player": "Lift the fallen Cogitant, settle her weight against your back, and head for the arch — Waymarker, now.",
+        "summary": "Saehara lifts the fallen Cogitant onto his back and walks out of the Cogitarium into the morning mist — northeast toward Waymarker.",
+        "narration": "You kneel beside her and work your arms under her shoulders. She weighs what Ossian said she would — fifty-one kilograms of someone who forgot to eat — and her head lolls against your neck with a faint, wet exhale, lips still moving. The chalk on her fingers transfers to your sleeve. You shift her weight until it settles across your back, arms hooked under your own, her feet barely grazing the floor. Manageable. Not comfortable, but manageable.\n\nKon is already at the arch. It stood the moment you knelt, and now it waits in the pale mouth of the doorway, coat catching the weak morning light, tail low and steady. Not hurrying you. Just ready.\n\nYou look back once. Ossian hasn't moved — hands folded, eyes open, already calculating something else. Araveth's finger traces the same chalk loop it has traced for eleven days. The drifting Cogitants continue their slow arcs at the hall's edges, orbiting inward, orbiting inward. You don't say goodbye. There's no one here who would register it.\n\nThen you step through the arch into the mist, the Cogitant's weight warm and still against your back, the junction cairn somewhere ahead, the dry-stone wall beyond that, and Waymarker eleven kilometers northeast. The path is not complex. You move with intent."
       }
     ],
     "lastTurn": {
-      "narration": "Ossian's hands remain folded. He processes the question the way water finds a crack — not with effort, but with the pressure of what he is.\n\n\"The runner's name was Brenn,\" he says. \"A young man, freckled, with a pronounced scar along his left jaw. He knew the Cogitarium by its smell — chalk and cold iron — and he knew to come to the east archway. He was paid in notation.\" A pause so brief it is almost not one. \"The notation was theoretical work — tensile load calculations, grain storage optimization, the kind of applied problem Waymarker's builder uses. We paid in thought. It was a sufficient arrangement.\"\n\nHe lets that land, then adds the thing that actually answers your question: \"If you arrive and they have doubt, you may say the arrangement was settled by Lenten — the builder. Lenten will know the smell of the chalk-work and will know the runner went quiet. We do not know why Brenn stopped coming.\" His eyes move to the arch, then back. \"We have not known for nineteen days. It is possible something happened to him. It is possible Waymarker withdrew the arrangement without notification. The calculation has a third branch\" — the faintest flattening of register — \"which is that the evacuation proposal was received with more hostility than described to us.\"\n\nKon lifts its head from beside the fallen Cogitant and looks at you, unhurried. That is everything Ossian has. The hall holds the chalk-smell, the pale morning light, Araveth's finger moving without pause at the wall, the woman's lips still working their silent arithmetic. The stairwell curves upward into dark. Waymarker is northeast.",
-      "sceneSummary": "Ossian names the runner — Brenn — and the contact at Waymarker — Lenten the builder — and raises a third possibility: the evacuation proposal may have poisoned the arrangement.",
+      "narration": "You kneel beside her and work your arms under her shoulders. She weighs what Ossian said she would — fifty-one kilograms of someone who forgot to eat — and her head lolls against your neck with a faint, wet exhale, lips still moving. The chalk on her fingers transfers to your sleeve. You shift her weight until it settles across your back, arms hooked under your own, her feet barely grazing the floor. Manageable. Not comfortable, but manageable.\n\nKon is already at the arch. It stood the moment you knelt, and now it waits in the pale mouth of the doorway, coat catching the weak morning light, tail low and steady. Not hurrying you. Just ready.\n\nYou look back once. Ossian hasn't moved — hands folded, eyes open, already calculating something else. Araveth's finger traces the same chalk loop it has traced for eleven days. The drifting Cogitants continue their slow arcs at the hall's edges, orbiting inward, orbiting inward. You don't say goodbye. There's no one here who would register it.\n\nThen you step through the arch into the mist, the Cogitant's weight warm and still against your back, the junction cairn somewhere ahead, the dry-stone wall beyond that, and Waymarker eleven kilometers northeast. The path is not complex. You move with intent.",
+      "sceneSummary": "Saehara lifts the fallen Cogitant onto his back and walks out of the Cogitarium into the morning mist — northeast toward Waymarker.",
       "choices": [
         {
-          "label": "Lift the fallen Cogitant, settle her weight against your back, and head for the arch — Waymarker, now.",
+          "label": "Set a hard pace — you have three hours and a body on your back; burn the distance while the morning is still cool",
           "attribute": "physical",
           "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "help",
+            "push",
+            "endure",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Before you go, speak once to Araveth — you won't be surprised to get nothing back, but you want to say that someone is going for food.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Walk steady and watch the path — three hours is long enough that a wrong turn costs more than rushing saves",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "careful",
+            "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Ossian the third branch plainly — does he think Waymarker refused to supply them because of the evacuation proposal, and what does that mean for your reception?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
+          "label": "Talk to her as you walk — not expecting an answer, but her lips are still moving and you want to know if anything surfaces",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study",
-            "plan"
+            "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Check the fallen Cogitant one more time before moving — her breathing, her weight, whether she is fit to be carried at all.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Use Total Focus to push through the weight and the cold and hold a clear head for whatever Waymarker looks like when you arrive",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "careful",
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "total_focus",
+          "energyCost": 4,
+          "trivial": false
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "cogitarium-supply-line",
-          "note": "Ossian named the runner (Brenn, freckled, jaw scar) and the Waymarker contact (Lenten the builder). The payment was notation — applied theoretical work. A third possibility raised: the evacuation proposal may have poisoned the arrangement before the runner stopped coming."
-        }
-      ],
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara stands at the base of the stairwell facing Ossian; Kon has lifted its head from beside the fallen Cogitant and watches Saehara.",
+        "setting": "The footpath northeast of the Cogitarium — pale-stone tower shrinking behind; morning mist low on the ground, early-spring air cold and still. Saehara carries the fallen Cogitant on his back; the junction cairn is somewhere ahead.",
         "npcsPresent": [
           {
-            "name": "Ossian",
-            "state": "Cross-legged at the hall's center, hands folded — has delivered the runner's name and the builder's name, face still and waiting."
-          },
-          {
-            "name": "Araveth",
-            "state": "At the notation wall, finger tracing chalk loops without pause — has not turned."
-          },
-          {
             "name": "Fallen Cogitant",
-            "state": "Half-upright on the floor, waterskin on her chest, lips moving — Kon seated beside her, warmth close."
+            "state": "Slung across Saehara's back — semiconscious, lips moving in silent calculation, head resting against his neck"
           },
           {
             "name": "Kon",
-            "state": "Head lifted from beside the fallen Cogitant, watching Saehara with amber eyes."
-          },
-          {
-            "name": "Drifting Cogitants",
-            "state": "Slow arcs at the hall's edges — uniform inward compression, no response."
+            "state": "Pacing ahead on the path, coat warm-red in the mist, tail low and steady — leading without hurrying"
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — twenty-two-day watershed model",
-          "Outer arch — mist faintly visible beyond",
-          "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
-          "Waterskin resting on the fallen Cogitant's chest — partially used",
-          "Traveler's Pack open behind where Saehara was kneeling — buckle undone",
+          "Traveler's Pack — riding over the fallen Cogitant's weight on Saehara's back",
+          "Waterskin — secured but accessible",
           "Katana at Saehara's waist",
-          "Stairwell opening — curves upward into dim chalk-and-iron-smelling dark"
+          "Junction cairn — somewhere ahead on the path, not yet visible",
+          "Dry-stone wall — further northeast, the leg to Waymarker"
         ],
         "threads": [
-          "Waymarker: eleven kilometers northeast — Brenn (runner, missing), Lenten (builder, contact), arrangement may be poisoned by the evacuation proposal",
-          "Fallen Cogitant: transport decision confirmed favorable — needs to be carried and kept warm",
-          "Third terrace: Cogitant unseen four days, dragging sound from above — unresolved",
-          "Araveth: has not acknowledged anyone — chalk model continues"
+          "Fallen Cogitant: two days, maybe three — needs food at Waymarker, not only shelter",
+          "Brenn the runner: stopped coming nineteen days ago — reason unknown, may be sick, gone, or the arrangement was poisoned by the evacuation proposal",
+          "Lenten the builder: the name to use at Waymarker if there is doubt",
+          "Third terrace: Cogitant unseen four days, dragging sound heard — unresolved, left behind"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "fallen-cogitant",
+          "name": "Fallen Cogitant",
+          "note": "Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker",
+          "status": "injured",
+          "statusNote": "Carried on Saehara's back, northeast path toward Waymarker — semiconscious, lips still moving, severely dehydrated, no food yet"
+        },
+        {
+          "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Named the runner (Brenn — freckled, jaw scar, east archway) and the Waymarker contact (Lenten the builder). Explained the payment was notation — applied theoretical work. Raised a third branch: the evacuation proposal may have been received with more hostility than reported, potentially poisoning the supply arrangement before Brenn stopped coming.",
-          "learned": [
-            "The runner's name was Brenn — young, freckled, pronounced scar along his left jaw",
-            "Brenn came to the east archway and was paid in notation: tensile load calculations, grain storage optimization",
-            "The contact at Waymarker is Lenten — a builder who used the Cogitarium's applied theoretical work",
-            "Ossian's third branch: the evacuation proposal may have been received with enough hostility to end the arrangement before Brenn stopped coming"
-          ],
-          "statusNote": "Seated in the entrance hall — has delivered all known intelligence about Waymarker and the supply arrangement; awaiting Saehara's departure.",
-          "relationshipDelta": 0
+          "note": "Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating",
+          "status": "active",
+          "statusNote": "Remaining in the Cogitarium entrance hall — eight to twelve days before irreversible decline"
         }
       ],
-      "codexUpdates": [
+      "factUpdates": [
         {
-          "topic": "cogitarium-supply-line",
-          "label": "Cogitarium Supply Line",
-          "kind": "mystery",
-          "fact": "The runner was named Brenn — young, freckled, jaw scar, came to the east archway. Payment was notation: applied theoretical work (tensile loads, grain storage). The Waymarker contact is Lenten the builder. A third possibility: the evacuation proposal poisoned the arrangement before Brenn stopped coming.",
-          "links": [
-            "cogitarium",
-            "waymarker",
-            "the-cogitariums-calculated-crisis",
-            "ossian",
-            "cogitarium-supply-line"
-          ]
-        },
-        {
-          "topic": "lenten",
-          "label": "Lenten (Waymarker Builder)",
-          "kind": "person",
-          "fact": "A builder at Waymarker who arranged the supply line with the Cogitarium. Paid in notation — applied theoretical work. The name Saehara should use if there is doubt at Waymarker.",
-          "links": [
-            "waymarker",
-            "cogitarium-supply-line",
-            "the-cogitariums-calculated-crisis"
-          ]
-        },
-        {
-          "topic": "brenn",
-          "label": "Brenn (Missing Runner)",
-          "kind": "person",
-          "fact": "The young supply runner from Waymarker — freckled, pronounced scar along his left jaw, came to the east archway every eight days. Stopped coming nineteen days ago. Reason unknown.",
-          "links": [
-            "waymarker",
-            "cogitarium-supply-line",
-            "the-cogitariums-calculated-crisis"
-          ]
+          "op": "add",
+          "text": "Saehara has taken the fallen Cogitant from the Cogitarium and is carrying her northeast toward Waymarker — she cannot be left behind; her two-to-three day window is now the mission's pace.",
+          "subjectId": "fallen-cogitant"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker.",
+          "flag": {
+            "fallen_cogitant_removed": true,
+            "saehara_departed": true
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "cogitarium-supply-line",
+          "note": "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead."
+        }
+      ],
+      "moveTo": {
+        "location": "waymarker",
+        "why": "Saehara walked out of the Cogitarium's arch and is on the northeast footpath, junction cairn ahead — travel in progress"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a focused exchange with Ossian — a few minutes only"
-      },
-      "sceneEnded": false
+        "why": "First moments of the walk — barely clear of the arch; no meaningful time elapsed yet"
+      }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara stands at the base of the stairwell facing Ossian; Kon has lifted its head from beside the fallen Cogitant and watches Saehara.",
+      "setting": "The footpath northeast of the Cogitarium — pale-stone tower shrinking behind; morning mist low on the ground, early-spring air cold and still. Saehara carries the fallen Cogitant on his back; the junction cairn is somewhere ahead.",
       "npcsPresent": [
         {
-          "name": "Ossian",
-          "state": "Cross-legged at the hall's center, hands folded — has delivered the runner's name and the builder's name, face still and"
-        },
-        {
-          "name": "Araveth",
-          "state": "At the notation wall, finger tracing chalk loops without pause — has not turned."
-        },
-        {
           "name": "Fallen Cogitant",
-          "state": "Half-upright on the floor, waterskin on her chest, lips moving — Kon seated beside her, warmth close."
+          "state": "Slung across Saehara's back — semiconscious, lips moving in silent calculation, head resting against his neck"
         },
         {
           "name": "Kon",
-          "state": "Head lifted from beside the fallen Cogitant, watching Saehara with amber eyes."
-        },
-        {
-          "name": "Drifting Cogitants",
-          "state": "Slow arcs at the hall's edges — uniform inward compression, no response."
+          "state": "Pacing ahead on the path, coat warm-red in the mist, tail low and steady — leading without hurrying"
         }
       ],
       "objects": [
-        "Wall of dense chalk notation — twenty-two-day watershed model",
-        "Outer arch — mist faintly visible beyond",
-        "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
-        "Waterskin resting on the fallen Cogitant's chest — partially used",
-        "Traveler's Pack open behind where Saehara was kneeling — buckle undone",
+        "Traveler's Pack — riding over the fallen Cogitant's weight on Saehara's back",
+        "Waterskin — secured but accessible",
         "Katana at Saehara's waist",
-        "Stairwell opening — curves upward into dim chalk-and-iron-smelling dark"
+        "Junction cairn — somewhere ahead on the path, not yet visible",
+        "Dry-stone wall — further northeast, the leg to Waymarker"
       ],
       "threads": [
-        "Waymarker: eleven kilometers northeast — Brenn (runner, missing), Lenten (builder, contact), arrangement may be poisoned by the evacuation proposal",
-        "Fallen Cogitant: transport decision confirmed favorable — needs to be carried and kept warm",
-        "Third terrace: Cogitant unseen four days, dragging sound from above — unresolved",
-        "Araveth: has not acknowledged anyone — chalk model continues"
+        "Fallen Cogitant: two days, maybe three — needs food at Waymarker, not only shelter",
+        "Brenn the runner: stopped coming nineteen days ago — reason unknown, may be sick, gone, or the arrangement was poisoned by the evacuation proposal",
+        "Lenten the builder: the name to use at Waymarker if there is doubt",
+        "Third terrace: Cogitant unseen four days, dragging sound heard — unresolved, left behind"
       ]
     }
   },
@@ -434,7 +373,8 @@
       "progress": [
         "Division of labor proposed to Ossian — awaiting his agreement and assignment of a Cogitant to make the walk.",
         "Ossian has given survival estimates: seven-day safe window. Saehara has volunteered to make the Waymarker run personally. Decision point: leave now, or resolve the third terrace first.",
-        "Ossian named the runner (Brenn, freckled, jaw scar) and the Waymarker contact (Lenten the builder). The payment was notation — applied theoretical work. A third possibility raised: the evacuation proposal may have poisoned the arrangement before the runner stopped coming."
+        "Ossian named the runner (Brenn, freckled, jaw scar) and the Waymarker contact (Lenten the builder). The payment was notation — applied theoretical work. A third possibility raised: the evacuation proposal may have poisoned the arrangement before the runner stopped coming.",
+        "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.282Z"
@@ -467,7 +407,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Named the wall's subject — a twenty-two-day chalk watershed model — and identified the standing Cogitant as Araveth",
         "[d1] You know this person's name now: Ossian (was \"Unknown Cogitant\")",
         "[d1] Gave Saehara a full count: fourteen Cogitants, three terraces. Named the third terrace — the laboratories — as the source of the sound. Disclosed that one Cogitant there has not be",
         "[d1] Saehara used Read the Fight — Ossian watched without comment. He has not moved.",
@@ -476,7 +415,8 @@
         "[d1] Saehara proposed a division of labor — Waymarker runner for resupply, Saehara taking the third terrace. Ossian is deliberating; no answer given yet.",
         "[d1] Delivered survival estimates unprompted by Saehara's framing — had the numbers already. Eight to twelve days for Araveth and upper-terrace Cogitants; two to three for the fallen wo",
         "[d1] Gave directions to Waymarker: eleven kilometers northeast, junction cairn then dry-stone wall, three hours. Confirmed no map exists for external use. Calculated that carrying the f",
-        "[d1] Named the runner (Brenn — freckled, jaw scar, east archway) and the Waymarker contact (Lenten the builder). Explained the payment was notation — applied theoretical work. Raised a "
+        "[d1] Named the runner (Brenn — freckled, jaw scar, east archway) and the Waymarker contact (Lenten the builder). Explained the payment was notation — applied theoretical work. Raised a ",
+        "[d1] Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating"
       ],
       "knownFacts": [
         "The fallen Cogitant has two to three days given her mass and the hall's temperature",
@@ -497,7 +437,7 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "Seated in the entrance hall — has delivered all known intelligence about Waymarker and the supply arrangement; awaiting Saehara's departure.",
+      "statusNote": "Remaining in the Cogitarium entrance hall — eight to twelve days before irreversible decline",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -549,7 +489,8 @@
         "[d1] Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water.",
         "[d1] Unattended now — waterskin on her chest, lips still moving. Saehara has risen and stands at the stair.",
         "[d1] Unattended. Waterskin on her chest. Lips still moving. No food. No one watching her.",
-        "[d1] Kon has moved to sit beside her, warming the air. Ossian confirmed transport is calculably favorable — fifty-one kilograms, thermoregulation compromised, but food at Waymarker chan"
+        "[d1] Kon has moved to sit beside her, warming the air. Ossian confirmed transport is calculably favorable — fifty-one kilograms, thermoregulation compromised, but food at Waymarker chan",
+        "[d1] Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker"
       ],
       "knownFacts": [
         "Chalk ground into both hands — she was working before she fell",
@@ -563,7 +504,7 @@
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "Half-upright on the entrance hall floor — Kon seated beside her for warmth. Saehara intends to carry her to Waymarker.",
+      "statusNote": "Carried on Saehara's back, northeast path toward Waymarker — semiconscious, lips still moving, severely dehydrated, no food yet",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -573,8 +514,13 @@
   "placeMemory": {
     "the_cogitarium": {
       "visits": 1,
-      "notes": [],
-      "flags": {},
+      "notes": [
+        "[d1] The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker."
+      ],
+      "flags": {
+        "fallen_cogitant_removed": true,
+        "saehara_departed": true
+      },
       "vectorsKnown": [
         "body_mind",
         "concrete_abstract"
@@ -625,7 +571,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-16T02:50:52.712Z",
+    "lastSharedReadAt": "2026-07-16T03:51:14.061Z",
     "lastTickWorldDay": 16,
     "lastCanonWorldDay": 16
   },
@@ -904,17 +850,19 @@
     }
   },
   "tendencies": {
-    "strategic": 13.601659263483407,
-    "social": 4.6731165378810315,
-    "cerebral": 7.621805992834215,
-    "generous": 4.713011777380587,
-    "cautious": 6.648904933546339,
-    "risky": 0.960693043575437
+    "strategic": 18.44098271233016,
+    "social": 7.611502200415668,
+    "cerebral": 8.540778478055692,
+    "generous": 7.655999484901216,
+    "cautious": 7.582582106834215,
+    "risky": 0.9511101304657719
   },
   "aptitudes": [
-    "strategist"
+    "strategist",
+    "scholar",
+    "good_samaritan"
   ],
-  "actionCount": 22,
+  "actionCount": 24,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -927,8 +875,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784173577600,
-  "rev": 45,
+  "updatedAt": 1784173922577,
+  "rev": 49,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -936,7 +884,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 23
+    "somatic_reaches": 24
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -945,6 +893,12 @@
       "text": "A Cogitant collapsed in the entrance hall — the third this week. Ossian noted it without alarm. The Cogitarium's bodies are failing at an accelerating rate.",
       "day": 1,
       "subjectId": "ossian"
+    },
+    {
+      "id": "fallen-cogitant",
+      "text": "Saehara has taken the fallen Cogitant from the Cogitarium and is carrying her northeast toward Waymarker — she cannot be left behind; her two-to-three day window is now the mission's pace.",
+      "day": 1,
+      "subjectId": "fallen-cogitant"
     }
   ],
   "customAbilities": {},
@@ -952,10 +906,12 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "total_focus": 2,
-      "read_the_fight": 2
+      "total_focus": 3,
+      "read_the_fight": 3
     },
-    "coActivations": {},
+    "coActivations": {
+      "read_the_fight+total_focus": 1
+    },
     "aspirations": [
       {
         "abilityId": "disarm",

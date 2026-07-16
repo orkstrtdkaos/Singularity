@@ -2064,89 +2064,104 @@
         "player": "While the food and water heat, get some spruce tips to put into the water for tea... then come back and quietly kiss Pell on the forehead to wake her.",
         "summary": "Silas brews spruce-tip tea and wakes Pell at dawn with a forehead kiss — she finds his wrist and opens her eyes.",
         "narration": "The spruce at the overhang's eastern edge is young enough that the tips are still soft — you strip a small handful, six or seven bunches, the resin cold and sharp on your fingers. The smell opens up the moment you bruise the needles: green and astringent, something clarifying about it in the early air. You carry them back and lay them in the cup of warming water, and they begin to steep almost immediately, the water going faintly gold at the edges.\n\nThe dried perch is already warming on the flat stone, and the fire has settled into something reliable — no drama, just heat. You set the spruce-tip cup at the better angle where the flame reaches it, check the water, and then cross back to where Pell is still under the bedroll.\n\nShe hasn't moved much. The hand that was curled against the canvas has shifted inward — she's pulled the edge tighter in her sleep, the way she does, finding warmth without asking for it. Her breathing is slow and steady, one cheek pressed against the folded cloth she's using as a pillow, her hair loose from last night. Huginn watches from the stone lip above with its usual unhurried attention, and you settle onto the stone beside her and lean down and press your lips to her forehead — warm, still, a breath held so the touch lands gently.\n\nHer eyes don't open right away. There's a moment of stillness, then a small exhale through her nose — not surprise, not sleep-confusion, just awareness arriving. One hand moves under the bedroll and finds your wrist. She holds it without squeezing, the way she does when she's deciding something, and then she opens her eyes. The light in the overhang is pale gray and even, and she looks at you the way someone looks at a thing they decided in the night and haven't taken back in the morning."
+      },
+      {
+        "player": "Say something — the morning deserves a word, after last night. Name what you're looking at.",
+        "summary": "Silas names what he's looking at — Pell, and the smoke. She holds his wrist and drinks her tea.",
+        "narration": "The dried perch is crisp at the edges and warm all the way through. Pell sits up with the bedroll around her shoulders, one collar still folded wrong, her thumb resting along the inside of your wrist — not measuring, just there. You tell her plainly: you're looking at her mostly, and at Huginn's chimney. She drinks from the spruce-tip cup without releasing your wrist and says the chimney will keep. Huginn makes a sound from the stone lip that is approximately 'not wrong.'"
       }
     ],
     "lastTurn": {
-      "narration": "The spruce at the overhang's eastern edge is young enough that the tips are still soft — you strip a small handful, six or seven bunches, the resin cold and sharp on your fingers. The smell opens up the moment you bruise the needles: green and astringent, something clarifying about it in the early air. You carry them back and lay them in the cup of warming water, and they begin to steep almost immediately, the water going faintly gold at the edges.\n\nThe dried perch is already warming on the flat stone, and the fire has settled into something reliable — no drama, just heat. You set the spruce-tip cup at the better angle where the flame reaches it, check the water, and then cross back to where Pell is still under the bedroll.\n\nShe hasn't moved much. The hand that was curled against the canvas has shifted inward — she's pulled the edge tighter in her sleep, the way she does, finding warmth without asking for it. Her breathing is slow and steady, one cheek pressed against the folded cloth she's using as a pillow, her hair loose from last night. Huginn watches from the stone lip above with its usual unhurried attention, and you settle onto the stone beside her and lean down and press your lips to her forehead — warm, still, a breath held so the touch lands gently.\n\nHer eyes don't open right away. There's a moment of stillness, then a small exhale through her nose — not surprise, not sleep-confusion, just awareness arriving. One hand moves under the bedroll and finds your wrist. She holds it without squeezing, the way she does when she's deciding something, and then she opens her eyes. The light in the overhang is pale gray and even, and she looks at you the way someone looks at a thing they decided in the night and haven't taken back in the morning.",
-      "sceneSummary": "Silas brews spruce-tip tea and wakes Pell at dawn with a forehead kiss — she finds his wrist and opens her eyes.",
+      "narration": "The dried perch is crisp at the edges and warm all the way through. Pell sits up with the bedroll around her shoulders, one collar still folded wrong, her thumb resting along the inside of your wrist — not measuring, just there. You tell her plainly: you're looking at her mostly, and at Huginn's chimney. She drinks from the spruce-tip cup without releasing your wrist and says the chimney will keep. Huginn makes a sound from the stone lip that is approximately 'not wrong.'",
+      "sceneSummary": "Silas names what he's looking at — Pell, and the smoke. She holds his wrist and drinks her tea.",
       "choices": [
         {
-          "label": "Hand her the spruce-tip tea and the dried perch — let the morning be quiet and ordinary before the descent begins.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "calm"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say something — the morning deserves a word, after last night. Name what you're looking at.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "While the tea finishes, talk through what you know about Leth and Sorel — plan the descent into the Edge District before you move.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Read the Edge District from here one more time with Huginn — the leftmost chimney smoke, what it means, whether you descend straight to it.",
+          "label": "Read the leftmost chimney smoke — use Order-Sense to see what structure or pattern it's part of before you descend",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3,
+            "mechanical_spiritual": 0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Break camp together — pack Memory, the oilcloth, and the remaining trail parcels, and start the descent",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Eat breakfast here before moving — finish the perch and the tea, give this morning its full weight before the Edge District claims the day",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn directly about the chimney — one croak, one direction, whatever it will give you",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
             "study"
           ],
-          "trivial": true,
-          "abilityId": "deathsense"
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
         "setting": "Far side of the mountain pass, early dawn — south-facing rock overhang, small fire burning steadily, pale gray light building. The Edge District's outer settlements visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Awake — eyes open, one hand on Silas's wrist, holding without squeezing, looking at him in the pale morning light."
+            "state": "Sitting up with the bedroll around her shoulders, shirt back on but collar still folded wrong, one hand around the spruce-tip cup, the other loose on Silas's wrist — looking at him with nothing managed."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the stone lip at the overhang's edge, watching the camp with its usual unhurried attention."
+            "state": "Perched on the stone lip, watching the leftmost chimney smoke below — quiet, deliberate attention."
           }
         ],
         "objects": [
           "Memory (spear, leaned against the overhang wall)",
           "Small fire (burning steadily, reliable heat)",
-          "Two strips of dried perch (warming on the flat stone near the fire)",
-          "Cup of spruce-tip water (steeping at the fire's edge — going faintly gold)",
+          "Two strips of dried perch (warming on the flat stone — Pell's strip set within her reach)",
+          "Cup of spruce-tip water (in Pell's hand, going faintly gold)",
           "Empty Resin Mountain Wine bottle (on the flat stone)",
-          "Pell's shirt (on the stone)",
-          "Silas's shirt (on the stone beside Pell's)",
+          "Pell's shirt (on — collar still folded wrong)",
           "Oilcloth Fold (propped as windbreak)",
-          "Bedroll (open, Pell under it, now awake)",
+          "Bedroll (around Pell's shoulders)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)"
         ],
         "threads": [
           "Huginn has marked the leftmost chimney smoke below — quiet, not urgent, but deliberate.",
           "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five.",
-          "Pell is awake — her hand on Silas's wrist, the morning's first exchange begun."
+          "Pell is awake — the morning's first real exchange concluded; the armor is still down."
         ]
       },
       "npcUpdates": [
@@ -2154,16 +2169,25 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Woke to a forehead kiss at dawn — found Silas's wrist before opening her eyes, looked at him in the morning light with nothing taken back from the night.",
+          "note": "Held Silas's wrist through the first exchange of the morning — nothing managed, nothing filed. Told him the chimney would keep. The armor is still down from last night.",
           "learned": [
-            "Opened her eyes into the first morning on the far side of the pass with the decision from the night still intact — no management, no ledger-close."
+            "The morning after the pass camp: still unguarded, still present — no reassembly overnight or at dawn."
           ],
-          "statusNote": "Awake at the overhang camp on the far side of the pass — hand on Silas's wrist, watching him in the early gray light."
+          "status": "active",
+          "statusNote": "Awake at the overhang camp, bedroll around her shoulders, spruce-tip tea in hand — the night's openness intact into morning."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Made a sound approximating 'not wrong' at Pell's remark about the chimney. Continues to watch the leftmost smoke below — quiet but deliberate.",
+          "status": "active",
+          "statusNote": "At the stone lip of the overhang, attending the leftmost chimney smoke in the Edge District below."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet few minutes — fire tended, spruce tips gathered, Pell gently woken."
+        "why": "A brief morning exchange over tea — the first real words of the day."
       }
     },
     "sceneState": {
@@ -2171,30 +2195,29 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Awake — eyes open, one hand on Silas's wrist, holding without squeezing, looking at him in the pale morning light."
+          "state": "Sitting up with the bedroll around her shoulders, shirt back on but collar still folded wrong, one hand around the spruc"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the stone lip at the overhang's edge, watching the camp with its usual unhurried attention."
+          "state": "Perched on the stone lip, watching the leftmost chimney smoke below — quiet, deliberate attention."
         }
       ],
       "objects": [
         "Memory (spear, leaned against the overhang wall)",
         "Small fire (burning steadily, reliable heat)",
-        "Two strips of dried perch (warming on the flat stone near the fire)",
-        "Cup of spruce-tip water (steeping at the fire's edge — going faintly gold)",
+        "Two strips of dried perch (warming on the flat stone — Pell's strip set within h",
+        "Cup of spruce-tip water (in Pell's hand, going faintly gold)",
         "Empty Resin Mountain Wine bottle (on the flat stone)",
-        "Pell's shirt (on the stone)",
-        "Silas's shirt (on the stone beside Pell's)",
+        "Pell's shirt (on — collar still folded wrong)",
         "Oilcloth Fold (propped as windbreak)",
-        "Bedroll (open, Pell under it, now awake)",
+        "Bedroll (around Pell's shoulders)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)"
       ],
       "threads": [
         "Huginn has marked the leftmost chimney smoke below — quiet, not urgent, but deliberate.",
         "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five.",
-        "Pell is awake — her hand on Silas's wrist, the morning's first exchange begun."
+        "Pell is awake — the morning's first real exchange concluded; the armor is still down."
       ]
     }
   },
@@ -2343,7 +2366,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing.",
         "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
         "[d2] Asked plainly for the pace back — named it with the armor down, no management, no qualifier.",
         "[d2] Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back.",
@@ -2352,17 +2374,18 @@
         "[d2] Took the wine by feel, drank half, passed it back — no words exchanged. Fully settled against Silas in the quiet after.",
         "[d2] Slept through the mountain night fully against Silas — the bedroll pulled tight, no armor reassembled overnight. Waking into the first morning on the far side of the pass.",
         "[d3] Asleep at dawn at the overhang camp — Silas eased out without waking her.",
-        "[d3] Woke to a forehead kiss at dawn — found Silas's wrist before opening her eyes, looked at him in the morning light with nothing taken back from the night."
+        "[d3] Woke to a forehead kiss at dawn — found Silas's wrist before opening her eyes, looked at him in the morning light with nothing taken back from the night.",
+        "[d3] Held Silas's wrist through the first exchange of the morning — nothing managed, nothing filed. Told him the chimney would keep. The armor is still down from last night."
       ],
       "knownFacts": [
-        "Stays in the open rather than recovering composure once it has slipped.",
         "Names Silas plainly, without management, when the moment takes the last of her composure.",
         "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close.",
         "Names what she wants without the ledger when the slow pace makes evasion impossible — the please comes from below the accounting.",
         "Names Silas plainly, without management, when the last of it is taken from her.",
         "Stops talking when the management has nowhere left to go — presence instead of words.",
         "Stays in the warmth without reassembling the armor — the rest after is as unguarded as the moment itself.",
-        "Opened her eyes into the first morning on the far side of the pass with the decision from the night still intact — no management, no ledger-close."
+        "Opened her eyes into the first morning on the far side of the pass with the decision from the night still intact — no management, no ledger-close.",
+        "The morning after the pass camp: still unguarded, still present — no reassembly overnight or at dawn."
       ],
       "skillsObserved": [
         "reading a stain pattern independently against a known failur",
@@ -2373,7 +2396,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "Awake at the overhang camp on the far side of the pass — hand on Silas's wrist, watching him in the early gray light.",
+      "statusNote": "Awake at the overhang camp, bedroll around her shoulders, spruce-tip tea in hand — the night's openness intact into morning.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -3510,17 +3533,17 @@
     }
   },
   "tendencies": {
-    "strategic": 48.434209819540094,
-    "cerebral": 30.93865981297747,
-    "social": 44.60846337585644,
-    "generous": 10.92009438911388,
-    "cautious": 40.157097174956185,
-    "physical": 2.6986155234176485,
-    "risky": 7.598758483481485,
-    "ruthless": 3.341372257346178,
-    "carousing": 2.346319175971891,
-    "amorous": 5.408302853509522,
-    "patient": 0.9506249999999999
+    "strategic": 47.22335457405159,
+    "cerebral": 30.16519331765303,
+    "social": 43.493251791460025,
+    "generous": 10.647092029386032,
+    "cautious": 39.15316974558228,
+    "physical": 2.631150135332207,
+    "risky": 7.408789521394448,
+    "ruthless": 3.2578379509125233,
+    "carousing": 2.2876611965725937,
+    "amorous": 6.273095282171783,
+    "patient": 0.9268593749999999
   },
   "aptitudes": [
     "strategist",
@@ -3533,7 +3556,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 326,
+  "actionCount": 327,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3675,8 +3698,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784217711338,
-  "rev": 455,
+  "updatedAt": 1784223058100,
+  "rev": 456,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4239,7 +4262,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 137
+    "valley": 138
   },
   "foreclosed": [
     "rootkin",

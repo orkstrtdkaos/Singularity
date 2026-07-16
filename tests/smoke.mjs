@@ -7,7 +7,7 @@ import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitudes, fadingAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
-import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses } from "../engine/inventory.js";
+import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
@@ -3112,6 +3112,42 @@ await (async () => {
   try { await raceTimeout(Promise.reject(new Error("GH_PUT_409")), 1000, "GH_TIMEOUT"); } catch (e) { rejected = e.message; }
   check("SNG-115: a real error (a 409) still propagates — the deadline doesn't mask genuine failures", rejected === "GH_PUT_409");
 })();
+
+// --- SNG-121: pin items to the sidebar — sensible kind-defaults, never override an explicit choice ---
+{
+  const mkChar = () => ({ inventory: [
+    { name: "Iron Sword", kind: "weapon" },
+    { name: "Healing Draught", kind: "consumable", qty: 2 },
+    { name: "Trail Ration", consumable: true },
+    { name: "River Whetstone", kind: "tool", uses: [{ label: "Sharpen", prompt: "I sharpen on the {item}" }] },
+    { name: "Old Map", kind: "quest" },
+    { name: "Loose Buttons", kind: "misc" },
+  ] });
+
+  const fresh = ensurePins(mkChar());
+  const pins = pinnedItems(fresh).map(i => i.name);
+  check("SNG-121: fresh character auto-pins weapon + consumables + anything with authored uses",
+    pins.includes("Iron Sword") && pins.includes("Healing Draught") && pins.includes("Trail Ration") && pins.includes("River Whetstone"));
+  check("SNG-121: bulk misc/quest items are left unpinned (they live in the full Inventory)",
+    !pins.includes("Old Map") && !pins.includes("Loose Buttons"));
+  check("SNG-121: ensurePins marks the character initialized and is idempotent (second call is a no-op)",
+    fresh._pinsInitialized === true && pinnedItems(ensurePins(fresh)).length === pins.length);
+
+  // Defaults never override an explicit choice: a player who unpinned everything stays unpinned.
+  const chosen = mkChar();
+  ensurePins(chosen);
+  for (const it of chosen.inventory) it.pinned = false;  // player explicitly clears the set
+  ensurePins(chosen);                                     // must NOT re-fill — already initialized
+  check("SNG-121: defaults never re-pin a character who has already made a choice (empty stays empty)",
+    pinnedItems(chosen).length === 0);
+
+  // togglePin flips a single item and reflects in pinnedItems; matches by name or customName.
+  const t = mkChar();
+  check("SNG-121: togglePin turns a misc item on, and pinnedItems reflects it", togglePin(t, "Loose Buttons") === true && pinnedItems(t).some(i => i.name === "Loose Buttons"));
+  check("SNG-121: togglePin flips the same item back off", togglePin(t, "Loose Buttons") === false && !pinnedItems(t).some(i => i.name === "Loose Buttons"));
+  check("SNG-121: togglePin matches a story-named item by its customName", togglePin({ inventory: [{ name: "Iron Sword", customName: "Grief", kind: "weapon" }] }, "Grief") === true);
+  check("SNG-121: togglePin on an absent item returns null (no throw)", togglePin(t, "No Such Thing") === null);
+}
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

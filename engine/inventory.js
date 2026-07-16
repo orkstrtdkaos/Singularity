@@ -150,6 +150,30 @@ const ITEM_USE_DEFAULTS = {
   misc: [{ label: "Put it to use", prompt: "I find a use for my {item} here" }]
 };
 
+// SNG-121: PINNED items are the sidebar quick-access set; everything else lives in the full Inventory view.
+function defaultPinnedKind(it) { return it.kind === "weapon" || it.consumable === true || it.kind === "consumable" || (Array.isArray(it.uses) && it.uses.length > 0); }
+
+/** Fill a never-pinned character's initial pinned set by kind (weapon + consumables + anything with authored
+ *  uses), ONCE. After the player pins/unpins anything (`_pinsInitialized`), defaults never touch it again. */
+export function ensurePins(character) {
+  if (!character || character._pinsInitialized) return character;
+  const inv = character.inventory || [];
+  if (!inv.some(i => i.pinned)) for (const it of inv) if (defaultPinnedKind(it)) it.pinned = true;
+  character._pinsInitialized = true;
+  return character;
+}
+
+/** Toggle an item's sidebar pin (and mark the character as having made an explicit choice). Returns the new state. */
+export function togglePin(character, name) {
+  const it = (character?.inventory || []).find(i => i.name === name || i.customName === name);
+  if (!it) return null;
+  it.pinned = !it.pinned;
+  character._pinsInitialized = true;
+  return it.pinned;
+}
+
+export function pinnedItems(character) { return (character?.inventory || []).filter(i => i.pinned); }
+
 /** SNG-114: the meaningful "use in scene" options for an item — authored `item.uses[]` wins; else the
  *  kind-defaults above (Q3). Pure; `{item}` → the display name. Empty array only for a kind with no default. */
 export function itemUses(item = {}, displayNm = null) {

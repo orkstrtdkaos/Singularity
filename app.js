@@ -14,7 +14,7 @@ import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
-import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses } from "./engine/inventory.js";
+import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
@@ -43,7 +43,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.81";
+const APP_VERSION = "1.8.82";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -143,6 +143,21 @@ let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tu
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
+// SNG-120: per-section collapse state for the play sidebar, mirroring the npcGroups open-set pattern.
+// Persisted on the PROFILE (a UI preference, cross-character — Q1). Two sets: what the player opened against
+// a collapsed default, and what they closed against an open default.
+let sidebarOpen = new Set();
+let sidebarClosed = new Set();
+function loadSidebarState() { try { const u = profile?.uiSidebar || {}; sidebarOpen = new Set(u.open || []); sidebarClosed = new Set(u.closed || []); } catch { /* defaults */ } }
+function saveSidebarState() { if (!profile) return; profile.uiSidebar = { open: [...sidebarOpen], closed: [...sidebarClosed] }; try { saveProfile(profile); } catch { /* best-effort */ } }
+function sectionOpen(key, defaultOpen) { return sidebarClosed.has(key) ? false : sidebarOpen.has(key) ? true : defaultOpen; }
+/** SNG-120: wrap a sidebar section in a collapsible <details> with persisted open/closed state + a header
+ *  summary (a count/band) so a glance answers without expanding. Interactive controls belong in `body`,
+ *  not the title, so a tap on them doesn't also toggle the section. */
+function sec(key, title, body, { defaultOpen = true, summary = "" } = {}) {
+  const open = sectionOpen(key, defaultOpen);
+  return `<details class="sidebar-sec" data-sec="${esc(key)}"${open ? " open" : ""}><summary><span class="sec-title">${title}</span>${summary ? ` <span class="sec-sum">${summary}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
+}
 let gambitDraft = null;  // in-progress plan: {goal, steps: [{text, fallback}], assessed}
 let pendingGambitProposal = null; // SNG-088B: a plan the GM sketched this turn, to open the builder pre-filled
 let lastPlayerText = ""; // last freeform/ask input — restored into the box if the GM errors
@@ -203,6 +218,7 @@ let pendingRankAdvances = []; // ability-arch v2: abilities that auto-advanced t
 function loadIdentity() {
   profile = loadProfile(getPlayerKey()) || newProfile(getPlayerKey());
   ensureRating(profile); // SNG-BATCH-9: backfill the content-rating ceiling on pre-BATCH-9 profiles
+  loadSidebarState();    // SNG-120: restore the player's per-section collapse preferences
 }
 
 /** SNG-BATCH-7 Phase 2: reconcile a local character against the sync repo's authoritative
@@ -4142,7 +4158,7 @@ function renderInventoryScreen(openName = null) {
     ${kinds.filter(k => (character.inventory || []).some(i => i.kind === k)).map(k => `
       <div class="cs-block"><h3 class="codex-title" style="font-size:14px; text-transform:capitalize">${k}s</h3>
       ${(character.inventory || []).filter(i => i.kind === k).map(it => `
-        <div class="inv-row">${itemCard(it, { open: openName === it.name, toggleAttr: "data-inv" })}</div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
+        <div class="inv-row">${itemCard(it, { open: openName === it.name, toggleAttr: "data-inv", showPin: true })}</div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
     <button class="btn secondary" id="inv-back" style="margin-top:10px">Back</button>
   </div>`);
   for (const b of app.querySelectorAll("[data-inv]")) b.onclick = () => renderInventoryScreen(openName === b.dataset.inv ? null : b.dataset.inv);
@@ -4963,10 +4979,10 @@ function useItem(name) {
 /** SNG-114: THE shared item card — a superset (image when open + effects + bonusTags + use/name/drop),
  *  rendered by BOTH the inventory popup and the play sidebar so the two can never drift again. The only
  *  per-surface difference is which attribute toggles it open (each surface owns its own open-state var). */
-function itemCard(it, { open = false, toggleAttr = "data-item-toggle" } = {}) {
+function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin = false } = {}) {
   const img = open && imagesEnabled() ? itemImage(it, { ratingLevel: viewerRatingLevel() }) : null;
   return `<div class="item-card ${open ? "open" : ""}">
-    <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>
+    <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>${showPin ? `<button class="item-pin ${it.pinned ? "on" : ""}" data-item-pin="${esc(it.name)}" title="${it.pinned ? "Pinned to the sidebar — tap to unpin" : "Pin to the sidebar for quick access"}">${it.pinned ? "📌" : "📍"}</button>` : ""}
     ${open ? `<div class="item-detail">
       ${img ? `<img class="item-img" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       <div class="item-desc">${esc(it.description || it.kind)}</div>
@@ -4986,6 +5002,7 @@ function bindItemCardHandlers(afterChange) {
   for (const b of app.querySelectorAll("[data-item-use]")) b.onclick = () => useItem(b.dataset.itemUse);
   for (const b of app.querySelectorAll("[data-item-drop]")) b.onclick = () => { const n = b.dataset.itemDrop; if (confirm("Drop " + n + "?")) { removeItem(character, n, 999); saveCharacter(character); afterChange(); } };
   for (const b of app.querySelectorAll("[data-item-name]")) b.onclick = () => { const nn = prompt("Name this item:"); if (nn !== null && nameItem(character, b.dataset.itemName, nn)) { saveCharacter(character); afterChange(b.dataset.itemName); } };
+  for (const b of app.querySelectorAll("[data-item-pin]")) b.onclick = (e) => { e.stopPropagation(); togglePin(character, b.dataset.itemPin); saveCharacter(character); afterChange(b.dataset.itemPin); }; // SNG-121
 }
 
 /** SNG-114: the intent step for using a non-consumable — offer the item's meaningful uses (authored or
@@ -5156,10 +5173,11 @@ function renderPlay(turn, opts = {}) {
     <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
     <div class="vital-row">Energy ${infoDot("energy.no_regen")}<span class="vital-num" data-vital="energy" tabindex="0" role="button" aria-label="Energy ${character.energy} of ${character.maxEnergy}. Tap for detail.">${character.energy} / ${character.maxEnergy}</span></div>
     <div class="bar energy"><div style="width:${pct(character.energy, character.maxEnergy)}%"></div></div>
-    <section><h3>Attributes${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</h3><div class="attr-grid">
+    <details class="sidebar-sec" data-sec="attributes"${sectionOpen("attributes", false) ? " open" : ""}><summary><span class="sec-title">Attributes</span>${character.pendingSubPoints > 0 ? ` <span class="grow-badge">+${character.pendingSubPoints} to place</span>` : ""}</summary><div class="sec-body"><div class="attr-grid">
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
-    </div></section>
-    <section><h3>Abilities${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}${character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules)) ? ` <button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-left:4px">⬆ Level Up</button>` : ""}</h3>
+    </div></div></details>
+    <details class="sidebar-sec" data-sec="abilities"${sectionOpen("abilities", true) ? " open" : ""}><summary><span class="sec-title">Abilities</span>${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</summary><div class="sec-body">
+      ${character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules)) ? `<button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-bottom:6px; display:block">⬆ Level Up</button>` : ""}
       ${(() => {
         // SNG-047: group owned abilities by type/tradition (same taxonomy as the skill graph),
         // show each ability's FUNCTIONS as chips (what it DOES at a glance).
@@ -5220,72 +5238,49 @@ function renderPlay(turn, opts = {}) {
         const parts = (d.abilityIds || []).map(id => fullCatalog()[id]?.name || id.replace(/-/g, " "));
         return `<div class="ability discovery-row" title="${esc(d.description || "")}">✦ <span class="name">${esc(d.name)}</span>${parts.length ? ` <span class="combo-parts">= ${parts.map(esc).join(" + ")}</span>` : ""}</div>`;
       }).join("")}</details>` : ""}
-    </section>
-    <section><h3>People you know</h3>
-      ${(() => { const partners = partnerAdjacentNpcs(character, CONTENT.rules); return partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name">❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""; })()}
-      ${(() => {
-        const groups = groupNpcsByLocation(character.npcRegistry || {});
-        const keys = Object.keys(groups);
-        if (!keys.length) return "<div class='insight'>no one yet — introduce yourself</div>";
-        keys.sort((a, b) => (a === character.currentLocationId ? -1 : b === character.currentLocationId ? 1 : a === "elsewhere" ? 1 : b === "elsewhere" ? -1 : 0));
-        return keys.map(k => {
-          const open = npcGroupsOpen.has(k) || (k === character.currentLocationId && !npcGroupsClosed.has(k));
-          const label = k === "elsewhere" ? "Elsewhere" : (CONTENT.locations[k]?.name || k);
-          return `<details class="npc-group" data-npcgroup="${esc(k)}" ${open ? "open" : ""}><summary>${esc(label)} <span class="cost">(${groups[k].length})</span></summary>
-            ${groups[k].map(n => `<div class="known-npc" title="${esc((n.statusNote ? "Now: " + n.statusNote + " | " : "") + ((n.history || []).slice(-2).join(" | ") || n.description || ""))}"><span class="npc-name">${esc(n.name)}${nameIsUnknown(n) ? ` <button class="npc-setname" data-setname="${esc(n.id)}" title="You know their name — set it">✎ name</button>` : ""}</span> ${n.bondType && n.bondType !== "platonic" ? `<span class="rep-band bond ${n.bondType === "romantic" ? "trusted" : ""}" title="A bond with its own path — ${esc(relationshipLabel(n))}">${n.bondType === "romantic" ? "❤ " : ""}${esc(relationshipLabel(n))}</span>` : `<span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span>`}</div>`).join("")}
-          </details>`;
-        }).join("");
-      })()}
-    </section>
-    <section><h3>Quests ${infoDot("quest.routes")}</h3>
+    </div></details>
+    ${/* SNG-120: the old sidebar "People you know" (a duplicate of the SNG-119 "who's here" list + the full
+          Character-screen roster) is GONE — its people show once, in the place-scoped section below. */""}
+    <details class="sidebar-sec" data-sec="quests"${sectionOpen("quests", (character.quests || []).some(q => q.status === "active")) ? " open" : ""}><summary><span class="sec-title">Quests</span> ${infoDot("quest.routes")}${(character.quests || []).filter(q => q.status === "active").length ? ` <span class="sec-sum">(${(character.quests || []).filter(q => q.status === "active").length})</span>` : ""}</summary><div class="sec-body">
       ${(character.quests || []).filter(q => q.status === "active").map(q => { const stage = q.structured ? (q.stages?.[q.stageIndex] || q.stages?.[q.stages.length - 1]) : null;
         return `<button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>${q.structured ? ` <span class="cost">✦</span>` : ""}
           <div class="quest-note">${esc(q.structured ? (stage?.objective || "resolve") : (q.progress?.length ? q.progress[q.progress.length - 1] : q.summary))}</div>
         </button>`; }).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
       ${(() => { const avail = availableStructuredQuests(character, CONTENT.quests || [], questOfferContext(character, sceneState)); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
       <button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed" || q.status === "resolved").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>
-    </section>
-    ${syncEnabled() ? `<section><h3>Party</h3>
-      ${sharedScene ? `
-        ${sharedScene.party.map(m => `<div class="known-npc"><span class="npc-name">${m.characterId === character.id ? "you" : esc(m.name)}</span>${sharedScene.turn === m.characterId ? `<span class="rep-band trusted">turn</span>` : ""}</div>`).join("")}
-        <div class="hint">${isMyTurn(sharedScene, character.id) ? "Your turn — act." : "Waiting for " + esc(sharedScene.party.find(m => m.characterId === sharedScene.turn)?.name || "…")}</div>
-        <button class="opt" id="party-leave" style="display:block; width:100%; margin-top:4px">Leave shared scene</button>`
-      : `<button class="opt" id="party-find" style="display:block; width:100%">Find or start a party here</button>`}
-    </section>` : ""}
-    <section><h3>Companions</h3>
-      ${(character.companions || []).map(id => {
-        const c = CONTENT.companions[id];
-        if (!c) return "";
-        const dn = character.companionNames?.[id] || c.name; // SNG-057: player's chosen name
-        const b = bondOf(character, c.id, CONTENT.rules);
-        return `<div class="companion"><span class="companion-name">${esc(dn)}</span>${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""} <span class="rep-band ${b.bond >= 3 ? "trusted" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}${b.stage === 2 ? " · stage 2" : ""}</span> <span class="cost">${esc(c.role)}</span>
-          <button class="opt companion-rename" data-rename="${esc(id)}" title="Name them">✎</button>
-          <button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>`;
-      }).join("")}
-      ${/* SNG-068B: a companion you have not MET must not exist to you — no roster recruit-menu here.
-            The full roster appears only in the quick-start picker + the prologue's companionBeat. */""}
-      ${!(character.companions || []).length ? "<div class='insight'>you travel alone — someone may yet fall in beside you</div>" : ""}
-    </section>
-    <section><h3>Items</h3>
-      ${(character.inventory || []).map(it => itemCard(it, { open: examinedItem === it.name, toggleAttr: "data-examine" })).join("") || "<div class='insight'>empty-handed</div>"}
-    </section>
-    ${(() => { // SNG-119: standing + the people you'd find HERE, scoped to this place (folded from the old detached list)
-      const here = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
-      if (!rep && !here.length) return "";
-      return `<section><h3>${esc(location.name)} — standing &amp; who's here</h3>
-      ${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}
-      ${here.length ? here.map(p => `<div class="known-npc"><span class="npc-name">${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}
-    </section>`; })()}
-    <section><h3>Play-style</h3>${aptitudeChips()}</section>
-    <section><h3>Map & Rest</h3>
+    </div></details>
+    ${(() => { // SNG-120: Company — Party (other players, sync) + Companions (NPCs), folded into one section
+      const comps = (character.companions || []).filter(id => CONTENT.companions[id]);
+      const partyOn = syncEnabled();
+      if (!partyOn && !comps.length) return ""; // solo + no companions → the section disappears
+      const count = (sharedScene?.party?.length || 0) + comps.length;
+      const partyBody = partyOn ? `<div class="company-group"><div class="sys-label">Party</div>${sharedScene ? `${sharedScene.party.map(m => `<div class="known-npc"><span class="npc-name">${m.characterId === character.id ? "you" : esc(m.name)}</span>${sharedScene.turn === m.characterId ? `<span class="rep-band trusted">turn</span>` : ""}</div>`).join("")}<div class="hint">${isMyTurn(sharedScene, character.id) ? "Your turn — act." : "Waiting for " + esc(sharedScene.party.find(m => m.characterId === sharedScene.turn)?.name || "…")}</div><button class="opt" id="party-leave" style="display:block; width:100%; margin-top:4px">Leave shared scene</button>` : `<button class="opt" id="party-find" style="display:block; width:100%">Find or start a party here</button>`}</div>` : "";
+      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules); return `<div class="companion"><span class="companion-name">${esc(dn)}</span>${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""} <span class="rep-band ${b.bond >= 3 ? "trusted" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}${b.stage === 2 ? " · stage 2" : ""}</span> <span class="cost">${esc(c.role)}</span><button class="opt companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>`; }).join("")}</div>` : "";
+      return `<details class="sidebar-sec" data-sec="company"${sectionOpen("company", true) ? " open" : ""}><summary><span class="sec-title">Company</span>${count ? ` <span class="sec-sum">(${count})</span>` : ""}</summary><div class="sec-body">${partyBody}${compBody}</div></details>`;
+    })()}
+    ${(() => { // SNG-121: Items — the PINNED quick-access set; the rest is one tap away in the full Inventory
+      ensurePins(character);
+      const pins = pinnedItems(character), total = (character.inventory || []).length, more = total - pins.length;
+      const body = `${pins.length ? pins.map(it => itemCard(it, { open: examinedItem === it.name, toggleAttr: "data-examine" })).join("") : `<div class="insight">${total ? "Nothing pinned — pin items from Inventory for quick access." : "empty-handed"}</div>`}${total ? `<button class="opt" id="open-inventory-more" style="display:block; width:100%; margin-top:4px">${more > 0 ? `＋ ${more} more in Inventory` : "Open Inventory"}</button>` : ""}`;
+      return `<details class="sidebar-sec" data-sec="items"${sectionOpen("items", true) ? " open" : ""}><summary><span class="sec-title">Items</span> <span class="sec-sum">(${pins.length} pinned · ${total} total)</span></summary><div class="sec-body">${body}</div></details>`;
+    })()}
+    ${(() => { // SNG-119/120: standing + who's HERE (place-scoped) + the committed-partner banner, collapsible
+      const hereP = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
+      const partners = partnerAdjacentNpcs(character, CONTENT.rules);
+      if (!rep && !hereP.length && !partners.length) return "";
+      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name">❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereP.length ? hereP.map(p => `<div class="known-npc"><span class="npc-name">${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}`;
+      return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
+    })()}
+    <details class="sidebar-sec" data-sec="playstyle"${sectionOpen("playstyle", false) ? " open" : ""}><summary><span class="sec-title">Play-style</span></summary><div class="sec-body">${aptitudeChips()}</div></details>
+    <details class="sidebar-sec" data-sec="maprest"${sectionOpen("maprest", false) ? " open" : ""}><summary><span class="sec-title">Map &amp; Rest</span></summary><div class="sec-body">
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>
       <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${recoveryEnergy("sleep", character, rules)} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
-    </section>
-    <section><h3>Codex &amp; Library</h3>
+    </div></details>
+    <details class="sidebar-sec" data-sec="codex"${sectionOpen("codex", false) ? " open" : ""}><summary><span class="sec-title">Codex &amp; Library</span></summary><div class="sec-body">
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>
       <button class="opt" id="open-library" style="display:block; width:100%; margin-top:6px">📖 The Library — read the world</button>
-    </section>
+    </div></details>
   </div>`;
 
   const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel() });
@@ -5497,6 +5492,13 @@ function renderPlay(turn, opts = {}) {
     if (d.open) { npcGroupsOpen.add(k); npcGroupsClosed.delete(k); }
     else { npcGroupsOpen.delete(k); npcGroupsClosed.add(k); }
   };
+  // SNG-120: persist each sidebar section's open/closed state across turns + reloads (on the profile).
+  for (const d of app.querySelectorAll("details.sidebar-sec[data-sec]")) d.ontoggle = () => {
+    const k = d.dataset.sec;
+    if (d.open) { sidebarOpen.add(k); sidebarClosed.delete(k); } else { sidebarOpen.delete(k); sidebarClosed.add(k); }
+    saveSidebarState();
+  };
+  const moreBtn = document.getElementById("open-inventory-more"); if (moreBtn) moreBtn.onclick = () => renderInventoryScreen(); // SNG-121
   // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");

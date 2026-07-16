@@ -435,62 +435,69 @@
         "player": "Use Order-Sense on Fendt himself — read the design he's part of, what role he played in the filtration system, and what piece of it only he still holds.",
         "summary": "Order-Sense fails in the thin substrate — Silas is left with Fendt's silence and the unread paper in his coat.",
         "narration": "The lattice here is thin — you knew that before you tried. You let Order-Sense settle into Fendt the way you'd press a fingertip to a surface to test for heat, and it simply... slides off. Not blocked, not refused. Insufficient. The substrate can't sustain the reach. What you get is the surface: a man with a case, a coat, a paper in the inner pocket, and the particular stillness of someone who has decided to stop moving until he knows what you are.\n\nThe craft gives you nothing about the design he belongs to. It can't thread the full picture together in this district's thin light.\n\nWhich means you're left with what you came in with: his reaction to his own name spoken by a stranger who emerged from a shadow. He has not run. He has not threatened. He has *assessed* — and he is still assessing, which means he has not yet decided you are a problem. That is something. Not much, but something.\n\nHuginn shifts on your shoulder and says nothing. The room holds the morning light coming through the shutter's cracked two fingers, and Fendt's hand rests on the case, and the silence between you has the particular weight of a man waiting to learn whether the next sentence will cost him."
+      },
+      {
+        "player": "Tell him you're not from the council — and that you don't care about the board, you care about the river.",
+        "summary": "Silas names the river; Fendt stills and opens the question back.",
+        "narration": "Fendt's assessment doesn't soften exactly, but something in it shifts — a reweighting, a column being moved.\n\nYou keep your position at the landing-head. No step toward him, no hand raised. \"I'm not from the council,\" you say, and you let the flatness of it carry its own truth. \"The board doesn't interest me. The river does.\"\n\nA beat. Huginn makes no sound on your shoulder, which in its way is a comment.\n\nFendt's hand stays on the case but his grip changes — less the grip of a man about to run, more the grip of a man who has just heard something that doesn't fit the shape of what he was braced for. He looks at you the way someone looks at a locked door they've just been told they can walk through. Calculating whether it's a trap. Deciding how much it matters if it is.\n\n\"The river,\" he says. Not a question. Testing the shape of it in his mouth, like a word in a language he used to know.\n\nHe doesn't sit down. He doesn't offer you a seat either. But he doesn't pick up the case, and he doesn't take another step toward the staircase. His eyes go to Huginn once — briefly, the way people do — then come back to you. \"Three weeks,\" he says, quieter now, something technical bleeding into his voice despite himself. \"I have been watching numbers that didn't add up for three weeks before anyone put my name on that board.\" A pause. \"What do you know about the river?\""
       }
     ],
     "lastTurn": {
-      "narration": "The lattice here is thin — you knew that before you tried. You let Order-Sense settle into Fendt the way you'd press a fingertip to a surface to test for heat, and it simply... slides off. Not blocked, not refused. Insufficient. The substrate can't sustain the reach. What you get is the surface: a man with a case, a coat, a paper in the inner pocket, and the particular stillness of someone who has decided to stop moving until he knows what you are.\n\nThe craft gives you nothing about the design he belongs to. It can't thread the full picture together in this district's thin light.\n\nWhich means you're left with what you came in with: his reaction to his own name spoken by a stranger who emerged from a shadow. He has not run. He has not threatened. He has *assessed* — and he is still assessing, which means he has not yet decided you are a problem. That is something. Not much, but something.\n\nHuginn shifts on your shoulder and says nothing. The room holds the morning light coming through the shutter's cracked two fingers, and Fendt's hand rests on the case, and the silence between you has the particular weight of a man waiting to learn whether the next sentence will cost him.",
-      "sceneSummary": "Order-Sense fails in the thin substrate — Silas is left with Fendt's silence and the unread paper in his coat.",
+      "narration": "Fendt's assessment doesn't soften exactly, but something in it shifts — a reweighting, a column being moved.\n\nYou keep your position at the landing-head. No step toward him, no hand raised. \"I'm not from the council,\" you say, and you let the flatness of it carry its own truth. \"The board doesn't interest me. The river does.\"\n\nA beat. Huginn makes no sound on your shoulder, which in its way is a comment.\n\nFendt's hand stays on the case but his grip changes — less the grip of a man about to run, more the grip of a man who has just heard something that doesn't fit the shape of what he was braced for. He looks at you the way someone looks at a locked door they've just been told they can walk through. Calculating whether it's a trap. Deciding how much it matters if it is.\n\n\"The river,\" he says. Not a question. Testing the shape of it in his mouth, like a word in a language he used to know.\n\nHe doesn't sit down. He doesn't offer you a seat either. But he doesn't pick up the case, and he doesn't take another step toward the staircase. His eyes go to Huginn once — briefly, the way people do — then come back to you. \"Three weeks,\" he says, quieter now, something technical bleeding into his voice despite himself. \"I have been watching numbers that didn't add up for three weeks before anyone put my name on that board.\" A pause. \"What do you know about the river?\"",
+      "sceneSummary": "Silas names the river; Fendt stills and opens the question back.",
       "choices": [
         {
-          "label": "Ask him plainly what the falsified readings covered — what the real numbers would have shown.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Tell him what you found at the valve sites — the CCW torque, the buried structure, the pre-Transition provenance. Come in with evidence and see if it unlocks what he's been holding.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "persuade"
+            "study",
+            "negotiate"
           ],
           "trivial": false
         },
         {
-          "label": "Tell him you're not from the council — and that you don't care about the board, you care about the river.",
+          "label": "Ask him what his numbers showed — let him lead. He's been sitting on something for three weeks; give him the opening to name it himself.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
+            "negotiate",
+            "calm"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Show him the Valve Failure Timeline note — Mara's torn page, the four sleeve blanks, the dates. Put physical evidence on the desk between you.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
             "negotiate"
           ],
           "trivial": true
         },
         {
-          "label": "Ask about the paper in his coat — what it is and why he took it rather than filed it.",
+          "label": "Use Deathsense on the paper in his coat — not on Fendt, on what that folded record is ending. Read what its disappearance closes off.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Step aside from the landing — let him see the stairs are clear, give him the out, and read what he does with it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "abilityId": "deathsense",
+          "energyCost": 2,
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "energy": -2
-      },
       "scene": {
-        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — Order-Sense failed; Fendt is reading Silas, unread in return.",
+        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas.",
         "npcsPresent": [
           {
             "name": "Fendt",
-            "state": "Standing beside the cleared desk, hand on the latched traveling case, weight in assessment — has not decided whether Silas is a threat"
+            "state": "Standing beside the cleared desk, hand on the latched traveling case — grip changed, no longer about to run; has just asked what Silas knows about the river"
           },
           {
             "name": "Pell",
@@ -498,19 +505,19 @@
           },
           {
             "name": "Huginn",
-            "state": "Perched on Silas's shoulder, shifted once, silent — watching Fendt"
+            "state": "Perched on Silas's shoulder, silent — watched Fendt briefly, now still"
           }
         ],
         "objects": [
           "Latched traveling case — at Fendt's boots, hand still on the handle",
-          "Narrow shutter — cracked two fingers wide, morning light crossing the room in one bar",
+          "Narrow shutter — cracked two fingers wide, morning light crossing the room in one thin blade",
           "Desk — cleared entirely, last paper gone into the coat",
           "Oil lamp (below, storage room) — still burning",
           "Cloth-wrapped bundle — outside, beside the rear service door",
           "Last paper — folded into Fendt's inner coat pocket"
         ],
         "threads": [
-          "Fendt is reading Silas — assessment still open, has not committed to a response",
+          "Fendt has asked what Silas knows about the river — the question is live and waiting",
           "The paper in the coat is the last record of something — not yet identified",
           "Order-Sense failed — what Fendt holds and what the design looked like is unread",
           "Pell holds the front; she does not know contact has been made"
@@ -521,22 +528,32 @@
           "op": "update",
           "npcId": "fendt",
           "name": "Fendt",
-          "note": "Order-Sense attempted on him — failed in the thin substrate. Fendt remains in assessment, unread. Has not moved.",
-          "statusNote": "At the desk in the upper floor of the Edge District administrative building — in assessment, neither fleeing nor committing. Waiting on Silas's next move.",
-          "status": "active"
+          "note": "Heard 'not from the council' and 'the river' — grip changed from flight-ready to assessment. Named three weeks of bad numbers before the board moved. Has asked what Silas knows about the river.",
+          "learned": [
+            "Silas is not from the council",
+            "Silas's stated interest is the river, not the accountability board",
+            "Has been watching numbers that didn't add up for three weeks before his name appeared on the board"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the desk in the upper floor — grip has shifted from flight to cautious engagement; has asked Silas what he knows about the river"
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "A brief beat of held silence — no meaningful time passed"
+        "hoursPassed": 0.25,
+        "why": "A brief exchange of opening words at the landing-head"
       }
     },
     "sceneState": {
-      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — Order-Sense failed; Fendt is reading Silas, unread in return.",
+      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas.",
       "npcsPresent": [
         {
           "name": "Fendt",
-          "state": "Standing beside the cleared desk, hand on the latched traveling case, weight in assessment — has not decided whether Sil"
+          "state": "Standing beside the cleared desk, hand on the latched traveling case — grip changed, no longer about to run; has just as"
         },
         {
           "name": "Pell",
@@ -544,7 +561,7 @@
         },
         {
           "name": "Huginn",
-          "state": "Perched on Silas's shoulder, shifted once, silent — watching Fendt"
+          "state": "Perched on Silas's shoulder, silent — watched Fendt briefly, now still"
         }
       ],
       "objects": [
@@ -556,7 +573,7 @@
         "Last paper — folded into Fendt's inner coat pocket"
       ],
       "threads": [
-        "Fendt is reading Silas — assessment still open, has not committed to a response",
+        "Fendt has asked what Silas knows about the river — the question is live and waiting",
         "The paper in the coat is the last record of something — not yet identified",
         "Order-Sense failed — what Fendt holds and what the design looked like is unread",
         "Pell holds the front; she does not know contact has been made"
@@ -1201,21 +1218,25 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d3] Named quietly at the landing-head by Silas; startled but did not flee — shifted into assessment. Said 'you came through the back' as a statement, not a question. Noted Silas arrive",
-        "[d3] Order-Sense attempted on him — failed in the thin substrate. Fendt remains in assessment, unread. Has not moved."
+        "[d3] Order-Sense attempted on him — failed in the thin substrate. Fendt remains in assessment, unread. Has not moved.",
+        "[d3] Heard 'not from the council' and 'the river' — grip changed from flight-ready to assessment. Named three weeks of bad numbers before the board moved. Has asked what Silas knows abo"
       ],
       "knownFacts": [
         "Recognized that Silas came through the rear — reads the approach as significant",
         "Is waiting for the council to act; Silas arrived ahead of that action",
-        "Has a last paper in his inner coat pocket — taken rather than filed"
+        "Has a last paper in his inner coat pocket — taken rather than filed",
+        "Silas is not from the council",
+        "Silas's stated interest is the river, not the accountability board",
+        "Has been watching numbers that didn't add up for three weeks before his name appeared on the board"
       ],
       "skillsObserved": [
         "forced calm under surprise — made himself slow his breathing"
       ],
       "status": "active",
-      "statusNote": "At the desk in the upper floor of the Edge District administrative building — in assessment, neither fleeing nor committing. Waiting on Silas's next move.",
+      "statusNote": "At the desk in the upper floor — grip has shifted from flight to cautious engagement; has asked Silas what he knows about the river",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2230,17 +2251,17 @@
     }
   },
   "tendencies": {
-    "strategic": 43.84383358502797,
-    "cerebral": 28.72954134344049,
-    "social": 34.63087145956691,
-    "generous": 8.47759273681729,
-    "cautious": 33.07883191515386,
-    "physical": 2.0950151661321197,
-    "risky": 5.89914129246082,
-    "ruthless": 2.594006257685778,
-    "carousing": 1.821517076290447,
-    "amorous": 4.994861212312543,
-    "patient": 1.5546501494889127
+    "strategic": 42.747737745402276,
+    "cerebral": 28.011302809854477,
+    "social": 34.765099673077735,
+    "generous": 8.265652918396857,
+    "cautious": 32.25186111727501,
+    "physical": 2.0426397869788167,
+    "risky": 5.7516627601493,
+    "ruthless": 2.5291561012436334,
+    "carousing": 1.7759791493831858,
+    "amorous": 4.8699896820047295,
+    "patient": 1.5157838957516898
   },
   "aptitudes": [
     "strategist",
@@ -2252,7 +2273,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 336,
+  "actionCount": 337,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2394,8 +2415,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784238500876,
-  "rev": 478,
+  "updatedAt": 1784238583777,
+  "rev": 479,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2959,7 +2980,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 150
+    "valley": 151
   },
   "foreclosed": [
     "rootkin",

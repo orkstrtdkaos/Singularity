@@ -237,161 +237,132 @@
         "player": "Stand, settle the pack, and go — no more words needed",
         "summary": "Saehara stands, exchanges a final nod with Lenten, and walks out of the long shed into the afternoon yard — Kon already leading northeast.",
         "narration": "You stand. The crate scrapes back an inch on the shed floor and that's the whole announcement of your departure — no ceremony, no drawn-out farewell. You settle the Traveler's Pack across both shoulders, check the waterskin by feel, and roll your neck once against the stiffness that eleven kilometers of carrying has left behind.\n\nLenten looks up from the bench. The fallen Cogitant sits beside them, chalk hands folded in her lap, lips still moving through whatever calculation holds her somewhere else entirely. Lenten meets your eyes and gives the same compact nod they gave when they agreed to send the runner — a thing already done, acknowledged, closed. \"Wall-path drop,\" they say, a single quiet reminder. You dip your chin. You remember.\n\nKon is off the doorframe before you reach it, dropping silently from seated to moving with no visible transition in between. The fox pads out into the afternoon yard ahead of you — coat warm-ember in the long gold light, already angled northeast, already home in the road the way you've never quite been anywhere. The central work-yard opens around you: stacked timber, the sound of a draw-plane from somewhere further in, two workers who glance at the grey robes through the shed's open door and then look back at their work. You pass through without stopping.\n\nThe Cogitarium is eleven kilometers behind the horizon. The third terrace hasn't waited four days to start waiting for you now."
+      },
+      {
+        "player": "Watch Kon as you walk — the fox knows when the world goes thin; let it tell you if the road north carries anything worth knowing before you arrive",
+        "summary": "Saehara watches Kon on the return march — the fox reads the road as clear; the dry-stone wall hazard is navigated without incident.",
+        "narration": "The road northeast unrolls under your boots in long gold light — the afternoon tilting toward evening without hurry, the pale stone of the Cogitarium not yet visible through the scrub. Kon runs ahead by twenty paces, sometimes thirty, coat deep red against the bleached gravel and winter-dry grass. You watch it the way you'd watch water for a current: not staring, just keeping it in the corner of your eye.\n\nFor the first kilometer the fox is simply a fox-shaped thing moving efficiently. It checks the wind, noses at a tuft of dry sedge, diverts around a standing stone without breaking rhythm. Normal enough. Then the dry-stone wall rises on your left and Kon angles toward it, then away — and doesn't look back, which is the tell. When the fox wants you to see something it looks back. When it simply adjusts, it's reading the terrain as home.\n\nHalfway along the wall-section you feel the path drop sharply to your right — the hazard Lenten named, a meter of hidden dip where the gravel gives way to loose scree. You step wide without breaking stride, and Kon, ahead of you, has already done the same. The fox knew. It will know the wall-path drop on the return in the dark as well, which is useful information: you won't have to slow for it, just watch where Kon steps.\n\nThe rest of the wall-path gives nothing unusual. Kon doesn't go still. The coat doesn't warm. The scrub on either side holds ordinary late-afternoon sound — a single bird, the creak of wind in dead stems — and that absence of strangeness is its own answer. Whatever the Cogitarium holds, the road north is clean. You bank that fact and keep walking, the Cogitarium's pale towers just beginning to resolve against the sky ahead."
       }
     ],
     "lastTurn": {
-      "narration": "You stand. The crate scrapes back an inch on the shed floor and that's the whole announcement of your departure — no ceremony, no drawn-out farewell. You settle the Traveler's Pack across both shoulders, check the waterskin by feel, and roll your neck once against the stiffness that eleven kilometers of carrying has left behind.\n\nLenten looks up from the bench. The fallen Cogitant sits beside them, chalk hands folded in her lap, lips still moving through whatever calculation holds her somewhere else entirely. Lenten meets your eyes and gives the same compact nod they gave when they agreed to send the runner — a thing already done, acknowledged, closed. \"Wall-path drop,\" they say, a single quiet reminder. You dip your chin. You remember.\n\nKon is off the doorframe before you reach it, dropping silently from seated to moving with no visible transition in between. The fox pads out into the afternoon yard ahead of you — coat warm-ember in the long gold light, already angled northeast, already home in the road the way you've never quite been anywhere. The central work-yard opens around you: stacked timber, the sound of a draw-plane from somewhere further in, two workers who glance at the grey robes through the shed's open door and then look back at their work. You pass through without stopping.\n\nThe Cogitarium is eleven kilometers behind the horizon. The third terrace hasn't waited four days to start waiting for you now.",
-      "sceneSummary": "Saehara stands, exchanges a final nod with Lenten, and walks out of the long shed into the afternoon yard — Kon already leading northeast.",
+      "narration": "The road northeast unrolls under your boots in long gold light — the afternoon tilting toward evening without hurry, the pale stone of the Cogitarium not yet visible through the scrub. Kon runs ahead by twenty paces, sometimes thirty, coat deep red against the bleached gravel and winter-dry grass. You watch it the way you'd watch water for a current: not staring, just keeping it in the corner of your eye.\n\nFor the first kilometer the fox is simply a fox-shaped thing moving efficiently. It checks the wind, noses at a tuft of dry sedge, diverts around a standing stone without breaking rhythm. Normal enough. Then the dry-stone wall rises on your left and Kon angles toward it, then away — and doesn't look back, which is the tell. When the fox wants you to see something it looks back. When it simply adjusts, it's reading the terrain as home.\n\nHalfway along the wall-section you feel the path drop sharply to your right — the hazard Lenten named, a meter of hidden dip where the gravel gives way to loose scree. You step wide without breaking stride, and Kon, ahead of you, has already done the same. The fox knew. It will know the wall-path drop on the return in the dark as well, which is useful information: you won't have to slow for it, just watch where Kon steps.\n\nThe rest of the wall-path gives nothing unusual. Kon doesn't go still. The coat doesn't warm. The scrub on either side holds ordinary late-afternoon sound — a single bird, the creak of wind in dead stems — and that absence of strangeness is its own answer. Whatever the Cogitarium holds, the road north is clean. You bank that fact and keep walking, the Cogitarium's pale towers just beginning to resolve against the sky ahead.",
+      "sceneSummary": "Saehara watches Kon on the return march — the fox reads the road as clear; the dry-stone wall hazard is navigated without incident.",
       "choices": [
         {
-          "label": "Set a hard pace — cover the ground before the light goes fully and reach the Cogitarium while there's still something to see by",
+          "label": "Keep pace — arrive at the Cogitarium entrance and go straight to the third-terrace stairwell",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "endure"
+            "move",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Walk at a measured pace and use the road to think — replay what you know about the third terrace and prepare for what you might find",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Call to Ossian as you enter — announce you've returned and the supply line is reopening tonight",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "study"
+            "inform",
+            "connect"
           ],
-          "abilityId": "total_focus",
           "trivial": true
         },
         {
-          "label": "Watch Kon as you walk — the fox knows when the world goes thin; let it tell you if the road north carries anything worth knowing before you arrive",
+          "label": "Pause in the entrance hall and use Read the Fight before climbing — get a sense of what the third terrace holds before you're in it",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Pull out your journal for the first stretch of road — rough notes on what happened today before the details go soft",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "careful",
+            "scout"
+          ],
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Go straight up — no pause, no announcement; if the third-terrace Cogitant is in trouble, every minute spent talking is a minute spent wrong",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "move",
+            "risky"
           ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Central work-yard of Waymarker, afternoon — long gold light across stacked timber and open ground, Saehara stepping out of Lenten's long shed heading northeast. Kon already moving ahead at the yard's edge.",
+        "setting": "Dry-stone wall-path northeast of Waymarker, late afternoon — gold light flattening, Cogitarium towers resolving pale against the sky ahead. The wall hazard passed; Waymarker behind, arrival imminent.",
         "npcsPresent": [
           {
-            "name": "Lenten",
-            "state": "Still at the bench inside the shed, feeding the fallen Cogitant — visible through the open doors, watching Saehara go"
-          },
-          {
-            "name": "Fallen Cogitant",
-            "state": "Seated on the workbench inside the shed, chalk hands in lap, lips moving — under Lenten's care"
-          },
-          {
             "name": "Kon",
-            "state": "Moving ahead of Saehara through the work-yard, coat banked-coal red in the afternoon light, angled northeast"
+            "state": "Running twenty to thirty paces ahead on the gravel path, coat banked-coal red in the long light — coat calm, no warmth-flare, road read as clean"
           }
         ],
         "objects": [
           "Traveler's Pack — on Saehara's shoulders",
           "Waterskin — secured",
           "Katana at Saehara's waist",
-          "Stacked timber around the work-yard edges",
-          "Workers at tasks — glancing, returning to work"
+          "Dry-stone wall — along the left of the path, hazard drop to the right now behind them",
+          "Cogitarium towers — pale stone, visible ahead through the scrub"
         ],
         "threads": [
-          "Runner not yet departed — Lenten committed, dispatch imminent before evening",
-          "Third terrace Cogitant: four days unseen, dragging sound — Saehara returning tonight",
+          "Third-terrace Cogitant: four days unseen, dragging sound — Saehara arriving shortly",
+          "Supply line: runner dispatching from Waymarker before evening — confirmed but not yet seen",
           "Fallen Cogitant's two-day window still running under Lenten's care",
-          "Return march to Cogitarium: eleven kilometers, arriving in early dark",
-          "Dry-stone wall-path drop: hazard one kilometer from the Cogitarium — carry the warning forward"
+          "Arrival in early dark: pace and light narrowing together"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "lenten",
-          "name": "Lenten",
-          "note": "Gave a final compact nod as Saehara stood — no words beyond the wall-path reminder. Already focused on the runner and the Cogitant.",
-          "statusNote": "Present in the long shed at Waymarker — caring for the fallen Cogitant and dispatching a runner before evening"
-        },
-        {
-          "op": "update",
-          "npcId": "fallen-cogitant",
-          "name": "Fallen Cogitant",
-          "note": "Still on the workbench as Saehara departed — chalk hands folded, lips moving, condition holding under Lenten's care.",
-          "statusNote": "On the workbench in Lenten's shed — eating on reflex, two-day window still running"
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "cogitarium-supply-line",
-          "note": "Saehara has departed Waymarker — Lenten is dispatching the runner before evening. The supply line resumes tonight. Quest effectively resolved pending confirmation."
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief departure — standing, a nod, crossing the yard; no more than a few minutes"
+        "hoursPassed": 1.5,
+        "why": "roughly half the return march elapsed while watching Kon on the road"
       },
-      "moveTo": {
-        "location": "the-cogitarium",
-        "why": "Saehara walks out of the Waymarker yard heading northeast on the return march — eleven kilometers back to the Cogitarium"
-      }
+      "codexUpdates": [
+        {
+          "topic": "cogitarium",
+          "label": "The Cogitarium",
+          "kind": "place",
+          "entityId": "cogitarium",
+          "fact": "The road northeast to the Cogitarium reads clean — Kon registered no Precursor activity or thin-place warnings on the return march. The dry-stone wall hazard is navigable in low light by watching where the fox steps.",
+          "links": [
+            "cogitarium-supply-line",
+            "third-terrace-collapse"
+          ]
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Central work-yard of Waymarker, afternoon — long gold light across stacked timber and open ground, Saehara stepping out of Lenten's long shed heading northeast. Kon already moving ahead at the yard's edge.",
+      "setting": "Dry-stone wall-path northeast of Waymarker, late afternoon — gold light flattening, Cogitarium towers resolving pale against the sky ahead. The wall hazard passed; Waymarker behind, arrival imminent.",
       "npcsPresent": [
         {
-          "name": "Lenten",
-          "state": "Still at the bench inside the shed, feeding the fallen Cogitant — visible through the open doors, watching Saehara go"
-        },
-        {
-          "name": "Fallen Cogitant",
-          "state": "Seated on the workbench inside the shed, chalk hands in lap, lips moving — under Lenten's care"
-        },
-        {
           "name": "Kon",
-          "state": "Moving ahead of Saehara through the work-yard, coat banked-coal red in the afternoon light, angled northeast"
+          "state": "Running twenty to thirty paces ahead on the gravel path, coat banked-coal red in the long light — coat calm, no warmth-f"
         }
       ],
       "objects": [
         "Traveler's Pack — on Saehara's shoulders",
         "Waterskin — secured",
         "Katana at Saehara's waist",
-        "Stacked timber around the work-yard edges",
-        "Workers at tasks — glancing, returning to work"
+        "Dry-stone wall — along the left of the path, hazard drop to the right now behind",
+        "Cogitarium towers — pale stone, visible ahead through the scrub"
       ],
       "threads": [
-        "Runner not yet departed — Lenten committed, dispatch imminent before evening",
-        "Third terrace Cogitant: four days unseen, dragging sound — Saehara returning tonight",
+        "Third-terrace Cogitant: four days unseen, dragging sound — Saehara arriving shortly",
+        "Supply line: runner dispatching from Waymarker before evening — confirmed but not yet seen",
         "Fallen Cogitant's two-day window still running under Lenten's care",
-        "Return march to Cogitarium: eleven kilometers, arriving in early dark",
-        "Dry-stone wall-path drop: hazard one kilometer from the Cogitarium — carry the warning forward"
+        "Arrival in early dark: pace and light narrowing together"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -740,7 +711,8 @@
           "[d1] Saehara pushed Read the Fight outward searching for a non-Cogitant presence in the hall — someone fed, rested, tethered to the world below. The scan found nothing: the entire hall reads as uniform inw",
           "[d1] A supply runner from Waymarker brought food every eight days. The last delivery was nineteen days ago. The Cogitarium never sent for resupply; the runner stopped coming. No settlement knows the Cogita",
           "[d1] Saehara proposed a division of labor to Ossian: a Cogitant sent to Waymarker to reopen the supply line; Saehara climbing to the third terrace. A slow dragging sound fell from above as the proposal was",
-          "[d1] Ossian's calculation: seven days is the safe window for a Waymarker run. Araveth and the upper-terrace Cogitants have eight to twelve days; the fallen woman on the floor has two, possibly three; the t"
+          "[d1] Ossian's calculation: seven days is the safe window for a Waymarker run. Araveth and the upper-terrace Cogitants have eight to twelve days; the fallen woman on the floor has two, possibly three; the t",
+          "[d1] The road northeast to the Cogitarium reads clean — Kon registered no Precursor activity or thin-place warnings on the return march. The dry-stone wall hazard is navigable in low light by watching wher"
         ],
         "links": [
           "cogitarium",
@@ -754,7 +726,8 @@
         "aliases": [
           "The Echo River Crisis",
           "The Cogitarium's Supply Silence",
-          "Cogitarium Survival Window"
+          "Cogitarium Survival Window",
+          "The Cogitarium"
         ],
         "createdDay": 1,
         "updatedDay": 1,
@@ -959,19 +932,19 @@
     }
   },
   "tendencies": {
-    "strategic": 20.455692561155214,
-    "social": 7.239376850877857,
-    "cerebral": 8.123220932542807,
-    "generous": 9.207912359315198,
-    "cautious": 11.093825788187779,
-    "risky": 0.9046104802746175
+    "strategic": 21.353414098349436,
+    "social": 7.203179966623468,
+    "cerebral": 8.082604827880093,
+    "generous": 9.161872797518622,
+    "cautious": 12.03835665924684,
+    "risky": 0.9000874278732445
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 34,
+  "actionCount": 35,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -992,8 +965,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784175152316,
-  "rev": 62,
+  "updatedAt": 1784175198550,
+  "rev": 63,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1092,7 +1065,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 34
+    "somatic_reaches": 35
   },
   "opLossPending": false,
   "establishedFacts": [

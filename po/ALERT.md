@@ -1,4 +1,11 @@
-# PIPELINE ALERT — Singularity## ✅ CHARACTER CHRONICLE ARC + 3 BUGS — CLOSED GREEN (Aevi HEAD audit, v1.8.68→73)
+# PIPELINE ALERT — Singularity## 🐛 TWO LIVE BUGS — specced (Erik play session 2026-07-15, awaiting CCode)
+
+- **SNG-115 — Feedback submit hangs on "Sending…".** `po/SPEC_SNG-115_feedback_submit_timeout.md`. The Send button `await`s a GitHub write with **no timeout anywhere** in the `ghGet`/`ghPut`/`pushMergedFile` chain (no AbortController, no deadline). A stalled request never throws, so the `await` never returns and the UI sits on "Sending…" forever; the entry may not even queue because the catch never runs. Fix: AbortController deadline → throw → the existing "never lose it" queue path; UI button always lands on a terminal status. **Recommend fixing at the `ghGet`/`ghPut` layer** — character save + event ledger likely share the same latent hang.
+- **SNG-116 — "How hard is this" preview omits the substrate penalty.** `po/SPEC_SNG-116_difficulty_preview_substrate.md`. **Erik: readout said easy, but lack of substrate made it hard — and he was right.** The preview `successChance` at app.js L5117 is called **without `substratePenalty`** (defaults to 0), so the readout assumes a full lattice; the real resolution applies the SNG-090 penalty, so the true chance is much worse than previewed. **Not a text bug — the readout is honest about a wrong number** (a missing term). Fix: preview computes the same substrate penalty as the resolve path, via ONE shared derivation fn so they can't drift; test asserts preview chance == resolve chance. Tie-in: this is NOT fog (tier perception is fine) — the true chance itself was incomplete; fog over a wrong number is still wrong.
+
+---
+
+## ✅ CHARACTER CHRONICLE ARC + 3 BUGS — CLOSED GREEN (Aevi HEAD audit, v1.8.68→73)
 
 CCode shipped all six; **Aevi verified each at authenticated origin, not on report.** Two came in *cleaner than the specs named them* — noted as improvements.
 - **SNG-105** (recovery scales, v1.8.68): landed as `recoveryEnergy(kind,character,rules) = Math.max(base, round(frac×maxEnergy))` — scales with the pool, floors at the flat base **by construction** (never worse than today), `recoveryFractions` as a clean separate config key, and the GM RECOVERY GUIDE calls it so it shows the per-character number (SNG-103 principle). Cleaner than the inline-`fraction` sketch. **Closed.**

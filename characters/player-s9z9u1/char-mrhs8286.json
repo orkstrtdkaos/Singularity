@@ -1768,82 +1768,89 @@
         "player": "Yes, obviously.. .just like the race...If I lose I've already won.  Who wouldn't want to wrestle you covered in oil naked... shadow step well ahead our of retaliation range and laugh.",
         "summary": "Silas shadowsteps ahead with a naked-wrestling taunt; Pell contains herself with visible effort.",
         "narration": "You say it without breaking stride — *'Just like the race. If I lose, I've already won. Who wouldn't want to wrestle you covered in oil, naked?'* — and then you step.\n\nThe shadow of the fence-post to your left and the shadow of the drainage ditch cover thirty feet ahead of you in one quiet fold. You land it clean, weight forward, already walking, Memory's shaft dropping back to road-angle like nothing interrupted. The step costs you barely a breath.\n\nBehind you, a beat of silence. Then: \"*Silas.*\" Flat, measured, with a quality that is doing a great deal of work to stay flat. Huginn banks left overhead without comment, which is somehow worse.\n\nYou glance back. Pell has not broken stride. Her face is doing something she is visibly not letting it finish. She catches you looking and points — one finger, unhurried — at the road ahead. \"*Walk.*\""
+      },
+      {
+        "player": "Call back something mild — 'I'm walking' — and keep your eyes on the road ahead.",
+        "summary": "Silas calls back 'I'm walking' and both continue north; Pell comes even and acknowledges the wrestling terms with dry composure.",
+        "narration": "The road runs straight here between its fence-lines, and you keep your eyes on it.\n\n\"I'm walking,\" you call back, no particular inflection. Memory's shaft catches the morning light over your shoulder. Huginn has pulled thirty yards ahead and is already angling toward the road-bend as if he has somewhere to be.\n\nBehind you, the sound of Pell's boots on wet stone maintains exactly the same cadence it had before. She doesn't answer. That is, in its own way, an answer.\n\nThe fence-lines thin where the terraced gardens give out to rougher grazing, and the road rises slightly — enough to feel in the backs of your calves after a morning's worth of ground. The valley ridgeline ahead is pale with low cloud that hasn't decided yet whether it's fog or weather. Somewhere above the scrub on the eastern slope, a pair of wood-pigeons settle into an argument neither of them seems likely to win.\n\nPell comes even with you without ceremony, oilcloth swinging back to her off-shoulder, and says nothing for two or three minutes. Then: \"The wrestling is fine.\" She says it the way she says most things — like she's delivering a measurement. \"I just want it on record that I'm aware of what you're doing.\" She doesn't look at you. The road-bend around the eastern flank is coming into view ahead, and Fen's intake will be around it."
       }
     ],
     "lastTurn": {
-      "narration": "You say it without breaking stride — *'Just like the race. If I lose, I've already won. Who wouldn't want to wrestle you covered in oil, naked?'* — and then you step.\n\nThe shadow of the fence-post to your left and the shadow of the drainage ditch cover thirty feet ahead of you in one quiet fold. You land it clean, weight forward, already walking, Memory's shaft dropping back to road-angle like nothing interrupted. The step costs you barely a breath.\n\nBehind you, a beat of silence. Then: \"*Silas.*\" Flat, measured, with a quality that is doing a great deal of work to stay flat. Huginn banks left overhead without comment, which is somehow worse.\n\nYou glance back. Pell has not broken stride. Her face is doing something she is visibly not letting it finish. She catches you looking and points — one finger, unhurried — at the road ahead. \"*Walk.*\"",
-      "sceneSummary": "Silas shadowsteps ahead with a naked-wrestling taunt; Pell contains herself with visible effort.",
+      "narration": "The road runs straight here between its fence-lines, and you keep your eyes on it.\n\n\"I'm walking,\" you call back, no particular inflection. Memory's shaft catches the morning light over your shoulder. Huginn has pulled thirty yards ahead and is already angling toward the road-bend as if he has somewhere to be.\n\nBehind you, the sound of Pell's boots on wet stone maintains exactly the same cadence it had before. She doesn't answer. That is, in its own way, an answer.\n\nThe fence-lines thin where the terraced gardens give out to rougher grazing, and the road rises slightly — enough to feel in the backs of your calves after a morning's worth of ground. The valley ridgeline ahead is pale with low cloud that hasn't decided yet whether it's fog or weather. Somewhere above the scrub on the eastern slope, a pair of wood-pigeons settle into an argument neither of them seems likely to win.\n\nPell comes even with you without ceremony, oilcloth swinging back to her off-shoulder, and says nothing for two or three minutes. Then: \"The wrestling is fine.\" She says it the way she says most things — like she's delivering a measurement. \"I just want it on record that I'm aware of what you're doing.\" She doesn't look at you. The road-bend around the eastern flank is coming into view ahead, and Fen's intake will be around it.",
+      "sceneSummary": "Silas calls back 'I'm walking' and both continue north; Pell comes even and acknowledges the wrestling terms with dry composure.",
       "choices": [
         {
-          "label": "Keep moving — let her catch up in silence and see what she says when she does.",
+          "label": "\"Noted. What do you expect to find at Fen's intake?\"",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "patient",
-            "watch"
+            "deflect",
+            "work"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Call back something mild — 'I'm walking' — and keep your eyes on the road ahead.",
+          "label": "\"What am I doing, then? Say it plainly.\"",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "deflect",
-            "play"
+            "press",
+            "name"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use the distance to study the road ahead — Order-Sense on the terrain toward Fen's intake.",
+          "label": "Use Order-Sense as you approach the bend — read the intake site's structure from the road before you round it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Wait for her to pull even, then ask what she's not letting her face finish.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Say something else or do something else.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "direct",
-            "curious"
+            "open"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "energy": -4
-      },
       "scene": {
-        "setting": "Old stone road between two fence-lines north of Millbrook — past the drainage channel gap, rising ground, valley ridgeline visible ahead. Silas is thirty feet ahead of where he was; Pell is behind, closing, doing something controlled with her expression. Fen's intake twenty minutes north, around the eastern road-bend.",
+        "setting": "Old stone road between thinning fence-lines north of Millbrook — terraced gardens giving way to rough grazing, road rising slightly, valley ridgeline ahead under low cloud. The eastern road-bend is coming into view; Fen's intake lies around it.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Closing the thirty-foot gap at a steady pace — one finger leveled at the road ahead, expression doing something she is not letting it finish."
+            "state": "Come even with Silas, oilcloth on off-shoulder, eyes on the road-bend ahead — composed, measuring."
           },
           {
             "name": "Huginn",
-            "state": "Banking left overhead without comment."
+            "state": "Thirty yards ahead, angling toward the road-bend."
           }
         ],
         "objects": [
           "Memory (spear, shaft angled over Silas's shoulder)",
           "Pell's oilcloth (on her shoulder)",
-          "Stone road — wheel-ruts, wet from the squall, fence-posts on both sides",
-          "Drainage channel (just passed)"
+          "Stone road — wheel-ruts, drying after the squall, fence-posts thinning",
+          "Eastern road-bend (Fen's intake beyond it)"
         ],
         "threads": [
-          "Pell's contained reaction — she's not done with that.",
+          "Pell has noted she's aware of what Silas is doing — the thread is named but not fully drawn out.",
           "Pell's read: Sorel likely has the engineer's name — filed as reluctant contact, not witness.",
           "Fen's intake: around the eastern bend, first valve site to inspect together.",
           "The question of whether to return and press Sorel before leaving the valley."
@@ -1854,37 +1861,36 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received the naked-wrestling-in-oil line and a shadowstep retreat — managed her face with visible effort and pointed Silas at the road ahead. Not done.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Thirty feet behind Silas on the north road, closing, expression controlled."
+          "note": "Came even with Silas on the road north — acknowledged the wrestling terms plainly and put it on record that she knows what he is doing. Did not look at him.",
+          "statusNote": "Walking north with Silas toward Fen's intake, composed and measuring.",
+          "relationshipDelta": 0
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange on the road — barely a beat."
+        "why": "A few minutes of walking and brief exchange on the road north."
       }
     },
     "sceneState": {
-      "setting": "Old stone road between two fence-lines north of Millbrook — past the drainage channel gap, rising ground, valley ridgeline visible ahead. Silas is thirty feet ahead of where he was; Pell is behind, closing, doing something controlled with her expression. Fen's intake twenty minutes north, around the eastern road-bend.",
+      "setting": "Old stone road between thinning fence-lines north of Millbrook — terraced gardens giving way to rough grazing, road rising slightly, valley ridgeline ahead under low cloud. The eastern road-bend is coming into view; Fen's intake lies around it.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Closing the thirty-foot gap at a steady pace — one finger leveled at the road ahead, expression doing something she is n"
+          "state": "Come even with Silas, oilcloth on off-shoulder, eyes on the road-bend ahead — composed, measuring."
         },
         {
           "name": "Huginn",
-          "state": "Banking left overhead without comment."
+          "state": "Thirty yards ahead, angling toward the road-bend."
         }
       ],
       "objects": [
         "Memory (spear, shaft angled over Silas's shoulder)",
         "Pell's oilcloth (on her shoulder)",
-        "Stone road — wheel-ruts, wet from the squall, fence-posts on both sides",
-        "Drainage channel (just passed)"
+        "Stone road — wheel-ruts, drying after the squall, fence-posts thinning",
+        "Eastern road-bend (Fen's intake beyond it)"
       ],
       "threads": [
-        "Pell's contained reaction — she's not done with that.",
+        "Pell has noted she's aware of what Silas is doing — the thread is named but not fully drawn out.",
         "Pell's read: Sorel likely has the engineer's name — filed as reluctant contact, not witness.",
         "Fen's intake: around the eastern bend, first valve site to inspect together.",
         "The question of whether to return and press Sorel before leaving the valley."
@@ -2036,7 +2042,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received 'both' plainly — a short nod that cost her something. Answered the spar proposal with 'terms?' without saying no.",
         "[d2] Named her spar condition plainly — when she taps you, tell her what you were thinking, not what went wrong. Same offer in return. Accepted 'flat ground, first tap' without ceremony",
         "[d2] Named Silas's stance plainly — weight-back, butt-grounded, watching the road, not the gap. A step cost when the first move is his. Then walked without ceremony.",
         "[d2] Read standing weight versus moving weight as two distinct reads — named the oblique maker's mark plainly: a line she hadn't earned, and she'd make the same choice again.",
@@ -2045,7 +2050,8 @@
         "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi",
         "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi",
         "[d2] Accepted the wrestling-next-time terms without deflection — named the reach problem plainly and said yes. Keeping pace north.",
-        "[d2] Received the naked-wrestling-in-oil line and a shadowstep retreat — managed her face with visible effort and pointed Silas at the road ahead. Not done."
+        "[d2] Received the naked-wrestling-in-oil line and a shadowstep retreat — managed her face with visible effort and pointed Silas at the road ahead. Not done.",
+        "[d2] Came even with Silas on the road north — acknowledged the wrestling terms plainly and put it on record that she knows what he is doing. Did not look at him."
       ],
       "knownFacts": [
         "Silas's weight sits back — ready-stance, half-second read before committing. Spear butt grounded is his tell. Costs him initiative when he's the one attacking.",
@@ -2066,7 +2072,7 @@
         "naming a speculative read as speculative without withdrawing"
       ],
       "status": "active",
-      "statusNote": "Thirty feet behind Silas on the north road, closing, expression controlled.",
+      "statusNote": "Walking north with Silas toward Fen's intake, composed and measuring.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3109,15 +3115,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.77528299332252,
-    "cerebral": 40.41207994603506,
-    "social": 60.80805662772975,
-    "generous": 16.50938378184002,
-    "cautious": 48.739598013862654,
-    "physical": 1.737768140659769,
-    "risky": 3.4833556630796916,
-    "ruthless": 3.859835162853069,
-    "carousing": 1.2963666326902756
+    "strategic": 60.47140657835591,
+    "cerebral": 40.210019546304885,
+    "social": 60.5040163445911,
+    "generous": 16.42683686293082,
+    "cautious": 48.49590002379334,
+    "physical": 1.7290792999564701,
+    "risky": 3.465938884764293,
+    "ruthless": 3.8405359870388036,
+    "carousing": 1.2898847995268243
   },
   "aptitudes": [
     "strategist",
@@ -3125,7 +3131,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 280,
+  "actionCount": 281,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3251,8 +3257,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784174249214,
-  "rev": 383,
+  "updatedAt": 1784174475133,
+  "rev": 384,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3814,7 +3820,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 82
+    "valley": 83
   },
   "foreclosed": [
     "rootkin",

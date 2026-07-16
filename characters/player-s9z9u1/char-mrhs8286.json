@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 7,
-  "xp": 673,
+  "xp": 676,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -44,7 +44,7 @@
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
     "concrete_abstract": -0.08911942715239332,
-    "death_life": -0.1571252728911151,
+    "death_life": -0.16426900924655935,
     "emotional_logical": 0.048249999999999994,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03,
@@ -54,7 +54,7 @@
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 130,
-  "energy": 63,
+  "energy": 59,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1663,53 +1663,61 @@
         "player": "Pause at the back door and use Order-Sense on the interior — read what situation Sorel is actually in before you step through.",
         "summary": "Silas reads the smokehouse interior through Order-Sense — Sorel is present and circling something with Aldric, news withheld on both ends.",
         "narration": "The back-door shadow is still cold and deep — frost on the latch-iron, salt and woodsmoke catching at the back of your throat. You settle one shoulder against the overhang post and let Order-Sense open quietly, the way you'd open a hand rather than reach.\n\nThe substrate is thin here. The sense comes in at about half weight — shapes and relationships, not fine grain. But it's enough.\n\nSorel is at the smoking rack. Standing, not seated — someone who arrived recently and hasn't found their ease yet. Aldric is on the far side of the block, knife in hand, the familiar rhythm of the morning perch row. Between them: a conversation that has been going for some time without going anywhere, the structural pattern of two people who know each other well enough to talk without saying the thing they're actually circling. The design of it reads as: *news being withheld on both ends*.\n\nNothing armed. Nothing cornered. No urgency in the physical arrangement that suggests Sorel is leaving soon, but the pack reads as present — the weight distribution of someone who hasn't put it down yet.\n\nHuginn shifts one talon on the ridge above you and looks at the door with the patient attention he gives to things that are about to change."
+      },
+      {
+        "player": "Use The Attended End on Sorel through the wall — read what's ending for this person before you put your face in front of them.",
+        "summary": "Silas reads Sorel through the wall — a season ending, not a crisis, something withheld and compressed. The frost on the latch holds.",
+        "narration": "The back-door shadow holds you a moment longer. You set Memory's butt against the overhang post quietly, close your eyes, and let The Attended End do what it does.\n\nIt comes in partial — the smokehouse wall is not much, but Millbrook's death-life axis runs toward the living side, and the ability works best where endings are close to the surface. What you get is impressionistic rather than precise: something is ending for Sorel, yes, and it has the texture of a season rather than a crisis. Not an emergency, not a wound. A situation that has been going on long enough to have a shape, and the shape is coming to a natural close. You catch the faint register of travel in it — a road that is finishing, not one that is beginning. There is also something compressed in there, something withheld, and you cannot tell if the withholding is from Aldric or from themselves or from the situation entire. What Marrow does not give you: cause. Whether this ending is chosen or imposed. What is on the other side of it.\n\nYou open your eyes. Huginn, up on the ridge, has tilted its head five degrees toward you — it noticed. It does not add anything. It doesn't need to.\n\nFrom inside: a low creak of the smoking rack. Aldric's knife pauses on the block, then resumes. They are still circling. Pell will be two minutes, maybe three. The frost on the latch-iron is starting to read as a question."
       }
     ],
     "lastTurn": {
-      "narration": "The back-door shadow is still cold and deep — frost on the latch-iron, salt and woodsmoke catching at the back of your throat. You settle one shoulder against the overhang post and let Order-Sense open quietly, the way you'd open a hand rather than reach.\n\nThe substrate is thin here. The sense comes in at about half weight — shapes and relationships, not fine grain. But it's enough.\n\nSorel is at the smoking rack. Standing, not seated — someone who arrived recently and hasn't found their ease yet. Aldric is on the far side of the block, knife in hand, the familiar rhythm of the morning perch row. Between them: a conversation that has been going for some time without going anywhere, the structural pattern of two people who know each other well enough to talk without saying the thing they're actually circling. The design of it reads as: *news being withheld on both ends*.\n\nNothing armed. Nothing cornered. No urgency in the physical arrangement that suggests Sorel is leaving soon, but the pack reads as present — the weight distribution of someone who hasn't put it down yet.\n\nHuginn shifts one talon on the ridge above you and looks at the door with the patient attention he gives to things that are about to change.",
-      "sceneSummary": "Silas reads the smokehouse interior through Order-Sense — Sorel is present and circling something with Aldric, news withheld on both ends.",
+      "narration": "The back-door shadow holds you a moment longer. You set Memory's butt against the overhang post quietly, close your eyes, and let The Attended End do what it does.\n\nIt comes in partial — the smokehouse wall is not much, but Millbrook's death-life axis runs toward the living side, and the ability works best where endings are close to the surface. What you get is impressionistic rather than precise: something is ending for Sorel, yes, and it has the texture of a season rather than a crisis. Not an emergency, not a wound. A situation that has been going on long enough to have a shape, and the shape is coming to a natural close. You catch the faint register of travel in it — a road that is finishing, not one that is beginning. There is also something compressed in there, something withheld, and you cannot tell if the withholding is from Aldric or from themselves or from the situation entire. What Marrow does not give you: cause. Whether this ending is chosen or imposed. What is on the other side of it.\n\nYou open your eyes. Huginn, up on the ridge, has tilted its head five degrees toward you — it noticed. It does not add anything. It doesn't need to.\n\nFrom inside: a low creak of the smoking rack. Aldric's knife pauses on the block, then resumes. They are still circling. Pell will be two minutes, maybe three. The frost on the latch-iron is starting to read as a question.",
+      "sceneSummary": "Silas reads Sorel through the wall — a season ending, not a crisis, something withheld and compressed. The frost on the latch holds.",
       "choices": [
         {
-          "label": "Step through now — walk in before Pell arrives; meet Sorel on your own terms first.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Step inside now, without announcing anything — walk in through the back door on your own terms, let your presence interrupt the circle, and see where Sorel's news lands without giving them more time to decide what to say.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "approach",
-            "direct"
+            "read-the-room",
+            "enter",
+            "surprise"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Wait for Pell — hold the overhang shadow until she rounds the lane; enter together.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "wait"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Knock once and wait — announce yourself at the threshold; let Aldric make the introduction.",
+          "label": "Knock on the door-frame first, let Aldric name you — give Sorel the beat of warning that their arriving conversation is about to include a third party; their reaction in that beat will tell you more than Order-Sense did.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "social"
+            "give-ground",
+            "learn",
+            "read-reaction"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait for Pell — go in together, arriving as two rather than one changes what Sorel has to decide about how much to say.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "wait",
+            "coordinate",
+            "weight"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1718,79 +1726,91 @@
           "emergenceId": null
         },
         {
-          "label": "Use The Attended End on Sorel through the wall — read what's ending for this person before you put your face in front of them.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 15,
+          "label": "Whistle once, soft — not a knock, not an entrance; a signal from the threshold that lets Aldric steer if he wants to, or ignore it if the conversation needs another breath.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "signal",
+            "give-choice",
+            "threshold"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": -2,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and woodsmoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
+        "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and woodsmoke heavy on the cold air. The back door is two strides ahead, closed but not latched. Frost on the latch-iron.",
         "npcsPresent": [
           {
             "name": "Huginn",
-            "state": "Perched on the smokehouse roof ridge, one talon shifted, watching the door with patient attention."
+            "state": "Perched on the smokehouse roof ridge, head tilted five degrees toward Silas — it noticed the use of The Attended End."
           },
           {
             "name": "Sorel (inside)",
-            "state": "Standing at the smoking rack, pack not yet set down, mid-conversation with Aldric — news circling on both ends."
+            "state": "Standing at the smoking rack, pack not yet set down, mid-conversation with Aldric — news still circling on both ends."
           },
           {
             "name": "Aldric (inside)",
-            "state": "At the smoking block, knife in hand, morning perch row — holding his own piece of the unspoken exchange."
+            "state": "At the smoking block, knife paused then resumed — holding his own piece of the unspoken exchange."
           }
         ],
         "objects": [
           "Smokehouse back door — closed, frost on the latch-iron, two strides ahead",
           "Rear overhang shadow — the step-through point, still dark",
-          "Memory (spear, across Silas's pack)"
+          "Memory (spear, leaned against the overhang post)"
         ],
         "threads": [
-          "Sorel inside, pack not yet put down — news withheld on both ends with Aldric",
-          "Pell is two minutes behind on the south lane",
-          "Pip Cotter at the north gate, errand complete"
+          "Sorel inside — a season ending, something withheld, cause unknown",
+          "Aldric and Sorel circling without landing — news held on both ends",
+          "Pell two minutes behind on the south lane",
+          "The Attended End gave partial read only — cause and choice-vs-imposed unresolved"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "aldric",
-          "name": "Aldric",
-          "role": "Smokehouse operator, Millbrook",
-          "note": "Inside at the morning perch row, in a circling conversation with Sorel — neither saying the load-bearing thing yet.",
+          "op": "meet",
+          "npcId": "sorel",
+          "name": "Sorel",
+          "role": "Spice-broker, old pass circuit — Edge District contact named by Mara",
+          "description": "A figure standing at the rack with pack not yet down — recently arrived, not yet at ease. Something is ending for them; texture of a finishing road rather than a crisis.",
+          "note": "Read through the wall via The Attended End — partial only. A season closing, travel finishing, something compressed and withheld. Cause and whether it is chosen remain unknown.",
           "learned": [
-            "In conversation with Sorel this morning — news withheld on both ends"
+            "Something is ending for Sorel — the texture of a finishing road, a season coming to a close rather than a crisis",
+            "Something withheld — cannot determine if the withholding is from Aldric, themselves, or the situation",
+            "The ending has the register of travel finishing, not beginning"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At his smokehouse block, working the morning perch row — in mid-conversation with Sorel, both holding something back."
+          "statusNote": "Inside Aldric's smokehouse, pack not down, mid-conversation — arrived recently, news circling on both ends with Aldric."
         }
       ],
+      "factUpdates": [],
+      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "sorel",
           "label": "Sorel",
           "kind": "person",
-          "fact": "Observed through Order-Sense at Aldric's smokehouse — standing, pack not yet down, in a long circling conversation with Aldric where news is withheld on both ends. Arrived recently. Not armed, not cornered, not leaving immediately.",
+          "entityId": "sorel",
+          "fact": "The Attended End (partial) through the smokehouse wall: something is ending for Sorel — texture of a finishing road, a season closing. Something compressed and withheld. Cause and whether it is chosen or imposed remain unread.",
           "links": [
             "millbrook",
-            "aldric",
             "the-water-crisis",
             "mara-wells"
           ]
@@ -1798,34 +1818,36 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief pause at the smokehouse back door — Order-Sense read, Pell still two minutes behind."
-      }
+        "why": "a brief pause at the threshold — The Attended End, then stillness"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and woodsmoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
+      "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and woodsmoke heavy on the cold air. The back door is two strides ahead, closed but not latched. Frost on the latch-iron.",
       "npcsPresent": [
         {
           "name": "Huginn",
-          "state": "Perched on the smokehouse roof ridge, one talon shifted, watching the door with patient attention."
+          "state": "Perched on the smokehouse roof ridge, head tilted five degrees toward Silas — it noticed the use of The Attended End."
         },
         {
           "name": "Sorel (inside)",
-          "state": "Standing at the smoking rack, pack not yet set down, mid-conversation with Aldric — news circling on both ends."
+          "state": "Standing at the smoking rack, pack not yet set down, mid-conversation with Aldric — news still circling on both ends."
         },
         {
           "name": "Aldric (inside)",
-          "state": "At the smoking block, knife in hand, morning perch row — holding his own piece of the unspoken exchange."
+          "state": "At the smoking block, knife paused then resumed — holding his own piece of the unspoken exchange."
         }
       ],
       "objects": [
         "Smokehouse back door — closed, frost on the latch-iron, two strides ahead",
         "Rear overhang shadow — the step-through point, still dark",
-        "Memory (spear, across Silas's pack)"
+        "Memory (spear, leaned against the overhang post)"
       ],
       "threads": [
-        "Sorel inside, pack not yet put down — news withheld on both ends with Aldric",
-        "Pell is two minutes behind on the south lane",
-        "Pip Cotter at the north gate, errand complete"
+        "Sorel inside — a season ending, something withheld, cause unknown",
+        "Aldric and Sorel circling without landing — news held on both ends",
+        "Pell two minutes behind on the south lane",
+        "The Attended End gave partial read only — cause and choice-vs-imposed unresolved"
       ]
     }
   },
@@ -2146,6 +2168,32 @@
       ],
       "status": "active",
       "statusNote": "At her house, beginning east-channel mitigation planning — east-bend junctions are her first target, crew briefing by week two.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 2
+      }
+    },
+    "sorel": {
+      "id": "sorel",
+      "name": "Sorel",
+      "role": "Spice-broker, old pass circuit — Edge District contact named by Mara",
+      "description": "A figure standing at the rack with pack not yet down — recently arrived, not yet at ease. Something is ending for them; texture of a finishing road rather than a crisis.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 2
+      },
+      "relationship": 0,
+      "history": [
+        "[d2] Read through the wall via The Attended End — partial only. A season closing, travel finishing, something compressed and withheld. Cause and whether it is chosen remain unknown."
+      ],
+      "knownFacts": [
+        "Something is ending for Sorel — the texture of a finishing road, a season coming to a close rather than a crisis",
+        "Something withheld — cannot determine if the withholding is from Aldric, themselves, or the situation",
+        "The ending has the register of travel finishing, not beginning"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "Inside Aldric's smokehouse, pack not down, mid-conversation — arrived recently, news circling on both ends with Aldric.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2885,7 +2933,8 @@
         "facts": [
           "[d2] Spotted at Millbrook's smokehouse on World-day 15 — present in the village after a season of silence. Mara's message urgent enough to send Pip running.",
           "[d2] Sorel — spice-broker, Edge District contact, not heard from in a season — has returned to Millbrook without announcement and is currently at Aldric's smokehouse on World-day 15 morning.",
-          "[d2] Observed through Order-Sense at Aldric's smokehouse — standing, pack not yet down, in a long circling conversation with Aldric where news is withheld on both ends. Arrived recently. Not armed, not cor"
+          "[d2] Observed through Order-Sense at Aldric's smokehouse — standing, pack not yet down, in a long circling conversation with Aldric where news is withheld on both ends. Arrived recently. Not armed, not cor",
+          "[d2] The Attended End (partial) through the smokehouse wall: something is ending for Sorel — texture of a finishing road, a season closing. Something compressed and withheld. Cause and whether it is chosen"
         ],
         "links": [
           "mara-wells",
@@ -2896,20 +2945,21 @@
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 2
+        "updatedDay": 2,
+        "entityId": "sorel"
       }
     }
   },
   "tendencies": {
-    "strategic": 61.840819943522185,
-    "cerebral": 40.49274615405596,
-    "social": 60.88408152557893,
-    "generous": 18.250268089783987,
-    "cautious": 47.57732644822569,
-    "physical": 0.8320633931095625,
-    "risky": 2.7671646714669738,
-    "ruthless": 2.0724503294323298,
-    "carousing": 1.433066121781754
+    "strategic": 61.53161584380457,
+    "cerebral": 41.290282423285674,
+    "social": 60.579661117951034,
+    "generous": 18.159016749335066,
+    "cautious": 48.33943981598456,
+    "physical": 0.8279030761440146,
+    "risky": 2.7533288481096387,
+    "ruthless": 2.0620880777851682,
+    "carousing": 1.4259007911728452
   },
   "aptitudes": [
     "strategist",
@@ -2917,7 +2967,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 260,
+  "actionCount": 261,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3043,8 +3093,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784161128290,
-  "rev": 357,
+  "updatedAt": 1784161241477,
+  "rev": 358,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3505,7 +3555,7 @@
       "palework": 17,
       "deathsense": 13,
       "shadowstep": 4,
-      "the-attended-end": 4
+      "the-attended-end": 5
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -3606,7 +3656,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 61
+    "valley": 62
   },
   "foreclosed": [
     "rootkin",

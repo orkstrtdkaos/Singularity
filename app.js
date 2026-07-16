@@ -12,7 +12,7 @@ import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, comp
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
-import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON } from "./engine/sync.js";
+import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -42,7 +42,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.75";
+const APP_VERSION = "1.8.76";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -633,7 +633,7 @@ function saveFeedbackQueue(q) { try { localStorage.setItem("singularity.feedback
 async function submitFeedback(entry) {
   const pending = [...feedbackQueue(), entry];
   if (!syncEnabled()) { saveFeedbackQueue(pending); return { ok: false, queued: true, id: entry.id }; }
-  const day = entry.at.slice(0, 10);
+  const day = String(entry.at || entry.context?.at || new Date().toISOString()).slice(0, 10); // SNG-115: never throw on a missing `at`
   try {
     await pushMergedFile(`po/feedback/${day}.json`, remote => {
       const entries = [...(remote?.entries || [])];
@@ -674,12 +674,27 @@ function openFeedback() {
   document.getElementById("fb-send").onclick = async () => {
     const text = document.getElementById("fb-text").value.trim();
     const status = document.getElementById("fb-status");
-    const entry = { id: "fb-" + Date.now().toString(36), type: _feedbackType, text: text.slice(0, 2000), player: profile?.displayName || null, context: buildFeedbackContext() };
+    const btn = document.getElementById("fb-send");
+    // SNG-115: `at` on the entry itself (submitFeedback dates the file from it) — its absence was a silent throw.
+    const entry = { id: "fb-" + Date.now().toString(36), at: new Date().toISOString(), type: _feedbackType, text: text.slice(0, 2000), player: profile?.displayName || null, context: buildFeedbackContext() };
     status.textContent = "Sending…";
-    const r = await submitFeedback(entry);
-    if (r.ok) status.textContent = `✓ Sent — thank you. Entry ${r.id}${r.flushed > 1 ? ` (+${r.flushed - 1} queued)` : ""}. Aevi will see it at session-open.`;
-    else if (r.queued) status.textContent = `✓ Saved as ${r.id}${syncEnabled() ? " — the send failed, it will retry next time" : " — will send when sync is on"}. Nothing is lost.`;
-    else status.textContent = "Couldn't save that — try again.";
+    btn.disabled = true;
+    try {
+      // SNG-115: race the submit against a UI deadline so the status ALWAYS reaches a terminal state — even
+      // if something below misbehaves. On the UI timeout the entry is still queued locally (never lost).
+      const r = await raceTimeout(submitFeedback(entry), 15000, "UI_TIMEOUT").catch(err => {
+        if (err?.message === "UI_TIMEOUT") { const q = feedbackQueue(); if (!q.some(e => e.id === entry.id)) saveFeedbackQueue([...q, entry]); return { queued: true, id: entry.id, error: "timeout" }; }
+        throw err;
+      });
+      if (r.ok) status.textContent = `✓ Sent — thank you. Entry ${r.id}${r.flushed > 1 ? ` (+${r.flushed - 1} queued)` : ""}. Aevi will see it at session-open.`;
+      else if (r.queued) status.textContent = `✓ Saved as ${r.id}${syncEnabled() ? " — the send didn't finish, it will retry next time" : " — will send when sync is on"}. Nothing is lost.`;
+      else status.textContent = "Couldn't save that — try again.";
+    } catch (err) {
+      const q = feedbackQueue(); if (!q.some(e => e.id === entry.id)) saveFeedbackQueue([...q, entry]); // never lose it, whatever failed
+      status.textContent = `✓ Saved as ${entry.id} — something went wrong sending, but it's kept and will retry. Nothing is lost.`;
+    } finally {
+      btn.disabled = false;
+    }
   };
 }
 
@@ -2738,6 +2753,15 @@ function substrateForAction(choice, location) {
   return substrateVerdict({ tradition, density, carried, data: CONTENT.substrateModel });
 }
 
+/** SNG-116: THE single source of truth for an action's substrate CHANCE penalty — the exact number the
+ *  resolve path applies (`substrateForAction(...).chancePenalty`). Every "how hard" preview MUST pass this
+ *  into successChance; omitting it made the readout assume a full lattice and lie on thin ground. Preview
+ *  and resolve both derive the penalty here, so they can never disagree. */
+function substratePenaltyFor(choice, location) {
+  const usesAbility = !!(choice.abilityId || (choice.comboAbilities || []).length);
+  return usesAbility ? (substrateForAction(choice, location)?.chancePenalty || 0) : 0;
+}
+
 async function onChoice(choice) {
   if (busy) return;
   lastPlayerAction = choice?.label || choice?.exactWords || null; // SNG-066: for feedback forensics
@@ -2769,7 +2793,7 @@ async function onChoice(choice) {
     if (!intensity) {
       const pAction = { label: choice.label, attribute: choice.attribute || "practical", subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null, axes: choice.axes || {}, difficulty: choice.difficulty || 0, tags: choice.intentTags || [], abilityLevel };
       const pe = equipmentBonus(character, pAction.tags, CONTENT.rules).bonus + companionBonus(activeCompanions(character, CONTENT.companions), pAction.tags, CONTENT.rules, character).bonus + affinityFor(pAction, location).bonus;
-      const stdChance = successChance({ character, action: pAction, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: pe });
+      const stdChance = successChance({ character, action: pAction, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: pe, substratePenalty: substratePenaltyFor(choice, location) }); // SNG-116: AUTO-intensity must see the real (substrate-inclusive) chance
       intensity = autoIntensity(stdChance, CONTENT.intensity);
     }
     if (energyCost != null) energyCost = scaledEnergy(energyCost, intensity, CONTENT.intensity);
@@ -5118,7 +5142,9 @@ function renderPlay(turn, opts = {}) {
         const equip = equipmentBonus(character, action.tags, rules);
         const comp = companionBonus(activeCompanions(character, CONTENT.companions), action.tags, rules, character);
         const aff = affinityFor(action, location);
-        const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus });
+        // SNG-116: the preview must include the SAME substrate penalty the resolve path applies — else "how
+        // hard" assumes a full lattice and reads easy on thin ground where the real roll is hard.
+        const chance = successChance({ character, action, location, rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus, substratePenalty: substratePenaltyFor(c, location) });
         const sense = senseAction({ character, action, location, rules, aptitudeMods: mods }, chance);
         if (sense.text) senseHtml = `<span class="sense">${esc(sense.text)}</span>`;
       }

@@ -22,7 +22,7 @@ import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
-import { resolveSaveConflict } from "../engine/sync.js";
+import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
@@ -2973,6 +2973,34 @@ await (async () => {
   const ov2 = knownOverlay(met, positions, content);
   check("SNG-083: a met person renders SOLID (discovered=true)", ov2.some(e => e.kind === "person" && e.label === "Fendt" && e.discovered === true));
   check("SNG-083: nothing to show → an empty list (the UI shows the empty state, never a silent no-op)", knownOverlay({ npcRegistry: {}, codex: { topics: {} }, quests: [] }, positions, content).length === 0);
+})();
+
+// --- SNG-116: the difficulty preview must include the substrate penalty (preview == resolve) ---
+{
+  const base = { character: { attributes: { mental: 3 }, energy: 100, alignment: {}, subAttributes: {}, skills: {} },
+    action: { attribute: "mental", abilityLevel: 2, axes: {}, difficulty: 0 }, location: { spectrum: {} }, rules, aptitudeMods: {}, equipmentBonus: 0 };
+  const full = successChance({ ...base });                          // full lattice (what the buggy preview showed)
+  const thin = successChance({ ...base, substratePenalty: 20 });   // the resolve path's real, substrate-inclusive chance
+  check("SNG-116: passing substratePenalty lowers the previewed chance by exactly the penalty (no drift)", full - thin === 20 || (full <= rules.d100.floorChance && thin <= rules.d100.floorChance));
+  const ctx = { ...base, substratePenalty: 20, _breakdown: null };
+  successChance(ctx);
+  check("SNG-116: the substrate penalty is its own honest, named line in the breakdown (SNG-106)",
+    ctx._breakdown.components.some(c => /substrate/.test(c.label) && c.value === -20));
+  check("SNG-116: with no substrate penalty (full lattice / non-ability action) the preview is unchanged (no regression)",
+    successChance({ ...base, substratePenalty: 0 }) === full);
+}
+
+// --- SNG-115: raceTimeout — a stalled network write must never hang the caller forever ---
+await (async () => {
+  let onTimeoutFired = false, timedOut = false;
+  try { await raceTimeout(new Promise(() => {}), 25, "GH_TIMEOUT", () => { onTimeoutFired = true; }); }
+  catch (e) { timedOut = e.message === "GH_TIMEOUT"; }
+  check("SNG-115: raceTimeout rejects a stalled promise with the label, and fires onTimeout (abort)", timedOut && onTimeoutFired);
+  const fast = await raceTimeout(Promise.resolve("ok"), 1000, "GH_TIMEOUT");
+  check("SNG-115: raceTimeout passes a promise that resolves in time straight through", fast === "ok");
+  let rejected = null;
+  try { await raceTimeout(Promise.reject(new Error("GH_PUT_409")), 1000, "GH_TIMEOUT"); } catch (e) { rejected = e.message; }
+  check("SNG-115: a real error (a 409) still propagates — the deadline doesn't mask genuine failures", rejected === "GH_PUT_409");
 })();
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -9,6 +9,24 @@
 // Region state is written by the world-tick only. Nobody edits shared files in place.
 
 const API = "https://api.github.com";
+const GH_TIMEOUT_MS = 12000; // SNG-115: per-request deadline — a stalled GitHub write must never hang the caller forever
+
+/** Race a promise against a deadline; on timeout, reject with `label` (and run onTimeout, e.g. an abort).
+ *  Pure + testable: a never-resolving promise rejects within `ms`. Every ghGet/ghPut goes through this,
+ *  so every sync caller (feedback, character save, ledger) inherits a bounded wait — no per-caller fix. */
+export function raceTimeout(promise, ms, label = "TIMEOUT", onTimeout = null) {
+  let timer;
+  const deadline = new Promise((_, reject) => { timer = setTimeout(() => { try { onTimeout?.(); } catch { /* abort best-effort */ } reject(new Error(label)); }, ms); });
+  return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
+}
+
+/** fetch with an AbortController deadline: on timeout the request is CANCELLED and the await rejects
+ *  (GH_TIMEOUT) so the caller's catch runs — routing feedback to its "never lose it" queue. */
+function ghFetch(url, opts) {
+  const ctrl = new AbortController();
+  const call = fetch(url, { ...opts, signal: ctrl.signal }).catch(e => { throw (e?.name === "AbortError" ? new Error("GH_TIMEOUT") : e); });
+  return raceTimeout(call, GH_TIMEOUT_MS, "GH_TIMEOUT", () => ctrl.abort());
+}
 
 export function getSyncConfig() {
   return {
@@ -29,7 +47,7 @@ export function syncEnabled() {
 
 async function ghGet(path) {
   const { owner, repo, pat } = getSyncConfig();
-  const res = await fetch(`${API}/repos/${owner}/${repo}/contents/${path}`, {
+  const res = await ghFetch(`${API}/repos/${owner}/${repo}/contents/${path}`, {
     headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json" }
   });
   if (res.status === 404) return null;
@@ -41,7 +59,7 @@ async function ghPut(path, contentStr, message, sha = null) {
   const { owner, repo, pat } = getSyncConfig();
   const body = { message, content: btoa(unescape(encodeURIComponent(contentStr))) };
   if (sha) body.sha = sha;
-  const res = await fetch(`${API}/repos/${owner}/${repo}/contents/${path}`, {
+  const res = await ghFetch(`${API}/repos/${owner}/${repo}/contents/${path}`, {
     method: "PUT",
     headers: { authorization: `Bearer ${pat}`, accept: "application/vnd.github+json", "content-type": "application/json" },
     body: JSON.stringify(body)

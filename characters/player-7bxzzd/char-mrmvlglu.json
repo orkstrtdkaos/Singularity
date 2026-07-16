@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrmvlglu",
+  "playerKey": "player-7bxzzd",
+  "name": "Saehara Makashi",
+  "origin": "cogitant",
+  "nativeTradition": "cogitant",
+  "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
+  "background": "drifter",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 4,
+    "mental": 3,
+    "social": 4,
+    "practical": 3
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "total_focus",
+      "level": 1
+    },
+    {
+      "abilityId": "read_the_fight",
+      "level": 1
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "the_cogitarium",
+  "activeScene": {
+    "locationId": "the_cogitarium",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Saehara enters the Cogitarium at morning — a tower of brilliant, slowly-dimming minds — and takes in the cold, the chalk, and the forgetting.",
+        "narration": "The Cogitarium announces itself before you see it: a low, persistent hum that lives behind the ears rather than in them, and a faint smell of ozone and old parchment. Then the structure itself resolves from the morning mist — pale stone terraces stacked like an argument, each level cantilevered slightly further than the last, as if the building keeps reaching upward and forgetting to stop. Narrow windows glow with a bluish inner light even in daylight. Kon pads at your heel and slows as you approach the outer arch, the fox's coat flickering once with ember-warmth before settling. Not warning-hot. Just noting something.\n\nInside, the entrance hall smells of cold and chalk dust. The ceiling is high enough that sound behaves strangely — your footstep arrives at you a half-beat late, as if the room is thinking before it agrees to echo. A handful of Cogitants drift through the space: robed figures with the unfocused gaze of people whose attention is somewhere interior. One sits cross-legged on the stone floor mid-hall, eyes open, lips moving with no sound. Another stands before a wall covered in looping notation and has not moved since you entered. They are thin. All of them are thin in a way that reads less like poverty than like sustained forgetting.\n\nYou are Saehara Makashi — ronin, nomad, a man writing his life as he lives it. You carry a traveler's pack and a waterskin that has grown more precious by the week as the Echo River runs gray-green on bad mornings. The water crisis is not here yet, not visibly, but the Cogitarium has its own quiet emergency: these people are brilliant and they are starving because eating requires them to remember they have bodies. You are a stranger in this place — no reputation precedes you, and the few glances you draw are less suspicious than simply absent, the way a genius looks at a chair.\n\nKon sits precisely at the edge of a shaft of window-light, tail wrapped over its paws, watching the cross-legged Cogitant with what might be professional curiosity."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Cogitarium announces itself before you see it: a low, persistent hum that lives behind the ears rather than in them, and a faint smell of ozone and old parchment. Then the structure itself resolves from the morning mist — pale stone terraces stacked like an argument, each level cantilevered slightly further than the last, as if the building keeps reaching upward and forgetting to stop. Narrow windows glow with a bluish inner light even in daylight. Kon pads at your heel and slows as you approach the outer arch, the fox's coat flickering once with ember-warmth before settling. Not warning-hot. Just noting something.\n\nInside, the entrance hall smells of cold and chalk dust. The ceiling is high enough that sound behaves strangely — your footstep arrives at you a half-beat late, as if the room is thinking before it agrees to echo. A handful of Cogitants drift through the space: robed figures with the unfocused gaze of people whose attention is somewhere interior. One sits cross-legged on the stone floor mid-hall, eyes open, lips moving with no sound. Another stands before a wall covered in looping notation and has not moved since you entered. They are thin. All of them are thin in a way that reads less like poverty than like sustained forgetting.\n\nYou are Saehara Makashi — ronin, nomad, a man writing his life as he lives it. You carry a traveler's pack and a waterskin that has grown more precious by the week as the Echo River runs gray-green on bad mornings. The water crisis is not here yet, not visibly, but the Cogitarium has its own quiet emergency: these people are brilliant and they are starving because eating requires them to remember they have bodies. You are a stranger in this place — no reputation precedes you, and the few glances you draw are less suspicious than simply absent, the way a genius looks at a chair.\n\nKon sits precisely at the edge of a shaft of window-light, tail wrapped over its paws, watching the cross-legged Cogitant with what might be professional curiosity.",
+      "sceneSummary": "Saehara enters the Cogitarium at morning — a tower of brilliant, slowly-dimming minds — and takes in the cold, the chalk, and the forgetting.",
+      "choices": [
+        {
+          "label": "Approach the cross-legged Cogitant mid-hall — crouch to their level and try to catch their attention with a quiet word.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "approach",
+            "connect"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Study the wall of notation the standing Cogitant hasn't moved from — read it as well as you can, looking for what they're working on.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "observe"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Find someone whose eyes are actually focused — a younger or less-gone face — and ask them plainly who or what you need to reach to be heard here.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "search",
+            "ask"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pull out your journal and sit down against one of the hall's stone pillars — write what you see, and wait to see if curiosity draws one of them to you.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "observe",
+            "wait",
+            "write"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust smell and ozone. Morning. Mist still visible through the outer arch behind you.",
+        "npcsPresent": [
+          {
+            "name": "Cross-legged Cogitant",
+            "state": "Seated mid-floor, eyes open, lips moving silently — present in body, somewhere else in mind."
+          },
+          {
+            "name": "Notating Cogitant",
+            "state": "Standing rigid before a wall dense with looping notation, has not moved since you entered."
+          },
+          {
+            "name": "Drifting Cogitants (background)",
+            "state": "Two or three robed figures moving slowly through the hall's edges, unfocused."
+          }
+        ],
+        "objects": [
+          "Wall of dense looping notation (chalk on stone)",
+          "Shaft of window-light (Kon is sitting in it)",
+          "Outer arch behind you (mist visible through it)"
+        ],
+        "threads": [
+          "No one has acknowledged your arrival — you are a stranger here and none of them seem to have noticed yet",
+          "The cross-legged Cogitant's silent-lip movement suggests active interior work",
+          "The wall of notation is unreadable from a distance — its subject is unknown"
+        ]
+      },
+      "npcUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "cogitarium",
+          "label": "The Cogitarium",
+          "kind": "place",
+          "fact": "A tower of stacked pale-stone terraces occupied by Cogitants — people of extraordinary mind who have begun to forget they have bodies. Brilliant and visibly starving. The entrance hall smells of chalk dust and ozone; the Cogitants drift or sit in deep interior work, thin and elsewhere.",
+          "links": []
+        },
+        {
+          "topic": "cogitants",
+          "label": "Cogitants",
+          "kind": "faction",
+          "fact": "Robed thinkers of the Cogitarium who have nearly left their bodies behind for pure mind. They are thin in the particular way of sustained forgetting — not poverty, but the body allowed to go unattended. Strangers draw absent glances, not suspicious ones.",
+          "links": [
+            "cogitarium"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Brief arrival and first look around — less than a half-hour"
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust smell and ozone. Morning. Mist still visible through the outer arch behind you.",
+      "npcsPresent": [
+        {
+          "name": "Cross-legged Cogitant",
+          "state": "Seated mid-floor, eyes open, lips moving silently — present in body, somewhere else in mind."
+        },
+        {
+          "name": "Notating Cogitant",
+          "state": "Standing rigid before a wall dense with looping notation, has not moved since you entered."
+        },
+        {
+          "name": "Drifting Cogitants (background)",
+          "state": "Two or three robed figures moving slowly through the hall's edges, unfocused."
+        }
+      ],
+      "objects": [
+        "Wall of dense looping notation (chalk on stone)",
+        "Shaft of window-light (Kon is sitting in it)",
+        "Outer arch behind you (mist visible through it)"
+      ],
+      "threads": [
+        "No one has acknowledged your arrival — you are a stranger here and none of them seem to have noticed yet",
+        "The cross-legged Cogitant's silent-lip movement suggests active interior work",
+        "The wall of notation is unreadable from a distance — its subject is unknown"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "ember"
+  ],
+  "companionNames": {
+    "ember": "Kon"
+  },
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "the_cogitarium": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 16,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 11,
+        "text": "This reaches your area — The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 12,
+        "text": "Word reaches you: A dead animal was brought back to life in Millbrook's upper meadow — no known ability in the valley's three civilizations accounts for it cleanly (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-16T02:14:18.959Z",
+    "lastTickWorldDay": 16,
+    "lastCanonWorldDay": 16
+  },
+  "domains": {
+    "primary": "cogitant",
+    "secondary": "syllogist",
+    "tertiary": "blazeborn"
+  },
+  "form": "Tall elven male, pale skin with a faint yellow undertone, sharp and still features beneath a wicker bamboo hat. Black robes bearing a glowing kanji for 'Honor' across the back. At his hip a long katana with a light-blue-wrapped handle and a tanto with a white-wrapped handle, both blades showing Damascus wave-pattern steel. A worn satchel carries loose pages and a quill.",
+  "bio": {
+    "hometown": "Saehara is from a small village to the East that is on a river and surrounded by Rice patties and fishing docks.",
+    "residence": "Saehara is a Ronin, a nomad, he has no permanent home, he would probably attribute \"The Wind\" to being his home.",
+    "livelihood": "He takes on mercenary work or odd jobs along the way.",
+    "hobbies": "Fishing, Writing, and honing his blade craft.",
+    "motivation": "He had a vision of writing his own life in a book and teaching generations to come with the knowledge he drafts into the book.",
+    "story": "Saehara has honed his craft in blades and travelling. He left his village of Chisai seeking adventure and a journey to draft into his book he is writing. He is hoping something will help him come up with the title for this book."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 4,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 4,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "the-cogitarium": {
+        "id": "the-cogitarium",
+        "label": "The Cogitarium",
+        "kind": "place",
+        "facts": [
+          "[d1] A tower of stacked pale-stone terraces occupied by Cogitants — people of extraordinary mind who have begun to forget they have bodies. Brilliant and visibly starving. The entrance hall smells of chalk"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-cogitarium",
+        "updatedDay": 1
+      },
+      "cogitants": {
+        "id": "cogitants",
+        "label": "Cogitants",
+        "kind": "faction",
+        "facts": [
+          "[d1] Robed thinkers of the Cogitarium who have nearly left their bodies behind for pure mind. They are thin in the particular way of sustained forgetting — not poverty, but the body allowed to go unattende"
+        ],
+        "links": [
+          "cogitarium"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {},
+  "aptitudes": [],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "reconcileVersion": 5,
+  "gallery": [],
+  "updatedAt": 1784168094225,
+  "rev": 5,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "regionsKnown": {
+    "somatic_reaches": 1
+  },
+  "opLossPending": false,
+  "establishedFacts": []
+}

@@ -127,79 +127,85 @@
         "player": "Try to get water into her — uncap the Waterskin and coax her lips apart; she's dehydrated and burning fuel.",
         "summary": "Saehara gets water into the fallen Cogitant — the body swallows on reflex; Ossian notes the intervention and says water alone won't be enough.",
         "narration": "The waterskin's cap comes off with a familiar click. You shift your weight onto one knee, slide your free hand beneath the back of her head — she weighs almost nothing, the skull light as a bird's — and lift her just enough to tip the skin against her lips.\n\nShe doesn't resist. She doesn't help either. Her mouth opens on its own, some animal reflex older than any calculation, and the water goes in. Some of it runs down her jaw, leaves a clean track through the chalk-dust on her neck. You wait, hold her there, let gravity and the body's older knowledge do the work. She swallows — once, twice, the throat moving in a slow mechanical way — and her lips keep moving, shaping numbers or sentences or the name of something she is still working through behind her eyes. You give her another slow pour. Then you rest the skin on her chest so she stays half-upright if she shifts.\n\nKon has not moved from her side. The fox sits in the chalk dust a handspan from the woman's hip, tail curled around its feet, watching her face with the same quality of attention it gives to places where the world goes thin. Not alarmed. Not certain it should be there at all. Just — watching, as though it is waiting for something it doesn't have words for and neither do you.\n\n\"That constitutes intervention.\" Ossian's voice arrives from across the hall without inflection. \"The calculation notes it. One hour and thirty-one minutes remain within the threshold.\" A pause. \"She will require more than water.\""
+      },
+      {
+        "player": "I'll reach into my traveler's pack searching for any hard tack or any rations of any kind",
+        "summary": "Saehara searches his pack — finds nothing; asks Ossian where food can be found in the Cogitarium.",
+        "narration": "You shift the waterskin to your left hand and reach back with your right, fingers working the Traveler's Pack's buckle by feel alone — you've done it in the dark, in rain, on horseback; your hands know the clasp. The pack opens. Inside: bedroll straps, flint wrapped in cloth, the mess kit nested neatly. You move past them, pressing into the side pockets where road-food lives if it lives anywhere.\n\nIt doesn't. The pack gives you the honest truth of a man who has been walking between jobs and eating when work provided it: empty. A few crumbs in the bottom corner of the left pocket, maybe oats, maybe something older. Nothing a person could call rations. Nothing you could put in front of this woman and call a meal.\n\nYou sit back on your heel and look at the waterskin on her chest, still rising and falling with her slow breath. The water you gave her was the right instinct — but Ossian said it plainly: it won't be enough. Across the hall his eyes haven't moved from you. Araveth traces the wall without a word. The hall breathes chalk and silence around the three of them — you, the woman, and Kon, who has not shifted an inch from her hip.\n\n\"My pack has nothing,\" you say, to the room, to Ossian. \"Where does food exist in this place?\""
       }
     ],
     "lastTurn": {
-      "narration": "The waterskin's cap comes off with a familiar click. You shift your weight onto one knee, slide your free hand beneath the back of her head — she weighs almost nothing, the skull light as a bird's — and lift her just enough to tip the skin against her lips.\n\nShe doesn't resist. She doesn't help either. Her mouth opens on its own, some animal reflex older than any calculation, and the water goes in. Some of it runs down her jaw, leaves a clean track through the chalk-dust on her neck. You wait, hold her there, let gravity and the body's older knowledge do the work. She swallows — once, twice, the throat moving in a slow mechanical way — and her lips keep moving, shaping numbers or sentences or the name of something she is still working through behind her eyes. You give her another slow pour. Then you rest the skin on her chest so she stays half-upright if she shifts.\n\nKon has not moved from her side. The fox sits in the chalk dust a handspan from the woman's hip, tail curled around its feet, watching her face with the same quality of attention it gives to places where the world goes thin. Not alarmed. Not certain it should be there at all. Just — watching, as though it is waiting for something it doesn't have words for and neither do you.\n\n\"That constitutes intervention.\" Ossian's voice arrives from across the hall without inflection. \"The calculation notes it. One hour and thirty-one minutes remain within the threshold.\" A pause. \"She will require more than water.\"",
-      "sceneSummary": "Saehara gets water into the fallen Cogitant — the body swallows on reflex; Ossian notes the intervention and says water alone won't be enough.",
+      "narration": "You shift the waterskin to your left hand and reach back with your right, fingers working the Traveler's Pack's buckle by feel alone — you've done it in the dark, in rain, on horseback; your hands know the clasp. The pack opens. Inside: bedroll straps, flint wrapped in cloth, the mess kit nested neatly. You move past them, pressing into the side pockets where road-food lives if it lives anywhere.\n\nIt doesn't. The pack gives you the honest truth of a man who has been walking between jobs and eating when work provided it: empty. A few crumbs in the bottom corner of the left pocket, maybe oats, maybe something older. Nothing a person could call rations. Nothing you could put in front of this woman and call a meal.\n\nYou sit back on your heel and look at the waterskin on her chest, still rising and falling with her slow breath. The water you gave her was the right instinct — but Ossian said it plainly: it won't be enough. Across the hall his eyes haven't moved from you. Araveth traces the wall without a word. The hall breathes chalk and silence around the three of them — you, the woman, and Kon, who has not shifted an inch from her hip.\n\n\"My pack has nothing,\" you say, to the room, to Ossian. \"Where does food exist in this place?\"",
+      "sceneSummary": "Saehara searches his pack — finds nothing; asks Ossian where food can be found in the Cogitarium.",
       "choices": [
         {
-          "label": "Ask Ossian plainly what she needs beyond water — you've started something; let him complete the picture.",
+          "label": "Press Ossian for an answer — where is their kitchen, their stores, their food? Someone in this tower must eat.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "ask",
+            "persuade",
             "help"
           ],
           "trivial": true
         },
         {
-          "label": "Look around the hall for anything that could serve as food — if the Cogitants have any provision here at all, there will be signs of it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Ossian directly why he hasn't intervened himself — he had a plan, he said. He's been watching the clock. What has he been waiting for?",
+          "label": "Ask Ossian if any other Cogitants in the hall can be roused — someone who knows where provisions are kept.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "ask",
-            "confront"
+            "help",
+            "scout"
           ],
           "trivial": true
         },
         {
-          "label": "Try to bring her back to herself — speak to her, use her name if you can learn it, address the mind still working behind those eyes.",
+          "label": "Leave the woman in Kon's watch for a moment and search the Cogitarium yourself — follow the upper terraces for any sign of a kitchen or stores.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Tell Ossian plainly: you'll stay with her, but you need his help — he had a plan before you arrived; now is the time to use it.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
+            "persuade",
             "help",
-            "connect"
+            "careful"
           ],
-          "trivial": true
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest. Mist still faint through the outer arch.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest, Traveler's Pack open behind him — searched and empty of food.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Seated cross-legged at the center of the hall, watching Saehara — has just spoken from across the room, voice flat and without urgency"
+            "state": "Seated cross-legged at the center of the hall, eyes fixed on Saehara — waiting for the answer the empty pack already gave."
           },
           {
             "name": "Araveth",
-            "state": "Standing at the notation wall, finger tracing chalk loops without pause — has not turned"
+            "state": "Standing at the notation wall, finger tracing chalk loops without pause — has not turned."
           },
           {
             "name": "Fallen Cogitant",
-            "state": "Half-upright against Saehara's hand, waterskin on her chest — swallowed twice on reflex, lips still moving, eyes half-open and aimed elsewhere"
+            "state": "Half-upright against Saehara's hand, waterskin on her chest — breathing slowly, lips still moving, eyes half-open."
           },
           {
             "name": "Drifting Cogitants",
-            "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious"
+            "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious."
           },
           {
             "name": "Kon",
-            "state": "Sitting in chalk dust a handspan from the fallen woman's hip, tail curled around its feet — watching her face with particular quiet stillness"
+            "state": "Sitting in chalk dust a handspan from the fallen woman's hip, tail curled around its feet — has not moved, watching her face."
           }
         ],
         "objects": [
@@ -207,13 +213,14 @@
           "Outer arch — mist faintly visible beyond",
           "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
           "Waterskin resting on the fallen Cogitant's chest — partially used",
-          "Katana at Saehara's waist",
-          "Traveler's Pack on Saehara's back"
+          "Traveler's Pack open behind Saehara — buckle undone, searched, empty of food",
+          "Katana at Saehara's waist"
         ],
         "threads": [
           "Fallen Cogitant is alive but unreachable — has swallowed water on reflex; needs more than water per Ossian",
-          "One hour and thirty-one minutes remain before Ossian's calculated threshold",
-          "Ossian has intervened in calculation only — his own plan remains unstated",
+          "One hour and some minutes remain before Ossian's calculated threshold",
+          "Ossian's own unstated plan — deferred when Saehara arrived, still not named",
+          "The pack is empty — food must be found somewhere in the Cogitarium",
           "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things",
           "The four conditions for source-remediation stand unmet"
         ]
@@ -221,59 +228,48 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "ossian",
+          "npcId": "unknown-cogitant",
           "name": "Ossian",
-          "note": "Noted Saehara's water intervention across the hall without rising — updated the threshold clock to one hour thirty-one minutes; stated she will require more than water",
-          "learned": [
-            "Saehara's intervention has been logged as meaningful by Ossian's calculation"
-          ],
-          "statusNote": "Seated at the center of the entrance hall, watching and timing — has not moved to intervene himself"
+          "role": "Cogitant — seated observer and probabilist",
+          "note": "Saehara announced the pack is empty and asked where food exists in the Cogitarium — Ossian's eyes have not moved from Saehara.",
+          "statusNote": "Seated in the entrance hall, watching Saehara with the same flat attention — awaiting his question about food."
         },
         {
           "op": "update",
           "npcId": "fallen-cogitant",
           "name": "Fallen Cogitant",
-          "note": "Received water — swallowed twice on reflex, throat still working, lips still moving; body taking the minimum",
-          "learned": [
-            "Swallowed water on animal reflex — body still functioning at minimum"
-          ],
-          "statusNote": "Half-upright against Saehara's hand in the entrance hall, waterskin on her chest — hydration begun but Ossian says it is not enough"
-        },
-        {
-          "op": "update",
-          "npcId": "kon",
-          "name": "Kon",
-          "note": "Settled a handspan from the fallen Cogitant, tail curled — watching her face with the attention it gives thin places, not moving",
-          "statusNote": "In the chalk dust beside the fallen Cogitant, watching her with quiet and particular stillness"
+          "role": "Cogitant — collapsed at the hall's far edge",
+          "note": "Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water.",
+          "statusNote": "Half-upright against Saehara's hand in the entrance hall — hydrated minimally but still unreachable; food not yet found."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "a brief, deliberate moment — water administered slowly, Ossian's response heard"
+        "hoursPassed": 0.25,
+        "why": "A brief search of the pack and a short exchange — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest. Mist still faint through the outer arch.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest, Traveler's Pack open behind him — searched and empty of food.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Seated cross-legged at the center of the hall, watching Saehara — has just spoken from across the room, voice flat and w"
+          "state": "Seated cross-legged at the center of the hall, eyes fixed on Saehara — waiting for the answer the empty pack already gav"
         },
         {
           "name": "Araveth",
-          "state": "Standing at the notation wall, finger tracing chalk loops without pause — has not turned"
+          "state": "Standing at the notation wall, finger tracing chalk loops without pause — has not turned."
         },
         {
           "name": "Fallen Cogitant",
-          "state": "Half-upright against Saehara's hand, waterskin on her chest — swallowed twice on reflex, lips still moving, eyes half-op"
+          "state": "Half-upright against Saehara's hand, waterskin on her chest — breathing slowly, lips still moving, eyes half-open."
         },
         {
           "name": "Drifting Cogitants",
-          "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious"
+          "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious."
         },
         {
           "name": "Kon",
-          "state": "Sitting in chalk dust a handspan from the fallen woman's hip, tail curled around its feet — watching her face with parti"
+          "state": "Sitting in chalk dust a handspan from the fallen woman's hip, tail curled around its feet — has not moved, watching her "
         }
       ],
       "objects": [
@@ -281,15 +277,15 @@
         "Outer arch — mist faintly visible beyond",
         "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
         "Waterskin resting on the fallen Cogitant's chest — partially used",
-        "Katana at Saehara's waist",
-        "Traveler's Pack on Saehara's back"
+        "Traveler's Pack open behind Saehara — buckle undone, searched, empty of food",
+        "Katana at Saehara's waist"
       ],
       "threads": [
         "Fallen Cogitant is alive but unreachable — has swallowed water on reflex; needs more than water per Ossian",
-        "One hour and thirty-one minutes remain before Ossian's calculated threshold",
-        "Ossian has intervened in calculation only — his own plan remains unstated",
-        "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things",
-        "The four conditions for source-remediation stand unmet"
+        "One hour and some minutes remain before Ossian's calculated threshold",
+        "Ossian's own unstated plan — deferred when Saehara arrived, still not named",
+        "The pack is empty — food must be found somewhere in the Cogitarium",
+        "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things"
       ]
     }
   },
@@ -386,7 +382,8 @@
       "history": [
         "[d1] Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular still",
         "[d1] Saehara checked her vitals by hand: pulse forty beats per minute, lips dry, chalk ground into fingertips, body consuming itself — she has been on the floor four hours and twelve mi",
-        "[d1] Received water — swallowed twice on reflex, throat still working, lips still moving; body taking the minimum"
+        "[d1] Received water — swallowed twice on reflex, throat still working, lips still moving; body taking the minimum",
+        "[d1] Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water."
       ],
       "knownFacts": [
         "Is alive but unreachable — still calculating, visibly, behind closed eyes",
@@ -399,7 +396,7 @@
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "Half-upright against Saehara's hand in the entrance hall, waterskin on her chest — hydration begun but Ossian says it is not enough",
+      "statusNote": "Half-upright against Saehara's hand in the entrance hall — hydrated minimally but still unreachable; food not yet found.",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -645,14 +642,14 @@
     }
   },
   "tendencies": {
-    "strategic": 1.9166307772752562,
-    "social": 2.8870279098369944,
-    "cerebral": 3.9160905529317027,
-    "generous": 3.9700998750000003,
-    "cautious": 3.9700998750000003
+    "strategic": 2.90704762338888,
+    "social": 2.8725927702878096,
+    "cerebral": 3.896510100167044,
+    "generous": 3.9502493756250003,
+    "cautious": 3.9502493756250003
   },
   "aptitudes": [],
-  "actionCount": 11,
+  "actionCount": 12,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -665,8 +662,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784171961117,
-  "rev": 33,
+  "updatedAt": 1784172126515,
+  "rev": 34,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -674,7 +671,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 12
+    "somatic_reaches": 13
   },
   "opLossPending": false,
   "establishedFacts": [

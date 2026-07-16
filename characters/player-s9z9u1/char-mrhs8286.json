@@ -460,60 +460,102 @@
         "player": "Let Pell ask him questions next.",
         "summary": "Pell takes over the questioning — Fendt confirms Grael was named by band designation in the original concern notice, meaning the suppression was precise and deliberate.",
         "narration": "Silas steps back from the desk — not far, just enough to make the geometry plain. He rests his weight on his back foot and goes quiet, the spear's heel dropping to the floor beside him with a soft knock. A clear signal to Pell, if she wants it.\n\nShe takes it. No preamble. She moves to the position Silas vacated and looks at Fendt the way she looks at a joint that might be failing — straight on, without hurry.\n\n\"The seven readings that were removed,\" she says. \"Were they consecutive, or spread across the three weeks?\"\n\nFendt blinks, recalibrates. He had been reading Silas as the one who would ask questions; now the frame has shifted and he is adjusting. His hand drops fully from the traveling case. \"Spread,\" he says, after a moment. \"Not evenly. Four in the first two weeks, three in the last. The gap between the fifth and sixth was nine days — I noticed it at the time but I didn't know what I was noticing.\"\n\nPell nods, exactly once, the way she nods when a measurement confirms something she already suspected. \"And your preliminary concern notice to Grael — did you name the seventh band specifically, or just report elevated particulate?\"\n\nFendt's jaw tightens. \"I named it. By band designation. I was precise.\"\n\nPell doesn't say anything for a moment. She glances at Silas — not for instruction, just sharing the weight of what that means. Grael knew exactly what he was suppressing, and he knew it from Fendt's own language.\n\nHuginn tilts his head toward the shuttered window, unhurried."
+      },
+      {
+        "player": "Name Leth to Fendt — the archivist who noticed the archive breach. See if the name means anything to him and whether the two threads connect.",
+        "summary": "Leth's name lands — Fendt knows her, knows the archive complaint, and the two threads are now one in the room.",
+        "narration": "The name lands quietly.\n\n\"Leth,\" you say. Not a question — just the name, offered into the space between you and Fendt the way you'd set a tool on a workbench to see what the other person does with it. \"Archivist. Edge District. She wrote to a contact of ours last month about someone removing material from the archive room. Specific material. Someone who knew exactly what they were looking for.\"\n\nFendt goes very still.\n\nIt is not the stillness of a man who doesn't recognize the name. It is the stillness of a man who has just watched two separate problems reveal themselves as one problem, and is standing at the join, and does not yet know whether that makes his situation better or worse.\n\n\"Leth filed a complaint,\" he says, finally. His voice has gone careful again — the deliberate engineer's cadence, the one he uses when he is testing whether what he says will be used against him. \"Two weeks ago. To the district records office. Someone had gone through the historical calibration files — the old array-setup records, pre-Transition provenance documentation, intake charts from before my time. She flagged it as a breach because the removal was too precise to be accidental.\" He pauses. \"The records office filed her complaint in the inactive stack. I saw the copy because Leth — because she is the kind of person who makes sure someone else has a copy.\" A brief, grim recognition crosses his face. \"The material that was removed. Did your contact say what specifically?\"\n\nPell glances at you once — the same sidelong read she uses when a joint has just confirmed what she suspected and now she wants to know if you caught it too.\n\nHuginn shifts on your shoulder. One feather, settling."
       }
     ],
     "lastTurn": {
-      "narration": "Silas steps back from the desk — not far, just enough to make the geometry plain. He rests his weight on his back foot and goes quiet, the spear's heel dropping to the floor beside him with a soft knock. A clear signal to Pell, if she wants it.\n\nShe takes it. No preamble. She moves to the position Silas vacated and looks at Fendt the way she looks at a joint that might be failing — straight on, without hurry.\n\n\"The seven readings that were removed,\" she says. \"Were they consecutive, or spread across the three weeks?\"\n\nFendt blinks, recalibrates. He had been reading Silas as the one who would ask questions; now the frame has shifted and he is adjusting. His hand drops fully from the traveling case. \"Spread,\" he says, after a moment. \"Not evenly. Four in the first two weeks, three in the last. The gap between the fifth and sixth was nine days — I noticed it at the time but I didn't know what I was noticing.\"\n\nPell nods, exactly once, the way she nods when a measurement confirms something she already suspected. \"And your preliminary concern notice to Grael — did you name the seventh band specifically, or just report elevated particulate?\"\n\nFendt's jaw tightens. \"I named it. By band designation. I was precise.\"\n\nPell doesn't say anything for a moment. She glances at Silas — not for instruction, just sharing the weight of what that means. Grael knew exactly what he was suppressing, and he knew it from Fendt's own language.\n\nHuginn tilts his head toward the shuttered window, unhurried.",
-      "sceneSummary": "Pell takes over the questioning — Fendt confirms Grael was named by band designation in the original concern notice, meaning the suppression was precise and deliberate.",
+      "narration": "The name lands quietly.\n\n\"Leth,\" you say. Not a question — just the name, offered into the space between you and Fendt the way you'd set a tool on a workbench to see what the other person does with it. \"Archivist. Edge District. She wrote to a contact of ours last month about someone removing material from the archive room. Specific material. Someone who knew exactly what they were looking for.\"\n\nFendt goes very still.\n\nIt is not the stillness of a man who doesn't recognize the name. It is the stillness of a man who has just watched two separate problems reveal themselves as one problem, and is standing at the join, and does not yet know whether that makes his situation better or worse.\n\n\"Leth filed a complaint,\" he says, finally. His voice has gone careful again — the deliberate engineer's cadence, the one he uses when he is testing whether what he says will be used against him. \"Two weeks ago. To the district records office. Someone had gone through the historical calibration files — the old array-setup records, pre-Transition provenance documentation, intake charts from before my time. She flagged it as a breach because the removal was too precise to be accidental.\" He pauses. \"The records office filed her complaint in the inactive stack. I saw the copy because Leth — because she is the kind of person who makes sure someone else has a copy.\" A brief, grim recognition crosses his face. \"The material that was removed. Did your contact say what specifically?\"\n\nPell glances at you once — the same sidelong read she uses when a joint has just confirmed what she suspected and now she wants to know if you caught it too.\n\nHuginn shifts on your shoulder. One feather, settling.",
+      "sceneSummary": "Leth's name lands — Fendt knows her, knows the archive complaint, and the two threads are now one in the room.",
       "choices": [
         {
-          "label": "Ask Fendt directly whether he will come with you — his account is given; the question is whether he testifies somewhere it can matter.",
+          "label": "Share what Sorel passed on — the breach was targeted, the actor moved fast, left nothing except the absence of what they took, and did it before the pass was open. See what Fendt makes of the sequence.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Ask about Grael's access — who else could have physically altered the formal ledger, and whether Fendt ever saw Grael at the array himself.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "negotiate",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Let Pell keep asking, and use Order-Sense on the room's structure — read the design this office is part of, and what Fendt's role was supposed to look like before it broke.",
+          "label": "Ask what the historical calibration files contain — before giving him more, find out what the removed material was, because Fendt clearly has a theory.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Name Leth to Fendt — the archivist who noticed the archive breach. See if the name means anything to him and whether the two threads connect.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask him directly whether Grael had access to the archive room — the same hand that rewrote the ledger may have cleared the records that would have corroborated it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "chaos_order": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask whether Fendt will leave the Edge District with you — he is a witness with a packed case and three days before the council board acts, and he needs to decide.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "violence_peace": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate",
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Fendt knows Leth and has a copy of her archive complaint — the breach was filed, suppressed to inactive stack, and Fendt learned of it because Leth ensured a second copy existed. The two threads are now confirmed as one in the room."
         }
       ],
       "scene": {
@@ -521,15 +563,15 @@
         "npcsPresent": [
           {
             "name": "Fendt",
-            "state": "Standing beside the cleared desk, hand fully off the traveling case now — recalibrated to Pell as the questioner, jaw tight after the band-designation admission."
+            "state": "Standing beside the cleared desk — very still, the join between two problems registering visibly. Hand off the traveling case. Has just asked what specifically was removed from the archive."
           },
           {
             "name": "Pell",
-            "state": "Standing at the desk position Silas vacated — questioning Fendt directly, straight on, without hurry."
+            "state": "Standing at the desk position, watching Silas with a sidelong read — waiting to see what he does with Fendt's question."
           },
           {
             "name": "Huginn",
-            "state": "Perched on Silas's shoulder, head tilted toward the shuttered window."
+            "state": "Perched on Silas's shoulder, one feather settling — unhurried."
           }
         ],
         "objects": [
@@ -541,12 +583,12 @@
           "Last paper — folded into Fendt's inner coat pocket; real filtration readings from memory"
         ],
         "threads": [
-          "Grael named the seventh band by designation in Fendt's concern notice — knew exactly what he was suppressing",
-          "The seven removed readings were spread unevenly across three weeks — not random, not consecutive; a pattern of selective removal",
-          "Fendt's reliability as a witness: his paper written from memory, exactness uncertain",
-          "Overseer Grael's physical access to the formal ledger unconfirmed",
-          "Leth and the archive breach not yet named to Fendt",
-          "Whether Fendt will leave the Edge District and come with them unasked"
+          "Fendt has asked what specifically was removed from the archive — waiting for Silas's answer",
+          "Leth's archive complaint was filed to the inactive stack — suppressed, not destroyed",
+          "Fendt has a copy of Leth's complaint — she made sure of it",
+          "Grael's access to the archive room not yet established",
+          "Fendt's traveling case packed — three days before council board acts; question of departure still open",
+          "The pre-Transition provenance documentation removed from the archive may connect to the buried valley structure"
         ]
       },
       "npcUpdates": [
@@ -554,62 +596,63 @@
           "op": "update",
           "npcId": "fendt",
           "name": "Fendt",
-          "note": "Recalibrated when Pell took the questioning position — adapted without resistance. Confirmed the seventh-band designation was named explicitly in his concern notice to Grael, meaning Grael's suppression was precise and deliberate.",
+          "role": "Filtration engineer, Edge District",
+          "note": "Recognized Leth's name immediately — knew her archive complaint, has a copy. The two threads are one in the room now; he is recalibrating what his situation means.",
           "learned": [
-            "The seven removed readings were spread unevenly — four in the first two weeks, three in the last, with a nine-day gap between the fifth and sixth",
-            "Fendt named the seventh band by band designation in his preliminary concern notice to Grael — the suppression was surgical, not approximate"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the desk in the upper floor — hand off the case, recalibrated to Pell as questioner, account given and now deepening."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Took the questioning position without prompting when Silas stepped back — read the geometry and moved into it. Pulled the band-designation admission from Fendt with two precise questions.",
-          "learned": [
-            "Grael knew exactly what he was suppressing — Fendt named the seventh band explicitly in the concern notice"
+            "Leth filed a breach complaint two weeks ago to the district records office — flagged as too precise to be accidental",
+            "The removed material was historical calibration files: old array-setup records, pre-Transition provenance documentation, intake charts from before Fendt's time",
+            "The records office filed Leth's complaint in the inactive stack",
+            "Fendt has a copy of Leth's complaint because Leth ensured a second copy existed",
+            "Fendt has asked what specifically was removed — he may have a theory about the material's significance"
           ],
           "skillsObserved": [
-            "precise technical questioning under field conditions",
-            "reading a subject's frame and shifting the dynamic deliberately"
+            "recognizing the connection between two separate threads under pressure"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the upper floor, running the questioning — pulling the band-designation admission from Fendt."
+          "statusNote": "At the desk in the upper floor — still, processing the join between the archive breach and the ledger falsification; waiting for Silas's answer about what was removed."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Leth filed an archive breach complaint two weeks ago to the district records office — flagged as too precise to be accidental, filed to the inactive stack. Fendt has a copy because Leth ensured it.",
+          "subjectId": "fendt"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "overseer-grael",
-          "label": "Overseer Grael",
-          "kind": "person",
-          "entityId": "overseer-grael",
-          "fact": "Grael received Fendt's preliminary concern notice naming the seventh band by band designation — meaning his subsequent suppression of those exact readings was surgical and deliberate, not approximate or accidental.",
+          "topic": "leth-archive-complaint",
+          "label": "Leth's Archive Complaint",
+          "kind": "event",
+          "fact": "Leth filed a formal breach complaint two weeks ago to the district records office. The removed material was historical calibration files — old array-setup records, pre-Transition provenance documentation, intake charts predating Fendt's tenure. The complaint was filed to the inactive stack. Fendt has a copy because Leth ensured one existed.",
           "links": [
             "fendt-and-the-falsified-ledger",
-            "the-water-crisis",
+            "find-the-engineer",
+            "the-edge-district-ledger",
+            "radiant-plateau-edge",
             "seventh-band-particulate",
-            "find-the-engineer"
+            "the-water-crisis",
+            "overseer-grael"
           ]
         },
         {
-          "topic": "fendt-and-the-falsified-ledger",
-          "label": "Fendt and the Falsified Ledger",
-          "kind": "event",
-          "fact": "The seven removed readings were spread unevenly across three weeks — four in the first two weeks, three in the last, with a nine-day gap between the fifth and sixth. Not random, not consecutive: a pattern of selective, targeted removal.",
+          "topic": "fendt",
+          "label": "Fendt",
+          "kind": "person",
+          "entityId": "fendt",
+          "fact": "Knows Leth and has a copy of her archive breach complaint. Recognized immediately that the two threads — the ledger falsification and the archive removal — are connected. The removed material includes pre-Transition provenance documentation and historical array intake charts.",
           "links": [
-            "overseer-grael",
-            "seventh-band-particulate",
-            "the-water-crisis",
-            "radiant-plateau-edge"
+            "leth-archive-complaint",
+            "the-edge-district-ledger",
+            "fendt-and-the-falsified-ledger",
+            "seventh-band-particulate"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange of questions at the desk"
+        "why": "a brief exchange — the name named, the recognition registered, Fendt's question left in the air"
       }
     },
     "sceneState": {
@@ -617,15 +660,15 @@
       "npcsPresent": [
         {
           "name": "Fendt",
-          "state": "Standing beside the cleared desk, hand fully off the traveling case now — recalibrated to Pell as the questioner, jaw ti"
+          "state": "Standing beside the cleared desk — very still, the join between two problems registering visibly. Hand off the traveling"
         },
         {
           "name": "Pell",
-          "state": "Standing at the desk position Silas vacated — questioning Fendt directly, straight on, without hurry."
+          "state": "Standing at the desk position, watching Silas with a sidelong read — waiting to see what he does with Fendt's question."
         },
         {
           "name": "Huginn",
-          "state": "Perched on Silas's shoulder, head tilted toward the shuttered window."
+          "state": "Perched on Silas's shoulder, one feather settling — unhurried."
         }
       ],
       "objects": [
@@ -637,11 +680,11 @@
         "Last paper — folded into Fendt's inner coat pocket; real filtration readings fro"
       ],
       "threads": [
-        "Grael named the seventh band by designation in Fendt's concern notice — knew exactly what he was suppressing",
-        "The seven removed readings were spread unevenly across three weeks — not random, not consecutive; a pattern of selective removal",
-        "Fendt's reliability as a witness: his paper written from memory, exactness uncertain",
-        "Overseer Grael's physical access to the formal ledger unconfirmed",
-        "Leth and the archive breach not yet named to Fendt"
+        "Fendt has asked what specifically was removed from the archive — waiting for Silas's answer",
+        "Leth's archive complaint was filed to the inactive stack — suppressed, not destroyed",
+        "Fendt has a copy of Leth's complaint — she made sure of it",
+        "Grael's access to the archive room not yet established",
+        "Fendt's traveling case packed — three days before council board acts; question of departure still open"
       ]
     }
   },
@@ -938,7 +981,8 @@
       "progress": [
         "Fendt located and named — he is present, unguarded, and aware the board is moving. First contact made. The paper in his coat and what the falsified readings covered are the immediate questions.",
         "Pell brought up; both now facing Fendt as he begins his full account — the real numbers and who replaced them are the immediate questions.",
-        "Fendt named Overseer Grael and described the falsification in full — seven readings removed, seventh-band upstream particulate suppressed. His paper exists but was written from memory; its exactness is uncertain. Next: establish who else had access, and whether Fendt will come with them."
+        "Fendt named Overseer Grael and described the falsification in full — seven readings removed, seventh-band upstream particulate suppressed. His paper exists but was written from memory; its exactness is uncertain. Next: establish who else had access, and whether Fendt will come with them.",
+        "Fendt knows Leth and has a copy of her archive complaint — the breach was filed, suppressed to inactive stack, and Fendt learned of it because Leth ensured a second copy existed. The two threads are now confirmed as one in the room."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -1293,23 +1337,25 @@
         "[d3] Deathsense read the paper in his coat — the real filtration readings exist; he kept them after watching someone falsify the formal ledger in his name. Has not moved. Question still",
         "[d3] Updated his model on seeing two visitors — not protest, calculation. Breath released; beginning to speak.",
         "[d3] Gave his full account — seventh-band particulate trending upstream, Grael named, falsification described, paper written from memory and still uncertain of its exactness.",
-        "[d3] Recalibrated when Pell took the questioning position — adapted without resistance. Confirmed the seventh-band designation was named explicitly in his concern notice to Grael, meani"
+        "[d3] Recalibrated when Pell took the questioning position — adapted without resistance. Confirmed the seventh-band designation was named explicitly in his concern notice to Grael, meani",
+        "[d3] Recognized Leth's name immediately — knew her archive complaint, has a copy. The two threads are one in the room now; he is recalibrating what his situation means."
       ],
       "knownFacts": [
-        "Someone replaced the formal ledger readings under his initials after he had already committed the real numbers elsewhere",
-        "He took the paper rather than filed it — its function as official evidence is now ending",
-        "Two people are asking; Silas is not alone",
         "Filed a preliminary concern notice to Overseer Grael three weeks ago — three days later the formal ledger was rewritten under his own initials",
         "The falsified figures removed seven readings that showed directional upstream particulate shift in the seventh band",
         "He wrote his own figures from memory that night — he is not certain the paper is exact, and named that uncertainty",
         "The seven removed readings were spread unevenly — four in the first two weeks, three in the last, with a nine-day gap between the fifth and sixth",
-        "Fendt named the seventh band by band designation in his preliminary concern notice to Grael — the suppression was surgical, not approximate"
+        "Fendt named the seventh band by band designation in his preliminary concern notice to Grael — the suppression was surgical, not approximate",
+        "Leth filed a breach complaint two weeks ago to the district records office — flagged as too precise to be accidental",
+        "The removed material was historical calibration files: old array-setup records, pre-Transition provenance documentation, intake charts from before Fendt's time",
+        "The records office filed Leth's complaint in the inactive stack"
       ],
       "skillsObserved": [
-        "forced calm under surprise — made himself slow his breathing"
+        "forced calm under surprise — made himself slow his breathing",
+        "recognizing the connection between two separate threads unde"
       ],
       "status": "active",
-      "statusNote": "At the desk in the upper floor — hand off the case, recalibrated to Pell as questioner, account given and now deepening.",
+      "statusNote": "At the desk in the upper floor — still, processing the join between the archive breach and the ledger falsification; waiting for Silas's answer about what was r",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2312,13 +2358,16 @@
         "kind": "person",
         "facts": [
           "[d3] Mid-forties filtration engineer — hollow-cheeked, coat slept-in, hand on a latched traveling case. Was expecting someone to come, just not before the council board acted. Came through the back; he not",
-          "[d3] The paper in Fendt's coat contains his own real filtration readings — three weeks of actual river data. Someone replaced the formal ledger with false figures under his initials after he had already re"
+          "[d3] The paper in Fendt's coat contains his own real filtration readings — three weeks of actual river data. Someone replaced the formal ledger with false figures under his initials after he had already re",
+          "[d3] Knows Leth and has a copy of her archive breach complaint. Recognized immediately that the two threads — the ledger falsification and the archive removal — are connected. The removed material includes"
         ],
         "links": [
           "the-edge-district-ledger",
           "fendt-and-the-falsified-ledger",
           "radiant-plateau-edge",
-          "the-water-crisis"
+          "the-water-crisis",
+          "leth-archive-complaint",
+          "seventh-band-particulate"
         ],
         "aliases": [
           "Fendt — Filtration Engineer",
@@ -2364,21 +2413,38 @@
         "aliases": [],
         "createdDay": 3,
         "updatedDay": 3
+      },
+      "leth-archive-complaint": {
+        "id": "leth-archive-complaint",
+        "label": "Leth's Archive Complaint",
+        "kind": "event",
+        "facts": [
+          "[d3] Leth filed a formal breach complaint two weeks ago to the district records office. The removed material was historical calibration files — old array-setup records, pre-Transition provenance documentat"
+        ],
+        "links": [
+          "fendt-and-the-falsified-ledger",
+          "find-the-engineer",
+          "the-edge-district-ledger",
+          "radiant-plateau-edge"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     }
   },
   "tendencies": {
-    "strategic": 40.59614148936746,
-    "cerebral": 28.888163615277463,
-    "social": 32.22235855480153,
-    "generous": 7.661097897912236,
-    "cautious": 30.892939837744315,
-    "physical": 1.893239836309319,
-    "risky": 5.330982551082754,
-    "ruthless": 2.344172043276111,
-    "carousing": 1.6460829244103312,
-    "amorous": 4.513795592919352,
-    "patient": 1.4049185142514762
+    "strategic": 39.58123795213327,
+    "cerebral": 29.165959524895527,
+    "social": 31.416799590931493,
+    "generous": 7.46957045046443,
+    "cautious": 30.120616341800705,
+    "physical": 1.845908840401586,
+    "risky": 5.1977079873056855,
+    "ruthless": 2.285567742194208,
+    "carousing": 1.6049308513000728,
+    "amorous": 4.400950703096368,
+    "patient": 1.3697955513951892
   },
   "aptitudes": [
     "strategist",
@@ -2390,7 +2456,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 340,
+  "actionCount": 341,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2532,8 +2598,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784239830485,
-  "rev": 483,
+  "updatedAt": 1784240130200,
+  "rev": 484,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2744,12 +2810,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "The Deathbound Runic Spear has been upgraded — transverse channel deepened, maker's mark re-seated (slightly oblique), memory-capacitor installed rough at the collar north quarter. Death-register now ",
-      "day": 2,
-      "subjectId": "pell"
-    },
     {
       "id": "pell",
       "text": "The Deathbound Runic Spear is fully repaired and seated — all known faults addressed, memory-capacitor flush at the collar. No remaining structural issues as of World-day 14 dawn.",
@@ -2983,6 +3043,12 @@
       "text": "Pell was fully unguarded at the overhang camp on World-day 16 evening — the habit broke entirely, no management, no ledger-close. She said Silas's name and stopped trying to hold anything back.",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "fendt",
+      "text": "Leth filed an archive breach complaint two weeks ago to the district records office — flagged as too precise to be accidental, filed to the inactive stack. Fendt has a copy because Leth ensured it.",
+      "day": 3,
+      "subjectId": "fendt"
     }
   ],
   "practice": {
@@ -3097,7 +3163,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 155
+    "valley": 156
   },
   "foreclosed": [
     "rootkin",

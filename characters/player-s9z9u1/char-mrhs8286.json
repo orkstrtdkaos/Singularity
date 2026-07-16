@@ -77,7 +77,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 135,
-  "energy": 94,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1885,171 +1885,147 @@
         "player": "Read the fire-ring with Palework — how old, who made it, what ended here last",
         "summary": "Palework reads the fire-ring — one occupant, two to three weeks ago, same hand as an earlier fire. A known waypoint, not a chance camp.",
         "narration": "You crouch at the fire-ring and set two fingers against the flat stones — the ash is dry and cold and faintly gritty, the kind of grey that has shed all its heat. Palework opens at a conserve, a quiet read rather than a push.\n\nThe ring is two weeks old, maybe three — late winter, before the pass opened. Single occupant: one set of stone placements, one sitting-angle's worth of char, a meal cooked and eaten without ceremony. Nothing ended here beyond ordinary hunger satisfied and ordinary cold held off. The ash is clean — no blood, no animal remains, no material worked or broken. Whoever this was, they camped the way someone camps who has done it a thousand times: efficiently, without trace, and without event.\n\nThe only thing Palework catches that isn't entirely ordinary: the fire was built on the site of an older fire, laid in the same ring, with the same stone placement. Not coincidence. The same hand made both, or someone who learned from that hand. This overhang is known to whoever lit these. It is a waypoint, not a discovery.\n\nYou lift your fingers from the stone. Pell is watching you, not the ring."
+      },
+      {
+        "player": "Make camp here — the overhang is dry, the ring is cold, whoever used it isn't here. Build a fire and eat before the light goes.",
+        "summary": "Camp made at the overhang fire-ring — fire built, trail parcel opened, Pell asks about the ring's interval.",
+        "narration": "The overhang is better shelter than anything you'd have found by pushing on — the underside is genuinely dry, the stone above cutting the evening wind that's begun moving through the pines. You drop your pack against the back wall and start breaking the fire the way whoever came before you built theirs: four stones already placed, two knocked askew by weather, corrected by hand in a minute.\n\nThe tinder is pine duff and a strip of bark peeled from a dead fall twenty feet into the trees — dry enough. Flint and steel twice, the third strike catches, and you feed it slowly until the small fire settles into something reliable. The flat stones absorb heat and begin to throw it back. Pell doesn't comment; she's already cleared the ground on her side of the ring, set the oilcloth fold across her pack as a low windbreak, and is working at the knot of her first trail parcel. Camp-making with a blacksmith: efficient, no wasted motion, no conversation needed.\n\nYou open one of your own Preserved Trail Parcels — dried river perch and salted pork, cloth-wrapped, Aldric's smokehouse smell still on it — and hold the other one against the heat just long enough to take the cold edge off. Above, Huginn has moved from the canopy to a ledge at the overhang's lip, where it can see the fire and the treeline both. It settles its wings once and goes still. The runnel to the east carries the sound of snowmelt over stone, thin and constant, and the pine run darkens by degrees as the afternoon light goes soft and amber behind the ridge.\n\nPell eats two bites and then asks, without looking up from her parcel: \"The ring. Same hand twice — you said that. How long between visits?\""
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the fire-ring and set two fingers against the flat stones — the ash is dry and cold and faintly gritty, the kind of grey that has shed all its heat. Palework opens at a conserve, a quiet read rather than a push.\n\nThe ring is two weeks old, maybe three — late winter, before the pass opened. Single occupant: one set of stone placements, one sitting-angle's worth of char, a meal cooked and eaten without ceremony. Nothing ended here beyond ordinary hunger satisfied and ordinary cold held off. The ash is clean — no blood, no animal remains, no material worked or broken. Whoever this was, they camped the way someone camps who has done it a thousand times: efficiently, without trace, and without event.\n\nThe only thing Palework catches that isn't entirely ordinary: the fire was built on the site of an older fire, laid in the same ring, with the same stone placement. Not coincidence. The same hand made both, or someone who learned from that hand. This overhang is known to whoever lit these. It is a waypoint, not a discovery.\n\nYou lift your fingers from the stone. Pell is watching you, not the ring.",
-      "sceneSummary": "Palework reads the fire-ring — one occupant, two to three weeks ago, same hand as an earlier fire. A known waypoint, not a chance camp.",
+      "narration": "The overhang is better shelter than anything you'd have found by pushing on — the underside is genuinely dry, the stone above cutting the evening wind that's begun moving through the pines. You drop your pack against the back wall and start breaking the fire the way whoever came before you built theirs: four stones already placed, two knocked askew by weather, corrected by hand in a minute.\n\nThe tinder is pine duff and a strip of bark peeled from a dead fall twenty feet into the trees — dry enough. Flint and steel twice, the third strike catches, and you feed it slowly until the small fire settles into something reliable. The flat stones absorb heat and begin to throw it back. Pell doesn't comment; she's already cleared the ground on her side of the ring, set the oilcloth fold across her pack as a low windbreak, and is working at the knot of her first trail parcel. Camp-making with a blacksmith: efficient, no wasted motion, no conversation needed.\n\nYou open one of your own Preserved Trail Parcels — dried river perch and salted pork, cloth-wrapped, Aldric's smokehouse smell still on it — and hold the other one against the heat just long enough to take the cold edge off. Above, Huginn has moved from the canopy to a ledge at the overhang's lip, where it can see the fire and the treeline both. It settles its wings once and goes still. The runnel to the east carries the sound of snowmelt over stone, thin and constant, and the pine run darkens by degrees as the afternoon light goes soft and amber behind the ridge.\n\nPell eats two bites and then asks, without looking up from her parcel: \"The ring. Same hand twice — you said that. How long between visits?\"",
+      "sceneSummary": "Camp made at the overhang fire-ring — fire built, trail parcel opened, Pell asks about the ring's interval.",
       "choices": [
         {
-          "label": "Read the overhang itself — Order-Sense on the whole shelf. If this is a waypoint, it's part of a route. Read the design.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Make camp here — the overhang is dry, the ring is cold, whoever used it isn't here. Build a fire and eat before the light goes.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "rest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell Pell what you read — share the detail about the same hand, same ring, twice. See what she makes of it.",
+          "label": "\"I can't put the interval precisely — Palework reads age, not schedule. But the ash layers are distinct. Weeks between them, maybe a month. Someone who keeps a route.\"",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "help"
+            "inform",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Send Huginn ahead down the slope — have it range low and return with a read on what's below before you commit to sleeping here.",
+          "label": "Use Order-Sense on the overhang itself — read what pattern the campsite is part of.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
+            "study",
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "\"Doesn't matter who — matters that they're not here. Eat.\"",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "redirect",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Share the Resin Mountain Wine with Pell — the fire is built, the light is right, the bottle has been waiting.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 11,
+        "inventoryRemove": [
+          "Preserved Trail Parcel x4"
+        ]
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Far side of the mountain pass, late afternoon — two miles below the crest, at a south-facing rock overhang with a dry underside. The fire-ring of flat stones sits just inside the shadow; ash cold, clean, two to three weeks old. Pine run dense around the shelf; a thin snowmelt runnel runs east nearby.",
+        "setting": "Far side of the mountain pass, late afternoon shading toward evening — at the south-facing rock overhang, fire now burning in the flat-stone ring. Amber light through the pines; wind cutting above the overhang lip.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Crouched a few feet from the fire-ring, watching Silas finish the read — waiting on what he found."
+            "state": "Eating her trail parcel, seated across the fire-ring, oilcloth fold propped as windbreak behind her — waiting on Silas's answer."
           },
           {
             "name": "Huginn",
-            "state": "Perched somewhere in the canopy above the overhang, still."
+            "state": "Perched at the overhang's stone lip, facing the treeline, still."
           }
         ],
         "objects": [
-          "Memory (spear, on Silas's shoulder)",
-          "Oilcloth Fold (packed, Pell's on her shoulder)",
+          "Memory (spear, leaned against the overhang wall)",
+          "Oilcloth Fold (Pell's, propped as windbreak)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Fire-ring of flat stones — old ash, cold and clean, two to three weeks old",
-          "Rock overhang — south-facing, dry underside, adequate shelter",
-          "Snowmelt runnel — thin, running east, twenty feet from overhang"
+          "Fire-ring of flat stones — fire now burning, ash beneath",
+          "Rock overhang — south-facing, dry underside",
+          "Snowmelt runnel — thin, running east, twenty feet from overhang",
+          "Preserved Trail Parcel (open, Silas eating)",
+          "Resin Mountain Wine (sealed, in pack)",
+          "Dried Starfruit (sealed packet, in pack)"
         ],
         "threads": [
-          "Fire-ring: same hand, twice — this overhang is a known waypoint on someone's route. Whose, and which direction are they traveling?",
+          "Fire-ring: same hand, twice — whose route is this, and which direction are they traveling?",
+          "Pell's direct question: how long between the ring's two visits?",
           "Edge District bearing — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five.",
           "What the system opens when the last sleeve runs — still unread."
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Watching Silas read the fire-ring — patient, waiting on his findings.",
-          "statusNote": "On the far side of the mountain pass with Silas, late afternoon, at the rock overhang — watching Silas finish the Palework read on the fire-ring."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-mountain-pass",
-          "label": "The Mountain Pass",
-          "kind": "place",
-          "fact": "The rock overhang two miles below the far crest holds a waypoint fire-ring — same hand built it at least twice, most recently two to three weeks ago, before the pass officially opened. Single occupant, clean camp, no event. Someone knew this overhang before the pass was accessible to valley folk.",
-          "links": [
-            "the-water-crisis",
-            "precursor-signs-in-the-valley",
-            "sorel"
-          ]
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief, conserved Palework read at the fire-ring."
+        "hoursPassed": 1,
+        "why": "Camp-making, fire-building, settling in for the evening meal — roughly an hour of activity."
       },
-      "scene_ended": false
+      "inventoryAdd": []
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, late afternoon — two miles below the crest, at a south-facing rock overhang with a dry underside. The fire-ring of flat stones sits just inside the shadow; ash cold, clean, two to three weeks old. Pine run dense around the shelf; a thin snowmelt runnel runs east nearby.",
+      "setting": "Far side of the mountain pass, late afternoon shading toward evening — at the south-facing rock overhang, fire now burning in the flat-stone ring. Amber light through the pines; wind cutting above the overhang lip.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Crouched a few feet from the fire-ring, watching Silas finish the read — waiting on what he found."
+          "state": "Eating her trail parcel, seated across the fire-ring, oilcloth fold propped as windbreak behind her — waiting on Silas's"
         },
         {
           "name": "Huginn",
-          "state": "Perched somewhere in the canopy above the overhang, still."
+          "state": "Perched at the overhang's stone lip, facing the treeline, still."
         }
       ],
       "objects": [
-        "Memory (spear, on Silas's shoulder)",
-        "Oilcloth Fold (packed, Pell's on her shoulder)",
+        "Memory (spear, leaned against the overhang wall)",
+        "Oilcloth Fold (Pell's, propped as windbreak)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
         "River Purification Tabs vial (in inner pack pocket)",
-        "Fire-ring of flat stones — old ash, cold and clean, two to three weeks old",
-        "Rock overhang — south-facing, dry underside, adequate shelter",
-        "Snowmelt runnel — thin, running east, twenty feet from overhang"
+        "Fire-ring of flat stones — fire now burning, ash beneath",
+        "Rock overhang — south-facing, dry underside",
+        "Snowmelt runnel — thin, running east, twenty feet from overhang",
+        "Preserved Trail Parcel (open, Silas eating)",
+        "Resin Mountain Wine (sealed, in pack)"
       ],
       "threads": [
-        "Fire-ring: same hand, twice — this overhang is a known waypoint on someone's route. Whose, and which direction are they traveling?",
+        "Fire-ring: same hand, twice — whose route is this, and which direction are they traveling?",
+        "Pell's direct question: how long between the ring's two visits?",
         "Edge District bearing — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five.",
         "What the system opens when the last sleeve runs — still unread."
@@ -2059,7 +2035,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -3316,15 +3292,15 @@
     }
   },
   "tendencies": {
-    "strategic": 64.82545625080992,
-    "cerebral": 43.169325220019765,
-    "social": 57.06327085703399,
-    "generous": 15.237024129895637,
-    "cautious": 50.78279994006487,
-    "physical": 1.6038403032657393,
-    "risky": 4.20989735732816,
-    "ruthless": 3.562362005207262,
-    "carousing": 1.1964571133915325
+    "strategic": 64.50132896955587,
+    "cerebral": 42.95347859391966,
+    "social": 56.77795450274882,
+    "generous": 15.160839009246159,
+    "cautious": 51.528885940364546,
+    "physical": 1.5958211017494106,
+    "risky": 4.188847870541519,
+    "ruthless": 3.5445501951812255,
+    "carousing": 1.190474827824575
   },
   "aptitudes": [
     "strategist",
@@ -3332,7 +3308,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 296,
+  "actionCount": 297,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3466,8 +3442,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784179077991,
-  "rev": 408,
+  "updatedAt": 1784179187670,
+  "rev": 409,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4029,7 +4005,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 99
+    "valley": 100
   },
   "foreclosed": [
     "rootkin",

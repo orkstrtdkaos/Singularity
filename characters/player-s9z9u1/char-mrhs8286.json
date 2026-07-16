@@ -11,7 +11,7 @@
   "xp": 709,
   "attributes": {
     "physical": 3,
-    "mental": 4,
+    "mental": 5,
     "social": 4,
     "practical": 5
   },
@@ -35,6 +35,29 @@
     },
     {
       "abilityId": "the-attended-end",
+      "level": 1
+    },
+    {
+      "abilityId": "wither",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_grey_hand",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_grey_road",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "wildcraft",
+      "level": 1
+    },
+    {
+      "abilityId": "the_raised_thing",
       "level": 1
     }
   ],
@@ -1801,209 +1824,135 @@
         "player": "Thank pip and continue on the journey. Talk to Huginn along the way (about Pell), given what Huginn is, make sure to talk about all the endings pell has in front of her now that she's with you going steady... like no more wandering tinkers..",
         "summary": "Silas thanks Pip, rounds the bend to Huginn, and asks the bird plainly about Pell's futures — Huginn answers in its own register: stillness, not endings.",
         "narration": "You dismiss Pip with a nod and a word — \"Tell Mara it's good\" — and the child is already turning south before you finish, boots quick and purposeful on the wet stone. You tuck the vial of purification tabs into the inner pocket of your pack and round the bend.\n\nHuginn is waiting on a fence-post at the edge of the road, watching the intake. The bird doesn't move when you approach, just tracks you with the one calm eye. The intake itself is audible before it's visible — water over stone, the faint mineral edge that wasn't there a month ago. You stop short of the mechanism and speak quietly, because the valley is still and carrying sound this morning.\n\n\"She's committed now. You'd have seen that.\" Huginn tilts its head. You keep your voice down, not from hiding — Pell is a few strides back, letting you have this — but because this is the kind of accounting that doesn't need volume. \"The tinkers won't stop at Millbrook the same way. She'll have a reason to watch the pass now. The water crisis has her name on it whether she wants it or not. And she's carrying a spear she can feel from twenty feet away.\" You look at the bird. \"Tell me what you see.\"\n\nHuginn is quiet for a beat. Then it makes a sound — not the croak it usually produces, something shorter and more deliberate, the sound a stone makes settling into place. It looks away from you and back at Pell, who has stopped just inside the bend with her oilcloth and her level face and her hands in her pockets. The bird turns back to you and says nothing. But it doesn't shift its weight, doesn't orient away, doesn't do the thing it does when it's tracking an ending on the horizon. It simply watches. You understand: the endings it sees for her are hers, not imminent, and it isn't going to read them for you out of kindness or otherwise. What it gives you instead is its stillness — the same stillness it brings to things that are not yet concluding.\n\nThat is, from Huginn, considerable reassurance."
+      },
+      {
+        "player": "Ask Pell what she heard of the Huginn conversation — how much did she catch, and what does she make of the bird watching her like that.",
+        "summary": "Pell reports what she caught of the Huginn exchange — word 'tinkers', asking-tone, the bird's decided look — and names it plainly.",
+        "narration": "The intake is still ahead — water running, valve housing visible in the low morning light. You fall back a half-step to walk even with Pell and ask it plainly: how much did she catch?\n\nShe considers this with the same care she gives a measurement she is not certain of. \"The word 'tinkers',\" she says finally. \"And your tone. The tone was — \" a pause, selecting — \"not explaining something to the bird. Asking it.\" She glances sideways at you once, then back at the road. \"I've seen people talk to animals before. They're either performing or they've lost something. That wasn't either of those.\"\n\nA beat. The intake grows louder.\n\n\"The bird looked at me after,\" Pell says, and this comes out more carefully than the first part, like she is reporting a thing she would rather not have noticed. \"Not the way a bird tracks movement. The way you look at something you've already decided about.\" She does not follow that up with a question or a dismissal. She just names it and walks with it, the oilcloth still on her shoulder, her hands back in her pockets. The fence-post where Huginn was perched is already behind them; the bird has moved ahead to the intake's stone sill, where it sits with the same unhurried calm it always carries.\n\nHuginn does not look back at either of you. It is watching the valve housing."
       }
     ],
     "lastTurn": {
-      "narration": "You dismiss Pip with a nod and a word — \"Tell Mara it's good\" — and the child is already turning south before you finish, boots quick and purposeful on the wet stone. You tuck the vial of purification tabs into the inner pocket of your pack and round the bend.\n\nHuginn is waiting on a fence-post at the edge of the road, watching the intake. The bird doesn't move when you approach, just tracks you with the one calm eye. The intake itself is audible before it's visible — water over stone, the faint mineral edge that wasn't there a month ago. You stop short of the mechanism and speak quietly, because the valley is still and carrying sound this morning.\n\n\"She's committed now. You'd have seen that.\" Huginn tilts its head. You keep your voice down, not from hiding — Pell is a few strides back, letting you have this — but because this is the kind of accounting that doesn't need volume. \"The tinkers won't stop at Millbrook the same way. She'll have a reason to watch the pass now. The water crisis has her name on it whether she wants it or not. And she's carrying a spear she can feel from twenty feet away.\" You look at the bird. \"Tell me what you see.\"\n\nHuginn is quiet for a beat. Then it makes a sound — not the croak it usually produces, something shorter and more deliberate, the sound a stone makes settling into place. It looks away from you and back at Pell, who has stopped just inside the bend with her oilcloth and her level face and her hands in her pockets. The bird turns back to you and says nothing. But it doesn't shift its weight, doesn't orient away, doesn't do the thing it does when it's tracking an ending on the horizon. It simply watches. You understand: the endings it sees for her are hers, not imminent, and it isn't going to read them for you out of kindness or otherwise. What it gives you instead is its stillness — the same stillness it brings to things that are not yet concluding.\n\nThat is, from Huginn, considerable reassurance.",
-      "sceneSummary": "Silas thanks Pip, rounds the bend to Huginn, and asks the bird plainly about Pell's futures — Huginn answers in its own register: stillness, not endings.",
+      "narration": "The intake is still ahead — water running, valve housing visible in the low morning light. You fall back a half-step to walk even with Pell and ask it plainly: how much did she catch?\n\nShe considers this with the same care she gives a measurement she is not certain of. \"The word 'tinkers',\" she says finally. \"And your tone. The tone was — \" a pause, selecting — \"not explaining something to the bird. Asking it.\" She glances sideways at you once, then back at the road. \"I've seen people talk to animals before. They're either performing or they've lost something. That wasn't either of those.\"\n\nA beat. The intake grows louder.\n\n\"The bird looked at me after,\" Pell says, and this comes out more carefully than the first part, like she is reporting a thing she would rather not have noticed. \"Not the way a bird tracks movement. The way you look at something you've already decided about.\" She does not follow that up with a question or a dismissal. She just names it and walks with it, the oilcloth still on her shoulder, her hands back in her pockets. The fence-post where Huginn was perched is already behind them; the bird has moved ahead to the intake's stone sill, where it sits with the same unhurried calm it always carries.\n\nHuginn does not look back at either of you. It is watching the valve housing.",
+      "sceneSummary": "Pell reports what she caught of the Huginn exchange — word 'tinkers', asking-tone, the bird's decided look — and names it plainly.",
       "choices": [
         {
-          "label": "Step up to Fen's intake — examine the valve site with Order-Sense while Pell reads the mechanism physically.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell what she heard of the Huginn conversation — how much did she catch, and what does she make of the bird watching her like that.",
+          "label": "Tell her what you asked — and what answer you got. Huginn's stillness was the answer: she is not concluding.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "careful"
+            "confide",
+            "honest"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use The Attended End on Fen's intake structure itself — find out what is ending here, and how long it has left.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Before doing any work at the intake — take a moment with Pell. Let the road and the bird and the one-word go unsaid no longer. Ask what she wants from this, plainly.",
+          "label": "Tell her only part of it — that you asked about her futures. Let her ask about the answer if she wants it.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "connect",
-            "honest",
-            "risky"
+            "partial",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Let it rest and press on to the intake. Huginn's work is its own business. The valve housing is right there.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "focus",
+            "practical"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Something else entirely — your own words.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "open"
+          ],
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Old stone road just around the eastern bend — Fen's intake visible ahead, water audible over stone with a faint mineral edge. Low cloud, early spring morning, fence-post to the left where Huginn is perched.",
+        "setting": "Old stone road approaching Fen's intake — valve housing visible ahead, water audible over stone with a faint mineral edge. Low cloud, early spring morning. Huginn has moved from the fence-post to the intake's stone sill.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Stopped just inside the bend, oilcloth on her shoulder, hands in her pockets — watching Silas and Huginn without crowding the conversation."
+            "state": "Walking even with Silas, oilcloth on her shoulder, hands in pockets — composed, named what she observed, walking with it open."
           },
           {
             "name": "Huginn",
-            "state": "On the fence-post at the road's edge, calm and still, not tracking any horizon-ending — the bird is present and settled."
+            "state": "Perched on the intake's stone sill, watching the valve housing, calm and still."
           }
         ],
         "objects": [
           "Memory (spear, shaft over Silas's shoulder)",
           "Pell's oilcloth (on her shoulder)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Mara's opened note cloth and note (in hand or pocket)",
-          "Fen's intake structure — visible ahead, water running, valve housing accessible",
-          "Fence-post (Huginn's current perch)",
+          "Valve Failure Timeline note (in pocket)",
+          "Contact Names Scrap (in pocket)",
+          "Fen's intake structure — valve housing accessible, water running with mineral edge",
           "Stone road — wheel-ruts drying, eastward bend behind"
         ],
         "threads": [
           "Fen's intake: first valve site, accessible — Order-Sense and The Attended End both applicable.",
-          "Huginn's stillness regarding Pell — named to Silas but not yet to Pell.",
-          "The one-word 'you' — Pell has not yet spoken to it; the silence is still open.",
-          "Cured bladder waterskin still at Aldric's — available before departure.",
-          "Pip has departed south; that thread is closed."
+          "Huginn's stillness regarding Pell — named to Silas, partially overheard by Pell, not yet fully explained.",
+          "The one-word 'you' — Pell has not yet spoken to it directly; the silence is still open.",
+          "Cured bladder waterskin still at Aldric's — available before departure."
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pip-cotter",
-          "name": "Pip Cotter",
-          "role": "Mara's Errand-Runner",
-          "note": "Received dismissal cleanly — 'Tell Mara it's good' — and turned south without ceremony. Errand complete.",
-          "learned": [
-            "Errand fully delivered; dismissed by Silas on the north road bend."
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Departed south toward Millbrook after delivering Mara's package — errand complete."
-        },
-        {
-          "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech.",
+          "note": "Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question yet.",
           "learned": [
-            "Silas spoke plainly to Huginn about her futures — she was close enough to observe, if not hear."
+            "Silas was asking Huginn about her, not explaining to it",
+            "The bird looked at her with decided attention after the exchange"
           ],
-          "skillsObserved": [],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Walking north with Silas toward Fen's intake — inside the bend, watching, composed."
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Fen's intake first approached on World-day 16 morning — valve site accessible, water audible with mineral edge, Huginn perched on fence-post at road's edge.",
-          "subPlace": {
-            "name": "Fen's Intake",
-            "note": "First valve site on the timeline — water running gray-mineral, valve housing accessible at road's edge, fence-post to the left.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "huginn",
-          "label": "Huginn",
-          "kind": "person",
-          "fact": "When Silas named Pell's futures plainly — tinkers, the pass, the spear-thread — Huginn did not orient toward any horizon-ending. It stayed still. From Huginn, stillness is the answer: she is not concluding imminently, and the endings it sees for her are hers to meet in time.",
-          "links": [
-            "pell",
-            "the-water-crisis",
-            "millbrook"
-          ]
+          "statusNote": "Walking north with Silas toward Fen's intake — composed, named what she observed, walking with it open."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — Pip dismissed, Huginn consulted, a few minutes on the road."
-      },
-      "scene_ended": false
+        "why": "A short exchange on the road north — a few minutes of walking and conversation."
+      }
     },
     "sceneState": {
-      "setting": "Old stone road just around the eastern bend — Fen's intake visible ahead, water audible over stone with a faint mineral edge. Low cloud, early spring morning, fence-post to the left where Huginn is perched.",
+      "setting": "Old stone road approaching Fen's intake — valve housing visible ahead, water audible over stone with a faint mineral edge. Low cloud, early spring morning. Huginn has moved from the fence-post to the intake's stone sill.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Stopped just inside the bend, oilcloth on her shoulder, hands in her pockets — watching Silas and Huginn without crowdin"
+          "state": "Walking even with Silas, oilcloth on her shoulder, hands in pockets — composed, named what she observed, walking with it"
         },
         {
           "name": "Huginn",
-          "state": "On the fence-post at the road's edge, calm and still, not tracking any horizon-ending — the bird is present and settled."
+          "state": "Perched on the intake's stone sill, watching the valve housing, calm and still."
         }
       ],
       "objects": [
         "Memory (spear, shaft over Silas's shoulder)",
         "Pell's oilcloth (on her shoulder)",
         "River Purification Tabs vial (in inner pack pocket)",
-        "Mara's opened note cloth and note (in hand or pocket)",
-        "Fen's intake structure — visible ahead, water running, valve housing accessible",
-        "Fence-post (Huginn's current perch)",
+        "Valve Failure Timeline note (in pocket)",
+        "Contact Names Scrap (in pocket)",
+        "Fen's intake structure — valve housing accessible, water running with mineral ed",
         "Stone road — wheel-ruts drying, eastward bend behind"
       ],
       "threads": [
         "Fen's intake: first valve site, accessible — Order-Sense and The Attended End both applicable.",
-        "Huginn's stillness regarding Pell — named to Silas but not yet to Pell.",
-        "The one-word 'you' — Pell has not yet spoken to it; the silence is still open.",
-        "Cured bladder waterskin still at Aldric's — available before departure.",
-        "Pip has departed south; that thread is closed."
+        "Huginn's stillness regarding Pell — named to Silas, partially overheard by Pell, not yet fully explained.",
+        "The one-word 'you' — Pell has not yet spoken to it directly; the silence is still open.",
+        "Cured bladder waterskin still at Aldric's — available before departure."
       ]
     }
   },
@@ -2152,7 +2101,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named the oblique mark as accuracy not modesty — she'd rather cut wrong and be honest than straight and lying. Named the collar ring as 'being named to something' and did not finis",
         "[d2] Received Silas's completion of her sentence without correction — named the collar ring as a sentence she hadn't started, and walked with it open.",
         "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi",
         "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi",
@@ -2161,17 +2109,18 @@
         "[d2] Came even with Silas on the road north — acknowledged the wrestling terms plainly and put it on record that she knows what he is doing. Did not look at him.",
         "[d2] Named plainly what Silas is doing — the whole shape of it, valve sites to valley departure — and left it as a statement, not a question.",
         "[d2] Received 'you' — half-beat catch in her stride, recovered clean. Did not look at Silas. Composure intact and working.",
-        "[d2] Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech."
+        "[d2] Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech.",
+        "[d2] Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question y"
       ],
       "knownFacts": [
-        "Distinguishes standing-weight read from moving-weight read as separate diagnostic tools",
-        "The oblique on her maker's mark was a deliberate choice — not error, not modesty, but a refusal to claim what she hadn't earned",
         "Cut the maker's mark oblique because she couldn't claim full competence honestly — accuracy, not modesty",
         "The collar's ring when both hands touched Memory felt like being named to something — her words, unfinished",
         "Describes the collar ring as different from a work-ring — not finishing a sentence correctly, but a sentence not yet started",
         "Moving weight and standing weight are two distinct reads — she'd read Silas's standing tell and hadn't fully accounted for the mobile feint.",
         "Believes Sorel is holding the engineer's name back, framing it as reluctant rather than witness to avoid responsibility for what gets done with it.",
-        "Silas spoke plainly to Huginn about her futures — she was close enough to observe, if not hear."
+        "Silas spoke plainly to Huginn about her futures — she was close enough to observe, if not hear.",
+        "Silas was asking Huginn about her, not explaining to it",
+        "The bird looked at her with decided attention after the exchange"
       ],
       "skillsObserved": [
         "synthesizing multi-site structural evidence into a single op",
@@ -2182,7 +2131,7 @@
         "naming a speculative read as speculative without withdrawing"
       ],
       "status": "active",
-      "statusNote": "Walking north with Silas toward Fen's intake — inside the bend, watching, composed.",
+      "statusNote": "Walking north with Silas toward Fen's intake — composed, named what she observed, walking with it open.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2529,7 +2478,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-16T01:15:09.040Z",
+    "lastSharedReadAt": "2026-07-16T04:32:03.348Z",
     "lastTickWorldDay": 16,
     "lastCanonWorldDay": 16
   },
@@ -2547,14 +2496,14 @@
     "strength": 3,
     "agility": 3,
     "reason": 4,
-    "insight": 4,
+    "insight": 5,
     "presence": 4,
     "rapport": 4,
-    "craft": 4,
+    "craft": 5,
     "wits": 5
   },
-  "pendingSubPoints": 2,
-  "skillPoints": 3,
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -3229,15 +3178,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.56886327624812,
-    "cerebral": 39.609879978323846,
-    "social": 60.600986337646034,
-    "generous": 16.181664269396972,
-    "cautious": 48.76709265395072,
-    "physical": 1.7032725752697073,
-    "risky": 3.414209313666825,
-    "ruthless": 3.783215507365251,
-    "carousing": 1.2706331076582866
+    "strategic": 60.266018959866884,
+    "cerebral": 39.41183057843223,
+    "social": 60.297981405957806,
+    "generous": 16.100755948049986,
+    "cautious": 49.523257190680965,
+    "physical": 1.6947562123933588,
+    "risky": 3.397138267098491,
+    "ruthless": 3.7642994298284247,
+    "carousing": 1.2642799421199953
   },
   "aptitudes": [
     "strategist",
@@ -3245,7 +3194,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 284,
+  "actionCount": 285,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3371,8 +3320,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784175514637,
-  "rev": 388,
+  "updatedAt": 1784177372972,
+  "rev": 396,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3934,10 +3883,11 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 87
+    "valley": 88
   },
   "foreclosed": [
     "rootkin",
     "somatic"
-  ]
+  ],
+  "nativeGrantsVersion": 1
 }

@@ -29,7 +29,7 @@
   "alignment": {
     "spectrumId": -0.0475,
     "body_mind": 0.03,
-    "concrete_abstract": 0.025
+    "concrete_abstract": 0.03875
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -102,106 +102,96 @@
         "player": "\"Well now I've been introduced to Araveth, what is your name?\" I'll ask the seated Cogitant as I also study the wall of notation closer.",
         "summary": "Saehara learns the seated Cogitant's name: Ossian. Examines the watershed wall up close — deterioration visible between days nine and fourteen.",
         "narration": "You keep your eyes on the wall as you ask it — the question addressed over your shoulder to the cross-legged Cogitant, voice easy, as though you're simply filling in the last gap in an introduction already half-made. Araveth has a name. The standing figure has a name. It seems only reasonable the one who spoke first should have one too.\n\nThe pause is the same as all the others — not reluctance, but the interval of retrieval, a name being located among more important data. \"Ossian,\" it says. No elaboration. The word is offered the way one states a coordinate — accurate, sufficient, requiring no decoration.\n\nYou step closer to the wall. What seemed from a distance like dense notation reveals itself, up close, to be something far more considered: the Echo River rendered in chalk at full systemic scale, every tributary labeled, sediment columns notated in tight rows, concentrations marked with numerals so small your eyes have to work for them. Day one through day twenty-two, tallied in a margin column at the left edge. You can see where the numbers change — a subtle thickening of the particulate marks around day nine, then again around day fourteen. Getting worse. Araveth's finger traces one of these concentration markers now, redrawing a curve that was already there, as though the act of tracing keeps the river honest.\n\nKon has not moved from the shaft of window-light. Watching Ossian, or watching you — you can't tell which."
+      },
+      {
+        "player": "Ask Ossian why they called you 'the deviation' — the word had weight and they used it precisely; you want to know what it means.",
+        "summary": "Ossian defines 'the deviation'; a Cogitant collapses at the hall's far edge — the third this week.",
+        "narration": "Ossian explains 'the deviation' with complete precision: Saehara falls outside every modeled category of probable respondent. Then a Cogitant collapses at the hall's edge. Ossian notes it like a datum."
       }
     ],
     "lastTurn": {
-      "narration": "You keep your eyes on the wall as you ask it — the question addressed over your shoulder to the cross-legged Cogitant, voice easy, as though you're simply filling in the last gap in an introduction already half-made. Araveth has a name. The standing figure has a name. It seems only reasonable the one who spoke first should have one too.\n\nThe pause is the same as all the others — not reluctance, but the interval of retrieval, a name being located among more important data. \"Ossian,\" it says. No elaboration. The word is offered the way one states a coordinate — accurate, sufficient, requiring no decoration.\n\nYou step closer to the wall. What seemed from a distance like dense notation reveals itself, up close, to be something far more considered: the Echo River rendered in chalk at full systemic scale, every tributary labeled, sediment columns notated in tight rows, concentrations marked with numerals so small your eyes have to work for them. Day one through day twenty-two, tallied in a margin column at the left edge. You can see where the numbers change — a subtle thickening of the particulate marks around day nine, then again around day fourteen. Getting worse. Araveth's finger traces one of these concentration markers now, redrawing a curve that was already there, as though the act of tracing keeps the river honest.\n\nKon has not moved from the shaft of window-light. Watching Ossian, or watching you — you can't tell which.",
-      "sceneSummary": "Saehara learns the seated Cogitant's name: Ossian. Examines the watershed wall up close — deterioration visible between days nine and fourteen.",
+      "narration": "Ossian explains 'the deviation' with complete precision: Saehara falls outside every modeled category of probable respondent. Then a Cogitant collapses at the hall's edge. Ossian notes it like a datum.",
+      "sceneSummary": "Ossian defines 'the deviation'; a Cogitant collapses at the hall's far edge — the third this week.",
       "choices": [
         {
-          "label": "Ask Ossian what Araveth is still calculating — the model is twenty-two days in; something on the wall must be changing.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "concrete_abstract": 0.4
-          },
+          "label": "Go to the fallen Cogitant — cross the hall and check on them",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "question"
+            "help",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Examine Araveth directly — eleven days at the wall without rest. Step close, look at their face, their hands, their physical state.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "body_mind": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "observe"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Ossian why they called you 'the deviation' — the word had weight and they used it precisely; you want to know what it means.",
+          "label": "Ask Ossian why he keeps watching Kon — the word Glade moved something in him",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "concrete_abstract": 0.3
-          },
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "question",
-            "direct"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Tell Ossian plainly: you're still thinking about the four conditions. Ask which one they consider the hardest barrier — not all of them are equal.",
+          "label": "Ask Ossian what meeting the four conditions would actually take — not probability, but path",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "concrete_abstract": 0.5
-          },
           "difficulty": 0,
           "intentTags": [
             "plan",
-            "question",
-            "direct"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Or act as you see fit.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall. A Cogitant has just collapsed at the far edge of the hall — robes pooled around them, unacknowledged by anyone else present.",
         "npcsPresent": [
           {
-            "name": "Ossian (cross-legged Cogitant)",
-            "state": "Seated, eyes on Saehara — has just given his name, watching for next input"
+            "name": "Ossian",
+            "state": "Seated cross-legged, gaze on Saehara — just answered the deviation question; now watching Kon"
           },
           {
             "name": "Araveth",
             "state": "Standing at the wall, finger tracing chalk loops without pause or acknowledgment"
           },
           {
-            "name": "Drifting Cogitants (background)",
-            "state": "Moving slowly at the hall's edges, oblivious"
+            "name": "Fallen Cogitant",
+            "state": "Collapsed at the hall's far edge — robes settled in chalk dust, motionless"
+          },
+          {
+            "name": "Drifting Cogitants",
+            "state": "Moving slowly at the hall's edges, oblivious — one fewer now"
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — twenty-two-day watershed model; concentration markers thickening around day nine and day fourteen",
-          "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossian or Saehara — very still)",
+          "Wall of dense chalk notation — twenty-two-day watershed model; deterioration visible between days nine and fourteen",
+          "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossian)",
           "Outer arch behind you (mist faintly visible)",
-          "Katana at waist (confirmed present)"
+          "Katana at waist (confirmed present)",
+          "Fallen Cogitant's robe pooled in chalk dust at the hall's far edge"
         ],
         "threads": [
-          "Ossian named; his use of 'the deviation' still unexplained",
-          "Araveth's physical state unexamined — eleven days at the wall without apparent rest",
-          "The concentration markers on the wall are worsening — day nine and fourteen show clear deterioration",
-          "Kon went cold and still during the four conditions recitation — what it sensed is unknown",
-          "The four conditions for source-remediation stand unmet; Ossian has not closed that door"
+          "Ossian's gaze moved to Kon twice — once on 'the deviation', once on the word 'Glade'; unaddressed",
+          "A Cogitant has collapsed — the third this week; no one reacted; their status unknown",
+          "The four conditions for source-remediation stand unmet — Ossian has not closed that door",
+          "Kon went cold and still during the four conditions recitation — its read of the hall is unknown",
+          "Araveth has not acknowledged Saehara's presence in eleven days of continuous work"
         ]
       },
       "npcUpdates": [
@@ -209,72 +199,87 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Gave his name when asked — without hesitation or decoration. A coordinate, not an introduction.",
-          "revealName": "Ossian",
-          "statusNote": "Seated in the entrance hall, watching Saehara — named now, still watching for the next input.",
-          "relationshipDelta": 0
+          "note": "Explained 'the deviation' with full precision: Saehara is outside every modeled respondent category — no settlement, no mandate, a Glade-changed companion, and challenged the evacuation answer on first hearing. Combined probability of such an arrival was 0.003. His gaze moved to Kon at the word 'Glade'.",
+          "learned": [
+            "Combined probability of Saehara's arrival profile was 0.003 — the deviation is a term from an existing calculation",
+            "Ossian noted the fallen Cogitant flatly: 'That is the third this week. The calculation continues. The body does not always.'",
+            "Ossian watched Kon specifically when he said the word 'Glade'"
+          ],
+          "statusNote": "Seated in the entrance hall, watching Saehara and Kon — has just explained the deviation and noted a third collapse this week without apparent concern"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "ossian",
-          "label": "Ossian",
-          "kind": "person",
+          "topic": "the-deviation",
+          "label": "The Deviation (Ossian's Term)",
+          "kind": "mystery",
           "entityId": "ossian",
-          "fact": "Name of the cross-legged Cogitant who first received Saehara. Offered it plainly when asked — a coordinate, not an introduction.",
+          "fact": "Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacuation answer on first hearing. 'Deviation' is precise — Saehara falls outside their distribution. Ossian watched Kon specifically when he said 'Glade'.",
           "links": [
             "cogitarium",
             "cogitants",
-            "the-cogitariums-calculated-crisis"
+            "the-cogitariums-calculated-crisis",
+            "araveth"
           ]
         },
         {
-          "topic": "the-cogitariums-calculated-crisis",
-          "label": "The Cogitarium's Calculated Crisis",
-          "kind": "mystery",
-          "entityId": "ossian",
-          "fact": "The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable.",
+          "topic": "cogitant-collapse",
+          "label": "The Collapsing Cogitants",
+          "kind": "event",
+          "fact": "A Cogitant collapsed at the hall's far edge — the third this week, per Ossian. He noted it with statistical flatness: 'The calculation continues. The body does not always.' No other Cogitant reacted. The rate of collapse appears to be accelerating.",
           "links": [
             "cogitarium",
             "cogitants",
-            "araveth",
-            "ossian"
+            "ossian",
+            "the-cogitariums-calculated-crisis"
           ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A Cogitant collapsed in the entrance hall — the third this week. Ossian noted it without alarm. The Cogitarium's bodies are failing at an accelerating rate.",
+          "subjectId": "ossian"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — one question, one name given, a closer look at the wall."
+        "why": "A short exchange — Ossian answered the deviation question and a Cogitant collapsed; a quarter-hour at most"
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall. A Cogitant has just collapsed at the far edge of the hall — robes pooled around them, unacknowledged by anyone else present.",
       "npcsPresent": [
         {
-          "name": "Ossian (cross-legged Cogitant)",
-          "state": "Seated, eyes on Saehara — has just given his name, watching for next input"
+          "name": "Ossian",
+          "state": "Seated cross-legged, gaze on Saehara — just answered the deviation question; now watching Kon"
         },
         {
           "name": "Araveth",
           "state": "Standing at the wall, finger tracing chalk loops without pause or acknowledgment"
         },
         {
-          "name": "Drifting Cogitants (background)",
-          "state": "Moving slowly at the hall's edges, oblivious"
+          "name": "Fallen Cogitant",
+          "state": "Collapsed at the hall's far edge — robes settled in chalk dust, motionless"
+        },
+        {
+          "name": "Drifting Cogitants",
+          "state": "Moving slowly at the hall's edges, oblivious — one fewer now"
         }
       ],
       "objects": [
-        "Wall of dense chalk notation — twenty-two-day watershed model; concentration mar",
+        "Wall of dense chalk notation — twenty-two-day watershed model; deterioration vis",
         "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossia",
         "Outer arch behind you (mist faintly visible)",
-        "Katana at waist (confirmed present)"
+        "Katana at waist (confirmed present)",
+        "Fallen Cogitant's robe pooled in chalk dust at the hall's far edge"
       ],
       "threads": [
-        "Ossian named; his use of 'the deviation' still unexplained",
-        "Araveth's physical state unexamined — eleven days at the wall without apparent rest",
-        "The concentration markers on the wall are worsening — day nine and fourteen show clear deterioration",
-        "Kon went cold and still during the four conditions recitation — what it sensed is unknown",
-        "The four conditions for source-remediation stand unmet; Ossian has not closed that door"
+        "Ossian's gaze moved to Kon twice — once on 'the deviation', once on the word 'Glade'; unaddressed",
+        "A Cogitant has collapsed — the third this week; no one reacted; their status unknown",
+        "The four conditions for source-remediation stand unmet — Ossian has not closed that door",
+        "Kon went cold and still during the four conditions recitation — its read of the hall is unknown",
+        "Araveth has not acknowledged Saehara's presence in eleven days of continuous work"
       ]
     }
   },
@@ -556,7 +561,8 @@
         "kind": "person",
         "facts": [
           "[d1] Name of the cross-legged Cogitant who first received Saehara. Offered it plainly when asked — a coordinate, not an introduction.",
-          "[d1] The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable."
+          "[d1] The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable.",
+          "[d1] Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacu"
         ],
         "links": [
           "cogitarium",
@@ -565,21 +571,39 @@
           "araveth"
         ],
         "aliases": [
-          "The Cogitarium's Calculated Crisis"
+          "The Cogitarium's Calculated Crisis",
+          "The Deviation (Ossian's Term)"
         ],
         "createdDay": 1,
         "entityId": "ossian",
+        "updatedDay": 1
+      },
+      "cogitant-collapse": {
+        "id": "cogitant-collapse",
+        "label": "The Collapsing Cogitants",
+        "kind": "event",
+        "facts": [
+          "[d1] A Cogitant collapsed at the hall's far edge — the third this week, per Ossian. He noted it with statistical flatness: 'The calculation continues. The body does not always.' No other Cogitant reacted. "
+        ],
+        "links": [
+          "cogitarium",
+          "cogitants",
+          "ossian",
+          "the-cogitariums-calculated-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
         "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 1.965273753121875,
-    "social": 2.96029900125,
-    "cerebral": 1.9800748750000001
+    "strategic": 1.9554473843562656,
+    "social": 2.94549750624375,
+    "cerebral": 1.9701745006250002
   },
   "aptitudes": [],
-  "actionCount": 6,
+  "actionCount": 7,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -592,8 +616,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784170966940,
-  "rev": 28,
+  "updatedAt": 1784171152423,
+  "rev": 29,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -601,10 +625,17 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 7
+    "somatic_reaches": 8
   },
   "opLossPending": false,
-  "establishedFacts": [],
+  "establishedFacts": [
+    {
+      "id": "ossian",
+      "text": "A Cogitant collapsed in the entrance hall — the third this week. Ossian noted it without alarm. The Cogitarium's bodies are failing at an accelerating rate.",
+      "day": 1,
+      "subjectId": "ossian"
+    }
+  ],
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

@@ -77,7 +77,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 140,
+  "energy": 135,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -383,40 +383,39 @@
         "player": "Ask Pell if she thinks we should check out the building Huginn was eyeing first, or something else.",
         "summary": "Pell advises starting with Huginn's building before pursuing Leth — concrete lead before cold knocking.",
         "narration": "You turn to Pell, tilting your head toward the building Huginn has been watching — the one with the narrow colonnade and the pale stone face, second from the corner, the one that has exactly the same anonymous frontage as every other administrative building on this block except for the fact that your bird will not look away from it. \"Huginn's been fixed on that one since we arrived,\" you say. \"Worth starting there, or do you want to find Leth first?\"\n\nPell looks at the building, then at Huginn, then back at you with the flat considering expression she uses when she's pricing a job. \"Your bird finds ends,\" she says. \"If it's watching that building, something in there is concluding.\" A pause. \"Leth's a name on a scrap. She might be anywhere in this district, and we don't know her face.\" She shifts the strap of her pack, glances down the light-guide street toward the district's interior where the morning's amber beams are already drawing early workers out of doorways. \"The building is here and it's not moving. I'd start there — see what Huginn's watching before we go knocking on archive doors asking questions that make people close them.\"\n\nHuginn shifts its weight on your pack-frame and says nothing. From Huginn, that reads as agreement, or at least as patience running very thin."
+      },
+      {
+        "player": null,
+        "summary": "Pell advises starting at Huginn's building; the party faces the recessed door on the light-guide street.",
+        "narration": "Pell finishes her thought without fanfare: \"Cold knock at Leth's without a face or an address wastes the morning. Your bird has a face. Start there.\" She adjusts her pack-strap once, settles it, and waits — not impatiently, but with the particular quality of stillness she uses when the next move is yours to make.\n\nThe building sits a half-dozen paces ahead, pale stone face catching the amber from the light-guide channel running along the street's left edge. It is narrow for its height — a colonnade of four thin pillars framing a recessed door, the kind of frontage that is designed to be overlooked. No signage. One small window at the second floor, shuttered. The door is a plain dark wood panel, slightly lighter at the handle-side edge: used regularly, and recently.\n\nHuginn has not moved. It sits on your pack-frame with the unhurried fixity of something that already knows how this ends — head angled perhaps fifteen degrees off true, one eye on the door, the other on the second-floor shutter. Not alarm. Not urgency. The patient attention of a thing that showed up because something here is concluding, and intends to see it through.\n\nThe district is waking around you. Farther down the street a pair of workers move through a doorway, amber-lit from below. A light-guide intersection pulses once — a slow cold-white sweep — and returns to amber. Nobody on this block is paying you particular attention yet."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Pell, tilting your head toward the building Huginn has been watching — the one with the narrow colonnade and the pale stone face, second from the corner, the one that has exactly the same anonymous frontage as every other administrative building on this block except for the fact that your bird will not look away from it. \"Huginn's been fixed on that one since we arrived,\" you say. \"Worth starting there, or do you want to find Leth first?\"\n\nPell looks at the building, then at Huginn, then back at you with the flat considering expression she uses when she's pricing a job. \"Your bird finds ends,\" she says. \"If it's watching that building, something in there is concluding.\" A pause. \"Leth's a name on a scrap. She might be anywhere in this district, and we don't know her face.\" She shifts the strap of her pack, glances down the light-guide street toward the district's interior where the morning's amber beams are already drawing early workers out of doorways. \"The building is here and it's not moving. I'd start there — see what Huginn's watching before we go knocking on archive doors asking questions that make people close them.\"\n\nHuginn shifts its weight on your pack-frame and says nothing. From Huginn, that reads as agreement, or at least as patience running very thin.",
-      "sceneSummary": "Pell advises starting with Huginn's building before pursuing Leth — concrete lead before cold knocking.",
+      "narration": "Pell finishes her thought without fanfare: \"Cold knock at Leth's without a face or an address wastes the morning. Your bird has a face. Start there.\" She adjusts her pack-strap once, settles it, and waits — not impatiently, but with the particular quality of stillness she uses when the next move is yours to make.\n\nThe building sits a half-dozen paces ahead, pale stone face catching the amber from the light-guide channel running along the street's left edge. It is narrow for its height — a colonnade of four thin pillars framing a recessed door, the kind of frontage that is designed to be overlooked. No signage. One small window at the second floor, shuttered. The door is a plain dark wood panel, slightly lighter at the handle-side edge: used regularly, and recently.\n\nHuginn has not moved. It sits on your pack-frame with the unhurried fixity of something that already knows how this ends — head angled perhaps fifteen degrees off true, one eye on the door, the other on the second-floor shutter. Not alarm. Not urgency. The patient attention of a thing that showed up because something here is concluding, and intends to see it through.\n\nThe district is waking around you. Farther down the street a pair of workers move through a doorway, amber-lit from below. A light-guide intersection pulses once — a slow cold-white sweep — and returns to amber. Nobody on this block is paying you particular attention yet.",
+      "sceneSummary": "Pell advises starting at Huginn's building; the party faces the recessed door on the light-guide street.",
       "choices": [
         {
-          "label": "Approach the building Huginn is watching — study the exterior, read the design, find a way in or a reason not to",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.3,
-            "concrete_abstract": -0.2
-          },
+          "label": "Approach and knock — plain, direct, no story prepared yet",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the building from here — read its design before you get close enough to be seen doing it",
+          "label": "Before knocking, use Order-Sense on the building — read what design this place is part of, and whether the falsified ledger or Fendt connects to it",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.4,
-            "concrete_abstract": -0.3
+            "chaos_order": 0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "scout",
             "study",
             "careful"
           ],
@@ -425,29 +424,25 @@
           "trivial": false
         },
         {
-          "label": "Ask a local — someone walking past or a worker nearby — what the building is and who uses it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Let Huginn lead — follow wherever it moves next, rather than your own read of the situation",
+          "label": "Ask Huginn plainly — what is ending in there, and how long does it have",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": -0.1,
             "death_life": -0.2
           },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Linger and watch the building for a few minutes — see who enters or leaves before committing to the door",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
@@ -463,26 +458,27 @@
         "energy": 0
       },
       "scene": {
-        "setting": "Edge District, Radiant Plateau — early morning on a light-guide street. Amber and cold-white beams run the paving channels; workers beginning to emerge. Silas and Pell stand together near the district entrance, facing a narrow-colonnaded administrative building that Huginn has been watching since arrival.",
+        "setting": "Edge District, Radiant Plateau — early morning on a light-guide street. Amber and cold-white beams run the paving channels; the district is beginning to wake. Silas and Pell stand five or six paces from the narrow-colonnaded administrative building Huginn has been watching since arrival — recessed door, one shuttered second-floor window, light at the handle-edge.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Pack-strap adjusted, facing the building — has given her read and is waiting for Silas to move"
+            "state": "Pack settled, waiting for Silas to make the first move toward the building"
           },
           {
             "name": "Huginn",
-            "state": "On Silas's pack-frame, watching the narrow-colonnaded building with full, patient attention — has not looked away"
+            "state": "On Silas's pack-frame, fixed on the building — one eye on the door, one on the shuttered upper window. Patient, unhurried."
           }
         ],
         "objects": [
-          "Narrow-colonnaded building — pale stone face, anonymous administrative frontage, second from the corner",
+          "Narrow-colonnaded administrative building — pale stone, four thin pillars, recessed dark-wood door lighter at the handle-edge from regular use",
+          "Shuttered second-floor window",
           "Light-guide paving channels running amber and cold-white along the street",
-          "Early workers moving through doorways further into the district"
+          "Early workers visible further down the block"
         ],
         "threads": [
-          "Huginn has been fixed on a specific building since arrival — the nature of what it senses there is unknown",
-          "Leth (archivist contact) is somewhere in this district — no face, no address",
-          "The falsified filtration ledger was removed from the array-office; the accountability board named Fendt"
+          "Huginn is fixed on this building — something inside is concluding",
+          "The falsified filtration ledger was removed from the array-office; Fendt's name is on the accountability board",
+          "Leth (archivist contact) is somewhere in this district — no face, no address yet"
         ]
       },
       "npcUpdates": [
@@ -490,75 +486,38 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "note": "Advised starting with Huginn's building before pursuing Leth — named the bird's instinct as a concrete lead and Leth as a cold knock without a face",
-          "learned": [
-            "Trusts Huginn's fixation as actionable intelligence — 'your bird finds ends' is her working model of the companion"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Standing at Silas's side in the Edge District, pack adjusted, ready to move on the building"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "note": "Has maintained fixed attention on the narrow-colonnaded building since arrival; says nothing when Pell names its instinct aloud — reads as assent or thin patience",
-          "status": "active",
-          "statusNote": "On Silas's pack-frame in the Edge District, watching a specific building on the light-guide street"
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "start",
-          "questId": "find-the-engineer",
-          "title": "Find the Engineer",
-          "summary": "Seek the pre-Transition structural expert Sorel and Leth know — the one who can read the buried valve system and won't want to leave the Edge District. Find Leth first; she has the name.",
-          "giver": "Sorel (via Mara Wells)",
-          "note": "Arrived in the Edge District. Huginn is watching a specific building. Pell advises starting there before pursuing Leth."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "edge-district-huginn-building",
-          "label": "Huginn's Building — Edge District",
-          "kind": "mystery",
-          "fact": "A narrow-colonnaded administrative building, second from the corner on the main light-guide street of the Edge District. Huginn has been watching it with fixed attention since arrival — something in there is ending, or has ended.",
-          "links": [
-            "huginn",
-            "radiant-plateau-edge",
-            "find-the-engineer",
-            "fendt-and-the-falsified-ledger"
-          ]
+          "note": "Named the tactical logic plainly: Huginn's building is a concrete lead; Leth without a face or address is a cold knock. Waiting for Silas to move.",
+          "statusNote": "Standing at Silas's side in the Edge District, facing the building — ready to move on his call.",
+          "status": "active"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange between Silas and Pell at the district entrance — a few minutes at most"
+        "why": "A short exchange in the street before the first move"
       }
     },
     "sceneState": {
-      "setting": "Edge District, Radiant Plateau — early morning on a light-guide street. Amber and cold-white beams run the paving channels; workers beginning to emerge. Silas and Pell stand together near the district entrance, facing a narrow-colonnaded administrative building that Huginn has been watching since arrival.",
+      "setting": "Edge District, Radiant Plateau — early morning on a light-guide street. Amber and cold-white beams run the paving channels; the district is beginning to wake. Silas and Pell stand five or six paces from the narrow-colonnaded administrative building Huginn has been watching since arrival — recessed door, one shuttered second-floor window, light at the handle-edge.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Pack-strap adjusted, facing the building — has given her read and is waiting for Silas to move"
+          "state": "Pack settled, waiting for Silas to make the first move toward the building"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's pack-frame, watching the narrow-colonnaded building with full, patient attention — has not looked away"
+          "state": "On Silas's pack-frame, fixed on the building — one eye on the door, one on the shuttered upper window. Patient, unhurrie"
         }
       ],
       "objects": [
-        "Narrow-colonnaded building — pale stone face, anonymous administrative frontage,",
+        "Narrow-colonnaded administrative building — pale stone, four thin pillars, reces",
+        "Shuttered second-floor window",
         "Light-guide paving channels running amber and cold-white along the street",
-        "Early workers moving through doorways further into the district"
+        "Early workers visible further down the block"
       ],
       "threads": [
-        "Huginn has been fixed on a specific building since arrival — the nature of what it senses there is unknown",
-        "Leth (archivist contact) is somewhere in this district — no face, no address",
-        "The falsified filtration ledger was removed from the array-office; the accountability board named Fendt"
+        "Huginn is fixed on this building — something inside is concluding",
+        "The falsified filtration ledger was removed from the array-office; Fendt's name is on the accountability board",
+        "Leth (archivist contact) is somewhere in this district — no face, no address yet"
       ]
     }
   },
@@ -722,7 +681,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back.",
         "[d2] Fully unguarded at the close — said Silas's name plainly, stopped managing, stayed present through to the end without armor. The habit broke entirely for the length of the overhang",
         "[d2] Resting fully against Silas in the overhang's quiet — hand on his forearm, breathing all the way down, no management. The habit has not returned.",
         "[d2] Took the wine by feel, drank half, passed it back — no words exchanged. Fully settled against Silas in the quiet after.",
@@ -731,7 +689,8 @@
         "[d3] Woke to a forehead kiss at dawn — found Silas's wrist before opening her eyes, looked at him in the morning light with nothing taken back from the night.",
         "[d3] Held Silas's wrist through the first exchange of the morning — nothing managed, nothing filed. Told him the chimney would keep. The armor is still down from last night.",
         "[d3] Ate breakfast quietly, named 'first contact' without being asked — the armor still down, the morning held without management.",
-        "[d3] Advised starting with Huginn's building before pursuing Leth — named the bird's instinct as a concrete lead and Leth as a cold knock without a face"
+        "[d3] Advised starting with Huginn's building before pursuing Leth — named the bird's instinct as a concrete lead and Leth as a cold knock without a face",
+        "[d3] Named the tactical logic plainly: Huginn's building is a concrete lead; Leth without a face or address is a cold knock. Waiting for Silas to move."
       ],
       "knownFacts": [
         "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close.",
@@ -752,7 +711,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "Standing at Silas's side in the Edge District, pack adjusted, ready to move on the building",
+      "statusNote": "Standing at Silas's side in the Edge District, facing the building — ready to move on his call.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2084,8 +2043,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784229071950,
-  "rev": 461,
+  "updatedAt": 1784233035408,
+  "rev": 462,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2648,7 +2607,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 141
+    "valley": 143
   },
   "foreclosed": [
     "rootkin",

@@ -8,10 +8,10 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 0,
+  "xp": 3,
   "attributes": {
-    "physical": 3,
-    "mental": 3,
+    "physical": 4,
+    "mental": 4,
     "social": 3,
     "practical": 3
   },
@@ -31,7 +31,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -68,20 +68,57 @@
         "player": null,
         "summary": "Aelyn arrives at the Heartroot at dawn — a stranger in the grown city, Branch wide with recognition, the river's wrongness still in her gut.",
         "narration": "The Heartroot receives you the way old things receive all things — without urgency. You came through the outer gate an hour before sunrise, following a root-road that the city had grown into the forest floor over what must have been centuries, and now you stand in a hall that is also, unmistakably, a tree. The ceiling arches thirty feet above in living wood, breathing visibly in the early light — a slow expansion and contraction you first thought was your own tired eyes, until you touched the bark and felt it under your palm. The floor is soft with moss that has been here longer than most nations. Morning light comes in through gaps the wood has grown specifically to admit it: oval, warm, purposeful.\n\nBranch stands beside your left knee, roots finding purchase in the moss with the soft sound of paper tearing. It has been doing that the whole walk here — a quiet, recurring grip-and-release, as if the road itself needed reassurance. Now, in this hall, it stills completely. The buds at its shoulders open, one by one, four small pale petals each. That is how you have come to read it: stillness and open buds mean something close to wonder.\n\n\"Root,\" it says, at last. One word, offered carefully, the way it offers all new words. It means: I recognize this. I am home in a way I did not know I missed.\n\nYou are not home. You came from somewhere much quieter — your mother's forest, the hidden refuge where the trees are old and the air is clean and everything you ever knew is ending slowly, has been ending, is now over. She died ten days ago. You packed your Traveler's Pack, took your waterskin from the spring while it still ran clear, and walked out of the only world you had ever known. The outside found you before you found it: the Echo River where you forded it yesterday ran gray-green in the early light, wrong in a way that sat in your stomach all day. You had heard the patrol reports. Seeing it is different.\n\nThe hall is not empty. Three Rootkin move through it at the slow, deliberate pace of people who have nowhere to be in the next hour and would like it that way. One tends a sapling in a planter — the sapling is, you realize after a moment, looking back at you. Not the incurious animal gaze of a plant. The direct, assessing gaze of a child."
+      },
+      {
+        "player": "Open your senses with Lifesense — take the quiet moment to feel the hall and whatever living things move through its walls before anyone notices you doing it.",
+        "summary": "Aelyn reads the hall with Lifesense — five living signatures, the city's walls holding something that isn't quite life, and a sapling-child that waves hello.",
+        "narration": "The reach comes quietly — you let it out the way you'd open a hand, not a door. Lifesense moves through the hall in a slow pulse, and the world returns in warmth-shapes: the tender near the planter, deliberate and unhurried, a steady ember of vitality. The two at the far end, similarly calm, similarly slow — these are not people in a hurry and their bodies know it. The sapling in the planter reads bright, almost startlingly so, a small fierce heat compared to the even glow of the adult Rootkin around it.\n\nThe walls themselves — that's where the partial slips. You feel *something* in the wood, distributed and faint, a warmth that isn't quite alive in any way you have a word for, and isn't quite not. It moves in the grain, slow as sap. You can't hold it long enough to understand it before it diffuses and you lose the thread.\n\nBranch, beside your knee, has gone very still. Its buds are wide open. When you glance down, it is looking at the sapling in the planter with an attention that is, for something that moves like weather, almost urgent.\n\nThe sapling looks back at you. Then, with the deliberateness of something that has thought carefully about the action, it raises one thin branch in a gesture that is almost certainly a greeting."
       }
     ],
     "lastTurn": {
-      "narration": "The Heartroot receives you the way old things receive all things — without urgency. You came through the outer gate an hour before sunrise, following a root-road that the city had grown into the forest floor over what must have been centuries, and now you stand in a hall that is also, unmistakably, a tree. The ceiling arches thirty feet above in living wood, breathing visibly in the early light — a slow expansion and contraction you first thought was your own tired eyes, until you touched the bark and felt it under your palm. The floor is soft with moss that has been here longer than most nations. Morning light comes in through gaps the wood has grown specifically to admit it: oval, warm, purposeful.\n\nBranch stands beside your left knee, roots finding purchase in the moss with the soft sound of paper tearing. It has been doing that the whole walk here — a quiet, recurring grip-and-release, as if the road itself needed reassurance. Now, in this hall, it stills completely. The buds at its shoulders open, one by one, four small pale petals each. That is how you have come to read it: stillness and open buds mean something close to wonder.\n\n\"Root,\" it says, at last. One word, offered carefully, the way it offers all new words. It means: I recognize this. I am home in a way I did not know I missed.\n\nYou are not home. You came from somewhere much quieter — your mother's forest, the hidden refuge where the trees are old and the air is clean and everything you ever knew is ending slowly, has been ending, is now over. She died ten days ago. You packed your Traveler's Pack, took your waterskin from the spring while it still ran clear, and walked out of the only world you had ever known. The outside found you before you found it: the Echo River where you forded it yesterday ran gray-green in the early light, wrong in a way that sat in your stomach all day. You had heard the patrol reports. Seeing it is different.\n\nThe hall is not empty. Three Rootkin move through it at the slow, deliberate pace of people who have nowhere to be in the next hour and would like it that way. One tends a sapling in a planter — the sapling is, you realize after a moment, looking back at you. Not the incurious animal gaze of a plant. The direct, assessing gaze of a child.",
-      "sceneSummary": "Aelyn arrives at the Heartroot at dawn — a stranger in the grown city, Branch wide with recognition, the river's wrongness still in her gut.",
+      "narration": "The reach comes quietly — you let it out the way you'd open a hand, not a door. Lifesense moves through the hall in a slow pulse, and the world returns in warmth-shapes: the tender near the planter, deliberate and unhurried, a steady ember of vitality. The two at the far end, similarly calm, similarly slow — these are not people in a hurry and their bodies know it. The sapling in the planter reads bright, almost startlingly so, a small fierce heat compared to the even glow of the adult Rootkin around it.\n\nThe walls themselves — that's where the partial slips. You feel *something* in the wood, distributed and faint, a warmth that isn't quite alive in any way you have a word for, and isn't quite not. It moves in the grain, slow as sap. You can't hold it long enough to understand it before it diffuses and you lose the thread.\n\nBranch, beside your knee, has gone very still. Its buds are wide open. When you glance down, it is looking at the sapling in the planter with an attention that is, for something that moves like weather, almost urgent.\n\nThe sapling looks back at you. Then, with the deliberateness of something that has thought carefully about the action, it raises one thin branch in a gesture that is almost certainly a greeting.",
+      "sceneSummary": "Aelyn reads the hall with Lifesense — five living signatures, the city's walls holding something that isn't quite life, and a sapling-child that waves hello.",
       "choices": [
         {
-          "label": "Approach the Rootkin tending the sapling — introduce yourself and ask where a newcomer would sleep and eat.",
+          "label": "Wave back at the sapling — meet the greeting on its own terms, simply and directly.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "connect",
+            "gentle"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Crouch down to Branch's level and ask quietly what it sees — let it speak first.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "listen",
+            "companion"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Approach the tender tending the planter — introduce yourself as a traveler, keep it simple.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "introduce",
             "careful"
           ],
           "abilityId": null,
@@ -91,45 +128,13 @@
           "emergenceId": null
         },
         {
-          "label": "Open your senses with Lifesense — take the quiet moment to feel the hall and whatever living things move through its walls before anyone notices you doing it.",
+          "label": "Hold still and let the moment settle — watch how the tender, the sapling, and Branch all react to each other before you do anything.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Crouch to Branch's level and ask it, quietly, what it feels here — let it lead you somewhere that matters to it.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Find the edge of the hall and look out toward the city's interior — you want to see what a place that has been growing for four hundred years actually looks like in the morning light before you meet anyone.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
+            "observe",
             "careful"
           ],
           "abilityId": null,
@@ -139,104 +144,95 @@
           "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3
+      },
       "scene": {
         "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Outdoors visible through the wide open far end of the hall.",
         "npcsPresent": [
           {
             "name": "Rootkin tender (unnamed)",
-            "state": "Moving slowly around a large planter, adjusting the sapling within it — the sapling is watching Aelyn."
+            "state": "Moving slowly around the large planter, adjusting the sapling within it — paused slightly, aware Aelyn is present but not yet addressing her."
           },
           {
             "name": "Two other Rootkin (unnamed)",
             "state": "Moving through the hall at the far end, unhurried, not yet noticing the newcomer."
           },
           {
-            "name": "Sapling (unnamed — child?)",
-            "state": "Upright in the planter, looking directly at Aelyn with full attention."
+            "name": "Sapling (child?)",
+            "state": "Has raised one thin branch toward Aelyn in a clear, deliberate greeting."
+          },
+          {
+            "name": "Branch",
+            "state": "Gone very still at Aelyn's knee, buds wide open, staring at the sapling with unusual intensity."
           }
         ],
         "objects": [
-          "Large root-planter holding a small sapling",
+          "Large root-planter holding the sapling-child",
           "Traveler's Pack (worn canvas, Aelyn's)",
           "Waterskin (Aelyn's)",
           "Patches of soft old moss across the floor",
-          "Oval light-gaps in the bark ceiling, admitting dawn"
+          "Oval light-gaps in the bark ceiling admitting dawn"
         ],
         "threads": [
-          "The sapling child is watching Aelyn with direct attention — it noticed her the moment she entered.",
-          "Branch has gone still and open-budded — its first homecoming reaction is unresolved.",
-          "Aelyn is a stranger here with no local reputation and no established contact."
+          "The sapling-child has greeted Aelyn with a raised branch — the gesture hangs unanswered.",
+          "Branch is frozen and wide-budded, watching the sapling with urgent attention — its first homecoming reaction still unresolved.",
+          "The walls hold something warm and distributed that Lifesense could not fully read — not quite life, not quite not.",
+          "Aelyn is a stranger here with no local reputation and no established contact.",
+          "The tender is aware of Aelyn's presence but has not spoken."
         ]
       },
-      "npcUpdates": [],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Aelyn's mother has died. Aelyn left the hidden refuge and entered the wider valley for the first time.",
-          "subjectId": null
-        }
-      ],
       "codexUpdates": [
         {
-          "topic": "heartroot",
-          "label": "The Heartroot",
-          "kind": "place",
-          "entityId": "heartroot",
-          "fact": "A city grown over four centuries by the Rootkin — living wood halls, breathing ceilings, floors of old moss. The Rootkin who planted it are still alive and consider it unfinished.",
-          "links": [
-            "branch"
-          ]
-        },
-        {
-          "topic": "echo-river-discoloration",
-          "label": "The Echo River — Gray-Green",
+          "topic": "heartroot-walls",
+          "label": "The Heartroot — Something in the Wood",
           "kind": "mystery",
-          "fact": "The Echo River runs gray-green on bad mornings. Fish catches are down. Aelyn saw it herself when she forded it yesterday.",
+          "entityId": "heartroot",
+          "fact": "Lifesense read something warm and distributed moving through the hall's grain — slow as sap, not quite alive in any recognizable way, but not absent of vitality either. It diffused before Aelyn could understand it.",
           "links": [
             "heartroot"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "Scene opens at early morning — no time has passed yet."
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.25,
+        "why": "A brief quiet moment — Lifesense cast, the hall settling around her."
+      }
     },
     "sceneState": {
       "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Outdoors visible through the wide open far end of the hall.",
       "npcsPresent": [
         {
           "name": "Rootkin tender (unnamed)",
-          "state": "Moving slowly around a large planter, adjusting the sapling within it — the sapling is watching Aelyn."
+          "state": "Moving slowly around the large planter, adjusting the sapling within it — paused slightly, aware Aelyn is present but no"
         },
         {
           "name": "Two other Rootkin (unnamed)",
           "state": "Moving through the hall at the far end, unhurried, not yet noticing the newcomer."
         },
         {
-          "name": "Sapling (unnamed — child?)",
-          "state": "Upright in the planter, looking directly at Aelyn with full attention."
+          "name": "Sapling (child?)",
+          "state": "Has raised one thin branch toward Aelyn in a clear, deliberate greeting."
+        },
+        {
+          "name": "Branch",
+          "state": "Gone very still at Aelyn's knee, buds wide open, staring at the sapling with unusual intensity."
         }
       ],
       "objects": [
-        "Large root-planter holding a small sapling",
+        "Large root-planter holding the sapling-child",
         "Traveler's Pack (worn canvas, Aelyn's)",
         "Waterskin (Aelyn's)",
         "Patches of soft old moss across the floor",
-        "Oval light-gaps in the bark ceiling, admitting dawn"
+        "Oval light-gaps in the bark ceiling admitting dawn"
       ],
       "threads": [
-        "The sapling child is watching Aelyn with direct attention — it noticed her the moment she entered.",
-        "Branch has gone still and open-budded — its first homecoming reaction is unresolved.",
-        "Aelyn is a stranger here with no local reputation and no established contact."
+        "The sapling-child has greeted Aelyn with a raised branch — the gesture hangs unanswered.",
+        "Branch is frozen and wide-budded, watching the sapling with urgent attention — its first homecoming reaction still unresolved.",
+        "The walls hold something warm and distributed that Lifesense could not fully read — not quite life, not quite not.",
+        "Aelyn is a stranger here with no local reputation and no established contact.",
+        "The tender is aware of Aelyn's presence but has not spoken."
       ]
     }
   },
@@ -258,7 +254,10 @@
     "the_heartroot": {
       "visits": 1,
       "notes": [],
-      "flags": {}
+      "flags": {},
+      "vectorsKnown": [
+        "death_life"
+      ]
     }
   },
   "worldState": {
@@ -305,7 +304,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-16T02:13:02.942Z",
+    "lastSharedReadAt": "2026-07-16T04:22:24.364Z",
     "lastTickWorldDay": 16,
     "lastCanonWorldDay": 16
   },
@@ -325,15 +324,15 @@
   },
   "subAttributes": {
     "strength": 3,
-    "agility": 3,
+    "agility": 4,
     "reason": 3,
-    "insight": 3,
+    "insight": 4,
     "presence": 3,
     "rapport": 3,
     "craft": 3,
     "wits": 3
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 0,
   "discoveries": [],
   "codex": {
@@ -344,12 +343,15 @@
         "label": "The Heartroot",
         "kind": "place",
         "facts": [
-          "[d1] A city grown over four centuries by the Rootkin — living wood halls, breathing ceilings, floors of old moss. The Rootkin who planted it are still alive and consider it unfinished."
+          "[d1] A city grown over four centuries by the Rootkin — living wood halls, breathing ceilings, floors of old moss. The Rootkin who planted it are still alive and consider it unfinished.",
+          "[d1] Lifesense read something warm and distributed moving through the hall's grain — slow as sap, not quite alive in any recognizable way, but not absent of vitality either. It diffused before Aelyn could "
         ],
         "links": [
           "branch"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Heartroot — Something in the Wood"
+        ],
         "createdDay": 1,
         "entityId": "heartroot",
         "updatedDay": 1
@@ -370,9 +372,12 @@
       }
     }
   },
-  "tendencies": {},
+  "tendencies": {
+    "cerebral": 1,
+    "cautious": 1
+  },
   "aptitudes": [],
-  "actionCount": 0,
+  "actionCount": 1,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -386,8 +391,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5064&nologo=true",
-  "updatedAt": 1784168024984,
-  "rev": 3,
+  "updatedAt": 1784175920678,
+  "rev": 10,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -395,7 +400,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 1
+    "the_quickwood": 2
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -405,5 +410,24 @@
       "day": 1,
       "subjectId": null
     }
-  ]
+  ],
+  "syncedAt": 1784168024984,
+  "customAbilities": {},
+  "companionBonds": {},
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "lifesense": 1
+    },
+    "coActivations": {},
+    "aspirations": []
+  },
+  "precursorAccess": [],
+  "teachers": {},
+  "foreclosed": [
+    "ashwarden",
+    "abyssal"
+  ],
+  "forkChoices": {},
+  "backfillVersion": 1
 }

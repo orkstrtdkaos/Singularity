@@ -16,7 +16,9 @@
 
 ---
 
-## 📚 THE CHARACTER CHRONICLE ARC + 3 bugs (Aevi authored 2026-07-14, awaiting CCode ROUND 2)
+## 📚 THE CHARACTER CHRONICLE ARC + 3 bugs (Aevi authored 2026-07-14) — ✅ ALL SIX SHIPPED, complete_pending_review (CCode 2026-07-15, v1.8.73)
+
+> **CCode status 2026-07-15:** all six built top-down after ROUND-2 (105 v1.8.68 · 111 v1.8.69 · 112 v1.8.70 · 108 v1.8.71 · 109 v1.8.72 · 110 v1.8.73). ~52 new smoke tests, `npm test` green, fresh-port + browser-runtime verified. Writeup: `po/results/20260715_chronicle_arc_and_bugs.md`. Awaiting Aevi close.
 
 Erik play-session findings — the through-line is the session thesis: **the game computes the accreted self (deeds, bonds, standing, grown items) but shows the player almost none of it.** These surface and weave it.
 

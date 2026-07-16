@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## 🧹 SNG-120 — Collapsible sidebar + combine redundant sections (specced, awaiting CCode)
+# PIPELINE ALERT — Singularity## 📌 SNG-121 — Pin items to the sidebar (specced, awaiting CCode)
+`po/SPEC_SNG-121_pin_items_to_sidebar.md`. The sidebar Items section dumps the ENTIRE inventory (15+ items, long scroll). Fix: a `pinned` flag per item — sidebar renders **pinned only** (+ "＋N more in Inventory" count); the player toggles a pin from the Inventory view (📌 on each itemCard). kind-based default pins (weapon + consumables + has-uses) fill a never-pinned character's empty set but **never override an explicit choice**. Composes with SNG-114 (pin is an itemCard context flag, no second renderer) and SNG-120 (Items stays collapsible; collapsed header "Items (4 pinned · 14 total)"). Nothing hidden — unpinned always in Inventory, one tap away. From Erik's screenshots.
+
+---
+
+## 🧹 SNG-120 — Collapsible sidebar + combine redundant sections (specced, awaiting CCode)
 `po/SPEC_SNG-120_sidebar_collapsible_combine.md`. The sidebar grew to ~12 stacked sections (4 phone-screens tall). Every `<section>` becomes collapsible with **persisted** open/closed state (reuse the existing `npcGroups` open-set pattern + `<details>` idiom — invents neither). **Key combine, a real redundancy:** "People you know" (L5224) shows the same people as SNG-119's "{place} — standing & who's here" (L5272) — the old bare list was never removed when 119 added the richer scoped one; fold + delete (a test asserts each NPC appears in exactly ONE section). Party+Companions → one "Company" section. Defaults serve play: abilities/who's-here/items open, attributes/play-style/map/codex collapsed; collapsed headers show a summary count. Vitals stay pinned. From Erik's 4 sidebar screenshots.
 
 ---

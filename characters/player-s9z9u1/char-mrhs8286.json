@@ -2035,16 +2035,21 @@
         "player": "Slow it back down — draw it out, make her ask.",
         "summary": "Silas draws down the rhythm — Pell names what she wants plainly, armor gone.",
         "narration": "You slow. Not a pause — a deliberate withdrawal of the rhythm she's been answering, like pulling a tide back from the shore just as it was reaching full. Your hips ease to half the pace, then slower still, and you feel the change move through her immediately — a small frustrated sound at the back of her throat, her hands tightening on your forearms, the rolling pressure of her hips trying to chase what you've taken back.\n\nYou let her chase it. Your hand stays where it is, unhurried, pressure steady but not urgent, and you put your mouth close to her ear — not speaking yet, just the warmth of your breath there, a presence that makes the waiting specific. The coals throw red light across the stone and across her face, turned slightly toward you now, the line of her jaw taut. She is not managing anything. She is entirely here, entirely waiting, and she knows you know it.\n\nShe lasts a few breaths. Then: \"Silas.\" The way she says it is not a question and not a name — it is a request with all the armor stripped off, the vowel stretched slightly as her hips roll back into the slow pace and find nothing given. Her hands press harder into your forearms. \"Don't—\" A short exhale. She tips her head back against your shoulder, bares her throat to the firelight, and finishes it plainly, quietly, the way she finishes things she has decided: \"give me the pace back.\"\n\nThe wine sits untouched on the flat stone. Huginn is motionless on the lip of the rock. The overhang holds the heat of the fire and the sound of her breathing and nothing else."
+      },
+      {
+        "player": "Hold the slow pace — make her ask again, more plainly.",
+        "summary": "Pell asks plainly — more, please — the last of the management gone.",
+        "narration": "You hold the pace. Not cruelly — there is no withholding in it, only a steady, unhurried presence that refuses to be rushed. Your hips move in long, slow strokes, and your hand keeps its light, maddening pressure, and you breathe against her ear and say nothing at all.\n\nShe tries to manage it. You can feel her trying — the small, controlled roll of her hips angling for more, then the catch when she realizes you're not following. Her hands tighten on your forearms. She turns her head a degree toward you and stops. Turns back. The firelight catches the line of her throat when she swallows.\n\n'Silas.' Her voice has lost the register she uses for everything she's decided in advance. It is just the word, just the want in it. 'More. Please.' The please comes out smaller than the rest — not practiced, not managed — the kind of word that surfaces from somewhere below accounting. She exhales sharply after it, like she can't believe she said it and doesn't intend to take it back.\n\nHuginn does not move. The coals throw their amber light across the stone, across the bare curve of her shoulder, across your joined hands. The night is quiet and cold outside the overhang's warmth, and she is asking you plainly, and there is nothing left between what she wants and the asking of it."
       }
     ],
     "lastTurn": {
-      "narration": "You slow. Not a pause — a deliberate withdrawal of the rhythm she's been answering, like pulling a tide back from the shore just as it was reaching full. Your hips ease to half the pace, then slower still, and you feel the change move through her immediately — a small frustrated sound at the back of her throat, her hands tightening on your forearms, the rolling pressure of her hips trying to chase what you've taken back.\n\nYou let her chase it. Your hand stays where it is, unhurried, pressure steady but not urgent, and you put your mouth close to her ear — not speaking yet, just the warmth of your breath there, a presence that makes the waiting specific. The coals throw red light across the stone and across her face, turned slightly toward you now, the line of her jaw taut. She is not managing anything. She is entirely here, entirely waiting, and she knows you know it.\n\nShe lasts a few breaths. Then: \"Silas.\" The way she says it is not a question and not a name — it is a request with all the armor stripped off, the vowel stretched slightly as her hips roll back into the slow pace and find nothing given. Her hands press harder into your forearms. \"Don't—\" A short exhale. She tips her head back against your shoulder, bares her throat to the firelight, and finishes it plainly, quietly, the way she finishes things she has decided: \"give me the pace back.\"\n\nThe wine sits untouched on the flat stone. Huginn is motionless on the lip of the rock. The overhang holds the heat of the fire and the sound of her breathing and nothing else.",
-      "sceneSummary": "Silas draws down the rhythm — Pell names what she wants plainly, armor gone.",
+      "narration": "You hold the pace. Not cruelly — there is no withholding in it, only a steady, unhurried presence that refuses to be rushed. Your hips move in long, slow strokes, and your hand keeps its light, maddening pressure, and you breathe against her ear and say nothing at all.\n\nShe tries to manage it. You can feel her trying — the small, controlled roll of her hips angling for more, then the catch when she realizes you're not following. Her hands tighten on your forearms. She turns her head a degree toward you and stops. Turns back. The firelight catches the line of her throat when she swallows.\n\n'Silas.' Her voice has lost the register she uses for everything she's decided in advance. It is just the word, just the want in it. 'More. Please.' The please comes out smaller than the rest — not practiced, not managed — the kind of word that surfaces from somewhere below accounting. She exhales sharply after it, like she can't believe she said it and doesn't intend to take it back.\n\nHuginn does not move. The coals throw their amber light across the stone, across the bare curve of her shoulder, across your joined hands. The night is quiet and cold outside the overhang's warmth, and she is asking you plainly, and there is nothing left between what she wants and the asking of it.",
+      "sceneSummary": "Pell asks plainly — more, please — the last of the management gone.",
       "choices": [
         {
-          "label": "Give her what she asked for — harder, all the way through.",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Give her what she asked for — answer the please directly, drive the pace back up.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -2052,7 +2057,7 @@
           "trivial": true
         },
         {
-          "label": "Hold the slow pace — make her ask again, more plainly.",
+          "label": "Say her name back to her — quietly, against her ear — then give her what she asked for.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -2062,9 +2067,9 @@
           "trivial": true
         },
         {
-          "label": "Turn her to face you — change everything: angle, eye contact, what's possible.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Hold the slow pace one moment longer — let the ask sit between you — then answer it.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -2072,7 +2077,7 @@
           "trivial": true
         },
         {
-          "label": "Answer her with your mouth at her ear — say what you want instead of just doing it.",
+          "label": "Turn her face toward yours and meet her eyes before you give her what she's asked for.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -2082,20 +2087,16 @@
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him, hands holding his forearms, face tipped toward him, throat bare in the firelight.",
+        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low red coals throwing warm amber light across the stone. Pell drawn back against Silas's chest, hands holding his forearms, head tipped to the side, throat bare in the firelight.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Drawn back against Silas's chest, hands pressing into his forearms — head tipped back against his shoulder, throat exposed, waiting on his answer."
+            "state": "Back against Silas's chest, hands pressing his forearms, head turned slightly — she has asked plainly and not taken it back."
           },
           {
             "name": "Huginn",
-            "state": "Motionless on the stone lip, head still tucked. Unmoved."
+            "state": "Motionless on the stone lip, head still. Unmoved."
           }
         ],
         "objects": [
@@ -2111,7 +2112,7 @@
           "Rock overhang — south-facing, dry underside"
         ],
         "threads": [
-          "Pell asked plainly for the pace back — Silas holds the answer.",
+          "Pell has asked plainly — more, please — and is waiting for Silas's answer.",
           "The last pour of Resin Mountain Wine sits untouched on the flat stone.",
           "The coals are burning low — the fire will not last much longer.",
           "Edge District bearing — Leth and Sorel as first contacts.",
@@ -2123,30 +2124,28 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Asked plainly for the pace back — named it with the armor down, no management, no qualifier.",
+          "note": "Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back.",
           "learned": [
-            "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close."
+            "Names what she wants without the ledger when the slow pace makes evasion impossible — the please comes from below the accounting."
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, nothing managed."
+          "statusNote": "At the overhang camp, fully unguarded, having asked plainly for what she wants.",
+          "bondType": "romantic",
+          "bondStage": "together"
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0,
-        "why": "A single held moment — the scene has not advanced."
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him, hands holding his forearms, face tipped toward him, throat bare in the firelight.",
+      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low red coals throwing warm amber light across the stone. Pell drawn back against Silas's chest, hands holding his forearms, head tipped to the side, throat bare in the firelight.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Drawn back against Silas's chest, hands pressing into his forearms — head tipped back against his shoulder, throat expos"
+          "state": "Back against Silas's chest, hands pressing his forearms, head turned slightly — she has asked plainly and not taken it b"
         },
         {
           "name": "Huginn",
-          "state": "Motionless on the stone lip, head still tucked. Unmoved."
+          "state": "Motionless on the stone lip, head still. Unmoved."
         }
       ],
       "objects": [
@@ -2162,7 +2161,7 @@
         "Rock overhang — south-facing, dry underside"
       ],
       "threads": [
-        "Pell asked plainly for the pace back — Silas holds the answer.",
+        "Pell has asked plainly — more, please — and is waiting for Silas's answer.",
         "The last pour of Resin Mountain Wine sits untouched on the flat stone.",
         "The coals are burning low — the fire will not last much longer.",
         "Edge District bearing — Leth and Sorel as first contacts.",
@@ -2173,7 +2172,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -2315,7 +2314,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Pulled Silas into her from behind, arms crossed forward across his chest — held the position longer than the technique required, then shifted grip deliberately. Said 'there' into h",
         "[d2] Silas reversed the hold — she let him move, curious about where it was going. Arms came up to cover his hands, not to stop them. Head back against his shoulder, breath slower. No a",
         "[d2] Named plainly by Silas — Pell Marsh — and asked directly. Answered yes without qualification or armor. The ledger she is always managing is open.",
         "[d2] Named two wants plainly and without armor — slower, and don't stop looking at her. The second one came quieter, like she hadn't decided to say it.",
@@ -2324,17 +2322,18 @@
         "[d2] Named what she wants plainly and without armor — harder, and don't stop watching. The second ask came quieter, less decided, and she didn't take it back.",
         "[d2] Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing.",
         "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
-        "[d2] Asked plainly for the pace back — named it with the armor down, no management, no qualifier."
+        "[d2] Asked plainly for the pace back — named it with the armor down, no management, no qualifier.",
+        "[d2] Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back."
       ],
       "knownFacts": [
-        "Leads with patience when she has the advantage — technique shifts to something else once the hold is established",
         "'Yes' — no qualifier, no close — the first time she has not managed the answer before it reached her mouth",
         "She wants to be watched — and naming it cost her something small and real.",
         "Her body's asking comes before her words do — she rolls her hips into the pace rather than speaking it.",
         "Names want without management when the moment takes the ledger from her — the second half of the ask was the one she hadn't decided to say.",
         "Stays in the open rather than recovering composure once it has slipped.",
         "Names Silas plainly, without management, when the moment takes the last of her composure.",
-        "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close."
+        "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close.",
+        "Names what she wants without the ledger when the slow pace makes evasion impossible — the please comes from below the accounting."
       ],
       "skillsObserved": [
         "reading a stain pattern independently against a known failur",
@@ -2345,7 +2344,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, nothing managed.",
+      "statusNote": "At the overhang camp, fully unguarded, having asked plainly for what she wants.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3465,16 +3464,16 @@
     }
   },
   "tendencies": {
-    "strategic": 55.46761712998692,
-    "cerebral": 36.93764365960831,
-    "social": 53.258012284323925,
-    "generous": 13.037492823305257,
-    "cautious": 47.94352938424984,
-    "physical": 3.221875129073195,
-    "risky": 9.07215227857191,
-    "ruthless": 3.9892619306083716,
-    "carousing": 2.8012687736849586,
-    "amorous": 1
+    "strategic": 54.08092670173725,
+    "cerebral": 36.0142025681181,
+    "social": 51.926561977215826,
+    "generous": 12.711555502722625,
+    "cautious": 46.744941149643594,
+    "physical": 3.141328250846365,
+    "risky": 8.845348471607611,
+    "ruthless": 3.889530382343162,
+    "carousing": 2.731237054342835,
+    "amorous": 1.975
   },
   "aptitudes": [
     "strategist",
@@ -3487,7 +3486,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 319,
+  "actionCount": 320,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3629,8 +3628,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784184021683,
-  "rev": 442,
+  "updatedAt": 1784184126894,
+  "rev": 443,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4193,7 +4192,7 @@
   "syncedAt": 1784183539045,
   "teachers": {},
   "regionsKnown": {
-    "valley": 129
+    "valley": 130
   },
   "foreclosed": [
     "rootkin",

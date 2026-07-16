@@ -216,6 +216,14 @@
       "qty": 1,
       "description": "A smooth river-flat whetstone — Pell's own, returned to the bench twice and given away once. Now in her pocket, not yours.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "River Purification Tabs (vial)",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "A stoppered dark-glass vial, wax-sealed — pre-Transition provenance. Drop one tab in a waterskin to purify questionable water. A dozen left in the world, maybe. From Mara's own stock.",
+      "consumable": true
     }
   ],
   "deeds": [
@@ -1783,83 +1791,88 @@
         "player": "You forgot something on the list of what I'm doing... just before Pip comes into earshot say... \"you\".",
         "summary": "Silas names Pell on the list — one word, forward-facing, before Pip arrives.",
         "narration": "Pip is still thirty yards back, boots quick on the wet stone, the cloth-wrapped package tucked under one arm — close enough now that you could shout and be heard.\n\nYou don't shout. You say it quietly, forward-facing, to the road and the pale ridgeline and the bend where Huginn disappeared.\n\n\"You.\"\n\nOne word. The fence-lines don't move. The low cloud doesn't shift. Pell's stride doesn't break — but there is a half-beat where it almost does, a catch in the rhythm that she recovers so cleanly you might have imagined it. She doesn't look at you. Her jaw moves once, not quite language, and then she is watching the bend again, composed and level, the oilcloth on her shoulder.\n\nPip's boots are audible now. Thirty yards has become twenty."
+      },
+      {
+        "player": "Turn and receive Pip — take the package and see what Mara sent.",
+        "summary": "Pip delivers Mara's package — a note about a waterskin at Aldric's and a vial of pre-Transition water-purification tabs.",
+        "narration": "Pip Cotter arrives at a dead stop, breathing hard, the cloth-wrapped package thrust out at arm's length with the unsentimental efficiency of someone who has run this errand a hundred times and is already thinking about the next one.\n\n\"Mara says you'd want it before the bend,\" Pip says, chest still working. That's the whole message. The child's eyes slide to Memory over your shoulder — a half-second assessment, not fear, just the same unhurried attention children give to things adults look away from — and then back to you, waiting to be dismissed.\n\nYou take the package. It's about the weight of a folded letter and something hard wrapped inside — cloth double-knotted, Mara's initials pressed into the knot with a thumbnail. When you work it open, there are two things: a short note in Mara's close hand, and a small stoppered vial of dark glass, sealed with the same wax she uses on her ledger marks.\n\nThe note reads: *Aldric remembered after you left — cured bladder waterskin in the back of the store, set aside, yours if you want it before the road gets long. Second thing: the vial is from my own stock. River-purification tabs, pre-Transition provenance, a dozen left in the world maybe. Drop one in a waterskin if the water gets bad. Don't ask where I got them. — M.*\n\nPell has read it over your shoulder without apology. She says nothing, but her expression shifts slightly — something between impressed and unsettled at the provenance line."
       }
     ],
     "lastTurn": {
-      "narration": "Pip is still thirty yards back, boots quick on the wet stone, the cloth-wrapped package tucked under one arm — close enough now that you could shout and be heard.\n\nYou don't shout. You say it quietly, forward-facing, to the road and the pale ridgeline and the bend where Huginn disappeared.\n\n\"You.\"\n\nOne word. The fence-lines don't move. The low cloud doesn't shift. Pell's stride doesn't break — but there is a half-beat where it almost does, a catch in the rhythm that she recovers so cleanly you might have imagined it. She doesn't look at you. Her jaw moves once, not quite language, and then she is watching the bend again, composed and level, the oilcloth on her shoulder.\n\nPip's boots are audible now. Thirty yards has become twenty.",
-      "sceneSummary": "Silas names Pell on the list — one word, forward-facing, before Pip arrives.",
+      "narration": "Pip Cotter arrives at a dead stop, breathing hard, the cloth-wrapped package thrust out at arm's length with the unsentimental efficiency of someone who has run this errand a hundred times and is already thinking about the next one.\n\n\"Mara says you'd want it before the bend,\" Pip says, chest still working. That's the whole message. The child's eyes slide to Memory over your shoulder — a half-second assessment, not fear, just the same unhurried attention children give to things adults look away from — and then back to you, waiting to be dismissed.\n\nYou take the package. It's about the weight of a folded letter and something hard wrapped inside — cloth double-knotted, Mara's initials pressed into the knot with a thumbnail. When you work it open, there are two things: a short note in Mara's close hand, and a small stoppered vial of dark glass, sealed with the same wax she uses on her ledger marks.\n\nThe note reads: *Aldric remembered after you left — cured bladder waterskin in the back of the store, set aside, yours if you want it before the road gets long. Second thing: the vial is from my own stock. River-purification tabs, pre-Transition provenance, a dozen left in the world maybe. Drop one in a waterskin if the water gets bad. Don't ask where I got them. — M.*\n\nPell has read it over your shoulder without apology. She says nothing, but her expression shifts slightly — something between impressed and unsettled at the provenance line.",
+      "sceneSummary": "Pip delivers Mara's package — a note about a waterskin at Aldric's and a vial of pre-Transition water-purification tabs.",
       "choices": [
         {
-          "label": "Turn and receive Pip — take the package and see what Mara sent.",
+          "label": "Send Pip back with a word for Mara — thanks, a request for the waterskin, or something else.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "receive",
-            "careful"
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Let Pip reach you but keep walking — take the package without stopping, read it on the move.",
+          "label": "Send Pip back and pocket the vial, keep moving — collect the waterskin on the way out or not at all.",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "efficient",
             "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Let Pell receive Pip — you watch the bend for Huginn's signal from Fen's intake.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say something else to Pell before Pip closes the distance — the moment is still open.",
+          "label": "Ask Pip something before sending them back — quick feet and attentive eyes.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "honest"
+            "scout"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "inventoryAdd": [
+          {
+            "name": "River Purification Tabs (vial)",
+            "kind": "consumable",
+            "description": "A stoppered dark-glass vial, wax-sealed — pre-Transition provenance. Drop one tab in a waterskin to purify questionable water. A dozen left in the world, maybe. From Mara's own stock.",
+            "consumable": true,
+            "effects": {}
+          }
+        ]
+      },
       "scene": {
         "setting": "Old stone road between thinning fence-lines north of Millbrook — terraced gardens giving way to rough grazing, road rising slightly, eastern road-bend ahead under low cloud. Fen's intake lies just around the bend; water can be heard past it.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Come even with Silas, oilcloth on off-shoulder — absorbed the one word without breaking stride; watching the bend, jaw set, composure intact and working."
-          },
-          {
-            "name": "Huginn",
-            "state": "Over the road-bend, out of sight, toward the sound of Fen's intake."
+            "state": "Standing at Silas's shoulder, having read the note — expression between impressed and unsettled at the provenance line, watching him."
           },
           {
             "name": "Pip Cotter",
-            "state": "Twenty yards south on the road, closing fast — cloth-wrapped package under one arm, feet loud on wet stone."
+            "state": "Twenty yards south on the road, stopped and waiting — errand delivered, watching for dismissal or reply."
+          },
+          {
+            "name": "Huginn",
+            "state": "Around the road-bend, out of sight, toward the sound of Fen's intake."
           }
         ],
         "objects": [
           "Memory (spear, shaft over Silas's shoulder)",
           "Pell's oilcloth (on her shoulder)",
-          "Cloth-wrapped package (under Pip's arm)",
+          "Opened cloth wrapping — Mara's double-knotted note cloth, unwrapped",
+          "Mara's note (in hand)",
+          "River Purification Tabs vial (now in inventory)",
           "Stone road — wheel-ruts drying after the squall",
           "Eastern road-bend (Fen's intake beyond it)"
         ],
         "threads": [
-          "Pip Cotter closing with a package from Mara — contents unknown.",
-          "Pell received the one word — reaction unspoken, the moment still open.",
+          "Pip waiting for dismissal or reply.",
+          "Cured bladder waterskin still at Aldric's store — available before departure.",
+          "Pell received the one word — reaction still open, not yet spoken.",
           "Fen's intake: first valve site, around the bend.",
           "The question of pressing Sorel before leaving the valley."
         ]
@@ -1867,17 +1880,48 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Received 'you' — half-beat catch in her stride, recovered clean. Did not look at Silas. Composure intact and working.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Walking north with Silas toward Fen's intake — absorbed the naming without comment, watching the bend."
+          "npcId": "pip-cotter",
+          "name": "Pip Cotter",
+          "note": "Delivered Mara's package to Silas on the north road before the bend — ran it out personally, message delivered clean.",
+          "learned": [
+            "Mara sent a note about a waterskin at Aldric's and a vial of pre-Transition purification tabs"
+          ],
+          "statusNote": "On the north road, just south of Silas's position — waiting for dismissal or a reply to carry back.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Sent a follow-up package via Pip — Aldric waterskin reminder and a vial of pre-Transition purification tabs from her own stock.",
+          "learned": [
+            "Holds pre-Transition purification tabs — possibly one of the last stocks in the valley",
+            "Acts proactively on expedition logistics even after a party has departed"
+          ],
+          "statusNote": "At her store in Millbrook — tabs sent, waterskin arranged with Aldric, now watching the shop.",
+          "relationshipDelta": 1,
+          "skillsObserved": [
+            "proactive expedition resupply from personal stock without prompting or price-setting"
+          ]
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "entityId": "mara-wells",
+          "fact": "Holds pre-Transition river-purification tabs in personal stock — sent a vial with Pip as a follow-up expedition supply. One of the last stocks in the world, by her own estimate.",
+          "links": [
+            "millbrook",
+            "aldric",
+            "the-water-crisis"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.1,
-        "why": "A brief moment on the road — one word, then Pip closing."
+        "why": "A brief stop on the road to receive Pip's package — less than five minutes."
       }
     },
     "sceneState": {
@@ -1885,27 +1929,30 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Come even with Silas, oilcloth on off-shoulder — absorbed the one word without breaking stride; watching the bend, jaw s"
-        },
-        {
-          "name": "Huginn",
-          "state": "Over the road-bend, out of sight, toward the sound of Fen's intake."
+          "state": "Standing at Silas's shoulder, having read the note — expression between impressed and unsettled at the provenance line, "
         },
         {
           "name": "Pip Cotter",
-          "state": "Twenty yards south on the road, closing fast — cloth-wrapped package under one arm, feet loud on wet stone."
+          "state": "Twenty yards south on the road, stopped and waiting — errand delivered, watching for dismissal or reply."
+        },
+        {
+          "name": "Huginn",
+          "state": "Around the road-bend, out of sight, toward the sound of Fen's intake."
         }
       ],
       "objects": [
         "Memory (spear, shaft over Silas's shoulder)",
         "Pell's oilcloth (on her shoulder)",
-        "Cloth-wrapped package (under Pip's arm)",
+        "Opened cloth wrapping — Mara's double-knotted note cloth, unwrapped",
+        "Mara's note (in hand)",
+        "River Purification Tabs vial (now in inventory)",
         "Stone road — wheel-ruts drying after the squall",
         "Eastern road-bend (Fen's intake beyond it)"
       ],
       "threads": [
-        "Pip Cotter closing with a package from Mara — contents unknown.",
-        "Pell received the one word — reaction unspoken, the moment still open.",
+        "Pip waiting for dismissal or reply.",
+        "Cured bladder waterskin still at Aldric's store — available before departure.",
+        "Pell received the one word — reaction still open, not yet spoken.",
         "Fen's intake: first valve site, around the bend.",
         "The question of pressing Sorel before leaving the valley."
       ]
@@ -2101,9 +2148,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 5,
+      "relationship": 6,
       "history": [
-        "[d2] Silas named Pell as the recipient of the wine and fruit — Mara received it cleanly, noted the whetstone connection, moved the goods to his side of the counter. Named the price: eig",
         "[d2] Accepted payment cleanly. Gave Silas candid intelligence on Pell — work ethic, the wine choice, the starfruit recognition, and a plain warning against over-engineering the approach",
         "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
         "[d2] Produced valve failure dates from two separate ledgers without hesitation — four sleeve blank sales in three weeks, both failures confirmed returned. Tore a note page unprompted an",
@@ -2112,28 +2158,29 @@
         "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F",
         "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a ",
         "[d2] Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situatio",
-        "[d2] Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting."
+        "[d2] Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting.",
+        "[d2] Sent a follow-up package via Pip — Aldric waterskin reminder and a vial of pre-Transition purification tabs from her own stock."
       ],
       "knownFacts": [
-        "Buried vault section will fail in six weeks — redirected surge into east-channel main feeder run",
-        "Dara Holt is already staging pipe-sections",
         "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
         "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
         "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District",
         "Mara keeps expedition logic running in the background once she knows a search is happening",
         "Aldric sometimes has cured winter-butchering bladder that works as a waterskin",
-        "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong"
+        "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong",
+        "Holds pre-Transition purification tabs — possibly one of the last stocks in the valley",
+        "Acts proactively on expedition logistics even after a party has departed"
       ],
       "skillsObserved": [
-        "reading the weight of a situation without needing it spelled",
         "accurate recall of local relationships and property arrangem",
         "producing Edge District contact names from memory without pr",
         "filing civic information without naming a price",
         "rapid trail-kit assembly from known inventory",
-        "proactive trail advice without being asked"
+        "proactive trail advice without being asked",
+        "proactive expedition resupply from personal stock without pr"
       ],
       "status": "active",
-      "statusNote": "At her store — but sent a runner north after Silas with new information.",
+      "statusNote": "At her store in Millbrook — tabs sent, waterskin arranged with Aldric, now watching the shop.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2615,7 +2662,8 @@
           "[d2] Stocks a bottle of resin mountain wine from an Adaptor settlement south of the Disputed Zone, and sealed dried starfruit from the old pass circuit — both unusual goods, kept in back reserve.",
           "[d2] Registered that the wine and starfruit are a gift for Pell without reaction — noted the whetstone connection and moved the goods across the counter. Treats gift logistics the same as any other transac",
           "[d2] Keeps cross-referenced sales logs precise enough to reconstruct a failure timeline three weeks back without prompting. Tore a note page for Silas without naming a price — treating civic information di",
-          "[d2] Assembled expedition kit (tallow, oilcloth, pine-tar salve) without being prompted for a list — priced at eight cord-weight or Aldric offset. Flagged Aldric as a source for cured bladder waterskins fr"
+          "[d2] Assembled expedition kit (tallow, oilcloth, pine-tar salve) without being prompted for a list — priced at eight cord-weight or Aldric offset. Flagged Aldric as a source for cured bladder waterskins fr",
+          "[d2] Holds pre-Transition river-purification tabs in personal stock — sent a vial with Pip as a follow-up expedition supply. One of the last stocks in the world, by her own estimate."
         ],
         "links": [
           "millbrook",
@@ -3129,15 +3177,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.169049545464134,
-    "cerebral": 40.00896944857336,
-    "social": 60.20149626286815,
-    "generous": 16.344702678616166,
-    "cautious": 48.25342052367437,
-    "physical": 1.7204339034566878,
-    "risky": 3.4486091903404716,
-    "ruthless": 3.8213333071036097,
-    "carousing": 1.2834353755291903
+    "strategic": 59.86820429773681,
+    "cerebral": 39.808924601330496,
+    "social": 59.900488781553804,
+    "generous": 16.262979165223086,
+    "cautious": 49.012153421056,
+    "physical": 1.7118317339394042,
+    "risky": 3.431366144388769,
+    "ruthless": 3.8022266405680916,
+    "carousing": 1.2770181986515443
   },
   "aptitudes": [
     "strategist",
@@ -3145,7 +3193,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 282,
+  "actionCount": 283,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3271,8 +3319,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784175055798,
-  "rev": 386,
+  "updatedAt": 1784175241189,
+  "rev": 387,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3834,7 +3882,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 85
+    "valley": 86
   },
   "foreclosed": [
     "rootkin",

@@ -66,7 +66,7 @@
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
-    "concrete_abstract": -0.09466345579477364,
+    "concrete_abstract": -0.09993028300503495,
     "death_life": -0.1585027808450198,
     "emotional_logical": 0.048249999999999994,
     "falsehood_truth": 0.04000000000000001,
@@ -1839,19 +1839,24 @@
         "player": "Use The Attended End on the intake structure — let it tell you plainly what is ending here and how long it has.",
         "summary": "The Attended End reads Fen's intake — the iron sleeve has three to four weeks before it runs open; the structure behind it is not ending.",
         "narration": "You set Memory's butt against the packed earth and close your eyes for a moment. The Attended End doesn't need ceremony — it just needs you to stop moving and let Marrow speak.\n\nThe intake tells you what it's ending. Not dramatically: the iron sleeve in the housing is surrendering its grip where the stone expanded and the fitting didn't. Three weeks, maybe four, before the channel runs open. Not a failure — a loosening, the way a tooth goes before it goes. The mechanism behind it, the buried thing pressing its intention through this valve, isn't ending at all. It has more work to do.\n\nHuginn shifts on the stone sill. One slow blink.\n\nYou open your eyes and look at the housing — the dark stain at the lip, the faint glaze on the outlet stone where the mineral edge has been coming through longest. \"Three to four weeks,\" you say, quiet enough that it's to Pell and not to the valley. \"The sleeve. Not the structure.\"\n\nPell is already crouching at the base of the housing, one hand near the stone but not on it, reading the stain the same way she read the torque signature at the east furlong. She doesn't look up. \"Same axis?\" A practical question, the kind she asks when she's already forming an answer and wants confirmation, not discovery."
+      },
+      {
+        "player": "Confirm Pell's question — same counterclockwise torque axis, same stain pattern as the east furlong. Walk her through what The Attended End found.",
+        "summary": "Silas confirms the CCW torque axis at Fen's intake — same as east furlong — and tells Pell what The Attended End found: three to four weeks on the sleeve, the structure not ending.",
+        "narration": "You crouch beside her at the housing base and point to the lip — the stain's inner arc, the way it curves left and then under, the same clockwise-read-from-outside that means counterclockwise at the shaft. Same axis. You trace it with one finger without touching it, the way you'd trace a word you already know.\n\n\"Same axis, same orientation,\" you say. \"East furlong runs the same way. The torque isn't from water pressure or sediment — it's from the mechanism. Something turning, consistently, in one direction, over a long time.\" You let her have the image for a moment before you add the rest. \"The Attended End says the sleeve has three to four weeks before it runs open. Not a collapse — more like a tooth going loose. The thread of failure is already started.\"\n\nPell's hand is still near the stone. She doesn't pull it back. \"And the thing behind it?\"\n\n\"Not ending,\" you say. \"It has more work to do.\"\n\nShe absorbs this with the flat steadiness she uses when a measurement lands somewhere she didn't want it to. Then she straightens, wipes her palm on her thigh, and looks at the full face of the housing — valve to lintel, the mineral glaze on the outlet stone, the iron sleeve dark with age. \"So this isn't a symptom that got away from it,\" she says. \"This is it doing what it was made to do.\" A beat. \"We need to know what the whole design looks like from here. If Order-Sense can read a room's intent from a cradle-recess, I want to know what it reads from a valve that's been running on purpose for forty years.\""
       }
     ],
     "lastTurn": {
-      "narration": "You set Memory's butt against the packed earth and close your eyes for a moment. The Attended End doesn't need ceremony — it just needs you to stop moving and let Marrow speak.\n\nThe intake tells you what it's ending. Not dramatically: the iron sleeve in the housing is surrendering its grip where the stone expanded and the fitting didn't. Three weeks, maybe four, before the channel runs open. Not a failure — a loosening, the way a tooth goes before it goes. The mechanism behind it, the buried thing pressing its intention through this valve, isn't ending at all. It has more work to do.\n\nHuginn shifts on the stone sill. One slow blink.\n\nYou open your eyes and look at the housing — the dark stain at the lip, the faint glaze on the outlet stone where the mineral edge has been coming through longest. \"Three to four weeks,\" you say, quiet enough that it's to Pell and not to the valley. \"The sleeve. Not the structure.\"\n\nPell is already crouching at the base of the housing, one hand near the stone but not on it, reading the stain the same way she read the torque signature at the east furlong. She doesn't look up. \"Same axis?\" A practical question, the kind she asks when she's already forming an answer and wants confirmation, not discovery.",
-      "sceneSummary": "The Attended End reads Fen's intake — the iron sleeve has three to four weeks before it runs open; the structure behind it is not ending.",
+      "narration": "You crouch beside her at the housing base and point to the lip — the stain's inner arc, the way it curves left and then under, the same clockwise-read-from-outside that means counterclockwise at the shaft. Same axis. You trace it with one finger without touching it, the way you'd trace a word you already know.\n\n\"Same axis, same orientation,\" you say. \"East furlong runs the same way. The torque isn't from water pressure or sediment — it's from the mechanism. Something turning, consistently, in one direction, over a long time.\" You let her have the image for a moment before you add the rest. \"The Attended End says the sleeve has three to four weeks before it runs open. Not a collapse — more like a tooth going loose. The thread of failure is already started.\"\n\nPell's hand is still near the stone. She doesn't pull it back. \"And the thing behind it?\"\n\n\"Not ending,\" you say. \"It has more work to do.\"\n\nShe absorbs this with the flat steadiness she uses when a measurement lands somewhere she didn't want it to. Then she straightens, wipes her palm on her thigh, and looks at the full face of the housing — valve to lintel, the mineral glaze on the outlet stone, the iron sleeve dark with age. \"So this isn't a symptom that got away from it,\" she says. \"This is it doing what it was made to do.\" A beat. \"We need to know what the whole design looks like from here. If Order-Sense can read a room's intent from a cradle-recess, I want to know what it reads from a valve that's been running on purpose for forty years.\"",
+      "sceneSummary": "Silas confirms the CCW torque axis at Fen's intake — same as east furlong — and tells Pell what The Attended End found: three to four weeks on the sleeve, the structure not ending.",
       "choices": [
         {
-          "label": "Use Order-Sense on the intake housing — read the whole design it is part of, not just the failing piece.",
+          "label": "Run Order-Sense on the intake housing — read the whole design this valve is part of",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
+            "concrete_abstract": 0.4,
+            "mechanical_spiritual": 0.3
           },
           "difficulty": 0,
           "intentTags": [
@@ -1860,17 +1865,29 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Confirm Pell's question — same counterclockwise torque axis, same stain pattern as the east furlong. Walk her through what The Attended End found.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Walk the hillside above the intake — look for the same settling-seam or rubble trace that marked the buried structure at the wash-room site",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "concrete_abstract": -0.2
+            "concrete_abstract": -0.3
           },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Collect the waterskin at Aldric's before continuing further north — the intake read is done; resupply now while Millbrook is still close",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "plan",
@@ -1878,60 +1895,31 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Physical inspection — get hands on the housing, check the mineral staining and the sleeve fit directly.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask Pell what she makes of the mechanism's intent — she named the breach-from-within as a valve design. Does she think it's a release, or a delivery?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.4
+            "concrete_abstract": 0.2
           },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "scout"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Mark this site the same way you marked the vault section — two stones on the hillside above, so Dara's crew can find the footprint without a guide.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
         "setting": "Fen's intake — valve housing in dark stone above the waterline, mineral-edged water audible and running. Low cloud, early spring morning. Road-end packed earth, wheel-ruts behind.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Crouching at the base of the housing, hand near the stone, reading the stain — waiting for Silas's answer about the axis."
+            "state": "Standing, looking at the full face of the housing — valve to lintel — after Silas confirmed the axis. Waiting on the next move."
           },
           {
             "name": "Huginn",
@@ -1940,8 +1928,8 @@
         ],
         "objects": [
           "Memory (spear, shaft grounded against packed earth)",
-          "Valve housing — dark stone, mineral glaze on outlet stone, iron sleeve visible at lip",
-          "Stain pattern at housing lip — same counterclockwise orientation as east furlong",
+          "Valve housing — dark stone, mineral glaze on outlet stone, iron sleeve visible",
+          "Stain pattern at housing lip — confirmed same counterclockwise orientation as east furlong",
           "Stone road — wheel-ruts behind, eastward bend south",
           "Pell's oilcloth (on her shoulder)",
           "River Purification Tabs vial (in Silas's inner pack pocket)",
@@ -1949,11 +1937,9 @@
           "Contact Names Scrap (in pocket)"
         ],
         "threads": [
-          "Pell's question — same axis? — waiting for confirmation.",
-          "The Attended End result: sleeve has 3–4 weeks; the structure behind it is not ending.",
-          "Order-Sense has not yet been run on this site — the whole design remains unread.",
+          "Order-Sense not yet run on this site — the whole design remains unread.",
           "The cured bladder waterskin at Aldric's — not yet collected.",
-          "The purification tabs from Mara — not yet discussed with Pell."
+          "Pell's question about mechanism intent: release or delivery?"
         ]
       },
       "npcUpdates": [
@@ -1961,33 +1947,14 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Crouching at the valve housing base, reading the stain independently — asked about the axis before Silas finished speaking.",
+          "note": "Received confirmation of the CCW axis and The Attended End findings — named the implication plainly: the mechanism is doing what it was made to do. Asked for Order-Sense to be run on the valve.",
           "learned": [
-            "The Attended End gives Silas a plain read on what is ending and its timeline — three to four weeks on the sleeve, the buried structure not ending."
+            "Same CCW torque axis at Fen's intake as east furlong — confirmed by Silas",
+            "Intake sleeve has three to four weeks before running open",
+            "The structure behind the valve is not ending — it has more work to do"
           ],
-          "skillsObserved": [
-            "reading a stain pattern independently against a known failure signature"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Walking north with Silas — at Fen's intake, crouching at the valve housing base, working the problem."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Attended End confirms Fen's intake iron sleeve has three to four weeks before it runs open — a loosening, not a collapse. The buried structure pressing through this valve is not ending.",
-          "subjectId": "the-water-crisis"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The Attended End read on World-day 16: intake sleeve has 3–4 weeks before running open. The structure behind it is not ending — it has more work to do.",
-          "subPlace": {
-            "name": "Fen's Intake",
-            "note": "Valve housing in dark stone, mineral-edged water. Sleeve failing in 3–4 weeks by The Attended End. Same CCW stain axis as east furlong.",
-            "visited": true
-          }
+          "statusNote": "Walking north with Silas — at Fen's intake, standing at the valve housing face, working the problem.",
+          "relationshipDelta": 0
         }
       ],
       "codexUpdates": [
@@ -1995,20 +1962,19 @@
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Fen's intake: iron sleeve has three to four weeks before running open. The buried structure driving the valve is not ending — it has more work to do. The failure is a symptom, not the event.",
+          "fact": "Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as designed.",
           "links": [
-            "palework",
             "millbrook",
-            "dara-holt",
-            "aldric",
             "pell",
-            "precursor-signs-in-the-valley"
+            "dara-holt",
+            "order-sense",
+            "the-unnamed-gift"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief stop at the intake — The Attended End cast and first read shared with Pell."
+        "why": "a brief exchange at the valve housing — minutes, not a beat"
       }
     },
     "sceneState": {
@@ -2016,7 +1982,7 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Crouching at the base of the housing, hand near the stone, reading the stain — waiting for Silas's answer about the axis"
+          "state": "Standing, looking at the full face of the housing — valve to lintel — after Silas confirmed the axis. Waiting on the nex"
         },
         {
           "name": "Huginn",
@@ -2025,8 +1991,8 @@
       ],
       "objects": [
         "Memory (spear, shaft grounded against packed earth)",
-        "Valve housing — dark stone, mineral glaze on outlet stone, iron sleeve visible a",
-        "Stain pattern at housing lip — same counterclockwise orientation as east furlong",
+        "Valve housing — dark stone, mineral glaze on outlet stone, iron sleeve visible",
+        "Stain pattern at housing lip — confirmed same counterclockwise orientation as ea",
         "Stone road — wheel-ruts behind, eastward bend south",
         "Pell's oilcloth (on her shoulder)",
         "River Purification Tabs vial (in Silas's inner pack pocket)",
@@ -2034,11 +2000,9 @@
         "Contact Names Scrap (in pocket)"
       ],
       "threads": [
-        "Pell's question — same axis? — waiting for confirmation.",
-        "The Attended End result: sleeve has 3–4 weeks; the structure behind it is not ending.",
-        "Order-Sense has not yet been run on this site — the whole design remains unread.",
+        "Order-Sense not yet run on this site — the whole design remains unread.",
         "The cured bladder waterskin at Aldric's — not yet collected.",
-        "The purification tabs from Mara — not yet discussed with Pell."
+        "Pell's question about mechanism intent: release or delivery?"
       ]
     }
   },
@@ -2187,7 +2151,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi",
         "[d2] Accepted the wrestling-next-time terms without deflection — named the reach problem plainly and said yes. Keeping pace north.",
         "[d2] Received the naked-wrestling-in-oil line and a shadowstep retreat — managed her face with visible effort and pointed Silas at the road ahead. Not done.",
         "[d2] Came even with Silas on the road north — acknowledged the wrestling terms plainly and put it on record that she knows what he is doing. Did not look at him.",
@@ -2196,17 +2159,18 @@
         "[d2] Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech.",
         "[d2] Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question y",
         "[d2] Received the full Huginn answer — stillness means nothing is concluding for her. Shoulders settled; the held tension released without ceremony. Named the bird's attention as intere",
-        "[d2] Crouching at the valve housing base, reading the stain independently — asked about the axis before Silas finished speaking."
+        "[d2] Crouching at the valve housing base, reading the stain independently — asked about the axis before Silas finished speaking.",
+        "[d2] Received confirmation of the CCW axis and The Attended End findings — named the implication plainly: the mechanism is doing what it was made to do. Asked for Order-Sense to be run "
       ],
       "knownFacts": [
-        "Moving weight and standing weight are two distinct reads — she'd read Silas's standing tell and hadn't fully accounted for the mobile feint.",
-        "Believes Sorel is holding the engineer's name back, framing it as reluctant rather than witness to avoid responsibility for what gets done with it.",
-        "Silas spoke plainly to Huginn about her futures — she was close enough to observe, if not hear.",
         "Silas was asking Huginn about her, not explaining to it",
         "The bird looked at her with decided attention after the exchange",
         "Huginn's stillness is a positive answer — nothing ending, not foreclosed",
         "The bird watches her because she is interesting to it, not because something is coming",
-        "The Attended End gives Silas a plain read on what is ending and its timeline — three to four weeks on the sleeve, the buried structure not ending."
+        "The Attended End gives Silas a plain read on what is ending and its timeline — three to four weeks on the sleeve, the buried structure not ending.",
+        "Same CCW torque axis at Fen's intake as east furlong — confirmed by Silas",
+        "Intake sleeve has three to four weeks before running open",
+        "The structure behind the valve is not ending — it has more work to do"
       ],
       "skillsObserved": [
         "field-kit discipline under weather change — oilcloth deploye",
@@ -2217,7 +2181,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "Walking north with Silas — at Fen's intake, crouching at the valve housing base, working the problem.",
+      "statusNote": "Walking north with Silas — at Fen's intake, standing at the valve housing face, working the problem.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2916,7 +2880,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] The interval between the four managed verification episodes is uneven — someone was returning on a schedule that cannot be read from the marks alone. The return stopped: whether at completion or becau",
           "[d2] Pell's reading of the deposit grain stain bands: three distinct accumulation layers above the old bleed-line — the managed return visits to the deeper chamber were seasonal and condition-triggered, no",
           "[d2] The managed return visits to the deeper chamber were condition-triggered seasonal checks — melt or first freeze. The last visit is consistent with one to two winters ago. The contamination onset is th",
           "[d2] Pell's two-winter model: first unmanaged melt after device removal begins the structural slip; a second winter carries the slip to the channel. Contamination onset delay is explained by this sequence ",
@@ -2939,17 +2902,18 @@
           "[d2] Pell's read: the Radiant Plateau Edge District is the most likely source of a pre-Transition structural expert — their optical arrays are built on pre-Transition infrastructure, guides and anchors bot",
           "[d2] The sealed original east-channel bed — pre-dating Aldric's father — shows the same CCW scour on interior stone housing lips as the active valve failures. The engineer's work or method reaches back int",
           "[d2] The four structural sites (wash-room, east furlong valve, Fen's intake, sealed village channel bed) form a single operating system. Someone with prior archive knowledge deliberately restarted it, then",
-          "[d2] Fen's intake: iron sleeve has three to four weeks before running open. The buried structure driving the valve is not ending — it has more work to do. The failure is a symptom, not the event."
+          "[d2] Fen's intake: iron sleeve has three to four weeks before running open. The buried structure driving the valve is not ending — it has more work to do. The failure is a symptom, not the event.",
+          "[d2] Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as desig"
         ],
         "links": [
-          "millbrook",
           "aldric-provisioning-deal",
           "huginn",
           "aldric",
           "pell",
           "precursor-signs-in-the-valley",
           "sorel",
-          "dara-holt"
+          "dara-holt",
+          "order-sense"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3265,15 +3229,15 @@
     }
   },
   "tendencies": {
-    "strategic": 59.66486542074221,
-    "cerebral": 40.01869756841237,
-    "social": 59.69650904143337,
-    "generous": 15.940150907468187,
-    "cautious": 49.02926270020392,
-    "physical": 1.6778510191747351,
-    "risky": 3.3632518128841835,
-    "ruthless": 3.726750543015886,
-    "carousing": 1.2516687496973484
+    "strategic": 60.366541093638496,
+    "cerebral": 39.81860408057031,
+    "social": 59.39802649622621,
+    "generous": 15.860450152930845,
+    "cautious": 49.784116386702905,
+    "physical": 1.6694617640788614,
+    "risky": 3.3464355538197625,
+    "ruthless": 3.7081167903008065,
+    "carousing": 1.2454104059488618
   },
   "aptitudes": [
     "strategist",
@@ -3281,7 +3245,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 287,
+  "actionCount": 288,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3407,8 +3371,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784177578762,
-  "rev": 398,
+  "updatedAt": 1784177671936,
+  "rev": 399,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3970,7 +3934,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 90
+    "valley": 91
   },
   "foreclosed": [
     "rootkin",

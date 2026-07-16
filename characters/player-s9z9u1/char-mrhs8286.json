@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 9,
-  "xp": 842,
+  "xp": 850,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -31,7 +31,7 @@
     },
     {
       "abilityId": "shadowstep",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "the-attended-end",
@@ -81,7 +81,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 118,
+  "energy": 110,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -415,60 +415,67 @@
         "player": "Look through the door into the room beyond. If it's empty, find a shadow to shadow step into without opening the door and remain perfectly still in the shadow to observer from inside.",
         "summary": "Silas shadowsteps into the rear storage room and holds position — one person upstairs, packing, almost done.",
         "narration": "The rear door stands barely a finger's width from its frame — the latch tongue not quite seated, a thin dark stripe of interior warmth at the edge. You press your eye to the gap.\n\nA storage room. Low ceiling, shelves mostly bare, one oil lamp burning on a hook to the left — the light catching dust motes that have not settled yet, meaning someone moved through here recently. Beyond the storage room, an open inner doorway leads to a staircase, and you can hear it: quiet, deliberate footsteps on the upper floor, back and forth, the weight-pattern of packing. One person. The bundle by the door outside was placed there already, which means they are almost done. At the far right edge of the storage room, a wedge of shadow falls from the shelf-unit — deep enough, real enough.\n\nYou ease back from the gap, breathe once, and find the shadow at your feet — the alley's cold dark against the building's base — and the one inside the room, connected by the dark line of the door's crack. Shadowstep is a step between two places that are already the same place in the dark. You take it. The world folds without sound.\n\nYou are inside. The oil lamp is four feet to your left, throwing its circle away from you. The shelf-shadow holds you completely. The footsteps continue upstairs — unhurried, no break in rhythm, no sign they felt anything. You press your back to the shelf and listen. The room smells of old paper, lamp-oil, and something sharper underneath — a chemical residue you recognize as a water-treatment solvent, the kind used in filtration array work. The inner doorway frames the bottom of the stairs. Through it, the cadence of someone moving between surfaces: a desk, a shelf, a case being latched. One person packing the last of what they intend to take."
+      },
+      {
+        "player": "Shadowstep silently to the top of the stairs",
+        "summary": "Silas shadowsteps silently to the landing — the figure at the desk, case latched, last paper folded, does not know he is there.",
+        "narration": "The shadow at the base of the staircase and the shadow at the top are one thing — you feel that before you move, the way you feel the cold before you touch iron. The lamp behind you throws its light toward the front of the room and away from the stairs entirely, leaving a column of genuine dark from floor-sill to landing-edge. Both ends shadowed. Clean.\n\nYou step.\n\nThere is no sound. Not the soft landing of careful feet, not the held breath of someone trying to be quiet — nothing. The Stepping Dark earns its name in moments like this one: you are simply at the top of the stairs, the way a thought arrives, and the stair itself never knew you.\n\nThe upper floor opens before you. A single room, low-beamed, lit by one narrow shutter cracked two fingers wide — the morning light coming through at an angle, hitting the opposite wall as a pale bar. A figure stands at a desk with their back to the stairhead: compact, dressed in the muted gray-brown of someone who does not want to be a bright thing in a bright place. A traveling case sits latched and buckled on the floor beside their boots. They are folding the last paper — something flat, official-looking, tucked into a coat's inner pocket — and their hands are unhurried in the way hands are when a decision has already been made and there is nothing left to feel about it.\n\nThey have not heard you. The room smells of the same water-treatment solvent that the storage room below held, sharper up here, and something else beneath it — old ink, dried carefully, the smell of records that lived in the same place for years and are now about to leave it."
       }
     ],
     "lastTurn": {
-      "narration": "The rear door stands barely a finger's width from its frame — the latch tongue not quite seated, a thin dark stripe of interior warmth at the edge. You press your eye to the gap.\n\nA storage room. Low ceiling, shelves mostly bare, one oil lamp burning on a hook to the left — the light catching dust motes that have not settled yet, meaning someone moved through here recently. Beyond the storage room, an open inner doorway leads to a staircase, and you can hear it: quiet, deliberate footsteps on the upper floor, back and forth, the weight-pattern of packing. One person. The bundle by the door outside was placed there already, which means they are almost done. At the far right edge of the storage room, a wedge of shadow falls from the shelf-unit — deep enough, real enough.\n\nYou ease back from the gap, breathe once, and find the shadow at your feet — the alley's cold dark against the building's base — and the one inside the room, connected by the dark line of the door's crack. Shadowstep is a step between two places that are already the same place in the dark. You take it. The world folds without sound.\n\nYou are inside. The oil lamp is four feet to your left, throwing its circle away from you. The shelf-shadow holds you completely. The footsteps continue upstairs — unhurried, no break in rhythm, no sign they felt anything. You press your back to the shelf and listen. The room smells of old paper, lamp-oil, and something sharper underneath — a chemical residue you recognize as a water-treatment solvent, the kind used in filtration array work. The inner doorway frames the bottom of the stairs. Through it, the cadence of someone moving between surfaces: a desk, a shelf, a case being latched. One person packing the last of what they intend to take.",
-      "sceneSummary": "Silas shadowsteps into the rear storage room and holds position — one person upstairs, packing, almost done.",
+      "narration": "The shadow at the base of the staircase and the shadow at the top are one thing — you feel that before you move, the way you feel the cold before you touch iron. The lamp behind you throws its light toward the front of the room and away from the stairs entirely, leaving a column of genuine dark from floor-sill to landing-edge. Both ends shadowed. Clean.\n\nYou step.\n\nThere is no sound. Not the soft landing of careful feet, not the held breath of someone trying to be quiet — nothing. The Stepping Dark earns its name in moments like this one: you are simply at the top of the stairs, the way a thought arrives, and the stair itself never knew you.\n\nThe upper floor opens before you. A single room, low-beamed, lit by one narrow shutter cracked two fingers wide — the morning light coming through at an angle, hitting the opposite wall as a pale bar. A figure stands at a desk with their back to the stairhead: compact, dressed in the muted gray-brown of someone who does not want to be a bright thing in a bright place. A traveling case sits latched and buckled on the floor beside their boots. They are folding the last paper — something flat, official-looking, tucked into a coat's inner pocket — and their hands are unhurried in the way hands are when a decision has already been made and there is nothing left to feel about it.\n\nThey have not heard you. The room smells of the same water-treatment solvent that the storage room below held, sharper up here, and something else beneath it — old ink, dried carefully, the smell of records that lived in the same place for years and are now about to leave it.\n\n*▲ Practiced — **Shadowstep** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Silas shadowsteps silently to the landing — the figure at the desk, case latched, last paper folded, does not know he is there.",
       "choices": [
         {
-          "label": "Stay perfectly still in the shadow and read the ending with Deathsense — what is actually concluding here, and is it just a departure?",
+          "label": "Hold position, study the figure — let Order-Sense read what design they're part of before announcing yourself",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Use Order-Sense on the room — read the design this space is part of, and whether what's being removed is load-bearing to it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Wait and listen — let the person come down the stairs on their own, then step out of shadow to speak before they reach the rear door",
+          "label": "Speak quietly from the shadow — name Fendt, name the ledger, and watch what they do with their hands",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "careful",
-            "persuade"
+            "persuade",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Slip up the stairs while they're still occupied — see what they're packing before they see you",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
+          "label": "Step into the light and block the stairhead — say nothing yet, let your presence be the opening",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "intentTags": [
-            "scout",
-            "sneak"
+            "intimidate",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Use The Attended End quietly — read whether this person is ending something or being ended, and how long the thread has",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
           "trivial": false
         }
       ],
@@ -477,11 +484,11 @@
         "energy": -4
       },
       "scene": {
-        "setting": "Interior rear storage room of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands in shadow beside a mostly-bare shelf unit, oil lamp burning on a hook four feet away, throwing its light away from him. The rear door behind him is still not latched. The inner doorway ahead frames the base of a staircase.",
+        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing head in shadow. A single shuttered window cracks morning light across the opposite wall. The figure at the desk has their back to him.",
         "npcsPresent": [
           {
-            "name": "Unknown person (upstairs)",
-            "state": "Moving between surfaces on the upper floor — a desk, a shelf, a case being latched. Packing the last of what they intend to take. Footsteps unhurried, no alarm."
+            "name": "Unknown figure",
+            "state": "Standing at the desk, folding a flat official-looking paper into an inner coat pocket — traveling case already latched at their feet. Back to the stairhead. Unhurried."
           },
           {
             "name": "Pell",
@@ -489,46 +496,40 @@
           }
         ],
         "objects": [
-          "Oil lamp on a hook — burning, throwing light toward the front of the room, away from the shelf-shadow",
-          "Mostly-bare shelves — disturbed dust, recent movement",
-          "Cloth-wrapped bundle (outside, beside the rear door) — records or working-kit sized, tied with a single cord",
-          "Inner doorway — open, leading to a staircase",
-          "Rear service door — iron-banded, still not latched, behind Silas"
+          "Latched traveling case — on the floor beside the figure's boots",
+          "Narrow shutter — cracked two fingers wide, morning light crossing the room as a pale bar",
+          "Desk — cleared except for the last folded paper now pocketed",
+          "Oil lamp (below, storage room) — still burning",
+          "Cloth-wrapped bundle — outside, beside the rear service door"
         ],
         "threads": [
-          "One person upstairs, packing the last of their things — almost done",
-          "Chemical smell: water-treatment solvent, filtration array provenance",
-          "The bundle outside is already placed — departure is imminent",
-          "Pell holds the front; Silas holds the rear and is now inside",
-          "The falsified filtration ledger was removed from the array-office; Fendt's name is on the accountability board"
+          "Figure at the desk does not know Silas is at the landing — the window of advantage is open but narrow",
+          "Traveling case already latched — departure is one decision away",
+          "Paper folded into the coat's inner pocket — official, flat, the kind of thing worth hiding",
+          "Water-treatment solvent smell, sharper on the upper floor — filtration array connection confirmed",
+          "Pell holds the front; the rear door is still unlatched; the figure's exit routes are both covered"
         ]
       },
-      "codexUpdates": [
+      "npcUpdates": [
         {
-          "topic": "huginn-s-building",
-          "label": "Huginn's Building — Edge District",
-          "kind": "mystery",
-          "entityId": "radiant-plateau-edge",
-          "fact": "Interior rear storage room: mostly-bare shelves (recently disturbed), one oil lamp burning, open staircase to upper floor. The room smells of water-treatment solvent — filtration array provenance. One person upstairs packing; almost done. The cloth-wrapped bundle was placed outside before they finished, meaning departure is planned and imminent.",
-          "links": [
-            "huginn",
-            "find-the-engineer",
-            "fendt-and-the-falsified-ledger",
-            "radiant-plateau-edge"
-          ]
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Holding the front of the building while Silas moved inside and up — she does not know he is at the landing yet.",
+          "statusNote": "Holding position at the building's recessed front door on the main light-guide street, Edge District — watching the entrance, unaware Silas is now at the upper landing."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A few quiet minutes circling the building and shadowstepping inside."
+        "hoursPassed": 0.1,
+        "why": "A shadowstep — seconds only"
       }
     },
     "sceneState": {
-      "setting": "Interior rear storage room of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands in shadow beside a mostly-bare shelf unit, oil lamp burning on a hook four feet away, throwing its light away from him. The rear door behind him is still not latched. The inner doorway ahead frames the base of a staircase.",
+      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing head in shadow. A single shuttered window cracks morning light across the opposite wall. The figure at the desk has their back to him.",
       "npcsPresent": [
         {
-          "name": "Unknown person (upstairs)",
-          "state": "Moving between surfaces on the upper floor — a desk, a shelf, a case being latched. Packing the last of what they intend"
+          "name": "Unknown figure",
+          "state": "Standing at the desk, folding a flat official-looking paper into an inner coat pocket — traveling case already latched a"
         },
         {
           "name": "Pell",
@@ -536,18 +537,18 @@
         }
       ],
       "objects": [
-        "Oil lamp on a hook — burning, throwing light toward the front of the room, away ",
-        "Mostly-bare shelves — disturbed dust, recent movement",
-        "Cloth-wrapped bundle (outside, beside the rear door) — records or working-kit si",
-        "Inner doorway — open, leading to a staircase",
-        "Rear service door — iron-banded, still not latched, behind Silas"
+        "Latched traveling case — on the floor beside the figure's boots",
+        "Narrow shutter — cracked two fingers wide, morning light crossing the room as a ",
+        "Desk — cleared except for the last folded paper now pocketed",
+        "Oil lamp (below, storage room) — still burning",
+        "Cloth-wrapped bundle — outside, beside the rear service door"
       ],
       "threads": [
-        "One person upstairs, packing the last of their things — almost done",
-        "Chemical smell: water-treatment solvent, filtration array provenance",
-        "The bundle outside is already placed — departure is imminent",
-        "Pell holds the front; Silas holds the rear and is now inside",
-        "The falsified filtration ledger was removed from the array-office; Fendt's name is on the accountability board"
+        "Figure at the desk does not know Silas is at the landing — the window of advantage is open but narrow",
+        "Traveling case already latched — departure is one decision away",
+        "Paper folded into the coat's inner pocket — official, flat, the kind of thing worth hiding",
+        "Water-treatment solvent smell, sharper on the upper floor — filtration array connection confirmed",
+        "Pell holds the front; the rear door is still unlatched; the figure's exit routes are both covered"
       ]
     }
   },
@@ -711,7 +712,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Took the wine by feel, drank half, passed it back — no words exchanged. Fully settled against Silas in the quiet after.",
         "[d2] Slept through the mountain night fully against Silas — the bedroll pulled tight, no armor reassembled overnight. Waking into the first morning on the far side of the pass.",
         "[d3] Asleep at dawn at the overhang camp — Silas eased out without waking her.",
         "[d3] Woke to a forehead kiss at dawn — found Silas's wrist before opening her eyes, looked at him in the morning light with nothing taken back from the night.",
@@ -720,7 +720,8 @@
         "[d3] Advised starting with Huginn's building before pursuing Leth — named the bird's instinct as a concrete lead and Leth as a cold knock without a face",
         "[d3] Named the tactical logic plainly: Huginn's building is a concrete lead; Leth without a face or address is a cold knock. Waiting for Silas to move.",
         "[d3] Read Huginn's signal through Silas's translation — filed 'hours' without editorializing. Said 'then we don't wait.' Waiting on Silas to move.",
-        "[d3] Took the front-door position without comment — holding it, watching the entrance."
+        "[d3] Took the front-door position without comment — holding it, watching the entrance.",
+        "[d3] Holding the front of the building while Silas moved inside and up — she does not know he is at the landing yet."
       ],
       "knownFacts": [
         "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close.",
@@ -741,7 +742,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "Holding position at the building's recessed front door on the main light-guide street, Edge District.",
+      "statusNote": "Holding position at the building's recessed front door on the main light-guide street, Edge District — watching the entrance, unaware Silas is now at the upper ",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1922,17 +1923,17 @@
     }
   },
   "tendencies": {
-    "strategic": 46.412013091179595,
-    "cerebral": 27.52904692153708,
-    "social": 38.32171684365035,
-    "generous": 9.38110693389296,
-    "cautious": 35.49768924420112,
-    "physical": 2.318295052823144,
-    "risky": 6.527852540306712,
-    "ruthless": 2.870466988211755,
-    "carousing": 2.0156484281654663,
-    "amorous": 5.527197237154572,
-    "patient": 1.7203396942872617
+    "strategic": 46.2517127639001,
+    "cerebral": 26.840820748498654,
+    "social": 37.36367392255909,
+    "generous": 9.146579260545636,
+    "cautious": 34.61024701309609,
+    "physical": 2.2603376765025653,
+    "risky": 6.364656226799044,
+    "ruthless": 2.7987053135064612,
+    "carousing": 1.9652572174613296,
+    "amorous": 5.389017306225707,
+    "patient": 1.6773312019300801
   },
   "aptitudes": [
     "strategist",
@@ -1944,7 +1945,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 332,
+  "actionCount": 333,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2086,8 +2087,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784235886609,
-  "rev": 473,
+  "updatedAt": 1784236256277,
+  "rev": 474,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2547,7 +2548,7 @@
       "order_sense": 38,
       "palework": 20,
       "deathsense": 14,
-      "shadowstep": 7,
+      "shadowstep": 8,
       "the-attended-end": 9,
       "wildcraft": 2
     },
@@ -2575,7 +2576,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 9
+    "marrow": 9.25
   },
   "customAbilities": {
     "the-attended-end": {
@@ -2650,7 +2651,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 146
+    "valley": 147
   },
   "foreclosed": [
     "rootkin",

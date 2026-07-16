@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 9,
-  "xp": 863,
+  "xp": 865,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -70,7 +70,7 @@
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.17191810626191062,
-    "concrete_abstract": -0.0749337688547832,
+    "concrete_abstract": -0.08618708041204404,
     "death_life": -0.17204875971263037,
     "emotional_logical": 0.048249999999999994,
     "falsehood_truth": 0.04000000000000001,
@@ -81,7 +81,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 104,
+  "energy": 100,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -430,171 +430,125 @@
         "player": "Say simply \"Fendt\", not loudly, not softly.  He will likely startle, but don't make any overtly threatening moves, yet.",
         "summary": "Silas names Fendt quietly at the landing-head; the man startles, reads him, and stills — assessment, not flight.",
         "narration": "You say the name the way you'd set a tool down on a bench — no weight added, no weight withheld. \"Fendt.\"\n\nHe startles. The traveling case scrapes against his boot as his hand snaps to it; his whole body turns in one compressed motion, the instinct of a man who has been waiting for this, who has perhaps been practicing not waiting for it. He is mid-forties, hollow at the cheeks, wearing the kind of coat that was pressed last week and has been slept in since. His eyes find you at the landing-head and hold there — not bolting, not reaching for anything, just reading you with the particular attention of someone who has been calculating odds for a long time and wants to know which column you fall in.\n\nHuginn, perched at your shoulder, says nothing. Its eye is on the man at the case. The silence it keeps is a comment.\n\nFendt's breathing slows deliberately — you can see him make himself do it. His hand is still on the case handle but his weight has shifted back from flight into something else: assessment. He takes in the landing, the shadow you came from, the spear across your back. He does not look at the door behind him. That is information too. \"You came through the back,\" he says, and it is not a question, and there is something in his voice that is almost — not relief, but its structural cousin. Someone found him before the board did."
+      },
+      {
+        "player": "Use Order-Sense on Fendt himself — read the design he's part of, what role he played in the filtration system, and what piece of it only he still holds.",
+        "summary": "Order-Sense fails in the thin substrate — Silas is left with Fendt's silence and the unread paper in his coat.",
+        "narration": "The lattice here is thin — you knew that before you tried. You let Order-Sense settle into Fendt the way you'd press a fingertip to a surface to test for heat, and it simply... slides off. Not blocked, not refused. Insufficient. The substrate can't sustain the reach. What you get is the surface: a man with a case, a coat, a paper in the inner pocket, and the particular stillness of someone who has decided to stop moving until he knows what you are.\n\nThe craft gives you nothing about the design he belongs to. It can't thread the full picture together in this district's thin light.\n\nWhich means you're left with what you came in with: his reaction to his own name spoken by a stranger who emerged from a shadow. He has not run. He has not threatened. He has *assessed* — and he is still assessing, which means he has not yet decided you are a problem. That is something. Not much, but something.\n\nHuginn shifts on your shoulder and says nothing. The room holds the morning light coming through the shutter's cracked two fingers, and Fendt's hand rests on the case, and the silence between you has the particular weight of a man waiting to learn whether the next sentence will cost him."
       }
     ],
     "lastTurn": {
-      "narration": "You say the name the way you'd set a tool down on a bench — no weight added, no weight withheld. \"Fendt.\"\n\nHe startles. The traveling case scrapes against his boot as his hand snaps to it; his whole body turns in one compressed motion, the instinct of a man who has been waiting for this, who has perhaps been practicing not waiting for it. He is mid-forties, hollow at the cheeks, wearing the kind of coat that was pressed last week and has been slept in since. His eyes find you at the landing-head and hold there — not bolting, not reaching for anything, just reading you with the particular attention of someone who has been calculating odds for a long time and wants to know which column you fall in.\n\nHuginn, perched at your shoulder, says nothing. Its eye is on the man at the case. The silence it keeps is a comment.\n\nFendt's breathing slows deliberately — you can see him make himself do it. His hand is still on the case handle but his weight has shifted back from flight into something else: assessment. He takes in the landing, the shadow you came from, the spear across your back. He does not look at the door behind him. That is information too. \"You came through the back,\" he says, and it is not a question, and there is something in his voice that is almost — not relief, but its structural cousin. Someone found him before the board did.",
-      "sceneSummary": "Silas names Fendt quietly at the landing-head; the man startles, reads him, and stills — assessment, not flight.",
+      "narration": "The lattice here is thin — you knew that before you tried. You let Order-Sense settle into Fendt the way you'd press a fingertip to a surface to test for heat, and it simply... slides off. Not blocked, not refused. Insufficient. The substrate can't sustain the reach. What you get is the surface: a man with a case, a coat, a paper in the inner pocket, and the particular stillness of someone who has decided to stop moving until he knows what you are.\n\nThe craft gives you nothing about the design he belongs to. It can't thread the full picture together in this district's thin light.\n\nWhich means you're left with what you came in with: his reaction to his own name spoken by a stranger who emerged from a shadow. He has not run. He has not threatened. He has *assessed* — and he is still assessing, which means he has not yet decided you are a problem. That is something. Not much, but something.\n\nHuginn shifts on your shoulder and says nothing. The room holds the morning light coming through the shutter's cracked two fingers, and Fendt's hand rests on the case, and the silence between you has the particular weight of a man waiting to learn whether the next sentence will cost him.",
+      "sceneSummary": "Order-Sense fails in the thin substrate — Silas is left with Fendt's silence and the unread paper in his coat.",
       "choices": [
         {
-          "label": "Tell him plainly: you're not from the council, not from Grael — you came because the filtration record that's missing matters and he's the one who understands it.",
+          "label": "Ask him plainly what the falsified readings covered — what the real numbers would have shown.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.8
-          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Tell him you're not from the council — and that you don't care about the board, you care about the river.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "persuade",
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask him what's in the coat — the paper he folded before you spoke. Not the case. The paper.",
+          "label": "Ask about the paper in his coat — what it is and why he took it rather than filed it.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.7
-          },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "negotiate"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use Order-Sense on Fendt himself — read the design he's part of, what role he played in the filtration system, and what piece of it only he still holds.",
+          "label": "Step aside from the landing — let him see the stairs are clear, give him the out, and read what he does with it.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Tell him you can get him out of the Edge District before the board acts — but only if he tells you what the falsified readings were covering up.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.4,
-            "violence_peace": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate",
-            "threaten"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "energy": -2
       },
       "scene": {
-        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — startled but not fleeing, actively reading him.",
+        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — Order-Sense failed; Fendt is reading Silas, unread in return.",
         "npcsPresent": [
           {
             "name": "Fendt",
-            "state": "Standing beside the cleared desk, one hand on the latched traveling case, weight shifted back from flight into assessment — watching Silas without reaching for anything."
+            "state": "Standing beside the cleared desk, hand on the latched traveling case, weight in assessment — has not decided whether Silas is a threat"
           },
           {
             "name": "Pell",
-            "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance, unaware of what is happening upstairs."
+            "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance, unaware contact has been made upstairs"
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on Silas's shoulder, shifted once, silent — watching Fendt"
           }
         ],
         "objects": [
-          "Latched traveling case — at Fendt's boots, his hand still on the handle",
-          "Narrow shutter — cracked two fingers wide, morning light crossing the room in one pale bar",
+          "Latched traveling case — at Fendt's boots, hand still on the handle",
+          "Narrow shutter — cracked two fingers wide, morning light crossing the room in one bar",
           "Desk — cleared entirely, last paper gone into the coat",
           "Oil lamp (below, storage room) — still burning",
           "Cloth-wrapped bundle — outside, beside the rear service door",
           "Last paper — folded into Fendt's inner coat pocket"
         ],
         "threads": [
-          "Fendt is reading Silas — he knows Silas came through the back and is filing what that means",
-          "Fendt has not looked at the rear door — he is not planning to run, or he knows it's covered",
+          "Fendt is reading Silas — assessment still open, has not committed to a response",
           "The paper in the coat is the last record of something — not yet identified",
-          "Pell holds the front; she does not know contact has been made",
-          "Fendt said 'before the board did' — he is expecting the council's action, and Silas arrived ahead of it"
+          "Order-Sense failed — what Fendt holds and what the design looked like is unread",
+          "Pell holds the front; she does not know contact has been made"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "fendt",
           "name": "Fendt",
-          "role": "Filtration engineer, Edge District — marked on the accountability board",
-          "description": "Mid-forties, hollow-cheeked, coat pressed last week and slept in since — a man who has been calculating odds and waiting to see which column his visitor falls in.",
-          "note": "Named quietly at the landing-head by Silas; startled but did not flee — shifted into assessment. Said 'you came through the back' as a statement, not a question. Noted Silas arrived before the board did.",
-          "learned": [
-            "Recognized that Silas came through the rear — reads the approach as significant",
-            "Is waiting for the council to act; Silas arrived ahead of that action",
-            "Has a last paper in his inner coat pocket — taken rather than filed"
-          ],
-          "skillsObserved": [
-            "forced calm under surprise — made himself slow his breathing deliberately"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the desk in the upper floor of the Edge District administrative building — not fleeing, actively reading Silas; departure was scheduled but is now paused."
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-edge-district-ledger",
-          "note": "Fendt located and named — he is present, unguarded, and aware the board is moving. First contact made. The paper in his coat and what the falsified readings covered are the immediate questions."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "fendt",
-          "label": "Fendt — Filtration Engineer",
-          "kind": "person",
-          "entityId": "fendt",
-          "fact": "Mid-forties filtration engineer — hollow-cheeked, coat slept-in, hand on a latched traveling case. Was expecting someone to come, just not before the council board acted. Came through the back; he noticed. Said 'before the board did' — he is ahead of the institutional action, not running from it.",
-          "links": [
-            "the-edge-district-ledger",
-            "fendt-and-the-falsified-ledger",
-            "radiant-plateau-edge"
-          ]
+          "note": "Order-Sense attempted on him — failed in the thin substrate. Fendt remains in assessment, unread. Has not moved.",
+          "statusNote": "At the desk in the upper floor of the Edge District administrative building — in assessment, neither fleeing nor committing. Waiting on Silas's next move.",
+          "status": "active"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.1,
-        "why": "A single word and its immediate aftermath — seconds only"
+        "why": "A brief beat of held silence — no meaningful time passed"
       }
     },
     "sceneState": {
-      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — startled but not fleeing, actively reading him.",
+      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — Order-Sense failed; Fendt is reading Silas, unread in return.",
       "npcsPresent": [
         {
           "name": "Fendt",
-          "state": "Standing beside the cleared desk, one hand on the latched traveling case, weight shifted back from flight into assessmen"
+          "state": "Standing beside the cleared desk, hand on the latched traveling case, weight in assessment — has not decided whether Sil"
         },
         {
           "name": "Pell",
           "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance, una"
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on Silas's shoulder, shifted once, silent — watching Fendt"
         }
       ],
       "objects": [
-        "Latched traveling case — at Fendt's boots, his hand still on the handle",
+        "Latched traveling case — at Fendt's boots, hand still on the handle",
         "Narrow shutter — cracked two fingers wide, morning light crossing the room in on",
         "Desk — cleared entirely, last paper gone into the coat",
         "Oil lamp (below, storage room) — still burning",
@@ -602,11 +556,10 @@
         "Last paper — folded into Fendt's inner coat pocket"
       ],
       "threads": [
-        "Fendt is reading Silas — he knows Silas came through the back and is filing what that means",
-        "Fendt has not looked at the rear door — he is not planning to run, or he knows it's covered",
+        "Fendt is reading Silas — assessment still open, has not committed to a response",
         "The paper in the coat is the last record of something — not yet identified",
-        "Pell holds the front; she does not know contact has been made",
-        "Fendt said 'before the board did' — he is expecting the council's action, and Silas arrived ahead of it"
+        "Order-Sense failed — what Fendt holds and what the design looked like is unread",
+        "Pell holds the front; she does not know contact has been made"
       ]
     }
   },
@@ -1250,7 +1203,8 @@
       },
       "relationship": 0,
       "history": [
-        "[d3] Named quietly at the landing-head by Silas; startled but did not flee — shifted into assessment. Said 'you came through the back' as a statement, not a question. Noted Silas arrive"
+        "[d3] Named quietly at the landing-head by Silas; startled but did not flee — shifted into assessment. Said 'you came through the back' as a statement, not a question. Noted Silas arrive",
+        "[d3] Order-Sense attempted on him — failed in the thin substrate. Fendt remains in assessment, unread. Has not moved."
       ],
       "knownFacts": [
         "Recognized that Silas came through the rear — reads the approach as significant",
@@ -1261,7 +1215,7 @@
         "forced calm under surprise — made himself slow his breathing"
       ],
       "status": "active",
-      "statusNote": "At the desk in the upper floor of the Edge District administrative building — not fleeing, actively reading Silas; departure was scheduled but is now paused.",
+      "statusNote": "At the desk in the upper floor of the Edge District administrative building — in assessment, neither fleeing nor committing. Waiting on Silas's next move.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2276,17 +2230,17 @@
     }
   },
   "tendencies": {
-    "strategic": 44.968034446182536,
-    "cerebral": 28.440555224041532,
-    "social": 35.51884252263273,
-    "generous": 8.694966909556195,
-    "cautious": 32.90136606682447,
-    "physical": 2.148733503725251,
-    "risky": 6.050401325600841,
-    "ruthless": 2.6605192386520797,
-    "carousing": 1.8682226423491763,
-    "amorous": 5.122934576730813,
-    "patient": 1.5945129738347823
+    "strategic": 43.84383358502797,
+    "cerebral": 28.72954134344049,
+    "social": 34.63087145956691,
+    "generous": 8.47759273681729,
+    "cautious": 33.07883191515386,
+    "physical": 2.0950151661321197,
+    "risky": 5.89914129246082,
+    "ruthless": 2.594006257685778,
+    "carousing": 1.821517076290447,
+    "amorous": 4.994861212312543,
+    "patient": 1.5546501494889127
   },
   "aptitudes": [
     "strategist",
@@ -2298,7 +2252,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 335,
+  "actionCount": 336,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2440,8 +2394,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784237942347,
-  "rev": 477,
+  "updatedAt": 1784238500876,
+  "rev": 478,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2898,7 +2852,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 39,
+      "order_sense": 40,
       "palework": 20,
       "deathsense": 14,
       "shadowstep": 8,
@@ -3005,7 +2959,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 149
+    "valley": 150
   },
   "foreclosed": [
     "rootkin",

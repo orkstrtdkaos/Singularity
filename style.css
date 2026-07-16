@@ -658,3 +658,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .item-pin { background: none; border: none; font-size: 13px; padding: 0 4px; opacity: 0.6; }
 .item-pin.on { opacity: 1; }
 .item-pin:hover { opacity: 1; }
+
+/* SNG-122 — the "arrive" safety net when a travel beat didn't move the player */
+.arrive-banner { border: 1px solid var(--accent2); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; background: linear-gradient(to right, rgba(90,168,160,0.12), transparent); font-family: var(--font-ui); font-size: 13px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.arrive-btn { background: var(--accent2); color: var(--bg); border: none; border-radius: 6px; padding: 6px 12px; font-size: 13px; font-weight: 600; }
+.arrive-btn:hover { filter: brightness(1.1); }

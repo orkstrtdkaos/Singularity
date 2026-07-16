@@ -43,7 +43,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.82";
+const APP_VERSION = "1.8.83";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2423,6 +2423,11 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
   if (romanceGuidanceDetail) autoVerifyLeg("romance-flirt", "a flirtatious action was tagged romantic and the romance guidance loaded in play — the one live-model surface"); // ROMANCE leg auto-detect (dev-only)
   const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
+  // SNG-122: if the player's action this turn is a travel intent, force the GM to emit moveTo to the named
+  // destination (+ enumerate reachable known places so its target resolves). Fixes the CAUSE — the deferred
+  // SNG-117 no-moveTo boundary that blocked normal in-fiction travel.
+  const travelIntent = travelIntentOf(resolution?.action);
+  const travelDirective = travelIntent ? buildTravelDirective(travelIntent) : null;
   const location = hereNow();
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
@@ -2465,7 +2470,8 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     legendDetail: maybeLegendDetail(), // SNG-042: a great figure surfaces on a qualifying beat (governed, rare, rating-aware)
     livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }), // §2: proactively surface only LIVE (non-dormant) grown content
     sharedCanonDetail: sharedCanonForGM(), // Phase 3: OTHER players' promoted canon, rating-lensed for this viewer
-    worldDateLabel: worldDate().label // SNG-041: the shared absolute calendar (references-not-invents)
+    worldDateLabel: worldDate().label, // SNG-041: the shared absolute calendar (references-not-invents)
+    travelDirective // SNG-122: a travel-intent turn MUST emit moveTo (with reachable-place enumeration)
   });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
@@ -2703,6 +2709,17 @@ function applyTurn(turn, resolution, playerWords = null) {
       try { ensureLocationImage(destId); } catch { /* art never blocks a move */ }
     }
   }
+  // SNG-122: NEVER STRAND THE PLAYER. If this turn was a travel intent but the beat produced no arrival
+  // (the GM emitted no moveTo, or an unresolvable one), stash the intended destination so renderPlay offers
+  // a one-tap "arrive" (the map's own travelTo path). If the move DID land them there, clear it. Any
+  // non-travel turn also clears a stale pending arrival — the affordance is tied to the travel beat.
+  const ti = travelIntentOf(resolution?.action);
+  if (ti) {
+    const arrived = (ti.destId && character.currentLocationId === ti.destId) || (!ti.destId && !!moveRef);
+    character._pendingArrival = arrived ? null : { ref: ti.ref, name: ti.name, destId: ti.destId || null };
+  } else {
+    character._pendingArrival = null;
+  }
   // SNG-070: the game self-heals — apply any bounded GM corrections to THIS save (repair, not wish;
   // every change validated + logged). Surface what changed so the player can see + trust it.
   if (turn.stateOps?.length) {
@@ -2839,7 +2856,8 @@ async function onChoice(choice) {
     subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null,
     axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel,
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
-    novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || ""
+    novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "",
+    travelTo: choice.travelTo || null, exactWords: choice.exactWords || null // SNG-122: travel destination + literal words for travel-intent detection
   };
   // accepting ripe emergence (GM-offered choice carrying an engine-verified emergenceId)
   if (choice.emergenceId) {
@@ -3002,6 +3020,7 @@ async function onFreeform(text) {
     comboAbilities: (intent.comboAbilities || []).filter(id => character.abilities.some(a => a.abilityId === id)),
     noveltyHint: intent.noveltyHint || "",
     trivial: !!intent.trivial,
+    travelTo: intent.travelTo || null, // SNG-122: the parsed destination rides through to the action
     exactWords: text
   });
 }
@@ -3104,6 +3123,61 @@ function addKnownPlace(id) {
   if (!id) return;
   character.knownPlaces = character.knownPlaces || [];
   if (!character.knownPlaces.includes(id)) character.knownPlaces = [...character.knownPlaces, id].slice(-80);
+}
+
+// SNG-122: a clear travel expression in the player's own words — "head to / go to / travel to / set out
+// for / make my way to {place}". Captures the destination phrase in group 1. Deliberately narrow so a
+// non-travel line ("I go for his throat") doesn't match a place (no "to/for {place}" travel frame).
+const TRAVEL_PHRASE = /\b(?:head(?:ing)?|go(?:ing)?|travel(?:ing)?|journey(?:ing)?|set out|set off|make (?:my|our|your|his|her|their|the) way|depart(?:ing)?|leave|ride|walk|march|venture|return|head back)\s+(?:back\s+)?(?:to|for|toward|towards|over to|into)\s+(.{2,48}?)(?:\s*[.!?,;]|\s+(?:and|then|to)\b|$)/i;
+const NOT_A_PLACE = /^(?:there|here|him|her|them|it|me|us|you|home|back|inside|outside|out|away|on|onward|forward|work|bed|sleep|rest|ground|him\b)$/i;
+
+/** SNG-122: is this action a TRAVEL intent, and to where? Two signals with different trust:
+ *   (1) TRUSTED — the LLM intent parser named a destination (`travelTo`) for a GO/HEAD/JOURNEY action;
+ *       honored even for an unmapped place (minted on arrival, the SNG-117 path).
+ *   (2) GUESSED — a "travel" tag or a travel-phrase in the label/words. A guess must name a REAL/known
+ *       place to count, so "go for his throat" (an attack) never becomes a phantom destination.
+ *  Returns {ref,name,destId} or null; destId null (trusted only) means "mint on arrival." */
+function travelIntentOf(action) {
+  if (!action) return null;
+  const titleize = s => String(s).replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()).slice(0, 60);
+  // (1) trusted explicit destination from the free-text parser
+  let ref = action.travelTo && String(action.travelTo).trim();
+  if (ref && !NOT_A_PLACE.test(ref.replace(/^the\s+/i, "").trim())) {
+    const destId = resolveLocationId(ref, CONTENT.locations);
+    return { ref, name: destId ? CONTENT.locations[destId].name : titleize(ref), destId };
+  }
+  // (2) a GUESS from tag/phrase — must resolve to a real place to be trusted as a destination
+  const tags = [...(action.intentTags || []), ...(action.tags || [])].map(t => String(t).toLowerCase());
+  const text = `${action.label || ""} ${action.exactWords || ""}`;
+  const m = text.match(TRAVEL_PHRASE);
+  let cand = m ? m[1].trim().replace(/\s+/g, " ") : null;
+  if ((!cand || NOT_A_PLACE.test(cand.replace(/^the\s+/i, "").trim())) && tags.includes("travel")) {
+    cand = null; // tagged travel, no clean phrase → find a KNOWN place named in the words
+    for (const l of Object.values(CONTENT.locations)) { const n = (l.name || "").toLowerCase(); if (n && n.length > 2 && text.toLowerCase().includes(n)) { cand = l.name; break; } }
+  }
+  if (!cand) return null;
+  const destId = resolveLocationId(cand, CONTENT.locations);
+  if (!destId) return null; // a guessed phrase that isn't a real place is NOT a travel intent (no over-move)
+  return { ref: cand, name: CONTENT.locations[destId].name, destId };
+}
+
+/** SNG-122: the per-turn directive that FORCES the GM to emit moveTo for a travel intent, and enumerates
+ *  the real/known places reachable from here so its moveTo target resolves (Q2). */
+function buildTravelDirective(ti) {
+  const here = CONTENT.locations[character.currentLocationId];
+  const adj = (here?.connections || []).map(id => CONTENT.locations[id]).filter(Boolean)
+    .filter(l => isPlaceKnown(character, l.id, CONTENT.locations)).map(l => `${l.name} (${l.id})`);
+  const dest = ti.destId ? `${CONTENT.locations[ti.destId].name} (id ${ti.destId})` : `"${ti.ref}"`;
+  return `The player is TRAVELING to ${dest}. You MUST emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} this turn so they actually arrive — narrate the trip (a montage if it's far, with timeOps) but do NOT end the beat without moveTo. ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}.` : ""}`;
+}
+
+/** SNG-122: the one-tap safety net — the travel beat didn't move the player, so arrive now via the SAME
+ *  path the map uses (resolve-or-mint the destination, then travelTo). Never leaves them stranded. */
+async function arriveAtPending() {
+  const p = character._pendingArrival; if (!p || busy) return;
+  character._pendingArrival = null;
+  const destId = (p.destId && CONTENT.locations[p.destId] ? p.destId : null) || resolveLocationId(p.ref, CONTENT.locations) || mintTransitLocation(p.ref);
+  await travelTo(destId);
 }
 
 /** SNG-117: turn a named-but-unrecorded destination ("the pass") into a REAL, travelable place — a
@@ -5324,6 +5398,12 @@ function renderPlay(turn, opts = {}) {
   if (opts.thinking) main += `<div class="thinking">${esc(opts.thinking)}</div>`;
   if (opts.aside) main += `<div class="beat"><em>${opts.aside.split("\n").map(esc).join("<br>")}</em></div>`;
   if (opts.gmAside) main += `<div class="gm-aside">${opts.gmAside.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+  // SNG-122: the safety net — a travel intent that didn't move the player gets a one-tap "arrive" so
+  // narrative travel and map travel converge on one path and the player is never stranded.
+  if (character?._pendingArrival) {
+    const p = character._pendingArrival;
+    main += `<div class="arrive-banner">You're on your way to <strong>${esc(p.name)}</strong>. <button class="btn arrive-btn" id="do-arrive">→ Arrive at ${esc(p.name)}</button></div>`;
+  }
   if (opts.error) main += `<div class="error-card">The GM stumbled: ${esc(opts.error)}<br><button class="btn" id="retry" style="margin-top:8px">Try again</button></div>`;
 
   if (turn) {
@@ -5503,6 +5583,7 @@ function renderPlay(turn, opts = {}) {
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
+  const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
   const qlBtn = document.getElementById("open-questlog"); if (qlBtn) qlBtn.onclick = () => renderQuestLog();
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();

@@ -12,7 +12,7 @@ import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, wor
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "../engine/chronicle.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory } from "../engine/gm.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
@@ -3147,6 +3147,47 @@ await (async () => {
   check("SNG-121: togglePin flips the same item back off", togglePin(t, "Loose Buttons") === false && !pinnedItems(t).some(i => i.name === "Loose Buttons"));
   check("SNG-121: togglePin matches a story-named item by its customName", togglePin({ inventory: [{ name: "Iron Sword", customName: "Grief", kind: "weapon" }] }, "Grief") === true);
   check("SNG-121: togglePin on an absent item returns null (no throw)", togglePin(t, "No Such Thing") === null);
+}
+
+// --- SNG-122: narrative travel — the travel intent is load-bearing (survives the tag cap) + forces moveTo ---
+{
+  // the travel tag, emitted LAST past the 6-tag cap, must survive (it gates the travel directive + arrival —
+  // exactly the romantic/flirt lesson). A build with 6 richer tags ahead of it used to silently drop it.
+  const rich = sanitizeIntent({ intentTags: ["persuade", "charm", "comfort", "rapport", "finesse", "risky", "travel"], travelTo: "the edge district" }, { abilities: [] });
+  check("SNG-122: a 'travel' tag past the 6-tag cap survives (hoisted like romantic/flirt — it gates the move)", rich.intentTags.includes("travel"));
+  check("SNG-122: sanitizeIntent carries the parsed destination through (travelTo)", rich.travelTo === "the edge district");
+  check("SNG-122: a null/none/empty travelTo becomes null (no phantom destination)",
+    sanitizeIntent({ travelTo: "none" }, { abilities: [] }).travelTo === null && sanitizeIntent({}, { abilities: [] }).travelTo === null && sanitizeIntent({ travelTo: "  " }, { abilities: [] }).travelTo === null);
+
+  // the per-turn travel directive lands in the UNCACHED player tier (so it forces moveTo THIS turn, not stale)
+  const parts = tierParts({
+    character: { name: "Ash", origin: "valley", background: "medic", level: 3, attributes: { physical: 2, mental: 2, social: 2, practical: 2 }, health: 10, maxHealth: 10, energy: 10, maxEnergy: 10, abilities: [], alignment: {} },
+    location: { name: "Millbrook", descriptionSeed: "a mill town", spectrum: {} }, rules: {},
+    travelDirective: "The player is TRAVELING to the edge district. You MUST emit moveTo."
+  });
+  check("SNG-122: the travel directive lands in the uncached PLAYER tier (forces moveTo this turn)",
+    parts.player.join("\n").includes("TRAVEL THIS TURN") && parts.player.join("\n").includes("MUST emit moveTo"));
+  check("SNG-122: no travelDirective → no travel block (a normal beat is unaffected)",
+    !tierParts({ character: { name: "Ash", origin: "valley", background: "medic", level: 3, attributes: { physical: 2, mental: 2, social: 2, practical: 2 }, health: 10, maxHealth: 10, energy: 10, maxEnergy: 10, abilities: [], alignment: {} }, location: { name: "M", descriptionSeed: "x", spectrum: {} }, rules: {} }).player.join("\n").includes("TRAVEL THIS TURN"));
+}
+
+// --- SNG-123: salvage recovers the ops that hurt most to lose — moveTo + vitals — from a TRUNCATED reply ---
+{
+  // a travel beat whose JSON got cut off mid-moveTo: the balanced-bracket scan gives up (no closing brace),
+  // so the targeted regex must still recover the destination — movement is never silently lost.
+  const brokenMove = '{"narration":"You walk the long road toward the edge.","choices":[],"moveTo": {"location": "the edge district", "why": "a day on the road"';
+  const mOps = salvageOps(brokenMove);
+  check("SNG-123: salvageOps recovers moveTo.location from a truncated reply (travel isn't lost)", mOps.moveTo?.location === "the edge district");
+  check("SNG-123: the salvaged moveTo keeps its why when present", mOps.moveTo?.why === "a day on the road");
+
+  const brokenVitals = '{"narration":"The blow lands hard.","characterDeltas": {"health": -3, "energy": -5';
+  const vOps = salvageOps(brokenVitals);
+  check("SNG-123: salvageOps recovers health/energy from a truncated characterDeltas (vitals aren't lost)", vOps.characterDeltas?.health === -3 && vOps.characterDeltas?.energy === -5);
+
+  // a well-formed reply is unchanged — the targeted pass only fills gaps the balanced scan missed
+  const whole = '{"moveTo": {"location": "millbrook", "why": "led home"}, "characterDeltas": {"health": 2, "energy": 0}}';
+  const wOps = salvageOps(whole);
+  check("SNG-123: a well-formed moveTo/characterDeltas still parses normally (no regression)", wOps.moveTo?.location === "millbrook" && wOps.characterDeltas?.health === 2);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

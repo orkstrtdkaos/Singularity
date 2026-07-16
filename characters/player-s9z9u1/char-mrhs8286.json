@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 8,
-  "xp": 789,
+  "xp": 794,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -77,7 +77,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 135,
-  "energy": 60,
+  "energy": 55,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1965,86 +1965,80 @@
         "player": "THAT IS wrestling... with a guy like me.  Believe me Pell... I want you to win.  But I have no intention of LETTING you.  Make a feint that makes her drop the waistband she's holding.",
         "summary": "Silas's feint drops Pell's guard and her waistband both — the game shifts register.",
         "narration": "\"That,\" you say, voice carrying the easy authority of someone who has already decided how this ends, \"is wrestling. With a guy like me.\"\n\nYou let her see exactly what you want her to see: your eyes drop to her free hand, then dart left — a half-second tell, the kind a wrestler makes when they're committed to a direction. Your weight shifts left with it, one heel finding purchase, body language spelling out the move in plain text. Pell reads it. Of course she reads it. Her grip on the waistband tightens, her weight shifts right to cut off your angle, and the waistband drops.\n\nYou go right.\n\nShe's already pivoting when she realizes, the waistband forgotten, both hands coming up — and she catches herself mid-pivot, bare to the firelight, and looks at you with an expression that has crossed the border from competitive into something sharper and warmer and considerably more dangerous. The wool-and-leather slides another hand's width. She lets it. Huginn examines a point on the far rockface with extraordinary interest.\n\n\"I believe you,\" Pell says. Her voice has dropped register. The dangerous smile is still there — slower now, more deliberate, the competitive edge folding back into something else underneath. She takes one step toward you, unhurried. \"About both parts.\""
+      },
+      {
+        "player": "Uh oh... what you're about to do isn't wrestling... I'm unseducible... I couldn't possibly be spellbound by a muscular naked woman INTENTIONALLY trying to seduce me.",
+        "summary": "Pell closes the distance and names Silas 'unseducible' — warmly, plainly, with her hand against his sternum and the smile she cannot suppress.",
+        "narration": "\"Uh oh,\" you say, and your voice does a creditable job of sounding like a man with his defenses intact.\n\nPell is one step away and she closes it — not rushing, not performing, just moving the way she moves when she has decided something. The firelight finds the planes of her shoulders, the dark curve of her collarbone, the loose wool-and-leather sitting exactly where it settled when she let it go. She is watching your face with the patient, warm attention of a woman who has already read the tell and is simply waiting for you to admit it.\n\n\"Unseducible,\" she says. The word lands with the flat, pleasant precision of a smith testing a seam.\n\nShe stops close enough that you can feel the heat off her skin — closer than wrestling range, too close for the game's original terms to mean anything at all. One hand comes up and settles against your sternum, not pushing, not pulling. Just there. Her thumb finds the open collar where the buttons went earlier and rests against the hollow of your throat, and she tips her chin up so her eyes are exactly level with yours.\n\n\"I believe you,\" she says. And then, slowly, she smiles — the real one, the one she cannot suppress, that starts at one corner and gives itself away before the rest of her face commits. \"Completely.\"\n\nHuginn, on the stone lip above, tucks its head under one wing. The coals breathe low and orange between the flat stones. The mountain wine sits on its rock, last third still waiting. Somewhere past the overhang, the snowmelt runnel runs thin and cold in the dark, and the pine run below is quiet, and none of that is the thing you are looking at."
       }
     ],
     "lastTurn": {
-      "narration": "\"That,\" you say, voice carrying the easy authority of someone who has already decided how this ends, \"is wrestling. With a guy like me.\"\n\nYou let her see exactly what you want her to see: your eyes drop to her free hand, then dart left — a half-second tell, the kind a wrestler makes when they're committed to a direction. Your weight shifts left with it, one heel finding purchase, body language spelling out the move in plain text. Pell reads it. Of course she reads it. Her grip on the waistband tightens, her weight shifts right to cut off your angle, and the waistband drops.\n\nYou go right.\n\nShe's already pivoting when she realizes, the waistband forgotten, both hands coming up — and she catches herself mid-pivot, bare to the firelight, and looks at you with an expression that has crossed the border from competitive into something sharper and warmer and considerably more dangerous. The wool-and-leather slides another hand's width. She lets it. Huginn examines a point on the far rockface with extraordinary interest.\n\n\"I believe you,\" Pell says. Her voice has dropped register. The dangerous smile is still there — slower now, more deliberate, the competitive edge folding back into something else underneath. She takes one step toward you, unhurried. \"About both parts.\"",
-      "sceneSummary": "Silas's feint drops Pell's guard and her waistband both — the game shifts register.",
+      "narration": "\"Uh oh,\" you say, and your voice does a creditable job of sounding like a man with his defenses intact.\n\nPell is one step away and she closes it — not rushing, not performing, just moving the way she moves when she has decided something. The firelight finds the planes of her shoulders, the dark curve of her collarbone, the loose wool-and-leather sitting exactly where it settled when she let it go. She is watching your face with the patient, warm attention of a woman who has already read the tell and is simply waiting for you to admit it.\n\n\"Unseducible,\" she says. The word lands with the flat, pleasant precision of a smith testing a seam.\n\nShe stops close enough that you can feel the heat off her skin — closer than wrestling range, too close for the game's original terms to mean anything at all. One hand comes up and settles against your sternum, not pushing, not pulling. Just there. Her thumb finds the open collar where the buttons went earlier and rests against the hollow of your throat, and she tips her chin up so her eyes are exactly level with yours.\n\n\"I believe you,\" she says. And then, slowly, she smiles — the real one, the one she cannot suppress, that starts at one corner and gives itself away before the rest of her face commits. \"Completely.\"\n\nHuginn, on the stone lip above, tucks its head under one wing. The coals breathe low and orange between the flat stones. The mountain wine sits on its rock, last third still waiting. Somewhere past the overhang, the snowmelt runnel runs thin and cold in the dark, and the pine run below is quiet, and none of that is the thing you are looking at.",
+      "sceneSummary": "Pell closes the distance and names Silas 'unseducible' — warmly, plainly, with her hand against his sternum and the smile she cannot suppress.",
       "choices": [
         {
-          "label": "Close the distance — reach for her, hands first, no pretense of wrestling left.",
+          "label": "Admit it — tell her plainly that she's right, that she's had you since the forge, and close what's left of the distance yourself.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "reach",
-            "honest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Hold your ground — let her come to you the rest of the way. See if she does.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "wait",
-            "patient"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Say something — name what this is now, plainly, the way she names things.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "honest",
-            "name"
+            "direct",
+            "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Reach for the wine instead — pour two measures, slow, give her the space to decide.",
+          "label": "Keep the game one beat longer — wrap both arms around her and say 'I'm still counting this as a draw.'",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "patient",
-            "offer"
+            "playful",
+            "romantic",
+            "deflect"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Put your hand over hers — the one at your collar — and just hold it there without saying anything.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "quiet",
+            "tender",
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pour the last of the Resin Mountain Wine into two cups and offer her one — a toast before whatever comes next.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "deliberate",
+            "romantic",
+            "pause"
+          ],
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Silas standing a step's distance from Pell, having just completed the feint; Pell bare-shouldered with wool-and-leather waistband slid low, both hands free, one step away and closing.",
+        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Pell standing chest-close to Silas, one hand resting at his open collar, thumb at the hollow of his throat, watching his face.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Bare-shouldered, waistband low, taking one slow step toward Silas — dangerous smile eased into something warmer and more direct."
+            "state": "Standing chest-close to Silas, hand at his collar, watching his face with warm patient attention — thumb at the hollow of his throat, the real smile already showing."
           },
           {
             "name": "Huginn",
-            "state": "On the overhang stone lip, studying the far rockface with studious disinterest."
+            "state": "Head tucked under one wing on the stone lip. Deliberate disinterest."
           }
         ],
         "objects": [
@@ -2060,9 +2054,8 @@
           "Snowmelt runnel — thin, running east, twenty feet from overhang"
         ],
         "threads": [
-          "Pell is one step away and closing — the game has shed its pretense; what happens next is not wrestling.",
-          "Pell has named both things Silas said (wanting her to win; not intending to let her) as believed — the acknowledgment is live.",
-          "Huginn's discretion is noted and deliberate.",
+          "Pell has named Silas 'unseducible' — warmly, with her hand at his collar, one step from him. What happens next is not wrestling.",
+          "The Resin Mountain Wine has one last pour in it.",
           "Edge District bearing — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five."
         ]
@@ -2072,34 +2065,32 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Silas's feint dropped her guard and her waistband — she let both go. Named both parts of what he said as believed, then closed the distance.",
+          "note": "Named Silas 'unseducible' with warm precision, then closed the last distance and placed her hand at his collar — the game is over and she is entirely aware of that.",
           "learned": [
-            "Silas can feint with full commitment — the tell was real enough to work on someone who knew to watch for it",
-            "When the game stopped being a game, she moved toward him rather than resetting"
+            "Silas folds completely when she closes the distance — she read it and named it out loud"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the overhang camp, one step from Silas, waistband low, game concluded — moving into something else."
+          "statusNote": "At the overhang camp, one step from Silas, hand at his collar — the pretense of wrestling fully shed.",
+          "bondType": "romantic",
+          "bondStage": "together"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quick exchange during the wrestling match"
+        "why": "a short exchange — one step, one word, a hand at the collar"
       }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Silas standing a step's distance from Pell, having just completed the feint; Pell bare-shouldered with wool-and-leather waistband slid low, both hands free, one step away and closing.",
+      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Pell standing chest-close to Silas, one hand resting at his open collar, thumb at the hollow of his throat, watching his face.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Bare-shouldered, waistband low, taking one slow step toward Silas — dangerous smile eased into something warmer and more"
+          "state": "Standing chest-close to Silas, hand at his collar, watching his face with warm patient attention — thumb at the hollow o"
         },
         {
           "name": "Huginn",
-          "state": "On the overhang stone lip, studying the far rockface with studious disinterest."
+          "state": "Head tucked under one wing on the stone lip. Deliberate disinterest."
         }
       ],
       "objects": [
@@ -2115,9 +2106,8 @@
         "Snowmelt runnel — thin, running east, twenty feet from overhang"
       ],
       "threads": [
-        "Pell is one step away and closing — the game has shed its pretense; what happens next is not wrestling.",
-        "Pell has named both things Silas said (wanting her to win; not intending to let her) as believed — the acknowledgment is live.",
-        "Huginn's discretion is noted and deliberate.",
+        "Pell has named Silas 'unseducible' — warmly, with her hand at his collar, one step from him. What happens next is not wrestling.",
+        "The Resin Mountain Wine has one last pour in it.",
         "Edge District bearing — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five."
       ]
@@ -2268,7 +2258,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received Silas's offer plainly — 'I don't know what to do with that yet, but I heard it, I'll keep it.' The armor still down; the rules she's been operating on named as rules.",
         "[d2] Held Silas's vulnerability plainly — named strangeness as where the work is, and the resurrection not as unsettling but as ground. Said: 'you were there, that's not the same as hav",
         "[d2] Received Silas closing the distance — adjusted naturally, rested her head against his without declaration. Named the thing that matters: he stayed, and that is not strange, that is",
         "[d2] Silas told her she looks fantastic by forgelight and that he keeps provoking challenges just to have her beat him and stay close. She tried to hold her composure, lost the war, and",
@@ -2277,17 +2266,18 @@
         "[d2] Called the win fair, gave Silas his visual prize, then got both hands on his collar and named the shirt as the remaining score — the match is alive and she is entirely in it.",
         "[d2] Used Silas's braid-grip as a fixed point, dropped her weight to kill the reversal angle, and got the second button — clean tactical read under live conditions.",
         "[d2] Shadowstepped behind — caught the loosened waistband, turned, named the move as not wrestling. Smiling in a way that suggests she is recalibrating the game's rules rather than endi",
-        "[d2] Silas's feint dropped her guard and her waistband — she let both go. Named both parts of what he said as believed, then closed the distance."
+        "[d2] Silas's feint dropped her guard and her waistband — she let both go. Named both parts of what he said as believed, then closed the distance.",
+        "[d2] Named Silas 'unseducible' with warm precision, then closed the last distance and placed her hand at his collar — the game is over and she is entirely aware of that."
       ],
       "knownFacts": [
-        "The forgelight compliment landed and landed hard — she couldn't suppress it",
         "She has just made the first physical reach of the evening, unprompted, taking his hand without ceremony",
         "Leads with her shoulder diagnostic — called it plainly mid-match",
         "Silas used wildcraft — she doesn't know the name for it, but she knows that was not a wrestling move",
         "Silas's reversal attempt used the braid as leverage — she neutralized it by leaning into the hold rather than away from it",
         "Silas can shadowstep — she does not have a name for it yet but she knows that was not a footwork move",
         "Silas can feint with full commitment — the tell was real enough to work on someone who knew to watch for it",
-        "When the game stopped being a game, she moved toward him rather than resetting"
+        "When the game stopped being a game, she moved toward him rather than resetting",
+        "Silas folds completely when she closes the distance — she read it and named it out loud"
       ],
       "skillsObserved": [
         "naming a speculative read as speculative without withdrawing",
@@ -2298,7 +2288,7 @@
         "catching a surprise move without losing composure"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp, one step from Silas, waistband low, game concluded — moving into something else.",
+      "statusNote": "At the overhang camp, one step from Silas, hand at his collar — the pretense of wrestling fully shed.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3569,8 +3559,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784181797097,
-  "rev": 424,
+  "updatedAt": 1784181983194,
+  "rev": 425,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4133,7 +4123,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 115
+    "valley": 116
   },
   "foreclosed": [
     "rootkin",

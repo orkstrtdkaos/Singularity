@@ -90,6 +90,51 @@ export function retroLevelGrants(character, rules) {
   return owed > 0;
 }
 
+// ---------- SNG-101b: by-right native grants (a character's PRIMARY tradition starter kit) ----------
+
+/** The native-basic ability ids a character is granted BY RIGHT of their primary tradition: the
+ *  tradition's anchors (always) + Tier-II basics matching their build lean (highest of mental /
+ *  physical / practical / social, filling from the mental caster-spine when the lean pool is thin),
+ *  capped at rules.grantCap. Data-driven from `rules.traditionNativeGrants` (SNG-101b content). The
+ *  PRIMARY tradition is authoritative via `domains.primary` (SNG-094), with a legacy fallback. Pure. */
+export function nativeGrantIdsFor(character, rules) {
+  const primary = character?.domains?.primary || character?.nativeTradition || character?.origin;
+  const table = rules?.traditionNativeGrants?.[primary];
+  if (!table) return [];
+  const cap = rules?.grantCap ?? 5;
+  const attrs = character?.attributes || {};
+  let leanKey = "mental", best = -Infinity;
+  for (const k of ["mental", "physical", "practical", "social"]) { const v = attrs[k] ?? 0; if (v > best) { best = v; leanKey = k; } }
+  const out = [];
+  const push = id => { if (id && !out.includes(id)) out.push(id); };
+  for (const a of table.anchors || []) push(a);                 // anchors: always, by right
+  for (const a of (table.byLean?.[leanKey] || [])) push(a);     // lean-matched basics
+  if (out.length < cap) for (const a of (table.byLean?.mental || [])) { if (out.length >= cap) break; push(a); } // fill from the caster spine
+  return out.slice(0, cap);
+}
+
+/** Grant any MISSING primary-tradition native basics at rank 1. Law 14: only ADDS — never lowers an
+ *  owned rank (an already-earned basic keeps its rank), never removes. Idempotent. Returns granted ids. */
+export function applyNativeGrants(character, rules) {
+  character.abilities = character.abilities || [];
+  const owned = new Set(character.abilities.map(a => a.abilityId));
+  const granted = [];
+  for (const id of nativeGrantIdsFor(character, rules)) {
+    if (!owned.has(id)) { character.abilities.push({ abilityId: id, level: 1, native: true }); owned.add(id); granted.push(id); }
+  }
+  return granted;
+}
+
+/** One-time retro: backfill missing primary-tradition native basics for existing characters. Versioned
+ *  via a DISTINCT flag (`nativeGrantsVersion`) so it never collides with `retroLevelGrants`' grantsVersion
+ *  (Q3). Law-14-safe (adds only, rank 1); idempotent (a second call grants nothing). Returns granted ids. */
+export function retroNativeGrants(character, rules) {
+  if ((character.nativeGrantsVersion || 0) >= 1) return [];
+  const granted = applyNativeGrants(character, rules);
+  character.nativeGrantsVersion = 1;
+  return granted;
+}
+
 /** Practiced power costs less: -1 energy per two character levels and -1 per
  *  ability rank above 1, floored at half the base cost (data-driven). */
 export function effectiveEnergyCost(abilityDef, character, rules) {

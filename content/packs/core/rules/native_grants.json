@@ -1,0 +1,443 @@
+{
+ "note": "SNG-101 native-grant content (Aevi). At creation a character is granted their PRIMARY tradition's anchors (always) + up to (grantCap - #anchors) Tier-II basics matching their build lean (highest of mental/physical/practical/social), falling back to mental (the caster spine). Data-driven from nativeOrCombination=='native' && levelReq<=2, tagged by ability.attribute. grantCap tunable in resolution.json (recommend 5). Applies at creation AND as a one-time retro-grant for existing chars (retroNativeGrants, modeled on retroLevelGrants), bumping grantsVersion to 2.",
+ "grantCap": 5,
+ "traditionNativeGrants": {
+  "harmonic": {
+   "anchors": [
+    "sonic_resonance",
+    "echo_sense",
+    "stillness_field",
+    "tremor_sense",
+    "drumline_stride"
+   ],
+   "byLean": {
+    "practical": [
+     "resonant_shield",
+     "chord_of_mending"
+    ],
+    "social": [
+     "harmonic_voice",
+     "voice_of_the_flock"
+    ],
+    "physical": [
+     "resonant_anchor"
+    ]
+   }
+  },
+  "radiant_folk": {
+   "anchors": [
+    "light_bending",
+    "prism_sight",
+    "light_well",
+    "sun_coax",
+    "glimmer_script"
+   ],
+   "byLean": {
+    "physical": [
+     "radiant_lance",
+     "afterimage"
+    ],
+    "social": [
+     "daybreak_mantle",
+     "beacon_thread"
+    ],
+    "mental": [
+     "clarity_lens"
+    ]
+   }
+  },
+  "somatic": {
+   "anchors": [
+    "body_read",
+    "second_wind"
+   ],
+   "byLean": {
+    "physical": [
+     "soma",
+     "perfect_motion",
+     "the_weight_of_presence"
+    ]
+   }
+  },
+  "cogitant": {
+   "anchors": [
+    "mind_read_folk",
+    "total_focus"
+   ],
+   "byLean": {
+    "mental": [
+     "noesis",
+     "the_clear_path",
+     "the_long_form"
+    ]
+   }
+  },
+  "churnfolk": {
+   "anchors": [
+    "chaos_sense",
+    "the_misdirect",
+    "catch_as_catch_can"
+   ],
+   "byLean": {
+    "practical": [
+     "wildcraft",
+     "scatter"
+    ],
+    "physical": [
+     "the_wrong_target"
+    ]
+   }
+  },
+  "lattice": {
+   "anchors": [
+    "order_sense",
+    "the_established_route"
+   ],
+   "byLean": {
+    "mental": [
+     "latticework"
+    ],
+    "practical": [
+     "truename_order",
+     "set_to_rights",
+     "the_maintained_order"
+    ]
+   }
+  },
+  "mason": {
+   "anchors": [
+    "stone_read",
+    "the_near_way",
+    "the_long_haul"
+   ],
+   "byLean": {
+    "physical": [
+     "thingcraft",
+     "sound_repair",
+     "the_set_word"
+    ]
+   }
+  },
+  "figurist": {
+   "anchors": [
+    "pattern_sense"
+   ],
+   "byLean": {
+    "mental": [
+     "formcraft",
+     "the_restored_form",
+     "the_warding_mark",
+     "the_patterned_way",
+     "the_held_form"
+    ]
+   }
+  },
+  "umbral": {
+   "anchors": [
+    "darksight",
+    "dim",
+    "the_long_dark"
+   ],
+   "byLean": {
+    "mental": [
+     "umbracraft",
+     "the_harbor",
+     "shroud",
+     "the_shadowed_mending"
+    ],
+    "practical": [
+     "false_trail"
+    ]
+   }
+  },
+  "blazeborn": {
+   "anchors": [
+    "lightsense",
+    "kindle",
+    "the_radiant_ground"
+   ],
+   "byLean": {
+    "mental": [
+     "radiance",
+     "the_cleansing_light",
+     "the_blaze_wall",
+     "glass_work",
+     "the_blazing_word"
+    ]
+   }
+  },
+  "rootkin": {
+   "anchors": [
+    "lifesense",
+    "staunch"
+   ],
+   "byLean": {
+    "practical": [
+     "quickening",
+     "the_green_claim",
+     "bark_and_briar",
+     "the_root_road"
+    ],
+    "mental": [
+     "the_speaking_grove"
+    ]
+   }
+  },
+  "ashwarden": {
+   "anchors": [
+    "deathsense"
+   ],
+   "byLean": {
+    "mental": [
+     "palework",
+     "the_grey_hand",
+     "the_grey_road",
+     "the_kept_breath"
+    ],
+    "practical": [
+     "wither"
+    ],
+    "social": [
+     "the_dread"
+    ]
+   }
+  },
+  "abyssal": {
+   "anchors": [
+    "appetite_sense",
+    "the_choir_sustains"
+   ],
+   "byLean": {
+    "social": [
+     "descent",
+     "the_offered_price",
+     "the_appetite_strike",
+     "the_consumed_wound",
+     "the_dread_mantle",
+     "the_descent_path"
+    ]
+   }
+  },
+  "seraphic": {
+   "anchors": [
+    "the_measuring_eye",
+    "the_sustained_order"
+   ],
+   "byLean": {
+    "mental": [
+     "ascent",
+     "the_judged_strike",
+     "the_raised_form",
+     "the_ascent_path"
+    ]
+   }
+  },
+  "unmaker": {
+   "anchors": [
+    "fault_sense"
+   ],
+   "byLean": {
+    "physical": [
+     "ruinwork",
+     "the_clean_removal",
+     "the_ended_threat",
+     "the_demonstrated_end"
+    ],
+    "mental": [
+     "the_ended_burden"
+    ]
+   }
+  },
+  "wright": {
+   "anchors": [
+    "makers_eye",
+    "the_raised_thing"
+   ],
+   "byLean": {
+    "physical": [
+     "makecraft",
+     "the_weapon_at_hand",
+     "the_work_speaks",
+     "the_built_way",
+     "the_ongoing_work"
+    ]
+   }
+  },
+  "threnodist": {
+   "anchors": [
+    "the_true_feeling",
+    "the_wellspring"
+   ],
+   "byLean": {
+    "social": [
+     "pathos",
+     "the_grief_strike",
+     "the_felt_wall",
+     "the_made_elegy",
+     "the_feeling_road"
+    ]
+   }
+  },
+  "syllogist": {
+   "anchors": [
+    "the_axiom_holds"
+   ],
+   "byLean": {
+    "mental": [
+     "logos",
+     "the_correct_protocol",
+     "the_proved_position",
+     "the_derived_route"
+    ]
+   }
+  },
+  "veilwright": {
+   "anchors": [
+    "see_the_made_thing"
+   ],
+   "byLean": {
+    "mental": [
+     "falsecraft",
+     "the_wrong_reality",
+     "the_better_story",
+     "the_false_target",
+     "the_false_door",
+     "the_maintained_veil"
+    ]
+   }
+  },
+  "verist": {
+   "anchors": [
+    "the_true_ground",
+    "the_held_truth"
+   ],
+   "byLean": {
+    "mental": [
+     "verity",
+     "the_established_fact",
+     "the_weight_of_truth",
+     "the_direct_path"
+    ]
+   }
+  },
+  "enginewright": {
+   "anchors": [
+    "mech_sense",
+    "mend_device",
+    "the_running_engine"
+   ],
+   "byLean": {
+    "practical": [
+     "command_engine",
+     "the_fault_strike",
+     "the_mechanical_defense"
+    ]
+   }
+  },
+  "numinous": {
+   "anchors": [
+    "numen_sense",
+    "steady_soul",
+    "the_unbroken_practice"
+   ],
+   "byLean": {
+    "social": [
+     "the_dimmed_meaning",
+     "the_weight_of_practice"
+    ]
+   }
+  },
+  "horizon": {
+   "anchors": [
+    "way_sense",
+    "the_road_ahead"
+   ],
+   "byLean": {
+    "physical": [
+     "spanwork",
+     "the_long_reach",
+     "the_fresh_horizon",
+     "the_kept_distance",
+     "the_land_knowledge"
+    ]
+   }
+  },
+  "hourkeeper": {
+   "anchors": [
+    "hour_sense",
+    "the_long_watch"
+   ],
+   "byLean": {
+    "mental": [
+     "hourcraft",
+     "the_wrong_moment",
+     "the_given_time",
+     "the_wasted_moment"
+    ]
+   }
+  },
+  "marcher": {
+   "anchors": [
+    "read_the_fight",
+    "disarm"
+   ],
+   "byLean": {
+    "physical": [
+     "the_edge",
+     "the_stand",
+     "the_advance",
+     "long_road"
+    ],
+    "practical": [
+     "soldiers_hand",
+     "whats_at_hand"
+    ],
+    "social": [
+     "the_weight"
+    ]
+   }
+  },
+  "stillhold": {
+   "anchors": [
+    "read_the_room",
+    "calm_word"
+   ],
+   "byLean": {
+    "social": [
+     "stillcraft",
+     "the_price_shown",
+     "the_laid_ground",
+     "safe_ground"
+    ],
+    "physical": [
+     "step_between"
+    ]
+   }
+  },
+  "valley_craft": {
+   "anchors": [
+    "wayfinding",
+    "greenlore",
+    "mediators_tongue",
+    "tinkers_hand",
+    "beastfriend",
+    "stonewise",
+    "rivercraft",
+    "quiet_step",
+    "storykeeper",
+    "hearthbinding",
+    "keen_appraisal",
+    "blend_in",
+    "hunters_strike"
+   ],
+   "byLean": {
+    "mental": [
+     "old_roads"
+    ],
+    "practical": [
+     "boundary_stone"
+    ]
+   }
+  }
+ }
+}

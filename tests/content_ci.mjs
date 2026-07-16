@@ -272,5 +272,28 @@ for (const pack of PACKS) {
   }
 }
 
+// (SNG-101b) native-grant table — every granted ability id must be a REAL ability (a typo would grant a
+// phantom at creation), grantCap sane, and every tradition key a real tradition. The grant is by-right;
+// it must never reference an ability that doesn't exist.
+{
+  const ngPath = "content/packs/core/rules/native_grants.json";
+  if (existsSync(join(root, ngPath))) {
+    const ng = rj(ngPath);
+    const abFiles = (rj("content/packs/core/manifest.json").provides?.abilities) || [];
+    const allAbilityIds = new Set();
+    const traditionsWithAbilities = new Set();
+    for (const rel of abFiles) { let doc; try { doc = rj(`content/packs/core/${rel}`); } catch { continue; } const abs = Array.isArray(doc) ? doc : Array.isArray(doc.abilities) ? doc.abilities : [doc]; const ps = doc.powerSystem; for (const a of abs) { if (!a || !a.id) continue; allAbilityIds.add(a.id); const trad = a.tradition || a.powerSystem || ps; if (trad) traditionsWithAbilities.add(trad); } }
+    check("SNG-101b: grantCap is a positive number", Number.isFinite(ng.grantCap) && ng.grantCap > 0, `got ${ng.grantCap}`);
+    let checkedIds = 0;
+    for (const [trad, def] of Object.entries(ng.traditionNativeGrants || {})) {
+      check(`SNG-101b: native-grant tradition "${trad}" is a real tradition (has abilities)`, traditionsWithAbilities.has(trad), "no ability in the catalog carries this tradition/powerSystem");
+      const ids = [...(def.anchors || []), ...Object.values(def.byLean || {}).flat()];
+      for (const id of ids) { checkedIds++; check(`SNG-101b: native-grant "${trad}" → ability "${id}" exists`, allAbilityIds.has(id), "no such ability id in the catalog"); }
+      check(`SNG-101b: native-grant tradition "${trad}" declares at least one anchor`, (def.anchors || []).length > 0, "a tradition with no anchor grants nothing by right");
+    }
+    ok(`SNG-101b: native-grant table validated — ${Object.keys(ng.traditionNativeGrants || {}).length} traditions, ${checkedIds} ability refs all real`);
+  }
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

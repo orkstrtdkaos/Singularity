@@ -17,7 +17,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants } from "../engine/progression.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
@@ -825,6 +825,51 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
   check("SNG-110: deleteGalleryImage removes a non-portrait image by url, leaving the rest", d1.gallery.length === 1 && d1.gallery[0].url === "url-A" && d1.wasPortrait === false);
   const d2 = deleteGalleryImage(c, "url-A");
   check("SNG-110: deleting the PRIMARY portrait flags wasPortrait + clears it (caller regenerates)", d2.wasPortrait === true && c.portrait === null && d2.gallery.length === 0);
+}
+
+// --- SNG-101b: by-right native grants — anchors + lean-matched basics, capped, Law-14-safe, versioned ---
+{
+  const ngContent = JSON.parse(readFileSync(join(root, "content/packs/core/rules/native_grants.json"), "utf8"));
+  const ngRules = { ...rules, traditionNativeGrants: ngContent.traditionNativeGrants, grantCap: ngContent.grantCap };
+
+  // ashwarden, MENTAL lean → the death-core caster spine (matches the spec's worked example).
+  const casterAsh = { domains: { primary: "ashwarden" }, attributes: { mental: 5, physical: 2, practical: 2, social: 2 } };
+  const casterGrants = nativeGrantIdsFor(casterAsh, ngRules);
+  check("SNG-101b: a mental-lean ashwarden gets the death-core spine (deathsense + mental basics)",
+    casterGrants.includes("deathsense") && casterGrants.includes("palework") && casterGrants.includes("the_grey_hand") && casterGrants.length <= ngContent.grantCap);
+  // ashwarden, PRACTICAL lean → the practical basic (wither), then FILLS from the mental spine, capped.
+  const martialAsh = { domains: { primary: "ashwarden" }, attributes: { practical: 5, mental: 4, social: 4, physical: 3 } };
+  const martialGrants = nativeGrantIdsFor(martialAsh, ngRules);
+  check("SNG-101b: a practical-lean ashwarden gets wither, filled from the mental spine, capped at grantCap",
+    martialGrants.includes("deathsense") && martialGrants.includes("wither") && martialGrants.length === ngContent.grantCap && martialGrants.length <= 5);
+
+  // grants key off domains.primary (SNG-094 authoritative), NOT a stale nativeTradition.
+  const mixed = { domains: { primary: "ashwarden" }, nativeTradition: "wright", origin: "wright", attributes: { practical: 5, mental: 4, social: 4, physical: 3 } };
+  check("SNG-101b: the grant keys off domains.primary, not a legacy nativeTradition (Silas: ashwarden, not wright)",
+    nativeGrantIdsFor(mixed, ngRules).includes("deathsense") && !nativeGrantIdsFor(mixed, ngRules).includes("makers_eye"));
+
+  // applyNativeGrants adds MISSING at rank 1, LEAVES an owned basic at its earned rank (Law 14), idempotent.
+  const silas = { domains: { primary: "ashwarden" }, attributes: { practical: 5, mental: 4, social: 4, physical: 3 },
+    abilities: [{ abilityId: "deathsense", level: 3 }, { abilityId: "palework", level: 2 }, { abilityId: "order_sense", level: 3 }] };
+  const added = applyNativeGrants(silas, ngRules);
+  const findRank = id => silas.abilities.find(a => a.abilityId === id)?.level;
+  check("SNG-101b: applyNativeGrants adds the missing ashwarden basics at rank 1", added.includes("wither") && added.includes("the_grey_hand") && findRank("wither") === 1);
+  check("SNG-101b: Law 14 — an already-owned basic keeps its EARNED rank (deathsense r3, palework r2 untouched)", findRank("deathsense") === 3 && findRank("palework") === 2);
+  check("SNG-101b: a non-native ability the character learned is untouched", findRank("order_sense") === 3);
+  const addedAgain = applyNativeGrants(silas, ngRules);
+  check("SNG-101b: applyNativeGrants is idempotent (a second call grants nothing)", addedAgain.length === 0);
+
+  // retroNativeGrants runs ONCE, versioned by a DISTINCT flag (never collides with grantsVersion).
+  const retroChar = { domains: { primary: "ashwarden" }, attributes: { mental: 5 }, abilities: [], grantsVersion: 1 };
+  const r1 = retroNativeGrants(retroChar, ngRules);
+  check("SNG-101b: retroNativeGrants backfills a bare character + sets nativeGrantsVersion (distinct from grantsVersion)",
+    r1.length > 0 && retroChar.nativeGrantsVersion === 1 && retroChar.grantsVersion === 1);
+  const r2 = retroNativeGrants(retroChar, ngRules);
+  check("SNG-101b: retroNativeGrants is one-time (a second call on a versioned character grants nothing)", r2.length === 0);
+
+  // no primary / unknown tradition → no grant (never guesses).
+  check("SNG-101b: a character with no primary domain is granted nothing (no guessing)",
+    nativeGrantIdsFor({ attributes: { mental: 5 } }, ngRules).length === 0);
 }
 check('revealName cannot create a person', (applyNpcUpdates({ npcRegistry: {} }, [{ op: 'update', npcId: 'ghost', revealName: 'X' }], {}), true));
 // customName

@@ -55,6 +55,11 @@ export async function loadContent() {
   const intensity = await loadRule("intensity_scaling", { steps: {} });
   const branchForks = await loadRule("branch_forks", { forks: {} });
   const romanceGuidance = await loadRule("romance_guidance", null); // pulled into the GM prompt on romantic intent
+  // SNG-101b: by-right native-grant table (anchors + lean-matched basics per tradition). Merged INTO the
+  // rules bag so nativeGrantIdsFor(character, rules) reads it directly; absence leaves grants a no-op.
+  const nativeGrants = await loadRule("native_grants", { traditionNativeGrants: {}, grantCap: 5 });
+  rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
+  rules.grantCap = nativeGrants.grantCap ?? 5;
   // SNG-055/059: the great-circle traditions map (domain-access model). Optional — absence leaves the
   // domain gates ungoverned (open), never breaks load.
   let traditions = await loadRule("traditions", null), traditionIndex = null;

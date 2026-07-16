@@ -34,7 +34,7 @@ import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
-import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery } from "../engine/art.js";
+import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
@@ -787,6 +787,44 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
   // empty-state is graceful — a brand-new character produces a valid, honest prompt.
   const fresh = buildChroniclePrompt({ name: "New" }, {});
   check("SNG-109: empty state is graceful (no deeds/bonds → honest 'nothing yet' prompt, no crash)", fresh.user.includes("nothing of note yet") && fresh.user.includes("no close ties yet"));
+}
+
+// --- SNG-110: portrait as earned record — player appearance, provenance gear, opt-in companion, delete ---
+{
+  // item provenance: a named item reads as yours; a grown item names its earned stage; a plain item is bare.
+  check("SNG-110: a player-named item carries its name into the portrait as YOURS", itemProvenancePhrase({ name: "spear", customName: "Gatekeeper" }).includes("Gatekeeper"));
+  check("SNG-110: a grown/evolved item names its earned stage", itemProvenancePhrase({ name: "spear", evoStageName: "the Unfinished Spear" }) === "spear — the Unfinished Spear");
+  check("SNG-110: a plain item is just its name", itemProvenancePhrase({ name: "lantern" }) === "lantern");
+
+  // player-authored physical description LEADS the portrait; gear appears with provenance.
+  const hero = { name: "Silas", form: "a weathered marsh-walker in oiled leathers", origin: "harmonic", background: "craftsman",
+    inventory: [{ name: "spear", customName: "Gatekeeper", evoStageName: "the Runebound Spear" }], bio: { motivation: "to make the district honest" } };
+  const seed = characterPromptSeed(hero);
+  check("SNG-110: the player-authored form/appearance LEADS the prompt", seed.startsWith("a weathered marsh-walker in oiled leathers"));
+  check("SNG-110: gear is named with provenance, not a bare item name", seed.includes("Gatekeeper") && seed.includes("Runebound"));
+
+  // companion in frame is OPT-IN — absent by default, present only when asked.
+  check("SNG-110: a companion is NOT in the portrait by default", !characterPromptSeed(hero).includes("alongside"));
+  const withPell = characterPromptSeed(hero, { withCompanion: { name: "Pell", appearance: "sharp-eyed, river-mud on her boots" } });
+  check("SNG-110: a companion is included only when opted in per generation", withPell.includes("alongside Pell") && withPell.includes("river-mud"));
+
+  // one-off override replaces the lead for THIS image only (base appearance untouched).
+  const oneOff = characterPromptSeed(hero, { appearanceOverride: "kneeling in the flooded gate at dawn, spear planted" });
+  check("SNG-110: a per-generation override leads the prompt without changing the base appearance", oneOff.startsWith("kneeling in the flooded gate at dawn") && hero.form === "a weathered marsh-walker in oiled leathers");
+
+  // THE FLOORS run AFTER every addition — a minor subject stays child-safe even with an override + companion.
+  const minor = { name: "A child", role: "child of the mill", form: "a young kid" };
+  const rawMinor = characterPromptSeed(minor, { appearanceOverride: "in a romantic embrace", withCompanion: { name: "someone", appearance: "an adult" } });
+  const safeMinor = sanitizeImagePrompt(rawMinor, { ratingLevel: 4, isMinor: isMinorSubject(minor) });
+  check("SNG-110: the FLOORS still impose the child-safe tone on a minor portrait after override/companion additions (ceiling capped to PG regardless of override)", isMinorSubject(minor) && /age-appropriate|wholesome|non-sexual/i.test(safeMinor));
+
+  // delete removes by url; deleting the primary portrait flags for regeneration (never imageless).
+  const c = { gallery: [], portrait: "url-A" };
+  addGalleryImage(c, { kind: "portrait", url: "url-A" }); addGalleryImage(c, { kind: "location", url: "url-B" });
+  const d1 = deleteGalleryImage(c, "url-B");
+  check("SNG-110: deleteGalleryImage removes a non-portrait image by url, leaving the rest", d1.gallery.length === 1 && d1.gallery[0].url === "url-A" && d1.wasPortrait === false);
+  const d2 = deleteGalleryImage(c, "url-A");
+  check("SNG-110: deleting the PRIMARY portrait flags wasPortrait + clears it (caller regenerates)", d2.wasPortrait === true && c.portrait === null && d2.gallery.length === 0);
 }
 check('revealName cannot create a person', (applyNpcUpdates({ npcRegistry: {} }, [{ op: 'update', npcId: 'ghost', revealName: 'X' }], {}), true));
 // customName

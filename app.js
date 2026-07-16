@@ -17,7 +17,7 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
@@ -42,7 +42,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.72";
+const APP_VERSION = "1.8.73";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1227,10 +1227,12 @@ function viewerRatingLevel() { return ratingLevel(profile); }
 
 /** Give a character its portrait (born-with-image; persist-once) + drop it in the gallery.
  *  `force` re-mints on a milestone (a new seed so the image changes). No-op when art is off. */
-function ensureCharacterPortrait(c, { force = false, milestone = null } = {}) {
+function ensureCharacterPortrait(c, { force = false, milestone = null, promptOpts = null } = {}) {
   if (!c || !imagesEnabled()) return null;
-  const seedKey = `${c.id}${milestone ? `-lvl${c.level}` : ""}`;
-  const url = ensureImage(c, "character", { ratingLevel: viewerRatingLevel(), isMinor: false, seedKey, force });
+  // SNG-110: a one-off override / companion-in-frame gets its own seed so it's a DISTINCT image (not the cached one).
+  const oneOff = promptOpts && (promptOpts.appearanceOverride || promptOpts.withCompanion) ? `-o${String(promptOpts.appearanceOverride || "") .length}${promptOpts.withCompanion?.name || ""}` : "";
+  const seedKey = `${c.id}${milestone ? `-lvl${c.level}` : ""}${oneOff}`;
+  const url = ensureImage(c, "character", { ratingLevel: viewerRatingLevel(), isMinor: false, seedKey, force, promptOpts: promptOpts || {} });
   if (url) { addGalleryImage(c, { kind: "portrait", prompt: c.name, url,
     caption: milestone ? `${c.name} — ${milestone}` : `${c.name} — ${String(c.origin || "").replace(/[-_]/g, " ")}`,
     worldDay: absoluteWorldDay() });
@@ -3861,10 +3863,29 @@ function renderCharacterScreen() {
   const genP = document.getElementById("cs-gen-portrait");
   if (genP) genP.onclick = () => { ensureCharacterPortrait(character); saveCharacter(character); renderCharacterScreen(); };
   const regenP = document.getElementById("cs-regen-portrait");
-  if (regenP) regenP.onclick = () => { ensureCharacterPortrait(character, { force: true, milestone: `level ${character.level}` }); saveCharacter(character); renderCharacterScreen(); };
+  if (regenP) regenP.onclick = () => regeneratePortraitFlow();
   const galB = document.getElementById("cs-gallery");
   if (galB) galB.onclick = () => renderGallery();
   document.getElementById("cs-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+/** SNG-110: re-mint the portrait with optional per-generation intent — a one-off scene description
+ *  (used for this image only, never persisted over the base appearance) and/or a committed partner
+ *  in frame (opt-in, never automatic). The floors still run after every addition. */
+function regeneratePortraitFlow() {
+  const override = prompt("New portrait — describe this specific scene or look, or leave blank to re-mint from the character as they are.\n(This is used for THIS image only — it doesn't change your saved appearance.)", "");
+  if (override === null) return; // cancelled
+  const promptOpts = {};
+  const one = override.trim();
+  if (one) promptOpts.appearanceOverride = one;
+  const partners = partnerAdjacentNpcs(character, CONTENT.rules);
+  if (partners.length && confirm(`Include ${partners[0].name} (your ${partners[0].label}) in this portrait?`)) {
+    const n = character.npcRegistry?.[partners[0].id];
+    promptOpts.withCompanion = { name: partners[0].name, appearance: n?.appearance || n?.description || "" };
+  }
+  ensureCharacterPortrait(character, { force: true, milestone: one || partners.length ? "a portrait you asked for" : `level ${character.level}`, promptOpts });
+  saveCharacter(character);
+  renderCharacterScreen();
 }
 
 /** SNG-035: the Saga gallery — every image this character has accrued (portraits, born-with-image
@@ -3879,11 +3900,20 @@ function renderGallery() {
     ${gallery.length ? `<div class="gallery-grid">${gallery.map((g, gi) => `
       <figure class="gallery-item">
         <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="this.parentElement.style.display='none'">
-        <figcaption>${esc(g.caption || g.kind)}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
+        <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
+        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
       </figure>`).join("")}</div>`
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}
     <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>
   </div>`);
+  for (const b of app.querySelectorAll("[data-galdel]")) b.onclick = () => {
+    const url = b.dataset.galdel;
+    if (!confirm("Remove this image?")) return;
+    const { wasPortrait } = deleteGalleryImage(character, url);
+    if (wasPortrait && imagesEnabled()) ensureCharacterPortrait(character, { force: true, milestone: "reforged" }); // never leave the character imageless
+    saveCharacter(character);
+    renderGallery();
+  };
   document.getElementById("gal-back").onclick = () => renderCharacterScreen();
 }
 

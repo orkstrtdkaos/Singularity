@@ -153,22 +153,39 @@ export function formOf(subject = {}) {
   return "a person";
 }
 
-/** The descriptive core of a character portrait: FORM leads, then origin/culture + gear + arc. */
-export function characterPromptSeed(character = {}) {
-  const bits = [`${formOf(character)}, full-body character portrait`];
+/** SNG-110: name a piece of gear in a portrait WITH ITS PROVENANCE — a player-named item reads as
+ *  theirs, a grown/evolved item names its earned stage — so "the spear you forged and named" shows up
+ *  as YOURS, not a generic "spear". The attention-makes-real thesis at the portrait layer. */
+export function itemProvenancePhrase(item = {}) {
+  if (!item) return "";
+  const base = item.name || item.itemId || "";
+  if (item.provenance) return `${item.customName || base} (${String(item.provenance).slice(0, 60)})`;
+  if (item.customName) return `${item.customName}${item.evoStageName ? `, ${item.evoStageName}` : `, a ${base}`} of your own`;
+  if (item.evoStageName && item.evoStageName !== base) return `${base} — ${item.evoStageName}`;
+  return base;
+}
+
+/** The descriptive core of a character portrait: player-authored FORM/APPEARANCE leads (or a per-image
+ *  override), then origin/culture + provenance-named gear + arc, and an OPT-IN companion in frame.
+ *  opts: { appearanceOverride (one-off, not persisted), withCompanion: { name, appearance } }. */
+export function characterPromptSeed(character = {}, opts = {}) {
+  const lead = String(opts.appearanceOverride || character.appearance || formOf(character)).slice(0, 220);
+  const bits = [`${lead}, full-body character portrait`];
   if (character.name) bits.push(`named ${character.name}`);
   if (character.origin) bits.push(`of the ${String(character.origin).replace(/[-_]/g, " ")}`);
   if (character.background) bits.push(String(character.background).replace(/[-_]/g, " "));
-  const gear = (character.inventory || []).map(i => i.name || i.itemId).filter(Boolean).slice(0, 3);
+  const gear = (character.inventory || []).map(itemProvenancePhrase).filter(Boolean).slice(0, 3);
   if (gear.length) bits.push(`carrying ${gear.join(", ")}`);
   const arc = character.bio?.motivation || character.currentAim;
   if (arc) bits.push(String(arc).slice(0, 120));
+  const co = opts.withCompanion;
+  if (co?.name) bits.push(`alongside ${co.name}${co.appearance ? `, ${String(co.appearance).slice(0, 140)}` : ""}`);
   return bits.join(", ");
 }
 
 /** Assemble the raw (pre-floors) descriptive prompt for a subject of a given kind. Pure. */
 export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
-  if (kind === "character") return characterPromptSeed(subject);
+  if (kind === "character") return characterPromptSeed(subject, ctx);
   if (kind === "npc") return `${formOf(subject)}, character portrait of ${subject.name || "a figure"}, ${subject.role || ""}. ${subject.voiceHints || ""}`.trim();
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   if (kind === "item") return `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
@@ -190,14 +207,14 @@ export function imageURLFor(kind, safePrompt, seedKey = "") {
  *  and the URL rides the save/sync like any other field. `field` defaults per kind (character →
  *  portrait, everything else → image). ratingLevel = the viewing player's ceiling; isMinor is
  *  derived from the subject unless forced. Mutates + returns the URL (or null when art is off). */
-export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, seedKey = null, field = null, force = false } = {}) {
+export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, seedKey = null, field = null, force = false, promptOpts = {} } = {}) {
   if (!record) return null;
   const key = field || (kind === "character" ? "portrait" : "image");
   if (!force && record[key]) return record[key];
   if (!imagesEnabled()) return record[key] || null;
   const minor = isMinor == null ? isMinorSubject(record) : !!isMinor;
-  const raw = assembleImagePrompt(kind, record);
-  const safe = sanitizeImagePrompt(raw, { ratingLevel, isMinor: minor });
+  const raw = assembleImagePrompt(kind, record, promptOpts); // SNG-110: one-off override / companion / provenance
+  const safe = sanitizeImagePrompt(raw, { ratingLevel, isMinor: minor }); // THE FLOORS run AFTER every addition
   const url = imageURLFor(kind, safe, seedKey || record.id || record.name || raw);
   record[key] = url;
   return url;
@@ -221,6 +238,17 @@ export function addGalleryImage(character, { kind, prompt = "", url, caption = "
   character.gallery.unshift({ kind, prompt: String(prompt).slice(0, 200), url, caption: String(caption).slice(0, 120), worldDay, at: nowStamp() });
   character.gallery = character.gallery.slice(0, GALLERY_CAP);
   return character.gallery;
+}
+
+/** SNG-110: remove an image from the gallery by its url (the stable per-image key — dedup is by url).
+ *  Returns { gallery, wasPortrait } — wasPortrait true when the removed image is the current primary
+ *  portrait, so the caller can regenerate (a character is never left imageless). Pure (mutates). */
+export function deleteGalleryImage(character, url) {
+  ensureGallery(character);
+  const wasPortrait = character.portrait === url;
+  character.gallery = character.gallery.filter(g => g.url !== url);
+  if (wasPortrait) character.portrait = null; // caller regenerates from the current seed
+  return { gallery: character.gallery, wasPortrait };
 }
 
 /** A timestamp that degrades gracefully where Date is stubbed out (tests). */

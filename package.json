@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Singularity — an AI-GM narrative RPG (pure ES modules on GitHub Pages, no build step).",
   "scripts": {
-    "test": "node tests/smoke.mjs && node tests/parse_probe.mjs && node tests/content_ci.mjs && node tests/balance_sim.mjs",
+    "test": "node tests/smoke.mjs && node tests/parse_probe.mjs && node tests/content_ci.mjs && node tests/balance_sim.mjs && node tests/skill_battle_sim.mjs",
     "smoke": "node tests/smoke.mjs",
     "parse": "node tests/parse_probe.mjs",
     "content-ci": "node tests/content_ci.mjs",

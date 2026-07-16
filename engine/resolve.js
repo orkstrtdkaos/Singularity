@@ -70,6 +70,11 @@ export function successChance(ctx) {
   // SNG-090: the substrate penalty — a SEPARATE, already-clamped environmental term (never folded into spectral).
   if (substratePenalty) add("substrate (the lattice here)", -substratePenalty);
 
+  // SNG-098: skill-battle contest terms — matchup edge (reveal beats conceal), intensity (Surge/Conserve).
+  // Each enters as its OWN named, self-summing line (SNG-106 honesty), so the tier-3 fog view shows the
+  // opponent's real math. Absent outside a skill battle.
+  for (const m of ctx.contestMods || []) add(m.label, m.value);
+
   // Exhaustion: at zero energy everything is harder — body and field both spent
   if ((character.energy ?? 1) <= 0) add("exhausted", -(rules.energy?.exhaustedPenalty ?? 10));
 

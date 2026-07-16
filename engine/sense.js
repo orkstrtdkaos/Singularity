@@ -44,3 +44,34 @@ export function renderSense(trueChance, tier) {
 export function senseAction(ctx, trueChance) {
   return renderSense(trueChance, senseTier(ctx));
 }
+
+/** SNG-098: FOG OF WAR against an opponent's skill-battle round. senseTier is a function of the VIEWER
+ *  (attunement + Strategist-on-scout + a bought tier from a "read them" action), never of the thing sensed —
+ *  so it points at the adversary unchanged. Returns exactly the slice of the opponent's TRUE round the
+ *  viewer's tier earns (per sb.senseVisibility): tier 0 outcome-only, tier 3 the full SNG-106 breakdown.
+ *  THE ENGINE ALREADY KNOWS THE WHOLE ROUND — this gates DISPLAY only; it never fabricates a number.
+ *  `oppRound` is the `opponent` receipt from battleRound. Pure. */
+export function senseOpponent(viewer, oppRound, rules, sb, { scouting = false, buyTier = 0, aptitudeMods = {} } = {}) {
+  const maxTier = (rules?.senseTiers || []).reduce((m, t) => Math.max(m, t.tier), 0);
+  let tier = senseTier({ character: viewer, action: { planned: scouting }, location: null, rules, aptitudeMods });
+  tier = Math.max(0, Math.min(maxTier, tier + (buyTier || 0)));
+  const vis = (sb?.senseVisibility && sb.senseVisibility[String(tier)]) || { reveals: ["outcome"] };
+  const reveals = new Set(vis.reveals || ["outcome"]);
+  const revealed = {};
+  if (reveals.has("outcome")) revealed.outcome = (oppRound?.margin ?? 0) >= 0 ? "pressed the advantage" : "faltered";
+  if (reveals.has("intent")) revealed.intent = oppRound?.function || null;
+  if (reveals.has("band")) revealed.band = marginBand(oppRound?.margin ?? 0);
+  if (reveals.has("skill")) revealed.skill = oppRound?.name || oppRound?.function || null;
+  if (reveals.has("intensity")) revealed.intensity = oppRound?.intensity || null;
+  if (reveals.has("breakdown")) revealed.breakdown = oppRound?.breakdown || null; // the tier-3 "see their math" view (SNG-106 popup)
+  return { tier, label: vis.label || null, revealed };
+}
+
+/** A qualitative band on a contest roll's margin — never the number (that's tier 3 only). */
+function marginBand(margin) {
+  if (margin >= 25) return "a crushing move";
+  if (margin >= 10) return "a strong move";
+  if (margin >= -5) return "an even move";
+  if (margin >= -20) return "a weak move";
+  return "a faltering move";
+}

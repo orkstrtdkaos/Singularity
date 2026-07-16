@@ -43,5 +43,64 @@
     {"battle": "the Edge duelist (Last Form, T5) vs a Churn-reaver (Unraveling Blow, T3)", "how": "strike vs strike, but the reaver's CHAOS domain resists the Edge's ORDER-read \u2014 the Last Form needs a form to read, and chaos gives it none (-matchup). The duelist's tier edge vs the reaver's matchup edge: a real contest, several rounds, decided by who commits energy at the right moment."}
   ],
 
+  "engine": {
+    "note": "SNG-098 machine layer — structured so skill_battle.js reads NUMBERS, never the prose above (the §7b lesson). The prose stays as the design record; this is what the engine executes.",
+    "functionMatchup": {
+      "note": "attacker function -> defender function -> roll bonus for the attacker. Defensive functions BLUNT (see defensiveFunctions): they cap how much the attacker's margin can exceed, they never win the round outright.",
+      "edges": {
+        "reveal":  { "conceal": 2, "reveal": 0 },
+        "conceal": { "reveal": -2, "conceal": 0 },
+        "strike":  { "shield": 0, "bind": 1, "ward": 0, "strike": 0 },
+        "break":   { "ward": 1, "shield": 1, "break": 0 },
+        "bind":    { "move": 2, "bind": 0 },
+        "move":    { "bind": -2, "move": 0 },
+        "heal":    { "strike": 0, "break": 0 }
+      },
+      "defensiveFunctions": ["shield", "ward", "resist"],
+      "defensiveBluntCap": 3,
+      "default": 0
+    },
+    "intensityLevels": ["conserve", "standard", "surge"],
+    "momentum": { "meterMax": 10, "marginScale": 0.5, "surgeCrushEndsIt": 8, "note": "bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. A single round-margin >= surgeCrushEndsIt ends it in one blow." },
+    "attrition": { "outOfEnergyLosesContest": true, "note": "a side that cannot pay a round's energy cost can only Conserve; at 0 energy it forfeits the contest even if ahead on rolls — attrition is the second win condition." },
+    "opponentPolicy": {
+      "note": "deterministic + seeded — the ENGINE picks the opponent's skill+intensity, never the narrative GM. Behind on momentum -> press (Surge); ahead -> pace (Conserve); tacticTags bias it. Skill pick: the function that matches up best against the player's last-SHOWN tendency (only what fog let them reveal to the engine's memory of the player).",
+      "behindSurgeAt": -3,
+      "aheadConserveAt": 3,
+      "defaultIntensity": "standard",
+      "tacticBias": {
+        "berserker": { "surge": true },
+        "reckless":  { "surge": true },
+        "duelist":   { "pace": true },
+        "cautious":  { "pace": true }
+      }
+    },
+    "senseVisibility": {
+      "note": "your senseTier vs the opponent gates what their round shows. Fog is presentation over TRUE state — the engine computes both full rolls; this table only hides display. NEVER fabricate a number to fill fog: show less, never false.",
+      "0": { "reveals": ["outcome"], "label": "blind — you fight by feel; only the aftermath" },
+      "1": { "reveals": ["outcome", "intent"], "label": "a read — their intent category, enough to counter-pick" },
+      "2": { "reveals": ["outcome", "intent", "band"], "label": "a measure — intent plus a band on their roll" },
+      "3": { "reveals": ["outcome", "intent", "band", "skill", "intensity", "breakdown"], "label": "near-precise — their skill, intensity, and full roll breakdown" }
+    },
+    "revealActionBuysTier": 1,
+    "opponentSheetSynthesis": {
+      "note": "a duel opponent carries threat + tacticTags but no skills[]. Synthesize a modest sheet; an authored opponent.skills[] overrides. threat -> attribute level + ability tier; energy from a threat-scaled pool.",
+      "threatToAttribute": 0.08,
+      "attributeFloor": 2,
+      "attributeCeiling": 6,
+      "threatToTier": 0.06,
+      "tierFloor": 1,
+      "tierCeiling": 4,
+      "energyBase": 40,
+      "threatToEnergy": 1.2,
+      "archetypeSkills": {
+        "berserker": [{ "function": "strike", "name": "the reaving blow" }, { "function": "break", "name": "the shatter" }],
+        "duelist":   [{ "function": "strike", "name": "the measured cut" }, { "function": "shield", "name": "the turned guard" }],
+        "trickster": [{ "function": "conceal", "name": "the feint" }, { "function": "move", "name": "the slip" }],
+        "warden":    [{ "function": "ward", "name": "the held line" }, { "function": "bind", "name": "the pin" }],
+        "default":   [{ "function": "strike", "name": "a hard strike" }, { "function": "shield", "name": "a raised guard" }]
+      }
+    }
+  },
   "buildImplication": "Engine: a skill-battle mode alongside single-check resolution \u2014 triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine \u2014 unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."
 }

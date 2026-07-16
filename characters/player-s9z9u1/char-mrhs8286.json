@@ -1678,153 +1678,182 @@
         "player": "\"Mara sent me — she thought you might have something I need before I leave the valley.\" Name the connection openly; let Sorel understand you know who they are and where they've been.",
         "summary": "Silas names Mara as his referral — Sorel recognizes the credential and opens the conversation.",
         "narration": "The words land easy, the way true things do. \"Mara sent me,\" you say, not quite to Aldric and not quite to Sorel — to the room, letting each of them sort out which part belongs to them. \"She thought you might have something I need before I leave the valley.\"\n\nSorel's eyes move once — a quick inventory: your face, Memory's shaft against the door-frame, the faint crow-call from the roof ridge where Huginn has settled. Then they come back to you, and the wariness softens into something more complicated. Not relief. Recognition, maybe, with an edge of decision finally made for them by someone else's hand. They set the nearest rack-rung down and shift the pack off the shoulder — not all the way off, just enough to take the weight. \"You're the Ashwarden's man,\" they say, and it is not quite a question. \"Mara's been careful about who she passes names to. If she sent you to me, you're past the first cut.\"\n\nAldric makes a small sound — the sound of a man watching two separate threads arrive at the same loom. He sets the fillet knife down on the block and picks up a cloth. Done.\n\nSorel's gaze settles on you properly now, steady and appraising. The pack is still half-on, half-off — they haven't decided about the weight yet, which is to say they haven't decided how long they're staying. \"The Edge District,\" they say. \"That's what you're walking toward. Tell me what you need to find there, and I'll tell you what I know about the road.\""
+      },
+      {
+        "player": "Wait for Pell — she's two minutes behind on the south lane. Hold the load-bearing conversation until she's in the room. Introduce them, let Sorel take the full picture of who you're traveling with.",
+        "summary": "Pell arrives; Sorel takes in the full picture and opens the real conversation.",
+        "narration": "The wait is shorter than two minutes. You hear Pell's step on the packed earth outside before you see her — a deliberate, unhurried cadence, the kind of walk that doesn't announce itself but doesn't hide either. She comes through the back door the way she moves through her forge: oriented, taking the room in one glance, Memory's shaft touching her hand briefly as she passes it in the door-frame. She reads Aldric, reads Sorel, reads you. Doesn't say anything yet.\n\nYou give her the half-beat to settle. \"This is Pell Marsh,\" you say to Sorel. \"She's the reason I know what I'm looking for.\" Not a credential-drop, just true. Pell doesn't react to the introduction except to shift her weight slightly — comfortable with being named, not interested in being performed at.\n\nSorel takes her in the same way they took you — face, hands, the easy authority of someone who's been inside hard work for a long time. The edge of decision softens another degree. \"Millbrook's smith,\" they say, and it's not a question. The old pass circuit keeps its own register, apparently. They glance between you once, sorting out the geometry of what they're looking at, and something in their posture completes a calculation. The pack comes all the way down now, set against the rack-leg with a quiet thud. \"Alright,\" Sorel says, to both of you. \"Edge District. Tell me what kind of person you're trying to find and how long you have.\"\n\nAldric picks up his knife — back to the perch row, not leaving, just giving the conversation its rightful owners. The curing fire breathes low and steady. Huginn shifts once on the roof ridge, audible through the thin boards, and doesn't move again."
       }
     ],
     "lastTurn": {
-      "narration": "The words land easy, the way true things do. \"Mara sent me,\" you say, not quite to Aldric and not quite to Sorel — to the room, letting each of them sort out which part belongs to them. \"She thought you might have something I need before I leave the valley.\"\n\nSorel's eyes move once — a quick inventory: your face, Memory's shaft against the door-frame, the faint crow-call from the roof ridge where Huginn has settled. Then they come back to you, and the wariness softens into something more complicated. Not relief. Recognition, maybe, with an edge of decision finally made for them by someone else's hand. They set the nearest rack-rung down and shift the pack off the shoulder — not all the way off, just enough to take the weight. \"You're the Ashwarden's man,\" they say, and it is not quite a question. \"Mara's been careful about who she passes names to. If she sent you to me, you're past the first cut.\"\n\nAldric makes a small sound — the sound of a man watching two separate threads arrive at the same loom. He sets the fillet knife down on the block and picks up a cloth. Done.\n\nSorel's gaze settles on you properly now, steady and appraising. The pack is still half-on, half-off — they haven't decided about the weight yet, which is to say they haven't decided how long they're staying. \"The Edge District,\" they say. \"That's what you're walking toward. Tell me what you need to find there, and I'll tell you what I know about the road.\"",
-      "sceneSummary": "Silas names Mara as his referral — Sorel recognizes the credential and opens the conversation.",
+      "narration": "The wait is shorter than two minutes. You hear Pell's step on the packed earth outside before you see her — a deliberate, unhurried cadence, the kind of walk that doesn't announce itself but doesn't hide either. She comes through the back door the way she moves through her forge: oriented, taking the room in one glance, Memory's shaft touching her hand briefly as she passes it in the door-frame. She reads Aldric, reads Sorel, reads you. Doesn't say anything yet.\n\nYou give her the half-beat to settle. \"This is Pell Marsh,\" you say to Sorel. \"She's the reason I know what I'm looking for.\" Not a credential-drop, just true. Pell doesn't react to the introduction except to shift her weight slightly — comfortable with being named, not interested in being performed at.\n\nSorel takes her in the same way they took you — face, hands, the easy authority of someone who's been inside hard work for a long time. The edge of decision softens another degree. \"Millbrook's smith,\" they say, and it's not a question. The old pass circuit keeps its own register, apparently. They glance between you once, sorting out the geometry of what they're looking at, and something in their posture completes a calculation. The pack comes all the way down now, set against the rack-leg with a quiet thud. \"Alright,\" Sorel says, to both of you. \"Edge District. Tell me what kind of person you're trying to find and how long you have.\"\n\nAldric picks up his knife — back to the perch row, not leaving, just giving the conversation its rightful owners. The curing fire breathes low and steady. Huginn shifts once on the roof ridge, audible through the thin boards, and doesn't move again.",
+      "sceneSummary": "Pell arrives; Sorel takes in the full picture and opens the real conversation.",
       "choices": [
         {
-          "label": "Name the search directly — a pre-Transition structural expert, someone who can read buried infrastructure and get their hands dirty. Give Sorel the problem in plain terms and let them match it to a name.",
+          "label": "Describe the structural problem precisely — the vault section, the torque signature, the instrument removed from the cradle-recess. Let Sorel understand you need someone who knows pre-Transition hydraulic engineering from the inside, not just a scholar who's read about it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "inform",
+            "precise",
+            "technical"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Lead with the timeline first — six weeks, a structural failure that will hit the east-channel main feeder, and a community that doesn't know yet. Let urgency shape what Sorel tells you.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "direct",
+            "persuade",
+            "urgent",
             "inform"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Give the timeline first — six weeks, a failing vault section, a surge that will cut the east-channel main feeder. The problem before the ask. Let Sorel understand the weight before they answer.",
+          "label": "Ask Sorel what they know before you commit to the full picture — they expected you, they've been to the Edge District twice, and they're holding something back. Find out what the currency of this conversation actually is before you spend it all.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful",
+            "probe"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Let Pell take the technical lead — she diagnosed the torque signature, she named the valve mechanism, she walked the northeast line to the wash-room. Her read of the structure is more precise than yours. Give her the floor and see what Sorel does with a smith's account.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "inform"
+            "help",
+            "observe",
+            "defer"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask what brought Sorel back to Millbrook — they said 'earlier than I thought', and the road they came off had the texture of finishing, not starting. Get that out of the air before you go any further.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "rapport"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Wait for Pell — she's two minutes behind on the south lane. Hold the load-bearing conversation until she's in the room. Introduce them, let Sorel take the full picture of who you're traveling with.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "wait",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
       "scene": {
-        "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas.",
+        "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas and Pell.",
         "npcsPresent": [
           {
             "name": "Aldric",
-            "state": "Knife set down, cloth in hand — watching the room settle, done circling."
+            "state": "Back at the perch row, knife resumed — present but giving the conversation its rightful owners."
+          },
+          {
+            "name": "Pell",
+            "state": "Just inside the back door, weight settled, reading the room — quiet and ready."
           },
           {
             "name": "Sorel",
-            "state": "Pack half-off the shoulder, eyes on Silas — opened the conversation, waiting for the ask."
+            "state": "Pack fully down against the rack-leg — both of you taken in, calculation complete, waiting for the ask."
           },
           {
             "name": "Huginn",
-            "state": "On the roof ridge outside — settled, attending."
+            "state": "On the roof ridge outside — shifted once, settled, attending."
           }
         ],
         "objects": [
           "Memory (spear, butt against the door-frame)",
           "Smoking rack with hanging perch",
           "Curing fire (low, steady)",
-          "Sorel's pack (half-shouldered)",
-          "Back door (open behind Silas)",
-          "Fillet knife (set down on the block)"
+          "Sorel's pack (set down against the rack-leg)",
+          "Back door (open)",
+          "Fillet knife (in Aldric's hand, working the perch row)"
         ],
         "threads": [
           "Sorel said 'earlier than I thought' — implies prior knowledge of Silas; source and extent unknown",
-          "Sorel has opened: 'tell me what you need to find there' — waiting for Silas's ask",
-          "Aldric's piece of the exchange still unspoken — what he was circling with Sorel unresolved",
-          "Pell two minutes behind on the south lane"
+          "Sorel has asked: tell me what kind of person you're trying to find and how long you have — waiting for the full ask",
+          "Aldric's piece of the exchange still unspoken — what he was circling with Sorel before Silas arrived",
+          "Pell now in the room — Sorel has read her; the geometry of the group is now established"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Arrived through the back door two minutes after Silas — took the room in one glance, received the introduction without performance, settled into ready stillness. Sorel recognized her by trade without prompting.",
+          "learned": [
+            "Sorel knows Millbrook's smith by reputation from the old pass circuit"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Inside Aldric's smokehouse — just arrived, standing near the back door, present for the Edge District conversation."
+        },
+        {
+          "op": "update",
           "npcId": "sorel",
           "name": "Sorel",
-          "note": "Recognized Mara's referral as a credential — named Silas as 'the Ashwarden's man' and opened the conversation about the Edge District road.",
+          "role": "Spice-broker, old pass circuit — Edge District contact",
+          "note": "Pack fully set down after taking in Pell — calculation complete. Asked both Silas and Pell to name the kind of person they're looking for and how long they have.",
           "learned": [
-            "Mara passes names carefully — Silas being sent means he's past her first cut",
-            "Sorel expected Silas but not this soon — 'earlier than I thought' still unexplained"
+            "Pell Marsh is traveling with Silas — the smith and the Ashwarden together clarified the shape of the ask for Sorel"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Inside Aldric's smokehouse, pack half-off shoulder — conversation opened, waiting for Silas's ask about the Edge District."
+          "statusNote": "Inside the smokehouse, pack down, engaged — ready to give the Edge District road."
         },
         {
           "op": "update",
           "npcId": "aldric",
           "name": "Aldric",
-          "note": "Set the knife down when Silas named Mara — done circling, watching the two threads converge.",
+          "role": "Smokehouse operator, Millbrook",
+          "note": "Knife back in hand at the perch row — reading the room without inserting himself, giving the conversation to its rightful owners.",
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the smokehouse block, knife set down — passive witness to Sorel and Silas's opening exchange."
+          "statusNote": "At the smokehouse block, working the perch row — present witness to the opening of the Edge District conversation."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange — a minute or two at the smokehouse back door."
+        "hoursPassed": 0.1,
+        "why": "A two-minute wait for Pell — barely a beat."
       }
     },
     "sceneState": {
-      "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas.",
+      "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas and Pell.",
       "npcsPresent": [
         {
           "name": "Aldric",
-          "state": "Knife set down, cloth in hand — watching the room settle, done circling."
+          "state": "Back at the perch row, knife resumed — present but giving the conversation its rightful owners."
+        },
+        {
+          "name": "Pell",
+          "state": "Just inside the back door, weight settled, reading the room — quiet and ready."
         },
         {
           "name": "Sorel",
-          "state": "Pack half-off the shoulder, eyes on Silas — opened the conversation, waiting for the ask."
+          "state": "Pack fully down against the rack-leg — both of you taken in, calculation complete, waiting for the ask."
         },
         {
           "name": "Huginn",
-          "state": "On the roof ridge outside — settled, attending."
+          "state": "On the roof ridge outside — shifted once, settled, attending."
         }
       ],
       "objects": [
         "Memory (spear, butt against the door-frame)",
         "Smoking rack with hanging perch",
         "Curing fire (low, steady)",
-        "Sorel's pack (half-shouldered)",
-        "Back door (open behind Silas)",
-        "Fillet knife (set down on the block)"
+        "Sorel's pack (set down against the rack-leg)",
+        "Back door (open)",
+        "Fillet knife (in Aldric's hand, working the perch row)"
       ],
       "threads": [
         "Sorel said 'earlier than I thought' — implies prior knowledge of Silas; source and extent unknown",
-        "Sorel has opened: 'tell me what you need to find there' — waiting for Silas's ask",
-        "Aldric's piece of the exchange still unspoken — what he was circling with Sorel unresolved",
-        "Pell two minutes behind on the south lane"
+        "Sorel has asked: tell me what kind of person you're trying to find and how long you have — waiting for the full ask",
+        "Aldric's piece of the exchange still unspoken — what he was circling with Sorel before Silas arrived",
+        "Pell now in the room — Sorel has read her; the geometry of the group is now established"
       ]
     }
   },
@@ -1926,7 +1955,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s",
         "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean.",
         "[d1] Received both animals without ceremony — named the boar's upstream shift as a three-week observation. Account squared; second trail parcel added.",
         "[d2] Squared the full account without argument — named the cord-weights cleanly, accepted the Mara offset without pushback. Ledger closed and initialed.",
@@ -1935,7 +1963,8 @@
         "[d2] Produced a cured bladder waterskin from back storage — named two cord-weight or standing credit as the price without ceremony. Returned to the perch row.",
         "[d2] Took the standing credit deduction without ceremony — ledger marked, waterskin handed over, knife back in the perch row. Sent Silas off with 'safe road' to the block.",
         "[d2] Inside at the morning perch row, in a circling conversation with Sorel — neither saying the load-bearing thing yet.",
-        "[d2] Set the knife down when Silas named Mara — done circling, watching the two threads converge."
+        "[d2] Set the knife down when Silas named Mara — done circling, watching the two threads converge.",
+        "[d2] Knife back in hand at the perch row — reading the room without inserting himself, giving the conversation to its rightful owners."
       ],
       "knownFacts": [
         "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit",
@@ -1956,7 +1985,7 @@
         "practical stock management"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse block, knife set down — passive witness to Sorel and Silas's opening exchange.",
+      "statusNote": "At the smokehouse block, working the perch row — present witness to the opening of the Edge District conversation.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -1973,7 +2002,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Silas set the tempo this time — she met it, unguarded throughout, verdict afterward: 'Thorough. Again.'",
         "[d2] Received Silas's plain declaration of bond and desire — pressed her cheek into his palm once, then laid her hand flat on his sternum and admitted she's managing wanting him badly. ",
         "[d2] Held Memory with Silas — felt the collar at range, admitted it unprompted. Received the 'managing it badly' observation without deflecting. The tinker/farmhand question is landing.",
         "[d2] Named no prior claims plainly — one man, two winters back, sonic work from the Heights; it ran longer than it should, he stopped coming, she didn't go looking. Set the whetstone ba",
@@ -1982,17 +2010,18 @@
         "[d2] Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting.",
         "[d2] Stopped and waiting without impatience — reading Silas's expression off the note.",
         "[d2] Read Mara's note, filed 'Sorel' without ceremony, watching Silas decide.",
-        "[d2] Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now."
+        "[d2] Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now.",
+        "[d2] Arrived through the back door two minutes after Silas — took the room in one glance, received the introduction without performance, settled into ready stillness. Sorel recognized h"
       ],
       "knownFacts": [
-        "She acknowledged Huginn's thread in the spear as evidence of her current reasoning failing",
         "She is managing the wanting badly, by her own account, and content to be",
         "Memory's collar rune is present to her even when she's not looking at it — she felt it through her thread",
         "Silas has named their bond's product explicitly as a first child and finds her admitted want intoxicating",
         "No current prior claims on her attention — the sonic-man from the Heights ended two winters ago, by his absence not her pursuit",
         "Her not-asking is a habit, named without apology — she carries wants without words for them and has done so a long time",
         "Silas named asking as a learnable skill and offered himself as practice — she received it plainly",
-        "Sorel has returned to Millbrook unexpectedly after a season's absence — currently at the smokehouse"
+        "Sorel has returned to Millbrook unexpectedly after a season's absence — currently at the smokehouse",
+        "Sorel knows Millbrook's smith by reputation from the old pass circuit"
       ],
       "skillsObserved": [
         "reading heat and evenness through the hand on the chest — th",
@@ -2003,7 +2032,7 @@
         "naming a technical and personal observation in the same regi"
       ],
       "status": "active",
-      "statusNote": "On the south lane, walking to the smokehouse — two to three minutes behind Silas.",
+      "statusNote": "Inside Aldric's smokehouse — just arrived, standing near the back door, present for the Edge District conversation.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2159,25 +2188,26 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d2] Read through the wall via The Attended End — partial only. A season closing, travel finishing, something compressed and withheld. Cause and whether it is chosen remain unknown.",
         "[d2] First face-to-face: Silas entered without announcement; Sorel's first words revealed prior expectation of him — source unknown.",
-        "[d2] Recognized Mara's referral as a credential — named Silas as 'the Ashwarden's man' and opened the conversation about the Edge District road."
+        "[d2] Recognized Mara's referral as a credential — named Silas as 'the Ashwarden's man' and opened the conversation about the Edge District road.",
+        "[d2] Pack fully set down after taking in Pell — calculation complete. Asked both Silas and Pell to name the kind of person they're looking for and how long they have."
       ],
       "knownFacts": [
-        "Something is ending for Sorel — the texture of a finishing road, a season coming to a close rather than a crisis",
         "Something withheld — cannot determine if the withholding is from Aldric, themselves, or the situation",
         "The ending has the register of travel finishing, not beginning",
         "Knew or expected Silas before he arrived — 'earlier than I thought' implies advance knowledge",
         "Travel-worn from a single long road, not many short ones — finishing something, not starting",
         "Pack still on shoulder — came to say something and found it harder than expected",
         "Mara passes names carefully — Silas being sent means he's past her first cut",
-        "Sorel expected Silas but not this soon — 'earlier than I thought' still unexplained"
+        "Sorel expected Silas but not this soon — 'earlier than I thought' still unexplained",
+        "Pell Marsh is traveling with Silas — the smith and the Ashwarden together clarified the shape of the ask for Sorel"
       ],
       "skillsObserved": [],
       "status": "active",
-      "statusNote": "Inside Aldric's smokehouse, pack half-off shoulder — conversation opened, waiting for Silas's ask about the Edge District.",
+      "statusNote": "Inside the smokehouse, pack down, engaged — ready to give the Edge District road.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2935,15 +2965,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.91783797576262,
-    "cerebral": 40.878411856113395,
-    "social": 60.97537899829947,
-    "generous": 17.97788055726045,
-    "cautious": 47.857253903820116,
-    "physical": 0.819644742959478,
-    "risky": 2.725864392849745,
-    "ruthless": 2.0415187492092612,
-    "carousing": 1.411677430780896
+    "strategic": 60.61324878588381,
+    "cerebral": 40.67401979683283,
+    "social": 60.670502103307975,
+    "generous": 17.887991154474147,
+    "cautious": 48.61796763430102,
+    "physical": 0.8155465192446806,
+    "risky": 2.712235070885496,
+    "ruthless": 2.031311155463215,
+    "carousing": 1.4046190436269914
   },
   "aptitudes": [
     "strategist",
@@ -2951,7 +2981,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 263,
+  "actionCount": 264,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3077,8 +3107,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784162445696,
-  "rev": 363,
+  "updatedAt": 1784163055567,
+  "rev": 364,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3640,7 +3670,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 64
+    "valley": 65
   },
   "foreclosed": [
     "rootkin",

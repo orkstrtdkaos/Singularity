@@ -5,6 +5,11 @@
 - **Aevi authoring — the ROSTER (in parallel):** the ~18–24 aptitude definitions themselves (earned + amorous + inverse), each a balanced bonus-AND-cost, + the new-tendency intent-tag additions. Aevi content, like the axis-touch combos. **Starting now.**
 - **Dependency declared:** `devoted_lover` reads the SNG-108 partner bond → ship after 108 or ship inert. Rest builds independently.
 
+## 🎒 SNG-114 — Inventory unify + intentful "Use in scene" (specced, awaiting CCode)
+`po/SPEC_SNG-114_inventory_unify_use_intent.md`. **Two findings, one ticket.** (1) "Use in scene" on a non-consumable literally submits `onFreeform("I use my X here")` — a canned, intent-less text action the GM must guess at; storied items (Pell's whetstone) deserve better. Fix: item `uses:[{label,prompt}]` + a "how?" field, generic prompt as fallback. (2) **Redundancy confirmed in code:** two separate item-card renderers — popup (`data-invuse`, shows effects) and play sidebar (`data-use`, shows image) — same 3 actions, different attrs/handlers/features, and **already drifted** (invuse vs use behave differently). Consolidate to one `itemCard` superset component; parity test so "Use in scene" does ONE thing regardless of surface.
+
+---
+
 ## 📚 THE CHARACTER CHRONICLE ARC + 3 bugs (Aevi authored 2026-07-14, awaiting CCode ROUND 2)
 
 Erik play-session findings — the through-line is the session thesis: **the game computes the accreted self (deeds, bonds, standing, grown items) but shows the player almost none of it.** These surface and weave it.

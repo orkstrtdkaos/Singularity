@@ -14,7 +14,10 @@ Run `update.bat` to sync. **Nothing broken found — the two architectural piece
 
 ---
 
-## 🗺️ LOCATION + UI BATCH — specced (Erik play session 2026-07-16, awaiting CCode)
+## 🗺️ LOCATION + UI BATCH — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.81)
+
+> **CCode 2026-07-16:** all three built + verified. **SNG-117** — `isPlaceKnown` (visited | adjacent | en-route/GM-named), map + headers name any KNOWN place, unresolvable `moveTo` MINTS an idempotent travelable place so the header never lies (soft-exit-without-moveTo inference is the one flagged boundary). **SNG-118** — `aptitudeChips` (axis-tinted, fading/lineage states, tap→popover). **SNG-119** — `knownPeopleAt` scopes bonds to a place; current-title standing chip + folded "standing & who's here" into headers. 9 smoke tests + browser-verified on real content. Writeup: `po/results/20260716_SNG-117_118_119_location_ui.md`. (Original spec below.)
+
 
 - **SNG-117 — The world you know is navigable** (bug cluster, priority). `po/SPEC_SNG-117_known_world_navigable.md`. **Two symptoms, ONE root cause:** the engine only travels to / names places with a resolvable location record. (a) Left Millbrook "via the pass" → header stuck on Millbrook (exit resolved to no id; SNG-056 header-follows-fiction only fires on a resolvable `moveTo`). (b) Map shows `?` for every un-*visited* place even when you know its name / are traveling to it (L3214 gates name on `visited`, not `known`). Fix: a **known-places layer** (heard/en-route/rumoured/adjacent, not just visited) + **mint named-but-unrecorded destinations** ("the pass" becomes a real place via the existing gen path) + **header never asserts a place the fiction has left** (mint/infer/transit). Map names + makes clickable any KNOWN place.
 - **SNG-118 — Play-style as clickable chips.** `po/SPEC_SNG-118_playstyle_chips.md`. The prose wall becomes tight colored `[Strategist]` chips, tap-to-expand (reuse info-dot popover), with fading/lineage/inverse states. Scales with the SNG-113 roster.

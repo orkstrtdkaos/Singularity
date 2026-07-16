@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 9,
-  "xp": 814,
+  "xp": 819,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -77,7 +77,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 130,
+  "energy": 125,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1995,95 +1995,72 @@
         "player": "Why Pell Marsh ... you absolute vixen.  Thrust and squeeze.  Do you like this?",
         "summary": "Silas names Pell Marsh and asks plainly — she answers without qualification.",
         "narration": "The name comes out in a breath against the back of her neck — *Why, Pell Marsh* — and she makes a sound that is not quite a laugh and not quite anything else, low and unguarded, and her hands tighten over yours for a moment before she releases them entirely.\n\nYou move into her and the cold at the edge of the overhang means nothing. Her warmth is the only temperature that exists. The thrust is deliberate — not urgent, not performing urgency — and her breath leaves her in a long open shape, her head still tipped back against your shoulder, her neck a clean line in the firelight. The word *vixen* landed somewhere it was going to stay; you can feel the smile it made even though you cannot see her face.\n\nYour hands press and release against the full weight of her breasts, slow and deliberate, and you feel everything she is managing not to say. Then you ask it plainly, your mouth at her ear: *Do you like this?*\n\nShe is quiet for one full breath. Then: \"Yes.\" No qualifier. No ledger-close. The word just sits there in the overhang air, flat and absolute and completely without defense, and Huginn does not move."
+      },
+      {
+        "player": "Watch the way her breasts sway and bounce as you thrust into her...  Tell me what you want Pell.",
+        "summary": "Silas watches Pell in the firelight and asks what she wants — she answers plainly, unguarded.",
+        "narration": "You slow the rhythm deliberately — not stopping, just giving yourself room to watch. The firelight is low and red and it does the work you couldn't have planned: every thrust rocks her forward a fraction and her breasts move with it, the weight of them swaying into your palms and then back, the press of her nipples against your fingers a point of heat in the cold air. You loosen your grip enough to feel the motion, not to hold it. She makes a sound at that — at the loosening — because she understands immediately that you are paying attention.\n\nYou say it against the skin where her neck meets her shoulder, your voice low enough that it belongs only here: *Tell me what you want, Pell.*\n\nHer breath comes out ragged. Her hands, still free of yours, find the stone in front of her — not pushing away, anchoring. A long beat where the only sounds are the fire's low tick and the wind past the overhang's lip. Then she turns her head just enough that the firelight catches the side of her face, and what's there is not the managed expression, not the composed register she carries like a second skin. Just her.\n\n*Slower,* she says. And then, quieter, like she's naming something she hadn't decided to say: *And don't stop looking at me.*"
       }
     ],
     "lastTurn": {
-      "narration": "The name comes out in a breath against the back of her neck — *Why, Pell Marsh* — and she makes a sound that is not quite a laugh and not quite anything else, low and unguarded, and her hands tighten over yours for a moment before she releases them entirely.\n\nYou move into her and the cold at the edge of the overhang means nothing. Her warmth is the only temperature that exists. The thrust is deliberate — not urgent, not performing urgency — and her breath leaves her in a long open shape, her head still tipped back against your shoulder, her neck a clean line in the firelight. The word *vixen* landed somewhere it was going to stay; you can feel the smile it made even though you cannot see her face.\n\nYour hands press and release against the full weight of her breasts, slow and deliberate, and you feel everything she is managing not to say. Then you ask it plainly, your mouth at her ear: *Do you like this?*\n\nShe is quiet for one full breath. Then: \"Yes.\" No qualifier. No ledger-close. The word just sits there in the overhang air, flat and absolute and completely without defense, and Huginn does not move.",
-      "sceneSummary": "Silas names Pell Marsh and asks plainly — she answers without qualification.",
+      "narration": "You slow the rhythm deliberately — not stopping, just giving yourself room to watch. The firelight is low and red and it does the work you couldn't have planned: every thrust rocks her forward a fraction and her breasts move with it, the weight of them swaying into your palms and then back, the press of her nipples against your fingers a point of heat in the cold air. You loosen your grip enough to feel the motion, not to hold it. She makes a sound at that — at the loosening — because she understands immediately that you are paying attention.\n\nYou say it against the skin where her neck meets her shoulder, your voice low enough that it belongs only here: *Tell me what you want, Pell.*\n\nHer breath comes out ragged. Her hands, still free of yours, find the stone in front of her — not pushing away, anchoring. A long beat where the only sounds are the fire's low tick and the wind past the overhang's lip. Then she turns her head just enough that the firelight catches the side of her face, and what's there is not the managed expression, not the composed register she carries like a second skin. Just her.\n\n*Slower,* she says. And then, quieter, like she's naming something she hadn't decided to say: *And don't stop looking at me.*",
+      "sceneSummary": "Silas watches Pell in the firelight and asks what she wants — she answers plainly, unguarded.",
       "choices": [
         {
-          "label": "Stay exactly here — slow, deliberate, let the answer land between you and keep moving into her.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "intimate",
-            "present",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Turn her — bring her around to face you in the firelight, hands still on her, and look at her properly.",
+          "label": "Give her what she asked for — slower, and your eyes on her the whole way through.",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "intimate",
-            "present",
-            "bold"
+            "careful",
+            "intimate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Say her name again — the full name, Pell Marsh — and nothing else. Let her hear what it sounds like coming from you.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "intimate",
-            "present",
-            "naming"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Reach for the last pour of the Resin Mountain Wine on the flat stone — offer it to her over her shoulder without breaking the rhythm.",
+          "label": "Ask again — more specifically. *What else?*",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "intimate",
-            "playful",
-            "present"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Turn her around — face to face now.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "difficulty": 0,
+          "intentTags": [
+            "intimate",
+            "bold"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Reach for the last pour of the Resin Mountain Wine and bring it into the warmth with you.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "intimate",
+            "careful"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Silas is behind Pell, inside her, arms forward across her, hands at her breasts; she has released his hands entirely and her head is tipped back against his shoulder, the word 'yes' still present in the overhang air.",
+        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Silas is behind Pell, inside her, hands loose at her breasts; she has anchored her hands against the stone and turned her head just enough for the firelight to catch her face — unguarded.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Head back against Silas's shoulder, hands released from his, breath slow and open — the one unguarded word still on her face."
+            "state": "Hands pressed to stone, head turned, face open in the firelight — two things named plainly: slower, and don't stop looking at her."
           },
           {
             "name": "Huginn",
-            "state": "Head tucked under one wing on the stone lip. Unmoved."
+            "state": "Head still tucked under one wing on the stone lip. Unmoved."
           }
         ],
         "objects": [
@@ -2099,7 +2076,7 @@
           "Rock overhang — south-facing, dry underside"
         ],
         "threads": [
-          "Pell answered plainly — the ledger she always closes is open right now.",
+          "Pell named two wants plainly — slower, and don't stop looking at her.",
           "The last pour of Resin Mountain Wine is still on the flat stone.",
           "Edge District bearing — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five."
@@ -2111,53 +2088,32 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Named plainly by Silas — Pell Marsh — and asked directly. Answered yes without qualification or armor. The ledger she is always managing is open.",
+          "note": "Named two wants plainly and without armor — slower, and don't stop looking at her. The second one came quieter, like she hadn't decided to say it.",
           "learned": [
-            "'Yes' — no qualifier, no close — the first time she has not managed the answer before it reached her mouth"
+            "She wants to be watched — and naming it cost her something small and real."
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the overhang camp on the far side of the pass, evening — inside the moment, undefended.",
+          "statusNote": "At the overhang camp on the far side of the pass, evening — inside the moment, fully unguarded for the second time.",
           "bondType": "romantic",
           "bondStage": "together"
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Pell answered 'yes' without qualification when asked directly if she likes this — the first fully unguarded answer she has given, no ledger-close, no management. The armor came down.",
-          "subjectId": "pell"
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short beat in the overhang evening"
-      },
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell Marsh",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Said yes — plainly, without qualifier — when asked directly at the overhang camp. The habit of managing it failed, once, completely.",
-          "links": [
-            "millbrook",
-            "the-unnamed-gift",
-            "memory-the-spear"
-          ]
-        }
-      ]
+        "why": "a short beat at the overhang, the night still early"
+      }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Silas is behind Pell, inside her, arms forward across her, hands at her breasts; she has released his hands entirely and her head is tipped back against his shoulder, the word 'yes' still present in the overhang air.",
+      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire settled to low red-orange coals. Silas is behind Pell, inside her, hands loose at her breasts; she has anchored her hands against the stone and turned her head just enough for the firelight to catch her face — unguarded.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Head back against Silas's shoulder, hands released from his, breath slow and open — the one unguarded word still on her "
+          "state": "Hands pressed to stone, head turned, face open in the firelight — two things named plainly: slower, and don't stop looki"
         },
         {
           "name": "Huginn",
-          "state": "Head tucked under one wing on the stone lip. Unmoved."
+          "state": "Head still tucked under one wing on the stone lip. Unmoved."
         }
       ],
       "objects": [
@@ -2173,7 +2129,7 @@
         "Rock overhang — south-facing, dry underside"
       ],
       "threads": [
-        "Pell answered plainly — the ledger she always closes is open right now.",
+        "Pell named two wants plainly — slower, and don't stop looking at her.",
         "The last pour of Resin Mountain Wine is still on the flat stone.",
         "Edge District bearing — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five."
@@ -2325,7 +2281,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Called the win fair, gave Silas his visual prize, then got both hands on his collar and named the shirt as the remaining score — the match is alive and she is entirely in it.",
         "[d2] Used Silas's braid-grip as a fixed point, dropped her weight to kill the reversal angle, and got the second button — clean tactical read under live conditions.",
         "[d2] Shadowstepped behind — caught the loosened waistband, turned, named the move as not wrestling. Smiling in a way that suggests she is recalibrating the game's rules rather than endi",
         "[d2] Silas's feint dropped her guard and her waistband — she let both go. Named both parts of what he said as believed, then closed the distance.",
@@ -2334,17 +2289,18 @@
         "[d2] Watched Silas undress without looking away — measuring rather than performing. Settled into a low open stance and is waiting. The game is plainly named on both sides now.",
         "[d2] Pulled Silas into her from behind, arms crossed forward across his chest — held the position longer than the technique required, then shifted grip deliberately. Said 'there' into h",
         "[d2] Silas reversed the hold — she let him move, curious about where it was going. Arms came up to cover his hands, not to stop them. Head back against his shoulder, breath slower. No a",
-        "[d2] Named plainly by Silas — Pell Marsh — and asked directly. Answered yes without qualification or armor. The ledger she is always managing is open."
+        "[d2] Named plainly by Silas — Pell Marsh — and asked directly. Answered yes without qualification or armor. The ledger she is always managing is open.",
+        "[d2] Named two wants plainly and without armor — slower, and don't stop looking at her. The second one came quieter, like she hadn't decided to say it."
       ],
       "knownFacts": [
-        "Silas's reversal attempt used the braid as leverage — she neutralized it by leaning into the hold rather than away from it",
         "Silas can shadowstep — she does not have a name for it yet but she knows that was not a footwork move",
         "Silas can feint with full commitment — the tell was real enough to work on someone who knew to watch for it",
         "When the game stopped being a game, she moved toward him rather than resetting",
         "Silas folds completely when she closes the distance — she read it and named it out loud",
         "Silas named the grapple plainly and without qualification — she read the double meaning and chose the stance anyway",
         "Leads with patience when she has the advantage — technique shifts to something else once the hold is established",
-        "'Yes' — no qualifier, no close — the first time she has not managed the answer before it reached her mouth"
+        "'Yes' — no qualifier, no close — the first time she has not managed the answer before it reached her mouth",
+        "She wants to be watched — and naming it cost her something small and real."
       ],
       "skillsObserved": [
         "reading a stain pattern independently against a known failur",
@@ -2355,7 +2311,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp on the far side of the pass, evening — inside the moment, undefended.",
+      "statusNote": "At the overhang camp on the far side of the pass, evening — inside the moment, fully unguarded for the second time.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3634,8 +3590,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784182679118,
-  "rev": 430,
+  "updatedAt": 1784182823674,
+  "rev": 431,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4198,7 +4154,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 121
+    "valley": 122
   },
   "foreclosed": [
     "rootkin",

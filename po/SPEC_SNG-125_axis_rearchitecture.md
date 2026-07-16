@@ -16,9 +16,18 @@
 
 The one real change is the **primary→secondary adjacency constraint** at selection time (and its display on the circle). Tertiary already behaves as "free"; the spec just makes that canonical and severs any lingering secondary-binding language.
 
-## ⚖ TWO RULINGS ERIK OWES (flagged, not pre-decided)
-1. **How adjacent is "adjacent"?** On the 24-tradition ring: immediate neighbor (±1 → only 2 choices, very tight) or the existing **kin band** (±small arc, ~4–6 choices)? **Recommend: reuse the existing `adjacent`/`kin` band** already in `domainAccess` — one coherent notion, sensible breadth, and it's already defined + displayed. Erik picks the arc width.
-2. **Existing characters (grandfather).** Silas = primary ashwarden, secondary cogitant, tertiary figurist. If cogitant isn't kin-adjacent to ashwarden under the new rule, this would make his build illegal. **The constraint must apply to NEW selection only; existing domain picks stay valid (Law-14: never invalidate owned ground).** Recommend building it grandfathered regardless; Erik confirms.
+## ✅ ERIK'S RULINGS — LOCKED (2026-07-16)
+1. **Adjacency = the existing KIN BAND.** Reuse `domainAccess`'s kin/adjacent definition; do not mint a second distance. Secondary must be kin-adjacent to primary.
+2. **Grandfather clause = YES, absolute.** Existing characters (Silas: cogitant secondary) stay legal and fully playable; the adjacency constraint gates NEW selection only. No owned ground ever invalidated.
+3. **Primary stays origin-seeded — AND origin is re-selectable on the creation screen, which re-picks primary.** VERIFIED already half-built: the `c-origin` dropdown (L1740) is changeable and its handler (L1760) ALREADY resets `state.domains` to null on change. So changing origin already re-seeds primary + clears domains for re-pick. **What SNG-125 adds:** after an origin change re-seeds the new primary, the secondary re-pick enforces the NEW kin band (adjacency measured from whatever primary the current origin seeds). The cascade infra exists; the constraint layers on.
+4. **Tertiary stays OPEN — its antipode is NOT closed.** Tertiary is the free wildcard reach. It closes/deepens ONLY later via the normal domain-progression path (SNG-101 promotion forecloses an antipode when a domain is promoted) — freed at pick-time, subject to progression later.
+
+## THE MODEL CHANGE (finalized)
+| Domain | New rule |
+|---|---|
+| **Primary** | origin-seeded (re-seeds if origin changed at creation); antipode closed+foreclosed; cap 5. Unchanged mechanics. |
+| **Secondary** | **must be KIN-ADJACENT to primary**; antipode closed; cap 3. NEW selection constraint. |
+| **Tertiary** | **free, anywhere legal**; antipode stays OPEN; cap 2. Closes only later IF promoted (existing SNG-101 path). |
 
 ## ENGINE / UI SURFACES
 | Module | Change |
@@ -26,6 +35,7 @@ The one real change is the **primary→secondary adjacency constraint** at selec
 | `engine/traditions.js` | An `isKinAdjacent(primary, candidate, index, arc)` helper (reuse the kin/adjacent band definition); `domainAccess` unchanged in gating math (caps/foreclosure stay) — the change is at *selection*, not access. |
 | `app.js` `domainCircleSVG` (L1127) selection | When choosing **secondary**, only kin-adjacent-to-primary nodes are `selectable`; non-adjacent nodes show as unavailable-for-secondary with a reason ("secondary must be kin to your primary"). **Tertiary** selection: freely selectable (minus closed/foreclosed/already-taken). |
 | `app.js` creation/prologue (`crystallizeDomains`, L2252) | If the prologue-derived secondary isn't kin-adjacent, snap it to the nearest kin tradition or prompt — never auto-produce an illegal build. |
+| `app.js` origin change (L1760, ALREADY resets domains) | After the origin-driven primary re-seed, the secondary selection validates against the NEW primary's kin band. The domain-reset cascade already fires on origin change; add the kin gate to the subsequent secondary pick. |
 | `engine/*` (validation) | A `domainsLegal(character, index)` check (grandfather-tolerant): new builds enforce adjacency; loaded characters with legacy non-adjacent secondaries are flagged legal (grandfathered), not broken. |
 | `tests/*` | New build: secondary selectable only among primary's kin; a non-adjacent secondary pick is refused with a reason; tertiary selectable anywhere legal; **a legacy character with a non-adjacent secondary loads and plays (grandfathered)**; promotion/foreclosure math unchanged. |
 
@@ -35,8 +45,7 @@ The one real change is the **primary→secondary adjacency constraint** at selec
 - **Reuse the existing kin band** — don't mint a second adjacency notion; the circle already has one.
 - **Primary stays origin-seeded** (unless Erik rules otherwise) — the adjacency is measured from that inherited primary.
 
-## OPEN QUESTIONS — ERIK (design) then CCODE (build)
-1. **[ERIK]** Adjacency arc width — immediate ±1, or the existing kin band? (Recommend kin band.)
-2. **[ERIK]** Confirm primary stays origin-seeded/fixed (recommend yes), or make it re-pickable at build.
-3. **[ERIK]** Does tertiary keep its current "antipode NOT closed" asymmetry, or should freeing it come with closing its antipode too (symmetry with secondary)? *(This is the one genuinely open mechanical question — freeing tertiary conceptually might argue for either; your call on whether a free tertiary still leaves its far pole open.)*
-4. **[CCODE]** Confirm the kin/adjacent band helper is reusable for a selection constraint (it's currently an access-band label — needs to answer "is X kin-adjacent to primary?" cleanly).
+## OPEN QUESTIONS — CCODE ROUND 2 (design settled; build confirmations only)
+1. Confirm the kin/adjacent band helper answers "is X kin-adjacent to primary?" cleanly for a *selection* gate (currently an access-band label — may need a thin `isKinAdjacent(primary, candidate, index)` wrapper).
+2. The origin-change handler (L1760) already resets domains — confirm the re-seeded primary flows into the secondary kin-gate on the next render without extra plumbing.
+3. `domainsLegal(character)` grandfather check reads legacy characters as legal (constraint applies to the builder's selection UI, not loaded saves) so no existing character is flagged illegal at load.

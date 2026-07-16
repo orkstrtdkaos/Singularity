@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "regionId": "valley",
+  "entities": {
+    "lenten": {
+      "schemaVersion": 1,
+      "id": "lenten",
+      "name": "Lenten",
+      "role": "Builder at Waymarker — the one who made the Cogitarium's supply line work, and who knows exactly what it cost to make it work",
+      "homeLocation": "the_cogitarium",
+      "communityId": "builder.waymarker",
+      "personality": {
+        "warmth": 0.5,
+        "trust": 0.4,
+        "candor": 0.6,
+        "patience": 0.7
+      },
+      "spectrum": {
+        "body_mind": 0.65,
+        "emotional_logical": 0.6,
+        "concrete_abstract": 0.55,
+        "dark_light": -0.35
+      },
+      "voiceHints": "Speaks in load-bearing sentences — nothing decorative, nothing wasted, but not cold. Measures what he says the way he measures timber: cut once, cut right. Has a builder's habit of naming the thing underneath the thing — the joist behind the wall, the assumption behind the proposal. Goes quiet when he's calculating, and the quiet feels occupied, not absent. Early-spring mud still on his boots.",
+      "knowledge": [
+        "The Cogitarium supply line in full — every dependency, every seasonal choke point, every person who makes it hold",
+        "Which parts of the evacuation proposal would snap the line immediately, and which would fray it slow",
+        "What Waymarker's builders actually believe, as opposed to what they've been willing to say out loud",
+        "That abstract plans have a weight and it falls on specific people — he has watched it fall"
+      ],
+      "wants": "For the decision — whatever it turns out to be — to be made by people who have walked the route and felt the cold, not only by people who have thought about it well.",
+      "fears": "That the evacuation debate will be resolved at the level of argument before anyone has checked what argument costs on the ground, and that he will have been too careful to say so clearly enough.",
+      "reactsToReputation": {
+        "practical": "opens up, visibly; offers the real numbers",
+        "theoretical": "listens with full patience, then asks the one grounding question that hasn't been asked yet",
+        "trustworthy": "takes longer to decide than you'd expect, because he weighs it, but once decided it holds"
+      },
+      "currentState": "Sitting in his shed at Waymarker in the thin early-spring light, with a logbook open and a concern he hasn't voiced yet sitting beside it like a second presence in the room.",
+      "functions": [
+        "reveal",
+        "bind"
+      ],
+      "universalRole": "Quartermaster-Witness",
+      "roleMethod": "Cogitarium method — sustains the system by mapping its true shape, reveals the hidden load-bearing truth before the structure is tested by weight it was never designed to carry",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Lenten%2C%20Builder%20at%20Waymarker%20%E2%80%94%20the%20one%20who%20made%20the%20Cogitarium's%20supply%20line%20work%2C%20and%20who%20knows%20exactly%20what%20it%20cost%20to%20make%20it%20work.%20Speaks%20in%20load-bearing%20sentences%20%E2%80%94%20nothing%20decorative%2C%20nothing%20wasted%2C%20but%20not%20cold.%20Measures%20what%20he%20says%20the%20way%20he%20measures%20timber%3A%20cut%20once%2C%20cut%20right.%20Has%20a%20builder's%20habit%20of%20naming%20the%20thing%20underneath%20the%20thing%20%E2%80%94%20the%20joist%20behind%20the%20wall%2C%20the%20assumption%20behind%20the%20proposal.%20Goes%20quiet%20when%20he's%20calculating%2C%20and%20the%20quiet%20feels%20occupied%2C%20not%20absent.%20Early-spring%20mud%20still%20on%20his%20boots.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=51640&nologo=true",
+      "_canon": {
+        "entityId": "lenten",
+        "type": "npc",
+        "weight": 7,
+        "rating": "R+",
+        "tier": "canonical",
+        "provenance": {
+          "playerKey": "player-7bxzzd",
+          "characterId": "char-mrmvlglu",
+          "locationId": "the_cogitarium",
+          "day": 1,
+          "worldDay": null,
+          "hint": "Lenten — a builder at Waymarker who arranged the Cogitarium supply line; practical, settled, probably cautious about the",
+          "why": "Saehara has arrived at Lenten's shed and is about to make contact — Lenten needs a stable, persistent identity"
+        },
+        "promotedWorldDay": 16,
+        "birthWeight": 1,
+        "overtook": "lenten"
+      }
+    }
+  },
+  "variants": []
+}

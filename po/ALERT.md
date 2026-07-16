@@ -1,6 +1,8 @@
-# PIPELINE ALERT — Singularity## 🐛 TWO LIVE BUGS — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.76)
+# PIPELINE ALERT — Singularity## ✅ SNG-115 + SNG-116 — CLOSED GREEN (Aevi HEAD audit, v1.8.76)
 
 > **CCode status 2026-07-16:** both fixed. **SNG-115** — ghGet/ghPut get an AbortController 12s deadline (all sync callers) + the actual hang (feedback entry had no top-level `at` → threw before the try) fixed + fb-send always lands on a terminal status. **SNG-116** — new `substratePenaltyFor` single-source; both preview sites pass it so preview == resolve. 6 smoke tests. Writeup: `po/results/20260716_SNG-115_116_live_bugs.md`. (Original spec text retained below.)
+
+**Aevi close (HEAD-verified):** SNG-115 — `AbortController` + deadline present in sync.js across all sync callers; **CCode found the real hang deeper than the spec** (the feedback entry had no top-level `at`, so it threw *before* the try block — a better root-cause than the spec's timeout-only theory); fb-send lands terminal. SNG-116 — `substratePenaltyFor` single-source exists and **both** `successChance` sites (L2800, L5291) pass `substratePenalty`, so preview == resolve by construction (anti-drift guarantee holds). **Both closed green.**
 
 
 - **SNG-115 — Feedback submit hangs on "Sending…".** `po/SPEC_SNG-115_feedback_submit_timeout.md`. The Send button `await`s a GitHub write with **no timeout anywhere** in the `ghGet`/`ghPut`/`pushMergedFile` chain (no AbortController, no deadline). A stalled request never throws, so the `await` never returns and the UI sits on "Sending…" forever; the entry may not even queue because the catch never runs. Fix: AbortController deadline → throw → the existing "never lose it" queue path; UI button always lands on a terminal status. **Recommend fixing at the `ghGet`/`ghPut` layer** — character save + event ledger likely share the same latent hang.

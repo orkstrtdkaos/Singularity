@@ -77,7 +77,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 135,
-  "energy": 112,
+  "energy": 107,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -132,14 +132,15 @@
       "id": null,
       "name": "Preserved Trail Parcel",
       "kind": "consumable",
-      "qty": 3,
+      "qty": 4,
       "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
       "effects": {
         "energy": 10
       },
       "consumable": true,
       "aliases": [
-        "Preserved Trail Parcel x1"
+        "Preserved Trail Parcel x1",
+        "Preserved Trail Parcel x2"
       ]
     },
     {
@@ -1859,14 +1860,19 @@
         "player": "Before leaving: run The Attended End one more time, facing northeast up the hillside — read what is ending in that direction and how far",
         "summary": "The Attended End reads northeast — the vault head is ending, slow and structural, a mile and a half up the hillside line.",
         "narration": "You turn northeast before you take the first step on the road, Memory's shaft grounded against the packed earth, and let The Attended End open quietly — not a push, just a listening. Conserve. The craft comes in like breath, not like a hammer.\n\nWhat it finds is distant but plain. Something is ending up there in the hillside dark, northeast and elevated — slow, structural, the particular quality of a load surrendering rather than breaking. The six-week window you already know from the wash-room sits on it like a label. What's new is the direction: not vague northeast, but a bearing you can feel — slightly above the road grade, perhaps a mile and a half, the same line the three-gate sequence draws. The vault head is ending. Everything below it is not.\n\nThere's one other thing, fainter and harder to name. Something smaller is concluding in that direction too — not structural, not the buried system. Animal, maybe, or a stand of something old. It's not urgent and it's not yours; The Attended End offers it the way a lamp shows a far wall without meaning to light it.\n\nYou lift Memory and settle it on your shoulder. Pell is already watching you. \"The head is where I thought,\" you say, and that's enough — she nods and turns northeast, oilcloth shifting on her shoulder. Huginn lifts from the packed earth without ceremony and catches the low air ahead of you both.\n\n*✦ Huginn has changed — The Told Truth.*"
+      },
+      {
+        "player": "Ok - we head out of the valley through the pass - long travel.",
+        "summary": "Silas and Pell cross the mountain pass, leaving the Valley of Echoes behind on World-day 16.",
+        "narration": "Huginn clears the intake fence-post without looking back, and that is enough. You shoulder Memory and fall into step behind Pell, who has already set her oilcloth against the wind-side and is walking like someone who has decided.\n\nThe road northeast is old packed earth for the first quarter-mile, then it loses confidence — becomes a game trail, then a line of crushed sedge where boots and hooves have been pressing the same argument into the hillside for decades. The valley floor drops away behind you faster than you expect. By the time the morning light gets serious, Millbrook is a smear of cookfire smoke below the tree line, and Huginn is a dark speck riding the thermals above the ridge. You pass the two river-pebble markers you set on the settling-seam without slowing — Pell notes them with a look, nothing more. The buried vault head is underneath you for a moment, failing slowly in the dark, and then it is behind you too.\n\nThe pass itself is honest about what it is: a notch in the rock where a glacial shoulder wore through, barely wide enough for a loaded cart in the tightest section. The stone is pale limestone with iron veining, and the wind finds every gap in your collar. You eat the midday meal seated on a flat outcrop just below the crest — Preserved Trail Parcel, dried perch and salt pork unwrapped against the cold — with the valley spread out south and the far side of the ridge showing its first slopes to the north. Pell eats without ceremony, tearing the cloth wrap with her thumbnail and watching the descent. The wind tastes different on this side: less mineral, more pine, something open in it that the valley air does not have. Huginn lands nearby, pulls a strip of dried pork from somewhere you did not offer, and arranges itself on the rock with the settled patience of something that has been waiting a long time for this particular view.\n\nBy mid-afternoon you are properly into the descent — a loose-scree slope giving way to a sparse pine run, the trail firming again as the elevation drops. The far side of the pass is quieter than the valley: no water-wheel sound, no distant hammer. The ground is damp from snowmelt and the pines are old enough that their canopy blocks the worst of the wind. You made good time. The next decision is ahead of you: push until the light fails, or camp early and solid while the ground is still readable."
       }
     ],
     "lastTurn": {
-      "narration": "You turn northeast before you take the first step on the road, Memory's shaft grounded against the packed earth, and let The Attended End open quietly — not a push, just a listening. Conserve. The craft comes in like breath, not like a hammer.\n\nWhat it finds is distant but plain. Something is ending up there in the hillside dark, northeast and elevated — slow, structural, the particular quality of a load surrendering rather than breaking. The six-week window you already know from the wash-room sits on it like a label. What's new is the direction: not vague northeast, but a bearing you can feel — slightly above the road grade, perhaps a mile and a half, the same line the three-gate sequence draws. The vault head is ending. Everything below it is not.\n\nThere's one other thing, fainter and harder to name. Something smaller is concluding in that direction too — not structural, not the buried system. Animal, maybe, or a stand of something old. It's not urgent and it's not yours; The Attended End offers it the way a lamp shows a far wall without meaning to light it.\n\nYou lift Memory and settle it on your shoulder. Pell is already watching you. \"The head is where I thought,\" you say, and that's enough — she nods and turns northeast, oilcloth shifting on her shoulder. Huginn lifts from the packed earth without ceremony and catches the low air ahead of you both.\n\n*✦ Huginn has changed — The Told Truth.*",
-      "sceneSummary": "The Attended End reads northeast — the vault head is ending, slow and structural, a mile and a half up the hillside line.",
+      "narration": "Huginn clears the intake fence-post without looking back, and that is enough. You shoulder Memory and fall into step behind Pell, who has already set her oilcloth against the wind-side and is walking like someone who has decided.\n\nThe road northeast is old packed earth for the first quarter-mile, then it loses confidence — becomes a game trail, then a line of crushed sedge where boots and hooves have been pressing the same argument into the hillside for decades. The valley floor drops away behind you faster than you expect. By the time the morning light gets serious, Millbrook is a smear of cookfire smoke below the tree line, and Huginn is a dark speck riding the thermals above the ridge. You pass the two river-pebble markers you set on the settling-seam without slowing — Pell notes them with a look, nothing more. The buried vault head is underneath you for a moment, failing slowly in the dark, and then it is behind you too.\n\nThe pass itself is honest about what it is: a notch in the rock where a glacial shoulder wore through, barely wide enough for a loaded cart in the tightest section. The stone is pale limestone with iron veining, and the wind finds every gap in your collar. You eat the midday meal seated on a flat outcrop just below the crest — Preserved Trail Parcel, dried perch and salt pork unwrapped against the cold — with the valley spread out south and the far side of the ridge showing its first slopes to the north. Pell eats without ceremony, tearing the cloth wrap with her thumbnail and watching the descent. The wind tastes different on this side: less mineral, more pine, something open in it that the valley air does not have. Huginn lands nearby, pulls a strip of dried pork from somewhere you did not offer, and arranges itself on the rock with the settled patience of something that has been waiting a long time for this particular view.\n\nBy mid-afternoon you are properly into the descent — a loose-scree slope giving way to a sparse pine run, the trail firming again as the elevation drops. The far side of the pass is quieter than the valley: no water-wheel sound, no distant hammer. The ground is damp from snowmelt and the pines are old enough that their canopy blocks the worst of the wind. You made good time. The next decision is ahead of you: push until the light fails, or camp early and solid while the ground is still readable.",
+      "sceneSummary": "Silas and Pell cross the mountain pass, leaving the Valley of Echoes behind on World-day 16.",
       "choices": [
         {
-          "label": "Move out at a steady pace — conserve energy for what's ahead; talk while you walk",
+          "label": "Push until the last light — cover as much ground on the far side as possible before dark.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
@@ -1877,136 +1883,189 @@
           "trivial": true
         },
         {
-          "label": "Before you clear the road-end: collect the cured bladder waterskin from Aldric's smokehouse — it's on your way if you angle back briefly",
+          "label": "Make camp now in the pine run — a solid rest before whatever the far slope holds.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "careful"
+            "careful",
+            "rest"
           ],
           "trivial": true
         },
         {
-          "label": "Push the pace — the vault head is the thing that matters; reach it before midday if you can, eat cold on the move",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Use The Attended End facing down the far slope — read what is ending in this direction before you commit to a bearing.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "risky",
-            "travel"
+            "scout",
+            "study"
           ],
-          "trivial": true
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Tell Pell what The Attended End found — the secondary signal, the smaller ending up there — and ask if she read anything from the housing that might match it",
+          "label": "Ask Pell what she knows of the Edge District — she has been farther than most; see what picture she holds of the road ahead.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "plan",
             "study"
           ],
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "energy": -2
+        "health": 0,
+        "energy": -5,
+        "inventoryRemove": [
+          "Preserved Trail Parcel x3"
+        ],
+        "inventoryAdd": [
+          {
+            "name": "Preserved Trail Parcel x2",
+            "kind": "consumable",
+            "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
+            "consumable": true,
+            "effects": {
+              "health": 0,
+              "energy": 11
+            }
+          }
+        ],
+        "xp": 0
       },
       "scene": {
-        "setting": "Fen's intake — valve housing in dark stone above the waterline, mineral-edged water audible and running. Low cloud, early spring morning. Road-end packed earth, wheel-ruts behind. Huginn airborne, moving northeast ahead of the party.",
+        "setting": "Far side of the mountain pass, mid-afternoon — sparse pine run below a loose-scree descent, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible. The trail firms to packed earth ahead; the bearing is north-northeast into unfamiliar territory.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Turned northeast, oilcloth on shoulder, waiting for Silas to move."
+            "state": "Seated on the flat outcrop, finishing her trail parcel, watching the descent north with the focused quiet of someone reading a new problem."
           },
           {
             "name": "Huginn",
-            "state": "Low in the air ahead, already tracking northeast along the hillside line."
+            "state": "Settled on the rock nearby, strip of dried pork claimed, watching the far slope with the unhurried attention of something that has been waiting for this view."
           }
         ],
         "objects": [
           "Memory (spear, on Silas's shoulder)",
-          "Valve housing — dark stone, mineral glaze on outlet stone, iron sleeve visible",
-          "Stain pattern at housing lip — confirmed CCW orientation",
-          "Stone road — wheel-ruts behind, eastward bend south",
-          "Pell's oilcloth (on her shoulder)",
-          "River Purification Tabs vial (in Silas's inner pack pocket)",
+          "Oilcloth Fold (packed, Pell's on her shoulder)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
-          "Contact Names Scrap (in pocket)"
+          "Contact Names Scrap (Sorel, Leth) (in pocket)",
+          "River Purification Tabs vial (in inner pack pocket)",
+          "Empty trail parcel cloth wrap — discarded on the outcrop",
+          "Flat limestone outcrop — midday rest site, just below the pass crest",
+          "Loose scree slope — behind them, above",
+          "Pine run — ahead, descending north-northeast"
         ],
         "threads": [
-          "Three-gate staged release sequence mapped — vault head is the remaining objective, northeast a mile and a half up the hillside line.",
-          "Secondary ending signal northeast — smaller than the structure, animal or vegetable, not urgent.",
-          "The cured bladder waterskin at Aldric's — not yet collected.",
-          "Design intent behind the full sequence — what the system opens when the last sleeve runs — still unread.",
-          "Departure decision live: push northeast now, or collect the waterskin first."
+          "Edge District bearing — Contact Names Scrap names Sorel (Millbrook now) and Leth (archivist, likely still in the Edge District) as first destinations.",
+          "The buried vault head is failing — six-week window, northeast in the hillside behind them now. The expert must be found and returned before week five.",
+          "Secondary ending signal — smaller, animal or vegetable, not urgent — noted at Fen's intake but not followed.",
+          "The cured bladder waterskin at Aldric's — not collected before departure.",
+          "What the system opens when the last sleeve runs — still unread.",
+          "Boot prints on the far side of the pass — the world news named them before the pass opened. You are now on that side."
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "The Attended End confirms the vault head is ending — slow, structural, load-surrendering — on the same northeast bearing as the three-gate sequence, approximately a mile and a half up the hillside. A secondary smaller ending also present in that direction: animal or vegetable, not urgent.",
-          "links": [
-            "pell",
-            "millbrook",
-            "dara-holt",
-            "order-sense"
-          ]
-        }
-      ],
+      "timeOps": {
+        "hoursPassed": 6,
+        "why": "A half-day of mountain travel — from Fen's intake at early morning to mid-afternoon on the far side of the pass, including the midday meal."
+      },
+      "moveTo": {
+        "location": "mountain-pass-far-side",
+        "why": "Crossed the pass on foot through the morning and midday, descending to the pine run on the north side."
+      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received the northeast bearing without words — turned and is ready to move.",
-          "statusNote": "At Fen's intake with Silas, turned northeast, ready to depart toward the vault head.",
+          "note": "Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope.",
+          "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, descending into unknown territory north of the valley.",
           "status": "active"
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief conserve-cast and a few words before departure — less than a quarter hour."
-      }
+      "codexUpdates": [
+        {
+          "topic": "mountain-pass",
+          "label": "The Mountain Pass",
+          "kind": "place",
+          "fact": "Crossed on World-day 16 — a limestone notch barely wide enough for a cart in its tightest section, iron-veined stone, wind through every gap. The far side smells of pine and open air, not mineral. Old enough that the trail has been pressed into the hillside for decades. Damp from snowmelt.",
+          "links": [
+            "the-water-crisis",
+            "pell",
+            "huginn",
+            "precursor-signs-in-the-valley"
+          ]
+        },
+        {
+          "topic": "edge-district-route",
+          "label": "Far Side of the Pass",
+          "kind": "place",
+          "fact": "The far slope is sparse pine run, firm trail, old canopy. Quieter than the valley — no water-wheel, no hammer. The world news named boot prints here before the pass opened. Silas is now on that side.",
+          "links": [
+            "mountain-pass",
+            "sorel",
+            "the-water-crisis",
+            "contact-names-scrap"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Silas and Pell crossed the pass on World-day 16 mid-morning — the valley is now behind them. The far side descends into pine run, damp from snowmelt.",
+          "subPlace": {
+            "name": "Pass Crest Outcrop",
+            "note": "Flat limestone outcrop just below the pass crest — midday meal site, World-day 16. First view of the far slope from here.",
+            "visited": true
+          }
+        }
+      ],
+      "imagePrompt": "Two figures and a grey-black corvid on a flat limestone outcrop just below a mountain pass crest — wind-scoured pale stone, iron veining, the valley lost in haze to the south, a sparse pine slope opening to the north. The woman has oilcloth on her shoulder and is watching the descent; the man holds a long ash spear and looks the same way. The bird is very still.",
+      "momentArt": "https://image.pollinations.ai/prompt/Two%20figures%20and%20a%20grey-black%20corvid%20on%20a%20flat%20limestone%20outcrop%20just%20below%20a%20mountain%20pass%20crest%20%E2%80%94%20wind-scoured%20pale%20stone%2C%20iron%20veining%2C%20the%20valley%20lost%20in%20haze%20to%20the%20south%2C%20a%20sparse%20pine%20slope%20opening%20to%20the%20north.%20The%20woman%20has%20oilcloth%20on%20her%20shoulder%20and%20is%20watching%20the%20descent%3B%20the%20man%20holds%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=17631&nologo=true"
     },
     "sceneState": {
-      "setting": "Fen's intake — valve housing in dark stone above the waterline, mineral-edged water audible and running. Low cloud, early spring morning. Road-end packed earth, wheel-ruts behind. Huginn airborne, moving northeast ahead of the party.",
+      "setting": "Far side of the mountain pass, mid-afternoon — sparse pine run below a loose-scree descent, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible. The trail firms to packed earth ahead; the bearing is north-northeast into unfamiliar territory.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Turned northeast, oilcloth on shoulder, waiting for Silas to move."
+          "state": "Seated on the flat outcrop, finishing her trail parcel, watching the descent north with the focused quiet of someone rea"
         },
         {
           "name": "Huginn",
-          "state": "Low in the air ahead, already tracking northeast along the hillside line."
+          "state": "Settled on the rock nearby, strip of dried pork claimed, watching the far slope with the unhurried attention of somethin"
         }
       ],
       "objects": [
         "Memory (spear, on Silas's shoulder)",
-        "Valve housing — dark stone, mineral glaze on outlet stone, iron sleeve visible",
-        "Stain pattern at housing lip — confirmed CCW orientation",
-        "Stone road — wheel-ruts behind, eastward bend south",
-        "Pell's oilcloth (on her shoulder)",
-        "River Purification Tabs vial (in Silas's inner pack pocket)",
+        "Oilcloth Fold (packed, Pell's on her shoulder)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
-        "Contact Names Scrap (in pocket)"
+        "Contact Names Scrap (Sorel, Leth) (in pocket)",
+        "River Purification Tabs vial (in inner pack pocket)",
+        "Empty trail parcel cloth wrap — discarded on the outcrop",
+        "Flat limestone outcrop — midday rest site, just below the pass crest",
+        "Loose scree slope — behind them, above",
+        "Pine run — ahead, descending north-northeast"
       ],
       "threads": [
-        "Three-gate staged release sequence mapped — vault head is the remaining objective, northeast a mile and a half up the hillside line.",
-        "Secondary ending signal northeast — smaller than the structure, animal or vegetable, not urgent.",
-        "The cured bladder waterskin at Aldric's — not yet collected.",
-        "Design intent behind the full sequence — what the system opens when the last sleeve runs — still unread.",
-        "Departure decision live: push northeast now, or collect the waterskin first."
+        "Edge District bearing — Contact Names Scrap names Sorel (Millbrook now) and Leth (archivist, likely still in the Edge District) as first destinations.",
+        "The buried vault head is failing — six-week window, northeast in the hillside behind them now. The expert must be found and returned before week five.",
+        "Secondary ending signal — smaller, animal or vegetable, not urgent — noted at Fen's intake but not followed.",
+        "The cured bladder waterskin at Aldric's — not collected before departure.",
+        "What the system opens when the last sleeve runs — still unread."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 9,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -2148,7 +2207,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named plainly what Silas is doing — the whole shape of it, valve sites to valley departure — and left it as a statement, not a question.",
         "[d2] Received 'you' — half-beat catch in her stride, recovered clean. Did not look at Silas. Composure intact and working.",
         "[d2] Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech.",
         "[d2] Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question y",
@@ -2157,7 +2215,8 @@
         "[d2] Received confirmation of the CCW axis and The Attended End findings — named the implication plainly: the mechanism is doing what it was made to do. Asked for Order-Sense to be run ",
         "[d2] Received the three-gate staged-release reading — southernmost, middle, head. Hasn't spoken yet; processing.",
         "[d2] Asked if she's ready to push out of the valley — answered without hesitation. 'I didn't walk up here to turn back at the valve.' Now standing ready at the intake, facing northeast.",
-        "[d2] Received the northeast bearing without words — turned and is ready to move."
+        "[d2] Received the northeast bearing without words — turned and is ready to move.",
+        "[d2] Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope."
       ],
       "knownFacts": [
         "Huginn's stillness is a positive answer — nothing ending, not foreclosed",
@@ -2178,7 +2237,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "At Fen's intake with Silas, turned northeast, ready to depart toward the vault head.",
+      "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, descending into unknown territory north of the valley.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2374,7 +2433,6 @@
     "millbrook": {
       "visits": 1,
       "notes": [
-        "[d2] Date four agreed at the wash-room site — both terms named plainly and accepted: snowmelt pool, three hours north of the interference ridge, night, no spear.",
         "[d2] Palework confirms cradle-recess held a stationed working piece — tall, load-bearing, regularly attended, cleanly removed. Age unresolvable beyond 40–200 years. No drag-scarring at lip.",
         "[d2] Order-Sense confirms the wash-room cradle-recess was an operator's station — the head of the buried structure's channel system. The instrument held here was cylindrical, iron-sheathed, ~5 ft tall, til",
         "[d2] Two river-pebble markers placed on the hillside settling-seam — south and north ends of the failing vault section, twenty-five feet apart, forty feet northeast of the wash-room entrance. Directly abov",
@@ -2385,7 +2443,8 @@
         "[d2] Silas gave Pell the river whetstone at the forge threshold on World-day 15 mid-morning — the last thing said before departure: asking is a skill, practice it on me. The forge now stands cold and empty",
         "[d2] Fen's intake first approached on World-day 16 morning — valve site accessible, water audible with mineral edge, Huginn perched on fence-post at road's edge.",
         "[d2] The Attended End read on World-day 16: intake sleeve has 3–4 weeks before running open. The structure behind it is not ending — it has more work to do.",
-        "[d2] Valve Failure Timeline note annotated with 'S-gate confirmed' at Fen's intake — the three-gate sequence is now fully mapped in writing."
+        "[d2] Valve Failure Timeline note annotated with 'S-gate confirmed' at Fen's intake — the three-gate sequence is now fully mapped in writing.",
+        "[d2] Silas and Pell crossed the pass on World-day 16 mid-morning — the valley is now behind them. The far side descends into pine run, damp from snowmelt."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -3223,19 +3282,53 @@
         "aliases": [],
         "createdDay": 2,
         "updatedDay": 2
+      },
+      "mountain-pass": {
+        "id": "mountain-pass",
+        "label": "The Mountain Pass",
+        "kind": "place",
+        "facts": [
+          "[d2] Crossed on World-day 16 — a limestone notch barely wide enough for a cart in its tightest section, iron-veined stone, wind through every gap. The far side smells of pine and open air, not mineral. Old"
+        ],
+        "links": [
+          "the-water-crisis",
+          "pell",
+          "huginn",
+          "precursor-signs-in-the-valley"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "edge-district-route": {
+        "id": "edge-district-route",
+        "label": "Far Side of the Pass",
+        "kind": "place",
+        "facts": [
+          "[d2] The far slope is sparse pine run, firm trail, old canopy. Quieter than the valley — no water-wheel, no hammer. The world news named boot prints here before the pass opened. Silas is now on that side."
+        ],
+        "links": [
+          "mountain-pass",
+          "sorel",
+          "the-water-crisis",
+          "contact-names-scrap"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
       }
     }
   },
   "tendencies": {
-    "strategic": 63.450562921998305,
-    "cerebral": 41.214331437342295,
-    "social": 58.51150352601672,
-    "generous": 15.623730951842083,
-    "cautious": 50.03110722661681,
-    "physical": 1.6445448385672639,
-    "risky": 3.2964895848745583,
-    "ruthless": 3.652772683690968,
-    "carousing": 1.2268224999637745
+    "strategic": 65.13331010738831,
+    "cerebral": 41.00825978015558,
+    "social": 58.21894600838663,
+    "generous": 15.545612297082872,
+    "cautious": 49.780951690483725,
+    "physical": 1.6363221143744275,
+    "risky": 3.2800071369501858,
+    "ruthless": 3.6345088202725133,
+    "carousing": 1.2206883874639556
   },
   "aptitudes": [
     "strategist",
@@ -3243,10 +3336,18 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 291,
+  "actionCount": 292,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Two figures and a grey-black corvid on a flat limestone outcrop just below a mountain pass crest — wind-scoured pale stone, iron veining, the valley lost in haze to the south, a sparse pine slope open",
+      "url": "https://image.pollinations.ai/prompt/Two%20figures%20and%20a%20grey-black%20corvid%20on%20a%20flat%20limestone%20outcrop%20just%20below%20a%20mountain%20pass%20crest%20%E2%80%94%20wind-scoured%20pale%20stone%2C%20iron%20veining%2C%20the%20valley%20lost%20in%20haze%20to%20the%20south%2C%20a%20sparse%20pine%20slope%20opening%20to%20the%20north.%20The%20woman%20has%20oilcloth%20on%20her%20shoulder%20and%20is%20watching%20the%20descent%3B%20the%20man%20holds%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=17631&nologo=true",
+      "caption": "Silas and Pell cross the mountain pass, leaving the Valley of Echoes behind on World-day 1",
+      "worldDay": 16,
+      "at": "2026-07-16T05:09:02.965Z"
+    },
     {
       "kind": "npc",
       "prompt": "Pip Cotter, Mara's Errand-Runner",
@@ -3369,8 +3470,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784178251754,
-  "rev": 402,
+  "updatedAt": 1784178542965,
+  "rev": 404,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3932,7 +4033,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 94
+    "valley": 95
   },
   "foreclosed": [
     "rootkin",

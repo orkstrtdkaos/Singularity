@@ -105,12 +105,30 @@
     }
   ],
   "peopleStandingBands": [
-    { "min": 20, "band": "kin" },
-    { "min": 10, "band": "trusted" },
-    { "min": 4, "band": "known" },
-    { "min": 0, "band": "neutral" },
-    { "min": -4, "band": "wary" },
-    { "min": -999, "band": "estranged" }
+    {
+      "min": 20,
+      "band": "kin"
+    },
+    {
+      "min": 10,
+      "band": "trusted"
+    },
+    {
+      "min": 4,
+      "band": "known"
+    },
+    {
+      "min": 0,
+      "band": "neutral"
+    },
+    {
+      "min": -4,
+      "band": "wary"
+    },
+    {
+      "min": -999,
+      "band": "estranged"
+    }
   ],
   "capstoneStanding": {
     "capstoneTier": 4,
@@ -118,12 +136,28 @@
     "requiresTeacher": true
   },
   "bond": {
-    "stageFloors": { "courting": 2, "together": 4, "committed": 6, "partner": 8 },
+    "stageFloors": {
+      "courting": 2,
+      "together": 4,
+      "committed": 6,
+      "partner": 8
+    },
     "partyAdjacentStage": "partner"
   },
   "promotion": {
-    "tertiaryToSecondary": { "minReputation": 8, "requiresTeacher": true, "minInDomainRanks": 3 },
-    "secondaryToPrimary": { "minReputation": 12, "requiresTeacher": true, "minInDomainRanks": 6, "requiresRegionStanding": true, "minRegionTurns": 12, "requiresCeilingExhausted": true }
+    "tertiaryToSecondary": {
+      "minReputation": 8,
+      "requiresTeacher": true,
+      "minInDomainRanks": 3
+    },
+    "secondaryToPrimary": {
+      "minReputation": 12,
+      "requiresTeacher": true,
+      "minInDomainRanks": 6,
+      "requiresRegionStanding": true,
+      "minRegionTurns": 12,
+      "requiresCeilingExhausted": true
+    }
   },
   "acquisition": {
     "minReputation": 8,
@@ -189,7 +223,9 @@
     {
       "id": "strategist",
       "tendency": "strategic",
-      "threshold": 8,
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
       "mods": {
         "plannedActionBonus": 5,
         "senseTierBonus": 1
@@ -197,19 +233,11 @@
       "description": "You think ahead. Planned and prepared actions succeed more often, and your read on the odds sharpens."
     },
     {
-      "id": "rough_and_ready",
-      "tendency": "physical",
-      "threshold": 8,
-      "mods": {
-        "physicalBonus": 5,
-        "socialFinessePenalty": -3
-      },
-      "description": "Your character grows hard and capable, but subtlety suffers."
-    },
-    {
       "id": "silver_tongue",
       "tendency": "social",
-      "threshold": 8,
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
       "mods": {
         "socialBonus": 5
       },
@@ -218,16 +246,32 @@
     {
       "id": "scholar",
       "tendency": "cerebral",
-      "threshold": 8,
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
       "mods": {
         "mentalBonus": 5
       },
       "description": "Study and investigation compound into insight."
     },
     {
+      "id": "rough_and_ready",
+      "tendency": "physical",
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "physicalBonus": 5,
+        "socialFinessePenalty": -3
+      },
+      "description": "You grow hard and capable, but subtlety suffers."
+    },
+    {
       "id": "carouser",
       "tendency": "carousing",
-      "threshold": 6,
+      "threshold": 9,
+      "tier": "A",
+      "axis": "earned",
       "mods": {
         "rapportBonus": 5,
         "disciplinePenalty": -5
@@ -237,7 +281,9 @@
     {
       "id": "daredevil",
       "tendency": "risky",
-      "threshold": 8,
+      "threshold": 11,
+      "tier": "A",
+      "axis": "earned",
       "mods": {
         "critSuccessBonus": 2,
         "critFailPenalty": 2
@@ -247,11 +293,324 @@
     {
       "id": "good_samaritan",
       "tendency": "generous",
-      "threshold": 6,
+      "threshold": 9,
+      "tier": "A",
+      "axis": "earned",
       "mods": {
         "reputationGainBonus": 0.25
       },
       "description": "Your kindnesses are remembered a little longer and travel a little farther."
+    },
+    {
+      "id": "tactician",
+      "tendency": "strategic",
+      "threshold": 18,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "plannedActionBonus": 8,
+        "senseTierBonus": 1,
+        "critSuccessBonus": 1
+      },
+      "description": "Deep planning becomes second nature — you see three moves out and the odds bend to it. (Deeper strategist.)"
+    },
+    {
+      "id": "orator",
+      "tendency": "social",
+      "threshold": 18,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "socialBonus": 8,
+        "reputationGainBonus": 0.15
+      },
+      "description": "A voice that moves rooms. People don't just open up — they follow. (Deeper silver_tongue.)"
+    },
+    {
+      "id": "sage",
+      "tendency": "cerebral",
+      "threshold": 18,
+      "tier": "A",
+      "axis": "earned",
+      "mods": {
+        "mentalBonus": 8,
+        "senseTierBonus": 1
+      },
+      "description": "Knowledge deepens into wisdom; you perceive what others miss entirely. (Deeper scholar.)"
+    },
+    {
+      "id": "stalwart",
+      "tendency": "cautious",
+      "threshold": 11,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "defenseBonus": 5,
+        "plannedActionBonus": -2
+      },
+      "description": "You hold the line. Harder to break, slower to seize the moment.",
+      "needs": [
+        "defenseBonus"
+      ]
+    },
+    {
+      "id": "shadow",
+      "tendency": "stealth",
+      "threshold": 11,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "stealthBonus": 6,
+        "socialBonus": -3
+      },
+      "description": "You move unseen — but a person who lives in shadow is little known in the light.",
+      "needs": [
+        "stealthBonus"
+      ]
+    },
+    {
+      "id": "trickster",
+      "tendency": "deception",
+      "threshold": 11,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "deceiveBonus": 6,
+        "reputationGainBonus": -0.15
+      },
+      "description": "Lies land clean — but a reputation for it precedes you.",
+      "needs": [
+        "deceiveBonus"
+      ]
+    },
+    {
+      "id": "peacemaker",
+      "tendency": "generous",
+      "threshold": 16,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "deEscalationBonus": 6,
+        "intimidateBonus": -4
+      },
+      "description": "You cool a room with a word — but no one fears you, and sometimes they should.",
+      "needs": [
+        "deEscalationBonus",
+        "intimidateBonus"
+      ]
+    },
+    {
+      "id": "dread",
+      "tendency": "ruthless",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "intimidateBonus": 6,
+        "rapportBonus": -4
+      },
+      "description": "Your presence chills — obedience comes easy, warmth does not.",
+      "needs": [
+        "intimidateBonus"
+      ]
+    },
+    {
+      "id": "long_game",
+      "tendency": "patient",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "sustainedActionBonus": 6,
+        "burstPenalty": -4
+      },
+      "description": "Rituals, sieges, slow work — yours. But you're caught flat in a sudden moment.",
+      "needs": [
+        "sustainedActionBonus",
+        "burstPenalty"
+      ]
+    },
+    {
+      "id": "artisan",
+      "tendency": "craft",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "craftBonus": 6,
+        "improvisationPenalty": -4
+      },
+      "description": "What you make, you make well — but away from your tools you're at a loss.",
+      "needs": [
+        "craftBonus",
+        "improvisationPenalty"
+      ]
+    },
+    {
+      "id": "banner",
+      "tendency": "leadership",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "allyActionBonus": 6,
+        "soloPenalty": -4
+      },
+      "description": "Others fight harder beside you — but you were never meant to stand alone.",
+      "needs": [
+        "allyActionBonus",
+        "soloPenalty"
+      ]
+    },
+    {
+      "id": "faithful",
+      "tendency": "devotion",
+      "threshold": 12,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "alignedTraditionBonus": 6,
+        "crossPolePenalty": -5
+      },
+      "description": "Deep in your own tradition you are strong; the far pole closes harder against you.",
+      "needs": [
+        "alignedTraditionBonus",
+        "crossPolePenalty"
+      ]
+    },
+    {
+      "id": "berserk",
+      "tendency": "risky",
+      "threshold": 16,
+      "tier": "B",
+      "axis": "earned",
+      "mods": {
+        "physicalBonus": 6,
+        "defenseBonus": -5
+      },
+      "description": "All fury, no guard. You hit like a storm and leave yourself open. (Deeper/rougher daredevil path.)",
+      "needs": [
+        "defenseBonus"
+      ]
+    },
+    {
+      "id": "charmer",
+      "tendency": "amorous",
+      "threshold": 10,
+      "tier": "B",
+      "axis": "amorous",
+      "mods": {
+        "flirtationBonus": 5,
+        "gravitasPenalty": -3
+      },
+      "description": "Woo, banter, ease — you draw people close. But it's hard to be taken gravely.",
+      "needs": [
+        "flirtationBonus",
+        "gravitasPenalty"
+      ],
+      "ratingCeilingBounded": true
+    },
+    {
+      "id": "devoted_lover",
+      "tendency": "amorous",
+      "threshold": 14,
+      "tier": "B",
+      "axis": "amorous",
+      "mods": {
+        "allyActionBonus": 6
+      },
+      "description": "In service of the one you love, you are more than yourself. Love as sustained attention, made real.",
+      "needs": [
+        "allyActionBonus"
+      ],
+      "dependsOn": "SNG-108 partner bond",
+      "shipInertUntilDependency": true
+    },
+    {
+      "id": "ardent",
+      "tendency": "amorous",
+      "threshold": 14,
+      "tier": "B",
+      "axis": "amorous",
+      "mods": {
+        "flirtationBonus": 8,
+        "composurePenalty": -4
+      },
+      "description": "Passion runs hot in you — magnetic in intimacy, but composure frays under pressure elsewhere.",
+      "needs": [
+        "flirtationBonus",
+        "composurePenalty"
+      ],
+      "ratingCeilingBounded": true
+    },
+    {
+      "id": "innocent",
+      "axis": "inverse",
+      "tier": "B",
+      "worldlinessCeiling": 10,
+      "worldlinessComponents": [
+        "ruthless",
+        "deception",
+        "amorous",
+        "carousing"
+      ],
+      "mods": {
+        "trustedBonus": 5,
+        "worldlyCunningPenalty": -5
+      },
+      "description": "The world hasn't marked you yet. People trust you, lower their guard, extend the benefit of the doubt — but cunning, deception, and menace come hard to you.",
+      "needs": [
+        "trustedBonus",
+        "worldlyCunningPenalty"
+      ],
+      "oneWay": true,
+      "backgroundGrantable": true
+    },
+    {
+      "id": "naive",
+      "axis": "inverse",
+      "tier": "B",
+      "worldlinessCeiling": 6,
+      "worldlinessComponents": [
+        "ruthless",
+        "deception",
+        "carousing"
+      ],
+      "mods": {
+        "sincerityReadBonus": 5,
+        "worldlyCunningPenalty": -3
+      },
+      "description": "You believe, so you are believed — but a lie slips past you, and cynical minds run circles.",
+      "needs": [
+        "sincerityReadBonus",
+        "worldlyCunningPenalty"
+      ],
+      "oneWay": true,
+      "backgroundGrantable": true
+    },
+    {
+      "id": "sheltered",
+      "axis": "inverse",
+      "tier": "B",
+      "worldlinessCeiling": 4,
+      "worldlinessComponents": [
+        "ruthless",
+        "deception",
+        "amorous",
+        "carousing",
+        "physical"
+      ],
+      "mods": {
+        "trustedBonus": 3,
+        "chargedSituationPenalty": -5
+      },
+      "description": "You have not yet seen violence or intimacy up close. A clean slate — but charged moments overwhelm you until you've weathered a few.",
+      "needs": [
+        "trustedBonus",
+        "chargedSituationPenalty"
+      ],
+      "oneWay": true,
+      "backgroundOnly": true
     }
   ],
   "xp": {
@@ -357,5 +716,8 @@
     "fullRevealAbilities": [
       "address_sense"
     ]
-  }
+  },
+  "aptitudeDecay": 0.975,
+  "aptitudeKeepMargin": 4,
+  "aptitudeFadeBand": 2
 }

@@ -13,12 +13,21 @@ const TAG_TO_TENDENCY = {
   study: "cerebral", investigate: "cerebral", analyze: "cerebral", read: "cerebral", meditate: "cerebral",
   gamble: "carousing", drink: "carousing", revel: "carousing",
   risky: "risky", reckless: "risky",
-  careful: "cautious", retreat: "cautious",
+  careful: "cautious", retreat: "cautious", defend: "cautious", guard: "cautious",
   help: "generous", give: "generous", rescue: "generous", heal: "generous",
-  threaten: "ruthless", steal: "ruthless", extort: "ruthless"
+  threaten: "ruthless", steal: "ruthless", extort: "ruthless", coerce: "ruthless", intimidate: "ruthless",
+  // SNG-113 — new tendencies for the expanded roster (+ inverse "worldliness" components)
+  sneak: "stealth", hide: "stealth", stealth: "stealth",
+  deceive: "deception", lie: "deception", feint: "deception", bluff: "deception",
+  sustain: "patient", endure: "patient", ritual: "patient", persist: "patient",
+  craft: "craft", forge: "craft", repair: "craft", make: "craft", mend: "craft",
+  lead: "leadership", rally: "leadership", command: "leadership", coordinate: "leadership",
+  devote: "devotion", pray: "devotion", dedicate: "devotion",
+  // SNG-113 §4a — the romantic/flirt tags (added SNG-100) finally have a home: the amorous tendency.
+  romantic: "amorous", flirt: "amorous", woo: "amorous", seduce: "amorous"
 };
 
-const DECAY = 0.995; // per action — old habits fade slowly if behavior changes
+const DECAY = 0.995; // legacy default — real value now lives in rules.aptitudeDecay (SNG-113)
 
 // ---------- SNG-BATCH-9 §3: content rating (the profile ceiling) ----------
 // The ceiling lives on the player profile (the BATCH-7 identity anchor). It governs three
@@ -104,22 +113,81 @@ export function ensureCharacterStyle(c) {
   return c;
 }
 
-/** Feed one action's intent tags into a STYLE HOLDER (a character). Mutates + returns it. */
-export function updateProfile(holder, intentTags = [], rulesAptitudes = []) {
+/** Feed one action's intent tags into a STYLE HOLDER (a character). Mutates + returns it. SNG-113: decay is
+ *  read from rules (aptitudeDecay ~0.975 — actually bites, so aptitudes are situational) with the JS constant
+ *  as fallback; hysteresis + inverse aptitudes are applied in deriveAptitudes. */
+export function updateProfile(holder, intentTags = [], rulesAptitudes = [], rules = {}) {
   ensureCharacterStyle(holder);
-  for (const k of Object.keys(holder.tendencies)) holder.tendencies[k] *= DECAY;
+  const decay = rules.aptitudeDecay ?? DECAY;
+  for (const k of Object.keys(holder.tendencies)) holder.tendencies[k] *= decay;
   for (const tag of intentTags) {
     const tendency = TAG_TO_TENDENCY[tag] || null;
     if (tendency) holder.tendencies[tendency] = (holder.tendencies[tendency] || 0) + 1;
   }
   holder.actionCount = (holder.actionCount || 0) + 1;
-  holder.aptitudes = deriveAptitudes(holder, rulesAptitudes);
+  holder.aptitudes = deriveAptitudes(holder, rulesAptitudes, rules);
   return holder;
 }
 
-/** Which aptitudes has this player earned? Data-driven from core rules. */
-export function deriveAptitudes(profile, rulesAptitudes = []) {
-  return rulesAptitudes.filter(a => (profile.tendencies[a.tendency] || 0) >= a.threshold).map(a => a.id);
+/** SNG-113: the "worldliness" score an inverse aptitude decays UP against — the sum of its named component
+ *  tendencies (ruthless/deception/amorous/carousing/…). Innocence is held while this stays below the ceiling. */
+function worldliness(profile, components = []) {
+  return components.reduce((s, t) => s + (profile.tendencies?.[t] || 0), 0);
+}
+
+/** Which aptitudes does this character currently hold? Data-driven, with SNG-113 mechanics:
+ *  • EARNED — held when its tendency ≥ threshold; HYSTERESIS keeps a held one until the tendency falls below
+ *    threshold − aptitudeKeepMargin (so a single off-tag turn never flickers it, but a real shift drops it).
+ *  • INVERSE (innocence) — NEVER earned by play; granted at creation and KEPT while a composite worldliness
+ *    score is below the ceiling. One-way: once worldliness crosses (or it's otherwise lost), it does not return. */
+export function deriveAptitudes(profile, rulesAptitudes = [], rules = {}) {
+  const held = new Set(profile.aptitudes || []);
+  const margin = rules.aptitudeKeepMargin ?? 0;
+  const out = [];
+  for (const a of rulesAptitudes) {
+    if (a.axis === "inverse") {
+      if (held.has(a.id) && worldliness(profile, a.worldlinessComponents) < (a.worldlinessCeiling ?? 0)) out.push(a.id);
+      continue; // inverse aptitudes are only ever GRANTED (creation), never auto-earned
+    }
+    const t = profile.tendencies?.[a.tendency] || 0;
+    const floor = held.has(a.id) ? a.threshold - margin : a.threshold;
+    if (t >= floor) out.push(a.id);
+  }
+  return out;
+}
+
+/** SNG-113: which held aptitudes are FADING (about to be lost) — an earned one whose tendency is within
+ *  aptitudeFadeBand of its keep-floor, or an inverse one whose worldliness is within the band below its
+ *  ceiling. Loss is legible: the UI shows these before they drop. Returns a Set of ids. */
+export function fadingAptitudes(profile, rulesAptitudes = [], rules = {}) {
+  const held = new Set(profile.aptitudes || []);
+  const margin = rules.aptitudeKeepMargin ?? 0, band = rules.aptitudeFadeBand ?? 2;
+  const fading = new Set();
+  for (const a of rulesAptitudes) {
+    if (!held.has(a.id)) continue;
+    if (a.axis === "inverse") { const w = worldliness(profile, a.worldlinessComponents); if (w >= (a.worldlinessCeiling ?? 0) - band) fading.add(a.id); }
+    else { const t = profile.tendencies?.[a.tendency] || 0; if (t < (a.threshold - margin) + band) fading.add(a.id); }
+  }
+  return fading;
+}
+
+/** SNG-113: grant background/lineage aptitudes at creation. An EARNED aptitude is seeded ABOVE its threshold
+ *  (so it's held from day one, but can still be lost by playing against it). An INVERSE (innocence) aptitude
+ *  is simply added to the held set — play erodes it. Idempotent. Returns the granted ids. */
+export function grantAptitudes(holder, ids = [], rulesAptitudes = [], rules = {}) {
+  ensureCharacterStyle(holder);
+  const byId = Object.fromEntries((rulesAptitudes || []).map(a => [a.id, a]));
+  const granted = [];
+  for (const id of ids) {
+    const a = byId[id]; if (!a) continue;
+    if (a.axis !== "inverse" && a.tendency) holder.tendencies[a.tendency] = Math.max(holder.tendencies[a.tendency] || 0, (a.threshold || 0) + 2);
+    if (!holder.aptitudes.includes(id)) { holder.aptitudes.push(id); granted.push(id); }
+  }
+  holder.grantedAptitudes = [...new Set([...(holder.grantedAptitudes || []), ...ids])]; // lineage provenance for the UI
+  holder.aptitudes = deriveAptitudes(holder, rulesAptitudes, rules); // reconcile (keeps granted earned + inverse held)
+  // an inverse aptitude just added must survive the reconcile even though deriveAptitudes only KEEPS held ones:
+  for (const id of ids) if (byId[id]?.axis === "inverse" && !holder.aptitudes.includes(id) && worldliness(holder, byId[id].worldlinessComponents) < (byId[id].worldlinessCeiling ?? 0)) holder.aptitudes.push(id);
+  return granted;
 }
 
 /** Merge all earned aptitudes' modifiers into one flat map for resolve.js. */
@@ -132,12 +200,15 @@ export function aptitudeMods(profile, rulesAptitudes = []) {
   return mods;
 }
 
-/** Short natural-language readout for the profile UI ("who are you becoming?"). */
-export function profileInsight(profile, rulesAptitudes = []) {
+/** Short natural-language readout for the profile UI ("who are you becoming?"). SNG-113: marks a fading
+ *  aptitude (about to be lost — legible, never silent) and a lineage-granted one. */
+export function profileInsight(profile, rulesAptitudes = [], rules = {}) {
   const earned = rulesAptitudes.filter(a => profile.aptitudes?.includes(a.id));
   if (!earned.length) {
     const top = Object.entries(profile.tendencies || {}).sort((a, b) => b[1] - a[1])[0];
     return top ? `A pattern is forming: you lean ${top[0]}.` : "The world is still learning who you are.";
   }
-  return earned.map(a => `${a.id.replace(/_/g, " ")}: ${a.description}`).join(" ");
+  const fading = fadingAptitudes(profile, rulesAptitudes, rules);
+  const lineage = new Set(profile.grantedAptitudes || []);
+  return earned.map(a => `${a.id.replace(/_/g, " ")}${lineage.has(a.id) ? " (lineage)" : ""}${fading.has(a.id) ? " — fading" : ""}: ${a.description}`).join(" ");
 }

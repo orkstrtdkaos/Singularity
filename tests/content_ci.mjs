@@ -295,5 +295,22 @@ for (const pack of PACKS) {
   }
 }
 
+// (SNG-113) every aptitude mod key must have a CONSUMER — a mod with no reader is a lie (the SNG-103 lesson).
+// Also: every earned aptitude declares a tendency + threshold; every inverse one a worldlinessCeiling + components.
+{
+  const res = rj("content/packs/core/rules/resolution.json");
+  const aps = res.playerAptitudes || [];
+  const consumerSrc = ["engine/resolve.js", "engine/sense.js", "engine/reputation.js"].map(f => existsSync(join(root, f)) ? readFileSync(join(root, f), "utf8") : "").join("\n");
+  const keys = new Set();
+  for (const a of aps) for (const k of Object.keys(a.mods || {})) keys.add(k);
+  let checked = 0;
+  for (const k of keys) { checked++; check(`SNG-113: aptitude mod "${k}" has a consumer (no inert mod)`, consumerSrc.includes(k), "no engine reader — a mod with no consumer is a lie (SNG-103)"); }
+  for (const a of aps) {
+    if (a.axis === "inverse") check(`SNG-113: inverse aptitude "${a.id}" declares a worldliness ceiling + components`, Number.isFinite(a.worldlinessCeiling) && (a.worldlinessComponents || []).length > 0, "an inverse aptitude needs the ceiling it decays up against");
+    else check(`SNG-113: earned aptitude "${a.id}" declares a tendency + threshold`, !!a.tendency && Number.isFinite(a.threshold), "an earned aptitude needs a tendency + threshold");
+  }
+  ok(`SNG-113: ${aps.length} aptitudes validated — ${checked} distinct mod keys, all with consumers`);
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

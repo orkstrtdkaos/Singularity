@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from "../engine/resolve.js";
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
-import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitudes, fadingAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
@@ -104,8 +104,10 @@ check("summary mentions standing", reputationSummary(hero, "valley.millbrook", r
 
 // --- player profile / aptitudes ---
 const prof = newProfile("test-player");
-for (let i = 0; i < 10; i++) updateProfile(prof, ["plan", "scout"], rules.playerAptitudes);
-check("strategist earned after 10 planned actions", prof.aptitudes.includes("strategist"));
+// SNG-113: seed strategic into strategist's band (>=11) but below the deeper tier tactician (18), so only
+// strategist is held — the tiered roster means a high lean earns the deeper tier too (tested in the SNG-113 block).
+prof.tendencies = { strategic: 12 }; prof.aptitudes = deriveAptitudes(prof, rules.playerAptitudes, rules);
+check("strategist earned when strategic crosses its threshold (and not yet the deeper tactician)", prof.aptitudes.includes("strategist") && !prof.aptitudes.includes("tactician"));
 const mods = aptitudeMods(prof, rules.playerAptitudes);
 check("strategist mods flow to resolver", mods.plannedActionBonus === 5 && mods.senseTierBonus === 1);
 const planned = successChance({ character: char, action: { ...action, planned: true }, location: loc, rules, aptitudeMods: mods });
@@ -2974,6 +2976,68 @@ await (async () => {
   check("SNG-083: a met person renders SOLID (discovered=true)", ov2.some(e => e.kind === "person" && e.label === "Fendt" && e.discovered === true));
   check("SNG-083: nothing to show → an empty list (the UI shows the empty state, never a silent no-op)", knownOverlay({ npcRegistry: {}, codex: { topics: {} }, quests: [] }, positions, content).length === 0);
 })();
+
+// --- SNG-113: aptitudes are SITUATIONAL — decay bites, hysteresis holds, grants seed, innocence erodes ---
+{
+  const aps = rules.playerAptitudes;
+  const R = { aptitudeDecay: rules.aptitudeDecay, aptitudeKeepMargin: rules.aptitudeKeepMargin, aptitudeFadeBand: rules.aptitudeFadeBand };
+  const strat = aps.find(a => a.id === "strategist"); // tendency strategic, threshold 11
+  // EARN at threshold: feed the strategic tag until it crosses.
+  const c = { tendencies: {}, aptitudes: [], actionCount: 0 };
+  for (let i = 0; i < 16; i++) updateProfile(c, ["plan"], aps, R); // ~13 turns of a fed tag crosses threshold 11 at 0.975 decay
+  check("SNG-113: an aptitude is EARNED once its tendency crosses the (curved) threshold", c.aptitudes.includes("strategist") && (c.tendencies.strategic >= strat.threshold));
+  // HYSTERESIS: a single off-tag turn does NOT drop it (kept until threshold - keepMargin).
+  updateProfile(c, ["attack"], aps, R);
+  check("SNG-113: hysteresis — one off-tag turn never flickers a held aptitude off", c.aptitudes.includes("strategist"));
+  // DECAY BITES: stop feeding it; within a realistic horizon it falls below the keep-floor and is LOST.
+  let lostAt = null;
+  for (let i = 0; i < 40 && lostAt === null; i++) { updateProfile(c, ["attack"], aps, R); if (!c.aptitudes.includes("strategist")) lostAt = i; }
+  check("SNG-113: decay at the new rate actually drops an unfed aptitude in a real horizon (not permanent)", lostAt !== null && lostAt < 40);
+  check("SNG-113: the OLD decay (0.995) would NOT have dropped it in that horizon (the fix is load-bearing)", Math.pow(0.995, 40) > 0.75);
+
+  // GRANT at creation: a lineage aptitude starts held (seeded above threshold) + recorded as lineage.
+  const born = { tendencies: {}, aptitudes: [], actionCount: 0 };
+  grantAptitudes(born, ["scholar"], aps, R);
+  check("SNG-113: a background-granted aptitude starts HELD (seeded above threshold) + marked lineage", born.aptitudes.includes("scholar") && born.grantedAptitudes.includes("scholar") && born.tendencies.cerebral > (aps.find(a => a.id === "scholar").threshold));
+
+  // FADING: near the keep-floor, the aptitude is flagged (loss is legible, never silent).
+  const fadingC = { tendencies: { strategic: (strat.threshold - R.aptitudeKeepMargin) + 1 }, aptitudes: ["strategist"], actionCount: 0 };
+  check("SNG-113: an aptitude within the fade band of its keep-floor reads as FADING", fadingAptitudes(fadingC, aps, R).has("strategist"));
+
+  // INVERSE (innocence): granted at creation; held while worldliness < ceiling; lost when it crosses; ONE-WAY.
+  const innocent = aps.find(a => a.id === "innocent"); // worldlinessCeiling 10, components ruthless/deception/amorous/carousing
+  const kid = { tendencies: {}, aptitudes: [], actionCount: 0 };
+  grantAptitudes(kid, ["innocent"], aps, R);
+  check("SNG-113: an inverse aptitude is GRANTED (not earned) and held at a clean slate", kid.aptitudes.includes("innocent"));
+  for (let i = 0; i < 12; i++) updateProfile(kid, ["threaten", "deceive"], aps, R); // accrue worldliness past the ceiling
+  check("SNG-113: innocence is LOST once worldliness crosses the ceiling", !kid.aptitudes.includes("innocent"));
+  for (let i = 0; i < 40; i++) updateProfile(kid, ["help"], aps, R); // worldliness decays back down…
+  check("SNG-113: innocence is ONE-WAY — living it away does not bring it back", !kid.aptitudes.includes("innocent"));
+
+  // AMOROUS routing: the romantic/flirt tags (SNG-100) now accrue the amorous tendency (they mapped to nothing before).
+  const lover = { tendencies: {}, aptitudes: [], actionCount: 0 };
+  for (let i = 0; i < 11; i++) updateProfile(lover, ["romantic", "flirt"], aps, R);
+  check("SNG-113: romantic/flirt tags accrue the amorous tendency (a home at last) → charmer earns", lover.tendencies.amorous > 0 && lover.aptitudes.includes("charmer"));
+
+  // NO COLLECT-ALL: even a STRONG two-lean build (clever face) earns a bounded few, never the whole roster —
+  // and a perfectly-even spread earns nothing (jack-of-all-trades, master of none — decay makes it real).
+  const leaned = { tendencies: {}, aptitudes: [], actionCount: 0 };
+  for (let i = 0; i < 60; i++) updateProfile(leaned, ["plan", "persuade"], aps, R); // leans strategic + social hard
+  check("SNG-113: a strong two-lean build earns a BOUNDED few (2–6), never the whole roster of 26", leaned.aptitudes.length >= 2 && leaned.aptitudes.length <= 6 && leaned.aptitudes.length < aps.length);
+  const scattered = { tendencies: {}, aptitudes: [], actionCount: 0 };
+  const spread = [["plan"], ["attack"], ["persuade"], ["study"], ["help"], ["scout"], ["negotiate"], ["craft"], ["climb"], ["comfort"]];
+  for (let i = 0; i < 100; i++) updateProfile(scattered, spread[i % spread.length], aps, R);
+  check("SNG-113: a perfectly-even 10-way spread earns few or none (no specialization → no aptitude, decay makes it bite)", scattered.aptitudes.length <= 2);
+
+  // a new resolver consumer actually fires (TIER-B is not inert): stealthBonus on a scout-tagged action.
+  const sneaker = { attributes: { practical: 3 }, energy: 100, alignment: {}, subAttributes: {}, skills: {} };
+  const withStealth = successChance({ character: sneaker, action: { attribute: "practical", axes: {}, tags: ["sneak"] }, location: { spectrum: {} }, rules, aptitudeMods: { stealthBonus: 6 } });
+  const without = successChance({ character: sneaker, action: { attribute: "practical", axes: {}, tags: ["sneak"] }, location: { spectrum: {} }, rules, aptitudeMods: {} });
+  check("SNG-113: a TIER-B mod (stealthBonus) fires on its tagged action — the consumer is real, not inert", withStealth - without === 6 || (withStealth <= rules.d100.floorChance));
+  const speakWithStealth = successChance({ character: sneaker, action: { attribute: "social", axes: {}, tags: ["persuade"] }, location: { spectrum: {} }, rules, aptitudeMods: { stealthBonus: 6 } });
+  const speakWithout = successChance({ character: sneaker, action: { attribute: "social", axes: {}, tags: ["persuade"] }, location: { spectrum: {} }, rules, aptitudeMods: {} });
+  check("SNG-113: a situational mod does NOT fire out of context (stealth helps you sneak, not speak)", speakWithStealth === speakWithout);
+}
 
 // --- SNG-114: "Use in scene" gets meaningful, intentful options (authored uses[] or kind-defaults) ---
 {

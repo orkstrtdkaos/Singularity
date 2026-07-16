@@ -60,6 +60,36 @@ export function successChance(ctx) {
   }
   if (action.tags?.includes("discipline") && aptitudeMods.disciplinePenalty) add("discipline (penalty)", aptitudeMods.disciplinePenalty);
 
+  // SNG-113: the expanded roster's SITUATIONAL mods — each fires only in its own context (intent tags /
+  // novelty / going it alone), as its own named, self-summing line. A bonus-and-cost aptitude expresses its
+  // edge only where it applies (shadow helps when you sneak, not when you speak). No consumer, no lie.
+  {
+    const am = aptitudeMods, tg = action.tags || [], hasTag = (...ts) => ts.some(t => tg.includes(t));
+    const TAG_MODS = [
+      ["defenseBonus", ["defend", "guard", "block", "brace", "careful"], "defense"],
+      ["stealthBonus", ["scout", "sneak", "hide", "stealth"], "stealth"],
+      ["deceiveBonus", ["deceive", "lie", "feint", "bluff", "trick"], "deception"],
+      ["intimidateBonus", ["threaten", "intimidate", "coerce", "menace"], "intimidation"],
+      ["deEscalationBonus", ["comfort", "negotiate", "calm", "deescalate", "soothe"], "de-escalation"],
+      ["sustainedActionBonus", ["sustain", "ritual", "patient", "endure", "persist"], "the long game"],
+      ["craftBonus", ["craft", "forge", "repair", "make", "build", "mend"], "craft"],
+      ["allyActionBonus", ["help", "aid", "protect", "support", "rally", "assist"], "in service of another"],
+      ["flirtationBonus", ["romantic", "flirt", "woo", "seduce", "charm"], "charm"],       // rating-ceiling-bounded: a social/rapport edge, never a content unlock
+      ["sincerityReadBonus", ["sincere", "earnest", "plead", "confess", "comfort"], "sincerity"],
+      ["trustedBonus", ["persuade", "ask", "request", "appeal", "plead", "negotiate"], "you are trusted"],
+      ["alignedTraditionBonus", ["aligned", "devout", "tradition", "devote", "pray"], "aligned tradition"]
+    ];
+    for (const [key, ts, label] of TAG_MODS) if (am[key] && hasTag(...ts)) add(label, am[key]);
+    if (am.gravitasPenalty && hasTag("command", "order", "formal", "authority", "decree", "lead")) add("gravitas (penalty)", am.gravitasPenalty);
+    if (am.composurePenalty && hasTag("risky", "reckless", "surge", "pressure", "panic")) add("composure (penalty)", am.composurePenalty);
+    if (am.burstPenalty && hasTag("burst", "allout", "reckless", "surge")) add("burst (penalty)", am.burstPenalty);
+    if (am.improvisationPenalty && action.novel) add("improvisation (penalty)", am.improvisationPenalty);
+    if (am.crossPolePenalty && action.novel && hasTag("cross", "opposed", "antipode")) add("cross-pole (penalty)", am.crossPolePenalty);
+    if (am.worldlyCunningPenalty && hasTag("deceive", "lie", "threaten", "intimidate", "coerce", "steal", "extort", "scheme", "menace")) add("worldly cunning (penalty)", am.worldlyCunningPenalty);
+    if (am.chargedSituationPenalty && hasTag("attack", "brawl", "kill", "romantic", "seduce", "threaten", "menace")) add("charged moment (penalty)", am.chargedSituationPenalty);
+    if (am.soloPenalty && !hasTag("help", "aid", "protect", "support", "rally", "assist")) add("acting alone (penalty)", am.soloPenalty);
+  }
+
   // Equipment: the right tool in your pack helps (computed by inventory.equipmentBonus)
   add("equipment", equipmentBonus);
 

@@ -7,7 +7,7 @@ import { senseAction, senseTier, senseOpponent } from "./engine/sense.js";
 import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
 import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "./engine/chronicle.js";
-import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
@@ -43,7 +43,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.79";
+const APP_VERSION = "1.8.80";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1958,6 +1958,7 @@ function renderCreate() {
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
     applyNativeGrants(character, CONTENT.rules); // SNG-101b: granted their primary tradition's basics by right of being what they are
+    { const g = backgroundById(character.background)?.grantsAptitudes; if (g?.length) grantAptitudes(character, g, CONTENT.rules.playerAptitudes, CONTENT.rules); } // SNG-113: lineage aptitude(s)
     character.nativeGrantsVersion = 1; // born with the starter kit — no retro native-grant owed
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
@@ -2574,7 +2575,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // the HUMAN's profile learns from the intent tags of the chosen action
   if (resolution?.action?.intentTags?.length) {
-    updateProfile(character, resolution.action.intentTags, CONTENT.rules.playerAptitudes);
+    updateProfile(character, resolution.action.intentTags, CONTENT.rules.playerAptitudes, CONTENT.rules);
   }
   // discoveries: only mintable when the engine flagged this resolution eligible
   if (turn.discovery && resolution?.discoveryEligible) {
@@ -3831,7 +3832,7 @@ function renderCharacterScreen() {
       </div>`;
     })()}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Play-style (${esc(character.name)}'s own)</h3>
-      <div class="insight">${esc(profileInsight(character, rules.playerAptitudes))}</div></div>
+      <div class="insight">${esc(profileInsight(character, rules.playerAptitudes, rules))}</div></div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests ${infoDot("quest.routes")}</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions ${infoDot("companion.bond")}</h3>
@@ -4848,7 +4849,7 @@ async function finishGambit(run) {
   }
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];
-  updateProfile(character, allTags, CONTENT.rules.playerAptitudes);
+  updateProfile(character, allTags, CONTENT.rules.playerAptitudes, CONTENT.rules);
   const rough = run.receipts.some(r => r.complication || r.viaFallback || r.rerolled || r.degree === "failure" || r.degree === "crit_failure");
   const outcome = run.abandoned ? "abandoned" : rough ? "completed_rough" : "completed";
   // SNG-030 remainder: a carried-out plan PAYS — award the completion bonus so planning
@@ -5208,7 +5209,7 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Standing here</h3>
       ${rep ? `<span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span>` : `<span class="insight">no community claims this place</span>`}
     </section>
-    <section><h3>Play-style</h3><div class="insight">${esc(profileInsight(character, rules.playerAptitudes))}</div></section>
+    <section><h3>Play-style</h3><div class="insight">${esc(profileInsight(character, rules.playerAptitudes, rules))}</div></section>
     <section><h3>Map & Rest</h3>
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>

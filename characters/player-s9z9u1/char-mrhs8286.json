@@ -66,7 +66,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6667872441085093,
+    "spectrumId": -0.6834478819030838,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.17191810626191062,
@@ -425,133 +425,188 @@
         "player": "use both the attended end and order sense to get the full picture.",
         "summary": "Silas reads the room through combined craft — the figure is departing on his own schedule, not fleeing; the role is ending, the man is not.",
         "narration": "You don't move. You stand at the landing-head and let the two crafts settle into each other — unhurried, the way you'd press two edges together to check the fit before committing the join.\n\nThe Attended End touches the room first. It goes to what it always goes to: the nearest ending. And the ending here is not the figure. The ending is the role — the position, the function, the thread of work this person has been part of. That thread has three, maybe four days left, and it is unraveling from the outside in, not the inside out. Whoever ends it won't be the figure pocketing that paper. Something else is closing the account.\n\nOrder-sense follows, quieter and wider. You read the design the room is part of — not the room itself, but the structure it serves. The desk was placed to face the door. The shelves were built for a working archive. The lamp hook was positioned for someone spending long hours here. This was a functional post, not a residence, and the person at the desk has been its occupant long enough that the room carries the shape of their habits. The paper now in the coat pocket is the last record of a finished task — the kind of document you file, not the kind you take, unless you don't expect to be asked for it again. The traveling case says the same thing. This isn't a man between assignments. This is a man who has decided he is done being found here.\n\nThe two readings fit together like matched valve faces: the ending is institutional and closing fast, the departure is voluntary and already decided, and the bundle by the rear door was placed there this morning, not last night. He is not fleeing. He is departing on a schedule he set himself — which means he believes he has time, and which means the window Huginn named is exactly correct. Hours."
+      },
+      {
+        "player": "Say simply \"Fendt\", not loudly, not softly.  He will likely startle, but don't make any overtly threatening moves, yet.",
+        "summary": "Silas names Fendt quietly at the landing-head; the man startles, reads him, and stills — assessment, not flight.",
+        "narration": "You say the name the way you'd set a tool down on a bench — no weight added, no weight withheld. \"Fendt.\"\n\nHe startles. The traveling case scrapes against his boot as his hand snaps to it; his whole body turns in one compressed motion, the instinct of a man who has been waiting for this, who has perhaps been practicing not waiting for it. He is mid-forties, hollow at the cheeks, wearing the kind of coat that was pressed last week and has been slept in since. His eyes find you at the landing-head and hold there — not bolting, not reaching for anything, just reading you with the particular attention of someone who has been calculating odds for a long time and wants to know which column you fall in.\n\nHuginn, perched at your shoulder, says nothing. Its eye is on the man at the case. The silence it keeps is a comment.\n\nFendt's breathing slows deliberately — you can see him make himself do it. His hand is still on the case handle but his weight has shifted back from flight into something else: assessment. He takes in the landing, the shadow you came from, the spear across your back. He does not look at the door behind him. That is information too. \"You came through the back,\" he says, and it is not a question, and there is something in his voice that is almost — not relief, but its structural cousin. Someone found him before the board did."
       }
     ],
     "lastTurn": {
-      "narration": "You don't move. You stand at the landing-head and let the two crafts settle into each other — unhurried, the way you'd press two edges together to check the fit before committing the join.\n\nThe Attended End touches the room first. It goes to what it always goes to: the nearest ending. And the ending here is not the figure. The ending is the role — the position, the function, the thread of work this person has been part of. That thread has three, maybe four days left, and it is unraveling from the outside in, not the inside out. Whoever ends it won't be the figure pocketing that paper. Something else is closing the account.\n\nOrder-sense follows, quieter and wider. You read the design the room is part of — not the room itself, but the structure it serves. The desk was placed to face the door. The shelves were built for a working archive. The lamp hook was positioned for someone spending long hours here. This was a functional post, not a residence, and the person at the desk has been its occupant long enough that the room carries the shape of their habits. The paper now in the coat pocket is the last record of a finished task — the kind of document you file, not the kind you take, unless you don't expect to be asked for it again. The traveling case says the same thing. This isn't a man between assignments. This is a man who has decided he is done being found here.\n\nThe two readings fit together like matched valve faces: the ending is institutional and closing fast, the departure is voluntary and already decided, and the bundle by the rear door was placed there this morning, not last night. He is not fleeing. He is departing on a schedule he set himself — which means he believes he has time, and which means the window Huginn named is exactly correct. Hours.",
-      "sceneSummary": "Silas reads the room through combined craft — the figure is departing on his own schedule, not fleeing; the role is ending, the man is not.",
+      "narration": "You say the name the way you'd set a tool down on a bench — no weight added, no weight withheld. \"Fendt.\"\n\nHe startles. The traveling case scrapes against his boot as his hand snaps to it; his whole body turns in one compressed motion, the instinct of a man who has been waiting for this, who has perhaps been practicing not waiting for it. He is mid-forties, hollow at the cheeks, wearing the kind of coat that was pressed last week and has been slept in since. His eyes find you at the landing-head and hold there — not bolting, not reaching for anything, just reading you with the particular attention of someone who has been calculating odds for a long time and wants to know which column you fall in.\n\nHuginn, perched at your shoulder, says nothing. Its eye is on the man at the case. The silence it keeps is a comment.\n\nFendt's breathing slows deliberately — you can see him make himself do it. His hand is still on the case handle but his weight has shifted back from flight into something else: assessment. He takes in the landing, the shadow you came from, the spear across your back. He does not look at the door behind him. That is information too. \"You came through the back,\" he says, and it is not a question, and there is something in his voice that is almost — not relief, but its structural cousin. Someone found him before the board did.",
+      "sceneSummary": "Silas names Fendt quietly at the landing-head; the man startles, reads him, and stills — assessment, not flight.",
       "choices": [
         {
-          "label": "Step forward into the room and name yourself — plainly, no threat, no performance. You know he's leaving; he may as well know someone noticed.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Stay in shadow and observe — watch what he does with himself before he knows he's watched. Let him reveal his state before he can manage it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let him reach the stairs first — step aside into the stairwell shadow and let him come to you. The narrow landing is a better place for a conversation than a room with a window.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Name the thing he's holding — the paper in the coat. Not as an accusation. As proof you already know enough that leaving without talking would be the worse choice.",
+          "label": "Tell him plainly: you're not from the council, not from Grael — you came because the filtration record that's missing matters and he's the one who understands it.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 15,
+          "axes": {
+            "falsehood_truth": 0.8
+          },
+          "difficulty": 0,
           "intentTags": [
             "persuade",
             "negotiate"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask him what's in the coat — the paper he folded before you spoke. Not the case. The paper.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Use Order-Sense on Fendt himself — read the design he's part of, what role he played in the filtration system, and what piece of it only he still holds.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Tell him you can get him out of the Edge District before the board acts — but only if he tells you what the falsified readings were covering up.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "violence_peace": -0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "threaten"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -4
+        "energy": 0
       },
       "scene": {
-        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. The figure at the desk has their back to him.",
+        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — startled but not fleeing, actively reading him.",
         "npcsPresent": [
           {
-            "name": "Unknown figure",
-            "state": "Standing at the cleared desk, last paper folded into inner coat pocket — traveling case latched at their boots. Unaware Silas is at the landing. Composure is deliberate, not agitated — a man working through a checklist, not running."
+            "name": "Fendt",
+            "state": "Standing beside the cleared desk, one hand on the latched traveling case, weight shifted back from flight into assessment — watching Silas without reaching for anything."
           },
           {
             "name": "Pell",
-            "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance."
+            "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance, unaware of what is happening upstairs."
           }
         ],
         "objects": [
-          "Latched traveling case — at the figure's boots, ready to lift",
+          "Latched traveling case — at Fendt's boots, his hand still on the handle",
           "Narrow shutter — cracked two fingers wide, morning light crossing the room in one pale bar",
-          "Desk — cleared entirely now, last paper gone into the coat",
+          "Desk — cleared entirely, last paper gone into the coat",
           "Oil lamp (below, storage room) — still burning",
-          "Cloth-wrapped bundle — outside, beside the rear service door"
+          "Cloth-wrapped bundle — outside, beside the rear service door",
+          "Last paper — folded into Fendt's inner coat pocket"
         ],
         "threads": [
-          "Figure does not know Silas is at the landing — window of advantage is open",
-          "Departure is voluntary and scheduled — he believes he has hours, not minutes",
-          "The paper in the coat is the last record of a finished task — taken rather than filed",
-          "The institutional role is ending in 3–4 days from outside pressure, not the man's own choice — he's ahead of it",
-          "Pell holds the front; rear door still unlatched; both exits covered"
+          "Fendt is reading Silas — he knows Silas came through the back and is filing what that means",
+          "Fendt has not looked at the rear door — he is not planning to run, or he knows it's covered",
+          "The paper in the coat is the last record of something — not yet identified",
+          "Pell holds the front; she does not know contact has been made",
+          "Fendt said 'before the board did' — he is expecting the council's action, and Silas arrived ahead of it"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "fendt",
+          "name": "Fendt",
+          "role": "Filtration engineer, Edge District — marked on the accountability board",
+          "description": "Mid-forties, hollow-cheeked, coat pressed last week and slept in since — a man who has been calculating odds and waiting to see which column his visitor falls in.",
+          "note": "Named quietly at the landing-head by Silas; startled but did not flee — shifted into assessment. Said 'you came through the back' as a statement, not a question. Noted Silas arrived before the board did.",
+          "learned": [
+            "Recognized that Silas came through the rear — reads the approach as significant",
+            "Is waiting for the council to act; Silas arrived ahead of that action",
+            "Has a last paper in his inner coat pocket — taken rather than filed"
+          ],
+          "skillsObserved": [
+            "forced calm under surprise — made himself slow his breathing deliberately"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the desk in the upper floor of the Edge District administrative building — not fleeing, actively reading Silas; departure was scheduled but is now paused."
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Fendt located and named — he is present, unguarded, and aware the board is moving. First contact made. The paper in his coat and what the falsified readings covered are the immediate questions."
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "huginn-s-building",
-          "label": "Huginn's Building — Edge District",
-          "kind": "mystery",
-          "entityId": "radiant-plateau-edge",
-          "fact": "The figure's departure is voluntary and self-scheduled — he believes he has hours. The ending is institutional (the role closes in 3–4 days from outside pressure), not personal. The paper pocketed is the last record of a completed task, taken rather than filed — a man who does not expect to be asked for it again. The room's design confirms a long-term functional post, not a transit point.",
+          "topic": "fendt",
+          "label": "Fendt — Filtration Engineer",
+          "kind": "person",
+          "entityId": "fendt",
+          "fact": "Mid-forties filtration engineer — hollow-cheeked, coat slept-in, hand on a latched traveling case. Was expecting someone to come, just not before the council board acted. Came through the back; he noticed. Said 'before the board did' — he is ahead of the institutional action, not running from it.",
           "links": [
-            "find-the-engineer",
+            "the-edge-district-ledger",
             "fendt-and-the-falsified-ledger",
-            "huginn",
-            "the-unnamed-engineer"
+            "radiant-plateau-edge"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief moment of stillness and combined craft-reading at the landing"
+        "hoursPassed": 0.1,
+        "why": "A single word and its immediate aftermath — seconds only"
       }
     },
     "sceneState": {
-      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. The figure at the desk has their back to him.",
+      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands at the landing-head in shadow. A single shuttered window cracks morning light across the opposite wall. Fendt stands beside the cleared desk, hand on the latched traveling case at his boots, facing Silas — startled but not fleeing, actively reading him.",
       "npcsPresent": [
         {
-          "name": "Unknown figure",
-          "state": "Standing at the cleared desk, last paper folded into inner coat pocket — traveling case latched at their boots. Unaware "
+          "name": "Fendt",
+          "state": "Standing beside the cleared desk, one hand on the latched traveling case, weight shifted back from flight into assessmen"
         },
         {
           "name": "Pell",
-          "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance."
+          "state": "Holding position three paces left of the recessed front door on the main light-guide street — watching the entrance, una"
         }
       ],
       "objects": [
-        "Latched traveling case — at the figure's boots, ready to lift",
+        "Latched traveling case — at Fendt's boots, his hand still on the handle",
         "Narrow shutter — cracked two fingers wide, morning light crossing the room in on",
-        "Desk — cleared entirely now, last paper gone into the coat",
+        "Desk — cleared entirely, last paper gone into the coat",
         "Oil lamp (below, storage room) — still burning",
-        "Cloth-wrapped bundle — outside, beside the rear service door"
+        "Cloth-wrapped bundle — outside, beside the rear service door",
+        "Last paper — folded into Fendt's inner coat pocket"
       ],
       "threads": [
-        "Figure does not know Silas is at the landing — window of advantage is open",
-        "Departure is voluntary and scheduled — he believes he has hours, not minutes",
-        "The paper in the coat is the last record of a finished task — taken rather than filed",
-        "The institutional role is ending in 3–4 days from outside pressure, not the man's own choice — he's ahead of it",
-        "Pell holds the front; rear door still unlatched; both exits covered"
+        "Fendt is reading Silas — he knows Silas came through the back and is filing what that means",
+        "Fendt has not looked at the rear door — he is not planning to run, or he knows it's covered",
+        "The paper in the coat is the last record of something — not yet identified",
+        "Pell holds the front; she does not know contact has been made",
+        "Fendt said 'before the board did' — he is expecting the council's action, and Silas arrived ahead of it"
       ]
     }
   },
@@ -605,6 +660,252 @@
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
+    },
+    {
+      "id": "the-edge-district-ledger",
+      "title": "The Edge District Ledger",
+      "structured": true,
+      "status": "active",
+      "premise": "A filtration supervisor named Fendt was marked on the Edge District accountability board by his own superior — and no accompanying record was filed. A keeper of thirty years says she has never seen that happen. Fendt is going to be ruined by a piece of paper that does not exist.",
+      "stakes": "If you walk away: Fendt is stripped and exiled within the season, the water-filtration failure he was blamed for goes uncorrected because the man who understood it is gone, and Overseer Grael's method — a name on a board, no record, no appeal — is confirmed as something that works. He will use it again. He has used it before.",
+      "axis": "falsehood_truth",
+      "traditions": [
+        "verist",
+        "veilwright",
+        "lattice",
+        "umbral",
+        "abyssal",
+        "stillhold"
+      ],
+      "giver": "fendt",
+      "legend": "overseer_grael",
+      "region": "valley",
+      "tier": "regional",
+      "arcId": null,
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "Find out what the missing record would have said.",
+          "condition": "Speak with Fendt OR obtain the filtration log for the marked period.",
+          "change": "Codex: Fendt's account is recorded — and it does not match the board."
+        },
+        {
+          "id": "s2",
+          "objective": "Find who marked him, and why there is no record.",
+          "condition": "Identify Overseer Grael as the marking authority (via the board's own chain, the keeper's testimony, or Grael himself).",
+          "change": "Codex: Grael is entered as an entity, linked to Fendt. He becomes aware that someone is looking."
+        },
+        {
+          "id": "s3",
+          "objective": "Find out whether the marking is a pattern.",
+          "condition": "Locate at least one prior unrecorded marking (the keeper remembers; the archive half-remembers; Grael's own ledger will say if you can reach it).",
+          "change": "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you."
+        },
+        {
+          "id": "s4",
+          "objective": "Decide what the truth is for.",
+          "condition": "Resolve — see outcomes.",
+          "change": "The district changes. So does Fendt. So, one way or another, does Grael."
+        }
+      ],
+      "routes": {
+        "verist": "Say it plainly, in public, at the board. Truth as a hammer.",
+        "lattice": "Take the ledger apart line by line until the arithmetic confesses. He is beaten by his own records.",
+        "veilwright": "Make a better record. Save Fendt with a truth you built. It works, and you know what you did.",
+        "umbral": "Harbor Fendt. Get him out. He lives; the district does not change.",
+        "abyssal": "Name what Grael actually wants — a quiet district and not to be the villain — and give him a way to have both, at a price.",
+        "stillhold": "Broker it. Fendt is restored quietly, Grael saves face, nobody is punished, and the method survives."
+      },
+      "outcomes": [
+        {
+          "id": "exposed",
+          "name": "Grael Exposed",
+          "summary": "The pattern is made public and holds. Grael falls.",
+          "narration": [
+            "Grael is stripped and removed (NPC state: fallen). His lieutenants scatter into the district as riffraff-tier antagonists.",
+            "Fendt is restored, and is permanently in your debt, and is not entirely grateful about it.",
+            "The thirty-year keeper is vindicated and becomes an ally who will never lie to you.",
+            "WORLD-EVENT (propagates): 'the Edge District accountability board was opened' — reaches other districts on the shared clock. Other markings begin to be questioned. Some of them should not be.",
+            "Verist disposition toward you: strongly raised. Veilwright: lowered."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "grael",
+              "state": "fallen",
+              "note": "stripped and removed; lieutenants scatter as riffraff-tier antagonists"
+            },
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "restored",
+              "note": "permanently in your debt, and not entirely grateful about it"
+            },
+            {
+              "type": "ally",
+              "npc": "keeper_ilma",
+              "note": "vindicated; will never lie to you"
+            },
+            {
+              "type": "disposition",
+              "people": "verist",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "veilwright",
+              "delta": -1
+            },
+            {
+              "type": "codex_fact",
+              "text": "The Edge District accountability board was opened. Grael's pattern of unrecorded markings is a matter of record."
+            },
+            {
+              "type": "world_event",
+              "text": "Word spreads that the Edge District board was opened; other districts begin questioning their own markings — some of which should not be.",
+              "propagates": true,
+              "delayDays": 3
+            },
+            {
+              "type": "xp",
+              "amount": 30
+            }
+          ]
+        },
+        {
+          "id": "saved_quietly",
+          "name": "Fendt Saved, Grael Standing",
+          "summary": "Fendt is safe. The method is intact.",
+          "narration": [
+            "Fendt lives and is restored or extracted — but the board's method is confirmed as survivable, which is not the same as beaten.",
+            "Grael remains, and he now knows your face, and he is patient.",
+            "Codex: 'Grael's method' recorded as an unresolved pattern. It will recur.",
+            "WORLD-EVENT: another name appears on the board within the season, and that one you will not be there for."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "safe",
+              "note": "restored or extracted; the method survives"
+            },
+            {
+              "type": "npc_state",
+              "npc": "grael",
+              "state": "standing",
+              "note": "knows your face now, and is patient"
+            },
+            {
+              "type": "codex_fact",
+              "text": "Grael's method — a name on the board, no record filed — remains an unresolved pattern."
+            },
+            {
+              "type": "world_event",
+              "text": "Another name appears on the Edge District board within the season, and you are not there for it.",
+              "propagates": true,
+              "delayDays": 20
+            },
+            {
+              "type": "xp",
+              "amount": 25
+            }
+          ]
+        },
+        {
+          "id": "bargained",
+          "name": "The Bargain",
+          "summary": "Grael gets what he actually wanted. So does Fendt. So, in a smaller way, do you.",
+          "narration": [
+            "Fendt restored; Grael's face saved; the district quiets. It is a genuinely good outcome and it is also a deal with a man who ruins people.",
+            "Grael's disposition toward you: WARY RESPECT. He will deal with you again. That is a door, and it is also a rope.",
+            "Abyssal disposition raised. Seraphic lowered — the Orders would have judged him."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "restored"
+            },
+            {
+              "type": "npc_state",
+              "npc": "grael",
+              "state": "standing",
+              "note": "wary respect; will deal with you again — a door, and a rope"
+            },
+            {
+              "type": "disposition",
+              "people": "abyssal",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "seraphic",
+              "delta": -1
+            },
+            {
+              "type": "codex_fact",
+              "text": "You made a bargain with Overseer Grael. It was fair. That is the part that stays with you."
+            },
+            {
+              "type": "xp",
+              "amount": 25
+            }
+          ]
+        },
+        {
+          "id": "walked_away",
+          "name": "You Walked Away",
+          "summary": "You had other things to do.",
+          "narration": [
+            "Fendt is stripped and exiled. The filtration failure goes uncorrected and worsens.",
+            "The keeper of thirty years stops speaking to anyone about anything.",
+            "WORLD-EVENT: the water problem escalates on the shared clock and reaches you later, larger, as someone else's crisis.",
+            "This outcome is REAL and is not a failure state. It is a choice with a cost, and the cost arrives."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "fendt",
+              "state": "exiled",
+              "note": "stripped; the filtration failure goes uncorrected"
+            },
+            {
+              "type": "npc_state",
+              "npc": "keeper_ilma",
+              "state": "silent",
+              "note": "stops speaking to anyone about anything"
+            },
+            {
+              "type": "location_state",
+              "location": "radiant_plateau_edge",
+              "change": "water_crisis_worsens"
+            },
+            {
+              "type": "world_event",
+              "text": "The Edge District water problem escalates and reaches you later, larger, as someone else's crisis.",
+              "propagates": true,
+              "delayDays": 30
+            },
+            {
+              "type": "codex_fact",
+              "text": "You walked away from the Edge District ledger. This is a real outcome, not a failure — and it has a cost, and the cost arrives."
+            },
+            {
+              "type": "xp",
+              "amount": 10
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [
+        "Fendt located and named — he is present, unguarded, and aware the board is moving. First contact made. The paper in his coat and what the falsified readings covered are the immediate questions."
+      ],
+      "aliases": [],
+      "startedAt": "2026-07-16T21:27:42.515Z",
+      "startedWorldDay": 16
     }
   ],
   "npcRegistry": {
@@ -936,6 +1237,34 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
+      }
+    },
+    "fendt": {
+      "id": "fendt",
+      "name": "Fendt",
+      "role": "Filtration engineer, Edge District — marked on the accountability board",
+      "description": "Mid-forties, hollow-cheeked, coat pressed last week and slept in since — a man who has been calculating odds and waiting to see which column his visitor falls in.",
+      "firstMet": {
+        "locationId": "radiant_plateau_edge",
+        "day": 3
+      },
+      "relationship": 0,
+      "history": [
+        "[d3] Named quietly at the landing-head by Silas; startled but did not flee — shifted into assessment. Said 'you came through the back' as a statement, not a question. Noted Silas arrive"
+      ],
+      "knownFacts": [
+        "Recognized that Silas came through the rear — reads the approach as significant",
+        "Is waiting for the council to act; Silas arrived ahead of that action",
+        "Has a last paper in his inner coat pocket — taken rather than filed"
+      ],
+      "skillsObserved": [
+        "forced calm under surprise — made himself slow his breathing"
+      ],
+      "status": "active",
+      "statusNote": "At the desk in the upper floor of the Edge District administrative building — not fleeing, actively reading Silas; departure was scheduled but is now paused.",
+      "lastSeen": {
+        "locationId": "radiant_plateau_edge",
+        "day": 3
       }
     }
   },
@@ -1924,21 +2253,40 @@
         "createdDay": 3,
         "updatedDay": 3,
         "entityId": "radiant-plateau-edge"
+      },
+      "fendt": {
+        "id": "fendt",
+        "label": "Fendt",
+        "kind": "person",
+        "facts": [
+          "[d3] Mid-forties filtration engineer — hollow-cheeked, coat slept-in, hand on a latched traveling case. Was expecting someone to come, just not before the council board acted. Came through the back; he not"
+        ],
+        "links": [
+          "the-edge-district-ledger",
+          "fendt-and-the-falsified-ledger",
+          "radiant-plateau-edge"
+        ],
+        "aliases": [
+          "Fendt — Filtration Engineer"
+        ],
+        "createdDay": 3,
+        "entityId": "fendt",
+        "updatedDay": 3
       }
     }
   },
   "tendencies": {
-    "strategic": 45.0954199448026,
-    "cerebral": 29.169800229786187,
-    "social": 36.42958207449511,
-    "generous": 8.917914779031994,
-    "cautious": 33.74499083776869,
-    "physical": 2.203829234590001,
-    "risky": 6.205539821129068,
-    "ruthless": 2.7287376806687997,
-    "carousing": 1.9161257870247963,
-    "amorous": 5.2542918735700646,
-    "patient": 1.635397921881828
+    "strategic": 44.968034446182536,
+    "cerebral": 28.440555224041532,
+    "social": 35.51884252263273,
+    "generous": 8.694966909556195,
+    "cautious": 32.90136606682447,
+    "physical": 2.148733503725251,
+    "risky": 6.050401325600841,
+    "ruthless": 2.6605192386520797,
+    "carousing": 1.8682226423491763,
+    "amorous": 5.122934576730813,
+    "patient": 1.5945129738347823
   },
   "aptitudes": [
     "strategist",
@@ -1950,7 +2298,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 334,
+  "actionCount": 335,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2092,8 +2440,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784236432567,
-  "rev": 475,
+  "updatedAt": 1784237942347,
+  "rev": 477,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2657,7 +3005,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 148
+    "valley": 149
   },
   "foreclosed": [
     "rootkin",

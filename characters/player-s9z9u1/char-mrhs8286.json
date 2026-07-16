@@ -12,7 +12,7 @@
   "attributes": {
     "physical": 3,
     "mental": 5,
-    "social": 4,
+    "social": 5,
     "practical": 5
   },
   "skills": {},
@@ -2025,52 +2025,54 @@
         "player": "Slide your hand from her breast down across her stomach and lower — heat moving while the rhythm holds.",
         "summary": "Silas slides his hand lower and holds the rhythm — Pell unguarded and climbing, the overhang holding the moment.",
         "narration": "The hand moves slowly — breast to ribs to the soft plane of her stomach — and she tracks it without turning her head, some animal part of her attending the path of your palm while her hips keep the rhythm you've set between you. When your fingers reach lower she exhales hard through her nose, a sound like something giving way at last, and her knees push apart an inch without being asked.\n\nYou find her there, slick and warm, and her whole body answers at once — back arching off the stone, weight pressing into your hand from both directions now, the rhythm below and the pressure above working the same note. She says your name. Not Silas, not a question — just the sound of it, two syllables stripped of everything except what they mean right now, breathed out against the cold air of the overhang while the coals throw their low red light across the planes of her back and shoulders.\n\nHer hands have stopped being steady against the stone. The fingers are moving, finding grip and losing it, and her breath has lost whatever management was left in it — just the real thing now, short and uneven, climbing. She tilts her head back against your shoulder and you feel her pulse at the side of her throat, quick and close.\n\nThe last pour of Resin Mountain Wine sits untouched on the flat stone. Huginn has not moved. The coals burn lower. None of it matters."
+      },
+      {
+        "player": "Pull her back from the stone and against your chest — change the angle, change the hold",
+        "summary": "Silas draws Pell back against his chest — angle changed, hold changed, the climb continuing.",
+        "narration": "The pull is simple and she comes willingly — you draw her back off the stone and against your chest, her weight settling into you, and the angle shifts entirely. Her back is warm against your front, her head falling to the side to find your shoulder, both your hands now free to move where they will. The cold air reaches the stone where she was braced; here, pressed together, there is only heat.\n\nShe makes a low sound at the change — part surprise, part satisfaction — and her hands find your forearms where they cross her body, not pulling, just holding the contact, feeling the motion from a new position. The fire has burned lower, the coals painting everything in red and amber. Huginn has not stirred. The wine sits on its flat stone, last pour still in the glass.\n\nYou are at the angle now where you can watch her face if you choose — the line of her jaw, her eyes half-closed, the way her mouth opens slightly when the rhythm catches right. This is the part she called managing. She is not managing it.\n\nHer hands tighten on your forearms. Her breath is short and climbing. The coals throw their slow light across both of you, and the overhang holds everything in."
       }
     ],
     "lastTurn": {
-      "narration": "The hand moves slowly — breast to ribs to the soft plane of her stomach — and she tracks it without turning her head, some animal part of her attending the path of your palm while her hips keep the rhythm you've set between you. When your fingers reach lower she exhales hard through her nose, a sound like something giving way at last, and her knees push apart an inch without being asked.\n\nYou find her there, slick and warm, and her whole body answers at once — back arching off the stone, weight pressing into your hand from both directions now, the rhythm below and the pressure above working the same note. She says your name. Not Silas, not a question — just the sound of it, two syllables stripped of everything except what they mean right now, breathed out against the cold air of the overhang while the coals throw their low red light across the planes of her back and shoulders.\n\nHer hands have stopped being steady against the stone. The fingers are moving, finding grip and losing it, and her breath has lost whatever management was left in it — just the real thing now, short and uneven, climbing. She tilts her head back against your shoulder and you feel her pulse at the side of her throat, quick and close.\n\nThe last pour of Resin Mountain Wine sits untouched on the flat stone. Huginn has not moved. The coals burn lower. None of it matters.",
-      "sceneSummary": "Silas slides his hand lower and holds the rhythm — Pell unguarded and climbing, the overhang holding the moment.",
+      "narration": "The pull is simple and she comes willingly — you draw her back off the stone and against your chest, her weight settling into you, and the angle shifts entirely. Her back is warm against your front, her head falling to the side to find your shoulder, both your hands now free to move where they will. The cold air reaches the stone where she was braced; here, pressed together, there is only heat.\n\nShe makes a low sound at the change — part surprise, part satisfaction — and her hands find your forearms where they cross her body, not pulling, just holding the contact, feeling the motion from a new position. The fire has burned lower, the coals painting everything in red and amber. Huginn has not stirred. The wine sits on its flat stone, last pour still in the glass.\n\nYou are at the angle now where you can watch her face if you choose — the line of her jaw, her eyes half-closed, the way her mouth opens slightly when the rhythm catches right. This is the part she called managing. She is not managing it.\n\nHer hands tighten on your forearms. Her breath is short and climbing. The coals throw their slow light across both of you, and the overhang holds everything in.",
+      "sceneSummary": "Silas draws Pell back against his chest — angle changed, hold changed, the climb continuing.",
       "choices": [
         {
-          "label": "Hold everything — pace, hand, mouth at her neck — and let her climb all the way",
+          "label": "Stay here — hold her, keep the pace, and let her climb the rest of the way.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "hold"
+            "romantic"
           ],
           "trivial": true
         },
         {
-          "label": "Work your fingers while the rhythm holds — two things moving together",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "act"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say her name into her neck — just her name, nothing else",
+          "label": "Put your mouth to her ear and say her name — just that.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "connect"
+            "romantic"
           ],
           "trivial": true
         },
         {
-          "label": "Pull her back from the stone and against your chest — change the angle, change the hold",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Slow it back down — draw it out, make her ask.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "act",
-            "risky"
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Do something else entirely.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
           ],
           "trivial": true
         }
@@ -2080,15 +2082,15 @@
         "energy": 0
       },
       "scene": {
-        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned down to low red coals throwing warm light across the stone.",
+        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned down to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him fully, hands on his forearms, face visible in the firelight.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Back arching off the stone, head tilted against Silas's shoulder, hands losing grip and finding it — breath short and uneven, climbing, fully unguarded."
+            "state": "Leaning back against Silas's chest, hands holding his forearms, breath short and climbing — face open, nothing managed."
           },
           {
             "name": "Huginn",
-            "state": "Head tucked under one wing on the stone lip. Unmoved."
+            "state": "Head still tucked under one wing on the stone lip. Unmoved."
           }
         ],
         "objects": [
@@ -2116,32 +2118,29 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing.",
-          "learned": [
-            "Names Silas plainly, without management, when the moment takes the last of her composure."
-          ],
+          "note": "Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, the last of the armor gone.",
+          "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, nothing managed.",
           "bondType": "romantic",
           "bondStage": "together"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "The scene continues — a short beat within the same evening."
+        "why": "A short beat — position change, the moment continuing."
       }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned down to low red coals throwing warm light across the stone.",
+      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned down to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him fully, hands on his forearms, face visible in the firelight.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Back arching off the stone, head tilted against Silas's shoulder, hands losing grip and finding it — breath short and un"
+          "state": "Leaning back against Silas's chest, hands holding his forearms, breath short and climbing — face open, nothing managed."
         },
         {
           "name": "Huginn",
-          "state": "Head tucked under one wing on the stone lip. Unmoved."
+          "state": "Head still tucked under one wing on the stone lip. Unmoved."
         }
       ],
       "objects": [
@@ -2310,7 +2309,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Laughed once — real, short — and stayed. Thumb still at his throat, chin up, watching him. She is not going anywhere.",
         "[d2] Watched Silas undress without looking away — measuring rather than performing. Settled into a low open stance and is waiting. The game is plainly named on both sides now.",
         "[d2] Pulled Silas into her from behind, arms crossed forward across his chest — held the position longer than the technique required, then shifted grip deliberately. Said 'there' into h",
         "[d2] Silas reversed the hold — she let him move, curious about where it was going. Arms came up to cover his hands, not to stop them. Head back against his shoulder, breath slower. No a",
@@ -2319,7 +2317,8 @@
         "[d2] The slap landed and broke her rhythm for a half-second — she exhaled it out and pressed back with her weight. Still unguarded; answering in motion.",
         "[d2] Went still at the mouth on her neck — then tilted her head to give more, leaned her full weight back into Silas, let the pace have her. Hips beginning to answer the rhythm, asking ",
         "[d2] Named what she wants plainly and without armor — harder, and don't stop watching. The second ask came quieter, less decided, and she didn't take it back.",
-        "[d2] Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing."
+        "[d2] Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing.",
+        "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing."
       ],
       "knownFacts": [
         "Silas named the grapple plainly and without qualification — she read the double meaning and chose the stance anyway",
@@ -2340,7 +2339,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, the last of the armor gone.",
+      "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, nothing managed.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2689,7 +2688,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-16T04:32:03.348Z",
+    "lastSharedReadAt": "2026-07-16T06:36:57.068Z",
     "lastTickWorldDay": 16,
     "lastCanonWorldDay": 16
   },
@@ -2708,12 +2707,12 @@
     "agility": 3,
     "reason": 4,
     "insight": 5,
-    "presence": 4,
+    "presence": 5,
     "rapport": 4,
     "craft": 5,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [],
   "codex": {
@@ -3460,24 +3459,28 @@
     }
   },
   "tendencies": {
-    "strategic": 58.34857817750103,
-    "cerebral": 38.85616690031118,
-    "social": 56.024207531175726,
-    "generous": 13.714653857520323,
-    "cautious": 50.43369297488478,
-    "physical": 3.3892177557640446,
-    "risky": 8.51771442847801,
-    "ruthless": 4.196462254420378,
-    "carousing": 2.946765310911199
+    "strategic": 56.889863723063506,
+    "cerebral": 37.8847627278034,
+    "social": 54.62360234289633,
+    "generous": 13.371787511082315,
+    "cautious": 49.17285065051266,
+    "physical": 3.3044873118699436,
+    "risky": 9.30477156776606,
+    "ruthless": 4.091550698059868,
+    "carousing": 2.873096178138419
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "scholar",
     "daredevil",
-    "good_samaritan"
+    "good_samaritan",
+    "tactician",
+    "orator",
+    "sage",
+    "stalwart"
   ],
-  "actionCount": 317,
+  "actionCount": 318,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3619,8 +3622,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784183539045,
-  "rev": 436,
+  "updatedAt": 1784183920611,
+  "rev": 441,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4180,10 +4183,10 @@
       "at": "2026-07-13T12:11:17.802Z"
     }
   ],
-  "syncedAt": 1784105484498,
+  "syncedAt": 1784183539045,
   "teachers": {},
   "regionsKnown": {
-    "valley": 127
+    "valley": 128
   },
   "foreclosed": [
     "rootkin",

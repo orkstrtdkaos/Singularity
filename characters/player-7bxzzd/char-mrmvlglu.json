@@ -157,63 +157,72 @@
         "player": "I'll read the room and see if there is anyone present other than me and Kon that isn't a cogitant, anyone who isn't neglecting their basic necessities. ",
         "summary": "Saehara pushes Read the Fight outward searching for a non-Cogitant presence — finds only the same uniform inward compression; no outlier, no fed and rested stranger in the hall.",
         "narration": "You cast the ability outward the way you've been doing all morning — Read the Fight, pressed into service it wasn't built for, reading people instead of the shape of violence. You're looking for something simple: someone fed, someone rested, someone whose body has been attended to in the last twelve hours. A person among all this forgetting who still remembers they have one.\n\nIt doesn't give you what you asked for. The ability is a blade, not a net — it finds tension, tells, the coiled-spring moment before a thing breaks. What it sweeps through the entrance hall and finds is uniform: the slow, bloodless compression of minds turned inward so far they've stopped broadcasting anything a fighter's instinct would recognize as a signal. Araveth's finger loops its chalk arc. The drifting Cogitants at the hall's edges move without agenda, without destination, without the small self-protective gravity that people carry when they're hungry and know it. There's no one here who reads as *not* a Cogitant. No warm outlier. No body that still eats on schedule. The fallen woman's lips move. Ossian watches you from the floor with his extraordinary eyes and says nothing, which is almost certainly because he already knows what you're going to find.\n\nKon, on the first step, glances back down at you. Not impatiently — the fox doesn't do impatience, exactly — but with the small shift of attention that means: *you're looking at the floor when the stairs are right here.*"
+      },
+      {
+        "player": "Turn to Ossian before climbing: ask him plainly whether anyone *outside* the Cogitarium knows what's happening here — does anyone come, does anyone bring food, is there a supplier, a runner, anyone tethered to the world below?",
+        "summary": "Ossian reveals the Cogitarium has had no resupply for nineteen days and no outside contact since the evacuation proposal was dismissed.",
+        "narration": "You turn back to Ossian before your foot finds the first step. Kon waits above you, patient, one ear angled down.\n\n\"Does anyone come here?\" you ask. \"From outside. A supplier, a runner — someone who brings food, checks in, stays tethered to what's below.\"\n\nOssian considers this the way he considers everything — not as a question but as a data point being filed. \"There was a supply arrangement,\" he says. \"Grain, dried goods, salt fish. A runner from the Waymarker settlement, every eight days.\" His eyes move briefly to the notation wall, then back. \"The last delivery was nineteen days ago. We sent no word. No word came in return.\" He says this without distress, the way a man reports a variable that has drifted outside its expected range. \"The arrangement assumed we would send for resupply when stocks ran low. We did not send. The runner,\" — the faintest pause, the word handled with care — \"stopped coming.\"\n\nYou look at him for a moment. He looks back. The chalk model on the wall behind Araveth tracks twenty-two days of river deterioration in meticulous, beautiful, cooling detail — and no one in this building has eaten in, by your best count, close to three weeks.\n\n\"No one knows,\" you say. Not a question.\n\n\"The probability that any settlement representative has re-initiated contact is low,\" Ossian says. \"Given the reception of our evacuation proposal, I calculate that we read as a closed matter to them.\" He folds his hands in his lap with the neatness of a man who has made peace with an outcome. \"We are not, in fact, a closed matter. But the distinction requires someone to make it.\""
       }
     ],
     "lastTurn": {
-      "narration": "You cast the ability outward the way you've been doing all morning — Read the Fight, pressed into service it wasn't built for, reading people instead of the shape of violence. You're looking for something simple: someone fed, someone rested, someone whose body has been attended to in the last twelve hours. A person among all this forgetting who still remembers they have one.\n\nIt doesn't give you what you asked for. The ability is a blade, not a net — it finds tension, tells, the coiled-spring moment before a thing breaks. What it sweeps through the entrance hall and finds is uniform: the slow, bloodless compression of minds turned inward so far they've stopped broadcasting anything a fighter's instinct would recognize as a signal. Araveth's finger loops its chalk arc. The drifting Cogitants at the hall's edges move without agenda, without destination, without the small self-protective gravity that people carry when they're hungry and know it. There's no one here who reads as *not* a Cogitant. No warm outlier. No body that still eats on schedule. The fallen woman's lips move. Ossian watches you from the floor with his extraordinary eyes and says nothing, which is almost certainly because he already knows what you're going to find.\n\nKon, on the first step, glances back down at you. Not impatiently — the fox doesn't do impatience, exactly — but with the small shift of attention that means: *you're looking at the floor when the stairs are right here.*",
-      "sceneSummary": "Saehara pushes Read the Fight outward searching for a non-Cogitant presence — finds only the same uniform inward compression; no outlier, no fed and rested stranger in the hall.",
+      "narration": "You turn back to Ossian before your foot finds the first step. Kon waits above you, patient, one ear angled down.\n\n\"Does anyone come here?\" you ask. \"From outside. A supplier, a runner — someone who brings food, checks in, stays tethered to what's below.\"\n\nOssian considers this the way he considers everything — not as a question but as a data point being filed. \"There was a supply arrangement,\" he says. \"Grain, dried goods, salt fish. A runner from the Waymarker settlement, every eight days.\" His eyes move briefly to the notation wall, then back. \"The last delivery was nineteen days ago. We sent no word. No word came in return.\" He says this without distress, the way a man reports a variable that has drifted outside its expected range. \"The arrangement assumed we would send for resupply when stocks ran low. We did not send. The runner,\" — the faintest pause, the word handled with care — \"stopped coming.\"\n\nYou look at him for a moment. He looks back. The chalk model on the wall behind Araveth tracks twenty-two days of river deterioration in meticulous, beautiful, cooling detail — and no one in this building has eaten in, by your best count, close to three weeks.\n\n\"No one knows,\" you say. Not a question.\n\n\"The probability that any settlement representative has re-initiated contact is low,\" Ossian says. \"Given the reception of our evacuation proposal, I calculate that we read as a closed matter to them.\" He folds his hands in his lap with the neatness of a man who has made peace with an outcome. \"We are not, in fact, a closed matter. But the distinction requires someone to make it.\"",
+      "sceneSummary": "Ossian reveals the Cogitarium has had no resupply for nineteen days and no outside contact since the evacuation proposal was dismissed.",
       "choices": [
         {
-          "label": "Climb — follow Kon up the stairwell toward the third terrace. You've read what's below; what's above needs eyes on it now.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Ask Ossian directly: can he tell you where the nearest food stores in the building are, even empty ones — any kitchen, any larder, anything that was once used for eating.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "move",
+            "investigate",
             "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Turn to Ossian before climbing: ask him plainly whether anyone *outside* the Cogitarium knows what's happening here — does anyone come, does anyone bring food, is there a supplier, a runner, anyone tethered to the world below?",
+          "label": "Tell Ossian you're going up. Ask him to watch the fallen Cogitant while you're on the stairs — she needs eyes on her, and he was tracking her before you arrived.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "help",
             "plan"
           ],
           "trivial": true
         },
         {
-          "label": "Cross to the chalk wall and look at the watershed model directly — you know what it tracks, but you haven't read it yourself. A twenty-two-day model of the Echo River might hold something Ossian hasn't volunteered.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Go up with Kon. The third terrace is what brought you here — someone is down up there and no one has gone to look. The food situation can't be solved from the entrance hall.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "scout",
             "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Write a fast entry before you climb — you've seen enough for a paragraph: the hall, the fallen woman, Ossian's probability columns, Araveth at the wall. Settle the ink before the third terrace changes what you know.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Tell Ossian plainly: the Cogitarium needs someone to go to Waymarker and reopen the supply arrangement. Ask whether he knows who the runner was — a name, a route, anything.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "reflect",
-            "careful"
+            "plan",
+            "help"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara stands at the base of the stairwell, Read the Fight still fading at the edges; Kon on the first step above, coat one shade warmer than normal, watching Saehara.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara stands at the base of the stairwell facing Ossian; Kon on the first step above, one ear tilted down, patient.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Seated cross-legged at the hall's center, watching Saehara — said nothing during the scan; still tracking."
+            "state": "Seated cross-legged at the hall's center, hands folded, watching Saehara after disclosing nineteen days without resupply."
           },
           {
             "name": "Araveth",
@@ -221,32 +230,33 @@
           },
           {
             "name": "Fallen Cogitant",
-            "state": "Half-upright against the entrance hall floor, waterskin resting on her chest — lips still moving in silent calculation, eyes half-open. Unattended."
+            "state": "Half-upright against the entrance hall floor, waterskin on her chest, lips moving in silent calculation — unattended."
           },
           {
             "name": "Kon",
-            "state": "On the first step of the stairwell, glancing back down at Saehara — oriented upward, patient."
+            "state": "On the first step of the stairwell, one ear angled down toward Saehara, coat a shade warmer than the hall's pale light."
           },
           {
             "name": "Drifting Cogitants",
-            "state": "Slow arcs at the hall's edges — no self-protective gravity, no hunger signals, nothing that breaks from the uniform inward compression."
+            "state": "Slow arcs at the hall's edges — uniform inward compression, no hunger signals."
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — twenty-two-day watershed model, deterioration visible at the margins",
+          "Wall of dense chalk notation — twenty-two-day watershed model",
           "Outer arch — mist faintly visible beyond",
           "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
           "Waterskin resting on the fallen Cogitant's chest — partially used",
-          "Traveler's Pack open behind where Saehara was kneeling — buckle undone, searched",
+          "Traveler's Pack open behind where Saehara was kneeling — buckle undone, searched, empty of food",
           "Katana at Saehara's waist",
           "Stairwell opening — curves upward into dim chalk-and-iron-smelling dark"
         ],
         "threads": [
-          "Third terrace: Read the Fight confirmed collapse, not violence — someone has gone down up there, same as below but further along; unvisited",
-          "Fallen Cogitant is alive but unattended — waterskin on her chest, no food, no one watching her now",
-          "Ossian's original intervention plan: voided, content still unknown",
-          "Kon is on the stairs — coat warm, patient, waiting",
-          "No non-Cogitant presence found in the hall — the scan failed to surface an outlier; the Cogitarium may be entirely self-contained and cut off from outside supply"
+          "Third terrace: collapse confirmed by Read the Fight — someone down up there, unvisited",
+          "Fallen Cogitant is alive but unattended — waterskin on her chest, no food, no one watching her",
+          "Cogitarium has had no resupply for nineteen days — the runner from Waymarker stopped coming after the evacuation proposal was dismissed",
+          "No outside party knows the Cogitarium's state — they read as 'a closed matter' to the settlements",
+          "Ossian's original intervention plan: voided by Saehara's arrival, content still unknown",
+          "Kon is on the stairs — coat warm, patient, waiting"
         ]
       },
       "npcUpdates": [
@@ -254,49 +264,44 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Watched Saehara push Read the Fight outward across the hall searching for a non-Cogitant presence. Said nothing. Has not moved.",
+          "note": "Disclosed that the supply runner from Waymarker stopped coming nineteen days ago — the Cogitarium sent no request for resupply and no word came back. He believes the settlements regard them as a closed matter.",
           "learned": [
-            "Saehara attempted to scan for outside presence — found none; Ossian observed without comment"
+            "Supply arrangement was with a runner from Waymarker settlement — grain, dried goods, salt fish, every eight days",
+            "Last delivery was nineteen days ago",
+            "The Cogitarium did not send for resupply; the runner stopped coming",
+            "No outside party knows the Cogitarium's current state — they are assumed closed"
           ],
-          "statusNote": "Seated in the entrance hall, watching Saehara at the base of the stairwell — has not moved."
-        },
-        {
-          "op": "update",
-          "npcId": "fallen-cogitant",
-          "name": "Fallen Cogitant",
-          "note": "Unattended. Waterskin on her chest. Lips still moving. No food. No one watching her.",
-          "statusNote": "Half-upright on the entrance hall floor — hydrated minimally, still calculating, unattended. Needs food urgently."
+          "statusNote": "Seated in the entrance hall, watching Saehara — has disclosed the supply situation, hands folded, no distress visible."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-cogitariums-calculated-crisis",
-          "label": "The Cogitarium's Calculated Crisis",
-          "kind": "mystery",
+          "topic": "cogitarium-supply-crisis",
+          "label": "The Cogitarium's Supply Silence",
+          "kind": "event",
           "entityId": "cogitarium",
-          "fact": "Saehara pushed Read the Fight outward searching for a non-Cogitant presence in the hall — someone fed, rested, tethered to the world below. The scan found nothing: the entire hall reads as uniform inward compression, no outlier, no warm signal of a body still attending to itself. The Cogitarium may be entirely self-contained — no runner, no supplier, no outside contact.",
+          "fact": "A supply runner from Waymarker brought food every eight days. The last delivery was nineteen days ago. The Cogitarium never sent for resupply; the runner stopped coming. No settlement knows the Cogitarium's current state — after the evacuation proposal was dismissed, they were written off as a closed matter.",
           "links": [
             "cogitarium",
             "cogitants",
+            "the-cogitariums-calculated-crisis",
             "ossian",
-            "the-collapsing-cogitants"
+            "the-collapsing-cogitants",
+            "the-evacuation-calculation"
           ]
         }
       ],
-      "characterDeltas": {
-        "energy": -3
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief attempt — Read the Fight surged and faded, a minute's effort at most."
+        "why": "A brief exchange — Saehara asks, Ossian answers, a short silence between them."
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara stands at the base of the stairwell, Read the Fight still fading at the edges; Kon on the first step above, coat one shade warmer than normal, watching Saehara.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara stands at the base of the stairwell facing Ossian; Kon on the first step above, one ear tilted down, patient.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Seated cross-legged at the hall's center, watching Saehara — said nothing during the scan; still tracking."
+          "state": "Seated cross-legged at the hall's center, hands folded, watching Saehara after disclosing nineteen days without resupply"
         },
         {
           "name": "Araveth",
@@ -304,19 +309,19 @@
         },
         {
           "name": "Fallen Cogitant",
-          "state": "Half-upright against the entrance hall floor, waterskin resting on her chest — lips still moving in silent calculation, "
+          "state": "Half-upright against the entrance hall floor, waterskin on her chest, lips moving in silent calculation — unattended."
         },
         {
           "name": "Kon",
-          "state": "On the first step of the stairwell, glancing back down at Saehara — oriented upward, patient."
+          "state": "On the first step of the stairwell, one ear angled down toward Saehara, coat a shade warmer than the hall's pale light."
         },
         {
           "name": "Drifting Cogitants",
-          "state": "Slow arcs at the hall's edges — no self-protective gravity, no hunger signals, nothing that breaks from the uniform inwa"
+          "state": "Slow arcs at the hall's edges — uniform inward compression, no hunger signals."
         }
       ],
       "objects": [
-        "Wall of dense chalk notation — twenty-two-day watershed model, deterioration vis",
+        "Wall of dense chalk notation — twenty-two-day watershed model",
         "Outer arch — mist faintly visible beyond",
         "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
         "Waterskin resting on the fallen Cogitant's chest — partially used",
@@ -325,11 +330,11 @@
         "Stairwell opening — curves upward into dim chalk-and-iron-smelling dark"
       ],
       "threads": [
-        "Third terrace: Read the Fight confirmed collapse, not violence — someone has gone down up there, same as below but further along; unvisited",
-        "Fallen Cogitant is alive but unattended — waterskin on her chest, no food, no one watching her now",
-        "Ossian's original intervention plan: voided, content still unknown",
-        "Kon is on the stairs — coat warm, patient, waiting",
-        "No non-Cogitant presence found in the hall — the scan failed to surface an outlier; the Cogitarium may be entirely self-contained and cut off from outside suppl"
+        "Third terrace: collapse confirmed by Read the Fight — someone down up there, unvisited",
+        "Fallen Cogitant is alive but unattended — waterskin on her chest, no food, no one watching her",
+        "Cogitarium has had no resupply for nineteen days — the runner from Waymarker stopped coming after the evacuation proposal was dismissed",
+        "No outside party knows the Cogitarium's state — they read as 'a closed matter' to the settlements",
+        "Ossian's original intervention plan: voided by Saehara's arrival, content still unknown"
       ]
     }
   },
@@ -365,17 +370,18 @@
         "[d1] You know this person's name now: Ossian (was \"Unknown Cogitant\")",
         "[d1] Gave Saehara a full count: fourteen Cogitants, three terraces. Named the third terrace — the laboratories — as the source of the sound. Disclosed that one Cogitant there has not be",
         "[d1] Saehara used Read the Fight — Ossian watched without comment. He has not moved.",
-        "[d1] Watched Saehara push Read the Fight outward across the hall searching for a non-Cogitant presence. Said nothing. Has not moved."
+        "[d1] Watched Saehara push Read the Fight outward across the hall searching for a non-Cogitant presence. Said nothing. Has not moved.",
+        "[d1] Disclosed that the supply runner from Waymarker stopped coming nineteen days ago — the Cogitarium sent no request for resupply and no word came back. He believes the settlements re"
       ],
       "knownFacts": [
-        "Explicitly names the body's discomfort as a category error — separates it from valid calculation",
-        "The wall is a working model of the Echo River from headwaters to delta, tracking particulate concentrations over twenty-two days of observation",
-        "The standing Cogitant is named Araveth, and has maintained the model continuously for eleven days",
         "Fourteen Cogitants total, distributed across three terraces",
         "Upper two terraces: continuous calculation — they do not pause for sound or absence",
         "Third terrace holds the laboratories",
         "Saehara read the Cogitarium's shape before climbing — confirmed collapse, not conflict, on the third terrace",
-        "Saehara attempted to scan for outside presence — found none; Ossian observed without comment"
+        "Saehara attempted to scan for outside presence — found none; Ossian observed without comment",
+        "Supply arrangement was with a runner from Waymarker settlement — grain, dried goods, salt fish, every eight days",
+        "Last delivery was nineteen days ago",
+        "The Cogitarium did not send for resupply; the runner stopped coming"
       ],
       "skillsObserved": [
         "probability modeling",
@@ -386,7 +392,7 @@
         "probabilistic collapse modeling"
       ],
       "status": "active",
-      "statusNote": "Seated in the entrance hall, watching Saehara at the base of the stairwell — has not moved.",
+      "statusNote": "Seated in the entrance hall, watching Saehara — has disclosed the supply situation, hands folded, no distress visible.",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -582,7 +588,8 @@
           "[d1] The Cogitarium calculated the source of the river's gray-green discoloration: a nanite reclamation site in the upper Disputed Zone, active and releasing particulate into the watershed. Their answer — ",
           "[d1] Fourteen Cogitants remain across three terraces. The upper two are in continuous calculation. The third terrace — the laboratories — is where the sound fell from. One Cogitant there has been absent fr",
           "[d1] Read the Fight confirmed: the third terrace holds distress, not danger — a collapse in progress, the same species of emergency as the fallen woman below but further along. No violence. No waiting thre",
-          "[d1] Saehara pushed Read the Fight outward searching for a non-Cogitant presence in the hall — someone fed, rested, tethered to the world below. The scan found nothing: the entire hall reads as uniform inw"
+          "[d1] Saehara pushed Read the Fight outward searching for a non-Cogitant presence in the hall — someone fed, rested, tethered to the world below. The scan found nothing: the entire hall reads as uniform inw",
+          "[d1] A supply runner from Waymarker brought food every eight days. The last delivery was nineteen days ago. The Cogitarium never sent for resupply; the runner stopped coming. No settlement knows the Cogita"
         ],
         "links": [
           "cogitarium",
@@ -592,7 +599,8 @@
           "the-collapsing-cogitants"
         ],
         "aliases": [
-          "The Echo River Crisis"
+          "The Echo River Crisis",
+          "The Cogitarium's Supply Silence"
         ],
         "createdDay": 1,
         "updatedDay": 1,
@@ -719,15 +727,15 @@
     }
   },
   "tendencies": {
-    "strategic": 5.810194444975917,
-    "social": 3.7816420180750994,
-    "cerebral": 5.795066616714702,
-    "generous": 4.832625278723747,
-    "cautious": 6.817650278723748,
-    "risky": 0.985074875
+    "strategic": 6.781143472751037,
+    "social": 3.762733807984724,
+    "cerebral": 6.766091283631129,
+    "generous": 4.8084621523301285,
+    "cautious": 6.783562027330129,
+    "risky": 0.9801495006250001
   },
   "aptitudes": [],
-  "actionCount": 17,
+  "actionCount": 18,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -740,8 +748,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784172943477,
-  "rev": 40,
+  "updatedAt": 1784173032670,
+  "rev": 41,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -749,7 +757,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 18
+    "somatic_reaches": 19
   },
   "opLossPending": false,
   "establishedFacts": [

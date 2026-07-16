@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## ✅ SNG-120 + SNG-121 — CLOSED GREEN (Aevi HEAD audit, v1.8.82)
+# PIPELINE ALERT — Singularity## 🎡 SNG-124 — Skill system reads at a glance, functions forward (specced, awaiting CCode)
+`po/SPEC_SNG-124_skill_system_legible.md`. Five coupled asks, one story — make the skill system legible instead of click-to-discover, with the 8 function families (SNG-092: HARM/RESTORE/CONTROL/MAKE/KNOW/HIDE/WARD/EMPOWER, 24 verbs) as the organizing spine. (1) **Bug:** character-screen `cs-levelup` (L3919) is unconditional — gate on `skillPoints>0||aspirationRipe` via a shared `canLevelUp`. (2) Level-up modal RECOMMENDS 2–4 skills scored by style (tendencies/aptitudes) / class (primary natives) / **function-GAP** (which of 8 families your kit lacks — highest-value axis) / ripe aspirations. (3) fn-chips → first-class colored badges (8 family colors), shown in list+modal+wheel. (4) **Wheel:** function as a visible OVERLAY — node function glyphs + 8-family filter toggles that highlight/dim nodes across traditions; tradition stays the ring, function becomes the color/filter layer (both axes at once, preserves SNG-073 geometry). (5) Owned/reachable wheel nodes show name + **effective** cost (SNG-103) at a glance, zoom-aware, not hover-only. From Erik play. Big multi-part — engine (recommender + functionCoverage) before wheel UI recommended.
+
+---
+
+## ✅ SNG-120 + SNG-121 — CLOSED GREEN (Aevi HEAD audit, v1.8.82)
 
 CCode shipped both; **Aevi verified at authenticated origin.** app.js + inventory.js syntax-clean.
 - **SNG-120** (collapsible sidebar + combine): 10 `<details class="sidebar-sec">` sections, state persisted to `profile.uiSidebar` via one `ontoggle`. **The risky combine VERIFIED:** the old "People you know" section is genuinely DELETED (L5242-43 carries a comment documenting it) and NPCs now render through `knownPeopleAt` at **exactly one** sidebar site (L5268, the SNG-119 who's-here section) — each person shown once, no dup, no loss. Party+Companions merged into one `data-sec="company"` section that returns "" when solo (L5255). Play-serving defaults + summary counts confirmed. **Closed.**
